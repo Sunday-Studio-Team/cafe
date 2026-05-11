@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cn12vpm4btpmx"]
 
 [ext_resource type="Script" uid="uid://bb6jc82myklm3" path="res://machine.gd" id="1_6a4ke"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://progress_bar/under.png" id="2_loq51"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://progress_bar/over.png" id="3_ioi8x"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://progress_bar/progress.png" id="4_llj37"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -10,9 +13,14 @@ albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
 material = SubResource("StandardMaterial3D_lp1hx")
 size = Vector3(1, 1.75, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_6qesk"]
+viewport_path = NodePath("ProgressIndicator/SubViewport")
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
+progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
+timer = NodePath("Timer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
@@ -20,3 +28,23 @@ mesh = SubResource("BoxMesh_lp1hx")
 
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -1)
+
+[node name="ProgressIndicator" type="Sprite3D" parent="." unique_id=1182371401]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7, 1)
+texture = SubResource("ViewportTexture_6qesk")
+
+[node name="SubViewport" type="SubViewport" parent="ProgressIndicator" unique_id=1178466868]
+transparent_bg = true
+size = Vector2i(160, 160)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="ProgressIndicator/SubViewport" unique_id=585963951]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("2_loq51")
+texture_over = ExtResource("3_ioi8x")
+texture_progress = ExtResource("4_llj37")
+
+[node name="Timer" type="Timer" parent="." unique_id=1788318326]
+wait_time = 10.0

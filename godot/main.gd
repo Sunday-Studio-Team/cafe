@@ -4,10 +4,13 @@ extends Node3D
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
+@export var customer_leaving_spot: Marker3D
 
 
 func _ready() -> void:
 	Global.main_scene = self
+	Global.customer_entry_spot = spot_for_customer_entry
+	Global.customer_leaving_spot = customer_leaving_spot
 
 	customer_spawn_timer.timeout.connect(_on_customer_spawn_timer_timeout)
 
@@ -24,8 +27,9 @@ func _on_customer_spawn_timer_timeout() -> void:
 
 func _on_customer_approached_machine(customer: Customer) -> void:
 	var machine: Machine = null
-	while machine == null or machine.occupied:
+	while machine == null or machine.customer:
 		machine = machines.pick_random()
 
 	customer.global_position = machine.spot_for_customer.global_position
 	machine.occupied = true
+	machine.customer = customer

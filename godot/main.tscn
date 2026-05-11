@@ -21,12 +21,13 @@ sky = SubResource("Sky_0xm2m")
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.29411766)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine"), NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
+customer_leaving_spot = NodePath("CustomerLeavingSpot")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1821948512]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 9)
@@ -94,7 +95,10 @@ size = Vector3(9.9, 2.9, 0.1)
 material = SubResource("StandardMaterial3D_ig7tw")
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
+
+[node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1111936502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
 
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 
