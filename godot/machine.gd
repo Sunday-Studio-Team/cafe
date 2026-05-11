@@ -6,12 +6,16 @@ extends Node3D
 @export var timer: Timer
 @export var current_order_indicator: Label3D
 @export var final_order_indicator: Label3D
+@export var score_label: Label3D
 
 var occupied := false:
 	set(value):
 		occupied = value
 		if not occupied:
 			customer = null
+			current_order_indicator.hide()
+			final_order_indicator.hide()
+			score_label.hide()
 			return
 		await get_tree().create_timer(randf_range(1, 3), false).timeout
 		start_order()
@@ -23,6 +27,9 @@ var completed_order: Drink
 func _ready() -> void:
 	timer.timeout.connect(_on_order_finished)
 	progress_bar.hide()
+	score_label.hide()
+	current_order_indicator.hide()
+	final_order_indicator.hide()
 
 
 func _physics_process(_delta: float) -> void:
@@ -33,7 +40,9 @@ func start_order() -> void:
 	timer.start()
 	customers_order = Global.drinks.pick_random()
 	current_order_indicator.text = "current order: " + customers_order.drink_name
+	current_order_indicator.show()
 	progress_bar.show()
+	print("starting order")
 
 
 func score_drink() -> void:
@@ -55,11 +64,20 @@ func score_drink() -> void:
 	Global.score += score
 	print("score is now ", Global.score)
 
+	score_label.show()
+	if score > 0:
+		score_label.modulate = Color.GREEN_YELLOW
+		score_label.text = "+ " + str(score)
+	else:
+		score_label.modulate = Color.RED
+		score_label.text = str(score)
+
 
 func _on_order_finished() -> void:
 	progress_bar.hide()
 	completed_order = Global.drinks.pick_random()
 	final_order_indicator.text = "final order: " + completed_order.drink_name
+	final_order_indicator.show()
 	score_drink()
 
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
