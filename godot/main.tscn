@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://pause_menu.gd" id="6_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -135,3 +136,21 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "score: 0"
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
+process_mode = 3
+script = ExtResource("6_7mycd")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1189096436]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer" unique_id=2024104815]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+horizontal_alignment = 1

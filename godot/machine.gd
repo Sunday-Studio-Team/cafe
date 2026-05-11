@@ -32,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 func start_order() -> void:
 	timer.start()
 	customers_order = Global.drinks.pick_random()
-	current_order_indicator.text = customers_order.drink_name
+	current_order_indicator.text = "current order: " + customers_order.drink_name
 	progress_bar.show()
 
 
@@ -59,7 +59,7 @@ func score_drink() -> void:
 func _on_order_finished() -> void:
 	progress_bar.hide()
 	completed_order = Global.drinks.pick_random()
-	final_order_indicator.text = completed_order.drink_name
+	final_order_indicator.text = "final order: " + completed_order.drink_name
 	score_drink()
 
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
