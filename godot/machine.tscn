@@ -16,6 +16,16 @@ size = Vector3(1, 1.75, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_6qesk"]
 viewport_path = NodePath("ProgressIndicator/SubViewport")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
+size = Vector3(1, 0.5, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioi8x"]
+albedo_color = Color(0.69803923, 1, 0.42745098, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_llj37"]
+material = SubResource("StandardMaterial3D_ioi8x")
+size = Vector2(1, 0.5)
+
 [node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer", "current_order_indicator", "final_order_indicator")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
@@ -59,3 +69,14 @@ text = "current order:"
 [node name="FinalOrderIndicator" type="Label3D" parent="." unique_id=1724140398]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
 text = "final order:"
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1764404189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2853076, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=505517545]
+shape = SubResource("BoxShape3D_loq51")
+
+[node name="Accept" type="MeshInstance3D" parent="Area3D" unique_id=1895236868]
+mesh = SubResource("QuadMesh_llj37")
+
+[node name="SubViewport" type="SubViewport" parent="Area3D/Accept" unique_id=271025010]

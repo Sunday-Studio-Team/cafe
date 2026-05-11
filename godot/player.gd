@@ -41,6 +41,9 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta += event.screen_relative * mouse_sens
+	
+	if event is InputEventMouseButton and event.button_mask == 1:
+		print(event)
 
 
 func handle_mouselook() -> void:
