@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="cafe"
+run/main_scene="uid://nm85k5woe7rt"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Events="*uid://bwnrp1mvuxrhd"
+Global="*uid://c5twwj8ykhohp"
 
 [physics]
 
