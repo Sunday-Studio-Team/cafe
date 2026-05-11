@@ -4,6 +4,14 @@ extends Node3D
 
 func _ready() -> void:
 	Events.customer_left_machine.connect(_on_customer_left_machine)
+	# NOTE: not actually sure what this true argument does here lol
+	add_to_group("customers", true)
+
+	print("spawned a customer")
+
+
+func _exit_tree() -> void:
+	print("customer despawned")
 
 
 func _on_customer_left_machine(customer: Customer) -> void:

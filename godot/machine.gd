@@ -35,3 +35,5 @@ func _on_order_finished() -> void:
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	Events.customer_left_machine.emit(customer)
 	occupied = false
+
+	print("order finished")
