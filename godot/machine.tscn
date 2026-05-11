@@ -26,13 +26,14 @@ albedo_color = Color(0.69803923, 1, 0.42745098, 1)
 material = SubResource("StandardMaterial3D_ioi8x")
 size = Vector2(1, 0.5)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer", "current_order_indicator", "final_order_indicator")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer", "current_order_indicator", "final_order_indicator", "score_label")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 current_order_indicator = NodePath("CurrentOrderIndicator")
 final_order_indicator = NodePath("FinalOrderIndicator")
+score_label = NodePath("ScoreLabel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
@@ -61,6 +62,7 @@ texture_progress = ExtResource("4_llj37")
 
 [node name="Timer" type="Timer" parent="." unique_id=1788318326]
 wait_time = 10.0
+one_shot = true
 
 [node name="CurrentOrderIndicator" type="Label3D" parent="." unique_id=2089461590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5999999, 1)
@@ -80,3 +82,8 @@ shape = SubResource("BoxShape3D_loq51")
 mesh = SubResource("QuadMesh_llj37")
 
 [node name="SubViewport" type="SubViewport" parent="Area3D/Accept" unique_id=271025010]
+
+[node name="ScoreLabel" type="Label3D" parent="." unique_id=2094560560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.9, 1)
+text = "+1"
+font_size = 64
