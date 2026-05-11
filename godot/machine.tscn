@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cn12vpm4btpmx"]
 
+[ext_resource type="Script" uid="uid://bb6jc82myklm3" path="res://machine.gd" id="1_6a4ke"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
 albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
@@ -8,8 +10,13 @@ albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
 material = SubResource("StandardMaterial3D_lp1hx")
 size = Vector3(1, 1.75, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer")]
+script = ExtResource("1_6a4ke")
+spot_for_customer = NodePath("SpotForCustomer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
 mesh = SubResource("BoxMesh_lp1hx")
+
+[node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -1)
