@@ -23,9 +23,9 @@ func _on_customer_spawn_timer_timeout() -> void:
 
 
 func _on_customer_approached_machine(customer: Customer) -> void:
-	# NOTE: i think this part is buggy
 	var machine: Machine = null
 	while machine == null or machine.occupied:
 		machine = machines.pick_random()
 
 	customer.global_position = machine.spot_for_customer.global_position
+	machine.occupied = true
