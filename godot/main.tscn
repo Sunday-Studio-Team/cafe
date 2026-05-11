@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://mncpikkcm8wd" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -28,10 +29,6 @@ customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1821948512]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 9)
-fov = 70.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
@@ -65,6 +62,7 @@ operation = 2
 size = Vector3(1.5, 2, 0.1)
 
 [node name="BackWall" type="CSGCombiner3D" parent="Building" unique_id=480264500]
+use_collision = true
 
 [node name="Wall" type="CSGBox3D" parent="Building/BackWall" unique_id=251660152]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.4)
@@ -78,6 +76,7 @@ size = Vector3(2.25, 1.5, 0.1)
 
 [node name="BackRoom" type="CSGCombiner3D" parent="Building" unique_id=1068869310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.95)
+use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/BackRoom" unique_id=159442344]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -114,3 +113,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 4)
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 wait_time = 5.0
 autostart = true
+
+[node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
