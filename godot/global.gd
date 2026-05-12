@@ -1,5 +1,9 @@
 extends Node
 
+# NOTE: i dont think folders are given UIDs so im not sure if theres a way
+# to get a ref to a folder that wont break if we move it : (
+@export_dir var drinks_folder_path: String
+
 var player: Player
 var main_scene: Node3D
 var customer_entry_spot: Marker3D
@@ -8,48 +12,17 @@ var drinks: Array[Drink]
 var score: int = 0
 
 
-# NOTE: this is probably rlly stupid . will probably replace with resources or
-# something
 func _ready() -> void:
-	var latte := Drink.new()
-	latte.drink_name = "latte"
-	latte.main_ingredient = Drink.MainIngredient.COFFEE
-	latte.liquid = Drink.Liquid.MILK
-	drinks.append(latte)
+	drinks.assign(load_resources_from_folder(drinks_folder_path))
 
-	var iced_latte := Drink.new()
-	iced_latte.drink_name = "iced latte"
-	iced_latte.main_ingredient = Drink.MainIngredient.COFFEE
-	iced_latte.liquid = Drink.Liquid.MILK
-	iced_latte.extra = Drink.Extra.ICE
-	drinks.append(iced_latte)
 
-	var chai_latte := Drink.new()
-	chai_latte.drink_name = "chai latte"
-	chai_latte.main_ingredient = Drink.MainIngredient.CHAI
-	chai_latte.liquid = Drink.Liquid.MILK
-	# NOTE: should this have sugar ? idk
-	chai_latte.extra = Drink.Extra.SUGAR
-	drinks.append(chai_latte)
+func load_resources_from_folder(folder_path: String) -> Array[Resource]:
+	var resources: Array[Resource]
 
-	var black_tea := Drink.new()
-	black_tea.drink_name = "black tea"
-	black_tea.main_ingredient = Drink.MainIngredient.TEA
-	black_tea.liquid = Drink.Liquid.WATER
-	drinks.append(black_tea)
+	var dir := DirAccess.open(folder_path)
 
-	var black_coffee := Drink.new()
-	black_coffee.drink_name = "black coffee"
-	black_coffee.main_ingredient = Drink.MainIngredient.COFFEE
-	black_coffee.liquid = Drink.Liquid.WATER
-	drinks.append(black_coffee)
+	for file_name: String in dir.get_files():
+		if file_name.ends_with(".tres"):
+			resources.append(load(folder_path.path_join(file_name)) as Resource)
 
-	var espresso := Drink.new()
-	espresso.drink_name = "espresso"
-	espresso.main_ingredient = Drink.MainIngredient.COFFEE
-	drinks.append(espresso)
-
-	var chai := Drink.new()
-	chai.drink_name = "chai"
-	chai.main_ingredient = Drink.MainIngredient.CHAI
-	chai.liquid = Drink.Liquid.WATER
+	return resources
