@@ -1,11 +1,11 @@
 class_name Drink
-extends Node
+extends Resource
 
-enum MainIngredient { COFFEE, TEA, CHAI }
-enum Liquid { WATER, MILK }
-enum Extra { SUGAR, ICE }
+enum MainIngredient { NONE, COFFEE, TEA, CHAI }
+enum Liquid { NONE, WATER, MILK }
+enum Extra { NONE, SUGAR, ICE }
 
-var drink_name: String
-var main_ingredient: MainIngredient
-var liquid: Liquid
-var extra: Extra
+@export var drink_name: String
+@export var main_ingredient: MainIngredient
+@export var liquid: Liquid
+@export var extra: Extra
