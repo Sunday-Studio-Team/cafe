@@ -33,15 +33,18 @@ albedo_color = Color(1, 0.37254903, 0.35686275, 1)
 material = SubResource("StandardMaterial3D_ioi8x")
 size = Vector3(0.22, 0.15, 0.3)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer", "current_order_indicator", "final_order_indicator", "score_label", "accept_button")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "accept_button", "reject_button", "waiting_approval_indicator", "making_drink_text")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
-current_order_indicator = NodePath("CurrentOrderIndicator")
-final_order_indicator = NodePath("FinalOrderIndicator")
+customer_order_indicator = NodePath("CustomerOrderIndicator")
+final_order_indicator = NodePath("MachineOrderIndicator")
 score_label = NodePath("ScoreLabel")
 accept_button = NodePath("AcceptButton")
+reject_button = NodePath("RejectButton")
+waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
+making_drink_text = NodePath("ProgressIndicator/MakingDrinkText")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
@@ -68,17 +71,24 @@ texture_under = ExtResource("2_loq51")
 texture_over = ExtResource("3_ioi8x")
 texture_progress = ExtResource("4_llj37")
 
+[node name="MakingDrinkText" type="Label3D" parent="ProgressIndicator" unique_id=693808641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.096037865)
+billboard = 2
+text = "making drink . . ."
+
 [node name="Timer" type="Timer" parent="." unique_id=1788318326]
 wait_time = 10.0
 one_shot = true
 
-[node name="CurrentOrderIndicator" type="Label3D" parent="." unique_id=2089461590]
+[node name="CustomerOrderIndicator" type="Label3D" parent="." unique_id=2089461590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5999999, 1)
-text = "current order:"
+text = "customer ordered:"
+font_size = 24
 
-[node name="FinalOrderIndicator" type="Label3D" parent="." unique_id=1724140398]
+[node name="MachineOrderIndicator" type="Label3D" parent="." unique_id=1724140398]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
-text = "final order:"
+text = "machine made:"
+font_size = 24
 
 [node name="ScoreLabel" type="Label3D" parent="." unique_id=2094560560]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.9, 1)
@@ -86,7 +96,7 @@ text = "+1"
 font_size = 64
 
 [node name="AcceptButton" type="StaticBody3D" parent="." unique_id=1768371020]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.774, 0.509)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.774, 1.0090001)
 collision_layer = 2
 collision_mask = 0
 
@@ -97,7 +107,7 @@ mesh = SubResource("BoxMesh_ioi8x")
 shape = SubResource("BoxShape3D_loq51")
 
 [node name="RejectButton" type="StaticBody3D" parent="." unique_id=1834573486]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.774, 0.509)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.774, 1.0090001)
 collision_layer = 2
 collision_mask = 0
 
@@ -106,6 +116,12 @@ mesh = SubResource("BoxMesh_llj37")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RejectButton" unique_id=1863884231]
 shape = SubResource("BoxShape3D_loq51")
+
+[node name="WaitingApprovalIndicator" type="Label3D" parent="." unique_id=879957228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
+text = "order complete!
+waiting for approval ^"
+font_size = 16
 
 [connection signal="input_event" from="AcceptButton" to="." method="_on_accept_button_input_event"]
 [connection signal="input_event" from="RejectButton" to="." method="_on_reject_button_input_event"]
