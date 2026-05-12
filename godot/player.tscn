@@ -6,12 +6,20 @@
 radius = 0.25
 height = 1.7
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loq51"]
+albedo_color = Color(0.5372549, 1, 0.5137255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4flbx"]
+material = SubResource("StandardMaterial3D_loq51")
+size = Vector3(0.22, 0.15, 0.3)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_4flbx"]
 size = Vector3(0.5, 0.5, 0.75)
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray")]
 script = ExtResource("1_4flbx")
 camera = NodePath("Camera3D")
+aiming_ray = NodePath("Camera3D/RayCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -23,7 +31,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.00467813, 0)
 target_position = Vector3(0, -2, 0)
-collide_with_areas = true
+collision_mask = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/RayCast3D" unique_id=1958449175]
+mesh = SubResource("BoxMesh_4flbx")
 
 [node name="Hands" type="Area3D" parent="Camera3D" unique_id=891143223]
 unique_name_in_owner = true

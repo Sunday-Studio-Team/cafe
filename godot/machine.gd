@@ -7,6 +7,7 @@ extends Node3D
 @export var current_order_indicator: Label3D
 @export var final_order_indicator: Label3D
 @export var score_label: Label3D
+@export var accept_button: StaticBody3D
 
 var occupied := false:
 	set(value):
@@ -22,6 +23,7 @@ var occupied := false:
 var customer: Customer
 var customers_order: Drink
 var completed_order: Drink
+var waiting_for_response: bool = false
 
 
 func _ready() -> void:
@@ -78,10 +80,30 @@ func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
 	final_order_indicator.text = "final order: " + completed_order.drink_name
 	final_order_indicator.show()
-	score_drink()
+	waiting_for_response = true
 
+
+func _on_accept_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	print("Accept was clicked")
+	if(!waiting_for_response or completed_order == null):
+		return
+	
+	score_drink()
+	waiting_for_response = false
+	completed_order = null
+	
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	Events.customer_left_machine.emit(customer)
 	occupied = false
-
+	
 	print("order finished")
+
+
+func _on_reject_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	print("Reject was clicked")
+	if(!waiting_for_response):
+		return
+	final_order_indicator.text = "final order: "
+	timer.start()
+	progress_bar.show()
+	print()

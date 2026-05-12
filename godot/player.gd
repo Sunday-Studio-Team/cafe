@@ -10,6 +10,7 @@ const MOVE_SPEED := 2.5
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
+@export var aiming_ray: RayCast3D
 
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
@@ -42,8 +43,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta += event.screen_relative * mouse_sens
 	
-	if event is InputEventMouseButton and event.button_mask == 1:
-		print(event)
+	if event is InputEventMouseButton:
+		handle_click(event)
 
 
 func handle_mouselook() -> void:
@@ -53,6 +54,12 @@ func handle_mouselook() -> void:
 	rotation_degrees.y -= mouse_delta.x
 
 	mouse_delta = Vector2.ZERO
+
+
+func handle_click(event) -> void:
+	var clicked_object: CollisionObject3D = aiming_ray.get_collider()
+	if(clicked_object != null and clicked_object is CollisionObject3D and aiming_ray.is_colliding() and event.button_mask == 1):
+		clicked_object.input_event.emit(null, event, aiming_ray.get_collision_point(), aiming_ray.get_collision_normal(), 0)
 
 
 func handle_movement(delta: float) -> void:
