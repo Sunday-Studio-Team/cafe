@@ -101,7 +101,7 @@ func _on_accept_button_input_event(camera: Node, event: InputEvent, event_positi
 
 func _on_reject_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	print("Reject was clicked")
-	if(!waiting_for_response):
+	if(!waiting_for_response or timer.time_left > 0):
 		return
 	final_order_indicator.text = "final order: "
 	timer.start()
