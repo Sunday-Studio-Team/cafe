@@ -7,8 +7,8 @@ extends Node3D
 @export var customer_order_indicator: Label3D
 @export var final_order_indicator: Label3D
 @export var score_label: Label3D
-@export var accept_button: StaticBody3D
-@export var reject_button: StaticBody3D
+@export var accept_button: Interactable
+@export var reject_button: Interactable
 @export var waiting_approval_indicator: Label3D
 @export var making_drink_text: Label3D
 
@@ -36,6 +36,9 @@ func _ready() -> void:
 	score_label.hide()
 	customer_order_indicator.hide()
 	final_order_indicator.hide()
+
+	accept_button.interacted.connect(_on_accept_button_presssed)
+	reject_button.interacted.connect(_on_reject_button_pressed)
 
 
 func _physics_process(_delta: float) -> void:
@@ -92,9 +95,9 @@ func _on_order_finished() -> void:
 	waiting_for_response = true
 
 
-func _on_accept_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_accept_button_presssed() -> void:
 	print("Accept was clicked")
-	if(!waiting_for_response or completed_order == null):
+	if (!waiting_for_response or completed_order == null):
 		return
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
 	score_drink()
@@ -108,9 +111,9 @@ func _on_accept_button_input_event(camera: Node, event: InputEvent, event_positi
 	print("order finished")
 
 
-func _on_reject_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_reject_button_pressed() -> void:
 	print("Reject was clicked")
-	if(!waiting_for_response or timer.time_left > 0):
+	if (!waiting_for_response or timer.time_left > 0):
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
 	timer.start()

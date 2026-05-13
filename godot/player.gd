@@ -1,6 +1,3 @@
-# NOTE: this is mostly copied from another project so probably has some
-# unused stuff
-#	- jack
 class_name Player
 extends CharacterBody3D
 
@@ -22,12 +19,9 @@ var mouse_delta: Vector2 = Vector2.ZERO
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 
-@onready var hands: Area3D = %Hands
-
 
 func _ready() -> void:
 	Global.player = self
-	#Global.player_hands = hands
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
@@ -35,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	handle_mouselook()
 	handle_movement(delta)
 	handle_gravity(delta)
+	handle_hovered_interactable()
 	handle_footstep_sounds()
 	move_and_slide()
 
@@ -42,9 +37,6 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta += event.screen_relative * mouse_sens
-	
-	if event is InputEventMouseButton:
-		handle_click(event)
 
 
 func handle_mouselook() -> void:
@@ -54,12 +46,6 @@ func handle_mouselook() -> void:
 	rotation_degrees.y -= mouse_delta.x
 
 	mouse_delta = Vector2.ZERO
-
-
-func handle_click(event) -> void:
-	var clicked_object: CollisionObject3D = aiming_ray.get_collider()
-	if(clicked_object != null and clicked_object is CollisionObject3D and aiming_ray.is_colliding() and event.button_mask == 1):
-		clicked_object.input_event.emit(null, event, aiming_ray.get_collision_point(), aiming_ray.get_collision_normal(), 0)
 
 
 func handle_movement(delta: float) -> void:
@@ -86,6 +72,17 @@ func handle_movement(delta: float) -> void:
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
+
+
+func handle_hovered_interactable() -> void:
+	var collider = aiming_ray.get_collider()
+	# NOTE: ideally we can rework something to remove this visible check,
+	# but seems like Area3Ds (which Interactable inherits) dont stop colliding
+	# with raycasts even when invisible 🤔
+	if collider is Interactable and collider.enabled and collider.visible:
+		Global.hovered_interactable = collider
+	else:
+		Global.hovered_interactable = null
 
 
 func handle_footstep_sounds() -> void:

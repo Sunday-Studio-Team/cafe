@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://progress_bar/under.png" id="2_loq51"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://progress_bar/over.png" id="3_ioi8x"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://progress_bar/progress.png" id="4_llj37"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -24,7 +25,7 @@ material = SubResource("StandardMaterial3D_loq51")
 size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
-size = Vector3(0.22, 0.15, 0.3)
+size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioi8x"]
 albedo_color = Color(1, 0.37254903, 0.35686275, 1)
@@ -95,10 +96,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.9, 1)
 text = "+1"
 font_size = 64
 
-[node name="AcceptButton" type="StaticBody3D" parent="." unique_id=1768371020]
+[node name="AcceptButton" type="Area3D" parent="." unique_id=600817850]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.774, 1.0090001)
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("5_ioi8x")
+display_name = "[color=green]accept button"
+metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AcceptButton" unique_id=900902096]
 mesh = SubResource("BoxMesh_ioi8x")
@@ -106,10 +110,13 @@ mesh = SubResource("BoxMesh_ioi8x")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AcceptButton" unique_id=1423337175]
 shape = SubResource("BoxShape3D_loq51")
 
-[node name="RejectButton" type="StaticBody3D" parent="." unique_id=1834573486]
+[node name="RejectButton" type="Area3D" parent="." unique_id=410108366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.774, 1.0090001)
 collision_layer = 2
 collision_mask = 0
+script = ExtResource("5_ioi8x")
+display_name = "[color=red]reject button"
+metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RejectButton" unique_id=160359694]
 mesh = SubResource("BoxMesh_llj37")
@@ -122,6 +129,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
 text = "order complete!
 waiting for approval ^"
 font_size = 16
-
-[connection signal="input_event" from="AcceptButton" to="." method="_on_accept_button_input_event"]
-[connection signal="input_event" from="RejectButton" to="." method="_on_reject_button_input_event"]
