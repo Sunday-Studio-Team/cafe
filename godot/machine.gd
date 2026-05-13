@@ -69,13 +69,21 @@ func score_drink() -> void:
 
 	Global.score += score
 
+	match score:
+		-3:
+			score_label.modulate = Color.DARK_RED
+			score_label.text = "-3 (drink TOTALLY wrong)"
+		-1:
+			score_label.modulate = Color.RED
+			score_label.text = "-1 (drink mostly wrong)"
+		+1:
+			score_label.modulate = Color.GREEN_YELLOW
+			score_label.text = "+1 (drink partially correct)"
+		+3:
+			score_label.modulate = Color.GREEN
+			score_label.text = "+3 (drink correct)"
+
 	score_label.show()
-	if score > 0:
-		score_label.modulate = Color.GREEN_YELLOW
-		score_label.text = "+ " + str(score)
-	else:
-		score_label.modulate = Color.RED
-		score_label.text = str(score)
 
 
 func _on_order_finished() -> void:
