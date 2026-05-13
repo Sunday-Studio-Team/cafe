@@ -13,7 +13,6 @@ signal interacted
 ## how long this interactable should be disabled after interacting
 ## (if not onetimeonly)
 @export var lockout_length: float = 1.0
-
 ## mesh used for this object
 @export var mesh: MeshInstance3D
 
@@ -29,9 +28,9 @@ func _physics_process(_delta: float) -> void:
 		mesh.material_overlay = null
 		return
 
-	if Global.hovered_interactable == self:
-		mesh.material_overlay = ShaderMaterial.new()
-		mesh.material_overlay.shader = Global.hover_shader
+	mesh.material_overlay = ShaderMaterial.new()
+	mesh.material_overlay.shader = Global.hover_shader
+
 	if Input.is_action_just_pressed("interact"):
 		interacted.emit()
 
