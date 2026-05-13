@@ -11,6 +11,11 @@ extends CanvasLayer
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
 
+	objective.text = (
+		"[b]OBJECTIVE:[/b] \n \n score %s points before the timer ends !"
+		% Global.goal_score
+	)
+
 	await get_tree().create_timer(5, false).timeout
 	objective.hide()
 

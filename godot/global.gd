@@ -3,8 +3,7 @@ extends Node
 # NOTE: i dont think folders are given UIDs so im not sure if theres a way
 # to get a ref to a folder that wont break if we move it : (
 @export_dir var drinks_folder_path: String
-
-@export var hover_shader : Shader
+@export var hover_shader: Shader
 
 var player: Player
 var hovered_interactable: Interactable
