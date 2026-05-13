@@ -11,6 +11,7 @@ var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var score: int = 0
+var goal_score: int = 10
 
 
 func _ready() -> void:

@@ -4,3 +4,4 @@ extends Node
 signal customer_entered
 signal customer_approached_machine(customer: Customer)
 signal customer_left_machine(customer: Customer)
+signal time_up

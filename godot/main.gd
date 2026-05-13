@@ -5,6 +5,7 @@ extends Node3D
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
+@export var game_timer: Timer
 
 
 func _ready() -> void:
@@ -13,6 +14,7 @@ func _ready() -> void:
 	Global.customer_leaving_spot = customer_leaving_spot
 
 	customer_spawn_timer.timeout.connect(_on_customer_spawn_timer_timeout)
+	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.customer_approached_machine.connect(_on_customer_approached_machine)
 
@@ -28,6 +30,13 @@ func _on_customer_spawn_timer_timeout() -> void:
 	add_child(customer)
 	await get_tree().create_timer(randf_range(2, 4), false).timeout
 	Events.customer_approached_machine.emit(customer)
+
+
+func _on_game_timer_timeout() -> void:
+	Events.time_up.emit()
+	await get_tree().create_timer(5, false).timeout
+	Global.score = 0
+	get_tree().reload_current_scene()
 
 
 func _on_customer_approached_machine(customer: Customer) -> void:

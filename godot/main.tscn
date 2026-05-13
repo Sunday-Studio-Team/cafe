@@ -24,13 +24,14 @@ sky = SubResource("Sky_0xm2m")
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.29411766)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine"), NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
+game_timer = NodePath("GameTimer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
@@ -116,13 +117,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 4)
 wait_time = 5.0
 autostart = true
 
+[node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("score_label", "interactable_label")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("score_label", "interactable_label", "game_timer", "time_left_label", "objective", "end_text")]
 script = ExtResource("5_lquwl")
 score_label = NodePath("MarginContainer/Score")
 interactable_label = NodePath("MarginContainer/Interactable")
+game_timer = NodePath("../GameTimer")
+time_left_label = NodePath("MarginContainer/TimeLeft")
+objective = NodePath("MarginContainer/Objective")
+end_text = NodePath("MarginContainer/EndText")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -131,6 +141,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 
 [node name="Score" type="Label" parent="UI/MarginContainer" unique_id=103958680]
 layout_mode = 2
@@ -147,6 +161,36 @@ bbcode_enabled = true
 text = "[E] interact"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer" unique_id=481278116]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "TIME LEFT: 0"
+
+[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]OBJECTIVE:[/b]
+
+score 10 points before the timer ends !"
+horizontal_alignment = 1
+
+[node name="EndText" type="RichTextLabel" parent="UI/MarginContainer" unique_id=545591058]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+horizontal_alignment = 1
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
 process_mode = 3
