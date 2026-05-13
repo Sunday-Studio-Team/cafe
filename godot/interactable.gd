@@ -2,7 +2,7 @@ class_name Interactable
 extends Area3D
 
 # interact functionality can either be defined by extending this script
-# and modifying _on_interact(), or by connecting this signal to a function
+# and modifying _on_interacted(), or by connecting this signal to a function
 # in another script
 signal interacted
 
@@ -18,7 +18,7 @@ var enabled := true
 
 
 func _ready() -> void:
-	interacted.connect(_on_interact)
+	interacted.connect(_on_interacted)
 
 
 func _physics_process(_delta: float) -> void:
@@ -31,7 +31,7 @@ func _physics_process(_delta: float) -> void:
 
 # NOTE: all this lockout stuff is a bit untested tbh lol
 # (also probably a more elegant way to do things than this)
-func _on_interact() -> void:
+func _on_interacted() -> void:
 	Global.hovered_interactable = null
 	enabled = false
 	if not one_time_only:
