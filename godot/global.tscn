@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bsobghkg5y0nh"]
 
 [ext_resource type="Script" uid="uid://c5twwj8ykhohp" path="res://global.gd" id="1_6q3x5"]
+[ext_resource type="Shader" uid="uid://dwfpcipt6bw3y" path="res://shaders/hoveroutline.gdshader" id="2_qxp0b"]
 
 [node name="Global" type="Node" unique_id=668412834]
 script = ExtResource("1_6q3x5")
 drinks_folder_path = "res://drinks"
+hover_shader = ExtResource("2_qxp0b")

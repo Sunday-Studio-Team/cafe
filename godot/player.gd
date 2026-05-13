@@ -83,6 +83,7 @@ func handle_hovered_interactable() -> void:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null
+		
 
 
 func handle_footstep_sounds() -> void:

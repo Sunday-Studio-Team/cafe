@@ -17,11 +17,11 @@ size = Vector3(1, 1.75, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_6qesk"]
 viewport_path = NodePath("ProgressIndicator/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_loq51"]
-albedo_color = Color(0.5372549, 1, 0.5137255, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qesk"]
+albedo_color = Color(0.61960787, 1, 0.60784316, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ioi8x"]
-material = SubResource("StandardMaterial3D_loq51")
+material = SubResource("StandardMaterial3D_6qesk")
 size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
@@ -96,13 +96,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.9, 1)
 text = "+1"
 font_size = 64
 
-[node name="AcceptButton" type="Area3D" parent="." unique_id=600817850]
+[node name="AcceptButton" type="Area3D" parent="." unique_id=600817850 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.774, 1.0090001)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
 display_name = "[color=green]accept button"
-metadata/_custom_type_script = "uid://cku66354bxktd"
+mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AcceptButton" unique_id=900902096]
 mesh = SubResource("BoxMesh_ioi8x")
@@ -110,13 +110,13 @@ mesh = SubResource("BoxMesh_ioi8x")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AcceptButton" unique_id=1423337175]
 shape = SubResource("BoxShape3D_loq51")
 
-[node name="RejectButton" type="Area3D" parent="." unique_id=410108366]
+[node name="RejectButton" type="Area3D" parent="." unique_id=410108366 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.774, 1.0090001)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
 display_name = "[color=red]reject button"
-metadata/_custom_type_script = "uid://cku66354bxktd"
+mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RejectButton" unique_id=160359694]
 mesh = SubResource("BoxMesh_llj37")
