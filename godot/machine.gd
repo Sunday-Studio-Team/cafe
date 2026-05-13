@@ -60,22 +60,14 @@ func start_order() -> void:
 
 func score_drink() -> void:
 	var score := 0
-	if completed_order.main_ingredient == customers_order.main_ingredient:
-		score += 1
-	else:
-		score -= 1
-	if completed_order.liquid == customers_order.liquid:
-		score += 1
-	else:
-		score -= 1
-	if completed_order.extra == customers_order.extra:
-		score += 1
-	else:
-		score -= 1
 
-	print("adding ", score, " to score")
+	for element in ["main_ingredient", "liquid", "extra"]:
+		if completed_order.get(element) == customers_order.get(element):
+			score += 1
+		else:
+			score -= 1
+
 	Global.score += score
-	print("score is now ", Global.score)
 
 	score_label.show()
 	if score > 0:
