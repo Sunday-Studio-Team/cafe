@@ -141,6 +141,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+mouse_behavior_recursive = 1
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
@@ -155,7 +156,6 @@ text = "score: 0"
 
 [node name="Interactable" type="RichTextLabel" parent="UI/MarginContainer" unique_id=644757301]
 layout_mode = 2
-mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[E] interact"
