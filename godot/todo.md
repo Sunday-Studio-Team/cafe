@@ -7,3 +7,5 @@ either dismiss them (which takes more points) or press and hold on them for like
 correct main ingredient, lost one for wrong milk, etc.
 - add more complex scoring rules ? e.g. take double points for giving someone
 a drink with whole milk when they asked for oat milk etc
+  - add multiplier based on time the customer spent waiting (more points for less waiting time)
+  - possibly weigh points more towards matching ingredients rather than wait time
