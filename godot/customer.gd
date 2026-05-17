@@ -6,6 +6,7 @@ extends Node3D
 @export var timer: Timer
 @export var time_bonus_label: Label3D
 
+var orders_made: int = 0
 var bonus_points_for_time: int
 
 
@@ -40,10 +41,11 @@ func _exit_tree() -> void:
 
 
 func _on_order_completed(customer: Customer) -> void:
-	if customer != self:
+	if customer != self or orders_made > 0:
 		return
 	timer.start()
 	waiting_indicator.show()
+	orders_made += 1
 
 
 func _on_order_approved(customer: Customer) -> void:
