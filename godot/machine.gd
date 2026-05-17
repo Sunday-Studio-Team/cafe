@@ -27,6 +27,7 @@ var customer: Customer
 var customers_order: Drink
 var completed_order: Drink
 var waiting_for_response: bool = false
+var drink_score: int = 0
 
 
 func _ready() -> void:
@@ -59,17 +60,15 @@ func start_order() -> void:
 
 
 func score_drink() -> void:
-	var score := 0
+	drink_score = 0
 
 	for element in ["main_ingredient", "liquid", "extra"]:
 		if completed_order.get(element) == customers_order.get(element):
-			score += 1
+			drink_score += 1
 		else:
-			score -= 1
+			drink_score -= 1
 
-	Global.score += score
-
-	match score:
+	match drink_score:
 		-3:
 			score_label.modulate = Color.DARK_RED
 			score_label.text = "-3 (drink TOTALLY wrong)"
@@ -94,12 +93,15 @@ func _on_order_finished() -> void:
 	final_order_indicator.show()
 	score_drink()
 	waiting_for_response = true
+	Events.order_completed.emit(customer)
 
 
 func _on_accept_button_presssed() -> void:
 	print("Accept was clicked")
 	if (!waiting_for_response or completed_order == null):
 		return
+	Events.order_approved.emit(customer)
+	Global.score += drink_score
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
 	waiting_for_response = false
 	completed_order = null
