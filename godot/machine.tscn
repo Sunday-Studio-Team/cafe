@@ -41,7 +41,7 @@ progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 customer_order_indicator = NodePath("CustomerOrderIndicator")
 final_order_indicator = NodePath("MachineOrderIndicator")
-score_label = NodePath("ScoreLabel")
+score_label = NodePath("AcceptButton/ScoreLabel")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
@@ -91,11 +91,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
 text = "machine made:"
 font_size = 24
 
-[node name="ScoreLabel" type="Label3D" parent="." unique_id=2094560560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 1.9, 1)
-text = "+1"
-font_size = 64
-
 [node name="AcceptButton" type="Area3D" parent="." unique_id=600817850 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0090001)
 collision_layer = 2
@@ -109,6 +104,10 @@ mesh = SubResource("BoxMesh_ioi8x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AcceptButton" unique_id=1423337175]
 shape = SubResource("BoxShape3D_loq51")
+
+[node name="ScoreLabel" type="Label3D" parent="AcceptButton" unique_id=2094560560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02403152, 0.22535914, 0.1323067)
+text = "+1"
 
 [node name="RejectButton" type="Area3D" parent="." unique_id=410108366 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.874, 1.0090001)

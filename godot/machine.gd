@@ -92,6 +92,7 @@ func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
 	final_order_indicator.text = "machine made: " + completed_order.drink_name
 	final_order_indicator.show()
+	score_drink()
 	waiting_for_response = true
 
 
@@ -100,7 +101,6 @@ func _on_accept_button_presssed() -> void:
 	if (!waiting_for_response or completed_order == null):
 		return
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
-	score_drink()
 	waiting_for_response = false
 	completed_order = null
 
