@@ -12,7 +12,7 @@ albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lp1hx"]
 material = SubResource("StandardMaterial3D_lp1hx")
-size = Vector3(1, 1.75, 1)
+size = Vector3(1, 1.75, 0.5)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6qesk"]
 viewport_path = NodePath("ProgressIndicator/SubViewport")
@@ -48,11 +48,11 @@ waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
 making_drink_text = NodePath("ProgressIndicator/MakingDrinkText")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
 mesh = SubResource("BoxMesh_lp1hx")
 
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
 
 [node name="ProgressIndicator" type="Sprite3D" parent="." unique_id=1182371401]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7, 1)
