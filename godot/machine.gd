@@ -9,8 +9,11 @@ extends Node3D
 @export var score_label: Label3D
 @export var accept_button: StaticBody3D
 @export var reject_button: StaticBody3D
+@export var make_drink_button: StaticBody3D
 @export var waiting_approval_indicator: Label3D
 @export var making_drink_text: Label3D
+@export var drink_progress : int
+@export var making_drink: bool
 
 var occupied := false:
 	set(value):
@@ -42,7 +45,25 @@ func _physics_process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
+	make_drink_button.visible = waiting_for_response
 	waiting_approval_indicator.visible = waiting_for_response
+	
+
+	if making_drink:
+		drink_progress += 1
+		if(drink_progress % 10 == 0):
+			print(drink_progress)
+		if drink_progress >= 300:
+			making_drink = false
+			waiting_for_response = false
+			completed_order = null
+			score_label.show()
+			score_label.modulate = Color.GREEN_YELLOW
+			score_label.text = "3"
+			Global.score += 3
+			await get_tree().create_timer(randf_range(1, 2), false).timeoutsdssdw
+			Events.customer_left_machine.emit(customer)
+			occupied = false
 
 
 func start_order() -> void:
@@ -93,6 +114,10 @@ func _on_order_finished() -> void:
 
 
 func _on_accept_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	#Rejects Non-Acceptable Input
+	if(event.button_mask != 1):
+		return
+		
 	print("Accept was clicked")
 	if(!waiting_for_response or completed_order == null):
 		return
@@ -109,6 +134,10 @@ func _on_accept_button_input_event(camera: Node, event: InputEvent, event_positi
 
 
 func _on_reject_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	#Rejects Non-Acceptable Input
+	if(event.button_mask != 1):
+		return
+	
 	print("Reject was clicked")
 	if(!waiting_for_response or timer.time_left > 0):
 		return
@@ -117,3 +146,21 @@ func _on_reject_button_input_event(camera: Node, event: InputEvent, event_positi
 	progress_bar.show()
 	making_drink_text.show()
 	waiting_for_response = false
+
+func _on_make_drink_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal, shape_idx):
+	#Rejects Non-Acceptable Input
+	if(event.button_mask != 1 and event.button_mask != 0):
+		return
+	
+	print("MAKING DRINK")
+	
+	#Hold button to increase the bar
+	if(event.button_mask == 0):
+		print("Let go")
+		drink_progress = 0
+		making_drink = false
+	else:
+		print("making")
+		making_drink = true
+	
+	pass # Replace with function body.

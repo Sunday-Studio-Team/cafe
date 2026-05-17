@@ -58,8 +58,14 @@ func handle_mouselook() -> void:
 
 func handle_click(event) -> void:
 	var clicked_object: CollisionObject3D = aiming_ray.get_collider()
-	if(clicked_object != null and clicked_object is CollisionObject3D and aiming_ray.is_colliding() and event.button_mask == 1):
+	print("Player Input:" , event)
+	
+	#Managing different clicking scenerios
+	#Note: Removed button mask checked and moved it to the individual functions
+	if(clicked_object != null and clicked_object is CollisionObject3D and aiming_ray.is_colliding()):
 		clicked_object.input_event.emit(null, event, aiming_ray.get_collision_point(), aiming_ray.get_collision_normal(), 0)
+		
+	
 
 
 func handle_movement(delta: float) -> void:
