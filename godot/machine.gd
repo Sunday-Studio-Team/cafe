@@ -107,7 +107,7 @@ func _on_accept_button_presssed() -> void:
 	completed_order = null
 
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
-	Events.customer_left_machine.emit(customer)
+	Events.customer_left_machine.emit(customer, drink_score)
 	occupied = false
 
 	print("order finished")

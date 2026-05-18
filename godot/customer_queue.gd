@@ -21,6 +21,14 @@ func add_customer(customer: Customer) -> void:
 
 
 func remove_front_customer() -> void:
+	# --------------------------------------------------
+	# Code to satisfy front customer, should be moved to its own function once trigger to make drink is added
+	var front_customer: Customer = get_front_customer()
+	front_customer.body.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	front_customer.leave_store()
+	# --------------------------------------------------
+	
+	
 	customers_waiting.pop_front()
 	queue_updated.emit()
 
