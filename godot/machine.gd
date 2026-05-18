@@ -51,7 +51,7 @@ func _physics_process(_delta: float) -> void:
 func start_order() -> void:
 	timer.start()
 	customers_order = Global.drinks.pick_random()
-	customer_order_indicator.text = "customer ordered: " + customers_order.drink_name
+	customer_order_indicator.text = "customer ordered: " + customers_order.name
 	customer_order_indicator.show()
 	progress_bar.show()
 	making_drink_text.show()
@@ -88,7 +88,7 @@ func _on_order_finished() -> void:
 	progress_bar.hide()
 	making_drink_text.hide()
 	completed_order = Global.drinks.pick_random()
-	final_order_indicator.text = "machine made: " + completed_order.drink_name
+	final_order_indicator.text = "machine made: " + completed_order.name
 	final_order_indicator.show()
 	score_drink()
 	waiting_for_response = true
