@@ -16,7 +16,6 @@ func _ready() -> void:
 	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
-	print("spawned a customer")
 
 	waiting_indicator.hide()
 
@@ -34,10 +33,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		waiting_indicator.modulate = Color.RED
 		bonus_points_for_time = -1
-
-
-func _exit_tree() -> void:
-	print("customer despawned")
 
 
 func _on_order_completed(customer: Customer) -> void:

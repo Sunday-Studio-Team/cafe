@@ -34,9 +34,10 @@ albedo_color = Color(1, 0.37254903, 0.35686275, 1)
 material = SubResource("StandardMaterial3D_ioi8x")
 size = Vector3(0.22, 0.15, 0.3)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "accept_button", "reject_button", "waiting_approval_indicator", "making_drink_text")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "accept_button", "reject_button", "waiting_approval_indicator")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
+progress_indicator = NodePath("ProgressIndicator")
 progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 customer_order_indicator = NodePath("CustomerOrderIndicator")
@@ -45,7 +46,6 @@ score_label = NodePath("AcceptButton/ScoreLabel")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
-making_drink_text = NodePath("ProgressIndicator/MakingDrinkText")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
