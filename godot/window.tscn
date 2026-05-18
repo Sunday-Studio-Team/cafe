@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dm7kt8nyip6tb"]
+
+[ext_resource type="Script" uid="uid://xo4gagvgognp" path="res://window.gd" id="1_mvsta"]
+[ext_resource type="Script" uid="uid://cckwaj76155mm" path="res://customer_queue.gd" id="2_hjewq"]
+
+[node name="Window" type="Node3D" unique_id=556547264]
+script = ExtResource("1_mvsta")
+
+[node name="CustomerQueue" type="Node3D" parent="." unique_id=932633449]
+script = ExtResource("2_hjewq")
+metadata/_custom_type_script = "uid://cckwaj76155mm"

@@ -6,6 +6,7 @@ extends Node3D
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
+@export var window: Node3D
 
 
 func _ready() -> void:
