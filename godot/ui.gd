@@ -29,9 +29,8 @@ func _physics_process(_delta: float) -> void:
 			"[E] interact - "
 			+ Global.hovered_interactable.display_name
 		)
-		interactable_label.show()
 	else:
-		interactable_label.hide()
+		interactable_label.text = ""
 
 
 func _on_time_up() -> void:
