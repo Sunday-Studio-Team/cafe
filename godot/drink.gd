@@ -1,9 +1,9 @@
 class_name Drink
 extends Resource
 
-enum MainIngredient { NONE, COFFEE, TEA, CHAI }
-enum Liquid { NONE, WATER, MILK }
-enum Extra { NONE, SUGAR, ICE }
+enum MainIngredient { NONE, WRONG, COFFEE, TEA, CHAI }
+enum Liquid { NONE, WRONG, WATER, MILK }
+enum Extra { NONE, WRONG, SUGAR, ICE }
 
 # TODO: rename this to just 'name' (couldnt before since Drink used to extend
 # Node which has a built-in property called name)
