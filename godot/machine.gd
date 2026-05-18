@@ -42,6 +42,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
+
+	progress_indicator.visible = not timer.is_stopped()
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	waiting_approval_indicator.visible = waiting_for_response
@@ -52,7 +54,6 @@ func start_order() -> void:
 	customer_order_indicator.text = "customer ordered: " + customers_order.name
 	customer_order_indicator.show()
 	timer.start()
-	progress_indicator.show()
 
 
 func score_drink() -> void:
@@ -82,7 +83,6 @@ func score_drink() -> void:
 
 
 func _on_order_finished() -> void:
-	progress_indicator.hide()
 	completed_order = Global.drinks.pick_random()
 	final_order_indicator.text = "machine made: " + completed_order.name
 	final_order_indicator.show()
