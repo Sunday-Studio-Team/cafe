@@ -23,11 +23,10 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	waiting_bar.value = timer.time_left / timer.wait_time * 100
 
-	var timer_progress_ratio: float = 1 - timer.time_left / timer.wait_time
-	if timer_progress_ratio < 0.333:
+	if waiting_bar.value >= 66:
 		waiting_indicator.modulate = Color.GREEN
 		bonus_points_for_time = 1
-	elif timer_progress_ratio < 0.666:
+	elif waiting_bar.value >= 33:
 		waiting_indicator.modulate = Color.ORANGE
 		bonus_points_for_time = 0
 	else:
