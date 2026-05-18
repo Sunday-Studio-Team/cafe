@@ -12,18 +12,17 @@ extends Node3D
 @export var waiting_approval_indicator: Label3D
 @export var making_drink_text: Label3D
 
-var occupied := false:
-	set(value):
-		occupied = value
-		if not occupied:
-			customer = null
+var customer: Customer:
+	set(new_customer):
+		customer = new_customer
+		if customer:
+			customer.global_position = spot_for_customer.global_position
+			await get_tree().create_timer(randf_range(1, 3), false).timeout
+			start_order()
+		else:
 			customer_order_indicator.hide()
 			final_order_indicator.hide()
 			score_label.hide()
-			return
-		await get_tree().create_timer(randf_range(1, 3), false).timeout
-		start_order()
-var customer: Customer
 var customers_order: Drink
 var completed_order: Drink
 var waiting_for_response: bool = false
@@ -108,7 +107,7 @@ func _on_accept_button_presssed() -> void:
 
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	Events.customer_left_machine.emit(customer)
-	occupied = false
+	customer = null
 
 	print("order finished")
 
