@@ -73,7 +73,6 @@ func _on_customer_left_machine(customer: Customer, drink_score) -> void:
 	if(drink_score > -3):
 		leave_store()
 	else:
-		body.modulate = Color(0.8, 0.3, 0.3, 1.0)
 		Events.customer_approached_window.emit(self)
 
 

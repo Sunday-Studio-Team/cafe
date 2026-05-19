@@ -4,7 +4,7 @@ extends Node3D
 signal queue_updated()
 
 @export var front_of_window_queue: Marker3D
-@export var queue_spacing_offset: float = 50
+@export var queue_spacing_offset: float = -1
 
 var customers_waiting: Array[Customer]
 
@@ -23,6 +23,8 @@ func add_customer(customer: Customer) -> void:
 func remove_front_customer() -> void:
 	# --------------------------------------------------
 	# Code to satisfy front customer, should be moved to its own function once trigger to make drink is added
+	# Or should be changed to call some function/emit the customer's signal telling them to do the next thing
+	# maybe the customer should have the all around "next-step code", that gets called, and that chooses whether they leave or go to the window
 	var front_customer: Customer = get_front_customer()
 	front_customer.body.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	front_customer.leave_store()
