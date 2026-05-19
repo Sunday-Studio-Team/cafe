@@ -85,7 +85,7 @@ func score_drink() -> void:
 
 func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
-	completed_order = Global.full_wrong_drink # make every order fully wrong for testing
+	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
 	final_order_indicator.text = "machine made: " + completed_order.name
 	final_order_indicator.show()
 	score_drink()
