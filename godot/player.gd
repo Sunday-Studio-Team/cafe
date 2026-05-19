@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const ACCELERATION := 25.0
 const DECELERATION := 25.0
-const MOVE_SPEED := 2.5
+const MOVE_SPEED := 2.0
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
@@ -83,7 +83,6 @@ func handle_hovered_interactable() -> void:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null
-		
 
 
 func handle_footstep_sounds() -> void:

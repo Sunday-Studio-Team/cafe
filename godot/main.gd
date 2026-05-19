@@ -45,6 +45,4 @@ func _on_customer_approached_machine(customer: Customer) -> void:
 	while machine == null or machine.customer:
 		machine = machines.pick_random()
 
-	customer.global_position = machine.spot_for_customer.global_position
-	machine.occupied = true
 	machine.customer = customer
