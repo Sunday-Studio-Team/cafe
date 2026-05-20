@@ -25,7 +25,7 @@ material = SubResource("StandardMaterial3D_6qesk")
 size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
-size = Vector3(0.5, 1, 0.25)
+size = Vector3(0.25, 0.5, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llj37"]
 albedo_color = Color(0.70842093, 0.6127528, 0, 1)
@@ -131,6 +131,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12589586, 0.03169334)
 mesh = SubResource("BoxMesh_6qesk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MakeDrinkButton" unique_id=1991787089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000005, 0)
 shape = SubResource("BoxShape3D_loq51")
 
 [node name="RejectButton" type="Area3D" parent="." unique_id=410108366 node_paths=PackedStringArray("mesh")]
