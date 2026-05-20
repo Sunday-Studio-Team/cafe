@@ -41,7 +41,7 @@ albedo_color = Color(1, 0.37254903, 0.35686275, 1)
 material = SubResource("StandardMaterial3D_ioi8x")
 size = Vector3(0.22, 0.15, 0.3)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "accept_button", "reject_button", "waiting_approval_indicator")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -50,6 +50,7 @@ timer = NodePath("Timer")
 customer_order_indicator = NodePath("CustomerOrderIndicator")
 final_order_indicator = NodePath("MachineOrderIndicator")
 score_label = NodePath("AcceptButton/ScoreLabel")
+make_drink_button = NodePath("MakeDrinkButton")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
@@ -121,8 +122,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023542345, 1.0213691, 0.9
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
-display_name = "[color=red]reject button"
+display_name = "[color=yellow]Make Drink"
 mesh = NodePath("MeshInstance3D")
+hold_to_interact = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MakeDrinkButton" unique_id=432966545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12589586, 0.03169334)

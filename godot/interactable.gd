@@ -19,6 +19,7 @@ signal interacted
 #Holding Interaction
 @export var hold_to_interact: bool = false
 @export var time_to_hold: float = 5
+var time_held : float = 0
 
 var enabled := true
 
@@ -31,11 +32,23 @@ func _physics_process(_delta: float) -> void:
 	if Global.hovered_interactable != self or not enabled:
 		mesh.material_overlay = null
 		return
-
+	
+	#Hold to press
+	#Detects how long a button is pressed
+	if Input.is_action_pressed("interact") and hold_to_interact:
+		#Note: Move time_held to the interaction
+		time_held += 1 * _delta
+		#print(time_held, " / ", time_to_hold)
+		if time_held >= time_to_hold:
+			interacted.emit()
+	else:
+		time_held = 0
+		
 	mesh.material_overlay = ShaderMaterial.new()
 	mesh.material_overlay.shader = Global.hover_shader
 
-	if Input.is_action_just_pressed("interact"):
+	#One time press
+	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()
 
 

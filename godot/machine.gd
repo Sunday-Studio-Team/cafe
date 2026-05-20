@@ -33,6 +33,7 @@ var drink_score: int = 0
 func _ready() -> void:
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
+	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	timer.timeout.connect(_on_order_finished)
 
 	progress_indicator.hide()
@@ -47,6 +48,7 @@ func _physics_process(_delta: float) -> void:
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
+	make_drink_button.visible = waiting_for_response
 	waiting_approval_indicator.visible = waiting_for_response
 
 
@@ -57,6 +59,24 @@ func start_order() -> void:
 	customer_order_indicator.show()
 	timer.start()
 
+#Gives a specified score to the score drink
+func score_drink_set(drink_score: int) -> void:
+	
+	match drink_score:
+		-3:
+			score_label.modulate = Color.DARK_RED
+			score_label.text = "-3 (drink TOTALLY wrong)"
+		-1:
+			score_label.modulate = Color.RED
+			score_label.text = "-1 (drink mostly wrong)"
+		+1:
+			score_label.modulate = Color.GREEN_YELLOW
+			score_label.text = "+1 (drink partially correct)"
+		+3:
+			score_label.modulate = Color.GREEN
+			score_label.text = "+3 (drink correct)"
+	
+	score_label.show()
 
 func score_drink() -> void:
 	drink_score = 0
@@ -125,3 +145,17 @@ func _on_reject_button_pressed() -> void:
 	timer.start()
 	progress_indicator.show()
 	waiting_for_response = false
+
+#Triggers when the player holds on long enough
+func _on_make_drink_button_pressed() -> void:
+	#Note: Should probably remove hardcoded value and base it off a table or enum
+	#Must hold in order to work
+	score_drink_set(3)
+	
+	#From accept button, removes customer
+	Global.score += 3
+	await get_tree().create_timer(randf_range(1, 2), false).timeout
+	waiting_for_response = false
+	completed_order = null
+	Events.customer_left_machine.emit(customer, drink_score)
+	customer = null
