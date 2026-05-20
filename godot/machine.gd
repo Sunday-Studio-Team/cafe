@@ -59,9 +59,9 @@ func start_order() -> void:
 	customer_order_indicator.show()
 	timer.start()
 
+
 #Gives a specified score to the score drink
 func score_drink_set(drink_score: int) -> void:
-	
 	match drink_score:
 		-3:
 			score_label.modulate = Color.DARK_RED
@@ -75,8 +75,9 @@ func score_drink_set(drink_score: int) -> void:
 		+3:
 			score_label.modulate = Color.GREEN
 			score_label.text = "+3 (drink correct)"
-	
+
 	score_label.show()
+
 
 func score_drink() -> void:
 	drink_score = 0
@@ -122,15 +123,15 @@ func _on_accept_button_presssed() -> void:
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
 	waiting_for_response = false
 	completed_order = null
-	
+
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)
 	# pretty clunky right now, with a score check here and a score check in _on_customer_left_machine
-	if(drink_score <= -3):
+	if (drink_score <= -3):
 		await get_tree().create_timer(randf_range(0.3, 1), false).timeout
 		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
 	# -------------------------------------------------
-	
+
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	Events.customer_left_machine.emit(customer, drink_score)
 	customer = null
@@ -146,16 +147,16 @@ func _on_reject_button_pressed() -> void:
 	progress_indicator.show()
 	waiting_for_response = false
 
+
 #Triggers when the player holds on long enough
 func _on_make_drink_button_pressed() -> void:
 	#Note: Should probably remove hardcoded value and base it off a table or enum
 	#Must hold in order to work
 	score_drink_set(3)
-	
-	#From accept button, removes customer
+
 	Global.score += 3
-	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	waiting_for_response = false
+	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	completed_order = null
 	Events.customer_left_machine.emit(customer, drink_score)
 	customer = null
