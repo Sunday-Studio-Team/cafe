@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export var score_label: Label
 @export var interactable_label: RichTextLabel
+@export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
 @export var time_left_label: Label
 @export var objective: RichTextLabel
@@ -24,13 +25,32 @@ func _physics_process(_delta: float) -> void:
 	score_label.text = "score: " + str(Global.score)
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
 
-	if Global.hovered_interactable != null:
-		interactable_label.text = (
-			"[E] interact - "
-			+ Global.hovered_interactable.display_name
-		)
+	var hovered_interactable: Interactable = Global.hovered_interactable
+
+	if hovered_interactable != null:
+		if hovered_interactable.hold_to_interact:
+			interactable_label.text = (
+				"(HOLD) [E] - "
+				+ Global.hovered_interactable.display_name
+			)
+
+			hold_interact_progress.value = (
+				hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
+			)
+
+		else:
+			interactable_label.text = (
+				"[E] - "
+				+ Global.hovered_interactable.display_name
+			)
+
 	else:
 		interactable_label.text = ""
+
+	hold_interact_progress.visible = (
+		hovered_interactable != null
+		and hovered_interactable.time_held > 0
+	)
 
 
 func _on_time_up() -> void:

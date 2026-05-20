@@ -104,7 +104,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0090001)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
-display_name = "[color=green]accept button"
+display_name = "[color=green]approve drink"
 mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AcceptButton" unique_id=900902096]
@@ -122,7 +122,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023542345, 1.0213691, 0.9
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
-display_name = "[color=yellow]Make Drink"
+display_name = "[color=yellow]remake drink manually"
 mesh = NodePath("MeshInstance3D")
 hold_to_interact = true
 
@@ -139,7 +139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.874, 1.0090001)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
-display_name = "[color=red]reject button"
+display_name = "[color=red]reject drink (retry)"
 mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RejectButton" unique_id=160359694]

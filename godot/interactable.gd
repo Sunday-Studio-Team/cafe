@@ -15,41 +15,41 @@ signal interacted
 @export var lockout_length: float = 1.0
 ## mesh used for this object
 @export var mesh: MeshInstance3D
-
-#Holding Interaction
+## if enabled, player has to HOLD interact to interact with this
+## (if disabled, they just have to press once)
 @export var hold_to_interact: bool = false
+## how long the player has to hold to interact (if hold_to_interact is enabled)
 @export var time_to_hold: float = 5
-var time_held : float = 0
 
 var enabled := true
+var time_held: float = 0
 
 
 func _ready() -> void:
 	interacted.connect(_on_interacted)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Global.hovered_interactable != self or not enabled:
 		mesh.material_overlay = null
-		return
-	
-	#Hold to press
-	#Detects how long a button is pressed
-	if Input.is_action_pressed("interact") and hold_to_interact:
-		#Note: Move time_held to the interaction
-		time_held += 1 * _delta
-		#print(time_held, " / ", time_to_hold)
-		if time_held >= time_to_hold:
-			interacted.emit()
-	else:
 		time_held = 0
-		
-	mesh.material_overlay = ShaderMaterial.new()
-	mesh.material_overlay.shader = Global.hover_shader
+		return
 
-	#One time press
+	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()
+
+	# Hold to press
+	if Input.is_action_pressed("interact") and hold_to_interact:
+		time_held += delta
+		if time_held >= time_to_hold:
+			interacted.emit()
+			time_held = 0
+	else:
+		time_held = 0
+
+	mesh.material_overlay = ShaderMaterial.new()
+	mesh.material_overlay.shader = Global.hover_shader
 
 
 # NOTE: all this lockout stuff is a bit untested tbh lol
