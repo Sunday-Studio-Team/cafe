@@ -16,6 +16,10 @@ signal interacted
 ## mesh used for this object
 @export var mesh: MeshInstance3D
 
+#Holding Interaction
+@export var hold_to_interact: bool = false
+@export var time_to_hold: float = 5
+
 var enabled := true
 
 

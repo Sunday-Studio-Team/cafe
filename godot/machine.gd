@@ -8,6 +8,7 @@ extends Node3D
 @export var customer_order_indicator: Label3D
 @export var final_order_indicator: Label3D
 @export var score_label: Label3D
+@export var make_drink_button: Interactable
 @export var accept_button: Interactable
 @export var reject_button: Interactable
 @export var waiting_approval_indicator: Label3D
