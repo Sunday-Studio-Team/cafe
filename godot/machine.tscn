@@ -18,7 +18,8 @@ size = Vector3(1, 1.75, 0.5)
 viewport_path = NodePath("ProgressIndicator/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qesk"]
-albedo_color = Color(0.61960787, 1, 0.60784316, 1)
+transparency = 1
+albedo_color = Color(0.61960787, 1, 0.60784316, 0.6862745)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ioi8x"]
 material = SubResource("StandardMaterial3D_6qesk")
@@ -28,14 +29,16 @@ size = Vector3(0.22, 0.15, 0.3)
 size = Vector3(0.25, 0.5, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llj37"]
-albedo_color = Color(0.70842093, 0.6127528, 0, 1)
+transparency = 1
+albedo_color = Color(0.70980394, 0.6117647, 0, 0.6862745)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6qesk"]
 material = SubResource("StandardMaterial3D_llj37")
 size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioi8x"]
-albedo_color = Color(1, 0.37254903, 0.35686275, 1)
+transparency = 1
+albedo_color = Color(1, 0.37254903, 0.35686275, 0.6862745)
 
 [sub_resource type="BoxMesh" id="BoxMesh_llj37"]
 material = SubResource("StandardMaterial3D_ioi8x")
@@ -107,15 +110,15 @@ script = ExtResource("5_ioi8x")
 display_name = "[color=green]approve drink"
 mesh = NodePath("MeshInstance3D")
 
+[node name="ScoreLabel" type="Label3D" parent="AcceptButton" unique_id=2094560560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02403152, 0.22535914, 0.1323067)
+text = "+1"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AcceptButton" unique_id=900902096]
 mesh = SubResource("BoxMesh_ioi8x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AcceptButton" unique_id=1423337175]
 shape = SubResource("BoxShape3D_loq51")
-
-[node name="ScoreLabel" type="Label3D" parent="AcceptButton" unique_id=2094560560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02403152, 0.22535914, 0.1323067)
-text = "+1"
 
 [node name="MakeDrinkButton" type="Area3D" parent="." unique_id=1329158865 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023542345, 1.0213691, 0.97740984)
