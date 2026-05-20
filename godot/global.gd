@@ -4,6 +4,7 @@ extends Node
 # to get a ref to a folder that wont break if we move it : (
 @export_dir var drinks_folder_path: String
 @export var hover_shader: Shader
+@export var full_wrong_drink: Drink
 
 var player: Player
 var hovered_interactable: Interactable

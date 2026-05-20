@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dm7kt8nyip6tb"]
+
+[ext_resource type="Script" uid="uid://xo4gagvgognp" path="res://window.gd" id="1_mvsta"]
+[ext_resource type="PackedScene" uid="uid://diy70fnfh8kt1" path="res://customer_queue.tscn" id="2_hjewq"]
+
+[node name="Window" type="Node3D" unique_id=556547264 node_paths=PackedStringArray("customer_queue")]
+script = ExtResource("1_mvsta")
+customer_queue = NodePath("CustomerQueue")
+
+[node name="CustomerQueue" parent="." unique_id=1576840435 instance=ExtResource("2_hjewq")]
+
+[editable path="CustomerQueue"]

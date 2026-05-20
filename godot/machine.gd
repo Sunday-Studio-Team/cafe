@@ -53,6 +53,7 @@ func _physics_process(_delta: float) -> void:
 func start_order() -> void:
 	customers_order = Global.drinks.pick_random()
 	customer_order_indicator.text = "customer ordered: " + customers_order.name
+	print("customer's order is: ", customers_order.name)
 	customer_order_indicator.show()
 	timer.start()
 
@@ -85,6 +86,7 @@ func score_drink() -> void:
 
 func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
+	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
 	final_order_indicator.text = "machine made: " + completed_order.name
 	final_order_indicator.show()
 	score_drink()
@@ -100,10 +102,20 @@ func _on_accept_button_presssed() -> void:
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
 	waiting_for_response = false
 	completed_order = null
-
+	
+	# -------------------------------------------------
+	# Check if the drink score is -3 to make them angry (red)
+	# pretty clunky right now, with a score check here and a score check in _on_customer_left_machine
+	if(drink_score <= -3):
+		await get_tree().create_timer(randf_range(0.3, 1), false).timeout
+		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
+	# -------------------------------------------------
+	
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
-	Events.customer_left_machine.emit(customer)
+	Events.customer_left_machine.emit(customer, drink_score)
 	customer = null
+
+	print("order finished")
 
 
 func _on_reject_button_pressed() -> void:

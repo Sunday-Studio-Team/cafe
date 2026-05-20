@@ -1,6 +1,7 @@
 class_name Customer
 extends Node3D
 
+@export var body: Sprite3D
 @export var waiting_indicator: Sprite3D
 @export var waiting_bar: TextureProgressBar
 @export var timer: Timer
@@ -57,12 +58,19 @@ func _on_order_approved(customer: Customer) -> void:
 			time_bonus_label.text = "time penalty: -1"
 
 
-func _on_customer_left_machine(customer: Customer) -> void:
+func _on_customer_left_machine(customer: Customer, drink_score) -> void:
 	if customer != self:
 		return
 
 	waiting_indicator.hide()
 	time_bonus_label.hide()
+	if(drink_score > -3):
+		leave_store()
+	else:
+		Events.customer_approached_window.emit(self)
+
+
+func leave_store() -> void:
 	global_transform = Global.customer_leaving_spot.global_transform
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	queue_free()

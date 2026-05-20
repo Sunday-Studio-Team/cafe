@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://diy70fnfh8kt1"]
+
+[ext_resource type="Script" uid="uid://cckwaj76155mm" path="res://customer_queue.gd" id="1_d6l12"]
+
+[node name="CustomerQueue" type="Node3D" unique_id=1576840435 node_paths=PackedStringArray("front_of_window_queue")]
+script = ExtResource("1_d6l12")
+front_of_window_queue = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=357374983]
