@@ -25,6 +25,17 @@ sky = SubResource("Sky_0xm2m")
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.29411766)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine"), NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
@@ -130,11 +141,12 @@ autostart = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("score_label", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("score_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text")]
 script = ExtResource("5_lquwl")
 score_label = NodePath("MarginContainer/Score")
-interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable")
-hold_interact_progress = NodePath("MarginContainer/VBoxContainer/HoldInteractProgress")
+interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
+interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
+hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
 time_left_label = NodePath("MarginContainer/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
@@ -160,13 +172,27 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "score: 0"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1133469025]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1052297915]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1696852801]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=1133469025]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Interactable" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer" unique_id=644757301]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -178,7 +204,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer" unique_id=1035330662]
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 size_flags_horizontal = 4

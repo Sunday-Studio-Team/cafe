@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var score_label: Label
+@export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
@@ -28,6 +29,8 @@ func _physics_process(_delta: float) -> void:
 	var hovered_interactable: Interactable = Global.hovered_interactable
 
 	if hovered_interactable != null:
+		interactable_indicator.show()
+
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
 				"(HOLD) [E] - "
@@ -45,7 +48,7 @@ func _physics_process(_delta: float) -> void:
 			)
 
 	else:
-		interactable_label.text = ""
+		interactable_indicator.hide()
 
 	hold_interact_progress.visible = (
 		hovered_interactable != null
