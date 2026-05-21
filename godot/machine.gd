@@ -60,25 +60,6 @@ func start_order() -> void:
 	timer.start()
 
 
-#Gives a specified score to the score drink
-func score_drink_set(drink_score: int) -> void:
-	match drink_score:
-		-3:
-			score_label.modulate = Color.DARK_RED
-			score_label.text = "-3 (drink TOTALLY wrong)"
-		-1:
-			score_label.modulate = Color.RED
-			score_label.text = "-1 (drink mostly wrong)"
-		+1:
-			score_label.modulate = Color.GREEN_YELLOW
-			score_label.text = "+1 (drink partially correct)"
-		+3:
-			score_label.modulate = Color.GREEN
-			score_label.text = "+3 (drink correct)"
-
-	score_label.show()
-
-
 func score_drink() -> void:
 	drink_score = 0
 
@@ -116,6 +97,10 @@ func _on_order_finished() -> void:
 
 
 func _on_accept_button_presssed() -> void:
+	# NOTE: we might be able to remove these checks since the buttons
+	# should only be visible/interactable if we're waiting for response
+	# (unless im forgetting something)
+	#	- jack
 	if (!waiting_for_response or completed_order == null):
 		return
 	Events.order_approved.emit(customer)
@@ -148,15 +133,8 @@ func _on_reject_button_pressed() -> void:
 	waiting_for_response = false
 
 
-#Triggers when the player holds on long enough
 func _on_make_drink_button_pressed() -> void:
-	#Note: Should probably remove hardcoded value and base it off a table or enum
-	#Must hold in order to work
-	score_drink_set(3)
-
-	Global.score += 3
-	waiting_for_response = false
-	await get_tree().create_timer(randf_range(1, 2), false).timeout
-	completed_order = null
-	Events.customer_left_machine.emit(customer, drink_score)
-	customer = null
+	completed_order = customers_order
+	final_order_indicator.text = "machine made: " + completed_order.name
+	score_drink()
+	Events.order_completed.emit(customer)
