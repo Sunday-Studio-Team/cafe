@@ -1,6 +1,7 @@
 class_name Drink
 extends Resource
 
+# NOTE: WRONG values for testing purposes
 enum MainIngredient { NONE, WRONG, COFFEE, TEA, CHAI }
 enum Liquid { NONE, WRONG, WATER, MILK }
 enum Extra { NONE, WRONG, SUGAR, ICE }
