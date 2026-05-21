@@ -97,12 +97,6 @@ func _on_order_finished() -> void:
 
 
 func _on_accept_button_presssed() -> void:
-	# NOTE: we might be able to remove these checks since the buttons
-	# should only be visible/interactable if we're waiting for response
-	# (unless im forgetting something)
-	#	- jack
-	if (!waiting_for_response or completed_order == null):
-		return
 	Events.order_approved.emit(customer)
 	Global.score += drink_score
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
@@ -125,8 +119,6 @@ func _on_accept_button_presssed() -> void:
 
 
 func _on_reject_button_pressed() -> void:
-	if (!waiting_for_response or timer.time_left > 0):
-		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
 	timer.start()
 	progress_indicator.show()
