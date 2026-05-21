@@ -127,6 +127,6 @@ func _on_reject_button_pressed() -> void:
 
 func _on_make_drink_button_pressed() -> void:
 	completed_order = customers_order
-	final_order_indicator.text = "machine made: " + completed_order.name
+	final_order_indicator.text = "you made: " + completed_order.name
 	score_drink()
 	Events.order_completed.emit(customer)
