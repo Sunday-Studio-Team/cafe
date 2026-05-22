@@ -1,6 +1,5 @@
 class_name Interactable
 extends Area3D
-## NOTE: PUT INTERACTABLES ON PHYSICS LAYER 2 OR THEY WONT WORK
 
 # interact functionality can either be defined by extending this script
 # and modifying _on_interacted(), or by connecting this signal to a function
@@ -35,6 +34,9 @@ func _ready() -> void:
 		func():
 			enabled = visible
 	)
+
+	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, true)
 
 
 func _physics_process(delta: float) -> void:
