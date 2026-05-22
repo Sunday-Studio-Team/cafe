@@ -44,7 +44,9 @@ albedo_color = Color(1, 0.37254903, 0.35686275, 0.6862745)
 material = SubResource("StandardMaterial3D_ioi8x")
 size = Vector3(0.22, 0.15, 0.3)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ioi8x"]
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -57,6 +59,8 @@ make_drink_button = NodePath("MakeDrinkButton")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
+fix_machine_button = NodePath("FixMachineButton")
+breakdown_timer = NodePath("BreakdownTimer")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -90,6 +94,9 @@ text = "making drink . . ."
 
 [node name="Timer" type="Timer" parent="." unique_id=1788318326]
 wait_time = 10.0
+one_shot = true
+
+[node name="BreakdownTimer" type="Timer" parent="." unique_id=644498863]
 one_shot = true
 
 [node name="CustomerOrderIndicator" type="Label3D" parent="." unique_id=2089461590]
@@ -156,3 +163,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
 text = "order complete!
 waiting for approval ^"
 font_size = 16
+
+[node name="FixMachineButton" type="Area3D" parent="." unique_id=885014159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
+visible = false
+collision_layer = 2
+script = ExtResource("5_ioi8x")
+display_name = "fix machine"
+hold_to_interact = true
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
+transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+modulate = Color(1, 0.6, 0.12156863, 1)
+text = "BROKEN DOWN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
+shape = SubResource("BoxShape3D_ioi8x")

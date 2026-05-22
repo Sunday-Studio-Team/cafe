@@ -12,11 +12,13 @@ extends Node3D
 @export var accept_button: Interactable
 @export var reject_button: Interactable
 @export var waiting_approval_indicator: Label3D
+@export var fix_machine_button: Interactable
+@export var breakdown_timer: Timer
 
 var customer: Customer:
 	set(new_customer):
 		customer = new_customer
-		if customer:
+		if customer != null:
 			customer.timer.timeout.connect(_on_customer_wait_timeout)
 			customer.global_position = spot_for_customer.global_position
 			await get_tree().create_timer(randf_range(1, 3), false).timeout
@@ -36,7 +38,10 @@ func _ready() -> void:
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
+	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	timer.timeout.connect(_on_order_finished)
+	breakdown_timer.wait_time = timer.wait_time / 2
+	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 
 	progress_indicator.hide()
 	score_label.hide()
@@ -60,6 +65,9 @@ func start_order() -> void:
 	print("customer's order is: ", customers_order.name)
 	customer_order_indicator.show()
 	timer.start()
+
+	if randf() < 0.2:
+		breakdown_timer.start()
 
 
 func score_drink() -> void:
@@ -127,6 +135,12 @@ func _on_reject_button_pressed() -> void:
 	waiting_for_response = false
 
 
+func _on_fix_machine_button_pressed() -> void:
+	fix_machine_button.hide()
+	customer_order_indicator.show()
+	timer.start()
+
+
 func _on_make_drink_button_pressed() -> void:
 	completed_order = customers_order
 	final_order_indicator.text = "you made: " + completed_order.name
@@ -136,3 +150,9 @@ func _on_make_drink_button_pressed() -> void:
 
 func _on_customer_wait_timeout() -> void:
 	customer = null
+
+
+func _on_breakdown_timer_timeout() -> void:
+	customer_order_indicator.hide()
+	timer.stop()
+	fix_machine_button.show()
