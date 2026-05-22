@@ -17,10 +17,14 @@ func _ready() -> void:
 
 func add_customer(customer: Customer) -> void:
 	customers_waiting.append(customer)
+	customer.timer.timeout.connect(func(): remove_front_customer(false))
+	customer.drink_made_at_window.connect(func(): remove_front_customer(true))
+	customer.make_drink_button.enabled = true
 	queue_updated.emit()
+	customer.at_window = true
 
 
-func remove_front_customer() -> void:
+func remove_front_customer(customer_happy: bool) -> void:
 	# --------------------------------------------------
 	# Code to satisfy front customer, should be moved to its own function once trigger to make drink is added
 	# Or should be changed to call some function/emit the customer's signal telling them to do the next thing
@@ -29,10 +33,14 @@ func remove_front_customer() -> void:
 	front_customer.body.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	front_customer.leave_store()
 	# --------------------------------------------------
-	
-	
+
 	customers_waiting.pop_front()
 	queue_updated.emit()
+
+	if customer_happy:
+		Global.score += 3
+	else:
+		Global.score -= 3
 
 
 func get_front_customer() -> Customer:
@@ -45,5 +53,5 @@ func _on_queue_updated() -> void:
 		# Offset z coordinate by the customer's position in the queue
 		var customer_position: Vector3 = queue_front_position
 		customer_position.z += queue_spacing_offset * index
-		
+
 		customer.global_position = customer_position

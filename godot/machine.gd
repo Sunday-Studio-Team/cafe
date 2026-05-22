@@ -17,6 +17,7 @@ var customer: Customer:
 	set(new_customer):
 		customer = new_customer
 		if customer:
+			customer.timer.timeout.connect(_on_customer_wait_timeout)
 			customer.global_position = spot_for_customer.global_position
 			await get_tree().create_timer(randf_range(1, 3), false).timeout
 			start_order()
@@ -24,6 +25,7 @@ var customer: Customer:
 			customer_order_indicator.hide()
 			final_order_indicator.hide()
 			score_label.hide()
+			waiting_for_response = false
 var customers_order: Drink
 var completed_order: Drink
 var waiting_for_response: bool = false
@@ -130,3 +132,7 @@ func _on_make_drink_button_pressed() -> void:
 	final_order_indicator.text = "you made: " + completed_order.name
 	score_drink()
 	Events.order_completed.emit(customer)
+
+
+func _on_customer_wait_timeout() -> void:
+	customer = null

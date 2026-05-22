@@ -1,5 +1,6 @@
 class_name Interactable
 extends Area3D
+## NOTE: PUT INTERACTABLES ON PHYSICS LAYER 2 OR THEY WONT WORK
 
 # interact functionality can either be defined by extending this script
 # and modifying _on_interacted(), or by connecting this signal to a function
@@ -31,7 +32,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Global.hovered_interactable != self or not enabled:
-		mesh.material_overlay = null
+		if mesh:
+			mesh.material_overlay = null
 		time_held = 0
 		return
 
@@ -48,8 +50,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		time_held = 0
 
-	mesh.material_overlay = ShaderMaterial.new()
-	mesh.material_overlay.shader = Global.hover_shader
+	if mesh:
+		mesh.material_overlay = ShaderMaterial.new()
+		mesh.material_overlay.shader = Global.hover_shader
 
 
 # NOTE: all this lockout stuff is a bit untested tbh lol

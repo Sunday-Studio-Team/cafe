@@ -5,17 +5,21 @@
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://progress_bar/under.png" id="3_gn8fi"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://progress_bar/over.png" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://progress_bar/progress.png" id="5_0rcyg"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="6_eas7q"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
 viewport_path = NodePath("WaitingIndicator/SubViewport")
 
-[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_eas7q"]
+
+[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "make_drink_button")]
 script = ExtResource("1_7tiyv")
 body = NodePath("Sprite3D")
 waiting_indicator = NodePath("WaitingIndicator")
 waiting_bar = NodePath("WaitingIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 time_bonus_label = NodePath("TimeBonusLabel")
+make_drink_button = NodePath("MakeDrinkButton")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.85, 0)
@@ -54,3 +58,14 @@ one_shot = true
 
 [node name="TimeBonusLabel" type="Label3D" parent="." unique_id=1602389944]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16839987, 2.2842515, 0)
+
+[node name="MakeDrinkButton" type="Area3D" parent="." unique_id=472902174]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.1349633)
+collision_layer = 2
+script = ExtResource("6_eas7q")
+display_name = "[color=yellow]make drink"
+hold_to_interact = true
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MakeDrinkButton" unique_id=892378874]
+shape = SubResource("BoxShape3D_eas7q")
