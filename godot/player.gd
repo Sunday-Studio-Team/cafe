@@ -76,10 +76,7 @@ func handle_gravity(delta: float) -> void:
 
 func handle_hovered_interactable() -> void:
 	var collider = aiming_ray.get_collider()
-	# NOTE: ideally we can rework something to remove this visible check,
-	# but seems like Area3Ds (which Interactable inherits) dont stop colliding
-	# with raycasts even when invisible 🤔
-	if collider is Interactable and collider.enabled and collider.visible:
+	if collider is Interactable:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null

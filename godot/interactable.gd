@@ -22,12 +22,24 @@ signal interacted
 ## how long the player has to hold to interact (if hold_to_interact is enabled)
 @export var time_to_hold: float = 5
 
-var enabled := true
+var enabled := true:
+	set(value):
+		enabled = value
+		if enabled:
+			process_mode = Node.PROCESS_MODE_INHERIT
+		else:
+			process_mode = Node.PROCESS_MODE_DISABLED
 var time_held: float = 0
 
 
 func _ready() -> void:
 	interacted.connect(_on_interacted)
+
+	enabled = visible
+	visibility_changed.connect(
+		func():
+			enabled = visible
+	)
 
 
 func _physics_process(delta: float) -> void:
