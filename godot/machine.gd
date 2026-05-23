@@ -28,6 +28,7 @@ var customer: Customer:
 			final_order_indicator.hide()
 			score_label.hide()
 			waiting_for_response = false
+			timer.stop()
 var customers_order: Drink
 var completed_order: Drink
 var waiting_for_response: bool = false
@@ -42,6 +43,7 @@ func _ready() -> void:
 	timer.timeout.connect(_on_order_finished)
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
+	Events.customer_approached_machine.connect(_on_customer_approached_window)
 
 	progress_indicator.hide()
 	score_label.hide()
@@ -156,3 +158,10 @@ func _on_breakdown_timer_timeout() -> void:
 	customer_order_indicator.hide()
 	timer.stop()
 	fix_machine_button.show()
+
+
+func _on_customer_approached_window(customer_at_window: Customer) -> void:
+	if customer_at_window != customer:
+		return
+
+	customer = null
