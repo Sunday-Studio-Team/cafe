@@ -26,7 +26,8 @@ func load_resources_from_folder(folder_path: String) -> Array[Resource]:
 	var dir := DirAccess.open(folder_path)
 
 	for file_name: String in dir.get_files():
+		file_name = file_name.replace(".remap", "")
 		if file_name.ends_with(".tres"):
-			resources.append(load(folder_path.path_join(file_name)) as Resource)
+			resources.append(ResourceLoader.load(folder_path.path_join(file_name)) as Resource)
 
 	return resources
