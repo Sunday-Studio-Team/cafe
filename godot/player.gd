@@ -8,6 +8,7 @@ const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
 @export var aiming_ray: RayCast3D
+@export var is_movement_enabled: bool = true
 
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
@@ -49,6 +50,8 @@ func handle_mouselook() -> void:
 
 
 func handle_movement(delta: float) -> void:
+	if(not is_movement_enabled):
+		return
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
