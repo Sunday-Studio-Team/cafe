@@ -14,7 +14,7 @@ signal interacted
 ## (if disabled, they just have to press once)
 @export var hold_to_interact: bool = false
 ## how long the player has to hold to interact (if hold_to_interact is enabled)
-@export var time_to_hold: float = 5
+@export var time_to_hold: float = 6
 
 var enabled := true:
 	set(value):

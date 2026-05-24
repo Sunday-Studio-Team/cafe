@@ -33,6 +33,7 @@ var customers_order: Drink
 var completed_order: Drink
 var waiting_for_response: bool = false
 var drink_score: int = 0
+var time_to_make_drink: float = 4.0
 
 
 func _ready() -> void:
@@ -41,6 +42,7 @@ func _ready() -> void:
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	timer.timeout.connect(_on_order_finished)
+	timer.wait_time = time_to_make_drink
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 	Events.customer_approached_machine.connect(_on_customer_approached_window)
