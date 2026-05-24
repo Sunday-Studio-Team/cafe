@@ -94,17 +94,6 @@ func score_drink() -> void:
 	if drink_score == 3:
 		drink_correct = true
 
-
-func _on_order_finished() -> void:
-	completed_order = Global.drinks.pick_random()
-	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
-	if drink_correct:
-		final_order_indicator.modulate = Color.GREEN
-	else:
-		final_order_indicator.modulate = Color.RED
-	final_order_indicator.text = "machine made: " + completed_order.name
-	final_order_indicator.show()
-	score_drink()
 	drink_customer_score_label.text = ""
 	if drink_score < 0:
 		drink_customer_score_label.modulate = Color.RED
@@ -114,6 +103,19 @@ func _on_order_finished() -> void:
 		drink_customer_score_label.modulate = Color.GREEN
 		drink_customer_score_label.text += "🙂+ "
 		drink_customer_score_label.text += str(drink_score)
+
+	if drink_correct:
+		final_order_indicator.modulate = Color.GREEN
+	else:
+		final_order_indicator.modulate = Color.RED
+
+
+func _on_order_finished() -> void:
+	completed_order = Global.drinks.pick_random()
+	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
+	final_order_indicator.text = "machine made: " + completed_order.name
+	final_order_indicator.show()
+	score_drink()
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
 
