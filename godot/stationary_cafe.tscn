@@ -15,7 +15,7 @@ ambient_light_source = 1
 shading_mode = 0
 albedo_color = Color(0.11328125, 0.11328125, 0.11328125, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5f5i4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpnvh"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
@@ -107,9 +107,10 @@ wait_time = 120.0
 one_shot = true
 autostart = true
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1253183465 node_paths=PackedStringArray("score_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=668018680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text")]
 script = ExtResource("6_ybsfc")
-score_label = NodePath("MarginContainer/Score")
+profit_label = NodePath("MarginContainer/Scores/Money")
+customer_happiness_label = NodePath("MarginContainer/Scores/Customer")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
@@ -118,7 +119,7 @@ time_left_label = NodePath("MarginContainer/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 end_text = NodePath("MarginContainer/EndText")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1142472113]
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=640900365]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -131,33 +132,43 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Score" type="Label" parent="UI/MarginContainer" unique_id=2117119397]
+[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer" unique_id=2131998014]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="UI/MarginContainer/Scores" unique_id=403525660]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
-text = "score: 0"
+text = "$ 0"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=729542868]
+[node name="Customer" type="Label" parent="UI/MarginContainer/Scores" unique_id=335680229]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "🙂 0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1730238945]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=2007421332]
+[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=701804651]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
 
-[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=256754083]
+[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1024861649]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_5f5i4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cpnvh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=1696503631]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=442954900]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1365359724]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=729920544]
 custom_minimum_size = Vector2(550, 50)
 layout_mode = 2
 size_flags_vertical = 10
@@ -168,34 +179,34 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=102439244]
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1891827902]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="TimeLeft" type="Label" parent="UI/MarginContainer" unique_id=1494908740]
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer" unique_id=305352179]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "TIME LEFT: 0"
 
-[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=632928797]
+[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=1978991440]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 text = "[b]OBJECTIVE:[/b]
 
-score X points before the timer ends !"
+make $10 while keeping your customer rating above 5"
+scroll_active = false
 horizontal_alignment = 1
 
-[node name="EndText" type="RichTextLabel" parent="UI/MarginContainer" unique_id=717883565]
+[node name="EndText" type="RichTextLabel" parent="UI/MarginContainer" unique_id=253287545]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 size_flags_horizontal = 4
