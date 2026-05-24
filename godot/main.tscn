@@ -63,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 size = Vector3(10, 3, 9)
 
 [node name="Void" type="CSGBox3D" parent="Building/CustomerArea" unique_id=760034625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.5, 0.05)
 operation = 2
 size = Vector3(9.9, 2.9, 9)
 
@@ -90,6 +90,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3999999, 1.6999999, 4.4)
 operation = 2
 size = Vector3(2.25, 1.5, 0.1)
 
+[node name="SideWall" type="CSGCombiner3D" parent="Building" unique_id=1154493046]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.6, 0, 0)
+use_collision = true
+
+[node name="Wall" type="CSGBox3D" parent="Building/SideWall" unique_id=1199950967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49999994, 1.5, 4.4)
+size = Vector3(9.9, 2.9, 0.1)
+material = SubResource("StandardMaterial3D_ig7tw")
+
 [node name="BackRoom" type="CSGCombiner3D" parent="Building" unique_id=1068869310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.95)
 use_collision = true
@@ -104,10 +113,23 @@ operation = 2
 size = Vector3(14.9, 2.9, 9)
 
 [node name="Void2" type="CSGBox3D" parent="Building/BackRoom" unique_id=1398872124]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4.4999995)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1.5, -4.4999995)
 operation = 2
-size = Vector3(9.9, 2.9, 0.1)
+size = Vector3(12, 2.9, 0.1)
 material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
+use_collision = true
+
+[node name="Room" type="CSGBox3D" parent="Building/BackRoom2" unique_id=930105116]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+size = Vector3(15, 3, 9)
+
+[node name="Void" type="CSGBox3D" parent="Building/BackRoom2" unique_id=59185805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1.5, -0.05000019)
+operation = 2
+size = Vector3(14.9, 2.9, 9)
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
@@ -118,7 +140,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 
 [node name="Machine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.1, 3.8)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.1, 0.1, 1.2999998)
 
 [node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 3.8)
