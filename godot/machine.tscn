@@ -46,7 +46,7 @@ size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ioi8x"]
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "drink_customer_score_label")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -61,6 +61,7 @@ reject_button = NodePath("RejectButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
+drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -180,3 +181,6 @@ text = "BROKEN DOWN"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
 shape = SubResource("BoxShape3D_ioi8x")
+
+[node name="DrinkCustomerScoreLabel" type="Label3D" parent="." unique_id=434807514]
+transform = Transform3D(0.98999906, -0.14107402, 0, 0.14107402, 0.98999906, 0, 0, 0, 1, 0.65134853, 1.0347569, 1.0733647)

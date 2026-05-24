@@ -14,6 +14,7 @@ extends Node3D
 @export var waiting_approval_indicator: Label3D
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
+@export var drink_customer_score_label: Label3D
 
 var customer: Customer:
 	set(new_customer):
@@ -34,6 +35,7 @@ var completed_order: Drink
 var waiting_for_response: bool = false
 var drink_score: int = 0
 var time_to_make_drink: float = 4.0
+var drink_correct: bool = false
 
 
 func _ready() -> void:
@@ -61,6 +63,7 @@ func _physics_process(_delta: float) -> void:
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
 	waiting_approval_indicator.visible = waiting_for_response
+	drink_customer_score_label.visible = waiting_for_response
 
 
 func start_order() -> void:
@@ -83,36 +86,43 @@ func score_drink() -> void:
 		else:
 			drink_score -= 1
 
-	match drink_score:
-		-3:
-			score_label.modulate = Color.DARK_RED
-			score_label.text = "-3 (drink TOTALLY wrong)"
-		-1:
-			score_label.modulate = Color.RED
-			score_label.text = "-1 (drink mostly wrong)"
-		+1:
-			score_label.modulate = Color.GREEN_YELLOW
-			score_label.text = "+1 (drink partially correct)"
-		+3:
-			score_label.modulate = Color.GREEN
-			score_label.text = "+3 (drink correct)"
+	score_label.modulate = Color.GREEN
+	score_label.text = "+$3"
 
 	score_label.show()
+
+	if drink_score == 3:
+		drink_correct = true
 
 
 func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
 	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
+	if drink_correct:
+		final_order_indicator.modulate = Color.GREEN
+	else:
+		final_order_indicator.modulate = Color.RED
 	final_order_indicator.text = "machine made: " + completed_order.name
 	final_order_indicator.show()
 	score_drink()
+	drink_customer_score_label.text = ""
+	if drink_score < 0:
+		drink_customer_score_label.modulate = Color.RED
+		drink_customer_score_label.text += "🙂 "
+		drink_customer_score_label.text += str(drink_score)
+	elif drink_score > 0:
+		drink_customer_score_label.modulate = Color.GREEN
+		drink_customer_score_label.text += "🙂+ "
+		drink_customer_score_label.text += str(drink_score)
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
 
 
 func _on_accept_button_presssed() -> void:
 	Events.order_approved.emit(customer)
-	Global.score += drink_score
+	Global.profit_score += 3
+	Global.customer_score += drink_score
+	final_order_indicator.modulate = Color.WHITE
 	final_order_indicator.text = "order approved! \n dispensing drink to customer"
 	waiting_for_response = false
 	completed_order = null

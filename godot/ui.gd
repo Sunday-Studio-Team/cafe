@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-@export var score_label: Label
+@export var profit_label: Label
+@export var customer_happiness_label: Label
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
@@ -14,8 +15,8 @@ func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
 
 	objective.text = (
-		"[b]OBJECTIVE:[/b] \n \n score %s points before the timer ends !"
-		% Global.goal_score
+		"[b]OBJECTIVE:[/b] \n \n make $%s while keeping your customer rating (🙂) above %s"
+		% [Global.goal_profit, Global.goal_customer_score]
 	)
 
 	await get_tree().create_timer(5, false).timeout
@@ -23,7 +24,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	score_label.text = "score: " + str(Global.score)
+	profit_label.text = "$ " + str(Global.profit_score)
+	customer_happiness_label.text = "🙂 " + str(Global.customer_score)
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
 
 	var hovered_interactable: Interactable = Global.hovered_interactable
@@ -57,7 +59,10 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_time_up() -> void:
-	if Global.score >= Global.goal_score:
+	if (
+		Global.customer_score >= Global.goal_customer_score
+		and Global.profit_score >= Global.goal_profit
+	):
 		end_text.text = "[color=green][b]you win !"
 	else:
 		end_text.text = "[color=red][b]you lose !"

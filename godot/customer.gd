@@ -58,6 +58,7 @@ func _on_timer_timeout() -> void:
 func _on_order_completed(customer: Customer) -> void:
 	if customer != self or orders_made > 0:
 		return
+	await get_tree().process_frame
 	timer.start()
 	waiting_indicator.show()
 	orders_made += 1
@@ -67,15 +68,15 @@ func _on_order_approved(customer: Customer) -> void:
 	if customer != self:
 		return
 
-	Global.score += bonus_points_for_time
+	Global.customer_score += bonus_points_for_time
 
 	match bonus_points_for_time:
 		1:
 			time_bonus_label.modulate = Color.GREEN
-			time_bonus_label.text = "time bonus: +1"
+			time_bonus_label.text = "⌚ bonus 🙂: +1"
 		-1:
 			time_bonus_label.modulate = Color.RED
-			time_bonus_label.text = "time penalty: -1"
+			time_bonus_label.text = "⌚ 🙂 penalty: -1"
 
 
 func _on_customer_left_machine(customer: Customer, drink_score) -> void:
