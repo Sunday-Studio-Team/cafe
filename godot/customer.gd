@@ -19,7 +19,7 @@ func _ready() -> void:
 	make_drink_button.enabled = false
 	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
 	timer.timeout.connect(_on_timer_timeout)
-	Events.order_completed.connect(_on_order_completed)
+	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
 	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
@@ -55,7 +55,7 @@ func _on_timer_timeout() -> void:
 		timer.start()
 
 
-func _on_order_completed(customer: Customer) -> void:
+func _on_order_started(customer: Customer) -> void:
 	if customer != self or orders_made > 0:
 		return
 	await get_tree().process_frame

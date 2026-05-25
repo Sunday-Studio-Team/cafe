@@ -67,6 +67,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func start_order() -> void:
+	Events.customer_started_order.emit(customer)
 	customers_order = Global.drinks.pick_random()
 	customer_order_indicator.text = "customer ordered: " + customers_order.name
 	print("customer's order is: ", customers_order.name)
