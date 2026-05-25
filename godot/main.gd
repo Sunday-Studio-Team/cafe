@@ -21,7 +21,6 @@ func _ready() -> void:
 
 
 func _on_customer_spawn_timer_timeout() -> void:
-	# TODO: figure out how to have a queue of customers at door and/or at machines
 	var existing_customers = get_tree().get_nodes_in_group("customers") as Array[Customer]
 	if existing_customers.size() == machines.size():
 		return

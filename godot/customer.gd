@@ -33,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 
 	if waiting_bar.value >= 66:
 		waiting_indicator.modulate = Color.GREEN
-		bonus_points_for_time = 1
+		bonus_points_for_time = 0
 	elif waiting_bar.value >= 33:
 		waiting_indicator.modulate = Color.ORANGE
 		bonus_points_for_time = 0
