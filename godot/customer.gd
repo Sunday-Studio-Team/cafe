@@ -29,6 +29,9 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if timer.is_stopped():
+		return
+
 	waiting_bar.value = timer.time_left / timer.wait_time * 100
 
 	if waiting_bar.value >= 66:
@@ -69,6 +72,7 @@ func _on_order_approved(customer: Customer) -> void:
 		return
 
 	Global.customer_score += bonus_points_for_time
+	timer.stop()
 
 	match bonus_points_for_time:
 		1:
