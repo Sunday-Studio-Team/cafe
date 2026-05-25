@@ -36,6 +36,7 @@ var waiting_for_response: bool = false
 var drink_score: int = 0
 var time_to_make_drink: float = 4.0
 var drink_correct: bool = false
+var broken_down: bool = false
 
 
 func _ready() -> void:
@@ -68,6 +69,9 @@ func _physics_process(_delta: float) -> void:
 
 func start_order() -> void:
 	Events.customer_started_order.emit(customer)
+	if broken_down:
+		return
+
 	customers_order = Global.drinks.pick_random()
 	customer_order_indicator.text = "customer ordered: " + customers_order.name
 	print("customer's order is: ", customers_order.name)
@@ -152,12 +156,6 @@ func _on_reject_button_pressed() -> void:
 	waiting_for_response = false
 
 
-func _on_fix_machine_button_pressed() -> void:
-	fix_machine_button.hide()
-	customer_order_indicator.show()
-	timer.start()
-
-
 func _on_make_drink_button_pressed() -> void:
 	completed_order = customers_order
 	final_order_indicator.text = "you made: " + completed_order.name
@@ -173,6 +171,15 @@ func _on_breakdown_timer_timeout() -> void:
 	customer_order_indicator.hide()
 	timer.stop()
 	fix_machine_button.show()
+	broken_down = true
+
+
+func _on_fix_machine_button_pressed() -> void:
+	fix_machine_button.hide()
+	broken_down = false
+	if customer:
+		customer_order_indicator.show()
+		timer.start()
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
