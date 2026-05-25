@@ -18,8 +18,7 @@ func _ready() -> void:
 		"
 		you are the new manager of a fully automated cafe! \n manage the self-service machines and meet your daily objective:
 		\n [b]OBJECTIVE:[/b] \n make $%s while keeping your customer rating (🙂) above %s
-		\n \n if customers wait too long, or are unhappy with the service, they'll complain.
-		handle orders and complaints efficiently and accurately or your rating will go down!
+		\n \n if customers get the wrong orders or are kept waiting too long, you might have to deal with them personally!
 		"
 		% [Global.goal_profit, Global.goal_customer_score]
 	)
