@@ -139,7 +139,7 @@ func _on_accept_button_presssed() -> void:
 	# Check if the drink score is -3 to make them angry (red)
 	# pretty clunky right now, with a score check here and a score check in _on_customer_left_machine
 	if (drink_score <= -3):
-		await get_tree().create_timer(randf_range(0.3, 1), false).timeout
+		#await get_tree().create_timer(randf_range(0.3, 1), false).timeout
 		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
 	# -------------------------------------------------
 
