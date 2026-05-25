@@ -84,6 +84,7 @@ func start_order() -> void:
 
 func score_drink() -> void:
 	drink_score = 0
+	drink_correct = false
 
 	for element in ["main_ingredient", "liquid", "extra"]:
 		if completed_order.get(element) == customers_order.get(element):
