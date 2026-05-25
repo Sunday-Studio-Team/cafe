@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://progress_bar/over.png" id="3_ioi8x"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://progress_bar/progress.png" id="4_llj37"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
+[ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -46,7 +47,7 @@ size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ioi8x"]
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "drink_customer_score_label")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "drink_customer_score_label")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -61,6 +62,7 @@ reject_button = NodePath("RejectButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
+breakdown_sound = NodePath("BreakdownSound")
 drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
@@ -190,3 +192,8 @@ shadow_enabled = true
 
 [node name="DrinkCustomerScoreLabel" type="Label3D" parent="." unique_id=434807514]
 transform = Transform3D(0.98999906, -0.14107402, 0, 0.14107402, 0.98999906, 0, 0, 0, 1, 0.65134853, 1.0347569, 1.0733647)
+
+[node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
+stream = ExtResource("6_llj37")
+volume_db = -5.0
+max_db = 0.0

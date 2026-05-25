@@ -14,6 +14,7 @@ extends Node3D
 @export var waiting_approval_indicator: Label3D
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
+@export var breakdown_sound: AudioStreamPlayer3D
 @export var drink_customer_score_label: Label3D
 
 var customer: Customer:
@@ -173,6 +174,7 @@ func _on_breakdown_timer_timeout() -> void:
 	timer.stop()
 	fix_machine_button.show()
 	broken_down = true
+	breakdown_sound.play()
 
 
 func _on_fix_machine_button_pressed() -> void:
