@@ -1,7 +1,8 @@
 class_name CustomerQueue
 extends Node3D
 
-signal queue_updated()
+signal customer_added
+signal queue_updated
 
 @export var front_of_window_queue: Marker3D
 @export var queue_spacing_offset: float = -1
@@ -21,6 +22,7 @@ func add_customer(customer: Customer) -> void:
 	customer.drink_made_at_window.connect(func(): remove_front_customer(true))
 	customer.make_drink_button.enabled = true
 	queue_updated.emit()
+	customer_added.emit()
 	customer.at_window = true
 
 
