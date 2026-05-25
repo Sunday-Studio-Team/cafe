@@ -48,7 +48,7 @@ func _ready() -> void:
 	timer.wait_time = time_to_make_drink
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
-	Events.customer_approached_machine.connect(_on_customer_approached_window)
+	Events.customer_approached_window.connect(_on_customer_approached_window)
 
 	progress_indicator.hide()
 	score_label.hide()
