@@ -15,11 +15,16 @@ func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
 
 	objective.text = (
-		"[b]OBJECTIVE:[/b] \n \n make $%s while keeping your customer rating (🙂) above %s"
+		"
+		you are the new manager of a fully automated cafe! \n manage the self-service machines and meet your daily objective:
+		\n [b]OBJECTIVE:[/b] \n make $%s while keeping your customer rating (🙂) above %s
+		\n \n if customers wait too long, or are unhappy with the service, they'll complain.
+		handle orders and complaints efficiently and accurately or your rating will go down!
+		"
 		% [Global.goal_profit, Global.goal_customer_score]
 	)
 
-	await get_tree().create_timer(5, false).timeout
+	await get_tree().create_timer(20, false).timeout
 	objective.hide()
 
 
