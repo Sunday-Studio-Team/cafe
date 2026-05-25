@@ -21,8 +21,11 @@ func _ready() -> void:
 
 
 func _on_customer_spawn_timer_timeout() -> void:
-	var existing_customers = get_tree().get_nodes_in_group("customers") as Array[Customer]
-	if existing_customers.size() == machines.size():
+	var all_machines_occupied := true
+	for machine in machines:
+		if not machine.customer:
+			all_machines_occupied = false
+	if all_machines_occupied:
 		return
 
 	var customer = customer_scene.instantiate()
