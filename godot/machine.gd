@@ -28,6 +28,7 @@ var customer: Customer:
 			customer_order_indicator.hide()
 			final_order_indicator.hide()
 			score_label.hide()
+			drink_customer_score_label.hide()
 			waiting_for_response = false
 			timer.stop()
 var customers_order: Drink
