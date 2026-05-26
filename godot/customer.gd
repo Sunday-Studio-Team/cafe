@@ -83,8 +83,10 @@ func _on_order_approved(customer: Customer) -> void:
 	if customer != self:
 		return
 
-	Global.customer_score += bonus_points_for_time
 	timer.stop()
+
+	await get_tree().create_timer(1, false).timeout
+	Global.customer_score += bonus_points_for_time
 
 	match bonus_points_for_time:
 		1:
