@@ -9,10 +9,12 @@ extends CanvasLayer
 @export var time_left_label: Label
 @export var objective: RichTextLabel
 @export var end_text: RichTextLabel
+@export var money_sound: AudioStreamPlayer
 
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
+	Events.gained_money.connect(func(): money_sound.play())
 
 	objective.text = (
 		"

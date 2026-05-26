@@ -12,7 +12,10 @@ var main_scene: Node3D
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
-var profit_score: int = 0
+var profit_score: int = 0:
+	set(score):
+		profit_score = score
+		Events.gained_money.emit()
 var customer_score: int = 5
 var goal_profit: int = 25
 var goal_customer_score: int = 5

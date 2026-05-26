@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui.gd" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://pause_menu.gd" id="6_7mycd"]
+[ext_resource type="Script" path="res://pause_menu.gd" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -163,7 +164,7 @@ autostart = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/Scores/Customer")
@@ -174,6 +175,7 @@ game_timer = NodePath("../GameTimer")
 time_left_label = NodePath("MarginContainer/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 end_text = NodePath("MarginContainer/EndText")
+money_sound = NodePath("MoneySound")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -269,6 +271,10 @@ theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 horizontal_alignment = 1
+
+[node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]
+stream = ExtResource("7_5vw27")
+volume_db = -5.0
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
 process_mode = 3
