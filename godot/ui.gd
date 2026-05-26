@@ -39,7 +39,7 @@ func _ready() -> void:
 		\n [b]OBJECTIVE:[/b] \n make $%s while keeping your customer rating (🙂) above %s
 		\n \n if customers get the wrong orders or are kept waiting too long, you might have to deal with them personally!
 		"
-		% [Global.goal_profit, Global.goal_customer_score]
+		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
 	)
 
 	await get_tree().create_timer(20, false).timeout
@@ -48,8 +48,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	profit_label.text = (
-		"$ " + Global.float_to_price(Global.profit_score)
-		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
+		"$" + Global.float_to_price(Global.profit_score)
+		+ " (goal: $%s)" % Global.float_to_price(Global.goal_profit)
 	)
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
