@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ckfw82nedsyi5"]
+
+[ext_resource type="Texture2D" uid="uid://dt7x5vhic1fc3" path="res://Minigames/RedSquare.png" id="2_hlhpw"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://progress_bar/progress.png" id="3_81cij"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61jrx"]
+size = Vector2(28.142853, 28.571432)
+
+[node name="Fixing Machine Minigame" type="Node2D" unique_id=1748449223]
+
+[node name="Circle" type="Sprite2D" parent="." unique_id=1180703883]
+position = Vector2(583, 326)
+rotation = -6.2831855
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("3_81cij")
+
+[node name="Obstacle" type="Sprite2D" parent="Circle" unique_id=229734739]
+position = Vector2(0, 50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_hlhpw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle/Obstacle" unique_id=1478375886]
+visible = false
+position = Vector2(-0.35713196, 0.2857132)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_61jrx")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=988225664]

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dul2s4m3xf458"]
+
+[ext_resource type="Script" uid="uid://lqbec5fgr6vx" path="res://Minigames/FroggerCharacter.gd" id="1_x7rto"]
+[ext_resource type="Texture2D" uid="uid://jxdqrawu2s5c" path="res://Minigames/WhiteSqaure.png" id="2_fr41t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18odo"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7rto"]
+size = Vector2(32, 32)
+
+[node name="Charcter" type="CharacterBody2D" unique_id=232224068]
+script = ExtResource("1_x7rto")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950345058]
+texture = ExtResource("2_fr41t")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1625761861]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=586539432]
+shape = SubResource("RectangleShape2D_18odo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=781524196]
+shape = SubResource("RectangleShape2D_x7rto")
+debug_color = Color(0.9962414, 0, 0.19910997, 0.41960785)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
