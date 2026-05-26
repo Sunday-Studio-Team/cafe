@@ -16,15 +16,15 @@ var profit_score: int = 0:
 	set(score):
 		profit_score = score
 		Events.gained_money.emit()
-var customer_score: int = 5:
+var customer_score: int = 0:
 	set(new_score):
 		if new_score == customer_score:
 			return
 		var increased: bool = new_score > customer_score
 		Events.customer_score_updated.emit(increased)
 		customer_score = new_score
-var goal_profit: int = 25
-var goal_customer_score: int = 5
+var goal_profit: int = 30
+var goal_customer_score: int = 10
 
 
 func _ready() -> void:
