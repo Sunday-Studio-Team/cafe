@@ -9,6 +9,7 @@ signal drink_made_at_window
 @export var timer: Timer
 @export var time_bonus_label: Label3D
 @export var make_drink_button: Interactable
+@export_dir var sprites_folder: String
 
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -16,6 +17,7 @@ var at_window: bool = false
 
 
 func _ready() -> void:
+	apply_random_sprite()
 	make_drink_button.enabled = false
 	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
 	timer.timeout.connect(_on_timer_timeout)
@@ -50,6 +52,16 @@ func leave_store() -> void:
 	global_transform = Global.customer_leaving_spot.global_transform
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	queue_free()
+
+
+func apply_random_sprite() -> void:
+	var sprites: Array[Resource]
+
+	for file_name: String in ResourceLoader.list_directory(sprites_folder):
+		if file_name.ends_with(".png"):
+			sprites.append(ResourceLoader.load(sprites_folder.path_join(file_name)) as Resource)
+
+	body.texture = sprites.pick_random()
 
 
 func _on_timer_timeout() -> void:
