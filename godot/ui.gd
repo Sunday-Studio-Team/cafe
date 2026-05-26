@@ -14,7 +14,11 @@ extends CanvasLayer
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-	Events.gained_money.connect(func(): money_sound.play())
+	Events.gained_money.connect(
+		func():
+			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(Color.GOLD)
+			money_sound.play()
+	)
 
 	objective.text = (
 		"
