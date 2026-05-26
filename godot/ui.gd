@@ -47,7 +47,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	profit_label.text = "$ " + str(Global.profit_score) + " (goal: %s)" % Global.goal_profit
+	profit_label.text = (
+		"$ " + Global.float_to_price(Global.profit_score)
+		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
+	)
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
 
