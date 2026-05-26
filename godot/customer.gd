@@ -67,7 +67,6 @@ func apply_random_sprite() -> void:
 func _on_timer_timeout() -> void:
 	if not at_window:
 		Events.customer_approached_window.emit(self)
-		timer.start()
 
 
 func _on_order_started(customer: Customer) -> void:
@@ -101,7 +100,6 @@ func _on_customer_left_machine(customer: Customer, drink_score) -> void:
 	if customer != self:
 		return
 
-	waiting_indicator.hide()
 	time_bonus_label.hide()
 	if (drink_score > -3):
 		leave_store()
