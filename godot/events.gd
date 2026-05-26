@@ -12,3 +12,4 @@ signal order_approved(customer: Customer)
 signal customer_left_machine(customer: Customer, drink_score: int)
 signal time_up
 signal gained_money
+signal customer_score_updated(increased: bool)

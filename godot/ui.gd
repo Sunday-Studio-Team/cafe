@@ -19,6 +19,15 @@ func _ready() -> void:
 			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(Color.GOLD)
 			money_sound.play()
 	)
+	Events.customer_score_updated.connect(
+		func(increased: bool):
+			var color: Color
+			if increased:
+				color = Color.GREEN
+			else:
+				color = Color.RED
+			create_tween().tween_property(customer_happiness_label, "modulate", Color.WHITE, 0.75).from(color)
+	)
 
 	objective.text = (
 		"
