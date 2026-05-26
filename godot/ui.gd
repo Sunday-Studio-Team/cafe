@@ -10,6 +10,8 @@ extends CanvasLayer
 @export var objective: RichTextLabel
 @export var end_text: RichTextLabel
 @export var money_sound: AudioStreamPlayer
+@export var gain_points_sound: AudioStreamPlayer
+@export var lose_points_sound: AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -24,8 +26,10 @@ func _ready() -> void:
 			var color: Color
 			if increased:
 				color = Color.GREEN
+				gain_points_sound.play()
 			else:
 				color = Color.RED
+				lose_points_sound.play()
 			create_tween().tween_property(customer_happiness_label, "modulate", Color.WHITE, 0.75).from(color)
 	)
 
