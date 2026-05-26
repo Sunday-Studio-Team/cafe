@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://diy70fnfh8kt1" path="res://customer_queue.tscn" id="2_hjewq"]
 [ext_resource type="AudioStream" uid="uid://b2l81b36awff1" path="res://audio/bell.mp3" id="3_nfq5s"]
 
-[node name="Window" type="Node3D" unique_id=556547264 node_paths=PackedStringArray("customer_queue", "bell_sound")]
+[node name="Window" type="Node3D" unique_id=556547264 node_paths=PackedStringArray("customer_queue", "bell_sound", "customer_complained_indicator")]
 script = ExtResource("1_mvsta")
 customer_queue = NodePath("CustomerQueue")
 bell_sound = NodePath("BellSound")
+customer_complained_indicator = NodePath("ComplaintIndicator")
 
 [node name="CustomerQueue" parent="." unique_id=1576840435 instance=ExtResource("2_hjewq")]
 
@@ -15,5 +16,12 @@ bell_sound = NodePath("BellSound")
 stream = ExtResource("3_nfq5s")
 volume_db = -10.0
 max_db = 0.0
+
+[node name="ComplaintIndicator" type="Label3D" parent="." unique_id=1204019047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.5)
+visible = false
+billboard = 2
+modulate = Color(0.9436012, 0, 0.15655962, 1)
+text = "customer complained: 🙂 - 1"
 
 [editable path="CustomerQueue"]
