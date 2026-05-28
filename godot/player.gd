@@ -19,6 +19,7 @@ var mouse_delta: Vector2 = Vector2.ZERO
 # vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
+var holding_interactable: bool = false
 
 
 func _ready() -> void:
@@ -28,9 +29,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_mouselook()
+	handle_hovered_interactable()
 	handle_movement(delta)
 	handle_gravity(delta)
-	handle_hovered_interactable()
 	handle_footstep_sounds()
 	move_and_slide()
 
@@ -50,7 +51,7 @@ func handle_mouselook() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled):
+	if not movement_enabled or holding_interactable:
 		velocity = Vector3.ZERO
 		return
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
@@ -79,6 +80,7 @@ func handle_gravity(delta: float) -> void:
 
 
 func handle_hovered_interactable() -> void:
+	holding_interactable = false
 	var hovered_interactable: Interactable = Global.hovered_interactable
 
 	# if we're currently holding interact on something, dont do anything
@@ -88,10 +90,8 @@ func handle_hovered_interactable() -> void:
 		and hovered_interactable.hold_to_interact
 		and Input.is_action_pressed("interact")
 	):
-		movement_enabled = false
+		holding_interactable = true
 		return
-	else:
-		movement_enabled = true
 
 	var collider = aiming_ray.get_collider()
 	if collider is Interactable:
