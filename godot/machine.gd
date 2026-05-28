@@ -129,10 +129,11 @@ func _on_order_finished() -> void:
 
 func _on_accept_button_presssed() -> void:
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "order approved! \n dispensing drink to customer"
+	final_order_indicator.text = "dispensing drink to customer"
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
 	drink_customer_score_label.hide()
+	score_label.show()
 	Global.profit_score += completed_order.price
 	completed_order = null
 	await get_tree().create_timer(0.5, false).timeout
@@ -169,6 +170,12 @@ func _on_make_drink_button_pressed() -> void:
 	final_order_indicator.text = "you made: " + completed_order.name
 	score_drink()
 	Events.order_completed.emit(customer)
+	Events.order_approved.emit(customer)
+	waiting_for_response = false
+	score_label.hide()
+	drink_customer_score_label.hide()
+	await get_tree().create_timer(1, false).timeout
+	_on_accept_button_presssed()
 
 
 func _on_breakdown_timer_timeout() -> void:
