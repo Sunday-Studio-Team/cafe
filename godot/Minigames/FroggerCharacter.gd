@@ -20,4 +20,6 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_area_entered(area):
 	#Check if 
 	print("area ", area)
+	if area.name == "Goal":
+		print("Goal")
 	pass # Replace with function body.

@@ -173,7 +173,6 @@ visible = false
 collision_layer = 2
 script = ExtResource("5_ioi8x")
 display_name = "fix machine"
-hold_to_interact = true
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
@@ -185,6 +184,72 @@ text = "BROKEN DOWN"
 shape = SubResource("BoxShape3D_ioi8x")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton" unique_id=1631380149]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="FixMachineButton2" type="Area3D" parent="." unique_id=1712892739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
+visible = false
+collision_layer = 2
+script = ExtResource("5_ioi8x")
+display_name = "fix machine"
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton2" unique_id=1361349696]
+transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+modulate = Color(1, 0.6, 0.12156863, 1)
+text = "BROKEN DOWN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton2" unique_id=229970661]
+shape = SubResource("BoxShape3D_ioi8x")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton2" unique_id=1352938654]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="FixMachineButton3" type="Area3D" parent="." unique_id=613652796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
+visible = false
+collision_layer = 2
+script = ExtResource("5_ioi8x")
+display_name = "fix machine"
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton3" unique_id=1871130080]
+transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+modulate = Color(1, 0.6, 0.12156863, 1)
+text = "BROKEN DOWN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton3" unique_id=861168234]
+shape = SubResource("BoxShape3D_ioi8x")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton3" unique_id=1164537602]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="FixMachineButton4" type="Area3D" parent="." unique_id=890766402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
+visible = false
+collision_layer = 2
+script = ExtResource("5_ioi8x")
+display_name = "fix machine"
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton4" unique_id=335100348]
+transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+modulate = Color(1, 0.6, 0.12156863, 1)
+text = "BROKEN DOWN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton4" unique_id=1273246145]
+shape = SubResource("BoxShape3D_ioi8x")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton4" unique_id=1003625967]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0

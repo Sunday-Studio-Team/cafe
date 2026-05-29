@@ -1,192 +1,53 @@
 [gd_scene format=4 uid="uid://b57ynu120pcpt"]
 
 [ext_resource type="Script" uid="uid://d3dw84qjokkan" path="res://Minigames/frogger.gd" id="1_lyi1p"]
-[ext_resource type="Texture2D" uid="uid://dt7x5vhic1fc3" path="res://Minigames/RedSquare.png" id="1_qnxix"]
 [ext_resource type="Texture2D" uid="uid://jxdqrawu2s5c" path="res://Minigames/WhiteSqaure.png" id="2_lyi1p"]
+[ext_resource type="PackedScene" uid="uid://bdc8k2vjqhii" path="res://Minigames/Frogger/obstacle.tscn" id="3_18odo"]
 [ext_resource type="PackedScene" uid="uid://dul2s4m3xf458" path="res://Minigames/frogger_charcter.tscn" id="3_vv77r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vv77r"]
 texture = ExtResource("2_lyi1p")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSet" id="TileSet_vv77r"]
 tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vv77r")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vv77r"]
-size = Vector2(64, 64)
+size = Vector2(58.996506, 65.82408)
 
-[node name="Frogger" type="Node2D" unique_id=1262441539 node_paths=PackedStringArray("circle2", "circle_list")]
+[node name="Frogger" type="Node2D" unique_id=1262441539 node_paths=PackedStringArray("circle_list")]
 script = ExtResource("1_lyi1p")
-circle2 = NodePath("Circle")
-circle_list = [NodePath("Circle"), NodePath("Circle2"), NodePath("Circle3")]
+circle_list = [NodePath("Circle")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1429325375]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=827453120]
 tile_map_data = PackedByteArray("AAACAAkAAAAAAAAAAAACAAgAAAAAAAAAAAACAAcAAAAAAAAAAAACAAYAAAAAAAAAAAD9/wYAAAAAAAAAAAD9/wcAAAAAAAAAAAD9/wgAAAAAAAAAAAD9/wkAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD9////AAAAAAAAAAD9/wIAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAP7/AAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAD+//3/AAAAAAAAAAACAP3/AAAAAAAAAAABAP3/AAAAAAAAAAD8/wYAAAAAAAAAAAD7/wYAAAAAAAAAAAACAAMAAAAAAAAAAAABAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD8/wMAAAAAAAAAAAD7/wMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAFAP//AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP3/AAAAAAAAAAAFAPz/AAAAAAAAAAAFAPv/AAAAAAAAAAAFAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAADAPr/AAAAAAAAAAACAPr/AAAAAAAAAAABAPr/AAAAAAAAAAAAAPr/AAAAAAAAAAD///r/AAAAAAAAAAD+//r/AAAAAAAAAAD6/wYAAAAAAAAAAAD5/wYAAAAAAAAAAAD4/wYAAAAAAAAAAAD6/wMAAAAAAAAAAAD3/wYAAAAAAAAAAAD3/wUAAAAAAAAAAAD3/wQAAAAAAAAAAAD3/wMAAAAAAAAAAAD3/wIAAAAAAAAAAAD3/wEAAAAAAAAAAAD6/wAAAAAAAAAAAAD5/wAAAAAAAAAAAAD4/wAAAAAAAAAAAAD3/wAAAAAAAAAAAAD6////AAAAAAAAAAD6//7/AAAAAAAAAAD6//3/AAAAAAAAAAD6//z/AAAAAAAAAAD6//v/AAAAAAAAAAD6//r/AAAAAAAAAAD7//r/AAAAAAAAAAD8//r/AAAAAAAAAAD9//r/AAAAAAAAAAD+/wkAAAAAAAAAAAD//wkAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_vv77r")
 rendering_quadrant_size = 32
 
-[node name="Circle3" type="Node2D" parent="." unique_id=912562137]
-position = Vector2(-256, -64)
-
-[node name="Obstacle4" type="Area2D" parent="Circle3" unique_id=849064386]
-position = Vector2(207.99998, 8)
-rotation = 1.5707964
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle3/Obstacle4" unique_id=2051205557]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle3/Obstacle4" unique_id=41517022]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle3" type="Area2D" parent="Circle3" unique_id=481851105]
-position = Vector2(0, -200)
-rotation = -3.1415927
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle3/Obstacle3" unique_id=1266312392]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle3/Obstacle3" unique_id=1609284459]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle2" type="Area2D" parent="Circle3" unique_id=1480022767]
-position = Vector2(-192, 0)
-rotation = 1.5707964
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle3/Obstacle2" unique_id=1671726141]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle3/Obstacle2" unique_id=966251003]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle" type="Area2D" parent="Circle3" unique_id=1292840206]
-position = Vector2(0, 200)
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle3/Obstacle" unique_id=467159131]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle3/Obstacle" unique_id=1769091699]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Circle2" type="Node2D" parent="." unique_id=589935339]
-position = Vector2(320, -64)
-
-[node name="Obstacle4" type="Area2D" parent="Circle2" unique_id=384763552]
-position = Vector2(207.99998, 8)
-rotation = 1.5707964
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle2/Obstacle4" unique_id=2085598055]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle2/Obstacle4" unique_id=2128187527]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle3" type="Area2D" parent="Circle2" unique_id=2119679957]
-position = Vector2(0, -200)
-rotation = -3.1415927
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle2/Obstacle3" unique_id=1209214493]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle2/Obstacle3" unique_id=1844391306]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle2" type="Area2D" parent="Circle2" unique_id=1905251025]
-position = Vector2(-192, 0)
-rotation = 1.5707964
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle2/Obstacle2" unique_id=309981444]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle2/Obstacle2" unique_id=444339349]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle" type="Area2D" parent="Circle2" unique_id=274300298]
-position = Vector2(0, 200)
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle2/Obstacle" unique_id=1701219899]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle2/Obstacle" unique_id=698264210]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
 [node name="Circle" type="Node2D" parent="." unique_id=1273514444]
 
-[node name="Obstacle4" type="Area2D" parent="Circle" unique_id=987598286]
-position = Vector2(207.99998, 8)
-rotation = 1.5707964
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle/Obstacle4" unique_id=2082591765]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle/Obstacle4" unique_id=219463846]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle3" type="Area2D" parent="Circle" unique_id=1481640872]
-position = Vector2(0, -200)
-rotation = -3.1415927
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle/Obstacle3" unique_id=1682339910]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle/Obstacle3" unique_id=194768374]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle2" type="Area2D" parent="Circle" unique_id=769903840]
-position = Vector2(-192, 0)
-rotation = 1.5707964
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle/Obstacle2" unique_id=1441286814]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle/Obstacle2" unique_id=1233399554]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Obstacle" type="Area2D" parent="Circle" unique_id=711337216]
-position = Vector2(0, 200)
-scale = Vector2(1, 0.333)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle/Obstacle" unique_id=1691535508]
-shape = SubResource("RectangleShape2D_vv77r")
-
-[node name="Sprite2D" type="Sprite2D" parent="Circle/Obstacle" unique_id=1910166167]
-scale = Vector2(2, 2)
-texture = ExtResource("1_qnxix")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1429325375]
+[node name="Obstacle" parent="Circle" unique_id=932339160 instance=ExtResource("3_18odo")]
+position = Vector2(0, 152)
+scale = Vector2(3, 1)
 
 [node name="Charcter" parent="." unique_id=232224068 instance=ExtResource("3_vv77r")]
 position = Vector2(0, 256)
 
 [node name="Goal" type="Area2D" parent="." unique_id=968853312]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1458541501]
-
 [node name="Sprite2D" type="Sprite2D" parent="Goal" unique_id=575917066]
 modulate = Color(0.25490198, 1, 0, 1)
-position = Vector2(-2.3841858e-07, -2.3841858e-07)
-scale = Vector2(2.2499998, 2.2499998)
+position = Vector2(-4.7683716e-07, -0.24299629)
+scale = Vector2(2, 2.0151873)
 texture = ExtResource("2_lyi1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1458541501]
+position = Vector2(-0.54165465, -0.17309716)
+scale = Vector2(1.1031723, 0.96702915)
+shape = SubResource("RectangleShape2D_vv77r")

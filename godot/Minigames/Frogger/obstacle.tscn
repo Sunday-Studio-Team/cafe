@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bdc8k2vjqhii"]
+
+[ext_resource type="Texture2D" uid="uid://dt7x5vhic1fc3" path="res://Minigames/RedSquare.png" id="1_6eiu0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6wcy"]
+size = Vector2(32, 32)
+
+[node name="Obstacle" type="Area2D" unique_id=932339160]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1612635751]
+texture = ExtResource("1_6eiu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=593747603]
+shape = SubResource("RectangleShape2D_t6wcy")

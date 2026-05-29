@@ -17,6 +17,7 @@ extends Node3D
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var drink_customer_score_label: Label3D
 
+
 var customer: Customer:
 	set(new_customer):
 		customer = new_customer
@@ -178,11 +179,17 @@ func _on_breakdown_timer_timeout() -> void:
 
 
 func _on_fix_machine_button_pressed() -> void:
-	fix_machine_button.hide()
-	broken_down = false
-	if customer:
-		customer_order_indicator.show()
-		timer.start()
+	print("Fix Machine!")
+	Events.minigame_active.emit()
+	#Plays Minigame to fix machine
+	
+	
+	#Original Fix machine method
+	#fix_machine_button.hide()
+	#broken_down = false
+	#if customer:
+		#customer_order_indicator.show()
+		#timer.start()
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:

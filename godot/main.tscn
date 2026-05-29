@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://pause_menu.gd" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b57ynu120pcpt" path="res://Minigames/frogger.tscn" id="8_5vw27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -36,7 +37,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "minigame")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine"), NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
@@ -45,6 +46,7 @@ spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
 window = NodePath("Window")
+minigame = NodePath("Minigame Layer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
@@ -287,3 +289,30 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
 text = "PAUSED"
 horizontal_alignment = 1
+
+[node name="Minigame Layer" type="CanvasLayer" parent="." unique_id=252917945]
+visible = false
+
+[node name="Control" type="Control" parent="Minigame Layer" unique_id=1323992290]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minigame Layer/Control" unique_id=928962480]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Minigame Layer/Control/SubViewportContainer" unique_id=108323629]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 0
+
+[node name="Frogger" parent="Minigame Layer/Control/SubViewportContainer/SubViewport" unique_id=1262441539 instance=ExtResource("8_5vw27")]

@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var circle2: Node2D
 @export var circle_list: Array[Node2D]
+	
 
 func _physics_process(delta):
 	#circle2.rotate(1*delta)
