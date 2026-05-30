@@ -23,6 +23,11 @@ func _ready() -> void:
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 
+	# spawn one customer early off-sync with the timers wait time
+	# so we dont have to wait loads every time we start the game to test
+	await get_tree().create_timer(1, false).timeout
+	customer_spawn_timer.timeout.emit()
+
 
 func _on_customer_spawn_timer_timeout() -> void:
 	var all_machines_occupied := true

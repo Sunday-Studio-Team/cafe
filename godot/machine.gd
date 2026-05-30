@@ -22,7 +22,6 @@ var customer: Customer:
 	set(new_customer):
 		customer = new_customer
 		if customer != null:
-			customer.timer.timeout.connect(_on_customer_wait_timeout)
 			customer.global_position = spot_for_customer.global_position
 			await get_tree().create_timer(randf_range(1, 3), false).timeout
 			start_order()
@@ -30,6 +29,7 @@ var customer: Customer:
 			customer_order_indicator.hide()
 			final_order_indicator.hide()
 			score_label.hide()
+			drink_customer_score_label.hide()
 			waiting_for_response = false
 			timer.stop()
 var customers_order: Drink
@@ -66,7 +66,6 @@ func _physics_process(_delta: float) -> void:
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
 	waiting_approval_indicator.visible = waiting_for_response
-	drink_customer_score_label.visible = waiting_for_response
 
 
 func start_order() -> void:
@@ -95,7 +94,7 @@ func score_drink() -> void:
 			drink_score -= 1
 
 	score_label.modulate = Color.GREEN
-	score_label.text = "+$3"
+	score_label.text = "+$" + (Global.float_to_price(completed_order.price))
 
 	score_label.show()
 
@@ -111,6 +110,7 @@ func score_drink() -> void:
 		drink_customer_score_label.modulate = Color.GREEN
 		drink_customer_score_label.text += "🙂+ "
 		drink_customer_score_label.text += str(drink_score)
+	drink_customer_score_label.show()
 
 	if drink_correct:
 		final_order_indicator.modulate = Color.GREEN
@@ -129,13 +129,20 @@ func _on_order_finished() -> void:
 
 
 func _on_accept_button_presssed() -> void:
-	Events.order_approved.emit(customer)
-	Global.profit_score += 3
-	Global.customer_score += drink_score
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "order approved! \n dispensing drink to customer"
+	final_order_indicator.text = "dispensing drink to customer"
 	waiting_for_response = false
+	Events.order_approved.emit(customer)
+	drink_customer_score_label.hide()
+	score_label.show()
+	Global.profit_score += completed_order.price
 	completed_order = null
+	await get_tree().create_timer(0.5, false).timeout
+	score_label.hide()
+	drink_customer_score_label.show()
+	Global.customer_score += drink_score
+	await get_tree().create_timer(0.5, false).timeout
+	drink_customer_score_label.hide()
 
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)
@@ -145,7 +152,7 @@ func _on_accept_button_presssed() -> void:
 		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
 	# -------------------------------------------------
 
-	await get_tree().create_timer(randf_range(1, 2), false).timeout
+	await get_tree().create_timer(1.5, false).timeout
 	Events.customer_left_machine.emit(customer, drink_score)
 	customer = null
 
@@ -164,10 +171,12 @@ func _on_make_drink_button_pressed() -> void:
 	final_order_indicator.text = "you made: " + completed_order.name
 	score_drink()
 	Events.order_completed.emit(customer)
-
-
-func _on_customer_wait_timeout() -> void:
-	customer = null
+	Events.order_approved.emit(customer)
+	waiting_for_response = false
+	score_label.hide()
+	drink_customer_score_label.hide()
+	await get_tree().create_timer(1, false).timeout
+	_on_accept_button_presssed()
 
 
 func _on_breakdown_timer_timeout() -> void:
