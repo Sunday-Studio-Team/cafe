@@ -5,7 +5,8 @@ correct main ingredient, lost one for wrong milk, etc.
 a drink with whole milk when they asked for oat milk etc
 - make different drinks have different prices
 - add some sounds for:
+	- machine breaking down
 	- orders starting and ending ?
+	- score(s) going up and down ?
 	- time running out ?
 	- customers entering and leaving ? (might be too much)
-- change timer to a 12h clock with shift end time

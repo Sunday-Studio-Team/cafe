@@ -9,29 +9,10 @@ extends CanvasLayer
 @export var time_left_label: Label
 @export var objective: RichTextLabel
 @export var end_text: RichTextLabel
-@export var money_sound: AudioStreamPlayer
-@export var gain_points_sound: AudioStreamPlayer
-@export var lose_points_sound: AudioStreamPlayer
 
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-	Events.gained_money.connect(
-		func():
-			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(Color.GOLD)
-			money_sound.play()
-	)
-	Events.customer_score_updated.connect(
-		func(increased: bool):
-			var color: Color
-			if increased:
-				color = Color.GREEN
-				gain_points_sound.play()
-			else:
-				color = Color.RED
-				lose_points_sound.play()
-			create_tween().tween_property(customer_happiness_label, "modulate", Color.WHITE, 0.75).from(color)
-	)
 
 	objective.text = (
 		"
@@ -39,7 +20,7 @@ func _ready() -> void:
 		\n [b]OBJECTIVE:[/b] \n make $%s while keeping your customer rating (🙂) above %s
 		\n \n if customers get the wrong orders or are kept waiting too long, you might have to deal with them personally!
 		"
-		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
+		% [Global.goal_profit, Global.goal_customer_score]
 	)
 
 	await get_tree().create_timer(20, false).timeout
@@ -47,10 +28,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	profit_label.text = (
-		"$" + Global.float_to_price(Global.profit_score)
-		+ " (goal: $%s)" % Global.float_to_price(Global.goal_profit)
-	)
+	profit_label.text = "$ " + str(Global.profit_score) + " (goal: %s)" % Global.goal_profit
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
 

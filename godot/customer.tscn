@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dp7t0dh80ct1r"]
 
 [ext_resource type="Script" uid="uid://cvo47hwaumo88" path="res://customer.gd" id="1_7tiyv"]
-[ext_resource type="Texture2D" uid="uid://jr4jbp7ebhok" path="res://sprites/customers/customer.png" id="2_r8ta2"]
+[ext_resource type="Texture2D" uid="uid://jr4jbp7ebhok" path="res://customer.png" id="2_r8ta2"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://progress_bar/under.png" id="3_gn8fi"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://progress_bar/over.png" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://progress_bar/progress.png" id="5_0rcyg"]
@@ -20,7 +20,6 @@ waiting_bar = NodePath("WaitingIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 time_bonus_label = NodePath("TimeBonusLabel")
 make_drink_button = NodePath("MakeDrinkButton")
-sprites_folder = "res://sprites/customers"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.85, 0)

@@ -24,8 +24,6 @@ func add_customer(customer: Customer) -> void:
 	queue_updated.emit()
 	customer_added.emit()
 	customer.at_window = true
-	customer.timer.start()
-	customer.waiting_indicator.show()
 
 
 func remove_front_customer(customer_happy: bool) -> void:

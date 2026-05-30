@@ -12,19 +12,10 @@ var main_scene: Node3D
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
-var profit_score: float = 0:
-	set(score):
-		profit_score = score
-		Events.gained_money.emit()
-var customer_score: int = 0:
-	set(new_score):
-		if new_score == customer_score:
-			return
-		var increased: bool = new_score > customer_score
-		Events.customer_score_updated.emit(increased)
-		customer_score = new_score
-var goal_profit: float = 30
-var goal_customer_score: int = 10
+var profit_score: int = 0
+var customer_score: int = 5
+var goal_profit: int = 25
+var goal_customer_score: int = 5
 
 
 func _ready() -> void:
@@ -39,7 +30,3 @@ func load_resources_from_folder(folder_path: String) -> Array[Resource]:
 			resources.append(ResourceLoader.load(folder_path.path_join(file_name)) as Resource)
 
 	return resources
-
-
-func float_to_price(number: float) -> String:
-	return ("%.2f" % number).trim_suffix(".00")

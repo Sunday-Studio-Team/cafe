@@ -9,7 +9,6 @@ signal drink_made_at_window
 @export var timer: Timer
 @export var time_bonus_label: Label3D
 @export var make_drink_button: Interactable
-@export_dir var sprites_folder: String
 
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -17,7 +16,6 @@ var at_window: bool = false
 
 
 func _ready() -> void:
-	apply_random_sprite()
 	make_drink_button.enabled = false
 	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
 	timer.timeout.connect(_on_timer_timeout)
@@ -54,19 +52,10 @@ func leave_store() -> void:
 	queue_free()
 
 
-func apply_random_sprite() -> void:
-	var sprites: Array[Resource]
-
-	for file_name: String in ResourceLoader.list_directory(sprites_folder):
-		if file_name.ends_with(".png"):
-			sprites.append(ResourceLoader.load(sprites_folder.path_join(file_name)) as Resource)
-
-	body.texture = sprites.pick_random()
-
-
 func _on_timer_timeout() -> void:
 	if not at_window:
 		Events.customer_approached_window.emit(self)
+		timer.start()
 
 
 func _on_order_started(customer: Customer) -> void:
@@ -82,10 +71,8 @@ func _on_order_approved(customer: Customer) -> void:
 	if customer != self:
 		return
 
-	timer.stop()
-
-	await get_tree().create_timer(1, false).timeout
 	Global.customer_score += bonus_points_for_time
+	timer.stop()
 
 	match bonus_points_for_time:
 		1:
@@ -100,6 +87,7 @@ func _on_customer_left_machine(customer: Customer, drink_score) -> void:
 	if customer != self:
 		return
 
+	waiting_indicator.hide()
 	time_bonus_label.hide()
 	if (drink_score > -3):
 		leave_store()

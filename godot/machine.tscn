@@ -55,7 +55,7 @@ progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 customer_order_indicator = NodePath("CustomerOrderIndicator")
 final_order_indicator = NodePath("MachineOrderIndicator")
-score_label = NodePath("ScoreLabel")
+score_label = NodePath("AcceptButton/ScoreLabel")
 make_drink_button = NodePath("MakeDrinkButton")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
@@ -112,10 +112,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
 text = "machine made:"
 font_size = 24
 
-[node name="ScoreLabel" type="Label3D" parent="." unique_id=2094560560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27403152, 1.0993592, 1.1413068)
-text = "+1"
-
 [node name="AcceptButton" type="Area3D" parent="." unique_id=600817850 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0090001)
 collision_layer = 2
@@ -123,6 +119,10 @@ collision_mask = 0
 script = ExtResource("5_ioi8x")
 display_name = "[color=green]approve drink"
 mesh = NodePath("MeshInstance3D")
+
+[node name="ScoreLabel" type="Label3D" parent="AcceptButton" unique_id=2094560560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02403152, 0.22535914, 0.1323067)
+text = "+1"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="AcceptButton" unique_id=900902096]
 mesh = SubResource("BoxMesh_ioi8x")
