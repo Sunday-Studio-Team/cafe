@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui.gd" id="5_lquwl"]
-[ext_resource type="Script" path="res://pause_menu.gd" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://pause_menu.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://Minigames/minigame_controller.gd" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://Minigames/Colors/Colors_Minigame.tscn" id="11_efxa6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -43,7 +45,7 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "minigame_controller")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine"), NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
@@ -52,6 +54,7 @@ spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
 window = NodePath("Window")
+minigame_controller = NodePath("Minigame Controller")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
@@ -309,3 +312,34 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
 text = "PAUSED"
 horizontal_alignment = 1
+
+[node name="Minigame Controller" type="CanvasLayer" parent="." unique_id=305291737]
+visible = false
+script = ExtResource("10_4c57u")
+minigame_dict = Dictionary[String, PackedScene]({
+"Colors": ExtResource("11_efxa6")
+})
+
+[node name="Control" type="Control" parent="Minigame Controller" unique_id=209610919]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minigame Controller/Control" unique_id=824924343]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.47900003
+anchor_bottom = 0.59400004
+offset_right = 0.19195557
+offset_bottom = 0.08798218
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Minigame Controller/Control/SubViewportContainer" unique_id=1717214408]
+handle_input_locally = false
+size = Vector2i(552, 385)
+render_target_update_mode = 0
