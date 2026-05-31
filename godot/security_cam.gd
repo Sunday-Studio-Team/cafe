@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var ray: RayCast3D
+@export var spotlight: SpotLight3D
 @export var rotation_amount: float = 90
 @export var rotation_time: float = 3
 @export var timer: Timer
@@ -10,6 +11,18 @@ var rotate_tween: Tween
 
 func _ready() -> void:
 	var original_rotation = rotation_degrees
+
+	# real scuffed duplication of raycast to make the angle wider
+	# will improve
+	var x := 5
+	while x < spotlight.spot_angle + 5:
+		var new_ray = ray.duplicate()
+		new_ray.rotation_degrees.z = ray.rotation_degrees.z + x
+		var other_new_ray = ray.duplicate()
+		other_new_ray.rotation_degrees.z = ray.rotation_degrees.z - x
+		spotlight.add_child(new_ray)
+		spotlight.add_child(other_new_ray)
+		x += 5
 
 	rotate_tween = create_tween().set_loops()
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
