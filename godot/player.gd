@@ -3,13 +3,16 @@ extends CharacterBody3D
 
 const ACCELERATION := 25.0
 const DECELERATION := 25.0
-const MOVE_SPEED := 2.0
+const DEFAULT_MOVE_SPEED := 2.0
+const SPRINT_MOVE_SPEED := 5.0
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 
+# this is a var separate to the const cos it changes when sprint etc
+var move_speed := DEFAULT_MOVE_SPEED
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -30,6 +33,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	handle_mouselook()
 	handle_hovered_interactable()
+	handle_sprint()
 	handle_movement(delta)
 	handle_gravity(delta)
 	handle_footstep_sounds()
@@ -67,7 +71,7 @@ func handle_movement(delta: float) -> void:
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
-		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * MOVE_SPEED, ACCELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, ACCELERATION * delta)
 	else:
 		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, DECELERATION * delta)
 
@@ -98,6 +102,13 @@ func handle_hovered_interactable() -> void:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null
+
+
+func handle_sprint() -> void:
+	if Input.is_action_pressed("sprint"):
+		move_speed = SPRINT_MOVE_SPEED
+	else:
+		move_speed = DEFAULT_MOVE_SPEED
 
 
 func handle_footstep_sounds() -> void:
