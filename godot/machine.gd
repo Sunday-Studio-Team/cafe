@@ -95,7 +95,7 @@ func score_drink() -> void:
 			drink_score -= 1
 
 	score_label.modulate = Color.GREEN
-	score_label.text = Global.float_to_price(completed_order.price)
+	score_label.text = "+$3"
 
 	score_label.show()
 
@@ -164,12 +164,10 @@ func _on_make_drink_button_pressed() -> void:
 	final_order_indicator.text = "you made: " + completed_order.name
 	score_drink()
 	Events.order_completed.emit(customer)
-	customer.timer.stop()
-	waiting_for_response = false
-	score_label.hide()
-	drink_customer_score_label.hide()
-	await get_tree().create_timer(1, false).timeout
-	_on_accept_button_presssed()
+
+
+func _on_customer_wait_timeout() -> void:
+	customer = null
 
 
 func _on_breakdown_timer_timeout() -> void:
