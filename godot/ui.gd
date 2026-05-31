@@ -17,7 +17,7 @@ func _ready() -> void:
 	objective.text = (
 		"
 		you are the new manager of a fully automated cafe! \n manage the self-service machines and meet your daily objective:
-		\n [b]OBJECTIVE:[/b] \n make $%s while keeping your customer rating (🙂) above %s
+		\n [b]OBJECTIVE:[/b] \n make %s while keeping your customer rating (🙂) above %s
 		\n \n if customers get the wrong orders or are kept waiting too long, you might have to deal with them personally!
 		"
 		% [Global.goal_profit, Global.goal_customer_score]
@@ -28,7 +28,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	profit_label.text = "$ " + str(Global.profit_score) + " (goal: %s)" % Global.goal_profit
+	profit_label.text = (
+		Global.float_to_price(Global.profit_score)
+		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
+	)
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
 
