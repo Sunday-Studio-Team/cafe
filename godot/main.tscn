@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://Minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://Minigames/Colors/Colors_Minigame.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -24,6 +25,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 2
 sky = SubResource("Sky_0xm2m")
+volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 transparency = 1
@@ -343,3 +345,6 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(552, 385)
 render_target_update_mode = 0
+
+[node name="SecurityCam" parent="." unique_id=557976636 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.819897, 4.209534)

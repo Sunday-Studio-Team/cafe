@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ctyf8qliv65c4"]
+
+[ext_resource type="Script" uid="uid://dngdj3sgfen6c" path="res://security_cam.gd" id="1_w3jiq"]
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "timer")]
+script = ExtResource("1_w3jiq")
+ray = NodePath("SpotLight3D/RayCast3D")
+timer = NodePath("Timer")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1348601655]
+transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.96592575, 0, -0.96592575, 0.25881904, 0, 0, 0)
+light_color = Color(0.90588236, 0, 0.32941177, 1)
+light_energy = 10.0
+light_volumetric_fog_energy = 16.0
+spot_angle = 15.0
+
+[node name="RayCast3D" type="RayCast3D" parent="SpotLight3D" unique_id=1998490399]
+transform = Transform3D(1, 0, 0, 0, 0.7071066, 0.7071066, 0, -0.7071066, 0.7071066, 0, 0, 0)
+target_position = Vector3(0, 10, -10)
+
+[node name="Timer" type="Timer" parent="." unique_id=2144038531]
+one_shot = true
