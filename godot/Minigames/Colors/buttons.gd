@@ -48,7 +48,7 @@ func victory():
 
 
 func _on_button1_pressed():
-	print("1")
+	print(successes)
 	if current_choice[1] == 1:
 		set_choice()
 		successes += 1
@@ -59,9 +59,9 @@ func _on_button1_pressed():
 
 
 func _on_button_2_pressed():
-	print("2")
 	if current_choice[1] == 2:
 		set_choice()
+		successes += 1
 		if successes >= needed_successes:
 			victory()
 	else:
@@ -69,9 +69,9 @@ func _on_button_2_pressed():
 
 
 func _on_button_3_pressed():
-	print("3")
 	if current_choice[1] == 3:
 		set_choice()
+		successes += 1
 		if successes >= needed_successes:
 			victory()
 	else:

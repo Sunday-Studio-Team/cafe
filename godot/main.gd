@@ -10,6 +10,7 @@ extends Node3D
 @export var minigame_controller : CanvasLayer
 
 
+
 func _ready() -> void:
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -60,3 +61,4 @@ func _on_minigame_active():
 
 func _on_minigame_end():
 	minigame_controller.close_game()
+	

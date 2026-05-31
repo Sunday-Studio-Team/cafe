@@ -181,6 +181,7 @@ func _on_breakdown_timer_timeout() -> void:
 func _on_fix_machine_button_pressed() -> void:
 	print("Fix Machine!")
 	Events.minigame_active.emit()
+	Events.minigame_end.connect(_on_minigame_end)
 	#Plays Minigame to fix machine
 	
 	
@@ -191,8 +192,13 @@ func _on_fix_machine_button_pressed() -> void:
 		#customer_order_indicator.show()
 		#timer.start()
 
+func _on_minigame_end():
+	machine_fixed()
+	Events.minigame_end.disconnect(_on_minigame_end)
+	pass
+
 #Fixes the machine
-func macine_fixed():
+func machine_fixed():
 	fix_machine_button.hide()
 	broken_down = false
 	if customer:
