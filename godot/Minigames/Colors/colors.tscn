@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c3vk0ocp0ruxd"]
+
+[ext_resource type="Texture2D" uid="uid://jxdqrawu2s5c" path="res://Minigames/Assets/WhiteSqaure.png" id="1_qsjk7"]
+
+[node name="Colors" type="Node2D" unique_id=1158827512]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=620734212]
+position = Vector2(4.000002, -192)
+scale = Vector2(4.25, 3.9999998)
+texture = ExtResource("1_qsjk7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=254204181]
+
+[node name="Control" type="Control" parent="." unique_id=1177733353]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button3" type="Button" parent="Control" unique_id=847405615]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 8.0
+offset_right = 344.0
+offset_bottom = 48.0
+scale = Vector2(4, 4)
+icon = ExtResource("1_qsjk7")
+
+[node name="Button2" type="Button" parent="Control" unique_id=1811633749]
+layout_mode = 0
+offset_left = -80.0
+offset_top = 8.0
+offset_right = -40.0
+offset_bottom = 48.0
+scale = Vector2(4, 4)
+icon = ExtResource("1_qsjk7")
+
+[node name="Button" type="Button" parent="Control" unique_id=1684395605]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 0
+offset_left = -456.0
+offset_right = -416.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+icon = ExtResource("1_qsjk7")

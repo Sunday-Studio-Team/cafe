@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://bdc8k2vjqhii"]
 
-[ext_resource type="Texture2D" uid="uid://dt7x5vhic1fc3" path="res://Minigames/RedSquare.png" id="1_6eiu0"]
+[ext_resource type="Texture2D" uid="uid://dt7x5vhic1fc3" path="res://Minigames/Assets/RedSquare.png" id="1_6eiu0"]
+[ext_resource type="Script" uid="uid://bec2wbv5r4k85" path="res://Minigames/Frogger/obstacle.gd" id="1_t6wcy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6wcy"]
 size = Vector2(32, 32)
 
 [node name="Obstacle" type="Area2D" unique_id=932339160]
+script = ExtResource("1_t6wcy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1612635751]
 texture = ExtResource("1_6eiu0")

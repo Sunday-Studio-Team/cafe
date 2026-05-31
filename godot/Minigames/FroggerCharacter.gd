@@ -2,9 +2,13 @@ extends CharacterBody2D
 
 @export var speed = 400
 
+#Prevents movement while player is not in minigame
+var active_movement : bool = true
+
 func get_input():
-	var input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	velocity = input_direction * speed
+	if active_movement:
+		var input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		velocity = input_direction * speed
 
 func _physics_process(delta):
 	get_input()

@@ -191,6 +191,13 @@ func _on_fix_machine_button_pressed() -> void:
 		#customer_order_indicator.show()
 		#timer.start()
 
+#Fixes the machine
+func macine_fixed():
+	fix_machine_button.hide()
+	broken_down = false
+	if customer:
+		customer_order_indicator.show()
+		timer.start()
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
 	if customer_at_window != customer:

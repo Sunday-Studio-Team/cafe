@@ -7,7 +7,7 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var window: Node3D
-@export var minigame : CanvasLayer
+@export var minigame_controller : CanvasLayer
 
 
 func _ready() -> void:
@@ -22,6 +22,7 @@ func _ready() -> void:
 	
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
+	Events.minigame_end.connect(_on_minigame_end)
 
 
 func _on_customer_spawn_timer_timeout() -> void:
@@ -55,4 +56,7 @@ func _on_customer_approached_machine(customer: Customer) -> void:
 	machine.customer = customer
 
 func _on_minigame_active():
-	minigame.visible = true
+	minigame_controller.play_minigame("Colors")
+
+func _on_minigame_end():
+	minigame_controller.close_game()

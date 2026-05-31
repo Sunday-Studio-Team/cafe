@@ -10,6 +10,9 @@ const STRIDE_LENGTH := 0.75
 @export var aiming_ray: RayCast3D
 @export var is_movement_enabled: bool = true
 
+#Stops movement if player is in a minigame
+var in_minigame: bool = false
+
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so

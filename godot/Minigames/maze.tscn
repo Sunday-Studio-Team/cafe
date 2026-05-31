@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://b57ynu120pcpt"]
 
-[ext_resource type="Script" uid="uid://d3dw84qjokkan" path="res://Minigames/frogger.gd" id="1_lyi1p"]
-[ext_resource type="Texture2D" uid="uid://jxdqrawu2s5c" path="res://Minigames/WhiteSqaure.png" id="2_lyi1p"]
-[ext_resource type="PackedScene" uid="uid://bdc8k2vjqhii" path="res://Minigames/Frogger/obstacle.tscn" id="3_18odo"]
-[ext_resource type="PackedScene" uid="uid://dul2s4m3xf458" path="res://Minigames/frogger_charcter.tscn" id="3_vv77r"]
+[ext_resource type="Script" uid="uid://d3dw84qjokkan" path="res://Minigames/maze.gd" id="1_6rmwi"]
+[ext_resource type="Texture2D" uid="uid://jxdqrawu2s5c" path="res://Minigames/Assets/WhiteSqaure.png" id="2_hnj4v"]
+[ext_resource type="PackedScene" uid="uid://bdc8k2vjqhii" path="res://Minigames/Frogger/obstacle.tscn" id="3_eyst7"]
+[ext_resource type="PackedScene" uid="uid://dul2s4m3xf458" path="res://Minigames/frogger_charcter.tscn" id="4_ax5b4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vv77r"]
-texture = ExtResource("2_lyi1p")
+texture = ExtResource("2_hnj4v")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -19,8 +19,8 @@ sources/0 = SubResource("TileSetAtlasSource_vv77r")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vv77r"]
 size = Vector2(58.996506, 65.82408)
 
-[node name="Frogger" type="Node2D" unique_id=1262441539 node_paths=PackedStringArray("circle_list")]
-script = ExtResource("1_lyi1p")
+[node name="Maze" type="Node2D" unique_id=1262441539 node_paths=PackedStringArray("circle_list")]
+script = ExtResource("1_6rmwi")
 circle_list = [NodePath("Circle")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1429325375]
@@ -32,11 +32,16 @@ rendering_quadrant_size = 32
 
 [node name="Circle" type="Node2D" parent="." unique_id=1273514444]
 
-[node name="Obstacle" parent="Circle" unique_id=932339160 instance=ExtResource("3_18odo")]
-position = Vector2(0, 152)
+[node name="Obstacle" parent="Circle" unique_id=932339160 instance=ExtResource("3_eyst7")]
+position = Vector2(0, 150)
 scale = Vector2(3, 1)
 
-[node name="Charcter" parent="." unique_id=232224068 instance=ExtResource("3_vv77r")]
+[node name="Obstacle2" parent="Circle" unique_id=1306551775 instance=ExtResource("3_eyst7")]
+position = Vector2(-150, 0)
+rotation = 1.5707964
+scale = Vector2(3, 1)
+
+[node name="Charcter" parent="." unique_id=232224068 instance=ExtResource("4_ax5b4")]
 position = Vector2(0, 256)
 
 [node name="Goal" type="Area2D" parent="." unique_id=968853312]
@@ -45,7 +50,7 @@ position = Vector2(0, 256)
 modulate = Color(0.25490198, 1, 0, 1)
 position = Vector2(-4.7683716e-07, -0.24299629)
 scale = Vector2(2, 2.0151873)
-texture = ExtResource("2_lyi1p")
+texture = ExtResource("2_hnj4v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=1458541501]
 position = Vector2(-0.54165465, -0.17309716)
