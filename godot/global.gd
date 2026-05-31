@@ -25,6 +25,7 @@ var customer_score: int = 0:
 		customer_score = new_score
 var goal_profit: float = 30
 var goal_customer_score: int = 10
+var penalty_for_sprinting: int = 5
 
 
 func _ready() -> void:

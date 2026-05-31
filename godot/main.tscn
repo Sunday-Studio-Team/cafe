@@ -175,7 +175,7 @@ autostart = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "caught_printing_label")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/Scores/Customer")
@@ -189,6 +189,7 @@ end_text = NodePath("MarginContainer/EndText")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
+caught_printing_label = NodePath("MarginContainer/CaughtSprinting")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -285,6 +286,14 @@ theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 horizontal_alignment = 1
 
+[node name="CaughtSprinting" type="Label" parent="UI/MarginContainer" unique_id=1280837841]
+visible = false
+modulate = Color(0.7314912, 0, 0.07300905, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "-1 🙂caught sprinting"
+horizontal_alignment = 1
+
 [node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]
 stream = ExtResource("7_5vw27")
 volume_db = -5.0
@@ -296,6 +305,21 @@ volume_db = -5.0
 [node name="LosePointsSound" type="AudioStreamPlayer" parent="UI" unique_id=1821886986]
 stream = SubResource("AudioStreamWAV_kek77")
 volume_db = -5.0
+
+[node name="Controls" type="RichTextLabel" parent="UI" unique_id=1478058715]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -69.0
+offset_right = 1102.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]WASD[/b] move
+[b]E[/b] interact
+[b]LShift[/b] sprint"
+fit_content = true
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
 process_mode = 3

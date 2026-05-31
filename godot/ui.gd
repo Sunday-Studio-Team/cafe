@@ -12,6 +12,7 @@ extends CanvasLayer
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
+@export var caught_printing_label: Label
 
 
 func _ready() -> void:
@@ -32,12 +33,20 @@ func _ready() -> void:
 				lose_points_sound.play()
 			create_tween().tween_property(customer_happiness_label, "modulate", Color.WHITE, 0.75).from(color)
 	)
+	Events.player_caught_sprinting.connect(
+		func():
+			caught_printing_label.text = "-%s🙂 caught sprinting" % Global.penalty_for_sprinting
+			caught_printing_label.show()
+			await get_tree().create_timer(1, false).timeout
+			caught_printing_label.hide()
+	)
 
 	objective.text = (
 		"
 		you are the new manager of a fully automated cafe! \n manage the self-service machines and meet your daily objective:
 		\n [b]OBJECTIVE:[/b] \n make %s while keeping your customer rating (🙂) above %s
 		\n \n if customers get the wrong orders or are kept waiting too long, you might have to deal with them personally!
+		\n p.s. your boss is watching on the security cameras !
 		"
 		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
 	)

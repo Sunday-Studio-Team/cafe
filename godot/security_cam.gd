@@ -19,5 +19,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	var collider = ray.get_collider()
 	if collider == Global.player and timer.is_stopped():
-		timer.start()
-		Global.customer_score -= 5
+		if Input.is_action_pressed("sprint"):
+			Events.player_caught_sprinting.emit()
+			timer.start()
+			Global.customer_score -= Global.penalty_for_sprinting
