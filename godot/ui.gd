@@ -13,6 +13,7 @@ extends CanvasLayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var caught_printing_label: Label
+@export var caught_remaking_label: Label
 
 
 func _ready() -> void:
@@ -40,7 +41,13 @@ func _ready() -> void:
 			await get_tree().create_timer(1, false).timeout
 			caught_printing_label.hide()
 	)
-
+	Events.player_caught_remaking.connect(
+		func():
+			caught_remaking_label.text = "-%s🙂 caught remaking drink" % Global.penalty_for_remaking_drink
+			caught_remaking_label.show()
+			await get_tree().create_timer(1, false).timeout
+			caught_remaking_label.hide()
+	)
 	objective.text = (
 		"
 		you are the new manager of a fully automated cafe! \n manage the self-service machines and meet your daily objective:

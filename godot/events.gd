@@ -14,6 +14,7 @@ signal time_up
 signal gained_money
 signal customer_score_updated(increased: bool)
 signal player_caught_sprinting
+signal player_caught_remaking
 #Minigame Events
 signal minigame_active
 signal minigame_end

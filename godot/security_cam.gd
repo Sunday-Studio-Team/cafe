@@ -23,3 +23,7 @@ func _physics_process(_delta: float) -> void:
 			Events.player_caught_sprinting.emit()
 			timer.start()
 			Global.customer_score -= Global.penalty_for_sprinting
+		elif Input.is_action_pressed("interact") and Global.hovered_interactable.display_name.contains("remake drink"):
+			Events.player_caught_remaking.emit()
+			timer.start()
+			Global.customer_score -= Global.penalty_for_remaking_drink
