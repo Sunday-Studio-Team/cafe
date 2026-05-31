@@ -170,7 +170,7 @@ func _on_make_drink_button_pressed() -> void:
 	final_order_indicator.text = "you made: " + completed_order.name
 	score_drink()
 	Events.order_completed.emit(customer)
-	Events.order_approved.emit(customer)
+	customer.timer.stop()
 	waiting_for_response = false
 	score_label.hide()
 	drink_customer_score_label.hide()
