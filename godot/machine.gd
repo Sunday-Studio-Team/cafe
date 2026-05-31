@@ -93,7 +93,7 @@ func score_drink() -> void:
 			drink_score -= 1
 
 	score_label.modulate = Color.GREEN
-	score_label.text = "+$" + (Global.float_to_price(completed_order.price))
+	score_label.text = Global.float_to_price(completed_order.price)
 
 	score_label.show()
 

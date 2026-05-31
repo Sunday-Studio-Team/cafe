@@ -41,5 +41,7 @@ func load_resources_from_folder(folder_path: String) -> Array[Resource]:
 	return resources
 
 
+## takes a float, converts it to a string formatted like a price in USD
+## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"
 func float_to_price(number: float) -> String:
-	return ("%.2f" % number).trim_suffix(".00")
+	return ("$%.2f" % number).trim_suffix(".00")
