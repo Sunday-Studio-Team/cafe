@@ -138,6 +138,7 @@ script = ExtResource("5_ioi8x")
 display_name = "[color=yellow]remake drink by hand"
 mesh = NodePath("MeshInstance3D")
 hold_to_interact = true
+time_to_hold = 3.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MakeDrinkButton" unique_id=432966545]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12589586, 0.03169334)

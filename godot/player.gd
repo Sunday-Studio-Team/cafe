@@ -3,8 +3,8 @@ extends CharacterBody3D
 
 const ACCELERATION := 25.0
 const DECELERATION := 25.0
-const DEFAULT_MOVE_SPEED := 2.0
-const SPRINT_MOVE_SPEED := 5.0
+const DEFAULT_MOVE_SPEED := 1.5
+const SPRINT_MOVE_SPEED := 4.0
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
@@ -111,6 +111,7 @@ func handle_sprint() -> void:
 		move_speed = DEFAULT_MOVE_SPEED
 
 
+# (unfinished) plays footstep sounds if we're moving
 func handle_footstep_sounds() -> void:
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0

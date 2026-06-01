@@ -26,19 +26,24 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not timer.is_stopped():
+		spotlight.light_color = Color.DIM_GRAY
+		return
+
 	var player_in_spotlight := false
 
 	for r in all_rays:
 		var collider = r.get_collider()
 		if collider == Global.player:
-			if not timer.is_stopped():
-				return
-
 			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
 				Events.player_caught_sprinting.emit()
 				timer.start()
 				Global.customer_score -= Global.penalty_for_sprinting
-			elif Input.is_action_pressed("interact") and Global.hovered_interactable.display_name.contains("remake drink"):
+			elif (
+				Input.is_action_pressed("interact")
+				and Global.hovered_interactable != null
+				and Global.hovered_interactable.display_name.contains("remake drink")
+			):
 				Events.player_caught_remaking.emit()
 				timer.start()
 				Global.customer_score -= Global.penalty_for_remaking_drink
