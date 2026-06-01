@@ -4,6 +4,7 @@ extends Node3D
 @export var spotlight: SpotLight3D
 @export var rotation_amount: float = 90
 @export var rotation_time: float = 3
+@export var rotation_pause_length: float = 2
 @export var timer: Timer
 
 # we duplicate the ray many times to cover the spotlight cone on startup
@@ -19,13 +20,15 @@ func _ready() -> void:
 
 	rotate_tween = create_tween().set_loops()
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
+	rotate_tween.tween_interval(rotation_pause_length)
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
+	rotate_tween.tween_interval(rotation_pause_length)
 
 
 func _physics_process(_delta: float) -> void:
 	if not timer.is_stopped():
 		return
-	
+
 	for r in all_rays:
 		var collider = r.get_collider()
 		if collider == Global.player:
