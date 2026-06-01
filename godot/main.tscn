@@ -135,6 +135,21 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.4
 operation = 2
 size = Vector3(1.5, 2, 0.1)
 
+[node name="LowWall" type="CSGBox3D" parent="Building/BackRoom" unique_id=2081912894]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0.5, -4)
+size = Vector3(1, 1, 0.1)
+
+[node name="FrontDesk" type="CSGCombiner3D" parent="Building/BackRoom" unique_id=2009448595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building/BackRoom/FrontDesk" unique_id=114203699]
+transform = Transform3D(0.96592593, 0, -0.25881907, 0, 1, 0, 0.25881907, 0, 0.96592593, 1.4000001, 0.5, -3.7999997)
+size = Vector3(0.5, 1, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Building/BackRoom/FrontDesk" unique_id=1990268840]
+transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, 2.9, 0.5, -4.1)
+size = Vector3(0.5, 1, 2)
+
 [node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
 use_collision = true
