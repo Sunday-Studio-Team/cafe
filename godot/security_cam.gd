@@ -29,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 	for r in all_rays:
 		var collider = r.get_collider()
 		if collider == Global.player:
-			if Input.is_action_pressed("sprint"):
+			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
 				Events.player_caught_sprinting.emit()
 				timer.start()
 				Global.customer_score -= Global.penalty_for_sprinting
