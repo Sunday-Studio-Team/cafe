@@ -2,6 +2,33 @@
 
 [ext_resource type="Script" uid="uid://dngdj3sgfen6c" path="res://security_cam.gd" id="1_w3jiq"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3jiq"]
+albedo_color = Color(0.46034718, 0.46034718, 0.46034712, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3jiq"]
+material = SubResource("StandardMaterial3D_w3jiq")
+size = Vector3(0.075, 0.075, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ad36"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.95686275, 0.84313726, 0.67058825, 1)
+emission_energy_multiplier = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_bpkf2"]
+material = SubResource("StandardMaterial3D_8ad36")
+radius = 0.025
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpkf2"]
+albedo_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qlhcy"]
+material = SubResource("StandardMaterial3D_bpkf2")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.25
+
 [node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "spotlight", "timer")]
 script = ExtResource("1_w3jiq")
 ray = NodePath("SpotLight3D/RayCast3D")
@@ -21,3 +48,18 @@ target_position = Vector3(0, -10, 0)
 [node name="Timer" type="Timer" parent="." unique_id=2144038531]
 wait_time = 2.0
 one_shot = true
+
+[node name="Model" type="Node3D" parent="." unique_id=263013221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08514333, 0.008925587)
+
+[node name="Body" type="MeshInstance3D" parent="Model" unique_id=1938907329]
+transform = Transform3D(1, 0, 0, 0, 0.48218188, 0.8760711, 0, -0.8760711, 0.48218188, 0, -0.0008558929, 0.030187339)
+mesh = SubResource("BoxMesh_w3jiq")
+
+[node name="Lens" type="MeshInstance3D" parent="Model" unique_id=1601630106]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07340768, -0.006826341)
+mesh = SubResource("SphereMesh_bpkf2")
+
+[node name="Mount" type="MeshInstance3D" parent="Model" unique_id=1125263611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12828007, -0.0012458414)
+mesh = SubResource("CylinderMesh_qlhcy")
