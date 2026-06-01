@@ -10,9 +10,8 @@ timer = NodePath("Timer")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1348601655]
 transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.9659257, 0, -0.9659257, 0.25881904, 0, 0, 0)
-light_color = Color(0.90588236, 0, 0.32941177, 1)
 light_energy = 10.0
-light_volumetric_fog_energy = 16.0
+light_volumetric_fog_energy = 2.5
 spot_angle = 20.0
 
 [node name="RayCast3D" type="RayCast3D" parent="SpotLight3D" unique_id=1998490399]

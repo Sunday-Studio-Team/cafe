@@ -117,6 +117,15 @@ func score_drink() -> void:
 		final_order_indicator.modulate = Color.RED
 
 
+#Fixes the machine
+func fix_machine() -> void:
+	fix_machine_button.hide()
+	broken_down = false
+	if customer:
+		customer_order_indicator.show()
+		timer.start()
+
+
 func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
 	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
@@ -185,30 +194,24 @@ func _on_breakdown_timer_timeout() -> void:
 	broken_down = true
 	breakdown_sound.play()
 
-
-#func _on_fix_machine_button_pressed() -> void:
+	#func _on_fix_machine_button_pressed() -> void:
 	#fix_machine_button.hide()
 	#broken_down = false
 	#if customer:
-		#customer_order_indicator.show()
-		#timer.start()
+	#customer_order_indicator.show()
+	#timer.start()
+
 
 func _on_fix_machine_button_pressed() -> void:
 	#Connects the fix machine to the minigame event and starts the minigame
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_active.emit()
 
+
 func _on_minigame_end():
 	Events.minigame_end.disconnect(_on_minigame_end)
 	fix_machine()
 
-#Fixes the machine 
-func fix_machine() -> void:
-	fix_machine_button.hide()
-	broken_down = false
-	if customer:
-		customer_order_indicator.show()
-		timer.start()
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
 	if customer_at_window != customer:
