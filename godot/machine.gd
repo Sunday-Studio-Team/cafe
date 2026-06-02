@@ -73,8 +73,10 @@ func start_order() -> void:
 		return
 
 	customers_order = Global.drinks.pick_random()
-	customer_order_indicator.text = "customer ordered: " + customers_order.name
-	print("customer's order is: ", customers_order.name)
+	customer_order_indicator.text = (
+		"customer ordered %s (%s)"
+		% [customers_order.name, Global.float_to_price(customers_order.price)]
+	)
 	customer_order_indicator.show()
 	timer.start()
 
@@ -129,7 +131,10 @@ func fix_machine() -> void:
 func _on_order_finished() -> void:
 	completed_order = Global.drinks.pick_random()
 	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
-	final_order_indicator.text = "machine made: " + completed_order.name
+	final_order_indicator.text = (
+		"machine made: %s (%s)"
+		% [completed_order.name, Global.float_to_price(completed_order.price)]
+	)
 	final_order_indicator.show()
 	score_drink()
 	waiting_for_response = true
@@ -164,8 +169,6 @@ func _on_accept_button_presssed() -> void:
 	Events.customer_left_machine.emit(customer, drink_score)
 	customer = null
 
-	print("order finished")
-
 
 func _on_reject_button_pressed() -> void:
 	final_order_indicator.text = "order rejected! \n making a new drink"
@@ -176,7 +179,10 @@ func _on_reject_button_pressed() -> void:
 
 func _on_make_drink_button_pressed() -> void:
 	completed_order = customers_order
-	final_order_indicator.text = "you made: " + completed_order.name
+	final_order_indicator.text = (
+		"you made: %s (%s)"
+		% [completed_order.name, Global.float_to_price(completed_order.price)]
+	)
 	score_drink()
 	Events.order_completed.emit(customer)
 	customer.timer.stop()

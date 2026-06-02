@@ -2,8 +2,6 @@
 ## things to do
 - rework popups when score changes
 ^ these should probably all be in the UI (or at least copied there) (player shouldnt have to look in a certain direction to understand why they gained/lost points)
-- show price for drink customer ordered vs what the machine made
-^ this should encourage players to make more trades where they might feel like they should give the wrong order on purpose if it makes more money etc
 - rework tutorial text, maybe with a list of 'rules' so player understands what they can/cant do while on camera
 - add a ui indicator to show when we're on camera (seeing the camera light change colour isnt always visible depending where youre looking)
 - rebalance to make money goal harder to hit ?
