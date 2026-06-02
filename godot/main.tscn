@@ -56,7 +56,7 @@ spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
 window = NodePath("Window")
-minigame_controller = NodePath("Minigame Controller")
+minigame_controller = NodePath("MinigameController")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
@@ -368,7 +368,7 @@ theme_override_font_sizes/font_size = 64
 text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="Minigame Controller" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
+[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
 visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
@@ -376,7 +376,7 @@ minigame_dict = Dictionary[String, PackedScene]({
 })
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 
-[node name="MarginContainer" type="MarginContainer" parent="Minigame Controller" unique_id=614867549]
+[node name="MarginContainer" type="MarginContainer" parent="MinigameController" unique_id=614867549]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -387,11 +387,11 @@ theme_override_constants/margin_top = 250
 theme_override_constants/margin_right = 500
 theme_override_constants/margin_bottom = 250
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Minigame Controller/MarginContainer" unique_id=824924343]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinigameController/MarginContainer" unique_id=824924343]
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Minigame Controller/MarginContainer/SubViewportContainer" unique_id=1717214408]
+[node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
 size = Vector2i(920, 580)
 render_target_update_mode = 0

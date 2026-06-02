@@ -55,7 +55,7 @@ func handle_mouselook() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	if not movement_enabled or holding_interactable:
+	if not movement_enabled or holding_interactable or Global.minigame_active:
 		velocity = Vector3.ZERO
 		return
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)

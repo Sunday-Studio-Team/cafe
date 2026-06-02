@@ -14,8 +14,10 @@ func play_minigame(minigame_name: String):
 	sub_viewport.add_child(choosen_game.instantiate())
 
 	visible = true
+	Global.minigame_active = true
 
 
 func close_game():
 	sub_viewport.get_child(0).queue_free()
 	visible = false
+	Global.minigame_active = false

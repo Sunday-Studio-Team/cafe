@@ -27,6 +27,7 @@ var goal_profit: float = 30
 var goal_customer_score: int = 10
 var penalty_for_sprinting: int = 5
 var penalty_for_remaking_drink: int = 5
+var minigame_active := false
 
 
 func _ready() -> void:
