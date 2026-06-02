@@ -56,7 +56,6 @@ func _ready() -> void:
 		p.s. your boss is watching on the security cameras, so follow the rules."
 		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
 	)
-
 	await get_tree().create_timer(20, false).timeout
 	objective.hide()
 
