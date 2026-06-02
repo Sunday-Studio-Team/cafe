@@ -4,6 +4,11 @@ extends CanvasLayer
 @export var sub_viewport: SubViewport
 
 
+func _physics_process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and Global.minigame_active:
+		close_game()
+
+
 func play_minigame(minigame_name: String):
 	var choosen_game: PackedScene = minigame_dict.get(minigame_name)
 
@@ -21,3 +26,4 @@ func close_game():
 	sub_viewport.get_child(0).queue_free()
 	visible = false
 	Global.minigame_active = false
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

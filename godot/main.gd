@@ -7,7 +7,6 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var window: Node3D
-
 #Minigame
 @export var minigame_controller: CanvasLayer
 
@@ -21,7 +20,7 @@ func _ready() -> void:
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.customer_approached_machine.connect(_on_customer_approached_machine)
-	
+
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
@@ -30,7 +29,6 @@ func _ready() -> void:
 	# so we dont have to wait loads every time we start the game to test
 	await get_tree().create_timer(1, false).timeout
 	customer_spawn_timer.timeout.emit()
-	
 
 
 func _on_customer_spawn_timer_timeout() -> void:
@@ -63,9 +61,11 @@ func _on_customer_approached_machine(customer: Customer) -> void:
 
 	machine.customer = customer
 
+
 #Minigame is active (Need to turn off regular player controls)
 func _on_minigame_active():
 	minigame_controller.play_minigame("Colors")
+
 
 #Closes the game -> Game is no longer visible and removed from the tree
 #Player regains all regular controls etc
