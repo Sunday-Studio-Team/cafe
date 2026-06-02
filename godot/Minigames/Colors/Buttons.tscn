@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cp150y65pvybf"]
 
-[ext_resource type="Script" uid="uid://bejotytu413bj" path="res://Minigames/Colors/buttons.gd" id="1_jxxp1"]
-[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://Minigames/Assets/RedSquare.png" id="1_rfmd0"]
-[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://Minigames/Assets/BlueSquare.png" id="2_nnnqg"]
-[ext_resource type="Texture2D" uid="uid://dwkj5nabjrlkb" path="res://Minigames/Assets/GreenSquare.png" id="3_phi86"]
+[ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/buttons.gd" id="1_jxxp1"]
+[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://minigames/assets/red_square.png" id="1_rfmd0"]
+[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://minigames/assets/blue_square.png" id="2_nnnqg"]
+[ext_resource type="Texture2D" uid="uid://dwkj5nabjrlkb" path="res://minigames/assets/green_square.png" id="3_phi86"]
 
 [node name="Buttons" type="Control" unique_id=587894759]
 layout_mode = 3
@@ -94,6 +94,15 @@ theme_override_font_sizes/font_size = 64
 
 [node name="Timer" type="Timer" parent="." unique_id=1657691319]
 one_shot = true
+
+[node name="ClickThe" type="Label" parent="." unique_id=1630240847]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 17.0
+offset_right = 720.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 64
+text = "click the..."
 
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
