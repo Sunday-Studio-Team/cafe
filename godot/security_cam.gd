@@ -38,7 +38,10 @@ func _physics_process(_delta: float) -> void:
 			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
 				Events.player_caught_sprinting.emit()
 				timer.start()
-				Global.customer_score -= Global.penalty_for_sprinting
+				Global.set_customer_score(
+					Global.customer_score - Global.penalty_for_sprinting,
+					"caught running"
+					)
 			elif (
 				Input.is_action_pressed("interact")
 				and Global.hovered_interactable != null
@@ -46,7 +49,10 @@ func _physics_process(_delta: float) -> void:
 			):
 				Events.player_caught_remaking.emit()
 				timer.start()
-				Global.customer_score -= Global.penalty_for_remaking_drink
+				Global.set_customer_score(
+					Global.customer_score - Global.penalty_for_remaking_drink,
+					"caught making drink by hand"
+					)
 
 			player_in_spotlight = true
 			break

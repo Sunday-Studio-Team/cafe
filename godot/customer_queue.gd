@@ -42,9 +42,9 @@ func remove_front_customer(customer_happy: bool) -> void:
 	queue_updated.emit()
 
 	if customer_happy:
-		Global.profit_score += 3
+		Global.set_money(Global.profit_score + 3, "fixed customer's drink")
 	else:
-		Global.customer_score -= 3
+		Global.set_customer_score(Global.customer_score - 3, "customer left")
 
 
 func get_front_customer() -> Customer:

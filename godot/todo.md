@@ -1,7 +1,5 @@
 # short term
 ## things to do
-- rework popups when score changes
-^ these should probably all be in the UI (or at least copied there) (player shouldnt have to look in a certain direction to understand why they gained/lost points)
 - rebalance to make money goal harder to hit ?
 ## things to figure out
 - what other rules can we add ? i think ideally we should have ideas for a few things to add to scale the difficulty or to swap based on what seems fun in testing

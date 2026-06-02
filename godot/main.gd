@@ -51,8 +51,8 @@ func _on_customer_spawn_timer_timeout() -> void:
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
 	await get_tree().create_timer(5, false).timeout
-	Global.profit_score = 0
-	Global.customer_score = 0
+	Global.set_money(0)
+	Global.set_customer_score(0)
 	get_tree().reload_current_scene()
 
 

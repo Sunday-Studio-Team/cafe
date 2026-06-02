@@ -148,14 +148,20 @@ func _on_accept_button_presssed() -> void:
 	Events.order_approved.emit(customer)
 	drink_customer_score_label.hide()
 	score_label.show()
-	Global.profit_score += completed_order.price
-	completed_order = null
+	Global.set_money(
+		Global.profit_score + completed_order.price,
+		"sold %s" % completed_order.name,
+	)
 	await get_tree().create_timer(0.5, false).timeout
 	score_label.hide()
 	drink_customer_score_label.show()
-	Global.customer_score += drink_score
+	Global.set_customer_score(
+		Global.customer_score + drink_score,
+		"customer rated %s" % completed_order.name,
+	)
 	await get_tree().create_timer(0.5, false).timeout
 	drink_customer_score_label.hide()
+	completed_order = null
 
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)

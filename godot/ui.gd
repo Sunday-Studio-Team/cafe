@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export var profit_label: Label
 @export var customer_happiness_label: Label
+@export var score_update_label: Label
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
@@ -19,35 +20,37 @@ extends CanvasLayer
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-	Events.gained_money.connect(
-		func():
+	Events.money_updated.connect(
+		func(_new_value: float, change: float, message: String):
+			var color: Color
 			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(Color.GOLD)
+			if change > 0:
+				color = Color.GREEN
+				score_update_label.text = "+"
+			else:
+				color = Color.RED
+				score_update_label.text = "-"
+			score_update_label.text += "$%s %s" % [abs(int(change)), message]
+			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(color)
+			score_update_label.modulate = color
+			create_tween().tween_property(score_update_label, "modulate:a", 0, 1.5)
 			money_sound.play()
 	)
 	Events.customer_score_updated.connect(
-		func(increased: bool):
+		func(_new_value: float, change: float, message: String):
 			var color: Color
-			if increased:
+			if change > 0:
 				color = Color.GREEN
 				gain_points_sound.play()
+				score_update_label.text = "+"
 			else:
 				color = Color.RED
 				lose_points_sound.play()
+				score_update_label.text = "-"
+			score_update_label.text += "🙂%s %s" % [abs(int(change)), message]
 			create_tween().tween_property(customer_happiness_label, "modulate", Color.WHITE, 0.75).from(color)
-	)
-	Events.player_caught_sprinting.connect(
-		func():
-			caught_printing_label.text = "-%s🙂 caught running" % Global.penalty_for_sprinting
-			caught_printing_label.show()
-			await get_tree().create_timer(1, false).timeout
-			caught_printing_label.hide()
-	)
-	Events.player_caught_remaking.connect(
-		func():
-			caught_remaking_label.text = "-%s🙂 caught remaking drink" % Global.penalty_for_remaking_drink
-			caught_remaking_label.show()
-			await get_tree().create_timer(1, false).timeout
-			caught_remaking_label.hide()
+			score_update_label.modulate = color
+			create_tween().tween_property(score_update_label, "modulate:a", 0, 1.5)
 	)
 	objective.text = (
 		"you are the new manager of a fully automated cafe!
@@ -56,6 +59,7 @@ func _ready() -> void:
 		p.s. your boss is watching on the security cameras, so follow the rules."
 		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
 	)
+	score_update_label.modulate = Color.TRANSPARENT
 	await get_tree().create_timer(20, false).timeout
 	objective.hide()
 

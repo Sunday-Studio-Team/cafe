@@ -11,10 +11,10 @@ signal order_completed(customer: Customer)
 signal order_approved(customer: Customer)
 signal customer_left_machine(customer: Customer, drink_score: int)
 signal time_up
-signal gained_money
-signal customer_score_updated(increased: bool)
+signal money_updated(new_value: float, change: float, message: String)
+signal customer_score_updated(new_value: int, change: int, message: String)
 signal player_caught_sprinting
 signal player_caught_remaking
-#Minigame Events
+# minigames
 signal minigame_active
 signal minigame_end

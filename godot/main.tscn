@@ -210,10 +210,11 @@ autostart = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "caught_printing_label", "caught_remaking_label", "cctv_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "caught_printing_label", "caught_remaking_label", "cctv_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Customer")
+score_update_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/ScoreUpdate")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
@@ -328,6 +329,12 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "🙂 0"
 
+[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=124548306]
+modulate = Color(0.4, 1, 0.4, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "+1$ from customer"
+
 [node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=481278116]
 layout_mode = 2
 size_flags_horizontal = 10
@@ -344,7 +351,8 @@ theme_override_font_sizes/bold_font_size = 48
 bbcode_enabled = true
 text = "[b]OBJECTIVE:[/b]
 
-make $10 while keeping your customer rating above 5"
+make $10 while keeping your customer rating above 5
+etc etc"
 scroll_active = false
 horizontal_alignment = 1
 
@@ -386,25 +394,6 @@ volume_db = -5.0
 stream = SubResource("AudioStreamWAV_kek77")
 volume_db = -5.0
 
-[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
-process_mode = 3
-visible = false
-script = ExtResource("6_7mycd")
-
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1189096436]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="PauseMenu/MarginContainer" unique_id=2024104815]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 64
-text = "PAUSED"
-horizontal_alignment = 1
-
 [node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
 visible = false
 script = ExtResource("10_4c57u")
@@ -432,3 +421,22 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
+process_mode = 3
+visible = false
+script = ExtResource("6_7mycd")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1189096436]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer" unique_id=2024104815]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+horizontal_alignment = 1

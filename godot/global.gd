@@ -12,17 +12,8 @@ var main_scene: Node3D
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
-var profit_score: float = 0:
-	set(score):
-		profit_score = score
-		Events.gained_money.emit()
-var customer_score: int = 0:
-	set(new_score):
-		if new_score == customer_score:
-			return
-		var increased: bool = new_score > customer_score
-		Events.customer_score_updated.emit(increased)
-		customer_score = new_score
+var profit_score: float = 0
+var customer_score: int = 0
 var goal_profit: float = 30
 var goal_customer_score: int = 10
 var player_in_cctv_los := false
@@ -40,6 +31,22 @@ func _physics_process(_delta: float) -> void:
 	# because if we set it in the individual security cameras' processes, they
 	# would start overriding each other
 	player_in_cctv_los = false
+
+
+func set_money(new_value: float, message: String = "") -> void:
+	if new_value == profit_score:
+		return
+	var old_value := profit_score
+	profit_score = new_value
+	Events.money_updated.emit(new_value, new_value - old_value, message)
+
+
+func set_customer_score(new_value: int, message: String = "") -> void:
+	if new_value == customer_score:
+		return
+	var old_value := customer_score
+	customer_score = new_value
+	Events.customer_score_updated.emit(new_value, new_value - old_value, message)
 
 
 func load_resources_from_folder(folder_path: String) -> Array[Resource]:
