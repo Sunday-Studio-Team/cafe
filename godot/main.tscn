@@ -368,35 +368,32 @@ theme_override_font_sizes/font_size = 64
 text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="Minigame Controller" type="CanvasLayer" parent="." unique_id=305291737]
+[node name="Minigame Controller" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
 visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
 "Colors": ExtResource("11_efxa6")
 })
+sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 
-[node name="Control" type="Control" parent="Minigame Controller" unique_id=209610919]
-layout_mode = 3
+[node name="MarginContainer" type="MarginContainer" parent="Minigame Controller" unique_id=614867549]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 500
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 250
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Minigame Controller/Control" unique_id=824924343]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.47900003
-anchor_bottom = 0.59400004
-offset_right = 0.19195557
-offset_bottom = 0.08798218
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minigame Controller/MarginContainer" unique_id=824924343]
+layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Minigame Controller/Control/SubViewportContainer" unique_id=1717214408]
+[node name="SubViewport" type="SubViewport" parent="Minigame Controller/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(552, 385)
+size = Vector2i(920, 580)
 render_target_update_mode = 0
 
 [node name="SecurityCam" parent="." unique_id=557976636 instance=ExtResource("12_dg77c")]
