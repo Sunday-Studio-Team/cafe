@@ -25,6 +25,7 @@ var customer_score: int = 0:
 		customer_score = new_score
 var goal_profit: float = 30
 var goal_customer_score: int = 10
+var player_in_cctv_los := false
 var penalty_for_sprinting: int = 5
 var penalty_for_remaking_drink: int = 5
 var minigame_active := false
@@ -32,6 +33,13 @@ var minigame_active := false
 
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
+
+
+func _physics_process(_delta: float) -> void:
+	# this has to be reset to false at the start of every frame here
+	# because if we set it in the individual security cameras' processes, they
+	# would start overriding each other
+	player_in_cctv_los = false
 
 
 func load_resources_from_folder(folder_path: String) -> Array[Resource]:

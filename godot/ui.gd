@@ -14,6 +14,7 @@ extends CanvasLayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var caught_printing_label: Label
 @export var caught_remaking_label: Label
+@export var cctv_indicator: TextureRect
 
 
 func _ready() -> void:
@@ -63,6 +64,12 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	update_score_indicators()
+	update_interactable_ui()
+	update_cctv_indicator()
+
+
+func update_score_indicators() -> void:
 	profit_label.text = (
 		Global.float_to_price(Global.profit_score)
 		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
@@ -70,6 +77,8 @@ func _physics_process(_delta: float) -> void:
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
 	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
 
+
+func update_interactable_ui() -> void:
 	var hovered_interactable: Interactable = Global.hovered_interactable
 
 	if hovered_interactable != null:
@@ -98,6 +107,13 @@ func _physics_process(_delta: float) -> void:
 		hovered_interactable != null
 		and hovered_interactable.time_held > 0
 	)
+
+
+func update_cctv_indicator() -> void:
+	if Global.player_in_cctv_los:
+		cctv_indicator.modulate = Color.RED
+	else:
+		cctv_indicator.modulate = Color.WHITE
 
 
 func _on_time_up() -> void:

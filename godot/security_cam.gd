@@ -51,8 +51,12 @@ func _physics_process(_delta: float) -> void:
 			player_in_spotlight = true
 			break
 
+# we need both a local and global var here to track if the player is in this
+# spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
+# things like this light flashing red when we enter a separate cameara's fov)
 	if player_in_spotlight:
 		spotlight.light_color = Color.RED
+		Global.player_in_cctv_los = true
 	else:
 		spotlight.light_color = Color.WHITE
 

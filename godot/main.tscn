@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://pause_menu.gd" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://Minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://Minigames/Colors/Colors_Minigame.tscn" id="11_efxa6"]
@@ -183,6 +184,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3.8)
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4912045, 0, 4)
 
+[node name="SecurityCam" parent="." unique_id=557976636 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.6975236, 4.209534)
+rotation_pause_length = 4.0
+
+[node name="SecurityCam2" parent="." unique_id=245896451 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88471025, 2.6719248, 6.382108)
+rotation_time = 6.0
+
+[node name="SecurityCam3" parent="." unique_id=1837350934 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.8847103, 2.6719248, 6.8821087)
+rotation_amount = 45.0
+rotation_time = 2.0
+rotation_pause_length = 0.0
+
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 wait_time = 5.0
 autostart = true
@@ -195,15 +210,15 @@ autostart = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "caught_printing_label", "caught_remaking_label")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "caught_printing_label", "caught_remaking_label", "cctv_indicator")]
 script = ExtResource("5_lquwl")
-profit_label = NodePath("MarginContainer/Scores/Money")
-customer_happiness_label = NodePath("MarginContainer/Scores/Customer")
+profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Money")
+customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Customer")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("MarginContainer/TimeLeft")
+time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 end_text = NodePath("MarginContainer/EndText")
 money_sound = NodePath("MoneySound")
@@ -211,6 +226,7 @@ gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 caught_printing_label = NodePath("MarginContainer/CaughtSprinting")
 caught_remaking_label = NodePath("MarginContainer/CaughtRemaking")
+cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CctvIndicator")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -225,25 +241,32 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1534145091]
-layout_mode = 2
-
-[node name="Money" type="Label" parent="UI/MarginContainer/Scores" unique_id=103958680]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "$ 0"
-
-[node name="Customer" type="Label" parent="UI/MarginContainer/Scores" unique_id=1609379077]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "🙂 0"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1052297915]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1617732849]
+layout_mode = 2
+
+[node name="CctvIndicator" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1082245281]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("7_ycdy4")
+expand_mode = 4
+
+[node name="Controls" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]WASD[/b] move
+[b]E[/b] interact
+[b]LShift[/b] sprint"
+fit_content = true
+vertical_alignment = 2
 
 [node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
@@ -279,12 +302,33 @@ size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="TimeLeft" type="Label" parent="UI/MarginContainer" unique_id=481278116]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
 layout_mode = 2
-size_flags_horizontal = 8
+
+[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1534145091]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/Scores" unique_id=103958680]
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
+text = "$ 0"
+
+[node name="Customer" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/Scores" unique_id=1609379077]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "🙂 0"
+
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=481278116]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
 text = "TIME LEFT: 0"
+vertical_alignment = 2
 
 [node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
 custom_minimum_size = Vector2(400, 250)
@@ -335,23 +379,9 @@ volume_db = -5.0
 stream = SubResource("AudioStreamWAV_kek77")
 volume_db = -5.0
 
-[node name="Controls" type="RichTextLabel" parent="UI" unique_id=1478058715]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -135.0
-offset_right = 1102.0
-grow_vertical = 0
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
-bbcode_enabled = true
-text = "[b]WASD[/b] move
-[b]E[/b] interact
-[b]LShift[/b] sprint"
-fit_content = true
-
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
 process_mode = 3
+visible = false
 script = ExtResource("6_7mycd")
 
 [node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1189096436]
@@ -393,19 +423,5 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(1420, 880)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
-
-[node name="SecurityCam" parent="." unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.6975236, 4.209534)
-rotation_pause_length = 4.0
-
-[node name="SecurityCam2" parent="." unique_id=245896451 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88471025, 2.6719248, 6.382108)
-rotation_time = 6.0
-
-[node name="SecurityCam3" parent="." unique_id=1837350934 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.8847103, 2.6719248, 6.8821087)
-rotation_amount = 45.0
-rotation_time = 2.0
-rotation_pause_length = 0.0
