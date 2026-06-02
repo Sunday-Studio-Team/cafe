@@ -2,7 +2,6 @@
 ## things to do
 - rework popups when score changes
 ^ these should probably all be in the UI (or at least copied there) (player shouldnt have to look in a certain direction to understand why they gained/lost points)
-- rework tutorial text, maybe with a list of 'rules' so player understands what they can/cant do while on camera
 - rebalance to make money goal harder to hit ?
 ## things to figure out
 - what other rules can we add ? i think ideally we should have ideas for a few things to add to scale the difficulty or to swap based on what seems fun in testing

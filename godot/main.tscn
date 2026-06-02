@@ -250,22 +250,29 @@ layout_mode = 2
 [node name="CctvIndicator" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1082245281]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture = ExtResource("7_ycdy4")
 expand_mode = 4
 
-[node name="Controls" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
-custom_minimum_size = Vector2(200, 0)
+[node name="ControlsRules" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
 bbcode_enabled = true
-text = "[b]WASD[/b] move
+text = "[b][i]controls[/i][/b]
+[b]WASD[/b] move
 [b]E[/b] interact
-[b]LShift[/b] sprint"
+[b]LShift[/b] sprint
+
+[b][i]rules[/i][/b]
+- no running
+- no handmade drinks"
 fit_content = true
+horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
@@ -333,7 +340,8 @@ vertical_alignment = 2
 [node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
-theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 48
 bbcode_enabled = true
 text = "[b]OBJECTIVE:[/b]
 
@@ -356,7 +364,7 @@ visible = false
 modulate = Color(0.7314912, 0, 0.07300905, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
-text = "-1 🙂caught sprinting"
+text = "-1 🙂caught running"
 horizontal_alignment = 1
 
 [node name="CaughtRemaking" type="Label" parent="UI/MarginContainer" unique_id=2091099460]

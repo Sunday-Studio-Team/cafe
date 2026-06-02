@@ -37,7 +37,7 @@ func _ready() -> void:
 	)
 	Events.player_caught_sprinting.connect(
 		func():
-			caught_printing_label.text = "-%s🙂 caught sprinting" % Global.penalty_for_sprinting
+			caught_printing_label.text = "-%s🙂 caught running" % Global.penalty_for_sprinting
 			caught_printing_label.show()
 			await get_tree().create_timer(1, false).timeout
 			caught_printing_label.hide()
@@ -50,12 +50,10 @@ func _ready() -> void:
 			caught_remaking_label.hide()
 	)
 	objective.text = (
-		"
-		you are the new manager of a fully automated cafe! \n manage the self-service machines and meet your daily objective:
-		\n [b]OBJECTIVE:[/b] \n make %s while keeping your customer rating (🙂) above %s
-		\n \n if customers get the wrong orders or are kept waiting too long, you might have to deal with them personally!
-		\n p.s. your boss is watching on the security cameras !
-		"
+		"you are the new manager of a fully automated cafe!
+		[b]OBJECTIVE[/b] \n make %s while keeping your customer rating (🙂) above %s \n
+		if customers don't get good service, you might have to deal with them personally!
+		p.s. your boss is watching on the security cameras, so follow the rules."
 		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
 	)
 
@@ -66,6 +64,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	update_score_indicators()
 	update_interactable_ui()
+	update_time_indicator()
 	update_cctv_indicator()
 
 
@@ -75,7 +74,10 @@ func update_score_indicators() -> void:
 		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
 	)
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
-	time_left_label.text = "TIME LEFT: " + str(int(game_timer.time_left))
+
+
+func update_time_indicator() -> void:
+	time_left_label.text = "TIME LEFT: %ss" % int(game_timer.time_left)
 
 
 func update_interactable_ui() -> void:

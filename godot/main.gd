@@ -27,8 +27,10 @@ func _ready() -> void:
 
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test
-	await get_tree().create_timer(1, false).timeout
-	customer_spawn_timer.timeout.emit()
+	# NOTE: commenting this out for now since maybe its better to give people
+	# a few seconds to read the tutorial text and get their bearings
+	#await get_tree().create_timer(1, false).timeout
+	#customer_spawn_timer.timeout.emit()
 
 
 func _on_customer_spawn_timer_timeout() -> void:
