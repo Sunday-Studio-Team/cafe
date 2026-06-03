@@ -25,3 +25,7 @@
 ## things to figure out
 - should we have more complex scoring rules ? e.g. take double points for giving someone
 a drink with whole milk when they asked for oat milk etc
+- how does the player see customers thru the wall (currently wall is just transparent but might be nicer ways to do it when we do more with art)
+	- security cameras on each machine with a screen on our side showing its feed ?
+	- one-way mirrors ?
+	- keep the transparency ?
