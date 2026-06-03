@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+enum ScoreType { MONEY, CUSTOMER }
+
 @export var profit_label: Label
 @export var customer_happiness_label: Label
 @export var score_update_label: Label
@@ -17,49 +19,29 @@ extends CanvasLayer
 @export var caught_remaking_label: Label
 @export var cctv_indicator: TextureRect
 
+var score_update_tween: Tween
+
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
 	Events.money_updated.connect(
 		func(_new_value: float, change: float, message: String):
-			var color: Color
-			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(Color.GOLD)
-			if change > 0:
-				color = Color.GREEN
-				score_update_label.text = "+"
-			else:
-				color = Color.RED
-				score_update_label.text = "-"
-			score_update_label.text += "$%s %s" % [abs(int(change)), message]
-			create_tween().tween_property(profit_label, "modulate", Color.WHITE, 0.75).from(color)
-			score_update_label.modulate = color
-			create_tween().tween_property(score_update_label, "modulate:a", 0, 1.5)
-			money_sound.play()
+			_on_score_updated(ScoreType.MONEY, change, message)
 	)
 	Events.customer_score_updated.connect(
 		func(_new_value: float, change: float, message: String):
-			var color: Color
-			if change > 0:
-				color = Color.GREEN
-				gain_points_sound.play()
-				score_update_label.text = "+"
-			else:
-				color = Color.RED
-				lose_points_sound.play()
-				score_update_label.text = "-"
-			score_update_label.text += "🙂%s %s" % [abs(int(change)), message]
-			create_tween().tween_property(customer_happiness_label, "modulate", Color.WHITE, 0.75).from(color)
-			score_update_label.modulate = color
-			create_tween().tween_property(score_update_label, "modulate:a", 0, 1.5)
+			_on_score_updated(ScoreType.CUSTOMER, change, message)
 	)
+	score_update_label.modulate = Color.TRANSPARENT
+
 	objective.text = (
 		"you are the new manager of a fully automated cafe!
 		[b]OBJECTIVE[/b] \n make %s while keeping your customer rating (🙂) above %s \n
 		if customers don't get good service, you might have to deal with them personally!
-		p.s. your boss is watching on the security cameras, so follow the rules."
+		p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
 		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
 	)
-	score_update_label.modulate = Color.TRANSPARENT
+
 	await get_tree().create_timer(20, false).timeout
 	objective.hide()
 
@@ -119,6 +101,48 @@ func update_cctv_indicator() -> void:
 		cctv_indicator.modulate = Color.RED
 	else:
 		cctv_indicator.modulate = Color.WHITE
+
+
+# they might ultimately be better separated but i combined the funcs for the ui notis when money
+# and customer scores change since they share a lot of code and use the same label for the updates
+func _on_score_updated(score_type: ScoreType, change: float, message: String) -> void:
+	if score_update_tween != null and score_update_tween.is_running():
+		score_update_tween.kill()
+	score_update_tween = create_tween()
+
+	var color: Color
+	# the score label itself, not the label showing the updates like "+1$" etc
+	var score_label_to_tween: Label
+
+	if change > 0:
+		score_update_label.text = "+"
+		match score_type:
+			ScoreType.MONEY:
+				color = Color.GOLD
+				money_sound.play()
+			ScoreType.CUSTOMER:
+				color = Color.GREEN
+				gain_points_sound.play()
+	else:
+		color = Color.RED
+		score_update_label.text = "-"
+		match score_type:
+			ScoreType.MONEY:
+				pass
+			ScoreType.CUSTOMER:
+				lose_points_sound.play()
+
+	score_update_label.modulate = color
+	match score_type:
+		ScoreType.MONEY:
+			score_update_label.text += "$"
+			score_label_to_tween = profit_label
+		ScoreType.CUSTOMER:
+			score_update_label.text += "🙂"
+			score_label_to_tween = customer_happiness_label
+	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
+	score_update_label.text += "%s %s" % [abs(int(change)), message]
+	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 2)
 
 
 func _on_time_up() -> void:
