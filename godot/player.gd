@@ -24,6 +24,12 @@ var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 var holding_interactable: bool = false
 
+# we add on top of the ray distance to avoid weird stuff with big interactables
+# (whose 'position's may be further away from us than their interactable hitbox)
+# NOTE: if we start getting weird flickering while holding interactables, we
+# might have to increase this a bit more
+@onready var max_interact_dist: float = abs(aiming_ray.target_position.z) + 0.5
+
 
 func _ready() -> void:
 	Global.player = self
@@ -87,6 +93,16 @@ func handle_gravity(delta: float) -> void:
 func handle_hovered_interactable() -> void:
 	holding_interactable = false
 	var hovered_interactable: Interactable = Global.hovered_interactable
+
+	# if we're somehow hovering an interactable which has been disabled,
+	# deleted or moved far away, fix that
+	if hovered_interactable != null:
+		if (
+			not hovered_interactable.enabled
+			or not hovered_interactable.is_inside_tree()
+			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
+		):
+			Global.hovered_interactable = null
 
 	# if we're currently holding interact on something, dont do anything
 	# (so we can look around while we hold)

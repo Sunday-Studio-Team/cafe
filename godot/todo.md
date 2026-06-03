@@ -1,7 +1,6 @@
 # short term
 ## things to do
 - rebalance to make money goal harder to hit ?
-- fix issues when holding to interact with something as it moves/deletes
 ## things to figure out
 - what other rules can we add ? i think ideally we should have ideas for a few things to add to scale the difficulty or to swap based on what seems fun in testing
 ^ we might paint ourselves into a corner if there arent a lot of fun intuitive ways to expand the main systems
