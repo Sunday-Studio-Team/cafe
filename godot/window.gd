@@ -11,7 +11,8 @@ func _ready() -> void:
 		func():
 			bell_sound.play()
 			await get_tree().create_timer(0.5, false).timeout
-			Global.set_customer_score(Global.customer_score - 1, "customer complained")
+			Global.score_update_message = "customer complained"
+			Global.customer_score -= 1
 			customer_complained_indicator.show()
 			await get_tree().create_timer(1, false).timeout
 			customer_complained_indicator.hide()

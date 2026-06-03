@@ -85,7 +85,8 @@ func _on_order_approved(customer: Customer) -> void:
 	timer.stop()
 
 	await get_tree().create_timer(1, false).timeout
-	Global.set_customer_score(Global.customer_score + bonus_points_for_time, "penalty for time")
+	Global.score_update_message = "penalty for time"
+	Global.customer_score += bonus_points_for_time
 
 	match bonus_points_for_time:
 		1:

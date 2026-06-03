@@ -11,8 +11,8 @@ signal order_completed(customer: Customer)
 signal order_approved(customer: Customer)
 signal customer_left_machine(customer: Customer, drink_score: int)
 signal time_up
-signal money_updated(new_value: float, change: float, message: String)
-signal customer_score_updated(new_value: int, change: int, message: String)
+signal money_updated(new_value: float, old_value: float)
+signal customer_score_updated(new_value: int, old_value: int)
 signal player_caught_sprinting
 signal player_caught_remaking
 # minigames

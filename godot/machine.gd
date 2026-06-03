@@ -147,17 +147,13 @@ func _on_accept_button_presssed() -> void:
 	Events.order_approved.emit(customer)
 	drink_customer_score_label.hide()
 	score_label.show()
-	Global.set_money(
-		Global.profit_score + completed_order.price,
-		"sold %s" % completed_order.name,
-	)
+	Global.score_update_message = "sold %s" % completed_order.name
+	Global.money += completed_order.price
 	await get_tree().create_timer(0.5, false).timeout
 	score_label.hide()
 	drink_customer_score_label.show()
-	Global.set_customer_score(
-		Global.customer_score + drink_score,
-		"customer rated %s" % completed_order.name,
-	)
+	Global.score_update_message = "customer rated %s" % completed_order.name
+	Global.customer_score += drink_score
 	await get_tree().create_timer(0.5, false).timeout
 	drink_customer_score_label.hide()
 	completed_order = null

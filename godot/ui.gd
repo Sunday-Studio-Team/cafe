@@ -25,12 +25,12 @@ var score_update_tween: Tween
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
 	Events.money_updated.connect(
-		func(_new_value: float, change: float, message: String):
-			_on_score_updated(ScoreType.MONEY, change, message)
+		func(new_value: float, old_value: float):
+			_on_score_updated(ScoreType.MONEY, new_value, old_value)
 	)
 	Events.customer_score_updated.connect(
-		func(_new_value: float, change: float, message: String):
-			_on_score_updated(ScoreType.CUSTOMER, change, message)
+		func(new_value: int, old_value: int):
+			_on_score_updated(ScoreType.CUSTOMER, new_value, old_value)
 	)
 	score_update_label.modulate = Color.TRANSPARENT
 
@@ -55,7 +55,7 @@ func _physics_process(_delta: float) -> void:
 
 func update_score_indicators() -> void:
 	profit_label.text = (
-		Global.float_to_price(Global.profit_score)
+		Global.float_to_price(Global.money)
 		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
 	)
 	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
@@ -105,7 +105,7 @@ func update_cctv_indicator() -> void:
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money
 # and customer scores change since they share a lot of code and use the same label for the updates
-func _on_score_updated(score_type: ScoreType, change: float, message: String) -> void:
+func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
 	if score_update_tween != null and score_update_tween.is_running():
 		score_update_tween.kill()
 	score_update_tween = create_tween()
@@ -114,6 +114,7 @@ func _on_score_updated(score_type: ScoreType, change: float, message: String) ->
 	# the score label itself, not the label showing the updates like "+1$" etc
 	var score_label_to_tween: Label
 
+	var change := new_value - old_value
 	if change > 0:
 		score_update_label.text = "+"
 		match score_type:
@@ -141,14 +142,14 @@ func _on_score_updated(score_type: ScoreType, change: float, message: String) ->
 			score_update_label.text += "🙂"
 			score_label_to_tween = customer_happiness_label
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
-	score_update_label.text += "%s %s" % [abs(int(change)), message]
+	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 2)
 
 
 func _on_time_up() -> void:
 	if (
 		Global.customer_score >= Global.goal_customer_score
-		and Global.profit_score >= Global.goal_profit
+		and Global.money >= Global.goal_profit
 	):
 		end_text.text = "[color=green][b]you win !"
 	else:
