@@ -29,6 +29,9 @@ func _ready():
 
 #Sets the text randomly
 func set_choice():
+	if successes > 0:
+		text_edit.text = "✅"
+		await get_tree().create_timer(0.5, false).timeout
 	current_choice = choices.pick_random()
 	text_edit.text = current_choice[0]
 	text_edit.add_theme_color_override("font_color", colors.pick_random())
@@ -43,6 +46,8 @@ func wrong_button_pressed():
 
 #Sends out needed information if the vicotry is achived.
 func victory():
+	text_edit.text = "✅"
+	await get_tree().create_timer(0.5, false).timeout
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Events.emit_signal("minigame_end")
 
@@ -50,8 +55,8 @@ func victory():
 func _on_button_pressed():
 	print(successes)
 	if current_choice[1] == 1:
-		set_choice()
 		successes += 1
+		set_choice()
 		if successes >= needed_successes:
 			victory()
 	else:
@@ -60,8 +65,8 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	if current_choice[1] == 2:
-		set_choice()
 		successes += 1
+		set_choice()
 		if successes >= needed_successes:
 			victory()
 	else:
@@ -70,8 +75,8 @@ func _on_button_2_pressed():
 
 func _on_button_3_pressed():
 	if current_choice[1] == 3:
-		set_choice()
 		successes += 1
+		set_choice()
 		if successes >= needed_successes:
 			victory()
 	else:

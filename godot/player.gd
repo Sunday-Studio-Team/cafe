@@ -3,8 +3,8 @@ extends CharacterBody3D
 
 const ACCELERATION := 25.0
 const DECELERATION := 25.0
-const DEFAULT_MOVE_SPEED := 1.5
-const SPRINT_MOVE_SPEED := 4.0
+const DEFAULT_MOVE_SPEED := 1.25
+const SPRINT_MOVE_SPEED := 4.5
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
@@ -36,7 +36,8 @@ func _physics_process(delta: float) -> void:
 	handle_sprint()
 	handle_movement(delta)
 	handle_gravity(delta)
-	handle_footstep_sounds()
+	#handle_footstep_sounds()
+	#tilt_camera()
 	move_and_slide()
 
 
@@ -103,6 +104,9 @@ func handle_hovered_interactable() -> void:
 	else:
 		Global.hovered_interactable = null
 
+	if Global.minigame_active:
+		Global.hovered_interactable = null
+
 
 func handle_sprint() -> void:
 	if Input.is_action_pressed("sprint"):
@@ -111,7 +115,7 @@ func handle_sprint() -> void:
 		move_speed = DEFAULT_MOVE_SPEED
 
 
-# (unfinished) plays footstep sounds if we're moving
+# (unfinished) plays footstep sounds with timing adjusted to speed
 func handle_footstep_sounds() -> void:
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
@@ -123,3 +127,10 @@ func handle_footstep_sounds() -> void:
 		dist_travelled_since_last_step = 0
 
 	pos_last_physics_frame = global_position
+
+
+func tilt_camera() -> void:
+	const TILT_AMOUNT := 0.25
+
+	var local_velocity = basis.transposed() * velocity
+	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT

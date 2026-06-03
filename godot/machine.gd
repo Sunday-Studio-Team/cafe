@@ -216,13 +216,13 @@ func _on_fix_machine_button_pressed() -> void:
 
 func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
-	Events.minigame_cancelled.connect(_on_minigame_cancelled)
+	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 	fix_machine()
 
 
 func _on_minigame_cancelled() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
-	Events.minigame_cancelled.connect(_on_minigame_cancelled)
+	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
