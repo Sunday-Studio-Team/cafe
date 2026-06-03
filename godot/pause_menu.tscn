@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dltayqwtj31d1"]
+
+[ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("quit_button")]
+process_mode = 3
+script = ExtResource("1_hdmo1")
+quit_button = NodePath("MarginContainer/Quit")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1420740072]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1228985395]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Quit" type="Button" parent="MarginContainer" unique_id=167199433]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "quit"
