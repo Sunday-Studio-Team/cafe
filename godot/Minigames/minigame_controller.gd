@@ -4,6 +4,10 @@ extends CanvasLayer
 @export var sub_viewport: SubViewport
 
 
+func _ready() -> void:
+	Events.time_up.connect(close_game)
+
+
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause") and Global.minigame_active:
 		close_game()
