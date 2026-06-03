@@ -46,7 +46,7 @@ func remove_front_customer(customer_happy: bool) -> void:
 		Global.money += 3
 	else:
 		Global.score_update_message = "customer left"
-		Global.money -= 3
+		Global.customer_score -= 3
 
 
 func get_front_customer() -> Customer:
