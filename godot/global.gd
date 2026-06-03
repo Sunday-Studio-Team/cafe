@@ -20,6 +20,12 @@ var money: float = 0:
 		Events.money_updated.emit(new_value, money)
 		money = new_value
 
+		# we set this as empty to hopefully avoid anything weird if someone
+		# accidentally updates one of these score vars without setting it
+		# (like gaining money but seeing a popup like '+1 🙂' from a prev thing)
+		# NOTE: i wonder if waiting a frame could ever cause anything weird if
+		# we changed a score twice on successive frames D: should get reworked
+		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		Global.score_update_message = ""
 var customer_score: int = 0:
@@ -30,6 +36,7 @@ var customer_score: int = 0:
 		Events.customer_score_updated.emit(new_value, customer_score)
 		customer_score = new_value
 
+		# (see comment for same lines in above func)
 		await get_tree().process_frame
 		Global.score_update_message = ""
 var score_update_message: String
