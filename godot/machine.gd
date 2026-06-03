@@ -119,7 +119,6 @@ func score_drink() -> void:
 		final_order_indicator.modulate = Color.RED
 
 
-#Fixes the machine
 func fix_machine() -> void:
 	fix_machine_button.hide()
 	broken_down = false
@@ -206,23 +205,24 @@ func _on_breakdown_timer_timeout() -> void:
 	broken_down = true
 	breakdown_sound.play()
 
-	#func _on_fix_machine_button_pressed() -> void:
-	#fix_machine_button.hide()
-	#broken_down = false
-	#if customer:
-	#customer_order_indicator.show()
-	#timer.start()
-
 
 func _on_fix_machine_button_pressed() -> void:
-	#Connects the fix machine to the minigame event and starts the minigame
+	# we connect and disconnect these signals here instead of in _ready() so other machines dont get
+	# the signal and do unintended things
 	Events.minigame_end.connect(_on_minigame_end)
+	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	Events.minigame_active.emit()
 
 
-func _on_minigame_end():
+func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	fix_machine()
+
+
+func _on_minigame_cancelled() -> void:
+	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:

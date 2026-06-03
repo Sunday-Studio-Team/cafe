@@ -394,6 +394,25 @@ volume_db = -5.0
 stream = SubResource("AudioStreamWAV_kek77")
 volume_db = -5.0
 
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
+process_mode = 3
+visible = false
+script = ExtResource("6_7mycd")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1189096436]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer" unique_id=2024104815]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+horizontal_alignment = 1
+
 [node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
 visible = false
 script = ExtResource("10_4c57u")
@@ -421,22 +440,3 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
-
-[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=359855339]
-process_mode = 3
-visible = false
-script = ExtResource("6_7mycd")
-
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1189096436]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="PauseMenu/MarginContainer" unique_id=2024104815]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 64
-text = "PAUSED"
-horizontal_alignment = 1

@@ -1,31 +1,31 @@
 extends Control
-@onready var text_edit = $PanelContainer/Panel/TextEdit
-@onready var timer = $Timer
 
-var current_choice : Array
+@export var needed_successes: int = 3
 
-var successes : int = 0
-@export var needed_successes : int = 3
-
-
+var current_choice: Array
+var successes: int = 0
 var colors = [
 	Color.RED,
 	Color.BLUE,
-	Color.GREEN
+	Color.GREEN,
 ]
-
 var choices = [
 	["Red Square", 1],
 	["Blue A", 1],
 	["Blue Square", 2],
 	["Green B", 2],
 	["Green Square", 3],
-	["Red C", 3]
+	["Red C", 3],
 ]
+
+@onready var text_edit = $PanelContainer/Panel/TextEdit
+@onready var timer = $Timer
+
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	set_choice()
+
 
 #Sets the text randomly
 func set_choice():
@@ -33,19 +33,29 @@ func set_choice():
 	text_edit.text = current_choice[0]
 	text_edit.add_theme_color_override("font_color", colors.pick_random())
 
+
 #Does the error if the wrong button is pressed
 func wrong_button_pressed():
 	text_edit.text = "ERROR"
 	text_edit.add_theme_color_override("font_color", Color.DARK_RED)
 	timer.start(1)
-	
-	
-#Sends out needed information if the vicotry is achived. 
+
+
+#Sends out needed information if the vicotry is achived.
 func victory():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Events.emit_signal("minigame_end")
-	pass
 
+
+func _on_button_pressed():
+	print(successes)
+	if current_choice[1] == 1:
+		set_choice()
+		successes += 1
+		if successes >= needed_successes:
+			victory()
+	else:
+		wrong_button_pressed()
 
 
 func _on_button_2_pressed():
@@ -70,16 +80,3 @@ func _on_button_3_pressed():
 
 func _on_timer_timeout():
 	set_choice()
-	pass # Replace with function body.
-
-
-func _on_button_pressed():
-	print(successes)
-	if current_choice[1] == 1:
-		set_choice()
-		successes += 1
-		if successes >= needed_successes:
-			victory()
-	else:
-		wrong_button_pressed()
-	pass # Replace with function body.

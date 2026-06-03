@@ -17,4 +17,5 @@ signal player_caught_sprinting
 signal player_caught_remaking
 # minigames
 signal minigame_active
+signal minigame_cancelled
 signal minigame_end

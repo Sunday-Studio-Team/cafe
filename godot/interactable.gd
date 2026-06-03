@@ -65,5 +65,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_interacted() -> void:
+	await get_tree().process_frame
 	Global.hovered_interactable = null
-	enabled = false
