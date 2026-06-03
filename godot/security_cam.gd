@@ -69,7 +69,7 @@ func create_rays() -> void:
 	# halo around the edge of the light
 	const ANGLE_OVERSHOOT := 5.0
 
-	for x_rot in range(25, 360, 25):
+	for x_rot in range(25, 360, 15):
 		for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
 			var new_ray := ray.duplicate() as RayCast3D
 			new_ray.rotation_degrees.x += x_rot
