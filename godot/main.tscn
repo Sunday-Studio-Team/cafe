@@ -198,6 +198,14 @@ rotation_amount = 45.0
 rotation_time = 2.0
 rotation_pause_length = 0.0
 
+[node name="SecurityCam4" parent="." unique_id=1261470041 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.49999997, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, 0.49999997, -6.7847104, 2.6719248, 0.88210875)
+rotation_amount = 45.0
+rotation_pause_length = 1.0
+
+[node name="SpotLight3D" parent="SecurityCam4" index="0" unique_id=1348601655]
+spot_angle = 30.0
+
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 wait_time = 5.0
 autostart = true
@@ -424,3 +432,5 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
+
+[editable path="SecurityCam4"]
