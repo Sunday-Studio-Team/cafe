@@ -43,6 +43,8 @@ func _physics_process(_delta: float) -> void:
 			elif (
 				Input.is_action_pressed("interact")
 				and Global.hovered_interactable != null
+				# TODO: think of a better way to identify specific interactables
+				# that wont break if things are renamed etc
 				and Global.hovered_interactable.display_name.contains("remake drink")
 			):
 				Events.player_caught_remaking.emit()
