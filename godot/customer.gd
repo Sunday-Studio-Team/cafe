@@ -11,12 +11,15 @@ signal drink_made_at_window
 @export var make_drink_button: Interactable
 @export_dir var sprites_folder: String
 
+var machine_wait_time: float = 25
+var window_wait_time: float = 30
 var orders_made: int = 0
 var bonus_points_for_time: int
 var at_window: bool = false
 
 
 func _ready() -> void:
+	timer.wait_time = machine_wait_time
 	apply_random_sprite()
 	make_drink_button.enabled = false
 	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
