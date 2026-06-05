@@ -13,7 +13,7 @@ func _ready() -> void:
 			await get_tree().create_timer(0.5, false).timeout
 			#Global.score_update_message = "customer complained"
 			#Global.customer_score -= 1
-			customer_complained_indicator.show()
+			#customer_complained_indicator.show()
 			await get_tree().create_timer(1, false).timeout
 			customer_complained_indicator.hide()
 	)
