@@ -13,6 +13,8 @@ signal interacted
 ## if enabled, player has to HOLD interact to interact with this
 ## (if disabled, they just have to press once)
 @export var hold_to_interact: bool = false
+## if enabled, the interact progress bar won't reset if we stop interacting
+@export var keep_progress_on_interrupt: bool = false
 ## how long the player has to hold to interact (if hold_to_interact is enabled)
 @export var time_to_hold: float = 6
 
@@ -23,6 +25,7 @@ var enabled := true:
 			process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			process_mode = Node.PROCESS_MODE_DISABLED
+			time_held = 0
 var time_held: float = 0
 
 
@@ -43,7 +46,8 @@ func _physics_process(delta: float) -> void:
 	if Global.hovered_interactable != self or not enabled:
 		if mesh:
 			mesh.material_overlay = null
-		time_held = 0
+		if not keep_progress_on_interrupt:
+			time_held = 0
 		return
 
 	# One time press
@@ -57,7 +61,8 @@ func _physics_process(delta: float) -> void:
 			interacted.emit()
 			time_held = 0
 	else:
-		time_held = 0
+		if not keep_progress_on_interrupt:
+			time_held = 0
 
 	if mesh:
 		mesh.material_overlay = ShaderMaterial.new()
