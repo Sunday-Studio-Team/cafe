@@ -5,7 +5,11 @@ extends CanvasLayer
 
 
 func _ready() -> void:
-	Events.time_up.connect(close_game)
+	Events.time_up.connect(
+		func():
+			if Global.minigame_active:
+				close_game()
+	)
 
 
 func _physics_process(_delta: float) -> void:
