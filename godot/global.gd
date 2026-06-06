@@ -13,8 +13,6 @@ var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var score_update_message: String
-var goal_profit: float = 30
-var goal_customer_score: int = 10
 var player_in_cctv_los := false
 var minigame_active := false
 
