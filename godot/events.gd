@@ -1,6 +1,7 @@
 extends Node
 
 @warning_ignore_start("unused_signal")
+signal shift_started
 signal customer_entered
 # NOTE: sorry for all these weird signals that pass the customer
 # i think thers probably nicer ways to do this lol

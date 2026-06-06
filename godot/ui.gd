@@ -62,7 +62,8 @@ func update_score_indicators() -> void:
 
 
 func update_time_indicator() -> void:
-	time_left_label.text = "TIME LEFT: %ss" % int(game_timer.time_left)
+	time_left_label.visible = not game_timer.is_stopped()
+	time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
 
 
 func update_interactable_ui() -> void:

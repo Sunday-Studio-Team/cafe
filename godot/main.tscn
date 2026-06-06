@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
@@ -206,14 +207,15 @@ rotation_pause_length = 1.0
 [node name="SpotLight3D" parent="SecurityCam4" index="0" unique_id=1348601655]
 spot_angle = 30.0
 
+[node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
+transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.216614, 1.3069857, 4.425891)
+
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 wait_time = 5.0
-autostart = true
 
 [node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
 wait_time = 120.0
 one_shot = true
-autostart = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)

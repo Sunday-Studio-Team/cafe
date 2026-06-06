@@ -19,6 +19,7 @@ func _ready() -> void:
 	customer_spawn_timer.timeout.connect(_on_customer_spawn_timer_timeout)
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
+	Events.shift_started.connect(_on_shift_started)
 	Events.customer_approached_machine.connect(_on_customer_approached_machine)
 
 	#Connect minigame
@@ -73,3 +74,8 @@ func _on_minigame_active():
 #Player regains all regular controls etc
 func _on_minigame_end():
 	minigame_controller.close_game()
+
+
+func _on_shift_started():
+	game_timer.start()
+	customer_spawn_timer.start()
