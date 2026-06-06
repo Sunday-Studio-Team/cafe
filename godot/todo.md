@@ -1,6 +1,5 @@
 # short term
 ## things to do
-- restart button
 - add some kind of resource meter for machines that are depleted as they make drinks but can be refilled
 	- could be specific to some ingredients, like milk meter, coffee meter etc
 	- refilling could be against rules

@@ -1,10 +1,17 @@
 extends CanvasLayer
 
 @export var quit_button: Button
+@export var restart_button: Button
 
 
 func _ready() -> void:
 	quit_button.pressed.connect(func(): get_tree().quit())
+	restart_button.pressed.connect(
+		func():
+			visible = false
+			get_tree().paused = false
+			get_tree().call_deferred("reload_current_scene")
+	)
 
 
 func _physics_process(_delta: float) -> void:

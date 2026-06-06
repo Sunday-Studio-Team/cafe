@@ -26,6 +26,10 @@ func _ready() -> void:
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
 
+	# we have to set these manually here so if we reload the scene theyll reset
+	Stats.daily_profit = 0
+	Stats.employee_rating = 0
+
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test
 	# NOTE: commenting this out for now since maybe its better to give people
@@ -52,8 +56,6 @@ func _on_customer_spawn_timer_timeout() -> void:
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
 	await get_tree().create_timer(5, false).timeout
-	Stats.daily_profit = 0
-	Stats.employee_rating = 0
 	get_tree().call_deferred("reload_current_scene")
 
 
