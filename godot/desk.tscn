@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://dhmqo5yinqk0t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r42xq"]
+size = Vector3(1.5, 0.1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ep8l3"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.7
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r42xq"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_ep8l3"]
+size = Vector3(0.5, 0.5, 0.05)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t5y75"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_t5y75"]
+size = Vector3(0.4, 0.25, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_se7ci"]
+size = Vector3(0.75, 0.5, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r42xq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lrwc4"]
+material = SubResource("StandardMaterial3D_r42xq")
+size = Vector3(0.725, 0.475, 0.01)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tm3w8"]
+size = Vector3(0.4, 0.025, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r8wvv"]
+size = Vector3(0.1, 0.025, 0.075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r42xq"]
+size = Vector3(1.49, 1, 1.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ep8l3"]
+size = Vector3(0.5, 1, 0.5)
+
+[node name="Desk" type="StaticBody3D" unique_id=1519674799]
+
+[node name="Table" type="MeshInstance3D" parent="." unique_id=297491436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("BoxMesh_r42xq")
+
+[node name="Leg" type="MeshInstance3D" parent="Table" unique_id=586339268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.3, 0.4)
+mesh = SubResource("CylinderMesh_ep8l3")
+
+[node name="Leg2" type="MeshInstance3D" parent="Table" unique_id=1787574776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.3, -0.4)
+mesh = SubResource("CylinderMesh_ep8l3")
+
+[node name="Leg3" type="MeshInstance3D" parent="Table" unique_id=405996757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.3, 0.4)
+mesh = SubResource("CylinderMesh_ep8l3")
+
+[node name="Leg4" type="MeshInstance3D" parent="Table" unique_id=1099823778]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.3, -0.4)
+mesh = SubResource("CylinderMesh_ep8l3")
+
+[node name="Chair" type="MeshInstance3D" parent="." unique_id=1908694284]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.8)
+mesh = SubResource("CylinderMesh_r42xq")
+
+[node name="Back" type="MeshInstance3D" parent="Chair" unique_id=479097061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29514572, 0.21275967)
+mesh = SubResource("BoxMesh_ep8l3")
+
+[node name="Leg" type="MeshInstance3D" parent="Chair" unique_id=1645086392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100000024, -0.20911375, -0.16314512)
+mesh = SubResource("CylinderMesh_t5y75")
+
+[node name="Leg2" type="MeshInstance3D" parent="Chair" unique_id=418650304]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100000024, -0.20911375, 0.15568203)
+mesh = SubResource("CylinderMesh_t5y75")
+
+[node name="Leg3" type="MeshInstance3D" parent="Chair" unique_id=1436348519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16004726, -0.20911375, -0.16314512)
+mesh = SubResource("CylinderMesh_t5y75")
+
+[node name="Leg4" type="MeshInstance3D" parent="Chair" unique_id=1674519016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16004726, -0.20911375, 0.15568203)
+mesh = SubResource("CylinderMesh_t5y75")
+
+[node name="Pc" type="MeshInstance3D" parent="." unique_id=1761426732]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.54897773, 0.9479301, -0.19627096)
+mesh = SubResource("BoxMesh_t5y75")
+
+[node name="Monitor" type="MeshInstance3D" parent="." unique_id=218762248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04603, -0.24978215)
+mesh = SubResource("BoxMesh_se7ci")
+
+[node name="Screen" type="MeshInstance3D" parent="Monitor" unique_id=1353284685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.027276814)
+mesh = SubResource("BoxMesh_lrwc4")
+
+[node name="Kb" type="MeshInstance3D" parent="." unique_id=1232282383]
+transform = Transform3D(0.9994531, 0, -0.033067957, 0, 1, 0, 0.033067957, 0, 0.9994531, -0.1077013, 0.75940037, 0.23132479)
+mesh = SubResource("BoxMesh_tm3w8")
+
+[node name="Mouse" type="MeshInstance3D" parent="." unique_id=1146626200]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 0.26438224, 0.7647054, 0.2208913)
+mesh = SubResource("BoxMesh_r8wvv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=302117327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52379656, -0.0031053424)
+shape = SubResource("BoxShape3D_r42xq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=487393276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43864143, 0.8150705)
+shape = SubResource("BoxShape3D_ep8l3")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2044123886]
+transform = Transform3D(1, 0, 0, 0, -0.5000001, 0.8660254, 0, -0.8660254, -0.5000001, 0, 1.049428, -0.15851712)
+visible = false
+light_energy = 0.5
+shadow_enabled = true
+spot_angle = 75.0
