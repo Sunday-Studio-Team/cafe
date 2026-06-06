@@ -1,6 +1,13 @@
 # short term
 ## things to do
 - rebalance to make money goal harder to hit ?
+- refactor some logic to give us readable stat numbers we can easily edit (in something like a Stats autoload/stats manager)
+- build the structure of days/shifts (for now, full game will be 5 shifts/days over a week)
+	- start of game: use laptop to read emails, buy items
+	- start shift by hitting a button/flipping a sign on door
+	- make something that manages/applies stats + rules + new stuff (like new machines, cameras) on start of each day
+- add leftover money (over goal) to our personal wallet (for buying items)
+- build some kind of inventory system to track items we own
 ## things to figure out
 - what other rules can we add ? i think ideally we should have ideas for a few things to add to scale the difficulty or to swap based on what seems fun in testing
 ^ we might paint ourselves into a corner if there arent a lot of fun intuitive ways to expand the main systems
@@ -15,11 +22,6 @@
 	- orders starting and ending ?
 	- time running out ?
 	- customers entering and leaving ? (might be too much)
-- start making system for (something like) a computer where we can:
-	- check emails from boss with new rules, progression updates and other atmosphere/background stuff
-	- order upgrades/items
-	^ both passive stat upgrades like a book that teaches you to make drinks faster and active items like something to jam cameras
-	- possibly look thru some secret files ?
 - add a hammer on a tool bench somewhere we can use to quickly 'fix' machines by hitting them (being seen carrying the hammer on a security cam will lose points)
 ^ maybe this is also an item we can buy - fixing a machine might damage the hammer and we have to order more etc
 ## things to figure out
