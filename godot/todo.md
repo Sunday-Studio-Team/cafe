@@ -2,7 +2,6 @@
 ## things to do
 - fix safespot from security camera on middle machine
 - rebalance to make money goal harder to hit ?
-- refactor some logic to give us readable stat numbers we can easily edit (in something like a Stats autoload/stats manager)
 - build the structure of days/shifts (for now, full game will be 5 shifts/days over a week)
 	- start of game: use laptop to read emails, buy items
 	- start shift by hitting a button/flipping a sign on door

@@ -24,7 +24,7 @@ func add_customer(customer: Customer) -> void:
 	queue_updated.emit()
 	customer_added.emit()
 	customer.at_window = true
-	customer.timer.wait_time = customer.window_wait_time
+	customer.timer.wait_time = Stats.customer_wait_time_window
 	customer.timer.start()
 	customer.waiting_indicator.show()
 
@@ -44,10 +44,10 @@ func remove_front_customer(customer_happy: bool) -> void:
 
 	if customer_happy:
 		Global.score_update_message = "fixed customer's drink"
-		Global.money += 3
+		Stats.daily_profit += 3
 	else:
 		Global.score_update_message = "customer left"
-		Global.customer_score -= 3
+		Stats.employee_rating -= 3
 
 
 func get_front_customer() -> Customer:

@@ -35,7 +35,6 @@ var customers_order: Drink
 var completed_order: Drink
 var waiting_for_response: bool = false
 var drink_score: int = 0
-var time_to_make_drink: float = 4.0
 var drink_correct: bool = false
 var broken_down: bool = false
 
@@ -43,10 +42,11 @@ var broken_down: bool = false
 func _ready() -> void:
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
+	make_drink_button.time_to_hold = Stats.time_to_manually_make_drink
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	timer.timeout.connect(_on_order_finished)
-	timer.wait_time = time_to_make_drink
+	timer.wait_time = Stats.machine_time_to_make_drink
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 	Events.customer_approached_window.connect(_on_customer_approached_window)
@@ -80,7 +80,7 @@ func start_order() -> void:
 	customer_order_indicator.show()
 	timer.start()
 
-	if randf() < 0.2:
+	if randf() < Stats.chance_of_machine_breaking:
 		breakdown_timer.start()
 
 
@@ -128,7 +128,15 @@ func fix_machine() -> void:
 
 
 func _on_order_finished() -> void:
-	completed_order = Global.drinks.pick_random()
+	completed_order = null
+	if randf() < Stats.machine_accuracy:
+		completed_order = customers_order
+	else:
+		while (
+			completed_order == null
+			or completed_order == customers_order
+		):
+			completed_order = Global.drinks.pick_random()
 	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
 	final_order_indicator.text = (
 		"machine made: %s (%s)"
@@ -148,15 +156,14 @@ func _on_accept_button_presssed() -> void:
 	drink_customer_score_label.hide()
 	score_label.show()
 	Global.score_update_message = "sold %s" % completed_order.name
-	Global.money += completed_order.price
+	Stats.daily_profit += completed_order.price
 	await get_tree().create_timer(0.5, false).timeout
 	score_label.hide()
 	drink_customer_score_label.show()
 	Global.score_update_message = "customer rated %s" % completed_order.name
-	Global.customer_score += drink_score
+	Stats.employee_rating += drink_score
 	await get_tree().create_timer(0.5, false).timeout
 	drink_customer_score_label.hide()
-	completed_order = null
 
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)

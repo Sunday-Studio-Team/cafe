@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 				Events.player_caught_sprinting.emit()
 				timer.start()
 				Global.score_update_message = "caught running"
-				Global.customer_score -= Global.penalty_for_sprinting
+				Stats.employee_rating -= Stats.penalty_for_running
 			elif (
 				Input.is_action_pressed("interact")
 				and Global.hovered_interactable != null
@@ -50,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 				Events.player_caught_remaking.emit()
 				timer.start()
 				Global.score_update_message = "caught making drink by hand"
-				Global.customer_score -= Global.penalty_for_remaking_drink
+				Stats.employee_rating -= Stats.penalty_for_handmade_drink
 
 			player_in_spotlight = true
 			break

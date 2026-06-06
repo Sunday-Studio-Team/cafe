@@ -39,7 +39,7 @@ func _ready() -> void:
 		[b]OBJECTIVE[/b] \n make %s while keeping your customer rating (🙂) above %s \n
 		if customers don't get good service, you might have to deal with them personally!
 		p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
-		% [Global.float_to_price(Global.goal_profit), Global.goal_customer_score]
+		% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
 	)
 
 	await get_tree().create_timer(20, false).timeout
@@ -55,10 +55,10 @@ func _physics_process(_delta: float) -> void:
 
 func update_score_indicators() -> void:
 	profit_label.text = (
-		Global.float_to_price(Global.money)
-		+ " (goal: %s)" % Global.float_to_price(Global.goal_profit)
+		Global.float_to_price(Stats.daily_profit)
+		+ " (goal: %s)" % Global.float_to_price(Stats.daily_profit_goal)
 	)
-	customer_happiness_label.text = "🙂 " + str(Global.customer_score) + " (goal: %s)" % Global.goal_customer_score
+	customer_happiness_label.text = "🙂 " + str(Stats.employee_rating) + " (goal: %s)" % Stats.employee_rating_goal
 
 
 func update_time_indicator() -> void:
@@ -148,8 +148,8 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 
 func _on_time_up() -> void:
 	if (
-		Global.customer_score >= Global.goal_customer_score
-		and Global.money >= Global.goal_profit
+		Stats.employee_rating >= Stats.employee_rating_goal
+		and Stats.daily_profit >= Stats.daily_profit_goal
 	):
 		end_text.text = "[color=green][b]you win !"
 	else:
