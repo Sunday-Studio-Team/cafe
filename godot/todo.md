@@ -1,5 +1,9 @@
 # short term
 ## things to do
+- restart button
+- add some kind of resource meter for machines that are depleted as they make drinks but can be refilled
+	- could be specific to some ingredients, like milk meter, coffee meter etc
+	- refilling could be against rules
 - fix safespots from security cameras on middle + right machines
 - add ui notification when customers come to window
 	- just something like a popup that says "❗️🛎️ CUSTOMER CAME TO WINDOW"
