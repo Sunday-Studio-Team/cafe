@@ -78,10 +78,12 @@ func _physics_process(_delta: float) -> void:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
 		reject_button.display_name = "[color=pink]🚫not enough ingredients"
+		make_drink_button.display_name = "[color=pink]🚫no ingredients"
 	else:
 		ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
 		reject_button.display_name = "[color=red]reject drink (retry)"
+		make_drink_button.display_name = "[color=yellow]remake drink by hand"
 
 
 func start_order() -> void:
@@ -215,6 +217,8 @@ func _on_reject_button_pressed() -> void:
 
 
 func _on_make_drink_button_pressed() -> void:
+	if ingredients < Stats.ingredients_per_order:
+		return
 	completed_order = customers_order
 	final_order_indicator.text = (
 		"you made: %s (%s)"
