@@ -194,8 +194,11 @@ transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.9285
 rotation_pause_length = 4.0
 
 [node name="SecurityCam2" parent="." unique_id=245896451 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88471025, 2.6719248, 6.382108)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9847103, 2.6719248, 5.5821085)
 rotation_time = 6.0
+
+[node name="SpotLight3D" parent="SecurityCam2" index="0" unique_id=1348601655]
+spot_angle = 30.0
 
 [node name="SecurityCam3" parent="." unique_id=1837350934 instance=ExtResource("12_dg77c")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.8847103, 2.6719248, 6.8821087)
@@ -426,4 +429,5 @@ handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
+[editable path="SecurityCam2"]
 [editable path="SecurityCam4"]
