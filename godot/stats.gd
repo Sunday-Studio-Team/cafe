@@ -31,7 +31,7 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		Global.score_update_message = ""
-var daily_profit_goal := 30.0
+var daily_profit_goal := 22.0
 var employee_rating := 0:
 	set(new_value):
 		if new_value == employee_rating:
