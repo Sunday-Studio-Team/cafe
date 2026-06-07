@@ -23,6 +23,7 @@ var score_update_message: String
 var player_in_cctv_los := false
 var minigame_active := false
 var holding_ingredients := false
+var day := 1
 
 
 func _ready() -> void:

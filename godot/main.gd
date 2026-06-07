@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var machines: Array[Machine]
+@export var side_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
@@ -27,8 +28,15 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	# we have to set these manually here so if we reload the scene theyll reset
-	Stats.daily_profit = 0
-	Stats.employee_rating = 0
+	Stats.daily_profit = 1000
+	Stats.employee_rating = 1000
+
+	match Global.day:
+		1:
+			pass
+		2:
+			machines.append(side_machine)
+			side_machine.show()
 
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test
@@ -56,6 +64,11 @@ func _on_customer_spawn_timer_timeout() -> void:
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
 	await get_tree().create_timer(5, false).timeout
+	if (
+		Stats.daily_profit > Stats.daily_profit_goal
+		and Stats.employee_rating > Stats.employee_rating_goal
+	):
+		Global.day += 1
 	get_tree().call_deferred("reload_current_scene")
 
 
