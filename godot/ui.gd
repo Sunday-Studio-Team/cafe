@@ -113,7 +113,6 @@ func update_cctv_indicator() -> void:
 		cctv_indicator.modulate = Color.WHITE
 
 
-# TODO: rework this into a generic alert thing that can show when machine broke too
 func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():
 		alert_tween.kill()
