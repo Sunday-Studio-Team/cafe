@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="4_llj37"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
+[ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -58,7 +59,7 @@ albedo_color = Color(1, 0.57254905, 0.57254905, 0.6862745)
 material = SubResource("StandardMaterial3D_yuuq8")
 size = Vector3(0.15, 0.15, 0.15)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "add_ing_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "add_ing_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -75,6 +76,7 @@ waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
 breakdown_sound = NodePath("BreakdownSound")
+no_ingredients_sound = NodePath("NoIngredientsSound")
 drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
 ingredients_bar = NodePath("IngredientsMeter/SubViewport/MarginContainer/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
@@ -264,3 +266,7 @@ shape = SubResource("BoxShape3D_loq51")
 stream = ExtResource("6_llj37")
 volume_db = -5.0
 max_db = 0.0
+
+[node name="NoIngredientsSound" type="AudioStreamPlayer3D" parent="." unique_id=689608729]
+stream = ExtResource("7_6qesk")
+volume_db = -5.0

@@ -120,7 +120,7 @@ func _on_alert_posted(message: String) -> void:
 	alert_tween = create_tween()
 
 	alert_indicator.text = message
-	alert_tween.tween_property(alert_indicator, ^"modulate:a", 0, 2).from(1)
+	alert_tween.tween_property(alert_indicator, "modulate:a", 0, 2).from(1)
 
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money

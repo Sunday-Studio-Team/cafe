@@ -16,6 +16,7 @@ extends Node3D
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
+@export var no_ingredients_sound: AudioStreamPlayer3D
 @export var drink_customer_score_label: Label3D
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
@@ -151,6 +152,9 @@ func fix_machine() -> void:
 
 func _on_order_finished() -> void:
 	ingredients -= Stats.ingredients_per_order
+	if ingredients <= Stats.ingredients_per_order:
+		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
+		no_ingredients_sound.play()
 	completed_order = null
 	if randf() < Stats.machine_accuracy:
 		completed_order = customers_order
@@ -232,7 +236,12 @@ func _on_add_ing_button_pressed() -> void:
 	if ingredients > max_ingredients:
 		ingredients = max_ingredients
 
-	if timer.is_stopped() and not broken_down and not waiting_for_response:
+	if (
+		timer.is_stopped()
+		and customer
+		and not broken_down
+		and not waiting_for_response
+	):
 		start_order()
 
 
