@@ -8,6 +8,8 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var window: Node3D
+@export var ui: CanvasLayer
+@export var day_indicator: Label
 #Minigame
 @export var minigame_controller: CanvasLayer
 
@@ -28,15 +30,23 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	# we have to set these manually here so if we reload the scene theyll reset
-	Stats.daily_profit = 1000
-	Stats.employee_rating = 1000
+	Stats.daily_profit = 0
+	Stats.employee_rating = 0
 
 	match Global.day:
 		1:
 			pass
 		2:
+			Stats.daily_profit_goal = 30
 			machines.append(side_machine)
 			side_machine.show()
+
+	ui.hide()
+	day_indicator.text = "DAY %s" % Global.day
+	day_indicator.show()
+	await get_tree().create_timer(3, false).timeout
+	ui.show()
+	day_indicator.hide()
 
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test
@@ -69,7 +79,10 @@ func _on_game_timer_timeout() -> void:
 		and Stats.employee_rating > Stats.employee_rating_goal
 	):
 		Global.day += 1
-	get_tree().call_deferred("reload_current_scene")
+	if Global.day == Global.final_day:
+		get_tree().quit()
+	else:
+		get_tree().call_deferred("reload_current_scene")
 
 
 func _on_customer_approached_machine(customer: Customer) -> void:

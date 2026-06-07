@@ -24,6 +24,9 @@ var player_in_cctv_los := false
 var minigame_active := false
 var holding_ingredients := false
 var day := 1
+# this just defines the max day where we quit if we beat it
+# (instead of loading the next day)
+var final_day := 2
 
 
 func _ready() -> void:

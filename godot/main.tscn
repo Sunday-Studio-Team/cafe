@@ -60,7 +60,7 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "minigame_controller")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 side_machine = NodePath("Machines/Machine")
@@ -70,6 +70,8 @@ spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
 window = NodePath("Window")
+ui = NodePath("UI")
+day_indicator = NodePath("DayIndicator/Label")
 minigame_controller = NodePath("MinigameController")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
@@ -484,6 +486,20 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
+
+[node name="DayIndicator" type="CanvasLayer" parent="." unique_id=1793268735]
+
+[node name="Label" type="Label" parent="DayIndicator" unique_id=513552188]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 512
+text = "DAY 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [editable path="SecurityCam2"]
 [editable path="SecurityCam4"]

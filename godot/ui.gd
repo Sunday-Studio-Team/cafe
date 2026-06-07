@@ -43,16 +43,30 @@ func _ready() -> void:
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_indicator.modulate.a = 0
 
-	objective.text = (
-		"you are the new manager of a fully automated cafe!
-		(flip the sign at the desk to open the shop and start your shift)
+	# we wait here to make sure some global vars like profit goal
+	# get set before we show them
+	await get_tree().process_frame
+	match Global.day:
+		1:
+			objective.text = (
+				"you are the new manager of a fully automated cafe!
+				(flip the sign at the desk to open the shop and start your shift)
 
-		[b]SHIFT OBJECTIVE[/b]
-		make %s while keeping your employee rating (🙂) above %s
+				[b]SHIFT OBJECTIVE[/b]
+				make %s while keeping your employee rating (🙂) above %s
 
-		p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
-		% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
-	)
+				p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
+				% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+			)
+		2:
+			objective.text = (
+				"your boss has installed a new machine! it's located around the corner on the left.
+				(your daily profit goal has been adjusted accordingly.)
+
+				[b]SHIFT OBJECTIVE[/b]
+				make %s while keeping your employee rating (🙂) above %s"
+				% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+			)
 
 
 func _physics_process(_delta: float) -> void:
