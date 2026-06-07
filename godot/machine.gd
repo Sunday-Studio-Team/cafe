@@ -149,7 +149,7 @@ func fix_machine() -> void:
 	broken_down = false
 	if customer:
 		customer_order_indicator.show()
-		timer.start()
+		timer.paused = false
 
 
 func _on_order_finished() -> void:
@@ -251,7 +251,7 @@ func _on_add_ing_button_pressed() -> void:
 
 func _on_breakdown_timer_timeout() -> void:
 	customer_order_indicator.hide()
-	timer.stop()
+	timer.paused = true
 	fix_machine_button.show()
 	broken_down = true
 	breakdown_sound.play()
