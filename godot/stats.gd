@@ -36,6 +36,8 @@ var employee_rating := 0:
 
 		Events.customer_score_updated.emit(new_value, employee_rating)
 		employee_rating = new_value
+		if employee_rating < 0:
+			employee_rating = 0
 
 		# (see comment for same lines in above func)
 		await get_tree().process_frame
