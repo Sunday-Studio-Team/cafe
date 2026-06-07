@@ -2,11 +2,14 @@ extends Node
 ## the idea here is to refactor a lot of the game's logic so important stats
 ## can be easily read, edited, and updated from here
 
+const DEFAULT_MOVE_SPEED := 1.0
+const SPRINT_MOVE_SPEED := 5.0
+
 var chance_of_machine_breaking := 0.2
 ## chance of machine making correct drink
 var machine_accuracy := 0.25
 var machine_time_to_make_drink := 4.0
-var customer_wait_time_machine := 20.0
+var customer_wait_time_machine := 30.0
 var customer_wait_time_window := 30.0
 var time_to_manually_make_drink := 3.0
 var penalty_for_running := 4

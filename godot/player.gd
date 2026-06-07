@@ -3,8 +3,6 @@ extends CharacterBody3D
 
 const ACCELERATION := 25.0
 const DECELERATION := 25.0
-const DEFAULT_MOVE_SPEED := 1.25
-const SPRINT_MOVE_SPEED := 4.5
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
@@ -13,7 +11,7 @@ const STRIDE_LENGTH := 0.75
 @export var ingredients_bag: MeshInstance3D
 
 # this is a var separate to the const cos it changes when sprint etc
-var move_speed := DEFAULT_MOVE_SPEED
+var move_speed := Stats.DEFAULT_MOVE_SPEED
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -128,9 +126,9 @@ func handle_hovered_interactable() -> void:
 
 func handle_sprint() -> void:
 	if Input.is_action_pressed("sprint"):
-		move_speed = SPRINT_MOVE_SPEED
+		move_speed = Stats.SPRINT_MOVE_SPEED
 	else:
-		move_speed = DEFAULT_MOVE_SPEED
+		move_speed = Stats.DEFAULT_MOVE_SPEED
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

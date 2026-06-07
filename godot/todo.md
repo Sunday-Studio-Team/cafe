@@ -1,5 +1,7 @@
 # short term
 ## things to do
+- add a meter that fills up while in spotlights before camera actually 'sees' us
+- make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
 - rebalance to make money goal harder to hit ?
 - build the structure of days/shifts (for now, full game will be 5 shifts/days over a week)
 	- start of game: use laptop to read emails, buy items
