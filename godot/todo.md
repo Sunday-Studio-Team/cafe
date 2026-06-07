@@ -1,8 +1,5 @@
 # short term
 ## things to do
-- add some kind of resource meter for machines that are depleted as they make drinks but can be refilled
-	- could be specific to some ingredients, like milk meter, coffee meter etc
-	- refilling could be against rules
 - rebalance to make money goal harder to hit ?
 - build the structure of days/shifts (for now, full game will be 5 shifts/days over a week)
 	- start of game: use laptop to read emails, buy items
