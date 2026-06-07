@@ -207,6 +207,7 @@ func _on_breakdown_timer_timeout() -> void:
 	fix_machine_button.show()
 	broken_down = true
 	breakdown_sound.play()
+	Events.alert_posted.emit("❗️⚙️ machine broke down")
 
 
 func _on_fix_machine_button_pressed() -> void:

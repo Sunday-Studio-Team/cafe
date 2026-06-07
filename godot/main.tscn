@@ -224,7 +224,7 @@ one_shot = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "caught_printing_label", "caught_remaking_label", "cctv_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "cctv_indicator", "alert_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Customer")
@@ -239,9 +239,8 @@ end_text = NodePath("MarginContainer/EndText")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
-caught_printing_label = NodePath("MarginContainer/CaughtSprinting")
-caught_remaking_label = NodePath("MarginContainer/CaughtRemaking")
 cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CctvIndicator")
+alert_indicator = NodePath("MarginContainer/VBoxContainer/Alert")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -289,10 +288,14 @@ text = "[b][i]controls [/i][/b]
 fit_content = true
 horizontal_alignment = 2
 
+[node name="Alert" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=1414946882]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "❗️🛎️ customer complained"
+
 [node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.9
 
 [node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1696852801]
 layout_mode = 2
@@ -378,22 +381,6 @@ size_flags_vertical = 8
 theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
-horizontal_alignment = 1
-
-[node name="CaughtSprinting" type="Label" parent="UI/MarginContainer" unique_id=1280837841]
-visible = false
-modulate = Color(0.7314912, 0, 0.07300905, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "-1 🙂caught running"
-horizontal_alignment = 1
-
-[node name="CaughtRemaking" type="Label" parent="UI/MarginContainer" unique_id=2091099460]
-visible = false
-modulate = Color(0.7314912, 0, 0.07300905, 1)
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "-1 🙂caught remaking"
 horizontal_alignment = 1
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]

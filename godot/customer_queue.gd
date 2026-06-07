@@ -17,6 +17,7 @@ func _ready() -> void:
 
 
 func add_customer(customer: Customer) -> void:
+	Events.alert_posted.emit("❗️🛎️ customer complained")
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(func(): remove_front_customer(false))
 	customer.drink_made_at_window.connect(func(): remove_front_customer(true))

@@ -2,7 +2,7 @@ extends Node3D
 
 @export var customer_queue: CustomerQueue
 @export var bell_sound: AudioStreamPlayer3D
-@export var customer_complained_indicator: Label3D
+@export var customer_alert_indicator: Label3D
 
 
 func _ready() -> void:

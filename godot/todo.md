@@ -4,8 +4,6 @@
 	- could be specific to some ingredients, like milk meter, coffee meter etc
 	- refilling could be against rules
 - fix safespots from security cameras on middle + right machines
-- add ui notification when customers come to window
-	- just something like a popup that says "❗️🛎️ CUSTOMER CAME TO WINDOW"
 - rebalance to make money goal harder to hit ?
 - build the structure of days/shifts (for now, full game will be 5 shifts/days over a week)
 	- start of game: use laptop to read emails, buy items

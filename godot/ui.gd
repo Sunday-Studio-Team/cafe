@@ -15,11 +15,11 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
-@export var caught_printing_label: Label
-@export var caught_remaking_label: Label
 @export var cctv_indicator: TextureRect
+@export var alert_indicator: Label
 
 var score_update_tween: Tween
+var alert_tween: Tween
 
 
 func _ready() -> void:
@@ -38,8 +38,10 @@ func _ready() -> void:
 			await get_tree().create_timer(5, false).timeout
 			objective.hide()
 	)
+	Events.alert_posted.connect(func(message): _on_alert_posted(message))
 
 	score_update_label.modulate = Color.TRANSPARENT
+	alert_indicator.modulate.a = 0
 
 	objective.text = (
 		"you are the new manager of a fully automated cafe!
@@ -109,6 +111,16 @@ func update_cctv_indicator() -> void:
 		cctv_indicator.modulate = Color.RED
 	else:
 		cctv_indicator.modulate = Color.WHITE
+
+
+# TODO: rework this into a generic alert thing that can show when machine broke too
+func _on_alert_posted(message: String) -> void:
+	if alert_tween != null and alert_tween.is_running():
+		alert_tween.kill()
+	alert_tween = create_tween()
+
+	alert_indicator.text = message
+	alert_tween.tween_property(alert_indicator, ^"modulate:a", 0, 2).from(1)
 
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money
