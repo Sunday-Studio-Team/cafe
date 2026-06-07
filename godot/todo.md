@@ -1,5 +1,6 @@
 # short term
 ## things to do
+- hide ui add big DAY 1 etc indicator when spawning in (hide after couple seconds and show ui)
 - add a meter that fills up while in spotlights before camera actually 'sees' us
 - make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
 - rebalance to make money goal harder to hit ?
