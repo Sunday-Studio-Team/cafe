@@ -11,6 +11,7 @@ var customer_wait_time_window := 30.0
 var time_to_manually_make_drink := 3.0
 var penalty_for_running := 4
 var penalty_for_handmade_drink := 5
+var penalty_for_holding_ingredients := 3
 var daily_profit := 0.0:
 	set(new_value):
 		if new_value == daily_profit:

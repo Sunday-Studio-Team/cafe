@@ -36,7 +36,6 @@ func _physics_process(_delta: float) -> void:
 		var collider = r.get_collider()
 		if collider == Global.player:
 			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
-				Events.player_caught_sprinting.emit()
 				timer.start()
 				Global.score_update_message = "caught running"
 				Stats.employee_rating -= Stats.penalty_for_running
@@ -47,10 +46,15 @@ func _physics_process(_delta: float) -> void:
 				# that wont break if things are renamed etc
 				and Global.hovered_interactable.display_name.contains("remake drink")
 			):
-				Events.player_caught_remaking.emit()
 				timer.start()
 				Global.score_update_message = "caught making drink by hand"
 				Stats.employee_rating -= Stats.penalty_for_handmade_drink
+			elif (
+				Global.holding_ingredients
+			):
+				Global.score_update_message = "caught stealing ingredients"
+				Stats.employee_rating -= Stats.penalty_for_holding_ingredients
+				timer.start()
 
 			player_in_spotlight = true
 			break

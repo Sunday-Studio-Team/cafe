@@ -15,8 +15,6 @@ signal time_up
 signal money_updated(new_value: float, old_value: float)
 signal customer_score_updated(new_value: int, old_value: int)
 signal alert_posted(message: String)
-signal player_caught_sprinting
-signal player_caught_remaking
 # minigames
 signal minigame_active
 signal minigame_cancelled
