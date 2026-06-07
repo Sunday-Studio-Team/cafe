@@ -7,7 +7,14 @@ extends Node
 @export var full_wrong_drink: Drink
 
 var player: Player
-var hovered_interactable: Interactable
+var hovered_interactable: Interactable:
+	get():
+		if hovered_interactable == null:
+			return
+		elif not hovered_interactable.is_inside_tree():
+			return null
+		else:
+			return hovered_interactable
 var main_scene: Node3D
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
@@ -15,6 +22,7 @@ var drinks: Array[Drink]
 var score_update_message: String
 var player_in_cctv_los := false
 var minigame_active := false
+var holding_ingredients := false
 
 
 func _ready() -> void:

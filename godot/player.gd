@@ -10,6 +10,7 @@ const STRIDE_LENGTH := 0.75
 @export var camera: Camera3D
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
+@export var ingredients_bag: MeshInstance3D
 
 # this is a var separate to the const cos it changes when sprint etc
 var move_speed := DEFAULT_MOVE_SPEED
@@ -45,6 +46,7 @@ func _physics_process(delta: float) -> void:
 	#handle_footstep_sounds()
 	#tilt_camera()
 	move_and_slide()
+	handle_ingredients_bag_visibility()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -150,3 +152,7 @@ func tilt_camera() -> void:
 
 	var local_velocity = basis.transposed() * velocity
 	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
+
+
+func handle_ingredients_bag_visibility() -> void:
+	ingredients_bag.visible = Global.holding_ingredients

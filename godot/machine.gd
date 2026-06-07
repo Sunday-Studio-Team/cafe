@@ -11,11 +11,14 @@ extends Node3D
 @export var make_drink_button: Interactable
 @export var accept_button: Interactable
 @export var reject_button: Interactable
+@export var add_ing_button: Interactable
 @export var waiting_approval_indicator: Label3D
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var drink_customer_score_label: Label3D
+@export var ingredients_bar: ProgressBar
+@export var ing_too_low_label: Label3D
 
 var customer: Customer:
 	set(new_customer):
@@ -37,11 +40,14 @@ var waiting_for_response: bool = false
 var drink_score: int = 0
 var drink_correct: bool = false
 var broken_down: bool = false
+var max_ingredients: int = 100
+var ingredients = max_ingredients
 
 
 func _ready() -> void:
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
+	add_ing_button.interacted.connect(_on_add_ing_button_pressed)
 	make_drink_button.time_to_hold = Stats.time_to_manually_make_drink
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
@@ -64,11 +70,27 @@ func _physics_process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
+	add_ing_button.visible = Global.holding_ingredients
 	waiting_approval_indicator.visible = waiting_for_response
+	ingredients_bar.value = ingredients
+	if ingredients_bar.value < Stats.ingredients_per_order:
+		ing_too_low_label.show()
+		ingredients_bar.modulate = Color.RED
+		reject_button.display_name = "[color=pink]🚫not enough ingredients"
+	else:
+		ingredients_bar.modulate = Color.GREEN
+		ing_too_low_label.hide()
+		reject_button.display_name = "[color=red]reject drink (retry)"
 
 
 func start_order() -> void:
+	# (i think) we emit this before returning because it starts the customer
+	# wait timer
 	Events.customer_started_order.emit(customer)
+
+	if ingredients < Stats.ingredients_per_order:
+		return
+
 	if broken_down:
 		return
 
@@ -128,6 +150,7 @@ func fix_machine() -> void:
 
 
 func _on_order_finished() -> void:
+	ingredients -= Stats.ingredients_per_order
 	completed_order = null
 	if randf() < Stats.machine_accuracy:
 		completed_order = customers_order
@@ -179,6 +202,8 @@ func _on_accept_button_presssed() -> void:
 
 
 func _on_reject_button_pressed() -> void:
+	if ingredients < Stats.ingredients_per_order:
+		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
 	timer.start()
 	progress_indicator.show()
@@ -199,6 +224,16 @@ func _on_make_drink_button_pressed() -> void:
 	drink_customer_score_label.hide()
 	await get_tree().create_timer(1, false).timeout
 	_on_accept_button_presssed()
+
+
+func _on_add_ing_button_pressed() -> void:
+	Global.holding_ingredients = false
+	ingredients += Stats.ingredients_per_bag
+	if ingredients > max_ingredients:
+		ingredients = max_ingredients
+
+	if timer.is_stopped() and not broken_down and not waiting_for_response:
+		start_order()
 
 
 func _on_breakdown_timer_timeout() -> void:

@@ -18,6 +18,9 @@ size = Vector3(1, 1.75, 0.5)
 [sub_resource type="ViewportTexture" id="ViewportTexture_6qesk"]
 viewport_path = NodePath("ProgressIndicator/SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_llj37"]
+viewport_path = NodePath("IngredientsMeter/SubViewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qesk"]
 transparency = 1
 albedo_color = Color(0.61960787, 1, 0.60784316, 0.6862745)
@@ -47,7 +50,15 @@ size = Vector3(0.22, 0.15, 0.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ioi8x"]
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "drink_customer_score_label")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
+transparency = 1
+albedo_color = Color(1, 0.57254905, 0.57254905, 0.6862745)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1hddr"]
+material = SubResource("StandardMaterial3D_yuuq8")
+size = Vector3(0.15, 0.15, 0.15)
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "add_ing_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -59,11 +70,14 @@ score_label = NodePath("ScoreLabel")
 make_drink_button = NodePath("MakeDrinkButton")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
+add_ing_button = NodePath("AddIngButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
 breakdown_sound = NodePath("BreakdownSound")
 drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
+ingredients_bar = NodePath("IngredientsMeter/SubViewport/MarginContainer/ProgressBar")
+ing_too_low_label = NodePath("IngTooLow")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -116,6 +130,53 @@ font_size = 24
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27403152, 1.0993592, 1.1413068)
 text = "+1"
 
+[node name="WaitingApprovalIndicator" type="Label3D" parent="." unique_id=879957228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
+text = "order complete!
+waiting for approval ^"
+font_size = 16
+
+[node name="IngredientsMeter" type="Sprite3D" parent="." unique_id=620646674]
+transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, 0.6548946, 0.8076456, 0.76289916)
+texture = SubResource("ViewportTexture_llj37")
+
+[node name="SubViewport" type="SubViewport" parent="IngredientsMeter" unique_id=1895087231]
+transparent_bg = true
+size = Vector2i(100, 25)
+
+[node name="MarginContainer" type="MarginContainer" parent="IngredientsMeter/SubViewport" unique_id=1990942971]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="IngredientsMeter/SubViewport/MarginContainer" unique_id=159870079]
+layout_mode = 2
+size_flags_vertical = 1
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="IngredientsMeter/SubViewport/MarginContainer" unique_id=156026625]
+layout_mode = 2
+text = "ingredients"
+horizontal_alignment = 1
+
+[node name="DrinkCustomerScoreLabel" type="Label3D" parent="." unique_id=434807514]
+transform = Transform3D(0.98999906, -0.14107402, 0, 0.14107402, 0.98999906, 0, 0, 0, 1, 0.65134853, 1.0347569, 1.0733647)
+
+[node name="IngTooLow" type="Label3D" parent="." unique_id=1911355806]
+transform = Transform3D(0.75122947, -0.66004103, 0, 0.66004103, 0.75122947, 0, 0, 0, 1, 1.3784734, 1.4826432, 0.73625064)
+modulate = Color(1, 0.44705883, 0.44705883, 1)
+text = "❗️out of ingredients
+<- please refill!"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="IngTooLow" unique_id=118984038]
+transform = Transform3D(0.74367034, -2.9223102e-08, 0.6685466, -0.6685466, -3.2506854e-08, 0.74367034, -5.663658e-15, -1, -4.3711385e-08, -0.7936928, -0.09933591, 0.026648521)
+light_color = Color(0.9411765, 0.5058824, 0.5058824, 1)
+light_energy = 2.0
+shadow_enabled = true
+
 [node name="AcceptButton" type="Area3D" parent="." unique_id=600817850 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0090001)
 collision_layer = 2
@@ -163,12 +224,6 @@ mesh = SubResource("BoxMesh_llj37")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RejectButton" unique_id=1863884231]
 shape = SubResource("BoxShape3D_loq51")
 
-[node name="WaitingApprovalIndicator" type="Label3D" parent="." unique_id=879957228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
-text = "order complete!
-waiting for approval ^"
-font_size = 16
-
 [node name="FixMachineButton" type="Area3D" parent="." unique_id=885014159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
 visible = false
@@ -192,8 +247,18 @@ light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="DrinkCustomerScoreLabel" type="Label3D" parent="." unique_id=434807514]
-transform = Transform3D(0.98999906, -0.14107402, 0, 0.14107402, 0.98999906, 0, 0, 0, 1, 0.65134853, 1.0347569, 1.0733647)
+[node name="AddIngButton" type="Area3D" parent="." unique_id=644204256 node_paths=PackedStringArray("mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89250463, 0.9077126, 0.89125085)
+script = ExtResource("5_ioi8x")
+display_name = "[color=pink]refill ingredients"
+mesh = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AddIngButton" unique_id=1086695979]
+mesh = SubResource("BoxMesh_1hddr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AddIngButton" unique_id=1205924170]
+shape = SubResource("BoxShape3D_loq51")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
 stream = ExtResource("6_llj37")

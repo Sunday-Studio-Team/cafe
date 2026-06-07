@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mncpikkcm8wd" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
@@ -33,6 +34,15 @@ volumetric_fog_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.29411766)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_yaehf"]
+material = SubResource("StandardMaterial3D_2cqfq")
+text = "store room"
+pixel_size = 0.025
+depth = 0.025
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
@@ -165,6 +175,50 @@ size = Vector3(15, 3, 9)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1.5, -0.05000019)
 operation = 2
 size = Vector3(14.9, 2.9, 9)
+
+[node name="StoreRoom" type="CSGCombiner3D" parent="Building" unique_id=1595009912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.010478, 0, 16.887238)
+use_collision = true
+
+[node name="Room" type="CSGBox3D" parent="Building/StoreRoom" unique_id=909590115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+size = Vector3(5, 3, 7)
+
+[node name="Void" type="CSGBox3D" parent="Building/StoreRoom" unique_id=2142819468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+operation = 2
+size = Vector3(4.9, 2.9, 6.9)
+
+[node name="Door" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1960340312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -3.4918575)
+operation = 2
+size = Vector3(1.5, 2, 0.1)
+
+[node name="Shelf" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1245730084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7501247, 2.9653435)
+size = Vector3(5, 0.1, 1)
+
+[node name="IngredientsBag" parent="Building/StoreRoom/Shelf" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.34170055, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag2" parent="Building/StoreRoom/Shelf" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.6065731, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag3" parent="Building/StoreRoom/Shelf" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 0.34170055, 0.13795435, -0.0006752014)
+
+[node name="IngredientsBag4" parent="Building/StoreRoom/Shelf" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0.024939537, 0.13795435, -0.40213585)
+
+[node name="IngredientsBag5" parent="Building/StoreRoom/Shelf" unique_id=587147078 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.22939682, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag6" parent="Building/StoreRoom/Shelf" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.8866453, 0.13795435, -0.11124611)
+
+[node name="Sign" type="MeshInstance3D" parent="Building/StoreRoom" unique_id=1748779659]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0216227, 2.1822639, -3.5186043)
+mesh = SubResource("TextMesh_yaehf")
 
 [node name="Desk" parent="Building" unique_id=1519674799 instance=ExtResource("3_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.583761, 0, 5)

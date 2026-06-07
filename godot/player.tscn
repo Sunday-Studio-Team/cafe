@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://c01lyg34g6sxd"]
 
 [ext_resource type="Script" uid="uid://deaoq82qeackq" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cr2t2yoape3ak" path="res://ingredients_bag_model.tscn" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
 height = 1.7
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag")]
 script = ExtResource("1_4flbx")
 camera = NodePath("Camera3D")
 aiming_ray = NodePath("Camera3D/RayCast3D")
+ingredients_bag = NodePath("Camera3D/IngredientsBag")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -26,3 +28,9 @@ collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="IngredientsBag" parent="Camera3D" unique_id=2023250318 instance=ExtResource("2_onrkg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.2521928, -0.24627936, -0.42260942)
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2008160580]

@@ -40,3 +40,5 @@ var employee_rating := 0:
 		await get_tree().process_frame
 		Global.score_update_message = ""
 var employee_rating_goal := 10
+var ingredients_per_order := 22
+var ingredients_per_bag := 50
