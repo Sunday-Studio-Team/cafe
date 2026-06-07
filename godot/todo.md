@@ -18,6 +18,7 @@
 (might have to rework the whole money system to make it make sense tho, since the money stat currently represents the cafe's income, not our pay)
 # longer term
 ## things to do
+- find a way to teach the player how the drink scoring system works (if we keep it)
 - change timer to a 12h clock with shift end time
 - rework machine UI into a 2d page (instead of 3d buttons)
 - add some sounds for:
