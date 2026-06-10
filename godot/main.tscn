@@ -296,14 +296,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "win_shift_sound", "lose_shift_sound", "cctv_indicator", "alert_indicator")]
 script = ExtResource("5_lquwl")
-profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Money")
-customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Customer")
+profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
+customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer")
 score_update_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/ScoreUpdate")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/TimeLeft")
+time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer2/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 end_text = NodePath("MarginContainer/EndText")
@@ -403,17 +403,20 @@ show_percentage = false
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
 layout_mode = 2
 
-[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1534145091]
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=284724776]
 layout_mode = 2
 
-[node name="Money" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/Scores" unique_id=103958680]
+[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=1534145091]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=103958680]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "$ 0"
 
-[node name="Customer" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/Scores" unique_id=1609379077]
+[node name="Customer" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=1609379077]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -426,7 +429,12 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "+1$ from customer"
 
-[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=481278116]
+[node name="PanelContainer2" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1967076198]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer2" unique_id=481278116]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8

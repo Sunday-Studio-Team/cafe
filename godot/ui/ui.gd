@@ -129,7 +129,7 @@ func update_score_indicators() -> void:
 		Global.float_to_price(Stats.daily_profit)
 		+ " (goal: %s)" % Global.float_to_price(Stats.daily_profit_goal)
 	)
-	customer_happiness_label.text = "🙂 " + str(Stats.employee_rating) + " (goal: %s)" % Stats.employee_rating_goal
+	customer_happiness_label.text = "🙂" + str(Stats.employee_rating) + " (goal: %s)" % Stats.employee_rating_goal
 
 
 func update_time_indicator() -> void:
