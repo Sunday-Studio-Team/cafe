@@ -17,6 +17,7 @@ var choices = [
 	["Green Square", 3],
 	["Red C", 3],
 ]
+var last_click_correct := false
 
 @onready var text_edit = $PanelContainer/Panel/TextEdit
 @onready var timer = $Timer
@@ -29,9 +30,10 @@ func _ready():
 
 #Sets the text randomly
 func set_choice():
-	if successes > 0:
+	if last_click_correct:
 		text_edit.text = "✅"
 		await get_tree().create_timer(0.5, false).timeout
+	last_click_correct = false
 	current_choice = choices.pick_random()
 	text_edit.text = current_choice[0]
 	text_edit.add_theme_color_override("font_color", colors.pick_random())
@@ -56,6 +58,7 @@ func _on_button_pressed():
 	print(successes)
 	if current_choice[1] == 1:
 		successes += 1
+		last_click_correct = true
 		set_choice()
 		if successes >= needed_successes:
 			victory()
@@ -66,6 +69,7 @@ func _on_button_pressed():
 func _on_button_2_pressed():
 	if current_choice[1] == 2:
 		successes += 1
+		last_click_correct = true
 		set_choice()
 		if successes >= needed_successes:
 			victory()
@@ -76,6 +80,7 @@ func _on_button_2_pressed():
 func _on_button_3_pressed():
 	if current_choice[1] == 3:
 		successes += 1
+		last_click_correct = true
 		set_choice()
 		if successes >= needed_successes:
 			victory()
