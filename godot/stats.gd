@@ -2,7 +2,7 @@ extends Node
 ## the idea here is to refactor a lot of the game's logic so important stats
 ## can be easily read, edited, and updated from here
 
-const DEFAULT_MOVE_SPEED := 1.0
+const DEFAULT_MOVE_SPEED := 1.1
 const SPRINT_MOVE_SPEED := 5.0
 
 var chance_of_machine_breaking := 0.2
