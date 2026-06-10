@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
+[ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="15_074og"]
+[ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="16_cegan"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -292,7 +294,7 @@ one_shot = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "win_shift_sound", "lose_shift_sound", "cctv_indicator", "alert_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Customer")
@@ -309,6 +311,8 @@ money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
+win_shift_sound = NodePath("WinShiftSound")
+lose_shift_sound = NodePath("LoseShiftSound")
 cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CctvIndicator")
 alert_indicator = NodePath("MarginContainer/VBoxContainer/Alert")
 
@@ -468,6 +472,14 @@ volume_db = -5.0
 
 [node name="LowTimeSound" type="AudioStreamPlayer" parent="UI" unique_id=170153923]
 stream = ExtResource("14_yaehf")
+volume_db = -5.0
+
+[node name="WinShiftSound" type="AudioStreamPlayer" parent="UI" unique_id=423305280]
+stream = ExtResource("15_074og")
+volume_db = -5.0
+
+[node name="LoseShiftSound" type="AudioStreamPlayer" parent="UI" unique_id=724415653]
+stream = ExtResource("16_cegan")
 volume_db = -5.0
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]

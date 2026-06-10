@@ -17,6 +17,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
+@export var win_shift_sound: AudioStreamPlayer
+@export var lose_shift_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
 @export var alert_indicator: Label
 
@@ -221,11 +223,11 @@ func _on_time_up() -> void:
 		and Stats.daily_profit >= Stats.daily_profit_goal
 	):
 		end_text.text = "[color=green][b]shift complete ![/b]"
+		win_shift_sound.play()
 		if Global.day == Global.final_day:
 			end_text.text += "\nthanks for playing"
 		else:
 			end_text.text += "\nloading next day..."
 	else:
-		end_text.text = (
-			"[color=red][b]shift failed ![/b]\ngame over"
-		)
+		end_text.text = "[color=red][b]shift failed ![/b]\ngame over"
+		lose_shift_sound.play()
