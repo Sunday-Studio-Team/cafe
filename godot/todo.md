@@ -3,7 +3,6 @@
 - can we make setting score not play a sound on day start ?
 - add a meter that fills up while in spotlights before camera actually 'sees' us
 - make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
-- add separate odds for each score (meaning 1/4 chance of -3 points, 1/4 of -1, etc etc instead of just odds of right or wrong)
 - add leftover money (over goal) to our personal wallet (for buying items)
 - build some kind of inventory system to track items we own
 - add some visual effect + ticking sound when timer gets low

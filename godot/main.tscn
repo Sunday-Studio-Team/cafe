@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
 sky_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
@@ -73,6 +75,11 @@ window = NodePath("Window")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
 minigame_controller = NodePath("MinigameController")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
+shape = SubResource("WorldBoundaryShape3D_2cqfq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
