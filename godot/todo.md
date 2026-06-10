@@ -1,6 +1,5 @@
 # short term
 ## things to do
-- can we make setting score not play a sound on day start ?
 - add a meter that fills up while in spotlights before camera actually 'sees' us
 - make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
 - add leftover money (over goal) to our personal wallet (for buying items)

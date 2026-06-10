@@ -48,6 +48,12 @@ func _ready() -> void:
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_indicator.modulate.a = 0
 
+	# we automatically play a sound whenever our points change,
+	# so we mute that sound while we reset our points @ the start of each day
+	# lol
+	var points_sound_volume := lose_points_sound.volume_db
+	lose_points_sound.volume_db = -70
+
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
 	await get_tree().process_frame
@@ -93,6 +99,10 @@ func _ready() -> void:
 		rules_controls.text += "\n- no taking ingredients from store room"
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
+
+	# (we muted this earlier, now we unmute)
+	await get_tree().create_timer(2, false).timeout
+	lose_points_sound.volume_db = points_sound_volume
 
 
 func _physics_process(_delta: float) -> void:
