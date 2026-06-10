@@ -33,13 +33,7 @@ func _ready() -> void:
 	Stats.daily_profit = 0
 	Stats.employee_rating = 0
 
-	match Global.day:
-		1:
-			pass
-		2:
-			Stats.daily_profit_goal = 30
-			machines.append(side_machine)
-			side_machine.show()
+	set_per_day_stuff()
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -54,6 +48,16 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
+
+
+# we reload this main scene to start each day, so we set all the per-day stuff here
+func set_per_day_stuff() -> void:
+	if Global.day >= 2:
+		Stats.daily_profit_goal = 30
+		machines.append(side_machine)
+		side_machine.show()
+	if Global.day >= 3:
+		Global.holding_ingredients_rule = true
 
 
 func _on_customer_spawn_timer_timeout() -> void:

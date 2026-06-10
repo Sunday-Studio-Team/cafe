@@ -11,6 +11,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var game_timer: Timer
 @export var time_left_label: Label
 @export var objective: RichTextLabel
+@export var rules_controls: RichTextLabel
 @export var end_text: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -46,27 +47,46 @@ func _ready() -> void:
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
 	await get_tree().process_frame
-	match Global.day:
-		1:
-			objective.text = (
-				"you are the new manager of a fully automated cafe!
-				(flip the sign at the desk to open the shop and start your shift)
+	if Global.day >= 1:
+		objective.text = (
+			"you are the new manager of a fully automated cafe!
+			(flip the sign at the desk to open the shop and start your shift)
 
-				[b]SHIFT OBJECTIVE[/b]
-				make %s while keeping your employee rating (🙂) above %s
+			[b]SHIFT OBJECTIVE[/b]
+			make %s while keeping your employee rating (🙂) above %s
 
-				p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
-				% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
-			)
-		2:
-			objective.text = (
-				"your boss has installed a new machine! it's located around the corner on the left.
-				(your daily profit goal has been adjusted accordingly.)
+			p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
+			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+		)
+		rules_controls.text = (
+			"[b][i]controls [/i][/b]
+			[b]WASD[/b] move
+			[b]E[/b] interact
+			[b]Shift[/b] sprint
 
-				[b]SHIFT OBJECTIVE[/b]
-				make %s while keeping your employee rating (🙂) above %s"
-				% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
-			)
+			[b][i]rules [/i][/b]
+			- no running
+			- no handmade drinks"
+		)
+	if Global.day >= 2:
+		objective.text = (
+			"your boss has installed a new machine! it's located around the corner on the left.
+			(your daily profit goal has been adjusted accordingly.)
+
+			[b]SHIFT OBJECTIVE[/b]
+			make %s while keeping your employee rating (🙂) above %s"
+			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+		)
+	if Global.day >= 3:
+		objective.text = (
+			"your boss says you're using up too many ingredients.
+			new rule: don't take any more ingredients out of the store room.
+
+			[b]SHIFT OBJECTIVE[/b]
+			make %s while keeping your employee rating (🙂) above %s"
+			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+		)
+		rules_controls.text += "\n- no taking ingredients from store room"
 
 
 func _physics_process(_delta: float) -> void:

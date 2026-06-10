@@ -285,7 +285,7 @@ one_shot = true
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "cctv_indicator", "alert_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "cctv_indicator", "alert_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Scores/Customer")
@@ -296,6 +296,7 @@ hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VB
 game_timer = NodePath("../GameTimer")
 time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
+rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 end_text = NodePath("MarginContainer/EndText")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")

@@ -50,13 +50,11 @@ func _physics_process(_delta: float) -> void:
 				Global.score_update_message = "caught making drink by hand"
 				Stats.employee_rating -= Stats.penalty_for_handmade_drink
 			elif (
-				Global.holding_ingredients
+				Global.holding_ingredients and Global.holding_ingredients_rule
 			):
-				# uncomment to penalise for carrying ingredients
-				pass
-				#Global.score_update_message = "caught stealing ingredients"
-				#Stats.employee_rating -= Stats.penalty_for_holding_ingredients
-				#timer.start()
+				Global.score_update_message = "caught stealing ingredients"
+				Stats.employee_rating -= Stats.penalty_for_holding_ingredients
+				timer.start()
 
 			player_in_spotlight = true
 			break
