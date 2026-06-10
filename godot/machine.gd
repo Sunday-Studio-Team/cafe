@@ -109,7 +109,7 @@ func start_order() -> void:
 		breakdown_timer.start()
 
 
-func make_and_score_drink() -> void:
+func make_random_drink() -> void:
 	completed_order = null
 	drink_score = 0
 	drink_correct = false
@@ -156,6 +156,8 @@ func make_and_score_drink() -> void:
 
 	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
 
+
+func display_drink_score() -> void:
 	score_label.modulate = Color.GREEN
 	score_label.text = Global.float_to_price(completed_order.price)
 
@@ -195,7 +197,8 @@ func _on_order_finished() -> void:
 		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
 
-	make_and_score_drink()
+	make_random_drink()
+	display_drink_score()
 
 	final_order_indicator.text = (
 		"machine made: %s (%s)"
@@ -249,11 +252,12 @@ func _on_make_drink_button_pressed() -> void:
 	if ingredients < Stats.ingredients_per_order:
 		return
 	completed_order = customers_order
+	drink_score = 3
 	final_order_indicator.text = (
 		"you made: %s (%s)"
 		% [completed_order.name, Global.float_to_price(completed_order.price)]
 	)
-	make_and_score_drink()
+	display_drink_score()
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
