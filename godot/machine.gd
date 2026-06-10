@@ -109,15 +109,52 @@ func start_order() -> void:
 		breakdown_timer.start()
 
 
-func score_drink() -> void:
+func make_and_score_drink() -> void:
+	completed_order = null
 	drink_score = 0
 	drink_correct = false
 
-	for element in ["main_ingredient", "liquid", "extra"]:
-		if completed_order.get(element) == customers_order.get(element):
-			drink_score += 1
-		else:
-			drink_score -= 1
+	# here we basically get a random num btwn 0 and 1, then add up the probabilities
+	# we set for each score until we hit that number
+	# (gives us a random drink score based on our probabilities)
+	var ran_num: float = randf()
+	var cumulative_score_chance: float = 0.0
+	for score in Stats.score_chances:
+		cumulative_score_chance += Stats.score_chances[score]
+		if ran_num < cumulative_score_chance:
+			drink_score = score
+			break
+
+	# now we get a random drink that will have that score !
+	var random_drink_score := 0
+	var loops := 0
+	const LOOP_LIMIT := 20
+
+	while (
+		(
+			completed_order == null
+			or random_drink_score != drink_score
+		)
+		and loops < LOOP_LIMIT
+	):
+		var potential_drink_score := 0
+		completed_order = Global.drinks.pick_random()
+		for element in ["main_ingredient", "liquid", "extra"]:
+			if completed_order.get(element) == customers_order.get(element):
+				potential_drink_score += 1
+			else:
+				potential_drink_score -= 1
+		random_drink_score = potential_drink_score
+		loops += 1
+
+	# use a fallback if we couldnt find a drink with that score
+	# (i THINK this can happen but it might be rare)
+	if loops > LOOP_LIMIT:
+		print("no matching drink has the generated drink score (%s) for %s" % [drink_score, completed_order.name])
+		print("choosing a random fallback drink instead - this one has a score of %s" % random_drink_score)
+		drink_score = random_drink_score
+
+	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
 
 	score_label.modulate = Color.GREEN
 	score_label.text = Global.float_to_price(completed_order.price)
@@ -157,22 +194,14 @@ func _on_order_finished() -> void:
 	if ingredients <= Stats.ingredients_per_order:
 		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
-	completed_order = null
-	if randf() < Stats.machine_accuracy:
-		completed_order = customers_order
-	else:
-		while (
-			completed_order == null
-			or completed_order == customers_order
-		):
-			completed_order = Global.drinks.pick_random()
-	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
+
+	make_and_score_drink()
+
 	final_order_indicator.text = (
 		"machine made: %s (%s)"
 		% [completed_order.name, Global.float_to_price(completed_order.price)]
 	)
 	final_order_indicator.show()
-	score_drink()
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
 
@@ -224,7 +253,7 @@ func _on_make_drink_button_pressed() -> void:
 		"you made: %s (%s)"
 		% [completed_order.name, Global.float_to_price(completed_order.price)]
 	)
-	score_drink()
+	make_and_score_drink()
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false

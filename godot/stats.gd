@@ -6,8 +6,14 @@ const DEFAULT_MOVE_SPEED := 1.1
 const SPRINT_MOVE_SPEED := 5.0
 
 var chance_of_machine_breaking := 0.2
-## chance of machine making correct drink
-var machine_accuracy := 0.25
+## chance of each score from machine
+## WARNING: make sure these always sum to 1
+var score_chances: Dictionary = {
+	3: 0.25,
+	1: 0.25,
+	-1: 0.25,
+	-3: 0.25,
+}
 var machine_time_to_make_drink := 4.0
 var customer_wait_time_machine := 30.0
 var customer_wait_time_window := 30.0
