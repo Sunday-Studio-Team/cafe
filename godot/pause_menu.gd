@@ -10,6 +10,7 @@ func _ready() -> void:
 		func():
 			visible = false
 			get_tree().paused = false
+			Global.day = 1
 			get_tree().call_deferred("reload_current_scene")
 	)
 
