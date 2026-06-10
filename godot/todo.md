@@ -3,11 +3,7 @@
 - can we make setting score not play a sound on day start ?
 - add a meter that fills up while in spotlights before camera actually 'sees' us
 - make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
-- rebalance to make money goal harder to hit ?
-- build the structure of days/shifts (for now, full game will be 5 shifts/days over a week)
-	- start of game: use laptop to read emails, buy items
-	- start shift by hitting a button/flipping a sign on door
-	- make something that manages/applies stats + rules + new stuff (like new machines, cameras) on start of each day
+- add separate odds for each score (meaning 1/4 chance of -3 points, 1/4 of -1, etc etc instead of just odds of right or wrong)
 - add leftover money (over goal) to our personal wallet (for buying items)
 - build some kind of inventory system to track items we own
 ## things to figure out
