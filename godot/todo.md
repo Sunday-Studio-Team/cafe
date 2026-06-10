@@ -1,5 +1,9 @@
 # short term
 ## things to do
+- can we make setting score not play a sound on day start ?
+- adjust spotlight speeds + sizes
+- slightly increase walk speed again ?
+- make sure restart button starts on 1st day
 - add a meter that fills up while in spotlights before camera actually 'sees' us
 - make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
 - rebalance to make money goal harder to hit ?

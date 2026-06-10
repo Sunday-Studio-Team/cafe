@@ -83,6 +83,8 @@ func _on_game_timer_timeout() -> void:
 		and Stats.employee_rating > Stats.employee_rating_goal
 	):
 		Global.day += 1
+	else:
+		Global.day = 1
 	if Global.day == Global.final_day + 1:
 		get_tree().quit()
 	else:

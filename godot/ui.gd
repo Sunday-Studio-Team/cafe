@@ -87,6 +87,8 @@ func _ready() -> void:
 			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
 		)
 		rules_controls.text += "\n- no taking ingredients from store room"
+	if Global.day == Global.final_day:
+		objective.text += "\n[color=orange](this will be your final shift!)"
 
 
 func _physics_process(_delta: float) -> void:
@@ -204,6 +206,12 @@ func _on_time_up() -> void:
 		Stats.employee_rating >= Stats.employee_rating_goal
 		and Stats.daily_profit >= Stats.daily_profit_goal
 	):
-		end_text.text = "[color=green][b]you win !"
+		end_text.text = "[color=green][b]shift complete ![/b]"
+		if Global.day == Global.final_day:
+			end_text.text += "\nthanks for playing"
+		else:
+			end_text.text += "\nloading next day..."
 	else:
-		end_text.text = "[color=red][b]you lose !"
+		end_text.text = (
+			"[color=red][b]shift failed ![/b]\ngame over"
+		)
