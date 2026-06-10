@@ -16,11 +16,13 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
+@export var low_time_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
 @export var alert_indicator: Label
 
 var score_update_tween: Tween
 var alert_tween: Tween
+var time_left_warning_played := false
 
 
 func _ready() -> void:
@@ -96,6 +98,18 @@ func _physics_process(_delta: float) -> void:
 	update_interactable_ui()
 	update_time_indicator()
 	update_cctv_indicator()
+	handle_time_left_warning()
+
+
+func handle_time_left_warning() -> void:
+	if (
+		not game_timer.is_stopped()
+		and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
+		and not time_left_warning_played
+	):
+		_on_alert_posted("⏰ time left: %ds" % Stats.TIME_FOR_LOW_TIME_WARNING)
+		low_time_sound.play()
+		time_left_warning_played = true
 
 
 func update_score_indicators() -> void:

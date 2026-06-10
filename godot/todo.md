@@ -5,7 +5,6 @@
 - make something that stops you getting +3 or -3 more than a certain amount of times in a row ?
 - add leftover money (over goal) to our personal wallet (for buying items)
 - build some kind of inventory system to track items we own
-- add some visual effect + ticking sound when timer gets low
 ## things to figure out
 - what other rules can we add ? i think ideally we should have ideas for a few things to add to scale the difficulty or to swap based on what seems fun in testing
 ^ we might paint ourselves into a corner if there arent a lot of fun intuitive ways to expand the main systems

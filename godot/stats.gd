@@ -4,6 +4,7 @@ extends Node
 
 const DEFAULT_MOVE_SPEED := 1.1
 const SPRINT_MOVE_SPEED := 5.0
+const TIME_FOR_LOW_TIME_WARNING := 30.0
 
 var chance_of_machine_breaking := 0.2
 ## chance of each score from machine
