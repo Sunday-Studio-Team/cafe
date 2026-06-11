@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
-[ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/pc/ui.gd" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/end_screen.tscn" id="21_getpj"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
@@ -65,7 +66,7 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 cameras = NodePath("SecurityCams")
@@ -78,6 +79,8 @@ game_timer = NodePath("GameTimer")
 window = NodePath("Window")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
+desk = NodePath("Building/Desk")
+pc_ui = NodePath("PCUI/PC")
 minigame_controller = NodePath("MinigameController")
 test_item = ExtResource("3_82xsv")
 
@@ -531,6 +534,12 @@ vertical_alignment = 1
 
 [node name="EndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
+
+[node name="PCUI" type="CanvasLayer" parent="." unique_id=1232958959]
+
+[node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui") instance=ExtResource("20_82xsv")]
+visible = false
+ui = NodePath("../../UI")
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam4"]

@@ -7,6 +7,7 @@ extends Resource
 
 @export var name: String
 @export var icon: Texture
+@export var price: float = 5
 ## this will be for showing the item physically on the shelf when we own it
 ## (we might actually just show the icon as a 3d sprite, im sorta just sketching here)
 @export var model: PackedScene

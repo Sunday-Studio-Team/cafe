@@ -1,0 +1,36 @@
+extends Control
+
+@export var email_button: Button
+@export var shop_button: Button
+@export var email_app: PCApp
+@export var shop_app: PCApp
+@export var exit_button: Button
+## regular game hud
+@export var ui: CanvasLayer
+
+
+func _ready() -> void:
+	email_button.pressed.connect(_on_email_button_pressed)
+	shop_button.pressed.connect(_on_shop_button_pressed)
+	exit_button.pressed.connect(
+		func():
+			hide()
+			ui.show()
+	)
+	visibility_changed.connect(
+		func():
+			if visible:
+				Global.in_pc_ui = true
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			else:
+				Global.in_pc_ui = false
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	)
+
+
+func _on_email_button_pressed() -> void:
+	email_app.show()
+
+
+func _on_shop_button_pressed() -> void:
+	shop_app.show()

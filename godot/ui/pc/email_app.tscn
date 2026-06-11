@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c3hbk2kct6kc7"]
+
+[ext_resource type="PackedScene" uid="uid://cqa614p1f0ccb" path="res://ui/pc/pc_app.tscn" id="1_yb0su"]
+
+[node name="EmailApp" unique_id=270681436 instance=ExtResource("1_yb0su")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=194945357]
+layout_mode = 2
+
+[node name="Emails" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" index="0" unique_id=1640140603]
+layout_mode = 2

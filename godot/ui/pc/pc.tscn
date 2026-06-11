@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://1efsqsuvbkts"]
+
+[ext_resource type="Script" uid="uid://dp6xi3yg7ev4q" path="res://ui/pc/pc.gd" id="1_yl021"]
+[ext_resource type="Texture2D" uid="uid://bmqsi4w6n2thu" path="res://sprites/email_icon.png" id="2_am8ka"]
+[ext_resource type="Texture2D" uid="uid://d3nmgsusj5d7c" path="res://sprites/shop_icon.png" id="3_qefv1"]
+[ext_resource type="PackedScene" uid="uid://bgyc1mnye0hph" path="res://ui/pc/shop_app.tscn" id="4_klsw4"]
+[ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
+
+[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yl021")
+email_button = NodePath("MarginContainer/Apps/Email")
+shop_button = NodePath("MarginContainer/Apps/Shop")
+email_app = NodePath("MarginContainer/EmailApp")
+shop_app = NodePath("MarginContainer/ShopApp")
+exit_button = NodePath("MarginContainer/Exit")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233319173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Background" type="ColorRect" parent="MarginContainer" unique_id=645540393]
+layout_mode = 2
+color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+
+[node name="Apps" type="HBoxContainer" parent="MarginContainer" unique_id=620486221]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Email" type="Button" parent="MarginContainer/Apps" unique_id=99455866]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "email"
+icon = ExtResource("2_am8ka")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Shop" type="Button" parent="MarginContainer/Apps" unique_id=58281754]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "shop"
+icon = ExtResource("3_qefv1")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="ShopApp" parent="MarginContainer" unique_id=270681436 instance=ExtResource("4_klsw4")]
+visible = false
+layout_mode = 2
+
+[node name="EmailApp" parent="MarginContainer" unique_id=1865286583 instance=ExtResource("5_k03dd")]
+visible = false
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="MarginContainer" unique_id=114216245]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "exit"

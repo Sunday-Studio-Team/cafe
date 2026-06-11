@@ -43,7 +43,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Global.hovered_interactable != self or not enabled:
+	if (
+		Global.hovered_interactable != self
+		or not enabled
+		or Global.in_pc_ui
+		or Global.minigame_active
+	):
 		if mesh:
 			mesh.material_overlay = null
 		if not keep_progress_on_interrupt:

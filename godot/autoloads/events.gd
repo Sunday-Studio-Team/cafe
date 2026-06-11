@@ -16,6 +16,7 @@ signal end_screen_finished
 signal money_updated(new_value: float, old_value: float)
 signal customer_score_updated(new_value: int, old_value: int)
 signal alert_posted(message: String)
+signal items_updated
 # minigames
 signal minigame_active
 signal minigame_cancelled

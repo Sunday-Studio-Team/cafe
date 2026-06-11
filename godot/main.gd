@@ -11,6 +11,8 @@ extends Node3D
 @export var window: Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
+@export var desk: Interactable
+@export var pc_ui: Control
 #Minigame
 @export var minigame_controller: CanvasLayer
 @export var test_item: Item
@@ -27,16 +29,18 @@ func _ready() -> void:
 	Events.shift_started.connect(_on_shift_started)
 	Events.customer_approached_machine.connect(_on_customer_approached_machine)
 
+	desk.interacted.connect(_on_desk_interacted)
+
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
 
 	# we have to set these manually here so if we reload the scene theyll reset
-	Stats.daily_profit = 0
-	Stats.employee_rating = 0
+	Stats.daily_profit = 100
+	Stats.employee_rating = 100
 
 	set_per_day_stuff()
-	apply_item_effects()
+	#apply_item_effects()
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -140,3 +144,8 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
+
+
+func _on_desk_interacted() -> void:
+	ui.hide()
+	pc_ui.show()

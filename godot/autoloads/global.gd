@@ -25,6 +25,7 @@ var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
 var minigame_active := false
+var in_pc_ui := false
 var holding_ingredients := false
 var day := 1
 # this just defines the max day where we quit if we beat it
