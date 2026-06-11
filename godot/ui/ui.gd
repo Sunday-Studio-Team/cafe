@@ -63,22 +63,31 @@ func _ready() -> void:
 			(flip the sign at the desk to open the shop and start your shift)
 
 			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s
-
-			p.s. your boss is watching on the security cameras, so follow the [b][i]rules[/i][/b]."
+			make %s while keeping your employee rating (🙂) above %s"
 			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
 		)
 		rules_controls.text = (
 			"[b][i]controls [/i][/b]
 			[b]WASD[/b] move
 			[b]E[/b] interact
-			[b]Shift[/b] sprint
+			[b]Shift[/b] sprint"
+		)
+		cctv_indicator.hide()
+	if Global.day >= 2:
+		objective.text = (
+			"your boss has added some security cameras to make sure you follow the [i]rules[/i]
 
-			[b][i]rules [/i][/b]
+			[b]SHIFT OBJECTIVE[/b]
+			make %s while keeping your employee rating (🙂) above %s"
+			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+		)
+		rules_controls.text += (
+			"\n[b][i]rules [/i][/b]
 			- no running
 			- no handmade drinks"
 		)
-	if Global.day >= 2:
+		cctv_indicator.show()
+	if Global.day >= 3:
 		objective.text = (
 			"your boss has installed a new machine! it's located around the corner on the left.
 			(your daily profit goal has been adjusted accordingly.)
@@ -87,7 +96,7 @@ func _ready() -> void:
 			make %s while keeping your employee rating (🙂) above %s"
 			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
 		)
-	if Global.day >= 3:
+	if Global.day >= 4:
 		objective.text = (
 			"your boss says you're using up too many ingredients.
 			new rule: don't take any more ingredients out of the store room.

@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var machines: Array[Machine]
+@export var cameras: Node3D
 @export var side_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
@@ -52,11 +53,20 @@ func _ready() -> void:
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
+	if Global.day >= 1:
+		game_timer.wait_time = 90
+		Stats.chance_of_machine_breaking = 0.3
+		Stats.daily_profit_goal = 20
+		cameras.hide()
 	if Global.day >= 2:
+		game_timer.wait_time = 120
+		Stats.chance_of_machine_breaking = 0.2
+		cameras.show()
+	if Global.day >= 3:
 		Stats.daily_profit_goal = 30
 		machines.append(side_machine)
 		side_machine.show()
-	if Global.day >= 3:
+	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 
 

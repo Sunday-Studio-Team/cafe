@@ -26,6 +26,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	# if cameras are hidden, treat that as them being disabled
+	if not is_visible_in_tree():
+		return
+
 	if not timer.is_stopped():
 		spotlight.light_color = Color.DIM_GRAY
 		return

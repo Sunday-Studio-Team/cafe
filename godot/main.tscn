@@ -65,9 +65,10 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "minigame_controller")]
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
+cameras = NodePath("SecurityCams")
 side_machine = NodePath("Machines/Machine")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
@@ -257,28 +258,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3.8)
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4912045, 0, 4)
 
-[node name="SecurityCam" parent="." unique_id=557976636 instance=ExtResource("12_dg77c")]
+[node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
+
+[node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.6975236, 4.209534)
 rotation_pause_length = 4.0
 
-[node name="SecurityCam2" parent="." unique_id=245896451 instance=ExtResource("12_dg77c")]
+[node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9847103, 2.6719248, 5.5821085)
 rotation_time = 2.0
 rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCam2" index="0" unique_id=1348601655]
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam2" index="0" unique_id=1348601655]
 spot_angle = 25.0
 
-[node name="SecurityCam3" parent="." unique_id=1837350934 instance=ExtResource("12_dg77c")]
+[node name="SecurityCam3" parent="SecurityCams" unique_id=1837350934 instance=ExtResource("12_dg77c")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.8847103, 2.6719248, 6.8821087)
 rotation_amount = 45.0
 rotation_time = 2.0
 rotation_pause_length = 0.0
 
-[node name="SecurityCam4" parent="." unique_id=1261470041 instance=ExtResource("12_dg77c")]
+[node name="SecurityCam4" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
 transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.086619, 2.6719248, 0.7078019)
 
-[node name="SpotLight3D" parent="SecurityCam4" index="0" unique_id=1348601655]
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam4" index="0" unique_id=1348601655]
 spot_angle = 25.0
 
 [node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
@@ -535,5 +538,5 @@ text = "DAY 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[editable path="SecurityCam2"]
-[editable path="SecurityCam4"]
+[editable path="SecurityCams/SecurityCam2"]
+[editable path="SecurityCams/SecurityCam4"]
