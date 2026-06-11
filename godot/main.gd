@@ -13,6 +13,7 @@ extends Node3D
 @export var day_indicator: Label
 #Minigame
 @export var minigame_controller: CanvasLayer
+@export var test_item: Item
 
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func _ready() -> void:
 	Stats.employee_rating = 0
 
 	set_per_day_stuff()
+	apply_item_effects()
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -49,6 +51,18 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
+
+
+func apply_item_effects() -> void:
+	# gives us a test item that just makes us run faster
+	#Global.owned_items.append(test_item)
+
+	for item in Global.owned_items:
+		for stat in item.stat_bonuses:
+			var current_stat = Stats.get(stat)
+			Stats.set(stat, current_stat + item.stat_bonuses[stat])
+		for rule in item.rules:
+			Global.set(rule, item.rules[rule])
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here

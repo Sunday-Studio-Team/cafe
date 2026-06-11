@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://mncpikkcm8wd" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
+[ext_resource type="Resource" uid="uid://cp11d8uyq4xbk" path="res://items/test/test_item.tres" id="3_82xsv"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
@@ -79,6 +80,7 @@ window = NodePath("Window")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
 minigame_controller = NodePath("MinigameController")
+test_item = ExtResource("3_82xsv")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
 

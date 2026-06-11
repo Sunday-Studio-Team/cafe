@@ -3,6 +3,7 @@ extends Node
 # NOTE: i dont think folders are given UIDs so im not sure if theres a way
 # to get a ref to a folder that wont break if we move it : (
 @export_dir var drinks_folder_path: String
+@export_dir var items_folder_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 
@@ -19,6 +20,8 @@ var main_scene: Node3D
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
+var items: Array[Item]
+var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
 var minigame_active := false
@@ -33,6 +36,7 @@ var holding_ingredients_rule := false
 
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
+	items.assign(load_resources_from_folder(items_folder_path))
 
 
 func _physics_process(_delta: float) -> void:
