@@ -2,13 +2,15 @@ extends Node
 ## the idea here is to refactor a lot of the game's logic so important stats
 ## can be easily read, edited, and updated from here
 
-const DEFAULT_MOVE_SPEED := 1.2
-const SPRINT_MOVE_SPEED := 5.0
 const TIME_FOR_LOW_TIME_WARNING := 30.0
 
+var default_move_speed := 1.2
+var sprint_move_speed := 5.0
 var chance_of_machine_breaking := 0.2
 ## chance of each score from machine
-## WARNING: make sure these always sum to 1
+## WARNING: make sure these always sum to 1 (or actually i can probably rework
+## the logic to allow them to not sum to 1, since that would be easier
+## for items etc that adjust the odds
 var score_chances: Dictionary = {
 	3: 0.25,
 	1: 0.25,
