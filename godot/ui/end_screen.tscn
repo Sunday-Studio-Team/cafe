@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://c1vvwndvemdbo"]
+
+[ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/end_screen.gd" id="1_70k24"]
+[ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_7ibj4"]
+[ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_ayll7"]
+
+[sub_resource type="Theme" id="Theme_70k24"]
+default_font_size = 128
+
+[node name="EndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound")]
+process_mode = 3
+script = ExtResource("1_70k24")
+times_up = NodePath("MarginContainer/TimesUp")
+shift_cleared = NodePath("MarginContainer/ShiftCleared")
+shift_failed = NodePath("MarginContainer/ShiftFailed")
+win_shift_sound = NodePath("WinShiftSound")
+lose_shift_sound = NodePath("LoseShiftSound")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme = SubResource("Theme_70k24")
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="TimesUp" type="RichTextLabel" parent="MarginContainer" unique_id=1255215483]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 256
+bbcode_enabled = true
+text = "[b]TIME'S
+UP! ⌛️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShiftCleared" type="RichTextLabel" parent="MarginContainer" unique_id=1334439900]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 256
+bbcode_enabled = true
+text = "[b][color=green]SHIFT
+CLEARED ✅"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShiftFailed" type="RichTextLabel" parent="MarginContainer" unique_id=83469973]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 256
+bbcode_enabled = true
+text = "[b][color=red]SHIFT
+FAILED ❌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="ColorRect" parent="." unique_id=1075982474]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+color = Color(0, 0, 0, 0.19607843)
+
+[node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
+stream = ExtResource("2_7ibj4")
+volume_db = -10.0
+
+[node name="LoseShiftSound" type="AudioStreamPlayer" parent="." unique_id=18379381]
+stream = ExtResource("3_ayll7")
+volume_db = -5.0

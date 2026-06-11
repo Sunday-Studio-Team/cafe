@@ -101,7 +101,7 @@ func _on_customer_spawn_timer_timeout() -> void:
 
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
-	await get_tree().create_timer(5, false).timeout
+	await Events.end_screen_finished
 	if (
 		Stats.daily_profit > Stats.daily_profit_goal
 		and Stats.employee_rating > Stats.employee_rating_goal

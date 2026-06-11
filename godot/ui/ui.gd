@@ -17,8 +17,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
-@export var win_shift_sound: AudioStreamPlayer
-@export var lose_shift_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
 @export var alert_indicator: Label
 
@@ -28,7 +26,6 @@ var time_left_warning_played := false
 
 
 func _ready() -> void:
-	Events.time_up.connect(_on_time_up)
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.MONEY, new_value, old_value)
@@ -44,6 +41,7 @@ func _ready() -> void:
 			objective.hide()
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
+	Events.time_up.connect(func(): hide())
 
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_indicator.modulate.a = 0
@@ -234,19 +232,3 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
 	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 2)
-
-
-func _on_time_up() -> void:
-	if (
-		Stats.employee_rating >= Stats.employee_rating_goal
-		and Stats.daily_profit >= Stats.daily_profit_goal
-	):
-		end_text.text = "[color=green][b]shift complete ![/b]"
-		win_shift_sound.play()
-		if Global.day == Global.final_day:
-			end_text.text += "\nthanks for playing"
-		else:
-			end_text.text += "\nloading next day..."
-	else:
-		end_text.text = "[color=red][b]shift failed ![/b]\ngame over"
-		lose_shift_sound.play()
