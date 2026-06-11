@@ -36,8 +36,8 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	# we have to set these manually here so if we reload the scene theyll reset
-	Stats.daily_profit = 100
-	Stats.employee_rating = 100
+	Stats.daily_profit = 0
+	Stats.employee_rating = 0
 
 	set_per_day_stuff()
 	#apply_item_effects()
