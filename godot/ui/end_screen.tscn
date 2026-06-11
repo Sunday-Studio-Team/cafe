@@ -7,14 +7,31 @@
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
 
-[node name="EndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound")]
+[node name="EndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("loading_screen", "background", "times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total")]
 process_mode = 3
 script = ExtResource("1_70k24")
+loading_screen = NodePath("LoadingScreen")
+background = NodePath("Background")
 times_up = NodePath("MarginContainer/TimesUp")
 shift_cleared = NodePath("MarginContainer/ShiftCleared")
 shift_failed = NodePath("MarginContainer/ShiftFailed")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
+money_calculation_screen = NodePath("MarginContainer/MoneyCalcScreen")
+profit = NodePath("MarginContainer/MoneyCalcScreen/Profit")
+boss_cut = NodePath("MarginContainer/MoneyCalcScreen/BossCut")
+banked_today = NodePath("MarginContainer/MoneyCalcScreen/Banked")
+bank_total = NodePath("MarginContainer/BankTotal")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1075982474]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+color = Color(0, 0, 0, 0.39215687)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
 anchors_preset = 15
@@ -60,7 +77,47 @@ FAILED ❌"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Background" type="ColorRect" parent="." unique_id=1075982474]
+[node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer" unique_id=475181285]
+visible = false
+layout_mode = 2
+
+[node name="Profit" type="RichTextLabel" parent="MarginContainer/MoneyCalcScreen" unique_id=1865208455]
+custom_minimum_size = Vector2(1600, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+text = "money made today: $30"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="BossCut" type="RichTextLabel" parent="MarginContainer/MoneyCalcScreen" unique_id=1475557562]
+custom_minimum_size = Vector2(1600, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+text = "- boss's cut: $20"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Banked" type="RichTextLabel" parent="MarginContainer/MoneyCalcScreen" unique_id=2144848338]
+custom_minimum_size = Vector2(1600, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 3
+text = "= $10 banked"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="BankTotal" type="RichTextLabel" parent="MarginContainer" unique_id=1779244370]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 256
+theme_override_font_sizes/bold_font_size = 256
+text = "🏦 Bank total: $10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadingScreen" type="ColorRect" parent="." unique_id=120974746]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -68,7 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
-color = Color(0, 0, 0, 0.19607843)
+color = Color(0, 0, 0, 0)
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_7ibj4")
