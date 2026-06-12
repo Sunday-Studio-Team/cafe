@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dlalp4lnows75"]
+
+[ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
+[ext_resource type="PackedScene" uid="uid://nm85k5woe7rt" path="res://main.tscn" id="2_myf8j"]
+
+[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen")]
+script = ExtResource("1_6uhv1")
+loading_screen = NodePath("LoadingCanvas/LoadingScreen")
+main_scene = ExtResource("2_myf8j")
+
+[node name="LoadingCanvas" type="CanvasLayer" parent="." unique_id=520928004]
+layer = 10
+
+[node name="LoadingScreen" type="ColorRect" parent="LoadingCanvas" unique_id=1915811073]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

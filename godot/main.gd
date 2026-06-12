@@ -106,7 +106,7 @@ func _on_game_timer_timeout() -> void:
 	if Global.day == Global.final_day + 1:
 		get_tree().quit()
 	else:
-		get_tree().call_deferred("reload_current_scene")
+		Events.main_scene_loaded.emit()
 
 
 func _on_customer_approached_machine(customer: Customer) -> void:

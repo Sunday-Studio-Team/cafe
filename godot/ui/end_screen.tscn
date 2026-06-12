@@ -7,10 +7,9 @@
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
 
-[node name="EndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("loading_screen", "background", "times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total")]
+[node name="EndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total")]
 process_mode = 3
 script = ExtResource("1_70k24")
-loading_screen = NodePath("LoadingScreen")
 background = NodePath("Background")
 times_up = NodePath("MarginContainer/TimesUp")
 shift_cleared = NodePath("MarginContainer/ShiftCleared")
@@ -116,16 +115,6 @@ theme_override_font_sizes/bold_font_size = 256
 text = "🏦 Bank total: $10"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="LoadingScreen" type="ColorRect" parent="." unique_id=120974746]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-color = Color(0, 0, 0, 0)
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_7ibj4")

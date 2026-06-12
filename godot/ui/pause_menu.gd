@@ -13,7 +13,7 @@ func _ready() -> void:
 			visible = false
 			get_tree().paused = false
 			Global.day = 1
-			get_tree().call_deferred("reload_current_scene")
+			Events.main_scene_loaded.emit()
 	)
 	Events.time_up.connect(
 		func():

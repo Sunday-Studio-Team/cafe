@@ -1,6 +1,8 @@
 extends Node
 
 @warning_ignore_start("unused_signal")
+# for scene switcher
+signal main_scene_loaded
 signal shift_started
 signal customer_entered
 # NOTE: sorry for all these weird signals that pass the customer

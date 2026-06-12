@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-@export var loading_screen: ColorRect
 @export var background: ColorRect
 @export var times_up: RichTextLabel
 @export var shift_cleared: RichTextLabel
@@ -17,12 +16,6 @@ extends CanvasLayer
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-
-	show()
-	background.hide()
-	var t := create_tween().tween_property(loading_screen, "color:a", 0, 1).from(1)
-	await t.finished
-	hide()
 
 
 func _on_time_up() -> void:
@@ -70,8 +63,5 @@ func _on_time_up() -> void:
 	bank_total.show()
 
 	await get_tree().create_timer(4).timeout
-
-	var t := create_tween().tween_property(loading_screen, "color:a", 1, 0.5).from(0)
-	await t.finished
 
 	Events.end_screen_finished.emit()
