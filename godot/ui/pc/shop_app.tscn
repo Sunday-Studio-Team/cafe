@@ -10,8 +10,15 @@ items_container = NodePath("MarginContainer/VBoxContainer/Items")
 item_button_scene = ExtResource("3_mamje")
 bank_balance = NodePath("MarginContainer/Bank")
 
-[node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=982291301]
+[node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
 layout_mode = 2
+text = "today's deals:"
+horizontal_alignment = 1
+
+[node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="2" unique_id=982291301]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
 
 [node name="Bank" type="Label" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=643122758]
 layout_mode = 2
@@ -19,3 +26,13 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 64
 text = "money in bank: $10"
+
+[node name="Label" type="Label" parent="." index="1" unique_id=456439768]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 305.0
+offset_right = 1781.0
+offset_bottom = 508.0
+rotation = -0.15233734
+theme_override_font_sizes/font_size = 32
+text = "(these are buttons they just dont have an effect when you hover/click them yet lol)"

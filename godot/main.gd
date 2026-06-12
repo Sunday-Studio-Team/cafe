@@ -131,6 +131,7 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
+	desk.enabled = false
 
 
 func _on_desk_interacted() -> void:

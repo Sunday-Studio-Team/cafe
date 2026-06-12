@@ -18,7 +18,7 @@ email_button = NodePath("MarginContainer/Apps/Email")
 shop_button = NodePath("MarginContainer/Apps/Shop")
 email_app = NodePath("MarginContainer/EmailApp")
 shop_app = NodePath("MarginContainer/ShopApp")
-exit_button = NodePath("MarginContainer/Exit")
+exit_button = NodePath("Exit")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233319173]
 layout_mode = 1
@@ -72,8 +72,14 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Exit" type="Button" parent="MarginContainer" unique_id=114216245]
-layout_mode = 2
+[node name="Exit" type="Button" parent="." unique_id=114216245]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 123.0
+grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 64
