@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func load_scene(scene: PackedScene) -> void:
 	if current_scene:
+		get_tree().paused = true
 		loading_tween = create_tween()
 		loading_tween.tween_property(loading_screen, "modulate:a", 1, LOADING_FADE_IN_TIME).from(0)
 		await loading_tween.finished
@@ -24,6 +25,6 @@ func load_scene(scene: PackedScene) -> void:
 		await current_scene.tree_exited
 	current_scene = scene.instantiate()
 	add_child(current_scene)
-	#await current_scene.ready
+	get_tree().paused = false
 	loading_tween = create_tween()
 	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)

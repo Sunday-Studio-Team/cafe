@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://c1vvwndvemdbo"]
 
-[ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/end_screen.gd" id="1_70k24"]
-[ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_7ibj4"]
-[ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_ayll7"]
+[ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/shift_end_screen.gd" id="1_cwskb"]
+[ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
+[ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
 
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
 
-[node name="EndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "shift_cleared", "shift_failed", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total")]
 process_mode = 3
-script = ExtResource("1_70k24")
+script = ExtResource("1_cwskb")
 background = NodePath("Background")
 times_up = NodePath("MarginContainer/TimesUp")
 shift_cleared = NodePath("MarginContainer/ShiftCleared")
@@ -117,9 +117,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
-stream = ExtResource("2_7ibj4")
+stream = ExtResource("2_g6pkj")
 volume_db = -10.0
 
 [node name="LoseShiftSound" type="AudioStreamPlayer" parent="." unique_id=18379381]
-stream = ExtResource("3_ayll7")
+stream = ExtResource("3_iiu1j")
 volume_db = -5.0

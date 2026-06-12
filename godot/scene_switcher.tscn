@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://nm85k5woe7rt" path="res://main.tscn" id="2_myf8j"]
 
 [node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen")]
+process_mode = 3
 script = ExtResource("1_6uhv1")
 loading_screen = NodePath("LoadingCanvas/LoadingScreen")
 main_scene = ExtResource("2_myf8j")

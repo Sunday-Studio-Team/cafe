@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
-[ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/end_screen.tscn" id="21_getpj"]
+[ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -66,6 +66,7 @@ format = 3
 stereo = true
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
+process_mode = 1
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 cameras = NodePath("SecurityCams")
@@ -485,9 +486,6 @@ volume_db = -5.0
 stream = ExtResource("14_yaehf")
 volume_db = -5.0
 
-[node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
-visible = false
-
 [node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
 visible = false
 script = ExtResource("10_4c57u")
@@ -530,14 +528,17 @@ text = "DAY 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
-visible = false
-
 [node name="PCUI" type="CanvasLayer" parent="." unique_id=1232958959]
 
 [node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui") instance=ExtResource("20_82xsv")]
 visible = false
 ui = NodePath("../../UI")
+
+[node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
+visible = false
+
+[node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
+visible = false
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam4"]
