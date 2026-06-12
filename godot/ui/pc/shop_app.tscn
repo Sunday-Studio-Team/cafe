@@ -2,10 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://cqa614p1f0ccb" path="res://ui/pc/pc_app.tscn" id="1_swvwp"]
 [ext_resource type="Script" uid="uid://nbfwdp3xcbh3" path="res://ui/pc/shop_app.gd" id="2_c06av"]
+[ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="3_mamje"]
 
 [node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance") instance=ExtResource("1_swvwp")]
 script = ExtResource("2_c06av")
 items_container = NodePath("MarginContainer/VBoxContainer/Items")
+item_button_scene = ExtResource("3_mamje")
 bank_balance = NodePath("MarginContainer/Bank")
 
 [node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=982291301]

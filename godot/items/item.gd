@@ -6,6 +6,7 @@ extends Resource
 ## - 3: some combination <- probably this, with resource for assets and hardcoded stuff for behaviour ?
 
 @export var name: String
+@export var description: String
 @export var icon: Texture
 @export var price: float = 5
 ## this will be for showing the item physically on the shelf when we own it
