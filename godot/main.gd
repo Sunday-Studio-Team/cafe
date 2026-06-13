@@ -69,17 +69,19 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
-		game_timer.wait_time = 90
+		game_timer.wait_time = 80
 		# since theres less happening in the first 'tutorial shift' we can make the machines
 		# more likely to break there to introduce that mechanic in a safe environment
 		Stats.current.chance_of_machine_breaking = 0.3
-		Stats.current.daily_profit_goal = 20
+		Stats.current.daily_profit_goal = 15
 		cameras.hide()
 	if Global.day >= 2:
-		game_timer.wait_time = 120
+		game_timer.wait_time = 90
 		Stats.current.chance_of_machine_breaking = 0.2
+		Stats.current.daily_profit_goal = 20
 		cameras.show()
 	if Global.day >= 3:
+		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 30
 		machines.append(side_machine)
 		side_machine.show()
