@@ -26,8 +26,12 @@ func _ready() -> void:
 
 
 func apply_stats():
+	if item.stat_bonuses.is_empty():
+		push_error("%s has no stat bonuses, can't apply stats" % item.name)
 	for stat in item.stat_bonuses:
 		var current_stat = Stats.get(stat)
+		if current_stat == null:
+			push_error("%s is trying to give a bonus to '%s' but that stat does not exist" % [item.name, stat])
 		Stats.set(stat, current_stat + item.stat_bonuses[stat])
 	for rule in item.rules:
 		Global.set(rule, item.rules[rule])
