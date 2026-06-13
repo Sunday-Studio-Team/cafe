@@ -30,7 +30,7 @@ func _on_time_up() -> void:
 	background.show()
 	get_tree().paused = true
 	times_up.show()
-	#time_up_sound.play()
+	time_up_sound.play()
 	await get_tree().create_timer(2).timeout
 	times_up.hide()
 
