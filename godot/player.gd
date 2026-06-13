@@ -11,7 +11,7 @@ const STRIDE_LENGTH := 0.75
 @export var ingredients_bag: MeshInstance3D
 
 # this is a var separate to the const cos it changes when sprint etc
-var move_speed := Stats.default_move_speed
+var move_speed: float = Stats.current.default_move_speed
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -131,9 +131,9 @@ func handle_hovered_interactable() -> void:
 
 func handle_sprint() -> void:
 	if Input.is_action_pressed("sprint"):
-		move_speed = Stats.sprint_move_speed
+		move_speed = Stats.current.sprint_move_speed
 	else:
-		move_speed = Stats.default_move_speed
+		move_speed = Stats.current.default_move_speed
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

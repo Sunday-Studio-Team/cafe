@@ -18,11 +18,11 @@ var at_window: bool = false
 
 
 func _ready() -> void:
-	timer.wait_time = Stats.customer_wait_time_machine
+	timer.wait_time = Stats.current.customer_wait_time_machine
 	apply_random_sprite()
 	make_drink_button.enabled = false
 	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
-	make_drink_button.time_to_hold = Stats.time_to_manually_make_drink
+	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
@@ -89,7 +89,7 @@ func _on_order_approved(customer: Customer) -> void:
 
 	await get_tree().create_timer(1, false).timeout
 	Global.score_update_message = "penalty for time"
-	Stats.employee_rating += bonus_points_for_time
+	Global.employee_rating += bonus_points_for_time
 
 	match bonus_points_for_time:
 		1:

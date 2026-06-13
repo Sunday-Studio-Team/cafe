@@ -17,9 +17,9 @@ func _ready() -> void:
 
 	pressed.connect(
 		func():
-			if Stats.bank_money >= item.price:
+			if Global.bank_money >= item.price:
 				apply_stats()
-				Stats.bank_money -= item.price
+				Global.bank_money -= item.price
 				Global.owned_items.append(item)
 				Events.items_updated.emit()
 				queue_free()
@@ -30,9 +30,9 @@ func apply_stats():
 	if item.stat_bonuses.is_empty():
 		push_error("%s has no stat bonuses, can't apply stats" % item.name)
 	for stat in item.stat_bonuses:
-		var current_stat = Stats.get(stat)
+		var current_stat = Stats.current.get(stat)
 		if current_stat == null:
 			push_error("%s is trying to give a bonus to '%s' but that stat does not exist" % [item.name, stat])
-		Stats.set(stat, current_stat + item.stat_bonuses[stat])
+		Stats.current.set(stat, current_stat + item.stat_bonuses[stat])
 	for rule in item.rules:
 		Global.set(rule, item.rules[rule])

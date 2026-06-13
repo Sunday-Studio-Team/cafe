@@ -28,8 +28,8 @@ func _on_time_up() -> void:
 	times_up.hide()
 
 	if (
-		Stats.daily_profit >= Stats.daily_profit_goal
-		and Stats.employee_rating >= Stats.employee_rating_goal
+		Global.daily_profit >= Stats.current.daily_profit_goal
+		and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
 		shift_cleared.show()
 		win_shift_sound.play()
@@ -43,8 +43,8 @@ func _on_time_up() -> void:
 	shift_cleared.hide()
 	shift_failed.hide()
 
-	var daily_profit := Stats.daily_profit
-	var daily_profit_goal := Stats.daily_profit_goal
+	var daily_profit := Global.daily_profit
+	var daily_profit_goal := Stats.current.daily_profit_goal
 	var our_cut := daily_profit - daily_profit_goal
 	if our_cut < 0:
 		our_cut = 0
@@ -58,8 +58,8 @@ func _on_time_up() -> void:
 	await get_tree().create_timer(5).timeout
 
 	money_calculation_screen.hide()
-	Stats.bank_money += our_cut
-	bank_total.text = "🏦 bank total: %s" % Global.float_to_price(Stats.bank_money)
+	Global.bank_money += our_cut
+	bank_total.text = "🏦 bank total: %s" % Global.float_to_price(Global.bank_money)
 	bank_total.show()
 
 	await get_tree().create_timer(4).timeout

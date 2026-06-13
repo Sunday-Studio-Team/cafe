@@ -49,11 +49,11 @@ func _ready() -> void:
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
 	add_ing_button.interacted.connect(_on_add_ing_button_pressed)
-	make_drink_button.time_to_hold = Stats.time_to_manually_make_drink
+	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	timer.timeout.connect(_on_order_finished)
-	timer.wait_time = Stats.machine_time_to_make_drink
+	timer.wait_time = Stats.current.machine_time_to_make_drink
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 	Events.customer_approached_window.connect(_on_customer_approached_window)
@@ -74,7 +74,7 @@ func _physics_process(_delta: float) -> void:
 	add_ing_button.visible = Global.holding_ingredients
 	waiting_approval_indicator.visible = waiting_for_response
 	ingredients_bar.value = ingredients
-	if ingredients_bar.value < Stats.ingredients_per_order:
+	if ingredients_bar.value < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
 		reject_button.display_name = "[color=pink]🚫not enough ingredients"
@@ -91,7 +91,7 @@ func start_order() -> void:
 	# wait timer
 	Events.customer_started_order.emit(customer)
 
-	if ingredients < Stats.ingredients_per_order:
+	if ingredients < Stats.current.ingredients_per_order:
 		return
 
 	if broken_down:
@@ -105,7 +105,7 @@ func start_order() -> void:
 	customer_order_indicator.show()
 	timer.start()
 
-	if randf() < Stats.chance_of_machine_breaking:
+	if randf() < Stats.current.chance_of_machine_breaking:
 		breakdown_timer.start()
 
 
@@ -119,8 +119,8 @@ func make_random_drink() -> void:
 	# (gives us a random drink score based on our probabilities)
 	var ran_num: float = randf()
 	var cumulative_score_chance: float = 0.0
-	for score in Stats.score_chances:
-		cumulative_score_chance += Stats.score_chances[score]
+	for score in Stats.current.score_chances:
+		cumulative_score_chance += Stats.current.score_chances[score]
 		if ran_num < cumulative_score_chance:
 			drink_score = score
 			break
@@ -192,8 +192,8 @@ func fix_machine() -> void:
 
 
 func _on_order_finished() -> void:
-	ingredients -= Stats.ingredients_per_order
-	if ingredients <= Stats.ingredients_per_order:
+	ingredients -= Stats.current.ingredients_per_order
+	if ingredients <= Stats.current.ingredients_per_order:
 		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
 
@@ -217,12 +217,12 @@ func _on_accept_button_presssed() -> void:
 	drink_customer_score_label.hide()
 	score_label.show()
 	Global.score_update_message = "sold %s" % completed_order.name
-	Stats.daily_profit += completed_order.price
+	Global.daily_profit += completed_order.price
 	await get_tree().create_timer(0.5, false).timeout
 	score_label.hide()
 	drink_customer_score_label.show()
 	Global.score_update_message = "customer rated %s" % completed_order.name
-	Stats.employee_rating += drink_score
+	Global.employee_rating += drink_score
 	await get_tree().create_timer(0.5, false).timeout
 	drink_customer_score_label.hide()
 
@@ -240,7 +240,7 @@ func _on_accept_button_presssed() -> void:
 
 
 func _on_reject_button_pressed() -> void:
-	if ingredients < Stats.ingredients_per_order:
+	if ingredients < Stats.current.ingredients_per_order:
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
 	timer.start()
@@ -249,7 +249,7 @@ func _on_reject_button_pressed() -> void:
 
 
 func _on_make_drink_button_pressed() -> void:
-	if ingredients < Stats.ingredients_per_order:
+	if ingredients < Stats.current.ingredients_per_order:
 		return
 	completed_order = customers_order
 	drink_score = 3
@@ -269,7 +269,7 @@ func _on_make_drink_button_pressed() -> void:
 
 func _on_add_ing_button_pressed() -> void:
 	Global.holding_ingredients = false
-	ingredients += Stats.ingredients_per_bag
+	ingredients += Stats.current.ingredients_per_bag
 	if ingredients > max_ingredients:
 		ingredients = max_ingredients
 

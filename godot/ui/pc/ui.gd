@@ -62,7 +62,7 @@ func _ready() -> void:
 
 			[b]SHIFT OBJECTIVE[/b]
 			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
 		)
 		rules_controls.text = (
 			"[b][i]controls [/i][/b]
@@ -77,7 +77,7 @@ func _ready() -> void:
 
 			[b]SHIFT OBJECTIVE[/b]
 			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
 		)
 		rules_controls.text += (
 			"\n[b][i]rules [/i][/b]
@@ -92,7 +92,7 @@ func _ready() -> void:
 
 			[b]SHIFT OBJECTIVE[/b]
 			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
 		)
 	if Global.day >= 4:
 		objective.text = (
@@ -101,7 +101,7 @@ func _ready() -> void:
 
 			[b]SHIFT OBJECTIVE[/b]
 			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.daily_profit_goal), Stats.employee_rating_goal]
+			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
 		)
 		rules_controls.text += "\n- no taking ingredients from store room"
 	if Global.day == Global.final_day:
@@ -133,10 +133,10 @@ func handle_time_left_warning() -> void:
 
 func update_score_indicators() -> void:
 	profit_label.text = (
-		Global.float_to_price(Stats.daily_profit)
-		+ " (goal: %s)" % Global.float_to_price(Stats.daily_profit_goal)
+		Global.float_to_price(Global.daily_profit)
+		+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
 	)
-	customer_happiness_label.text = "🙂" + str(Stats.employee_rating) + " (goal: %s)" % Stats.employee_rating_goal
+	customer_happiness_label.text = "🙂" + str(Global.employee_rating) + " (goal: %s)" % Stats.current.employee_rating_goal
 
 
 func update_time_indicator() -> void:

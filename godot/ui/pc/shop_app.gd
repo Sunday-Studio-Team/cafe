@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	bank_balance.text = "🏦 bank balance: %s" % Global.float_to_price(Stats.bank_money)
+	bank_balance.text = "🏦 bank balance: %s" % Global.float_to_price(Global.bank_money)
 
 
 func populate_items() -> void:

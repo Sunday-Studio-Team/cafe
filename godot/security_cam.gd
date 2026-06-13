@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
 				timer.start()
 				Global.score_update_message = "caught running"
-				Stats.employee_rating -= Stats.penalty_for_running
+				Global.employee_rating -= Stats.current.penalty_for_running
 			elif (
 				Input.is_action_pressed("interact")
 				and Global.hovered_interactable != null
@@ -52,12 +52,12 @@ func _physics_process(_delta: float) -> void:
 			):
 				timer.start()
 				Global.score_update_message = "caught making drink by hand"
-				Stats.employee_rating -= Stats.penalty_for_handmade_drink
+				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
 			elif (
 				Global.holding_ingredients and Global.holding_ingredients_rule
 			):
 				Global.score_update_message = "caught stealing ingredients"
-				Stats.employee_rating -= Stats.penalty_for_holding_ingredients
+				Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
 				timer.start()
 
 			player_in_spotlight = true

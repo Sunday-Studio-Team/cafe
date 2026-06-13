@@ -28,6 +28,36 @@ var minigame_active := false
 var in_pc_ui := false
 var holding_ingredients := false
 var day := 1
+var daily_profit := 0.0:
+	set(new_value):
+		if new_value == daily_profit:
+			return
+
+		Events.money_updated.emit(new_value, daily_profit)
+		daily_profit = new_value
+
+		# we set this as empty to hopefully avoid anything weird if someone
+		# accidentally updates one of these score vars without setting it
+		# (like gaining money but seeing a popup like '+1 🙂' from a prev thing)
+		# NOTE: i wonder if waiting a frame could ever cause anything weird if
+		# we changed a score twice on successive frames D: should get reworked
+		# again anyway so hopefully we wont find out .
+		await get_tree().process_frame
+		score_update_message = ""
+var employee_rating := 0:
+	set(new_value):
+		if new_value == employee_rating:
+			return
+
+		Events.customer_score_updated.emit(new_value, employee_rating)
+		employee_rating = new_value
+		if employee_rating < 0:
+			employee_rating = 0
+
+		# (see comment for same lines in above func)
+		await get_tree().process_frame
+		score_update_message = ""
+var bank_money := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 4

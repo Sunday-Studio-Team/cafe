@@ -34,11 +34,15 @@ func _ready() -> void:
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
 
-	# we have to set these manually here so if we reload the scene theyll reset
-	Stats.daily_profit = 0
-	Stats.employee_rating = 0
-
 	set_per_day_stuff()
+
+	# we have to set these manually here so if we reload the scene theyll reset
+	Global.daily_profit = 0
+	Global.employee_rating = 0
+	# high values for debug
+	#Global.daily_profit = 100
+	#Global.employee_rating = 100
+	#Global.bank_money = 100
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -58,19 +62,20 @@ func _ready() -> void:
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	if Global.day == 1:
-		Stats.bank_money = 0
+		Global.bank_money = 0
 		Global.owned_items.clear()
+		Stats.reset()
 	if Global.day >= 1:
 		game_timer.wait_time = 90
-		Stats.chance_of_machine_breaking = 0.3
-		Stats.daily_profit_goal = 20
+		Stats.current.chance_of_machine_breaking = 0.3
+		Stats.current.daily_profit_goal = 20
 		cameras.hide()
 	if Global.day >= 2:
 		game_timer.wait_time = 120
-		Stats.chance_of_machine_breaking = 0.2
+		Stats.current.chance_of_machine_breaking = 0.2
 		cameras.show()
 	if Global.day >= 3:
-		Stats.daily_profit_goal = 30
+		Stats.current.daily_profit_goal = 30
 		machines.append(side_machine)
 		side_machine.show()
 	if Global.day >= 4:
@@ -97,8 +102,8 @@ func _on_game_timer_timeout() -> void:
 	await Events.end_screen_finished
 	get_tree().paused = false
 	if (
-		Stats.daily_profit > Stats.daily_profit_goal
-		and Stats.employee_rating > Stats.employee_rating_goal
+		Global.daily_profit > Stats.current.daily_profit_goal
+		and Global.employee_rating > Stats.current.employee_rating_goal
 	):
 		Global.day += 1
 	else:
