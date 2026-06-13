@@ -13,6 +13,7 @@ extends CanvasLayer
 @export var banked_today: RichTextLabel
 @export var bank_total: RichTextLabel
 @export var bank_gain_sound: AudioStreamPlayer
+@export var pencil_scribble: AudioStreamPlayer
 
 var value_to_show_on_bank_total: float
 
@@ -56,11 +57,18 @@ func _on_time_up() -> void:
 	if our_cut < 0:
 		our_cut = 0
 
-	# TODO: animate these one by one
-	money_calculation_screen.show()
 	profit.text = "[color=green]+[/color] money made today: %s" % Global.float_to_price(daily_profit)
 	boss_cut.text = "[color=red]-[/color] boss's cut: %s" % Global.float_to_price(daily_profit_goal)
 	banked_today.text = "= %s banked" % Global.float_to_price(our_cut)
+	profit.modulate.a = 0
+	boss_cut.modulate.a = 0
+	banked_today.modulate.a = 0
+	money_calculation_screen.show()
+	pencil_scribble.play()
+	var calc_screen_tween := create_tween()
+	calc_screen_tween.tween_property(profit, "modulate:a", 1, 0.2)
+	calc_screen_tween.tween_property(boss_cut, "modulate:a", 1, 0.2)
+	calc_screen_tween.tween_property(banked_today, "modulate:a", 1, 0.2)
 
 	await get_tree().create_timer(5).timeout
 
