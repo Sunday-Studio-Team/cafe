@@ -18,11 +18,10 @@ var at_window: bool = false
 
 
 func _ready() -> void:
-	timer.wait_time = Stats.current.customer_wait_time_machine
 	apply_random_sprite()
+	get_stats()
 	make_drink_button.enabled = false
 	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
-	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
@@ -48,6 +47,11 @@ func _physics_process(_delta: float) -> void:
 	else:
 		waiting_indicator.modulate = Color.RED
 		bonus_points_for_time = -1
+
+
+func get_stats():
+	timer.wait_time = Stats.current.customer_wait_time_machine
+	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 
 
 func leave_store() -> void:

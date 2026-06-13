@@ -46,14 +46,14 @@ var ingredients = max_ingredients
 
 
 func _ready() -> void:
+	get_stats()
+	Events.items_updated.connect(get_stats)
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
 	add_ing_button.interacted.connect(_on_add_ing_button_pressed)
-	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	timer.timeout.connect(_on_order_finished)
-	timer.wait_time = Stats.current.machine_time_to_make_drink
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 	Events.customer_approached_window.connect(_on_customer_approached_window)
@@ -84,6 +84,11 @@ func _physics_process(_delta: float) -> void:
 		ing_too_low_label.hide()
 		reject_button.display_name = "[color=red]reject drink (retry)"
 		make_drink_button.display_name = "[color=yellow]remake drink by hand"
+
+
+func get_stats() -> void:
+	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
+	timer.wait_time = Stats.current.machine_time_to_make_drink
 
 
 func start_order() -> void:
