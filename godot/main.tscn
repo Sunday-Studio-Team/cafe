@@ -358,7 +358,7 @@ game_timer = NodePath("../GameTimer")
 time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer2/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
-end_text = NodePath("MarginContainer/EndText")
+end_text = NodePath("")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
@@ -505,17 +505,6 @@ text = "[b]OBJECTIVE:[/b]
 
 make $10 while keeping your customer rating above 5
 etc etc"
-scroll_active = false
-horizontal_alignment = 1
-
-[node name="EndText" type="RichTextLabel" parent="UI/MarginContainer" unique_id=545591058]
-custom_minimum_size = Vector2(400, 250)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 128
-bbcode_enabled = true
-fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
