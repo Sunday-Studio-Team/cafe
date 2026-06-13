@@ -232,10 +232,12 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 		match score_type:
 			ScoreType.MONEY:
 				color = Color.GOLD
-				money_sound.play()
+				if is_inside_tree():
+					money_sound.play()
 			ScoreType.CUSTOMER:
 				color = Color.GREEN
-				gain_points_sound.play()
+				if is_inside_tree():
+					gain_points_sound.play()
 	else:
 		color = Color.RED
 		score_update_label.text = "-"
@@ -243,7 +245,8 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 			ScoreType.MONEY:
 				pass
 			ScoreType.CUSTOMER:
-				lose_points_sound.play()
+				if is_inside_tree():
+					lose_points_sound.play()
 
 	score_update_label.modulate = color
 	match score_type:
