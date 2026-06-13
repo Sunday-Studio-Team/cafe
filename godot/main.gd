@@ -2,7 +2,9 @@ extends Node3D
 
 @export var machines: Array[Machine]
 @export var cameras: Node3D
+# first machine on the left
 @export var side_machine: Machine
+@export var fourth_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
@@ -37,6 +39,7 @@ func _ready() -> void:
 	set_per_day_stuff()
 
 	# we have to set these manually here so if we reload the scene theyll reset
+	Global.holding_ingredients = false
 	Global.daily_profit = 0
 	Global.employee_rating = 0
 	# high values for debug
@@ -67,6 +70,8 @@ func set_per_day_stuff() -> void:
 		Stats.reset()
 	if Global.day >= 1:
 		game_timer.wait_time = 90
+		# since theres less happening in the first 'tutorial shift' we can make the machines
+		# more likely to break there to introduce that mechanic in a safe environment
 		Stats.current.chance_of_machine_breaking = 0.3
 		Stats.current.daily_profit_goal = 20
 		cameras.hide()
@@ -80,6 +85,9 @@ func set_per_day_stuff() -> void:
 		side_machine.show()
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
+	if Global.day == 5:
+		machines.append(fourth_machine)
+		fourth_machine.show()
 
 
 func _on_customer_spawn_timer_timeout() -> void:

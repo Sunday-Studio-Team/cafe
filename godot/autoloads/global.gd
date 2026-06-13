@@ -61,7 +61,7 @@ var employee_rating := 0:
 var bank_money := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
-var final_day := 4
+var final_day := 5
 # rules (true = rule in effect) (these are toggled per-day in main.gd)
 var holding_ingredients_rule := false
 

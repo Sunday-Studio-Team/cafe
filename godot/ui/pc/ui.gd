@@ -107,6 +107,14 @@ func _ready() -> void:
 			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
 		)
 		rules_controls.text += "\n- no taking ingredients from store room"
+	if Global.day == 5:
+		objective.text = (
+			"your boss has added another machine on the left side of the store
+
+			[b]SHIFT OBJECTIVE[/b]
+			make %s while keeping your employee rating (🙂) above %s"
+			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+		)
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 

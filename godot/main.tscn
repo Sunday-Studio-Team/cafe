@@ -77,12 +77,13 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 cameras = NodePath("SecurityCams")
 side_machine = NodePath("Machines/Machine")
+fourth_machine = NodePath("Machines/Machine4")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
@@ -162,14 +163,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 size = Vector3(15, 3, 9)
 
 [node name="Void" type="CSGBox3D" parent="Building/BackRoom" unique_id=703396434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.05000019)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.03203392)
 operation = 2
-size = Vector3(14.9, 2.9, 9)
+size = Vector3(14.9, 2.9, 8.9)
 
 [node name="Void2" type="CSGBox3D" parent="Building/BackRoom" unique_id=1398872124]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 1.5, -4.4999995)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5166847, 1.5, -4.4999995)
 operation = 2
-size = Vector3(12, 2.9, 0.1)
+size = Vector3(12, 2.9, 0.2)
 material = SubResource("StandardMaterial3D_ig7tw")
 
 [node name="Door" type="CSGBox3D" parent="Building/BackRoom" unique_id=1245701505]
@@ -192,18 +193,28 @@ size = Vector3(0.5, 1, 1)
 transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, 2.9, 0.5, -4.1)
 size = Vector3(0.5, 1, 2)
 
+[node name="Door2" type="CSGBox3D" parent="Building/BackRoom" unique_id=608670982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.99999994, 4.5081425)
+operation = 2
+size = Vector3(1.5, 2, 0.1)
+
+[node name="Window" type="CSGBox3D" parent="Building/BackRoom" unique_id=692264008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 4.6453276)
+operation = 2
+size = Vector3(1.75, 1, 0.5)
+
 [node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
 use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/BackRoom2" unique_id=930105116]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(15, 3, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4546285, 1.5, 0)
+size = Vector3(24, 3, 9)
 
 [node name="Void" type="CSGBox3D" parent="Building/BackRoom2" unique_id=59185805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1.5, -0.05000019)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4058976, 1.5, -0.05000019)
 operation = 2
-size = Vector3(14.9, 2.9, 9)
+size = Vector3(23.9, 2.9, 9)
 
 [node name="StoreRoom" type="CSGCombiner3D" parent="Building" unique_id=1595009912]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.010478, 0, 16.887238)
@@ -269,6 +280,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 3.8)
 
 [node name="Machine3" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3.8)
+
+[node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.1, 0.1, -2.7000003)
+visible = false
 
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4912045, 0, 4)
@@ -346,7 +361,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer")
@@ -358,7 +373,6 @@ game_timer = NodePath("../GameTimer")
 time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer2/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
-end_text = NodePath("")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
