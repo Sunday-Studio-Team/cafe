@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bxnxtc8jiih51"]
+
+[ext_resource type="Script" uid="uid://vced4uv7gts" path="res://items/shelf_item.gd" id="1_iksst"]
+
+[node name="ShelfItem" type="Node3D" unique_id=1155599176 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_iksst")
+sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1365720048]
+pixel_size = 0.005
+billboard = 2

@@ -21,6 +21,7 @@ func _ready() -> void:
 				apply_stats()
 				Stats.bank_money -= item.price
 				Global.owned_items.append(item)
+				Events.items_updated.emit()
 				queue_free()
 	)
 

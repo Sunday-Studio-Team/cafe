@@ -13,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://bxnxtc8jiih51" path="res://items/shelf_item.tscn" id="11_getpj"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
@@ -48,6 +50,16 @@ material = SubResource("StandardMaterial3D_2cqfq")
 text = "store room"
 pixel_size = 0.025
 depth = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
+albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
+material = SubResource("StandardMaterial3D_cegan")
+size = Vector3(3, 0.1, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
+size = Vector3(3, 0.1, 0.25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
@@ -299,6 +311,42 @@ one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="ItemShelf" type="Node3D" parent="." unique_id=195864544 node_paths=PackedStringArray("item_slots_parent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 1.1999999, 9)
+script = ExtResource("10_82xsv")
+shelf_item_scene = ExtResource("11_getpj")
+item_slots_parent = NodePath("ItemSlots")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ItemShelf" unique_id=1884389784]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_cegan")
+
+[node name="ItemSlots" type="Node3D" parent="ItemShelf" unique_id=32404470]
+
+[node name="ItemSlot" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1814333156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -1.1999998)
+
+[node name="ItemSlot2" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=241184296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -0.6999998)
+
+[node name="ItemSlot3" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1201025248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -0.19999981)
+
+[node name="ItemSlot4" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1162839248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0.3000002)
+
+[node name="ItemSlot5" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=238910412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0.8000002)
+
+[node name="ItemSlot6" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=2053122406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 1.3000002)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ItemShelf" unique_id=1757812054]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+shape = SubResource("BoxShape3D_getpj")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator")]
 script = ExtResource("5_lquwl")

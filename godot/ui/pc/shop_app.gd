@@ -19,6 +19,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func populate_items() -> void:
+	# wait for main.gd to clear owned items on restart before populating
+	await get_tree().process_frame
 	var random_item: Item = null
 	# we track this in case something goes wrong here with finding the items
 	# and we dont get the game stuck in an infinite loop
