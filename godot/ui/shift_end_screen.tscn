@@ -36,7 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 mouse_behavior_recursive = 1
-color = Color(0, 0, 0, 0.39215687)
+color = Color(0, 0, 0, 0.5882353)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
 anchors_preset = 15
@@ -92,8 +92,9 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[color=green]+[/color] money made today: $30"
+text = "[color=green]+[/color] money made today: $30.75"
 fit_content = true
+autowrap_mode = 0
 horizontal_alignment = 2
 
 [node name="BossCut" type="RichTextLabel" parent="MarginContainer/MoneyCalcScreen" unique_id=1475557562]
@@ -111,7 +112,8 @@ custom_minimum_size = Vector2(1600, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
-text = "= $10 banked"
+bbcode_enabled = true
+text = "= [color=gold]$10[/color] banked"
 fit_content = true
 horizontal_alignment = 2
 
@@ -120,7 +122,8 @@ visible = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 256
 theme_override_font_sizes/bold_font_size = 256
-text = "🏦 Bank total: $10"
+bbcode_enabled = true
+text = "🏦 Bank total: [color=gold]$10[/color]"
 vertical_alignment = 1
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]

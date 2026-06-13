@@ -2,7 +2,7 @@ extends PCApp
 
 @export var items_container: Container
 @export var item_button_scene: PackedScene
-@export var bank_balance: Label
+@export var bank_balance: RichTextLabel
 @export var cant_buy_sound: AudioStreamPlayer
 @export var bought_sound: AudioStreamPlayer
 
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	bank_balance.text = "🏦 bank balance: %s" % Global.float_to_price(Global.bank_money)
+	bank_balance.text = "🏦 bank balance: [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
 
 
 func populate_items() -> void:
