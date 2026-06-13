@@ -1,3 +1,10 @@
+# this is basically a list of a lot of stats (particularly ones we might want to change with items etc)
+# - these default values are stored in base_stats.tres, and the global var Stats.current is a duplicate
+# of those base stats which we can modify/fetch during gameplay for actual logic
+# ----------
+# setup might sound weird but i think it works pretty well cos we have all the base stats stored
+# separately from the current stats so we can reset them etc AND we dont have to do anything fancy
+# to add new stats other than put them in this script
 class_name StatData
 extends Resource
 
