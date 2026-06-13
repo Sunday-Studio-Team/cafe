@@ -313,42 +313,40 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
 [node name="ItemShelf" type="Node3D" parent="." unique_id=195864544 node_paths=PackedStringArray("item_slots_parent")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2, 1.1999999, 9)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 7.2, 1.1999999, 9)
 script = ExtResource("10_82xsv")
 shelf_item_scene = ExtResource("11_getpj")
 item_slots_parent = NodePath("ItemSlots")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ItemShelf" unique_id=1884389784]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("BoxMesh_cegan")
 
 [node name="ItemSlots" type="Node3D" parent="ItemShelf" unique_id=32404470]
 
 [node name="ItemSlot" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1814333156]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -1.1999998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1999998, 0.100000024, 0)
 
 [node name="ItemSlot2" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=241184296]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -0.6999998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6999998, 0.100000024, 0)
 
 [node name="ItemSlot3" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1201025248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, -0.19999981)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0.100000024, 0)
 
 [node name="ItemSlot4" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1162839248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0.3000002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3000002, 0.100000024, 0)
 
 [node name="ItemSlot5" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=238910412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0.8000002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000002, 0.100000024, 0)
 
 [node name="ItemSlot6" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=2053122406]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 1.3000002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ItemShelf" unique_id=1757812054]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_getpj")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "end_text", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer")
@@ -367,6 +365,9 @@ lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
 cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CctvIndicator")
 alert_indicator = NodePath("MarginContainer/VBoxContainer/Alert")
+shelf_item_ui = NodePath("MarginContainer/ShelfItem")
+shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
+shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -516,6 +517,33 @@ theme_override_font_sizes/bold_font_size = 128
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1
+
+[node name="ShelfItem" type="PanelContainer" parent="UI/MarginContainer" unique_id=898520236]
+modulate = Color(1, 1, 1, 0.98039216)
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/ShelfItem" unique_id=259568750]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1662140889]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_font_size = 53
+bbcode_enabled = true
+text = "[b]item name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1739048215]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "item description"
 horizontal_alignment = 1
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]

@@ -19,6 +19,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var low_time_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
 @export var alert_indicator: Label
+@export var shelf_item_ui: PanelContainer
+@export var shelf_item_name: RichTextLabel
+@export var shelf_item_description: RichTextLabel
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -118,6 +121,19 @@ func _physics_process(_delta: float) -> void:
 	update_time_indicator()
 	update_cctv_indicator()
 	handle_time_left_warning()
+	handle_shelf_item_ui()
+
+
+func handle_shelf_item_ui() -> void:
+	var shelf_item: ShelfItem = Global.inspected_shelf_item
+
+	shelf_item_ui.visible = shelf_item != null
+
+	if not shelf_item:
+		return
+
+	shelf_item_name.text = "[b]%s" % shelf_item.item.name
+	shelf_item_description.text = shelf_item.item.description
 
 
 func handle_time_left_warning() -> void:

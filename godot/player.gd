@@ -38,6 +38,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	handle_mouselook()
 	handle_hovered_interactable()
+	handle_inspected_shelf_item()
 	handle_sprint()
 	handle_movement(delta)
 	handle_gravity(delta)
@@ -127,6 +128,14 @@ func handle_hovered_interactable() -> void:
 
 	if Global.minigame_active:
 		Global.hovered_interactable = null
+
+
+func handle_inspected_shelf_item() -> void:
+	var collider = aiming_ray.get_collider()
+	if collider is ShelfItem:
+		Global.inspected_shelf_item = collider
+	else:
+		Global.inspected_shelf_item = null
 
 
 func handle_sprint() -> void:

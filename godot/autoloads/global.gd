@@ -16,6 +16,7 @@ var hovered_interactable: Interactable:
 			return null
 		else:
 			return hovered_interactable
+var inspected_shelf_item: ShelfItem
 var main_scene: Node3D
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
