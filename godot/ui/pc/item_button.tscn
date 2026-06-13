@@ -3,40 +3,36 @@
 [ext_resource type="Texture2D" uid="uid://b1j05q5s30754" path="res://icon.svg" id="1_crjyi"]
 [ext_resource type="Script" uid="uid://cqb3s88o3lq6d" path="res://ui/pc/item_button.gd" id="1_rlbhm"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_o2dny"]
-viewport_path = NodePath("SubViewport")
-
-[node name="ItemButton" type="TextureButton" unique_id=480738907 node_paths=PackedStringArray("icon", "item_name", "description")]
+[node name="ItemButton" type="Button" unique_id=1733613719 node_paths=PackedStringArray("item_icon", "item_name", "description")]
+custom_minimum_size = Vector2(500, 500)
 offset_right = 512.0
 offset_bottom = 768.0
-texture_normal = SubResource("ViewportTexture_o2dny")
+size_flags_vertical = 3
 script = ExtResource("1_rlbhm")
-icon = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/TextureRect")
-item_name = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Name")
-description = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/Description")
+item_icon = NodePath("MarginContainer/VBoxContainer/TextureRect")
+item_name = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Name")
+description = NodePath("MarginContainer/VBoxContainer/Description")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=278055690]
-
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport" unique_id=328661402]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2054879464]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/PanelContainer" unique_id=2054879464]
-layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/PanelContainer/MarginContainer" unique_id=2116169256]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2116169256]
 clip_contents = true
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=941600540]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=941600540]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -46,11 +42,11 @@ texture = ExtResource("1_crjyi")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=1284397859]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1284397859]
 layout_mode = 2
 alignment = 1
 
-[node name="Name" type="RichTextLabel" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1436776660]
+[node name="Name" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1436776660]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -63,7 +59,7 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="Description" type="Label" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=896543453]
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=896543453]
 modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2

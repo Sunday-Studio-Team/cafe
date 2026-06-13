@@ -3,6 +3,8 @@ extends PCApp
 @export var items_container: Container
 @export var item_button_scene: PackedScene
 @export var bank_balance: Label
+@export var cant_buy_sound: AudioStreamPlayer
+@export var bought_sound: AudioStreamPlayer
 
 var number_of_items_to_show := 3
 var items_in_shop: Array[Item]
@@ -44,3 +46,13 @@ func populate_items() -> void:
 			item_button.item = random_item
 			items_container.add_child(item_button)
 			items_in_shop.append(random_item)
+			item_button.clicked.connect(_on_item_button_clicked)
+
+
+func _on_item_button_clicked(bought: bool) -> void:
+	if bought:
+		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.GOLD)
+		bought_sound.play()
+	else:
+		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
+		cant_buy_sound.play()
