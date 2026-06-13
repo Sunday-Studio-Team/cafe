@@ -12,10 +12,17 @@ extends CanvasLayer
 @export var boss_cut: RichTextLabel
 @export var banked_today: RichTextLabel
 @export var bank_total: RichTextLabel
+@export var bank_gain_sound: AudioStreamPlayer
+
+var value_to_show_on_bank_total: float
 
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
+
+
+func _physics_process(_delta: float) -> void:
+	bank_total.text = "🏦 bank total: %s" % Global.float_to_price(value_to_show_on_bank_total)
 
 
 func _on_time_up() -> void:
@@ -58,10 +65,19 @@ func _on_time_up() -> void:
 	await get_tree().create_timer(5).timeout
 
 	money_calculation_screen.hide()
-	Global.bank_money += our_cut
-	bank_total.text = "🏦 bank total: %s" % Global.float_to_price(Global.bank_money)
 	bank_total.show()
-
+	Global.bank_money += our_cut
+	await get_tree().create_timer(1).timeout
+	if Global.bank_money > value_to_show_on_bank_total:
+		bank_gain_sound.play()
+		# TODO: figure out a way to do this that works while still having the bank total text
+		# centre-aligned
+		var t := create_tween().tween_property(
+			self,
+			"value_to_show_on_bank_total",
+			Global.bank_money,
+			1.5,
+		)
+		await t.finished
 	await get_tree().create_timer(4).timeout
-
 	Events.end_screen_finished.emit()
