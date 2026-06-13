@@ -58,8 +58,8 @@ func _on_time_up() -> void:
 
 	# TODO: animate these one by one
 	money_calculation_screen.show()
-	profit.text = "money made today: %s" % Global.float_to_price(daily_profit)
-	boss_cut.text = "- boss's cut: %s" % Global.float_to_price(daily_profit_goal)
+	profit.text = "[color=green]+[/color] money made today: %s" % Global.float_to_price(daily_profit)
+	boss_cut.text = "[color=red]-[/color] boss's cut: %s" % Global.float_to_price(daily_profit_goal)
 	banked_today.text = "= %s banked" % Global.float_to_price(our_cut)
 
 	await get_tree().create_timer(5).timeout
