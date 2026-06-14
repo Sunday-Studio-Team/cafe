@@ -23,3 +23,6 @@ signal items_updated
 signal minigame_active
 signal minigame_cancelled
 signal minigame_end
+
+#Active Items
+signal active_item_used(item: String)

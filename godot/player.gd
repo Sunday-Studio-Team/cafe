@@ -63,6 +63,10 @@ func handle_mouselook() -> void:
 
 
 func handle_movement(delta: float) -> void:
+	#TO BE REMOVED: For testing the active item use
+	if Input.is_action_just_pressed("Test_Button"):
+		Events.active_item_used.emit("clock")
+	
 	if (
 		not movement_enabled
 		or holding_interactable
@@ -168,3 +172,18 @@ func tilt_camera() -> void:
 
 func handle_ingredients_bag_visibility() -> void:
 	ingredients_bag.visible = Global.holding_ingredients
+
+
+
+
+
+
+func _on_area_3d_body_entered(body):
+	print(body)
+	pass # Replace with function body.
+
+
+
+func _on_area_3d_area_entered(area):
+	print(area)
+	pass # Replace with function body.

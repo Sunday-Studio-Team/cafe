@@ -17,6 +17,8 @@ extends Node3D
 @export var pc_ui: Control
 #Minigame
 @export var minigame_controller: CanvasLayer
+#Active Items
+@onready var clock_switch_timer = $ActivateItems/Clock_Switch_Timer
 
 
 func _ready() -> void:
@@ -60,6 +62,10 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
+	
+	#Active Item Use
+	Events.active_item_used.connect(active_item_used)
+	
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -150,3 +156,25 @@ func _on_shift_started():
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
+	
+
+
+
+#When an Item is used, will activate the required effects
+func active_item_used(item: String):
+	print(item)
+	
+	if item == "hammer":
+		#Check if the player is in front of a machine:
+		
+		pass
+	if item == "clock":
+		#Stop the clock for a time period
+		game_timer.stop()
+		clock_switch_timer.start()
+
+
+
+func _on_clock_switch_timer_timeout():
+	game_timer.start()
+	pass # Replace with function body.
