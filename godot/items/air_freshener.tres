@@ -9,8 +9,8 @@ name = "air freshener"
 description = "makes customers more patient"
 icon = ExtResource("1_vofp5")
 price = 6.0
-stat_bonuses = {
+stat_bonuses = Dictionary[String, float]({
 "customer_wait_time_machine": 6.0,
 "customer_wait_time_window": 5.0
-}
+})
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
