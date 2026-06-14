@@ -14,3 +14,7 @@ extends Resource
 ## this will be like stat_bonuses but it can change vars in Global
 ## NOTE: unused for now
 @export var rules: Dictionary
+#Determines if it's an active item 
+#Does not go to shelf & instead inventory
+#Used up after use
+@export var is_active: bool = false
