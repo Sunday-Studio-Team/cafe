@@ -76,7 +76,8 @@ func _ready() -> void:
 		cctv_indicator.hide()
 	if Global.day >= 2:
 		objective.text = (
-			"your boss has added some security cameras to make sure you follow the [i]rules[/i]
+			"your boss has instated some new store [i]rules[/i].
+			they installed some security cameras to make sure you follow them!
 
 			[b]SHIFT OBJECTIVE[/b]
 			make %s while keeping your employee rating (🙂) above %s"
@@ -90,7 +91,7 @@ func _ready() -> void:
 		cctv_indicator.show()
 	if Global.day >= 3:
 		objective.text = (
-			"your boss has installed a new machine! it's located around the corner on the left.
+			"your boss has installed another machine! it's located around the corner on the left.
 			(your daily profit goal has been adjusted accordingly.)
 
 			[b]SHIFT OBJECTIVE[/b]
@@ -109,7 +110,7 @@ func _ready() -> void:
 		rules_controls.text += "\n- no taking ingredients from store room"
 	if Global.day == 5:
 		objective.text = (
-			"your boss has added another machine on the left side of the store
+			"your boss has installed another machine.
 
 			[b]SHIFT OBJECTIVE[/b]
 			make %s while keeping your employee rating (🙂) above %s"

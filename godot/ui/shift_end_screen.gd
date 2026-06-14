@@ -84,7 +84,7 @@ func _on_time_up() -> void:
 			self,
 			"value_to_show_on_bank_total",
 			Global.bank_money,
-			1,
+			0.75,
 		)
 		await t.finished
 	await get_tree().create_timer(4).timeout
