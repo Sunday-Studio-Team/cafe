@@ -74,6 +74,7 @@ func _on_time_up() -> void:
 
 	money_calculation_screen.hide()
 	bank_total.show()
+	value_to_show_on_bank_total = Global.bank_money
 	Global.bank_money += our_cut
 	await get_tree().create_timer(1).timeout
 	if Global.bank_money > value_to_show_on_bank_total:
