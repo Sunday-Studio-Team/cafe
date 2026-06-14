@@ -8,11 +8,8 @@ extends Resource
 ## this will be for 'active items' we can pick up
 ## NOTE: unused as of now
 @export var in_game_item: PackedScene
-## stats (in the Stats autoload) and bonuses we'll add to them
-## (there may be a nicer way to do this than just having them as strings but we'll get there)
-##
 ## Dropdown options are taken from an auto-generated enum based on stat_data.gd.
-## Due to Godot limitations, the editor must be restarted for the dropdown to be updated. 
+## Due to Godot limitations, the project must be reloaded for the dropdown to be updated.
 # TYPE_STRING = 4
 # PROPERTY_HINT_ENUM = 2 / PROPERTY_HINT_ENUM_SUGGESTION = 3
 # TYPE_FLOAT = 3

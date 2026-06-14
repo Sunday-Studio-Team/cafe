@@ -32,3 +32,4 @@ var daily_profit_goal := 22.0
 var employee_rating_goal := 10
 var ingredients_per_order := 22
 var ingredients_per_bag := 50
+var customer_spawn_interval := 5.0
