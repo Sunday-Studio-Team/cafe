@@ -14,6 +14,8 @@ func _ready() -> void:
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(
 		func():
+			email_app.hide()
+			shop_app.hide()
 			hide()
 			ui.show()
 	)
