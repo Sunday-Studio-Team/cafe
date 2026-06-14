@@ -196,12 +196,15 @@ func fix_machine() -> void:
 		timer.paused = false
 
 
-func _on_order_finished() -> void:
+func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
 	if ingredients <= Stats.current.ingredients_per_order:
 		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
 
+
+func _on_order_finished() -> void:
+	consume_ingredients()
 	make_random_drink()
 	display_drink_score()
 
@@ -256,6 +259,7 @@ func _on_reject_button_pressed() -> void:
 func _on_make_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		return
+	consume_ingredients()
 	completed_order = customers_order
 	drink_score = 3
 	final_order_indicator.text = (
