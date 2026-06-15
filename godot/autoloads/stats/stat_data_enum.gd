@@ -16,4 +16,5 @@ daily_profit_goal,\
 employee_rating_goal,\
 ingredients_per_order,\
 ingredients_per_bag,\
+customer_spawn_interval,\
 "

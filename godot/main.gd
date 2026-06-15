@@ -39,6 +39,8 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	set_per_day_stuff()
+	get_stats()
+	Events.items_updated.connect(get_stats)
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
@@ -66,6 +68,10 @@ func _ready() -> void:
 	#Active Item Use
 	Events.active_item_used.connect(active_item_used)
 	
+
+
+func get_stats() -> void:
+	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
