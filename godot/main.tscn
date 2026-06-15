@@ -621,9 +621,10 @@ vertical_alignment = 1
 
 [node name="PCUI" type="CanvasLayer" parent="." unique_id=1232958959]
 
-[node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui") instance=ExtResource("20_82xsv")]
+[node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
 visible = false
 ui = NodePath("../../UI")
+irl_new_shop_items_indicator = NodePath("../../Building/Desk/NewShopItems")
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
 visible = false

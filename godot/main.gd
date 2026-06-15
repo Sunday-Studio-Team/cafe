@@ -53,7 +53,8 @@ func _ready() -> void:
 	day_indicator.text = "DAY %s" % Global.day
 	day_indicator.show()
 	await get_tree().create_timer(3, false).timeout
-	ui.show()
+	if not Global.in_pc_ui:
+		ui.show()
 	day_indicator.hide()
 
 	# spawn one customer early off-sync with the timers wait time
