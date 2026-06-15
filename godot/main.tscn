@@ -360,7 +360,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer")
@@ -369,13 +369,14 @@ interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer2/TimeLeft")
+time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
+low_time_warning_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/LowTimeWarning")
 cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/CctvIndicator")
 alert_indicator = NodePath("MarginContainer/VBoxContainer/Alert")
 shelf_item_ui = NodePath("MarginContainer/ShelfItem")
@@ -495,12 +496,24 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "+1$ from customer"
 
-[node name="PanelContainer2" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1967076198]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=434238300]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 2
+
+[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1504470302]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "‼️⏰ 30s left"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1967076198]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
 
-[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer2" unique_id=481278116]
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer" unique_id=481278116]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8

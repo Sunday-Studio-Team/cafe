@@ -17,6 +17,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
+@export var low_time_warning_label: Label
 @export var cctv_indicator: TextureRect
 @export var alert_indicator: Label
 @export var shelf_item_ui: PanelContainer
@@ -151,9 +152,13 @@ func handle_time_left_warning() -> void:
 		and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
 		and not time_left_warning_played
 	):
-		_on_alert_posted("⏰ time left: %ds" % Stats.TIME_FOR_LOW_TIME_WARNING)
+		low_time_warning_label.text = "‼️⏰ %ds left" % Stats.TIME_FOR_LOW_TIME_WARNING
 		low_time_sound.play()
+		low_time_warning_label.show()
 		time_left_warning_played = true
+		var t := get_tree().create_tween().tween_property(low_time_warning_label, "modulate:a", 0, 2)
+		await t.finished
+		low_time_warning_label.hide()
 
 
 func update_score_indicators() -> void:
