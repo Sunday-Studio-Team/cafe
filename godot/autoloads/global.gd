@@ -87,6 +87,22 @@ func load_resources_from_folder(folder_path: String) -> Array[Resource]:
 
 	return resources
 
+#Items Functions
+
+#Returns true if item name exists
+func has_item(item_name: String) -> bool:
+	for i : Item in owned_items:
+		if i.name == item_name:
+			return true
+	return false
+
+#Removes the named item. If successful, returns true otherwise false
+func remove_item(item_name: String)-> bool:
+	for i in range(owned_items.size()):
+		if owned_items[i].name == item_name:
+			owned_items.remove_at(i)
+			return true
+	return false
 
 ## takes a float, converts it to a string formatted like a price in USD
 ## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"

@@ -57,6 +57,8 @@ func _ready() -> void:
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 	Events.customer_approached_window.connect(_on_customer_approached_window)
+	
+	fix_machine_button.interactable_active_item.connect(_on_active_item_use)
 
 	progress_indicator.hide()
 	score_label.hide()
@@ -324,3 +326,9 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 		return
 
 	customer = null
+
+func _on_active_item_use(item_name: String):
+	print("Using Item: ", item_name)
+	if item_name == "Hammer":
+		Global.remove_item("Hammer")
+		fix_machine()

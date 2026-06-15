@@ -163,13 +163,9 @@ func _on_desk_interacted() -> void:
 
 
 #When an Item is used, will activate the required effects
+#Not being used right now
 func active_item_used(item: String):
-	print(item)
 	
-	if item == "hammer":
-		#Check if the player is in front of a machine:
-		
-		pass
 	if item == "clock":
 		#Stop the clock for a time period
 		game_timer.stop()

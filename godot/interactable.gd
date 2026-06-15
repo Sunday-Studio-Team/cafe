@@ -5,6 +5,7 @@ extends Area3D
 # and modifying _on_interacted(), or by connecting this signal to a function
 # in another script
 signal interacted
+signal interactable_active_item
 
 ## the name that will show in UI for this interactable
 @export var display_name: String
@@ -54,7 +55,11 @@ func _physics_process(delta: float) -> void:
 		if not keep_progress_on_interrupt:
 			time_held = 0
 		return
-
+		
+	#Uses active item
+	if Input.is_action_just_pressed("Test_Button"):
+		#Emits if you use an active item in interactable
+		interactable_active_item.emit()
 	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()
@@ -72,6 +77,8 @@ func _physics_process(delta: float) -> void:
 	if mesh:
 		mesh.material_overlay = ShaderMaterial.new()
 		mesh.material_overlay.shader = Global.hover_shader
+	
+	
 
 
 func _on_interacted() -> void:
