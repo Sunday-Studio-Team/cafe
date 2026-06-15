@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
 [ext_resource type="PackedScene" uid="uid://nm85k5woe7rt" path="res://main.tscn" id="2_myf8j"]
+[ext_resource type="PackedScene" uid="uid://cqpfyo7o4qvn6" path="res://ui/main_menu.tscn" id="3_0bfbf"]
 
 [node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen")]
 process_mode = 3
 script = ExtResource("1_6uhv1")
 loading_screen = NodePath("LoadingCanvas/LoadingScreen")
 main_scene = ExtResource("2_myf8j")
+main_menu = ExtResource("3_0bfbf")
 
 [node name="LoadingCanvas" type="CanvasLayer" parent="." unique_id=520928004]
 layer = 10

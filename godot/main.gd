@@ -126,7 +126,7 @@ func _on_game_timer_timeout() -> void:
 	else:
 		Global.day = 1
 	if Global.day == Global.final_day + 1:
-		get_tree().quit()
+		Events.main_menu_loaded.emit()
 	else:
 		Events.main_scene_loaded.emit()
 

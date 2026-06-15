@@ -7,7 +7,7 @@ var in_end_screen := false
 
 
 func _ready() -> void:
-	quit_button.pressed.connect(func(): get_tree().quit())
+	quit_button.pressed.connect(func(): Events.main_menu_loaded.emit())
 	restart_button.pressed.connect(
 		func():
 			visible = false
