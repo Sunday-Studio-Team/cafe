@@ -1,11 +1,206 @@
 [gd_scene format=3 uid="uid://c3hbk2kct6kc7"]
 
 [ext_resource type="PackedScene" uid="uid://cqa614p1f0ccb" path="res://ui/pc/pc_app.tscn" id="1_yb0su"]
+[ext_resource type="Script" uid="uid://rgxs8xor3s1q" path="res://ui/pc/email_app.gd" id="2_1jvbq"]
+[ext_resource type="PackedScene" uid="uid://bo2t06x0a8xhx" path="res://ui/pc/email_app_list_item.tscn" id="2_n55yy"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="3_6p1nn"]
+[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_data_day_1_001.tres" id="4_fdysk"]
+[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="5_r71nh"]
+[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="6_7ubrx"]
+[ext_resource type="Script" uid="uid://cp5xre3ygh6sc" path="res://ui/pc/email_viewer.gd" id="6_lwc43"]
 
-[node name="EmailApp" unique_id=270681436 instance=ExtResource("1_yb0su")]
+[sub_resource type="LabelSettings" id="LabelSettings_6p1nn"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=194945357]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jvbq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fdysk"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pl26c"]
+font_size = 24
+font_color = Color(0.25, 0.25, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lwc43"]
+font_size = 24
+font_color = Color(0.25, 0.25, 0.25, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n55yy"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="EmailApp" unique_id=270681436 node_paths=PackedStringArray("email_app_list_items_container", "email_viewer") instance=ExtResource("1_yb0su")]
+script = ExtResource("2_1jvbq")
+emails_schedule = Array[ExtResource("3_6p1nn")]([ExtResource("4_fdysk"), ExtResource("5_r71nh"), ExtResource("6_7ubrx")])
+email_app_list_item_packed_scene = ExtResource("2_n55yy")
+email_app_list_items_container = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/EmailsList")
+email_viewer = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=2038282777]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=1162504817]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" index="0" unique_id=252186045]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" index="0" unique_id=1260820471]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Inbox"
+label_settings = SubResource("LabelSettings_6p1nn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" index="1" unique_id=194945357]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EmailsList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer" index="0" unique_id=1640140603]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1618283871]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="EmailViewer" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/Control" index="0" unique_id=265234611 node_paths=PackedStringArray("sender_name_label", "subject_label", "displayed_date_time_label", "recipient_label", "brief_contents_rich_text_label")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_lwc43")
+sender_name_label = NodePath("VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer2/SenderNameLabel")
+subject_label = NodePath("VBoxContainer/Control3/MarginContainer/VBoxContainer/EmailSubjectLabel")
+displayed_date_time_label = NodePath("VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer2/DateTimeLabel")
+recipient_label = NodePath("VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer/RecipientLabel")
+brief_contents_rich_text_label = NodePath("VBoxContainer/Control/ScrollContainer/VBoxContainer/MarginContainer/ContentsRichTextLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer" index="0" unique_id=929586699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer" index="0" unique_id=107130534]
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 
-[node name="Emails" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" index="0" unique_id=1640140603]
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer" index="1" unique_id=851516885]
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3" index="0" unique_id=1224708514]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1jvbq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3" index="1" unique_id=89146639]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer" index="0" unique_id=640662760]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="0" unique_id=1566303969]
+layout_mode = 2
+
+[node name="SenderNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer2" index="0" unique_id=712464132]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sender Name"
+label_settings = SubResource("LabelSettings_fdysk")
+
+[node name="DateTimeLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer2" index="1" unique_id=1301583772]
+layout_mode = 2
+text = "Date/Time"
+label_settings = SubResource("LabelSettings_pl26c")
+
+[node name="EmailSubjectLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="1" unique_id=569509916]
+layout_mode = 2
+text = "Email Subject"
+label_settings = SubResource("LabelSettings_fdysk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="2" unique_id=1812271745]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=609207322]
+layout_mode = 2
+text = "To:"
+label_settings = SubResource("LabelSettings_fdysk")
+
+[node name="RecipientLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=2093987972]
+layout_mode = 2
+text = "Email Recipient"
+label_settings = SubResource("LabelSettings_lwc43")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer" index="2" unique_id=216106416]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control" index="0" unique_id=1848254538]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n55yy")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control" index="1" unique_id=1100904384]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control/ScrollContainer" index="0" unique_id=917066260]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control/ScrollContainer/VBoxContainer" index="0" unique_id=84546733]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ContentsRichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control/ScrollContainer/VBoxContainer/MarginContainer" index="0" unique_id=1119108308]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 28
+text = "Email Contents"
