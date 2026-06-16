@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func apply_stats():
 	if item.stat_bonuses.is_empty():
-		push_error("%s has no stat bonuses, can't apply stats" % item.name)
+		push_warning("%s has no stat bonuses, not applying stats" % item.name)
 	for stat in item.stat_bonuses:
 		var current_stat = Stats.current.get(stat)
 		if current_stat == null:

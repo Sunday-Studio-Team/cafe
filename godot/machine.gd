@@ -20,6 +20,7 @@ extends Node3D
 @export var drink_customer_score_label: Label3D
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
+@export var tip_jar_item: Item
 
 var customer: Customer:
 	set(new_customer):
@@ -43,6 +44,7 @@ var drink_correct: bool = false
 var broken_down: bool = false
 var max_ingredients: int = 100
 var ingredients = max_ingredients
+var tip := 0.0
 
 
 func _ready() -> void:
@@ -118,6 +120,7 @@ func make_random_drink() -> void:
 	completed_order = null
 	drink_score = 0
 	drink_correct = false
+	tip = 0
 
 	# here we basically get a random num btwn 0 and 1, then add up the probabilities
 	# we set for each score until we hit that number
@@ -203,10 +206,20 @@ func consume_ingredients() -> void:
 		no_ingredients_sound.play()
 
 
+func calculate_tip() -> void:
+	if not tip_jar_item in Global.owned_items:
+		return
+
+	if randf() < 0.25:
+		tip = randf_range(0.5, 2)
+		score_label.text += " (+ %s tip)" % Global.float_to_price(tip)
+
+
 func _on_order_finished() -> void:
 	consume_ingredients()
 	make_random_drink()
 	display_drink_score()
+	calculate_tip()
 
 	final_order_indicator.text = (
 		"machine made: %s (%s)"
