@@ -12,7 +12,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var time_left_label: Label
 @export var objective: RichTextLabel
 @export var rules_controls: RichTextLabel
-@export var end_text: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
@@ -23,6 +22,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
+@export var day_indicator: Label
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -132,6 +132,11 @@ func _physics_process(_delta: float) -> void:
 	update_cctv_indicator()
 	handle_time_left_warning()
 	handle_shelf_item_ui()
+	update_day_indicator()
+
+
+func update_day_indicator() -> void:
+	day_indicator.text = "DAY %s/%s" % [Global.day, Global.final_day]
 
 
 func handle_shelf_item_ui() -> void:

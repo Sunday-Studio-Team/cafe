@@ -20,6 +20,12 @@ extends Node3D
 @export var minigame_controller: CanvasLayer
 
 
+func _enter_tree() -> void:
+	# for setting day on spawn (for debug)
+	#Global.day = 2
+	pass
+
+
 func _ready() -> void:
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
