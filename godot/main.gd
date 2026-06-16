@@ -15,6 +15,7 @@ extends Node3D
 @export var day_indicator: Label
 @export var desk: Interactable
 @export var pc_ui: Control
+@export var overtime_item: Item
 #Minigame
 @export var minigame_controller: CanvasLayer
 
@@ -67,6 +68,8 @@ func _ready() -> void:
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
+	if overtime_item in Global.owned_items:
+		game_timer.wait_time += game_timer.wait_time * 0.2
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here

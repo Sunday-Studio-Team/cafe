@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
+[ext_resource type="Resource" uid="uid://cipc6br6cv25l" path="res://items/overtime_request_form.tres" id="3_ryguw"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
@@ -94,6 +95,7 @@ ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Building/Desk")
 pc_ui = NodePath("PCUI/PC")
+overtime_item = ExtResource("3_ryguw")
 minigame_controller = NodePath("MinigameController")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
