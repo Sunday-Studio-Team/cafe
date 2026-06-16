@@ -238,7 +238,7 @@ func _on_accept_button_presssed() -> void:
 	drink_customer_score_label.hide()
 	score_label.show()
 	Global.score_update_message = "sold %s" % completed_order.name
-	Global.daily_profit += completed_order.price
+	Global.daily_profit += completed_order.price + tip
 	await get_tree().create_timer(0.5, false).timeout
 	score_label.hide()
 	drink_customer_score_label.show()
