@@ -6,13 +6,16 @@
 [ext_resource type="AudioStream" uid="uid://7lrf1ronpj3e" path="res://audio/cant_buy_item.wav" id="4_488el"]
 [ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
 
-[node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound") instance=ExtResource("1_swvwp")]
+[node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button") instance=ExtResource("1_swvwp")]
 script = ExtResource("2_c06av")
 items_container = NodePath("MarginContainer/VBoxContainer/Items")
 item_button_scene = ExtResource("3_mamje")
 bank_balance = NodePath("MarginContainer/Bank")
 cant_buy_sound = NodePath("CantBuySound")
 bought_sound = NodePath("BoughtItemSound")
+reroll_sound = NodePath("ReRollSound")
+cant_reroll_sound = NodePath("CantReRollSound")
+reroll_button = NodePath("MarginContainer/VBoxContainer/ReRoll")
 
 [node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
 layout_mode = 2
@@ -23,6 +26,12 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
+
+[node name="ReRoll" type="Button" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="3" unique_id=1225747767]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "re-roll"
 
 [node name="Bank" type="RichTextLabel" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=385636938]
 custom_minimum_size = Vector2(1000, 100)
@@ -39,3 +48,11 @@ volume_db = 5.0
 
 [node name="BoughtItemSound" type="AudioStreamPlayer" parent="." index="2" unique_id=456237441]
 stream = ExtResource("5_mngmr")
+
+[node name="ReRollSound" type="AudioStreamPlayer" parent="." index="3" unique_id=1962905130]
+stream = ExtResource("5_mngmr")
+pitch_scale = 0.5
+
+[node name="CantReRollSound" type="AudioStreamPlayer" parent="." index="4" unique_id=1111751407]
+stream = ExtResource("4_488el")
+pitch_scale = 0.5

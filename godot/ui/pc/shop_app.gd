@@ -5,6 +5,9 @@ extends PCApp
 @export var bank_balance: RichTextLabel
 @export var cant_buy_sound: AudioStreamPlayer
 @export var bought_sound: AudioStreamPlayer
+@export var reroll_sound: AudioStreamPlayer
+@export var cant_reroll_sound: AudioStreamPlayer
+@export var reroll_button: Button
 
 var number_of_items_to_show := 3
 var items_in_shop: Array[Item]
@@ -14,6 +17,8 @@ var items_in_shop: Array[Item]
 func _ready() -> void:
 	super()
 	populate_items()
+	reroll_button.text = "re-roll (%s)" % Global.float_to_price(Stats.current.cost_to_reroll)
+	reroll_button.pressed.connect(_on_reroll_pressed)
 
 
 func _physics_process(_delta: float) -> void:
@@ -49,10 +54,27 @@ func populate_items() -> void:
 			item_button.clicked.connect(_on_item_button_clicked)
 
 
+func _on_reroll_pressed() -> void:
+	if not Global.bank_money >= Stats.current.cost_to_reroll:
+		cant_reroll_sound.play()
+		var t := create_tween().set_parallel()
+		t.tween_property(reroll_button, "modulate", Color.WHITE, 1).from(Color.RED)
+		t.tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
+		return
+
+	for itm in items_container.get_children():
+		itm.queue_free()
+	populate_items()
+	Global.bank_money -= Stats.current.cost_to_reroll
+	reroll_button.hide()
+	reroll_sound.play()
+
+
 func _on_item_button_clicked(bought: bool) -> void:
 	if bought:
 		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.GOLD)
 		bought_sound.play()
+		reroll_button.hide()
 	else:
 		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
 		cant_buy_sound.play()
