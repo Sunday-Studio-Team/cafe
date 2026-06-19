@@ -33,3 +33,4 @@ var employee_rating_goal := 10
 var ingredients_per_order := 22
 var ingredients_per_bag := 50
 var customer_spawn_interval := 5.0
+var cost_to_reroll := 5.0

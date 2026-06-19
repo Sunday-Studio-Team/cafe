@@ -15,10 +15,17 @@ extends Node3D
 @export var day_indicator: Label
 @export var desk: Interactable
 @export var pc_ui: Control
+@export var overtime_item: Item
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
 @onready var clock_switch_timer = $ActivateItems/Clock_Switch_Timer
+
+
+func _enter_tree() -> void:
+	# for setting day on spawn (for debug)
+	#Global.day = 2
+	pass
 
 
 func _ready() -> void:
@@ -55,7 +62,8 @@ func _ready() -> void:
 	day_indicator.text = "DAY %s" % Global.day
 	day_indicator.show()
 	await get_tree().create_timer(3, false).timeout
-	ui.show()
+	if not Global.in_pc_ui:
+		ui.show()
 	day_indicator.hide()
 
 	# spawn one customer early off-sync with the timers wait time
@@ -72,6 +80,8 @@ func _ready() -> void:
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
+	if overtime_item in Global.owned_items:
+		game_timer.wait_time += game_timer.wait_time * 0.2
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -131,7 +141,7 @@ func _on_game_timer_timeout() -> void:
 	else:
 		Global.day = 1
 	if Global.day == Global.final_day + 1:
-		get_tree().quit()
+		Events.main_menu_loaded.emit()
 	else:
 		Events.main_scene_loaded.emit()
 

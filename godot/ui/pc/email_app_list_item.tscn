@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://bo2t06x0a8xhx"]
+
+[ext_resource type="Script" uid="uid://bdeq4svbobhug" path="res://ui/pc/email_app_list_item.gd" id="1_77ee6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yb0su"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77ee6"]
+bg_color = Color(0.20230746, 0.38137677, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_yb0su"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jvbq"]
+font_size = 22
+font_color = Color(0.25, 0.25, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n55yy"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[node name="EmailAppListItem" type="Control" unique_id=1527795294 node_paths=PackedStringArray("button", "sender_name_label", "subject_label", "displayed_date_time_label", "brief_contents_rich_text_label", "unread_indicator")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+script = ExtResource("1_77ee6")
+button = NodePath("Button")
+sender_name_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/SenderNameLabel")
+subject_label = NodePath("MarginContainer/VBoxContainer/EmailSubjectLabel")
+displayed_date_time_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/DateTimeLabel")
+brief_contents_rich_text_label = NodePath("MarginContainer/VBoxContainer/ContentRichTextLabel")
+unread_indicator = NodePath("UnreadIndicator")
+
+[node name="Button" type="Button" parent="." unique_id=1933184191]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=503647691]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yb0su")
+
+[node name="UnreadIndicator" type="HBoxContainer" parent="." unique_id=247064192]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UnreadIndicator" unique_id=1111255385]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 22
+
+[node name="UnreadIndicator" type="Panel" parent="UnreadIndicator/MarginContainer" unique_id=1767972631]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_77ee6")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=511084969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=406271631]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1224678106]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SenderNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=379861660]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sender Name"
+label_settings = SubResource("LabelSettings_yb0su")
+vertical_alignment = 1
+
+[node name="DateTimeLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=627192465]
+layout_mode = 2
+text = "Date/Time"
+label_settings = SubResource("LabelSettings_1jvbq")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="EmailSubjectLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1330127873]
+layout_mode = 2
+text = "Email Subject"
+label_settings = SubResource("LabelSettings_n55yy")
+vertical_alignment = 1
+
+[node name="ContentRichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=12680031]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_constants/line_separation = -2
+theme_override_font_sizes/normal_font_size = 16
+text = "Email Contents First Line
+Second Line"
+scroll_active = false

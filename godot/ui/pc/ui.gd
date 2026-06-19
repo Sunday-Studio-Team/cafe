@@ -12,16 +12,17 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var time_left_label: Label
 @export var objective: RichTextLabel
 @export var rules_controls: RichTextLabel
-@export var end_text: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
+@export var low_time_warning_label: Label
 @export var cctv_indicator: TextureRect
 @export var alert_indicator: Label
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
+@export var day_indicator: Label
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -131,6 +132,11 @@ func _physics_process(_delta: float) -> void:
 	update_cctv_indicator()
 	handle_time_left_warning()
 	handle_shelf_item_ui()
+	update_day_indicator()
+
+
+func update_day_indicator() -> void:
+	day_indicator.text = "DAY %s/%s" % [Global.day, Global.final_day]
 
 
 func handle_shelf_item_ui() -> void:
@@ -151,9 +157,13 @@ func handle_time_left_warning() -> void:
 		and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
 		and not time_left_warning_played
 	):
-		_on_alert_posted("⏰ time left: %ds" % Stats.TIME_FOR_LOW_TIME_WARNING)
+		low_time_warning_label.text = "‼️⏰ %ds left" % Stats.TIME_FOR_LOW_TIME_WARNING
 		low_time_sound.play()
+		low_time_warning_label.show()
 		time_left_warning_played = true
+		var t := get_tree().create_tween().tween_property(low_time_warning_label, "modulate:a", 0, 2)
+		await t.finished
+		low_time_warning_label.hide()
 
 
 func update_score_indicators() -> void:

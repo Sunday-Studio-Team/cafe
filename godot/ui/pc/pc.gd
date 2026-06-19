@@ -7,6 +7,9 @@ extends Control
 @export var exit_button: Button
 ## regular game hud
 @export var ui: CanvasLayer
+@export var irl_new_shop_items_indicator: Label3D
+
+var new_shop_items := true
 
 
 func _ready() -> void:
@@ -30,9 +33,14 @@ func _ready() -> void:
 	)
 
 
+func _physics_process(_delta: float) -> void:
+	irl_new_shop_items_indicator.visible = new_shop_items
+
+
 func _on_email_button_pressed() -> void:
 	email_app.show()
 
 
 func _on_shop_button_pressed() -> void:
 	shop_app.show()
+	new_shop_items = false
