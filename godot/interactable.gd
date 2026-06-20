@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	#Uses active item
 	if Input.is_action_just_pressed("Test_Button"):
 		#Emits if you use an active item in interactable
-		interactable_active_item.emit()
+		interactable_active_item.emit("Hammer")
 	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()

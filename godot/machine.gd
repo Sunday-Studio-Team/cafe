@@ -341,7 +341,6 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 	customer = null
 
 func _on_active_item_use(item_name: String):
-	print("Using Item: ", item_name)
-	if item_name == "Hammer":
+	if Global.has_item("Hammer"):
 		Global.remove_item("Hammer")
 		fix_machine()
