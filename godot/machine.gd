@@ -201,7 +201,7 @@ func fix_machine() -> void:
 
 func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
-	if ingredients <= Stats.current.ingredients_per_order:
+	if ingredients < Stats.current.ingredients_per_order:
 		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
 
