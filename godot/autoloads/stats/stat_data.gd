@@ -11,7 +11,7 @@ extends Resource
 var default_move_speed := 1.2
 var sprint_move_speed := 5.0
 var chance_of_machine_breaking := 0.2
-var machine_chance_of_spill := 0.99
+var machine_chance_of_spill := 0.15
 ## chance of each score from machine
 ## WARNING: make sure these always sum to 1 (or actually i can probably rework
 ## the logic to allow them to not sum to 1, since that would be easier
