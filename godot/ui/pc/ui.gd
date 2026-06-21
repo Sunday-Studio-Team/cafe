@@ -161,7 +161,10 @@ func handle_time_left_warning() -> void:
 		low_time_sound.play()
 		low_time_warning_label.show()
 		time_left_warning_played = true
-		var t := get_tree().create_tween().tween_property(low_time_warning_label, "modulate:a", 0, 2)
+		var t := create_tween()
+		t.tween_property(low_time_warning_label, "offset_transform_scale", Vector2(4, 4), 0.75)
+		t.tween_property(low_time_warning_label, "offset_transform_scale", Vector2(1, 1), 0.5)
+		t.tween_property(low_time_warning_label, "modulate:a", 0, 2)
 		await t.finished
 		low_time_warning_label.hide()
 
