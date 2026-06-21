@@ -1,14 +1,11 @@
 class_name Customer
 extends Node3D
 
-signal drink_made_at_window
-
 @export var body: Sprite3D
 @export var waiting_indicator: Sprite3D
 @export var waiting_bar: TextureProgressBar
 @export var timer: Timer
 @export var time_bonus_label: Label3D
-@export var make_drink_button: Interactable
 @export_dir var sprites_folder: String
 
 var window_wait_time: float = 30
@@ -20,8 +17,6 @@ var at_window: bool = false
 func _ready() -> void:
 	apply_random_sprite()
 	get_stats()
-	make_drink_button.enabled = false
-	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
@@ -51,7 +46,6 @@ func _physics_process(_delta: float) -> void:
 
 func get_stats():
 	timer.wait_time = Stats.current.customer_wait_time_machine
-	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 
 
 func leave_store() -> void:

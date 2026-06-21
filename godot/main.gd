@@ -149,8 +149,8 @@ func _on_customer_approached_machine(customer: Customer) -> void:
 
 
 #Minigame is active (Need to turn off regular player controls)
-func _on_minigame_active():
-	minigame_controller.play_minigame("Colors")
+func _on_minigame_active(minigame_name: String):
+	minigame_controller.play_minigame(minigame_name)
 
 
 #Closes the game -> Game is no longer visible and removed from the tree

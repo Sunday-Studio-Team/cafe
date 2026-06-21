@@ -318,7 +318,7 @@ func _on_fix_machine_button_pressed() -> void:
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
-	Events.minigame_active.emit()
+	Events.minigame_active.emit("Colors")
 
 
 func _on_minigame_end() -> void:
