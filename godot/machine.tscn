@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
+[ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -60,7 +61,9 @@ albedo_color = Color(1, 0.57254905, 0.57254905, 0.6862745)
 material = SubResource("StandardMaterial3D_yuuq8")
 size = Vector3(0.15, 0.15, 0.15)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "add_ing_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vn1tu"]
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "add_ing_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -82,6 +85,8 @@ drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
 ingredients_bar = NodePath("IngredientsMeter/SubViewport/MarginContainer/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
 tip_jar_item = ExtResource("2_yuuq8")
+spill_interactable = NodePath("Spill")
+spill_sound = NodePath("SpillSound")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -273,3 +278,23 @@ max_db = 0.0
 [node name="NoIngredientsSound" type="AudioStreamPlayer3D" parent="." unique_id=689608729]
 stream = ExtResource("7_6qesk")
 volume_db = -5.0
+
+[node name="Spill" type="Area3D" parent="." unique_id=1225300652]
+visible = false
+script = ExtResource("5_ioi8x")
+display_name = "clean up spill"
+hold_to_interact = true
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="Sprite3D" type="Sprite3D" parent="Spill" unique_id=667352050]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.001
+texture = ExtResource("9_1hddr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spill" unique_id=2013507775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.569979, -0.3)
+shape = SubResource("BoxShape3D_vn1tu")
+
+[node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
+stream = ExtResource("7_6qesk")
+pitch_scale = 2.0

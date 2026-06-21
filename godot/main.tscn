@@ -123,6 +123,7 @@ shadow_enabled = true
 [node name="Building" type="Node3D" parent="." unique_id=743168160]
 
 [node name="CustomerArea" type="CSGCombiner3D" parent="Building" unique_id=148944054]
+use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/CustomerArea" unique_id=1002136365]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -142,6 +143,11 @@ size = Vector3(2, 1, 0.1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -4.5)
 operation = 2
 size = Vector3(1.5, 2, 0.1)
+
+[node name="Doorway2" type="CSGBox3D" parent="Building/CustomerArea" unique_id=1948693067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 1.0515031, 0.85)
+operation = 2
+size = Vector3(0.505, 2, 1)
 
 [node name="BackWall" type="CSGCombiner3D" parent="Building" unique_id=480264500]
 use_collision = true
@@ -218,6 +224,11 @@ size = Vector3(1.75, 1, 0.5)
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.5, 0.99999994, -3.5)
 operation = 2
 size = Vector3(1, 2, 0.1)
+
+[node name="Doorway2" type="CSGBox3D" parent="Building/BackRoom" unique_id=62918386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1.0310736, -4.75)
+operation = 2
+size = Vector3(1, 2, 1)
 
 [node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
@@ -339,6 +350,29 @@ text = "BREAK
 ROOM"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HallwayToCustomerArea" type="CSGCombiner3D" parent="Building" unique_id=1167004986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+use_collision = true
+
+[node name="Room" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=284017547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.4, 2)
+size = Vector3(2, 3, 5)
+
+[node name="Void" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=1661541318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.4, 2)
+operation = 2
+size = Vector3(1.9, 2.9, 4.9)
+
+[node name="Doorway" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=547147232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6999998, 1, 4.2)
+operation = 2
+size = Vector3(1, 2, 1)
+
+[node name="Doorway3" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=1146012207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1, 0.85)
+operation = 2
+size = Vector3(1, 2, 1)
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)

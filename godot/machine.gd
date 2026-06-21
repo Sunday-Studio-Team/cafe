@@ -21,12 +21,17 @@ extends Node3D
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
 @export var tip_jar_item: Item
+@export var spill_interactable: Interactable
+@export var spill_sound: AudioStreamPlayer3D
 
 var customer: Customer:
 	set(new_customer):
 		customer = new_customer
 		if customer != null:
 			customer.global_position = spot_for_customer.global_position
+			if spill_on_floor:
+				Global.score_update_message = "customer stepped in spill"
+				Global.employee_rating -= Stats.current.penalty_for_customer_stood_in_spill
 			await get_tree().create_timer(randf_range(1, 3), false).timeout
 			start_order()
 		else:
@@ -45,6 +50,7 @@ var broken_down: bool = false
 var max_ingredients: int = 100
 var ingredients = max_ingredients
 var tip := 0.0
+var spill_on_floor := false
 
 
 func _ready() -> void:
@@ -59,6 +65,7 @@ func _ready() -> void:
 	breakdown_timer.wait_time = timer.wait_time / 2
 	breakdown_timer.timeout.connect(_on_breakdown_timer_timeout)
 	Events.customer_approached_window.connect(_on_customer_approached_window)
+	spill_interactable.interacted.connect(clean_up_spill)
 
 	progress_indicator.hide()
 	score_label.hide()
@@ -91,6 +98,7 @@ func _physics_process(_delta: float) -> void:
 func get_stats() -> void:
 	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.wait_time = Stats.current.machine_time_to_make_drink
+	spill_interactable.time_to_hold = Stats.current.time_to_clean_up_spill
 
 
 func start_order() -> void:
@@ -215,11 +223,25 @@ func calculate_tip() -> void:
 		score_label.text += " (+ %s tip)" % Global.float_to_price(tip)
 
 
+func spill() -> void:
+	if randf() < Stats.current.machine_chance_of_spill:
+		spill_interactable.show()
+		spill_on_floor = true
+		Events.alert_posted.emit("‼️⚙️machine made a spill")
+		spill_sound.play()
+
+
+func clean_up_spill() -> void:
+	spill_interactable.hide()
+	spill_on_floor = false
+
+
 func _on_order_finished() -> void:
 	consume_ingredients()
 	make_random_drink()
 	display_drink_score()
 	calculate_tip()
+	spill()
 
 	final_order_indicator.text = (
 		"machine made: %s (%s)"
