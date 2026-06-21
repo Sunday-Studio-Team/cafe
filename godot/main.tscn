@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/pc/ui.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
+[ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
@@ -51,6 +53,12 @@ material = SubResource("StandardMaterial3D_2cqfq")
 text = "store room"
 pixel_size = 0.025
 depth = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
+albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
+viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
 albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
@@ -205,6 +213,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 4.6453276)
 operation = 2
 size = Vector3(1.75, 1, 0.5)
 
+[node name="BreakroomDoorway" type="CSGBox3D" parent="Building/BackRoom" unique_id=1331323864]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.5, 0.99999994, -3.5)
+operation = 2
+size = Vector3(1, 2, 0.1)
+
 [node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
 use_collision = true
@@ -262,8 +275,69 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.88
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0216227, 2.1822639, -3.5186043)
 mesh = SubResource("TextMesh_yaehf")
 
+[node name="BreakRoom" type="CSGCombiner3D" parent="Building" unique_id=868477188]
+use_collision = true
+
+[node name="Room" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1478688247]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
+size = Vector3(4, 3, 6)
+
+[node name="Void" type="CSGBox3D" parent="Building/BreakRoom" unique_id=2135782914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
+operation = 2
+size = Vector3(3.9, 2.9, 5.9)
+
+[node name="Doorway" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1331827105]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.433789, 0.99999994, 5.5)
+operation = 2
+size = Vector3(1, 2, 0.1)
+
 [node name="Desk" parent="Building" unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.583761, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5)
+
+[node name="BreakRoomDoor" type="Node3D" parent="Building" unique_id=18232531 node_paths=PackedStringArray("close_sound")]
+transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.41727, 0, 4.9959364)
+script = ExtResource("6_d13ii")
+close_sound = NodePath("CloseSound")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Building/BreakRoomDoor" unique_id=1875513880]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
+use_collision = true
+size = Vector3(0.1, 2, 1)
+material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="CloseSound" type="AudioStreamPlayer3D" parent="Building/BreakRoomDoor" unique_id=1397575772]
+stream = ExtResource("7_1u8w0")
+volume_db = -20.0
+
+[node name="Sign" type="Sprite3D" parent="Building/BreakRoomDoor" unique_id=295705367]
+transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
+shaded = true
+texture = SubResource("ViewportTexture_vn1tu")
+
+[node name="SubViewport" type="SubViewport" parent="Building/BreakRoomDoor/Sign" unique_id=1349397849]
+transparent_bg = true
+
+[node name="ColorRect" type="ColorRect" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=1749443931]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Building/BreakRoomDoor/Sign/SubViewport/ColorRect" unique_id=364969205]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "BREAK
+ROOM"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
@@ -326,10 +400,10 @@ wait_time = 120.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
 
 [node name="ItemShelf" type="Node3D" parent="." unique_id=195864544 node_paths=PackedStringArray("item_slots_parent")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 7.2, 1.1999999, 9)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 11.216949, 1.1999999, 9)
 script = ExtResource("10_82xsv")
 shelf_item_scene = ExtResource("11_getpj")
 item_slots_parent = NodePath("ItemSlots")
