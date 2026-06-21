@@ -10,7 +10,7 @@ func _ready() -> void:
 			if Global.minigame_active:
 				close_game()
 	)
-	
+
 	Events.force_close_minigame.connect(_on_force_close_minigame)
 
 
@@ -38,6 +38,7 @@ func close_game():
 	visible = false
 	Global.minigame_active = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func _on_force_close_minigame() -> void:
 	if Global.minigame_active:

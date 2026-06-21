@@ -63,7 +63,7 @@ size = Vector3(0.15, 0.15, 0.15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vn1tu"]
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "add_ing_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("ProgressIndicator")
@@ -75,7 +75,7 @@ score_label = NodePath("ScoreLabel")
 make_drink_button = NodePath("MakeDrinkButton")
 accept_button = NodePath("AcceptButton")
 reject_button = NodePath("RejectButton")
-add_ing_button = NodePath("AddIngButton")
+refill_button = NodePath("RefillButton")
 waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
@@ -257,17 +257,17 @@ light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="AddIngButton" type="Area3D" parent="." unique_id=644204256 node_paths=PackedStringArray("mesh")]
+[node name="RefillButton" type="Area3D" parent="." unique_id=644204256 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89250463, 0.9077126, 0.89125085)
 script = ExtResource("5_ioi8x")
 display_name = "[color=pink]refill ingredients"
 mesh = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AddIngButton" unique_id=1086695979]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RefillButton" unique_id=1086695979]
 mesh = SubResource("BoxMesh_1hddr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AddIngButton" unique_id=1205924170]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RefillButton" unique_id=1205924170]
 shape = SubResource("BoxShape3D_loq51")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]

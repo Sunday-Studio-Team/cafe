@@ -8,14 +8,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(150, 25)
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "game_timer", "catch_point")]
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "catch_point", "meter", "bag_sprite")]
 script = ExtResource("1_2efvg")
 cup = NodePath("Cup")
 bean_scene = ExtResource("2_51asp")
 pour_point = NodePath("Bag/PourPoint")
 bean_spawn_timer = NodePath("BeanSpawnTimer")
-game_timer = NodePath("GameTimer")
 catch_point = NodePath("Cup/CatchPoint")
+meter = NodePath("CanvasLayer/MarginContainer/Meter")
+bag_sprite = NodePath("Bag/Sprite2D")
 
 [node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
 position = Vector2(939, 971)
@@ -40,10 +41,23 @@ texture = ExtResource("3_51asp")
 position = Vector2(-43, 227)
 
 [node name="BeanSpawnTimer" type="Timer" parent="." unique_id=1475975290]
-wait_time = 0.5
+wait_time = 0.4
 autostart = true
 
-[node name="GameTimer" type="Timer" parent="." unique_id=211379614]
-wait_time = 10.0
-one_shot = true
-autostart = true
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=341988252]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1305284393]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Meter" type="ProgressBar" parent="CanvasLayer/MarginContainer" unique_id=859238091]
+modulate = Color(0.33333334, 0.24705882, 0.23529412, 1)
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+value = 1.0
+show_percentage = false

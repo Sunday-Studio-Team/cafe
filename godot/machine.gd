@@ -11,7 +11,7 @@ extends Node3D
 @export var make_drink_button: Interactable
 @export var accept_button: Interactable
 @export var reject_button: Interactable
-@export var add_ing_button: Interactable
+@export var refill_button: Interactable
 @export var waiting_approval_indicator: Label3D
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
@@ -58,7 +58,7 @@ func _ready() -> void:
 	Events.items_updated.connect(get_stats)
 	accept_button.interacted.connect(_on_accept_button_presssed)
 	reject_button.interacted.connect(_on_reject_button_pressed)
-	add_ing_button.interacted.connect(_on_add_ing_button_pressed)
+	refill_button.interacted.connect(refill)
 	make_drink_button.interacted.connect(_on_make_drink_button_pressed)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	timer.timeout.connect(_on_order_finished)
@@ -80,7 +80,7 @@ func _physics_process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
-	add_ing_button.visible = Global.holding_ingredients
+	refill_button.visible = Global.holding_ingredients
 	waiting_approval_indicator.visible = waiting_for_response
 	ingredients_bar.value = ingredients
 	if ingredients_bar.value < Stats.current.ingredients_per_order:
@@ -236,6 +236,32 @@ func clean_up_spill() -> void:
 	spill_on_floor = false
 
 
+func refill() -> void:
+	Events.minigame_active.emit("Refill")
+
+	await Events.minigame_end
+
+	Global.holding_ingredients = false
+	ingredients += (
+		Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
+	)
+	if ingredients > max_ingredients:
+		ingredients = max_ingredients
+
+	if (
+		timer.is_stopped()
+		and customer
+		and not broken_down
+		and not waiting_for_response
+	):
+		start_order()
+
+
+func cancel_fix_minigame() -> void:
+	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
+
+
 func _on_order_finished() -> void:
 	consume_ingredients()
 	make_random_drink()
@@ -311,21 +337,6 @@ func _on_make_drink_button_pressed() -> void:
 	_on_accept_button_presssed()
 
 
-func _on_add_ing_button_pressed() -> void:
-	Global.holding_ingredients = false
-	ingredients += Stats.current.ingredients_per_bag
-	if ingredients > max_ingredients:
-		ingredients = max_ingredients
-
-	if (
-		timer.is_stopped()
-		and customer
-		and not broken_down
-		and not waiting_for_response
-	):
-		start_order()
-
-
 func _on_breakdown_timer_timeout() -> void:
 	customer_order_indicator.hide()
 	timer.paused = true
@@ -339,19 +350,14 @@ func _on_fix_machine_button_pressed() -> void:
 	# we connect and disconnect these signals here instead of in _ready() so other machines dont get
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_minigame_end)
-	Events.minigame_cancelled.connect(_on_minigame_cancelled)
+	Events.minigame_cancelled.connect(cancel_fix_minigame)
 	Events.minigame_active.emit("Colors")
 
 
 func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
-	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
+	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 	fix_machine()
-
-
-func _on_minigame_cancelled() -> void:
-	Events.minigame_end.disconnect(_on_minigame_end)
-	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:

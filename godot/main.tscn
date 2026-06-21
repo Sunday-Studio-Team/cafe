@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
+[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -471,6 +472,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
 
+[node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
+visible = false
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
@@ -703,6 +707,7 @@ visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
 "Colors": ExtResource("11_efxa6"),
+"Refill": ExtResource("23_lswn8"),
 "Typing": ExtResource("20_d13ii")
 })
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
@@ -724,7 +729,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1420, 880)
 render_target_update_mode = 0
 
 [node name="DayIndicator" type="CanvasLayer" parent="." unique_id=1793268735]
@@ -747,9 +752,6 @@ vertical_alignment = 1
 visible = false
 ui = NodePath("../../UI")
 irl_new_shop_items_indicator = NodePath("../../Building/Desk/NewShopItems")
-
-[node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
-visible = false
 
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
