@@ -17,70 +17,88 @@ bg_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51asp"]
 bg_color = Color(0.3372549, 0.24705882, 0.23529412, 1)
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "cup_area", "meter", "bag")]
-script = ExtResource("1_2efvg")
-cup = NodePath("Cup")
-bean_scene = ExtResource("2_51asp")
-pour_point = NodePath("Bag/PourPoint")
-bean_spawn_timer = NodePath("BeanSpawnTimer")
-cup_area = NodePath("Cup/CupArea")
-meter = NodePath("CanvasLayer/MarginContainer/Meter")
-bag = NodePath("Bag")
-
-[node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
-z_index = 1
-position = Vector2(939, 971)
-
-[node name="Sprite2D" type="Sprite2D" parent="Cup" unique_id=241036928]
-texture = ExtResource("2_m1jwq")
-
-[node name="CupArea" type="Area2D" parent="Cup" unique_id=1016481044]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cup/CupArea" unique_id=856955422]
-position = Vector2(-26, 23)
-shape = SubResource("RectangleShape2D_vn1tu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cup" unique_id=1320358170]
-position = Vector2(-150, 24)
-shape = SubResource("RectangleShape2D_0ffxp")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Cup" unique_id=156292515]
-position = Vector2(97, 24)
-shape = SubResource("RectangleShape2D_0ffxp")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Cup" unique_id=989659882]
-position = Vector2(-30, 186)
-rotation = 1.5707964
-shape = SubResource("RectangleShape2D_0ffxp")
-
-[node name="Bag" type="Node2D" parent="." unique_id=1716841124]
-position = Vector2(943, 74)
-
-[node name="Sprite2D" type="Sprite2D" parent="Bag" unique_id=2140708498]
-texture = ExtResource("3_51asp")
-
-[node name="PourPoint" type="Marker2D" parent="Bag" unique_id=1502659684]
-position = Vector2(-43, 227)
-
-[node name="BeanSpawnTimer" type="Timer" parent="." unique_id=1475975290]
-wait_time = 0.4
-autostart = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=341988252]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1305284393]
+[node name="SubViewportContainer" type="SubViewportContainer" unique_id=1244272070]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Meter" type="ProgressBar" parent="CanvasLayer/MarginContainer" unique_id=859238091]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=210426897]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="IngredientsRefillMinigame" type="Node2D" parent="SubViewport" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "cup_area", "meter", "bag")]
+script = ExtResource("1_2efvg")
+cup = NodePath("Cup")
+bean_scene = ExtResource("2_51asp")
+pour_point = NodePath("Bag/PourPoint")
+bean_spawn_timer = NodePath("BeanSpawnTimer")
+cup_area = NodePath("Cup/CupArea")
+meter = NodePath("../Meter")
+bag = NodePath("Bag")
+
+[node name="Cup" type="CharacterBody2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1768243399]
+z_index = 1
+position = Vector2(939, 971)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=241036928]
+texture = ExtResource("2_m1jwq")
+
+[node name="CupArea" type="Area2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1016481044]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup/CupArea" unique_id=856955422]
+position = Vector2(-26, 23)
+shape = SubResource("RectangleShape2D_vn1tu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1320358170]
+position = Vector2(-150, 24)
+shape = SubResource("RectangleShape2D_0ffxp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=156292515]
+position = Vector2(97, 24)
+shape = SubResource("RectangleShape2D_0ffxp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=989659882]
+position = Vector2(-30, 186)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_0ffxp")
+
+[node name="Bag" type="Node2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1716841124]
+position = Vector2(943, 74)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=2140708498]
+texture = ExtResource("3_51asp")
+
+[node name="PourPoint" type="Marker2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=1502659684]
+position = Vector2(-43, 227)
+
+[node name="BeanSpawnTimer" type="Timer" parent="SubViewport/IngredientsRefillMinigame" unique_id=1475975290]
+wait_time = 0.4
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport/IngredientsRefillMinigame" unique_id=341988252]
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/IngredientsRefillMinigame/CanvasLayer" unique_id=1305284393]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Meter" type="ProgressBar" parent="SubViewport" unique_id=859238091]
+z_index = -1
 custom_minimum_size = Vector2(500, 100)
-layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 theme_override_styles/background = SubResource("StyleBoxFlat_2w8d4")
 theme_override_styles/fill = SubResource("StyleBoxFlat_51asp")
 max_value = 1.0
 value = 0.6
+fill_mode = 3
 show_percentage = false

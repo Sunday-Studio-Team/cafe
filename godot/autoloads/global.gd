@@ -65,6 +65,7 @@ var bank_money := 0.0
 var final_day := 5
 # rules (true = rule in effect) (these are toggled per-day in main.gd)
 var holding_ingredients_rule := false
+# score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 
 
