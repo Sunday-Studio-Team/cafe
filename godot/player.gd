@@ -33,6 +33,9 @@ var holding_interactable: bool = false
 func _ready() -> void:
 	Global.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# the aiming ray is a child of the camera (not a direct child of the player)
+	# so just enabling exclude_parent doesnt work
+	aiming_ray.add_exception(self)
 
 
 func _physics_process(delta: float) -> void:

@@ -24,10 +24,9 @@ fov = 110.0
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
 target_position = Vector3(0, 0, -0.75)
-collision_mask = 2
+collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="IngredientsBag" parent="Camera3D" unique_id=2023250318 instance=ExtResource("2_onrkg")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.2521928, -0.24627936, -0.42260942)
