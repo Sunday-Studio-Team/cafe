@@ -2,14 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://s043j74ko4a1" path="res://sprites/coffee_bean.png" id="1_qurre"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m1jwq"]
-radius = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 25.0
+height = 80.0
 
 [node name="Bean" type="RigidBody2D" unique_id=68542228]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_qurre")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
-shape = SubResource("CircleShape2D_m1jwq")
+position = Vector2(-1, -1)
+rotation = -0.7382135
+shape = SubResource("CapsuleShape2D_onrkg")
