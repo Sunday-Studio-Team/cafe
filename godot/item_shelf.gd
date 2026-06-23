@@ -17,8 +17,7 @@ func display_items() -> void:
 	# properly on restart
 	await get_tree().process_frame
 	for item in Global.owned_items:
-		if item.is_active:
-			continue
+		#can change the visual of the item here
 		var shelf_item: ShelfItem = shelf_item_scene.instantiate()
 		shelf_item.item = item
 		item_slots[Global.owned_items.find(item)].add_child(shelf_item)

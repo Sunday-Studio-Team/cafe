@@ -18,6 +18,7 @@ extends Resource
 ## NOTE: unused for now
 @export var rules: Dictionary
 #Determines if it's an active item 
-#Does not go to shelf & instead inventory
-#Used up after use
-@export var is_active: bool = false
+@export var is_active_item: bool = false
+
+#When false, the item can't be used (only for active items)
+@export var able_to_use: bool = true

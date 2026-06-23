@@ -105,6 +105,19 @@ func remove_item(item_name: String)-> bool:
 			return true
 	return false
 
+#Deactivates a specific item
+func deactivate_item(item_name: String) -> bool:
+	for i in range(owned_items.size()):
+		if owned_items[i].name == item_name:
+			owned_items[i].able_to_use = false
+			return true
+	return false
+
+#Activates all items
+func activate_all_items():
+	for i in range(owned_items.size()):
+		owned_items[i].able_to_use = true
+
 ## takes a float, converts it to a string formatted like a price in USD
 ## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"
 func float_to_price(number: float) -> String:
