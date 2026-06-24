@@ -23,6 +23,7 @@ extends Node3D
 @export var tip_jar_item: Item
 @export var spill_interactable: Interactable
 @export var spill_sound: AudioStreamPlayer3D
+@export var static_body: StaticBody3D
 
 var customer: Customer:
 	set(new_customer):
@@ -71,6 +72,9 @@ func _ready() -> void:
 	score_label.hide()
 	customer_order_indicator.hide()
 	final_order_indicator.hide()
+
+	visibility_changed.connect(_on_visibility_changed)
+	_on_visibility_changed()
 
 
 func _physics_process(_delta: float) -> void:
@@ -260,6 +264,13 @@ func refill() -> void:
 func cancel_fix_minigame() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		static_body.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		static_body.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func _on_order_finished() -> void:
