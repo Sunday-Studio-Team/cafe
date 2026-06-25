@@ -15,17 +15,17 @@
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
-[ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://Minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
-[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://Minigames/Colors/Colors_Minigame.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bxnxtc8jiih51" path="res://items/shelf_item.tscn" id="11_getpj"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
-[ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
+[ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://Minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
-[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
+[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://Minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -43,9 +43,17 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 volumetric_fog_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
+albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
+viewport_path = NodePath("BreakRoomDoor/Sign/SubViewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.29411766)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ho8ok"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
 albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
@@ -55,12 +63,6 @@ material = SubResource("StandardMaterial3D_2cqfq")
 text = "store room"
 pixel_size = 0.025
 depth = 0.025
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
-albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
-viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
 albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
@@ -103,7 +105,7 @@ game_timer = NodePath("GameTimer")
 window = NodePath("Window")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
-desk = NodePath("Building/Desk")
+desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
 minigame_controller = NodePath("MinigameController")
@@ -117,11 +119,70 @@ shape = SubResource("WorldBoundaryShape3D_2cqfq")
 environment = SubResource("Environment_h2yge")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1539755588]
-transform = Transform3D(0.9659258, 2.956346e-08, -0.25881907, 0.12940952, -0.8660253, 0.48296285, -0.22414385, -0.5, -0.83651626, 0, 10, 0)
-light_color = Color(0.6745098, 0.5647059, 0.5254902, 1)
+transform = Transform3D(0.9659259, 7.766263e-10, -0.25881904, 0.12940954, -0.8660254, 0.48296297, -0.22414386, -0.50000006, -0.83651626, 3.8400393, 6.8929615, -7.5485992)
+light_color = Color(0.5832209, 0.5957617, 0.57406896, 1)
+light_energy = 3.297
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.287
 shadow_enabled = true
 
+[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5.6864905)
+
+[node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1111936502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.789435, 0, 0.996032)
+
+[node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8894348, 0, 2.396032)
+
+[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound")]
+transform = Transform3D(-1.2999979, 0, 0.0022584386, 0, 1.3, 0, -0.0022584386, 0, -1.2999979, 7.21848, 0, 8.163682)
+script = ExtResource("6_d13ii")
+close_sound = NodePath("CloseSound")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor" unique_id=1875513880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.040650368, 1, 0.509799)
+use_collision = true
+size = Vector3(0.1, 2, 1.2270508)
+material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="CloseSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=1397575772]
+stream = ExtResource("7_1u8w0")
+volume_db = -20.0
+
+[node name="Sign" type="Sprite3D" parent="BreakRoomDoor" unique_id=295705367]
+transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
+shaded = true
+texture = SubResource("ViewportTexture_vn1tu")
+
+[node name="SubViewport" type="SubViewport" parent="BreakRoomDoor/Sign" unique_id=1349397849]
+transparent_bg = true
+size = Vector2i(700, 512)
+
+[node name="ColorRect" type="ColorRect" parent="BreakRoomDoor/Sign/SubViewport" unique_id=1749443931]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BreakRoomDoor/Sign/SubViewport/ColorRect" unique_id=364969205]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "MAKE COFFEE
+GREAT AGAIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Building" type="Node3D" parent="." unique_id=743168160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.346714, 0, 0)
+visible = false
 
 [node name="CustomerArea" type="CSGCombiner3D" parent="Building" unique_id=148944054]
 use_collision = true
@@ -244,50 +305,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4058976, 1.5, -0.05000019)
 operation = 2
 size = Vector3(23.9, 2.9, 9)
 
-[node name="StoreRoom" type="CSGCombiner3D" parent="Building" unique_id=1595009912]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.010478, 0, 16.887238)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/StoreRoom" unique_id=909590115]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(5, 3, 7)
-
-[node name="Void" type="CSGBox3D" parent="Building/StoreRoom" unique_id=2142819468]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.9621792)
-operation = 2
-size = Vector3(4.9, 2.9, 3)
-
-[node name="Door" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1960340312]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -3.4918575)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Shelf" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1245730084]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7501247, -0.7672291)
-size = Vector3(5, 0.1, 1)
-
-[node name="IngredientsBag" parent="Building/StoreRoom/Shelf" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.34170055, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag2" parent="Building/StoreRoom/Shelf" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.6065731, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag3" parent="Building/StoreRoom/Shelf" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 0.34170055, 0.13795435, -0.0006752014)
-
-[node name="IngredientsBag4" parent="Building/StoreRoom/Shelf" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0.024939537, 0.13795435, -0.40213585)
-
-[node name="IngredientsBag5" parent="Building/StoreRoom/Shelf" unique_id=587147078 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.22939682, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag6" parent="Building/StoreRoom/Shelf" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.8866453, 0.13795435, -0.11124611)
-
-[node name="Sign" type="MeshInstance3D" parent="Building/StoreRoom" unique_id=1748779659]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0216227, 2.1822639, -3.5186043)
-mesh = SubResource("TextMesh_yaehf")
-
 [node name="BreakRoom" type="CSGCombiner3D" parent="Building" unique_id=868477188]
 use_collision = true
 
@@ -328,106 +345,132 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1, 0.85)
 operation = 2
 size = Vector3(1, 2, 1)
 
-[node name="Desk" parent="Building" unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1336410776]
+transform = Transform3D(62.570522, 0, 0, 0, 1, 0, 0, 0, 26.746897, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ho8ok")
 
-[node name="BreakRoomDoor" type="Node3D" parent="Building" unique_id=18232531 node_paths=PackedStringArray("close_sound")]
-transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.41727, 0, 4.9959364)
-script = ExtResource("6_d13ii")
-close_sound = NodePath("CloseSound")
+[node name="circle" type="Node3D" parent="." unique_id=1864003083]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Building/BreakRoomDoor" unique_id=1875513880]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="circle" unique_id=674159465]
 use_collision = true
-size = Vector3(0.1, 2, 1)
-material = SubResource("StandardMaterial3D_1u8w0")
 
-[node name="CloseSound" type="AudioStreamPlayer3D" parent="Building/BreakRoomDoor" unique_id=1397575772]
-stream = ExtResource("7_1u8w0")
-volume_db = -20.0
+[node name="StoreRoom" type="CSGCombiner3D" parent="circle/CSGCombiner3D" unique_id=1595009912]
+transform = Transform3D(0.5841896, 0, -0.81161726, 0, 1, 0, 0.81161726, 0, 0.5841896, -6.596294, 0, 11.149679)
+use_collision = true
 
-[node name="Sign" type="Sprite3D" parent="Building/BreakRoomDoor" unique_id=295705367]
-transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
-shaded = true
-texture = SubResource("ViewportTexture_vn1tu")
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="circle/CSGCombiner3D" unique_id=53116820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8791523, 0.45325637, 7.57292)
+use_collision = true
+radius = 4.209
+height = 0.94464445
+sides = 50
 
-[node name="SubViewport" type="SubViewport" parent="Building/BreakRoomDoor/Sign" unique_id=1349397849]
-transparent_bg = true
+[node name="Room" type="CSGBox3D" parent="circle/CSGCombiner3D" unique_id=909590115]
+transform = Transform3D(0.5841896, 0, -0.81161726, 0, 1, 0, 0.81161726, 0, 0.5841896, -6.596294, 1.5, 11.149679)
+size = Vector3(5, 3, 7)
 
-[node name="ColorRect" type="ColorRect" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=1749443931]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Void" type="CSGBox3D" parent="circle/CSGCombiner3D" unique_id=2142819468]
+transform = Transform3D(0.5841896, 0, -0.81161726, 0, 1, 0, 0.81161726, 0, 0.5841896, -5.0037556, 1.4414227, 10.003394)
+operation = 2
+size = Vector3(4.9, 2.9, 3)
 
-[node name="Label" type="Label" parent="Building/BreakRoomDoor/Sign/SubViewport/ColorRect" unique_id=364969205]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 96
-text = "BREAK
-ROOM"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Shelf" type="CSGBox3D" parent="circle/CSGCombiner3D" unique_id=1245730084]
+transform = Transform3D(0.5841896, 0, -0.81161726, 0, 1, 0, 0.81161726, 0, 0.5841896, -5.9735975, 0.7501247, 10.701472)
+size = Vector3(5, 0.1, 1)
 
-[node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
+[node name="IngredientsBag" parent="circle/CSGCombiner3D/Shelf" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.34170055, 0.13795435, -0.33964348)
 
-[node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1111936502]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
+[node name="IngredientsBag2" parent="circle/CSGCombiner3D/Shelf" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.6065731, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag3" parent="circle/CSGCombiner3D/Shelf" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 0.34170055, 0.13795435, -0.0006752014)
+
+[node name="IngredientsBag4" parent="circle/CSGCombiner3D/Shelf" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0.024939537, 0.13795435, -0.40213585)
+
+[node name="IngredientsBag5" parent="circle/CSGCombiner3D/Shelf" unique_id=587147078 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.22939682, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag6" parent="circle/CSGCombiner3D/Shelf" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.8866453, 0.13795435, -0.11124611)
+
+[node name="Sign" type="MeshInstance3D" parent="circle/CSGCombiner3D" unique_id=1748779659]
+transform = Transform3D(-0.58418965, 0, 0.8116172, 0, 1, 0, -0.8116172, 0, -0.58418965, -3.1437128, 2.1822639, 9.923314)
+mesh = SubResource("TextMesh_yaehf")
+
+[node name="Door" type="CSGBox3D" parent="circle/CSGCombiner3D" unique_id=1960340312]
+transform = Transform3D(0.5841896, 0, -0.81161726, 0, 1, 0, 0.81161726, 0, 0.5841896, -3.887583, 0.99999994, 10.4321)
+operation = 2
+size = Vector3(1.5, 2, 1.8484375)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="circle/CSGCombiner3D" unique_id=1986424613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8791523, 2.014934, 7.57292)
+operation = 2
+use_collision = true
+radius = 3.946
+height = 4.068
+sides = 50
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="circle/CSGCombiner3D" unique_id=1444899240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.789896, 1.3514497, 7.57292)
+use_collision = true
+radius = 3.0
+height = 2.7410312
+sides = 50
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="circle/CSGCombiner3D" unique_id=13125480]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.798094, 1.438897, 7.57292)
+operation = 2
+use_collision = true
+radius = 2.9
+height = 2.9159257
+sides = 50
+
+[node name="CSGBox3D" type="CSGBox3D" parent="circle/CSGCombiner3D" unique_id=1573424737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9864664, 1.2263544, 7.5220165)
+size = Vector3(4.206352, 2.7391663, 1.6237793)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="circle/CSGCombiner3D" unique_id=572075000]
+transform = Transform3D(1, 0, 0, 0, 0.9123055, 0, 0, 0, 1, 4.6738176, 1.3031703, 7.5370617)
+operation = 2
+size = Vector3(4.83165, 2.8555298, 1.4490356)
 
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 
 [node name="Machine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.1, 0.1, 1.2999998)
-visible = false
+transform = Transform3D(-0.99694157, 0, 0.07815034, 0, 1, 0, -0.07815034, 0, -0.99694157, -1.1556425, 0.1, 11.755557)
 
 [node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 3.8)
+transform = Transform3D(0.2832148, 0, 0.9590566, 0, 1, 0, -0.9590566, 0, 0.2832148, -4.7668276, 0.1, 6.360728)
 
 [node name="Machine3" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3.8)
+transform = Transform3D(0.98887086, 0, -0.1487763, 0, 1, 0, 0.1487763, 0, 0.98887086, 0, 0.1, 3.5679772)
 
 [node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.1, 0.1, -2.7000003)
-visible = false
+transform = Transform3D(-0.44638428, 0, -0.8948414, 0, 1, 0, 0.8948414, 0, -0.44638428, 2.9302154, 0.1, 9.581743)
 
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4912045, 0, 4)
 
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.303767, 0, 3.7692227)
 
 [node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.6975236, 4.209534)
-rotation_pause_length = 4.0
+transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -4.4166946, 2.6975236, 4.0772305)
+rotation_amount = 360.0
+rotation_time = 20.0
+rotation_pause_length = 3.0
 
-[node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9847103, 2.6719248, 5.5821085)
-rotation_time = 2.0
-rotation_pause_length = 4.0
-
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam2" index="0" unique_id=1348601655]
-spot_angle = 25.0
-
-[node name="SecurityCam3" parent="SecurityCams" unique_id=1837350934 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.8847103, 2.6719248, 6.8821087)
-rotation_amount = 45.0
-rotation_time = 2.0
-rotation_pause_length = 0.0
-
-[node name="SecurityCam4" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.086619, 2.6719248, 0.7078019)
-
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam4" index="0" unique_id=1348601655]
-spot_angle = 25.0
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam" index="0" unique_id=1348601655]
+transform = Transform3D(0.96137106, 0.27406484, 0.025575966, -0.21908602, 0.7056298, 0.6738605, 0.16663435, -0.6534333, 0.7384159, 0, 0, 0)
+spot_range = 6.3
+spot_attenuation = 0.72
+spot_angle = 21.66
 
 [node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.216614, 1.3069857, 4.425891)
+transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 9.451205, 1.1012981, 5.7562857)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -751,10 +794,9 @@ vertical_alignment = 1
 [node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
 visible = false
 ui = NodePath("../../UI")
-irl_new_shop_items_indicator = NodePath("../../Building/Desk/NewShopItems")
+irl_new_shop_items_indicator = NodePath("../../Desk/NewShopItems")
 
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
 
-[editable path="SecurityCams/SecurityCam2"]
-[editable path="SecurityCams/SecurityCam4"]
+[editable path="SecurityCams/SecurityCam"]
