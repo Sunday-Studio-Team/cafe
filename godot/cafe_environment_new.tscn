@@ -6,6 +6,56 @@
 [ext_resource type="PackedScene" uid="uid://cvx1me2mi6tpm" path="res://environment/corner_piece.tscn" id="4_rkau7"]
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="5_y5pqn"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
+albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(10, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y5pqn"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(2, 0.1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
+albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(12, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jofr6"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(4, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7olkn"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(4, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u58gx"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(20, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l03hl"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(6, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q16ga"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(20, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_opecw"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(6, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4tnuu"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cl0mu"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(4, 0.1, 4)
+
 [node name="Environment" type="Node3D" unique_id=563251901]
 
 [node name="CustomerArea" type="Node3D" parent="." unique_id=1276105761]
@@ -61,6 +111,18 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0
 [node name="WallPieceShort6" parent="CustomerArea" unique_id=61899105 instance=ExtResource("3_jofr6")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -5)
 
+[node name="Roof" type="MeshInstance3D" parent="CustomerArea" unique_id=1539259139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, -4)
+mesh = SubResource("BoxMesh_0ffxp")
+
+[node name="Roof2" type="MeshInstance3D" parent="CustomerArea" unique_id=1314548239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, -3)
+mesh = SubResource("BoxMesh_y5pqn")
+
+[node name="Floor" type="MeshInstance3D" parent="CustomerArea" unique_id=657010812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+mesh = SubResource("BoxMesh_rkau7")
+
 [node name="BreakRoom" type="Node3D" parent="." unique_id=988114770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
@@ -84,6 +146,14 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0
 
 [node name="WallPieceLong4" parent="BreakRoom" unique_id=1778505889 instance=ExtResource("1_646ss")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.9999998, 0, 6)
+
+[node name="Roof" type="MeshInstance3D" parent="BreakRoom" unique_id=35610809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 3)
+mesh = SubResource("BoxMesh_jofr6")
+
+[node name="Floor" type="MeshInstance3D" parent="BreakRoom" unique_id=930735005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+mesh = SubResource("BoxMesh_7olkn")
 
 [node name="BackRoom" type="Node3D" parent="." unique_id=519216479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
@@ -124,6 +194,22 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 
 [node name="WallPieceLong8" parent="BackRoom" unique_id=834723144 instance=ExtResource("1_646ss")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11, 0, 1)
 
+[node name="Floor" type="MeshInstance3D" parent="BackRoom" unique_id=819726107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+mesh = SubResource("BoxMesh_u58gx")
+
+[node name="Floor2" type="MeshInstance3D" parent="BackRoom" unique_id=1784540031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+mesh = SubResource("BoxMesh_l03hl")
+
+[node name="Roof" type="MeshInstance3D" parent="BackRoom" unique_id=14358993]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -2)
+mesh = SubResource("BoxMesh_q16ga")
+
+[node name="Roof2" type="MeshInstance3D" parent="BackRoom" unique_id=406058405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -9)
+mesh = SubResource("BoxMesh_opecw")
+
 [node name="StoreRoom" type="Node3D" parent="." unique_id=1090696470]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
 
@@ -147,3 +233,11 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 
 [node name="WallPieceLong" parent="StoreRoom" unique_id=768785082 instance=ExtResource("1_646ss")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 4)
+
+[node name="Roof" type="MeshInstance3D" parent="StoreRoom" unique_id=2141389222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 2)
+mesh = SubResource("BoxMesh_4tnuu")
+
+[node name="Floor" type="MeshInstance3D" parent="StoreRoom" unique_id=1411438706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = SubResource("BoxMesh_cl0mu")
