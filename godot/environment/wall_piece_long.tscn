@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cbxfoj2piyybe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
+size = Vector3(4, 3, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvgty"]
+albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_kvgty")
+size = Vector3(4, 3, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chp50"]
+albedo_color = Color(0.6509804, 0.63529414, 0.5882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3nopi"]
+material = SubResource("StandardMaterial3D_chp50")
+size = Vector3(4.05, 0.1, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5j1ws"]
+albedo_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pmsvo"]
+material = SubResource("StandardMaterial3D_5j1ws")
+size = Vector3(4.05, 0.1, 0.25)
+
+[node name="WallPieceLong" type="Node3D" unique_id=1045992760]
+
+[node name="Offset" type="Node3D" parent="." unique_id=1057949970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.1)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Offset" unique_id=377064045]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Offset/StaticBody3D" unique_id=2029179536]
+shape = SubResource("BoxShape3D_0ffxp")
+
+[node name="Wall" type="MeshInstance3D" parent="Offset" unique_id=1734048891]
+mesh = SubResource("BoxMesh_0ffxp")
+
+[node name="FloorTrim" type="MeshInstance3D" parent="Offset" unique_id=1553129437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.45, 0)
+mesh = SubResource("BoxMesh_3nopi")
+
+[node name="CeilingTrim" type="MeshInstance3D" parent="Offset" unique_id=633211982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+mesh = SubResource("BoxMesh_pmsvo")
