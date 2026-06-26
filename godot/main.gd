@@ -145,7 +145,8 @@ func _on_customer_approached_machine(customer: Customer) -> void:
 	while machine == null or machine.customer:
 		machine = machines.pick_random()
 
-	machine.customer = customer
+	machine.set_customer(customer)
+	machine.start_order()
 
 
 #Minigame is active (Need to turn off regular player controls)
