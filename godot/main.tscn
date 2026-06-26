@@ -15,17 +15,17 @@
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
-[ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://Minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
-[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://Minigames/Colors/Colors_Minigame.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bxnxtc8jiih51" path="res://items/shelf_item.tscn" id="11_getpj"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
-[ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
+[ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://Minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
-[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
+[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://Minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -177,24 +177,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.95)
 use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/BackRoom" unique_id=159442344]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0021665096, 1.5, -0.003581047)
 size = Vector3(15, 3, 9)
 
 [node name="Void" type="CSGBox3D" parent="Building/BackRoom" unique_id=703396434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.03203392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.059960842, 1.5, 0.03203392)
 operation = 2
-size = Vector3(14.9, 2.9, 8.9)
+size = Vector3(14.780078, 2.9, 8.9)
 
 [node name="Void2" type="CSGBox3D" parent="Building/BackRoom" unique_id=1398872124]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5166847, 1.5, -4.4999995)
 operation = 2
 size = Vector3(12, 2.9, 0.2)
 material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="Door" type="CSGBox3D" parent="Building/BackRoom" unique_id=1245701505]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.491553, 0.99999994, -1.5561385)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
 
 [node name="LowWall" type="CSGBox3D" parent="Building/BackRoom" unique_id=2081912894]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0.5, -4)
@@ -212,9 +207,9 @@ transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, 2.9,
 size = Vector3(0.5, 1, 2)
 
 [node name="Door2" type="CSGBox3D" parent="Building/BackRoom" unique_id=608670982]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.99999994, 4.5081425)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.0267334, 4.5081425)
 operation = 2
-size = Vector3(1.5, 2, 0.1)
+size = Vector3(1.5, 1.9465332, 0.1)
 
 [node name="Window" type="CSGBox3D" parent="Building/BackRoom" unique_id=692264008]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 4.6453276)
@@ -231,21 +226,62 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1.0310736, -4.75)
 operation = 2
 size = Vector3(1, 2, 1)
 
+[node name="Door3" type="CSGBox3D" parent="Building/BackRoom" unique_id=472395663]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.42, 1.0324972, -1.5524068)
+operation = 2
+size = Vector3(1.5128174, 1.9741211, 0.18309326)
+
 [node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
+transform = Transform3D(-2.716657e-08, 0, -1.3505564, 0, 1, 0, 0.6214987, 0, -5.9034694e-08, -17.073174, 0, 9.166435)
 use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/BackRoom2" unique_id=930105116]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4546285, 1.5, 0)
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, 0, 0, 1, 4.454631, 1.5150642, 0)
 size = Vector3(24, 3, 9)
 
 [node name="Void" type="CSGBox3D" parent="Building/BackRoom2" unique_id=59185805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4058976, 1.5, -0.05000019)
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, 0, 0, 1, 4.410966, 1.488, -0.010000229)
 operation = 2
-size = Vector3(23.9, 2.9, 9)
+size = Vector3(23.9, 2.9, 8.8)
+
+[node name="Block" type="CSGBox3D" parent="Building/BackRoom2" unique_id=128542569]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, 0, 0, 1, 6, 1.5, 0)
+size = Vector3(8, 3, 3)
+
+[node name="Door" type="CSGBox3D" parent="Building/BackRoom2" unique_id=1392114957]
+transform = Transform3D(-7.033223e-08, 0, 1.6090138, 0, 1, 0, -0.7404356, 0, -3.236547e-08, -7.2451277, 1.461282, -2.7164936)
+operation = 2
+size = Vector3(2.8, 2.8, 1)
+
+[node name="Door1" type="CSGBox3D" parent="Building/BackRoom2" unique_id=1025100829]
+transform = Transform3D(-7.033223e-08, 0, -1.6090138, 0, 1, 0, 0.7404356, 0, -3.2365467e-08, 16.490223, 1.022, -2.8960018)
+operation = 2
+size = Vector3(1.5, 2, 0.19599609)
+
+[node name="PlayerArea" type="CSGCombiner3D" parent="Building" unique_id=1675860015]
+use_collision = true
+
+[node name="Room" type="CSGBox3D" parent="Building/PlayerArea" unique_id=313128441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.002422, 1.5, 3.528595e-05)
+size = Vector3(10, 3, 9)
+
+[node name="Void" type="CSGBox3D" parent="Building/PlayerArea" unique_id=1337219708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1.5, 0.038565636)
+operation = 2
+size = Vector3(9.8, 2.9, 8.8)
+
+[node name="Door1" type="CSGBox3D" parent="Building/PlayerArea" unique_id=1047761407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.290892, 1.4621098, 4.52)
+operation = 2
+size = Vector3(3, 2.8, 1)
+
+[node name="Door2" type="CSGBox3D" parent="Building/PlayerArea" unique_id=1050075470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.405, 1.462, 4.577)
+operation = 2
+size = Vector3(2.8, 2.8, 1)
 
 [node name="StoreRoom" type="CSGCombiner3D" parent="Building" unique_id=1595009912]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.010478, 0, 16.887238)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.466366, 0, 21.9)
 use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/StoreRoom" unique_id=909590115]
@@ -288,12 +324,17 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.88
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0216227, 2.1822639, -3.5186043)
 mesh = SubResource("TextMesh_yaehf")
 
+[node name="Door2" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1327153986]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.4966755, 1.0222466, -2.3221855)
+operation = 2
+size = Vector3(1.5, 2, 0.1)
+
 [node name="BreakRoom" type="CSGCombiner3D" parent="Building" unique_id=868477188]
 use_collision = true
 
 [node name="Room" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1478688247]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
-size = Vector3(4, 3, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.421728, 1.5, 7.5)
+size = Vector3(3.956543, 3, 6)
 
 [node name="Void" type="CSGBox3D" parent="Building/BreakRoom" unique_id=2135782914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
@@ -304,6 +345,62 @@ size = Vector3(3.9, 2.9, 5.9)
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.433789, 0.99999994, 5.5)
 operation = 2
 size = Vector3(1, 2, 0.1)
+
+[node name="PlayerArea2" type="CSGCombiner3D" parent="Building" unique_id=1319005563]
+use_collision = true
+
+[node name="Door4" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=924059382]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.497, 1.022, -2.322)
+operation = 2
+size = Vector3(1.5, 2, 0.1)
+
+[node name="PlayerAreaRoom" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=551802680]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0010147, 1.5074255, 14.441868)
+size = Vector3(12, 3, 20)
+
+[node name="Void" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=1791740313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.522608, 1.4797449, 19.05064)
+operation = 2
+size = Vector3(10.945215, 2.9, 10.5846195)
+
+[node name="Void2" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=459332112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.252643, 1.48, 9.403)
+operation = 2
+size = Vector3(3.4840314, 2.9, 9.065735)
+
+[node name="Void3" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=1372727623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.405, 1.48, 21.905)
+operation = 2
+size = Vector3(1.104, 2.9, 4.8838177)
+
+[node name="Door" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=451154473]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11.973342, 0.97262037, 22.783974)
+operation = 2
+size = Vector3(1.5, 2, 0.1)
+
+[node name="Door1" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=1743876238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.476, 1.462, 4.52)
+operation = 2
+size = Vector3(3, 2.8711915, 1)
+
+[node name="Floor" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=335017604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.982046, 0.0004911572, 22.842596)
+size = Vector3(0.1, 0.1, 1.3861084)
+
+[node name="Void4" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=2029704044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5426393, 1.5153809, 8.93906)
+operation = 2
+size = Vector3(7.6854324, 2.9692383, 8.974151)
+
+[node name="Door3" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=1617572776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.0146484, 13.565226)
+operation = 2
+size = Vector3(1.5, 1.9707031, 0.565625)
+
+[node name="Door2" type="CSGBox3D" parent="Building/PlayerArea2" unique_id=1245701505]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.42049, 1.0249023, 7.3938613)
+operation = 2
+size = Vector3(1.5, 1.9501953, 0.18309326)
 
 [node name="HallwayToCustomerArea" type="CSGCombiner3D" parent="Building" unique_id=1167004986]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
