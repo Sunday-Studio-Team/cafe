@@ -22,7 +22,7 @@ extends Node3D
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
-	#Global.day = 2
+	#Global.day = 5
 	pass
 
 
@@ -31,11 +31,10 @@ func _ready() -> void:
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 
-	customer_spawn_timer.timeout.connect(_on_customer_spawn_timer_timeout)
+	customer_spawn_timer.timeout.connect(spawn_customer)
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
-	Events.customer_approached_machine.connect(_on_customer_approached_machine)
 
 	desk.interacted.connect(_on_desk_interacted)
 
@@ -101,31 +100,44 @@ func set_per_day_stuff() -> void:
 		Stats.current.daily_profit_goal = 30
 		machines.append(side_machine)
 		side_machine.show()
+		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
 		machines.append(fourth_machine)
 		fourth_machine.show()
+		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
 
 
-func _on_customer_spawn_timer_timeout() -> void:
+func spawn_customer() -> void:
 	var all_machines_occupied := true
+
 	for machine in machines:
 		if not machine.customer:
 			all_machines_occupied = false
+
 	if all_machines_occupied:
 		return
 
-	var customer = customer_scene.instantiate()
-	customer.position = spot_for_customer_entry.position
-	add_child(customer)
+	var new_customer = customer_scene.instantiate()
+	new_customer.position = spot_for_customer_entry.position
+	add_child(new_customer)
+
 	await get_tree().create_timer(randf_range(2, 4), false).timeout
-	Events.customer_approached_machine.emit(customer)
+
+	var machine: Machine = null
+	while machine == null or machine.customer:
+		machine = machines.pick_random()
+
+	machine.set_customer(new_customer)
+	machine.start_order()
 
 
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
+
 	await Events.end_screen_finished
+
 	get_tree().paused = false
 	if (
 		Global.daily_profit > Stats.current.daily_profit_goal
@@ -138,15 +150,6 @@ func _on_game_timer_timeout() -> void:
 		Events.main_menu_loaded.emit()
 	else:
 		Events.main_scene_loaded.emit()
-
-
-func _on_customer_approached_machine(customer: Customer) -> void:
-	var machine: Machine = null
-	while machine == null or machine.customer:
-		machine = machines.pick_random()
-
-	machine.set_customer(customer)
-	machine.start_order()
 
 
 #Minigame is active (Need to turn off regular player controls)

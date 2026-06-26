@@ -56,9 +56,6 @@ func _ready() -> void:
 	customer_order_indicator.hide()
 	final_order_indicator.hide()
 
-	visibility_changed.connect(_on_visibility_changed)
-	_on_visibility_changed()
-
 
 func _physics_process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
@@ -230,7 +227,7 @@ func accept_order() -> void:
 
 	await get_tree().create_timer(1.5, false).timeout
 	Events.customer_left_machine.emit(customer, order.score)
-	customer = null
+	set_customer(null)
 
 
 func reject_order() -> void:
@@ -341,16 +338,6 @@ func machine_make_drink() -> void:
 	Events.order_completed.emit(customer)
 
 
-# disable collision for machine if its hidden
-# TODO: move this stuff to wherever we're showing/hiding the machine
-# so this behaviour is explicit
-func _on_visibility_changed() -> void:
-	if visible:
-		static_body.process_mode = Node.PROCESS_MODE_INHERIT
-	else:
-		static_body.process_mode = Node.PROCESS_MODE_DISABLED
-
-
 func _on_fix_machine_button_pressed() -> void:
 	# we connect and disconnect these signals here instead of in _ready() so other machines dont get
 	# the signal and do unintended things
@@ -369,7 +356,7 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 	if customer_at_window != customer:
 		return
 
-	customer = null
+	set_customer(null)
 
 
 class OrderData:
