@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ce518qg6ck3gw" path="res://Minigames/typing/typing_minigame.gd" id="1_6jplg"]
 [ext_resource type="Texture2D" uid="uid://b1j05q5s30754" path="res://icon.svg" id="1_pojmr"]
 [ext_resource type="Script" uid="uid://6d8b03xohlwa" path="res://Minigames/typing/typing_minigame_replies/typing_minigame_content.gd" id="2_01tsg"]
-[ext_resource type="Resource" uid="uid://c4fffhlqsgpcl" path="res://Minigames/typing/typing_minigame_replies/typing_minigame_content_001.tres" id="3_wstoq"]
+[ext_resource type="Resource" uid="uid://cadtk0655usp3" path="res://Minigames/typing/typing_minigame_replies/typing_minigame_content_easy.tres" id="3_6jplg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kpug4"]
 font_size = 32
@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6jplg")
-typing_minigame_contents = Array[ExtResource("2_01tsg")]([ExtResource("3_wstoq")])
+typing_minigame_contents = Array[ExtResource("2_01tsg")]([ExtResource("3_6jplg")])
 customer_dialog_container = NodePath("VBoxContainer/CustomerDialogContainer")
 customer_dialog_rich_text_label = NodePath("VBoxContainer/CustomerDialogContainer/HBoxContainer/VBoxContainer/CustomerDialogRichTextLabel")
 instructions_container = NodePath("VBoxContainer/InstructionsContainer")
