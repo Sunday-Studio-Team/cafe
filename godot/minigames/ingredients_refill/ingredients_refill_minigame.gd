@@ -1,7 +1,7 @@
 extends Node2D
 
-const MOVE_SPEED := 5
-const BEANS_TO_SPAWN := 10
+const MOVE_SPEED := 6
+const BEANS_TO_SPAWN := 7
 
 @export var cup: CharacterBody2D
 @export var bean_scene: PackedScene
@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	cup.position.x = clamp(cup.position.x, 600, 1300)
 	cup.rotation_degrees = lerp(
 		cup.rotation_degrees,
-		left_right_input * 5,
+		left_right_input * 7,
 		delta * 5,
 	)
 
