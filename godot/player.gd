@@ -7,6 +7,7 @@ const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
 @export var aiming_ray: RayCast3D
+@export var spill_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
 
@@ -28,6 +29,7 @@ var holding_interactable: bool = false
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.z) + 1.25
+@onready var max_spill_interact_dist: float = abs(spill_ray.target_position.z) + 0.5
 
 
 func _ready() -> void:
@@ -36,6 +38,8 @@ func _ready() -> void:
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
+	if spill_ray != null:
+		spill_ray.add_exception(self)
 
 
 func _physics_process(delta: float) -> void:
@@ -103,18 +107,17 @@ func handle_hovered_interactable() -> void:
 	holding_interactable = false
 	var hovered_interactable: Interactable = Global.hovered_interactable
 
-	# if we're somehow hovering an interactable which has been disabled,
-	# deleted or moved far away, fix that
 	if hovered_interactable != null:
+		var check_position := _get_interactable_check_position(hovered_interactable)
+		var max_dist := _get_max_interact_dist(hovered_interactable)
 		if (
 			not hovered_interactable.enabled
 			or not hovered_interactable.is_inside_tree()
-			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
+			or check_position.distance_to(camera.global_position) > max_dist
 		):
 			Global.hovered_interactable = null
+			hovered_interactable = null
 
-	# if we're currently holding interact on something, dont do anything
-	# (so we can look around while we hold)
 	if (
 		hovered_interactable != null
 		and hovered_interactable.hold_to_interact
@@ -123,14 +126,40 @@ func handle_hovered_interactable() -> void:
 		holding_interactable = true
 		return
 
-	var collider = aiming_ray.get_collider()
-	if collider is Interactable:
-		Global.hovered_interactable = collider
-	else:
-		Global.hovered_interactable = null
+	Global.hovered_interactable = _find_hovered_interactable()
 
 	if Global.minigame_active:
 		Global.hovered_interactable = null
+
+
+func _find_hovered_interactable() -> Interactable:
+	if spill_ray != null and spill_ray.is_colliding():
+		var spill_collider = spill_ray.get_collider()
+		if spill_collider is SpillInteractable:
+			var spill := spill_collider as SpillInteractable
+			if spill.enabled:
+				var check_position := spill.get_interaction_position()
+				if check_position.distance_to(camera.global_position) <= max_spill_interact_dist:
+					return spill
+
+	if aiming_ray.is_colliding():
+		var collider = aiming_ray.get_collider()
+		if collider is Interactable:
+			return collider as Interactable
+
+	return null
+
+
+func _get_interactable_check_position(interactable: Interactable) -> Vector3:
+	if interactable is SpillInteractable:
+		return (interactable as SpillInteractable).get_interaction_position()
+	return interactable.global_position
+
+
+func _get_max_interact_dist(interactable: Interactable) -> float:
+	if interactable is SpillInteractable:
+		return max_spill_interact_dist
+	return max_interact_dist
 
 
 func handle_inspected_shelf_item() -> void:
