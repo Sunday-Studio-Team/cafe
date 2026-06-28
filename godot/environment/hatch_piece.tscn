@@ -1,21 +1,32 @@
 [gd_scene format=3 uid="uid://dmn6astu67x2i"]
 
+[ext_resource type="Texture2D" uid="uid://1farnok5ulms" path="res://environment/textures/white_brick.png" id="1_bo846"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(4, 3, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m64gf"]
-albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
+albedo_texture = ExtResource("1_bo846")
+uv1_scale = Vector3(2.06, 2.06, 2.06)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bo846"]
 material = SubResource("StandardMaterial3D_m64gf")
 size = Vector3(1, 3, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77ylc"]
+albedo_texture = ExtResource("1_bo846")
+uv1_scale = Vector3(-0.59, 0.81, -0.59)
+uv1_offset = Vector3(0, 0.62, -0.59)
+
 [sub_resource type="BoxMesh" id="BoxMesh_m64gf"]
-material = SubResource("StandardMaterial3D_m64gf")
+material = SubResource("StandardMaterial3D_77ylc")
 size = Vector3(2, 1.2, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo846"]
+albedo_texture = ExtResource("1_bo846")
+
 [sub_resource type="BoxMesh" id="BoxMesh_77ylc"]
-material = SubResource("StandardMaterial3D_m64gf")
+material = SubResource("StandardMaterial3D_bo846")
 size = Vector3(2, 0.8, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chp50"]
