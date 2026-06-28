@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cp150y65pvybf"]
 
-[ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/buttons.gd" id="1_jxxp1"]
-[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://minigames/assets/red_square.png" id="1_rfmd0"]
-[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://minigames/assets/blue_square.png" id="2_nnnqg"]
-[ext_resource type="Texture2D" uid="uid://dwkj5nabjrlkb" path="res://minigames/assets/green_square.png" id="3_phi86"]
+[ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames_/colors_/buttons.gd" id="1_dw425"]
+[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://minigames_/assets/red_square.png" id="2_665na"]
+[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://minigames_/assets/blue_square.png" id="3_d6lkr"]
+[ext_resource type="Texture2D" uid="uid://dwkj5nabjrlkb" path="res://minigames_/assets/green_square.png" id="4_dximu"]
 
 [node name="Buttons" type="Control" unique_id=587894759]
 layout_mode = 3
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_jxxp1")
+script = ExtResource("1_dw425")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=31575764]
 layout_mode = 1
@@ -37,7 +37,7 @@ theme_override_colors/font_pressed_color = Color(0, 0, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
 theme_override_font_sizes/font_size = 64
 text = "A"
-icon = ExtResource("1_rfmd0")
+icon = ExtResource("2_665na")
 icon_alignment = 1
 expand_icon = true
 
@@ -49,7 +49,7 @@ theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
 theme_override_font_sizes/font_size = 64
 text = "B"
-icon = ExtResource("2_nnnqg")
+icon = ExtResource("3_d6lkr")
 icon_alignment = 1
 expand_icon = true
 
@@ -61,7 +61,7 @@ theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
 text = "	C"
-icon = ExtResource("3_phi86")
+icon = ExtResource("4_dximu")
 icon_alignment = 1
 expand_icon = true
 
