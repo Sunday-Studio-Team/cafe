@@ -8,8 +8,12 @@ const BEANS_TO_SPAWN := 7
 @export var pour_point: Marker2D
 @export var bean_spawn_timer: Timer
 @export var cup_area: Area2D
+@export var cup_boundaries: Area2D
 @export var meter: ProgressBar
 @export var bag: Node2D
+@export var bean_hit_glasss_sound: AudioStreamPlayer2D
+@export var bag_shake_sound: AudioStreamPlayer2D
+@export var gain_score_sound: AudioStreamPlayer
 
 var beans_in_cup := 0
 var beans_spawned := 0
@@ -28,6 +32,12 @@ func _ready() -> void:
 	bag_shake_tween = create_tween().set_loops()
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, 0.2)
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, 0.2)
+
+	cup_boundaries.body_entered.connect(
+		func(body):
+			if body.is_in_group("beans"):
+				bean_hit_glasss_sound.play()
+	)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,6 +66,7 @@ func spawn_bean() -> void:
 	else:
 		Global.refill_minigame_accuracy = meter.value
 		bag_shake_tween.kill()
+		bag_shake_sound.stop()
 		await get_tree().create_timer(1.5, false).timeout
 		Events.emit_signal("minigame_end")
 
@@ -63,6 +74,8 @@ func spawn_bean() -> void:
 func catch_bean(bean: PhysicsBody2D) -> void:
 	if not collected_beans.has(bean) and bean.is_in_group("beans"):
 		beans_in_cup += 1
+		gain_score_sound.play()
+		gain_score_sound.pitch_scale += 0.05
 		collected_beans.append(bean)
 
 
