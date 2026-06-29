@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 
 	if waiting_bar.value >= 66:
 		waiting_indicator.modulate = Color.GREEN
-		bonus_points_for_time = 0
+		bonus_points_for_time = 1
 	elif waiting_bar.value >= 33:
 		waiting_indicator.modulate = Color.ORANGE
 		bonus_points_for_time = 0
@@ -76,16 +76,11 @@ func _on_order_approved(customer: Customer) -> void:
 	timer.stop()
 
 	await get_tree().create_timer(1, false).timeout
-	Global.score_update_message = "penalty for time"
+	if bonus_points_for_time > 0:
+		Global.score_update_message = "bonus for time"
+	else:
+		Global.score_update_message = "penalty for time"
 	Global.employee_rating += bonus_points_for_time
-
-	match bonus_points_for_time:
-		1:
-			time_bonus_label.modulate = Color.GREEN
-			time_bonus_label.text = "⌚ bonus 🙂: +1"
-		-1:
-			time_bonus_label.modulate = Color.RED
-			time_bonus_label.text = "⌚ 🙂 penalty: -1"
 
 
 func _on_customer_left_machine(customer: Customer, drink_score) -> void:
