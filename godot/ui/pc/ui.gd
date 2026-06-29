@@ -236,7 +236,9 @@ func _on_alert_posted(message: String) -> void:
 func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
 	if score_update_tween != null and score_update_tween.is_running():
 		score_update_tween.kill()
-	score_update_tween = create_tween()
+	score_update_label.offset_transform_position_ratio = Vector2.ZERO
+	score_update_label.offset_transform_rotation = 0
+	score_update_tween = create_tween().set_parallel()
 
 	var color: Color
 	# the score label itself, not the label showing the updates like "+1$" etc
@@ -274,4 +276,6 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 			score_label_to_tween = customer_happiness_label
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
 	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
-	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 2)
+	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
+	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
+	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)
