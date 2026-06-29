@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func populate_ui() -> void:
-	for machine in Global.machines:
+	for m in Global.machines:
 		var machine_ui: TabletMachineUI = machine_ui_scene.instantiate()
-		machine_ui.machine = machine
+		machine_ui.machine = m
 		machines_container.add_child(machine_ui)

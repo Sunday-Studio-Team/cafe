@@ -5,7 +5,7 @@ extends Control
 
 var machine: Machine
 
-@onready var timer: Timer = machine.timer
+@onready var timer := machine.timer
 
 
 func _physics_process(_delta: float) -> void:

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="3_15k3r"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="4_hq0he"]
 
-[node name="TabletMachineUI" type="MarginContainer" unique_id=1037558298]
+[node name="TabletMachineUI" type="MarginContainer" unique_id=1037558298 node_paths=PackedStringArray("timer_ui")]
 custom_minimum_size = Vector2(100, 100)
 custom_maximum_size = Vector2(100, 100)
 clip_contents = true
@@ -15,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n3ai3")
+timer_ui = NodePath("Timer")
 
 [node name="Timer" type="TextureProgressBar" parent="." unique_id=1593234249]
 texture_filter = 1
@@ -32,12 +33,3 @@ offset_transform_enabled = true
 offset_transform_rotation = -0.17453292
 text = "BROKEN DOWN"
 horizontal_alignment = 1
-
-[node name="TabletMachineUi" type="Control" parent="." unique_id=2117727732 node_paths=PackedStringArray("timer_ui")]
-custom_minimum_size = Vector2(100, 100)
-custom_maximum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("1_n3ai3")
-timer_ui = NodePath("../Timer")
