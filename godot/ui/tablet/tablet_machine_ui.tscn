@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ck5m4eetjuovd"]
+
+[ext_resource type="Script" uid="uid://2730a8i8k0vn" path="res://ui/tablet/tablet_machine_ui.gd" id="1_n3ai3"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="2_eysya"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="3_15k3r"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="4_hq0he"]
+
+[node name="TabletMachineUI" type="MarginContainer" unique_id=1037558298]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, 100)
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n3ai3")
+
+[node name="Timer" type="TextureProgressBar" parent="." unique_id=1593234249]
+texture_filter = 1
+layout_mode = 2
+fill_mode = 4
+texture_under = ExtResource("2_eysya")
+texture_over = ExtResource("3_15k3r")
+texture_progress = ExtResource("4_hq0he")
+
+[node name="BrokenDown" type="Label" parent="." unique_id=2059861179]
+modulate = Color(0.93267196, 0.6454541, 0.24098766, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_rotation = -0.17453292
+text = "BROKEN DOWN"
+horizontal_alignment = 1
+
+[node name="TabletMachineUi" type="Control" parent="." unique_id=2117727732 node_paths=PackedStringArray("timer_ui")]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_n3ai3")
+timer_ui = NodePath("../Timer")

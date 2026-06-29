@@ -1,0 +1,16 @@
+extends MeshInstance3D
+
+@export var machines_container: Container
+@export var machine_ui_scene: PackedScene
+
+
+func _ready() -> void:
+	await get_tree().process_frame
+	populate_ui()
+
+
+func populate_ui() -> void:
+	for machine in Global.machines:
+		var machine_ui: TabletMachineUI = machine_ui_scene.instantiate()
+		machine_ui.machine = machine
+		machines_container.add_child(machine_ui)

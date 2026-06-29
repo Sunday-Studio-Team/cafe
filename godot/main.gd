@@ -106,6 +106,8 @@ func set_per_day_stuff() -> void:
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
 
+	Global.machines.assign(machines)
+
 
 func spawn_customer() -> void:
 	var all_machines_occupied := true
