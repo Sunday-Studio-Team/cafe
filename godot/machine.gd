@@ -69,13 +69,16 @@ func _physics_process(_delta: float) -> void:
 	refill_button.visible = Global.holding_ingredients
 
 	ingredients_bar.value = ingredients
-	if ingredients_bar.value < Stats.current.ingredients_per_order:
+	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
 		reject_button.display_name = "[color=pink]🚫not enough ingredients"
 		make_drink_button.display_name = "[color=pink]🚫no ingredients"
 	else:
-		ingredients_bar.modulate = Color.GREEN
+		if ingredients <= max_ingredients / 2.0:
+			ingredients_bar.modulate = Color.YELLOW
+		else:
+			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
 		reject_button.display_name = "[color=red]reject drink (retry)"
 		make_drink_button.display_name = "[color=yellow]remake drink by hand"
