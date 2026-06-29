@@ -44,9 +44,8 @@ func _ready() -> void:
 	refill_button.interacted.connect(refill)
 	make_drink_button.interacted.connect(make_drink_manually)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
-	timer.timeout.connect(machine_make_drink)
 
-	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-2, 2)
+	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
 
 	Events.customer_approached_window.connect(_on_customer_approached_window)
 	spill_interactable.interacted.connect(clean_up_spill)
@@ -81,6 +80,13 @@ func _physics_process(_delta: float) -> void:
 		reject_button.display_name = "[color=red]reject drink (retry)"
 		make_drink_button.display_name = "[color=yellow]remake drink by hand"
 
+	# disable reject/make buttons if no ingredients
+	# (not sure if this is best way to do it, probably should enable them but
+	# give them custom behaviour that gives player feeback and makes sure they
+	# know why they arent working)
+	#make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
+	#reject_button.enabled = ingredients >= Stats.current.ingredients_per_order
+
 
 func set_customer(c: Customer) -> void:
 	customer = c
@@ -106,7 +112,7 @@ func get_stats() -> void:
 	spill_interactable.time_to_hold = Stats.current.time_to_clean_up_spill
 
 
-func start_order() -> void:
+func machine_make_drink() -> void:
 	await get_tree().create_timer(randf_range(1, 3), false).timeout
 
 	# (i think) we emit this before returning because it starts the customer
@@ -128,6 +134,72 @@ func start_order() -> void:
 
 	if randf() < Stats.current.chance_of_machine_breaking:
 		break_down()
+
+	await timer.timeout
+
+	consume_ingredients()
+
+	# roll a random score based on chances from stat_data
+	var ran_num: float = randf()
+	var cumulative_score_chance: float = 0.0
+	for score in Stats.current.score_chances:
+		cumulative_score_chance += Stats.current.score_chances[score]
+		if ran_num < cumulative_score_chance:
+			order.score = score
+			break
+
+	# now find a random drink that has that score !
+	var random_drink_score := 0
+	var loops := 0
+	const LOOP_LIMIT := 20
+
+	while (
+		(
+			order.made_drink == null
+			or random_drink_score != order.score
+		)
+		and loops < LOOP_LIMIT
+	):
+		var potential_drink_score := 0
+		order.made_drink = Global.drinks.pick_random()
+		for element in ["main_ingredient", "liquid", "extra"]:
+			if order.made_drink.get(element) == order.ordered_drink.get(element):
+				potential_drink_score += 1
+			else:
+				potential_drink_score -= 1
+		random_drink_score = potential_drink_score
+		loops += 1
+
+	# use a fallback if we couldnt find a drink with that score
+	# (i THINK this can happen but it might be rare)
+	if loops > LOOP_LIMIT:
+		print("no matching drink has the generated drink score (%s) for %s" % [order.score, order.made_drink.name])
+		print("choosing a random fallback drink instead - this one has a score of %s" % random_drink_score)
+		order.score = random_drink_score
+
+	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
+
+	display_drink_score()
+
+	# TODO: move hardcoded tip chance here somewhere else
+	if tip_jar_item in Global.owned_items and randf() < 0.25:
+		order.tip = randf_range(0.5, 2)
+		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
+
+	if randf() < Stats.current.machine_chance_of_spill:
+		spill_interactable.show()
+		spill_sound.play()
+		Events.alert_posted.emit("‼️⚙️machine made a spill")
+		spill_on_floor = true
+
+	final_order_indicator.text = (
+		"machine made: %s (%s)"
+		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+	)
+	final_order_indicator.show()
+
+	waiting_for_response = true
+	Events.order_completed.emit(customer)
 
 
 func display_drink_score() -> void:
@@ -192,7 +264,7 @@ func refill() -> void:
 		and not broken_down
 		and not waiting_for_response
 	):
-		start_order()
+		machine_make_drink()
 
 
 func cancel_fix_minigame() -> void:
@@ -234,9 +306,11 @@ func reject_order() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
-	timer.start()
-	progress_indicator.show()
+	price_label.hide()
+	drink_customer_score_label.hide()
 	waiting_for_response = false
+
+	machine_make_drink()
 
 
 func make_drink_manually() -> void:
@@ -270,72 +344,6 @@ func break_down() -> void:
 
 	timer.paused = true
 	broken_down = true
-
-
-func machine_make_drink() -> void:
-	consume_ingredients()
-
-	# roll a random score based on chances from stat_data
-	var ran_num: float = randf()
-	var cumulative_score_chance: float = 0.0
-	for score in Stats.current.score_chances:
-		cumulative_score_chance += Stats.current.score_chances[score]
-		if ran_num < cumulative_score_chance:
-			order.score = score
-			break
-
-	# now find a random drink that has that score !
-	var random_drink_score := 0
-	var loops := 0
-	const LOOP_LIMIT := 20
-
-	while (
-		(
-			order.made_drink == null
-			or random_drink_score != order.score
-		)
-		and loops < LOOP_LIMIT
-	):
-		var potential_drink_score := 0
-		order.made_drink = Global.drinks.pick_random()
-		for element in ["main_ingredient", "liquid", "extra"]:
-			if order.made_drink.get(element) == order.ordered_drink.get(element):
-				potential_drink_score += 1
-			else:
-				potential_drink_score -= 1
-		random_drink_score = potential_drink_score
-		loops += 1
-
-	# use a fallback if we couldnt find a drink with that score
-	# (i THINK this can happen but it might be rare)
-	if loops > LOOP_LIMIT:
-		print("no matching drink has the generated drink score (%s) for %s" % [order.score, order.made_drink.name])
-		print("choosing a random fallback drink instead - this one has a score of %s" % random_drink_score)
-		order.score = random_drink_score
-
-	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
-
-	display_drink_score()
-
-	# TODO: move hardcoded tip chance here somewhere else
-	if tip_jar_item in Global.owned_items and randf() < 0.25:
-		order.tip = randf_range(0.5, 2)
-		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
-
-	if randf() < Stats.current.machine_chance_of_spill:
-		spill_interactable.show()
-		spill_sound.play()
-		Events.alert_posted.emit("‼️⚙️machine made a spill")
-		spill_on_floor = true
-
-	final_order_indicator.text = (
-		"machine made: %s (%s)"
-		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
-	)
-	final_order_indicator.show()
-
-	waiting_for_response = true
-	Events.order_completed.emit(customer)
 
 
 func _on_fix_machine_button_pressed() -> void:

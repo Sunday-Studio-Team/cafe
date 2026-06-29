@@ -126,7 +126,7 @@ func spawn_customer() -> void:
 		machine = machines.pick_random()
 
 	machine.set_customer(new_customer)
-	machine.start_order()
+	machine.machine_make_drink()
 
 
 func _on_game_timer_timeout() -> void:
