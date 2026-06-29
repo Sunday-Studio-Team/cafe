@@ -42,20 +42,6 @@ func _ready() -> void:
 	set_collision_layer_value(2, true)
 
 
-func uses_timer_hold() -> bool:
-	return true
-
-
-func get_custom_hold_progress() -> float:
-	if time_to_hold <= 0.0:
-		return 0.0
-	return clampf(time_held / time_to_hold, 0.0, 1.0)
-
-
-func _process_custom_hold(_delta: float) -> void:
-	pass
-
-
 func _physics_process(delta: float) -> void:
 	if (
 		Global.hovered_interactable != self
@@ -66,24 +52,22 @@ func _physics_process(delta: float) -> void:
 		if mesh:
 			mesh.material_overlay = null
 		if not keep_progress_on_interrupt:
-			time_held = 0.0
+			time_held = 0
 		return
 
+	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()
 
+	# Hold to press
 	if Input.is_action_pressed("interact") and hold_to_interact:
-		if uses_timer_hold():
-			time_held += delta
-			if time_held >= time_to_hold:
-				interacted.emit()
-				time_held = 0.0
-		else:
-			_process_custom_hold(delta)
-	elif not keep_progress_on_interrupt:
-		time_held = 0.0
-	elif not uses_timer_hold():
-		time_held = get_custom_hold_progress() * time_to_hold
+		time_held += delta
+		if time_held >= time_to_hold:
+			interacted.emit()
+			time_held = 0
+	else:
+		if not keep_progress_on_interrupt:
+			time_held = 0
 
 	if mesh:
 		mesh.material_overlay = ShaderMaterial.new()

@@ -7,11 +7,10 @@
 radius = 0.25
 height = 1.7
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "spill_ray", "ingredients_bag")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag")]
 script = ExtResource("1_4flbx")
 camera = NodePath("Camera3D")
 aiming_ray = NodePath("Camera3D/RayCast3D")
-spill_ray = NodePath("Camera3D/SpillRayCast3D")
 ingredients_bag = NodePath("Camera3D/IngredientsBag")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
@@ -24,14 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
 target_position = Vector3(0, 0, -0.75)
-collision_mask = 2
-hit_from_inside = true
-collide_with_areas = true
-
-[node name="SpillRayCast3D" type="RayCast3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
-target_position = Vector3(0, 0, -2.5)
-collision_mask = 4
+collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
 

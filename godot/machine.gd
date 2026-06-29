@@ -323,7 +323,6 @@ func machine_make_drink() -> void:
 		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
 
 	if randf() < Stats.current.machine_chance_of_spill:
-		spill_interactable.reset_spill()
 		spill_interactable.show()
 		spill_sound.play()
 		Events.alert_posted.emit("‼️⚙️machine made a spill")
