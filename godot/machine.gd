@@ -135,7 +135,10 @@ func machine_make_drink() -> void:
 
 	timer.start()
 
-	if randf() < Stats.current.chance_of_machine_breaking:
+	if (
+		randf() < Stats.current.chance_of_machine_breaking
+		and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
+	):
 		break_down()
 
 	await timer.timeout
@@ -189,10 +192,14 @@ func machine_make_drink() -> void:
 		order.tip = randf_range(0.5, 2)
 		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
 
-	if randf() < Stats.current.machine_chance_of_spill:
+	if (
+		randf() < Stats.current.machine_chance_of_spill
+		and Global.spills_this_shift < Stats.current.max_spills_per_shift
+	):
 		spill_interactable.show()
 		spill_sound.play()
 		Events.alert_posted.emit("‼️⚙️machine made a spill")
+		Global.spills_this_shift += 1
 		spill_on_floor = true
 
 	final_order_indicator.text = (
@@ -344,6 +351,7 @@ func break_down() -> void:
 	fix_machine_button.show()
 	breakdown_sound.play()
 	Events.alert_posted.emit("❗️⚙️ machine broke down")
+	Global.breakdowns_this_shift += 1
 
 	timer.paused = true
 	broken_down = true

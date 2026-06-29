@@ -69,6 +69,8 @@ var holding_ingredients_rule := false
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var customer_sprites: Array[Texture]
+var breakdowns_this_shift := 0
+var spills_this_shift := 0
 
 
 func _ready() -> void:

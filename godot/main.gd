@@ -50,6 +50,8 @@ func _ready() -> void:
 	Global.holding_ingredients = false
 	Global.daily_profit = 0
 	Global.employee_rating = 0
+	Global.spills_this_shift = 0
+	Global.breakdowns_this_shift = 0
 	# high values for debug
 	#Global.daily_profit = 100
 	#Global.employee_rating = 100
