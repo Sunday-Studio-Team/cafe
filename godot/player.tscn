@@ -54,9 +54,11 @@ machine_ui_scene = ExtResource("4_hqtel")
 [node name="Screen" type="Sprite3D" parent="Camera3D/Tablet" unique_id=634465263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
 pixel_size = 0.0005
+texture_filter = 0
 texture = SubResource("ViewportTexture_0ffxp")
 
 [node name="SubViewport" type="SubViewport" parent="Camera3D/Tablet/Screen" unique_id=485074464]
+canvas_item_default_texture_filter = 0
 size = Vector2i(450, 275)
 
 [node name="MarginContainer" type="MarginContainer" parent="Camera3D/Tablet/Screen/SubViewport" unique_id=399650461]
@@ -65,13 +67,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 35
-theme_override_constants/margin_top = 35
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera3D/Tablet/Screen/SubViewport/MarginContainer" unique_id=564031877]
-custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2008160580]

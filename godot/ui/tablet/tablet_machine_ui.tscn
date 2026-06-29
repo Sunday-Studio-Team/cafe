@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://ck5m4eetjuovd"]
 
 [ext_resource type="Script" uid="uid://2730a8i8k0vn" path="res://ui/tablet/tablet_machine_ui.gd" id="1_n3ai3"]
+[ext_resource type="Texture2D" uid="uid://dk17utr3s8vur" path="res://sprites/machine_icon.png" id="2_15k3r"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="2_eysya"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="3_15k3r"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="4_hq0he"]
 
-[node name="TabletMachineUI" type="MarginContainer" unique_id=1037558298 node_paths=PackedStringArray("timer_ui")]
+[node name="TabletMachineUI" type="MarginContainer" unique_id=1037558298 node_paths=PackedStringArray("timer_ui", "broken_down_text", "ready_text", "price_label", "rating_label")]
 custom_minimum_size = Vector2(100, 100)
 custom_maximum_size = Vector2(100, 100)
 clip_contents = true
@@ -14,22 +15,77 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_n3ai3")
 timer_ui = NodePath("Timer")
+broken_down_text = NodePath("BrokenDown")
+ready_text = NodePath("PanelContainer/Ready")
+price_label = NodePath("PanelContainer2/HBoxContainer/PriceLabel")
+rating_label = NodePath("PanelContainer2/HBoxContainer/RatingLabel")
 
-[node name="Timer" type="TextureProgressBar" parent="." unique_id=1593234249]
+[node name="MachineIcon" type="TextureRect" parent="." unique_id=1369286764]
 texture_filter = 1
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.25, 1.25)
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("2_15k3r")
+
+[node name="Timer" type="TextureProgressBar" parent="." unique_id=1593234249]
+visible = false
+texture_filter = 1
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.6, 0.6)
+offset_transform_pivot_ratio = Vector2(0, 0)
 fill_mode = 4
 texture_under = ExtResource("2_eysya")
 texture_over = ExtResource("3_15k3r")
 texture_progress = ExtResource("4_hq0he")
 
 [node name="BrokenDown" type="Label" parent="." unique_id=2059861179]
+visible = false
 modulate = Color(0.93267196, 0.6454541, 0.24098766, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
 offset_transform_rotation = -0.17453292
-text = "BROKEN DOWN"
+theme_override_font_sizes/font_size = 24
+text = "BROKEN
+DOWN"
 horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=220626538]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Ready" type="Label" parent="PanelContainer" unique_id=867719552]
+layout_mode = 2
+size_flags_vertical = 0
+text = "READY FOR
+APPROVAL"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1622307031]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2" unique_id=2001457531]
+layout_mode = 2
+
+[node name="PriceLabel" type="Label" parent="PanelContainer2/HBoxContainer" unique_id=1004174759]
+modulate = Color(0.34237343, 1, 0.34237343, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "+ 4$"
+vertical_alignment = 2
+
+[node name="RatingLabel" type="Label" parent="PanelContainer2/HBoxContainer" unique_id=917201964]
+modulate = Color(0.34237343, 1, 0.34237343, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+text = "+ 4🙂"
+vertical_alignment = 2
