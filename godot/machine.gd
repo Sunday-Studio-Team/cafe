@@ -213,7 +213,7 @@ func machine_make_drink() -> void:
 
 
 func display_drink_score() -> void:
-	price_label.text = Global.float_to_price(order.ordered_drink.price)
+	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()
 
 	drink_customer_score_label.text = ""
