@@ -15,7 +15,7 @@ var at_window: bool = false
 
 
 func _ready() -> void:
-	apply_random_sprite()
+	body.texture = Global.customer_sprites.pick_random()
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
@@ -53,16 +53,6 @@ func leave_store() -> void:
 	global_transform = Global.customer_leaving_spot.global_transform
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	queue_free()
-
-
-func apply_random_sprite() -> void:
-	var sprites: Array[Resource]
-
-	for file_name: String in ResourceLoader.list_directory(sprites_folder):
-		if file_name.ends_with(".png"):
-			sprites.append(ResourceLoader.load(sprites_folder.path_join(file_name)) as Resource)
-
-	body.texture = sprites.pick_random()
 
 
 func _on_timer_timeout() -> void:
