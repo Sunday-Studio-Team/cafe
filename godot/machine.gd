@@ -189,7 +189,7 @@ func machine_make_drink() -> void:
 
 	# TODO: move hardcoded tip chance here somewhere else
 	if tip_jar_item in Global.owned_items and randf() < 0.25:
-		order.tip = randf_range(0.5, 2)
+		order.tip = randf_range(0.25, 1)
 		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
 
 	if (
