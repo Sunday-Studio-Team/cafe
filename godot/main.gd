@@ -96,15 +96,17 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 3:
 		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 25
-		machines.append(side_machine)
+		machines.push_front(side_machine)
 		side_machine.show()
 		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
-		machines.append(fourth_machine)
+		machines.push_front(fourth_machine)
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
+
+	Global.machines.assign(machines)
 
 
 func spawn_customer() -> void:
