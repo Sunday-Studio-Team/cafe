@@ -84,17 +84,16 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
-		game_timer.wait_time = 80
+		game_timer.wait_time = 90
 		Stats.current.daily_profit_goal = 12
 		cameras.hide()
 	if Global.day >= 2:
-		game_timer.wait_time = 90
-		Stats.current.chance_of_machine_breaking = 0.2
-		Stats.current.daily_profit_goal = 20
+		game_timer.wait_time = 120
+		Stats.current.daily_profit_goal = 18
 		cameras.show()
 	if Global.day >= 3:
 		game_timer.wait_time = 120
-		Stats.current.daily_profit_goal = 30
+		Stats.current.daily_profit_goal = 25
 		machines.append(side_machine)
 		side_machine.show()
 		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
