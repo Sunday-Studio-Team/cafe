@@ -1,7 +1,7 @@
 extends Node2D
 
 const MOVE_SPEED := 6
-const BEANS_TO_SPAWN := 7
+const BEANS_TO_SPAWN := 5
 
 @export var cup: CharacterBody2D
 @export var bean_scene: PackedScene
