@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
 [ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
+[ext_resource type="PackedScene" uid="uid://cisoat3ij3w1y" path="res://environment/machine/placeholder asset/Vending Machine VGDC.glb" id="10_0d1aa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -101,7 +102,7 @@ mesh = SubResource("BoxMesh_lp1hx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
 
 [node name="ProgressIndicator" type="Sprite3D" parent="." unique_id=1182371401]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7, 1)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7, 1.2034533)
 billboard = 2
 texture = SubResource("ViewportTexture_6qesk")
 
@@ -146,7 +147,7 @@ modulate = Color(0, 1, 0, 1)
 text = "+1"
 
 [node name="WaitingApprovalIndicator" type="Label3D" parent="." unique_id=879957228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.3092647)
 text = "order complete!
 waiting for approval ^"
 font_size = 16
@@ -194,7 +195,7 @@ light_energy = 2.0
 shadow_enabled = true
 
 [node name="AcceptButton" type="Area3D" parent="." unique_id=600817850 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0090001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0740197)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
@@ -208,7 +209,7 @@ mesh = SubResource("BoxMesh_ioi8x")
 shape = SubResource("BoxShape3D_loq51")
 
 [node name="MakeDrinkButton" type="Area3D" parent="." unique_id=1329158865 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023542345, 1.0213691, 0.97740984)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023542345, 1.0213691, 1.0424294)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
@@ -227,7 +228,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000005, 0)
 shape = SubResource("BoxShape3D_loq51")
 
 [node name="RejectButton" type="Area3D" parent="." unique_id=410108366 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.874, 1.0090001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.874, 1.0740197)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_ioi8x")
@@ -320,3 +321,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1941494849]
 shape = SubResource("BoxShape3D_0ffxp")
+
+[node name="Sketchfab_Scene" parent="." unique_id=582151356 instance=ExtResource("10_0d1aa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121481895, -0.112309575, 0.50008106)
