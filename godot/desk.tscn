@@ -1,16 +1,14 @@
 [gd_scene format=3 uid="uid://dhmqo5yinqk0t"]
 
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
-[ext_resource type="PackedScene" uid="uid://cja6drbsdy7uq" path="res://environment/Office/desk placeholders/Office Props Pack.glb" id="2_t5y75"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t5y75"]
-size = Vector3(1.1179199, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ep8l3"]
-size = Vector3(0.5, 1.7446289, 1.8288879)
+size = Vector3(0.5, 1, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r42xq"]
-size = Vector3(2.1842675, 1.6033936, 1.01)
+size = Vector3(1.49, 1, 1.01)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r42xq"]
 size = Vector3(1.5, 0.1, 1)
@@ -58,23 +56,22 @@ mesh = NodePath("Model/Monitor")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=337724593]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20892274, 1, -0.22542614)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_t5y75")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1519674799]
 process_mode = 3
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=487393276]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12962115, 0.8109559, 0.94316804)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43864143, 0.8150705)
 shape = SubResource("BoxShape3D_ep8l3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=302117327]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34713376, 0.82549334, -0.38364336)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52379656, -0.0031053424)
 shape = SubResource("BoxShape3D_r42xq")
 
 [node name="Model" type="Node3D" parent="." unique_id=166450955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10080838, 0.80964196, 0.09252084)
-visible = false
 
 [node name="Table" type="MeshInstance3D" parent="Model" unique_id=297491436]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10080838, -0.10964197, -0.09252084)
@@ -152,6 +149,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6018026, 0)
 billboard = 2
 text = "❗️🛒"
 font_size = 64
-
-[node name="Office desk placeholder" parent="." unique_id=1075973406 instance=ExtResource("2_t5y75")]
-transform = Transform3D(-0.9997029, 0, -0.024376173, 0, 1, 0, 0.024376173, 0, -0.9997029, -0.39823472, 0.13255942, 0.6149144)
