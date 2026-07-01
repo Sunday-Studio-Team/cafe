@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ck5hb0yuvfdsa" path="res://environment/wall_piece_short.tscn" id="3_jofr6"]
 [ext_resource type="PackedScene" uid="uid://cvx1me2mi6tpm" path="res://environment/corner_piece.tscn" id="4_rkau7"]
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="5_y5pqn"]
+[ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="6_jofr6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
 albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -47,6 +48,15 @@ size = Vector3(20, 0.1, 6)
 [sub_resource type="BoxMesh" id="BoxMesh_opecw"]
 material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(6, 0.1, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_rkau7"]
+material = SubResource("StandardMaterial3D_2cqfq")
+text = "store room"
+pixel_size = 0.025
+depth = 0.025
 
 [sub_resource type="BoxMesh" id="BoxMesh_4tnuu"]
 material = SubResource("StandardMaterial3D_y5pqn")
@@ -127,7 +137,7 @@ mesh = SubResource("BoxMesh_rkau7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 
 [node name="DoorwayPiece" parent="BreakRoom" unique_id=821917615 instance=ExtResource("5_y5pqn")]
-transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 2, 0, 1)
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 2, 0.009813607, 1)
 
 [node name="WallPieceShort" parent="BreakRoom" unique_id=363839860 instance=ExtResource("3_jofr6")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 0)
@@ -212,6 +222,32 @@ mesh = SubResource("BoxMesh_opecw")
 
 [node name="StoreRoom" type="Node3D" parent="." unique_id=1090696470]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
+
+[node name="Shelf" type="CSGBox3D" parent="StoreRoom" unique_id=61959209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.010461, 0.7501247, 3.652462)
+size = Vector3(5, 0.1, 1)
+
+[node name="IngredientsBag" parent="StoreRoom/Shelf" unique_id=1055430729 instance=ExtResource("6_jofr6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.34170055, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag2" parent="StoreRoom/Shelf" unique_id=449582998 instance=ExtResource("6_jofr6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.6065731, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag3" parent="StoreRoom/Shelf" unique_id=358489948 instance=ExtResource("6_jofr6")]
+transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 0.34170055, 0.13795435, -0.0006752014)
+
+[node name="IngredientsBag4" parent="StoreRoom/Shelf" unique_id=133634589 instance=ExtResource("6_jofr6")]
+transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0.024939537, 0.13795435, -0.40213585)
+
+[node name="IngredientsBag5" parent="StoreRoom/Shelf" unique_id=1871142503 instance=ExtResource("6_jofr6")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.22939682, 0.13795435, -0.33964348)
+
+[node name="IngredientsBag6" parent="StoreRoom/Shelf" unique_id=1269993056 instance=ExtResource("6_jofr6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.8866453, 0.13795435, -0.11124611)
+
+[node name="Sign" type="MeshInstance3D" parent="StoreRoom" unique_id=1542924138]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.0320837, 2.1822639, -0.05068016)
+mesh = SubResource("TextMesh_rkau7")
 
 [node name="DoorwayPiece" parent="StoreRoom" unique_id=995689952 instance=ExtResource("5_y5pqn")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 0)

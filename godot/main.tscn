@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://bacqqenku1dta" path="res://environment/Office/Cabinet placeholder/Placeholder shelves_Image_7.png" id="29_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://baayjgkpbgy7o" path="res://environment/Office/white board placeholder/Low Poly Whiteboard.glb" id="29_qsp4k"]
 [ext_resource type="Texture2D" uid="uid://qeihmc243eip" path="res://environment/Office/Cabinet placeholder/Placeholder shelves_Image_8.png" id="30_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://b4b01saoitvlt" path="res://cafe_environment_new.tscn" id="33_jq2sk"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -49,24 +50,11 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 volumetric_fog_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.29411766)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_yaehf"]
-material = SubResource("StandardMaterial3D_2cqfq")
-text = "store room"
-pixel_size = 0.025
-depth = 0.025
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
 albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
-viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
+viewport_path = NodePath("BreakRoomDoor/Sign/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
 albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
@@ -82,6 +70,19 @@ material = SubResource("StandardMaterial3D_mjix0")
 text = "customer
 area"
 depth = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.29411766)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq2sk"]
+albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_yaehf"]
+material = SubResource("StandardMaterial3D_jq2sk")
+text = "store room"
+pixel_size = 0.025
+depth = 0.025
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
 albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
@@ -170,7 +171,7 @@ game_timer = NodePath("GameTimer")
 window = NodePath("Window")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
-desk = NodePath("Building/Desk")
+desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
 minigame_controller = NodePath("MinigameController")
@@ -188,7 +189,64 @@ transform = Transform3D(0.9659258, 2.956346e-08, -0.25881907, 0.12940952, -0.866
 light_color = Color(0.6745098, 0.5647059, 0.5254902, 1)
 shadow_enabled = true
 
+[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5.2001863)
+
+[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound")]
+transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.214936, 0, 4.756097)
+script = ExtResource("6_d13ii")
+close_sound = NodePath("CloseSound")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor" unique_id=1875513880]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
+use_collision = true
+size = Vector3(0.1, 2, 1)
+material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="CloseSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=1397575772]
+stream = ExtResource("7_1u8w0")
+volume_db = -20.0
+
+[node name="Sign" type="Sprite3D" parent="BreakRoomDoor" unique_id=295705367]
+transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
+shaded = true
+texture = SubResource("ViewportTexture_vn1tu")
+
+[node name="SubViewport" type="SubViewport" parent="BreakRoomDoor/Sign" unique_id=1349397849]
+transparent_bg = true
+
+[node name="ColorRect" type="ColorRect" parent="BreakRoomDoor/Sign/SubViewport" unique_id=1749443931]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BreakRoomDoor/Sign/SubViewport/ColorRect" unique_id=364969205]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "BREAK
+ROOM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmployeeAreaSign" type="MeshInstance3D" parent="." unique_id=544386463]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.90943, 2.3, -0.44643724)
+mesh = SubResource("TextMesh_vn1tu")
+
+[node name="CustomerAreaSign" type="MeshInstance3D" parent="." unique_id=136068731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.171345, 2.3, 4.7785497)
+mesh = SubResource("TextMesh_lswn8")
+
 [node name="Building" type="Node3D" parent="." unique_id=743168160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.742464)
+visible = false
 
 [node name="CustomerArea" type="CSGCombiner3D" parent="Building" unique_id=148944054]
 use_collision = true
@@ -395,61 +453,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1, 0.85)
 operation = 2
 size = Vector3(1, 2, 1)
 
-[node name="Desk" parent="Building" unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5.2001863)
-
-[node name="BreakRoomDoor" type="Node3D" parent="Building" unique_id=18232531 node_paths=PackedStringArray("close_sound")]
-transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.41727, 0, 4.9959364)
-script = ExtResource("6_d13ii")
-close_sound = NodePath("CloseSound")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Building/BreakRoomDoor" unique_id=1875513880]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
-use_collision = true
-size = Vector3(0.1, 2, 1)
-material = SubResource("StandardMaterial3D_1u8w0")
-
-[node name="CloseSound" type="AudioStreamPlayer3D" parent="Building/BreakRoomDoor" unique_id=1397575772]
-stream = ExtResource("7_1u8w0")
-volume_db = -20.0
-
-[node name="Sign" type="Sprite3D" parent="Building/BreakRoomDoor" unique_id=295705367]
-transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
-shaded = true
-texture = SubResource("ViewportTexture_vn1tu")
-
-[node name="SubViewport" type="SubViewport" parent="Building/BreakRoomDoor/Sign" unique_id=1349397849]
-transparent_bg = true
-
-[node name="ColorRect" type="ColorRect" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=1749443931]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Building/BreakRoomDoor/Sign/SubViewport/ColorRect" unique_id=364969205]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 96
-text = "BREAK
-ROOM"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EmployeeAreaSign" type="MeshInstance3D" parent="Building" unique_id=544386463]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.8483644, 2.3, 0.8688429)
-mesh = SubResource("TextMesh_vn1tu")
-
-[node name="CustomerAreaSign" type="MeshInstance3D" parent="Building" unique_id=136068731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7000003, 2.3, 4.6000004)
-mesh = SubResource("TextMesh_lswn8")
-
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
 
@@ -504,7 +507,7 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 spot_angle = 25.0
 
 [node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.216614, 1.3069857, 4.425891)
+transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 1.8935173, 1.3239809, 5.056421)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -831,7 +834,7 @@ vertical_alignment = 1
 [node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
 visible = false
 ui = NodePath("../../UI")
-irl_new_shop_items_indicator = NodePath("../../Building/Desk/NewShopItems")
+irl_new_shop_items_indicator = NodePath("../../Desk/NewShopItems")
 
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
@@ -848,6 +851,9 @@ transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, 
 
 [node name="Sketchfab_Scene2" parent="." unique_id=1851803810 instance=ExtResource("29_qsp4k")]
 transform = Transform3D(-2.0025606e-08, 0, -0.45813245, 0, 0.4581325, 0, 0.45813245, 0, -2.0025606e-08, 8.325348, 0.164332, 4.7332206)
+
+[node name="Environment" parent="." unique_id=563251901 instance=ExtResource("33_jq2sk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.864354, -0.03334713, 4.561019)
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam4"]
