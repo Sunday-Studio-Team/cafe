@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.15527344
-height = 0.7634155
+height = 1.751754
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50gvf"]
 albedo_color = Color(0.38928655, 0.38928664, 0.38928658, 1)
@@ -26,7 +26,7 @@ aiming_ray = NodePath("Camera3D/RayCast3D")
 ingredients_bag = NodePath("Camera3D/IngredientsBag")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55059195, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8827938, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2046988330]

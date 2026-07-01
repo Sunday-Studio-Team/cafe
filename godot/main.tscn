@@ -197,7 +197,7 @@ light_color = Color(0.6745098, 0.5647059, 0.5254902, 1)
 shadow_enabled = true
 
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5.2001863)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.123747, 0, 5.2001863)
 
 [node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound")]
 transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.214936, 0, 4.756097)
@@ -248,7 +248,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.90
 mesh = SubResource("TextMesh_vn1tu")
 
 [node name="CustomerAreaSign" type="MeshInstance3D" parent="." unique_id=136068731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.171345, 2.3, 4.7785497)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.804088, 2.359232, 5.1548986)
 mesh = SubResource("TextMesh_lswn8")
 
 [node name="Building" type="Node3D" parent="." unique_id=743168160]
@@ -512,7 +512,7 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 spot_angle = 25.0
 
 [node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 1.8935173, 1.3239809, 5.056421)
+transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 1.5632279, 1.2197964, 5.056421)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -524,7 +524,7 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
 
 [node name="ItemShelf" type="Node3D" parent="." unique_id=195864544 node_paths=PackedStringArray("item_slots_parent")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 11.216949, 1.1999999, 9)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 10.297824, 0.7600187, 9)
 script = ExtResource("10_82xsv")
 shelf_item_scene = ExtResource("11_getpj")
 item_slots_parent = NodePath("ItemSlots")
@@ -844,21 +844,36 @@ irl_new_shop_items_indicator = NodePath("../../Desk/NewShopItems")
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
 
-[node name="Placeholder shelves" parent="." unique_id=1103804277 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(-3.422108e-08, 0, 0.7828871, 0, 0.7828871, 0, -0.7828871, 0, -3.422108e-08, 8.046391, 1.0588318, 8.214255)
-
-[node name="cabinet3_mesh_cabinet 3_1" type="MeshInstance3D" parent="Placeholder shelves" unique_id=1431153512]
-transform = Transform3D(-4.3711385e-08, -0.99999976, -4.371138e-08, 0, -4.3711378e-08, 0.9999998, -0.9999998, 4.371138e-08, 1.910685e-15, -2.1643906, 0, 1.0938578)
+[node name="cabinet3_mesh_cabinet 3_1" type="MeshInstance3D" parent="." unique_id=1431153512]
+transform = Transform3D(-0.782887, 6.844215e-08, 2.9917013e-15, 0, -3.4221074e-08, 0.782887, 6.844215e-08, 0.7828869, 3.4221078e-08, 8.262164, 1.2681166, 9.961565)
 mesh = SubResource("ArrayMesh_0rl1p")
 
+[node name="Placeholder shelves" parent="." unique_id=1103804277 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(-3.422108e-08, 0, 0.7828871, 0, 0.7828871, 0, -0.7828871, 0, -3.422108e-08, 7.362483, 1.1969075, 8.214255)
+
+[node name="Placeholder shelves2" parent="." unique_id=94379757 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(-3.422108e-08, 0, -0.7828871, 0, 0.7828871, 0, 0.7828871, 0, -3.422108e-08, 6.0674853, 1.2044829, 8.214255)
+
+[node name="Placeholder shelves3" parent="." unique_id=1657951655 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(-0.7828871, 0, -6.844216e-08, 0, 0.7828871, 0, 6.844216e-08, 0, -0.7828871, 3.7029734, 1.2044829, 9.946796)
+
+[node name="Placeholder shelves4" parent="." unique_id=1678523969 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(-0.7828871, 0, -6.844216e-08, 0, 0.7828871, 0, 6.844216e-08, 0, -0.7828871, -2.920096, 1.2044829, 9.946796)
+
+[node name="Placeholder shelves5" parent="." unique_id=80034492 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(-0.7828871, 0, -6.844216e-08, 0, 0.7828871, 0, 6.844216e-08, 0, -0.7828871, -8.620756, 1.2044829, 9.946796)
+
 [node name="Sketchfab_Scene" parent="." unique_id=1649342532 instance=ExtResource("28_xuqvo")]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 11.027153, 0.044076506, 8.317321)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 10.447218, 0.044076506, 8.317321)
+
+[node name="Sketchfab_Scene3" parent="." unique_id=2028593848 instance=ExtResource("28_xuqvo")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 1.0017282, 0.044076506, 10.024435)
 
 [node name="Sketchfab_Scene2" parent="." unique_id=1851803810 instance=ExtResource("29_qsp4k")]
-transform = Transform3D(-2.0025606e-08, 0, -0.45813245, 0, 0.4581325, 0, 0.45813245, 0, -2.0025606e-08, 8.325348, 0.164332, 4.7332206)
+transform = Transform3D(-2.0025606e-08, 0, -0.45813245, 0, 0.4581325, 0, 0.45813245, 0, -2.0025606e-08, 7.8028507, 0.30213162, 5.016889)
 
 [node name="new floor Environment" parent="." unique_id=563251901 instance=ExtResource("33_jq2sk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.864354, -0.03334713, 4.561019)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2190657, 0.20238972, 4.5791388)
 
 [node name="Lights" type="Node3D" parent="." unique_id=70697466]
 
@@ -869,6 +884,15 @@ light_energy = 16.0
 shadow_enabled = true
 spot_range = 3.748
 spot_attenuation = 0.7
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="Lights" unique_id=195926624]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.9459481, 3.1989996, 1.7655988)
+light_color = Color(0.5604, 0.6, 0.468, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 4.207
+spot_attenuation = 0.7
+spot_angle = 31.67
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=74620204]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.8328985, 2.4967062, 7.7492085)
@@ -887,10 +911,21 @@ spot_range = 3.748
 spot_attenuation = 0.7
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1046384767]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.5691645, 1.5822527, 1.1757822)
-light_energy = 3.535
-shadow_enabled = true
-omni_range = 10.0
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.5691645, 2.622927, 1.1757822)
+light_energy = 2.188
+omni_range = 9.597
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" unique_id=1227393792]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.5691645, 1.5822527, 7.6464376)
+light_color = Color(0.65413237, 0.86293083, 0.732037, 1)
+light_energy = 0.921
+omni_range = 22.786
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights" unique_id=1400335422]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -10.469174, 1.5822527, 1.1249313)
+light_color = Color(0.65413237, 0.86293083, 0.732037, 1)
+light_energy = 0.921
+omni_range = 22.786
 
 [node name="SpotLight3D4" type="SpotLight3D" parent="Lights" unique_id=792580967]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.70046234, 2.4967062, -0.21300387)
@@ -914,11 +949,34 @@ light_energy = 2.426
 shadow_enabled = true
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=1618790461]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.602975, 1.2108836, 5.2385535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.160924, 1.2108836, 5.209157)
 light_color = Color(0.7012699, 0.96605545, 0.99999994, 1)
 light_energy = 1.317
 shadow_enabled = true
-omni_attenuation = 1.594
+omni_range = 2.483
+omni_attenuation = 0.604
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Lights" unique_id=301803978]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 9.1418915, 3.2596233, 9.038138)
+light_color = Color(0.8016073, 0.8532707, 0.53798264, 1)
+light_energy = 2.98
+light_volumetric_fog_energy = 1.158
+light_specular = 1.134
+shadow_enabled = true
+spot_range = 4.419
+spot_attenuation = -0.78
+spot_angle = 36.98
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="Lights" unique_id=1749260665]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 6.866584, 3.2596233, 5.5013547)
+light_color = Color(0.8016073, 0.8532707, 0.53798264, 1)
+light_energy = 2.98
+light_volumetric_fog_energy = 1.158
+light_specular = 1.134
+shadow_enabled = true
+spot_range = 4.419
+spot_attenuation = -0.78
+spot_angle = 33.65
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam4"]
