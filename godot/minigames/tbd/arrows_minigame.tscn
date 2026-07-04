@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://k0xp76mgx728"]
+
+[ext_resource type="Script" uid="uid://umo6thqlsy7d" path="res://minigames/tbd/arrows.gd" id="1_iuqyn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
+bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+
+[node name="Arrows" type="Node2D" unique_id=655191518 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output")]
+script = ExtResource("1_iuqyn")
+background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
+arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
+prompt_output = NodePath("CanvasLayer/Prompt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1499237152]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=538834130]
+anchors_preset = -1
+anchor_top = 0.123
+anchor_right = 1.1110001
+anchor_bottom = 0.49400002
+offset_left = 85.0
+offset_top = 535.16003
+offset_right = -286.12012
+offset_bottom = 396.47998
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer" unique_id=2121547647]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ol6wr")
+
+[node name="Arrows" type="RichTextLabel" parent="CanvasLayer/PanelContainer/Panel" unique_id=968681062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 154
+bbcode_enabled = true
+text = "[color=#14529F]🡹[/color][color=#000]Error text[/color][color=#A20B10]🡹[/color]
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Prompt" type="RichTextLabel" parent="CanvasLayer" unique_id=1688849488]
+offset_left = 96.0
+offset_top = 75.0
+offset_right = 1858.0
+offset_bottom = 338.0
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "This text should not appear in game"
+horizontal_alignment = 1
+vertical_alignment = 1
