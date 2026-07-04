@@ -11,7 +11,9 @@ const SPRITE_SIZE = Vector2(32,32)
 @export var inner_radius: int = 64
 @export var line_width: int = 4
 
-@export var options = []
+@export var options = [null]
+
+var active = false
 
 var selection : int = 0
 
@@ -19,6 +21,7 @@ var selection : int = 0
 
 #Need to use to resize
 func _ready():
+	Events.items_updated.connect(update_items)
 	pass
 
 func _draw():
@@ -79,19 +82,29 @@ func _draw():
 			
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and active:
 		if event.pressed and event.button_index == 1:
 			print("Selection: ", selection)
+			#If not the center one get the name of the item
+			if(selection > 0):
+				print("Item: ", options[selection])
 
 func _process(delta):
 	var mouse_pos = get_local_mouse_position()
 	var mouse_radius = mouse_pos.length()
 	
 	
-	if mouse_radius < inner_radius:
+	if mouse_radius < inner_radius: 
 		selection = 0
 	else:
 		var mouse_rads = fposmod(mouse_pos.angle() * -1, TAU)
 		selection = ceil((mouse_rads / TAU) * (len(options) - 1))
 	
 	queue_redraw()
+
+#Whenever item is added, goes through list and adds any active items bought
+func update_items():
+	for item in Global.owned_items:
+		if item.is_active_item:
+			options.append(item)
+	pass

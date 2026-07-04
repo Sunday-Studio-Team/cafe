@@ -22,6 +22,8 @@
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
+[ext_resource type="Script" uid="uid://b5dk0m7pnw5qo" path="res://active_item_selection_ui.gd" id="23_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://cpo2smu28r1o3" path="res://ui/ActiveItemSelection/active_item_selection.tscn" id="23_d13ii"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -668,6 +670,12 @@ visible = false
 
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
+
+[node name="ActiveItemSelectionUI" type="CanvasLayer" parent="." unique_id=53754607 node_paths=PackedStringArray("active_item_selection")]
+script = ExtResource("23_1u8w0")
+active_item_selection = NodePath("ActiveItemSelection")
+
+[node name="ActiveItemSelection" parent="ActiveItemSelectionUI" unique_id=437489300 instance=ExtResource("23_d13ii")]
 
 [node name="ActivateItems" type="Node" parent="." unique_id=398208983]
 
