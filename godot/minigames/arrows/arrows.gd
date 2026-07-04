@@ -41,13 +41,14 @@ func _start_minigame() -> void:
 	var color_choice: String
 	var text_color: String
 	# Choose if player has to click red or blue directions
+	var text_colors = [blue, red]
 	if choose_color == 0:
 		blue_valid = true
-		text_color = blue
+		text_color = text_colors.pick_random()
 		color_choice = "[bgcolor=%s][color=%s]blue[/color][/bgcolor]" % [background_color, text_color]
 	else:
 		blue_valid = false
-		text_color = red
+		text_color = text_colors.pick_random()
 		color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
 	
 	prompt_output.text = "Press the %s directions!" % color_choice
