@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://k0xp76mgx728"]
 
-[ext_resource type="Script" uid="uid://umo6thqlsy7d" path="res://minigames/tbd/arrows.gd" id="1_iuqyn"]
+[ext_resource type="Script" uid="uid://umo6thqlsy7d" path="res://minigames/arrows/arrows.gd" id="1_iuqyn"]
+[ext_resource type="Texture2D" uid="uid://dmqw3ojbkrp4m" path="res://minigames/arrows/dirs.png" id="2_57lmy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
 bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
@@ -9,7 +10,7 @@ bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
 script = ExtResource("1_iuqyn")
 background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
 arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
-prompt_output = NodePath("CanvasLayer/Prompt")
+prompt_output = NodePath("CanvasLayer/Control/Prompt")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1499237152]
 
@@ -21,7 +22,7 @@ anchor_bottom = 0.49400002
 offset_left = 85.0
 offset_top = 535.16003
 offset_right = -286.12012
-offset_bottom = 396.47998
+offset_bottom = 431.47998
 
 [node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer" unique_id=2121547647]
 layout_mode = 2
@@ -38,20 +39,39 @@ offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 154
+theme_override_font_sizes/normal_font_size = 120
 bbcode_enabled = true
 text = "[color=#14529F]🡹[/color][color=#000]Error text[/color][color=#A20B10]🡹[/color]
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Prompt" type="RichTextLabel" parent="CanvasLayer" unique_id=1688849488]
-offset_left = 96.0
-offset_top = 75.0
-offset_right = 1858.0
-offset_bottom = 338.0
-theme_override_font_sizes/normal_font_size = 100
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Prompt" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1688849488]
+layout_mode = 0
+offset_left = -881.0
+offset_right = 881.0
+offset_bottom = 263.0
+theme_override_font_sizes/normal_font_size = 80
 bbcode_enabled = true
 text = "This text should not appear in game"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="CanvasLayer" unique_id=747208162]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.446
+anchor_right = 0.5
+anchor_bottom = 0.448
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dirs" type="Sprite2D" parent="CanvasLayer/Control2" unique_id=1774183212]
+texture = ExtResource("2_57lmy")
