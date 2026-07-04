@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dp6xi3yg7ev4q" path="res://ui/pc/pc.gd" id="1_yl021"]
 [ext_resource type="Texture2D" uid="uid://bmqsi4w6n2thu" path="res://sprites/email_icon.png" id="2_am8ka"]
+[ext_resource type="Texture2D" uid="uid://3x0kmienore" path="res://sprites/wallpaper.png" id="2_k03dd"]
+[ext_resource type="Theme" uid="uid://bq1llck4skix4" path="res://ui/pc/pc_app_icon_theme.tres" id="3_8383a"]
 [ext_resource type="Texture2D" uid="uid://d3nmgsusj5d7c" path="res://sprites/shop_icon.png" id="3_qefv1"]
 [ext_resource type="PackedScene" uid="uid://bgyc1mnye0hph" path="res://ui/pc/shop_app.tscn" id="4_klsw4"]
 [ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
@@ -32,12 +34,14 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="Background" type="ColorRect" parent="MarginContainer" unique_id=645540393]
+[node name="Background" type="TextureRect" parent="MarginContainer" unique_id=2064125814]
+texture_filter = 1
 layout_mode = 2
-color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+texture = ExtResource("2_k03dd")
 
 [node name="Apps" type="HBoxContainer" parent="MarginContainer" unique_id=620486221]
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/separation = 50
 
 [node name="Email" type="Button" parent="MarginContainer/Apps" unique_id=99455866]
@@ -45,6 +49,10 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -0.1)
+offset_transform_scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_8383a")
 theme_override_font_sizes/font_size = 64
 text = "email"
 icon = ExtResource("2_am8ka")
@@ -57,6 +65,10 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 0.1)
+offset_transform_scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_8383a")
 theme_override_font_sizes/font_size = 64
 text = "shop"
 icon = ExtResource("3_qefv1")
