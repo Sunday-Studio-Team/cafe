@@ -531,7 +531,7 @@ handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "hammer_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer")
@@ -554,6 +554,7 @@ shelf_item_ui = NodePath("MarginContainer/ShelfItem")
 shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
 shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
 day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DayIndicator")
+hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/HammerIndicator")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -646,6 +647,15 @@ layout_mode = 2
 size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
+
+[node name="HammerIndicator" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=250359011]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.2, -0.8)
+
+[node name="TextEdit" type="TextEdit" parent="UI/MarginContainer/VBoxContainer/Interactable/HammerIndicator" unique_id=777988849]
+layout_mode = 2
+text = "[Q] Hammer"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
 layout_mode = 2

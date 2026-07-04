@@ -28,6 +28,9 @@ var score_update_tween: Tween
 var alert_tween: Tween
 var time_left_warning_played := false
 
+#Active Item
+@export var hammer_indicator : PanelContainer
+
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -191,14 +194,10 @@ func update_interactable_ui() -> void:
 		interactable_indicator.show()
 		
 		if hovered_interactable.name == "FixMachineButton" and Global.equipped_item != null and Global.equipped_item.name == "Hammer":
-			interactable_label.text = (
-				"(HOLD) [E] - "
-				+ Global.hovered_interactable.display_name
-				+
-				" [Q] Hammer"
-			)
+			hammer_indicator.show()
+			pass
 		
-		elif hovered_interactable.hold_to_interact:
+		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
 				"(HOLD) [E] - "
 				+ Global.hovered_interactable.display_name
