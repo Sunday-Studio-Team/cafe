@@ -195,7 +195,8 @@ func update_interactable_ui() -> void:
 		
 		if hovered_interactable.name == "FixMachineButton" and Global.equipped_item != null and Global.equipped_item.name == "Hammer":
 			hammer_indicator.show()
-			pass
+		else:
+			hammer_indicator.hide()
 		
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
