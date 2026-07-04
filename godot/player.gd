@@ -93,6 +93,9 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+	
+	if Input.is_action_just_pressed("use_item"):
+		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_gravity(delta: float) -> void:

@@ -19,6 +19,9 @@ extends Node3D
 #Minigame
 @export var minigame_controller: CanvasLayer
 
+#Active Item
+@export var active_clock_timer : Timer
+
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -71,6 +74,9 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
+	
+	#ACTIVE Items
+	Events.active_item_used.connect(active_item_used)
 
 
 
@@ -181,8 +187,13 @@ func active_item_used(item: Item):
 	if item != null:
 		item_name = item.name
 	
-	if item_name == "clock":
+	if item_name == "Clock":
 		game_timer.paused = true
+		active_clock_timer.start()
 	
-	if item_name == "hammer":
+	if item_name == "Hammer":
 		print("hammer used")
+
+
+func _on_clock_timer_timeout():
+	game_timer.paused = false

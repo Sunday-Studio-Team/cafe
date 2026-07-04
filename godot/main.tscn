@@ -103,7 +103,7 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller", "active_clock_timer")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
@@ -122,6 +122,7 @@ desk = NodePath("Building/Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
 minigame_controller = NodePath("MinigameController")
+active_clock_timer = NodePath("ActiveItemNodes/ClockTimer")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
 
@@ -788,8 +789,11 @@ visible = false
 
 [node name="ActiveItemNodes" type="Node" parent="." unique_id=1645591731]
 
-[node name="Timer" type="Timer" parent="ActiveItemNodes" unique_id=1815359101]
+[node name="ClockTimer" type="Timer" parent="ActiveItemNodes" unique_id=1815359101]
+wait_time = 6.0
 one_shot = true
+
+[connection signal="timeout" from="ActiveItemNodes/ClockTimer" to="." method="_on_clock_timer_timeout"]
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam4"]
