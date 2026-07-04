@@ -3,11 +3,12 @@ extends Node2D
 @export var background_panel: Panel
 @export var arrow_output: RichTextLabel
 @export var prompt_output: RichTextLabel
+@export var wrong_sign: Control
 
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
 var red: String = "#A20B10"
-var directions = ["🡄","🡅","🡆","🡇"]
+var general_directions = ["left","up","right","down"]
 var blue_directions = []
 var red_directions = []
 var output_directions = []
@@ -17,6 +18,12 @@ var input_to_direction: Dictionary = {
 	"move_forward": "🡅",
 	"move_right": "🡆",
 	"move_back": "🡇",
+}
+var general_direction_to_arrow: Dictionary = {
+	"left": ["🡄", "🠬", "🢀", "🠜" ,"🠘", "⇠"],
+	"up": ["🡅", "🠭", "🢁", "🠝", "🠙", "⇡"],
+	"right": ["🡆", "🠮", "🢂", "🠞", "🠚", "⇢"],
+	"down": ["🡇", "🠯", "🢃", "🠟", "🠛", "⇣"],
 }
 var correct_input_index: int = 0
 
@@ -55,8 +62,8 @@ func _start_minigame() -> void:
 	
 	# Randomly choose arrow directions
 	for i in range(max_arrow_count/2):
-		blue_directions.append([ directions.pick_random(), blue ])
-		red_directions.append([ directions.pick_random(), red ])
+		blue_directions.append([ general_direction_to_arrow[general_directions.pick_random()].pick_random(), blue ])
+		red_directions.append([ general_direction_to_arrow[general_directions.pick_random()].pick_random(), red ])
 	
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
 	var bi: int = max_arrow_count/2 - 1
@@ -86,26 +93,27 @@ func _end_minigame() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
 		if event.is_action("move_left"):
-			check_input("move_left")
+			check_input("left")
 		if event.is_action("move_forward"):
-			check_input("move_forward")
+			check_input("up")
 		if event.is_action("move_right"):
-			check_input("move_right")
+			check_input("right")
 		if event.is_action("move_back"):
-			check_input("move_back")
+			check_input("down")
 	
 	if correct_input_index >= valid_indices.size():
 		_end_minigame()
 
 
-func check_input(action: String) -> void:
+func check_input(direction: String) -> void:
 	var valid_index: int = valid_indices[correct_input_index]
 	
-	if input_to_direction[action] == output_directions[valid_index][0]:
+	if general_direction_to_arrow[direction].has(output_directions[valid_index][0]):
 		output_directions[valid_index][1] = background_color
 		correct_input_index += 1
 		update_output()
 	else:
+		display_wrong()
 		_start_minigame()
 
 
@@ -124,3 +132,9 @@ func update_output() -> void:
 		var arrow: String = output_directions[i][0]
 		output_text += "[color=%s]%s[/color]" % [color, arrow]
 	arrow_output.text = output_text
+
+
+func display_wrong() -> void:
+	wrong_sign.visible = true
+	await get_tree().create_timer(.4).timeout
+	wrong_sign.visible = false
