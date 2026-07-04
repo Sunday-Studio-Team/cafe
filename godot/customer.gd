@@ -1,14 +1,11 @@
 class_name Customer
 extends Node3D
 
-signal drink_made_at_window
-
 @export var body: Sprite3D
 @export var waiting_indicator: Sprite3D
 @export var waiting_bar: TextureProgressBar
 @export var timer: Timer
 @export var time_bonus_label: Label3D
-@export var make_drink_button: Interactable
 @export_dir var sprites_folder: String
 
 var window_wait_time: float = 30
@@ -18,10 +15,8 @@ var at_window: bool = false
 
 
 func _ready() -> void:
-	apply_random_sprite()
+	body.texture = Global.customer_sprites.pick_random()
 	get_stats()
-	make_drink_button.enabled = false
-	make_drink_button.interacted.connect(func(): drink_made_at_window.emit())
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
@@ -40,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 
 	if waiting_bar.value >= 66:
 		waiting_indicator.modulate = Color.GREEN
-		bonus_points_for_time = 0
+		bonus_points_for_time = 1
 	elif waiting_bar.value >= 33:
 		waiting_indicator.modulate = Color.ORANGE
 		bonus_points_for_time = 0
@@ -51,7 +46,6 @@ func _physics_process(_delta: float) -> void:
 
 func get_stats():
 	timer.wait_time = Stats.current.customer_wait_time_machine
-	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 
 
 func leave_store() -> void:
@@ -59,16 +53,6 @@ func leave_store() -> void:
 	global_transform = Global.customer_leaving_spot.global_transform
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	queue_free()
-
-
-func apply_random_sprite() -> void:
-	var sprites: Array[Resource]
-
-	for file_name: String in ResourceLoader.list_directory(sprites_folder):
-		if file_name.ends_with(".png"):
-			sprites.append(ResourceLoader.load(sprites_folder.path_join(file_name)) as Resource)
-
-	body.texture = sprites.pick_random()
 
 
 func _on_timer_timeout() -> void:
@@ -92,16 +76,11 @@ func _on_order_approved(customer: Customer) -> void:
 	timer.stop()
 
 	await get_tree().create_timer(1, false).timeout
-	Global.score_update_message = "penalty for time"
+	if bonus_points_for_time > 0:
+		Global.score_update_message = "bonus for time"
+	else:
+		Global.score_update_message = "penalty for time"
 	Global.employee_rating += bonus_points_for_time
-
-	match bonus_points_for_time:
-		1:
-			time_bonus_label.modulate = Color.GREEN
-			time_bonus_label.text = "⌚ bonus 🙂: +1"
-		-1:
-			time_bonus_label.modulate = Color.RED
-			time_bonus_label.text = "⌚ 🙂 penalty: -1"
 
 
 func _on_customer_left_machine(customer: Customer, drink_score) -> void:

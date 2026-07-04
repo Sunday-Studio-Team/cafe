@@ -24,7 +24,7 @@ extends Node3D
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
-	#Global.day = 2
+	#Global.day = 5
 	pass
 
 
@@ -33,11 +33,10 @@ func _ready() -> void:
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 
-	customer_spawn_timer.timeout.connect(_on_customer_spawn_timer_timeout)
+	customer_spawn_timer.timeout.connect(spawn_customer)
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
-	Events.customer_approached_machine.connect(_on_customer_approached_machine)
 
 	desk.interacted.connect(_on_desk_interacted)
 
@@ -53,6 +52,8 @@ func _ready() -> void:
 	Global.holding_ingredients = false
 	Global.daily_profit = 0
 	Global.employee_rating = 0
+	Global.spills_this_shift = 0
+	Global.breakdowns_this_shift = 0
 	# high values for debug
 	#Global.daily_profit = 100
 	#Global.employee_rating = 100
@@ -91,51 +92,62 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
-		game_timer.wait_time = 80
-		# since theres less happening in the first 'tutorial shift' we can make the machines
-		# more likely to break there to introduce that mechanic in a safe environment
-		Stats.current.chance_of_machine_breaking = 0.3
-		Stats.current.daily_profit_goal = 15
+		game_timer.wait_time = 90
+		Stats.current.daily_profit_goal = 12
 		cameras.hide()
 	if Global.day >= 2:
-		game_timer.wait_time = 90
-		Stats.current.chance_of_machine_breaking = 0.2
-		Stats.current.daily_profit_goal = 20
+		game_timer.wait_time = 120
+		Stats.current.daily_profit_goal = 18
 		cameras.show()
 	if Global.day >= 3:
 		game_timer.wait_time = 120
-		Stats.current.daily_profit_goal = 30
-		machines.append(side_machine)
+		Stats.current.daily_profit_goal = 25
+		machines.push_front(side_machine)
 		side_machine.show()
+		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
-		machines.append(fourth_machine)
+		machines.push_front(fourth_machine)
 		fourth_machine.show()
+		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
+
+	Global.machines.assign(machines)
 
 
-func _on_customer_spawn_timer_timeout() -> void:
+func spawn_customer() -> void:
 	var all_machines_occupied := true
+
 	for machine in machines:
 		if not machine.customer:
 			all_machines_occupied = false
+
 	if all_machines_occupied:
 		return
 
-	var customer = customer_scene.instantiate()
-	customer.position = spot_for_customer_entry.position
-	add_child(customer)
+	var new_customer = customer_scene.instantiate()
+	new_customer.position = spot_for_customer_entry.position
+	add_child(new_customer)
+
 	await get_tree().create_timer(randf_range(2, 4), false).timeout
-	Events.customer_approached_machine.emit(customer)
+
+	var machine: Machine = null
+	while machine == null or machine.customer:
+		machine = machines.pick_random()
+
+	machine.set_customer(new_customer)
+	machine.machine_make_drink()
 
 
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
+
 	await Events.end_screen_finished
+
 	get_tree().paused = false
 	if (
-		Global.daily_profit > Stats.current.daily_profit_goal
-		and Global.employee_rating > Stats.current.employee_rating_goal
+		Global.daily_profit >= Stats.current.daily_profit_goal
+		and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
 		Global.day += 1
 	else:
@@ -146,17 +158,9 @@ func _on_game_timer_timeout() -> void:
 		Events.main_scene_loaded.emit()
 
 
-func _on_customer_approached_machine(customer: Customer) -> void:
-	var machine: Machine = null
-	while machine == null or machine.customer:
-		machine = machines.pick_random()
-
-	machine.customer = customer
-
-
 #Minigame is active (Need to turn off regular player controls)
-func _on_minigame_active():
-	minigame_controller.play_minigame("Colors")
+func _on_minigame_active(minigame_name: String):
+	minigame_controller.play_minigame(minigame_name)
 
 
 #Closes the game -> Game is no longer visible and removed from the tree

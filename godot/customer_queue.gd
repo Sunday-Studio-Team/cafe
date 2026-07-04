@@ -4,6 +4,7 @@ extends Node3D
 signal customer_added
 signal queue_updated
 
+@export var customer_interactable: Interactable
 @export var front_of_window_queue: Marker3D
 @export var queue_spacing_offset: float = -1
 
@@ -14,14 +15,16 @@ var customers_waiting: Array[Customer]
 
 func _ready() -> void:
 	queue_updated.connect(_on_queue_updated)
+	customer_interactable.interacted.connect(_on_customer_interactable_interacted)
+	customer_interactable.enabled = false
 
 
 func add_customer(customer: Customer) -> void:
 	Events.alert_posted.emit("❗️🛎️ customer complained")
+	Global.score_update_message = "customer complained"
+	Global.employee_rating -= 1
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(func(): remove_front_customer(false))
-	customer.drink_made_at_window.connect(func(): remove_front_customer(true))
-	customer.make_drink_button.enabled = true
 	queue_updated.emit()
 	customer_added.emit()
 	customer.at_window = true
@@ -35,7 +38,7 @@ func remove_front_customer(customer_happy: bool) -> void:
 	# Code to satisfy front customer, should be moved to its own function once trigger to make drink is added
 	# Or should be changed to call some function/emit the customer's signal telling them to do the next thing
 	# maybe the customer should have the all around "next-step code", that gets called, and that chooses whether they leave or go to the window
-	var front_customer: Customer = get_front_customer()
+	var front_customer: Customer = _get_front_customer()
 	front_customer.body.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	front_customer.leave_store()
 	# --------------------------------------------------
@@ -44,14 +47,15 @@ func remove_front_customer(customer_happy: bool) -> void:
 	queue_updated.emit()
 
 	if customer_happy:
-		Global.score_update_message = "fixed customer's drink"
-		Global.daily_profit += 3
+		Global.score_update_message = "customer placated"
+		Global.employee_rating += 1
 	else:
 		Global.score_update_message = "customer left"
 		Global.employee_rating -= 3
+		Events.customer_timed_out_window.emit()
 
 
-func get_front_customer() -> Customer:
+func _get_front_customer() -> Customer:
 	return customers_waiting.front()
 
 
@@ -63,3 +67,33 @@ func _on_queue_updated() -> void:
 		customer_position.z += queue_spacing_offset * index
 
 		customer.global_position = customer_position
+
+	# Update interactable
+	if customers_waiting.size() > 0:
+		customer_interactable.enabled = true
+	else:
+		customer_interactable.enabled = false
+
+
+func _on_customer_interactable_interacted() -> void:
+	Events.minigame_end.connect(_on_minigame_end)
+	Events.minigame_cancelled.connect(_on_minigame_cancelled)
+	Events.minigame_active.emit("Typing")
+	Events.customer_timed_out_window.connect(_on_customer_timed_out_window)
+
+
+func _on_minigame_end() -> void:
+	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
+	Events.customer_timed_out_window.disconnect(_on_customer_timed_out_window)
+	remove_front_customer(true)
+
+
+func _on_minigame_cancelled() -> void:
+	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
+	Events.customer_timed_out_window.disconnect(_on_customer_timed_out_window)
+
+
+func _on_customer_timed_out_window() -> void:
+	Events.force_close_minigame.emit()

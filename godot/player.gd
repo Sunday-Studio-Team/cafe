@@ -27,12 +27,15 @@ var holding_interactable: bool = false
 # (whose 'position's may be further away from us than their interactable hitbox)
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
-@onready var max_interact_dist: float = abs(aiming_ray.target_position.z) + 0.75
+@onready var max_interact_dist: float = abs(aiming_ray.target_position.z) + 1.25
 
 
 func _ready() -> void:
 	Global.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# the aiming ray is a child of the camera (not a direct child of the player)
+	# so just enabling exclude_parent doesnt work
+	aiming_ray.add_exception(self)
 
 
 func _physics_process(delta: float) -> void:

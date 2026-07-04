@@ -4,6 +4,7 @@ extends Node
 # to get a ref to a folder that wont break if we move it : (
 @export_dir var drinks_folder_path: String
 @export_dir var items_folder_path: String
+@export_dir var customer_sprites_folder_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 
@@ -65,11 +66,18 @@ var bank_money := 0.0
 var final_day := 5
 # rules (true = rule in effect) (these are toggled per-day in main.gd)
 var holding_ingredients_rule := false
+# score from refill minigame (to pass to machine)
+var refill_minigame_accuracy: float
+var customer_sprites: Array[Texture]
+var breakdowns_this_shift := 0
+var spills_this_shift := 0
+var machines: Array[Machine]
 
 
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	items.assign(load_resources_from_folder(items_folder_path))
+	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 
 
 func _physics_process(_delta: float) -> void:
@@ -79,12 +87,12 @@ func _physics_process(_delta: float) -> void:
 	player_in_cctv_los = false
 
 
-func load_resources_from_folder(folder_path: String) -> Array[Resource]:
+func load_resources_from_folder(path: String, extension: String = "tres") -> Array[Resource]:
 	var resources: Array[Resource]
 
-	for file_name: String in ResourceLoader.list_directory(folder_path):
-		if file_name.ends_with(".tres"):
-			resources.append(ResourceLoader.load(folder_path.path_join(file_name)) as Resource)
+	for file_name: String in ResourceLoader.list_directory(path):
+		if file_name.ends_with(extension):
+			resources.append(ResourceLoader.load(path.path_join(file_name)) as Resource)
 
 	return resources
 

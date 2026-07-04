@@ -168,7 +168,10 @@ func handle_time_left_warning() -> void:
 		low_time_sound.play()
 		low_time_warning_label.show()
 		time_left_warning_played = true
-		var t := get_tree().create_tween().tween_property(low_time_warning_label, "modulate:a", 0, 2)
+		var t := create_tween()
+		t.tween_property(low_time_warning_label, "offset_transform_scale", Vector2(4, 4), 0.75)
+		t.tween_property(low_time_warning_label, "offset_transform_scale", Vector2(1, 1), 0.5)
+		t.tween_property(low_time_warning_label, "modulate:a", 0, 2)
 		await t.finished
 		low_time_warning_label.hide()
 
@@ -182,8 +185,10 @@ func update_score_indicators() -> void:
 
 
 func update_time_indicator() -> void:
-	time_left_label.visible = not game_timer.is_stopped()
-	time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
+	if game_timer.is_stopped():
+		time_left_label.text = "SHIFT LENGTH: %ss" % int(game_timer.wait_time)
+	else:
+		time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
 
 
 func update_interactable_ui() -> void:
@@ -246,7 +251,9 @@ func _on_alert_posted(message: String) -> void:
 func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
 	if score_update_tween != null and score_update_tween.is_running():
 		score_update_tween.kill()
-	score_update_tween = create_tween()
+	score_update_label.offset_transform_position_ratio = Vector2.ZERO
+	score_update_label.offset_transform_rotation = 0
+	score_update_tween = create_tween().set_parallel()
 
 	var color: Color
 	# the score label itself, not the label showing the updates like "+1$" etc
@@ -285,7 +292,11 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
 	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 2)
+	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
+	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
+	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)
 
 
 func set_active_item_image(item: Item):
 	active_item_image.texture = item.icon
+	

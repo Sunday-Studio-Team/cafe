@@ -34,7 +34,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	irl_new_shop_items_indicator.visible = new_shop_items
+	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day == 1
 
 
 func _on_email_button_pressed() -> void:

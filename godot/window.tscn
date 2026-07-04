@@ -4,11 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://diy70fnfh8kt1" path="res://customer_queue.tscn" id="2_hjewq"]
 [ext_resource type="AudioStream" uid="uid://b2l81b36awff1" path="res://audio/bell.mp3" id="3_nfq5s"]
 
-[node name="Window" type="Node3D" unique_id=556547264 node_paths=PackedStringArray("customer_queue", "bell_sound", "customer_complained_indicator")]
+[node name="Window" type="Node3D" unique_id=556547264 node_paths=PackedStringArray("customer_queue", "bell_sound")]
 script = ExtResource("1_mvsta")
 customer_queue = NodePath("CustomerQueue")
 bell_sound = NodePath("BellSound")
-customer_complained_indicator = NodePath("ComplaintIndicator")
 
 [node name="CustomerQueue" parent="." unique_id=1576840435 instance=ExtResource("2_hjewq")]
 
