@@ -73,6 +73,9 @@ var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 
+#Active Items
+var equipped_item : Item = null
+
 
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))

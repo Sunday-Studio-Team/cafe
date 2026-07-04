@@ -54,6 +54,9 @@ func _ready() -> void:
 	price_label.hide()
 	customer_order_indicator.hide()
 	final_order_indicator.hide()
+	
+	#Active Items
+	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
 
 
 func _physics_process(_delta: float) -> void:
@@ -377,6 +380,11 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 
 	set_customer(null)
 
+#Active Item
+#If item used, checks if it's valid and does the specified action
+func on_active_item_used_machine(item: Item):
+	if item.name == "Hammer":
+		fix_machine()
 
 class OrderData:
 	var ordered_drink: Drink

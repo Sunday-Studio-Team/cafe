@@ -17,3 +17,6 @@ extends Resource
 ## this will be like stat_bonuses but it can change vars in Global
 ## NOTE: unused for now
 @export var rules: Dictionary
+
+#Active Item
+@export var is_active_item: bool = false

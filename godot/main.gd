@@ -53,9 +53,9 @@ func _ready() -> void:
 	Global.spills_this_shift = 0
 	Global.breakdowns_this_shift = 0
 	# high values for debug
-	#Global.daily_profit = 100
-	#Global.employee_rating = 100
-	#Global.bank_money = 100
+	Global.daily_profit = 100
+	Global.employee_rating = 100
+	Global.bank_money = 100
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -71,6 +71,7 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
+
 
 
 func get_stats() -> void:
@@ -172,3 +173,16 @@ func _on_shift_started():
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
+
+
+#Actives the effects of a given active item
+func active_item_used(item: Item):
+	var item_name : String = ""
+	if item != null:
+		item_name = item.name
+	
+	if item_name == "clock":
+		game_timer.paused = true
+	
+	if item_name == "hammer":
+		print("hammer used")
