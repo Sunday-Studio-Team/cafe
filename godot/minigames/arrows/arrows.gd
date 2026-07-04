@@ -29,6 +29,13 @@ func _ready() -> void:
 
 func _start_minigame() -> void:
 	arrow_output.text = ""
+	
+	blue_directions = []
+	red_directions = []
+	output_directions = []
+	valid_indices = []
+	correct_input_index = 0
+	
 	var choose_color: float = randi_range(0, 1);
 	var blue_valid: bool
 	var color_choice: String
@@ -69,12 +76,10 @@ func _start_minigame() -> void:
 		ri -= 1
 	
 	update_output()
-	print(valid_indices)
 
 
 func _end_minigame() -> void:
 	Events.minigame_end.emit()
-	print("end")
 
 
 func _input(event: InputEvent) -> void:
@@ -99,6 +104,8 @@ func check_input(action: String) -> void:
 		output_directions[valid_index][1] = background_color
 		correct_input_index += 1
 		update_output()
+	else:
+		_start_minigame()
 
 
 # color_array can't be statically typed since Nested Type Collections are not supported. Code can be changed to use an array of classes instead.
