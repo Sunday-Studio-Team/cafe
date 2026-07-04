@@ -184,11 +184,11 @@ func active_item_used(item: String):
 	
 	if item == "clock":
 		#Stop the clock for a time period
-		game_timer.stop()
+		game_timer.paused = true
 		clock_switch_timer.start()
 
 
 
 func _on_clock_switch_timer_timeout():
-	game_timer.start()
+	game_timer.paused = false
 	pass # Replace with function body.

@@ -340,7 +340,8 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 
 	customer = null
 
-func _on_active_item_use(item_name: String):
+func _on_active_item_use(item: Item):
+	print("Used: ", item.name)
 	if Global.has_item("Hammer"):
 		Global.remove_item("Hammer")
 		fix_machine()

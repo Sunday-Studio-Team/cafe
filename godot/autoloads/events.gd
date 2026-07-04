@@ -27,5 +27,5 @@ signal minigame_cancelled
 signal minigame_end
 
 #Active Items
-signal active_item_used(item: String)
-signal select_item(selection: int)
+signal active_item_used(item: Item)
+signal select_item(selection: Item)

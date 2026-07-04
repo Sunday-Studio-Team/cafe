@@ -28,6 +28,10 @@ var score_update_tween: Tween
 var alert_tween: Tween
 var time_left_warning_played := false
 
+#Active Items
+@export var active_item_image : TextureRect
+
+
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -49,6 +53,9 @@ func _ready() -> void:
 
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_indicator.modulate.a = 0
+	
+	#Active Item
+	
 
 	# we automatically play a sound whenever our points change,
 	# so we mute that sound while we reset our points @ the start of each day
@@ -278,3 +285,7 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
 	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 2)
+
+
+func set_active_item_image(item: Item):
+	active_item_image.texture = item.icon
