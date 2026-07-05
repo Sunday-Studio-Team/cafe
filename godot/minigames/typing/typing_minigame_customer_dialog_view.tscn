@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cyy22h6m1wrhp"]
+
+[ext_resource type="Script" uid="uid://cswkqc7xx2m4" path="res://minigames/typing/typing_minigame_customer_dialog_view.gd" id="1_1kj11"]
+[ext_resource type="Texture2D" uid="uid://b1j05q5s30754" path="res://icon.svg" id="2_sejw3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kpug4"]
+font_size = 32
+
+[node name="TypingMinigameCustomerDialogView" type="Control" unique_id=1209190186 node_paths=PackedStringArray("customer_dialog_rich_text_label")]
+custom_minimum_size = Vector2(960, 160)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+script = ExtResource("1_1kj11")
+customer_dialog_rich_text_label = NodePath("HBoxContainer/VBoxContainer/CustomerDialogRichTextLabel")
+metadata/_custom_type_script = "uid://cswkqc7xx2m4"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1761184655]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1137849820]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+texture = ExtResource("2_sejw3")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=794225334]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=941133180]
+layout_mode = 2
+text = "Customer Name"
+label_settings = SubResource("LabelSettings_kpug4")
+
+[node name="CustomerDialogRichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer" unique_id=1661473529]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "The machine won't give me what I ordered!"
+fit_content = true

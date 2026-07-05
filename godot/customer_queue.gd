@@ -76,6 +76,8 @@ func _on_queue_updated() -> void:
 
 
 func _on_customer_interactable_interacted() -> void:
+	Global.active_helpdesk_customer = _get_front_customer()
+	
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	Events.minigame_active.emit("Typing")

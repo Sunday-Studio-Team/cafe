@@ -127,7 +127,7 @@ func machine_make_drink() -> void:
 		return
 
 	order = OrderData.new()
-	order.ordered_drink = Global.drinks.pick_random()
+	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
 		"customer ordered %s (%s)"
 		% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
