@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://b6dhgqysx6di" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://4rl0a3bpopmq" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
-[ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/pc/ui.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
@@ -526,10 +526,10 @@ handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_indicator", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
-customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer")
+customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")
 score_update_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/ScoreUpdate")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
@@ -549,6 +549,8 @@ shelf_item_ui = NodePath("MarginContainer/ShelfItem")
 shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
 shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
 day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Stars")
+rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -658,12 +660,22 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "$ 0"
 
-[node name="Customer" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=1609379077]
+[node name="Customer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=375295033]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=653594015]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
-text = "🙂 0"
+text = "🙂"
+
+[node name="Stars" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=2112858348]
+layout_mode = 2
+
+[node name="Goal" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=417478634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 
 [node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=124548306]
 modulate = Color(0.4, 1, 0.4, 1)
