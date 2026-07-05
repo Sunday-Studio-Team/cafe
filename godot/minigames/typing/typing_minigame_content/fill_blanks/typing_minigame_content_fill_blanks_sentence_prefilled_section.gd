@@ -1,0 +1,4 @@
+class_name TypingMinigameContentFillBlanksSentencePrefilledSection
+extends TypingMinigameContentFillBlanksSentenceSection
+
+@export var prefilled_section: String

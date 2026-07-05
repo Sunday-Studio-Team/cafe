@@ -1,2 +1,74 @@
 class_name TypingMinigameVariantFillBlanks
 extends TypingMinigameVariant
+
+@export var contents: Array[TypingMinigameContentFillBlanks]
+
+@export var prefilled_section_packed_scene: PackedScene
+@export var typed_section_packed_scene: PackedScene
+
+@export var customer_dialog_view: TypingMinigameCustomerDialogView
+@export var instructions_container: Control
+@export var instructions_display_duration: float = 0.1
+@export var sentence_container: Control
+
+var _sentence: TypingMinigameContentFillBlanksSentence
+var _prefilled_sections: Array[TypingMinigameVariantFillBlanksPrefilledSection]
+var _typing_sections: Array[TypingMinigameSection]
+var _active_typing_section_index: int
+
+func start_minigame_variant(customer: Customer) -> void:
+	instructions_container.visible = false
+	
+	# Get a random minigame content resource
+	var typing_minigame_contents_index: int = randi_range(0, contents.size()-1)
+	var typing_minigame_content: TypingMinigameContentFillBlanks = contents[typing_minigame_contents_index]
+	
+	# Get a random customer dialog
+	var typing_minigame_content_customer_dialog_index: int = randi_range(0, typing_minigame_content.possible_customer_dialog.size()-1)
+	var customer_dialog: String = typing_minigame_content.possible_customer_dialog[typing_minigame_content_customer_dialog_index]
+
+	# Get a random player reply
+	var typing_minigame_content_player_reply_index: int = randi_range(0, typing_minigame_content.possible_reply_sentences.size()-1)
+	_sentence = typing_minigame_content.possible_reply_sentences[typing_minigame_content_player_reply_index]
+
+	customer_dialog_view.init(customer_dialog)
+	customer_dialog_view.play_dialog()
+	await customer_dialog_view.dialog_finished
+	
+	instructions_container.visible = true
+	
+	var instructions_timer: SceneTreeTimer = get_tree().create_timer(instructions_display_duration)
+	await instructions_timer.timeout
+	
+	# Create sentence views
+	for sentence_section_content in _sentence.sentence_sections:
+		if sentence_section_content is TypingMinigameContentFillBlanksSentencePrefilledSection:
+			var prefilled_section_content: TypingMinigameContentFillBlanksSentencePrefilledSection = sentence_section_content as TypingMinigameContentFillBlanksSentencePrefilledSection
+			var prefilled_section: TypingMinigameVariantFillBlanksPrefilledSection = prefilled_section_packed_scene.instantiate()
+			prefilled_section.init(prefilled_section_content.prefilled_section)
+			_prefilled_sections.append(prefilled_section)
+			sentence_container.add_child(prefilled_section)
+		elif sentence_section_content is TypingMinigameContentFillBlanksSentenceTypedSection:
+			var typed_section_content: TypingMinigameContentFillBlanksSentenceTypedSection = sentence_section_content as TypingMinigameContentFillBlanksSentenceTypedSection
+			var typing_minigame_section: TypingMinigameSection = typed_section_packed_scene.instantiate()
+			typing_minigame_section.init(typed_section_content.typed_section)
+			typing_minigame_section.section_finished.connect(_on_section_finished)
+			_typing_sections.append(typing_minigame_section)
+			sentence_container.add_child(typing_minigame_section)
+		else:
+			printerr("Unhandled TypingMinigameContentFillBlanksSentenceSection type")
+	
+	_active_typing_section_index = 0
+	_start_next_section()
+
+func _start_next_section() -> void:
+	var typing_minigame_section: TypingMinigameSection = _typing_sections[_active_typing_section_index]
+	print("starting section")
+	typing_minigame_section.start_section()
+
+func _on_section_finished(finished_typing_minigame_section: TypingMinigameSection) -> void:
+	_active_typing_section_index += 1
+	if _active_typing_section_index < _typing_sections.size():
+		_start_next_section()
+	else:
+		minigame_variant_finished.emit(self)

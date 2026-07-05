@@ -1,0 +1,113 @@
+[gd_resource type="Resource" script_class="TypingMinigameContentFillBlanks" format=3 uid="uid://m3i7yt8fmkcm"]
+
+[ext_resource type="Script" uid="uid://bi77x8lotc312" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks_sentence.gd" id="1_1sjvo"]
+[ext_resource type="Script" uid="uid://c4f6srfjqwpsp" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks.gd" id="2_cp0d3"]
+[ext_resource type="Script" uid="uid://wr37glaceeiw" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks_sentence_section.gd" id="2_kmna6"]
+[ext_resource type="Script" uid="uid://cw0afgvrbt0gq" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks_sentence_prefilled_section.gd" id="3_ltk1g"]
+[ext_resource type="Script" uid="uid://cgsyb3kd3ahx7" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks_sentence_typed_section.gd" id="4_n0y0b"]
+
+[sub_resource type="Resource" id="Resource_cp0d3"]
+script = ExtResource("3_ltk1g")
+prefilled_section = "We "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_s4bm8"]
+script = ExtResource("4_n0y0b")
+typed_section = "sincerely"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_kmna6"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " apologize for the "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_ltk1g"]
+script = ExtResource("4_n0y0b")
+typed_section = "inconvenience"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_bts7e"]
+script = ExtResource("3_ltk1g")
+prefilled_section = ". Please "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_n8p8o"]
+script = ExtResource("4_n0y0b")
+typed_section = "wait"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_n0y0b"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " a moment."
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_1sjvo"]
+script = ExtResource("1_1sjvo")
+sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_cp0d3"), SubResource("Resource_s4bm8"), SubResource("Resource_kmna6"), SubResource("Resource_ltk1g"), SubResource("Resource_bts7e"), SubResource("Resource_n8p8o"), SubResource("Resource_n0y0b")])
+metadata/_custom_type_script = "uid://bi77x8lotc312"
+
+[sub_resource type="Resource" id="Resource_ubaki"]
+script = ExtResource("3_ltk1g")
+prefilled_section = "We sincerely"
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_g8vla"]
+script = ExtResource("4_n0y0b")
+typed_section = "apologize"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_ryk1a"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " for this error. I will prepare a "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_knijl"]
+script = ExtResource("4_n0y0b")
+typed_section = "replacement"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_hib46"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " drink for you."
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_nc7i6"]
+script = ExtResource("1_1sjvo")
+sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_ubaki"), SubResource("Resource_g8vla"), SubResource("Resource_ryk1a"), SubResource("Resource_knijl"), SubResource("Resource_hib46")])
+metadata/_custom_type_script = "uid://bi77x8lotc312"
+
+[sub_resource type="Resource" id="Resource_0e247"]
+script = ExtResource("3_ltk1g")
+prefilled_section = "We are "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_024bv"]
+script = ExtResource("4_n0y0b")
+typed_section = "sorry"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_o4yl8"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " to hear this. I will"
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_dbiq6"]
+script = ExtResource("4_n0y0b")
+typed_section = "prepare"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_yvj4k"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " a replacement drink for you."
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_yilih"]
+script = ExtResource("1_1sjvo")
+sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_0e247"), SubResource("Resource_024bv"), SubResource("Resource_o4yl8"), SubResource("Resource_dbiq6"), SubResource("Resource_yvj4k")])
+metadata/_custom_type_script = "uid://bi77x8lotc312"
+
+[resource]
+script = ExtResource("2_cp0d3")
+possible_customer_dialog = Array[String](["The machine won't give me what I ordered!", "I've been waiting forever for my order!"])
+possible_reply_sentences = Array[ExtResource("1_1sjvo")]([SubResource("Resource_1sjvo"), SubResource("Resource_nc7i6"), SubResource("Resource_yilih")])
+metadata/_custom_type_script = "uid://c4f6srfjqwpsp"

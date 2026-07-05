@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cpm8e11dkp7ty"]
+
+[ext_resource type="Script" uid="uid://sqoa7t6v464p" path="res://minigames/typing/typing_minigame_section.gd" id="1_nyewc"]
+
+[node name="TypingMinigameVariantFillBlanksTypingSection" type="MarginContainer" unique_id=220690316 node_paths=PackedStringArray("typing_rich_text_label")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -25.0
+offset_right = 0.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nyewc")
+typing_rich_text_label = NodePath("TypingRichTextLabel")
+
+[node name="TypingRichTextLabel" type="RichTextLabel" parent="." unique_id=1777825959]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "unfilled text"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
