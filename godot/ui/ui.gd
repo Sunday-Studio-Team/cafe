@@ -29,6 +29,9 @@ enum ScoreType { MONEY, CUSTOMER }
 var score_update_tween: Tween
 var alert_tween: Tween
 var time_left_warning_played := false
+var star_texture_rect := TextureRect.new()
+var half_star_texture_rect := TextureRect.new()
+var empty_star_texture_rect := TextureRect.new()
 
 
 func _ready() -> void:
@@ -122,6 +125,29 @@ func _ready() -> void:
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 
+	# we make these things for the employee rating here instead of in editor
+	# cos theyre dynamically added based on score
+	star_texture_rect.texture = Global.star_texture
+	star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+	star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	star_texture_rect.custom_minimum_size = Vector2(50, 50)
+	star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
+	half_star_texture_rect.texture = Global.half_star_texture
+	half_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+	half_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	half_star_texture_rect.custom_minimum_size = Vector2(50, 50)
+	half_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	half_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
+	empty_star_texture_rect.texture = Global.empty_star_texture
+	empty_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+	empty_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	empty_star_texture_rect.custom_minimum_size = Vector2(50, 50)
+	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
 	# (we muted this earlier, now we unmute)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
@@ -181,31 +207,6 @@ func update_score_indicators() -> void:
 		c.queue_free()
 
 	var current_rating := Global.employee_rating
-
-	var star_texture_rect := TextureRect.new()
-	star_texture_rect.texture = Global.star_texture
-	star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	star_texture_rect.custom_minimum_size = Vector2(50, 50)
-	star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-
-	var half_star_texture_rect := TextureRect.new()
-	half_star_texture_rect.texture = Global.half_star_texture
-	half_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	half_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	half_star_texture_rect.custom_minimum_size = Vector2(50, 50)
-	half_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	half_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-
-	var empty_star_texture_rect := TextureRect.new()
-	empty_star_texture_rect.texture = Global.empty_star_texture
-	empty_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	empty_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	empty_star_texture_rect.custom_minimum_size = Vector2(50, 50)
-	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-
 	var rating_is_even := current_rating % 2 == 0
 	var rating_shown := 0
 
