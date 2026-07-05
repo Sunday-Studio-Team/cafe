@@ -66,10 +66,17 @@ func init(typing_text: String) -> void:
 
 func start_section() -> void:
 	_state = State.PLAYING
-
+	_update_style_player_reply()
 
 func _update_style_player_reply() -> void:
 	var styled_player_reply: String = _typing_text
+	
+	# If fully complete, just style everything as finished
+	if _state == State.FINISHED:
+		styled_player_reply = styled_player_reply.insert(0, past_words_correct_letters_bbcode_open)
+		styled_player_reply = styled_player_reply.insert(styled_player_reply.length(), past_words_correct_letters_bbcode_close)
+		typing_rich_text_label.text = styled_player_reply
+		return
 	
 	# Calculate bbcode indices
 	
@@ -109,30 +116,32 @@ func _update_style_player_reply() -> void:
 	
 	var offset: int = 0
 	
-	styled_player_reply = styled_player_reply.insert(past_words_correct_letters_bbcode_open_index, past_words_correct_letters_bbcode_open)
-	offset += past_words_correct_letters_bbcode_open.length()
-	
-	styled_player_reply = styled_player_reply.insert(offset + past_words_correct_letters_bbcode_close_index, past_words_correct_letters_bbcode_close)
-	offset += past_words_correct_letters_bbcode_close.length()
-	
-	styled_player_reply = styled_player_reply.insert(offset + current_word_previous_letters_bbcode_open_index, current_word_previous_letters_bbcode_open)
-	offset += current_word_previous_letters_bbcode_open.length()
-	
-	styled_player_reply = styled_player_reply.insert(offset + current_word_previous_letters_bbcode_close_index, current_word_previous_letters_bbcode_close)
-	offset += current_word_previous_letters_bbcode_close.length()
-
-	styled_player_reply = styled_player_reply.insert(offset + current_word_next_letter_bbcode_open_index, current_word_next_letter_bbcode_open)
-	offset += current_word_next_letter_bbcode_open.length()
-	
-	styled_player_reply = styled_player_reply.insert(offset + current_word_next_letter_bbcode_close_index, current_word_next_letter_bbcode_close)
-	offset += current_word_next_letter_bbcode_close.length()
-	
-	if current_word_future_letters_bbcode_open_index <= current_word_future_letters_bbcode_close_index:
-		styled_player_reply = styled_player_reply.insert(offset + current_word_future_letters_bbcode_open_index, current_word_future_letters_bbcode_open)
-		offset += current_word_future_letters_bbcode_open.length()
+	# Only style active/finished words if minigame has started
+	if _state != State.PRE_START:
+		styled_player_reply = styled_player_reply.insert(past_words_correct_letters_bbcode_open_index, past_words_correct_letters_bbcode_open)
+		offset += past_words_correct_letters_bbcode_open.length()
 		
-		styled_player_reply = styled_player_reply.insert(offset + current_word_future_letters_bbcode_close_index, current_word_future_letters_bbcode_close)
-		offset += current_word_future_letters_bbcode_close.length()
+		styled_player_reply = styled_player_reply.insert(offset + past_words_correct_letters_bbcode_close_index, past_words_correct_letters_bbcode_close)
+		offset += past_words_correct_letters_bbcode_close.length()
+		
+		styled_player_reply = styled_player_reply.insert(offset + current_word_previous_letters_bbcode_open_index, current_word_previous_letters_bbcode_open)
+		offset += current_word_previous_letters_bbcode_open.length()
+		
+		styled_player_reply = styled_player_reply.insert(offset + current_word_previous_letters_bbcode_close_index, current_word_previous_letters_bbcode_close)
+		offset += current_word_previous_letters_bbcode_close.length()
+	
+		styled_player_reply = styled_player_reply.insert(offset + current_word_next_letter_bbcode_open_index, current_word_next_letter_bbcode_open)
+		offset += current_word_next_letter_bbcode_open.length()
+		
+		styled_player_reply = styled_player_reply.insert(offset + current_word_next_letter_bbcode_close_index, current_word_next_letter_bbcode_close)
+		offset += current_word_next_letter_bbcode_close.length()
+		
+		if current_word_future_letters_bbcode_open_index <= current_word_future_letters_bbcode_close_index:
+			styled_player_reply = styled_player_reply.insert(offset + current_word_future_letters_bbcode_open_index, current_word_future_letters_bbcode_open)
+			offset += current_word_future_letters_bbcode_open.length()
+			
+			styled_player_reply = styled_player_reply.insert(offset + current_word_future_letters_bbcode_close_index, current_word_future_letters_bbcode_close)
+			offset += current_word_future_letters_bbcode_close.length()
 	
 	styled_player_reply = styled_player_reply.insert(offset + future_words_bbcode_open_index, future_words_bbcode_open)
 	offset += future_words_bbcode_open.length()
@@ -145,4 +154,5 @@ func _update_style_player_reply() -> void:
 
 func _on_section_finished() -> void:
 	_state = State.FINISHED
+	_update_style_player_reply()
 	section_finished.emit(self)

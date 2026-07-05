@@ -1,0 +1,2 @@
+class_name TypingMinigameContentFillBlanksSentenceSection
+extends Resource

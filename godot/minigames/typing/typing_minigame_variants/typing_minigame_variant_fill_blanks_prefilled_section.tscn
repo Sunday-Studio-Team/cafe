@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://vidaqp0nyrn3"]
+
+[ext_resource type="Script" uid="uid://cbjsmecowcxib" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_prefilled_section.gd" id="1_e1b1v"]
+
+[node name="TypingMinigameVariantFillBlanksPrefilledSection" type="MarginContainer" unique_id=1005996712 node_paths=PackedStringArray("rich_text_label")]
+script = ExtResource("1_e1b1v")
+rich_text_label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1115679183]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.51, 0.51, 0.51, 1)
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "prefilled text"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

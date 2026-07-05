@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ce518qg6ck3gw" path="res://minigames/typing/typing_minigame.gd" id="1_6jplg"]
 [ext_resource type="PackedScene" uid="uid://cm8xhtcrglv52" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_full_sentence.tscn" id="2_y0qj6"]
 [ext_resource type="PackedScene" uid="uid://dsbs01da3oyl" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_ingredients_list.tscn" id="3_125gu"]
+[ext_resource type="PackedScene" uid="uid://ib45bvdvotru" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks.tscn" id="3_nc7i6"]
 
 [node name="TypingMinigame" type="Control" unique_id=1689639804 node_paths=PackedStringArray("typing_minigame_variant_container")]
 layout_mode = 3
@@ -13,8 +14,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6jplg")
 typing_minigame_variant_full_sentence_packed_scene = ExtResource("2_y0qj6")
+typing_minigame_variant_fill_blanks_packed_scene = ExtResource("3_nc7i6")
 typing_minigame_variant_ingredients_list_packed_scene = ExtResource("3_125gu")
 typing_minigame_variant_container = NodePath("TypingMinigameContainer")
+full_sentence_likelihood = 0.0
+fill_blanks_likelihood = 1.0
 
 [node name="TypingMinigameContainer" type="Control" parent="." unique_id=921845571]
 layout_mode = 1
