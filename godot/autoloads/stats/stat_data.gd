@@ -29,6 +29,7 @@ var time_to_manually_make_drink := 3.5
 var penalty_for_running := 4
 var penalty_for_handmade_drink := 5
 var penalty_for_holding_ingredients := 3
+var penalty_for_customer_complaint := 2
 var penalty_for_customer_stood_in_spill := 1
 var daily_profit_goal := 22.0
 var employee_rating_goal := 10

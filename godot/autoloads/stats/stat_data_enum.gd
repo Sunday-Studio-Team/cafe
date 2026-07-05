@@ -13,6 +13,7 @@ time_to_manually_make_drink,\
 penalty_for_running,\
 penalty_for_handmade_drink,\
 penalty_for_holding_ingredients,\
+penalty_for_customer_complaint,\
 penalty_for_customer_stood_in_spill,\
 daily_profit_goal,\
 employee_rating_goal,\
