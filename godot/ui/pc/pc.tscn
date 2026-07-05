@@ -29,15 +29,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
+theme_override_constants/margin_left = 323
 theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
+theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 100
 
 [node name="Background" type="TextureRect" parent="MarginContainer" unique_id=2064125814]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_k03dd")
+stretch_mode = 5
 
 [node name="Apps" type="HBoxContainer" parent="MarginContainer" unique_id=620486221]
 layout_mode = 2
@@ -50,12 +51,11 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0, -0.1)
-offset_transform_scale = Vector2(0.5, 0.5)
+offset_transform_position_ratio = Vector2(0.08, 0.94)
 offset_transform_visual_only = false
 theme = ExtResource("3_8383a")
 theme_override_font_sizes/font_size = 64
-text = "email"
+text = "Bmail"
 icon = ExtResource("2_am8ka")
 icon_alignment = 1
 vertical_icon_alignment = 0
@@ -67,7 +67,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_scale = Vector2(0.5, 0.5)
+offset_transform_position_ratio = Vector2(0.07, 1.55)
 offset_transform_visual_only = false
 theme = ExtResource("3_8383a")
 theme_override_font_sizes/font_size = 64
