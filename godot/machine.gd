@@ -199,7 +199,7 @@ func machine_make_drink() -> void:
 	):
 		spill_interactable.show()
 		spill_sound.play()
-		Events.alert_posted.emit("‼️⚙️machine made a spill")
+		Events.alert_posted.emit("⚙️machine made a spill")
 		Global.spills_this_shift += 1
 		spill_on_floor = true
 
@@ -246,7 +246,7 @@ func fix_machine() -> void:
 func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
 	if ingredients < Stats.current.ingredients_per_order:
-		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
+		Events.alert_posted.emit("🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
 
 
@@ -351,7 +351,7 @@ func break_down() -> void:
 	customer_order_indicator.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()
-	Events.alert_posted.emit("❗️⚙️ machine broke down")
+	Events.alert_posted.emit("⚙️ machine broke down")
 	Global.breakdowns_this_shift += 1
 
 	timer.paused = true
