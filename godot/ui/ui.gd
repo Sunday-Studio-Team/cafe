@@ -212,7 +212,7 @@ func update_score_indicators() -> void:
 	for i in 5 - rating_shown:
 		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
 
-	rating_goal_label.text = "(goal: %s)" % (int(Stats.current.employee_rating_goal / 2.0))
+	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
 
 
 func update_time_indicator() -> void:
@@ -305,14 +305,23 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 			ScoreType.CUSTOMER:
 				if is_inside_tree():
 					lose_points_sound.play()
-
 	score_update_label.modulate = color
+
+	var change_num_to_show: String = ""
+	if change > 0:
+		change_num_to_show = "+"
+
 	match score_type:
 		ScoreType.MONEY:
-			score_update_label.text = "$%s %s" % [String.num(change), Global.score_update_message]
+			change_num_to_show += Global.float_to_price(change)
+			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
 			score_label_to_tween = profit_label
 		ScoreType.CUSTOMER:
-			score_update_label.text = "🙂%s⭐️ %s" % [String.num(change / 2.0), Global.score_update_message]
+			change /= 2
+			change_num_to_show += "%.1f" % change
+			change_num_to_show = change_num_to_show.rstrip(".0")
+
+			score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
 			score_label_to_tween = customer_happiness_label
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
