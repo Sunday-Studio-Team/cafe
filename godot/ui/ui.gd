@@ -24,11 +24,16 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
 @export var day_indicator: Label
+@export var rating_stars_hbox: HBoxContainer
+@export var rating_goal_label: Label
 @export var alert_sprite: AnimatedSprite2D
 
 var score_update_tween: Tween
 var alert_tween: Tween
 var time_left_warning_played := false
+var star_texture_rect := TextureRect.new()
+var half_star_texture_rect := TextureRect.new()
+var empty_star_texture_rect := TextureRect.new()
 
 
 func _ready() -> void:
@@ -64,11 +69,7 @@ func _ready() -> void:
 	if Global.day >= 1:
 		objective.text = (
 			"you are the new manager of a fully automated cafe!
-			(flip the sign at the desk to open the shop and start your shift)
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+(flip the sign at the desk to open the shop and start your shift)"
 		)
 		rules_controls.text = (
 			"[b][i]controls [/i][/b]
@@ -80,11 +81,7 @@ func _ready() -> void:
 	if Global.day >= 2:
 		objective.text = (
 			"your boss has instated some new store [i]rules[/i].
-			they installed some security cameras to make sure you follow them!
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+they installed some security cameras to make sure you follow them!"
 		)
 		rules_controls.text += (
 			"\n[b][i]rules [/i][/b]
@@ -95,32 +92,49 @@ func _ready() -> void:
 	if Global.day >= 3:
 		objective.text = (
 			"your boss has installed another machine! it's located around the corner on the left.
-			(your daily profit goal has been adjusted accordingly.)
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+(your daily profit goal has been adjusted accordingly.)"
 		)
 	if Global.day >= 4:
 		objective.text = (
 			"your boss says you're using up too many ingredients.
-			new rule: don't take any more ingredients out of the store room.
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+new rule: don't take any more ingredients out of the store room."
 		)
 		rules_controls.text += "\n- no taking ingredients from store room"
 	if Global.day == 5:
 		objective.text = (
-			"your boss has installed another machine.
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+			"your boss has installed another machine."
 		)
+
+	objective.text += (
+		"\n\n[b]SHIFT OBJECTIVE[/b]
+make %s while keeping your employee rating (🙂) above %s⭐️"
+		% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
+	)
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
+
+	# we make these things for the employee rating here instead of in editor
+	# cos theyre dynamically added based on score
+	star_texture_rect.texture = Global.star_texture
+	star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+	star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	star_texture_rect.custom_minimum_size = Vector2(50, 50)
+	star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
+	half_star_texture_rect.texture = Global.half_star_texture
+	half_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+	half_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	half_star_texture_rect.custom_minimum_size = Vector2(50, 50)
+	half_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	half_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+
+	empty_star_texture_rect.texture = Global.empty_star_texture
+	empty_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+	empty_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+	empty_star_texture_rect.custom_minimum_size = Vector2(50, 50)
+	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 
 	# (we muted this earlier, now we unmute)
 	await get_tree().create_timer(2, false).timeout
@@ -176,7 +190,29 @@ func update_score_indicators() -> void:
 		Global.float_to_price(Global.daily_profit)
 		+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
 	)
-	customer_happiness_label.text = "🙂" + str(Global.employee_rating) + " (goal: %s)" % Stats.current.employee_rating_goal
+
+	for c in rating_stars_hbox.get_children():
+		c.queue_free()
+
+	var current_rating := Global.employee_rating
+	var rating_is_even := current_rating % 2 == 0
+	var rating_shown := 0
+
+	if rating_is_even:
+		for i in current_rating / 2.0:
+			rating_stars_hbox.add_child(star_texture_rect.duplicate())
+			rating_shown += 1
+	else:
+		for i in (current_rating - 1) / 2.0:
+			rating_stars_hbox.add_child(star_texture_rect.duplicate())
+			rating_shown += 1
+		rating_stars_hbox.add_child(half_star_texture_rect.duplicate())
+		rating_shown += 1
+
+	for i in 5 - rating_shown:
+		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
+
+	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
 
 
 func update_time_indicator() -> void:
@@ -247,10 +283,10 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	var color: Color
 	# the score label itself, not the label showing the updates like "+1$" etc
 	var score_label_to_tween: Label
+	score_update_label.text = ""
 
 	var change := new_value - old_value
 	if change > 0:
-		score_update_label.text = "+"
 		match score_type:
 			ScoreType.MONEY:
 				color = Color.GOLD
@@ -262,24 +298,32 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 					gain_points_sound.play()
 	else:
 		color = Color.RED
-		score_update_label.text = "-"
+		score_update_label.text = ""
 		match score_type:
 			ScoreType.MONEY:
 				pass
 			ScoreType.CUSTOMER:
 				if is_inside_tree():
 					lose_points_sound.play()
-
 	score_update_label.modulate = color
+
+	var change_num_to_show: String = ""
+	if change > 0:
+		change_num_to_show = "+"
+
 	match score_type:
 		ScoreType.MONEY:
-			score_update_label.text += "$"
+			change_num_to_show += Global.float_to_price(change)
+			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
 			score_label_to_tween = profit_label
 		ScoreType.CUSTOMER:
-			score_update_label.text += "🙂"
+			change /= 2
+			change_num_to_show += "%.1f" % change
+			change_num_to_show = change_num_to_show.rstrip(".0")
+
+			score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
 			score_label_to_tween = customer_happiness_label
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
-	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
 	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
 	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)
