@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://b6dhgqysx6di" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://4rl0a3bpopmq" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
@@ -825,7 +825,7 @@ handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "alert_sprite", "rating_stars_hbox", "rating_goal_label")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")

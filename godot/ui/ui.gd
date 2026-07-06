@@ -69,11 +69,7 @@ func _ready() -> void:
 	if Global.day >= 1:
 		objective.text = (
 			"you are the new manager of a fully automated cafe!
-			(flip the sign at the desk to open the shop and start your shift)
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+(flip the sign at the desk to open the shop and start your shift)"
 		)
 		rules_controls.text = (
 			"[b][i]controls [/i][/b]
@@ -85,11 +81,7 @@ func _ready() -> void:
 	if Global.day >= 2:
 		objective.text = (
 			"your boss has instated some new store [i]rules[/i].
-			they installed some security cameras to make sure you follow them!
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+they installed some security cameras to make sure you follow them!"
 		)
 		rules_controls.text += (
 			"\n[b][i]rules [/i][/b]
@@ -100,30 +92,24 @@ func _ready() -> void:
 	if Global.day >= 3:
 		objective.text = (
 			"your boss has installed another machine! it's located around the corner on the left.
-			(your daily profit goal has been adjusted accordingly.)
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+(your daily profit goal has been adjusted accordingly.)"
 		)
 	if Global.day >= 4:
 		objective.text = (
 			"your boss says you're using up too many ingredients.
-			new rule: don't take any more ingredients out of the store room.
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+new rule: don't take any more ingredients out of the store room."
 		)
 		rules_controls.text += "\n- no taking ingredients from store room"
 	if Global.day == 5:
 		objective.text = (
-			"your boss has installed another machine.
-
-			[b]SHIFT OBJECTIVE[/b]
-			make %s while keeping your employee rating (🙂) above %s"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), Stats.current.employee_rating_goal]
+			"your boss has installed another machine."
 		)
+
+	objective.text += (
+		"\n\n[b]SHIFT OBJECTIVE[/b]
+make %s while keeping your employee rating (🙂) above %s⭐️"
+		% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
+	)
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 
