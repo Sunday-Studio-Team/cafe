@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://umo6thqlsy7d" path="res://minigames/arrows/arrows.gd" id="1_iuqyn"]
 [ext_resource type="Texture2D" uid="uid://dmqw3ojbkrp4m" path="res://minigames/arrows/dirs.png" id="2_57lmy"]
+[ext_resource type="FontFile" uid="uid://hscjrb7045hv" path="res://minigames/arrows/fontello-c5a6b182/font/fontello.ttf" id="2_bw26h"]
 [ext_resource type="Texture2D" uid="uid://dj5s5y1n7gc0m" path="res://minigames/arrows/wrong.png" id="3_qx814"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
@@ -41,11 +42,12 @@ offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 120
+theme_override_fonts/normal_font = ExtResource("2_bw26h")
+theme_override_font_sizes/normal_font_size = 100
 bbcode_enabled = true
-text = "[color=#14529F]🡹[/color][color=#000]Error text[/color][color=#A20B10]🡹[/color]
+text = "[color=#14529F]🡹 [/color][color=#000]Error text [/color][color=#A20B10]🡹 [/color]
 "
-horizontal_alignment = 1
+horizontal_alignment = 3
 vertical_alignment = 1
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]

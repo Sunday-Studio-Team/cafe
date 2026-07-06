@@ -18,13 +18,15 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var low_time_sound: AudioStreamPlayer
 @export var low_time_warning_label: Label
 @export var cctv_indicator: TextureRect
-@export var alert_indicator: Label
+@export var alert_ui: Control
+@export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_goal_label: Label
+@export var alert_sprite: AnimatedSprite2D
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -53,7 +55,7 @@ func _ready() -> void:
 	Events.time_up.connect(func(): hide())
 
 	score_update_label.modulate = Color.TRANSPARENT
-	alert_indicator.modulate.a = 0
+	alert_ui.modulate.a = 0
 
 	# we automatically play a sound whenever our points change,
 	# so we mute that sound while we reset our points @ the start of each day
@@ -277,8 +279,10 @@ func _on_alert_posted(message: String) -> void:
 		alert_tween.kill()
 	alert_tween = create_tween()
 
-	alert_indicator.text = message
-	alert_tween.tween_property(alert_indicator, "modulate:a", 0, 2).from(1)
+	alert_label.text = message
+	alert_tween.tween_property(alert_ui, "modulate:a", 0, 2).from(1)
+
+	alert_sprite.play()
 
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money

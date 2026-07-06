@@ -20,10 +20,10 @@ var input_to_direction: Dictionary = {
 	"move_back": "🡇",
 }
 var general_direction_to_arrow: Dictionary = {
-	"left": ["🡄", "🠬", "🢀", "🠜", "🠘", "⇠"],
-	"up": ["🡅", "🠭", "🢁", "🠝", "🠙", "⇡"],
-	"right": ["🡆", "🠮", "🢂", "🠞", "🠚", "⇢"],
-	"down": ["🡇", "🠯", "🢃", "🠟", "🠛", "⇣"],
+	"left":  ["", "", "", "" ,"", ""],
+	"up":    ["", "" , "", "", "", ""],
+	"right": ["", "", "", "", "",  ""],
+	"down":  ["", "" , "", "", "", ""],
 }
 var correct_input_index: int = 0
 
@@ -75,7 +75,7 @@ func update_output() -> void:
 	for i in range(output_directions.size()):
 		var color: String = output_directions[i][1]
 		var arrow: String = output_directions[i][0]
-		output_text += "[color=%s]%s[/color]" % [color, arrow]
+		output_text += "[color=%s]%s [/color]" % [color, arrow]
 	arrow_output.text = output_text
 
 
