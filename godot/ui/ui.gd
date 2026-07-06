@@ -224,7 +224,7 @@ func update_score_indicators() -> void:
 	for i in 5 - rating_shown:
 		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
 
-	rating_goal_label.text = "(goal: %s)" % (Stats.current.employee_rating_goal / 2)
+	rating_goal_label.text = "(goal: %s)" % (int(Stats.current.employee_rating_goal / 2.0))
 
 
 func update_time_indicator() -> void:
@@ -293,10 +293,10 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	var color: Color
 	# the score label itself, not the label showing the updates like "+1$" etc
 	var score_label_to_tween: Label
+	score_update_label.text = ""
 
 	var change := new_value - old_value
 	if change > 0:
-		score_update_label.text = "+"
 		match score_type:
 			ScoreType.MONEY:
 				color = Color.GOLD
@@ -308,7 +308,7 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 					gain_points_sound.play()
 	else:
 		color = Color.RED
-		score_update_label.text = "-"
+		score_update_label.text = ""
 		match score_type:
 			ScoreType.MONEY:
 				pass
@@ -319,13 +319,12 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	score_update_label.modulate = color
 	match score_type:
 		ScoreType.MONEY:
-			score_update_label.text += "$"
+			score_update_label.text = "$%s %s" % [String.num(change), Global.score_update_message]
 			score_label_to_tween = profit_label
 		ScoreType.CUSTOMER:
-			score_update_label.text += "🙂"
+			score_update_label.text = "🙂%s⭐️ %s" % [String.num(change / 2.0), Global.score_update_message]
 			score_label_to_tween = customer_happiness_label
 	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
-	score_update_label.text += "%s %s" % [abs(int(change)), Global.score_update_message]
 	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
 	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
 	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)
