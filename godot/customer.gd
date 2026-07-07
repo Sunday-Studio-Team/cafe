@@ -8,6 +8,7 @@ extends Node3D
 @export var time_bonus_label: Label3D
 @export_dir var sprites_folder: String
 
+var desired_drink: Drink
 var window_wait_time: float = 30
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -23,6 +24,8 @@ func _ready() -> void:
 	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
+	
+	desired_drink = Global.drinks.pick_random()
 
 	waiting_indicator.hide()
 

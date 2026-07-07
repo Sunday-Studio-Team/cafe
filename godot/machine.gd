@@ -127,7 +127,7 @@ func machine_make_drink() -> void:
 		return
 
 	order = OrderData.new()
-	order.ordered_drink = Global.drinks.pick_random()
+	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
 		"customer ordered %s (%s)"
 		% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
@@ -199,7 +199,7 @@ func machine_make_drink() -> void:
 	):
 		spill_interactable.show()
 		spill_sound.play()
-		Events.alert_posted.emit("‼️⚙️machine made a spill")
+		Events.alert_posted.emit("⚙️machine made a spill")
 		Global.spills_this_shift += 1
 		spill_on_floor = true
 
@@ -217,15 +217,12 @@ func display_drink_score() -> void:
 	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()
 
-	drink_customer_score_label.text = ""
 	if order.score < 0:
 		drink_customer_score_label.modulate = Color.RED
-		drink_customer_score_label.text += "🙂 "
-		drink_customer_score_label.text += str(order.score)
+		drink_customer_score_label.text = "🙂 %s⭐️" % (order.score / 2.0)
 	elif order.score > 0:
 		drink_customer_score_label.modulate = Color.GREEN
-		drink_customer_score_label.text += "🙂 +"
-		drink_customer_score_label.text += str(order.score)
+		drink_customer_score_label.text = "🙂 +%s⭐️" % (order.score / 2.0)
 	drink_customer_score_label.show()
 
 	if order.score == 3:
@@ -246,7 +243,7 @@ func fix_machine() -> void:
 func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
 	if ingredients < Stats.current.ingredients_per_order:
-		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
+		Events.alert_posted.emit("🫘 machine ran out of ingredients")
 		no_ingredients_sound.play()
 
 
@@ -351,7 +348,7 @@ func break_down() -> void:
 	customer_order_indicator.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()
-	Events.alert_posted.emit("❗️⚙️ machine broke down")
+	Events.alert_posted.emit("⚙️ machine broke down")
 	Global.breakdowns_this_shift += 1
 
 	timer.paused = true

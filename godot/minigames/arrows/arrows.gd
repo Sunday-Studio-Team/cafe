@@ -8,7 +8,7 @@ extends Node2D
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
 var red: String = "#A20B10"
-var general_directions = ["left","up","right","down"]
+var general_directions = ["left", "up", "right", "down"]
 var blue_directions = []
 var red_directions = []
 var output_directions = []
@@ -20,10 +20,10 @@ var input_to_direction: Dictionary = {
 	"move_back": "🡇",
 }
 var general_direction_to_arrow: Dictionary = {
-	"left": ["🡄", "🠬", "🢀", "🠜" ,"🠘", "⇠"],
-	"up": ["🡅", "🠭", "🢁", "🠝", "🠙", "⇡"],
-	"right": ["🡆", "🠮", "🢂", "🠞", "🠚", "⇢"],
-	"down": ["🡇", "🠯", "🢃", "🠟", "🠛", "⇣"],
+	"left":  ["", "", "", "" ,"", ""],
+	"up":    ["", "" , "", "", "", ""],
+	"right": ["", "", "", "", "",  ""],
+	"down":  ["", "" , "", "", "", ""],
 }
 var correct_input_index: int = 0
 
@@ -31,63 +31,8 @@ var correct_input_index: int = 0
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	_start_minigame()
-
-
-func _start_minigame() -> void:
-	arrow_output.text = ""
-	
-	blue_directions = []
-	red_directions = []
-	output_directions = []
-	valid_indices = []
-	correct_input_index = 0
-	
-	var choose_color: float = randi_range(0, 1);
-	var blue_valid: bool
-	var color_choice: String
-	var text_color: String
-	# Choose if player has to click red or blue directions
-	var text_colors = [blue, red]
-	if choose_color == 0:
-		blue_valid = true
-		text_color = text_colors.pick_random()
-		color_choice = "[bgcolor=%s][color=%s]blue[/color][/bgcolor]" % [background_color, text_color]
-	else:
-		blue_valid = false
-		text_color = text_colors.pick_random()
-		color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
-	
-	prompt_output.text = "Press the %s directions!" % color_choice
-	
-	# Randomly choose arrow directions
-	for i in range(max_arrow_count/2):
-		blue_directions.append([ general_direction_to_arrow[general_directions.pick_random()].pick_random(), blue ])
-		red_directions.append([ general_direction_to_arrow[general_directions.pick_random()].pick_random(), red ])
-	
-	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
-	var bi: int = max_arrow_count/2 - 1
-	var ri: int = max_arrow_count/2 - 1
-	while bi >= 0 and ri >= 0:
-		var choose_dir = randi_range(0, 1);
-		if choose_dir == 0:
-			add_arrow(blue_directions, bi, blue_valid)
-			bi -= 1
-		else:
-			add_arrow(red_directions, ri, !blue_valid)
-			ri -= 1
-	while bi >= 0:
-		add_arrow(blue_directions, bi, blue_valid)
-		bi -= 1
-	while ri >= 0:
-		add_arrow(red_directions, ri, !blue_valid)
-		ri -= 1
-	
-	update_output()
-
-
-func _end_minigame() -> void:
-	Events.minigame_end.emit()
 
 
 func _input(event: InputEvent) -> void:
@@ -100,14 +45,14 @@ func _input(event: InputEvent) -> void:
 			check_input("right")
 		if event.is_action("move_back"):
 			check_input("down")
-	
+
 	if correct_input_index >= valid_indices.size():
 		_end_minigame()
 
 
 func check_input(direction: String) -> void:
 	var valid_index: int = valid_indices[correct_input_index]
-	
+
 	if general_direction_to_arrow[direction].has(output_directions[valid_index][0]):
 		output_directions[valid_index][1] = background_color
 		correct_input_index += 1
@@ -130,7 +75,7 @@ func update_output() -> void:
 	for i in range(output_directions.size()):
 		var color: String = output_directions[i][1]
 		var arrow: String = output_directions[i][0]
-		output_text += "[color=%s]%s[/color]" % [color, arrow]
+		output_text += "[color=%s]%s [/color]" % [color, arrow]
 	arrow_output.text = output_text
 
 
@@ -138,3 +83,59 @@ func display_wrong() -> void:
 	wrong_sign.visible = true
 	await get_tree().create_timer(.4).timeout
 	wrong_sign.visible = false
+
+
+func _start_minigame() -> void:
+	arrow_output.text = ""
+
+	blue_directions = []
+	red_directions = []
+	output_directions = []
+	valid_indices = []
+	correct_input_index = 0
+
+	var choose_color: float = randi_range(0, 1)
+	var blue_valid: bool
+	var color_choice: String
+	var text_color: String
+	# Choose if player has to click red or blue directions
+	var text_colors = [blue, red]
+	if choose_color == 0:
+		blue_valid = true
+		text_color = text_colors.pick_random()
+		color_choice = "[bgcolor=%s][color=%s]blue[/color][/bgcolor]" % [background_color, text_color]
+	else:
+		blue_valid = false
+		text_color = text_colors.pick_random()
+		color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
+
+	prompt_output.text = "Press the %s directions!" % color_choice
+
+	# Randomly choose arrow directions
+	for i in range(max_arrow_count / 2):
+		blue_directions.append([general_direction_to_arrow[general_directions.pick_random()].pick_random(), blue])
+		red_directions.append([general_direction_to_arrow[general_directions.pick_random()].pick_random(), red])
+
+	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
+	var bi: int = max_arrow_count / 2 - 1
+	var ri: int = max_arrow_count / 2 - 1
+	while bi >= 0 and ri >= 0:
+		var choose_dir = randi_range(0, 1)
+		if choose_dir == 0:
+			add_arrow(blue_directions, bi, blue_valid)
+			bi -= 1
+		else:
+			add_arrow(red_directions, ri, !blue_valid)
+			ri -= 1
+	while bi >= 0:
+		add_arrow(blue_directions, bi, blue_valid)
+		bi -= 1
+	while ri >= 0:
+		add_arrow(red_directions, ri, !blue_valid)
+		ri -= 1
+
+	update_output()
+
+
+func _end_minigame() -> void:
+	Events.minigame_end.emit()

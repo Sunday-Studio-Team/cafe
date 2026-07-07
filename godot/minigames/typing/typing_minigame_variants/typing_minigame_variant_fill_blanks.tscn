@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://ib45bvdvotru"]
+
+[ext_resource type="Script" uid="uid://dp7wiw2dh25le" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks.gd" id="1_bg8cr"]
+[ext_resource type="Script" uid="uid://c4f6srfjqwpsp" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks.gd" id="2_qjm3i"]
+[ext_resource type="Resource" uid="uid://m3i7yt8fmkcm" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks_default.tres" id="3_tlcrm"]
+[ext_resource type="PackedScene" uid="uid://cpm8e11dkp7ty" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_typing_section.tscn" id="4_bg8cr"]
+[ext_resource type="PackedScene" uid="uid://cyy22h6m1wrhp" path="res://minigames/typing/typing_minigame_customer_dialog_view.tscn" id="4_tlcrm"]
+[ext_resource type="PackedScene" uid="uid://vidaqp0nyrn3" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_prefilled_section.tscn" id="5_bg8cr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 48
+
+[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bg8cr")
+contents = Array[ExtResource("2_qjm3i")]([ExtResource("3_tlcrm")])
+prefilled_section_packed_scene = ExtResource("5_bg8cr")
+typed_section_packed_scene = ExtResource("4_bg8cr")
+customer_dialog_view = NodePath("VBoxContainer/TypingMinigameCustomerDialogView")
+instructions_container = NodePath("VBoxContainer/InstructionsContainer")
+sentence_container = NodePath("VBoxContainer/TypingSectionContainer/SentenceHBoxContainer")
+metadata/_custom_type_script = "uid://dp7wiw2dh25le"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667575708]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -696.0
+offset_top = -589.0
+offset_right = 696.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="TypingMinigameCustomerDialogView" parent="VBoxContainer" unique_id=1209190186 instance=ExtResource("4_tlcrm")]
+layout_mode = 2
+
+[node name="InstructionsContainer" type="MarginContainer" parent="VBoxContainer" unique_id=639655740]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/InstructionsContainer" unique_id=943532684]
+layout_mode = 2
+text = "⬇️ TYPE REPLY! ⬇️"
+label_settings = SubResource("LabelSettings_xrivr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypingSectionContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1204504852]
+layout_mode = 2
+theme_override_constants/margin_bottom = 64
+
+[node name="SentenceHBoxContainer" type="HBoxContainer" parent="VBoxContainer/TypingSectionContainer" unique_id=714687961]
+layout_mode = 2
+alignment = 1

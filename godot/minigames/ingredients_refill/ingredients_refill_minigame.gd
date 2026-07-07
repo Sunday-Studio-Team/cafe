@@ -2,6 +2,7 @@ extends Node2D
 
 const MOVE_SPEED := 6
 const BEANS_TO_SPAWN := 5
+const LEFT_RIGHT_FORCE := 250
 
 @export var cup: CharacterBody2D
 @export var bean_scene: PackedScene
@@ -60,7 +61,7 @@ func spawn_bean() -> void:
 		bean.global_position = pour_point.global_position
 		bean.add_to_group("beans")
 		add_child(bean)
-		bean.apply_impulse(Vector2(randf_range(-200, 200), 0))
+		bean.apply_impulse(Vector2(randf_range(-LEFT_RIGHT_FORCE, LEFT_RIGHT_FORCE), 0))
 		bean.rotation_degrees = randf_range(0, 360)
 		beans_spawned += 1
 	else:
