@@ -25,6 +25,7 @@ extends Node3D
 @export var spill_interactable: Interactable
 @export var spill_sound: AudioStreamPlayer3D
 @export var static_body: StaticBody3D
+@export var spill_warning: Label
 
 var customer: Customer
 var order: OrderData
@@ -83,6 +84,8 @@ func _physics_process(_delta: float) -> void:
 		ing_too_low_label.hide()
 		reject_button.text = "reject drink (retry)"
 		make_drink_button.text = "remake drink by hand"
+
+	spill_warning.visible = spill_on_floor
 
 	# disable reject/make buttons if no ingredients
 	# (not sure if this is best way to do it, probably should enable them but
