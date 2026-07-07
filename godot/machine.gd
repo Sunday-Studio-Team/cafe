@@ -6,19 +6,19 @@ extends Node3D
 @export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
 @export var timer: Timer
-@export var customer_order_indicator: Label3D
-@export var final_order_indicator: Label3D
-@export var price_label: Label3D
+@export var customer_order_indicator: Label
+@export var final_order_indicator: Label
+@export var price_label: Label
+@export var drink_customer_score_label: Label
 @export var make_drink_button: Button
 @export var accept_button: Button
 @export var reject_button: Button
 @export var refill_button: Interactable
-@export var waiting_approval_indicator: Label3D
+@export var waiting_approval_indicator: Label
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var no_ingredients_sound: AudioStreamPlayer3D
-@export var drink_customer_score_label: Label3D
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
 @export var tip_jar_item: Item
@@ -74,7 +74,7 @@ func _physics_process(_delta: float) -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
-		reject_button.display_name = "[color=pink]🚫not enough ingredients"
+		reject_button.display_name = "[color=pink]🚫no ingredients"
 		make_drink_button.display_name = "[color=pink]🚫no ingredients"
 	else:
 		if ingredients <= max_ingredients / 2.0:
@@ -82,8 +82,8 @@ func _physics_process(_delta: float) -> void:
 		else:
 			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
-		reject_button.text = "reject drink (retry)"
-		make_drink_button.text = "remake drink by hand"
+		reject_button.text = "reject"
+		make_drink_button.text = "remake by hand"
 
 	spill_warning.visible = spill_on_floor
 

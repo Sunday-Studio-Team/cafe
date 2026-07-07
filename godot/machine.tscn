@@ -51,32 +51,32 @@ size = Vector2(0.9, 1.2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2xdn"]
 size = Vector3(0.9, 1.2, 0.01)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator")
 progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator/TextureProgressBar")
 timer = NodePath("Timer")
-customer_order_indicator = NodePath("CustomerOrderIndicator")
-final_order_indicator = NodePath("MachineOrderIndicator")
-price_label = NodePath("PriceLabel")
+customer_order_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerOrderIndicator")
+final_order_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MachineOrderIndicator")
+price_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/PriceLabel")
+drink_customer_score_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/DrinkCustomerScoreLabel")
 make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton")
 accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton")
 reject_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RejectButton")
 refill_button = NodePath("RefillButton")
-waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
+waiting_approval_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
 breakdown_sound = NodePath("BreakdownSound")
 no_ingredients_sound = NodePath("NoIngredientsSound")
-drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
 ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsMeter/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
 tip_jar_item = ExtResource("2_yuuq8")
 spill_interactable = NodePath("Spill")
 spill_sound = NodePath("SpillSound")
 static_body = NodePath("StaticBody3D")
-spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/SpillWarning")
+spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/SpillWarning/Label")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -91,32 +91,6 @@ one_shot = true
 
 [node name="BreakdownTimer" type="Timer" parent="." unique_id=644498863]
 one_shot = true
-
-[node name="CustomerOrderIndicator" type="Label3D" parent="." unique_id=2089461590]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5999999, 1)
-text = "customer ordered:"
-font_size = 24
-
-[node name="MachineOrderIndicator" type="Label3D" parent="." unique_id=1724140398]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
-text = "machine made:"
-font_size = 24
-
-[node name="PriceLabel" type="Label3D" parent="." unique_id=2094560560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27403152, 1.0993592, 1.1413068)
-modulate = Color(0, 1, 0, 1)
-text = "+1"
-
-[node name="WaitingApprovalIndicator" type="Label3D" parent="." unique_id=879957228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
-text = "order complete!
-waiting for approval ^"
-font_size = 16
-
-[node name="DrinkCustomerScoreLabel" type="Label3D" parent="." unique_id=434807514]
-transform = Transform3D(0.98999906, -0.14107402, 0, 0.14107402, 0.98999906, 0, 0, 0, 1, 0.65134853, 0.8347569, 1.0733647)
-visible = false
-text = "+3"
 
 [node name="IngTooLow" type="Label3D" parent="." unique_id=1911355806]
 transform = Transform3D(0.75122947, -0.66004103, 0, 0.66004103, 0.75122947, 0, 0, 0, 1, 1.3784734, 1.4826432, 0.73625064)
