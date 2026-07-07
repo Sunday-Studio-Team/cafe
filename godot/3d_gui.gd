@@ -28,10 +28,11 @@ func _ready():
 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and Global.in_machine_ui:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if Input.is_action_just_pressed("pause"):
 		interactable.enabled = true
-		Global.in_machine_ui = false
+		if Global.in_machine_ui:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			Global.in_machine_ui = false
 
 	#if get_parent().name == "Machinee":
 	#print("its me")
