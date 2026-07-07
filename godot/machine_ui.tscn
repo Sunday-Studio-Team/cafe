@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bh5bdrvebx5nl"]
+
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="1_sahxb"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="2_rxjwk"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="3_pjr5n"]
+
+[node name="MachineUI" type="MarginContainer" unique_id=317935962]
+custom_maximum_size = Vector2(600, 800)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1147466751]
+layout_mode = 2
+
+[node name="ProgressIndicator" type="VBoxContainer" parent="VBoxContainer" unique_id=105617217]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+
+[node name="MakingDrinkText" type="Label" parent="VBoxContainer/ProgressIndicator" unique_id=92433370]
+layout_mode = 2
+text = "making drink . . ."
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/ProgressIndicator" unique_id=894079404]
+texture_filter = 1
+layout_mode = 2
+fill_mode = 4
+texture_under = ExtResource("1_sahxb")
+texture_over = ExtResource("2_rxjwk")
+texture_progress = ExtResource("3_pjr5n")
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer" unique_id=1826884261]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="RejectButton" type="Button" parent="VBoxContainer/Buttons" unique_id=49434824]
+layout_mode = 2
+text = "reject (machine will retry)"
+
+[node name="MakeDrinkButton" type="Button" parent="VBoxContainer/Buttons" unique_id=779966476]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "remake manually"
+
+[node name="AcceptButton" type="Button" parent="VBoxContainer/Buttons" unique_id=1653396744]
+layout_mode = 2
+text = "accept"
+
+[node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/IngredientsMeter" unique_id=869047581]
+modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
+custom_minimum_size = Vector2(250, 25)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+value = 75.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="VBoxContainer/IngredientsMeter" unique_id=861789852]
+layout_mode = 2
+text = "ingredients"
+horizontal_alignment = 1

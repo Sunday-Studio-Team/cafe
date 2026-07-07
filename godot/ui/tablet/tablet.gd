@@ -9,6 +9,10 @@ func _ready() -> void:
 	populate_ui()
 
 
+func _physics_process(_delta: float) -> void:
+	visible = not Global.in_ui
+
+
 func populate_ui() -> void:
 	for m in Global.machines:
 		var machine_ui: TabletMachineUI = machine_ui_scene.instantiate()

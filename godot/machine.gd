@@ -3,15 +3,15 @@ class_name Machine
 extends Node3D
 
 @export var spot_for_customer: Marker3D
-@export var progress_indicator: Sprite3D
+@export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
 @export var timer: Timer
 @export var customer_order_indicator: Label3D
 @export var final_order_indicator: Label3D
 @export var price_label: Label3D
-@export var make_drink_button: Interactable
-@export var accept_button: Interactable
-@export var reject_button: Interactable
+@export var make_drink_button: Button
+@export var accept_button: Button
+@export var reject_button: Button
 @export var refill_button: Interactable
 @export var waiting_approval_indicator: Label3D
 @export var fix_machine_button: Interactable
@@ -40,10 +40,10 @@ func _ready() -> void:
 	get_stats()
 	Events.items_updated.connect(get_stats)
 
-	accept_button.interacted.connect(accept_order)
-	reject_button.interacted.connect(reject_order)
+	accept_button.pressed.connect(accept_order)
+	make_drink_button.pressed.connect(make_drink_manually)
+	reject_button.pressed.connect(reject_order)
 	refill_button.interacted.connect(refill)
-	make_drink_button.interacted.connect(make_drink_manually)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 
 	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
@@ -81,8 +81,8 @@ func _physics_process(_delta: float) -> void:
 		else:
 			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
-		reject_button.display_name = "[color=red]reject drink (retry)"
-		make_drink_button.display_name = "[color=yellow]remake drink by hand"
+		reject_button.text = "reject drink (retry)"
+		make_drink_button.text = "remake drink by hand"
 
 	# disable reject/make buttons if no ingredients
 	# (not sure if this is best way to do it, probably should enable them but
@@ -111,7 +111,7 @@ func set_customer(c: Customer) -> void:
 
 
 func get_stats() -> void:
-	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
+	#make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.wait_time = Stats.current.machine_time_to_make_drink
 	spill_interactable.time_to_hold = Stats.current.time_to_clean_up_spill
 

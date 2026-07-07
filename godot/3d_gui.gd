@@ -2,10 +2,14 @@
 # (basically just handles putting our inputs into a scene on a subviewport)
 extends Node3D
 
+const CAM_TWEEN_DUR := 0.25
+
 @export var interactable: Interactable
 @export var node_viewport: SubViewport
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
+@export var cam_spot: Marker3D
+@export var exit_button: Button
 
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
@@ -13,6 +17,7 @@ var is_mouse_inside = false
 var last_event_pos2D = null
 # The time of the last event in seconds since engine start.
 var last_event_time: float = -1.0
+var cam_trans_b4_enter: Transform3D
 
 
 func _ready():
@@ -24,20 +29,18 @@ func _ready():
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			interactable.enabled = false
 			Global.in_machine_ui = true
+
+			var cam := Global.player.camera
+			cam_trans_b4_enter = cam.transform
+			create_tween().tween_property(cam, "global_transform", cam_spot.global_transform, CAM_TWEEN_DUR)
 	)
+
+	Events.gui3d_exit_button_pressed.connect(exit)
 
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
-		interactable.enabled = true
-		if Global.in_machine_ui:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			Global.in_machine_ui = false
-
-	#if get_parent().name == "Machinee":
-	#print("its me")
-	#if interactable.enabled:
-	#print("im enabled")
+		exit()
 
 
 func _unhandled_input(event):
@@ -48,6 +51,14 @@ func _unhandled_input(event):
 			# handled via Physics Picking.
 			return
 	node_viewport.push_input(event)
+
+
+func exit() -> void:
+	interactable.enabled = true
+	if Global.in_machine_ui:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		Global.in_machine_ui = false
+		create_tween().tween_property(Global.player.camera, "transform", cam_trans_b4_enter, CAM_TWEEN_DUR)
 
 
 func _mouse_entered_area():
