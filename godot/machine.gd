@@ -83,7 +83,7 @@ func _physics_process(_delta: float) -> void:
 			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
 		reject_button.text = "reject"
-		make_drink_button.text = "remake by hand"
+		make_drink_button.text = "remake manually"
 
 	spill_warning.visible = spill_on_floor
 
@@ -284,8 +284,9 @@ func cancel_fix_minigame() -> void:
 
 
 func accept_order() -> void:
+	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "dispensing drink to customer"
+	final_order_indicator.text = "dispensing drink to customer . . ."
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
 	drink_customer_score_label.hide()

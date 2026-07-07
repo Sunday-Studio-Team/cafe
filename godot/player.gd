@@ -169,4 +169,4 @@ func tilt_camera() -> void:
 
 
 func handle_ingredients_bag_visibility() -> void:
-	ingredients_bag.visible = Global.holding_ingredients
+	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
