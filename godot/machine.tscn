@@ -54,7 +54,10 @@ viewport_path = NodePath("../../../../CamFeed")
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2xdn"]
 size = Vector3(0.9, 1.2, 0.01)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
+size = Vector3(0.9, 1.2, 1)
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator")
@@ -68,7 +71,7 @@ make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/B
 accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton")
 reject_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RejectButton")
 refill_button = NodePath("RefillButton")
-waiting_approval_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/WaitingApprovalIndicator")
+waiting_approval_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer/WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
 breakdown_sound = NodePath("BreakdownSound")
@@ -80,6 +83,8 @@ spill_interactable = NodePath("Spill")
 spill_sound = NodePath("SpillSound")
 static_body = NodePath("StaticBody3D")
 spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/SpillWarning/Label")
+manual_progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton/ProgressBar")
+gui_3d = NodePath("3DGui")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -215,7 +220,7 @@ metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
-shape = SubResource("BoxShape3D_j2xdn")
+shape = SubResource("BoxShape3D_yuuq8")
 
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)

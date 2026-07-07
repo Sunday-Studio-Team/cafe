@@ -1,5 +1,6 @@
 # mostly copied from sample project: https://godotengine.org/asset-library/asset/2807
 # (basically just handles putting our inputs into a scene on a subviewport)
+class_name Gui3D
 extends Node3D
 
 const CAM_TWEEN_DUR := 0.25
@@ -30,7 +31,7 @@ func _ready():
 			interactable.enabled = false
 			Global.in_machine_ui = true
 
-			var cam := Global.player.camera
+			var cam: Camera3D = Global.player.camera
 			cam_trans_b4_enter = cam.transform
 			create_tween().tween_property(cam, "global_transform", cam_spot.global_transform, CAM_TWEEN_DUR)
 	)

@@ -10,7 +10,7 @@ extends Node3D
 @export var final_order_indicator: Label
 @export var price_label: Label
 @export var drink_customer_score_label: Label
-@export var make_drink_button: Button
+@export var make_drink_button: HoldButton
 @export var accept_button: Button
 @export var reject_button: Button
 @export var refill_button: Interactable
@@ -26,6 +26,8 @@ extends Node3D
 @export var spill_sound: AudioStreamPlayer3D
 @export var static_body: StaticBody3D
 @export var spill_warning: Label
+@export var manual_progress_bar: TextureProgressBar
+@export var gui_3d: Gui3D
 
 var customer: Customer
 var order: OrderData
@@ -42,7 +44,7 @@ func _ready() -> void:
 	Events.items_updated.connect(get_stats)
 
 	accept_button.pressed.connect(accept_order)
-	make_drink_button.pressed.connect(make_drink_manually)
+	make_drink_button.hold_completed.connect(make_drink_manually)
 	reject_button.pressed.connect(reject_order)
 	refill_button.interacted.connect(refill)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
@@ -87,6 +89,12 @@ func _physics_process(_delta: float) -> void:
 
 	spill_warning.visible = spill_on_floor
 
+	manual_progress_bar.value = (
+		make_drink_button.held_time / make_drink_button.time_to_hold * 100
+	)
+
+	manual_progress_bar.visible = make_drink_button.held or make_drink_button.held_time > 0
+
 	# disable reject/make buttons if no ingredients
 	# (not sure if this is best way to do it, probably should enable them but
 	# give them custom behaviour that gives player feeback and makes sure they
@@ -111,10 +119,11 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
+		make_drink_button.held_time = 0
 
 
 func get_stats() -> void:
-	#make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
+	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.wait_time = Stats.current.machine_time_to_make_drink
 	spill_interactable.time_to_hold = Stats.current.time_to_clean_up_spill
 
@@ -284,6 +293,7 @@ func cancel_fix_minigame() -> void:
 
 
 func accept_order() -> void:
+	gui_3d.exit()
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
 	final_order_indicator.text = "dispensing drink to customer . . ."
@@ -315,6 +325,7 @@ func accept_order() -> void:
 
 
 func reject_order() -> void:
+	gui_3d.exit()
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
@@ -326,6 +337,7 @@ func reject_order() -> void:
 
 
 func make_drink_manually() -> void:
+	gui_3d.exit()
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	consume_ingredients()
