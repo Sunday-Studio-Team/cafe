@@ -6,6 +6,7 @@ signal hold_completed
 @export var time_to_hold := 5.0
 @export var reset_if_let_go := false
 
+var enabled := true
 var held := false
 var held_time := 0.0
 
@@ -17,7 +18,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if held:
+	if held and enabled:
 		held_time += delta
 	elif reset_if_let_go:
 		held_time = 0

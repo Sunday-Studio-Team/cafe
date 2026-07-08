@@ -20,6 +20,13 @@ bg_color = Color(0.68556535, 0.5972759, 0.23268256, 1)
 corner_radius_top_left = 50
 corner_radius_bottom_right = 50
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
+bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="MachineUI" type="MarginContainer" unique_id=317935962]
 custom_maximum_size = Vector2(600, 800)
 anchors_preset = 15
@@ -242,3 +249,21 @@ size_flags_vertical = 10
 theme_override_font_sizes/font_size = 48
 text = "ingredients"
 horizontal_alignment = 1
+
+[node name="NoIngredientsWarning" type="PanelContainer" parent="." unique_id=1916984411]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = 0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ffxp")
+
+[node name="Label" type="Label" parent="NoIngredientsWarning" unique_id=981182096]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 48
+text = "NO
+INGREDIENTS !"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -30,6 +30,7 @@ extends Node3D
 @export var gui_3d: Gui3D
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
+@export var no_ingredients_warning: Control
 
 var customer: Customer
 var order: OrderData
@@ -46,8 +47,23 @@ func _ready() -> void:
 	Events.items_updated.connect(get_stats)
 
 	accept_button.pressed.connect(accept_order)
+	make_drink_button.button_down.connect(
+		func():
+			if ingredients < Stats.current.ingredients_per_order:
+				no_ingredients_warning.show()
+				await get_tree().create_timer(0.5, false).timeout
+				no_ingredients_warning.hide()
+	)
 	make_drink_button.hold_completed.connect(make_drink_manually)
-	reject_button.pressed.connect(reject_order)
+	reject_button.pressed.connect(
+		func():
+			if ingredients < Stats.current.ingredients_per_order:
+				no_ingredients_warning.show()
+				await get_tree().create_timer(0.5, false).timeout
+				no_ingredients_warning.hide()
+			else:
+				reject_order()
+	)
 	refill_button.interacted.connect(refill)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 
@@ -70,6 +86,7 @@ func _physics_process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
+	make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
 
 	refill_button.visible = Global.holding_ingredients
@@ -78,16 +95,12 @@ func _physics_process(_delta: float) -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
-		reject_button.display_name = "[color=pink]🚫no ingredients"
-		make_drink_button.display_name = "[color=pink]🚫no ingredients"
 	else:
 		if ingredients <= max_ingredients / 2.0:
 			ingredients_bar.modulate = Color.YELLOW
 		else:
 			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
-		reject_button.text = "reject"
-		make_drink_button.text = "remake manually"
 
 	spill_warning.visible = spill_on_floor
 
@@ -95,7 +108,7 @@ func _physics_process(_delta: float) -> void:
 		make_drink_button.held_time / make_drink_button.time_to_hold * 100
 	)
 
-	manual_progress_bar.visible = make_drink_button.held or make_drink_button.held_time > 0
+	manual_progress_bar.visible = make_drink_button.held_time > 0
 
 	customer_wait_indicator.visible = customer != null and not customer.timer.is_stopped()
 
