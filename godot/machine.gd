@@ -3,28 +3,34 @@ class_name Machine
 extends Node3D
 
 @export var spot_for_customer: Marker3D
-@export var progress_indicator: Sprite3D
+@export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
 @export var timer: Timer
-@export var customer_order_indicator: Label3D
-@export var final_order_indicator: Label3D
-@export var price_label: Label3D
-@export var make_drink_button: Interactable
-@export var accept_button: Interactable
-@export var reject_button: Interactable
+@export var customer_order_indicator: Label
+@export var final_order_indicator: Label
+@export var price_label: Label
+@export var drink_customer_score_label: Label
+@export var make_drink_button: HoldButton
+@export var accept_button: Button
+@export var reject_button: Button
 @export var refill_button: Interactable
-@export var waiting_approval_indicator: Label3D
+@export var waiting_approval_indicator: Label
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var no_ingredients_sound: AudioStreamPlayer3D
-@export var drink_customer_score_label: Label3D
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
 @export var tip_jar_item: Item
 @export var spill_interactable: Interactable
 @export var spill_sound: AudioStreamPlayer3D
 @export var static_body: StaticBody3D
+@export var spill_warning: Label
+@export var manual_progress_bar: TextureProgressBar
+@export var gui_3d: Gui3D
+@export var customer_wait_indicator: Control
+@export var customer_wait_bar: TextureProgressBar
+@export var no_ingredients_warning: Control
 
 var customer: Customer
 var order: OrderData
@@ -40,10 +46,25 @@ func _ready() -> void:
 	get_stats()
 	Events.items_updated.connect(get_stats)
 
-	accept_button.interacted.connect(accept_order)
-	reject_button.interacted.connect(reject_order)
+	accept_button.pressed.connect(accept_order)
+	make_drink_button.button_down.connect(
+		func():
+			if ingredients < Stats.current.ingredients_per_order:
+				no_ingredients_warning.show()
+				await get_tree().create_timer(0.5, false).timeout
+				no_ingredients_warning.hide()
+	)
+	make_drink_button.hold_completed.connect(make_drink_manually)
+	reject_button.pressed.connect(
+		func():
+			if ingredients < Stats.current.ingredients_per_order:
+				no_ingredients_warning.show()
+				await get_tree().create_timer(0.5, false).timeout
+				no_ingredients_warning.hide()
+			else:
+				reject_order()
+	)
 	refill_button.interacted.connect(refill)
-	make_drink_button.interacted.connect(make_drink_manually)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 
 	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
@@ -65,6 +86,7 @@ func _physics_process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
+	make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
 
 	refill_button.visible = Global.holding_ingredients
@@ -73,16 +95,34 @@ func _physics_process(_delta: float) -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
-		reject_button.display_name = "[color=pink]🚫not enough ingredients"
-		make_drink_button.display_name = "[color=pink]🚫no ingredients"
 	else:
 		if ingredients <= max_ingredients / 2.0:
 			ingredients_bar.modulate = Color.YELLOW
 		else:
 			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
-		reject_button.display_name = "[color=red]reject drink (retry)"
-		make_drink_button.display_name = "[color=yellow]remake drink by hand"
+
+	spill_warning.visible = spill_on_floor
+
+	manual_progress_bar.value = (
+		make_drink_button.held_time / make_drink_button.time_to_hold * 100
+	)
+
+	manual_progress_bar.visible = make_drink_button.held_time > 0
+
+	customer_wait_indicator.visible = customer != null and not customer.timer.is_stopped()
+
+	if customer:
+		var customer_timer: Timer = customer.timer
+
+		customer_wait_bar.value = customer_timer.time_left / customer_timer.wait_time * 100
+
+		if customer_wait_bar.value >= 66:
+			customer_wait_indicator.modulate = Color.GREEN
+		elif customer_wait_bar.value >= 33:
+			customer_wait_indicator.modulate = Color.ORANGE
+		else:
+			customer_wait_indicator.modulate = Color.RED
 
 	# disable reject/make buttons if no ingredients
 	# (not sure if this is best way to do it, probably should enable them but
@@ -108,6 +148,7 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
+		make_drink_button.held_time = 0
 
 
 func get_stats() -> void:
@@ -234,6 +275,7 @@ func display_drink_score() -> void:
 func fix_machine() -> void:
 	fix_machine_button.hide()
 	broken_down = false
+	gui_3d.interactable.enabled = true
 	if customer:
 		customer_order_indicator.show()
 		timer.paused = false
@@ -281,8 +323,10 @@ func cancel_fix_minigame() -> void:
 
 
 func accept_order() -> void:
+	gui_3d.exit()
+	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "dispensing drink to customer"
+	final_order_indicator.text = "dispensing drink to customer . . ."
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
 	drink_customer_score_label.hide()
@@ -311,6 +355,7 @@ func accept_order() -> void:
 
 
 func reject_order() -> void:
+	gui_3d.exit()
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
@@ -322,6 +367,7 @@ func reject_order() -> void:
 
 
 func make_drink_manually() -> void:
+	gui_3d.exit()
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	consume_ingredients()
@@ -345,6 +391,8 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
+	gui_3d.exit()
+	gui_3d.interactable.enabled = false
 	customer_order_indicator.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()

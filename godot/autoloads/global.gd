@@ -79,6 +79,17 @@ var customer_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
+var in_machine_ui: bool = false
+var in_ui: bool:
+	get():
+		if (
+			minigame_active
+			or in_pc_ui
+			or in_machine_ui
+		):
+			return true
+		else:
+			return false
 
 
 func _ready() -> void:
