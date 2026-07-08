@@ -13,6 +13,7 @@ var held_time := 0.0
 func _ready() -> void:
 	button_down.connect(func(): held = true)
 	button_up.connect(func(): held = false)
+	mouse_exited.connect(func(): button_up.emit())
 
 
 func _physics_process(delta: float) -> void:
