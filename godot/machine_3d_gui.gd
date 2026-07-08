@@ -1,5 +1,6 @@
 # mostly copied from sample project: https://godotengine.org/asset-library/asset/2807
-# (basically just handles putting our inputs into a scene on a subviewport)
+# (basically just handles putting our inputs into a scene on the subviewport
+# + some camera stuff)
 class_name Gui3D
 extends Node3D
 
@@ -18,7 +19,10 @@ var is_mouse_inside = false
 var last_event_pos2D = null
 # The time of the last event in seconds since engine start.
 var last_event_time: float = -1.0
+# where to put our camera back to when we exit
 var cam_trans_b4_enter: Transform3D
+
+@onready var machine: Machine = get_parent() as Machine
 
 
 func _ready():
@@ -28,6 +32,9 @@ func _ready():
 	interactable.interacted.connect(
 		func():
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			# seems weird because we cant interact with Interactables while in_ui
+			# anyway but this is actually to stop that CollisionShape blocking
+			# our mouse from clicking stuff lul
 			interactable.enabled = false
 			Global.in_machine_ui = true
 			exit_button.show()
@@ -56,7 +63,8 @@ func _unhandled_input(event):
 
 
 func exit() -> void:
-	interactable.enabled = true
+	if not machine.broken_down:
+		interactable.enabled = true
 	exit_button.hide()
 	if Global.in_machine_ui:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

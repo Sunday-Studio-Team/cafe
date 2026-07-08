@@ -275,6 +275,7 @@ func display_drink_score() -> void:
 func fix_machine() -> void:
 	fix_machine_button.hide()
 	broken_down = false
+	gui_3d.interactable.enabled = true
 	if customer:
 		customer_order_indicator.show()
 		timer.paused = false
@@ -390,6 +391,8 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
+	gui_3d.exit()
+	gui_3d.interactable.enabled = false
 	customer_order_indicator.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()

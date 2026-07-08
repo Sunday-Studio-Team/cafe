@@ -18,7 +18,8 @@ albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
 material = SubResource("StandardMaterial3D_lp1hx")
 size = Vector3(1, 1.75, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ioi8x"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
+size = Vector3(1, 1.5, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
 transparency = 1
@@ -129,7 +130,7 @@ modulate = Color(1, 0.6, 0.12156863, 1)
 text = "BROKEN DOWN"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
-shape = SubResource("BoxShape3D_ioi8x")
+shape = SubResource("BoxShape3D_1hddr")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton" unique_id=1631380149]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
