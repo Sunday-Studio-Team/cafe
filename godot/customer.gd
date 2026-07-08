@@ -24,15 +24,12 @@ func _ready() -> void:
 	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
-	
-	desired_drink = Global.drinks.pick_random()
 
-	waiting_indicator.hide()
+	desired_drink = Global.drinks.pick_random()
 
 
 func _physics_process(_delta: float) -> void:
-	if timer.is_stopped():
-		return
+	#waiting_indicator.visible = not timer.is_stopped()
 
 	waiting_bar.value = timer.time_left / timer.wait_time * 100
 
@@ -68,7 +65,6 @@ func _on_order_started(customer: Customer) -> void:
 		return
 	await get_tree().process_frame
 	timer.start()
-	waiting_indicator.show()
 	orders_made += 1
 
 

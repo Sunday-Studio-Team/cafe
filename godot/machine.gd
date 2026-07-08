@@ -28,6 +28,8 @@ extends Node3D
 @export var spill_warning: Label
 @export var manual_progress_bar: TextureProgressBar
 @export var gui_3d: Gui3D
+@export var customer_wait_indicator: Control
+@export var customer_wait_bar: TextureProgressBar
 
 var customer: Customer
 var order: OrderData
@@ -94,6 +96,20 @@ func _physics_process(_delta: float) -> void:
 	)
 
 	manual_progress_bar.visible = make_drink_button.held or make_drink_button.held_time > 0
+
+	customer_wait_indicator.visible = customer != null and not customer.timer.is_stopped()
+
+	if customer:
+		var customer_timer: Timer = customer.timer
+
+		customer_wait_bar.value = customer_timer.time_left / customer_timer.wait_time * 100
+
+		if customer_wait_bar.value >= 66:
+			customer_wait_indicator.modulate = Color.GREEN
+		elif customer_wait_bar.value >= 33:
+			customer_wait_indicator.modulate = Color.ORANGE
+		else:
+			customer_wait_indicator.modulate = Color.RED
 
 	# disable reject/make buttons if no ingredients
 	# (not sure if this is best way to do it, probably should enable them but

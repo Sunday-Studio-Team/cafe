@@ -50,11 +50,39 @@ layout_mode = 2
 text = "⚠️ PLEASE MOP UP SPILL"
 horizontal_alignment = 1
 
-[node name="CamFeed" type="SubViewportContainer" parent="VBoxContainer" unique_id=2077053007]
+[node name="CustomerDetails" type="HBoxContainer" parent="VBoxContainer" unique_id=1861793704]
+layout_mode = 2
+alignment = 1
+
+[node name="CamFeed" type="SubViewportContainer" parent="VBoxContainer/CustomerDetails" unique_id=2077053007]
 custom_minimum_size = Vector2(240, 180)
 custom_maximum_size = Vector2(240, 180)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 10
+
+[node name="CustomerTimer" type="PanelContainer" parent="VBoxContainer/CustomerDetails" unique_id=362326317]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+offset_transform_position_ratio = Vector2(-0.215, -0.95)
+
+[node name="Timer" type="TextureProgressBar" parent="VBoxContainer/CustomerDetails/CustomerTimer" unique_id=731233711]
+texture_filter = 1
+custom_maximum_size = Vector2(25, 25)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-1, -1)
+offset_transform_scale = Vector2(0.41, 0.41)
+fill_mode = 4
+texture_under = ExtResource("1_sahxb")
+texture_over = ExtResource("2_rxjwk")
+texture_progress = ExtResource("3_pjr5n")
+
+[node name="Label" type="Label" parent="VBoxContainer/CustomerDetails/CustomerTimer" unique_id=1182337612]
+layout_mode = 2
+text = "⌛"
+horizontal_alignment = 1
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer" unique_id=1074364750]
 layout_mode = 2
