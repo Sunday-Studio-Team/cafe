@@ -48,9 +48,6 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_j2xdn")
 size = Vector2(0.9, 1.2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yuuq8"]
-viewport_path = NodePath("../../../../CamFeed")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_j2xdn"]
 size = Vector3(0.9, 1.2, 0.01)
 
@@ -203,8 +200,15 @@ size = Vector2i(600, 800)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
 
-[node name="CamFeed" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer" parent_id_path=PackedInt32Array(317935962, 1147466751) index="1" unique_id=567944749]
-texture = SubResource("ViewportTexture_yuuq8")
+[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
+handle_input_locally = false
+size = Vector2i(240, 180)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=1027900055]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+fov = 140.0
+near = 0.001
 
 [node name="Area3D" type="Area3D" parent="3DGui" unique_id=128585634]
 
@@ -225,12 +229,8 @@ shape = SubResource("BoxShape3D_yuuq8")
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 
-[node name="CamFeed" type="SubViewport" parent="." unique_id=2017828538]
-size = Vector2i(240, 180)
-
-[node name="Camera3D" type="Camera3D" parent="CamFeed" unique_id=1027900055]
-transform = Transform3D(1, 0, 0, 0, 0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 1.6, 4)
-fov = 160.0
-near = 0.001
+[node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]

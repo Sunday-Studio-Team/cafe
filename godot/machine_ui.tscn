@@ -15,8 +15,6 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_sahxb"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovvye"]
 bg_color = Color(0.68556535, 0.5972759, 0.23268256, 1)
 corner_radius_top_left = 50
@@ -31,9 +29,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_yuuq8")
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_bottom = 25
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1147466751]
 layout_mode = 2
@@ -49,18 +47,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
 
 [node name="Label" type="Label" parent="VBoxContainer/SpillWarning" unique_id=1244531673]
 layout_mode = 2
-text = "⚠️
-SPILL DETECTED ON GROUND
-PLEASE MOP UP"
+text = "⚠️ PLEASE MOP UP SPILL"
 horizontal_alignment = 1
 
-[node name="CamFeed" type="TextureRect" parent="VBoxContainer" unique_id=567944749]
-visible = false
+[node name="CamFeed" type="SubViewportContainer" parent="VBoxContainer" unique_id=2077053007]
 custom_minimum_size = Vector2(240, 180)
 custom_maximum_size = Vector2(240, 180)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = SubResource("ViewportTexture_sahxb")
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer" unique_id=1074364750]
 layout_mode = 2
@@ -198,8 +192,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ovvye")
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = "order complete!
-waiting for approval ^"
+text = "order waiting for approval! ^"
 horizontal_alignment = 1
 
 [node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
