@@ -84,8 +84,8 @@ static_body = NodePath("StaticBody3D")
 spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/SpillWarning/Label")
 manual_progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton/ProgressBar")
 gui_3d = NodePath("3DGui")
-customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerDetails/CustomerTimer")
-customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerDetails/CustomerTimer/Timer")
+customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer")
+customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TextureProgressBar")
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
@@ -206,15 +206,14 @@ size = Vector2i(600, 800)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
 
-[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerDetails/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
+[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
 handle_input_locally = false
-size = Vector2i(240, 180)
+size = Vector2i(300, 225)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerDetails/CamFeed/CamFeed" unique_id=1027900055]
+[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
 fov = 140.0
-near = 0.001
 
 [node name="Area3D" type="Area3D" parent="3DGui" unique_id=128585634]
 
@@ -264,6 +263,6 @@ text = "exit"
 
 [node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
-remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerDetails/CamFeed/CamFeed/Camera3D")
+remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]

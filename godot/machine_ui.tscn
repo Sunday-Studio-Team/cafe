@@ -42,8 +42,7 @@ theme_override_constants/margin_bottom = 25
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1147466751]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="SpillWarning" type="PanelContainer" parent="VBoxContainer" unique_id=337494662]
@@ -57,24 +56,21 @@ layout_mode = 2
 text = "⚠️ PLEASE MOP UP SPILL"
 horizontal_alignment = 1
 
-[node name="CustomerDetails" type="HBoxContainer" parent="VBoxContainer" unique_id=1861793704]
+[node name="CamFeed" type="SubViewportContainer" parent="VBoxContainer" unique_id=2077053007]
+custom_minimum_size = Vector2(300, 225)
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 4
 
-[node name="CamFeed" type="SubViewportContainer" parent="VBoxContainer/CustomerDetails" unique_id=2077053007]
-custom_minimum_size = Vector2(240, 180)
-custom_maximum_size = Vector2(240, 180)
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="CustomerTimer" type="PanelContainer" parent="VBoxContainer/CustomerDetails" unique_id=362326317]
+[node name="CustomerTimer" type="PanelContainer" parent="VBoxContainer/CamFeed" unique_id=362326317]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
-size_flags_stretch_ratio = 0.0
-offset_transform_position_ratio = Vector2(-0.215, -0.95)
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(12, 2.5)
+offset_transform_scale = Vector2(1.5, 1.5)
+offset_transform_rotation = 0.08726646
 
-[node name="Timer" type="TextureProgressBar" parent="VBoxContainer/CustomerDetails/CustomerTimer" unique_id=731233711]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/CamFeed/CustomerTimer" unique_id=731233711]
 texture_filter = 1
 custom_maximum_size = Vector2(25, 25)
 layout_mode = 2
@@ -86,7 +82,7 @@ texture_under = ExtResource("1_sahxb")
 texture_over = ExtResource("2_rxjwk")
 texture_progress = ExtResource("3_pjr5n")
 
-[node name="Label" type="Label" parent="VBoxContainer/CustomerDetails/CustomerTimer" unique_id=1182337612]
+[node name="Label" type="Label" parent="VBoxContainer/CamFeed/CustomerTimer" unique_id=1182337612]
 layout_mode = 2
 text = "⌛"
 horizontal_alignment = 1
@@ -233,10 +229,12 @@ horizontal_alignment = 1
 [node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
 layout_mode = 2
 size_flags_vertical = 10
+offset_transform_enabled = true
+offset_transform_rotation = -0.017453292
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/IngredientsMeter" unique_id=869047581]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
-custom_minimum_size = Vector2(400, 50)
+custom_minimum_size = Vector2(400, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
@@ -246,7 +244,8 @@ show_percentage = false
 [node name="Label" type="Label" parent="VBoxContainer/IngredientsMeter" unique_id=861789852]
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_font_sizes/font_size = 48
+offset_transform_rotation = -0.08726646
+theme_override_font_sizes/font_size = 32
 text = "ingredients"
 horizontal_alignment = 1
 
