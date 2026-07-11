@@ -23,10 +23,10 @@
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
-[ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
-[ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
+[ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://Minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://Minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
-[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
+[ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://Minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="Texture2D" uid="uid://c86eywh2qbnig" path="res://sprites/alert/frame_00_delay-0.04s.png" id="23_vieuh"]
 [ext_resource type="Texture2D" uid="uid://bdyrmd0hdrdvh" path="res://sprites/alert/frame_01_delay-0.04s.png" id="24_yjja3"]
 [ext_resource type="Texture2D" uid="uid://v5nn6up6aa13" path="res://sprites/alert/frame_02_delay-0.04s.png" id="25_l0gw7"]
@@ -458,7 +458,7 @@ handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "hammer_indicator")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")
@@ -485,6 +485,7 @@ day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContai
 rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Stars")
 rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
 alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/SubViewport/AnimatedSprite2D")
+hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/Hammer Indicator")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -597,6 +598,25 @@ layout_mode = 2
 size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
+
+[node name="Hammer Indicator" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=235633408]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.5, -0.8)
+offset_transform_scale = Vector2(0.8, 0.8)
+
+[node name="Panel" type="Panel" parent="UI/MarginContainer/VBoxContainer/Interactable/Hammer Indicator" unique_id=1844491663]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/Hammer Indicator/Panel" unique_id=1606252175]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 23
+text = "[Q] Hammer to Fix Instantly!"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
 layout_mode = 2
