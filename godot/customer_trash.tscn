@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b2kutc78gmwd1"]
+
+[ext_resource type="Script" uid="uid://dtsyu2epb5p76" path="res://customer_trash.gd" id="1_e16t0"]
+[ext_resource type="Texture2D" uid="uid://8qvdvf14s6li" path="res://sprites/customer_trash.png" id="2_i5ewh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_715ky"]
+radius = 0.3154297
+height = 0.7463379
+
+[node name="CustomerTrash" type="Area3D" unique_id=2137740851]
+script = ExtResource("1_e16t0")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102110654, -0.021725103, -0.0062898397)
+billboard = 1
+texture = ExtResource("2_i5ewh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1263651111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23685433, -0.06267059, -0.010090709)
+shape = SubResource("CapsuleShape3D_715ky")

@@ -98,6 +98,7 @@
 [ext_resource type="Texture2D" uid="uid://7lah3kcbjgdn" path="res://sprites/alert/frame_68_delay-0.04s.png" id="91_arf1h"]
 [ext_resource type="Texture2D" uid="uid://c1yhe1o7t4rlq" path="res://sprites/alert/frame_69_delay-0.04s.png" id="92_s0om5"]
 [ext_resource type="Texture2D" uid="uid://dxcquusp3m075" path="res://sprites/alert/frame_70_delay-0.04s.png" id="93_gkfde"]
+[ext_resource type="PackedScene" uid="uid://b2kutc78gmwd1" path="res://customer_trash.tscn" id="93_yjja3"]
 [ext_resource type="Texture2D" uid="uid://78rgr88rxg1k" path="res://sprites/alert/frame_71_delay-0.05s.png" id="94_4qxq8"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
@@ -403,7 +404,7 @@ size = Vector3(3, 0.1, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
 size = Vector3(3, 0.1, 0.25)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "customer_trash_spawn_timer", "left_corner", "right_corner", "bottom_left_corner", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
@@ -411,7 +412,12 @@ cameras = NodePath("SecurityCams")
 side_machine = NodePath("Machines/Machine")
 fourth_machine = NodePath("Machines/Machine4")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
+customer_trash_spawn_timer = NodePath("CustomerTrashSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
+customer_trash_scene = ExtResource("93_yjja3")
+left_corner = NodePath("Building/TrashPoints/LeftCorner")
+right_corner = NodePath("Building/TrashPoints/RightCorner")
+bottom_left_corner = NodePath("Building/TrashPoints/BottomLeftCorner")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
@@ -1021,6 +1027,21 @@ mesh = SubResource("TextMesh_vn1tu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7000003, 2.3, 4.6000004)
 mesh = SubResource("TextMesh_lswn8")
 
+[node name="TrashPoints" type="Node3D" parent="Building" unique_id=795793990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06953561, 0)
+
+[node name="LeftCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=1835019513]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.4356194, 0.2775855, 3.2832842)
+
+[node name="RightCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=974701754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3592978, 0.19294798, 3.6953862)
+
+[node name="BottomLeftCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=1711481428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5459504, 0.25749695, -3.9982808)
+
+[node name="RightBottomCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=1718722666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.261909, 0.2580762, -4.030566)
+
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
 
@@ -1113,6 +1134,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
+
+[node name="CustomerTrashSpawnTimer" type="Timer" parent="." unique_id=2103506507]
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam3"]

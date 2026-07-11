@@ -6,7 +6,12 @@ extends Node3D
 @export var side_machine: Machine
 @export var fourth_machine: Machine
 @export var customer_spawn_timer: Timer
+@export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
+@export var customer_trash_scene: PackedScene
+@export var left_corner:Marker3D
+@export var right_corner:Marker3D
+@export var bottom_left_corner:	Marker3D
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
@@ -32,8 +37,9 @@ func _ready() -> void:
 	Global.customer_leaving_spot = customer_leaving_spot
 
 	customer_spawn_timer.timeout.connect(spawn_customer)
+	customer_trash_spawn_timer.timeout.connect(spawn_trash)
 	game_timer.timeout.connect(_on_game_timer_timeout)
-
+   
 	Events.shift_started.connect(_on_shift_started)
 
 	desk.interacted.connect(_on_desk_interacted)
@@ -110,6 +116,7 @@ func set_per_day_stuff() -> void:
 
 
 func spawn_customer() -> void:
+	print("customer spawn started")
 	var all_machines_occupied := true
 
 	for machine in machines:
@@ -132,7 +139,19 @@ func spawn_customer() -> void:
 	machine.set_customer(new_customer)
 	machine.machine_make_drink()
 
-
+#code for  trash spawn 
+func spawn_trash() -> void:
+	
+	var spawn=randi_range(0,8)
+	if spawn==3:
+		return
+	var customer_trash = customer_trash_scene.instantiate()
+	var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
+	var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
+	customer_trash.position=Vector3(rand_x,0.2,rand_z)
+	
+	add_child(customer_trash)
+	
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
 
@@ -166,6 +185,7 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
+	customer_trash_spawn_timer.start()
 	desk.enabled = false
 
 
