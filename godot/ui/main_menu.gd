@@ -14,3 +14,5 @@ func _ready() -> void:
 		func():
 			Events.game_quit.emit()
 	)
+
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

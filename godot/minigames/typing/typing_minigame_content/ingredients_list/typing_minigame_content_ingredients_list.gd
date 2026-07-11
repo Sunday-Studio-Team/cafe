@@ -1,0 +1,4 @@
+class_name TypingMinigameContentIngredientsList
+extends Resource
+
+@export var recipes: Array[TypingMinigameContentIngredientsListRecipe]

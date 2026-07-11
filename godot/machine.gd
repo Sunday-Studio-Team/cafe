@@ -33,6 +33,7 @@ var broken_down: bool = false
 var max_ingredients: int = 100
 var ingredients = max_ingredients
 var spill_on_floor := false
+var repair_minigames := ["Colors", "Arrows"]
 
 
 func _ready() -> void:
@@ -129,7 +130,7 @@ func machine_make_drink() -> void:
 		return
 
 	order = OrderData.new()
-	order.ordered_drink = Global.drinks.pick_random()
+	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
 		"customer ordered %s (%s)"
 		% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
@@ -365,7 +366,7 @@ func _on_fix_machine_button_pressed() -> void:
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
-	Events.minigame_active.emit("Colors")
+	Events.minigame_active.emit(repair_minigames.pick_random())
 
 
 func _on_minigame_end() -> void:
