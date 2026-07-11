@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://doklhi2dl0pgm" path="res://minigames/drink_making/drink_minigame.gd" id="1_yp56t"]
 [ext_resource type="Script" uid="uid://c0i0nn4hmcdx6" path="res://minigames/drink_making/drop_zone.gd" id="2_g4be4"]
 
-[node name="Control" type="Control" unique_id=1550553634 node_paths=PackedStringArray("_ingredient_holder", "_drop_zone", "_recipe_card", "_recipe_label")]
+[node name="Control" type="Control" unique_id=1550553634 node_paths=PackedStringArray("_ingredient_holder", "_drop_zone", "_recipe_card", "_recipe_label", "_close_recipe")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,8 @@ script = ExtResource("1_yp56t")
 _ingredient_holder = NodePath("ingredient_holder")
 _drop_zone = NodePath("dropzone")
 _recipe_card = NodePath("recipe_card")
-_recipe_label = NodePath("recipe_card/recipe_label")
+_recipe_label = NodePath("recipe_card/VBoxContainer/recipe_label")
+_close_recipe = NodePath("recipe_card/VBoxContainer/close_recipe")
 
 [node name="dropzone" type="ColorRect" parent="." unique_id=1314985038]
 layout_mode = 0
@@ -26,18 +27,33 @@ script = ExtResource("2_g4be4")
 
 [node name="ingredient_holder" type="HBoxContainer" parent="." unique_id=1577421530]
 custom_minimum_size = Vector2(1000, 0)
-layout_mode = 0
-offset_left = 407.0
-offset_top = 395.0
-offset_right = 1407.0
-offset_bottom = 495.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.12100001
+anchor_right = 0.93200004
+anchor_bottom = 0.69000006
+offset_left = 265.6
+offset_top = 269.32
+offset_right = -344.44006
+offset_bottom = -245.20007
 theme_override_constants/separation = 20
 
 [node name="recipe_card" type="PanelContainer" parent="." unique_id=323269116]
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 700.0
+offset_top = 250.0
+offset_right = 1200.0
+offset_bottom = 550.0
 
-[node name="recipe_label" type="Label" parent="recipe_card" unique_id=1247220471]
+[node name="VBoxContainer" type="VBoxContainer" parent="recipe_card" unique_id=365208971]
+layout_mode = 2
+
+[node name="recipe_label" type="Label" parent="recipe_card/VBoxContainer" unique_id=1247220471]
 layout_mode = 2
 horizontal_alignment = 1
+
+[node name="close_recipe" type="Button" parent="recipe_card/VBoxContainer" unique_id=629140422]
+layout_mode = 2
+text = "start"
