@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://4rl0a3bpopmq" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://e55lyd28dcb2" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
@@ -99,6 +99,66 @@
 [ext_resource type="Texture2D" uid="uid://c1yhe1o7t4rlq" path="res://sprites/alert/frame_69_delay-0.04s.png" id="92_s0om5"]
 [ext_resource type="Texture2D" uid="uid://dxcquusp3m075" path="res://sprites/alert/frame_70_delay-0.04s.png" id="93_gkfde"]
 [ext_resource type="Texture2D" uid="uid://78rgr88rxg1k" path="res://sprites/alert/frame_71_delay-0.05s.png" id="94_4qxq8"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
+sky_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+ground_bottom_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
+ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+volumetric_fog_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.29411766)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_yaehf"]
+material = SubResource("StandardMaterial3D_2cqfq")
+text = "store room"
+pixel_size = 0.025
+depth = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
+albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_j2xdn"]
+viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
+albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_mjix0")
+text = "employee
+area"
+depth = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_lswn8"]
+material = SubResource("StandardMaterial3D_mjix0")
+text = "customer
+area"
+depth = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
+albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
+material = SubResource("StandardMaterial3D_cegan")
+size = Vector3(3, 0.1, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
+size = Vector3(3, 0.1, 0.25)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alert/SubViewport")
@@ -343,66 +403,6 @@ data = PackedByteArray("cW9hZgABE6ACAKxEFAAQKAAAAAAAAAAAAAAAAOAAQAAAAAAAAAAAAAAA
 format = 3
 stereo = true
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
-sky_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
-ground_bottom_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
-ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
-
-[sub_resource type="Sky" id="Sky_0xm2m"]
-sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
-
-[sub_resource type="Environment" id="Environment_h2yge"]
-background_mode = 2
-sky = SubResource("Sky_0xm2m")
-volumetric_fog_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.29411766)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_yaehf"]
-material = SubResource("StandardMaterial3D_2cqfq")
-text = "store room"
-pixel_size = 0.025
-depth = 0.025
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
-albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_j2xdn"]
-viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
-albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_vn1tu"]
-material = SubResource("StandardMaterial3D_mjix0")
-text = "employee
-area"
-depth = 0.0
-
-[sub_resource type="TextMesh" id="TextMesh_lswn8"]
-material = SubResource("StandardMaterial3D_mjix0")
-text = "customer
-area"
-depth = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
-albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
-material = SubResource("StandardMaterial3D_cegan")
-size = Vector3(3, 0.1, 0.25)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
-size = Vector3(3, 0.1, 0.25)
-
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
@@ -456,270 +456,6 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
-
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite")]
-script = ExtResource("5_lquwl")
-profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
-customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")
-score_update_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/ScoreUpdate")
-interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
-interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
-hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
-game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer/TimeLeft")
-objective = NodePath("MarginContainer/Objective")
-rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
-money_sound = NodePath("MoneySound")
-gain_points_sound = NodePath("GainPointsSound")
-lose_points_sound = NodePath("LosePointsSound")
-low_time_sound = NodePath("LowTimeSound")
-low_time_warning_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/LowTimeWarning")
-cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CctvIndicator")
-alert_ui = NodePath("MarginContainer/VBoxContainer/Alert")
-alert_label = NodePath("MarginContainer/VBoxContainer/Alert/AlertText")
-shelf_item_ui = NodePath("MarginContainer/ShelfItem")
-shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
-shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
-day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Stars")
-rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
-alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/SubViewport/AnimatedSprite2D")
-
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1052297915]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1617732849]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=337997486]
-layout_mode = 2
-
-[node name="DayIndicator" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=586450203]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "DAY 1/5"
-
-[node name="CctvIndicator" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("7_ycdy4")
-expand_mode = 4
-
-[node name="ControlsRules" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
-custom_minimum_size = Vector2(400, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
-theme_override_font_sizes/bold_italics_font_size = 32
-bbcode_enabled = true
-text = "[b][i]controls [/i][/b]
-[b]WASD[/b] move
-[b]E[/b] interact
-[b]Shift[/b] sprint
-
-[b][i]rules [/i][/b]
-- no running
-- no handmade drinks"
-fit_content = true
-horizontal_alignment = 2
-
-[node name="Alert" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1991174183]
-layout_mode = 2
-
-[node name="Exclamation" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=585775166]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = SubResource("ViewportTexture_0ffxp")
-
-[node name="AlertText" type="Label" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=1414946882]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "❗️🛎️ customer complained"
-
-[node name="SubViewport" type="SubViewport" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=259486482]
-transparent_bg = true
-size = Vector2i(85, 100)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/MarginContainer/VBoxContainer/Alert/SubViewport" unique_id=2022034122]
-texture_filter = 1
-position = Vector2(55, 30)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_0ffxp")
-frame = 71
-frame_progress = 1.0
-
-[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1696852801]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=1133469025]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
-custom_minimum_size = Vector2(550, 50)
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[E] interact"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
-custom_minimum_size = Vector2(250, 10)
-layout_mode = 2
-size_flags_horizontal = 4
-value = 50.0
-show_percentage = false
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=284724776]
-layout_mode = 2
-
-[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=1534145091]
-layout_mode = 2
-
-[node name="Money" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=103958680]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "$ 0"
-
-[node name="Customer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=375295033]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=653594015]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "🙂"
-
-[node name="Stars" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=2112858348]
-layout_mode = 2
-
-[node name="Goal" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=417478634]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-
-[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=124548306]
-modulate = Color(0.4, 1, 0.4, 1)
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 52
-text = "+1$ from customer"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=434238300]
-layout_mode = 2
-size_flags_horizontal = 10
-alignment = 2
-
-[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1504470302]
-visible = false
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_pivot_ratio = Vector2(1, 1)
-theme_override_font_sizes/font_size = 32
-text = "‼️⏰ 30s left"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1967076198]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-
-[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer" unique_id=481278116]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
-text = "TIME LEFT: 0"
-vertical_alignment = 2
-
-[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
-custom_minimum_size = Vector2(400, 250)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 48
-bbcode_enabled = true
-text = "[b]OBJECTIVE:[/b]
-
-make $10 while keeping your customer rating above 5
-etc etc"
-scroll_active = false
-horizontal_alignment = 1
-
-[node name="ShelfItem" type="PanelContainer" parent="UI/MarginContainer" unique_id=898520236]
-modulate = Color(1, 1, 1, 0.98039216)
-custom_minimum_size = Vector2(500, 250)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/ShelfItem" unique_id=259568750]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1662140889]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/bold_font_size = 53
-bbcode_enabled = true
-text = "[b]item name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1739048215]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 32
-text = "item description"
-horizontal_alignment = 1
-
-[node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]
-stream = ExtResource("7_5vw27")
-volume_db = -5.0
-
-[node name="GainPointsSound" type="AudioStreamPlayer" parent="UI" unique_id=1752145735]
-stream = ExtResource("8_4c57u")
-volume_db = -5.0
-
-[node name="LosePointsSound" type="AudioStreamPlayer" parent="UI" unique_id=1821886986]
-stream = SubResource("AudioStreamWAV_kek77")
-volume_db = -5.0
-
-[node name="LowTimeSound" type="AudioStreamPlayer" parent="UI" unique_id=170153923]
-stream = ExtResource("14_yaehf")
 
 [node name="DayIndicator" type="CanvasLayer" parent="." unique_id=1793268735]
 
@@ -1113,6 +849,270 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite")]
+script = ExtResource("5_lquwl")
+profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
+customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")
+score_update_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/ScoreUpdate")
+interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
+interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
+hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
+game_timer = NodePath("../GameTimer")
+time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer/TimeLeft")
+objective = NodePath("MarginContainer/Objective")
+rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
+money_sound = NodePath("MoneySound")
+gain_points_sound = NodePath("GainPointsSound")
+lose_points_sound = NodePath("LosePointsSound")
+low_time_sound = NodePath("LowTimeSound")
+low_time_warning_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/LowTimeWarning")
+cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CctvIndicator")
+alert_ui = NodePath("MarginContainer/VBoxContainer/Alert")
+alert_label = NodePath("MarginContainer/VBoxContainer/Alert/AlertText")
+shelf_item_ui = NodePath("MarginContainer/ShelfItem")
+shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
+shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
+day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Stars")
+rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
+alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/SubViewport/AnimatedSprite2D")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1052297915]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1617732849]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=337997486]
+layout_mode = 2
+
+[node name="DayIndicator" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=586450203]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "DAY 1/5"
+
+[node name="CctvIndicator" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1082245281]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("7_ycdy4")
+expand_mode = 4
+
+[node name="ControlsRules" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+bbcode_enabled = true
+text = "[b][i]controls [/i][/b]
+[b]WASD[/b] move
+[b]E[/b] interact
+[b]Shift[/b] sprint
+
+[b][i]rules [/i][/b]
+- no running
+- no handmade drinks"
+fit_content = true
+horizontal_alignment = 2
+
+[node name="Alert" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1991174183]
+layout_mode = 2
+
+[node name="Exclamation" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=585775166]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("ViewportTexture_0ffxp")
+
+[node name="AlertText" type="Label" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=1414946882]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "❗️🛎️ customer complained"
+
+[node name="SubViewport" type="SubViewport" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=259486482]
+transparent_bg = true
+size = Vector2i(85, 100)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/MarginContainer/VBoxContainer/Alert/SubViewport" unique_id=2022034122]
+texture_filter = 1
+position = Vector2(55, 30)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_0ffxp")
+frame = 71
+frame_progress = 1.0
+
+[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1696852801]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=1133469025]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
+custom_minimum_size = Vector2(550, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[E] interact"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
+custom_minimum_size = Vector2(250, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 50.0
+show_percentage = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=284724776]
+layout_mode = 2
+
+[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=1534145091]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=103958680]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "$ 0"
+
+[node name="Customer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=375295033]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=653594015]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "🙂"
+
+[node name="Stars" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=2112858348]
+layout_mode = 2
+
+[node name="Goal" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=417478634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=124548306]
+modulate = Color(0.4, 1, 0.4, 1)
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 52
+text = "+1$ from customer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=434238300]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 2
+
+[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1504470302]
+visible = false
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_pivot_ratio = Vector2(1, 1)
+theme_override_font_sizes/font_size = 32
+text = "‼️⏰ 30s left"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1967076198]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer" unique_id=481278116]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+text = "TIME LEFT: 0"
+vertical_alignment = 2
+
+[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[b]OBJECTIVE:[/b]
+
+make $10 while keeping your customer rating above 5
+etc etc"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ShelfItem" type="PanelContainer" parent="UI/MarginContainer" unique_id=898520236]
+modulate = Color(1, 1, 1, 0.98039216)
+custom_minimum_size = Vector2(500, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/ShelfItem" unique_id=259568750]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1662140889]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_font_size = 53
+bbcode_enabled = true
+text = "[b]item name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1739048215]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "item description"
+horizontal_alignment = 1
+
+[node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]
+stream = ExtResource("7_5vw27")
+volume_db = -5.0
+
+[node name="GainPointsSound" type="AudioStreamPlayer" parent="UI" unique_id=1752145735]
+stream = ExtResource("8_4c57u")
+volume_db = -5.0
+
+[node name="LosePointsSound" type="AudioStreamPlayer" parent="UI" unique_id=1821886986]
+stream = SubResource("AudioStreamWAV_kek77")
+volume_db = -5.0
+
+[node name="LowTimeSound" type="AudioStreamPlayer" parent="UI" unique_id=170153923]
+stream = ExtResource("14_yaehf")
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam3"]

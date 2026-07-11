@@ -75,6 +75,7 @@ var final_day := 5
 var holding_ingredients_rule := false
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
+var holding_make_drink_button := false
 var customer_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
@@ -103,6 +104,7 @@ func _physics_process(_delta: float) -> void:
 	# because if we set it in the individual security cameras' processes, they
 	# would start overriding each other
 	player_in_cctv_los = false
+	holding_make_drink_button = false
 
 
 func load_resources_from_folder(path: String, extension: String = "tres") -> Array[Resource]:
