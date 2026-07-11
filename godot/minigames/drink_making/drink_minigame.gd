@@ -13,7 +13,7 @@ const RECIPES := [
 				"options": [
 					{"id": "water", "color": Color.BLUE},
 					{"id": "coffee", "color": Color.BLACK},
-					{"id": "milk", "color": Color.WHITE},
+					{"id": "nothing", "color": Color.WHITE},
 				],
 			},
 			{
@@ -22,7 +22,7 @@ const RECIPES := [
 					{"id": "green_tea", "color": Color.MEDIUM_SEA_GREEN},
 					{"id": "black_tea", "color": Color.DARK_SLATE_GRAY},
 					{"id": "matcha", "color": Color.SEA_GREEN},
-					{"id": "thai", "color": Color.ORANGE_RED},
+					{"id": "coffee", "color": Color.ORANGE_RED},
 				],
 			},
 			{
@@ -45,7 +45,7 @@ const RECIPES := [
 				"options": [
 					{"id": "water", "color": Color.BLUE},
 					{"id": "coffee", "color": Color.BLACK},
-					{"id": "milk", "color": Color.WHITE},
+					{"id": "nothing", "color": Color.WHITE},
 				],
 			},
 			{
@@ -54,7 +54,7 @@ const RECIPES := [
 					{"id": "green_tea", "color": Color.MEDIUM_SEA_GREEN},
 					{"id": "black_tea", "color": Color.DARK_SLATE_GRAY},
 					{"id": "matcha", "color": Color.SEA_GREEN},
-					{"id": "thai", "color": Color.ORANGE_RED},
+					{"id": "coffee", "color": Color.ORANGE_RED},
 				],
 			},
 			{
