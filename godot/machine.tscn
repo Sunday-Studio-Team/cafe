@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cn12vpm4btpmx"]
 
-[ext_resource type="Script" uid="uid://bb6jc82myklm3" path="res://machine.gd" id="1_6a4ke"]
-[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="2_loq51"]
+[ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
 [ext_resource type="Resource" uid="uid://dbjwbruh16sas" path="res://items/tip_jar.tres" id="2_yuuq8"]
-[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="3_ioi8x"]
-[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="4_llj37"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
+[ext_resource type="PackedScene" uid="uid://bh5bdrvebx5nl" path="res://machine_ui.tscn" id="8_yuuq8"]
+[ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="9_0d1aa"]
 [ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
+[ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -18,40 +18,8 @@ albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
 material = SubResource("StandardMaterial3D_lp1hx")
 size = Vector3(1, 1.75, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_6qesk"]
-viewport_path = NodePath("ProgressIndicator/SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_llj37"]
-viewport_path = NodePath("IngredientsMeter/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qesk"]
-transparency = 1
-albedo_color = Color(0.61960787, 1, 0.60784316, 0.6862745)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ioi8x"]
-material = SubResource("StandardMaterial3D_6qesk")
-size = Vector3(0.22, 0.15, 0.3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
-size = Vector3(0.25, 0.5, 0.25)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llj37"]
-transparency = 1
-albedo_color = Color(0.70980394, 0.6117647, 0, 0.6862745)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6qesk"]
-material = SubResource("StandardMaterial3D_llj37")
-size = Vector3(0.22, 0.15, 0.3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioi8x"]
-transparency = 1
-albedo_color = Color(1, 0.37254903, 0.35686275, 0.6862745)
-
-[sub_resource type="BoxMesh" id="BoxMesh_llj37"]
-material = SubResource("StandardMaterial3D_ioi8x")
-size = Vector3(0.22, 0.15, 0.3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ioi8x"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
+size = Vector3(1, 1.5, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
 transparency = 1
@@ -61,37 +29,64 @@ albedo_color = Color(1, 0.57254905, 0.57254905, 0.6862745)
 material = SubResource("StandardMaterial3D_yuuq8")
 size = Vector3(0.15, 0.15, 0.15)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
+size = Vector3(0.25, 0.5, 0.25)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vn1tu"]
 size = Vector3(1.5, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(1, 1.75, 0.5)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "drink_customer_score_label", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_55x7b"]
+viewport_path = NodePath("3DGui/Screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2xdn"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_55x7b")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0ffxp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_j2xdn")
+size = Vector2(0.9, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2xdn"]
+size = Vector3(0.9, 1.2, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
+size = Vector3(0.9, 1.2, 1)
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
-progress_indicator = NodePath("ProgressIndicator")
-progress_bar = NodePath("ProgressIndicator/SubViewport/TextureProgressBar")
+progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator")
+progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator/TextureProgressBar")
 timer = NodePath("Timer")
-customer_order_indicator = NodePath("CustomerOrderIndicator")
-final_order_indicator = NodePath("MachineOrderIndicator")
-price_label = NodePath("PriceLabel")
-make_drink_button = NodePath("MakeDrinkButton")
-accept_button = NodePath("AcceptButton")
-reject_button = NodePath("RejectButton")
+customer_order_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerOrderIndicator")
+final_order_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MachineOrderIndicator")
+price_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/PriceLabel")
+drink_customer_score_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/DrinkCustomerScoreLabel")
+make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton")
+accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton")
+reject_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RejectButton")
 refill_button = NodePath("RefillButton")
-waiting_approval_indicator = NodePath("WaitingApprovalIndicator")
+waiting_approval_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer/WaitingApprovalIndicator")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
 breakdown_sound = NodePath("BreakdownSound")
 no_ingredients_sound = NodePath("NoIngredientsSound")
-drink_customer_score_label = NodePath("DrinkCustomerScoreLabel")
-ingredients_bar = NodePath("IngredientsMeter/SubViewport/MarginContainer/ProgressBar")
+ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsMeter/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
 tip_jar_item = ExtResource("2_yuuq8")
 spill_interactable = NodePath("Spill")
 spill_sound = NodePath("SpillSound")
 static_body = NodePath("StaticBody3D")
+spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/SpillWarning/Label")
+manual_progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton/ProgressBar")
+gui_3d = NodePath("3DGui")
+customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer")
+customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TextureProgressBar")
+no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -100,85 +95,12 @@ mesh = SubResource("BoxMesh_lp1hx")
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
 
-[node name="ProgressIndicator" type="Sprite3D" parent="." unique_id=1182371401]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.7, 1)
-billboard = 2
-texture = SubResource("ViewportTexture_6qesk")
-
-[node name="SubViewport" type="SubViewport" parent="ProgressIndicator" unique_id=1178466868]
-transparent_bg = true
-size = Vector2i(160, 160)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="ProgressIndicator/SubViewport" unique_id=585963951]
-texture_filter = 1
-offset_right = 40.0
-offset_bottom = 40.0
-fill_mode = 4
-texture_under = ExtResource("2_loq51")
-texture_over = ExtResource("3_ioi8x")
-texture_progress = ExtResource("4_llj37")
-
-[node name="MakingDrinkText" type="Label3D" parent="ProgressIndicator" unique_id=693808641]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.096037865)
-billboard = 2
-text = "making drink . . ."
-
 [node name="Timer" type="Timer" parent="." unique_id=1788318326]
 wait_time = 10.0
 one_shot = true
 
 [node name="BreakdownTimer" type="Timer" parent="." unique_id=644498863]
 one_shot = true
-
-[node name="CustomerOrderIndicator" type="Label3D" parent="." unique_id=2089461590]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5999999, 1)
-text = "customer ordered:"
-font_size = 24
-
-[node name="MachineOrderIndicator" type="Label3D" parent="." unique_id=1724140398]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1)
-text = "machine made:"
-font_size = 24
-
-[node name="PriceLabel" type="Label3D" parent="." unique_id=2094560560]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27403152, 1.0993592, 1.1413068)
-modulate = Color(0, 1, 0, 1)
-text = "+1"
-
-[node name="WaitingApprovalIndicator" type="Label3D" parent="." unique_id=879957228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 1.2)
-text = "order complete!
-waiting for approval ^"
-font_size = 16
-
-[node name="IngredientsMeter" type="Sprite3D" parent="." unique_id=620646674]
-transform = Transform3D(1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0, 0, 1, 0.6548946, 0.8076456, 0.76289916)
-texture = SubResource("ViewportTexture_llj37")
-
-[node name="SubViewport" type="SubViewport" parent="IngredientsMeter" unique_id=1895087231]
-transparent_bg = true
-size = Vector2i(100, 25)
-
-[node name="MarginContainer" type="MarginContainer" parent="IngredientsMeter/SubViewport" unique_id=1990942971]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="IngredientsMeter/SubViewport/MarginContainer" unique_id=159870079]
-layout_mode = 2
-size_flags_vertical = 1
-value = 100.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="IngredientsMeter/SubViewport/MarginContainer" unique_id=156026625]
-layout_mode = 2
-text = "ingredients"
-horizontal_alignment = 1
-
-[node name="DrinkCustomerScoreLabel" type="Label3D" parent="." unique_id=434807514]
-transform = Transform3D(0.98999906, -0.14107402, 0, 0.14107402, 0.98999906, 0, 0, 0, 1, 0.65134853, 0.8347569, 1.0733647)
 
 [node name="IngTooLow" type="Label3D" parent="." unique_id=1911355806]
 transform = Transform3D(0.75122947, -0.66004103, 0, 0.66004103, 0.75122947, 0, 0, 0, 1, 1.3784734, 1.4826432, 0.73625064)
@@ -192,53 +114,6 @@ transform = Transform3D(0.74367034, -2.9223102e-08, 0.6685466, -0.6685466, -3.25
 light_color = Color(0.9411765, 0.5058824, 0.5058824, 1)
 light_energy = 2.0
 shadow_enabled = true
-
-[node name="AcceptButton" type="Area3D" parent="." unique_id=600817850 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.874, 1.0090001)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_ioi8x")
-display_name = "[color=green]approve drink"
-mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="AcceptButton" unique_id=900902096]
-mesh = SubResource("BoxMesh_ioi8x")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AcceptButton" unique_id=1423337175]
-shape = SubResource("BoxShape3D_loq51")
-
-[node name="MakeDrinkButton" type="Area3D" parent="." unique_id=1329158865 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023542345, 1.0213691, 0.97740984)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_ioi8x")
-display_name = "[color=yellow]remake drink by hand"
-mesh = NodePath("MeshInstance3D")
-hold_to_interact = true
-keep_progress_on_interrupt = true
-time_to_hold = 3.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MakeDrinkButton" unique_id=432966545]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12589586, 0.03169334)
-mesh = SubResource("BoxMesh_6qesk")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MakeDrinkButton" unique_id=1991787089]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20000005, 0)
-shape = SubResource("BoxShape3D_loq51")
-
-[node name="RejectButton" type="Area3D" parent="." unique_id=410108366 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0.874, 1.0090001)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_ioi8x")
-display_name = "[color=red]reject drink (retry)"
-mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RejectButton" unique_id=160359694]
-mesh = SubResource("BoxMesh_llj37")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RejectButton" unique_id=1863884231]
-shape = SubResource("BoxShape3D_loq51")
 
 [node name="FixMachineButton" type="Area3D" parent="." unique_id=885014159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
@@ -255,7 +130,7 @@ modulate = Color(1, 0.6, 0.12156863, 1)
 text = "BROKEN DOWN"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
-shape = SubResource("BoxShape3D_ioi8x")
+shape = SubResource("BoxShape3D_1hddr")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton" unique_id=1631380149]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -302,15 +177,6 @@ texture = ExtResource("9_1hddr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041475177, 0.569979, -0.1422759)
 shape = SubResource("BoxShape3D_vn1tu")
 
-[node name="Warning" type="Label3D" parent="Spill" unique_id=1351832313]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
-layers = 2
-sorting_offset = 1.0
-billboard = 2
-text = "⚠️
-CLEAN UP SPILL
-⬇️"
-
 [node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
 stream = ExtResource("7_6qesk")
 pitch_scale = 2.0
@@ -320,3 +186,83 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1941494849]
 shape = SubResource("BoxShape3D_0ffxp")
+
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "exit_button")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.06)
+script = ExtResource("10_0d1aa")
+interactable = NodePath("Interactable")
+node_viewport = NodePath("Screen/SubViewport")
+node_quad = NodePath("Screen")
+node_area = NodePath("Area3D")
+cam_spot = NodePath("CameraSpot")
+exit_button = NodePath("ExitButtonLayer/MarginContainer/Button")
+
+[node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
+mesh = SubResource("QuadMesh_0ffxp")
+
+[node name="SubViewport" type="SubViewport" parent="3DGui/Screen" unique_id=1837069961]
+size = Vector2i(600, 800)
+
+[node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
+
+[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
+handle_input_locally = false
+size = Vector2i(300, 225)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+fov = 140.0
+
+[node name="Area3D" type="Area3D" parent="3DGui" unique_id=128585634]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Area3D" unique_id=805871503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
+shape = SubResource("BoxShape3D_j2xdn")
+
+[node name="Interactable" type="Area3D" parent="3DGui" unique_id=1501552722 node_paths=PackedStringArray("mesh")]
+script = ExtResource("5_ioi8x")
+display_name = "use machine"
+mesh = NodePath("../Screen")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
+shape = SubResource("BoxShape3D_yuuq8")
+
+[node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
+
+[node name="ExitButtonLayer" type="CanvasLayer" parent="3DGui" unique_id=673876877]
+layer = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="3DGui/ExitButtonLayer" unique_id=1636617478]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 150
+
+[node name="Button" type="Button" parent="3DGui/ExitButtonLayer/MarginContainer" unique_id=1306151559]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_visual_only = false
+theme = ExtResource("9_0d1aa")
+theme_override_font_sizes/font_size = 64
+text = "exit"
+
+[node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
+
+[editable path="3DGui/Screen/SubViewport/MachineUI"]

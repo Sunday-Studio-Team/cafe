@@ -24,9 +24,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if (
 		Input.is_action_just_pressed("pause")
-		and not Global.minigame_active
-		and not Global.in_pc_ui
-		and not in_end_screen
+		and not Global.in_ui
 	):
 		get_tree().paused = !get_tree().paused
 		visible = !visible

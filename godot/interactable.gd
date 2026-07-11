@@ -25,6 +25,11 @@ var enabled := true:
 		if enabled:
 			process_mode = Node.PROCESS_MODE_INHERIT
 		else:
+			# i really dont know why but it seems like the highlight
+			# (which is controlled in process) doesnt get disabled properly
+			# unless we wait 3 frames o_0)
+			for i in 3:
+				await get_tree().process_frame
 			process_mode = Node.PROCESS_MODE_DISABLED
 			time_held = 0
 var time_held: float = 0

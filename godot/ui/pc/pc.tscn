@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d3nmgsusj5d7c" path="res://sprites/shop_icon.png" id="3_qefv1"]
 [ext_resource type="PackedScene" uid="uid://bgyc1mnye0hph" path="res://ui/pc/shop_app.tscn" id="4_klsw4"]
 [ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
+[ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="8_4xb7n"]
 
 [node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button")]
 layout_mode = 3
@@ -95,5 +96,10 @@ offset_right = 123.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.25, -0.5)
+offset_transform_rotation = -0.08726646
+offset_transform_visual_only = false
+theme = ExtResource("8_4xb7n")
 theme_override_font_sizes/font_size = 64
 text = "exit"

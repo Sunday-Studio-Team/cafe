@@ -7,6 +7,9 @@ extends Node
 @export_dir var customer_sprites_folder_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
+@export var star_texture: Texture
+@export var half_star_texture: Texture
+@export var empty_star_texture: Texture
 
 var player: Player
 var hovered_interactable: Interactable:
@@ -48,8 +51,11 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		score_update_message = ""
+# represented as stars (1 rating = 1 half star)
 var employee_rating := 0:
 	set(new_value):
+		if new_value > 10:
+			new_value = 10
 		if new_value == employee_rating:
 			return
 
@@ -73,6 +79,17 @@ var customer_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
+var in_machine_ui: bool = false
+var in_ui: bool:
+	get():
+		if (
+			minigame_active
+			or in_pc_ui
+			or in_machine_ui
+		):
+			return true
+		else:
+			return false
 
 #Active Items
 var equipped_item : Item = null

@@ -13,6 +13,7 @@ var window_wait_time: float = 30
 var orders_made: int = 0
 var bonus_points_for_time: int
 var at_window: bool = false
+var percent_time_left: float = 100
 
 
 func _ready() -> void:
@@ -24,27 +25,28 @@ func _ready() -> void:
 	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
-	
-	desired_drink = Global.drinks.pick_random()
 
-	waiting_indicator.hide()
+	desired_drink = Global.drinks.pick_random()
 
 
 func _physics_process(_delta: float) -> void:
-	if timer.is_stopped():
-		return
+	# uncomment to show time above customer head
+	#waiting_indicator.visible = not timer.is_stopped()
 
-	waiting_bar.value = timer.time_left / timer.wait_time * 100
+	if not timer.is_stopped():
+		percent_time_left = timer.time_left / timer.wait_time * 100
 
-	if waiting_bar.value >= 66:
+	if percent_time_left >= 66:
 		waiting_indicator.modulate = Color.GREEN
 		bonus_points_for_time = 1
-	elif waiting_bar.value >= 33:
+	elif percent_time_left >= 33:
 		waiting_indicator.modulate = Color.ORANGE
 		bonus_points_for_time = 0
 	else:
 		waiting_indicator.modulate = Color.RED
 		bonus_points_for_time = -1
+
+	waiting_bar.value = percent_time_left
 
 
 func get_stats():
@@ -68,7 +70,6 @@ func _on_order_started(customer: Customer) -> void:
 		return
 	await get_tree().process_frame
 	timer.start()
-	waiting_indicator.show()
 	orders_made += 1
 
 

@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func add_customer(customer: Customer) -> void:
-	Events.alert_posted.emit("❗️🛎️ customer complained")
+	Events.alert_posted.emit("🛎️ customer complained")
 	Global.score_update_message = "customer complained"
 	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
@@ -77,7 +77,7 @@ func _on_queue_updated() -> void:
 
 func _on_customer_interactable_interacted() -> void:
 	Global.active_helpdesk_customer = _get_front_customer()
-	
+
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	Events.minigame_active.emit("Typing")

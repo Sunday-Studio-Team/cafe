@@ -69,8 +69,7 @@ func handle_movement(delta: float) -> void:
 	if (
 		not movement_enabled
 		or holding_interactable
-		or Global.minigame_active
-		or Global.in_pc_ui
+		or Global.in_ui
 	):
 		velocity = Vector3.ZERO
 		return
@@ -132,7 +131,7 @@ func handle_hovered_interactable() -> void:
 	else:
 		Global.hovered_interactable = null
 
-	if Global.minigame_active:
+	if Global.in_ui:
 		Global.hovered_interactable = null
 
 
@@ -173,4 +172,4 @@ func tilt_camera() -> void:
 
 
 func handle_ingredients_bag_visibility() -> void:
-	ingredients_bag.visible = Global.holding_ingredients
+	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui

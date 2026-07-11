@@ -10,8 +10,8 @@ extends Resource
 
 var default_move_speed := 1.2
 var sprint_move_speed := 5.0
-var chance_of_machine_breaking := 0.2
-var machine_chance_of_spill := 0.15
+var chance_of_machine_breaking := 0.15
+var machine_chance_of_spill := 0.1
 ## chance of each score from machine
 ## WARNING: make sure these always sum to 1 (or actually i can probably rework
 ## the logic to allow them to not sum to 1, since that would be easier
@@ -32,7 +32,7 @@ var penalty_for_holding_ingredients := 3
 var penalty_for_customer_complaint := 2
 var penalty_for_customer_stood_in_spill := 1
 var daily_profit_goal := 22.0
-var employee_rating_goal := 10
+var employee_rating_goal := 6
 var ingredients_per_order := 20
 var ingredients_per_bag := 50
 var customer_spawn_interval := 5.0
