@@ -1,17 +1,23 @@
 [gd_scene format=3 uid="uid://bib858l2cqot0"]
 
+[ext_resource type="Texture2D" uid="uid://1farnok5ulms" path="res://environment/textures/white_brick.png" id="1_e0jku"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(2, 3, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvgty"]
-albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
+albedo_texture = ExtResource("1_e0jku")
+uv1_scale = Vector3(2.05, 2.05, 2.05)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
 material = SubResource("StandardMaterial3D_kvgty")
 size = Vector3(0.5, 3, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
+albedo_texture = ExtResource("1_e0jku")
+
 [sub_resource type="BoxMesh" id="BoxMesh_exv3y"]
-material = SubResource("StandardMaterial3D_kvgty")
+material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(1, 1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chp50"]

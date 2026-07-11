@@ -50,6 +50,8 @@ func _ready() -> void:
 	Global.holding_ingredients = false
 	Global.daily_profit = 0
 	Global.employee_rating = 0
+	Global.spills_this_shift = 0
+	Global.breakdowns_this_shift = 0
 	# high values for debug
 	#Global.daily_profit = 100
 	#Global.employee_rating = 100
@@ -84,29 +86,27 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
-		game_timer.wait_time = 80
-		# since theres less happening in the first 'tutorial shift' we can make the machines
-		# more likely to break there to introduce that mechanic in a safe environment
-		Stats.current.chance_of_machine_breaking = 0.3
+		game_timer.wait_time = 90
 		Stats.current.daily_profit_goal = 12
 		cameras.hide()
 	if Global.day >= 2:
-		game_timer.wait_time = 90
-		Stats.current.chance_of_machine_breaking = 0.2
-		Stats.current.daily_profit_goal = 20
+		game_timer.wait_time = 120
+		Stats.current.daily_profit_goal = 18
 		cameras.show()
 	if Global.day >= 3:
 		game_timer.wait_time = 120
-		Stats.current.daily_profit_goal = 30
-		machines.append(side_machine)
+		Stats.current.daily_profit_goal = 25
+		machines.push_front(side_machine)
 		side_machine.show()
 		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
-		machines.append(fourth_machine)
+		machines.push_front(fourth_machine)
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
+
+	Global.machines.assign(machines)
 
 
 func spawn_customer() -> void:
@@ -130,7 +130,7 @@ func spawn_customer() -> void:
 		machine = machines.pick_random()
 
 	machine.set_customer(new_customer)
-	machine.start_order()
+	machine.machine_make_drink()
 
 
 func _on_game_timer_timeout() -> void:
@@ -140,8 +140,8 @@ func _on_game_timer_timeout() -> void:
 
 	get_tree().paused = false
 	if (
-		Global.daily_profit > Stats.current.daily_profit_goal
-		and Global.employee_rating > Stats.current.employee_rating_goal
+		Global.daily_profit >= Stats.current.daily_profit_goal
+		and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
 		Global.day += 1
 	else:

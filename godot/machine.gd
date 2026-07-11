@@ -3,28 +3,34 @@ class_name Machine
 extends Node3D
 
 @export var spot_for_customer: Marker3D
-@export var progress_indicator: Sprite3D
+@export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
 @export var timer: Timer
-@export var customer_order_indicator: Label3D
-@export var final_order_indicator: Label3D
-@export var price_label: Label3D
-@export var make_drink_button: Interactable
-@export var accept_button: Interactable
-@export var reject_button: Interactable
+@export var customer_order_indicator: Label
+@export var final_order_indicator: Label
+@export var price_label: Label
+@export var drink_customer_score_label: Label
+@export var make_drink_button: HoldButton
+@export var accept_button: Button
+@export var reject_button: Button
 @export var refill_button: Interactable
-@export var waiting_approval_indicator: Label3D
+@export var waiting_approval_indicator: Label
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var no_ingredients_sound: AudioStreamPlayer3D
-@export var drink_customer_score_label: Label3D
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
 @export var tip_jar_item: Item
 @export var spill_interactable: Interactable
 @export var spill_sound: AudioStreamPlayer3D
 @export var static_body: StaticBody3D
+@export var spill_warning: Label
+@export var manual_progress_bar: TextureProgressBar
+@export var gui_3d: Gui3D
+@export var customer_wait_indicator: Control
+@export var customer_wait_bar: TextureProgressBar
+@export var no_ingredients_warning: Control
 
 var customer: Customer
 var order: OrderData
@@ -33,20 +39,35 @@ var broken_down: bool = false
 var max_ingredients: int = 100
 var ingredients = max_ingredients
 var spill_on_floor := false
+var repair_minigames := ["Colors", "Arrows"]
 
 
 func _ready() -> void:
 	get_stats()
 	Events.items_updated.connect(get_stats)
 
-	accept_button.interacted.connect(accept_order)
-	reject_button.interacted.connect(reject_order)
+	accept_button.pressed.connect(accept_order)
+	make_drink_button.button_down.connect(
+		func():
+			if ingredients < Stats.current.ingredients_per_order:
+				no_ingredients_warning.show()
+				await get_tree().create_timer(0.5, false).timeout
+				no_ingredients_warning.hide()
+	)
+	make_drink_button.hold_completed.connect(make_drink_manually)
+	reject_button.pressed.connect(
+		func():
+			if ingredients < Stats.current.ingredients_per_order:
+				no_ingredients_warning.show()
+				await get_tree().create_timer(0.5, false).timeout
+				no_ingredients_warning.hide()
+			else:
+				reject_order()
+	)
 	refill_button.interacted.connect(refill)
-	make_drink_button.interacted.connect(make_drink_manually)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
-	timer.timeout.connect(machine_make_drink)
 
-	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-2, 2)
+	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
 
 	Events.customer_approached_window.connect(_on_customer_approached_window)
 	spill_interactable.interacted.connect(clean_up_spill)
@@ -65,21 +86,53 @@ func _physics_process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
+	make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
 
 	refill_button.visible = Global.holding_ingredients
 
 	ingredients_bar.value = ingredients
-	if ingredients_bar.value < Stats.current.ingredients_per_order:
+	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
-		reject_button.display_name = "[color=pink]🚫not enough ingredients"
-		make_drink_button.display_name = "[color=pink]🚫no ingredients"
 	else:
-		ingredients_bar.modulate = Color.GREEN
+		if ingredients <= max_ingredients / 2.0:
+			ingredients_bar.modulate = Color.YELLOW
+		else:
+			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
-		reject_button.display_name = "[color=red]reject drink (retry)"
-		make_drink_button.display_name = "[color=yellow]remake drink by hand"
+
+	spill_warning.visible = spill_on_floor
+
+	manual_progress_bar.value = (
+		make_drink_button.held_time / make_drink_button.time_to_hold * 100
+	)
+
+	manual_progress_bar.visible = make_drink_button.held_time > 0
+
+	customer_wait_indicator.visible = customer != null and not customer.timer.is_stopped()
+
+	if customer:
+		var customer_timer: Timer = customer.timer
+
+		customer_wait_bar.value = customer_timer.time_left / customer_timer.wait_time * 100
+
+		if customer_wait_bar.value >= 66:
+			customer_wait_indicator.modulate = Color.GREEN
+		elif customer_wait_bar.value >= 33:
+			customer_wait_indicator.modulate = Color.ORANGE
+		else:
+			customer_wait_indicator.modulate = Color.RED
+
+	if make_drink_button.held:
+		Global.holding_make_drink_button = true
+
+	# disable reject/make buttons if no ingredients
+	# (not sure if this is best way to do it, probably should enable them but
+	# give them custom behaviour that gives player feeback and makes sure they
+	# know why they arent working)
+	#make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
+	#reject_button.enabled = ingredients >= Stats.current.ingredients_per_order
 
 
 func set_customer(c: Customer) -> void:
@@ -98,6 +151,7 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
+		make_drink_button.held_time = 0
 
 
 func get_stats() -> void:
@@ -106,7 +160,7 @@ func get_stats() -> void:
 	spill_interactable.time_to_hold = Stats.current.time_to_clean_up_spill
 
 
-func start_order() -> void:
+func machine_make_drink() -> void:
 	await get_tree().create_timer(randf_range(1, 3), false).timeout
 
 	# (i think) we emit this before returning because it starts the customer
@@ -117,7 +171,7 @@ func start_order() -> void:
 		return
 
 	order = OrderData.new()
-	order.ordered_drink = Global.drinks.pick_random()
+	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
 		"customer ordered %s (%s)"
 		% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
@@ -126,153 +180,14 @@ func start_order() -> void:
 
 	timer.start()
 
-	if randf() < Stats.current.chance_of_machine_breaking:
+	if (
+		randf() < Stats.current.chance_of_machine_breaking
+		and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
+	):
 		break_down()
 
+	await timer.timeout
 
-func display_drink_score() -> void:
-	price_label.text = Global.float_to_price(order.ordered_drink.price)
-	price_label.show()
-
-	drink_customer_score_label.text = ""
-	if order.score < 0:
-		drink_customer_score_label.modulate = Color.RED
-		drink_customer_score_label.text += "🙂 "
-		drink_customer_score_label.text += str(order.score)
-	elif order.score > 0:
-		drink_customer_score_label.modulate = Color.GREEN
-		drink_customer_score_label.text += "🙂 +"
-		drink_customer_score_label.text += str(order.score)
-	drink_customer_score_label.show()
-
-	if order.score == 3:
-		final_order_indicator.modulate = Color.GREEN
-	else:
-		final_order_indicator.modulate = Color.RED
-
-
-func fix_machine() -> void:
-	fix_machine_button.hide()
-	broken_down = false
-	if customer:
-		customer_order_indicator.show()
-		timer.paused = false
-
-
-# this isnt inlined cos both manual and automatic drinks call this
-func consume_ingredients() -> void:
-	ingredients -= Stats.current.ingredients_per_order
-	if ingredients < Stats.current.ingredients_per_order:
-		Events.alert_posted.emit("❗️🫘 machine ran out of ingredients")
-		no_ingredients_sound.play()
-
-
-func clean_up_spill() -> void:
-	spill_interactable.hide()
-	spill_on_floor = false
-
-
-func refill() -> void:
-	Events.minigame_active.emit("Refill")
-
-	await Events.minigame_end
-
-	Global.holding_ingredients = false
-	ingredients += (
-		Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
-	)
-	if ingredients > max_ingredients:
-		ingredients = max_ingredients
-
-	# TODO: separate this out ? its not explicit its doing this when we just call
-	# 'refill()'
-	if (
-		timer.is_stopped()
-		and customer
-		and not broken_down
-		and not waiting_for_response
-	):
-		start_order()
-
-
-func cancel_fix_minigame() -> void:
-	Events.minigame_end.disconnect(_on_minigame_end)
-	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
-
-
-func accept_order() -> void:
-	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "dispensing drink to customer"
-	waiting_for_response = false
-	Events.order_approved.emit(customer)
-	drink_customer_score_label.hide()
-	price_label.show()
-	Global.score_update_message = "sold %s" % order.made_drink.name
-	Global.daily_profit += order.made_drink.price + order.tip
-	await get_tree().create_timer(0.5, false).timeout
-	price_label.hide()
-	drink_customer_score_label.show()
-	Global.score_update_message = "customer rated %s" % order.made_drink.name
-	Global.employee_rating += order.score
-	await get_tree().create_timer(0.5, false).timeout
-	drink_customer_score_label.hide()
-
-	# -------------------------------------------------
-	# Check if the drink score is -3 to make them angry (red)
-	# pretty clunky right now, with a score check here and a score check in _on_customer_left_machine
-	if (order.score <= -3):
-		#await get_tree().create_timer(randf_range(0.3, 1), false).timeout
-		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
-	# -------------------------------------------------
-
-	await get_tree().create_timer(1.5, false).timeout
-	Events.customer_left_machine.emit(customer, order.score)
-	set_customer(null)
-
-
-func reject_order() -> void:
-	if ingredients < Stats.current.ingredients_per_order:
-		return
-	final_order_indicator.text = "order rejected! \n making a new drink"
-	timer.start()
-	progress_indicator.show()
-	waiting_for_response = false
-
-
-func make_drink_manually() -> void:
-	if ingredients < Stats.current.ingredients_per_order:
-		return
-	consume_ingredients()
-	order.made_drink = order.ordered_drink
-	order.score = 3
-	final_order_indicator.text = (
-		"you made: %s (%s)"
-		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
-	)
-	display_drink_score()
-	Events.order_completed.emit(customer)
-	customer.timer.stop()
-	waiting_for_response = false
-	price_label.hide()
-	drink_customer_score_label.hide()
-	await get_tree().create_timer(1, false).timeout
-	accept_order()
-
-
-func break_down() -> void:
-	breakdown_timer.start()
-	await breakdown_timer.timeout
-
-	customer_order_indicator.hide()
-	fix_machine_button.show()
-	breakdown_sound.play()
-	Events.alert_posted.emit("❗️⚙️ machine broke down")
-
-	timer.paused = true
-	broken_down = true
-
-
-func machine_make_drink() -> void:
 	consume_ingredients()
 
 	# roll a random score based on chances from stat_data
@@ -319,13 +234,17 @@ func machine_make_drink() -> void:
 
 	# TODO: move hardcoded tip chance here somewhere else
 	if tip_jar_item in Global.owned_items and randf() < 0.25:
-		order.tip = randf_range(0.5, 2)
+		order.tip = randf_range(0.25, 1)
 		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
 
-	if randf() < Stats.current.machine_chance_of_spill:
+	if (
+		randf() < Stats.current.machine_chance_of_spill
+		and Global.spills_this_shift < Stats.current.max_spills_per_shift
+	):
 		spill_interactable.show()
 		spill_sound.play()
-		Events.alert_posted.emit("‼️⚙️machine made a spill")
+		Events.alert_posted.emit("⚙️machine made a spill")
+		Global.spills_this_shift += 1
 		spill_on_floor = true
 
 	final_order_indicator.text = (
@@ -338,12 +257,161 @@ func machine_make_drink() -> void:
 	Events.order_completed.emit(customer)
 
 
+func display_drink_score() -> void:
+	price_label.text = Global.float_to_price(order.made_drink.price)
+	price_label.show()
+
+	if order.score < 0:
+		drink_customer_score_label.modulate = Color.RED
+		drink_customer_score_label.text = "🙂 %s⭐️" % (order.score / 2.0)
+	elif order.score > 0:
+		drink_customer_score_label.modulate = Color.GREEN
+		drink_customer_score_label.text = "🙂 +%s⭐️" % (order.score / 2.0)
+	drink_customer_score_label.show()
+
+	if order.score == 3:
+		final_order_indicator.modulate = Color.GREEN
+	else:
+		final_order_indicator.modulate = Color.RED
+
+
+func fix_machine() -> void:
+	fix_machine_button.hide()
+	broken_down = false
+	gui_3d.interactable.enabled = true
+	if customer:
+		customer_order_indicator.show()
+		timer.paused = false
+
+
+# this isnt inlined cos both manual and automatic drinks call this
+func consume_ingredients() -> void:
+	ingredients -= Stats.current.ingredients_per_order
+	if ingredients < Stats.current.ingredients_per_order:
+		Events.alert_posted.emit("🫘 machine ran out of ingredients")
+		no_ingredients_sound.play()
+
+
+func clean_up_spill() -> void:
+	spill_interactable.hide()
+	spill_on_floor = false
+
+
+func refill() -> void:
+	Events.minigame_active.emit("Refill")
+
+	await Events.minigame_end
+
+	Global.holding_ingredients = false
+	ingredients += (
+		Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
+	)
+	if ingredients > max_ingredients:
+		ingredients = max_ingredients
+
+	# TODO: separate this out ? its not explicit its doing this when we just call
+	# 'refill()'
+	if (
+		timer.is_stopped()
+		and customer
+		and not broken_down
+		and not waiting_for_response
+	):
+		machine_make_drink()
+
+
+func cancel_fix_minigame() -> void:
+	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
+
+
+func accept_order() -> void:
+	gui_3d.exit()
+	customer_order_indicator.text = ""
+	final_order_indicator.modulate = Color.WHITE
+	final_order_indicator.text = "dispensing drink to customer . . ."
+	waiting_for_response = false
+	Events.order_approved.emit(customer)
+	drink_customer_score_label.hide()
+	price_label.show()
+	Global.score_update_message = "sold %s" % order.made_drink.name
+	Global.daily_profit += order.made_drink.price + order.tip
+	await get_tree().create_timer(0.5, false).timeout
+	price_label.hide()
+	drink_customer_score_label.show()
+	Global.score_update_message = "customer rated %s" % order.made_drink.name
+	Global.employee_rating += order.score
+	await get_tree().create_timer(0.5, false).timeout
+	drink_customer_score_label.hide()
+
+	# -------------------------------------------------
+	# Check if the drink score is -3 to make them angry (red)
+	# pretty clunky right now, with a score check here and a score check in _on_customer_left_machine
+	if (order.score <= -3):
+		#await get_tree().create_timer(randf_range(0.3, 1), false).timeout
+		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
+	# -------------------------------------------------
+
+	await get_tree().create_timer(1.5, false).timeout
+	Events.customer_left_machine.emit(customer, order.score)
+	set_customer(null)
+
+
+func reject_order() -> void:
+	gui_3d.exit()
+	if ingredients < Stats.current.ingredients_per_order:
+		return
+	final_order_indicator.text = "order rejected! \n making a new drink"
+	price_label.hide()
+	drink_customer_score_label.hide()
+	waiting_for_response = false
+
+	machine_make_drink()
+
+
+func make_drink_manually() -> void:
+	gui_3d.exit()
+	if ingredients < Stats.current.ingredients_per_order:
+		return
+	consume_ingredients()
+	order.made_drink = order.ordered_drink
+	order.score = 3
+	final_order_indicator.text = (
+		"you made: %s (%s)"
+		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+	)
+	display_drink_score()
+	Events.order_completed.emit(customer)
+	customer.timer.stop()
+	waiting_for_response = false
+	price_label.hide()
+	drink_customer_score_label.hide()
+	await get_tree().create_timer(1, false).timeout
+	accept_order()
+
+
+func break_down() -> void:
+	breakdown_timer.start()
+	await breakdown_timer.timeout
+
+	gui_3d.exit()
+	gui_3d.interactable.enabled = false
+	customer_order_indicator.hide()
+	fix_machine_button.show()
+	breakdown_sound.play()
+	Events.alert_posted.emit("⚙️ machine broke down")
+	Global.breakdowns_this_shift += 1
+
+	timer.paused = true
+	broken_down = true
+
+
 func _on_fix_machine_button_pressed() -> void:
 	# we connect and disconnect these signals here instead of in _ready() so other machines dont get
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
-	Events.minigame_active.emit("Colors")
+	Events.minigame_active.emit(repair_minigames.pick_random())
 
 
 func _on_minigame_end() -> void:

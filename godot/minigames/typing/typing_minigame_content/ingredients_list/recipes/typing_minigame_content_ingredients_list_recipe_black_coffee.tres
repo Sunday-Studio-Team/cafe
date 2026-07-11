@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TypingMinigameContentIngredientsListRecipe" format=3 uid="uid://c00q0spui2jwt"]
+
+[ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/recipes/typing_minigame_content_ingredients_list_recipe.gd" id="1_23ole"]
+[ext_resource type="Resource" uid="uid://bgum1f0hyg378" path="res://drinks/black_coffee.tres" id="1_u3vxd"]
+
+[resource]
+script = ExtResource("1_23ole")
+drink_resource = ExtResource("1_u3vxd")
+ingredient_names = Array[String](["coffee", "water"])
+metadata/_custom_type_script = "uid://c1qu64r4ohlqc"

@@ -15,13 +15,7 @@ var new_shop_items := true
 func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
-	exit_button.pressed.connect(
-		func():
-			email_app.hide()
-			shop_app.hide()
-			hide()
-			ui.show()
-	)
+	exit_button.pressed.connect(exit)
 	visibility_changed.connect(
 		func():
 			if visible:
@@ -34,7 +28,17 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	irl_new_shop_items_indicator.visible = new_shop_items
+	if Input.is_action_just_pressed("pause") and Global.in_pc_ui:
+		exit()
+
+	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day == 1
+
+
+func exit() -> void:
+	email_app.hide()
+	shop_app.hide()
+	hide()
+	ui.show()
 
 
 func _on_email_button_pressed() -> void:

@@ -18,8 +18,11 @@ func _ready() -> void:
 	customer_interactable.interacted.connect(_on_customer_interactable_interacted)
 	customer_interactable.enabled = false
 
+
 func add_customer(customer: Customer) -> void:
-	Events.alert_posted.emit("❗️🛎️ customer complained")
+	Events.alert_posted.emit("🛎️ customer complained")
+	Global.score_update_message = "customer complained"
+	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(func(): remove_front_customer(false))
 	queue_updated.emit()
@@ -64,7 +67,7 @@ func _on_queue_updated() -> void:
 		customer_position.z += queue_spacing_offset * index
 
 		customer.global_position = customer_position
-		
+
 	# Update interactable
 	if customers_waiting.size() > 0:
 		customer_interactable.enabled = true
@@ -73,21 +76,26 @@ func _on_queue_updated() -> void:
 
 
 func _on_customer_interactable_interacted() -> void:
+	Global.active_helpdesk_customer = _get_front_customer()
+
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	Events.minigame_active.emit("Typing")
 	Events.customer_timed_out_window.connect(_on_customer_timed_out_window)
+
 
 func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 	Events.customer_timed_out_window.disconnect(_on_customer_timed_out_window)
 	remove_front_customer(true)
-	
+
+
 func _on_minigame_cancelled() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 	Events.customer_timed_out_window.disconnect(_on_customer_timed_out_window)
+
 
 func _on_customer_timed_out_window() -> void:
 	Events.force_close_minigame.emit()

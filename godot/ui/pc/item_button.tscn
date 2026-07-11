@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://cqb3s88o3lq6d" path="res://ui/pc/item_button.gd" id="1_rlbhm"]
 
 [node name="ItemButton" type="Button" unique_id=1733613719 node_paths=PackedStringArray("item_icon", "item_name", "description")]
-custom_minimum_size = Vector2(500, 500)
-offset_right = 512.0
-offset_bottom = 768.0
+custom_minimum_size = Vector2(400, 500)
+offset_right = 500.0
+offset_bottom = 600.0
 size_flags_vertical = 3
 script = ExtResource("1_rlbhm")
 item_icon = NodePath("MarginContainer/VBoxContainer/TextureRect")
@@ -39,8 +39,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 texture = ExtResource("1_crjyi")
-expand_mode = 2
-stretch_mode = 4
+expand_mode = 3
+stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1284397859]
 layout_mode = 2
@@ -51,8 +51,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 48
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 40
 bbcode_enabled = true
 text = "[b]item name[color=gold] ($10)"
 fit_content = true
