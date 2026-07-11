@@ -127,6 +127,9 @@ func _physics_process(_delta: float) -> void:
 		else:
 			customer_wait_indicator.modulate = Color.RED
 
+	if make_drink_button.held:
+		Global.holding_make_drink_button = true
+
 	# disable reject/make buttons if no ingredients
 	# (not sure if this is best way to do it, probably should enable them but
 	# give them custom behaviour that gives player feeback and makes sure they

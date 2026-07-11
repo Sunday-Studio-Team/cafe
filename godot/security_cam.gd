@@ -43,13 +43,7 @@ func _physics_process(_delta: float) -> void:
 				timer.start()
 				Global.score_update_message = "caught running"
 				Global.employee_rating -= Stats.current.penalty_for_running
-			elif (
-				Input.is_action_pressed("interact")
-				and Global.hovered_interactable != null
-				# TODO: think of a better way to identify specific interactables
-				# that wont break if things are renamed etc
-				and Global.hovered_interactable.display_name.contains("remake drink")
-			):
+			elif Global.holding_make_drink_button:
 				timer.start()
 				Global.score_update_message = "caught making drink by hand"
 				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
