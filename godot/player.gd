@@ -171,7 +171,11 @@ func tilt_camera() -> void:
 
 
 func handle_ingredients_bag() -> void:
-	if Input.is_action_just_pressed("drop") and Global.holding_ingredients:
+	if (
+		Input.is_action_just_pressed("drop")
+		and Global.holding_ingredients
+		and not Global.in_ui
+	):
 		Global.holding_ingredients = false
 		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()
 		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2

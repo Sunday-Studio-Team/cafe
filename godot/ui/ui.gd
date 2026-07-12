@@ -154,7 +154,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func handle_drop_item_ui():
-	drop_button.visible = Global.holding_ingredients
+	drop_button.visible = Global.holding_ingredients and not Global.in_ui
 
 
 func update_day_indicator() -> void:
