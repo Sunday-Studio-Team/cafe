@@ -405,7 +405,8 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
-	gui_3d.exit()
+	if gui_3d.player_using_me:
+		gui_3d.exit()
 	gui_3d.interactable.enabled = false
 	customer_order_indicator.hide()
 	fix_machine_button.show()

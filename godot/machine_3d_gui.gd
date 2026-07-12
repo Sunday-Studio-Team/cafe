@@ -13,6 +13,7 @@ const CAM_TWEEN_DUR := 0.25
 @export var cam_spot: Marker3D
 @export var exit_button: Button
 
+var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
 # The last processed input touch/mouse event. To calculate relative movement.
@@ -38,6 +39,7 @@ func _ready():
 			interactable.enabled = false
 			Global.in_machine_ui = true
 			exit_button.show()
+			player_using_me = true
 
 			create_tween().tween_property(
 				Global.player,
@@ -80,9 +82,13 @@ func _unhandled_input(event):
 
 
 func exit() -> void:
+	player_using_me = false
+
 	if not machine.broken_down:
 		interactable.enabled = true
+
 	exit_button.hide()
+
 	if Global.in_machine_ui:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		Global.in_machine_ui = false
