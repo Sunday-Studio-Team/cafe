@@ -140,13 +140,6 @@ func _physics_process(_delta: float) -> void:
 	if make_drink_button.held:
 		Global.holding_make_drink_button = true
 
-	# disable reject/make buttons if no ingredients
-	# (not sure if this is best way to do it, probably should enable them but
-	# give them custom behaviour that gives player feeback and makes sure they
-	# know why they arent working)
-	#make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
-	#reject_button.enabled = ingredients >= Stats.current.ingredients_per_order
-
 
 func set_customer(c: Customer) -> void:
 	customer = c
@@ -338,21 +331,27 @@ func cancel_fix_minigame() -> void:
 
 func accept_order() -> void:
 	gui_3d.exit()
+
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
 	final_order_indicator.text = "dispensing drink to customer . . ."
+
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
+
 	drink_customer_score_label.hide()
 	price_label.show()
 	Global.score_update_message = "sold %s" % order.made_drink.name
 	Global.daily_profit += order.made_drink.price + order.tip
+
 	await get_tree().create_timer(0.5, false).timeout
+
 	price_label.hide()
 	drink_customer_score_label.show()
 	Global.score_update_message = "customer rated %s" % order.made_drink.name
 	Global.employee_rating += order.score
 	await get_tree().create_timer(0.5, false).timeout
+
 	drink_customer_score_label.hide()
 
 	# -------------------------------------------------
@@ -382,9 +381,12 @@ func reject_order() -> void:
 
 func make_drink_manually() -> void:
 	gui_3d.exit()
+
 	if ingredients < Stats.current.ingredients_per_order:
 		return
+
 	consume_ingredients()
+
 	order.made_drink = order.ordered_drink
 	order.score = 3
 	final_order_indicator.text = (
@@ -392,6 +394,7 @@ func make_drink_manually() -> void:
 		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	display_drink_score()
+
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
