@@ -120,7 +120,7 @@ func _physics_process(_delta: float) -> void:
 	spill_warning.visible = spill_on_floor
 
 	manual_progress_bar.value = (
-		make_drink_button.held_time / make_drink_button.time_to_hold * 100
+			make_drink_button.held_time / make_drink_button.time_to_hold * 100
 	)
 
 	manual_progress_bar.visible = make_drink_button.held_time > 0
@@ -177,6 +177,10 @@ func get_stats() -> void:
 func machine_make_drink() -> void:
 	await get_tree().create_timer(randf_range(1, 3), false).timeout
 
+	# should stop us restarting order if order already auto started by us refilling
+	if not timer.is_stopped():
+		return
+
 	# (i think) we emit this before returning because it starts the customer
 	# wait timer
 	Events.customer_started_order.emit(customer)
@@ -187,16 +191,16 @@ func machine_make_drink() -> void:
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
-		"customer ordered %s (%s)"
-		% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
+			"customer ordered %s (%s)"
+			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
 	customer_order_indicator.show()
 
 	timer.start()
 
 	if (
-		randf() < Stats.current.chance_of_machine_breaking
-		and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
+			randf() < Stats.current.chance_of_machine_breaking
+			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
 	):
 		break_down()
 
@@ -219,11 +223,11 @@ func machine_make_drink() -> void:
 	const LOOP_LIMIT := 20
 
 	while (
-		(
-			order.made_drink == null
-			or random_drink_score != order.score
-		)
-		and loops < LOOP_LIMIT
+			(
+					order.made_drink == null
+					or random_drink_score != order.score
+			)
+			and loops < LOOP_LIMIT
 	):
 		var potential_drink_score := 0
 		order.made_drink = Global.drinks.pick_random()
@@ -252,8 +256,8 @@ func machine_make_drink() -> void:
 		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
 
 	if (
-		randf() < Stats.current.machine_chance_of_spill
-		and Global.spills_this_shift < Stats.current.max_spills_per_shift
+			randf() < Stats.current.machine_chance_of_spill
+			and Global.spills_this_shift < Stats.current.max_spills_per_shift
 	):
 		spill_interactable.show()
 		spill_sound.play()
@@ -262,8 +266,8 @@ func machine_make_drink() -> void:
 		spill_on_floor = true
 
 	final_order_indicator.text = (
-		"machine made: %s (%s)"
-		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+			"machine made: %s (%s)"
+			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	final_order_indicator.show()
 
@@ -317,17 +321,18 @@ func refill() -> void:
 	await Events.minigame_end
 
 	Global.holding_ingredients = false
+	@warning_ignore("narrowing_conversion")
 	ingredients += (
-		Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
+			Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
 	)
 
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
 	if (
-		timer.is_stopped()
-		and customer
-		and not broken_down
-		and not waiting_for_response
+			timer.is_stopped()
+			and customer
+			and not broken_down
+			and not waiting_for_response
 	):
 		machine_make_drink()
 
@@ -398,8 +403,8 @@ func make_drink_manually() -> void:
 	order.made_drink = order.ordered_drink
 	order.score = 3
 	final_order_indicator.text = (
-		"you made: %s (%s)"
-		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+			"you made: %s (%s)"
+			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	display_drink_score()
 
