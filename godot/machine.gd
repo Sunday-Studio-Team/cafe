@@ -39,7 +39,18 @@ var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
 var max_ingredients: int = 100
-var ingredients = max_ingredients
+var ingredients: int = max_ingredients:
+	set(new_value):
+		var change := new_value - ingredients
+
+		if new_value > max_ingredients:
+			change = max_ingredients - ingredients
+			ingredients = max_ingredients
+		else:
+			ingredients = new_value
+
+		if not change == 0:
+			print("ingredients changed by %s on %s" % [change, name])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
 
@@ -308,8 +319,6 @@ func refill() -> void:
 	ingredients += (
 		Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
 	)
-	if ingredients > max_ingredients:
-		ingredients = max_ingredients
 
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
