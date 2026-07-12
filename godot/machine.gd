@@ -33,6 +33,8 @@ extends Node3D
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
+@export var time_bonus_panel: PanelContainer
+@export var time_bonus_label: Label
 
 var customer: Customer
 var order: OrderData
@@ -136,6 +138,12 @@ func _physics_process(_delta: float) -> void:
 			customer_wait_indicator.modulate = Color.ORANGE
 		else:
 			customer_wait_indicator.modulate = Color.RED
+
+		if customer.bonus_points_for_time > 0:
+			time_bonus_label.text = "+%s⭐️ bonus" % [customer.bonus_points_for_time / 2.0]
+		else:
+			time_bonus_label.text = "%s⭐️ penalty" % [customer.bonus_points_for_time / 2.0]
+		time_bonus_panel.visible = customer.bonus_points_for_time != 0
 
 	if make_drink_button.held:
 		Global.holding_make_drink_button = true
