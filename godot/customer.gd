@@ -87,7 +87,7 @@ func _on_order_approved(customer: Customer) -> void:
 	Global.employee_rating += bonus_points_for_time
 
 
-func _on_customer_left_machine(customer: Customer, drink_score) -> void:
+func _on_customer_left_machine(customer: Customer, _drink_score) -> void:
 	if customer != self:
 		return
 

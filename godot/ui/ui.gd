@@ -105,7 +105,7 @@ new rule: don't take any more ingredients out of the store room."
 		objective.text = (
 			"your boss has installed another machine."
 		)
-
+	@warning_ignore("integer_division")
 	objective.text += (
 		"\n\n[b]SHIFT OBJECTIVE[/b]
 make %s while keeping your employee rating (🙂) above %s⭐️"
