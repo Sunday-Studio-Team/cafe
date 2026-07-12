@@ -27,6 +27,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_goal_label: Label
 @export var alert_sprite: AnimatedSprite2D
+@export var drop_button: Button
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -149,6 +150,11 @@ func _physics_process(_delta: float) -> void:
 	handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
+	handle_drop_item_ui()
+
+
+func handle_drop_item_ui():
+	drop_button.visible = Global.holding_ingredients
 
 
 func update_day_indicator() -> void:

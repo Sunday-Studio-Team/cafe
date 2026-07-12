@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://deaoq82qeackq" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cr2t2yoape3ak" path="res://models/ingredients_bag_model.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="2_sweqy"]
 [ext_resource type="Script" uid="uid://0vrj07axdu0p" path="res://ui/tablet/tablet.gd" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="4_hqtel"]
 
@@ -24,6 +25,7 @@ script = ExtResource("1_4flbx")
 camera = NodePath("CameraRig/Camera3D")
 aiming_ray = NodePath("CameraRig/Camera3D/RayCast3D")
 ingredients_bag = NodePath("CameraRig/Camera3D/IngredientsBag")
+ingredients_bag_scene = ExtResource("2_sweqy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
