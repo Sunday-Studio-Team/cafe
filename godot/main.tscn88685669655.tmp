@@ -509,16 +509,49 @@ stereo = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r43ev"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": null
-}],
+"frames": [],
 "loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.2,
+"texture": ExtResource("101_jegnu")
+}, {
+"duration": 0.2,
+"texture": ExtResource("102_rx6mv")
+}, {
+"duration": 0.2,
+"texture": ExtResource("103_31js7")
+}, {
+"duration": 0.2,
+"texture": ExtResource("104_0a4i0")
+}, {
+"duration": 0.2,
+"texture": ExtResource("105_i0xsp")
+}, {
+"duration": 0.2,
+"texture": ExtResource("106_kll2q")
+}, {
+"duration": 0.2,
+"texture": ExtResource("107_ft875")
+}, {
+"duration": 0.2,
+"texture": ExtResource("108_6hmxt")
+}, {
+"duration": 0.2,
+"texture": ExtResource("109_rhlye")
+}, {
+"duration": 0.2,
+"texture": ExtResource("110_pqvsh")
+}, {
+"duration": 0.2,
+"texture": ExtResource("111_3qj4k")
+}, {
+"duration": 0.2,
+"texture": ExtResource("112_mo8hc")
+}, {
+"duration": 0.2,
 "texture": ExtResource("113_gbg58")
 }],
 "loop": 1,
@@ -1585,7 +1618,10 @@ stream = ExtResource("14_yaehf")
 [node name="ActiveItemMenu" type="CanvasLayer" parent="." unique_id=537038309]
 
 [node name="ActiveItemSelection" parent="ActiveItemMenu" unique_id=81633795 instance=ExtResource("102_0a4i0")]
-visible = false
+outer_radius = 256
+inner_radius = 64
+line_width = 4
+IMAGE_OFFSET = Vector2(40, 40)
 
 [node name="Animation Canvas" type="CanvasLayer" parent="." unique_id=1926801417]
 process_mode = 3
@@ -1624,7 +1660,6 @@ process_mode = 3
 position = Vector2(992.00006, 538)
 scale = Vector2(3.505357, 3.420635)
 sprite_frames = SubResource("SpriteFrames_r43ev")
-animation = &"equ_hammer"
 
 [connection signal="animation_finished" from="Animation Canvas/Control/MarginContainer/SubViewportContainer/SubViewport/AnimatedSprite2D" to="Animation Canvas" method="_on_animated_sprite_2d_animation_finished"]
 

@@ -97,6 +97,9 @@ func handle_movement(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("use_item"):
 		Events.active_item_used.emit(Global.equipped_item)
+	
+	if Input.is_action_just_pressed("item_menu"):
+		Events.active_item_menu.emit()
 
 
 func handle_gravity(delta: float) -> void:

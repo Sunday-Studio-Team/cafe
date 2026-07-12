@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b37dkhfistnto"]
+
+[ext_resource type="Script" uid="uid://j1eitpbr3nt3" path="res://items/active_items/active_item_selection.gd" id="1_5vedp"]
+[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="2_avcgr"]
+
+[node name="ActiveItemSelection" type="Control" unique_id=81633795]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5vedp")
+bkg_color = Color(0, 0, 0, 0.5568628)
+line_color = Color(1, 1, 1, 1)
+highlight_color = Color(0.4117647, 0.4117647, 0.4117647, 0.80784315)
+options = [null, null, ExtResource("2_avcgr"), null, null]

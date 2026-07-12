@@ -124,10 +124,15 @@ func load_resources_from_folder(path: String, extension: String = "tres") -> Arr
 ## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"
 func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
-
+	
 
 #Equips the item:
 func equip_item(item: Item):
 	equipped_item = item
+	if item == null:
+		Events.emit_signal("play_item_animation", "default")
+		return
+		
 	if item.name == "Hammer":
 		Events.emit_signal("play_item_animation", "pul_hammer")
+	

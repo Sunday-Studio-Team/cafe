@@ -29,7 +29,7 @@ func _ready() -> void:
 				apply_stats()
 				Global.bank_money -= item.price
 				Global.owned_items.append(item)
-				Events.items_updated.emit()
+				Events.items_updated.emit() #signals items have changed
 				queue_free()
 			else:
 				clicked.emit(false)
