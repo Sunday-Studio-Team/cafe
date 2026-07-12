@@ -39,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="26_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dytf7oi1bf6o7" path="res://sprites/alert/frame_04_delay-0.04s.png" id="27_jcxqu"]
 [ext_resource type="Texture2D" uid="uid://jvv7706jqmaf" path="res://sprites/alert/frame_05_delay-0.05s.png" id="28_0arob"]
+[ext_resource type="Texture2D" uid="uid://c6fkp2w01emjt" path="res://environment/textures/lights vent cieling.png" id="28_wat4s"]
 [ext_resource type="Texture2D" uid="uid://byywig7v214so" path="res://sprites/alert/frame_06_delay-0.04s.png" id="29_dij0e"]
 [ext_resource type="Texture2D" uid="uid://ds0th57ag3r1d" path="res://sprites/alert/frame_07_delay-0.04s.png" id="30_k1udn"]
 [ext_resource type="Texture2D" uid="uid://bg7pew7xy8xc1" path="res://sprites/alert/frame_08_delay-0.04s.png" id="31_wat4s"]
@@ -192,6 +193,11 @@ size = Vector3(6, 0.1, 8)
 [sub_resource type="BoxMesh" id="BoxMesh_q16ga"]
 material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(20, 0.1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1udn"]
+albedo_texture = ExtResource("28_wat4s")
+uv1_scale = Vector3(15.995, 3.97, 14.81)
+uv1_offset = Vector3(0.05, -0.97, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_opecw"]
 material = SubResource("StandardMaterial3D_y5pqn")
@@ -509,7 +515,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(1420, 880)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="Button" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
@@ -856,6 +862,7 @@ mesh = SubResource("BoxMesh_l03hl")
 [node name="Roof" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=14358993]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -2)
 mesh = SubResource("BoxMesh_q16ga")
+surface_material_override/0 = SubResource("StandardMaterial3D_k1udn")
 
 [node name="Roof2" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=406058405]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -9)
@@ -877,7 +884,7 @@ size = Vector3(0.5, 1, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
 
 [node name="DoorwayPiece" parent="Environment/StoreRoom" unique_id=995689952 instance=ExtResource("26_tko6h")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.02268833, 0.20313454)
 
 [node name="WallPieceShort" parent="Environment/StoreRoom" unique_id=550947796 instance=ExtResource("24_ywjan")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, -8.742278e-08)
