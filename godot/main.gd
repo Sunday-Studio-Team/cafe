@@ -143,8 +143,8 @@ func _on_game_timer_timeout() -> void:
 
 	get_tree().paused = false
 	if (
-		Global.daily_profit >= Stats.current.daily_profit_goal
-		and Global.employee_rating >= Stats.current.employee_rating_goal
+			Global.daily_profit >= Stats.current.daily_profit_goal
+			and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
 		Global.day += 1
 	else:

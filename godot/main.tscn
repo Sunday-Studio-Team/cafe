@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://4rl0a3bpopmq" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
@@ -507,8 +507,19 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1420, 880)
 render_target_update_mode = 0
+
+[node name="Button" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, 0.25)
+offset_transform_rotation = 0.08726646
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 48
+text = "cancel"
 
 [node name="DayIndicator" type="CanvasLayer" parent="." unique_id=1793268735]
 
