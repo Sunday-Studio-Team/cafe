@@ -49,6 +49,7 @@ transform = Transform3D(0.5147956, -0.1656346, -0.84116036, -8.445128e-09, 0.981
 
 [node name="Tablet" type="MeshInstance3D" parent="CameraRig/Camera3D" unique_id=849939380 node_paths=PackedStringArray("machines_container")]
 transform = Transform3D(0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 0, 0, 1, 0.075, -0.2, -0.2)
+cast_shadow = 0
 mesh = SubResource("BoxMesh_0ffxp")
 script = ExtResource("3_i3pqv")
 machines_container = NodePath("Screen/SubViewport/MarginContainer/HBoxContainer")
