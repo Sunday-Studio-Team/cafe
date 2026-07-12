@@ -23,8 +23,8 @@ var score_chances: Dictionary = {
 	-3: 0.25,
 }
 var machine_time_to_make_drink := 4.0
-var customer_wait_time_machine := 35.0
-var customer_wait_time_window := 25.0
+var customer_wait_time_machine := 45.0
+var customer_wait_time_window := 30.0
 var time_to_manually_make_drink := 3.5
 var penalty_for_running := 4
 var penalty_for_handmade_drink := 5
