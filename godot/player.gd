@@ -9,6 +9,8 @@ const STRIDE_LENGTH := 0.75
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
+# to spawn when we drop the bag
+@export var ingredients_bag_scene: PackedScene
 
 # this is a var separate to the const cos it changes when sprint etc
 var move_speed: float = Stats.current.default_move_speed
@@ -47,8 +49,8 @@ func _physics_process(delta: float) -> void:
 	handle_gravity(delta)
 	#handle_footstep_sounds()
 	#tilt_camera()
+	handle_ingredients_bag()
 	move_and_slide()
-	handle_ingredients_bag_visibility()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -126,7 +128,7 @@ func handle_hovered_interactable() -> void:
 		return
 
 	var collider = aiming_ray.get_collider()
-	if collider is Interactable:
+	if collider is Interactable and collider.enabled:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null
@@ -171,5 +173,16 @@ func tilt_camera() -> void:
 	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
 
 
-func handle_ingredients_bag_visibility() -> void:
+func handle_ingredients_bag() -> void:
+	if (
+		Input.is_action_just_pressed("drop")
+		and Global.holding_ingredients
+		and not Global.in_ui
+	):
+		Global.holding_ingredients = false
+		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()
+		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
+		Global.main_scene.add_child(bag_to_drop)
+		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
+
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui

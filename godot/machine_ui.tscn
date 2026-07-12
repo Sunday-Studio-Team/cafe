@@ -61,31 +61,49 @@ custom_minimum_size = Vector2(300, 225)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CustomerTimer" type="PanelContainer" parent="VBoxContainer/CamFeed" unique_id=362326317]
+[node name="CustomerTimer" type="Control" parent="VBoxContainer/CamFeed" unique_id=985060453]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(12, 2.5)
-offset_transform_scale = Vector2(1.5, 1.5)
+offset_transform_position = Vector2(300, 25)
+offset_transform_position_ratio = Vector2(1.75, 1.25)
 offset_transform_rotation = 0.08726646
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/CamFeed/CustomerTimer" unique_id=731233711]
 texture_filter = 1
 custom_maximum_size = Vector2(25, 25)
-layout_mode = 2
+layout_mode = 0
+offset_right = 158.0
+offset_bottom = 34.125
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-1, -1)
-offset_transform_scale = Vector2(0.41, 0.41)
+offset_transform_scale = Vector2(0.5, 0.5)
 fill_mode = 4
 texture_under = ExtResource("1_sahxb")
 texture_over = ExtResource("2_rxjwk")
 texture_progress = ExtResource("3_pjr5n")
 
-[node name="Label" type="Label" parent="VBoxContainer/CamFeed/CustomerTimer" unique_id=1182337612]
-layout_mode = 2
+[node name="TimerIcon" type="Label" parent="VBoxContainer/CamFeed/CustomerTimer" unique_id=1182337612]
+layout_mode = 0
+offset_right = 158.0
+offset_bottom = 34.125
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.2, 0.75)
+offset_transform_scale = Vector2(1.5, 1.5)
 text = "⌛"
 horizontal_alignment = 1
+
+[node name="TimeBonusPanel" type="PanelContainer" parent="VBoxContainer/CamFeed/CustomerTimer" unique_id=882786859]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.25, 2.5)
+
+[node name="TimeBonusText" type="Label" parent="VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel" unique_id=119832678]
+layout_mode = 2
+offset_transform_position_ratio = Vector2(-0.25, 2.5)
+text = "+ 0.5⭐️ bonus"
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer" unique_id=1074364750]
 layout_mode = 2

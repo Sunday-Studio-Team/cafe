@@ -200,6 +200,8 @@
 [ext_resource type="Texture2D" uid="uid://b78xybgqtgo1r" path="res://sprites/2d animations/pull_hammer_animation/frame_09_delay-0.04s.png" id="123_trkoe"]
 [ext_resource type="Texture2D" uid="uid://dqcwoqa5xybd5" path="res://sprites/2d animations/pull_hammer_animation/frame_10_delay-0.04s.png" id="124_bvlej"]
 [ext_resource type="Texture2D" uid="uid://rjepqwkpr2aa" path="res://sprites/2d animations/pull_hammer_animation/frame_11_delay-0.05s.png" id="125_ycw8e"]
+[ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
+[ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -1317,7 +1319,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "hammer_indicator")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")
@@ -1344,7 +1346,7 @@ day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContai
 rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Stars")
 rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
 alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/SubViewport/AnimatedSprite2D")
-hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/Hammer Indicator")
+drop_button = NodePath("MarginContainer/VBoxContainer/DropButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -1475,6 +1477,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "[Q] Hammer to Fix Instantly"
+[node name="DropButton" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=1994757836]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.25, -0.25)
+offset_transform_rotation = -0.08726646
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 24
+text = "drop"
+icon = ExtResource("98_l0gw7")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
 layout_mode = 2

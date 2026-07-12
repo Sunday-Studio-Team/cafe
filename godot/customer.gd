@@ -87,12 +87,14 @@ func _on_order_approved(customer: Customer) -> void:
 	Global.employee_rating += bonus_points_for_time
 
 
-func _on_customer_left_machine(customer: Customer, drink_score) -> void:
+func _on_customer_left_machine(customer: Customer, _drink_score) -> void:
 	if customer != self:
 		return
 
 	time_bonus_label.hide()
-	if (drink_score > -3):
-		leave_store()
-	else:
-		Events.customer_approached_window.emit(self)
+	leave_store()
+	# window complaint mechanic (disabled for now)
+	#if (drink_score > -3):
+	#leave_store()
+	#else:
+	#Events.customer_approached_window.emit(self)

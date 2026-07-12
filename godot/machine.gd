@@ -3,6 +3,8 @@ class_name Machine
 extends Node3D
 
 @export var spot_for_customer: Marker3D
+# where the player gets put when they interact with machine
+@export var spot_for_player: Marker3D
 @export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
 @export var timer: Timer
@@ -31,13 +33,26 @@ extends Node3D
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
+@export var time_bonus_panel: PanelContainer
+@export var time_bonus_label: Label
 
 var customer: Customer
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
 var max_ingredients: int = 100
-var ingredients = max_ingredients
+var ingredients: int = max_ingredients:
+	set(new_value):
+		var change := new_value - ingredients
+
+		if new_value > max_ingredients:
+			change = max_ingredients - ingredients
+			ingredients = max_ingredients
+		else:
+			ingredients = new_value
+
+		if not change == 0:
+			print("ingredients changed by %s on %s" % [change, name])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
 
@@ -127,15 +142,14 @@ func _physics_process(_delta: float) -> void:
 		else:
 			customer_wait_indicator.modulate = Color.RED
 
+		if customer.bonus_points_for_time > 0:
+			time_bonus_label.text = "+%s⭐️ bonus" % [customer.bonus_points_for_time / 2.0]
+		else:
+			time_bonus_label.text = "%s⭐️ penalty" % [customer.bonus_points_for_time / 2.0]
+		time_bonus_panel.visible = customer.bonus_points_for_time != 0
+
 	if make_drink_button.held:
 		Global.holding_make_drink_button = true
-
-	# disable reject/make buttons if no ingredients
-	# (not sure if this is best way to do it, probably should enable them but
-	# give them custom behaviour that gives player feeback and makes sure they
-	# know why they arent working)
-	#make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
-	#reject_button.enabled = ingredients >= Stats.current.ingredients_per_order
 
 
 func set_customer(c: Customer) -> void:
@@ -309,8 +323,6 @@ func refill() -> void:
 	ingredients += (
 		Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
 	)
-	if ingredients > max_ingredients:
-		ingredients = max_ingredients
 
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
@@ -330,29 +342,35 @@ func cancel_fix_minigame() -> void:
 
 func accept_order() -> void:
 	gui_3d.exit()
+
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
 	final_order_indicator.text = "dispensing drink to customer . . ."
+
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
+
 	drink_customer_score_label.hide()
 	price_label.show()
 	Global.score_update_message = "sold %s" % order.made_drink.name
 	Global.daily_profit += order.made_drink.price + order.tip
+
 	await get_tree().create_timer(0.5, false).timeout
+
 	price_label.hide()
 	drink_customer_score_label.show()
 	Global.score_update_message = "customer rated %s" % order.made_drink.name
 	Global.employee_rating += order.score
 	await get_tree().create_timer(0.5, false).timeout
+
 	drink_customer_score_label.hide()
 
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)
 	# pretty clunky right now, with a score check here and a score check in _on_customer_left_machine
-	if (order.score <= -3):
-		#await get_tree().create_timer(randf_range(0.3, 1), false).timeout
-		customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
+	# NOTE: disabled for now !
+	#if (order.score <= -3):
+	#customer.body.modulate = Color(0.8, 0.3, 0.3, 1.0)
 	# -------------------------------------------------
 
 	await get_tree().create_timer(1.5, false).timeout
@@ -374,9 +392,12 @@ func reject_order() -> void:
 
 func make_drink_manually() -> void:
 	gui_3d.exit()
+
 	if ingredients < Stats.current.ingredients_per_order:
 		return
+
 	consume_ingredients()
+
 	order.made_drink = order.ordered_drink
 	order.score = 3
 	final_order_indicator.text = (
@@ -384,6 +405,7 @@ func make_drink_manually() -> void:
 		% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	display_drink_score()
+
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
@@ -397,7 +419,8 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
-	gui_3d.exit()
+	if gui_3d.player_using_me:
+		gui_3d.exit()
 	gui_3d.interactable.enabled = false
 	customer_order_indicator.hide()
 	fix_machine_button.show()
