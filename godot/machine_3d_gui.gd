@@ -39,9 +39,26 @@ func _ready():
 			Global.in_machine_ui = true
 			exit_button.show()
 
+			create_tween().tween_property(
+				Global.player,
+				"global_rotation_degrees",
+				machine.global_rotation_degrees,
+				0.1,
+			)
+			create_tween().tween_property(
+				Global.player,
+				"global_position",
+				machine.spot_for_player.global_position,
+				0.1,
+			)
 			var cam: Camera3D = Global.player.camera
 			cam_trans_b4_enter = cam.transform
-			create_tween().tween_property(cam, "global_transform", cam_spot.global_transform, CAM_TWEEN_DUR)
+			create_tween().tween_property(
+				cam,
+				"global_transform",
+				cam_spot.global_transform,
+				CAM_TWEEN_DUR,
+			)
 	)
 
 	exit_button.pressed.connect(exit)
@@ -69,7 +86,12 @@ func exit() -> void:
 	if Global.in_machine_ui:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		Global.in_machine_ui = false
-		create_tween().tween_property(Global.player.camera, "transform", cam_trans_b4_enter, CAM_TWEEN_DUR)
+		create_tween().tween_property(
+			Global.player.camera,
+			"transform",
+			cam_trans_b4_enter,
+			CAM_TWEEN_DUR,
+		)
 
 
 func _mouse_entered_area():

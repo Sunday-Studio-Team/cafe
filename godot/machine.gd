@@ -3,6 +3,8 @@ class_name Machine
 extends Node3D
 
 @export var spot_for_customer: Marker3D
+# where the player gets put when they interact with machine
+@export var spot_for_player: Marker3D
 @export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
 @export var timer: Timer
