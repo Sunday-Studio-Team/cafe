@@ -26,11 +26,16 @@
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
+[ext_resource type="PackedScene" uid="uid://cbxfoj2piyybe" path="res://environment/wall_piece_long.tscn" id="22_k1udn"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="Texture2D" uid="uid://c86eywh2qbnig" path="res://sprites/alert/frame_00_delay-0.04s.png" id="23_vieuh"]
+[ext_resource type="PackedScene" uid="uid://dmn6astu67x2i" path="res://environment/hatch_piece.tscn" id="23_wat4s"]
 [ext_resource type="Texture2D" uid="uid://bdyrmd0hdrdvh" path="res://sprites/alert/frame_01_delay-0.04s.png" id="24_yjja3"]
+[ext_resource type="PackedScene" uid="uid://ck5hb0yuvfdsa" path="res://environment/wall_piece_short.tscn" id="24_ywjan"]
 [ext_resource type="Texture2D" uid="uid://v5nn6up6aa13" path="res://sprites/alert/frame_02_delay-0.04s.png" id="25_l0gw7"]
+[ext_resource type="PackedScene" uid="uid://cvx1me2mi6tpm" path="res://environment/corner_piece.tscn" id="25_m74q3"]
 [ext_resource type="Texture2D" uid="uid://b07v7ssw28quk" path="res://sprites/alert/frame_03_delay-0.04s.png" id="26_inymm"]
+[ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="26_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dytf7oi1bf6o7" path="res://sprites/alert/frame_04_delay-0.04s.png" id="27_jcxqu"]
 [ext_resource type="Texture2D" uid="uid://jvv7706jqmaf" path="res://sprites/alert/frame_05_delay-0.05s.png" id="28_0arob"]
 [ext_resource type="Texture2D" uid="uid://byywig7v214so" path="res://sprites/alert/frame_06_delay-0.04s.png" id="29_dij0e"]
@@ -118,24 +123,21 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 volumetric_fog_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.29411766)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
+albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
+material = SubResource("StandardMaterial3D_cegan")
+size = Vector3(3, 0.1, 0.25)
 
-[sub_resource type="TextMesh" id="TextMesh_yaehf"]
-material = SubResource("StandardMaterial3D_2cqfq")
-text = "store room"
-pixel_size = 0.025
-depth = 0.025
+[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
+size = Vector3(3, 0.1, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
 albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_j2xdn"]
-viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
+viewport_path = NodePath("BreakRoomDoor/Sign/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
 albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
@@ -152,15 +154,64 @@ text = "customer
 area"
 depth = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
-albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
+albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
-material = SubResource("StandardMaterial3D_cegan")
-size = Vector3(3, 0.1, 0.25)
+[sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(10, 0.1, 8)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
-size = Vector3(3, 0.1, 0.25)
+[sub_resource type="BoxMesh" id="BoxMesh_y5pqn"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(2, 0.1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
+albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(12, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jofr6"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(4, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7olkn"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(4, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u58gx"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(20, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l03hl"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(6, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q16ga"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(20, 0.1, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_opecw"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(6, 0.1, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4tnuu"]
+material = SubResource("StandardMaterial3D_y5pqn")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cl0mu"]
+material = SubResource("StandardMaterial3D_jofr6")
+size = Vector3(4, 0.1, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_yaehf"]
+material = SubResource("StandardMaterial3D_2cqfq")
+text = "store room"
+pixel_size = 0.025
+depth = 0.025
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alert/SubViewport")
@@ -420,7 +471,7 @@ game_timer = NodePath("GameTimer")
 window = NodePath("Window")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
-desk = NodePath("Building/Desk")
+desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
 minigame_controller = NodePath("MinigameController")
@@ -478,7 +529,7 @@ vertical_alignment = 1
 [node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
 visible = false
 ui = NodePath("../../UI")
-irl_new_shop_items_indicator = NodePath("../../Building/Desk/NewShopItems")
+irl_new_shop_items_indicator = NodePath("../../Desk/NewShopItems")
 
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
@@ -488,9 +539,6 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
 shape = SubResource("WorldBoundaryShape3D_2cqfq")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor" unique_id=1657852407]
-shape = SubResource("WorldBoundaryShape3D_2cqfq")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
 
@@ -498,266 +546,6 @@ environment = SubResource("Environment_h2yge")
 transform = Transform3D(0.9659258, 2.956346e-08, -0.25881907, 0.12940952, -0.8660253, 0.48296285, -0.22414385, -0.5, -0.83651626, 0, 10, 0)
 light_color = Color(0.6745098, 0.5647059, 0.5254902, 1)
 shadow_enabled = true
-
-[node name="Building" type="Node3D" parent="." unique_id=743168160]
-
-[node name="CustomerArea" type="CSGCombiner3D" parent="Building" unique_id=148944054]
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/CustomerArea" unique_id=1002136365]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(10, 3, 9)
-
-[node name="Void" type="CSGBox3D" parent="Building/CustomerArea" unique_id=760034625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.5, 0.05)
-operation = 2
-size = Vector3(9.9, 2.9, 9)
-
-[node name="Window" type="CSGBox3D" parent="Building/CustomerArea" unique_id=2037732402]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, -4.5)
-operation = 2
-size = Vector3(2, 1, 0.1)
-
-[node name="Door" type="CSGBox3D" parent="Building/CustomerArea" unique_id=2092157089]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -4.5)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Doorway2" type="CSGBox3D" parent="Building/CustomerArea" unique_id=1948693067]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 1.0515031, 0.85)
-operation = 2
-size = Vector3(0.505, 2, 1)
-
-[node name="BackWall" type="CSGCombiner3D" parent="Building" unique_id=480264500]
-use_collision = true
-
-[node name="Wall" type="CSGBox3D" parent="Building/BackWall" unique_id=251660152]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.4)
-size = Vector3(9.9, 2.9, 0.1)
-material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="Window" type="CSGBox3D" parent="Building/BackWall" unique_id=711147860]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3999999, 1.6999999, 4.4)
-operation = 2
-size = Vector3(2.25, 1.5, 0.1)
-
-[node name="SideWall" type="CSGCombiner3D" parent="Building" unique_id=1154493046]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.6, 0, 0)
-use_collision = true
-
-[node name="Wall" type="CSGBox3D" parent="Building/SideWall" unique_id=1199950967]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49999994, 1.5, 4.4)
-size = Vector3(9.9, 2.9, 0.1)
-material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="BackRoom" type="CSGCombiner3D" parent="Building" unique_id=1068869310]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.95)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/BackRoom" unique_id=159442344]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(15, 3, 9)
-
-[node name="Void" type="CSGBox3D" parent="Building/BackRoom" unique_id=703396434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.03203392)
-operation = 2
-size = Vector3(14.9, 2.9, 8.9)
-
-[node name="Void2" type="CSGBox3D" parent="Building/BackRoom" unique_id=1398872124]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5166847, 1.5, -4.4999995)
-operation = 2
-size = Vector3(12, 2.9, 0.2)
-material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="Door" type="CSGBox3D" parent="Building/BackRoom" unique_id=1245701505]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.491553, 0.99999994, -1.5561385)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="LowWall" type="CSGBox3D" parent="Building/BackRoom" unique_id=2081912894]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0.5, -4)
-size = Vector3(1, 1, 0.1)
-
-[node name="FrontDesk" type="CSGCombiner3D" parent="Building/BackRoom" unique_id=2009448595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Building/BackRoom/FrontDesk" unique_id=114203699]
-transform = Transform3D(0.96592593, 0, -0.25881907, 0, 1, 0, 0.25881907, 0, 0.96592593, 1.4000001, 0.5, -3.7999997)
-size = Vector3(0.5, 1, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Building/BackRoom/FrontDesk" unique_id=1990268840]
-transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, 2.9, 0.5, -4.1)
-size = Vector3(0.5, 1, 2)
-
-[node name="Door2" type="CSGBox3D" parent="Building/BackRoom" unique_id=608670982]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.99999994, 4.5081425)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Window" type="CSGBox3D" parent="Building/BackRoom" unique_id=692264008]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 4.6453276)
-operation = 2
-size = Vector3(1.75, 1, 0.5)
-
-[node name="BreakroomDoorway" type="CSGBox3D" parent="Building/BackRoom" unique_id=1331323864]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.5, 0.99999994, -3.5)
-operation = 2
-size = Vector3(1, 2, 0.1)
-
-[node name="Doorway2" type="CSGBox3D" parent="Building/BackRoom" unique_id=62918386]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1.0310736, -4.75)
-operation = 2
-size = Vector3(1, 2, 1)
-
-[node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/BackRoom2" unique_id=930105116]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4546285, 1.5, 0)
-size = Vector3(24, 3, 9)
-
-[node name="Void" type="CSGBox3D" parent="Building/BackRoom2" unique_id=59185805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4058976, 1.5, -0.05000019)
-operation = 2
-size = Vector3(23.9, 2.9, 9)
-
-[node name="StoreRoom" type="CSGCombiner3D" parent="Building" unique_id=1595009912]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.010478, 0, 16.887238)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/StoreRoom" unique_id=909590115]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(5, 3, 7)
-
-[node name="Void" type="CSGBox3D" parent="Building/StoreRoom" unique_id=2142819468]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.9621792)
-operation = 2
-size = Vector3(4.9, 2.9, 3)
-
-[node name="Door" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1960340312]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -3.4918575)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Shelf" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1245730084]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7501247, -0.7672291)
-size = Vector3(5, 0.1, 1)
-
-[node name="IngredientsBag" parent="Building/StoreRoom/Shelf" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.34170055, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag2" parent="Building/StoreRoom/Shelf" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.6065731, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag3" parent="Building/StoreRoom/Shelf" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 0.34170055, 0.13795435, -0.0006752014)
-
-[node name="IngredientsBag4" parent="Building/StoreRoom/Shelf" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0.024939537, 0.13795435, -0.40213585)
-
-[node name="IngredientsBag5" parent="Building/StoreRoom/Shelf" unique_id=587147078 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.22939682, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag6" parent="Building/StoreRoom/Shelf" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.8866453, 0.13795435, -0.11124611)
-
-[node name="Sign" type="MeshInstance3D" parent="Building/StoreRoom" unique_id=1748779659]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0216227, 2.1822639, -3.5186043)
-mesh = SubResource("TextMesh_yaehf")
-
-[node name="BreakRoom" type="CSGCombiner3D" parent="Building" unique_id=868477188]
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1478688247]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
-size = Vector3(4, 3, 6)
-
-[node name="Void" type="CSGBox3D" parent="Building/BreakRoom" unique_id=2135782914]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
-operation = 2
-size = Vector3(3.9, 2.9, 5.9)
-
-[node name="Doorway" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1331827105]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.433789, 0.99999994, 5.5)
-operation = 2
-size = Vector3(1, 2, 0.1)
-
-[node name="HallwayToCustomerArea" type="CSGCombiner3D" parent="Building" unique_id=1167004986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=284017547]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.4, 2)
-size = Vector3(2, 3, 5)
-
-[node name="Void" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=1661541318]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.4, 2)
-operation = 2
-size = Vector3(1.9, 2.9, 4.9)
-
-[node name="Doorway" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=547147232]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6999998, 1, 4.2)
-operation = 2
-size = Vector3(1, 2, 1)
-
-[node name="Doorway2" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=1146012207]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1, 0.85)
-operation = 2
-size = Vector3(1, 2, 1)
-
-[node name="Desk" parent="Building" unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5)
-
-[node name="BreakRoomDoor" type="Node3D" parent="Building" unique_id=18232531 node_paths=PackedStringArray("close_sound")]
-transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.41727, 0, 4.9959364)
-script = ExtResource("6_d13ii")
-close_sound = NodePath("CloseSound")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Building/BreakRoomDoor" unique_id=204670809]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
-use_collision = true
-size = Vector3(0.1, 2, 1)
-material = SubResource("StandardMaterial3D_1u8w0")
-
-[node name="CloseSound" type="AudioStreamPlayer3D" parent="Building/BreakRoomDoor" unique_id=2035882888]
-stream = ExtResource("7_1u8w0")
-volume_db = -20.0
-
-[node name="Sign" type="Sprite3D" parent="Building/BreakRoomDoor" unique_id=742288546]
-transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
-shaded = true
-texture = SubResource("ViewportTexture_j2xdn")
-
-[node name="SubViewport" type="SubViewport" parent="Building/BreakRoomDoor/Sign" unique_id=1054434373]
-
-[node name="ColorRect" type="ColorRect" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=456523841]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=1004293169]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 96
-text = "BREAK
-ROOM"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EmployeeAreaSign" type="MeshInstance3D" parent="Building" unique_id=544386463]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.8483644, 2.3, 0.8688429)
-mesh = SubResource("TextMesh_vn1tu")
-
-[node name="CustomerAreaSign" type="MeshInstance3D" parent="Building" unique_id=136068731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7000003, 2.3, 4.6000004)
-mesh = SubResource("TextMesh_lswn8")
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
@@ -769,27 +557,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
 
 [node name="Machine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
 process_mode = 4
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.3999996, 0.1, 1.2999998)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 1.3)
 visible = false
 
 [node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 3.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
 
 [node name="Machine3" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.8)
 
 [node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
 process_mode = 4
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.4, 0.1, -2.7000003)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.7)
 visible = false
 
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4912045, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 3.5)
 
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
 
 [node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.6975236, 4.209534)
+transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -7.047043, 2.6975236, 4.6095347)
 rotation_pause_length = 4.0
 
 [node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
@@ -807,7 +595,7 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 spot_angle = 25.0
 
 [node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.216614, 1.3069857, 4.425891)
+transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.716614, 1.4069858, 4.1258907)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -816,10 +604,10 @@ wait_time = 120.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 9)
 
 [node name="ItemShelf" type="Node3D" parent="." unique_id=195864544 node_paths=PackedStringArray("item_slots_parent")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 11.216949, 1.1999999, 9)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 12.81695, 1.1999999, 8.5)
 script = ExtResource("10_82xsv")
 shelf_item_scene = ExtResource("11_getpj")
 item_slots_parent = NodePath("ItemSlots")
@@ -851,6 +639,288 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
 shape = SubResource("BoxShape3D_getpj")
+
+[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.083761, 0, 4.5)
+
+[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound")]
+transform = Transform3D(-0.25881922, 0, -0.9659259, 0, 1, 0, 0.9659259, 0, -0.25881922, 8.917271, 0, 4.4959364)
+script = ExtResource("6_d13ii")
+close_sound = NodePath("CloseSound")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor" unique_id=204670809]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
+use_collision = true
+size = Vector3(0.1, 2, 1)
+material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="CloseSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=2035882888]
+stream = ExtResource("7_1u8w0")
+volume_db = -20.0
+
+[node name="Sign" type="Sprite3D" parent="BreakRoomDoor" unique_id=742288546]
+transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
+shaded = true
+texture = SubResource("ViewportTexture_j2xdn")
+
+[node name="SubViewport" type="SubViewport" parent="BreakRoomDoor/Sign" unique_id=1054434373]
+
+[node name="ColorRect" type="ColorRect" parent="BreakRoomDoor/Sign/SubViewport" unique_id=456523841]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BreakRoomDoor/Sign/SubViewport" unique_id=1004293169]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "BREAK
+ROOM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmployeeAreaSign" type="MeshInstance3D" parent="." unique_id=544386463]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.9483643, 2.3, -0.83115715)
+mesh = SubResource("TextMesh_vn1tu")
+
+[node name="CustomerAreaSign" type="MeshInstance3D" parent="." unique_id=136068731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1000004, 2.3, 4.3)
+mesh = SubResource("TextMesh_lswn8")
+
+[node name="Environment" type="Node3D" parent="." unique_id=563251901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
+
+[node name="CustomerArea" type="Node3D" parent="Environment" unique_id=1276105761]
+
+[node name="WallPieceLong" parent="Environment/CustomerArea" unique_id=1045992760 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 0)
+
+[node name="HatchPiece" parent="Environment/CustomerArea" unique_id=163389660 instance=ExtResource("23_wat4s")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 0)
+
+[node name="HatchPiece2" parent="Environment/CustomerArea" unique_id=824672086 instance=ExtResource("23_wat4s")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.9999995, 0, -7.9999995)
+
+[node name="WallPieceShort" parent="Environment/CustomerArea" unique_id=129511552 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1, 0, 0)
+
+[node name="WallPieceLong2" parent="Environment/CustomerArea" unique_id=449688472 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.9999999, 0, -1.9999999)
+
+[node name="WallPieceLong3" parent="Environment/CustomerArea" unique_id=1123635350 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 0, -6)
+
+[node name="WallPieceLong6" parent="Environment/CustomerArea" unique_id=1709963996 instance=ExtResource("22_k1udn")]
+transform = Transform3D(3.059797e-07, 0, -1, 0, 1, 0, 1, 0, 3.059797e-07, 8.000001, 0, -2.0000014)
+
+[node name="WallPieceLong7" parent="Environment/CustomerArea" unique_id=2001037871 instance=ExtResource("22_k1udn")]
+transform = Transform3D(3.059797e-07, 0, -1, 0, 1, 0, 1, 0, 3.059797e-07, 10.000001, 0, -2.0000021)
+
+[node name="WallPieceShort2" parent="Environment/CustomerArea" unique_id=930406507 instance=ExtResource("24_ywjan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -7.7999997)
+
+[node name="WallPieceShort5" parent="Environment/CustomerArea" unique_id=834126774 instance=ExtResource("24_ywjan")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7.7999997)
+
+[node name="WallPieceShort3" parent="Environment/CustomerArea" unique_id=101892382 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, -7)
+
+[node name="WallPieceShort4" parent="Environment/CustomerArea" unique_id=1665587406 instance=ExtResource("24_ywjan")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 9, 0, -6)
+
+[node name="CornerPiece" parent="Environment/CustomerArea" unique_id=1252870026 instance=ExtResource("25_m74q3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0.2)
+
+[node name="DoorwayPiece" parent="Environment/CustomerArea" unique_id=518519592 instance=ExtResource("26_tko6h")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 9, 0, 0)
+
+[node name="DoorwayPiece3" parent="Environment/CustomerArea" unique_id=1081414290 instance=ExtResource("26_tko6h")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.000001, 0, -8)
+
+[node name="DoorwayPiece2" parent="Environment/CustomerArea" unique_id=1959777613 instance=ExtResource("26_tko6h")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, -5)
+
+[node name="WallPieceShort6" parent="Environment/CustomerArea" unique_id=61899105 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -5)
+
+[node name="Roof" type="MeshInstance3D" parent="Environment/CustomerArea" unique_id=1539259139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 3, -4)
+mesh = SubResource("BoxMesh_0ffxp")
+
+[node name="Roof2" type="MeshInstance3D" parent="Environment/CustomerArea" unique_id=1314548239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, -3)
+mesh = SubResource("BoxMesh_y5pqn")
+
+[node name="Floor" type="MeshInstance3D" parent="Environment/CustomerArea" unique_id=657010812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+mesh = SubResource("BoxMesh_rkau7")
+
+[node name="BreakRoom" type="Node3D" parent="Environment" unique_id=988114770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="DoorwayPiece" parent="Environment/BreakRoom" unique_id=821917615 instance=ExtResource("26_tko6h")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 2, 0, 1)
+
+[node name="WallPieceShort" parent="Environment/BreakRoom" unique_id=363839860 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 0)
+
+[node name="WallPieceShort2" parent="Environment/BreakRoom" unique_id=1124961392 instance=ExtResource("24_ywjan")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 6, 0, 0.99999976)
+
+[node name="WallPieceLong" parent="Environment/BreakRoom" unique_id=860014391 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.9999999, 0, 4)
+
+[node name="WallPieceLong3" parent="Environment/BreakRoom" unique_id=1783524960 instance=ExtResource("22_k1udn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.7484555e-07)
+
+[node name="WallPieceLong2" parent="Environment/BreakRoom" unique_id=954637903 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0, 4)
+
+[node name="WallPieceLong4" parent="Environment/BreakRoom" unique_id=1778505889 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.9999998, 0, 6)
+
+[node name="Roof" type="MeshInstance3D" parent="Environment/BreakRoom" unique_id=35610809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 3)
+mesh = SubResource("BoxMesh_jofr6")
+
+[node name="Floor" type="MeshInstance3D" parent="Environment/BreakRoom" unique_id=930735005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+mesh = SubResource("BoxMesh_7olkn")
+
+[node name="BackRoom" type="Node3D" parent="Environment" unique_id=519216479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="WallPieceLong" parent="Environment/BackRoom" unique_id=989985274 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0, 1)
+
+[node name="WallPieceLong2" parent="Environment/BackRoom" unique_id=1439164411 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 1.0000004)
+
+[node name="WallPieceLong3" parent="Environment/BackRoom" unique_id=529551250 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3, 0, 1.0000007)
+
+[node name="WallPieceLong4" parent="Environment/BackRoom" unique_id=904449277 instance=ExtResource("22_k1udn")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -13, 0, -0.99999833)
+
+[node name="WallPieceLong5" parent="Environment/BackRoom" unique_id=1429961777 instance=ExtResource("22_k1udn")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -13.000001, 0, -4.999998)
+
+[node name="WallPieceLong6" parent="Environment/BackRoom" unique_id=313438971 instance=ExtResource("22_k1udn")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -13.000002, 0, -8.999998)
+
+[node name="WallPieceLong7" parent="Environment/BackRoom" unique_id=943356805 instance=ExtResource("22_k1udn")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -11.000003, 0, -12.999998)
+
+[node name="WallPieceShort" parent="Environment/BackRoom" unique_id=2075108936 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13, 0, -12)
+
+[node name="WallPieceShort2" parent="Environment/BackRoom" unique_id=2078353845 instance=ExtResource("24_ywjan")]
+transform = Transform3D(1, 0, -5.563627e-08, 0, 1, 0, 5.563627e-08, 0, 1, -8, 0, -13)
+
+[node name="WallPieceShort3" parent="Environment/BackRoom" unique_id=558776506 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 0, 4.371139e-08)
+
+[node name="DoorwayPiece" parent="Environment/BackRoom" unique_id=1567156202 instance=ExtResource("26_tko6h")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 0, -2)
+
+[node name="WallPieceLong8" parent="Environment/BackRoom" unique_id=834723144 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11, 0, 1)
+
+[node name="Floor" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=819726107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+mesh = SubResource("BoxMesh_u58gx")
+
+[node name="Floor2" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=1784540031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
+mesh = SubResource("BoxMesh_l03hl")
+
+[node name="Roof" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=14358993]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -2)
+mesh = SubResource("BoxMesh_q16ga")
+
+[node name="Roof2" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=406058405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3, -9)
+mesh = SubResource("BoxMesh_opecw")
+
+[node name="FrontDesk" type="CSGCombiner3D" parent="Environment/BackRoom" unique_id=1364019414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1000004, 1, 0.40000057)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/BackRoom/FrontDesk" unique_id=114203699]
+transform = Transform3D(0.96592593, 0, -0.25881907, 0, 1, 0, 0.25881907, 0, 0.96592593, -3.3000002, -0.5, -4.55)
+size = Vector3(0.5, 1, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/BackRoom/FrontDesk" unique_id=1990268840]
+transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, -1.8000002, -0.5, -4.8500004)
+size = Vector3(0.5, 1, 2)
+
+[node name="StoreRoom" type="Node3D" parent="Environment" unique_id=1090696470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
+
+[node name="DoorwayPiece" parent="Environment/StoreRoom" unique_id=995689952 instance=ExtResource("26_tko6h")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3, 0, 0)
+
+[node name="WallPieceShort" parent="Environment/StoreRoom" unique_id=550947796 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, -8.742278e-08)
+
+[node name="WallPieceShort2" parent="Environment/StoreRoom" unique_id=140273727 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.371139e-08, 0, 1)
+
+[node name="WallPieceShort3" parent="Environment/StoreRoom" unique_id=1598656149 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 0.9999998)
+
+[node name="WallPieceShort4" parent="Environment/StoreRoom" unique_id=973184045 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 2.9999998)
+
+[node name="WallPieceShort5" parent="Environment/StoreRoom" unique_id=337496998 instance=ExtResource("24_ywjan")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 3)
+
+[node name="WallPieceLong" parent="Environment/StoreRoom" unique_id=768785082 instance=ExtResource("22_k1udn")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 4)
+
+[node name="Roof" type="MeshInstance3D" parent="Environment/StoreRoom" unique_id=2141389222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 2)
+mesh = SubResource("BoxMesh_4tnuu")
+
+[node name="Floor" type="MeshInstance3D" parent="Environment/StoreRoom" unique_id=1411438706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+mesh = SubResource("BoxMesh_cl0mu")
+
+[node name="Shelf" type="CSGBox3D" parent="Environment/StoreRoom" unique_id=1245730084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.989522, 0.7501247, 3.520008)
+use_collision = true
+size = Vector3(5, 0.1, 1)
+
+[node name="Sign" type="MeshInstance3D" parent="Environment/StoreRoom" unique_id=1748779659]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.0111446, 2.2822638, -0.03136635)
+mesh = SubResource("TextMesh_yaehf")
+
+[node name="Ingredients" type="Node3D" parent="." unique_id=1312596977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.692263, 1.6382039, 26.78452)
+
+[node name="IngredientsBag" parent="Ingredients" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.023485, -0.7501248, -13.604155)
+
+[node name="IngredientsBag2" parent="Ingredients" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.2883577, -0.7501248, -13.604155)
+
+[node name="IngredientsBag3" parent="Ingredients" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 5.023485, -0.7501248, -13.265186)
+
+[node name="IngredientsBag4" parent="Ingredients" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 4.706724, -0.7501248, -13.666647)
+
+[node name="IngredientsBag5" parent="Ingredients" unique_id=587147078 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 4.452388, -0.7501248, -13.604155)
+
+[node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.375757)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button")]
 script = ExtResource("5_lquwl")
