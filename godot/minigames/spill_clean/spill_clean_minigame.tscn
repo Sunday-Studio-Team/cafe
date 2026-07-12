@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c8jilqo1pb0th"]
+
+[ext_resource type="Texture2D" uid="uid://cqn3lryxh5bh4" path="res://minigames/spill_clean/stains/stain2.png" id="1_vadif"]
+[ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/erasable_canvas.gd" id="2_imr7o"]
+
+[node name="SpillCleanMinigame" type="Node2D" unique_id=219843307]
+
+[node name="Panel" type="Panel" parent="." unique_id=1156563764]
+offset_right = 1920.0
+offset_bottom = 892.0
+
+[node name="ErasableCanvas" type="Sprite2D" parent="." unique_id=2143233988 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
+position = Vector2(960, 446)
+scale = Vector2(0.50149524, 0.50149524)
+texture = ExtResource("1_vadif")
+script = ExtResource("2_imr7o")
+eraser_radius = 80
+allowed_remaining_ratio = 0.0
+canvas_sprite = NodePath(".")
+progress_label = NodePath("../Label")
+
+[node name="Label" type="Label" parent="." unique_id=622094738]
+offset_left = 585.0
+offset_top = 900.0
+offset_right = 1335.0
+offset_bottom = 1000.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 50
+text = "Percentage"
+horizontal_alignment = 1
+vertical_alignment = 1
