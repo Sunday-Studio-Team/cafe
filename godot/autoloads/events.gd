@@ -31,3 +31,6 @@ signal force_close_minigame
 #Active Items
 signal active_item_used(item: Item)
 signal select_item(selection: Item)
+
+#Animations
+signal play_item_animation(animation: String)

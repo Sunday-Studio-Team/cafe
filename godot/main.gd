@@ -22,6 +22,8 @@ extends Node3D
 #Active Item
 @export var active_clock_timer : Timer
 
+@export var animate : AnimatedSprite2D
+
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -30,6 +32,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
@@ -77,7 +80,7 @@ func _ready() -> void:
 	
 	#ACTIVE Items
 	Events.active_item_used.connect(active_item_used)
-
+	
 
 
 func get_stats() -> void:
@@ -197,3 +200,7 @@ func active_item_used(item: Item):
 
 func _on_clock_timer_timeout():
 	game_timer.paused = false
+
+
+func _on_animated_sprite_2d_animation_finished():
+	pass # Replace with function body.
