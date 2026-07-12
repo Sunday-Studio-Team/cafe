@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://nbfwdp3xcbh3" path="res://ui/pc/shop_app.gd" id="2_c06av"]
 [ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="3_mamje"]
 [ext_resource type="AudioStream" uid="uid://7lrf1ronpj3e" path="res://audio/cant_buy_item.wav" id="4_488el"]
+[ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="4_jf33y"]
 [ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
 
 [node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button") instance=ExtResource("1_swvwp")]
@@ -19,6 +20,7 @@ reroll_button = NodePath("MarginContainer/VBoxContainer/ReRoll")
 
 [node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jf33y")
 text = "today's deals:"
 horizontal_alignment = 1
 

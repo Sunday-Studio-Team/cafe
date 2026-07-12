@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="5_r71nh"]
 [ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="6_7ubrx"]
 [ext_resource type="Script" uid="uid://cp5xre3ygh6sc" path="res://ui/pc/email_viewer.gd" id="6_lwc43"]
+[ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="8_7ubrx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6p1nn"]
 font_size = 24
@@ -54,6 +55,7 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" index="0" unique_id=1260820471]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("8_7ubrx")
 text = "Inbox"
 label_settings = SubResource("LabelSettings_6p1nn")
 horizontal_alignment = 1
@@ -147,6 +149,7 @@ label_settings = SubResource("LabelSettings_pl26c")
 
 [node name="EmailSubjectLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="1" unique_id=569509916]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("8_7ubrx")
 text = "Email Subject"
 label_settings = SubResource("LabelSettings_fdysk")
 

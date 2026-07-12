@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://1efsqsuvbkts"]
 
+[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="1_0qe70"]
 [ext_resource type="Script" uid="uid://dp6xi3yg7ev4q" path="res://ui/pc/pc.gd" id="1_yl021"]
 [ext_resource type="Texture2D" uid="uid://bmqsi4w6n2thu" path="res://sprites/email_icon.png" id="2_am8ka"]
 [ext_resource type="Texture2D" uid="uid://3x0kmienore" path="res://sprites/wallpaper.png" id="2_k03dd"]
@@ -9,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="8_4xb7n"]
 
+[sub_resource type="Theme" id="Theme_8jakj"]
+default_font = ExtResource("1_0qe70")
+
 [node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -16,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_8jakj")
 script = ExtResource("1_yl021")
 email_button = NodePath("MarginContainer/Apps/Email")
 shop_button = NodePath("MarginContainer/Apps/Shop")
