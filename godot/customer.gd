@@ -92,7 +92,9 @@ func _on_customer_left_machine(customer: Customer, drink_score) -> void:
 		return
 
 	time_bonus_label.hide()
-	if (drink_score > -3):
-		leave_store()
-	else:
-		Events.customer_approached_window.emit(self)
+	leave_store()
+	# window complaint mechanic (disabled for now)
+	#if (drink_score > -3):
+	#leave_store()
+	#else:
+	#Events.customer_approached_window.emit(self)
