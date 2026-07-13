@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export var minigame_dict: Dictionary[String, PackedScene]
 @export var sub_viewport: SubViewport
+@export var cancel_button: Button
 
 
 func _ready() -> void:
@@ -12,6 +13,12 @@ func _ready() -> void:
 	)
 
 	Events.force_close_minigame.connect(_on_force_close_minigame)
+
+	cancel_button.pressed.connect(
+		func():
+			close_game()
+			Events.minigame_cancelled.emit()
+	)
 
 
 func _physics_process(_delta: float) -> void:

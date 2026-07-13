@@ -486,7 +486,7 @@ minigame_controller = NodePath("MinigameController")
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
 visible = false
 
-[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
+[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
 visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
@@ -497,6 +497,7 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Typing": ExtResource("20_d13ii")
 })
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
+cancel_button = NodePath("MarginContainer/CancelButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="MinigameController" unique_id=614867549]
 anchors_preset = 15
@@ -515,16 +516,17 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(1420, 880)
 render_target_update_mode = 0
 
-[node name="Button" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
+[node name="CancelButton" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(-0.5, 0.25)
 offset_transform_rotation = 0.08726646
+offset_transform_visual_only = false
 theme = ExtResource("97_l0gw7")
 theme_override_font_sizes/font_size = 48
 text = "cancel"

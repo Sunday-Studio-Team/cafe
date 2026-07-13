@@ -20,10 +20,10 @@ var input_to_direction: Dictionary = {
 	"move_back": "🡇",
 }
 var general_direction_to_arrow: Dictionary = {
-	"left":  ["", "", "", "" ,"", ""],
-	"up":    ["", "" , "", "", "", ""],
-	"right": ["", "", "", "", "",  ""],
-	"down":  ["", "" , "", "", "", ""],
+	"left": ["", "", "", "", "", ""],
+	"up": ["", "", "", "", "", ""],
+	"right": ["", "", "", "", "", ""],
+	"down": ["", "", "", "", "", ""],
 }
 var correct_input_index: int = 0
 
@@ -31,7 +31,7 @@ var correct_input_index: int = 0
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_start_minigame()
 
 
