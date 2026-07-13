@@ -8,13 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
+[ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="5_jq2sk"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
+[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="6_4k2k6"]
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
+[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="7_0rl1p"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="8_ok6jj"]
+[ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
 [ext_resource type="PackedScene" uid="uid://c8jilqo1pb0th" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
@@ -125,6 +131,8 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 volumetric_fog_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smeu8"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
 albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
 
@@ -135,11 +143,94 @@ size = Vector3(3, 0.1, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
 size = Vector3(3, 0.1, 0.25)
 
+[sub_resource type="Animation" id="Animation_m74q3"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BreakRoomDoorModel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BreakRoomEntranceBlocker:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tko6h"]
+resource_name = "close_door"
+length = 0.5
+step = 0.1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BreakRoomDoorModel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.7933533, 0, 0.6087614, 0.5, 1, 0, 0, 0, 1)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BreakRoomEntranceBlocker:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ywjan"]
+resource_name = "open_door"
+length = 0.5
+step = 0.1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BreakRoomDoorModel")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, -0.7933533, 0, 0.6087614)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BreakRoomEntranceBlocker:process_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m74q3"]
+_data = {
+&"RESET": SubResource("Animation_m74q3"),
+&"close_door": SubResource("Animation_tko6h"),
+&"open_door": SubResource("Animation_ywjan")
+}
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
 albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_j2xdn"]
-viewport_path = NodePath("BreakRoomDoor/Sign/SubViewport")
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(0.21887207, 2.095642, 1.0678711)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
+size = Vector3(1.1627197, 1, 4.01709)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m74q3"]
+size = Vector3(1.2062073, 1, 1.314148)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
 albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
@@ -483,6 +574,10 @@ pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
 minigame_controller = NodePath("MinigameController")
 
+[node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
+script = ExtResource("4_qsp4k")
+emails_schedule = Array[ExtResource("5_jq2sk")]([ExtResource("6_4k2k6"), ExtResource("7_0rl1p"), ExtResource("8_ok6jj")])
+
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
 visible = false
 
@@ -516,7 +611,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(1420, 880)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="CancelButton" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
@@ -615,8 +710,18 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 [node name="SpotLight3D" parent="SecurityCams/SecurityCam3" index="0" unique_id=1348601655]
 spot_angle = 25.0
 
-[node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.716614, 1.4069858, 4.1258907)
+[node name="StartShiftWhiteboard" type="Node3D" parent="." unique_id=969808922]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 9.122295, 1.2081752, 7.1008935)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="StartShiftWhiteboard" unique_id=1093979055]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StartShiftWhiteboard/CSGCombiner3D" unique_id=907099516]
+size = Vector3(2.3029785, 1.1992188, 0.07836914)
+material = SubResource("StandardMaterial3D_smeu8")
+
+[node name="OpenCloseSign" parent="StartShiftWhiteboard" unique_id=1352342917 instance=ExtResource("6_w48qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33906305, 0.07036972)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -664,47 +769,53 @@ shape = SubResource("BoxShape3D_getpj")
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.083761, 0, 4.5)
 
-[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound")]
-transform = Transform3D(-0.25881922, 0, -0.9659259, 0, 1, 0, 0.9659259, 0, -0.25881922, 8.917271, 0, 4.4959364)
+[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound", "animation_player", "exited_break_room_detection_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.917271, 0, 4.4959364)
 script = ExtResource("6_d13ii")
 close_sound = NodePath("CloseSound")
+animation_player = NodePath("BreakRoomDoorAnimationPlayer")
+open_door_animation_name = "open_door"
+close_door_animation_name = "close_door"
+exited_break_room_detection_area = NodePath("PlayerDetectionArea")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor" unique_id=204670809]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
+[node name="BreakRoomDoorAnimationPlayer" type="AnimationPlayer" parent="BreakRoomDoor" unique_id=1153521959]
+libraries/ = SubResource("AnimationLibrary_m74q3")
+
+[node name="BreakRoomDoorModel" type="Node3D" parent="BreakRoomDoor" unique_id=1779757833]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=204670809]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.04065132, 1, 0.5088234)
 use_collision = true
 size = Vector3(0.1, 2, 1)
 material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="Label3D" type="Label3D" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=2097630685]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.068532944, 1.3897167, 0.5199895)
+text = "BREAK
+ROOM"
+
+[node name="BreakRoomEntranceBlocker" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/BreakRoomEntranceBlocker" unique_id=801664430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009460449, 0.9860133, 0.51588345)
+shape = SubResource("BoxShape3D_xrivr")
 
 [node name="CloseSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=2035882888]
 stream = ExtResource("7_1u8w0")
 volume_db = -20.0
 
-[node name="Sign" type="Sprite3D" parent="BreakRoomDoor" unique_id=742288546]
-transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
-shaded = true
-texture = SubResource("ViewportTexture_j2xdn")
+[node name="PlayerDetectionArea" type="Area3D" parent="BreakRoomDoor" unique_id=1569147687]
+script = ExtResource("8_xuqvo")
+metadata/_custom_type_script = "uid://cyfg6kertkbie"
 
-[node name="SubViewport" type="SubViewport" parent="BreakRoomDoor/Sign" unique_id=1054434373]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/PlayerDetectionArea" unique_id=873683659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8959332, 0, 1.5085449)
+shape = SubResource("BoxShape3D_13qdw")
 
-[node name="ColorRect" type="ColorRect" parent="BreakRoomDoor/Sign/SubViewport" unique_id=456523841]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="BreakRoomDoor/Sign/SubViewport" unique_id=1004293169]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 96
-text = "BREAK
-ROOM"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BreakRoomDoor/PlayerDetectionArea" unique_id=829031094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70064926, 0, 2.8381968)
+shape = SubResource("BoxShape3D_m74q3")
 
 [node name="EmployeeAreaSign" type="MeshInstance3D" parent="." unique_id=544386463]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.9483643, 2.3, -0.83115715)

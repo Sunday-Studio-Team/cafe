@@ -21,20 +21,16 @@ signal interacted
 var enabled := true:
 	set(value):
 		enabled = value
+		_update_material()
 		if enabled:
 			process_mode = Node.PROCESS_MODE_INHERIT
 		else:
-			# i really dont know why but it seems like the highlight
-			# (which is controlled in process) doesnt get disabled properly
-			# unless we wait 3 frames o_0)
-			for i in 3:
-				await get_tree().process_frame
 			process_mode = Node.PROCESS_MODE_DISABLED
 			time_held = 0
 var time_held: float = 0
 
 
-func _ready() -> void:
+func _init() -> void:
 	interacted.connect(_on_interacted)
 
 	enabled = visible
@@ -47,15 +43,15 @@ func _ready() -> void:
 	set_collision_layer_value(2, true)
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	_update_material()
+	
 	if (
 		Global.hovered_interactable != self
 		or not enabled
 		or Global.in_pc_ui
 		or Global.minigame_active
 	):
-		if mesh:
-			mesh.material_overlay = null
 		if not keep_progress_on_interrupt:
 			time_held = 0
 		return
@@ -74,11 +70,22 @@ func _physics_process(delta: float) -> void:
 		if not keep_progress_on_interrupt:
 			time_held = 0
 
-	if mesh:
-		mesh.material_overlay = ShaderMaterial.new()
-		mesh.material_overlay.shader = Global.hover_shader
-
 
 func _on_interacted() -> void:
 	await get_tree().process_frame
 	Global.hovered_interactable = null
+
+func _update_material() -> void:
+	if (Global.hovered_interactable != self
+		or not enabled
+		or Global.in_pc_ui
+		or Global.minigame_active
+	):
+		if mesh:
+			mesh.material_overlay = null
+		return
+
+
+	if mesh:
+		mesh.material_overlay = ShaderMaterial.new()
+		mesh.material_overlay.shader = Global.hover_shader

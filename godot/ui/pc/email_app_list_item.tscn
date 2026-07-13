@@ -12,6 +12,16 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(0.9607843, 0.69803923, 0.25882354, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 24
+
 [sub_resource type="LabelSettings" id="LabelSettings_yb0su"]
 font_size = 24
 font_color = Color(0, 0, 0, 1)
@@ -24,10 +34,12 @@ font_color = Color(0.25, 0.25, 0.25, 1)
 font_size = 18
 font_color = Color(0, 0, 0, 1)
 
-[node name="EmailAppListItem" type="Control" unique_id=1527795294 node_paths=PackedStringArray("button", "sender_name_label", "subject_label", "displayed_date_time_label", "brief_contents_rich_text_label", "unread_indicator")]
+[node name="EmailAppListItem" type="Control" unique_id=1527795294 node_paths=PackedStringArray("button", "sender_name_label", "subject_label", "displayed_date_time_label", "brief_contents_rich_text_label", "unread_indicator", "important_indicator")]
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 473.0
+offset_bottom = 128.0
 size_flags_horizontal = 3
 script = ExtResource("1_77ee6")
 button = NodePath("Button")
@@ -36,6 +48,7 @@ subject_label = NodePath("MarginContainer/VBoxContainer/EmailSubjectLabel")
 displayed_date_time_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/DateTimeLabel")
 brief_contents_rich_text_label = NodePath("MarginContainer/VBoxContainer/ContentRichTextLabel")
 unread_indicator = NodePath("UnreadIndicator")
+important_indicator = NodePath("ImportantIndicator")
 
 [node name="Button" type="Button" parent="." unique_id=1933184191]
 layout_mode = 1
@@ -57,21 +70,23 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yb0su")
 
 [node name="UnreadIndicator" type="HBoxContainer" parent="." unique_id=247064192]
-custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 32.0
+offset_bottom = 60.0
 grow_horizontal = 2
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UnreadIndicator" unique_id=1111255385]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 22
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 22
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
 
 [node name="UnreadIndicator" type="Panel" parent="UnreadIndicator/MarginContainer" unique_id=1767972631]
 custom_minimum_size = Vector2(16, 16)
@@ -79,6 +94,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_77ee6")
+
+[node name="ImportantIndicator" type="HBoxContainer" parent="." unique_id=1211972657]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 84.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ImportantIndicator" unique_id=1544175376]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="Panel" type="Panel" parent="ImportantIndicator/MarginContainer" unique_id=435649247]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="ImportantLabel" type="Label" parent="ImportantIndicator/MarginContainer" unique_id=1810238660]
+layout_mode = 2
+text = "!"
+label_settings = SubResource("LabelSettings_xrivr")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=511084969]
 layout_mode = 1
@@ -88,7 +130,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 32
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 12
@@ -132,3 +174,8 @@ theme_override_font_sizes/normal_font_size = 16
 text = "Email Contents First Line
 Second Line"
 scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1499105598]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

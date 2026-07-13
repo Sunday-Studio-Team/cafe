@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dip3uy51ysart"]
+
+[ext_resource type="Script" uid="uid://bvu7t3irwd4ua" path="res://emails/email_view_day_1_001/custom_email_view_day_1_001.gd" id="1_dbg1a"]
+[ext_resource type="Texture2D" uid="uid://dmkmtcoeeuus1" path="res://emails/email_view_day_1_001/custom_email_view_day_1_001_employee_contract.png" id="2_oxsxw"]
+
+[node name="EmailDataViewDay1_001" type="MarginContainer" unique_id=1659852643 node_paths=PackedStringArray("yes_button", "ok_button")]
+custom_minimum_size = Vector2(916, 0)
+custom_maximum_size = Vector2(916, -1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 502.0
+offset_right = -502.0
+offset_bottom = 787.5105
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dbg1a")
+yes_button = NodePath("TextureRect/YesButton")
+ok_button = NodePath("TextureRect/OkButton")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1916880038]
+layout_mode = 2
+texture = ExtResource("2_oxsxw")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="YesButton" type="Button" parent="TextureRect" unique_id=345676898]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 1662.2554
+offset_right = -503.0
+offset_bottom = -97.25525
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="OkButton" type="Button" parent="TextureRect" unique_id=1814498882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 477.0
+offset_top = 1660.2552
+offset_right = -52.0
+offset_bottom = -98.25525
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+flat = true
