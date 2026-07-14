@@ -1,5 +1,5 @@
 class_name CircuitNode
-extends TextureButton
+extends Button
 
 ## Sent to CircuitPuzzle when this node is clicked.
 signal node_clicked(node: CircuitNode)

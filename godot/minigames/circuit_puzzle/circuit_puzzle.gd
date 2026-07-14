@@ -15,7 +15,6 @@ var puzzle_finished := false
 
 
 func _ready() -> void:
-	# Hide the mouse just like the other minigames
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	randomize()
@@ -75,6 +74,7 @@ func _generate_sequence() -> void:
 
 # Display the order on screen
 func _update_status() -> void:
+	print(sequence)
 
 	var text := "[center][b]Repair Circuit[/b][/center]\n\n"
 
@@ -86,6 +86,7 @@ func _update_status() -> void:
 			text += "  →  "
 
 	status_label.text = text
+
 
 # Called when a CircuitNode is clicked
 func _on_node_clicked(node_id: String) -> void:
