@@ -5,25 +5,36 @@
 
 [node name="SpillCleanMinigame" type="Node2D" unique_id=219843307]
 
-[node name="Panel" type="Panel" parent="." unique_id=1156563764]
-offset_right = 1920.0
-offset_bottom = 892.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953366936]
 
-[node name="ErasableCanvas" type="Sprite2D" parent="." unique_id=2143233988 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
-position = Vector2(960, 446)
-scale = Vector2(0.50149524, 0.50149524)
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1156563764]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ErasableCanvas" type="Sprite2D" parent="CanvasLayer/Panel" unique_id=2143233988 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
+position = Vector2(960, 400)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_vadif")
 script = ExtResource("2_imr7o")
 eraser_radius = 80
-allowed_remaining_ratio = 0.0
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../Label")
 
-[node name="Label" type="Label" parent="." unique_id=622094738]
-offset_left = 585.0
-offset_top = 900.0
-offset_right = 1335.0
-offset_bottom = 1000.0
+[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=622094738]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -182.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_font_sizes/font_size = 50
 text = "Percentage"

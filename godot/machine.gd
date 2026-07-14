@@ -55,6 +55,8 @@ var ingredients: int = max_ingredients:
 			print("ingredients changed by %s on %s" % [change, name])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
+var clean_spill_minigame := "SpillClean"
+var refill_minigame := "Refill"
 
 
 func _ready() -> void:
@@ -85,7 +87,7 @@ func _ready() -> void:
 	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
 
 	Events.customer_approached_window.connect(_on_customer_approached_window)
-	spill_interactable.interacted.connect(clean_up_spill)
+	spill_interactable.interacted.connect(_on_clean_spill)
 
 	progress_indicator.hide()
 	price_label.hide()
@@ -310,13 +312,21 @@ func consume_ingredients() -> void:
 		no_ingredients_sound.play()
 
 
+func _on_clean_spill() -> void:
+	Events.minigame_active.emit(clean_spill_minigame)
+	Events.minigame_end.connect(clean_up_spill)
+	Events.minigame_cancelled.connect(cancel_clean_spill)
+
+
 func clean_up_spill() -> void:
+	Events.minigame_end.disconnect(clean_up_spill)
+	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 	spill_interactable.hide()
 	spill_on_floor = false
 
 
 func refill() -> void:
-	Events.minigame_active.emit("Refill")
+	Events.minigame_active.emit(refill_minigame)
 
 	await Events.minigame_end
 
@@ -338,9 +348,12 @@ func refill() -> void:
 
 
 func cancel_fix_minigame() -> void:
-	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 
+func cancel_clean_spill() -> void:
+	Events.minigame_end.disconnect(clean_up_spill)
+	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 
 func accept_order() -> void:
 	gui_3d.exit()
@@ -437,13 +450,13 @@ func break_down() -> void:
 func _on_fix_machine_button_pressed() -> void:
 	# we connect and disconnect these signals here instead of in _ready() so other machines dont get
 	# the signal and do unintended things
-	Events.minigame_end.connect(_on_minigame_end)
+	Events.minigame_end.connect(_on_machine_fixed)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
 	Events.minigame_active.emit(repair_minigames.pick_random())
 
 
-func _on_minigame_end() -> void:
-	Events.minigame_end.disconnect(_on_minigame_end)
+func _on_machine_fixed() -> void:
+	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 	fix_machine()
 
