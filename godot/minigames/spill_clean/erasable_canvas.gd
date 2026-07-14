@@ -30,6 +30,8 @@ func _ready() -> void:
 	# Choose the image before creating the editable Image.
 	if not choose_random_canvas():
 		return
+	
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	# Create an editable copy of the randomly selected image.
 	canvas_image = canvas_sprite.texture.get_image()
@@ -300,6 +302,7 @@ func win_game() -> void:
 
 	game_finished = true
 	is_erasing = false
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 	progress_label.text = "Erased: 100%"
 
