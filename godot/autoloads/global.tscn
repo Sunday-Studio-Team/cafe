@@ -6,6 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://b5u5pk4pmxhhc" path="res://sprites/stars/star.png" id="4_rx4vo"]
 [ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="5_hx7jl"]
 [ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="6_4y2jn"]
+[ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="7_oys0l"]
+[ext_resource type="Texture2D" uid="uid://n4oreq7gv7mh" path="res://sprites/ingredient_icons/black tea.png" id="8_x2nk7"]
+[ext_resource type="Texture2D" uid="uid://yvvk5750mo8b" path="res://sprites/ingredient_icons/chai.png" id="9_jmbcq"]
+[ext_resource type="Texture2D" uid="uid://djasw8q00grs7" path="res://sprites/ingredient_icons/water.png" id="10_nkame"]
+[ext_resource type="Texture2D" uid="uid://dars6l4l6w3cg" path="res://sprites/ingredient_icons/milk.png" id="11_lt8ol"]
+[ext_resource type="Texture2D" uid="uid://sq8k5eurmf01" path="res://sprites/ingredient_icons/sugar.png" id="12_x2nk7"]
+[ext_resource type="Texture2D" uid="uid://jcak6ksq2m0k" path="res://sprites/ingredient_icons/ice.png" id="13_jmbcq"]
 
 [node name="Global" type="Node" unique_id=668412834]
 script = ExtResource("1_6q3x5")
@@ -17,3 +24,16 @@ full_wrong_drink = ExtResource("3_2wtbm")
 star_texture = ExtResource("4_rx4vo")
 half_star_texture = ExtResource("5_hx7jl")
 empty_star_texture = ExtResource("6_4y2jn")
+main_ingredient_icons = Dictionary[int, Texture2D]({
+2: ExtResource("7_oys0l"),
+3: ExtResource("8_x2nk7"),
+4: ExtResource("9_jmbcq")
+})
+liquid_icons = Dictionary[int, Texture2D]({
+2: ExtResource("10_nkame"),
+3: ExtResource("11_lt8ol")
+})
+extra_icons = Dictionary[int, Texture2D]({
+2: ExtResource("12_x2nk7"),
+3: ExtResource("13_jmbcq")
+})

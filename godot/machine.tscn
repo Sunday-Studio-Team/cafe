@@ -56,7 +56,7 @@ size = Vector3(0.9, 1.2, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
 size = Vector3(0.9, 1.2, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_main_ingredient_icon", "made_liquid_panel", "made_liquid_icon", "made_extra_panel", "made_extra_icon")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 spot_for_player = NodePath("SpotForPlayer")
@@ -90,6 +90,17 @@ customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/C
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
 time_bonus_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel")
 time_bonus_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel/TimeBonusText")
+order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown")
+ordered_main_ingredient_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown/Main/TextureRect")
+ordered_liquid_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown/Liquid/TextureRect")
+ordered_extra_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown/Extra/TextureRect")
+made_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown")
+made_main_ingredient_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Main")
+made_main_ingredient_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Main/TextureRect")
+made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Liquid")
+made_liquid_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Liquid/TextureRect")
+made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Extra")
+made_extra_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Extra/TextureRect")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -213,7 +224,7 @@ size = Vector2i(600, 800)
 
 [node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
 handle_input_locally = false
-size = Vector2i(300, 225)
+size = Vector2i(180, 135)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
