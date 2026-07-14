@@ -1,0 +1,30 @@
+class_name SpamEmail
+extends EmailData
+
+const SPAM_SUBJECTS = [
+	"You've won a prize!",
+	"Claim your free gift now!",
+	"Exclusive offer just for you!",
+	"Don't miss out on this deal!",
+	"Congratulations! You've been selected!",
+    "YOU WON A FREE IPHONE!!!!"
+]
+
+const SPAM_CONTENTS = [
+	"Congratulations! You've been selected to receive a special prize. Click the link below to claim it now!",
+	"Don't miss out on this exclusive offer! Act fast before it's gone!",
+	"You've won a free gift! Click here to claim it now!",
+	"This is your last chance to claim your prize! Click the link below!",
+    "Congratulations! You've been selected for a special reward. Click here to claim it!"
+]
+
+func _init():
+	day_to_send = 0
+	is_important = false
+	sender_name = "Unknown Sender"
+	displayed_time = "7am"
+	#displayed_time = str(randi() % 12 + 1) + ":" + str(randi() % 60).pad_zeroes(2) + " " + (["AM", "PM"][randi() % 2])
+	subject = SPAM_SUBJECTS[randi() % SPAM_SUBJECTS.size()]
+	recipient_name = "Employee #000000"
+	contents = SPAM_CONTENTS[randi() % SPAM_CONTENTS.size()]
+	custom_email_view_packed_scene = null
