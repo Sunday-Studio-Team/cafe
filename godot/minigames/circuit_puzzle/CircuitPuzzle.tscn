@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cu7pnngkxmtfa"]
+
+[ext_resource type="PackedScene" uid="uid://652getgs1vla" path="res://minigames/circuit_puzzle/CircuitNode.tscn" id="1_id0ae"]
+[ext_resource type="Script" uid="uid://8slpo258hyv2" path="res://minigames/circuit_puzzle/circuit_puzzle.gd" id="1_rseeb"]
+
+[node name="CircuitPuzzle" type="Control" unique_id=1457866109]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_rseeb")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=91096013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1820314375]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -260.0
+offset_right = 320.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1624727866]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel/VBox" unique_id=117934647]
+layout_mode = 2
+text = "Click the nodes in the correct order to repair the circuit"
+horizontal_alignment = 1
+
+[node name="Board" type="Control" parent="Panel/VBox" unique_id=2067374285]
+custom_minimum_size = Vector2(600, 380)
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Line" type="Line2D" parent="Panel/VBox/Board" unique_id=482233477]
+
+[node name="NodeContainer" type="Control" parent="Panel/VBox/Board" unique_id=994273857]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CircuitNode6" parent="Panel/VBox/Board/NodeContainer" unique_id=452137524 instance=ExtResource("1_id0ae")]
+layout_mode = 0
+node_id = "F"
+
+[node name="CircuitNode4" parent="Panel/VBox/Board/NodeContainer" unique_id=1346816430 instance=ExtResource("1_id0ae")]
+layout_mode = 0
+node_id = "D"
+
+[node name="CircuitNode1" parent="Panel/VBox/Board/NodeContainer" unique_id=1120375738 instance=ExtResource("1_id0ae")]
+layout_mode = 0
+
+[node name="CircuitNode2" parent="Panel/VBox/Board/NodeContainer" unique_id=175422183 instance=ExtResource("1_id0ae")]
+layout_mode = 0
+node_id = "B"
+
+[node name="CircuitNode3" parent="Panel/VBox/Board/NodeContainer" unique_id=1413330380 instance=ExtResource("1_id0ae")]
+layout_mode = 0
+node_id = "C"
+
+[node name="CircuitNode5" parent="Panel/VBox/Board/NodeContainer" unique_id=1367060684 instance=ExtResource("1_id0ae")]
+layout_mode = 0
+node_id = "E"
+
+[node name="ButtonRow" type="HBoxContainer" parent="Panel/VBox" unique_id=1009571536]
+layout_mode = 2
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="Panel/VBox/ButtonRow" unique_id=573978826]
+layout_mode = 2
+text = "Reset"
+
+[node name="CloseButton" type="Button" parent="Panel/VBox/ButtonRow" unique_id=159435073]
+layout_mode = 2
+text = "Abandon"
