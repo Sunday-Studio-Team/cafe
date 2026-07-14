@@ -173,6 +173,7 @@ func set_customer(c: Customer) -> void:
 	else:
 		customer_order_indicator.hide()
 		final_order_indicator.hide()
+		order_breakdown.hide()
 		price_label.hide()
 		drink_customer_score_label.hide()
 		waiting_for_response = false
@@ -308,7 +309,7 @@ func display_drink_score() -> void:
 	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
 	made_extra_panel.ingredient = order.made_drink.extra
-	made_extra_panel.ingredient = order.extra_correct
+	made_extra_panel.correct = order.extra_correct
 
 	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()

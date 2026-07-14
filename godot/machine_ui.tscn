@@ -163,9 +163,27 @@ layout_mode = 2
 
 [node name="Liquid" parent="VBoxContainer/MadeBreakdown" unique_id=352312806 instance=ExtResource("7_dw44w")]
 layout_mode = 2
+type = 1
 
 [node name="Extra" parent="VBoxContainer/MadeBreakdown" unique_id=1838140619 instance=ExtResource("7_dw44w")]
 layout_mode = 2
+type = 2
+
+[node name="Total" type="HBoxContainer" parent="VBoxContainer/MadeBreakdown" unique_id=1935245382]
+visible = false
+layout_mode = 2
+
+[node name="=" type="Label" parent="VBoxContainer/MadeBreakdown/Total" unique_id=1894603849]
+layout_mode = 2
+text = "="
+
+[node name="Total2" type="HBoxContainer" parent="VBoxContainer/MadeBreakdown" unique_id=1905253024]
+visible = false
+layout_mode = 2
+
+[node name="=" type="Label" parent="VBoxContainer/MadeBreakdown/Total2" unique_id=1654895271]
+layout_mode = 2
+text = "="
 
 [node name="ProgressIndicator" type="VBoxContainer" parent="VBoxContainer" unique_id=105617217]
 visible = false
