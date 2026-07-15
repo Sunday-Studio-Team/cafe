@@ -27,10 +27,10 @@ func _ready() -> void:
 		if current_day >= email_scheduled_day:
 			_delivered_emails_to_date.append(email_data)
 	
-	if days_since_random >= 2: # Can't get random emails everyday
+	if days_since_random >= 1: # Can't get random emails everyday
 		var min_random = 0.1
 		for i in range(0, days_since_random): # More likely to get random emails the more days have passed
-			min_random += 0.1
+			min_random += 0.5
 		var rand_email_percent = randf_range(min_random, 1.0)
 		if rand_email_percent >= 0.5:
 			last_random_email_day = current_day

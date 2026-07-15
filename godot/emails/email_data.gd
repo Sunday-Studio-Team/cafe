@@ -3,6 +3,7 @@ extends Resource
 
 @export var day_to_send: int
 @export var is_important: bool
+@export var is_finished_spam: bool
 @export var sender_name: String
 @export var displayed_time: String
 @export var subject: String

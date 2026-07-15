@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://xc3ei048sfo5"]
+
+[ext_resource type="Script" uid="uid://vho51evo6lmi" path="res://emails/random_emails/custom_email_view_spam.gd" id="1_7ft51"]
+[ext_resource type="Texture2D" uid="uid://cyvqnytrstpsl" path="res://emails/random_emails/custom_email_view_spam.png" id="2_7ft51"]
+
+[node name="CustomEmailViewSpam" type="Control" unique_id=546867457]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 501.0
+offset_bottom = 224.0
+script = ExtResource("1_7ft51")
+metadata/_custom_type_script = "uid://caa7hq7r1n2lw"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=412577844]
+custom_minimum_size = Vector2(500, 0)
+custom_maximum_size = Vector2(500, -1)
+clip_contents = true
+layout_mode = 0
+offset_left = 1.0
+offset_right = 491.0
+offset_bottom = 224.0
+texture = ExtResource("2_7ft51")
+expand_mode = 1
+
+[node name="ClaimButton" type="Button" parent="TextureRect" unique_id=1650434258]
+light_mask = 0
+visibility_layer = 0
+texture_repeat = 3
+layout_mode = 0
+offset_left = 133.0
+offset_top = 80.0
+offset_right = 356.0
+offset_bottom = 157.0
+mouse_default_cursor_shape = 2
+disabled = true
+
+[connection signal="draw" from="TextureRect/ClaimButton" to="." method="_on_claim_button_draw"]
+[connection signal="pressed" from="TextureRect/ClaimButton" to="." method="_on_claim_button_pressed"]

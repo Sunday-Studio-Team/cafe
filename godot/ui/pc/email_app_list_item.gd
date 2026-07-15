@@ -15,15 +15,17 @@ var email_data: EmailData
 var is_finished_important: bool
 var is_read: bool
 var is_current_day: bool
+var is_finished_spam: bool
 
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
 
-func initialize(init_email_data: EmailData, init_is_finished_important: bool, init_is_read: bool, init_is_current_day: bool) -> void:
+func initialize(init_email_data: EmailData, init_is_finished_important: bool, init_is_read: bool, init_is_current_day: bool, init_is_finished_spam: bool) -> void:
 	email_data = init_email_data
 	is_finished_important = init_is_finished_important
 	is_read = init_is_read
 	is_current_day = init_is_current_day
+	is_finished_spam = init_is_finished_spam
 	
 	sender_name_label.text = email_data.sender_name
 	subject_label.text = email_data.subject

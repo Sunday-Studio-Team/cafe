@@ -26,4 +26,4 @@ func _init():
 	subject = SPAM_SUBJECTS[randi() % SPAM_SUBJECTS.size()]
 	recipient_name = "Employee #000000"
 	contents = SPAM_CONTENTS[randi() % SPAM_CONTENTS.size()]
-	custom_email_view_packed_scene = null
+	custom_email_view_packed_scene = load("res://emails/random_emails/custom_email_view_spam.tscn")
