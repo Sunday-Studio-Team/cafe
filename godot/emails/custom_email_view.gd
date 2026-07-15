@@ -18,3 +18,5 @@ func mark_finished_important() -> void:
 func mark_spam_pressed() -> void:
 	pressed_spam_bool = true
 	finished_spam.emit(self)
+	
+	

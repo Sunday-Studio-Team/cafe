@@ -9,6 +9,13 @@ func _ready() -> void:
 	
 func _on_button_pressed() -> void:
 	mark_spam_pressed()
+
+	var scam_chance = randf_range(0.2, 1.0)
+	if scam_chance >= 0.5:
+		Global.bank_money += -3
+	else:
+		Global.bank_money += 3
+		
 	_update_button()
 	
 func _update_button() -> void:
