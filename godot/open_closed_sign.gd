@@ -8,6 +8,7 @@ func _ready() -> void:
 		important_emails_required_model.visible = true
 		Events.finished_important_email.connect(_on_finished_important_email)
 	else:
+		important_emails_required_model.visible = false
 		enabled = true
 
 func _on_interacted() -> void:

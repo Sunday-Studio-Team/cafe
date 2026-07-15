@@ -35,6 +35,14 @@ extends Node3D
 @export var no_ingredients_warning: Control
 @export var time_bonus_panel: PanelContainer
 @export var time_bonus_label: Label
+@export var order_breakdown: Control
+@export var ordered_main_ingredient_icon: TextureRect
+@export var ordered_liquid_icon: TextureRect
+@export var ordered_extra_icon: TextureRect
+@export var made_breakdown: Control
+@export var made_main_ingredient_panel: OrderBreakdownElement
+@export var made_liquid_panel: OrderBreakdownElement
+@export var made_extra_panel: OrderBreakdownElement
 
 var customer: Customer
 var order: OrderData
@@ -55,6 +63,8 @@ var ingredients: int = max_ingredients:
 			print("ingredients changed by %s on %s" % [change, name])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
+var clean_spill_minigame := "SpillClean"
+var refill_minigame := "Refill"
 
 
 func _ready() -> void:
@@ -85,11 +95,12 @@ func _ready() -> void:
 	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
 
 	Events.customer_approached_window.connect(_on_customer_approached_window)
-	spill_interactable.interacted.connect(clean_up_spill)
+	spill_interactable.interacted.connect(_on_clean_spill)
 
 	progress_indicator.hide()
 	price_label.hide()
 	customer_order_indicator.hide()
+	order_breakdown.hide()
 	final_order_indicator.hide()
 
 
@@ -103,6 +114,7 @@ func _physics_process(_delta: float) -> void:
 	make_drink_button.visible = waiting_for_response
 	make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
+	made_breakdown.visible = waiting_for_response
 
 	refill_button.visible = Global.holding_ingredients
 
@@ -161,6 +173,7 @@ func set_customer(c: Customer) -> void:
 	else:
 		customer_order_indicator.hide()
 		final_order_indicator.hide()
+		order_breakdown.hide()
 		price_label.hide()
 		drink_customer_score_label.hide()
 		waiting_for_response = false
@@ -191,10 +204,16 @@ func machine_make_drink() -> void:
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
-			"customer ordered %s (%s)"
+			"ORDERED: %s (%s)"
 			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
+
+	ordered_main_ingredient_icon.texture = Global.main_ingredient_icons.get(order.ordered_drink.main_ingredient)
+	ordered_liquid_icon.texture = Global.liquid_icons.get(order.ordered_drink.liquid)
+	ordered_extra_icon.texture = Global.extra_icons.get(order.ordered_drink.extra)
+
 	customer_order_indicator.show()
+	order_breakdown.show()
 
 	timer.start()
 
@@ -246,6 +265,13 @@ func machine_make_drink() -> void:
 		print("choosing a random fallback drink instead - this one has a score of %s" % random_drink_score)
 		order.score = random_drink_score
 
+	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
+		order.main_correct = true
+	if order.ordered_drink.liquid == order.made_drink.liquid:
+		order.liquid_correct = true
+	if order.ordered_drink.extra == order.made_drink.extra:
+		order.extra_correct = true
+
 	#completed_order = Global.full_wrong_drink # make every order fully wrong for testing
 
 	display_drink_score()
@@ -266,7 +292,7 @@ func machine_make_drink() -> void:
 		spill_on_floor = true
 
 	final_order_indicator.text = (
-			"machine made: %s (%s)"
+			"MADE: %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	final_order_indicator.show()
@@ -276,6 +302,15 @@ func machine_make_drink() -> void:
 
 
 func display_drink_score() -> void:
+	# these all automatically set the icon, colour, and score of each icon 
+	# from OrderBreakdownElement
+	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
+	made_main_ingredient_panel.correct = order.main_correct
+	made_liquid_panel.ingredient = order.made_drink.liquid
+	made_liquid_panel.correct = order.liquid_correct
+	made_extra_panel.ingredient = order.made_drink.extra
+	made_extra_panel.correct = order.extra_correct
+
 	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()
 
@@ -311,12 +346,14 @@ func consume_ingredients() -> void:
 
 
 func clean_up_spill() -> void:
+	Events.minigame_end.disconnect(clean_up_spill)
+	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 	spill_interactable.hide()
 	spill_on_floor = false
 
 
 func refill() -> void:
-	Events.minigame_active.emit("Refill")
+	Events.minigame_active.emit(refill_minigame)
 
 	await Events.minigame_end
 
@@ -338,8 +375,13 @@ func refill() -> void:
 
 
 func cancel_fix_minigame() -> void:
-	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
+
+
+func cancel_clean_spill() -> void:
+	Events.minigame_end.disconnect(clean_up_spill)
+	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 
 
 func accept_order() -> void:
@@ -366,6 +408,7 @@ func accept_order() -> void:
 	await get_tree().create_timer(0.5, false).timeout
 
 	drink_customer_score_label.hide()
+	order_breakdown.hide()
 
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)
@@ -434,16 +477,22 @@ func break_down() -> void:
 	broken_down = true
 
 
+func _on_clean_spill() -> void:
+	Events.minigame_active.emit(clean_spill_minigame)
+	Events.minigame_end.connect(clean_up_spill)
+	Events.minigame_cancelled.connect(cancel_clean_spill)
+
+
 func _on_fix_machine_button_pressed() -> void:
 	# we connect and disconnect these signals here instead of in _ready() so other machines dont get
 	# the signal and do unintended things
-	Events.minigame_end.connect(_on_minigame_end)
+	Events.minigame_end.connect(_on_machine_fixed)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
 	Events.minigame_active.emit(repair_minigames.pick_random())
 
 
-func _on_minigame_end() -> void:
-	Events.minigame_end.disconnect(_on_minigame_end)
+func _on_machine_fixed() -> void:
+	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 	fix_machine()
 
@@ -458,5 +507,8 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 class OrderData:
 	var ordered_drink: Drink
 	var made_drink: Drink
+	var main_correct: bool = false
+	var liquid_correct: bool = false
+	var extra_correct: bool = false
 	var score: int
 	var tip: float = 0.0

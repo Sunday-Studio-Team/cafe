@@ -65,6 +65,8 @@ func _ready():
 
 	exit_button.pressed.connect(exit)
 
+	Events.time_up.connect(func(): exit_button.hide())
+
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
