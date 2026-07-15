@@ -33,8 +33,11 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 		# Show time only
 		displayed_date_time_label.text = email_data.displayed_time
 	else:
-		# Show day only
-		displayed_date_time_label.text = "x days ago"
+		var days_ago = Global.day - email_data.day_to_send
+		if days_ago == 1:
+			displayed_date_time_label.text = "1 day ago"
+		else:
+			displayed_date_time_label.text = str(days_ago) + " days ago"
 	recipient_label.text = email_data.recipient_name
 	brief_contents_rich_text_label.text = email_data.contents
 	
