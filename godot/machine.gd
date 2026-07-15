@@ -43,6 +43,8 @@ extends Node3D
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
+@export var hum_sound: AudioStreamPlayer3D
+@export var done_sound: AudioStreamPlayer3D
 
 var customer: Customer
 var order: OrderData
@@ -201,6 +203,8 @@ func machine_make_drink() -> void:
 	if ingredients < Stats.current.ingredients_per_order or broken_down:
 		return
 
+	hum_sound.play()
+
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
@@ -224,6 +228,9 @@ func machine_make_drink() -> void:
 		break_down()
 
 	await timer.timeout
+
+	hum_sound.stop()
+	done_sound.play()
 
 	consume_ingredients()
 
