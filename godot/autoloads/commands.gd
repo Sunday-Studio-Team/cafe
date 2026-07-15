@@ -1,5 +1,7 @@
 # basically just handles the commands and settings for the console
-# (might be better as just part of Console or somewhere else lemme know)
+# (might be better as just part of Console or somewhere else
+# (or maybe theres no real reason to put all these commands in the same script tbh)
+# lemme know)
 extends Node
 
 
@@ -18,9 +20,16 @@ func _ready() -> void:
 	Console.add_command("break", breakdown)
 	Console.add_command("spill", spill)
 
-	# WARNING: doesnt really work yet
-	Console.add_command("item", give_item, ["item name"])
-	Console.add_command_autocomplete_list("item", Global.items)
+	# WARNING: dont really know how to get params to work yet lol
+	#Console.add_command("item", give_item, ["item name"])
+	#Console.add_command_autocomplete_list("item", Global.items)
+
+	#Console.add_command("speed", set_speed, 1)
+
+
+func set_speed(speed: float) -> void:
+	Engine.time_scale = speed
+	Console.print_line("game speed set to %s" % speed)
 
 
 func start_shift() -> void:
