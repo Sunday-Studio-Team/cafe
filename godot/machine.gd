@@ -293,11 +293,7 @@ func machine_make_drink() -> void:
 			randf() < Stats.current.machine_chance_of_spill
 			and Global.spills_this_shift < Stats.current.max_spills_per_shift
 	):
-		spill_interactable.show()
-		spill_sound.play()
-		Events.alert_posted.emit("⚙️machine made a spill")
-		Global.spills_this_shift += 1
-		spill_on_floor = true
+		spill()
 
 	final_order_indicator.text = (
 			"MADE: %s (%s)"
@@ -307,6 +303,15 @@ func machine_make_drink() -> void:
 
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
+
+
+# NOTE: separated into its own func so it can be called from dev console
+func spill() -> void:
+	spill_interactable.show()
+	spill_sound.play()
+	Events.alert_posted.emit("⚙️machine made a spill")
+	Global.spills_this_shift += 1
+	spill_on_floor = true
 
 
 func display_drink_score() -> void:

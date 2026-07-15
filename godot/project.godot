@@ -21,6 +21,8 @@ config/icon="res://icon.svg"
 Events="*uid://bwnrp1mvuxrhd"
 Global="*uid://bsobghkg5y0nh"
 Stats="*uid://bmxcuhiqxfn43"
+Console="*uid://ouiu5xh1cs8n"
+Commands="*uid://bio06bvap3ug1"
 
 [display]
 
@@ -32,7 +34,7 @@ window/size/mode.editor=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/editor_tools/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/editor_tools/plugin.cfg")
 
 [input]
 
