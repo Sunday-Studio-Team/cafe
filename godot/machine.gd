@@ -203,6 +203,7 @@ func machine_make_drink() -> void:
 	if ingredients < Stats.current.ingredients_per_order or broken_down:
 		return
 
+	hum_sound.pitch_scale = randf_range(0.95, 1.05)
 	hum_sound.play()
 
 	order = OrderData.new()
@@ -342,6 +343,8 @@ func fix_machine() -> void:
 	if customer:
 		customer_order_indicator.show()
 		timer.paused = false
+		hum_sound.pitch_scale = randf_range(0.95, 1.05)
+		hum_sound.play()
 
 
 # this isnt inlined cos both manual and automatic drinks call this
@@ -482,6 +485,7 @@ func break_down() -> void:
 
 	timer.paused = true
 	broken_down = true
+	hum_sound.stop()
 
 
 func _on_clean_spill() -> void:
