@@ -177,14 +177,6 @@ layout_mode = 2
 layout_mode = 2
 text = "="
 
-[node name="Total2" type="HBoxContainer" parent="VBoxContainer/MadeBreakdown" unique_id=1905253024]
-visible = false
-layout_mode = 2
-
-[node name="=" type="Label" parent="VBoxContainer/MadeBreakdown/Total2" unique_id=1654895271]
-layout_mode = 2
-text = "="
-
 [node name="ProgressIndicator" type="VBoxContainer" parent="VBoxContainer" unique_id=105617217]
 visible = false
 layout_mode = 2
@@ -298,7 +290,7 @@ theme_override_font_sizes/font_size = 32
 text = "+1.5⭐🙂"
 
 [node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=2014872253]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=2095979665]
@@ -314,7 +306,7 @@ horizontal_alignment = 1
 
 [node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
 layout_mode = 2
-size_flags_vertical = 10
+size_flags_vertical = 2
 offset_transform_enabled = true
 offset_transform_rotation = -0.017453292
 
