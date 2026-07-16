@@ -5,14 +5,15 @@ extends CanvasLayer
 
 
 func _ready() -> void:
+	Global.in_main_menu = true
+
 	play_button.pressed.connect(
 		func():
 			Global.day = 1
 			Events.main_scene_loaded.emit()
+			Global.in_main_menu = false
 	)
 	quit_button.pressed.connect(
 		func():
 			Events.game_quit.emit()
 	)
-
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

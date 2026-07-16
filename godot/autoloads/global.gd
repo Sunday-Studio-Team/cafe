@@ -85,12 +85,15 @@ var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var in_machine_ui: bool = false
+var in_main_menu := false
 var in_ui: bool:
 	get():
 		if (
 				minigame_active
 				or in_pc_ui
 				or in_machine_ui
+				or Console.is_visible()
+				or in_main_menu
 		):
 			return true
 		else:
@@ -109,6 +112,11 @@ func _physics_process(_delta: float) -> void:
 	# would start overriding each other
 	player_in_cctv_los = false
 	holding_make_drink_button = false
+
+	if in_ui or get_tree().paused:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func load_resources_from_folder(path: String, extension: String = "tres") -> Array[Resource]:

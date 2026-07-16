@@ -1,28 +1,21 @@
 extends Node2D
 
-
 @export var eraser_radius: int = 30
+@export var canvas_sprite: Sprite2D
+@export var progress_label: Label
+@export_dir var canvas_folder: String = "res://minigames/spill_clean/stains"
 
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
 var allowed_remaining_ratio: float = 0.01
-@export var canvas_sprite: Sprite2D
-@export var progress_label: Label
-@export_dir var canvas_folder: String = \
-	"res://minigames/spill_clean/stains"
-
-
 var canvas_image: Image
 var canvas_texture: ImageTexture
-
 var starting_pixel_count: int = 0
 var remaining_pixel_count: int = 0
-
 var is_erasing: bool = false
 var has_previous_position: bool = false
 var previous_pixel_position: Vector2i
-
 var game_finished: bool = false
 
 
@@ -30,8 +23,6 @@ func _ready() -> void:
 	# Choose the image before creating the editable Image.
 	if not choose_random_canvas():
 		return
-	
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	# Create an editable copy of the randomly selected image.
 	canvas_image = canvas_sprite.texture.get_image()
@@ -39,7 +30,7 @@ func _ready() -> void:
 	canvas_image.convert(Image.FORMAT_RGBA8)
 
 	canvas_texture = ImageTexture.create_from_image(
-		canvas_image
+		canvas_image,
 	)
 
 	canvas_sprite.texture = canvas_texture
@@ -90,8 +81,8 @@ func erase_at_mouse() -> void:
 
 	update_progress_display()
 	check_for_win()
-	
-	
+
+
 func choose_random_canvas() -> bool:
 	var canvas_paths: Array[String] = []
 
@@ -105,7 +96,7 @@ func choose_random_canvas() -> bool:
 	if canvas_paths.is_empty():
 		push_error(
 			"No PNG files were found in: "
-			+ canvas_folder
+			+ canvas_folder,
 		)
 
 		return false
@@ -113,13 +104,13 @@ func choose_random_canvas() -> bool:
 	var selected_path: String = canvas_paths.pick_random()
 
 	var selected_texture: Texture2D = (
-		load(selected_path) as Texture2D
+			load(selected_path) as Texture2D
 	)
 
 	if selected_texture == null:
 		push_error(
 			"Failed to load: "
-			+ selected_path
+			+ selected_path,
 		)
 
 		return false
@@ -128,7 +119,7 @@ func choose_random_canvas() -> bool:
 
 	print(
 		"Selected canvas: ",
-		selected_path
+		selected_path,
 	)
 
 	return true
@@ -147,16 +138,16 @@ func get_mouse_image_position() -> Vector2i:
 
 	# Convert the mouse position into a value from 0 to 1.
 	var normalized_position: Vector2 = (
-		(local_mouse_position - sprite_rect.position)
-		/ sprite_rect.size
+			(local_mouse_position - sprite_rect.position)
+			/ sprite_rect.size
 	)
 
 	# Convert the normalized position into image-pixel coordinates.
 	var pixel_x: int = int(
-		normalized_position.x * canvas_image.get_width()
+		normalized_position.x * canvas_image.get_width(),
 	)
 	var pixel_y: int = int(
-		normalized_position.y * canvas_image.get_height()
+		normalized_position.y * canvas_image.get_height(),
 	)
 
 	# Clamp the coordinate if it is out of the boundary
@@ -167,10 +158,9 @@ func get_mouse_image_position() -> Vector2i:
 
 
 func erase_between_points(
-	start_position: Vector2i,
-	end_position: Vector2i
+		start_position: Vector2i,
+		end_position: Vector2i,
 ) -> void:
-
 	var start: Vector2 = Vector2(start_position)
 	var end: Vector2 = Vector2(end_position)
 
@@ -180,18 +170,18 @@ func erase_between_points(
 
 	var number_of_steps: int = max(
 		1,
-		ceili(distance / spacing)
+		ceili(distance / spacing),
 	)
 
 	for step: int in range(number_of_steps + 1):
 		var interpolation_amount: float = (
-			float(step)
-			/ float(number_of_steps)
+				float(step)
+				/ float(number_of_steps)
 		)
 
 		var erase_position: Vector2 = start.lerp(
 			end,
-			interpolation_amount
+			interpolation_amount,
 		)
 
 		erase_circle(Vector2i(erase_position))
@@ -200,27 +190,27 @@ func erase_between_points(
 func erase_circle(center: Vector2i) -> void:
 	var minimum_x: int = max(
 		0,
-		center.x - eraser_radius
+		center.x - eraser_radius,
 	)
 
 	var maximum_x: int = min(
 		canvas_image.get_width() - 1,
-		center.x + eraser_radius
+		center.x + eraser_radius,
 	)
 
 	var minimum_y: int = max(
 		0,
-		center.y - eraser_radius
+		center.y - eraser_radius,
 	)
 
 	var maximum_y: int = min(
 		canvas_image.get_height() - 1,
-		center.y + eraser_radius
+		center.y + eraser_radius,
 	)
 
 	var radius_squared: int = (
-		eraser_radius
-		* eraser_radius
+			eraser_radius
+			* eraser_radius
 	)
 
 	for y: int in range(minimum_y, maximum_y + 1):
@@ -229,8 +219,8 @@ func erase_circle(center: Vector2i) -> void:
 			var difference_y: int = y - center.y
 
 			var distance_squared: int = (
-				difference_x * difference_x 
-				+ difference_y * difference_y)
+					difference_x * difference_x
+					+ difference_y * difference_y)
 
 			# Taking the sqrt does not affect the order relationship.
 			# Ignore pixels outside the circular eraser.
@@ -246,7 +236,7 @@ func erase_circle(center: Vector2i) -> void:
 				canvas_image.set_pixel(
 					x,
 					y,
-					pixel_color
+					pixel_color,
 				)
 
 				remaining_pixel_count -= 1
@@ -271,8 +261,8 @@ func update_progress_display() -> void:
 		return
 
 	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
+			float(remaining_pixel_count)
+			/ float(starting_pixel_count)
 	)
 
 	var erased_ratio: float = 1.0 - remaining_ratio
@@ -288,8 +278,8 @@ func check_for_win() -> void:
 		return
 
 	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
+			float(remaining_pixel_count)
+			/ float(starting_pixel_count)
 	)
 
 	if remaining_ratio <= allowed_remaining_ratio:
@@ -302,7 +292,6 @@ func win_game() -> void:
 
 	game_finished = true
 	is_erasing = false
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 	progress_label.text = "Erased: 100%"
 

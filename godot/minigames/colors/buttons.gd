@@ -24,7 +24,6 @@ var last_click_correct := false
 
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	set_choice()
 
 
@@ -50,7 +49,6 @@ func wrong_button_pressed():
 func victory():
 	text_edit.text = "✅"
 	await get_tree().create_timer(0.5, false).timeout
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Events.emit_signal("minigame_end")
 
 
