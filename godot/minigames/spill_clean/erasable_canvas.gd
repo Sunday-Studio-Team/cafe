@@ -7,10 +7,17 @@ extends Node2D
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
 var allowed_remaining_ratio: float = 0.01
+@export_range(0.25, 1.0, 0.05)
+var brush_spacing_ratio: float = 0.5
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
 @export_dir var canvas_folder: String = \
 	"res://minigames/spill_clean/stains"
+
+
+# If a pixel has alpha value lower then the threshold,
+# it was consider transparent
+const ALPHA_THRESHOLD_BYTE: int = 5
 
 
 var canvas_image: Image
@@ -18,6 +25,11 @@ var canvas_texture: ImageTexture
 
 var starting_pixel_count: int = 0
 var remaining_pixel_count: int = 0
+
+var image_width: int
+var image_height: int
+var pixel_data: PackedByteArray
+var brush_offsets: Array[Vector2i] = []
 
 var is_erasing: bool = false
 var has_previous_position: bool = false
@@ -27,25 +39,25 @@ var game_finished: bool = false
 
 
 func _ready() -> void:
-	# Choose the image before creating the editable Image.
 	if not choose_random_canvas():
 		return
-	
+
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	# Create an editable copy of the randomly selected image.
 	canvas_image = canvas_sprite.texture.get_image()
 
 	canvas_image.convert(Image.FORMAT_RGBA8)
+	canvas_image.clear_mipmaps()
 
-	canvas_texture = ImageTexture.create_from_image(
-		canvas_image
-	)
+	image_width = canvas_image.get_width()
+	image_height = canvas_image.get_height()
+	pixel_data = canvas_image.get_data()
 
+	canvas_texture = ImageTexture.create_from_image(canvas_image)
 	canvas_sprite.texture = canvas_texture
 
+	create_brush_offsets()
 	count_starting_pixels()
-
 	update_progress_display()
 
 
@@ -57,18 +69,58 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			is_erasing = event.pressed
+			has_previous_position = false
 
-			if is_erasing:
-				has_previous_position = false
-				erase_at_mouse()
 
-			else:
-				has_previous_position = false
+func _physics_process(_delta: float) -> void:
+	if game_finished or not is_erasing:
+		return
 
-	# Continue erasing while the mouse moves.
-	elif event is InputEventMouseMotion:
-		if is_erasing:
-			erase_at_mouse()
+	var current_position: Vector2i = get_mouse_image_position()
+
+	if current_position.x < 0:
+		has_previous_position = false
+		return
+
+	if (
+		has_previous_position 
+		and current_position == previous_pixel_position
+	):
+		return
+
+	var image_changed: bool
+
+	if has_previous_position:
+		image_changed = erase_between_points(
+			previous_pixel_position,
+			current_position
+		)
+	else:
+		image_changed = erase_circle(current_position)
+
+	previous_pixel_position = current_position
+	has_previous_position = true
+
+	if not image_changed:
+		return
+
+	upload_changed_image()
+	update_progress_display()
+	check_for_win()
+
+
+func create_brush_offsets() -> void:
+	brush_offsets.clear()
+
+	var radius_squared: int = eraser_radius * eraser_radius
+
+	for offset_y: int in range(-eraser_radius, eraser_radius + 1):
+		for offset_x: int in range(-eraser_radius, eraser_radius + 1):
+			var distance_squared: int = (
+				offset_x * offset_x + offset_y * offset_y)
+
+			if distance_squared <= radius_squared:
+				brush_offsets.append(Vector2i(offset_x, offset_y))
 
 
 func erase_at_mouse() -> void:
@@ -136,7 +188,8 @@ func choose_random_canvas() -> bool:
 
 func get_mouse_image_position() -> Vector2i:
 	# Mouse position relative to ErasableCanvas.
-	var local_mouse_position: Vector2 = canvas_sprite.get_local_mouse_position()
+	var local_mouse_position: Vector2 
+	local_mouse_position = canvas_sprite.get_local_mouse_position()
 
 	# Rectangle occupied by the sprite in its local coordinate system.
 	var sprite_rect: Rect2 = canvas_sprite.get_rect()
@@ -152,16 +205,12 @@ func get_mouse_image_position() -> Vector2i:
 	)
 
 	# Convert the normalized position into image-pixel coordinates.
-	var pixel_x: int = int(
-		normalized_position.x * canvas_image.get_width()
-	)
-	var pixel_y: int = int(
-		normalized_position.y * canvas_image.get_height()
-	)
+	var pixel_x: int = int(normalized_position.x * image_width)
+	var pixel_y: int = int(normalized_position.y * image_height)
 
 	# Clamp the coordinate if it is out of the boundary
-	pixel_x = clampi(pixel_x, 0, canvas_image.get_width() - 1)
-	pixel_y = clampi(pixel_y, 0, canvas_image.get_height() - 1)
+	pixel_x = clampi(pixel_x, 0, image_width - 1)
+	pixel_y = clampi(pixel_y, 0, image_height - 1)
 
 	return Vector2i(pixel_x, pixel_y)
 
@@ -169,98 +218,83 @@ func get_mouse_image_position() -> Vector2i:
 func erase_between_points(
 	start_position: Vector2i,
 	end_position: Vector2i
-) -> void:
-
+) -> bool:
 	var start: Vector2 = Vector2(start_position)
 	var end: Vector2 = Vector2(end_position)
 
 	var distance: float = start.distance_to(end)
 
-	var spacing: float = eraser_radius * 0.25
+	if distance <= 0.0:
+		return false
 
-	var number_of_steps: int = max(
-		1,
-		ceili(distance / spacing)
-	)
+	var spacing: float =  float(eraser_radius) * brush_spacing_ratio
+	var number_of_steps: int = maxi(1, ceili(distance / spacing))
 
-	for step: int in range(number_of_steps + 1):
+	var image_changed: bool = false
+	# Start at 1 because the starting point was already erased
+	# during the previous  frame.
+	for step: int in range(1, number_of_steps + 1):
 		var interpolation_amount: float = (
 			float(step)
 			/ float(number_of_steps)
 		)
 
-		var erase_position: Vector2 = start.lerp(
-			end,
-			interpolation_amount
+		var erase_position: Vector2i = Vector2i(
+			start.lerp(end, interpolation_amount)
 		)
 
-		erase_circle(Vector2i(erase_position))
+		if erase_circle(erase_position):
+			image_changed = true
+
+	return image_changed
 
 
-func erase_circle(center: Vector2i) -> void:
-	var minimum_x: int = max(
-		0,
-		center.x - eraser_radius
+func erase_circle(center: Vector2i) -> bool:
+	var image_changed: bool = false
+
+	for offset: Vector2i in brush_offsets:
+		var x: int = center.x + offset.x
+		var y: int = center.y + offset.y
+
+		if (
+			x < 0
+			or x >= image_width
+			or y < 0
+			or y >= image_height
+		):
+			continue
+
+		var pixel_number: int = y * image_width + x
+		# The fourth RGBA8 byte is alpha, adding 3 to access it.
+		var alpha_index: int = pixel_number * 4 + 3
+
+		if pixel_data[alpha_index] > ALPHA_THRESHOLD_BYTE:
+			pixel_data[alpha_index] = 0
+			remaining_pixel_count -= 1
+			image_changed = true
+	
+	return image_changed
+
+
+func upload_changed_image() -> void:
+	canvas_image.set_data(
+		image_width,
+		image_height,
+		false,
+		Image.FORMAT_RGBA8,
+		pixel_data
 	)
-
-	var maximum_x: int = min(
-		canvas_image.get_width() - 1,
-		center.x + eraser_radius
-	)
-
-	var minimum_y: int = max(
-		0,
-		center.y - eraser_radius
-	)
-
-	var maximum_y: int = min(
-		canvas_image.get_height() - 1,
-		center.y + eraser_radius
-	)
-
-	var radius_squared: int = (
-		eraser_radius
-		* eraser_radius
-	)
-
-	for y: int in range(minimum_y, maximum_y + 1):
-		for x: int in range(minimum_x, maximum_x + 1):
-			var difference_x: int = x - center.x
-			var difference_y: int = y - center.y
-
-			var distance_squared: int = (
-				difference_x * difference_x 
-				+ difference_y * difference_y)
-
-			# Taking the sqrt does not affect the order relationship.
-			# Ignore pixels outside the circular eraser.
-			if distance_squared > radius_squared:
-				continue
-
-			var pixel_color: Color = (canvas_image.get_pixel(x, y))
-
-			# Only count the pixel again if it has not already been erased.
-			if pixel_color.a > 0.01:
-				pixel_color.a = 0.0
-
-				canvas_image.set_pixel(
-					x,
-					y,
-					pixel_color
-				)
-
-				remaining_pixel_count -= 1
+	canvas_texture.update(canvas_image)
 
 
 func count_starting_pixels() -> void:
 	starting_pixel_count = 0
 
-	for y: int in range(canvas_image.get_height()):
-		for x: int in range(canvas_image.get_width()):
-			var pixel_color: Color = (canvas_image.get_pixel(x, y))
+	for pixel_index: int in range(image_width * image_height):
+		var alpha_index: int = pixel_index * 4 + 3
 
-			if pixel_color.a > 0.01:
-				starting_pixel_count += 1
+		if pixel_data[alpha_index] > ALPHA_THRESHOLD_BYTE:
+			starting_pixel_count += 1
 
 	remaining_pixel_count = starting_pixel_count
 
@@ -302,7 +336,6 @@ func win_game() -> void:
 
 	game_finished = true
 	is_erasing = false
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 
 	progress_label.text = "Erased: 100%"
 
