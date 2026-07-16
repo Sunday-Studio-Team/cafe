@@ -12,8 +12,7 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	mark_finished_spam()
 
-	var scam_chance = randf_range(0.2, 1.0)
-	if scam_chance >= 0.5:
+	if randf_range(0.1, 1.0) >= 0.5:
 		Global.bank_money += -3
 		$LosePointsSound.play()
 		money_notif.show_notif_lose_money()
