@@ -56,3 +56,4 @@ func _on_active_custom_email_view_finished_important(custom_email_view: CustomEm
 func _on_active_custom_email_view_finish_spam(custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_spam.disconnect(_on_active_custom_email_view_finish_spam)
 	Global.spam_emails.append(email_data)
+	Events.finished_spam_email.emit(email_data)

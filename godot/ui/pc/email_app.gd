@@ -14,6 +14,7 @@ func _ready() -> void:
 	_populate_email_items()
 	
 	Events.finished_important_email.connect(_on_finished_important_email)
+	Events.finished_spam_email.connect(_on_finished_spam_email)
 
 func _populate_email_items() -> void:
 	var emails_manager: EmailsManager = EmailsManager.get_instance()
@@ -77,3 +78,8 @@ func _on_finished_important_email(email_data: EmailData) -> void:
 	for email_app_list_item in email_app_list_items:
 		if email_app_list_item.email_data == email_data:
 			email_app_list_item.mark_as_finished_important()
+
+func _on_finished_spam_email(email_data: EmailData) -> void:
+	for email_app_list_item in email_app_list_items:
+		if email_app_list_item.email_data == email_data:
+			email_app_list_item.mark_as_finished_spam()

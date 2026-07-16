@@ -52,6 +52,9 @@ func mark_as_finished_important() -> void:
 	is_finished_important = true
 	_update_important_indicator()
 
+func mark_as_finished_spam() -> void:
+	is_finished_spam = true
+
 func _update_unread_indicator() -> void:
 	unread_indicator.visible = not is_read
 
