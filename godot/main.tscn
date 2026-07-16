@@ -46,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="26_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dytf7oi1bf6o7" path="res://sprites/alert/frame_04_delay-0.04s.png" id="27_jcxqu"]
 [ext_resource type="Texture2D" uid="uid://jvv7706jqmaf" path="res://sprites/alert/frame_05_delay-0.05s.png" id="28_0arob"]
+[ext_resource type="AudioStream" uid="uid://bvl68g2188yl0" path="res://audio/door_open.ogg" id="28_f3y11"]
 [ext_resource type="Texture2D" uid="uid://c6fkp2w01emjt" path="res://environment/textures/lights vent cieling.png" id="28_wat4s"]
 [ext_resource type="Texture2D" uid="uid://byywig7v214so" path="res://sprites/alert/frame_06_delay-0.04s.png" id="29_dij0e"]
 [ext_resource type="Texture2D" uid="uid://ds0th57ag3r1d" path="res://sprites/alert/frame_07_delay-0.04s.png" id="30_k1udn"]
@@ -770,9 +771,10 @@ shape = SubResource("BoxShape3D_getpj")
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.083761, 0, 4.5)
 
-[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("close_sound", "animation_player", "exited_break_room_detection_area")]
+[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("open_sound", "close_sound", "animation_player", "exited_break_room_detection_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.917271, 0, 4.4959364)
 script = ExtResource("6_d13ii")
+open_sound = NodePath("OpenSound")
 close_sound = NodePath("CloseSound")
 animation_player = NodePath("BreakRoomDoorAnimationPlayer")
 open_door_animation_name = "open_door"
@@ -801,6 +803,10 @@ ROOM"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/BreakRoomEntranceBlocker" unique_id=801664430]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009460449, 0.9860133, 0.51588345)
 shape = SubResource("BoxShape3D_xrivr")
+
+[node name="OpenSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=1999929962]
+stream = ExtResource("28_f3y11")
+volume_db = -20.0
 
 [node name="CloseSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=2035882888]
 stream = ExtResource("7_1u8w0")

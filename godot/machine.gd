@@ -43,6 +43,8 @@ extends Node3D
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
+@export var hum_sound: AudioStreamPlayer3D
+@export var done_sound: AudioStreamPlayer3D
 
 var customer: Customer
 var order: OrderData
@@ -201,6 +203,9 @@ func machine_make_drink() -> void:
 	if ingredients < Stats.current.ingredients_per_order or broken_down:
 		return
 
+	hum_sound.pitch_scale = randf_range(0.95, 1.05)
+	hum_sound.play()
+
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
@@ -224,6 +229,9 @@ func machine_make_drink() -> void:
 		break_down()
 
 	await timer.timeout
+
+	hum_sound.stop()
+	done_sound.play()
 
 	consume_ingredients()
 
@@ -285,11 +293,7 @@ func machine_make_drink() -> void:
 			randf() < Stats.current.machine_chance_of_spill
 			and Global.spills_this_shift < Stats.current.max_spills_per_shift
 	):
-		spill_interactable.show()
-		spill_sound.play()
-		Events.alert_posted.emit("⚙️machine made a spill")
-		Global.spills_this_shift += 1
-		spill_on_floor = true
+		spill()
 
 	final_order_indicator.text = (
 			"MADE: %s (%s)"
@@ -299,6 +303,15 @@ func machine_make_drink() -> void:
 
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
+
+
+# NOTE: separated into its own func so it can be called from dev console
+func spill() -> void:
+	spill_interactable.show()
+	spill_sound.play()
+	Events.alert_posted.emit("⚙️machine made a spill")
+	Global.spills_this_shift += 1
+	spill_on_floor = true
 
 
 func display_drink_score() -> void:
@@ -335,6 +348,8 @@ func fix_machine() -> void:
 	if customer:
 		customer_order_indicator.show()
 		timer.paused = false
+		hum_sound.pitch_scale = randf_range(0.95, 1.05)
+		hum_sound.play()
 
 
 # this isnt inlined cos both manual and automatic drinks call this
@@ -475,6 +490,7 @@ func break_down() -> void:
 
 	timer.paused = true
 	broken_down = true
+	hum_sound.stop()
 
 
 func _on_clean_spill() -> void:
