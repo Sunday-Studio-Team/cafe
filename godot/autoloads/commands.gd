@@ -29,10 +29,14 @@ func _ready() -> void:
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
 - [i]startshift[/i] starts shift
+- [i]endshift[/i] ends shift
+- [i]endshift W[/i] forces a win
+- [i]endshift L[/i] forces a loss
 - [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
-- [i]spill[/i] makes a random machine spill,
-- [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete),
+- [i]spill[/i] makes a random machine spill
+- [i]day <number>[/i] skips to a day and resets the game
+- [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
 - [i]speed <number>[/i] sets the game speed"
 		% [items_guide_str],
@@ -49,6 +53,8 @@ func _ready() -> void:
 	Console.add_command("bank", bank)
 	Console.add_command("break", breakdown)
 	Console.add_command("spill", spill)
+	Console.add_command("day", set_day, 1)
+	Console.add_command("endshift", end_shift, ["arg"])
 
 	Console.add_command("item", give_item, ["item_name"])
 	for item in Global.items:
@@ -56,6 +62,34 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("item", _item_names)
 
 	Console.add_command("speed", set_speed, 1)
+
+
+func end_shift(arg: String = "") -> void:
+	var detail := ""
+
+	if arg.to_lower() == "w":
+		Global.daily_profit = 100
+		Global.employee_rating = 100
+		detail = "(forcing win)"
+	elif arg.to_lower() == "l":
+		Global.daily_profit = 0
+		Global.employee_rating = 0
+		detail = "(forcing loss)"
+
+	# unsafe ref but whatever
+	Global.main_scene._on_game_timer_timeout()
+	Console.print_line("ending shift %s" % detail)
+
+
+func set_day(day: String) -> void:
+	var final_day := Global.final_day
+	if int(day) > final_day:
+		Console.print_error("final day is day %s, can't set day higher than that :p" % final_day)
+		return
+
+	Global.day = int(day)
+	Events.main_scene_loaded.emit()
+	Console.print_line("skipping to day %s" % day)
 
 
 func set_speed(param1: String) -> void:
