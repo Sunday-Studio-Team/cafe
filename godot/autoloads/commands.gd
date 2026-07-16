@@ -15,8 +15,9 @@ func _ready() -> void:
 	# not sure whether to enable this or not, seems to break some stuff
 	# but might be better than accidentally pressing stuff in game by typing lol
 	#Console.pause_enabled = true
-	Console.font_size = 28
+	Console.font_size = 18
 	# dont think we need this yet, but if the commands list gets much longer itll go offscreen
+	# (maybe font size could just be further reduced to compensate for that tho)
 	#Console.toggle_size() # set fullscreen
 
 	var items_guide_str: String = "Available items: "
