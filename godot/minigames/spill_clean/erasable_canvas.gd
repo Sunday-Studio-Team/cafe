@@ -11,10 +11,6 @@ extends Node2D
 var allowed_remaining_ratio: float = 0.01
 @export_range(0.25, 1.0, 0.05)
 var brush_spacing_ratio: float = 0.5
-@export var canvas_sprite: Sprite2D
-@export var progress_label: Label
-@export_dir var canvas_folder: String = \
-	"res://minigames/spill_clean/stains"
 
 
 # If a pixel has alpha value lower then the threshold,
