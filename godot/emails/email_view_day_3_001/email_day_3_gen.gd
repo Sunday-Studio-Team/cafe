@@ -12,12 +12,12 @@ var closer = "
 
 From all of us at the company, we cannot thank you enough for joining us on this journey.
 
-You're welcome."
+ And you're welcome."
 
 # Nested type collections not supported, using new class 'AIImprovement' instead
 var improvement_list: Array[AIImprovement] = [
 	## AI automatically cleans spills... but more will happen
-	AIImprovement.new(" the AI cleans spills now. No more wasting money on manual labor.",
+	AIImprovement.new(" the machine's spills are smaller, less money wasted on manual labor.",
 	{
 		'machine_chance_of_spill' : 0.2,
 		'max_spills_per_shift' : 1.0,
