@@ -16,14 +16,26 @@ You're welcome."
 
 var day_3_dict = {
 	## AI automatically cleans spills... but could create a new one
-	1 : " the AI cleans spills now. No more wasting money on manual labor.",
+	{
+		'machine_chance_of_spill' : 0.1,
+		'max_spills_per_shift' : 1.0
+		# add stat / mechanic for ai to clean spills
+	} : " the AI cleans spills now. No more wasting money on manual labor.",
 	## AI is more accurate... but takes longer
-	2 : " we've added workflow-enhancing technology, ensuring accuracy of orders.",
-		## AI is less wasteful.. but not effecient
-	3 : " we've increased the water to coffee beans ratio. More bank for our buck."
+	{
+		'machine_time_to_make_drink' : 0.5
+		# add stat for order accuracy
+	}: " we've added workflow-enhancing technology, ensuring accuracy of orders.",
+		
+	{
+		'ingredients_per_order' : -5.0,
+		'chance_of_machine_breaking' : 0.05
+	} : " we've increased the water to coffee beans ratio. More bank for our buck."
+	## AI is less wasteful.. but not effecient
 }
 
 func _init():
+	
 	contents += opener	
 	var chosen_buff = day_3_dict.keys().pick_random()
 	contents += day_3_dict[chosen_buff]
