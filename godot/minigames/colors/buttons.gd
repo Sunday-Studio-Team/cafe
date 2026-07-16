@@ -2,6 +2,7 @@ extends Control
 
 @export var needed_successes: int = 3
 
+var accepting_input := true
 var current_choice: Array
 var successes: int = 0
 var colors = [
@@ -30,8 +31,10 @@ func _ready():
 #Sets the text randomly
 func set_choice():
 	if last_click_correct:
+		accepting_input = false
 		text_edit.text = "✅"
 		await get_tree().create_timer(0.5, false).timeout
+		accepting_input = true
 	last_click_correct = false
 	current_choice = choices.pick_random()
 	text_edit.text = current_choice[0]
@@ -53,6 +56,9 @@ func victory():
 
 
 func _on_button_pressed():
+	if not accepting_input:
+		return
+
 	print(successes)
 	if current_choice[1] == 1:
 		successes += 1
@@ -65,6 +71,9 @@ func _on_button_pressed():
 
 
 func _on_button_2_pressed():
+	if not accepting_input:
+		return
+
 	if current_choice[1] == 2:
 		successes += 1
 		last_click_correct = true
@@ -76,6 +85,9 @@ func _on_button_2_pressed():
 
 
 func _on_button_3_pressed():
+	if not accepting_input:
+		return
+
 	if current_choice[1] == 3:
 		successes += 1
 		last_click_correct = true
