@@ -22,6 +22,7 @@ signal customer_score_updated(new_value: int, old_value: int)
 signal alert_posted(message: String)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
+signal finished_spam_email(email_data: EmailData)
 signal gui3d_exit_button_pressed
 # minigames
 signal minigame_active(minigame_name: String)
