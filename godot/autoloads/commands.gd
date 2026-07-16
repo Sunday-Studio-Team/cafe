@@ -4,6 +4,7 @@
 # lemme know)
 extends Node
 
+var _item_names: Array[String] = []
 
 func _ready() -> void:
 	# NOTE: untested
@@ -17,6 +18,10 @@ func _ready() -> void:
 	# dont think we need this yet, but if the commands list gets much longer itll go offscreen
 	#Console.toggle_size() # set fullscreen
 
+	var items_guide_str: String = "Available items: "
+	for item in Global.items:
+		items_guide_str += "\"%s\", " % item.name
+
 	# NOTE: theres a command which shows a command list but it seems to include builtin ones,
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
@@ -24,7 +29,11 @@ func _ready() -> void:
 - [i]startshift[/i] starts shift
 - [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
-- [i]spill[/i] makes a random machine spill",
+- [i]spill[/i] makes a random machine spill,
+- [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete),
+%s
+- [i]speed <number>[/i] sets the game speed"
+	% [items_guide_str]
 	)
 	Console.print_line(
 		"\n[color=green]tip: try typing the start of a command and pressing TAB to autofill ![/color]",
@@ -39,14 +48,16 @@ func _ready() -> void:
 	Console.add_command("break", breakdown)
 	Console.add_command("spill", spill)
 
-	# WARNING: dont really know how to get params to work yet lol
-	#Console.add_command("item", give_item, ["item name"])
-	#Console.add_command_autocomplete_list("item", Global.items)
+	Console.add_command("item", give_item, ["item_name"])
+	for item in Global.items:
+		_item_names.append("\"%s\"" % item.name)
+	Console.add_command_autocomplete_list("item", _item_names)
 
-	#Console.add_command("speed", set_speed, 1)
+	Console.add_command("speed", set_speed, 1)
 
 
-func set_speed(speed: float) -> void:
+func set_speed(param1: String) -> void:
+	var speed: float = float(param1)
 	Engine.time_scale = speed
 	Console.print_line("game speed set to %s" % speed)
 
@@ -56,9 +67,13 @@ func start_shift() -> void:
 	Console.print_line("starting shift")
 
 
-func give_item(item: Item) -> void:
-	Global.owned_items.append(item)
-	Console.print_line("gave %s" % item.name)
+func give_item(item_name: String) -> void:
+	for item in Global.items:
+		if item_name == item.name:
+			Global.owned_items.append(item)
+			Console.print_line("gave %s" % item.name)
+			return
+	Console.print_error("Item name not found.")
 
 
 func bank() -> void:
