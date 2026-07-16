@@ -26,7 +26,7 @@ var improvement_list: Array[AIImprovement] = [
 	## AI is more accurate... but takes longer
 	AIImprovement.new(" we've added workflow-enhancing technology, ensuring accuracy of orders.",
 	{
-		'machine_time_to_make_drink' : 1.0,
+		'machine_time_to_make_drink' : 2.0,
 		'score_chances_3' : 0.15,
 		'score_chances_neg3' : -0.15,
 		'score_chances_1' : 0.15,
