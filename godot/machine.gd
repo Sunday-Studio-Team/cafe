@@ -344,12 +344,19 @@ func display_drink_score() -> void:
 func fix_machine() -> void:
 	fix_machine_button.hide()
 	broken_down = false
+	timer.paused = false
 	gui_3d.interactable.enabled = true
 	if customer:
-		customer_order_indicator.show()
-		timer.paused = false
-		hum_sound.pitch_scale = randf_range(0.95, 1.05)
-		hum_sound.play()
+		# during normal gameplay, breakdowns always happen mid order,
+		# but when we force a breakdown thru the console we have to check some stuff
+		if timer.time_left != 0:
+			customer_order_indicator.show()
+			hum_sound.pitch_scale = randf_range(0.95, 1.05)
+			hum_sound.play()
+		elif waiting_for_response:
+			return
+		else:
+			machine_make_drink()
 
 
 # this isnt inlined cos both manual and automatic drinks call this

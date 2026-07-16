@@ -69,11 +69,12 @@ func _ready() -> void:
 	await get_tree().process_frame
 	if Global.day >= 1:
 		objective.text = (
-			"you are the new manager of a fully automated cafe!
-(flip the sign at the desk to open the shop and start your shift)"
+				"You are the new manager of a fully automated cafe!
+This is your first trial shift - make it through the week to keep your new position!
+(check your emails the computer for more details)"
 		)
 		rules_controls.text = (
-			"[b][i]controls [/i][/b]
+				"[b][i]controls [/i][/b]
 			[b]WASD[/b] move
 			[b]E[/b] interact
 			[b]Shift[/b] sprint"
@@ -81,35 +82,35 @@ func _ready() -> void:
 		cctv_indicator.hide()
 	if Global.day >= 2:
 		objective.text = (
-			"your boss has instated some new store [i]rules[/i].
+				"your boss has instated some new store [i]rules[/i].
 they installed some security cameras to make sure you follow them!"
 		)
 		rules_controls.text += (
-			"\n[b][i]rules [/i][/b]
+				"\n[b][i]rules [/i][/b]
 			- no running
 			- no handmade drinks"
 		)
 		cctv_indicator.show()
 	if Global.day >= 3:
 		objective.text = (
-			"your boss has installed another machine! it's located around the corner on the left.
+				"your boss has installed another machine! it's located around the corner on the left.
 (your daily profit goal has been adjusted accordingly.)"
 		)
 	if Global.day >= 4:
 		objective.text = (
-			"your boss says you're using up too many ingredients.
+				"your boss says you're using up too many ingredients.
 new rule: don't take any more ingredients out of the store room."
 		)
 		rules_controls.text += "\n- no taking ingredients from store room"
 	if Global.day == 5:
 		objective.text = (
-			"your boss has installed another machine."
+				"your boss has installed another machine."
 		)
 	@warning_ignore("integer_division")
 	objective.text += (
-		"\n\n[b]SHIFT OBJECTIVE[/b]
+			"\n\n[b]SHIFT OBJECTIVE[/b]
 make %s while keeping your employee rating (🙂) above %s⭐️"
-		% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
+			% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
 	)
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
@@ -175,9 +176,9 @@ func handle_shelf_item_ui() -> void:
 
 func handle_time_left_warning() -> void:
 	if (
-		not game_timer.is_stopped()
-		and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
-		and not time_left_warning_played
+			not game_timer.is_stopped()
+			and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
+			and not time_left_warning_played
 	):
 		low_time_warning_label.text = "‼️⏰ %ds left" % Stats.TIME_FOR_LOW_TIME_WARNING
 		low_time_sound.play()
@@ -193,8 +194,8 @@ func handle_time_left_warning() -> void:
 
 func update_score_indicators() -> void:
 	profit_label.text = (
-		Global.float_to_price(Global.daily_profit)
-		+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
+			Global.float_to_price(Global.daily_profit)
+			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
 	)
 
 	for c in rating_stars_hbox.get_children():
@@ -236,26 +237,26 @@ func update_interactable_ui() -> void:
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
-				"(HOLD) [E] - "
-				+ Global.hovered_interactable.display_name
+					"(HOLD) [E] - "
+					+ Global.hovered_interactable.display_name
 			)
 
 			hold_interact_progress.value = (
-				hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
+					hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
 			)
 
 		else:
 			interactable_label.text = (
-				"[E] - "
-				+ Global.hovered_interactable.display_name
+					"[E] - "
+					+ Global.hovered_interactable.display_name
 			)
 
 	else:
 		interactable_indicator.hide()
 
 	hold_interact_progress.visible = (
-		hovered_interactable != null
-		and hovered_interactable.time_held > 0
+			hovered_interactable != null
+			and hovered_interactable.time_held > 0
 	)
 
 

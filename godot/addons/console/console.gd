@@ -1,255 +1,58 @@
 extends Node
 
-const CONSOLE_THEME : String = &"console/theme"
-const CONSOLE_SCALE : String = &"console/scale"
-const CONSOLE_HEIGHT : String = &"console/height"
-const CONSOLE_COLOR_WARNING : String = &"console/color_warning"
-const CONSOLE_COLOR_ERROR : String = &"console/color_error"
-const CONSOLE_COLOR_INFO : String = &"console/color_info"
-const CONSOLE_COLOR_LITERAL : String = &"console/color_literal"
-const CONSOLE_TABSTOP : String = &"console/tabstop"
-
-const color_dictionary : Dictionary[String, Color] = {
-	CONSOLE_COLOR_ERROR: Color.LIGHT_CORAL,
-	CONSOLE_COLOR_INFO: Color.LIGHT_BLUE,
-	CONSOLE_COLOR_LITERAL: Color.PALE_GREEN,
-	CONSOLE_COLOR_WARNING: Color.LIGHT_GOLDENROD
-}
-
-var enabled : bool = true
-var enable_on_release_build : bool = false : set = set_enable_on_release_build
-var pause_enabled : bool = false
-var font_size : int : set = _set_font_size
-
-## What visual scale should the console be
-var console_scale : float : set = set_console_scale
-
-## Is the console in full screen or part screen mode
-var console_full_screen : bool = false
-
-var _conosle_tween_time : float = 5
-
 signal console_opened
 signal console_closed
 signal console_unknown_command
-signal console_cvar_changed(cvar_name : String, value : Variant)
+signal console_cvar_changed(cvar_name: String, value: Variant)
 
+const CONSOLE_THEME: String = &"console/theme"
+const CONSOLE_SCALE: String = &"console/scale"
+const CONSOLE_HEIGHT: String = &"console/height"
+const CONSOLE_COLOR_WARNING: String = &"console/color_warning"
+const CONSOLE_COLOR_ERROR: String = &"console/color_error"
+const CONSOLE_COLOR_INFO: String = &"console/color_info"
+const CONSOLE_COLOR_LITERAL: String = &"console/color_literal"
+const CONSOLE_TABSTOP: String = &"console/tabstop"
+const color_dictionary: Dictionary[String, Color] = {
+	CONSOLE_COLOR_ERROR: Color.LIGHT_CORAL,
+	CONSOLE_COLOR_INFO: Color.LIGHT_BLUE,
+	CONSOLE_COLOR_LITERAL: Color.PALE_GREEN,
+	CONSOLE_COLOR_WARNING: Color.LIGHT_GOLDENROD,
+}
 
-class ConsoleCommand:
-	var function : Callable
-	var arguments : PackedStringArray
-	var required : int
-	var description : String
-	var hidden : bool
-	func _init(in_function : Callable, in_arguments : PackedStringArray, in_required : int = 0, in_description : String = ""):
-		function = in_function
-		arguments = in_arguments
-		required = in_required
-		description = in_description
-
-
-class ConsoleCvar:
-	var name : String
-	var description : String
-	var type : int
-	var save : bool
-	var value : Variant
-	var object : Object
-	var property : String
-
-	func _init(in_name : String, in_type : int, in_description : String = "", in_save : bool = false):
-		name = in_name
-		type = in_type
-		description = in_description
-		save = in_save
-
-	func is_reference() -> bool:
-		return object != null
-
-	func is_alive() -> bool:
-		return object == null or is_instance_valid(object)
-
-	func get_value() -> Variant:
-		if object != null:
-			return object.get_indexed(property)
-		return value
-
-	func set_value(new_value : Variant) -> void:
-		if object != null:
-			object.set_indexed(property, new_value)
-		else:
-			value = new_value
-
-var theme : Theme
-var canvas_layer : CanvasLayer = CanvasLayer.new()
-var v_box_container : VBoxContainer = VBoxContainer.new()
-
+var enabled: bool = true
+var enable_on_release_build: bool = false:
+	set = set_enable_on_release_build
+var pause_enabled: bool = false
+var font_size: int:
+	set = _set_font_size
+## What visual scale should the console be
+var console_scale: float:
+	set = set_console_scale
+## Is the console in full screen or part screen mode
+var console_full_screen: bool = false
+var theme: Theme
+var canvas_layer: CanvasLayer = CanvasLayer.new()
+var v_box_container: VBoxContainer = VBoxContainer.new()
 # If you want to customize the way the console looks, you can direcly modify
 # the properties of the rich text and line edit here:
-var rich_label : RichTextLabel = RichTextLabel.new()
-var panel : Panel = Panel.new()
-var line_edit : LineEdit = LineEdit.new()
-
-var console_commands : Dictionary[String, ConsoleCommand] = {}
-var console_cvars : Dictionary[String, ConsoleCvar] = {}
+var rich_label: RichTextLabel = RichTextLabel.new()
+var panel: Panel = Panel.new()
+var line_edit: LineEdit = LineEdit.new()
+var console_commands: Dictionary[String, ConsoleCommand] = { }
+var console_cvars: Dictionary[String, ConsoleCvar] = { }
+var command_parameters: Dictionary[String, PackedStringArray] = { }
+var console_history: Array[String] = []
+var console_history_index: int = 0
+var was_paused_already: bool = false
+var tab_string: String = "    "
+var text_block_cache: Array[String]
+var suggestions := []
+var current_suggest := 0
+var suggesting := false
+var _conosle_tween_time: float = 5
 # Pending values are applied when cvars are registered (if loaded from config)
-var _pending_cvar_values : Dictionary[String, Variant] = {}
-var command_parameters : Dictionary[String, PackedStringArray] = {}
-var console_history : Array[String] = []
-var console_history_index : int = 0
-var was_paused_already : bool = false
-
-var tab_string : String = "    "
-var text_block_cache : Array[String]
-
-## Usage: Console.add_command("command_name", <function to call>, <number of arguments or array of argument names>, <required number of arguments>, "Help description")
-func add_command(command_name : String, function : Callable, arguments = [], required: int = 0, description : String = "") -> void:
-	if (arguments is int):
-		# Legacy call using an argument number
-		var param_array : PackedStringArray
-		for i in range(arguments):
-			param_array.append("arg_" + str(i + 1))
-		console_commands[command_name] = ConsoleCommand.new(function, param_array, required, description)
-	elif (arguments is Array):
-		# New array argument system
-		var str_args : PackedStringArray
-		for argument in arguments:
-			str_args.append(str(argument))
-		console_commands[command_name] = ConsoleCommand.new(function, str_args, required, description)
-
-
-## Adds a secret command that will not show up in the help or auto-complete.
-func add_hidden_command(command_name : String, function : Callable, arguments = [], required : int = 0) -> void:
-	add_command(command_name, function, arguments, required)
-	console_commands[command_name].hidden = true
-
-
-## Removes a command from the console.  This should be called on a script's _exit_tree()
-## if you have console commands for things that are unloaded before the project closes.
-func remove_command(command_name : String) -> void:
-	console_commands.erase(command_name)
-	command_parameters.erase(command_name)
-
-
-## Registers an auto-managed cvar that stores its value internally.
-## Type the name to print the value, or "name value" to set it.  The value is coerced to the
-## type of default_value.  If save is true, the value is persisted to user://console_cvars.txt.
-## Usage: Console.add_cvar("cl_fov", 90.0, "Field of view.", true)
-func add_cvar(cvar_name : String, default_value : Variant, description : String = "", save : bool = false) -> void:
-	var cvar := ConsoleCvar.new(cvar_name, typeof(default_value), description, save)
-	cvar.value = default_value
-	console_cvars[cvar_name] = cvar
-	_apply_pending_cvar_value(cvar)
-
-
-## Registers a cvar that reads from and writes to a property on another object.
-## The cvar type is inferred from the property's current value.  property may be a nested path
-## (ex: "position:x").
-## Usage: Console.add_cvar_reference("cl_fov", camera, "fov", "Camera field of view.")
-func add_cvar_reference(cvar_name : String, object : Object, property : String, description : String = "", save : bool = false) -> void:
-	if not is_instance_valid(object):
-		print_error("Cannot register cvar \"%s\": invalid object." % cvar_name)
-		return
-	var cvar := ConsoleCvar.new(cvar_name, typeof(object.get_indexed(property)), description, save)
-	cvar.object = object
-	cvar.property = property
-	console_cvars[cvar_name] = cvar
-	_apply_pending_cvar_value(cvar)
-
-
-## Removes a cvar.  Call this on _exit_tree() for reference cvars whose object is freed early.
-func remove_cvar(cvar_name : String) -> void:
-	console_cvars.erase(cvar_name)
-
-
-## Returns the current value of a cvar, or null if it doesn't exist / its object was freed.
-func get_cvar(cvar_name : String) -> Variant:
-	if console_cvars.has(cvar_name):
-		var cvar : ConsoleCvar = console_cvars[cvar_name]
-		if cvar.is_alive():
-			return cvar.get_value()
-	return null
-
-
-## Sets the value of a cvar programmatically (no string coercion) and emits console_cvar_changed.
-func set_cvar(cvar_name : String, value : Variant) -> void:
-	if console_cvars.has(cvar_name):
-		var cvar : ConsoleCvar = console_cvars[cvar_name]
-		if cvar.is_alive():
-			cvar.set_value(value)
-			console_cvar_changed.emit(cvar_name, value)
-
-
-func _apply_pending_cvar_value(cvar : ConsoleCvar) -> void:
-	if cvar.save and _pending_cvar_values.has(cvar.name):
-		var saved_value : Variant = _pending_cvar_values[cvar.name]
-		if typeof(saved_value) != cvar.type:
-			saved_value = type_convert(saved_value, cvar.type)
-		cvar.set_value(saved_value)
-		_pending_cvar_values.erase(cvar.name)
-
-
-## Coerces a string into the given Variant.Type.  Returns [success : bool, value : Variant].
-func _coerce_string_to_type(string_value : String, type : int) -> Array:
-	match type:
-		TYPE_BOOL:
-			var lower := string_value.strip_edges().to_lower()
-			if lower in ["1", "true", "yes", "on"]:
-				return [true, true]
-			if lower in ["0", "false", "no", "off"]:
-				return [true, false]
-			return [false, null]
-		TYPE_INT:
-			var int_string := string_value.strip_edges()
-			if int_string.is_valid_int():
-				return [true, int_string.to_int()]
-			return [false, null]
-		TYPE_FLOAT:
-			var float_string := string_value.strip_edges()
-			if float_string.is_valid_float():
-				return [true, float_string.to_float()]
-			return [false, null]
-		TYPE_STRING:
-			return [true, string_value]
-		TYPE_STRING_NAME:
-			return [true, StringName(string_value)]
-		_:
-			# Complex types (Vector2, etc.) require GDScript literal syntax, ex: "Vector2(1, 2)".
-			var parsed : Variant = str_to_var(string_value)
-			if parsed != null and typeof(parsed) == type:
-				return [true, parsed]
-			return [false, null]
-
-
-func _print_cvar_value(cvar : ConsoleCvar) -> void:
-	print_line("%s = [system_color color=CONSOLE_COLOR_LITERAL]%s[/system_color]" % [cvar.name, str(cvar.get_value())])
-
-
-func _handle_cvar(cvar : ConsoleCvar, arguments : PackedStringArray) -> void:
-	if not cvar.is_alive():
-		print_error("Variable \"%s\" references a freed object." % cvar.name)
-		return
-
-	if arguments.is_empty():
-		_print_cvar_value(cvar)
-		if cvar.description:
-			print_line("%s%s" % [tab_string, cvar.description])
-		return
-
-	var raw_value := " ".join(arguments)
-	var result := _coerce_string_to_type(raw_value, cvar.type)
-	if not result[0]:
-		print_error("Invalid value \"%s\" for variable \"%s\" (expected %s)." % [raw_value, cvar.name, type_string(cvar.type)])
-		return
-
-	cvar.set_value(result[1])
-	console_cvar_changed.emit(cvar.name, result[1])
-	_print_cvar_value(cvar)
-
-
-## Useful if you have a list of possible parameters (ex: level names).
-func add_command_autocomplete_list(command_name : String, param_list : PackedStringArray):
-	command_parameters[command_name] = param_list
+var _pending_cvar_values: Dictionary[String, Variant] = { }
 
 
 func _enter_tree() -> void:
@@ -298,7 +101,7 @@ func _enter_tree() -> void:
 	rich_label.anchor_bottom = 1.0
 	rich_label.install_effect(preload("res://addons/console/system_color.gd").new())
 	panel.add_child(rich_label)
-	rich_label.append_text("Development console.\n")
+	rich_label.append_text("this is the dev console :D\n")
 	line_edit.anchor_right = 1.0
 	line_edit.placeholder_text = "Enter \"help\" for instructions"
 	if font_size > 0:
@@ -308,75 +111,6 @@ func _enter_tree() -> void:
 	line_edit.text_changed.connect(_on_line_edit_text_changed)
 	v_box_container.visible = false
 	process_mode = PROCESS_MODE_ALWAYS
-
-
-## Get the scale of the console from the settings -- if this is not in the system settings return a default value
-func _get_console_scale_setting() -> float:
-	if ProjectSettings.has_setting(CONSOLE_SCALE):
-		return ProjectSettings.get_setting(CONSOLE_SCALE)
-
-	return 1.0
-
-
-## Set the console scale
-func set_console_scale(scale : float):
-	console_scale = scale
-	v_box_container.scale = Vector2(console_scale, console_scale)
-	v_box_container.anchor_right = _get_console_width()
-	v_box_container.anchor_bottom = _get_console_height()
-
-
-## Get the height of the console - this is related to the scaling of the console
-func _get_console_height() -> float:
-	if console_full_screen:
-		return 1.0 / console_scale
-
-	if ProjectSettings.has_setting(CONSOLE_HEIGHT):
-		return ProjectSettings.get_setting(CONSOLE_HEIGHT) / console_scale
-
-	return 0.5 / console_scale
-
-func _get_console_width() -> float:
-	return 1.0 / console_scale
-
-
-func _set_font_size(value: int) -> void:
-	font_size = value
-	if value > 0:
-		line_edit.add_theme_font_size_override("font_size", font_size)
-		rich_label.add_theme_font_size_override("normal_font_size", font_size)
-		rich_label.add_theme_font_size_override("bold_font_size", font_size)
-		rich_label.add_theme_font_size_override("bold_italics_font_size", font_size)
-		rich_label.add_theme_font_size_override("italics_font_size", font_size)
-		rich_label.add_theme_font_size_override("mono_font_size", font_size)
-	else:
-		line_edit.remove_theme_font_size_override("font_size")
-		rich_label.remove_theme_font_size_override("normal_font_size")
-		rich_label.remove_theme_font_size_override("bold_font_size")
-		rich_label.remove_theme_font_size_override("bold_italics_font_size")
-		rich_label.remove_theme_font_size_override("italics_font_size")
-		rich_label.remove_theme_font_size_override("mono_font_size")
-
-
-func _exit_tree() -> void:
-	var console_history_file := FileAccess.open("user://console_history.txt", FileAccess.WRITE)
-	if (console_history_file):
-		var write_index := 0
-		var start_write_index := console_history.size() - 100 # Max lines to write
-		for line in console_history:
-			if (write_index >= start_write_index):
-				console_history_file.store_line(line)
-			write_index += 1
-
-	var console_cvars_file := FileAccess.open("user://console_cvars.txt", FileAccess.WRITE)
-	if (console_cvars_file):
-		for cvar_name in console_cvars:
-			var cvar : ConsoleCvar = console_cvars[cvar_name]
-			if (cvar.save and cvar.is_alive()):
-				console_cvars_file.store_line("%s %s" % [cvar_name, var_to_str(cvar.get_value())])
-		for pending_name in _pending_cvar_values:
-			if (!console_cvars.has(pending_name)):
-				console_cvars_file.store_line("%s %s" % [pending_name, var_to_str(_pending_cvar_values[pending_name])])
 
 
 func _ready() -> void:
@@ -399,7 +133,28 @@ func _ready() -> void:
 	add_command("exec", exec, 1, 1, "Execute a script.")
 
 
-func _input(event : InputEvent) -> void:
+func _exit_tree() -> void:
+	var console_history_file := FileAccess.open("user://console_history.txt", FileAccess.WRITE)
+	if (console_history_file):
+		var write_index := 0
+		var start_write_index := console_history.size() - 100 # Max lines to write
+		for line in console_history:
+			if (write_index >= start_write_index):
+				console_history_file.store_line(line)
+			write_index += 1
+
+	var console_cvars_file := FileAccess.open("user://console_cvars.txt", FileAccess.WRITE)
+	if (console_cvars_file):
+		for cvar_name in console_cvars:
+			var cvar: ConsoleCvar = console_cvars[cvar_name]
+			if (cvar.save and cvar.is_alive()):
+				console_cvars_file.store_line("%s %s" % [cvar_name, var_to_str(cvar.get_value())])
+		for pending_name in _pending_cvar_values:
+			if (!console_cvars.has(pending_name)):
+				console_cvars_file.store_line("%s %s" % [pending_name, var_to_str(_pending_cvar_values[pending_name])])
+
+
+func _input(event: InputEvent) -> void:
 	if (event is InputEventKey):
 		if (event.physical_keycode == KEY_QUOTELEFT): # ~ key.
 			if (event.physical_keycode == KEY_QUOTELEFT and event.is_command_or_control_pressed()): # Toggles console size or opens big console.
@@ -441,12 +196,12 @@ func _input(event : InputEvent) -> void:
 			if (event.get_physical_keycode_with_modifiers() == KEY_PAGEUP):
 				var scroll := rich_label.get_v_scroll_bar()
 				var tween := create_tween()
-				tween.tween_property(scroll, "value",  scroll.value - (scroll.page - scroll.page * 0.1), 0.1)
+				tween.tween_property(scroll, "value", scroll.value - (scroll.page - scroll.page * 0.1), 0.1)
 				get_tree().get_root().set_input_as_handled()
 			if (event.get_physical_keycode_with_modifiers() == KEY_PAGEDOWN):
 				var scroll := rich_label.get_v_scroll_bar()
 				var tween := create_tween()
-				tween.tween_property(scroll, "value",  scroll.value + (scroll.page - scroll.page * 0.1), 0.1)
+				tween.tween_property(scroll, "value", scroll.value + (scroll.page - scroll.page * 0.1), 0.1)
 				get_tree().get_root().set_input_as_handled()
 			if (event.get_physical_keycode_with_modifiers() == KEY_TAB):
 				autocomplete()
@@ -463,9 +218,96 @@ func _input(event : InputEvent) -> void:
 					get_tree().get_root().set_input_as_handled()
 
 
-var suggestions := []
-var current_suggest := 0
-var suggesting := false
+## Usage: Console.add_command("command_name", <function to call>, <number of arguments or array of argument names>, <required number of arguments>, "Help description")
+func add_command(command_name: String, function: Callable, arguments = [], required: int = 0, description: String = "") -> void:
+	if (arguments is int):
+		# Legacy call using an argument number
+		var param_array: PackedStringArray
+		for i in range(arguments):
+			param_array.append("arg_" + str(i + 1))
+		console_commands[command_name] = ConsoleCommand.new(function, param_array, required, description)
+	elif (arguments is Array):
+		# New array argument system
+		var str_args: PackedStringArray
+		for argument in arguments:
+			str_args.append(str(argument))
+		console_commands[command_name] = ConsoleCommand.new(function, str_args, required, description)
+
+
+## Adds a secret command that will not show up in the help or auto-complete.
+func add_hidden_command(command_name: String, function: Callable, arguments = [], required: int = 0) -> void:
+	add_command(command_name, function, arguments, required)
+	console_commands[command_name].hidden = true
+
+
+## Removes a command from the console.  This should be called on a script's _exit_tree()
+## if you have console commands for things that are unloaded before the project closes.
+func remove_command(command_name: String) -> void:
+	console_commands.erase(command_name)
+	command_parameters.erase(command_name)
+
+
+## Registers an auto-managed cvar that stores its value internally.
+## Type the name to print the value, or "name value" to set it.  The value is coerced to the
+## type of default_value.  If save is true, the value is persisted to user://console_cvars.txt.
+## Usage: Console.add_cvar("cl_fov", 90.0, "Field of view.", true)
+func add_cvar(cvar_name: String, default_value: Variant, description: String = "", save: bool = false) -> void:
+	var cvar := ConsoleCvar.new(cvar_name, typeof(default_value), description, save)
+	cvar.value = default_value
+	console_cvars[cvar_name] = cvar
+	_apply_pending_cvar_value(cvar)
+
+
+## Registers a cvar that reads from and writes to a property on another object.
+## The cvar type is inferred from the property's current value.  property may be a nested path
+## (ex: "position:x").
+## Usage: Console.add_cvar_reference("cl_fov", camera, "fov", "Camera field of view.")
+func add_cvar_reference(cvar_name: String, object: Object, property: String, description: String = "", save: bool = false) -> void:
+	if not is_instance_valid(object):
+		print_error("Cannot register cvar \"%s\": invalid object." % cvar_name)
+		return
+	var cvar := ConsoleCvar.new(cvar_name, typeof(object.get_indexed(property)), description, save)
+	cvar.object = object
+	cvar.property = property
+	console_cvars[cvar_name] = cvar
+	_apply_pending_cvar_value(cvar)
+
+
+## Removes a cvar.  Call this on _exit_tree() for reference cvars whose object is freed early.
+func remove_cvar(cvar_name: String) -> void:
+	console_cvars.erase(cvar_name)
+
+
+## Returns the current value of a cvar, or null if it doesn't exist / its object was freed.
+func get_cvar(cvar_name: String) -> Variant:
+	if console_cvars.has(cvar_name):
+		var cvar: ConsoleCvar = console_cvars[cvar_name]
+		if cvar.is_alive():
+			return cvar.get_value()
+	return null
+
+
+## Sets the value of a cvar programmatically (no string coercion) and emits console_cvar_changed.
+func set_cvar(cvar_name: String, value: Variant) -> void:
+	if console_cvars.has(cvar_name):
+		var cvar: ConsoleCvar = console_cvars[cvar_name]
+		if cvar.is_alive():
+			cvar.set_value(value)
+			console_cvar_changed.emit(cvar_name, value)
+
+
+## Useful if you have a list of possible parameters (ex: level names).
+func add_command_autocomplete_list(command_name: String, param_list: PackedStringArray):
+	command_parameters[command_name] = param_list
+
+
+## Set the console scale
+func set_console_scale(scale: float):
+	console_scale = scale
+	v_box_container.scale = Vector2(console_scale, console_scale)
+	v_box_container.anchor_right = _get_console_width()
+	v_box_container.anchor_bottom = _get_console_height()
+
 
 func autocomplete() -> void:
 	if (suggesting):
@@ -503,7 +345,7 @@ func autocomplete() -> void:
 			var prev_index := 0
 			for command in sorted_commands:
 				if (!line_edit.text || command.contains(line_edit.text)):
-					var index : int = command.find(line_edit.text)
+					var index: int = command.find(line_edit.text)
 					if (index <= prev_index):
 						suggestions.push_front(command)
 					else:
@@ -563,30 +405,31 @@ func scroll_to_bottom() -> void:
 	scroll.value = scroll.max_value - scroll.page
 
 
-func print_error(text : Variant, print_godot := false) -> void:
-	var _color : Color = Color.LIGHT_CORAL
+func print_error(text: Variant, print_godot := false) -> void:
+	var _color: Color = Color.LIGHT_CORAL
 	if not text is String:
 		text = str(text)
 
 	print_line("%s[system_color color=CONSOLE_COLOR_ERROR]ERROR:[/system_color] %s" % [tab_string, text], print_godot)
 
 
-func print_info(text : Variant, print_godot := false) -> void:
-	var _color : Color = Color.LIGHT_BLUE
+func print_info(text: Variant, print_godot := false) -> void:
+	var _color: Color = Color.LIGHT_BLUE
 	if not text is String:
 		text = str(text)
 
 	print_line("%s[system_color color=CONSOLE_COLOR_INFO]INFO:[/system_color] %s" % [tab_string, text], print_godot)
 
 
-func print_warning(text : Variant, print_godot := false) -> void:
-	var _color : Color = Color.LIGHT_GOLDENROD
+func print_warning(text: Variant, print_godot := false) -> void:
+	var _color: Color = Color.LIGHT_GOLDENROD
 	if not text is String:
 		text = str(text)
 
 	print_line("%s[system_color color=CONSOLE_COLOR_WARNING]WARNING:[/system_color] %s" % [tab_string, text], print_godot)
 
-func print_line(text : Variant, print_godot := false) -> void:
+
+func print_line(text: Variant, print_godot := false) -> void:
 	if not text is String:
 		text = str(text)
 	if (!rich_label): # Tried to print something before the console was loaded.
@@ -598,12 +441,12 @@ func print_line(text : Variant, print_godot := false) -> void:
 			print_rich(text.dedent())
 
 
-func parse_line_input(text : String) -> PackedStringArray:
-	var out_array : PackedStringArray
+func parse_line_input(text: String) -> PackedStringArray:
+	var out_array: PackedStringArray
 	var first_char := true
 	var in_quotes := false
 	var escaped := false
-	var token : String
+	var token: String
 	for c in text:
 		if (c == '\\'):
 			escaped = true
@@ -635,53 +478,6 @@ func parse_line_input(text : String) -> PackedStringArray:
 	return out_array
 
 
-func _on_text_entered(new_text : String) -> void:
-	scroll_to_bottom()
-	reset_autocomplete()
-	line_edit.clear()
-	if (line_edit.has_method(&"edit")):
-		line_edit.call_deferred(&"edit")
-
-	if not new_text.strip_edges().is_empty():
-		add_input_history(new_text)
-		print_line("[i]> " + new_text + "[/i]")
-		var text_split := parse_line_input(new_text)
-		var text_command := text_split[0]
-
-		if console_commands.has(text_command):
-			var arguments := text_split.slice(1)
-			var console_command : ConsoleCommand = console_commands[text_command]
-
-			# calc is a especial command that needs special treatment
-			if (text_command.match("calc")):
-				var expression := ""
-				for word in arguments:
-					expression += word
-				console_command.function.callv([expression])
-				return
-
-			if (arguments.size() < console_command.required):
-				print_error("Too few arguments! Required < %d >" % console_command.required)
-				return
-			elif (arguments.size() > console_command.arguments.size()):
-				arguments.resize(console_command.arguments.size())
-
-			# Functions fail to call if passed the incorrect number of arguments, so fill out with blank strings.
-			while (arguments.size() < console_command.arguments.size()):
-				arguments.append("")
-
-			console_command.function.callv(arguments)
-		elif console_cvars.has(text_command):
-			_handle_cvar(console_cvars[text_command], text_split.slice(1))
-		else:
-			console_unknown_command.emit(text_command)
-			print_error("Unknown command or variable.")
-
-
-func _on_line_edit_text_changed(new_text : String) -> void:
-	reset_autocomplete()
-
-
 func quit() -> void:
 	get_tree().quit()
 
@@ -697,7 +493,8 @@ func delete_history() -> void:
 
 
 func help() -> void:
-	rich_label.append_text("	Built in commands:
+	rich_label.append_text(
+		"	Built in commands:
 		[system_color color=CONSOLE_COLOR_LITERAL]calc[/system_color]: Calculates a given expresion
 		[system_color color=CONSOLE_COLOR_LITERAL]clear[/system_color]: Clears the registry view
 		[system_color color=CONSOLE_COLOR_LITERAL]commands[/system_color]: Shows a reduced list of all the currently registered commands
@@ -717,10 +514,11 @@ func help() -> void:
 		[[system_color color=CONSOLE_COLOR_INFO]Ctrl[/system_color] + [system_color color=CONSOLE_COLOR_INFO]~[/system_color]] to change console size between half screen and full screen
 		[[system_color color=CONSOLE_COLOR_INFO]Ctrl[/system_color] + [system_color color=CONSOLE_COLOR_INFO]Mouse Wheel[/system_color]] up/down to change console font size
 		[system_color color=CONSOLE_COLOR_INFO]~[/system_color] or [system_color color=CONSOLE_COLOR_INFO]Esc[/system_color] key to close the console
-		[system_color color=CONSOLE_COLOR_INFO]Tab[/system_color] key to autocomplete, [system_color system_color=CONSOLE_COLOR_INFO]Tab[/system_color] again to cycle between matching suggestions\n\n")
+		[system_color color=CONSOLE_COLOR_INFO]Tab[/system_color] key to autocomplete, [system_color system_color=CONSOLE_COLOR_INFO]Tab[/system_color] again to cycle between matching suggestions\n\n",
+	)
 
 
-func calculate(command : String) -> void:
+func calculate(command: String) -> void:
 	var expression := Expression.new()
 	var error = expression.parse(command)
 	if error:
@@ -752,7 +550,7 @@ func commands_list() -> void:
 
 	for command in commands:
 		var arguments_string := ""
-		var description : String = console_commands[command].description
+		var description: String = console_commands[command].description
 		for i in range(console_commands[command].arguments.size()):
 			if i < console_commands[command].required:
 				arguments_string += "  [system_color color=CONSOLE_COLOR_ERROR]<" + console_commands[command].arguments[i] + ">[/system_color]"
@@ -766,7 +564,7 @@ func cvars() -> void:
 	var names := console_cvars.keys()
 	names.sort()
 	for cvar_name in names:
-		var cvar : ConsoleCvar = console_cvars[cvar_name]
+		var cvar: ConsoleCvar = console_cvars[cvar_name]
 		var value_string := "<invalid>"
 		if (cvar.is_alive()):
 			value_string = str(cvar.get_value())
@@ -774,13 +572,13 @@ func cvars() -> void:
 	rich_label.append_text("\n")
 
 
-func add_input_history(text : String) -> void:
+func add_input_history(text: String) -> void:
 	if (!console_history.size() || text != console_history.back()): # Don't add consecutive duplicates
 		console_history.append(text)
 	console_history_index = console_history.size()
 
 
-func set_enable_on_release_build(enable : bool):
+func set_enable_on_release_build(enable: bool):
 	enable_on_release_build = enable
 	if (!enable_on_release_build):
 		if (!OS.is_debug_build()):
@@ -795,7 +593,7 @@ func unpause() -> void:
 	get_tree().paused = false
 
 
-func exec(filename : String) -> void:
+func exec(filename: String) -> void:
 	var path := "user://%s.txt" % [filename]
 	var script := FileAccess.open(path, FileAccess.READ)
 	if (script):
@@ -803,3 +601,211 @@ func exec(filename : String) -> void:
 			_on_text_entered(script.get_line())
 	else:
 		print_error("File %s not found." % [path])
+
+
+func _apply_pending_cvar_value(cvar: ConsoleCvar) -> void:
+	if cvar.save and _pending_cvar_values.has(cvar.name):
+		var saved_value: Variant = _pending_cvar_values[cvar.name]
+		if typeof(saved_value) != cvar.type:
+			saved_value = type_convert(saved_value, cvar.type)
+		cvar.set_value(saved_value)
+		_pending_cvar_values.erase(cvar.name)
+
+
+## Coerces a string into the given Variant.Type.  Returns [success : bool, value : Variant].
+func _coerce_string_to_type(string_value: String, type: int) -> Array:
+	match type:
+		TYPE_BOOL:
+			var lower := string_value.strip_edges().to_lower()
+			if lower in ["1", "true", "yes", "on"]:
+				return [true, true]
+			if lower in ["0", "false", "no", "off"]:
+				return [true, false]
+			return [false, null]
+		TYPE_INT:
+			var int_string := string_value.strip_edges()
+			if int_string.is_valid_int():
+				return [true, int_string.to_int()]
+			return [false, null]
+		TYPE_FLOAT:
+			var float_string := string_value.strip_edges()
+			if float_string.is_valid_float():
+				return [true, float_string.to_float()]
+			return [false, null]
+		TYPE_STRING:
+			return [true, string_value]
+		TYPE_STRING_NAME:
+			return [true, StringName(string_value)]
+		_:
+			# Complex types (Vector2, etc.) require GDScript literal syntax, ex: "Vector2(1, 2)".
+			var parsed: Variant = str_to_var(string_value)
+			if parsed != null and typeof(parsed) == type:
+				return [true, parsed]
+			return [false, null]
+
+
+func _print_cvar_value(cvar: ConsoleCvar) -> void:
+	print_line("%s = [system_color color=CONSOLE_COLOR_LITERAL]%s[/system_color]" % [cvar.name, str(cvar.get_value())])
+
+
+func _handle_cvar(cvar: ConsoleCvar, arguments: PackedStringArray) -> void:
+	if not cvar.is_alive():
+		print_error("Variable \"%s\" references a freed object." % cvar.name)
+		return
+
+	if arguments.is_empty():
+		_print_cvar_value(cvar)
+		if cvar.description:
+			print_line("%s%s" % [tab_string, cvar.description])
+		return
+
+	var raw_value := " ".join(arguments)
+	var result := _coerce_string_to_type(raw_value, cvar.type)
+	if not result[0]:
+		print_error("Invalid value \"%s\" for variable \"%s\" (expected %s)." % [raw_value, cvar.name, type_string(cvar.type)])
+		return
+
+	cvar.set_value(result[1])
+	console_cvar_changed.emit(cvar.name, result[1])
+	_print_cvar_value(cvar)
+
+
+## Get the scale of the console from the settings -- if this is not in the system settings return a default value
+func _get_console_scale_setting() -> float:
+	if ProjectSettings.has_setting(CONSOLE_SCALE):
+		return ProjectSettings.get_setting(CONSOLE_SCALE)
+
+	return 1.0
+
+
+## Get the height of the console - this is related to the scaling of the console
+func _get_console_height() -> float:
+	if console_full_screen:
+		return 1.0 / console_scale
+
+	if ProjectSettings.has_setting(CONSOLE_HEIGHT):
+		return ProjectSettings.get_setting(CONSOLE_HEIGHT) / console_scale
+
+	return 0.5 / console_scale
+
+
+func _get_console_width() -> float:
+	return 1.0 / console_scale
+
+
+func _set_font_size(value: int) -> void:
+	font_size = value
+	if value > 0:
+		line_edit.add_theme_font_size_override("font_size", font_size)
+		rich_label.add_theme_font_size_override("normal_font_size", font_size)
+		rich_label.add_theme_font_size_override("bold_font_size", font_size)
+		rich_label.add_theme_font_size_override("bold_italics_font_size", font_size)
+		rich_label.add_theme_font_size_override("italics_font_size", font_size)
+		rich_label.add_theme_font_size_override("mono_font_size", font_size)
+	else:
+		line_edit.remove_theme_font_size_override("font_size")
+		rich_label.remove_theme_font_size_override("normal_font_size")
+		rich_label.remove_theme_font_size_override("bold_font_size")
+		rich_label.remove_theme_font_size_override("bold_italics_font_size")
+		rich_label.remove_theme_font_size_override("italics_font_size")
+		rich_label.remove_theme_font_size_override("mono_font_size")
+
+
+func _on_text_entered(new_text: String) -> void:
+	scroll_to_bottom()
+	reset_autocomplete()
+	line_edit.clear()
+	if (line_edit.has_method(&"edit")):
+		line_edit.call_deferred(&"edit")
+
+	if not new_text.strip_edges().is_empty():
+		add_input_history(new_text)
+		print_line("[i]> " + new_text + "[/i]")
+		var text_split := parse_line_input(new_text)
+		var text_command := text_split[0]
+
+		if console_commands.has(text_command):
+			var arguments := text_split.slice(1)
+			var console_command: ConsoleCommand = console_commands[text_command]
+
+			# calc is a especial command that needs special treatment
+			if (text_command.match("calc")):
+				var expression := ""
+				for word in arguments:
+					expression += word
+				console_command.function.callv([expression])
+				return
+
+			if (arguments.size() < console_command.required):
+				print_error("Too few arguments! Required < %d >" % console_command.required)
+				return
+			elif (arguments.size() > console_command.arguments.size()):
+				arguments.resize(console_command.arguments.size())
+
+			# Functions fail to call if passed the incorrect number of arguments, so fill out with blank strings.
+			while (arguments.size() < console_command.arguments.size()):
+				arguments.append("")
+
+			console_command.function.callv(arguments)
+		elif console_cvars.has(text_command):
+			_handle_cvar(console_cvars[text_command], text_split.slice(1))
+		else:
+			console_unknown_command.emit(text_command)
+			print_error("Unknown command or variable.")
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	reset_autocomplete()
+
+
+class ConsoleCommand:
+	var function: Callable
+	var arguments: PackedStringArray
+	var required: int
+	var description: String
+	var hidden: bool
+
+
+	func _init(in_function: Callable, in_arguments: PackedStringArray, in_required: int = 0, in_description: String = ""):
+		function = in_function
+		arguments = in_arguments
+		required = in_required
+		description = in_description
+
+
+class ConsoleCvar:
+	var name: String
+	var description: String
+	var type: int
+	var save: bool
+	var value: Variant
+	var object: Object
+	var property: String
+
+
+	func _init(in_name: String, in_type: int, in_description: String = "", in_save: bool = false):
+		name = in_name
+		type = in_type
+		description = in_description
+		save = in_save
+
+
+	func is_reference() -> bool:
+		return object != null
+
+
+	func is_alive() -> bool:
+		return object == null or is_instance_valid(object)
+
+
+	func get_value() -> Variant:
+		if object != null:
+			return object.get_indexed(property)
+		return value
+
+
+	func set_value(new_value: Variant) -> void:
+		if object != null:
+			object.set_indexed(property, new_value)
+		else:
+			value = new_value

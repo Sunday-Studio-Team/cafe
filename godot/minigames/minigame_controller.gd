@@ -44,7 +44,6 @@ func close_game():
 	sub_viewport.get_child(0).queue_free()
 	visible = false
 	Global.minigame_active = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _on_force_close_minigame() -> void:

@@ -32,7 +32,6 @@ func _ready():
 	node_area.input_event.connect(_mouse_input_event)
 	interactable.interacted.connect(
 		func():
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			# seems weird because we cant interact with Interactables while in_ui
 			# anyway but this is actually to stop that CollisionShape blocking
 			# our mouse from clicking stuff lul
@@ -92,7 +91,6 @@ func exit() -> void:
 	exit_button.hide()
 
 	if Global.in_machine_ui:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		Global.in_machine_ui = false
 		create_tween().tween_property(
 			Global.player.camera,
