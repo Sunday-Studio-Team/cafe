@@ -21,7 +21,6 @@
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="8_ok6jj"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
-[ext_resource type="Resource" uid="uid://crbaapb4gveto" path="res://emails/email_view_day_3_001/email_data_day_3_001.tres" id="9_f3y11"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
 [ext_resource type="PackedScene" uid="uid://c8jilqo1pb0th" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
@@ -578,7 +577,7 @@ minigame_controller = NodePath("MinigameController")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
-emails_schedule = Array[ExtResource("5_jq2sk")]([ExtResource("6_4k2k6"), ExtResource("7_0rl1p"), ExtResource("8_ok6jj"), ExtResource("9_f3y11")])
+emails_schedule = Array[ExtResource("5_jq2sk")]([ExtResource("6_4k2k6"), ExtResource("7_0rl1p"), ExtResource("8_ok6jj")])
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
 visible = false

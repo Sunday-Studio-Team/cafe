@@ -22,11 +22,6 @@ func _ready() -> void:
 	# Check emails schedule for all emails that are current day or beyond
 	_delivered_emails_to_date = []
 
-	for email_data in emails_schedule:
-		var email_scheduled_day: int = email_data.day_to_send
-		if current_day >= email_scheduled_day:
-			_delivered_emails_to_date.append(email_data)
-	
 	if days_since_random >= 2: # Can't get random emails everyday or on first day
 		var min_random = 0.1
 		for i in range(0, days_since_random): # More likely to get random emails the more days have passed
@@ -35,7 +30,19 @@ func _ready() -> void:
 		if rand_email_percent >= 0.5:
 			last_spam_email_day = current_day
 			var spam_email = SpamEmail.new()
-			_delivered_emails_to_date.append(spam_email)					
+			_delivered_emails_to_date.append(spam_email)
+			emails_schedule.append(spam_email)	
+
+	for email_data in emails_schedule:
+		var email_scheduled_day: int = email_data.day_to_send
+		if current_day >= email_scheduled_day:
+			_delivered_emails_to_date.append(email_data)	
+
+	# Needs to be added manually since can't be added to game resource bc it uses stats that are not initialized until after the game resource is loaded
+	if current_day == 3:
+		var email_day_3 = EmailDay3.new()
+		_delivered_emails_to_date.append(email_day_3)
+		emails_schedule.append(email_day_3)			
 			
 
 func get_delivered_emails_to_date() -> Array[EmailData]:
