@@ -32,17 +32,15 @@ func _ready() -> void:
 			var spam_email = SpamEmail.new()
 			_delivered_emails_to_date.append(spam_email)
 			emails_schedule.append(spam_email)	
+	# Needs to be added manually since can't be added to game resource bc it uses stats that are not initialized until after the game resource is loaded
+	if current_day == 3:
+		var email_day_3 = EmailDay3.new()
+		emails_schedule.append(email_day_3)			
 
 	for email_data in emails_schedule:
 		var email_scheduled_day: int = email_data.day_to_send
 		if current_day >= email_scheduled_day:
 			_delivered_emails_to_date.append(email_data)	
-
-	# Needs to be added manually since can't be added to game resource bc it uses stats that are not initialized until after the game resource is loaded
-	if current_day == 3:
-		var email_day_3 = EmailDay3.new()
-		_delivered_emails_to_date.append(email_day_3)
-		emails_schedule.append(email_day_3)			
 			
 
 func get_delivered_emails_to_date() -> Array[EmailData]:

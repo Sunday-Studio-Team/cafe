@@ -44,3 +44,4 @@ var score_chances_3 := 0.25
 var score_chances_1 := 0.25
 var score_chances_neg1 := 0.25
 var score_chances_neg3 := 0.25
+var clean_spill_allowed_remaining := 0.01
