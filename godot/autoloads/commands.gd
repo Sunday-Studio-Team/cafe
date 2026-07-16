@@ -32,6 +32,8 @@ func _ready() -> void:
 - [i]endshift[/i] ends shift
 - [i]endshift W[/i] forces a win
 - [i]endshift L[/i] forces a loss
+- [i]profit <number>[/i] sets your daily profit
+- [i]rating <number>[/i] sets your employee rating (1 point here = half a star)
 - [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
@@ -55,6 +57,8 @@ func _ready() -> void:
 	Console.add_command("spill", spill)
 	Console.add_command("day", set_day, 1)
 	Console.add_command("endshift", end_shift, ["arg"])
+	Console.add_command("profit", set_profit, 1)
+	Console.add_command("rating", set_rating, 1)
 
 	Console.add_command("item", give_item, ["item_name"])
 	for item in Global.items:
@@ -62,6 +66,18 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("item", _item_names)
 
 	Console.add_command("speed", set_speed, 1)
+
+
+func set_profit(profit: String) -> void:
+	Global.daily_profit = float(profit)
+	Console.print_line("setting profit to %s" % profit)
+
+
+func set_rating(rating: String) -> void:
+	Global.employee_rating = int(rating)
+	Console.print_line("setting rating to %s (%s stars)" % [int(rating), (int(rating) / 2.0)])
+	if int(rating) > 10:
+		Console.print_line("(will be clamped to limit of 5 stars")
 
 
 func end_shift(arg: String = "") -> void:
