@@ -28,8 +28,6 @@ func _ready() -> void:
 	cup_area.body_entered.connect(catch_bean)
 	cup_area.body_exited.connect(spill_bean)
 
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-
 	bag_shake_tween = create_tween().set_loops()
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, 0.2)
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, 0.2)

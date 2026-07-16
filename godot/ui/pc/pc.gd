@@ -20,10 +20,8 @@ func _ready() -> void:
 		func():
 			if visible:
 				Global.in_pc_ui = true
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			else:
 				Global.in_pc_ui = false
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	)
 
 

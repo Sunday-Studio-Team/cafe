@@ -1,7 +1,9 @@
 extends Node2D
 
-
 @export var eraser_radius: int = 30
+@export var canvas_sprite: Sprite2D
+@export var progress_label: Label
+@export_dir var canvas_folder: String = "res://minigames/spill_clean/stains"
 
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
@@ -22,7 +24,6 @@ const ALPHA_THRESHOLD_BYTE: int = 5
 
 var canvas_image: Image
 var canvas_texture: ImageTexture
-
 var starting_pixel_count: int = 0
 var remaining_pixel_count: int = 0
 
@@ -34,7 +35,6 @@ var brush_offsets: Array[Vector2i] = []
 var is_erasing: bool = false
 var has_previous_position: bool = false
 var previous_pixel_position: Vector2i
-
 var game_finished: bool = false
 
 
@@ -142,8 +142,8 @@ func erase_at_mouse() -> void:
 
 	update_progress_display()
 	check_for_win()
-	
-	
+
+
 func choose_random_canvas() -> bool:
 	var canvas_paths: Array[String] = []
 
@@ -157,7 +157,7 @@ func choose_random_canvas() -> bool:
 	if canvas_paths.is_empty():
 		push_error(
 			"No PNG files were found in: "
-			+ canvas_folder
+			+ canvas_folder,
 		)
 
 		return false
@@ -165,13 +165,13 @@ func choose_random_canvas() -> bool:
 	var selected_path: String = canvas_paths.pick_random()
 
 	var selected_texture: Texture2D = (
-		load(selected_path) as Texture2D
+			load(selected_path) as Texture2D
 	)
 
 	if selected_texture == null:
 		push_error(
 			"Failed to load: "
-			+ selected_path
+			+ selected_path,
 		)
 
 		return false
@@ -180,7 +180,7 @@ func choose_random_canvas() -> bool:
 
 	print(
 		"Selected canvas: ",
-		selected_path
+		selected_path,
 	)
 
 	return true
@@ -200,8 +200,8 @@ func get_mouse_image_position() -> Vector2i:
 
 	# Convert the mouse position into a value from 0 to 1.
 	var normalized_position: Vector2 = (
-		(local_mouse_position - sprite_rect.position)
-		/ sprite_rect.size
+			(local_mouse_position - sprite_rect.position)
+			/ sprite_rect.size
 	)
 
 	# Convert the normalized position into image-pixel coordinates.
@@ -235,8 +235,8 @@ func erase_between_points(
 	# during the previous  frame.
 	for step: int in range(1, number_of_steps + 1):
 		var interpolation_amount: float = (
-			float(step)
-			/ float(number_of_steps)
+				float(step)
+				/ float(number_of_steps)
 		)
 
 		var erase_position: Vector2i = Vector2i(
@@ -305,8 +305,8 @@ func update_progress_display() -> void:
 		return
 
 	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
+			float(remaining_pixel_count)
+			/ float(starting_pixel_count)
 	)
 
 	var erased_ratio: float = 1.0 - remaining_ratio
@@ -322,8 +322,8 @@ func check_for_win() -> void:
 		return
 
 	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
+			float(remaining_pixel_count)
+			/ float(starting_pixel_count)
 	)
 
 	if remaining_ratio <= allowed_remaining_ratio:

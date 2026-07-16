@@ -34,7 +34,6 @@ var holding_interactable: bool = false
 
 func _ready() -> void:
 	Global.player = self
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -69,9 +68,9 @@ func handle_mouselook() -> void:
 
 func handle_movement(delta: float) -> void:
 	if (
-		not movement_enabled
-		or holding_interactable
-		or Global.in_ui
+			not movement_enabled
+			or holding_interactable
+			or Global.in_ui
 	):
 		velocity = Vector3.ZERO
 		return
@@ -108,18 +107,18 @@ func handle_hovered_interactable() -> void:
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
 		if (
-			not hovered_interactable.enabled
-			or not hovered_interactable.is_inside_tree()
-			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
+				not hovered_interactable.enabled
+				or not hovered_interactable.is_inside_tree()
+				or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
 
 	# if we're currently holding interact on something, dont do anything
 	# (so we can look around while we hold)
 	if (
-		hovered_interactable != null
-		and hovered_interactable.hold_to_interact
-		and Input.is_action_pressed("interact")
+			hovered_interactable != null
+			and hovered_interactable.hold_to_interact
+			and Input.is_action_pressed("interact")
 	):
 		holding_interactable = true
 		return
@@ -172,9 +171,9 @@ func tilt_camera() -> void:
 
 func handle_ingredients_bag() -> void:
 	if (
-		Input.is_action_just_pressed("drop")
-		and Global.holding_ingredients
-		and not Global.in_ui
+			Input.is_action_just_pressed("drop")
+			and Global.holding_ingredients
+			and not Global.in_ui
 	):
 		Global.holding_ingredients = false
 		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()

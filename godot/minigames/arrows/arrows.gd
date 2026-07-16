@@ -31,7 +31,6 @@ var correct_input_index: int = 0
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_start_minigame()
 
 
