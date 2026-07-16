@@ -6,6 +6,7 @@ extends Node
 
 var _item_names: Array[String] = []
 
+
 func _ready() -> void:
 	# NOTE: untested
 	if not OS.has_feature("debug"):
@@ -33,7 +34,7 @@ func _ready() -> void:
 - [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete),
 %s
 - [i]speed <number>[/i] sets the game speed"
-	% [items_guide_str]
+		% [items_guide_str],
 	)
 	Console.print_line(
 		"\n[color=green]tip: try typing the start of a command and pressing TAB to autofill ![/color]",
@@ -71,6 +72,7 @@ func give_item(item_name: String) -> void:
 	for item in Global.items:
 		if item_name == item.name:
 			Global.owned_items.append(item)
+			Events.items_updated.emit()
 			Console.print_line("gave %s" % item.name)
 			return
 	Console.print_error("Item name not found.")
@@ -82,7 +84,21 @@ func bank() -> void:
 
 
 func breakdown() -> void:
-	Global.machines.pick_random().break_down()
+	var all_machines_broken_down := true
+
+	for m in Global.machines:
+		if not m.broken_down:
+			all_machines_broken_down = false
+			break
+
+	if all_machines_broken_down:
+		Console.print_error("all machines already broken down")
+		return
+
+	var random_machine: Machine = null
+	while random_machine == null or random_machine.broken_down:
+		random_machine = Global.machines.pick_random()
+	random_machine.break_down()
 	Console.print_line("triggering breakdown on random machine")
 
 
