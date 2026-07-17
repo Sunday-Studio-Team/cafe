@@ -11,16 +11,16 @@ extends Resource
 var default_move_speed := 1.2
 var sprint_move_speed := 5.0
 var chance_of_machine_breaking := 0.15
-var machine_chance_of_spill := 0.1
+var machine_chance_of_spill := 0.2
 ## chance of each score from machine
 ## WARNING: make sure these always sum to 1 (or actually i can probably rework
 ## the logic to allow them to not sum to 1, since that would be easier
 ## for items etc that adjust the odds)
 var score_chances: Dictionary = {
-	3: 0.25,
-	1: 0.25,
-	-1: 0.25,
-	-3: 0.25,
+	3: score_chances_3,
+	1: score_chances_1,
+	-1: score_chances_neg1,
+	-3: score_chances_neg3,
 }
 var machine_time_to_make_drink := 4.0
 var customer_wait_time_machine := 45.0
@@ -40,3 +40,8 @@ var cost_to_reroll := 5.0
 var time_to_clean_up_spill := 3.0
 var max_spills_per_shift := 2
 var max_breakdowns_per_shift := 3
+var score_chances_3 := 0.25
+var score_chances_1 := 0.25
+var score_chances_neg1 := 0.25
+var score_chances_neg3 := 0.25
+var clean_spill_allowed_remaining := 0.01

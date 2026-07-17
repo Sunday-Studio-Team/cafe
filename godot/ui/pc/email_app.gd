@@ -14,6 +14,7 @@ func _ready() -> void:
 	_populate_email_items()
 	
 	Events.finished_important_email.connect(_on_finished_important_email)
+	Events.finished_spam_email.connect(_on_finished_spam_email)
 
 func _populate_email_items() -> void:
 	var emails_manager: EmailsManager = EmailsManager.get_instance()
@@ -25,6 +26,8 @@ func _populate_email_items() -> void:
 	var finished_important_emails: Array[EmailData] = Global.finished_important_emails
 	# Check save data for read emails
 	var read_emails: Array[EmailData] = Global.read_emails
+	# Check save data for spam emails
+	var spam_emails: Array[EmailData] = Global.spam_emails
 
 	# Create email list items, and mark read or unread
 	email_app_list_items = []
@@ -40,9 +43,13 @@ func _populate_email_items() -> void:
 		var is_current_day: bool = false
 		if current_day == email_data.day_to_send:
 			is_current_day = true
+			
+		var is_finished_spam: bool = false
+		if email_data in spam_emails:
+			is_finished_spam = true
 	
 		var email_app_list_item: EmailAppListItem = email_app_list_item_packed_scene.instantiate()
-		email_app_list_item.initialize(email_data, is_email_finished_important, is_email_read, is_current_day) 
+		email_app_list_item.initialize(email_data, is_email_finished_important, is_email_read, is_current_day, is_finished_spam) 
 		email_app_list_items_container.add_child(email_app_list_item, true)
 		email_app_list_items_container.move_child(email_app_list_item, 0)
 		email_app_list_item.email_pressed.connect(_on_email_pressed)
@@ -65,9 +72,14 @@ func _open_email_in_viewer(email_app_list_item: EmailAppListItem) -> void:
 		is_current_day = true
 	
 	email_viewer.visible = true
-	email_viewer.show_email(email_app_list_item.email_data, email_app_list_item.is_finished_important, is_current_day)
+	email_viewer.show_email(email_app_list_item.email_data, email_app_list_item.is_finished_important, is_current_day, email_app_list_item.is_finished_spam)
 
 func _on_finished_important_email(email_data: EmailData) -> void:
 	for email_app_list_item in email_app_list_items:
 		if email_app_list_item.email_data == email_data:
 			email_app_list_item.mark_as_finished_important()
+
+func _on_finished_spam_email(email_data: EmailData) -> void:
+	for email_app_list_item in email_app_list_items:
+		if email_app_list_item.email_data == email_data:
+			email_app_list_item.mark_as_finished_spam()
