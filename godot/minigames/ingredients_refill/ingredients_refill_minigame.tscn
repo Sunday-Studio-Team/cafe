@@ -59,6 +59,7 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="IngredientsRefillMinigame" type="Node2D" parent="SubViewport" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "meter", "bag", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound")]
+position = Vector2(0, 2)
 script = ExtResource("1_2efvg")
 cup = NodePath("Cup")
 bean_scene = ExtResource("2_51asp")

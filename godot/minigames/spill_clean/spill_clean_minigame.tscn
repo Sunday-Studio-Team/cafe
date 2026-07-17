@@ -1,13 +1,30 @@
-[gd_scene format=3 uid="uid://c8jilqo1pb0th"]
+[gd_scene format=3 uid="uid://l7w4dtq33b6f"]
 
-[ext_resource type="Texture2D" uid="uid://ci31qslj1q2t4" path="res://sprites/stains/stain1.png" id="1_imr7o"]
+[ext_resource type="Texture2D" uid="uid://bven6m7o8w0u7" path="res://sprites/stains/stain1.png" id="1_imr7o"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/erasable_canvas.gd" id="2_imr7o"]
 
-[node name="SpillCleanMinigame" type="Node2D" unique_id=219843307]
+[node name="SpillCleanMinigame" type="SubViewportContainer" unique_id=1975707646]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953366936]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=564771113]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1156563764]
+[node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
+position = Vector2(980, 402)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_imr7o")
+script = ExtResource("2_imr7o")
+eraser_radius = 150
+canvas_sprite = NodePath(".")
+progress_label = NodePath("../Panel/Label")
+
+[node name="Panel" type="Panel" parent="SubViewport" unique_id=865394514]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,16 +32,7 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ErasableCanvas" type="Sprite2D" parent="CanvasLayer/Panel" unique_id=2143233988 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
-position = Vector2(960, 400)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_imr7o")
-script = ExtResource("2_imr7o")
-eraser_radius = 80
-canvas_sprite = NodePath(".")
-progress_label = NodePath("../Label")
-
-[node name="Label" type="Label" parent="CanvasLayer/Panel" unique_id=622094738]
+[node name="Label" type="Label" parent="SubViewport/Panel" unique_id=2001257238]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
