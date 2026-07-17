@@ -1,6 +1,12 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://bgum1f0hyg378"]
 
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_rp4e0"]
+[ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_recipe.gd" id="2_pgiq0"]
+
+[sub_resource type="Resource" id="Resource_yh4iq"]
+script = ExtResource("2_pgiq0")
+ingredient_names = Array[String](["coffee", "water"])
+metadata/_custom_type_script = "uid://c1qu64r4ohlqc"
 
 [resource]
 script = ExtResource("1_rp4e0")
@@ -8,4 +14,5 @@ name = "black coffee"
 price = 2.5
 main_ingredient = 2
 liquid = 2
+typing_minigame_ingredients_recipe = SubResource("Resource_yh4iq")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"

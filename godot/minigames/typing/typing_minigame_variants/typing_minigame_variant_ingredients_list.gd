@@ -1,9 +1,7 @@
 class_name TypingMinigameVariantIngredientsList
 extends TypingMinigameVariant
 
-@export var fallback_drink: Drink
-@export var fallback_recipe: TypingMinigameContentIngredientsListRecipe
-@export var ingredients_list: TypingMinigameContentIngredientsList
+@export var fallback_drink_index: int = 0
 
 @export var drink_name_label: Label
 @export var instructions_container: Control
@@ -17,6 +15,9 @@ func start_minigame_variant(customer: Customer) -> void:
 	instructions_container.visible = false
 	typing_minigame_section.visible = false
 	
+	assert(Global.drinks.size() > 0, "No drinks to get recipes for!")
+	var fallback_drink = Global.drinks[0]
+	
 	# Get the drink the customer wants
 	var drink: Drink
 	if customer != null and customer.desired_drink != null:
@@ -25,13 +26,8 @@ func start_minigame_variant(customer: Customer) -> void:
 		drink = fallback_drink
 	
 	# Get the recipe for it
-	for list_recipe in ingredients_list.recipes:
-		var recipe_drink: Drink = list_recipe.drink_resource
-		if drink == recipe_drink:
-			_recipe = list_recipe
-			break
-	if _recipe == null:
-		_recipe = fallback_recipe
+	_recipe = drink.typing_minigame_ingredients_recipe
+	assert(_recipe != null, "Drink has no recipe!")
 	
 	drink_name_label.text = drink.name
 	

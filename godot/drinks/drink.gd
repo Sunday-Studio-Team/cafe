@@ -11,3 +11,4 @@ enum Extra { NONE, WRONG, SUGAR, ICE }
 @export var main_ingredient: MainIngredient
 @export var liquid: Liquid
 @export var extra: Extra
+@export var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe
