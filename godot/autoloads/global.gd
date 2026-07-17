@@ -5,6 +5,7 @@ extends Node
 @export_dir var drinks_folder_path: String
 @export_dir var items_folder_path: String
 @export_dir var customer_sprites_folder_path: String
+@export_dir var spill_sprites_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 @export var star_texture: Texture
@@ -13,6 +14,7 @@ extends Node
 @export var main_ingredient_icons: Dictionary[Drink.MainIngredient, Texture2D]
 @export var liquid_icons: Dictionary[Drink.Liquid, Texture2D]
 @export var extra_icons: Dictionary[Drink.Extra, Texture2D]
+
 
 var player: Player
 var hovered_interactable: Interactable:
@@ -81,6 +83,7 @@ var holding_ingredients_rule := false
 var refill_minigame_accuracy: float
 var holding_make_drink_button := false
 var customer_sprites: Array[Texture]
+var spill_sprites: Array [Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
@@ -104,6 +107,7 @@ func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	items.assign(load_resources_from_folder(items_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
+	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 
 func _physics_process(_delta: float) -> void:
