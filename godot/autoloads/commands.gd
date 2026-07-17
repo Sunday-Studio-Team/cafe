@@ -15,9 +15,7 @@ func _ready() -> void:
 	# not sure whether to enable this or not, seems to break some stuff
 	# but might be better than accidentally pressing stuff in game by typing lol
 	#Console.pause_enabled = true
-	Console.font_size = 18
 	# dont think we need this yet, but if the commands list gets much longer itll go offscreen
-	# (maybe font size could just be further reduced to compensate for that tho)
 	#Console.toggle_size() # set fullscreen
 
 	var items_guide_str: String = "Available items: "
@@ -32,6 +30,7 @@ func _ready() -> void:
 - [i]endshift[/i] ends shift
 - [i]endshift W[/i] forces a win
 - [i]endshift L[/i] forces a loss
+- [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
 - [i]rating <number>[/i] sets your employee rating (1 point here = half a star)
 - [i]bank[/i] adds $100 to bank
@@ -59,6 +58,7 @@ func _ready() -> void:
 	Console.add_command("endshift", end_shift, ["arg"])
 	Console.add_command("profit", set_profit, 1)
 	Console.add_command("rating", set_rating, 1)
+	Console.add_command("timer", toggle_timer)
 
 	Console.add_command("item", give_item, ["item_name"])
 	for item in Global.items:
@@ -156,3 +156,18 @@ func breakdown() -> void:
 func spill() -> void:
 	Global.machines.pick_random().spill()
 	Console.print_line("triggering spill on random machine")
+
+
+func toggle_timer() -> void:
+	var timer: Timer = Global.main_scene.game_timer
+
+	if timer.is_stopped():
+		Console.print_error("shift not in progress, can't toggle timer")
+		return
+
+	timer.paused = !timer.paused
+
+	if timer.paused:
+		Console.print_line("game timer paused")
+	else:
+		Console.print_line("game timer resumed")
