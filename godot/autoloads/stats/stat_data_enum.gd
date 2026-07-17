@@ -5,6 +5,10 @@ default_move_speed,\
 sprint_move_speed,\
 chance_of_machine_breaking,\
 machine_chance_of_spill,\
+score_chances_3,\
+score_chances_1,\
+score_chances_neg1,\
+score_chances_neg3,\
 score_chances,\
 machine_time_to_make_drink,\
 customer_wait_time_machine,\
@@ -24,4 +28,5 @@ cost_to_reroll,\
 time_to_clean_up_spill,\
 max_spills_per_shift,\
 max_breakdowns_per_shift,\
+clean_spill_allowed_remaining,\
 "

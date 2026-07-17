@@ -16,6 +16,10 @@ var machine_chance_of_spill := 0.2
 ## WARNING: make sure these always sum to 1 (or actually i can probably rework
 ## the logic to allow them to not sum to 1, since that would be easier
 ## for items etc that adjust the odds)
+var score_chances_3 := 0.25
+var score_chances_1 := 0.25
+var score_chances_neg1 := 0.25
+var score_chances_neg3 := 0.25
 var score_chances: Dictionary = {
 	3: score_chances_3,
 	1: score_chances_1,
@@ -40,8 +44,4 @@ var cost_to_reroll := 5.0
 var time_to_clean_up_spill := 3.0
 var max_spills_per_shift := 2
 var max_breakdowns_per_shift := 3
-var score_chances_3 := 0.25
-var score_chances_1 := 0.25
-var score_chances_neg1 := 0.25
-var score_chances_neg3 := 0.25
 var clean_spill_allowed_remaining := 0.01
