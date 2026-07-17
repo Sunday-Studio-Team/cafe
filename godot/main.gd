@@ -67,6 +67,7 @@ func _ready() -> void:
 	if not Global.in_pc_ui:
 		ui.show()
 	day_indicator.hide()
+	Input.set_custom_mouse_cursor(null)
 
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test

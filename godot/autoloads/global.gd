@@ -11,6 +11,7 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
+@export var mop_cursor_texture: Texture2D
 @export var main_ingredient_icons: Dictionary[Drink.MainIngredient, Texture2D]
 @export var liquid_icons: Dictionary[Drink.Liquid, Texture2D]
 @export var extra_icons: Dictionary[Drink.Extra, Texture2D]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://l7w4dtq33b6f"]
 
-[ext_resource type="Texture2D" uid="uid://bven6m7o8w0u7" path="res://sprites/stains/stain1.png" id="1_imr7o"]
+[ext_resource type="Texture2D" uid="uid://dfrkdsu4k5v6q" path="res://sprites/stains/stain3.png" id="1_imr7o"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/erasable_canvas.gd" id="2_imr7o"]
 
 [node name="SpillCleanMinigame" type="SubViewportContainer" unique_id=1975707646]
@@ -16,13 +16,15 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
-position = Vector2(980, 402)
-scale = Vector2(0.3, 0.3)
+position = Vector2(980, 500)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_imr7o")
 script = ExtResource("2_imr7o")
-eraser_radius = 150
+eraser_height = 80
+eraser_width = 150
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../Panel/Label")
+allowed_remaining_ratio = 0.01
 
 [node name="Panel" type="Panel" parent="SubViewport" unique_id=865394514]
 anchors_preset = 15

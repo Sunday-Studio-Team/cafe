@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var eraser_radius: int = 30
+@export var eraser_height: int = 20
+@export var eraser_width: int = 60
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
 # 0.0 means every visible pixel must be erased.
@@ -16,6 +17,7 @@ var brush_spacing_ratio: float = 0.5
 # it was consider transparent
 const ALPHA_THRESHOLD_BYTE: int = 5
 
+var eraser_cursor: Texture2D = Global.mop_cursor_texture
 
 var canvas_image: Image
 var canvas_texture: ImageTexture
@@ -36,6 +38,16 @@ var game_finished: bool = false
 func _ready() -> void:
 	canvas_sprite.texture = Global.spill_sprites.pick_random()
 
+	var hotspot := Vector2(
+		eraser_cursor.get_width() / 2.0,
+		eraser_cursor.get_height() / 2.0
+	)
+
+	Input.set_custom_mouse_cursor(
+		eraser_cursor,
+		Input.CURSOR_ARROW,
+		hotspot
+	)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	canvas_image = canvas_sprite.texture.get_image()
@@ -54,7 +66,6 @@ func _ready() -> void:
 	count_starting_pixels()
 	update_progress_display()
 
-	
 func _input(event: InputEvent) -> void:
 	if game_finished:
 		return
@@ -99,15 +110,12 @@ func _physics_process(_delta: float) -> void:
 
 func create_brush_offsets() -> void:
 	brush_offsets.clear()
+	
+	var half_height: int = eraser_height / 2
+	var half_width: int = eraser_width / 2
 
-	var radius_squared: int = eraser_radius * eraser_radius
-
-	for offset_y: int in range(-eraser_radius, eraser_radius + 1):
-		for offset_x: int in range(-eraser_radius, eraser_radius + 1):
-			var distance_squared: int = (
-				offset_x * offset_x + offset_y * offset_y)
-
-			if distance_squared <= radius_squared:
+	for offset_y: int in range(-half_height, half_height + 1):
+		for offset_x: int in range(-half_width, half_width + 1):
 				brush_offsets.append(Vector2i(offset_x, offset_y))
 
 
