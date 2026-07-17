@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8jilqo1pb0th"]
 
-[ext_resource type="Texture2D" uid="uid://cqn3lryxh5bh4" path="res://minigames/spill_clean/stains/stain2.png" id="1_vadif"]
+[ext_resource type="Texture2D" uid="uid://ci31qslj1q2t4" path="res://sprites/stains/stain1.png" id="1_imr7o"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/erasable_canvas.gd" id="2_imr7o"]
 
 [node name="SpillCleanMinigame" type="Node2D" unique_id=219843307]
@@ -18,7 +18,7 @@ grow_vertical = 2
 [node name="ErasableCanvas" type="Sprite2D" parent="CanvasLayer/Panel" unique_id=2143233988 node_paths=PackedStringArray("canvas_sprite", "progress_label")]
 position = Vector2(960, 400)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_vadif")
+texture = ExtResource("1_imr7o")
 script = ExtResource("2_imr7o")
 eraser_radius = 80
 canvas_sprite = NodePath(".")

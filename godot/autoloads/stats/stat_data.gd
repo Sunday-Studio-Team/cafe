@@ -41,7 +41,6 @@ var ingredients_per_order := 20
 var ingredients_per_bag := 50
 var customer_spawn_interval := 5.0
 var cost_to_reroll := 5.0
-var time_to_clean_up_spill := 3.0
 var max_spills_per_shift := 2
 var max_breakdowns_per_shift := 3
 var clean_spill_allowed_remaining := 0.01

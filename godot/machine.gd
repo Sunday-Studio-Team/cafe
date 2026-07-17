@@ -186,7 +186,6 @@ func set_customer(c: Customer) -> void:
 func get_stats() -> void:
 	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.wait_time = Stats.current.machine_time_to_make_drink
-	spill_interactable.time_to_hold = Stats.current.time_to_clean_up_spill
 
 
 func machine_make_drink() -> void:

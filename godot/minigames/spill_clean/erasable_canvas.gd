@@ -3,14 +3,13 @@ extends Node2D
 @export var eraser_radius: int = 30
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
-@export_dir var canvas_folder: String = "res://minigames/spill_clean/stains"
-
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
 var allowed_remaining_ratio: float = Stats.current.clean_spill_allowed_remaining
 @export_range(0.25, 1.0, 0.05)
 var brush_spacing_ratio: float = 0.5
+
 
 
 # If a pixel has alpha value lower then the threshold,
@@ -35,8 +34,7 @@ var game_finished: bool = false
 
 
 func _ready() -> void:
-	if not choose_random_canvas():
-		return
+	canvas_sprite.texture = Global.spill_sprites.pick_random()
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -86,17 +84,11 @@ func _physics_process(_delta: float) -> void:
 
 	var image_changed: bool
 
-	if has_previous_position:
-		image_changed = erase_between_points(
-			previous_pixel_position,
-			current_position
-		)
-	else:
-		image_changed = erase_circle(current_position)
+	image_changed = erase_circle(current_position)
 
 	previous_pixel_position = current_position
 	has_previous_position = true
-
+ 
 	if not image_changed:
 		return
 
@@ -127,10 +119,7 @@ func erase_at_mouse() -> void:
 		has_previous_position = false
 		return
 
-	if has_previous_position:
-		erase_between_points(previous_pixel_position, current_position)
-	else:
-		erase_circle(current_position)
+	erase_circle(current_position)
 
 	previous_pixel_position = current_position
 	has_previous_position = true
@@ -138,48 +127,6 @@ func erase_at_mouse() -> void:
 
 	update_progress_display()
 	check_for_win()
-
-
-func choose_random_canvas() -> bool:
-	var canvas_paths: Array[String] = []
-
-	for file_name: String in ResourceLoader.list_directory(canvas_folder):
-		if file_name.get_extension().to_lower() == "png":
-			var full_path: String = canvas_folder.path_join(file_name)
-
-			canvas_paths.append(full_path)
-
-	# Prevent an error if no PNG images were found.
-	if canvas_paths.is_empty():
-		push_error(
-			"No PNG files were found in: "
-			+ canvas_folder,
-		)
-
-		return false
-
-	var selected_path: String = canvas_paths.pick_random()
-
-	var selected_texture: Texture2D = (
-			load(selected_path) as Texture2D
-	)
-
-	if selected_texture == null:
-		push_error(
-			"Failed to load: "
-			+ selected_path,
-		)
-
-		return false
-
-	canvas_sprite.texture = selected_texture
-
-	print(
-		"Selected canvas: ",
-		selected_path,
-	)
-
-	return true
 
 
 func get_mouse_image_position() -> Vector2i:
@@ -209,40 +156,6 @@ func get_mouse_image_position() -> Vector2i:
 	pixel_y = clampi(pixel_y, 0, image_height - 1)
 
 	return Vector2i(pixel_x, pixel_y)
-
-
-func erase_between_points(
-	start_position: Vector2i,
-	end_position: Vector2i
-) -> bool:
-	var start: Vector2 = Vector2(start_position)
-	var end: Vector2 = Vector2(end_position)
-
-	var distance: float = start.distance_to(end)
-
-	if distance <= 0.0:
-		return false
-
-	var spacing: float =  float(eraser_radius) * brush_spacing_ratio
-	var number_of_steps: int = maxi(1, ceili(distance / spacing))
-
-	var image_changed: bool = false
-	# Start at 1 because the starting point was already erased
-	# during the previous  frame.
-	for step: int in range(1, number_of_steps + 1):
-		var interpolation_amount: float = (
-				float(step)
-				/ float(number_of_steps)
-		)
-
-		var erase_position: Vector2i = Vector2i(
-			start.lerp(end, interpolation_amount)
-		)
-
-		if erase_circle(erase_position):
-			image_changed = true
-
-	return image_changed
 
 
 func erase_circle(center: Vector2i) -> bool:

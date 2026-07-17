@@ -25,7 +25,6 @@ ingredients_per_order,\
 ingredients_per_bag,\
 customer_spawn_interval,\
 cost_to_reroll,\
-time_to_clean_up_spill,\
 max_spills_per_shift,\
 max_breakdowns_per_shift,\
 clean_spill_allowed_remaining,\
