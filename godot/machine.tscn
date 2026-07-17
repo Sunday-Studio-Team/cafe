@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bh5bdrvebx5nl" path="res://machine_ui.tscn" id="8_yuuq8"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="9_0d1aa"]
 [ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
+[ext_resource type="AudioStream" uid="uid://b78v8ja676k6r" path="res://audio/spill_clean.mp3" id="9_42f15"]
 [ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
 [ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
 
@@ -37,6 +38,25 @@ size = Vector3(0.25, 0.5, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_vn1tu"]
 size = Vector3(1.5, 1, 1)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ovvye"]
+emission_shape_scale = Vector3(1.5, 1, 0.5)
+emission_shape = 3
+emission_box_extents = Vector3(0.63, 0, 1)
+use_rotation_3d = true
+rotation_3d_min = Vector3(0, 0, 0)
+rotation_3d_max = Vector3(0, 0, 0)
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 9.8, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
+albedo_color = Color(1, 1, 0.1764706, 1)
+emission_enabled = true
+emission = Color(0.93775684, 0.88670754, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_mjix0")
+text = "✨"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(1, 1.75, 0.5)
 
@@ -58,7 +78,7 @@ size = Vector3(0.9, 1.2, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
 size = Vector3(0.9, 1.2, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 spot_for_player = NodePath("SpotForPlayer")
@@ -102,6 +122,8 @@ made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/M
 made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Extra")
 hum_sound = NodePath("HumSound")
 done_sound = NodePath("DoneSound")
+spill_clean_sound = NodePath("SpillCleanSound")
+spill_clean_particles = NodePath("SpillCleanParticles")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -203,9 +225,20 @@ texture = ExtResource("9_1hddr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041475177, 0.569979, -0.1422759)
 shape = SubResource("BoxShape3D_vn1tu")
 
+[node name="SpillCleanParticles" type="GPUParticles3D" parent="." unique_id=1791871194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+emitting = false
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ovvye")
+draw_pass_1 = SubResource("TextMesh_vn1tu")
+
 [node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
 stream = ExtResource("7_6qesk")
 pitch_scale = 2.0
+
+[node name="SpillCleanSound" type="AudioStreamPlayer3D" parent="." unique_id=750243636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+stream = ExtResource("9_42f15")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=460997142]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)

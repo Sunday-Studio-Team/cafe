@@ -45,6 +45,8 @@ extends Node3D
 @export var made_extra_panel: OrderBreakdownElement
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
+@export var spill_clean_sound: AudioStreamPlayer3D
+@export var spill_clean_particles: GPUParticles3D
 
 var customer: Customer
 var order: OrderData
@@ -371,6 +373,8 @@ func clean_up_spill() -> void:
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 	spill_interactable.hide()
 	spill_on_floor = false
+	spill_clean_sound.play()
+	spill_clean_particles.restart()
 
 
 func refill() -> void:
