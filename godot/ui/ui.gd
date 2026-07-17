@@ -71,7 +71,7 @@ func _ready() -> void:
 		objective.text = (
 				"You are the new manager of a fully automated cafe!
 This is your first trial shift - make it through the week to keep your new position!
-(check your emails the computer for more details)"
+(check your emails on the computer for more details)"
 		)
 		rules_controls.text = (
 				"[b][i]controls [/i][/b]
