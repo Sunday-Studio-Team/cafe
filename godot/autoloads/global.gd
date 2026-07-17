@@ -35,13 +35,10 @@ var player_in_cctv_los := false
 var minigame_active := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
-var spam_emails: Array[EmailData]
 var finished_important_emails: Array[EmailData]
 var active_helpdesk_customer: Customer
 var holding_ingredients := false
 var day := 1
-var ai_improvement_enabled := false
-var ai_improvement: AIImprovement
 var daily_profit := 0.0:
 	set(new_value):
 		if new_value == daily_profit:

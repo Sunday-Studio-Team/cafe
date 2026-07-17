@@ -108,19 +108,8 @@ func set_per_day_stuff() -> void:
 		machines.push_front(fourth_machine)
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
-		
-	if Global.ai_improvement and !Global.ai_improvement_enabled:
-		# actually add the stats now
-		for stat in Global.ai_improvement.stat_bonuses:
-			var current_stat = Stats.current.get(stat)
-			if current_stat == null:
-				push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
-			Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
-		Global.ai_improvement_enabled = true
 
 	Global.machines.assign(machines)
-
-
 
 
 func spawn_customer() -> void:

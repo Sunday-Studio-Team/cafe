@@ -8,7 +8,7 @@ extends Node2D
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
-var allowed_remaining_ratio: float = Stats.current.clean_spill_allowed_remaining
+var allowed_remaining_ratio: float = 0.01
 @export_range(0.25, 1.0, 0.05)
 var brush_spacing_ratio: float = 0.5
 
@@ -56,7 +56,7 @@ func _ready() -> void:
 	count_starting_pixels()
 	update_progress_display()
 
-	
+
 func _input(event: InputEvent) -> void:
 	if game_finished:
 		return
