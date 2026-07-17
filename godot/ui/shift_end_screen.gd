@@ -25,6 +25,11 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	bank_total.text = "🏦 Bank total: [color=gold]%s[/color]" % Global.float_to_price(value_to_show_on_bank_total)
 
+	if visible:
+		Global.in_end_screen = true
+	else:
+		Global.in_end_screen = false
+
 
 func _on_time_up() -> void:
 	show()
@@ -36,8 +41,8 @@ func _on_time_up() -> void:
 	times_up.hide()
 
 	if (
-		Global.daily_profit >= Stats.current.daily_profit_goal
-		and Global.employee_rating >= Stats.current.employee_rating_goal
+			Global.daily_profit >= Stats.current.daily_profit_goal
+			and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
 		shift_cleared.show()
 		win_shift_sound.play()

@@ -15,7 +15,6 @@ extends Node
 @export var liquid_icons: Dictionary[Drink.Liquid, Texture2D]
 @export var extra_icons: Dictionary[Drink.Extra, Texture2D]
 
-
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -86,12 +85,13 @@ var holding_ingredients_rule := false
 var refill_minigame_accuracy: float
 var holding_make_drink_button := false
 var customer_sprites: Array[Texture]
-var spill_sprites: Array [Texture]
+var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var in_machine_ui: bool = false
 var in_main_menu := false
+var in_end_screen := false
 var in_ui: bool:
 	get():
 		if (
@@ -100,6 +100,7 @@ var in_ui: bool:
 				or in_machine_ui
 				or Console.is_visible()
 				or in_main_menu
+				or in_end_screen
 		):
 			return true
 		else:
