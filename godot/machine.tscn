@@ -142,14 +142,13 @@ one_shot = true
 one_shot = true
 
 [node name="IngTooLow" type="Label3D" parent="." unique_id=1911355806]
-transform = Transform3D(0.75122947, -0.66004103, 0, 0.66004103, 0.75122947, 0, 0, 0, 1, 1.3784734, 1.4826432, 0.73625064)
-visible = false
+transform = Transform3D(0.62520164, -0.78046316, 0, 0.78046316, 0.62520164, 0, 0, 0, 1, 1.1170099, 1.5826433, 0.65213495)
 modulate = Color(1, 0.44705883, 0.44705883, 1)
 text = "❗️out of ingredients
 <- please refill!"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="IngTooLow" unique_id=118984038]
-transform = Transform3D(0.74367034, -2.9223102e-08, 0.6685466, -0.6685466, -3.2506854e-08, 0.74367034, -5.663658e-15, -1, -4.3711385e-08, -0.7936928, -0.09933591, 0.026648521)
+transform = Transform3D(0.6162804, -3.4423895e-08, 0.78752685, -0.78752685, -2.6938462e-08, 0.6162804, -5.930551e-15, -1, -4.371139e-08, -0.7936927, -0.09933591, 0.026648521)
 light_color = Color(0.9411765, 0.5058824, 0.5058824, 1)
 light_energy = 2.0
 shadow_enabled = true
@@ -178,7 +177,7 @@ light_energy = 2.0
 shadow_enabled = true
 
 [node name="RefillButton" type="Area3D" parent="." unique_id=644204256 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.89250463, 0.9077126, 0.89125085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.9077126, 0.69125086)
 script = ExtResource("5_ioi8x")
 display_name = "[color=pink]refill ingredients"
 mesh = NodePath("MeshInstance3D")
