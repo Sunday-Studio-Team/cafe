@@ -47,6 +47,7 @@ extends Node3D
 @export var done_sound: AudioStreamPlayer3D
 @export var spill_clean_sound: AudioStreamPlayer3D
 @export var spill_clean_particles: GPUParticles3D
+@export var fixed_sound: AudioStreamPlayer3D
 
 var customer: Customer
 var order: OrderData
@@ -343,7 +344,18 @@ func display_drink_score() -> void:
 
 
 func fix_machine() -> void:
+	fixed_sound.play()
+	fix_machine_button.enabled = false
+	var t := create_tween().tween_property(
+		fix_machine_button,
+		"scale",
+		Vector3.ZERO,
+		0.25,
+	)
+	await t.finished
+	fix_machine_button.enabled = true
 	fix_machine_button.hide()
+	fix_machine_button.scale = Vector3.ONE
 	broken_down = false
 	timer.paused = false
 	gui_3d.interactable.enabled = true

@@ -45,12 +45,12 @@ func _init() -> void:
 
 func _process(delta: float) -> void:
 	_update_material()
-	
+
 	if (
-		Global.hovered_interactable != self
-		or not enabled
-		or Global.in_pc_ui
-		or Global.minigame_active
+			Global.hovered_interactable != self
+			or not enabled
+			or Global.in_pc_ui
+			or Global.minigame_active
 	):
 		if not keep_progress_on_interrupt:
 			time_held = 0
@@ -75,16 +75,17 @@ func _on_interacted() -> void:
 	await get_tree().process_frame
 	Global.hovered_interactable = null
 
+
 func _update_material() -> void:
-	if (Global.hovered_interactable != self
-		or not enabled
-		or Global.in_pc_ui
-		or Global.minigame_active
+	if (
+			Global.hovered_interactable != self
+			or not enabled
+			or Global.in_pc_ui
+			or Global.minigame_active
 	):
 		if mesh:
 			mesh.material_overlay = null
 		return
-
 
 	if mesh:
 		mesh.material_overlay = ShaderMaterial.new()
