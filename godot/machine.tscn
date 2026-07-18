@@ -78,7 +78,28 @@ size = Vector3(0.9, 1.2, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
 size = Vector3(0.9, 1.2, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles", "fixed_sound")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u17ae"]
+albedo_color = Color(0.50731444, 0.50731444, 0.5073144, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_u17ae")
+top_radius = 0.1
+bottom_radius = 0.12
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xurph"]
+albedo_color = Color(0.50731444, 0.50731444, 0.5073144, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_xurph")
+radius = 0.1
+height = 0.2
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles", "fixed_sound", "tip_label")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 spot_for_player = NodePath("SpotForPlayer")
@@ -125,6 +146,7 @@ done_sound = NodePath("DoneSound")
 spill_clean_sound = NodePath("SpillCleanSound")
 spill_clean_particles = NodePath("SpillCleanParticles")
 fixed_sound = NodePath("FixedSound")
+tip_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/TipLabel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -327,5 +349,21 @@ text = "exit"
 [node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
 remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
+
+[node name="IngedientsCanister" type="Node3D" parent="." unique_id=1872344733]
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="IngedientsCanister" unique_id=1647255840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, 0.7)
+mesh = SubResource("CylinderMesh_0ffxp")
+
+[node name="Cap" type="MeshInstance3D" parent="IngedientsCanister" unique_id=882612463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.90000004, 0.70000005)
+mesh = SubResource("SphereMesh_0ffxp")
+
+[node name="CoffeeIcon" type="Label3D" parent="IngedientsCanister" unique_id=357984642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.7077126, 0.8152923)
+visible = false
+text = "☕️"
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]

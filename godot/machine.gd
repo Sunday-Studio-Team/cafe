@@ -48,6 +48,7 @@ extends Node3D
 @export var spill_clean_sound: AudioStreamPlayer3D
 @export var spill_clean_particles: GPUParticles3D
 @export var fixed_sound: AudioStreamPlayer3D
+@export var tip_label: Label
 
 var customer: Customer
 var order: OrderData
@@ -287,9 +288,10 @@ func machine_make_drink() -> void:
 	display_drink_score()
 
 	# TODO: move hardcoded tip chance here somewhere else
+	tip_label.text = ""
 	if tip_jar_item in Global.owned_items and randf() < 0.25:
 		order.tip = randf_range(0.25, 1)
-		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
+		tip_label.text = "(+ %s TIP)" % Global.float_to_price(order.tip)
 
 	if (
 			randf() < Stats.current.machine_chance_of_spill

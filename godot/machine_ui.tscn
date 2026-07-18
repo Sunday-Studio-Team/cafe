@@ -276,6 +276,20 @@ offset_transform_rotation = -0.0715585
 theme_override_font_sizes/font_size = 32
 text = "+$1"
 
+[node name="TipLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=1536888060]
+modulate = Color(1, 0.93333334, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -1.5)
+offset_transform_rotation = -0.17453292
+theme_override_font_sizes/font_size = 24
+text = "(+ $1 TIP)"
+
 [node name="DrinkCustomerScoreLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=699335639]
 layout_mode = 1
 anchors_preset = 15
