@@ -5,17 +5,38 @@ extends SubViewportContainer
 @export var extra_ordered: IngredientIconHolder
 @export var captcha: GridContainer
 @export var submit_button: Button
+@export var instructions: RichTextLabel
+@export var entire_panel: PanelContainer
+@export var shake_intensity: float = 10
 
 var main_icons: Dictionary[Drink.MainIngredient, Texture2D] = Global.main_ingredient_icons
 var liquid_licons: Dictionary[Drink.Liquid, Texture2D] = Global.liquid_icons
 var extra_icons: Dictionary[Drink.Extra, Texture2D] = Global.extra_icons
 var ordered_drink: Drink
 var current_game_state: GameStates = GameStates.MAIN
+var main_text: String = "The required first ingredient"
+var liquid_text: String = "The required second ingredient"
+var extra_text: String = "The required third ingredient"
 
 enum GameStates {MAIN, LIQUID, EXTRA}
 
 func _ready() -> void:
 	_start_minigame()
+
+
+func _physics_process(delta: float) -> void:
+	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
+	if Engine.get_physics_frames() % 5 == 0:
+		var button_is_selected: bool = false
+		for captcha_icon: IngredientIconHolder in captcha.get_children():
+			if captcha_icon.button.button_pressed:
+				button_is_selected = true
+				break
+		if button_is_selected:
+			set_submit_text("VERIFY")
+		else:
+			set_submit_text("SKIP")
+
 
 func populate_captcha() -> void:
 	for captcha_icon: IngredientIconHolder in captcha.get_children():
@@ -53,9 +74,11 @@ func progress_state() -> void:
 		GameStates.MAIN:
 			current_game_state = GameStates.LIQUID
 			populate_captcha()
+			set_instructions(liquid_text)
 		GameStates.LIQUID:
 			current_game_state = GameStates.EXTRA
 			populate_captcha()
+			set_instructions(extra_text)
 		GameStates.EXTRA:
 			_end_minigame() 
 
@@ -73,14 +96,37 @@ func verify_captcha() -> void:
 	
 	for captcha_icon: IngredientIconHolder in captcha.get_children():
 		if ( (captcha_icon.ingredient == ordered_ingredient) != captcha_icon.button.button_pressed ):
-			print("at lewast one wrong")
+			shake_panel()
 			return
 	
 	progress_state()
 
 
+func set_instructions(text: String) -> void:
+	instructions.text = text
+
+
+func set_submit_text(text: String) -> void:
+	submit_button.text = text
+
+
+func shake_panel() -> void:
+	var panel_original_position: Vector2 = entire_panel.position
+	var tween = entire_panel.create_tween()
+	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+	
+	tween.tween_property(entire_panel, "position", entire_panel.position+shake_offset_target, 0.025)
+	for i in range(10):
+		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+		tween.chain().tween_property(entire_panel, "position", entire_panel.position+shake_offset_target, 0.025)
+	
+	tween.tween_property(entire_panel, "position", panel_original_position, 0.1)
+
+
+
 func _start_minigame() -> void:
 	current_game_state = GameStates.MAIN
+	set_instructions(main_text)
 	
 	# Temp drink setting for testing
 	var drink: Drink = Global.drinks.pick_random()
