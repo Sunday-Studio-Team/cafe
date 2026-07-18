@@ -26,8 +26,18 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and Global.in_pc_ui:
-		exit()
+	if (
+			Input.is_action_just_pressed("pause")
+			and Global.in_pc_ui
+	):
+		var in_app := false
+
+		for app in [email_app, shop_app]:
+			if app.visible:
+				in_app = true
+
+		if not in_app:
+			exit()
 
 	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day == 1
 

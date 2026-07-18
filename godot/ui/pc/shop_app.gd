@@ -22,6 +22,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	super(_delta)
+
 	bank_balance.text = "🏦 bank balance: [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
 
 
@@ -35,9 +37,9 @@ func populate_items() -> void:
 	var valid_item := true
 	for slot in number_of_items_to_show:
 		while (
-			random_item == null
-			or items_in_shop.has(random_item)
-			or Global.owned_items.has(random_item)
+				random_item == null
+				or items_in_shop.has(random_item)
+				or Global.owned_items.has(random_item)
 		):
 			random_item = Global.items.pick_random()
 			loops += 1
