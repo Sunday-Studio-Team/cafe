@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://cxw6bx3yspg0t" path="res://sprites/alert/frame_11_delay-0.05s.png" id="34_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dyvn8y6yxxp3c" path="res://sprites/alert/frame_12_delay-0.04s.png" id="35_am8a1"]
 [ext_resource type="Texture2D" uid="uid://ce6aylxemgy35" path="res://sprites/alert/frame_13_delay-0.04s.png" id="36_8dc3g"]
+[ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="36_cpm2s"]
 [ext_resource type="Texture2D" uid="uid://b2x5bvsgxyxsp" path="res://sprites/alert/frame_14_delay-0.04s.png" id="37_htgcl"]
 [ext_resource type="Texture2D" uid="uid://gfqu51nrngu4" path="res://sprites/alert/frame_15_delay-0.04s.png" id="38_smeu8"]
 [ext_resource type="Texture2D" uid="uid://dx3lbu3ju7deu" path="res://sprites/alert/frame_16_delay-0.04s.png" id="39_f3y11"]
@@ -119,8 +120,8 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
-sky_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+sky_top_color = Color(0.89, 0.79981333, 0.6052, 1)
+sky_horizon_color = Color(0.6912, 0.70224005, 0.72, 1)
 ground_bottom_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
 ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
 
@@ -130,6 +131,8 @@ sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 2
 sky = SubResource("Sky_0xm2m")
+ssao_enabled = true
+ssil_enabled = true
 volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smeu8"]
@@ -260,7 +263,8 @@ material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
-albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
+albedo_texture = ExtResource("36_cpm2s")
+uv1_scale = Vector3(13.51, 2.58, 13.51)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_jofr6")
