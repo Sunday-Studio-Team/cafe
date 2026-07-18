@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://cgvsd5jb05afu"]
+
+[ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/drink_making_game_2/drink_making_2.gd" id="1_pitvc"]
+[ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/drink_making_game_2/ingredient_icon_holder.tscn" id="2_c5i2p"]
+
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_goal", "liquid_goal", "extra_goal", "captcha")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pitvc")
+main_goal = NodePath("SubViewport/CanvasLayer/PanelContainer/MarginContainer/HBoxContainer/Main")
+liquid_goal = NodePath("SubViewport/CanvasLayer/PanelContainer/MarginContainer/HBoxContainer/Liquid")
+extra_goal = NodePath("SubViewport/CanvasLayer/PanelContainer/MarginContainer/HBoxContainer/Extra")
+captcha = NodePath("SubViewport/CanvasLayer/Captcha")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport" unique_id=1618702107]
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport/CanvasLayer" unique_id=2035377822]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -439.0
+offset_top = -400.0
+offset_right = 61.0
+offset_bottom = 100.000244
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.3944444
+pivot_offset = Vector2(250, 250)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/CanvasLayer/PanelContainer" unique_id=195611177]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/CanvasLayer/PanelContainer/MarginContainer" unique_id=346830654]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="Main" parent="SubViewport/CanvasLayer/PanelContainer/MarginContainer/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+button_disabled = true
+
+[node name="Liquid" parent="SubViewport/CanvasLayer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+button_disabled = true
+
+[node name="Extra" parent="SubViewport/CanvasLayer/PanelContainer/MarginContainer/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+button_disabled = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/CanvasLayer" unique_id=1043046182]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.5
+offset_top = -117.5
+offset_right = 117.5
+offset_bottom = 117.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Captcha" type="GridContainer" parent="SubViewport/CanvasLayer" unique_id=1363679932]
+anchors_preset = -1
+offset_left = 842.5
+offset_top = 422.5
+offset_right = 1077.5
+offset_bottom = 657.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 3
+
+[node name="Button0" parent="SubViewport/CanvasLayer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button1" parent="SubViewport/CanvasLayer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button2" parent="SubViewport/CanvasLayer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button3" parent="SubViewport/CanvasLayer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button4" parent="SubViewport/CanvasLayer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button5" parent="SubViewport/CanvasLayer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button6" parent="SubViewport/CanvasLayer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button7" parent="SubViewport/CanvasLayer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button8" parent="SubViewport/CanvasLayer/Captcha" unique_id=617140734 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button9" type="Button" parent="SubViewport/CanvasLayer" unique_id=1979538868]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 13.0
+offset_top = 130.0
+offset_right = 118.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://05434h1dr00p"]
+
+[ext_resource type="Script" uid="uid://dq72kek7dsmii" path="res://minigames/drink_making_game_2/ingredient_icon_holder.gd" id="1_0nynn"]
+
+[node name="IngredientIconHolder" type="PanelContainer" unique_id=307859356 node_paths=PackedStringArray("icon", "button")]
+custom_minimum_size = Vector2(75, 75)
+script = ExtResource("1_0nynn")
+icon = NodePath("IconImage")
+button = NodePath("Button")
+
+[node name="IconImage" type="TextureRect" parent="." unique_id=1931330701]
+layout_mode = 2
+expand_mode = 3
+
+[node name="Button" type="Button" parent="." unique_id=1994620602]
+layout_mode = 2
+toggle_mode = true
