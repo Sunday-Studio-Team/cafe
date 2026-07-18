@@ -1,10 +1,13 @@
 extends ColorRect
 
-@export var ingredient_id: String = "orange_box"
+@export var ingredient_id: String = "coffee_box"
 @export var ingredient_color: Color = Color.ORANGE
+
+@onready var _id_label: Label = $Label
 
 func _ready() -> void:
 	color = ingredient_color
+	_id_label.text = ingredient_id
 
 func _get_drag_data(_at_position: Vector2):
 	var preview := ColorRect.new()
