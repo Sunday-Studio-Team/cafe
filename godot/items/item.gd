@@ -17,3 +17,15 @@ extends Resource
 ## this will be like stat_bonuses but it can change vars in Global
 ## NOTE: unused for now
 @export var rules: Dictionary
+
+
+func apply_stats():
+	if stat_bonuses.is_empty():
+		push_warning("%s has no stat bonuses, not applying stats" % name)
+	for stat in stat_bonuses:
+		var current_stat = Stats.current.get(stat)
+		if current_stat == null:
+			push_error("%s is trying to give a bonus to '%s' but that stat does not exist" % [name, stat])
+		Stats.current.set(stat, current_stat + stat_bonuses[stat])
+	for rule in rules:
+		Global.set(rule, rules[rule])

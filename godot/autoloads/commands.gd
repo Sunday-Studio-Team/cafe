@@ -123,6 +123,7 @@ func give_item(item_name: String) -> void:
 	for item in Global.items:
 		if item_name == item.name:
 			Global.owned_items.append(item)
+			item.apply_stats()
 			Events.items_updated.emit()
 			Console.print_line("gave %s" % item.name)
 			return
