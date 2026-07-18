@@ -1,7 +1,7 @@
 extends CustomEmailView
 class_name CustomEmailViewSpam
 
-@onready var claim_button: Button = $TextureRect/ClaimButton
+@onready var claim_button: TextureButton = $TextureRect/ClaimButton
 
 @onready var money_notif: Container = $TextureRect/MoneyNotifs
 
