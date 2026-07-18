@@ -43,19 +43,18 @@ emission_shape_scale = Vector3(1.5, 1, 0.5)
 emission_shape = 3
 emission_box_extents = Vector3(0.63, 0, 1)
 use_rotation_3d = true
-rotation_3d_min = Vector3(0, 0, 0)
-rotation_3d_max = Vector3(0, 0, 0)
+rotation_3d_min = Vector3(0, 0, 45)
+rotation_3d_max = Vector3(0, 0, 45)
 direction = Vector3(0, -1, 0)
 gravity = Vector3(0, 9.8, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
-albedo_color = Color(1, 1, 0.1764706, 1)
-emission_enabled = true
-emission = Color(0.93775684, 0.88670754, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wuddj"]
+albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="TextMesh" id="TextMesh_vn1tu"]
-material = SubResource("StandardMaterial3D_mjix0")
-text = "✨"
+[sub_resource type="PlaneMesh" id="PlaneMesh_u17ae"]
+material = SubResource("StandardMaterial3D_wuddj")
+size = Vector2(0.1, 0.1)
+orientation = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(1, 1.75, 0.5)
@@ -226,11 +225,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041475177, 0.569979, -0.14
 shape = SubResource("BoxShape3D_vn1tu")
 
 [node name="SpillCleanParticles" type="GPUParticles3D" parent="." unique_id=1791871194]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
 emitting = false
+lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_ovvye")
-draw_pass_1 = SubResource("TextMesh_vn1tu")
+draw_pass_1 = SubResource("PlaneMesh_u17ae")
 
 [node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
 stream = ExtResource("7_6qesk")
