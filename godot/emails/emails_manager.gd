@@ -30,7 +30,6 @@ func _ready() -> void:
 		if rand_email_percent >= 0.5:
 			last_spam_email_day = current_day
 			var spam_email = SpamEmail.new()
-			_delivered_emails_to_date.append(spam_email)
 			emails_schedule.append(spam_email)	
 	# Needs to be added manually since can't be added to game resource bc it uses stats that are not initialized until after the game resource is loaded
 	if current_day == 3:
