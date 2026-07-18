@@ -133,6 +133,7 @@ background_mode = 2
 sky = SubResource("Sky_0xm2m")
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
 volumetric_fog_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smeu8"]
@@ -835,6 +836,31 @@ mesh = SubResource("TextMesh_vn1tu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1000004, 2.3, 4.3)
 mesh = SubResource("TextMesh_lswn8")
 
+[node name="Lights" type="Node3D" parent="." unique_id=1249928200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights" unique_id=95847607]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2323385, 2.8165505, 3.0065422)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="AreaLight3D2" type="AreaLight3D" parent="Lights" unique_id=1337331138]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.259366, 2.8165505, 3.0065422)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="AreaLight3D3" type="AreaLight3D" parent="Lights" unique_id=194176168]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 13.841586, 2.8165505, 3.0065422)
+light_energy = 4.604
+light_specular = 1.37
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
 [node name="Environment" type="Node3D" parent="." unique_id=563251901]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
 
@@ -983,7 +1009,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
 mesh = SubResource("BoxMesh_l03hl")
 
 [node name="Roof" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=14358993]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9522974, 3.0000288, -2.035007)
 mesh = SubResource("BoxMesh_q16ga")
 surface_material_override/0 = SubResource("StandardMaterial3D_k1udn")
 
