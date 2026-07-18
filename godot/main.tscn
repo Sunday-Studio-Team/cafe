@@ -120,10 +120,9 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(0.89, 0.79981333, 0.6052, 1)
+sky_top_color = Color(1, 0.89, 0.8, 1)
 sky_horizon_color = Color(0.6912, 0.70224005, 0.72, 1)
-ground_bottom_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
-ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+ground_bottom_color = Color(0.13668326, 0.16590339, 0.2840879, 1)
 
 [sub_resource type="Sky" id="Sky_0xm2m"]
 sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
@@ -136,7 +135,9 @@ reflected_light_source = 2
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smeu8"]
 
@@ -864,6 +865,7 @@ area_size = Vector2(1.2112226, 1.1672361)
 
 [node name="AreaLight3D4" type="AreaLight3D" parent="Lights" unique_id=911257138]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.3930755, 2.8165505, -3.278502)
+light_color = Color(1, 0.8, 0.52, 1)
 light_energy = 5.0
 shadow_enabled = true
 area_range = 5.895
@@ -886,14 +888,17 @@ area_size = Vector2(2.0486052, 2.0054026)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1338537585]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2646357, 1.4271426, 3.0065422)
+light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
 omni_range = 16.497
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights" unique_id=527671258]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.243606, 1.4271424, 3.0065422)
+light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
 omni_range = 16.497
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=673108826]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.2067113, 1.4271426, -3.3517313)
+light_color = Color(1, 0.7783333, 0.65, 1)
 omni_range = 16.497
 
 [node name="Environment" type="Node3D" parent="." unique_id=563251901]
