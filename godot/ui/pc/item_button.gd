@@ -25,12 +25,15 @@ func _ready() -> void:
 	pressed.connect(
 		func():
 			if Global.bank_money >= item.price:
-				clicked.emit(true)
-				item.apply_stats()
-				Global.bank_money -= item.price
-				Global.owned_items.append(item)
-				Events.items_updated.emit()
-				queue_free()
+				if Global.owned_items.size() < Global.item_slots_amount:
+					clicked.emit(true)
+					item.apply_stats()
+					Global.bank_money -= item.price
+					Global.owned_items.append(item)
+					Events.items_updated.emit()
+					queue_free()
+				else:
+					clicked.emit(false)
 			else:
 				clicked.emit(false)
 	)

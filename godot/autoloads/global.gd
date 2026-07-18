@@ -25,6 +25,8 @@ var hovered_interactable: Interactable:
 			return null
 		else:
 			return hovered_interactable
+# max amount of items we can own
+var item_slots_amount: int
 var inspected_shelf_item: ShelfItem
 var main_scene: Node3D
 var customer_entry_spot: Marker3D

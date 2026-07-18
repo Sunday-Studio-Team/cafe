@@ -7,7 +7,14 @@
 [ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="4_jf33y"]
 [ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
 
-[node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button") instance=ExtResource("1_swvwp")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf33y"]
+bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button", "shelf_full_warning") instance=ExtResource("1_swvwp")]
 script = ExtResource("2_c06av")
 items_container = NodePath("MarginContainer/VBoxContainer/Items")
 item_button_scene = ExtResource("3_mamje")
@@ -17,6 +24,7 @@ bought_sound = NodePath("BoughtItemSound")
 reroll_sound = NodePath("ReRollSound")
 cant_reroll_sound = NodePath("CantReRollSound")
 reroll_button = NodePath("MarginContainer/VBoxContainer/ReRoll")
+shelf_full_warning = NodePath("MarginContainer/ShelfFullWarning")
 
 [node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
 layout_mode = 2
@@ -44,6 +52,23 @@ mouse_filter = 2
 bbcode_enabled = true
 text = "money in bank: $10"
 horizontal_alignment = 2
+
+[node name="ShelfFullWarning" type="PanelContainer" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="3" unique_id=1986553584]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = 0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_jf33y")
+
+[node name="Label" type="Label" parent="MarginContainer/ShelfFullWarning" index="0" unique_id=1148976534]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 128
+text = "ITEM SHELF FULL !"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CantBuySound" type="AudioStreamPlayer" parent="." index="1" unique_id=2005999671]
 stream = ExtResource("4_488el")

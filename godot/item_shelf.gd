@@ -8,6 +8,7 @@ var item_slots: Array[Marker3D]
 
 func _ready() -> void:
 	item_slots.assign(item_slots_parent.get_children())
+	Global.item_slots_amount = item_slots.size()
 	display_items()
 	Events.items_updated.connect(display_items)
 
