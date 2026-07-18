@@ -30,9 +30,9 @@ size_flags_vertical = 3
 script = ExtResource("1_n3ai3")
 timer_ui = NodePath("Timer")
 broken_down_text = NodePath("BrokenDown")
-ready_text = NodePath("BottomPanel/Ready")
-price_label = NodePath("TopPanel/HBoxContainer/PriceLabel")
-rating_label = NodePath("TopPanel/HBoxContainer/RatingLabel")
+ready_text = NodePath("ReadyPanel/Ready")
+price_label = NodePath("BottomPanel/HBoxContainer/PriceLabel")
+rating_label = NodePath("BottomPanel/HBoxContainer/RatingLabel")
 spill = NodePath("Spill")
 ingredients = NodePath("Ingredients")
 customer_wait_indicator = NodePath("CustomerTimer")
@@ -79,34 +79,36 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
 layout_mode = 2
 text = "🫘"
 
-[node name="TopPanel" type="PanelContainer" parent="." unique_id=1622307031]
+[node name="BottomPanel" type="PanelContainer" parent="." unique_id=1622307031]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopPanel" unique_id=2001457531]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel" unique_id=2001457531]
 layout_mode = 2
 
-[node name="PriceLabel" type="Label" parent="TopPanel/HBoxContainer" unique_id=1004174759]
+[node name="PriceLabel" type="Label" parent="BottomPanel/HBoxContainer" unique_id=1004174759]
 modulate = Color(0.34237343, 1, 0.34237343, 1)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-text = "+ 4$"
+theme_override_font_sizes/font_size = 12
+text = "+ 4.50$"
 vertical_alignment = 2
 
-[node name="RatingLabel" type="Label" parent="TopPanel/HBoxContainer" unique_id=917201964]
+[node name="RatingLabel" type="Label" parent="BottomPanel/HBoxContainer" unique_id=917201964]
 modulate = Color(0.34237343, 1, 0.34237343, 1)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
-text = "+ 4🙂"
+theme_override_font_sizes/font_size = 12
+text = "+ 1.5⭐️🙂"
 vertical_alignment = 2
 
-[node name="BottomPanel" type="PanelContainer" parent="." unique_id=220626538]
+[node name="ReadyPanel" type="PanelContainer" parent="." unique_id=220626538]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Ready" type="Label" parent="BottomPanel" unique_id=867719552]
+[node name="Ready" type="Label" parent="ReadyPanel" unique_id=867719552]
 layout_mode = 2
 size_flags_vertical = 0
 text = "READY FOR
@@ -138,6 +140,7 @@ text = "⌛"
 horizontal_alignment = 1
 
 [node name="Timer" type="TextureProgressBar" parent="." unique_id=1593234249]
+visible = false
 texture_filter = 1
 layout_mode = 2
 offset_transform_enabled = true
@@ -149,6 +152,7 @@ texture_over = ExtResource("3_15k3r")
 texture_progress = ExtResource("4_hq0he")
 
 [node name="BrokenDown" type="Label" parent="." unique_id=2059861179]
+visible = false
 modulate = Color(0.93267196, 0.6454541, 0.24098766, 1)
 layout_mode = 2
 size_flags_horizontal = 4

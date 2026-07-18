@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 
 		var score := machine.order.score
 		rating_label.modulate = Color.GREEN if score > 0 else Color.RED
-		rating_label.text = "+%s🙂" % score if score > 0 else "%s🙂" % score
+		rating_label.text = "+%s⭐️🙂" % (score / 2.0) if score > 0 else "%s⭐️🙂" % (score / 2.0)
 
 	spill.visible = machine.spill_on_floor
 
