@@ -28,6 +28,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var rating_goal_label: Label
 @export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
+#Active Item
+@export var hammer_indicator: PanelContainer
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -35,9 +37,6 @@ var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
-
-#Active Item
-@export var hammer_indicator : PanelContainer
 
 
 func _ready() -> void:
@@ -80,7 +79,8 @@ This is your first trial shift - make it through the week to keep your new posit
 				"[b][i]controls [/i][/b]
 			[b]WASD[/b] move
 			[b]E[/b] interact
-			[b]Shift[/b] sprint"
+			[b]Shift[/b] sprint
+			[b]TAB[/b] item wheel"
 		)
 		cctv_indicator.hide()
 	if Global.day >= 2:
@@ -237,7 +237,7 @@ func update_interactable_ui() -> void:
 
 	if hovered_interactable != null:
 		interactable_indicator.show()
-		
+
 		if hovered_interactable.name == "FixMachineButton" and Global.equipped_item != null and Global.equipped_item.name == "Hammer":
 			hammer_indicator.show()
 		else:
