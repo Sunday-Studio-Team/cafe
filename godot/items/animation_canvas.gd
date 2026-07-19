@@ -30,6 +30,8 @@ func _physics_process(_delta: float) -> void:
 	):
 		Events.hammer_animation_hit.emit()
 
+	visible = not Global.in_ui
+
 
 #NOTE: NEED TO FIX THE ANIMATION STATE MACHINE
 #TEMPORARY FOR TESTING

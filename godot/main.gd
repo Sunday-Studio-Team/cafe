@@ -164,13 +164,12 @@ func active_item_used(item: Item):
 		item_name = item.name
 
 	# TODO: Fix how clock works
-	# TODO: block item usage before shift starts
-	if item == clock_item:
+	if item == clock_item and not game_timer.is_stopped():
 		game_timer.paused = true
 		Global.equipped_item = null
 		Global.deactivate_active_item(item)
 		clock_item_stop_sound.play()
-		await get_tree().create_timer(8).timeout
+		await get_tree().create_timer(8, false).timeout
 		game_timer.paused = false
 		clock_item_start_sound.play()
 
