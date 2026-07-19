@@ -238,13 +238,15 @@ sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 2
 sky = SubResource("Sky_0xm2m")
-ambient_light_source = 3
-reflected_light_source = 2
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.04
+adjustment_enabled = true
+adjustment_brightness = 0.89
+adjustment_contrast = 1.25
+adjustment_saturation = 1.15
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smeu8"]
 
@@ -1298,6 +1300,13 @@ shadow_enabled = true
 area_range = 5.895
 area_size = Vector2(2.0486052, 2.0054026)
 
+[node name="AreaLight3D7" type="AreaLight3D" parent="Lights" unique_id=2032056219]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -4.9053288, 2.7198212, -3.600625)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
 [node name="AreaLight3D2" type="AreaLight3D" parent="Lights" unique_id=466501790]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.049901, 2.742811, 8.090851)
 light_energy = 5.0
@@ -1337,6 +1346,11 @@ area_size = Vector2(2.0486052, 2.0054026)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1338537585]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2646357, 1.4271426, 3.0065422)
+light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
+omni_range = 16.497
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" unique_id=795949709]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -5.05064, 1.4271426, -3.6029358)
 light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
 omni_range = 16.497
 
