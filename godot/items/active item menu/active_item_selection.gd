@@ -45,6 +45,7 @@ func _input(event):
 			print("Item Chosen: ", options[selection])
 
 			Global.equip_item(options[selection])
+			menu_selected()
 
 
 func _draw():
