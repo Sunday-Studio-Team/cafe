@@ -530,6 +530,7 @@ func on_active_item_used_machine(item: Item):
 	if item == hammer_item:
 		Events.play_item_animation.emit("use_hammer")
 		Global.deactivate_active_item(item)
+		await Events.hammer_animation_hit
 		fix_machine()
 
 
