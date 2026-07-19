@@ -81,7 +81,7 @@ func _ready() -> void:
 				await get_tree().create_timer(0.5, false).timeout
 				no_ingredients_warning.hide()
 	)
-	make_drink_button.button_down.connect(_on_manual_drink_button_pressed)
+	make_drink_button.button_down.connect(_on_remake_drink_button_pressed)
 	reject_button.pressed.connect(
 		func():
 			if ingredients < Stats.current.ingredients_per_order:
@@ -514,9 +514,10 @@ func _on_machine_fixed() -> void:
 	fix_machine()
 
 
-func _on_manual_drink_button_pressed() -> void:
+func _on_remake_drink_button_pressed() -> void:
 	Events.minigame_end.connect(_on_remade_drink)
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
+	Global.ordered_drink_to_remake = order.ordered_drink
 	Events.minigame_active.emit(manual_drink_minigames.pick_random())
 
 

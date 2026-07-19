@@ -142,7 +142,7 @@ func _start_minigame() -> void:
 	set_instructions(main_text)
 	
 	# Temp drink setting for testing
-	var drink: Drink = Global.drinks.pick_random()
+	var drink: Drink = Global.ordered_drink_to_remake
 	get_ordered_drink(drink)
 	
 	populate_captcha()

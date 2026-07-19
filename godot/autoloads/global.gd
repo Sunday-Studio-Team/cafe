@@ -105,6 +105,7 @@ var in_ui: bool:
 			return true
 		else:
 			return false
+var ordered_drink_to_remake: Drink
 
 
 func _ready() -> void:
