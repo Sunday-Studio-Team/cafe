@@ -24,11 +24,14 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
 @export var shelf_item_active_indicator: PanelContainer
+@export var shelf_item_sell: Button
+@export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_goal_label: Label
 @export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
+@export var sold_item_sound: AudioStreamPlayer
 #Active Item
 @export var current_item_ui: Control
 @export var hammer_indicator: PanelContainer
@@ -150,9 +153,13 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
 
-	var t := create_tween().set_loops()
-	t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
-	t.tween_property(hammer_indicator, "modulate", Color.ORANGE_RED, 0.5)
+	var hammer_t := create_tween().set_loops()
+	hammer_t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
+	hammer_t.tween_property(hammer_indicator, "modulate", Color.ORANGE_RED, 0.5)
+
+	var shelf_sell_t := create_tween().set_loops()
+	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.GOLD, 2)
+	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.WHITE, 2)
 
 
 func _physics_process(_delta: float) -> void:
@@ -204,6 +211,18 @@ func handle_shelf_item_ui() -> void:
 
 	shelf_item_name.text = "[b]%s" % shelf_item.item.name
 	shelf_item_description.text = shelf_item.item.description
+
+	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(shelf_item.item.price / 2.0)
+
+	if Input.is_action_just_pressed("interact"):
+		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(shelf_item.item.price / 2)
+		shelf_item_sold_indicator.show()
+		sold_item_sound.play()
+		await get_tree().create_timer(0.5, false).timeout
+		shelf_item_sold_indicator.hide()
+		Global.bank_money += shelf_item.item.price / 2
+		Global.owned_items.erase(shelf_item.item)
+		Events.items_updated.emit()
 
 
 func handle_time_left_warning() -> void:
