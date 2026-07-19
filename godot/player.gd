@@ -49,12 +49,19 @@ func _physics_process(delta: float) -> void:
 	#handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
+	handle_active_item_menu()
 	move_and_slide()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta += event.screen_relative * mouse_sens
+
+
+func handle_active_item_menu() -> void:
+	if Input.is_action_just_pressed("item_menu"):
+		if not Global.in_ui or Global.in_active_item_menu:
+			Events.active_item_menu.emit()
 
 
 func handle_mouselook() -> void:
@@ -93,6 +100,10 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+
+	#Active Item
+	if Input.is_action_just_pressed("use_item"):
+		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_gravity(delta: float) -> void:

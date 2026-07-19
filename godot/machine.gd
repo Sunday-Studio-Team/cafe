@@ -49,6 +49,8 @@ extends Node3D
 @export var spill_clean_particles: GPUParticles3D
 @export var fixed_sound: AudioStreamPlayer3D
 @export var tip_label: Label
+@export var hammer_item: Item
+@export var hammer_hit_sound: AudioStreamPlayer
 
 var customer: Customer
 var order: OrderData
@@ -108,6 +110,9 @@ func _ready() -> void:
 	customer_order_indicator.hide()
 	order_breakdown.hide()
 	final_order_indicator.hide()
+
+	#Active Items
+	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
 
 
 func _physics_process(_delta: float) -> void:
@@ -345,8 +350,12 @@ func display_drink_score() -> void:
 		final_order_indicator.modulate = Color.RED
 
 
-func fix_machine() -> void:
+func fix_machine(hammer: bool = false) -> void:
+	if hammer:
+		hammer_hit_sound.play()
+		Global.equipped_item = null
 	fixed_sound.play()
+
 	fix_machine_button.enabled = false
 	var t := create_tween().tween_property(
 		fix_machine_button,
@@ -515,6 +524,19 @@ func break_down() -> void:
 	timer.paused = true
 	broken_down = true
 	hum_sound.stop()
+
+
+#Active Item
+#If item used, checks if it's valid and does the specified action
+func on_active_item_used_machine(item: Item):
+	if item == null:
+		return
+
+	if item == hammer_item:
+		Events.play_item_animation.emit("use_hammer")
+		Global.deactivate_active_item(item)
+		await Events.hammer_animation_hit
+		fix_machine(true)
 
 
 func _on_clean_spill() -> void:

@@ -18,6 +18,11 @@ extends Node3D
 @export var overtime_item: Item
 #Minigame
 @export var minigame_controller: CanvasLayer
+#Active Items
+@export var clock_item: Item
+@export var active_item_timer: Timer
+@export var clock_item_stop_sound: AudioStreamPlayer
+@export var clock_item_start_sound: AudioStreamPlayer
 
 
 func _enter_tree() -> void:
@@ -76,6 +81,12 @@ func _ready() -> void:
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
 
+	#Active Item refresh
+	Global.refresh_active_items()
+
+	#Active Items
+	Events.active_item_used.connect(active_item_used)
+
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
@@ -109,7 +120,7 @@ func set_per_day_stuff() -> void:
 		machines.push_front(fourth_machine)
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
-		
+
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
 		for stat in Global.ai_improvement.stat_bonuses:
@@ -120,8 +131,6 @@ func set_per_day_stuff() -> void:
 		Global.ai_improvement_enabled = true
 
 	Global.machines.assign(machines)
-
-
 
 
 func spawn_customer() -> void:
@@ -146,6 +155,23 @@ func spawn_customer() -> void:
 
 	machine.set_customer(new_customer)
 	machine.machine_make_drink()
+
+
+#Actives the effects of a given active item
+func active_item_used(item: Item):
+	var item_name: String = ""
+	if item != null:
+		item_name = item.name
+
+	# TODO: Fix how clock works
+	if item == clock_item and not game_timer.is_stopped():
+		game_timer.paused = true
+		Global.equipped_item = null
+		Global.deactivate_active_item(item)
+		clock_item_stop_sound.play()
+		await get_tree().create_timer(8, false).timeout
+		game_timer.paused = false
+		clock_item_start_sound.play()
 
 
 func _on_game_timer_timeout() -> void:
@@ -187,3 +213,8 @@ func _on_shift_started():
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
+
+
+func _on_timer_timeout():
+	#game_timer.paused = false
+	pass # Replace with function body.

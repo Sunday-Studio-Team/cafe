@@ -23,11 +23,17 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
+@export var shelf_item_active_indicator: PanelContainer
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_goal_label: Label
 @export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
+#Active Item
+@export var current_item_ui: Control
+@export var hammer_indicator: PanelContainer
+@export var current_item_icon: TextureRect
+@export var use_item_prompt: Button
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -77,7 +83,9 @@ This is your first trial shift - make it through the week to keep your new posit
 				"[b][i]controls [/i][/b]
 			[b]WASD[/b] move
 			[b]E[/b] interact
-			[b]Shift[/b] sprint"
+			[b]Shift[/b] sprint
+			[b]TAB[/b] item wheel
+			[b]Q[/b] use item"
 		)
 		cctv_indicator.hide()
 	if Global.day >= 2:
@@ -142,6 +150,10 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
 
+	var t := create_tween().set_loops()
+	t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
+	t.tween_property(hammer_indicator, "modulate", Color.ORANGE_RED, 0.5)
+
 
 func _physics_process(_delta: float) -> void:
 	update_score_indicators()
@@ -152,9 +164,24 @@ func _physics_process(_delta: float) -> void:
 	handle_shelf_item_ui()
 	update_day_indicator()
 	handle_drop_item_ui()
+	handle_item_ui()
 
 
-func handle_drop_item_ui():
+func handle_item_ui() -> void:
+	var current_item: Item = Global.equipped_item
+
+	if current_item != null:
+		current_item_ui.show()
+		current_item_icon.texture = current_item.icon
+		use_item_prompt.visible = (
+				current_item.can_activate_anywhere
+				and current_item.can_be_used
+		)
+	else:
+		current_item_ui.hide()
+
+
+func handle_drop_item_ui() -> void:
 	drop_button.visible = Global.holding_ingredients and not Global.in_ui
 
 
@@ -169,6 +196,11 @@ func handle_shelf_item_ui() -> void:
 
 	if not shelf_item:
 		return
+
+	if shelf_item.item.is_active_item:
+		shelf_item_active_indicator.show()
+	else:
+		shelf_item_active_indicator.hide()
 
 	shelf_item_name.text = "[b]%s" % shelf_item.item.name
 	shelf_item_description.text = shelf_item.item.description
@@ -234,6 +266,16 @@ func update_interactable_ui() -> void:
 
 	if hovered_interactable != null:
 		interactable_indicator.show()
+
+		if (
+				hovered_interactable.name == "FixMachineButton"
+				and Global.equipped_item != null
+				and Global.equipped_item.name == "hammer"
+		):
+			hammer_indicator.show()
+
+		else:
+			hammer_indicator.hide()
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
