@@ -1,7 +1,7 @@
 extends Node
 
-const LOADING_FADE_IN_TIME := 1.0
-const LOADING_FADE_OUT_TIME := 2.0
+const LOADING_FADE_IN_TIME := 0.5
+const LOADING_FADE_OUT_TIME := 1.0
 
 @export var loading_screen: ColorRect
 @export var main_scene: PackedScene
