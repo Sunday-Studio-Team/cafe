@@ -353,6 +353,7 @@ func display_drink_score() -> void:
 func fix_machine(hammer: bool = false) -> void:
 	if hammer:
 		hammer_hit_sound.play()
+		Global.equipped_item = null
 	fixed_sound.play()
 
 	fix_machine_button.enabled = false

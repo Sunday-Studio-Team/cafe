@@ -54,7 +54,7 @@ func play_animation(animation_name: String):
 	animated_sprite_2d.play(animation_name)
 
 
-#Checks for when the animation finishes
+# Checks for when the animation finishes
 func _on_animated_sprite_2d_animation_finished():
 	print("State: ", current_state)
 	if item_animation_name == "":

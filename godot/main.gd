@@ -19,7 +19,10 @@ extends Node3D
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
+@export var clock_item: Item
 @export var active_item_timer: Timer
+@export var clock_item_stop_sound: AudioStreamPlayer
+@export var clock_item_start_sound: AudioStreamPlayer
 
 
 func _enter_tree() -> void:
@@ -160,12 +163,16 @@ func active_item_used(item: Item):
 	if item != null:
 		item_name = item.name
 
-	#TODO: Fix how clock works
-	if item_name == "Clock":
+	# TODO: Fix how clock works
+	# TODO: block item usage before shift starts
+	if item == clock_item:
 		game_timer.paused = true
-		active_item_timer.wait_time = 8.0
-		active_item_timer.start()
+		Global.equipped_item = null
 		Global.deactivate_active_item(item)
+		clock_item_stop_sound.play()
+		await get_tree().create_timer(8).timeout
+		game_timer.paused = false
+		clock_item_start_sound.play()
 
 
 func _on_game_timer_timeout() -> void:
@@ -210,5 +217,5 @@ func _on_desk_interacted() -> void:
 
 
 func _on_timer_timeout():
-	game_timer.paused = false
+	#game_timer.paused = false
 	pass # Replace with function body.
