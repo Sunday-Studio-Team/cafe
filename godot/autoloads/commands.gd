@@ -15,8 +15,9 @@ func _ready() -> void:
 	# not sure whether to enable this or not, seems to break some stuff
 	# but might be better than accidentally pressing stuff in game by typing lol
 	#Console.pause_enabled = true
-	# dont think we need this yet, but if the commands list gets much longer itll go offscreen
-	#Console.toggle_size() # set fullscreen
+
+	Console.font_size = 32
+	Console.toggle_size() # set fullscreen
 
 	var items_guide_str: String = "Available items: "
 	for item in Global.items:
@@ -38,7 +39,6 @@ func _ready() -> void:
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
-%s
 - [i]speed <number>[/i] sets the game speed"
 		% [items_guide_str],
 	)
