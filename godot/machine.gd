@@ -12,7 +12,7 @@ extends Node3D
 @export var final_order_indicator: Label
 @export var price_label: Label
 @export var drink_customer_score_label: Label
-@export var make_drink_button: HoldButton
+@export var make_drink_button: Button
 @export var accept_button: Button
 @export var reject_button: Button
 @export var refill_button: Interactable
@@ -28,7 +28,6 @@ extends Node3D
 @export var spill_sound: AudioStreamPlayer3D
 @export var static_body: StaticBody3D
 @export var spill_warning: Label
-@export var manual_progress_bar: TextureProgressBar
 @export var gui_3d: Gui3D
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
@@ -65,6 +64,7 @@ var ingredients: int = max_ingredients:
 			print("ingredients changed by %s on %s" % [change, name])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
+var manual_drink_minigames := [""]
 var clean_spill_minigame := "SpillClean"
 var refill_minigame := "Refill"
 
@@ -81,7 +81,7 @@ func _ready() -> void:
 				await get_tree().create_timer(0.5, false).timeout
 				no_ingredients_warning.hide()
 	)
-	make_drink_button.hold_completed.connect(make_drink_manually)
+	make_drink_button.button_down.connect(_on_manual_drink_button_pressed)
 	reject_button.pressed.connect(
 		func():
 			if ingredients < Stats.current.ingredients_per_order:
@@ -132,12 +132,6 @@ func _physics_process(_delta: float) -> void:
 		ing_too_low_label.hide()
 
 	spill_warning.visible = spill_on_floor
-
-	manual_progress_bar.value = (
-			make_drink_button.held_time / make_drink_button.time_to_hold * 100
-	)
-
-	manual_progress_bar.visible = make_drink_button.held_time > 0
 
 	customer_wait_indicator.visible = customer != null and not customer.timer.is_stopped()
 
@@ -456,7 +450,7 @@ func reject_order() -> void:
 	machine_make_drink()
 
 
-func make_drink_manually() -> void:
+func finished_make_drink_manually() -> void:
 	gui_3d.exit()
 
 	if ingredients < Stats.current.ingredients_per_order:
@@ -517,6 +511,13 @@ func _on_machine_fixed() -> void:
 	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 	fix_machine()
+
+
+func _on_manual_drink_button_pressed() -> void:
+	Events.minigame_end.connect()
+	Events.minigame_cancelled.connect()
+	Events.minigame_active.emit()
+	pass
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
