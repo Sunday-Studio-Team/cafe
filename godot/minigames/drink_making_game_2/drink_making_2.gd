@@ -54,8 +54,21 @@ func populate_captcha() -> void:
 				var ingredient_num: Drink.Extra = Global.extra_icons.keys().pick_random()
 				captcha_icon.type = captcha_icon.Type.EXTRA
 				captcha_icon.ingredient = ingredient_num
-	# TODO: Add functionality to guarantee needed icon shows up at least once
-
+	
+	# Functionality to guarantee needed icon shows up at least once
+	match current_game_state:
+		GameStates.MAIN:
+			var ordered_ingredient_num: Drink.MainIngredient = ordered_drink.main_ingredient
+			if(ordered_ingredient_num != Drink.MainIngredient.NONE):
+				captcha.get_children().pick_random().ingredient = ordered_ingredient_num
+		GameStates.LIQUID:
+			var ordered_ingredient_num: Drink.Liquid = ordered_drink.liquid
+			if(ordered_ingredient_num != Drink.Liquid.NONE):
+				captcha.get_children().pick_random().ingredient = ordered_ingredient_num
+		GameStates.EXTRA:
+			var ordered_ingredient_num: Drink.Extra = ordered_drink.extra
+			if(ordered_ingredient_num != Drink.Extra.NONE):
+				captcha.get_children().pick_random().ingredient = ordered_ingredient_num
 
 func populate_order_reminder() -> void:
 	main_ordered.ingredient = ordered_drink.main_ingredient
