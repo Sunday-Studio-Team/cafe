@@ -18,7 +18,6 @@ extends Node3D
 @export var overtime_item: Item
 #Minigame
 @export var minigame_controller: CanvasLayer
-
 #Active Items
 @export var active_item_timer: Timer
 
@@ -59,9 +58,9 @@ func _ready() -> void:
 	Global.in_pc_ui = false
 
 	# high values for debug
-	Global.daily_profit = 100
-	Global.employee_rating = 100
-	Global.bank_money = 100
+	#Global.daily_profit = 100
+	#Global.employee_rating = 100
+	#Global.bank_money = 100
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -78,10 +77,10 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
-	
+
 	#Active Item refresh
 	Global.refresh_active_items()
-	
+
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
@@ -118,7 +117,7 @@ func set_per_day_stuff() -> void:
 		machines.push_front(fourth_machine)
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
-		
+
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
 		for stat in Global.ai_improvement.stat_bonuses:
@@ -129,8 +128,6 @@ func set_per_day_stuff() -> void:
 		Global.ai_improvement_enabled = true
 
 	Global.machines.assign(machines)
-
-
 
 
 func spawn_customer() -> void:
@@ -155,6 +152,20 @@ func spawn_customer() -> void:
 
 	machine.set_customer(new_customer)
 	machine.machine_make_drink()
+
+
+#Actives the effects of a given active item
+func active_item_used(item: Item):
+	var item_name: String = ""
+	if item != null:
+		item_name = item.name
+
+	#TODO: Fix how clock works
+	if item_name == "Clock":
+		game_timer.paused = true
+		active_item_timer.wait_time = 8.0
+		active_item_timer.start()
+		Global.deactivate_active_item(item)
 
 
 func _on_game_timer_timeout() -> void:
@@ -196,22 +207,6 @@ func _on_shift_started():
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
-	
-
-
-#Actives the effects of a given active item
-func active_item_used(item: Item):
-	var item_name : String = ""
-	if item != null:
-		item_name = item.name
-	
-	#TODO: Fix how clock works
-	if item_name == "Clock":
-		game_timer.paused = true
-		active_item_timer.wait_time = 8.0
-		active_item_timer.start()
-		Global.deactivate_active_item(item)
-
 
 
 func _on_timer_timeout():
