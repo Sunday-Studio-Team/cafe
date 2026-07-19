@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://cxw6bx3yspg0t" path="res://sprites/alert/frame_11_delay-0.05s.png" id="34_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dyvn8y6yxxp3c" path="res://sprites/alert/frame_12_delay-0.04s.png" id="35_am8a1"]
 [ext_resource type="Texture2D" uid="uid://ce6aylxemgy35" path="res://sprites/alert/frame_13_delay-0.04s.png" id="36_8dc3g"]
+[ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="36_cpm2s"]
 [ext_resource type="Texture2D" uid="uid://b2x5bvsgxyxsp" path="res://sprites/alert/frame_14_delay-0.04s.png" id="37_htgcl"]
 [ext_resource type="Texture2D" uid="uid://gfqu51nrngu4" path="res://sprites/alert/frame_15_delay-0.04s.png" id="38_smeu8"]
 [ext_resource type="Texture2D" uid="uid://dx3lbu3ju7deu" path="res://sprites/alert/frame_16_delay-0.04s.png" id="39_f3y11"]
@@ -221,10 +222,9 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
-sky_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
-ground_bottom_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
-ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+sky_top_color = Color(1, 0.89, 0.8, 1)
+sky_horizon_color = Color(0.6912, 0.70224005, 0.72, 1)
+ground_bottom_color = Color(0.13668326, 0.16590339, 0.2840879, 1)
 
 [sub_resource type="Sky" id="Sky_0xm2m"]
 sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
@@ -232,7 +232,13 @@ sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 2
 sky = SubResource("Sky_0xm2m")
+ambient_light_source = 3
+reflected_light_source = 2
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smeu8"]
 
@@ -362,7 +368,8 @@ material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
-albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
+albedo_texture = ExtResource("36_cpm2s")
+uv1_scale = Vector3(13.51, 2.58, 13.51)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_jofr6")
@@ -390,8 +397,8 @@ size = Vector3(20, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1udn"]
 albedo_texture = ExtResource("28_wat4s")
-uv1_scale = Vector3(15.995, 3.97, 14.81)
-uv1_offset = Vector3(0.05, -0.97, 0)
+uv1_scale = Vector3(8.415, 2.104, 7.799)
+uv1_offset = Vector3(0.28, -1.07, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_opecw"]
 material = SubResource("StandardMaterial3D_y5pqn")
@@ -1266,6 +1273,68 @@ mesh = SubResource("TextMesh_vn1tu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1000004, 2.3, 4.3)
 mesh = SubResource("TextMesh_lswn8")
 
+[node name="Lights" type="Node3D" parent="." unique_id=1249928200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights" unique_id=95847607]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2323385, 2.8165505, 3.0065422)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="AreaLight3D2" type="AreaLight3D" parent="Lights" unique_id=466501790]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.049901, 2.742811, 8.090851)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="AreaLight3D3" type="AreaLight3D" parent="Lights" unique_id=971646445]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 9.131668, 2.5290854, -2.1931384)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(1.2112226, 1.1672361)
+
+[node name="AreaLight3D4" type="AreaLight3D" parent="Lights" unique_id=911257138]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.3930755, 2.8165505, -3.278502)
+light_color = Color(1, 0.8, 0.52, 1)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.8595924)
+
+[node name="AreaLight3D5" type="AreaLight3D" parent="Lights" unique_id=1337331138]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.259366, 2.8165505, 3.0065422)
+light_energy = 5.0
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="AreaLight3D6" type="AreaLight3D" parent="Lights" unique_id=194176168]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 13.841586, 2.8165505, 3.0065422)
+light_energy = 4.604
+light_specular = 1.37
+shadow_enabled = true
+area_range = 5.895
+area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1338537585]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2646357, 1.4271426, 3.0065422)
+light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
+omni_range = 16.497
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights" unique_id=527671258]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.243606, 1.4271424, 3.0065422)
+light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
+omni_range = 16.497
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=673108826]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.2067113, 1.4271426, -3.3517313)
+light_color = Color(1, 0.7783333, 0.65, 1)
+omni_range = 16.497
+
 [node name="Environment" type="Node3D" parent="." unique_id=563251901]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
 
@@ -1414,7 +1483,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -9)
 mesh = SubResource("BoxMesh_l03hl")
 
 [node name="Roof" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=14358993]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9522974, 3.0000288, -2.035007)
 mesh = SubResource("BoxMesh_q16ga")
 surface_material_override/0 = SubResource("StandardMaterial3D_k1udn")
 

@@ -1,8 +1,8 @@
 class_name CustomEmailViewDay_1_001
 extends CustomEmailView
 
-@export var yes_button: Button
-@export var ok_button: Button
+@export var yes_button: TextureButton
+@export var ok_button: TextureButton
 
 func _ready() -> void:
 	yes_button.pressed.connect(_on_button_pressed)
