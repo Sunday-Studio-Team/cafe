@@ -108,7 +108,7 @@ func _ready() -> void:
 	customer_order_indicator.hide()
 	order_breakdown.hide()
 	final_order_indicator.hide()
-	
+
 	#Active Items
 	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
 
@@ -520,6 +520,20 @@ func break_down() -> void:
 	hum_sound.stop()
 
 
+#Active Item
+#If item used, checks if it's valid and does the specified action
+func on_active_item_used_machine(item: Item):
+	if not item == null:
+		#checks if item is not null (for testing)
+		print(item.name)
+		pass
+
+	if item.name == "hammer":
+		Events.play_item_animation.emit("use_hammer")
+		Global.deactivate_active_item(item)
+		fix_machine()
+
+
 func _on_clean_spill() -> void:
 	Events.minigame_active.emit(clean_spill_minigame)
 	Events.minigame_end.connect(clean_up_spill)
@@ -546,18 +560,6 @@ func _on_customer_approached_window(customer_at_window: Customer) -> void:
 
 	set_customer(null)
 
-#Active Item
-#If item used, checks if it's valid and does the specified action
-func on_active_item_used_machine(item: Item):
-	if not item == null :
-		#checks if item is not null (for testing)
-		print(item.name)
-		pass
-	
-	if item.name == "Hammer":
-		Events.play_item_animation.emit("use_hammer")
-		Global.deactivate_active_item(item)
-		fix_machine()
 
 class OrderData:
 	var ordered_drink: Drink

@@ -157,7 +157,7 @@ func equip_item(item: Item):
 		Events.emit_signal("play_item_animation", "default")
 		return
 
-	if item.name == "Hammer":
+	if item.name == "hammer":
 		Events.emit_signal("play_item_animation", "pul_hammer")
 
 	else:
