@@ -41,6 +41,11 @@ func _ready() -> void:
 
 func _on_clicked(bought: bool) -> void:
 	if bought:
+		#TODO REMOVE AND CHANGE
+		if item.is_active_item:
+			#Global.equipped_item = item
+			Global.equip_item(item)
+			print("Equipped: ", Global.equipped_item)
 		pass
 	else:
 		create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)

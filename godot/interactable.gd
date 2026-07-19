@@ -5,6 +5,7 @@ extends Area3D
 # and modifying _on_interacted(), or by connecting this signal to a function
 # in another script
 signal interacted
+signal interactable_active_item(item: Item) #Uses an item on the interactable
 
 ## the name that will show in UI for this interactable
 @export var display_name: String
@@ -55,7 +56,11 @@ func _process(delta: float) -> void:
 		if not keep_progress_on_interrupt:
 			time_held = 0
 		return
-
+	
+	#Uses a set active item
+	if Input.is_action_just_pressed("use_item"):
+		interactable_active_item.emit(Global.equipped_item) #Sends out the current active item
+	
 	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()

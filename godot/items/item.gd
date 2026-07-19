@@ -18,6 +18,10 @@ extends Resource
 ## NOTE: unused for now
 @export var rules: Dictionary
 
+#Active Items
+@export var is_active_item: bool = false
+var can_be_used: bool = true #Set to false when the item is used
+
 
 func apply_stats():
 	if stat_bonuses.is_empty():

@@ -36,6 +36,9 @@ var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
 
+#Active Item
+@export var hammer_indicator : PanelContainer
+
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -234,6 +237,11 @@ func update_interactable_ui() -> void:
 
 	if hovered_interactable != null:
 		interactable_indicator.show()
+		
+		if hovered_interactable.name == "FixMachineButton" and Global.equipped_item != null and Global.equipped_item.name == "Hammer":
+			hammer_indicator.show()
+		else:
+			hammer_indicator.hide()
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (

@@ -19,6 +19,9 @@ extends Node3D
 #Minigame
 @export var minigame_controller: CanvasLayer
 
+#Active Items
+@export var active_item_timer: Timer
+
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -56,9 +59,9 @@ func _ready() -> void:
 	Global.in_pc_ui = false
 
 	# high values for debug
-	#Global.daily_profit = 100
-	#Global.employee_rating = 100
-	#Global.bank_money = 100
+	Global.daily_profit = 100
+	Global.employee_rating = 100
+	Global.bank_money = 100
 
 	ui.hide()
 	day_indicator.text = "DAY %s" % Global.day
@@ -75,6 +78,12 @@ func _ready() -> void:
 	# a few seconds to read the tutorial text and get their bearings
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
+	
+	#Active Item refresh
+	Global.refresh_active_items()
+	
+	#Active Items
+	Events.active_item_used.connect(active_item_used)
 
 
 func get_stats() -> void:
@@ -187,3 +196,24 @@ func _on_shift_started():
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
+	
+
+
+#Actives the effects of a given active item
+func active_item_used(item: Item):
+	var item_name : String = ""
+	if item != null:
+		item_name = item.name
+	
+	#TODO: Fix how clock works
+	if item_name == "Clock":
+		game_timer.paused = true
+		active_item_timer.wait_time = 8.0
+		active_item_timer.start()
+		Global.deactivate_active_item(item)
+
+
+
+func _on_timer_timeout():
+	game_timer.paused = false
+	pass # Replace with function body.

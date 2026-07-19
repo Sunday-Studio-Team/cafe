@@ -50,6 +50,10 @@ func _physics_process(delta: float) -> void:
 	#tilt_camera()
 	handle_ingredients_bag()
 	move_and_slide()
+	
+	#Active Item
+	if Input.is_action_just_pressed("item_menu") and not Global.in_machine_ui:
+		Events.active_item_menu.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -93,6 +97,10 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+	
+	#Active Item
+	if Input.is_action_just_pressed("use_item"):
+		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_gravity(delta: float) -> void:

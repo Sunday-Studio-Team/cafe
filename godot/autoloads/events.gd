@@ -29,3 +29,12 @@ signal minigame_active(minigame_name: String)
 signal minigame_cancelled
 signal minigame_end
 signal force_close_minigame
+
+#Active Items
+signal active_item_used(item: Item)
+signal select_item(selection: Item)
+signal active_item_menu
+signal active_menu_refresh
+
+#Animations
+signal play_item_animation(animation: String)
