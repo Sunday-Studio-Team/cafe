@@ -1597,7 +1597,7 @@ rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Panel
 rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
 alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("MarginContainer/VBoxContainer/DropButton")
-hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/Hammer Indicator")
+hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/HammerIndicator")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -1711,11 +1711,8 @@ size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="Hammer Indicator" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=226478573]
-layout_mode = 2
-
-[node name="Panel" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/Interactable/Hammer Indicator" unique_id=498491282]
-custom_minimum_size = Vector2(275, 50)
+[node name="HammerIndicator" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=498491282]
+custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
@@ -1723,7 +1720,7 @@ offset_transform_position_ratio = Vector2(1, -0.5)
 offset_transform_scale = Vector2(0.75, 0.75)
 offset_transform_rotation = 0.08726646
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/Hammer Indicator/Panel" unique_id=1532821752]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/HammerIndicator" unique_id=1532821752]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 text = "[Q] HAMMER 💥"
