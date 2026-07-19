@@ -49,6 +49,7 @@ extends Node3D
 @export var spill_clean_particles: GPUParticles3D
 @export var fixed_sound: AudioStreamPlayer3D
 @export var tip_label: Label
+@export var hammer_item: Item
 
 var customer: Customer
 var order: OrderData
@@ -523,12 +524,10 @@ func break_down() -> void:
 #Active Item
 #If item used, checks if it's valid and does the specified action
 func on_active_item_used_machine(item: Item):
-	if not item == null:
-		#checks if item is not null (for testing)
-		print(item.name)
-		pass
+	if item == null:
+		return
 
-	if item.name == "hammer":
+	if item == hammer_item:
 		Events.play_item_animation.emit("use_hammer")
 		Global.deactivate_active_item(item)
 		fix_machine()

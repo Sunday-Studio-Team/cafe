@@ -56,11 +56,11 @@ func _process(delta: float) -> void:
 		if not keep_progress_on_interrupt:
 			time_held = 0
 		return
-	
+
 	#Uses a set active item
 	if Input.is_action_just_pressed("use_item"):
 		interactable_active_item.emit(Global.equipped_item) #Sends out the current active item
-	
+
 	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
 		interacted.emit()
