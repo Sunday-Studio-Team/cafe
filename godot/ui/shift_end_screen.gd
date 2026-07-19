@@ -147,13 +147,17 @@ func _on_time_up() -> void:
 	stars_sound.play()
 	await get_tree().create_timer(2).timeout
 
-	# show passed/fired and button
+	# show outcome text and button
 	if (
 			Global.daily_profit >= Stats.current.daily_profit_goal
 			and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
-		outcome.text = "[b][color=green]SHIFT CLEARED"
-		button.text = "continue"
+		if Global.day == Global.final_day:
+			outcome.text = "[b][color=green]YOU WIN"
+			button.text = "end run"
+		else:
+			outcome.text = "[b][color=green]SHIFT CLEARED"
+			button.text = "continue"
 		win_shift_sound.play()
 	else:
 		outcome.text = "[b][color=red]FIRED"
