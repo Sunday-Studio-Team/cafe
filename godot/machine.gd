@@ -64,7 +64,7 @@ var ingredients: int = max_ingredients:
 			print("ingredients changed by %s on %s" % [change, name])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
-var manual_drink_minigames := [""]
+var manual_drink_minigames := ["Captcha"]
 var clean_spill_minigame := "SpillClean"
 var refill_minigame := "Refill"
 
@@ -114,7 +114,7 @@ func _physics_process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
-	make_drink_button.enabled = ingredients >= Stats.current.ingredients_per_order
+	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
 	made_breakdown.visible = waiting_for_response
 
@@ -153,8 +153,8 @@ func _physics_process(_delta: float) -> void:
 			time_bonus_label.text = "%s⭐️ penalty" % [customer.bonus_points_for_time / 2.0]
 		time_bonus_panel.visible = customer.bonus_points_for_time != 0
 
-	if make_drink_button.held:
-		Global.holding_make_drink_button = true
+	#if make_drink_button.held:
+		#Global.holding_make_drink_button = true
 
 
 func set_customer(c: Customer) -> void:
@@ -174,11 +174,12 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
-		make_drink_button.held_time = 0
+		#make_drink_button.held_time = 0
 
 
 func get_stats() -> void:
-	make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
+	# Deprecated with addition of ramking minigame, I think
+	#make_drink_button.time_to_hold = Stats.current.time_to_manually_make_drink
 	timer.wait_time = Stats.current.machine_time_to_make_drink
 
 
@@ -514,16 +515,25 @@ func _on_machine_fixed() -> void:
 
 
 func _on_manual_drink_button_pressed() -> void:
-	Events.minigame_end.connect()
-	Events.minigame_cancelled.connect()
-	Events.minigame_active.emit()
-	pass
+	Events.minigame_end.connect(_on_remade_drink)
+	Events.minigame_cancelled.connect(_cancel_remake_minigame)
+	Events.minigame_active.emit(manual_drink_minigames.pick_random())
+
+
+func _on_remade_drink() -> void:
+	Events.minigame_end.disconnect(_on_remade_drink)
+	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
+	finished_make_drink_manually()
+
+
+func _cancel_remake_minigame() -> void:
+	Events.minigame_end.disconnect(_on_remade_drink)
+	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
 	if customer_at_window != customer:
 		return
-
 	set_customer(null)
 
 

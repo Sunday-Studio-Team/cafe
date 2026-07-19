@@ -121,10 +121,10 @@ func _physics_process(_delta: float) -> void:
 	player_in_cctv_los = false
 	holding_make_drink_button = false
 
-	#if in_ui or get_tree().paused:
-		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	#else:
-		#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if in_ui or get_tree().paused:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func load_resources_from_folder(path: String, extension: String = "tres") -> Array[Resource]:
