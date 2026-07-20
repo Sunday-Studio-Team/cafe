@@ -39,6 +39,7 @@ func _ready() -> void:
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
+%s
 - [i]speed <number>[/i] sets the game speed"
 		% [items_guide_str],
 	)
