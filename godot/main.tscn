@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
+[ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
 [ext_resource type="PackedScene" uid="uid://l7w4dtq33b6f" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame_.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bxnxtc8jiih51" path="res://items/shelf_item.tscn" id="11_getpj"]
@@ -224,6 +225,15 @@
 [ext_resource type="Texture2D" uid="uid://v4pshgbtql15" path="res://sprites/2d animations/hammer-animation-frames/frame_74_delay-0.04s.png" id="215_fkmie"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
 [ext_resource type="AudioStream" uid="uid://bxlwlieajscls" path="res://audio/time_start.mp3" id="223_ycw8e"]
+[ext_resource type="Script" uid="uid://djpemlgyywwcb" path="res://tutorial/tutorial_view.gd" id="225_gttkg"]
+[ext_resource type="PackedScene" uid="uid://b21ndqhhyxlxy" path="res://tutorial/tutorial_screen_view_1.tscn" id="227_lix4w"]
+[ext_resource type="PackedScene" uid="uid://8h2mdx74vf3b" path="res://tutorial/tutorial_screen_view_2.tscn" id="228_kmrid"]
+[ext_resource type="PackedScene" uid="uid://r1xentkdq7bs" path="res://tutorial/tutorial_screen_view_3.tscn" id="229_e31mi"]
+[ext_resource type="PackedScene" uid="uid://chggna86aqera" path="res://tutorial/tutorial_screen_view_4.tscn" id="230_mq14a"]
+[ext_resource type="PackedScene" uid="uid://vpthg7i8xd5t" path="res://tutorial/tutorial_screen_view_5.tscn" id="231_yf6j3"]
+[ext_resource type="PackedScene" uid="uid://cwrrk4bkluvu" path="res://tutorial/tutorial_screen_view_6.tscn" id="232_e4ynb"]
+[ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
+[ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -231,6 +241,7 @@
 sky_top_color = Color(1, 0.89, 0.8, 1)
 sky_horizon_color = Color(0.6912, 0.70224005, 0.72, 1)
 ground_bottom_color = Color(0.13668326, 0.16590339, 0.2840879, 1)
+ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
 
 [sub_resource type="Sky" id="Sky_0xm2m"]
 sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
@@ -376,6 +387,7 @@ material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
+albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
 albedo_texture = ExtResource("36_cpm2s")
 uv1_scale = Vector3(13.51, 2.58, 13.51)
 
@@ -1010,9 +1022,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
+_pause_menu = NodePath("PauseMenu")
+_tutorial_manager = NodePath("TutorialManager")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 cameras = NodePath("SecurityCams")
 side_machine = NodePath("Machines/Machine")
@@ -1037,6 +1051,12 @@ clock_item_start_sound = NodePath("ClockItemStartSound")
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
 emails_schedule = Array[ExtResource("5_jq2sk")]([ExtResource("6_4k2k6"), ExtResource("7_0rl1p"), ExtResource("8_ok6jj")])
+
+[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_view_canvas_layer", "_tutorial_view")]
+script = ExtResource("10_ed5de")
+_tutorial_view_canvas_layer = NodePath("../TutorialCanvasLayer")
+_tutorial_view = NodePath("../TutorialCanvasLayer/TutorialView")
+metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
 visible = false
@@ -2033,6 +2053,40 @@ stream = ExtResource("222_bvlej")
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
+
+[node name="TutorialCanvasLayer" type="CanvasLayer" parent="." unique_id=1790182858]
+process_mode = 3
+layer = 10
+
+[node name="TutorialView" type="Control" parent="TutorialCanvasLayer" unique_id=1443352301 node_paths=PackedStringArray("_tutorial_screen_container")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("225_gttkg")
+_tutorial_screen_view_packed_scenes = Array[PackedScene]([ExtResource("227_lix4w"), ExtResource("228_kmrid"), ExtResource("229_e31mi"), ExtResource("230_mq14a"), ExtResource("231_yf6j3"), ExtResource("232_e4ynb"), ExtResource("233_a1n43"), ExtResource("234_dfxmq")])
+_tutorial_screen_container = NodePath("TutorialScreenContainer")
+metadata/_custom_type_script = "uid://djpemlgyywwcb"
+
+[node name="ColorRect" type="ColorRect" parent="TutorialCanvasLayer/TutorialView" unique_id=1317806334]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="TutorialScreenContainer" type="Control" parent="TutorialCanvasLayer/TutorialView" unique_id=854730436]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 

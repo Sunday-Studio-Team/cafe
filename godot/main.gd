@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var _pause_menu: PauseMenu
+@export var _tutorial_manager: TutorialManager
 @export var machines: Array[Machine]
 @export var cameras: Node3D
 # first machine on the left
@@ -66,6 +68,12 @@ func _ready() -> void:
 	#Global.bank_money = 100
 
 	ui.hide()
+	
+	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
+	if Global.day == 1:
+		_tutorial_manager.show_tutorial()
+		await _tutorial_manager.finished_tutorial
+	
 	day_indicator.text = "DAY %s" % Global.day
 	day_indicator.show()
 	await get_tree().create_timer(3, false).timeout
@@ -173,6 +181,8 @@ func active_item_used(item: Item):
 		game_timer.paused = false
 		clock_item_start_sound.play()
 
+func _on_pause_menu_tutorial_requested() -> void:
+	_tutorial_manager.show_tutorial()
 
 func _on_game_timer_timeout() -> void:
 	Events.time_up.emit()
@@ -202,7 +212,6 @@ func _on_minigame_active(minigame_name: String):
 #Player regains all regular controls etc
 func _on_minigame_end():
 	minigame_controller.close_game()
-
 
 func _on_shift_started():
 	game_timer.start()
