@@ -1675,7 +1675,7 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
 offset_top = -480.0
-offset_right = 640.0
+offset_right = 678.36487
 offset_bottom = 120.0
 grow_vertical = 0
 rotation = 0.08726646
@@ -1702,11 +1702,9 @@ custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
 
 [node name="InfoContainer" type="MarginContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=655530118]
-custom_maximum_size = Vector2(-1, 200)
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 10
 
 [node name="DayIndicator" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=586450203]
 custom_minimum_size = Vector2(300, 0)
@@ -1721,7 +1719,6 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(-10, -10)
 texture = ExtResource("7_ycdy4")
 expand_mode = 4
 
@@ -1735,6 +1732,9 @@ text = "TIME LEFT: 0"
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=263628450]
+layout_mode = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=1516433386]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
@@ -1744,6 +1744,7 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="MachineContainer" type="HBoxContainer" parent="UI/Tablet/Screen/MarginContainer" unique_id=129505205]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="ScoreContainer" type="HBoxContainer" parent="UI/Tablet/Screen" unique_id=1716672005]
