@@ -33,6 +33,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
 @export var sold_item_sound: AudioStreamPlayer
+@export var exit_machine_button: Button
 #Active Item
 @export var current_item_ui: Control
 @export var hammer_indicator: PanelContainer
@@ -64,6 +65,11 @@ func _ready() -> void:
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
 	Events.time_up.connect(func(): hide())
+
+	exit_machine_button.pressed.connect(
+		func():
+			Events.machine_exit_button_pressed.emit()
+	)
 
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_ui.modulate.a = 0
@@ -166,8 +172,13 @@ func _physics_process(_delta: float) -> void:
 	handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
+	handle_exit_machine_ui()
 	handle_drop_item_ui()
 	handle_item_ui()
+
+
+func handle_exit_machine_ui() -> void:
+	exit_machine_button.visible = Global.in_machine_ui
 
 
 func handle_item_ui() -> void:
@@ -192,7 +203,7 @@ func update_day_indicator() -> void:
 	match Global.day % 5: # Incase we add another week or days
 		1:
 			day_indicator.text = "Mon"
-		2: 
+		2:
 			day_indicator.text = "Tue"
 		3:
 			day_indicator.text = "Wed"
@@ -220,11 +231,12 @@ func handle_shelf_item_ui() -> void:
 
 	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(shelf_item.item.price / 2.0)
 
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") and not shelf_item.clicked_sell:
+		shelf_item.clicked_sell = true
 		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(shelf_item.item.price / 2)
 		shelf_item_sold_indicator.show()
 		sold_item_sound.play()
-		await get_tree().create_timer(0.5, false).timeout
+		await get_tree().create_timer(0.75, false).timeout
 		shelf_item_sold_indicator.hide()
 		Global.bank_money += shelf_item.item.price / 2
 		Global.owned_items.erase(shelf_item.item)
@@ -291,7 +303,7 @@ func update_time_indicator() -> void:
 		else:
 			time_left_bar.modulate = Color.RED
 	#else:
-		#time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
+	#time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
 
 
 func update_interactable_ui() -> void:

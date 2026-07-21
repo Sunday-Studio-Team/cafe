@@ -93,6 +93,7 @@ var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var in_machine_ui: bool = false
+var machine_in_use: Machine = null
 var in_main_menu := false
 var in_end_screen := false
 var in_active_item_menu := false

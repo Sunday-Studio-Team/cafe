@@ -1080,6 +1080,7 @@ _tutorial_view = NodePath("../TutorialCanvasLayer/TutorialView")
 metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
+layer = 2
 visible = false
 
 [node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
@@ -1635,12 +1636,12 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.375757)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/MoneyBar")
 customer_happiness_label = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Customer/Label")
-score_update_label = NodePath("MarginContainer/VBoxContainer/Alerts2/ScoreUpdate")
+score_update_label = NodePath("MarginContainer/VBoxContainer/ScoreUpdate")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
@@ -1652,7 +1653,7 @@ money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-low_time_warning_label = NodePath("MarginContainer/VBoxContainer/Alerts2/LowTimeWarning")
+low_time_warning_label = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/TimeLeftBar/LowTimeWarning")
 cctv_indicator = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/CctvIndicator")
 alert_ui = NodePath("MarginContainer/VBoxContainer/Alerts")
 alert_label = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/AlertText")
@@ -1666,8 +1667,9 @@ day_indicator = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/DayIndica
 rating_stars_hbox = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Customer/Stars")
 rating_goal_label = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Customer/Goal")
 alert_sprite = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
-drop_button = NodePath("MarginContainer/VBoxContainer/DropButton")
+drop_button = NodePath("MarginContainer/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
+exit_machine_button = NodePath("MarginContainer/VBoxContainer/FloatingButtons/ExitMachineButton")
 current_item_ui = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
 hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/HammerIndicator")
 current_item_icon = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
@@ -1749,6 +1751,22 @@ fill_mode = 4
 texture_under = ExtResource("45_dfxmq")
 texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
+
+[node name="LowTimeWarning" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer/TimeLeftBar" unique_id=1504470302]
+visible = false
+layout_mode = 0
+offset_left = -309.99997
+offset_top = 39.99994
+offset_right = -101.99997
+offset_bottom = 84.99994
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(1, -0.75)
+offset_transform_scale = Vector2(1.25, 1.25)
+offset_transform_rotation = -0.2617994
+theme_override_font_sizes/font_size = 32
+text = "⏰ LOW‼️"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=1516433386]
 custom_minimum_size = Vector2(0, 175)
@@ -1871,20 +1889,7 @@ sprite_frames = SubResource("SpriteFrames_0ffxp")
 frame = 71
 frame_progress = 1.0
 
-[node name="Alerts2" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=439897745]
-layout_mode = 2
-
-[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/Alerts2" unique_id=1504470302]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-offset_transform_enabled = true
-offset_transform_pivot_ratio = Vector2(1, 1)
-theme_override_font_sizes/font_size = 32
-text = "‼️⏰ 30s left"
-horizontal_alignment = 1
-
-[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/Alerts2" unique_id=124548306]
+[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=124548306]
 modulate = Color(0.4, 1, 0.4, 1)
 layout_mode = 2
 offset_transform_enabled = true
@@ -1944,13 +1949,29 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DropButton" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=1994757836]
+[node name="FloatingButtons" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=369205068]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="ExitMachineButton" type="Button" parent="UI/MarginContainer/VBoxContainer/FloatingButtons" unique_id=1336699155]
+layout_mode = 2
+size_flags_horizontal = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_visual_only = false
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 64
+text = "exit"
+
+[node name="DropButton" type="Button" parent="UI/MarginContainer/VBoxContainer/FloatingButtons" unique_id=1994757836]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(-100, -50)
-offset_transform_position_ratio = Vector2(0.25, -0.25)
+offset_transform_position_ratio = Vector2(0, -0.25)
 offset_transform_rotation = 0.08726646
 theme = ExtResource("97_l0gw7")
 theme_override_font_sizes/font_size = 24
@@ -2107,6 +2128,7 @@ highlight_color = Color(0.28729504, 0.28729486, 0.2872949, 0.7254902)
 
 [node name="Animation Canvas" type="CanvasLayer" parent="." unique_id=1737862047]
 process_mode = 3
+layer = 0
 visible = false
 script = ExtResource("116_w7qqv")
 
