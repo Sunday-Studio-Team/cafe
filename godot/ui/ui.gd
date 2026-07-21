@@ -84,12 +84,7 @@ This is your first trial shift - make it through the week to keep your new posit
 (check your emails on the computer for more details)"
 		)
 		rules_controls.text = (
-				"[b][i]controls [/i][/b]
-			[b]WASD[/b] move
-			[b]E[/b] interact
-			[b]Shift[/b] sprint
-			[b]TAB[/b] item wheel
-			[b]Q[/b] use item"
+				""
 		)
 		cctv_indicator.hide()
 	if Global.day >= 2:
@@ -194,7 +189,17 @@ func handle_drop_item_ui() -> void:
 
 
 func update_day_indicator() -> void:
-	day_indicator.text = "DAY %s/%s" % [Global.day, Global.final_day]
+	match Global.day % 5: # Incase we add another week or days
+		1:
+			day_indicator.text = "Mon"
+		2: 
+			day_indicator.text = "Tue"
+		3:
+			day_indicator.text = "Wed"
+		4:
+			day_indicator.text = "Thu"
+		0:
+			day_indicator.text = "Fri"
 
 
 func handle_shelf_item_ui() -> void:
@@ -332,9 +337,9 @@ func update_interactable_ui() -> void:
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
-		cctv_indicator.modulate = Color.RED
+		cctv_indicator.texture = load("res://sprites/eye_red.png")
 	else:
-		cctv_indicator.modulate = Color.WHITE
+		cctv_indicator.texture = load("res://sprites/eye_logo.png")
 
 
 func _on_alert_posted(message: String) -> void:

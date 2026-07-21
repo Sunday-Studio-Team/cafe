@@ -18,7 +18,6 @@
 [ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="7_0rl1p"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
-[ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="8_ok6jj"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
@@ -67,6 +66,7 @@
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://on7yfgn0tt30" path="res://sprites/alert/frame_20_delay-0.04s.png" id="43_mnw77"]
+[ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="Texture2D" uid="uid://cn5o1xhguo2jv" path="res://sprites/alert/frame_21_delay-0.04s.png" id="44_vjgyh"]
 [ext_resource type="Texture2D" uid="uid://bkxu26f3wo1xb" path="res://sprites/alert/frame_22_delay-0.04s.png" id="45_d5iia"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
@@ -1679,10 +1679,10 @@ custom_maximum_size = Vector2(550, -1)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 37.999992
-offset_top = -511.0
+offset_left = 37.99999
+offset_top = -516.0
 offset_right = 588.0
-offset_bottom = 39.0
+offset_bottom = 34.0
 grow_vertical = 0
 rotation = 0.05235988
 size_flags_horizontal = 0
@@ -1709,8 +1709,9 @@ layout_mode = 2
 
 [node name="InfoContainer" type="MarginContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=655530118]
 layout_mode = 2
-theme_override_constants/margin_left = 30
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = -30
 
 [node name="DayIndicator" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=586450203]
 custom_minimum_size = Vector2(125, 100)
@@ -1721,15 +1722,17 @@ size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
-text = "DAY 1/5"
+text = "day"
+horizontal_alignment = 1
 
 [node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(175, 100)
-custom_maximum_size = Vector2(175, 100)
+custom_minimum_size = Vector2(150, 125)
+custom_maximum_size = Vector2(150, 125)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
-texture = ExtResource("7_ycdy4")
+offset_transform_position = Vector2(0, -15)
+texture = ExtResource("44_dfxmq")
 expand_mode = 4
 
 [node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1649230487]
@@ -1740,15 +1743,15 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 offset_transform_enabled = true
-offset_transform_position = Vector2(15, -20)
-offset_transform_scale = Vector2(0.5, 0.5)
+offset_transform_position = Vector2(20, -20)
+offset_transform_scale = Vector2(0.45, 0.45)
 fill_mode = 4
 texture_under = ExtResource("45_dfxmq")
 texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=1516433386]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
@@ -1991,7 +1994,6 @@ icon = ExtResource("115_12204")
 layout_mode = 2
 
 [node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
-visible = false
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
