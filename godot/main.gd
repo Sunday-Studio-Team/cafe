@@ -71,8 +71,9 @@ func _ready() -> void:
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
 	if Global.day == 1:
-		_tutorial_manager.show_tutorial()
-		await _tutorial_manager.finished_tutorial
+		if not OS.has_feature("editor"):
+			_tutorial_manager.show_tutorial()
+			await _tutorial_manager.finished_tutorial
 
 	day_indicator.text = "DAY %s" % Global.day
 	day_indicator.show()
