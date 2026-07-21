@@ -458,6 +458,12 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
@@ -1635,7 +1641,7 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.375757)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
@@ -1646,15 +1652,14 @@ interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxCo
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
 time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
-time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftText")
-time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftBar")
+time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
+time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-low_time_warning_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftBar/LowTimeWarning")
 cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
 alert_ui = NodePath("MarginContainer/VBoxContainer/Alerts")
 alert_label = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/AlertText")
@@ -1723,15 +1728,22 @@ theme_override_font_sizes/font_size = 32
 text = "day"
 horizontal_alignment = 1
 
-[node name="TimeUI" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=27172397]
+[node name="TimeUI" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=770158511]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.9, 0.9)
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjix0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=27172397]
 layout_mode = 2
 
-[node name="TimeLeftText" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=2076268572]
+[node name="TimeLeftText" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=2076268572]
 layout_mode = 2
+offset_transform_enabled = true
 theme_override_font_sizes/font_size = 24
 text = "⌛60s"
 
-[node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=1649230487]
+[node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=1649230487]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 0)
 custom_maximum_size = Vector2(60, -1)
@@ -1744,22 +1756,6 @@ fill_mode = 4
 texture_under = ExtResource("45_dfxmq")
 texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
-
-[node name="LowTimeWarning" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftBar" unique_id=1504470302]
-visible = false
-layout_mode = 0
-offset_left = -309.99997
-offset_top = 39.99994
-offset_right = -101.99997
-offset_bottom = 84.99994
-size_flags_horizontal = 0
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(1, -0.75)
-offset_transform_scale = Vector2(1.25, 1.25)
-offset_transform_rotation = -0.2617994
-theme_override_font_sizes/font_size = 32
-text = "⏰ LOW‼️"
-horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
 custom_minimum_size = Vector2(0, 175)

@@ -10,7 +10,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
-@export var time_left_ui: HBoxContainer
+@export var time_left_ui: Control
 @export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
 @export var objective: RichTextLabel
@@ -19,7 +19,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
-@export var low_time_warning_label: Label
 @export var cctv_indicator: TextureRect
 @export var alert_ui: Control
 @export var alert_label: Label
@@ -251,16 +250,20 @@ func handle_time_left_warning() -> void:
 			and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
 			and not time_left_warning_played
 	):
-		low_time_warning_label.text = "‼️⏰ %ds left" % Stats.TIME_FOR_LOW_TIME_WARNING
+		var col_t := create_tween()
+		col_t.tween_property(time_left_label, "modulate", Color.WHITE, 1.5).from(Color.RED)
+
+		var size_t := create_tween()
+		size_t.tween_property(time_left_label, "offset_transform_scale", Vector2.ONE * 1.1, 0.25)
+		size_t.tween_property(time_left_label, "offset_transform_scale", Vector2.ONE * 1, 0.75)
+
+		var rot_t := create_tween()
+		rot_t.tween_property(time_left_label, "offset_transform_rotation", deg_to_rad(-10), 0.25)
+		rot_t.tween_property(time_left_label, "offset_transform_rotation", deg_to_rad(0), 0.75)
+
 		low_time_sound.play()
-		low_time_warning_label.show()
+
 		time_left_warning_played = true
-		var t := create_tween()
-		t.tween_property(low_time_warning_label, "offset_transform_scale", Vector2(4, 4), 0.75)
-		t.tween_property(low_time_warning_label, "offset_transform_scale", Vector2(1, 1), 0.5)
-		t.tween_property(low_time_warning_label, "modulate:a", 0, 2)
-		await t.finished
-		low_time_warning_label.hide()
 
 
 func update_score_indicators() -> void:
@@ -301,6 +304,12 @@ func update_time_indicator() -> void:
 	var time_left := game_timer.time_left
 
 	time_left_label.text = "⌛%s" % int(time_left)
+
+	# 'freeze' the indicator if we paused with an item
+	if game_timer.paused:
+		time_left_ui.modulate = Color.SKY_BLUE
+	else:
+		time_left_ui.modulate = Color.WHITE
 
 	time_left_bar.value = time_left / game_timer.wait_time * 100
 	if time_left_bar.value >= 66:
