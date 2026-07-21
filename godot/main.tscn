@@ -460,7 +460,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alert/HBoxContainer/SubViewport")
+viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ffxp"]
 animations = [{
@@ -1636,32 +1636,32 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/Screen/ScoreContainer/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("Tablet/Screen/ScoreContainer/PanelContainer/Scores/Customer/Label")
-score_update_label = NodePath("MarginContainer/VBoxContainer/Alert/ScoreUpdate")
+score_update_label = NodePath("MarginContainer/VBoxContainer/Alerts2/ScoreUpdate")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer/PanelContainer/TimeLeft")
+time_left_label = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/TimeLeft")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-low_time_warning_label = NodePath("MarginContainer/VBoxContainer/Alert/LowTimeWarning")
-cctv_indicator = NodePath("Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer/CctvIndicator")
-alert_ui = NodePath("")
-alert_label = NodePath("MarginContainer/VBoxContainer/Alert/HBoxContainer/AlertText")
+low_time_warning_label = NodePath("MarginContainer/VBoxContainer/Alerts2/LowTimeWarning")
+cctv_indicator = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/CctvIndicator")
+alert_ui = NodePath("MarginContainer/VBoxContainer/Alerts")
+alert_label = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/AlertText")
 shelf_item_ui = NodePath("MarginContainer/ShelfItem")
 shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
 shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
 shelf_item_active_indicator = NodePath("MarginContainer/ShelfItem/VBoxContainer/Active")
 shelf_item_sell = NodePath("MarginContainer/ShelfItem/VBoxContainer/Sell")
 shelf_item_sold_indicator = NodePath("MarginContainer/ShelfItem/ShelfItemSold/Label")
-day_indicator = NodePath("Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer/DayIndicator")
+day_indicator = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/DayIndicator")
 rating_stars_hbox = NodePath("Tablet/Screen/ScoreContainer/PanelContainer/Scores/Customer/Stars")
 rating_goal_label = NodePath("Tablet/Screen/ScoreContainer/PanelContainer/Scores/Customer/Goal")
-alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/HBoxContainer/SubViewport/AnimatedSprite2D")
+alert_sprite = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("MarginContainer/VBoxContainer/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
 current_item_ui = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
@@ -1687,50 +1687,63 @@ machine_ui_scene = ExtResource("43_e4ynb")
 
 [node name="Screen" type="VBoxContainer" parent="UI/Tablet" unique_id=1640692384]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="MarginContainer2" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=2019204596]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=2056308306]
+[node name="header" type="PanelContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=2056308306]
+custom_minimum_size = Vector2(0, 50)
+custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
 
-[node name="InfoContainer" type="HBoxContainer" parent="UI/Tablet/Screen/MarginContainer2/PanelContainer" unique_id=1354080843]
+[node name="InfoContainer" type="MarginContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=655530118]
+custom_maximum_size = Vector2(-1, 200)
 layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
 
-[node name="DayIndicator" type="Label" parent="UI/Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer" unique_id=586450203]
+[node name="DayIndicator" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=586450203]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 2
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "DAY 1/5"
 
-[node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(150, 0)
+[node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1082245281]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-10, -10)
 texture = ExtResource("7_ycdy4")
 expand_mode = 4
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer" unique_id=1967076198]
+[node name="TimeLeft" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=481278116]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_vertical = 8
-
-[node name="TimeLeft" type="Label" parent="UI/Tablet/Screen/MarginContainer2/PanelContainer/InfoContainer/PanelContainer" unique_id=481278116]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "TIME LEFT: 0"
+horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=1516433386]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="MachineContainer" type="HBoxContainer" parent="UI/Tablet/Screen/MarginContainer" unique_id=129505205]
-layout_mode = 2
-
-[node name="CashContainer" type="HBoxContainer" parent="UI/Tablet/Screen" unique_id=394609916]
 layout_mode = 2
 
 [node name="ScoreContainer" type="HBoxContainer" parent="UI/Tablet/Screen" unique_id=1716672005]
@@ -1810,10 +1823,39 @@ text = "[b][i]controls [/i][/b]
 fit_content = true
 horizontal_alignment = 2
 
-[node name="Alert" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1572896895]
+[node name="Alerts" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1572896895]
 layout_mode = 2
 
-[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=1504470302]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/Alerts" unique_id=407575910]
+layout_mode = 2
+
+[node name="Exclamation" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("ViewportTexture_0ffxp")
+
+[node name="AlertText" type="Label" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "❗️🛎️ customer complained"
+
+[node name="SubViewport" type="SubViewport" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
+transparent_bg = true
+size = Vector2i(85, 100)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport" unique_id=2022034122]
+texture_filter = 1
+position = Vector2(55, 30)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_0ffxp")
+frame = 71
+frame_progress = 1.0
+
+[node name="Alerts2" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=439897745]
+layout_mode = 2
+
+[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/Alerts2" unique_id=1504470302]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 offset_transform_enabled = true
@@ -1822,7 +1864,7 @@ theme_override_font_sizes/font_size = 32
 text = "‼️⏰ 30s left"
 horizontal_alignment = 1
 
-[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=124548306]
+[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/Alerts2" unique_id=124548306]
 modulate = Color(0.4, 1, 0.4, 1)
 layout_mode = 2
 offset_transform_enabled = true
@@ -1830,31 +1872,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
 theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 52
 text = "+1$ from customer"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=407575910]
-layout_mode = 2
-
-[node name="Exclamation" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/Alert/HBoxContainer" unique_id=585775166]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = SubResource("ViewportTexture_0ffxp")
-
-[node name="AlertText" type="Label" parent="UI/MarginContainer/VBoxContainer/Alert/HBoxContainer" unique_id=1414946882]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "❗️🛎️ customer complained"
-
-[node name="SubViewport" type="SubViewport" parent="UI/MarginContainer/VBoxContainer/Alert/HBoxContainer" unique_id=259486482]
-transparent_bg = true
-size = Vector2i(85, 100)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/MarginContainer/VBoxContainer/Alert/HBoxContainer/SubViewport" unique_id=2022034122]
-texture_filter = 1
-position = Vector2(55, 30)
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_0ffxp")
-frame = 71
-frame_progress = 1.0
 
 [node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
