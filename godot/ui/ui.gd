@@ -3,13 +3,14 @@ extends CanvasLayer
 enum ScoreType { MONEY, CUSTOMER }
 
 @export var profit_label: Label
+@export var profit_progress: ProgressBar
 @export var customer_happiness_label: Label
 @export var score_update_label: Label
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
-@export var time_left_label: Label
+@export var time_left_bar: TextureProgressBar
 @export var objective: RichTextLabel
 @export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
@@ -83,12 +84,7 @@ This is your first trial shift - make it through the week to keep your new posit
 (check your emails on the computer for more details)"
 		)
 		rules_controls.text = (
-				"[b][i]controls [/i][/b]
-			[b]WASD[/b] move
-			[b]E[/b] interact
-			[b]Shift[/b] sprint
-			[b]TAB[/b] item wheel
-			[b]Q[/b] use item"
+				""
 		)
 		cctv_indicator.hide()
 	if Global.day >= 2:
@@ -193,7 +189,17 @@ func handle_drop_item_ui() -> void:
 
 
 func update_day_indicator() -> void:
-	day_indicator.text = "DAY %s/%s" % [Global.day, Global.final_day]
+	match Global.day % 5: # Incase we add another week or days
+		1:
+			day_indicator.text = "Mon"
+		2: 
+			day_indicator.text = "Tue"
+		3:
+			day_indicator.text = "Wed"
+		4:
+			day_indicator.text = "Thu"
+		0:
+			day_indicator.text = "Fri"
 
 
 func handle_shelf_item_ui() -> void:
@@ -248,6 +254,8 @@ func update_score_indicators() -> void:
 			Global.float_to_price(Global.daily_profit)
 			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
 	)
+	if Global.daily_profit:
+		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
 
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
@@ -274,10 +282,16 @@ func update_score_indicators() -> void:
 
 
 func update_time_indicator() -> void:
-	if game_timer.is_stopped():
-		time_left_label.text = "SHIFT LENGTH: %ss" % int(game_timer.wait_time)
-	else:
-		time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
+	if not game_timer.is_stopped():
+		time_left_bar.value = game_timer.time_left / game_timer.wait_time * 100
+		if time_left_bar.value >= 66:
+			time_left_bar.modulate = Color.GREEN
+		elif time_left_bar.value >= 33:
+			time_left_bar.modulate = Color.ORANGE
+		else:
+			time_left_bar.modulate = Color.RED
+	#else:
+		#time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
 
 
 func update_interactable_ui() -> void:
@@ -323,9 +337,9 @@ func update_interactable_ui() -> void:
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
-		cctv_indicator.modulate = Color.RED
+		cctv_indicator.texture = load("res://sprites/eye_red.png")
 	else:
-		cctv_indicator.modulate = Color.WHITE
+		cctv_indicator.texture = load("res://sprites/eye_logo.png")
 
 
 func _on_alert_posted(message: String) -> void:
