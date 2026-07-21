@@ -3,8 +3,6 @@ extends Node
 
 static var _instance: EmailsManager
 
-@export var emails_schedule: Array[EmailData]
-
 var _delivered_emails_to_date: Array[EmailData]
 
 var last_spam_email_day: int = 0
@@ -23,9 +21,9 @@ func _ready() -> void:
 	_delivered_emails_to_date = []
 	
 	# Needs to be added manually since can't be added to game resource bc it uses stats that are not initialized until after the game resource is loaded
-	if current_day == 3:
+	if not Global.ai_improvement and current_day >= 3:
 		var email_day_3 = EmailDay3.new()
-		emails_schedule.append(email_day_3)
+		Global.emails_schedule.append(email_day_3)
 
 	if days_since_random >= 2: # Can't get random emails everyday or on first day
 		var min_random = 0.1
@@ -35,9 +33,9 @@ func _ready() -> void:
 		if rand_email_percent >= 0.5:
 			last_spam_email_day = current_day
 			var spam_email = SpamEmail.new()
-			emails_schedule.append(spam_email)				
+			Global.emails_schedule.append(spam_email)				
 
-	for email_data in emails_schedule:
+	for email_data in Global.emails_schedule:
 		var email_scheduled_day: int = email_data.day_to_send
 		if current_day >= email_scheduled_day:
 			_delivered_emails_to_date.append(email_data)	
