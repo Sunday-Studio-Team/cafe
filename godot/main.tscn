@@ -1264,7 +1264,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
 shape = SubResource("BoxShape3D_getpj")
 
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.083761, 0, 4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.069131, 0, 4.587011)
 
 [node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("open_sound", "close_sound", "animation_player", "exited_break_room_detection_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.917271, 0, 4.4959364)
@@ -1374,11 +1374,10 @@ area_range = 5.895
 area_size = Vector2(2.0486052, 2.0054026)
 
 [node name="AreaLight3D6" type="AreaLight3D" parent="Lights" unique_id=194176168]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 13.841586, 2.8165505, 3.0065422)
-light_energy = 4.604
-light_specular = 1.37
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 13.841586, 2.8188477, 3.0065422)
+light_energy = 2.069
 shadow_enabled = true
-area_range = 5.895
+area_range = 7.547
 area_size = Vector2(2.0486052, 2.0054026)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=1338537585]
