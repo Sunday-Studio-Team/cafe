@@ -9,11 +9,12 @@ enum State { NORMAL, CONFIRMING_RESTART, CONFIRMING_QUIT }
 @export var _tutorial_button: Button
 @export var restart_button: Button
 @export var quit_button: Button
-@export var sure_menu: PanelContainer
+@export var sure_menu: Control
 @export var yes_sure_button: Button
 @export var no_sure_button: Button
 @export var sure_info_label: Label
 
+var buttons: Array[Button]
 var state: State = State.NORMAL:
 	set(new_state):
 		state = new_state
@@ -30,22 +31,7 @@ func _ready() -> void:
 	quit_button.pressed.connect(func(): state = State.CONFIRMING_QUIT)
 	restart_button.pressed.connect(func(): state = State.CONFIRMING_RESTART)
 
-	yes_sure_button.pressed.connect(
-		func():
-			match state:
-				State.CONFIRMING_QUIT:
-					Events.main_menu_loaded.emit()
-				State.CONFIRMING_RESTART:
-					# NOTE: shouldnt this not be visible on restart anyway ? idk
-					visible = false
-					get_tree().paused = false
-					Global.day = 1
-					Events.main_scene_loaded.emit()
-	)
-	no_sure_button.pressed.connect(
-		func():
-			state = State.NORMAL
-	)
+	setup_button_tweens()
 
 
 func _physics_process(_delta: float) -> void:
@@ -61,6 +47,44 @@ func _physics_process(_delta: float) -> void:
 	sure_menu.visible = (
 			state == State.CONFIRMING_RESTART
 			or state == State.CONFIRMING_QUIT
+	)
+
+
+func setup_button_tweens() -> void:
+	for button: Button in find_children("*", "Button"):
+		button.offset_transform_enabled = true
+
+		const T_DUR := 0.1
+
+		button.mouse_entered.connect(
+			func():
+				var t := create_tween().set_parallel()
+				t.tween_property(button, "offset_transform_scale", Vector2.ONE * 1.1, T_DUR)
+				t.tween_property(button, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), T_DUR)
+		)
+
+		button.mouse_exited.connect(
+			func():
+				var t := create_tween().set_parallel()
+				t.tween_property(button, "offset_transform_scale", Vector2.ONE, T_DUR)
+				t.tween_property(button, "offset_transform_rotation", 0, T_DUR)
+		)
+
+	yes_sure_button.pressed.connect(
+		func():
+			match state:
+				State.CONFIRMING_QUIT:
+					Events.main_menu_loaded.emit()
+				State.CONFIRMING_RESTART:
+					# NOTE: shouldnt this not be visible on restart anyway ? idk
+					visible = false
+					get_tree().paused = false
+					Global.day = 1
+					Events.main_scene_loaded.emit()
+	)
+	no_sure_button.pressed.connect(
+		func():
+			state = State.NORMAL
 	)
 
 
