@@ -10,16 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Resource" uid="uid://drg362efjsksg" path="res://items/clock.tres" id="4_12204"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
-[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="5_jq2sk"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
-[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="6_4k2k6"]
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
-[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="7_0rl1p"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
-[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="8_ok6jj"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
@@ -1071,7 +1067,6 @@ clock_item_start_sound = NodePath("ClockItemStartSound")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
-emails_schedule = Array[ExtResource("5_jq2sk")]([ExtResource("6_4k2k6"), ExtResource("7_0rl1p"), ExtResource("8_ok6jj")])
 
 [node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_view_canvas_layer", "_tutorial_view")]
 script = ExtResource("10_ed5de")
@@ -1636,25 +1631,27 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.375757)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
 script = ExtResource("5_lquwl")
-profit_label = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Money")
-profit_progress = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/MoneyBar")
-customer_happiness_label = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Customer/Label")
+profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
+profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
+customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Label")
 score_update_label = NodePath("MarginContainer/VBoxContainer/ScoreUpdate")
 interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
-time_left_bar = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/TimeLeftBar")
+time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
+time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftText")
+time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftBar")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-low_time_warning_label = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/TimeLeftBar/LowTimeWarning")
-cctv_indicator = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/CctvIndicator")
+low_time_warning_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftBar/LowTimeWarning")
+cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
 alert_ui = NodePath("MarginContainer/VBoxContainer/Alerts")
 alert_label = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/AlertText")
 shelf_item_ui = NodePath("MarginContainer/ShelfItem")
@@ -1663,9 +1660,9 @@ shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Descr
 shelf_item_active_indicator = NodePath("MarginContainer/ShelfItem/VBoxContainer/Active")
 shelf_item_sell = NodePath("MarginContainer/ShelfItem/VBoxContainer/Sell")
 shelf_item_sold_indicator = NodePath("MarginContainer/ShelfItem/ShelfItemSold/Label")
-day_indicator = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/DayIndicator")
-rating_stars_hbox = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Customer/Stars")
-rating_goal_label = NodePath("Tablet/Screen/Scores/ScoreContainer/Scores/Customer/Goal")
+day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Stars")
+rating_goal_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Goal")
 alert_sprite = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("MarginContainer/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
@@ -1690,69 +1687,61 @@ rotation = 0.05235988
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_b2gp0")
 script = ExtResource("42_yf6j3")
-machines_container = NodePath("Screen/MarginContainer/MachineContainer")
+machines_container = NodePath("MarginContainer/Screen/MarginContainer/MachineContainer")
 machine_ui_scene = ExtResource("43_e4ynb")
 
-[node name="Screen" type="VBoxContainer" parent="UI/Tablet" unique_id=1640692384]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="MarginContainer2" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=2019204596]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Tablet" unique_id=1632834486]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="header" type="PanelContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=2056308306]
+[node name="Screen" type="VBoxContainer" parent="UI/Tablet/MarginContainer" unique_id=1640692384]
+layout_mode = 2
+
+[node name="TopBar" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=2056308306]
 custom_minimum_size = Vector2(0, 50)
 custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
 
-[node name="InfoContainer" type="MarginContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=655530118]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar" unique_id=29320243]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = -30
+alignment = 1
 
-[node name="DayIndicator" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=586450203]
-custom_minimum_size = Vector2(125, 100)
-custom_maximum_size = Vector2(125, 100)
+[node name="DayIndicator" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=586450203]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 2
-size_flags_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
 text = "day"
 horizontal_alignment = 1
 
-[node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(125, 100)
-custom_maximum_size = Vector2(125, 100)
+[node name="TimeUI" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=27172397]
+layout_mode = 2
+
+[node name="TimeLeftText" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=2076268572]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "⌛60s"
+
+[node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=1649230487]
+texture_filter = 1
+custom_minimum_size = Vector2(60, 0)
+custom_maximum_size = Vector2(60, -1)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
-offset_transform_position = Vector2(0, 1)
-texture = ExtResource("44_dfxmq")
-expand_mode = 4
-
-[node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1649230487]
-texture_filter = 1
-custom_minimum_size = Vector2(100, 100)
-custom_maximum_size = Vector2(150, 100)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(20, -20)
-offset_transform_scale = Vector2(0.45, 0.45)
+offset_transform_position_ratio = Vector2(-0.25, -0.25)
+offset_transform_scale = Vector2(0.25, 0.25)
 fill_mode = 4
 texture_under = ExtResource("45_dfxmq")
 texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
 
-[node name="LowTimeWarning" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer/TimeLeftBar" unique_id=1504470302]
+[node name="LowTimeWarning" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/TimeLeftBar" unique_id=1504470302]
 visible = false
 layout_mode = 0
 offset_left = -309.99997
@@ -1768,37 +1757,37 @@ theme_override_font_sizes/font_size = 32
 text = "⏰ LOW‼️"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=1516433386]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
 
-[node name="MachineContainer" type="HBoxContainer" parent="UI/Tablet/Screen/MarginContainer" unique_id=129505205]
+[node name="MachineContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/MarginContainer" unique_id=129505205]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
-[node name="Scores" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=2066546892]
+[node name="Scores" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=2066546892]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
-[node name="ScoreContainer" type="HBoxContainer" parent="UI/Tablet/Screen/Scores" unique_id=1716672005]
+[node name="ScoreContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores" unique_id=1716672005]
 layout_mode = 2
 
-[node name="Scores" type="VBoxContainer" parent="UI/Tablet/Screen/Scores/ScoreContainer" unique_id=1534145091]
+[node name="Scores" type="VBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
 layout_mode = 2
 
-[node name="Money" type="Label" parent="UI/Tablet/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
+[node name="Money" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "$ 0"
 
-[node name="MoneyBar" type="ProgressBar" parent="UI/Tablet/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
+[node name="MoneyBar" type="ProgressBar" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
 custom_minimum_size = Vector2(475, 30)
 layout_mode = 2
@@ -1806,22 +1795,32 @@ size_flags_horizontal = 0
 size_flags_vertical = 10
 show_percentage = false
 
-[node name="Customer" type="HBoxContainer" parent="UI/Tablet/Screen/Scores/ScoreContainer/Scores" unique_id=375295033]
+[node name="Customer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=375295033]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Tablet/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=653594015]
+[node name="Label" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=653594015]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "🙂"
 
-[node name="Stars" type="HBoxContainer" parent="UI/Tablet/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=2112858348]
+[node name="Stars" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=2112858348]
 layout_mode = 2
 
-[node name="Goal" type="Label" parent="UI/Tablet/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=417478634]
+[node name="Goal" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=417478634]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+
+[node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/MarginContainer" unique_id=1082245281]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("44_dfxmq")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15

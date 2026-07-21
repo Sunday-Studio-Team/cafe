@@ -10,6 +10,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
+@export var time_left_ui: HBoxContainer
+@export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
 @export var objective: RichTextLabel
 @export var rules_controls: RichTextLabel
@@ -294,16 +296,19 @@ func update_score_indicators() -> void:
 
 
 func update_time_indicator() -> void:
-	if not game_timer.is_stopped():
-		time_left_bar.value = game_timer.time_left / game_timer.wait_time * 100
-		if time_left_bar.value >= 66:
-			time_left_bar.modulate = Color.GREEN
-		elif time_left_bar.value >= 33:
-			time_left_bar.modulate = Color.ORANGE
-		else:
-			time_left_bar.modulate = Color.RED
-	#else:
-	#time_left_label.text = "TIME LEFT IN SHIFT: %ss" % int(game_timer.time_left)
+	time_left_ui.visible = not game_timer.is_stopped()
+
+	var time_left := game_timer.time_left
+
+	time_left_label.text = "⌛%s" % int(time_left)
+
+	time_left_bar.value = time_left / game_timer.wait_time * 100
+	if time_left_bar.value >= 66:
+		time_left_bar.modulate = Color.GREEN
+	elif time_left_bar.value >= 33:
+		time_left_bar.modulate = Color.ORANGE
+	else:
+		time_left_bar.modulate = Color.RED
 
 
 func update_interactable_ui() -> void:
