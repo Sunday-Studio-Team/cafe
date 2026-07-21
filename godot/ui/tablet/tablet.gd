@@ -1,5 +1,4 @@
-extends MeshInstance3D
-
+extends PanelContainer
 @export var machines_container: Container
 @export var machine_ui_scene: PackedScene
 

@@ -3,22 +3,10 @@
 [ext_resource type="Script" uid="uid://deaoq82qeackq" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cr2t2yoape3ak" path="res://models/ingredients_bag_model.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="2_sweqy"]
-[ext_resource type="Script" uid="uid://0vrj07axdu0p" path="res://ui/tablet/tablet.gd" id="3_i3pqv"]
-[ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
 height = 1.7
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50gvf"]
-albedo_color = Color(0.38928655, 0.38928664, 0.38928658, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
-material = SubResource("StandardMaterial3D_50gvf")
-size = Vector3(0.25, 0.15, 0.008)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("CameraRig/Camera3D/Tablet/Screen/SubViewport")
 
 [node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag")]
 script = ExtResource("1_4flbx")
@@ -46,38 +34,5 @@ collide_with_areas = true
 
 [node name="IngredientsBag" parent="CameraRig/Camera3D" unique_id=2023250318 instance=ExtResource("2_onrkg")]
 transform = Transform3D(0.5147956, -0.1656346, -0.84116036, -8.445128e-09, 0.9811591, -0.19320203, 0.8573129, 0.099459544, 0.50509626, -0.28140098, -0.24627936, -0.42260942)
-
-[node name="Tablet" type="MeshInstance3D" parent="CameraRig/Camera3D" unique_id=849939380 node_paths=PackedStringArray("machines_container")]
-transform = Transform3D(0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 0, 0, 1, 0.075, -0.2, -0.2)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_0ffxp")
-script = ExtResource("3_i3pqv")
-machines_container = NodePath("Screen/SubViewport/MarginContainer/HBoxContainer")
-machine_ui_scene = ExtResource("4_hqtel")
-
-[node name="Screen" type="Sprite3D" parent="CameraRig/Camera3D/Tablet" unique_id=634465263]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
-pixel_size = 0.0005
-texture_filter = 0
-texture = SubResource("ViewportTexture_0ffxp")
-
-[node name="SubViewport" type="SubViewport" parent="CameraRig/Camera3D/Tablet/Screen" unique_id=485074464]
-canvas_item_default_texture_filter = 0
-size = Vector2i(450, 275)
-
-[node name="MarginContainer" type="MarginContainer" parent="CameraRig/Camera3D/Tablet/Screen/SubViewport" unique_id=399650461]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CameraRig/Camera3D/Tablet/Screen/SubViewport/MarginContainer" unique_id=564031877]
-layout_mode = 2
-size_flags_vertical = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2008160580]
