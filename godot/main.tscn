@@ -69,8 +69,11 @@
 [ext_resource type="Texture2D" uid="uid://on7yfgn0tt30" path="res://sprites/alert/frame_20_delay-0.04s.png" id="43_mnw77"]
 [ext_resource type="Texture2D" uid="uid://cn5o1xhguo2jv" path="res://sprites/alert/frame_21_delay-0.04s.png" id="44_vjgyh"]
 [ext_resource type="Texture2D" uid="uid://bkxu26f3wo1xb" path="res://sprites/alert/frame_22_delay-0.04s.png" id="45_d5iia"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
 [ext_resource type="Texture2D" uid="uid://by4sxeac6n5vd" path="res://sprites/alert/frame_23_delay-0.05s.png" id="46_asu84"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
 [ext_resource type="Texture2D" uid="uid://4xg61rrqv125" path="res://sprites/alert/frame_24_delay-0.04s.png" id="47_qwt6e"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
 [ext_resource type="Texture2D" uid="uid://y5qyrblkkthi" path="res://sprites/alert/frame_25_delay-0.04s.png" id="48_off2o"]
 [ext_resource type="Texture2D" uid="uid://38dkibuboqy0" path="res://sprites/alert/frame_26_delay-0.04s.png" id="49_tttfs"]
 [ext_resource type="Texture2D" uid="uid://b4mmkwxhnxhnd" path="res://sprites/alert/frame_27_delay-0.04s.png" id="50_1iygd"]
@@ -1632,7 +1635,7 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.375757)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/Screen/Scores/ScoreContainer/PanelContainer/Scores/Money")
 customer_happiness_label = NodePath("Tablet/Screen/Scores/ScoreContainer/PanelContainer/Scores/Customer/Label")
@@ -1641,7 +1644,7 @@ interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
 interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/TimeLeft")
+time_left_bar = NodePath("Tablet/Screen/MarginContainer2/InfoContainer/TimeLeftBar")
 objective = NodePath("MarginContainer/Objective")
 rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
@@ -1703,37 +1706,44 @@ layout_mode = 2
 
 [node name="InfoContainer" type="MarginContainer" parent="UI/Tablet/Screen/MarginContainer2" unique_id=655530118]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 40
 
 [node name="DayIndicator" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=586450203]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(125, 125)
+custom_maximum_size = Vector2(125, 125)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 32
 text = "DAY 1/5"
 
 [node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(175, 125)
+custom_maximum_size = Vector2(175, 125)
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true
 texture = ExtResource("7_ycdy4")
 expand_mode = 4
 
-[node name="TimeLeft" type="Label" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=481278116]
-custom_minimum_size = Vector2(300, 0)
+[node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=1649230487]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(150, 100)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "TIME LEFT: 0"
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Tablet/Screen/MarginContainer2/InfoContainer" unique_id=263628450]
-layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -20)
+offset_transform_scale = Vector2(0.5, 0.5)
+fill_mode = 4
+texture_under = ExtResource("45_dfxmq")
+texture_over = ExtResource("46_kcoi7")
+texture_progress = ExtResource("47_rkju4")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/Screen" unique_id=1516433386]
 custom_minimum_size = Vector2(0, 150)
