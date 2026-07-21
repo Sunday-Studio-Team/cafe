@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dhmqo5yinqk0t"]
 
-[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
+[ext_resource type="Script" uid="uid://c5ojrof5ocd0i" path="res://interactable.gd" id="1_ep8l3"]
 [ext_resource type="Texture2D" uid="uid://dj050iu2fwpx3" path="res://Assets/Desk/office desk_Image_0.jpg" id="2_rejd0"]
 [ext_resource type="Texture2D" uid="uid://cpdd4gapsy0fs" path="res://Assets/Desk/office desk_Image_2.jpg" id="3_vdysj"]
 [ext_resource type="Texture2D" uid="uid://b6ymni81c51th" path="res://Assets/Desk/office desk_Image_1.png" id="4_sxph0"]
@@ -1861,7 +1861,7 @@ shadow_mesh = SubResource("ArrayMesh_16ay0")
 [node name="Desk" type="Area3D" unique_id=2130239944 node_paths=PackedStringArray("mesh")]
 script = ExtResource("1_ep8l3")
 display_name = "use PC"
-mesh = NodePath("Model/Monitor")
+mesh = NodePath("office desk/screen2_mac_0")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=337724593]
