@@ -3,6 +3,7 @@ extends CanvasLayer
 enum ScoreType { MONEY, CUSTOMER }
 
 @export var profit_label: Label
+@export var profit_progress: ProgressBar
 @export var customer_happiness_label: Label
 @export var score_update_label: Label
 @export var interactable_indicator: PanelContainer
@@ -248,6 +249,8 @@ func update_score_indicators() -> void:
 			Global.float_to_price(Global.daily_profit)
 			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
 	)
+	if Global.daily_profit:
+		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
 
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
