@@ -37,11 +37,12 @@ grow_vertical = 2
 handle_input_locally = false
 physics_object_picking = true
 size = Vector2i(1920, 1080)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "mop_sprite", "moping_area")]
-position = Vector2(960, 500)
-scale = Vector2(0.6, 0.6)
+position = Vector2(960, 600)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_imr7o")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
@@ -52,7 +53,7 @@ allowed_remaining_ratio = 0.01
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles")]
 position = Vector2(960, 500)
-scale = Vector2(-1.5, -1.5)
+scale = Vector2(-1.3, -1.3)
 texture = ExtResource("3_0rxra")
 script = ExtResource("4_6lir2")
 drag_area = NodePath("Area2D2")

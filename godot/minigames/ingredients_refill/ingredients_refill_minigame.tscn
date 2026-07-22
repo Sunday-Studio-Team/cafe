@@ -51,11 +51,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=210426897]
 handle_input_locally = false
 audio_listener_enable_2d = true
 size = Vector2i(1920, 1080)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="IngredientsRefillMinigame" type="Node2D" parent="SubViewport" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "meter", "bag", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound")]
