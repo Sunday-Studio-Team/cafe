@@ -41,15 +41,17 @@ func _ready() -> void:
 
 	Events.bag_pickup_animation_grabbed.connect(
 		func():
-			# scuffed 'animation' of bag appearing when we grab it
-			create_tween().tween_property(
-				ingredients_bag,
-				"scale",
-				Vector3.ONE,
-				0.5,
-			).from(Vector3.ZERO)
-
 			bag_pickup_sound.play()
+
+			# scuffed 'animation' of bag appearing when we grab it
+			ingredients_bag.transparency = 1
+			ingredients_bag.scale = Vector3.ZERO
+
+			await Events.viewmodel_animation_finished
+
+			var t := create_tween().set_parallel()
+			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
+			t.tween_property(ingredients_bag, "transparency", 0, 0.25)
 	)
 
 

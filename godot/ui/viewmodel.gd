@@ -4,8 +4,10 @@ extends CanvasLayer
 @export var hammer_item: Item
 
 
-func _ready():
+func _ready() -> void:
 	Events.play_viewmodel_animation.connect(sprite.play)
+
+	sprite.frame_changed.connect(_on_frame_changed)
 
 	sprite.animation_finished.connect(
 		func():
@@ -17,28 +19,29 @@ func _ready():
 
 
 func _physics_process(_delta: float) -> void:
+	visible = not Global.in_ui
+
+
+func _on_frame_changed() -> void:
 	if (
 			sprite.frame == 21
 			and sprite.animation == "hammer_use"
 	):
 		Events.hammer_animation_hit.emit()
-
-	if (
+	elif (
 			sprite.frame == 10
 			and sprite.animation == "bag_pickup"
 	):
 		Events.bag_pickup_animation_grabbed.emit()
 
-	visible = not Global.in_ui
 
-
-func _on_animation_finished():
+func _on_animation_finished() -> void:
 	match sprite.animation:
 		"bag_pickup":
-			if not Global.equipped_item:
-				sprite.play("default")
-			elif Global.equipped_item == hammer_item:
+			if Global.equipped_item == hammer_item:
 				sprite.play("hammer_idle")
+			else:
+				sprite.play("default")
 		"hammer_use":
 			sprite.play("default")
 		"hammer_equip":

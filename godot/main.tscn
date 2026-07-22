@@ -236,16 +236,11 @@
 [ext_resource type="Texture2D" uid="uid://cea1iodnsap02" path="res://sprites/2d_animations/bag_pickup/frame_24_delay-0.04s.png" id="174_nrh2l"]
 [ext_resource type="Texture2D" uid="uid://b710h8ekdxyij" path="res://sprites/2d_animations/bag_pickup/frame_25_delay-0.04s.png" id="175_cuixb"]
 [ext_resource type="Texture2D" uid="uid://bjojkqckgfros" path="res://sprites/2d_animations/hammer_use/frame_34_delay-0.04s.png" id="175_kc3cm"]
-[ext_resource type="Texture2D" uid="uid://24a5ad3efgrl" path="res://sprites/2d_animations/bag_pickup/frame_26_delay-0.04s.png" id="176_bwis2"]
 [ext_resource type="Texture2D" uid="uid://c208tk8uhdub6" path="res://sprites/2d_animations/hammer_use/frame_35_delay-0.05s.png" id="176_utcts"]
 [ext_resource type="Texture2D" uid="uid://dwvg70w8bf8qv" path="res://sprites/2d_animations/hammer_use/frame_36_delay-0.04s.png" id="177_2pm5r"]
-[ext_resource type="Texture2D" uid="uid://bu1je15kb8roa" path="res://sprites/2d_animations/bag_pickup/frame_27_delay-0.04s.png" id="177_lyu6w"]
 [ext_resource type="Texture2D" uid="uid://olbo2mb33ch7" path="res://sprites/2d_animations/hammer_use/frame_37_delay-0.04s.png" id="178_38n85"]
-[ext_resource type="Texture2D" uid="uid://dxo1tf1enffut" path="res://sprites/2d_animations/bag_pickup/frame_28_delay-0.04s.png" id="178_prs1d"]
-[ext_resource type="Texture2D" uid="uid://bj4qdyhn8jur1" path="res://sprites/2d_animations/bag_pickup/frame_29_delay-0.05s.png" id="179_klk0y"]
 [ext_resource type="Texture2D" uid="uid://cxshfhlks2mpe" path="res://sprites/2d_animations/hammer_use/frame_38_delay-0.04s.png" id="179_nkmqd"]
 [ext_resource type="Texture2D" uid="uid://bgasa4pbch3d3" path="res://sprites/2d_animations/hammer_use/frame_39_delay-0.04s.png" id="180_4b624"]
-[ext_resource type="Texture2D" uid="uid://cu62omahi7rdj" path="res://sprites/2d_animations/bag_pickup/frame_30_delay-0.04s.png" id="180_a2565"]
 [ext_resource type="Texture2D" uid="uid://dkk74s8a1x7u1" path="res://sprites/2d_animations/hammer_use/frame_40_delay-0.04s.png" id="181_0li47"]
 [ext_resource type="Texture2D" uid="uid://bomqnnpxs4s7w" path="res://sprites/2d_animations/hammer_use/frame_41_delay-0.05s.png" id="182_idhsh"]
 [ext_resource type="Texture2D" uid="uid://d0dhdbgq6mph1" path="res://sprites/2d_animations/hammer_use/frame_42_delay-0.04s.png" id="183_piefl"]
@@ -3864,25 +3859,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("175_cuixb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("176_bwis2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("177_lyu6w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("178_prs1d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("179_klk0y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("180_a2565")
 }],
 "loop": 0,
 "name": &"bag_pickup",
-"speed": 24.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -4597,7 +4577,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="0" unique_id=895061839]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -4608,10 +4588,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="1" unique_id=1595560103]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1845172364) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(1, 0.52156866, 0.9607843, 1)
 light_energy = 5.04
@@ -4619,7 +4599,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="2" unique_id=555267135]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -6093,7 +6073,7 @@ position = Vector2(960, 540)
 scale = Vector2(3.43, 3.43)
 sprite_frames = SubResource("SpriteFrames_cpm2s")
 animation = &"bag_pickup"
-frame = 30
+frame = 25
 frame_progress = 1.0
 
 [node name="Active Item Nodes" type="Node" parent="." unique_id=1125066088]
