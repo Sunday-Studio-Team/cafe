@@ -16,7 +16,7 @@ expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
 
-[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "restart_button", "quit_button", "sure_menu", "yes_sure_button", "no_sure_button", "sure_info_label")]
+[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "restart_button", "quit_button", "sure_menu", "sure_panel", "yes_sure_button", "no_sure_button", "sure_info_label")]
 process_mode = 3
 script = ExtResource("1_hdmo1")
 _continue_button = NodePath("MarginContainer/VBoxContainer/Continue")
@@ -24,6 +24,7 @@ _tutorial_button = NodePath("MarginContainer/VBoxContainer/ShowTutorial")
 restart_button = NodePath("MarginContainer/VBoxContainer/Restart")
 quit_button = NodePath("MarginContainer/VBoxContainer/Quit")
 sure_menu = NodePath("MarginContainer/Sure")
+sure_panel = NodePath("MarginContainer/Sure/PanelContainer")
 yes_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/YesButton")
 no_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/NoButton")
 sure_info_label = NodePath("MarginContainer/Sure/PanelContainer/Info/PanelContainer/Label")
@@ -85,7 +86,6 @@ theme_override_font_sizes/font_size = 64
 text = "quit"
 
 [node name="Sure" type="MarginContainer" parent="MarginContainer" unique_id=586124836]
-visible = false
 layout_mode = 2
 
 [node name="Background" type="ColorRect" parent="MarginContainer/Sure" unique_id=707749891]
