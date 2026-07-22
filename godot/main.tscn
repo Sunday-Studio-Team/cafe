@@ -62,7 +62,9 @@
 [ext_resource type="PackedScene" uid="uid://cexib5vqpbisp" path="res://Assets/ceiling lights/Ceiling Lamp 3D Model.glb" id="36_7dysq"]
 [ext_resource type="Texture2D" uid="uid://ce6aylxemgy35" path="res://sprites/alert/frame_13_delay-0.04s.png" id="36_8dc3g"]
 [ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="36_cpm2s"]
+[ext_resource type="PackedScene" uid="uid://cja7slsposkuo" path="res://Assets/ceiling light 1/Modern Interior Ceiling Light.glb" id="37_7b48j"]
 [ext_resource type="Texture2D" uid="uid://b2x5bvsgxyxsp" path="res://sprites/alert/frame_14_delay-0.04s.png" id="37_htgcl"]
+[ext_resource type="PackedScene" uid="uid://b7lkrbc1y0a24" path="res://Assets/ceiling light 1/Ceiling Lamps 3D Model.glb" id="38_8tqy7"]
 [ext_resource type="Texture2D" uid="uid://gfqu51nrngu4" path="res://sprites/alert/frame_15_delay-0.04s.png" id="38_smeu8"]
 [ext_resource type="Texture2D" uid="uid://dx3lbu3ju7deu" path="res://sprites/alert/frame_16_delay-0.04s.png" id="39_f3y11"]
 [ext_resource type="Texture2D" uid="uid://b1k8vkx1m7bsv" path="res://sprites/alert/frame_17_delay-0.05s.png" id="40_cpm2s"]
@@ -1653,13 +1655,53 @@ shadow_enabled = true
 area_range = 5.895
 area_size = Vector2(1.2112226, 1.1672361)
 
-[node name="AreaLight3D4" type="AreaLight3D" parent="Lights" unique_id=911257138]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.3930755, 2.8165505, -3.278502)
+[node name="Sketchfab_Scene" parent="Lights" unique_id=2142242220 instance=ExtResource("37_7b48j")]
+transform = Transform3D(2.8963146, 0, 0, 0, 2.8963146, 0, 0, 0, 2.8963146, 3.4626575, 2.6481774, -3.3092804)
+
+[node name="AreaLight3D4" type="AreaLight3D" parent="Lights/Sketchfab_Scene" unique_id=911257138]
+transform = Transform3D(0.34526634, 0, 0, 0, -1.5092072e-08, 0.34526634, 0, -0.34526634, -1.5092072e-08, -0.024024323, -0.11925888, 0.010626748)
 light_color = Color(1, 0.8, 0.52, 1)
 light_energy = 5.0
 shadow_enabled = true
 area_range = 5.895
 area_size = Vector2(2.0486052, 2.8595924)
+
+[node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
+transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
+
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1576339296) index="0" unique_id=569639577]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
+transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, 89.927246, -258.8015)
+light_color = Color(1, 0.52156866, 0.9607843, 1)
+light_energy = 8.763
+shadow_enabled = true
+spot_range = 4.419
+spot_angle = 31.63
+
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1576339296) index="1" unique_id=1896552285]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 681341292) index="1" unique_id=398972065]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(1, 0.52156866, 0.9607843, 1)
+light_energy = 5.04
+shadow_enabled = true
+area_range = 3.905
+area_size = Vector2(1.6194825, 2.7039185)
+
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1576339296) index="2" unique_id=1559712432]
+transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
+transform = Transform3D(100.00001, 0, 2.7105054e-20, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 139.14665, -16.29895, 0)
+light_color = Color(1, 0.52156866, 0.9607843, 1)
+light_energy = 5.99
+light_specular = 6.069
+shadow_enabled = true
+area_range = 2.021
+area_size = Vector2(0.19068861, 2.8746767)
 
 [node name="ceiling lights" parent="Lights" unique_id=55955626 instance=ExtResource("36_7dysq")]
 transform = Transform3D(-5.9447487e-08, 5.9447487e-08, 1.36, 0, 1.36, -5.9447487e-08, -1.36, -2.5985323e-15, -5.9447487e-08, 7.1126103, -0.39420274, 2.9190664)
@@ -2525,3 +2567,4 @@ grow_vertical = 2
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam3"]
+[editable path="Lights/Sketchfab_Scene/Sketchfab_Scene"]
