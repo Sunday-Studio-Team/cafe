@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://ds0th57ag3r1d" path="res://sprites/alert/frame_07_delay-0.04s.png" id="30_k1udn"]
 [ext_resource type="Texture2D" uid="uid://bg7pew7xy8xc1" path="res://sprites/alert/frame_08_delay-0.04s.png" id="31_wat4s"]
 [ext_resource type="Texture2D" uid="uid://c8tu2yliho5vv" path="res://sprites/alert/frame_09_delay-0.04s.png" id="32_ywjan"]
+[ext_resource type="PackedScene" uid="uid://dfmk6fgi2327m" path="res://Assets/Office door/Managers Office Door 3D Model.glb" id="33_0abf2"]
 [ext_resource type="Texture2D" uid="uid://dio2nr6075utp" path="res://sprites/alert/frame_10_delay-0.04s.png" id="33_m74q3"]
 [ext_resource type="Texture2D" uid="uid://cxw6bx3yspg0t" path="res://sprites/alert/frame_11_delay-0.05s.png" id="34_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dyvn8y6yxxp3c" path="res://sprites/alert/frame_12_delay-0.04s.png" id="35_am8a1"]
@@ -1578,14 +1579,19 @@ libraries/ = SubResource("AnimationLibrary_m74q3")
 [node name="BreakRoomDoorModel" type="Node3D" parent="BreakRoomDoor" unique_id=1779757833]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
+[node name="Sketchfab_Scene" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=605328551 instance=ExtResource("33_0abf2")]
+transform = Transform3D(-3.2810537e-08, 0, 0.9999996, 0, 0.9083781, 0, -0.7506176, 0, -4.3711367e-08, -0.029385567, -0.024177432, 0.5333538)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=204670809]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.04065132, 1, 0.5088234)
+visible = false
 use_collision = true
 size = Vector3(0.1, 2, 1)
 material = SubResource("StandardMaterial3D_1u8w0")
 
 [node name="Label3D" type="Label3D" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=2097630685]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.068532944, 1.3897167, 0.5199895)
+visible = false
 text = "BREAK
 ROOM"
 
