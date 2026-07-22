@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://d2rhbxbiy6es6" path="res://ingredients_bag.gd" id="1_ernkv"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_52fgx"]
 [ext_resource type="PackedScene" uid="uid://cr2t2yoape3ak" path="res://models/ingredients_bag_model.tscn" id="2_ernkv"]
-[ext_resource type="PackedScene" uid="uid://b0x2nxtr2d0xj" path="res://Assets/coffee bag/Coffee Paper Bag 3D Scan.glb" id="4_2x5h2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_52fgx"]
-size = Vector3(0.15, 0.22115478, 0.09816895)
+size = Vector3(0.15, 0.15, 0.15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ernkv"]
 size = Vector3(0.5, 0.75, 0.5)
@@ -17,7 +16,6 @@ script = ExtResource("1_ernkv")
 interactable = NodePath("Interactable")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=628374374]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.028216556, -0.0036499016)
 shape = SubResource("BoxShape3D_52fgx")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=1055430729 node_paths=PackedStringArray("mesh")]
@@ -31,7 +29,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("BoxShape3D_ernkv")
 
 [node name="IngredientsBagModel" parent="." unique_id=2023250318 instance=ExtResource("2_ernkv")]
-visible = false
-
-[node name="Sketchfab_Scene" parent="." unique_id=1554523289 instance=ExtResource("4_2x5h2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4869113, 10.1689, -11.76522)
