@@ -76,11 +76,14 @@
 [ext_resource type="Texture2D" uid="uid://b3cbnqrgmqdvk" path="res://sprites/alert/frame_19_delay-0.04s.png" id="42_rt5wr"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
+[ext_resource type="Texture2D" uid="uid://hcs1q821ckgp" path="res://Assets/Posters/Workplace Safety Signs Vol 1_0.jpg" id="43_g65e0"]
 [ext_resource type="Texture2D" uid="uid://on7yfgn0tt30" path="res://sprites/alert/frame_20_delay-0.04s.png" id="43_mnw77"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="Texture2D" uid="uid://cn5o1xhguo2jv" path="res://sprites/alert/frame_21_delay-0.04s.png" id="44_vjgyh"]
+[ext_resource type="Texture2D" uid="uid://dhh0h5qr63wvg" path="res://Assets/Posters/Workplace Safety Signs Vol 1_1.jpg" id="44_yjv7m"]
 [ext_resource type="Texture2D" uid="uid://bkxu26f3wo1xb" path="res://sprites/alert/frame_22_delay-0.04s.png" id="45_d5iia"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
+[ext_resource type="Texture2D" uid="uid://br7xuc05t8ko7" path="res://Assets/Posters/Workplace Safety Signs Vol 1_2.jpg" id="45_xaqn1"]
 [ext_resource type="Texture2D" uid="uid://by4sxeac6n5vd" path="res://sprites/alert/frame_23_delay-0.05s.png" id="46_asu84"]
 [ext_resource type="PackedScene" uid="uid://d0m4cxa5fl07f" path="res://Assets/window/Glass Door 221.glb" id="46_kc3cm"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
@@ -88,6 +91,7 @@
 [ext_resource type="Texture2D" uid="uid://4xg61rrqv125" path="res://sprites/alert/frame_24_delay-0.04s.png" id="47_qwt6e"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
 [ext_resource type="Texture2D" uid="uid://y5qyrblkkthi" path="res://sprites/alert/frame_25_delay-0.04s.png" id="48_off2o"]
+[ext_resource type="Texture2D" uid="uid://d2btgj0u5x7k1" path="res://Assets/Posters/Workplace Safety Signs Vol 1_5.jpg" id="48_va5bq"]
 [ext_resource type="Texture2D" uid="uid://38dkibuboqy0" path="res://sprites/alert/frame_26_delay-0.04s.png" id="49_tttfs"]
 [ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="49_utcts"]
 [ext_resource type="Texture2D" uid="uid://b4mmkwxhnxhnd" path="res://sprites/alert/frame_27_delay-0.04s.png" id="50_1iygd"]
@@ -718,6 +722,162 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ro7ag")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d3c11"]
+resource_name = "TexturesCom_SignsCameras0010_M"
+cull_mode = 2
+albedo_texture = ExtResource("43_g65e0")
+roughness = 0.77500856
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7voks"]
+_surfaces = [{
+"aabb": AABB(3.469325, -0.01842, 0.558714, 0.355649, 1e-05, 0.46871406),
+"format": 34896613377,
+"index_count": 45,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgAFAAQABQAGAAQABQAHAAYABwAIAAYABwAJAAgACQAKAAgACQALAAoACwAMAAoACwANAAwADQAOAAwADQAPAA4ADwAQAA4A"),
+"name": "TexturesCom_SignsCameras0010_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("gOUAAFgAAADKGQAAAAAAAOMNAAAVAgAAB/AAALwBAADP9wAAhAQAAFsDAACkBwAATv0AAGsKAACcAAAA+g8AAAT+AADoEwAAAAAAAHHtAAD//wAA/e0AABwBAADd9QAACvwAAP71AABTCAAAw/sAAHjzAAD+/AAAWBMAAP//AAA+6gAAfv8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nmlnp"]
+resource_name = "Sketchfab_Scene_Object_0"
+_surfaces = [{
+"aabb": AABB(3.469325, -0.01842, 0.558714, 0.355649, 1e-05, 0.46871406),
+"attribute_data": PackedByteArray("gt89Cjkg6QkMFd4LZemKC7PwJQ4oCxMR3PWuE5QI5BiH9pMcAQh/6GP4AukMCWXwrPSD8NIP7PWg7BP3Kxrk+fbjbPk="),
+"format": 34896613399,
+"index_count": 45,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgAFAAQABQAGAAQABQAHAAYABwAIAAYABwAJAAgACQAKAAgACQALAAoACwAMAAoACwANAAwADQAOAAwADQAPAA4ADwAQAA4A"),
+"material": SubResource("StandardMaterial3D_d3c11"),
+"name": "TexturesCom_SignsCameras0010_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("gOUAAFgA/z/KGQAAAAD/P+MNAAAVAv8/B/AAALwB/z/P9wAAhAT/P1sDAACkB/8/Tv0AAGsK/z+cAAAA+g//PwT+AADoE/8/AAAAAHHt/z///wAA/e3/PxwBAADd9f8/CvwAAP71/z9TCAAAw/v/P3jzAAD+/P8/WBMAAP///z8+6gAAfv//PwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7voks")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7r6u"]
+resource_name = "TexturesCom_SignsCameras0014_M"
+cull_mode = 2
+albedo_texture = ExtResource("44_yjv7m")
+roughness = 0.8011823
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kosge"]
+_surfaces = [{
+"aabb": AABB(2.462391, -0.01842, 0.562758, 0.45496106, 1e-05, 0.45367497),
+"format": 34896613377,
+"index_count": 42,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgAFAAQABQAGAAQABQAHAAYABwAIAAYACAAJAAYACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0A"),
+"name": "TexturesCom_SignsCameras0014_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("1ewAALkAAAA/FAAAAAAAAJILAABZBAAAgvUAAEMDAABh/AAAJwoAAIcCAAAnCgAA//8AAJQTAAByAQAAfhIAAAAAAABt6AAA//8AAJrqAABBAwAAB/QAABr9AADX9QAAfAoAAEj7AADf9QAAXvwAABQSAAD//wAA1ewAAKL/AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fpee3"]
+resource_name = "Sketchfab_Scene_Object_1"
+_surfaces = [{
+"aabb": AABB(2.462391, -0.01842, 0.562758, 0.45496106, 1e-05, 0.45367497),
+"attribute_data": PackedByteArray("AeGkDKMe+wvaFu4PyujxDvXuMhW9DjIVM/LAHcQNwxx4DODeM/LZ4GMPZ+mb7wzr4RX87x7p+PCxHEP0AeHu8w=="),
+"format": 34896613399,
+"index_count": 42,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgAFAAQABQAGAAQABQAHAAYABwAIAAYACAAJAAYACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0A"),
+"material": SubResource("StandardMaterial3D_l7r6u"),
+"name": "TexturesCom_SignsCameras0014_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("1ewAALkA/z8/FAAAAAD/P5ILAABZBP8/gvUAAEMD/z9h/AAAJwr/P4cCAAAnCv8///8AAJQT/z9yAQAAfhL/PwAAAABt6P8///8AAJrq/z9BAwAAB/T/Pxr9AADX9f8/fAoAAEj7/z/f9QAAXvz/PxQSAAD///8/1ewAAKL//z8AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kosge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5iqs"]
+resource_name = "TexturesCom_SignsCameras0015_M"
+cull_mode = 2
+albedo_texture = ExtResource("45_xaqn1")
+roughness = 0.8011823
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cv0hb"]
+_surfaces = [{
+"aabb": AABB(3.012671, -0.01842, 0.55152, 0.38292694, 1e-05, 0.47557306),
+"format": 34896613377,
+"index_count": 33,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACAALAAoACwAMAAoA"),
+"name": "TexturesCom_SignsCameras0015_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("HPkAAAYBAACjCAAAAAAAANgDAACIAQAAKf4AABsDAAAHAQAAowQAADX/AADSBgAAAAAAAIf3AAD//wAAlvcAAKcAAACb/AAAQf4AADH8AABF+wAAy/4AAKMHAADL/wAATvUAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ca7x7"]
+resource_name = "Sketchfab_Scene_Object_2"
+_surfaces = [{
+"aabb": AABB(3.012671, -0.01842, 0.55152, 0.38292694, 1e-05, 0.47557306),
+"attribute_data": PackedByteArray("PfI0By0TOga7DrAH7PYvCR4MpArl97gMKQuq8aD4ufHFC3/2A/ca9j/0k/g/Eof5tu64+Q=="),
+"format": 34896613399,
+"index_count": 33,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACAALAAoACwAMAAoA"),
+"material": SubResource("StandardMaterial3D_m5iqs"),
+"name": "TexturesCom_SignsCameras0015_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("HPkAAAYB/z+jCAAAAAD/P9gDAACIAf8/Kf4AABsD/z8HAQAAowT/PzX/AADSBv8/AAAAAIf3/z///wAAlvf/P6cAAACb/P8/Qf4AADH8/z9F+wAAy/7/P6MHAADL//8/TvUAAP///z8AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cv0hb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekkpa"]
+resource_name = "TexturesCom_SignsTrespassing0006_1_M"
+cull_mode = 2
+albedo_texture = ExtResource("48_va5bq")
+roughness = 0.8011823
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r2cha"]
+_surfaces = [{
+"aabb": AABB(0.904894, -0.01842, 0.560902, 0.42005706, 1e-05, 0.420057),
+"format": 34896613377,
+"index_count": 90,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAGAAaABkAGgAbABkAGgAcABsAHAAdABsAHAAeAB0AHgAfAB0A"),
+"name": "TexturesCom_SignsTrespassing0006_1_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("+JgAAHUCAAD/fwAAAAAAAAZnAAB1AgAA+7AAAL4JAAADTwAAvgkAABzHAACSFQAA4jgAAJIVAACB2gAAfSUAAH0lAAB9JQAAbOoAAOI4AACSFQAA4jgAAED2AAADTwAAvgkAAANPAACJ/QAABmcAAHUCAAAGZwAA//8AAP9/AAAAAAAA/38AAIn9AAD4mAAAdQIAAPiYAABA9gAA+7AAAL4JAAD7sAAAbOoAABzHAACSFQAAHMcAAIHaAACB2gAAfSUAAIHaAAAcxwAAbOoAAOI4AABs6gAA+7AAAED2AAADTwAAQPYAAPiYAACJ/QAABmcAAIn9AAD/fwAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3g115"]
+resource_name = "Sketchfab_Scene_Object_5"
+_surfaces = [{
+"aabb": AABB(0.904894, -0.01842, 0.560902, 0.42005706, 1e-05, 0.420057),
+"attribute_data": PackedByteArray("xZdYCjqBFQivalgKcq0IEQJVCBFsweQbCEHkG+7SgSqFL4EqTeFQPCchUDz766FQeRahUI7yrWbmD61mxvSbfa0Nm32O8oiU5g+IlPvrlKp5FpSqTeHlvich5b7u0rTQhS+00GzBUd8IQVHfcq0t6gJVLerFl93wr2rd8DqBIPM="),
+"format": 34896613399,
+"index_count": 90,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABAAFAAMABAAGAAUABgAHAAUABgAIAAcACAAJAAcACAAKAAkACgALAAkACgAMAAsADAANAAsADAAOAA0ADgAPAA0ADgAQAA8AEAARAA8AEAASABEAEgATABEAEgAUABMAFAAVABMAFAAWABUAFgAXABUAFgAYABcAGAAZABcAGAAaABkAGgAbABkAGgAcABsAHAAdABsAHAAeAB0AHgAfAB0A"),
+"material": SubResource("StandardMaterial3D_ekkpa"),
+"name": "TexturesCom_SignsTrespassing0006_1_M",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("+JgAAHUC/z//fwAAAAD/PwZnAAB1Av8/+7AAAL4J/z8DTwAAvgn/PxzHAACSFf8/4jgAAJIV/z+B2gAAfSX/P30lAAB9Jf8/bOoAAOI4/z+SFQAA4jj/P0D2AAADT/8/vgkAAANP/z+J/QAABmf/P3UCAAAGZ/8///8AAP9//z8AAAAA/3//P4n9AAD4mP8/dQIAAPiY/z9A9gAA+7D/P74JAAD7sP8/bOoAABzH/z+SFQAAHMf/P4HaAACB2v8/fSUAAIHa/z8cxwAAbOr/P+I4AABs6v8/+7AAAED2/z8DTwAAQPb/P/iYAACJ/f8/BmcAAIn9/z//fwAA////PwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_r2cha")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
 albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
@@ -4389,7 +4549,6 @@ spot_angle = 50.34
 [node name="AreaLight3D6" type="AreaLight3D" parent="Lights" unique_id=194176168]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 13.841586, 2.5911565, 3.0065422)
 light_color = Color(1, 0.9882353, 0.8392157, 1)
-light_energy = 0.5
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 area_range = 4.419
@@ -4415,6 +4574,25 @@ omni_range = 16.497
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.2067113, 1.4271426, -3.3517313)
 light_color = Color(1, 0.7783333, 0.65, 1)
 omni_range = 16.497
+
+[node name="workplace_signs_obj_cleaner_materialmerger_gles" type="Node3D" parent="Lights" unique_id=608549853]
+transform = Transform3D(-1, -8.742278e-08, 1.9411756e-23, 0, 2.220446e-16, 1, -8.742278e-08, 1, -2.220446e-16, 5.799853, 0.1, 4.3599863)
+
+[node name="Object_2" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=689259217]
+transform = Transform3D(-7.387225e-08, -1.69, 0, 1.69, -7.387225e-08, 0, 0, 0, 1.69, -6.007262, -9.517833, 0.9908324)
+mesh = SubResource("ArrayMesh_nmlnp")
+
+[node name="Object_3" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=1573084065]
+transform = Transform3D(-2.2095256, 0.045795646, -1.0168756e-17, -0.045795646, -2.2095256, 9.813317e-16, 1.0168595e-17, 9.813317e-16, 2.21, 9.812852, -4.0457783, 0.53482413)
+mesh = SubResource("ArrayMesh_fpee3")
+
+[node name="Object_4" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=1359882231]
+transform = Transform3D(-2.16, -3.2615094e-07, 0, 3.2615094e-07, -2.16, 0, 0, 0, 2.16, 4.9618835, -4.188082, -0.037852645)
+mesh = SubResource("ArrayMesh_ca7x7")
+
+[node name="Object_7" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=300734905]
+transform = Transform3D(2.3444278, 0, 0, 0, 2.3444278, 0, 0, 0, 2.3444278, -2.3841858e-07, 1.6391191, 0.4625004)
+mesh = SubResource("ArrayMesh_3g115")
 
 [node name="Environment" type="Node3D" parent="." unique_id=563251901]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
