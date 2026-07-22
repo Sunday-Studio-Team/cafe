@@ -1,0 +1,80 @@
+[gd_resource type="Theme" format=3 uid="uid://uv4g7m7luum2"]
+
+[ext_resource type="Texture2D" uid="uid://caw0oi1ybb1cj" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_escape.png" id="1_b5esb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5esb"]
+bg_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 25
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42f15"]
+bg_color = Color(0.61960787, 0.5019608, 0.36078432, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 25
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g51a1"]
+bg_color = Color(0.19215687, 0.20392157, 0.19607843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 25
+expand_margin_right = 10.0
+
+[sub_resource type="FontFile" id="FontFile_8u4h4"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[resource]
+default_font = SubResource("FontFile_8u4h4")
+Button/icons/icon = ExtResource("1_b5esb")
+Button/styles/hover = SubResource("StyleBoxFlat_b5esb")
+Button/styles/normal = SubResource("StyleBoxFlat_42f15")
+Button/styles/pressed = SubResource("StyleBoxFlat_g51a1")

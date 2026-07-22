@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://ctyf8qliv65c4"]
+
+[ext_resource type="Script" uid="uid://dngdj3sgfen6c" path="res://security_cam.gd" id="1_w3jiq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3jiq"]
+albedo_color = Color(0.46034718, 0.46034718, 0.46034712, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w3jiq"]
+material = SubResource("StandardMaterial3D_w3jiq")
+size = Vector3(0.075, 0.075, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ad36"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.95686275, 0.84313726, 0.67058825, 1)
+emission_energy_multiplier = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_bpkf2"]
+material = SubResource("StandardMaterial3D_8ad36")
+radius = 0.025
+height = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpkf2"]
+albedo_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qlhcy"]
+material = SubResource("StandardMaterial3D_bpkf2")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.25
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "spotlight", "timer")]
+script = ExtResource("1_w3jiq")
+ray = NodePath("SpotLight3D/RayCast3D")
+spotlight = NodePath("SpotLight3D")
+timer = NodePath("GraceTimer")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1348601655]
+transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.9659257, 0, -0.9659257, 0.25881904, 0, 0, 0)
+light_energy = 10.0
+light_volumetric_fog_energy = 2.5
+spot_angle = 20.0
+
+[node name="RayCast3D" type="RayCast3D" parent="SpotLight3D" unique_id=1998490399]
+transform = Transform3D(0.9659258, -1.4894287e-09, -0.258819, -0.25881907, -1.1313339e-08, -0.96592563, -1.489429e-09, 0.99999976, -1.131334e-08, 0, 0, 0)
+target_position = Vector3(0, -10, 0)
+collision_mask = 8
+
+[node name="GraceTimer" type="Timer" parent="." unique_id=2144038531]
+wait_time = 2.5
+one_shot = true
+
+[node name="Model" type="Node3D" parent="." unique_id=263013221]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08514333, 0.008925587)
+
+[node name="Body" type="MeshInstance3D" parent="Model" unique_id=1938907329]
+transform = Transform3D(1, 0, 0, 0, 0.48218188, 0.8760711, 0, -0.8760711, 0.48218188, 0, -0.0008558929, 0.030187339)
+mesh = SubResource("BoxMesh_w3jiq")
+
+[node name="Lens" type="MeshInstance3D" parent="Model" unique_id=1601630106]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07340768, -0.006826341)
+mesh = SubResource("SphereMesh_bpkf2")
+
+[node name="Mount" type="MeshInstance3D" parent="Model" unique_id=1125263611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12828007, -0.0012458414)
+mesh = SubResource("CylinderMesh_qlhcy")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dbrgyr7b3hjr3"]
+
+[ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="1_pu17e"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_qbtco"]
+
+[resource]
+script = ExtResource("1_qbtco")
+name = "teflon"
+description = "reduces penalty for breaking rules"
+icon = ExtResource("1_pu17e")
+price = 6.0
+stat_bonuses = Dictionary[String, float]({
+"penalty_for_handmade_drink": -1.0,
+"penalty_for_holding_ingredients": -1.0,
+"penalty_for_running": -1.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

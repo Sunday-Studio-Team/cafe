@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b7j7p84hynyid"]
+
+[ext_resource type="Texture2D" uid="uid://bhg3g67g8gjck" path="res://sprites/items/book.png" id="1_c8eu7"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="2_2f08s"]
+
+[resource]
+script = ExtResource("2_2f08s")
+name = "barista guide"
+description = "make drinks faster"
+icon = ExtResource("1_c8eu7")
+price = 9.0
+stat_bonuses = Dictionary[String, float]({
+"time_to_manually_make_drink": -1.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

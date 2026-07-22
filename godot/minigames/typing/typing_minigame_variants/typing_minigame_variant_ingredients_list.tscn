@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dsbs01da3oyl"]
+
+[ext_resource type="Script" uid="uid://bblydet80pt41" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_ingredients_list.gd" id="1_ijvf5"]
+[ext_resource type="Script" uid="uid://sqoa7t6v464p" path="res://minigames/typing/typing_minigame_section.gd" id="5_bvgs8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c35dl"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 48
+
+[node name="TypingMinigameVariantIngredientsList" type="Control" unique_id=1467098012 node_paths=PackedStringArray("drink_name_label", "instructions_container", "typing_minigame_section")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ijvf5")
+drink_name_label = NodePath("VBoxContainer/DrinkNameLabel")
+instructions_container = NodePath("VBoxContainer/InstructionsContainer")
+typing_minigame_section = NodePath("VBoxContainer/TypingSectionContainer/TypingMinigameSection")
+metadata/_custom_type_script = "uid://bblydet80pt41"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667575708]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -696.0
+offset_top = -663.0
+offset_right = 696.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=2086026876]
+layout_mode = 2
+text = "Manually remaking:"
+label_settings = SubResource("LabelSettings_c35dl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrinkNameLabel" type="Label" parent="VBoxContainer" unique_id=1555329547]
+layout_mode = 2
+text = "drink_name"
+label_settings = SubResource("LabelSettings_xrivr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1114366160]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="InstructionsContainer" type="MarginContainer" parent="VBoxContainer" unique_id=639655740]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/InstructionsContainer" unique_id=943532684]
+layout_mode = 2
+text = "⬇️ TYPE INGREDIENTS! ⬇️"
+label_settings = SubResource("LabelSettings_xrivr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypingSectionContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1204504852]
+layout_mode = 2
+theme_override_constants/margin_bottom = 64
+
+[node name="TypingMinigameSection" type="Control" parent="VBoxContainer/TypingSectionContainer" unique_id=1984534808 node_paths=PackedStringArray("typing_rich_text_label")]
+layout_mode = 2
+script = ExtResource("5_bvgs8")
+typing_rich_text_label = NodePath("TypingRichTextLabel")
+
+[node name="TypingRichTextLabel" type="RichTextLabel" parent="VBoxContainer/TypingSectionContainer/TypingMinigameSection" unique_id=303428000]
+layout_mode = 0
+offset_right = 1392.0
+offset_bottom = 250.0
+theme_override_font_sizes/normal_font_size = 36
+theme_override_font_sizes/bold_font_size = 36
+bbcode_enabled = true
+text = "[b][color=green]mi[/color][color=yellow]l[/color]k[/b] [color=gray][/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

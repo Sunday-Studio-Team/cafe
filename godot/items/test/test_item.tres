@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cp11d8uyq4xbk"]
+
+[ext_resource type="Texture2D" uid="uid://b1j05q5s30754" path="res://icon.svg" id="1_r3vx7"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="2_x0lmo"]
+
+[resource]
+script = ExtResource("2_x0lmo")
+name = "shoes"
+icon = ExtResource("1_r3vx7")
+stat_bonuses = {
+"default_move_speed": 1.0
+}
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

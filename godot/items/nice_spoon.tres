@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://kxjctrnpqcs3"]
+
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_4i5wr"]
+[ext_resource type="Texture2D" uid="uid://puq2ykckp4t7" path="res://sprites/items/spoon.png" id="1_pd80m"]
+
+[resource]
+script = ExtResource("1_4i5wr")
+name = "nice spoon"
+description = "get more ingredients out of each bag"
+icon = ExtResource("1_pd80m")
+price = 4.0
+stat_bonuses = Dictionary[String, float]({
+"ingredients_per_bag": 20.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

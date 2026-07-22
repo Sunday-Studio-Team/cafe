@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://bvie7veqsaumo"]
+
+[ext_resource type="Script" uid="uid://4rl0a3bpopmq" path="res://main.gd" id="1_l8hvl"]
+[ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="1_p0hbu"]
+[ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="1_wprfe"]
+[ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="2_cpnvh"]
+[ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="3_e11qe"]
+[ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="6_ybsfc"]
+[ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://ui/pause_menu.gd" id="7_yr38v"]
+
+[sub_resource type="Environment" id="Environment_wprfe"]
+ambient_light_source = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpnvh"]
+shading_mode = 0
+albedo_color = Color(0.11328125, 0.11328125, 0.11328125, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpnvh"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="StationaryCafe" type="Node3D" unique_id=2095961686 node_paths=PackedStringArray("machines", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window")]
+script = ExtResource("1_l8hvl")
+machines = [NodePath("Machine"), NodePath("Machine2"), NodePath("Machine3")]
+customer_spawn_timer = NodePath("CustomerSpawnTimer")
+customer_scene = ExtResource("2_cpnvh")
+spot_for_customer_entry = NodePath("CustomerEntrySpot")
+customer_leaving_spot = NodePath("CustomerLeavingSpot")
+game_timer = NodePath("GameTimer")
+window = NodePath("Window")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=26909584]
+environment = SubResource("Environment_wprfe")
+
+[node name="Lights" type="Node3D" parent="." unique_id=961709297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9912798, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=421245155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.868861, 0)
+light_energy = 0.142
+light_bake_mode = 1
+shadow_enabled = true
+omni_attenuation = 3.02
+
+[node name="Player" parent="." unique_id=1025923804 instance=ExtResource("1_wprfe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030151248, 0, -0.042151928)
+is_movement_enabled = false
+
+[node name="Camera3D" parent="Player" index="1" unique_id=2046988330]
+fov = 90.0
+
+[node name="Machine" parent="." unique_id=1346980836 instance=ExtResource("1_p0hbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.042)
+
+[node name="Machine2" parent="." unique_id=218843272 instance=ExtResource("1_p0hbu")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.4700916, 0, -0.042151928)
+
+[node name="Machine3" parent="." unique_id=1289240657 instance=ExtResource("1_p0hbu")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 1.958)
+
+[node name="VendingMachine" type="CSGCombiner3D" parent="." unique_id=548876495]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="VendingMachine" unique_id=872826744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29501343, 1, 0)
+size = Vector3(3.045105, 2, 3)
+
+[node name="Void" type="CSGBox3D" parent="VendingMachine" unique_id=734589922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26213002, 1, 0)
+operation = 2
+size = Vector3(2.957854, 1.885, 2.885)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="VendingMachine" unique_id=1756096816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3779259, 1.4351306, 0.06273174)
+operation = 2
+size = Vector3(0.6292114, 0.06581217, 2.2225952)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="VendingMachine" unique_id=162787894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3779259, 1.766884, 0.06273174)
+operation = 2
+size = Vector3(0.6292114, 0.26715493, 2.2225952)
+
+[node name="Roof" type="CSGCombiner3D" parent="." unique_id=656925142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8601408, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Roof" unique_id=1363006505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33322787, 0)
+size = Vector3(0.65, 0.504, 0.65)
+material = SubResource("StandardMaterial3D_cpnvh")
+
+[node name="Window" parent="." unique_id=556547264 instance=ExtResource("3_e11qe")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -2, 0, 0)
+
+[node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=112462846]
+wait_time = 5.0
+autostart = true
+
+[node name="GameTimer" type="Timer" parent="." unique_id=269492319]
+wait_time = 120.0
+one_shot = true
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=668018680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "end_text")]
+script = ExtResource("6_ybsfc")
+profit_label = NodePath("MarginContainer/Scores/Money")
+customer_happiness_label = NodePath("MarginContainer/Scores/Customer")
+interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
+interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
+hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
+game_timer = NodePath("../GameTimer")
+time_left_label = NodePath("MarginContainer/TimeLeft")
+objective = NodePath("MarginContainer/Objective")
+end_text = NodePath("MarginContainer/EndText")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=640900365]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer" unique_id=2131998014]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="UI/MarginContainer/Scores" unique_id=403525660]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "$ 0"
+
+[node name="Customer" type="Label" parent="UI/MarginContainer/Scores" unique_id=335680229]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "🙂 0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1730238945]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=701804651]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1024861649]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_cpnvh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=442954900]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=729920544]
+custom_minimum_size = Vector2(550, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[E] interact"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1891827902]
+custom_minimum_size = Vector2(250, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 50.0
+show_percentage = false
+
+[node name="TimeLeft" type="Label" parent="UI/MarginContainer" unique_id=305352179]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "TIME LEFT: 0"
+
+[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=1978991440]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]OBJECTIVE:[/b]
+
+make $10 while keeping your customer rating above 5"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="EndText" type="RichTextLabel" parent="UI/MarginContainer" unique_id=253287545]
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+horizontal_alignment = 1
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=2041731583]
+process_mode = 3
+script = ExtResource("7_yr38v")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu" unique_id=1787227281]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/MarginContainer" unique_id=1899986407]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=1783602626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3477936, 0, -4.0826244)
+
+[node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1125124981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
+
+[editable path="Player"]

@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://dip3uy51ysart"]
+
+[ext_resource type="Script" uid="uid://bvu7t3irwd4ua" path="res://emails/email_view_day_1_001/custom_email_view_day_1_001.gd" id="1_dbg1a"]
+[ext_resource type="Texture2D" uid="uid://dmkmtcoeeuus1" path="res://emails/email_view_day_1_001/custom_email_view_day_1_001_employee_contract.png" id="2_oxsxw"]
+[ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_oxsxw"]
+[ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_c4gwl"]
+[ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="5_p4awi"]
+[ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="6_v0rsh"]
+[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="7_4ow3p"]
+
+[node name="EmailDataViewDay1_001" type="MarginContainer" unique_id=1659852643 node_paths=PackedStringArray("yes_button", "ok_button")]
+custom_minimum_size = Vector2(916, 0)
+custom_maximum_size = Vector2(916, -1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 502.0
+offset_right = -502.0
+offset_bottom = 787.5105
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dbg1a")
+yes_button = NodePath("TextureRect/YesButton")
+ok_button = NodePath("TextureRect/OkButton")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1916880038]
+layout_mode = 2
+texture = ExtResource("2_oxsxw")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="YesButton" type="TextureButton" parent="TextureRect" unique_id=1683556458]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 1651.0
+offset_right = 428.0
+offset_bottom = 1770.0
+texture_normal = ExtResource("3_oxsxw")
+texture_pressed = ExtResource("4_c4gwl")
+texture_hover = ExtResource("5_p4awi")
+texture_disabled = ExtResource("6_v0rsh")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="YesLabel" type="Label" parent="TextureRect/YesButton" unique_id=931304933]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_4ow3p")
+theme_override_font_sizes/font_size = 50
+text = "Yes"
+horizontal_alignment = 1
+
+[node name="OkButton" type="TextureButton" parent="TextureRect" unique_id=1545120689]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 1651.0
+offset_right = 872.0
+offset_bottom = 1770.0
+texture_normal = ExtResource("3_oxsxw")
+texture_pressed = ExtResource("4_c4gwl")
+texture_hover = ExtResource("5_p4awi")
+texture_disabled = ExtResource("6_v0rsh")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="OkLabel" type="Label" parent="TextureRect/OkButton" unique_id=81127762]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_4ow3p")
+theme_override_font_sizes/font_size = 50
+text = "Ok"
+horizontal_alignment = 1

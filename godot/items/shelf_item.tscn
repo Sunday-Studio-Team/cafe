@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bxnxtc8jiih51"]
+
+[ext_resource type="Script" uid="uid://vced4uv7gts" path="res://items/shelf_item.gd" id="1_iksst"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iksst"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="ShelfItem" type="Area3D" unique_id=279881388 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_iksst")
+sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1365720048]
+pixel_size = 0.005
+billboard = 2
+texture_filter = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1931868334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_iksst")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cr2t2yoape3ak"]
+
+[ext_resource type="Texture2D" uid="uid://sh0cu4gbokbo" path="res://sprites/ingredients_icon..png" id="1_4s4ns"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4s4ns"]
+albedo_color = Color(0.6039216, 0.5411765, 0.50980395, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_431sx"]
+material = SubResource("StandardMaterial3D_4s4ns")
+size = Vector3(0.15, 0.15, 0.15)
+
+[node name="IngredientsBagModel" type="MeshInstance3D" unique_id=2023250318]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_431sx")
+
+[node name="Label" type="Sprite3D" parent="." unique_id=1738799109]
+transform = Transform3D(-1.9670125e-08, -0.2380736, 0.63275146, 0, 0.459919, 0.32753903, -0.45000005, 2.4113184e-08, -1.789702e-08, 0.03778252, 0.0022725537, -0.0008851604)
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_4s4ns")

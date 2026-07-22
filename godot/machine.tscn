@@ -1,0 +1,353 @@
+[gd_scene format=3 uid="uid://cn12vpm4btpmx"]
+
+[ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
+[ext_resource type="Resource" uid="uid://dbjwbruh16sas" path="res://items/tip_jar.tres" id="2_yuuq8"]
+[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="3_wuddj"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
+[ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
+[ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
+[ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
+[ext_resource type="AudioStream" uid="uid://r1glsx5px3xm" path="res://audio/machine_fixed.mp3" id="8_u17ae"]
+[ext_resource type="PackedScene" uid="uid://bh5bdrvebx5nl" path="res://machine_ui.tscn" id="8_yuuq8"]
+[ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
+[ext_resource type="AudioStream" uid="uid://b78v8ja676k6r" path="res://audio/spill_clean.mp3" id="9_42f15"]
+[ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
+[ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
+[ext_resource type="AudioStream" uid="uid://c1mwy70fw26kj" path="res://audio/hammer_hit.mp3" id="12_xurph"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
+transparency = 1
+albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lp1hx"]
+material = SubResource("StandardMaterial3D_lp1hx")
+size = Vector3(1, 1.75, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
+transparency = 1
+albedo_color = Color(1, 0.57254905, 0.57254905, 0.6862745)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1hddr"]
+material = SubResource("StandardMaterial3D_yuuq8")
+size = Vector3(0.15, 0.15, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
+size = Vector3(0.25, 0.5, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vn1tu"]
+size = Vector3(1.5, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ovvye"]
+emission_shape_scale = Vector3(1.5, 1, 0.5)
+emission_shape = 3
+emission_box_extents = Vector3(0.63, 0, 1)
+use_rotation_3d = true
+rotation_3d_min = Vector3(0, 0, 45)
+rotation_3d_max = Vector3(0, 0, 45)
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 9.8, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wuddj"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u17ae"]
+material = SubResource("StandardMaterial3D_wuddj")
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
+size = Vector3(1, 1.75, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_55x7b"]
+viewport_path = NodePath("3DGui/Screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2xdn"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_55x7b")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0ffxp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_j2xdn")
+size = Vector2(0.9, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2xdn"]
+size = Vector3(0.9, 1.2, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
+size = Vector3(0.9, 1.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u17ae"]
+albedo_color = Color(0.50731444, 0.50731444, 0.5073144, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_u17ae")
+top_radius = 0.1
+bottom_radius = 0.12
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xurph"]
+albedo_color = Color(0.50731444, 0.50731444, 0.5073144, 1)
+metallic = 1.0
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_0ffxp"]
+material = SubResource("StandardMaterial3D_xurph")
+radius = 0.1
+height = 0.2
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles", "fixed_sound", "tip_label", "hammer_hit_sound")]
+script = ExtResource("1_6a4ke")
+spot_for_customer = NodePath("SpotForCustomer")
+spot_for_player = NodePath("SpotForPlayer")
+progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator")
+progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/ProgressIndicator/TextureProgressBar")
+timer = NodePath("Timer")
+customer_order_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CustomerOrderIndicator")
+final_order_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MachineOrderIndicator")
+price_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/PriceLabel")
+drink_customer_score_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/DrinkCustomerScoreLabel")
+make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton")
+accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton")
+reject_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RejectButton")
+refill_button = NodePath("RefillButton")
+waiting_approval_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer/WaitingApprovalIndicator")
+fix_machine_button = NodePath("FixMachineButton")
+breakdown_timer = NodePath("BreakdownTimer")
+breakdown_sound = NodePath("BreakdownSound")
+no_ingredients_sound = NodePath("NoIngredientsSound")
+ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsMeter/ProgressBar")
+ing_too_low_label = NodePath("IngTooLow")
+tip_jar_item = ExtResource("2_yuuq8")
+spill_interactable = NodePath("Spill")
+spill_sound = NodePath("SpillSound")
+static_body = NodePath("StaticBody3D")
+spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/SpillWarning/Label")
+manual_progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton/ProgressBar")
+gui_3d = NodePath("3DGui")
+customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer")
+customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TextureProgressBar")
+no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
+time_bonus_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel")
+time_bonus_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel/TimeBonusText")
+order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown")
+ordered_main_ingredient_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown/Main/TextureRect")
+ordered_liquid_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown/Liquid/TextureRect")
+ordered_extra_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderBreakdown/Extra/TextureRect")
+made_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown")
+made_main_ingredient_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Main")
+made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Liquid")
+made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/MadeBreakdown/Extra")
+hum_sound = NodePath("HumSound")
+done_sound = NodePath("DoneSound")
+spill_clean_sound = NodePath("SpillCleanSound")
+spill_clean_particles = NodePath("SpillCleanParticles")
+fixed_sound = NodePath("FixedSound")
+tip_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/TipLabel")
+hammer_item = ExtResource("3_wuddj")
+hammer_hit_sound = NodePath("HammerHitSound")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
+mesh = SubResource("BoxMesh_lp1hx")
+
+[node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+
+[node name="SpotForPlayer" type="Marker3D" parent="." unique_id=225603677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+
+[node name="Timer" type="Timer" parent="." unique_id=1788318326]
+wait_time = 10.0
+one_shot = true
+
+[node name="BreakdownTimer" type="Timer" parent="." unique_id=644498863]
+one_shot = true
+
+[node name="IngTooLow" type="Label3D" parent="." unique_id=1911355806]
+transform = Transform3D(0.62520164, -0.78046316, 0, 0.78046316, 0.62520164, 0, 0, 0, 1, 1.1170099, 1.5826433, 0.65213495)
+modulate = Color(1, 0.44705883, 0.44705883, 1)
+text = "❗️out of ingredients
+<- please refill!"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="IngTooLow" unique_id=118984038]
+transform = Transform3D(0.6162804, -3.4423895e-08, 0.78752685, -0.78752685, -2.6938462e-08, 0.6162804, -5.930551e-15, -1, -4.371139e-08, -0.7936927, -0.09933591, 0.026648521)
+light_color = Color(0.9411765, 0.5058824, 0.5058824, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="FixMachineButton" type="Area3D" parent="." unique_id=885014159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
+visible = false
+collision_layer = 2
+script = ExtResource("5_ioi8x")
+display_name = "fix machine"
+time_to_hold = 1.0
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
+transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+modulate = Color(1, 0.6, 0.12156863, 1)
+text = "BROKEN DOWN"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
+shape = SubResource("BoxShape3D_1hddr")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton" unique_id=1631380149]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="RefillButton" type="Area3D" parent="." unique_id=644204256 node_paths=PackedStringArray("mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.9077126, 0.69125086)
+script = ExtResource("5_ioi8x")
+display_name = "[color=pink]refill ingredients"
+mesh = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RefillButton" unique_id=1086695979]
+mesh = SubResource("BoxMesh_1hddr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RefillButton" unique_id=1205924170]
+shape = SubResource("BoxShape3D_loq51")
+
+[node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
+stream = ExtResource("6_llj37")
+volume_db = -5.0
+max_db = 0.0
+
+[node name="NoIngredientsSound" type="AudioStreamPlayer3D" parent="." unique_id=689608729]
+stream = ExtResource("7_6qesk")
+volume_db = -5.0
+
+[node name="HumSound" type="AudioStreamPlayer3D" parent="." unique_id=402048072]
+stream = ExtResource("6_5f3ny")
+unit_size = 1.0
+max_db = 0.0
+
+[node name="DoneSound" type="AudioStreamPlayer3D" parent="." unique_id=400444992]
+stream = ExtResource("10_5f3ny")
+volume_db = -5.0
+
+[node name="FixedSound" type="AudioStreamPlayer3D" parent="." unique_id=2147316297]
+stream = ExtResource("8_u17ae")
+
+[node name="Spill" type="Area3D" parent="." unique_id=1225300652]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+visible = false
+script = ExtResource("5_ioi8x")
+display_name = "clean up spill"
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="Sprite3D" type="Sprite3D" parent="Spill" unique_id=667352050]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+pixel_size = 0.001
+texture = ExtResource("9_1hddr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spill" unique_id=2013507775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041475177, 0.569979, -0.1422759)
+shape = SubResource("BoxShape3D_vn1tu")
+
+[node name="SpillCleanParticles" type="GPUParticles3D" parent="." unique_id=1791871194]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.5)
+emitting = false
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ovvye")
+draw_pass_1 = SubResource("PlaneMesh_u17ae")
+
+[node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
+stream = ExtResource("7_6qesk")
+pitch_scale = 2.0
+
+[node name="SpillCleanSound" type="AudioStreamPlayer3D" parent="." unique_id=750243636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+stream = ExtResource("9_42f15")
+
+[node name="HammerHitSound" type="AudioStreamPlayer" parent="." unique_id=471638354]
+stream = ExtResource("12_xurph")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=460997142]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1941494849]
+shape = SubResource("BoxShape3D_0ffxp")
+
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.06)
+script = ExtResource("10_0d1aa")
+interactable = NodePath("Interactable")
+node_viewport = NodePath("Screen/SubViewport")
+node_quad = NodePath("Screen")
+node_area = NodePath("Area3D")
+cam_spot = NodePath("CameraSpot")
+
+[node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
+mesh = SubResource("QuadMesh_0ffxp")
+
+[node name="SubViewport" type="SubViewport" parent="3DGui/Screen" unique_id=1837069961]
+size = Vector2i(600, 800)
+
+[node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
+
+[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
+handle_input_locally = false
+size = Vector2i(180, 135)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+fov = 140.0
+
+[node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
+light_energy = 1.95
+area_range = 0.292
+area_size = Vector2(0.795609, 1.06196)
+
+[node name="Area3D" type="Area3D" parent="3DGui" unique_id=128585634]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Area3D" unique_id=805871503]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
+shape = SubResource("BoxShape3D_j2xdn")
+
+[node name="Interactable" type="Area3D" parent="3DGui" unique_id=1501552722 node_paths=PackedStringArray("mesh")]
+script = ExtResource("5_ioi8x")
+display_name = "use machine"
+mesh = NodePath("../Screen")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
+shape = SubResource("BoxShape3D_yuuq8")
+
+[node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
+
+[node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
+
+[node name="IngedientsCanister" type="Node3D" parent="." unique_id=1872344733]
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="IngedientsCanister" unique_id=1647255840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, 0.7)
+mesh = SubResource("CylinderMesh_0ffxp")
+
+[node name="Cap" type="MeshInstance3D" parent="IngedientsCanister" unique_id=882612463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.90000004, 0.70000005)
+mesh = SubResource("SphereMesh_0ffxp")
+
+[node name="CoffeeIcon" type="Label3D" parent="IngedientsCanister" unique_id=357984642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.7077126, 0.8152923)
+visible = false
+text = "☕️"
+
+[editable path="3DGui/Screen/SubViewport/MachineUI"]

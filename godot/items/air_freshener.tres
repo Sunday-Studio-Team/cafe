@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://wcmqw2vunn6e"]
+
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_gooww"]
+[ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="1_vofp5"]
+
+[resource]
+script = ExtResource("1_gooww")
+name = "air freshener"
+description = "makes customers more patient"
+icon = ExtResource("1_vofp5")
+stat_bonuses = Dictionary[String, float]({
+"customer_wait_time_machine": 6.0,
+"customer_wait_time_window": 5.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

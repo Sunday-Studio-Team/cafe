@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bsobghkg5y0nh"]
+
+[ext_resource type="Script" uid="uid://c5twwj8ykhohp" path="res://autoloads/global.gd" id="1_6q3x5"]
+[ext_resource type="Shader" uid="uid://dwfpcipt6bw3y" path="res://shaders/hoveroutline.gdshader" id="2_qxp0b"]
+[ext_resource type="Resource" uid="uid://be8e3uu5i5qsb" path="res://drinks/debug drinks/full_incorrect_drink.tres" id="3_2wtbm"]
+[ext_resource type="Texture2D" uid="uid://b5u5pk4pmxhhc" path="res://sprites/stars/star.png" id="4_rx4vo"]
+[ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="5_hx7jl"]
+[ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="6_4y2jn"]
+[ext_resource type="Texture2D" uid="uid://u061xia2klda" path="res://sprites/mop_cursor.png" id="7_nkame"]
+[ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="7_oys0l"]
+[ext_resource type="Texture2D" uid="uid://n4oreq7gv7mh" path="res://sprites/ingredient_icons/black tea.png" id="8_x2nk7"]
+[ext_resource type="Texture2D" uid="uid://yvvk5750mo8b" path="res://sprites/ingredient_icons/chai.png" id="9_jmbcq"]
+[ext_resource type="Texture2D" uid="uid://djasw8q00grs7" path="res://sprites/ingredient_icons/water.png" id="10_nkame"]
+[ext_resource type="Texture2D" uid="uid://dars6l4l6w3cg" path="res://sprites/ingredient_icons/milk.png" id="11_lt8ol"]
+[ext_resource type="Texture2D" uid="uid://sq8k5eurmf01" path="res://sprites/ingredient_icons/sugar.png" id="12_x2nk7"]
+[ext_resource type="Texture2D" uid="uid://jcak6ksq2m0k" path="res://sprites/ingredient_icons/ice.png" id="13_jmbcq"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="15_do865"]
+[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="16_qy21g"]
+[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="17_aqy5m"]
+[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="18_oscrk"]
+
+[node name="Global" type="Node" unique_id=668412834]
+process_mode = 3
+script = ExtResource("1_6q3x5")
+drinks_folder_path = "res://drinks"
+items_folder_path = "res://items"
+customer_sprites_folder_path = "res://sprites/customers"
+spill_sprites_path = "res://sprites/stains"
+hover_shader = ExtResource("2_qxp0b")
+full_wrong_drink = ExtResource("3_2wtbm")
+star_texture = ExtResource("4_rx4vo")
+half_star_texture = ExtResource("5_hx7jl")
+empty_star_texture = ExtResource("6_4y2jn")
+mop_cursor_texture = ExtResource("7_nkame")
+main_ingredient_icons = Dictionary[int, Texture2D]({
+2: ExtResource("7_oys0l"),
+3: ExtResource("8_x2nk7"),
+4: ExtResource("9_jmbcq")
+})
+liquid_icons = Dictionary[int, Texture2D]({
+2: ExtResource("10_nkame"),
+3: ExtResource("11_lt8ol")
+})
+extra_icons = Dictionary[int, Texture2D]({
+2: ExtResource("12_x2nk7"),
+3: ExtResource("13_jmbcq")
+})
+emails_schedule = Array[ExtResource("15_do865")]([ExtResource("16_qy21g"), ExtResource("17_aqy5m"), ExtResource("18_oscrk")])

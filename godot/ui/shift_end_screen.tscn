@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://c1vvwndvemdbo"]
+
+[ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/shift_end_screen.gd" id="1_cwskb"]
+[ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
+[ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
+[ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
+[ext_resource type="AudioStream" uid="uid://cww7w5j41tgbm" path="res://audio/time_up.wav" id="5_iiu1j"]
+[ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
+[ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
+
+[sub_resource type="Theme" id="Theme_70k24"]
+default_font_size = 128
+
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total", "bank_gain_sound", "pencil_scribble", "rating_stars_hbox", "rating_breakdown", "button", "stars_sound")]
+process_mode = 3
+script = ExtResource("1_cwskb")
+background = NodePath("Background")
+times_up = NodePath("MarginContainer/TimesUp")
+outcome = NodePath("MarginContainer/VBoxContainer/Outcome")
+time_up_sound = NodePath("TimeUpSound")
+win_shift_sound = NodePath("WinShiftSound")
+lose_shift_sound = NodePath("LoseShiftSound")
+money_calculation_screen = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen")
+profit = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
+boss_cut = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/BossCut")
+banked_today = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Banked")
+bank_total = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/BankTotal")
+bank_gain_sound = NodePath("BankGainSound")
+pencil_scribble = NodePath("PencilScribbleSound")
+rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Stars")
+rating_breakdown = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating")
+button = NodePath("MarginContainer/VBoxContainer/Button")
+stars_sound = NodePath("StarsSound")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1075982474]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_70k24")
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="TimesUp" type="RichTextLabel" parent="MarginContainer" unique_id=1255215483]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 256
+bbcode_enabled = true
+text = "[b]TIME'S
+UP! ⌛️"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1545259444]
+layout_mode = 2
+
+[node name="Outcome" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1334439900]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1930785200]
+layout_mode = 2
+
+[node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=475181285]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
+custom_maximum_size = Vector2(1000, 100)
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]money"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Profit" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1865208455]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[color=green]+[/color] money made today: $30.75"
+fit_content = true
+autowrap_mode = 0
+
+[node name="BossCut" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1475557562]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[color=red]-[/color] boss's cut: $20"
+fit_content = true
+
+[node name="Banked" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=2144848338]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "= [color=gold]$10[/color] banked"
+fit_content = true
+
+[node name="BankTotal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1779244370]
+visible = false
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+text = "🏦 Bank total: [color=gold]$10[/color]"
+fit_content = true
+vertical_alignment = 1
+
+[node name="Rating" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1855303608]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1751468109]
+custom_maximum_size = Vector2(1000, 100)
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]rating"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Stars" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=20645354]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2091535216]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "continue"
+
+[node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
+stream = ExtResource("2_g6pkj")
+volume_db = -10.0
+
+[node name="LoseShiftSound" type="AudioStreamPlayer" parent="." unique_id=18379381]
+stream = ExtResource("3_iiu1j")
+volume_db = -5.0
+
+[node name="BankGainSound" type="AudioStreamPlayer" parent="." unique_id=78238649]
+stream = ExtResource("4_g6pkj")
+
+[node name="TimeUpSound" type="AudioStreamPlayer" parent="." unique_id=621257515]
+stream = ExtResource("5_iiu1j")
+
+[node name="PencilScribbleSound" type="AudioStreamPlayer" parent="." unique_id=911022996]
+stream = ExtResource("6_13087")
+volume_db = -5.0
+
+[node name="StarsSound" type="AudioStreamPlayer" parent="." unique_id=1833295684]
+stream = ExtResource("7_xu4ny")
+volume_db = -5.0

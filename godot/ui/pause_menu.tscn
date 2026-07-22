@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://dltayqwtj31d1"]
+
+[ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://ui/pause_menu.gd" id="1_hdmo1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
+bg_color = Color(0.74428886, 0.5576893, 0.38271093, 1)
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50142"]
+bg_color = Color(0.74509805, 0.44705883, 0.38431373, 1)
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "restart_button", "quit_button", "sure_menu", "sure_panel", "yes_sure_button", "no_sure_button", "sure_info_label")]
+process_mode = 3
+script = ExtResource("1_hdmo1")
+_continue_button = NodePath("MarginContainer/VBoxContainer/Continue")
+_tutorial_button = NodePath("MarginContainer/VBoxContainer/ShowTutorial")
+restart_button = NodePath("MarginContainer/VBoxContainer/Restart")
+quit_button = NodePath("MarginContainer/VBoxContainer/Quit")
+sure_menu = NodePath("MarginContainer/Sure")
+sure_panel = NodePath("MarginContainer/Sure/PanelContainer")
+yes_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/YesButton")
+no_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/NoButton")
+sure_info_label = NodePath("MarginContainer/Sure/PanelContainer/Info/PanelContainer/Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1315358308]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Background" type="ColorRect" parent="MarginContainer" unique_id=1977648160]
+layout_mode = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1644511243]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PausedText" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=475797831]
+custom_maximum_size = Vector2(1000, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+text = "[b]PAUSED"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer" unique_id=563093019]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "Continue"
+
+[node name="ShowTutorial" type="Button" parent="MarginContainer/VBoxContainer" unique_id=26743770]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "Open Tutorial"
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=923217522]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "restart"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=167199433]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "quit"
+
+[node name="Sure" type="MarginContainer" parent="MarginContainer" unique_id=586124836]
+layout_mode = 2
+
+[node name="Background" type="ColorRect" parent="MarginContainer/Sure" unique_id=707749891]
+layout_mode = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Sure" unique_id=994863316]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = 0.017453292
+offset_transform_visual_only = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjix0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Sure/PanelContainer" unique_id=117390067]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="SureText" type="Label" parent="MarginContainer/Sure/PanelContainer/VBoxContainer" unique_id=1980083673]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/Sure/PanelContainer/VBoxContainer" unique_id=1008877382]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="YesButton" type="Button" parent="MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons" unique_id=39382377]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "yes"
+
+[node name="NoButton" type="Button" parent="MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons" unique_id=1401959578]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "no"
+
+[node name="Info" type="Control" parent="MarginContainer/Sure/PanelContainer" unique_id=812354334]
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Sure/PanelContainer/Info" unique_id=194752003]
+layout_mode = 0
+offset_top = 82.0
+offset_right = 483.0
+offset_bottom = 127.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.25, -3)
+offset_transform_rotation = 0.034906585
+offset_transform_visual_only = false
+theme_override_styles/panel = SubResource("StyleBoxFlat_50142")
+
+[node name="Label" type="Label" parent="MarginContainer/Sure/PanelContainer/Info/PanelContainer" unique_id=401475287]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.992644, 0.9491355, 0.89883375, 1)
+theme_override_font_sizes/font_size = 32
+text = "(this means going back to day 1!)"

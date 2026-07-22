@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://ck5m4eetjuovd"]
+
+[ext_resource type="Script" uid="uid://2730a8i8k0vn" path="res://ui/tablet/tablet_machine_ui.gd" id="1_n3ai3"]
+[ext_resource type="Texture2D" uid="uid://dk17utr3s8vur" path="res://sprites/machine_icon.png" id="2_15k3r"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="2_eysya"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="3_15k3r"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="4_hq0he"]
+[ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="6_15k3r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vn1tu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
+bg_color = Color(0.75964916, 0, 0.18975684, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 5
+
+[node name="TabletMachineUI" type="MarginContainer" unique_id=1037558298 node_paths=PackedStringArray("timer_ui", "broken_down_text", "ready_text", "price_label", "rating_label", "spill", "ingredients", "customer_wait_indicator", "customer_wait_bar")]
+custom_minimum_size = Vector2(120, 135)
+custom_maximum_size = Vector2(120, 135)
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 910.0
+offset_top = 490.0
+offset_right = -910.0
+offset_bottom = -490.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_n3ai3")
+timer_ui = NodePath("Timer")
+broken_down_text = NodePath("BrokenDown")
+ready_text = NodePath("ReadyPanel/Ready")
+price_label = NodePath("BottomPanel/HBoxContainer/PriceLabel")
+rating_label = NodePath("BottomPanel/HBoxContainer/RatingLabel")
+spill = NodePath("Spill")
+ingredients = NodePath("Ingredients")
+customer_wait_indicator = NodePath("CustomerTimer")
+customer_wait_bar = NodePath("CustomerTimer/Timer")
+
+[node name="MachineIcon" type="TextureRect" parent="." unique_id=1369286764]
+texture_filter = 1
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.25, 1.25)
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("2_15k3r")
+
+[node name="Spill" type="PanelContainer" parent="." unique_id=1814263986]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, -25)
+offset_transform_scale = Vector2(1.5, 1.5)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vn1tu")
+
+[node name="TextureRect" type="TextureRect" parent="Spill" unique_id=795127076]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("6_15k3r")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Spill" unique_id=267572252]
+layout_mode = 2
+text = "⚠️"
+horizontal_alignment = 1
+
+[node name="Ingredients" type="PanelContainer" parent="." unique_id=1599337843]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -25)
+offset_transform_scale = Vector2(1.25, 1.25)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
+
+[node name="Label" type="Label" parent="Ingredients" unique_id=812558617]
+layout_mode = 2
+text = "🫘"
+
+[node name="BottomPanel" type="PanelContainer" parent="." unique_id=1622307031]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel" unique_id=2001457531]
+layout_mode = 2
+
+[node name="PriceLabel" type="Label" parent="BottomPanel/HBoxContainer" unique_id=1004174759]
+modulate = Color(0.34237343, 1, 0.34237343, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+text = "+ 4.50$"
+vertical_alignment = 2
+
+[node name="RatingLabel" type="Label" parent="BottomPanel/HBoxContainer" unique_id=917201964]
+modulate = Color(0.34237343, 1, 0.34237343, 1)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+text = "+ 1.5⭐️🙂"
+vertical_alignment = 2
+
+[node name="ReadyPanel" type="PanelContainer" parent="." unique_id=220626538]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Ready" type="Label" parent="ReadyPanel" unique_id=867719552]
+layout_mode = 2
+size_flags_vertical = 0
+text = "READY FOR
+APPROVAL"
+horizontal_alignment = 1
+
+[node name="CustomerTimer" type="PanelContainer" parent="." unique_id=305476971]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.215, -0.95)
+
+[node name="Timer" type="TextureProgressBar" parent="CustomerTimer" unique_id=2030999359]
+texture_filter = 1
+custom_maximum_size = Vector2(25, 25)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.15, 0.15)
+offset_transform_pivot_ratio = Vector2(0, 0)
+fill_mode = 4
+texture_under = ExtResource("2_eysya")
+texture_over = ExtResource("3_15k3r")
+texture_progress = ExtResource("4_hq0he")
+
+[node name="Label" type="Label" parent="CustomerTimer" unique_id=286900962]
+layout_mode = 2
+text = "⌛"
+horizontal_alignment = 1
+
+[node name="Timer" type="TextureProgressBar" parent="." unique_id=1593234249]
+visible = false
+texture_filter = 1
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.2, 0.2)
+offset_transform_pivot_ratio = Vector2(0.2, 0.85)
+fill_mode = 4
+texture_under = ExtResource("2_eysya")
+texture_over = ExtResource("3_15k3r")
+texture_progress = ExtResource("4_hq0he")
+
+[node name="BrokenDown" type="Label" parent="." unique_id=2059861179]
+visible = false
+modulate = Color(0.93267196, 0.6454541, 0.24098766, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_rotation = -0.17453292
+theme_override_font_sizes/font_size = 24
+text = "BROKEN
+DOWN"
+horizontal_alignment = 1

@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://bgyc1mnye0hph"]
+
+[ext_resource type="PackedScene" uid="uid://cqa614p1f0ccb" path="res://ui/pc/pc_app.tscn" id="1_swvwp"]
+[ext_resource type="Script" uid="uid://nbfwdp3xcbh3" path="res://ui/pc/shop_app.gd" id="2_c06av"]
+[ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="3_mamje"]
+[ext_resource type="AudioStream" uid="uid://7lrf1ronpj3e" path="res://audio/cant_buy_item.wav" id="4_488el"]
+[ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="4_jf33y"]
+[ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf33y"]
+bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button", "shelf_full_warning") instance=ExtResource("1_swvwp")]
+script = ExtResource("2_c06av")
+items_container = NodePath("MarginContainer/VBoxContainer/Items")
+item_button_scene = ExtResource("3_mamje")
+bank_balance = NodePath("MarginContainer/Bank")
+cant_buy_sound = NodePath("CantBuySound")
+bought_sound = NodePath("BoughtItemSound")
+reroll_sound = NodePath("ReRollSound")
+cant_reroll_sound = NodePath("CantReRollSound")
+reroll_button = NodePath("MarginContainer/VBoxContainer/ReRoll")
+shelf_full_warning = NodePath("MarginContainer/ShelfFullWarning")
+
+[node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jf33y")
+text = "today's deals:"
+horizontal_alignment = 1
+
+[node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="2" unique_id=982291301]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="ReRoll" type="Button" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="3" unique_id=1225747767]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+text = "re-roll"
+
+[node name="Bank" type="RichTextLabel" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=385636938]
+custom_minimum_size = Vector2(1000, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+bbcode_enabled = true
+text = "money in bank: $10"
+horizontal_alignment = 2
+
+[node name="ShelfFullWarning" type="PanelContainer" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="3" unique_id=1986553584]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = 0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_jf33y")
+
+[node name="Label" type="Label" parent="MarginContainer/ShelfFullWarning" index="0" unique_id=1148976534]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 128
+text = "ITEM SHELF FULL !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CantBuySound" type="AudioStreamPlayer" parent="." index="1" unique_id=2005999671]
+stream = ExtResource("4_488el")
+volume_db = 5.0
+
+[node name="BoughtItemSound" type="AudioStreamPlayer" parent="." index="2" unique_id=456237441]
+stream = ExtResource("5_mngmr")
+
+[node name="ReRollSound" type="AudioStreamPlayer" parent="." index="3" unique_id=1962905130]
+stream = ExtResource("5_mngmr")
+pitch_scale = 0.5
+
+[node name="CantReRollSound" type="AudioStreamPlayer" parent="." index="4" unique_id=1111751407]
+stream = ExtResource("4_488el")
+pitch_scale = 0.5

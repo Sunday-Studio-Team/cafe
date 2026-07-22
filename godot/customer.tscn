@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dp7t0dh80ct1r"]
+
+[ext_resource type="Script" uid="uid://cvo47hwaumo88" path="res://customer.gd" id="1_7tiyv"]
+[ext_resource type="Texture2D" uid="uid://bn8ip007ur456" path="res://sprites/customers/npc7.png" id="2_gn8fi"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="3_gn8fi"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="4_eas7q"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_0rcyg"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
+viewport_path = NodePath("WaitingIndicator/SubViewport")
+
+[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label")]
+script = ExtResource("1_7tiyv")
+body = NodePath("Sprite3D")
+waiting_indicator = NodePath("WaitingIndicator")
+waiting_bar = NodePath("WaitingIndicator/SubViewport/TextureProgressBar")
+timer = NodePath("Timer")
+time_bonus_label = NodePath("TimeBonusLabel")
+sprites_folder = "res://sprites/customers"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0.925, 0)
+billboard = 2
+texture = ExtResource("2_gn8fi")
+
+[node name="WaitingIndicator" type="Sprite3D" parent="." unique_id=756198707]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.09615041, 1.9518676, 0)
+visible = false
+pixel_size = 0.005
+billboard = 2
+texture = SubResource("ViewportTexture_frhio")
+
+[node name="SubViewport" type="SubViewport" parent="WaitingIndicator" unique_id=900939674]
+transparent_bg = true
+size = Vector2i(160, 160)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="WaitingIndicator/SubViewport" unique_id=507241024]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("3_gn8fi")
+texture_over = ExtResource("4_eas7q")
+texture_progress = ExtResource("5_0rcyg")
+
+[node name="Label" type="Label3D" parent="WaitingIndicator" unique_id=511551452]
+sorting_offset = 1.0
+pixel_size = 0.01
+billboard = 2
+text = "⌛"
+
+[node name="Timer" type="Timer" parent="." unique_id=493127331]
+one_shot = true
+
+[node name="TimeBonusLabel" type="Label3D" parent="." unique_id=1602389944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16839987, 2.2842515, 0)
+billboard = 2
