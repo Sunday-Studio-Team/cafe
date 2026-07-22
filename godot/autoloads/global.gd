@@ -20,6 +20,7 @@ extends Node
 
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
+
 var player: Player
 var hovered_interactable: Interactable:
 	get():

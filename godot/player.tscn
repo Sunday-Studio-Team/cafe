@@ -37,6 +37,8 @@ collide_with_areas = true
 
 [node name="IngredientsBag" parent="CameraRig/Camera3D" unique_id=2023250318 instance=ExtResource("2_onrkg")]
 transform = Transform3D(-0.639973, -0.14845599, -0.7539203, 1.3317077e-08, 0.9811593, -0.1932021, 0.7683976, -0.12364409, -0.62791526, 0.36360922, -0.1206491, -0.423)
+cast_shadow = 0
+
 
 [node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraRig/Camera3D/IngredientsBag" unique_id=1902215747]
 transform = Transform3D(-0.63997275, 7.4505753e-09, 0.7683974, -0.14845592, 0.9811587, -0.12364404, -0.75391996, -0.19320197, -0.62791497, 0, 0, 0)

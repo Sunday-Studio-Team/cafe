@@ -28,9 +28,10 @@ func add_customer(customer: Customer) -> void:
 	else:
 		pass
 		
+
 	Events.alert_posted.emit("🛎️ customer complained")
 	Global.score_update_message = "customer complained"
-		
+	
 	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(func(): remove_front_customer(false))

@@ -30,9 +30,9 @@ extends Node3D
 @export var clock_item_start_sound: AudioStreamPlayer
 @export var interaction_popup: CanvasLayer
 @export var breakdown_popup: CanvasLayer
-
 static var seen_interaction_popup := false
 static var seen_breakdown_popup := false
+
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
