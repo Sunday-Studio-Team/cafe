@@ -138,6 +138,8 @@ func shake_panel() -> void:
 
 
 func _start_minigame() -> void:
+	Global.making_drink_manually = true
+	
 	current_game_state = GameStates.MAIN
 	set_instructions(main_text)
 	
@@ -150,7 +152,7 @@ func _start_minigame() -> void:
 
 
 func _end_minigame() -> void:
-	print("End drink minigame 2")
+	Global.making_drink_manually = false
 	Events.minigame_end.emit()
 
 

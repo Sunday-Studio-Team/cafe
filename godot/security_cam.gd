@@ -43,7 +43,7 @@ func _physics_process(_delta: float) -> void:
 				timer.start()
 				Global.score_update_message = "caught running"
 				Global.employee_rating -= Stats.current.penalty_for_running
-			elif Global.holding_make_drink_button:
+			elif Global.making_drink_manually:
 				timer.start()
 				Global.score_update_message = "caught making drink by hand"
 				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
