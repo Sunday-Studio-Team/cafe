@@ -5,6 +5,7 @@ extends Area3D
 # and modifying _on_interacted(), or by connecting this signal to a function
 # in another script
 signal interacted
+signal interactable_active_item(item: Item) #Uses an item on the interactable
 
 ## the name that will show in UI for this interactable
 @export var display_name: String
@@ -45,16 +46,20 @@ func _init() -> void:
 
 func _process(delta: float) -> void:
 	_update_material()
-	
+
 	if (
-		Global.hovered_interactable != self
-		or not enabled
-		or Global.in_pc_ui
-		or Global.minigame_active
+			Global.hovered_interactable != self
+			or not enabled
+			or Global.in_pc_ui
+			or Global.minigame_active
 	):
 		if not keep_progress_on_interrupt:
 			time_held = 0
 		return
+
+	#Uses a set active item
+	if Input.is_action_just_pressed("use_item"):
+		interactable_active_item.emit(Global.equipped_item) #Sends out the current active item
 
 	# One time press
 	if Input.is_action_just_pressed("interact") and not hold_to_interact:
@@ -75,16 +80,17 @@ func _on_interacted() -> void:
 	await get_tree().process_frame
 	Global.hovered_interactable = null
 
+
 func _update_material() -> void:
-	if (Global.hovered_interactable != self
-		or not enabled
-		or Global.in_pc_ui
-		or Global.minigame_active
+	if (
+			Global.hovered_interactable != self
+			or not enabled
+			or Global.in_pc_ui
+			or Global.minigame_active
 	):
 		if mesh:
 			mesh.material_overlay = null
 		return
-
 
 	if mesh:
 		mesh.material_overlay = ShaderMaterial.new()

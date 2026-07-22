@@ -8,6 +8,7 @@ extends PCApp
 @export var reroll_sound: AudioStreamPlayer
 @export var cant_reroll_sound: AudioStreamPlayer
 @export var reroll_button: Button
+@export var shelf_full_warning: Control
 
 var number_of_items_to_show := 3
 var items_in_shop: Array[Item]
@@ -22,6 +23,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	super(_delta)
+
 	bank_balance.text = "🏦 bank balance: [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
 
 
@@ -35,9 +38,9 @@ func populate_items() -> void:
 	var valid_item := true
 	for slot in number_of_items_to_show:
 		while (
-			random_item == null
-			or items_in_shop.has(random_item)
-			or Global.owned_items.has(random_item)
+				random_item == null
+				or items_in_shop.has(random_item)
+				or Global.owned_items.has(random_item)
 		):
 			random_item = Global.items.pick_random()
 			loops += 1
@@ -76,5 +79,10 @@ func _on_item_button_clicked(bought: bool) -> void:
 		bought_sound.play()
 		reroll_button.hide()
 	else:
-		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
 		cant_buy_sound.play()
+		if Global.owned_items.size() < Global.item_slots_amount:
+			create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
+		else:
+			shelf_full_warning.show()
+			await get_tree().create_timer(0.5, false).timeout
+			shelf_full_warning.hide()

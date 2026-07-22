@@ -44,6 +44,12 @@ extends Node3D
 @export var made_extra_panel: OrderBreakdownElement
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
+@export var spill_clean_sound: AudioStreamPlayer3D
+@export var spill_clean_particles: GPUParticles3D
+@export var fixed_sound: AudioStreamPlayer3D
+@export var tip_label: Label
+@export var hammer_item: Item
+@export var hammer_hit_sound: AudioStreamPlayer
 
 var customer: Customer
 var order: OrderData
@@ -104,6 +110,14 @@ func _ready() -> void:
 	customer_order_indicator.hide()
 	order_breakdown.hide()
 	final_order_indicator.hide()
+
+	# glowing fx on spill warning
+	var t := create_tween().set_loops()
+	t.tween_property(spill_warning, "modulate", Color.GOLD, 1)
+	t.tween_property(spill_warning, "modulate", Color.RED, 1)
+
+	#Active Items
+	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
 
 
 func _physics_process(_delta: float) -> void:
@@ -279,9 +293,10 @@ func machine_make_drink() -> void:
 	display_drink_score()
 
 	# TODO: move hardcoded tip chance here somewhere else
+	tip_label.text = ""
 	if tip_jar_item in Global.owned_items and randf() < 0.25:
 		order.tip = randf_range(0.25, 1)
-		price_label.text += " (+ %s tip)" % Global.float_to_price(order.tip)
+		tip_label.text = "(+ %s TIP)" % Global.float_to_price(order.tip)
 
 	if (
 			randf() < Stats.current.machine_chance_of_spill
@@ -335,8 +350,23 @@ func display_drink_score() -> void:
 		final_order_indicator.modulate = Color.RED
 
 
-func fix_machine() -> void:
+func fix_machine(hammer: bool = false) -> void:
+	if hammer:
+		hammer_hit_sound.play()
+		Global.equipped_item = null
+	fixed_sound.play()
+
+	fix_machine_button.enabled = false
+	var t := create_tween().tween_property(
+		fix_machine_button,
+		"scale",
+		Vector3.ZERO,
+		0.25,
+	)
+	await t.finished
+	fix_machine_button.enabled = true
 	fix_machine_button.hide()
+	fix_machine_button.scale = Vector3.ONE
 	broken_down = false
 	timer.paused = false
 	gui_3d.interactable.enabled = true
@@ -366,6 +396,8 @@ func clean_up_spill() -> void:
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 	spill_interactable.hide()
 	spill_on_floor = false
+	spill_clean_sound.play()
+	spill_clean_particles.restart()
 
 
 func refill() -> void:
@@ -492,6 +524,19 @@ func break_down() -> void:
 	timer.paused = true
 	broken_down = true
 	hum_sound.stop()
+
+
+#Active Item
+#If item used, checks if it's valid and does the specified action
+func on_active_item_used_machine(item: Item):
+	if item == null:
+		return
+
+	if item == hammer_item:
+		Events.play_viewmodel_animation.emit("hammer_use")
+		Global.deactivate_active_item(item)
+		await Events.hammer_animation_hit
+		fix_machine(true)
 
 
 func _on_clean_spill() -> void:

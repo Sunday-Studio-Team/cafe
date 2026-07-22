@@ -27,4 +27,5 @@ cost_to_reroll,\
 max_spills_per_shift,\
 max_breakdowns_per_shift,\
 clean_spill_allowed_remaining,\
+extra_time_from_overtime_form_item,\
 "

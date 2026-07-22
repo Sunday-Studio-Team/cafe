@@ -25,31 +25,27 @@ func _ready() -> void:
 	pressed.connect(
 		func():
 			if Global.bank_money >= item.price:
-				clicked.emit(true)
-				apply_stats()
-				Global.bank_money -= item.price
-				Global.owned_items.append(item)
-				Events.items_updated.emit()
-				queue_free()
+				if Global.owned_items.size() < Global.item_slots_amount:
+					clicked.emit(true)
+					item.apply_stats()
+					Global.bank_money -= item.price
+					Global.owned_items.append(item)
+					Events.items_updated.emit()
+					queue_free()
+				else:
+					clicked.emit(false)
 			else:
 				clicked.emit(false)
 	)
 
 
-func apply_stats():
-	if item.stat_bonuses.is_empty():
-		push_warning("%s has no stat bonuses, not applying stats" % item.name)
-	for stat in item.stat_bonuses:
-		var current_stat = Stats.current.get(stat)
-		if current_stat == null:
-			push_error("%s is trying to give a bonus to '%s' but that stat does not exist" % [item.name, stat])
-		Stats.current.set(stat, current_stat + item.stat_bonuses[stat])
-	for rule in item.rules:
-		Global.set(rule, item.rules[rule])
-
-
 func _on_clicked(bought: bool) -> void:
 	if bought:
+		#TODO REMOVE AND CHANGE
+		if item.is_active_item:
+			#Global.equipped_item = item
+			Global.equip_item(item)
+			print("Equipped: ", Global.equipped_item)
 		pass
 	else:
 		create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)

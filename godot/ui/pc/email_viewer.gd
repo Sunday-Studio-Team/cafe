@@ -47,7 +47,7 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 		custom_email_view_container.add_child(active_custom_email_view)
 		active_custom_email_view.finished_important.connect(_on_active_custom_email_view_finished_important)
 		active_custom_email_view.finished_spam.connect(_on_active_custom_email_view_finish_spam)
-		
+
 func _on_active_custom_email_view_finished_important(custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_important.disconnect(_on_active_custom_email_view_finished_important)
 	Global.finished_important_emails.append(email_data)

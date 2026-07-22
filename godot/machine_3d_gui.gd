@@ -11,7 +11,6 @@ const CAM_TWEEN_DUR := 0.25
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
-@export var exit_button: Button
 
 var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
@@ -37,7 +36,6 @@ func _ready():
 			# our mouse from clicking stuff lul
 			interactable.enabled = false
 			Global.in_machine_ui = true
-			exit_button.show()
 			player_using_me = true
 
 			create_tween().tween_property(
@@ -62,9 +60,11 @@ func _ready():
 			)
 	)
 
-	exit_button.pressed.connect(exit)
-
-	Events.time_up.connect(func(): exit_button.hide())
+	Events.machine_exit_button_pressed.connect(
+		func():
+			if player_using_me:
+				exit()
+	)
 
 
 func _physics_process(_delta: float) -> void:
@@ -87,8 +87,6 @@ func exit() -> void:
 
 	if not machine.broken_down:
 		interactable.enabled = true
-
-	exit_button.hide()
 
 	if Global.in_machine_ui:
 		Global.in_machine_ui = false

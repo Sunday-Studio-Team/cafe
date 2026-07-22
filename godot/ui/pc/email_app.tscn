@@ -3,10 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cqa614p1f0ccb" path="res://ui/pc/pc_app.tscn" id="1_yb0su"]
 [ext_resource type="Script" uid="uid://rgxs8xor3s1q" path="res://ui/pc/email_app.gd" id="2_1jvbq"]
 [ext_resource type="PackedScene" uid="uid://bo2t06x0a8xhx" path="res://ui/pc/email_app_list_item.tscn" id="2_n55yy"]
-[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="3_6p1nn"]
-[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="4_fdysk"]
-[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="5_r71nh"]
-[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="6_7ubrx"]
 [ext_resource type="Script" uid="uid://cp5xre3ygh6sc" path="res://ui/pc/email_viewer.gd" id="6_lwc43"]
 [ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="8_7ubrx"]
 
@@ -48,7 +44,6 @@ bg_color = Color(0.9137255, 0.9098039, 0.827451, 1)
 
 [node name="EmailApp" unique_id=270681436 node_paths=PackedStringArray("email_app_list_items_container", "email_viewer") instance=ExtResource("1_yb0su")]
 script = ExtResource("2_1jvbq")
-emails_schedule = Array[ExtResource("3_6p1nn")]([ExtResource("4_fdysk"), ExtResource("5_r71nh"), ExtResource("6_7ubrx")])
 email_app_list_item_packed_scene = ExtResource("2_n55yy")
 email_app_list_items_container = NodePath("MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/VBoxContainer2/PanelContainer2/MarginContainer/ScrollContainer/EmailsList")
 email_viewer = NodePath("MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer")
