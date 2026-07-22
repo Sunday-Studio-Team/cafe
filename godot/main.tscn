@@ -58,6 +58,7 @@
 [ext_resource type="Texture2D" uid="uid://dio2nr6075utp" path="res://sprites/alert/frame_10_delay-0.04s.png" id="33_m74q3"]
 [ext_resource type="Texture2D" uid="uid://cxw6bx3yspg0t" path="res://sprites/alert/frame_11_delay-0.05s.png" id="34_tko6h"]
 [ext_resource type="Texture2D" uid="uid://dyvn8y6yxxp3c" path="res://sprites/alert/frame_12_delay-0.04s.png" id="35_am8a1"]
+[ext_resource type="PackedScene" uid="uid://cexib5vqpbisp" path="res://Assets/ceiling lights/Ceiling Lamp 3D Model.glb" id="36_7dysq"]
 [ext_resource type="Texture2D" uid="uid://ce6aylxemgy35" path="res://sprites/alert/frame_13_delay-0.04s.png" id="36_8dc3g"]
 [ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="36_cpm2s"]
 [ext_resource type="Texture2D" uid="uid://b2x5bvsgxyxsp" path="res://sprites/alert/frame_14_delay-0.04s.png" id="37_htgcl"]
@@ -1625,13 +1626,6 @@ mesh = SubResource("TextMesh_lswn8")
 [node name="Lights" type="Node3D" parent="." unique_id=1249928200]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights" unique_id=95847607]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.2323385, 2.8165505, 3.0065422)
-light_energy = 5.0
-shadow_enabled = true
-area_range = 5.895
-area_size = Vector2(2.0486052, 2.0054026)
-
 [node name="AreaLight3D7" type="AreaLight3D" parent="Lights" unique_id=2032056219]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -4.9053288, 2.7198212, -3.600625)
 light_energy = 5.0
@@ -1661,12 +1655,31 @@ shadow_enabled = true
 area_range = 5.895
 area_size = Vector2(2.0486052, 2.8595924)
 
-[node name="AreaLight3D5" type="AreaLight3D" parent="Lights" unique_id=1337331138]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.259366, 2.8165505, 3.0065422)
-light_energy = 5.0
+[node name="ceiling lights" parent="Lights" unique_id=55955626 instance=ExtResource("36_7dysq")]
+transform = Transform3D(-5.9447487e-08, 5.9447487e-08, 1.36, 0, 1.36, -5.9447487e-08, -1.36, -2.5985323e-15, -5.9447487e-08, 7.1126103, -0.39420274, 2.9190664)
+
+[node name="AreaLight3D5" type="AreaLight3D" parent="Lights/ceiling lights" unique_id=1337331138]
+transform = Transform3D(1.9106855e-15, 1, 4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1, 0, -4.371139e-08, -0.08747578, 2.1555076, 0)
+light_energy = 5.792
+light_volumetric_fog_energy = 0.7
+light_specular = 1.079
 shadow_enabled = true
-area_range = 5.895
-area_size = Vector2(2.0486052, 2.0054026)
+area_range = 3.714
+area_attenuation = 0.63
+area_size = Vector2(0.13588142, 2.0054026)
+
+[node name="ceiling lights2" parent="Lights" unique_id=1661030639 instance=ExtResource("36_7dysq")]
+transform = Transform3D(-5.9447487e-08, 5.9447487e-08, 1.36, 0, 1.36, -5.9447487e-08, -1.36, -2.5985323e-15, -5.9447487e-08, -0.017005444, -0.39420274, 2.9190664)
+
+[node name="AreaLight3D5" type="AreaLight3D" parent="Lights/ceiling lights2" unique_id=300059304]
+transform = Transform3D(1.9106855e-15, 1, 4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1, 0, -4.371139e-08, -0.08747578, 2.1555076, 0)
+light_energy = 5.792
+light_volumetric_fog_energy = 0.7
+light_specular = 1.079
+shadow_enabled = true
+area_range = 3.714
+area_attenuation = 0.63
+area_size = Vector2(0.13588142, 2.0054026)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=380197281]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 13.841586, 2.8188477, 3.0065422)
@@ -1693,6 +1706,7 @@ omni_range = 16.497
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights" unique_id=527671258]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 8.243606, 1.4271424, 3.0065422)
 light_color = Color(0.41568628, 0.8509804, 0.69803923, 1)
+light_volumetric_fog_energy = 0.0
 omni_range = 16.497
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=673108826]
