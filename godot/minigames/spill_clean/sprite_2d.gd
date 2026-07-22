@@ -6,6 +6,7 @@ signal drag_started
 signal drag_ended
 
 @export var drag_area: Area2D
+@export var bubbles: GPUParticles2D
 
 var drag_collision: CollisionShape2D
 var drag_rectangle: RectangleShape2D
@@ -53,6 +54,15 @@ func _ready() -> void:
 		set_process_input(false)
 		return
 
+	if bubbles == null:
+		push_error(
+			"Particle has not been assigned."
+		)
+		set_process(false)
+		set_process_input(false)
+		return
+
+	bubbles.emitting = false;
 
 func _input(event: InputEvent) -> void:
 	if event is not InputEventMouseButton:
@@ -119,6 +129,7 @@ func start_dragging() -> void:
 		return
 
 	is_dragging = true
+	bubbles.emitting = true;
 
 	drag_offset = (
 		global_position
@@ -131,6 +142,8 @@ func start_dragging() -> void:
 func stop_dragging() -> void:
 	if not is_dragging:
 		return
+	
+	bubbles.emitting = false;
 
 	is_dragging = false
 	drag_ended.emit()

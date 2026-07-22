@@ -4,12 +4,27 @@
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/erasable_canvas.gd" id="2_imr7o"]
 [ext_resource type="Texture2D" uid="uid://u061xia2klda" path="res://sprites/mop_cursor.png" id="3_0rxra"]
 [ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/sprite_2d.gd" id="4_6lir2"]
+[ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnu58"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(130, 50, 1)
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -30.000002
+radial_accel_max = 29.999996
+scale_min = 0.099999994
+scale_max = 0.39999998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
 size = Vector2(137, 170)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
 size = Vector2(20, 162)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lir2"]
+font_size = 30
+font_color = Color(0.4771131, 0.4771131, 0.4771131, 1)
 
 [node name="SpillCleanMinigame" type="SubViewportContainer" unique_id=1975707646]
 anchors_preset = 15
@@ -25,21 +40,31 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "mop_sprite", "moping_area")]
-position = Vector2(980, 500)
+position = Vector2(960, 500)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_imr7o")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
-progress_label = NodePath("../Panel/Label")
+progress_label = NodePath("../Panel/Percentage")
 mop_sprite = NodePath("../Sprite2D")
 moping_area = NodePath("../Sprite2D/Area2D")
 allowed_remaining_ratio = 0.01
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area")]
-position = Vector2(300, 500)
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles")]
+position = Vector2(960, 500)
+scale = Vector2(-1.5, -1.5)
 texture = ExtResource("3_0rxra")
 script = ExtResource("4_6lir2")
 drag_area = NodePath("Area2D2")
+bubbles = NodePath("GPUParticles2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewport/Sprite2D" unique_id=360286918]
+position = Vector2(0, 130)
+rotation = 3.1415925
+amount = 14
+texture = ExtResource("5_quysc")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_xnu58")
 
 [node name="Area2D" type="Area2D" parent="SubViewport/Sprite2D" unique_id=1322127866]
 
@@ -62,7 +87,24 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="SubViewport/Panel" unique_id=2001257238]
+[node name="Instruction" type="Label" parent="SubViewport/Panel" unique_id=1198189638]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -400.0
+offset_bottom = -400.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 50
+text = "Move the mop the clean the spill!"
+label_settings = SubResource("LabelSettings_6lir2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Percentage" type="Label" parent="SubViewport/Panel" unique_id=2001257238]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
