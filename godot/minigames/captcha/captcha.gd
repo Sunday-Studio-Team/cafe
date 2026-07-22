@@ -25,6 +25,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	Global.making_drink_manually = true
+	
 	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
 	if Engine.get_physics_frames() % 5 == 0:
 		var button_is_selected: bool = false
@@ -138,8 +140,6 @@ func shake_panel() -> void:
 
 
 func _start_minigame() -> void:
-	Global.making_drink_manually = true
-	
 	current_game_state = GameStates.MAIN
 	set_instructions(main_text)
 	
