@@ -3964,7 +3964,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1610269269) index="0" unique_id=1654320086]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -3975,10 +3975,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1610269269) index="1" unique_id=1977426369]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1983699349) index="1" unique_id=398972065]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(1, 0.52156866, 0.9607843, 1)
 light_energy = 5.04
@@ -3986,7 +3986,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1610269269) index="2" unique_id=2060077414]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -5413,12 +5413,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MachineInteractionPopup" type="CanvasLayer" parent="." unique_id=1183147259]
+process_mode = 3
 script = ExtResource("287_4fms3")
 popup_id = "interaction"
 
 [node name="ColorRect" type="ColorRect" parent="MachineInteractionPopup" unique_id=80583314]
-custom_minimum_size = Vector2(1080, 1920)
-custom_maximum_size = Vector2(1080, 1920)
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -5430,9 +5431,12 @@ color = Color(0, 0, 0, 0.47058824)
 custom_minimum_size = Vector2(1080, 1920)
 custom_maximum_size = Vector2(1080, 1920)
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_right = 540.0
+offset_bottom = 1920.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="MachineInteractionPopup/ColorRect/CenterContainer" unique_id=1924834336]
@@ -5441,14 +5445,16 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 100
 text = "Click on an option to 
 interact with the machine"
+horizontal_alignment = 1
 
 [node name="MachineBreakdownPopup" type="CanvasLayer" parent="." unique_id=564086082]
+process_mode = 3
 script = ExtResource("287_4fms3")
 popup_id = "breakdown"
 
 [node name="ColorRect" type="ColorRect" parent="MachineBreakdownPopup" unique_id=1658828775]
-custom_minimum_size = Vector2(1080, 1920)
-custom_maximum_size = Vector2(1080, 1920)
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -5460,15 +5466,20 @@ color = Color(0, 0, 0, 0.47058824)
 custom_minimum_size = Vector2(1080, 1920)
 custom_maximum_size = Vector2(1080, 1920)
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_right = 540.0
+offset_bottom = 1920.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="MachineBreakdownPopup/ColorRect/CenterContainer" unique_id=1029267268]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Walk up to the machine and press E to fix it"
+theme_override_font_sizes/font_size = 100
+text = "Walk up to the broken machine and press E to fix it"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 

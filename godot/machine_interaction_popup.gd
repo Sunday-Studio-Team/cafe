@@ -10,8 +10,13 @@ func open() -> void:
 	Global.popup_hint_showing = true
 	get_tree().paused = true
 	
+func close() -> void:
+	visible = false
+	Global.popup_hint_showing = false
+	get_tree().paused = false
+	
 func _unhandled_input(event):
 	if visible and event.is_action_pressed("ui_cancel"):
-		visible = false
-		get_tree().paused = false
+		close()
+		get_viewport().set_input_as_handled()
 	
