@@ -4,6 +4,7 @@ const LOADING_FADE_IN_TIME := 0.5
 const LOADING_FADE_OUT_TIME := 1.0
 
 @export var loading_screen: ColorRect
+@export var loading_icons: Control
 @export var main_scene: PackedScene
 @export var main_menu: PackedScene
 
@@ -19,6 +20,13 @@ func _ready() -> void:
 	Events.main_scene_loaded.connect(func(): load_scene(main_scene))
 	Events.main_menu_loaded.connect(func(): load_scene(main_menu))
 	Events.game_quit.connect(func(): quit())
+
+
+func _physics_process(_delta: float) -> void:
+	# (disabled for now cos they seemed to not actually be showing during the
+	# loading hitch after pressing play in build)
+	#loading_icons.visible = loading_screen.modulate.a == 1
+	loading_icons.hide()
 
 
 func load_scene(scene: PackedScene) -> void:
