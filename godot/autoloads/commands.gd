@@ -16,7 +16,7 @@ func _ready() -> void:
 	# but might be better than accidentally pressing stuff in game by typing lol
 	#Console.pause_enabled = true
 
-	Console.font_size = 32
+	Console.font_size = 28
 	Console.toggle_size() # set fullscreen
 
 	var items_guide_str: String = "Available items: "
@@ -41,7 +41,8 @@ func _ready() -> void:
 - [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
 - [i]fullshelf[/i] gives you a full inventory of items
-- [i]speed <number>[/i] sets the game speed"
+- [i]speed <number>[/i] sets the game speed
+- [i]bag[/i] gives you an ingredients bag"
 		% [items_guide_str],
 	)
 	Console.print_line(
@@ -62,6 +63,7 @@ func _ready() -> void:
 	Console.add_command("rating", set_rating, 1)
 	Console.add_command("timer", toggle_timer)
 	Console.add_command("fullshelf", fill_items)
+	Console.add_command("bag", give_bag)
 
 	Console.add_command("item", give_item, ["item_name"])
 	for item in Global.items:
@@ -69,6 +71,11 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("item", _item_names)
 
 	Console.add_command("speed", set_speed, 1)
+
+
+func give_bag() -> void:
+	Global.holding_ingredients = true
+	Console.print_line("gave bag")
 
 
 func fill_items() -> void:
