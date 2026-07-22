@@ -86,6 +86,7 @@
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
 [ext_resource type="Texture2D" uid="uid://y5qyrblkkthi" path="res://sprites/alert/frame_25_delay-0.04s.png" id="48_off2o"]
 [ext_resource type="Texture2D" uid="uid://38dkibuboqy0" path="res://sprites/alert/frame_26_delay-0.04s.png" id="49_tttfs"]
+[ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="49_utcts"]
 [ext_resource type="Texture2D" uid="uid://b4mmkwxhnxhnd" path="res://sprites/alert/frame_27_delay-0.04s.png" id="50_1iygd"]
 [ext_resource type="Texture2D" uid="uid://diljb7fbwbiyh" path="res://sprites/alert/frame_28_delay-0.04s.png" id="51_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://d0tcraufqsi8m" path="res://sprites/alert/frame_29_delay-0.05s.png" id="52_s4o1y"]
@@ -1848,6 +1849,17 @@ mesh = SubResource("BoxMesh_rkau7")
 
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
+
+[node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
+
+[node name="plastic chair" parent="Environment/CustomerArea/plastic chairs" unique_id=727856857 instance=ExtResource("49_utcts")]
+transform = Transform3D(-0.7265694, 0, 0.6870931, 0, 1, 0, -0.6870931, 0, -0.7265694, 0.91900563, 0.04765231, -5.225158)
+
+[node name="plastic chair2" parent="Environment/CustomerArea/plastic chairs" unique_id=2000641406 instance=ExtResource("49_utcts")]
+transform = Transform3D(0.6821799, 0, -0.7311844, 0, 1, 0, 0.7311844, 0, 0.6821799, 6.216303, 0.04765231, -7.0861816)
+
+[node name="plastic chair3" parent="Environment/CustomerArea/plastic chairs" unique_id=1084265810 instance=ExtResource("49_utcts")]
+transform = Transform3D(0.5930181, 0, 0.8051892, 0, 1, 0, -0.8051892, 0, 0.5930181, 4.2286296, 0.04765231, -3.450582)
 
 [node name="BreakRoom" type="Node3D" parent="Environment" unique_id=988114770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)

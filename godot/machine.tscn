@@ -278,7 +278,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1941494849]
 shape = SubResource("BoxShape3D_0ffxp")
 
-[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "exit_button")]
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.06)
 script = ExtResource("10_0d1aa")
 interactable = NodePath("Interactable")
@@ -286,7 +286,6 @@ node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
-exit_button = NodePath("")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
@@ -305,6 +304,12 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
 fov = 140.0
+
+[node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
+light_energy = 1.95
+area_range = 0.292
+area_size = Vector2(0.795609, 1.06196)
 
 [node name="Area3D" type="Area3D" parent="3DGui" unique_id=128585634]
 
