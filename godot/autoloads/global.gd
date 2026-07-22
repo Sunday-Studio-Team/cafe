@@ -158,14 +158,14 @@ func float_to_price(number: float) -> String:
 func equip_item(item: Item):
 	equipped_item = item
 	if item == null:
-		Events.emit_signal("play_item_animation", "default")
+		Events.emit_signal("play_viewmodel_animation", "default")
 		return
 
 	if item.name == "hammer":
-		Events.emit_signal("play_item_animation", "pul_hammer")
+		Events.emit_signal("play_viewmodel_animation", "hammer_equip")
 
 	else:
-		Events.emit_signal("play_item_animation", "default")
+		Events.emit_signal("play_viewmodel_animation", "default")
 
 
 func refresh_active_items():

@@ -9,6 +9,7 @@ const STRIDE_LENGTH := 0.75
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
+@export var bag_pickup_sound: AudioStreamPlayer3D
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 
@@ -37,6 +38,19 @@ func _ready() -> void:
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
+
+	Events.bag_pickup_animation_grabbed.connect(
+		func():
+			# scuffed 'animation' of bag appearing when we grab it
+			create_tween().tween_property(
+				ingredients_bag,
+				"scale",
+				Vector3.ONE,
+				0.5,
+			).from(Vector3.ZERO)
+
+			bag_pickup_sound.play()
+	)
 
 
 func _physics_process(delta: float) -> void:
