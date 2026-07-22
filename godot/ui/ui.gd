@@ -87,8 +87,7 @@ func _ready() -> void:
 	if Global.day >= 1:
 		objective.text = (
 				"You are the new manager of a fully automated cafe!
-This is your first trial shift - make it through the week to keep your new position!
-(check your emails on the computer for more details)"
+This is your first trial shift - make it through the week to keep your new position!"
 		)
 		rules_controls.text = (
 				""
