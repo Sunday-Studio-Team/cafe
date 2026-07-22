@@ -23,7 +23,7 @@ signal alert_posted(message: String)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)
-signal gui3d_exit_button_pressed
+signal machine_exit_button_pressed
 # viewmodel animation signals
 signal viewmodel_animation_finished
 signal hammer_animation_hit

@@ -111,6 +111,11 @@ func _ready() -> void:
 	order_breakdown.hide()
 	final_order_indicator.hide()
 
+	# glowing fx on spill warning
+	var t := create_tween().set_loops()
+	t.tween_property(spill_warning, "modulate", Color.GOLD, 1)
+	t.tween_property(spill_warning, "modulate", Color.RED, 1)
+
 	#Active Items
 	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
 

@@ -4,6 +4,9 @@ extends Area3D
 @export var sprite: Sprite3D
 
 var item: Item
+# we check this when we press sell so we cant spam and sell like 10 times
+# before it hides for infinite money glitch
+var clicked_sell := false
 
 
 func _ready() -> void:

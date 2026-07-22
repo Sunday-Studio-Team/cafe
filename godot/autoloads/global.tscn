@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://dars6l4l6w3cg" path="res://sprites/ingredient_icons/milk.png" id="11_lt8ol"]
 [ext_resource type="Texture2D" uid="uid://sq8k5eurmf01" path="res://sprites/ingredient_icons/sugar.png" id="12_x2nk7"]
 [ext_resource type="Texture2D" uid="uid://jcak6ksq2m0k" path="res://sprites/ingredient_icons/ice.png" id="13_jmbcq"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="15_do865"]
+[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="16_qy21g"]
+[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="17_aqy5m"]
+[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="18_oscrk"]
 
 [node name="Global" type="Node" unique_id=668412834]
 process_mode = 3
@@ -41,3 +45,4 @@ extra_icons = Dictionary[int, Texture2D]({
 2: ExtResource("12_x2nk7"),
 3: ExtResource("13_jmbcq")
 })
+emails_schedule = Array[ExtResource("15_do865")]([ExtResource("16_qy21g"), ExtResource("17_aqy5m"), ExtResource("18_oscrk")])

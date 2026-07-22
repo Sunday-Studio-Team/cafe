@@ -1,0 +1,24 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background (Solid Dark Gray to Match Godot UI) -->
+  <rect width="64" height="64" fill="#1a1a1a"/>
+
+  <!-- Cube Base (Gray) -->
+  <path d="M10 10 L54 10 L54 54 L10 54 Z" fill="#3c3c3c"/>
+  <!-- Top Face (3D Effect) -->
+  <path d="M10 10 L30 2 L54 10 L10 10" fill="#4a4a4a"/>
+  <!-- Right Face (3D Effect) -->
+  <path d="M54 10 L54 54 L42 62 L30 2" fill="#585858"/>
+
+  <!-- Triangulation Lines (Simplified) -->
+  <!-- Front Face -->
+  <line x1="10" y1="10" x2="54" y2="54" stroke="#ffffff" stroke-width="1"/>
+  <line x1="10" y1="54" x2="54" y2="10" stroke="#ffffff" stroke-width="1"/>
+  <!-- Top Face -->
+  <line x1="10" y1="10" x2="54" y2="10" stroke="#ffffff" stroke-width="1"/>
+  <!-- Right Face -->
+  <line x1="54" y1="10" x2="54" y2="54" stroke="#ffffff" stroke-width="1"/>
+
+  <!-- Outline (Single Path) -->
+  <path d="M10 10 L54 10 L54 54 L10 54 L10 10 M10 10 L30 2 L54 10 M54 10 L54 54 L42 62 L30 2"
+        stroke="#ffffff" stroke-width="1" fill="none"/>
+</svg>

@@ -44,3 +44,4 @@ var cost_to_reroll := 5.0
 var max_spills_per_shift := 2
 var max_breakdowns_per_shift := 3
 var clean_spill_allowed_remaining := 0.01
+var extra_time_from_overtime_form_item := 25.0

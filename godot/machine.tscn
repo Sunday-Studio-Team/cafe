@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
 [ext_resource type="AudioStream" uid="uid://r1glsx5px3xm" path="res://audio/machine_fixed.mp3" id="8_u17ae"]
 [ext_resource type="PackedScene" uid="uid://bh5bdrvebx5nl" path="res://machine_ui.tscn" id="8_yuuq8"]
-[ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="9_0d1aa"]
 [ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
 [ext_resource type="AudioStream" uid="uid://b78v8ja676k6r" path="res://audio/spill_clean.mp3" id="9_42f15"]
 [ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
@@ -287,7 +286,7 @@ node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
-exit_button = NodePath("ExitButtonLayer/MarginContainer/Button")
+exit_button = NodePath("")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
@@ -325,33 +324,6 @@ shape = SubResource("BoxShape3D_yuuq8")
 
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
-
-[node name="ExitButtonLayer" type="CanvasLayer" parent="3DGui" unique_id=673876877]
-layer = 10
-
-[node name="MarginContainer" type="MarginContainer" parent="3DGui/ExitButtonLayer" unique_id=1636617478]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 250
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 250
-
-[node name="Button" type="Button" parent="3DGui/ExitButtonLayer/MarginContainer" unique_id=1306151559]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-offset_transform_enabled = true
-offset_transform_rotation = -0.08726646
-offset_transform_visual_only = false
-theme = ExtResource("9_0d1aa")
-theme_override_font_sizes/font_size = 64
-text = "exit"
 
 [node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)

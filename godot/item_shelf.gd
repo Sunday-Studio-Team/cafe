@@ -17,6 +17,11 @@ func display_items() -> void:
 	# items are cleared in main.gd so if we dont wait for that, shelf wont clear
 	# properly on restart
 	await get_tree().process_frame
+
+	for slot in item_slots:
+		for child in slot.get_children():
+			child.queue_free()
+
 	for item in Global.owned_items:
 		var shelf_item: ShelfItem = shelf_item_scene.instantiate()
 		shelf_item.item = item

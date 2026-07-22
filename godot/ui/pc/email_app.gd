@@ -78,8 +78,11 @@ func _on_finished_important_email(email_data: EmailData) -> void:
 	for email_app_list_item in email_app_list_items:
 		if email_app_list_item.email_data == email_data:
 			email_app_list_item.mark_as_finished_important()
+	email_viewer.visible = false 
 
 func _on_finished_spam_email(email_data: EmailData) -> void:
 	for email_app_list_item in email_app_list_items:
 		if email_app_list_item.email_data == email_data:
 			email_app_list_item.mark_as_finished_spam()
+	await get_tree().create_timer(3).timeout # need to wait for the money animation to play before hiding
+	email_viewer.visible = false

@@ -24,6 +24,10 @@ func _ready() -> void:
 				Global.in_pc_ui = false
 	)
 
+	# we dont even have money for shop on day 1 sooo
+	if Global.day == 1:
+		shop_button.hide()
+
 
 func _physics_process(_delta: float) -> void:
 	if (

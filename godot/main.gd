@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var _pause_menu: PauseMenu
+@export var _tutorial_manager: TutorialManager
 @export var machines: Array[Machine]
 @export var cameras: Node3D
 # first machine on the left
@@ -66,6 +68,13 @@ func _ready() -> void:
 	#Global.bank_money = 100
 
 	ui.hide()
+
+	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
+	if Global.day == 1:
+		if not OS.has_feature("editor"):
+			_tutorial_manager.show_tutorial()
+			await _tutorial_manager.finished_tutorial
+
 	day_indicator.text = "DAY %s" % Global.day
 	day_indicator.show()
 	await get_tree().create_timer(3, false).timeout
@@ -91,7 +100,7 @@ func _ready() -> void:
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
 	if overtime_item in Global.owned_items:
-		game_timer.wait_time += game_timer.wait_time * 0.2
+		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -172,6 +181,10 @@ func active_item_used(item: Item):
 		await get_tree().create_timer(8, false).timeout
 		game_timer.paused = false
 		clock_item_start_sound.play()
+
+
+func _on_pause_menu_tutorial_requested() -> void:
+	_tutorial_manager.show_tutorial()
 
 
 func _on_game_timer_timeout() -> void:

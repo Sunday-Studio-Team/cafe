@@ -15,8 +15,9 @@ func _ready() -> void:
 	# not sure whether to enable this or not, seems to break some stuff
 	# but might be better than accidentally pressing stuff in game by typing lol
 	#Console.pause_enabled = true
-	# dont think we need this yet, but if the commands list gets much longer itll go offscreen
-	#Console.toggle_size() # set fullscreen
+
+	Console.font_size = 32
+	Console.toggle_size() # set fullscreen
 
 	var items_guide_str: String = "Available items: "
 	for item in Global.items:
@@ -39,6 +40,7 @@ func _ready() -> void:
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
+- [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed"
 		% [items_guide_str],
 	)
@@ -59,6 +61,7 @@ func _ready() -> void:
 	Console.add_command("profit", set_profit, 1)
 	Console.add_command("rating", set_rating, 1)
 	Console.add_command("timer", toggle_timer)
+	Console.add_command("fullshelf", fill_items)
 
 	Console.add_command("item", give_item, ["item_name"])
 	for item in Global.items:
@@ -66,6 +69,18 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("item", _item_names)
 
 	Console.add_command("speed", set_speed, 1)
+
+
+func fill_items() -> void:
+	for item in [
+		"air freshener",
+		"clock",
+		"hammer",
+		"nice spoon",
+		"nice shoes",
+		"teflon",
+	]:
+		give_item(item)
 
 
 func set_profit(profit: String) -> void:

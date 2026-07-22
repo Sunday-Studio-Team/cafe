@@ -15,6 +15,7 @@ extends Node
 @export var main_ingredient_icons: Dictionary[Drink.MainIngredient, Texture2D]
 @export var liquid_icons: Dictionary[Drink.Liquid, Texture2D]
 @export var extra_icons: Dictionary[Drink.Extra, Texture2D]
+@export var emails_schedule: Array[EmailData]
 
 var player: Player
 var hovered_interactable: Interactable:
@@ -93,9 +94,11 @@ var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var in_machine_ui: bool = false
+var machine_in_use: Machine = null
 var in_main_menu := false
 var in_end_screen := false
 var in_active_item_menu := false
+var in_tutorial_screen: bool = false
 var in_ui: bool:
 	get():
 		if (
@@ -106,6 +109,7 @@ var in_ui: bool:
 				or in_main_menu
 				or in_end_screen
 				or in_active_item_menu
+				or in_tutorial_screen
 		):
 			return true
 		else:

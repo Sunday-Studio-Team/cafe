@@ -44,6 +44,7 @@ spot_angle = 20.0
 [node name="RayCast3D" type="RayCast3D" parent="SpotLight3D" unique_id=1998490399]
 transform = Transform3D(0.9659258, -1.4894287e-09, -0.258819, -0.25881907, -1.1313339e-08, -0.96592563, -1.489429e-09, 0.99999976, -1.131334e-08, 0, 0, 0)
 target_position = Vector3(0, -10, 0)
+collision_mask = 8
 
 [node name="GraceTimer" type="Timer" parent="." unique_id=2144038531]
 wait_time = 2.5
