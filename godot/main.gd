@@ -18,6 +18,9 @@ extends Node3D
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
+# environmental art that mentions security cams (referenced so we can disable
+# them until the day where the cameras get installed)
+@export var camera_posters: Array[Node3D]
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
@@ -140,6 +143,11 @@ func set_per_day_stuff() -> void:
 		Global.ai_improvement_enabled = true
 
 	Global.machines.assign(machines)
+
+	# hide posters that mention security cameras until we have them
+	if Global.day < 2:
+		for poster in camera_posters:
+			poster.hide()
 
 
 func spawn_customer() -> void:
