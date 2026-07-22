@@ -3,11 +3,88 @@
 [ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
 [ext_resource type="PackedScene" uid="uid://nm85k5woe7rt" path="res://main.tscn" id="2_myf8j"]
 [ext_resource type="PackedScene" uid="uid://cqpfyo7o4qvn6" path="res://ui/main_menu.tscn" id="3_0bfbf"]
+[ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_xn3vj"]
 
-[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen")]
+[sub_resource type="Animation" id="Animation_okatn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons/LoadingIcon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons/LoadingIcon3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.9200001, 0.9200001, 0.9200001, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q6tpw"]
+resource_name = "loading"
+length = 1.5
+loop_mode = 1
+step = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons/LoadingIcon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons/LoadingIcon2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons/LoadingIcon3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.9200001, 0.9200001, 0.9200001, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ivs3u"]
+_data = {
+&"RESET": SubResource("Animation_okatn"),
+&"loading": SubResource("Animation_q6tpw")
+}
+
+[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen", "loading_icons")]
 process_mode = 3
 script = ExtResource("1_6uhv1")
 loading_screen = NodePath("LoadingCanvas/LoadingScreen")
+loading_icons = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons")
 main_scene = ExtResource("2_myf8j")
 main_menu = ExtResource("3_0bfbf")
 
@@ -15,10 +92,47 @@ main_menu = ExtResource("3_0bfbf")
 layer = 10
 
 [node name="LoadingScreen" type="ColorRect" parent="LoadingCanvas" unique_id=1915811073]
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="LoadingCanvas/LoadingScreen" unique_id=144886860]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="LoadingIcons" type="HBoxContainer" parent="LoadingCanvas/LoadingScreen/MarginContainer" unique_id=736671333]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="LoadingIcon" type="TextureRect" parent="LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons" unique_id=2065646450]
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_xn3vj")
+
+[node name="LoadingIcon2" type="TextureRect" parent="LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons" unique_id=636883721]
+modulate = Color(0, 0, 0, 1)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_xn3vj")
+
+[node name="LoadingIcon3" type="TextureRect" parent="LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons" unique_id=248039684]
+modulate = Color(0.9200001, 0.9200001, 0.9200001, 1)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("4_xn3vj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=964861867]
+libraries/ = SubResource("AnimationLibrary_ivs3u")
+autoplay = &"loading"
+speed_scale = 0.5

@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
 [ext_resource type="Resource" uid="uid://dbjwbruh16sas" path="res://items/tip_jar.tres" id="2_yuuq8"]
+[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="3_wuddj"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
 [ext_resource type="AudioStream" uid="uid://r1glsx5px3xm" path="res://audio/machine_fixed.mp3" id="8_u17ae"]
 [ext_resource type="PackedScene" uid="uid://bh5bdrvebx5nl" path="res://machine_ui.tscn" id="8_yuuq8"]
-[ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="9_0d1aa"]
 [ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
 [ext_resource type="AudioStream" uid="uid://b78v8ja676k6r" path="res://audio/spill_clean.mp3" id="9_42f15"]
 [ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
 [ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
+[ext_resource type="AudioStream" uid="uid://c1mwy70fw26kj" path="res://audio/hammer_hit.mp3" id="12_xurph"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
 transparency = 1
@@ -99,7 +100,7 @@ material = SubResource("StandardMaterial3D_xurph")
 radius = 0.1
 height = 0.2
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles", "fixed_sound", "tip_label")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "manual_progress_bar", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles", "fixed_sound", "tip_label", "hammer_hit_sound")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 spot_for_player = NodePath("SpotForPlayer")
@@ -147,6 +148,8 @@ spill_clean_sound = NodePath("SpillCleanSound")
 spill_clean_particles = NodePath("SpillCleanParticles")
 fixed_sound = NodePath("FixedSound")
 tip_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/TipLabel")
+hammer_item = ExtResource("3_wuddj")
+hammer_hit_sound = NodePath("HammerHitSound")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
@@ -266,13 +269,16 @@ pitch_scale = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 stream = ExtResource("9_42f15")
 
+[node name="HammerHitSound" type="AudioStreamPlayer" parent="." unique_id=471638354]
+stream = ExtResource("12_xurph")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=460997142]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1941494849]
 shape = SubResource("BoxShape3D_0ffxp")
 
-[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "exit_button")]
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.06)
 script = ExtResource("10_0d1aa")
 interactable = NodePath("Interactable")
@@ -280,7 +286,6 @@ node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
-exit_button = NodePath("ExitButtonLayer/MarginContainer/Button")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
@@ -300,6 +305,12 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
 fov = 140.0
 
+[node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
+light_energy = 1.95
+area_range = 0.292
+area_size = Vector2(0.795609, 1.06196)
+
 [node name="Area3D" type="Area3D" parent="3DGui" unique_id=128585634]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Area3D" unique_id=805871503]
@@ -318,33 +329,6 @@ shape = SubResource("BoxShape3D_yuuq8")
 
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
-
-[node name="ExitButtonLayer" type="CanvasLayer" parent="3DGui" unique_id=673876877]
-layer = 10
-
-[node name="MarginContainer" type="MarginContainer" parent="3DGui/ExitButtonLayer" unique_id=1636617478]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 250
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 150
-
-[node name="Button" type="Button" parent="3DGui/ExitButtonLayer/MarginContainer" unique_id=1306151559]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-offset_transform_enabled = true
-offset_transform_rotation = -0.08726646
-offset_transform_visual_only = false
-theme = ExtResource("9_0d1aa")
-theme_override_font_sizes/font_size = 64
-text = "exit"
 
 [node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)

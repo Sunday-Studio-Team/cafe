@@ -9,6 +9,7 @@ const STRIDE_LENGTH := 0.75
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
+@export var bag_pickup_sound: AudioStreamPlayer3D
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 
@@ -38,6 +39,21 @@ func _ready() -> void:
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
 
+	Events.bag_pickup_animation_grabbed.connect(
+		func():
+			bag_pickup_sound.play()
+
+			# scuffed 'animation' of bag appearing when we grab it
+			ingredients_bag.transparency = 1
+			ingredients_bag.scale = Vector3.ZERO
+
+			await Events.viewmodel_animation_finished
+
+			var t := create_tween().set_parallel()
+			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
+			t.tween_property(ingredients_bag, "transparency", 0, 0.25)
+	)
+
 
 func _physics_process(delta: float) -> void:
 	handle_mouselook()
@@ -49,12 +65,19 @@ func _physics_process(delta: float) -> void:
 	#handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
+	handle_active_item_menu()
 	move_and_slide()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta += event.screen_relative * mouse_sens
+
+
+func handle_active_item_menu() -> void:
+	if Input.is_action_just_pressed("item_menu"):
+		if not Global.in_ui or Global.in_active_item_menu:
+			Events.active_item_menu.emit()
 
 
 func handle_mouselook() -> void:
@@ -93,6 +116,10 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+
+	#Active Item
+	if Input.is_action_just_pressed("use_item"):
+		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_gravity(delta: float) -> void:

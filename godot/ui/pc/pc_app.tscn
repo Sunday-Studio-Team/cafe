@@ -24,7 +24,7 @@ theme = SubResource("Theme_616af")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 75
 
 [node name="Background" type="ColorRect" parent="MarginContainer" unique_id=533031003]
 layout_mode = 2
@@ -38,6 +38,7 @@ layout_mode = 2
 size_flags_vertical = 0
 
 [node name="X" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1508020803]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0

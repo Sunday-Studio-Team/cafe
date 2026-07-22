@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var _pause_menu: PauseMenu
+@export var _tutorial_manager: TutorialManager
 @export var machines: Array[Machine]
 @export var cameras: Node3D
 # first machine on the left
@@ -16,8 +18,16 @@ extends Node3D
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
+# environmental art that mentions security cams (referenced so we can disable
+# them until the day where the cameras get installed)
+@export var camera_posters: Array[Node3D]
 #Minigame
 @export var minigame_controller: CanvasLayer
+#Active Items
+@export var clock_item: Item
+@export var active_item_timer: Timer
+@export var clock_item_stop_sound: AudioStreamPlayer
+@export var clock_item_start_sound: AudioStreamPlayer
 
 
 func _enter_tree() -> void:
@@ -61,6 +71,13 @@ func _ready() -> void:
 	#Global.bank_money = 100
 
 	ui.hide()
+
+	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
+	if Global.day == 1:
+		if not OS.has_feature("editor"):
+			_tutorial_manager.show_tutorial()
+			await _tutorial_manager.finished_tutorial
+
 	day_indicator.text = "DAY %s" % Global.day
 	day_indicator.show()
 	await get_tree().create_timer(3, false).timeout
@@ -76,11 +93,17 @@ func _ready() -> void:
 	#await get_tree().create_timer(1, false).timeout
 	#customer_spawn_timer.timeout.emit()
 
+	#Active Item refresh
+	Global.refresh_active_items()
+
+	#Active Items
+	Events.active_item_used.connect(active_item_used)
+
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
 	if overtime_item in Global.owned_items:
-		game_timer.wait_time += game_timer.wait_time * 0.2
+		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -109,7 +132,7 @@ func set_per_day_stuff() -> void:
 		machines.push_front(fourth_machine)
 		fourth_machine.show()
 		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
-		
+
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
 		for stat in Global.ai_improvement.stat_bonuses:
@@ -121,7 +144,10 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(machines)
 
-
+	# hide posters that mention security cameras until we have them
+	if Global.day < 2:
+		for poster in camera_posters:
+			poster.hide()
 
 
 func spawn_customer() -> void:
@@ -146,6 +172,27 @@ func spawn_customer() -> void:
 
 	machine.set_customer(new_customer)
 	machine.machine_make_drink()
+
+
+#Actives the effects of a given active item
+func active_item_used(item: Item):
+	var item_name: String = ""
+	if item != null:
+		item_name = item.name
+
+	# TODO: Fix how clock works
+	if item == clock_item and not game_timer.is_stopped():
+		game_timer.paused = true
+		Global.equipped_item = null
+		Global.deactivate_active_item(item)
+		clock_item_stop_sound.play()
+		await get_tree().create_timer(8, false).timeout
+		game_timer.paused = false
+		clock_item_start_sound.play()
+
+
+func _on_pause_menu_tutorial_requested() -> void:
+	_tutorial_manager.show_tutorial()
 
 
 func _on_game_timer_timeout() -> void:
@@ -187,3 +234,8 @@ func _on_shift_started():
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
+
+
+func _on_timer_timeout():
+	#game_timer.paused = false
+	pass # Replace with function body.

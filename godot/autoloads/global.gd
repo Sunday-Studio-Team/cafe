@@ -15,6 +15,7 @@ extends Node
 @export var main_ingredient_icons: Dictionary[Drink.MainIngredient, Texture2D]
 @export var liquid_icons: Dictionary[Drink.Liquid, Texture2D]
 @export var extra_icons: Dictionary[Drink.Extra, Texture2D]
+@export var emails_schedule: Array[EmailData]
 
 var player: Player
 var hovered_interactable: Interactable:
@@ -93,8 +94,11 @@ var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var in_machine_ui: bool = false
+var machine_in_use: Machine = null
 var in_main_menu := false
 var in_end_screen := false
+var in_active_item_menu := false
+var in_tutorial_screen: bool = false
 var in_ui: bool:
 	get():
 		if (
@@ -104,10 +108,14 @@ var in_ui: bool:
 				or Console.is_visible()
 				or in_main_menu
 				or in_end_screen
+				or in_active_item_menu
+				or in_tutorial_screen
 		):
 			return true
 		else:
 			return false
+#Active Items
+var equipped_item: Item = null
 
 
 func _ready() -> void:
@@ -144,3 +152,30 @@ func load_resources_from_folder(path: String, extension: String = "tres") -> Arr
 ## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"
 func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
+
+
+#Equips the item:
+func equip_item(item: Item):
+	equipped_item = item
+	if item == null:
+		Events.emit_signal("play_viewmodel_animation", "default")
+		return
+
+	if item.name == "hammer":
+		Events.emit_signal("play_viewmodel_animation", "hammer_equip")
+
+	else:
+		Events.emit_signal("play_viewmodel_animation", "default")
+
+
+func refresh_active_items():
+	for item in owned_items:
+		item.can_be_used = true
+	Events.items_updated.emit()
+
+
+func deactivate_active_item(target_item: Item):
+	for item in owned_items:
+		if item.name == target_item.name:
+			item.can_be_used = false
+			Events.items_updated.emit()

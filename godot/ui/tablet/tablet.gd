@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends PanelContainer
 
 @export var machines_container: Container
 @export var machine_ui_scene: PackedScene
@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	visible = not Global.in_ui
+	visible = not Global.in_ui or Global.in_machine_ui
 
 
 func populate_ui() -> void:

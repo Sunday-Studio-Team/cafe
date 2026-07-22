@@ -23,9 +23,21 @@ signal alert_posted(message: String)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)
-signal gui3d_exit_button_pressed
+signal machine_exit_button_pressed
 # minigames
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled
 signal minigame_end
 signal force_close_minigame
+#Active Items
+signal active_item_used(item: Item)
+signal select_item(selection: Item)
+signal active_item_menu
+signal active_menu_refresh
+# viewmodel animations
+signal play_viewmodel_animation(animation_name: String)
+signal viewmodel_animation_finished
+# some signals that emit on certain frames of vm animations
+# (to time certain stuff off)
+signal bag_pickup_animation_grabbed
+signal hammer_animation_hit
