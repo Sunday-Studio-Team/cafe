@@ -106,6 +106,8 @@ var in_ui: bool:
 		else:
 			return false
 var ordered_drink_to_remake: Drink
+#Active Items
+var equipped_item: Item = null
 
 
 func _ready() -> void:
