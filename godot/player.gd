@@ -66,12 +66,22 @@ func _physics_process(delta: float) -> void:
 	#tilt_camera()
 	handle_ingredients_bag()
 	handle_active_item_menu()
+	handle_floating_cursor()
 	move_and_slide()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta += event.screen_relative * mouse_sens
+
+
+# this is what decides whether to show the mouse
+# (for hovering the tablet ui for more info etc) when holding alt
+func handle_floating_cursor() -> void:
+	if Input.is_action_pressed("show_cursor"):
+		Global.showing_floating_cursor = true
+	else:
+		Global.showing_floating_cursor = false
 
 
 func handle_active_item_menu() -> void:

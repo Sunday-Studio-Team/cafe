@@ -13,7 +13,6 @@ score_chances,\
 machine_time_to_make_drink,\
 customer_wait_time_machine,\
 customer_wait_time_window,\
-time_to_manually_make_drink,\
 penalty_for_running,\
 penalty_for_handmade_drink,\
 penalty_for_holding_ingredients,\

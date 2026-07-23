@@ -8,16 +8,15 @@ enum Type { MAIN, LIQUID, EXTRA }
 @export var star_sign: Label
 @export var icon: TextureRect
 
-var ingredient: int = 0:
+var ingredient: Ingredient = null:
 	set(value):
-		icon.texture = null
-		ingredient = value
-		if type == Type.MAIN:
-			icon.texture = Global.main_ingredient_icons.get(ingredient)
-		if type == Type.LIQUID:
-			icon.texture = Global.liquid_icons.get(ingredient)
-		if type == Type.EXTRA:
-			icon.texture = Global.extra_icons.get(ingredient)
+		if value == null:
+			ingredient = null
+			icon.texture = null
+		else:
+			ingredient = value
+			icon.texture = ingredient.icon
+
 var correct: bool = false:
 	set(value):
 		correct = value

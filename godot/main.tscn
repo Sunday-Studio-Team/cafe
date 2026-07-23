@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
@@ -115,11 +116,18 @@
 [ext_resource type="Texture2D" uid="uid://cm6vhnn82dmon" path="res://sprites/alert/frame_43_delay-0.04s.png" id="66_t5kpo"]
 [ext_resource type="Texture2D" uid="uid://71150mhvmlgn" path="res://sprites/alert/frame_44_delay-0.04s.png" id="67_pw0td"]
 [ext_resource type="Texture2D" uid="uid://berkulo1wmonh" path="res://sprites/alert/frame_45_delay-0.04s.png" id="68_37eu1"]
+[ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="68_tfaor"]
 [ext_resource type="Texture2D" uid="uid://5s20stlwbrg2" path="res://sprites/alert/frame_46_delay-0.04s.png" id="69_0wkqm"]
+[ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="69_3rmuw"]
+[ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="69_j3ofb"]
+[ext_resource type="Texture2D" uid="uid://bhg3g67g8gjck" path="res://sprites/items/book.png" id="70_j3ofb"]
 [ext_resource type="Texture2D" uid="uid://du70ghn0053vm" path="res://sprites/alert/frame_47_delay-0.05s.png" id="70_ve5sr"]
 [ext_resource type="Texture2D" uid="uid://c51a6c721kqft" path="res://sprites/alert/frame_48_delay-0.04s.png" id="71_5s44m"]
+[ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
 [ext_resource type="Texture2D" uid="uid://w2ivnokp8yuo" path="res://sprites/alert/frame_49_delay-0.04s.png" id="72_ibca3"]
+[ext_resource type="Texture2D" uid="uid://b8pqjkx1lt8xa" path="res://sprites/items/shoes.png" id="72_oirqo"]
 [ext_resource type="Texture2D" uid="uid://iqhdj1vcxykc" path="res://sprites/alert/frame_50_delay-0.04s.png" id="73_g3y5b"]
+[ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
 [ext_resource type="Texture2D" uid="uid://djex1hfdtd160" path="res://sprites/alert/frame_51_delay-0.04s.png" id="74_1slqb"]
 [ext_resource type="Texture2D" uid="uid://d17r3alt8bqjk" path="res://sprites/alert/frame_52_delay-0.04s.png" id="75_uo83y"]
 [ext_resource type="Texture2D" uid="uid://dm5ru4q74uevw" path="res://sprites/alert/frame_53_delay-0.05s.png" id="76_y0aao"]
@@ -176,6 +184,7 @@
 [ext_resource type="Texture2D" uid="uid://dgsgt8vqlht3n" path="res://sprites/2d_animations/hammer_use/frame_00_delay-0.04s.png" id="141_ak6tq"]
 [ext_resource type="Texture2D" uid="uid://cosg3svmsx88b" path="res://sprites/2d_animations/hammer_use/frame_01_delay-0.04s.png" id="142_w7qqv"]
 [ext_resource type="Texture2D" uid="uid://b5l2aghbrqfk3" path="res://sprites/2d_animations/hammer_use/frame_02_delay-0.04s.png" id="143_3gvdc"]
+[ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
 [ext_resource type="Texture2D" uid="uid://f77m1a2rm6j5" path="res://sprites/2d_animations/hammer_use/frame_03_delay-0.04s.png" id="144_h0sjo"]
 [ext_resource type="Texture2D" uid="uid://cvknug1jhkh5i" path="res://sprites/2d_animations/hammer_use/frame_04_delay-0.04s.png" id="145_uqsbb"]
 [ext_resource type="Texture2D" uid="uid://t5kvvogn51b6" path="res://sprites/2d_animations/hammer_use/frame_05_delay-0.05s.png" id="146_gfi32"]
@@ -287,6 +296,7 @@
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
+[ext_resource type="PackedScene" uid="uid://bk1aw8emtkeqa" path="res://ui/end_shift_earlier_menu.tscn" id="287_4fms3"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -3626,6 +3636,7 @@ visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
 "Arrows": ExtResource("20_a6jrf"),
+"Captcha": ExtResource("16_cpm2s"),
 "Colors": ExtResource("11_efxa6"),
 "Refill": ExtResource("23_lswn8"),
 "SpillClean": ExtResource("10_inymm"),
@@ -3760,7 +3771,6 @@ transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.8854
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StartShiftWhiteboard/CSGCombiner3D" unique_id=907099516]
-visible = false
 size = Vector3(2.3029785, 1.1992188, 0.07836914)
 material = SubResource("StandardMaterial3D_smeu8")
 
@@ -4866,7 +4876,7 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt", "end_shift_guide")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
@@ -4905,24 +4915,27 @@ current_item_ui = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer
 hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/HammerIndicator")
 current_item_icon = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
 use_item_prompt = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
+end_shift_guide = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/EndShiftGuide")
 
-[node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container")]
+[node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
 custom_maximum_size = Vector2(550, -1)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 37.99999
-offset_top = -516.0
+offset_top = -482.0
 offset_right = 588.0
-offset_bottom = 34.0
+offset_bottom = 68.0
 grow_vertical = 0
 rotation = 0.05235988
 size_flags_horizontal = 0
+mouse_behavior_recursive = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b2gp0")
 script = ExtResource("42_yf6j3")
 machines_container = NodePath("MarginContainer/Screen/MarginContainer/MachineContainer")
 machine_ui_scene = ExtResource("43_e4ynb")
+item_icons = NodePath("MarginContainer/Screen/ItemIcons")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet" unique_id=1632834486]
 layout_mode = 2
@@ -5014,7 +5027,7 @@ text = "$ 0"
 
 [node name="MoneyBar" type="ProgressBar" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
-custom_minimum_size = Vector2(475, 30)
+custom_minimum_size = Vector2(450, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
@@ -5037,15 +5050,73 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 
+[node name="ItemIcons" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1915478391]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=1878469102]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("68_tfaor")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon2" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=1702717453]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("69_3rmuw")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon3" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=475476002]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("70_j3ofb")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon4" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=995260422]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("71_m5f57")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon5" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=898300513]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("72_oirqo")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon6" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=1635346569]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("73_moxjo")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
 [node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/MarginContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 110)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
-stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
@@ -5240,6 +5311,15 @@ icon = ExtResource("115_12204")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
 layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EndShiftGuide" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=638924094]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "End Shift "
+icon = ExtResource("143_7bx05")
 
 [node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
 custom_minimum_size = Vector2(400, 250)
@@ -5477,6 +5557,10 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 70
 text = "Walk up to the broken machine and press E to fix it"
 horizontal_alignment = 1
+
+[node name="EndShiftEarlierMenu" parent="." unique_id=305608973 node_paths=PackedStringArray("game_timer") instance=ExtResource("287_4fms3")]
+visible = false
+game_timer = NodePath("../GameTimer")
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 

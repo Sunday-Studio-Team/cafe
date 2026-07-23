@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://ck4fdplxcgf2s"]
+
+[ext_resource type="Texture2D" uid="uid://b183e18xb3dn6" path="res://sprites/drink_icons/green_tea.png" id="1_cajg6"]
+[ext_resource type="Resource" uid="uid://c566sstn0q5w6" path="res://drinks/ingredients/water.tres" id="2_jcqli"]
+[ext_resource type="Resource" uid="uid://ddva2spvtymuj" path="res://drinks/ingredients/green_tea_bag.tres" id="3_jcqli"]
+[ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="4_4t51k"]
+
+[resource]
+script = ExtResource("4_4t51k")
+name = "green tea"
+main_ingredient = ExtResource("3_jcqli")
+liquid = ExtResource("2_jcqli")
+icon = ExtResource("1_cajg6")
+metadata/_custom_type_script = "uid://bpib3g54m3xm5"
