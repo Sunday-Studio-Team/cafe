@@ -131,8 +131,8 @@ texture = ExtResource("4_dw44w")
 expand_mode = 4
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1074364750]
-custom_minimum_size = Vector2(250, 0)
-custom_maximum_size = Vector2(250, -1)
+custom_minimum_size = Vector2(250, 100)
+custom_maximum_size = Vector2(250, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "ORDERED
@@ -177,6 +177,7 @@ custom_maximum_size = Vector2(-1, 275)
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 10
+offset_transform_position = Vector2(0, 5)
 
 [node name="ProgressIndicator" type="VBoxContainer" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=105617217]
 visible = false
@@ -207,8 +208,8 @@ texture = ExtResource("4_dw44w")
 expand_mode = 4
 
 [node name="MachineOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=220725264]
-custom_minimum_size = Vector2(250, 0)
-custom_maximum_size = Vector2(250, -1)
+custom_minimum_size = Vector2(250, 100)
+custom_maximum_size = Vector2(250, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "MADE
