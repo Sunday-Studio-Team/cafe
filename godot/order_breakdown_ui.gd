@@ -8,7 +8,10 @@ enum Type { MAIN, LIQUID, EXTRA }
 @export var star_sign: Label
 @export var icon: TextureRect
 
-var ingredient: Ingredient
+var ingredient: Ingredient = null:
+	set(value):
+		ingredient = value
+		icon.texture = ingredient.icon
 
 var correct: bool = false:
 	set(value):
