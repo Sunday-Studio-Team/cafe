@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://dx4ghtwqjr1g"]
+
+[ext_resource type="Resource" uid="uid://cxmm0w33f8vfv" path="res://drinks/ingredients/ice.tres" id="1_ocud8"]
+[ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="2_viexf"]
+[ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="3_5wtap"]
+[ext_resource type="Resource" uid="uid://dqwdh1q6mry1i" path="res://drinks/ingredients/espresso_bean.tres" id="4_bou44"]
+[ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="5_37xat"]
+
+[resource]
+script = ExtResource("5_37xat")
+name = "almondmilk iced espresso latte"
+singular_article = "an"
+main_ingredient = ExtResource("4_bou44")
+liquid = ExtResource("3_5wtap")
+extra = ExtResource("1_ocud8")
+icon = ExtResource("2_viexf")
+metadata/_custom_type_script = "uid://bpib3g54m3xm5"

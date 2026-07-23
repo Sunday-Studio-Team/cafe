@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://vbm7fccmcsd1"]
+
+[ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="1_2ltfg"]
+[ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="2_fxo3g"]
+[ext_resource type="Resource" uid="uid://dopc7eu5beqyc" path="res://drinks/ingredients/chai.tres" id="3_pac0d"]
+[ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="4_0svji"]
+
+[resource]
+script = ExtResource("4_0svji")
+name = "almondmilk chai latte"
+main_ingredient = ExtResource("3_pac0d")
+liquid = ExtResource("2_fxo3g")
+icon = ExtResource("1_2ltfg")
+metadata/_custom_type_script = "uid://bpib3g54m3xm5"

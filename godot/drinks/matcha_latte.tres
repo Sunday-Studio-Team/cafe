@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://2v7setnqlw6r"]
+
+[ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="1_dg572"]
+[ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_huula"]
+[ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="2_6ronp"]
+[ext_resource type="Resource" uid="uid://ddva2spvtymuj" path="res://drinks/ingredients/green_tea_bag.tres" id="3_hf347"]
+
+[resource]
+script = ExtResource("1_huula")
+name = "matcha latte"
+main_ingredient = ExtResource("3_hf347")
+liquid = ExtResource("2_6ronp")
+icon = ExtResource("1_dg572")
+metadata/_custom_type_script = "uid://bpib3g54m3xm5"
