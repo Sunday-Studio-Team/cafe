@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="1_sahxb"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="2_rxjwk"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="3_pjr5n"]
+[ext_resource type="Texture2D" uid="uid://djasw8q00grs7" path="res://sprites/ingredient_icons/water.png" id="4_dw44w"]
 [ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_qwcv2"]
 [ext_resource type="Texture2D" uid="uid://dars6l4l6w3cg" path="res://sprites/ingredient_icons/milk.png" id="5_dw44w"]
 [ext_resource type="Texture2D" uid="uid://jcak6ksq2m0k" path="res://sprites/ingredient_icons/ice.png" id="6_uuvgi"]
@@ -134,11 +135,17 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="OrderedInfo" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/OrderInfo" unique_id=1529670566]
+propagate_maximum_size = false
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 4
 
 [node name="OrderedItem" type="TextureRect" parent="VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo" unique_id=1920408608]
+custom_minimum_size = Vector2(150, 150)
+custom_maximum_size = Vector2(150, 150)
 layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_dw44w")
+expand_mode = 5
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo" unique_id=1074364750]
 layout_mode = 2
@@ -183,6 +190,14 @@ stretch_mode = 4
 [node name="MadeInfo" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/OrderInfo" unique_id=1867858415]
 layout_mode = 2
 size_flags_horizontal = 10
+
+[node name="MadeItem" type="TextureRect" parent="VBoxContainer/PanelContainer2/OrderInfo/MadeInfo" unique_id=1104273258]
+custom_minimum_size = Vector2(150, 150)
+custom_maximum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("4_dw44w")
+expand_mode = 5
 
 [node name="MachineOrderIndicator" type="Label" parent="VBoxContainer/PanelContainer2/OrderInfo/MadeInfo" unique_id=220725264]
 layout_mode = 2
