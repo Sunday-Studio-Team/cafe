@@ -37,6 +37,7 @@ expand_margin_bottom = 35.0
 bg_color = Color(0.68556535, 0.5972759, 0.23268256, 1)
 corner_radius_top_left = 50
 corner_radius_bottom_right = 50
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
@@ -154,10 +155,14 @@ texture = ExtResource("4_dw44w")
 expand_mode = 4
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer/DrinksInfo/OrderInfo/OrderedInfo" unique_id=1074364750]
+custom_minimum_size = Vector2(250, 0)
+custom_maximum_size = Vector2(250, -1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "ORDERED
-item"
+almond milk iced matcha latte"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="OrderBreakdown" type="GridContainer" parent="VBoxContainer/DrinksInfo/OrderInfo/OrderedInfo" unique_id=802914043]
 layout_mode = 2
@@ -226,10 +231,14 @@ texture = ExtResource("4_dw44w")
 expand_mode = 4
 
 [node name="MachineOrderIndicator" type="Label" parent="VBoxContainer/DrinksInfo/OrderInfo/MadeInfo" unique_id=220725264]
+custom_minimum_size = Vector2(250, 0)
+custom_maximum_size = Vector2(250, -1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "MADE
-item"
+almond milk iced matcha latte"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="MadeBreakdown" type="GridContainer" parent="VBoxContainer/DrinksInfo/OrderInfo/MadeInfo" unique_id=1161911280]
 layout_mode = 2
@@ -354,7 +363,8 @@ horizontal_alignment = 1
 [node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
 layout_mode = 2
 size_flags_vertical = 2
-offset_transform_rotation = -0.017453292
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 10)
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/IngredientsMeter" unique_id=869047581]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
