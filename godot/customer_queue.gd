@@ -8,6 +8,7 @@ signal queue_updated
 @export var front_of_window_queue: Marker3D
 @export var queue_spacing_offset: float = -1
 
+static var seen_complaint_popup := false
 var customers_waiting: Array[Customer]
 
 @onready var queue_front_position: Vector3 = front_of_window_queue.global_position
@@ -20,8 +21,17 @@ func _ready() -> void:
 
 
 func add_customer(customer: Customer) -> void:
+	# Showing the popup tutorial when the customer complains
+	if not seen_complaint_popup:
+		seen_complaint_popup = true # Only showing it once
+		Global.popups["complaint"].open()
+	else:
+		pass
+		
+
 	Events.alert_posted.emit("🛎️ customer complained")
 	Global.score_update_message = "customer complained"
+	
 	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(func(): remove_front_customer(false))

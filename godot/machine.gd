@@ -1,4 +1,5 @@
 # TODO: make the fixing minigame flow more readable
+# machine_3d_gui.gd is where the player interacts with the machine
 class_name Machine
 extends Node3D
 
@@ -56,6 +57,7 @@ extends Node3D
 @export var hammer_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
 
+static var seen_breakdown_popup := false
 var customer: Customer
 var order: OrderData
 var waiting_for_response: bool = false
@@ -509,6 +511,13 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
+	# Showing the popup tutorial when the machine is broken
+	if not seen_breakdown_popup:
+		seen_breakdown_popup = true # Only showing it once
+		Global.popups["breakdown"].open()
+	else:
+		pass
+		
 	if gui_3d.player_using_me:
 		gui_3d.exit()
 	gui_3d.interactable.enabled = false

@@ -12,6 +12,7 @@ const CAM_TWEEN_DUR := 0.25
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
 
+static var seen_interaction_popup := false
 var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
@@ -37,7 +38,14 @@ func _ready():
 			interactable.enabled = false
 			Global.in_machine_ui = true
 			player_using_me = true
-
+			
+			# Showing the popup tutorial when the player uses the machine
+			if not seen_interaction_popup:
+				seen_interaction_popup = true # Only showing it once
+				Global.popups["interaction"].open()
+			else:
+				pass
+				
 			create_tween().tween_property(
 				Global.player,
 				"global_rotation_degrees",

@@ -14,6 +14,10 @@ extends Node
 @export var empty_star_texture: Texture
 @export var mop_cursor_texture: Texture2D
 @export var emails_schedule: Array[EmailData]
+@export var complaint_popup: CanvasLayer
+
+var popups: Dictionary = {}
+var popup_hint_showing: bool = false
 
 var player: Player
 var hovered_interactable: Interactable:
@@ -105,6 +109,7 @@ var in_ui: bool:
 		if (
 				minigame_active
 				or in_pc_ui
+				or popup_hint_showing
 				or in_machine_ui
 				or Console.is_visible()
 				or in_main_menu

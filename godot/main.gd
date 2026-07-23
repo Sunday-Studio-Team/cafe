@@ -28,6 +28,10 @@ extends Node3D
 @export var active_item_timer: Timer
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
+@export var interaction_popup: CanvasLayer
+@export var breakdown_popup: CanvasLayer
+static var seen_interaction_popup := false
+static var seen_breakdown_popup := false
 
 
 func _enter_tree() -> void:
