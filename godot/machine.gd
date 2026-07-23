@@ -263,6 +263,7 @@ func machine_make_drink() -> void:
 			break
 	
 	# now find a random drink that has that score !
+	Global.drinks.shuffle()
 	for item in Global.drinks:
 		var sc = item.get_score_from(order.ordered_drink)
 		if sc == order.score:
