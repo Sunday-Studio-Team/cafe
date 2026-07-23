@@ -121,7 +121,7 @@ var equipped_item: Item = null
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
-		drink.get_price()
+		drink.create() # adds the price and creates the typing minigame resource
 	items.assign(load_resources_from_folder(items_folder_path))
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
