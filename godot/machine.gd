@@ -136,6 +136,7 @@ func _physics_process(_delta: float) -> void:
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
 	made_breakdown.visible = waiting_for_response
+	made_drink_icon.visible = waiting_for_response
 
 	refill_button.visible = Global.holding_ingredients
 
@@ -222,7 +223,7 @@ func machine_make_drink() -> void:
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
-			"ORDERED: %s (%s)"
+			"ORDERED:\n %s (%s)"
 			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
 
@@ -311,7 +312,7 @@ func machine_make_drink() -> void:
 		spill()
 
 	final_order_indicator.text = (
-			"MADE: %s (%s)"
+			"MADE:\n %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	final_order_indicator.show()
@@ -444,7 +445,7 @@ func accept_order() -> void:
 
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "dispensing drink to customer . . ."
+	final_order_indicator.text = "dispensing . . ."
 
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
@@ -501,7 +502,7 @@ func finished_make_drink_manually() -> void:
 	order.made_drink = order.ordered_drink
 	order.score = 3
 	final_order_indicator.text = (
-			"you made: %s (%s)"
+			"you made:\n %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	display_drink_score()
