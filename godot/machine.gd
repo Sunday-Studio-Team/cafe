@@ -16,7 +16,7 @@ extends Node3D
 @export var accept_button: Button
 @export var reject_button: Button
 @export var refill_button: Interactable
-@export var waiting_approval_indicator: Label
+@export var waiting_approval_indicator: Control
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
