@@ -15,8 +15,6 @@ func close() -> void:
 	Global.popup_hint_showing = false
 	get_tree().paused = false
 	
-func _unhandled_input(event):
-	if visible and event.is_action_pressed("ui_cancel"):
+func _physics_process(delta: float) -> void:
+	if visible and Input.is_action_pressed("ui_cancel"):
 		close()
-		get_viewport().set_input_as_handled()
-	
