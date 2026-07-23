@@ -6,6 +6,7 @@ extends Resource
 @export var main_ingredient: Ingredient
 @export var liquid: Ingredient
 @export var extra: Ingredient
+@export var icon: Texture2D
 @export var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe
 
 func _init() -> void:

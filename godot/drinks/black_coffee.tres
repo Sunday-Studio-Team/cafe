@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://bgum1f0hyg378"]
 
 [ext_resource type="Resource" uid="uid://c566sstn0q5w6" path="res://drinks/ingredients/water.tres" id="1_04jei"]
+[ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="1_jbrti"]
 [ext_resource type="Resource" uid="uid://cldvta860kml" path="res://drinks/ingredients/coffee.tres" id="1_o3mpd"]
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_rp4e0"]
 [ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_recipe.gd" id="2_pgiq0"]
@@ -15,5 +16,6 @@ script = ExtResource("1_rp4e0")
 name = "black coffee"
 main_ingredient = ExtResource("1_o3mpd")
 liquid = ExtResource("1_04jei")
+icon = ExtResource("1_jbrti")
 typing_minigame_ingredients_recipe = SubResource("Resource_yh4iq")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"
