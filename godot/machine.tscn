@@ -100,7 +100,7 @@ material = SubResource("StandardMaterial3D_xurph")
 radius = 0.1
 height = 0.2
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "hum_sound", "done_sound", "spill_clean_sound", "spill_clean_particles", "fixed_sound", "tip_label", "hammer_hit_sound")]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "waiting_approval_indicator", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_clean_particles", "tip_label", "hammer_hit_sound")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 spot_for_player = NodePath("SpotForPlayer")
@@ -133,19 +133,21 @@ customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/C
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
 time_bonus_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel")
 time_bonus_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel/TimeBonusText")
-order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo/OrderBreakdown")
+order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2")
 ordered_main_ingredient_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo/OrderBreakdown/Main/TextureRect")
 ordered_liquid_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo/OrderBreakdown/Liquid/TextureRect")
 ordered_extra_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo/OrderBreakdown/Extra/TextureRect")
-made_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/MadeInfo/MadeBreakdown")
+ordered_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/OrderedInfo/OrderedItem")
+made_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/MadeInfo")
 made_main_ingredient_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/MadeInfo/MadeBreakdown/Main")
 made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/MadeInfo/MadeBreakdown/Liquid")
 made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/MadeInfo/MadeBreakdown/Extra")
+made_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/PanelContainer2/OrderInfo/MadeInfo/MadeItem")
 hum_sound = NodePath("HumSound")
 done_sound = NodePath("DoneSound")
 spill_clean_sound = NodePath("SpillCleanSound")
-spill_clean_particles = NodePath("SpillCleanParticles")
 fixed_sound = NodePath("FixedSound")
+spill_clean_particles = NodePath("SpillCleanParticles")
 tip_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/TipLabel")
 hammer_item = ExtResource("3_wuddj")
 hammer_hit_sound = NodePath("HammerHitSound")
