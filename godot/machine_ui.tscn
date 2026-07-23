@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="2_rxjwk"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="3_pjr5n"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="4_dw44w"]
-[ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_qwcv2"]
-[ext_resource type="Texture2D" uid="uid://dars6l4l6w3cg" path="res://sprites/ingredient_icons/milk.png" id="5_dw44w"]
-[ext_resource type="Texture2D" uid="uid://jcak6ksq2m0k" path="res://sprites/ingredient_icons/ice.png" id="6_uuvgi"]
 [ext_resource type="PackedScene" uid="uid://wy44aeyirhsb" path="res://ui/order_breakdown_icon.tscn" id="7_dw44w"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
@@ -173,7 +170,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/DrinksInfo/OrderInfo/OrderedInfo/OrderBreakdown/Main" unique_id=1345079991]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-texture = ExtResource("4_qwcv2")
 expand_mode = 3
 stretch_mode = 4
 
@@ -183,7 +179,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/DrinksInfo/OrderInfo/OrderedInfo/OrderBreakdown/Liquid" unique_id=1279882551]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-texture = ExtResource("5_dw44w")
 expand_mode = 3
 stretch_mode = 4
 
@@ -193,7 +188,6 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/DrinksInfo/OrderInfo/OrderedInfo/OrderBreakdown/Extra" unique_id=1400792246]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-texture = ExtResource("6_uuvgi")
 expand_mode = 3
 stretch_mode = 4
 

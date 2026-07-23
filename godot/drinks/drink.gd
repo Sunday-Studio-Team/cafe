@@ -9,7 +9,7 @@ extends Resource
 @export var icon: Texture2D
 @export var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe
 
-func _init() -> void:
+func get_price() -> void:
 	price += main_ingredient.cost
 	if liquid:
 		price += liquid.cost

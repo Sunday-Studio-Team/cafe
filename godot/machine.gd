@@ -227,10 +227,12 @@ func machine_make_drink() -> void:
 			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
 
-	ordered_main_ingredient_icon.texture = Global.main_ingredient_icons.get(order.ordered_drink.main_ingredient)
-	ordered_liquid_icon.texture = Global.liquid_icons.get(order.ordered_drink.liquid)
-	ordered_extra_icon.texture = Global.extra_icons.get(order.ordered_drink.extra)
-	ordered_drink_icon.texture = Global.drinks_icons.get(order.ordered_drink.name)
+	ordered_main_ingredient_icon.texture = order.ordered_drink.main_ingredient.icon
+	if (order.ordered_drink.liquid):
+		ordered_liquid_icon.texture = order.ordered_drink.liquid.icon
+	if (order.ordered_drink.extra):
+		ordered_extra_icon.texture = order.ordered_drink.extra.icon
+	ordered_drink_icon.texture = order.ordered_drink.icon
 
 	customer_order_indicator.show()
 	order_breakdown.show()
@@ -335,11 +337,13 @@ func display_drink_score() -> void:
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
 	made_main_ingredient_panel.correct = order.main_correct
-	made_liquid_panel.ingredient = order.made_drink.liquid
+	if order.made_drink.liquid:
+		made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-	made_extra_panel.ingredient = order.made_drink.extra
+	if made_extra_panel.ingredient:
+		made_extra_panel.ingredient = order.made_drink.extra
 	made_extra_panel.correct = order.extra_correct
-	made_drink_icon.texture = Global.drinks_icons.get(order.made_drink.name)
+	made_drink_icon.texture = order.made_drink.icon
 
 	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()
