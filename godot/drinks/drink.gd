@@ -2,6 +2,7 @@ class_name Drink
 extends Resource
 
 @export var name: String
+@export var singular_article: String = "a"
 @export var main_ingredient: Ingredient
 @export var liquid: Ingredient
 @export var extra: Ingredient

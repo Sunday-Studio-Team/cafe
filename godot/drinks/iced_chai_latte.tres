@@ -4,20 +4,14 @@
 [ext_resource type="Resource" uid="uid://cxmm0w33f8vfv" path="res://drinks/ingredients/ice.tres" id="1_1ncab"]
 [ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="1_604ko"]
 [ext_resource type="Resource" uid="uid://dopc7eu5beqyc" path="res://drinks/ingredients/chai.tres" id="2_1ncab"]
-[ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_recipe.gd" id="2_u2fog"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="2_u4lej"]
-
-[sub_resource type="Resource" id="Resource_gnwcv"]
-script = ExtResource("2_u2fog")
-ingredient_names = Array[String](["chai", "milk", "ice"])
-metadata/_custom_type_script = "uid://c1qu64r4ohlqc"
 
 [resource]
 script = ExtResource("1_0n4d4")
 name = "iced chai latte"
+singular_article = "an"
 main_ingredient = ExtResource("2_1ncab")
 liquid = ExtResource("1_604ko")
 extra = ExtResource("1_1ncab")
 icon = ExtResource("2_u4lej")
-typing_minigame_ingredients_recipe = SubResource("Resource_gnwcv")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"

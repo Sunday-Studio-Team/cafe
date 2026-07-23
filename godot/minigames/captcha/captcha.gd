@@ -6,6 +6,7 @@ extends SubViewportContainer
 @export var captcha: GridContainer
 @export var submit_button: Button
 @export var instructions: RichTextLabel
+@export var drink_name: RichTextLabel
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 
@@ -74,6 +75,7 @@ func populate_order_reminder() -> void:
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
+	drink_name.text = "You are making %s [color=gold]%s" % [ordered_drink.singular_article, ordered_drink.name]
 
 
 ## Should only be called after verifying that criteria for progressing state is met
