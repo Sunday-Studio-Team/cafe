@@ -16,7 +16,7 @@ extends Node3D
 @export var accept_button: Button
 @export var reject_button: Button
 @export var refill_button: Interactable
-@export var waiting_approval_indicator: Label
+@export var waiting_approval_indicator: Control
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
@@ -34,19 +34,24 @@ extends Node3D
 @export var no_ingredients_warning: Control
 @export var time_bonus_panel: PanelContainer
 @export var time_bonus_label: Label
+
 @export var order_breakdown: Control
 @export var ordered_main_ingredient_icon: TextureRect
 @export var ordered_liquid_icon: TextureRect
 @export var ordered_extra_icon: TextureRect
+@export var ordered_drink_icon: TextureRect
+
 @export var made_breakdown: Control
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
+@export var made_drink_icon: TextureRect
+
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
 @export var spill_clean_sound: AudioStreamPlayer3D
-@export var spill_clean_particles: GPUParticles3D
 @export var fixed_sound: AudioStreamPlayer3D
+@export var spill_clean_particles: GPUParticles3D
 @export var tip_label: Label
 @export var hammer_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
@@ -131,6 +136,7 @@ func _physics_process(_delta: float) -> void:
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
 	waiting_approval_indicator.visible = waiting_for_response
 	made_breakdown.visible = waiting_for_response
+	made_drink_icon.visible = waiting_for_response
 
 	refill_button.visible = Global.holding_ingredients
 
@@ -217,13 +223,17 @@ func machine_make_drink() -> void:
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
-			"ORDERED: %s (%s)"
+			"ORDERED:\n %s (%s)"
 			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
 
-	ordered_main_ingredient_icon.texture = Global.main_ingredient_icons.get(order.ordered_drink.main_ingredient)
-	ordered_liquid_icon.texture = Global.liquid_icons.get(order.ordered_drink.liquid)
-	ordered_extra_icon.texture = Global.extra_icons.get(order.ordered_drink.extra)
+	ordered_main_ingredient_icon.texture = order.ordered_drink.main_ingredient.icon
+	ordered_liquid_icon.texture = order.ordered_drink.liquid.icon
+	if (order.ordered_drink.extra):
+		ordered_extra_icon.texture = order.ordered_drink.extra.icon
+	else:
+		ordered_extra_icon.texture = null
+	ordered_drink_icon.texture = order.ordered_drink.icon
 
 	customer_order_indicator.show()
 	order_breakdown.show()
@@ -305,7 +315,7 @@ func machine_make_drink() -> void:
 		spill()
 
 	final_order_indicator.text = (
-			"MADE: %s (%s)"
+			"MADE:\n %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	final_order_indicator.show()
@@ -330,8 +340,12 @@ func display_drink_score() -> void:
 	made_main_ingredient_panel.correct = order.main_correct
 	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-	made_extra_panel.ingredient = order.made_drink.extra
+	if order.made_drink.extra:
+		made_extra_panel.ingredient = order.made_drink.extra
+	else:
+		made_extra_panel.ingredient = null
 	made_extra_panel.correct = order.extra_correct
+	made_drink_icon.texture = order.made_drink.icon
 
 	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()
@@ -437,7 +451,7 @@ func accept_order() -> void:
 
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "dispensing drink to customer . . ."
+	final_order_indicator.text = "dispensing . . ."
 
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
@@ -494,7 +508,7 @@ func finished_make_drink_manually() -> void:
 	order.made_drink = order.ordered_drink
 	order.score = 3
 	final_order_indicator.text = (
-			"you made: %s (%s)"
+			"you made:\n %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
 	display_drink_score()

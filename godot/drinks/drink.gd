@@ -1,14 +1,23 @@
 class_name Drink
 extends Resource
 
-# NOTE: WRONG values for testing purposes
-enum MainIngredient { NONE, WRONG, COFFEE, TEA, CHAI }
-enum Liquid { NONE, WRONG, WATER, MILK }
-enum Extra { NONE, WRONG, SUGAR, ICE }
-
 @export var name: String
-@export var price: float = 3.00
-@export var main_ingredient: MainIngredient
-@export var liquid: Liquid
-@export var extra: Extra
-@export var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe
+@export var singular_article: String = "a"
+@export var main_ingredient: Ingredient
+@export var liquid: Ingredient
+@export var extra: Ingredient
+@export var icon: Texture2D
+var price: float
+var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe = null
+
+func create() -> void:
+	typing_minigame_ingredients_recipe = TypingMinigameContentIngredientsListRecipe.new()
+	price += main_ingredient.cost
+	typing_minigame_ingredients_recipe.ingredient_names.append(main_ingredient.name_to_string())
+	if liquid:
+		typing_minigame_ingredients_recipe.ingredient_names.append(liquid.name_to_string())
+		price += liquid.cost
+	if extra:
+		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
+		price += extra.cost
+	price += 0.5

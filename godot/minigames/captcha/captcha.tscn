@@ -16,7 +16,7 @@ bg_color = Color(0.21702155, 0.42809728, 0.671875, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uevaj"]
 bg_color = Color(0.3121078, 0.61610895, 0.96875, 1)
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "entire_panel")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +29,7 @@ extra_ordered = NodePath("SubViewport/CanvasLayer/OrderReminder/MarginContainer/
 captcha = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha")
 submit_button = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/BottomButtonContainer/SubmitButton")
 instructions = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/Instructions")
+drink_name = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
 entire_panel = NodePath("SubViewport/CanvasLayer/PanelContainer")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
@@ -138,6 +139,14 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer" unique_id=1853410154]
 layout_mode = 2
+
+[node name="DrinkName" type="RichTextLabel" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=1563091382]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=red]This should not be visible in game"
+fit_content = true
+scroll_active = false
 
 [node name="Intro" type="RichTextLabel" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=657684729]
 custom_minimum_size = Vector2(0, 35)

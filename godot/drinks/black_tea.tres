@@ -1,7 +1,10 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://c0h5l2omgd2fq"]
 
+[ext_resource type="Resource" uid="uid://c566sstn0q5w6" path="res://drinks/ingredients/water.tres" id="1_f7qq6"]
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_o04t2"]
+[ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="1_x0abr"]
 [ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_recipe.gd" id="2_sup2u"]
+[ext_resource type="Resource" uid="uid://cqp5ihcl57x2g" path="res://drinks/ingredients/tea_bag.tres" id="2_x0abr"]
 
 [sub_resource type="Resource" id="Resource_h5pe5"]
 script = ExtResource("2_sup2u")
@@ -11,8 +14,8 @@ metadata/_custom_type_script = "uid://c1qu64r4ohlqc"
 [resource]
 script = ExtResource("1_o04t2")
 name = "black tea"
-price = 2.0
-main_ingredient = 3
-liquid = 2
+main_ingredient = ExtResource("2_x0abr")
+liquid = ExtResource("1_f7qq6")
+icon = ExtResource("1_x0abr")
 typing_minigame_ingredients_recipe = SubResource("Resource_h5pe5")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"
