@@ -261,35 +261,16 @@ func machine_make_drink() -> void:
 		if ran_num < cumulative_score_chance:
 			order.score = score
 			break
-
+	
 	# now find a random drink that has that score !
-	var random_drink_score := 0
-	var loops := 0
-	const LOOP_LIMIT := 20
-
-	while (
-			(
-					order.made_drink == null
-					or random_drink_score != order.score
-			)
-			and loops < LOOP_LIMIT
-	):
-		var potential_drink_score := 0
-		order.made_drink = Global.drinks.pick_random()
-		for element in ["main_ingredient", "liquid", "extra"]:
-			if order.made_drink.get(element) == order.ordered_drink.get(element):
-				potential_drink_score += 1
-			else:
-				potential_drink_score -= 1
-		random_drink_score = potential_drink_score
-		loops += 1
-
-	# use a fallback if we couldnt find a drink with that score
-	# (i THINK this can happen but it might be rare)
-	if loops > LOOP_LIMIT:
-		print("no matching drink has the generated drink score (%s) for %s" % [order.score, order.made_drink.name])
-		print("choosing a random fallback drink instead - this one has a score of %s" % random_drink_score)
-		order.score = random_drink_score
+	for item in Global.drinks:
+		var sc = item.get_score_from(order.ordered_drink)
+		if sc == order.score:
+			order.made_drink = item
+			break;
+	#var drinks_list = Global.drinks.filter(func(d): 
+		#d.get_score_from(order.ordered_drink) == order.score)
+	#order.made_drink = drinks_list.pick_random()
 
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
