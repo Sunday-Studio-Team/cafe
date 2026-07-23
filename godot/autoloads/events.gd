@@ -17,6 +17,7 @@ signal customer_left_machine(customer: Customer, drink_score: int)
 signal customer_timed_out_window
 signal time_up
 signal end_screen_finished
+signal requirements_met
 signal money_updated(new_value: float, old_value: float)
 signal customer_score_updated(new_value: int, old_value: int)
 signal alert_posted(message: String)
