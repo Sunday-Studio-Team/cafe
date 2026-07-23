@@ -37,20 +37,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			set_submit_text("SKIP")
 
-
 func populate_captcha() -> void:
 	for captcha_icon: IngredientIconHolder in captcha.get_children():
 		captcha_icon.button.button_pressed = false
 		match current_game_state:
 			GameStates.MAIN:
 				captcha_icon.type = captcha_icon.Type.MAIN
-				captcha_icon.ingredient = Global.ingredients.filter(func(type): return Ingredient.Ingredient_Type.MAIN).pick_random()
+				captcha_icon.ingredient = Global.ingredients.filter(func(i): return i.type == Ingredient.Ingredient_Type.MAIN).pick_random()
 			GameStates.LIQUID:
 				captcha_icon.type = captcha_icon.Type.LIQUID
-				captcha_icon.ingredient = Global.ingredients.filter(func(type): return Ingredient.Ingredient_Type.LIQUID).pick_random()
+				captcha_icon.ingredient = Global.ingredients.filter(func(i): return i.type == Ingredient.Ingredient_Type.LIQUID).pick_random()
 			GameStates.EXTRA:
 				captcha_icon.type = captcha_icon.Type.EXTRA
-				captcha_icon.ingredient = Global.ingredients.filter(func(type): return Ingredient.Ingredient_Type.EXTRA).pick_random()
+				captcha_icon.ingredient = Global.ingredients.filter(func(i): return i.type == Ingredient.Ingredient_Type.EXTRA).pick_random()
 	
 	# Functionality to guarantee needed icon shows up at least once
 	match current_game_state:
