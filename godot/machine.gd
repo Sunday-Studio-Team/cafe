@@ -340,7 +340,7 @@ func display_drink_score() -> void:
 	if order.made_drink.liquid:
 		made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-	if made_extra_panel.ingredient:
+	if order.made_drink.extra:
 		made_extra_panel.ingredient = order.made_drink.extra
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
