@@ -98,6 +98,7 @@ var in_main_menu := false
 var in_end_screen := false
 var in_active_item_menu := false
 var in_tutorial_screen: bool = false
+var in_end_shift_early_menu := false
 var in_ui: bool:
 	get():
 		if (
@@ -109,6 +110,7 @@ var in_ui: bool:
 				or in_end_screen
 				or in_active_item_menu
 				or in_tutorial_screen
+				or in_end_shift_early_menu
 		):
 			return true
 		else:

@@ -40,6 +40,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var hammer_indicator: PanelContainer
 @export var current_item_icon: TextureRect
 @export var use_item_prompt: Button
+@export var end_shift_guide: Button
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -66,6 +67,7 @@ func _ready() -> void:
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
 	Events.time_up.connect(func(): hide())
+	Events.requirements_met.connect(func(): end_shift_guide.show())
 
 	exit_machine_button.pressed.connect(
 		func():
