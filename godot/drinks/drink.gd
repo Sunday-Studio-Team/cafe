@@ -20,4 +20,4 @@ func create() -> void:
 	if extra:
 		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
 		price += extra.cost
-	price += 1.0
+	price += 0.5
