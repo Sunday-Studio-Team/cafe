@@ -34,19 +34,24 @@ extends Node3D
 @export var no_ingredients_warning: Control
 @export var time_bonus_panel: PanelContainer
 @export var time_bonus_label: Label
+
 @export var order_breakdown: Control
 @export var ordered_main_ingredient_icon: TextureRect
 @export var ordered_liquid_icon: TextureRect
 @export var ordered_extra_icon: TextureRect
+@export var ordered_drink_icon: TextureRect
+
 @export var made_breakdown: Control
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
+@export var made_drink_icon: TextureRect
+
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
 @export var spill_clean_sound: AudioStreamPlayer3D
-@export var spill_clean_particles: GPUParticles3D
 @export var fixed_sound: AudioStreamPlayer3D
+@export var spill_clean_particles: GPUParticles3D
 @export var tip_label: Label
 @export var hammer_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
@@ -224,6 +229,7 @@ func machine_make_drink() -> void:
 	ordered_main_ingredient_icon.texture = Global.main_ingredient_icons.get(order.ordered_drink.main_ingredient)
 	ordered_liquid_icon.texture = Global.liquid_icons.get(order.ordered_drink.liquid)
 	ordered_extra_icon.texture = Global.extra_icons.get(order.ordered_drink.extra)
+	ordered_drink_icon.texture = Global.drinks_icons.get(order.ordered_drink.name)
 
 	customer_order_indicator.show()
 	order_breakdown.show()
@@ -332,6 +338,7 @@ func display_drink_score() -> void:
 	made_liquid_panel.correct = order.liquid_correct
 	made_extra_panel.ingredient = order.made_drink.extra
 	made_extra_panel.correct = order.extra_correct
+	made_drink_icon.texture = Global.drinks_icons.get(order.made_drink.name)
 
 	price_label.text = Global.float_to_price(order.made_drink.price)
 	price_label.show()

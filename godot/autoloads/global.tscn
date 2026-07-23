@@ -15,9 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://sq8k5eurmf01" path="res://sprites/ingredient_icons/sugar.png" id="12_x2nk7"]
 [ext_resource type="Texture2D" uid="uid://jcak6ksq2m0k" path="res://sprites/ingredient_icons/ice.png" id="13_jmbcq"]
 [ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="15_do865"]
+[ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="15_mqmvk"]
+[ext_resource type="Texture2D" uid="uid://cvel5001amo2l" path="res://sprites/drink_icons/latte.png" id="16_d3ggd"]
 [ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="16_qy21g"]
 [ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="17_aqy5m"]
+[ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="17_q3fcq"]
 [ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="18_oscrk"]
+[ext_resource type="Texture2D" uid="uid://b183e18xb3dn6" path="res://sprites/drink_icons/green_tea.png" id="18_rl0w7"]
 
 [node name="Global" type="Node" unique_id=668412834]
 process_mode = 3
@@ -44,5 +48,17 @@ liquid_icons = Dictionary[int, Texture2D]({
 extra_icons = Dictionary[int, Texture2D]({
 2: ExtResource("12_x2nk7"),
 3: ExtResource("13_jmbcq")
+})
+drinks_icons = Dictionary[String, Texture2D]({
+"WRONGWRONGWRONG": ExtResource("10_nkame"),
+"black coffee": ExtResource("10_nkame"),
+"black tea": ExtResource("10_nkame"),
+"chai latte": ExtResource("10_nkame"),
+"espresso": ExtResource("15_mqmvk"),
+"green tea": ExtResource("18_rl0w7"),
+"iced chai latte": ExtResource("10_nkame"),
+"iced espresso": ExtResource("10_nkame"),
+"iced latte": ExtResource("16_d3ggd"),
+"iced matcha latte": ExtResource("17_q3fcq")
 })
 emails_schedule = Array[ExtResource("15_do865")]([ExtResource("16_qy21g"), ExtResource("17_aqy5m"), ExtResource("18_oscrk")])

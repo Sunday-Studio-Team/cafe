@@ -15,6 +15,7 @@ extends Node
 @export var main_ingredient_icons: Dictionary[Drink.MainIngredient, Texture2D]
 @export var liquid_icons: Dictionary[Drink.Liquid, Texture2D]
 @export var extra_icons: Dictionary[Drink.Extra, Texture2D]
+@export var drinks_icons: Dictionary[String, Texture2D]
 @export var emails_schedule: Array[EmailData]
 
 var player: Player
