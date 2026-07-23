@@ -26,6 +26,7 @@ shape = SubResource("BoxShape3D_n6krc")
 
 [node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=2012924599]
 process_mode = 3
+visible = false
 script = ExtResource("3_n6krc")
 popup_id = "complaint"
 
@@ -50,4 +51,5 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 70
-text = "A customer has a complaint. Talk to them at the counter"
+text = "A customer has a complaint.
+Talk to them at the counter"
