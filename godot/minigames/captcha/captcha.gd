@@ -12,8 +12,8 @@ extends SubViewportContainer
 var ordered_drink: Drink
 var current_game_state: GameStates = GameStates.MAIN
 var main_text: String = "The required first ingredient"
-var liquid_text: String = "The required second ingredient"
-var extra_text: String = "The required third ingredient"
+var liquid_text: String = "The required liquid ingredient"
+var extra_text: String = "The required additional ingredient"
 
 enum GameStates { MAIN, LIQUID, EXTRA }
 
@@ -92,7 +92,7 @@ func progress_state() -> void:
 
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
-	var ordered_ingredient
+	var ordered_ingredient;	
 	match current_game_state:
 		GameStates.MAIN:
 			ordered_ingredient = ordered_drink.main_ingredient
