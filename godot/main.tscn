@@ -3761,7 +3761,6 @@ transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.8854
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StartShiftWhiteboard/CSGCombiner3D" unique_id=907099516]
-visible = false
 size = Vector3(2.3029785, 1.1992188, 0.07836914)
 material = SubResource("StandardMaterial3D_smeu8")
 
@@ -3965,7 +3964,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="0" unique_id=1716810175]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -3976,10 +3975,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="1" unique_id=976313027]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1178192340) index="1" unique_id=398972065]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(1, 0.52156866, 0.9607843, 1)
 light_energy = 5.04
@@ -3987,7 +3986,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="2" unique_id=62528304]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -4914,9 +4913,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 37.99999
-offset_top = -516.0
+offset_top = -482.0
 offset_right = 588.0
-offset_bottom = 34.0
+offset_bottom = 68.0
 grow_vertical = 0
 rotation = 0.05235988
 size_flags_horizontal = 0
@@ -5015,7 +5014,7 @@ text = "$ 0"
 
 [node name="MoneyBar" type="ProgressBar" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
-custom_minimum_size = Vector2(475, 30)
+custom_minimum_size = Vector2(450, 30)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
@@ -5039,14 +5038,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 
 [node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/MarginContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(125, 110)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
-stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
