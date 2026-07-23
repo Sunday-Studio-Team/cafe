@@ -10,8 +10,12 @@ enum Type { MAIN, LIQUID, EXTRA }
 
 var ingredient: Ingredient = null:
 	set(value):
-		ingredient = value
-		icon.texture = ingredient.icon
+		if value == null:
+			ingredient = null
+			icon.texture = null
+		else:
+			ingredient = value
+			icon.texture = ingredient.icon
 
 func _ready() -> void:
 	button.disabled = button_disabled

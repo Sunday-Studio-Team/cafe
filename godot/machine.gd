@@ -228,10 +228,11 @@ func machine_make_drink() -> void:
 	)
 
 	ordered_main_ingredient_icon.texture = order.ordered_drink.main_ingredient.icon
-	if (order.ordered_drink.liquid):
-		ordered_liquid_icon.texture = order.ordered_drink.liquid.icon
+	ordered_liquid_icon.texture = order.ordered_drink.liquid.icon
 	if (order.ordered_drink.extra):
 		ordered_extra_icon.texture = order.ordered_drink.extra.icon
+	else:
+		ordered_extra_icon.texture = null
 	ordered_drink_icon.texture = order.ordered_drink.icon
 
 	customer_order_indicator.show()
@@ -337,11 +338,12 @@ func display_drink_score() -> void:
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
 	made_main_ingredient_panel.correct = order.main_correct
-	if order.made_drink.liquid:
-		made_liquid_panel.ingredient = order.made_drink.liquid
+	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
 	if order.made_drink.extra:
 		made_extra_panel.ingredient = order.made_drink.extra
+	else:
+		made_extra_panel.ingredient = null
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
 
