@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://cijqkuvo12tqt"]
 
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_fo7p0"]
+[ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="1_g2qxs"]
+[ext_resource type="Resource" uid="uid://cldvta860kml" path="res://drinks/ingredients/coffee.tres" id="2_ddp4v"]
 [ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_recipe.gd" id="2_g5lke"]
 
 [sub_resource type="Resource" id="Resource_rgg08"]
@@ -11,8 +13,7 @@ metadata/_custom_type_script = "uid://c1qu64r4ohlqc"
 [resource]
 script = ExtResource("1_fo7p0")
 name = "latte"
-price = 3.5
-main_ingredient = 2
-liquid = 3
+main_ingredient = ExtResource("2_ddp4v")
+liquid = ExtResource("1_g2qxs")
 typing_minigame_ingredients_recipe = SubResource("Resource_rgg08")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"
