@@ -116,11 +116,18 @@
 [ext_resource type="Texture2D" uid="uid://cm6vhnn82dmon" path="res://sprites/alert/frame_43_delay-0.04s.png" id="66_t5kpo"]
 [ext_resource type="Texture2D" uid="uid://71150mhvmlgn" path="res://sprites/alert/frame_44_delay-0.04s.png" id="67_pw0td"]
 [ext_resource type="Texture2D" uid="uid://berkulo1wmonh" path="res://sprites/alert/frame_45_delay-0.04s.png" id="68_37eu1"]
+[ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="68_tfaor"]
 [ext_resource type="Texture2D" uid="uid://5s20stlwbrg2" path="res://sprites/alert/frame_46_delay-0.04s.png" id="69_0wkqm"]
+[ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="69_3rmuw"]
+[ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="69_j3ofb"]
+[ext_resource type="Texture2D" uid="uid://bhg3g67g8gjck" path="res://sprites/items/book.png" id="70_j3ofb"]
 [ext_resource type="Texture2D" uid="uid://du70ghn0053vm" path="res://sprites/alert/frame_47_delay-0.05s.png" id="70_ve5sr"]
 [ext_resource type="Texture2D" uid="uid://c51a6c721kqft" path="res://sprites/alert/frame_48_delay-0.04s.png" id="71_5s44m"]
+[ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
 [ext_resource type="Texture2D" uid="uid://w2ivnokp8yuo" path="res://sprites/alert/frame_49_delay-0.04s.png" id="72_ibca3"]
+[ext_resource type="Texture2D" uid="uid://b8pqjkx1lt8xa" path="res://sprites/items/shoes.png" id="72_oirqo"]
 [ext_resource type="Texture2D" uid="uid://iqhdj1vcxykc" path="res://sprites/alert/frame_50_delay-0.04s.png" id="73_g3y5b"]
+[ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
 [ext_resource type="Texture2D" uid="uid://djex1hfdtd160" path="res://sprites/alert/frame_51_delay-0.04s.png" id="74_1slqb"]
 [ext_resource type="Texture2D" uid="uid://d17r3alt8bqjk" path="res://sprites/alert/frame_52_delay-0.04s.png" id="75_uo83y"]
 [ext_resource type="Texture2D" uid="uid://dm5ru4q74uevw" path="res://sprites/alert/frame_53_delay-0.05s.png" id="76_y0aao"]
@@ -3966,7 +3973,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="0" unique_id=1445662813]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -3977,10 +3984,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="1" unique_id=570926734]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 185934754) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(1, 0.52156866, 0.9607843, 1)
 light_energy = 5.04
@@ -3988,7 +3995,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="2" unique_id=1882741105]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -4909,7 +4916,7 @@ current_item_icon = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContain
 use_item_prompt = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/EndShiftGuide")
 
-[node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container")]
+[node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
 custom_maximum_size = Vector2(550, -1)
 anchors_preset = 2
@@ -4922,10 +4929,12 @@ offset_bottom = 68.0
 grow_vertical = 0
 rotation = 0.05235988
 size_flags_horizontal = 0
+mouse_behavior_recursive = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_b2gp0")
 script = ExtResource("42_yf6j3")
 machines_container = NodePath("MarginContainer/Screen/MarginContainer/MachineContainer")
 machine_ui_scene = ExtResource("43_e4ynb")
+item_icons = NodePath("MarginContainer/Screen/ItemIcons")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet" unique_id=1632834486]
 layout_mode = 2
@@ -5039,6 +5048,65 @@ layout_mode = 2
 [node name="Goal" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=417478634]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+
+[node name="ItemIcons" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1915478391]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=1878469102]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("68_tfaor")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon2" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=1702717453]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("69_3rmuw")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon3" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=475476002]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("70_j3ofb")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon4" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=995260422]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("71_m5f57")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon5" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=898300513]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("72_oirqo")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon6" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/ItemIcons" unique_id=1635346569]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("73_moxjo")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
 
 [node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/MarginContainer" unique_id=1082245281]
 custom_minimum_size = Vector2(125, 110)
