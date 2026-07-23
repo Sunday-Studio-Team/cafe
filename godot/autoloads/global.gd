@@ -16,9 +16,8 @@ extends Node
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 
-var popups: Dictionary = {}
+var popups: Dictionary = { }
 var popup_hint_showing: bool = false
-
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -92,6 +91,9 @@ var holding_ingredients_rule := false
 var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[Texture]
+## the sprites of customers that are in the cafe right now
+## (tracked so we dont spawn 2 of the same)
+var customer_sprites_spawned: Array[Texture]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0

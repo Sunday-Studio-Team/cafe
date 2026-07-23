@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dp7t0dh80ct1r"]
 
 [ext_resource type="Script" uid="uid://cvo47hwaumo88" path="res://customer.gd" id="1_7tiyv"]
-[ext_resource type="Texture2D" uid="uid://bn8ip007ur456" path="res://sprites/customers/npc7.png" id="2_gn8fi"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="3_gn8fi"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_0rcyg"]
@@ -21,7 +20,6 @@ sprites_folder = "res://sprites/customers"
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
 transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0.925, 0)
 billboard = 2
-texture = ExtResource("2_gn8fi")
 
 [node name="WaitingIndicator" type="Sprite3D" parent="." unique_id=756198707]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.09615041, 1.9518676, 0)
