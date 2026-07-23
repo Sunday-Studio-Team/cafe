@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://bk1aw8emtkeqa"]
+
+[ext_resource type="Script" uid="uid://c577j7msbxqwy" path="res://ui/end_shift_earlier_menu.gd" id="1_r53t0"]
+
+[node name="EndShiftEarlierMenu" type="CanvasLayer" unique_id=305608973 node_paths=PackedStringArray("end_shift_button", "continue_shift_button", "main_label", "secondary_label")]
+process_mode = 3
+script = ExtResource("1_r53t0")
+end_shift_button = NodePath("Panel/HBoxContainer/Yes")
+continue_shift_button = NodePath("Panel/HBoxContainer/No")
+main_label = NodePath("Panel/Control/MainLabel")
+secondary_label = NodePath("Panel/Control/SecondaryLabel")
+
+[node name="Panel" type="Panel" parent="." unique_id=304476746]
+self_modulate = Color(1, 1, 1, 0.7764706)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1545451131]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="Panel/HBoxContainer" unique_id=518299464]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Yes" type="Button" parent="Panel/HBoxContainer" unique_id=95244841]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 80
+text = "Yes"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/HBoxContainer" unique_id=1099280810]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="No" type="Button" parent="Panel/HBoxContainer" unique_id=681465561]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 80
+text = "No"
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/HBoxContainer" unique_id=1855494173]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="Panel" unique_id=331802418]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -307.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLabel" type="Label" parent="Panel/Control" unique_id=413623502]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 178.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 90
+text = "All Requirements Are Met!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SecondaryLabel" type="Label" parent="Panel/Control" unique_id=29377382]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -822.0
+offset_top = -89.0
+offset_right = 822.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6073017, 0.60730165, 0.60730165, 1)
+theme_override_font_sizes/font_size = 60
+text = "You can end shift early at any time."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestionLabel" type="Label" parent="Panel/Control" unique_id=1548367790]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Do you want to end the shift right now?"
+horizontal_alignment = 1
+vertical_alignment = 1
