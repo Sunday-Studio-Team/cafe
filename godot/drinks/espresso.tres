@@ -1,22 +1,21 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://dh5h1vstyox0p"]
 
-[ext_resource type="Resource" uid="uid://cldvta860kml" path="res://drinks/ingredients/coffee.tres" id="1_bj25k"]
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_ssacj"]
 [ext_resource type="Resource" uid="uid://c566sstn0q5w6" path="res://drinks/ingredients/water.tres" id="2_0a3p4"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="2_47jid"]
 [ext_resource type="Script" uid="uid://c1qu64r4ohlqc" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_recipe.gd" id="2_shsmw"]
+[ext_resource type="Resource" uid="uid://dqwdh1q6mry1i" path="res://drinks/ingredients/espresso_bean.tres" id="3_0a3p4"]
 
 [sub_resource type="Resource" id="Resource_wrj5x"]
 script = ExtResource("2_shsmw")
-ingredient_names = Array[String](["coffee", "water", "coffee"])
+ingredient_names = Array[String](["espresso", "water"])
 metadata/_custom_type_script = "uid://c1qu64r4ohlqc"
 
 [resource]
 script = ExtResource("1_ssacj")
 name = "espresso"
-main_ingredient = ExtResource("1_bj25k")
+main_ingredient = ExtResource("3_0a3p4")
 liquid = ExtResource("2_0a3p4")
-extra = ExtResource("1_bj25k")
 icon = ExtResource("2_47jid")
 typing_minigame_ingredients_recipe = SubResource("Resource_wrj5x")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"
