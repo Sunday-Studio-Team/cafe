@@ -1,4 +1,4 @@
-﻿class_name TutorialManager
+class_name TutorialManager
 extends Node
 
 signal finished_tutorial
