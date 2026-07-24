@@ -56,6 +56,7 @@ extends Node3D
 @export var tip_label: Label
 @export var hammer_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
+@export var popup_storage_room: PackedScene #tutorial popup that tells player to go to the storage room
 
 static var seen_breakdown_popup := false
 var customer: Customer
@@ -146,6 +147,10 @@ func _physics_process(_delta: float) -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
+		
+		#shows tutorial (checks inside if it's appropriate to show)
+		show_tutorial_where_is_storeroom()
+		
 	else:
 		if ingredients <= max_ingredients / 2.0:
 			ingredients_bar.modulate = Color.YELLOW
@@ -177,6 +182,44 @@ func _physics_process(_delta: float) -> void:
 
 	#if make_drink_button.held:
 		#Global.holding_make_drink_button = true
+
+func show_tutorial_where_is_storeroom() -> void:
+	#this is getting called within physics_process...
+	#check values in global
+	#and then immediately turn those values to 'tutorial has been shown',
+	if (Global.day == 1) and (Global.tutorial_refill_shown==false): 
+		Global.tutorial_refill_shown = true
+		Global.in_tutorial_screen=true
+		
+		#hide tablet so it's not in the way.
+		var tablet = get_parent().get_parent().find_child("Tablet")
+		tablet.hide()
+		
+		var popup = popup_storage_room.instantiate()
+		add_child(popup)
+		get_tree().paused = true # this kinda works but its janky
+		var next_label = popup.get_node("NextButton/NextLabel")
+		next_label.text = "Okay"
+		
+		var button = popup.get_node("NextButton")
+		#button.move_to_front() #this was an attempt to fix issue, does not really do anything
+		popup.process_mode = Node.PROCESS_MODE_ALWAYS
+		
+		button.pressed.connect(func():	
+			get_tree().paused = false
+			popup.queue_free()
+		)
+		
+		#add functionality to allow use of Esc
+		#add functionality so that button makes popup disappear
+		#hide tablet
+		#
+		
+		await popup.tree_exited #delays some code until event occurs
+		tablet.show()
+		Global.in_tutorial_screen=false #re enable pause
+		
+	
 
 
 func set_customer(c: Customer) -> void:
