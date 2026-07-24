@@ -25,7 +25,6 @@ func populate_items() -> void:
 	for icon: TabletItemIcon in item_icons.get_children():
 		if Global.owned_items.size() >= i + 1:
 			icon.item = Global.owned_items[i]
-			print("hi, ", Global.owned_items[i])
 		else:
 			icon.item = null
 		i += 1
