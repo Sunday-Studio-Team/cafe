@@ -131,6 +131,7 @@
 [ext_resource type="Texture2D" uid="uid://5s20stlwbrg2" path="res://sprites/alert/frame_46_delay-0.04s.png" id="69_0wkqm"]
 [ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="69_3rmuw"]
 [ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="69_j3ofb"]
+[ext_resource type="PackedScene" uid="uid://ttq5pes58y07" path="res://Assets/register machine/Low Poly Eftpos Machine.glb" id="69_l0ugm"]
 [ext_resource type="Texture2D" uid="uid://bhg3g67g8gjck" path="res://sprites/items/book.png" id="70_j3ofb"]
 [ext_resource type="Texture2D" uid="uid://du70ghn0053vm" path="res://sprites/alert/frame_47_delay-0.05s.png" id="70_ve5sr"]
 [ext_resource type="Texture2D" uid="uid://c51a6c721kqft" path="res://sprites/alert/frame_48_delay-0.04s.png" id="71_5s44m"]
@@ -4832,6 +4833,9 @@ mesh = SubResource("BoxMesh_opecw")
 
 [node name="counter" type="Node3D" parent="Environment/BackRoom" unique_id=549512245]
 transform = Transform3D(-1.2225262, 0, 1.1627881e-07, 0, 1, 0, -1.0687663e-07, 0, -1.3300745, 1.9587679, 0.055816747, -4.9087977)
+
+[node name="register machine" parent="Environment/BackRoom/counter" unique_id=327074498 instance=ExtResource("69_l0ugm")]
+transform = Transform3D(1.593109, -0.02947397, -0.014311729, -0.002480673, 0.4603434, -1.4407836, 0.037350945, 1.2877135, 0.51473767, 0.30134153, 0.699632, -0.14148045)
 
 [node name="SM_Bartable__0" type="MeshInstance3D" parent="Environment/BackRoom/counter" unique_id=1982176701]
 transform = Transform3D(1.0000001, 1.4210855e-14, 0, 0, -1.6292067e-07, 1, 7.1054274e-15, -1, -1.6292068e-07, 0, 0, 0)
