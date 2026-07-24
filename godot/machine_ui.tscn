@@ -16,12 +16,6 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovvye"]
-bg_color = Color(0.68556535, 0.5972759, 0.23268256, 1)
-corner_radius_top_left = 50
-corner_radius_bottom_right = 50
-expand_margin_bottom = 10.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
 corner_radius_top_left = 10
@@ -325,17 +319,6 @@ text = "+1.5⭐🙂"
 [node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=2014872253]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=2095979665]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ovvye")
-
-[node name="WaitingApprovalIndicator" type="Label" parent="VBoxContainer/PanelContainer" unique_id=1573558633]
-layout_mode = 2
-size_flags_vertical = 2
-theme_override_font_sizes/font_size = 28
-text = "order waiting for approval! ^"
-horizontal_alignment = 1
 
 [node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
 layout_mode = 2
