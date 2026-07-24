@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://mncpikkcm8wd" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
@@ -11,7 +11,9 @@
 [ext_resource type="Resource" uid="uid://drg362efjsksg" path="res://items/clock.tres" id="4_12204"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://c1caeynuei18t" path="res://Assets/Street/street test.webp" id="5_oirqo"]
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
+[ext_resource type="Texture2D" uid="uid://bsaijqk5w5k1y" path="res://Assets/Street/road.png" id="6_moxjo"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
@@ -301,10 +303,9 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(1, 0.89, 0.8, 1)
-sky_horizon_color = Color(0.6912, 0.70224005, 0.72, 1)
-ground_bottom_color = Color(0.13668326, 0.16590339, 0.2840879, 1)
-ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+sky_top_color = Color(1, 0.976, 0.84000003, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0.050999995, 0, 0.18, 1)
 
 [sub_resource type="Sky" id="Sky_0xm2m"]
 sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
@@ -316,7 +317,7 @@ ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.04
+volumetric_fog_density = 0.02
 adjustment_enabled = true
 adjustment_brightness = 0.89
 adjustment_contrast = 1.25
@@ -3618,6 +3619,16 @@ active_item_timer = NodePath("Active Item Nodes/Timer")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
 
+[node name="street" type="Node3D" parent="." unique_id=1139868307]
+
+[node name="Sprite3D" type="Sprite3D" parent="street" unique_id=938046995]
+transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73325, -6.7800574)
+texture = ExtResource("5_oirqo")
+
+[node name="Sprite3D2" type="Sprite3D" parent="street" unique_id=810177457]
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.7103424, 0, -5.478418)
+texture = ExtResource("6_moxjo")
+
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
 
@@ -3974,7 +3985,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="0" unique_id=587558728]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -3985,10 +3996,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="1" unique_id=195788702]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1266530751) index="1" unique_id=398972065]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(1, 0.52156866, 0.9607843, 1)
 light_energy = 5.04
@@ -3996,7 +4007,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="2" unique_id=1661838220]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
