@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://kjjjflnmf627" path="res://Assets/Street/street sides.jpg" id="7_moxjo"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
@@ -3625,9 +3626,33 @@ clock_item_start_sound = NodePath("ClockItemStartSound")
 transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73325, -6.7800574)
 texture = ExtResource("5_oirqo")
 
+[node name="Sprite3D6" type="Sprite3D" parent="street" unique_id=1109630919]
+transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 14.820215, 4.73325, -6.7579613)
+texture = ExtResource("5_oirqo")
+
+[node name="Sprite3D5" type="Sprite3D" parent="street" unique_id=1307845475]
+transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73325, -6.7800574)
+texture = ExtResource("5_oirqo")
+
+[node name="Sprite3D7" type="Sprite3D" parent="street" unique_id=2110744486]
+transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, -15.333674, 4.73325, -6.7800574)
+texture = ExtResource("5_oirqo")
+
 [node name="Sprite3D2" type="Sprite3D" parent="street" unique_id=810177457]
-transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.7103424, 0, -5.478418)
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.70082474, -0.0056385994, -5.4775853)
 texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D8" type="Sprite3D" parent="street" unique_id=467678864]
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -14.923087, -0.0056385994, -5.4775853)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D4" type="Sprite3D" parent="street" unique_id=772127232]
+transform = Transform3D(-0.6264175, -2.1319964e-08, 9.632258e-09, 2.738158e-08, 4.659626e-16, 0.22036037, -5.476316e-08, 0.24387196, 4.2103935e-16, 13.498823, -0.0056385994, -5.4775853)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D3" type="Sprite3D" parent="street" unique_id=487477074]
+transform = Transform3D(4.468231e-15, -1.0222118e-07, 2.338548, 3.8367034e-09, 0.8226517, 3.595924e-08, -0.9104251, -3.836753e-09, 1.5718274e-15, 18.92614, 2.3219075, -5.4775853)
+texture = ExtResource("7_moxjo")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
