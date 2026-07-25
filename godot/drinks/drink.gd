@@ -21,6 +21,8 @@ func create() -> void:
 		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
 		price += extra.cost
 	price += 0.5
+	liquid.get_similar()
+	main_ingredient.get_similar()
 
 func get_score_from(drank: Drink) -> int:
 	var myf = 0
