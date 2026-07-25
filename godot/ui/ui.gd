@@ -190,12 +190,14 @@ func handle_item_hover_tooltip() -> void:
 	var hovered_icon := Global.hovered_item_icon
 
 	if hovered_icon != null:
-		item_hover_tooltip.show()
 		item_hover_tooltip_name.text = "[b] %s" % hovered_icon.item.name
 		item_hover_tooltip_description.text = hovered_icon.item.description
 		item_hover_tooltip_active_indicator.visible = hovered_icon.item.is_active_item
-	else:
-		item_hover_tooltip.hide()
+
+	item_hover_tooltip.visible = (
+			hovered_icon != null
+			and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
+	)
 
 
 func handle_exit_machine_ui() -> void:
