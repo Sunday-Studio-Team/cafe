@@ -11,12 +11,7 @@ extends SubViewportContainer
 @export var shake_intensity: float = 10
 
 var ordered_drink: Drink
-var current_game_state: GameStates = GameStates.MAIN
-var main_text: String = "The required first ingredient"
-var liquid_text: String = "The required liquid ingredient"
-var extra_text: String = "The required additional ingredient"
-
-enum GameStates { MAIN, LIQUID, EXTRA }
+var main_text: String = "The required ingredients"
 
 func _ready() -> void:
 	_start_minigame()
@@ -28,11 +23,7 @@ func _physics_process(delta: float) -> void:
 	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
 	if Engine.get_physics_frames() % 5 == 0:
 		var button_is_selected: bool = false
-		for captcha_icon: IngredientIconHolder in captcha.get_children():
-			if captcha_icon.button.button_pressed:
-				button_is_selected = true
-				break
-		if button_is_selected:
+		if captcha.get_children().any(func(x: IngredientIconHolder): return x.button.button_pressed):
 			set_submit_text("VERIFY")
 		else:
 			set_submit_text("SKIP")
@@ -40,75 +31,41 @@ func _physics_process(delta: float) -> void:
 func populate_captcha() -> void:
 	for captcha_icon: IngredientIconHolder in captcha.get_children():
 		captcha_icon.button.button_pressed = false
-		match current_game_state:
-			GameStates.MAIN:
-				captcha_icon.type = captcha_icon.Type.MAIN
-				captcha_icon.ingredient = Global.ingredients.filter(func(i): return i.type == Ingredient.Ingredient_Type.MAIN).pick_random()
-			GameStates.LIQUID:
-				captcha_icon.type = captcha_icon.Type.LIQUID
-				captcha_icon.ingredient = Global.ingredients.filter(func(i): return i.type == Ingredient.Ingredient_Type.LIQUID).pick_random()
-			GameStates.EXTRA:
-				captcha_icon.type = captcha_icon.Type.EXTRA
-				captcha_icon.ingredient = Global.ingredients.filter(func(i): return i.type == Ingredient.Ingredient_Type.EXTRA).pick_random()
+		captcha_icon.ingredient = Global.ingredients.pick_random()
 	
-	# Functionality to guarantee needed icon shows up at least once
-	match current_game_state:
-		GameStates.MAIN:
-			if(ordered_drink.main_ingredient):
-				captcha.get_children().pick_random().ingredient = ordered_drink.main_ingredient
-		GameStates.LIQUID:
-			if(ordered_drink.liquid):
-				captcha.get_children().pick_random().ingredient = ordered_drink.liquid
-		GameStates.EXTRA:
-			if(ordered_drink.extra):
-				captcha.get_children().pick_random().ingredient = ordered_drink.extra
+	# Functionality to guarantee needed icons show up at least once
+	captcha.get_children().pick_random().ingredient = ordered_drink.main_ingredient
+	captcha.get_children().pick_random().ingredient = ordered_drink.liquid
+	if(ordered_drink.extra):
+		captcha.get_children().pick_random().ingredient = ordered_drink.extra
 
 func populate_order_reminder() -> void:
 	main_ordered.ingredient = ordered_drink.main_ingredient
-	if (ordered_drink.liquid):
-		liquid_ordered.ingredient = ordered_drink.liquid
+	liquid_ordered.ingredient = ordered_drink.liquid	
 	if (ordered_drink.extra):
 		extra_ordered.ingredient = ordered_drink.extra
-
 
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
 	drink_name.text = "You are making %s [color=gold]%s" % [ordered_drink.singular_article, ordered_drink.name]
-
-
-## Should only be called after verifying that criteria for progressing state is met
-func progress_state() -> void:
-	if (current_game_state == GameStates.MAIN and ordered_drink.liquid):
-		current_game_state = GameStates.LIQUID
-		populate_captcha()
-		set_instructions(liquid_text)
-	elif (current_game_state == GameStates.LIQUID and ordered_drink.extra):
-		current_game_state = GameStates.EXTRA
-		populate_captcha()
-		set_instructions(extra_text)
-	else:
-		_end_minigame()
 			
 
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
-	var ordered_ingredient;	
-	match current_game_state:
-		GameStates.MAIN:
-			ordered_ingredient = ordered_drink.main_ingredient
-		GameStates.LIQUID:
-			ordered_ingredient = ordered_drink.liquid
-		GameStates.EXTRA:
-			ordered_ingredient = ordered_drink.extra
+	var ordered_ingredients = [
+		ordered_drink.main_ingredient,
+		ordered_drink.liquid,
+		ordered_drink.extra
+	]	
 	
 	for captcha_icon: IngredientIconHolder in captcha.get_children():
-		if ( (captcha_icon.ingredient == ordered_ingredient) != captcha_icon.button.button_pressed ):
+		if ( (ordered_ingredients.any(func(x: Ingredient): return x == captcha_icon.ingredient) != captcha_icon.button.button_pressed)):
 			shake_panel()
 			return
+			
+	_end_minigame()
 	
-	progress_state()
-
 
 func set_instructions(text: String) -> void:
 	instructions.text = text
@@ -133,7 +90,6 @@ func shake_panel() -> void:
 
 
 func _start_minigame() -> void:
-	current_game_state = GameStates.MAIN
 	set_instructions(main_text)
 	
 	# Temp drink setting for testing
