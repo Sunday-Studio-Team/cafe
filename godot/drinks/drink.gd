@@ -7,6 +7,12 @@ extends Resource
 @export var liquid: Ingredient
 @export var extra: Ingredient
 @export var icon: Texture2D
+@export var day_unlocked: int = 1
+# coffee, tea, espresso (+iced ver) = day 1
+# basic lattes (+iced ver) = day 2
+# chai and matcha drinks (+iced ver) = day 3
+# almond milk variations (+iced ver) = day 4
+
 var price: float
 var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe = null
 
