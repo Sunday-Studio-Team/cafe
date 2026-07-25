@@ -3,6 +3,8 @@ class_name StatDataEnum
 const VALUES: String = "\
 default_move_speed,\
 sprint_move_speed,\
+player_accel,\
+player_decel,\
 chance_of_machine_breaking,\
 machine_chance_of_spill,\
 score_chances_3,\

@@ -263,6 +263,7 @@ func handle_shelf_item_ui() -> void:
 		shelf_item_sold_indicator.hide()
 		Global.bank_money += shelf_item.item.price / 2
 		Global.owned_items.erase(shelf_item.item)
+		shelf_item.item.unapply_stats()
 		Events.items_updated.emit()
 
 

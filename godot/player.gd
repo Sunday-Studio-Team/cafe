@@ -1,8 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-const ACCELERATION := 25.0
-const DECELERATION := 25.0
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
@@ -13,7 +11,6 @@ const STRIDE_LENGTH := 0.75
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 
-# this is a var separate to the const cos it changes when sprint etc
 var move_speed: float = Stats.current.default_move_speed
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
@@ -65,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	#handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
-	handle_active_item_menu()
+	handle_active_items()
 	handle_floating_cursor()
 	move_and_slide()
 
@@ -84,10 +81,13 @@ func handle_floating_cursor() -> void:
 		Global.showing_floating_cursor = false
 
 
-func handle_active_item_menu() -> void:
+func handle_active_items() -> void:
 	if Input.is_action_just_pressed("item_menu"):
 		if not Global.in_ui or Global.in_active_item_menu:
 			Events.active_item_menu.emit()
+
+	if Input.is_action_just_pressed("use_item"):
+		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_mouselook() -> void:
@@ -107,6 +107,10 @@ func handle_movement(delta: float) -> void:
 	):
 		velocity = Vector3.ZERO
 		return
+
+	var accel: float = Stats.current.player_accel
+	var decel: float = Stats.current.player_decel
+
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
@@ -120,16 +124,12 @@ func handle_movement(delta: float) -> void:
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
-		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, ACCELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, accel * delta)
 	else:
-		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, DECELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, decel * delta)
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-
-	#Active Item
-	if Input.is_action_just_pressed("use_item"):
-		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_gravity(delta: float) -> void:

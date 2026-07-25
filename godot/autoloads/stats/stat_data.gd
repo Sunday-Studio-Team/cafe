@@ -10,6 +10,8 @@ extends Resource
 
 var default_move_speed := 1.2
 var sprint_move_speed := 5.0
+var player_accel := 25.0
+var player_decel := 25.0
 var chance_of_machine_breaking := 0.15
 var machine_chance_of_spill := 0.2
 ## chance of each score from machine
