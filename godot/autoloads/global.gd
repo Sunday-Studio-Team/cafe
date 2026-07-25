@@ -130,6 +130,8 @@ var equipped_item: Item = null
 
 #tutorial flags
 var tutorial_refill_shown : bool = false #on day 1, shows a tutorial when a machine runs out of food
+var tutorial_go_clean_spill_shown : bool = false #on day 1, shows a tutorial the first time a spill happens.
+
 
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
