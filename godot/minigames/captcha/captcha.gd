@@ -9,6 +9,7 @@ extends SubViewportContainer
 @export var drink_name: RichTextLabel
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
+@export var order_reminder: Control
 
 var ordered_drink: Drink
 var main_text: String = "The required ingredients"
@@ -97,7 +98,12 @@ func _start_minigame() -> void:
 	get_ordered_drink(drink)
 	
 	populate_captcha()
-	populate_order_reminder()
+	
+	if Global.owned_items.any(func(x: Item): return x.name == "barista guide"):
+		populate_order_reminder()
+		order_reminder.visible = true
+	else:
+		order_reminder.visible = false
 
 
 func _end_minigame() -> void:

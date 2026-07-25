@@ -16,7 +16,7 @@ bg_color = Color(0.21702155, 0.42809728, 0.671875, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uevaj"]
 bg_color = Color(0.3121078, 0.61610895, 0.96875, 1)
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,6 +31,7 @@ submit_button = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/B
 instructions = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/Instructions")
 drink_name = NodePath("SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
 entire_panel = NodePath("SubViewport/CanvasLayer/PanelContainer")
+order_reminder = NodePath("SubViewport/CanvasLayer/OrderReminder")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false
