@@ -3,6 +3,8 @@
 class_name Machine
 extends Node3D
 
+static var seen_breakdown_popup := false
+
 @export var spot_for_customer: Marker3D
 # where the player gets put when they interact with machine
 @export var spot_for_player: Marker3D
@@ -17,7 +19,6 @@ extends Node3D
 @export var accept_button: Button
 @export var reject_button: Button
 @export var refill_button: Interactable
-@export var waiting_approval_indicator: Control
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
@@ -35,19 +36,16 @@ extends Node3D
 @export var no_ingredients_warning: Control
 @export var time_bonus_panel: PanelContainer
 @export var time_bonus_label: Label
-
 @export var order_breakdown: Control
 @export var ordered_main_ingredient_icon: TextureRect
 @export var ordered_liquid_icon: TextureRect
 @export var ordered_extra_icon: TextureRect
 @export var ordered_drink_icon: TextureRect
-
 @export var made_breakdown: Control
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
-
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
 @export var spill_clean_sound: AudioStreamPlayer3D
@@ -56,8 +54,8 @@ extends Node3D
 @export var tip_label: Label
 @export var hammer_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
+@export var popup_storage_room: PackedScene #tutorial popup that tells player to go to the storage room
 
-static var seen_breakdown_popup := false
 var customer: Customer
 var order: OrderData
 var waiting_for_response: bool = false
@@ -136,7 +134,6 @@ func _physics_process(_delta: float) -> void:
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
-	waiting_approval_indicator.visible = waiting_for_response
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
@@ -146,6 +143,10 @@ func _physics_process(_delta: float) -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
+
+		#shows tutorial (checks inside if it's appropriate to show)
+		show_tutorial_where_is_storeroom()
+
 	else:
 		if ingredients <= max_ingredients / 2.0:
 			ingredients_bar.modulate = Color.YELLOW
@@ -176,7 +177,45 @@ func _physics_process(_delta: float) -> void:
 		time_bonus_panel.visible = customer.bonus_points_for_time != 0
 
 	#if make_drink_button.held:
-		#Global.holding_make_drink_button = true
+	#Global.holding_make_drink_button = true
+
+
+func show_tutorial_where_is_storeroom() -> void:
+	#this is getting called within physics_process...
+	#check values in global
+	#and then immediately turn those values to 'tutorial has been shown',
+	if (Global.day == 1) and (Global.tutorial_refill_shown == false):
+		Global.tutorial_refill_shown = true
+		Global.in_tutorial_screen = true
+
+		#hide tablet so it's not in the way.
+		var tablet = get_parent().get_parent().find_child("Tablet")
+		tablet.hide()
+
+		var popup = popup_storage_room.instantiate()
+		add_child(popup)
+		get_tree().paused = true # this kinda works but its janky
+		var next_label = popup.get_node("NextButton/NextLabel")
+		next_label.text = "Okay"
+
+		var button = popup.get_node("NextButton")
+		#button.move_to_front() #this was an attempt to fix issue, does not really do anything
+		popup.process_mode = Node.PROCESS_MODE_ALWAYS
+
+		button.pressed.connect(
+			func():
+				get_tree().paused = false
+				popup.queue_free()
+		)
+
+		#add functionality to allow use of Esc
+		#add functionality so that button makes popup disappear
+		#hide tablet
+		#
+
+		await popup.tree_exited #delays some code until event occurs
+		tablet.show()
+		Global.in_tutorial_screen = false #re enable pause
 
 
 func set_customer(c: Customer) -> void:
@@ -263,7 +302,7 @@ func machine_make_drink() -> void:
 		if ran_num < cumulative_score_chance:
 			order.score = score
 			break
-	
+
 	# now find a random drink that has that score !
 	randomize()
 	Global.drinks.shuffle()
@@ -271,9 +310,9 @@ func machine_make_drink() -> void:
 		var sc = item.get_score_from(order.ordered_drink)
 		if sc == order.score:
 			order.made_drink = item
-			break;
+			break
 	#var drinks_list = Global.drinks.filter(func(d): 
-		#d.get_score_from(order.ordered_drink) == order.score)
+	#d.get_score_from(order.ordered_drink) == order.score)
 	#order.made_drink = drinks_list.pick_random()
 
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
@@ -517,7 +556,7 @@ func break_down() -> void:
 		Global.popups["breakdown"].open()
 	else:
 		pass
-		
+
 	if gui_3d.player_using_me:
 		gui_3d.exit()
 	gui_3d.interactable.enabled = false

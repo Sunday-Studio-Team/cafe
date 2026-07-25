@@ -128,6 +128,8 @@ var ordered_drink_to_remake: Drink
 #Active Items
 var equipped_item: Item = null
 
+#tutorial flags
+var tutorial_refill_shown : bool = false #on day 1, shows a tutorial when a machine runs out of food
 
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
