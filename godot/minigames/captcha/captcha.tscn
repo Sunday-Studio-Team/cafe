@@ -144,7 +144,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 bbcode_enabled = true
-text = "[color=red]This should not be visible in game"
+text = "[color=red]Drink name you are making here"
 fit_content = true
 scroll_active = false
 
@@ -157,9 +157,10 @@ text = "Select all images with"
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 bbcode_enabled = true
-text = "[color=red]This should not be visible in game"
+text = "[color=red]Instructions Here"
 
 [node name="BottomText" type="RichTextLabel" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=554797709]
+visible = false
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 15
@@ -172,7 +173,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
-columns = 3
+columns = 4
 
 [node name="Button0" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
@@ -199,6 +200,27 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Button8" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=617140734 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button9" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=29177547 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button10" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1330016194 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button11" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=2099329115 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button12" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1646201839 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button13" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1329460346 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button14" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1751453834 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+
+[node name="Button15" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=942843353 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
 [node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer" unique_id=2048074803]
