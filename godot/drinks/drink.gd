@@ -43,3 +43,6 @@ func get_score_from(drank: Drink) -> int:
 	else:
 		myf += 1
 	return myf
+
+func is_unlocked() -> bool:
+	return Global.day >= day_unlocked

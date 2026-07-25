@@ -28,7 +28,7 @@ func _ready() -> void:
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
 
-	desired_drink = Global.drinks.pick_random()
+	desired_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
 
 
 func _physics_process(_delta: float) -> void:
