@@ -73,6 +73,9 @@ func _ready() -> void:
 	Console.add_command("speed", set_speed, 1)
 
 
+	
+
+
 func give_bag() -> void:
 	Global.holding_ingredients = true
 	Console.print_line("gave bag")
