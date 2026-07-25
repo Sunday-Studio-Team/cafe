@@ -359,8 +359,12 @@ func machine_make_drink() -> void:
 		var sc = item.get_score_from(order.ordered_drink)
 		if sc == order.score:
 			order.made_drink = item
-			break
-
+			break 
+			
+	if !order.ordered_drink: # get a random drink, useful for earlier days
+			order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
+			order.score = order.made_drink.get_score_from(order.ordered_drink)
+			
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
 	if order.ordered_drink.liquid == order.made_drink.liquid:
