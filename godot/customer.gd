@@ -38,15 +38,15 @@ func _physics_process(_delta: float) -> void:
 	if not timer.is_stopped():
 		percent_time_left = timer.time_left / timer.wait_time * 100
 
-	if percent_time_left >= 66:
+	if percent_time_left >= 75:
 		waiting_indicator.modulate = Color.GREEN
 		bonus_points_for_time = 1
-	elif percent_time_left >= 33:
+	elif percent_time_left >= 50:
 		waiting_indicator.modulate = Color.ORANGE
-		bonus_points_for_time = 0
+		bonus_points_for_time = 0.5
 	else:
 		waiting_indicator.modulate = Color.RED
-		bonus_points_for_time = -1
+		bonus_points_for_time = -0.5
 
 	waiting_bar.value = percent_time_left
 
