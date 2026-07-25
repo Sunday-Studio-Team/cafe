@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://mncpikkcm8wd" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
@@ -3371,7 +3371,7 @@ corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport")
+viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ffxp"]
 animations = [{
@@ -4445,7 +4445,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="0" unique_id=587558728]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -4456,10 +4456,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="1" unique_id=195788702]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1266530751) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(1, 0.52156866, 0.9607843, 1)
 light_energy = 5.04
@@ -4467,7 +4467,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="2" unique_id=1661838220]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -4745,10 +4745,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 535169615) index="2" unique_id=1286912570]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 978519736) index="2" unique_id=1693237370]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 1567843386) index="2" unique_id=1095193056]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 107142378) index="2" unique_id=352500083]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
@@ -5480,46 +5480,50 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt", "end_shift_guide")]
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
 customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Label")
-score_update_label = NodePath("MarginContainer/VBoxContainer/ScoreUpdate")
-interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
-interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
-hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
+score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
+interactable_indicator = NodePath("HUD/VBoxContainer/Interactable")
+interactable_label = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
+hold_interact_progress = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
 time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
 time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
 time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
-objective = NodePath("MarginContainer/Objective")
-rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
+objective = NodePath("HUD/Objective")
+rules_controls = NodePath("HUD/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
 cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
-alert_ui = NodePath("MarginContainer/VBoxContainer/Alerts")
-alert_label = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/AlertText")
-shelf_item_ui = NodePath("MarginContainer/ShelfItem")
-shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
-shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
-shelf_item_active_indicator = NodePath("MarginContainer/ShelfItem/VBoxContainer/Active")
-shelf_item_sell = NodePath("MarginContainer/ShelfItem/VBoxContainer/Sell")
-shelf_item_sold_indicator = NodePath("MarginContainer/ShelfItem/ShelfItemSold/Label")
+alert_ui = NodePath("HUD/VBoxContainer/Alerts")
+alert_label = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/AlertText")
+shelf_item_ui = NodePath("HUD/ShelfItem")
+shelf_item_name = NodePath("HUD/ShelfItem/VBoxContainer/Name")
+shelf_item_description = NodePath("HUD/ShelfItem/VBoxContainer/Description")
+shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
+shelf_item_sell = NodePath("HUD/ShelfItem/VBoxContainer/Sell")
+shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
 day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
 rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Stars")
 rating_goal_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Goal")
-alert_sprite = NodePath("MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
-drop_button = NodePath("MarginContainer/VBoxContainer/FloatingButtons/DropButton")
+alert_sprite = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
+drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
-exit_machine_button = NodePath("MarginContainer/VBoxContainer/FloatingButtons/ExitMachineButton")
-current_item_ui = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
-hammer_indicator = NodePath("MarginContainer/VBoxContainer/Interactable/HammerIndicator")
-current_item_icon = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
-use_item_prompt = NodePath("MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
-end_shift_guide = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/EndShiftGuide")
+exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
+item_hover_tooltip = NodePath("ItemHoverTooltip")
+item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
+item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
+item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
+current_item_ui = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
+hammer_indicator = NodePath("HUD/VBoxContainer/Interactable/HammerIndicator")
+current_item_icon = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
+use_item_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
+end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
@@ -5722,7 +5726,7 @@ offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
+[node name="HUD" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -5735,18 +5739,18 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1052297915]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD" unique_id=1052297915]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1617732849]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=1617732849]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=337997486]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/VBoxContainer/HBoxContainer" unique_id=337997486]
 visible = false
 layout_mode = 2
 
-[node name="ControlsRules" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
+[node name="ControlsRules" type="RichTextLabel" parent="UI/HUD/VBoxContainer/HBoxContainer" unique_id=1478058715]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -5760,27 +5764,27 @@ text = "[b][i]rules [/i][/b]
 fit_content = true
 horizontal_alignment = 2
 
-[node name="Alerts" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1572896895]
+[node name="Alerts" type="VBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=1572896895]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/Alerts" unique_id=407575910]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/Alerts" unique_id=407575910]
 layout_mode = 2
 
-[node name="Exclamation" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
+[node name="Exclamation" type="TextureRect" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = SubResource("ViewportTexture_0ffxp")
 
-[node name="AlertText" type="Label" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
+[node name="AlertText" type="Label" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "❗️🛎️ customer complained"
 
-[node name="SubViewport" type="SubViewport" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
+[node name="SubViewport" type="SubViewport" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
 transparent_bg = true
 size = Vector2i(85, 100)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/MarginContainer/VBoxContainer/Alerts/HBoxContainer/SubViewport" unique_id=2022034122]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport" unique_id=2022034122]
 texture_filter = 1
 position = Vector2(55, 30)
 scale = Vector2(0.5, 0.5)
@@ -5788,7 +5792,7 @@ sprite_frames = SubResource("SpriteFrames_0ffxp")
 frame = 71
 frame_progress = 1.0
 
-[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=124548306]
+[node name="ScoreUpdate" type="Label" parent="UI/HUD/VBoxContainer" unique_id=124548306]
 modulate = Color(0.4, 1, 0.4, 1)
 layout_mode = 2
 offset_transform_enabled = true
@@ -5797,22 +5801,22 @@ theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 52
 text = "+1$ from customer"
 
-[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
+[node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1696852801]
+[node name="Interactable" type="PanelContainer" parent="UI/HUD/VBoxContainer" unique_id=1696852801]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=1133469025]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/VBoxContainer/Interactable" unique_id=1133469025]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
 custom_minimum_size = Vector2(550, 50)
 layout_mode = 2
 size_flags_vertical = 10
@@ -5823,14 +5827,14 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/HUD/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="HammerIndicator" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=498491282]
+[node name="HammerIndicator" type="PanelContainer" parent="UI/HUD/VBoxContainer/Interactable" unique_id=498491282]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -5839,7 +5843,7 @@ offset_transform_position_ratio = Vector2(1, -0.5)
 offset_transform_scale = Vector2(0.75, 0.75)
 offset_transform_rotation = 0.08726646
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/HammerIndicator" unique_id=1532821752]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Interactable/HammerIndicator" unique_id=1532821752]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 text = "[Q] HAMMER 💥"
@@ -5848,14 +5852,14 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FloatingButtons" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=369205068]
+[node name="FloatingButtons" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=369205068]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 50
 alignment = 2
 
-[node name="ExitMachineButton" type="Button" parent="UI/MarginContainer/VBoxContainer/FloatingButtons" unique_id=1336699155]
+[node name="ExitMachineButton" type="Button" parent="UI/HUD/VBoxContainer/FloatingButtons" unique_id=1336699155]
 layout_mode = 2
 size_flags_horizontal = 2
 offset_transform_enabled = true
@@ -5865,7 +5869,7 @@ theme = ExtResource("97_l0gw7")
 theme_override_font_sizes/font_size = 64
 text = "exit"
 
-[node name="DropButton" type="Button" parent="UI/MarginContainer/VBoxContainer/FloatingButtons" unique_id=1994757836]
+[node name="DropButton" type="Button" parent="UI/HUD/VBoxContainer/FloatingButtons" unique_id=1994757836]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -5877,47 +5881,47 @@ theme_override_font_sizes/font_size = 24
 text = "drop"
 icon = ExtResource("98_l0gw7")
 
-[node name="ItemInfo" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1662791771]
+[node name="ItemInfo" type="PanelContainer" parent="UI/HUD/VBoxContainer" unique_id=1662791771]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -750)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/ItemInfo" unique_id=701910864]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/ItemInfo" unique_id=701910864]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="MenuPrompt" type="Button" parent="UI/MarginContainer/VBoxContainer/ItemInfo/HBoxContainer" unique_id=1266925751]
+[node name="MenuPrompt" type="Button" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer" unique_id=1266925751]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "view items"
 icon = ExtResource("114_gfi32")
 
-[node name="CurrentItem" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/ItemInfo/HBoxContainer" unique_id=549022221]
+[node name="CurrentItem" type="HBoxContainer" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer" unique_id=549022221]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="CurrentText" type="Label" parent="UI/MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
+[node name="CurrentText" type="Label" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "current:"
 
-[node name="Icon" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
+[node name="Icon" type="TextureRect" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
 layout_mode = 2
 
-[node name="UsePrompt" type="Button" parent="UI/MarginContainer/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
+[node name="UsePrompt" type="Button" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
 layout_mode = 2
 offset_transform_enabled = true
 theme_override_font_sizes/font_size = 24
 text = "use"
 icon = ExtResource("115_12204")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=312814953]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="EndShiftGuide" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=638924094]
+[node name="EndShiftGuide" type="Button" parent="UI/HUD/VBoxContainer/HBoxContainer2" unique_id=638924094]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -5925,7 +5929,7 @@ theme_override_font_sizes/font_size = 50
 text = "End Shift "
 icon = ExtResource("143_7bx05")
 
-[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
+[node name="Objective" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
@@ -5938,18 +5942,18 @@ etc etc"
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="ShelfItem" type="PanelContainer" parent="UI/MarginContainer" unique_id=898520236]
+[node name="ShelfItem" type="PanelContainer" parent="UI/HUD" unique_id=898520236]
 modulate = Color(1, 1, 1, 0.98039216)
 custom_minimum_size = Vector2(500, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/ShelfItem" unique_id=259568750]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/ShelfItem" unique_id=259568750]
 layout_mode = 2
 alignment = 1
 
-[node name="Name" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1662140889]
+[node name="Name" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1662140889]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/bold_font_size = 53
@@ -5960,11 +5964,11 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Active" type="PanelContainer" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=2062460218]
+[node name="Active" type="PanelContainer" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=2062460218]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
 
-[node name="Label" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer/Active" unique_id=590042369]
+[node name="Label" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Active" unique_id=590042369]
 custom_minimum_size = Vector2(400, 0)
 custom_maximum_size = Vector2(-1, 25)
 layout_mode = 2
@@ -5977,7 +5981,7 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="Description" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1739048215]
+[node name="Description" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1739048215]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
@@ -5986,7 +5990,7 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="Sell" type="Button" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1146068133]
+[node name="Sell" type="Button" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1146068133]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 32
@@ -5994,7 +5998,7 @@ text = "sell"
 icon = ExtResource("117_ycw8e")
 flat = true
 
-[node name="ShelfItemSold" type="PanelContainer" parent="UI/MarginContainer/ShelfItem" unique_id=577218032]
+[node name="ShelfItemSold" type="PanelContainer" parent="UI/HUD/ShelfItem" unique_id=577218032]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -6002,7 +6006,7 @@ offset_transform_enabled = true
 offset_transform_rotation = -0.08726646
 theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
 
-[node name="Label" type="Label" parent="UI/MarginContainer/ShelfItem/ShelfItemSold" unique_id=2040053351]
+[node name="Label" type="Label" parent="UI/HUD/ShelfItem/ShelfItemSold" unique_id=2040053351]
 visible = false
 layout_mode = 2
 offset_transform_enabled = true
@@ -6010,6 +6014,70 @@ theme_override_font_sizes/font_size = 64
 text = "SOLD: $5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ItemHoverTooltip" type="PanelContainer" parent="UI" unique_id=1202178015]
+visible = false
+modulate = Color(1, 1, 1, 0.98039216)
+custom_minimum_size = Vector2(500, 250)
+custom_maximum_size = Vector2(500, 250)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -123.0
+offset_right = 266.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -1)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ItemHoverTooltip" unique_id=233573804]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=584146414]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_font_size = 53
+bbcode_enabled = true
+text = "[b]item name"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Active" type="PanelContainer" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=326428598]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
+
+[node name="Label" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Active" unique_id=1571478993]
+custom_minimum_size = Vector2(400, 0)
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]ACTIVE[/b] (can be used once per shift):"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=335327845]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "item description (blah blah blah blah blah )"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]
 stream = ExtResource("7_5vw27")

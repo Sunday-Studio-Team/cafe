@@ -125,12 +125,13 @@ var in_ui: bool:
 		else:
 			return false
 var ordered_drink_to_remake: Drink
+# used to decide which items tooltip to show when hovering mouse over tablet
+var hovered_item_icon: TabletItemIcon = null
 #Active Items
 var equipped_item: Item = null
-
 #tutorial flags
-var tutorial_refill_shown : bool = false #on day 1, shows a tutorial when a machine runs out of food
-var tutorial_go_clean_spill_shown : bool = false #on day 1, shows a tutorial the first time a spill happens.
+var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
+var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 
 
 func _ready() -> void:

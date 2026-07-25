@@ -7,7 +7,7 @@ extends PanelContainer
 
 func _ready() -> void:
 	await get_tree().process_frame
-	populate_ui()
+	populate_machine_ui()
 	populate_items()
 	Events.items_updated.connect(populate_items)
 
@@ -30,7 +30,7 @@ func populate_items() -> void:
 		i += 1
 
 
-func populate_ui() -> void:
+func populate_machine_ui() -> void:
 	for m in Global.machines:
 		var machine_ui: TabletMachineUI = machine_ui_scene.instantiate()
 		machine_ui.machine = m
