@@ -18,6 +18,7 @@ extends Node3D
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
+@export var floating_buttons: Control
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -220,13 +221,17 @@ func _on_game_timer_timeout() -> void:
 
 #Minigame is active (Need to turn off regular player controls)
 func _on_minigame_active(minigame_name: String):
+	floating_buttons.visible = false
 	minigame_controller.play_minigame(minigame_name)
+	
 
 
 #Closes the game -> Game is no longer visible and removed from the tree
 #Player regains all regular controls etc
 func _on_minigame_end():
+	floating_buttons.visible = true
 	minigame_controller.close_game()
+	
 
 
 func _on_shift_started():

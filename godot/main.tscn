@@ -4034,7 +4034,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "floating_buttons", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -4054,6 +4054,7 @@ day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
+floating_buttons = NodePath("UI/HUD/VBoxContainer/FloatingButtons")
 camera_posters = [NodePath("Lights/workplace_signs_obj_cleaner_materialmerger_gles/Object_2"), NodePath("Lights/workplace_signs_obj_cleaner_materialmerger_gles/Object_3"), NodePath("Lights/workplace_signs_obj_cleaner_materialmerger_gles/Object_4")]
 minigame_controller = NodePath("MinigameController")
 clock_item = ExtResource("4_12204")
@@ -4147,7 +4148,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(1820, 980)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="CancelButton" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
