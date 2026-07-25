@@ -82,15 +82,8 @@ func give_bag() -> void:
 
 
 func fill_items() -> void:
-	for item in [
-		"air freshener",
-		"clock",
-		"hammer",
-		"nice spoon",
-		"nice shoes",
-		"teflon",
-	]:
-		give_item(item)
+	for i in Global.item_slots_amount:
+		give_item(Global.items[i].name)
 
 
 func set_profit(profit: String) -> void:
