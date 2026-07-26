@@ -32,6 +32,8 @@ func _ready() -> void:
 
 	desired_drink = Global.drinks.pick_random()
 
+	spawn_anim()
+
 
 func _physics_process(_delta: float) -> void:
 	# uncomment to show time above customer head
@@ -57,6 +59,24 @@ func _exit_tree() -> void:
 	Global.customer_sprites_spawned.erase(body.texture)
 
 
+func spawn_anim() -> void:
+	const DUR := 0.25
+
+	var t := create_tween().set_parallel().set_ease(Tween.EASE_OUT)
+	t.tween_property(body, "transparency", 0, DUR).from(1)
+	t.tween_property(self, "scale:y", 1, DUR).from(1.25)
+
+
+func despawn_anim() -> void:
+	const DUR := 0.25
+
+	var t := create_tween().set_parallel().set_ease(Tween.EASE_IN)
+	t.tween_property(body, "transparency", 1, DUR).from(0)
+	t.tween_property(self, "scale:y", 1.25, DUR).from(1)
+
+	await t.finished
+
+
 # smoothly move to a location
 # NOTE: loc should be a global position
 func move_to(loc: Vector3) -> void:
@@ -75,6 +95,7 @@ func leave_store() -> void:
 	waiting_indicator.hide()
 	await move_to(Global.customer_leaving_spot.global_position)
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
+	await despawn_anim()
 	queue_free()
 
 
