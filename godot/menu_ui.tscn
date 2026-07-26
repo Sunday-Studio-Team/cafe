@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://clkd03qupx8mf"]
 
 [ext_resource type="Script" uid="uid://878axqshl42v" path="res://menu_ui.gd" id="1_62138"]
-[ext_resource type="Script" uid="uid://brdkuguahs71p" path="res://drink_info_container.gd" id="1_jhml7"]
-[ext_resource type="Texture2D" uid="uid://cvel5001amo2l" path="res://sprites/drink_icons/latte.png" id="2_0n2sb"]
+[ext_resource type="PackedScene" uid="uid://dxs5w7ca7dshy" path="res://drink_info_container.tscn" id="2_0n2sb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrgxk"]
 
@@ -20,7 +19,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "latte_drinks", "specialty_drinks")]
+[node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "tea_drinks", "latte_drinks", "specialty_drinks")]
 custom_minimum_size = Vector2(800, 1000)
 custom_maximum_size = Vector2(800, 1000)
 anchors_preset = 15
@@ -34,8 +33,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_62138")
 coffee_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid")
+tea_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Tea/TeaDrinks/DrinksGrid")
 latte_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid")
-specialty_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Lattees2/SpecialDrinks/DrinksGrid")
+specialty_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Special/SpecialDrinks/DrinksGrid")
 
 [node name="Background" type="Panel" parent="." unique_id=783454252]
 layout_mode = 2
@@ -90,81 +90,35 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
 layout_mode = 2
 columns = 4
 
-[node name="DrinkInfoContainer" type="VBoxContainer" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid" unique_id=178883033 node_paths=PackedStringArray("drink_name", "drink_price", "drink_icon")]
-custom_minimum_size = Vector2(150, 175)
-custom_maximum_size = Vector2(150, 175)
+[node name="DrinkInfoContainer" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid" unique_id=1539861584 instance=ExtResource("2_0n2sb")]
 layout_mode = 2
-script = ExtResource("1_jhml7")
-drink_name = NodePath("DrinkName")
-drink_price = NodePath("DrinkPrice")
-drink_icon = NodePath("DrinkIcon")
 
-[node name="DrinkIcon" type="TextureRect" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid/DrinkInfoContainer" unique_id=1672415438]
-custom_minimum_size = Vector2(75, 75)
-custom_maximum_size = Vector2(75, 75)
+[node name="Tea" type="HBoxContainer" parent="Menu/MenuTypes/VBoxContainer" unique_id=1126924997]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_0n2sb")
-expand_mode = 4
-stretch_mode = 5
+theme_override_constants/separation = 4
 
-[node name="DrinkName" type="Label" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid/DrinkInfoContainer" unique_id=1682719289]
+[node name="TeaDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Tea" unique_id=656270403]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "almond milk iced espresso latte"
-horizontal_alignment = 1
-autowrap_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
 
-[node name="DrinkPrice" type="Label" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid/DrinkInfoContainer" unique_id=1001999695]
+[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Tea/TeaDrinks" unique_id=1031281081]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "3.50"
-horizontal_alignment = 1
+columns = 4
+
+[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Tea" unique_id=489152976]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+
+[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Tea/CoffeeBox" unique_id=1044681184]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "TEA"
 
 [node name="Lattees" type="HBoxContainer" parent="Menu/MenuTypes/VBoxContainer" unique_id=1930843561]
 layout_mode = 2
 theme_override_constants/separation = 4
-
-[node name="LatteDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=234375226]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
-
-[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks" unique_id=103809294]
-layout_mode = 2
-columns = 4
-
-[node name="DrinkInfoContainer" type="VBoxContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid" unique_id=776395951 node_paths=PackedStringArray("drink_name", "drink_price", "drink_icon")]
-custom_minimum_size = Vector2(150, 175)
-custom_maximum_size = Vector2(150, 175)
-layout_mode = 2
-script = ExtResource("1_jhml7")
-drink_name = NodePath("DrinkName")
-drink_price = NodePath("DrinkPrice")
-drink_icon = NodePath("DrinkIcon")
-
-[node name="DrinkIcon" type="TextureRect" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid/DrinkInfoContainer" unique_id=693283820]
-custom_minimum_size = Vector2(75, 75)
-custom_maximum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_0n2sb")
-expand_mode = 4
-stretch_mode = 5
-
-[node name="DrinkName" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid/DrinkInfoContainer" unique_id=1047549312]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "almond milk iced espresso latte"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="DrinkPrice" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid/DrinkInfoContainer" unique_id=800299483]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "3.50"
-horizontal_alignment = 1
 
 [node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=557153007]
 layout_mode = 2
@@ -177,57 +131,33 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 text = "LATTES"
 
-[node name="Lattees2" type="HBoxContainer" parent="Menu/MenuTypes/VBoxContainer" unique_id=198679165]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees2" unique_id=1519584411]
+[node name="LatteDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=234375226]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
 
-[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees2/CoffeeBox" unique_id=1830419386]
+[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks" unique_id=678731819]
+layout_mode = 2
+columns = 4
+
+[node name="Special" type="HBoxContainer" parent="Menu/MenuTypes/VBoxContainer" unique_id=198679165]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpecialDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Special" unique_id=795180901]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+
+[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Special/SpecialDrinks" unique_id=1024227558]
+layout_mode = 2
+columns = 4
+
+[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Special" unique_id=1519584411]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+
+[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Special/CoffeeBox" unique_id=1830419386]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 text = "SPECIAL"
-
-[node name="SpecialDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees2" unique_id=795180901]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
-
-[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees2/SpecialDrinks" unique_id=1024227558]
-layout_mode = 2
-columns = 4
-
-[node name="DrinkInfoContainer" type="VBoxContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees2/SpecialDrinks/DrinksGrid" unique_id=1878885485 node_paths=PackedStringArray("drink_name", "drink_price", "drink_icon")]
-custom_minimum_size = Vector2(150, 175)
-custom_maximum_size = Vector2(150, 175)
-layout_mode = 2
-script = ExtResource("1_jhml7")
-drink_name = NodePath("DrinkName")
-drink_price = NodePath("DrinkPrice")
-drink_icon = NodePath("DrinkIcon")
-
-[node name="DrinkIcon" type="TextureRect" parent="Menu/MenuTypes/VBoxContainer/Lattees2/SpecialDrinks/DrinksGrid/DrinkInfoContainer" unique_id=108379529]
-custom_minimum_size = Vector2(75, 75)
-custom_maximum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_0n2sb")
-expand_mode = 4
-stretch_mode = 5
-
-[node name="DrinkName" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees2/SpecialDrinks/DrinksGrid/DrinkInfoContainer" unique_id=2065558716]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "almond milk iced espresso latte"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="DrinkPrice" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees2/SpecialDrinks/DrinksGrid/DrinkInfoContainer" unique_id=2088130698]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "3.50"
-horizontal_alignment = 1

@@ -4037,13 +4037,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "floating_buttons", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "floating_buttons", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
 _tutorial_manager = NodePath("TutorialManager")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 cameras = NodePath("SecurityCams")
+menu = NodePath("Environment/CustomerArea/Menu")
 side_machine = NodePath("Machines/Machine")
 fourth_machine = NodePath("Machines/Machine4")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")

@@ -15,9 +15,10 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_kk3ma")
 size = Vector2(0.9, 1.2)
 
-[node name="Menu" type="Node3D" unique_id=1811682227]
+[node name="Menu" type="Node3D" unique_id=1811682227 node_paths=PackedStringArray("menu_ui")]
 transform = Transform3D(1, 0, 0, 0, 1.3043694, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_ouk20")
+menu_ui = NodePath("Screen/SubViewport/menu_ui")
 
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=901126912]
 transform = Transform3D(2.5, 0, 0, 0, 1.666, 0, 0, 0, 1.666, 0, 0, 0.76)

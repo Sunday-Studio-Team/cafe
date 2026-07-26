@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dxs5w7ca7dshy"]
+
+[ext_resource type="Script" uid="uid://brdkuguahs71p" path="res://drink_info_container.gd" id="1_hhiuq"]
+[ext_resource type="Texture2D" uid="uid://cvel5001amo2l" path="res://sprites/drink_icons/latte.png" id="2_7qvwv"]
+
+[node name="DrinkInfoContainer" type="VBoxContainer" unique_id=1539861584 node_paths=PackedStringArray("drink_name", "drink_price", "drink_icon")]
+custom_minimum_size = Vector2(150, 175)
+custom_maximum_size = Vector2(150, 175)
+script = ExtResource("1_hhiuq")
+drink_name = NodePath("DrinkName")
+drink_price = NodePath("DrinkPrice")
+drink_icon = NodePath("DrinkIcon")
+
+[node name="DrinkIcon" type="TextureRect" parent="." unique_id=1094487854]
+custom_minimum_size = Vector2(75, 75)
+custom_maximum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_7qvwv")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="DrinkName" type="Label" parent="." unique_id=1741036853]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "almond milk iced espresso latte"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DrinkPrice" type="Label" parent="." unique_id=1042482675]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "3.50"
+horizontal_alignment = 1
