@@ -6,13 +6,14 @@
 [resource]
 script = ExtResource("2_63mx7")
 name = "roller skates"
-description = "move faster, but lose some control"
+description = "move faster and sprint without losing stamina, but lose some control"
 icon = ExtResource("1_i5jft")
 price = 7.0
 stat_bonuses = Dictionary[String, float]({
 "default_move_speed": 2.5,
 "player_accel": -20.0,
 "player_decel": -20.0,
-"sprint_move_speed": 5.0
+"sprint_move_speed": 5.0,
+"sprint_stamina_drain_rate": -100.0
 })
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
