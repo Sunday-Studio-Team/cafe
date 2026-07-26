@@ -8,7 +8,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtxfr"]
 bg_color = Color(0.099985994, 0.09998601, 0.099985965, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhml7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0n2sb"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
@@ -18,6 +18,51 @@ border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 400
+corner_detail = 1
+expand_margin_right = 100.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62138"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 400
+corner_detail = 1
+expand_margin_left = 250.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lm61"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 400
+corner_detail = 1
+expand_margin_right = 250.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xact7"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_left = 400
+corner_detail = 1
+expand_margin_left = 75.0
 
 [node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "coffee_1", "tea_drinks", "latte_drinks", "latte_coming_soon")]
 custom_minimum_size = Vector2(830, 1050)
@@ -34,9 +79,9 @@ grow_vertical = 2
 script = ExtResource("1_62138")
 coffee_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid")
 coffee_1 = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid/DrinkInfoContainer")
-tea_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Tea/TeaDrinks/DrinksGrid")
-latte_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid")
-latte_coming_soon = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid/Label")
+tea_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Tea/CoffeeBox3/DrinksGrid")
+latte_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/CoffeeBox2/DrinksGrid")
+latte_coming_soon = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/CoffeeBox2/Label")
 
 [node name="Background" type="Panel" parent="." unique_id=783454252]
 layout_mode = 2
@@ -77,56 +122,70 @@ theme_override_constants/separation = 4
 [node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Coffee" unique_id=323587502]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0n2sb")
 
 [node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox" unique_id=1538627835]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 50)
+offset_transform_position_ratio = Vector2(-0.025, 0)
+offset_transform_rotation = -0.2617994
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 45
 text = "COFFEE"
 horizontal_alignment = 1
 
 [node name="CoffeeBox2" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Coffee" unique_id=914640952]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_62138")
 
 [node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2" unique_id=1428220135]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-columns = 5
+columns = 4
 
 [node name="DrinkInfoContainer" parent="Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid" unique_id=1539861584 instance=ExtResource("2_0n2sb")]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 20)
 
 [node name="Tea" type="HBoxContainer" parent="Menu/MenuTypes/VBoxContainer" unique_id=1126924997]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 
-[node name="TeaDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Tea" unique_id=656270403]
+[node name="CoffeeBox3" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Tea" unique_id=280350507]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4lm61")
 
-[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Tea/TeaDrinks" unique_id=1031281081]
+[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Tea/CoffeeBox3" unique_id=1517080866]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-columns = 5
+columns = 4
 
-[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Tea" unique_id=489152976]
+[node name="CoffeeBox2" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Tea" unique_id=429224633]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xact7")
 
-[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Tea/CoffeeBox" unique_id=1044681184]
+[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Tea/CoffeeBox2" unique_id=1688764064]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(50, 50)
+offset_transform_position_ratio = Vector2(-0.025, 0)
+offset_transform_rotation = 0.2617994
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 45
 text = "TEA"
 horizontal_alignment = 1
 
@@ -135,32 +194,39 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 
-[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=557153007]
+[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=1102246074]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0n2sb")
 
-[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/CoffeeBox" unique_id=802890985]
+[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/CoffeeBox" unique_id=741694170]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 50)
+offset_transform_position_ratio = Vector2(-0.025, 0)
+offset_transform_rotation = -0.2617994
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 45
 text = "LATTES"
 horizontal_alignment = 1
 
-[node name="LatteDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=234375226]
+[node name="CoffeeBox2" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees" unique_id=1226731071]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_62138")
 
-[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks" unique_id=678731819]
+[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Lattees/CoffeeBox2" unique_id=587606851]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-columns = 5
+columns = 4
 
-[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid" unique_id=2086407071]
+[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/CoffeeBox2" unique_id=1239423834]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "coming soon!"
+theme_override_font_sizes/font_size = 32
+text = "COMING SOON!"
 horizontal_alignment = 1
