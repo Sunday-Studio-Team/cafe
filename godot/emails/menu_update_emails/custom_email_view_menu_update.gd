@@ -1,4 +1,4 @@
-extends CustomEmailView
+extends CustomEmailView	
 class_name CustomEmailViewMenuUpdate
 
 @export var drink_1: Control
