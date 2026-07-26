@@ -7,7 +7,8 @@ func _init():
 	day_to_send = Global.day
 	is_important = true
 	sender_name = "Management"
-	displayed_time = "7am"
+	displayed_time = "8:30am"
 	subject = "Important: Menu Update"
 	recipient_name = "Employee #000000"
 	custom_email_view_packed_scene = scene_loader
+	contents = "will fill this in with something good later"
