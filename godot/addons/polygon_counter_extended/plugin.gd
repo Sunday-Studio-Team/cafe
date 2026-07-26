@@ -11,6 +11,10 @@ const _file_extensions_to_check: Array[StringName] = [
 const _dock_scene_path: StringName = &"res://addons/polygon_counter_extended/dock.tscn"
 
 var _dock: PolygonCounterExtendedDock
+var _loading_thread: Thread
+var _progress_ratio_mutex: Mutex
+var _progress_ratio: float
+var _results_string: String
 
 func _enter_tree() -> void:
 	var dock_scene: PackedScene = load(_dock_scene_path)
@@ -27,7 +31,7 @@ func _enter_tree() -> void:
 	
 	_dock.requested_check_all_meshes.connect(_on_dock_requested_check_all_meshes)
 
-func _exit_tree() -> void:
+func _exit_tree() -> void:	
 	if _dock != null and _dock.get_parent() != null:
 		remove_control_from_bottom_panel(_dock)
 		_dock.queue_free()
@@ -35,6 +39,20 @@ func _exit_tree() -> void:
 
 
 func _on_dock_requested_check_all_meshes() -> void:
+	_progress_ratio_mutex = Mutex.new()
+	_loading_thread = Thread.new()
+	_loading_thread.start(_threaded_check_all_meshes)
+	while _loading_thread.is_alive():
+		_progress_ratio_mutex.lock()
+		_dock.update_progress_bar(_progress_ratio)
+		_progress_ratio_mutex.unlock()
+		await get_tree().process_frame
+	_loading_thread.wait_to_finish()
+	_loading_thread = null
+	_progress_ratio_mutex = null
+	_dock.show_results(_results_string)
+
+func _threaded_check_all_meshes() -> void:
 	var file_paths: Array[String] = []
 	for folder_path in _folders_to_check:
 		var folder_file_paths: Array[String] = _get_all_valid_files_recursively(folder_path)
@@ -43,15 +61,16 @@ func _on_dock_requested_check_all_meshes() -> void:
 	var index: int = 0
 	var file_polygons_results: Array[FilePolygonsResult] = []
 	for file_path in file_paths:
-		_dock.update_progress_bar(float(index) / float(file_paths.size()))
-		var file_polygons_result: FilePolygonsResult = await _count_file_polygons(file_path)
+		_progress_ratio_mutex.lock()
+		_progress_ratio = float(index) / float(file_paths.size())
+		_progress_ratio_mutex.unlock()
+		
+		var file_polygons_result: FilePolygonsResult = _count_file_polygons(file_path)
 		if file_polygons_result == null:
 			push_error("ERROR: Couldn't count file polygons for %s" % file_path)
 			continue
 		file_polygons_results.append(file_polygons_result)
 		index += 1
-
-	_dock.update_progress_bar(float(index) / float(file_paths.size()))
 	
 	# Sort by poly count
 	file_polygons_results.sort_custom(_sort_polygon_count_descending)
@@ -60,7 +79,7 @@ func _on_dock_requested_check_all_meshes() -> void:
 	for file_polygons_result in file_polygons_results:
 		results_string += "\"%s\": Polygons: %s, Vertices: %s\n" % [file_polygons_result.file_path, file_polygons_result.polygon_count, file_polygons_result.vertex_count]
 	
-	_dock.show_results(results_string)
+	_results_string = results_string
 
 
 func _get_all_valid_files_recursively(folder_path: String) -> Array[String]:
@@ -91,22 +110,9 @@ func _get_all_valid_files_recursively(folder_path: String) -> Array[String]:
 
 ## Returns null if error.
 func _count_file_polygons(file_path: String) -> FilePolygonsResult:
-	# Do a threaded read of the file first, maybe that helps with minimizing lag?
-	var resource_request: int = ResourceLoader.load_threaded_request(file_path)
-	while ResourceLoader.load_threaded_get_status(file_path) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
-		await get_tree().process_frame
-	if ResourceLoader.load_threaded_get_status(file_path) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
-		push_error("ERROR: Threaded loading failed for resource at %s" % file_path)
-		return null
-	var resource: Resource = ResourceLoader.load_threaded_get(file_path) 
-	if resource == null:
-		push_error("ERROR: Could not open resource at %s" % file_path)
-		return null
 	if not file_path.ends_with(".glb"):
 		push_error("ERROR: Only .glb is supported for now!")
 		return null
-
-	# Can't seem to do a threaded read of the GLTFDocument.
 	var gltf_document_load: GLTFDocument = GLTFDocument.new()
 	var gltf_state_load: GLTFState = GLTFState.new()
 	var error: int = gltf_document_load.append_from_file(file_path, gltf_state_load)
