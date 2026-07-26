@@ -10,6 +10,7 @@ const STRIDE_LENGTH := 0.75
 @export var bag_pickup_sound: AudioStreamPlayer3D
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
+@export var sprint_lockout_timer: Timer
 
 var move_speed: float = Stats.current.default_move_speed
 var mouse_sens := 0.1
@@ -51,12 +52,16 @@ func _ready() -> void:
 			t.tween_property(ingredients_bag, "transparency", 0, 0.25)
 	)
 
+	Global.stamina = Stats.current.max_stamina
+	Global.sprint_lockout_timer = sprint_lockout_timer
+	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
+
 
 func _physics_process(delta: float) -> void:
 	handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
-	handle_sprint()
+	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
 	#handle_footstep_sounds()
@@ -178,11 +183,26 @@ func handle_inspected_shelf_item() -> void:
 		Global.inspected_shelf_item = null
 
 
-func handle_sprint() -> void:
+func handle_sprint(delta: float) -> void:
 	if Input.is_action_pressed("sprint"):
-		move_speed = Stats.current.sprint_move_speed
+		if get_last_motion().length() > 0:
+			if sprint_lockout_timer.is_stopped():
+				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
+		else:
+			Global.stamina += Stats.current.stamina_regen_rate * delta
+
+		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
+			move_speed = Stats.current.sprint_move_speed
+
+		else:
+			move_speed = Stats.current.default_move_speed
+			Global.stamina += Stats.current.stamina_regen_rate * delta
 	else:
 		move_speed = Stats.current.default_move_speed
+		Global.stamina += Stats.current.stamina_regen_rate * delta
+
+	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
+		sprint_lockout_timer.start()
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

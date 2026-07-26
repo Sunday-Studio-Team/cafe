@@ -39,6 +39,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var item_hover_tooltip_name: RichTextLabel
 @export var item_hover_tooltip_active_indicator: PanelContainer
 @export var item_hover_tooltip_description: RichTextLabel
+@export var stamina_bar: ProgressBar
 #Active Item
 @export var current_item_ui: Control
 @export var hammer_indicator: PanelContainer
@@ -80,6 +81,8 @@ func _ready() -> void:
 
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_ui.modulate.a = 0
+
+	stamina_bar.max_value = Stats.current.max_stamina
 
 	# we automatically play a sound whenever our points change,
 	# so we mute that sound while we reset our points @ the start of each day
@@ -182,6 +185,21 @@ func _physics_process(_delta: float) -> void:
 	handle_drop_item_ui()
 	handle_item_ui()
 	handle_item_hover_tooltip()
+	handle_stamina_bar()
+
+
+func handle_stamina_bar() -> void:
+	var stam: float = Global.stamina
+	var max_stam: float = Stats.current.max_stamina
+
+	stamina_bar.visible = stam < max_stam
+
+	stamina_bar.value = stam
+
+	if not Global.sprint_lockout_timer.is_stopped():
+		stamina_bar.modulate = Color.INDIAN_RED
+	else:
+		stamina_bar.modulate = Color.WHITE
 
 
 func handle_item_hover_tooltip() -> void:
