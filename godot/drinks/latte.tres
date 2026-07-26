@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://cijqkuvo12tqt"]
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://cblv6ef5auan0"]
 
 [ext_resource type="Texture2D" uid="uid://cvel5001amo2l" path="res://sprites/drink_icons/latte.png" id="1_ddp4v"]
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_fo7p0"]
 [ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="1_g2qxs"]
-[ext_resource type="Resource" uid="uid://cldvta860kml" path="res://drinks/ingredients/coffee.tres" id="2_ddp4v"]
+[ext_resource type="Resource" uid="uid://dqwdh1q6mry1i" path="res://drinks/ingredients/espresso_bean.tres" id="3_g2qxs"]
 
 [resource]
 script = ExtResource("1_fo7p0")
 name = "latte"
-main_ingredient = ExtResource("2_ddp4v")
+main_ingredient = ExtResource("3_g2qxs")
 liquid = ExtResource("1_g2qxs")
 icon = ExtResource("1_ddp4v")
+day_unlocked = 2
+type = 2
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"

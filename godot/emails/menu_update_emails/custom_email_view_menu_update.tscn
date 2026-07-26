@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://bxy57taomjx7x"]
+
+[ext_resource type="Script" uid="uid://dwvs44j1308am" path="res://emails/menu_update_emails/custom_email_view_menu_update.gd" id="1_8jh7c"]
+[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="2_o8gnl"]
+[ext_resource type="PackedScene" uid="uid://c1yb2udyxmruy" path="res://emails/menu_update_emails/email_drink_container.tscn" id="3_maimp"]
+[ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="4_gd1jp"]
+[ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="5_dufui"]
+[ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="6_btdt4"]
+[ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="7_0361o"]
+
+[node name="MenuUpdateEmail" type="Container" unique_id=1099734027 node_paths=PackedStringArray("drink_1", "drinks_list", "yes_button", "ok_button")]
+script = ExtResource("1_8jh7c")
+drink_1 = NodePath("Container/VBoxContainer/NewDrinks/EmailDrinkContainer")
+drinks_list = NodePath("Container/VBoxContainer/NewDrinks")
+yes_button = NodePath("Container/VBoxContainer/HBoxContainer/YesButton")
+ok_button = NodePath("Container/VBoxContainer/HBoxContainer/OkButton")
+
+[node name="Container" type="MarginContainer" parent="." unique_id=1963856371]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container" unique_id=194085118]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Container/VBoxContainer" unique_id=1229364220]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_o8gnl")
+theme_override_font_sizes/font_size = 24
+text = "Items Added:"
+horizontal_alignment = 1
+
+[node name="NewDrinks" type="GridContainer" parent="Container/VBoxContainer" unique_id=1811236088]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 5
+
+[node name="EmailDrinkContainer" parent="Container/VBoxContainer/NewDrinks" unique_id=2043435788 instance=ExtResource("3_maimp")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer" unique_id=955129832]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+
+[node name="YesButton" type="TextureButton" parent="Container/VBoxContainer/HBoxContainer" unique_id=284654496]
+custom_minimum_size = Vector2(125, 0)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource("4_gd1jp")
+texture_pressed = ExtResource("5_dufui")
+texture_hover = ExtResource("6_btdt4")
+texture_disabled = ExtResource("7_0361o")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="YesLabel" type="Label" parent="Container/VBoxContainer/HBoxContainer/YesButton" unique_id=1278401392]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -28.0
+offset_right = 43.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_o8gnl")
+theme_override_font_sizes/font_size = 24
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OkButton" type="TextureButton" parent="Container/VBoxContainer/HBoxContainer" unique_id=490732829]
+custom_minimum_size = Vector2(125, 0)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource("4_gd1jp")
+texture_pressed = ExtResource("5_dufui")
+texture_hover = ExtResource("6_btdt4")
+texture_disabled = ExtResource("7_0361o")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="OkLabel" type="Label" parent="Container/VBoxContainer/HBoxContainer/OkButton" unique_id=2085454235]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_o8gnl")
+theme_override_font_sizes/font_size = 24
+text = "Ok"
+horizontal_alignment = 1

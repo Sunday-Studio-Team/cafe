@@ -7,6 +7,7 @@ static var seen_breakdown_popup := false
 @export var _tutorial_manager: TutorialManager
 @export var machines: Array[Machine]
 @export var cameras: Node3D
+@export var menu: Menu3D
 # first machine on the left
 @export var side_machine: Machine
 @export var fourth_machine: Machine
@@ -147,6 +148,8 @@ func set_per_day_stuff() -> void:
 				push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
 			Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
 		Global.ai_improvement_enabled = true
+		
+	menu.populate_drinks()
 
 	Global.machines.assign(machines)
 

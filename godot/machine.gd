@@ -353,15 +353,16 @@ func machine_make_drink() -> void:
 	# now find a random drink that has that score !
 	randomize()
 	Global.drinks.shuffle()
-	for item in Global.drinks:
+	for item in Global.drinks.filter(func(d: Drink): return d.is_unlocked()):
 		var sc = item.get_score_from(order.ordered_drink)
 		if sc == order.score:
 			order.made_drink = item
-			break
-	#var drinks_list = Global.drinks.filter(func(d): 
-	#d.get_score_from(order.ordered_drink) == order.score)
-	#order.made_drink = drinks_list.pick_random()
-
+			break 
+			
+	if !order.made_drink: # get a random drink, useful for earlier days
+			order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
+			order.score = order.made_drink.get_score_from(order.ordered_drink)
+			
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
 	if order.ordered_drink.liquid == order.made_drink.liquid:
