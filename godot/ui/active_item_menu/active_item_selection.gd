@@ -116,8 +116,14 @@ func update_items():
 		if item.is_active_item and item.can_be_used:
 			options.append(item)
 
+	if (
+			Global.equipped_item != null
+			and not Global.owned_items.has(Global.equipped_item)
+	):
+		remove_item(Global.equipped_item)
+		Global.equipped_item = null
+
 	print("Options: ", options)
-	pass
 
 
 func remove_item(target_item: Item):
