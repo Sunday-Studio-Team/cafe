@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dohtcd6556n24"]
+
+[ext_resource type="PackedScene" uid="uid://clkd03qupx8mf" path="res://menu_ui.tscn" id="1_lti8b"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_rtxfr"]
+
+[node name="Menu" type="Node3D" unique_id=1811682227]
+
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=228370175]
+mesh = SubResource("QuadMesh_rtxfr")
+
+[node name="SubViewport" type="SubViewport" parent="Screen" unique_id=1216287343]
+size = Vector2i(800, 800)
+
+[node name="menu_ui" parent="Screen/SubViewport" unique_id=136653234 instance=ExtResource("1_lti8b")]
