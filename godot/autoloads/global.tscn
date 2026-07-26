@@ -7,10 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="5_hx7jl"]
 [ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="6_4y2jn"]
 [ext_resource type="Texture2D" uid="uid://u061xia2klda" path="res://sprites/mop_cursor.png" id="7_nkame"]
+[ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="9_oys0l"]
+[ext_resource type="Resource" uid="uid://blnm357ivsu6d" path="res://emails/sato/email_data_day_2_sato_arooj.tres" id="10_x2nk7"]
+[ext_resource type="Resource" uid="uid://d0ex15shahsk6" path="res://emails/sato/email_data_day_4_sato_dre.tres" id="11_jmbcq"]
+[ext_resource type="Resource" uid="uid://b3n1pyo07g0pi" path="res://emails/tucker_files/email_data_day_2_tucker_files_1.tres" id="12_nkame"]
+[ext_resource type="Resource" uid="uid://by6jj4sy6cm8q" path="res://emails/tucker_files/email_data_day_3_tucker_files_2.tres" id="13_lt8ol"]
+[ext_resource type="Resource" uid="uid://dl1wik4q6kid8" path="res://emails/tucker_files/email_data_day_5_tucker_files_3.tres" id="14_pwnsx"]
 [ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="15_do865"]
-[ext_resource type="Resource" uid="uid://bbr8qpbfanc3b" path="res://emails/email_view_day_1_001/email_data_day_1_001.tres" id="16_qy21g"]
-[ext_resource type="Resource" uid="uid://dallqsbjskfmo" path="res://emails/email_data_day_2_001.tres" id="17_aqy5m"]
-[ext_resource type="Resource" uid="uid://drxcox1duurkn" path="res://emails/email_data_day_2_002.tres" id="18_oscrk"]
 
 [node name="Global" type="Node" unique_id=668412834]
 process_mode = 3
@@ -26,4 +29,4 @@ star_texture = ExtResource("4_rx4vo")
 half_star_texture = ExtResource("5_hx7jl")
 empty_star_texture = ExtResource("6_4y2jn")
 mop_cursor_texture = ExtResource("7_nkame")
-emails_schedule = Array[ExtResource("15_do865")]([ExtResource("16_qy21g"), ExtResource("17_aqy5m"), ExtResource("18_oscrk")])
+emails_schedule = Array[ExtResource("15_do865")]([ExtResource("9_oys0l"), ExtResource("10_x2nk7"), ExtResource("11_jmbcq"), ExtResource("12_nkame"), ExtResource("13_lt8ol"), ExtResource("14_pwnsx")])
