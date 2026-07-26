@@ -5,8 +5,6 @@ class_name MenuUI
 @export var coffee_1: Control
 @export var tea_drinks: Control
 @export var latte_drinks: Control
-@export var specialty_drinks: Control
-
 
 func populate_drinks() -> void:
 	for drink: Drink in Global.drinks:
@@ -19,7 +17,5 @@ func populate_drinks() -> void:
 				tea_drinks.add_child(container)
 			2:
 				latte_drinks.add_child(container)
-			3:
-				specialty_drinks.add_child(container)
 	# remove placehodler
 	coffee_drinks.remove_child(coffee_1)

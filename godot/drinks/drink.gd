@@ -1,7 +1,7 @@
 class_name Drink
 extends Resource
 
-enum DrinkType { COFFEE, TEA, LATTE, SPECIAL }
+enum DrinkType { COFFEE, TEA, LATTE }
 @export var name: String
 @export var singular_article: String = "a"
 @export var main_ingredient: Ingredient

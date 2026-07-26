@@ -19,7 +19,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "coffee_1", "tea_drinks", "latte_drinks", "specialty_drinks")]
+[node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "coffee_1", "tea_drinks", "latte_drinks")]
 custom_minimum_size = Vector2(830, 1050)
 custom_maximum_size = Vector2(830, 1050)
 anchors_preset = 15
@@ -36,7 +36,6 @@ coffee_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksG
 coffee_1 = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid/DrinkInfoContainer")
 tea_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Tea/TeaDrinks/DrinksGrid")
 latte_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid")
-specialty_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Special/SpecialDrinks/DrinksGrid")
 
 [node name="Background" type="Panel" parent="." unique_id=783454252]
 layout_mode = 2
@@ -159,31 +158,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 5
 
-[node name="Special" type="HBoxContainer" parent="Menu/MenuTypes/VBoxContainer" unique_id=198679165]
+[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid" unique_id=2086407071]
+visible = false
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 4
-
-[node name="SpecialDrinks" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Special" unique_id=795180901]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
-
-[node name="DrinksGrid" type="GridContainer" parent="Menu/MenuTypes/VBoxContainer/Special/SpecialDrinks" unique_id=1024227558]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-columns = 5
-
-[node name="CoffeeBox" type="PanelContainer" parent="Menu/MenuTypes/VBoxContainer/Special" unique_id=1519584411]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jhml7")
-
-[node name="Label" type="Label" parent="Menu/MenuTypes/VBoxContainer/Special/CoffeeBox" unique_id=1830419386]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 30
-text = "SPECIAL"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "coming soon!"
 horizontal_alignment = 1
