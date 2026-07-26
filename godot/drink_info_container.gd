@@ -13,5 +13,5 @@ var drink: Drink = null:
 		else:
 			drink = value
 			drink_icon.texture = drink.icon
-			drink_price.text = str(drink.price)
+			drink_price.text = Global.float_to_price(drink.price)
 			drink_name.text = drink.name

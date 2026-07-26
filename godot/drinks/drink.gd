@@ -1,7 +1,7 @@
 class_name Drink
 extends Resource
 
-enum DrinkType { COFFEE, TEA, LATTE, SPECIAL } # For menu
+enum DrinkType { COFFEE, TEA, LATTE, SPECIAL }
 @export var name: String
 @export var singular_article: String = "a"
 @export var main_ingredient: Ingredient
@@ -15,6 +15,7 @@ enum DrinkType { COFFEE, TEA, LATTE, SPECIAL } # For menu
 # almond milk variations (+iced ver) = day 4
 
 @export var type: DrinkType
+# where it goes on the menu
 @export var upcharge: float = 0 
 # incase u want to make the drink more expensive on top of the regular price when calculated
 # only used for matcha atm
@@ -23,7 +24,6 @@ var price: float
 var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe = null
 
 func create() -> void:
-	price = upcharge
 	typing_minigame_ingredients_recipe = TypingMinigameContentIngredientsListRecipe.new()
 	price += main_ingredient.cost
 	typing_minigame_ingredients_recipe.ingredient_names.append(main_ingredient.name_to_string())
@@ -33,6 +33,7 @@ func create() -> void:
 	if extra:
 		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
 		price += extra.cost
+	price += upcharge
 	price += 0.5 # profit
 
 func get_score_from(drank: Drink) -> int:
