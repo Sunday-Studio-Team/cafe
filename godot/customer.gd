@@ -82,7 +82,7 @@ func despawn_anim() -> void:
 func move_to(loc: Vector3) -> void:
 	var dur := global_position.distance_to(loc) / MOVE_SPEED
 
-	var t := create_tween()
+	var t := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	t.tween_property(self, "global_position", loc, dur)
 	await t.finished
 
