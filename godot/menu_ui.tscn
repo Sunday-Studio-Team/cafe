@@ -19,7 +19,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "tea_drinks", "latte_drinks", "specialty_drinks")]
+[node name="MenuUi" type="MarginContainer" unique_id=554075569 node_paths=PackedStringArray("coffee_drinks", "coffee_1", "tea_drinks", "latte_drinks", "specialty_drinks")]
 custom_minimum_size = Vector2(800, 1000)
 custom_maximum_size = Vector2(800, 1000)
 anchors_preset = 15
@@ -33,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_62138")
 coffee_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid")
+coffee_1 = NodePath("Menu/MenuTypes/VBoxContainer/Coffee/CoffeeBox2/DrinksGrid/DrinkInfoContainer")
 tea_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Tea/TeaDrinks/DrinksGrid")
 latte_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Lattees/LatteDrinks/DrinksGrid")
 specialty_drinks = NodePath("Menu/MenuTypes/VBoxContainer/Special/SpecialDrinks/DrinksGrid")

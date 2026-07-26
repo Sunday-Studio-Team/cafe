@@ -361,7 +361,7 @@ func machine_make_drink() -> void:
 			order.made_drink = item
 			break 
 			
-	if !order.ordered_drink: # get a random drink, useful for earlier days
+	if !order.made_drink: # get a random drink, useful for earlier days
 			order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
 			order.score = order.made_drink.get_score_from(order.ordered_drink)
 			

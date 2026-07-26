@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://brdkuguahs71p" path="res://drink_info_container.gd" id="1_hhiuq"]
 [ext_resource type="Texture2D" uid="uid://cvel5001amo2l" path="res://sprites/drink_icons/latte.png" id="2_7qvwv"]
 
-[node name="DrinkInfoContainer" type="VBoxContainer" unique_id=1539861584 node_paths=PackedStringArray("drink_name", "drink_price", "drink_icon")]
+[node name="DrinkInfoContainer" type="VBoxContainer" unique_id=1539861584 node_paths=PackedStringArray("drink_icon", "drink_name", "drink_price")]
 custom_minimum_size = Vector2(150, 175)
 custom_maximum_size = Vector2(150, 175)
 script = ExtResource("1_hhiuq")
+drink_icon = NodePath("DrinkIcon")
 drink_name = NodePath("DrinkName")
 drink_price = NodePath("DrinkPrice")
-drink_icon = NodePath("DrinkIcon")
 
 [node name="DrinkIcon" type="TextureRect" parent="." unique_id=1094487854]
 custom_minimum_size = Vector2(75, 75)
