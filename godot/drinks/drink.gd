@@ -9,17 +9,21 @@ enum DrinkType { COFFEE, TEA, LATTE, SPECIAL } # For menu
 @export var extra: Ingredient
 @export var icon: Texture2D
 @export var day_unlocked: int = 1
-@export var type: DrinkType
-
 # coffee, tea, espresso (+iced ver) = day 1
 # basic lattes (+iced ver) = day 2
 # chai and matcha drinks (+iced ver) = day 3
 # almond milk variations (+iced ver) = day 4
 
+@export var type: DrinkType
+@export var upcharge: float = 0 
+# incase u want to make the drink more expensive on top of the regular price when calculated
+# only used for matcha atm
+
 var price: float
 var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe = null
 
 func create() -> void:
+	price = upcharge
 	typing_minigame_ingredients_recipe = TypingMinigameContentIngredientsListRecipe.new()
 	price += main_ingredient.cost
 	typing_minigame_ingredients_recipe.ingredient_names.append(main_ingredient.name_to_string())
@@ -29,7 +33,7 @@ func create() -> void:
 	if extra:
 		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
 		price += extra.cost
-	price += 0.5
+	price += 0.5 # profit
 
 func get_score_from(drank: Drink) -> int:
 	var myf = 0
