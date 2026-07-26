@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cckwaj76155mm" path="res://customer_queue.gd" id="1_d6l12"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_s4cln"]
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="3_n6krc"]
+[ext_resource type="Texture2D" uid="uid://bs1mpgx84cqn6" path="res://Assets/UI/speech_bubble.png" id="4_0hcj7"]
+[ext_resource type="Texture2D" uid="uid://b176xreldagr8" path="res://Assets/UI/x_button.png" id="5_80sc6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n6krc"]
 size = Vector3(2, 2, 1)
@@ -53,3 +55,33 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 70
 text = "A customer has a complaint.
 Talk to them at the counter"
+
+[node name="InputBlocker" type="Control" parent="CustomerComplaintPopup" unique_id=909110369]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CustomerComplaintPopup/InputBlocker" unique_id=131193305]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_0hcj7")
+
+[node name="MarginContainer" type="MarginContainer" parent="CustomerComplaintPopup/InputBlocker/TextureRect" unique_id=1749240471]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CustomerComplaintPopup/InputBlocker/TextureRect/MarginContainer" unique_id=279930085]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 70
+text = "A customer has a complaint.
+Talk to them at the counter"
+
+[node name="Button" type="Button" parent="CustomerComplaintPopup/InputBlocker" unique_id=1559320630]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+icon = ExtResource("5_80sc6")
