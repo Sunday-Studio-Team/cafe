@@ -1,6 +1,8 @@
 class_name Customer
 extends Node3D
 
+const MOVE_SPEED := 2.0
+
 @export var body: Sprite3D
 @export var waiting_indicator: Sprite3D
 @export var waiting_bar: TextureProgressBar
@@ -55,13 +57,23 @@ func _exit_tree() -> void:
 	Global.customer_sprites_spawned.erase(body.texture)
 
 
+# smoothly move to a location
+# NOTE: loc should be a global position
+func move_to(loc: Vector3) -> void:
+	var dur := global_position.distance_to(loc) / MOVE_SPEED
+
+	var t := create_tween()
+	t.tween_property(self, "global_position", loc, dur)
+	await t.finished
+
+
 func get_stats():
 	timer.wait_time = Stats.current.customer_wait_time_machine
 
 
 func leave_store() -> void:
 	waiting_indicator.hide()
-	global_transform = Global.customer_leaving_spot.global_transform
+	await move_to(Global.customer_leaving_spot.global_position)
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
 	queue_free()
 
