@@ -2,7 +2,7 @@ class_name Item
 extends Resource
 
 @export var name: String
-@export var description: String
+@export_multiline var description: String
 @export var icon: Texture
 @export var price: float = 5
 ## this will be for 'active items' we can pick up
@@ -27,7 +27,7 @@ extends Resource
 var can_be_used: bool = true #Set to false when the item is used
 
 
-func apply_stats():
+func apply_stats() -> void:
 	if stat_bonuses.is_empty():
 		push_warning("%s has no stat bonuses, not applying stats" % name)
 	for stat in stat_bonuses:
@@ -37,3 +37,14 @@ func apply_stats():
 		Stats.current.set(stat, current_stat + stat_bonuses[stat])
 	for rule in rules:
 		Global.set(rule, rules[rule])
+
+
+# for when we sell items
+func unapply_stats() -> void:
+	if stat_bonuses.is_empty():
+		push_warning("%s has no stat bonuses, not unapplying stats" % name)
+	for stat in stat_bonuses:
+		var current_stat = Stats.current.get(stat)
+		if current_stat == null:
+			push_error("%s is trying to take a bonus from '%s' but that stat does not exist" % [name, stat])
+		Stats.current.set(stat, current_stat - stat_bonuses[stat])

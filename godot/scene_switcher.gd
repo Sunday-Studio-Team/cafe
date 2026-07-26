@@ -1,12 +1,19 @@
+class_name SceneSwitcher
 extends Node
+
+enum GameScene {
+	MAIN_SCENE,
+	MAIN_MENU,
+}
 
 const LOADING_FADE_IN_TIME := 0.5
 const LOADING_FADE_OUT_TIME := 1.0
 
 @export var loading_screen: ColorRect
+@export var _loading_progress_bar: ProgressBar
 @export var loading_icons: Control
-@export var main_scene: PackedScene
-@export var main_menu: PackedScene
+@export var _main_scene_uid: StringName
+@export var _main_menu_uid: StringName
 
 var current_scene: Node = null
 var loading_tween: Tween
@@ -14,20 +21,19 @@ var loading_tween: Tween
 
 func _ready() -> void:
 	if OS.has_feature("editor"):
-		load_scene(main_scene)
+		load_scene(SceneSwitcher.GameScene.MAIN_SCENE)
 	else:
-		load_scene(main_menu)
-	Events.main_scene_loaded.connect(func(): load_scene(main_scene))
-	Events.main_menu_loaded.connect(func(): load_scene(main_menu))
+		load_scene(SceneSwitcher.GameScene.MAIN_MENU)
+	Events.main_scene_loaded.connect(func(): load_scene(SceneSwitcher.GameScene.MAIN_SCENE))
+	Events.main_menu_loaded.connect(func(): load_scene(SceneSwitcher.GameScene.MAIN_MENU))
 	Events.game_quit.connect(func(): quit())
 
-func _physics_process(_delta: float) -> void:
-	# (disabled for now cos they seemed to not actually be showing during the
-	# loading hitch after pressing play in build)
-	#loading_icons.visible = loading_screen.modulate.a == 1
-	loading_icons.hide()
 
-func load_scene(scene: PackedScene) -> void:
+func _physics_process(_delta: float) -> void:
+	loading_icons.visible = loading_screen.modulate.a == 1
+
+
+func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	if current_scene:
 		get_tree().paused = true
 		loading_tween = create_tween()
@@ -35,7 +41,37 @@ func load_scene(scene: PackedScene) -> void:
 		await loading_tween.finished
 		current_scene.queue_free()
 		await current_scene.tree_exited
-	current_scene = scene.instantiate()
+
+	_loading_progress_bar.visible = true
+	_loading_progress_bar.min_value = 0.0
+	_loading_progress_bar.max_value = 1.0
+
+	var scene_uid: StringName = _scene_enum_to_uid(scene)
+	var request_result: int = ResourceLoader.load_threaded_request(scene_uid)
+	if request_result != OK:
+		push_error("Failed to request scene.")
+		return
+	var progress_ratio_array: Array[float] = []
+	while ResourceLoader.load_threaded_get_status(scene_uid, progress_ratio_array) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
+		if progress_ratio_array.size() > 0:
+			var progress_ratio: float = progress_ratio_array[0]
+			_loading_progress_bar.value = progress_ratio
+		await get_tree().process_frame
+	if ResourceLoader.load_threaded_get_status(scene_uid) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+		push_error("Failed to load scene.")
+		return
+	var scene_resource: Resource = ResourceLoader.load_threaded_get(scene_uid)
+	if scene_resource == null:
+		push_error("Failed to get scene resource.")
+		return
+	var scene_packed_scene: PackedScene = scene_resource as PackedScene
+	if scene_packed_scene == null:
+		push_error("Error: scene resource is not a PackedScene")
+		return
+
+	_loading_progress_bar.visible = false
+
+	current_scene = scene_packed_scene.instantiate()
 	add_child(current_scene)
 	get_tree().paused = false
 	loading_tween = create_tween()
@@ -49,3 +85,14 @@ func quit() -> void:
 		loading_tween.tween_property(loading_screen, "modulate:a", 1, LOADING_FADE_IN_TIME).from(0)
 		await loading_tween.finished
 		get_tree().quit()
+
+
+func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
+	match scene:
+		SceneSwitcher.GameScene.MAIN_SCENE:
+			return _main_scene_uid
+		SceneSwitcher.GameScene.MAIN_MENU:
+			return _main_menu_uid
+		_:
+			push_error("Unhandled Scene!")
+			return &""

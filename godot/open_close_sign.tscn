@@ -82,12 +82,14 @@ mesh = SubResource("CylinderMesh_bpwws")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.041092753)
 text = "START
 SHIFT"
+font_size = 16
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StartShiftModel" unique_id=1768748418]
 visible = false
 size = Vector3(0.88671875, 0.515625, 0.075927734)
 
 [node name="ImportantEmailsRequiredModel" type="Node3D" parent="." unique_id=1299437437]
+visible = false
 
 [node name="Label3D" type="Label3D" parent="ImportantEmailsRequiredModel" unique_id=1266681095]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4575901, 0.041092753)

@@ -1,8 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-const ACCELERATION := 25.0
-const DECELERATION := 25.0
 const STRIDE_LENGTH := 0.75
 
 @export var camera: Camera3D
@@ -12,8 +10,8 @@ const STRIDE_LENGTH := 0.75
 @export var bag_pickup_sound: AudioStreamPlayer3D
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
+@export var sprint_lockout_timer: Timer
 
-# this is a var separate to the const cos it changes when sprint etc
 var move_speed: float = Stats.current.default_move_speed
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
@@ -54,18 +52,22 @@ func _ready() -> void:
 			t.tween_property(ingredients_bag, "transparency", 0, 0.25)
 	)
 
+	Global.stamina = Stats.current.max_stamina
+	Global.sprint_lockout_timer = sprint_lockout_timer
+	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
+
 
 func _physics_process(delta: float) -> void:
 	handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
-	handle_sprint()
+	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
 	#handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
-	handle_active_item_menu()
+	handle_active_items()
 	handle_floating_cursor()
 	move_and_slide()
 
@@ -84,10 +86,13 @@ func handle_floating_cursor() -> void:
 		Global.showing_floating_cursor = false
 
 
-func handle_active_item_menu() -> void:
+func handle_active_items() -> void:
 	if Input.is_action_just_pressed("item_menu"):
 		if not Global.in_ui or Global.in_active_item_menu:
 			Events.active_item_menu.emit()
+
+	if Input.is_action_just_pressed("use_item"):
+		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_mouselook() -> void:
@@ -107,6 +112,10 @@ func handle_movement(delta: float) -> void:
 	):
 		velocity = Vector3.ZERO
 		return
+
+	var accel: float = Stats.current.player_accel
+	var decel: float = Stats.current.player_decel
+
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
@@ -120,16 +129,12 @@ func handle_movement(delta: float) -> void:
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
-		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, ACCELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, accel * delta)
 	else:
-		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, DECELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, decel * delta)
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-
-	#Active Item
-	if Input.is_action_just_pressed("use_item"):
-		Events.active_item_used.emit(Global.equipped_item)
 
 
 func handle_gravity(delta: float) -> void:
@@ -178,11 +183,26 @@ func handle_inspected_shelf_item() -> void:
 		Global.inspected_shelf_item = null
 
 
-func handle_sprint() -> void:
+func handle_sprint(delta: float) -> void:
 	if Input.is_action_pressed("sprint"):
-		move_speed = Stats.current.sprint_move_speed
+		if get_last_motion().length() > 0:
+			if sprint_lockout_timer.is_stopped():
+				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
+		else:
+			Global.stamina += Stats.current.stamina_regen_rate * delta
+
+		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
+			move_speed = Stats.current.sprint_move_speed
+
+		else:
+			move_speed = Stats.current.default_move_speed
+			Global.stamina += Stats.current.stamina_regen_rate * delta
 	else:
 		move_speed = Stats.current.default_move_speed
+		Global.stamina += Stats.current.stamina_regen_rate * delta
+
+	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
+		sprint_lockout_timer.start()
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

@@ -4,17 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="3_gn8fi"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_0rcyg"]
+[ext_resource type="AudioStream" uid="uid://b2l81b36awff1" path="res://audio/bell.mp3" id="5_gn8fi"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
 viewport_path = NodePath("WaitingIndicator/SubViewport")
 
-[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label")]
+[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "spawn_sound")]
 script = ExtResource("1_7tiyv")
 body = NodePath("Sprite3D")
 waiting_indicator = NodePath("WaitingIndicator")
 waiting_bar = NodePath("WaitingIndicator/SubViewport/TextureProgressBar")
 timer = NodePath("Timer")
 time_bonus_label = NodePath("TimeBonusLabel")
+spawn_sound = NodePath("SpawnSound")
 sprites_folder = "res://sprites/customers"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
@@ -53,3 +55,9 @@ one_shot = true
 [node name="TimeBonusLabel" type="Label3D" parent="." unique_id=1602389944]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16839987, 2.2842515, 0)
 billboard = 2
+
+[node name="SpawnSound" type="AudioStreamPlayer3D" parent="." unique_id=124183828]
+stream = ExtResource("5_gn8fi")
+volume_db = -5.0
+max_db = 0.0
+pitch_scale = 3.0

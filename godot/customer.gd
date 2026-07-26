@@ -1,11 +1,14 @@
 class_name Customer
 extends Node3D
 
+const MOVE_SPEED := 2.0
+
 @export var body: Sprite3D
 @export var waiting_indicator: Sprite3D
 @export var waiting_bar: TextureProgressBar
 @export var timer: Timer
 @export var time_bonus_label: Label3D
+@export var spawn_sound: AudioStreamPlayer3D
 @export_dir var sprites_folder: String
 
 var desired_drink: Drink
@@ -29,6 +32,9 @@ func _ready() -> void:
 	add_to_group("customers", true)
 
 	desired_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
+
+	spawn_anim()
+	spawn_sound.play()
 
 
 func _physics_process(_delta: float) -> void:
@@ -55,14 +61,45 @@ func _exit_tree() -> void:
 	Global.customer_sprites_spawned.erase(body.texture)
 
 
+func spawn_anim() -> void:
+	const DUR := 0.25
+
+	var t := create_tween().set_parallel().set_ease(Tween.EASE_OUT)
+	t.tween_property(body, "transparency", 0, DUR).from(1)
+	t.tween_property(self, "scale:y", 1, DUR).from(1.25)
+
+
+func despawn_anim() -> void:
+	const DUR := 0.25
+
+	var t := create_tween().set_parallel().set_ease(Tween.EASE_IN)
+	t.tween_property(body, "transparency", 1, DUR).from(0)
+	t.tween_property(self, "scale:y", 1.25, DUR).from(1)
+
+	await t.finished
+
+
+# smoothly move to a location
+# NOTE: loc should be a global position
+func move_to(loc: Vector3) -> void:
+	var dur := global_position.distance_to(loc) / MOVE_SPEED
+
+	var t := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(self, "global_position", loc, dur)
+	await t.finished
+
+
 func get_stats():
 	timer.wait_time = Stats.current.customer_wait_time_machine
 
 
 func leave_store() -> void:
 	waiting_indicator.hide()
-	global_transform = Global.customer_leaving_spot.global_transform
+	await move_to(Global.customer_leaving_spot.global_position)
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
+	spawn_sound.pitch_scale = 4
+	spawn_sound.play()
+	await despawn_anim()
 	queue_free()
 
 
