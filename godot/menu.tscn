@@ -16,6 +16,7 @@ material = SubResource("StandardMaterial3D_kk3ma")
 size = Vector2(0.9, 1.2)
 
 [node name="Menu" type="Node3D" unique_id=1811682227]
+transform = Transform3D(1, 0, 0, 0, 1.3043694, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_ouk20")
 
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=901126912]
@@ -23,10 +24,9 @@ transform = Transform3D(2.5, 0, 0, 0, 1.666, 0, 0, 0, 1.666, 0, 0, 0.76)
 mesh = SubResource("QuadMesh_nrnbx")
 
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=925820632]
-size = Vector2i(800, 800)
+size = Vector2i(800, 1000)
 
 [node name="menu_ui" parent="Screen/SubViewport" unique_id=136653234 instance=ExtResource("1_lti8b")]
-custom_minimum_size = Vector2(0, 0)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Screen" unique_id=1676100691]
 transform = Transform3D(0.6666667, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
