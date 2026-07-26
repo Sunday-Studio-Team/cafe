@@ -102,6 +102,9 @@ func _start_minigame() -> void:
 	if Global.owned_items.any(func(x: Item): return x.name == "barista guide"):
 		populate_order_reminder()
 		order_reminder.visible = true
+	elif Global.day == 1:
+		populate_order_reminder()
+		order_reminder.visible = true
 	else:
 		order_reminder.visible = false
 
