@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://dlalp4lnows75"]
 
 [ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
-[ext_resource type="PackedScene" uid="uid://nm85k5woe7rt" path="res://main.tscn" id="2_myf8j"]
-[ext_resource type="PackedScene" uid="uid://cqpfyo7o4qvn6" path="res://ui/main_menu.tscn" id="3_0bfbf"]
 [ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_xn3vj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bfbf"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_okatn"]
 length = 0.001
@@ -80,21 +84,22 @@ _data = {
 &"loading": SubResource("Animation_q6tpw")
 }
 
-[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen", "loading_icons")]
+[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen", "_loading_progress_bar", "loading_icons")]
 process_mode = 3
 script = ExtResource("1_6uhv1")
 loading_screen = NodePath("LoadingCanvas/LoadingScreen")
+_loading_progress_bar = NodePath("LoadingCanvas/LoadingScreen/ProgressBar")
 loading_icons = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons")
-main_scene = ExtResource("2_myf8j")
-main_menu = ExtResource("3_0bfbf")
+_main_scene_uid = &"uid://nm85k5woe7rt"
+_main_menu_uid = &"uid://cqpfyo7o4qvn6"
 
 [node name="LoadingCanvas" type="CanvasLayer" parent="." unique_id=520928004]
 layer = 10
 
 [node name="LoadingScreen" type="ColorRect" parent="LoadingCanvas" unique_id=1915811073]
-
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -108,9 +113,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
 [node name="LoadingIcons" type="HBoxContainer" parent="LoadingCanvas/LoadingScreen/MarginContainer" unique_id=736671333]
 layout_mode = 2
@@ -123,7 +127,7 @@ layout_mode = 2
 texture = ExtResource("4_xn3vj")
 
 [node name="LoadingIcon2" type="TextureRect" parent="LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons" unique_id=636883721]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.19970748, 0.19970748, 0.19970748, 1)
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_xn3vj")
@@ -133,6 +137,21 @@ modulate = Color(0.9200001, 0.9200001, 0.9200001, 1)
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_xn3vj")
+
+[node name="ProgressBar" type="ProgressBar" parent="LoadingCanvas/LoadingScreen" unique_id=1990637330]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_myf8j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0bfbf")
+max_value = 1.0
+value = 0.5
+show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=964861867]
 libraries/ = SubResource("AnimationLibrary_ivs3u")

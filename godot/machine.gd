@@ -186,15 +186,12 @@ func show_tutorial_where_is_storeroom() -> void:
 	#check values in global
 	#and then immediately turn those values to 'tutorial has been shown',
 
-	
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
 	await get_tree().create_timer(0.75).timeout #allows audio to play first
 
-
 	if (Global.day == 1) and (Global.tutorial_refill_shown == false):
-
 		Global.tutorial_refill_shown = true
 		Global.in_tutorial_screen = true
 
@@ -233,44 +230,45 @@ func show_tutorial_go_clean_spill() -> void:
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
-	
+
 	await get_tree().create_timer(0.75).timeout #allows audio to play first
-	if (Global.day == 1) and (Global.tutorial_go_clean_spill_shown==false): 
-		Global.tutorial_go_clean_spill_shown= true
-		Global.in_tutorial_screen=true
-		
-		
+	if (Global.day == 1) and (Global.tutorial_go_clean_spill_shown == false):
+		Global.tutorial_go_clean_spill_shown = true
+		Global.in_tutorial_screen = true
+
 		#hide tablet so it's not in the way.
 		var tablet = get_parent().get_parent().find_child("Tablet")
 		tablet.hide()
-		
+
 		#CHANGE POPUP HERE
 		var popup = popup_go_to_spill.instantiate()
 		add_child(popup)
 		get_tree().paused = true # this kinda works but its janky
-		
+
 		var button = popup.get_node("NextButton")
 		popup.move_to_front() #this was an attempt to fix issue, does not really do anything
 		popup.process_mode = Node.PROCESS_MODE_ALWAYS
-		
-		button.pressed.connect(func():	
-			get_tree().paused = false
-			popup.queue_free()
+
+		button.pressed.connect(
+			func():
+				get_tree().paused = false
+				popup.queue_free()
 		)
-		
+
 		#add functionality to allow use of Esc
 		#add functionality so that button makes popup disappear
 		#hide tablet
 		#
-		
+
 		await popup.tree_exited #delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen=false #re enable pause
+		Global.in_tutorial_screen = false #re enable pause
+
 
 func set_customer(c: Customer) -> void:
 	customer = c
 	if customer != null:
-		customer.global_position = spot_for_customer.global_position
+		await customer.move_to(spot_for_customer.global_position)
 
 		if spill_on_floor:
 			Global.score_update_message = "customer stepped in spill"
@@ -387,7 +385,7 @@ func machine_make_drink() -> void:
 	):
 		spill()
 		show_tutorial_go_clean_spill()
-		
+
 	final_order_indicator.text = (
 			"MADE:\n %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
@@ -405,7 +403,6 @@ func spill() -> void:
 	Events.alert_posted.emit("⚙️machine made a spill")
 	Global.spills_this_shift += 1
 	spill_on_floor = true
-	
 
 
 func display_drink_score() -> void:

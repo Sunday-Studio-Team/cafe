@@ -1,0 +1,2 @@
+class_name DayShiftWhiteboardContent
+extends Node3D

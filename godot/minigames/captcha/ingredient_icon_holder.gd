@@ -1,9 +1,5 @@
 class_name IngredientIconHolder
 extends PanelContainer
-
-enum Type { MAIN, LIQUID, EXTRA }
-
-@export var type: Type
 @export var icon: TextureRect
 @export var button: Button
 @export var button_disabled: bool

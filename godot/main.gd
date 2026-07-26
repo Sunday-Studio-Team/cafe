@@ -1,5 +1,8 @@
 extends Node3D
 
+static var seen_interaction_popup := false
+static var seen_breakdown_popup := false
+
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
 @export var machines: Array[Machine]
@@ -18,6 +21,7 @@ extends Node3D
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
+@export var floating_buttons: Control
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -30,8 +34,6 @@ extends Node3D
 @export var clock_item_start_sound: AudioStreamPlayer
 @export var interaction_popup: CanvasLayer
 @export var breakdown_popup: CanvasLayer
-static var seen_interaction_popup := false
-static var seen_breakdown_popup := false
 
 
 func _enter_tree() -> void:
@@ -174,7 +176,7 @@ func spawn_customer() -> void:
 	while machine == null or machine.customer:
 		machine = machines.pick_random()
 
-	machine.set_customer(new_customer)
+	await machine.set_customer(new_customer)
 	machine.machine_make_drink()
 
 
@@ -220,12 +222,14 @@ func _on_game_timer_timeout() -> void:
 
 #Minigame is active (Need to turn off regular player controls)
 func _on_minigame_active(minigame_name: String):
+	floating_buttons.visible = false
 	minigame_controller.play_minigame(minigame_name)
 
 
 #Closes the game -> Game is no longer visible and removed from the tree
 #Player regains all regular controls etc
 func _on_minigame_end():
+	floating_buttons.visible = true
 	minigame_controller.close_game()
 
 

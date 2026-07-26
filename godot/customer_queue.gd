@@ -2,20 +2,19 @@ class_name CustomerQueue
 extends Node3D
 
 signal customer_added
-signal queue_updated
+
+static var seen_complaint_popup := false
 
 @export var customer_interactable: Interactable
 @export var front_of_window_queue: Marker3D
 @export var queue_spacing_offset: float = -1
 
-static var seen_complaint_popup := false
 var customers_waiting: Array[Customer]
 
 @onready var queue_front_position: Vector3 = front_of_window_queue.global_position
 
 
 func _ready() -> void:
-	queue_updated.connect(_on_queue_updated)
 	customer_interactable.interacted.connect(_on_customer_interactable_interacted)
 	customer_interactable.enabled = false
 
@@ -27,15 +26,14 @@ func add_customer(customer: Customer) -> void:
 		Global.popups["complaint"].open()
 	else:
 		pass
-		
 
 	Events.alert_posted.emit("🛎️ customer complained")
 	Global.score_update_message = "customer complained"
-	
+
 	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(func(): remove_front_customer(false))
-	queue_updated.emit()
+	await _on_queue_updated()
 	customer_added.emit()
 	customer.at_window = true
 	customer.timer.wait_time = Stats.current.customer_wait_time_window
@@ -54,7 +52,7 @@ func remove_front_customer(customer_happy: bool) -> void:
 	# --------------------------------------------------
 
 	customers_waiting.pop_front()
-	queue_updated.emit()
+	await _on_queue_updated()
 
 	if customer_happy:
 		Global.score_update_message = "customer placated"
@@ -76,7 +74,7 @@ func _on_queue_updated() -> void:
 		var customer_position: Vector3 = queue_front_position
 		customer_position.z += queue_spacing_offset * index
 
-		customer.global_position = customer_position
+		await customer.move_to(customer_position)
 
 	# Update interactable
 	if customers_waiting.size() > 0:
