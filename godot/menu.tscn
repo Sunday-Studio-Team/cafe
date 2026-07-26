@@ -21,15 +21,15 @@ script = ExtResource("1_ouk20")
 menu_ui = NodePath("Screen/SubViewport/menu_ui")
 
 [node name="Screen" type="MeshInstance3D" parent="." unique_id=901126912]
-transform = Transform3D(2.5, 0, 0, 0, 1.666, 0, 0, 0, 1.666, 0, 0, 0.76)
+transform = Transform3D(2.5, 0, 0, 0, 1.8742499, 0, 0, 0, 1.666, 0, 0, 0.76)
 mesh = SubResource("QuadMesh_nrnbx")
 
 [node name="SubViewport" type="SubViewport" parent="Screen" unique_id=925820632]
-size = Vector2i(800, 1000)
+size = Vector2i(830, 1050)
 
 [node name="menu_ui" parent="Screen/SubViewport" unique_id=136653234 instance=ExtResource("1_lti8b")]
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Screen" unique_id=1676100691]
 transform = Transform3D(0.6666667, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
-light_energy = 5.0
-area_size = Vector2(3, 3)
+light_energy = 8.0
+area_size = Vector2(3.5, 3.5)
