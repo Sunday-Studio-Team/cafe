@@ -13,13 +13,13 @@ func populate_drinks() -> void:
 		var container = coffee_1.duplicate()
 		container.drink = drink
 		match drink.type:
-			1:
+			0:
 				coffee_drinks.add_child(container)
-			2:
+			1:
 				tea_drinks.add_child(container)
-			3:
+			2:
 				latte_drinks.add_child(container)
-			4:
+			3:
 				specialty_drinks.add_child(container)
 	# remove placehodler
 	coffee_drinks.remove_child(coffee_1)
