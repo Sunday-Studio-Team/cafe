@@ -8,6 +8,7 @@ const MOVE_SPEED := 2.0
 @export var waiting_bar: TextureProgressBar
 @export var timer: Timer
 @export var time_bonus_label: Label3D
+@export var spawn_sound: AudioStreamPlayer3D
 @export_dir var sprites_folder: String
 
 var desired_drink: Drink
@@ -33,6 +34,7 @@ func _ready() -> void:
 	desired_drink = Global.drinks.pick_random()
 
 	spawn_anim()
+	spawn_sound.play()
 
 
 func _physics_process(_delta: float) -> void:
@@ -95,6 +97,8 @@ func leave_store() -> void:
 	waiting_indicator.hide()
 	await move_to(Global.customer_leaving_spot.global_position)
 	await get_tree().create_timer(randf_range(1, 2), false).timeout
+	spawn_sound.pitch_scale = 4
+	spawn_sound.play()
 	await despawn_anim()
 	queue_free()
 
