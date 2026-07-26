@@ -1,6 +1,7 @@
 class_name Drink
 extends Resource
 
+enum DrinkType { COFFEE, TEA, LATTE, SPECIAL }
 @export var name: String
 @export var singular_article: String = "a"
 @export var main_ingredient: Ingredient
@@ -8,6 +9,8 @@ extends Resource
 @export var extra: Ingredient
 @export var icon: Texture2D
 @export var day_unlocked: int = 1
+@export var type: DrinkType
+
 # coffee, tea, espresso (+iced ver) = day 1
 # basic lattes (+iced ver) = day 2
 # chai and matcha drinks (+iced ver) = day 3
