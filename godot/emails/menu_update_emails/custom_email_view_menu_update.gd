@@ -5,9 +5,9 @@ class_name CustomEmailViewMenuUpdate
 @export var drinks_list: Control
 
 func populate_drinks() -> void:
+	var container = drink_1.duplicate()
 	for drink: Drink in Global.drinks.filter(func(d: Drink): return d.day_unlocked == Global.day):
-		var container = drink_1.duplicate()
 		container.drink = drink
 		drinks_list.add_child(container)
-		# remove placehodler
-		drinks_list.remove_child(drink_1) 
+	# remove placehodler
+	drinks_list.remove_child(drink_1) 	

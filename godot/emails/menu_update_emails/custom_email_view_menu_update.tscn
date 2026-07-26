@@ -8,14 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="6_btdt4"]
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="7_0361o"]
 
-[node name="MenuUpdateEmail" type="Node2D" unique_id=1131266086 node_paths=PackedStringArray("yes_button", "ok_button")]
+[node name="MenuUpdateEmail" type="Container" unique_id=1099734027 node_paths=PackedStringArray("drink_1", "drinks_list", "yes_button", "ok_button")]
 script = ExtResource("1_8jh7c")
+drink_1 = NodePath("Container/VBoxContainer/NewDrinks/EmailDrinkContainer")
+drinks_list = NodePath("Container/VBoxContainer/NewDrinks")
 yes_button = NodePath("Container/VBoxContainer/HBoxContainer/YesButton")
 ok_button = NodePath("Container/VBoxContainer/HBoxContainer/OkButton")
 
 [node name="Container" type="MarginContainer" parent="." unique_id=1963856371]
-offset_right = 152.0
-offset_bottom = 157.0
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10

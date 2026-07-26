@@ -24,6 +24,10 @@ func _ready() -> void:
 	if not Global.ai_improvement and current_day >= 3:
 		var email_day_3 = EmailDay3.new()
 		Global.emails_schedule.append(email_day_3)
+		
+	## check for menu updates
+	if Global.drinks.any(func(d: Drink): return d.day_unlocked == current_day):
+		Global.emails_schedule.append(MenuUpdateEmail.new())
 
 	if days_since_random >= 2: # Can't get random emails everyday or on first day
 		var min_random = 0.1
