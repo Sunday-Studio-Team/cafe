@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://c1caeynuei18t" path="res://Assets/Street/street test.webp" id="5_oirqo"]
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
 [ext_resource type="Texture2D" uid="uid://bsaijqk5w5k1y" path="res://Assets/Street/road.png" id="6_moxjo"]
-[ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://kjjjflnmf627" path="res://Assets/Street/street sides.jpg" id="7_moxjo"]
@@ -38,16 +37,22 @@
 [ext_resource type="PackedScene" uid="uid://cbxfoj2piyybe" path="res://environment/wall_piece_long.tscn" id="22_k1udn"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dmn6astu67x2i" path="res://environment/hatch_piece.tscn" id="23_wat4s"]
+[ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/start_shift_whiteboard.gd" id="24_d5iia"]
 [ext_resource type="PackedScene" uid="uid://ck5hb0yuvfdsa" path="res://environment/wall_piece_short.tscn" id="24_ywjan"]
 [ext_resource type="PackedScene" uid="uid://cvx1me2mi6tpm" path="res://environment/corner_piece.tscn" id="25_m74q3"]
 [ext_resource type="Texture2D" uid="uid://cwr6wcigvcheu" path="res://Assets/Locker/Metal School Lockers 3D Model_0.png" id="25_um25j"]
 [ext_resource type="Texture2D" uid="uid://c1pw0n03ctq8l" path="res://Assets/Locker/Metal School Lockers 3D Model_1.png" id="26_7dysq"]
+[ext_resource type="PackedScene" uid="uid://bmyt3fpgtr3o4" path="res://environment/whiteboard/day_shift_whiteboard_content_tuesday.tscn" id="26_off2o"]
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="26_tko6h"]
+[ext_resource type="PackedScene" uid="uid://dl4geuiiydscc" path="res://environment/whiteboard/day_shift_whiteboard_content_monday.tscn" id="26_vjgyh"]
 [ext_resource type="Texture2D" uid="uid://65futlyofja8" path="res://Assets/Locker/Metal School Lockers 3D Model_2.png" id="27_0abf2"]
+[ext_resource type="PackedScene" uid="uid://d1ovgl21407i" path="res://environment/whiteboard/day_shift_whiteboard_content_wednesday.tscn" id="27_tttfs"]
+[ext_resource type="PackedScene" uid="uid://b4fbdabp5lxuo" path="res://environment/whiteboard/day_shift_whiteboard_content_thursday.tscn" id="28_1iygd"]
 [ext_resource type="Texture2D" uid="uid://cn0lw3mjs66fa" path="res://Assets/Locker/Low Poly Lockers_0.png" id="28_7b48j"]
 [ext_resource type="AudioStream" uid="uid://bvl68g2188yl0" path="res://audio/door_open.ogg" id="28_f3y11"]
 [ext_resource type="Texture2D" uid="uid://c6fkp2w01emjt" path="res://environment/textures/lights vent cieling.png" id="28_wat4s"]
 [ext_resource type="Texture2D" uid="uid://cajk3bnnmie8h" path="res://Assets/Locker/Low Poly Lockers_1.png" id="29_8tqy7"]
+[ext_resource type="PackedScene" uid="uid://b1he8y7llt2c7" path="res://environment/whiteboard/day_shift_whiteboard_content_friday.tscn" id="29_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://blo5und4lewb4" path="res://Assets/Locker/Low Poly Lockers_2.png" id="30_faa31"]
 [ext_resource type="PackedScene" uid="uid://dfmk6fgi2327m" path="res://Assets/Office door/Managers Office Door 3D Model.glb" id="33_0abf2"]
 [ext_resource type="PackedScene" uid="uid://cexib5vqpbisp" path="res://Assets/ceiling lights/Ceiling Lamp 3D Model.glb" id="36_7dysq"]
@@ -142,8 +147,6 @@ adjustment_enabled = true
 adjustment_brightness = 0.89
 adjustment_contrast = 1.25
 adjustment_saturation = 1.15
-
-[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
 albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
@@ -3117,18 +3120,18 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 [node name="SpotLight3D" parent="SecurityCams/SecurityCam3" index="0" unique_id=1348601655]
 spot_angle = 25.0
 
-[node name="StartShiftWhiteboard" type="Node3D" parent="." unique_id=969808922]
+[node name="StartShiftWhiteboard" type="Node3D" parent="." unique_id=969808922 node_paths=PackedStringArray("_content_parent_node")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 9.279628, 1.2573626, 7.431313)
+script = ExtResource("24_d5iia")
+_days_whiteboard_content_packed_scenes = Array[PackedScene]([ExtResource("26_vjgyh"), ExtResource("26_off2o"), ExtResource("27_tttfs"), ExtResource("28_1iygd"), ExtResource("29_g5xqc")])
+_fallback_day_whiteboard_content_packed_scene = ExtResource("26_vjgyh")
+_content_parent_node = NodePath("WhiteboardContentParent")
 
 [node name="Sketchfab_Scene" parent="StartShiftWhiteboard" unique_id=1149312832 instance=ExtResource("20_yf6j3")]
 transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.88540924, 0, -3.8702453e-08, 0, -1.041, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StartShiftWhiteboard" unique_id=1410986479]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0.012773037)
-mesh = SubResource("QuadMesh_xrivr")
-
-[node name="OpenCloseSign" parent="StartShiftWhiteboard" unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(0.56829554, 0, -3.5527137e-15, 0, 0.56829554, 0, 3.5527137e-15, 0, 0.56829554, 0, 0.0022990704, 0.07312775)
+[node name="WhiteboardContentParent" type="Node3D" parent="StartShiftWhiteboard" unique_id=1452390955]
+transform = Transform3D(0.6749997, 0, -1.2434498e-14, 0, 0.6749997, 0, 1.2434498e-14, 0, 0.6749997, 0, 0.050234556, 0.0138754845)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
