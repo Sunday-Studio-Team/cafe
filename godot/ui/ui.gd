@@ -35,6 +35,10 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var drop_button: Button
 @export var sold_item_sound: AudioStreamPlayer
 @export var exit_machine_button: Button
+@export var item_hover_tooltip: Control
+@export var item_hover_tooltip_name: RichTextLabel
+@export var item_hover_tooltip_active_indicator: PanelContainer
+@export var item_hover_tooltip_description: RichTextLabel
 #Active Item
 @export var current_item_ui: Control
 @export var hammer_indicator: PanelContainer
@@ -177,6 +181,21 @@ func _physics_process(_delta: float) -> void:
 	handle_exit_machine_ui()
 	handle_drop_item_ui()
 	handle_item_ui()
+	handle_item_hover_tooltip()
+
+
+func handle_item_hover_tooltip() -> void:
+	item_hover_tooltip.position = get_viewport().get_mouse_position()
+
+	var hovered_icon := Global.hovered_item_icon
+
+	if hovered_icon != null:
+		item_hover_tooltip.show()
+		item_hover_tooltip_name.text = "[b] %s" % hovered_icon.item.name
+		item_hover_tooltip_description.text = hovered_icon.item.description
+		item_hover_tooltip_active_indicator.visible = hovered_icon.item.is_active_item
+	else:
+		item_hover_tooltip.hide()
 
 
 func handle_exit_machine_ui() -> void:

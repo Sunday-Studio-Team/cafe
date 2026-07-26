@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="1_sahxb"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="2_rxjwk"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="3_pjr5n"]
+[ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="4_apda1"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="4_dw44w"]
 [ext_resource type="PackedScene" uid="uid://wy44aeyirhsb" path="res://ui/order_breakdown_icon.tscn" id="7_dw44w"]
 
@@ -15,12 +16,6 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovvye"]
-bg_color = Color(0.68556535, 0.5972759, 0.23268256, 1)
-corner_radius_top_left = 50
-corner_radius_bottom_right = 50
-expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
@@ -123,11 +118,11 @@ layout_mode = 2
 size_flags_horizontal = 2
 
 [node name="OrderedItem" type="TextureRect" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1920408608]
-custom_minimum_size = Vector2(100, 100)
-custom_maximum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(100, 125)
+custom_maximum_size = Vector2(100, 125)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("4_dw44w")
+texture = ExtResource("4_apda1")
 expand_mode = 4
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1074364750]
@@ -200,8 +195,8 @@ texture_over = ExtResource("2_rxjwk")
 texture_progress = ExtResource("3_pjr5n")
 
 [node name="MadeItem" type="TextureRect" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=1104273258]
-custom_minimum_size = Vector2(100, 100)
-custom_maximum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(100, 125)
+custom_maximum_size = Vector2(100, 125)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_dw44w")
@@ -242,7 +237,7 @@ layout_mode = 2
 text = "="
 
 [node name="Spacer" type="Control" parent="VBoxContainer" unique_id=1906797842]
-custom_minimum_size = Vector2(0, 57)
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer" unique_id=1826884261]
@@ -325,17 +320,6 @@ text = "+1.5⭐🙂"
 [node name="Spacer2" type="Control" parent="VBoxContainer" unique_id=2014872253]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=2095979665]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ovvye")
-
-[node name="WaitingApprovalIndicator" type="Label" parent="VBoxContainer/PanelContainer" unique_id=1573558633]
-layout_mode = 2
-size_flags_vertical = 2
-theme_override_font_sizes/font_size = 28
-text = "order waiting for approval! ^"
-horizontal_alignment = 1
 
 [node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
 layout_mode = 2

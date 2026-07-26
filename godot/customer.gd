@@ -17,7 +17,9 @@ var percent_time_left: float = 100
 
 
 func _ready() -> void:
-	body.texture = Global.customer_sprites.pick_random()
+	while body.texture == null or Global.customer_sprites_spawned.has(body.texture):
+		body.texture = Global.customer_sprites.pick_random()
+	Global.customer_sprites_spawned.append(body.texture)
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
@@ -47,6 +49,10 @@ func _physics_process(_delta: float) -> void:
 		bonus_points_for_time = -1
 
 	waiting_bar.value = percent_time_left
+
+
+func _exit_tree() -> void:
+	Global.customer_sprites_spawned.erase(body.texture)
 
 
 func get_stats():

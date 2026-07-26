@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dhmqo5yinqk0t"]
 
-[ext_resource type="Script" uid="uid://c5ojrof5ocd0i" path="res://interactable.gd" id="1_ep8l3"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
 [ext_resource type="Texture2D" uid="uid://dj050iu2fwpx3" path="res://Assets/Desk/office desk_Image_0.jpg" id="2_rejd0"]
 [ext_resource type="Texture2D" uid="uid://cpdd4gapsy0fs" path="res://Assets/Desk/office desk_Image_2.jpg" id="3_vdysj"]
 [ext_resource type="Texture2D" uid="uid://b6ymni81c51th" path="res://Assets/Desk/office desk_Image_1.png" id="4_sxph0"]
@@ -76,6 +76,10 @@
 [ext_resource type="Texture2D" uid="uid://v86aa2kf3iwj" path="res://Assets/Desk/office desk_Image_33.png" id="74_0cyth"]
 [ext_resource type="Texture2D" uid="uid://to45l7efmsu4" path="res://Assets/Desk/office desk_Image_34.png" id="75_elyq8"]
 [ext_resource type="Texture2D" uid="uid://dyjc5op00cw8s" path="res://Assets/Desk/office desk_Image_35.png" id="76_xv4y3"]
+[ext_resource type="PackedScene" uid="uid://bgbi74vdujp6p" path="res://Assets/chinese deco/Chinese Knotting 3D Model.glb" id="77_vdysj"]
+[ext_resource type="PackedScene" uid="uid://db6pabb57d017" path="res://Assets/chinese deco/Chinese New Year Lantern.glb" id="78_sxph0"]
+[ext_resource type="PackedScene" uid="uid://cbphg2k1mxn1w" path="res://Assets/chinese deco/Lucky Cat Maneki Neko.glb" id="79_7gdev"]
+[ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t5y75"]
 size = Vector3(1.3969727, 1, 0.63098145)
@@ -2102,9 +2106,36 @@ mesh = SubResource("ArrayMesh_www57")
 transform = Transform3D(-0.04396611, 0.999033, 2.7363026e-07, -0.9990328, -0.043966074, -1.2735812e-07, -1.1520453e-07, -2.78965e-07, 0.9999998, -0.6843137, -0.0957343, 1.0870271)
 mesh = SubResource("ArrayMesh_6ythc")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Object_8" unique_id=1299499190]
+transform = Transform3D(1.0000004, 5.2154064e-08, 2.2737368e-13, -3.7252903e-09, 1.0000001, -1.9984014e-13, -2.2737368e-13, -1.3322676e-14, 1.0000002, 0.092681944, 0.10540062, 0.11730039)
+light_color = Color(1, 0.78, 0.39999998, 1)
+light_energy = 6.862
+shadow_enabled = true
+shadow_blur = 0.5
+spot_range = 0.924
+spot_angle = 43.22
+
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1647296300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23109445, 1.0087188, 0.088364124)
 light_color = Color(0.65999997, 0.89799994, 1, 1)
 shadow_enabled = true
 omni_range = 0.498
 omni_attenuation = 0.208
+
+[node name="fu deco" parent="." unique_id=1230203188 instance=ExtResource("77_vdysj")]
+transform = Transform3D(0.47429273, 0, -0.012752608, 0, 0.47446412, 0, 0.012752608, 0, 0.47429273, 0.29968208, 1.2504256, -0.19334602)
+
+[node name="lantern" parent="." unique_id=915868689 instance=ExtResource("78_sxph0")]
+transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0.51964045, 1.1594965, 0.91960573)
+
+[node name="cat" parent="." unique_id=1337734455 instance=ExtResource("79_7gdev")]
+transform = Transform3D(4.8595085, 0, 2.4893332, 0, 5.46, 0, -2.4893332, 0, 4.8595085, -0.0997318, 0.67776674, -0.17901674)
+
+[node name="lamo" parent="." unique_id=504927446 instance=ExtResource("80_h3q4e")]
+transform = Transform3D(0.45745757, 0, -0.88923144, 0, 1, 0, 0.88923144, 0, 0.45745757, -0.720707, 1.6712577, -0.21237288)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lamo" unique_id=785542697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006056428, -0.30474746, 0.011772811)
+light_color = Color(1, 0.6446667, 0.18, 1)
+light_specular = 0.0
+omni_range = 0.421

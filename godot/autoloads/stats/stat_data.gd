@@ -27,8 +27,8 @@ var score_chances: Dictionary = {
 	-3: score_chances_neg3,
 }
 var machine_time_to_make_drink := 4.0
-var customer_wait_time_machine := 45.0
-var customer_wait_time_window := 30.0
+var customer_wait_time_machine := 35.0
+var customer_wait_time_window := 25.0
 var penalty_for_running := 2
 var penalty_for_handmade_drink := 2
 var penalty_for_holding_ingredients := 2
