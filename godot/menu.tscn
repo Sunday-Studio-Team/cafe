@@ -1,15 +1,34 @@
 [gd_scene format=3 uid="uid://dohtcd6556n24"]
 
 [ext_resource type="PackedScene" uid="uid://clkd03qupx8mf" path="res://menu_ui.tscn" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://dwi0gfjyuprp0" path="res://menu.gd" id="1_ouk20"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_rtxfr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ecwwl"]
+viewport_path = NodePath("Screen/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kk3ma"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_ecwwl")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nrnbx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kk3ma")
+size = Vector2(0.9, 1.2)
 
 [node name="Menu" type="Node3D" unique_id=1811682227]
+script = ExtResource("1_ouk20")
 
-[node name="Screen" type="MeshInstance3D" parent="." unique_id=228370175]
-mesh = SubResource("QuadMesh_rtxfr")
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=901126912]
+transform = Transform3D(2.5, 0, 0, 0, 1.666, 0, 0, 0, 1.666, 0, 0, 0.76)
+mesh = SubResource("QuadMesh_nrnbx")
 
-[node name="SubViewport" type="SubViewport" parent="Screen" unique_id=1216287343]
+[node name="SubViewport" type="SubViewport" parent="Screen" unique_id=925820632]
 size = Vector2i(800, 800)
 
 [node name="menu_ui" parent="Screen/SubViewport" unique_id=136653234 instance=ExtResource("1_lti8b")]
+custom_minimum_size = Vector2(0, 0)
+
+[node name="AreaLight3D" type="AreaLight3D" parent="Screen" unique_id=1676100691]
+transform = Transform3D(0.6666667, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
+light_energy = 5.0
+area_size = Vector2(3, 3)
