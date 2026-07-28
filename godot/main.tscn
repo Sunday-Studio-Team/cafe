@@ -131,7 +131,7 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(1, 0.976, 0.84000003, 1)
+sky_top_color = Color(1, 0.908, 0.77, 1)
 sky_horizon_color = Color(0, 0, 0, 1)
 ground_bottom_color = Color(0.050999995, 0, 0.18, 1)
 
@@ -2942,27 +2942,33 @@ clock_item_start_sound = NodePath("ClockItemStartSound")
 [node name="street" type="Node3D" parent="." unique_id=1139868307]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="street" unique_id=1611812809]
-transform = Transform3D(-0.24796428, 0.88489306, 0.39430732, 0.9619688, 0.17676342, 0.20825678, 0.11458587, 0.43095154, -0.89507043, -0.6605799, 1.2398705, -6.122117)
-light_color = Color(1, 0.8775, 0.51, 1)
-light_energy = 3.833
+transform = Transform3D(-0.10167641, 0.9513218, 0.29094487, 0.97940177, 0.044437736, 0.19697031, 0.1744532, 0.30497915, -0.93624437, -0.6605799, 1.2398705, -6.122117)
+light_color = Color(1, 0.82266665, 0.62, 1)
+light_energy = 2.664
+light_volumetric_fog_energy = 2.0
+light_specular = 3.614
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 4.327
 
-[node name="Sprite3D" type="Sprite3D" parent="street" unique_id=938046995]
-transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73325, -6.7800574)
+[node name="Sprite3D6" type="Sprite3D" parent="street" unique_id=1109630919]
+transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 14.820215, 6.955685, -12.538168)
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D6" type="Sprite3D" parent="street" unique_id=1109630919]
-transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 14.820215, 4.73325, -6.7579613)
+[node name="Sprite3D16" type="Sprite3D" parent="street" unique_id=143095512]
+transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 29.577177, 6.955685, -12.538168)
 texture = ExtResource("5_oirqo")
 
 [node name="Sprite3D5" type="Sprite3D" parent="street" unique_id=1307845475]
-transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.73325, -6.7800574)
+transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 0, 6.955685, -12.560264)
 texture = ExtResource("5_oirqo")
 
 [node name="Sprite3D7" type="Sprite3D" parent="street" unique_id=2110744486]
-transform = Transform3D(1.2795149, 0, 0, 0, 1, 0, 0, 0, 1, -15.333674, 4.73325, -6.7800574)
+transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, -15.333674, 6.955685, -12.560264)
+texture = ExtResource("5_oirqo")
+
+[node name="Sprite3D15" type="Sprite3D" parent="street" unique_id=2110244905]
+transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, -29.488722, 6.955685, -12.560264)
 texture = ExtResource("5_oirqo")
 
 [node name="Sprite3D2" type="Sprite3D" parent="street" unique_id=810177457]
@@ -2977,8 +2983,36 @@ texture = ExtResource("6_moxjo")
 transform = Transform3D(-0.6264175, -2.1319964e-08, 9.632258e-09, 2.738158e-08, 4.659626e-16, 0.22036037, -5.476316e-08, 0.24387196, 4.2103935e-16, 13.498823, -0.0056385994, -5.4775853)
 texture = ExtResource("6_moxjo")
 
+[node name="Sprite3D9" type="Sprite3D" parent="street" unique_id=292746759]
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.70082474, -0.0056385994, -8.4085865)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D10" type="Sprite3D" parent="street" unique_id=1898139258]
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -14.923087, -0.0056385994, -8.4085865)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D11" type="Sprite3D" parent="street" unique_id=2135145776]
+transform = Transform3D(-0.6264175, -2.1319964e-08, 9.632258e-09, 2.738158e-08, 4.659626e-16, 0.22036037, -5.476316e-08, 0.24387196, 4.2103935e-16, 13.498823, -0.0056385994, -8.4085865)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D12" type="Sprite3D" parent="street" unique_id=392300876]
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.70082474, -0.0056385994, -11.1989)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D13" type="Sprite3D" parent="street" unique_id=136047994]
+transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -14.923087, -0.0056385994, -11.1989)
+texture = ExtResource("6_moxjo")
+
+[node name="Sprite3D14" type="Sprite3D" parent="street" unique_id=1702578200]
+transform = Transform3D(-0.6264175, -2.1319964e-08, 9.632258e-09, 2.738158e-08, 4.659626e-16, 0.22036037, -5.476316e-08, 0.24387196, 4.2103935e-16, 13.498823, -0.0056385994, -11.1989)
+texture = ExtResource("6_moxjo")
+
 [node name="Sprite3D3" type="Sprite3D" parent="street" unique_id=487477074]
-transform = Transform3D(4.468231e-15, -1.0222118e-07, 2.338548, 3.8367034e-09, 0.8226517, 3.595924e-08, -0.9104251, -3.836753e-09, 1.5718274e-15, 18.92614, 2.3219075, -5.4775853)
+transform = Transform3D(5.6519705e-15, -1.1715666e-07, 2.338548, 4.8531366e-09, 0.94284886, 3.595924e-08, -1.1516182, -4.397339e-09, 1.5718274e-15, 18.92614, 3.0476103, -7.7345595)
+texture = ExtResource("7_moxjo")
+
+[node name="Sprite3D17" type="Sprite3D" parent="street" unique_id=583404019]
+transform = Transform3D(5.6519705e-15, -1.1715666e-07, 2.338548, 4.8531366e-09, 0.94284886, 3.595924e-08, -1.1516182, -4.397339e-09, 1.5718274e-15, -22.760891, 3.0476103, -7.7345595)
 texture = ExtResource("7_moxjo")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
@@ -3071,11 +3105,6 @@ shape = SubResource("WorldBoundaryShape3D_2cqfq")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
 environment = SubResource("Environment_h2yge")
-
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1539755588]
-transform = Transform3D(0.9659258, 2.956346e-08, -0.25881907, 0.12940952, -0.8660253, 0.48296285, -0.22414385, -0.5, -0.83651626, 0, 10, 0)
-light_color = Color(0.6745098, 0.5647059, 0.5254902, 1)
-shadow_enabled = true
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
@@ -3312,7 +3341,7 @@ transform = Transform3D(2.8963146, 0, 0, 0, 2.8963146, 0, 0, 0, 2.8963146, 3.462
 
 [node name="AreaLight3D4" type="AreaLight3D" parent="Lights/Sketchfab_Scene" unique_id=911257138]
 transform = Transform3D(0.34526634, 0, 0, 0, -1.5092072e-08, 0.34526634, 0, -0.34526634, -1.5092072e-08, -0.024024323, -0.11925888, 0.010626748)
-light_color = Color(1, 0.8, 0.52, 1)
+light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.0
 shadow_enabled = true
 area_range = 5.895
@@ -3326,7 +3355,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, 89.927246, -258.8015)
-light_color = Color(1, 0.52156866, 0.9607843, 1)
+light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 8.763
 shadow_enabled = true
 spot_range = 4.419
@@ -3336,8 +3365,8 @@ spot_angle = 31.63
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1266530751) index="1" unique_id=398972065]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_color = Color(1, 0.52156866, 0.9607843, 1)
+transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
+light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
 shadow_enabled = true
 area_range = 3.905
@@ -3348,7 +3377,7 @@ transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
 transform = Transform3D(100.00001, 0, 2.7105054e-20, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 139.14665, -16.29895, 0)
-light_color = Color(1, 0.52156866, 0.9607843, 1)
+light_color = Color(1, 0.3, 0.55666673, 1)
 light_energy = 5.99
 light_specular = 6.069
 shadow_enabled = true
@@ -3375,7 +3404,7 @@ transform = Transform3D(-5.9447487e-08, 5.9447487e-08, 1.36, 0, 1.36, -5.9447487
 [node name="AreaLight3D5" type="AreaLight3D" parent="Lights/ceiling lights3" unique_id=1406065822]
 transform = Transform3D(1.9106855e-15, 1, 4.371139e-08, 4.371139e-08, -4.371139e-08, 1, 1, 0, -4.371139e-08, -0.08747578, 2.1555076, 0)
 light_color = Color(0.8784314, 1, 0.95686275, 1)
-light_energy = 5.792
+light_energy = 2.782
 light_volumetric_fog_energy = 0.5
 light_specular = 1.079
 shadow_enabled = true
@@ -3463,7 +3492,7 @@ omni_range = 16.497
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=673108826]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.2067113, 1.4271426, -3.3517313)
-light_color = Color(1, 0.7783333, 0.65, 1)
+light_color = Color(1, 0.43137255, 0.7607843, 1)
 omni_range = 16.497
 
 [node name="workplace_signs_obj_cleaner_materialmerger_gles" type="Node3D" parent="Lights" unique_id=608549853]

@@ -309,7 +309,7 @@ size = Vector2i(424, 177)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
-transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
+transform = Transform3D(1, 0, 0, 0, 0.93146175, 0.36383915, 0, -0.36383915, 0.93146175, 0, 1.732186, -0.4412867)
 fov = 90.0
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
@@ -360,7 +360,7 @@ text = "☕️"
 [node name="machine back" parent="." unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="machine back" index="0" unique_id=1418991110]
+[node name="ingr tank" parent="machine back" index="0" unique_id=1879776488]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="machine front" parent="." unique_id=1261802568 instance=ExtResource("18_2ajbd")]
@@ -368,3 +368,4 @@ transform = Transform3D(0.045387473, 0, 1.3299611, 0, 1.229, 0, -1.1481032, 0, 0
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]
 [editable path="machine back"]
+[editable path="machine front"]
