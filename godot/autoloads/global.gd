@@ -115,6 +115,9 @@ var stamina: float:
 
 		stamina = new_stam
 var sprint_lockout_timer: Timer
+# if we save an item in the shop (so that itll show up the next day)
+# itll be stored here
+var saved_item: Item
 var in_ui: bool:
 	get():
 		if (

@@ -20,6 +20,14 @@ func _ready() -> void:
 	populate_items()
 	reroll_button.text = "re-roll (%s)" % Global.float_to_price(Stats.current.cost_to_reroll)
 	reroll_button.pressed.connect(_on_reroll_pressed)
+	reroll_button.mouse_entered.connect(
+		func():
+			create_tween().tween_property(reroll_button, "offset_transform_scale", Vector2.ONE * 1.1, 0.25)
+	)
+	reroll_button.mouse_exited.connect(
+		func():
+			create_tween().tween_property(reroll_button, "offset_transform_scale", Vector2.ONE, 0.25)
+	)
 
 
 func _physics_process(_delta: float) -> void:
@@ -65,12 +73,21 @@ func _on_reroll_pressed() -> void:
 		t.tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
 		return
 
+	reroll_button.disabled = true
+	reroll_sound.play()
+
+	await create_tween().tween_property(
+		reroll_button,
+		"offset_transform_rotation",
+		deg_to_rad(360),
+		0.5,
+	).set_trans(Tween.TRANS_SPRING).finished
+
 	for itm in items_container.get_children():
 		itm.queue_free()
 	populate_items()
 	Global.bank_money -= Stats.current.cost_to_reroll
 	reroll_button.hide()
-	reroll_sound.play()
 
 
 func _on_item_button_clicked(bought: bool) -> void:

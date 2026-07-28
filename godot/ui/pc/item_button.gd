@@ -38,6 +38,25 @@ func _ready() -> void:
 				clicked.emit(false)
 	)
 
+	set_up_tweens()
+
+
+func set_up_tweens() -> void:
+	const DUR := 0.25
+
+	mouse_entered.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(self, "offset_transform_rotation", deg_to_rad(randf_range(-1, 1)), DUR)
+			t.tween_property(self, "offset_transform_position_ratio:y", -0.025, DUR)
+	)
+	mouse_exited.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(self, "offset_transform_rotation", 0, DUR)
+			t.tween_property(self, "offset_transform_position_ratio:y", 0, DUR)
+	)
+
 
 func _on_clicked(bought: bool) -> void:
 	if bought:
