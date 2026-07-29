@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="3_wuddj"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="4_xurph"]
 [ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
-[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
+[ext_resource type="Script" uid="uid://c5ojrof5ocd0i" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
@@ -160,7 +160,6 @@ collision_layer = 2
 script = ExtResource("5_ioi8x")
 display_name = "fix machine"
 time_to_hold = 1.0
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
 transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
@@ -181,7 +180,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.9077126, 0.6912
 script = ExtResource("5_ioi8x")
 display_name = "[color=pink]refill ingredients"
 mesh = NodePath("MeshInstance3D")
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RefillButton" unique_id=1086695979]
 mesh = SubResource("BoxMesh_1hddr")
@@ -211,11 +209,10 @@ volume_db = -5.0
 stream = ExtResource("8_u17ae")
 
 [node name="Spill" type="Area3D" parent="." unique_id=1225300652]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -0.5)
 visible = false
 script = ExtResource("5_ioi8x")
 display_name = "clean up spill"
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="Sprite3D" type="Sprite3D" parent="Spill" unique_id=667352050]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -294,7 +291,6 @@ shape = SubResource("BoxShape3D_j2xdn")
 script = ExtResource("5_ioi8x")
 display_name = "use machine"
 mesh = NodePath("../Screen")
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
@@ -312,7 +308,7 @@ remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamF
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=15717846]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=50258527]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1261802568 instance=ExtResource("18_2ajbd")]
