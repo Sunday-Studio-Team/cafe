@@ -10,8 +10,11 @@ func _ready() -> void:
 	for continue_button in _continue_buttons:
 		continue_button.pressed.connect(_on_continue_button_pressed)
 
-	if OS.has_feature("skip_popups"):
-		_on_continue_button_pressed()
+	# attempt to implement skip_popups feature tag
+	#if OS.has_feature("skip_popups"):
+	#get_tree().paused = false
+	#queue_free()
+	#_on_continue_button_pressed()
 
 
 func _on_continue_button_pressed() -> void:
