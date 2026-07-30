@@ -225,8 +225,9 @@ func show_tutorial_where_is_storeroom() -> void:
 		Global.in_tutorial_screen = false #re enable pause
 
 
+# called from inside spill() (so that itll still show if we trigger the spill
+# via a console command etc
 func show_tutorial_go_clean_spill() -> void:
-	#this is called right after spill() is called [but not inside spill()]
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
@@ -357,12 +358,12 @@ func machine_make_drink() -> void:
 		var sc = item.get_score_from(order.ordered_drink)
 		if sc == order.score:
 			order.made_drink = item
-			break 
-			
+			break
+
 	if !order.made_drink: # get a random drink, useful for earlier days
-			order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
-			order.score = order.made_drink.get_score_from(order.ordered_drink)
-			
+		order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
+		order.score = order.made_drink.get_score_from(order.ordered_drink)
+
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
 	if order.ordered_drink.liquid == order.made_drink.liquid:
@@ -385,7 +386,6 @@ func machine_make_drink() -> void:
 			and Global.spills_this_shift < Stats.current.max_spills_per_shift
 	):
 		spill()
-		show_tutorial_go_clean_spill()
 
 	final_order_indicator.text = (
 			"MADE:\n %s (%s)"
@@ -404,6 +404,7 @@ func spill() -> void:
 	Events.alert_posted.emit("⚙️machine made a spill")
 	Global.spills_this_shift += 1
 	spill_on_floor = true
+	show_tutorial_go_clean_spill()
 
 
 func display_drink_score() -> void:
