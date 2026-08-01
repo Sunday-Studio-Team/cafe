@@ -111,6 +111,7 @@
 [ext_resource type="Texture2D" uid="uid://5rgpi658gcye" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_e.png" id="117_ycw8e"]
 [ext_resource type="Texture2D" uid="uid://bs1mpgx84cqn6" path="res://Assets/UI/speech_bubble.png" id="124_1iygd"]
 [ext_resource type="Texture2D" uid="uid://b176xreldagr8" path="res://Assets/UI/x_button.png" id="125_g5xqc"]
+[ext_resource type="Texture2D" uid="uid://s043j74ko4a1" path="res://sprites/coffee_bean.png" id="128_s4o1y"]
 [ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
@@ -2910,7 +2911,7 @@ bg_color = Color(0.6862745, 0.6, 0.6, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "floating_buttons", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "floating_buttons", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -2938,6 +2939,9 @@ clock_item = ExtResource("4_12204")
 active_item_timer = NodePath("Active Item Nodes/Timer")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
+special_shift_icon = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
+special_shift_text = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
 
 [node name="street" type="Node3D" parent="." unique_id=1139868307]
 
@@ -3343,7 +3347,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="0" unique_id=895061839]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="0" unique_id=1445662813]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -3354,10 +3358,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="1" unique_id=1595560103]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="1" unique_id=570926734]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1845172364) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 185934754) index="1" unique_id=398972065]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -3365,7 +3369,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="2" unique_id=555267135]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="2" unique_id=1882741105]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -3635,10 +3639,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 1962115550) index="2" unique_id=1461719258]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 601267185) index="2" unique_id=1087249090]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 43957841) index="2" unique_id=1538735026]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 416840435) index="2" unique_id=1189806681]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
@@ -5226,6 +5230,73 @@ text = "A customer has a complaint.
 Talk to them at the counter"
 
 [node name="TextureButton" type="TextureButton" parent="CustomerComplaintPopup/InputBlocker" unique_id=1788235375]
+layout_mode = 0
+offset_left = 1590.0
+offset_top = 167.0
+offset_right = 2216.0
+offset_bottom = 793.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("125_g5xqc")
+
+[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319]
+process_mode = 3
+visible = false
+script = ExtResource("287_4fms3")
+popup_id = "special shift"
+
+[node name="InputBlocker" type="Control" parent="SpecialShiftPop" unique_id=317794041]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SpecialShiftPop/InputBlocker" unique_id=1463248199]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("124_1iygd")
+
+[node name="MarginContainer" type="MarginContainer" parent="SpecialShiftPop/InputBlocker/TextureRect" unique_id=460616503]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 245.0
+offset_right = 1575.0
+offset_bottom = 650.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer" unique_id=785505753]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=2011957646]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("128_s4o1y")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=745760569]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=533747834]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 80
+text = "Shift Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="Label" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=860561688]
+custom_maximum_size = Vector2(1100, 800)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 40
+text = "This is a description."
+autowrap_mode = 3
+
+[node name="TextureButton" type="TextureButton" parent="SpecialShiftPop/InputBlocker" unique_id=916961120]
 layout_mode = 0
 offset_left = 1590.0
 offset_top = 167.0
