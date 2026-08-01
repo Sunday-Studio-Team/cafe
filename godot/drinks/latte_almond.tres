@@ -2,14 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://iraybjpkl8e5" path="res://sprites/drink_icons/lattealmond.png" id="1_wbnm3"]
 [ext_resource type="Resource" uid="uid://bcfdth8yq1wmh" path="res://drinks/ingredients/almond_milk.tres" id="2_wbnm3"]
-[ext_resource type="Resource" uid="uid://cldvta860kml" path="res://drinks/ingredients/coffee.tres" id="3_25h11"]
+[ext_resource type="Resource" uid="uid://dqwdh1q6mry1i" path="res://drinks/ingredients/espresso_bean.tres" id="3_wbnm3"]
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="4_hioqy"]
 
 [resource]
 script = ExtResource("4_hioqy")
 name = "almond milk latte"
 singular_article = "an"
-main_ingredient = ExtResource("3_25h11")
+main_ingredient = ExtResource("3_wbnm3")
 liquid = ExtResource("2_wbnm3")
 icon = ExtResource("1_wbnm3")
+day_unlocked = 4
+type = 2
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"

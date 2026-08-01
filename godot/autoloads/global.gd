@@ -106,6 +106,18 @@ var in_active_item_menu := false
 var in_tutorial_screen: bool = false
 var in_end_shift_early_menu := false
 var showing_floating_cursor := false
+var stamina: float:
+	set(new_stam):
+		if new_stam > Stats.current.max_stamina:
+			new_stam = Stats.current.max_stamina
+		if new_stam < 0:
+			new_stam = 0
+
+		stamina = new_stam
+var sprint_lockout_timer: Timer
+# if we save an item in the shop (so that itll show up the next day)
+# itll be stored here
+var saved_item: Item
 var in_ui: bool:
 	get():
 		if (

@@ -1,13 +1,13 @@
 class_name SceneSwitcher
 extends Node
 
-const LOADING_FADE_IN_TIME := 0.5
-const LOADING_FADE_OUT_TIME := 1.0
-
 enum GameScene {
 	MAIN_SCENE,
-	MAIN_MENU
+	MAIN_MENU,
 }
+
+const LOADING_FADE_IN_TIME := 0.5
+const LOADING_FADE_OUT_TIME := 1.0
 
 @export var loading_screen: ColorRect
 @export var _loading_progress_bar: ProgressBar
@@ -28,11 +28,10 @@ func _ready() -> void:
 	Events.main_menu_loaded.connect(func(): load_scene(SceneSwitcher.GameScene.MAIN_MENU))
 	Events.game_quit.connect(func(): quit())
 
+
 func _physics_process(_delta: float) -> void:
-	# (disabled for now cos they seemed to not actually be showing during the
-	# loading hitch after pressing play in build)
 	loading_icons.visible = loading_screen.modulate.a == 1
-	# loading_icons.hide()
+
 
 func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	if current_scene:
@@ -46,7 +45,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	_loading_progress_bar.visible = true
 	_loading_progress_bar.min_value = 0.0
 	_loading_progress_bar.max_value = 1.0
-	
+
 	var scene_uid: StringName = _scene_enum_to_uid(scene)
 	var request_result: int = ResourceLoader.load_threaded_request(scene_uid)
 	if request_result != OK:
@@ -71,7 +70,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 		return
 
 	_loading_progress_bar.visible = false
-	
+
 	current_scene = scene_packed_scene.instantiate()
 	add_child(current_scene)
 	get_tree().paused = false

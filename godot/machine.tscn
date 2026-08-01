@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="3_wuddj"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="4_xurph"]
 [ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
-[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
+[ext_resource type="Script" uid="uid://c5ojrof5ocd0i" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
@@ -16,14 +16,8 @@
 [ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
 [ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://c1mwy70fw26kj" path="res://audio/hammer_hit.mp3" id="12_xurph"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp1hx"]
-transparency = 1
-albedo_color = Color(0.27058825, 0.29411766, 0.29411766, 0.39215687)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lp1hx"]
-material = SubResource("StandardMaterial3D_lp1hx")
-size = Vector3(1, 1.75, 0.5)
+[ext_resource type="PackedScene" uid="uid://opsuwlsv3dke" path="res://Assets/Drink Machine/machine back.glb" id="17_jqdip"]
+[ext_resource type="PackedScene" uid="uid://df558355onylt" path="res://Assets/Drink Machine/machine front.glb" id="18_2ajbd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -81,27 +75,6 @@ size = Vector3(0.9, 1.2, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
 size = Vector3(0.9, 1.2, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u17ae"]
-albedo_color = Color(0.50731444, 0.50731444, 0.5073144, 1)
-metallic = 1.0
-roughness = 0.5
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_0ffxp"]
-material = SubResource("StandardMaterial3D_u17ae")
-top_radius = 0.1
-bottom_radius = 0.12
-height = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xurph"]
-albedo_color = Color(0.50731444, 0.50731444, 0.5073144, 1)
-metallic = 1.0
-roughness = 0.5
-
-[sub_resource type="SphereMesh" id="SphereMesh_0ffxp"]
-material = SubResource("StandardMaterial3D_xurph")
-radius = 0.1
-height = 0.2
-
 [node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_clean_particles", "tip_label", "hammer_hit_sound")]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
@@ -155,12 +128,8 @@ hammer_hit_sound = NodePath("HammerHitSound")
 popup_storage_room = ExtResource("4_xurph")
 popup_go_to_spill = ExtResource("5_8sjwk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1391845402]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
-mesh = SubResource("BoxMesh_lp1hx")
-
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -0.78443056)
 
 [node name="SpotForPlayer" type="Marker3D" parent="." unique_id=225603677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
@@ -191,7 +160,6 @@ collision_layer = 2
 script = ExtResource("5_ioi8x")
 display_name = "fix machine"
 time_to_hold = 1.0
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
 transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
@@ -212,7 +180,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.9077126, 0.6912
 script = ExtResource("5_ioi8x")
 display_name = "[color=pink]refill ingredients"
 mesh = NodePath("MeshInstance3D")
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RefillButton" unique_id=1086695979]
 mesh = SubResource("BoxMesh_1hddr")
@@ -242,11 +209,10 @@ volume_db = -5.0
 stream = ExtResource("8_u17ae")
 
 [node name="Spill" type="Area3D" parent="." unique_id=1225300652]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -0.5)
 visible = false
 script = ExtResource("5_ioi8x")
 display_name = "clean up spill"
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="Sprite3D" type="Sprite3D" parent="Spill" unique_id=667352050]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -283,7 +249,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.5)
 shape = SubResource("BoxShape3D_0ffxp")
 
 [node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.06)
+transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0.30209354, 0.1217342)
 script = ExtResource("10_0d1aa")
 interactable = NodePath("Interactable")
 node_viewport = NodePath("Screen/SubViewport")
@@ -292,22 +258,22 @@ node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
 mesh = SubResource("QuadMesh_0ffxp")
 
 [node name="SubViewport" type="SubViewport" parent="3DGui/Screen" unique_id=1837069961]
-size = Vector2i(600, 800)
+size = Vector2i(600, 781)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
 
 [node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
 handle_input_locally = false
-size = Vector2i(180, 135)
+size = Vector2i(424, 177)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
-fov = 140.0
+transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
+fov = 90.0
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
@@ -325,7 +291,6 @@ shape = SubResource("BoxShape3D_j2xdn")
 script = ExtResource("5_ioi8x")
 display_name = "use machine"
 mesh = NodePath("../Screen")
-metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
@@ -335,23 +300,20 @@ shape = SubResource("BoxShape3D_yuuq8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 
 [node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 1.6, 0.19999999)
+transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
 remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
-[node name="IngedientsCanister" type="Node3D" parent="." unique_id=1872344733]
-visible = false
+[node name="Model" type="Node3D" parent="." unique_id=238356525]
 
-[node name="Body" type="MeshInstance3D" parent="IngedientsCanister" unique_id=1647255840]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, 0.7)
-mesh = SubResource("CylinderMesh_0ffxp")
+[node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
+transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="Cap" type="MeshInstance3D" parent="IngedientsCanister" unique_id=882612463]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.90000004, 0.70000005)
-mesh = SubResource("SphereMesh_0ffxp")
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=50258527]
+transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
-[node name="CoffeeIcon" type="Label3D" parent="IngedientsCanister" unique_id=357984642]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.7077126, 0.8152923)
-visible = false
-text = "☕️"
+[node name="CustomerSide" parent="Model" unique_id=1261802568 instance=ExtResource("18_2ajbd")]
+transform = Transform3D(0.045387473, 0, 1.3299611, 0, 1.229, 0, -1.1481032, 0, 0.05257678, -0.005250156, 0, 0.06786412)
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]
+[editable path="Model/EmployeeSide"]
+[editable path="Model/CustomerSide"]

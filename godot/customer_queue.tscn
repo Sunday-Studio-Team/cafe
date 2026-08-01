@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cckwaj76155mm" path="res://customer_queue.gd" id="1_d6l12"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_s4cln"]
-[ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="3_n6krc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n6krc"]
 size = Vector3(2, 2, 1)
@@ -23,33 +22,3 @@ display_name = "[color=yellow]talk with customer"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CustomerInteractionArea3D" unique_id=1535582938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_n6krc")
-
-[node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=2012924599]
-process_mode = 3
-visible = false
-script = ExtResource("3_n6krc")
-popup_id = "complaint"
-
-[node name="ColorRect" type="ColorRect" parent="CustomerComplaintPopup" unique_id=1704218316]
-custom_minimum_size = Vector2(1920, 1080)
-custom_maximum_size = Vector2(1920, 1080)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0.47058824)
-
-[node name="CenterContainer" type="CenterContainer" parent="CustomerComplaintPopup/ColorRect" unique_id=1481834859]
-custom_minimum_size = Vector2(1080, 1920)
-custom_maximum_size = Vector2(1080, 1920)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="CustomerComplaintPopup/ColorRect/CenterContainer" unique_id=1594218190]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 70
-text = "A customer has a complaint.
-Talk to them at the counter"

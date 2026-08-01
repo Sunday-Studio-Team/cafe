@@ -39,6 +39,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var item_hover_tooltip_name: RichTextLabel
 @export var item_hover_tooltip_active_indicator: PanelContainer
 @export var item_hover_tooltip_description: RichTextLabel
+@export var stamina_bar: ProgressBar
+@export var item_menu_prompt: Control
 #Active Item
 @export var current_item_ui: Control
 @export var hammer_indicator: PanelContainer
@@ -80,6 +82,8 @@ func _ready() -> void:
 
 	score_update_label.modulate = Color.TRANSPARENT
 	alert_ui.modulate.a = 0
+
+	stamina_bar.max_value = Stats.current.max_stamina
 
 	# we automatically play a sound whenever our points change,
 	# so we mute that sound while we reset our points @ the start of each day
@@ -157,6 +161,9 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 
+	hide_item_menu_prompt_if_no_actives()
+	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
+
 	# (we muted this earlier, now we unmute)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
@@ -182,6 +189,35 @@ func _physics_process(_delta: float) -> void:
 	handle_drop_item_ui()
 	handle_item_ui()
 	handle_item_hover_tooltip()
+	handle_stamina_bar()
+
+
+func hide_item_menu_prompt_if_no_actives() -> void:
+	var no_active_items_owned := true
+
+	for item in Global.owned_items:
+		if item.is_active_item:
+			no_active_items_owned = false
+			break
+
+	if no_active_items_owned:
+		item_menu_prompt.hide()
+	else:
+		item_menu_prompt.show()
+
+
+func handle_stamina_bar() -> void:
+	var stam: float = Global.stamina
+	var max_stam: float = Stats.current.max_stamina
+
+	stamina_bar.visible = stam < max_stam
+
+	stamina_bar.value = stam
+
+	if not Global.sprint_lockout_timer.is_stopped():
+		stamina_bar.modulate = Color.INDIAN_RED
+	else:
+		stamina_bar.modulate = Color.WHITE
 
 
 func handle_item_hover_tooltip() -> void:

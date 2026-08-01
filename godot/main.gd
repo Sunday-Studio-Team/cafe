@@ -7,6 +7,7 @@ static var seen_breakdown_popup := false
 @export var _tutorial_manager: TutorialManager
 @export var machines: Array[Machine]
 @export var cameras: Node3D
+@export var menu: Menu3D
 # first machine on the left
 @export var side_machine: Machine
 @export var fourth_machine: Machine
@@ -120,15 +121,15 @@ func set_per_day_stuff() -> void:
 		Stats.reset()
 	if Global.day >= 1:
 		game_timer.wait_time = 90
-		Stats.current.daily_profit_goal = 16
+		Stats.current.daily_profit_goal = 10
 		cameras.hide()
 	if Global.day >= 2:
 		game_timer.wait_time = 120
-		Stats.current.daily_profit_goal = 23
+		Stats.current.daily_profit_goal = 20
 		cameras.show()
 	if Global.day >= 3:
 		game_timer.wait_time = 120
-		Stats.current.daily_profit_goal = 36
+		Stats.current.daily_profit_goal = 32
 		machines.push_front(side_machine)
 		side_machine.show()
 		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
@@ -147,6 +148,8 @@ func set_per_day_stuff() -> void:
 				push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
 			Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
 		Global.ai_improvement_enabled = true
+		
+	menu.populate_drinks()
 
 	Global.machines.assign(machines)
 

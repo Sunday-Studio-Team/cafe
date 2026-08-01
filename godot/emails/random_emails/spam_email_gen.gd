@@ -22,7 +22,7 @@ func _init():
 	day_to_send = Global.day
 	is_important = false
 	sender_name = "Unknown"
-	displayed_time = str(randi_range(7, 11)) + ":" + str(randi_range(0, 59)).pad_zeros(2) + "am"
+	displayed_time = str(randi_range(8, 10)) + ":" + str(randi_range(0, 59)).pad_zeros(2) + "am"
 	subject = SPAM_SUBJECTS[randi() % SPAM_SUBJECTS.size()]
 	recipient_name = "Employee #000000"
 	contents = SPAM_CONTENTS[randi() % SPAM_CONTENTS.size()]

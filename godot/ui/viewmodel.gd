@@ -7,6 +7,19 @@ extends CanvasLayer
 func _ready() -> void:
 	Events.play_viewmodel_animation.connect(sprite.play)
 
+	# here we make sure if we just sold an item we stop showing the animation
+	# of us holding it
+	# (probably a smarter way to do this but i'll just hardcode here for now)
+	#	- jack
+	Events.items_updated.connect(
+		func():
+			if (
+					sprite.animation == "hammer_idle"
+					and not Global.owned_items.has(hammer_item)
+			):
+				sprite.play("default")
+	)
+
 	sprite.frame_changed.connect(_on_frame_changed)
 
 	sprite.animation_finished.connect(

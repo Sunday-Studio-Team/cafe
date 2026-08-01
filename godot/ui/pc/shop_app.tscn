@@ -5,7 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="3_mamje"]
 [ext_resource type="AudioStream" uid="uid://7lrf1ronpj3e" path="res://audio/cant_buy_item.wav" id="4_488el"]
 [ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="4_jf33y"]
+[ext_resource type="Texture2D" uid="uid://ctkumjnkh8osr" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/mouse_left.png" id="5_cxysb"]
 [ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
+[ext_resource type="Texture2D" uid="uid://bpl8nhkoimcyo" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/mouse_right.png" id="6_2606k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf33y"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
@@ -27,6 +29,7 @@ reroll_button = NodePath("MarginContainer/VBoxContainer/ReRoll")
 shelf_full_warning = NodePath("MarginContainer/ShelfFullWarning")
 
 [node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
+z_index = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_jf33y")
 text = "today's deals:"
@@ -40,8 +43,30 @@ alignment = 1
 [node name="ReRoll" type="Button" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="3" unique_id=1225747767]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
 text = "re-roll"
+
+[node name="Prompts" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="4" unique_id=566987784]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Buy" type="Button" parent="MarginContainer/VBoxContainer/Prompts" index="0" unique_id=1864250342]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+disabled = true
+text = "buy"
+icon = ExtResource("5_cxysb")
+
+[node name="Hold" type="Button" parent="MarginContainer/VBoxContainer/Prompts" index="1" unique_id=1620404381]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+disabled = true
+text = "save"
+icon = ExtResource("6_2606k")
 
 [node name="Bank" type="RichTextLabel" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=385636938]
 custom_minimum_size = Vector2(1000, 100)
