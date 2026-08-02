@@ -9,6 +9,7 @@ class_name SecurityCam3D
 @export var timer: Timer
 @export var tries_until_disabled: int = 3
 @export var disabled := false
+var disable_minigames := ["Lines"]
 
 # we duplicate the ray many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -68,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 			spotlight.light_color = Color.RED
 			Global.player_in_cctv_los = true
 			Global.player_in_cctv_los_camera = self
-			if Input.is_action_just_pressed("disable_camera") and Global.player_in_cctv_los_camera == self:
+			if Input.is_action_just_pressed("interact") and Global.player_in_cctv_los_camera == self:
 				try_disable_camera()
 		else:
 			spotlight.light_color = Color.WHITE
@@ -99,3 +100,23 @@ func try_disable_camera() -> void:
 	tries_until_disabled -= 1
 	if tries_until_disabled <= 0:
 		disable_camera()
+
+func open_camera_minigame() -> void:
+	if disabled:
+		return
+
+	if Global.minigame_active:
+		return
+
+	Events.minigame_end.connect(_on_break_camera)
+	Events.minigame_cancelled.connect(_cancel_break_minigame)
+	Events.minigame_active.emit(disable_minigames.pick_random())
+
+func _on_break_camera() -> void:
+	Events.minigame_end.disconnect(_on_break_camera)
+	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
+	try_disable_camera()
+
+func _cancel_break_minigame() -> void:
+	Events.minigame_end.disconnect(_on_break_camera)
+	Events.minigame_cancelled.disconnect(_cancel_break_minigame)

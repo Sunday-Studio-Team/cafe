@@ -425,7 +425,7 @@ func update_interactable_ui() -> void:
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
 		cctv_indicator.texture = load("res://sprites/eye_red.png")
-		disable_camera_indicator_label.text = "[Z] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
+		disable_camera_indicator_label.text = "[E] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
 		disable_camera_indicator.show()
 	else:
 		cctv_indicator.texture = load("res://sprites/eye_logo.png")
