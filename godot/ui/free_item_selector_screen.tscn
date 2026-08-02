@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dfdxran8jmt41"]
+
+[ext_resource type="Script" uid="uid://c7kkpkhctw55g" path="res://free_item_selector_screen.gd" id="1_5polt"]
+[ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="2_lpn1o"]
+[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="3_lybgo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1olvq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cypxk"]
+bg_color = Color(0.95686275, 0.77254903, 0.24705882, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font = ExtResource("3_lybgo")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vrusd"]
+font = ExtResource("3_lybgo")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[node name="FreeItemSelectorScreen" type="Control" unique_id=730735265 node_paths=PackedStringArray("_item_buttons_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5polt")
+_item_button_packed_scene = ExtResource("2_lpn1o")
+_item_buttons_container = NodePath("MarginContainer/PanelContainer/MarginContainer/VBoxContainer/ItemButtonsHBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=723597555]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1796266873]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1olvq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1756265126]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=1816838632]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=271047486]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_cypxk")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=2033152621]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=1312494065]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=507230576]
+layout_mode = 2
+text = "5 Star Customer Satisfaction!"
+label_settings = SubResource("LabelSettings_xrivr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=141868253]
+layout_mode = 2
+text = "Pick an item for free:"
+label_settings = SubResource("LabelSettings_vrusd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemButtonsHBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1776465163]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 48
+alignment = 1

@@ -66,8 +66,8 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		score_update_message = ""
-# represented as stars (1 rating = 1 half star)
-var employee_rating := 0:
+# represented as stars (1 rating = 1 half star), max is 10 rating = 5 stars
+var employee_rating: int = 0:
 	set(new_value):
 		if new_value > 10:
 			new_value = 10

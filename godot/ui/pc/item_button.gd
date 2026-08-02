@@ -3,10 +3,7 @@ extends Button
 ## script for the items that show up in the shop
 ## (which you click on to buy the item)
 
-## sorry for confusing naming since this is similar to pressed
-## but i wanted a version with an arg for whether we had enough money to buy
-## when we clicked it lol
-signal clicked(bought: bool)
+signal item_button_pressed(item_button: ItemButton)
 
 @export var item_icon: TextureRect
 @export var item_name: RichTextLabel
@@ -14,29 +11,12 @@ signal clicked(bought: bool)
 
 var item: Item
 
-
 func _ready() -> void:
 	item_icon.texture = item.icon
 	item_name.text = "[b]%s [color=gold](%s)" % [item.name, Global.float_to_price(item.price)]
 	description.text = item.description
 
-	clicked.connect(_on_clicked)
-
-	pressed.connect(
-		func():
-			if Global.bank_money >= item.price:
-				if Global.owned_items.size() < Global.item_slots_amount:
-					clicked.emit(true)
-					item.apply_stats()
-					Global.bank_money -= item.price
-					Global.owned_items.append(item)
-					Events.items_updated.emit()
-					queue_free()
-				else:
-					clicked.emit(false)
-			else:
-				clicked.emit(false)
-	)
+	pressed.connect(_on_button_pressed)
 
 	set_up_tweens()
 
@@ -57,9 +37,8 @@ func set_up_tweens() -> void:
 			t.tween_property(self, "offset_transform_position_ratio:y", 0, DUR)
 	)
 
-
-func _on_clicked(bought: bool) -> void:
-	if bought:
+func notify_pressed(did_buy_item: bool) -> void:
+	if did_buy_item:
 		#TODO REMOVE AND CHANGE
 		if item.is_active_item:
 			#Global.equipped_item = item
@@ -68,3 +47,7 @@ func _on_clicked(bought: bool) -> void:
 		pass
 	else:
 		create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)
+
+
+func _on_button_pressed() -> void:
+	item_button_pressed.emit(self)
