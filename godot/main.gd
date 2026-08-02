@@ -79,9 +79,9 @@ func _ready() -> void:
 	Global.in_pc_ui = false
 
 	# high values for debug
-	#Global.daily_profit = 100
-	#Global.employee_rating = 100
-	#Global.bank_money = 100
+	Global.daily_profit = 100
+	Global.employee_rating = 100
+	Global.bank_money = 100
 
 	ui.hide()
 

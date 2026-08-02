@@ -394,6 +394,10 @@ func update_interactable_ui() -> void:
 
 		else:
 			hammer_indicator.hide()
+		
+		#
+		
+			
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
@@ -410,6 +414,16 @@ func update_interactable_ui() -> void:
 					"[E] - "
 					+ Global.hovered_interactable.display_name
 			)
+		
+		if hovered_interactable.display_name == "Camera":
+			
+			if Global.equipped_item != null and Global.equipped_item.name == "Whipped Cream":
+				interactable_label.text = (
+					"[Q] - Whipped Cream The Camera"
+				)
+			else:
+				interactable_indicator.hide()
+			
 
 	else:
 		interactable_indicator.hide()
