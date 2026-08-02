@@ -42,6 +42,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
 @export var disable_camera_indicator: PanelContainer
+@export var disable_camera_indicator_label: RichTextLabel
 #Active Item
 @export var current_item_ui: Control
 @export var hammer_indicator: PanelContainer
@@ -424,6 +425,7 @@ func update_interactable_ui() -> void:
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
 		cctv_indicator.texture = load("res://sprites/eye_red.png")
+		disable_camera_indicator_label.text = "[Z] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
 		disable_camera_indicator.show()
 	else:
 		cctv_indicator.texture = load("res://sprites/eye_logo.png")

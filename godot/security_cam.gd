@@ -1,4 +1,5 @@
 extends Node3D
+class_name SecurityCam3D
 
 @export var ray: RayCast3D
 @export var spotlight: SpotLight3D
@@ -63,15 +64,14 @@ func _physics_process(_delta: float) -> void:
 # we need both a local and global var here to track if the player is in this
 # spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
 # things like this light flashing red when we enter a separate cameara's fov)
-	if not disabled:
 		if player_in_spotlight:
 			spotlight.light_color = Color.RED
 			Global.player_in_cctv_los = true
+			Global.player_in_cctv_los_camera = self
+			if Input.is_action_just_pressed("disable_camera") and Global.player_in_cctv_los_camera == self:
+				try_disable_camera()
 		else:
 			spotlight.light_color = Color.WHITE
-	else:
-		spotlight.light_color = Color.DIM_GRAY
-
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
 func create_rays() -> void:
@@ -90,6 +90,7 @@ func create_rays() -> void:
 func disable_camera() -> void:
 	disabled = true
 	spotlight.light_color = Color.DIM_GRAY
+	rotate_tween.stop()
 
 func try_disable_camera() -> void:
 	if disabled:
