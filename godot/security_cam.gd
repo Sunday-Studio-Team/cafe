@@ -6,6 +6,8 @@ extends Node3D
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
+@export var tries_until_disabled: int = 3
+@export var disabled := false
 
 # we duplicate the ray many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -36,35 +38,39 @@ func _physics_process(_delta: float) -> void:
 
 	var player_in_spotlight := false
 
-	for r in all_rays:
-		var collider = r.get_collider()
-		if collider == Global.player:
-			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
-				timer.start()
-				Global.score_update_message = "caught running"
-				Global.employee_rating -= Stats.current.penalty_for_running
-			elif Global.making_drink_manually:
-				timer.start()
-				Global.score_update_message = "caught making drink by hand"
-				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
-			elif (
-				Global.holding_ingredients and Global.holding_ingredients_rule
-			):
-				Global.score_update_message = "caught stealing ingredients"
-				Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
-				timer.start()
+	if not disabled:
+		for r in all_rays:
+			var collider = r.get_collider()
+			if collider == Global.player:
+				if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
+					timer.start()
+					Global.score_update_message = "caught running"
+					Global.employee_rating -= Stats.current.penalty_for_running
+				elif Global.making_drink_manually:
+					timer.start()
+					Global.score_update_message = "caught making drink by hand"
+					Global.employee_rating -= Stats.current.penalty_for_handmade_drink
+				elif (
+					Global.holding_ingredients and Global.holding_ingredients_rule
+				):
+					Global.score_update_message = "caught stealing ingredients"
+					Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
+					timer.start()
 
-			player_in_spotlight = true
-			break
+				player_in_spotlight = true
+				break
 
 # we need both a local and global var here to track if the player is in this
 # spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
 # things like this light flashing red when we enter a separate cameara's fov)
-	if player_in_spotlight:
-		spotlight.light_color = Color.RED
-		Global.player_in_cctv_los = true
+	if not disabled:
+		if player_in_spotlight:
+			spotlight.light_color = Color.RED
+			Global.player_in_cctv_los = true
+		else:
+			spotlight.light_color = Color.WHITE
 	else:
-		spotlight.light_color = Color.WHITE
+		spotlight.light_color = Color.DIM_GRAY
 
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
@@ -80,3 +86,15 @@ func create_rays() -> void:
 			new_ray.rotation_degrees.z += z_rot
 			spotlight.add_child(new_ray)
 			all_rays.append(new_ray)
+
+func disable_camera() -> void:
+	disabled = true
+	spotlight.light_color = Color.DIM_GRAY
+
+func try_disable_camera() -> void:
+	if disabled:
+		return
+
+	tries_until_disabled -= 1
+	if tries_until_disabled <= 0:
+		disable_camera()

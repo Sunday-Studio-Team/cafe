@@ -3347,7 +3347,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/Sketchfab_Scene" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="0" unique_id=1445662813]
+[node name="circlelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="0" unique_id=1716810175]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 5.973917)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -3358,10 +3358,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="1" unique_id=570926734]
+[node name="squarelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="1" unique_id=976313027]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 185934754) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1178192340) index="1" unique_id=398972065]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -3369,7 +3369,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="2" unique_id=1882741105]
+[node name="linelight" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="2" unique_id=62528304]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/Sketchfab_Scene/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -3639,10 +3639,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 601267185) index="2" unique_id=1087249090]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 1609833982) index="2" unique_id=404602307]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 416840435) index="2" unique_id=1189806681]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 1136610341) index="2" unique_id=1547282853]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
@@ -4999,6 +4999,31 @@ text = "item description (blah blah blah blah blah )"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="BreakCameraButton" type="PanelContainer" parent="UI" unique_id=843488416]
+offset_left = 735.0
+offset_top = 975.0
+offset_right = 1185.0
+offset_bottom = 1035.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BreakCameraButton" unique_id=131349112]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/BreakCameraButton/VBoxContainer" unique_id=1845985033]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[Z] Disable Camera (1)"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StaminaBar" type="ProgressBar" parent="UI" unique_id=72741199]
 custom_minimum_size = Vector2(500, 25)
