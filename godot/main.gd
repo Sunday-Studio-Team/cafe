@@ -61,7 +61,7 @@ func _ready() -> void:
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
-	
+
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.unapply_stats()
 
@@ -111,7 +111,7 @@ func _ready() -> void:
 
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
-	
+
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		special_shift_text.text = Global.current_special_shift.description
 		special_shift_title.text = Global.current_special_shift.name
@@ -162,7 +162,7 @@ func set_per_day_stuff() -> void:
 				push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
 			Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
 		Global.ai_improvement_enabled = true
-		
+
 	menu.populate_drinks()
 
 	Global.machines.assign(machines)
@@ -175,10 +175,10 @@ func set_per_day_stuff() -> void:
 	#select a special shift if it is not day one
 	if Global.day > 1:
 		var rng = RandomNumberGenerator.new()
-		var weights : PackedFloat32Array
+		var weights: PackedFloat32Array
 		for special_shift in Global.special_shifts:
 			weights.append(special_shift.weight)
-			
+
 		var selected_index := rng.rand_weighted(weights)
 		Global.current_special_shift = Global.special_shifts[selected_index]
 	else:

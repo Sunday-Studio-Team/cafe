@@ -178,6 +178,13 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 
 
 func _physics_process(_delta: float) -> void:
+	var should_show_hud: bool = (
+			not Global.in_ui
+			or Global.in_machine_ui
+			or Global.showing_floating_cursor
+	)
+	visible = should_show_hud and not get_tree().paused
+
 	update_score_indicators()
 	update_interactable_ui()
 	update_time_indicator()
