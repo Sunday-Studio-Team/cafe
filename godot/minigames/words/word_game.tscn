@@ -13,6 +13,10 @@ script = ExtResource("1_y5mif")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1841265703]
 
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=790116433]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Lanes" type="HBoxContainer" parent="CanvasLayer" unique_id=163375182]
 anchors_preset = 5
 anchor_left = 0.5
@@ -21,10 +25,6 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
 grow_horizontal = 2
-
-[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=790116433]
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Letters" type="Control" parent="CanvasLayer" unique_id=518723865]
 layout_mode = 3
@@ -40,3 +40,7 @@ offset_top = -27.0
 offset_right = 4.0
 grow_vertical = 0
 max_value = 8.0
+
+[node name="GameTimer" type="Timer" parent="." unique_id=443815171]
+wait_time = 8.0
+one_shot = true

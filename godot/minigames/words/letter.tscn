@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://l00h0f5lsy8f"]
 
 [ext_resource type="Script" uid="uid://bjj1adjuhwh26" path="res://letter.gd" id="1_gkbq4"]
+[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://minigames/assets/blue_square.png" id="2_sdqqb"]
 
 [node name="Letter" type="Control" unique_id=375265569]
 layout_mode = 3
@@ -10,6 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gkbq4")
+
+[node name="Tile" type="TextureRect" parent="." unique_id=848870577]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_sdqqb")
 
 [node name="Text" type="Label" parent="." unique_id=1787336554]
 layout_mode = 0
