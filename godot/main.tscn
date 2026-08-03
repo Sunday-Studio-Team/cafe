@@ -66,6 +66,7 @@
 [ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="44_fxdwr"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
 [ext_resource type="ArrayMesh" uid="uid://dgbjtxwcdnvra" path="res://Assets/Posters/Sketchfab_Scene_Object_0.res" id="45_ecwfn"]
+[ext_resource type="PackedScene" uid="uid://clu38siu3rseb" path="res://tutorial/tutorial_view_this_is_a_camera.tscn" id="45_s4o1y"]
 [ext_resource type="ArrayMesh" uid="uid://bv82fahor8chv" path="res://Assets/Posters/Sketchfab_Scene_Object_1.res" id="46_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="47_acld0"]
@@ -3304,15 +3305,17 @@ stream = ExtResource("7_1u8w0")
 volume_db = -20.0
 
 [node name="PlayerDetectionArea" type="Area3D" parent="BreakRoomDoor" unique_id=1569147687]
+collision_mask = 8
 script = ExtResource("8_xuqvo")
+popup_this_is_camera = ExtResource("45_s4o1y")
 metadata/_custom_type_script = "uid://cyfg6kertkbie"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/PlayerDetectionArea" unique_id=873683659]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8959332, 0, 1.5085449)
+transform = Transform3D(1.705, 0, 0, 0, 1.705, 0, 0, 0, 1.705, -1.8959332, 0, 1.5085449)
 shape = SubResource("BoxShape3D_13qdw")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="BreakRoomDoor/PlayerDetectionArea" unique_id=829031094]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70064926, 0, 2.8381968)
+transform = Transform3D(0.99999917, 0.00028794399, 0.001277541, -0.00029311544, 0.9999918, 0.00405065, -0.0012763645, -0.004051021, 0.999991, -0.70064926, 0, 2.8381968)
 shape = SubResource("BoxShape3D_m74q3")
 
 [node name="EmployeeAreaSign" type="MeshInstance3D" parent="." unique_id=544386463]
@@ -3748,7 +3751,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11, 0, 1)
 
 [node name="Floor" type="MeshInstance3D" parent="Environment/BackRoom" unique_id=819726107]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.000082, -0.0008468628, -1.9997339)
 mesh = SubResource("BoxMesh_u58gx")
 
 [node name="trashancan" type="Node3D" parent="Environment/BackRoom/Floor" unique_id=1541597237]
