@@ -14,6 +14,8 @@ var drag_rectangle: RectangleShape2D
 var is_dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
 
+var is_wet: bool = false;
+
 
 func _ready() -> void:
 	if drag_area == null:
@@ -23,46 +25,35 @@ func _ready() -> void:
 		return
 
 	if drag_area.get_child_count() == 0:
-		push_error(
-			"Drag Area requires a CollisionShape2D child."
-		)
+		push_error("Drag Area requires a CollisionShape2D child.")
 		set_process(false)
 		set_process_input(false)
 		return
 
-	drag_collision = (
-		drag_area.get_child(0) as CollisionShape2D
-	)
+	drag_collision = (drag_area.get_child(0) as CollisionShape2D)
 
 	if drag_collision == null:
-		push_error(
-			"Drag Area's child must be a CollisionShape2D."
-		)
+		push_error("Drag Area's child must be a CollisionShape2D.")
 		set_process(false)
 		set_process_input(false)
 		return
 
-	drag_rectangle = (
-		drag_collision.shape as RectangleShape2D
-	)
+	drag_rectangle = (drag_collision.shape as RectangleShape2D)
 
 	if drag_rectangle == null:
-		push_error(
-			"The CollisionShape2D must use RectangleShape2D."
-		)
+		push_error("The CollisionShape2D must use RectangleShape2D.")
 		set_process(false)
 		set_process_input(false)
 		return
 
 	if bubbles == null:
-		push_error(
-			"Particle has not been assigned."
-		)
+		push_error("Particle has not been assigned.")
 		set_process(false)
 		set_process_input(false)
 		return
 
-	bubbles.emitting = false;
+	bubbles.emitting = false
+	is_wet = false
 
 func _input(event: InputEvent) -> void:
 	if event is not InputEventMouseButton:
@@ -129,7 +120,6 @@ func start_dragging() -> void:
 		return
 
 	is_dragging = true
-	bubbles.emitting = true;
 
 	drag_offset = (
 		global_position
@@ -142,8 +132,7 @@ func start_dragging() -> void:
 func stop_dragging() -> void:
 	if not is_dragging:
 		return
-	
-	bubbles.emitting = false;
+
 
 	is_dragging = false
 	drag_ended.emit()

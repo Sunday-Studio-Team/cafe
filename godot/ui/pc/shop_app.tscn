@@ -4,10 +4,42 @@
 [ext_resource type="Script" uid="uid://nbfwdp3xcbh3" path="res://ui/pc/shop_app.gd" id="2_c06av"]
 [ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="3_mamje"]
 [ext_resource type="AudioStream" uid="uid://7lrf1ronpj3e" path="res://audio/cant_buy_item.wav" id="4_488el"]
+[ext_resource type="Texture2D" uid="uid://ctxni3vvws4pt" path="res://Assets/UI/bomazon_logo.png" id="4_2606k"]
 [ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="4_jf33y"]
 [ext_resource type="Texture2D" uid="uid://ctkumjnkh8osr" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/mouse_left.png" id="5_cxysb"]
 [ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
 [ext_resource type="Texture2D" uid="uid://bpl8nhkoimcyo" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/mouse_right.png" id="6_2606k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(0.94509804, 0.54901963, 0.003921569, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cxysb"]
+font = ExtResource("4_jf33y")
+font_size = 96
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2606k"]
+content_margin_left = 64.0
+content_margin_top = 16.0
+content_margin_right = 64.0
+content_margin_bottom = 16.0
+bg_color = Color(0.9411765, 0.54901963, 0.003921569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr0b"]
+content_margin_left = 64.0
+content_margin_top = 16.0
+content_margin_right = 64.0
+content_margin_bottom = 16.0
+bg_color = Color(0.68, 0.3966667, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye6mp"]
+content_margin_left = 64.0
+content_margin_top = 16.0
+content_margin_right = 64.0
+content_margin_bottom = 16.0
+bg_color = Color(0.92, 0.68233335, 0.3496, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf33y"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
@@ -18,41 +50,100 @@ corner_radius_bottom_left = 10
 
 [node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button", "shelf_full_warning") instance=ExtResource("1_swvwp")]
 script = ExtResource("2_c06av")
-items_container = NodePath("MarginContainer/VBoxContainer/Items")
+items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Items")
 item_button_scene = ExtResource("3_mamje")
 bank_balance = NodePath("MarginContainer/Bank")
 cant_buy_sound = NodePath("CantBuySound")
 bought_sound = NodePath("BoughtItemSound")
 reroll_sound = NodePath("ReRollSound")
 cant_reroll_sound = NodePath("CantReRollSound")
-reroll_button = NodePath("MarginContainer/VBoxContainer/ReRoll")
+reroll_button = NodePath("MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ReRoll")
 shelf_full_warning = NodePath("MarginContainer/ShelfFullWarning")
 
-[node name="Deals" type="Label" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=1585422207]
+[node name="Background" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="0" unique_id=533031003]
+color = Color(1, 1, 1, 1)
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=2046163112]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_13qdw")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer2" index="0" unique_id=1426887004]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer" index="0" unique_id=70546058]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="0" unique_id=68204755]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/MarginContainer" index="0" unique_id=829732857]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+texture = ExtResource("4_2606k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpaceControl4" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="1" unique_id=34111087]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="2" unique_id=1917486912]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer" index="0" unique_id=1444392765]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Deals" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" index="0" unique_id=1585422207]
 z_index = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_jf33y")
-text = "today's deals:"
+text = "today's deals!!!"
+label_settings = SubResource("LabelSettings_cxysb")
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="2" unique_id=982291301]
+[node name="SpaceControl" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="3" unique_id=419365170]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="4" unique_id=982291301]
+custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="ReRoll" type="Button" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="3" unique_id=1225747767]
+[node name="SpaceControl2" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="5" unique_id=2017255305]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="ReRoll" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="6" unique_id=1225747767]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 offset_transform_enabled = true
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_2606k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_llr0b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ye6mp")
 text = "re-roll"
 
-[node name="Prompts" type="HBoxContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="4" unique_id=566987784]
+[node name="SpaceControl3" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="7" unique_id=1466171127]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Prompts" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="8" unique_id=566987784]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Buy" type="Button" parent="MarginContainer/VBoxContainer/Prompts" index="0" unique_id=1864250342]
+[node name="Buy" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Prompts" index="0" unique_id=1864250342]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
@@ -60,7 +151,7 @@ disabled = true
 text = "buy"
 icon = ExtResource("5_cxysb")
 
-[node name="Hold" type="Button" parent="MarginContainer/VBoxContainer/Prompts" index="1" unique_id=1620404381]
+[node name="Hold" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Prompts" index="1" unique_id=1620404381]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
@@ -74,6 +165,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "money in bank: $10"
 horizontal_alignment = 2

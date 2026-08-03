@@ -35,6 +35,9 @@ static var seen_breakdown_popup := false
 @export var clock_item_start_sound: AudioStreamPlayer
 @export var interaction_popup: CanvasLayer
 @export var breakdown_popup: CanvasLayer
+@export var special_shift_icon: TextureRect
+@export var special_shift_text: Label
+@export var special_shift_title: Label
 
 
 func _enter_tree() -> void:
@@ -58,6 +61,9 @@ func _ready() -> void:
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
+	
+	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		Global.current_special_shift.unapply_stats()
 
 	set_per_day_stuff()
 	get_stats()
@@ -105,12 +111,20 @@ func _ready() -> void:
 
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
+	
+	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		special_shift_text.text = Global.current_special_shift.description
+		special_shift_title.text = Global.current_special_shift.name
+		special_shift_icon.texture = Global.current_special_shift.icon
+		Global.popups["special shift"].open()
 
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
 	if overtime_item in Global.owned_items:
 		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
+	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		Global.current_special_shift.apply_stats()
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -157,6 +171,18 @@ func set_per_day_stuff() -> void:
 	if Global.day < 2:
 		for poster in camera_posters:
 			poster.hide()
+
+	#select a special shift if it is not day one
+	if Global.day > 1:
+		var rng = RandomNumberGenerator.new()
+		var weights : PackedFloat32Array
+		for special_shift in Global.special_shifts:
+			weights.append(special_shift.weight)
+			
+		var selected_index := rng.rand_weighted(weights)
+		Global.current_special_shift = Global.special_shifts[selected_index]
+	else:
+		Global.current_special_shift = Global.special_shifts[0]
 
 
 func spawn_customer() -> void:
