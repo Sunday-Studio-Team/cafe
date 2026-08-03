@@ -15,6 +15,7 @@ extends Node
 @export var mop_cursor_texture: Texture2D
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
+@export var special_shifts: Array[SpecialShift]
 
 var popups: Dictionary = { }
 var popup_hint_showing: bool = false
@@ -65,8 +66,8 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		score_update_message = ""
-# represented as stars (1 rating = 1 half star)
-var employee_rating := 0:
+# represented as stars (1 rating = 1 half star), max is 10 rating = 5 stars
+var employee_rating: int = 0:
 	set(new_value):
 		if new_value > 10:
 			new_value = 10
@@ -78,7 +79,7 @@ var employee_rating := 0:
 		if employee_rating < 0:
 			employee_rating = 0
 
-		# (see comment for same lines in above func)
+		# (see ccomment for same lines in above func)
 		await get_tree().process_frame
 		score_update_message = ""
 var bank_money := 0.0
@@ -95,6 +96,7 @@ var customer_sprites: Array[Texture]
 ## (tracked so we dont spawn 2 of the same)
 var customer_sprites_spawned: Array[Texture]
 var spill_sprites: Array[Texture]
+var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]

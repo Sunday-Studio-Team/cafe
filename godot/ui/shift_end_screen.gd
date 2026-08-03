@@ -17,6 +17,8 @@ extends CanvasLayer
 @export var rating_breakdown: Control
 @export var button: Button
 @export var stars_sound: AudioStreamPlayer
+@export var _free_item_selector_screen_packed_scene: PackedScene
+@export var _free_item_selector_screen_container: Control
 
 var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
@@ -167,5 +169,18 @@ func _on_time_up() -> void:
 	outcome.show()
 
 	await get_tree().create_timer(0.5).timeout
+	
+	# If player has a free item slot,
+	# and if 5 star customer satisfaction, give free selection of 1 of 3 random items
+	var has_free_item_slots: bool = Global.owned_items.size() <= Global.item_slots_amount
+	var five_star_rating: int = 10
+	if has_free_item_slots and Global.employee_rating >= five_star_rating:
+		var free_item_selector_screen: FreeItemSelectorScreen = _free_item_selector_screen_packed_scene.instantiate()
+		if free_item_selector_screen == null:
+			printerr("FreeItemSelectorScreen is null.")
+			return
+		_free_item_selector_screen_container.add_child(free_item_selector_screen)
+		await free_item_selector_screen.finished_selection
+		free_item_selector_screen.queue_free()
 
 	button.show()
