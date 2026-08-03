@@ -4,6 +4,9 @@ extends Node2D
 @export var progress_label: Label
 @export var mop_sprite: DraggableMop
 @export var moping_area: Area2D
+@export var bucket: Sprite2D
+@export var mop: DraggableMop
+@export var splash: AudioStreamPlayer2D
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
@@ -49,16 +52,27 @@ func _ready() -> void:
 	mop_collision = moping_area.get_child(0) as CollisionShape2D
 	mop_rectangle = mop_collision.shape as RectangleShape2D
 
+	if moping_area == null:
+		push_error("Moping Area has not been assigned.")
+		set_physics_process(false)
+		return
+
+	mop_collision = (moping_area.get_child(0) as CollisionShape2D)
+
 	if mop_collision == null:
 		push_error("Moping Area must have a CollisionShape2D child.")
+		set_physics_process(false)
 		return
+
+	mop_rectangle = (mop_collision.shape as RectangleShape2D)
 
 	if mop_rectangle == null:
 		push_error("The CollisionShape2D must use RectangleShape2D.")
+		set_physics_process(false)
 		return
-
-	if mop_sprite == null:
-		push_error("Mop Sprite has not been assigned.")
+	
+	if mop == null:
+		push_error("Mop has not been assigned")
 		set_physics_process(false)
 		return
 
@@ -74,6 +88,16 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if mop_collision == null or mop_collision.disabled:
+		return
+
+	# The mop cannot erase until it has touched the bucket.
+	if not mop.is_wet:
+		if mop_overlaps_bucket():
+			splash.play()
+			mop.is_wet = true
+			mop.modulate = "5f5f5f"
+			mop.bubbles.emitting = true
+			print("The mop is now wet.")
 		return
 
 	var image_changed: bool = erase_inside_mop_rectangle()
@@ -92,6 +116,77 @@ func _on_mop_drag_started() -> void:
 
 func _on_mop_drag_ended() -> void:
 	is_erasing = false
+
+func mop_overlaps_bucket() -> bool:
+	if bucket == null or bucket.texture == null:
+		return false
+
+	var half_size: Vector2 = mop_rectangle.size * 0.5
+
+	var mop_local_rect: Rect2 = Rect2(
+		-half_size,
+		mop_rectangle.size
+	)
+
+	var bucket_local_rect: Rect2 = bucket.get_rect()
+
+	var mop_polygon: PackedVector2Array = (
+		rect_to_global_polygon(
+			mop_local_rect,
+			mop_collision.global_transform
+		)
+	)
+
+	var bucket_polygon: PackedVector2Array = (
+		rect_to_global_polygon(
+			bucket_local_rect,
+			bucket.global_transform
+		)
+	)
+
+	var intersection: Array[PackedVector2Array] = (
+		Geometry2D.intersect_polygons(
+			mop_polygon,
+			bucket_polygon
+		)
+	)
+
+	return not intersection.is_empty()
+
+
+func rect_to_global_polygon(local_rect: Rect2, global_rect_transform: Transform2D) -> PackedVector2Array:
+	var top_left: Vector2 = (
+		global_rect_transform
+		* local_rect.position
+	)
+
+	var top_right: Vector2 = (
+		global_rect_transform
+		* Vector2(
+			local_rect.end.x,
+			local_rect.position.y
+		)
+	)
+
+	var bottom_right: Vector2 = (
+		global_rect_transform
+		* local_rect.end
+	)
+
+	var bottom_left: Vector2 = (
+		global_rect_transform
+		* Vector2(
+			local_rect.position.x,
+			local_rect.end.y
+		)
+	)
+
+	return PackedVector2Array([
+		top_left,
+		top_right,
+		bottom_right,
+		bottom_left
+	])
 
 
 func erase_inside_mop_rectangle() -> bool:
