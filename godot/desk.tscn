@@ -76,10 +76,9 @@
 [ext_resource type="Texture2D" uid="uid://v86aa2kf3iwj" path="res://Assets/Desk/office desk_Image_33.png" id="74_0cyth"]
 [ext_resource type="Texture2D" uid="uid://to45l7efmsu4" path="res://Assets/Desk/office desk_Image_34.png" id="75_elyq8"]
 [ext_resource type="Texture2D" uid="uid://dyjc5op00cw8s" path="res://Assets/Desk/office desk_Image_35.png" id="76_xv4y3"]
-[ext_resource type="PackedScene" uid="uid://bgbi74vdujp6p" path="res://Assets/chinese deco/Chinese Knotting 3D Model.glb" id="77_vdysj"]
-[ext_resource type="PackedScene" uid="uid://db6pabb57d017" path="res://Assets/chinese deco/Chinese New Year Lantern.glb" id="78_sxph0"]
 [ext_resource type="PackedScene" uid="uid://cbphg2k1mxn1w" path="res://Assets/chinese deco/Lucky Cat Maneki Neko.glb" id="79_7gdev"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
+[ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t5y75"]
 size = Vector3(1.3969727, 1, 0.63098145)
@@ -2122,12 +2121,6 @@ shadow_enabled = true
 omni_range = 0.498
 omni_attenuation = 0.208
 
-[node name="fu deco" parent="." unique_id=1230203188 instance=ExtResource("77_vdysj")]
-transform = Transform3D(0.47429273, 0, -0.012752608, 0, 0.47446412, 0, 0.012752608, 0, 0.47429273, 0.29968208, 1.2504256, -0.19334602)
-
-[node name="lantern" parent="." unique_id=915868689 instance=ExtResource("78_sxph0")]
-transform = Transform3D(0.56, 0, 0, 0, 0.56, 0, 0, 0, 0.56, 0.51964045, 1.1594965, 0.91960573)
-
 [node name="cat" parent="." unique_id=1337734455 instance=ExtResource("79_7gdev")]
 transform = Transform3D(4.8595085, 0, 2.4893332, 0, 5.46, 0, -2.4893332, 0, 4.8595085, -0.0997318, 0.67776674, -0.17901674)
 
@@ -2139,3 +2132,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006056428, -0.30474746, 0.
 light_color = Color(1, 0.6446667, 0.18, 1)
 light_specular = 0.0
 omni_range = 0.421
+
+[node name="chinese knot" parent="." unique_id=1559351388 instance=ExtResource("80_luojq")]
+transform = Transform3D(0.578742, 0, 0, 0, 0.578742, 0, 0, 0, 0.578742, 0.007232696, 1.0449795, -0.20998544)
