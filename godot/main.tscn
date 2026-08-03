@@ -73,6 +73,8 @@
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="48_7mmqq"]
 [ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="49_utcts"]
 [ext_resource type="Texture2D" uid="uid://b2rqpc84kelgy" path="res://Assets/Storage room/PSX Storage Shelves Cardboard Boxes_0.png" id="51_2pm5r"]
+[ext_resource type="Texture2D" uid="uid://cum1mkp08w1tt" path="res://environment/textures/green wall.png" id="53_3exxq"]
+[ext_resource type="Material" uid="uid://b3y3jl5x4gdij" path="res://environment/textures/green wall.tres" id="53_5aa3q"]
 [ext_resource type="ArrayMesh" uid="uid://c3jhgpotph4u" path="res://Assets/window/Sketchfab_Scene_Object_0.res" id="54_q4gy1"]
 [ext_resource type="ArrayMesh" uid="uid://c6nqh2tdr8vbh" path="res://Assets/window/Sketchfab_Scene_Object_2.res" id="56_cnw22"]
 [ext_resource type="Material" uid="uid://ckkmdu1uj8548" path="res://shaders/glass.tres" id="56_moxjo"]
@@ -716,12 +718,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_djpd5")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
-albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5aa3q"]
+albedo_texture = ExtResource("53_3exxq")
 
 [sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
-material = SubResource("StandardMaterial3D_y5pqn")
+material = SubResource("StandardMaterial3D_5aa3q")
 size = Vector3(10, 0.1, 8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5pqn"]
+albedo_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_y5pqn"]
 material = SubResource("StandardMaterial3D_y5pqn")
@@ -1815,6 +1820,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
 
 [node name="CustomerArea" type="Node3D" parent="Environment" unique_id=1276105761]
 
+[node name="customer wall" type="Node3D" parent="Environment/CustomerArea" unique_id=1913424734]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=36565387]
+transform = Transform3D(0.22, 0, 0, 0, 0.12, 0, 0, 0, 0.179, 0.48368263, 1.4768955, 0.0022182465)
+material_override = ExtResource("53_5aa3q")
+gi_mode = 2
+texture = ExtResource("53_3exxq")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=1573185473]
+transform = Transform3D(-1.0927847e-08, 0, -0.179, 0, 0.12, 0, 0.25, 0, -7.8243385e-09, 3.993938, 1.4768955, 3.944484)
+material_override = ExtResource("53_5aa3q")
+texture = ExtResource("53_3exxq")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=1677607101]
+transform = Transform3D(-6.4395365e-09, 1.0490733e-08, 0.179, 0, -0.12, 1.5648677e-08, 0.14731942, 4.585645e-16, 7.8243385e-09, -5.993949, 1.4768955, 2.170809)
+material_override = ExtResource("53_5aa3q")
+texture = ExtResource("53_3exxq")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=1083970201]
+transform = Transform3D(-3.6012915e-09, -1.0490733e-08, 0.179, 0, -0.12, -1.5648677e-08, 0.08238795, -4.585645e-16, 7.8243385e-09, -5.9939528, 1.4768955, 6.8028874)
+material_override = ExtResource("53_5aa3q")
+texture = ExtResource("53_3exxq")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=2026508840]
+transform = Transform3D(1.6610328e-09, 0, 0.076, 0, -0.057, 0, -0.038, 0, 3.3220655e-09, -5.9939528, 2.6876156, 5.0391827)
+material_override = ExtResource("53_5aa3q")
+texture = ExtResource("53_3exxq")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=1732858592]
+transform = Transform3D(-0.09591907, 0, 0, 0, 0.057, -6.6441315e-09, 0, 4.9830984e-09, 0.076000005, -4.4858856, 2.8348846, 0.006742716)
+material_override = ExtResource("53_5aa3q")
+texture = ExtResource("53_3exxq")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Environment/CustomerArea/customer wall" unique_id=524876163]
+transform = Transform3D(3.3220648e-09, -0.042, 4.633407e-09, 0.076, 1.8358783e-09, 4.633407e-09, -6.6441315e-09, 3.6717562e-09, 0.053, -5.5085516, 1.2791618, 0.0067431927)
+material_override = ExtResource("53_5aa3q")
+texture = ExtResource("53_3exxq")
+
 [node name="WallPieceLong" parent="Environment/CustomerArea" unique_id=1045992760 instance=ExtResource("22_k1udn")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 0)
 
@@ -1963,7 +2007,7 @@ transform = Transform3D(0.5901272, 0, -0.8073103, 0, 1, 0, 0.8073103, 0, 0.59012
 transform = Transform3D(-3.2346428e-08, 0, -0.74, 0, 0.74, 0, 0.74, 0, -3.2346428e-08, 7.769355, 1.0831108, -3.2094498)
 
 [node name="Menu" parent="Environment/CustomerArea" unique_id=1811682227 instance=ExtResource("70_g5xqc")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 8.754517, 1.4850197, -1.8513138)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 8.728275, 1.4850197, -1.8513138)
 
 [node name="cafe table2" parent="Environment/CustomerArea" unique_id=1555103727 instance=ExtResource("70_s4o1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8607272, 0.04417161, -6.630125)
