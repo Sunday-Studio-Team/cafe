@@ -475,9 +475,6 @@ _data = {
 &"open_door": SubResource("Animation_ywjan")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
-albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(0.21887207, 2.095642, 1.0678711)
 
@@ -1582,19 +1579,6 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sketchfab_Scene" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=605328551 instance=ExtResource("33_0abf2")]
 transform = Transform3D(-3.2810537e-08, 0, 0.9999996, 0, 0.9083781, 0, -0.7506176, 0, -4.3711367e-08, -0.029385567, -0.024177432, 0.5333538)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=204670809]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.04065132, 1, 0.5088234)
-visible = false
-use_collision = true
-size = Vector3(0.1, 2, 1)
-material = SubResource("StandardMaterial3D_1u8w0")
-
-[node name="Label3D" type="Label3D" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=2097630685]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.068532944, 1.3897167, 0.5199895)
-visible = false
-text = "BREAK
-ROOM"
 
 [node name="BreakRoomEntranceBlocker" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]
 
