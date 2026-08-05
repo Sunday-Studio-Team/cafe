@@ -230,11 +230,10 @@ func show_tutorial_where_is_storeroom() -> void:
 # via a console command etc
 func show_tutorial_go_clean_spill() -> void:
 	#this is called right after spill() is called [but not inside spill()]
-	
-	
+
 	if OS.has_feature("skip_popups"):
 		return
-	
+
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
@@ -290,7 +289,13 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
-		#make_drink_button.held_time = 0
+		if Global.making_drink_manually:
+			# NOTE: not sure these are both correct + necessary to cancel a minigame
+			# but this seems to behave correctly
+			Events.force_close_minigame.emit()
+			Events.minigame_cancelled.emit()
+			# this might already get set somewhere else but just to be sure
+			Global.making_drink_manually = false
 
 
 func get_stats() -> void:
