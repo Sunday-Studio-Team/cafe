@@ -6,7 +6,7 @@ var dragging: bool = false
 var falling: bool = true
 var locked: bool = false
 
-@onready var label = $Label
+@onready var label = $Text
 
 func _ready():
 	label.text = letter_value
