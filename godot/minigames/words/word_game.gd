@@ -9,12 +9,13 @@ var lanes = []
 var correct_count = 0
 var game_over = false
 
-@onready var lane_container = $CanvasLayer/Lanes
+@onready var lane_container = $CanvasLayer/UI/CenterContainer/Lanes
 @onready var letters_container = $CanvasLayer/Letters
 @onready var timer_bar = $CanvasLayer/Timer
 @onready var game_timer = $GameTimer
 
 func _ready():
+
 	add_to_group("game_manager")
 	target_word = words.pick_random()
 	timer_bar.min_value = 0
