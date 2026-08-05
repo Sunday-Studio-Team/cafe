@@ -289,7 +289,7 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
-		if Global.making_drink_manually:
+		if Global.making_drink_manually and gui_3d.player_using_me:
 			# NOTE: not sure these are both correct + necessary to cancel a minigame
 			# but this seems to behave correctly
 			Events.force_close_minigame.emit()
