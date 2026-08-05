@@ -1,17 +1,25 @@
 [gd_scene format=3 uid="uid://1efsqsuvbkts"]
 
-[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="1_0qe70"]
+[ext_resource type="FontFile" uid="uid://c58o1rhcqdf6w" path="res://fonts/liberation_sans/LiberationSans-Regular.ttf" id="1_0qe70"]
+[ext_resource type="FontFile" uid="uid://htxk0s522b1c" path="res://fonts/liberation_sans/LiberationSans-Bold.ttf" id="1_s37j5"]
 [ext_resource type="Script" uid="uid://dp6xi3yg7ev4q" path="res://ui/pc/pc.gd" id="1_yl021"]
 [ext_resource type="Texture2D" uid="uid://bmqsi4w6n2thu" path="res://sprites/email_icon.png" id="2_am8ka"]
 [ext_resource type="Texture2D" uid="uid://3x0kmienore" path="res://sprites/wallpaper.png" id="2_k03dd"]
+[ext_resource type="FontFile" uid="uid://bvyc16pkil5nd" path="res://fonts/liberation_sans/LiberationSans-BoldItalic.ttf" id="2_r811s"]
 [ext_resource type="Theme" uid="uid://bq1llck4skix4" path="res://ui/pc/pc_app_icon_theme.tres" id="3_8383a"]
 [ext_resource type="Texture2D" uid="uid://d3nmgsusj5d7c" path="res://sprites/shop_icon.png" id="3_qefv1"]
+[ext_resource type="FontFile" uid="uid://chbgi2tc37e5n" path="res://fonts/liberation_sans/LiberationSans-Italic.ttf" id="3_uws3o"]
 [ext_resource type="PackedScene" uid="uid://bgyc1mnye0hph" path="res://ui/pc/shop_app.tscn" id="4_klsw4"]
 [ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="8_4xb7n"]
 
-[sub_resource type="Theme" id="Theme_8jakj"]
+[sub_resource type="Theme" id="Theme_4xb7n"]
 default_font = ExtResource("1_0qe70")
+default_font_size = 16
+RichTextLabel/fonts/bold_font = ExtResource("1_s37j5")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_r811s")
+RichTextLabel/fonts/italics_font = ExtResource("3_uws3o")
+RichTextLabel/fonts/normal_font = ExtResource("1_0qe70")
 
 [node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button")]
 layout_mode = 3
@@ -20,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_8jakj")
+theme = SubResource("Theme_4xb7n")
 script = ExtResource("1_yl021")
 email_button = NodePath("MarginContainer/Apps/Email")
 shop_button = NodePath("MarginContainer/Apps/Shop")

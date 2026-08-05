@@ -178,6 +178,13 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 
 
 func _physics_process(_delta: float) -> void:
+	var should_show_hud: bool = (
+			not Global.in_ui
+			or Global.in_machine_ui
+			or Global.showing_floating_cursor
+	)
+	visible = should_show_hud and not get_tree().paused
+
 	update_score_indicators()
 	update_interactable_ui()
 	update_time_indicator()
@@ -185,7 +192,7 @@ func _physics_process(_delta: float) -> void:
 	handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
-	handle_exit_machine_ui()
+	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
 	handle_item_ui()
 	handle_item_hover_tooltip()
@@ -236,8 +243,8 @@ func handle_item_hover_tooltip() -> void:
 	)
 
 
-func handle_exit_machine_ui() -> void:
-	exit_machine_button.visible = Global.in_machine_ui
+func handle_exit_machine_button_visibility() -> void:
+	exit_machine_button.visible = Global.in_machine_ui and not Global.minigame_active
 
 
 func handle_item_ui() -> void:

@@ -148,6 +148,7 @@ var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machi
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
 
+
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
