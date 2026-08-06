@@ -103,7 +103,9 @@
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="75_bmvma"]
 [ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="77_ldnlw"]
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="78_qe8ju"]
+[ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="79_qe8ju"]
 [ext_resource type="PackedScene" uid="uid://8j8i4rb32gr8" path="res://Assets/filling cabinets/filling_cabinets.tscn" id="79_s4o1y"]
+[ext_resource type="Texture2D" uid="uid://d0bcxshct7olx" path="res://Assets/Posters/gun watching.png" id="80_bnk2o"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="83_bmvma"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
@@ -2061,9 +2063,24 @@ material_override = ExtResource("75_86lig")
 texture = ExtResource("75_bmvma")
 
 [node name="Watching poster" type="Sprite3D" parent="Environment/BackRoom" unique_id=886113309]
-transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -2.578967, 1.4720756, 0.96424294)
+transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -2.0769935, 1.4720756, 0.96424294)
 material_override = ExtResource("77_ldnlw")
 texture = ExtResource("78_qe8ju")
+
+[node name="Gun watching" type="Sprite3D" parent="Environment/BackRoom" unique_id=1983314462]
+transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -0.023314238, 1.4720756, 0.96424294)
+material_override = ExtResource("79_qe8ju")
+texture = ExtResource("80_bnk2o")
+
+[node name="Gun watching2" type="Sprite3D" parent="Environment/BackRoom" unique_id=2002668626]
+transform = Transform3D(0.11596574, 0, 0, 0, 0.11596574, 0, 0, 0, 0.11596574, 5.297222, 1.657395, -4.7949424)
+material_override = ExtResource("79_qe8ju")
+texture = ExtResource("80_bnk2o")
+
+[node name="Gun watching3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1613066011]
+transform = Transform3D(-5.661606e-09, 0, -0.12952244, 0, 0.12952244, 0, 0.12952244, 0, -5.661606e-09, -7.2233624, 1.3688644, -9.528911)
+material_override = ExtResource("79_qe8ju")
+texture = ExtResource("80_bnk2o")
 
 [node name="Watching poster2" type="Sprite3D" parent="Environment/BackRoom" unique_id=689960844]
 transform = Transform3D(0.15037051, 0, 0, 0, 0.15037051, 0, 0, 0, 0.15037051, -5.991908, 1.4720756, -4.785888)
