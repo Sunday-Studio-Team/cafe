@@ -36,7 +36,7 @@ func setup_letters():
 	for letter in target_word:
 		var letter_node = LETTER.instantiate()
 		letter_node.letter_value = letter
-		letter_node.position = Vector2(randf_range(50, 500), randf_range(-200, -50))
+		letter_node.position = Vector2(randf_range(700, 1200), randf_range(-200, -50))
 		letters_container.add_child(letter_node)
 
 func get_lanes():

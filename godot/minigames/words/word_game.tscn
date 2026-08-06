@@ -17,12 +17,6 @@ script = ExtResource("1_y5mif")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Letters" type="Control" parent="CanvasLayer" unique_id=518723865]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="Timer" type="ProgressBar" parent="CanvasLayer" unique_id=1636477094]
 anchors_preset = 2
 anchor_top = 1.0
@@ -39,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/UI" unique_id=650902575]
 layout_mode = 1
@@ -56,6 +51,10 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_constants/separation = 24
 alignment = 1
+
+[node name="Letters" type="Control" parent="CanvasLayer" unique_id=518723865]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="GameTimer" type="Timer" parent="." unique_id=443815171]
 wait_time = 8.0
