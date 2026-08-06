@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://drf8hvebpx4n0" path="res://ui/pc/item_button.tscn" id="3_mamje"]
 [ext_resource type="AudioStream" uid="uid://7lrf1ronpj3e" path="res://audio/cant_buy_item.wav" id="4_488el"]
 [ext_resource type="Texture2D" uid="uid://ctxni3vvws4pt" path="res://Assets/UI/bomazon_logo.png" id="4_2606k"]
-[ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="4_jf33y"]
 [ext_resource type="Texture2D" uid="uid://ctkumjnkh8osr" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/mouse_left.png" id="5_cxysb"]
 [ext_resource type="AudioStream" uid="uid://dchl5b4jrn848" path="res://audio/bought_item.wav" id="5_mngmr"]
 [ext_resource type="Texture2D" uid="uid://bpl8nhkoimcyo" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/mouse_right.png" id="6_2606k"]
@@ -17,8 +16,7 @@ bg_color = Color(1, 1, 1, 1)
 bg_color = Color(0.94509804, 0.54901963, 0.003921569, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cxysb"]
-font = ExtResource("4_jf33y")
-font_size = 96
+font_size = 72
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2606k"]
 content_margin_left = 64.0
@@ -81,14 +79,14 @@ theme_override_constants/separation = 0
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/MarginContainer" index="0" unique_id=829732857]
-custom_minimum_size = Vector2(0, 128)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 texture = ExtResource("4_2606k")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="SpaceControl4" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="1" unique_id=34111087]
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="2" unique_id=1917486912]
@@ -97,13 +95,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer" index="0" unique_id=1444392765]
 layout_mode = 2
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="Deals" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" index="0" unique_id=1585422207]
 z_index = 1
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_jf33y")
 text = "today's deals!!!"
 label_settings = SubResource("LabelSettings_cxysb")
 horizontal_alignment = 1
@@ -164,8 +161,11 @@ custom_minimum_size = Vector2(1000, 100)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.03, 0)
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "money in bank: $10"
 horizontal_alignment = 2

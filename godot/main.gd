@@ -166,11 +166,6 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(machines)
 
-	# hide posters that mention security cameras until we have them
-	if Global.day < 2:
-		for poster in camera_posters:
-			poster.hide()
-
 	#select a special shift if it is not day one
 	if Global.day > 1:
 		var rng = RandomNumberGenerator.new()

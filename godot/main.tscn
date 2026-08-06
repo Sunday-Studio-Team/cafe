@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://kjjjflnmf627" path="res://Assets/Street/street sides.jpg" id="7_moxjo"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bcsqffwblcksh" path="res://Assets/Street/Street.glb" id="8_bnk2o"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
@@ -63,13 +64,10 @@
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="44_fxdwr"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
-[ext_resource type="ArrayMesh" uid="uid://dgbjtxwcdnvra" path="res://Assets/Posters/Sketchfab_Scene_Object_0.res" id="45_ecwfn"]
 [ext_resource type="PackedScene" uid="uid://clu38siu3rseb" path="res://tutorial/tutorial_view_this_is_a_camera.tscn" id="45_s4o1y"]
-[ext_resource type="ArrayMesh" uid="uid://bv82fahor8chv" path="res://Assets/Posters/Sketchfab_Scene_Object_1.res" id="46_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
 [ext_resource type="PackedScene" uid="uid://dbxcl8y3t1aqb" path="res://Assets/signs/metal arch.glb" id="46_shlp4"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="47_acld0"]
-[ext_resource type="ArrayMesh" uid="uid://bewa3i3khwhi5" path="res://Assets/Posters/Sketchfab_Scene_Object_2.res" id="47_fxdwr"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="48_7mmqq"]
 [ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="49_utcts"]
@@ -101,7 +99,14 @@
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
 [ext_resource type="Texture2D" uid="uid://b8pqjkx1lt8xa" path="res://sprites/items/shoes.png" id="72_oirqo"]
 [ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
+[ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="74_2n44k"]
+[ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="75_86lig"]
+[ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="75_bmvma"]
+[ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="77_ldnlw"]
+[ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="78_qe8ju"]
+[ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="79_qe8ju"]
 [ext_resource type="PackedScene" uid="uid://8j8i4rb32gr8" path="res://Assets/filling cabinets/filling_cabinets.tscn" id="79_s4o1y"]
+[ext_resource type="Texture2D" uid="uid://d0bcxshct7olx" path="res://Assets/Posters/gun watching.png" id="80_bnk2o"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="83_bmvma"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
@@ -1251,7 +1256,7 @@ day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
-camera_posters = [NodePath("Lights/workplace_signs_obj_cleaner_materialmerger_gles/Object_2"), NodePath("Lights/workplace_signs_obj_cleaner_materialmerger_gles/Object_3"), NodePath("Lights/workplace_signs_obj_cleaner_materialmerger_gles/Object_4")]
+camera_posters = [NodePath(""), NodePath(""), NodePath("")]
 minigame_controller = NodePath("MinigameController")
 clock_item = ExtResource("4_12204")
 active_item_timer = NodePath("Active Item Nodes/Timer")
@@ -1264,33 +1269,78 @@ special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginC
 [node name="street" type="Node3D" parent="." unique_id=1139868307]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="street" unique_id=1611812809]
-transform = Transform3D(-0.10167641, 0.9513218, 0.29094487, 0.97940177, 0.044437736, 0.19697031, 0.1744532, 0.30497915, -0.93624437, -0.6605799, 1.2398705, -6.122117)
-light_color = Color(1, 0.82266665, 0.62, 1)
-light_energy = 2.664
+transform = Transform3D(-0.124133065, 0.94648933, -0.2979075, 0.5337153, 0.31678873, 0.7840872, 0.83650386, -0.061666638, -0.54447997, -0.6605799, 1.2398705, -6.122117)
+visible = false
+light_color = Color(1, 0.872, 0.52, 1)
+light_energy = 5.119
 light_volumetric_fog_energy = 2.0
 light_specular = 3.614
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 4.327
 
-[node name="Sprite3D6" type="Sprite3D" parent="street" unique_id=1109630919]
+[node name="SpotLight3D2" type="SpotLight3D" parent="street" unique_id=1878133856]
+transform = Transform3D(1, 0, 0, 0, 0.101209655, 0.9948651, 0, -0.9948651, 0.101209655, -1.5757878, 13.926348, -8.920484)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 80.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 15.987515
+spot_angle = 85.99
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="street" unique_id=1209815898]
+transform = Transform3D(0.9912373, 0.12607189, 0.03942711, 0.011071067, -0.37672028, 0.926261, 0.13162847, -0.91770786, -0.3748149, 0.1927681, 4.092229, -6.0626655)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 50.0
+shadow_enabled = true
+shadow_blur = 0.356
+spot_range = 10.837
+spot_angle = 68.17
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="street" unique_id=1383224020]
+transform = Transform3D(1, 0, 0, 0, 0.101209655, 0.9948651, 0, -0.9948651, 0.101209655, 23.829054, 16.174639, -8.902901)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 80.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 17.278723
+spot_angle = 60.468746
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="street" unique_id=1535599436]
+transform = Transform3D(1, 0, 0, 0, 0.101209655, 0.9948651, 0, -0.9948651, 0.101209655, -25.703432, 16.174639, -8.591202)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 80.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 17.879
+spot_angle = 85.99
+
+[node name="front street" type="Node3D" parent="street" unique_id=1033554420]
 transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 14.820215, 6.955685, -12.538168)
+
+[node name="Sprite3D6" type="Sprite3D" parent="street/front street" unique_id=1109630919]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D16" type="Sprite3D" parent="street" unique_id=143095512]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 29.577177, 6.955685, -12.538168)
+[node name="Sprite3D16" type="Sprite3D" parent="street/front street" unique_id=143095512]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 11.533246, 0, 0)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D5" type="Sprite3D" parent="street" unique_id=1307845475]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 0, 6.955685, -12.560264)
+[node name="Sprite3D5" type="Sprite3D" parent="street/front street" unique_id=1307845475]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -11.582683, 0, -0.02209568)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D7" type="Sprite3D" parent="street" unique_id=2110744486]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, -15.333674, 6.955685, -12.560264)
+[node name="Sprite3D7" type="Sprite3D" parent="street/front street" unique_id=2110744486]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -23.566658, 0, -0.02209568)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D15" type="Sprite3D" parent="street" unique_id=2110244905]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, -29.488722, 6.955685, -12.560264)
+[node name="Sprite3D15" type="Sprite3D" parent="street/front street" unique_id=2110244905]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -34.629482, 0, -0.02209568)
+visible = false
 texture = ExtResource("5_oirqo")
 
 [node name="Sprite3D2" type="Sprite3D" parent="street" unique_id=810177457]
@@ -1331,11 +1381,22 @@ texture = ExtResource("6_moxjo")
 
 [node name="Sprite3D3" type="Sprite3D" parent="street" unique_id=487477074]
 transform = Transform3D(5.6519705e-15, -1.1715666e-07, 2.338548, 4.8531366e-09, 0.94284886, 3.595924e-08, -1.1516182, -4.397339e-09, 1.5718274e-15, 18.92614, 3.0476103, -7.7345595)
+visible = false
 texture = ExtResource("7_moxjo")
 
 [node name="Sprite3D17" type="Sprite3D" parent="street" unique_id=583404019]
 transform = Transform3D(5.6519705e-15, -1.1715666e-07, 2.338548, 4.8531366e-09, 0.94284886, 3.595924e-08, -1.1516182, -4.397339e-09, 1.5718274e-15, -22.760891, 3.0476103, -7.7345595)
+visible = false
 texture = ExtResource("7_moxjo")
+
+[node name="Street" parent="street" unique_id=1514446524 instance=ExtResource("8_bnk2o")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.014688, 0.76805764, -14.919954)
+
+[node name="Street3" parent="street" unique_id=1730343390 instance=ExtResource("8_bnk2o")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -68.295746, 0.76805764, -14.919954)
+
+[node name="Street2" parent="street" unique_id=116072521 instance=ExtResource("8_bnk2o")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 58.992302, 0.76805764, -14.919954)
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1643,7 +1704,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/customer lights" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
+[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="0" unique_id=587558728]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -1654,10 +1715,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
+[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="1" unique_id=195788702]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1266530751) index="1" unique_id=398972065]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -1665,7 +1726,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
+[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="2" unique_id=1661838220]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -1787,21 +1848,6 @@ omni_range = 16.497
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.2067113, 1.4271426, -3.3517313)
 light_color = Color(1, 0.43137255, 0.7607843, 1)
 omni_range = 16.497
-
-[node name="workplace_signs_obj_cleaner_materialmerger_gles" type="Node3D" parent="Lights" unique_id=608549853]
-transform = Transform3D(-1, -8.742278e-08, 1.9411756e-23, 0, 2.220446e-16, 1, -8.742278e-08, 1, -2.220446e-16, 5.799853, 0.1, 4.3599863)
-
-[node name="Object_2" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=689259217]
-transform = Transform3D(-7.387225e-08, -1.69, 0, 1.69, -7.387225e-08, 0, 0, 0, 1.69, -6.007262, -9.517833, 0.9908324)
-mesh = ExtResource("45_ecwfn")
-
-[node name="Object_3" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=1573084065]
-transform = Transform3D(-2.2095256, 0.045795646, -1.0168756e-17, -0.045795646, -2.2095256, 9.813317e-16, 1.0168595e-17, 9.813317e-16, 2.21, 9.812852, -4.0457783, 0.53482413)
-mesh = ExtResource("46_ip2l3")
-
-[node name="Object_4" type="MeshInstance3D" parent="Lights/workplace_signs_obj_cleaner_materialmerger_gles" unique_id=1359882231]
-transform = Transform3D(-2.16, -3.2615094e-07, 0, 3.2615094e-07, -2.16, 0, 0, 0, 2.16, 4.9618835, -4.188082, -0.037852645)
-mesh = ExtResource("47_fxdwr")
 
 [node name="Environment" type="Node3D" parent="." unique_id=563251901]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
@@ -1971,10 +2017,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 978519736) index="2" unique_id=1693237370]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 535169615) index="2" unique_id=1286912570]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 107142378) index="2" unique_id=352500083]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 1567843386) index="2" unique_id=1095193056]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
@@ -1999,6 +2045,23 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-
 
 [node name="cafe table2" parent="Environment/CustomerArea" unique_id=1555103727 instance=ExtResource("70_s4o1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8607272, 0.04417161, -6.630125)
+
+[node name="Tippy cutout2" parent="Environment/CustomerArea" unique_id=1861450768 instance=ExtResource("74_2n44k")]
+transform = Transform3D(-0.69033265, 0, 0.723492, 0, 1, 0, -0.723492, 0, -0.69033265, 7.3513746, 0.04014621, -0.83145595)
+
+[node name="Tippy cutout5" parent="Environment/CustomerArea" unique_id=1672549990 instance=ExtResource("74_2n44k")]
+transform = Transform3D(0.8173477, 0, 0.5761446, 0, 1, 0, -0.5761446, 0, 0.8173477, -2.3643398, 0.04014621, 4.972418)
+
+[node name="Tippy cutout4" parent="Environment/CustomerArea" unique_id=344324096 instance=ExtResource("74_2n44k")]
+transform = Transform3D(0.7428745, 0, 0.6694307, 0, 1, 0, -0.6694307, 0, 0.7428745, 2.5335338, 0.04014621, -8.73253)
+
+[node name="Tippy cutout3" parent="Environment/CustomerArea" unique_id=501152920 instance=ExtResource("74_2n44k")]
+transform = Transform3D(0.30320162, 0, -0.63143015, 0, 0.70045364, 0, 0.63143015, 0, 0.30320162, 12.655342, 0.04014621, 0.36364746)
+
+[node name="OmniLight3D" parent="Environment/CustomerArea/Tippy cutout3" index="3" unique_id=1619657736]
+transform = Transform3D(1.4276465, 0, 0, 0, 1.4276463, 0, 0, 0, 1.4276464, 0.9329815, 1.5571138, -0.05124855)
+light_color = Color(0.8765, 1, 0.81, 1)
+omni_range = 1.212
 
 [node name="BreakRoom" type="Node3D" parent="Environment" unique_id=988114770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
@@ -2046,6 +2109,51 @@ mesh = SubResource("BoxMesh_7olkn")
 [node name="BackRoom" type="Node3D" parent="Environment" unique_id=519216479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
+[node name="Time is Money Poster" type="Sprite3D" parent="Environment/BackRoom" unique_id=389475209]
+transform = Transform3D(0.11596574, 0, 0, 0, 0.115965724, 0, 0, 0, 0.11596574, 2.720026, 1.6392398, -4.7883887)
+material_override = ExtResource("75_86lig")
+texture = ExtResource("75_bmvma")
+
+[node name="Time is Money Poster3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1201993862]
+transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -4.0747476, 1.4720756, 0.96424294)
+material_override = ExtResource("75_86lig")
+texture = ExtResource("75_bmvma")
+
+[node name="Watching poster" type="Sprite3D" parent="Environment/BackRoom" unique_id=886113309]
+transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -2.0769935, 1.4720756, 0.96424294)
+material_override = ExtResource("77_ldnlw")
+texture = ExtResource("78_qe8ju")
+
+[node name="Gun watching" type="Sprite3D" parent="Environment/BackRoom" unique_id=1983314462]
+transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -0.023314238, 1.4720756, 0.96424294)
+material_override = ExtResource("79_qe8ju")
+texture = ExtResource("80_bnk2o")
+
+[node name="Gun watching2" type="Sprite3D" parent="Environment/BackRoom" unique_id=2002668626]
+transform = Transform3D(0.11596574, 0, 0, 0, 0.11596574, 0, 0, 0, 0.11596574, 5.297222, 1.657395, -4.7949424)
+material_override = ExtResource("79_qe8ju")
+texture = ExtResource("80_bnk2o")
+
+[node name="Gun watching3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1613066011]
+transform = Transform3D(-5.661606e-09, 0, -0.12952244, 0, 0.12952244, 0, 0.12952244, 0, -5.661606e-09, -7.2233624, 1.3688644, -9.528911)
+material_override = ExtResource("79_qe8ju")
+texture = ExtResource("80_bnk2o")
+
+[node name="Watching poster2" type="Sprite3D" parent="Environment/BackRoom" unique_id=689960844]
+transform = Transform3D(0.15037051, 0, 0, 0, 0.15037051, 0, 0, 0, 0.15037051, -5.991908, 1.4720756, -4.785888)
+material_override = ExtResource("77_ldnlw")
+texture = ExtResource("78_qe8ju")
+
+[node name="Watching poster3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1244336697]
+transform = Transform3D(-6.5729036e-09, 0, 0.15037051, 0, 0.15037051, 0, -0.15037051, 0, -6.5729036e-09, -12.7878065, 1.4720756, -1.8746128)
+material_override = ExtResource("77_ldnlw")
+texture = ExtResource("78_qe8ju")
+
+[node name="Time is Money Poster2" type="Sprite3D" parent="Environment/BackRoom" unique_id=2124143628]
+transform = Transform3D(0.16055465, 0, 0, 0, 0.16055463, 0, 0, 0, 0.16055465, -10.080574, 1.4840565, -12.98291)
+material_override = ExtResource("75_86lig")
+texture = ExtResource("75_bmvma")
+
 [node name="WallPieceLong" parent="Environment/BackRoom" unique_id=989985274 instance=ExtResource("22_k1udn")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0, 1)
 
@@ -2053,7 +2161,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5, 0
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 0, 1.0000004)
 
 [node name="WallPieceLong3" parent="Environment/BackRoom" unique_id=529551250 instance=ExtResource("22_k1udn")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3, 0, 1.000001)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -2.9973712, -1.1920929e-07, 0.9999285)
 
 [node name="WallPieceLong4" parent="Environment/BackRoom" unique_id=904449277 instance=ExtResource("22_k1udn")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, -13, 0, -0.99999833)
@@ -3203,3 +3311,4 @@ texture_normal = ExtResource("125_g5xqc")
 [editable path="SecurityCams/SecurityCam3"]
 [editable path="Lights/customer lights/Sketchfab_Scene"]
 [editable path="Environment/CustomerArea/glass window"]
+[editable path="Environment/CustomerArea/Tippy cutout3"]
