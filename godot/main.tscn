@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://kjjjflnmf627" path="res://Assets/Street/street sides.jpg" id="7_moxjo"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bcsqffwblcksh" path="res://Assets/Street/Street.glb" id="8_bnk2o"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="8_xuqvo"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
@@ -1268,33 +1269,78 @@ special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginC
 [node name="street" type="Node3D" parent="." unique_id=1139868307]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="street" unique_id=1611812809]
-transform = Transform3D(-0.10167641, 0.9513218, 0.29094487, 0.97940177, 0.044437736, 0.19697031, 0.1744532, 0.30497915, -0.93624437, -0.6605799, 1.2398705, -6.122117)
-light_color = Color(1, 0.82266665, 0.62, 1)
-light_energy = 2.664
+transform = Transform3D(-0.124133065, 0.94648933, -0.2979075, 0.5337153, 0.31678873, 0.7840872, 0.83650386, -0.061666638, -0.54447997, -0.6605799, 1.2398705, -6.122117)
+visible = false
+light_color = Color(1, 0.872, 0.52, 1)
+light_energy = 5.119
 light_volumetric_fog_energy = 2.0
 light_specular = 3.614
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 4.327
 
-[node name="Sprite3D6" type="Sprite3D" parent="street" unique_id=1109630919]
+[node name="SpotLight3D2" type="SpotLight3D" parent="street" unique_id=1878133856]
+transform = Transform3D(1, 0, 0, 0, 0.101209655, 0.9948651, 0, -0.9948651, 0.101209655, -1.5757878, 13.926348, -8.920484)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 80.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 15.987515
+spot_angle = 85.99
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="street" unique_id=1209815898]
+transform = Transform3D(0.9912373, 0.12607189, 0.03942711, 0.011071067, -0.37672028, 0.926261, 0.13162847, -0.91770786, -0.3748149, 0.1927681, 4.092229, -6.0626655)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 50.0
+shadow_enabled = true
+shadow_blur = 0.356
+spot_range = 10.837
+spot_angle = 68.17
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="street" unique_id=1383224020]
+transform = Transform3D(1, 0, 0, 0, 0.101209655, 0.9948651, 0, -0.9948651, 0.101209655, 23.829054, 16.174639, -8.902901)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 80.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 17.278723
+spot_angle = 60.468746
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="street" unique_id=1535599436]
+transform = Transform3D(1, 0, 0, 0, 0.101209655, 0.9948651, 0, -0.9948651, 0.101209655, -25.703432, 16.174639, -8.591202)
+light_color = Color(1, 0.79683334, 0.47000003, 1)
+light_energy = 80.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+spot_range = 17.879
+spot_angle = 85.99
+
+[node name="front street" type="Node3D" parent="street" unique_id=1033554420]
 transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 14.820215, 6.955685, -12.538168)
+
+[node name="Sprite3D6" type="Sprite3D" parent="street/front street" unique_id=1109630919]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D16" type="Sprite3D" parent="street" unique_id=143095512]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 29.577177, 6.955685, -12.538168)
+[node name="Sprite3D16" type="Sprite3D" parent="street/front street" unique_id=143095512]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 11.533246, 0, 0)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D5" type="Sprite3D" parent="street" unique_id=1307845475]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, 0, 6.955685, -12.560264)
+[node name="Sprite3D5" type="Sprite3D" parent="street/front street" unique_id=1307845475]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -11.582683, 0, -0.02209568)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D7" type="Sprite3D" parent="street" unique_id=2110744486]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, -15.333674, 6.955685, -12.560264)
+[node name="Sprite3D7" type="Sprite3D" parent="street/front street" unique_id=2110744486]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -23.566658, 0, -0.02209568)
+visible = false
 texture = ExtResource("5_oirqo")
 
-[node name="Sprite3D15" type="Sprite3D" parent="street" unique_id=2110244905]
-transform = Transform3D(1.2795149, 0, 0, 0, 1.597023, 0, 0, 0, 1, -29.488722, 6.955685, -12.560264)
+[node name="Sprite3D15" type="Sprite3D" parent="street/front street" unique_id=2110244905]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -34.629482, 0, -0.02209568)
+visible = false
 texture = ExtResource("5_oirqo")
 
 [node name="Sprite3D2" type="Sprite3D" parent="street" unique_id=810177457]
@@ -1335,11 +1381,22 @@ texture = ExtResource("6_moxjo")
 
 [node name="Sprite3D3" type="Sprite3D" parent="street" unique_id=487477074]
 transform = Transform3D(5.6519705e-15, -1.1715666e-07, 2.338548, 4.8531366e-09, 0.94284886, 3.595924e-08, -1.1516182, -4.397339e-09, 1.5718274e-15, 18.92614, 3.0476103, -7.7345595)
+visible = false
 texture = ExtResource("7_moxjo")
 
 [node name="Sprite3D17" type="Sprite3D" parent="street" unique_id=583404019]
 transform = Transform3D(5.6519705e-15, -1.1715666e-07, 2.338548, 4.8531366e-09, 0.94284886, 3.595924e-08, -1.1516182, -4.397339e-09, 1.5718274e-15, -22.760891, 3.0476103, -7.7345595)
+visible = false
 texture = ExtResource("7_moxjo")
+
+[node name="Street" parent="street" unique_id=1514446524 instance=ExtResource("8_bnk2o")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.014688, 0.76805764, -14.919954)
+
+[node name="Street3" parent="street" unique_id=1730343390 instance=ExtResource("8_bnk2o")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -68.295746, 0.76805764, -14.919954)
+
+[node name="Street2" parent="street" unique_id=116072521 instance=ExtResource("8_bnk2o")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 58.992302, 0.76805764, -14.919954)
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
