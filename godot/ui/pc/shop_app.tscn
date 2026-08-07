@@ -39,6 +39,13 @@ content_margin_right = 64.0
 content_margin_bottom = 16.0
 bg_color = Color(0.92, 0.68233335, 0.3496, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
+bg_color = Color(0.94509804, 0.54901963, 0.003921569, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jf33y"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
 corner_radius_top_left = 10
@@ -50,7 +57,7 @@ corner_radius_bottom_left = 10
 script = ExtResource("2_c06av")
 items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Items")
 item_button_scene = ExtResource("3_mamje")
-bank_balance = NodePath("MarginContainer/Bank")
+bank_balance = NodePath("MarginContainer/PanelContainer/Bank")
 cant_buy_sound = NodePath("CantBuySound")
 bought_sound = NodePath("BoughtItemSound")
 reroll_sound = NodePath("ReRollSound")
@@ -156,19 +163,26 @@ disabled = true
 text = "save"
 icon = ExtResource("6_2606k")
 
-[node name="Bank" type="RichTextLabel" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=385636938]
-custom_minimum_size = Vector2(1000, 100)
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=502270219]
+custom_maximum_size = Vector2(250, -1)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.03, -0.043)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
+
+[node name="Bank" type="RichTextLabel" parent="MarginContainer/PanelContainer" index="0" unique_id=385636938]
+custom_minimum_size = Vector2(1000, 100)
+layout_mode = 2
 offset_transform_position_ratio = Vector2(-0.03, 0)
 mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "money in bank: $10"
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ShelfFullWarning" type="PanelContainer" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="3" unique_id=1986553584]
 visible = false
