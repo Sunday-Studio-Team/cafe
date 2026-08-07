@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
 [ext_resource type="Texture2D" uid="uid://dfrkdsu4k5v6q" path="res://sprites/stains/stain3.png" id="1_imr7o"]
-[ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/erasable_canvas.gd" id="2_imr7o"]
+[ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/spill.gd" id="2_imr7o"]
 [ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/spill_mop_wet.png" id="4_4xqy4"]
-[ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/sprite_2d.gd" id="4_6lir2"]
+[ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/mop.gd" id="4_6lir2"]
 [ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/spill_mop_dry.png" id="4_omxn0"]
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
@@ -101,10 +101,10 @@ wet_mop_texture = ExtResource("4_4xqy4")
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../Panel/Percentage")
 mop_sprite = NodePath("../Mop")
-moping_area = NodePath("../Mop/Area2D")
+moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
 mop = NodePath("../Mop")
-splash = NodePath("../AudioStreamPlayer2D")
+splash = NodePath("../SplashSound")
 allowed_remaining_ratio = 0.01
 
 [node name="Mop" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles")]
@@ -112,7 +112,7 @@ position = Vector2(960.00006, 500.00003)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_omxn0")
 script = ExtResource("4_6lir2")
-drag_area = NodePath("Area2D2")
+drag_area = NodePath("MopDragHitbox")
 bubbles = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewport/Mop" unique_id=360286918]
@@ -123,18 +123,18 @@ texture = ExtResource("5_quysc")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_xnu58")
 
-[node name="Area2D" type="Area2D" parent="SubViewport/Mop" unique_id=1322127866]
+[node name="MopHeadHitbox" type="Area2D" parent="SubViewport/Mop" unique_id=1322127866]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/Area2D" unique_id=426483103]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/MopHeadHitbox" unique_id=426483103]
 position = Vector2(13.999756, -508.00012)
 shape = SubResource("RectangleShape2D_6lir2")
 
-[node name="Area2D2" type="Area2D" parent="SubViewport/Mop" unique_id=1484986336]
+[node name="MopDragHitbox" type="Area2D" parent="SubViewport/Mop" unique_id=1484986336]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/Area2D2" unique_id=1835631460]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/MopDragHitbox" unique_id=1835631460]
 position = Vector2(17.999756, 13.999878)
 shape = SubResource("RectangleShape2D_xnu58")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SubViewport" unique_id=1715966103]
+[node name="SplashSound" type="AudioStreamPlayer2D" parent="SubViewport" unique_id=1715966103]
 position = Vector2(451, 543)
 stream = ExtResource("7_eeqbd")
