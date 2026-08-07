@@ -126,7 +126,7 @@
 [ext_resource type="Texture2D" uid="uid://duypnvlfw06cv" path="res://Assets/Street/city pack_Image_63.png" id="139_6seew"]
 [ext_resource type="Texture2D" uid="uid://fdi1a6klaj8t" path="res://Assets/Street/city pack_Image_64.png" id="140_3ox4t"]
 [ext_resource type="Texture2D" uid="uid://8j4nyg8ln614" path="res://Assets/Street/city pack_Image_65.png" id="141_4fmho"]
-[ext_resource type="ArrayMesh" uid="uid://s0v5yo36fgrw" path="res://Assets/Street/city pack_BusStop_Sign_shader_0.res" id="141_ibca3"]
+[ext_resource type="ArrayMesh" uid="uid://blnnbvh7f8mrc" path="res://Assets/Street/city pack_BusStop_Sign_shader_0.res" id="141_ibca3"]
 [ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
 [ext_resource type="Texture2D" uid="uid://bci5vj157jg4g" path="res://Assets/Street/city pack_Image_48.png" id="143_aivy6"]
 [ext_resource type="Texture2D" uid="uid://dbptav0wvpuef" path="res://Assets/Street/city pack_Image_15.png" id="143_y0aao"]
@@ -134,17 +134,17 @@
 [ext_resource type="Texture2D" uid="uid://xnhpljxjge6d" path="res://Assets/Street/city pack_Image_16.png" id="144_wm5rm"]
 [ext_resource type="Texture2D" uid="uid://batrfyw18g2s8" path="res://Assets/Street/city pack_Image_17.png" id="145_ekl5k"]
 [ext_resource type="Texture2D" uid="uid://m8l0xbxao27v" path="res://Assets/Street/city pack_Image_50.png" id="145_hnquj"]
-[ext_resource type="ArrayMesh" uid="uid://c5nxihcixf6ew" path="res://Assets/Street/city pack_Dumpster_Dumpster_shader_0.res" id="145_y0aao"]
+[ext_resource type="ArrayMesh" uid="uid://cd32x2aqspori" path="res://Assets/Street/city pack_Dumpster_Dumpster_shader_0.res" id="145_y0aao"]
 [ext_resource type="Texture2D" uid="uid://djpefotujgict" path="res://Assets/Street/city pack_Image_24.png" id="146_0h8y2"]
-[ext_resource type="ArrayMesh" uid="uid://ctxandnavi1ca" path="res://Assets/Street/city pack_Light_Light_shader_0.res" id="146_1slqb"]
-[ext_resource type="ArrayMesh" uid="uid://xpuvs3js8ygt" path="res://Assets/Street/city pack_FireHydrant_FireHydrant_shader_0.res" id="146_wm5rm"]
+[ext_resource type="ArrayMesh" uid="uid://cuyek27m5ceit" path="res://Assets/Street/city pack_Light_Light_shader_0.res" id="146_1slqb"]
+[ext_resource type="ArrayMesh" uid="uid://cwkliwr17aw7f" path="res://Assets/Street/city pack_FireHydrant_FireHydrant_shader_0.res" id="146_wm5rm"]
 [ext_resource type="Texture2D" uid="uid://bjj3fhjpkrpst" path="res://Assets/Street/city pack_Image_25.png" id="147_nycv6"]
-[ext_resource type="ArrayMesh" uid="uid://2jmjs31f3cmb" path="res://Assets/Street/city pack_ParkBenchShort_ParkBenchShort_shader_0.res" id="147_uo83y"]
+[ext_resource type="ArrayMesh" uid="uid://c2eehx6o44wd5" path="res://Assets/Street/city pack_ParkBenchShort_ParkBenchShort_shader_0.res" id="147_uo83y"]
 [ext_resource type="Texture2D" uid="uid://b6ru5cfyhy4lu" path="res://Assets/Street/city pack_Image_26.png" id="148_x4ftd"]
-[ext_resource type="ArrayMesh" uid="uid://pwqwn186j40b" path="res://Assets/Street/city pack_PostBox_PostBox_shader_0.res" id="148_y0aao"]
-[ext_resource type="ArrayMesh" uid="uid://dcdxsjraj8fio" path="res://Assets/Street/city pack_TrashCanCap_TrashCanCap_shader_0.res" id="149_wm5rm"]
+[ext_resource type="ArrayMesh" uid="uid://cqgx1qc6g3wkx" path="res://Assets/Street/city pack_PostBox_PostBox_shader_0.res" id="148_y0aao"]
+[ext_resource type="ArrayMesh" uid="uid://caj3pb2qppj56" path="res://Assets/Street/city pack_TrashCanCap_TrashCanCap_shader_0.res" id="149_wm5rm"]
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
-[ext_resource type="ArrayMesh" uid="uid://hrtvsupitu6o" path="res://Assets/Street/city pack_TrashCanLarge_TrashCanLarge_shader_0.res" id="150_ekl5k"]
+[ext_resource type="ArrayMesh" uid="uid://daakg7bt1d8hu" path="res://Assets/Street/city pack_TrashCanLarge_TrashCanLarge_shader_0.res" id="150_ekl5k"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
 [ext_resource type="AudioStream" uid="uid://bxlwlieajscls" path="res://audio/time_start.mp3" id="223_ycw8e"]
@@ -1901,7 +1901,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/customer lights" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="0" unique_id=587558728]
+[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="0" unique_id=1445662813]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -1912,10 +1912,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="1" unique_id=195788702]
+[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="1" unique_id=570926734]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1266530751) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 185934754) index="1" unique_id=398972065]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -1923,7 +1923,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1695556818) index="2" unique_id=1661838220]
+[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="2" unique_id=1882741105]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -2218,10 +2218,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 535169615) index="2" unique_id=1286912570]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 601267185) index="2" unique_id=1087249090]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 1567843386) index="2" unique_id=1095193056]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 416840435) index="2" unique_id=1189806681]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
