@@ -160,6 +160,9 @@
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
 [ext_resource type="PackedScene" uid="uid://bk1aw8emtkeqa" path="res://ui/end_shift_earlier_menu.tscn" id="297_j3ofb"]
 
+[sub_resource type="FogMaterial" id="FogMaterial_0ffxp"]
+density = 0.25
+
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6seew"]
@@ -1488,7 +1491,7 @@ spot_angle = 85.99
 [node name="SpotLight3D5" type="SpotLight3D" parent="street" unique_id=1209815898]
 transform = Transform3D(0.9912373, 0.12607189, 0.03942711, 0.011071067, -0.37672028, 0.926261, 0.13162847, -0.91770786, -0.3748149, 0.1927681, 4.092229, -6.0626655)
 light_color = Color(1, 0.79683334, 0.47000003, 1)
-light_energy = 50.0
+light_energy = 5.0
 shadow_enabled = true
 shadow_blur = 0.356
 spot_range = 10.837
@@ -1594,6 +1597,11 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -68.
 
 [node name="Street2" parent="street" unique_id=116072521 instance=ExtResource("8_bnk2o")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 58.992302, 0.76805764, -14.919954)
+
+[node name="FogVolume" type="FogVolume" parent="street" unique_id=1714179452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10.5)
+size = Vector3(25, 5, 10)
+material = SubResource("FogMaterial_0ffxp")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1836,7 +1844,7 @@ libraries/ = SubResource("AnimationLibrary_m74q3")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sketchfab_Scene" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=605328551 instance=ExtResource("33_0abf2")]
-transform = Transform3D(-3.2810537e-08, 0, 0.9999996, 0, 0.9083781, 0, -0.7506176, 0, -4.3711367e-08, -0.029385567, -0.024177432, 0.5333538)
+transform = Transform3D(-3.2810533e-08, 0, 0.9999995, 0, 0.9083781, 0, -0.75061756, 0, -4.3711363e-08, -0.029385567, -0.024177432, 0.5333538)
 
 [node name="BreakRoomEntranceBlocker" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]
 
@@ -1901,7 +1909,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/customer lights" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="0" unique_id=1445662813]
+[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="0" unique_id=1211131001]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -1912,10 +1920,10 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="1" unique_id=570926734]
+[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="1" unique_id=1566090278]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 185934754) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1403655107) index="1" unique_id=398972065]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -1923,7 +1931,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 1373968794) index="2" unique_id=1882741105]
+[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 484549468) index="2" unique_id=1141778786]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -2218,10 +2226,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 601267185) index="2" unique_id=1087249090]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 978519736) index="2" unique_id=1693237370]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 416840435) index="2" unique_id=1189806681]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 107142378) index="2" unique_id=352500083]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
@@ -2251,7 +2259,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8607272, 0.04417161, -6.630
 transform = Transform3D(-0.69033265, 0, 0.723492, 0, 1, 0, -0.723492, 0, -0.69033265, 7.3513746, 0.04014621, -0.83145595)
 
 [node name="Tippy cutout5" parent="Environment/CustomerArea" unique_id=1672549990 instance=ExtResource("74_2n44k")]
-transform = Transform3D(0.8173477, 0, 0.5761446, 0, 1, 0, -0.5761446, 0, 0.8173477, -2.3643398, 0.04014621, 4.972418)
+transform = Transform3D(-0.30714986, -0.92040664, 0.2418898, 0.37903327, 0.114830345, 0.9182307, -0.87292176, 0.37371877, 0.31359458, -4.4463344, 0.626155, 4.6745605)
 
 [node name="Tippy cutout4" parent="Environment/CustomerArea" unique_id=344324096 instance=ExtResource("74_2n44k")]
 transform = Transform3D(0.8501011, 0, 0.52661943, 0, 1, 0, -0.52661943, 0, 0.8501011, 2.7155895, 0.04014621, -9.132018)
@@ -2311,48 +2319,57 @@ mesh = SubResource("BoxMesh_7olkn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
 
 [node name="Time is Money Poster" type="Sprite3D" parent="Environment/BackRoom" unique_id=389475209]
-transform = Transform3D(0.11596574, 0, 0, 0, 0.115965724, 0, 0, 0, 0.11596574, 2.720026, 1.6392398, -4.7883887)
+transform = Transform3D(0.11596312, -0.0007790586, 0, 0.0007790588, 0.11596312, 0, 0, 0, 0.11596574, 2.720026, 1.6392398, -4.7883887)
 material_override = ExtResource("75_86lig")
+shaded = true
 texture = ExtResource("75_bmvma")
 
 [node name="Time is Money Poster3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1201993862]
-transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -4.0747476, 1.4720756, 0.96424294)
+transform = Transform3D(-0.11594819, 0.0020175104, -1.0136513e-08, 0.0020175104, 0.11594819, 1.7637636e-10, 1.0138047e-08, 0, -0.11596574, -4.0747476, 1.4923304, 0.96424294)
 material_override = ExtResource("75_86lig")
+shaded = true
 texture = ExtResource("75_bmvma")
 
 [node name="Watching poster" type="Sprite3D" parent="Environment/BackRoom" unique_id=886113309]
-transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -2.0769935, 1.4720756, 0.96424294)
+transform = Transform3D(-0.11595539, -0.0015491113, -1.0137143e-08, -0.0015491113, 0.11595539, -1.3542761e-10, 1.0138047e-08, 0, -0.11596574, -2.0769935, 1.450106, 0.96424294)
 material_override = ExtResource("77_ldnlw")
+shaded = true
 texture = ExtResource("78_qe8ju")
 
-[node name="Gun watching" type="Sprite3D" parent="Environment/BackRoom" unique_id=1983314462]
-transform = Transform3D(-0.11596574, 0, -1.0138047e-08, 0, 0.11596574, 0, 1.0138047e-08, 0, -0.11596574, -0.023314238, 1.4720756, 0.96424294)
+[node name="Gun watching2" type="Sprite3D" parent="Environment/BackRoom" unique_id=2002668626]
+transform = Transform3D(0.115964636, 0.00050575804, 0, -0.00050575804, 0.115964636, 0, 0, 0, 0.11596574, 5.297222, 1.5840777, -4.7949424)
 material_override = ExtResource("79_qe8ju")
+shaded = true
 texture = ExtResource("80_bnk2o")
 
-[node name="Gun watching2" type="Sprite3D" parent="Environment/BackRoom" unique_id=2002668626]
-transform = Transform3D(0.11596574, 0, 0, 0, 0.11596574, 0, 0, 0, 0.11596574, 5.297222, 1.657395, -4.7949424)
+[node name="Gun watching4" type="Sprite3D" parent="Environment/BackRoom" unique_id=982936491]
+transform = Transform3D(-0.11593241, 0.00277999, -5.5863296e-09, 0.00277999, 0.11593241, 1.3395685e-10, 5.5879354e-09, 0, -0.11596574, -0.0027778149, 1.457395, 0.90505695)
 material_override = ExtResource("79_qe8ju")
+shaded = true
 texture = ExtResource("80_bnk2o")
 
 [node name="Gun watching3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1613066011]
-transform = Transform3D(-5.661606e-09, 0, -0.12952244, 0, 0.12952244, 0, 0.12952244, 0, -5.661606e-09, -7.2233624, 1.3688644, -9.528911)
+transform = Transform3D(-5.6616054e-09, 0, -0.12952244, -0.0009183418, 0.12951918, 4.014199e-11, 0.12951918, 0.0009183418, -5.661463e-09, -7.2233624, 1.3688644, -9.528911)
 material_override = ExtResource("79_qe8ju")
+shaded = true
 texture = ExtResource("80_bnk2o")
 
 [node name="Watching poster2" type="Sprite3D" parent="Environment/BackRoom" unique_id=689960844]
-transform = Transform3D(0.15037051, 0, 0, 0, 0.15037051, 0, 0, 0, 0.15037051, -5.991908, 1.4720756, -4.785888)
+transform = Transform3D(0.15036875, -0.00072672014, 0, 0.00072672014, 0.15036875, 0, 0, 0, 0.1503705, -5.991908, 1.4720756, -4.785888)
 material_override = ExtResource("77_ldnlw")
+shaded = true
 texture = ExtResource("78_qe8ju")
 
 [node name="Watching poster3" type="Sprite3D" parent="Environment/BackRoom" unique_id=1244336697]
-transform = Transform3D(-6.5729036e-09, 0, 0.15037051, 0, 0.15037051, 0, -0.15037051, 0, -6.5729036e-09, -12.7878065, 1.4720756, -1.8746128)
+transform = Transform3D(-6.572903e-09, 0, 0.1503705, 0.0012303937, 0.15036546, 5.378221e-11, -0.15036546, 0.0012303937, -6.572683e-09, -12.7878065, 1.4753662, -1.8746128)
 material_override = ExtResource("77_ldnlw")
+shaded = true
 texture = ExtResource("78_qe8ju")
 
 [node name="Time is Money Poster2" type="Sprite3D" parent="Environment/BackRoom" unique_id=2124143628]
-transform = Transform3D(0.16055465, 0, 0, 0, 0.16055463, 0, 0, 0, 0.16055465, -10.080574, 1.4840565, -12.98291)
+transform = Transform3D(0.16055132, -0.0010343428, 0, 0.0010343428, 0.1605513, 0, 0, 0, 0.16055465, -10.080574, 1.4840565, -12.98291)
 material_override = ExtResource("75_86lig")
+shaded = true
 texture = ExtResource("75_bmvma")
 
 [node name="WallPieceLong" parent="Environment/BackRoom" unique_id=989985274 instance=ExtResource("22_k1udn")]
