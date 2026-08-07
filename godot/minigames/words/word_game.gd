@@ -53,20 +53,30 @@ func on_correct_placement():
 		win_game()
 
 func on_wrong_placement():
-	lose_game()
-
+	# Maybe the letter could disapear? Not doing anything with this currently though
+	pass
+	
+func pause():
+	# There is probably a better way but this is a good temporary option
+	await get_tree().create_timer(0.5).timeout # Letting animations finish playing
+	get_tree().paused = true
+	
 func on_time_up():
 	if not game_over:
 		lose_game()
-
+		
+func show_result_text(result_text: String):
+	result_label.text = result_text
+	result_label.visible = true
+	
 func win_game():
 	game_over = true
 	game_timer.stop()
-	result_label.text = "You Win!"
-	result_label.visible = true
+	show_result_text("You Win!")
+	pause()
 
 func lose_game():
 	game_over = true
 	game_timer.stop()
-	result_label.text = "You Lose!"
-	result_label.visible = true
+	show_result_text("You Lose!")
+	pause()

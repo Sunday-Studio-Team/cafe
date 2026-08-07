@@ -1,7 +1,7 @@
 extends Control
 
 var letter_value: String = ""
-var fall_speed: float = 40.0
+var fall_speed: float = 60.0
 var dragging: bool = false
 var falling: bool = true
 var locked: bool = false
