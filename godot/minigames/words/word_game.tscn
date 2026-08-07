@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cqe74vq6ub28c" path="res://minigames/words/word_game.gd" id="1_y5mif"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5mif"]
+bg_color = Color(0.744344, 0.5673771, 0.24229944, 1)
+
 [node name="WordGame" type="Control" unique_id=45776713]
 layout_mode = 3
 anchors_preset = 15
@@ -18,13 +21,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Timer" type="ProgressBar" parent="CanvasLayer" unique_id=1636477094]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-offset_right = 4.0
-grow_vertical = 0
+custom_minimum_size = Vector2(400, 30)
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 430.0
+offset_bottom = 60.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_y5mif")
 max_value = 8.0
+show_percentage = false
 
 [node name="UI" type="Control" parent="CanvasLayer" unique_id=948977780]
 layout_mode = 3
@@ -55,6 +59,20 @@ alignment = 1
 [node name="Letters" type="Control" parent="CanvasLayer" unique_id=518723865]
 layout_mode = 3
 anchors_preset = 0
+
+[node name="ResultText" type="Label" parent="CanvasLayer" unique_id=1812348814]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
 
 [node name="GameTimer" type="Timer" parent="." unique_id=443815171]
 wait_time = 8.0

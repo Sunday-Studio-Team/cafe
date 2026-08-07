@@ -9,7 +9,10 @@ script = ExtResource("1_fs0nv")
 
 [node name="Tile" type="TextureRect" parent="." unique_id=888473966]
 custom_minimum_size = Vector2(64, 64)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_od34h")

@@ -13,6 +13,7 @@ var game_over = false
 @onready var letters_container = $CanvasLayer/Letters
 @onready var timer_bar = $CanvasLayer/Timer
 @onready var game_timer = $GameTimer
+@onready var result_label = $CanvasLayer/ResultText
 
 func _ready():
 
@@ -61,9 +62,11 @@ func on_time_up():
 func win_game():
 	game_over = true
 	game_timer.stop()
-	print("You win!")
+	result_label.text = "You Win!"
+	result_label.visible = true
 
 func lose_game():
 	game_over = true
 	game_timer.stop()
-	print("Game over")
+	result_label.text = "You Lose!"
+	result_label.visible = true
