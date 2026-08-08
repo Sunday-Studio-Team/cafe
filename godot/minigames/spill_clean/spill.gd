@@ -80,9 +80,7 @@ func _ready() -> void:
 	mop.drag_ended.connect(_on_mop_drag_ended)
 	
 	if used_scrubber:
-		mop.scale = Vector2(-2, -2)
-	else:
-		mop.scale = Vector2(-1.3, -1.3)
+		mop.scale *= 1.5
 
 	count_starting_pixels()
 	update_progress_display()
