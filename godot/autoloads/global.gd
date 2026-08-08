@@ -12,7 +12,6 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
-@export var mop_cursor_texture: Texture2D
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
@@ -67,8 +66,8 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		score_update_message = ""
-# represented as stars (1 rating = 1 half star)
-var employee_rating := 0:
+# represented as stars (1 rating = 1 half star), max is 10 rating = 5 stars
+var employee_rating: int = 0:
 	set(new_value):
 		if new_value > 10:
 			new_value = 10
@@ -147,6 +146,7 @@ var equipped_item: Item = null
 #tutorial flags
 var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
+var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
 
 
 func _ready() -> void:

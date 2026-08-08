@@ -17,8 +17,10 @@ var is_read: bool
 var is_current_day: bool
 var is_finished_spam: bool
 
+
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
+
 
 func initialize(init_email_data: EmailData, init_is_finished_important: bool, init_is_read: bool, init_is_current_day: bool, init_is_finished_spam: bool) -> void:
 	email_data = init_email_data
@@ -26,7 +28,7 @@ func initialize(init_email_data: EmailData, init_is_finished_important: bool, in
 	is_read = init_is_read
 	is_current_day = init_is_current_day
 	is_finished_spam = init_is_finished_spam
-	
+
 	sender_name_label.text = email_data.sender_name
 	subject_label.text = email_data.subject
 	if is_current_day:
@@ -39,28 +41,35 @@ func initialize(init_email_data: EmailData, init_is_finished_important: bool, in
 			displayed_date_time_label.text = "1 day ago"
 		else:
 			displayed_date_time_label.text = str(days_ago) + " days ago"
+
 	brief_contents_rich_text_label.text = email_data.contents
-	
+
 	_update_unread_indicator()
 	_update_important_indicator()
+
 
 func mark_as_read() -> void:
 	is_read = true
 	_update_unread_indicator()
 
+
 func mark_as_finished_important() -> void:
 	is_finished_important = true
 	_update_important_indicator()
 
+
 func mark_as_finished_spam() -> void:
 	is_finished_spam = true
+
 
 func _update_unread_indicator() -> void:
 	unread_indicator.visible = not is_read
 
+
 func _update_important_indicator() -> void:
 	var show_important_indicator: bool = email_data.is_important and not is_finished_important
 	important_indicator.visible = show_important_indicator
+
 
 func _on_button_pressed():
 	email_pressed.emit(self)

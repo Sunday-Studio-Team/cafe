@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bxy57taomjx7x"]
 
 [ext_resource type="Script" uid="uid://dwvs44j1308am" path="res://emails/menu_update_emails/custom_email_view_menu_update.gd" id="1_8jh7c"]
+[ext_resource type="FontFile" uid="uid://c58o1rhcqdf6w" path="res://fonts/liberation_sans/LiberationSans-Regular.ttf" id="2_dufui"]
 [ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="2_o8gnl"]
 [ext_resource type="PackedScene" uid="uid://c1yb2udyxmruy" path="res://emails/menu_update_emails/email_drink_container.tscn" id="3_maimp"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="4_gd1jp"]
@@ -9,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="7_0361o"]
 
 [node name="MenuUpdateEmail" type="Container" unique_id=1099734027 node_paths=PackedStringArray("drink_1", "drinks_list", "yes_button", "ok_button")]
+custom_minimum_size = Vector2(100, 500)
+custom_maximum_size = Vector2(1000, 500)
+offset_right = 520.0
+offset_bottom = 365.0
 script = ExtResource("1_8jh7c")
 drink_1 = NodePath("Container/VBoxContainer/NewDrinks/EmailDrinkContainer")
 drinks_list = NodePath("Container/VBoxContainer/NewDrinks")
@@ -29,8 +34,8 @@ theme_override_constants/separation = 10
 [node name="Label" type="Label" parent="Container/VBoxContainer" unique_id=1229364220]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_o8gnl")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("2_dufui")
+theme_override_font_sizes/font_size = 50
 text = "Items Added:"
 horizontal_alignment = 1
 
