@@ -6,6 +6,9 @@ extends Node3D
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
+@export var interactable : Interactable
+var camera_disabled : bool = false
+
 
 # we duplicate the ray many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -23,11 +26,20 @@ func _ready() -> void:
 	rotate_tween.tween_interval(rotation_pause_length)
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
 	rotate_tween.tween_interval(rotation_pause_length)
+	
+	#Active Item
+	interactable.interactable_active_item.connect(activate_interaction)
+	
+	
 
 
 func _physics_process(_delta: float) -> void:
 	# if cameras are hidden, treat that as them being disabled
 	if not is_visible_in_tree():
+		return
+	
+	#If disabled
+	if camera_disabled:
 		return
 
 	if not timer.is_stopped():
@@ -80,3 +92,16 @@ func create_rays() -> void:
 			new_ray.rotation_degrees.z += z_rot
 			spotlight.add_child(new_ray)
 			all_rays.append(new_ray)
+
+
+func activate_interaction(item: Item):
+	print(item)
+	if item != null:
+		print(item.name)
+	if item != null and item.name == "Whipped Cream":
+		camera_disabled = true
+		spotlight.visible = false
+		await get_tree().create_timer(8, false).timeout
+		camera_disabled = false
+		spotlight.visible = true
+	pass
