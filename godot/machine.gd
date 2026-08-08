@@ -54,9 +54,10 @@ static var seen_breakdown_popup := false
 @export var spill_clean_particles: GPUParticles3D
 @export var tip_label: Label
 @export var hammer_item: Item
+@export var scrubber_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
-@export var popup_storage_room: PackedScene #tutorial popup that tells player to go to the storage room
-@export var popup_go_to_spill: PackedScene #tutorial popup that tells player to go to the spill
+@export var popup_storage_room: PackedScene # tutorial popup that tells player to go to the storage room
+@export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
 var customer: Customer
 var order: OrderData
@@ -133,6 +134,7 @@ func _ready() -> void:
 
 	#Active Items
 	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
+	spill_interactable.interactable_active_item.connect(on_active_item_used_spill)
 
 
 func _physics_process(_delta: float) -> void:
@@ -197,7 +199,7 @@ func show_tutorial_where_is_storeroom() -> void:
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
-	await get_tree().create_timer(0.75).timeout #allows audio to play first
+	await get_tree().create_timer(0.75).timeout # allows audio to play first
 
 	if (Global.day == 1) and (Global.tutorial_refill_shown == false):
 		Global.tutorial_refill_shown = true
@@ -228,16 +230,15 @@ func show_tutorial_where_is_storeroom() -> void:
 		#hide tablet
 		#
 
-		await popup.tree_exited #delays some code until event occurs
+		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen = false #re enable pause
+		Global.in_tutorial_screen = false # re enable pause
 
 
 # called from inside spill() (so that itll still show if we trigger the spill
 # via a console command etc
 func show_tutorial_go_clean_spill() -> void:
 	#this is called right after spill() is called [but not inside spill()]
-
 	if OS.has_feature("skip_popups"):
 		return
 
@@ -245,7 +246,7 @@ func show_tutorial_go_clean_spill() -> void:
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
 
-	await get_tree().create_timer(0.75).timeout #allows audio to play first
+	await get_tree().create_timer(0.75).timeout # allows audio to play first
 	if (Global.day == 1) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
 		Global.in_tutorial_screen = true
@@ -260,7 +261,7 @@ func show_tutorial_go_clean_spill() -> void:
 		get_tree().paused = true # this kinda works but its janky
 
 		var button = popup.get_node("NextButton")
-		popup.move_to_front() #this was an attempt to fix issue, does not really do anything
+		popup.move_to_front() # this was an attempt to fix issue, does not really do anything
 		popup.process_mode = Node.PROCESS_MODE_ALWAYS
 
 		button.pressed.connect(
@@ -274,9 +275,9 @@ func show_tutorial_go_clean_spill() -> void:
 		#hide tablet
 		#
 
-		await popup.tree_exited #delays some code until event occurs
+		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen = false #re enable pause
+		Global.in_tutorial_screen = false # re enable pause
 
 
 func set_customer(c: Customer) -> void:
@@ -651,6 +652,16 @@ func on_active_item_used_machine(item: Item):
 		Global.deactivate_active_item(item)
 		await Events.hammer_animation_hit
 		fix_machine(true)
+
+
+func on_active_item_used_spill(item: Item):
+	if item == null:
+		return
+	
+	if item == scrubber_item:
+		ErasableCanvas.used_scrubber = true
+		Global.deactivate_active_item(item)
+		_on_clean_spill()
 
 
 func _on_clean_spill() -> void:
