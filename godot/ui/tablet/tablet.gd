@@ -12,14 +12,6 @@ func _ready() -> void:
 	Events.items_updated.connect(populate_items)
 
 
-func _physics_process(_delta: float) -> void:
-	visible = (
-			not Global.in_ui
-			or Global.in_machine_ui
-			or Global.showing_floating_cursor
-	)
-
-
 func populate_items() -> void:
 	var i := 0
 	for icon: TabletItemIcon in item_icons.get_children():

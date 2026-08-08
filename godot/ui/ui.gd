@@ -85,11 +85,12 @@ func _ready() -> void:
 
 	stamina_bar.max_value = Stats.current.max_stamina
 
-	# we automatically play a sound whenever our points change,
-	# so we mute that sound while we reset our points @ the start of each day
-	# lol
+	# we automatically do some stuff whenever our points change,
+	# so we mute + hide that stuff
+	# while we reset our points @ the start of each day lol
 	var points_sound_volume := lose_points_sound.volume_db
 	lose_points_sound.volume_db = -70
+	score_update_label.hide()
 
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
@@ -164,9 +165,10 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	hide_item_menu_prompt_if_no_actives()
 	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
 
-	# (we muted this earlier, now we unmute)
+	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
+	score_update_label.show()
 
 	var hammer_t := create_tween().set_loops()
 	hammer_t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
@@ -178,6 +180,13 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 
 
 func _physics_process(_delta: float) -> void:
+	var should_show_hud: bool = (
+			not Global.in_ui
+			or Global.in_machine_ui
+			or Global.showing_floating_cursor
+	)
+	visible = should_show_hud and not get_tree().paused
+
 	update_score_indicators()
 	update_interactable_ui()
 	update_time_indicator()
@@ -185,7 +194,7 @@ func _physics_process(_delta: float) -> void:
 	handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
-	handle_exit_machine_ui()
+	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
 	handle_item_ui()
 	handle_item_hover_tooltip()
@@ -236,8 +245,8 @@ func handle_item_hover_tooltip() -> void:
 	)
 
 
-func handle_exit_machine_ui() -> void:
-	exit_machine_button.visible = Global.in_machine_ui
+func handle_exit_machine_button_visibility() -> void:
+	exit_machine_button.visible = Global.in_machine_ui and not Global.minigame_active
 
 
 func handle_item_ui() -> void:

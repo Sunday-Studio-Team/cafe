@@ -22,7 +22,6 @@ static var seen_breakdown_popup := false
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
-@export var floating_buttons: Control
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -61,7 +60,7 @@ func _ready() -> void:
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
-	
+
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.unapply_stats()
 
@@ -111,7 +110,7 @@ func _ready() -> void:
 
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
-	
+
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		special_shift_text.text = Global.current_special_shift.description
 		special_shift_title.text = Global.current_special_shift.name
@@ -162,23 +161,18 @@ func set_per_day_stuff() -> void:
 				push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
 			Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
 		Global.ai_improvement_enabled = true
-		
+
 	menu.populate_drinks()
 
 	Global.machines.assign(machines)
 
-	# hide posters that mention security cameras until we have them
-	if Global.day < 2:
-		for poster in camera_posters:
-			poster.hide()
-
 	#select a special shift if it is not day one
 	if Global.day > 1:
 		var rng = RandomNumberGenerator.new()
-		var weights : PackedFloat32Array
+		var weights: PackedFloat32Array
 		for special_shift in Global.special_shifts:
 			weights.append(special_shift.weight)
-			
+
 		var selected_index := rng.rand_weighted(weights)
 		Global.current_special_shift = Global.special_shifts[selected_index]
 	else:
@@ -251,14 +245,12 @@ func _on_game_timer_timeout() -> void:
 
 #Minigame is active (Need to turn off regular player controls)
 func _on_minigame_active(minigame_name: String):
-	floating_buttons.visible = false
 	minigame_controller.play_minigame(minigame_name)
 
 
 #Closes the game -> Game is no longer visible and removed from the tree
 #Player regains all regular controls etc
 func _on_minigame_end():
-	floating_buttons.visible = true
 	minigame_controller.close_game()
 
 

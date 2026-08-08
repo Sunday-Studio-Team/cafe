@@ -18,7 +18,7 @@ static var seen_breakdown_popup := false
 @export var make_drink_button: Button
 @export var accept_button: Button
 @export var reject_button: Button
-@export var refill_button: Interactable
+@export var refill_button: Button
 @export var fix_machine_button: Interactable
 @export var breakdown_timer: Timer
 @export var breakdown_sound: AudioStreamPlayer3D
@@ -34,6 +34,7 @@ static var seen_breakdown_popup := false
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
+@export var get_ingredients_prompt: Control
 @export var time_bonus_panel: PanelContainer
 @export var time_bonus_label: Label
 @export var order_breakdown: Control
@@ -103,7 +104,15 @@ func _ready() -> void:
 			else:
 				reject_order()
 	)
-	refill_button.interacted.connect(refill)
+	refill_button.pressed.connect(
+		func():
+			if Global.holding_ingredients:
+				refill()
+			else:
+				get_ingredients_prompt.show()
+				await get_tree().create_timer(0.5, false).timeout
+				get_ingredients_prompt.hide()
+	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 
 	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
@@ -137,8 +146,6 @@ func _physics_process(_delta: float) -> void:
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
-
-	refill_button.visible = Global.holding_ingredients
 
 	ingredients_bar.value = ingredients
 	if ingredients < Stats.current.ingredients_per_order:
@@ -230,11 +237,10 @@ func show_tutorial_where_is_storeroom() -> void:
 # via a console command etc
 func show_tutorial_go_clean_spill() -> void:
 	#this is called right after spill() is called [but not inside spill()]
-	
-	
+
 	if OS.has_feature("skip_popups"):
 		return
-	
+
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
@@ -290,7 +296,13 @@ func set_customer(c: Customer) -> void:
 		drink_customer_score_label.hide()
 		waiting_for_response = false
 		timer.stop()
-		#make_drink_button.held_time = 0
+		if Global.making_drink_manually and gui_3d.player_using_me:
+			# NOTE: not sure these are both correct + necessary to cancel a minigame
+			# but this seems to behave correctly
+			Events.force_close_minigame.emit()
+			Events.minigame_cancelled.emit()
+			# this might already get set somewhere else but just to be sure
+			Global.making_drink_manually = false
 
 
 func get_stats() -> void:
