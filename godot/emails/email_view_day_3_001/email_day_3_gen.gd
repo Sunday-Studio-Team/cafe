@@ -21,7 +21,7 @@ var improvement_list: Array[AIImprovement] = [
 	{
 		'machine_chance_of_spill' : 0.2,
 		'max_spills_per_shift' : 1.0,
-		'clean_spill_allowed_remaining' : 0.4
+		'clean_spill_allowed_remaining' : 0.3
 	}),
 	## AI is more accurate... but takes longer
 	AIImprovement.new(" we've added workflow-enhancing technology, ensuring accuracy of orders.",
