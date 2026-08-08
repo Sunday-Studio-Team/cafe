@@ -85,11 +85,12 @@ func _ready() -> void:
 
 	stamina_bar.max_value = Stats.current.max_stamina
 
-	# we automatically play a sound whenever our points change,
-	# so we mute that sound while we reset our points @ the start of each day
-	# lol
+	# we automatically do some stuff whenever our points change,
+	# so we mute + hide that stuff
+	# while we reset our points @ the start of each day lol
 	var points_sound_volume := lose_points_sound.volume_db
 	lose_points_sound.volume_db = -70
+	score_update_label.hide()
 
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
@@ -164,9 +165,10 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	hide_item_menu_prompt_if_no_actives()
 	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
 
-	# (we muted this earlier, now we unmute)
+	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
+	score_update_label.show()
 
 	var hammer_t := create_tween().set_loops()
 	hammer_t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
@@ -401,6 +403,10 @@ func update_interactable_ui() -> void:
 
 		else:
 			hammer_indicator.hide()
+		
+		#
+		
+			
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
@@ -417,6 +423,16 @@ func update_interactable_ui() -> void:
 					"[E] - "
 					+ Global.hovered_interactable.display_name
 			)
+		
+		if hovered_interactable.display_name == "Camera":
+			
+			if Global.equipped_item != null and Global.equipped_item.name == "Whipped Cream":
+				interactable_label.text = (
+					"[Q] - Whipped Cream The Camera"
+				)
+			else:
+				interactable_indicator.hide()
+			
 
 	else:
 		interactable_indicator.hide()

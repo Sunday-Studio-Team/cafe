@@ -169,12 +169,16 @@ func _on_time_up() -> void:
 	outcome.show()
 
 	await get_tree().create_timer(0.5).timeout
-	
+
 	# If player has a free item slot,
 	# and if 5 star customer satisfaction, give free selection of 1 of 3 random items
 	var has_free_item_slots: bool = Global.owned_items.size() <= Global.item_slots_amount
 	var five_star_rating: int = 10
-	if has_free_item_slots and Global.employee_rating >= five_star_rating:
+	if (
+			has_free_item_slots
+			and Global.employee_rating >= five_star_rating
+			and Global.daily_profit >= Stats.current.daily_profit_goal
+	):
 		var free_item_selector_screen: FreeItemSelectorScreen = _free_item_selector_screen_packed_scene.instantiate()
 		if free_item_selector_screen == null:
 			printerr("FreeItemSelectorScreen is null.")

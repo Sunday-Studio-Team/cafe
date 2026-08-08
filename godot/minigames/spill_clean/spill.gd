@@ -1,5 +1,10 @@
 extends Node2D
 
+# If a pixel has alpha value lower then the threshold,
+# it was consider transparent
+const ALPHA_THRESHOLD_BYTE: int = 5
+
+@export var wet_mop_texture: Texture
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
 @export var mop_sprite: DraggableMop
@@ -7,27 +12,20 @@ extends Node2D
 @export var bucket: Sprite2D
 @export var mop: DraggableMop
 @export var splash: AudioStreamPlayer2D
+
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
-var allowed_remaining_ratio: float# = Stats.current.clean_spill_allowed_remaining
-
-
-# If a pixel has alpha value lower then the threshold,
-# it was consider transparent
-const ALPHA_THRESHOLD_BYTE: int = 5
-
+var allowed_remaining_ratio: float # = Stats.current.clean_spill_allowed_remaining
 var mop_collision: CollisionShape2D
 var mop_rectangle: RectangleShape2D
 var canvas_image: Image
 var canvas_texture: ImageTexture
 var starting_pixel_count: int = 0
 var remaining_pixel_count: int = 0
-
 var image_width: int
 var image_height: int
 var pixel_data: PackedByteArray
-
 var is_erasing: bool = false
 var game_finished: bool = false
 
@@ -70,7 +68,7 @@ func _ready() -> void:
 		push_error("The CollisionShape2D must use RectangleShape2D.")
 		set_physics_process(false)
 		return
-	
+
 	if mop == null:
 		push_error("Mop has not been assigned")
 		set_physics_process(false)
@@ -95,8 +93,14 @@ func _physics_process(_delta: float) -> void:
 		if mop_overlaps_bucket():
 			splash.play()
 			mop.is_wet = true
-			mop.modulate = "5f5f5f"
+			mop.texture = wet_mop_texture
 			mop.bubbles.emitting = true
+			create_tween().tween_property(
+				mop,
+				"modulate",
+				Color.WHITE,
+				1,
+			).from(Color.AQUA)
 			print("The mop is now wet.")
 		return
 
@@ -110,13 +114,6 @@ func _physics_process(_delta: float) -> void:
 	check_for_win()
 
 
-func _on_mop_drag_started() -> void:
-	is_erasing = true
-
-
-func _on_mop_drag_ended() -> void:
-	is_erasing = false
-
 func mop_overlaps_bucket() -> bool:
 	if bucket == null or bucket.texture == null:
 		return false
@@ -125,30 +122,30 @@ func mop_overlaps_bucket() -> bool:
 
 	var mop_local_rect: Rect2 = Rect2(
 		-half_size,
-		mop_rectangle.size
+		mop_rectangle.size,
 	)
 
 	var bucket_local_rect: Rect2 = bucket.get_rect()
 
 	var mop_polygon: PackedVector2Array = (
-		rect_to_global_polygon(
-			mop_local_rect,
-			mop_collision.global_transform
-		)
+			rect_to_global_polygon(
+				mop_local_rect,
+				mop_collision.global_transform,
+			)
 	)
 
 	var bucket_polygon: PackedVector2Array = (
-		rect_to_global_polygon(
-			bucket_local_rect,
-			bucket.global_transform
-		)
+			rect_to_global_polygon(
+				bucket_local_rect,
+				bucket.global_transform,
+			)
 	)
 
 	var intersection: Array[PackedVector2Array] = (
-		Geometry2D.intersect_polygons(
-			mop_polygon,
-			bucket_polygon
-		)
+			Geometry2D.intersect_polygons(
+				mop_polygon,
+				bucket_polygon,
+			)
 	)
 
 	return not intersection.is_empty()
@@ -156,37 +153,39 @@ func mop_overlaps_bucket() -> bool:
 
 func rect_to_global_polygon(local_rect: Rect2, global_rect_transform: Transform2D) -> PackedVector2Array:
 	var top_left: Vector2 = (
-		global_rect_transform
-		* local_rect.position
+			global_rect_transform
+			* local_rect.position
 	)
 
 	var top_right: Vector2 = (
-		global_rect_transform
-		* Vector2(
-			local_rect.end.x,
-			local_rect.position.y
-		)
+			global_rect_transform
+			* Vector2(
+				local_rect.end.x,
+				local_rect.position.y,
+			)
 	)
 
 	var bottom_right: Vector2 = (
-		global_rect_transform
-		* local_rect.end
+			global_rect_transform
+			* local_rect.end
 	)
 
 	var bottom_left: Vector2 = (
-		global_rect_transform
-		* Vector2(
-			local_rect.position.x,
-			local_rect.end.y
-		)
+			global_rect_transform
+			* Vector2(
+				local_rect.position.x,
+				local_rect.end.y,
+			)
 	)
 
-	return PackedVector2Array([
-		top_left,
-		top_right,
-		bottom_right,
-		bottom_left
-	])
+	return PackedVector2Array(
+		[
+			top_left,
+			top_right,
+			bottom_right,
+			bottom_left,
+		],
+	)
 
 
 func erase_inside_mop_rectangle() -> bool:
@@ -196,28 +195,28 @@ func erase_inside_mop_rectangle() -> bool:
 	# Converts a point from the collision shape's local coordinates
 	# into the sprite's local coordinates.
 	var shape_to_sprite: Transform2D = (
-		canvas_sprite.global_transform.affine_inverse()
-		* mop_collision.global_transform
+			canvas_sprite.global_transform.affine_inverse()
+			* mop_collision.global_transform
 	)
 
 	# Converts a point from the sprite's local coordinates
 	# into the collision shape's local coordinates.
 	var sprite_to_shape: Transform2D = (
-		shape_to_sprite.affine_inverse()
+			shape_to_sprite.affine_inverse()
 	)
 
 	var shape_bounds: Rect2 = Rect2(
 		-half_size,
-		mop_rectangle.size
+		mop_rectangle.size,
 	)
 
 	var bounds_on_sprite: Rect2 = transform_rect(
 		shape_bounds,
-		shape_to_sprite
+		shape_to_sprite,
 	)
 
 	var clipped_bounds: Rect2 = (
-		bounds_on_sprite.intersection(sprite_rect)
+			bounds_on_sprite.intersection(sprite_rect)
 	)
 
 	if not clipped_bounds.has_area():
@@ -225,18 +224,18 @@ func erase_inside_mop_rectangle() -> bool:
 
 	var pixel_bounds: Rect2i = sprite_rect_to_pixel_rect(
 		clipped_bounds,
-		sprite_rect
+		sprite_rect,
 	)
 
 	var image_changed: bool = false
 
 	for y: int in range(
 		pixel_bounds.position.y,
-		pixel_bounds.end.y
+		pixel_bounds.end.y,
 	):
 		for x: int in range(
 			pixel_bounds.position.x,
-			pixel_bounds.end.x
+			pixel_bounds.end.x,
 		):
 			var pixel_number: int = y * image_width + x
 			var alpha_index: int = pixel_number * 4 + 3
@@ -247,16 +246,16 @@ func erase_inside_mop_rectangle() -> bool:
 			var sprite_point: Vector2 = pixel_to_sprite_position(
 				x,
 				y,
-				sprite_rect
+				sprite_rect,
 			)
 
 			var shape_point: Vector2 = (
-				sprite_to_shape * sprite_point
+					sprite_to_shape * sprite_point
 			)
 
 			var is_inside: bool = (
-				absf(shape_point.x) <= half_size.x
-				and absf(shape_point.y) <= half_size.y
+					absf(shape_point.x) <= half_size.x
+					and absf(shape_point.y) <= half_size.y
 			)
 
 			if not is_inside:
@@ -271,29 +270,29 @@ func erase_inside_mop_rectangle() -> bool:
 
 func transform_rect(
 		rect: Rect2,
-		rect_transform: Transform2D
+		rect_transform: Transform2D,
 ) -> Rect2:
 	var top_left: Vector2 = (
-		rect_transform * rect.position
+			rect_transform * rect.position
 	)
 
 	var top_right: Vector2 = (
-		rect_transform
-		* Vector2(rect.end.x, rect.position.y)
+			rect_transform
+			* Vector2(rect.end.x, rect.position.y)
 	)
 
 	var bottom_right: Vector2 = (
-		rect_transform * rect.end
+			rect_transform * rect.end
 	)
 
 	var bottom_left: Vector2 = (
-		rect_transform
-		* Vector2(rect.position.x, rect.end.y)
+			rect_transform
+			* Vector2(rect.position.x, rect.end.y)
 	)
 
 	var result: Rect2 = Rect2(
 		top_left,
-		Vector2.ZERO
+		Vector2.ZERO,
 	)
 
 	result = result.expand(top_right)
@@ -301,92 +300,91 @@ func transform_rect(
 	result = result.expand(bottom_left)
 
 	return result
-	
 
 
 func sprite_rect_to_pixel_rect(
 		bounds: Rect2,
-		sprite_rect: Rect2
+		sprite_rect: Rect2,
 ) -> Rect2i:
 	var normalized_start: Vector2 = (
-		(bounds.position - sprite_rect.position)
-		/ sprite_rect.size
+			(bounds.position - sprite_rect.position)
+			/ sprite_rect.size
 	)
 
 	var normalized_end: Vector2 = (
-		(bounds.end - sprite_rect.position)
-		/ sprite_rect.size
+			(bounds.end - sprite_rect.position)
+			/ sprite_rect.size
 	)
 
 	normalized_start.x = clampf(
 		normalized_start.x,
 		0.0,
-		1.0
+		1.0,
 	)
 
 	normalized_start.y = clampf(
 		normalized_start.y,
 		0.0,
-		1.0
+		1.0,
 	)
 
 	normalized_end.x = clampf(
 		normalized_end.x,
 		0.0,
-		1.0
+		1.0,
 	)
 
 	normalized_end.y = clampf(
 		normalized_end.y,
 		0.0,
-		1.0
+		1.0,
 	)
 
 	var start_x: int = clampi(
 		floori(normalized_start.x * image_width),
 		0,
-		image_width
+		image_width,
 	)
 
 	var start_y: int = clampi(
 		floori(normalized_start.y * image_height),
 		0,
-		image_height
+		image_height,
 	)
 
 	var end_x: int = clampi(
 		ceili(normalized_end.x * image_width),
 		0,
-		image_width
+		image_width,
 	)
 
 	var end_y: int = clampi(
 		ceili(normalized_end.y * image_height),
 		0,
-		image_height
+		image_height,
 	)
 
 	return Rect2i(
 		start_x,
 		start_y,
 		end_x - start_x,
-		end_y - start_y
+		end_y - start_y,
 	)
 
 
 func pixel_to_sprite_position(
 		x: int,
 		y: int,
-		sprite_rect: Rect2
+		sprite_rect: Rect2,
 ) -> Vector2:
 	var normalized_position: Vector2 = Vector2(
 		(float(x) + 0.5) / float(image_width),
-		(float(y) + 0.5) / float(image_height)
+		(float(y) + 0.5) / float(image_height),
 	)
 
 	return (
-		sprite_rect.position
-		+ normalized_position * sprite_rect.size
+			sprite_rect.position
+			+ normalized_position * sprite_rect.size
 	)
 
 
@@ -396,7 +394,7 @@ func upload_changed_image() -> void:
 		image_height,
 		false,
 		Image.FORMAT_RGBA8,
-		pixel_data
+		pixel_data,
 	)
 	canvas_texture.update(canvas_image)
 
@@ -454,3 +452,11 @@ func win_game() -> void:
 	progress_label.text = "Erased: 100%"
 
 	Events.emit_signal("minigame_end")
+
+
+func _on_mop_drag_started() -> void:
+	is_erasing = true
+
+
+func _on_mop_drag_ended() -> void:
+	is_erasing = false
