@@ -43,7 +43,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var item_menu_prompt: Control
 #Active Item
 @export var current_item_ui: Control
-@export var hammer_indicator: PanelContainer
+@export var item_indicator: PanelContainer
+@export var item_text: RichTextLabel
 @export var current_item_icon: TextureRect
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
@@ -171,8 +172,8 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	score_update_label.show()
 
 	var hammer_t := create_tween().set_loops()
-	hammer_t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
-	hammer_t.tween_property(hammer_indicator, "modulate", Color.ORANGE_RED, 0.5)
+	hammer_t.tween_property(item_indicator, "modulate", Color.GOLD, 0.5)
+	hammer_t.tween_property(item_indicator, "modulate", Color.ORANGE_RED, 0.5)
 
 	var shelf_sell_t := create_tween().set_loops()
 	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.GOLD, 2)
@@ -399,14 +400,20 @@ func update_interactable_ui() -> void:
 				and Global.equipped_item != null
 				and Global.equipped_item.name == "hammer"
 		):
-			hammer_indicator.show()
+			item_indicator.show()
+			item_text.text = "[Q] HAMMER 💥"
+		
+		if(
+				hovered_interactable.name == "Spill"
+				and Global.equipped_item != null
+				and Global.equipped_item.name == "super scrubber 2000"
+		):
+			item_indicator.show()
+			item_text.text = "[Q] SCRUBBER 🧼"
 
 		else:
-			hammer_indicator.hide()
-		
-		#
-		
-			
+			item_indicator.hide()
+			item_text.text = ""
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (

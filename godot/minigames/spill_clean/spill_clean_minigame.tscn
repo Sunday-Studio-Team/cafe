@@ -91,7 +91,7 @@ position = Vector2(465.99997, 556)
 scale = Vector2(0.41000003, 0.48500004)
 texture = ExtResource("1_eeqbd")
 
-[node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "mop_sprite", "moping_area", "bucket", "mop", "splash")]
+[node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "mop", "splash")]
 modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
 position = Vector2(960, 600)
 scale = Vector2(0.8, 0.8)
@@ -100,7 +100,6 @@ script = ExtResource("2_imr7o")
 wet_mop_texture = ExtResource("4_4xqy4")
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../Panel/Percentage")
-mop_sprite = NodePath("../Mop")
 moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
 mop = NodePath("../Mop")
