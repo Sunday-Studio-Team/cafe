@@ -1,32 +1,21 @@
 [gd_scene format=3 uid="uid://d05qn0pkjxo5j"]
 
-[ext_resource type="Script" uid="uid://d1niawkeh1pyd" path="res://minigames/lines/lines.gd" id="1_5mq45"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtxfr"]
-bg_color = Color(0.2520276, 0.25202766, 0.25202754, 1)
+[ext_resource type="PackedScene" uid="uid://bnrk62uhwymp1" path="res://minigames/lines/lines.tscn" id="1_5mq45"]
 
 [node name="LinesMinigame" type="Node2D" unique_id=1898571375]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953665671]
 
-[node name="Lines" type="Control" parent="CanvasLayer" unique_id=405888750]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-script = ExtResource("1_5mq45")
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=847814111]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -376.0
+offset_top = 48.0
+offset_right = 376.0
+offset_bottom = 153.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 76
+text = "click to cut the wires"
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Lines" unique_id=1741888401]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.123
-anchor_right = 1.1110001
-anchor_bottom = 0.49400002
-offset_left = 248.0
-offset_top = -117.84
-offset_right = -391.87207
-offset_bottom = 523.48
-theme_override_styles/panel = SubResource("StyleBoxFlat_rtxfr")
-
-[node name="Timer" type="Timer" parent="CanvasLayer/Lines" unique_id=1171681837]
-one_shot = true
+[node name="Lines" parent="CanvasLayer" unique_id=1577892201 instance=ExtResource("1_5mq45")]

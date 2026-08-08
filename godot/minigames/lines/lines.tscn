@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://bnrk62uhwymp1"]
+
+[ext_resource type="Script" uid="uid://d1niawkeh1pyd" path="res://minigames/lines/lines.gd" id="1_ufq5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lghh"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtxfr"]
+bg_color = Color(0.13725491, 0.13725491, 0.13725491, 0.2901961)
+border_width_left = 100
+border_width_top = 30
+border_width_right = 100
+border_width_bottom = 30
+border_color = Color(0.19793722, 0.19793728, 0.1979371, 1)
+
+[node name="Lines" type="Control" unique_id=1577892201 node_paths=PackedStringArray("background_panel", "wire_holder")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_ufq5k")
+background_panel = NodePath("CanvasLayer/PanelContainer")
+wire_holder = NodePath("CanvasLayer")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=704073497]
+
+[node name="Wire" type="Panel" parent="CanvasLayer" unique_id=745848724]
+modulate = Color(0.91710806, 0.13506433, 0.08938738, 1)
+custom_minimum_size = Vector2(0, 50)
+offset_left = 310.0
+offset_top = 550.0
+offset_right = 1697.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8lghh")
+
+[node name="Wire2" type="Panel" parent="CanvasLayer" unique_id=2029379298]
+modulate = Color(0.36930263, 0.6520042, 0.114377655, 1)
+custom_minimum_size = Vector2(0, 50)
+offset_left = 315.84744
+offset_top = 306.6001
+offset_right = 1754.8237
+offset_bottom = 356.6001
+rotation = 0.2617994
+theme_override_styles/panel = SubResource("StyleBoxFlat_8lghh")
+
+[node name="Wire3" type="Panel" parent="CanvasLayer" unique_id=2124631080]
+modulate = Color(0.26081583, 0.54995686, 1, 1)
+custom_minimum_size = Vector2(0, 50)
+offset_left = 319.0
+offset_top = 793.00006
+offset_right = 1757.9763
+offset_bottom = 843.00006
+rotation = -0.3710077
+theme_override_styles/panel = SubResource("StyleBoxFlat_8lghh")
+
+[node name="Wire4" type="Panel" parent="CanvasLayer" unique_id=1144866231]
+modulate = Color(0.26081583, 0.54995686, 1, 1)
+custom_minimum_size = Vector2(0, 50)
+offset_left = 319.0
+offset_top = 793.00006
+offset_right = 1757.9763
+offset_bottom = 843.00006
+rotation = -0.3710077
+theme_override_styles/panel = SubResource("StyleBoxFlat_8lghh")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1888579267]
+anchors_preset = -1
+anchor_top = 0.123
+anchor_right = 1.1110001
+anchor_bottom = 0.49400002
+offset_left = 248.0
+offset_top = 47.160004
+offset_right = -391.87207
+offset_bottom = 523.48
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtxfr")
+metadata/_edit_lock_ = true

@@ -70,7 +70,7 @@ func _physics_process(_delta: float) -> void:
 			Global.player_in_cctv_los = true
 			Global.player_in_cctv_los_camera = self
 			if Input.is_action_just_pressed("interact") and Global.player_in_cctv_los_camera == self:
-				try_disable_camera()
+				open_camera_minigame()
 		else:
 			spotlight.light_color = Color.WHITE
 
