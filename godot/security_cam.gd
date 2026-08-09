@@ -8,9 +8,8 @@ class_name SecurityCam3D
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
 @export var tries_until_disabled: int = 3
-@export var disabled := false
+@export var camera_disabled := false
 var disable_minigames := ["Lines"]
-
 # we duplicate the ray many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
 var all_rays: Array[RayCast3D]
@@ -27,11 +26,20 @@ func _ready() -> void:
 	rotate_tween.tween_interval(rotation_pause_length)
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
 	rotate_tween.tween_interval(rotation_pause_length)
+	
+	#Active Item
+	interactable.interactable_active_item.connect(activate_interaction)
+	
+	
 
 
 func _physics_process(_delta: float) -> void:
 	# if cameras are hidden, treat that as them being disabled
 	if not is_visible_in_tree():
+		return
+	
+	#If disabled
+	if camera_disabled:
 		return
 
 	if not timer.is_stopped():
@@ -40,27 +48,27 @@ func _physics_process(_delta: float) -> void:
 
 	var player_in_spotlight := false
 
-	if not disabled:
-		for r in all_rays:
-			var collider = r.get_collider()
-			if collider == Global.player:
-				if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
-					timer.start()
-					Global.score_update_message = "caught running"
-					Global.employee_rating -= Stats.current.penalty_for_running
-				elif Global.making_drink_manually:
-					timer.start()
-					Global.score_update_message = "caught making drink by hand"
-					Global.employee_rating -= Stats.current.penalty_for_handmade_drink
-				elif (
-					Global.holding_ingredients and Global.holding_ingredients_rule
-				):
-					Global.score_update_message = "caught stealing ingredients"
-					Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
-					timer.start()
+	if not camera_disabled:
+	for r in all_rays:
+		var collider = r.get_collider()
+		if collider == Global.player:
+			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
+				timer.start()
+				Global.score_update_message = "caught running"
+				Global.employee_rating -= Stats.current.penalty_for_running
+			elif Global.making_drink_manually:
+				timer.start()
+				Global.score_update_message = "caught making drink by hand"
+				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
+			elif (
+				Global.holding_ingredients and Global.holding_ingredients_rule
+			):
+				Global.score_update_message = "caught stealing ingredients"
+				Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
+				timer.start()
 
-				player_in_spotlight = true
-				break
+			player_in_spotlight = true
+			break
 
 # we need both a local and global var here to track if the player is in this
 # spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
@@ -89,12 +97,12 @@ func create_rays() -> void:
 			all_rays.append(new_ray)
 
 func disable_camera() -> void:
-	disabled = true
+	camera_disabled = true
 	spotlight.light_color = Color.DIM_GRAY
 	rotate_tween.stop()
 
 func try_disable_camera() -> void:
-	if disabled:
+	if camera_disabled:
 		return
 
 	tries_until_disabled -= 1
@@ -102,7 +110,7 @@ func try_disable_camera() -> void:
 		disable_camera()
 
 func open_camera_minigame() -> void:
-	if disabled:
+	if camera_disabled:
 		return
 
 	if Global.minigame_active:
@@ -120,3 +128,15 @@ func _on_break_camera() -> void:
 func _cancel_break_minigame() -> void:
 	Events.minigame_end.disconnect(_on_break_camera)
 	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
+
+func activate_interaction(item: Item):
+	print(item)
+	if item != null:
+		print(item.name)
+	if item != null and item.name == "Whipped Cream":
+		camera_disabled = true
+		spotlight.visible = false
+		await get_tree().create_timer(8, false).timeout
+		camera_disabled = false
+		spotlight.visible = true
+	pass

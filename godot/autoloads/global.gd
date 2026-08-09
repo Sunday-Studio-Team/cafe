@@ -107,6 +107,7 @@ var in_end_screen := false
 var in_active_item_menu := false
 var in_tutorial_screen: bool = false
 var in_end_shift_early_menu := false
+var in_dialog_screen: bool = false
 var showing_floating_cursor := false
 var stamina: float:
 	set(new_stam):
@@ -133,6 +134,7 @@ var in_ui: bool:
 				or in_active_item_menu
 				or in_tutorial_screen
 				or in_end_shift_early_menu
+				or in_dialog_screen
 				or showing_floating_cursor
 		):
 			return true

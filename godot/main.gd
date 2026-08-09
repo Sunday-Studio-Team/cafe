@@ -77,11 +77,6 @@ func _ready() -> void:
 	Global.in_machine_ui = false
 	Global.in_pc_ui = false
 
-	# high values for debug
-	#Global.daily_profit = 100
-	#Global.employee_rating = 100
-	#Global.bank_money = 100
-
 	ui.hide()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)

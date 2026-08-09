@@ -1,3 +1,4 @@
+class_name ErasableCanvas
 extends Node2D
 
 # If a pixel has alpha value lower then the threshold,
@@ -7,7 +8,6 @@ const ALPHA_THRESHOLD_BYTE: int = 5
 @export var wet_mop_texture: Texture
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
-@export var mop_sprite: DraggableMop
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
 @export var mop: DraggableMop
@@ -28,6 +28,8 @@ var image_height: int
 var pixel_data: PackedByteArray
 var is_erasing: bool = false
 var game_finished: bool = false
+
+static var used_scrubber: bool = false
 
 
 func _ready() -> void:
@@ -74,8 +76,11 @@ func _ready() -> void:
 		set_physics_process(false)
 		return
 
-	mop_sprite.drag_started.connect(_on_mop_drag_started)
-	mop_sprite.drag_ended.connect(_on_mop_drag_ended)
+	mop.drag_started.connect(_on_mop_drag_started)
+	mop.drag_ended.connect(_on_mop_drag_ended)
+	
+	if used_scrubber:
+		mop.scale *= 1.5
 
 	count_starting_pixels()
 	update_progress_display()

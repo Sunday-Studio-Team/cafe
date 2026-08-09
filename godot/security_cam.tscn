@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctyf8qliv65c4"]
 
 [ext_resource type="Script" uid="uid://dngdj3sgfen6c" path="res://security_cam.gd" id="1_w3jiq"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_8ad36"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3jiq"]
 albedo_color = Color(0.46034718, 0.46034718, 0.46034712, 1)
@@ -29,11 +30,15 @@ top_radius = 0.01
 bottom_radius = 0.01
 height = 0.25
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "spotlight", "timer")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5kcxd"]
+height = 1.2861328
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "spotlight", "timer", "interactable")]
 script = ExtResource("1_w3jiq")
 ray = NodePath("SpotLight3D/RayCast3D")
 spotlight = NodePath("SpotLight3D")
 timer = NodePath("GraceTimer")
+interactable = NodePath("Interactable")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1348601655]
 transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.9659257, 0, -0.9659257, 0.25881904, 0, 0, 0)
@@ -64,3 +69,13 @@ mesh = SubResource("SphereMesh_bpkf2")
 [node name="Mount" type="MeshInstance3D" parent="Model" unique_id=1125263611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12828007, -0.0012458414)
 mesh = SubResource("CylinderMesh_qlhcy")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=53695990 node_paths=PackedStringArray("mesh")]
+script = ExtResource("2_8ad36")
+display_name = "Camera"
+mesh = NodePath("../Model/Body")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=2134907620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3569336, 0)
+shape = SubResource("CylinderShape3D_5kcxd")
