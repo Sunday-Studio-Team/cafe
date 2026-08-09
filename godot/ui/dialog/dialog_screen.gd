@@ -1,21 +1,27 @@
 class_name DialogScreen
 extends Control
 
+signal finished_sequence
+
 @export var _dialog_view: DialogView
 @export var _dialog_options_view: DialogOptionsView
-@export var _dialog_event_sequence: DialogEventSequence
+
+func _init() -> void:
+	visible = false
 
 func _ready() -> void:
-	start_sequence(_dialog_event_sequence)
+	visible = true
+	_dialog_view.visible = false
 
 func start_sequence(dialog_event_sequence: DialogEventSequence) -> void:
+	_dialog_view.visible = true
 	Global.in_dialog_screen = true
-	
 	setup_events_recursively(dialog_event_sequence)
 	dialog_event_sequence.start_dialog_event()
 	await dialog_event_sequence.event_finished
-	print("Done sequence!")
+	_dialog_view.visible = false
 	Global.in_dialog_screen = false
+	finished_sequence.emit()
 
 func setup_events_recursively(dialog_event: DialogEvent) -> void:
 	if dialog_event is DialogEventText:

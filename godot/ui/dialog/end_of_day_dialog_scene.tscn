@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b0nxtbhq1jhc6"]
+
+[ext_resource type="PackedScene" uid="uid://chmykmsmk4ne8" path="res://ui/dialog/dialog_screen.tscn" id="1_i5p1t"]
+[ext_resource type="Script" uid="uid://dhya5ot6ccufp" path="res://ui/dialog/end_of_day_dialog_manager.gd" id="1_mkslt"]
+[ext_resource type="Texture2D" uid="uid://hyrc23gvplb3" path="res://sprites/customers/gym girl.png" id="2_mkslt"]
+[ext_resource type="Script" uid="uid://442f717ma1my" path="res://ui/dialog/dialog_event_sequence.gd" id="2_s1jad"]
+[ext_resource type="PackedScene" uid="uid://dtbfgptmi7ixs" path="res://cafe_environment.tscn" id="3_1vr28"]
+[ext_resource type="Resource" uid="uid://egl5diurx6xw" path="res://ui/dialog/sequences/dialog_event_sequence_day_1_end.tres" id="3_or2q1"]
+
+[node name="EndOfDayDialogScene" type="Node3D" unique_id=1583033720]
+
+[node name="EndOfDayDialogManager" type="Node" parent="." unique_id=661944956 node_paths=PackedStringArray("_dialog_screen")]
+script = ExtResource("1_mkslt")
+_daily_dialog_sequences = Array[ExtResource("2_s1jad")]([ExtResource("3_or2q1"), ExtResource("3_or2q1"), ExtResource("3_or2q1"), ExtResource("3_or2q1"), ExtResource("3_or2q1"), ExtResource("3_or2q1")])
+_dialog_screen = NodePath("../DialogScreen")
+
+[node name="DialogScreen" parent="." unique_id=440681411 instance=ExtResource("1_i5p1t")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=531532454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9249697, 1.7120757, 0.9290296)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1230251743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.876441, 1.0280052, -0.7223476)
+pixel_size = 0.001
+texture = ExtResource("2_mkslt")
+
+[node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("3_1vr28")]

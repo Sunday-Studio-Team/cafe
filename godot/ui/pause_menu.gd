@@ -46,13 +46,13 @@ func _ready() -> void:
 		func():
 			match state:
 				State.CONFIRMING_QUIT:
-					Events.main_menu_loaded.emit()
+					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 				State.CONFIRMING_RESTART:
 					# NOTE: shouldnt this not be visible on restart anyway ? idk
 					visible = false
 					get_tree().paused = false
 					Global.day = 1
-					Events.main_scene_loaded.emit()
+					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 	)
 	no_sure_button.pressed.connect(not_sure)
 

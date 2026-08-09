@@ -10,10 +10,10 @@ func _ready() -> void:
 	play_button.pressed.connect(
 		func():
 			Global.day = 1
-			Events.main_scene_loaded.emit()
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 			Global.in_main_menu = false
 	)
 	quit_button.pressed.connect(
 		func():
-			Events.game_quit.emit()
+			Events.quit_game_requested.emit()
 	)

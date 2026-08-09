@@ -225,17 +225,17 @@ func _on_game_timer_timeout() -> void:
 	await Events.end_screen_finished
 
 	get_tree().paused = false
-	if (
-			Global.daily_profit >= Stats.current.daily_profit_goal
-			and Global.employee_rating >= Stats.current.employee_rating_goal
-	):
-		Global.day += 1
+	var met_profit_goal: bool = Global.daily_profit >= Stats.current.daily_profit_goal
+	var met_employee_rating_goal: bool = Global.employee_rating >= Stats.current.employee_rating_goal
+	if met_profit_goal and met_employee_rating_goal:
+		var just_finished_final_day: bool = Global.day == Global.final_day
+		if just_finished_final_day:
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+			return
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
 	else:
 		Global.day = 1
-	if Global.day == Global.final_day + 1:
-		Events.main_menu_loaded.emit()
-	else:
-		Events.main_scene_loaded.emit()
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 #Minigame is active (Need to turn off regular player controls)
