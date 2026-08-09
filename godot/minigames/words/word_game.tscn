@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ce4dmlcd3n30f"]
 
 [ext_resource type="Script" uid="uid://cqe74vq6ub28c" path="res://minigames/words/word_game.gd" id="1_y5mif"]
+[ext_resource type="Texture2D" uid="uid://b87dv0riwwset" path="res://minigames/assets/sorry_bg.png" id="2_aoemu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5mif"]
 bg_color = Color(0.744344, 0.5673771, 0.24229944, 1)
@@ -17,8 +18,12 @@ script = ExtResource("1_y5mif")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1841265703]
 
 [node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=790116433]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aoemu")
 
 [node name="Timer" type="ProgressBar" parent="CanvasLayer" unique_id=1636477094]
 custom_minimum_size = Vector2(400, 30)
@@ -40,20 +45,23 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/UI" unique_id=650902575]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -180.0
+offset_left = -100.0
+offset_top = -330.0
+offset_right = -100.0
 offset_bottom = -180.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Lanes" type="HBoxContainer" parent="CanvasLayer/UI/CenterContainer" unique_id=525556040]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Letters" type="Control" parent="CanvasLayer" unique_id=518723865]
