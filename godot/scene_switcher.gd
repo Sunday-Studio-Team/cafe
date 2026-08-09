@@ -10,8 +10,6 @@ enum GameScene {
 const LOADING_FADE_IN_TIME := 0.5
 const LOADING_FADE_OUT_TIME := 1.0
 
-static var _instance: SceneSwitcher
-
 @export var loading_screen: ColorRect
 @export var _loading_progress_bar: ProgressBar
 @export var loading_icons: Control
