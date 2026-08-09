@@ -150,12 +150,16 @@ scroll_active = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Select all images with"
+fit_content = true
+scroll_active = false
 
 [node name="Instructions" type="RichTextLabel" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=997226404]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 bbcode_enabled = true
 text = "[color=red]Instructions Here"
+fit_content = true
+scroll_active = false
 
 [node name="BottomText" type="RichTextLabel" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=554797709]
 visible = false
@@ -171,7 +175,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
-columns = 4
+columns = 3
 
 [node name="Button0" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
@@ -198,15 +202,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Button8" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=617140734 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button9" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=29177547 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button10" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1330016194 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button11" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=2099329115 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
 [node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/CanvasLayer/PanelContainer/VBoxContainer" unique_id=2048074803]
