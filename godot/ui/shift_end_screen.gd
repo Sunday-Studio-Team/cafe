@@ -13,47 +13,19 @@ extends CanvasLayer
 @export var bank_total: RichTextLabel
 @export var bank_gain_sound: AudioStreamPlayer
 @export var pencil_scribble: AudioStreamPlayer
-@export var rating_stars_hbox: HBoxContainer
+@export var star_rating_textures: Array[Texture]
+@export var stars_texure_rect: TextureRect
 @export var rating_breakdown: Control
 @export var button: Button
 @export var stars_sound: AudioStreamPlayer
 @export var _free_item_selector_screen_packed_scene: PackedScene
 @export var _free_item_selector_screen_container: Control
 
-var star_texture_rect := TextureRect.new()
-var half_star_texture_rect := TextureRect.new()
-var empty_star_texture_rect := TextureRect.new()
 var value_to_show_on_bank_total: float
 
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-
-	const STAR_SIZE := Vector2(150, 150)
-
-	star_texture_rect.texture = Global.star_texture
-	star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	star_texture_rect.custom_minimum_size = STAR_SIZE
-	star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	#star_texture_rect.size_flags_horizontal = Control.SIZE_EXPAND
-	star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-
-	half_star_texture_rect.texture = Global.half_star_texture
-	half_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	half_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	half_star_texture_rect.custom_minimum_size = STAR_SIZE
-	half_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	#half_star_texture_rect.size_flags_horizontal = Control.SIZE_EXPAND
-	half_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-
-	empty_star_texture_rect.texture = Global.empty_star_texture
-	empty_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	empty_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	empty_star_texture_rect.custom_minimum_size = STAR_SIZE
-	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	#empty_star_texture_rect.size_flags_horizontal = Control.SIZE_EXPAND
-	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 	button.pressed.connect(
 		func():
@@ -68,32 +40,6 @@ func _physics_process(_delta: float) -> void:
 		Global.in_end_screen = true
 	else:
 		Global.in_end_screen = false
-
-
-func draw_stars() -> void:
-	var current_rating := Global.employee_rating
-	var rating_is_even := current_rating % 2 == 0
-	var rating_shown := 0
-
-	const DELAY_BETWEEN_STARS := 0.1
-
-	if rating_is_even:
-		for i in current_rating / 2.0:
-			await get_tree().create_timer(DELAY_BETWEEN_STARS).timeout
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-	else:
-		for i in (current_rating - 1) / 2.0:
-			await get_tree().create_timer(DELAY_BETWEEN_STARS).timeout
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-		await get_tree().create_timer(DELAY_BETWEEN_STARS).timeout
-		rating_stars_hbox.add_child(half_star_texture_rect.duplicate())
-		rating_shown += 1
-
-	for i in 5 - rating_shown:
-		await get_tree().create_timer(DELAY_BETWEEN_STARS).timeout
-		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
 
 
 func _on_time_up() -> void:
@@ -143,10 +89,27 @@ func _on_time_up() -> void:
 		await t.finished
 	await get_tree().create_timer(1).timeout
 
-	# show stars
+	# show rating
 	rating_breakdown.show()
-	draw_stars()
+
+	stars_texure_rect.texture = star_rating_textures[Global.employee_rating]
+
+	var color_to_tint_stars: Color
+
+	if Global.employee_rating >= Stats.current.employee_rating_goal:
+		color_to_tint_stars = Color.GREEN
+	else:
+		color_to_tint_stars = Color.RED
+
 	stars_sound.play()
+
+	create_tween().tween_property(
+		stars_texure_rect,
+		"modulate",
+		Color.WHITE,
+		1,
+	).from(color_to_tint_stars)
+
 	await get_tree().create_timer(2).timeout
 
 	# show outcome text and button
