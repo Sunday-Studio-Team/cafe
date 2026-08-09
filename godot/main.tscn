@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
 [ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
@@ -444,6 +445,17 @@ size = Vector3(1.1627197, 1, 4.01709)
 [sub_resource type="BoxShape3D" id="BoxShape3D_m74q3"]
 size = Vector3(1.2062073, 1, 1.314148)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
 content_margin_left = 10.0
 content_margin_top = 10.0
@@ -468,17 +480,6 @@ corner_radius_bottom_left = 25
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
 bg_color = Color(0.6862745, 0.6, 0.6, 1)
@@ -537,6 +538,7 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Arrows": ExtResource("20_a6jrf"),
 "Captcha": ExtResource("16_cpm2s"),
 "Colors": ExtResource("11_efxa6"),
+"Lines": ExtResource("15_aivy6"),
 "Refill": ExtResource("23_lswn8"),
 "SpillClean": ExtResource("10_inymm"),
 "Typing": ExtResource("20_d13ii")
@@ -815,7 +817,7 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "disable_camera_indicator", "disable_camera_indicator_label", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -857,12 +859,39 @@ item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/A
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
 item_menu_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/MenuPrompt")
+disable_camera_indicator = NodePath("BreakCameraButton")
+disable_camera_indicator_label = NodePath("BreakCameraButton/VBoxContainer/RichTextLabel")
 current_item_ui = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
 item_indicator = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator")
 item_text = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator/RichTextLabel")
 current_item_icon = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
 use_item_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
+
+[node name="BreakCameraButton" type="PanelContainer" parent="UI" unique_id=843488416]
+offset_left = 735.0
+offset_top = 975.0
+offset_right = 1185.0
+offset_bottom = 1035.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BreakCameraButton" unique_id=131349112]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/BreakCameraButton/VBoxContainer" unique_id=1845985033]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[E] Disable Camera (1)"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)

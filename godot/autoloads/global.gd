@@ -39,6 +39,7 @@ var items: Array[Item]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
+var player_in_cctv_los_camera: SecurityCam3D
 var minigame_active := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
