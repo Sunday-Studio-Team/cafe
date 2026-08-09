@@ -55,6 +55,8 @@ func _on_time_up() -> void:
 	# show money breakdown
 	var daily_profit := Global.daily_profit
 	var daily_profit_goal: float = Stats.current.daily_profit_goal
+	var passed_profit_goal := daily_profit >= daily_profit_goal
+
 	var our_cut := daily_profit - daily_profit_goal
 	if our_cut < 0:
 		our_cut = 0
@@ -67,26 +69,32 @@ func _on_time_up() -> void:
 	banked_today.modulate.a = 0
 	money_calculation_screen.show()
 	pencil_scribble.play()
+
 	var calc_screen_tween := create_tween()
-	calc_screen_tween.tween_property(profit, "modulate:a", 1, 0.2)
-	calc_screen_tween.tween_property(boss_cut, "modulate:a", 1, 0.2)
-	calc_screen_tween.tween_property(banked_today, "modulate:a", 1, 0.2)
+
+	if passed_profit_goal:
+		calc_screen_tween.tween_property(profit, "modulate", Color.WHITE, 1).from(Color.GREEN)
+		calc_screen_tween.tween_property(boss_cut, "modulate:a", 1, 0.2)
+		calc_screen_tween.tween_property(banked_today, "modulate:a", 1, 0.2)
+	else:
+		calc_screen_tween.tween_property(profit, "modulate", Color.RED, 1)
 
 	await get_tree().create_timer(2).timeout
 
-	bank_total.show()
-	value_to_show_on_bank_total = Global.bank_money
-	Global.bank_money += our_cut
-	await get_tree().create_timer(1).timeout
-	if Global.bank_money > value_to_show_on_bank_total:
-		bank_gain_sound.play()
-		var t := create_tween().tween_property(
-			self,
-			"value_to_show_on_bank_total",
-			Global.bank_money,
-			0.75,
-		)
-		await t.finished
+	if passed_profit_goal:
+		bank_total.show()
+		value_to_show_on_bank_total = Global.bank_money
+		Global.bank_money += our_cut
+		await get_tree().create_timer(1).timeout
+		if Global.bank_money > value_to_show_on_bank_total:
+			bank_gain_sound.play()
+			var t := create_tween().tween_property(
+				self,
+				"value_to_show_on_bank_total",
+				Global.bank_money,
+				0.75,
+			)
+			await t.finished
 	await get_tree().create_timer(1).timeout
 
 	# show rating
