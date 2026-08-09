@@ -1,0 +1,103 @@
+[gd_resource type="Resource" script_class="DialogEventSequence" format=3 uid="uid://egl5diurx6xw"]
+
+[ext_resource type="Script" uid="uid://hal5vcd7ln" path="res://ui/dialog/dialog_event.gd" id="1_18lur"]
+[ext_resource type="Resource" uid="uid://c3dhpts0jjef3" path="res://ui/dialog/characters/dialog_character_best_friend.tres" id="2_1tmx8"]
+[ext_resource type="Script" uid="uid://nevhqm0xmeoh" path="res://ui/dialog/dialog_event_text.gd" id="3_8bng2"]
+[ext_resource type="Script" uid="uid://dylp3y1tb6coc" path="res://ui/dialog/dialog_option.gd" id="4_6s1uq"]
+[ext_resource type="Script" uid="uid://442f717ma1my" path="res://ui/dialog/dialog_event_sequence.gd" id="5_tf1xf"]
+[ext_resource type="Script" uid="uid://8ab01c5b6xxc" path="res://ui/dialog/dialog_event_options.gd" id="6_4ar74"]
+
+[sub_resource type="Resource" id="Resource_v2yq3"]
+script = ExtResource("3_8bng2")
+dialog_character = ExtResource("2_1tmx8")
+dialog_text = "Hello! This is some test dialog from your best friend."
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_pc810"]
+script = ExtResource("3_8bng2")
+dialog_text = "Let's test the dialog options. Heads or tails?"
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_5xw23"]
+script = ExtResource("3_8bng2")
+dialog_text = "It's tails! Sorry."
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_hrbbq"]
+script = ExtResource("5_tf1xf")
+dialog_events = Array[ExtResource("1_18lur")]([SubResource("Resource_5xw23")])
+metadata/_custom_type_script = "uid://442f717ma1my"
+
+[sub_resource type="Resource" id="Resource_ewf3v"]
+script = ExtResource("4_6s1uq")
+option_text = "Heads."
+dialog_event_sequence = SubResource("Resource_hrbbq")
+metadata/_custom_type_script = "uid://dylp3y1tb6coc"
+
+[sub_resource type="Resource" id="Resource_gyoo2"]
+script = ExtResource("3_8bng2")
+dialog_text = "It's heads! Sorry."
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_lcq1d"]
+script = ExtResource("5_tf1xf")
+dialog_events = Array[ExtResource("1_18lur")]([SubResource("Resource_gyoo2")])
+metadata/_custom_type_script = "uid://442f717ma1my"
+
+[sub_resource type="Resource" id="Resource_74yr5"]
+script = ExtResource("4_6s1uq")
+option_text = "Tails."
+dialog_event_sequence = SubResource("Resource_lcq1d")
+metadata/_custom_type_script = "uid://dylp3y1tb6coc"
+
+[sub_resource type="Resource" id="Resource_1tmx8"]
+script = ExtResource("3_8bng2")
+dialog_text = "...?"
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_18lur"]
+script = ExtResource("5_tf1xf")
+dialog_events = Array[ExtResource("1_18lur")]([SubResource("Resource_1tmx8")])
+metadata/_custom_type_script = "uid://442f717ma1my"
+
+[sub_resource type="Resource" id="Resource_kmna6"]
+script = ExtResource("4_6s1uq")
+option_text = "Neither."
+dialog_event_sequence = SubResource("Resource_18lur")
+metadata/_custom_type_script = "uid://dylp3y1tb6coc"
+
+[sub_resource type="Resource" id="Resource_6s1uq"]
+script = ExtResource("3_8bng2")
+dialog_text = "You can't pick both."
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_tf1xf"]
+script = ExtResource("3_8bng2")
+dialog_text = "..."
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[sub_resource type="Resource" id="Resource_8bng2"]
+script = ExtResource("5_tf1xf")
+dialog_events = Array[ExtResource("1_18lur")]([SubResource("Resource_6s1uq"), SubResource("Resource_tf1xf")])
+metadata/_custom_type_script = "uid://442f717ma1my"
+
+[sub_resource type="Resource" id="Resource_ltk1g"]
+script = ExtResource("4_6s1uq")
+option_text = "Both."
+dialog_event_sequence = SubResource("Resource_8bng2")
+metadata/_custom_type_script = "uid://dylp3y1tb6coc"
+
+[sub_resource type="Resource" id="Resource_ucut3"]
+script = ExtResource("6_4ar74")
+dialog_options = Array[ExtResource("4_6s1uq")]([SubResource("Resource_ewf3v"), SubResource("Resource_74yr5"), SubResource("Resource_kmna6"), SubResource("Resource_ltk1g")])
+metadata/_custom_type_script = "uid://8ab01c5b6xxc"
+
+[sub_resource type="Resource" id="Resource_y2ra7"]
+script = ExtResource("3_8bng2")
+dialog_character = ExtResource("2_1tmx8")
+dialog_text = "OK, that's all!"
+metadata/_custom_type_script = "uid://nevhqm0xmeoh"
+
+[resource]
+script = ExtResource("5_tf1xf")
+dialog_events = Array[ExtResource("1_18lur")]([SubResource("Resource_v2yq3"), SubResource("Resource_pc810"), SubResource("Resource_ucut3"), SubResource("Resource_y2ra7")])

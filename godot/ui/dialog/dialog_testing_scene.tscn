@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b0nxtbhq1jhc6"]
+
+[ext_resource type="PackedScene" uid="uid://chmykmsmk4ne8" path="res://ui/dialog/dialog_screen.tscn" id="1_t83wb"]
+[ext_resource type="Texture2D" uid="uid://hyrc23gvplb3" path="res://sprites/customers/gym girl.png" id="2_p0uiw"]
+
+[node name="DialogTestingScene" type="Node3D" unique_id=1583033720]
+
+[node name="DialogScreen" parent="." unique_id=440681411 instance=ExtResource("1_t83wb")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=531532454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63673794, 1.3993378)
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1230251743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.38408244)
+pixel_size = 0.001
+texture = ExtResource("2_p0uiw")

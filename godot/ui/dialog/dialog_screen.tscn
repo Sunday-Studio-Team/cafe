@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://chmykmsmk4ne8"]
+
+[ext_resource type="Texture2D" uid="uid://bwwsxgaa8yyl5" path="res://Assets/UI/dialog/dialog_bubble.png" id="1_etqkd"]
+[ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="1_srxfy"]
+[ext_resource type="Script" uid="uid://bcd4ixvwvyuh5" path="res://ui/dialog/dialog_screen.gd" id="1_ucut3"]
+[ext_resource type="Resource" uid="uid://egl5diurx6xw" path="res://ui/dialog/sequences/dialog_event_sequence_day_1_end.tres" id="2_ewf3v"]
+[ext_resource type="Script" uid="uid://bhoeh0y4n2gwo" path="res://ui/dialog/dialog_view.gd" id="2_howv1"]
+[ext_resource type="Script" uid="uid://cwvm1qg8e7fq2" path="res://ui/dialog/dialog_options_view.gd" id="6_ewf3v"]
+[ext_resource type="PackedScene" uid="uid://ctxk7tkg21qiw" path="res://ui/dialog/dialog_option_view.tscn" id="7_74yr5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
+bg_color = Color(0, 0, 0, 0.5019608)
+
+[node name="DialogScreen" type="Control" unique_id=440681411 node_paths=PackedStringArray("_dialog_view", "_dialog_options_view")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ucut3")
+_dialog_view = NodePath("DialogView")
+_dialog_options_view = NodePath("DialogOptionsView")
+_dialog_event_sequence = ExtResource("2_ewf3v")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=378514143]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -897.0
+offset_top = -316.0
+offset_right = -390.0
+offset_bottom = 762.0447
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_srxfy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DialogView" type="Control" parent="." unique_id=1587268639 node_paths=PackedStringArray("_character_name_label", "_dialog_text_label")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 506.0
+offset_top = -268.5
+offset_right = 506.0
+offset_bottom = -268.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_howv1")
+_character_name_label = NodePath("Control2/MarginContainer/NameRichTextLabel")
+_dialog_text_label = NodePath("Control/MarginContainer/DialogRichTextLabel")
+
+[node name="TextureRect" type="TextureRect" parent="DialogView" unique_id=338013930]
+custom_minimum_size = Vector2(434, 245)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.48572
+offset_top = -203.5
+offset_right = 360.48572
+offset_bottom = 203.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_etqkd")
+stretch_mode = 5
+flip_h = true
+
+[node name="Control" type="Control" parent="DialogView" unique_id=354391805]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -339.0
+offset_top = -115.5
+offset_right = 341.0
+offset_bottom = 125.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogView/Control" unique_id=457194238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 16
+
+[node name="DialogRichTextLabel" type="RichTextLabel" parent="DialogView/Control/MarginContainer" unique_id=801142125]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "This is some test dialog!"
+
+[node name="Control2" type="Control" parent="DialogView" unique_id=680104658]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -172.5
+offset_right = 276.0
+offset_bottom = -88.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="DialogView/Control2" unique_id=1569575924]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_13qdw")
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogView/Control2" unique_id=352842342]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="NameRichTextLabel" type="RichTextLabel" parent="DialogView/Control2/MarginContainer" unique_id=1829826842]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+bbcode_enabled = true
+text = "[b]CHARACTER NAME[/b]"
+vertical_alignment = 1
+
+[node name="DialogOptionsView" type="Control" parent="." unique_id=175947338 node_paths=PackedStringArray("_option_views_container")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -842.0
+offset_top = 252.0
+offset_right = 842.0
+offset_bottom = 469.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_ewf3v")
+_option_views_container = NodePath("OptionViewsGridContainer")
+_dialog_option_view_packed_scene = ExtResource("7_74yr5")
+metadata/_edit_group_ = true
+
+[node name="OptionViewsGridContainer" type="GridContainer" parent="DialogOptionsView" unique_id=1542790145]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
