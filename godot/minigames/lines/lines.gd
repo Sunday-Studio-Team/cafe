@@ -59,7 +59,7 @@ func _on_button_pressed():
 			for item in choices.keys():
 				if choices[item] == 1:
 					choices.erase(item)
-			wire_1.hide()
+			wire_1.disabled = true
 
 
 func _on_button_2_pressed():
@@ -76,7 +76,7 @@ func _on_button_2_pressed():
 			for item in choices.keys():
 				if choices[item] == 2:
 					choices.erase(item)
-			wire_2.hide()
+			wire_2.disabled = true
 		
 
 func _on_button_3_pressed():
@@ -93,9 +93,9 @@ func _on_button_3_pressed():
 			for item in choices.keys():
 				if choices[item] == 3:
 					choices.erase(item)
-			wire_3.hide()
+			wire_3.disabled = true
 	
-#Sends out needed information if the vicotry is achived.
+#Sends out needed information if the victory is achived.
 func victory():
 	await get_tree().create_timer(0.5, false).timeout
 	Events.emit_signal("minigame_end")

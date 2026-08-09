@@ -7,9 +7,12 @@ class_name SecurityCam3D
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
+@export var interactable : Interactable
+var camera_disabled : bool = false
 @export var tries_until_disabled: int = 3
-@export var camera_disabled := false
 var disable_minigames := ["Lines"]
+
+
 # we duplicate the ray many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
 var all_rays: Array[RayCast3D]
@@ -48,7 +51,6 @@ func _physics_process(_delta: float) -> void:
 
 	var player_in_spotlight := false
 
-	if not camera_disabled:
 	for r in all_rays:
 		var collider = r.get_collider()
 		if collider == Global.player:
@@ -73,14 +75,24 @@ func _physics_process(_delta: float) -> void:
 # we need both a local and global var here to track if the player is in this
 # spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
 # things like this light flashing red when we enter a separate cameara's fov)
-		if player_in_spotlight:
-			spotlight.light_color = Color.RED
-			Global.player_in_cctv_los = true
-			Global.player_in_cctv_los_camera = self
-			if Input.is_action_just_pressed("interact") and Global.player_in_cctv_los_camera == self:
-				open_camera_minigame()
-		else:
-			spotlight.light_color = Color.WHITE
+	if player_in_spotlight:
+		spotlight.light_color = Color.RED
+		Global.player_in_cctv_los = true
+		Global.player_in_cctv_los_camera = self
+		if Input.is_action_just_pressed("interact") and Global.player_in_cctv_los_camera == self and not Global.owned_items.any(func(x: Item): return x.name == "Whipped Cream"):
+			open_camera_minigame()
+	else:
+		spotlight.light_color = Color.WHITE
+
+func disable_camera() -> void:
+	camera_disabled = true
+	spotlight.visible = false
+	rotate_tween.stop()
+
+func enable_camera() -> void:
+	camera_disabled = false
+	spotlight.visible = true
+	rotate_tween.play()
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
 func create_rays() -> void:
@@ -96,10 +108,6 @@ func create_rays() -> void:
 			spotlight.add_child(new_ray)
 			all_rays.append(new_ray)
 
-func disable_camera() -> void:
-	camera_disabled = true
-	spotlight.light_color = Color.DIM_GRAY
-	rotate_tween.stop()
 
 func try_disable_camera() -> void:
 	if camera_disabled:
@@ -108,6 +116,8 @@ func try_disable_camera() -> void:
 	tries_until_disabled -= 1
 	if tries_until_disabled <= 0:
 		disable_camera()
+		await get_tree().create_timer(20, false).timeout
+		enable_camera()
 
 func open_camera_minigame() -> void:
 	if camera_disabled:
@@ -134,9 +144,7 @@ func activate_interaction(item: Item):
 	if item != null:
 		print(item.name)
 	if item != null and item.name == "Whipped Cream":
-		camera_disabled = true
-		spotlight.visible = false
+		disable_camera()
 		await get_tree().create_timer(8, false).timeout
-		camera_disabled = false
-		spotlight.visible = true
+		enable_camera()
 	pass
