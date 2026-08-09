@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
 [ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
@@ -1395,6 +1396,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3nq1b")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
 content_margin_left = 10.0
 content_margin_top = 10.0
@@ -1419,17 +1431,6 @@ corner_radius_bottom_left = 25
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
 bg_color = Color(0.6862745, 0.6, 0.6, 1)
@@ -1488,6 +1489,7 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Arrows": ExtResource("20_a6jrf"),
 "Captcha": ExtResource("16_cpm2s"),
 "Colors": ExtResource("11_efxa6"),
+"Lines": ExtResource("15_aivy6"),
 "Refill": ExtResource("23_lswn8"),
 "SpillClean": ExtResource("10_inymm"),
 "Typing": ExtResource("20_d13ii")
@@ -1763,7 +1765,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="Sketchfab_Scene" parent="Lights/customer lights" unique_id=768339213 instance=ExtResource("38_8tqy7")]
 transform = Transform3D(0.3452663, 0, 0, 0, 0.3452663, 0, 0, 0, 0.3452663, -0.03319618, -0.19623488, 0.07843456)
 
-[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="0" unique_id=895061839]
+[node name="circlelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="0" unique_id=1716810175]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1654143359]
@@ -1774,13 +1776,13 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="1" unique_id=1595560103]
+[node name="squarelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="1" unique_id=976313027]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="squarelamp_lambert1_0" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1845172364) index="0" unique_id=1782853931]
+[node name="squarelamp_lambert1_0" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1178192340) index="0" unique_id=69081983]
 visible = false
 
-[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1845172364) index="1" unique_id=398972065]
+[node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(768339213, 1178192340) index="1" unique_id=398972065]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -1788,7 +1790,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 451585417) index="2" unique_id=555267135]
+[node name="linelight" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(768339213, 2047186526) index="2" unique_id=62528304]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="Lights/customer lights/Sketchfab_Scene/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1905931570]
@@ -2130,10 +2132,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="Environment/CustomerArea" unique_id=1246568253 instance=ExtResource("47_acld0")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 1962115550) index="2" unique_id=1461719258]
+[node name="Window_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1246568253, 1609833982) index="2" unique_id=404602307]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 43957841) index="2" unique_id=1538735026]
+[node name="Window2_glass_0" parent="Environment/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1246568253, 1136610341) index="2" unique_id=1547282853]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="Environment/CustomerArea" unique_id=457188625]
@@ -2606,7 +2608,7 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "disable_camera_indicator", "disable_camera_indicator_label", "current_item_ui", "hammer_indicator", "current_item_icon", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -2648,11 +2650,38 @@ item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/A
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
 item_menu_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/MenuPrompt")
+disable_camera_indicator = NodePath("BreakCameraButton")
+disable_camera_indicator_label = NodePath("BreakCameraButton/VBoxContainer/RichTextLabel")
 current_item_ui = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
 hammer_indicator = NodePath("HUD/VBoxContainer/Interactable/HammerIndicator")
 current_item_icon = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
 use_item_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
+
+[node name="BreakCameraButton" type="PanelContainer" parent="UI" unique_id=843488416]
+offset_left = 735.0
+offset_top = 975.0
+offset_right = 1185.0
+offset_bottom = 1035.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BreakCameraButton" unique_id=131349112]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/BreakCameraButton/VBoxContainer" unique_id=1845985033]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[E] Disable Camera (1)"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)

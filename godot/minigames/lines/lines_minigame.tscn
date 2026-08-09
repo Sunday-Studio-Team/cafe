@@ -4,18 +4,4 @@
 
 [node name="LinesMinigame" type="Node2D" unique_id=1898571375]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953665671]
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=847814111]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -376.0
-offset_top = 48.0
-offset_right = 376.0
-offset_bottom = 153.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 76
-text = "click to cut the wires"
-
-[node name="Lines" parent="CanvasLayer" unique_id=1577892201 instance=ExtResource("1_5mq45")]
+[node name="Lines" parent="." unique_id=1577892201 instance=ExtResource("1_5mq45")]
