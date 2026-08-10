@@ -61,7 +61,10 @@ func _on_time_up() -> void:
 	if our_cut < 0:
 		our_cut = 0
 
-	profit.text = "[color=green]+[/color] money made today: %s" % Global.float_to_price(daily_profit)
+	profit.text = "[color=green]+[/color] money made today: %s/%s" % [
+		Global.float_to_price(daily_profit),
+		Global.float_to_price(daily_profit_goal),
+	]
 	boss_cut.text = "[color=red]-[/color] boss's cut: %s" % Global.float_to_price(daily_profit_goal)
 	banked_today.text = "= [color=gold]%s[/color] banked" % Global.float_to_price(our_cut)
 	profit.modulate.a = 0
