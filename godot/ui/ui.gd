@@ -397,6 +397,11 @@ func update_interactable_ui() -> void:
 	if hovered_interactable != null:
 		interactable_indicator.show()
 
+		# show prompt to use active item if we need to
+
+		# TODO: replace some of these unsafe refs with the item names with refs
+		# to the actual items as export vars
+
 		if (
 				hovered_interactable.name == "FixMachineButton"
 				and Global.equipped_item != null
@@ -404,14 +409,24 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			item_text.text = "[Q] HAMMER 💥"
-		
-		if(
+
+		elif (
 				hovered_interactable.name == "Spill"
 				and Global.equipped_item != null
 				and Global.equipped_item.name == "super scrubber 2000"
 		):
 			item_indicator.show()
 			item_text.text = "[Q] SCRUBBER 🧼"
+
+		# NOTE: I DONT THINK THIS ONE WORKS
+		elif (
+				hovered_interactable.display_name == "Camera"
+				and Global.equipped_item != null
+				and Global.equipped_item.name == "whipped cream"
+		):
+			interactable_label.text = (
+					"[Q] WHIPPED CREAM"
+			)
 
 		else:
 			item_indicator.hide()
@@ -432,16 +447,6 @@ func update_interactable_ui() -> void:
 					"[E] - "
 					+ Global.hovered_interactable.display_name
 			)
-		
-		if hovered_interactable.display_name == "Camera":
-			
-			if Global.equipped_item != null and Global.equipped_item.name == "Whipped Cream":
-				interactable_label.text = (
-					"[Q] - Whipped Cream The Camera"
-				)
-			else:
-				interactable_indicator.hide()
-			
 
 	else:
 		interactable_indicator.hide()
