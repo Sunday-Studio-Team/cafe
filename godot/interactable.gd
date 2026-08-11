@@ -5,7 +5,10 @@ extends Area3D
 # and modifying _on_interacted(), or by connecting this signal to a function
 # in another script
 signal interacted
-signal used_active_item(item: Item) #Uses an item on the interactable
+# this is like the interacted signal but it gets emitted when we pres Q instead of E .
+# since it emits a ref to the equipped item, we can check that wherever we recieve
+# the signal and have something trigger if we used a certain item on this interactable
+signal used_active_item(item: Item)
 
 ## the name that will show in UI for this interactable
 @export var display_name: String
@@ -37,7 +40,7 @@ func _init() -> void:
 	enabled = visible
 	visibility_changed.connect(
 		func():
-			enabled = visible
+			enabled = visible,
 	)
 
 	set_collision_layer_value(1, false)
@@ -48,10 +51,8 @@ func _process(delta: float) -> void:
 	_update_material()
 
 	if (
-			Global.hovered_interactable != self
-			or not enabled
-			or Global.in_pc_ui
-			or Global.minigame_active
+		Global.hovered_interactable != self or not enabled
+		or Global.in_pc_ui or Global.minigame_active
 	):
 		if not keep_progress_on_interrupt:
 			time_held = 0
@@ -83,10 +84,8 @@ func _on_interacted() -> void:
 
 func _update_material() -> void:
 	if (
-			Global.hovered_interactable != self
-			or not enabled
-			or Global.in_pc_ui
-			or Global.minigame_active
+		Global.hovered_interactable != self or not enabled
+		or Global.in_pc_ui or Global.minigame_active
 	):
 		if mesh:
 			mesh.material_overlay = null
