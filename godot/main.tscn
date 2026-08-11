@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
 [ext_resource type="Resource" uid="uid://drg362efjsksg" path="res://items/clock.tres" id="4_12204"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
+[ext_resource type="Resource" uid="uid://bxbcn6yks4tpc" path="res://items/teleporter.tres" id="4_yvsr8"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
@@ -71,6 +72,7 @@
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
 [ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
+[ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
 [ext_resource type="SpriteFrames" uid="uid://cricks5lh0svk" path="res://sprites/sprite_frames_resources/hand_animations_sprite_frames.tres" id="108_asu84"]
 [ext_resource type="Texture2D" uid="uid://c3dx5sicliquh" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_tab.png" id="114_gfi32"]
@@ -490,7 +492,12 @@ bg_color = Color(0.6862745, 0.6, 0.6, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
+size = Vector3(1, 0.2680664, 1)
+
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "machines", "cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -511,6 +518,7 @@ day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
 overtime_item = ExtResource("3_ryguw")
+teleporter = ExtResource("4_yvsr8")
 camera_posters = [null, null, null]
 minigame_controller = NodePath("MinigameController")
 clock_item = ExtResource("4_12204")
@@ -520,6 +528,8 @@ clock_item_start_sound = NodePath("ClockItemStartSound")
 special_shift_icon = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
 special_shift_text = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
 special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+teleporter1 = NodePath("Teleporter1")
+teleporter2 = NodePath("Teleporter2")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1799,6 +1809,54 @@ offset_right = 2216.0
 offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
+
+[node name="Teleporter1" type="Area3D" parent="." unique_id=247187360 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5923508, 5.8457847)
+visible = false
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter1" unique_id=731332946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4384332, -0.13512087, 2.9732747)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter1/CollisionShape3D" unique_id=790686180]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter1/CollisionShape3D" unique_id=2091540570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter1" unique_id=743376530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.010804, -0.20572126, -7.0794954)
+
+[node name="Teleporter2" type="Area3D" parent="." unique_id=469409372 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1847016, 11.691569)
+visible = false
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter2" unique_id=1650664057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3723807, -0.76275265, -8.737095)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter2/CollisionShape3D" unique_id=1046926191]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter2/CollisionShape3D" unique_id=966457308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter2" unique_id=456152824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.798117)
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 

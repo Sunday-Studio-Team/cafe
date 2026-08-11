@@ -22,6 +22,7 @@ static var seen_breakdown_popup := false
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
+@export var teleporter: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -37,6 +38,8 @@ static var seen_breakdown_popup := false
 @export var special_shift_icon: TextureRect
 @export var special_shift_text: Label
 @export var special_shift_title: Label
+@export var teleporter1: Teleporter
+@export var teleporter2: Teleporter
 
 
 func _enter_tree() -> void:
@@ -111,6 +114,13 @@ func _ready() -> void:
 		special_shift_title.text = Global.current_special_shift.name
 		special_shift_icon.texture = Global.current_special_shift.icon
 		Global.popups["special shift"].open()
+	
+	if teleporter in Global.owned_items:
+		teleporter1.enable_teleporter()
+		teleporter2.enable_teleporter()
+	else:
+		teleporter1.disable_teleporter()
+		teleporter2.disable_teleporter()
 
 
 func get_stats() -> void:
