@@ -4,14 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bbl1ykvtf1wot" path="res://minigames/ingredients_refill/coffee_bean.tscn" id="2_51asp"]
 [ext_resource type="Texture2D" uid="uid://behdxsa15jcyk" path="res://sprites/measuring_cup.png" id="2_m1jwq"]
 [ext_resource type="Texture2D" uid="uid://duttrswast3t6" path="res://sprites/coffee_bag.png" id="3_51asp"]
-[ext_resource type="PackedScene" uid="uid://c6yjlm2dq0ooh" path="res://minigames/ingredients_refill/screw_coffee_bean.tscn" id="3_bjc5e"]
 [ext_resource type="AudioStream" uid="uid://l86h8xt0qx7a" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_1.mp3" id="4_5i8lf"]
-[ext_resource type="PackedScene" uid="uid://bnsmlrlfh5qwi" path="res://minigames/ingredients_refill/golden_coffee_bean.tscn" id="4_ir0rs"]
 [ext_resource type="AudioStream" uid="uid://cb10bwbw0dexy" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_2.mp3" id="5_j5bal"]
-[ext_resource type="PackedScene" uid="uid://c2puysinr51lx" path="res://minigames/ingredients_refill/bomb_coffee_bean.tscn" id="5_mev0o"]
 [ext_resource type="AudioStream" uid="uid://cptjbekcax0eo" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_3.mp3" id="6_47f3m"]
-[ext_resource type="Texture2D" uid="uid://cs32g8qm3rrge" path="res://minigames/ingredients_refill/normal/facial.png" id="6_mev0o"]
-[ext_resource type="Texture2D" uid="uid://bxs744l0liimn" path="res://minigames/ingredients_refill/normal/lid.png" id="7_jjgte"]
 [ext_resource type="AudioStream" uid="uid://cxroyv25hkhls" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_4.mp3" id="7_mx0ba"]
 [ext_resource type="AudioStream" uid="uid://cfyppjyltvho2" path="res://audio/refill_minigame/bag_shake_loop.wav" id="9_j5bal"]
 [ext_resource type="AudioStream" uid="uid://d3h2qcon3jj14" path="res://audio/refill_minigame/gain_score/refill_gain_score_1.mp3" id="10_5w3ak"]
@@ -23,7 +18,7 @@
 size = Vector2(244, 326)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ffxp"]
-size = Vector2(17.5, 419)
+size = Vector2(20, 350)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 random_pitch = 1.0442737
@@ -70,9 +65,6 @@ position = Vector2(0, 2)
 script = ExtResource("1_2efvg")
 cup = NodePath("Cup")
 bean_scene = ExtResource("2_51asp")
-screw_bean_scene = ExtResource("3_bjc5e")
-golden_bean_scene = ExtResource("4_ir0rs")
-bomb_bean_scene = ExtResource("5_mev0o")
 pour_point = NodePath("Bag/PourPoint")
 bean_spawn_timer = NodePath("BeanSpawnTimer")
 cup_area = NodePath("Cup/CupArea")
@@ -85,39 +77,27 @@ gain_score_sound = NodePath("../GainScoreSound")
 
 [node name="Cup" type="CharacterBody2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1768243399]
 z_index = 1
-position = Vector2(900, 900)
+position = Vector2(900, 1000)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=241036928]
-scale = Vector2(0.28, 0.28)
-texture = ExtResource("6_mev0o")
-offset = Vector2(-139, -728)
-
-[node name="Sprite2D2" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=213253411]
-position = Vector2(-139, -728)
-texture = ExtResource("7_jjgte")
-
-[node name="Sprite2D3" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=1037288139]
-visible = false
-scale = Vector2(3.5714285, 3.5714285)
 texture = ExtResource("2_m1jwq")
 
 [node name="CupArea" type="Area2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1016481044]
-position = Vector2(0, -100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup/CupArea" unique_id=856955422]
 position = Vector2(-26, 23)
 shape = SubResource("RectangleShape2D_vn1tu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1320358170]
-position = Vector2(-153.75, -93.5)
+position = Vector2(-150, 24)
 shape = SubResource("RectangleShape2D_0ffxp")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=156292515]
-position = Vector2(99.5, -100)
+position = Vector2(97, 24)
 shape = SubResource("RectangleShape2D_0ffxp")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=989659882]
-position = Vector2(-30, 86)
+position = Vector2(-30, 186)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
 
@@ -127,7 +107,6 @@ volume_db = -15.0
 max_polyphony = 10
 
 [node name="CupBoundaries" type="Area2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=285867703]
-position = Vector2(0, -100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup/CupBoundaries" unique_id=1767360864]
 position = Vector2(-145, 22)
@@ -187,10 +166,6 @@ custom_minimum_size = Vector2(500, 100)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_top = -5.0
-offset_right = 23.0
-offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 8
