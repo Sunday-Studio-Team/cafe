@@ -1,16 +1,16 @@
-[gd_scene format=3 uid="uid://bbl1ykvtf1wot"]
+[gd_scene format=3 uid="uid://c6yjlm2dq0ooh"]
 
-[ext_resource type="Texture2D" uid="uid://d2cqpi0gkd51p" path="res://minigames/ingredients_refill/normal/coffee bean.png" id="1_qurre"]
+[ext_resource type="Texture2D" uid="uid://cjjos2le7v8gp" path="res://minigames/ingredients_refill/screw/screw.png" id="1_y3kfk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 25.0
 height = 80.0
 
-[node name="Bean2" type="RigidBody2D" unique_id=68542228]
+[node name="Bean" type="RigidBody2D" unique_id=68542228]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_qurre")
+texture = ExtResource("1_y3kfk")
 offset = Vector2(-66, 478.405)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]

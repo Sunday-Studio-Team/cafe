@@ -609,6 +609,7 @@ func finished_make_drink_manually() -> void:
 
 
 func break_down() -> void:
+	broken_down = true
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
@@ -629,7 +630,7 @@ func break_down() -> void:
 	Global.breakdowns_this_shift += 1
 
 	timer.paused = true
-	broken_down = true
+	
 	hum_sound.stop()
 
 
