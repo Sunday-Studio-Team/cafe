@@ -211,6 +211,7 @@ func refresh_active_items():
 
 
 func deactivate_active_item(target_item: Item):
+	Global.equipped_item = null
 	for item in owned_items:
 		if item.name == target_item.name:
 			item.can_be_used = false

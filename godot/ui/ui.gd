@@ -50,6 +50,10 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var current_item_icon: TextureRect
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
+@export_category("item refs")
+@export var hammer:Item
+@export var scrubber:Item
+@export var whipped_cream:Item
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -405,7 +409,7 @@ func update_interactable_ui() -> void:
 		if (
 				hovered_interactable.name == "FixMachineButton"
 				and Global.equipped_item != null
-				and Global.equipped_item.name == "hammer"
+				and Global.equipped_item == hammer
 		):
 			item_indicator.show()
 			item_text.text = "[Q] HAMMER 💥"
@@ -413,20 +417,18 @@ func update_interactable_ui() -> void:
 		elif (
 				hovered_interactable.name == "Spill"
 				and Global.equipped_item != null
-				and Global.equipped_item.name == "super scrubber 2000"
+				and Global.equipped_item == scrubber
 		):
 			item_indicator.show()
 			item_text.text = "[Q] SCRUBBER 🧼"
 
-		# NOTE: I DONT THINK THIS ONE WORKS
 		elif (
 				hovered_interactable.display_name == "Camera"
 				and Global.equipped_item != null
-				and Global.equipped_item.name == "whipped cream"
+				and Global.equipped_item == whipped_cream
 		):
-			interactable_label.text = (
-					"[Q] WHIPPED CREAM"
-			)
+			item_indicator.show()
+			item_text.text = "[Q] WHIPPED CREAM"
 
 		else:
 			item_indicator.hide()

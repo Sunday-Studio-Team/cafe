@@ -133,8 +133,8 @@ func _ready() -> void:
 	t.tween_property(spill_warning, "modulate", Color.RED, 1)
 
 	#Active Items
-	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
-	spill_interactable.interactable_active_item.connect(on_active_item_used_spill)
+	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
+	spill_interactable.used_active_item.connect(on_active_item_used_spill)
 
 
 func _physics_process(_delta: float) -> void:
@@ -461,7 +461,6 @@ func display_drink_score() -> void:
 func fix_machine(hammer: bool = false) -> void:
 	if hammer:
 		hammer_hit_sound.play()
-		Global.equipped_item = null
 	fixed_sound.play()
 
 	fix_machine_button.enabled = false
@@ -657,7 +656,7 @@ func on_active_item_used_machine(item: Item):
 func on_active_item_used_spill(item: Item):
 	if item == null:
 		return
-	
+
 	if item == scrubber_item:
 		ErasableCanvas.used_scrubber = true
 		Global.deactivate_active_item(item)
