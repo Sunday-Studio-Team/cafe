@@ -13,7 +13,7 @@ func _ready():
 
 func _process(delta):
 	if falling and not dragging and not locked:
-		position.y += fall_speed * delta
+		position.y += fall_speed * delta # Make letters fall
 
 func _gui_input(event):
 	if locked:
@@ -36,7 +36,5 @@ func check_drop():
 				locked = true
 				global_position = lane.global_position
 				game_manager.on_correct_placement()
-			else:
-				game_manager.on_wrong_placement()
 			return
 	falling = true 
