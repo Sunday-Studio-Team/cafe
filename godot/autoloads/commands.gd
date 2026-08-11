@@ -122,7 +122,7 @@ func set_day(day: String) -> void:
 		return
 
 	Global.day = int(day)
-	Events.main_scene_loaded.emit()
+	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 	Console.print_line("skipping to day %s" % day)
 
 

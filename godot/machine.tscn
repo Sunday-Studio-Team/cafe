@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
 [ext_resource type="Resource" uid="uid://dbjwbruh16sas" path="res://items/tip_jar.tres" id="2_yuuq8"]
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="3_wuddj"]
+[ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://items/super_scrubber_2000.tres" id="4_2ajbd"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="4_xurph"]
 [ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
@@ -21,17 +22,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
-transparency = 1
-albedo_color = Color(1, 0.57254905, 0.57254905, 0.6862745)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1hddr"]
-material = SubResource("StandardMaterial3D_yuuq8")
-size = Vector3(0.15, 0.15, 0.15)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_loq51"]
-size = Vector3(0.25, 0.5, 0.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vn1tu"]
 size = Vector3(1.5, 1, 1)
@@ -75,7 +65,7 @@ size = Vector3(0.9, 1.2, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
 size = Vector3(0.9, 1.2, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_clean_particles", "tip_label", "hammer_hit_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "price_label", "drink_customer_score_label", "make_drink_button", "accept_button", "reject_button", "refill_button", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "time_bonus_panel", "time_bonus_label", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_clean_particles", "tip_label", "hammer_hit_sound")] groups=["machines"]]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
 spot_for_player = NodePath("SpotForPlayer")
@@ -89,12 +79,12 @@ drink_customer_score_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxCo
 make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/MakeDrinkButton")
 accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton")
 reject_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RejectButton")
-refill_button = NodePath("RefillButton")
+refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsUI/RefillButton")
 fix_machine_button = NodePath("FixMachineButton")
 breakdown_timer = NodePath("BreakdownTimer")
 breakdown_sound = NodePath("BreakdownSound")
 no_ingredients_sound = NodePath("NoIngredientsSound")
-ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsMeter/ProgressBar")
+ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsUI/IngredientsMeter/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
 tip_jar_item = ExtResource("2_yuuq8")
 spill_interactable = NodePath("Spill")
@@ -105,6 +95,7 @@ gui_3d = NodePath("3DGui")
 customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer")
 customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TextureProgressBar")
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
+get_ingredients_prompt = NodePath("3DGui/Screen/SubViewport/MachineUI/GetIngredientsPrompt")
 time_bonus_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel")
 time_bonus_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TimeBonusPanel/TimeBonusText")
 order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo")
@@ -124,6 +115,7 @@ fixed_sound = NodePath("FixedSound")
 spill_clean_particles = NodePath("SpillCleanParticles")
 tip_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/TipLabel")
 hammer_item = ExtResource("3_wuddj")
+scrubber_item = ExtResource("4_2ajbd")
 hammer_hit_sound = NodePath("HammerHitSound")
 popup_storage_room = ExtResource("4_xurph")
 popup_go_to_spill = ExtResource("5_8sjwk")
@@ -174,18 +166,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
 shadow_enabled = true
-
-[node name="RefillButton" type="Area3D" parent="." unique_id=644204256 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69250464, 0.9077126, 0.69125086)
-script = ExtResource("5_ioi8x")
-display_name = "[color=pink]refill ingredients"
-mesh = NodePath("MeshInstance3D")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RefillButton" unique_id=1086695979]
-mesh = SubResource("BoxMesh_1hddr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RefillButton" unique_id=1205924170]
-shape = SubResource("BoxShape3D_loq51")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
 stream = ExtResource("6_llj37")

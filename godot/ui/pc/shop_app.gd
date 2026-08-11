@@ -15,6 +15,34 @@ var number_of_items_to_show := 3
 var items_in_shop: Array[Item]
 
 
+## Gives the requested number of items randomly, from the pool of items currently unowned by the player.
+## If requested_num_items <= the remaining unowned items, it will give all the remaining items,
+## which may be less than the requested number.
+static func get_random_unowned_items(requested_num_items: int) -> Array[Item]:
+	var remaining_unowned_items: Array[Item] = []
+	for item in Global.items:
+		if Global.owned_items.has(item):
+			continue
+		remaining_unowned_items.append(item)
+
+	var random_unowned_items: Array[Item] = []
+	for i in requested_num_items:
+		if remaining_unowned_items.size() == 0:
+			break
+		var random_index: int = randi_range(0, remaining_unowned_items.size() - 1)
+		var random_unowned_item: Item = remaining_unowned_items[random_index]
+		random_unowned_items.append(random_unowned_item)
+		remaining_unowned_items.remove_at(random_index)
+
+	return random_unowned_items
+
+
+static func own_and_apply_item(item: Item) -> void:
+	item.apply_stats()
+	Global.owned_items.append(item)
+	Events.items_updated.emit()
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
@@ -34,45 +62,21 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	super(_delta)
 
-	bank_balance.text = "🏦 bank balance: [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
+	bank_balance.text = "🏦 [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
 
-## Gives the requested number of items randomly, from the pool of items currently unowned by the player.
-## If requested_num_items <= the remaining unowned items, it will give all the remaining items,
-## which may be less than the requested number.
-static func get_random_unowned_items(requested_num_items: int) -> Array[Item]:
-	var remaining_unowned_items: Array[Item] = []
-	for item in Global.items:
-		if Global.owned_items.has(item):
-			continue
-		remaining_unowned_items.append(item)
-	
-	var random_unowned_items: Array[Item] = []
-	for i in requested_num_items:
-		if remaining_unowned_items.size() == 0:
-			break
-		var random_index: int = randi_range(0, remaining_unowned_items.size()-1)
-		var random_unowned_item: Item = remaining_unowned_items[random_index]
-		random_unowned_items.append(random_unowned_item)
-		remaining_unowned_items.remove_at(random_index)
-	
-	return random_unowned_items
-
-static func own_and_apply_item(item: Item) -> void:
-	item.apply_stats()
-	Global.owned_items.append(item)
-	Events.items_updated.emit()
 
 func populate_items() -> void:
 	# wait for main.gd to clear owned items on restart before populating
 	await get_tree().process_frame
-	
+
 	var items_to_show: Array[Item] = get_random_unowned_items(number_of_items_to_show)
 	for item in items_to_show:
 		var item_button: ItemButton = item_button_scene.instantiate()
 		item_button.item = item
 		items_container.add_child(item_button)
 		items_in_shop.append(item)
-		item_button.item_button_pressed.connect(_on_item_button_pressed)	
+		item_button.item_button_pressed.connect(_on_item_button_pressed)
+
 
 func _on_reroll_pressed() -> void:
 	if not Global.bank_money >= Stats.current.cost_to_reroll:
@@ -99,7 +103,7 @@ func _on_reroll_pressed() -> void:
 	reroll_button.hide()
 
 
-func _on_item_button_pressed(item_button: ItemButton) -> void:	
+func _on_item_button_pressed(item_button: ItemButton) -> void:
 	var item: Item = item_button.item
 	var can_afford: bool = Global.bank_money >= item.price
 	var has_free_item_slots: bool = Global.owned_items.size() < Global.item_slots_amount
@@ -107,9 +111,9 @@ func _on_item_button_pressed(item_button: ItemButton) -> void:
 	item_button.notify_pressed(did_buy_item)
 	if did_buy_item:
 		Global.bank_money -= item.price
-		
+
 		own_and_apply_item(item)
-		
+
 		item_button.queue_free()
 		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.GOLD)
 		bought_sound.play()

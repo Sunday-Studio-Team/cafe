@@ -41,9 +41,12 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var item_hover_tooltip_description: RichTextLabel
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
+@export var disable_camera_indicator: PanelContainer
+@export var disable_camera_indicator_label: RichTextLabel
 #Active Item
 @export var current_item_ui: Control
-@export var hammer_indicator: PanelContainer
+@export var item_indicator: PanelContainer
+@export var item_text: RichTextLabel
 @export var current_item_icon: TextureRect
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
@@ -85,11 +88,12 @@ func _ready() -> void:
 
 	stamina_bar.max_value = Stats.current.max_stamina
 
-	# we automatically play a sound whenever our points change,
-	# so we mute that sound while we reset our points @ the start of each day
-	# lol
+	# we automatically do some stuff whenever our points change,
+	# so we mute + hide that stuff
+	# while we reset our points @ the start of each day lol
 	var points_sound_volume := lose_points_sound.volume_db
 	lose_points_sound.volume_db = -70
+	score_update_label.hide()
 
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
@@ -164,13 +168,14 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	hide_item_menu_prompt_if_no_actives()
 	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
 
-	# (we muted this earlier, now we unmute)
+	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
+	score_update_label.show()
 
 	var hammer_t := create_tween().set_loops()
-	hammer_t.tween_property(hammer_indicator, "modulate", Color.GOLD, 0.5)
-	hammer_t.tween_property(hammer_indicator, "modulate", Color.ORANGE_RED, 0.5)
+	hammer_t.tween_property(item_indicator, "modulate", Color.GOLD, 0.5)
+	hammer_t.tween_property(item_indicator, "modulate", Color.ORANGE_RED, 0.5)
 
 	var shelf_sell_t := create_tween().set_loops()
 	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.GOLD, 2)
@@ -392,15 +397,40 @@ func update_interactable_ui() -> void:
 	if hovered_interactable != null:
 		interactable_indicator.show()
 
+		# show prompt to use active item if we need to
+
+		# TODO: replace some of these unsafe refs with the item names with refs
+		# to the actual items as export vars
+
 		if (
 				hovered_interactable.name == "FixMachineButton"
 				and Global.equipped_item != null
 				and Global.equipped_item.name == "hammer"
 		):
-			hammer_indicator.show()
+			item_indicator.show()
+			item_text.text = "[Q] HAMMER 💥"
+
+		elif (
+				hovered_interactable.name == "Spill"
+				and Global.equipped_item != null
+				and Global.equipped_item.name == "super scrubber 2000"
+		):
+			item_indicator.show()
+			item_text.text = "[Q] SCRUBBER 🧼"
+
+		# NOTE: I DONT THINK THIS ONE WORKS
+		elif (
+				hovered_interactable.display_name == "Camera"
+				and Global.equipped_item != null
+				and Global.equipped_item.name == "whipped cream"
+		):
+			interactable_label.text = (
+					"[Q] WHIPPED CREAM"
+			)
 
 		else:
-			hammer_indicator.hide()
+			item_indicator.hide()
+			item_text.text = ""
 
 		if hovered_interactable.hold_to_interact:
 			interactable_label.text = (
@@ -430,8 +460,11 @@ func update_interactable_ui() -> void:
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
 		cctv_indicator.texture = load("res://sprites/eye_red.png")
+		disable_camera_indicator_label.text = "[E] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
+		disable_camera_indicator.show()
 	else:
 		cctv_indicator.texture = load("res://sprites/eye_logo.png")
+		disable_camera_indicator.hide()
 
 
 func _on_alert_posted(message: String) -> void:

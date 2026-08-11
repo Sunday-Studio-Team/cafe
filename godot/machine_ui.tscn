@@ -17,6 +17,88 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwcv2"]
+bg_color = Color(0.999996, 0.30647203, 0.34021902, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 25
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dw44w"]
+bg_color = Color(1, 0.44705883, 0.44705883, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 25
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuvgi"]
+bg_color = Color(0.7379392, 0, 0.1546509, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 25
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 25
+expand_margin_right = 10.0
+
+[sub_resource type="FontFile" id="FontFile_8u4h4"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_ywufb"]
+default_font = SubResource("FontFile_8u4h4")
+Button/icons/icon = null
+Button/styles/hover = SubResource("StyleBoxFlat_qwcv2")
+Button/styles/normal = SubResource("StyleBoxFlat_dw44w")
+Button/styles/pressed = SubResource("StyleBoxFlat_uuvgi")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
 corner_radius_top_left = 10
@@ -313,13 +395,18 @@ offset_transform_rotation = -0.13962634
 theme_override_font_sizes/font_size = 64
 text = "+1.5⭐🙂"
 
-[node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer" unique_id=704912867]
+[node name="IngredientsUI" type="HBoxContainer" parent="VBoxContainer" unique_id=282857860]
 layout_mode = 2
-size_flags_vertical = 2
+alignment = 1
+
+[node name="IngredientsMeter" type="VBoxContainer" parent="VBoxContainer/IngredientsUI" unique_id=704912867]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.88, 0.88)
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/IngredientsMeter" unique_id=869047581]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/IngredientsUI/IngredientsMeter" unique_id=869047581]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
 custom_minimum_size = Vector2(800, 60)
 layout_mode = 2
@@ -328,13 +415,23 @@ size_flags_vertical = 10
 value = 75.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="VBoxContainer/IngredientsMeter" unique_id=861789852]
+[node name="Label" type="Label" parent="VBoxContainer/IngredientsUI/IngredientsMeter" unique_id=861789852]
 layout_mode = 2
 size_flags_vertical = 10
 offset_transform_rotation = -0.08726646
 theme_override_font_sizes/font_size = 64
 text = "ingredients"
 horizontal_alignment = 1
+
+[node name="RefillButton" type="Button" parent="VBoxContainer/IngredientsUI" unique_id=1915155455]
+layout_mode = 2
+size_flags_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.1, 0)
+offset_transform_visual_only = false
+theme = SubResource("Theme_ywufb")
+theme_override_font_sizes/font_size = 96
+text = "refill"
 
 [node name="NoIngredientsWarning" type="PanelContainer" parent="." unique_id=1916984411]
 visible = false
@@ -351,5 +448,23 @@ size_flags_vertical = 1
 theme_override_font_sizes/font_size = 96
 text = "NO
 INGREDIENTS !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GetIngredientsPrompt" type="PanelContainer" parent="." unique_id=1409498974]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = 0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ffxp")
+
+[node name="Label" type="Label" parent="GetIngredientsPrompt" unique_id=1407812639]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 96
+text = "NEED INGREDIENTS
+FROM STORE ROOM"
 horizontal_alignment = 1
 vertical_alignment = 1

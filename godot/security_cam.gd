@@ -1,4 +1,5 @@
 extends Node3D
+class_name SecurityCam3D
 
 @export var ray: RayCast3D
 @export var spotlight: SpotLight3D
@@ -6,6 +7,11 @@ extends Node3D
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
+@export var interactable : Interactable
+var camera_disabled : bool = false
+@export var tries_until_disabled: int = 3
+var disable_minigames := ["Lines"]
+
 
 # we duplicate the ray many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -23,11 +29,20 @@ func _ready() -> void:
 	rotate_tween.tween_interval(rotation_pause_length)
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
 	rotate_tween.tween_interval(rotation_pause_length)
+	
+	#Active Item
+	interactable.interactable_active_item.connect(activate_interaction)
+	
+	
 
 
 func _physics_process(_delta: float) -> void:
 	# if cameras are hidden, treat that as them being disabled
 	if not is_visible_in_tree():
+		return
+	
+	#If disabled
+	if camera_disabled:
 		return
 
 	if not timer.is_stopped():
@@ -63,9 +78,21 @@ func _physics_process(_delta: float) -> void:
 	if player_in_spotlight:
 		spotlight.light_color = Color.RED
 		Global.player_in_cctv_los = true
+		Global.player_in_cctv_los_camera = self
+		if Input.is_action_just_pressed("interact") and Global.player_in_cctv_los_camera == self and not Global.owned_items.any(func(x: Item): return x.name == "Whipped Cream"):
+			open_camera_minigame()
 	else:
 		spotlight.light_color = Color.WHITE
 
+func disable_camera() -> void:
+	camera_disabled = true
+	spotlight.visible = false
+	rotate_tween.stop()
+
+func enable_camera() -> void:
+	camera_disabled = false
+	spotlight.visible = true
+	rotate_tween.play()
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
 func create_rays() -> void:
@@ -80,3 +107,44 @@ func create_rays() -> void:
 			new_ray.rotation_degrees.z += z_rot
 			spotlight.add_child(new_ray)
 			all_rays.append(new_ray)
+
+
+func try_disable_camera() -> void:
+	if camera_disabled:
+		return
+
+	tries_until_disabled -= 1
+	if tries_until_disabled <= 0:
+		disable_camera()
+		await get_tree().create_timer(20, false).timeout
+		enable_camera()
+
+func open_camera_minigame() -> void:
+	if camera_disabled:
+		return
+
+	if Global.minigame_active:
+		return
+
+	Events.minigame_end.connect(_on_break_camera)
+	Events.minigame_cancelled.connect(_cancel_break_minigame)
+	Events.minigame_active.emit(disable_minigames.pick_random())
+
+func _on_break_camera() -> void:
+	Events.minigame_end.disconnect(_on_break_camera)
+	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
+	try_disable_camera()
+
+func _cancel_break_minigame() -> void:
+	Events.minigame_end.disconnect(_on_break_camera)
+	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
+
+func activate_interaction(item: Item):
+	print(item)
+	if item != null:
+		print(item.name)
+	if item != null and item.name == "Whipped Cream":
+		disable_camera()
+		await get_tree().create_timer(8, false).timeout
+		enable_camera()
+	pass

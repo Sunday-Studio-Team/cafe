@@ -12,7 +12,6 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
-@export var mop_cursor_texture: Texture2D
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
@@ -40,6 +39,7 @@ var items: Array[Item]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
+var player_in_cctv_los_camera: SecurityCam3D
 var minigame_active := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
@@ -107,6 +107,7 @@ var in_end_screen := false
 var in_active_item_menu := false
 var in_tutorial_screen: bool = false
 var in_end_shift_early_menu := false
+var in_dialog_screen: bool = false
 var showing_floating_cursor := false
 var stamina: float:
 	set(new_stam):
@@ -133,6 +134,7 @@ var in_ui: bool:
 				or in_active_item_menu
 				or in_tutorial_screen
 				or in_end_shift_early_menu
+				or in_dialog_screen
 				or showing_floating_cursor
 		):
 			return true
