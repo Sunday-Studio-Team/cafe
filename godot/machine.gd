@@ -196,13 +196,16 @@ func show_tutorial_where_is_storeroom() -> void:
 	#and then immediately turn those values to 'tutorial has been shown',
 	if OS.has_feature("skip_popups"):
 		return
-	while (Global.in_ui):
-		await get_tree().create_timer(0.25).timeout
-		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
-	await get_tree().create_timer(0.75).timeout # allows audio to play first
 
-	if (Global.day == 1) and (Global.tutorial_refill_shown == false):
+	if Global.tutorial_refill_shown == false:
 		Global.tutorial_refill_shown = true
+		
+		while (Global.in_ui):
+			await get_tree().create_timer(0.25).timeout
+			#janky way to make sure the popup tutorial does not show up while in a menu/minigame
+		
+		await get_tree().create_timer(0.75).timeout # allows audio to play first
+		
 		Global.in_tutorial_screen = true
 
 		#hide tablet so it's not in the way.
