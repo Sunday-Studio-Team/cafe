@@ -64,6 +64,7 @@ var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
 
+var _employee_rating_last_update: float = -1
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -351,10 +352,17 @@ func update_score_indicators() -> void:
 	if Global.daily_profit:
 		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
 
+	_update_rating()
+
+func _update_rating() -> void:
+	var current_rating := Global.employee_rating
+	if current_rating == _employee_rating_last_update:
+		return
+	_employee_rating_last_update = current_rating
+	
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
 
-	var current_rating := Global.employee_rating
 	var rating_is_even := current_rating % 2 == 0
 	var rating_shown := 0
 
@@ -373,7 +381,6 @@ func update_score_indicators() -> void:
 		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
 
 	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
-
 
 func update_time_indicator() -> void:
 	time_left_ui.visible = not game_timer.is_stopped()
