@@ -12,12 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://ck5hb0yuvfdsa" path="res://environment/wall_piece_short.tscn" id="10_f84oc"]
 [ext_resource type="PackedScene" uid="uid://cvx1me2mi6tpm" path="res://environment/corner_piece.tscn" id="11_f2c6s"]
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="12_02vyw"]
-[ext_resource type="ArrayMesh" uid="uid://ddv04dnt0thrm" path="res://Assets/window/Sketchfab_Scene_Object_0.res" id="13_vn30m"]
+[ext_resource type="ArrayMesh" uid="uid://c3jhgpotph4u" path="res://Assets/window/Sketchfab_Scene_Object_0.res" id="13_vn30m"]
 [ext_resource type="Material" uid="uid://ckkmdu1uj8548" path="res://shaders/glass.tres" id="14_4nsdn"]
-[ext_resource type="ArrayMesh" uid="uid://doho2v1tgcsn2" path="res://Assets/window/Sketchfab_Scene_Object_2.res" id="15_wredj"]
-[ext_resource type="ArrayMesh" uid="uid://ds7viw3iv25iv" path="res://Assets/window/Sketchfab_Scene_Object_3.res" id="16_pv1ha"]
-[ext_resource type="ArrayMesh" uid="uid://cesecpns3gklg" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
-[ext_resource type="ArrayMesh" uid="uid://dh1rt52icf7il" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
+[ext_resource type="ArrayMesh" uid="uid://c6nqh2tdr8vbh" path="res://Assets/window/Sketchfab_Scene_Object_2.res" id="15_wredj"]
+[ext_resource type="ArrayMesh" uid="uid://jn4wo5ccjmt8" path="res://Assets/window/Sketchfab_Scene_Object_3.res" id="16_pv1ha"]
+[ext_resource type="ArrayMesh" uid="uid://dg7pb4va76uok" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
+[ext_resource type="ArrayMesh" uid="uid://f3vpqcxgpjle" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
 [ext_resource type="Texture2D" uid="uid://ciwanem2vjg81" path="res://environment/textures/pink tiles.jpg" id="19_tx4o1"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="20_ala11"]
 [ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="21_li8ef"]
@@ -27,8 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
 [ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="28_dlkxn"]
-[ext_resource type="ArrayMesh" uid="uid://dabquex4ygkx3" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
-[ext_resource type="ArrayMesh" uid="uid://dtu5t2lyd3t5r" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
+[ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
+[ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
 [ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="31_2t8u4"]
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
@@ -1077,7 +1077,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="MediumLights" parent="CustomerArea" unique_id=988487720 instance=ExtResource("5_omxm3")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3.3665109, 2.0798194, -3.0821092)
 
-[node name="circlelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1054104950) index="0" unique_id=2022546909]
+[node name="circlelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1695556818) index="0" unique_id=587558728]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1967334830]
@@ -1088,13 +1088,13 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1054104950) index="1" unique_id=73167562]
+[node name="squarelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1695556818) index="1" unique_id=195788702]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="squarelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 78100719) index="0" unique_id=783702490]
+[node name="squarelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1266530751) index="0" unique_id=1809770722]
 visible = false
 
-[node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 78100719) index="1" unique_id=987737270]
+[node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1266530751) index="1" unique_id=987737270]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(0.91764706, 1, 0, 1)
 light_energy = 5.04
@@ -1102,7 +1102,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1054104950) index="2" unique_id=112172523]
+[node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1695556818) index="2" unique_id=1661838220]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1917070567]
@@ -1281,10 +1281,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="CustomerArea" unique_id=1259450021 instance=ExtResource("20_ala11")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 347051479) index="2" unique_id=445241375]
+[node name="Window_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 535169615) index="2" unique_id=1286912570]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 2073212042) index="2" unique_id=943486978]
+[node name="Window2_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 1567843386) index="2" unique_id=1095193056]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="CustomerArea" unique_id=1814443078]
@@ -1594,6 +1594,7 @@ transform = Transform3D(-0.4837753, 0, -3.6683446e-08, 0, 0.658351, 0, 3.887321e
 
 [node name="filling cabinets" parent="BackRoom" unique_id=1645398128 instance=ExtResource("46_a3sl0")]
 transform = Transform3D(-1.22, 0, -1.8421488e-07, 0, 1.22, 0, 1.8421488e-07, 0, -1.22, 3.8309226, 0.05262039, 0.24210644)
+visible = false
 
 [node name="CustomerAreaSign" type="MeshInstance3D" parent="BackRoom" unique_id=279572169]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1000004, 2.3999999, -4.7)
