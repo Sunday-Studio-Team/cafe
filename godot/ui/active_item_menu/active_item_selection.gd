@@ -61,13 +61,7 @@ func _draw():
 			#Turns the radian into a point at the edge of the created circle
 			var point = Vector2.from_angle(rads)
 			#Draws line from edge of center circle to end of circle
-			draw_line(
-				point * inner_radius,
-				point * outer_radius,
-				line_color,
-				line_width,
-				true,
-			)
+			draw_line(point * inner_radius, point * outer_radius, line_color, line_width, true)
 
 		#If selection is inner circle. If not, will draw highlight below in the arc draw
 		if selection == 0:
@@ -103,10 +97,7 @@ func _draw():
 					points_outer.append(outer_radius * Vector2.from_angle(TAU - angle))
 
 				points_outer.reverse()
-				draw_polygon(
-					points_inner + points_outer,
-					PackedColorArray([highlight_color]),
-				)
+				draw_polygon(points_inner + points_outer, PackedColorArray([highlight_color]))
 
 
 #Whenever item is added, goes through list and adds any active items bought
@@ -116,14 +107,9 @@ func update_items():
 		if item.is_active_item and item.can_be_used:
 			options.append(item)
 
-	if (
-			Global.equipped_item != null
-			and not Global.owned_items.has(Global.equipped_item)
-	):
+	if (Global.equipped_item != null and not Global.owned_items.has(Global.equipped_item)):
 		remove_item(Global.equipped_item)
 		Global.equipped_item = null
-
-	print("Options: ", options)
 
 
 func remove_item(target_item: Item):

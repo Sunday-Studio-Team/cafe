@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ctxk7tkg21qiw"]
+
+[ext_resource type="Script" uid="uid://bv20v4hi18mc8" path="res://ui/dialog/dialog_option_view.gd" id="1_ytsoj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1lj4"]
+bg_color = Color(0, 0, 0, 0.5019608)
+
+[node name="DialogOptionView" type="MarginContainer" unique_id=754067411 node_paths=PackedStringArray("_option_text_label", "_button")]
+size_flags_horizontal = 3
+script = ExtResource("1_ytsoj")
+_option_text_label = NodePath("MarginContainer/OptionTextRichTextLabel")
+_button = NodePath("Button")
+
+[node name="Button" type="Button" parent="." unique_id=2068973041]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1842398655]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b1lj4")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1457706943]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 16
+
+[node name="OptionTextRichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=2127904570]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "This is a test dialog option!"
+fit_content = true
+vertical_alignment = 1
