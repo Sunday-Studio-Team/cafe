@@ -20,6 +20,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
+@export var _eye_logo_red_texture: Texture2D
+@export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
@@ -461,11 +463,11 @@ func update_interactable_ui() -> void:
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
-		cctv_indicator.texture = load("res://sprites/eye_red.png")
+		cctv_indicator.texture = _eye_logo_red_texture
 		disable_camera_indicator_label.text = "[E] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
 		disable_camera_indicator.show()
 	else:
-		cctv_indicator.texture = load("res://sprites/eye_logo.png")
+		cctv_indicator.texture = _eye_logo_texture
 		disable_camera_indicator.hide()
 
 

@@ -56,6 +56,7 @@
 [ext_resource type="PackedScene" uid="uid://clu38siu3rseb" path="res://tutorial/tutorial_view_this_is_a_camera.tscn" id="45_s4o1y"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
+[ext_resource type="Texture2D" uid="uid://bst7kul722rro" path="res://sprites/eye_red.png" id="48_lwnsi"]
 [ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://items/super_scrubber_2000.tres" id="50_jbvwl"]
 [ext_resource type="Resource" uid="uid://dro03qfkl0ucg" path="res://items/whipped_cream.tres" id="51_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="68_tfaor"]
@@ -840,6 +841,8 @@ gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
 cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
+_eye_logo_red_texture = ExtResource("48_lwnsi")
+_eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
 alert_label = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/AlertText")
 shelf_item_ui = NodePath("HUD/ShelfItem")
