@@ -7,6 +7,8 @@ enum State { NORMAL, CONFIRMING_RESTART, CONFIRMING_QUIT }
 
 @export var _continue_button: Button
 @export var _tutorial_button: Button
+@export var _options_button: Button
+@export var _options_menu_packed_scene: PackedScene
 @export var restart_button: Button
 @export var quit_button: Button
 @export var sure_menu: Control
@@ -30,6 +32,7 @@ var state: State = State.NORMAL:
 func _ready() -> void:
 	_continue_button.pressed.connect(_toggle_pause)
 	_tutorial_button.pressed.connect(_on_tutorial_button_pressed)
+	_options_button.pressed.connect(_on_options_button_pressed)
 	quit_button.pressed.connect(func(): state = State.CONFIRMING_QUIT)
 	restart_button.pressed.connect(func(): state = State.CONFIRMING_RESTART)
 	sure_panel.visibility_changed.connect(
@@ -114,3 +117,7 @@ func _toggle_pause() -> void:
 
 func _on_tutorial_button_pressed() -> void:
 	tutorial_requested.emit()
+
+func _on_options_button_pressed() -> void:
+	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()
+	add_sibling(options_menu, true)

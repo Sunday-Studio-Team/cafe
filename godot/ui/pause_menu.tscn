@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dltayqwtj31d1"]
 
 [ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://ui/pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="PackedScene" uid="uid://u0mxb00igfni" path="res://ui/options_menu/options_menu.tscn" id="2_ejwgg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
 bg_color = Color(0.74428886, 0.5576893, 0.38271093, 1)
@@ -16,11 +17,13 @@ expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
 
-[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "restart_button", "quit_button", "sure_menu", "sure_panel", "yes_sure_button", "no_sure_button", "sure_info_label")]
+[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "_options_button", "restart_button", "quit_button", "sure_menu", "sure_panel", "yes_sure_button", "no_sure_button", "sure_info_label")]
 process_mode = 3
 script = ExtResource("1_hdmo1")
 _continue_button = NodePath("MarginContainer/VBoxContainer/Continue")
 _tutorial_button = NodePath("MarginContainer/VBoxContainer/ShowTutorial")
+_options_button = NodePath("MarginContainer/VBoxContainer/Options")
+_options_menu_packed_scene = ExtResource("2_ejwgg")
 restart_button = NodePath("MarginContainer/VBoxContainer/Restart")
 quit_button = NodePath("MarginContainer/VBoxContainer/Quit")
 sure_menu = NodePath("MarginContainer/Sure")
@@ -71,6 +74,13 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 64
 text = "Open Tutorial"
 
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1623132545]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+
 [node name="Restart" type="Button" parent="MarginContainer/VBoxContainer" unique_id=923217522]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -86,6 +96,7 @@ theme_override_font_sizes/font_size = 64
 text = "quit"
 
 [node name="Sure" type="MarginContainer" parent="MarginContainer" unique_id=586124836]
+visible = false
 layout_mode = 2
 
 [node name="Background" type="ColorRect" parent="MarginContainer/Sure" unique_id=707749891]

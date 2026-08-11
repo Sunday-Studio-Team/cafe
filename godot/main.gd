@@ -5,6 +5,7 @@ static var seen_breakdown_popup := false
 
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
+@export var _world_environment: WorldEnvironment
 @export var machines: Array[Machine]
 @export var cameras: Node3D
 @export var menu: Menu3D
@@ -49,6 +50,9 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	Events.game_options_changed.connect(_on_game_options_changed)
+	SaveDataManager.get_options_data().apply_options()
+	
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
@@ -273,3 +277,37 @@ func _on_desk_interacted() -> void:
 func _on_timer_timeout():
 	#game_timer.paused = false
 	pass # Replace with function body.
+
+
+func _on_game_options_changed(options_data: OptionsData) -> void:
+	_apply_game_options(options_data)
+	
+func _apply_game_options(options_data: OptionsData) -> void:
+	match options_data.graphics_preset:
+		OptionsData.GraphicsOptionsPresets.HIGH:
+			_world_environment.environment.ssao_enabled = true
+			_world_environment.environment.ssil_enabled = true
+			_world_environment.environment.sdfgi_enabled = true
+			_world_environment.environment.volumetric_fog_enabled = true
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+		OptionsData.GraphicsOptionsPresets.MEDIUM:
+			_world_environment.environment.ssao_enabled = true
+			_world_environment.environment.ssil_enabled = false
+			_world_environment.environment.sdfgi_enabled = true
+			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+		OptionsData.GraphicsOptionsPresets.LOW:
+			_world_environment.environment.ssao_enabled = false
+			_world_environment.environment.ssil_enabled = false
+			_world_environment.environment.sdfgi_enabled = false
+			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+		OptionsData.GraphicsOptionsPresets.MINIMUM:
+			_world_environment.environment.ssao_enabled = false
+			_world_environment.environment.ssil_enabled = false
+			_world_environment.environment.sdfgi_enabled = false
+			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 0.5)
+		_:
+			pass
+	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
