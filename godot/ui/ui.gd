@@ -109,6 +109,11 @@ This is your first trial shift - make it through the week to keep your new posit
 		cctv_indicator.hide()
 	if Global.day >= 2:
 		objective.text = (
+				"your boss has installed another machine! it's located around the corner on the left.
+(your daily profit goal has been adjusted accordingly.)"
+		)
+	if Global.day >= 3:
+		objective.text = (
 				"your boss has instated some new store [i]rules[/i].
 they installed some security cameras to make sure you follow them!"
 		)
@@ -118,11 +123,6 @@ they installed some security cameras to make sure you follow them!"
 			- no handmade drinks"
 		)
 		cctv_indicator.show()
-	if Global.day >= 3:
-		objective.text = (
-				"your boss has installed another machine! it's located around the corner on the left.
-(your daily profit goal has been adjusted accordingly.)"
-		)
 	if Global.day >= 4:
 		objective.text = (
 				"your boss says you're using up too many ingredients.
