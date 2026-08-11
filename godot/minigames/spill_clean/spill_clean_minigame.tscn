@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
+size = Vector2(678.04865, 540.20624)
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnu58"]
 particle_flag_disable_z = true
 emission_shape = 3
@@ -91,7 +94,13 @@ position = Vector2(465.99997, 556)
 scale = Vector2(0.41000003, 0.48500004)
 texture = ExtResource("1_eeqbd")
 
-[node name="ErasableCanvas" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "mop", "splash")]
+[node name="Area2D" type="Area2D" parent="SubViewport/Bucket" unique_id=474787777]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Bucket/Area2D" unique_id=251683750]
+position = Vector2(0.00012207031, 4.123657)
+shape = SubResource("RectangleShape2D_vn1tu")
+
+[node name="Spill" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "bucket_area", "mop", "splash")]
 modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
 position = Vector2(960, 600)
 scale = Vector2(0.8, 0.8)
@@ -102,6 +111,7 @@ canvas_sprite = NodePath(".")
 progress_label = NodePath("../Panel/Percentage")
 moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
+bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
 splash = NodePath("../SplashSound")
 allowed_remaining_ratio = 0.01

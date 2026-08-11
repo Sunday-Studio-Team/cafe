@@ -41,6 +41,7 @@ var score_update_message: String
 var player_in_cctv_los := false
 var player_in_cctv_los_camera: SecurityCam3D
 var minigame_active := false
+var in_spill_minigame := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
@@ -169,7 +170,10 @@ func _physics_process(_delta: float) -> void:
 	making_drink_manually = false
 
 	if in_ui or get_tree().paused:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if Global.minigame_active and in_spill_minigame:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
