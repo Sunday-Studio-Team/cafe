@@ -18,11 +18,11 @@ func _ready() -> void:
 	_start_minigame()
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	Global.making_drink_manually = true
 	
 	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
-	if Engine.get_physics_frames() % 5 == 0:
+	if Engine.get_process_frames() % 5 == 0:
 		var button_is_selected: bool = false
 		if captcha.get_children().any(func(x: IngredientIconHolder): return x.button.button_pressed):
 			set_submit_text("VERIFY")

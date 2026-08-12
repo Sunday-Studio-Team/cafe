@@ -62,7 +62,7 @@ func _ready() -> void:
 	setup_button_tweens()
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (
 			Input.is_action_just_pressed("pause")
 			and not Global.in_ui

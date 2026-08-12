@@ -59,7 +59,7 @@ func _ready() -> void:
 	)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	super(_delta)
 
 	bank_balance.text = "🏦 [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)

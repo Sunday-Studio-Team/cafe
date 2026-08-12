@@ -18,10 +18,6 @@ func _ready() -> void:
 	continue_shift_button.pressed.connect(close_menu)
 
 
-func _physics_process(_delta: float) -> void:
-	Global.in_end_shift_early_menu
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("end_shift_early_menu"):
 		if requirements_met_before:

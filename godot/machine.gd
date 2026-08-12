@@ -137,7 +137,7 @@ func _ready() -> void:
 	spill_interactable.used_active_item.connect(on_active_item_used_spill)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 
 	progress_indicator.visible = not timer.is_stopped()

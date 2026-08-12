@@ -189,7 +189,7 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.WHITE, 2)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui

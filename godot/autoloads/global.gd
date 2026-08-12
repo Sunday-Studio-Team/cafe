@@ -164,7 +164,7 @@ func _ready() -> void:
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	# this has to be reset to false at the start of every frame here
 	# because if we set it in the individual security cameras' processes, they
 	# would start overriding each other

@@ -29,7 +29,7 @@ func _ready() -> void:
 		shop_button.hide()
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (
 			Input.is_action_just_pressed("pause")
 			and Global.in_pc_ui

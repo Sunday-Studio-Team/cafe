@@ -31,7 +31,7 @@ func _ready() -> void:
 	sprite.play("default")
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	visible = not Global.in_ui
 
 
