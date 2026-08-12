@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
 [ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="37_vf5ik"]
 [ext_resource type="Texture2D" uid="uid://d0bcxshct7olx" path="res://Assets/Posters/gun watching.png" id="38_on62l"]
+[ext_resource type="Texture2D" uid="uid://ciwcmxb4pqx1t" path="res://environment/textures/stain 2.png" id="39_5utbh"]
 [ext_resource type="Texture2D" uid="uid://c6fkp2w01emjt" path="res://environment/textures/lights vent cieling.png" id="39_yftd0"]
 [ext_resource type="PackedScene" uid="uid://ttq5pes58y07" path="res://Assets/register machine/Low Poly Eftpos Machine.glb" id="40_aslp2"]
 [ext_resource type="Texture2D" uid="uid://bj0uqxhx8vy06" path="res://Assets/counter/Bar Counter American Diner v1_0.png" id="41_1wuav"]
@@ -369,6 +370,9 @@ uv1_scale = Vector3(13.51, 2.58, 13.51)
 [sub_resource type="BoxMesh" id="BoxMesh_7olkn"]
 material = SubResource("StandardMaterial3D_jofr6")
 size = Vector3(4, 0.1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjja3"]
+albedo_texture = ExtResource("39_5utbh")
 
 [sub_resource type="BoxMesh" id="BoxMesh_u58gx"]
 material = SubResource("StandardMaterial3D_jofr6")
@@ -1482,6 +1486,24 @@ transform = Transform3D(-0.11593241, 0.00277999, -5.5863296e-09, 0.00277999, 0.1
 material_override = ExtResource("37_vf5ik")
 shaded = true
 texture = ExtResource("38_on62l")
+
+[node name="stain" type="Sprite3D" parent="BackRoom" unique_id=714646856]
+transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, 2.2398763, 1.5644994, 0.9870186)
+material_override = SubResource("StandardMaterial3D_yjja3")
+shaded = true
+texture = ExtResource("39_5utbh")
+
+[node name="stain3" type="Sprite3D" parent="BackRoom" unique_id=1541038549]
+transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, 9.581166, 1.5644994, 0.9870186)
+material_override = SubResource("StandardMaterial3D_yjja3")
+shaded = true
+texture = ExtResource("39_5utbh")
+
+[node name="stain2" type="Sprite3D" parent="BackRoom" unique_id=1263953208]
+transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, -11.397602, 1.5644994, 0.9870186)
+material_override = SubResource("StandardMaterial3D_yjja3")
+shaded = true
+texture = ExtResource("39_5utbh")
 
 [node name="Gun watching3" type="Sprite3D" parent="BackRoom" unique_id=1417879894]
 transform = Transform3D(-5.6616054e-09, 0, -0.12952244, -0.0009183418, 0.12951918, 4.014199e-11, 0.12951918, 0.0009183418, -5.661463e-09, -7.2233624, 1.3688644, -6.326212)
