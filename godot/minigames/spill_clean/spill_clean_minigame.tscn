@@ -15,7 +15,7 @@ size = Vector2(678.04865, 540.20624)
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnu58"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(130, 50, 1)
+emission_box_extents = Vector3(300, 150, 1)
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -30.000002
 radial_accel_max = 29.999996
@@ -125,7 +125,7 @@ drag_area = NodePath("MopDragHitbox")
 bubbles = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewport/Mop" unique_id=360286918]
-position = Vector2(-0.00024414063, -572)
+position = Vector2(0, -500)
 rotation = 3.1415925
 amount = 14
 texture = ExtResource("5_quysc")
