@@ -230,7 +230,7 @@ func active_item_used(item: Item):
 
 func _set_security_cameras_active(active: bool) -> void:
 	for security_camera in _cameras:
-		security_camera.set_camera_visible(active)
+		security_camera.visible = active
 
 func _on_pause_menu_tutorial_requested() -> void:
 	_tutorial_manager.show_tutorial()

@@ -17,7 +17,6 @@ class_name SecurityCam3D
 var all_rays: Array[RayCast3D]
 var rotate_tween: Tween
 var disable_minigames := ["Lines"]
-var _camera_visible: bool = false
 var _camera_disarmed := false
 
 @onready var original_rotation := rotation_degrees
@@ -34,12 +33,12 @@ func _ready() -> void:
 
 	interactable.used_active_item.connect(_on_used_active_item)
 
-	_update_camera_visibility()
+	visibility_changed.connect(_on_visibility_changed)
+	_update_camera_components_active()
 
 
 func _physics_process(_delta: float) -> void:
-	# if cameras are hidden, treat that as them being disabled
-	if not is_visible_in_tree():
+	if not visible:
 		return
 	
 	#If disabled
@@ -86,28 +85,22 @@ func _physics_process(_delta: float) -> void:
 		spotlight.light_color = Color.WHITE
 
 
-func set_camera_visible(camera_visible: bool) -> void:
-	_camera_visible = camera_visible
-	_update_camera_visibility()
+func _on_visibility_changed() -> void:
+	_update_camera_components_active()
 
 
 func disarm_camera() -> void:
 	_camera_disarmed = true
-	_update_camera_visibility()
+	_update_camera_components_active()
 
 
 func rearm_camera() -> void:
 	_camera_disarmed = false
-	_update_camera_visibility()
+	_update_camera_components_active()
 
 
-func _update_camera_visibility() -> void:
-	if _camera_visible:
-		visible = true
-	else:
-		visible = false
-	
-	if _camera_visible and !_camera_disarmed:
+func _update_camera_components_active() -> void:
+	if visible and !_camera_disarmed:
 		spotlight.visible = true
 		rotate_tween.play()
 		ray.enabled = true
