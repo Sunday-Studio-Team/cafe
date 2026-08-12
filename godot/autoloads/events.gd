@@ -2,9 +2,10 @@ extends Node
 
 @warning_ignore_start("unused_signal")
 # for scene switcher
-signal main_scene_loaded
-signal main_menu_loaded
-signal game_quit
+signal scene_switch_requested(game_scene: SceneSwitcher.GameScene)
+signal scene_switch_in_animation_finished
+signal quit_game_requested
+signal game_options_changed(options_data: OptionsData)
 signal shift_started
 signal customer_entered
 # NOTE: sorry for all these weird signals that pass the customer

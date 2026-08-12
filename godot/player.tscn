@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://deaoq82qeackq" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cr2t2yoape3ak" path="res://models/ingredients_bag_model.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="2_sweqy"]
+[ext_resource type="Resource" uid="uid://bhcmo11ttgvh3" path="res://items/rollerblades.tres" id="3_sweqy"]
 [ext_resource type="AudioStream" uid="uid://najej8q5da4u" path="res://audio/bag_pickup.mp3" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
 height = 1.7
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "sprint_lockout_timer")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "sprint_lockout_timer") groups=["player"]]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraRig/Camera3D")
@@ -18,6 +19,7 @@ ingredients_bag = NodePath("CameraRig/Camera3D/IngredientsBag")
 bag_pickup_sound = NodePath("CameraRig/Camera3D/IngredientsBag/BagPickupSound")
 ingredients_bag_scene = ExtResource("2_sweqy")
 sprint_lockout_timer = NodePath("SprintLockoutTimer")
+roller_skates = ExtResource("3_sweqy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

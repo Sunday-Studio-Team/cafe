@@ -60,6 +60,7 @@ static var seen_breakdown_popup := false
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
 var customer: Customer
+var queued_customer: Customer
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
@@ -133,11 +134,11 @@ func _ready() -> void:
 	t.tween_property(spill_warning, "modulate", Color.RED, 1)
 
 	#Active Items
-	fix_machine_button.interactable_active_item.connect(on_active_item_used_machine)
-	spill_interactable.interactable_active_item.connect(on_active_item_used_spill)
+	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
+	spill_interactable.used_active_item.connect(on_active_item_used_spill)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 
 	progress_indicator.visible = not timer.is_stopped()
@@ -196,13 +197,16 @@ func show_tutorial_where_is_storeroom() -> void:
 	#and then immediately turn those values to 'tutorial has been shown',
 	if OS.has_feature("skip_popups"):
 		return
-	while (Global.in_ui):
-		await get_tree().create_timer(0.25).timeout
-		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
-	await get_tree().create_timer(0.75).timeout # allows audio to play first
 
-	if (Global.day == 1) and (Global.tutorial_refill_shown == false):
+	if Global.tutorial_refill_shown == false:
 		Global.tutorial_refill_shown = true
+		
+		while (Global.in_ui):
+			await get_tree().create_timer(0.25).timeout
+			#janky way to make sure the popup tutorial does not show up while in a menu/minigame
+		
+		await get_tree().create_timer(0.75).timeout # allows audio to play first
+		
 		Global.in_tutorial_screen = true
 
 		#hide tablet so it's not in the way.
@@ -379,6 +383,10 @@ func machine_make_drink() -> void:
 		if sc == order.score:
 			order.made_drink = item
 			break
+	
+	if Global.current_special_shift != null and Global.current_special_shift.name == "Critical Customers":
+		if order.score < 3:
+			order.score = -3
 
 	if !order.made_drink: # get a random drink, useful for earlier days
 		order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
@@ -461,7 +469,6 @@ func display_drink_score() -> void:
 func fix_machine(hammer: bool = false) -> void:
 	if hammer:
 		hammer_hit_sound.play()
-		Global.equipped_item = null
 	fixed_sound.play()
 
 	fix_machine_button.enabled = false
@@ -617,6 +624,9 @@ func finished_make_drink_manually() -> void:
 
 
 func break_down() -> void:
+	if broken_down == true:
+		return
+	broken_down = true
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 
@@ -637,7 +647,7 @@ func break_down() -> void:
 	Global.breakdowns_this_shift += 1
 
 	timer.paused = true
-	broken_down = true
+	
 	hum_sound.stop()
 
 
@@ -657,7 +667,7 @@ func on_active_item_used_machine(item: Item):
 func on_active_item_used_spill(item: Item):
 	if item == null:
 		return
-	
+
 	if item == scrubber_item:
 		ErasableCanvas.used_scrubber = true
 		Global.deactivate_active_item(item)

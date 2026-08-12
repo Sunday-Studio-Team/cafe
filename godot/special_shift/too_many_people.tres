@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://d4ho1epmr2gym"
 
 [sub_resource type="Resource" id="Resource_bmvma"]
 script = ExtResource("2_qcjkm")
-modification = 1.5
+modification = 5.0
 metadata/_custom_type_script = "uid://d4ho1epmr2gym"
 
 [resource]
@@ -20,7 +20,7 @@ script = ExtResource("1_xc5s3")
 name = "Too Many Customers!"
 description = "Your customer base is doubling! A steady stream of new customers is pouring in—can you serve them well?"
 icon = ExtResource("1_qcjkm")
-weight = 20
+weight = 15
 modifications = Dictionary[String, ExtResource("2_qcjkm")]({
 "customer_spawn_interval": SubResource("Resource_3exxq"),
 "customer_wait_time_machine": SubResource("Resource_bmvma")

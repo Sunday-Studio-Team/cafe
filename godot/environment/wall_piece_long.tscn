@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://cbxfoj2piyybe"]
 
-[ext_resource type="Texture2D" uid="uid://cu2lbmip0nha" path="res://environment/textures/metal holes.png" id="1_jrupk"]
+[ext_resource type="Texture2D" uid="uid://bqdlveahtvcrp" path="res://environment/textures/metal wall 1.png" id="1_jrupk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(4, 3, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvgty"]
 albedo_texture = ExtResource("1_jrupk")
-uv1_scale = Vector3(2.98, 2.16, 3)
-uv1_offset = Vector3(0, -0.04, 0)
+uv1_scale = Vector3(3.03, 2.21, 3)
+uv1_offset = Vector3(0, -0.03, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_0ffxp"]
 material = SubResource("StandardMaterial3D_kvgty")

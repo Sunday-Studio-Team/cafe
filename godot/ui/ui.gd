@@ -20,6 +20,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
+@export var _eye_logo_red_texture: Texture2D
+@export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
@@ -48,6 +50,10 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var current_item_icon: TextureRect
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
+@export_category("item refs")
+@export var hammer:Item
+@export var scrubber:Item
+@export var whipped_cream:Item
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -56,6 +62,7 @@ var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
 
+var _employee_rating_last_update: float = -1
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -107,6 +114,11 @@ This is your first trial shift - make it through the week to keep your new posit
 		cctv_indicator.hide()
 	if Global.day >= 2:
 		objective.text = (
+				"your boss has installed another machine! it's located around the corner on the left.
+(your daily profit goal has been adjusted accordingly.)"
+		)
+	if Global.day >= 3:
+		objective.text = (
 				"your boss has instated some new store [i]rules[/i].
 they installed some security cameras to make sure you follow them!"
 		)
@@ -116,11 +128,6 @@ they installed some security cameras to make sure you follow them!"
 			- no handmade drinks"
 		)
 		cctv_indicator.show()
-	if Global.day >= 3:
-		objective.text = (
-				"your boss has installed another machine! it's located around the corner on the left.
-(your daily profit goal has been adjusted accordingly.)"
-		)
 	if Global.day >= 4:
 		objective.text = (
 				"your boss says you're using up too many ingredients.
@@ -180,7 +187,7 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.WHITE, 2)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
@@ -343,10 +350,17 @@ func update_score_indicators() -> void:
 	if Global.daily_profit:
 		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
 
+	_update_rating()
+
+func _update_rating() -> void:
+	var current_rating := Global.employee_rating
+	if current_rating == _employee_rating_last_update:
+		return
+	_employee_rating_last_update = current_rating
+	
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
 
-	var current_rating := Global.employee_rating
 	var rating_is_even := current_rating % 2 == 0
 	var rating_shown := 0
 
@@ -365,7 +379,6 @@ func update_score_indicators() -> void:
 		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
 
 	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
-
 
 func update_time_indicator() -> void:
 	time_left_ui.visible = not game_timer.is_stopped()
@@ -395,21 +408,34 @@ func update_interactable_ui() -> void:
 	if hovered_interactable != null:
 		interactable_indicator.show()
 
+		# show prompt to use active item if we need to
+
+		# TODO: replace some of these unsafe refs with the item names with refs
+		# to the actual items as export vars
+
 		if (
 				hovered_interactable.name == "FixMachineButton"
 				and Global.equipped_item != null
-				and Global.equipped_item.name == "hammer"
+				and Global.equipped_item == hammer
 		):
 			item_indicator.show()
 			item_text.text = "[Q] HAMMER 💥"
-		
-		if(
+
+		elif (
 				hovered_interactable.name == "Spill"
 				and Global.equipped_item != null
-				and Global.equipped_item.name == "super scrubber 2000"
+				and Global.equipped_item == scrubber
 		):
 			item_indicator.show()
 			item_text.text = "[Q] SCRUBBER 🧼"
+
+		elif (
+				hovered_interactable.display_name.contains("camera")
+				and Global.equipped_item != null
+				and Global.equipped_item == whipped_cream
+		):
+			item_indicator.show()
+			item_text.text = "[Q] WHIPPED CREAM"
 
 		else:
 			item_indicator.hide()
@@ -430,16 +456,6 @@ func update_interactable_ui() -> void:
 					"[E] - "
 					+ Global.hovered_interactable.display_name
 			)
-		
-		if hovered_interactable.display_name == "Camera":
-			
-			if Global.equipped_item != null and Global.equipped_item.name == "Whipped Cream":
-				interactable_label.text = (
-					"[Q] - Whipped Cream The Camera"
-				)
-			else:
-				interactable_indicator.hide()
-			
 
 	else:
 		interactable_indicator.hide()
@@ -452,9 +468,9 @@ func update_interactable_ui() -> void:
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
-		cctv_indicator.texture = load("res://sprites/eye_red.png")
+		cctv_indicator.texture = _eye_logo_red_texture
 	else:
-		cctv_indicator.texture = load("res://sprites/eye_logo.png")
+		cctv_indicator.texture = _eye_logo_texture
 
 
 func _on_alert_posted(message: String) -> void:

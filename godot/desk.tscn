@@ -76,7 +76,6 @@
 [ext_resource type="Texture2D" uid="uid://v86aa2kf3iwj" path="res://Assets/Desk/office desk_Image_33.png" id="74_0cyth"]
 [ext_resource type="Texture2D" uid="uid://to45l7efmsu4" path="res://Assets/Desk/office desk_Image_34.png" id="75_elyq8"]
 [ext_resource type="Texture2D" uid="uid://dyjc5op00cw8s" path="res://Assets/Desk/office desk_Image_35.png" id="76_xv4y3"]
-[ext_resource type="PackedScene" uid="uid://cbphg2k1mxn1w" path="res://Assets/chinese deco/Lucky Cat Maneki Neko.glb" id="79_7gdev"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 [ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
 
@@ -91,45 +90,6 @@ size = Vector3(1.9422656, 1, 0.8091992)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8n35f"]
 size = Vector3(0.8293457, 1, 1.1235352)
-
-[sub_resource type="BoxMesh" id="BoxMesh_r42xq"]
-size = Vector3(1.5, 0.1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ep8l3"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 0.7
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_r42xq"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.1
-
-[sub_resource type="BoxMesh" id="BoxMesh_ep8l3"]
-size = Vector3(0.5, 0.5, 0.05)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_t5y75"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_t5y75"]
-size = Vector3(0.4, 0.25, 0.25)
-
-[sub_resource type="BoxMesh" id="BoxMesh_se7ci"]
-size = Vector3(0.75, 0.5, 0.05)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r42xq"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_lrwc4"]
-material = SubResource("StandardMaterial3D_r42xq")
-size = Vector3(0.725, 0.475, 0.01)
-
-[sub_resource type="BoxMesh" id="BoxMesh_tm3w8"]
-size = Vector3(0.4, 0.025, 0.2)
-
-[sub_resource type="BoxMesh" id="BoxMesh_r8wvv"]
-size = Vector3(0.1, 0.025, 0.075)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eo2j7"]
 resource_name = "material.001"
@@ -1864,7 +1824,7 @@ shadow_mesh = SubResource("ArrayMesh_16ay0")
 [node name="Desk" type="Area3D" unique_id=2130239944 node_paths=PackedStringArray("mesh")]
 script = ExtResource("1_ep8l3")
 display_name = "use PC"
-mesh = NodePath("office desk/screen2_mac_0")
+mesh = NodePath("DeskModel/screen2_mac_0")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=337724593]
@@ -1886,226 +1846,151 @@ shape = SubResource("BoxShape3D_r42xq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8659401, 0.50634766, 0.061767578)
 shape = SubResource("BoxShape3D_8n35f")
 
-[node name="Model" type="Node3D" parent="." unique_id=166450955]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10080838, 0.80964196, 0.09252084)
-visible = false
-
-[node name="Table" type="MeshInstance3D" parent="Model" unique_id=297491436]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10080838, -0.10964197, -0.09252084)
-mesh = SubResource("BoxMesh_r42xq")
-
-[node name="Leg" type="MeshInstance3D" parent="Model/Table" unique_id=586339268]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.3, 0.4)
-mesh = SubResource("CylinderMesh_ep8l3")
-
-[node name="Leg2" type="MeshInstance3D" parent="Model/Table" unique_id=1787574776]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -0.3, -0.4)
-mesh = SubResource("CylinderMesh_ep8l3")
-
-[node name="Leg3" type="MeshInstance3D" parent="Model/Table" unique_id=405996757]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.3, 0.4)
-mesh = SubResource("CylinderMesh_ep8l3")
-
-[node name="Leg4" type="MeshInstance3D" parent="Model/Table" unique_id=1099823778]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.3, -0.4)
-mesh = SubResource("CylinderMesh_ep8l3")
-
-[node name="Chair" type="MeshInstance3D" parent="Model" unique_id=1908694284]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10080838, -0.40964195, 0.7074792)
-mesh = SubResource("CylinderMesh_r42xq")
-
-[node name="Back" type="MeshInstance3D" parent="Model/Chair" unique_id=479097061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29514572, 0.21275967)
-mesh = SubResource("BoxMesh_ep8l3")
-
-[node name="Leg" type="MeshInstance3D" parent="Model/Chair" unique_id=1645086392]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100000024, -0.20911375, -0.16314512)
-mesh = SubResource("CylinderMesh_t5y75")
-
-[node name="Leg2" type="MeshInstance3D" parent="Model/Chair" unique_id=418650304]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100000024, -0.20911375, 0.15568203)
-mesh = SubResource("CylinderMesh_t5y75")
-
-[node name="Leg3" type="MeshInstance3D" parent="Model/Chair" unique_id=1436348519]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16004726, -0.20911375, -0.16314512)
-mesh = SubResource("CylinderMesh_t5y75")
-
-[node name="Leg4" type="MeshInstance3D" parent="Model/Chair" unique_id=1674519016]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16004726, -0.20911375, 0.15568203)
-mesh = SubResource("CylinderMesh_t5y75")
-
-[node name="Pc" type="MeshInstance3D" parent="Model" unique_id=1761426732]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.44816935, 0.13828814, -0.2887918)
-mesh = SubResource("BoxMesh_t5y75")
-
-[node name="Monitor" type="MeshInstance3D" parent="Model" unique_id=218762248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10080838, 0.23638809, -0.34230298)
-mesh = SubResource("BoxMesh_se7ci")
-
-[node name="Screen" type="MeshInstance3D" parent="Model/Monitor" unique_id=1353284685]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.027276814)
-mesh = SubResource("BoxMesh_lrwc4")
-
-[node name="Kb" type="MeshInstance3D" parent="Model" unique_id=1232282383]
-transform = Transform3D(0.9994531, 0, -0.033067957, 0, 1, 0, 0.033067957, 0, 0.9994531, -0.20850968, -0.05024159, 0.13880396)
-mesh = SubResource("BoxMesh_tm3w8")
-
-[node name="Mouse" type="MeshInstance3D" parent="Model" unique_id=1146626200]
-transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 0.16357386, -0.044936538, 0.12837046)
-mesh = SubResource("BoxMesh_r8wvv")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Model" unique_id=2044123886]
-transform = Transform3D(1, 0, 0, 0, -0.5000001, 0.8660254, 0, -0.8660254, -0.5000001, -0.10080838, 0.23978603, -0.25103796)
-visible = false
-light_energy = 0.5
-shadow_enabled = true
-spot_angle = 75.0
-
-[node name="NewShopItems" type="Label3D" parent="." unique_id=1744972095]
+[node name="NewShopItemsPrompt" type="Label3D" parent="." unique_id=1744972095]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41726112, 1.4025844, -0.1311822)
 billboard = 2
 text = "❗️🛒"
 font_size = 64
 
-[node name="office desk" type="Node3D" parent="." unique_id=287397947]
+[node name="DeskModel" type="Node3D" parent="." unique_id=287397947]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.1433835, 0, 0.6383956)
 
-[node name="screen2_mac_0" type="MeshInstance3D" parent="office desk" unique_id=658838354]
+[node name="screen2_mac_0" type="MeshInstance3D" parent="DeskModel" unique_id=658838354]
 transform = Transform3D(0.96110713, -1.0160978, -4.2722672e-07, -8.336518e-08, -6.669215e-07, 1.3986356, -1.0160978, -0.96110725, -5.1885576e-07, -0.59403116, 0.8704788, 0.76609486)
 mesh = SubResource("ArrayMesh_mm2yn")
 
-[node name="tower_mac_0" type="MeshInstance3D" parent="office desk" unique_id=45849777]
+[node name="tower_mac_0" type="MeshInstance3D" parent="DeskModel" unique_id=45849777]
 transform = Transform3D(1.3967869, -0.07188425, 2.1432522e-08, -7.294452e-08, -1.0003823e-06, 1.3986359, -0.07188422, -1.3967874, -1.0028092e-06, -0.5645096, 0.28000256, 0.30315402)
 mesh = SubResource("ArrayMesh_elxjw")
 
-[node name="screen2_outline_mac_outline_0" type="MeshInstance3D" parent="office desk" unique_id=561824737]
+[node name="screen2_outline_mac_outline_0" type="MeshInstance3D" parent="DeskModel" unique_id=561824737]
 transform = Transform3D(0.96110713, -1.0160978, -4.2722672e-07, -8.336518e-08, -6.669215e-07, 1.3986356, -1.0160978, -0.96110725, -5.1885576e-07, -0.59403116, 0.8704788, 0.76609486)
 mesh = SubResource("ArrayMesh_q04nv")
 
-[node name="tower_keyboard_mac_0" type="MeshInstance3D" parent="office desk" unique_id=1300844335]
+[node name="tower_keyboard_mac_0" type="MeshInstance3D" parent="DeskModel" unique_id=1300844335]
 transform = Transform3D(0.72723585, -0.76884514, -2.7018132e-07, 3.153974e-08, -5.0463586e-07, 0.7363939, -0.76884514, -0.7272358, -2.2535082e-07, -0.22591007, 0.67742914, 0.4553701)
 mesh = SubResource("ArrayMesh_p1yhj")
 
-[node name="tower_keys_mac_0" type="MeshInstance3D" parent="office desk" unique_id=1671825583]
+[node name="tower_keys_mac_0" type="MeshInstance3D" parent="DeskModel" unique_id=1671825583]
 transform = Transform3D(0.7250213, -0.768845, 0.022861745, -0.063694715, -1.3186073e-07, 0.5510907, -0.7665038, -0.7272358, -0.024169896, -0.5525567, 0.70092076, 0.36025357)
 mesh = SubResource("ArrayMesh_str45")
 
-[node name="tower_keyboard_outline_mac_outline_0" type="MeshInstance3D" parent="office desk" unique_id=103225197]
+[node name="tower_keyboard_outline_mac_outline_0" type="MeshInstance3D" parent="DeskModel" unique_id=103225197]
 transform = Transform3D(0.75502646, -0.72300977, -2.6316337e-07, -3.2745003e-08, -3.559137e-07, 1.0995634, -0.7982258, -0.68388104, -2.9402773e-07, -0.33504343, 0.69005436, 0.51444733)
 mesh = SubResource("ArrayMesh_by6vl")
 
-[node name="tower_mouse_mac_0" type="MeshInstance3D" parent="office desk" unique_id=1009701733]
+[node name="tower_mouse_mac_0" type="MeshInstance3D" parent="DeskModel" unique_id=1009701733]
 transform = Transform3D(0.96110713, -1.0160978, -4.2722672e-07, -8.336518e-08, -6.669215e-07, 1.3986356, -1.0160978, -0.96110725, -5.1885576e-07, -0.5288763, 0.73693913, 0.21205378)
 mesh = SubResource("ArrayMesh_3xj5e")
 
-[node name="tower_mouse_outline_mac_outline_0" type="MeshInstance3D" parent="office desk" unique_id=1791318789]
+[node name="tower_mouse_outline_mac_outline_0" type="MeshInstance3D" parent="DeskModel" unique_id=1791318789]
 transform = Transform3D(0.96110713, -1.0160978, -4.2722672e-07, -8.336518e-08, -6.669215e-07, 1.3986356, -1.0160978, -0.96110725, -5.1885576e-07, -0.5288763, 0.73693913, 0.21205378)
 mesh = SubResource("ArrayMesh_uhxm7")
 
-[node name="Sketchfab_model" type="Node3D" parent="office desk" unique_id=487412579]
+[node name="Sketchfab_model" type="Node3D" parent="DeskModel" unique_id=487412579]
 transform = Transform3D(1, 0, 0, 0, -3.5762787e-07, 0.99999994, 0, -0.99999994, -3.5762787e-07, 0, 0, 0)
 
-[node name="SceneFinal_obj_cleaner_materialmerger_gles" type="Node3D" parent="office desk/Sketchfab_model" unique_id=541980614]
+[node name="SceneFinal_obj_cleaner_materialmerger_gles" type="Node3D" parent="DeskModel/Sketchfab_model" unique_id=541980614]
 
-[node name="Object_10" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1019495055]
+[node name="Object_10" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1019495055]
 mesh = SubResource("ArrayMesh_gvh67")
 
-[node name="Object_12" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=183485007]
+[node name="Object_12" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=183485007]
 mesh = SubResource("ArrayMesh_aklqf")
 
-[node name="Object_14" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=255135867]
+[node name="Object_14" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=255135867]
 mesh = SubResource("ArrayMesh_6j4di")
 
-[node name="Object_15" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1512975442]
+[node name="Object_15" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1512975442]
 mesh = SubResource("ArrayMesh_sg75c")
 
-[node name="Object_16" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2001998706]
+[node name="Object_16" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2001998706]
 mesh = SubResource("ArrayMesh_7qlys")
 
-[node name="Object_17" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=584720914]
+[node name="Object_17" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=584720914]
 mesh = SubResource("ArrayMesh_xasqr")
 
-[node name="Object_18" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=422605027]
+[node name="Object_18" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=422605027]
 transform = Transform3D(0.9260495, 0.37740213, 0, -0.37740213, 0.9260495, 0, 0, 0, 1, 0.31274652, -0.035393413, 0)
 mesh = SubResource("ArrayMesh_12f3x")
 
-[node name="Object_19" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1333022958]
+[node name="Object_19" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1333022958]
 mesh = SubResource("ArrayMesh_55biu")
 
-[node name="Object_2" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1285449499]
+[node name="Object_2" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1285449499]
 mesh = SubResource("ArrayMesh_xpdxm")
 
-[node name="Object_20" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1102800572]
+[node name="Object_20" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1102800572]
 mesh = SubResource("ArrayMesh_lgkr1")
 
-[node name="Object_21" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=493745593]
+[node name="Object_21" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=493745593]
 mesh = SubResource("ArrayMesh_gbk5y")
 
-[node name="Object_22" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1903516109]
+[node name="Object_22" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1903516109]
 mesh = SubResource("ArrayMesh_0pwp4")
 
-[node name="Object_23" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1099953718]
+[node name="Object_23" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1099953718]
 mesh = SubResource("ArrayMesh_e1vj3")
 
-[node name="Object_24" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1537958559]
+[node name="Object_24" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1537958559]
 mesh = SubResource("ArrayMesh_d0mp5")
 
-[node name="Object_25" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2007461665]
+[node name="Object_25" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2007461665]
 mesh = SubResource("ArrayMesh_log7v")
 
-[node name="Object_26" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1896188684]
+[node name="Object_26" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1896188684]
 mesh = SubResource("ArrayMesh_af4p1")
 
-[node name="Object_27" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1709247770]
+[node name="Object_27" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1709247770]
 mesh = SubResource("ArrayMesh_tefht")
 
-[node name="Object_28" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=515344241]
+[node name="Object_28" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=515344241]
 mesh = SubResource("ArrayMesh_yo7oo")
 
-[node name="Object_29" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1522935653]
+[node name="Object_29" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1522935653]
 mesh = SubResource("ArrayMesh_ulioc")
 
-[node name="Object_3" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=465155644]
+[node name="Object_3" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=465155644]
 mesh = SubResource("ArrayMesh_fft1u")
 
-[node name="Object_30" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2085672006]
+[node name="Object_30" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2085672006]
 mesh = SubResource("ArrayMesh_jc8wj")
 
-[node name="Object_31" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=515203511]
+[node name="Object_31" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=515203511]
 mesh = SubResource("ArrayMesh_g1qrw")
 
-[node name="Object_32" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=500824723]
+[node name="Object_32" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=500824723]
 mesh = SubResource("ArrayMesh_70vh8")
 
-[node name="Object_33" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=15492815]
+[node name="Object_33" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=15492815]
 mesh = SubResource("ArrayMesh_3leq0")
 
-[node name="Object_34" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=596415195]
+[node name="Object_34" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=596415195]
 mesh = SubResource("ArrayMesh_43xhl")
 
-[node name="Object_35" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2008088596]
+[node name="Object_35" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2008088596]
 mesh = SubResource("ArrayMesh_lljxw")
 
-[node name="Object_36" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=494347238]
+[node name="Object_36" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=494347238]
 mesh = SubResource("ArrayMesh_bbst1")
 
-[node name="Object_37" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2049217147]
+[node name="Object_37" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=2049217147]
 mesh = SubResource("ArrayMesh_f5b32")
 
-[node name="Object_4" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1932758457]
+[node name="Object_4" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1932758457]
 mesh = SubResource("ArrayMesh_rwuis")
 
-[node name="Object_5" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1454640191]
+[node name="Object_5" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=1454640191]
 mesh = SubResource("ArrayMesh_wyxlv")
 
-[node name="Object_6" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=351452638]
+[node name="Object_6" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=351452638]
 mesh = SubResource("ArrayMesh_www57")
 
-[node name="Object_8" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=187566552]
+[node name="Object_8" type="MeshInstance3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" unique_id=187566552]
 transform = Transform3D(-0.04396611, 0.999033, 2.7363026e-07, -0.9990328, -0.043966074, -1.2735812e-07, -1.1520453e-07, -2.78965e-07, 0.9999998, -0.6843137, -0.0957343, 1.0870271)
 mesh = SubResource("ArrayMesh_6ythc")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Object_8" unique_id=1299499190]
+[node name="SpotLight3D" type="SpotLight3D" parent="DeskModel/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Object_8" unique_id=1299499190]
 transform = Transform3D(1.0000004, 5.2154064e-08, 2.2737368e-13, -3.7252903e-09, 1.0000001, -1.9984014e-13, -2.2737368e-13, -1.3322676e-14, 1.0000002, 0.092681944, 0.10540062, 0.11730039)
 light_color = Color(1, 0.78, 0.39999998, 1)
 light_energy = 6.862
@@ -2114,20 +1999,17 @@ shadow_blur = 0.5
 spot_range = 0.924
 spot_angle = 43.22
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1647296300]
+[node name="ScreenLight" type="OmniLight3D" parent="." unique_id=1647296300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23109445, 1.0087188, 0.088364124)
 light_color = Color(0.65999997, 0.89799994, 1, 1)
 shadow_enabled = true
 omni_range = 0.498
 omni_attenuation = 0.208
 
-[node name="cat" parent="." unique_id=1337734455 instance=ExtResource("79_7gdev")]
-transform = Transform3D(4.8595085, 0, 2.4893332, 0, 5.46, 0, -2.4893332, 0, 4.8595085, -0.0997318, 0.67776674, -0.17901674)
-
-[node name="lamo" parent="." unique_id=504927446 instance=ExtResource("80_h3q4e")]
+[node name="Lamp" parent="." unique_id=504927446 instance=ExtResource("80_h3q4e")]
 transform = Transform3D(0.45745757, 0, -0.88923144, 0, 1, 0, 0.88923144, 0, 0.45745757, -0.720707, 1.6712577, -0.21237288)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="lamo" unique_id=785542697]
+[node name="OmniLight3D" type="OmniLight3D" parent="Lamp" unique_id=785542697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006056428, -0.30474746, 0.011772811)
 light_color = Color(1, 0.6446667, 0.18, 1)
 light_specular = 0.0

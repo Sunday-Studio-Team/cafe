@@ -16,7 +16,7 @@ var machine: Machine
 @onready var timer := machine.timer
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if timer.is_stopped():
 		timer_ui.hide()
 	else:

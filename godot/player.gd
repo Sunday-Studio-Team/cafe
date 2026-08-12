@@ -11,6 +11,7 @@ const STRIDE_LENGTH := 0.75
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
+@export var roller_skates: Item
 
 var move_speed: float = Stats.current.default_move_speed
 var mouse_sens := 0.1
@@ -49,7 +50,7 @@ func _ready() -> void:
 
 			var t := create_tween().set_parallel()
 			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
-			t.tween_property(ingredients_bag, "transparency", 0, 0.25)
+			t.tween_property(ingredients_bag, "transparency", 0, 0.25),
 	)
 
 	Global.stamina = Stats.current.max_stamina
@@ -115,11 +116,7 @@ func handle_mouselook() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	if (
-			not movement_enabled
-			or holding_interactable
-			or Global.in_ui
-	):
+	if (not movement_enabled or holding_interactable or Global.in_ui):
 		velocity = Vector3.ZERO
 		return
 
@@ -139,7 +136,10 @@ func handle_movement(delta: float) -> void:
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
-		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, accel * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(
+			move_dir_3d * move_speed,
+			accel * delta,
+		)
 	else:
 		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, decel * delta)
 
@@ -159,18 +159,16 @@ func handle_hovered_interactable() -> void:
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
 		if (
-				not hovered_interactable.enabled
-				or not hovered_interactable.is_inside_tree()
-				or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
+			not hovered_interactable.enabled or not hovered_interactable.is_inside_tree()
+			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
 
 	# if we're currently holding interact on something, dont do anything
 	# (so we can look around while we hold)
 	if (
-			hovered_interactable != null
-			and hovered_interactable.hold_to_interact
-			and Input.is_action_pressed("interact")
+		hovered_interactable != null and hovered_interactable.hold_to_interact
+		and Input.is_action_pressed("interact")
 	):
 		holding_interactable = true
 		return
@@ -194,7 +192,7 @@ func handle_inspected_shelf_item() -> void:
 
 
 func handle_sprint(delta: float) -> void:
-	if Input.is_action_pressed("sprint"):
+	if (Input.is_action_pressed("sprint") and not Global.owned_items.has(roller_skates)):
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
 				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
@@ -237,11 +235,7 @@ func tilt_camera() -> void:
 
 
 func handle_ingredients_bag() -> void:
-	if (
-			Input.is_action_just_pressed("drop")
-			and Global.holding_ingredients
-			and not Global.in_ui
-	):
+	if (Input.is_action_just_pressed("drop") and Global.holding_ingredients and not Global.in_ui):
 		Global.holding_ingredients = false
 		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()
 		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2

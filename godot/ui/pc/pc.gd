@@ -21,7 +21,7 @@ func _ready() -> void:
 			if visible:
 				Global.in_pc_ui = true
 			else:
-				Global.in_pc_ui = false
+				Global.in_pc_ui = false,
 	)
 
 	# we dont even have money for shop on day 1 sooo
@@ -29,11 +29,8 @@ func _ready() -> void:
 		shop_button.hide()
 
 
-func _physics_process(_delta: float) -> void:
-	if (
-			Input.is_action_just_pressed("pause")
-			and Global.in_pc_ui
-	):
+func _process(_delta: float) -> void:
+	if (Input.is_action_just_pressed("pause") and Global.in_pc_ui):
 		var in_app := false
 
 		for app in [email_app, shop_app]:
