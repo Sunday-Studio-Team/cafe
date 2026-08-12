@@ -10,13 +10,44 @@ modification = 1.8
 multiply = true
 metadata/_custom_type_script = "uid://d4ho1epmr2gym"
 
+[sub_resource type="Resource" id="Resource_5qn2k"]
+script = ExtResource("2_enc2h")
+modification = -0.1
+metadata/_custom_type_script = "uid://d4ho1epmr2gym"
+
+[sub_resource type="Resource" id="Resource_nfne0"]
+script = ExtResource("2_enc2h")
+modification = 0.1
+metadata/_custom_type_script = "uid://d4ho1epmr2gym"
+
+[sub_resource type="Resource" id="Resource_n1mwn"]
+script = ExtResource("2_enc2h")
+modification = 1.8
+multiply = true
+metadata/_custom_type_script = "uid://d4ho1epmr2gym"
+
+[sub_resource type="Resource" id="Resource_enc2h"]
+script = ExtResource("2_enc2h")
+modification = 2.0
+metadata/_custom_type_script = "uid://d4ho1epmr2gym"
+
+[sub_resource type="Resource" id="Resource_kn3rl"]
+script = ExtResource("2_enc2h")
+modification = 3.0
+metadata/_custom_type_script = "uid://d4ho1epmr2gym"
+
 [resource]
 script = ExtResource("1_t0472")
 name = "Unstable Machine"
-description = "There’s a problem with the machines; it has become less smooth... It will break more often......"
+description = "There’s a problem with the machines; it has become less smooth... It will make more mistakes......"
 icon = ExtResource("1_enc2h")
-weight = 20
+weight = 15
 modifications = Dictionary[String, ExtResource("2_enc2h")]({
-"chance_of_machine_breaking": SubResource("Resource_qcjkm")
+"chance_of_machine_breaking": SubResource("Resource_qcjkm"),
+"machine_chance_of_spill": SubResource("Resource_n1mwn"),
+"max_breakdowns_per_shift": SubResource("Resource_kn3rl"),
+"max_spills_per_shift": SubResource("Resource_enc2h"),
+"score_chances_3": SubResource("Resource_5qn2k"),
+"score_chances_neg3": SubResource("Resource_nfne0")
 })
 metadata/_custom_type_script = "uid://d1wwxitrj27iw"
