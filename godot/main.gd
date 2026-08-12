@@ -189,27 +189,29 @@ func set_per_day_stuff() -> void:
 
 
 func spawn_customer() -> void:
-	var all_machines_occupied := true
-
+	var available_machines: Array[Machine] = []
 	for machine in machines:
-		if not machine.customer:
-			all_machines_occupied = false
-
-	if all_machines_occupied:
+		if machine.customer == null and machine.queued_customer == null:
+			available_machines.append(machine)
+	
+	if available_machines.size() == 0:
 		return
-
-	var new_customer = customer_scene.instantiate()
+	
+	var assigned_machine: Machine = available_machines.pick_random()
+	if assigned_machine == null:
+		printerr("Machine to spawn at should never be null?")
+		return
+	
+	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
+	assigned_machine.queued_customer = new_customer
 
 	await get_tree().create_timer(randf_range(2, 4), false).timeout
 
-	var machine: Machine = null
-	while machine == null or machine.customer:
-		machine = machines.pick_random()
-
-	await machine.set_customer(new_customer)
-	machine.machine_make_drink()
+	await assigned_machine.set_customer(new_customer)
+	assigned_machine.queued_customer = null
+	assigned_machine.machine_make_drink()
 
 
 #Actives the effects of a given active item

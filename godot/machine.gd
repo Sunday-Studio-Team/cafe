@@ -60,6 +60,7 @@ static var seen_breakdown_popup := false
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
 var customer: Customer
+var queued_customer: Customer
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
