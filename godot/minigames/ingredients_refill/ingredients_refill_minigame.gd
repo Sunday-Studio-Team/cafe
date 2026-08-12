@@ -50,7 +50,9 @@ func _ready() -> void:
 	add_child(bomb_sound_player)
 
 	bomb_sound_player.stream= preload("res://audio/hammer_hit.mp3")
-	_player = get_tree().get_nodes_in_group("player")[0]
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size()>0:
+		_player = players[0]
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
