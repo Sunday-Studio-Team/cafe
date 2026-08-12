@@ -1,0 +1,28 @@
+[gd_resource type="Environment" format=3 uid="uid://bbukfqfrfkb1r"]
+
+[ext_resource type="Texture2D" uid="uid://dqnm76jpmu5v6" path="res://Assets/hdri/Joburg Central Sunset HDRI.hdr" id="1_ftucs"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6seew"]
+panorama = ExtResource("1_ftucs")
+energy_multiplier = 1.1
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("PanoramaSkyMaterial_6seew")
+radiance_size = 0
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+sky_rotation = Vector3(0, 3.387684, 0)
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_cascades = 2
+sdfgi_y_scale = 0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+adjustment_enabled = true
+adjustment_brightness = 0.89
+adjustment_contrast = 1.25
+adjustment_saturation = 1.15
