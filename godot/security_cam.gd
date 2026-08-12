@@ -31,6 +31,7 @@ func _ready() -> void:
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
 	rotate_tween.tween_interval(rotation_pause_length)
 
+	interactable.interacted.connect(open_camera_minigame)
 	interactable.used_active_item.connect(_on_used_active_item)
 
 	visibility_changed.connect(_on_visibility_changed)
@@ -38,11 +39,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not visible:
-		return
-	
-	#If disabled
-	if _camera_disarmed:
+	if not visible or _camera_disarmed:
 		return
 
 	if not timer.is_stopped():
@@ -84,6 +81,8 @@ func _physics_process(_delta: float) -> void:
 	else:
 		spotlight.light_color = Color.WHITE
 
+	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
+
 
 func _on_visibility_changed() -> void:
 	_update_camera_components_active()
@@ -100,18 +99,22 @@ func rearm_camera() -> void:
 
 
 func _update_camera_components_active() -> void:
-	if visible and !_camera_disarmed:
+	if visible and not _camera_disarmed:
+		interactable.enabled = true
 		spotlight.visible = true
 		rotate_tween.play()
 		ray.enabled = true
 		for stored_ray in all_rays:
 			stored_ray.enabled = true
 	else:
+		interactable.enabled = false
 		spotlight.visible = false
 		rotate_tween.stop()
 		ray.enabled = false
 		for stored_ray in all_rays:
 			stored_ray.enabled = false
+
+
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
 func create_rays() -> void:

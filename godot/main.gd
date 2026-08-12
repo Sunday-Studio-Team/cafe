@@ -214,10 +214,6 @@ func spawn_customer() -> void:
 
 #Actives the effects of a given active item
 func active_item_used(item: Item):
-	var item_name: String = ""
-	if item != null:
-		item_name = item.name
-
 	# TODO: Fix how clock works
 	if item == clock_item and not game_timer.is_stopped():
 		game_timer.paused = true
@@ -228,9 +224,11 @@ func active_item_used(item: Item):
 		game_timer.paused = false
 		clock_item_start_sound.play()
 
+
 func _set_security_cameras_active(active: bool) -> void:
 	for security_camera in _cameras:
 		security_camera.visible = active
+
 
 func _on_pause_menu_tutorial_requested() -> void:
 	_tutorial_manager.show_tutorial()

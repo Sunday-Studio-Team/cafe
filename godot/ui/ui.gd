@@ -43,8 +43,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var item_hover_tooltip_description: RichTextLabel
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
-@export var disable_camera_indicator: PanelContainer
-@export var disable_camera_indicator_label: RichTextLabel
 #Active Item
 @export var current_item_ui: Control
 @export var item_indicator: PanelContainer
@@ -471,11 +469,8 @@ func update_interactable_ui() -> void:
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
 		cctv_indicator.texture = _eye_logo_red_texture
-		disable_camera_indicator_label.text = "[E] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
-		disable_camera_indicator.show()
 	else:
 		cctv_indicator.texture = _eye_logo_texture
-		disable_camera_indicator.hide()
 
 
 func _on_alert_posted(message: String) -> void:
