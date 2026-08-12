@@ -6,6 +6,9 @@ const LEFT_RIGHT_FORCE := 250
 
 @export var cup: CharacterBody2D
 @export var bean_scene: PackedScene
+@export var screw_bean_scene: PackedScene
+@export var golden_bean_scene: PackedScene
+@export var bomb_bean_scene: PackedScene
 @export var pour_point: Marker2D
 @export var bean_spawn_timer: Timer
 @export var cup_area: Area2D
@@ -16,11 +19,16 @@ const LEFT_RIGHT_FORCE := 250
 @export var bag_shake_sound: AudioStreamPlayer2D
 @export var gain_score_sound: AudioStreamPlayer
 
+var _player: Node #gets loaded in ready()
+
 var beans_in_cup := 0
 var beans_spawned := 0
+var bomb_bean_spawned = false #guarantees that the refill minigame can only spawn 1 bomb bean.
+var screw_bean_spawned = false #guarantees that the refill minigame can only spawn 1 screw bean.
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 
+var bomb_sound_player: AudioStreamPlayer #requires some setup in ready()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +46,12 @@ func _ready() -> void:
 				bean_hit_glasss_sound.play()
 	)
 
+	bomb_sound_player = AudioStreamPlayer.new()
+	add_child(bomb_sound_player)
 
+	bomb_sound_player.stream= preload("res://audio/hammer_hit.mp3")
+	_player = get_tree().get_nodes_in_group("player")[0]
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	var left_right_input = Input.get_vector("move_left", "move_right", "move_forward", "move_back").x
