@@ -17,6 +17,7 @@ var game_over = false
 
 func _ready():
 	add_to_group("game_manager")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	chosen_word = words.pick_random()
 	visible = true
 	
@@ -78,18 +79,17 @@ func win_game():
 	game_timer.stop()
 	show_result_text("You Win!")
 	pause()
-	# _end_minigame()
-	# Events.force_close_minigame
-	Events.emit_signal("minigame_end")
+	_end_minigame()
+	# Events.emit_signal("minigame_end")
 
 func lose_game():
 	game_over = true
 	game_timer.stop()
 	show_result_text("You Lose!")
 	pause()
-	# _end_minigame()
-	# Events._on_force_close_minigame
-	Events.emit_signal("minigame_end")
+	_end_minigame()
+	# Events.emit_signal("minigame_end")
 	
 func _end_minigame() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Events.minigame_end.emit()
