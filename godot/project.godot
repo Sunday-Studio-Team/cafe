@@ -122,6 +122,8 @@ dialog_continue={
 
 [layer_names]
 
+3d_render/layer_1="static_occluders"
+3d_render/layer_2="dynamic_occluders"
 3d_physics/layer_1="environment"
 3d_physics/layer_2="interactables"
 3d_physics/layer_3="droppable"
@@ -135,3 +137,4 @@ dialog_continue={
 
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/use_debanding=true
+occlusion_culling/use_occlusion_culling=true

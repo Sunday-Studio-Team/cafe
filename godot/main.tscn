@@ -49,6 +49,7 @@
 [ext_resource type="PackedScene" uid="uid://b1he8y7llt2c7" path="res://environment/whiteboard/day_shift_whiteboard_content_friday.tscn" id="29_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://blo5und4lewb4" path="res://Assets/Locker/Low Poly Lockers_2.png" id="30_faa31"]
 [ext_resource type="PackedScene" uid="uid://dfmk6fgi2327m" path="res://Assets/Office door/Managers Office Door 3D Model.glb" id="33_0abf2"]
+[ext_resource type="ArrayOccluder3D" uid="uid://cyseh0wgqavym" path="res://break_room_door_occluder3d.occ" id="42_l0gw7"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
@@ -385,6 +386,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BreakRoomDoorOccluderInstance3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_tko6h"]
 resource_name = "close_door"
@@ -396,7 +409,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("BreakRoomDoorModel")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, -0.7933533, 0, 0.6087614, 0.5, 1, 0, 0, 0, 1)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.793353, 0, 0.608761, 0.5, 1, 0, 0, 0, 1)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -409,6 +422,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BreakRoomDoorOccluderInstance3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ywjan"]
 resource_name = "open_door"
@@ -420,7 +445,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("BreakRoomDoorModel")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, -0.7933533, 0, 0.6087614)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 0.793353, 0, 0.608761)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -432,6 +457,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BreakRoomDoorOccluderInstance3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m74q3"]
@@ -758,7 +795,7 @@ mesh = SubResource("ArrayMesh_mls0f")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.069131, 0, 4.587011)
 
 [node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("open_sound", "close_sound", "animation_player", "exited_break_room_detection_area")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.917271, 0, 4.4959364)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.917271, 0, 5.4959364)
 script = ExtResource("6_d13ii")
 open_sound = NodePath("OpenSound")
 close_sound = NodePath("CloseSound")
@@ -770,11 +807,22 @@ exited_break_room_detection_area = NodePath("PlayerDetectionArea")
 [node name="BreakRoomDoorAnimationPlayer" type="AnimationPlayer" parent="BreakRoomDoor" unique_id=1153521959]
 libraries/ = SubResource("AnimationLibrary_m74q3")
 
+[node name="BreakRoomDoorOccluderInstance3D" type="OccluderInstance3D" parent="BreakRoomDoor" unique_id=890064405]
+layers = 2
+occluder = ExtResource("42_l0gw7")
+bake_mask = 4293918722
+
 [node name="BreakRoomDoorModel" type="Node3D" parent="BreakRoomDoor" unique_id=1779757833]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Sketchfab_Scene" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=605328551 instance=ExtResource("33_0abf2")]
-transform = Transform3D(-3.2810533e-08, 0, 0.9999995, 0, 0.9083781, 0, -0.75061756, 0, -4.3711363e-08, -0.029385567, -0.024177432, 0.5333538)
+transform = Transform3D(-3.6398223e-08, 0, 1.1093451, 0, 1.0077057, 0, -0.8326944, 0, -4.8491014e-08, -0.029385567, -0.024177432, -0.50364494)
+
+[node name="Object_2" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 2114470308) index="0" unique_id=1655746761]
+layers = 2
+
+[node name="Object_3" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 2114470308) index="1" unique_id=1126054756]
+layers = 2
 
 [node name="BreakRoomEntranceBlocker" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]
 
@@ -1863,3 +1911,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.7
 
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam3"]
+[editable path="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene"]
