@@ -430,7 +430,7 @@ func update_interactable_ui() -> void:
 			item_text.text = "[Q] SCRUBBER 🧼"
 
 		elif (
-				hovered_interactable.display_name == "Camera"
+				hovered_interactable.display_name.contains("camera")
 				and Global.equipped_item != null
 				and Global.equipped_item == whipped_cream
 		):
