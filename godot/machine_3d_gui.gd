@@ -24,6 +24,9 @@ var last_event_time: float = -1.0
 # where to put our camera back to when we exit
 var cam_trans_b4_enter: Transform3D
 
+#keeps track of where the player was before they interacted w/ machine.
+var where_was_player: Transform3D
+
 @onready var machine: Machine = get_parent() as Machine
 
 
@@ -39,7 +42,12 @@ func _ready():
 			interactable.enabled = false
 			Global.in_machine_ui = true
 			player_using_me = true
-
+			
+			#store where the player was, before they interacted w/ the machine.
+			#used when using bomb(), which is in ingredients_refill_minigame.gd
+			where_was_player = Global.player.global_transform
+			
+				
 			# Showing the popup tutorial when the player uses the machine
 			if not seen_interaction_popup:
 				seen_interaction_popup = true # Only showing it once
