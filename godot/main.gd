@@ -289,25 +289,40 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			_world_environment.environment.ssil_enabled = true
 			_world_environment.environment.sdfgi_enabled = true
 			_world_environment.environment.volumetric_fog_enabled = true
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
 		OptionsData.GraphicsOptionsPresets.MEDIUM:
 			_world_environment.environment.ssao_enabled = true
 			_world_environment.environment.ssil_enabled = false
 			_world_environment.environment.sdfgi_enabled = true
 			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
 		OptionsData.GraphicsOptionsPresets.LOW:
 			_world_environment.environment.ssao_enabled = false
 			_world_environment.environment.ssil_enabled = false
 			_world_environment.environment.sdfgi_enabled = false
 			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
 		OptionsData.GraphicsOptionsPresets.MINIMUM:
 			_world_environment.environment.ssao_enabled = false
 			_world_environment.environment.ssil_enabled = false
 			_world_environment.environment.sdfgi_enabled = false
 			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 0.5)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
 		_:
 			pass
+	RenderingServer.gi_set_use_half_resolution(ProjectSettings.get_setting("rendering/global_illumination/gi/use_half_resolution"))
 	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
+	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
+	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
