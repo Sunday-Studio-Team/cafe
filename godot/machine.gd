@@ -382,6 +382,10 @@ func machine_make_drink() -> void:
 		if sc == order.score:
 			order.made_drink = item
 			break
+	
+	if Global.current_special_shift != null and Global.current_special_shift.name == "Critical Customers":
+		if order.score < 3:
+			order.score = -3
 
 	if !order.made_drink: # get a random drink, useful for earlier days
 		order.made_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
