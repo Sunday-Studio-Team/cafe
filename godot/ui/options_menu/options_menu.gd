@@ -6,8 +6,8 @@ extends Node
 @export var _save_settings_button: Button
 
 const _graphics_option_presets: Dictionary[String, int] = {
-	"High": OptionsData.GraphicsOptionsPresets.HIGH,
-	"Medium": OptionsData.GraphicsOptionsPresets.MEDIUM,
+	"Ultra": OptionsData.GraphicsOptionsPresets.HIGH,
+	"High": OptionsData.GraphicsOptionsPresets.MEDIUM,
 	"Low": OptionsData.GraphicsOptionsPresets.LOW,
 	"Minimum": OptionsData.GraphicsOptionsPresets.MINIMUM,
 }
