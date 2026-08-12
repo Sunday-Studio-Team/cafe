@@ -17,7 +17,7 @@ class_name SecurityCam3D
 var all_rays: Array[RayCast3D]
 var rotate_tween: Tween
 var disable_minigames := ["Lines"]
-var camera_disabled := false
+var _camera_disarmed := false
 
 @onready var original_rotation := rotation_degrees
 
@@ -31,17 +31,15 @@ func _ready() -> void:
 	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
 	rotate_tween.tween_interval(rotation_pause_length)
 
+	interactable.interacted.connect(open_camera_minigame)
 	interactable.used_active_item.connect(_on_used_active_item)
 
+	visibility_changed.connect(_on_visibility_changed)
+	_update_camera_components_active()
 
 
 func _physics_process(_delta: float) -> void:
-	# if cameras are hidden, treat that as them being disabled
-	if not is_visible_in_tree():
-		return
-	
-	#If disabled
-	if camera_disabled:
+	if not visible or _camera_disarmed:
 		return
 
 	if not timer.is_stopped():
@@ -83,15 +81,40 @@ func _physics_process(_delta: float) -> void:
 	else:
 		spotlight.light_color = Color.WHITE
 
-func disable_camera() -> void:
-	camera_disabled = true
-	spotlight.visible = false
-	rotate_tween.stop()
+	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
 
-func enable_camera() -> void:
-	camera_disabled = false
-	spotlight.visible = true
-	rotate_tween.play()
+
+func _on_visibility_changed() -> void:
+	_update_camera_components_active()
+
+
+func disarm_camera() -> void:
+	_camera_disarmed = true
+	_update_camera_components_active()
+
+
+func rearm_camera() -> void:
+	_camera_disarmed = false
+	_update_camera_components_active()
+
+
+func _update_camera_components_active() -> void:
+	if visible and not _camera_disarmed:
+		interactable.enabled = true
+		spotlight.visible = true
+		rotate_tween.play()
+		ray.enabled = true
+		for stored_ray in all_rays:
+			stored_ray.enabled = true
+	else:
+		interactable.enabled = false
+		spotlight.visible = false
+		rotate_tween.stop()
+		ray.enabled = false
+		for stored_ray in all_rays:
+			stored_ray.enabled = false
+
+
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
 func create_rays() -> void:
@@ -99,6 +122,8 @@ func create_rays() -> void:
 	# halo around the edge of the light
 	const ANGLE_OVERSHOOT := 5.0
 
+	# Disable the template by default.
+	ray.enabled = false
 	for x_rot in range(25, 360, 15):
 		for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
 			var new_ray := ray.duplicate() as RayCast3D
@@ -109,18 +134,18 @@ func create_rays() -> void:
 
 
 func try_disable_camera() -> void:
-	if camera_disabled:
+	if _camera_disarmed:
 		return
 
 	tries_until_disabled -= 1
 	if tries_until_disabled <= 0:
-		disable_camera()
+		disarm_camera()
 		await get_tree().create_timer(20, false).timeout
-		enable_camera()
+		rearm_camera()
 
 
 func open_camera_minigame() -> void:
-	if camera_disabled:
+	if _camera_disarmed:
 		return
 
 	if Global.minigame_active:
@@ -145,6 +170,6 @@ func _cancel_break_minigame() -> void:
 func _on_used_active_item(item: Item):
 	if item != null and item == whipped_cream_item:
 		Global.deactivate_active_item(whipped_cream_item)
-		disable_camera()
+		disarm_camera()
 		await get_tree().create_timer(8, false).timeout
-		enable_camera()
+		rearm_camera()

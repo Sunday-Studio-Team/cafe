@@ -37,7 +37,7 @@ func _ready() -> void:
 	spawn_sound.play()
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	# uncomment to show time above customer head
 	#waiting_indicator.visible = not timer.is_stopped()
 

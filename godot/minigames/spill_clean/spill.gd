@@ -5,11 +5,14 @@ extends Node2D
 # it was consider transparent
 const ALPHA_THRESHOLD_BYTE: int = 5
 
+static var used_scrubber: bool = false
+
 @export var wet_mop_texture: Texture
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
+@export var bucket_area: Area2D
 @export var mop: DraggableMop
 @export var splash: AudioStreamPlayer2D
 
@@ -26,17 +29,13 @@ var remaining_pixel_count: int = 0
 var image_width: int
 var image_height: int
 var pixel_data: PackedByteArray
-var is_erasing: bool = false
 var game_finished: bool = false
-
-static var used_scrubber: bool = false
 
 
 func _ready() -> void:
 	Global.minigame_active = true
+	Global.in_spill_minigame = true
 	canvas_sprite.texture = Global.spill_sprites.pick_random()
-
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	canvas_image = canvas_sprite.texture.get_image()
 	canvas_image.convert(Image.FORMAT_RGBA8)
@@ -76,9 +75,11 @@ func _ready() -> void:
 		set_physics_process(false)
 		return
 
-	mop.drag_started.connect(_on_mop_drag_started)
-	mop.drag_ended.connect(_on_mop_drag_ended)
-	
+	bucket_area.area_entered.connect(
+		func(_area: Area2D):
+			wet_mop()
+	)
+
 	if used_scrubber:
 		mop.scale *= 1.5
 
@@ -87,26 +88,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if game_finished or not is_erasing:
+	if game_finished or not mop.is_wet:
 		return
 
 	if mop_collision == null or mop_collision.disabled:
-		return
-
-	# The mop cannot erase until it has touched the bucket.
-	if not mop.is_wet:
-		if mop_overlaps_bucket():
-			splash.play()
-			mop.is_wet = true
-			mop.texture = wet_mop_texture
-			mop.bubbles.emitting = true
-			create_tween().tween_property(
-				mop,
-				"modulate",
-				Color.WHITE,
-				1,
-			).from(Color.AQUA)
-			print("The mop is now wet.")
 		return
 
 	var image_changed: bool = erase_inside_mop_rectangle()
@@ -119,41 +104,18 @@ func _physics_process(_delta: float) -> void:
 	check_for_win()
 
 
-func mop_overlaps_bucket() -> bool:
-	if bucket == null or bucket.texture == null:
-		return false
-
-	var half_size: Vector2 = mop_rectangle.size * 0.5
-
-	var mop_local_rect: Rect2 = Rect2(
-		-half_size,
-		mop_rectangle.size,
-	)
-
-	var bucket_local_rect: Rect2 = bucket.get_rect()
-
-	var mop_polygon: PackedVector2Array = (
-			rect_to_global_polygon(
-				mop_local_rect,
-				mop_collision.global_transform,
-			)
-	)
-
-	var bucket_polygon: PackedVector2Array = (
-			rect_to_global_polygon(
-				bucket_local_rect,
-				bucket.global_transform,
-			)
-	)
-
-	var intersection: Array[PackedVector2Array] = (
-			Geometry2D.intersect_polygons(
-				mop_polygon,
-				bucket_polygon,
-			)
-	)
-
-	return not intersection.is_empty()
+func wet_mop() -> void:
+	if not mop.is_wet:
+		splash.play()
+		mop.is_wet = true
+		mop.texture = wet_mop_texture
+		mop.bubbles.emitting = true
+		create_tween().tween_property(
+			mop,
+			"modulate",
+			Color.WHITE,
+			1,
+		).from(Color.AQUA)
 
 
 func rect_to_global_polygon(local_rect: Rect2, global_rect_transform: Transform2D) -> PackedVector2Array:
@@ -452,16 +414,7 @@ func win_game() -> void:
 		return
 
 	game_finished = true
-	is_erasing = false
 
 	progress_label.text = "Erased: 100%"
 
 	Events.emit_signal("minigame_end")
-
-
-func _on_mop_drag_started() -> void:
-	is_erasing = true
-
-
-func _on_mop_drag_ended() -> void:
-	is_erasing = false

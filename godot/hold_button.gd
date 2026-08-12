@@ -17,7 +17,7 @@ func _ready() -> void:
 	mouse_exited.connect(func(): button_up.emit())
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if held and enabled:
 		held_time += delta
 	elif reset_if_let_go:

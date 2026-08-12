@@ -31,7 +31,7 @@ func _ready() -> void:
 		load_scene(SceneSwitcher.GameScene.MAIN_MENU)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	loading_icons.visible = loading_screen.modulate.a == 1
 
 

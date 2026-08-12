@@ -9,7 +9,7 @@ func _ready() -> void:
 	mouse_exited.connect(func(): Global.hovered_item_icon = null)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if item:
 		texture = item.icon
 		show()

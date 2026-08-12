@@ -39,7 +39,7 @@ script = ExtResource("1_w3jiq")
 ray = NodePath("SpotLight3D/RayCast3D")
 spotlight = NodePath("SpotLight3D")
 timer = NodePath("GraceTimer")
-interactable = NodePath("Interactable")
+interactable = NodePath("SabotageInteractable")
 whipped_cream_item = ExtResource("2_bpkf2")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1348601655]
@@ -72,12 +72,12 @@ mesh = SubResource("SphereMesh_bpkf2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12828007, -0.0012458414)
 mesh = SubResource("CylinderMesh_qlhcy")
 
-[node name="Interactable" type="Area3D" parent="." unique_id=53695990 node_paths=PackedStringArray("mesh")]
+[node name="SabotageInteractable" type="Area3D" parent="." unique_id=53695990 node_paths=PackedStringArray("mesh")]
 script = ExtResource("2_8ad36")
-display_name = "Camera"
+display_name = "sabotage camera"
 mesh = NodePath("../Model/Body")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=2134907620]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SabotageInteractable" unique_id=2134907620]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3569336, 0)
 shape = SubResource("CylinderShape3D_5kcxd")

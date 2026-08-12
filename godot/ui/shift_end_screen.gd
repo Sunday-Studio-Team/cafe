@@ -33,7 +33,7 @@ func _ready() -> void:
 	)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	bank_total.text = "🏦 Bank total: [color=gold]%s[/color]" % Global.float_to_price(value_to_show_on_bank_total)
 
 	if visible:

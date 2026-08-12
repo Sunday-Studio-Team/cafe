@@ -20,6 +20,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
 @export var cctv_indicator: TextureRect
+@export var _eye_logo_red_texture: Texture2D
+@export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
@@ -41,8 +43,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var item_hover_tooltip_description: RichTextLabel
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
-@export var disable_camera_indicator: PanelContainer
-@export var disable_camera_indicator_label: RichTextLabel
 #Active Item
 @export var current_item_ui: Control
 @export var item_indicator: PanelContainer
@@ -62,6 +62,7 @@ var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
 
+var _employee_rating_last_update: float = -1
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -186,7 +187,7 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.WHITE, 2)
 
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
@@ -349,10 +350,17 @@ func update_score_indicators() -> void:
 	if Global.daily_profit:
 		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
 
+	_update_rating()
+
+func _update_rating() -> void:
+	var current_rating := Global.employee_rating
+	if current_rating == _employee_rating_last_update:
+		return
+	_employee_rating_last_update = current_rating
+	
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
 
-	var current_rating := Global.employee_rating
 	var rating_is_even := current_rating % 2 == 0
 	var rating_shown := 0
 
@@ -371,7 +379,6 @@ func update_score_indicators() -> void:
 		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
 
 	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
-
 
 func update_time_indicator() -> void:
 	time_left_ui.visible = not game_timer.is_stopped()
@@ -461,12 +468,9 @@ func update_interactable_ui() -> void:
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
-		cctv_indicator.texture = load("res://sprites/eye_red.png")
-		disable_camera_indicator_label.text = "[E] Disable Camera (%s)" % Global.player_in_cctv_los_camera.tries_until_disabled
-		disable_camera_indicator.show()
+		cctv_indicator.texture = _eye_logo_red_texture
 	else:
-		cctv_indicator.texture = load("res://sprites/eye_logo.png")
-		disable_camera_indicator.hide()
+		cctv_indicator.texture = _eye_logo_texture
 
 
 func _on_alert_posted(message: String) -> void:

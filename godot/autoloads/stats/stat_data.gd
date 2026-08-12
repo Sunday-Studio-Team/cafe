@@ -47,6 +47,7 @@ var max_breakdowns_per_shift := 3
 var clean_spill_allowed_remaining := 0.01
 var extra_time_from_overtime_form_item := 25.0
 var max_stamina := 125.0
-var sprint_stamina_drain_rate := 25.0
+# NOTE: set to 0 to effectively disable (was 25 before)
+var sprint_stamina_drain_rate := 0.0
 var stamina_regen_rate := 10.0
 var sprint_lockout_time := 3.0

@@ -5,8 +5,9 @@ static var seen_breakdown_popup := false
 
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
+@export var _world_environment: WorldEnvironment
 @export var machines: Array[Machine]
-@export var cameras: Node3D
+@export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
 # first machine on the left
 @export var side_machine: Machine
@@ -22,6 +23,7 @@ static var seen_breakdown_popup := false
 @export var desk: Interactable
 @export var pc_ui: Control
 @export var overtime_item: Item
+@export var teleporter: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -37,6 +39,8 @@ static var seen_breakdown_popup := false
 @export var special_shift_icon: TextureRect
 @export var special_shift_text: Label
 @export var special_shift_title: Label
+@export var teleporter1: Teleporter
+@export var teleporter2: Teleporter
 
 
 func _enter_tree() -> void:
@@ -46,6 +50,9 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+	Events.game_options_changed.connect(_on_game_options_changed)
+	SaveDataManager.get_options_data().apply_options()
+	
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
@@ -111,6 +118,13 @@ func _ready() -> void:
 		special_shift_title.text = Global.current_special_shift.name
 		special_shift_icon.texture = Global.current_special_shift.icon
 		Global.popups["special shift"].open()
+	
+	if teleporter in Global.owned_items:
+		teleporter1.enable_teleporter()
+		teleporter2.enable_teleporter()
+	else:
+		teleporter1.disable_teleporter()
+		teleporter2.disable_teleporter()
 
 
 func get_stats() -> void:
@@ -130,7 +144,7 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 1:
 		game_timer.wait_time = 90
 		Stats.current.daily_profit_goal = 10
-		cameras.hide()
+		_set_security_cameras_active(false)
 	if Global.day >= 2:
 		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
@@ -140,7 +154,7 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 3:
 		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
-		cameras.show()
+		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
@@ -200,10 +214,6 @@ func spawn_customer() -> void:
 
 #Actives the effects of a given active item
 func active_item_used(item: Item):
-	var item_name: String = ""
-	if item != null:
-		item_name = item.name
-
 	# TODO: Fix how clock works
 	if item == clock_item and not game_timer.is_stopped():
 		game_timer.paused = true
@@ -213,6 +223,11 @@ func active_item_used(item: Item):
 		await get_tree().create_timer(8, false).timeout
 		game_timer.paused = false
 		clock_item_start_sound.play()
+
+
+func _set_security_cameras_active(active: bool) -> void:
+	for security_camera in _cameras:
+		security_camera.visible = active
 
 
 func _on_pause_menu_tutorial_requested() -> void:
@@ -263,3 +278,52 @@ func _on_desk_interacted() -> void:
 func _on_timer_timeout():
 	#game_timer.paused = false
 	pass # Replace with function body.
+
+
+func _on_game_options_changed(options_data: OptionsData) -> void:
+	_apply_game_options(options_data)
+	
+func _apply_game_options(options_data: OptionsData) -> void:
+	match options_data.graphics_preset:
+		OptionsData.GraphicsOptionsPresets.HIGH:
+			_world_environment.environment.ssao_enabled = true
+			_world_environment.environment.ssil_enabled = true
+			_world_environment.environment.sdfgi_enabled = true
+			_world_environment.environment.volumetric_fog_enabled = true
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
+		OptionsData.GraphicsOptionsPresets.MEDIUM:
+			_world_environment.environment.ssao_enabled = true
+			_world_environment.environment.ssil_enabled = false
+			_world_environment.environment.sdfgi_enabled = true
+			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+		OptionsData.GraphicsOptionsPresets.LOW:
+			_world_environment.environment.ssao_enabled = false
+			_world_environment.environment.ssil_enabled = false
+			_world_environment.environment.sdfgi_enabled = false
+			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+		OptionsData.GraphicsOptionsPresets.MINIMUM:
+			_world_environment.environment.ssao_enabled = false
+			_world_environment.environment.ssil_enabled = false
+			_world_environment.environment.sdfgi_enabled = false
+			_world_environment.environment.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 0.5)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+		_:
+			pass
+	RenderingServer.gi_set_use_half_resolution(ProjectSettings.get_setting("rendering/global_illumination/gi/use_half_resolution"))
+	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
+	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
+	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)

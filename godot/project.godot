@@ -20,10 +20,15 @@ config/icon="res://icon.svg"
 
 Console="*uid://ouiu5xh1cs8n"
 Events="*uid://bwnrp1mvuxrhd"
+SaveDataManager="*uid://cwhxoltiia6kx"
 Global="*uid://bsobghkg5y0nh"
 Stats="*uid://bmxcuhiqxfn43"
 Commands="*uid://bio06bvap3ug1"
 DebugMenu="*uid://cggqb75a8w8r"
+
+[debug]
+
+settings/profiler/max_timestamp_query_elements=1024
 
 [display]
 
@@ -40,6 +45,11 @@ project/assembly_name="cafe"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/editor_tools/plugin.cfg", "res://addons/polygon_counter/plugin.cfg", "res://addons/polygon_counter_extended/plugin.cfg")
+
+[global_group]
+
+player=""
+machines=""
 
 [input]
 
@@ -112,6 +122,8 @@ dialog_continue={
 
 [layer_names]
 
+3d_render/layer_1="static_occluders"
+3d_render/layer_2="dynamic_occluders"
 3d_physics/layer_1="environment"
 3d_physics/layer_2="interactables"
 3d_physics/layer_3="droppable"
@@ -119,10 +131,13 @@ dialog_continue={
 
 [physics]
 
+3d/run_on_separate_thread=true
+common/physics_ticks_per_second=45
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/use_debanding=true
+occlusion_culling/use_occlusion_culling=true
