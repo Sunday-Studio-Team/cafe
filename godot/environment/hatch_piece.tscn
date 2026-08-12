@@ -1,22 +1,21 @@
 [gd_scene format=3 uid="uid://dmn6astu67x2i"]
 
-[ext_resource type="Texture2D" uid="uid://cu2lbmip0nha" path="res://environment/textures/metal holes.png" id="1_bo846"]
+[ext_resource type="Texture2D" uid="uid://bqdlveahtvcrp" path="res://environment/textures/metal wall 1.png" id="1_77ylc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ffxp"]
 size = Vector3(4, 3, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m64gf"]
-albedo_texture = ExtResource("1_bo846")
-uv1_scale = Vector3(-1.6, 2.04, 2.06)
-uv1_offset = Vector3(-0.06, -7.01, 0)
+albedo_texture = ExtResource("1_77ylc")
+uv1_offset = Vector3(0.45, 0.01, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bo846"]
 material = SubResource("StandardMaterial3D_m64gf")
 size = Vector3(1, 3, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77ylc"]
-albedo_texture = ExtResource("1_bo846")
-uv1_scale = Vector3(1.8, 0.61, 0.97)
+albedo_texture = ExtResource("1_77ylc")
+uv1_scale = Vector3(0.32, 0.32, 0.32)
 uv1_offset = Vector3(0.12, 0.7, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_m64gf"]
@@ -24,8 +23,9 @@ material = SubResource("StandardMaterial3D_77ylc")
 size = Vector3(2, 0.9567383, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bo846"]
-albedo_texture = ExtResource("1_bo846")
-uv1_scale = Vector3(0.68, 0.68, 0.68)
+albedo_texture = ExtResource("1_77ylc")
+uv1_scale = Vector3(0.29, 0.34, 0.29)
+uv1_offset = Vector3(0, 1, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_77ylc"]
 material = SubResource("StandardMaterial3D_bo846")
