@@ -29,7 +29,7 @@ var holding_interactable: bool = false
 # (whose 'position's may be further away from us than their interactable hitbox)
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
-@onready var max_interact_dist: float = abs(aiming_ray.target_position.z) + 1.25
+@onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
 
 
 func _ready() -> void:
@@ -159,7 +159,7 @@ func handle_hovered_interactable() -> void:
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
 		if (
-			not hovered_interactable.enabled or not hovered_interactable.is_inside_tree()
+			not hovered_interactable.visible or not hovered_interactable.is_inside_tree()
 			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
@@ -174,7 +174,7 @@ func handle_hovered_interactable() -> void:
 		return
 
 	var collider = aiming_ray.get_collider()
-	if collider is Interactable and collider.enabled:
+	if collider is Interactable and collider.visible:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null

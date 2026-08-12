@@ -31,6 +31,7 @@ var where_was_player: Transform3D
 
 
 func _ready():
+	node_area.visible = false
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
 	node_area.input_event.connect(_mouse_input_event)
@@ -39,7 +40,8 @@ func _ready():
 			# seems weird because we cant interact with Interactables while in_ui
 			# anyway but this is actually to stop that CollisionShape blocking
 			# our mouse from clicking stuff lul
-			interactable.enabled = false
+			node_area.visible = true
+			interactable.visible = false
 			Global.in_machine_ui = true
 			player_using_me = true
 			
@@ -100,10 +102,11 @@ func _unhandled_input(event):
 
 
 func exit() -> void:
+	node_area.visible = false
 	player_using_me = false
 
 	if not machine.broken_down:
-		interactable.enabled = true
+		interactable.visible = true
 
 	if Global.in_machine_ui:
 		Global.in_machine_ui = false
