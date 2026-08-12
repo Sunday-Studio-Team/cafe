@@ -243,12 +243,15 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0,
 mesh = SubResource("QuadMesh_0ffxp")
 
 [node name="SubViewport" type="SubViewport" parent="3DGui/Screen" unique_id=1837069961]
+use_occlusion_culling = true
 size = Vector2i(1200, 1600)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
 
 [node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
 handle_input_locally = false
+use_occlusion_culling = true
+scaling_3d_scale = 0.5
 size = Vector2i(848, 354)
 render_target_update_mode = 4
 
