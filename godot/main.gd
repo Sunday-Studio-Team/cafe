@@ -7,7 +7,7 @@ static var seen_breakdown_popup := false
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
 @export var machines: Array[Machine]
-@export var cameras: Node3D
+@export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
 # first machine on the left
 @export var side_machine: Machine
@@ -144,7 +144,7 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 1:
 		game_timer.wait_time = 90
 		Stats.current.daily_profit_goal = 10
-		cameras.hide()
+		_set_security_cameras_active(false)
 	if Global.day >= 2:
 		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
@@ -154,7 +154,7 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 3:
 		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
-		cameras.show()
+		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
@@ -228,6 +228,9 @@ func active_item_used(item: Item):
 		game_timer.paused = false
 		clock_item_start_sound.play()
 
+func _set_security_cameras_active(active: bool) -> void:
+	for security_camera in _cameras:
+		security_camera.set_camera_visible(active)
 
 func _on_pause_menu_tutorial_requested() -> void:
 	_tutorial_manager.show_tutorial()

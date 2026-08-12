@@ -513,14 +513,14 @@ bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
 size = Vector3(1, 0.2680664, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "machines", "cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "machines", "_cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
 _tutorial_manager = NodePath("TutorialManager")
 _world_environment = NodePath("WorldEnvironment")
 machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
-cameras = NodePath("SecurityCams")
+_cameras = [NodePath("SecurityCams/SecurityCam"), NodePath("SecurityCams/SecurityCam2"), NodePath("SecurityCams/SecurityCam3")]
 menu = NodePath("Menu")
 side_machine = NodePath("Machines/Machine")
 fourth_machine = NodePath("Machines/Machine4")
