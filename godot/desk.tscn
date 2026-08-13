@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://dhmqo5yinqk0t"]
 
+[ext_resource type="Script" uid="uid://52mve0rsf25i" path="res://desk.gd" id="1_7gdev"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
 [ext_resource type="Texture2D" uid="uid://dj050iu2fwpx3" path="res://Assets/Desk/office desk_Image_0.jpg" id="2_rejd0"]
 [ext_resource type="Texture2D" uid="uid://cpdd4gapsy0fs" path="res://Assets/Desk/office desk_Image_2.jpg" id="3_vdysj"]
@@ -1821,13 +1822,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_16ay0")
 
-[node name="Desk" type="Area3D" unique_id=2130239944 node_paths=PackedStringArray("mesh")]
+[node name="Desk" type="Node3D" unique_id=466216321 node_paths=PackedStringArray("interactable")]
+script = ExtResource("1_7gdev")
+interactable = NodePath("Interactable")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=691218958 node_paths=PackedStringArray("mesh")]
 script = ExtResource("1_ep8l3")
 display_name = "use PC"
-mesh = NodePath("DeskModel/screen2_mac_0")
-metadata/_custom_type_script = "uid://cku66354bxktd"
+mesh = NodePath("../DeskModel/screen2_mac_0")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=337724593]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=337724593]
 transform = Transform3D(0.77597946, 0, -0.63075817, 0, 1, 0, 0.63075817, 0, 0.77597946, 0.28375852, 1, 0.026936661)
 shape = SubResource("BoxShape3D_t5y75")
 

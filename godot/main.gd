@@ -20,7 +20,7 @@ static var seen_breakdown_popup := false
 @export var window: Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
-@export var desk: Interactable
+@export var desk: Desk
 @export var pc_ui: Control
 @export var overtime_item: Item
 @export var teleporter: Item
@@ -62,7 +62,7 @@ func _ready() -> void:
 
 	Events.shift_started.connect(_on_shift_started)
 
-	desk.interacted.connect(_on_desk_interacted)
+	desk.interactable.interacted.connect(_on_desk_interacted)
 
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
@@ -269,7 +269,7 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
-	desk.visible = false
+	desk.disable_interactable()
 
 
 func _on_desk_interacted() -> void:
