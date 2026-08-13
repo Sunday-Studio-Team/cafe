@@ -60,6 +60,7 @@ static var seen_breakdown_popup := false
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
 var customer: Customer
+var queued_customer: Customer
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
@@ -470,7 +471,7 @@ func fix_machine(hammer: bool = false) -> void:
 		hammer_hit_sound.play()
 	fixed_sound.play()
 
-	fix_machine_button.enabled = false
+	fix_machine_button.visible = false
 	var t := create_tween().tween_property(
 		fix_machine_button,
 		"scale",
@@ -478,12 +479,12 @@ func fix_machine(hammer: bool = false) -> void:
 		0.25,
 	)
 	await t.finished
-	fix_machine_button.enabled = true
+	fix_machine_button.visible = true
 	fix_machine_button.hide()
 	fix_machine_button.scale = Vector3.ONE
 	broken_down = false
 	timer.paused = false
-	gui_3d.interactable.enabled = true
+	gui_3d.interactable.visible = true
 	if customer:
 		# during normal gameplay, breakdowns always happen mid order,
 		# but when we force a breakdown thru the console we have to check some stuff
@@ -638,7 +639,7 @@ func break_down() -> void:
 
 	if gui_3d.player_using_me:
 		gui_3d.exit()
-	gui_3d.interactable.enabled = false
+	gui_3d.interactable.visible = false
 	customer_order_indicator.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()
@@ -668,7 +669,7 @@ func on_active_item_used_spill(item: Item):
 		return
 
 	if item == scrubber_item:
-		ErasableCanvas.used_scrubber = true
+		DraggableMop.used_scrubber = true
 		Global.deactivate_active_item(item)
 		_on_clean_spill()
 

@@ -12,9 +12,9 @@ func _ready() -> void:
 
 	# briefly disable on spawn so if we're dropping it we cant accidentally
 	# interact with it as it falls
-	interactable.enabled = false
+	interactable.visible = false
 	await get_tree().create_timer(0.5, false).timeout
-	interactable.enabled = true
+	interactable.visible = true
 
 
 func _on_interacted() -> void:

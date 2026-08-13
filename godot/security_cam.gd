@@ -100,14 +100,14 @@ func rearm_camera() -> void:
 
 func _update_camera_components_active() -> void:
 	if visible and not _camera_disarmed:
-		interactable.enabled = true
+		interactable.visible = true
 		spotlight.visible = true
 		rotate_tween.play()
 		ray.enabled = true
 		for stored_ray in all_rays:
 			stored_ray.enabled = true
 	else:
-		interactable.enabled = false
+		interactable.visible = false
 		spotlight.visible = false
 		rotate_tween.stop()
 		ray.enabled = false

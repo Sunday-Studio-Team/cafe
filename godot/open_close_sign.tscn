@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://by5ndd0lvwdiv"]
 
 [ext_resource type="Script" uid="uid://c0nsltcnkwb8t" path="res://open_closed_sign.gd" id="1_jq31d"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_rxk5n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
+size = Vector3(0.90000004, 0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxk5n"]
 albedo_color = Color(0.99957997, 0.5919275, 0.47328472, 1)
@@ -35,16 +39,19 @@ top_radius = 0.01
 bottom_radius = 0.01
 height = 0.05
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
-size = Vector3(0.90000004, 0.5, 0.5)
-
-[node name="OpenCloseSign" type="Area3D" unique_id=1352342917 node_paths=PackedStringArray("important_emails_required_model", "mesh")]
+[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "important_emails_required_model")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 script = ExtResource("1_jq31d")
+interactable = NodePath("Interactable")
 important_emails_required_model = NodePath("ImportantEmailsRequiredModel")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=2045513509 node_paths=PackedStringArray("mesh")]
+script = ExtResource("2_rxk5n")
 display_name = "start shift"
-mesh = NodePath("SignModel/Sign")
-metadata/_custom_type_script = "uid://cku66354bxktd"
+mesh = NodePath("../SignModel/Sign")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=668432471]
+shape = SubResource("BoxShape3D_jq31d")
 
 [node name="SignModel" type="Node3D" parent="." unique_id=1777842618]
 
@@ -95,6 +102,3 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4575901, 0.041092753)
 text = "BLOCKED:
 Deal with important emails first!"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=668432471]
-shape = SubResource("BoxShape3D_jq31d")

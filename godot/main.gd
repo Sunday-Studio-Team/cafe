@@ -20,7 +20,7 @@ static var seen_breakdown_popup := false
 @export var window: Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
-@export var desk: Interactable
+@export var desk: Desk
 @export var pc_ui: Control
 @export var overtime_item: Item
 @export var teleporter: Item
@@ -62,7 +62,7 @@ func _ready() -> void:
 
 	Events.shift_started.connect(_on_shift_started)
 
-	desk.interacted.connect(_on_desk_interacted)
+	desk.interactable.interacted.connect(_on_desk_interacted)
 
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
@@ -73,7 +73,9 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	get_stats()
+	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
+	Events.items_updated.connect(enable_disable_teleporters)
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
@@ -118,13 +120,6 @@ func _ready() -> void:
 		special_shift_title.text = Global.current_special_shift.name
 		special_shift_icon.texture = Global.current_special_shift.icon
 		Global.popups["special shift"].open()
-	
-	if teleporter in Global.owned_items:
-		teleporter1.enable_teleporter()
-		teleporter2.enable_teleporter()
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
 
 
 func get_stats() -> void:
@@ -133,6 +128,15 @@ func get_stats() -> void:
 		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
+	
+
+func enable_disable_teleporters():
+	if teleporter in Global.owned_items:
+		teleporter1.enable_teleporter()
+		teleporter2.enable_teleporter()
+	else:
+		teleporter1.disable_teleporter()
+		teleporter2.disable_teleporter()
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -189,27 +193,29 @@ func set_per_day_stuff() -> void:
 
 
 func spawn_customer() -> void:
-	var all_machines_occupied := true
-
+	var available_machines: Array[Machine] = []
 	for machine in machines:
-		if not machine.customer:
-			all_machines_occupied = false
-
-	if all_machines_occupied:
+		if machine.customer == null and machine.queued_customer == null:
+			available_machines.append(machine)
+	
+	if available_machines.size() == 0:
 		return
-
-	var new_customer = customer_scene.instantiate()
+	
+	var assigned_machine: Machine = available_machines.pick_random()
+	if assigned_machine == null:
+		printerr("Machine to spawn at should never be null?")
+		return
+	
+	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
+	assigned_machine.queued_customer = new_customer
 
 	await get_tree().create_timer(randf_range(2, 4), false).timeout
 
-	var machine: Machine = null
-	while machine == null or machine.customer:
-		machine = machines.pick_random()
-
-	await machine.set_customer(new_customer)
-	machine.machine_make_drink()
+	await assigned_machine.set_customer(new_customer)
+	assigned_machine.queued_customer = null
+	assigned_machine.machine_make_drink()
 
 
 #Actives the effects of a given active item
@@ -267,7 +273,7 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
-	desk.enabled = false
+	desk.disable_interactable()
 
 
 func _on_desk_interacted() -> void:
