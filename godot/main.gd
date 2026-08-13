@@ -73,7 +73,9 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	get_stats()
+	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
+	Events.items_updated.connect(enable_disable_teleporters)
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
@@ -118,13 +120,6 @@ func _ready() -> void:
 		special_shift_title.text = Global.current_special_shift.name
 		special_shift_icon.texture = Global.current_special_shift.icon
 		Global.popups["special shift"].open()
-	
-	if teleporter in Global.owned_items:
-		teleporter1.enable_teleporter()
-		teleporter2.enable_teleporter()
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
 
 
 func get_stats() -> void:
@@ -133,6 +128,15 @@ func get_stats() -> void:
 		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
+	
+
+func enable_disable_teleporters():
+	if teleporter in Global.owned_items:
+		teleporter1.enable_teleporter()
+		teleporter2.enable_teleporter()
+	else:
+		teleporter1.disable_teleporter()
+		teleporter2.disable_teleporter()
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
