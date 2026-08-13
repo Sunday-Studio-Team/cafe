@@ -128,7 +128,7 @@ func get_stats() -> void:
 		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
-	
+
 
 func enable_disable_teleporters():
 	if teleporter in Global.owned_items:

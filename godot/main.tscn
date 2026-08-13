@@ -344,127 +344,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ru6cq")
 
-[sub_resource type="Animation" id="Animation_m74q3"]
-length = 0.001
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BreakRoomDoorModel")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BreakRoomEntranceBlocker:process_mode")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BreakRoomDoorOccluderInstance3D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_tko6h"]
-resource_name = "close_door"
-length = 0.5
-step = 0.1
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BreakRoomDoorModel")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.793353, 0, 0.608761, 0.5, 1, 0, 0, 0, 1)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BreakRoomEntranceBlocker:process_mode")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BreakRoomDoorOccluderInstance3D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ywjan"]
-resource_name = "open_door"
-length = 0.5
-step = 0.1
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BreakRoomDoorModel")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 0.793353, 0, 0.608761)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BreakRoomEntranceBlocker:process_mode")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BreakRoomDoorOccluderInstance3D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m74q3"]
-_data = {
-&"RESET": SubResource("Animation_m74q3"),
-&"close_door": SubResource("Animation_tko6h"),
-&"open_door": SubResource("Animation_ywjan")
-}
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
-size = Vector3(0.21887207, 2.095642, 1.0678711)
+size = Vector3(0.2, 2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
 size = Vector3(1.1627197, 1, 4.01709)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_m74q3"]
-size = Vector3(1.2062073, 1, 1.314148)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
 content_margin_left = 10.0
@@ -773,26 +657,22 @@ mesh = SubResource("ArrayMesh_mls0f")
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.069131, 0, 4.587011)
 
-[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("open_sound", "close_sound", "animation_player", "exited_break_room_detection_area")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.917271, 0, 5.4959364)
+[node name="BreakRoomDoor" type="Node3D" parent="." unique_id=18232531 node_paths=PackedStringArray("open_sound", "close_sound", "exited_break_room_detection_area")]
+transform = Transform3D(-0.25881907, 0, 0.96592593, 0, 1, 0, -0.96592593, 0, -0.25881907, 8.917271, 0, 5.4959364)
 script = ExtResource("6_d13ii")
 open_sound = NodePath("OpenSound")
 close_sound = NodePath("CloseSound")
-animation_player = NodePath("BreakRoomDoorAnimationPlayer")
-open_door_animation_name = "open_door"
-close_door_animation_name = "close_door"
 exited_break_room_detection_area = NodePath("PlayerDetectionArea")
 
-[node name="BreakRoomDoorAnimationPlayer" type="AnimationPlayer" parent="BreakRoomDoor" unique_id=1153521959]
-libraries/ = SubResource("AnimationLibrary_m74q3")
-
-[node name="BreakRoomDoorOccluderInstance3D" type="OccluderInstance3D" parent="BreakRoomDoor" unique_id=890064405]
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="BreakRoomDoor" unique_id=890064405]
+transform = Transform3D(-0.25881892, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881892, 8.917271, 0, 5.4959364)
+top_level = true
 layers = 2
 occluder = ExtResource("42_l0gw7")
 bake_mask = 4293918722
 
 [node name="BreakRoomDoorModel" type="Node3D" parent="BreakRoomDoor" unique_id=1779757833]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Sketchfab_Scene" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=605328551 instance=ExtResource("33_0abf2")]
 transform = Transform3D(-3.6398223e-08, 0, 1.1093451, 0, 1.0077057, 0, -0.8326944, 0, -4.8491014e-08, -0.029385567, -0.024177432, -0.50364494)
@@ -803,10 +683,10 @@ layers = 2
 [node name="Object_3" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 1448364757) index="1" unique_id=1745844038]
 layers = 2
 
-[node name="BreakRoomEntranceBlocker" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]
+[node name="StaticBody3D" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/BreakRoomEntranceBlocker" unique_id=801664430]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009460449, 0.9860133, 0.51588345)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/StaticBody3D" unique_id=801664430]
+transform = Transform3D(-1, 0, -2.2351742e-08, 0, 1, 0, 2.2351742e-08, 0, -1, 0.0010708645, 0.9860133, -0.5496547)
 shape = SubResource("BoxShape3D_xrivr")
 
 [node name="OpenSound" type="AudioStreamPlayer3D" parent="BreakRoomDoor" unique_id=1999929962]
@@ -824,12 +704,8 @@ popup_this_is_camera = ExtResource("45_s4o1y")
 metadata/_custom_type_script = "uid://cyfg6kertkbie"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoomDoor/PlayerDetectionArea" unique_id=873683659]
-transform = Transform3D(1.705, 0, 0, 0, 1.705, 0, 0, 0, 1.705, -1.8959332, 0, 1.5085449)
+transform = Transform3D(0.44128653, 0, -1.6469035, 0, 1.705, 0, 1.6469035, 0, 0.44128653, -0.2369127, 0, -2.7259316)
 shape = SubResource("BoxShape3D_13qdw")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="BreakRoomDoor/PlayerDetectionArea" unique_id=829031094]
-transform = Transform3D(0.99999917, 0.00028794399, 0.001277541, -0.00029311544, 0.9999918, 0.00405065, -0.0012763645, -0.004051021, 0.999991, -0.70064926, 0, 2.8381968)
-shape = SubResource("BoxShape3D_m74q3")
 
 [node name="Menu" parent="." unique_id=1811682227 instance=ExtResource("70_g5xqc")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
