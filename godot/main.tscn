@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
 [ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
+[ext_resource type="PackedScene" uid="uid://ce4dmlcd3n30f" path="res://minigames/words/word_game.tscn" id="17_l0gw7"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="19_yjja3"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
@@ -571,7 +572,8 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Lines": ExtResource("15_aivy6"),
 "Refill": ExtResource("23_lswn8"),
 "SpillClean": ExtResource("10_inymm"),
-"Typing": ExtResource("20_d13ii")
+"Typing": ExtResource("20_d13ii"),
+"WordMatch": ExtResource("17_l0gw7")
 })
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 cancel_button = NodePath("MarginContainer/CancelButton")
@@ -797,10 +799,10 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 [node name="Sketchfab_Scene" parent="BreakRoomDoor/BreakRoomDoorModel" unique_id=605328551 instance=ExtResource("33_0abf2")]
 transform = Transform3D(-3.6398223e-08, 0, 1.1093451, 0, 1.0077057, 0, -0.8326944, 0, -4.8491014e-08, -0.029385567, -0.024177432, -0.50364494)
 
-[node name="Object_2" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 1448364757) index="0" unique_id=1315661021]
+[node name="Object_2" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 1747775413) index="0" unique_id=9385713]
 layers = 2
 
-[node name="Object_3" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 1448364757) index="1" unique_id=1745844038]
+[node name="Object_3" parent="BreakRoomDoor/BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(605328551, 1747775413) index="1" unique_id=956458749]
 layers = 2
 
 [node name="BreakRoomEntranceBlocker" type="StaticBody3D" parent="BreakRoomDoor" unique_id=1040366868]

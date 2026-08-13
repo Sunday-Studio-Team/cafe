@@ -89,10 +89,10 @@ func _on_customer_interactable_interacted() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	# 50% Chance of words minigame, 50% chance of typing minigame.
-	if randf() < 0.5:
+	if randf() < 0.1: #0.5
 			Events.minigame_active.emit("Typing") 
 	else:
-			Events.minigame_active.emit("Words")
+			Events.minigame_active.emit("WordMatch")
 			
 	Events.customer_timed_out_window.connect(_on_customer_timed_out_window)
 

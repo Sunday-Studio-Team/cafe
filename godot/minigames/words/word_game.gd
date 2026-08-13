@@ -64,7 +64,7 @@ func pause():
 	
 func _physics_process(_delta: float) -> void:
 	if visible and Input.is_action_just_pressed("ui_cancel"):
-		Events._on_force_close_minigame
+		Events.minigame_cancelled.emit()
 		
 func on_time_up():
 	if not game_over:
@@ -79,16 +79,16 @@ func win_game():
 	game_timer.stop()
 	show_result_text("You Win!")
 	pause()
+	# Customer gains satisfaction
 	_end_minigame()
-	# Events.emit_signal("minigame_end")
 
 func lose_game():
 	game_over = true
 	game_timer.stop()
 	show_result_text("You Lose!")
 	pause()
+	# Customer loses satisfaction
 	_end_minigame()
-	# Events.emit_signal("minigame_end")
 	
 func _end_minigame() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
