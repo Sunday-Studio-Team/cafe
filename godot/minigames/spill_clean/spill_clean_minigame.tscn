@@ -3,10 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
 [ext_resource type="Texture2D" uid="uid://dfrkdsu4k5v6q" path="res://sprites/stains/stain3.png" id="1_imr7o"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/spill.gd" id="2_imr7o"]
-[ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/spill_mop_wet.png" id="4_4xqy4"]
+[ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/dirty_mop.png" id="4_4xqy4"]
 [ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/mop.gd" id="4_6lir2"]
-[ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/spill_mop_dry.png" id="4_omxn0"]
+[ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/clean_mop.png" id="4_omxn0"]
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
+[ext_resource type="Texture2D" uid="uid://babqx6yagblfe" path="res://sprites/spill_minigame/clean_scrubber.png" id="6_v4dls"]
+[ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
@@ -23,7 +25,7 @@ scale_min = 0.099999994
 scale_max = 0.39999998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
-size = Vector2(644, 312)
+size = Vector2(640, 312)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
 size = Vector2(644, 1348)
@@ -100,29 +102,33 @@ texture = ExtResource("1_eeqbd")
 position = Vector2(0.00012207031, 4.123657)
 shape = SubResource("RectangleShape2D_vn1tu")
 
-[node name="Spill" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "bucket_area", "mop", "splash")]
+[node name="Spill" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "bucket_area", "mop")]
 modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
 position = Vector2(960, 600)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_imr7o")
 script = ExtResource("2_imr7o")
-wet_mop_texture = ExtResource("4_4xqy4")
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../Panel/Percentage")
 moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
-splash = NodePath("../SplashSound")
 allowed_remaining_ratio = 0.01
 
-[node name="Mop" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles")]
+[node name="Mop" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles", "splash", "mope_range")]
 position = Vector2(960.00006, 500.00003)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_omxn0")
 script = ExtResource("4_6lir2")
 drag_area = NodePath("MopDragHitbox")
 bubbles = NodePath("GPUParticles2D")
+splash = NodePath("../SplashSound")
+mope_range = NodePath("MopHeadHitbox/CollisionShape2D")
+mop_texture = ExtResource("4_omxn0")
+dirty_mop_texture = ExtResource("4_4xqy4")
+scrubber_texture = ExtResource("6_v4dls")
+dirty_scrubber_texture = ExtResource("7_80bh0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewport/Mop" unique_id=360286918]
 position = Vector2(0, -500)
@@ -135,7 +141,7 @@ process_material = SubResource("ParticleProcessMaterial_xnu58")
 [node name="MopHeadHitbox" type="Area2D" parent="SubViewport/Mop" unique_id=1322127866]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/MopHeadHitbox" unique_id=426483103]
-position = Vector2(13.999756, -508.00012)
+position = Vector2(16, -503)
 shape = SubResource("RectangleShape2D_6lir2")
 
 [node name="MopDragHitbox" type="Area2D" parent="SubViewport/Mop" unique_id=1484986336]

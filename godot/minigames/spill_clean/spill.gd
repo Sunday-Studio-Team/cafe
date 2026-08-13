@@ -5,16 +5,14 @@ extends Node2D
 # it was consider transparent
 const ALPHA_THRESHOLD_BYTE: int = 5
 
-static var used_scrubber: bool = false
 
-@export var wet_mop_texture: Texture
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
 @export var bucket_area: Area2D
 @export var mop: DraggableMop
-@export var splash: AudioStreamPlayer2D
+
 
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
@@ -77,11 +75,8 @@ func _ready() -> void:
 
 	bucket_area.area_entered.connect(
 		func(_area: Area2D):
-			wet_mop()
+			mop.wet_mop()
 	)
-
-	if used_scrubber:
-		mop.scale *= 1.5
 
 	count_starting_pixels()
 	update_progress_display()
@@ -98,24 +93,16 @@ func _physics_process(_delta: float) -> void:
 
 	if not image_changed:
 		return
+	if !mop.is_dirty:
+		mop.is_dirty = true
+		if mop.used_scrubber:
+			mop.texture = mop.dirty_scrubber_texture
+		else:
+			mop.texture = mop.dirty_mop_texture
 
 	upload_changed_image()
 	update_progress_display()
 	check_for_win()
-
-
-func wet_mop() -> void:
-	if not mop.is_wet:
-		splash.play()
-		mop.is_wet = true
-		mop.texture = wet_mop_texture
-		mop.bubbles.emitting = true
-		create_tween().tween_property(
-			mop,
-			"modulate",
-			Color.WHITE,
-			1,
-		).from(Color.AQUA)
 
 
 func rect_to_global_polygon(local_rect: Rect2, global_rect_transform: Transform2D) -> PackedVector2Array:

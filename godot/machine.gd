@@ -669,7 +669,7 @@ func on_active_item_used_spill(item: Item):
 		return
 
 	if item == scrubber_item:
-		ErasableCanvas.used_scrubber = true
+		DraggableMop.used_scrubber = true
 		Global.deactivate_active_item(item)
 		_on_clean_spill()
 
