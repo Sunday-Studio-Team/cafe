@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://c1mwy70fw26kj" path="res://audio/hammer_hit.mp3" id="12_xurph"]
 [ext_resource type="PackedScene" uid="uid://opsuwlsv3dke" path="res://Assets/Drink Machine/machine back.glb" id="17_jqdip"]
+[ext_resource type="Script" uid="uid://c4c77yw7tsv87" path="res://low_fps_sub_viewport_updater.gd" id="18_0ne0o"]
 [ext_resource type="PackedScene" uid="uid://df558355onylt" path="res://Assets/Drink Machine/machine front.glb" id="18_2ajbd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://hujuc46pc8gw" path="res://machine_occluder3d.occ" id="18_64ldb"]
 [ext_resource type="Texture2D" uid="uid://dqnm76jpmu5v6" path="res://Assets/hdri/Joburg Central Sunset HDRI.hdr" id="18_yl6qm"]
@@ -276,6 +277,10 @@ use_occlusion_culling = true
 scaling_3d_scale = 0.5
 size = Vector2i(848, 354)
 render_target_update_mode = 4
+
+[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=719900526 node_paths=PackedStringArray("_sub_viewport")]
+script = ExtResource("18_0ne0o")
+_sub_viewport = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
 transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
