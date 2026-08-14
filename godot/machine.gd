@@ -135,7 +135,6 @@ func _ready() -> void:
 
 	#Active Items
 	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
-	spill_interactable.used_active_item.connect(on_active_item_used_spill)
 
 
 func _process(_delta: float) -> void:
@@ -662,16 +661,6 @@ func on_active_item_used_machine(item: Item):
 		Global.deactivate_active_item(item)
 		await Events.hammer_animation_hit
 		fix_machine(true)
-
-
-func on_active_item_used_spill(item: Item):
-	if item == null:
-		return
-
-	if item == scrubber_item:
-		DraggableMop.used_scrubber = true
-		Global.deactivate_active_item(item)
-		_on_clean_spill()
 
 
 func _on_clean_spill() -> void:
