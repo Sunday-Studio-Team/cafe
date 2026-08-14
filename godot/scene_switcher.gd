@@ -36,6 +36,9 @@ func _process(_delta: float) -> void:
 
 
 func load_scene(scene: SceneSwitcher.GameScene) -> void:
+	var loading_start_time_ms: int = Time.get_ticks_msec()
+	print("SceneSwitcher: started timing loading")
+	
 	if current_scene:
 		get_tree().paused = true
 		loading_tween = create_tween()
@@ -71,16 +74,27 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 		push_error("Error: scene resource is not a PackedScene")
 		return
 
+	var loading_end_time_ms: int = Time.get_ticks_msec()
+	var loading_total_duration_ms: int = loading_end_time_ms - loading_start_time_ms
+	print("SceneSwitcher: total loading duration: %s ms" % loading_total_duration_ms)
+	
 	_loading_progress_bar.visible = false
+
+	var instantiating_start_time_ms: int = Time.get_ticks_msec()
+	print("SceneSwitcher: started timing instantiation")
 
 	current_scene = scene_packed_scene.instantiate()
 	add_child(current_scene)
 	get_tree().paused = false
+	
+	var instantiating_end_time_ms: int = Time.get_ticks_msec()
+	var instantiating_total_duration_ms: int = instantiating_end_time_ms - instantiating_start_time_ms
+	print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
+	
 	loading_tween = create_tween()
 	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)
 	await loading_tween.finished
 	Events.scene_switch_in_animation_finished.emit()
-
 
 func quit_game() -> void:
 	if current_scene:
