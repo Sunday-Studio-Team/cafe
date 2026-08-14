@@ -274,21 +274,13 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
-	desk.enabled = false
-	
-	if teleporter in Global.owned_items:
-		teleporter1.enable_teleporter()
-		teleporter2.enable_teleporter()
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
-	
+
 	if scrubber in Global.owned_items:
 		DraggableMop.used_scrubber = true
 	else:
 		DraggableMop.used_scrubber = false
 
-	desk.disable_interactable()
+	desk.interactable.visible = false
 
 
 func _on_desk_interacted() -> void:
@@ -296,14 +288,10 @@ func _on_desk_interacted() -> void:
 	pc_ui.show()
 
 
-func _on_timer_timeout():
-	#game_timer.paused = false
-	pass # Replace with function body.
-
-
 func _on_game_options_changed(options_data: OptionsData) -> void:
 	_apply_game_options(options_data)
-	
+
+
 func _apply_game_options(options_data: OptionsData) -> void:
 	match options_data.graphics_preset:
 		OptionsData.GraphicsOptionsPresets.HIGH:
