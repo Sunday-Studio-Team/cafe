@@ -21,7 +21,7 @@ func _ready() -> void:
 			if visible:
 				Global.in_pc_ui = true
 			else:
-				Global.in_pc_ui = false,
+				Global.in_pc_ui = false
 	)
 
 	# we dont even have money for shop on day 1 sooo

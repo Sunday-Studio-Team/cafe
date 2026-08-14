@@ -16,7 +16,7 @@ var customers_waiting: Array[Customer]
 
 func _ready() -> void:
 	customer_interactable.interacted.connect(_on_customer_interactable_interacted)
-	customer_interactable.enabled = false
+	customer_interactable.visible = false
 
 
 func add_customer(customer: Customer) -> void:
@@ -78,9 +78,9 @@ func _on_queue_updated() -> void:
 
 	# Update interactable
 	if customers_waiting.size() > 0:
-		customer_interactable.enabled = true
+		customer_interactable.visible = true
 	else:
-		customer_interactable.enabled = false
+		customer_interactable.visible = false
 
 
 func _on_customer_interactable_interacted() -> void:

@@ -20,7 +20,7 @@ static var seen_breakdown_popup := false
 @export var window: Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
-@export var desk: Interactable
+@export var desk: Desk
 @export var pc_ui: Control
 @export var overtime_item: Item
 @export var teleporter: Item
@@ -63,7 +63,7 @@ func _ready() -> void:
 
 	Events.shift_started.connect(_on_shift_started)
 
-	desk.interacted.connect(_on_desk_interacted)
+	desk.interactable.interacted.connect(_on_desk_interacted)
 
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
@@ -74,7 +74,9 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	get_stats()
+	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
+	Events.items_updated.connect(enable_disable_teleporters)
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
@@ -127,6 +129,15 @@ func get_stats() -> void:
 		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
+
+
+func enable_disable_teleporters():
+	if teleporter in Global.owned_items:
+		teleporter1.enable_teleporter()
+		teleporter2.enable_teleporter()
+	else:
+		teleporter1.disable_teleporter()
+		teleporter2.disable_teleporter()
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
@@ -276,6 +287,8 @@ func _on_shift_started():
 		DraggableMop.used_scrubber = true
 	else:
 		DraggableMop.used_scrubber = false
+
+	desk.disable_interactable()
 
 
 func _on_desk_interacted() -> void:

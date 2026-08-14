@@ -22,26 +22,14 @@ signal used_active_item(item: Item)
 ## how long the player has to hold to interact (if hold_to_interact is enabled)
 @export var time_to_hold: float = 6
 
-var enabled := true:
-	set(value):
-		enabled = value
-		_update_material()
-		if enabled:
-			process_mode = Node.PROCESS_MODE_INHERIT
-		else:
-			process_mode = Node.PROCESS_MODE_DISABLED
-			time_held = 0
 var time_held: float = 0
 
 
 func _init() -> void:
 	interacted.connect(_on_interacted)
 
-	enabled = visible
-	visibility_changed.connect(
-		func():
-			enabled = visible,
-	)
+	_update_enabled()
+	visibility_changed.connect(_on_visibility_changed)
 
 	set_collision_layer_value(1, false)
 	set_collision_layer_value(2, true)
@@ -51,8 +39,10 @@ func _process(delta: float) -> void:
 	_update_material()
 
 	if (
-		Global.hovered_interactable != self or not enabled
-		or Global.in_pc_ui or Global.minigame_active
+		Global.hovered_interactable != self 
+			or not visible
+			or Global.in_pc_ui 
+			or Global.minigame_active
 	):
 		if not keep_progress_on_interrupt:
 			time_held = 0
@@ -77,6 +67,17 @@ func _process(delta: float) -> void:
 		used_active_item.emit(Global.equipped_item)
 
 
+func _on_visibility_changed() -> void:
+	_update_enabled()
+
+func _update_enabled() -> void:
+	_update_material()
+	if visible:
+		process_mode = ProcessMode.PROCESS_MODE_INHERIT
+	else:
+		process_mode = ProcessMode.PROCESS_MODE_DISABLED
+		time_held = 0
+
 func _on_interacted() -> void:
 	await get_tree().process_frame
 	Global.hovered_interactable = null
@@ -84,7 +85,7 @@ func _on_interacted() -> void:
 
 func _update_material() -> void:
 	if (
-		Global.hovered_interactable != self or not enabled
+		Global.hovered_interactable != self or not visible
 		or Global.in_pc_ui or Global.minigame_active
 	):
 		if mesh:

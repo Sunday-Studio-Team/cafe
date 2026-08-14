@@ -378,6 +378,10 @@ albedo_texture = ExtResource("39_5utbh")
 material = SubResource("StandardMaterial3D_jofr6")
 size = Vector3(20, 0.1, 6)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+radius = 0.27148438
+height = 0.88623047
+
 [sub_resource type="BoxMesh" id="BoxMesh_l03hl"]
 material = SubResource("StandardMaterial3D_jofr6")
 size = Vector3(6, 0.1, 8)
@@ -1569,14 +1573,21 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.000082, -0.0008468628, -1.9997339)
 mesh = SubResource("BoxMesh_u58gx")
 
-[node name="trashancan" type="Node3D" parent="BackRoom/Floor" unique_id=1739498006]
-transform = Transform3D(-0.18321216, 0, -8.698071, 0, 8.7, 0, 8.698071, 0, -0.18321216, 5.3375697, 0.18933806, -2.5107512)
+[node name="StaticBody3D" type="StaticBody3D" parent="BackRoom/Floor" unique_id=200269603]
+transform = Transform3D(-0.021058867, 0, -0.99977815, 0, 1, 0, 0.99977815, 0, -0.021058867, 5.3375697, 0.18933806, -2.5107512)
 
-[node name="Object_4" type="MeshInstance3D" parent="BackRoom/Floor/trashancan" unique_id=59472799]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BackRoom/Floor/StaticBody3D" unique_id=309016413]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 0.29466057, 0)
+shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="trashancan" type="Node3D" parent="BackRoom/Floor/StaticBody3D" unique_id=1739498006]
+transform = Transform3D(8.700002, 0, 0, 0, 8.7, 0, 0, 0, 8.700002, 0, 0, 0)
+
+[node name="Object_4" type="MeshInstance3D" parent="BackRoom/Floor/StaticBody3D/trashancan" unique_id=59472799]
 transform = Transform3D(30.558342, 0, 0, 0, 45.399143, 0, 0, 0, 45.399143, 0, 0.061471164, 0)
 mesh = ExtResource("29_itkf6")
 
-[node name="Object_5" type="MeshInstance3D" parent="BackRoom/Floor/trashancan" unique_id=1965926331]
+[node name="Object_5" type="MeshInstance3D" parent="BackRoom/Floor/StaticBody3D/trashancan" unique_id=1965926331]
 transform = Transform3D(30.558342, 0, 0, 0, 45.399143, 0, 0, 0, 45.399143, 0, 0.061471164, 0)
 mesh = ExtResource("30_grihc")
 
