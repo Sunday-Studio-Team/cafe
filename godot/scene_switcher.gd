@@ -86,12 +86,13 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 				use_sub_threads = true
 			else:
 				if TIMING_PRINTS: print("SceneSwitcher: loading the main requested scene")
-				# WARNING: If set to true for the main scene, causes errors in the debugger, but doesn't seem to break anything yet: 
+				# WARNING: If set to true for the main scene, causes errors in the debugger:
 					# E 0:00:02:675   get_script: /root/Global: The caller thread can't call the function `get_script()` on this node. Use `call_deferred()` or `call_deferred_thread_group()` instead.
 					#   <C++ Error>   Condition "!is_accessible_from_caller_thread()" is true. Returning: (Variant())
 					#   <C++ Source>  scene/main/node.cpp:4159 @ get_script()
-				# If it becomes a problem, set this to false!
-				use_sub_threads = true
+				# If true, it may randomly crash possibly due to engine bugs with autoloads:
+					# https://github.com/godotengine/godot/issues/98865
+				use_sub_threads = false
 			
 			var request_result: int = ResourceLoader.load_threaded_request(scene_uid_request, "PackedScene", use_sub_threads)
 			if request_result != OK:
