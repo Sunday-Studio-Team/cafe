@@ -80,7 +80,9 @@ func win_game():
 	show_result_text("You Win!")
 	pause()
 	# Customer gains satisfaction
+	print("Rating before win game change: %s" % [Global.employee_rating])
 	Global.employee_rating = Global.employee_rating + 1
+	print("Rating after win game change: %s" % [Global.employee_rating])
 	_end_minigame()
 
 func lose_game():
@@ -89,7 +91,9 @@ func lose_game():
 	show_result_text("You Lose!")
 	pause()
 	# Customer loses satisfaction
+	print("Rating before lose game change: %s" % [Global.employee_rating])
 	Global.employee_rating = Global.employee_rating - 1
+	print("Rating after lose game change: %s" % [Global.employee_rating])
 	_end_minigame()
 	
 func _end_minigame() -> void:
