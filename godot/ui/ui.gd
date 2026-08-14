@@ -190,11 +190,25 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 
 
 func _process(_delta: float) -> void:
+	# looks a bit complex but basically we want to show the HUD if we're not
+	# in UI (except for the machine UI where we want the tablet to show on the
+	# side)
+
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
+			# this exception is a bit awkward cos mouse visibility is tied to
+			# being 'in ui' so we need to make sure it doesnt trigger the hud
+			# to disappear when we show the mouse in that way
 			or Global.showing_floating_cursor
 	)
+
+	# if we dont have this, the remake minigame (where we're in the machine ui)
+	# wont hide the hud properly
+	if Global.minigame_active:
+		should_show_hud = false
+
+	# looks cleaner if we dont show the hud behind the pause menu
 	visible = should_show_hud and not get_tree().paused
 
 	update_score_indicators()
