@@ -55,6 +55,7 @@ func _ready() -> void:
 	SaveDataManager.get_options_data().apply_options()
 	
 	Global.main_scene = self
+	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 
@@ -274,21 +275,13 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
-	desk.enabled = false
-	
-	if teleporter in Global.owned_items:
-		teleporter1.enable_teleporter()
-		teleporter2.enable_teleporter()
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
-	
+
 	if scrubber in Global.owned_items:
 		DraggableMop.used_scrubber = true
 	else:
 		DraggableMop.used_scrubber = false
 
-	desk.disable_interactable()
+	desk.interactable.visible = false
 
 
 func _on_desk_interacted() -> void:
@@ -296,14 +289,10 @@ func _on_desk_interacted() -> void:
 	pc_ui.show()
 
 
-func _on_timer_timeout():
-	#game_timer.paused = false
-	pass # Replace with function body.
-
-
 func _on_game_options_changed(options_data: OptionsData) -> void:
 	_apply_game_options(options_data)
-	
+
+
 func _apply_game_options(options_data: OptionsData) -> void:
 	match options_data.graphics_preset:
 		OptionsData.GraphicsOptionsPresets.HIGH:
@@ -313,7 +302,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			_world_environment.environment.volumetric_fog_enabled = true
 			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
 			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
 		OptionsData.GraphicsOptionsPresets.MEDIUM:
 			_world_environment.environment.ssao_enabled = true
@@ -345,6 +334,8 @@ func _apply_game_options(options_data: OptionsData) -> void:
 		_:
 			pass
 	RenderingServer.gi_set_use_half_resolution(ProjectSettings.get_setting("rendering/global_illumination/gi/use_half_resolution"))
+	if not is_inside_tree():
+		await tree_entered
 	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
 	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
 	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)

@@ -18,6 +18,19 @@ const LEFT_RIGHT_FORCE := 250
 @export var bean_hit_glasss_sound: AudioStreamPlayer2D
 @export var bag_shake_sound: AudioStreamPlayer2D
 @export var gain_score_sound: AudioStreamPlayer
+@export var normal_face_sprite: CompressedTexture2D
+@export var bomb_face_sprite: CompressedTexture2D 
+@export var screw_face_sprite: CompressedTexture2D
+@export var golden_face_sprite: CompressedTexture2D
+
+@export var normal_visual_effect: CompressedTexture2D
+@export var bomb_visual_effect: CompressedTexture2D 
+@export var screw_visual_effect: CompressedTexture2D
+@export var golden_visual_effect: CompressedTexture2D
+
+
+@export var face_sprite:Sprite2D
+@export var visual_effect:Sprite2D
 
 var _player: Node #gets loaded in ready() #player is a CharacterBody3D node
 
@@ -119,7 +132,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			bomb() #also calls Events.emit_signal("minigame_end")
 			return
 		elif "screw" in bean_type:
-			break_machine() #calls Events.emit_signal("minigame_end")
+			screw() #calls Events.emit_signal("minigame_end")
 			#break closest machine
 			collected_beans.append(bean)
 			
@@ -129,6 +142,8 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			gold(bean) #calls Events.emit_signal("minigame_end")
 			pass
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
+			face_sprite.texture = normal_face_sprite
+			visual_effect.texture = normal_visual_effect
 			pass
 		beans_in_cup += 1
 		gain_score_sound.play()
@@ -142,6 +157,10 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 
 
 func bomb() ->void:
+	
+	face_sprite.texture = bomb_face_sprite
+	visual_effect.texture = bomb_visual_effect
+	
 	var closest_machine = get_closest_machine_or_null()
 	if closest_machine == null: #error handling
 		return
@@ -188,7 +207,10 @@ func bomb() ->void:
 	#apply velocity to player
 
 
-func break_machine():
+func screw():
+	face_sprite.texture = screw_face_sprite
+	visual_effect.texture = screw_visual_effect
+	
 	var _closest_machine = get_closest_machine_or_null()
 
 	await get_tree().create_timer((BEANS_TO_SPAWN-2)*bean_spawn_timer.wait_time + bean_spawn_timer.time_left, false).timeout #can we calculate when the minigame will end?
@@ -198,11 +220,14 @@ func break_machine():
 		_closest_machine.break_down()
 	
 func gold(bean: PhysicsBody2D):
+
+	face_sprite.texture = golden_face_sprite
+	visual_effect.texture = golden_visual_effect
+	
 	beans_in_cup = 5
 	#create a for loop; until 
 	while len(collected_beans)<5:
-		collected_beans.append(bean)
-	
+		collected_beans.append(bean)	
 	
 	await get_tree().create_timer(0.5, false).timeout #has to be less than bean timer!
 	Global.score_update_message = "earned" 
