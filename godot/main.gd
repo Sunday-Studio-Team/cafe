@@ -24,7 +24,6 @@ static var seen_breakdown_popup := false
 @export var pc_ui: Control
 @export var overtime_item: Item
 @export var teleporter: Item
-@export var scrubber: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -274,20 +273,6 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
-	desk.enabled = false
-	
-	if teleporter in Global.owned_items:
-		teleporter1.enable_teleporter()
-		teleporter2.enable_teleporter()
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
-	
-	if scrubber in Global.owned_items:
-		DraggableMop.used_scrubber = true
-	else:
-		DraggableMop.used_scrubber = false
-
 	desk.disable_interactable()
 
 
