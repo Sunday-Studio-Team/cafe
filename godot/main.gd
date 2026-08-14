@@ -55,6 +55,7 @@ func _ready() -> void:
 	SaveDataManager.get_options_data().apply_options()
 	
 	Global.main_scene = self
+	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 
