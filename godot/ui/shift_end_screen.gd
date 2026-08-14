@@ -32,6 +32,19 @@ func _ready() -> void:
 			Events.end_screen_finished.emit()
 	)
 
+	button.mouse_entered.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(button, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+			t.tween_property(button, "offset_transform_rotation", deg_to_rad(-1), 0.1)
+	)
+	button.mouse_exited.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(button, "offset_transform_scale", Vector2.ONE, 0.1)
+			t.tween_property(button, "offset_transform_rotation", deg_to_rad(1), 0.1)
+	)
+
 
 func _process(_delta: float) -> void:
 	bank_total.text = "🏦 Bank total: [color=gold]%s[/color]" % Global.float_to_price(value_to_show_on_bank_total)
@@ -160,3 +173,8 @@ func _on_time_up() -> void:
 		free_item_selector_screen.queue_free()
 
 	button.show()
+	await get_tree().create_timer(2).timeout
+	var button_shine_tween := create_tween().set_loops()
+	button_shine_tween.tween_property(button, "modulate", Color.from_hsv(0.0, 0.0, 1.374, 1.0), 1)
+	button_shine_tween.tween_property(button, "modulate", Color.WHITE, 1)
+	button_shine_tween.tween_interval(2)
