@@ -16,15 +16,15 @@ const LOADING_FADE_OUT_TIME := 1.0
 @export var _main_scene_uid: StringName
 @export var _main_menu_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
-## Additional scenes to always keep cached for speed. 
-@export var _main_sub_scene_uids: Array[StringName]
+## Additional resources to always keep cached for speed. 
+@export var _main_sub_resource_uids: Array[StringName]
 
 var current_scene: Node = null
 var loading_tween: Tween
 
 # Caching for quick loads
 var _cached_main_packed_scene: PackedScene
-var _cached_sub_packed_scenes: Dictionary[StringName, PackedScene]
+var _cached_sub_resources: Dictionary[StringName, Resource]
 
 func _ready() -> void:
 	Events.scene_switch_requested.connect(load_scene)
@@ -70,19 +70,19 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	else:
 		var scene_uid: StringName = _scene_enum_to_uid(scene)
 		
-		var scene_uid_requests: Array[StringName] = []
+		var resource_uid_requests: Array[StringName] = []
 		if scene == SceneSwitcher.GameScene.MAIN_SCENE:
-			scene_uid_requests.append_array(_main_sub_scene_uids)
-		scene_uid_requests.append(scene_uid)
+			resource_uid_requests.append_array(_main_sub_resource_uids)
+		resource_uid_requests.append(scene_uid)
 		
 		var finished_requests: int = 0
-		for scene_uid_request in scene_uid_requests:
+		for resource_uid_request in resource_uid_requests:
 			var request_start_time_ms: int = Time.get_ticks_msec()
-			if TIMING_PRINTS: print("SceneSwitcher: started timing scene %s loading" % finished_requests)
+			if TIMING_PRINTS: print("SceneSwitcher: started timing resource %s loading" % finished_requests)
 			
 			var use_sub_threads: bool = false
-			if scene_uid_request in _main_sub_scene_uids:
-				if TIMING_PRINTS: print("SceneSwitcher: loading sub scene with threads")
+			if resource_uid_request in _main_sub_resource_uids:
+				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource with threads")
 				use_sub_threads = true
 			else:
 				if TIMING_PRINTS: print("SceneSwitcher: loading the main requested scene")
@@ -94,45 +94,45 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 					# https://github.com/godotengine/godot/issues/98865
 				use_sub_threads = false
 			
-			var request_result: int = ResourceLoader.load_threaded_request(scene_uid_request, "PackedScene", use_sub_threads)
+			var request_result: int = ResourceLoader.load_threaded_request(resource_uid_request, "Resource", use_sub_threads)
 			if request_result != OK:
-				push_error("Failed to request scene.")
+				push_error("Failed to request resource.")
 				return
 			
 			var progress_ratio_array: Array[float] = []
-			while ResourceLoader.load_threaded_get_status(scene_uid_request, progress_ratio_array) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:				
+			while ResourceLoader.load_threaded_get_status(resource_uid_request, progress_ratio_array) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:				
 				if progress_ratio_array.size() != 1:
 					push_error("Progress ratio array empty?")
 					return
 				var progress_ratio: float = progress_ratio_array[0]
-				var total_progress_ratio: float = ((finished_requests as float) + progress_ratio) / (scene_uid_requests.size() as float)
+				var total_progress_ratio: float = ((finished_requests as float) + progress_ratio) / (resource_uid_requests.size() as float)
 				_loading_progress_bar.value = total_progress_ratio
 				await get_tree().process_frame
 			
-			if ResourceLoader.load_threaded_get_status(scene_uid_request) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
-				push_error("Failed to load scene.")
+			if ResourceLoader.load_threaded_get_status(resource_uid_request) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+				push_error("Failed to load resource.")
 				return
-			var requested_scene_resource: Resource = ResourceLoader.load_threaded_get(scene_uid_request)
-			if requested_scene_resource == null:
-				push_error("Failed to get scene resource.")
-				return
-			var requested_packed_scene: PackedScene = requested_scene_resource as PackedScene
-			if requested_packed_scene == null:
-				push_error("Error: scene resource is not a PackedScene")
+			var requested_resource: Resource = ResourceLoader.load_threaded_get(resource_uid_request)
+			if requested_resource == null:
+				push_error("Failed to get resource.")
 				return
 			
-			if scene_uid_request == scene_uid:
+			if resource_uid_request == scene_uid:
+				var requested_packed_scene: PackedScene = requested_resource as PackedScene
+				if requested_packed_scene == null:
+					push_error("Error: scene resource is not a PackedScene")
+					return
 				scene_packed_scene = requested_packed_scene
 				if scene == SceneSwitcher.GameScene.MAIN_SCENE:
 					if TIMING_PRINTS: print("SceneSwitcher: cached main scene")
 					_cached_main_packed_scene = scene_packed_scene
-			elif scene_uid_request in _main_sub_scene_uids:
-				if TIMING_PRINTS: print("SceneSwitcher: cached sub scene")
-				_cached_sub_packed_scenes[scene_uid_request] = scene_packed_scene
-
+			elif resource_uid_request in _main_sub_resource_uids:
+				if TIMING_PRINTS: print("SceneSwitcher: cached sub resource")
+				_cached_sub_resources[resource_uid_request] = requested_resource
+			
 			var request_end_time_ms: int = Time.get_ticks_msec()
 			var request_total_duration_ms: int = request_end_time_ms - request_start_time_ms
-			if TIMING_PRINTS: print("SceneSwitcher: scene %s (%s) loading duration: %s ms" % [finished_requests, requested_packed_scene.resource_path, request_total_duration_ms])
+			if TIMING_PRINTS: print("SceneSwitcher: resource %s (%s) loading duration: %s ms" % [finished_requests, requested_resource.resource_path, request_total_duration_ms])
 			
 			finished_requests += 1
 

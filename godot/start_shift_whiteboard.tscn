@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dy4e7ivinjsni"]
+
+[ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/start_shift_whiteboard.gd" id="1_6exnn"]
+[ext_resource type="PackedScene" uid="uid://dl4geuiiydscc" path="res://environment/whiteboard/day_shift_whiteboard_content_monday.tscn" id="2_m5x6x"]
+[ext_resource type="PackedScene" uid="uid://bmyt3fpgtr3o4" path="res://environment/whiteboard/day_shift_whiteboard_content_tuesday.tscn" id="3_rmo0h"]
+[ext_resource type="PackedScene" uid="uid://d1ovgl21407i" path="res://environment/whiteboard/day_shift_whiteboard_content_wednesday.tscn" id="4_ldwac"]
+[ext_resource type="PackedScene" uid="uid://b4fbdabp5lxuo" path="res://environment/whiteboard/day_shift_whiteboard_content_thursday.tscn" id="5_46cy4"]
+[ext_resource type="PackedScene" uid="uid://b1he8y7llt2c7" path="res://environment/whiteboard/day_shift_whiteboard_content_friday.tscn" id="6_juu6q"]
+[ext_resource type="PackedScene" uid="uid://cd3xb42fgnnxw" path="res://Assets/Whiteboard/low_poly_whiteboard.glb" id="7_qmmlt"]
+
+[node name="StartShiftWhiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("_content_parent_node")]
+transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
+script = ExtResource("1_6exnn")
+_days_whiteboard_content_packed_scenes = Array[PackedScene]([ExtResource("2_m5x6x"), ExtResource("3_rmo0h"), ExtResource("4_ldwac"), ExtResource("5_46cy4"), ExtResource("6_juu6q")])
+_fallback_day_whiteboard_content_packed_scene = ExtResource("2_m5x6x")
+_content_parent_node = NodePath("WhiteboardContentParent")
+
+[node name="Sketchfab_Scene" parent="." unique_id=240193298 instance=ExtResource("7_qmmlt")]
+transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.88540924, 0, -3.8702453e-08, 0, -1.041, 0)
+
+[node name="WhiteboardContentParent" type="Node3D" parent="." unique_id=925885761]
+transform = Transform3D(0.6749997, 0, -1.2434498e-14, 0, 0.6749997, 0, 1.2434498e-14, 0, 0.6749997, 0, 0.050234556, 0.0138754845)
