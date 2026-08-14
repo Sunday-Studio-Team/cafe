@@ -5,6 +5,9 @@
 extends Node
 
 var _item_names: Array[String] = []
+# tracks whether we have the 'unlimited actives' command toggled on
+# (so we can toggle on/off with the same command)
+var ua_enabled := false
 
 
 func _ready() -> void:
@@ -15,7 +18,6 @@ func _ready() -> void:
 	# not sure whether to enable this or not, seems to break some stuff
 	# but might be better than accidentally pressing stuff in game by typing lol
 	#Console.pause_enabled = true
-
 	Console.font_size = 28
 	Console.toggle_size() # set fullscreen
 
@@ -42,7 +44,8 @@ func _ready() -> void:
 %s
 - [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
-- [i]bag[/i] gives you an ingredients bag"
+- [i]bag[/i] gives you an ingredients bag
+- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)"
 		% [items_guide_str],
 	)
 	Console.print_line(
@@ -64,16 +67,18 @@ func _ready() -> void:
 	Console.add_command("timer", toggle_timer)
 	Console.add_command("fullshelf", fill_items)
 	Console.add_command("bag", give_bag)
-
 	Console.add_command("item", give_item, ["item_name"])
 	for item in Global.items:
 		_item_names.append("\"%s\"" % item.name)
 	Console.add_command_autocomplete_list("item", _item_names)
-
 	Console.add_command("speed", set_speed, 1)
+	Console.add_command("ua", toggle_unlimited_actives)
 
-
-	
+	Events.main_scene_loaded.connect(
+		func():
+			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
+				Events.active_item_used.connect(refresh_active_item)
+	)
 
 
 func give_bag() -> void:
@@ -190,3 +195,24 @@ func toggle_timer() -> void:
 		Console.print_line("game timer paused")
 	else:
 		Console.print_line("game timer resumed")
+
+
+func toggle_unlimited_actives() -> void:
+	ua_enabled = !ua_enabled
+
+	if ua_enabled:
+		Events.active_item_used.connect(refresh_active_item)
+		Console.print_line("Unlimited Actives enabled")
+	else:
+		Events.active_item_used.disconnect(refresh_active_item)
+		Console.print_line("Unlimited Actives disabled")
+
+
+func refresh_active_item(item: Item):
+	# some items like the hammer wait for certain signals with their
+	# animations etc before being disabled and handling all those cases
+	# would be annoying/would break with new items so im just doing
+	# a lazy timer which should cover most things
+	await get_tree().create_timer(3, false).timeout
+	item.can_be_used = true
+	Events.items_updated.emit()

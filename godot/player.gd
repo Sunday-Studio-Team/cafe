@@ -102,7 +102,7 @@ func handle_active_items() -> void:
 
 			Events.active_item_menu.emit()
 
-	if Input.is_action_just_pressed("use_item"):
+	if Input.is_action_just_pressed("use_item") and Global.equipped_item:
 		Events.active_item_used.emit(Global.equipped_item)
 
 
