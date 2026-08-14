@@ -2,7 +2,7 @@ class_name LowFpsSubViewportUpdater
 extends Node
 
 @export var _sub_viewport: SubViewport
-@export var _target_frames_per_second: int = 15 
+@export var _target_frames_per_second: int = 10
 
 var _delta_since_last_frame: float
 
