@@ -51,9 +51,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
 @export_category("item refs")
-@export var hammer:Item
-@export var scrubber:Item
-@export var whipped_cream:Item
+@export var hammer: Item
+@export var scrubber: Item
+@export var whipped_cream: Item
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -61,8 +61,8 @@ var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
-
 var _employee_rating_last_update: float = -1
+
 
 func _ready() -> void:
 	Events.money_updated.connect(
@@ -170,6 +170,8 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 
+	_update_rating()
+
 	hide_item_menu_prompt_if_no_actives()
 	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
 
@@ -188,11 +190,25 @@ make %s while keeping your employee rating (🙂) above %s⭐️"
 
 
 func _process(_delta: float) -> void:
+	# looks a bit complex but basically we want to show the HUD if we're not
+	# in UI (except for the machine UI where we want the tablet to show on the
+	# side)
+
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
+			# this exception is a bit awkward cos mouse visibility is tied to
+			# being 'in ui' so we need to make sure it doesnt trigger the hud
+			# to disappear when we show the mouse in that way
 			or Global.showing_floating_cursor
 	)
+
+	# if we dont have this, the remake minigame (where we're in the machine ui)
+	# wont hide the hud properly
+	if Global.minigame_active:
+		should_show_hud = false
+
+	# looks cleaner if we dont show the hud behind the pause menu
 	visible = should_show_hud and not get_tree().paused
 
 	update_score_indicators()
@@ -350,35 +366,9 @@ func update_score_indicators() -> void:
 	if Global.daily_profit:
 		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
 
-	_update_rating()
+	if not Global.employee_rating == _employee_rating_last_update:
+		_update_rating()
 
-func _update_rating() -> void:
-	var current_rating := Global.employee_rating
-	if current_rating == _employee_rating_last_update:
-		return
-	_employee_rating_last_update = current_rating
-	
-	for c in rating_stars_hbox.get_children():
-		c.queue_free()
-
-	var rating_is_even := current_rating % 2 == 0
-	var rating_shown := 0
-
-	if rating_is_even:
-		for i in current_rating / 2.0:
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-	else:
-		for i in (current_rating - 1) / 2.0:
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-		rating_stars_hbox.add_child(half_star_texture_rect.duplicate())
-		rating_shown += 1
-
-	for i in 5 - rating_shown:
-		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
-
-	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
 
 func update_time_indicator() -> void:
 	time_left_ui.visible = not game_timer.is_stopped()
@@ -463,6 +453,33 @@ func update_cctv_indicator() -> void:
 		cctv_indicator.texture = _eye_logo_red_texture
 	else:
 		cctv_indicator.texture = _eye_logo_texture
+
+
+func _update_rating() -> void:
+	var current_rating := Global.employee_rating
+	_employee_rating_last_update = current_rating
+
+	for c in rating_stars_hbox.get_children():
+		c.queue_free()
+
+	var rating_is_even := current_rating % 2 == 0
+	var rating_shown := 0
+
+	if rating_is_even:
+		for i in current_rating / 2.0:
+			rating_stars_hbox.add_child(star_texture_rect.duplicate())
+			rating_shown += 1
+	else:
+		for i in (current_rating - 1) / 2.0:
+			rating_stars_hbox.add_child(star_texture_rect.duplicate())
+			rating_shown += 1
+		rating_stars_hbox.add_child(half_star_texture_rect.duplicate())
+		rating_shown += 1
+
+	for i in 5 - rating_shown:
+		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
+
+	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
 
 
 func _on_alert_posted(message: String) -> void:

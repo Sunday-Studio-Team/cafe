@@ -148,12 +148,21 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	if TIMING_PRINTS: print("SceneSwitcher: started timing instantiation")
 
 	current_scene = scene_packed_scene.instantiate()
-	add_child(current_scene)
-	get_tree().paused = false
 	
 	var instantiating_end_time_ms: int = Time.get_ticks_msec()
 	var instantiating_total_duration_ms: int = instantiating_end_time_ms - instantiating_start_time_ms
 	if TIMING_PRINTS: print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
+	
+	var add_child_start_time_ms: int = Time.get_ticks_msec()
+	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child")
+	
+	add_child(current_scene)
+
+	var add_child_end_time_ms: int = Time.get_ticks_msec()
+	var add_child_total_duration_ms: int = add_child_end_time_ms - add_child_start_time_ms
+	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms" % add_child_total_duration_ms)
+	
+	get_tree().paused = false
 	
 	loading_tween = create_tween()
 	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)

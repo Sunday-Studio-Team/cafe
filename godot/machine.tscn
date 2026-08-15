@@ -18,9 +18,11 @@
 [ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://c1mwy70fw26kj" path="res://audio/hammer_hit.mp3" id="12_xurph"]
 [ext_resource type="PackedScene" uid="uid://opsuwlsv3dke" path="res://Assets/Drink Machine/machine back.glb" id="17_jqdip"]
+[ext_resource type="Script" uid="uid://c4c77yw7tsv87" path="res://low_fps_sub_viewport_updater.gd" id="18_0ne0o"]
 [ext_resource type="PackedScene" uid="uid://df558355onylt" path="res://Assets/Drink Machine/machine front.glb" id="18_2ajbd"]
 [ext_resource type="ArrayOccluder3D" uid="uid://hujuc46pc8gw" path="res://machine_occluder3d.occ" id="18_64ldb"]
 [ext_resource type="Texture2D" uid="uid://dqnm76jpmu5v6" path="res://Assets/hdri/Joburg Central Sunset HDRI.hdr" id="18_yl6qm"]
+[ext_resource type="Script" uid="uid://lidk43nk3l7v" path="res://non_visible_camera_disabler.gd" id="20_x45kg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -264,6 +266,11 @@ cam_spot = NodePath("CameraSpot")
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
 mesh = SubResource("QuadMesh_0ffxp")
 
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="3DGui/Screen" unique_id=379095341]
+transform = Transform3D(1.2075837, 0, 0, 0, 1.2075838, 3.2749806e-08, 0, -3.2749806e-08, 1.2075838, 0, 0, 0)
+layers = 4
+aabb = AABB(-0.39646965, -0.5177541, -0.112911776, 0.7929393, 1.0355082, 0.22582355)
+
 [node name="SubViewport" type="SubViewport" parent="3DGui/Screen" unique_id=1837069961]
 use_occlusion_culling = true
 size = Vector2i(1200, 1600)
@@ -277,10 +284,20 @@ scaling_3d_scale = 0.5
 size = Vector2i(848, 354)
 render_target_update_mode = 4
 
+[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=719900526 node_paths=PackedStringArray("_sub_viewport")]
+script = ExtResource("18_0ne0o")
+_sub_viewport = NodePath("..")
+
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
 transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
+cull_mask = 3
 environment = SubResource("Environment_0ne0o")
 fov = 90.0
+
+[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D" unique_id=1220965674 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
+script = ExtResource("20_x45kg")
+_camera_3d = NodePath("..")
+_visible_on_screen_notifier_3d = NodePath("../../../../../../../VisibleOnScreenNotifier3D")
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
