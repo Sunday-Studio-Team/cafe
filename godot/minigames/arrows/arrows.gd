@@ -4,6 +4,11 @@ extends Node2D
 @export var arrow_output: RichTextLabel
 @export var prompt_output: RichTextLabel
 @export var wrong_sign: Control
+@export var arrows_container: HBoxContainer
+@export var textime: Texture2D
+
+@export_dir var red_arrows
+@export_dir var blue_arrows
 
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
@@ -31,6 +36,7 @@ var correct_input_index: int = 0
 
 
 func _ready() -> void:
+	set_up_arrow_container()
 	_start_minigame()
 
 
@@ -82,6 +88,19 @@ func display_wrong() -> void:
 	wrong_sign.visible = true
 	await get_tree().create_timer(.4).timeout
 	wrong_sign.visible = false
+
+
+func set_up_arrow_container() -> void:
+	var container_horizontal_size: float = arrows_container.size.x
+	var required_separation_spaces: float = arrows_container.get_theme_constant("separation") * max_arrow_count
+	var min_arrow_size: float = (container_horizontal_size - required_separation_spaces) / (max_arrow_count)
+	for arrow in max_arrow_count:
+		var arrow_rect = TextureRect.new()
+		arrow_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		arrow_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		arrow_rect.custom_minimum_size.x = min_arrow_size
+		arrow_rect.texture = textime
+		arrows_container.add_child(arrow_rect)
 
 
 func _start_minigame() -> void:
