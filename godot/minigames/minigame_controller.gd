@@ -9,7 +9,7 @@ func _ready() -> void:
 	Events.time_up.connect(
 		func():
 			if Global.minigame_active:
-				close_game()
+				close_game(),
 	)
 
 	Events.force_close_minigame.connect(_on_force_close_minigame)
@@ -17,7 +17,7 @@ func _ready() -> void:
 	cancel_button.pressed.connect(
 		func():
 			close_game()
-			Events.minigame_cancelled.emit()
+			Events.minigame_cancelled.emit(),
 	)
 
 
