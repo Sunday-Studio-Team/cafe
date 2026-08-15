@@ -5,6 +5,8 @@
 [ext_resource type="FontFile" uid="uid://hscjrb7045hv" path="res://minigames/arrows/fontello-c5a6b182/font/fontello.ttf" id="2_bw26h"]
 [ext_resource type="Texture2D" uid="uid://dj5s5y1n7gc0m" path="res://minigames/arrows/wrong.png" id="3_qx814"]
 [ext_resource type="Texture2D" uid="uid://cmfpmofbghgub" path="res://minigames/arrows/assets/blue-arrows/bluedown1.png" id="5_cfvr6"]
+[ext_resource type="Texture2D" uid="uid://ddduvf5l8kwv1" path="res://minigames/arrows/assets/border.png" id="6_cfscc"]
+[ext_resource type="Texture2D" uid="uid://snodwjwlkoge" path="res://minigames/arrows/assets/inputs.png" id="6_vxntg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
 bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
@@ -15,7 +17,7 @@ background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
 arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
 prompt_output = NodePath("CanvasLayer/Control/Prompt")
 wrong_sign = NodePath("CanvasLayer/wrong")
-arrows_container = NodePath("CanvasLayer/ArrowHContainer")
+arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
 textime = ExtResource("5_cfvr6")
 red_arrows = "res://minigames/arrows/assets/red-arrows"
 blue_arrows = "res://minigames/arrows/assets/blue-arrows"
@@ -75,6 +77,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="help" type="Control" parent="CanvasLayer" unique_id=747208162]
+visible = false
 layout_mode = 3
 anchor_left = 0.5
 anchor_top = 0.446
@@ -105,16 +108,36 @@ grow_vertical = 2
 scale = Vector2(1.4075757, 1.5)
 texture = ExtResource("3_qx814")
 
-[node name="ArrowHContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=959055107]
-custom_maximum_size = Vector2(1758, -1)
+[node name="ArrowsBackground" type="TextureRect" parent="CanvasLayer" unique_id=1185070196]
 anchors_preset = -1
-anchor_left = 0.051
-anchor_top = 0.225
-anchor_right = 0.95600003
-anchor_bottom = 0.452
-offset_left = -11.0
-offset_top = 426.0
-offset_right = 9.400024
-offset_bottom = 477.00003
+anchor_left = 0.041
+anchor_top = 0.060000002
+anchor_right = 0.80600005
+anchor_bottom = 0.93100005
+offset_left = 8.0
+offset_top = 551.0
+offset_right = -5.0
+offset_bottom = -1.0
+texture = ExtResource("6_vxntg")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ArrowHContainer" type="HBoxContainer" parent="CanvasLayer/ArrowsBackground" unique_id=959055107]
+custom_maximum_size = Vector2(1758, -1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.036000002
+anchor_top = 0.40500003
+anchor_right = 0.96400005
+anchor_bottom = 0.80600005
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="Border" type="NinePatchRect" parent="CanvasLayer" unique_id=1238806735]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_cfscc")
+region_rect = Rect2(0, 0, 2679, 1817)
