@@ -7,8 +7,11 @@ extends Node2D
 @export var arrows_container: HBoxContainer
 @export var textime: Texture2D
 
-@export_dir var red_arrows
-@export_dir var blue_arrows
+@export_dir var blue_left
+@export_dir var blue_up
+@export_dir var blue_right
+@export_dir var blue_down
+@export_dir var red_arrow
 
 var max_arrow_count: int = 10
 var blue: String = "#14529F"

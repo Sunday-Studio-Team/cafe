@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://dmqw3ojbkrp4m" path="res://minigames/arrows/dirs.png" id="2_57lmy"]
 [ext_resource type="FontFile" uid="uid://hscjrb7045hv" path="res://minigames/arrows/fontello-c5a6b182/font/fontello.ttf" id="2_bw26h"]
 [ext_resource type="Texture2D" uid="uid://dj5s5y1n7gc0m" path="res://minigames/arrows/wrong.png" id="3_qx814"]
-[ext_resource type="Texture2D" uid="uid://cmfpmofbghgub" path="res://minigames/arrows/assets/blue-arrows/bluedown1.png" id="5_cfvr6"]
 [ext_resource type="Texture2D" uid="uid://ddduvf5l8kwv1" path="res://minigames/arrows/assets/border.png" id="6_cfscc"]
 [ext_resource type="Texture2D" uid="uid://snodwjwlkoge" path="res://minigames/arrows/assets/inputs.png" id="6_vxntg"]
 
@@ -18,9 +17,6 @@ arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
 prompt_output = NodePath("CanvasLayer/Control/Prompt")
 wrong_sign = NodePath("CanvasLayer/wrong")
 arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
-textime = ExtResource("5_cfvr6")
-red_arrows = "res://minigames/arrows/assets/red-arrows"
-blue_arrows = "res://minigames/arrows/assets/blue-arrows"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1499237152]
 
