@@ -21,7 +21,15 @@ RichTextLabel/fonts/bold_italics_font = ExtResource("2_r811s")
 RichTextLabel/fonts/italics_font = ExtResource("3_uws3o")
 RichTextLabel/fonts/normal_font = ExtResource("1_0qe70")
 
-[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.81, 0, 0, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+corner_detail = 20
+
+[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button", "unread_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +43,7 @@ shop_button = NodePath("MarginContainer/Apps/Shop")
 email_app = NodePath("MarginContainer/EmailApp")
 shop_app = NodePath("MarginContainer/ShopApp")
 exit_button = NodePath("Exit")
+unread_label = NodePath("MarginContainer/Apps/Email/UnreadCount")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233319173]
 layout_mode = 1
@@ -73,6 +82,19 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
+[node name="UnreadCount" type="Label" parent="MarginContainer/Apps/Email" unique_id=1568631134]
+layout_mode = 0
+offset_left = 96.20001
+offset_top = -2.3599854
+offset_right = 136.20001
+offset_bottom = 25.640015
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_yf5fn")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yf5fn")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Shop" type="Button" parent="MarginContainer/Apps" unique_id=58281754]
 texture_filter = 1
 layout_mode = 2
@@ -93,9 +115,10 @@ expand_icon = true
 visible = false
 layout_mode = 2
 
-[node name="EmailApp" parent="MarginContainer" unique_id=1865286583 instance=ExtResource("5_k03dd")]
+[node name="EmailApp" parent="MarginContainer" unique_id=1865286583 node_paths=PackedStringArray("PC") instance=ExtResource("5_k03dd")]
 visible = false
 layout_mode = 2
+PC = NodePath("../..")
 
 [node name="Exit" type="Button" parent="." unique_id=114216245]
 layout_mode = 1
@@ -114,3 +137,5 @@ offset_transform_visual_only = false
 theme = ExtResource("8_4xb7n")
 theme_override_font_sizes/font_size = 64
 text = "exit"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

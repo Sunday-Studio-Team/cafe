@@ -45,6 +45,7 @@ var in_spill_minigame := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
+var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_helpdesk_customer: Customer
 var holding_ingredients := false

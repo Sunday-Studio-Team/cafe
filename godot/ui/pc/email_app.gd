@@ -4,6 +4,7 @@ extends PCApp
 @export var email_app_list_item_packed_scene: PackedScene
 @export var email_app_list_items_container: Node
 @export var email_viewer: EmailViewer
+@export var PC:Control
 
 var email_app_list_items: Array[EmailAppListItem]
 
@@ -17,6 +18,7 @@ func _ready() -> void:
 	Events.finished_spam_email.connect(_on_finished_spam_email)
 
 func _populate_email_items() -> void:
+	Global.unread_email_count = 0
 	var emails_manager: EmailsManager = EmailsManager.get_instance()
 	var emails_to_populate: Array[EmailData] = emails_manager.get_delivered_emails_to_date()
 
@@ -39,6 +41,8 @@ func _populate_email_items() -> void:
 		var is_email_read: bool = false
 		if email_data in read_emails:
 			is_email_read = true
+		else:
+			Global.unread_email_count += 1
 	
 		var is_current_day: bool = false
 		if current_day == email_data.day_to_send:
@@ -63,6 +67,7 @@ func _on_email_pressed(email_app_list_item: EmailAppListItem) -> void:
 		email_app_list_item.mark_as_read()
 	# Open the email in the viewer
 	_open_email_in_viewer(email_app_list_item)
+	PC.set_unread_count()
 
 func _open_email_in_viewer(email_app_list_item: EmailAppListItem) -> void:
 	# Check current day

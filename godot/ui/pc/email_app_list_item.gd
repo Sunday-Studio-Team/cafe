@@ -51,6 +51,7 @@ func initialize(init_email_data: EmailData, init_is_finished_important: bool, in
 func mark_as_read() -> void:
 	is_read = true
 	_update_unread_indicator()
+	Global.unread_email_count -=1
 
 
 func mark_as_finished_important() -> void:
