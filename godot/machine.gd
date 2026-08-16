@@ -72,6 +72,9 @@ var ingredients: int = max_ingredients:
 		if new_value > max_ingredients:
 			change = max_ingredients - ingredients
 			ingredients = max_ingredients
+		elif new_value < 0:
+			change = 0 - ingredients
+			ingredients = 0
 		else:
 			ingredients = new_value
 
