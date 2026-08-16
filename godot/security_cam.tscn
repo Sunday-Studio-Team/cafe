@@ -66,10 +66,10 @@ transform = Transform3D(1.55, 0, 0, 0, 1.55, 0, 0, 0, 1.55, 0, -0.105479196, -0.
 [node name="camera" parent="Model" unique_id=1944074621 instance=ExtResource("3_qlhcy")]
 transform = Transform3D(-0.4515773, -0.00734083, 0.003703244, -0.007246691, 0.25924936, -0.36976588, 0.0038842484, -0.36976397, -0.2593242, 0.0058659017, -0.020149954, 0.0857618)
 
-[node name="Cylinder_Cylinder" parent="Model/camera" index="2" unique_id=1471732467]
+[node name="Cylinder_Cylinder" parent="Model/camera" index="2" unique_id=1715892377]
 transform = Transform3D(1.2503961, 0.014059592, 0.015266214, -0.0011158865, 0.88243234, -1.198308, -0.01790624, 0.92679477, 1.1407188, -0.089072615, 0.060985863, -0.39554608)
 
-[node name="Torus_004_Torus_004" parent="Model/camera" index="3" unique_id=1402471612]
+[node name="Torus_004_Torus_004" parent="Model/camera" index="3" unique_id=206233586]
 transform = Transform3D(0.9999595, 0.0059514605, 0.0068100933, -0.0019403454, 0.8766179, -0.4811833, -0.008833591, 0.48115033, 0.87659436, -0.0044638347, 0.029213324, -0.13744369)
 
 [node name="Body" type="MeshInstance3D" parent="Model" unique_id=1938907329]
@@ -90,7 +90,7 @@ mesh = SubResource("CylinderMesh_qlhcy")
 [node name="SabotageInteractable" type="Area3D" parent="." unique_id=53695990 node_paths=PackedStringArray("mesh")]
 script = ExtResource("2_8ad36")
 display_name = "sabotage camera"
-mesh = NodePath("../Model/Body")
+mesh = NodePath("../Model/camera/Cube_001")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SabotageInteractable" unique_id=2134907620]

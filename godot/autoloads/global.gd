@@ -39,7 +39,6 @@ var items: Array[Item]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
-var player_in_cctv_los_camera: SecurityCam3D
 var minigame_active := false
 var in_spill_minigame := false
 var in_pc_ui := false
@@ -165,13 +164,15 @@ func _ready() -> void:
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 
-func _process(_delta: float) -> void:
-	# this has to be reset to false at the start of every frame here
-	# because if we set it in the individual security cameras' processes, they
+func _physics_process(_delta: float) -> void:
+	# these have to be reset to false at the start of every frame here
+	# because if we set them in the individual security cameras' processes, they
 	# would start overriding each other
+	# NOTE: in physics for timing reasons
 	player_in_cctv_los = false
 	making_drink_manually = false
 
+func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
 		if Global.minigame_active and in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
