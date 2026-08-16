@@ -122,13 +122,6 @@ func _on_order_approved(customer: Customer) -> void:
 
 	timer.stop()
 
-	await get_tree().create_timer(1, false).timeout
-	if bonus_points_for_time > 0:
-		Global.score_update_message = "bonus for time"
-	else:
-		Global.score_update_message = "penalty for time"
-	Global.employee_rating += bonus_points_for_time
-
 
 func _on_customer_left_machine(customer: Customer, _drink_score) -> void:
 	if customer != self:

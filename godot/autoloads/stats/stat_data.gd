@@ -14,20 +14,6 @@ var player_accel := 25.0
 var player_decel := 25.0
 var chance_of_machine_breaking := 0.15
 var machine_chance_of_spill := 0.2
-## chance of each score from machine
-## WARNING: make sure these always sum to 1 (or actually i can probably rework
-## the logic to allow them to not sum to 1, since that would be easier
-## for items etc that adjust the odds)
-var score_chances_3 := 0.25
-var score_chances_1 := 0.25
-var score_chances_neg1 := 0.25
-var score_chances_neg3 := 0.25
-var score_chances: Dictionary = {
-	3: score_chances_3,
-	1: score_chances_1,
-	-1: score_chances_neg1,
-	-3: score_chances_neg3,
-}
 var machine_time_to_make_drink := 4.0
 var customer_wait_time_machine := 35.0
 var customer_wait_time_window := 25.0
@@ -36,11 +22,10 @@ var penalty_for_handmade_drink := 2
 var penalty_for_holding_ingredients := 2
 var penalty_for_customer_complaint := 2
 var penalty_for_customer_stood_in_spill := 1
-var daily_profit_goal := 22.0
-var employee_rating_goal := 6
+var daily_profit_goals_each_day: Dictionary[int, float] = { 1: 20.0, 2: 40.0, 3: 60.0, 4: 80.0, 5: 100.0}
+var employee_rating_max := 5.0
 var ingredients_per_order := 20
 var ingredients_per_bag := 75
-var customer_spawn_interval := 5.0
 var cost_to_reroll := 5.0
 var max_spills_per_shift := 2
 var max_breakdowns_per_shift := 3
@@ -51,4 +36,13 @@ var max_stamina := 125.0
 var sprint_stamina_drain_rate := 0.0
 var stamina_regen_rate := 10.0
 var sprint_lockout_time := 3.0
-var shift_lengths_for_each_day: Dictionary = { 1: 90, 2: 120, 3: 120, 4: 120, 5: 120 }
+var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 90, 2: 120, 3: 120, 4: 120, 5: 120 }
+
+# Redesign stuff
+# Seconds between customers entering store, linearly scaling between min and max with rating. Maybe use curves later!
+var first_customer_entry_time: float = 3.0
+var customer_flow_rate_at_min_rating_per_day: Dictionary[int, float] = { 1: 10.0, 2: 10.0, 3: 10.0, 4: 10.0, 5: 10.0}
+var customer_flow_rate_at_max_rating_per_day: Dictionary[int, float] = { 1: 3.0, 2: 3.0, 3: 3.0, 4: 3.0, 5: 3.0}
+var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
+var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
+var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }

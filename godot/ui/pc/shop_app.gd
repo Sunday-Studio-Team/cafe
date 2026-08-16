@@ -62,7 +62,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	super(_delta)
 
-	bank_balance.text = "🏦 [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
+	bank_balance.text = "🏦 [color=gold]%s[/color]" % Global.float_to_price(Global.player_tips_bank)
 
 
 func populate_items() -> void:
@@ -79,7 +79,7 @@ func populate_items() -> void:
 
 
 func _on_reroll_pressed() -> void:
-	if not Global.bank_money >= Stats.current.cost_to_reroll:
+	if not Global.player_tips_bank >= Stats.current.cost_to_reroll:
 		cant_reroll_sound.play()
 		var t := create_tween().set_parallel()
 		t.tween_property(reroll_button, "modulate", Color.WHITE, 1).from(Color.RED)
@@ -99,18 +99,18 @@ func _on_reroll_pressed() -> void:
 	for itm in items_container.get_children():
 		itm.queue_free()
 	populate_items()
-	Global.bank_money -= Stats.current.cost_to_reroll
+	Global.player_tips_bank -= Stats.current.cost_to_reroll
 	reroll_button.hide()
 
 
 func _on_item_button_pressed(item_button: ItemButton) -> void:
 	var item: Item = item_button.item
-	var can_afford: bool = Global.bank_money >= item.price
+	var can_afford: bool = Global.player_tips_bank >= item.price
 	var has_free_item_slots: bool = Global.owned_items.size() < Global.item_slots_amount
 	var did_buy_item: bool = can_afford and has_free_item_slots
 	item_button.notify_pressed(did_buy_item)
 	if did_buy_item:
-		Global.bank_money -= item.price
+		Global.player_tips_bank -= item.price
 
 		own_and_apply_item(item)
 

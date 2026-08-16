@@ -68,8 +68,8 @@ func _on_time_up() -> void:
 	times_up.hide()
 
 	# show money breakdown
-	var daily_profit := Global.daily_profit
-	var daily_profit_goal: float = Stats.current.daily_profit_goal
+	var daily_profit := Global.daily_cafe_money
+	var daily_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= daily_profit_goal
 
 	var our_cut := daily_profit - daily_profit_goal
@@ -101,15 +101,15 @@ func _on_time_up() -> void:
 
 	if passed_profit_goal:
 		bank_total.show()
-		value_to_show_on_bank_total = Global.bank_money
-		Global.bank_money += our_cut
+		value_to_show_on_bank_total = Global.player_tips_bank
+		Global.player_tips_bank += our_cut
 		await get_tree().create_timer(1).timeout
-		if Global.bank_money > value_to_show_on_bank_total:
+		if Global.player_tips_bank > value_to_show_on_bank_total:
 			bank_gain_sound.play()
 			var t := create_tween().tween_property(
 				self,
 				"value_to_show_on_bank_total",
-				Global.bank_money,
+				Global.player_tips_bank,
 				0.75,
 			)
 			await t.finished
@@ -121,11 +121,7 @@ func _on_time_up() -> void:
 	stars_texure_rect.texture = star_rating_textures[Global.employee_rating]
 
 	var color_to_tint_stars: Color
-
-	if Global.employee_rating >= Stats.current.employee_rating_goal:
-		color_to_tint_stars = Color.GREEN
-	else:
-		color_to_tint_stars = Color.RED
+	color_to_tint_stars = Color.GREEN
 
 	stars_sound.play()
 
@@ -137,8 +133,7 @@ func _on_time_up() -> void:
 
 	# show outcome text and button
 	if (
-		Global.daily_profit >= Stats.current.daily_profit_goal
-		and Global.employee_rating >= Stats.current.employee_rating_goal
+		Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
 	):
 		if Global.day == Global.final_day:
 			outcome.text = "[b][color=green]YOU WIN"

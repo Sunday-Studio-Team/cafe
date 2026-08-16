@@ -32,7 +32,8 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
-@export var rating_goal_label: Label
+@export var rating_label: Label
+@export var customer_flow_rate_label: Label
 @export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
 @export var sold_item_sound: AudioStreamPlayer
@@ -65,12 +66,14 @@ var _employee_rating_last_update: float = -1
 
 
 func _ready() -> void:
+	_update_rating()
+	
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.MONEY, new_value, old_value)
 	)
-	Events.customer_score_updated.connect(
-		func(new_value: int, old_value: int):
+	Events.employee_rating_updated.connect(
+		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.CUSTOMER, new_value, old_value)
 	)
 	Events.shift_started.connect(
@@ -140,9 +143,9 @@ new rule: don't take any more ingredients out of the store room."
 		)
 	@warning_ignore("integer_division")
 	objective.text += (
-			"\n\n[b]SHIFT OBJECTIVE[/b]
-make %s while keeping your employee rating (🙂) above %s⭐️"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
+			"\n\n[b]SHIFT OBJECTIVE[/b]" + \
+			"\nmake %s!"
+			% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
 	)
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
@@ -330,7 +333,7 @@ func handle_shelf_item_ui() -> void:
 		sold_item_sound.play()
 		await get_tree().create_timer(0.75, false).timeout
 		shelf_item_sold_indicator.hide()
-		Global.bank_money += shelf_item.item.price / 2
+		Global.player_tips_bank += shelf_item.item.price / 2
 		Global.owned_items.erase(shelf_item.item)
 		shelf_item.item.unapply_stats()
 		Events.items_updated.emit()
@@ -360,11 +363,11 @@ func handle_time_left_warning() -> void:
 
 func update_score_indicators() -> void:
 	profit_label.text = (
-			Global.float_to_price(Global.daily_profit)
-			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
+			Global.float_to_price(Global.daily_cafe_money)
+			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
 	)
-	if Global.daily_profit:
-		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
+	if Global.daily_cafe_money:
+		profit_progress.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
 
 	if not Global.employee_rating == _employee_rating_last_update:
 		_update_rating()
@@ -461,26 +464,9 @@ func _update_rating() -> void:
 
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
-
-	var rating_is_even := current_rating % 2 == 0
-	var rating_shown := 0
-
-	if rating_is_even:
-		for i in current_rating / 2.0:
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-	else:
-		for i in (current_rating - 1) / 2.0:
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-		rating_stars_hbox.add_child(half_star_texture_rect.duplicate())
-		rating_shown += 1
-
-	for i in 5 - rating_shown:
-		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
-
-	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
-
+	
+	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
+	customer_flow_rate_label.text = "%s" % Global.customer_flow_rate
 
 func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():
@@ -507,8 +493,9 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	var score_label_to_tween: Label
 	score_update_label.text = ""
 
-	var change := new_value - old_value
-	if change > 0:
+	var change: float = new_value - old_value
+	print("change: %s" % change)
+	if change > 0.0:
 		match score_type:
 			ScoreType.MONEY:
 				color = Color.GOLD

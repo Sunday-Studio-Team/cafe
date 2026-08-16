@@ -103,7 +103,7 @@ func fill_items() -> void:
 
 
 func set_profit(profit: String) -> void:
-	Global.daily_profit = float(profit)
+	Global.daily_cafe_money = float(profit)
 	Console.print_line("setting profit to %s" % profit)
 
 
@@ -118,11 +118,11 @@ func end_shift(arg: String = "") -> void:
 	var detail := ""
 
 	if arg.to_lower() == "w":
-		Global.daily_profit = 100
+		Global.daily_cafe_money = 100
 		Global.employee_rating = 100
 		detail = "(forcing win)"
 	elif arg.to_lower() == "l":
-		Global.daily_profit = 0
+		Global.daily_cafe_money = 0
 		Global.employee_rating = 0
 		detail = "(forcing loss)"
 
@@ -165,7 +165,7 @@ func give_item(item_name: String) -> void:
 
 
 func bank() -> void:
-	Global.bank_money = 100
+	Global.player_tips_bank = 100
 	Console.print_line("added $100 to bank balance")
 
 

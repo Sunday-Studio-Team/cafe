@@ -108,6 +108,10 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 32
+font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
@@ -297,12 +301,12 @@ transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.707
 [node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
-customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Label")
+customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
 score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
 interactable_indicator = NodePath("HUD/VBoxContainer/Interactable")
 interactable_label = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
@@ -329,8 +333,9 @@ shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
 shelf_item_sell = NodePath("HUD/ShelfItem/VBoxContainer/Sell")
 shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
 day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Stars")
-rating_goal_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Goal")
+rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
+rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
+customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
 alert_sprite = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
@@ -482,6 +487,7 @@ layout_mode = 2
 
 [node name="Scores" type="VBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Money" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
 layout_mode = 2
@@ -498,22 +504,55 @@ size_flags_horizontal = 0
 size_flags_vertical = 10
 show_percentage = false
 
-[node name="Customer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=375295033]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=653594015]
+[node name="Rating" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
+layout_mode = 2
+
+[node name="RatingIconLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "🙂"
 
-[node name="Stars" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=2112858348]
+[node name="RatingLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "⭐2.1"
+
+[node name="Stars" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
+visible = false
 layout_mode = 2
 
-[node name="Goal" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=417478634]
+[node name="Control" type="Control" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
+layout_mode = 2
+
+[node name="FlowRate" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
+layout_mode = 2
+
+[node name="FlowRateLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
+text = "10"
+label_settings = SubResource("LabelSettings_xrivr")
+
+[node name="FlowRateDescLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "secs/custmr"
+label_settings = SubResource("LabelSettings_xrivr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=84901258]
 layout_mode = 2

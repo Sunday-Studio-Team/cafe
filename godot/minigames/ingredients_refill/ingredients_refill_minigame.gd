@@ -232,7 +232,7 @@ func gold(bean: PhysicsBody2D):
 	
 	await get_tree().create_timer(0.5, false).timeout #has to be less than bean timer!
 	Global.score_update_message = "earned" 
-	Global.daily_profit += 1
+	Global.daily_cafe_money += 1
 
 	Events.emit_signal("minigame_end")
 	

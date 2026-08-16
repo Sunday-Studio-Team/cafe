@@ -56,13 +56,13 @@ var holding_ingredients := false
 var day := 0
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
-var daily_profit := 0.0:
+var daily_cafe_money := 0.0:
 	set(new_value):
-		if new_value == daily_profit:
+		if new_value == daily_cafe_money:
 			return
 
-		Events.money_updated.emit(new_value, daily_profit)
-		daily_profit = new_value
+		Events.money_updated.emit(new_value, daily_cafe_money)
+		daily_cafe_money = new_value
 
 		# we set this as empty to hopefully avoid anything weird if someone
 		# accidentally updates one of these score vars without setting it
@@ -72,23 +72,23 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		score_update_message = ""
-# represented as stars (1 rating = 1 half star), max is 10 rating = 5 stars
-var employee_rating: int = 0:
+# represented as stars (1 rating = 1 star.)
+var employee_rating: float = 0:
 	set(new_value):
-		if new_value > 10:
-			new_value = 10
+		if new_value > Stats.current.employee_rating_max:
+			new_value = Stats.current.employee_rating_max
 		if new_value == employee_rating:
 			return
-
-		Events.customer_score_updated.emit(new_value, employee_rating)
+		
+		var previous_employee_rating: float = employee_rating
 		employee_rating = new_value
-		if employee_rating < 0:
-			employee_rating = 0
+		Events.employee_rating_updated.emit(new_value, previous_employee_rating)
 
-		# (see ccomment for same lines in above func)
+		# (see comment for same lines in above func)
 		await get_tree().process_frame
 		score_update_message = ""
-var bank_money := 0.0
+var customer_flow_rate: float
+var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5

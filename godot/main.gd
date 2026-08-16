@@ -50,6 +50,7 @@ static var seen_breakdown_popup := false
 
 var machines: Array[Machine]
 
+var _previous_tracked_employee_rating: float = 0.0
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -66,8 +67,9 @@ func _ready() -> void:
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
-
-	customer_spawn_timer.timeout.connect(spawn_customer)
+	
+	Events.employee_rating_updated.connect(_on_employee_rating_updated)
+	customer_spawn_timer.timeout.connect(_on_customer_timer_timeout)
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
@@ -79,18 +81,19 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	set_per_day_stuff()
-	get_stats()
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
-	Global.daily_profit = 0
+	Global.daily_cafe_money = 0
 	Global.employee_rating = 0
 	Global.spills_this_shift = 0
 	Global.breakdowns_this_shift = 0
 	Global.in_machine_ui = false
 	Global.in_pc_ui = false
+	Global.customer_flow_rate = _get_customer_flow_rate()
+	get_stats()
 
 	ui.hide()
 
@@ -130,7 +133,7 @@ func _ready() -> void:
 
 
 func get_stats() -> void:
-	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
+	customer_spawn_timer.wait_time = Global.customer_flow_rate
 
 	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
 	if Global.owned_items.has(overtime_item):
@@ -170,14 +173,12 @@ func set_per_day_stuff() -> void:
 		Stats.reset()
 		load_machines()
 	if Global.day >= 1:
-		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
 		machines.push_front(first_machine)
 		load_machines()
 	if Global.day >= 3:
-		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
@@ -225,7 +226,12 @@ func load_machines():
 		machine.show()
 
 
-func spawn_customer():
+func _on_customer_timer_timeout() -> void:
+	customer_spawn_timer.wait_time = Global.customer_flow_rate
+	customer_spawn_timer.start()
+	spawn_customer()
+
+func spawn_customer() -> void:
 	var available_machines: Array[Machine] = []
 	for machine in machines:
 		if machine.customer == null and machine.queued_customer == null:
@@ -244,8 +250,8 @@ func spawn_customer():
 	add_child(new_customer)
 	assigned_machine.queued_customer = new_customer
 
-	await get_tree().create_timer(randf_range(2, 4), false).timeout
- 
+	await get_tree().create_timer(randf_range(0.1, 0.2), false).timeout
+
 	await assigned_machine.set_customer(new_customer)
 	assigned_machine.queued_customer = null
 	assigned_machine.machine_make_drink()
@@ -279,9 +285,8 @@ func _on_game_timer_timeout() -> void:
 	await Events.end_screen_finished
 
 	get_tree().paused = false
-	var met_profit_goal: bool = Global.daily_profit >= Stats.current.daily_profit_goal
-	var met_employee_rating_goal: bool = Global.employee_rating >= Stats.current.employee_rating_goal
-	if met_profit_goal and met_employee_rating_goal:
+	var met_profit_goal: bool = Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
+	if met_profit_goal:
 		var just_finished_final_day: bool = Global.day == Global.final_day
 		if just_finished_final_day:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
@@ -305,6 +310,8 @@ func _on_minigame_end():
 
 func _on_shift_started():
 	Global.shift_started = true
+	game_timer.start()
+	customer_spawn_timer.start(Stats.current.first_customer_entry_time)
 
 	if Global.day > 0:
 		game_timer.start()
@@ -438,3 +445,20 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
 	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
 	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
+
+func _on_employee_rating_updated(new_value: float, old_value: float) -> void:
+	var new_flow_rate: float = _get_customer_flow_rate()
+	Global.customer_flow_rate = new_flow_rate
+	if customer_spawn_timer.time_left > new_flow_rate:
+		customer_spawn_timer.wait_time = new_flow_rate
+		customer_spawn_timer.start()
+
+func _get_customer_flow_rate() -> float:
+	return _rating_to_customer_flow_rate(Global.employee_rating)
+
+## In seconds per customer entry.
+func _rating_to_customer_flow_rate(current_employee_rating: float) -> float:
+	var min_flow_rate_for_day: float = Stats.current.customer_flow_rate_at_min_rating_per_day[Global.day]
+	var max_flow_rate_for_day: float = Stats.current.customer_flow_rate_at_max_rating_per_day[Global.day]
+	var seconds_per_customer: float = remap(current_employee_rating, 0.0, Stats.current.employee_rating_max, min_flow_rate_for_day, max_flow_rate_for_day)
+	return seconds_per_customer

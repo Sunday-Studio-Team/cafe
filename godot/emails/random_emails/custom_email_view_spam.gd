@@ -13,11 +13,11 @@ func _on_button_pressed() -> void:
 	mark_finished_spam()
 
 	if randf_range(0.1, 1.0) >= 0.5:
-		Global.bank_money += -3
+		Global.player_tips_bank += -3
 		$LosePointsSound.play()
 		money_notif.show_notif_lose_money()
 	else:
-		Global.bank_money += 3
+		Global.player_tips_bank += 3
 		$GainPointsSound.play()
 		money_notif.show_notif_gain_money()
 	_update_button()
