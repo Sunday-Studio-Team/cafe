@@ -80,7 +80,6 @@
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
-[ext_resource type="PackedScene" uid="uid://bk1aw8emtkeqa" path="res://ui/end_shift_earlier_menu.tscn" id="297_j3ofb"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -1171,10 +1170,6 @@ offset_right = 2216.0
 offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
-
-[node name="EndShiftEarlierMenu" parent="." unique_id=305608973 node_paths=PackedStringArray("game_timer") instance=ExtResource("297_j3ofb")]
-visible = false
-game_timer = NodePath("../GameTimer")
 
 [node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=1328361687]
 process_mode = 3
