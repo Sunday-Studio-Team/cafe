@@ -9,7 +9,7 @@ func _ready() -> void:
 
 	play_button.pressed.connect(
 		func():
-			Global.day = 1
+			Global.day = 0
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 			Global.in_main_menu = false
 	)

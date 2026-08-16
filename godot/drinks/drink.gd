@@ -13,7 +13,7 @@ enum DrinkType { COFFEE, TEA, LATTE }
 # basic lattes (+iced ver) = day 2
 # chai and matcha drinks (+iced ver) = day 3
 # almond milk variations (+iced ver) = day 4
-@export var day_unlocked: int = 1
+@export var day_unlocked: int = 0
 # where it goes on the menu
 @export var type: DrinkType
 # incase u want to make the drink more expensive on top of the regular price when calculated
