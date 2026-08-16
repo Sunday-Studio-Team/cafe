@@ -65,6 +65,7 @@ var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
 var max_ingredients: int = 100
+var make_drink_locked: bool = false
 
 var ingredients: int = max_ingredients:
 	set(new_value):
@@ -146,7 +147,7 @@ func _process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
-	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
+	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
@@ -252,7 +253,7 @@ func show_tutorial_where_is_storeroom() -> void:
 func set_order_action_buttons_available(button_case: String) -> void:
 	accept_button.disabled = true
 	reject_button.disabled = true
-	make_drink_button.disabled = true
+	make_drink_locked = true
 	refill_button.disabled = true
 
 	match button_case:
@@ -261,7 +262,7 @@ func set_order_action_buttons_available(button_case: String) -> void:
 		"reject":
 			reject_button.disabled = false
 		"make_drink":
-			make_drink_button.disabled = false
+			make_drink_locked = false
 		"refill":
 			refill_button.disabled = false
 		"all":
