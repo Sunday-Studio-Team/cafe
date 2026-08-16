@@ -353,6 +353,7 @@ mouse_filter = 2
 script = ExtResource("28_ppx11")
 
 [node name="TextureRect" type="TextureRect" parent="UI/Crosshair" unique_id=698336152]
+modulate = Color(1, 1, 1, 0.39215687)
 custom_minimum_size = Vector2(12, 12)
 custom_maximum_size = Vector2(12, 12)
 layout_mode = 1
@@ -369,6 +370,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("28_4obbf")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
