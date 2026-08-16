@@ -112,7 +112,11 @@ offset_bottom = 467.0
 [node name="Background" parent="MarginContainer" index="0" unique_id=533031003]
 color = Color(0, 0.32941177, 0.92156863, 1)
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=2046163112]
+[node name="VBoxContainer" parent="MarginContainer" index="1" unique_id=1960292155]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer" index="1" unique_id=2046163112]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_13qdw")
 
