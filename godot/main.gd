@@ -160,6 +160,7 @@ func set_per_day_stuff() -> void:
 		machines.clear()
 		machines.push_front(tutorial_machine)
 		load_machines()
+		_set_security_cameras_active(false)
 	if Global.day == 1:
 		Global.bank_money = 0
 		Global.owned_items.clear()
