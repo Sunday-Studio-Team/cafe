@@ -31,7 +31,9 @@
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
+[ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
 [ext_resource type="PackedScene" uid="uid://dyu70pksd1s2w" path="res://cafe_break_room_door.tscn" id="28_ovcoh"]
+[ext_resource type="Script" uid="uid://b83i4oyqxn1q8" path="res://ui/crosshair.gd" id="28_ppx11"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
@@ -339,6 +341,34 @@ end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 hammer = ExtResource("150_0bk8h")
 scrubber = ExtResource("50_jbvwl")
 whipped_cream = ExtResource("51_sn1fb")
+
+[node name="Crosshair" type="Control" parent="UI" unique_id=1676497832]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("28_ppx11")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Crosshair" unique_id=698336152]
+custom_minimum_size = Vector2(12, 12)
+custom_maximum_size = Vector2(12, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_4obbf")
 
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
