@@ -305,8 +305,6 @@ func set_customer(c: Customer) -> void:
 			# but this seems to behave correctly
 			Events.force_close_minigame.emit()
 			Events.minigame_cancelled.emit()
-			# this might already get set somewhere else but just to be sure
-			Global.making_drink_manually = false
 
 
 func get_stats() -> void:

@@ -39,7 +39,12 @@ var items: Array[Item]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
-var minigame_active := false
+var minigame_active := false:
+	set(value):
+		minigame_active = value
+		if minigame_active == false:
+			current_minigame_name = ""
+var current_minigame_name: String
 var in_spill_minigame := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
@@ -164,13 +169,16 @@ func _ready() -> void:
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 
+
+# NOTE: these things in physics process instead of process for timing reasons
 func _physics_process(_delta: float) -> void:
-	# these have to be reset to false at the start of every frame here
-	# because if we set them in the individual security cameras' processes, they
+	# this have to be reset to false at the start of every frame here
+	# because if we set it in the individual security cameras' processes, they
 	# would start overriding each other
-	# NOTE: in physics for timing reasons
 	player_in_cctv_los = false
-	making_drink_manually = false
+
+	making_drink_manually = current_minigame_name == "Captcha"
+
 
 func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
