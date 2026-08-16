@@ -28,8 +28,9 @@ func initialize(init_email_data: EmailData, init_is_finished_important: bool, in
 	is_read = init_is_read
 	is_current_day = init_is_current_day
 	is_finished_spam = init_is_finished_spam
-
-	sender_name_label.text = email_data.sender_name
+	
+	var sender_name_cut = email_data.sender_name.split("@")
+	sender_name_label.text = sender_name_cut[0]
 	subject_label.text = email_data.subject
 	if is_current_day:
 		# Show time only
