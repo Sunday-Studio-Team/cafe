@@ -336,10 +336,10 @@ func machine_make_drink() -> void:
 
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
-	customer_order_indicator.text = (
-			"ORDERED:\n %s (%s)"
-			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
-	)
+	#customer_order_indicator.text = (
+			#"ORDERED:\n %s (%s)"
+			#% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
+	#)
 
 	ordered_main_ingredient_icon.texture = order.ordered_drink.main_ingredient.icon
 	ordered_liquid_icon.texture = order.ordered_drink.liquid.icon
@@ -349,7 +349,7 @@ func machine_make_drink() -> void:
 		ordered_extra_icon.texture = null
 	ordered_drink_icon.texture = order.ordered_drink.icon
 
-	customer_order_indicator.show()
+	#customer_order_indicator.show()
 	order_breakdown.show()
 
 	timer.start()
@@ -416,11 +416,11 @@ func machine_make_drink() -> void:
 	):
 		spill()
 
-	final_order_indicator.text = (
-			"MADE:\n %s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
-	)
-	final_order_indicator.show()
+	#final_order_indicator.text = (
+			#"MADE:\n %s (%s)"
+			#% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+	#)
+	#final_order_indicator.show()
 
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
@@ -455,10 +455,10 @@ func display_drink_score() -> void:
 
 	if order.score < 0:
 		drink_customer_score_label.modulate = Color.RED
-		drink_customer_score_label.text = "🙂 %s⭐️" % (order.score / 2.0)
+		drink_customer_score_label.text = " %s⭐️" % (order.score / 2.0)
 	elif order.score > 0:
 		drink_customer_score_label.modulate = Color.GREEN
-		drink_customer_score_label.text = "🙂 +%s⭐️" % (order.score / 2.0)
+		drink_customer_score_label.text = " +%s⭐️" % (order.score / 2.0)
 	drink_customer_score_label.show()
 
 	if order.score == 3:
@@ -490,7 +490,7 @@ func fix_machine(hammer: bool = false) -> void:
 		# during normal gameplay, breakdowns always happen mid order,
 		# but when we force a breakdown thru the console we have to check some stuff
 		if timer.time_left != 0:
-			customer_order_indicator.show()
+			#customer_order_indicator.show()
 			hum_sound.pitch_scale = randf_range(0.95, 1.05)
 			hum_sound.play()
 		elif waiting_for_response:
@@ -553,7 +553,7 @@ func accept_order() -> void:
 
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
-	final_order_indicator.text = "dispensing . . ."
+	#final_order_indicator.text = "dispensing . . ."
 
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
@@ -591,7 +591,7 @@ func reject_order() -> void:
 	gui_3d.exit()
 	if ingredients < Stats.current.ingredients_per_order:
 		return
-	final_order_indicator.text = "order rejected! \n making a new drink"
+	#final_order_indicator.text = "order rejected! \n making a new drink"
 	price_label.hide()
 	drink_customer_score_label.hide()
 	waiting_for_response = false
@@ -609,10 +609,10 @@ func finished_make_drink_manually() -> void:
 
 	order.made_drink = order.ordered_drink
 	order.score = 3
-	final_order_indicator.text = (
-			"you made:\n %s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
-	)
+	#final_order_indicator.text = (
+			#"you made:\n %s (%s)"
+			#% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+	#)
 	display_drink_score()
 
 	Events.order_completed.emit(customer)
