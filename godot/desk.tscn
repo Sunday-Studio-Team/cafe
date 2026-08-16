@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
 [ext_resource type="PackedScene" uid="uid://cmt3rwlkf5iot" path="res://Assets/Desk/office desk.glb" id="3_r8wvv"]
 [ext_resource type="PackedScene" uid="uid://c3gk12fh1bx5y" path="res://Assets/chinese deco/New Kitty (1).glb" id="6_lrwc4"]
+[ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 [ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
 
@@ -56,6 +57,9 @@ font_size = 64
 [node name="office desk" parent="." unique_id=955491125 instance=ExtResource("3_r8wvv")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.1433835, 0, 0.6383956)
 
+[node name="Object_10" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1126555957) index="0" unique_id=1646439652]
+transform = Transform3D(1, 7.1054274e-15, 3.3881318e-21, 0, 0.99999994, -2.842171e-14, -3.3881318e-21, 2.842171e-14, 0.99999994, 0, 0.018199563, 6.508671e-09)
+
 [node name="Object_21" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1126555957) index="11" unique_id=501441965]
 transform = Transform3D(1, 7.1054274e-15, 6.7762636e-21, 0, 0.9999999, -5.684342e-14, -6.7762636e-21, 5.684342e-14, 0.9999999, 0.16755354, 0, 2.842171e-14)
 
@@ -92,5 +96,8 @@ transform = Transform3D(0.578742, 0, 0, 0, 0.578742, 0, 0, 0, 0.578742, 0.007232
 
 [node name="New Kitty (1)" parent="." unique_id=44918328 instance=ExtResource("6_lrwc4")]
 transform = Transform3D(-0.08066758, 0, -0.81017673, 0, 0.81418276, 0, 0.81017673, 0, -0.08066758, 0.47238111, -0.11540568, -0.13677394)
+
+[node name="Cat (1)" parent="." unique_id=1459962748 instance=ExtResource("7_yh53x")]
+transform = Transform3D(0.6833165, 0, 0.29271302, 0, 0.7433723, 0, -0.29271302, 0, 0.6833165, 0.7515243, 0.6772824, -0.27797565)
 
 [editable path="office desk"]
