@@ -124,10 +124,15 @@ func _ready() -> void:
 		Global.popups["special shift"].open()
 
 
+
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
-	if overtime_item in Global.owned_items:
-		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
+
+	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
+	if Global.owned_items.has(overtime_item):
+		shift_length += Stats.current.extra_time_from_overtime_form_item
+	game_timer.wait_time = shift_length
+
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
 
@@ -148,17 +153,14 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
-		game_timer.wait_time = 90
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
 	if Global.day >= 2:
-		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
 		machines.push_front(side_machine)
 		side_machine.show()
 		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
 	if Global.day >= 3:
-		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
 	if Global.day >= 4:
