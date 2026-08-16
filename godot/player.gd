@@ -13,6 +13,8 @@ const STRIDE_LENGTH := 0.75
 @export var sprint_lockout_timer: Timer
 @export var roller_skates: Item
 
+@export var pully_ball_scene: PackedScene
+
 var move_speed: float = Stats.current.default_move_speed
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
@@ -24,6 +26,10 @@ var mouse_delta: Vector2 = Vector2.ZERO
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 var holding_interactable: bool = false
+
+#when pully ball spawns, starts counting up. keeping track of strength.
+var pully_ball_countup: float = 0.0
+var pully_ball_instance: Node3D
 
 # we add on top of the ray distance to avoid weird stuff with big interactables
 # (whose 'position's may be further away from us than their interactable hitbox)
@@ -211,6 +217,18 @@ func handle_sprint(delta: float) -> void:
 
 	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
 		sprint_lockout_timer.start()
+
+
+func handle_right_click(delta: float)-> void:
+	#handles pully-ball 
+	
+	#TODO check if player has item. return if they don't
+	
+	if (Input.is_action_pressed("right_click") ):
+		pass
+	
+	pass
+	
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

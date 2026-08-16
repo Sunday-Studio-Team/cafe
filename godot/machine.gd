@@ -80,6 +80,7 @@ var ingredients: int = max_ingredients:
 
 		if not change == 0:
 			print("ingredients changed by %s on %s" % [change, name])
+		print("printing current ingredient amount of %s : %s" % [name, ingredients])
 var spill_on_floor := false
 var repair_minigames := ["Colors", "Arrows"]
 var manual_drink_minigames := ["Captcha"]

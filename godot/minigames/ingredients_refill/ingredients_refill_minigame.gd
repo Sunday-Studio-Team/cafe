@@ -90,17 +90,18 @@ func spawn_bean() -> void:
 		
 		
 		var bean: RigidBody2D
-		if random_int<10 and bomb_bean_spawned == false:
+		if random_int<12 and bomb_bean_spawned == false:
 			bean = bomb_bean_scene.instantiate()
 			bomb_bean_spawned = true #guarantees that the refill minigame can only spawn 1 bomb  bean.
 			
-		elif random_int>=10 and random_int<20 and screw_bean_spawned == false:
-			bean = screw_bean_scene.instantiate()
-			screw_bean_spawned = true #guarantees that the refill minigame can only spawn 1 screw bean.
+		#elif random_int>=10 and random_int<20 and screw_bean_spawned == false:
+		#	bean = screw_bean_scene.instantiate()
+		#	screw_bean_spawned = true #guarantees that the refill minigame can only spawn 1 screw bean.
+
 
 		elif random_int>=20 and random_int<35 :
 			bean = golden_bean_scene.instantiate()
-		else:
+		else: #we removed the screw, but rng for screw now goes to here.
 			bean = bean_scene.instantiate()
 		
 		bean.global_position = pour_point.global_position
