@@ -13,6 +13,7 @@ extends CanvasLayer
 @export var _rating_title_label: RichTextLabel
 @export var _rating_label: RichTextLabel
 @export var _tips_per_star_label: RichTextLabel
+@export var _tip_jar_desc_label: RichTextLabel
 @export var _tips_today_label: RichTextLabel
 @export var _bank_total_label: RichTextLabel
 @export var bank_gain_sound: AudioStreamPlayer
@@ -73,6 +74,7 @@ func _on_time_up() -> void:
 	_rating_title_label.visible = false
 	_rating_label.visible = false
 	_tips_per_star_label.visible = false
+	_tip_jar_desc_label.visible = false
 	_tips_today_label.visible = false
 	_bank_total_label.visible = false
 	
@@ -99,8 +101,20 @@ func _on_time_up() -> void:
 	]
 	
 	_rating_label.text = "⭐ %s / %s" % [Global.employee_rating, Stats.current.employee_rating_max]
-	_tips_per_star_label.text = "$%s tip per full star" % Stats.current.tip_per_star_rating
-	var tips: float = Stats.current.tip_per_star_rating * (floori(Global.employee_rating))
+	var tip_per_star: float = Stats.current.tip_per_star_rating
+	var show_tip_jar_desc: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "tip_jar":
+			_tip_jar_desc_label.visible = true
+			var tip_multiplier: float = 1.0
+			if item.item_level == 1:
+				tip_multiplier = 1.5
+			elif item.item_level == 2:
+				tip_multiplier = 3.0
+			tip_per_star *= tip_multiplier
+			_tip_jar_desc_label.text = "x%s from Tip Jar!" % tip_multiplier
+	_tips_per_star_label.text = "$%s tip per full star" % tip_per_star
+	var tips: float = tip_per_star * (floori(Global.employee_rating))
 	_tips_today_label.text = "= [color=gold]%s[/color] tips" % Global.float_to_price(tips)
 	
 	pencil_scribble.play()
@@ -124,12 +138,10 @@ func _on_time_up() -> void:
 	var profit_judgement_texture_index: int = 0
 	if passed_profit_goal:
 		var profit_judgement_index_float: float = remap(daily_profit, min_profit_goal, max_profit_goal, 0.0, 11.0)
-		print("judgement index float: %s:" % profit_judgement_index_float)
 		if daily_profit <= max_profit_goal: 
 			profit_judgement_texture_index = floori(profit_judgement_index_float)
 		else:
 			profit_judgement_texture_index = profit_judgement_textures.size() - 1
-	print("judgement index int: %s:" % profit_judgement_texture_index)
 	if profit_judgement_texture_index >= 0 and profit_judgement_texture_index < profit_judgement_textures.size():
 		profit_judgement_texture_rect.texture = profit_judgement_textures[profit_judgement_texture_index]
 	_profit_judgement_container.visible = true
@@ -144,6 +156,8 @@ func _on_time_up() -> void:
 	if passed_profit_goal:
 		await get_tree().create_timer(0.1).timeout
 		_tips_per_star_label.visible = true
+		if show_tip_jar_desc:
+			_tip_jar_desc_label.visible = true
 		await get_tree().create_timer(0.2).timeout
 		_tips_today_label.visible = true
 		await get_tree().create_timer(0.5).timeout

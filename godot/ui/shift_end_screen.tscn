@@ -127,7 +127,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_max_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "_profit_judgement_container", "profit_judgement_texture_rect", "button", "stars_sound", "_free_item_selector_screen_container")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_max_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "_profit_judgement_container", "profit_judgement_texture_rect", "button", "stars_sound", "_free_item_selector_screen_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -143,6 +143,7 @@ _profit_made_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Money
 _rating_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/RatingTitle")
 _rating_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Rating")
 _tips_per_star_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info")
+_tip_jar_desc_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer/TipMultiplierDesc")
 _tips_today_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Tips")
 _bank_total_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/TipsTotal")
 bank_gain_sound = NodePath("BankGainSound")
@@ -288,10 +289,39 @@ autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=398510589]
+clip_contents = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "$2 tip per full star"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/Info" unique_id=648041750]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 153.0
+offset_top = -54.0
+offset_right = 473.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_rotation = 0.082030475
+alignment = 1
+
+[node name="TipMultiplierDesc" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer" unique_id=668037415]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 0.8833333, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "x1.5 from Tip Jar!"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
