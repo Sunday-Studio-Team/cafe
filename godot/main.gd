@@ -47,6 +47,7 @@ static var seen_breakdown_popup := false
 @export var teleporter2: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
+var seen_tutorial_machine_instructions: bool = false
 
 var machines: Array[Machine]
 
@@ -327,8 +328,9 @@ func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
 	tutorial_machine.gui_3d.interactable.interacted.connect(
 		func():
-			if Global.day == 0 and tutorial_machine.gui_3d.seen_interaction_popup:
+			if Global.day == 0 and not seen_tutorial_machine_instructions:
 				_tutorial_manager.show_machine_tutorial()
+				seen_tutorial_machine_instructions = true
 	)
 	
 
