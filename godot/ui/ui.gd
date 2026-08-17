@@ -299,17 +299,20 @@ func handle_drop_item_ui() -> void:
 
 
 func update_day_indicator() -> void:
-	match Global.day % 5: # Incase we add another week or days
-		1:
-			day_indicator.text = "Mon"
-		2:
-			day_indicator.text = "Tue"
-		3:
-			day_indicator.text = "Wed"
-		4:
-			day_indicator.text = "Thu"
-		0:
-			day_indicator.text = "Fri"
+	if Global.day == 0:
+		day_indicator.text = ""
+	else:
+		match Global.day % 5: # Incase we add another week or days
+			1:
+				day_indicator.text = "Mon"
+			2:
+				day_indicator.text = "Tue"
+			3:
+				day_indicator.text = "Wed"
+			4:
+				day_indicator.text = "Thu"
+			0:
+				day_indicator.text = "Fri"
 
 
 func handle_shelf_item_ui() -> void:
