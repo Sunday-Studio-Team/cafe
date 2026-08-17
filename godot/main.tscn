@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
+[ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
 [ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
@@ -133,7 +134,9 @@ bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
 size = Vector3(1, 0.2680664, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_day_machines", "first_machine", "second_machine", "third_machine", "fourth_machine", "tutorial_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "tutorial_selection_menu")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yv1y"]
+
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_day_machines", "first_machine", "second_machine", "third_machine", "fourth_machine", "tutorial_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "tutorial_selection_menu", "whiteboard_tutorial_arrow")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -172,6 +175,7 @@ special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginC
 teleporter1 = NodePath("Teleporter1")
 teleporter2 = NodePath("Teleporter2")
 tutorial_selection_menu = NodePath("TutorialSelectionMenu")
+whiteboard_tutorial_arrow = NodePath("WhiteboardTutorialArrow")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -274,7 +278,7 @@ transform = Transform3D(-0.25881907, 0, 0.96592593, 0, 1, 0, -0.96592593, 0, -0.
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
 
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0010734, -0.09343622, 4.002124)
 
 [node name="Ingredients" type="Node3D" parent="." unique_id=1312596977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
@@ -1375,6 +1379,13 @@ mesh = SubResource("BoxMesh_xnu58")
 
 [node name="Marker3D" type="Marker3D" parent="Teleporter2" unique_id=456152824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.798117)
+
+[node name="WhiteboardTutorialArrow" type="Marker3D" parent="." unique_id=2126139227]
+transform = Transform3D(-0.07545426, 0.021451268, -0.9969185, -0.9971494, -0.001623217, 0.0754368, 0, 0.9997687, 0.021512596, 10.456207, 1.2273792, 7.327977)
+gizmo_extents = 0.0
+script = ExtResource("84_ppx11")
+arrow_material = SubResource("StandardMaterial3D_1yv1y")
+metadata/_custom_type_script = "uid://bd82opkja4ku1"
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 

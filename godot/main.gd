@@ -46,7 +46,7 @@ static var seen_breakdown_popup := false
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
-
+@export var whiteboard_tutorial_arrow: Arrow3D
 
 var machines: Array[Machine]
 
@@ -126,6 +126,7 @@ func _ready() -> void:
 	
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
+		whiteboard_tutorial_arrow.visible = true
 		tutorial_selection_menu.open_menu()
 		
 
