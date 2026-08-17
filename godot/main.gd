@@ -70,6 +70,7 @@ func _ready() -> void:
 	
 	Events.employee_rating_updated.connect(_on_employee_rating_updated)
 	customer_spawn_timer.timeout.connect(_on_customer_timer_timeout)
+	customer_spawn_timer.autostart = false
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
@@ -156,7 +157,7 @@ func enable_disable_teleporters():
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	if Global.day == 0:
-		Global.bank_money = 0
+		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
 		Stats.current.customer_wait_time_machine = INF
@@ -167,7 +168,7 @@ func set_per_day_stuff() -> void:
 		load_machines()
 		_set_security_cameras_active(false)
 	if Global.day == 1:
-		Global.bank_money = 0
+		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		machines = first_day_machines
 		Stats.reset()
@@ -305,12 +306,10 @@ func _on_minigame_end():
 
 func _on_shift_started():
 	Global.shift_started = true
-	game_timer.start()
-	customer_spawn_timer.start(Stats.current.first_customer_entry_time)
 
 	if Global.day > 0:
 		game_timer.start()
-		customer_spawn_timer.start()
+		customer_spawn_timer.start(Stats.current.first_customer_entry_time)
 
 		if scrubber in Global.owned_items:
 			DraggableMop.used_scrubber = true
@@ -328,35 +327,20 @@ func interactive_tutorial_flow() -> void:
 		return
 
 	# First customer, accept order
-	Machine.set_next_drink_score(3)
+	tutorial_machine.force_next_drink_perfect()
 	spawn_customer()
 	tutorial_machine.set_order_action_buttons_available("accept")
 
-	while tutorial_machine.queued_customer != null or tutorial_machine.customer != null:
-		await get_tree().process_frame
-	await get_tree().create_timer(0.5, false).timeout
-
-	# Second customer, reject order
-	Machine.set_next_drink_score(-3)
-	spawn_customer()
-	tutorial_machine.set_order_action_buttons_available("reject")
-	tutorial_machine.reject_button.pressed.connect(
-		func():
-			Machine.set_next_drink_score(3)
-			tutorial_machine.set_order_action_buttons_available("accept")
-	, CONNECT_ONE_SHOT
-	)
-
-	while tutorial_machine.queued_customer != null or tutorial_machine.customer != null:
+	while tutorial_machine.customer != null or tutorial_machine.queued_customers.size() > 0:
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5, false).timeout
 
 	# Third customer, make drink
-	Machine.set_next_drink_score(-3)
+	tutorial_machine.force_next_drink_incorrect()
 	spawn_customer()
 	tutorial_machine.set_order_action_buttons_available("make_drink")
 
-	while tutorial_machine.queued_customer != null or tutorial_machine.customer != null:
+	while tutorial_machine.customer != null or tutorial_machine.queued_customers.size() > 0:
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5, false).timeout
 
@@ -366,7 +350,7 @@ func interactive_tutorial_flow() -> void:
 	tutorial_machine.ingredients = 0
 	tutorial_machine.set_order_action_buttons_available("refill")
 
-	while tutorial_machine.ingredients < tutorial_machine.max_ingredients:
+	while tutorial_machine.ingredients <= 0:
 		await get_tree().process_frame
 
 	tutorial_machine.set_order_action_buttons_available("all")

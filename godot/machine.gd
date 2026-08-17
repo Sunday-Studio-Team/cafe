@@ -64,6 +64,8 @@ var waiting_for_response: bool = false
 var broken_down: bool = false
 var max_ingredients: int = 100
 var make_drink_locked: bool = false
+var next_drink_forced_perfect: bool = false
+var next_drink_forced_incorrect: bool = false
 
 var ingredients: int = max_ingredients:
 	set(new_value):
@@ -181,6 +183,12 @@ func add_customer_to_queue(new_customer: Customer) -> void:
 	queued_customers.append(new_customer)
 	_customer_queue_updated()
 
+func force_next_drink_perfect() -> void:
+	next_drink_forced_perfect = true
+
+func force_next_drink_incorrect() -> void:
+	next_drink_forced_incorrect = true
+
 func _customer_queue_updated() -> void:
 	var i: int = 0
 	for queued_customer in queued_customers:
@@ -249,22 +257,18 @@ func show_tutorial_where_is_storeroom() -> void:
 
 func set_order_action_buttons_available(button_case: String) -> void:
 	accept_button.disabled = true
-	reject_button.disabled = true
 	make_drink_locked = true
 	refill_button.disabled = true
 
 	match button_case:
 		"accept":
 			accept_button.disabled = false
-		"reject":
-			reject_button.disabled = false
 		"make_drink":
 			make_drink_locked = false
 		"refill":
 			refill_button.disabled = false
 		"all":
 			accept_button.disabled = false
-			reject_button.disabled = false
 			make_drink_button.disabled = false
 			refill_button.disabled = false
 		"none":
@@ -398,7 +402,12 @@ func machine_make_drink() -> void:
 	# Roll a random number of ingredients to differ.
 	const ingredient_types_count: int = 3
 	var target_drink_diff: int = randi_range(0, ingredient_types_count)
-	print("target drink diff: %s" % target_drink_diff)
+	if next_drink_forced_perfect:
+		target_drink_diff = 0
+		next_drink_forced_perfect = false
+	elif next_drink_forced_incorrect:
+		target_drink_diff = 2
+		next_drink_forced_incorrect = false
 	
 	var unlocked_drinks: Array[Drink]
 	for drink in Global.drinks:
@@ -415,7 +424,7 @@ func machine_make_drink() -> void:
 		# Use a fallback random drink.
 		made_drink = unlocked_drinks.pick_random()
 	order.made_drink = made_drink
-
+	
 	# Add rating gain on remake for each incorrect ingredient.
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
