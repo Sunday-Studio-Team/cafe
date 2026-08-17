@@ -45,6 +45,9 @@ static var seen_breakdown_popup := false
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
+@export var whiteboard_tutorial_arrow: Arrow3D
+@export var waypoint_ring: Area3D
+var seen_tutorial_machine_instructions: bool = false
 
 var machines: Array[Machine]
 
@@ -125,7 +128,13 @@ func _ready() -> void:
 		Global.popups["special shift"].open()
 	
 	if Global.day == 0:
+		Events.tutorial_selected.connect(_interactive_tutorial_flow)
+		whiteboard_tutorial_arrow.visible = true
+		waypoint_ring.show()
 		tutorial_selection_menu.open_menu()
+	else:
+		whiteboard_tutorial_arrow.visible = false
+		waypoint_ring.hide()
 
 
 func get_stats() -> void:
@@ -165,8 +174,11 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
+		machines = first_day_machines
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
+	if Global.day >= 2:
+		Stats.current.daily_profit_goal = 20
 		machines.append(first_machine)
 		machines.append(second_machine)
 	if Global.day >= 2:
@@ -179,6 +191,8 @@ func set_per_day_stuff() -> void:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
 		machines.append(fourth_machine)
+	load_machines()
+ 
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
@@ -309,13 +323,23 @@ func _on_shift_started():
 		desk.interactable.visible = false
 	
 	else:
-		interactive_tutorial_flow()
+		_interactive_tutorial_shift()
 
+func _interactive_tutorial_flow():
+	_tutorial_manager.show_intro_tutorial()
+	tutorial_machine.gui_3d.interactable.interacted.connect(
+		func():
+			if Global.day == 0 and not seen_tutorial_machine_instructions:
+				_tutorial_manager.show_machine_tutorial()
+				seen_tutorial_machine_instructions = true
+	)
+	
 
-func interactive_tutorial_flow() -> void:
+func _interactive_tutorial_shift() -> void:
+	
 	if tutorial_machine == null:
 		return
-
+	
 	# First customer, accept order
 	Machine.set_next_drink_score(3)
 	spawn_customer()

@@ -20,6 +20,7 @@ func _on_continue() -> void:
 	get_tree().paused = false
 	Global.in_tutorial_selection = false
 	visible = false
+	Events.tutorial_selected.emit()
 
 
 func open_menu() -> void:
