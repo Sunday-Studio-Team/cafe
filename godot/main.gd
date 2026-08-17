@@ -47,6 +47,7 @@ static var seen_breakdown_popup := false
 @export var teleporter2: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
+@export var waypoint_ring: Area3D
 var seen_tutorial_machine_instructions: bool = false
 
 var machines: Array[Machine]
@@ -128,8 +129,11 @@ func _ready() -> void:
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
 		whiteboard_tutorial_arrow.visible = true
+		waypoint_ring.show()
 		tutorial_selection_menu.open_menu()
-		
+	else:
+		whiteboard_tutorial_arrow.visible = false
+		waypoint_ring.hide()
 
 
 
@@ -165,22 +169,19 @@ func set_per_day_stuff() -> void:
 		Stats.current.machine_chance_of_spill = 0.0
 		machines.clear()
 		machines.push_front(tutorial_machine)
-		load_machines()
 		_set_security_cameras_active(false)
 	if Global.day == 1:
 		Global.bank_money = 0
 		Global.owned_items.clear()
-		machines = first_day_machines
 		Stats.reset()
-		load_machines()
 	if Global.day >= 1:
+		machines = first_day_machines
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
 		whiteboard_tutorial_arrow.visible = false
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
 		machines.push_front(first_machine)
-		load_machines()
 	if Global.day >= 3:
 		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
@@ -188,7 +189,7 @@ func set_per_day_stuff() -> void:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
 		machines.push_front(fourth_machine)
-		load_machines()
+	load_machines()
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now

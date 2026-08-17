@@ -40,9 +40,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# uncomment to show time above customer head
 	#waiting_indicator.visible = not timer.is_stopped()
-
 	if not timer.is_stopped():
 		percent_time_left = timer.time_left / timer.wait_time * 100
+		if timer.wait_time == INF:
+			percent_time_left = 100
 
 	if percent_time_left >= 66:
 		waiting_indicator.modulate = Color.GREEN

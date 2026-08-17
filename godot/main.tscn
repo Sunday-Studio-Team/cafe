@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
 [ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
+[ext_resource type="PackedScene" uid="uid://d1y6rrv6kckh7" path="res://WaypointRing.tscn" id="85_1yv1y"]
 [ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
@@ -136,7 +137,7 @@ size = Vector3(1, 0.2680664, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yv1y"]
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_day_machines", "first_machine", "second_machine", "third_machine", "fourth_machine", "tutorial_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "tutorial_selection_menu", "whiteboard_tutorial_arrow")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_day_machines", "first_machine", "second_machine", "third_machine", "fourth_machine", "tutorial_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -176,6 +177,7 @@ teleporter1 = NodePath("Teleporter1")
 teleporter2 = NodePath("Teleporter2")
 tutorial_selection_menu = NodePath("TutorialSelectionMenu")
 whiteboard_tutorial_arrow = NodePath("WhiteboardTutorialArrow")
+waypoint_ring = NodePath("WaypointRing")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1384,10 +1386,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.7
 
 [node name="WhiteboardTutorialArrow" type="Marker3D" parent="." unique_id=2126139227]
 transform = Transform3D(-0.07545426, 0.021451268, -0.9969185, -0.9971494, -0.001623217, 0.0754368, 0, 0.9997687, 0.021512596, 10.456207, 1.2273792, 7.327977)
+visible = false
 gizmo_extents = 0.0
 script = ExtResource("84_ppx11")
 arrow_material = SubResource("StandardMaterial3D_1yv1y")
 metadata/_custom_type_script = "uid://bd82opkja4ku1"
+
+[node name="WaypointRing" parent="." unique_id=59742114 instance=ExtResource("85_1yv1y")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.6126642, 0, 5.163345)
+collision_layer = 7
+collision_mask = 15
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 
