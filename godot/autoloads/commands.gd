@@ -40,7 +40,7 @@ func _ready() -> void:
 - [i]endshift L[/i] forces a loss
 - [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
-- [i]rating <number>[/i] sets your employee rating (1 point here = half a star)
+- [i]rating <number>[/i] sets your employee rating
 - [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
@@ -108,9 +108,9 @@ func set_profit(profit: String) -> void:
 
 
 func set_rating(rating: String) -> void:
-	Global.employee_rating = int(rating)
-	Console.print_line("setting rating to %s (%s stars)" % [int(rating), (int(rating) / 2.0)])
-	if int(rating) > 10:
+	Global.employee_rating = rating as float
+	Console.print_line("setting rating to %s" % rating)
+	if int(rating) > 5.0:
 		Console.print_line("(will be clamped to limit of 5 stars")
 
 
