@@ -46,7 +46,7 @@ static var seen_breakdown_popup := false
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
-
+@export var whiteboard_tutorial_arrow: Arrow3D
 
 var machines: Array[Machine]
 
@@ -125,7 +125,10 @@ func _ready() -> void:
 		Global.popups["special shift"].open()
 	
 	if Global.day == 0:
+		Events.tutorial_selected.connect(_interactive_tutorial_flow)
+		whiteboard_tutorial_arrow.visible = true
 		tutorial_selection_menu.open_menu()
+		
 
 
 
@@ -318,13 +321,22 @@ func _on_shift_started():
 		desk.interactable.visible = false
 	
 	else:
-		interactive_tutorial_flow()
+		_interactive_tutorial_shift()
 
+func _interactive_tutorial_flow():
+	_tutorial_manager.show_intro_tutorial()
+	tutorial_machine.gui_3d.interactable.interacted.connect(
+		func():
+			if Global.day == 0 and tutorial_machine.gui_3d.seen_interaction_popup:
+				_tutorial_manager.show_machine_tutorial()
+	)
+	
 
-func interactive_tutorial_flow() -> void:
+func _interactive_tutorial_shift() -> void:
+	
 	if tutorial_machine == null:
 		return
-
+	
 	# First customer, accept order
 	Machine.set_next_drink_score(3)
 	spawn_customer()
