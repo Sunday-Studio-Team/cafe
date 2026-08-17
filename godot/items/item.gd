@@ -3,7 +3,6 @@ extends Resource
 
 @export var item_id: String
 @export var name: String
-@export_multiline var description: String
 @export var description_at_levels: Dictionary[int, String]
 @export var icon: Texture
 @export var price_at_levels: Dictionary[int, float]
