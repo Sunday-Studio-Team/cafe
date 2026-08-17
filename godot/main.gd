@@ -26,7 +26,6 @@ static var seen_breakdown_popup := false
 @export var pc_ui: Control
 @export var overtime_item: Item
 @export var teleporter: Item
-@export var scrubber: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -312,11 +311,12 @@ func _on_shift_started():
 	if Global.day > 0:
 		game_timer.start()
 		customer_spawn_timer.start(Stats.current.first_customer_entry_time)
-
-		if scrubber in Global.owned_items:
-			DraggableMop.used_scrubber = true
-		else:
-			DraggableMop.used_scrubber = false
+		
+		var has_scrubber: bool = false
+		for item in Global.owned_items:
+			if item.item_id == "super_scrubber":
+				has_scrubber = true
+		DraggableMop.used_scrubber = has_scrubber
 
 		desk.interactable.visible = false
 	
