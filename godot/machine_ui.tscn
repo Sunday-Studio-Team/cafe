@@ -327,7 +327,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 offset_transform_enabled = true
-theme_override_constants/separation = 64
+theme_override_constants/separation = 96
 alignment = 1
 
 [node name="RejectButton" type="Button" parent="VBoxContainer/Buttons" unique_id=49434824]
@@ -364,7 +364,7 @@ grow_vertical = 0
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.045, 1.08)
 theme_override_font_sizes/font_size = 64
-text = "+0.4⭐🙂"
+text = "🙂+0.4⭐"
 
 [node name="RemakePriceLabel" type="Label" parent="VBoxContainer/Buttons/RemakeDrinkButton" unique_id=2060782162]
 modulate = Color(0, 1, 0, 1)
@@ -390,6 +390,23 @@ offset_transform_rotation = 0.08726646
 offset_transform_visual_only = false
 theme_override_font_sizes/font_size = 64
 text = "accept"
+
+[node name="AcceptRatingLossLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=66054506]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -151.5
+offset_top = -88.0
+offset_right = 151.5
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.045, 1.08)
+theme_override_font_sizes/font_size = 64
+text = "☹️-0.2⭐"
 
 [node name="AcceptPriceLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=464422795]
 modulate = Color(0, 1, 0, 1)

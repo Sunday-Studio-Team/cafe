@@ -18,6 +18,7 @@ static var seen_breakdown_popup := false
 @export var _price_labels: Array[Label]
 @export var _rating_gain_on_remake_label: Label
 @export var make_drink_button: Button
+@export var _rating_loss_on_accept_label: Label
 @export var accept_button: Button
 @export var refill_button: Button
 @export var fix_machine_button: Interactable
@@ -337,6 +338,7 @@ func set_customer(c: Customer) -> void:
 		for label in _price_labels:
 			label.hide()
 		_rating_gain_on_remake_label.hide()
+		_rating_loss_on_accept_label.hide()
 		waiting_for_response = false
 		timer.stop()
 		if Global.making_drink_manually and gui_3d.player_using_me:
@@ -449,6 +451,14 @@ func machine_make_drink() -> void:
 		# If critical customers, halve the star rating gains.
 		order.star_rating_gain_for_remake /= 2.0
 
+	# Calculate star rating loss if accepted
+	if order.star_rating_gain_for_remake == 0.0:
+		order.star_rating_loss_if_accept = 0.0
+	else:
+		order.star_rating_loss_if_accept = snappedf(
+			order.star_rating_gain_for_remake * Stats.current.accept_incorrect_drink_star_rating_multiplier,
+			Stats.current.accept_incorrect_drink_star_rating_rounding)
+	
 	display_drink_score()
 
 	if (
@@ -505,18 +515,28 @@ func display_drink_score() -> void:
 		price_label.text = Global.float_to_price(order.made_drink.price)
 		price_label.show()
 
-	if order.star_rating_gain_for_remake > 0:
+	if order.star_rating_gain_for_remake > 0.0:
 		_rating_gain_on_remake_label.modulate = Color.GREEN
 		var star_rating_gain_if_remade: float = order.star_rating_gain_for_remake
 		_rating_gain_on_remake_label.text = "🙂 +%s⭐️" % star_rating_gain_if_remade
-	elif order.star_rating_gain_for_remake == 0:
+	elif order.star_rating_gain_for_remake == 0.0:
 		_rating_gain_on_remake_label.modulate = Color.DARK_GRAY
 		var star_rating_gain_if_remade: float = 0
 		_rating_gain_on_remake_label.text = "+%s⭐️" % star_rating_gain_if_remade
 
+	if order.star_rating_loss_if_accept > 0.0:
+		_rating_loss_on_accept_label.modulate = Color.RED
+		var star_rating_loss_if_accept: float = order.star_rating_loss_if_accept
+		_rating_loss_on_accept_label.text = "☹️ -%s⭐" % star_rating_loss_if_accept
+	elif order.star_rating_loss_if_accept == 0.0:
+		_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
+		var star_rating_loss_if_accept: float = 0
+		_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
+
 	_rating_gain_on_remake_label.show()
+	_rating_loss_on_accept_label.show()
 	
-	if order.star_rating_gain_for_remake == 3:
+	if order.star_rating_gain_for_remake == 0.0:
 		final_order_indicator.modulate = Color.GREEN
 	else:
 		final_order_indicator.modulate = Color.RED
@@ -622,16 +642,22 @@ func accept_order(did_remake_drink: bool) -> void:
 	_rating_gain_on_remake_label.hide()
 	
 	if did_remake_drink:
-		Global.score_update_message = "customer happy for remade %s!" % [order.made_drink.name]
-		Global.employee_rating += order.star_rating_gain_for_remake
-		await get_tree().create_timer(0.5, false).timeout
+		if order.star_rating_gain_for_remake > 0.0:	
+			Global.score_update_message = "customer happy for remade %s!" % [order.made_drink.name]
+			Global.employee_rating += order.star_rating_gain_for_remake
+			await get_tree().create_timer(0.8, false).timeout
+	else:
+		if order.star_rating_loss_if_accept > 0.0:
+			Global.score_update_message = "customer upset for incorrect %s!" % [order.made_drink.name]
+			Global.employee_rating -= order.star_rating_loss_if_accept
+			await get_tree().create_timer(0.8, false).timeout
 
 	for label in _price_labels:
 		label.show()
 	Global.score_update_message = "sold %s" % order.made_drink.name
 	Global.daily_cafe_money += order.made_drink.price
 
-	await get_tree().create_timer(0.5, false).timeout
+	await get_tree().create_timer(0.8, false).timeout
 
 	for label in _price_labels:
 		label.hide()
@@ -780,4 +806,5 @@ class OrderData:
 	var liquid_correct: bool = false
 	var extra_correct: bool = false
 	var star_rating_gain_for_remake: float
+	var star_rating_loss_if_accept: float
 	var tip: float = 0.0
