@@ -58,6 +58,7 @@ func _ready() -> void:
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
+	Global.shift_started = false
 
 	customer_spawn_timer.timeout.connect(spawn_customer)
 	game_timer.timeout.connect(_on_game_timer_timeout)
@@ -69,9 +70,6 @@ func _ready() -> void:
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
-
-	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		Global.current_special_shift.unapply_stats()
 
 	set_per_day_stuff()
 	get_stats()
@@ -118,9 +116,6 @@ func _ready() -> void:
 	Events.active_item_used.connect(active_item_used)
 
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		special_shift_text.text = Global.current_special_shift.description
-		special_shift_title.text = Global.current_special_shift.name
-		special_shift_icon.texture = Global.current_special_shift.icon
 		Global.popups["special shift"].open()
 
 
@@ -277,6 +272,7 @@ func _on_minigame_end():
 func _on_shift_started():
 	game_timer.start()
 	customer_spawn_timer.start()
+	Global.shift_started = true
 
 	if scrubber in Global.owned_items:
 		DraggableMop.used_scrubber = true

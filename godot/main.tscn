@@ -1249,11 +1249,14 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319]
+[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
 process_mode = 3
 visible = false
 script = ExtResource("287_4fms3")
 popup_id = "special shift"
+text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
 
 [node name="InputBlocker" type="Control" parent="SpecialShiftPop" unique_id=317794041]
 layout_mode = 3
