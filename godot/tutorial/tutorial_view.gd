@@ -31,6 +31,10 @@ func _spawn_tutorial_screen_view() -> void:
 func show_tutorial_intro_screen() -> void:
 	show()
 	_spawn_tutorial_intro_screen()
+
+func show_machine_tutorial_screen() -> void:
+	show()
+	_spawn_machine_intro_tutorial_screen()
 	
 func _spawn_tutorial_intro_screen() -> void:
 	_current_tutorial_view = _tutorial_screen_view_packed_scenes[0].instantiate()
@@ -40,15 +44,29 @@ func _spawn_tutorial_intro_screen() -> void:
 func _spawn_tutorial_controls_screen() -> void:
 	_current_tutorial_view = _tutorial_screen_view_packed_scenes[1].instantiate()
 	_tutorial_screen_container.add_child(_current_tutorial_view, true)
-	_current_tutorial_view.finished.connect(_on_controls_screen_finished)
+	_current_tutorial_view.finished.connect(_on_tutorial_section_finished)
+
+func _spawn_machine_intro_tutorial_screen() -> void:
+	_current_tutorial_view = _tutorial_screen_view_packed_scenes[2].instantiate()
+	_tutorial_screen_container.add_child(_current_tutorial_view, true)
+	_current_tutorial_view.finished.connect(_on_machine_intro_tutorial_screen_finished)
+	
+func _spawn_machine_options_tutorial_screen() -> void:
+	_current_tutorial_view = _tutorial_screen_view_packed_scenes[3].instantiate()
+	_tutorial_screen_container.add_child(_current_tutorial_view, true)
+	_current_tutorial_view.finished.connect(_on_tutorial_section_finished)
 
 func _on_intro_screen_finished(tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()
 	_spawn_tutorial_controls_screen()
 
-func _on_controls_screen_finished(tutorial_screen_view: TutorialScreenView) -> void:
+func _on_tutorial_section_finished(tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()
 	tutorials_finished.emit(self)
+	
+func _on_machine_intro_tutorial_screen_finished(tutorial_screen_view: TutorialScreenView) -> void:
+	_close_tutorial_screen_view()
+	_spawn_machine_options_tutorial_screen()
 
 func _on_tutorial_screen_view_finished(tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()

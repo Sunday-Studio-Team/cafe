@@ -324,7 +324,12 @@ func _on_shift_started():
 		_interactive_tutorial_shift()
 
 func _interactive_tutorial_flow():
-	_tutorial_manager.show_tutorial_intro_screen()
+	_tutorial_manager.show_intro_tutorial()
+	tutorial_machine.gui_3d.interactable.interacted.connect(
+		func():
+			if Global.day == 0 and tutorial_machine.gui_3d.seen_interaction_popup:
+				_tutorial_manager.show_machine_tutorial()
+	)
 	
 
 func _interactive_tutorial_shift() -> void:

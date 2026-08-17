@@ -15,10 +15,13 @@ func show_tutorial() -> void:
 	Global.in_tutorial_screen = true
 	_tutorial_view.open_tutorial()
 
-func show_tutorial_intro_screen() -> void:
+func show_intro_tutorial() -> void:
 	Global.in_tutorial_screen = true
 	_tutorial_view.show_tutorial_intro_screen()
 	
+func show_machine_tutorial() -> void:
+	Global.in_tutorial_screen = true
+	_tutorial_view.show_machine_tutorial_screen()
 
 func _on_tutorials_finished(tutorial_view: TutorialView) -> void:
 	tutorial_view.hide_tutorial()
