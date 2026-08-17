@@ -544,7 +544,6 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
 			score_label_to_tween = profit_label
 		ScoreType.CUSTOMER:
-			change /= 2
 			change_num_to_show += "%.1f" % change
 			change_num_to_show = change_num_to_show.rstrip(".0")
 
