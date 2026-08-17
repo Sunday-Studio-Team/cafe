@@ -11,19 +11,31 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
 bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
 bg_color = Color(0.94509804, 0.54901963, 0.003921569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_cxysb"]
-font_size = 72
+font_size = 64
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2606k"]
 content_margin_left = 64.0
-content_margin_top = 16.0
+content_margin_top = 8.0
 content_margin_right = 64.0
-content_margin_bottom = 16.0
+content_margin_bottom = 8.0
 bg_color = Color(0.9411765, 0.54901963, 0.003921569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr0b"]
 content_margin_left = 64.0
@@ -31,6 +43,10 @@ content_margin_top = 16.0
 content_margin_right = 64.0
 content_margin_bottom = 16.0
 bg_color = Color(0.68, 0.3966667, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye6mp"]
 content_margin_left = 64.0
@@ -38,6 +54,10 @@ content_margin_top = 16.0
 content_margin_right = 64.0
 content_margin_bottom = 16.0
 bg_color = Color(0.92, 0.68233335, 0.3496, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.94509804, 0.54901963, 0.003921569, 1)
@@ -54,10 +74,23 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [node name="ShopApp" unique_id=270681436 node_paths=PackedStringArray("items_container", "bank_balance", "cant_buy_sound", "bought_sound", "reroll_sound", "cant_reroll_sound", "reroll_button", "shelf_full_warning") instance=ExtResource("1_swvwp")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("2_c06av")
 items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/Items")
 item_button_scene = ExtResource("3_mamje")
-bank_balance = NodePath("MarginContainer/PanelContainer/Bank")
+bank_balance = NodePath("MarginContainer/VBoxContainer/PanelContainer2/PanelContainer/Bank")
 cant_buy_sound = NodePath("CantBuySound")
 bought_sound = NodePath("BoughtItemSound")
 reroll_sound = NodePath("ReRollSound")
@@ -65,18 +98,34 @@ cant_reroll_sound = NodePath("CantReRollSound")
 reroll_button = NodePath("MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ReRoll")
 shelf_full_warning = NodePath("MarginContainer/ShelfFullWarning")
 
-[node name="Background" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="0" unique_id=533031003]
-color = Color(1, 1, 1, 1)
+[node name="MarginContainer" parent="." index="0" unique_id=1131925057]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -643.5
+offset_top = -467.0
+offset_right = 643.5
+offset_bottom = 467.0
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(1960292155) index="1" unique_id=2046163112]
+[node name="Background" parent="MarginContainer" index="0" unique_id=533031003]
+color = Color(0, 0.32941177, 0.92156863, 1)
+
+[node name="VBoxContainer" parent="MarginContainer" index="1" unique_id=1960292155]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/VBoxContainer" index="1" unique_id=2046163112]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_13qdw")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer2" index="0" unique_id=1426887004]
 layout_mode = 2
 theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer" index="0" unique_id=70546058]
 layout_mode = 2
@@ -102,8 +151,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer" index="0" unique_id=1444392765]
 layout_mode = 2
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_bottom = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="Deals" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" index="0" unique_id=1585422207]
 z_index = 1
@@ -114,17 +163,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SpaceControl" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="3" unique_id=419365170]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="Items" type="HBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="4" unique_id=982291301]
-custom_minimum_size = Vector2(0, 500)
+custom_minimum_size = Vector2(0, 350)
+custom_maximum_size = Vector2(-1, 450)
 layout_mode = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="SpaceControl2" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="5" unique_id=2017255305]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="ReRoll" type="Button" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="6" unique_id=1225747767]
@@ -139,6 +189,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ye6mp")
 text = "re-roll"
 
 [node name="SpaceControl3" type="Control" parent="MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" index="7" unique_id=1466171127]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
@@ -163,16 +214,16 @@ disabled = true
 text = "save"
 icon = ExtResource("6_2606k")
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="2" unique_id=502270219]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer2" index="1" unique_id=502270219]
 custom_maximum_size = Vector2(250, -1)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.03, -0.043)
+offset_transform_position = Vector2(-20, -20)
 theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
 
-[node name="Bank" type="RichTextLabel" parent="MarginContainer/PanelContainer" index="0" unique_id=385636938]
+[node name="Bank" type="RichTextLabel" parent="MarginContainer/VBoxContainer/PanelContainer2/PanelContainer" index="0" unique_id=385636938]
 custom_minimum_size = Vector2(1000, 100)
 layout_mode = 2
 offset_transform_position_ratio = Vector2(-0.03, 0)
@@ -184,7 +235,7 @@ text = "money in bank: $10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ShelfFullWarning" type="PanelContainer" parent="MarginContainer" parent_id_path=PackedInt32Array(1131925057) index="3" unique_id=1986553584]
+[node name="ShelfFullWarning" type="PanelContainer" parent="MarginContainer" index="2" unique_id=1986553584]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4

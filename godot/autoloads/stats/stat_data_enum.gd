@@ -34,4 +34,5 @@ max_stamina,\
 sprint_stamina_drain_rate,\
 stamina_regen_rate,\
 sprint_lockout_time,\
+shift_lengths_for_each_day,\
 "

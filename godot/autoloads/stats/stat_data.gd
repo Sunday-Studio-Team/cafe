@@ -51,3 +51,4 @@ var max_stamina := 125.0
 var sprint_stamina_drain_rate := 0.0
 var stamina_regen_rate := 10.0
 var sprint_lockout_time := 3.0
+var shift_lengths_for_each_day: Dictionary = { 1: 90, 2: 120, 3: 120, 4: 120, 5: 120 }

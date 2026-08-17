@@ -39,12 +39,17 @@ var items: Array[Item]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
-var player_in_cctv_los_camera: SecurityCam3D
-var minigame_active := false
+var minigame_active := false:
+	set(value):
+		minigame_active = value
+		if minigame_active == false:
+			current_minigame_name = ""
+var current_minigame_name: String
 var in_spill_minigame := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
+var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_helpdesk_customer: Customer
 var holding_ingredients := false
@@ -151,9 +156,10 @@ var hovered_item_icon: TabletItemIcon = null
 #Active Items
 var equipped_item: Item = null
 #tutorial flags
-var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a machine runs out of food
-var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
-var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
+var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
+var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
+var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
+var shift_started: bool = false
 
 
 func _ready() -> void:
@@ -166,13 +172,18 @@ func _ready() -> void:
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 
-func _process(_delta: float) -> void:
-	# this has to be reset to false at the start of every frame here
+
+# NOTE: these things in physics process instead of process for timing reasons
+func _physics_process(_delta: float) -> void:
+	# this have to be reset to false at the start of every frame here
 	# because if we set it in the individual security cameras' processes, they
 	# would start overriding each other
 	player_in_cctv_los = false
-	making_drink_manually = false
 
+	making_drink_manually = current_minigame_name == "Captcha"
+
+
+func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
 		if Global.minigame_active and in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="4_apda1"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="4_dw44w"]
 [ext_resource type="PackedScene" uid="uid://wy44aeyirhsb" path="res://ui/order_breakdown_icon.tscn" id="7_dw44w"]
+[ext_resource type="Texture2D" uid="uid://csktf0dcaqtpm" path="res://Assets/UI/retry_coffee.png" id="7_uuvgi"]
+[ext_resource type="Texture2D" uid="uid://cauic6e7vugt5" path="res://Assets/UI/handmade_coffe.png" id="8_ywufb"]
+[ext_resource type="Texture2D" uid="uid://6280p1fdreep" path="res://Assets/UI/accept.png" id="9_nsw07"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -16,6 +19,8 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwcv2"]
 bg_color = Color(0.999996, 0.30647203, 0.34021902, 1)
@@ -196,6 +201,11 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 
+[node name="HSeparator2" type="VSeparator" parent="VBoxContainer/OrderInfo" unique_id=1719487920]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
+
 [node name="OrderedInfo" type="VBoxContainer" parent="VBoxContainer/OrderInfo" unique_id=1529670566]
 custom_maximum_size = Vector2(-1, 275)
 propagate_maximum_size = false
@@ -210,7 +220,13 @@ size_flags_horizontal = 4
 texture = ExtResource("4_apda1")
 expand_mode = 4
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1586463342]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
+
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1074364750]
+visible = false
 custom_minimum_size = Vector2(500, 200)
 custom_maximum_size = Vector2(500, 200)
 layout_mode = 2
@@ -223,6 +239,7 @@ autowrap_mode = 3
 [node name="OrderBreakdown" type="GridContainer" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=802914043]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
 columns = 3
 
 [node name="Main" type="PanelContainer" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown" unique_id=1457050671]
@@ -287,7 +304,13 @@ size_flags_horizontal = 4
 texture = ExtResource("4_dw44w")
 expand_mode = 4
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=511096359]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
+
 [node name="MachineOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=220725264]
+visible = false
 custom_minimum_size = Vector2(500, 200)
 custom_maximum_size = Vector2(500, 200)
 layout_mode = 2
@@ -300,6 +323,7 @@ autowrap_mode = 3
 [node name="MadeBreakdown" type="GridContainer" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=1161911280]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
 columns = 3
 
 [node name="Main" parent="VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown" unique_id=1739128889 instance=ExtResource("7_dw44w")]
@@ -321,11 +345,16 @@ layout_mode = 2
 layout_mode = 2
 text = "="
 
+[node name="HSeparator" type="VSeparator" parent="VBoxContainer/OrderInfo" unique_id=765491016]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
+
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer" unique_id=1826884261]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_constants/separation = 10
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="RejectButton" type="Button" parent="VBoxContainer/Buttons" unique_id=49434824]
@@ -334,8 +363,9 @@ layout_mode = 2
 offset_transform_enabled = true
 offset_transform_rotation = -0.08726646
 offset_transform_visual_only = false
+theme_override_constants/icon_max_width = 140
 theme_override_font_sizes/font_size = 64
-text = "reject"
+icon = ExtResource("7_uuvgi")
 
 [node name="MakeDrinkButton" type="Button" parent="VBoxContainer/Buttons" unique_id=273329570]
 modulate = Color(1, 1, 0, 1)
@@ -344,8 +374,12 @@ offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -0.5)
 offset_transform_rotation = 0.017453292
 offset_transform_visual_only = false
+theme_override_constants/icon_max_width = 120
 theme_override_font_sizes/font_size = 64
-text = "remake manually"
+text = "brew manually"
+icon = ExtResource("8_ywufb")
+icon_alignment = 1
+vertical_icon_alignment = 0
 
 [node name="AcceptButton" type="Button" parent="VBoxContainer/Buttons" unique_id=1653396744]
 self_modulate = Color(0.27450982, 1, 0, 1)
@@ -353,31 +387,39 @@ layout_mode = 2
 offset_transform_enabled = true
 offset_transform_rotation = 0.08726646
 offset_transform_visual_only = false
+theme_override_constants/icon_max_width = 140
 theme_override_font_sizes/font_size = 64
-text = "accept"
+icon = ExtResource("9_nsw07")
 
 [node name="PriceLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=464422795]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.438824
+offset_top = -15.702049
+offset_right = 53.561172
+offset_bottom = 72.29795
 grow_horizontal = 2
-grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.18, -0.895)
-offset_transform_rotation = -0.0715585
+offset_transform_rotation = 0.10471976
 theme_override_font_sizes/font_size = 64
 text = "+$1"
 
 [node name="TipLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=1536888060]
 modulate = Color(1, 0.93333334, 0, 1)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -137.27538
+offset_top = -2.0542583
+offset_right = 71.724625
+offset_bottom = 64.94574
+grow_horizontal = 0
+rotation = -0.06511205
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.55, -0.85)
 offset_transform_scale = Vector2(0.65, 0.65)
@@ -387,16 +429,22 @@ text = "(+ $1 TIP)"
 
 [node name="DrinkCustomerScoreLabel" type="Label" parent="VBoxContainer/Buttons/AcceptButton" unique_id=699335639]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 9.049507
+offset_top = -252.24858
+offset_right = 312.0495
+offset_bottom = -164.24858
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.045, 1.08)
-offset_transform_rotation = -0.13962634
+offset_transform_rotation = -0.2268928
 theme_override_font_sizes/font_size = 64
-text = "+1.5⭐🙂"
+text = "+1.5⭐"
 
 [node name="IngredientsUI" type="HBoxContainer" parent="VBoxContainer" unique_id=282857860]
 layout_mode = 2

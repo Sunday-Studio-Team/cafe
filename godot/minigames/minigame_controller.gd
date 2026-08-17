@@ -38,6 +38,7 @@ func play_minigame(minigame_name: String):
 
 	visible = true
 	Global.minigame_active = true
+	Global.current_minigame_name = minigame_name
 
 
 func close_game():

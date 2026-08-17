@@ -69,15 +69,9 @@ func _physics_process(_delta: float) -> void:
 			player_in_spotlight = true
 			break
 
-# we need both a local and global var here to track if the player is in this
-# spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
-# things like this light flashing red when we enter a separate cameara's fov)
 	if player_in_spotlight:
 		spotlight.light_color = Color.RED
 		Global.player_in_cctv_los = true
-		Global.player_in_cctv_los_camera = self
-		if Input.is_action_just_pressed("interact") and Global.player_in_cctv_los_camera == self and not Global.owned_items.any(func(x: Item): return x.name == "Whipped Cream"):
-			open_camera_minigame()
 	else:
 		spotlight.light_color = Color.WHITE
 

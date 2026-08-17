@@ -10,7 +10,7 @@
 bg_color = Color(0.7294118, 0.827451, 0.972549, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r71nh"]
-bg_color = Color(0.57254905, 0.6, 0.6901961, 1)
+bg_color = Color(0.8537145, 0.8634115, 0.9020146, 0.81960785)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
 bg_color = Color(0, 0.32941177, 0.92156863, 1)
@@ -21,26 +21,36 @@ font_size = 24
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1lj4"]
 bg_color = Color(0.7294118, 0.827451, 0.972549, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1jvbq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdysk"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_fdysk"]
-font_size = 24
+font_size = 26
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pl26c"]
 font_size = 24
-font_color = Color(0.25, 0.25, 0.25, 1)
+font_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lwc43"]
 font_size = 24
-font_color = Color(0.25, 0.25, 0.25, 1)
+font_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n55yy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwc43"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njqwk"]
-bg_color = Color(0.9137255, 0.9098039, 0.827451, 1)
+bg_color = Color(0.7294118, 0.827451, 0.972549, 1)
 
 [node name="EmailApp" unique_id=270681436 node_paths=PackedStringArray("email_app_list_items_container", "email_viewer") instance=ExtResource("1_yb0su")]
 script = ExtResource("2_1jvbq")
@@ -174,7 +184,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1jvbq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_fdysk")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3" index="1" unique_id=89146639]
 layout_mode = 1
@@ -192,7 +202,13 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="0" unique_id=1566303969]
+[node name="EmailSubjectLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="0" unique_id=569509916]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_7ubrx")
+text = "Email Subject"
+label_settings = SubResource("LabelSettings_fdysk")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="1" unique_id=1566303969]
 layout_mode = 2
 
 [node name="SenderNameLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer/HBoxContainer2" index="0" unique_id=712464132]
@@ -205,12 +221,6 @@ label_settings = SubResource("LabelSettings_fdysk")
 layout_mode = 2
 text = "Date/Time"
 label_settings = SubResource("LabelSettings_pl26c")
-
-[node name="EmailSubjectLabel" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="1" unique_id=569509916]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("8_7ubrx")
-text = "Email Subject"
-label_settings = SubResource("LabelSettings_fdysk")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control3/MarginContainer/VBoxContainer" index="2" unique_id=1812271745]
 layout_mode = 2
@@ -236,7 +246,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_n55yy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwc43")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/VBoxContainer/PanelContainer/MarginContainer2/HBoxContainer/Control/EmailViewer/VBoxContainer/Control" index="1" unique_id=1100904384]
 layout_mode = 1
