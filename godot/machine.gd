@@ -601,8 +601,16 @@ func refill() -> void:
 
 	Global.holding_ingredients = false
 	Events.ingredients_bag_consumed.emit()
-	ingredients += roundi(Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy)
-
+	
+	var ingredient_multiplier: float = 1.0
+	for item in Global.owned_items:
+		if item.item_id == "nice_spoon":
+			if item.item_level == 1:
+				ingredient_multiplier = 2.0
+			elif item.item_level == 2:
+				ingredient_multiplier = 3.0
+	ingredients += roundi(Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy * ingredient_multiplier)
+	
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
 	if (
