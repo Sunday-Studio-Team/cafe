@@ -210,8 +210,8 @@ func show_tutorial_where_is_storeroom() -> void:
 	#this is getting called within physics_process...
 	#check values in global
 	#and then immediately turn those values to 'tutorial has been shown',
-	#if OS.has_feature("skip_popups"):
-	return
+	if (Global.day == 0) and OS.has_feature("skip_popups"):
+		return
 
 	if Global.tutorial_refill_shown == false:
 		Global.tutorial_refill_shown = true
@@ -284,15 +284,15 @@ func set_order_action_buttons_available(button_case: String) -> void:
 # via a console command etc
 func show_tutorial_go_clean_spill() -> void:
 	#this is called right after spill() is called [but not inside spill()]
-	#if OS.has_feature("skip_popups"):
-	return
+	if OS.has_feature("skip_popups"):
+		return
 
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
 
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
-	if (Global.day == 1) and (Global.tutorial_go_clean_spill_shown == false):
+	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
 		Global.in_tutorial_screen = true
 
