@@ -244,10 +244,10 @@ func handle_footstep_sounds() -> void:
 	pos_last_physics_frame = global_position
 
 
-func tilt_camera() -> void:
-	const TILT_AMOUNT := 0.25
-	var local_velocity = basis.transposed() * velocity
-	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
+#func tilt_camera() -> void:
+#	const TILT_AMOUNT := 0.25
+#	var local_velocity = basis.transposed() * velocity
+#	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
 
 
 func handle_ingredients_bag() -> void:

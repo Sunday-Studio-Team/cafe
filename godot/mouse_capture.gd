@@ -1,6 +1,6 @@
 #class_name MouseCaptureComponent extends Node
 
-
+#!
 #export var debug : bool = false
 #@export var camera_controller : CameraController
 #@export_category("Mouse Capture Settings")

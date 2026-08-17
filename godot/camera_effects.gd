@@ -2,6 +2,7 @@ class_name CameraEffects extends Camera3D
 
 @export_category("Refecrences")
 @export var player : Player
+#easly turned off
 
 @export_category("Effects")
 @export var enable_tilt : bool = true
