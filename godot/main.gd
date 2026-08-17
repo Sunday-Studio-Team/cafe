@@ -157,6 +157,8 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 		Stats.current.customer_wait_time_machine = INF
+		Stats.current.chance_of_machine_breaking = 0.0
+		Stats.current.machine_chance_of_spill = 0.0
 		machines.clear()
 		machines.push_front(tutorial_machine)
 		load_machines()
