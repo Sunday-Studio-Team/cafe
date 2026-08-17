@@ -103,14 +103,17 @@ func _ready() -> void:
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
 	await get_tree().process_frame
+
+	if Global.day == 0:
+		objective.text = ""
+		rules_controls.text = ""
+		cctv_indicator.hide()
 	if Global.day >= 1:
 		objective.text = (
 				"You are the new manager of a fully automated cafe!
 This is your first trial shift - make it through the week to keep your new position!"
 		)
-		rules_controls.text = (
-				""
-		)
+		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 2:
 		objective.text = (
@@ -139,11 +142,15 @@ new rule: don't take any more ingredients out of the store room."
 				"your boss has installed another machine."
 		)
 	@warning_ignore("integer_division")
-	objective.text += (
-			"\n\n[b]SHIFT OBJECTIVE[/b]
-make %s while keeping your employee rating (🙂) above %s⭐️"
-			% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
-	)
+
+	if Global.day != 0:
+		@warning_ignore("integer_division")
+		objective.text += (
+				"\n\n[b]SHIFT OBJECTIVE[/b]
+	make %s while keeping your employee rating (🙂) above %s⭐️"
+				% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
+		)
+
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 
@@ -292,17 +299,20 @@ func handle_drop_item_ui() -> void:
 
 
 func update_day_indicator() -> void:
-	match Global.day % 5: # Incase we add another week or days
-		1:
-			day_indicator.text = "Mon"
-		2:
-			day_indicator.text = "Tue"
-		3:
-			day_indicator.text = "Wed"
-		4:
-			day_indicator.text = "Thu"
-		0:
-			day_indicator.text = "Fri"
+	if Global.day == 0:
+		day_indicator.text = ""
+	else:
+		match Global.day % 5: # Incase we add another week or days
+			1:
+				day_indicator.text = "Mon"
+			2:
+				day_indicator.text = "Tue"
+			3:
+				day_indicator.text = "Wed"
+			4:
+				day_indicator.text = "Thu"
+			0:
+				day_indicator.text = "Fri"
 
 
 func handle_shelf_item_ui() -> void:

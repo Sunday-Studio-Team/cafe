@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
 [ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
+[ext_resource type="PackedScene" uid="uid://ce4dmlcd3n30f" path="res://minigames/words/word_game.tscn" id="18_4obbf"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="19_yjja3"]
 [ext_resource type="PackedScene" uid="uid://b42eh0jvdare4" path="res://tutorial_selection_menu.tscn" id="20_4obbf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
@@ -145,12 +146,10 @@ _tutorial_manager = NodePath("TutorialManager")
 _world_environment = NodePath("WorldEnvironment")
 _cameras = [NodePath("SecurityCams/SecurityCam"), NodePath("SecurityCams/SecurityCam2"), NodePath("SecurityCams/SecurityCam3")]
 menu = NodePath("Menu")
-first_day_machines = [NodePath("Machines/Machine3"), NodePath("Machines/Machine2")]
 first_machine = NodePath("Machines/Machine")
 second_machine = NodePath("Machines/Machine2")
 third_machine = NodePath("Machines/Machine3")
 fourth_machine = NodePath("Machines/Machine4")
-tutorial_machine = NodePath("Machines/Machine3")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
@@ -216,21 +215,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05381441, 0)
 
-[node name="Machine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-process_mode = 4
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.33386397)
-visible = false
+[node name="Machine" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 
 [node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
 
-[node name="Machine3" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
+[node name="Machine3" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.33386397)
 
 [node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
-process_mode = 4
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.7)
-visible = false
 
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 3.5)
@@ -395,9 +390,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 50.0
-offset_top = -505.0
+offset_top = -330.0
 offset_right = 600.0
-offset_bottom = 45.0
+offset_bottom = 219.99976
 grow_vertical = 0
 rotation = 0.05235988
 size_flags_horizontal = 0
@@ -467,6 +462,7 @@ texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
+visible = false
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -479,7 +475,7 @@ layout_mode = 2
 [node name="Scores" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=2066546892]
 layout_mode = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
@@ -1019,7 +1015,8 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Lines": ExtResource("15_aivy6"),
 "Refill": ExtResource("23_lswn8"),
 "SpillClean": ExtResource("10_inymm"),
-"Typing": ExtResource("20_d13ii")
+"Typing": ExtResource("20_d13ii"),
+"WordMatch": ExtResource("18_4obbf")
 })
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 cancel_button = NodePath("MarginContainer/CancelButton")

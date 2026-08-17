@@ -32,7 +32,10 @@ func add_customer(customer: Customer) -> void:
 
 	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
-	customer.timer.timeout.connect(func(): remove_front_customer(false))
+	customer.timer.timeout.connect(
+		func():
+			remove_front_customer(false),
+	)
 	await _on_queue_updated()
 	customer_added.emit()
 	customer.at_window = true
@@ -50,7 +53,6 @@ func remove_front_customer(customer_happy: bool) -> void:
 	front_customer.body.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	front_customer.leave_store()
 	# --------------------------------------------------
-
 	customers_waiting.pop_front()
 	await _on_queue_updated()
 
@@ -88,7 +90,11 @@ func _on_customer_interactable_interacted() -> void:
 
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
+
+	# NOTE: disabled WordMatch for now
+	#Events.minigame_active.emit(["Typing", "WordMatch"].pick_random())
 	Events.minigame_active.emit("Typing")
+
 	Events.customer_timed_out_window.connect(_on_customer_timed_out_window)
 
 
