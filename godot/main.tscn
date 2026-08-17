@@ -32,7 +32,9 @@
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
+[ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
 [ext_resource type="PackedScene" uid="uid://dyu70pksd1s2w" path="res://cafe_break_room_door.tscn" id="28_ovcoh"]
+[ext_resource type="Script" uid="uid://b83i4oyqxn1q8" path="res://ui/crosshair.gd" id="28_ppx11"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
@@ -81,7 +83,6 @@
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
-[ext_resource type="PackedScene" uid="uid://bk1aw8emtkeqa" path="res://ui/end_shift_earlier_menu.tscn" id="297_j3ofb"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -349,6 +350,37 @@ end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 hammer = ExtResource("150_0bk8h")
 scrubber = ExtResource("50_jbvwl")
 whipped_cream = ExtResource("51_sn1fb")
+
+[node name="Crosshair" type="Control" parent="UI" unique_id=1676497832]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("28_ppx11")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Crosshair" unique_id=698336152]
+modulate = Color(1, 1, 1, 0.39215687)
+custom_minimum_size = Vector2(12, 12)
+custom_maximum_size = Vector2(12, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_4obbf")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
@@ -1181,10 +1213,6 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[node name="EndShiftEarlierMenu" parent="." unique_id=305608973 node_paths=PackedStringArray("game_timer") instance=ExtResource("297_j3ofb")]
-visible = false
-game_timer = NodePath("../GameTimer")
-
 [node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=1328361687]
 process_mode = 3
 visible = false
@@ -1230,11 +1258,14 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319]
+[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
 process_mode = 3
 visible = false
 script = ExtResource("287_4fms3")
 popup_id = "special shift"
+text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
 
 [node name="InputBlocker" type="Control" parent="SpecialShiftPop" unique_id=317794041]
 layout_mode = 3
@@ -1348,4 +1379,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.7
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 
 [editable path="SecurityCams/SecurityCam2"]
+[editable path="SecurityCams/SecurityCam2/Model/camera"]
 [editable path="SecurityCams/SecurityCam3"]
+[editable path="SecurityCams/SecurityCam3/Model/camera"]
