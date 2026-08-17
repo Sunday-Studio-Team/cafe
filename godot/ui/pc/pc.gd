@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 		if not in_app:
 			exit()
 
-	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day == 1
+	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day < 2
 
 
 func exit() -> void:
