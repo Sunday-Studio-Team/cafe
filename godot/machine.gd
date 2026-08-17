@@ -292,7 +292,7 @@ func show_tutorial_go_clean_spill() -> void:
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
 
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
-	if (Global.day == 1) and (Global.tutorial_go_clean_spill_shown == false):
+	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
 		Global.in_tutorial_screen = true
 
