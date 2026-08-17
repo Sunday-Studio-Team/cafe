@@ -90,9 +90,11 @@ size = Vector3(0.9, 1.2, 0.01)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yuuq8"]
 size = Vector3(0.9, 1.2, 1)
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "_price_labels", "_rating_gain_on_remake_label", "make_drink_button", "accept_button", "refill_button", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_clean_particles", "hammer_hit_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "spot_for_player", "progress_indicator", "progress_bar", "timer", "customer_order_indicator", "final_order_indicator", "_price_labels", "_rating_gain_on_remake_label", "make_drink_button", "accept_button", "refill_button", "fix_machine_button", "breakdown_timer", "breakdown_sound", "no_ingredients_sound", "ingredients_bar", "ing_too_low_label", "spill_interactable", "spill_sound", "static_body", "spill_warning", "gui_3d", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_clean_particles", "hammer_hit_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 spot_for_customer = NodePath("SpotForCustomer")
+start_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst")
+end_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst/SpotForQueuedCustomerFinal")
 spot_for_player = NodePath("SpotForPlayer")
 progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/ProgressIndicator")
 progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/ProgressIndicator/TextureProgressBar")
@@ -143,6 +145,12 @@ popup_go_to_spill = ExtResource("5_8sjwk")
 
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -0.78443056)
+
+[node name="SpotForQueuedCustomerFirst" type="Marker3D" parent="." unique_id=1470976684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -2.7844305)
+
+[node name="SpotForQueuedCustomerFinal" type="Marker3D" parent="SpotForQueuedCustomerFirst" unique_id=166524749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -3.7844305)
 
 [node name="SpotForPlayer" type="Marker3D" parent="." unique_id=225603677]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)

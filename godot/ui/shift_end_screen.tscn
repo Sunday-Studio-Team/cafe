@@ -77,6 +77,9 @@ corner_radius_bottom_left = 25
 expand_margin_right = 10.0
 
 [sub_resource type="FontFile" id="FontFile_8u4h4"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/variation_coordinates = {}
 cache/0/face_index = 0
 cache/0/embolden = 0.0
@@ -124,7 +127,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "money_calculation_screen", "profit", "boss_cut", "banked_today", "bank_total", "bank_gain_sound", "pencil_scribble", "stars_texure_rect", "rating_breakdown", "button", "stars_sound", "_free_item_selector_screen_container")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_max_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "_profit_judgement_container", "profit_judgement_texture_rect", "button", "stars_sound", "_free_item_selector_screen_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -133,16 +136,20 @@ outcome = NodePath("MarginContainer/VBoxContainer/Outcome")
 time_up_sound = NodePath("TimeUpSound")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
-money_calculation_screen = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen")
-profit = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
-boss_cut = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/BossCut")
-banked_today = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Banked")
-bank_total = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/BankTotal")
+_money_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MoneyTitle")
+_min_profit_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MinGoal")
+_max_profit_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MaxGoal")
+_profit_made_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
+_rating_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/RatingTitle")
+_rating_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Rating")
+_tips_per_star_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info")
+_tips_today_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Tips")
+_bank_total_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/TipsTotal")
 bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
-star_rating_textures = Array[Texture]([ExtResource("2_t6g3v"), ExtResource("3_3n0pv"), ExtResource("2_cypxk"), ExtResource("5_s5d2k"), ExtResource("3_t6g3v"), ExtResource("7_e16oh"), ExtResource("4_t50qp"), ExtResource("9_j2nqk"), ExtResource("5_l71wa"), ExtResource("11_wegfb"), ExtResource("3_f5jmc")])
-stars_texure_rect = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/StarsContainer/Stars")
-rating_breakdown = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating")
+_profit_judgement_container = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/ProfitJudgementContainer")
+profit_judgement_textures = Array[Texture]([ExtResource("2_t6g3v"), ExtResource("3_3n0pv"), ExtResource("2_cypxk"), ExtResource("5_s5d2k"), ExtResource("3_t6g3v"), ExtResource("7_e16oh"), ExtResource("4_t50qp"), ExtResource("9_j2nqk"), ExtResource("5_l71wa"), ExtResource("11_wegfb"), ExtResource("3_f5jmc")])
+profit_judgement_texture_rect = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/ProfitJudgementContainer/ProfitJudgement")
 button = NodePath("MarginContainer/VBoxContainer/Button")
 stars_sound = NodePath("StarsSound")
 _free_item_selector_screen_packed_scene = ExtResource("2_n6kr8")
@@ -195,69 +202,74 @@ vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1930785200]
 layout_mode = 2
+alignment = 1
 
 [node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=475181285]
-visible = false
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 6
 
-[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
+[node name="MoneyTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
 custom_maximum_size = Vector2(1000, 100)
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
-text = "[b]money"
+text = "[b]cafe profits"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MinGoal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1475557562]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "required goal: $20"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MaxGoal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=2127638548]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "perfect goal: $40"
 fit_content = true
 horizontal_alignment = 1
 
 [node name="Profit" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1865208455]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[color=green]+[/color] money made today: $30.75"
+text = "made today: $30.75"
 fit_content = true
 autowrap_mode = 0
+horizontal_alignment = 1
 
-[node name="BossCut" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1475557562]
-custom_minimum_size = Vector2(800, 0)
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=994164902]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "[color=red]-[/color] boss's cut: $20"
-fit_content = true
 
-[node name="Banked" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=2144848338]
-custom_minimum_size = Vector2(900, 0)
+[node name="ProfitJudgementContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1691312754]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 96
-bbcode_enabled = true
-text = "= [color=gold]$10[/color] banked"
-fit_content = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_position_ratio = Vector2(0, 0.1)
+offset_transform_rotation = -0.017453292
+theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
 
-[node name="BankTotal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1779244370]
-visible = false
-custom_minimum_size = Vector2(900, 0)
+[node name="ProfitJudgement" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/ProfitJudgementContainer" unique_id=843468016]
+custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 128
-bbcode_enabled = true
-text = "🏦 Bank total: [color=gold]$10[/color]"
-fit_content = true
-vertical_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 2
+texture = ExtResource("3_t6g3v")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Rating" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1855303608]
-visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 
-[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1751468109]
+[node name="RatingTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1751468109]
 custom_maximum_size = Vector2(1000, 100)
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
@@ -266,24 +278,45 @@ text = "[b]rating"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="StarsContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1691312754]
+[node name="Rating" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=54102786]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0, 0.1)
-offset_transform_rotation = -0.017453292
-theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "⭐ 5.0 / 5.0"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
 
-[node name="Stars" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/StarsContainer" unique_id=843468016]
-custom_minimum_size = Vector2(400, 400)
-custom_maximum_size = Vector2(-1, 400)
+[node name="Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=398510589]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 2
-texture = ExtResource("3_t6g3v")
-expand_mode = 5
-stretch_mode = 4
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "$2 tip per full star"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Tips" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=2144848338]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "= +[color=gold]$10[/color] tips"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="TipsTotal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1779244370]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 128
+bbcode_enabled = true
+text = "🏦 Your Bank: [color=gold]$10[/color]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2091535216]
 visible = false

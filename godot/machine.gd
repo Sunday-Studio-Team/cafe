@@ -6,6 +6,8 @@ extends Node3D
 static var seen_breakdown_popup := false
 
 @export var spot_for_customer: Marker3D
+@export var start_of_customer_queue_marker: Marker3D
+@export var end_of_customer_queue_marker: Marker3D
 # where the player gets put when they interact with machine
 @export var spot_for_player: Marker3D
 @export var progress_indicator: Control
@@ -56,7 +58,7 @@ static var seen_breakdown_popup := false
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
 var customer: Customer
-var queued_customer: Customer
+var queued_customers: Array[Customer]
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
@@ -171,18 +173,31 @@ func _process(_delta: float) -> void:
 		elif customer_wait_bar.value >= 33:
 			customer_wait_indicator.modulate = Color.ORANGE
 		else:
-			customer_wait_indicator.modulate = Color.RED		
+			customer_wait_indicator.modulate = Color.RED
+	
+	_process_queued_customers()
 
-static func set_next_drink_score(score: int) -> void:
-	if !(score in Stats.current.score_chances.keys()):
-		return
+func add_customer_to_queue(new_customer: Customer) -> void:
+	queued_customers.append(new_customer)
+	_customer_queue_updated()
 
-	for k in Stats.current.score_chances.keys():
-		if k == score:
-			Stats.current.score_chances[k] = 1.0
-		else:
-			Stats.current.score_chances[k] = 0.0
+func _customer_queue_updated() -> void:
+	var i: int = 0
+	for queued_customer in queued_customers:
+		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine 
+		var queue_global_position: Vector3 = start_of_customer_queue_marker.global_position.lerp(end_of_customer_queue_marker.global_position, ratio_along_queue)
+		queued_customer.move_to(queue_global_position)
+		i += 1
 
+func _process_queued_customers() -> void:
+	if queued_customers.size() > 0:
+		if customer != null:
+			return
+		var new_current_customer: Customer = queued_customers.pop_front()
+		_customer_queue_updated()
+		set_customer(new_current_customer)
+		await customer.move_to(spot_for_customer.global_position)
+		machine_make_drink()
 
 func show_tutorial_where_is_storeroom() -> void:
 	#this is getting called within physics_process...
@@ -331,7 +346,7 @@ func get_stats() -> void:
 
 
 func machine_make_drink() -> void:
-	await get_tree().create_timer(randf_range(1, 3), false).timeout
+	await get_tree().create_timer(randf_range(1, 1), false).timeout
 
 	# should stop us restarting order if order already auto started by us refilling
 	if not timer.is_stopped():
@@ -364,7 +379,7 @@ func machine_make_drink() -> void:
 
 	customer_order_indicator.show()
 	order_breakdown.show()
-
+	
 	timer.start()
 
 	if (
@@ -542,6 +557,10 @@ func clean_up_spill() -> void:
 	spill_on_floor = false
 	spill_clean_sound.play()
 	spill_clean_particles.restart()
+	
+	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
+	Global.score_update_message = "spill cleaned!"
+	Global.employee_rating += rating_gained
 
 
 func refill() -> void:
@@ -591,7 +610,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	_rating_gain_on_remake_label.hide()
 	
 	if did_remake_drink:
-		Global.score_update_message = "+%s⭐! customer happy for remade %s!" % [order.star_rating_gain_for_remake, order.made_drink.name]
+		Global.score_update_message = "customer happy for remade %s!" % [order.made_drink.name]
 		Global.employee_rating += order.star_rating_gain_for_remake
 		await get_tree().create_timer(0.5, false).timeout
 

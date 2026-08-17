@@ -22,27 +22,32 @@ var penalty_for_handmade_drink := 2
 var penalty_for_holding_ingredients := 2
 var penalty_for_customer_complaint := 2
 var penalty_for_customer_stood_in_spill := 1
-var daily_profit_goals_each_day: Dictionary[int, float] = { 1: 20.0, 2: 40.0, 3: 60.0, 4: 80.0, 5: 100.0}
+var daily_profit_goals_each_day: Dictionary[int, float] = { 1: 30.0, 2: 40.0, 3: 60.0, 4: 80.0, 5: 100.0}
+var perfect_profit_goals_each_day: Dictionary[int, float] = { 1: 50.0, 2: 60.0, 3: 80.0, 4: 100.0, 5: 120.0}
 var employee_rating_max := 5.0
 var ingredients_per_order := 20
 var ingredients_per_bag := 75
 var cost_to_reroll := 5.0
 var max_spills_per_shift := 2
 var max_breakdowns_per_shift := 3
-var clean_spill_allowed_remaining := 0.01
+var clean_spill_allowed_remaining := 0.05
 var extra_time_from_overtime_form_item := 25.0
 var max_stamina := 125.0
 # NOTE: set to 0 to effectively disable (was 25 before)
 var sprint_stamina_drain_rate := 0.0
 var stamina_regen_rate := 10.0
 var sprint_lockout_time := 3.0
-var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 90, 2: 120, 3: 120, 4: 120, 5: 120 }
+var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 180, 2: 190, 3: 200, 4: 210, 5: 220 }
 
 # Redesign stuff
-# Seconds between customers entering store, linearly scaling between min and max with rating. Maybe use curves later!
+var max_customers_queued_per_machine: int = 3
 var first_customer_entry_time: float = 3.0
-var customer_flow_rate_at_min_rating_per_day: Dictionary[int, float] = { 1: 10.0, 2: 10.0, 3: 10.0, 4: 10.0, 5: 10.0}
-var customer_flow_rate_at_max_rating_per_day: Dictionary[int, float] = { 1: 3.0, 2: 3.0, 3: 3.0, 4: 3.0, 5: 3.0}
-var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
-var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
-var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
+# Seconds between customers entering store, linearly scaling between min and max with rating. Maybe use curves later!
+var customer_flow_rate_at_min_rating_per_day: Dictionary[int, float] = { 1: 12.0, 2: 12.0, 3: 12.0, 4: 12.0, 5: 12.0}
+var customer_flow_rate_at_max_rating_per_day: Dictionary[int, float] = { 1: 6.0, 2: 6.0, 3: 6.0, 4: 6.0, 5: 6.0}
+var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
+var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
+var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1 }
+var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.9, 3: 0.8, 4: 0.7, 5: 0.6 }
+var placated_customer_rating_gain_each_day: Dictionary[int, float] = { 1: 0.4, 2: 0.4, 3: 0.3, 4: 0.2, 5: 0.1 }
+var tip_per_star_rating: float = 2.0

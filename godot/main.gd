@@ -234,7 +234,7 @@ func _on_customer_timer_timeout() -> void:
 func spawn_customer() -> void:
 	var available_machines: Array[Machine] = []
 	for machine in machines:
-		if machine.customer == null and machine.queued_customer == null:
+		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
 			available_machines.append(machine)
 	
 	if available_machines.size() == 0:
@@ -248,13 +248,8 @@ func spawn_customer() -> void:
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
-	assigned_machine.queued_customer = new_customer
 
-	await get_tree().create_timer(randf_range(0.1, 0.2), false).timeout
-
-	await assigned_machine.set_customer(new_customer)
-	assigned_machine.queued_customer = null
-	assigned_machine.machine_make_drink()
+	assigned_machine.add_customer_to_queue(new_customer)
 
 
 #Actives the effects of a given active item
