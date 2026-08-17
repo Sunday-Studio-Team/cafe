@@ -49,10 +49,12 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
 #Active Item
+@export var item_ui: Control
 @export var current_item_ui: Control
 @export var item_indicator: PanelContainer
 @export var item_text: RichTextLabel
 @export var current_item_icon: TextureRect
+@export var item_cooldown_bar: TextureProgressBar
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
 @export_category("item refs")
@@ -182,8 +184,8 @@ new rule: don't take any more ingredients out of the store room."
 
 	_update_rating()
 
-	hide_item_menu_prompt_if_no_actives()
-	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
+	hide_item_ui_if_no_actives()
+	Events.items_updated.connect(hide_item_ui_if_no_actives)
 
 	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
@@ -235,7 +237,7 @@ func _process(_delta: float) -> void:
 	handle_stamina_bar()
 
 
-func hide_item_menu_prompt_if_no_actives() -> void:
+func hide_item_ui_if_no_actives() -> void:
 	var no_active_items_owned := true
 
 	for item in Global.owned_items:
@@ -244,9 +246,9 @@ func hide_item_menu_prompt_if_no_actives() -> void:
 			break
 
 	if no_active_items_owned:
-		item_menu_prompt.hide()
+		item_ui.hide()
 	else:
-		item_menu_prompt.show()
+		item_ui.show()
 
 
 func handle_stamina_bar() -> void:
@@ -288,15 +290,19 @@ func handle_exit_machine_button_visibility() -> void:
 
 
 func handle_item_ui() -> void:
-	var current_item: Item = Global.equipped_item
+	var item: Item = Global.equipped_item
 
-	if current_item != null:
+	if item != null:
 		current_item_ui.show()
-		current_item_icon.texture = current_item.icon
+		current_item_icon.texture = item.icon
 		use_item_prompt.visible = (
-				current_item.can_activate_anywhere
-				and current_item.can_be_used
+				item.can_activate_anywhere
+				and item.can_be_used
 		)
+		item_cooldown_bar.visible = not item.can_be_used
+		item_cooldown_bar.value = (
+			100 - item.active_item_remaining_cooldown / item.active_item_cooldown_at_levels[item.item_level] * 100
+			)
 	else:
 		current_item_ui.hide()
 

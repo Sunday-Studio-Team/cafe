@@ -308,7 +308,7 @@ transform = Transform3D(-0.785986, 0, -0.61824423, 0, 1, 0, 0.61824423, 0, -0.78
 [node name="IngredientSpawnMarker3D6" type="Marker3D" parent="IngredientSpawner" unique_id=1211296652]
 transform = Transform3D(-0.5060448, 0, 0.86250716, 0, 1, 0, -0.86250716, 0, -0.5060448, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -356,12 +356,14 @@ item_hover_tooltip_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active
 item_hover_tooltip_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
-item_menu_prompt = NodePath("ActiveItemInfo/HBoxContainer/MenuPrompt")
-current_item_ui = NodePath("ActiveItemInfo/HBoxContainer/CurrentItem")
+item_menu_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/MenuPrompt")
+item_ui = NodePath("HUD/ActiveItemInfo")
+current_item_ui = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem")
 item_indicator = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator")
 item_text = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator/RichTextLabel")
-current_item_icon = NodePath("ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
-use_item_prompt = NodePath("ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
+current_item_icon = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
+item_cooldown_bar = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon/CooldownIndicator")
+use_item_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 hammer = ExtResource("150_0bk8h")
 scrubber = ExtResource("50_jbvwl")
@@ -659,44 +661,6 @@ offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
 
-[node name="ActiveItemInfo" type="PanelContainer" parent="UI" unique_id=1662791771]
-offset_left = 25.0
-offset_top = 228.0
-offset_right = 494.0
-offset_bottom = 300.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-offset_transform_enabled = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ActiveItemInfo" unique_id=701910864]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="MenuPrompt" type="Button" parent="UI/ActiveItemInfo/HBoxContainer" unique_id=1266925751]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "active items"
-icon = ExtResource("114_gfi32")
-
-[node name="CurrentItem" type="HBoxContainer" parent="UI/ActiveItemInfo/HBoxContainer" unique_id=549022221]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CurrentText" type="Label" parent="UI/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "current:"
-
-[node name="Icon" type="TextureRect" parent="UI/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
-layout_mode = 2
-
-[node name="UsePrompt" type="Button" parent="UI/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 24
-text = "use"
-icon = ExtResource("115_12204")
-
 [node name="HUD" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
 anchor_right = 1.0
@@ -983,6 +947,60 @@ theme_override_font_sizes/font_size = 64
 text = "SOLD: $5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ActiveItemInfo" type="PanelContainer" parent="UI/HUD" unique_id=1662791771]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/ActiveItemInfo" unique_id=701910864]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MenuPrompt" type="Button" parent="UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=1266925751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "active items"
+icon = ExtResource("114_gfi32")
+
+[node name="CurrentItem" type="HBoxContainer" parent="UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=549022221]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CurrentText" type="Label" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "current:"
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
+layout_mode = 2
+texture = ExtResource("69_3rmuw")
+
+[node name="CooldownIndicator" type="TextureProgressBar" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon" unique_id=169002250]
+modulate = Color(1, 1, 1, 0.29411766)
+custom_maximum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.6, 0.6)
+offset_transform_pivot_ratio = Vector2(0, 0)
+fill_mode = 4
+texture_under = ExtResource("45_dfxmq")
+texture_over = ExtResource("46_kcoi7")
+texture_progress = ExtResource("47_rkju4")
+
+[node name="UsePrompt" type="Button" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 24
+text = "use"
+icon = ExtResource("115_12204")
 
 [node name="ItemHoverTooltip" type="PanelContainer" parent="UI" unique_id=1202178015]
 visible = false

@@ -139,6 +139,7 @@ func _process(delta: float) -> void:
 					item.can_be_used = true
 					item.active_item_remaining_cooldown = 0
 
+
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Global.customer_flow_rate
 
@@ -251,9 +252,6 @@ func spawn_customer() -> void:
 
 #Actives the effects of a given active item
 func active_item_used(item: Item):
-	if !item.can_be_used:
-		return
-	
 	if item.item_id == "air_freshener":
 		var customer_wait_duration_extension: float = 0.0
 		if item.item_level == 1:
@@ -264,10 +262,10 @@ func active_item_used(item: Item):
 		for machine in machines:
 			if machine.customer:
 				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
-		
+
 		item.active_item_remaining_cooldown = item.active_item_cooldown_at_levels[item.item_level]
 		item.can_be_used = false
-		
+
 		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension)
 
 
