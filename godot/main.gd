@@ -176,6 +176,7 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 1:
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
+		whiteboard_tutorial_arrow.visible = false
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
 		machines.push_front(first_machine)
