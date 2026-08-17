@@ -9,7 +9,6 @@ extends Node3D
 @export var timer: Timer
 @export var interactable : Interactable
 # safe reference for when we use this item on a camera
-@export var whipped_cream_item: Item
 @export var tries_until_disabled: int = 3
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 
@@ -169,8 +168,13 @@ func _cancel_break_minigame() -> void:
 
 
 func _on_used_active_item(item: Item):
-	if item != null and item == whipped_cream_item:
-		Global.deactivate_active_item(whipped_cream_item)
+	if item != null and item.item_id == "whipped_cream":
+		Global.put_active_item_on_cooldown(item)
 		disarm_camera()
-		await get_tree().create_timer(8, false).timeout
+		var disarm_duration: float = 1.0
+		if item.item_level == 1:
+			disarm_duration = 10
+		elif item.item_level == 2:
+			disarm_duration = 20
+		await get_tree().create_timer(disarm_duration, false).timeout
 		rearm_camera()

@@ -263,8 +263,7 @@ func active_item_used(item: Item):
 			if machine.customer:
 				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
 
-		item.active_item_remaining_cooldown = item.active_item_cooldown_at_levels[item.item_level]
-		item.can_be_used = false
+		Global.put_active_item_on_cooldown(item)
 
 		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension)
 

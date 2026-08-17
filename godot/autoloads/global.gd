@@ -231,9 +231,6 @@ func refresh_active_items():
 	Events.items_updated.emit()
 
 
-func deactivate_active_item(target_item: Item):
-	Global.equipped_item = null
-	for item in owned_items:
-		if item.item_id == target_item.item_id:
-			item.can_be_used = false
-			Events.items_updated.emit()
+func put_active_item_on_cooldown(target_item: Item):
+	target_item.active_item_remaining_cooldown = target_item.active_item_cooldown_at_levels[target_item.item_level]
+	target_item.can_be_used = false

@@ -52,7 +52,6 @@ static var seen_breakdown_popup := false
 @export var spill_clean_sound: AudioStreamPlayer3D
 @export var fixed_sound: AudioStreamPlayer3D
 @export var spill_clean_particles: GPUParticles3D
-@export var hammer_item: Item
 @export var scrubber_item: Item
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var popup_storage_room: PackedScene # tutorial popup that tells player to go to the storage room
@@ -746,9 +745,9 @@ func on_active_item_used_machine(item: Item):
 	if item == null:
 		return
 
-	if item == hammer_item:
+	if item.item_id == "hammer":
 		Events.play_viewmodel_animation.emit("hammer_use")
-		Global.deactivate_active_item(item)
+		Global.put_active_item_on_cooldown(item)
 		await Events.hammer_animation_hit
 		fix_machine(true)
 
