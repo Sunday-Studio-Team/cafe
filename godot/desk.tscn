@@ -4,7 +4,10 @@
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
 [ext_resource type="PackedScene" uid="uid://cmt3rwlkf5iot" path="res://Assets/Desk/office desk.glb" id="3_r8wvv"]
 [ext_resource type="PackedScene" uid="uid://c3gk12fh1bx5y" path="res://Assets/chinese deco/New Kitty (1).glb" id="6_lrwc4"]
+[ext_resource type="PackedScene" uid="uid://v5xwxv8wthdc" path="res://Assets/chinese deco/Blue Carp.glb" id="7_vf3xh"]
 [ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
+[ext_resource type="PackedScene" uid="uid://cuphhyfq8nb83" path="res://Assets/chinese deco/Greenfish (1).glb" id="9_7hob8"]
+[ext_resource type="PackedScene" uid="uid://ciaj5465hecdo" path="res://Assets/chinese deco/Onigiri (1).glb" id="10_hdap7"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 [ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
 
@@ -75,9 +78,16 @@ shadow_blur = 0.5
 spot_range = 0.924
 spot_angle = 43.22
 
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1381647886]
+transform = Transform3D(-0.8342353, 0, 0.5514086, 0, 1, 0, -0.5514086, 0, -0.8342353, 0.2937344, 1.0087188, 0.091836125)
+light_color = Color(0.51, 0.95100003, 1, 1)
+light_energy = 9.079
+spot_range = 2.2054026
+
 [node name="ScreenLight" type="OmniLight3D" parent="." unique_id=1647296300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23109445, 1.0087188, 0.088364124)
 light_color = Color(0.65999997, 0.89799994, 1, 1)
+light_energy = 1.554
 shadow_enabled = true
 omni_range = 0.498
 omni_attenuation = 0.208
@@ -97,7 +107,16 @@ transform = Transform3D(0.578742, 0, 0, 0, 0.578742, 0, 0, 0, 0.578742, 0.007232
 [node name="New Kitty (1)" parent="." unique_id=44918328 instance=ExtResource("6_lrwc4")]
 transform = Transform3D(-0.08066758, 0, -0.81017673, 0, 0.81418276, 0, 0.81017673, 0, -0.08066758, 0.47238111, -0.11540568, -0.13677394)
 
+[node name="Blue Carp" parent="." unique_id=2050908617 instance=ExtResource("7_vf3xh")]
+transform = Transform3D(0.5404715, 3.7788863e-15, -0.1329577, 0, 0.55658525, 1.5819104e-14, 0.13295777, -1.5361124e-14, 0.54047143, 0.71199316, 0.5514217, 0.44783002)
+
 [node name="Cat (1)" parent="." unique_id=1459962748 instance=ExtResource("7_yh53x")]
 transform = Transform3D(0.6833165, 0, 0.29271302, 0, 0.7433723, 0, -0.29271302, 0, 0.6833165, 0.7515243, 0.6772824, -0.27797565)
+
+[node name="Greenfish (1)" parent="." unique_id=1725124513 instance=ExtResource("9_7hob8")]
+transform = Transform3D(-0.90834457, 0, -0.41822255, 0, 1, 0, 0.41822255, 0, -0.90834457, 0.63663065, 0.67911255, 0.4589079)
+
+[node name="Onigiri (1)" parent="." unique_id=284199203 instance=ExtResource("10_hdap7")]
+transform = Transform3D(0.7569102, 0.25285956, 0.058636323, -0.24628384, 0.756694, -0.08395051, -0.08197828, 0.0613634, 0.79360145, 0.44458315, 0.63366187, 0.64561886)
 
 [editable path="office desk"]
