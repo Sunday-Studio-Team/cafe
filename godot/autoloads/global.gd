@@ -77,6 +77,8 @@ var employee_rating: float = 0:
 	set(new_value):
 		if new_value > Stats.current.employee_rating_max:
 			new_value = Stats.current.employee_rating_max
+		if new_value < 0.0:
+			new_value = 0.0
 		if new_value == employee_rating:
 			return
 		
