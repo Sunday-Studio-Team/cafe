@@ -601,6 +601,7 @@ func refill() -> void:
 	await Events.minigame_end
 
 	Global.holding_ingredients = false
+	Events.ingredients_bag_consumed.emit()
 	ingredients += roundi(Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy)
 
 	# TODO: separate this out ? its not explicit its doing this when we just call

@@ -26,6 +26,7 @@ signal alert_posted(message: String)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)
+signal ingredients_bag_consumed
 signal machine_exit_button_pressed
 # minigames
 signal minigame_active(minigame_name: String)

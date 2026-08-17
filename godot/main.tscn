@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
+[ext_resource type="Script" uid="uid://cpy5mfle7bldo" path="res://ingredient_spawner.gd" id="23_ppx11"]
 [ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
 [ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
@@ -283,26 +284,29 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, 4)
 
-[node name="Ingredients" type="Node3D" parent="." unique_id=1312596977]
+[node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
+script = ExtResource("23_ppx11")
+_ingredient_spawn_points = [NodePath("IngredientSpawnMarker3D"), NodePath("IngredientSpawnMarker3D2"), NodePath("IngredientSpawnMarker3D3"), NodePath("IngredientSpawnMarker3D4"), NodePath("IngredientSpawnMarker3D5"), NodePath("IngredientSpawnMarker3D6")]
+_ingredients_bag_packed_scene = ExtResource("3_2cqfq")
 
-[node name="IngredientsBag" parent="Ingredients" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.943459, -0.7501248, -13.604155)
+[node name="IngredientSpawnMarker3D" type="Marker3D" parent="IngredientSpawner" unique_id=1568223279]
+transform = Transform3D(0.9487802, 0, -0.31593695, 0, 1, 0, 0.31593695, 0, 0.9487802, 4.943459, -0.7501248, -13.604155)
 
-[node name="IngredientsBag2" parent="Ingredients" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.2883577, -0.7501248, -13.604155)
+[node name="IngredientSpawnMarker3D2" type="Marker3D" parent="IngredientSpawner" unique_id=769091873]
+transform = Transform3D(0.3277469, 0, -0.9447655, 0, 1, 0, 0.9447655, 0, 0.3277469, 5.366172, -0.7501248, -13.604155)
 
-[node name="IngredientsBag3" parent="Ingredients" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 5.1639137, -0.7501248, -13.758191)
+[node name="IngredientSpawnMarker3D3" type="Marker3D" parent="IngredientSpawner" unique_id=1791985955]
+transform = Transform3D(-0.778302, 0, -0.6278901, 0, 1, 0, 0.6278901, 0, -0.778302, 5.1639137, -0.7501248, -13.654996)
 
-[node name="IngredientsBag4" parent="Ingredients" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 4.706724, -0.7501248, -13.666647)
+[node name="IngredientSpawnMarker3D4" type="Marker3D" parent="IngredientSpawner" unique_id=677772387]
+transform = Transform3D(-0.9180558, 0, 0.39645162, 0, 1, 0, -0.39645162, 0, -0.9180558, 4.706724, -0.7501248, -13.666647)
 
-[node name="IngredientsBag5" parent="Ingredients" unique_id=587147078 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 4.452388, -0.7501248, -13.604155)
+[node name="IngredientSpawnMarker3D5" type="Marker3D" parent="IngredientSpawner" unique_id=2098485488]
+transform = Transform3D(-0.785986, 0, -0.61824423, 0, 1, 0, 0.61824423, 0, -0.785986, 4.452388, -0.7501248, -13.604155)
 
-[node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
+[node name="IngredientSpawnMarker3D6" type="Marker3D" parent="IngredientSpawner" unique_id=1211296652]
+transform = Transform3D(-0.5060448, 0, 0.86250716, 0, 1, 0, -0.86250716, 0, -0.5060448, 5.56843, -0.7501248, -13.627114)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
