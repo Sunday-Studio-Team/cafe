@@ -11,7 +11,6 @@ const STRIDE_LENGTH := 0.75
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
-@export var roller_skates: Item
 
 @export var pully_ball_scene: PackedScene
 
@@ -46,6 +45,7 @@ var pully_ball_instance: Node3D
 func _ready() -> void:
 	Global.player = self
 	player_status_effects = PlayerStatusEffects.new(self)
+	Events.items_updated.connect(_on_items_updated)
 	
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
@@ -208,7 +208,13 @@ func handle_inspected_shelf_item() -> void:
 
 
 func handle_sprint(delta: float) -> void:
-	if (Input.is_action_pressed("sprint") and not Global.owned_items.has(roller_skates)):
+	var has_roller_skates: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "roller_skates":
+			has_roller_skates = true
+			break
+	
+	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
 				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
@@ -272,6 +278,8 @@ func handle_ingredients_bag() -> void:
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
 
+func _on_items_updated() -> void:
+	player_status_effects.recalculate_status_effects()
 
 class PlayerStatusEffects extends RefCounted:
 	var _player: Player
@@ -286,6 +294,10 @@ class PlayerStatusEffects extends RefCounted:
 			if status_effect.get_owner() == owner:
 				return true
 		return false
+
+	func recalculate_status_effects() -> void:
+		_reset_stats()
+		_apply_status_effects()
 
 	func apply_status_effect(status_effect: Player.PlayerStatusEffect) -> void:
 		_reset_stats()
