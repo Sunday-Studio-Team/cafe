@@ -9,13 +9,11 @@ static var seen_breakdown_popup := false
 @export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
 
-@export var first_day_machines: Array[Machine]
 # (machines numbered in order from the window here)
 @export var first_machine: Machine
 @export var second_machine: Machine
 @export var third_machine: Machine
 @export var fourth_machine: Machine
-@export var tutorial_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
@@ -48,9 +46,9 @@ static var seen_breakdown_popup := false
 @export var teleporter2: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
 
-
 var machines: Array[Machine]
 
+@onready var tutorial_machine: Machine = first_machine
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -80,7 +78,7 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	set_per_day_stuff()
-	load_machines()
+	spawn_machines()
 	get_stats()
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
@@ -169,7 +167,8 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 1:
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
-		machines.assign(first_day_machines)
+		machines.append(first_machine)
+		machines.append(second_machine)
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
 		machines.append(third_machine)
@@ -207,15 +206,11 @@ func set_per_day_stuff() -> void:
 		Global.current_special_shift = Global.special_shifts[0]
 
 
-func load_machines():
-	first_machine.hide()
-	first_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	second_machine.hide()
-	second_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	third_machine.hide()
-	third_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	fourth_machine.hide()
-	fourth_machine.process_mode = Node.PROCESS_MODE_DISABLED
+func spawn_machines():
+	for machine: Machine in [first_machine, second_machine, third_machine, fourth_machine]:
+		machine.hide()
+		machine.process_mode = Node.PROCESS_MODE_DISABLED
+
 	for machine in machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
