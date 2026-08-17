@@ -163,7 +163,11 @@ func _process(_delta: float) -> void:
 	
 	spill_warning.visible = spill_on_floor
 
-	customer_wait_indicator.visible = customer != null and not customer.timer.is_stopped()
+	customer_wait_indicator.visible = (
+		customer != null
+		and not customer.timer.is_stopped()
+		and not Global.day == 0
+		)
 
 	if customer:
 		var customer_timer: Timer = customer.timer
@@ -248,7 +252,6 @@ func show_tutorial_where_is_storeroom() -> void:
 		#add functionality to allow use of Esc
 		#add functionality so that button makes popup disappear
 		#hide tablet
-		#
 
 		await popup.tree_exited # delays some code until event occurs
 		tablet.show()

@@ -9,6 +9,7 @@ const MOVE_SPEED := 2.0
 @export var timer: Timer
 @export var time_bonus_label: Label3D
 @export var spawn_sound: AudioStreamPlayer3D
+
 @export_dir var sprites_folder: String
 
 var desired_drink: Drink
@@ -31,7 +32,10 @@ func _ready() -> void:
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
 
-	desired_drink = Global.drinks.filter(func(d: Drink): return d.is_unlocked()).pick_random()
+	desired_drink = Global.drinks.filter(
+		func(d: Drink):
+			return d.is_unlocked(),
+	).pick_random()
 
 	spawn_anim()
 	spawn_sound.play()
@@ -40,7 +44,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# uncomment to show time above customer head
 	#waiting_indicator.visible = not timer.is_stopped()
-
 	if not timer.is_stopped():
 		percent_time_left = timer.time_left / timer.wait_time * 100
 
