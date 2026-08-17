@@ -12,6 +12,7 @@ func _on_body_entered(body: Node3D) -> void:
 	print("teleport")
 	if body is CharacterBody3D:
 		body.global_position = destination.global_position
+		body.rotation.y = destination.rotation.y - deg_to_rad(90)
 		body.reset_physics_interpolation()
 
 

@@ -25,7 +25,6 @@ static var seen_breakdown_popup := false
 @export var desk: Desk
 @export var pc_ui: Control
 @export var overtime_item: Item
-@export var teleporter: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
 @export var camera_posters: Array[Node3D]
@@ -150,9 +149,16 @@ func get_stats() -> void:
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
 
+	enable_disable_teleporters()
+
 
 func enable_disable_teleporters():
-	if teleporter in Global.owned_items:
+	var has_teleporter: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "teleporter":
+			has_teleporter = true
+			break
+	if has_teleporter:
 		teleporter1.enable_teleporter()
 		teleporter2.enable_teleporter()
 	else:
@@ -316,6 +322,7 @@ func _on_shift_started():
 		for item in Global.owned_items:
 			if item.item_id == "super_scrubber":
 				has_scrubber = true
+				break
 		DraggableMop.used_scrubber = has_scrubber
 
 		desk.interactable.visible = false
