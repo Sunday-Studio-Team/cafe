@@ -355,7 +355,7 @@ func interactive_tutorial_flow() -> void:
 	tutorial_machine.ingredients = 0
 	tutorial_machine.set_order_action_buttons_available("refill")
 
-	while tutorial_machine.ingredients < tutorial_machine.max_ingredients:
+	while tutorial_machine.ingredients == 0:
 		await get_tree().process_frame
 
 	tutorial_machine.set_order_action_buttons_available("all")
@@ -370,10 +370,11 @@ func interactive_tutorial_flow() -> void:
 
 	while tutorial_machine.broken_down:
 		await get_tree().process_frame
-	
+
 	Global.day = 1
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-	
+
+
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
