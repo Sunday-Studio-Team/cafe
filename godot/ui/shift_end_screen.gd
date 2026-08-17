@@ -29,12 +29,27 @@ func _ready() -> void:
 
 	button.pressed.connect(
 		func():
-			Events.end_screen_finished.emit()
+			Events.end_screen_finished.emit(),
+	)
+
+	button.mouse_entered.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(button, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+			t.tween_property(button, "offset_transform_rotation", deg_to_rad(-1), 0.1),
+	)
+	button.mouse_exited.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(button, "offset_transform_scale", Vector2.ONE, 0.1)
+			t.tween_property(button, "offset_transform_rotation", deg_to_rad(1), 0.1),
 	)
 
 
 func _process(_delta: float) -> void:
-	bank_total.text = "🏦 Bank total: [color=gold]%s[/color]" % Global.float_to_price(value_to_show_on_bank_total)
+	bank_total.text = "🏦 Bank total: [color=gold]%s[/color]" % Global.float_to_price(
+		value_to_show_on_bank_total
+	)
 
 	if visible:
 		Global.in_end_screen = true
@@ -114,19 +129,16 @@ func _on_time_up() -> void:
 
 	stars_sound.play()
 
-	create_tween().tween_property(
-		stars_texure_rect,
-		"modulate",
-		Color.WHITE,
-		1,
-	).from(color_to_tint_stars)
+	create_tween().tween_property(stars_texure_rect, "modulate", Color.WHITE, 1).from(
+		color_to_tint_stars
+	)
 
 	await get_tree().create_timer(2).timeout
 
 	# show outcome text and button
 	if (
-			Global.daily_profit >= Stats.current.daily_profit_goal
-			and Global.employee_rating >= Stats.current.employee_rating_goal
+		Global.daily_profit >= Stats.current.daily_profit_goal
+		and Global.employee_rating >= Stats.current.employee_rating_goal
 	):
 		if Global.day == Global.final_day:
 			outcome.text = "[b][color=green]YOU WIN"
@@ -146,17 +158,22 @@ func _on_time_up() -> void:
 
 	# If player has a free item slot,
 	# and if 5 star customer satisfaction, give free selection of 1 of 3 random items
-	var has_free_item_slots: bool = Global.owned_items.size() <= Global.item_slots_amount
-	var made_enough_money: bool = Global.daily_profit >= Stats.current.daily_profit_goal
-	var five_star_rating: int = 10
-	var got_five_stars: bool = Global.employee_rating >= five_star_rating
-	if has_free_item_slots and made_enough_money and got_five_stars:
-		var free_item_selector_screen: FreeItemSelectorScreen = _free_item_selector_screen_packed_scene.instantiate()
-		if free_item_selector_screen == null:
-			printerr("FreeItemSelectorScreen is null.")
-			return
-		_free_item_selector_screen_container.add_child(free_item_selector_screen)
-		await free_item_selector_screen.finished_selection
-		free_item_selector_screen.queue_free()
-
+	# NOTE: disabled for now
+	#var has_free_item_slots: bool = Global.owned_items.size() <= Global.item_slots_amount
+	#var made_enough_money: bool = Global.daily_profit >= Stats.current.daily_profit_goal
+	#var five_star_rating: int = 10
+	#var got_five_stars: bool = Global.employee_rating >= five_star_rating
+	#if has_free_item_slots and made_enough_money and got_five_stars:
+	#var free_item_selector_screen: FreeItemSelectorScreen = _free_item_selector_screen_packed_scene.instantiate()
+	#if free_item_selector_screen == null:
+	#printerr("FreeItemSelectorScreen is null.")
+	#return
+	#_free_item_selector_screen_container.add_child(free_item_selector_screen)
+	#await free_item_selector_screen.finished_selection
+	#free_item_selector_screen.queue_free()
 	button.show()
+	await get_tree().create_timer(2).timeout
+	var button_shine_tween := create_tween().set_loops()
+	button_shine_tween.tween_property(button, "modulate", Color.from_hsv(0.0, 0.0, 1.374, 1.0), 1)
+	button_shine_tween.tween_property(button, "modulate", Color.WHITE, 1)
+	button_shine_tween.tween_interval(2)

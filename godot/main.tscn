@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
 [ext_resource type="PackedScene" uid="uid://ce4dmlcd3n30f" path="res://minigames/words/word_game.tscn" id="18_4obbf"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="19_yjja3"]
+[ext_resource type="PackedScene" uid="uid://b42eh0jvdare4" path="res://tutorial_selection_menu.tscn" id="20_4obbf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
@@ -32,7 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
+[ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
 [ext_resource type="PackedScene" uid="uid://dyu70pksd1s2w" path="res://cafe_break_room_door.tscn" id="28_ovcoh"]
+[ext_resource type="Script" uid="uid://b83i4oyqxn1q8" path="res://ui/crosshair.gd" id="28_ppx11"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
@@ -81,7 +84,6 @@
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
-[ext_resource type="PackedScene" uid="uid://bk1aw8emtkeqa" path="res://ui/end_shift_earlier_menu.tscn" id="297_j3ofb"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
@@ -132,16 +134,17 @@ bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
 size = Vector3(1, 0.2680664, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "machines", "_cameras", "menu", "side_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "tutorial_selection_menu")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
 _tutorial_manager = NodePath("TutorialManager")
 _world_environment = NodePath("WorldEnvironment")
-machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
 _cameras = [NodePath("SecurityCams/SecurityCam"), NodePath("SecurityCams/SecurityCam2"), NodePath("SecurityCams/SecurityCam3")]
 menu = NodePath("Menu")
-side_machine = NodePath("Machines/Machine")
+first_machine = NodePath("Machines/Machine")
+second_machine = NodePath("Machines/Machine2")
+third_machine = NodePath("Machines/Machine3")
 fourth_machine = NodePath("Machines/Machine4")
 customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
@@ -167,6 +170,7 @@ special_shift_text = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginCo
 special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
 teleporter1 = NodePath("Teleporter1")
 teleporter2 = NodePath("Teleporter2")
+tutorial_selection_menu = NodePath("TutorialSelectionMenu")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -181,55 +185,11 @@ metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 layer = 2
 visible = false
 
-[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
-visible = false
-script = ExtResource("10_4c57u")
-minigame_dict = Dictionary[String, PackedScene]({
-"Arrows": ExtResource("20_a6jrf"),
-"Captcha": ExtResource("16_cpm2s"),
-"Colors": ExtResource("11_efxa6"),
-"Lines": ExtResource("15_aivy6"),
-"Refill": ExtResource("23_lswn8"),
-"SpillClean": ExtResource("10_inymm"),
-"Typing": ExtResource("20_d13ii"),
-"WordMatch": ExtResource("18_4obbf")
-})
-sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
-cancel_button = NodePath("MarginContainer/CancelButton")
-
-[node name="MarginContainer" type="MarginContainer" parent="MinigameController" unique_id=614867549]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MinigameController/MarginContainer" unique_id=824924343]
-layout_mode = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
-
-[node name="CancelButton" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.5, 0.25)
-offset_transform_rotation = 0.08726646
-offset_transform_visual_only = false
-theme = ExtResource("97_l0gw7")
-theme_override_font_sizes/font_size = 48
-text = "cancel"
-
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
+visible = false
+
+[node name="TutorialSelectionMenu" parent="." unique_id=1397742482 instance=ExtResource("20_4obbf")]
+layer = 2
 visible = false
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
@@ -249,21 +209,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05381441, 0)
 
-[node name="Machine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-process_mode = 4
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.33386397)
-visible = false
+[node name="Machine" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 
 [node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
 
-[node name="Machine3" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
+[node name="Machine3" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.33386397)
 
 [node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
-process_mode = 4
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.7)
-visible = false
 
 [node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 3.5)
@@ -390,6 +346,37 @@ hammer = ExtResource("150_0bk8h")
 scrubber = ExtResource("50_jbvwl")
 whipped_cream = ExtResource("51_sn1fb")
 
+[node name="Crosshair" type="Control" parent="UI" unique_id=1676497832]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("28_ppx11")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Crosshair" unique_id=698336152]
+modulate = Color(1, 1, 1, 0.39215687)
+custom_minimum_size = Vector2(12, 12)
+custom_maximum_size = Vector2(12, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_4obbf")
+expand_mode = 5
+stretch_mode = 5
+
 [node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
 custom_minimum_size = Vector2(550, 0)
 custom_maximum_size = Vector2(550, -1)
@@ -397,9 +384,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 50.0
-offset_top = -505.0
+offset_top = -330.0
 offset_right = 600.0
-offset_bottom = 45.0
+offset_bottom = 219.99976
 grow_vertical = 0
 rotation = 0.05235988
 size_flags_horizontal = 0
@@ -469,6 +456,7 @@ texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
+visible = false
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -481,7 +469,7 @@ layout_mode = 2
 [node name="Scores" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=2066546892]
 layout_mode = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
@@ -1011,6 +999,54 @@ text = "DAY 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
+visible = false
+script = ExtResource("10_4c57u")
+minigame_dict = Dictionary[String, PackedScene]({
+"Arrows": ExtResource("20_a6jrf"),
+"Captcha": ExtResource("16_cpm2s"),
+"Colors": ExtResource("11_efxa6"),
+"Lines": ExtResource("15_aivy6"),
+"Refill": ExtResource("23_lswn8"),
+"SpillClean": ExtResource("10_inymm"),
+"Typing": ExtResource("20_d13ii")
+})
+sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
+cancel_button = NodePath("MarginContainer/CancelButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="MinigameController" unique_id=614867549]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinigameController/MarginContainer" unique_id=824924343]
+layout_mode = 2
+mouse_filter = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 0
+
+[node name="CancelButton" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, 0.25)
+offset_transform_rotation = 0.08726646
+offset_transform_visual_only = false
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 48
+text = "cancel"
+
 [node name="PCUI" type="CanvasLayer" parent="." unique_id=1232958959]
 
 [node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
@@ -1173,10 +1209,6 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[node name="EndShiftEarlierMenu" parent="." unique_id=305608973 node_paths=PackedStringArray("game_timer") instance=ExtResource("297_j3ofb")]
-visible = false
-game_timer = NodePath("../GameTimer")
-
 [node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=1328361687]
 process_mode = 3
 visible = false
@@ -1222,11 +1254,14 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319]
+[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
 process_mode = 3
 visible = false
 script = ExtResource("287_4fms3")
 popup_id = "special shift"
+text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
 
 [node name="InputBlocker" type="Control" parent="SpecialShiftPop" unique_id=317794041]
 layout_mode = 3
@@ -1340,4 +1375,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.7
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 
 [editable path="SecurityCams/SecurityCam2"]
+[editable path="SecurityCams/SecurityCam2/Model/camera"]
 [editable path="SecurityCams/SecurityCam3"]
+[editable path="SecurityCams/SecurityCam3/Model/camera"]

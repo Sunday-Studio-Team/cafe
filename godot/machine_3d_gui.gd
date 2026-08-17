@@ -44,12 +44,11 @@ func _ready():
 			interactable.visible = false
 			Global.in_machine_ui = true
 			player_using_me = true
-			
+
 			#store where the player was, before they interacted w/ the machine.
 			#used when using bomb(), which is in ingredients_refill_minigame.gd
 			where_was_player = Global.player.global_transform
-			
-				
+
 			# Showing the popup tutorial when the player uses the machine
 			if not seen_interaction_popup:
 				seen_interaction_popup = true # Only showing it once
@@ -76,24 +75,29 @@ func _ready():
 				"global_transform",
 				cam_spot.global_transform,
 				CAM_TWEEN_DUR,
-			)
+			),
 	)
 
 	Events.machine_exit_button_pressed.connect(
 		func():
 			if player_using_me:
-				exit()
+				exit(),
 	)
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not Global.making_drink_manually:
+	if Input.is_action_just_pressed("pause") and not Global.minigame_active:
 		exit()
 
 
 func _unhandled_input(event):
 	# Check if the event is a non-mouse/non-touch event
-	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
+	for mouse_event in [
+		InputEventMouseButton,
+		InputEventMouseMotion,
+		InputEventScreenDrag,
+		InputEventScreenTouch,
+	]:
 		if is_instance_of(event, mouse_event):
 			# If the event is a mouse/touch event, then we can ignore it here, because it will be
 			# handled via Physics Picking.
@@ -126,7 +130,13 @@ func _mouse_exited_area():
 	is_mouse_inside = false
 
 
-func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
+func _mouse_input_event(
+	_camera: Camera3D,
+	event: InputEvent,
+	event_position: Vector3,
+	_normal: Vector3,
+	_shape_idx: int,
+):
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
 	var quad_mesh_size = node_quad.mesh.size
 
@@ -141,7 +151,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
 
 	# TODO: Adapt to bilboard mode or avoid completely.
-
 	var event_pos2D: Vector2 = Vector2()
 
 	if is_mouse_inside:

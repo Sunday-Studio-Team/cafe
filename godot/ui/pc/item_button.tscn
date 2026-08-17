@@ -5,12 +5,24 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr0b"]
 bg_color = Color(0.3529412, 0.5137255, 0.5803922, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye6mp"]
 bg_color = Color(0.2928, 0.42383993, 0.48, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ts1q0"]
 bg_color = Color(0.48960003, 0.65088, 0.72, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlbhm"]
 bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
@@ -51,6 +63,7 @@ theme_override_constants/margin_bottom = 10
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
+alignment = 1
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=941600540]
 texture_filter = 1

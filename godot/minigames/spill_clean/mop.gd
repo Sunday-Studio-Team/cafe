@@ -73,11 +73,13 @@ func _ready() -> void:
 		mope_range.position = normal_offset
 		mope_range.shape.size = normal_range
 
-func _process(_delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	global_position = (
 			get_global_mouse_position()
 			+ drag_offset
 	)
+	reset_physics_interpolation()
 
 
 func _exit_tree() -> void:

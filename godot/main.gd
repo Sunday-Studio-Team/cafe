@@ -6,11 +6,13 @@ static var seen_breakdown_popup := false
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
-@export var machines: Array[Machine]
 @export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
-# first machine on the left
-@export var side_machine: Machine
+
+# (machines numbered in order from the window here)
+@export var first_machine: Machine
+@export var second_machine: Machine
+@export var third_machine: Machine
 @export var fourth_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
@@ -42,7 +44,11 @@ static var seen_breakdown_popup := false
 @export var special_shift_title: Label
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
+@export var tutorial_selection_menu: TutorialSelectionMenu
 
+var machines: Array[Machine]
+
+@onready var tutorial_machine: Machine = first_machine
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -58,6 +64,7 @@ func _ready() -> void:
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
+	Global.shift_started = false
 
 	customer_spawn_timer.timeout.connect(spawn_customer)
 	game_timer.timeout.connect(_on_game_timer_timeout)
@@ -70,14 +77,11 @@ func _ready() -> void:
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
 
-	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		Global.current_special_shift.unapply_stats()
-
 	set_per_day_stuff()
+	spawn_machines()
 	get_stats()
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
-	Events.items_updated.connect(enable_disable_teleporters)
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
@@ -118,16 +122,20 @@ func _ready() -> void:
 	Events.active_item_used.connect(active_item_used)
 
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		special_shift_text.text = Global.current_special_shift.description
-		special_shift_title.text = Global.current_special_shift.name
-		special_shift_icon.texture = Global.current_special_shift.icon
 		Global.popups["special shift"].open()
+	
+	if Global.day == 0:
+		tutorial_selection_menu.open_menu()
 
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
-	if overtime_item in Global.owned_items:
-		game_timer.wait_time += Stats.current.extra_time_from_overtime_form_item
+
+	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
+	if Global.owned_items.has(overtime_item):
+		shift_length += Stats.current.extra_time_from_overtime_form_item
+	game_timer.wait_time = shift_length
+
 	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 		Global.current_special_shift.apply_stats()
 
@@ -143,30 +151,34 @@ func enable_disable_teleporters():
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
+	if Global.day == 0:
+		Global.bank_money = 0
+		Global.owned_items.clear()
+		Stats.reset()
+		Stats.current.customer_wait_time_machine = INF
+		Stats.current.chance_of_machine_breaking = 0.0
+		Stats.current.machine_chance_of_spill = 0.0
+		machines.append(tutorial_machine)
+		_set_security_cameras_active(false)
 	if Global.day == 1:
 		Global.bank_money = 0
 		Global.owned_items.clear()
 		Stats.reset()
 	if Global.day >= 1:
-		game_timer.wait_time = 90
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
+		machines.append(first_machine)
+		machines.append(second_machine)
 	if Global.day >= 2:
-		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
-		machines.push_front(side_machine)
-		side_machine.show()
-		side_machine.process_mode = Node.PROCESS_MODE_INHERIT
+		machines.append(third_machine)
 	if Global.day >= 3:
-		game_timer.wait_time = 120
 		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
-		machines.push_front(fourth_machine)
-		fourth_machine.show()
-		fourth_machine.process_mode = Node.PROCESS_MODE_INHERIT
+		machines.append(fourth_machine)
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
@@ -194,7 +206,17 @@ func set_per_day_stuff() -> void:
 		Global.current_special_shift = Global.special_shifts[0]
 
 
-func spawn_customer() -> void:
+func spawn_machines():
+	for machine: Machine in [first_machine, second_machine, third_machine, fourth_machine]:
+		machine.hide()
+		machine.process_mode = Node.PROCESS_MODE_DISABLED
+
+	for machine in machines:
+		machine.process_mode = Node.PROCESS_MODE_INHERIT
+		machine.show()
+
+
+func spawn_customer():
 	var available_machines: Array[Machine] = []
 	for machine in machines:
 		if machine.customer == null and machine.queued_customer == null:
@@ -214,7 +236,7 @@ func spawn_customer() -> void:
 	assigned_machine.queued_customer = new_customer
 
 	await get_tree().create_timer(randf_range(2, 4), false).timeout
-
+ 
 	await assigned_machine.set_customer(new_customer)
 	assigned_machine.queued_customer = null
 	assigned_machine.machine_make_drink()
@@ -273,15 +295,84 @@ func _on_minigame_end():
 
 
 func _on_shift_started():
-	game_timer.start()
-	customer_spawn_timer.start()
+	Global.shift_started = true
 
-	if scrubber in Global.owned_items:
-		DraggableMop.used_scrubber = true
+	if Global.day > 0:
+		game_timer.start()
+		customer_spawn_timer.start()
+
+		if scrubber in Global.owned_items:
+			DraggableMop.used_scrubber = true
+		else:
+			DraggableMop.used_scrubber = false
+
+		desk.interactable.visible = false
+	
 	else:
-		DraggableMop.used_scrubber = false
+		interactive_tutorial_flow()
 
-	desk.interactable.visible = false
+
+func interactive_tutorial_flow() -> void:
+	if tutorial_machine == null:
+		return
+
+	# First customer, accept order
+	Machine.set_next_drink_score(3)
+	spawn_customer()
+	tutorial_machine.set_order_action_buttons_available("accept")
+
+	while tutorial_machine.queued_customer != null or tutorial_machine.customer != null:
+		await get_tree().process_frame
+	await get_tree().create_timer(0.5, false).timeout
+
+	# Second customer, reject order
+	Machine.set_next_drink_score(-3)
+	spawn_customer()
+	tutorial_machine.set_order_action_buttons_available("reject")
+	tutorial_machine.reject_button.pressed.connect(
+		func():
+			Machine.set_next_drink_score(3)
+			tutorial_machine.set_order_action_buttons_available("accept")
+	, CONNECT_ONE_SHOT
+	)
+
+	while tutorial_machine.queued_customer != null or tutorial_machine.customer != null:
+		await get_tree().process_frame
+	await get_tree().create_timer(0.5, false).timeout
+
+	# Third customer, make drink
+	Machine.set_next_drink_score(-3)
+	spawn_customer()
+	tutorial_machine.set_order_action_buttons_available("make_drink")
+
+	while tutorial_machine.queued_customer != null or tutorial_machine.customer != null:
+		await get_tree().process_frame
+	await get_tree().create_timer(0.5, false).timeout
+
+	# Machine runs out of ingredients: player learns to refill without a customer.
+	tutorial_machine.customer = null
+	tutorial_machine.waiting_for_response = false
+	tutorial_machine.ingredients = 0
+	tutorial_machine.set_order_action_buttons_available("refill")
+
+	while tutorial_machine.ingredients == 0:
+		await get_tree().process_frame
+
+	tutorial_machine.set_order_action_buttons_available("all")
+
+	# Spill tutorial: player learns to clean up spills
+	tutorial_machine.spill()
+
+	while tutorial_machine.spill_on_floor:
+		await get_tree().process_frame
+	
+	tutorial_machine.break_down()
+
+	while tutorial_machine.broken_down:
+		await get_tree().process_frame
+
+	Global.day = 1
+	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 func _on_desk_interacted() -> void:
