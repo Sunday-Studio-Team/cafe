@@ -778,18 +778,35 @@ func _on_remake_drink_button_pressed() -> void:
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
 	Events.minigame_active.emit(manual_drink_minigames.pick_random())
-
+	
+	for item in Global.owned_items:
+		if item.item_id == "barista_guide":
+			var time_scale: float = 1.0
+			if item.item_level == 1:
+				time_scale = 0.5
+			elif item.item_level == 2:
+				time_scale = 0.25
+			Engine.time_scale *= time_scale
+			print("time scale set to: %s" % Engine.time_scale)
 
 func _on_remade_drink() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	finished_manual_remake_drink()
-
+	
+	for item in Global.owned_items:
+		if item.item_id == "barista_guide":
+			Engine.time_scale = 1.0
+			print("time scale returned to: %s" % Engine.time_scale)
 
 func _cancel_remake_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 
+	for item in Global.owned_items:
+		if item.item_id == "barista_guide":
+			Engine.time_scale = 1.0
+			print("time scale returned to: %s" % Engine.time_scale)
 
 func _on_customer_approached_window(customer_at_window: Customer) -> void:
 	if customer_at_window != customer:
