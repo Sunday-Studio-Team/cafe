@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const STRIDE_LENGTH := 0.75
 
-@export var camera: Camera3D
+@export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
@@ -13,13 +13,29 @@ const STRIDE_LENGTH := 0.75
 @export var sprint_lockout_timer: Timer
 @export var roller_skates: Item
 
+
+@export_category("Camera Effects")
+@export_group("Headbob")
+@export var enable_headbob : bool = true
+@export var headbob_frequency :float= 2.0
+@export var headbob_amplitude :float= 0.04
+@export_group("Camera Tilt")
+@export var enable_tilt : bool = true
+@export var run_pitch : float = 0.1
+@export var run_roll : float = 0.20
+@export var max_pitch : float = 1.0
+@export var max_roll : float = 2.5
+var headbob_time :float= 0.0
+
+@onready var camera_controller_anchor: Marker3D = $CameraControllerAnchor
+
 var move_speed: float = Stats.current.default_move_speed
-var mouse_sens := 0.1
+#var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
 # we store it here then apply it in the physics process so no movement is
 # applied off-sync with physics frames
-var mouse_delta: Vector2 = Vector2.ZERO
+#var mouse_delta: Vector2 = Vector2.ZERO
 # vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
@@ -33,7 +49,7 @@ var holding_interactable: bool = false
 
 
 func _ready() -> void:
-	Global.player = self
+#	Global.player = self
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -59,23 +75,26 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	handle_mouselook()
+	#handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
+#	handle_headbob(delta)
+	#handle_tilt()
 	#handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
 	handle_active_items()
 	handle_floating_cursor()
 	move_and_slide()
+	
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		mouse_delta += event.screen_relative * mouse_sens
+#func _unhandled_input(event: InputEvent) -> void:
+#	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+#		mouse_delta += event.screen_relative * mouse_sens
 
 
 # this is what decides whether to show the mouse
@@ -106,13 +125,11 @@ func handle_active_items() -> void:
 		Events.active_item_used.emit(Global.equipped_item)
 
 
-func handle_mouselook() -> void:
-	camera.rotation_degrees.x -= mouse_delta.y
-	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-
-	rotation_degrees.y -= mouse_delta.x
-
-	mouse_delta = Vector2.ZERO
+#func handle_mouselook() -> void:
+#	camera.rotation_degrees.x -= mouse_delta.y
+#	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+#	rotation_degrees.y -= mouse_delta.x
+#	mouse_delta = Vector2.ZERO
 
 
 func handle_movement(delta: float) -> void:
@@ -229,7 +246,6 @@ func handle_footstep_sounds() -> void:
 
 func tilt_camera() -> void:
 	const TILT_AMOUNT := 0.25
-
 	var local_velocity = basis.transposed() * velocity
 	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
 
@@ -243,3 +259,7 @@ func handle_ingredients_bag() -> void:
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+	
+	
+func update_rotation(rotation_input) -> void:
+	global_transform.basis = Basis.from_euler(rotation_input)

@@ -1,0 +1,79 @@
+class_name CameraEffects extends Camera3D
+
+@export_category("Refecrences")
+@export var player : Player
+
+@export_category("Effects")
+@export var enable_tilt : bool = true
+@export var enable_headbob : bool = true
+
+@export_category("Kick & Recoil Settings")
+@export_group("Run Tilt")
+@export var run_pitch : float = 0.1 
+@export var run_roll : float = 0.20 
+@export var max_pitch : float = 1.0 
+@export var max_roll : float = 2.5 
+@export_subgroup("Headbob")
+@export_range(0.0, 0.1, 0.001) var bob_pitch: float = 0.05
+@export_range(0.0, 0.1, 0.001) var bob_roll: float = 0.025
+@export_range(0.0, 0.04, 0.001) var bob_up: float = 0.005
+@export_range(3.0, 10.0, 0.1) var bob_frequency: float = 10.0
+
+var _step_timer : float = 0.0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	camera_effects(delta)
+	
+
+func camera_effects(delta: float) -> void:
+	if not player:
+		return
+	
+	
+	var velocity = player.velocity
+	
+	# Headbob Step Timer and Sin Value
+	var speed = Vector2(velocity.x, velocity.z).length()
+	if speed > 0.1 and player.is_on_floor():
+		_step_timer += delta * (speed / bob_frequency)
+		_step_timer = fmod(_step_timer, 1.0)
+	else:
+		_step_timer = 0.0
+	var bob_sin = sin(_step_timer * 2.0 * PI) * 0.5
+	
+	
+	var angles = Vector3.ZERO
+	var offset = Vector3.ZERO
+	
+	# Camera Tilt
+	if enable_tilt:
+		var forward = global_transform.basis.z
+		var right = global_transform.basis.x
+		
+		var forward_dot = velocity.dot(forward)
+		var forward_tilt = clampf(forward_dot * deg_to_rad(run_pitch), deg_to_rad(-max_pitch), deg_to_rad(max_pitch))
+		angles.x += forward_tilt
+		
+		var right_dot = velocity.dot(right)
+		var side_tilt = clampf(right_dot * deg_to_rad(run_roll), deg_to_rad(-max_roll), deg_to_rad(max_roll))
+		angles.z -= side_tilt
+	
+	# Headbob
+	if enable_headbob:
+		var pitch_delta = bob_sin * deg_to_rad(bob_pitch) * speed
+		angles.x -= pitch_delta
+		
+		var roll_delta = bob_sin * deg_to_rad(bob_roll) * speed
+		angles.z -= roll_delta
+		
+		var bob_height = bob_sin * speed * bob_up
+		offset.y += bob_height
+	
+	position = offset
+	rotation = angles 
