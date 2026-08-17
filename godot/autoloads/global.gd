@@ -216,7 +216,7 @@ func equip_item(item: Item):
 		Events.emit_signal("play_viewmodel_animation", "default")
 		return
 
-	if item.name == "hammer":
+	if item.item_id == "hammer":
 		Events.emit_signal("play_viewmodel_animation", "hammer_equip")
 
 	else:
@@ -232,6 +232,6 @@ func refresh_active_items():
 func deactivate_active_item(target_item: Item):
 	Global.equipped_item = null
 	for item in owned_items:
-		if item.name == target_item.name:
+		if item.item_id == target_item.item_id:
 			item.can_be_used = false
 			Events.items_updated.emit()

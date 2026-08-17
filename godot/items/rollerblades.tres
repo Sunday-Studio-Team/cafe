@@ -5,10 +5,22 @@
 
 [resource]
 script = ExtResource("2_63mx7")
-name = "roller skates"
+item_id = "roller_skates"
+name = "Roller Skates"
 description = "move faster but lose some control and the ability to sprint"
+description_at_levels = Dictionary[int, String]({
+1: "Move at 2x speed, but no sprinting and hard to control.",
+2: "Move at 3x speed, but no sprinting and hard to control."
+})
 icon = ExtResource("1_i5jft")
-price = 7.0
+price_at_levels = Dictionary[int, float]({
+1: 5.0,
+2: 3.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 6.0
+})
 stat_bonuses = Dictionary[String, float]({
 "default_move_speed": 5.0,
 "player_accel": -20.0,

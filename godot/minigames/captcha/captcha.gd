@@ -125,7 +125,7 @@ func _start_minigame() -> void:
 
 	if Global.owned_items.any(
 		func(x: Item):
-			return x.name == "barista guide",
+			return x.item_id == "barista_guide",
 	):
 		populate_order_reminder()
 		order_reminder.visible = true

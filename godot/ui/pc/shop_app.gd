@@ -62,7 +62,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	super(_delta)
 
-	bank_balance.text = "🏦 [color=gold]%s[/color]" % Global.float_to_price(Global.player_tips_bank)
+	bank_balance.text = "[b]🏦[color=white]%s[/color][/b]" % Global.float_to_price(Global.player_tips_bank)
 
 
 func populate_items() -> void:
@@ -105,12 +105,12 @@ func _on_reroll_pressed() -> void:
 
 func _on_item_button_pressed(item_button: ItemButton) -> void:
 	var item: Item = item_button.item
-	var can_afford: bool = Global.player_tips_bank >= item.price
+	var can_afford: bool = Global.player_tips_bank >= item.price_at_levels[item.item_level]
 	var has_free_item_slots: bool = Global.owned_items.size() < Global.item_slots_amount
 	var did_buy_item: bool = can_afford and has_free_item_slots
 	item_button.notify_pressed(did_buy_item)
 	if did_buy_item:
-		Global.player_tips_bank -= item.price
+		Global.player_tips_bank -= item.price_at_levels[item.item_level]
 
 		own_and_apply_item(item)
 

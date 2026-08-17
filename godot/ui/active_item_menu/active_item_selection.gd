@@ -116,7 +116,7 @@ func remove_item(target_item: Item):
 	#Removes specified item from being choosable
 	#NOTE: Does NOT remove it from the player's inventory
 	for i in options.size():
-		if options[i] != null and target_item.name == options[i].name:
+		if options[i] != null and target_item.item_id == options[i].item_id:
 			options.remove_at(i)
 
 

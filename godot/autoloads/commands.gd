@@ -4,7 +4,7 @@
 # lemme know)
 extends Node
 
-var _item_names: Array[String] = []
+var _item_ids: Array[String] = []
 var _shift_names: Array[String] = []
 # tracks whether we have the 'unlimited actives' command toggled on
 # (so we can toggle on/off with the same command)
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 	var items_guide_str: String = "Available items: "
 	for item in Global.items:
-		items_guide_str += "\"%s\", " % item.name
+		items_guide_str += "\"%s\", " % item.item_id
 	
 	var shift_guide_str: String = "Available shifts: "
 	for each_shift in Global.special_shifts:
@@ -45,7 +45,7 @@ func _ready() -> void:
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
-- [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
+- [i]item \"<item_id>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
 - [i]shift \"<shift name>\"[/i] change to the spcial shift (TAB to auto-complete, can't be used after the shift has started)
 %s
@@ -74,10 +74,10 @@ func _ready() -> void:
 	Console.add_command("timer", toggle_timer)
 	Console.add_command("fullshelf", fill_items)
 	Console.add_command("bag", give_bag)
-	Console.add_command("item", give_item, ["item_name"])
+	Console.add_command("item", give_item, ["item_id"])
 	for item in Global.items:
-		_item_names.append("\"%s\"" % item.name)
-	Console.add_command_autocomplete_list("item", _item_names)
+		_item_ids.append("\"%s\"" % item.item_id)
+	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
 	Console.add_command("ua", toggle_unlimited_actives)
 	Console.add_command("shift", special_shift, ["shift_name"])
@@ -153,15 +153,15 @@ func start_shift() -> void:
 	Console.print_line("starting shift")
 
 
-func give_item(item_name: String) -> void:
+func give_item(item_id: String) -> void:
 	for item in Global.items:
-		if item_name == item.name:
+		if item_id == item.item_id:
 			Global.owned_items.append(item)
 			item.apply_stats()
 			Events.items_updated.emit()
-			Console.print_line("gave %s" % item.name)
+			Console.print_line("gave %s" % item.item_id)
 			return
-	Console.print_error("Item name not found.")
+	Console.print_error("Item ID not found.")
 
 
 func bank() -> void:

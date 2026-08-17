@@ -27,7 +27,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
-@export var shelf_item_active_indicator: PanelContainer
+@export var shelf_item_active_indicator: Control
+@export var shelf_item_cooldown_label: RichTextLabel
+@export var shelf_item_passive_indicator: Control
 @export var shelf_item_sell: Button
 @export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
@@ -40,7 +42,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var exit_machine_button: Button
 @export var item_hover_tooltip: Control
 @export var item_hover_tooltip_name: RichTextLabel
-@export var item_hover_tooltip_active_indicator: PanelContainer
+@export var item_hover_tooltip_active_indicator: Control
+@export var item_hover_tooltip_cooldown_label: RichTextLabel
+@export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_description: RichTextLabel
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
@@ -265,9 +269,13 @@ func handle_item_hover_tooltip() -> void:
 	var hovered_icon := Global.hovered_item_icon
 
 	if hovered_icon != null:
-		item_hover_tooltip_name.text = "[b] %s" % hovered_icon.item.name
-		item_hover_tooltip_description.text = hovered_icon.item.description
-		item_hover_tooltip_active_indicator.visible = hovered_icon.item.is_active_item
+		var item: Item = hovered_icon.item
+		item_hover_tooltip_name.text = "[b] %s" % item.name
+		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
+		item_hover_tooltip_active_indicator.visible = item.is_active_item
+		if item.is_active_item:
+			item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
+		item_hover_tooltip_passive_indicator.visible = !item.is_active_item
 
 	item_hover_tooltip.visible = (
 			hovered_icon != null
@@ -323,23 +331,27 @@ func handle_shelf_item_ui() -> void:
 		return
 
 	if shelf_item.item.is_active_item:
-		shelf_item_active_indicator.show()
+		shelf_item_active_indicator.visible = true
+		shelf_item_cooldown_label.text = "(%ss cooldown)" % shelf_item.item.active_item_cooldown_at_levels[shelf_item.item.item_level]
+		shelf_item_passive_indicator.visible = false
 	else:
-		shelf_item_active_indicator.hide()
+		shelf_item_active_indicator.visible = false
+		shelf_item_passive_indicator.visible = true
 
 	shelf_item_name.text = "[b]%s" % shelf_item.item.name
-	shelf_item_description.text = shelf_item.item.description
+	shelf_item_description.text = shelf_item.item.description_at_levels[shelf_item.item.item_level]
 
-	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(shelf_item.item.price / 2.0)
+	var sell_value: float = shelf_item.item.sell_value_at_levels[shelf_item.item.item_level]
+	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(sell_value)
 
 	if Input.is_action_just_pressed("interact") and not shelf_item.clicked_sell:
 		shelf_item.clicked_sell = true
-		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(shelf_item.item.price / 2)
+		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(sell_value)
 		shelf_item_sold_indicator.show()
 		sold_item_sound.play()
 		await get_tree().create_timer(0.75, false).timeout
 		shelf_item_sold_indicator.hide()
-		Global.player_tips_bank += shelf_item.item.price / 2
+		Global.player_tips_bank += sell_value
 		Global.owned_items.erase(shelf_item.item)
 		shelf_item.item.unapply_stats()
 		Events.items_updated.emit()

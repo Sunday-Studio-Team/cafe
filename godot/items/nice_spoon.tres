@@ -5,11 +5,22 @@
 
 [resource]
 script = ExtResource("1_4i5wr")
-name = "nice spoon"
+item_id = "nice_spoon"
+name = "Nice Spoon"
 description = "get more ingredients out of each bag"
+description_at_levels = Dictionary[int, String]({
+1: "Each ingredient refills the machine 2x.",
+2: "Each ingredient refills the machine 3x."
+})
 icon = ExtResource("1_pd80m")
 price = 4.0
-stat_bonuses = Dictionary[String, float]({
-"ingredients_per_bag": 20.0
+price_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 2.0
 })
+sell_value_at_levels = Dictionary[int, float]({
+1: 3.0,
+2: 5.0
+})
+can_activate_anywhere = false
 metadata/_custom_type_script = "uid://w8k3e1miec1a"

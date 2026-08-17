@@ -5,8 +5,21 @@
 
 [resource]
 script = ExtResource("2_tmed4")
-name = "teleporter"
+item_id = "teleporter"
+name = "Teleporter"
 description = "takes you between the staff and customer areas instantly"
+description_at_levels = Dictionary[int, String]({
+1: "Set up a teleporter that has a 15s cooldown.",
+2: "Set up a teleporter that has a 5s cooldown."
+})
 icon = ExtResource("1_hfxye")
 price = 7.0
+price_at_levels = Dictionary[int, float]({
+1: 6.0,
+2: 4.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 7.0
+})
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
