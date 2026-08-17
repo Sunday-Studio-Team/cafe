@@ -65,6 +65,8 @@ var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
 var max_ingredients: int = 100
+var make_drink_locked: bool = false
+
 var ingredients: int = max_ingredients:
 	set(new_value):
 		var change := new_value - ingredients
@@ -149,7 +151,7 @@ func _process(_delta: float) -> void:
 	accept_button.visible = waiting_for_response
 	reject_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
-	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order
+	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
@@ -192,6 +194,16 @@ func _process(_delta: float) -> void:
 
 	#if make_drink_button.held:
 	#Global.holding_make_drink_button = true
+
+static func set_next_drink_score(score: int) -> void:
+	if !(score in Stats.current.score_chances.keys()):
+		return
+
+	for k in Stats.current.score_chances.keys():
+		if k == score:
+			Stats.current.score_chances[k] = 1.0
+		else:
+			Stats.current.score_chances[k] = 0.0
 
 
 func show_tutorial_where_is_storeroom() -> void:
@@ -240,6 +252,32 @@ func show_tutorial_where_is_storeroom() -> void:
 		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
 		Global.in_tutorial_screen = false # re enable pause
+
+
+func set_order_action_buttons_available(button_case: String) -> void:
+	accept_button.disabled = true
+	reject_button.disabled = true
+	make_drink_locked = true
+	refill_button.disabled = true
+
+	match button_case:
+		"accept":
+			accept_button.disabled = false
+		"reject":
+			reject_button.disabled = false
+		"make_drink":
+			make_drink_locked = false
+		"refill":
+			refill_button.disabled = false
+		"all":
+			accept_button.disabled = false
+			reject_button.disabled = false
+			make_drink_button.disabled = false
+			refill_button.disabled = false
+		"none":
+			pass
+		_:
+			print("invalid button_case passed to set_order_action_buttons_available()")
 
 
 # called from inside spill() (so that itll still show if we trigger the spill
