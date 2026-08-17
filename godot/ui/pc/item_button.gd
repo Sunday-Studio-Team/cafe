@@ -17,7 +17,7 @@ var item: Item
 
 func _ready() -> void:
 	item_icon.texture = item.icon
-	item_name.text = "[b]%s [color=gold](%s)" % [item.name, Global.float_to_price(item.price_at_levels[item.item_level])]
+	item_name.text = "[b]%s Lv%s [color=gold](%s)" % [item.name, item.item_level, Global.float_to_price(item.price_at_levels[item.item_level])]
 	active_indicator.visible = item.is_active_item
 	if item.is_active_item:
 		_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]

@@ -41,6 +41,7 @@ static var seen_breakdown_popup := false
 @export var special_shift_title: Label
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
+@export var teleporter3: Teleporter
 @export var tutorial_selection_menu: TutorialSelectionMenu
 
 var machines: Array[Machine]
@@ -161,10 +162,11 @@ func enable_disable_teleporters():
 	if has_teleporter:
 		teleporter1.enable_teleporter()
 		teleporter2.enable_teleporter()
+		teleporter3.enable_teleporter()
 	else:
 		teleporter1.disable_teleporter()
 		teleporter2.disable_teleporter()
-
+		teleporter3.enable_teleporter()
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:

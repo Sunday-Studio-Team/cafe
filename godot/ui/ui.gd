@@ -272,7 +272,7 @@ func handle_item_hover_tooltip() -> void:
 
 	if hovered_icon != null:
 		var item: Item = hovered_icon.item
-		item_hover_tooltip_name.text = "[b] %s" % item.name
+		item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
 		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
 		item_hover_tooltip_active_indicator.visible = item.is_active_item
 		if item.is_active_item:
@@ -344,7 +344,7 @@ func handle_shelf_item_ui() -> void:
 		shelf_item_active_indicator.visible = false
 		shelf_item_passive_indicator.visible = true
 
-	shelf_item_name.text = "[b]%s" % shelf_item.item.name
+	shelf_item_name.text = "[b]%s Lv%s" % [shelf_item.item.name, shelf_item.item.item_level]
 	shelf_item_description.text = shelf_item.item.description_at_levels[shelf_item.item.item_level]
 
 	var sell_value: float = shelf_item.item.sell_value_at_levels[shelf_item.item.item_level]
