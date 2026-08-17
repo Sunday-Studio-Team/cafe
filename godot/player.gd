@@ -15,7 +15,12 @@ const STRIDE_LENGTH := 0.75
 
 @export var pully_ball_scene: PackedScene
 
-var move_speed: float = Stats.current.default_move_speed
+var player_status_effects: PlayerStatusEffects
+
+var _walk_move_speed: float
+var _sprint_move_speed: float
+var _current_move_speed: float
+
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -40,6 +45,8 @@ var pully_ball_instance: Node3D
 
 func _ready() -> void:
 	Global.player = self
+	player_status_effects = PlayerStatusEffects.new(self)
+	
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -65,6 +72,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	player_status_effects.process_status_effects(delta)
+	
 	handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
@@ -143,7 +152,7 @@ func handle_movement(delta: float) -> void:
 
 	if move_dir_3d.length() > 0.2:
 		horizontal_velocity = horizontal_velocity.move_toward(
-			move_dir_3d * move_speed,
+			move_dir_3d * _current_move_speed,
 			accel * delta,
 		)
 	else:
@@ -206,13 +215,13 @@ func handle_sprint(delta: float) -> void:
 			Global.stamina += Stats.current.stamina_regen_rate * delta
 
 		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
-			move_speed = Stats.current.sprint_move_speed
+			_current_move_speed = _sprint_move_speed
 
 		else:
-			move_speed = Stats.current.default_move_speed
+			_current_move_speed = _walk_move_speed
 			Global.stamina += Stats.current.stamina_regen_rate * delta
 	else:
-		move_speed = Stats.current.default_move_speed
+		_current_move_speed = _walk_move_speed
 		Global.stamina += Stats.current.stamina_regen_rate * delta
 
 	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
@@ -261,3 +270,92 @@ func handle_ingredients_bag() -> void:
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+
+
+class PlayerStatusEffects extends RefCounted:
+	var _player: Player
+	var _player_status_effects_array: Array[PlayerStatusEffect] = []
+
+	func _init(player: Player) -> void:
+		_player = player
+		_reset_stats()
+
+	func has_status_effect_from_owner(owner: RefCounted) -> bool:
+		for status_effect in _player_status_effects_array:
+			if status_effect.get_owner() == owner:
+				return true
+		return false
+
+	func apply_status_effect(status_effect: Player.PlayerStatusEffect) -> void:
+		_reset_stats()
+		_player_status_effects_array.append(status_effect)
+		_apply_status_effects()
+	
+	func remove_status_effect(status_effect: Player.PlayerStatusEffect) -> void:
+		var index: int = _player_status_effects_array.find(status_effect)
+		if index == -1:
+			return
+		_player_status_effects_array.remove_at(index)
+		_reset_stats()
+		_apply_status_effects()
+	
+	func process_status_effects(delta: float) -> void:
+		for i in range(_player_status_effects_array.size()):
+			if i >= _player_status_effects_array.size():
+				return
+			var status_effect: PlayerStatusEffect = _player_status_effects_array[i]
+			status_effect.process_status_effect(delta)
+			if status_effect.is_status_effect_expired():
+				remove_status_effect(status_effect)
+			else:
+				i += 1
+
+	func _reset_stats() -> void:
+		# Reset to base stats
+		_player._walk_move_speed = Stats.current.default_move_speed
+		_player._sprint_move_speed = Stats.current.sprint_move_speed
+	
+	func _apply_status_effects() -> void:
+		for player_status_effect in _player_status_effects_array:
+			player_status_effect.apply_effect(_player)
+
+@abstract
+class PlayerStatusEffect extends RefCounted:
+	@abstract 
+	func apply_effect(player: Player) -> void
+
+	@abstract
+	func process_status_effect(delta: float) -> void
+	
+	@abstract
+	func is_status_effect_expired() -> bool
+	
+	@abstract
+	func get_owner() -> Object
+
+
+class CameraSlowPlayerStatusEffect extends PlayerStatusEffect:
+	var _owner_camera: SecurityCam3D
+	var _duration: float
+	var _duration_remaining: float
+	var _expired: bool
+
+	func _init(owner_camera: SecurityCam3D, duration: float) -> void:
+		_owner_camera = owner_camera
+		_duration = duration
+		_duration_remaining = _duration
+	
+	func apply_effect(player: Player) -> void:
+		player._walk_move_speed *= 0.5
+		player._sprint_move_speed *= 0.5
+	
+	func process_status_effect(delta: float) -> void:
+		_duration_remaining -= delta
+		if _duration_remaining <= 0.0:
+			_expired = true
+	
+	func is_status_effect_expired() -> bool:
+		return _expired
+
+	func get_owner() -> Object:
+		return _owner_camera as Object

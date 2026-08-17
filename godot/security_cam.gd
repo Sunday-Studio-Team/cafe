@@ -1,5 +1,5 @@
-extends Node3D
 class_name SecurityCam3D
+extends Node3D
 
 @export var ray: RayCast3D
 @export var spotlight: SpotLight3D
@@ -11,6 +11,7 @@ class_name SecurityCam3D
 # safe reference for when we use this item on a camera
 @export var whipped_cream_item: Item
 @export var tries_until_disabled: int = 3
+@export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 
 # we duplicate the raycast many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -18,6 +19,7 @@ var all_rays: Array[RayCast3D]
 var rotate_tween: Tween
 var disable_minigames := ["Lines"]
 var _camera_disarmed := false
+var _player_slow_status_effect: Player.CameraSlowPlayerStatusEffect
 
 @onready var original_rotation := rotation_degrees
 
@@ -51,21 +53,26 @@ func _physics_process(_delta: float) -> void:
 	for r in all_rays:
 		var collider = r.get_collider()
 		if collider == Global.player:
+			var apply_slow: bool = false
 			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
 				timer.start()
-				Global.score_update_message = "caught running"
-				Global.employee_rating -= Stats.current.penalty_for_running
+				Events.alert_posted.emit("caught running")
+				apply_slow = true
 			elif Global.making_drink_manually:
 				timer.start()
-				Global.score_update_message = "caught making drink by hand"
-				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
-			elif (
-				Global.holding_ingredients and Global.holding_ingredients_rule
-			):
-				Global.score_update_message = "caught stealing ingredients"
-				Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
+				Events.alert_posted.emit("caught making drink by hand")
+				apply_slow = true
+			elif Global.holding_ingredients and Global.holding_ingredients_rule:
 				timer.start()
-
+				Events.alert_posted.emit("caught stealing ingredients")
+				apply_slow = true
+			
+			if apply_slow:
+				if _player_slow_status_effect != null:
+					Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
+				_player_slow_status_effect = Player.CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
+				Global.player.player_status_effects.apply_status_effect(_player_slow_status_effect)
+				caught_audio_stream_player_3d.play()
 			player_in_spotlight = true
 			break
 

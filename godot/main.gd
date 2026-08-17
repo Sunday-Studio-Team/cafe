@@ -50,7 +50,6 @@ static var seen_breakdown_popup := false
 
 var machines: Array[Machine]
 
-var _previous_tracked_employee_rating: float = 0.0
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -176,10 +175,8 @@ func set_per_day_stuff() -> void:
 	if Global.day >= 1:
 		_set_security_cameras_active(false)
 	if Global.day >= 2:
-		Stats.current.daily_profit_goal = 20
 		machines.push_front(first_machine)
 		load_machines()
-	if Global.day >= 3:
 		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true

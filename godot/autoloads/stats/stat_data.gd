@@ -51,3 +51,5 @@ var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, 
 var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.9, 3: 0.8, 4: 0.7, 5: 0.6, 0: 1.0 }
 var placated_customer_rating_gain_each_day: Dictionary[int, float] = { 1: 0.4, 2: 0.4, 3: 0.3, 4: 0.2, 5: 0.1, 0: 0.4 }
 var tip_per_star_rating: float = 2.0
+var camera_slow_player_speed_multiplier: float = 0.5
+var camera_slow_player_duration: float = 3.0
