@@ -8,8 +8,9 @@ static var seen_breakdown_popup := false
 @export var _world_environment: WorldEnvironment
 @export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
-# first machine on the left
+
 @export var first_day_machines: Array[Machine]
+# (machines numbered in order from the window here)
 @export var first_machine: Machine
 @export var second_machine: Machine
 @export var third_machine: Machine
@@ -79,6 +80,7 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	set_per_day_stuff()
+	load_machines()
 	get_stats()
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
@@ -128,7 +130,6 @@ func _ready() -> void:
 		tutorial_selection_menu.open_menu()
 
 
-
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
 
@@ -159,31 +160,26 @@ func set_per_day_stuff() -> void:
 		Stats.current.customer_wait_time_machine = INF
 		Stats.current.chance_of_machine_breaking = 0.0
 		Stats.current.machine_chance_of_spill = 0.0
-		machines.clear()
-		machines.push_front(tutorial_machine)
-		load_machines()
+		machines.append(tutorial_machine)
 		_set_security_cameras_active(false)
 	if Global.day == 1:
 		Global.bank_money = 0
 		Global.owned_items.clear()
-		machines = first_day_machines
 		Stats.reset()
-		load_machines()
 	if Global.day >= 1:
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
+		machines.assign(first_day_machines)
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
-		machines.push_front(first_machine)
-		load_machines()
+		machines.append(third_machine)
 	if Global.day >= 3:
 		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
-		machines.push_front(fourth_machine)
-		load_machines()
+		machines.append(fourth_machine)
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
