@@ -12,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://bxbcn6yks4tpc" path="res://items/teleporter.tres" id="4_yvsr8"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
-[ext_resource type="Texture2D" uid="uid://bid1q8toukju1" path="res://sprites/items/clock.png" id="7_ppx11"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
@@ -91,14 +90,6 @@ item_id = "overtime_form"
 name = "Overtime Form"
 description = "makes shifts longer"
 icon = ExtResource("71_m5f57")
-metadata/_custom_type_script = "uid://w8k3e1miec1a"
-
-[sub_resource type="Resource" id="Resource_5yh34"]
-script = ExtResource("4_ovcoh")
-name = "clock"
-description = "briefly pauses the shift timer"
-icon = ExtResource("7_ppx11")
-is_active_item = true
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
@@ -184,7 +175,6 @@ teleporter = ExtResource("4_yvsr8")
 scrubber = ExtResource("50_jbvwl")
 camera_posters = [null, null, null]
 minigame_controller = NodePath("MinigameController")
-clock_item = SubResource("Resource_5yh34")
 active_item_timer = NodePath("Active Item Nodes/Timer")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
@@ -363,12 +353,12 @@ item_hover_tooltip_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active
 item_hover_tooltip_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
-item_menu_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/MenuPrompt")
-current_item_ui = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
+item_menu_prompt = NodePath("ActiveItemInfo/HBoxContainer/MenuPrompt")
+current_item_ui = NodePath("ActiveItemInfo/HBoxContainer/CurrentItem")
 item_indicator = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator")
 item_text = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator/RichTextLabel")
-current_item_icon = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
-use_item_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
+current_item_icon = NodePath("ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
+use_item_prompt = NodePath("ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 hammer = ExtResource("150_0bk8h")
 scrubber = ExtResource("50_jbvwl")
@@ -666,6 +656,45 @@ offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
 
+[node name="ActiveItemInfo" type="PanelContainer" parent="UI" unique_id=1662791771]
+visible = false
+offset_left = 25.0
+offset_top = 228.0
+offset_right = 494.0
+offset_bottom = 300.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ActiveItemInfo" unique_id=701910864]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MenuPrompt" type="Button" parent="UI/ActiveItemInfo/HBoxContainer" unique_id=1266925751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "active items"
+icon = ExtResource("114_gfi32")
+
+[node name="CurrentItem" type="HBoxContainer" parent="UI/ActiveItemInfo/HBoxContainer" unique_id=549022221]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CurrentText" type="Label" parent="UI/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "current:"
+
+[node name="Icon" type="TextureRect" parent="UI/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
+layout_mode = 2
+
+[node name="UsePrompt" type="Button" parent="UI/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 24
+text = "use"
+icon = ExtResource("115_12204")
+
 [node name="HUD" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
 anchor_right = 1.0
@@ -820,42 +849,6 @@ theme = ExtResource("97_l0gw7")
 theme_override_font_sizes/font_size = 24
 text = "drop"
 icon = ExtResource("98_l0gw7")
-
-[node name="ItemInfo" type="PanelContainer" parent="UI/HUD/VBoxContainer" unique_id=1662791771]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, -750)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/ItemInfo" unique_id=701910864]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="MenuPrompt" type="Button" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer" unique_id=1266925751]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "active items"
-icon = ExtResource("114_gfi32")
-
-[node name="CurrentItem" type="HBoxContainer" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer" unique_id=549022221]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CurrentText" type="Label" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "current:"
-
-[node name="Icon" type="TextureRect" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
-layout_mode = 2
-
-[node name="UsePrompt" type="Button" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 24
-text = "use"
-icon = ExtResource("115_12204")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=312814953]
 layout_mode = 2

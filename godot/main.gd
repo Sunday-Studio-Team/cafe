@@ -33,7 +33,6 @@ static var seen_breakdown_popup := false
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
-@export var clock_item: Item
 @export var active_item_timer: Timer
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
@@ -130,6 +129,15 @@ func _ready() -> void:
 	if Global.day == 0:
 		tutorial_selection_menu.open_menu()
 
+
+func _process(delta: float) -> void:
+	for item in Global.owned_items:
+		if item.is_active_item:
+			if item.active_item_remaining_cooldown > 0.0:
+				item.active_item_remaining_cooldown -= delta
+				if item.active_item_remaining_cooldown <= 0.0:
+					item.can_be_used = true
+					item.active_item_remaining_cooldown = 0
 
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Global.customer_flow_rate
@@ -243,15 +251,24 @@ func spawn_customer() -> void:
 
 #Actives the effects of a given active item
 func active_item_used(item: Item):
-	# TODO: Fix how clock works
-	if item == clock_item and not game_timer.is_stopped():
-		game_timer.paused = true
-		Global.equipped_item = null
-		Global.deactivate_active_item(item)
-		clock_item_stop_sound.play()
-		await get_tree().create_timer(8, false).timeout
-		game_timer.paused = false
-		clock_item_start_sound.play()
+	if !item.can_be_used:
+		return
+	
+	if item.item_id == "air_freshener":
+		var customer_wait_duration_extension: float = 0.0
+		if item.item_level == 1:
+			customer_wait_duration_extension = 20.0
+		else:
+			customer_wait_duration_extension = 30.0
+		
+		for machine in machines:
+			if machine.customer:
+				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
+		
+		item.active_item_remaining_cooldown = item.active_item_cooldown_at_levels[item.item_level]
+		item.can_be_used = false
+		
+		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension)
 
 
 func _set_security_cameras_active(active: bool) -> void:

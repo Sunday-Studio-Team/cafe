@@ -13,10 +13,10 @@ const MOVE_SPEED := 2.0
 @export_dir var sprites_folder: String
 
 var desired_drink: Drink
-var window_wait_time: float = 30
 var orders_made: int = 0
 var bonus_points_for_time: int
 var at_window: bool = false
+var _total_wait_time: float
 var percent_time_left: float = 100
 
 
@@ -45,7 +45,7 @@ func _process(_delta: float) -> void:
 	# uncomment to show time above customer head
 	#waiting_indicator.visible = not timer.is_stopped()
 	if not timer.is_stopped():
-		percent_time_left = timer.time_left / timer.wait_time * 100
+		percent_time_left = timer.time_left / _total_wait_time * 100
 
 	if percent_time_left >= 66:
 		waiting_indicator.modulate = Color.GREEN
@@ -92,8 +92,15 @@ func move_to(loc: Vector3) -> void:
 	await t.finished
 
 
+func extend_wait_patience_time(duration: float) -> void:
+	_total_wait_time += duration
+	if timer.time_left > 0:
+		timer.start(timer.time_left + duration)
+
+
 func get_stats():
-	timer.wait_time = Stats.current.customer_wait_time_machine
+	_total_wait_time = Stats.current.customer_wait_time_machine
+	timer.wait_time = _total_wait_time
 
 
 func leave_store() -> void:

@@ -29,6 +29,7 @@ extends Resource
 @export var can_activate_anywhere: bool = true
 
 var item_level: int = 1
+var active_item_remaining_cooldown: float
 var can_be_used: bool = true #Set to false when the item is used
 
 
