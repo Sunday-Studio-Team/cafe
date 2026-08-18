@@ -155,18 +155,24 @@ func get_stats() -> void:
 
 func enable_disable_teleporters():
 	var has_teleporter: bool = false
+	var has_teleporter_level_2: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "teleporter":
 			has_teleporter = true
+			if item.item_level == 2:
+				has_teleporter_level_2 = true
 			break
 	if has_teleporter:
 		teleporter1.enable_teleporter()
 		teleporter2.enable_teleporter()
-		teleporter3.enable_teleporter()
+		if has_teleporter_level_2:
+			teleporter3.enable_teleporter()
+		else:
+			teleporter3.disable_teleporter()
 	else:
 		teleporter1.disable_teleporter()
 		teleporter2.disable_teleporter()
-		teleporter3.enable_teleporter()
+		teleporter3.disable_teleporter()
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
