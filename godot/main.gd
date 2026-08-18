@@ -8,12 +8,13 @@ static var seen_breakdown_popup := false
 @export var _world_environment: WorldEnvironment
 @export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
-
-# (machines numbered in order from the window here)
+# first machine on the left
+@export var first_day_machines: Array[Machine]
 @export var first_machine: Machine
 @export var second_machine: Machine
 @export var third_machine: Machine
 @export var fourth_machine: Machine
+@export var tutorial_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
@@ -51,7 +52,6 @@ var seen_tutorial_machine_instructions: bool = false
 
 var machines: Array[Machine]
 
-@onready var tutorial_machine: Machine = first_machine
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -81,7 +81,6 @@ func _ready() -> void:
 	Events.minigame_end.connect(_on_minigame_end)
 
 	set_per_day_stuff()
-	spawn_machines()
 	get_stats()
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
@@ -137,6 +136,7 @@ func _ready() -> void:
 		waypoint_ring.hide()
 
 
+
 func get_stats() -> void:
 	customer_spawn_timer.wait_time = Stats.current.customer_spawn_interval
 
@@ -167,7 +167,8 @@ func set_per_day_stuff() -> void:
 		Stats.current.customer_wait_time_machine = INF
 		Stats.current.chance_of_machine_breaking = 0.0
 		Stats.current.machine_chance_of_spill = 0.0
-		machines.append(tutorial_machine)
+		machines.clear()
+		machines.push_front(tutorial_machine)
 		_set_security_cameras_active(false)
 	if Global.day == 1:
 		Global.bank_money = 0
@@ -177,22 +178,18 @@ func set_per_day_stuff() -> void:
 		machines = first_day_machines
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
+		whiteboard_tutorial_arrow.visible = false
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
-		machines.append(first_machine)
-		machines.append(second_machine)
-	if Global.day >= 2:
-		Stats.current.daily_profit_goal = 20
-		machines.append(third_machine)
+		machines.push_front(first_machine)
 	if Global.day >= 3:
 		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
 	if Global.day >= 4:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
-		machines.append(fourth_machine)
+		machines.push_front(fourth_machine)
 	load_machines()
- 
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
@@ -220,11 +217,15 @@ func set_per_day_stuff() -> void:
 		Global.current_special_shift = Global.special_shifts[0]
 
 
-func spawn_machines():
-	for machine: Machine in [first_machine, second_machine, third_machine, fourth_machine]:
-		machine.hide()
-		machine.process_mode = Node.PROCESS_MODE_DISABLED
-
+func load_machines():
+	first_machine.hide()
+	first_machine.process_mode = Node.PROCESS_MODE_DISABLED
+	second_machine.hide()
+	second_machine.process_mode = Node.PROCESS_MODE_DISABLED
+	third_machine.hide()
+	third_machine.process_mode = Node.PROCESS_MODE_DISABLED
+	fourth_machine.hide()
+	fourth_machine.process_mode = Node.PROCESS_MODE_DISABLED
 	for machine in machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
@@ -379,7 +380,7 @@ func _interactive_tutorial_shift() -> void:
 	tutorial_machine.ingredients = 0
 	tutorial_machine.set_order_action_buttons_available("refill")
 
-	while tutorial_machine.ingredients == 0:
+	while tutorial_machine.ingredients < tutorial_machine.max_ingredients:
 		await get_tree().process_frame
 
 	tutorial_machine.set_order_action_buttons_available("all")
@@ -394,11 +395,10 @@ func _interactive_tutorial_shift() -> void:
 
 	while tutorial_machine.broken_down:
 		await get_tree().process_frame
-
+	
 	Global.day = 1
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-
-
+	
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
