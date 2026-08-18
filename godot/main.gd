@@ -200,17 +200,20 @@ func set_per_day_stuff() -> void:
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
-		machines.clear()
 	if Global.day >= 1:
 		_set_security_cameras_active(false)
+		machines.clear()
+		machines.push_front(first_machine)
+		machines.push_front(second_machine)
 		# whiteboard_tutorial_arrow.visible = false
 	if Global.day >= 2:
 		machines.append(third_machine)
 		_set_security_cameras_active(true)
-	if Global.day >= 4:
-		Global.holding_ingredients_rule = true
-	if Global.day == 5:
+	if Global.day >= 3:
 		machines.push_front(fourth_machine)
+		# Global.holding_ingredients_rule = true
+	if Global.day == 5:
+		pass
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
