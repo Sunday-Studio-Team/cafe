@@ -8,13 +8,11 @@ static var seen_breakdown_popup := false
 @export var _world_environment: WorldEnvironment
 @export var _cameras: Array[SecurityCam3D]
 @export var menu: Menu3D
-# first machine on the left
-@export var first_day_machines: Array[Machine]
+# (machines numbered in order from the window here)
 @export var first_machine: Machine
 @export var second_machine: Machine
 @export var third_machine: Machine
 @export var fourth_machine: Machine
-@export var tutorial_machine: Machine
 @export var customer_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
@@ -48,10 +46,11 @@ static var seen_breakdown_popup := false
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
-var seen_tutorial_machine_instructions: bool = false
 
+var seen_tutorial_machine_instructions: bool = false
 var machines: Array[Machine]
 
+@onready var tutorial_machine: Machine = first_machine
 
 func _enter_tree() -> void:
 	# for setting day on spawn (for debug)
@@ -82,6 +81,7 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	get_stats()
+	spawn_machines()
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
 
@@ -174,14 +174,16 @@ func set_per_day_stuff() -> void:
 		Global.bank_money = 0
 		Global.owned_items.clear()
 		Stats.reset()
+		machines.clear()
 	if Global.day >= 1:
-		machines = first_day_machines
+		machines.push_front(first_machine)
+		machines.push_front(second_machine)
 		Stats.current.daily_profit_goal = 10
 		_set_security_cameras_active(false)
 		whiteboard_tutorial_arrow.visible = false
 	if Global.day >= 2:
 		Stats.current.daily_profit_goal = 20
-		machines.push_front(first_machine)
+		machines.push_front(third_machine)
 	if Global.day >= 3:
 		Stats.current.daily_profit_goal = 20
 		_set_security_cameras_active(true)
@@ -189,7 +191,6 @@ func set_per_day_stuff() -> void:
 		Global.holding_ingredients_rule = true
 	if Global.day == 5:
 		machines.push_front(fourth_machine)
-	load_machines()
 
 	if Global.ai_improvement and !Global.ai_improvement_enabled:
 		# actually add the stats now
@@ -217,18 +218,15 @@ func set_per_day_stuff() -> void:
 		Global.current_special_shift = Global.special_shifts[0]
 
 
-func load_machines():
-	first_machine.hide()
-	first_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	second_machine.hide()
-	second_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	third_machine.hide()
-	third_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	fourth_machine.hide()
-	fourth_machine.process_mode = Node.PROCESS_MODE_DISABLED
-	for machine in machines:
+func spawn_machines():
+	for machine: Machine in [first_machine, second_machine, third_machine, fourth_machine]:
+		machine.hide()
+		machine.process_mode = Node.PROCESS_MODE_DISABLED
+
+	for machine: Machine in machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
+
 
 
 func spawn_customer():
