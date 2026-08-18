@@ -15,7 +15,8 @@ static var seen_breakdown_popup := false
 @export var timer: Timer
 @export var customer_order_indicator: Label
 @export var final_order_indicator: Label
-@export var _price_labels: Array[Label]
+@export var _price_label_remake: Label
+@export var _price_label_accept: Label
 @export var _rating_gain_on_remake_label: Label
 @export var make_drink_button: Button
 @export var _rating_loss_on_accept_label: Label
@@ -120,8 +121,8 @@ func _ready() -> void:
 	spill_interactable.interacted.connect(_on_clean_spill)
 
 	progress_indicator.hide()
-	for label in _price_labels:
-		label.hide()
+	_price_label_remake.hide()
+	_price_label_accept.hide()
 	customer_order_indicator.hide()
 	order_breakdown.hide()
 	final_order_indicator.hide()
@@ -334,8 +335,8 @@ func set_customer(c: Customer) -> void:
 		customer_order_indicator.hide()
 		final_order_indicator.hide()
 		order_breakdown.hide()
-		for label in _price_labels:
-			label.hide()
+		_price_label_remake.hide()
+		_price_label_accept.hide()
 		_rating_gain_on_remake_label.hide()
 		_rating_loss_on_accept_label.hide()
 		waiting_for_response = false
@@ -510,9 +511,12 @@ func display_drink_score() -> void:
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
 
-	for price_label in _price_labels:
-		price_label.text = Global.float_to_price(order.made_drink.price)
-		price_label.show()
+	print("about to display in price labels")
+	var price_labels_text: String = "+%s" % Global.float_to_price(order.made_drink.price)
+	_price_label_remake.text = price_labels_text
+	_price_label_accept.text = price_labels_text
+	_price_label_remake.show()
+	_price_label_accept.show()
 
 	if order.star_rating_gain_for_remake > 0.0:
 		_rating_gain_on_remake_label.modulate = Color.GREEN
@@ -657,15 +661,15 @@ func accept_order(did_remake_drink: bool) -> void:
 			Global.employee_rating -= order.star_rating_loss_if_accept
 			await get_tree().create_timer(0.8, false).timeout
 
-	for label in _price_labels:
-		label.show()
+	_price_label_remake.show()
+	_price_label_accept.show()
 	Global.score_update_message = "sold %s" % order.made_drink.name
 	Global.daily_cafe_money += order.made_drink.price
 
 	await get_tree().create_timer(0.8, false).timeout
 
-	for label in _price_labels:
-		label.hide()
+	_price_label_remake.hide()
+	_price_label_accept.hide()
 
 	_rating_gain_on_remake_label.hide()
 	order_breakdown.hide()
@@ -688,8 +692,8 @@ func reject_order() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
-	for label in _price_labels:
-		label.hide()
+	_price_label_remake.hide()
+	_price_label_accept.hide()
 	_rating_gain_on_remake_label.hide()
 	waiting_for_response = false
 
@@ -714,8 +718,8 @@ func finished_manual_remake_drink() -> void:
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
-	for label in _price_labels:
-		label.hide()
+	_price_label_remake.hide()
+	_price_label_accept.hide()
 	_rating_gain_on_remake_label.hide()
 
 	accept_order(true)	
