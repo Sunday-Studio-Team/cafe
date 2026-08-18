@@ -13,12 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://ck5hb0yuvfdsa" path="res://environment/wall_piece_short.tscn" id="10_f84oc"]
 [ext_resource type="PackedScene" uid="uid://cvx1me2mi6tpm" path="res://environment/corner_piece.tscn" id="11_f2c6s"]
 [ext_resource type="PackedScene" uid="uid://bib858l2cqot0" path="res://environment/doorway_piece.tscn" id="12_02vyw"]
-[ext_resource type="ArrayMesh" uid="uid://ddv04dnt0thrm" path="res://Assets/window/Sketchfab_Scene_Object_0.res" id="13_vn30m"]
+[ext_resource type="ArrayMesh" uid="uid://c3jhgpotph4u" path="res://Assets/window/Sketchfab_Scene_Object_0.res" id="13_vn30m"]
 [ext_resource type="Material" uid="uid://ckkmdu1uj8548" path="res://shaders/glass.tres" id="14_4nsdn"]
-[ext_resource type="ArrayMesh" uid="uid://doho2v1tgcsn2" path="res://Assets/window/Sketchfab_Scene_Object_2.res" id="15_wredj"]
-[ext_resource type="ArrayMesh" uid="uid://ds7viw3iv25iv" path="res://Assets/window/Sketchfab_Scene_Object_3.res" id="16_pv1ha"]
-[ext_resource type="ArrayMesh" uid="uid://cesecpns3gklg" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
-[ext_resource type="ArrayMesh" uid="uid://dh1rt52icf7il" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
+[ext_resource type="ArrayMesh" uid="uid://c6nqh2tdr8vbh" path="res://Assets/window/Sketchfab_Scene_Object_2.res" id="15_wredj"]
+[ext_resource type="ArrayMesh" uid="uid://jn4wo5ccjmt8" path="res://Assets/window/Sketchfab_Scene_Object_3.res" id="16_pv1ha"]
+[ext_resource type="ArrayMesh" uid="uid://dg7pb4va76uok" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
+[ext_resource type="ArrayMesh" uid="uid://f3vpqcxgpjle" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
 [ext_resource type="Texture2D" uid="uid://ciwanem2vjg81" path="res://environment/textures/pink tiles.jpg" id="19_tx4o1"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="20_ala11"]
 [ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="21_li8ef"]
@@ -28,8 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
 [ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="28_dlkxn"]
-[ext_resource type="ArrayMesh" uid="uid://dabquex4ygkx3" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
-[ext_resource type="ArrayMesh" uid="uid://dtu5t2lyd3t5r" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
+[ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
+[ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
 [ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="31_2t8u4"]
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
@@ -876,20 +876,21 @@ area_range = 5.895
 area_size = Vector2(2.0486052, 2.0054026)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=1633564141]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.341586, 2.629269, 9.306542)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.254367, 2.629269, 9.201126)
 light_color = Color(1, 0.9882353, 0.8392157, 1)
-light_energy = 13.12
-light_volumetric_fog_energy = 0.5
+light_energy = 16.0
+light_volumetric_fog_energy = 1.5
 shadow_enabled = true
-spot_range = 4.07
-spot_angle = 50.34
+spot_range = 9.274
+spot_angle = 36.97
 
 [node name="AreaLight3D6" type="AreaLight3D" parent="Lights" unique_id=239762360]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.341586, 2.5911565, 9.306542)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.341586, 2.5870347, 9.306542)
 light_color = Color(1, 0.9882353, 0.8392157, 1)
+light_energy = 5.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
-area_range = 4.419
+area_range = 5.657
 area_size = Vector2(2.0486052, 2.0054026)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=724350520]
@@ -986,7 +987,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="MediumLights" parent="CustomerArea" unique_id=988487720 instance=ExtResource("5_omxm3")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3.3665109, 2.0798194, -3.0821092)
 
-[node name="circlelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1054104950) index="0" unique_id=2022546909]
+[node name="circlelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1695556818) index="0" unique_id=587558728]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1967334830]
@@ -997,13 +998,13 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1054104950) index="1" unique_id=73167562]
+[node name="squarelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1695556818) index="1" unique_id=195788702]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="squarelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 78100719) index="0" unique_id=783702490]
+[node name="squarelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1266530751) index="0" unique_id=1809770722]
 visible = false
 
-[node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 78100719) index="1" unique_id=987737270]
+[node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1266530751) index="1" unique_id=987737270]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(1, 0.9666667, 0, 1)
 light_energy = 5.04
@@ -1011,7 +1012,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1054104950) index="2" unique_id=112172523]
+[node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1695556818) index="2" unique_id=1661838220]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1917070567]
@@ -1190,10 +1191,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="CustomerArea" unique_id=1259450021 instance=ExtResource("20_ala11")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 347051479) index="2" unique_id=445241375]
+[node name="Window_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 535169615) index="2" unique_id=1286912570]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 2073212042) index="2" unique_id=943486978]
+[node name="Window2_glass_0" parent="CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 1567843386) index="2" unique_id=1095193056]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chairs" type="Node3D" parent="CustomerArea" unique_id=1814443078]
@@ -1712,55 +1713,55 @@ mesh = ExtResource("69_grppk")
 [node name="PSX Storage Shelves Cardboard Boxes" parent="." unique_id=836022883 instance=ExtResource("71_a4lwu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1183012, 0, 10.88344)
 
-[node name="Cardboard_box_01_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 762645188) index="0" unique_id=471596067]
+[node name="Cardboard_box_01_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 812954935) index="0" unique_id=1577178039]
 transform = Transform3D(-0.64107496, -0.7674783, -2.7447166e-07, 0.7674783, -0.64107496, -5.8689415e-07, 2.7447166e-07, -5.8689415e-07, 1, 1.9024861, 3.8909721, 0.055455238)
 
-[node name="Cardboard_box_01_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 762645188) index="1" unique_id=1428772810]
+[node name="Cardboard_box_01_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 812954935) index="1" unique_id=1428772810]
 transform = Transform3D(-0.9539966, 0.2998175, 1.07223116e-07, -0.29981756, -0.95399654, -6.9880366e-07, -1.0722315e-07, -6.9880366e-07, 1, 0.19560862, 8.295387, 0.05545667)
 mesh = SubResource("ArrayMesh_omxm3")
 
-[node name="Cardboard_box_02_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 1283754521) index="0" unique_id=1212014903]
+[node name="Cardboard_box_02_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 800011126) index="0" unique_id=308971037]
 transform = Transform3D(0.039124183, 0.9992343, 3.5735405e-07, -0.9992343, 0.039124187, -3.4363597e-07, -3.5735405e-07, -3.4363606e-07, 1, 0.8013885, 5.534722, 0.042485207)
 
-[node name="Cardboard_box_02_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 1283754521) index="1" unique_id=1690710154]
+[node name="Cardboard_box_02_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 800011126) index="1" unique_id=1690710154]
 transform = Transform3D(0.9385944, 0.3450223, 1.2338955e-07, -0.3450223, 0.93859446, -2.1960375e-08, -1.2338957e-07, -2.196063e-08, 1, -3.6323795, 9.918352, 0.042486668)
 mesh = SubResource("ArrayMesh_kmdca")
 
-[node name="Cardboard_box_03_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 1729142158) index="0" unique_id=1173143617]
+[node name="Cardboard_box_03_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 143277177) index="0" unique_id=1262632421]
 transform = Transform3D(0.70129263, -0.7128735, -2.5494344e-07, 0.7128735, 0.70129263, -1.06826036e-07, 2.5494344e-07, -1.06826036e-07, 1, -0.7213445, 3.24362, 1.1622906e-06)
 
-[node name="Cardboard_box_03_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 1729142158) index="1" unique_id=141808257]
+[node name="Cardboard_box_03_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 143277177) index="1" unique_id=141808257]
 transform = Transform3D(0.28142878, -0.9595821, -3.4317333e-07, 0.9595821, 0.2814288, -2.5698102e-07, 3.4317327e-07, -2.5698105e-07, 1, -0.7697568, 3.1488047, 0.60323465)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 1729142158) index="2" unique_id=1458681459]
+[node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 143277177) index="2" unique_id=1458681459]
 transform = Transform3D(0.40185183, -0.91570467, -3.2748147e-07, 0.9157048, 0.40185183, -2.1391443e-07, 3.274816e-07, -2.1391442e-07, 1, 0.15594602, 6.742078, 2.2947788e-06)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 1729142158) index="3" unique_id=161891677]
+[node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 143277177) index="3" unique_id=161891677]
 transform = Transform3D(-0.078307875, -0.9969292, -3.5652968e-07, 0.9969292, -0.078307934, -3.8563286e-07, 3.565298e-07, -3.8563314e-07, 1, 0.14442396, 6.636239, 0.6032358)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_04_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 661414432) index="0" unique_id=1143910818]
+[node name="Cardboard_box_04_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 2014605818) index="0" unique_id=1268292181]
 transform = Transform3D(0.62599075, 0.7798305, 2.7888913e-07, -0.7798306, 0.62599075, -1.3375607e-07, -2.7888916e-07, -1.3375603e-07, 1, -1.208724, 4.6413646, 0.05188881)
 
-[node name="Cardboard_box_04_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 661414432) index="1" unique_id=1898910109]
+[node name="Cardboard_box_04_Storage_Shelves_1" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 2014605818) index="1" unique_id=1898910109]
 transform = Transform3D(0.9596605, -0.28116187, -1.0055139e-07, 0.28116187, 0.95966035, -1.44265755e-08, 1.0055138e-07, -1.4426462e-08, 1, -4.266979, 8.012367, 0.051889822)
 mesh = SubResource("ArrayMesh_f2c6s")
 
-[node name="Storage_Shelves_01_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 1149220989) index="0" unique_id=1854717748]
+[node name="Storage_Shelves_01_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 792496828) index="0" unique_id=692836057]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 6.285015, 3.199945, 0.047309875)
 
-[node name="Storage_Shelves_01_Storage_Shelves_0_002" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 1149220989) index="1" unique_id=920952728]
+[node name="Storage_Shelves_01_Storage_Shelves_0_002" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 792496828) index="1" unique_id=1914674430]
 transform = Transform3D(0.014316622, -0.99989754, -3.5759126e-07, 0.99989754, 0.014316622, -3.5250787e-07, 3.5759126e-07, -3.5250804e-07, 1, 3.040893, 3.2777905, 0.04502797)
 
-[node name="Storage_Shelves_04_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 750302398) index="0" unique_id=583156398]
+[node name="Storage_Shelves_04_Storage_Shelves_0" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 1681188618) index="0" unique_id=261047095]
 transform = Transform3D(-0.29616085, -0.9551381, -3.41584e-07, 0.9551381, -0.29616085, -4.6354324e-07, 3.41584e-07, -4.635433e-07, 1, -7.191148, 6.9717093, 0.0063648224)
 
-[node name="Storage_Shelves_04_Storage_Shelves_0_001" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 750302398) index="1" unique_id=1692615781]
+[node name="Storage_Shelves_04_Storage_Shelves_0_001" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 1681188618) index="1" unique_id=1262766467]
 transform = Transform3D(-0.99926764, -0.038264617, -1.3684494e-08, 0.038264617, -0.99926764, -7.1499386e-07, 1.3684494e-08, -7.149939e-07, 1, -2.2321305, 1.6594906, 0.05219078)
 
-[node name="Storage_Shelves_04_Storage_Shelves_0_002" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 750302398) index="2" unique_id=1375355156]
+[node name="Storage_Shelves_04_Storage_Shelves_0_002" type="MeshInstance3D" parent="PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 1681188618) index="2" unique_id=1375355156]
 transform = Transform3D(-4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, 2.842171e-14, 0, 1, -3.9124968, 6.1658907, 0.05219245)
 mesh = SubResource("ArrayMesh_vn30m")
 
