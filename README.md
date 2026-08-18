@@ -1,3 +1,3 @@
 # feature tags
-`tutorial` makes you always load into the tutorial for testing
-`skip_popups` skips popups
+- `tutorial` makes you always load into the tutorial for testing
+- `skip_popups` skips popups
