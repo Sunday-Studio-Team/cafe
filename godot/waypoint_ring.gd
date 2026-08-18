@@ -7,4 +7,4 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
-		queue_free()
+		hide()
