@@ -36,23 +36,5 @@ func create() -> void:
 	price += upcharge
 	price += 0.5 # profit
 
-
-func get_score_from(drank: Drink) -> int:
-	var myf = 0
-	if drank.main_ingredient != main_ingredient:
-		myf -= 1
-	else:
-		myf += 1
-	if drank.liquid != liquid:
-		myf -= 1
-	else:
-		myf += 1
-	if drank.extra != extra:
-		myf -= 1
-	else:
-		myf += 1
-	return myf
-
-
 func is_unlocked() -> bool:
 	return Global.day >= day_unlocked

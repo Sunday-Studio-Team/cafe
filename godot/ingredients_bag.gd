@@ -1,4 +1,7 @@
+class_name IngredientsBag
 extends RigidBody3D
+
+signal ingredients_bag_taken(ingredients_bag: IngredientsBag)
 
 @export var interactable: Interactable
 
@@ -21,9 +24,10 @@ func _on_interacted() -> void:
 	if Global.holding_ingredients or already_interacted:
 		return
 
+	ingredients_bag_taken.emit(self)
+	
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
 	await Events.bag_pickup_animation_grabbed
 	Global.holding_ingredients = true
-
 	queue_free()

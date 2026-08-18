@@ -4,7 +4,7 @@
 # lemme know)
 extends Node
 
-var _item_names: Array[String] = []
+var _item_ids: Array[String] = []
 var _shift_names: Array[String] = []
 # tracks whether we have the 'unlimited actives' command toggled on
 # (so we can toggle on/off with the same command)
@@ -24,7 +24,7 @@ func _ready() -> void:
 
 	var items_guide_str: String = "Available items: "
 	for item in Global.items:
-		items_guide_str += "\"%s\", " % item.name
+		items_guide_str += "\"%s\", " % item.item_id
 	
 	var shift_guide_str: String = "Available shifts: "
 	for each_shift in Global.special_shifts:
@@ -40,12 +40,12 @@ func _ready() -> void:
 - [i]endshift L[/i] forces a loss
 - [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
-- [i]rating <number>[/i] sets your employee rating (1 point here = half a star)
+- [i]rating <number>[/i] sets your employee rating
 - [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
-- [i]item \"<item_name>\"[/i] gives you a specified item (TAB to auto-complete)
+- [i]item \"<item_id>\" <item_level>[/i] gives you a specified item at the specified level (TAB to auto-complete)
 %s
 - [i]shift \"<shift name>\"[/i] change to the spcial shift (TAB to auto-complete, can't be used after the shift has started)
 %s
@@ -74,10 +74,10 @@ func _ready() -> void:
 	Console.add_command("timer", toggle_timer)
 	Console.add_command("fullshelf", fill_items)
 	Console.add_command("bag", give_bag)
-	Console.add_command("item", give_item, ["item_name"])
+	Console.add_command("item", give_item, ["item_id", "item_level"], 2)
 	for item in Global.items:
-		_item_names.append("\"%s\"" % item.name)
-	Console.add_command_autocomplete_list("item", _item_names)
+		_item_ids.append("\"%s\"" % item.item_id)
+	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
 	Console.add_command("ua", toggle_unlimited_actives)
 	Console.add_command("shift", special_shift, ["shift_name"])
@@ -99,18 +99,18 @@ func give_bag() -> void:
 
 func fill_items() -> void:
 	for i in Global.item_slots_amount:
-		give_item(Global.items[i].name)
+		give_item(Global.items[i].item_id, "1")
 
 
 func set_profit(profit: String) -> void:
-	Global.daily_profit = float(profit)
+	Global.daily_cafe_money = float(profit)
 	Console.print_line("setting profit to %s" % profit)
 
 
 func set_rating(rating: String) -> void:
-	Global.employee_rating = int(rating)
-	Console.print_line("setting rating to %s (%s stars)" % [int(rating), (int(rating) / 2.0)])
-	if int(rating) > 10:
+	Global.employee_rating = rating as float
+	Console.print_line("setting rating to %s" % rating)
+	if int(rating) > 5.0:
 		Console.print_line("(will be clamped to limit of 5 stars")
 
 
@@ -118,11 +118,11 @@ func end_shift(arg: String = "") -> void:
 	var detail := ""
 
 	if arg.to_lower() == "w":
-		Global.daily_profit = 100
+		Global.daily_cafe_money = 100
 		Global.employee_rating = 100
 		detail = "(forcing win)"
 	elif arg.to_lower() == "l":
-		Global.daily_profit = 0
+		Global.daily_cafe_money = 0
 		Global.employee_rating = 0
 		detail = "(forcing loss)"
 
@@ -153,19 +153,20 @@ func start_shift() -> void:
 	Console.print_line("starting shift")
 
 
-func give_item(item_name: String) -> void:
+func give_item(item_id: String, item_level: String) -> void:
 	for item in Global.items:
-		if item_name == item.name:
+		if item_id == item.item_id:
+			item.item_level = (item_level as int)
 			Global.owned_items.append(item)
 			item.apply_stats()
 			Events.items_updated.emit()
-			Console.print_line("gave %s" % item.name)
+			Console.print_line("gave %s" % item.item_id)
 			return
-	Console.print_error("Item name not found.")
+	Console.print_error("Item ID not found.")
 
 
 func bank() -> void:
-	Global.bank_money = 100
+	Global.player_tips_bank = 100
 	Console.print_line("added $100 to bank balance")
 
 

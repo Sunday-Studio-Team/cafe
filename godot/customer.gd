@@ -13,10 +13,10 @@ const MOVE_SPEED := 2.0
 @export_dir var sprites_folder: String
 
 var desired_drink: Drink
-var window_wait_time: float = 30
 var orders_made: int = 0
 var bonus_points_for_time: int
 var at_window: bool = false
+var _total_wait_time: float
 var percent_time_left: float = 100
 
 
@@ -94,8 +94,15 @@ func move_to(loc: Vector3) -> void:
 	await t.finished
 
 
+func extend_wait_patience_time(duration: float) -> void:
+	_total_wait_time += duration
+	if timer.time_left > 0:
+		timer.start(timer.time_left + duration)
+
+
 func get_stats():
-	timer.wait_time = Stats.current.customer_wait_time_machine
+	_total_wait_time = Stats.current.customer_wait_time_machine
+	timer.wait_time = _total_wait_time
 
 
 func leave_store() -> void:
@@ -126,15 +133,6 @@ func _on_order_approved(customer: Customer) -> void:
 		return
 
 	timer.stop()
-
-	await get_tree().create_timer(1, false).timeout
-
-	# disabling time bonuses for now
-	#if bonus_points_for_time > 0:
-	#Global.score_update_message = "bonus for time"
-	#else:
-	#Global.score_update_message = "penalty for time"
-	#Global.employee_rating += bonus_points_for_time
 
 
 func _on_customer_left_machine(customer: Customer, _drink_score) -> void:

@@ -1,16 +1,19 @@
-extends Node3D
 class_name SecurityCam3D
+extends Node3D
 
 @export var ray: RayCast3D
 @export var spotlight: SpotLight3D
+@export var camera_aimer_node: Node3D
+@export var aim_path_follow_3d: PathFollow3D
+@export var aim_follow_rate: float = 0.5
 @export var rotation_amount: float = 90
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
 @export var interactable : Interactable
 # safe reference for when we use this item on a camera
-@export var whipped_cream_item: Item
 @export var tries_until_disabled: int = 3
+@export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 
 # we duplicate the raycast many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -18,6 +21,8 @@ var all_rays: Array[RayCast3D]
 var rotate_tween: Tween
 var disable_minigames := ["Lines"]
 var _camera_disarmed := false
+var _player_slow_status_effect: Player.CameraSlowPlayerStatusEffect
+var _direction_multiplier: float = 1.0
 
 @onready var original_rotation := rotation_degrees
 
@@ -25,17 +30,26 @@ var _camera_disarmed := false
 func _ready() -> void:
 	create_rays()
 
-	rotate_tween = create_tween().set_loops()
-	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
-	rotate_tween.tween_interval(rotation_pause_length)
-	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
-	rotate_tween.tween_interval(rotation_pause_length)
+	# rotate_tween = create_tween().set_loops()
+	# rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
+	# rotate_tween.tween_interval(rotation_pause_length)
+	# rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
+	# rotate_tween.tween_interval(rotation_pause_length)
 
 	interactable.interacted.connect(open_camera_minigame)
 	interactable.used_active_item.connect(_on_used_active_item)
 
 	visibility_changed.connect(_on_visibility_changed)
 	_update_camera_components_active()
+	
+	# Randomize progress along path
+	aim_path_follow_3d.progress_ratio = randf_range(0.0, 1.0)
+	# Randomize direction multiplier
+	var direction_roll: float = randf_range(0.0, 1.0)
+	if direction_roll >= 0.5:
+		_direction_multiplier = 1.0
+	else:
+		_direction_multiplier = -1.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -51,21 +65,26 @@ func _physics_process(_delta: float) -> void:
 	for r in all_rays:
 		var collider = r.get_collider()
 		if collider == Global.player:
+			var apply_slow: bool = false
 			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
 				timer.start()
-				Global.score_update_message = "caught running"
-				Global.employee_rating -= Stats.current.penalty_for_running
+				Events.alert_posted.emit("caught running")
+				apply_slow = true
 			elif Global.making_drink_manually:
 				timer.start()
-				Global.score_update_message = "caught making drink by hand"
-				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
-			elif (
-				Global.holding_ingredients and Global.holding_ingredients_rule
-			):
-				Global.score_update_message = "caught stealing ingredients"
-				Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
+				Events.alert_posted.emit("caught making drink by hand")
+				apply_slow = true
+			elif Global.holding_ingredients and Global.holding_ingredients_rule:
 				timer.start()
-
+				Events.alert_posted.emit("caught stealing ingredients")
+				apply_slow = true
+			
+			if apply_slow:
+				if _player_slow_status_effect != null:
+					Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
+				_player_slow_status_effect = Player.CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
+				Global.player.player_status_effects.apply_status_effect(_player_slow_status_effect)
+				caught_audio_stream_player_3d.play()
 			player_in_spotlight = true
 			break
 
@@ -76,7 +95,9 @@ func _physics_process(_delta: float) -> void:
 		spotlight.light_color = Color.WHITE
 
 	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
-
+	
+	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
+	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
 
 func _on_visibility_changed() -> void:
 	_update_camera_components_active()
@@ -96,14 +117,14 @@ func _update_camera_components_active() -> void:
 	if visible and not _camera_disarmed:
 		interactable.visible = true
 		spotlight.visible = true
-		rotate_tween.play()
+		# rotate_tween.play()
 		ray.enabled = true
 		for stored_ray in all_rays:
 			stored_ray.enabled = true
 	else:
 		interactable.visible = false
 		spotlight.visible = false
-		rotate_tween.stop()
+		# rotate_tween.stop()
 		ray.enabled = false
 		for stored_ray in all_rays:
 			stored_ray.enabled = false
@@ -162,8 +183,13 @@ func _cancel_break_minigame() -> void:
 
 
 func _on_used_active_item(item: Item):
-	if item != null and item == whipped_cream_item:
-		Global.deactivate_active_item(whipped_cream_item)
+	if item != null and item.item_id == "whipped_cream":
+		Global.put_active_item_on_cooldown(item)
 		disarm_camera()
-		await get_tree().create_timer(8, false).timeout
+		var disarm_duration: float = 1.0
+		if item.item_level == 1:
+			disarm_duration = 10
+		elif item.item_level == 2:
+			disarm_duration = 20
+		await get_tree().create_timer(disarm_duration, false).timeout
 		rearm_camera()

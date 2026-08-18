@@ -1,7 +1,7 @@
 extends Node2D
 
 const MOVE_SPEED := 6.7
-const BEANS_TO_SPAWN := 5
+const NUM_BEANS_TO_SPAWN := 5
 const LEFT_RIGHT_FORCE := 250
 
 @export var cup: CharacterBody2D
@@ -29,10 +29,10 @@ const LEFT_RIGHT_FORCE := 250
 @export var face_sprite:Sprite2D
 @export var visual_effect:Sprite2D
 
-var beans_in_cup := 0
-var beans_spawned := 0
-var bomb_bean_spawned = false #guarantees that the refill minigame can only spawn 1 bomb bean.
-var screw_bean_spawned = false #guarantees that the refill minigame can only spawn 1 screw bean.
+var beans_in_cup: int = 0
+var beans_spawned: int = 0
+var bomb_bean_spawned: bool = false #guarantees that the refill minigame can only spawn 1 bomb bean.
+var screw_bean_spawned: bool = false #guarantees that the refill minigame can only spawn 1 screw bean.
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 var bomb_sound_player: AudioStreamPlayer #requires some setup in ready()
@@ -62,7 +62,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	var left_right_input = Input.get_vector("move_left", "move_right", "move_forward", "move_back").x
+	var left_right_input: float = Input.get_vector("move_left", "move_right", "move_forward", "move_back").x
 	cup.position.x += left_right_input * MOVE_SPEED
 	cup.position.x = clamp(cup.position.x, 600, 1300)
 	cup.rotation_degrees = lerp(
@@ -71,14 +71,13 @@ func _physics_process(delta: float) -> void:
 		delta * 5,
 	)
 
-	meter.value = float(beans_in_cup) / float(BEANS_TO_SPAWN)
-
+	meter.value = (beans_in_cup as float) / (NUM_BEANS_TO_SPAWN as float)
 
 func spawn_bean() -> void:
 	# let's... create a random int from 1-100
 	var random_int: int = randi_range(1,100)
 
-	if beans_spawned < BEANS_TO_SPAWN: #BEANS_TO_SPAWN decrements from ~5 to 0
+	if beans_spawned < NUM_BEANS_TO_SPAWN: #BEANS_TO_SPAWN decrements from ~5 to 0
 		var bean: RigidBody2D
 		if random_int<12 and bomb_bean_spawned == false:
 			bean = bomb_bean_scene.instantiate()
@@ -104,10 +103,12 @@ func spawn_bean() -> void:
 		# all beans have spawned; start a timer to end the minigame (signal)
 		bean_spawn_timer.stop()
 
-		Global.refill_minigame_accuracy = meter.value
 		bag_shake_tween.kill()
 		bag_shake_sound.stop()
 		await get_tree().create_timer(1.5, false).timeout
+				
+		Global.refill_minigame_accuracy = meter.value
+		
 		Events.emit_signal("minigame_end")
 
 
@@ -128,13 +129,14 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			return
 		elif "gold" in bean_type:
 			gold(bean) #calls Events.emit_signal("minigame_end")
+			return
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
 			face_sprite.texture = normal_face_sprite
 			visual_effect.texture = normal_visual_effect
-		beans_in_cup += 1
-		gain_score_sound.play()
-		gain_score_sound.pitch_scale += 0.05
-		collected_beans.append(bean) #append the bean to collected_beans array
+			beans_in_cup += 1
+			gain_score_sound.play()
+			gain_score_sound.pitch_scale += 0.05
+			collected_beans.append(bean) #append the bean to collected_beans array
 
 
 func spill_bean(bean: PhysicsBody2D) -> void:
@@ -191,7 +193,7 @@ func screw():
 	
 	var _closest_machine = get_closest_machine_or_null()
 
-	await get_tree().create_timer((BEANS_TO_SPAWN-2)*bean_spawn_timer.wait_time + bean_spawn_timer.time_left, false).timeout #can we calculate when the minigame will end?
+	await get_tree().create_timer((NUM_BEANS_TO_SPAWN-2)*bean_spawn_timer.wait_time + bean_spawn_timer.time_left, false).timeout #can we calculate when the minigame will end?
 	
 	#machine, when calling break_down() has a somewhat variable delay.
 	if _closest_machine.broken_down == false: #don't break a machine that is already broken
@@ -202,14 +204,15 @@ func gold(bean: PhysicsBody2D):
 	face_sprite.texture = golden_face_sprite
 	visual_effect.texture = golden_visual_effect
 
-	beans_in_cup = 5
+	beans_in_cup = NUM_BEANS_TO_SPAWN
+
 	#create a for loop; until 
 	while len(collected_beans)<5:
 		collected_beans.append(bean)	
 
 	await get_tree().create_timer(0.5, false).timeout #has to be less than bean timer!
-	Global.score_update_message = "earned" 
-	Global.daily_profit += 1
+
+	Global.refill_minigame_accuracy = meter.value
 
 	Events.emit_signal("minigame_end")
 

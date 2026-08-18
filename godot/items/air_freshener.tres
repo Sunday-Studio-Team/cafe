@@ -5,11 +5,24 @@
 
 [resource]
 script = ExtResource("1_gooww")
-name = "air freshener"
-description = "makes customers more patient"
+item_id = "air_freshener"
+name = "Air Freshener"
+description_at_levels = Dictionary[int, String]({
+1: "Current customers wait 20s longer.",
+2: "Current customers wait 30s longer."
+})
 icon = ExtResource("1_vofp5")
-stat_bonuses = Dictionary[String, float]({
-"customer_wait_time_machine": 6.0,
-"customer_wait_time_window": 5.0
+price_at_levels = Dictionary[int, float]({
+1: 5.0,
+2: 3.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 6.0
+})
+is_active_item = true
+active_item_cooldown_at_levels = Dictionary[int, float]({
+1: 30.0,
+2: 20.0
 })
 metadata/_custom_type_script = "uid://w8k3e1miec1a"

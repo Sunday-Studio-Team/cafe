@@ -21,11 +21,12 @@ signal time_up
 signal end_screen_finished
 signal requirements_met
 signal money_updated(new_value: float, old_value: float)
-signal customer_score_updated(new_value: int, old_value: int)
+signal employee_rating_updated(new_value: float, old_value: float)
 signal alert_posted(message: String)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)
+signal ingredients_bag_consumed
 signal machine_exit_button_pressed
 # minigames
 signal minigame_active(minigame_name: String)

@@ -27,27 +27,34 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
-@export var shelf_item_active_indicator: PanelContainer
+@export var shelf_item_active_indicator: Control
+@export var shelf_item_cooldown_label: RichTextLabel
+@export var shelf_item_passive_indicator: Control
 @export var shelf_item_sell: Button
 @export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
-@export var rating_goal_label: Label
+@export var rating_label: Label
+@export var customer_flow_rate_label: Label
 @export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
 @export var sold_item_sound: AudioStreamPlayer
 @export var exit_machine_button: Button
 @export var item_hover_tooltip: Control
 @export var item_hover_tooltip_name: RichTextLabel
-@export var item_hover_tooltip_active_indicator: PanelContainer
+@export var item_hover_tooltip_active_indicator: Control
+@export var item_hover_tooltip_cooldown_label: RichTextLabel
+@export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_description: RichTextLabel
 @export var stamina_bar: ProgressBar
 @export var item_menu_prompt: Control
 #Active Item
+@export var item_ui: Control
 @export var current_item_ui: Control
 @export var item_indicator: PanelContainer
 @export var item_text: RichTextLabel
 @export var current_item_icon: TextureRect
+@export var item_cooldown_bar: TextureProgressBar
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
 @export_category("item refs")
@@ -65,12 +72,14 @@ var _employee_rating_last_update: float = -1
 
 
 func _ready() -> void:
+	_update_rating()
+	
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.MONEY, new_value, old_value)
 	)
-	Events.customer_score_updated.connect(
-		func(new_value: int, old_value: int):
+	Events.employee_rating_updated.connect(
+		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.CUSTOMER, new_value, old_value)
 	)
 	Events.shift_started.connect(
@@ -142,15 +151,11 @@ new rule: don't take any more ingredients out of the store room."
 				"your boss has installed another machine."
 		)
 	@warning_ignore("integer_division")
-
-	if Global.day != 0:
-		@warning_ignore("integer_division")
-		objective.text += (
-				"\n\n[b]SHIFT OBJECTIVE[/b]
-	make %s while keeping your employee rating (🙂) above %s⭐️"
-				% [Global.float_to_price(Stats.current.daily_profit_goal), (Stats.current.employee_rating_goal / 2)]
-		)
-
+	objective.text += (
+			"\n\n[b]SHIFT OBJECTIVE[/b]" + \
+			"\nmake %s!"
+			% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
+	)
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 
@@ -179,8 +184,8 @@ new rule: don't take any more ingredients out of the store room."
 
 	_update_rating()
 
-	hide_item_menu_prompt_if_no_actives()
-	Events.items_updated.connect(hide_item_menu_prompt_if_no_actives)
+	hide_item_ui_if_no_actives()
+	Events.items_updated.connect(hide_item_ui_if_no_actives)
 
 	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
@@ -232,7 +237,7 @@ func _process(_delta: float) -> void:
 	handle_stamina_bar()
 
 
-func hide_item_menu_prompt_if_no_actives() -> void:
+func hide_item_ui_if_no_actives() -> void:
 	var no_active_items_owned := true
 
 	for item in Global.owned_items:
@@ -241,9 +246,9 @@ func hide_item_menu_prompt_if_no_actives() -> void:
 			break
 
 	if no_active_items_owned:
-		item_menu_prompt.hide()
+		item_ui.hide()
 	else:
-		item_menu_prompt.show()
+		item_ui.show()
 
 
 func handle_stamina_bar() -> void:
@@ -266,9 +271,13 @@ func handle_item_hover_tooltip() -> void:
 	var hovered_icon := Global.hovered_item_icon
 
 	if hovered_icon != null:
-		item_hover_tooltip_name.text = "[b] %s" % hovered_icon.item.name
-		item_hover_tooltip_description.text = hovered_icon.item.description
-		item_hover_tooltip_active_indicator.visible = hovered_icon.item.is_active_item
+		var item: Item = hovered_icon.item
+		item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
+		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
+		item_hover_tooltip_active_indicator.visible = item.is_active_item
+		if item.is_active_item:
+			item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
+		item_hover_tooltip_passive_indicator.visible = !item.is_active_item
 
 	item_hover_tooltip.visible = (
 			hovered_icon != null
@@ -281,15 +290,19 @@ func handle_exit_machine_button_visibility() -> void:
 
 
 func handle_item_ui() -> void:
-	var current_item: Item = Global.equipped_item
+	var item: Item = Global.equipped_item
 
-	if current_item != null:
+	if item != null:
 		current_item_ui.show()
-		current_item_icon.texture = current_item.icon
+		current_item_icon.texture = item.icon
 		use_item_prompt.visible = (
-				current_item.can_activate_anywhere
-				and current_item.can_be_used
+				item.can_activate_anywhere
+				and item.can_be_used
 		)
+		item_cooldown_bar.visible = not item.can_be_used
+		item_cooldown_bar.value = (
+			100 - item.active_item_remaining_cooldown / item.active_item_cooldown_at_levels[item.item_level] * 100
+			)
 	else:
 		current_item_ui.hide()
 
@@ -324,23 +337,27 @@ func handle_shelf_item_ui() -> void:
 		return
 
 	if shelf_item.item.is_active_item:
-		shelf_item_active_indicator.show()
+		shelf_item_active_indicator.visible = true
+		shelf_item_cooldown_label.text = "(%ss cooldown)" % shelf_item.item.active_item_cooldown_at_levels[shelf_item.item.item_level]
+		shelf_item_passive_indicator.visible = false
 	else:
-		shelf_item_active_indicator.hide()
+		shelf_item_active_indicator.visible = false
+		shelf_item_passive_indicator.visible = true
 
-	shelf_item_name.text = "[b]%s" % shelf_item.item.name
-	shelf_item_description.text = shelf_item.item.description
+	shelf_item_name.text = "[b]%s Lv%s" % [shelf_item.item.name, shelf_item.item.item_level]
+	shelf_item_description.text = shelf_item.item.description_at_levels[shelf_item.item.item_level]
 
-	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(shelf_item.item.price / 2.0)
+	var sell_value: float = shelf_item.item.sell_value_at_levels[shelf_item.item.item_level]
+	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(sell_value)
 
 	if Input.is_action_just_pressed("interact") and not shelf_item.clicked_sell:
 		shelf_item.clicked_sell = true
-		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(shelf_item.item.price / 2)
+		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(sell_value)
 		shelf_item_sold_indicator.show()
 		sold_item_sound.play()
 		await get_tree().create_timer(0.75, false).timeout
 		shelf_item_sold_indicator.hide()
-		Global.bank_money += shelf_item.item.price / 2
+		Global.player_tips_bank += sell_value
 		Global.owned_items.erase(shelf_item.item)
 		shelf_item.item.unapply_stats()
 		Events.items_updated.emit()
@@ -370,11 +387,11 @@ func handle_time_left_warning() -> void:
 
 func update_score_indicators() -> void:
 	profit_label.text = (
-			Global.float_to_price(Global.daily_profit)
-			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goal)
+			Global.float_to_price(Global.daily_cafe_money)
+			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
 	)
-	if Global.daily_profit:
-		profit_progress.value = Global.daily_profit / Stats.current.daily_profit_goal * 100
+	if Global.daily_cafe_money:
+		profit_progress.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
 
 	if not Global.employee_rating == _employee_rating_last_update:
 		_update_rating()
@@ -471,26 +488,9 @@ func _update_rating() -> void:
 
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
-
-	var rating_is_even := current_rating % 2 == 0
-	var rating_shown := 0
-
-	if rating_is_even:
-		for i in current_rating / 2.0:
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-	else:
-		for i in (current_rating - 1) / 2.0:
-			rating_stars_hbox.add_child(star_texture_rect.duplicate())
-			rating_shown += 1
-		rating_stars_hbox.add_child(half_star_texture_rect.duplicate())
-		rating_shown += 1
-
-	for i in 5 - rating_shown:
-		rating_stars_hbox.add_child(empty_star_texture_rect.duplicate())
-
-	rating_goal_label.text = "(goal: %s⭐️)" % (int(Stats.current.employee_rating_goal / 2.0))
-
+	
+	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
+	customer_flow_rate_label.text = "%s" % Global.customer_flow_rate
 
 func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():
@@ -517,8 +517,9 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 	var score_label_to_tween: Label
 	score_update_label.text = ""
 
-	var change := new_value - old_value
-	if change > 0:
+	var change: float = new_value - old_value
+	print("change: %s" % change)
+	if change > 0.0:
 		match score_type:
 			ScoreType.MONEY:
 				color = Color.GOLD
@@ -549,7 +550,6 @@ func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float
 			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
 			score_label_to_tween = profit_label
 		ScoreType.CUSTOMER:
-			change /= 2
 			change_num_to_show += "%.1f" % change
 			change_num_to_show = change_num_to_show.rstrip(".0")
 

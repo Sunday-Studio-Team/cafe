@@ -5,8 +5,20 @@
 
 [resource]
 script = ExtResource("2_2f08s")
-name = "barista guide"
-description = "see ingredients when remaking drinks"
+item_id = "barista_guide"
+name = "Barista Guide"
+description_at_levels = Dictionary[int, String]({
+1: "Time slows to 0.5x while remaking drinks.",
+2: "Time slows to 0.25x while remaking drinks."
+})
 icon = ExtResource("1_c8eu7")
-price = 3.0
+price_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 3.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 3.0,
+2: 6.0
+})
+can_activate_anywhere = false
 metadata/_custom_type_script = "uid://w8k3e1miec1a"

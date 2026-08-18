@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dgx2rjk26naaf"]
 
 [ext_resource type="Script" uid="uid://dmym6qynnh1ua" path="res://ui/active_item_menu/active_item_selection.gd" id="1_vwkfn"]
+[ext_resource type="PackedScene" uid="uid://cawbqfnyfyw52" path="res://ui/active_item_menu/active_item_wheel_cooldown_bar.tscn" id="2_6dtbh"]
 
 [node name="ActiveItemSelection" type="Control" unique_id=1659622550]
 layout_mode = 3
@@ -12,3 +13,4 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vwkfn")
+cooldown_bar_scene = ExtResource("2_6dtbh")

@@ -30,7 +30,6 @@ func add_customer(customer: Customer) -> void:
 	Events.alert_posted.emit("🛎️ customer complained")
 	Global.score_update_message = "customer complained"
 
-	Global.employee_rating -= Stats.current.penalty_for_customer_complaint
 	customers_waiting.append(customer)
 	customer.timer.timeout.connect(
 		func():
@@ -58,10 +57,9 @@ func remove_front_customer(customer_happy: bool) -> void:
 
 	if customer_happy:
 		Global.score_update_message = "customer placated"
-		Global.employee_rating += 1
+		Global.employee_rating += Stats.current.placated_customer_rating_gain_each_day[Global.day]
 	else:
 		Global.score_update_message = "customer left"
-		Global.employee_rating -= 3
 		Events.customer_timed_out_window.emit()
 
 

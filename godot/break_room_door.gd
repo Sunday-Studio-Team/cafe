@@ -1,8 +1,7 @@
-# sorry for gutting this script + deleting the animation player i was changing
-# something while i was a bit sick and just wanted to get it to work lul
-# 	- jack
 extends Node3D
 
+@export var door_physics_body: PhysicsBody3D
+@export var door_open_angle: float = 105.0
 @export var open_sound: AudioStreamPlayer3D
 @export var close_sound: AudioStreamPlayer3D
 @export var exited_break_room_detection_area: PlayerDetectionArea
@@ -10,8 +9,9 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	create_tween().tween_property(door_physics_body, "rotation_degrees:y", door_open_angle, 0.5)
+	open_sound.play()
 	Events.shift_started.connect(_on_shift_started)
-
 
 func _on_shift_started():
 	exited_break_room_detection_area.player_entered_area.connect(
@@ -22,5 +22,5 @@ func _on_shift_started():
 
 
 func _on_player_entered_detection_area() -> void:
-	create_tween().tween_property(self, "rotation_degrees:y", 0, 0.5)
+	create_tween().tween_property(door_physics_body, "rotation_degrees:y", 0, 0.5)
 	close_sound.play()

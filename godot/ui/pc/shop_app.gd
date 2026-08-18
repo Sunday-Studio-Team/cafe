@@ -21,9 +21,22 @@ var items_in_shop: Array[Item]
 static func get_random_unowned_items(requested_num_items: int) -> Array[Item]:
 	var remaining_unowned_items: Array[Item] = []
 	for item in Global.items:
-		if Global.owned_items.has(item):
+		var already_owns_item: bool = false
+		for owned_item in Global.owned_items:
+			if owned_item.item_id == item.item_id:
+				already_owns_item = true
+				break
+		if already_owns_item:
 			continue
 		remaining_unowned_items.append(item)
+
+	# Also get leveled up versions of existing items!
+	for owned_item in Global.owned_items:
+		if owned_item.item_level != 1:
+			continue
+		var leveled_up_item: Item = owned_item.duplicate()
+		leveled_up_item.item_level = 2
+		remaining_unowned_items.append(leveled_up_item)
 
 	var random_unowned_items: Array[Item] = []
 	for i in requested_num_items:
@@ -62,7 +75,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	super(_delta)
 
-	bank_balance.text = "🏦 [color=gold]%s[/color]" % Global.float_to_price(Global.bank_money)
+	bank_balance.text = "[b]🏦[color=white]%s[/color][/b]" % Global.float_to_price(Global.player_tips_bank)
 
 
 func populate_items() -> void:
@@ -79,14 +92,13 @@ func populate_items() -> void:
 
 
 func _on_reroll_pressed() -> void:
-	if not Global.bank_money >= Stats.current.cost_to_reroll:
+	if not Global.player_tips_bank >= Stats.current.cost_to_reroll:
 		cant_reroll_sound.play()
 		var t := create_tween().set_parallel()
 		t.tween_property(reroll_button, "modulate", Color.WHITE, 1).from(Color.RED)
 		t.tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.RED)
 		return
 
-	reroll_button.disabled = true
 	reroll_sound.play()
 
 	await create_tween().tween_property(
@@ -99,25 +111,39 @@ func _on_reroll_pressed() -> void:
 	for itm in items_container.get_children():
 		itm.queue_free()
 	populate_items()
-	Global.bank_money -= Stats.current.cost_to_reroll
-	reroll_button.hide()
+	Global.player_tips_bank -= Stats.current.cost_to_reroll
 
 
 func _on_item_button_pressed(item_button: ItemButton) -> void:
 	var item: Item = item_button.item
-	var can_afford: bool = Global.bank_money >= item.price
-	var has_free_item_slots: bool = Global.owned_items.size() < Global.item_slots_amount
+	
+	var does_own_lower_level_of_item: bool = false
+	for owned_item in Global.owned_items:
+		if item.item_id == owned_item.item_id:
+			does_own_lower_level_of_item = true
+			
+	var can_afford: bool = Global.player_tips_bank >= item.price_at_levels[item.item_level]
+	var has_free_item_slots: bool = does_own_lower_level_of_item or Global.owned_items.size() < Global.item_slots_amount
 	var did_buy_item: bool = can_afford and has_free_item_slots
 	item_button.notify_pressed(did_buy_item)
 	if did_buy_item:
-		Global.bank_money -= item.price
+		
+		# Remove lower leveled item
+		var index: int = 0
+		for owned_item in Global.owned_items:
+			if item.item_id == owned_item.item_id:
+				owned_item.unapply_stats()
+				Global.owned_items.remove_at(index)
+				break
+			index += 1
+		
+		Global.player_tips_bank -= item.price_at_levels[item.item_level]
 
 		own_and_apply_item(item)
 
 		item_button.queue_free()
 		create_tween().tween_property(bank_balance, "modulate", Color.WHITE, 1.0).from(Color.GOLD)
 		bought_sound.play()
-		reroll_button.hide()
 	else:
 		cant_buy_sound.play()
 		if has_free_item_slots:

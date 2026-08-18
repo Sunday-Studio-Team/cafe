@@ -11,7 +11,7 @@ var requirements_met_before := false
 
 func _ready() -> void:
 	Events.money_updated.connect(_on_money_update)
-	Events.customer_score_updated.connect(_on_score_update)
+	Events.employee_rating_updated.connect(_on_employee_rating_update)
 	Events.time_up.connect(func(): requirements_met_before = false)
 
 	end_shift_button.pressed.connect(end_shift)
@@ -39,8 +39,7 @@ func open_menu() -> void:
 
 func update_label() -> void:
 	if (
-			Global.employee_rating >= Stats.current.employee_rating_goal &&
-			Global.daily_profit >= Stats.current.daily_profit_goal
+			Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
 	):
 		main_label.text = "All Requirements Are Met!"
 		secondary_label.text = "You can end shift early at any time."
@@ -62,23 +61,14 @@ func close_menu() -> void:
 
 
 func _on_money_update(new: float, _old: float) -> void:
-	if new >= Stats.current.daily_profit_goal:
-		var employee_rating = Global.employee_rating
-		var employee_rating_goal = Stats.current.employee_rating_goal
-
-		if employee_rating >= employee_rating_goal && !requirements_met_before:
+	if new >= Stats.current.daily_profit_goals_each_day[Global.day]:
+		if !requirements_met_before:
 			requirements_met_before = true
 			_on_requirements_met()
 
 
-func _on_score_update(new: int, _old: int) -> void:
-	if new >= Stats.current.employee_rating_goal:
-		var daily_profit = Global.daily_profit
-		var profit_goal = Stats.current.daily_profit_goal
-
-		if daily_profit >= profit_goal && !requirements_met_before:
-			requirements_met_before = true
-			_on_requirements_met()
+func _on_employee_rating_update(new: int, _old: int) -> void:
+	pass
 
 
 func _on_requirements_met() -> void:

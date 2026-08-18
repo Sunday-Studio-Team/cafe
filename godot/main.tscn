@@ -4,13 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
-[ext_resource type="Resource" uid="uid://cipc6br6cv25l" path="res://items/overtime_request_form.tres" id="3_ryguw"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
-[ext_resource type="Resource" uid="uid://drg362efjsksg" path="res://items/clock.tres" id="4_12204"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="4_ovcoh"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
-[ext_resource type="Resource" uid="uid://bxbcn6yks4tpc" path="res://items/teleporter.tres" id="4_yvsr8"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
@@ -31,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
+[ext_resource type="Script" uid="uid://cpy5mfle7bldo" path="res://ingredient_spawner.gd" id="23_ppx11"]
 [ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
 [ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
@@ -87,7 +86,43 @@
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
 
+[sub_resource type="Resource" id="Resource_1yv1y"]
+script = ExtResource("4_ovcoh")
+item_id = "overtime_form"
+name = "Overtime Form"
+icon = ExtResource("71_m5f57")
+metadata/_custom_type_script = "uid://w8k3e1miec1a"
+
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
+
+[sub_resource type="Curve3D" id="Curve3D_ovcoh"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.9674349, -0.14133549, 0.37266684, 0, 0, 0, 0, 0, 0, 1.2822933, -0.14133549, 1.7030587, 0, 0, 0, 0, 0, 0, -1.425354, -0.14133549, 1.8031206, 0, 0, 0, 0, 0, 0, -1.7179842, -0.14133525, 0.09962416, 0, 0, 0, 0, 0, 0, -1.66679, -0.14133549, -1.8155394, 0, 0, 0, 0, 0, 0, 1.8930559, -0.14133549, -1.6656036),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_ppx11"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.9857298, -0.14100003, -1.25632, 0, 0, 0, 0, 0, 0, 1.9366394, -0.14100003, -0.22045803, 0, 0, 0, 0, 0, 0, 1.8751656, -0.14100003, 0.9885745, 0, 0, 0, 0, 0, 0, 1.0215527, -0.14100003, 1.9086924, 0, 0, 0, 0, 0, 0, -0.35155213, -0.14100003, 2.1390781, 0, 0, 0, 0, 0, 0, -1.665934, -0.14100003, 1.3223314, 0, 0, 0, 0, 0, 0, -1.765494, -0.14100003, -0.22566223, 0, 0, 0, 0, 0, 0, -0.59757805, -0.14100003, -1.1739569),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="Curve3D" id="Curve3D_1yv1y"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.2787304, 0, -0.6934252, 0, 0, 0, 0, 0, 0, 1.6884236, -0.14100003, 1.0052791, 0, 0, 0, 0, 0, 0, -0.65226126, -0.14100003, 1.9012499, 0, 0, 0, 0, 0, 0, -1.3193774, -0.14100003, 0.37446022, 0, 0, 0, 0, 0, 0, -1.7369752, -0.14100003, -0.7691543, 0, 0, 0, 0, 0, 0, -0.9964194, -0.14100003, -1.6095676, 0, 0, 0, 0, 0, 0, 0.39631987, -0.14100003, -1.8792813),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
+size = Vector3(1, 0.2680664, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
 content_margin_left = 10.0
@@ -111,6 +146,10 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 32
+font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
 viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
@@ -126,7 +165,10 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
-bg_color = Color(0.6862745, 0.6, 0.6, 1)
+bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjuso"]
+bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
@@ -138,7 +180,7 @@ size = Vector3(1, 0.2680664, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yv1y"]
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "active_item_timer", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -160,12 +202,9 @@ ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
-overtime_item = ExtResource("3_ryguw")
-teleporter = ExtResource("4_yvsr8")
-scrubber = ExtResource("50_jbvwl")
+overtime_item = SubResource("Resource_1yv1y")
 camera_posters = [null, null, null]
 minigame_controller = NodePath("MinigameController")
-clock_item = ExtResource("4_12204")
 active_item_timer = NodePath("Active Item Nodes/Timer")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
@@ -174,6 +213,7 @@ special_shift_text = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginCo
 special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
 teleporter1 = NodePath("Teleporter1")
 teleporter2 = NodePath("Teleporter2")
+teleporter3 = NodePath("Teleporter3")
 tutorial_selection_menu = NodePath("TutorialSelectionMenu")
 whiteboard_tutorial_arrow = NodePath("WhiteboardTutorialArrow")
 waypoint_ring = NodePath("WaypointRing")
@@ -233,25 +273,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 3.5)
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
 
 [node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -7.047043, 2.6975236, 4.6095347)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.962635, 2.8413355, 4.6095347)
 rotation_pause_length = 4.0
 
+[node name="AimPath3D" parent="SecurityCams/SecurityCam" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ovcoh")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.88902724, 0, 0.45784253, 0, 0.99999255, 0, -0.4578422, 0, -0.8890279, 1.9674349, -0.14133549, 0.37266684)
+
 [node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9847103, 2.6719248, 5.5821085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
 rotation_time = 2.0
 rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam2" index="0" unique_id=1348601655]
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam2/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.086619, 2.6719248, 0.7078019)
+[node name="AimPath3D" parent="SecurityCams/SecurityCam2" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ppx11")
 
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam3" index="0" unique_id=1348601655]
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam2/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+
+[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.9940248, 2.841, -1.0650823)
+
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam3/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 25.0
 
+[node name="AimPath3D" parent="SecurityCams/SecurityCam3" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_1yv1y")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam3/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
+
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
-transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 9.279628, 1.2573626, 7.431313)
+transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -260,16 +318,16 @@ wait_time = 120.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 9)
+transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071067, 2.720034, 0, 14.536791)
 
 [node name="CafeItemShelf" parent="." unique_id=1767295431 instance=ExtResource("26_4obbf")]
-transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 12.81695, 1.1999999, 8.5)
+transform = Transform3D(1.1924875e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924875e-08, -1.2828894, 1.1999999, 13.967806)
 
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.069131, 0, 4.587011)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.4037077, 1.1920929e-07, 13.4061365)
 
 [node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
-transform = Transform3D(-0.25881907, 0, 0.96592593, 0, 1, 0, -0.96592593, 0, -0.25881907, 8.917271, 0, 5.4959364)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4011619, -0.11735466, 10.078446)
 
 [node name="Menu" parent="." unique_id=1811682227 instance=ExtResource("70_g5xqc")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
@@ -277,33 +335,114 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0010734, -0.09343622, 4.002124)
 
-[node name="Ingredients" type="Node3D" parent="." unique_id=1312596977]
+[node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
+script = ExtResource("23_ppx11")
+_ingredient_spawn_points = [NodePath("IngredientSpawnMarker3D"), NodePath("IngredientSpawnMarker3D2"), NodePath("IngredientSpawnMarker3D3"), NodePath("IngredientSpawnMarker3D4"), NodePath("IngredientSpawnMarker3D5"), NodePath("IngredientSpawnMarker3D6")]
+_ingredients_bag_packed_scene = ExtResource("3_2cqfq")
 
-[node name="IngredientsBag" parent="Ingredients" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4.943459, -0.7501248, -13.604155)
+[node name="IngredientSpawnMarker3D" type="Marker3D" parent="IngredientSpawner" unique_id=1568223279]
+transform = Transform3D(0.9487802, 0, -0.31593695, 0, 1, 0, 0.31593695, 0, 0.9487802, 4.943459, -0.7501248, -13.604155)
 
-[node name="IngredientsBag2" parent="Ingredients" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.2883577, -0.7501248, -13.604155)
+[node name="IngredientSpawnMarker3D2" type="Marker3D" parent="IngredientSpawner" unique_id=769091873]
+transform = Transform3D(0.3277469, 0, -0.9447655, 0, 1, 0, 0.9447655, 0, 0.3277469, 5.366172, -0.7501248, -13.604155)
 
-[node name="IngredientsBag3" parent="Ingredients" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 5.1639137, -0.7501248, -13.758191)
+[node name="IngredientSpawnMarker3D3" type="Marker3D" parent="IngredientSpawner" unique_id=1791985955]
+transform = Transform3D(-0.778302, 0, -0.6278901, 0, 1, 0, 0.6278901, 0, -0.778302, 5.1639137, -0.7501248, -13.654996)
 
-[node name="IngredientsBag4" parent="Ingredients" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 4.706724, -0.7501248, -13.666647)
+[node name="IngredientSpawnMarker3D4" type="Marker3D" parent="IngredientSpawner" unique_id=677772387]
+transform = Transform3D(-0.9180558, 0, 0.39645162, 0, 1, 0, -0.39645162, 0, -0.9180558, 4.706724, -0.7501248, -13.666647)
 
-[node name="IngredientsBag5" parent="Ingredients" unique_id=587147078 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 4.452388, -0.7501248, -13.604155)
+[node name="IngredientSpawnMarker3D5" type="Marker3D" parent="IngredientSpawner" unique_id=2098485488]
+transform = Transform3D(-0.785986, 0, -0.61824423, 0, 1, 0, 0.61824423, 0, -0.785986, 4.452388, -0.7501248, -13.604155)
 
-[node name="IngredientsBag6" parent="Ingredients" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.56843, -0.7501248, -13.627114)
+[node name="IngredientSpawnMarker3D6" type="Marker3D" parent="IngredientSpawner" unique_id=1211296652]
+transform = Transform3D(-0.5060448, 0, 0.86250716, 0, 1, 0, -0.86250716, 0, -0.5060448, 5.56843, -0.7501248, -13.627114)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "use_item_prompt", "end_shift_guide")]
+[node name="Teleporter1" type="Area3D" parent="." unique_id=247187360 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.289, 0, 5.974)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter1" unique_id=731332946]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.2514602, 0)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter1/CollisionShape3D" unique_id=790686180]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter1/CollisionShape3D" unique_id=2091540570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter1" unique_id=743376530]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, -7.5824304, 0, -6.8695865)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter1/Marker3D" unique_id=2006567238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Teleporter2" type="Area3D" parent="." unique_id=469409372 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.134, 0, 2.016)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter2" unique_id=1650664057]
+transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -0.06488752, 0.26131332, 0)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter2/CollisionShape3D" unique_id=1046926191]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter2/CollisionShape3D" unique_id=966457308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter2" unique_id=456152824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.497669, 0, -0.41641974)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter2/Marker3D" unique_id=966291062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Teleporter3" type="Area3D" parent="." unique_id=1924229073 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2494335, 0, -2.7986898)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter3" unique_id=554001673]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.064888, 0.26131332, 0)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter3/CollisionShape3D" unique_id=541196362]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter3/CollisionShape3D" unique_id=583088529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter3" unique_id=1836870035]
+transform = Transform3D(1.1920929e-07, 0, 1, 0, 1, 0, -1, 0, 1.1920929e-07, 11.307452, 1.1920929e-07, 10.258867)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter3/Marker3D" unique_id=1894647867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
-customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Label")
+customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
 score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
 interactable_indicator = NodePath("HUD/VBoxContainer/Interactable")
 interactable_label = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
@@ -327,11 +466,14 @@ shelf_item_ui = NodePath("HUD/ShelfItem")
 shelf_item_name = NodePath("HUD/ShelfItem/VBoxContainer/Name")
 shelf_item_description = NodePath("HUD/ShelfItem/VBoxContainer/Description")
 shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
+shelf_item_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+shelf_item_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 shelf_item_sell = NodePath("HUD/ShelfItem/VBoxContainer/Sell")
 shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
 day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Stars")
-rating_goal_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer/Goal")
+rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
+rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
+customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
 alert_sprite = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
@@ -339,14 +481,18 @@ exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineBut
 item_hover_tooltip = NodePath("ItemHoverTooltip")
 item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
 item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
+item_hover_tooltip_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+item_hover_tooltip_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
-item_menu_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/MenuPrompt")
-current_item_ui = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem")
+item_menu_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/MenuPrompt")
+item_ui = NodePath("HUD/ActiveItemInfo")
+current_item_ui = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem")
 item_indicator = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator")
 item_text = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator/RichTextLabel")
-current_item_icon = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/Icon")
-use_item_prompt = NodePath("HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem/UsePrompt")
+current_item_icon = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
+item_cooldown_bar = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon/CooldownIndicator")
+use_item_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 hammer = ExtResource("150_0bk8h")
 scrubber = ExtResource("50_jbvwl")
@@ -484,6 +630,7 @@ layout_mode = 2
 
 [node name="Scores" type="VBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Money" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
 layout_mode = 2
@@ -500,22 +647,55 @@ size_flags_horizontal = 0
 size_flags_vertical = 10
 show_percentage = false
 
-[node name="Customer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=375295033]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=653594015]
+[node name="Rating" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
+layout_mode = 2
+
+[node name="RatingIconLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "🙂"
 
-[node name="Stars" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=2112858348]
+[node name="RatingLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "⭐2.1"
+
+[node name="Stars" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
+visible = false
 layout_mode = 2
 
-[node name="Goal" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Customer" unique_id=417478634]
+[node name="Control" type="Control" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
+layout_mode = 2
+
+[node name="FlowRate" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
+layout_mode = 2
+
+[node name="FlowRateLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
+text = "10"
+label_settings = SubResource("LabelSettings_xrivr")
+
+[node name="FlowRateDescLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "secs/custmr"
+label_settings = SubResource("LabelSettings_xrivr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=84901258]
 layout_mode = 2
@@ -765,42 +945,6 @@ theme_override_font_sizes/font_size = 24
 text = "drop"
 icon = ExtResource("98_l0gw7")
 
-[node name="ItemInfo" type="PanelContainer" parent="UI/HUD/VBoxContainer" unique_id=1662791771]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, -750)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/ItemInfo" unique_id=701910864]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="MenuPrompt" type="Button" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer" unique_id=1266925751]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "active items"
-icon = ExtResource("114_gfi32")
-
-[node name="CurrentItem" type="HBoxContainer" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer" unique_id=549022221]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CurrentText" type="Label" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "current:"
-
-[node name="Icon" type="TextureRect" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
-layout_mode = 2
-
-[node name="UsePrompt" type="Button" parent="UI/HUD/VBoxContainer/ItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 24
-text = "use"
-icon = ExtResource("115_12204")
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=312814953]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -842,7 +986,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/bold_font_size = 53
 bbcode_enabled = true
-text = "[b]item name"
+text = "[b]Item Name[/b]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -852,17 +996,51 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
 
-[node name="Label" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Active" unique_id=590042369]
-custom_minimum_size = Vector2(400, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/ShelfItem/VBoxContainer/Active" unique_id=585615415]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Active/HBoxContainer" unique_id=590042369]
 custom_maximum_size = Vector2(-1, 25)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 18
 theme_override_font_sizes/bold_font_size = 18
 bbcode_enabled = true
-text = "[b]ACTIVE[/b] (can be used once per shift)"
+text = "[b]ACTIVE[/b]"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Active/HBoxContainer" unique_id=935610494]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=61637865]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pjuso")
+
+[node name="Label" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Passive" unique_id=1393032447]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="Description" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1739048215]
@@ -898,6 +1076,60 @@ theme_override_font_sizes/font_size = 64
 text = "SOLD: $5"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ActiveItemInfo" type="PanelContainer" parent="UI/HUD" unique_id=1662791771]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/ActiveItemInfo" unique_id=701910864]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MenuPrompt" type="Button" parent="UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=1266925751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "active items"
+icon = ExtResource("114_gfi32")
+
+[node name="CurrentItem" type="HBoxContainer" parent="UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=549022221]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CurrentText" type="Label" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "current:"
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
+layout_mode = 2
+texture = ExtResource("69_3rmuw")
+
+[node name="CooldownIndicator" type="TextureProgressBar" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon" unique_id=169002250]
+modulate = Color(1, 1, 1, 0.29411766)
+custom_maximum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.6, 0.6)
+offset_transform_pivot_ratio = Vector2(0, 0)
+fill_mode = 4
+texture_under = ExtResource("45_dfxmq")
+texture_over = ExtResource("46_kcoi7")
+texture_progress = ExtResource("47_rkju4")
+
+[node name="UsePrompt" type="Button" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 24
+text = "use"
+icon = ExtResource("115_12204")
 
 [node name="ItemHoverTooltip" type="PanelContainer" parent="UI" unique_id=1202178015]
 visible = false
@@ -1333,70 +1565,11 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[node name="Teleporter1" type="Area3D" parent="." unique_id=247187360 node_paths=PackedStringArray("destination")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5923508, 5.8457847)
-visible = false
-collision_layer = 7
-collision_mask = 15
-monitoring = false
-script = ExtResource("97_sn1fb")
-destination = NodePath("Marker3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter1" unique_id=731332946]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4384332, -0.13512087, 2.9732747)
-shape = SubResource("BoxShape3D_punm7")
-
-[node name="Label3D" type="Label3D" parent="Teleporter1/CollisionShape3D" unique_id=790686180]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-text = "step on to teleport"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter1/CollisionShape3D" unique_id=2091540570]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
-mesh = SubResource("BoxMesh_xnu58")
-
-[node name="Marker3D" type="Marker3D" parent="Teleporter1" unique_id=743376530]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.010804, -0.20572126, -7.0794954)
-
-[node name="Teleporter2" type="Area3D" parent="." unique_id=469409372 node_paths=PackedStringArray("destination")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1847016, 11.691569)
-visible = false
-collision_layer = 7
-collision_mask = 15
-monitoring = false
-script = ExtResource("97_sn1fb")
-destination = NodePath("Marker3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter2" unique_id=1650664057]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3723807, -0.76275265, -8.737095)
-shape = SubResource("BoxShape3D_punm7")
-
-[node name="Label3D" type="Label3D" parent="Teleporter2/CollisionShape3D" unique_id=1046926191]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-text = "step on to teleport"
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter2/CollisionShape3D" unique_id=966457308]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
-mesh = SubResource("BoxMesh_xnu58")
-
-[node name="Marker3D" type="Marker3D" parent="Teleporter2" unique_id=456152824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27721417, -1.1508243, -4.798117)
-
-[node name="WhiteboardTutorialArrow" type="Marker3D" parent="." unique_id=2126139227]
-transform = Transform3D(-0.07545426, 0.021451268, -0.9969185, -0.9971494, -0.001623217, 0.0754368, 0, 0.9997687, 0.021512596, 10.456207, 1.2273792, 7.327977)
-visible = false
-gizmo_extents = 0.0
-script = ExtResource("84_ppx11")
-arrow_material = SubResource("StandardMaterial3D_1yv1y")
-metadata/_custom_type_script = "uid://bd82opkja4ku1"
-
-[node name="WaypointRing" parent="." unique_id=59742114 instance=ExtResource("85_1yv1y")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.6126642, 0, 5.163345)
-collision_layer = 7
-collision_mask = 15
-
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 
+[editable path="SecurityCams/SecurityCam"]
+[editable path="SecurityCams/SecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam2"]
-[editable path="SecurityCams/SecurityCam2/Model/camera"]
+[editable path="SecurityCams/SecurityCam2/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam3"]
-[editable path="SecurityCams/SecurityCam3/Model/camera"]
+[editable path="SecurityCams/SecurityCam3/CameraAimerModel/Model/camera"]

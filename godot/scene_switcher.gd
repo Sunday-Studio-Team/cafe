@@ -82,8 +82,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 			
 			var use_sub_threads: bool = false
 			if resource_uid_request in _main_sub_resource_uids:
-				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource with threads")
-				use_sub_threads = true
+				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource without threads")
+				use_sub_threads = false
 			else:
 				if TIMING_PRINTS: print("SceneSwitcher: loading the main requested scene")
 				# WARNING: If set to true for the main scene, causes errors in the debugger:
