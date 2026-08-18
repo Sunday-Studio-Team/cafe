@@ -1,7 +1,7 @@
 class_name SecurityCam3D
 extends Node3D
 
-@export var ray: RayCast3D
+@export var _shape_cast_3d: ShapeCast3D
 @export var spotlight: SpotLight3D
 @export var camera_aimer_node: Node3D
 @export var aim_path_follow_3d: PathFollow3D
@@ -17,7 +17,7 @@ extends Node3D
 
 # we duplicate the raycast many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
-var all_rays: Array[RayCast3D]
+var _all_shape_casts: Array[ShapeCast3D]
 var rotate_tween: Tween
 var disable_minigames := ["Lines"]
 var _camera_disarmed := false
@@ -29,12 +29,6 @@ var _direction_multiplier: float = 1.0
 
 func _ready() -> void:
 	create_rays()
-
-	# rotate_tween = create_tween().set_loops()
-	# rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
-	# rotate_tween.tween_interval(rotation_pause_length)
-	# rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
-	# rotate_tween.tween_interval(rotation_pause_length)
 
 	interactable.interacted.connect(open_camera_minigame)
 	interactable.used_active_item.connect(_on_used_active_item)
@@ -62,31 +56,34 @@ func _physics_process(_delta: float) -> void:
 
 	var player_in_spotlight := false
 
-	for r in all_rays:
-		var collider = r.get_collider()
-		if collider == Global.player:
-			var apply_slow: bool = false
-			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
-				timer.start()
-				Events.alert_posted.emit("caught running")
-				apply_slow = true
-			elif Global.making_drink_manually:
-				timer.start()
-				Events.alert_posted.emit("caught making drink by hand")
-				apply_slow = true
-			elif Global.holding_ingredients and Global.holding_ingredients_rule:
-				timer.start()
-				Events.alert_posted.emit("caught stealing ingredients")
-				apply_slow = true
-			
-			if apply_slow:
-				if _player_slow_status_effect != null:
-					Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
-				_player_slow_status_effect = Player.CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
-				Global.player.player_status_effects.apply_status_effect(_player_slow_status_effect)
-				caught_audio_stream_player_3d.play()
-			player_in_spotlight = true
-			break
+	for shape_cast in _all_shape_casts:
+		var collision_count: int = shape_cast.get_collision_count()
+		if collision_count >= 0:
+			for i in range(collision_count):
+				var collider: Object = shape_cast.get_collider(i)
+				if collider == Global.player:
+					var apply_slow: bool = false
+					if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
+						timer.start()
+						Events.alert_posted.emit("caught running")
+						apply_slow = true
+					elif Global.making_drink_manually:
+						timer.start()
+						Events.alert_posted.emit("caught making drink by hand")
+						apply_slow = true
+					elif Global.holding_ingredients and Global.holding_ingredients_rule:
+						timer.start()
+						Events.alert_posted.emit("caught stealing ingredients")
+						apply_slow = true
+					
+					if apply_slow:
+						if _player_slow_status_effect != null:
+							Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
+						_player_slow_status_effect = Player.CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
+						Global.player.player_status_effects.apply_status_effect(_player_slow_status_effect)
+						caught_audio_stream_player_3d.play()
+					player_in_spotlight = true
+					break
 
 	if player_in_spotlight:
 		spotlight.light_color = Color.RED
@@ -117,16 +114,14 @@ func _update_camera_components_active() -> void:
 	if visible and not _camera_disarmed:
 		interactable.visible = true
 		spotlight.visible = true
-		# rotate_tween.play()
-		ray.enabled = true
-		for stored_ray in all_rays:
+		_shape_cast_3d.enabled = true
+		for stored_ray in _all_shape_casts:
 			stored_ray.enabled = true
 	else:
 		interactable.visible = false
 		spotlight.visible = false
-		# rotate_tween.stop()
-		ray.enabled = false
-		for stored_ray in all_rays:
+		_shape_cast_3d.enabled = false
+		for stored_ray in _all_shape_casts:
 			stored_ray.enabled = false
 
 
@@ -137,15 +132,16 @@ func create_rays() -> void:
 	# halo around the edge of the light
 	const ANGLE_OVERSHOOT := 5.0
 
+	_all_shape_casts.append(_shape_cast_3d)
 	# Disable the template by default.
-	ray.enabled = false
-	for x_rot in range(25, 360, 15):
-		for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
-			var new_ray := ray.duplicate() as RayCast3D
-			new_ray.rotation_degrees.x += x_rot
-			new_ray.rotation_degrees.z += z_rot
-			spotlight.add_child(new_ray)
-			all_rays.append(new_ray)
+	# ray.enabled = false
+	# for x_rot in range(25, 360, 15):
+	# 	for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
+	# 		var new_ray := ray.duplicate() as RayCast3D
+	# 		new_ray.rotation_degrees.x += x_rot
+	# 		new_ray.rotation_degrees.z += z_rot
+	# 		spotlight.add_child(new_ray)
+	# 		all_rays.append(new_ray)
 
 
 func try_disable_camera() -> void:

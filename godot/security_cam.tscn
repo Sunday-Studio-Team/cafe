@@ -39,10 +39,18 @@ height = 1.2861328
 
 [sub_resource type="Curve3D" id="Curve3D_qlhcy"]
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "timer", "interactable", "caught_audio_stream_player_3d")]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xrivr"]
+height = 10.0
+radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlhcy"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.22352941)
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "timer", "interactable", "caught_audio_stream_player_3d")]
 script = ExtResource("1_w3jiq")
-ray = NodePath("CameraAimerModel/SpotLight3D/RayCast3D")
-spotlight = NodePath("CameraAimerModel/SpotLight3D")
+_shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
+spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
 camera_aimer_node = NodePath("CameraAimerModel")
 aim_path_follow_3d = NodePath("AimPath3D/AimPathFollow3D")
 timer = NodePath("GraceTimer")
@@ -60,14 +68,10 @@ one_shot = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="CameraAimerModel" unique_id=1348601655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6273376)
-light_energy = 10.0
+light_energy = 5.0
 light_volumetric_fog_energy = 2.5
-spot_angle = 20.0
-
-[node name="RayCast3D" type="RayCast3D" parent="CameraAimerModel/SpotLight3D" unique_id=1998490399]
-transform = Transform3D(0.9659258, -1.4894287e-09, -0.258819, -0.25881907, -1.1313339e-08, -0.96592563, -1.489429e-09, 0.99999976, -1.131334e-08, 0, 0, 0)
-target_position = Vector3(0, -10, 0)
-collision_mask = 8
+spot_angle = 18.0
+spot_angle_attenuation = 2.0
 
 [node name="Model" type="Node3D" parent="CameraAimerModel" unique_id=263013221]
 transform = Transform3D(1.5499998, 0, 0, 0, 0.87564456, -1.2789629, 0, 1.2789629, 0.87564456, 0, 0.027873814, -0.5080554)
@@ -112,9 +116,31 @@ curve = SubResource("Curve3D_qlhcy")
 
 [node name="AimPathFollow3D" type="PathFollow3D" parent="AimPath3D" unique_id=1068131204]
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="AimPath3D/AimPathFollow3D" unique_id=78244845]
+[node name="DebugCSGSphere3D" type="CSGSphere3D" parent="AimPath3D/AimPathFollow3D" unique_id=78244845]
 visible = false
 radius = 0.1
 radial_segments = 6
+
+[node name="SpotLight3D" type="SpotLight3D" parent="AimPath3D/AimPathFollow3D" unique_id=642379767]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.20921922, 0)
+light_energy = 5.0
+light_volumetric_fog_energy = 2.5
+spot_range = 1.0891194
+spot_angle = 77.86068
+spot_angle_attenuation = 0.01
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="AimPath3D/AimPathFollow3D" unique_id=1398772470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+shape = SubResource("CylinderShape3D_xrivr")
+target_position = Vector3(0, -5, 0)
+collision_mask = 9
+
+[node name="DebugCSGCylinder3D" type="CSGCylinder3D" parent="AimPath3D/AimPathFollow3D/ShapeCast3D" unique_id=1047781990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.000001, 0)
+visible = false
+radius = 0.75
+height = 10.0
+sides = 16
+material = SubResource("StandardMaterial3D_qlhcy")
 
 [editable path="CameraAimerModel/Model/camera"]
