@@ -167,6 +167,8 @@ var shift_started: bool = false
 func _ready() -> void:
 	if SaveDataManager.save_data.finished_or_skipped_tutorial:
 		day = 1
+	if OS.has_feature("tutorial"):
+		day = 0
 
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
