@@ -3,6 +3,9 @@ extends Node3D
 
 @export var ray: RayCast3D
 @export var spotlight: SpotLight3D
+@export var camera_aimer_node: Node3D
+@export var aim_path_follow_3d: PathFollow3D
+@export var aim_follow_rate: float = 0.5
 @export var rotation_amount: float = 90
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
@@ -19,6 +22,7 @@ var rotate_tween: Tween
 var disable_minigames := ["Lines"]
 var _camera_disarmed := false
 var _player_slow_status_effect: Player.CameraSlowPlayerStatusEffect
+var _direction_multiplier: float = 1.0
 
 @onready var original_rotation := rotation_degrees
 
@@ -26,17 +30,26 @@ var _player_slow_status_effect: Player.CameraSlowPlayerStatusEffect
 func _ready() -> void:
 	create_rays()
 
-	rotate_tween = create_tween().set_loops()
-	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
-	rotate_tween.tween_interval(rotation_pause_length)
-	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
-	rotate_tween.tween_interval(rotation_pause_length)
+	# rotate_tween = create_tween().set_loops()
+	# rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
+	# rotate_tween.tween_interval(rotation_pause_length)
+	# rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
+	# rotate_tween.tween_interval(rotation_pause_length)
 
 	interactable.interacted.connect(open_camera_minigame)
 	interactable.used_active_item.connect(_on_used_active_item)
 
 	visibility_changed.connect(_on_visibility_changed)
 	_update_camera_components_active()
+	
+	# Randomize progress along path
+	aim_path_follow_3d.progress_ratio = randf_range(0.0, 1.0)
+	# Randomize direction multiplier
+	var direction_roll: float = randf_range(0.0, 1.0)
+	if direction_roll >= 0.5:
+		_direction_multiplier = 1.0
+	else:
+		_direction_multiplier = -1.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -82,7 +95,9 @@ func _physics_process(_delta: float) -> void:
 		spotlight.light_color = Color.WHITE
 
 	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
-
+	
+	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
+	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
 
 func _on_visibility_changed() -> void:
 	_update_camera_components_active()
@@ -102,14 +117,14 @@ func _update_camera_components_active() -> void:
 	if visible and not _camera_disarmed:
 		interactable.visible = true
 		spotlight.visible = true
-		rotate_tween.play()
+		# rotate_tween.play()
 		ray.enabled = true
 		for stored_ray in all_rays:
 			stored_ray.enabled = true
 	else:
 		interactable.visible = false
 		spotlight.visible = false
-		rotate_tween.stop()
+		# rotate_tween.stop()
 		ray.enabled = false
 		for stored_ray in all_rays:
 			stored_ray.enabled = false

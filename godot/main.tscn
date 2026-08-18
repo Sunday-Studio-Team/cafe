@@ -93,6 +93,30 @@ metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
+[sub_resource type="Curve3D" id="Curve3D_ovcoh"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.9674349, -0.14133549, 0.37266684, 0, 0, 0, 0, 0, 0, 1.2822933, -0.14133549, 1.7030587, 0, 0, 0, 0, 0, 0, -1.425354, -0.14133549, 1.8031206, 0, 0, 0, 0, 0, 0, -1.7179842, -0.14133525, 0.09962416, 0, 0, 0, 0, 0, 0, -1.66679, -0.14133549, -1.8155394, 0, 0, 0, 0, 0, 0, 1.8930559, -0.14133549, -1.6656036),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_ppx11"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.9857298, -0.14100003, -1.25632, 0, 0, 0, 0, 0, 0, 1.9366394, -0.14100003, -0.22045803, 0, 0, 0, 0, 0, 0, 1.8751656, -0.14100003, 0.9885745, 0, 0, 0, 0, 0, 0, 1.0215527, -0.14100003, 1.9086924, 0, 0, 0, 0, 0, 0, -0.35155213, -0.14100003, 2.1390781, 0, 0, 0, 0, 0, 0, -1.665934, -0.14100003, 1.3223314, 0, 0, 0, 0, 0, 0, -1.765494, -0.14100003, -0.22566223, 0, 0, 0, 0, 0, 0, -0.59757805, -0.14100003, -1.1739569),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="Curve3D" id="Curve3D_1yv1y"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.2787304, 0, -0.6934252, 0, 0, 0, 0, 0, 0, 1.6884236, -0.14100003, 1.0052791, 0, 0, 0, 0, 0, 0, -0.65226126, -0.14100003, 1.9012499, 0, 0, 0, 0, 0, 0, -1.3193774, -0.14100003, 0.37446022, 0, 0, 0, 0, 0, 0, -1.7369752, -0.14100003, -0.7691543, 0, 0, 0, 0, 0, 0, -0.9964194, -0.14100003, -1.6095676, 0, 0, 0, 0, 0, 0, 0.39631987, -0.14100003, -1.8792813),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
@@ -238,22 +262,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 3.5)
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
 
 [node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -7.047043, 2.6975236, 4.6095347)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.962635, 2.8413355, 4.6095347)
 rotation_pause_length = 4.0
 
+[node name="AimPath3D" parent="SecurityCams/SecurityCam" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ovcoh")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.88902724, 0, 0.45784253, 0, 0.99999255, 0, -0.4578422, 0, -0.8890279, 1.9674349, -0.14133549, 0.37266684)
+
 [node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9847103, 2.6719248, 5.5821085)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
 rotation_time = 2.0
 rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam2" index="1" unique_id=1348601655]
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam2/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.086619, 2.6719248, 0.7078019)
+[node name="AimPath3D" parent="SecurityCams/SecurityCam2" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ppx11")
 
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam3" index="1" unique_id=1348601655]
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam2/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+
+[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.9940248, 2.841, -1.0650823)
+
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam3/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 25.0
+
+[node name="AimPath3D" parent="SecurityCams/SecurityCam3" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_1yv1y")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam3/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -1516,7 +1558,9 @@ texture_normal = ExtResource("125_g5xqc")
 
 [connection signal="timeout" from="Active Item Nodes/Timer" to="." method="_on_timer_timeout"]
 
+[editable path="SecurityCams/SecurityCam"]
+[editable path="SecurityCams/SecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam2"]
-[editable path="SecurityCams/SecurityCam2/Model/camera"]
+[editable path="SecurityCams/SecurityCam2/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam3"]
-[editable path="SecurityCams/SecurityCam3/Model/camera"]
+[editable path="SecurityCams/SecurityCam3/CameraAimerModel/Model/camera"]
