@@ -129,12 +129,13 @@ func _ready() -> void:
 	
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
-		whiteboard_tutorial_arrow.visible = true
-		waypoint_ring.show()
+		# whiteboard_tutorial_arrow.visible = true
+		# waypoint_ring.show()
 		tutorial_selection_menu.open_menu()
 	else:
-		whiteboard_tutorial_arrow.visible = false
-		waypoint_ring.hide()
+		pass
+		# whiteboard_tutorial_arrow.visible = false
+		# waypoint_ring.hide()
 
 
 
@@ -202,7 +203,7 @@ func set_per_day_stuff() -> void:
 		machines.clear()
 	if Global.day >= 1:
 		_set_security_cameras_active(false)
-		whiteboard_tutorial_arrow.visible = false
+		# whiteboard_tutorial_arrow.visible = false
 	if Global.day >= 2:
 		machines.append(third_machine)
 		_set_security_cameras_active(true)
