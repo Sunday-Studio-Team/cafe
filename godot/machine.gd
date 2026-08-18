@@ -511,7 +511,6 @@ func display_drink_score() -> void:
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
 
-	print("about to display in price labels")
 	var price_labels_text: String = "+%s" % Global.float_to_price(order.made_drink.price)
 	_price_label_remake.text = price_labels_text
 	_price_label_accept.text = price_labels_text
