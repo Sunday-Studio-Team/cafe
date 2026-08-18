@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://btqpw8yhbjges" path="res://ui/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="PackedScene" uid="uid://u0mxb00igfni" path="res://ui/options_menu/options_menu.tscn" id="2_0dkrt"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "_options_button", "quit_button")]
+[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "tutorial_button", "quit_button", "_options_button")]
 script = ExtResource("1_t7e0r")
 play_button = NodePath("MarginContainer/VBoxContainer/Buttons/Play")
+tutorial_button = NodePath("MarginContainer/VBoxContainer/Buttons/Tutorial")
+quit_button = NodePath("MarginContainer/VBoxContainer/Buttons/Quit")
 _options_button = NodePath("MarginContainer/VBoxContainer/Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
-quit_button = NodePath("MarginContainer/VBoxContainer/Buttons/Quit")
 
 [node name="TextureRect" type="ColorRect" parent="." unique_id=1287952031]
 anchors_preset = 15
@@ -53,6 +54,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 64
 text = "PLAY"
+
+[node name="Tutorial" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=2096895214]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "REPLAY TUTORIAL"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=955994199]
 layout_mode = 2

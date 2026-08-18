@@ -50,11 +50,6 @@ var machines: Array[Machine]
 
 @onready var tutorial_machine: Machine = first_machine
 
-func _enter_tree() -> void:
-	# for setting day on spawn (for debug)
-	#Global.day = 5
-	pass
-
 
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
@@ -129,9 +124,11 @@ func _ready() -> void:
 	
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
-		# whiteboard_tutorial_arrow.visible = true
-		# waypoint_ring.show()
-		tutorial_selection_menu.open_menu()
+
+		if not SaveDataManager.save_data.finished_or_skipped_tutorial:
+			tutorial_selection_menu.open_menu()
+		else:
+			_interactive_tutorial_flow()
 	else:
 		pass
 		# whiteboard_tutorial_arrow.visible = false
@@ -183,6 +180,7 @@ func enable_disable_teleporters():
 		teleporter1.disable_teleporter()
 		teleporter2.disable_teleporter()
 		teleporter3.disable_teleporter()
+
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
@@ -406,10 +404,14 @@ func _interactive_tutorial_shift() -> void:
 
 	while tutorial_machine.broken_down:
 		await get_tree().process_frame
-	
+
+	SaveDataManager.save_data.finished_or_skipped_tutorial = true
+	SaveDataManager.save_game()
+
 	Global.day = 1
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-	
+
+
 func _on_desk_interacted() -> void:
 	ui.hide()
 	pc_ui.show()
@@ -465,6 +467,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
 	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
 	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
+
 
 func _on_employee_rating_updated(new_value: float, old_value: float) -> void:
 	var new_flow_rate: float = _get_customer_flow_rate()

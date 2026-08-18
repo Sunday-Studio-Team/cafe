@@ -165,6 +165,9 @@ var shift_started: bool = false
 
 
 func _ready() -> void:
+	if SaveDataManager.save_data.finished_or_skipped_tutorial:
+		day = 1
+
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
 		drink.create() # adds the price and creates the typing minigame resource
@@ -172,7 +175,6 @@ func _ready() -> void:
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
-
 
 
 # NOTE: these things in physics process instead of process for timing reasons

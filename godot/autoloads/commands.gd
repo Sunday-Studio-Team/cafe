@@ -25,7 +25,7 @@ func _ready() -> void:
 	var items_guide_str: String = "Available items: "
 	for item in Global.items:
 		items_guide_str += "\"%s\", " % item.item_id
-	
+
 	var shift_guide_str: String = "Available shifts: "
 	for each_shift in Global.special_shifts:
 		shift_guide_str += "\"%s\", " % each_shift.name
@@ -34,6 +34,7 @@ func _ready() -> void:
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]wipesave[/i] wipes save (will automatically load into tutorial etc. on next run)
 - [i]startshift[/i] starts shift
 - [i]endshift[/i] ends shift
 - [i]endshift W[/i] forces a win
@@ -63,6 +64,7 @@ func _ready() -> void:
 (or tell us if any of the existing ones seem bugged D:)[/color]",
 	)
 
+	Console.add_command("wipesave", wipe_save)
 	Console.add_command("startshift", start_shift)
 	Console.add_command("bank", bank)
 	Console.add_command("break", breakdown)
@@ -88,8 +90,13 @@ func _ready() -> void:
 	Events.main_scene_loaded.connect(
 		func():
 			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
-				Events.active_item_used.connect(refresh_active_item)
+				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func wipe_save() -> void:
+	SaveDataManager.wipe_save()
+	Console.print_line("save wiped")
 
 
 func give_bag() -> void:
@@ -232,7 +239,9 @@ func refresh_active_item(item: Item):
 
 func special_shift(shift_name: String):
 	if Global.shift_started:
-		Console.print_line("You can't change shift after the shift has started! Try to use day # to restart today.")
+		Console.print_line(
+			"You can't change shift after the shift has started! Try to use day # to restart today."
+		)
 		return
 	Global.current_special_shift.unapply_stats()
 	for shift in Global.special_shifts:
