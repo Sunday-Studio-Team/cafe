@@ -73,7 +73,7 @@ var _employee_rating_last_update: float = -1
 
 func _ready() -> void:
 	_update_rating()
-	
+
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.MONEY, new_value, old_value)
@@ -150,12 +150,15 @@ new rule: don't take any more ingredients out of the store room."
 		objective.text = (
 				"your boss has installed another machine."
 		)
-	@warning_ignore("integer_division")
-	objective.text += (
-			"\n\n[b]SHIFT OBJECTIVE[/b]" + \
-			"\nmake %s!"
-			% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
-	)
+
+	if Global.day > 0:
+		@warning_ignore("integer_division")
+		objective.text += (
+				"\n\n[b]SHIFT OBJECTIVE[/b]" + \
+				"\nmake %s!"
+				% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
+		)
+
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 
