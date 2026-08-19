@@ -187,6 +187,9 @@ func enable_disable_teleporters():
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	if Global.day == 0:
+		var email_manager = EmailsManager.get_instance()
+		email_manager._delivered_emails_to_date.clear()
+		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
@@ -197,6 +200,9 @@ func set_per_day_stuff() -> void:
 		machines.push_front(tutorial_machine)
 		_set_security_cameras_active(false)
 	if Global.day == 1:
+		var email_manager = EmailsManager.get_instance()
+		email_manager._delivered_emails_to_date.clear()
+		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
