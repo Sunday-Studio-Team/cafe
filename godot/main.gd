@@ -361,10 +361,9 @@ func _interactive_tutorial_flow():
 	
 
 func _interactive_tutorial_shift() -> void:
-	
 	if tutorial_machine == null:
 		return
-	
+
 	# First customer, accept order
 	tutorial_machine.force_next_drink_perfect()
 	spawn_customer()
@@ -405,11 +404,16 @@ func _interactive_tutorial_shift() -> void:
 	while tutorial_machine.broken_down:
 		await get_tree().process_frame
 
+	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
+
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
 	SaveDataManager.save_game()
 
-	Global.day = 1
-	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+	if replaying_tutorial:
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+	else:
+		Global.day = 1
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 func _on_desk_interacted() -> void:
@@ -476,8 +480,10 @@ func _on_employee_rating_updated(new_value: float, old_value: float) -> void:
 		customer_spawn_timer.wait_time = new_flow_rate
 		customer_spawn_timer.start()
 
+
 func _get_customer_flow_rate() -> float:
 	return _rating_to_customer_flow_rate(Global.employee_rating)
+
 
 ## In seconds per customer entry.
 func _rating_to_customer_flow_rate(current_employee_rating: float) -> float:
