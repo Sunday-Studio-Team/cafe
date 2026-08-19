@@ -477,7 +477,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
 
 
-func _on_employee_rating_updated() -> void:
+func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
 	var new_flow_rate: float = _get_customer_flow_rate()
 	Global.customer_flow_rate = new_flow_rate
 	if customer_spawn_timer.time_left > new_flow_rate:
