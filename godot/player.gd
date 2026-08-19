@@ -235,7 +235,7 @@ func handle_sprint(delta: float) -> void:
 		sprint_lockout_timer.start()
 
 
-func handle_right_click(delta: float)-> void:
+func handle_right_click(_delta: float)-> void:
 	#handles pully-ball 
 	
 	#TODO check if player has item. return if they don't
