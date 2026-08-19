@@ -350,6 +350,7 @@ func _on_shift_started():
 	else:
 		_interactive_tutorial_shift()
 
+
 func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
 	tutorial_machine.gui_3d.interactable.interacted.connect(
@@ -358,7 +359,7 @@ func _interactive_tutorial_flow():
 				_tutorial_manager.show_machine_tutorial()
 				seen_tutorial_machine_instructions = true
 	)
-	
+
 
 func _interactive_tutorial_shift() -> void:
 	if tutorial_machine == null:
@@ -386,6 +387,7 @@ func _interactive_tutorial_shift() -> void:
 	tutorial_machine.customer = null
 	tutorial_machine.waiting_for_response = false
 	tutorial_machine.ingredients = 0
+	tutorial_machine.no_ingredients_sound.play()
 	tutorial_machine.set_order_action_buttons_available("refill")
 
 	while tutorial_machine.ingredients <= 0:
