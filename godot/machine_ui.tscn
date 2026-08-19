@@ -372,15 +372,34 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -55.367325
-offset_top = -21.044218
-offset_right = 54.63269
-offset_bottom = 66.95578
+offset_left = -55.36731
+offset_top = -21.04425
+offset_right = 54.632706
+offset_bottom = 66.95575
 grow_horizontal = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -0.8)
 theme_override_font_sizes/font_size = 64
 text = "+$x"
+
+[node name="IngredientsCostLabel" type="Label" parent="VBoxContainer/Buttons/RemakeDrinkButton" unique_id=637349936]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -151.5
+offset_top = -88.0
+offset_right = 151.5
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.28, 0)
+offset_transform_rotation = 0.08726646
+theme_override_font_sizes/font_size = 64
+text = "-🫘"
 
 [node name="AcceptButton" type="Button" parent="VBoxContainer/Buttons" unique_id=1653396744]
 self_modulate = Color(0.27450982, 1, 0, 1)
@@ -440,14 +459,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 value = 75.0
-show_percentage = false
 
 [node name="Label" type="Label" parent="VBoxContainer/IngredientsUI/IngredientsMeter" unique_id=861789852]
 layout_mode = 2
 size_flags_vertical = 10
 offset_transform_rotation = -0.08726646
 theme_override_font_sizes/font_size = 64
-text = "ingredients"
+text = "🫘"
 horizontal_alignment = 1
 
 [node name="RefillButton" type="Button" parent="VBoxContainer/IngredientsUI" unique_id=1915155455]

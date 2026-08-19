@@ -16,6 +16,7 @@ static var seen_breakdown_popup := false
 @export var customer_order_indicator: Label
 @export var final_order_indicator: Label
 @export var _price_label_remake: Label
+@export var remake_ingredients_cost_label: Label
 @export var _price_label_accept: Label
 @export var _rating_gain_on_remake_label: Label
 @export var make_drink_button: Button
@@ -146,6 +147,9 @@ func _process(_delta: float) -> void:
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
+	
+	# uncomment if we want to show detailed ingredients cost for remakes
+	#remake_ingredients_cost_label.text = "-%s%%🫘" % int(Stats.current.ingredients_per_order / float(max_ingredients) * 100)
 
 	ingredients_bar.value = ingredients
 	if ingredients < Stats.current.ingredients_per_order:
@@ -184,15 +188,19 @@ func _process(_delta: float) -> void:
 	
 	_process_queued_customers()
 
+
 func add_customer_to_queue(new_customer: Customer) -> void:
 	queued_customers.append(new_customer)
 	_customer_queue_updated()
 
+
 func force_next_drink_perfect() -> void:
 	next_drink_forced_perfect = true
 
+
 func force_next_drink_incorrect() -> void:
 	next_drink_forced_incorrect = true
+
 
 func _customer_queue_updated() -> void:
 	var i: int = 0
@@ -211,6 +219,7 @@ func _process_queued_customers() -> void:
 		set_customer(new_current_customer)
 		await customer.move_to(spot_for_customer.global_position)
 		machine_make_drink()
+
 
 func show_tutorial_where_is_storeroom() -> void:
 	#this is getting called within physics_process...
