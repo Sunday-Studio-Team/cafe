@@ -2,7 +2,7 @@ extends Resource
 class_name Ingredient
 
 # NOTE: WRONG values for testing purposes
-enum Ingredient_Label { NONE, WRONG, COFFEE, ESPRESSO, GREEN_TEA, TEA, CHAI, WATER, MILK, SUGAR, ICE, ALMOND_MILK }
+enum Ingredient_Label { NONE, WRONG, COFFEE, ESPRESSO, GREEN_TEA, TEA, CHAI, WATER, MILK, SUGAR, ICE, ALMOND_MILK, CARDAMOM }
 enum Ingredient_Type { NONE, MAIN, LIQUID, EXTRA } # only used in minigame atm
 
 @export var icon: Texture2D
@@ -35,6 +35,8 @@ func name_to_string() -> String:
 		Ingredient_Label.ICE:
 			return "ice"
 		Ingredient_Label.ALMOND_MILK:
-			return "almond milk"	
+			return "almond milk"
+		Ingredient_Label.CARDAMOM:
+			return "cardamom seeds"
 		_:
 			return "unknown"
