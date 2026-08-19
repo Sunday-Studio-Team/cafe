@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://deaoq82qeackq" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cr2t2yoape3ak" path="res://models/ingredients_bag_model.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="2_sweqy"]
+[ext_resource type="Script" uid="uid://dkrhm1jngkx74" path="res://camera_controller.gd" id="3_sweqy"]
+[ext_resource type="Script" uid="uid://cfdil6b7366s" path="res://camera_effects.gd" id="4_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://najej8q5da4u" path="res://audio/bag_pickup.mp3" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
@@ -12,7 +14,7 @@ height = 1.7
 [node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "sprint_lockout_timer")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
-camera = NodePath("CameraRig/Camera3D")
+camera = NodePath("CameraRig")
 aiming_ray = NodePath("CameraRig/Camera3D/RayCast3D")
 ingredients_bag = NodePath("CameraRig/Camera3D/IngredientsBag")
 bag_pickup_sound = NodePath("CameraRig/Camera3D/IngredientsBag/BagPickupSound")
@@ -23,11 +25,22 @@ sprint_lockout_timer = NodePath("SprintLockoutTimer")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
 
-[node name="CameraRig" type="Node3D" parent="." unique_id=1520575227]
+[node name="CameraRig" type="Node3D" parent="." unique_id=1520575227 node_paths=PackedStringArray("player_controller", "camera_effects")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+top_level = true
+script = ExtResource("3_sweqy")
+player_controller = NodePath("..")
+camera_effects = NodePath("Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=2046988330]
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=2046988330 node_paths=PackedStringArray("player")]
 fov = 90.0
+script = ExtResource("4_2hs0m")
+player = NodePath("../..")
+bob_pitch = 0.06
+bob_roll = 0.04
+bob_up = 0.01
+bob_frequency = 3.0
+max_shake = 0.2
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraRig/Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
@@ -50,3 +63,6 @@ max_db = 0.0
 
 [node name="SprintLockoutTimer" type="Timer" parent="." unique_id=1168419825]
 one_shot = true
+
+[node name="camera_controller_anchor" type="Marker3D" parent="." unique_id=1083781940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)

@@ -68,7 +68,7 @@ func _ready():
 				machine.spot_for_player.global_position,
 				0.1,
 			)
-			var cam: Camera3D = Global.player.camera
+			var cam: CameraController = Global.player.camera
 			cam_trans_b4_enter = cam.transform
 			create_tween().tween_property(
 				cam,
@@ -113,13 +113,20 @@ func exit() -> void:
 		interactable.visible = true
 
 	if Global.in_machine_ui:
-		Global.in_machine_ui = false
-		create_tween().tween_property(
-			Global.player.camera,
-			"transform",
-			cam_trans_b4_enter,
+		var cam: CameraController = Global.player.camera
+		var target_transform: Transform3D = Global.player.camera_controller_anchor.global_transform
+		
+		var tween := create_tween()
+		
+		tween.tween_property(
+			cam,
+			"global_transform",
+			target_transform,
 			CAM_TWEEN_DUR,
 		)
+		await tween.finished
+		cam.sync_rotation_to_player()
+		Global.in_machine_ui = false
 
 
 func _mouse_entered_area():

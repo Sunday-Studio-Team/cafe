@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const STRIDE_LENGTH := 0.75
 
-@export var camera: Camera3D
+@export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
@@ -40,6 +40,7 @@ var pully_ball_instance: Node3D
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
+@onready var camera_controller_anchor: Marker3D = $camera_controller_anchor
 
 
 func _ready() -> void:
@@ -74,7 +75,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
 	
-	handle_mouselook()
+	#handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
@@ -88,9 +89,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		mouse_delta += event.screen_relative * mouse_sens
+#func _unhandled_input(event: InputEvent) -> void:
+#	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+#		mouse_delta += event.screen_relative * mouse_sens
 
 
 # this is what decides whether to show the mouse
@@ -122,13 +123,13 @@ func handle_active_items() -> void:
 			Events.active_item_used.emit(Global.equipped_item)
 
 
-func handle_mouselook() -> void:
-	camera.rotation_degrees.x -= mouse_delta.y
-	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-
-	rotation_degrees.y -= mouse_delta.x
-
-	mouse_delta = Vector2.ZERO
+#func handle_mouselook() -> void:
+#	camera.rotation_degrees.x -= mouse_delta.y
+#	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+#	
+#	rotation_degrees.y -= mouse_delta.x
+#	
+#	mouse_delta = Vector2.ZERO
 
 
 func handle_movement(delta: float) -> void:
@@ -174,8 +175,12 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
+		if camera == null:
+			return
+
 		if (
-			not hovered_interactable.visible or not hovered_interactable.is_inside_tree()
+			not hovered_interactable.visible 
+			or not hovered_interactable.is_inside_tree()
 			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
@@ -272,8 +277,8 @@ func handle_ingredients_bag() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_ingredients and not Global.in_ui):
 		Global.holding_ingredients = false
 		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()
-		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		Global.main_scene.add_child(bag_to_drop)
+		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
