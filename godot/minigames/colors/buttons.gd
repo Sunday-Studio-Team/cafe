@@ -1,6 +1,6 @@
 extends Control
 
-const DELAY_AFTER_PRESSING_BUTTON := 0.9
+const DELAY_AFTER_PRESSING_BUTTON := 0.75
 
 @export var buttons: Array[Button]
 @export var needed_successes: int = 3
