@@ -54,13 +54,13 @@ var machines: Array[Machine]
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
 	SaveDataManager.get_options_data().apply_options()
-	
+
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
-	
+
 	Events.employee_rating_updated.connect(_on_employee_rating_updated)
 	customer_spawn_timer.timeout.connect(_on_customer_timer_timeout)
 	customer_spawn_timer.autostart = false
@@ -90,21 +90,21 @@ func _ready() -> void:
 	Global.customer_flow_rate = _get_customer_flow_rate()
 	get_stats()
 
-	ui.hide()
-
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
 	if Global.day == 1:
 		if not OS.has_feature("editor"):
 			_tutorial_manager.show_tutorial()
 			await _tutorial_manager.finished_tutorial
 
-	day_indicator.text = "DAY %s" % Global.day
+	day_indicator.text = Global.day_to_string(Global.day).to_upper()
 	day_indicator.show()
+	await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
 	await get_tree().create_timer(3, false).timeout
-	if not Global.in_pc_ui:
-		ui.show()
+	await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
 	day_indicator.hide()
-	Input.set_custom_mouse_cursor(null)
+
+	for ui_element: Control in ui.find_children("*", "Control", false):
+		create_tween().tween_property(ui_element, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT)
 
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test

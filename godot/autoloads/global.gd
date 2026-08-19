@@ -191,7 +191,7 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
-		if Global.minigame_active and in_spill_minigame:
+		if in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -238,3 +238,20 @@ func refresh_active_items():
 func put_active_item_on_cooldown(target_item: Item):
 	target_item.active_item_remaining_cooldown = target_item.active_item_cooldown_at_levels[target_item.item_level]
 	target_item.can_be_used = false
+
+
+func day_to_string(d: int) -> String:
+	var days_as_strings: Dictionary = {
+		0: "Friday",
+		1: "Monday",
+		2: "Tuesday",
+		3: "Wednesday",
+		4: "Thursday",
+	}
+
+	var day_as_string: String = days_as_strings[d % 5]
+
+	if d == 0:
+		day_as_string = "TRAINING"
+
+	return day_as_string

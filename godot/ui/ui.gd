@@ -2,6 +2,7 @@ extends CanvasLayer
 
 enum ScoreType { MONEY, CUSTOMER }
 
+@export var shift_start_ui: Label
 @export var profit_label: Label
 @export var profit_progress: ProgressBar
 @export var customer_happiness_label: Label
@@ -212,11 +213,10 @@ func _process(_delta: float) -> void:
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
-			# this exception is a bit awkward cos mouse visibility is tied to
-			# being 'in ui' so we need to make sure it doesnt trigger the hud
-			# to disappear when we show the mouse in that way
-			or Global.showing_floating_cursor
 	)
+
+	if shift_start_ui.visible:
+		should_show_hud = false
 
 	# if we dont have this, the remake minigame (where we're in the machine ui)
 	# wont hide the hud properly
