@@ -3,7 +3,7 @@ extends CanvasLayer
 
 signal tutorial_requested
 
-enum State { NORMAL, CONFIRMING_RESTART, CONFIRMING_QUIT }
+enum State { NORMAL, IN_OPTIONS, CONFIRMING_RESTART, CONFIRMING_QUIT }
 
 @export var _continue_button: Button
 @export var _tutorial_button: Button
@@ -71,7 +71,11 @@ func _process(_delta: float) -> void:
 			Input.is_action_just_pressed("pause")
 			and not Global.in_ui
 	):
-		if state == State.NORMAL:
+		if state == State.IN_OPTIONS:
+			# the options menu itself handles hiding, we just make eat the input
+			# and set the state here
+			state = State.NORMAL
+		elif state == State.NORMAL:
 			_toggle_pause()
 		else:
 			not_sure()
@@ -122,6 +126,8 @@ func _toggle_pause() -> void:
 func _on_tutorial_button_pressed() -> void:
 	tutorial_requested.emit()
 
+
 func _on_options_button_pressed() -> void:
+	state = State.IN_OPTIONS
 	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()
 	add_sibling(options_menu, true)

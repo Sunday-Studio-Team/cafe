@@ -30,6 +30,7 @@ func _ready() -> void:
 	_setup_option_views()
 	_save_settings_button.pressed.connect(_on_save_settings_button_pressed)
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_save_and_close_menu()
