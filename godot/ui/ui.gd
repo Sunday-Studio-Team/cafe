@@ -274,10 +274,13 @@ func handle_item_hover_tooltip() -> void:
 		var item: Item = hovered_icon.item
 		item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
 		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
-		item_hover_tooltip_active_indicator.visible = item.is_active_item
 		if item.is_active_item:
+			item_hover_tooltip_passive_indicator.hide()
+			item_hover_tooltip_active_indicator.show()
 			item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
-		item_hover_tooltip_passive_indicator.visible = !item.is_active_item
+		else:
+			item_hover_tooltip_passive_indicator.show()
+			item_hover_tooltip_active_indicator.hide()
 
 	item_hover_tooltip.visible = (
 			hovered_icon != null

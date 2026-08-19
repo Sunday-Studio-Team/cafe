@@ -491,8 +491,8 @@ exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineBut
 item_hover_tooltip = NodePath("ItemHoverTooltip")
 item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
 item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
-item_hover_tooltip_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
-item_hover_tooltip_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
+item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
 item_menu_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/MenuPrompt")
@@ -1168,35 +1168,69 @@ mouse_behavior_recursive = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Name" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=584146414]
+[node name="Name" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=5491478]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/bold_font_size = 53
 bbcode_enabled = true
-text = "[b]item name"
+text = "[b]Item Name[/b]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Active" type="PanelContainer" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=326428598]
+[node name="Active" type="PanelContainer" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=1414640514]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
 
-[node name="Label" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Active" unique_id=1571478993]
-custom_minimum_size = Vector2(400, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ItemHoverTooltip/VBoxContainer/Active" unique_id=1085170923]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=822948841]
 custom_maximum_size = Vector2(-1, 25)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 18
 theme_override_font_sizes/bold_font_size = 18
 bbcode_enabled = true
-text = "[b]ACTIVE[/b] (can be used once per shift)"
+text = "[b]ACTIVE[/b]"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="Description" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=335327845]
+[node name="CooldownLabel" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=948250030]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=1050465347]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pjuso")
+
+[node name="Label" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Passive" unique_id=693972534]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=1867485925]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
