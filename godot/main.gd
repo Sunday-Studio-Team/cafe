@@ -30,7 +30,6 @@ static var seen_breakdown_popup := false
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
-@export var active_item_timer: Timer
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
 @export var interaction_popup: CanvasLayer
@@ -95,6 +94,9 @@ func _ready() -> void:
 		if not OS.has_feature("editor"):
 			_tutorial_manager.show_tutorial()
 			await _tutorial_manager.finished_tutorial
+
+	for ui_element: Control in ui.find_children("*", "Control", false):
+		ui_element.modulate = Color.TRANSPARENT
 
 	day_indicator.text = Global.day_to_string(Global.day).to_upper()
 	day_indicator.show()
