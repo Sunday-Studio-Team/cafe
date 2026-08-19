@@ -212,6 +212,7 @@ func _process(_delta: float) -> void:
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
+			or Global.showing_floating_cursor and not (Global.in_pc_ui or Global.minigame_active)
 	)
 
 	# if we dont have this, the remake minigame (where we're in the machine ui)
