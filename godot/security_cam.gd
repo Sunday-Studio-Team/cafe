@@ -27,6 +27,7 @@ var _direction_multiplier: float = 1.0
 @onready var original_rotation := rotation_degrees
 
 
+
 func _ready() -> void:
 	create_rays()
 
@@ -84,12 +85,15 @@ func _physics_process(_delta: float) -> void:
 						caught_audio_stream_player_3d.play()
 					player_in_spotlight = true
 					break
-
-	if player_in_spotlight:
-		spotlight.light_color = Color.RED
-		Global.player_in_cctv_los = true
-	else:
-		spotlight.light_color = Color.WHITE
+		
+		if player_in_spotlight:
+			spotlight.light_color = Color.RED
+			Global.player_in_cctv_los = true
+			Global.player.vignette_red.fade_to(1.0 , 1.0)
+		else:
+			spotlight.light_color = Color.WHITE
+			Global.player.vignette_red.fade_to(0.0 , 1.0)
+		
 
 	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
 	

@@ -88,6 +88,8 @@ func _ready():
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause") and not Global.minigame_active:
 		exit()
+	if machine.broken_down:
+		exit()
 
 
 func _unhandled_input(event):

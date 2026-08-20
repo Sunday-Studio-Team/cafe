@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name UI extends CanvasLayer
 
 enum ScoreType { MONEY, CUSTOMER }
 
@@ -61,6 +61,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var hammer: Item
 @export var scrubber: Item
 @export var whipped_cream: Item
+
 
 var score_update_tween: Tween
 var alert_tween: Tween
@@ -208,7 +209,7 @@ func _process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
 	# in UI (except for the machine UI where we want the tablet to show on the
 	# side)
-
+	
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui

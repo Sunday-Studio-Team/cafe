@@ -738,7 +738,7 @@ func break_down() -> void:
 	broken_down = true
 	breakdown_timer.start()
 	await breakdown_timer.timeout
-	gui_3d.exit()
+	
 	Global.player.camera.camera_effects.trigger_shake()
 	# Showing the popup tutorial when the machine is broken
 	if not seen_breakdown_popup:
@@ -746,7 +746,7 @@ func break_down() -> void:
 		Global.popups["breakdown"].open()
 	else:
 		pass
-
+	
 	if gui_3d.player_using_me:
 		gui_3d.exit()
 	gui_3d.interactable.visible = false
@@ -755,7 +755,7 @@ func break_down() -> void:
 	breakdown_sound.play()
 	Events.alert_posted.emit("⚙️ machine broke down")
 	Global.breakdowns_this_shift += 1
-
+	
 	timer.paused = true
 	
 	hum_sound.stop()

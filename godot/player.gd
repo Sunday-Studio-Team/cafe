@@ -42,6 +42,12 @@ var pully_ball_instance: Node3D
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
 @onready var camera_controller_anchor: Marker3D = $camera_controller_anchor
 
+@onready var vignette_red: vignette_red = $"vignette/vignette red"
+@onready var vignette_black: vignette = $"vignette/vignette black"
+
+
+
+
 
 func _ready() -> void:
 	Global.player = self

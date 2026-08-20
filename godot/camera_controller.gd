@@ -2,7 +2,7 @@ class_name CameraController
 extends Node3D
 #values
 @export var player_controller: Player
-@export var mouse_sensitivity: float = 0.005
+@export var mouse_sensitivity: float = 0.002
 var input_rotation: Vector3
 var mouse_input: Vector2
 @export var camera_effects: Camera3D

@@ -280,6 +280,16 @@ curve = SubResource("Curve3D_ovcoh")
 [node name="AimPathFollow3D" parent="SecurityCams/SecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.88902724, 0, 0.45784253, 0, 0.99999255, 0, -0.4578422, 0, -0.8890279, 1.9674349, -0.14133549, 0.37266684)
 
+[node name="SecurityCam4" parent="SecurityCams" unique_id=747552737 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.796199, 2.8413355, 7.0981154)
+rotation_pause_length = 4.0
+
+[node name="AimPath3D" parent="SecurityCams/SecurityCam4" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ovcoh")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam4/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.88902724, 0, 0.45784253, 0, 0.99999255, 0, -0.4578422, 0, -0.8890279, 1.9674349, -0.14133549, 0.37266684)
+
 [node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
 rotation_time = 2.0
@@ -1614,6 +1624,8 @@ transform = Transform3D(-2.1482563, 0.65651375, -0.056880556, 0.6562837, 2.14900
 
 [editable path="SecurityCams/SecurityCam"]
 [editable path="SecurityCams/SecurityCam/CameraAimerModel/Model/camera"]
+[editable path="SecurityCams/SecurityCam4"]
+[editable path="SecurityCams/SecurityCam4/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam2"]
 [editable path="SecurityCams/SecurityCam2/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam3"]
