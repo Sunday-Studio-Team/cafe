@@ -15,6 +15,18 @@ extends Node
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
+@export var tippy_voice_lines: Dictionary[AudioStream, TippyLineType]
+
+enum TippyLineType {
+	shift_start,
+	shift_low_time,
+	customer_low_time,
+	remake_drink,
+	machine_make_drink,
+	under_goal,
+	clean_spill,
+	accept_drink
+}
 
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
