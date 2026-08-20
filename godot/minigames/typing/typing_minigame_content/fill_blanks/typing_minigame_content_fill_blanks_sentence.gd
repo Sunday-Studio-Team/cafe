@@ -1,4 +1,5 @@
 class_name TypingMinigameContentFillBlanksSentence
 extends Resource
 
+@export var customer_dialog: String
 @export var sentence_sections: Array[TypingMinigameContentFillBlanksSentenceSection]

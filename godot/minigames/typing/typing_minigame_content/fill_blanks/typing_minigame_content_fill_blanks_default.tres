@@ -33,16 +33,17 @@ metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_n8p8o"]
 script = ExtResource("4_n0y0b")
-typed_section = "wait"
+typed_section = "contact"
 metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
 
 [sub_resource type="Resource" id="Resource_n0y0b"]
 script = ExtResource("3_ltk1g")
-prefilled_section = " a moment."
+prefilled_section = "our services online for assistance."
 metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_1sjvo"]
 script = ExtResource("1_1sjvo")
+customer_dialog = "When I came here yesterday, the AI gave me the wrong drink!"
 sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_cp0d3"), SubResource("Resource_s4bm8"), SubResource("Resource_kmna6"), SubResource("Resource_ltk1g"), SubResource("Resource_bts7e"), SubResource("Resource_n8p8o"), SubResource("Resource_n0y0b")])
 metadata/_custom_type_script = "uid://bi77x8lotc312"
 
@@ -58,56 +59,108 @@ metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
 
 [sub_resource type="Resource" id="Resource_ryk1a"]
 script = ExtResource("3_ltk1g")
-prefilled_section = " for this error. I will prepare a "
+prefilled_section = " for this error. I will note this in a "
 metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_knijl"]
 script = ExtResource("4_n0y0b")
-typed_section = "replacement"
+typed_section = "feedback"
 metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
 
 [sub_resource type="Resource" id="Resource_hib46"]
 script = ExtResource("3_ltk1g")
-prefilled_section = " drink for you."
+prefilled_section = " form for you."
 metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_nc7i6"]
 script = ExtResource("1_1sjvo")
+customer_dialog = "This cafe's decor is so ugly!"
 sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_ubaki"), SubResource("Resource_g8vla"), SubResource("Resource_ryk1a"), SubResource("Resource_knijl"), SubResource("Resource_hib46")])
 metadata/_custom_type_script = "uid://bi77x8lotc312"
 
 [sub_resource type="Resource" id="Resource_0e247"]
 script = ExtResource("3_ltk1g")
-prefilled_section = "We are "
+prefilled_section = "We "
 metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_024bv"]
 script = ExtResource("4_n0y0b")
-typed_section = "sorry"
+typed_section = "apologize"
 metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
 
 [sub_resource type="Resource" id="Resource_o4yl8"]
 script = ExtResource("3_ltk1g")
-prefilled_section = " to hear this. I will"
+prefilled_section = " for the inconvenience. You may have the "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_rwsp4"]
+script = ExtResource("4_n0y0b")
+typed_section = "chance"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_n30lt"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " to receive a "
 metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_dbiq6"]
 script = ExtResource("4_n0y0b")
-typed_section = "prepare"
+typed_section = "coupon"
 metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
 
 [sub_resource type="Resource" id="Resource_yvj4k"]
 script = ExtResource("3_ltk1g")
-prefilled_section = " a replacement drink for you."
+prefilled_section = " for a replacement drink by email."
 metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
 
 [sub_resource type="Resource" id="Resource_yilih"]
 script = ExtResource("1_1sjvo")
-sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_0e247"), SubResource("Resource_024bv"), SubResource("Resource_o4yl8"), SubResource("Resource_dbiq6"), SubResource("Resource_yvj4k")])
+customer_dialog = "I was here last night, the AI gave me the wrong drink!"
+sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_0e247"), SubResource("Resource_024bv"), SubResource("Resource_o4yl8"), SubResource("Resource_rwsp4"), SubResource("Resource_n30lt"), SubResource("Resource_dbiq6"), SubResource("Resource_yvj4k")])
+metadata/_custom_type_script = "uid://bi77x8lotc312"
+
+[sub_resource type="Resource" id="Resource_vy0sy"]
+script = ExtResource("4_n0y0b")
+typed_section = "I "
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_uh030"]
+script = ExtResource("3_ltk1g")
+prefilled_section = "apologize"
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_bhe7a"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " for this error. Rest "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_ogxum"]
+script = ExtResource("4_n0y0b")
+typed_section = "assured"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_0skct"]
+script = ExtResource("3_ltk1g")
+prefilled_section = " that it will be "
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_4gdvx"]
+script = ExtResource("4_n0y0b")
+typed_section = "rectified"
+metadata/_custom_type_script = "uid://cgsyb3kd3ahx7"
+
+[sub_resource type="Resource" id="Resource_cs67g"]
+script = ExtResource("3_ltk1g")
+prefilled_section = "."
+metadata/_custom_type_script = "uid://cw0afgvrbt0gq"
+
+[sub_resource type="Resource" id="Resource_wy1sp"]
+script = ExtResource("1_1sjvo")
+customer_dialog = "It stinks in here! You stink!"
+sentence_sections = Array[ExtResource("2_kmna6")]([SubResource("Resource_vy0sy"), SubResource("Resource_uh030"), SubResource("Resource_bhe7a"), SubResource("Resource_ogxum"), SubResource("Resource_0skct"), SubResource("Resource_4gdvx"), SubResource("Resource_cs67g")])
 metadata/_custom_type_script = "uid://bi77x8lotc312"
 
 [resource]
 script = ExtResource("2_cp0d3")
-possible_customer_dialog = Array[String](["The machine won't give me what I ordered!", "I've been waiting forever for my order!"])
-possible_reply_sentences = Array[ExtResource("1_1sjvo")]([SubResource("Resource_1sjvo"), SubResource("Resource_nc7i6"), SubResource("Resource_yilih")])
+customer_dialog_and_player_replies = Array[ExtResource("1_1sjvo")]([SubResource("Resource_1sjvo"), SubResource("Resource_nc7i6"), SubResource("Resource_yilih"), SubResource("Resource_wy1sp")])
 metadata/_custom_type_script = "uid://c4f6srfjqwpsp"
