@@ -1,8 +1,11 @@
 class_name CameraController
 extends Node3D
+
+const MOUSE_SENSITIVITY_SCALING_FACTOR: float = 1000.0
+
 #values
 @export var player_controller: Player
-@export var mouse_sensitivity: float = 0.005
+@export var mouse_sensitivity: float = 1.5
 var input_rotation: Vector3
 var mouse_input: Vector2
 @export var camera_effects: Camera3D
@@ -16,8 +19,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not Global.in_ui:
-		mouse_input.x += -event.screen_relative.x * mouse_sensitivity
-		mouse_input.y += -event.screen_relative.y * mouse_sensitivity
+		mouse_input.x += -event.screen_relative.x * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
+		mouse_input.y += -event.screen_relative.y * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 
 func _process(_delta: float) -> void:
 	if Global.in_ui:
