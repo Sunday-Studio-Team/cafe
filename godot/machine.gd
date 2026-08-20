@@ -738,7 +738,7 @@ func break_down() -> void:
 	broken_down = true
 	breakdown_timer.start()
 	await breakdown_timer.timeout
-	gui_3d.exit()
+	#gui_3d.exit()
 	Global.player.camera.camera_effects.trigger_shake()
 	# Showing the popup tutorial when the machine is broken
 	if not seen_breakdown_popup:
