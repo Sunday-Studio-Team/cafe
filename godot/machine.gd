@@ -1,5 +1,5 @@
-# TODO: make the fixing minigame flow more readable
-# machine_3d_gui.gd is where the player interacts with the machine
+# this script is for all the behaviour of the machine + its ui
+# (machine_3d_gui.gd handles the player interaction and passing mouse input here)
 class_name Machine
 extends Node3D
 
@@ -292,9 +292,8 @@ func set_order_action_buttons_available(button_case: String) -> void:
 
 
 # called from inside spill() (so that itll still show if we trigger the spill
-# via a console command etc
+# via a console command etc)
 func show_tutorial_go_clean_spill() -> void:
-	#this is called right after spill() is called [but not inside spill()]
 	if OS.has_feature("skip_popups"):
 		return
 
@@ -384,7 +383,7 @@ func machine_make_drink() -> void:
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
 	customer_order_indicator.text = (
-			"ORDERED:\n %s (%s)"
+			"%s (%s)"
 			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
 
@@ -396,9 +395,10 @@ func machine_make_drink() -> void:
 		ordered_extra_icon.texture = null
 	ordered_drink_icon.texture = order.ordered_drink.icon
 
-	customer_order_indicator.show()
+	# NOTE: experiment: commented out for now to simplify ui
+	#customer_order_indicator.show()
 	order_breakdown.show()
-	
+
 	timer.start()
 
 	var breaking_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_start_each_day[Global.day]
@@ -485,10 +485,11 @@ func machine_make_drink() -> void:
 		spill()
 
 	final_order_indicator.text = (
-			"MADE:\n %s (%s)"
+			"%s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
-	final_order_indicator.show()
+	# NOTE: experiment: commented out for now to simplify ui
+	#final_order_indicator.show()
 
 	waiting_for_response = true
 	Events.order_completed.emit(customer)
@@ -584,7 +585,8 @@ func fix_machine(hammer: bool = false) -> void:
 		# during normal gameplay, breakdowns always happen mid order,
 		# but when we force a breakdown thru the console we have to check some stuff
 		if timer.time_left != 0:
-			customer_order_indicator.show()
+			# NOTE: experiment: commented out for now to simplify ui
+			#customer_order_indicator.show()
 			hum_sound.pitch_scale = randf_range(0.95, 1.05)
 			hum_sound.play()
 		elif waiting_for_response:
@@ -817,6 +819,7 @@ func _on_remake_drink_button_pressed() -> void:
 			Engine.time_scale *= time_scale
 			print("time scale set to: %s" % Engine.time_scale)
 
+
 func _on_remade_drink() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
@@ -826,6 +829,7 @@ func _on_remade_drink() -> void:
 		if item.item_id == "barista_guide":
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
+
 
 func _cancel_remake_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)

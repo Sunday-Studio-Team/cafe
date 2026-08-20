@@ -202,22 +202,31 @@ custom_maximum_size = Vector2(-1, 275)
 propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="OrderedText" type="RichTextLabel" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=96130809]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]ORDERED"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="OrderedItem" type="TextureRect" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1920408608]
-custom_minimum_size = Vector2(200, 250)
-custom_maximum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_apda1")
-expand_mode = 4
+expand_mode = 3
+stretch_mode = 5
 
 [node name="CustomerOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/OrderedInfo" unique_id=1074364750]
+visible = false
 custom_minimum_size = Vector2(500, 200)
-custom_maximum_size = Vector2(500, 200)
+custom_maximum_size = Vector2(500, 125)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "ORDERED
-almond milk iced matcha latte"
+text = "almond milk iced matcha latte"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -228,6 +237,9 @@ columns = 3
 
 [node name="Main" type="PanelContainer" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown" unique_id=1457050671]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.1, -0.25)
+offset_transform_rotation = 0.08726646
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Main" unique_id=1345079991]
 custom_minimum_size = Vector2(150, 150)
@@ -237,6 +249,8 @@ stretch_mode = 4
 
 [node name="Liquid" type="PanelContainer" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown" unique_id=1721289582]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 0.25)
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Liquid" unique_id=1279882551]
 custom_minimum_size = Vector2(150, 150)
@@ -246,6 +260,9 @@ stretch_mode = 4
 
 [node name="Extra" type="PanelContainer" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown" unique_id=51312532]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.1, -0.25)
+offset_transform_rotation = -0.08726646
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Extra" unique_id=1400792246]
 custom_minimum_size = Vector2(150, 150)
@@ -284,22 +301,31 @@ propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 10
 offset_transform_position = Vector2(0, 5)
+theme_override_constants/separation = 0
+
+[node name="OrderedText" type="RichTextLabel" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=611145803]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "[b]MADE"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="MadeItem" type="TextureRect" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=1104273258]
-custom_minimum_size = Vector2(200, 250)
-custom_maximum_size = Vector2(200, 250)
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_dw44w")
-expand_mode = 4
+expand_mode = 3
+stretch_mode = 5
 
 [node name="MachineOrderIndicator" type="Label" parent="VBoxContainer/OrderInfo/MadeInfo" unique_id=220725264]
+visible = false
 custom_minimum_size = Vector2(500, 200)
-custom_maximum_size = Vector2(500, 200)
+custom_maximum_size = Vector2(500, 125)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "MADE
-almond milk iced matcha latte"
+text = "almond milk iced matcha latte"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -310,13 +336,21 @@ columns = 3
 
 [node name="Main" parent="VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown" unique_id=1739128889 instance=ExtResource("7_dw44w")]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.1, -0.25)
+offset_transform_rotation = 0.08726646
 
 [node name="Liquid" parent="VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown" unique_id=352312806 instance=ExtResource("7_dw44w")]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 0.25)
 type = 1
 
 [node name="Extra" parent="VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown" unique_id=1838140619 instance=ExtResource("7_dw44w")]
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.1, -0.25)
+offset_transform_rotation = -0.08726646
 type = 2
 
 [node name="Total" type="HBoxContainer" parent="VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown" unique_id=1935245382]
@@ -330,7 +364,7 @@ text = "="
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer" unique_id=1826884261]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 2
 offset_transform_enabled = true
 theme_override_constants/separation = 96
 alignment = 1
