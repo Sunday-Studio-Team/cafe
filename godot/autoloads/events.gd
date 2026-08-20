@@ -15,8 +15,7 @@ signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
 signal order_completed(customer: Customer)
 signal order_approved(customer: Customer)
-signal customer_left_machine(customer: Customer, drink_score: int)
-signal customer_timed_out_window
+signal customer_left_machine(customer: Customer)
 signal time_up
 signal end_screen_finished
 signal requirements_met

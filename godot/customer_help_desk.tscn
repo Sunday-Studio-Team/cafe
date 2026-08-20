@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dm7kt8nyip6tb"]
+
+[ext_resource type="Script" uid="uid://xo4gagvgognp" path="res://customer_help_desk.gd" id="1_mvsta"]
+[ext_resource type="AudioStream" uid="uid://b2l81b36awff1" path="res://audio/bell.mp3" id="3_nfq5s"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="3_srjdr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(1, 1.6409302, 0.49658203)
+
+[node name="CustomerHelpDesk" type="Node3D" unique_id=556547264 node_paths=PackedStringArray("_spot_for_customer", "_start_of_customer_queue_marker", "_end_of_customer_queue_marker", "_help_desk_interactable", "bell_sound")]
+script = ExtResource("1_mvsta")
+_spot_for_customer = NodePath("SpotForCustomer")
+_start_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst")
+_end_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst/SpotForQueuedCustomerFinal")
+_help_desk_interactable = NodePath("Interactable")
+bell_sound = NodePath("BellSound")
+
+[node name="SpotForCustomer" type="Marker3D" parent="." unique_id=161216233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -0.9893484)
+
+[node name="SpotForQueuedCustomerFirst" type="Marker3D" parent="." unique_id=731738254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -2.9893484)
+
+[node name="SpotForQueuedCustomerFinal" type="Marker3D" parent="SpotForQueuedCustomerFirst" unique_id=418438218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -3.7844305)
+
+[node name="Interactable" type="Area3D" parent="." unique_id=1182380766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8095408, 0.6592536)
+script = ExtResource("3_srjdr")
+display_name = "Deal with customer"
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=444782907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32046503, -0.25170898)
+shape = SubResource("BoxShape3D_xrivr")
+
+[node name="Label3D" type="Label3D" parent="Interactable" unique_id=1612536710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17575902, -0.04817152)
+text = "Customer needs help!"
+
+[node name="BellSound" type="AudioStreamPlayer3D" parent="." unique_id=1253510791]
+stream = ExtResource("3_nfq5s")
+volume_db = -10.0
+max_db = 0.0

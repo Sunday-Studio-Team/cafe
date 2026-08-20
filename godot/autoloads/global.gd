@@ -50,7 +50,7 @@ var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
-var active_helpdesk_customer: Customer
+var active_help_desk_customer: Customer
 var holding_ingredients := false
 var day := 0
 var shift_length: float
@@ -91,7 +91,8 @@ var employee_rating: float = 0:
 		# (see comment for same lines in above func)
 		await get_tree().process_frame
 		score_update_message = ""
-var customer_flow_rate: float
+var machine_customer_flow_rate: float
+var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)

@@ -1,6 +1,8 @@
 class_name Customer
 extends Node3D
 
+signal wait_timed_out(customer: Customer)
+
 const MOVE_SPEED := 2.0
 
 @export var body: Sprite3D
@@ -28,7 +30,6 @@ func _ready() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
-	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
 
@@ -116,8 +117,8 @@ func leave_store() -> void:
 
 
 func _on_timer_timeout() -> void:
-	if not at_window:
-		Events.customer_approached_window.emit(self)
+	wait_timed_out.emit(self)
+	leave_store()
 
 
 func _on_order_started(customer: Customer) -> void:
@@ -133,16 +134,3 @@ func _on_order_approved(customer: Customer) -> void:
 		return
 
 	timer.stop()
-
-
-func _on_customer_left_machine(customer: Customer, _drink_score) -> void:
-	if customer != self:
-		return
-
-	time_bonus_label.hide()
-	leave_store()
-	# window complaint mechanic (disabled for now)
-	#if (drink_score > -3):
-	#leave_store()
-	#else:
-	#Events.customer_approached_window.emit(self)

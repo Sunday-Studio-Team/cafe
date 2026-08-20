@@ -27,7 +27,7 @@ func _ready() -> void:
 func _start_minigame() -> void:
 	_state = State.CUSTOMER_APOLOGY
 	
-	_active_helpdesk_customer = Global.active_helpdesk_customer
+	_active_helpdesk_customer = Global.active_help_desk_customer
 	
 	var customer_apology_typing_minigame_variant_packed_scene: PackedScene
 	var likelihoods_total: float = full_sentence_likelihood + fill_blanks_likelihood

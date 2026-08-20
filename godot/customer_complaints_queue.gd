@@ -1,4 +1,4 @@
-class_name CustomerQueue
+class_name CustomerComplaintsQueue
 extends Node3D
 
 signal customer_added
@@ -38,7 +38,7 @@ func add_customer(customer: Customer) -> void:
 	await _on_queue_updated()
 	customer_added.emit()
 	customer.at_window = true
-	customer.timer.wait_time = Stats.current.customer_wait_time_window
+	customer.timer.wait_time = Stats.current.customer_wait_time_help_desk
 	customer.timer.start()
 	customer.waiting_indicator.show()
 
@@ -57,7 +57,7 @@ func remove_front_customer(customer_happy: bool) -> void:
 
 	if customer_happy:
 		Global.score_update_message = "customer placated"
-		Global.employee_rating += Stats.current.placated_customer_rating_gain_each_day[Global.day]
+		Global.employee_rating += Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
 	else:
 		Global.score_update_message = "customer left"
 		Events.customer_timed_out_window.emit()
@@ -84,7 +84,7 @@ func _on_queue_updated() -> void:
 
 
 func _on_customer_interactable_interacted() -> void:
-	Global.active_helpdesk_customer = _get_front_customer()
+	Global.active_help_desk_customer = _get_front_customer()
 
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
@@ -99,14 +99,12 @@ func _on_customer_interactable_interacted() -> void:
 func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
-	Events.customer_timed_out_window.disconnect(_on_customer_timed_out_window)
 	remove_front_customer(true)
 
 
 func _on_minigame_cancelled() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
-	Events.customer_timed_out_window.disconnect(_on_customer_timed_out_window)
 
 
 func _on_customer_timed_out_window() -> void:
