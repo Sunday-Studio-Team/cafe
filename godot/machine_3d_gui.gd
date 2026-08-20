@@ -114,18 +114,14 @@ func exit() -> void:
 
 	if Global.in_machine_ui:
 		var cam: CameraController = Global.player.camera
-		var target_transform: Transform3D = Global.player.camera_controller_anchor.global_transform
-		
-		var tween := create_tween()
-		
-		tween.tween_property(
+		var tween: PropertyTweener = create_tween().tween_property(
 			cam,
-			"global_transform",
-			target_transform,
+			"transform",
+			cam_trans_b4_enter,
 			CAM_TWEEN_DUR,
 		)
 		await tween.finished
-		cam.sync_rotation_to_player()
+		cam.sync_rotation_from_player()
 		Global.in_machine_ui = false
 
 

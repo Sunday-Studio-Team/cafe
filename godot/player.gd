@@ -40,7 +40,6 @@ var pully_ball_instance: Node3D
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
-@onready var camera_controller_anchor: Marker3D = $camera_controller_anchor
 
 
 func _ready() -> void:
@@ -269,7 +268,7 @@ func handle_footstep_sounds() -> void:
 func tilt_camera() -> void:
 	const TILT_AMOUNT := 0.25
 
-	var local_velocity = basis.transposed() * velocity
+	var local_velocity: Vector3 = basis.transposed() * velocity
 	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
 
 
