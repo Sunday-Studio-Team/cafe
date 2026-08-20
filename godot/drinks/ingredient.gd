@@ -10,6 +10,7 @@ enum Ingredient_Type { NONE, MAIN, LIQUID, EXTRA } # only used in minigame atm
 @export var type: Ingredient_Type
 @export var cost: float
 
+
 func name_to_string() -> String:
 	match name:
 		Ingredient_Label.NONE:

@@ -32,15 +32,25 @@ func _physics_process(_delta: float) -> void:
 
 
 func populate_captcha() -> void:
-	for captcha_icon: IngredientIconHolder in captcha.get_children():
-		captcha_icon.button.button_pressed = false
-		captcha_icon.ingredient = Global.ingredients.pick_random()
+	var captcha_slots = captcha.get_children() as Array[IngredientIconHolder]
+	var slots_with_our_ingredients: Array[IngredientIconHolder]
 
-	# Functionality to guarantee needed icons show up at least once
-	captcha.get_children().pick_random().ingredient = ordered_drink.main_ingredient
-	captcha.get_children().pick_random().ingredient = ordered_drink.liquid
-	if (ordered_drink.extra):
-		captcha.get_children().pick_random().ingredient = ordered_drink.extra
+	# get the ingredients from the ordered drink and put them each in one of the
+	# slots in the captcha
+	for ingredient: Ingredient in [
+		ordered_drink.main_ingredient,
+		ordered_drink.liquid,
+		ordered_drink.extra,
+	]:
+		if ingredient != null and ingredient.name != Ingredient.Ingredient_Label.NONE:
+			var random_icon_holder: IngredientIconHolder = captcha_slots.pick_random()
+			random_icon_holder.ingredient = ingredient
+			slots_with_our_ingredients.append(random_icon_holder)
+
+	# fill in the rest of the slots with random ingredients
+	for captcha_icon: IngredientIconHolder in captcha_slots:
+		if not slots_with_our_ingredients.has(captcha_icon):
+			captcha_icon.ingredient = Global.ingredients.pick_random()
 
 
 func populate_order_reminder() -> void:
@@ -122,7 +132,7 @@ func _start_minigame() -> void:
 	get_ordered_drink(drink)
 
 	populate_captcha()
-	
+
 	order_reminder.visible = false
 
 
