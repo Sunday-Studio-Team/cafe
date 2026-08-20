@@ -102,8 +102,7 @@ var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[Texture]
 ## the sprites of customers that are in the cafe right now
-## (tracked so we dont spawn 2 of the same)
-var customer_sprites_spawned: Array[Texture]
+var customer_sprites_in_use: Array[Texture]
 var spill_sprites: Array[Texture]
 var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0

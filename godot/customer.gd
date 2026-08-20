@@ -23,9 +23,21 @@ var percent_time_left: float = 100
 
 
 func _ready() -> void:
-	while body.texture == null or Global.customer_sprites_spawned.has(body.texture):
-		body.texture = Global.customer_sprites.pick_random()
-	Global.customer_sprites_spawned.append(body.texture)
+	# Find all unused customer sprites
+	var unused_customer_sprites: Array[Texture]
+	for customer_sprite in Global.customer_sprites:
+		if !Global.customer_sprites_in_use.has(customer_sprite):
+			unused_customer_sprites.append(customer_sprite)
+	
+	# Prefer using an unused one, else just get a random one.
+	var customer_texture: Texture
+	if unused_customer_sprites.size() > 0:
+		customer_texture = unused_customer_sprites.pick_random()
+	else:
+		customer_texture = Global.customer_sprites.pick_random()
+	Global.customer_sprites_in_use.append(customer_texture)
+	body.texture = customer_texture
+	
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
@@ -64,7 +76,7 @@ func _process(_delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	Global.customer_sprites_spawned.erase(body.texture)
+	Global.customer_sprites_in_use.erase(body.texture)
 
 
 func spawn_anim() -> void:
