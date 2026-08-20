@@ -86,7 +86,7 @@ func _ready():
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not Global.minigame_active:
+	if Input.is_action_just_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit()
 
 
