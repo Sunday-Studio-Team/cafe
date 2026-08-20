@@ -147,8 +147,28 @@ func _on_time_up() -> void:
 	_profit_judgement_container.visible = true
 	stars_sound.play()
 
-	await get_tree().create_timer(1).timeout
-	
+	await get_tree().create_timer(1.5).timeout
+
+	# show outcome text and button
+	if (
+			Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
+	):
+		if Global.day == Global.final_day:
+			outcome.text = "[b][color=green]YOU WIN"
+			button.text = "end run"
+		else:
+			outcome.text = "[b][color=green]SHIFT CLEARED"
+			button.text = "continue"
+		win_shift_sound.play()
+	else:
+		outcome.text = "[b][color=red]FIRED"
+		button.text = "new run"
+		lose_shift_sound.play()
+
+	outcome.show()
+
+	await get_tree().create_timer(1.0).timeout
+
 	_rating_title_label.visible = true
 	await get_tree().create_timer(0.5).timeout
 	_rating_label.visible = true
@@ -175,25 +195,6 @@ func _on_time_up() -> void:
 					0.75,
 					)
 			await t.finished
-
-	await get_tree().create_timer(0.5).timeout
-	# show outcome text and button
-	if (
-		Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
-	):
-		if Global.day == Global.final_day:
-			outcome.text = "[b][color=green]YOU WIN"
-			button.text = "end run"
-		else:
-			outcome.text = "[b][color=green]SHIFT CLEARED"
-			button.text = "continue"
-		win_shift_sound.play()
-	else:
-		outcome.text = "[b][color=red]FIRED"
-		button.text = "new run"
-		lose_shift_sound.play()
-
-	outcome.show()
 
 	await get_tree().create_timer(0.5).timeout
 

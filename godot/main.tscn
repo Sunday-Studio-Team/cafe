@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://customer_help_desk.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="4_ovcoh"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
@@ -179,7 +179,7 @@ bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "customer_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "_customer_help_desk", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -191,12 +191,11 @@ first_machine = NodePath("Machines/Machine")
 second_machine = NodePath("Machines/Machine2")
 third_machine = NodePath("Machines/Machine3")
 fourth_machine = NodePath("Machines/Machine4")
-customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
-window = NodePath("Window")
+_customer_help_desk = NodePath("CustomerHelpDesk")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Desk")
@@ -267,8 +266,8 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8
 [node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.7)
 
-[node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 3.5)
+[node name="CustomerHelpDesk" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 4.0535426)
 
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
 

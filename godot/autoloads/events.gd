@@ -18,8 +18,7 @@ signal order_approved(customer: Customer)
 signal order_approved_no_customer
 signal order_remaking_drink
 signal machine_making_drink
-signal customer_left_machine(customer: Customer, drink_score: int)
-signal customer_timed_out_window
+signal customer_left_machine(customer: Customer)
 signal customer_low_time_warning
 signal under_money_goal
 signal time_up

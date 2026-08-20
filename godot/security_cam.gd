@@ -21,7 +21,7 @@ var _all_shape_casts: Array[ShapeCast3D]
 var rotate_tween: Tween
 var disable_minigames := ["Lines"]
 var _camera_disarmed := false
-var _player_slow_status_effect: Player.CameraSlowPlayerStatusEffect
+var _player_slow_status_effect: CameraSlowPlayerStatusEffect
 var _direction_multiplier: float = 1.0
 
 @onready var original_rotation := rotation_degrees
@@ -77,7 +77,7 @@ func _physics_process(_delta: float) -> void:
 					if apply_slow:
 						if _player_slow_status_effect != null:
 							Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
-						_player_slow_status_effect = Player.CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
+						_player_slow_status_effect = CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
 						Global.player.player_status_effects.apply_status_effect(_player_slow_status_effect)
 						caught_audio_stream_player_3d.play()
 					player_in_spotlight = true

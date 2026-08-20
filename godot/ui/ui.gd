@@ -494,7 +494,7 @@ func _update_rating() -> void:
 		c.queue_free()
 	
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
-	customer_flow_rate_label.text = "%s" % Global.customer_flow_rate
+	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
 
 func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():

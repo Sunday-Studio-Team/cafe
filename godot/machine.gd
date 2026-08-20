@@ -121,7 +121,6 @@ func _ready() -> void:
 
 	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
 
-	Events.customer_approached_window.connect(_on_customer_approached_window)
 	spill_interactable.interacted.connect(_on_clean_spill)
 
 	progress_indicator.hide()
@@ -196,7 +195,7 @@ func _process(_delta: float) -> void:
 
 func add_customer_to_queue(new_customer: Customer) -> void:
 	queued_customers.append(new_customer)
-	_customer_queue_updated()
+	_customer_queue_update_visuals()
 
 
 func force_next_drink_perfect() -> void:
@@ -207,7 +206,7 @@ func force_next_drink_incorrect() -> void:
 	next_drink_forced_incorrect = true
 
 
-func _customer_queue_updated() -> void:
+func _customer_queue_update_visuals() -> void:
 	var i: int = 0
 	for queued_customer in queued_customers:
 		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine 
@@ -220,9 +219,8 @@ func _process_queued_customers() -> void:
 		if customer != null:
 			return
 		var new_current_customer: Customer = queued_customers.pop_front()
-		_customer_queue_updated()
-		set_customer(new_current_customer)
-		await customer.move_to(spot_for_customer.global_position)
+		_customer_queue_update_visuals()
+		await _set_customer(new_current_customer)
 		check_for_stepping_in_spill()
 		machine_make_drink()
 
@@ -362,11 +360,11 @@ func show_tutorial_go_clean_spill() -> void:
 		Global.in_tutorial_screen = false # re enable pause
 
 
-func set_customer(c: Customer) -> void:
-	customer = c
+func _set_customer(new_customer: Customer) -> void:
+	customer = new_customer
 	if customer != null:
+		customer.wait_timed_out.connect(_on_customer_wait_timed_out)
 		await customer.move_to(spot_for_customer.global_position)
-
 	else:
 		customer_order_indicator.hide()
 		final_order_indicator.hide()
@@ -383,6 +381,13 @@ func set_customer(c: Customer) -> void:
 			Events.force_close_minigame.emit()
 			Events.minigame_cancelled.emit()
 
+func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
+	timed_out_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out)
+	if customer == timed_out_customer:
+		Global.score_update_message = "customer didn't get drink in time"
+		Global.employee_rating -= Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
+		customer.leave_store()
+		_set_customer(null)
 
 func get_stats() -> void:
 	# Deprecated with addition of ramking minigame, I think
@@ -651,7 +656,7 @@ func refill() -> void:
 	Events.minigame_active.emit(refill_minigame)
 
 	await Events.minigame_end
-	
+
 	var ingredient_multiplier: float = 1.0
 	for item in Global.owned_items:
 		if item.item_id == "nice_spoon":
@@ -660,7 +665,7 @@ func refill() -> void:
 			elif item.item_level == 2:
 				ingredient_multiplier = 3.0
 	ingredients += roundi(Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy * ingredient_multiplier)
-	
+
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
 	if (
@@ -680,6 +685,7 @@ func cancel_fix_minigame() -> void:
 func cancel_clean_spill() -> void:
 	Events.minigame_end.disconnect(clean_up_spill)
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
+
 
 func _on_accept_button_pressed() -> void:
 	accept_order(false)
@@ -734,8 +740,8 @@ func accept_order(did_remake_drink: bool) -> void:
 	# -------------------------------------------------
 
 	await get_tree().create_timer(1.5, false).timeout
-	Events.customer_left_machine.emit(customer, order.star_rating_gain_for_remake)
-	set_customer(null)
+	customer.leave_store()
+	_set_customer(null)
 
 
 func reject_order() -> void:
@@ -773,7 +779,8 @@ func finished_manual_remake_drink() -> void:
 	_price_label_accept.hide()
 	_rating_gain_on_remake_label.hide()
 
-	accept_order(true)	
+	accept_order(true)
+
 
 func break_down() -> void:
 	if broken_down == true:
@@ -803,8 +810,7 @@ func break_down() -> void:
 	
 	hum_sound.stop()
 
-#Active Item
-#If item used, checks if it's valid and does the specified action
+
 func on_active_item_used_machine(item: Item):
 	if item == null:
 		return
@@ -873,12 +879,6 @@ func _cancel_remake_minigame() -> void:
 		if item.item_id == "barista_guide":
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
-
-func _on_customer_approached_window(customer_at_window: Customer) -> void:
-	if customer_at_window != customer:
-		return
-	set_customer(null)
-
 
 class OrderData:
 	var ordered_drink: Drink
