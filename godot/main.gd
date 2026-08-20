@@ -159,6 +159,9 @@ func _ready() -> void:
 	Events.spill_clean_done.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
 	)
+	Events.order_approved_no_customer.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.accept_drink)
+	)
 
 
 func _process(delta: float) -> void:

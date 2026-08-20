@@ -693,6 +693,7 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
+	Events.order_approved_no_customer.emit()
 
 	_rating_gain_on_remake_label.hide()
 	
