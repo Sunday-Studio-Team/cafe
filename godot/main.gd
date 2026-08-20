@@ -553,7 +553,7 @@ func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> fl
 	var rating_flow_rate_curve_for_day: Curve = Stats.current.machine_customer_flow_rate_at_rating_curve_per_day[Global.day]
 	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
-	print("secs per machine customer: %s" % seconds_per_customer)
+	print("secs per machine customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
 
 ## In seconds per help desk customer entry.
@@ -561,5 +561,5 @@ func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> 
 	var rating_flow_rate_curve_for_day: Curve = Stats.current.help_desk_customer_flow_rate_at_rating_curve_per_day[Global.day]
 	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
-	print("secs per help desk customer: %s" % seconds_per_customer)
+	print("secs per help desk customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
