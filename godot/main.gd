@@ -271,7 +271,21 @@ func spawn_customer() -> void:
 	if available_machines.size() == 0:
 		return
 	
-	var assigned_machine: Machine = available_machines.pick_random()
+	
+	# Get the machine that's got the shortest queue.
+	var shortest_queue_machine: Machine = null
+	for machine in available_machines:
+		if shortest_queue_machine == null:
+			shortest_queue_machine = machine
+			continue
+		if machine.customer == null and shortest_queue_machine.customer != null:
+			shortest_queue_machine = machine
+			continue
+		if machine.queued_customers.size() < shortest_queue_machine.queued_customers.size():
+			shortest_queue_machine = machine
+			continue
+	
+	var assigned_machine: Machine = shortest_queue_machine
 	if assigned_machine == null:
 		printerr("Machine to spawn at should never be null?")
 		return
