@@ -147,6 +147,9 @@ func _ready() -> void:
 	Events.customer_low_time_warning.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.customer_low_time)
 	)
+	Events.order_remaking_drink.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.remake_drink)
+	)
 
 
 func _process(delta: float) -> void:

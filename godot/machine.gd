@@ -835,6 +835,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
 	Events.minigame_active.emit(manual_drink_minigames.pick_random())
+	Events.order_remaking_drink.emit()
 	
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
