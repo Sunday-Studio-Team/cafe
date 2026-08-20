@@ -28,6 +28,9 @@ var _shake_strength :float = 0.0
 
 var _step_timer : float = 0.0
 
+func _ready() -> void:
+	Events.game_options_changed.connect(_on_game_options_changed)
+
 func trigger_shake()-> void:
 	_shake_strength = max_shake
 
@@ -89,3 +92,16 @@ func camera_effects(delta: float) -> void:
 	
 	position = offset
 	rotation = angles 
+
+func _on_game_options_changed(options_data: OptionsData) -> void:
+	match options_data.camera_motion_option:
+		OptionsData.CameraMotionOption.On:
+			enable_headbob = true
+			enable_shake = true
+			enable_tilt = true
+		OptionsData.CameraMotionOption.Off:
+			enable_headbob = false
+			enable_shake = false
+			enable_tilt = false
+		_:
+			pass

@@ -4,6 +4,7 @@ extends Node
 
 @export var _graphics_preset_option_view: OptionsMenuOptionView
 @export var _crosshair_option_view: OptionsMenuOptionView
+@export var _camera_motion_option_view: OptionsMenuOptionView
 @export var _save_settings_button: Button
 
 const _graphics_option_presets: Dictionary[String, int] = {
@@ -16,6 +17,11 @@ const _graphics_option_presets: Dictionary[String, int] = {
 const _crosshair_options: Dictionary[String, int] = {
 	"On (Default)": OptionsData.CrosshairOption.On,
 	"Off": OptionsData.CrosshairOption.Off,
+}
+
+const _camera_motion_options: Dictionary[String, int] = {
+	"Camera Effects On (Default)": OptionsData.CameraMotionOption.On,
+	"Camera Effects Off (Motion Sickness Friendly)": OptionsData.CameraMotionOption.Off,
 }
 
 var _options_data: OptionsData
@@ -48,12 +54,21 @@ func _setup_option_views() -> void:
 	_crosshair_option_view.set_selected_dropdown_option((_options_data.crosshair_option as int))
 	_crosshair_option_view.changed_option.connect(_on_crosshair_option_view_changed_option)
 
+	_camera_motion_option_view.set_label("Motion Sickness")
+	_camera_motion_option_view.set_dropdown_options(_camera_motion_options)
+	_camera_motion_option_view.set_selected_dropdown_option((_options_data.camera_motion_option as int))
+	_camera_motion_option_view.changed_option.connect(_on_camera_motion_option_view_changed_option)
+
 func _on_graphics_preset_option_view_changed_option(index: int) -> void:
 	_options_data.graphics_preset = (index as OptionsData.GraphicsOptionsPresets)
 	_options_data.apply_options()
 
 func _on_crosshair_option_view_changed_option(index: int) -> void:
 	_options_data.crosshair_option = (index as OptionsData.CrosshairOption)
+	_options_data.apply_options()
+
+func _on_camera_motion_option_view_changed_option(index: int) -> void:
+	_options_data.camera_motion_option = (index as OptionsData.CameraMotionOption)
 	_options_data.apply_options()
 
 func _on_save_settings_button_pressed() -> void:
