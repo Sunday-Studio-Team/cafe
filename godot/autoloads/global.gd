@@ -15,7 +15,6 @@ extends Node
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
-
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
 var player: Player
