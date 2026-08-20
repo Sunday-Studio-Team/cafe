@@ -118,8 +118,6 @@ func leave_store() -> void:
 
 func _on_timer_timeout() -> void:
 	wait_timed_out.emit(self)
-	leave_store()
-
 
 func _on_order_started(customer: Customer) -> void:
 	if customer != self or orders_made > 0:
