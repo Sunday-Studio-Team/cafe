@@ -550,14 +550,16 @@ func _get_help_desk_customer_flow_rate() -> float:
 
 ## In seconds per machine customer entry.
 func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> float:
-	var min_flow_rate_for_day: float = Stats.current.machine_customer_flow_rate_at_min_rating_per_day[Global.day]
-	var max_flow_rate_for_day: float = Stats.current.machine_customer_flow_rate_at_max_rating_per_day[Global.day]
-	var seconds_per_customer: float = remap(current_employee_rating, 0.0, Stats.current.employee_rating_max, min_flow_rate_for_day, max_flow_rate_for_day)
+	var rating_flow_rate_curve_for_day: Curve = Stats.current.machine_customer_flow_rate_at_rating_curve_per_day[Global.day]
+	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
+	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	print("secs per machine customer: %s" % seconds_per_customer)
 	return seconds_per_customer
 
-## In seconds per machine customer entry.
+## In seconds per help desk customer entry.
 func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> float:
-	var min_flow_rate_for_day: float = Stats.current.help_desk_customer_flow_rate_at_min_rating_per_day[Global.day]
-	var max_flow_rate_for_day: float = Stats.current.help_desk_customer_flow_rate_at_max_rating_per_day[Global.day]
-	var seconds_per_customer: float = remap(current_employee_rating, 0.0, Stats.current.employee_rating_max, min_flow_rate_for_day, max_flow_rate_for_day)
+	var rating_flow_rate_curve_for_day: Curve = Stats.current.help_desk_customer_flow_rate_at_rating_curve_per_day[Global.day]
+	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
+	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	print("secs per help desk customer: %s" % seconds_per_customer)
 	return seconds_per_customer
