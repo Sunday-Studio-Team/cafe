@@ -291,7 +291,7 @@ func handle_ingredients_bag() -> void:
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()
 
-class PlayerStatusEffects extends RefCounted:
+class PlayerStatusEffects extends Resource:
 	var _player: Player
 	var _player_status_effects_array: Array[PlayerStatusEffect] = []
 
@@ -343,7 +343,7 @@ class PlayerStatusEffects extends RefCounted:
 			player_status_effect.apply_effect(_player)
 
 @abstract
-class PlayerStatusEffect extends RefCounted:
+class PlayerStatusEffect extends Resource:
 	@abstract 
 	func apply_effect(player: Player) -> void
 
