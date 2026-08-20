@@ -18,6 +18,7 @@ signal order_approved(customer: Customer)
 signal customer_left_machine(customer: Customer, drink_score: int)
 signal customer_timed_out_window
 signal time_up
+signal low_time_warning
 signal end_screen_finished
 signal requirements_met
 signal money_updated(new_value: float, old_value: float)

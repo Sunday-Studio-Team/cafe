@@ -140,6 +140,11 @@ func _ready() -> void:
 		# waypoint_ring.hide()
 
 
+	# Add tippy voice lines
+	Events.low_time_warning.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_low_time)
+	)
+
 
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
