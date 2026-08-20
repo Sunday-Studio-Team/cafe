@@ -64,18 +64,17 @@ var queued_customers: Array[Customer]
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
-var max_ingredients: int = 100
 var make_drink_locked: bool = false
 var next_drink_forced_perfect: bool = false
 var next_drink_forced_incorrect: bool = false
 
-var ingredients: int = max_ingredients:
+var ingredients: int:
 	set(new_value):
 		var change := new_value - ingredients
 
-		if new_value > max_ingredients:
-			change = max_ingredients - ingredients
-			ingredients = max_ingredients
+		if new_value > Stats.current.machine_max_ingredients:
+			change = Stats.current.machine_max_ingredients - ingredients
+			ingredients = Stats.current.machine_max_ingredients
 		elif new_value < 0:
 			change = 0 - ingredients
 			ingredients = 0
@@ -95,6 +94,8 @@ var refill_minigame := "Refill"
 func _ready() -> void:
 	get_stats()
 	Events.items_updated.connect(get_stats)
+	
+	ingredients = Stats.current.machine_starting_ingredients
 
 	accept_button.pressed.connect(_on_accept_button_pressed)
 	make_drink_button.button_down.connect(
@@ -160,7 +161,7 @@ func _process(_delta: float) -> void:
 		show_tutorial_where_is_storeroom()
 	
 	else:
-		if ingredients <= max_ingredients / 2.0:
+		if ingredients <= Stats.current.machine_max_ingredients / 2.0:
 			ingredients_bar.modulate = Color.YELLOW
 		else:
 			ingredients_bar.modulate = Color.GREEN
@@ -400,8 +401,11 @@ func machine_make_drink() -> void:
 	
 	timer.start()
 
+	var breaking_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_start_each_day[Global.day]
+	var breaking_chance_at_shift_end_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_end_each_day[Global.day]
+	var breaking_chance_now: float = remap(Global.shift_progress_ratio, 0.0, 1.0, breaking_chance_at_shift_start_for_day, breaking_chance_at_shift_end_for_day)
 	if (
-			randf() < Stats.current.chance_of_machine_breaking
+			randf() <= breaking_chance_now
 			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
 	):
 		break_down()
@@ -470,8 +474,12 @@ func machine_make_drink() -> void:
 	
 	display_drink_score()
 
+	var shift_progress_ratio: float = Global.shift_progress_ratio
+	var spill_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_spill_at_shift_start_each_day[Global.day]
+	var spill_chance_at_shift_end_for_day: float = Stats.current.chance_of_machine_spill_at_shift_end_each_day[Global.day]
+	var spill_chance_now: float = remap(shift_progress_ratio, 0.0, 1.0, spill_chance_at_shift_start_for_day, spill_chance_at_shift_end_for_day)
 	if (
-			randf() < Stats.current.machine_chance_of_spill
+			randf() < spill_chance_now
 			and Global.spills_this_shift < Stats.current.max_spills_per_shift
 	):
 		spill()

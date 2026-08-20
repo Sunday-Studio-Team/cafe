@@ -54,6 +54,9 @@ var finished_important_emails: Array[EmailData]
 var active_helpdesk_customer: Customer
 var holding_ingredients := false
 var day := 0
+var shift_length: float
+var shift_time_remaining: float
+var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
 var daily_cafe_money := 0.0:
