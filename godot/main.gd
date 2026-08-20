@@ -85,6 +85,7 @@ func _ready() -> void:
 	Global.spills_this_shift = 0
 	Global.breakdowns_this_shift = 0
 	Global.in_machine_ui = false
+	Global.machine_in_use = null
 	Global.in_pc_ui = false
 	Global.customer_flow_rate = _get_customer_flow_rate()
 	get_stats()

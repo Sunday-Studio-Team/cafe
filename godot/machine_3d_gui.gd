@@ -43,6 +43,7 @@ func _ready():
 			node_area.visible = true
 			interactable.visible = false
 			Global.in_machine_ui = true
+			Global.machine_in_use = machine
 			player_using_me = true
 
 			#store where the player was, before they interacted w/ the machine.
@@ -81,13 +82,13 @@ func _ready():
 	Events.machine_exit_button_pressed.connect(
 		func():
 			if player_using_me:
-				exit(),
+				exit_with_camera_tween(),
 	)
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause") and not Global.minigame_active and player_using_me:
-		exit()
+		exit_with_camera_tween()
 
 
 func _unhandled_input(event):
@@ -105,7 +106,21 @@ func _unhandled_input(event):
 	node_viewport.push_input(event)
 
 
-func exit() -> void:
+func exit_without_camera_tween() -> void:
+	node_area.visible = false
+	player_using_me = false
+	
+	if not machine.broken_down:
+		interactable.visible = true
+
+	Global.player.camera.transform = cam_trans_b4_enter
+	Global.player.camera.sync_rotation_from_player()
+		
+	if Global.in_machine_ui:
+		Global.in_machine_ui = false
+		Global.machine_in_use = null
+
+func exit_with_camera_tween() -> void:
 	node_area.visible = false
 	player_using_me = false
 
@@ -123,6 +138,7 @@ func exit() -> void:
 		await tween.finished
 		cam.sync_rotation_from_player()
 		Global.in_machine_ui = false
+		Global.machine_in_use = null
 
 
 func _mouse_entered_area():

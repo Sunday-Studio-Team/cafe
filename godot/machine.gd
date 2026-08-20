@@ -3,6 +3,8 @@
 class_name Machine
 extends Node3D
 
+const BLAST_LAUNCH_MAGNITUDE: float = 20.0
+
 static var seen_breakdown_popup := false
 
 @export var spot_for_customer: Marker3D
@@ -221,6 +223,23 @@ func _process_queued_customers() -> void:
 		await customer.move_to(spot_for_customer.global_position)
 		machine_make_drink()
 
+func blast_player_from_using_machine() -> void:
+	if gui_3d.player_using_me:
+		if Global.minigame_active:
+			Events.force_close_minigame.emit()
+		gui_3d.exit_without_camera_tween()
+	
+	# Get the direction vector from machine to player.
+	var machine_to_player_normalized: Vector3 = global_position.direction_to(Global.player.global_position)
+	
+	# Flatten it.
+	machine_to_player_normalized.y = 0.0
+	machine_to_player_normalized = machine_to_player_normalized.normalized()
+	
+	# Scale it.
+	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
+	
+	Global.player.velocity += launch_vector
 
 func show_tutorial_where_is_storeroom() -> void:
 	#this is getting called within physics_process...
@@ -657,7 +676,7 @@ func _on_accept_button_pressed() -> void:
 	accept_order(false)
 
 func accept_order(did_remake_drink: bool) -> void:	
-	gui_3d.exit()
+	gui_3d.exit_with_camera_tween()
 
 	customer_order_indicator.text = ""
 	final_order_indicator.modulate = Color.WHITE
@@ -706,7 +725,7 @@ func accept_order(did_remake_drink: bool) -> void:
 
 
 func reject_order() -> void:
-	gui_3d.exit()
+	gui_3d.exit_with_camera_tween()
 	if ingredients < Stats.current.ingredients_per_order:
 		return
 	final_order_indicator.text = "order rejected! \n making a new drink"
@@ -719,7 +738,7 @@ func reject_order() -> void:
 
 
 func finished_manual_remake_drink() -> void:
-	gui_3d.exit()
+	gui_3d.exit_with_camera_tween()
 
 	if ingredients < Stats.current.ingredients_per_order:
 		return
@@ -758,7 +777,7 @@ func break_down() -> void:
 		pass
 
 	if gui_3d.player_using_me:
-		gui_3d.exit()
+		gui_3d.exit_with_camera_tween()
 	gui_3d.interactable.visible = false
 	customer_order_indicator.hide()
 	fix_machine_button.show()

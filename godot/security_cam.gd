@@ -70,10 +70,8 @@ func _physics_process(_delta: float) -> void:
 					elif Global.making_drink_manually:
 						timer.start()
 						Events.alert_posted.emit("caught making drink by hand")
-						apply_slow = true
-					elif Global.holding_ingredients and Global.holding_ingredients_rule:
-						timer.start()
-						Events.alert_posted.emit("caught stealing ingredients")
+						if Global.machine_in_use != null:
+							Global.machine_in_use.blast_player_from_using_machine()
 						apply_slow = true
 					
 					if apply_slow:
