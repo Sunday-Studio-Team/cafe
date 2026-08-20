@@ -121,8 +121,8 @@ func _ready() -> void:
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
-	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		Global.popups["special shift"].open()
+	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+	# 	Global.popups["special shift"].open()
 	
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
@@ -139,6 +139,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	Global.shift_time_remaining = game_timer.time_left
+	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
+	
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
@@ -152,12 +155,11 @@ func get_stats() -> void:
 	customer_spawn_timer.wait_time = Global.customer_flow_rate
 
 	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
-	if Global.owned_items.has(overtime_item):
-		shift_length += Stats.current.extra_time_from_overtime_form_item
+	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
 
-	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		Global.current_special_shift.apply_stats()
+	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+	# 	Global.current_special_shift.apply_stats()
 
 	enable_disable_teleporters()
 
@@ -194,7 +196,6 @@ func set_per_day_stuff() -> void:
 		Global.owned_items.clear()
 		Stats.reset()
 		Stats.current.customer_wait_time_machine = INF
-		Stats.current.chance_of_machine_breaking = 0.0
 		Stats.current.machine_chance_of_spill = 0.0
 		machines.clear()
 		machines.push_front(tutorial_machine)
@@ -234,17 +235,17 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(machines)
 
-	#select a special shift if it is not day one
-	if Global.day > 1:
-		var rng = RandomNumberGenerator.new()
-		var weights: PackedFloat32Array
-		for special_shift in Global.special_shifts:
-			weights.append(special_shift.weight)
-
-		var selected_index := rng.rand_weighted(weights)
-		Global.current_special_shift = Global.special_shifts[selected_index]
-	else:
-		Global.current_special_shift = Global.special_shifts[0]
+	# #select a special shift if it is not day one
+	# if Global.day > 1:
+	# 	var rng = RandomNumberGenerator.new()
+	# 	var weights: PackedFloat32Array
+	# 	for special_shift in Global.special_shifts:
+	# 		weights.append(special_shift.weight)
+	# 
+	# 	var selected_index := rng.rand_weighted(weights)
+	# 	Global.current_special_shift = Global.special_shifts[selected_index]
+	# else:
+	# 	Global.current_special_shift = Global.special_shifts[0]
 
 
 func spawn_machines():
@@ -396,7 +397,7 @@ func _interactive_tutorial_shift() -> void:
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5, false).timeout
 
-	# Third customer, make drink
+	# Second customer, manually remake drink
 	tutorial_machine.force_next_drink_incorrect()
 	spawn_customer()
 	tutorial_machine.set_order_action_buttons_available("make_drink")
