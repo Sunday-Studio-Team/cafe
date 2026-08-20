@@ -727,8 +727,8 @@ func accept_order(did_remake_drink: bool) -> void:
 	_rating_gain_on_remake_label.hide()
 	order_breakdown.hide()
 	
-	# tippy will get mad if you're 25% or more under money goal and you only have 45 sec left
-	if Global.daily_cafe_money <= (Stats.current.daily_profit_goals_each_day[Global.day] * 0.75) and Global.shift_time_remaining <= 45.0:
+	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left
+	if Global.daily_cafe_money <= (Stats.current.daily_profit_goals_each_day[Global.day] * 0.6) and Global.shift_time_remaining <= 60.0:
 		Events.under_money_goal.emit()
 
 	# -------------------------------------------------
