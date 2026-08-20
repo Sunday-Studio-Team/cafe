@@ -44,8 +44,8 @@ var max_customers_queued_help_desk: int = 3
 var first_machine_customer_entry_time: float = 3.0
 var first_help_desk_customer_entry_time: float = 8.0
 # Seconds between customers entering store, linearly scaling between min and max with rating. Maybe use curves later!
-var machine_customer_flow_rate_at_min_rating_per_day: Dictionary[int, float] = { 1: 12.0, 2: 12.0, 3: 12.0, 4: 12.0, 5: 12.0, 0: 12.0}
-var machine_customer_flow_rate_at_max_rating_per_day: Dictionary[int, float] = { 1: 6.0, 2: 6.0, 3: 6.0, 4: 6.0, 5: 6.0, 0: 6.0}
+var machine_customer_flow_rate_at_min_rating_per_day: Dictionary[int, float] = { 1: 20.0, 2: 20.0, 3: 20.0, 4: 20.0, 5: 20.0, 0: 20.0}
+var machine_customer_flow_rate_at_max_rating_per_day: Dictionary[int, float] = { 1: 4.0, 2: 4.0, 3: 4.0, 4: 4.0, 5: 4.0, 0: 4.0}
 var help_desk_customer_flow_rate_at_min_rating_per_day: Dictionary[int, float] = { 1: 20.0, 2: 20.0, 3: 20.0, 4: 20.0, 5: 20.0, 0: 999.0}
 var help_desk_customer_flow_rate_at_max_rating_per_day: Dictionary[int, float] = { 1: 15.0, 2: 15.0, 3: 15.0, 4: 15.0, 15: 15.0, 0: 999.0}
 var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1, 0: 0.1  }
