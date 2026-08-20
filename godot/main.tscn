@@ -55,6 +55,7 @@
 [ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
+[ext_resource type="PackedScene" uid="uid://1s54vqwadrmx" path="res://Assets/signs/tippy_open_close_sign.tscn" id="84_1yv1y"]
 [ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
 [ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
@@ -1607,6 +1608,9 @@ offset_right = 2216.0
 offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
+
+[node name="Tippy Open Close Sign2" parent="." unique_id=56236514 instance=ExtResource("84_1yv1y")]
+transform = Transform3D(-2.2462666, 0, -0.059475627, 0, 2.2470539, 0, 0.059475627, 0, -2.2462666, 2.4666414, 0.8977529, 3.7481408)
 
 [editable path="SecurityCams/SecurityCam"]
 [editable path="SecurityCams/SecurityCam/CameraAimerModel/Model/camera"]
