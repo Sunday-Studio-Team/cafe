@@ -636,12 +636,12 @@ func clean_up_spill() -> void:
 
 
 func refill() -> void:
+	Global.holding_ingredients = false
+	Events.ingredients_bag_consumed.emit()
+	
 	Events.minigame_active.emit(refill_minigame)
 
 	await Events.minigame_end
-
-	Global.holding_ingredients = false
-	Events.ingredients_bag_consumed.emit()
 	
 	var ingredient_multiplier: float = 1.0
 	for item in Global.owned_items:
