@@ -150,6 +150,9 @@ func _ready() -> void:
 	Events.order_remaking_drink.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.remake_drink)
 	)
+	Events.machine_making_drink.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.machine_make_drink)
+	)
 
 
 func _process(delta: float) -> void:

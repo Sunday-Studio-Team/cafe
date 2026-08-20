@@ -427,6 +427,7 @@ func machine_make_drink() -> void:
 	order_breakdown.show()
 
 	timer.start()
+	Events.machine_making_drink.emit()
 
 	var breaking_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_start_each_day[Global.day]
 	var breaking_chance_at_shift_end_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_end_each_day[Global.day]
