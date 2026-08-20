@@ -156,6 +156,9 @@ func _ready() -> void:
 	Events.under_money_goal.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.under_goal)
 	)
+	Events.spill_clean_done.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
+	)
 
 
 func _process(delta: float) -> void:

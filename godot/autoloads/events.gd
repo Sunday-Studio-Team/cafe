@@ -37,6 +37,7 @@ signal machine_exit_button_pressed
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled
 signal minigame_end
+signal spill_clean_done
 signal force_close_minigame
 #Active Items
 signal active_item_used(item: Item)

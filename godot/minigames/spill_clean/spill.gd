@@ -405,3 +405,4 @@ func win_game() -> void:
 	progress_label.text = "Erased: 100%"
 
 	Events.emit_signal("minigame_end")
+	Events.spill_clean_done.emit()
