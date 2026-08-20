@@ -221,7 +221,13 @@ func _process_queued_customers() -> void:
 		_customer_queue_updated()
 		set_customer(new_current_customer)
 		await customer.move_to(spot_for_customer.global_position)
+		check_for_stepping_in_spill()
 		machine_make_drink()
+
+func check_for_stepping_in_spill() -> void:
+	if spill_on_floor:
+		Global.score_update_message = "customer upset for stepping in spill!"
+		Global.employee_rating -= Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
 
 func blast_player_from_using_machine() -> void:
 	if gui_3d.player_using_me:
