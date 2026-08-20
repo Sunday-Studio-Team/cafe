@@ -26,11 +26,11 @@ var can_be_used: bool = true #Set to false when the item is used
 func apply_stats() -> void:
 	if item_id == "roller_skates":
 		if item_level == 1:
-			Stats.current.default_move_speed *= 2.0
+			Stats.current.default_move_speed *= 3.0
 			Stats.current.player_accel -= 10.0
 			Stats.current.player_decel -= 10.0
 		elif item_level == 2:
-			Stats.current.default_move_speed *= 3.0
+			Stats.current.default_move_speed *= 5.0
 			Stats.current.player_accel -= 10.0
 			Stats.current.player_decel -= 10.0
 
@@ -39,10 +39,10 @@ func apply_stats() -> void:
 func unapply_stats() -> void:
 	if item_id == "roller_skates":
 		if item_level == 1:
-			Stats.current.default_move_speed /= 2.0
+			Stats.current.default_move_speed /= 3.0
 			Stats.current.player_accel += 10.0
 			Stats.current.player_decel += 10.0
 		elif item_level == 2:
-			Stats.current.default_move_speed /= 3.0
+			Stats.current.default_move_speed /= 5.0
 			Stats.current.player_accel += 10.0
 			Stats.current.player_decel += 10.0
