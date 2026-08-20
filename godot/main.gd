@@ -45,6 +45,7 @@ static var seen_breakdown_popup := false
 @export var waypoint_ring: Area3D
 
 @export var tippy_voice_player: AudioStreamPlayer
+@export var tippy_voice_timer: Timer
 
 var seen_tutorial_machine_instructions: bool = false
 var machines: Array[Machine]
@@ -548,7 +549,11 @@ func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
 	if tippy_voice_player.playing:
 		return
 		
+	if !tippy_voice_timer.is_stopped():
+		return
+		
 	var chance_play = randf_range(0.0, 1.0)
 	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
 		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
 		tippy_voice_player.play()
+		tippy_voice_timer.start(randi_range(10, 20))
