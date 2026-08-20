@@ -545,5 +545,10 @@ func _rating_to_customer_flow_rate(current_employee_rating: float) -> float:
 	return seconds_per_customer
 
 func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
-	tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
-	tippy_voice_player.play()
+	if tippy_voice_player.playing:
+		return
+		
+	var chance_play = randf_range(0.0, 1.0)
+	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
+		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
+		tippy_voice_player.play()
