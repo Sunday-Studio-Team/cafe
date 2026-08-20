@@ -651,7 +651,7 @@ func refill() -> void:
 	Events.minigame_active.emit(refill_minigame)
 
 	await Events.minigame_end
-	
+
 	var ingredient_multiplier: float = 1.0
 	for item in Global.owned_items:
 		if item.item_id == "nice_spoon":
@@ -660,7 +660,7 @@ func refill() -> void:
 			elif item.item_level == 2:
 				ingredient_multiplier = 3.0
 	ingredients += roundi(Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy * ingredient_multiplier)
-	
+
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
 	if (
@@ -680,6 +680,7 @@ func cancel_fix_minigame() -> void:
 func cancel_clean_spill() -> void:
 	Events.minigame_end.disconnect(clean_up_spill)
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
+
 
 func _on_accept_button_pressed() -> void:
 	accept_order(false)
@@ -768,7 +769,8 @@ func finished_manual_remake_drink() -> void:
 	_price_label_accept.hide()
 	_rating_gain_on_remake_label.hide()
 
-	accept_order(true)	
+	accept_order(true)
+
 
 func break_down() -> void:
 	if broken_down == true:
@@ -798,8 +800,7 @@ func break_down() -> void:
 	
 	hum_sound.stop()
 
-#Active Item
-#If item used, checks if it's valid and does the specified action
+
 func on_active_item_used_machine(item: Item):
 	if item == null:
 		return

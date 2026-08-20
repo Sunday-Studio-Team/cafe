@@ -47,6 +47,7 @@ func _set_customer(new_customer: Customer) -> void:
 		await _desk_customer.move_to(_spot_for_customer.global_position)
 		_desk_customer.timer.wait_time = Stats.current.customer_wait_time_help_desk
 		_desk_customer.timer.start()
+		_desk_customer.waiting_indicator.show()
 		bell_sound.play()
 		_help_desk_interactable.visible = true
 	else:
