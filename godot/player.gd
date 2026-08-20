@@ -20,6 +20,7 @@ var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
 
+var _is_sprinting: bool
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -87,6 +88,8 @@ func _physics_process(delta: float) -> void:
 	handle_floating_cursor()
 	move_and_slide()
 
+func is_sprinting() -> bool:
+	return _is_sprinting
 
 #func _unhandled_input(event: InputEvent) -> void:
 #	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -219,6 +222,7 @@ func handle_sprint(delta: float) -> void:
 			break
 	
 	if Input.is_action_pressed("sprint") and !has_roller_skates:
+		_is_sprinting = true
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
 				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
@@ -226,12 +230,14 @@ func handle_sprint(delta: float) -> void:
 			Global.stamina += Stats.current.stamina_regen_rate * delta
 
 		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
+			_is_sprinting = true
 			_current_move_speed = _sprint_move_speed
-
 		else:
+			_is_sprinting = false
 			_current_move_speed = _walk_move_speed
 			Global.stamina += Stats.current.stamina_regen_rate * delta
 	else:
+		_is_sprinting = false
 		_current_move_speed = _walk_move_speed
 		Global.stamina += Stats.current.stamina_regen_rate * delta
 

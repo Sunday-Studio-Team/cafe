@@ -63,7 +63,7 @@ func _physics_process(_delta: float) -> void:
 				var collider: Object = shape_cast.get_collider(i)
 				if collider == Global.player:
 					var apply_slow: bool = false
-					if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
+					if Global.player.is_sprinting() and Global.player.get_last_motion() != Vector3.ZERO:
 						timer.start()
 						Events.alert_posted.emit("caught running")
 						apply_slow = true
