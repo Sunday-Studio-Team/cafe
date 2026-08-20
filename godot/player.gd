@@ -369,8 +369,8 @@ class CameraSlowPlayerStatusEffect extends PlayerStatusEffect:
 		_duration_remaining = _duration
 	
 	func apply_effect(player: Player) -> void:
-		player._walk_move_speed *= 0.5
-		player._sprint_move_speed *= 0.5
+		player._walk_move_speed *= Stats.current.camera_slow_player_walk_speed_multiplier
+		player._sprint_move_speed *= Stats.current.camera_slow_player_sprint_speed_multiplier
 	
 	func process_status_effect(delta: float) -> void:
 		_duration_remaining -= delta

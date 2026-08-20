@@ -8,7 +8,7 @@
 class_name StatData
 extends Resource
 
-var default_move_speed := 2.0
+var default_move_speed := 2.5
 var sprint_move_speed := 5.0
 var player_accel := 25.0
 var player_decel := 25.0
@@ -60,5 +60,6 @@ var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.
 var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 0.4, 2: 0.35, 3: 0.3, 4: 0.2, 5: 0.1, 0: 0.4 }
 var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.2, 2: 0.25, 3: 0.3, 4: 0.35, 5: 0.4, 0: 0.4 }
 var tip_per_star_rating: float = 3.0
-var camera_slow_player_speed_multiplier: float = 0.5
+var camera_slow_player_walk_speed_multiplier: float = 0.3
+var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
