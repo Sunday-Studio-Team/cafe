@@ -13,21 +13,8 @@
 [ext_resource type="Script" uid="uid://d1wwxitrj27iw" path="res://special_shift/special_shift.gd" id="15_gwf6j"]
 [ext_resource type="Resource" uid="uid://bj825vi7a2pjl" path="res://special_shift/critical_customer.tres" id="15_lt8ol"]
 [ext_resource type="Resource" uid="uid://bykp8oyecplvb" path="res://special_shift/ai_malfunction.tres" id="16_do865"]
-[ext_resource type="AudioStream" uid="uid://cv8a808mvbsyg" path="res://audio/voicelines/another_day.mp3" id="16_lhs6p"]
 [ext_resource type="Resource" uid="uid://b1yx0xfwyoffv" path="res://special_shift/normal_shift.tres" id="16_qy21g"]
-[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="17_6566j"]
 [ext_resource type="Resource" uid="uid://c0lmq370bcajp" path="res://special_shift/too_many_people.tres" id="17_qy21g"]
-[ext_resource type="AudioStream" uid="uid://bbe2voneyrs83" path="res://audio/voicelines/ahahah_not.mp3" id="18_k2sio"]
-[ext_resource type="AudioStream" uid="uid://duai7628vsf3k" path="res://audio/voicelines/hmm_better.mp3" id="19_ok8c7"]
-[ext_resource type="AudioStream" uid="uid://kgpgisbkb5n7" path="res://audio/voicelines/hey_can.mp3" id="20_73nhw"]
-[ext_resource type="AudioStream" uid="uid://da2q5cjlr57i0" path="res://audio/voicelines/hey_whats.mp3" id="21_vsu6k"]
-[ext_resource type="AudioStream" uid="uid://crlfwpqre5xv7" path="res://audio/voicelines/hmm_boss.mp3" id="22_u8dat"]
-[ext_resource type="AudioStream" uid="uid://lufcgmjr3did" path="res://audio/voicelines/hmm_waste.mp3" id="23_4binx"]
-[ext_resource type="AudioStream" uid="uid://cshvdrb3m50hh" path="res://audio/voicelines/ooh_la_la.mp3" id="24_oaqfm"]
-[ext_resource type="AudioStream" uid="uid://718xalfnrk5v" path="res://audio/voicelines/aww_till.mp3" id="25_toyjt"]
-[ext_resource type="AudioStream" uid="uid://cyuo7lvip66yp" path="res://audio/voicelines/our_cash.mp3" id="26_rratu"]
-[ext_resource type="AudioStream" uid="uid://chc347xgedhuo" path="res://audio/voicelines/squeaky_clean.mp3" id="27_iccip"]
-[ext_resource type="AudioStream" uid="uid://b7xuyfdu2g7vn" path="res://audio/voicelines/the_sound.mp3" id="28_hs2d3"]
 
 [node name="Global" type="Node" unique_id=668412834]
 process_mode = 3
@@ -37,6 +24,7 @@ items_folder_path = "res://items"
 ingredients_folder_path = "res://drinks/ingredients"
 customer_sprites_folder_path = "res://sprites/customers"
 spill_sprites_path = "res://sprites/stains"
+tippy_voice_path = "res://audio/voicelines"
 hover_shader = ExtResource("2_qxp0b")
 full_wrong_drink = ExtResource("3_2wtbm")
 star_texture = ExtResource("4_rx4vo")
@@ -44,18 +32,3 @@ half_star_texture = ExtResource("5_hx7jl")
 empty_star_texture = ExtResource("6_4y2jn")
 emails_schedule = Array[ExtResource("15_do865")]([ExtResource("9_oys0l"), ExtResource("10_x2nk7"), ExtResource("11_jmbcq")])
 special_shifts = Array[ExtResource("15_gwf6j")]([ExtResource("16_qy21g"), ExtResource("16_do865"), ExtResource("17_qy21g"), ExtResource("15_lt8ol")])
-tippy_voice_lines = Dictionary[AudioStream, int]({
-ExtResource("16_lhs6p"): 0,
-ExtResource("17_6566j"): 0,
-ExtResource("18_k2sio"): 1,
-ExtResource("19_ok8c7"): 2,
-ExtResource("20_73nhw"): 2,
-ExtResource("21_vsu6k"): 3,
-ExtResource("22_u8dat"): 3,
-ExtResource("23_4binx"): 3,
-ExtResource("24_oaqfm"): 4,
-ExtResource("25_toyjt"): 5,
-ExtResource("26_rratu"): 5,
-ExtResource("27_iccip"): 6,
-ExtResource("28_hs2d3"): 7
-})

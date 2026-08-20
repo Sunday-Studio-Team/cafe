@@ -7,6 +7,7 @@ extends Node
 @export_dir var ingredients_folder_path: String
 @export_dir var customer_sprites_folder_path: String
 @export_dir var spill_sprites_path: String
+@export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 @export var star_texture: Texture
@@ -15,18 +16,6 @@ extends Node
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
-@export var tippy_voice_lines: Dictionary[AudioStream, TippyLineType]
-
-enum TippyLineType {
-	shift_start,
-	shift_low_time,
-	customer_low_time,
-	remake_drink,
-	machine_make_drink,
-	under_goal,
-	clean_spill,
-	accept_drink
-}
 
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
@@ -71,6 +60,7 @@ var shift_time_remaining: float
 var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
+var tippy_voice_lines: Array[TippyVoiceLine]
 var daily_cafe_money := 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
@@ -190,6 +180,7 @@ func _ready() -> void:
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
+	tippy_voice_lines.assign(load_resources_from_folder(tippy_voice_path))
 
 
 # NOTE: these things in physics process instead of process for timing reasons

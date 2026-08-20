@@ -44,6 +44,8 @@ static var seen_breakdown_popup := false
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
 
+@export var tippy_voice_player: AudioStreamPlayer
+
 var seen_tutorial_machine_instructions: bool = false
 var machines: Array[Machine]
 
@@ -373,7 +375,8 @@ func _on_shift_started():
 	
 	else:
 		_interactive_tutorial_shift()
-
+	
+	_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_start)
 
 func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
@@ -517,3 +520,7 @@ func _rating_to_customer_flow_rate(current_employee_rating: float) -> float:
 	var max_flow_rate_for_day: float = Stats.current.customer_flow_rate_at_max_rating_per_day[Global.day]
 	var seconds_per_customer: float = remap(current_employee_rating, 0.0, Stats.current.employee_rating_max, min_flow_rate_for_day, max_flow_rate_for_day)
 	return seconds_per_customer
+
+func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
+	tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
+	tippy_voice_player.play()
