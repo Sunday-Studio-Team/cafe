@@ -382,6 +382,8 @@ func _set_customer(new_customer: Customer) -> void:
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	timed_out_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out)
 	if customer == timed_out_customer:
+		Global.score_update_message = "customer didn't get drink in time"
+		Global.employee_rating -= Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		customer.leave_store()
 		_set_customer(null)
 

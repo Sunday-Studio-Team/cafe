@@ -55,9 +55,10 @@ var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int,
 var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.5, 3: 0.3, 4: 0.2, 5: 0.1, 0: 0.1  }
 var accept_incorrect_drink_star_rating_multiplier: float = 0.2
 var accept_incorrect_drink_star_rating_rounding: float = 0.1
+var machine_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.15, 2: 0.18, 3: 0.2, 4: 0.25, 5: 0.3, 0: 0.2 }
 var customer_steps_on_spill_rating_loss_each_day: Dictionary[int, float] = { 1: 0.2, 2: 0.25, 3: 0.3, 4: 0.35, 5: 0.4, 0: 0.2 }
 var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.9, 3: 0.8, 4: 0.7, 5: 0.6, 0: 1.0 }
-var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 0.4, 2: 0.35, 3: 0.3, 4: 0.2, 5: 0.1, 0: 0.4 }
+var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 0: 0.4 }
 var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.2, 2: 0.25, 3: 0.3, 4: 0.35, 5: 0.4, 0: 0.4 }
 var tip_per_star_rating: float = 3.0
 var camera_slow_player_walk_speed_multiplier: float = 0.3
