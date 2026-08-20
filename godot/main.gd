@@ -599,7 +599,10 @@ func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
 		return
 		
 	var chance_play = randf_range(0.0, 1.0)
+	if voice_line == TippyVoiceLine.TippyLineType.shift_low_time:
+		chance_play += 0.25
+
 	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
 		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
 		tippy_voice_player.play()
-		tippy_voice_timer.start(randf_range(10.0, 20.0))
+		tippy_voice_timer.start(randf_range(10.0, 16.0))
