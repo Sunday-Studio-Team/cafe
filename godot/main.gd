@@ -144,6 +144,9 @@ func _ready() -> void:
 	Events.low_time_warning.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_low_time)
 	)
+	Events.customer_low_time_warning.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.customer_low_time)
+	)
 
 
 func _process(delta: float) -> void:

@@ -184,11 +184,13 @@ func _process(_delta: float) -> void:
 
 		if customer_wait_bar.value >= 66:
 			customer_wait_indicator.modulate = Color.GREEN
+		elif customer_wait_bar.value == 34:
+			Events.customer_low_time_warning.emit()
 		elif customer_wait_bar.value >= 33:
 			customer_wait_indicator.modulate = Color.ORANGE
 		else:
 			customer_wait_indicator.modulate = Color.RED
-	
+			
 	_process_queued_customers()
 
 
