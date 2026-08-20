@@ -22,13 +22,13 @@ func _input(event: InputEvent) -> void:
 		mouse_input.x += -event.screen_relative.x * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 		mouse_input.y += -event.screen_relative.y * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Global.in_ui:
 		return
-	
+
 	input_rotation.x = clampf(input_rotation.x + mouse_input.y, deg_to_rad(-90), deg_to_rad(85))
 	input_rotation.y += mouse_input.x
-	
+
 	# rotate camera controller (up/down)
 	player_controller.camera_controller_anchor.transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
 
@@ -36,7 +36,6 @@ func _process(_delta: float) -> void:
 	player_controller.global_transform.basis = Basis.from_euler(Vector3(0.0, input_rotation.y, 0.0))
 	global_transform = player_controller.camera_controller_anchor.get_global_transform_interpolated()
 	mouse_input = Vector2.ZERO
-
 
 func sync_rotation_to_player() -> void:
 	input_rotation.y = player_controller.global_rotation.y
