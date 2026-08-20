@@ -384,6 +384,7 @@ func handle_time_left_warning() -> void:
 		rot_t.tween_property(time_left_label, "offset_transform_rotation", deg_to_rad(0), 0.75)
 
 		low_time_sound.play()
+		Events.low_time_warning.emit()
 
 		time_left_warning_played = true
 

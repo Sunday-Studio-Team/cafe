@@ -183,11 +183,13 @@ func _process(_delta: float) -> void:
 
 		if customer_wait_bar.value >= 66:
 			customer_wait_indicator.modulate = Color.GREEN
+		elif customer_wait_bar.value == 34:
+			Events.customer_low_time_warning.emit()
 		elif customer_wait_bar.value >= 33:
 			customer_wait_indicator.modulate = Color.ORANGE
 		else:
 			customer_wait_indicator.modulate = Color.RED
-	
+			
 	_process_queued_customers()
 
 
@@ -430,6 +432,7 @@ func machine_make_drink() -> void:
 	order_breakdown.show()
 
 	timer.start()
+	Events.machine_making_drink.emit()
 
 	var breaking_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_start_each_day[Global.day]
 	var breaking_chance_at_shift_end_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_end_each_day[Global.day]
@@ -696,6 +699,7 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
+	Events.order_approved_no_customer.emit()
 
 	_rating_gain_on_remake_label.hide()
 	
@@ -722,6 +726,10 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	_rating_gain_on_remake_label.hide()
 	order_breakdown.hide()
+	
+	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left
+	if Global.daily_cafe_money <= (Stats.current.daily_profit_goals_each_day[Global.day] * 0.6) and Global.shift_time_remaining <= 60.0:
+		Events.under_money_goal.emit()
 
 	# -------------------------------------------------
 	# Check if the drink score is -3 to make them angry (red)
@@ -840,6 +848,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Events.force_close_minigame.connect(_on_force_close_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
 	Events.minigame_active.emit(manual_drink_minigames.pick_random())
+	Events.order_remaking_drink.emit()
 	
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":

@@ -179,7 +179,7 @@ bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "_customer_help_desk", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "_customer_help_desk", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -214,6 +214,8 @@ teleporter3 = NodePath("Teleporter3")
 tutorial_selection_menu = NodePath("TutorialSelectionMenu")
 whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
 waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
+tippy_voice_player = NodePath("TippyVoiceLinePlayer")
+tippy_voice_timer = NodePath("TippyVoiceTimer")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -324,6 +326,10 @@ shape = SubResource("BoxShape3D_xrivr")
 
 [node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
 wait_time = 120.0
+one_shot = true
+
+[node name="TippyVoiceTimer" type="Timer" parent="." unique_id=375848378]
+wait_time = 15.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
@@ -1362,6 +1368,9 @@ sprite_frames = ExtResource("108_asu84")
 animation = &"bag_pickup"
 
 [node name="ClockItemStopSound" type="AudioStreamPlayer" parent="." unique_id=1632177732]
+stream = ExtResource("222_bvlej")
+
+[node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
 stream = ExtResource("222_bvlej")
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]

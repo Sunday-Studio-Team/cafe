@@ -15,8 +15,14 @@ signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
 signal order_completed(customer: Customer)
 signal order_approved(customer: Customer)
+signal order_approved_no_customer
+signal order_remaking_drink
+signal machine_making_drink
 signal customer_left_machine(customer: Customer)
+signal customer_low_time_warning
+signal under_money_goal
 signal time_up
+signal low_time_warning
 signal end_screen_finished
 signal requirements_met
 signal money_updated(new_value: float, old_value: float)
@@ -31,6 +37,7 @@ signal machine_exit_button_pressed
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled
 signal minigame_end
+signal spill_clean_done
 signal force_close_minigame
 #Active Items
 signal active_item_used(item: Item)
