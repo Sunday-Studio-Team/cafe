@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
+[ext_resource type="AudioStream" uid="uid://b36lt7uasbtpp" path="res://audio/captcha/captcha_correct.wav" id="7_p8bru"]
+[ext_resource type="AudioStream" uid="uid://qm462c3iywm1" path="res://audio/captcha/captcha_wrong.wav" id="8_3tmsw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnsl6"]
 bg_color = Color(0.28627452, 0.5647059, 0.8862745, 1)
@@ -26,7 +28,7 @@ stream_0/stream = ExtResource("4_juyqc")
 stream_1/stream = ExtResource("5_w8b1k")
 stream_2/stream = ExtResource("6_p8bru")
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder", "click_sound")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder", "click_sound", "correct_sound", "wrong_sound")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,6 +45,8 @@ drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBlu
 entire_panel = NodePath("SubViewport/Captcha")
 order_reminder = NodePath("SubViewport/IngredientsReminder")
 click_sound = NodePath("ClickSound")
+correct_sound = NodePath("CorrectSound")
+wrong_sound = NodePath("WrongSound")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false
@@ -122,30 +126,39 @@ columns = 3
 
 [node name="Button0" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button1" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button2" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button3" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button4" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button5" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button6" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button7" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="Button8" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=617140734 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
+offset_transform_enabled = true
 
 [node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=2048074803]
 layout_mode = 2
@@ -231,6 +244,14 @@ layout_mode = 2
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -5.0
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=430448945]
+stream = ExtResource("7_p8bru")
+volume_db = -5.0
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
+stream = ExtResource("8_3tmsw")
 volume_db = -5.0
 
 [connection signal="pressed" from="SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
