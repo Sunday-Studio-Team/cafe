@@ -3,15 +3,52 @@
 [ext_resource type="Texture2D" uid="uid://b1j05q5s30754" path="res://icon.svg" id="1_crjyi"]
 [ext_resource type="Script" uid="uid://cqb3s88o3lq6d" path="res://ui/pc/item_button.gd" id="1_rlbhm"]
 
-[node name="ItemButton" type="Button" unique_id=1733613719 node_paths=PackedStringArray("item_icon", "item_name", "description")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr0b"]
+bg_color = Color(0.3529412, 0.5137255, 0.5803922, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye6mp"]
+bg_color = Color(0.2928, 0.42383993, 0.48, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ts1q0"]
+bg_color = Color(0.48960003, 0.65088, 0.72, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlbhm"]
+bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20vef"]
+bg_color = Color(0.4940306, 0.665577, 0.86957014, 1)
+
+[node name="ItemButton" type="Button" unique_id=1733613719 node_paths=PackedStringArray("item_icon", "item_name", "description", "active_indicator", "_cooldown_label", "_passive_indicator")]
 custom_minimum_size = Vector2(400, 500)
-offset_right = 500.0
-offset_bottom = 600.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
+offset_transform_enabled = true
+theme_override_styles/normal = SubResource("StyleBoxFlat_llr0b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ye6mp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ts1q0")
 script = ExtResource("1_rlbhm")
-item_icon = NodePath("MarginContainer/VBoxContainer/TextureRect")
-item_name = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Name")
+item_icon = NodePath("MarginContainer/VBoxContainer/Icon")
+item_name = NodePath("MarginContainer/VBoxContainer/Name")
 description = NodePath("MarginContainer/VBoxContainer/Description")
+active_indicator = NodePath("MarginContainer/VBoxContainer/Active")
+_cooldown_label = NodePath("MarginContainer/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+_passive_indicator = NodePath("MarginContainer/VBoxContainer/Passive")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2054879464]
 layout_mode = 1
@@ -30,41 +67,98 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2116169256]
 clip_contents = true
 layout_mode = 2
+size_flags_vertical = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=941600540]
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=941600540]
 texture_filter = 1
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
+size_flags_vertical = 0
 texture = ExtResource("1_crjyi")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1284397859]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1436776660]
+[node name="Name" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1436776660]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
 size_flags_stretch_ratio = 4.0
-theme_override_font_sizes/normal_font_size = 48
-theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
 bbcode_enabled = true
 text = "[b]item name[color=gold] ($10)"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 
+[node name="Active" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=262205599]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rlbhm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Active" unique_id=751839410]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Active/HBoxContainer" unique_id=727452142]
+custom_maximum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]ACTIVE[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Active/HBoxContainer" unique_id=145362623]
+custom_maximum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=670916561]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_20vef")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Passive" unique_id=1653274519]
+layout_mode = 2
+alignment = 1
+
+[node name="PassiveLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Passive/HBoxContainer" unique_id=894949306]
+custom_maximum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
 [node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=896543453]
 modulate = Color(0.78431374, 0.78431374, 0.78431374, 1)
-custom_minimum_size = Vector2(0, 100)
+custom_maximum_size = Vector2(350, -1)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 32
-text = "item description (blah blah blah blah)"
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 28
+text = "item description (could be really long like this blah blah blah blah blah)"
 horizontal_alignment = 1
 autowrap_mode = 3

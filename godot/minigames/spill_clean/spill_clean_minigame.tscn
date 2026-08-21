@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://l7w4dtq33b6f"]
+
+[ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
+[ext_resource type="Texture2D" uid="uid://dfrkdsu4k5v6q" path="res://sprites/stains/stain3.png" id="1_imr7o"]
+[ext_resource type="Texture2D" uid="uid://db2tgyy1utbm6" path="res://sprites/spill_minigame/tippy_text.png" id="2_80bh0"]
+[ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/spill.gd" id="2_imr7o"]
+[ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/dirty_mop.png" id="4_4xqy4"]
+[ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/mop.gd" id="4_6lir2"]
+[ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/clean_mop.png" id="4_omxn0"]
+[ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
+[ext_resource type="Texture2D" uid="uid://babqx6yagblfe" path="res://sprites/spill_minigame/clean_scrubber.png" id="6_v4dls"]
+[ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
+[ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
+size = Vector2(678.04865, 540.20624)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnu58"]
+emission_shape = 3
+emission_box_extents = Vector3(300, 150, 1)
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 24.999998
+scale_min = 0.099999994
+scale_max = 0.39999998
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
+size = Vector2(640, 312)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
+size = Vector2(644, 1348)
+
+[node name="SpillCleanMinigame" type="SubViewportContainer" unique_id=1975707646]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=564771113]
+handle_input_locally = false
+audio_listener_enable_2d = true
+physics_object_picking = true
+size = Vector2i(1920, 1080)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Panel" type="Panel" parent="SubViewport" unique_id=865394514]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Instruction" type="RichTextLabel" parent="SubViewport/Panel" unique_id=1890544718]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 121.0
+offset_bottom = 253.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[b]Wet the mop then wipe up the mess![/b]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Percentage" type="Label" parent="SubViewport/Panel" unique_id=2001257238]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -182.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 40
+text = "Percentage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bucket" type="Sprite2D" parent="SubViewport" unique_id=960728432]
+position = Vector2(415, 611.00006)
+scale = Vector2(0.41000003, 0.48500004)
+texture = ExtResource("1_eeqbd")
+
+[node name="TippyText" type="Sprite2D" parent="SubViewport/Bucket" unique_id=423773723]
+modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
+position = Vector2(-19.512085, -385.56702)
+scale = Vector2(6.0975604, 5.154639)
+texture = ExtResource("2_80bh0")
+
+[node name="Area2D" type="Area2D" parent="SubViewport/Bucket" unique_id=474787777]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Bucket/Area2D" unique_id=251683750]
+position = Vector2(0.00012207031, 4.123657)
+shape = SubResource("RectangleShape2D_vn1tu")
+
+[node name="Spill" type="Sprite2D" parent="SubViewport" unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "bucket_area", "mop")]
+modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
+position = Vector2(960, 600)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_imr7o")
+script = ExtResource("2_imr7o")
+canvas_sprite = NodePath(".")
+progress_label = NodePath("../Panel/Percentage")
+moping_area = NodePath("../Mop/MopHeadHitbox")
+bucket = NodePath("../Bucket")
+bucket_area = NodePath("../Bucket/Area2D")
+mop = NodePath("../Mop")
+allowed_remaining_ratio = 0.01
+
+[node name="Mop" type="Sprite2D" parent="SubViewport" unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles", "splash", "mope_range")]
+position = Vector2(960.00006, 500.00003)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_omxn0")
+script = ExtResource("4_6lir2")
+drag_area = NodePath("MopDragHitbox")
+bubbles = NodePath("GPUParticles2D")
+splash = NodePath("../SplashSound")
+mope_range = NodePath("MopHeadHitbox/CollisionShape2D")
+mop_texture = ExtResource("4_omxn0")
+dirty_mop_texture = ExtResource("4_4xqy4")
+scrubber_texture = ExtResource("6_v4dls")
+dirty_scrubber_texture = ExtResource("7_80bh0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SubViewport/Mop" unique_id=360286918]
+position = Vector2(0, -500)
+amount = 10
+texture = ExtResource("5_quysc")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_xnu58")
+
+[node name="MopHeadHitbox" type="Area2D" parent="SubViewport/Mop" unique_id=1322127866]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/MopHeadHitbox" unique_id=426483103]
+position = Vector2(16, -503)
+shape = SubResource("RectangleShape2D_6lir2")
+
+[node name="MopDragHitbox" type="Area2D" parent="SubViewport/Mop" unique_id=1484986336]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/Mop/MopDragHitbox" unique_id=1835631460]
+position = Vector2(17.999756, 13.999878)
+shape = SubResource("RectangleShape2D_xnu58")
+
+[node name="SplashSound" type="AudioStreamPlayer2D" parent="SubViewport" unique_id=1715966103]
+position = Vector2(451, 543)
+stream = ExtResource("7_eeqbd")

@@ -3,13 +3,18 @@ class_name StatDataEnum
 const VALUES: String = "\
 default_move_speed,\
 sprint_move_speed,\
+player_accel,\
+player_decel,\
 chance_of_machine_breaking,\
 machine_chance_of_spill,\
+score_chances_3,\
+score_chances_1,\
+score_chances_neg1,\
+score_chances_neg3,\
 score_chances,\
 machine_time_to_make_drink,\
 customer_wait_time_machine,\
 customer_wait_time_window,\
-time_to_manually_make_drink,\
 penalty_for_running,\
 penalty_for_handmade_drink,\
 penalty_for_holding_ingredients,\
@@ -21,7 +26,13 @@ ingredients_per_order,\
 ingredients_per_bag,\
 customer_spawn_interval,\
 cost_to_reroll,\
-time_to_clean_up_spill,\
 max_spills_per_shift,\
 max_breakdowns_per_shift,\
+clean_spill_allowed_remaining,\
+extra_time_from_overtime_form_item,\
+max_stamina,\
+sprint_stamina_drain_rate,\
+stamina_regen_rate,\
+sprint_lockout_time,\
+shift_lengths_for_each_day,\
 "

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://8h2mdx74vf3b"]
+
+[ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_ea8gr"]
+[ext_resource type="Texture2D" uid="uid://brsir84v0lva5" path="res://tutorial/tutorial_screen_2.png" id="2_ea8gr"]
+[ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_28iwr"]
+[ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_t11oh"]
+[ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="5_b2ufu"]
+[ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="6_036i6"]
+[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="7_xxmnc"]
+
+[node name="TutorialScreenView2" type="Control" unique_id=322187242 node_paths=PackedStringArray("_continue_buttons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ea8gr")
+_continue_buttons = [NodePath("NextButton")]
+metadata/_custom_type_script = "uid://8bh0c410cd6d"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -647.5
+offset_top = -486.0
+offset_right = 647.5
+offset_bottom = 486.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ea8gr")
+stretch_mode = 3
+
+[node name="NextButton" type="TextureButton" parent="." unique_id=1750636259]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 266.0
+offset_top = 357.0
+offset_right = 621.0
+offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_28iwr")
+texture_pressed = ExtResource("4_t11oh")
+texture_hover = ExtResource("5_b2ufu")
+texture_disabled = ExtResource("6_036i6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="NextLabel" type="Label" parent="NextButton" unique_id=523071466]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_xxmnc")
+theme_override_font_sizes/font_size = 50
+text = "Next"
+horizontal_alignment = 1

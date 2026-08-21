@@ -6,14 +6,29 @@
 [ext_resource type="Texture2D" uid="uid://b5u5pk4pmxhhc" path="res://sprites/stars/star.png" id="4_rx4vo"]
 [ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="5_hx7jl"]
 [ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="6_4y2jn"]
+[ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="9_oys0l"]
+[ext_resource type="Resource" uid="uid://blnm357ivsu6d" path="res://emails/sato/email_data_day_2_sato_arooj.tres" id="10_x2nk7"]
+[ext_resource type="Resource" uid="uid://d0ex15shahsk6" path="res://emails/sato/email_data_day_4_sato_dre.tres" id="11_jmbcq"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="15_do865"]
+[ext_resource type="Script" uid="uid://d1wwxitrj27iw" path="res://special_shift/special_shift.gd" id="15_gwf6j"]
+[ext_resource type="Resource" uid="uid://bj825vi7a2pjl" path="res://special_shift/critical_customer.tres" id="15_lt8ol"]
+[ext_resource type="Resource" uid="uid://bykp8oyecplvb" path="res://special_shift/ai_malfunction.tres" id="16_do865"]
+[ext_resource type="Resource" uid="uid://b1yx0xfwyoffv" path="res://special_shift/normal_shift.tres" id="16_qy21g"]
+[ext_resource type="Resource" uid="uid://c0lmq370bcajp" path="res://special_shift/too_many_people.tres" id="17_qy21g"]
 
 [node name="Global" type="Node" unique_id=668412834]
+process_mode = 3
 script = ExtResource("1_6q3x5")
 drinks_folder_path = "res://drinks"
 items_folder_path = "res://items"
+ingredients_folder_path = "res://drinks/ingredients"
 customer_sprites_folder_path = "res://sprites/customers"
+spill_sprites_path = "res://sprites/stains"
+tippy_voice_path = "res://audio/voicelines"
 hover_shader = ExtResource("2_qxp0b")
 full_wrong_drink = ExtResource("3_2wtbm")
 star_texture = ExtResource("4_rx4vo")
 half_star_texture = ExtResource("5_hx7jl")
 empty_star_texture = ExtResource("6_4y2jn")
+emails_schedule = Array[ExtResource("15_do865")]([ExtResource("9_oys0l"), ExtResource("10_x2nk7"), ExtResource("11_jmbcq")])
+special_shifts = Array[ExtResource("15_gwf6j")]([ExtResource("16_qy21g"), ExtResource("16_do865"), ExtResource("17_qy21g"), ExtResource("15_lt8ol")])

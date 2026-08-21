@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bxbcn6yks4tpc"]
+
+[ext_resource type="Texture2D" uid="uid://bqut8rmoefxwy" path="res://sprites/items/teleporter.png" id="1_hfxye"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="2_tmed4"]
+
+[resource]
+script = ExtResource("2_tmed4")
+item_id = "teleporter"
+name = "Teleporter"
+description_at_levels = Dictionary[int, String]({
+1: "Set up 2 teleporters in the cafe.",
+2: "Set up 3 teleporters in the cafe."
+})
+icon = ExtResource("1_hfxye")
+price_at_levels = Dictionary[int, float]({
+1: 6.0,
+2: 4.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 7.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

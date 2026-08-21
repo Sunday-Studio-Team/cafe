@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://s0w2axgev1xa"]
+
+[ext_resource type="Texture2D" uid="uid://cbux7ul03sjk" path="res://minigames/tippy_distractor/Tippy.png" id="1_bghe3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lms4"]
+bg_color = Color(1, 0, 0.023529412, 1)
+
+[node name="TippyDistractor" type="Control" unique_id=1352527336]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TippyTexture" type="TextureRect" parent="." unique_id=731068255]
+layout_mode = 0
+offset_left = -189.0
+offset_top = -283.0
+offset_right = 311.0
+offset_bottom = 444.6471
+texture = ExtResource("1_bghe3")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="TippyTexture" unique_id=1288146054]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -128.0
+offset_top = -80.0
+offset_right = 128.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TippyTexture/PanelContainer" unique_id=741714542]
+clip_contents = false
+layout_mode = 2
+text = "I see you're trying to work on the machine. 
+Would you like help?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="TippyTexture/PanelContainer/RichTextLabel" unique_id=1766726402]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 4.9999695
+offset_bottom = 5.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3lms4")

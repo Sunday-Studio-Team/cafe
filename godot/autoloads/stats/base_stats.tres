@@ -2,6 +2,82 @@
 
 [ext_resource type="Script" uid="uid://dkcvishq458wg" path="res://autoloads/stats/stat_data.gd" id="1_l8dww"]
 
+[sub_resource type="Curve" id="Curve_l8dww"]
+_limits = [15.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -9.154129, 0, 0, Vector2(1, 15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_cu7t1"]
+_limits = [15.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -9.154129, 0, 0, Vector2(1, 15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_52gt0"]
+_limits = [15.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -9.154129, 0, 0, Vector2(1, 15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5q6qa"]
+_limits = [15.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -9.154129, 0, 0, Vector2(1, 15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k36g1"]
+_limits = [15.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -9.154129, 0, 0, Vector2(1, 15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p528g"]
+_limits = [15.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -9.154129, 0, 0, Vector2(1, 15), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_l5342"]
+_limits = [4.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -56.423374, 0, 0, Vector2(0.20743033, 9.676234), -16.10498, -16.10498, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_ta1ti"]
+_limits = [4.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -56.423374, 0, 0, Vector2(0.20743033, 9.676234), -16.10498, -16.10498, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_48kir"]
+_limits = [4.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -56.423374, 0, 0, Vector2(0.20743033, 9.676234), -16.10498, -16.10498, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_xd0y5"]
+_limits = [4.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -56.423374, 0, 0, Vector2(0.20743033, 9.676234), -16.10498, -16.10498, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_mdshh"]
+_limits = [4.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -56.423374, 0, 0, Vector2(0.20743033, 9.676234), -16.10498, -16.10498, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_acddn"]
+_limits = [4.0, 20.0, 0.0, 1.0]
+_data = [Vector2(0, 20), 0.0, -56.423374, 0, 0, Vector2(0.20743033, 9.676234), -16.10498, -16.10498, 0, 0, Vector2(1, 4), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [resource]
 script = ExtResource("1_l8dww")
+machine_customer_flow_rate_at_rating_curve_per_day = Dictionary[int, Curve]({
+0: SubResource("Curve_l5342"),
+1: SubResource("Curve_ta1ti"),
+2: SubResource("Curve_48kir"),
+3: SubResource("Curve_xd0y5"),
+4: SubResource("Curve_mdshh"),
+5: SubResource("Curve_acddn")
+})
+help_desk_customer_flow_rate_at_rating_curve_per_day = Dictionary[int, Curve]({
+0: SubResource("Curve_l8dww"),
+1: SubResource("Curve_cu7t1"),
+2: SubResource("Curve_52gt0"),
+3: SubResource("Curve_5q6qa"),
+4: SubResource("Curve_k36g1"),
+5: SubResource("Curve_p528g")
+})
 metadata/_custom_type_script = "uid://dkcvishq458wg"

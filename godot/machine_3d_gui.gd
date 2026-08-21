@@ -6,13 +6,15 @@ extends Node3D
 
 const CAM_TWEEN_DUR := 0.25
 
+static var seen_interaction_popup := false
+
 @export var interactable: Interactable
 @export var node_viewport: SubViewport
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
-@export var exit_button: Button
 
+var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
 var is_mouse_inside = false
 # The last processed input touch/mouse event. To calculate relative movement.
@@ -22,39 +24,81 @@ var last_event_time: float = -1.0
 # where to put our camera back to when we exit
 var cam_trans_b4_enter: Transform3D
 
+#keeps track of where the player was before they interacted w/ machine.
+var where_was_player: Transform3D
+
 @onready var machine: Machine = get_parent() as Machine
 
 
 func _ready():
+	node_area.visible = false
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
 	node_area.input_event.connect(_mouse_input_event)
 	interactable.interacted.connect(
 		func():
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			# seems weird because we cant interact with Interactables while in_ui
 			# anyway but this is actually to stop that CollisionShape blocking
 			# our mouse from clicking stuff lul
-			interactable.enabled = false
+			node_area.visible = true
+			interactable.visible = false
 			Global.in_machine_ui = true
-			exit_button.show()
+			Global.machine_in_use = machine
+			player_using_me = true
 
-			var cam: Camera3D = Global.player.camera
+			#store where the player was, before they interacted w/ the machine.
+			#used when using bomb(), which is in ingredients_refill_minigame.gd
+			where_was_player = Global.player.global_transform
+
+			# Showing the popup tutorial when the player uses the machine
+			if not seen_interaction_popup:
+				seen_interaction_popup = true # Only showing it once
+				Global.popups["interaction"].open()
+			else:
+				pass
+
+			create_tween().tween_property(
+				Global.player,
+				"global_rotation_degrees",
+				machine.global_rotation_degrees,
+				0.1,
+			)
+			create_tween().tween_property(
+				Global.player,
+				"global_position",
+				machine.spot_for_player.global_position,
+				0.1,
+			)
+			var cam: CameraController = Global.player.camera
 			cam_trans_b4_enter = cam.transform
-			create_tween().tween_property(cam, "global_transform", cam_spot.global_transform, CAM_TWEEN_DUR)
+			create_tween().tween_property(
+				cam,
+				"global_transform",
+				cam_spot.global_transform,
+				CAM_TWEEN_DUR,
+			),
 	)
 
-	exit_button.pressed.connect(exit)
+	Events.machine_exit_button_pressed.connect(
+		func():
+			if player_using_me:
+				exit_with_camera_tween(),
+	)
 
 
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
-		exit()
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and not Global.minigame_active and player_using_me:
+		exit_with_camera_tween()
 
 
 func _unhandled_input(event):
 	# Check if the event is a non-mouse/non-touch event
-	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
+	for mouse_event in [
+		InputEventMouseButton,
+		InputEventMouseMotion,
+		InputEventScreenDrag,
+		InputEventScreenTouch,
+	]:
 		if is_instance_of(event, mouse_event):
 			# If the event is a mouse/touch event, then we can ignore it here, because it will be
 			# handled via Physics Picking.
@@ -62,14 +106,39 @@ func _unhandled_input(event):
 	node_viewport.push_input(event)
 
 
-func exit() -> void:
+func exit_without_camera_tween() -> void:
+	node_area.visible = false
+	player_using_me = false
+	
 	if not machine.broken_down:
-		interactable.enabled = true
-	exit_button.hide()
+		interactable.visible = true
+
+	Global.player.camera.transform = cam_trans_b4_enter
+	Global.player.camera.sync_rotation_from_player()
+		
 	if Global.in_machine_ui:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		Global.in_machine_ui = false
-		create_tween().tween_property(Global.player.camera, "transform", cam_trans_b4_enter, CAM_TWEEN_DUR)
+		Global.machine_in_use = null
+
+func exit_with_camera_tween() -> void:
+	node_area.visible = false
+	player_using_me = false
+
+	if not machine.broken_down:
+		interactable.visible = true
+
+	if Global.in_machine_ui:
+		var cam: CameraController = Global.player.camera
+		var tween: PropertyTweener = create_tween().tween_property(
+			cam,
+			"transform",
+			cam_trans_b4_enter,
+			CAM_TWEEN_DUR,
+		)
+		await tween.finished
+		cam.sync_rotation_from_player()
+		Global.in_machine_ui = false
+		Global.machine_in_use = null
 
 
 func _mouse_entered_area():
@@ -80,7 +149,13 @@ func _mouse_exited_area():
 	is_mouse_inside = false
 
 
-func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
+func _mouse_input_event(
+	_camera: Camera3D,
+	event: InputEvent,
+	event_position: Vector3,
+	_normal: Vector3,
+	_shape_idx: int,
+):
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
 	var quad_mesh_size = node_quad.mesh.size
 
@@ -95,7 +170,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	event_pos3D = node_quad.global_transform.affine_inverse() * event_pos3D
 
 	# TODO: Adapt to bilboard mode or avoid completely.
-
 	var event_pos2D: Vector2 = Vector2()
 
 	if is_mouse_inside:

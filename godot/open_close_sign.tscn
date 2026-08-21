@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://by5ndd0lvwdiv"]
 
 [ext_resource type="Script" uid="uid://c0nsltcnkwb8t" path="res://open_closed_sign.gd" id="1_jq31d"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_rxk5n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
+size = Vector3(0.90000004, 0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxk5n"]
 albedo_color = Color(0.99957997, 0.5919275, 0.47328472, 1)
@@ -35,39 +39,66 @@ top_radius = 0.01
 bottom_radius = 0.01
 height = 0.05
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="OpenCloseSign" type="Area3D" unique_id=1352342917 node_paths=PackedStringArray("mesh")]
+[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "important_emails_required_model")]
+transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 script = ExtResource("1_jq31d")
+interactable = NodePath("Interactable")
+important_emails_required_model = NodePath("ImportantEmailsRequiredModel")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=2045513509 node_paths=PackedStringArray("mesh")]
+script = ExtResource("2_rxk5n")
 display_name = "start shift"
-mesh = NodePath("Model/Sign")
-metadata/_custom_type_script = "uid://cku66354bxktd"
+mesh = NodePath("../SignModel/Sign")
 
-[node name="Model" type="Node3D" parent="." unique_id=1777842618]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=668432471]
+shape = SubResource("BoxShape3D_jq31d")
 
-[node name="Closed" type="MeshInstance3D" parent="Model" unique_id=1595451907]
+[node name="SignModel" type="Node3D" parent="." unique_id=1777842618]
+
+[node name="Closed" type="MeshInstance3D" parent="SignModel" unique_id=1595451907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00962235)
+visible = false
 mesh = SubResource("TextMesh_vu0xl")
 
-[node name="Open" type="MeshInstance3D" parent="Model" unique_id=1318186677]
+[node name="Open" type="MeshInstance3D" parent="SignModel" unique_id=1318186677]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.019794166, -0.006853506)
+visible = false
 mesh = SubResource("TextMesh_1xpwx")
 
-[node name="Sign" type="MeshInstance3D" parent="Model" unique_id=1043669756]
+[node name="Sign" type="MeshInstance3D" parent="SignModel" unique_id=1043669756]
 mesh = SubResource("BoxMesh_dju1t")
 
-[node name="String" type="MeshInstance3D" parent="Model" unique_id=54815243]
+[node name="String" type="MeshInstance3D" parent="SignModel" unique_id=54815243]
 transform = Transform3D(0.8399515, 0.5426614, 0, -0.5426614, 0.8399515, 0, 0, 0, 1, -0.03186643, 0.14003932, 0)
+visible = false
 mesh = SubResource("CylinderMesh_wbp8u")
 
-[node name="String2" type="MeshInstance3D" parent="Model" unique_id=384346195]
+[node name="String2" type="MeshInstance3D" parent="SignModel" unique_id=384346195]
 transform = Transform3D(-0.8399515, -0.5426614, -8.742278e-08, -0.5426614, 0.8399515, 0, 7.34309e-08, 4.744097e-08, -1, 0.040038973, 0.14003932, 0)
+visible = false
 mesh = SubResource("CylinderMesh_wbp8u")
 
-[node name="Pin" type="MeshInstance3D" parent="Model" unique_id=2048239407]
+[node name="Pin" type="MeshInstance3D" parent="SignModel" unique_id=2048239407]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.19728023, 0)
+visible = false
 mesh = SubResource("CylinderMesh_bpwws")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=668432471]
-shape = SubResource("BoxShape3D_jq31d")
+[node name="StartShiftModel" type="Node3D" parent="." unique_id=64415536]
+
+[node name="Label3D" type="Label3D" parent="StartShiftModel" unique_id=832554582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.041092753)
+text = "START
+SHIFT"
+font_size = 16
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StartShiftModel" unique_id=1768748418]
+visible = false
+size = Vector3(0.88671875, 0.515625, 0.075927734)
+
+[node name="ImportantEmailsRequiredModel" type="Node3D" parent="." unique_id=1299437437]
+visible = false
+
+[node name="Label3D" type="Label3D" parent="ImportantEmailsRequiredModel" unique_id=1266681095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4575901, 0.041092753)
+text = "BLOCKED:
+Deal with important emails first!"

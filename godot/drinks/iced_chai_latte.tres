@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://ddurpbjl4uiwr"]
+
+[ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_0n4d4"]
+[ext_resource type="Resource" uid="uid://cxmm0w33f8vfv" path="res://drinks/ingredients/ice.tres" id="1_1ncab"]
+[ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="1_604ko"]
+[ext_resource type="Resource" uid="uid://dopc7eu5beqyc" path="res://drinks/ingredients/chai.tres" id="2_1ncab"]
+[ext_resource type="Texture2D" uid="uid://34eguwlg636b" path="res://sprites/drink_icons/chai_latte.png" id="2_u4lej"]
+
+[resource]
+script = ExtResource("1_0n4d4")
+name = "iced chai latte"
+singular_article = "an"
+main_ingredient = ExtResource("2_1ncab")
+liquid = ExtResource("1_604ko")
+extra = ExtResource("1_1ncab")
+icon = ExtResource("2_u4lej")
+day_unlocked = 3
+type = 3
+metadata/_custom_type_script = "uid://bpib3g54m3xm5"

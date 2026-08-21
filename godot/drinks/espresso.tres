@@ -1,9 +1,15 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://dh5h1vstyox0p"]
 
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_ssacj"]
+[ext_resource type="Resource" uid="uid://c566sstn0q5w6" path="res://drinks/ingredients/water.tres" id="2_0a3p4"]
+[ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="2_47jid"]
+[ext_resource type="Resource" uid="uid://dqwdh1q6mry1i" path="res://drinks/ingredients/espresso_bean.tres" id="3_0a3p4"]
 
 [resource]
 script = ExtResource("1_ssacj")
-name = "espresso"
-main_ingredient = 2
+name = "espresso shot"
+singular_article = "an"
+main_ingredient = ExtResource("3_0a3p4")
+liquid = ExtResource("2_0a3p4")
+icon = ExtResource("2_47jid")
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"

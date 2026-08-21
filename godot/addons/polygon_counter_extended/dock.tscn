@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://brfgbq8vo7756"]
+
+[ext_resource type="Script" uid="uid://dwlglphkbku82" path="res://addons/polygon_counter_extended/polygon_counter_extended_dock.gd" id="1_sdveq"]
+
+[node name="PolygonCounterExtendedDock" type="PanelContainer" unique_id=936049587 node_paths=PackedStringArray("_check_all_meshes_button", "_progress_bar", "_clear_results_button", "_copy_to_clipboard_button", "_results_text_edit")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sdveq")
+_check_all_meshes_button = NodePath("VBoxContainer/CheckAllMeshesButton")
+_progress_bar = NodePath("VBoxContainer/ProgressBar")
+_clear_results_button = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ClearButton")
+_copy_to_clipboard_button = NodePath("VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/CopyButton")
+_results_text_edit = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ResultsCodeEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=827386827]
+layout_mode = 2
+
+[node name="CheckAllMeshesButton" type="Button" parent="VBoxContainer" unique_id=664447812]
+layout_mode = 2
+text = "Check all .glb meshes in project"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1468712548]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1790723230]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=952315976]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1451013526]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=746498944]
+layout_mode = 2
+text = "Results:"
+
+[node name="Control" type="Control" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=256775712]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SortedLabel" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=730788523]
+layout_mode = 2
+text = "Sorted by Descending Polygon Count"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1148061056]
+layout_mode = 2
+text = "Clear"
+
+[node name="CopyButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=974632968]
+layout_mode = 2
+text = "Copy to Clipboard"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/VBoxContainer" unique_id=1212777730]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResultsCodeEdit" type="CodeEdit" parent="VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=671726464]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+editable = false
+scroll_smooth = true
+minimap_draw = true

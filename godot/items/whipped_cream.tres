@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dro03qfkl0ucg"]
+
+[ext_resource type="Texture2D" uid="uid://tp1xob855xry" path="res://sprites/items/whipped_cream.png" id="1_5mxpd"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_cefh6"]
+
+[resource]
+script = ExtResource("1_cefh6")
+item_id = "whipped_cream"
+name = "Whipped Cream"
+description_at_levels = Dictionary[int, String]({
+1: "Disable a camera for 10s.",
+2: "Disable a camera for 20s."
+})
+icon = ExtResource("1_5mxpd")
+price_at_levels = Dictionary[int, float]({
+1: 5.0,
+2: 4.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 7.0
+})
+is_active_item = true
+active_item_cooldown_at_levels = Dictionary[int, float]({
+1: 20.0,
+2: 10.0
+})
+can_activate_anywhere = false
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EmailData" format=3 uid="uid://bbr8qpbfanc3b"]
+
+[ext_resource type="PackedScene" uid="uid://dip3uy51ysart" path="res://emails/contract/custom_email_view_day_1_contract.tscn" id="1_ttlmn"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="2_t8wel"]
+
+[resource]
+script = ExtResource("2_t8wel")
+day_to_send = 1
+sender_name = "Management"
+displayed_time = "7am"
+subject = "Important: Employee Contract"
+recipient_name = "Employee #000000"
+contents = "Hi,
+
+Please be informed that you are required to sign the contract below before starting your shift.
+"
+custom_email_view_packed_scene = ExtResource("1_ttlmn")
+metadata/_custom_type_script = "uid://djk1v35hn3es4"

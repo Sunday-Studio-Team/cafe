@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://dsbs01da3oyl"]
 
 [ext_resource type="Script" uid="uid://bblydet80pt41" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_ingredients_list.gd" id="1_ijvf5"]
-[ext_resource type="Resource" uid="uid://cijqkuvo12tqt" path="res://drinks/latte.tres" id="2_c35dl"]
-[ext_resource type="Resource" uid="uid://ccqd0ecxf6ej" path="res://minigames/typing/typing_minigame_content/ingredients_list/typing_minigame_content_ingredients_list_default.tres" id="2_ijvf5"]
-[ext_resource type="Resource" uid="uid://bcjjy5g2i74xr" path="res://minigames/typing/typing_minigame_content/ingredients_list/recipes/typing_minigame_content_ingredients_list_recipe_latte.tres" id="3_iw1nw"]
 [ext_resource type="Script" uid="uid://sqoa7t6v464p" path="res://minigames/typing/typing_minigame_section.gd" id="5_bvgs8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c35dl"]
@@ -20,9 +17,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ijvf5")
-fallback_drink = ExtResource("2_c35dl")
-fallback_recipe = ExtResource("3_iw1nw")
-ingredients_list = ExtResource("2_ijvf5")
 drink_name_label = NodePath("VBoxContainer/DrinkNameLabel")
 instructions_container = NodePath("VBoxContainer/InstructionsContainer")
 typing_minigame_section = NodePath("VBoxContainer/TypingSectionContainer/TypingMinigameSection")

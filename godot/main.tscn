@@ -1,332 +1,163 @@
-[gd_scene format=4 uid="uid://nm85k5woe7rt"]
+[gd_scene format=3 uid="uid://nm85k5woe7rt"]
 
-[ext_resource type="Script" uid="uid://4rl0a3bpopmq" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
-[ext_resource type="Resource" uid="uid://cipc6br6cv25l" path="res://items/overtime_request_form.tres" id="3_ryguw"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://window.tscn" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://customer_help_desk.tscn" id="4_272bh"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="4_ovcoh"]
+[ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
-[ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="6_d13ii"]
-[ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="6_w48qg"]
-[ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="7_1u8w0"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
-[ext_resource type="Texture2D" uid="uid://bieg4r5p475q3" path="res://sprites/cctv.png" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
-[ext_resource type="Script" uid="uid://cat432fvo260e" path="res://item_shelf.gd" id="10_82xsv"]
+[ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
+[ext_resource type="PackedScene" uid="uid://l7w4dtq33b6f" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame_.tscn" id="11_efxa6"]
-[ext_resource type="PackedScene" uid="uid://bxnxtc8jiih51" path="res://items/shelf_item.tscn" id="11_getpj"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
+[ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
+[ext_resource type="PackedScene" uid="uid://ce4dmlcd3n30f" path="res://minigames/words/word_game.tscn" id="18_4obbf"]
+[ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="19_yjja3"]
+[ext_resource type="PackedScene" uid="uid://b42eh0jvdare4" path="res://tutorial_selection_menu.tscn" id="20_4obbf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
-[ext_resource type="Texture2D" uid="uid://c86eywh2qbnig" path="res://sprites/alert/frame_00_delay-0.04s.png" id="23_vieuh"]
-[ext_resource type="Texture2D" uid="uid://bdyrmd0hdrdvh" path="res://sprites/alert/frame_01_delay-0.04s.png" id="24_yjja3"]
-[ext_resource type="Texture2D" uid="uid://v5nn6up6aa13" path="res://sprites/alert/frame_02_delay-0.04s.png" id="25_l0gw7"]
-[ext_resource type="Texture2D" uid="uid://b07v7ssw28quk" path="res://sprites/alert/frame_03_delay-0.04s.png" id="26_inymm"]
-[ext_resource type="Texture2D" uid="uid://dytf7oi1bf6o7" path="res://sprites/alert/frame_04_delay-0.04s.png" id="27_jcxqu"]
-[ext_resource type="Texture2D" uid="uid://jvv7706jqmaf" path="res://sprites/alert/frame_05_delay-0.05s.png" id="28_0arob"]
-[ext_resource type="Texture2D" uid="uid://byywig7v214so" path="res://sprites/alert/frame_06_delay-0.04s.png" id="29_dij0e"]
-[ext_resource type="Texture2D" uid="uid://ds0th57ag3r1d" path="res://sprites/alert/frame_07_delay-0.04s.png" id="30_k1udn"]
-[ext_resource type="Texture2D" uid="uid://bg7pew7xy8xc1" path="res://sprites/alert/frame_08_delay-0.04s.png" id="31_wat4s"]
-[ext_resource type="Texture2D" uid="uid://c8tu2yliho5vv" path="res://sprites/alert/frame_09_delay-0.04s.png" id="32_ywjan"]
-[ext_resource type="Texture2D" uid="uid://dio2nr6075utp" path="res://sprites/alert/frame_10_delay-0.04s.png" id="33_m74q3"]
-[ext_resource type="Texture2D" uid="uid://cxw6bx3yspg0t" path="res://sprites/alert/frame_11_delay-0.05s.png" id="34_tko6h"]
-[ext_resource type="Texture2D" uid="uid://dyvn8y6yxxp3c" path="res://sprites/alert/frame_12_delay-0.04s.png" id="35_am8a1"]
-[ext_resource type="Texture2D" uid="uid://ce6aylxemgy35" path="res://sprites/alert/frame_13_delay-0.04s.png" id="36_8dc3g"]
-[ext_resource type="Texture2D" uid="uid://b2x5bvsgxyxsp" path="res://sprites/alert/frame_14_delay-0.04s.png" id="37_htgcl"]
-[ext_resource type="Texture2D" uid="uid://gfqu51nrngu4" path="res://sprites/alert/frame_15_delay-0.04s.png" id="38_smeu8"]
-[ext_resource type="Texture2D" uid="uid://dx3lbu3ju7deu" path="res://sprites/alert/frame_16_delay-0.04s.png" id="39_f3y11"]
-[ext_resource type="Texture2D" uid="uid://b1k8vkx1m7bsv" path="res://sprites/alert/frame_17_delay-0.05s.png" id="40_cpm2s"]
-[ext_resource type="Texture2D" uid="uid://cg8jitaav8s5b" path="res://sprites/alert/frame_18_delay-0.04s.png" id="41_u81y6"]
-[ext_resource type="Texture2D" uid="uid://b3cbnqrgmqdvk" path="res://sprites/alert/frame_19_delay-0.04s.png" id="42_rt5wr"]
-[ext_resource type="Texture2D" uid="uid://on7yfgn0tt30" path="res://sprites/alert/frame_20_delay-0.04s.png" id="43_mnw77"]
-[ext_resource type="Texture2D" uid="uid://cn5o1xhguo2jv" path="res://sprites/alert/frame_21_delay-0.04s.png" id="44_vjgyh"]
-[ext_resource type="Texture2D" uid="uid://bkxu26f3wo1xb" path="res://sprites/alert/frame_22_delay-0.04s.png" id="45_d5iia"]
-[ext_resource type="Texture2D" uid="uid://by4sxeac6n5vd" path="res://sprites/alert/frame_23_delay-0.05s.png" id="46_asu84"]
-[ext_resource type="Texture2D" uid="uid://4xg61rrqv125" path="res://sprites/alert/frame_24_delay-0.04s.png" id="47_qwt6e"]
-[ext_resource type="Texture2D" uid="uid://y5qyrblkkthi" path="res://sprites/alert/frame_25_delay-0.04s.png" id="48_off2o"]
-[ext_resource type="Texture2D" uid="uid://38dkibuboqy0" path="res://sprites/alert/frame_26_delay-0.04s.png" id="49_tttfs"]
-[ext_resource type="Texture2D" uid="uid://b4mmkwxhnxhnd" path="res://sprites/alert/frame_27_delay-0.04s.png" id="50_1iygd"]
-[ext_resource type="Texture2D" uid="uid://diljb7fbwbiyh" path="res://sprites/alert/frame_28_delay-0.04s.png" id="51_g5xqc"]
-[ext_resource type="Texture2D" uid="uid://d0tcraufqsi8m" path="res://sprites/alert/frame_29_delay-0.05s.png" id="52_s4o1y"]
-[ext_resource type="Texture2D" uid="uid://ckck3ymuw1kyp" path="res://sprites/alert/frame_30_delay-0.04s.png" id="53_7mmqq"]
-[ext_resource type="Texture2D" uid="uid://d2pho6wkk8lh7" path="res://sprites/alert/frame_31_delay-0.04s.png" id="54_3exxq"]
-[ext_resource type="Texture2D" uid="uid://cax1i73apu2vg" path="res://sprites/alert/frame_32_delay-0.04s.png" id="55_5aa3q"]
-[ext_resource type="Texture2D" uid="uid://gwlq48ckvyqy" path="res://sprites/alert/frame_33_delay-0.04s.png" id="56_bmvma"]
-[ext_resource type="Texture2D" uid="uid://4qk4887kjdlo" path="res://sprites/alert/frame_34_delay-0.04s.png" id="57_shlp4"]
-[ext_resource type="Texture2D" uid="uid://btpdr6xo8mtid" path="res://sprites/alert/frame_35_delay-0.05s.png" id="58_2n44k"]
-[ext_resource type="Texture2D" uid="uid://cl2u4hy6xgf0q" path="res://sprites/alert/frame_36_delay-0.04s.png" id="59_86lig"]
-[ext_resource type="Texture2D" uid="uid://datmsefnmt5j8" path="res://sprites/alert/frame_37_delay-0.04s.png" id="60_ldnlw"]
-[ext_resource type="Texture2D" uid="uid://cy2a5pnm1ubsn" path="res://sprites/alert/frame_38_delay-0.04s.png" id="61_qe8ju"]
-[ext_resource type="Texture2D" uid="uid://qniaaug5xro6" path="res://sprites/alert/frame_39_delay-0.04s.png" id="62_bnk2o"]
-[ext_resource type="Texture2D" uid="uid://1kogor4xv3yf" path="res://sprites/alert/frame_40_delay-0.04s.png" id="63_oosfy"]
-[ext_resource type="Texture2D" uid="uid://d2bqahts50r02" path="res://sprites/alert/frame_41_delay-0.05s.png" id="64_nf4f2"]
-[ext_resource type="Texture2D" uid="uid://dnwtqx2idxigf" path="res://sprites/alert/frame_42_delay-0.04s.png" id="65_xkvoa"]
-[ext_resource type="Texture2D" uid="uid://cm6vhnn82dmon" path="res://sprites/alert/frame_43_delay-0.04s.png" id="66_t5kpo"]
-[ext_resource type="Texture2D" uid="uid://71150mhvmlgn" path="res://sprites/alert/frame_44_delay-0.04s.png" id="67_pw0td"]
-[ext_resource type="Texture2D" uid="uid://berkulo1wmonh" path="res://sprites/alert/frame_45_delay-0.04s.png" id="68_37eu1"]
-[ext_resource type="Texture2D" uid="uid://5s20stlwbrg2" path="res://sprites/alert/frame_46_delay-0.04s.png" id="69_0wkqm"]
-[ext_resource type="Texture2D" uid="uid://du70ghn0053vm" path="res://sprites/alert/frame_47_delay-0.05s.png" id="70_ve5sr"]
-[ext_resource type="Texture2D" uid="uid://c51a6c721kqft" path="res://sprites/alert/frame_48_delay-0.04s.png" id="71_5s44m"]
-[ext_resource type="Texture2D" uid="uid://w2ivnokp8yuo" path="res://sprites/alert/frame_49_delay-0.04s.png" id="72_ibca3"]
-[ext_resource type="Texture2D" uid="uid://iqhdj1vcxykc" path="res://sprites/alert/frame_50_delay-0.04s.png" id="73_g3y5b"]
-[ext_resource type="Texture2D" uid="uid://djex1hfdtd160" path="res://sprites/alert/frame_51_delay-0.04s.png" id="74_1slqb"]
-[ext_resource type="Texture2D" uid="uid://d17r3alt8bqjk" path="res://sprites/alert/frame_52_delay-0.04s.png" id="75_uo83y"]
-[ext_resource type="Texture2D" uid="uid://dm5ru4q74uevw" path="res://sprites/alert/frame_53_delay-0.05s.png" id="76_y0aao"]
-[ext_resource type="Texture2D" uid="uid://d0eqh0jirjeud" path="res://sprites/alert/frame_54_delay-0.04s.png" id="77_wm5rm"]
-[ext_resource type="Texture2D" uid="uid://dpapi0l4eekc4" path="res://sprites/alert/frame_55_delay-0.04s.png" id="78_ekl5k"]
-[ext_resource type="Texture2D" uid="uid://w3c2wqamgs7e" path="res://sprites/alert/frame_56_delay-0.04s.png" id="79_fdpg8"]
-[ext_resource type="Texture2D" uid="uid://blorj6se4dvl5" path="res://sprites/alert/frame_57_delay-0.04s.png" id="80_rpys8"]
-[ext_resource type="Texture2D" uid="uid://b2m7efjbdat3g" path="res://sprites/alert/frame_58_delay-0.04s.png" id="81_6gr3f"]
-[ext_resource type="Texture2D" uid="uid://deonbpsv3t147" path="res://sprites/alert/frame_59_delay-0.05s.png" id="82_6seew"]
-[ext_resource type="Texture2D" uid="uid://dyi464btb2k1g" path="res://sprites/alert/frame_60_delay-0.04s.png" id="83_3ox4t"]
-[ext_resource type="Texture2D" uid="uid://g17e6pf2vsp3" path="res://sprites/alert/frame_61_delay-0.04s.png" id="84_4fmho"]
-[ext_resource type="Texture2D" uid="uid://df8tkjtq6gepg" path="res://sprites/alert/frame_62_delay-0.04s.png" id="85_aivy6"]
-[ext_resource type="Texture2D" uid="uid://bw4almf4aibha" path="res://sprites/alert/frame_63_delay-0.04s.png" id="86_bil4k"]
-[ext_resource type="Texture2D" uid="uid://cgxxxf5rb6ewh" path="res://sprites/alert/frame_64_delay-0.04s.png" id="87_hnquj"]
-[ext_resource type="Texture2D" uid="uid://dy23vdh1gkm4a" path="res://sprites/alert/frame_65_delay-0.05s.png" id="88_0h8y2"]
-[ext_resource type="Texture2D" uid="uid://ojla2bm22r2k" path="res://sprites/alert/frame_66_delay-0.04s.png" id="89_nycv6"]
-[ext_resource type="Texture2D" uid="uid://dmuyb1irpuomi" path="res://sprites/alert/frame_67_delay-0.04s.png" id="90_x4ftd"]
-[ext_resource type="Texture2D" uid="uid://7lah3kcbjgdn" path="res://sprites/alert/frame_68_delay-0.04s.png" id="91_arf1h"]
-[ext_resource type="Texture2D" uid="uid://c1yhe1o7t4rlq" path="res://sprites/alert/frame_69_delay-0.04s.png" id="92_s0om5"]
-[ext_resource type="Texture2D" uid="uid://dxcquusp3m075" path="res://sprites/alert/frame_70_delay-0.04s.png" id="93_gkfde"]
-[ext_resource type="PackedScene" uid="uid://b2kutc78gmwd1" path="res://customer_trash.tscn" id="93_yjja3"]
-[ext_resource type="Texture2D" uid="uid://78rgr88rxg1k" path="res://sprites/alert/frame_71_delay-0.05s.png" id="94_4qxq8"]
+[ext_resource type="Script" uid="uid://cpy5mfle7bldo" path="res://ingredient_spawner.gd" id="23_ppx11"]
+[ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
+[ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
+[ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
+[ext_resource type="PackedScene" uid="uid://dyu70pksd1s2w" path="res://cafe_break_room_door.tscn" id="28_ovcoh"]
+[ext_resource type="Script" uid="uid://b83i4oyqxn1q8" path="res://ui/crosshair.gd" id="28_ppx11"]
+[ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
+[ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
+[ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
+[ext_resource type="PackedScene" uid="uid://dtbfgptmi7ixs" path="res://cafe_environment.tscn" id="44_h6isl"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
+[ext_resource type="Texture2D" uid="uid://bst7kul722rro" path="res://sprites/eye_red.png" id="48_lwnsi"]
+[ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://items/super_scrubber_2000.tres" id="50_jbvwl"]
+[ext_resource type="Resource" uid="uid://dro03qfkl0ucg" path="res://items/whipped_cream.tres" id="51_sn1fb"]
+[ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="68_tfaor"]
+[ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="69_3rmuw"]
+[ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="69_j3ofb"]
+[ext_resource type="PackedScene" uid="uid://dohtcd6556n24" path="res://menu.tscn" id="70_g5xqc"]
+[ext_resource type="Texture2D" uid="uid://bhg3g67g8gjck" path="res://sprites/items/book.png" id="70_j3ofb"]
+[ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
+[ext_resource type="Texture2D" uid="uid://b8pqjkx1lt8xa" path="res://sprites/items/shoes.png" id="72_oirqo"]
+[ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
+[ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
+[ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
+[ext_resource type="PackedScene" uid="uid://1s54vqwadrmx" path="res://Assets/signs/tippy_open_close_sign.tscn" id="84_1yv1y"]
+[ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
+[ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
+[ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
+[ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
+[ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
+[ext_resource type="SpriteFrames" uid="uid://cricks5lh0svk" path="res://sprites/sprite_frames_resources/hand_animations_sprite_frames.tres" id="108_asu84"]
+[ext_resource type="Texture2D" uid="uid://c3dx5sicliquh" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_tab.png" id="114_gfi32"]
+[ext_resource type="Texture2D" uid="uid://coc6oix1rjnwv" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Vector/keyboard_q.svg" id="115_12204"]
+[ext_resource type="PackedScene" uid="uid://dgx2rjk26naaf" path="res://ui/active_item_menu/active_item_selection.tscn" id="116_3gvdc"]
+[ext_resource type="Script" uid="uid://88l7tqjx13sk" path="res://ui/viewmodel.gd" id="116_w7qqv"]
+[ext_resource type="Texture2D" uid="uid://5rgpi658gcye" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_e.png" id="117_ycw8e"]
+[ext_resource type="Texture2D" uid="uid://bs1mpgx84cqn6" path="res://Assets/UI/speech_bubble.png" id="124_1iygd"]
+[ext_resource type="Texture2D" uid="uid://b176xreldagr8" path="res://Assets/UI/x_button.png" id="125_g5xqc"]
+[ext_resource type="Texture2D" uid="uid://s043j74ko4a1" path="res://sprites/coffee_bean.png" id="128_s4o1y"]
+[ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
+[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
+[ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
+[ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
+[ext_resource type="AudioStream" uid="uid://bxlwlieajscls" path="res://audio/time_start.mp3" id="223_ycw8e"]
+[ext_resource type="Script" uid="uid://djpemlgyywwcb" path="res://tutorial/tutorial_view.gd" id="225_gttkg"]
+[ext_resource type="PackedScene" uid="uid://b21ndqhhyxlxy" path="res://tutorial/tutorial_screen_view_1.tscn" id="227_lix4w"]
+[ext_resource type="PackedScene" uid="uid://8h2mdx74vf3b" path="res://tutorial/tutorial_screen_view_2.tscn" id="228_kmrid"]
+[ext_resource type="PackedScene" uid="uid://r1xentkdq7bs" path="res://tutorial/tutorial_screen_view_3.tscn" id="229_e31mi"]
+[ext_resource type="PackedScene" uid="uid://vpthg7i8xd5t" path="res://tutorial/tutorial_screen_view_5.tscn" id="231_yf6j3"]
+[ext_resource type="PackedScene" uid="uid://cwrrk4bkluvu" path="res://tutorial/tutorial_screen_view_6.tscn" id="232_e4ynb"]
+[ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
+[ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
+[ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
+
+[sub_resource type="Resource" id="Resource_1yv1y"]
+script = ExtResource("4_ovcoh")
+item_id = "overtime_form"
+name = "Overtime Form"
+icon = ExtResource("71_m5f57")
+metadata/_custom_type_script = "uid://w8k3e1miec1a"
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
+
+[sub_resource type="Curve3D" id="Curve3D_ovcoh"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.9674349, -0.14133549, 0.37266684, 0, 0, 0, 0, 0, 0, 1.2822933, -0.14133549, 1.7030587, 0, 0, 0, 0, 0, 0, -1.425354, -0.14133549, 1.8031206, 0, 0, 0, 0, 0, 0, -1.7179842, -0.14133525, 0.09962416, 0, 0, 0, 0, 0, 0, -1.66679, -0.14133549, -1.8155394, 0, 0, 0, 0, 0, 0, 1.8930559, -0.14133549, -1.6656036),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_ppx11"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.9857298, -0.14100003, -1.25632, 0, 0, 0, 0, 0, 0, 1.9366394, -0.14100003, -0.22045803, 0, 0, 0, 0, 0, 0, 1.8751656, -0.14100003, 0.9885745, 0, 0, 0, 0, 0, 0, 1.0215527, -0.14100003, 1.9086924, 0, 0, 0, 0, 0, 0, -0.35155213, -0.14100003, 2.1390781, 0, 0, 0, 0, 0, 0, -1.665934, -0.14100003, 1.3223314, 0, 0, 0, 0, 0, 0, -1.765494, -0.14100003, -0.22566223, 0, 0, 0, 0, 0, 0, -0.59757805, -0.14100003, -1.1739569),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="Curve3D" id="Curve3D_1yv1y"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.2787304, 0, -0.6934252, 0, 0, 0, 0, 0, 0, 1.6884236, -0.14100003, 1.0052791, 0, 0, 0, 0, 0, 0, -0.65226126, -0.14100003, 1.9012499, 0, 0, 0, 0, 0, 0, -1.3193774, -0.14100003, 0.37446022, 0, 0, 0, 0, 0, 0, -1.7369752, -0.14100003, -0.7691543, 0, 0, 0, 0, 0, 0, -0.9964194, -0.14100003, -1.6095676, 0, 0, 0, 0, 0, 0, 0.39631987, -0.14100003, -1.8792813),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.29000002, 0.29000002, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
+size = Vector3(1, 0.2680664, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 32
+font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("UI/MarginContainer/VBoxContainer/Alert/SubViewport")
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0ffxp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("23_vieuh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_yjja3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_l0gw7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_inymm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_jcxqu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_0arob")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_dij0e")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_k1udn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_wat4s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_ywjan")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_m74q3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_tko6h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_am8a1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_8dc3g")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_htgcl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("38_smeu8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("39_f3y11")
-}, {
-"duration": 1.0,
-"texture": ExtResource("40_cpm2s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("41_u81y6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("42_rt5wr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("43_mnw77")
-}, {
-"duration": 1.0,
-"texture": ExtResource("44_vjgyh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("45_d5iia")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_asu84")
-}, {
-"duration": 1.0,
-"texture": ExtResource("47_qwt6e")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_off2o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("49_tttfs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_1iygd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("51_g5xqc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("52_s4o1y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("53_7mmqq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("54_3exxq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("55_5aa3q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("56_bmvma")
-}, {
-"duration": 1.0,
-"texture": ExtResource("57_shlp4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("58_2n44k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("59_86lig")
-}, {
-"duration": 1.0,
-"texture": ExtResource("60_ldnlw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("61_qe8ju")
-}, {
-"duration": 1.0,
-"texture": ExtResource("62_bnk2o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("63_oosfy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("64_nf4f2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("65_xkvoa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("66_t5kpo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("67_pw0td")
-}, {
-"duration": 1.0,
-"texture": ExtResource("68_37eu1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("69_0wkqm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("70_ve5sr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("71_5s44m")
-}, {
-"duration": 1.0,
-"texture": ExtResource("72_ibca3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("73_g3y5b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("74_1slqb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("75_uo83y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("76_y0aao")
-}, {
-"duration": 1.0,
-"texture": ExtResource("77_wm5rm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("78_ekl5k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("79_fdpg8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("80_rpys8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("81_6gr3f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("82_6seew")
-}, {
-"duration": 1.0,
-"texture": ExtResource("83_3ox4t")
-}, {
-"duration": 1.0,
-"texture": ExtResource("84_4fmho")
-}, {
-"duration": 1.0,
-"texture": ExtResource("85_aivy6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("86_bil4k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("87_hnquj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("88_0h8y2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("89_nycv6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("90_x4ftd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("91_arf1h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("92_s0om5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("93_gkfde")
-}, {
-"duration": 1.0,
-"texture": ExtResource("94_4qxq8")
-}],
-"loop": 0,
-"name": &"default",
-"speed": 24.0
-}]
+viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
@@ -339,79 +170,27 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="AudioStreamWAV" id="AudioStreamWAV_kek77"]
-data = PackedByteArray("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AFAAoAoFB5oECgCgHmgCgQaDjQKaBABABEBoONAgAlUCmACCA0QQGgjTRBAcqIDRAkBpogoggNEAQQGmiHGACgDjTRDjAcYDAgpogpoOEgEIwCnGEQCgAAAAKBCIRCKcAoAFAAFAAxoCnCinA4HrAwCuaCaAAAAMCFFFFOApwFEGk40mk40nHACDzCKBRCKBAgAJpOEBNJwEUCijLACgRAICccIThACICwAoFAFAoFAE49UnA44UQAKAeaAKBQBQABOFOEAFBxoCgUCgCiA0QAIAcYIDlQYDAEAhogghoqoEGASAQ0LGAQcqIIaIaDAaANENENENENEGg1YwCQGmgwIBKsYDRIDRABolWMBokBoA4wGmhY4wCAJAaIaaFljAANNBoNEOMAEGiHGAGnLCHARAaJTjQcIKBpoXVFNBxoECnGgUUY04QAABCYRTjjCKBOOEJpOEJxwHHGg4HCAE4QIThACcICcKAAJwhOEBOFMGkU44QEQAnAScIThARAATBxwpwgBOOOEIQAnHCAAnCAAATjjjjhAAABONJxwgAAAAAAAAUmgrnAAAAAMcaAAAAgoAAxoAoAADGgACgADGgQKABQKAAKADCNAxoFAFAAoM0ACgA840YwAKBQBQAKKABEAFEAgNMAMAAUQCAGAGmgTTTTRKqDTRBokEEBpppogA00SrGrGCmAaaIacoVjTBAqxqxpqxqxoACGiHKmhY0waYDjDRAYKaAAgghoghoOUGAGAQAUCiAAjRBADhBQKIAoAoAFFAoFAE4U440CgCgAKAKAcABRQBAooFAoFAoFAE80HmgUHAUQKKKAcAKKKKBFFFFOAohFECnACiEUUQigCKIRARRARCAgIOFOAgIpwHCnrHCiE40AKIRCccacYBBogMAggWFywFY00000000wsYcsqIDTADAAgghxgghywAqg000000QwYcYIcsYDTTAANNEgNOVNME00Q005U0QwlngYKsasLQBENEpgNENEMGA5UQQ0GmAQllRKaYVRDlAEOMpppgC6oEGg400A440AYBBBBBBBAcAAoAoFAAoFAGFdUA4QAUQABQBQDzQADzAogAogOXVAoE0CACimgU4wAITQKKKBCDCWONFNAgAogEnGgA4A9Y0QBAAAAAAAAKBAhPfOXWNOMCUQAU4wA4wAl1SsDjRABRAgOMAgNEFEAACCrG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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgCsRBQAECgAAQABAAEAAf///p/fAz0tAAEAAQABAAEAef8R35s91wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAKxEFAAQKAABAAEAAQAB///+n98DPS0AAQABAAEAAQB5/xHfmz3XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIArEQUABAoAAEAAQABAAH///6f3wM9LQABAAEAAQABAHn/Ed+bPdcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgCsRBQAECgAAQABAAEAAf///p/fAz0tAAEAAQABAAEAef8R35s91wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAKxEFAAQKAABAAEAAQAB///+n98DPS0AAQABAAEAAQB5/xHfmz3XAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIArEQPoAyoAAEAAQABAAH///6f3wM9LQABAAEAAQABAHn/Ed+bPdcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==")
-format = 3
-stereo = true
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
+bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjuso"]
+bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_top_color = Color(0.7058824, 0.67058825, 0.56078434, 1)
-sky_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
-ground_bottom_color = Color(0.4745098, 0.42352942, 0.39215687, 1)
-ground_horizon_color = Color(0.7372549, 0.7176471, 0.64705884, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
+bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[sub_resource type="Sky" id="Sky_0xm2m"]
-sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
-
-[sub_resource type="Environment" id="Environment_h2yge"]
-background_mode = 2
-sky = SubResource("Sky_0xm2m")
-volumetric_fog_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.29411766)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-albedo_color = Color(0.96862745, 0.43137255, 0.43137255, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_yaehf"]
-material = SubResource("StandardMaterial3D_2cqfq")
-text = "store room"
-pixel_size = 0.025
-depth = 0.025
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
-albedo_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_j2xdn"]
-viewport_path = NodePath("Building/BreakRoomDoor/Sign/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
-albedo_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
-
-[sub_resource type="TextMesh" id="TextMesh_vn1tu"]
-material = SubResource("StandardMaterial3D_mjix0")
-text = "employee
-area"
-depth = 0.0
-
-[sub_resource type="TextMesh" id="TextMesh_lswn8"]
-material = SubResource("StandardMaterial3D_mjix0")
-text = "customer
-area"
-depth = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cegan"]
-albedo_color = Color(0.34117648, 0.2901961, 0.2901961, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
-material = SubResource("StandardMaterial3D_cegan")
-size = Vector3(3, 0.1, 0.25)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
-size = Vector3(3, 0.1, 0.25)
-
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("machines", "cameras", "side_machine", "fourth_machine", "customer_spawn_timer", "customer_trash_spawn_timer", "left_corner", "right_corner", "bottom_left_corner", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "window", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "_customer_help_desk", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
-machines = [NodePath("Machines/Machine2"), NodePath("Machines/Machine3")]
-cameras = NodePath("SecurityCams")
-side_machine = NodePath("Machines/Machine")
+_pause_menu = NodePath("PauseMenu")
+_tutorial_manager = NodePath("TutorialManager")
+_world_environment = NodePath("WorldEnvironment")
+_cameras = [NodePath("SecurityCams/SecurityCam"), NodePath("SecurityCams/SecurityCam2"), NodePath("SecurityCams/SecurityCam3")]
+menu = NodePath("Menu")
+first_machine = NodePath("Machines/Machine")
+second_machine = NodePath("Machines/Machine2")
+third_machine = NodePath("Machines/Machine3")
 fourth_machine = NodePath("Machines/Machine4")
-customer_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_trash_spawn_timer = NodePath("CustomerTrashSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
 customer_trash_scene = ExtResource("93_yjja3")
@@ -421,77 +200,617 @@ bottom_left_corner = NodePath("Building/TrashPoints/BottomLeftCorner")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
-window = NodePath("Window")
+_customer_help_desk = NodePath("CustomerHelpDesk")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
-desk = NodePath("Building/Desk")
+desk = NodePath("Desk")
 pc_ui = NodePath("PCUI/PC")
-overtime_item = ExtResource("3_ryguw")
+overtime_item = SubResource("Resource_1yv1y")
+camera_posters = [null, null, null]
 minigame_controller = NodePath("MinigameController")
+clock_item_stop_sound = NodePath("ClockItemStopSound")
+clock_item_start_sound = NodePath("ClockItemStartSound")
+special_shift_icon = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
+special_shift_text = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+teleporter1 = NodePath("Teleporter1")
+teleporter2 = NodePath("Teleporter2")
+teleporter3 = NodePath("Teleporter3")
+tutorial_selection_menu = NodePath("TutorialSelectionMenu")
+whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
+waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
+tippy_voice_player = NodePath("TippyVoiceLinePlayer")
+tippy_voice_timer = NodePath("TippyVoiceTimer")
+
+[node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
+script = ExtResource("4_qsp4k")
+
+[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_view_canvas_layer", "_tutorial_view")]
+script = ExtResource("10_ed5de")
+_tutorial_view_canvas_layer = NodePath("../TutorialCanvasLayer")
+_tutorial_view = NodePath("../TutorialCanvasLayer/TutorialView")
+metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
+layer = 2
 visible = false
 
-[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport")]
+[node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
-script = ExtResource("10_4c57u")
-minigame_dict = Dictionary[String, PackedScene]({
-"Arrows": ExtResource("20_a6jrf"),
-"Colors": ExtResource("11_efxa6"),
-"Refill": ExtResource("23_lswn8"),
-"Typing": ExtResource("20_d13ii")
-})
-sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 
-[node name="MarginContainer" type="MarginContainer" parent="MinigameController" unique_id=614867549]
+[node name="TutorialSelectionMenu" parent="." unique_id=1397742482 instance=ExtResource("20_4obbf")]
+layer = 2
+visible = false
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
+shape = SubResource("WorldBoundaryShape3D_2cqfq")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
+environment = ExtResource("19_yjja3")
+
+[node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
+
+[node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1111936502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
+
+[node name="Machines" type="Node3D" parent="." unique_id=407734909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05381441, 0)
+
+[node name="Machine" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
+
+[node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
+
+[node name="Machine3" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.33386397)
+
+[node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.7)
+
+[node name="CustomerHelpDesk" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 4.0535426)
+
+[node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
+
+[node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.962635, 2.8413355, 4.6095347)
+rotation_pause_length = 4.0
+
+[node name="AimPath3D" parent="SecurityCams/SecurityCam" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ovcoh")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.88902724, 0, 0.45784253, 0, 0.99999255, 0, -0.4578422, 0, -0.8890279, 1.9674349, -0.14133549, 0.37266684)
+
+[node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
+rotation_time = 2.0
+rotation_pause_length = 4.0
+
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam2/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
+spot_angle = 21.0
+
+[node name="AimPath3D" parent="SecurityCams/SecurityCam2" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_ppx11")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam2/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+
+[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.9940248, 2.841, -1.0650823)
+
+[node name="SpotLight3D" parent="SecurityCams/SecurityCam3/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
+spot_angle = 25.0
+
+[node name="AimPath3D" parent="SecurityCams/SecurityCam3" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_1yv1y")
+
+[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam3/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
+
+[node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
+transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
+
+[node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
+transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
+visible = false
+gizmo_extents = 0.0
+script = ExtResource("84_ppx11")
+arrow_material = SubResource("StandardMaterial3D_ppx11")
+
+[node name="WaypointArea3D" type="Area3D" parent="TutorialArrow3D" unique_id=156454262]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialArrow3D/WaypointArea3D" unique_id=1886631170]
+shape = SubResource("BoxShape3D_xrivr")
+
+[node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
+
+[node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
+wait_time = 120.0
+one_shot = true
+
+[node name="TippyVoiceTimer" type="Timer" parent="." unique_id=375848378]
+wait_time = 15.0
+one_shot = true
+
+[node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
+transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071067, 2.720034, 0, 14.536791)
+
+[node name="CafeItemShelf" parent="." unique_id=1767295431 instance=ExtResource("26_4obbf")]
+transform = Transform3D(1.1924875e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924875e-08, -1.2828894, 1.1999999, 13.967806)
+
+[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.4037077, 1.1920929e-07, 13.4061365)
+
+[node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4011619, -0.11735466, 10.078446)
+
+[node name="Menu" parent="." unique_id=1811682227 instance=ExtResource("70_g5xqc")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
+
+[node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0010734, -0.09343622, 4.002124)
+
+[node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
+script = ExtResource("23_ppx11")
+_ingredient_spawn_points = [NodePath("IngredientSpawnMarker3D"), NodePath("IngredientSpawnMarker3D2"), NodePath("IngredientSpawnMarker3D3"), NodePath("IngredientSpawnMarker3D4"), NodePath("IngredientSpawnMarker3D5"), NodePath("IngredientSpawnMarker3D6")]
+_ingredients_bag_packed_scene = ExtResource("3_2cqfq")
+
+[node name="IngredientSpawnMarker3D" type="Marker3D" parent="IngredientSpawner" unique_id=1568223279]
+transform = Transform3D(0.9487802, 0, -0.31593695, 0, 1, 0, 0.31593695, 0, 0.9487802, 4.943459, -0.7501248, -13.604155)
+
+[node name="IngredientSpawnMarker3D2" type="Marker3D" parent="IngredientSpawner" unique_id=769091873]
+transform = Transform3D(0.3277469, 0, -0.9447655, 0, 1, 0, 0.9447655, 0, 0.3277469, 5.366172, -0.7501248, -13.604155)
+
+[node name="IngredientSpawnMarker3D3" type="Marker3D" parent="IngredientSpawner" unique_id=1791985955]
+transform = Transform3D(-0.778302, 0, -0.6278901, 0, 1, 0, 0.6278901, 0, -0.778302, 5.1639137, -0.7501248, -13.654996)
+
+[node name="IngredientSpawnMarker3D4" type="Marker3D" parent="IngredientSpawner" unique_id=677772387]
+transform = Transform3D(-0.9180558, 0, 0.39645162, 0, 1, 0, -0.39645162, 0, -0.9180558, 4.706724, -0.7501248, -13.666647)
+
+[node name="IngredientSpawnMarker3D5" type="Marker3D" parent="IngredientSpawner" unique_id=2098485488]
+transform = Transform3D(-0.785986, 0, -0.61824423, 0, 1, 0, 0.61824423, 0, -0.785986, 4.452388, -0.7501248, -13.604155)
+
+[node name="IngredientSpawnMarker3D6" type="Marker3D" parent="IngredientSpawner" unique_id=1211296652]
+transform = Transform3D(-0.5060448, 0, 0.86250716, 0, 1, 0, -0.86250716, 0, -0.5060448, 5.56843, -0.7501248, -13.627114)
+
+[node name="Teleporter1" type="Area3D" parent="." unique_id=247187360 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.289, 0, 5.974)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter1" unique_id=731332946]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.2514602, 0)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter1/CollisionShape3D" unique_id=790686180]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter1/CollisionShape3D" unique_id=2091540570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter1" unique_id=743376530]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, -7.5824304, 0, -6.8695865)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter1/Marker3D" unique_id=2006567238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Teleporter2" type="Area3D" parent="." unique_id=469409372 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.134, 0, 2.016)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter2" unique_id=1650664057]
+transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -0.06488752, 0.26131332, 0)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter2/CollisionShape3D" unique_id=1046926191]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter2/CollisionShape3D" unique_id=966457308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter2" unique_id=456152824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.497669, 0, -0.41641974)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter2/Marker3D" unique_id=966291062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Teleporter3" type="Area3D" parent="." unique_id=1924229073 node_paths=PackedStringArray("destination")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2494335, 0, -2.7986898)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter3" unique_id=554001673]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.064888, 0.26131332, 0)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter3/CollisionShape3D" unique_id=541196362]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter3/CollisionShape3D" unique_id=583088529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter3" unique_id=1836870035]
+transform = Transform3D(1.1920929e-07, 0, 1, 0, 1, 0, -1, 0, 1.1920929e-07, 11.307452, 1.1920929e-07, 10.258867)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter3/Marker3D" unique_id=1894647867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
+process_mode = 3
+script = ExtResource("5_lquwl")
+profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
+profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
+customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
+score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
+interactable_indicator = NodePath("HUD/VBoxContainer/Interactable")
+interactable_label = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
+hold_interact_progress = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
+game_timer = NodePath("../GameTimer")
+time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
+time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
+time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
+objective = NodePath("HUD/Objective")
+rules_controls = NodePath("HUD/VBoxContainer/HBoxContainer/ControlsRules")
+money_sound = NodePath("MoneySound")
+gain_points_sound = NodePath("GainPointsSound")
+lose_points_sound = NodePath("LosePointsSound")
+low_time_sound = NodePath("LowTimeSound")
+cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
+_eye_logo_red_texture = ExtResource("48_lwnsi")
+_eye_logo_texture = ExtResource("44_dfxmq")
+alert_ui = NodePath("HUD/VBoxContainer/Alerts")
+alert_label = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/AlertText")
+shelf_item_ui = NodePath("HUD/ShelfItem")
+shelf_item_name = NodePath("HUD/ShelfItem/VBoxContainer/Name")
+shelf_item_description = NodePath("HUD/ShelfItem/VBoxContainer/Description")
+shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
+shelf_item_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+shelf_item_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
+shelf_item_sell = NodePath("HUD/ShelfItem/VBoxContainer/Sell")
+shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
+day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
+rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
+customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
+alert_sprite = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
+drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
+sold_item_sound = NodePath("SoldItemSound")
+exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
+item_hover_tooltip = NodePath("ItemHoverTooltip")
+item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
+item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
+item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
+item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
+stamina_bar = NodePath("StaminaBar")
+item_menu_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/MenuPrompt")
+item_ui = NodePath("HUD/ActiveItemInfo")
+current_item_ui = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem")
+item_indicator = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator")
+item_text = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator/RichTextLabel")
+current_item_icon = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
+item_cooldown_bar = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon/CooldownIndicator")
+use_item_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
+end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
+hammer = ExtResource("150_0bk8h")
+scrubber = ExtResource("50_jbvwl")
+whipped_cream = ExtResource("51_sn1fb")
+
+[node name="Crosshair" type="Control" parent="UI" unique_id=1676497832]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 250
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 250
-theme_override_constants/margin_bottom = 100
+mouse_filter = 2
+script = ExtResource("28_ppx11")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MinigameController/MarginContainer" unique_id=824924343]
+[node name="TextureRect" type="TextureRect" parent="UI/Crosshair" unique_id=698336152]
+modulate = Color(1, 1, 1, 0.39215687)
+custom_minimum_size = Vector2(12, 12)
+custom_maximum_size = Vector2(12, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_4obbf")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Tablet" type="PanelContainer" parent="UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
+custom_minimum_size = Vector2(550, 0)
+custom_maximum_size = Vector2(550, -1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -330.0
+offset_right = 600.0
+offset_bottom = 219.99976
+grow_vertical = 0
+rotation = 0.05235988
+size_flags_horizontal = 0
+mouse_behavior_recursive = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b2gp0")
+script = ExtResource("42_yf6j3")
+machines_container = NodePath("MarginContainer/Screen/MarginContainer/MachineContainer")
+machine_ui_scene = ExtResource("43_e4ynb")
+item_icons = NodePath("MarginContainer/Screen/HBoxContainer/ItemIcons")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Tablet" unique_id=1632834486]
 layout_mode = 2
-stretch = true
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
+[node name="Screen" type="VBoxContainer" parent="UI/Tablet/MarginContainer" unique_id=1640692384]
+layout_mode = 2
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_label", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "low_time_warning_label", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "day_indicator", "rating_stars_hbox", "rating_goal_label", "alert_sprite")]
-script = ExtResource("5_lquwl")
-profit_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Money")
-customer_happiness_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Label")
-score_update_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/ScoreUpdate")
-interactable_indicator = NodePath("MarginContainer/VBoxContainer/Interactable")
-interactable_label = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
-hold_interact_progress = NodePath("MarginContainer/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
-game_timer = NodePath("../GameTimer")
-time_left_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer/TimeLeft")
-objective = NodePath("MarginContainer/Objective")
-rules_controls = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ControlsRules")
-money_sound = NodePath("MoneySound")
-gain_points_sound = NodePath("GainPointsSound")
-lose_points_sound = NodePath("LosePointsSound")
-low_time_sound = NodePath("LowTimeSound")
-low_time_warning_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/LowTimeWarning")
-cctv_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CctvIndicator")
-alert_ui = NodePath("MarginContainer/VBoxContainer/Alert")
-alert_label = NodePath("MarginContainer/VBoxContainer/Alert/AlertText")
-shelf_item_ui = NodePath("MarginContainer/ShelfItem")
-shelf_item_name = NodePath("MarginContainer/ShelfItem/VBoxContainer/Name")
-shelf_item_description = NodePath("MarginContainer/ShelfItem/VBoxContainer/Description")
-day_indicator = NodePath("MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Stars")
-rating_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer/Goal")
-alert_sprite = NodePath("MarginContainer/VBoxContainer/Alert/SubViewport/AnimatedSprite2D")
+[node name="TopBar" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=2056308306]
+custom_minimum_size = Vector2(0, 50)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=192377891]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar" unique_id=29320243]
+layout_mode = 2
+alignment = 1
+
+[node name="DayIndicator" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=586450203]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "day"
+horizontal_alignment = 1
+
+[node name="TimeUI" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=770158511]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.9, 0.9)
+theme_override_styles/panel = SubResource("StyleBoxFlat_mjix0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=27172397]
+layout_mode = 2
+
+[node name="TimeLeftText" type="Label" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=2076268572]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 24
+text = "⌛60s"
+
+[node name="TimeLeftBar" type="TextureProgressBar" parent="UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=1649230487]
+texture_filter = 1
+custom_minimum_size = Vector2(60, 0)
+custom_maximum_size = Vector2(60, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.25, -0.25)
+offset_transform_scale = Vector2(0.25, 0.25)
+fill_mode = 4
+texture_under = ExtResource("45_dfxmq")
+texture_over = ExtResource("46_kcoi7")
+texture_progress = ExtResource("47_rkju4")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
+visible = false
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="MachineContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/MarginContainer" unique_id=129505205]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="Scores" type="MarginContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=2066546892]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="ScoreContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores" unique_id=1716672005]
+layout_mode = 2
+
+[node name="Scores" type="VBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Money" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "$ 0"
+
+[node name="MoneyBar" type="ProgressBar" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
+modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
+custom_minimum_size = Vector2(450, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+show_percentage = false
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
+layout_mode = 2
+
+[node name="Rating" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
+layout_mode = 2
+
+[node name="RatingIconLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "🙂"
+
+[node name="RatingLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "⭐2.1"
+
+[node name="Stars" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
+visible = false
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
+layout_mode = 2
+
+[node name="FlowRate" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
+layout_mode = 2
+
+[node name="FlowRateLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "10"
+label_settings = SubResource("LabelSettings_xrivr")
+
+[node name="FlowRateDescLabel" type="Label" parent="UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "secs/custmr"
+label_settings = SubResource("LabelSettings_xrivr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen" unique_id=84901258]
+layout_mode = 2
+alignment = 1
+
+[node name="ShowMousePrompt" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer" unique_id=726117337]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Mouse" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1897773976]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, -1)
+layout_mode = 2
+texture = ExtResource("82_ip2l3")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Alt" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1969538304]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, -1)
+layout_mode = 2
+texture = ExtResource("83_s14wm")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ItemIcons" type="HBoxContainer" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer" unique_id=1915478391]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1878469102]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("68_tfaor")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon2" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1702717453]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("69_3rmuw")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon3" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=475476002]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("70_j3ofb")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon4" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=995260422]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("71_m5f57")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon5" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=898300513]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("72_oirqo")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="ItemIcon6" type="TextureRect" parent="UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1635346569]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("73_moxjo")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("69_j3ofb")
+
+[node name="CctvIndicator" type="TextureRect" parent="UI/Tablet/MarginContainer" unique_id=1082245281]
+custom_minimum_size = Vector2(125, 110)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("44_dfxmq")
+expand_mode = 2
+
+[node name="HUD" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -504,29 +823,14 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=1052297915]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD" unique_id=1052297915]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1617732849]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=1617732849]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=337997486]
-layout_mode = 2
-
-[node name="DayIndicator" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=586450203]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "DAY 1/5"
-
-[node name="CctvIndicator" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-texture = ExtResource("7_ycdy4")
-expand_mode = 4
-
-[node name="ControlsRules" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1478058715]
+[node name="ControlsRules" type="RichTextLabel" parent="UI/HUD/VBoxContainer/HBoxContainer" unique_id=1478058715]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -534,58 +838,66 @@ theme_override_font_sizes/normal_font_size = 32
 theme_override_font_sizes/bold_font_size = 32
 theme_override_font_sizes/bold_italics_font_size = 32
 bbcode_enabled = true
-text = "[b][i]controls [/i][/b]
-[b]WASD[/b] move
-[b]E[/b] interact
-[b]Shift[/b] sprint
-
-[b][i]rules [/i][/b]
+text = "[b][i]rules [/i][/b]
 - no running
 - no handmade drinks"
 fit_content = true
 horizontal_alignment = 2
 
-[node name="Alert" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1991174183]
+[node name="Alerts" type="VBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=1572896895]
 layout_mode = 2
 
-[node name="Exclamation" type="TextureRect" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=585775166]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/Alerts" unique_id=407575910]
+layout_mode = 2
+
+[node name="Exclamation" type="TextureRect" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = SubResource("ViewportTexture_0ffxp")
 
-[node name="AlertText" type="Label" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=1414946882]
+[node name="AlertText" type="Label" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "❗️🛎️ customer complained"
 
-[node name="SubViewport" type="SubViewport" parent="UI/MarginContainer/VBoxContainer/Alert" unique_id=259486482]
+[node name="SubViewport" type="SubViewport" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
 transparent_bg = true
 size = Vector2i(85, 100)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/MarginContainer/VBoxContainer/Alert/SubViewport" unique_id=2022034122]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport" unique_id=2022034122]
 texture_filter = 1
 position = Vector2(55, 30)
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_0ffxp")
+sprite_frames = ExtResource("95_d5iia")
 frame = 71
 frame_progress = 1.0
 
-[node name="Spacer" type="Control" parent="UI/MarginContainer/VBoxContainer" unique_id=1118819587]
+[node name="ScoreUpdate" type="Label" parent="UI/HUD/VBoxContainer" unique_id=124548306]
+modulate = Color(0.4, 1, 0.4, 1)
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 52
+text = "+1$ from customer"
+
+[node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Interactable" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1696852801]
+[node name="Interactable" type="PanelContainer" parent="UI/HUD/VBoxContainer" unique_id=1696852801]
+custom_maximum_size = Vector2(-1, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/Interactable" unique_id=1133469025]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/VBoxContainer/Interactable" unique_id=1133469025]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
 custom_minimum_size = Vector2(550, 50)
 layout_mode = 2
 size_flags_vertical = 10
@@ -596,83 +908,76 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HoldInteractProgress" type="ProgressBar" parent="UI/MarginContainer/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/HUD/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=312814953]
+[node name="ItemIndicator" type="PanelContainer" parent="UI/HUD/VBoxContainer/Interactable" unique_id=498491282]
+custom_minimum_size = Vector2(300, 50)
+custom_maximum_size = Vector2(400, 50)
 layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=284724776]
-layout_mode = 2
-
-[node name="Scores" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=1534145091]
-layout_mode = 2
-
-[node name="Money" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=103958680]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "$ 0"
-
-[node name="Customer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores" unique_id=375295033]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=653594015]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "🙂"
-
-[node name="Stars" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=2112858348]
-layout_mode = 2
-
-[node name="Goal" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/Scores/Customer" unique_id=417478634]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-
-[node name="ScoreUpdate" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=124548306]
-modulate = Color(0.4, 1, 0.4, 1)
-layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 offset_transform_enabled = true
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 52
-text = "+1$ from customer"
+offset_transform_position_ratio = Vector2(0.75, -0.5)
+offset_transform_scale = Vector2(0.75, 0.75)
+offset_transform_rotation = 0.08726646
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=434238300]
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Interactable/ItemIndicator" unique_id=1532821752]
 layout_mode = 2
-size_flags_horizontal = 10
+theme_override_font_sizes/normal_font_size = 36
+text = "[Q] HAMMER 💥"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FloatingButtons" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=369205068]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 50
 alignment = 2
 
-[node name="LowTimeWarning" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1504470302]
+[node name="ExitMachineButton" type="Button" parent="UI/HUD/VBoxContainer/FloatingButtons" unique_id=1336699155]
+layout_mode = 2
+size_flags_horizontal = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_visual_only = false
+mouse_behavior_recursive = 2
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 64
+text = "exit"
+
+[node name="DropButton" type="Button" parent="UI/HUD/VBoxContainer/FloatingButtons" unique_id=1994757836]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -0.25)
+offset_transform_rotation = 0.08726646
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 24
+text = "drop"
+icon = ExtResource("98_l0gw7")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=312814953]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EndShiftGuide" type="Button" parent="UI/HUD/VBoxContainer/HBoxContainer2" unique_id=638924094]
 visible = false
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_pivot_ratio = Vector2(1, 1)
-theme_override_font_sizes/font_size = 32
-text = "‼️⏰ 30s left"
-horizontal_alignment = 1
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "End Shift "
+icon = ExtResource("143_7bx05")
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1967076198]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-
-[node name="TimeLeft" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/PanelContainer" unique_id=481278116]
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
-text = "TIME LEFT: 0"
-vertical_alignment = 2
-
-[node name="Objective" type="RichTextLabel" parent="UI/MarginContainer" unique_id=2027255565]
+[node name="Objective" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 24
@@ -685,32 +990,273 @@ etc etc"
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="ShelfItem" type="PanelContainer" parent="UI/MarginContainer" unique_id=898520236]
+[node name="ShelfItem" type="PanelContainer" parent="UI/HUD" unique_id=898520236]
 modulate = Color(1, 1, 1, 0.98039216)
 custom_minimum_size = Vector2(500, 250)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/ShelfItem" unique_id=259568750]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/ShelfItem" unique_id=259568750]
 layout_mode = 2
 alignment = 1
 
-[node name="Name" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1662140889]
+[node name="Name" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1662140889]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/bold_font_size = 53
 bbcode_enabled = true
-text = "[b]item name"
+text = "[b]Item Name[/b]"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Description" type="RichTextLabel" parent="UI/MarginContainer/ShelfItem/VBoxContainer" unique_id=1739048215]
+[node name="Active" type="PanelContainer" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=2062460218]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/ShelfItem/VBoxContainer/Active" unique_id=585615415]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Active/HBoxContainer" unique_id=590042369]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]ACTIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Active/HBoxContainer" unique_id=935610494]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=61637865]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pjuso")
+
+[node name="Label" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer/Passive" unique_id=1393032447]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1739048215]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
-text = "item description"
+text = "item description (blah blah blah blah blah )"
+fit_content = true
+scroll_active = false
 horizontal_alignment = 1
+
+[node name="Sell" type="Button" parent="UI/HUD/ShelfItem/VBoxContainer" unique_id=1146068133]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 32
+text = "sell"
+icon = ExtResource("117_ycw8e")
+flat = true
+
+[node name="ShelfItemSold" type="PanelContainer" parent="UI/HUD/ShelfItem" unique_id=577218032]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
+
+[node name="Label" type="Label" parent="UI/HUD/ShelfItem/ShelfItemSold" unique_id=2040053351]
+visible = false
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 64
+text = "SOLD: $5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActiveItemInfo" type="PanelContainer" parent="UI/HUD" unique_id=1662791771]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/ActiveItemInfo" unique_id=701910864]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MenuPrompt" type="Button" parent="UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=1266925751]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "active items"
+icon = ExtResource("114_gfi32")
+
+[node name="CurrentItem" type="HBoxContainer" parent="UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=549022221]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="CurrentText" type="Label" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "current:"
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
+layout_mode = 2
+texture = ExtResource("69_3rmuw")
+
+[node name="CooldownIndicator" type="TextureProgressBar" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon" unique_id=169002250]
+modulate = Color(1, 1, 1, 0.29411766)
+custom_maximum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.6, 0.6)
+offset_transform_pivot_ratio = Vector2(0, 0)
+fill_mode = 4
+texture_under = ExtResource("45_dfxmq")
+texture_over = ExtResource("46_kcoi7")
+texture_progress = ExtResource("47_rkju4")
+
+[node name="UsePrompt" type="Button" parent="UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 24
+text = "use"
+icon = ExtResource("115_12204")
+
+[node name="ItemHoverTooltip" type="PanelContainer" parent="UI" unique_id=1202178015]
+visible = false
+modulate = Color(1, 1, 1, 0.98039216)
+custom_minimum_size = Vector2(500, 250)
+custom_maximum_size = Vector2(500, 250)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -123.0
+offset_right = 251.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -1)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ItemHoverTooltip" unique_id=233573804]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=5491478]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_font_size = 53
+bbcode_enabled = true
+text = "[b]Item Name[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Active" type="PanelContainer" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=1414640514]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ItemHoverTooltip/VBoxContainer/Active" unique_id=1085170923]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=822948841]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]ACTIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=948250030]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=1050465347]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pjuso")
+
+[node name="Label" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer/Passive" unique_id=693972534]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="UI/ItemHoverTooltip/VBoxContainer" unique_id=1867485925]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "item description (blah blah blah blah blah )"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="StaminaBar" type="ProgressBar" parent="UI" unique_id=72741199]
+custom_minimum_size = Vector2(500, 25)
+offset_left = 710.0
+offset_top = 1043.0
+offset_right = 1210.0
+offset_bottom = 1068.0
+size_flags_horizontal = 4
+show_percentage = false
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="UI" unique_id=220836306]
 stream = ExtResource("7_5vw27")
@@ -721,11 +1267,14 @@ stream = ExtResource("8_4c57u")
 volume_db = -5.0
 
 [node name="LosePointsSound" type="AudioStreamPlayer" parent="UI" unique_id=1821886986]
-stream = SubResource("AudioStreamWAV_kek77")
+stream = ExtResource("174_8e868")
 volume_db = -5.0
 
 [node name="LowTimeSound" type="AudioStreamPlayer" parent="UI" unique_id=170153923]
 stream = ExtResource("14_yaehf")
+
+[node name="SoldItemSound" type="AudioStreamPlayer" parent="UI" unique_id=875628346]
+stream = ExtResource("7_5vw27")
 
 [node name="DayIndicator" type="CanvasLayer" parent="." unique_id=1793268735]
 
@@ -736,406 +1285,349 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 512
-text = "DAY 1"
+offset_transform_enabled = true
+theme_override_colors/font_color = Color(0.88744825, 0.62849903, 0.44131222, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 12
+theme_override_constants/shadow_offset_y = 12
+theme_override_font_sizes/font_size = 256
+text = "MONDAY"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MinigameController" type="CanvasLayer" parent="." unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
+visible = false
+script = ExtResource("10_4c57u")
+minigame_dict = Dictionary[String, PackedScene]({
+"Arrows": ExtResource("20_a6jrf"),
+"Captcha": ExtResource("16_cpm2s"),
+"Colors": ExtResource("11_efxa6"),
+"Lines": ExtResource("15_aivy6"),
+"Refill": ExtResource("23_lswn8"),
+"SpillClean": ExtResource("10_inymm"),
+"Typing": ExtResource("20_d13ii"),
+"WordMatch": ExtResource("18_4obbf")
+})
+sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
+cancel_button = NodePath("MarginContainer/CancelButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="MinigameController" unique_id=614867549]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MinigameController/MarginContainer" unique_id=824924343]
+layout_mode = 2
+mouse_filter = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 0
+
+[node name="CancelButton" type="Button" parent="MinigameController/MarginContainer" unique_id=1664414392]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(-0.5, 0.25)
+offset_transform_rotation = 0.08726646
+offset_transform_visual_only = false
+theme = ExtResource("97_l0gw7")
+theme_override_font_sizes/font_size = 48
+text = "cancel"
 
 [node name="PCUI" type="CanvasLayer" parent="." unique_id=1232958959]
 
 [node name="PC" parent="PCUI" unique_id=303240417 node_paths=PackedStringArray("ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
 visible = false
 ui = NodePath("../../UI")
-irl_new_shop_items_indicator = NodePath("../../Building/Desk/NewShopItems")
+irl_new_shop_items_indicator = NodePath("../../Desk/NewShopItemsPrompt")
 
-[node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
+[node name="ActiveItemMenu" type="CanvasLayer" parent="." unique_id=1028925718]
+
+[node name="ActiveItemSelection" parent="ActiveItemMenu" unique_id=1659622550 instance=ExtResource("116_3gvdc")]
 visible = false
+bkg_color = Color(0.008202022, 0.008202025, 0.008202025, 0.5529412)
+line_color = Color(1, 1, 1, 1)
+highlight_color = Color(0.28729504, 0.28729486, 0.2872949, 0.7254902)
 
-[node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
+[node name="Viewmodel" type="CanvasLayer" parent="." unique_id=1737862047 node_paths=PackedStringArray("sprite")]
+process_mode = 3
+layer = 0
+script = ExtResource("116_w7qqv")
+sprite = NodePath("AnimatedSprite2D")
+hammer_item = ExtResource("150_0bk8h")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
-shape = SubResource("WorldBoundaryShape3D_2cqfq")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Viewmodel" unique_id=1708238979]
+position = Vector2(960, 540)
+scale = Vector2(3.43, 3.43)
+sprite_frames = ExtResource("108_asu84")
+animation = &"bag_pickup"
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor" unique_id=1657852407]
-shape = SubResource("WorldBoundaryShape3D_2cqfq")
+[node name="ClockItemStopSound" type="AudioStreamPlayer" parent="." unique_id=1632177732]
+stream = ExtResource("222_bvlej")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
-environment = SubResource("Environment_h2yge")
+[node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
+stream = ExtResource("222_bvlej")
 
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1539755588]
-transform = Transform3D(0.9659258, 2.956346e-08, -0.25881907, 0.12940952, -0.8660253, 0.48296285, -0.22414385, -0.5, -0.83651626, 0, 10, 0)
-light_color = Color(0.6745098, 0.5647059, 0.5254902, 1)
-shadow_enabled = true
+[node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
+stream = ExtResource("223_ycw8e")
 
-[node name="Building" type="Node3D" parent="." unique_id=743168160]
+[node name="TutorialCanvasLayer" type="CanvasLayer" parent="." unique_id=1790182858]
+process_mode = 3
+layer = 10
 
-[node name="CustomerArea" type="CSGCombiner3D" parent="Building" unique_id=148944054]
-use_collision = true
+[node name="TutorialView" type="Control" parent="TutorialCanvasLayer" unique_id=1443352301 node_paths=PackedStringArray("_tutorial_screen_container")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("225_gttkg")
+_tutorial_screen_view_packed_scenes = Array[PackedScene]([ExtResource("227_lix4w"), ExtResource("228_kmrid"), ExtResource("229_e31mi"), ExtResource("231_yf6j3"), ExtResource("232_e4ynb"), ExtResource("233_a1n43"), ExtResource("234_dfxmq")])
+_tutorial_screen_container = NodePath("TutorialScreenContainer")
+metadata/_custom_type_script = "uid://djpemlgyywwcb"
 
-[node name="Room" type="CSGBox3D" parent="Building/CustomerArea" unique_id=1002136365]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(10, 3, 9)
+[node name="ColorRect" type="ColorRect" parent="TutorialCanvasLayer/TutorialView" unique_id=1317806334]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
 
-[node name="Void" type="CSGBox3D" parent="Building/CustomerArea" unique_id=760034625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 1.5, 0.05)
-operation = 2
-size = Vector3(9.9, 2.9, 9)
-
-[node name="Window" type="CSGBox3D" parent="Building/CustomerArea" unique_id=2037732402]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, -4.5)
-operation = 2
-size = Vector3(2, 1, 0.1)
-
-[node name="Door" type="CSGBox3D" parent="Building/CustomerArea" unique_id=2092157089]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -4.5)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Doorway2" type="CSGBox3D" parent="Building/CustomerArea" unique_id=1948693067]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 1.0515031, 0.85)
-operation = 2
-size = Vector3(0.505, 2, 1)
-
-[node name="BackWall" type="CSGCombiner3D" parent="Building" unique_id=480264500]
-use_collision = true
-
-[node name="Wall" type="CSGBox3D" parent="Building/BackWall" unique_id=251660152]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.4)
-size = Vector3(9.9, 2.9, 0.1)
-material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="Window" type="CSGBox3D" parent="Building/BackWall" unique_id=711147860]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3999999, 1.6999999, 4.4)
-operation = 2
-size = Vector3(2.25, 1.5, 0.1)
-
-[node name="SideWall" type="CSGCombiner3D" parent="Building" unique_id=1154493046]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.6, 0, 0)
-use_collision = true
-
-[node name="Wall" type="CSGBox3D" parent="Building/SideWall" unique_id=1199950967]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.49999994, 1.5, 4.4)
-size = Vector3(9.9, 2.9, 0.1)
-material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="BackRoom" type="CSGCombiner3D" parent="Building" unique_id=1068869310]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.95)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/BackRoom" unique_id=159442344]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(15, 3, 9)
-
-[node name="Void" type="CSGBox3D" parent="Building/BackRoom" unique_id=703396434]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.03203392)
-operation = 2
-size = Vector3(14.9, 2.9, 8.9)
-
-[node name="Void2" type="CSGBox3D" parent="Building/BackRoom" unique_id=1398872124]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5166847, 1.5, -4.4999995)
-operation = 2
-size = Vector3(12, 2.9, 0.2)
-material = SubResource("StandardMaterial3D_ig7tw")
-
-[node name="Door" type="CSGBox3D" parent="Building/BackRoom" unique_id=1245701505]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.491553, 0.99999994, -1.5561385)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="LowWall" type="CSGBox3D" parent="Building/BackRoom" unique_id=2081912894]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1, 0.5, -4)
-size = Vector3(1, 1, 0.1)
-
-[node name="FrontDesk" type="CSGCombiner3D" parent="Building/BackRoom" unique_id=2009448595]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999981)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Building/BackRoom/FrontDesk" unique_id=114203699]
-transform = Transform3D(0.96592593, 0, -0.25881907, 0, 1, 0, 0.25881907, 0, 0.96592593, 1.4000001, 0.5, -3.7999997)
-size = Vector3(0.5, 1, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Building/BackRoom/FrontDesk" unique_id=1990268840]
-transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, 2.9, 0.5, -4.1)
-size = Vector3(0.5, 1, 2)
-
-[node name="Door2" type="CSGBox3D" parent="Building/BackRoom" unique_id=608670982]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.99999994, 4.5081425)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Window" type="CSGBox3D" parent="Building/BackRoom" unique_id=692264008]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 4.6453276)
-operation = 2
-size = Vector3(1.75, 1, 0.5)
-
-[node name="BreakroomDoorway" type="CSGBox3D" parent="Building/BackRoom" unique_id=1331323864]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.5, 0.99999994, -3.5)
-operation = 2
-size = Vector3(1, 2, 0.1)
-
-[node name="Doorway2" type="CSGBox3D" parent="Building/BackRoom" unique_id=62918386]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1.0310736, -4.75)
-operation = 2
-size = Vector3(1, 2, 1)
-
-[node name="BackRoom2" type="CSGCombiner3D" parent="Building" unique_id=2023654472]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9, 0, 3.0499997)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/BackRoom2" unique_id=930105116]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4546285, 1.5, 0)
-size = Vector3(24, 3, 9)
-
-[node name="Void" type="CSGBox3D" parent="Building/BackRoom2" unique_id=59185805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4058976, 1.5, -0.05000019)
-operation = 2
-size = Vector3(23.9, 2.9, 9)
-
-[node name="StoreRoom" type="CSGCombiner3D" parent="Building" unique_id=1595009912]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.010478, 0, 16.887238)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/StoreRoom" unique_id=909590115]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-size = Vector3(5, 3, 7)
-
-[node name="Void" type="CSGBox3D" parent="Building/StoreRoom" unique_id=2142819468]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1.9621792)
-operation = 2
-size = Vector3(4.9, 2.9, 3)
-
-[node name="Door" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1960340312]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.99999994, -3.4918575)
-operation = 2
-size = Vector3(1.5, 2, 0.1)
-
-[node name="Shelf" type="CSGBox3D" parent="Building/StoreRoom" unique_id=1245730084]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7501247, -0.7672291)
-size = Vector3(5, 0.1, 1)
-
-[node name="IngredientsBag" parent="Building/StoreRoom/Shelf" unique_id=1055430729 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.34170055, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag2" parent="Building/StoreRoom/Shelf" unique_id=2124672681 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.6065731, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag3" parent="Building/StoreRoom/Shelf" unique_id=1010227544 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.9659258, 0, 0.25881895, 0, 1, 0, -0.25881895, 0, -0.9659258, 0.34170055, 0.13795435, -0.0006752014)
-
-[node name="IngredientsBag4" parent="Building/StoreRoom/Shelf" unique_id=2124867904 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0.024939537, 0.13795435, -0.40213585)
-
-[node name="IngredientsBag5" parent="Building/StoreRoom/Shelf" unique_id=587147078 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -0.22939682, 0.13795435, -0.33964348)
-
-[node name="IngredientsBag6" parent="Building/StoreRoom/Shelf" unique_id=1023406345 instance=ExtResource("3_2cqfq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.8866453, 0.13795435, -0.11124611)
-
-[node name="Sign" type="MeshInstance3D" parent="Building/StoreRoom" unique_id=1748779659]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0216227, 2.1822639, -3.5186043)
-mesh = SubResource("TextMesh_yaehf")
-
-[node name="BreakRoom" type="CSGCombiner3D" parent="Building" unique_id=868477188]
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1478688247]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
-size = Vector3(4, 3, 6)
-
-[node name="Void" type="CSGBox3D" parent="Building/BreakRoom" unique_id=2135782914]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.5, 7.5)
-operation = 2
-size = Vector3(3.9, 2.9, 5.9)
-
-[node name="Doorway" type="CSGBox3D" parent="Building/BreakRoom" unique_id=1331827105]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.433789, 0.99999994, 5.5)
-operation = 2
-size = Vector3(1, 2, 0.1)
-
-[node name="HallwayToCustomerArea" type="CSGCombiner3D" parent="Building" unique_id=1167004986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-use_collision = true
-
-[node name="Room" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=284017547]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.4, 2)
-size = Vector3(2, 3, 5)
-
-[node name="Void" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=1661541318]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.4, 2)
-operation = 2
-size = Vector3(1.9, 2.9, 4.9)
-
-[node name="Doorway" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=547147232]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6999998, 1, 4.2)
-operation = 2
-size = Vector3(1, 2, 1)
-
-[node name="Doorway2" type="CSGBox3D" parent="Building/HallwayToCustomerArea" unique_id=1146012207]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999905, 1, 0.85)
-operation = 2
-size = Vector3(1, 2, 1)
-
-[node name="Desk" parent="Building" unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.583761, 0, 5)
-
-[node name="BreakRoomDoor" type="Node3D" parent="Building" unique_id=18232531 node_paths=PackedStringArray("close_sound")]
-transform = Transform3D(-0.5000002, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, -0.5000002, 7.41727, 0, 4.9959364)
-script = ExtResource("6_d13ii")
-close_sound = NodePath("CloseSound")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Building/BreakRoomDoor" unique_id=204670809]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0.040650845, 1, 0.5088234)
-use_collision = true
-size = Vector3(0.1, 2, 1)
-material = SubResource("StandardMaterial3D_1u8w0")
-
-[node name="CloseSound" type="AudioStreamPlayer3D" parent="Building/BreakRoomDoor" unique_id=2035882888]
-stream = ExtResource("7_1u8w0")
-volume_db = -20.0
-
-[node name="Sign" type="Sprite3D" parent="Building/BreakRoomDoor" unique_id=742288546]
-transform = Transform3D(-5.4639235e-09, 0, -0.125, 0, 0.125, 0, 0.125, 0, -5.4639235e-09, -0.015325546, 1.4, 0.5)
-shaded = true
-texture = SubResource("ViewportTexture_j2xdn")
-
-[node name="SubViewport" type="SubViewport" parent="Building/BreakRoomDoor/Sign" unique_id=1054434373]
-
-[node name="ColorRect" type="ColorRect" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=456523841]
+[node name="TutorialScreenContainer" type="Control" parent="TutorialCanvasLayer/TutorialView" unique_id=854730436]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Building/BreakRoomDoor/Sign/SubViewport" unique_id=1004293169]
-anchors_preset = 15
+[node name="MachineInteractionPopup" type="CanvasLayer" parent="." unique_id=1183147259]
+process_mode = 3
+visible = false
+script = ExtResource("287_4fms3")
+popup_id = "interaction"
+
+[node name="InputBlocker" type="Control" parent="MachineInteractionPopup" unique_id=412772111]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="MachineInteractionPopup/InputBlocker" unique_id=794177971]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("124_1iygd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MachineInteractionPopup/InputBlocker/TextureRect" unique_id=1483955226]
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_bottom = 0.94900006
+offset_right = -712.0
+offset_bottom = -529.92004
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 300
+
+[node name="Label" type="Label" parent="MachineInteractionPopup/InputBlocker/TextureRect/MarginContainer" unique_id=1045934740]
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 96
-text = "BREAK
-ROOM"
+theme_override_font_sizes/font_size = 70
+text = "Click on an option to
+interact with the machine"
+
+[node name="TextureButton" type="TextureButton" parent="MachineInteractionPopup/InputBlocker" unique_id=1126942917]
+layout_mode = 0
+offset_left = 1590.0
+offset_top = 167.0
+offset_right = 2216.0
+offset_bottom = 793.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("125_g5xqc")
+
+[node name="MachineTutorialAcceptPopup" type="CanvasLayer" parent="." unique_id=1844326657]
+
+[node name="MachineBreakdownPopup" type="CanvasLayer" parent="." unique_id=564086082]
+process_mode = 3
+visible = false
+script = ExtResource("287_4fms3")
+popup_id = "breakdown"
+
+[node name="InputBlocker" type="Control" parent="MachineBreakdownPopup" unique_id=14118040]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="MachineBreakdownPopup/InputBlocker" unique_id=1083735692]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("124_1iygd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MachineBreakdownPopup/InputBlocker/TextureRect" unique_id=1756986695]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.94900006
+offset_right = -712.0
+offset_bottom = -529.92004
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 300
+
+[node name="Label" type="Label" parent="MachineBreakdownPopup/InputBlocker/TextureRect/MarginContainer" unique_id=211088944]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "Walk up to the broken machine
+and press E to fix it"
+
+[node name="TextureButton" type="TextureButton" parent="MachineBreakdownPopup/InputBlocker" unique_id=932780726]
+layout_mode = 0
+offset_left = 1590.0
+offset_top = 167.0
+offset_right = 2216.0
+offset_bottom = 793.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("125_g5xqc")
+
+[node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=1328361687]
+process_mode = 3
+visible = false
+script = ExtResource("287_4fms3")
+popup_id = "complaint"
+
+[node name="InputBlocker" type="Control" parent="CustomerComplaintPopup" unique_id=1917233431]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CustomerComplaintPopup/InputBlocker" unique_id=731648011]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("124_1iygd")
+
+[node name="MarginContainer" type="MarginContainer" parent="CustomerComplaintPopup/InputBlocker/TextureRect" unique_id=1766302123]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.94900006
+offset_right = -712.0
+offset_bottom = -529.92004
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 300
+
+[node name="Label" type="Label" parent="CustomerComplaintPopup/InputBlocker/TextureRect/MarginContainer" unique_id=1701895760]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 70
+text = "A customer has a complaint.
+Talk to them at the counter"
+
+[node name="TextureButton" type="TextureButton" parent="CustomerComplaintPopup/InputBlocker" unique_id=1788235375]
+layout_mode = 0
+offset_left = 1590.0
+offset_top = 167.0
+offset_right = 2216.0
+offset_bottom = 793.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("125_g5xqc")
+
+[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
+process_mode = 3
+visible = false
+script = ExtResource("287_4fms3")
+popup_id = "special shift"
+text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
+
+[node name="InputBlocker" type="Control" parent="SpecialShiftPop" unique_id=317794041]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SpecialShiftPop/InputBlocker" unique_id=1463248199]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("124_1iygd")
+
+[node name="MarginContainer" type="MarginContainer" parent="SpecialShiftPop/InputBlocker/TextureRect" unique_id=460616503]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 245.0
+offset_right = 1575.0
+offset_bottom = 650.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer" unique_id=785505753]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=2011957646]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("128_s4o1y")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=745760569]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=533747834]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 80
+text = "Shift Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EmployeeAreaSign" type="MeshInstance3D" parent="Building" unique_id=544386463]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.8483644, 2.3, 0.8688429)
-mesh = SubResource("TextMesh_vn1tu")
+[node name="Body" type="Label" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=860561688]
+custom_maximum_size = Vector2(1100, 800)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
+theme_override_font_sizes/font_size = 40
+text = "This is a description."
+autowrap_mode = 3
 
-[node name="CustomerAreaSign" type="MeshInstance3D" parent="Building" unique_id=136068731]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7000003, 2.3, 4.6000004)
-mesh = SubResource("TextMesh_lswn8")
+[node name="TextureButton" type="TextureButton" parent="SpecialShiftPop/InputBlocker" unique_id=916961120]
+layout_mode = 0
+offset_left = 1590.0
+offset_top = 167.0
+offset_right = 2216.0
+offset_bottom = 793.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("125_g5xqc")
 
-[node name="TrashPoints" type="Node3D" parent="Building" unique_id=795793990]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06953561, 0)
+[node name="Tippy Open Close Sign2" parent="." unique_id=56236514 instance=ExtResource("84_1yv1y")]
+transform = Transform3D(-2.1482563, 0.65651375, -0.056880556, 0.6562837, 2.149009, 0.01737678, 0.059475627, 0, -2.2462666, 3.4934645, 1.5209296, 3.9618158)
 
-[node name="LeftCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=1835019513]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 4.4356194, 0.2775855, 3.2832842)
-
-[node name="RightCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=974701754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3592978, 0.19294798, 3.6953862)
-
-[node name="BottomLeftCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=1711481428]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5459504, 0.25749695, -3.9982808)
-
-[node name="RightBottomCorner" type="Marker3D" parent="Building/TrashPoints" unique_id=1718722666]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.261909, 0.2580762, -4.030566)
-
-[node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
-
-[node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1111936502]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
-
-[node name="Machines" type="Node3D" parent="." unique_id=407734909]
-
-[node name="Machine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-process_mode = 4
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.3999996, 0.1, 1.2999998)
-visible = false
-
-[node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 3.8)
-
-[node name="Machine3" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3.8)
-
-[node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
-process_mode = 4
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.4, 0.1, -2.7000003)
-visible = false
-
-[node name="Window" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4912045, 0, 4)
-
-[node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
-
-[node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.92853117, 0, -0.3712544, 0, 1, 0, 0.3712544, 0, 0.92853117, -6.9470425, 2.6975236, 4.209534)
-rotation_pause_length = 4.0
-
-[node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9847103, 2.6719248, 5.5821085)
-rotation_time = 2.0
-rotation_pause_length = 4.0
-
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam2" index="0" unique_id=1348601655]
-spot_angle = 21.0
-
-[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.086619, 2.6719248, 0.7078019)
-
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam3" index="0" unique_id=1348601655]
-spot_angle = 25.0
-
-[node name="OpenCloseSign" parent="." unique_id=1352342917 instance=ExtResource("6_w48qg")]
-transform = Transform3D(-0.9873115, -0.15879568, -8.742278e-08, -0.15879568, 0.9873115, 0, 8.631351e-08, 1.3882359e-08, -1, 3.216614, 1.3069857, 4.425891)
-
-[node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
-
-[node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
-wait_time = 120.0
-one_shot = true
-
-[node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
-
-[node name="ItemShelf" type="Node3D" parent="." unique_id=195864544 node_paths=PackedStringArray("item_slots_parent")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 11.216949, 1.1999999, 9)
-script = ExtResource("10_82xsv")
-shelf_item_scene = ExtResource("11_getpj")
-item_slots_parent = NodePath("ItemSlots")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ItemShelf" unique_id=1884389784]
-mesh = SubResource("BoxMesh_cegan")
-
-[node name="ItemSlots" type="Node3D" parent="ItemShelf" unique_id=32404470]
-
-[node name="ItemSlot" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1814333156]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1999998, 0.100000024, 0)
-
-[node name="ItemSlot2" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=241184296]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6999998, 0.100000024, 0)
-
-[node name="ItemSlot3" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1201025248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999981, 0.100000024, 0)
-
-[node name="ItemSlot4" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=1162839248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3000002, 0.100000024, 0)
-
-[node name="ItemSlot5" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=238910412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8000002, 0.100000024, 0)
-
-[node name="ItemSlot6" type="Marker3D" parent="ItemShelf/ItemSlots" unique_id=2053122406]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3000011, 0.100000024, 0)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="ItemShelf" unique_id=1757812054]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemShelf/StaticBody3D" unique_id=613857087]
-shape = SubResource("BoxShape3D_getpj")
-
-[node name="CustomerTrashSpawnTimer" type="Timer" parent="." unique_id=2103506507]
-
+[editable path="SecurityCams/SecurityCam"]
+[editable path="SecurityCams/SecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam2"]
+[editable path="SecurityCams/SecurityCam2/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/SecurityCam3"]
+[editable path="SecurityCams/SecurityCam3/CameraAimerModel/Model/camera"]

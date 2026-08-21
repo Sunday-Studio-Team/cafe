@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dyu70pksd1s2w"]
+
+[ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="1_fnanm"]
+[ext_resource type="ArrayOccluder3D" uid="uid://cyseh0wgqavym" path="res://break_room_door_occluder3d.occ" id="2_6uinn"]
+[ext_resource type="PackedScene" uid="uid://dfmk6fgi2327m" path="res://Assets/Office door/Managers Office Door 3D Model.glb" id="3_51qo0"]
+[ext_resource type="AudioStream" uid="uid://bvl68g2188yl0" path="res://audio/door_open.ogg" id="4_564c8"]
+[ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="5_pq8ay"]
+[ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="6_fntm6"]
+[ext_resource type="PackedScene" uid="uid://clu38siu3rseb" path="res://tutorial/tutorial_view_this_is_a_camera.tscn" id="7_34cy1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(0.2, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
+size = Vector3(1.1627197, 1, 2.4090576)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fnanm"]
+size = Vector3(2.3068237, 1, 1.3675537)
+
+[node name="CafeBreakRoomDoor" type="Node3D" unique_id=1466363411 node_paths=PackedStringArray("door_physics_body", "open_sound", "close_sound", "exited_break_room_detection_area")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+script = ExtResource("1_fnanm")
+door_physics_body = NodePath("DoorStaticBody3D")
+open_sound = NodePath("OpenSound")
+close_sound = NodePath("CloseSound")
+exited_break_room_detection_area = NodePath("PlayerDetectionArea")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1489315657]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+top_level = true
+layers = 2
+occluder = ExtResource("2_6uinn")
+bake_mask = 4293918722
+
+[node name="DoorStaticBody3D" type="StaticBody3D" parent="." unique_id=1987512734]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorStaticBody3D" unique_id=820153959]
+transform = Transform3D(-1, 0, -2.2351742e-08, 0, 1, 0, 2.2351742e-08, 0, -1, 0.0010708645, 0.9860133, -0.5496547)
+shape = SubResource("BoxShape3D_xrivr")
+
+[node name="BreakRoomDoorModel" type="Node3D" parent="DoorStaticBody3D" unique_id=685924687]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, 0)
+
+[node name="Sketchfab_Scene" parent="DoorStaticBody3D/BreakRoomDoorModel" unique_id=2121543409 instance=ExtResource("3_51qo0")]
+transform = Transform3D(-3.6398227e-08, 0, 1.109345, 0, 1.0077057, 0, -0.83269435, 0, -4.849101e-08, -0.029385565, -0.024177432, -0.5036449)
+
+[node name="OpenSound" type="AudioStreamPlayer3D" parent="." unique_id=300316961]
+stream = ExtResource("4_564c8")
+volume_db = -20.0
+
+[node name="CloseSound" type="AudioStreamPlayer3D" parent="." unique_id=1693619886]
+stream = ExtResource("5_pq8ay")
+volume_db = -20.0
+
+[node name="PlayerDetectionArea" type="Area3D" parent="." unique_id=1939277881]
+collision_mask = 8
+script = ExtResource("6_fntm6")
+popup_this_is_camera = ExtResource("7_34cy1")
+metadata/_custom_type_script = "uid://cyfg6kertkbie"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=539028435]
+transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -3.0017142, 0, -0.44566852)
+shape = SubResource("BoxShape3D_13qdw")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1777402583]
+transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -2.0263662, 0, 2.6724236)
+shape = SubResource("BoxShape3D_fnanm")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=90646488]
+transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -2.0263662, 0, -3.4452095)
+shape = SubResource("BoxShape3D_fnanm")

@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://bnrk62uhwymp1"]
+
+[ext_resource type="Script" uid="uid://d1niawkeh1pyd" path="res://minigames/lines/lines.gd" id="1_ufq5k"]
+[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://minigames/assets/red_square.png" id="2_d2jn2"]
+[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://minigames/assets/blue_square.png" id="3_ij4j3"]
+[ext_resource type="Texture2D" uid="uid://dwkj5nabjrlkb" path="res://minigames/assets/green_square.png" id="4_lb2jj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtxfr"]
+bg_color = Color(0.13725491, 0.13725491, 0.13725491, 0.2901961)
+border_width_left = 150
+border_width_top = 50
+border_width_right = 150
+border_width_bottom = 50
+border_color = Color(0.19793722, 0.19793728, 0.1979371, 1)
+
+[node name="Lines" type="Control" unique_id=1577892201 node_paths=PackedStringArray("background_panel", "wire_1", "wire_2", "wire_3", "wire_holder", "label")]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_ufq5k")
+background_panel = NodePath("CanvasLayer/PanelContainer")
+wire_1 = NodePath("CanvasLayer/HBoxContainer/Button")
+wire_2 = NodePath("CanvasLayer/HBoxContainer/Button2")
+wire_3 = NodePath("CanvasLayer/HBoxContainer/Button3")
+wire_holder = NodePath("CanvasLayer")
+label = NodePath("CanvasLayer/Label")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=704073497]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1888579267]
+anchors_preset = -1
+anchor_top = 0.123
+anchor_right = 1.1110001
+anchor_bottom = 0.49400002
+offset_left = 248.0
+offset_top = 47.160004
+offset_right = -391.87207
+offset_bottom = 523.48
+scale = Vector2(1, 0.8800003)
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtxfr")
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=89205438]
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.605
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.56
+offset_top = -261.40002
+offset_right = -102.0
+offset_bottom = -317.36
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8409944, 1)
+theme_override_constants/separation = 100
+
+[node name="Button" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=869328298]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = " "
+icon = ExtResource("2_d2jn2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button2" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=2008230879]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = " "
+icon = ExtResource("3_ij4j3")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button3" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=169282282]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = " "
+icon = ExtResource("4_lb2jj")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=503008098]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -376.0
+offset_top = 48.0
+offset_right = 376.0
+offset_bottom = 153.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 76
+text = "cut the red wire"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Button3" to="." method="_on_button_3_pressed"]

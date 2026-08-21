@@ -1,39 +1,138 @@
 [gd_scene format=3 uid="uid://1efsqsuvbkts"]
 
+[ext_resource type="FontFile" uid="uid://c58o1rhcqdf6w" path="res://fonts/liberation_sans/LiberationSans-Regular.ttf" id="1_0qe70"]
+[ext_resource type="FontFile" uid="uid://htxk0s522b1c" path="res://fonts/liberation_sans/LiberationSans-Bold.ttf" id="1_s37j5"]
 [ext_resource type="Script" uid="uid://dp6xi3yg7ev4q" path="res://ui/pc/pc.gd" id="1_yl021"]
 [ext_resource type="Texture2D" uid="uid://bmqsi4w6n2thu" path="res://sprites/email_icon.png" id="2_am8ka"]
 [ext_resource type="Texture2D" uid="uid://3x0kmienore" path="res://sprites/wallpaper.png" id="2_k03dd"]
+[ext_resource type="FontFile" uid="uid://bvyc16pkil5nd" path="res://fonts/liberation_sans/LiberationSans-BoldItalic.ttf" id="2_r811s"]
 [ext_resource type="Theme" uid="uid://bq1llck4skix4" path="res://ui/pc/pc_app_icon_theme.tres" id="3_8383a"]
 [ext_resource type="Texture2D" uid="uid://d3nmgsusj5d7c" path="res://sprites/shop_icon.png" id="3_qefv1"]
+[ext_resource type="FontFile" uid="uid://chbgi2tc37e5n" path="res://fonts/liberation_sans/LiberationSans-Italic.ttf" id="3_uws3o"]
 [ext_resource type="PackedScene" uid="uid://bgyc1mnye0hph" path="res://ui/pc/shop_app.tscn" id="4_klsw4"]
 [ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="8_4xb7n"]
 
-[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button")]
+[sub_resource type="Theme" id="Theme_4xb7n"]
+default_font = ExtResource("1_0qe70")
+default_font_size = 16
+RichTextLabel/fonts/bold_font = ExtResource("1_s37j5")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_r811s")
+RichTextLabel/fonts/italics_font = ExtResource("3_uws3o")
+RichTextLabel/fonts/normal_font = ExtResource("1_0qe70")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s37j5"]
+bg_color = Color(0.45758688, 0.51367843, 0.60030866, 1)
+expand_margin_left = 40.0
+expand_margin_top = 40.0
+expand_margin_right = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r811s"]
+bg_color = Color(0.6402658, 0.6873346, 0.75974005, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 40.0
+expand_margin_top = 40.0
+expand_margin_right = 40.0
+expand_margin_bottom = 40.0
+shadow_color = Color(0.6392157, 0.6862745, 0.7607843, 1)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.036263242, 0.0488967, 0.06475353, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.83137256, 0.18431373, 0.19215687, 1)
+corner_radius_top_left = 11
+corner_radius_top_right = 11
+corner_radius_bottom_right = 11
+corner_radius_bottom_left = 11
+corner_detail = 20
+
+[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button", "unread_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_4xb7n")
 script = ExtResource("1_yl021")
 email_button = NodePath("MarginContainer/Apps/Email")
 shop_button = NodePath("MarginContainer/Apps/Shop")
 email_app = NodePath("MarginContainer/EmailApp")
 shop_app = NodePath("MarginContainer/ShopApp")
 exit_button = NodePath("Exit")
+unread_label = NodePath("MarginContainer/Apps/Email/UnreadCount")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233319173]
+[node name="BorderGray" type="Panel" parent="." unique_id=1670875515]
+z_index = -1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -716.0
+offset_top = -540.0
+offset_right = 716.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 323
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 300
-theme_override_constants/margin_bottom = 100
+theme_override_styles/panel = SubResource("StyleBoxFlat_s37j5")
+
+[node name="BorderLightGray" type="Panel" parent="." unique_id=832275199]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -651.0
+offset_top = -485.0
+offset_right = 651.0
+offset_bottom = 485.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r811s")
+
+[node name="BorderBlack" type="Panel" parent="." unique_id=449598272]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -661.0
+offset_top = -500.0
+offset_right = 661.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233319173]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -647.5
+offset_top = -486.0
+offset_right = 647.5
+offset_bottom = 486.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Background" type="TextureRect" parent="MarginContainer" unique_id=2064125814]
 texture_filter = 1
@@ -44,55 +143,74 @@ stretch_mode = 5
 [node name="Apps" type="HBoxContainer" parent="MarginContainer" unique_id=620486221]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_constants/separation = 50
+theme_override_constants/separation = 60
 
 [node name="Email" type="Button" parent="MarginContainer/Apps" unique_id=99455866]
 texture_filter = 1
+custom_minimum_size = Vector2(30, 30)
+custom_maximum_size = Vector2(-1, 140)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0.08, 0.94)
+offset_transform_position_ratio = Vector2(0.21, 0.28)
 offset_transform_visual_only = false
 theme = ExtResource("3_8383a")
-theme_override_font_sizes/font_size = 64
+theme_override_constants/icon_max_width = 95
+theme_override_font_sizes/font_size = 48
 text = "Bmail"
 icon = ExtResource("2_am8ka")
 icon_alignment = 1
 vertical_icon_alignment = 0
-expand_icon = true
+
+[node name="UnreadCount" type="Label" parent="MarginContainer/Apps/Email" unique_id=1568631134]
+layout_mode = 0
+offset_left = 96.20001
+offset_top = -2.3599854
+offset_right = 131.20001
+offset_bottom = 27.640015
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_yf5fn")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yf5fn")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Shop" type="Button" parent="MarginContainer/Apps" unique_id=58281754]
 texture_filter = 1
+custom_maximum_size = Vector2(-1, 140)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0.07, 1.55)
+offset_transform_position_ratio = Vector2(0.07, 1.355)
 offset_transform_visual_only = false
 theme = ExtResource("3_8383a")
-theme_override_font_sizes/font_size = 64
+theme_override_constants/icon_max_width = 95
+theme_override_font_sizes/font_size = 48
 text = "shop"
 icon = ExtResource("3_qefv1")
 icon_alignment = 1
 vertical_icon_alignment = 0
-expand_icon = true
 
 [node name="ShopApp" parent="MarginContainer" unique_id=270681436 instance=ExtResource("4_klsw4")]
 visible = false
 layout_mode = 2
 
-[node name="EmailApp" parent="MarginContainer" unique_id=1865286583 instance=ExtResource("5_k03dd")]
+[node name="EmailApp" parent="MarginContainer" unique_id=1865286583 node_paths=PackedStringArray("PC") instance=ExtResource("5_k03dd")]
 visible = false
 layout_mode = 2
+PC = NodePath("../..")
 
 [node name="Exit" type="Button" parent="." unique_id=114216245]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -96.0
-offset_right = 123.0
+offset_left = -29.0
+offset_top = -74.0
+offset_right = 149.0
+offset_bottom = 23.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -103,3 +221,5 @@ offset_transform_visual_only = false
 theme = ExtResource("8_4xb7n")
 theme_override_font_sizes/font_size = 64
 text = "exit"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

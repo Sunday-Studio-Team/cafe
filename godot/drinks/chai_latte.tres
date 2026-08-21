@@ -1,11 +1,16 @@
 [gd_resource type="Resource" script_class="Drink" format=3 uid="uid://bat27y4fi8pxa"]
 
+[ext_resource type="Texture2D" uid="uid://34eguwlg636b" path="res://sprites/drink_icons/chai_latte.png" id="1_1otd7"]
 [ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="1_aq5e0"]
+[ext_resource type="Resource" uid="uid://de8om71jxvlv1" path="res://drinks/ingredients/milk.tres" id="1_dw3mo"]
+[ext_resource type="Resource" uid="uid://dopc7eu5beqyc" path="res://drinks/ingredients/chai.tres" id="1_xq1gt"]
 
 [resource]
 script = ExtResource("1_aq5e0")
 name = "chai latte"
-price = 4.0
-main_ingredient = 4
-liquid = 3
+main_ingredient = ExtResource("1_xq1gt")
+liquid = ExtResource("1_dw3mo")
+icon = ExtResource("1_1otd7")
+day_unlocked = 3
+type = 3
 metadata/_custom_type_script = "uid://bpib3g54m3xm5"

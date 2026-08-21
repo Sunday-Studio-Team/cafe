@@ -1,17 +1,26 @@
 class_name Player
 extends CharacterBody3D
 
-const ACCELERATION := 25.0
-const DECELERATION := 25.0
 const STRIDE_LENGTH := 0.75
 
-@export var camera: Camera3D
+@export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
+@export var bag_pickup_sound: AudioStreamPlayer3D
+# to spawn when we drop the bag
+@export var ingredients_bag_scene: PackedScene
+@export var sprint_lockout_timer: Timer
 
-# this is a var separate to the const cos it changes when sprint etc
-var move_speed: float = Stats.current.default_move_speed
+@export var pully_ball_scene: PackedScene
+
+var player_status_effects: PlayerStatusEffects
+
+var _walk_move_speed: float
+var _sprint_move_speed: float
+var _current_move_speed: float
+
+var _is_sprinting: bool
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -23,56 +32,116 @@ var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 var holding_interactable: bool = false
 
+#when pully ball spawns, starts counting up. keeping track of strength.
+var pully_ball_countup: float = 0.0
+var pully_ball_instance: Node3D
+
 # we add on top of the ray distance to avoid weird stuff with big interactables
 # (whose 'position's may be further away from us than their interactable hitbox)
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
-@onready var max_interact_dist: float = abs(aiming_ray.target_position.z) + 1.25
+@onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
 
 
 func _ready() -> void:
 	Global.player = self
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	player_status_effects = PlayerStatusEffects.new(self)
+	Events.items_updated.connect(_on_items_updated)
+	
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
 
+	Events.bag_pickup_animation_grabbed.connect(
+		func():
+			bag_pickup_sound.play()
+
+			# scuffed 'animation' of bag appearing when we grab it
+			ingredients_bag.transparency = 1
+			ingredients_bag.scale = Vector3.ZERO
+
+			await Events.viewmodel_animation_finished
+
+			var t := create_tween().set_parallel()
+			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
+			t.tween_property(ingredients_bag, "transparency", 0, 0.25),
+	)
+
+	Global.stamina = Stats.current.max_stamina
+	Global.sprint_lockout_timer = sprint_lockout_timer
+	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
+
 
 func _physics_process(delta: float) -> void:
-	handle_mouselook()
+	player_status_effects.process_status_effects(delta)
+	
+	#handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
-	handle_sprint()
+	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
 	#handle_footstep_sounds()
 	#tilt_camera()
+	handle_ingredients_bag()
+	handle_active_items()
+	handle_floating_cursor()
 	move_and_slide()
-	handle_ingredients_bag_visibility()
+
+func is_sprinting() -> bool:
+	return _is_sprinting
+
+#func _unhandled_input(event: InputEvent) -> void:
+#	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+#		mouse_delta += event.screen_relative * mouse_sens
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		mouse_delta += event.screen_relative * mouse_sens
+# this is what decides whether to show the mouse
+# (for hovering the tablet ui for more info etc) when holding alt
+func handle_floating_cursor() -> void:
+	if Input.is_action_pressed("show_cursor"):
+		Global.showing_floating_cursor = true
+	else:
+		Global.showing_floating_cursor = false
 
 
-func handle_mouselook() -> void:
-	camera.rotation_degrees.x -= mouse_delta.y
-	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+func handle_active_items() -> void:
+	if Input.is_action_just_pressed("item_menu"):
+		if not Global.in_ui or Global.in_active_item_menu:
+			var no_active_items_owned := true
 
-	rotation_degrees.y -= mouse_delta.x
+			for item in Global.owned_items:
+				if item.is_active_item:
+					no_active_items_owned = false
+					break
 
-	mouse_delta = Vector2.ZERO
+			if no_active_items_owned:
+				return
+
+			Events.active_item_menu.emit()
+
+	if Input.is_action_just_pressed("use_item") and Global.equipped_item:
+		if Global.equipped_item.can_be_used:
+			Events.active_item_used.emit(Global.equipped_item)
+
+
+#func handle_mouselook() -> void:
+#	camera.rotation_degrees.x -= mouse_delta.y
+#	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+#	
+#	rotation_degrees.y -= mouse_delta.x
+#	
+#	mouse_delta = Vector2.ZERO
 
 
 func handle_movement(delta: float) -> void:
-	if (
-		not movement_enabled
-		or holding_interactable
-		or Global.in_ui
-	):
+	if (not movement_enabled or holding_interactable or Global.in_ui):
 		velocity = Vector3.ZERO
 		return
+
+	var accel: float = Stats.current.player_accel
+	var decel: float = Stats.current.player_decel
+
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
@@ -86,9 +155,12 @@ func handle_movement(delta: float) -> void:
 	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
-		horizontal_velocity = horizontal_velocity.move_toward(move_dir_3d * move_speed, ACCELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(
+			move_dir_3d * _current_move_speed,
+			accel * delta,
+		)
 	else:
-		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, DECELERATION * delta)
+		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, decel * delta)
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
@@ -105,8 +177,11 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
+		if camera == null:
+			return
+
 		if (
-			not hovered_interactable.enabled
+			not hovered_interactable.visible 
 			or not hovered_interactable.is_inside_tree()
 			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
@@ -115,15 +190,14 @@ func handle_hovered_interactable() -> void:
 	# if we're currently holding interact on something, dont do anything
 	# (so we can look around while we hold)
 	if (
-		hovered_interactable != null
-		and hovered_interactable.hold_to_interact
+		hovered_interactable != null and hovered_interactable.hold_to_interact
 		and Input.is_action_pressed("interact")
 	):
 		holding_interactable = true
 		return
 
 	var collider = aiming_ray.get_collider()
-	if collider is Interactable:
+	if collider is Interactable and collider.visible:
 		Global.hovered_interactable = collider
 	else:
 		Global.hovered_interactable = null
@@ -140,11 +214,47 @@ func handle_inspected_shelf_item() -> void:
 		Global.inspected_shelf_item = null
 
 
-func handle_sprint() -> void:
-	if Input.is_action_pressed("sprint"):
-		move_speed = Stats.current.sprint_move_speed
+func handle_sprint(delta: float) -> void:
+	var has_roller_skates: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "roller_skates":
+			has_roller_skates = true
+			break
+	
+	if Input.is_action_pressed("sprint") and !has_roller_skates:
+		_is_sprinting = true
+		if get_last_motion().length() > 0:
+			if sprint_lockout_timer.is_stopped():
+				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
+		else:
+			Global.stamina += Stats.current.stamina_regen_rate * delta
+
+		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
+			_is_sprinting = true
+			_current_move_speed = _sprint_move_speed
+		else:
+			_is_sprinting = false
+			_current_move_speed = _walk_move_speed
+			Global.stamina += Stats.current.stamina_regen_rate * delta
 	else:
-		move_speed = Stats.current.default_move_speed
+		_is_sprinting = false
+		_current_move_speed = _walk_move_speed
+		Global.stamina += Stats.current.stamina_regen_rate * delta
+
+	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
+		sprint_lockout_timer.start()
+
+
+func handle_right_click(_delta: float)-> void:
+	#handles pully-ball 
+	
+	#TODO check if player has item. return if they don't
+	
+	if (Input.is_action_pressed("right_click") ):
+		pass
+	
+	pass
+	
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed
@@ -164,9 +274,19 @@ func handle_footstep_sounds() -> void:
 func tilt_camera() -> void:
 	const TILT_AMOUNT := 0.25
 
-	var local_velocity = basis.transposed() * velocity
+	var local_velocity: Vector3 = basis.transposed() * velocity
 	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
 
 
-func handle_ingredients_bag_visibility() -> void:
+func handle_ingredients_bag() -> void:
+	if (Input.is_action_just_pressed("drop") and Global.holding_ingredients and not Global.in_ui):
+		Global.holding_ingredients = false
+		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()
+		Global.main_scene.add_child(bag_to_drop)
+		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
+		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
+
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+
+func _on_items_updated() -> void:
+	player_status_effects.recalculate_status_effects()

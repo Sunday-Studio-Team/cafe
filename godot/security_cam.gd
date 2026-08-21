@@ -1,16 +1,28 @@
+class_name SecurityCam3D
 extends Node3D
 
-@export var ray: RayCast3D
+@export var _shape_cast_3d: ShapeCast3D
 @export var spotlight: SpotLight3D
+@export var camera_aimer_node: Node3D
+@export var aim_path_follow_3d: PathFollow3D
+@export var aim_follow_rate: float = 0.5
 @export var rotation_amount: float = 90
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
 @export var timer: Timer
+@export var interactable : Interactable
+# safe reference for when we use this item on a camera
+@export var tries_until_disabled: int = 3
+@export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 
-# we duplicate the ray many times to cover the spotlight cone on startup
+# we duplicate the raycast many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
-var all_rays: Array[RayCast3D]
+var _all_shape_casts: Array[ShapeCast3D]
 var rotate_tween: Tween
+var disable_minigames := ["Lines"]
+var _camera_disarmed := false
+var _player_slow_status_effect: CameraSlowPlayerStatusEffect
+var _direction_multiplier: float = 1.0
 
 @onready var original_rotation := rotation_degrees
 
@@ -18,16 +30,24 @@ var rotate_tween: Tween
 func _ready() -> void:
 	create_rays()
 
-	rotate_tween = create_tween().set_loops()
-	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y + rotation_amount, rotation_time)
-	rotate_tween.tween_interval(rotation_pause_length)
-	rotate_tween.tween_property(self, "rotation_degrees:y", original_rotation.y - rotation_amount, rotation_time)
-	rotate_tween.tween_interval(rotation_pause_length)
+	interactable.interacted.connect(open_camera_minigame)
+	interactable.used_active_item.connect(_on_used_active_item)
+
+	visibility_changed.connect(_on_visibility_changed)
+	_update_camera_components_active()
+	
+	# Randomize progress along path
+	aim_path_follow_3d.progress_ratio = randf_range(0.0, 1.0)
+	# Randomize direction multiplier
+	var direction_roll: float = randf_range(0.0, 1.0)
+	if direction_roll >= 0.5:
+		_direction_multiplier = 1.0
+	else:
+		_direction_multiplier = -1.0
 
 
 func _physics_process(_delta: float) -> void:
-	# if cameras are hidden, treat that as them being disabled
-	if not is_visible_in_tree():
+	if not visible or _camera_disarmed:
 		return
 
 	if not timer.is_stopped():
@@ -36,41 +56,72 @@ func _physics_process(_delta: float) -> void:
 
 	var player_in_spotlight := false
 
-	for r in all_rays:
-		var collider = r.get_collider()
-		if collider == Global.player:
-			if Input.is_action_pressed("sprint") and Global.player.get_last_motion() != Vector3.ZERO:
-				timer.start()
-				Global.score_update_message = "caught running"
-				Global.employee_rating -= Stats.current.penalty_for_running
-			elif (
-				Input.is_action_pressed("interact")
-				and Global.hovered_interactable != null
-				# TODO: think of a better way to identify specific interactables
-				# that wont break if things are renamed etc
-				and Global.hovered_interactable.display_name.contains("remake drink")
-			):
-				timer.start()
-				Global.score_update_message = "caught making drink by hand"
-				Global.employee_rating -= Stats.current.penalty_for_handmade_drink
-			elif (
-				Global.holding_ingredients and Global.holding_ingredients_rule
-			):
-				Global.score_update_message = "caught stealing ingredients"
-				Global.employee_rating -= Stats.current.penalty_for_holding_ingredients
-				timer.start()
+	for shape_cast in _all_shape_casts:
+		var collision_count: int = shape_cast.get_collision_count()
+		if collision_count >= 0:
+			for i in range(collision_count):
+				var collider: Object = shape_cast.get_collider(i)
+				if collider == Global.player:
+					var apply_slow: bool = false
+					if Global.player.is_sprinting() and Global.player.get_last_motion() != Vector3.ZERO:
+						timer.start()
+						Events.alert_posted.emit("caught running")
+						apply_slow = true
+					elif Global.making_drink_manually:
+						timer.start()
+						Events.alert_posted.emit("caught making drink by hand")
+						if Global.machine_in_use != null:
+							Global.machine_in_use.blast_player_from_using_machine()
+						apply_slow = true
+					
+					if apply_slow:
+						if _player_slow_status_effect != null:
+							Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
+						_player_slow_status_effect = CameraSlowPlayerStatusEffect.new(self, Stats.current.camera_slow_player_duration)
+						Global.player.player_status_effects.apply_status_effect(_player_slow_status_effect)
+						caught_audio_stream_player_3d.play()
+					player_in_spotlight = true
+					break
 
-			player_in_spotlight = true
-			break
-
-# we need both a local and global var here to track if the player is in this
-# spotlight AND if theyre in ANY spotlight (otherwise we'd start getting weird
-# things like this light flashing red when we enter a separate cameara's fov)
 	if player_in_spotlight:
 		spotlight.light_color = Color.RED
 		Global.player_in_cctv_los = true
 	else:
 		spotlight.light_color = Color.WHITE
+
+	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
+	
+	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
+	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
+
+func _on_visibility_changed() -> void:
+	_update_camera_components_active()
+
+
+func disarm_camera() -> void:
+	_camera_disarmed = true
+	_update_camera_components_active()
+
+
+func rearm_camera() -> void:
+	_camera_disarmed = false
+	_update_camera_components_active()
+
+
+func _update_camera_components_active() -> void:
+	if visible and not _camera_disarmed:
+		interactable.visible = true
+		spotlight.visible = true
+		_shape_cast_3d.enabled = true
+		for stored_ray in _all_shape_casts:
+			stored_ray.enabled = true
+	else:
+		interactable.visible = false
+		spotlight.visible = false
+		_shape_cast_3d.enabled = false
+		for stored_ray in _all_shape_casts:
+			stored_ray.enabled = false
+
 
 
 # duplicates our raycast many times, covering roughly the area of the spotlight
@@ -79,10 +130,60 @@ func create_rays() -> void:
 	# halo around the edge of the light
 	const ANGLE_OVERSHOOT := 5.0
 
-	for x_rot in range(25, 360, 15):
-		for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
-			var new_ray := ray.duplicate() as RayCast3D
-			new_ray.rotation_degrees.x += x_rot
-			new_ray.rotation_degrees.z += z_rot
-			spotlight.add_child(new_ray)
-			all_rays.append(new_ray)
+	_all_shape_casts.append(_shape_cast_3d)
+	# Disable the template by default.
+	# ray.enabled = false
+	# for x_rot in range(25, 360, 15):
+	# 	for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
+	# 		var new_ray := ray.duplicate() as RayCast3D
+	# 		new_ray.rotation_degrees.x += x_rot
+	# 		new_ray.rotation_degrees.z += z_rot
+	# 		spotlight.add_child(new_ray)
+	# 		all_rays.append(new_ray)
+
+
+func try_disable_camera() -> void:
+	if _camera_disarmed:
+		return
+
+	tries_until_disabled -= 1
+	if tries_until_disabled <= 0:
+		disarm_camera()
+		await get_tree().create_timer(20, false).timeout
+		rearm_camera()
+
+
+func open_camera_minigame() -> void:
+	if _camera_disarmed:
+		return
+
+	if Global.minigame_active:
+		return
+
+	Events.minigame_end.connect(_on_break_camera)
+	Events.minigame_cancelled.connect(_cancel_break_minigame)
+	Events.minigame_active.emit(disable_minigames.pick_random())
+
+
+func _on_break_camera() -> void:
+	Events.minigame_end.disconnect(_on_break_camera)
+	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
+	try_disable_camera()
+
+
+func _cancel_break_minigame() -> void:
+	Events.minigame_end.disconnect(_on_break_camera)
+	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
+
+
+func _on_used_active_item(item: Item):
+	if item != null and item.item_id == "whipped_cream":
+		Global.put_active_item_on_cooldown(item)
+		disarm_camera()
+		var disarm_duration: float = 1.0
+		if item.item_level == 1:
+			disarm_duration = 10
+		elif item.item_level == 2:
+			disarm_duration = 20
+		await get_tree().create_timer(disarm_duration, false).timeout
+		rearm_camera()

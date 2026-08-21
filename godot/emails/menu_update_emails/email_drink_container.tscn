@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://c1yb2udyxmruy"]
+
+[ext_resource type="Texture2D" uid="uid://5q6uecdj1wqh" path="res://sprites/drink_icons/matchaalmond.png" id="1_f7v7m"]
+[ext_resource type="Script" uid="uid://cf3fyykd008yn" path="res://emails/menu_update_emails/email_drink_container.gd" id="1_pid8o"]
+[ext_resource type="FontFile" uid="uid://c58o1rhcqdf6w" path="res://fonts/liberation_sans/LiberationSans-Regular.ttf" id="3_pid8o"]
+[ext_resource type="Texture2D" uid="uid://ce70lnqiyyncd" path="res://sprites/ingredient_icons/green tea.png" id="3_v80sy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_maimp"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="EmailDrinkContainer" type="PanelContainer" unique_id=2043435788 node_paths=PackedStringArray("drink_icon", "drink_name", "main_icon", "liquid_icon", "extra_icon", "extra_panel")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_maimp")
+script = ExtResource("1_pid8o")
+drink_icon = NodePath("VBoxContainer/DrinkIcon")
+drink_name = NodePath("VBoxContainer/DrinkName")
+main_icon = NodePath("VBoxContainer/Ingredients/MainIngredient/IngredientIcon")
+liquid_icon = NodePath("VBoxContainer/Ingredients/LiquidIngredient/IngredientIcon")
+extra_icon = NodePath("VBoxContainer/Ingredients/ExtraIngredient/IngredientIcon")
+extra_panel = NodePath("VBoxContainer/Ingredients/ExtraIngredient")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2062638759]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DrinkIcon" type="TextureRect" parent="VBoxContainer" unique_id=1220074333]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_f7v7m")
+expand_mode = 1
+
+[node name="DrinkName" type="Label" parent="VBoxContainer" unique_id=1374374876]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pid8o")
+theme_override_font_sizes/font_size = 24
+text = "iced almond matcha latte"
+horizontal_alignment = 1
+
+[node name="Ingredients" type="HBoxContainer" parent="VBoxContainer" unique_id=49433399]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MainIngredient" type="PanelContainer" parent="VBoxContainer/Ingredients" unique_id=1353577272]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_maimp")
+
+[node name="IngredientIcon" type="TextureRect" parent="VBoxContainer/Ingredients/MainIngredient" unique_id=1015046565]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_v80sy")
+expand_mode = 1
+
+[node name="LiquidIngredient" type="PanelContainer" parent="VBoxContainer/Ingredients" unique_id=1783480448]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_maimp")
+
+[node name="IngredientIcon" type="TextureRect" parent="VBoxContainer/Ingredients/LiquidIngredient" unique_id=1908639599]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_v80sy")
+expand_mode = 1
+
+[node name="ExtraIngredient" type="PanelContainer" parent="VBoxContainer/Ingredients" unique_id=1258732110]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_maimp")
+
+[node name="IngredientIcon" type="TextureRect" parent="VBoxContainer/Ingredients/ExtraIngredient" unique_id=197831838]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_v80sy")
+expand_mode = 1

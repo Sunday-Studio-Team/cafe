@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://u0mxb00igfni"]
+
+[ext_resource type="PackedScene" uid="uid://p8e3ualo81vq" path="res://ui/options_menu/options_menu_option_view.tscn" id="1_3s1t0"]
+[ext_resource type="Script" uid="uid://don8op45g0jer" path="res://ui/options_menu/options_menu.gd" id="1_8h7tm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h7tm"]
+bg_color = Color(0.11366529, 0.11366529, 0.113665275, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 24
+
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_graphics_preset_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_save_settings_button")]
+process_mode = 3
+layer = 2
+script = ExtResource("1_8h7tm")
+_graphics_preset_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView")
+_crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
+_camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
+_save_settings_button = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/SaveSettingsButton")
+
+[node name="Control" type="Control" parent="." unique_id=12575952]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=7772573]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1612091414]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -452.0
+offset_right = 410.0
+offset_bottom = 452.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer" unique_id=681432772]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8h7tm")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer" unique_id=105624590]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer" unique_id=315716441]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=926855798]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+
+[node name="Label" type="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1065899081]
+layout_mode = 2
+text = "Game Settings"
+label_settings = SubResource("LabelSettings_xrivr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1617562027]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OptionViewsVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1160021112]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Graphics Preset"
+
+[node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Crosshair"
+
+[node name="CameraMotionOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=1495567016 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Motion Sickness"
+
+[node name="SaveSettingsButton" type="Button" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1727838823]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Save Settings"

@@ -1,110 +1,123 @@
 [gd_scene format=3 uid="uid://cp150y65pvybf"]
 
 [ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/buttons.gd" id="1_dw425"]
-[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://minigames/assets/red_square.png" id="2_665na"]
-[ext_resource type="Texture2D" uid="uid://dv15ttjq1v3hw" path="res://minigames/assets/blue_square.png" id="3_d6lkr"]
-[ext_resource type="Texture2D" uid="uid://dwkj5nabjrlkb" path="res://minigames/assets/green_square.png" id="4_dximu"]
+[ext_resource type="Theme" uid="uid://ceewjxb7pd4qu" path="res://themes/machine_fix_minigame_button.tres" id="2_rln5u"]
+[ext_resource type="AudioStream" uid="uid://ddvfhfjtmqstn" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_correct.mp3" id="3_w52pr"]
+[ext_resource type="AudioStream" uid="uid://cd7tvvoptxqc8" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_incorrect.mp3" id="4_nb5rf"]
 
-[node name="Buttons" type="Control" unique_id=587894759]
-layout_mode = 3
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rln5u"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xoenn"]
+bg_color = Color(0.75, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w52pr"]
+bg_color = Color(0.9, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ljywr"]
+bg_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb5rf"]
+bg_color = Color(0, 0, 0.75, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flrtv"]
+bg_color = Color(0, 0, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hthg1"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7cm1"]
+bg_color = Color(0, 0.75, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8fk2"]
+bg_color = Color(0, 0.9, 0, 1)
+
+[node name="Buttons" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "correct_sound", "wrong_sound")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 script = ExtResource("1_dw425")
+buttons = [NodePath("VBoxContainer/HBoxContainer/Button"), NodePath("VBoxContainer/HBoxContainer/Button2"), NodePath("VBoxContainer/HBoxContainer/Button3")]
+prompt_panel = NodePath("VBoxContainer/PromptPanel")
+prompt_text_box = NodePath("VBoxContainer/PromptPanel/Prompt")
+correct_sound = NodePath("CorrectSound")
+wrong_sound = NodePath("WrongSound")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=31575764]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.007
-anchor_top = 0.605
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 215.936
-offset_top = 23.959991
-offset_right = -232.0
-offset_bottom = -32.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1850140781]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ClickThe" type="Label" parent="VBoxContainer" unique_id=1630240847]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "click the . . ."
+horizontal_alignment = 1
+
+[node name="PromptPanel" type="PanelContainer" parent="VBoxContainer" unique_id=1690713236]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+offset_transform_enabled = true
+
+[node name="Prompt" type="Label" parent="VBoxContainer/PromptPanel" unique_id=1820295606]
+layout_mode = 2
+theme_override_font_sizes/font_size = 156
+text = "red square"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=31575764]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 30
 
-[node name="Button" type="Button" parent="HBoxContainer" unique_id=496650234]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=496650234]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_rln5u")
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_rln5u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xoenn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w52pr")
 text = "A"
-icon = ExtResource("2_665na")
-icon_alignment = 1
 expand_icon = true
 
-[node name="Button2" type="Button" parent="HBoxContainer" unique_id=1630732]
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1630732]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_rln5u")
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_ljywr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nb5rf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_flrtv")
 text = "B"
-icon = ExtResource("3_d6lkr")
-icon_alignment = 1
 expand_icon = true
 
-[node name="Button3" type="Button" parent="HBoxContainer" unique_id=1536439932]
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1536439932]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_rln5u")
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "	C"
-icon = ExtResource("4_dximu")
-icon_alignment = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_hthg1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l7cm1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e8fk2")
+text = "C"
 expand_icon = true
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1690713236]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.123
-anchor_right = 1.1110001
-anchor_bottom = 0.49400002
-offset_left = 248.0
-offset_top = 0.29599762
-offset_right = -391.87207
-offset_bottom = 15.8880005
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=613272079]
+stream = ExtResource("3_w52pr")
 
-[node name="Panel" type="Panel" parent="PanelContainer" unique_id=170654813]
-layout_mode = 2
-
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/Panel" unique_id=1556190131]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = -24.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 64
-
-[node name="Timer" type="Timer" parent="." unique_id=1657691319]
-one_shot = true
-
-[node name="ClickThe" type="Label" parent="." unique_id=1630240847]
-layout_mode = 0
-offset_left = 412.0
-offset_top = 17.0
-offset_right = 720.0
-offset_bottom = 105.0
-theme_override_font_sizes/font_size = 64
-text = "click the..."
-
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="HBoxContainer/Button3" to="." method="_on_button_3_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=1992806125]
+stream = ExtResource("4_nb5rf")

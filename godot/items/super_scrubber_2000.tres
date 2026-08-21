@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://v1yxr7b2fctp"]
+
+[ext_resource type="Texture2D" uid="uid://ddb2lvi5auue4" path="res://sprites/items/scrubber.png" id="1_64n1a"]
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_unx1t"]
+
+[resource]
+script = ExtResource("1_unx1t")
+item_id = "super_scrubber"
+name = "SUPER SCRUBBER 2K"
+description_at_levels = Dictionary[int, String]({
+1: "Your mop is 2x bigger.",
+2: "Your mop is 3x bigger."
+})
+icon = ExtResource("1_64n1a")
+price_at_levels = Dictionary[int, float]({
+1: 3.0,
+2: 2.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 2.0,
+2: 4.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"
