@@ -582,13 +582,14 @@ func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> 
 	print("secs per help desk customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
 
+
 func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
 	if tippy_voice_player.playing:
 		return
-		
+
 	if !tippy_voice_timer.is_stopped():
 		return
-		
+
 	var chance_play = randf_range(0.0, 1.0)
 	if voice_line == TippyVoiceLine.TippyLineType.shift_low_time:
 		chance_play += 0.25
