@@ -31,6 +31,7 @@
 [ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
 [ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
 [ext_resource type="Texture2D" uid="uid://cetushjghxirl" path="res://environment/textures/office tiles.png" id="31_omxm3"]
+[ext_resource type="PackedScene" uid="uid://7guo1hrx6oco" path="res://Assets/Locker/locker_tippy.tscn" id="31_ubo3j"]
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
@@ -1467,6 +1468,66 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.01
 [node name="Roof" type="MeshInstance3D" parent="BreakRoom" unique_id=1275070204]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5996704, 3, 3)
 mesh = SubResource("BoxMesh_jofr6")
+
+[node name="Locker tippy" parent="BreakRoom" unique_id=787314827 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044044, 0, -0.0034689992, 0, 0.70441294, 0, 0.0034689992, 0, -0.7044044, 2.2924411, -0.08429599, 2.152318)
+
+[node name="Locker tippy2" parent="BreakRoom" unique_id=111289729 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044044, 0, -0.0034689992, 0, 0.70441294, 0, 0.0034689992, 0, -0.7044044, 2.2924411, -0.08429599, 1.2463007)
+
+[node name="Locker tippy3" parent="BreakRoom" unique_id=469023238 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.797965, 0.009764552, -1.8249063)
+
+[node name="Locker tippy4" parent="BreakRoom" unique_id=428753990 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.009764552, -0.9211664)
+
+[node name="Locker tippy5" parent="BreakRoom" unique_id=248312422 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.797965, 0.009764552, -3.739593)
+
+[node name="Locker tippy6" parent="BreakRoom" unique_id=215115281 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.009764552, -2.835853)
+
+[node name="Locker tippy7" parent="BreakRoom" unique_id=1913584178 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.797965, 0.009764552, -5.4898095)
+
+[node name="Locker tippy8" parent="BreakRoom" unique_id=2119566149 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.009764552, -4.5860696)
+
+[node name="Locker tippy15" parent="BreakRoom" unique_id=1479455124 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.9528513, 0.009764314, -12.49315)
+
+[node name="Locker tippy16" parent="BreakRoom" unique_id=1242390208 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.8896112, 0.009764314, -13.396957)
+
+[node name="Locker tippy17" parent="BreakRoom" unique_id=1875434797 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.950835, 0.009764314, -8.833549)
+
+[node name="Locker tippy18" parent="BreakRoom" unique_id=1649937457 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.887595, 0.009764314, -10.825682)
+
+[node name="Locker tippy19" parent="BreakRoom" unique_id=496520420 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.9489927, 0.009764314, -6.247348)
+
+[node name="Locker tippy20" parent="BreakRoom" unique_id=554112667 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.8857527, 0.009764314, -7.9871397)
+
+[node name="Locker tippy9" parent="BreakRoom" unique_id=28170398 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 3.7142837, 0.009764552, -0.5407038)
+
+[node name="Locker tippy10" parent="BreakRoom" unique_id=2077010906 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 1.3672915, 0.009764552, -0.56572676)
+
+[node name="Locker tippy11" parent="BreakRoom" unique_id=1597140254 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.613706, 0, 0.34577858, 0, 0.70441306, 0, -0.34577858, 0, -0.613706, -6.8092213, 0.009764552, -4.837779)
+
+[node name="Locker tippy12" parent="BreakRoom" unique_id=1764203829 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, -4.105858, 0.009764552, -0.59271574)
+
+[node name="Locker tippy13" parent="BreakRoom" unique_id=979761337 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 8.777748, 0.009764552, -0.69930077)
+
+[node name="Locker tippy14" parent="BreakRoom" unique_id=395456157 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 6.4628353, 0.009764552, -0.72432375)
 
 [node name="Floor" type="MeshInstance3D" parent="BreakRoom" unique_id=2034756070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5376587, 0, 3)
