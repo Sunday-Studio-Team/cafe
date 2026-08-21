@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://dbxcl8y3t1aqb" path="res://Assets/signs/metal arch.glb" id="45_fp6ic"]
 [ext_resource type="PackedScene" uid="uid://8j8i4rb32gr8" path="res://Assets/filling cabinets/filling_cabinets.tscn" id="46_a3sl0"]
 [ext_resource type="Texture2D" uid="uid://bsaijqk5w5k1y" path="res://Assets/Street/road.png" id="48_bqqh4"]
+[ext_resource type="Texture2D" uid="uid://drqdck5keqc5" path="res://Assets/cars/ambulance.png" id="49_0jw1j"]
 [ext_resource type="PackedScene" uid="uid://bcsqffwblcksh" path="res://Assets/Street/Street.glb" id="49_bkt63"]
 [ext_resource type="Texture2D" uid="uid://duypnvlfw06cv" path="res://Assets/Street/city pack_Image_63.png" id="50_56cmc"]
 [ext_resource type="Texture2D" uid="uid://fdi1a6klaj8t" path="res://Assets/Street/city pack_Image_64.png" id="51_rkxax"]
@@ -516,6 +517,12 @@ material = SubResource("StandardMaterial3D_2cqfq")
 text = "store room"
 pixel_size = 0.025
 depth = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n35f"]
+transparency = 1
+albedo_texture = ExtResource("49_0jw1j")
+metallic = 0.3
+roughness = 0.65
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tackp"]
 resource_name = "Structure_shader"
@@ -1784,6 +1791,11 @@ texture = ExtResource("48_bqqh4")
 [node name="Sprite3D4" type="Sprite3D" parent="Exterior" unique_id=640929780]
 transform = Transform3D(-0.6264175, -2.1319964e-08, 9.632258e-09, 2.738158e-08, 4.659626e-16, 0.22036037, -5.476316e-08, 0.24387196, 4.2103935e-16, 13.498823, -0.0056385994, -5.4775853)
 texture = ExtResource("48_bqqh4")
+
+[node name="ambulance" type="Sprite3D" parent="Exterior" unique_id=1089029611]
+transform = Transform3D(0.19703001, 0, 0, 0, 0.19703001, 0, 0, 0, 0.19703001, -5.078621, 1.7736286, -7.8076143)
+material_override = SubResource("StandardMaterial3D_8n35f")
+texture = ExtResource("49_0jw1j")
 
 [node name="Sprite3D9" type="Sprite3D" parent="Exterior" unique_id=1013928753]
 transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.70082474, -0.0056385994, -8.4085865)
