@@ -198,10 +198,8 @@ func _on_used_active_item(item: Item):
 	if item != null and item.item_id == "whipped_cream":
 		Global.put_active_item_on_cooldown(item)
 		disarm_camera()
-		var disarm_duration: float = 1.0
-		if item.item_level == 1:
-			disarm_duration = 10
-		elif item.item_level == 2:
-			disarm_duration = 20
-		await get_tree().create_timer(disarm_duration, false).timeout
+		disabled_timer.wait_time = 15
+		disabled_timer.start()
+		await disabled_timer.timeout
+		disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
 		rearm_camera()
