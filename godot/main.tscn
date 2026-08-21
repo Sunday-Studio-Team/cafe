@@ -428,9 +428,6 @@ corner_radius_bottom_left = 25
 font_size = 32
 font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -441,6 +438,9 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
+viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
 bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
@@ -767,9 +767,9 @@ profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Sco
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
 customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
 score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
-interactable_indicator = NodePath("HUD/VBoxContainer/Interactable")
-interactable_label = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/RichTextLabel")
-hold_interact_progress = NodePath("HUD/VBoxContainer/Interactable/VBoxContainer/HoldInteractProgress")
+interactable_indicator = NodePath("Interactable")
+interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
+hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../GameTimer")
 time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
 time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
@@ -811,8 +811,8 @@ stamina_bar = NodePath("StaminaBar")
 item_menu_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/MenuPrompt")
 item_ui = NodePath("HUD/ActiveItemInfo")
 current_item_ui = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem")
-item_indicator = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator")
-item_text = NodePath("HUD/VBoxContainer/Interactable/ItemIndicator/RichTextLabel")
+item_indicator = NodePath("Interactable/ItemIndicator")
+item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 current_item_icon = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
 item_cooldown_bar = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon/CooldownIndicator")
 use_item_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
@@ -1113,6 +1113,66 @@ offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
 
+[node name="Interactable" type="PanelContainer" parent="UI" unique_id=1696852801]
+custom_maximum_size = Vector2(-1, 75)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = 118.0
+offset_right = 280.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Interactable" unique_id=1133469025]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Interactable/VBoxContainer" unique_id=644757301]
+custom_minimum_size = Vector2(550, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[E] interact"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HoldInteractProgress" type="ProgressBar" parent="UI/Interactable/VBoxContainer" unique_id=1035330662]
+custom_minimum_size = Vector2(250, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 50.0
+show_percentage = false
+
+[node name="ItemIndicator" type="PanelContainer" parent="UI/Interactable" unique_id=498491282]
+custom_minimum_size = Vector2(300, 50)
+custom_maximum_size = Vector2(400, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.75, -0.5)
+offset_transform_scale = Vector2(0.75, 0.75)
+offset_transform_rotation = 0.08726646
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Interactable/ItemIndicator" unique_id=1532821752]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 36
+text = "[Q] HAMMER 💥"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HUD" type="MarginContainer" parent="UI" unique_id=192377891]
 anchors_preset = 15
 anchor_right = 1.0
@@ -1187,56 +1247,6 @@ text = "+1$ from customer"
 [node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Interactable" type="PanelContainer" parent="UI/HUD/VBoxContainer" unique_id=1696852801]
-custom_maximum_size = Vector2(-1, 75)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/HUD/VBoxContainer/Interactable" unique_id=1133469025]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Interactable/VBoxContainer" unique_id=644757301]
-custom_minimum_size = Vector2(550, 50)
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[E] interact"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HoldInteractProgress" type="ProgressBar" parent="UI/HUD/VBoxContainer/Interactable/VBoxContainer" unique_id=1035330662]
-custom_minimum_size = Vector2(250, 10)
-layout_mode = 2
-size_flags_horizontal = 4
-value = 50.0
-show_percentage = false
-
-[node name="ItemIndicator" type="PanelContainer" parent="UI/HUD/VBoxContainer/Interactable" unique_id=498491282]
-custom_minimum_size = Vector2(300, 50)
-custom_maximum_size = Vector2(400, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0.75, -0.5)
-offset_transform_scale = Vector2(0.75, 0.75)
-offset_transform_rotation = 0.08726646
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Interactable/ItemIndicator" unique_id=1532821752]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 36
-text = "[Q] HAMMER 💥"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="FloatingButtons" type="HBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=369205068]
 custom_minimum_size = Vector2(500, 0)
@@ -1792,7 +1802,7 @@ texture_normal = ExtResource("125_g5xqc")
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/MiddleSecurityCam"]
 [editable path="SecurityCams/MiddleSecurityCam/CameraAimerModel/Model/camera"]
-[editable path="SecurityCams/RightAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/RightAreaSecurityCam"]
+[editable path="SecurityCams/RightAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/HallwaySecurityCam"]
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
