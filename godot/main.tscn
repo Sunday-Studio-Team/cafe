@@ -525,6 +525,21 @@ visible = false
 layer = 2
 visible = false
 
+[node name="ScoreUpdate" type="CanvasLayer" parent="." unique_id=358513537]
+layer = 2
+
+[node name="ScoreUpdate" type="Label" parent="ScoreUpdate" unique_id=938663646]
+modulate = Color(0.4, 1, 0.4, 1)
+offset_left = 40.0
+offset_top = 475.0
+offset_right = 517.0
+offset_bottom = 547.0
+offset_transform_enabled = true
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 52
+text = "+1$ from customer"
+
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
@@ -790,7 +805,7 @@ script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
 customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
-score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
+score_update_label = NodePath("../ScoreUpdate/ScoreUpdate")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
@@ -1258,15 +1273,6 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("95_d5iia")
 frame = 71
 frame_progress = 1.0
-
-[node name="ScoreUpdate" type="Label" parent="UI/HUD/VBoxContainer" unique_id=124548306]
-modulate = Color(0.4, 1, 0.4, 1)
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 52
-text = "+1$ from customer"
 
 [node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
