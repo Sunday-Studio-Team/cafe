@@ -19,8 +19,8 @@
 [ext_resource type="ArrayMesh" uid="uid://jn4wo5ccjmt8" path="res://Assets/window/Sketchfab_Scene_Object_3.res" id="16_pv1ha"]
 [ext_resource type="ArrayMesh" uid="uid://dg7pb4va76uok" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
 [ext_resource type="ArrayMesh" uid="uid://f3vpqcxgpjle" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
-[ext_resource type="Texture2D" uid="uid://ciwanem2vjg81" path="res://environment/textures/pink tiles.jpg" id="19_tx4o1"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="20_ala11"]
+[ext_resource type="Texture2D" uid="uid://cl2g108lqa0bu" path="res://environment/textures/star floor.jpg" id="20_omxm3"]
 [ext_resource type="PackedScene" uid="uid://hqrp2qi3haje" path="res://Assets/cafe chairs/Plastic Monobloc Chair.glb" id="21_li8ef"]
 [ext_resource type="PackedScene" uid="uid://brrcrumg8hxyp" path="res://Assets/trashcan/Modern Trash Bin Low Poly.glb" id="22_uftqg"]
 [ext_resource type="PackedScene" uid="uid://k2x3c55gi1fl" path="res://Assets/ATM/ATM Machine 3D Model.glb" id="23_ljlh3"]
@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="28_dlkxn"]
 [ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
 [ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
-[ext_resource type="Texture2D" uid="uid://b67f7lbfgiqv8" path="res://environment/textures/white rug.png" id="31_2t8u4"]
+[ext_resource type="Texture2D" uid="uid://cetushjghxirl" path="res://environment/textures/office tiles.png" id="31_omxm3"]
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
@@ -310,9 +310,9 @@ material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3exxq"]
-albedo_texture = ExtResource("19_tx4o1")
-uv1_scale = Vector3(2.58, 2.53, 2.58)
-uv1_offset = Vector3(0.07, 0.09, 0)
+albedo_texture = ExtResource("20_omxm3")
+uv1_scale = Vector3(3.06, 1.56, 2.26)
+uv1_offset = Vector3(-1.13, 0.34, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_3exxq")
@@ -367,7 +367,7 @@ size = Vector3(5.199341, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
 albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
-albedo_texture = ExtResource("31_2t8u4")
+albedo_texture = ExtResource("31_omxm3")
 uv1_scale = Vector3(13.51, 2.58, 13.51)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7olkn"]
@@ -2054,30 +2054,30 @@ transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.01515600
 [node name="Milk Var 2" parent="Mugs Milk Sugar Light4" index="1" unique_id=1722434993]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
+[node name="Milk Var 3" parent="Mugs Milk Sugar Light4" index="2" unique_id=834262876]
+transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
+
+[node name="Milk Var 3_001" parent="Mugs Milk Sugar Light4" index="3" unique_id=1513919712]
+transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
+
+[node name="Mug Empty" parent="Mugs Milk Sugar Light4" index="4" unique_id=560469408]
+transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
+
+[node name="Mug Empty_001" parent="Mugs Milk Sugar Light4" index="5" unique_id=1690268879]
+transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
+
+[node name="Mug Empty_005" parent="Mugs Milk Sugar Light4" index="6" unique_id=1826731410]
+transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
+
+[node name="Sugar Var 1" parent="Mugs Milk Sugar Light4" index="7" unique_id=369928458]
+transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
+
+[node name="Sugar Var 2" parent="Mugs Milk Sugar Light4" index="8" unique_id=1175329585]
+transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
+
 [node name="Milk Var 5" type="MeshInstance3D" parent="Mugs Milk Sugar Light4" unique_id=1235414067]
 transform = Transform3D(0.068629935, 0, -0.018727854, 0, 0.1371508, 0, 0.02248766, 0, 0.057155393, 0.5796461, 0.63102937, -0.11547375)
 mesh = SubResource("ArrayMesh_2n5bl")
-
-[node name="Milk Var 3" parent="Mugs Milk Sugar Light4" index="3" unique_id=834262876]
-transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
-
-[node name="Milk Var 3_001" parent="Mugs Milk Sugar Light4" index="4" unique_id=1513919712]
-transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
-
-[node name="Mug Empty" parent="Mugs Milk Sugar Light4" index="5" unique_id=560469408]
-transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
-
-[node name="Mug Empty_001" parent="Mugs Milk Sugar Light4" index="6" unique_id=1690268879]
-transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
-
-[node name="Mug Empty_005" parent="Mugs Milk Sugar Light4" index="7" unique_id=1826731410]
-transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
-
-[node name="Sugar Var 1" parent="Mugs Milk Sugar Light4" index="8" unique_id=369928458]
-transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
-
-[node name="Sugar Var 2" parent="Mugs Milk Sugar Light4" index="9" unique_id=1175329585]
-transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
 
 [node name="Milk Var 4" type="MeshInstance3D" parent="Mugs Milk Sugar Light4" unique_id=978221176]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.7784449, 1.1263016, -0.055408478)
@@ -2128,30 +2128,30 @@ transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.01515600
 [node name="Milk Var 2" parent="Mugs Milk Sugar Light5" index="1" unique_id=1722434993]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
+[node name="Milk Var 3" parent="Mugs Milk Sugar Light5" index="2" unique_id=834262876]
+transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
+
+[node name="Milk Var 3_001" parent="Mugs Milk Sugar Light5" index="3" unique_id=1513919712]
+transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
+
+[node name="Mug Empty" parent="Mugs Milk Sugar Light5" index="4" unique_id=560469408]
+transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
+
+[node name="Mug Empty_001" parent="Mugs Milk Sugar Light5" index="5" unique_id=1690268879]
+transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
+
+[node name="Mug Empty_005" parent="Mugs Milk Sugar Light5" index="6" unique_id=1826731410]
+transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
+
+[node name="Sugar Var 1" parent="Mugs Milk Sugar Light5" index="7" unique_id=369928458]
+transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
+
+[node name="Sugar Var 2" parent="Mugs Milk Sugar Light5" index="8" unique_id=1175329585]
+transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
+
 [node name="Milk Var 5" type="MeshInstance3D" parent="Mugs Milk Sugar Light5" unique_id=1585292267]
 transform = Transform3D(0.068629935, 0, -0.018727854, 0, 0.1371508, 0, 0.02248766, 0, 0.057155393, 0.5796461, 0.63102937, -0.11547375)
 mesh = SubResource("ArrayMesh_2n5bl")
-
-[node name="Milk Var 3" parent="Mugs Milk Sugar Light5" index="3" unique_id=834262876]
-transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
-
-[node name="Milk Var 3_001" parent="Mugs Milk Sugar Light5" index="4" unique_id=1513919712]
-transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
-
-[node name="Mug Empty" parent="Mugs Milk Sugar Light5" index="5" unique_id=560469408]
-transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
-
-[node name="Mug Empty_001" parent="Mugs Milk Sugar Light5" index="6" unique_id=1690268879]
-transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
-
-[node name="Mug Empty_005" parent="Mugs Milk Sugar Light5" index="7" unique_id=1826731410]
-transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
-
-[node name="Sugar Var 1" parent="Mugs Milk Sugar Light5" index="8" unique_id=369928458]
-transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
-
-[node name="Sugar Var 2" parent="Mugs Milk Sugar Light5" index="9" unique_id=1175329585]
-transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
 
 [node name="Milk Var 4" type="MeshInstance3D" parent="Mugs Milk Sugar Light5" unique_id=660529236]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.7784449, 1.1263016, -0.055408478)
