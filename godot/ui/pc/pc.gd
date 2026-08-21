@@ -36,7 +36,7 @@ func _ready() -> void:
 				if not button == exit_button:
 					click_sound.play()
 		)
-	
+
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("pause") and Global.in_pc_ui):
