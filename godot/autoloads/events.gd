@@ -15,7 +15,6 @@ signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
 signal order_completed(customer: Customer)
 signal order_approved(customer: Customer)
-signal order_approved_no_customer
 signal order_remaking_drink
 signal machine_making_drink
 signal customer_left_machine(customer: Customer)

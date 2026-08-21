@@ -172,7 +172,7 @@ func _ready() -> void:
 	Events.spill_clean_done.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
 	)
-	Events.order_approved_no_customer.connect(func():
+	Events.order_approved.connect(func(_customer: Customer):
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.accept_drink)
 	)
 
@@ -180,7 +180,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
 	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
-	
+
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
