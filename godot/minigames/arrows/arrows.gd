@@ -5,28 +5,26 @@ extends Node2D
 @export var prompt_output: RichTextLabel
 @export var wrong_sign: Control
 @export var arrows_container: HBoxContainer
-@export var textime: Texture2D
 
-@export_dir var blue_left
-@export_dir var blue_up
-@export_dir var blue_right
-@export_dir var blue_down
-@export_dir var red_arrow
+@export var blue_left: Array[Texture]
+@export var blue_up: Array[Texture]
+@export var blue_right: Array[Texture]
+@export var blue_down: Array[Texture]
+@export var red_left: Array[Texture]
+@export var red_up: Array[Texture]
+@export var red_right: Array[Texture]
+@export var red_down: Array[Texture]
 
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
 var red: String = "#A20B10"
-var general_directions = ["left", "up", "right", "down"]
-var blue_directions = []
-var red_directions = []
+var general_directions: Array[String] = ["left", "up", "right", "down"]
+var general_colors: Array[String] = ["blue", "red"]
+var blue_textures = []
+var red_textures = []
 var output_directions = []
-var valid_indices: Array[int] = []
-var input_to_direction: Dictionary = {
-	"move_left": "🡄",
-	"move_forward": "🡅",
-	"move_right": "🡆",
-	"move_back": "🡇",
-}
+var valid_indices = []
+var valid_directions = []
 var general_direction_to_arrow: Dictionary = {
 	"left": ["", "", "", "", "", ""],
 	"up": ["", "", "", "", "", ""],
@@ -35,7 +33,22 @@ var general_direction_to_arrow: Dictionary = {
 }
 var correct_input_index: int = 0
 
-@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
+@onready var get_arrow_array: Dictionary = {
+	"blue": {
+		"left": blue_left,
+		"up": blue_up,
+		"right": blue_right,
+		"down": blue_down,
+	},
+	"red": {
+		"left": red_left,
+		"up": red_up,
+		"right": red_right,
+		"down": red_down,
+	}
+}
+@onready var background_color = "#ffffff"
+#@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
 
 
 func _ready() -> void:
@@ -54,37 +67,27 @@ func _input(event: InputEvent) -> void:
 		if event.is_action("move_back"):
 			check_input("down")
 
-	if correct_input_index >= valid_indices.size():
+	if correct_input_index >= valid_directions.size():
 		_end_minigame()
 
 
 func check_input(direction: String) -> void:
-	var valid_index: int = valid_indices[correct_input_index]
-
-	if general_direction_to_arrow[direction].has(output_directions[valid_index][0]):
-		output_directions[valid_index][1] = background_color
+	if(valid_directions[correct_input_index] == direction):
+		output_directions[valid_indices[correct_input_index]].texture = null
 		correct_input_index += 1
-		update_output()
 	else:
 		display_wrong()
 		_start_minigame()
 
 
-# color_array can't be statically typed since Nested Type Collections are not supported. Code can be changed to use an array of classes instead.
-# build output_directions array, to use to update the output text later
-func add_arrow(color_array, index: int, is_valid: bool) -> void:
-	if is_valid:
-		valid_indices.append(output_directions.size())
-	output_directions.append(color_array[index])
-
-
-func update_output() -> void:
-	var output_text: String = ""
-	for i in range(output_directions.size()):
-		var color: String = output_directions[i][1]
-		var arrow: String = output_directions[i][0]
-		output_text += "[color=%s]%s [/color]" % [color, arrow]
-	arrow_output.text = output_text
+func add_arrow_to_output(output_index: int, color: String, color_index: int, correct_color: String) -> void:
+	if(color == "blue"):
+		output_directions[output_index].texture = blue_textures[color_index]
+	else:
+		output_directions[output_index].texture = red_textures[color_index]
+	
+	if correct_color == color:
+		valid_indices.append(output_index)
 
 
 func display_wrong() -> void:
@@ -102,61 +105,68 @@ func set_up_arrow_container() -> void:
 		arrow_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		arrow_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		arrow_rect.custom_minimum_size.x = min_arrow_size
-		arrow_rect.texture = textime
 		arrows_container.add_child(arrow_rect)
 
 
 func _start_minigame() -> void:
-	arrow_output.text = ""
-
-	blue_directions = []
-	red_directions = []
-	output_directions = []
+	blue_textures = []
+	red_textures = []
+	output_directions = arrows_container.get_children()
 	valid_indices = []
+	valid_directions = []
 	correct_input_index = 0
+	
+	#output_directions[0].texture = blue_left[0]
 
-	var choose_color: float = randi_range(0, 1)
-	var blue_valid: bool
+	# Choose if player has to click red or blue directions
+	var choose_color: String = general_colors.pick_random()
 	var color_choice: String
 	var text_color: String
-	# Choose if player has to click red or blue directions
-	var text_colors = [blue, red]
-	if choose_color == 0:
-		blue_valid = true
-		text_color = text_colors.pick_random()
+	# Create the colored text in the game tooltip
+	if choose_color == "blue":
+		text_color = general_colors.pick_random()
 		color_choice = "[bgcolor=%s][color=%s]blue[/color][/bgcolor]" % [background_color, text_color]
 	else:
-		blue_valid = false
-		text_color = text_colors.pick_random()
+		text_color = general_colors.pick_random()
 		color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
-
 	prompt_output.text = "Press the %s directions!" % color_choice
-
-	# Randomly choose arrow directions
-	for i in range(max_arrow_count / 2):
-		blue_directions.append([general_direction_to_arrow[general_directions.pick_random()].pick_random(), blue])
-		red_directions.append([general_direction_to_arrow[general_directions.pick_random()].pick_random(), red])
-
+	
+	# Choose a pool of [max_arrow_count / (general_colors.size())] arrows for each color (likely 2, for blue and red)
+	for i in range(max_arrow_count / (general_colors.size())):
+		var blue_dir: String = general_directions.pick_random()
+		blue_textures.append(get_arrow_array["blue"][blue_dir].pick_random())
+		if(choose_color == "blue"):
+			valid_directions.append(blue_dir)
+		
+		var red_dir: String = general_directions.pick_random()
+		red_textures.append(get_arrow_array["red"][red_dir].pick_random())
+		if(choose_color == "red"):
+			valid_directions.append(red_dir)
+		
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
-	var bi: int = max_arrow_count / 2 - 1
-	var ri: int = max_arrow_count / 2 - 1
-	while bi >= 0 and ri >= 0:
-		var choose_dir = randi_range(0, 1)
-		if choose_dir == 0:
-			add_arrow(blue_directions, bi, blue_valid)
-			bi -= 1
+	var individual_color_max: int = max_arrow_count / 2 - 1
+	var bi: int = 0
+	var ri: int = 0
+	var output_index: int = 0
+	while bi <= individual_color_max and ri <= individual_color_max:
+		var rand_color = general_colors.pick_random()
+		if rand_color == "blue":
+			add_arrow_to_output(output_index, rand_color, bi, choose_color)
+			bi += 1
 		else:
-			add_arrow(red_directions, ri, !blue_valid)
-			ri -= 1
-	while bi >= 0:
-		add_arrow(blue_directions, bi, blue_valid)
-		bi -= 1
-	while ri >= 0:
-		add_arrow(red_directions, ri, !blue_valid)
-		ri -= 1
-
-	update_output()
+			add_arrow_to_output(output_index, rand_color, ri, choose_color)
+			ri += 1
+		output_index += 1
+	while bi <= individual_color_max:
+		add_arrow_to_output(output_index, "blue", bi, choose_color)
+		bi += 1
+		output_index += 1
+	while ri <= individual_color_max:
+		add_arrow_to_output(output_index, "red", ri, choose_color)
+		ri += 1
+		output_index += 1
 
 
 func _end_minigame() -> void:
 	Events.minigame_end.emit()
+	print("End arrows minigame")

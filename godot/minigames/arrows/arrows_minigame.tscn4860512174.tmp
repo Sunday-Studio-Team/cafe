@@ -46,7 +46,6 @@
 [ext_resource type="Texture2D" uid="uid://bb1yjb7xx2n4u" path="res://minigames/arrows/assets/red-arrows/down/reddown3.png" id="39_iy2on"]
 [ext_resource type="Texture2D" uid="uid://bmvmfmtd5vxsx" path="res://minigames/arrows/assets/red-arrows/down/reddown4.png" id="40_5ospk"]
 [ext_resource type="Texture2D" uid="uid://gf8d5srtafg7" path="res://minigames/arrows/assets/red-arrows/down/reddown5.png" id="41_vbul5"]
-[ext_resource type="Texture2D" uid="uid://cqxhkomebjxod" path="res://minigames/arrows/assets/dancemachine.png" id="42_l8ovb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
 bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
@@ -68,20 +67,6 @@ red_right = Array[Texture]([ExtResource("32_xrvhh"), ExtResource("33_m17ou"), Ex
 red_down = Array[Texture]([ExtResource("37_ukk4x"), ExtResource("38_p5j3n"), ExtResource("39_iy2on"), ExtResource("40_5ospk"), ExtResource("41_vbul5")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1499237152]
-
-[node name="DanceMachine" type="TextureRect" parent="CanvasLayer" unique_id=916732716]
-anchors_preset = -1
-anchor_left = 0.27600002
-anchor_top = 0.063
-anchor_right = 0.56700003
-anchor_bottom = 0.63600004
-offset_left = -30.060059
-offset_right = 30.060059
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("42_l8ovb")
-expand_mode = 3
-stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=538834130]
 visible = false
@@ -119,9 +104,9 @@ vertical_alignment = 1
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]
 layout_mode = 3
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -165.0
 grow_horizontal = 2
 
 [node name="Prompt" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1688849488]
