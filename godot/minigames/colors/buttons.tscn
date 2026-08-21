@@ -1,120 +1,168 @@
 [gd_scene format=3 uid="uid://cp150y65pvybf"]
 
 [ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/buttons.gd" id="1_dw425"]
-[ext_resource type="Theme" uid="uid://ceewjxb7pd4qu" path="res://themes/machine_fix_minigame_button.tres" id="2_rln5u"]
+[ext_resource type="Texture2D" uid="uid://jtnppq73gskq" path="res://sprites/machine_fix_buttons_minigame/button_press_background.png" id="2_nb5rf"]
 [ext_resource type="AudioStream" uid="uid://ddvfhfjtmqstn" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_correct.mp3" id="3_w52pr"]
+[ext_resource type="Texture2D" uid="uid://biumdld4stgbd" path="res://sprites/machine_fix_buttons_minigame/tippy_with_sign.png" id="3_y50b2"]
+[ext_resource type="Texture2D" uid="uid://chj8nhjnttj32" path="res://sprites/machine_fix_buttons_minigame/tippy_buttons_normal.png" id="4_flrtv"]
 [ext_resource type="AudioStream" uid="uid://cd7tvvoptxqc8" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_incorrect.mp3" id="4_nb5rf"]
+[ext_resource type="PackedScene" uid="uid://d3pjeuemwlp77" path="res://minigames/colors/individual_button.tscn" id="5_flrtv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rln5u"]
-bg_color = Color(1, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xoenn"]
-bg_color = Color(0.75, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w52pr"]
-bg_color = Color(0.9, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ljywr"]
-bg_color = Color(0, 0, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nb5rf"]
-bg_color = Color(0, 0, 0.75, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flrtv"]
-bg_color = Color(0, 0, 0.9, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hthg1"]
-bg_color = Color(0, 1, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7cm1"]
-bg_color = Color(0, 0.75, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8fk2"]
-bg_color = Color(0, 0.9, 0, 1)
-
-[node name="Buttons" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "correct_sound", "wrong_sound")]
+[node name="Buttons" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "employee_texture_rect", "correct_sound", "wrong_sound")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 161.0
+offset_right = 3063.0
+offset_bottom = 2000.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+offset_transform_enabled = true
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_dw425")
-buttons = [NodePath("VBoxContainer/HBoxContainer/Button"), NodePath("VBoxContainer/HBoxContainer/Button2"), NodePath("VBoxContainer/HBoxContainer/Button3")]
-prompt_panel = NodePath("VBoxContainer/PromptPanel")
-prompt_text_box = NodePath("VBoxContainer/PromptPanel/Prompt")
+buttons = [NodePath("MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer/A"), NodePath("MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer/B"), NodePath("MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer/C")]
+prompt_panel = NodePath("MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel")
+prompt_text_box = NodePath("MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/Prompt")
+employee_texture_rect = NodePath("MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Employee")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1850140781]
+[node name="Background" type="TextureRect" parent="." unique_id=2088356955]
 layout_mode = 2
-theme_override_constants/separation = 8
+texture = ExtResource("2_nb5rf")
 
-[node name="ClickThe" type="Label" parent="VBoxContainer" unique_id=1630240847]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2086730106]
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "click the . . ."
-horizontal_alignment = 1
+theme_override_constants/margin_left = 680
+theme_override_constants/margin_top = 680
+theme_override_constants/margin_right = 940
+theme_override_constants/margin_bottom = 155
 
-[node name="PromptPanel" type="PanelContainer" parent="VBoxContainer" unique_id=1690713236]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=2129421319]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer2" unique_id=1707086457]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer2/MarginContainer2" unique_id=305716537]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.71379566, 0.71379566, 0.7137956, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/MarginContainer2" unique_id=1590473284]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tippy" type="TextureRect" parent="MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer" unique_id=1504543574]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -90)
+texture = ExtResource("3_y50b2")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="PromptPanel" type="Control" parent="MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy" unique_id=256743011]
 custom_minimum_size = Vector2(1000, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 offset_transform_enabled = true
 
-[node name="Prompt" type="Label" parent="VBoxContainer/PromptPanel" unique_id=1820295606]
-layout_mode = 2
-theme_override_font_sizes/font_size = 156
-text = "red square"
+[node name="Prompt" type="RichTextLabel" parent="MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel" unique_id=1752982742]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -577.5
+offset_right = -144.0
+offset_bottom = -227.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.13962634
+bbcode_enabled = true
+text = "[font_size=110][color=black]Click the[br][color=#00ff00ff]Blue A"
+fit_content = true
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=31575764]
+[node name="Employee" type="TextureRect" parent="MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer" unique_id=1282741107]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+texture = ExtResource("4_flrtv")
+stretch_mode = 6
+
+[node name="ButtonContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer2" unique_id=1427279196]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 30
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=496650234]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer2/ButtonContainer" unique_id=1452804329]
+layout_mode = 2
+color = Color(0.7137255, 0.7137255, 0.7137255, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer2/ButtonContainer" unique_id=605900742]
+layout_mode = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 64
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer" unique_id=1500228212]
+layout_mode = 2
+color = Color(0.5274172, 0.66598505, 0.7783834, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer" unique_id=196578255]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_rln5u")
-theme_override_colors/font_color = Color(0, 0, 1, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 1, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_rln5u")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xoenn")
-theme_override_styles/hover = SubResource("StyleBoxFlat_w52pr")
-text = "A"
-expand_icon = true
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
 
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1630732]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer" unique_id=804726017]
+layout_mode = 2
+
+[node name="A" parent="MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=1674219931 instance=ExtResource("5_flrtv")]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_rln5u")
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 1, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_ljywr")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_nb5rf")
-theme_override_styles/hover = SubResource("StyleBoxFlat_flrtv")
-text = "B"
-expand_icon = true
+color = Color(1, 0, 0, 1)
+letter = "A"
 
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1536439932]
+[node name="B" parent="MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=1743484422 instance=ExtResource("5_flrtv")]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("2_rln5u")
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_hthg1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_l7cm1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_e8fk2")
-text = "C"
-expand_icon = true
+color = Color(0, 0, 1, 1)
+letter_color = Color(0, 1, 0, 1)
+
+[node name="C" parent="MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=469461869 instance=ExtResource("5_flrtv")]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 1, 0, 1)
+letter = "C"
+letter_color = Color(1, 0, 0, 1)
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=613272079]
 stream = ExtResource("3_w52pr")

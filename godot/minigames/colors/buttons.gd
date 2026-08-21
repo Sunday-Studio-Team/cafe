@@ -1,13 +1,21 @@
+@tool
 extends Control
 
 const DELAY_AFTER_PRESSING_BUTTON := 0.75
 
-@export var buttons: Array[Button]
+@export var buttons: Array[MachineFixButton]
 @export var needed_successes: int = 3
 @export var prompt_panel: Control
-@export var prompt_text_box: Label
+@export var prompt_text_box: RichTextLabel
+@export var employee_texture_rect:TextureRect
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+
+@export_tool_button("Random Prompt") var action = show_new_prompt
+
+const employee_default:Texture2D = preload("res://sprites/machine_fix_buttons_minigame/tippy_buttons_normal.png")
+const employee_happy:Texture2D = preload("res://sprites/machine_fix_buttons_minigame/tippy_buttons_happy_1.png")
+const employee_anxiety:Texture2D = preload("res://sprites/machine_fix_buttons_minigame/tippy_buttons_anx_1.png")
 
 var successes: int = 0
 var colors = [Color.RED, Color.BLUE, Color.GREEN]
@@ -23,29 +31,33 @@ var current_prompt: String
 
 
 func _ready():
-	for button: Button in buttons:
-		button.pressed.connect(
+	for container: MachineFixButton in buttons:
+		container.button.pressed.connect(
 			func():
-				_on_button_pressed(buttons.find(button)),
+				_on_button_pressed(buttons.find(container)),
 		)
-
 	show_new_prompt()
 
+func set_employee_face(texture:Texture2D=employee_default):
+	employee_texture_rect.texture = texture
 
 func show_new_prompt():
+	set_employee_face()
 	current_prompt = prompts_and_corresponding_buttons.keys().pick_random()
-	prompt_text_box.text = current_prompt
+	var color:String = str("#",(colors.pick_random() as Color).to_html())
 	prompt_text_box.add_theme_color_override("font_color", colors.pick_random())
-
+	prompt_text_box.text = "[font_size=110][color=black]Click the[br][color=%s]%s" % [color,current_prompt]
 
 func _on_button_pressed(button_index: int):
 	if prompts_and_corresponding_buttons[current_prompt] == button_index + 1:
 		correct_sound.play()
 		correct_sound.pitch_scale += 0.1
-		prompt_text_box.text = "✅"
+		prompt_text_box.text = "[font_size=220]✅"
+		set_employee_face(employee_happy)
 		successes += 1
 	else:
-		prompt_text_box.text = "❌"
+		set_employee_face(employee_anxiety)
+		prompt_text_box.text = "[font_size=220]❌"
 		wrong_sound.play()
 		var shake_tween := create_tween().set_trans(Tween.TRANS_SPRING)
 		shake_tween.tween_property(prompt_panel, "offset_transform_position_ratio:x", 0.1, 0.1)
