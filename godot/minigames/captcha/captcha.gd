@@ -32,8 +32,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func populate_captcha() -> void:
-	var captcha_slots = captcha.get_children() as Array[IngredientIconHolder]
-	var slots_with_our_ingredients: Array[IngredientIconHolder]
+	var captcha_slots_to_fill = captcha.get_children() as Array[IngredientIconHolder]
 
 	# get the ingredients from the ordered drink and put them each in one of the
 	# slots in the captcha
@@ -43,14 +42,13 @@ func populate_captcha() -> void:
 		ordered_drink.extra,
 	]:
 		if ingredient != null and ingredient.name != Ingredient.Ingredient_Label.NONE:
-			var random_icon_holder: IngredientIconHolder = captcha_slots.pick_random()
+			var random_icon_holder: IngredientIconHolder = captcha_slots_to_fill.pick_random()
 			random_icon_holder.ingredient = ingredient
-			slots_with_our_ingredients.append(random_icon_holder)
+			captcha_slots_to_fill.erase(random_icon_holder)
 
 	# fill in the rest of the slots with random ingredients
-	for captcha_icon: IngredientIconHolder in captcha_slots:
-		if not slots_with_our_ingredients.has(captcha_icon):
-			captcha_icon.ingredient = Global.ingredients.pick_random()
+	for captcha_icon: IngredientIconHolder in captcha_slots_to_fill:
+		captcha_icon.ingredient = Global.ingredients.pick_random()
 
 
 func populate_order_reminder() -> void:
