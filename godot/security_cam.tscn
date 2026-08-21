@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_8ad36"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="3_j0k3h"]
 [ext_resource type="PackedScene" uid="uid://cmy2r1onge1xx" path="res://Assets/Camera/camera.glb" id="3_qlhcy"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="5_jdgwh"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="6_0j8nf"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="7_ebrmn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3jiq"]
 albedo_color = Color(0.46034718, 0.46034718, 0.46034712, 1)
@@ -47,21 +50,30 @@ radius = 0.75
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.22352941)
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "timer", "interactable", "caught_audio_stream_player_3d")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_sghrc"]
+viewport_path = NodePath("DisabledTimerSprite/SubViewport")
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disabled_timer_sprite", "disabled_timer_bar")]
 script = ExtResource("1_w3jiq")
 _shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
 spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
 camera_aimer_node = NodePath("CameraAimerModel")
 aim_path_follow_3d = NodePath("AimPath3D/AimPathFollow3D")
-timer = NodePath("GraceTimer")
+grace_timer = NodePath("GraceTimer")
+disabled_timer = NodePath("DisabledTimer")
 interactable = NodePath("SabotageInteractable")
 caught_audio_stream_player_3d = NodePath("AudioStreamPlayer3D")
+disabled_timer_sprite = NodePath("DisabledTimerSprite")
+disabled_timer_bar = NodePath("DisabledTimerSprite/SubViewport/TextureProgressBar")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=706302561]
 stream = ExtResource("3_j0k3h")
 
 [node name="GraceTimer" type="Timer" parent="." unique_id=2144038531]
 wait_time = 2.5
+one_shot = true
+
+[node name="DisabledTimer" type="Timer" parent="." unique_id=478179154]
 one_shot = true
 
 [node name="CameraAimerModel" type="Node3D" parent="." unique_id=1953194644]
@@ -79,10 +91,10 @@ transform = Transform3D(1.5499998, 0, 0, 0, 0.87564456, -1.2789629, 0, 1.2789629
 [node name="camera" parent="CameraAimerModel/Model" unique_id=1944074621 instance=ExtResource("3_qlhcy")]
 transform = Transform3D(-0.4515773, -0.00734083, 0.003703244, -0.007246691, 0.25924936, -0.36976588, 0.0038842484, -0.36976397, -0.2593242, 0.0058659017, -0.020149954, 0.0857618)
 
-[node name="Cylinder_Cylinder" parent="CameraAimerModel/Model/camera" index="2" unique_id=1908547763]
+[node name="Cylinder_Cylinder" parent="CameraAimerModel/Model/camera" index="2" unique_id=868173451]
 transform = Transform3D(1.2503961, 0.014059592, 0.015266214, -0.0011158865, 0.88243234, -1.198308, -0.01790624, 0.92679477, 1.1407188, -0.089072615, 0.060985863, -0.39554608)
 
-[node name="Torus_004_Torus_004" parent="CameraAimerModel/Model/camera" index="3" unique_id=1791077073]
+[node name="Torus_004_Torus_004" parent="CameraAimerModel/Model/camera" index="3" unique_id=70328738]
 transform = Transform3D(0.9999595, 0.0059514605, 0.0068100933, -0.0019403454, 0.8766179, -0.4811833, -0.008833591, 0.48115033, 0.87659436, -0.0044638347, 0.029213324, -0.13744369)
 
 [node name="Body" type="MeshInstance3D" parent="CameraAimerModel/Model" unique_id=1938907329]
@@ -142,5 +154,30 @@ radius = 0.75
 height = 10.0
 sides = 16
 material = SubResource("StandardMaterial3D_qlhcy")
+
+[node name="DisabledTimerSprite" type="Sprite3D" parent="." unique_id=1674333602]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.09615041, -0.7481325, 0)
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_sghrc")
+
+[node name="SubViewport" type="SubViewport" parent="DisabledTimerSprite" unique_id=347062602]
+transparent_bg = true
+size = Vector2i(160, 160)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="DisabledTimerSprite/SubViewport" unique_id=17941410]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("5_jdgwh")
+texture_over = ExtResource("6_0j8nf")
+texture_progress = ExtResource("7_ebrmn")
+
+[node name="Label" type="Label3D" parent="DisabledTimerSprite" unique_id=424793455]
+sorting_offset = 1.0
+pixel_size = 0.01
+billboard = 1
+text = "⌛"
 
 [editable path="CameraAimerModel/Model/camera"]

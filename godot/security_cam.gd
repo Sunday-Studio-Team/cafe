@@ -1,6 +1,8 @@
 class_name SecurityCam3D
 extends Node3D
 
+const NUM_OF_MINIGAMES_TO_DISABLE := 1
+
 @export var _shape_cast_3d: ShapeCast3D
 @export var spotlight: SpotLight3D
 @export var camera_aimer_node: Node3D
@@ -9,11 +11,12 @@ extends Node3D
 @export var rotation_amount: float = 90
 @export var rotation_time: float = 3
 @export var rotation_pause_length: float = 2
-@export var timer: Timer
+@export var grace_timer: Timer
+@export var disabled_timer: Timer
 @export var interactable : Interactable
-# safe reference for when we use this item on a camera
-@export var tries_until_disabled: int = 3
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
+@export var disabled_timer_sprite: Sprite3D
+@export var disabled_timer_bar: TextureProgressBar
 
 # we duplicate the raycast many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -25,6 +28,7 @@ var _player_slow_status_effect: CameraSlowPlayerStatusEffect
 var _direction_multiplier: float = 1.0
 
 @onready var original_rotation := rotation_degrees
+@onready var tries_until_disabled := NUM_OF_MINIGAMES_TO_DISABLE
 
 
 func _ready() -> void:
@@ -35,7 +39,7 @@ func _ready() -> void:
 
 	visibility_changed.connect(_on_visibility_changed)
 	_update_camera_components_active()
-	
+
 	# Randomize progress along path
 	aim_path_follow_3d.progress_ratio = randf_range(0.0, 1.0)
 	# Randomize direction multiplier
@@ -45,12 +49,22 @@ func _ready() -> void:
 	else:
 		_direction_multiplier = -1.0
 
+	get_stats()
+	Events.items_updated.connect(get_stats)
+
+
+func get_stats() -> void:
+	disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
+
 
 func _physics_process(_delta: float) -> void:
+	disabled_timer_sprite.visible = not disabled_timer.is_stopped()
+	disabled_timer_bar.value = 100 - disabled_timer.time_left / disabled_timer.wait_time * 100
+
 	if not visible or _camera_disarmed:
 		return
 
-	if not timer.is_stopped():
+	if not grace_timer.is_stopped():
 		spotlight.light_color = Color.DIM_GRAY
 		return
 
@@ -64,16 +78,16 @@ func _physics_process(_delta: float) -> void:
 				if collider == Global.player:
 					var apply_slow: bool = false
 					if Global.player.is_sprinting() and Global.player.get_last_motion() != Vector3.ZERO:
-						timer.start()
+						grace_timer.start()
 						Events.alert_posted.emit("caught running")
 						apply_slow = true
 					elif Global.making_drink_manually:
-						timer.start()
+						grace_timer.start()
 						Events.alert_posted.emit("caught making drink by hand")
 						if Global.machine_in_use != null:
 							Global.machine_in_use.blast_player_from_using_machine()
 						apply_slow = true
-					
+
 					if apply_slow:
 						if _player_slow_status_effect != null:
 							Global.player.player_status_effects.remove_status_effect(_player_slow_status_effect)
@@ -89,10 +103,12 @@ func _physics_process(_delta: float) -> void:
 	else:
 		spotlight.light_color = Color.WHITE
 
-	interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
-	
+	# commenting cos it only takes 1 minigame to disable for now
+	#interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
+
 	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
 	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
+
 
 func _on_visibility_changed() -> void:
 	_update_camera_components_active()
@@ -149,7 +165,9 @@ func try_disable_camera() -> void:
 	tries_until_disabled -= 1
 	if tries_until_disabled <= 0:
 		disarm_camera()
-		await get_tree().create_timer(20, false).timeout
+		tries_until_disabled = NUM_OF_MINIGAMES_TO_DISABLE
+		disabled_timer.start()
+		await disabled_timer.timeout
 		rearm_camera()
 
 

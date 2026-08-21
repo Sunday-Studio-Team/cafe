@@ -64,3 +64,4 @@ var tip_per_star_rating: float = 3.0
 var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
+var time_camera_disabled_after_sabotage := 30.0
