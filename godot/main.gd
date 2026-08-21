@@ -1,8 +1,5 @@
 extends Node3D
 
-static var seen_interaction_popup := false
-static var seen_breakdown_popup := false
-
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
@@ -31,8 +28,6 @@ static var seen_breakdown_popup := false
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var interaction_popup: CanvasLayer
-@export var breakdown_popup: CanvasLayer
 @export var special_shift_icon: TextureRect
 @export var special_shift_text: Label
 @export var special_shift_title: Label
@@ -106,10 +101,6 @@ func _ready() -> void:
 	get_stats()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
-	if Global.day == 1:
-		if not OS.has_feature("editor"):
-			_tutorial_manager.show_tutorial()
-			await _tutorial_manager.finished_tutorial
 
 	for ui_element: Control in ui.find_children("*", "Control", false):
 		ui_element.modulate = Color.TRANSPARENT
@@ -137,9 +128,9 @@ func _ready() -> void:
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
-	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-	# 	Global.popups["special shift"].open()
-	
+	#if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		#Global.popups["special shift"].open()
+
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
 

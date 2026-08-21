@@ -205,13 +205,13 @@ camera_posters = [null, null, null]
 minigame_controller = NodePath("MinigameController")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
-special_shift_icon = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
-special_shift_text = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
-special_shift_title = NodePath("SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
+special_shift_icon = NodePath("SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
+special_shift_text = NodePath("SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
+special_shift_title = NodePath("SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
 teleporter1 = NodePath("Teleporter1")
 teleporter2 = NodePath("Teleporter2")
 teleporter3 = NodePath("Teleporter3")
-tutorial_selection_menu = NodePath("TutorialSelectionMenu")
+tutorial_selection_menu = NodePath("TrainingSkipMenu")
 whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
 waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
 tippy_voice_player = NodePath("TippyVoiceLinePlayer")
@@ -233,7 +233,7 @@ visible = false
 [node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
 visible = false
 
-[node name="TutorialSelectionMenu" parent="." unique_id=1397742482 instance=ExtResource("20_4obbf")]
+[node name="TrainingSkipMenu" parent="." unique_id=1397742482 instance=ExtResource("20_4obbf")]
 layer = 2
 visible = false
 
@@ -1410,144 +1410,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MachineInteractionPopup" type="CanvasLayer" parent="." unique_id=1183147259]
-process_mode = 3
-visible = false
-script = ExtResource("287_4fms3")
-popup_id = "interaction"
-
-[node name="InputBlocker" type="Control" parent="MachineInteractionPopup" unique_id=412772111]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="MachineInteractionPopup/InputBlocker" unique_id=794177971]
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("124_1iygd")
-
-[node name="MarginContainer" type="MarginContainer" parent="MachineInteractionPopup/InputBlocker/TextureRect" unique_id=1483955226]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.94900006
-offset_right = -712.0
-offset_bottom = -529.92004
-theme_override_constants/margin_left = 400
-theme_override_constants/margin_top = 300
-
-[node name="Label" type="Label" parent="MachineInteractionPopup/InputBlocker/TextureRect/MarginContainer" unique_id=1045934740]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 70
-text = "Click on an option to
-interact with the machine"
-
-[node name="TextureButton" type="TextureButton" parent="MachineInteractionPopup/InputBlocker" unique_id=1126942917]
-layout_mode = 0
-offset_left = 1590.0
-offset_top = 167.0
-offset_right = 2216.0
-offset_bottom = 793.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("125_g5xqc")
-
-[node name="MachineTutorialAcceptPopup" type="CanvasLayer" parent="." unique_id=1844326657]
-
-[node name="MachineBreakdownPopup" type="CanvasLayer" parent="." unique_id=564086082]
-process_mode = 3
-visible = false
-script = ExtResource("287_4fms3")
-popup_id = "breakdown"
-
-[node name="InputBlocker" type="Control" parent="MachineBreakdownPopup" unique_id=14118040]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="MachineBreakdownPopup/InputBlocker" unique_id=1083735692]
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("124_1iygd")
-
-[node name="MarginContainer" type="MarginContainer" parent="MachineBreakdownPopup/InputBlocker/TextureRect" unique_id=1756986695]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.94900006
-offset_right = -712.0
-offset_bottom = -529.92004
-theme_override_constants/margin_left = 400
-theme_override_constants/margin_top = 300
-
-[node name="Label" type="Label" parent="MachineBreakdownPopup/InputBlocker/TextureRect/MarginContainer" unique_id=211088944]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 70
-text = "Walk up to the broken machine
-and press E to fix it"
-
-[node name="TextureButton" type="TextureButton" parent="MachineBreakdownPopup/InputBlocker" unique_id=932780726]
-layout_mode = 0
-offset_left = 1590.0
-offset_top = 167.0
-offset_right = 2216.0
-offset_bottom = 793.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("125_g5xqc")
-
-[node name="CustomerComplaintPopup" type="CanvasLayer" parent="." unique_id=1328361687]
-process_mode = 3
-visible = false
-script = ExtResource("287_4fms3")
-popup_id = "complaint"
-
-[node name="InputBlocker" type="Control" parent="CustomerComplaintPopup" unique_id=1917233431]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="CustomerComplaintPopup/InputBlocker" unique_id=731648011]
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("124_1iygd")
-
-[node name="MarginContainer" type="MarginContainer" parent="CustomerComplaintPopup/InputBlocker/TextureRect" unique_id=1766302123]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.94900006
-offset_right = -712.0
-offset_bottom = -529.92004
-theme_override_constants/margin_left = 400
-theme_override_constants/margin_top = 300
-
-[node name="Label" type="Label" parent="CustomerComplaintPopup/InputBlocker/TextureRect/MarginContainer" unique_id=1701895760]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 70
-text = "A customer has a complaint.
-Talk to them at the counter"
-
-[node name="TextureButton" type="TextureButton" parent="CustomerComplaintPopup/InputBlocker" unique_id=1788235375]
-layout_mode = 0
-offset_left = 1590.0
-offset_top = 167.0
-offset_right = 2216.0
-offset_bottom = 793.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("125_g5xqc")
-
-[node name="SpecialShiftPop" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
+[node name="SpecialShiftPopup" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
 process_mode = 3
 visible = false
 script = ExtResource("287_4fms3")
@@ -1556,30 +1419,30 @@ text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxCont
 title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
 icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
 
-[node name="InputBlocker" type="Control" parent="SpecialShiftPop" unique_id=317794041]
+[node name="InputBlocker" type="Control" parent="SpecialShiftPopup" unique_id=317794041]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="SpecialShiftPop/InputBlocker" unique_id=1463248199]
+[node name="TextureRect" type="TextureRect" parent="SpecialShiftPopup/InputBlocker" unique_id=1463248199]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("124_1iygd")
 
-[node name="MarginContainer" type="MarginContainer" parent="SpecialShiftPop/InputBlocker/TextureRect" unique_id=460616503]
+[node name="MarginContainer" type="MarginContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect" unique_id=460616503]
 layout_mode = 0
 offset_left = 268.0
 offset_top = 245.0
 offset_right = 1575.0
 offset_bottom = 650.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer" unique_id=785505753]
+[node name="HBoxContainer" type="HBoxContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer" unique_id=785505753]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=2011957646]
+[node name="TextureRect" type="TextureRect" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=2011957646]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1587,11 +1450,11 @@ size_flags_vertical = 4
 texture = ExtResource("128_s4o1y")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=745760569]
+[node name="VBoxContainer" type="VBoxContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=745760569]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=533747834]
+[node name="Title" type="Label" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=533747834]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
 theme_override_font_sizes/font_size = 80
@@ -1599,7 +1462,7 @@ text = "Shift Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Body" type="Label" parent="SpecialShiftPop/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=860561688]
+[node name="Body" type="Label" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=860561688]
 custom_maximum_size = Vector2(1100, 800)
 layout_mode = 2
 size_flags_vertical = 3
@@ -1608,7 +1471,7 @@ theme_override_font_sizes/font_size = 40
 text = "This is a description."
 autowrap_mode = 3
 
-[node name="TextureButton" type="TextureButton" parent="SpecialShiftPop/InputBlocker" unique_id=916961120]
+[node name="TextureButton" type="TextureButton" parent="SpecialShiftPopup/InputBlocker" unique_id=916961120]
 layout_mode = 0
 offset_left = 1590.0
 offset_top = 167.0

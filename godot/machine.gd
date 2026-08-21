@@ -9,8 +9,6 @@ const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
 const REFILL_MINIGAME := "Refill"
 
-static var seen_breakdown_popup := false
-
 @export var static_body: StaticBody3D
 @export var gui_3d: Gui3D
 @export var timer: Timer
@@ -63,7 +61,6 @@ static var seen_breakdown_popup := false
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export_category("Popups")
-@export var popup_storage_room: PackedScene # tutorial popup that tells player to go to the storage room
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
 var customer: Customer
@@ -142,10 +139,6 @@ func _process(_delta: float) -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
 		ingredients_bar.modulate = Color.RED
-
-		#shows tutorial (checks inside if it's appropriate to show)
-		show_tutorial_where_is_storeroom()
-
 	else:
 		if ingredients <= Stats.current.machine_max_ingredients / 2.0:
 			ingredients_bar.modulate = Color.YELLOW
@@ -239,53 +232,6 @@ func blast_player_from_using_machine() -> void:
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
 
 	Global.player.velocity += launch_vector
-
-
-func show_tutorial_where_is_storeroom() -> void:
-	#this is getting called within physics_process...
-	#check values in global
-	#and then immediately turn those values to 'tutorial has been shown',
-	if (Global.day == 0) or OS.has_feature("skip_popups"):
-		return
-
-	if Global.tutorial_refill_shown == false:
-		Global.tutorial_refill_shown = true
-		
-		while (Global.in_ui):
-			await get_tree().create_timer(0.25).timeout
-			#janky way to make sure the popup tutorial does not show up while in a menu/minigame
-		
-		await get_tree().create_timer(0.75).timeout # allows audio to play first
-		
-		Global.in_tutorial_screen = true
-
-		#hide tablet so it's not in the way.
-		var tablet = get_parent().get_parent().find_child("Tablet")
-		tablet.hide()
-
-		var popup = popup_storage_room.instantiate()
-		add_child(popup)
-		get_tree().paused = true # this kinda works but its janky
-		var next_label = popup.get_node("NextButton/NextLabel")
-		next_label.text = "Okay"
-
-		var button = popup.get_node("NextButton")
-		#button.move_to_front() #this was an attempt to fix issue, does not really do anything
-		popup.process_mode = Node.PROCESS_MODE_ALWAYS
-
-		button.pressed.connect(
-			func():
-				get_tree().paused = false
-				popup.queue_free()
-		)
-
-		#add functionality to allow use of Esc
-		#add functionality so that button makes popup disappear
-		#hide tablet
-
-		await popup.tree_exited # delays some code until event occurs
-		tablet.show()
-		Global.in_tutorial_screen = false # re enable pause
 
 
 func set_order_action_buttons_available(button_case: String) -> void:
@@ -760,10 +706,6 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
-	# Showing the popup tutorial when the machine is broken
-	if not seen_breakdown_popup:
-		seen_breakdown_popup = true # Only showing it once
-		Global.popups["breakdown"].open()
 
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
