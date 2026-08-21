@@ -434,18 +434,22 @@ func update_interactable_ui() -> void:
 		# TODO: replace some of these unsafe refs with the item names with refs
 		# to the actual items as export vars
 
+		var equipped_item := Global.equipped_item
+
 		if (
 				hovered_interactable.name == "FixMachineButton"
-				and Global.equipped_item != null
-				and Global.equipped_item == hammer
+				and equipped_item != null
+				and equipped_item.item_id == "hammer"
+				and equipped_item.can_be_used
 		):
 			item_indicator.show()
 			item_text.text = "[Q] HAMMER 💥"
 
 		elif (
 				hovered_interactable.display_name.contains("camera")
-				and Global.equipped_item != null
-				and Global.equipped_item == whipped_cream
+				and equipped_item != null
+				and equipped_item.item_id == "whipped_cream"
+				and equipped_item.can_be_used
 		):
 			item_indicator.show()
 			item_text.text = "[Q] WHIPPED CREAM"
@@ -495,6 +499,7 @@ func _update_rating() -> void:
 	
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
+
 
 func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():
