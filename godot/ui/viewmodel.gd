@@ -35,7 +35,9 @@ func _process(_delta: float) -> void:
 func _on_frame_changed() -> void:
 	if sprite.frame == 21 and sprite.animation == "hammer_use":
 		Events.hammer_animation_hit.emit()
-	elif sprite.frame == 9 and sprite.animation == "bag_pickup":
+	elif sprite.animation == "bag_pickup" and not Global.holding_ingredients:
+		sprite.play("default")
+	elif sprite.frame == 7 and sprite.animation == "bag_pickup":
 		Events.bag_pickup_animation_grabbed.emit()
 
 

@@ -51,6 +51,11 @@ func _ready() -> void:
 
 	get_stats()
 	Events.items_updated.connect(get_stats)
+	interactable.visible = false
+	Events.shift_started.connect(
+		func():
+			interactable.visible = true
+	)
 
 
 func get_stats() -> void:
