@@ -158,13 +158,21 @@ metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
 
+[sub_resource type="Curve3D" id="Curve3D_1yv1y"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.2787304, 0, -0.6934252, 0, 0, 0, 0, 0, 0, 1.6884236, -0.14100003, 1.0052791, 0, 0, 0, 0, 0, 0, -0.65226126, -0.14100003, 1.9012499, 0, 0, 0, 0, 0, 0, -1.3193774, -0.14100003, 0.37446022, 0, 0, 0, 0, 0, 0, -1.7369752, -0.14100003, -0.7691543, 0, 0, 0, 0, 0, 0, -0.9964194, -0.14100003, -1.6095676, 0, 0, 0, 0, 0, 0, 0.39631987, -0.14100003, -1.8792813),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.9674349, -0.14133549, 0.37266684, 0, 0, 0, 0, 0, 0, 1.2822933, -0.14133549, 1.7030587, 0, 0, 0, 0, 0, 0, -1.425354, -0.14133549, 1.8031206, 0, 0, 0, 0, 0, 0, -1.7179842, -0.14133525, 0.09962416, 0, 0, 0, 0, 0, 0, -1.66679, -0.14133549, -1.8155394, 0, 0, 0, 0, 0, 0, 1.8930559, -0.14133549, -1.6656036),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.3646345, -0.14133549, -0.23825216, 0, 0, 0, 0, 0, 0, 1.2822933, -0.14133549, 1.7030587, 0, 0, 0, 0, 0, 0, -1.6694646, -0.14133549, 1.6461668, 0, 0, 0, 0, 0, 0, -2.1775799, -0.14133525, 0.09962416, 0, 0, 0, 0, 0, 0, -2.2664633, -0.14133549, -1.8155394, 0, 0, 0, 0, 0, 0, -0.042063236, -0.144351, -1.9403653, 0, 0, 0, 0, 0, 0, 0.04756546, -0.14133549, -0.4412341),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 6
+point_count = 7
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
 closed = true
@@ -174,13 +182,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="Curve3D" id="Curve3D_1yv1y"]
+[sub_resource type="Curve3D" id="Curve3D_g3y5b"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 1.2787304, 0, -0.6934252, 0, 0, 0, 0, 0, 0, 1.6884236, -0.14100003, 1.0052791, 0, 0, 0, 0, 0, 0, -0.65226126, -0.14100003, 1.9012499, 0, 0, 0, 0, 0, 0, -1.3193774, -0.14100003, 0.37446022, 0, 0, 0, 0, 0, 0, -1.7369752, -0.14100003, -0.7691543, 0, 0, 0, 0, 0, 0, -0.9964194, -0.14100003, -1.6095676, 0, 0, 0, 0, 0, 0, 0.39631987, -0.14100003, -1.8792813),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.9857298, -0.14100003, -1.25632, 0, 0, 0, 0, 0, 0, 1.9366394, -0.14100003, -0.22045803, 0, 0, 0, 0, 0, 0, 1.8751656, -0.14100003, 0.9885745, 0, 0, 0, 0, 0, 0, 1.0215527, -0.14100003, 1.9086924, 0, 0, 0, 0, 0, 0, -0.35155213, -0.14100003, 2.1390781, 0, 0, 0, 0, 0, 0, -1.665934, -0.14100003, 1.3223314, 0, 0, 0, 0, 0, 0, -1.765494, -0.14100003, -0.22566223, 0, 0, 0, 0, 0, 0, -0.59757805, -0.14100003, -1.1739569),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 7
+point_count = 8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
 albedo_color = Color(1, 0, 0, 1)
@@ -443,23 +451,27 @@ bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_cameras", "menu", "first_machine", "second_machine", "third_machine", "fourth_machine", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "_customer_help_desk", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
 _tutorial_manager = NodePath("TutorialManager")
 _world_environment = NodePath("WorldEnvironment")
-_cameras = [NodePath("SecurityCams/SecurityCam"), NodePath("SecurityCams/SecurityCam2"), NodePath("SecurityCams/SecurityCam3")]
+_left_area_camera = NodePath("SecurityCams/LeftAreaSecurityCam")
+_middle_camera = NodePath("SecurityCams/MiddleSecurityCam")
+_right_area_camera = NodePath("SecurityCams/RightAreaSecurityCam")
+_hallway_camera = NodePath("SecurityCams/HallwaySecurityCam")
 menu = NodePath("Menu")
-first_machine = NodePath("Machines/Machine")
-second_machine = NodePath("Machines/Machine2")
-third_machine = NodePath("Machines/Machine3")
-fourth_machine = NodePath("Machines/Machine4")
+_right_area_left_machine = NodePath("Machines/RightAreaLeftMachine")
+_right_area_right_machine = NodePath("Machines/RightAreaRightMachine")
+_left_area_left_machine = NodePath("Machines/LeftAreaLeftMachine")
+_left_area_middle_machine = NodePath("Machines/LeftAreaMiddleMachine")
+_left_area_right_machine = NodePath("Machines/LeftAreaRightMachine")
+_customer_help_desk = NodePath("CustomerHelpDesk")
 customer_scene = ExtResource("3_h2yge")
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
-_customer_help_desk = NodePath("CustomerHelpDesk")
 ui = NodePath("UI")
 day_indicator = NodePath("DayIndicator/Label")
 desk = NodePath("Desk")
@@ -518,58 +530,75 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -4.4)
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05381441, 0)
 
-[node name="Machine" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
-
-[node name="Machine2" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
+[node name="RightAreaLeftMachine" parent="Machines" unique_id=1963636817 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
 
-[node name="Machine3" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.33386397)
+[node name="RightAreaRightMachine" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 
-[node name="Machine4" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.7)
+[node name="LeftAreaLeftMachine" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.8389482)
+
+[node name="LeftAreaMiddleMachine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -1.1309242)
+
+[node name="LeftAreaRightMachine" parent="Machines" unique_id=912957935 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.6331055)
 
 [node name="CustomerHelpDesk" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 4.0535426)
 
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
 
-[node name="SecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.962635, 2.8413355, 4.6095347)
+[node name="LeftAreaSecurityCam" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
+transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.9940248, 2.841, -1.0650823)
+
+[node name="SpotLight3D" parent="SecurityCams/LeftAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
+spot_angle = 25.0
+
+[node name="AimPath3D" parent="SecurityCams/LeftAreaSecurityCam" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_1yv1y")
+
+[node name="AimPathFollow3D" parent="SecurityCams/LeftAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
+
+[node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
 rotation_pause_length = 4.0
 
-[node name="AimPath3D" parent="SecurityCams/SecurityCam" index="4" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/MiddleSecurityCam" index="4" unique_id=1994339220]
 curve = SubResource("Curve3D_ovcoh")
 
-[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.88902724, 0, 0.45784253, 0, 0.99999255, 0, -0.4578422, 0, -0.8890279, 1.9674349, -0.14133549, 0.37266684)
+[node name="AimPathFollow3D" parent="SecurityCams/MiddleSecurityCam/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
-[node name="SecurityCam2" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
+[node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
 rotation_time = 2.0
 rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam2/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
+[node name="SpotLight3D" parent="SecurityCams/RightAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="AimPath3D" parent="SecurityCams/SecurityCam2" index="4" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/RightAreaSecurityCam" index="4" unique_id=1994339220]
 curve = SubResource("Curve3D_ppx11")
 
-[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam2/AimPath3D" index="0" unique_id=1068131204]
+[node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
-[node name="SecurityCam3" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
-transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.9940248, 2.841, -1.0650823)
+[node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
+rotation_time = 2.0
+rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCams/SecurityCam3/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
-spot_angle = 25.0
+[node name="SpotLight3D" parent="SecurityCams/HallwaySecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1382585707, 1953194644) index="0" unique_id=1348601655]
+spot_angle = 21.0
 
-[node name="AimPath3D" parent="SecurityCams/SecurityCam3" index="4" unique_id=1994339220]
-curve = SubResource("Curve3D_1yv1y")
+[node name="AimPath3D" parent="SecurityCams/HallwaySecurityCam" index="4" unique_id=1994339220]
+curve = SubResource("Curve3D_g3y5b")
 
-[node name="AimPathFollow3D" parent="SecurityCams/SecurityCam3/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
+[node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -1759,9 +1788,11 @@ offset_bottom = 793.0
 scale = Vector2(0.3, 0.3)
 texture_normal = ExtResource("125_g5xqc")
 
-[editable path="SecurityCams/SecurityCam"]
-[editable path="SecurityCams/SecurityCam/CameraAimerModel/Model/camera"]
-[editable path="SecurityCams/SecurityCam2"]
-[editable path="SecurityCams/SecurityCam2/CameraAimerModel/Model/camera"]
-[editable path="SecurityCams/SecurityCam3"]
-[editable path="SecurityCams/SecurityCam3/CameraAimerModel/Model/camera"]
+[editable path="SecurityCams/LeftAreaSecurityCam"]
+[editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
+[editable path="SecurityCams/MiddleSecurityCam"]
+[editable path="SecurityCams/MiddleSecurityCam/CameraAimerModel/Model/camera"]
+[editable path="SecurityCams/RightAreaSecurityCam/CameraAimerModel/Model/camera"]
+[editable path="SecurityCams/RightAreaSecurityCam"]
+[editable path="SecurityCams/HallwaySecurityCam"]
+[editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
