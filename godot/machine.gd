@@ -211,7 +211,7 @@ func _process_queued_customers() -> void:
 
 func check_for_stepping_in_spill() -> void:
 	if spill_on_floor:
-		Global.score_update_message = "customer upset for stepping in spill!"
+		Global.score_update_message = "customer stood in spill!"
 		Global.employee_rating -= Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
 
 
@@ -320,7 +320,7 @@ func _set_customer(new_customer: Customer) -> void:
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if customer == timed_out_customer:
-		Global.score_update_message = "customer didn't get drink in time"
+		Global.score_update_message = "customer left"
 		Global.employee_rating -= Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		customer.leave_store()
 		_set_customer(null)
@@ -660,11 +660,11 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
-			Global.score_update_message = "customer happy for remade %s!" % [order.made_drink.name]
+			Global.score_update_message = "rated %s" % [order.made_drink.name]
 			Global.employee_rating += order.star_rating_gain_for_remake
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
-			Global.score_update_message = "customer upset for incorrect %s!" % [order.made_drink.name]
+			Global.score_update_message = "rated %s" % [order.made_drink.name]
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	# stagger showing the update popups for rating and money if both changed
