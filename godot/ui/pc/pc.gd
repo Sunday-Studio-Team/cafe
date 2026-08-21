@@ -8,8 +8,8 @@ extends Control
 ## regular game hud
 @export var ui: CanvasLayer
 @export var irl_new_shop_items_indicator: Label3D
-
 @export var unread_label:Label
+@export var click_sound: AudioStreamPlayer
 var new_shop_items := true
 
 
@@ -29,6 +29,13 @@ func _ready() -> void:
 	if Global.day == 1:
 		shop_button.hide()
 	set_unread_count()
+	
+	for button: Button in find_children("*", "Button"):
+		button.pressed.connect(
+			func():
+				if not button == exit_button:
+					click_sound.play()
+		)
 	
 
 func _process(_delta: float) -> void:

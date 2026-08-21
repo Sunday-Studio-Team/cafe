@@ -10,12 +10,19 @@ extends SubViewportContainer
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
+@export var click_sound: AudioStreamPlayer
 
 var ordered_drink: Drink
 var main_text: String = "The required ingredients"
 
 
 func _ready() -> void:
+	for slot: IngredientIconHolder in captcha.get_children():
+		slot.button.pressed.connect(
+			func():
+				click_sound.play(),
+		)
+
 	_start_minigame()
 
 

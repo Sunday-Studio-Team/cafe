@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/captcha/captcha.gd" id="1_pitvc"]
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
+[ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
+[ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
+[ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnsl6"]
 bg_color = Color(0.28627452, 0.5647059, 0.8862745, 1)
@@ -16,7 +19,14 @@ bg_color = Color(0.21702155, 0.42809728, 0.671875, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uevaj"]
 bg_color = Color(0.3121078, 0.61610895, 0.96875, 1)
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("4_juyqc")
+stream_1/stream = ExtResource("5_w8b1k")
+stream_2/stream = ExtResource("6_p8bru")
+
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder", "click_sound")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,6 +42,7 @@ instructions = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopB
 drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
 entire_panel = NodePath("SubViewport/Captcha")
 order_reminder = NodePath("SubViewport/IngredientsReminder")
+click_sound = NodePath("ClickSound")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false
@@ -217,5 +228,9 @@ vertical_alignment = 1
 [node name="IngredientIconHolder2" parent="SubViewport/InstructionWithImage" unique_id=954410995 instance=ExtResource("2_c5i2p")]
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -5.0
 
 [connection signal="pressed" from="SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
