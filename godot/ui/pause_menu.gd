@@ -3,7 +3,7 @@ extends CanvasLayer
 
 signal tutorial_requested
 
-enum State { NORMAL, CONFIRMING_RESTART, CONFIRMING_QUIT }
+enum State { NORMAL, IN_OPTIONS, CONFIRMING_RESTART, CONFIRMING_QUIT }
 
 @export var _continue_button: Button
 @export var _tutorial_button: Button
@@ -24,7 +24,10 @@ var state: State = State.NORMAL:
 		state = new_state
 		match state:
 			State.CONFIRMING_RESTART:
-				sure_info_label.text = "(this means going back to day 1!)"
+				if SaveDataManager.save_data.finished_or_skipped_tutorial:
+					sure_info_label.text = "(this means going back to day 1!)"
+				else:
+					sure_info_label.text = "(this means losing all progress!)"
 			State.CONFIRMING_QUIT:
 				sure_info_label.text = "(this means losing all progress!)"
 
@@ -54,7 +57,8 @@ func _ready() -> void:
 					# NOTE: shouldnt this not be visible on restart anyway ? idk
 					visible = false
 					get_tree().paused = false
-					Global.day = 1
+					if SaveDataManager.save_data.finished_or_skipped_tutorial:
+						Global.day = 1
 					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 	)
 	no_sure_button.pressed.connect(not_sure)
@@ -67,7 +71,11 @@ func _process(_delta: float) -> void:
 			Input.is_action_just_pressed("pause")
 			and not Global.in_ui
 	):
-		if state == State.NORMAL:
+		if state == State.IN_OPTIONS:
+			# the options menu itself handles hiding, we just make eat the input
+			# and set the state here
+			state = State.NORMAL
+		elif state == State.NORMAL:
 			_toggle_pause()
 		else:
 			not_sure()
@@ -118,6 +126,8 @@ func _toggle_pause() -> void:
 func _on_tutorial_button_pressed() -> void:
 	tutorial_requested.emit()
 
+
 func _on_options_button_pressed() -> void:
+	state = State.IN_OPTIONS
 	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()
 	add_sibling(options_menu, true)

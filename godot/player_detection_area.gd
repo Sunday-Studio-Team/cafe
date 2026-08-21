@@ -24,8 +24,8 @@ func _on_body_exited(body: Node3D):
 
 
 func show_tutorial_this_is_camera()-> void:
-	if OS.has_feature("skip_popups"):
-		return
+	#if OS.has_feature("skip_popups"):
+	return
 	# janky way to make sure the popup tutorial does not show up while in a menu/minigame
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout

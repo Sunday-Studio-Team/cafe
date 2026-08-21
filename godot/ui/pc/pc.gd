@@ -9,6 +9,7 @@ extends Control
 @export var ui: CanvasLayer
 @export var irl_new_shop_items_indicator: Label3D
 
+@export var unread_label:Label
 var new_shop_items := true
 
 
@@ -27,7 +28,8 @@ func _ready() -> void:
 	# we dont even have money for shop on day 1 sooo
 	if Global.day == 1:
 		shop_button.hide()
-
+	set_unread_count()
+	
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("pause") and Global.in_pc_ui):
@@ -40,7 +42,7 @@ func _process(_delta: float) -> void:
 		if not in_app:
 			exit()
 
-	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day == 1
+	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day < 2
 
 
 func exit() -> void:
@@ -57,3 +59,10 @@ func _on_email_button_pressed() -> void:
 func _on_shop_button_pressed() -> void:
 	shop_app.show()
 	new_shop_items = false
+
+
+func set_unread_count():
+	unread_label.visible = false
+	unread_label.text = str(Global.unread_email_count)
+	if Global.unread_email_count != 0:
+		unread_label.visible = true

@@ -12,39 +12,38 @@
 size = Vector3(0.2, 2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
-size = Vector3(1.1627197, 1, 4.01709)
+size = Vector3(1.1627197, 1, 2.4090576)
 
-[node name="CafeBreakRoomDoor" type="Node3D" unique_id=1466363411 node_paths=PackedStringArray("open_sound", "close_sound", "exited_break_room_detection_area")]
-transform = Transform3D(-0.25881907, 0, 0.96592593, 0, 1, 0, -0.96592593, 0, -0.25881907, 0, 0, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fnanm"]
+size = Vector3(2.3068237, 1, 1.3675537)
+
+[node name="CafeBreakRoomDoor" type="Node3D" unique_id=1466363411 node_paths=PackedStringArray("door_physics_body", "open_sound", "close_sound", "exited_break_room_detection_area")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 script = ExtResource("1_fnanm")
+door_physics_body = NodePath("DoorStaticBody3D")
 open_sound = NodePath("OpenSound")
 close_sound = NodePath("CloseSound")
 exited_break_room_detection_area = NodePath("PlayerDetectionArea")
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1489315657]
-transform = Transform3D(-0.25881892, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881892, 8.917271, 0, 5.4959364)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 top_level = true
 layers = 2
 occluder = ExtResource("2_6uinn")
 bake_mask = 4293918722
 
-[node name="BreakRoomDoorModel" type="Node3D" parent="." unique_id=685924687]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
+[node name="DoorStaticBody3D" type="StaticBody3D" parent="." unique_id=1987512734]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 
-[node name="Sketchfab_Scene" parent="BreakRoomDoorModel" unique_id=2121543409 instance=ExtResource("3_51qo0")]
-transform = Transform3D(-3.6398223e-08, 0, 1.1093451, 0, 1.0077057, 0, -0.8326944, 0, -4.8491014e-08, -0.029385567, -0.024177432, -0.50364494)
-
-[node name="Object_2" parent="BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(2121543409, 2114470308) index="0" unique_id=1655746761]
-layers = 2
-
-[node name="Object_3" parent="BreakRoomDoorModel/Sketchfab_Scene/Sketchfab_model/532c162dc75147d1a8fbd9945dfa8fdf_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(2121543409, 2114470308) index="1" unique_id=1126054756]
-layers = 2
-
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1987512734]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=820153959]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorStaticBody3D" unique_id=820153959]
 transform = Transform3D(-1, 0, -2.2351742e-08, 0, 1, 0, 2.2351742e-08, 0, -1, 0.0010708645, 0.9860133, -0.5496547)
 shape = SubResource("BoxShape3D_xrivr")
+
+[node name="BreakRoomDoorModel" type="Node3D" parent="DoorStaticBody3D" unique_id=685924687]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, 0)
+
+[node name="Sketchfab_Scene" parent="DoorStaticBody3D/BreakRoomDoorModel" unique_id=2121543409 instance=ExtResource("3_51qo0")]
+transform = Transform3D(-3.6398227e-08, 0, 1.109345, 0, 1.0077057, 0, -0.83269435, 0, -4.849101e-08, -0.029385565, -0.024177432, -0.5036449)
 
 [node name="OpenSound" type="AudioStreamPlayer3D" parent="." unique_id=300316961]
 stream = ExtResource("4_564c8")
@@ -61,7 +60,13 @@ popup_this_is_camera = ExtResource("7_34cy1")
 metadata/_custom_type_script = "uid://cyfg6kertkbie"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=539028435]
-transform = Transform3D(0.44128653, 0, -1.6469035, 0, 1.705, 0, 1.6469035, 0, 0.44128653, -0.2369127, 0, -2.7259316)
+transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -3.0017142, 0, -0.44566852)
 shape = SubResource("BoxShape3D_13qdw")
 
-[editable path="BreakRoomDoorModel/Sketchfab_Scene"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=1777402583]
+transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -2.0263662, 0, 2.6724236)
+shape = SubResource("BoxShape3D_fnanm")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=90646488]
+transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -2.0263662, 0, -3.4452095)
+shape = SubResource("BoxShape3D_fnanm")

@@ -5,9 +5,25 @@
 
 [resource]
 script = ExtResource("1_tpcn1")
-name = "hammer"
-description = "fixes a broken machine instantly"
+item_id = "hammer"
+name = "Hammer"
+description_at_levels = Dictionary[int, String]({
+1: "Fix a broken machine instantly.",
+2: "Fix a broken machine instantly."
+})
 icon = ExtResource("1_4l7ey")
+price_at_levels = Dictionary[int, float]({
+1: 5.0,
+2: 3.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 6.0
+})
 is_active_item = true
+active_item_cooldown_at_levels = Dictionary[int, float]({
+1: 20.0,
+2: 10.0
+})
 can_activate_anywhere = false
 metadata/_custom_type_script = "uid://w8k3e1miec1a"

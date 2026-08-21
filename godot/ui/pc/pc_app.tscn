@@ -5,6 +5,25 @@
 [sub_resource type="Theme" id="Theme_616af"]
 default_font_size = 64
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1iqfk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7dbb5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_algjx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7lhbc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vip0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57qmd"]
+bg_color = Color(0.83, 0.18260002, 0.19338983, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="PcApp" type="Control" unique_id=270681436 node_paths=PackedStringArray("x_button")]
 layout_mode = 3
 anchors_preset = 0
@@ -38,10 +57,48 @@ theme_override_constants/separation = 10
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="X" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1508020803]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1730308116]
+layout_mode = 2
+theme_override_constants/separation = 1040
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g4v7s")
+
+[node name="_" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=1716048113]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 theme_override_font_sizes/font_size = 48
-text = "❌"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1iqfk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7dbb5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_algjx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7lhbc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6vip0")
+disabled = true
+text = "_"
+
+[node name="[]" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=318618805]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1iqfk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7dbb5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_algjx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7lhbc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6vip0")
+disabled = true
+text = "[ ]"
+
+[node name="X" type="Button" parent="MarginContainer/VBoxContainer/TopBar" unique_id=813935041]
+custom_minimum_size = Vector2(65, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_57qmd")
+text = "X"

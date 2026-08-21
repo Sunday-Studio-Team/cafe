@@ -26,10 +26,11 @@ var loading_tween: Tween
 var _cached_main_packed_scene: PackedScene
 var _cached_sub_resources: Dictionary[StringName, Resource]
 
+
 func _ready() -> void:
 	Events.scene_switch_requested.connect(load_scene)
 	Events.quit_game_requested.connect(quit_game)
-	
+
 	if OS.has_feature("editor"):
 		load_scene(SceneSwitcher.GameScene.MAIN_SCENE)
 	else:
@@ -82,8 +83,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 			
 			var use_sub_threads: bool = false
 			if resource_uid_request in _main_sub_resource_uids:
-				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource with threads")
-				use_sub_threads = true
+				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource without threads")
+				use_sub_threads = false
 			else:
 				if TIMING_PRINTS: print("SceneSwitcher: loading the main requested scene")
 				# WARNING: If set to true for the main scene, causes errors in the debugger:
@@ -154,13 +155,13 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	if TIMING_PRINTS: print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
 	
 	var add_child_start_time_ms: int = Time.get_ticks_msec()
-	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child")
+	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child, current child node count: %s" % _count_children_recursively(self))
 	
 	add_child(current_scene)
 
 	var add_child_end_time_ms: int = Time.get_ticks_msec()
 	var add_child_total_duration_ms: int = add_child_end_time_ms - add_child_start_time_ms
-	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms" % add_child_total_duration_ms)
+	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms, new child count: %s" % [add_child_total_duration_ms, _count_children_recursively(self)])
 	
 	get_tree().paused = false
 	
@@ -189,3 +190,11 @@ func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 		_:
 			push_error("Unhandled Scene!")
 			return &""
+
+func _count_children_recursively(node: Node) -> int:
+	var child_count: int = 0
+	child_count += get_child_count()
+	for child_node in node.get_children():
+		child_count += _count_children_recursively(child_node)
+	return child_count
+	

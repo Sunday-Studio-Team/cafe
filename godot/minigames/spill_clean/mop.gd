@@ -21,6 +21,8 @@ var normal_range = Vector2(644, 312)
 var normal_offset = Vector2(16.0, -503.0)
 var scrubber_range = Vector2(644.0, 1348.0)
 var scrubber_offset = Vector2(0.0, -865.0)
+var scrubber_level_2_range = Vector2(944.0, 1648.0)
+var scrubber_level_2_offset = Vector2(0.0, -865.0)
 
 @onready var mop_start_position: Vector2 = position
 
@@ -73,11 +75,13 @@ func _ready() -> void:
 		mope_range.position = normal_offset
 		mope_range.shape.size = normal_range
 
-func _process(_delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	global_position = (
 			get_global_mouse_position()
 			+ drag_offset
 	)
+	reset_physics_interpolation()
 
 
 func _exit_tree() -> void:

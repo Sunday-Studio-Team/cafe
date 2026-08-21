@@ -7,6 +7,7 @@ extends Node
 @export_dir var ingredients_folder_path: String
 @export_dir var customer_sprites_folder_path: String
 @export_dir var spill_sprites_path: String
+@export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 @export var star_texture: Texture
@@ -15,8 +16,7 @@ extends Node
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
-
-var popups: Dictionary = { }
+var popups: Dictionary = {}
 var popup_hint_showing: bool = false
 var player: Player
 var hovered_interactable: Interactable:
@@ -39,25 +39,34 @@ var items: Array[Item]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
-var player_in_cctv_los_camera: SecurityCam3D
-var minigame_active := false
+var minigame_active := false:
+	set(value):
+		minigame_active = value
+		if minigame_active == false:
+			current_minigame_name = ""
+var current_minigame_name: String
 var in_spill_minigame := false
 var in_pc_ui := false
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
+var unread_email_count: int
 var finished_important_emails: Array[EmailData]
-var active_helpdesk_customer: Customer
+var active_help_desk_customer: Customer
 var holding_ingredients := false
-var day := 1
+var day := 0
+var shift_length: float
+var shift_time_remaining: float
+var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
-var daily_profit := 0.0:
+var tippy_voice_lines: Array[TippyVoiceLine]
+var daily_cafe_money := 0.0:
 	set(new_value):
-		if new_value == daily_profit:
+		if new_value == daily_cafe_money:
 			return
 
-		Events.money_updated.emit(new_value, daily_profit)
-		daily_profit = new_value
+		Events.money_updated.emit(new_value, daily_cafe_money)
+		daily_cafe_money = new_value
 
 		# we set this as empty to hopefully avoid anything weird if someone
 		# accidentally updates one of these score vars without setting it
@@ -67,35 +76,35 @@ var daily_profit := 0.0:
 		# again anyway so hopefully we wont find out .
 		await get_tree().process_frame
 		score_update_message = ""
-# represented as stars (1 rating = 1 half star), max is 10 rating = 5 stars
-var employee_rating: int = 0:
+# represented as stars (1 rating = 1 star.)
+var employee_rating: float = 0:
 	set(new_value):
-		if new_value > 10:
-			new_value = 10
+		if new_value > Stats.current.employee_rating_max:
+			new_value = Stats.current.employee_rating_max
+		if new_value < 0.0:
+			new_value = 0.0
 		if new_value == employee_rating:
 			return
-
-		Events.customer_score_updated.emit(new_value, employee_rating)
+		
+		var previous_employee_rating: float = employee_rating
 		employee_rating = new_value
-		if employee_rating < 0:
-			employee_rating = 0
+		Events.employee_rating_updated.emit(new_value, previous_employee_rating)
 
-		# (see ccomment for same lines in above func)
+		# (see comment for same lines in above func)
 		await get_tree().process_frame
 		score_update_message = ""
-var bank_money := 0.0
+var machine_customer_flow_rate: float
+var help_desk_customer_flow_rate: float
+var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
-# rules (true = rule in effect) (these are toggled per-day in main.gd)
-var holding_ingredients_rule := false
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[Texture]
 ## the sprites of customers that are in the cafe right now
-## (tracked so we dont spawn 2 of the same)
-var customer_sprites_spawned: Array[Texture]
+var customer_sprites_in_use: Array[Texture]
 var spill_sprites: Array[Texture]
 var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
@@ -111,6 +120,7 @@ var in_end_shift_early_menu := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
 var showing_floating_cursor := false
+var in_tutorial_selection := false
 var stamina: float:
 	set(new_stam):
 		if new_stam > Stats.current.max_stamina:
@@ -139,6 +149,7 @@ var in_ui: bool:
 				or in_dialog_screen
 				or in_options_menu
 				or showing_floating_cursor
+				or in_tutorial_selection
 		):
 			return true
 		else:
@@ -152,9 +163,15 @@ var equipped_item: Item = null
 var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
+var shift_started: bool = false
 
 
 func _ready() -> void:
+	if SaveDataManager.save_data.finished_or_skipped_tutorial:
+		day = 1
+	if OS.has_feature("tutorial"):
+		day = 0
+
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
 		drink.create() # adds the price and creates the typing minigame resource
@@ -162,17 +179,22 @@ func _ready() -> void:
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
+	tippy_voice_lines.assign(load_resources_from_folder(tippy_voice_path))
 
 
-func _process(_delta: float) -> void:
-	# this has to be reset to false at the start of every frame here
+# NOTE: these things in physics process instead of process for timing reasons
+func _physics_process(_delta: float) -> void:
+	# this have to be reset to false at the start of every frame here
 	# because if we set it in the individual security cameras' processes, they
 	# would start overriding each other
 	player_in_cctv_los = false
-	making_drink_manually = false
 
+	making_drink_manually = current_minigame_name == "Captcha"
+
+
+func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
-		if Global.minigame_active and in_spill_minigame:
+		if in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -203,7 +225,7 @@ func equip_item(item: Item):
 		Events.emit_signal("play_viewmodel_animation", "default")
 		return
 
-	if item.name == "hammer":
+	if item.item_id == "hammer":
 		Events.emit_signal("play_viewmodel_animation", "hammer_equip")
 
 	else:
@@ -216,9 +238,23 @@ func refresh_active_items():
 	Events.items_updated.emit()
 
 
-func deactivate_active_item(target_item: Item):
-	Global.equipped_item = null
-	for item in owned_items:
-		if item.name == target_item.name:
-			item.can_be_used = false
-			Events.items_updated.emit()
+func put_active_item_on_cooldown(target_item: Item):
+	target_item.active_item_remaining_cooldown = target_item.active_item_cooldown_at_levels[target_item.item_level]
+	target_item.can_be_used = false
+
+
+func day_to_string(d: int) -> String:
+	var days_as_strings: Dictionary = {
+		0: "Friday",
+		1: "Monday",
+		2: "Tuesday",
+		3: "Wednesday",
+		4: "Thursday",
+	}
+
+	var day_as_string: String = days_as_strings[d % 5]
+
+	if d == 0:
+		day_as_string = "TRAINING"
+
+	return day_as_string

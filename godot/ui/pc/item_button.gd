@@ -9,15 +9,20 @@ signal item_button_pressed(item_button: ItemButton)
 @export var item_name: RichTextLabel
 @export var description: Label
 @export var active_indicator: Control
+@export var _cooldown_label: RichTextLabel
+@export var _passive_indicator: Control
 
 var item: Item
 
 
 func _ready() -> void:
 	item_icon.texture = item.icon
-	item_name.text = "[b]%s [color=gold](%s)" % [item.name, Global.float_to_price(item.price)]
-	description.text = item.description
+	item_name.text = "[b]%s Lv%s [color=gold](%s)" % [item.name, item.item_level, Global.float_to_price(item.price_at_levels[item.item_level])]
 	active_indicator.visible = item.is_active_item
+	if item.is_active_item:
+		_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
+	_passive_indicator.visible = !item.is_active_item
+	description.text = item.description_at_levels[item.item_level]
 
 	pressed.connect(_on_button_pressed)
 

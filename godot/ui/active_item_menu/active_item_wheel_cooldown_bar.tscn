@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cawbqfnyfyw52"]
+
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="1_ryfsf"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="2_lpyiu"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="3_wysoa"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" unique_id=636572385]
+modulate = Color(1, 1, 1, 0.29411766)
+offset_right = 160.0
+offset_bottom = 160.0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.6, 0.6)
+fill_mode = 4
+texture_under = ExtResource("1_ryfsf")
+texture_over = ExtResource("2_lpyiu")
+texture_progress = ExtResource("3_wysoa")

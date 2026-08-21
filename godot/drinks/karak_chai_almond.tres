@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Drink" format=3 uid="uid://bu0puifq4mcxi"]
+
+[ext_resource type="Resource" uid="uid://352rg414niof" path="res://drinks/ingredients/cardamom_seeds.tres" id="1_6h4c1"]
+[ext_resource type="Texture2D" uid="uid://cyl1rmo0y77cv" path="res://sprites/drink_icons/karak_chai_almond.png" id="2_6h4c1"]
+[ext_resource type="Resource" uid="uid://bcfdth8yq1wmh" path="res://drinks/ingredients/almond_milk.tres" id="3_fwlw6"]
+[ext_resource type="Resource" uid="uid://cqp5ihcl57x2g" path="res://drinks/ingredients/tea_bag.tres" id="4_es7sp"]
+[ext_resource type="Script" uid="uid://bpib3g54m3xm5" path="res://drinks/drink.gd" id="5_dknv8"]
+
+[resource]
+script = ExtResource("5_dknv8")
+name = "almond karak chai"
+main_ingredient = ExtResource("4_es7sp")
+liquid = ExtResource("3_fwlw6")
+extra = ExtResource("1_6h4c1")
+icon = ExtResource("2_6h4c1")
+day_unlocked = 3
+type = 1
+metadata/_custom_type_script = "uid://bpib3g54m3xm5"

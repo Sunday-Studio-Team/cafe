@@ -64,7 +64,8 @@ func _process(delta: float) -> void:
 
 	# alt interaction where player uses an item on this interactable
 	if Input.is_action_just_pressed("use_item"):
-		used_active_item.emit(Global.equipped_item)
+		if Global.equipped_item and Global.equipped_item.can_be_used:
+			used_active_item.emit(Global.equipped_item)
 
 
 func _on_visibility_changed() -> void:

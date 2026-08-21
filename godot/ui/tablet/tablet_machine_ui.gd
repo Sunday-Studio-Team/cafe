@@ -33,9 +33,9 @@ func _process(_delta: float) -> void:
 	if waiting:
 		price_label.text = "+%s" % Global.float_to_price(machine.order.made_drink.price)
 
-		var score := machine.order.score
-		rating_label.modulate = Color.GREEN if score > 0 else Color.RED
-		rating_label.text = "+%s⭐️🙂" % (score / 2.0) if score > 0 else "%s⭐️🙂" % (score / 2.0)
+		var star_rating_gain_for_remake := machine.order.star_rating_gain_for_remake
+		rating_label.modulate = Color.GREEN if star_rating_gain_for_remake > 0 else Color.DARK_GRAY
+		rating_label.text = "+%s⭐️🙂" % star_rating_gain_for_remake if star_rating_gain_for_remake > 0 else ""
 
 	spill.visible = machine.spill_on_floor
 

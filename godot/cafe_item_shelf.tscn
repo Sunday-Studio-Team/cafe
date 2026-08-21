@@ -268,17 +268,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0516939, 0.287526, -0.14610
 [node name="ItemSlot2" type="Marker3D" parent="ItemSlots" unique_id=676660522]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0389781, -0.17206717, -0.068813324)
 
-[node name="ItemSlot3" type="Marker3D" parent="ItemSlots" unique_id=1177732510]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0156031, -0.7205615, 0)
-
-[node name="ItemSlot4" type="Marker3D" parent="ItemSlots" unique_id=1140164396]
+[node name="ItemSlot3" type="Marker3D" parent="ItemSlots" unique_id=1140164396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52660656, 0.2308085, 0)
 
-[node name="ItemSlot5" type="Marker3D" parent="ItemSlots" unique_id=1462479313]
+[node name="ItemSlot4" type="Marker3D" parent="ItemSlots" unique_id=1462479313]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56041145, -0.18767905, -0.060560226)
 
-[node name="ItemSlot6" type="Marker3D" parent="ItemSlots" unique_id=339265608]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5406208, -0.67053664, -0.07717037)
+[node name="ItemSlot5" type="Marker3D" parent="ItemSlots" unique_id=1824281173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014695704, 0.2308085, 7.098321e-08)
+
+[node name="ItemSlot6" type="Marker3D" parent="ItemSlots" unique_id=247373045]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019109182, -0.18767905, -0.060560156)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1083288574]
 
@@ -307,8 +307,14 @@ transform = Transform3D(-5.962682e-08, 0.9999999, 0.0005079508, -1, -5.960463e-0
 [node name="cabine low_011_Material_001_0" type="MeshInstance3D" parent="lockers/cabine low_012" unique_id=1783215446]
 mesh = SubResource("ArrayMesh_fgc01")
 
+[node name="cabine low_013" type="Node3D" parent="lockers" unique_id=2052074862]
+transform = Transform3D(-5.962682e-08, 0.9999999, 0.0005079508, -1, -5.960463e-08, -4.3711395e-08, -4.368112e-08, -0.0005079508, 0.9999999, 0.86875457, 0.15144992, -0.2640295)
+
+[node name="cabine low_011_Material_001_0" type="MeshInstance3D" parent="lockers/cabine low_013" unique_id=720741983]
+mesh = SubResource("ArrayMesh_fgc01")
+
 [node name="Locker1" type="Node3D" parent="lockers" unique_id=359331269]
-transform = Transform3D(0.0078, 0, 0, 0, 0.0077999993, -1.7319478e-18, 0, 1.7319479e-18, 0.0078, 0.8916073, -0.24360794, -0.14978409)
+transform = Transform3D(0.0078, 0, 0, 0, 0.0077999993, -1.7319478e-18, 0, 1.7319479e-18, 0.0078, 1.5085385, -0.24360794, -0.1500974)
 
 [node name="Locker1_Locker1_0" type="MeshInstance3D" parent="lockers/Locker1" unique_id=1204929379]
 mesh = SubResource("ArrayMesh_tws47")
