@@ -667,9 +667,10 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
-	Events.order_approved_no_customer.emit()
 
 	order_breakdown.hide()
+
+	var rating_before_update: float = Global.employee_rating
 
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
@@ -679,13 +680,19 @@ func accept_order(did_remake_drink: bool) -> void:
 		if order.star_rating_loss_if_accept > 0.0:
 			Global.score_update_message = "customer upset for incorrect %s!" % [order.made_drink.name]
 			Global.employee_rating -= order.star_rating_loss_if_accept
-			await get_tree().create_timer(0.8, false).timeout
+
+	# stagger showing the update popups for rating and money if both changed
+	if Global.employee_rating != rating_before_update:
+		await get_tree().create_timer(0.8, false).timeout
 
 	Global.score_update_message = "sold %s" % order.made_drink.name
 	Global.daily_cafe_money += order.made_drink.price
 
 	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left
-	if Global.daily_cafe_money <= (Stats.current.daily_profit_goals_each_day[Global.day] * 0.6) and Global.shift_time_remaining <= 60.0:
+	if (
+		Global.daily_cafe_money <= (Stats.current.daily_profit_goals_each_day[Global.day] * 0.6)
+		and Global.shift_time_remaining <= 60.0
+	):
 		await get_tree().create_timer(0.8, false).timeout
 		Events.under_money_goal.emit()
 
@@ -696,33 +703,14 @@ func accept_order(did_remake_drink: bool) -> void:
 
 func reject_order() -> void:
 	gui_3d.exit_with_camera_tween()
+
+	# TODO: check if this can happen
 	if ingredients < Stats.current.ingredients_per_order:
 		return
+
 	waiting_for_response = false
 
 	machine_make_drink()
-
-
-func finished_manual_remake_drink() -> void:
-	gui_3d.exit_with_camera_tween()
-
-	if ingredients < Stats.current.ingredients_per_order:
-		return
-
-	consume_ingredients()
-
-	order.made_drink = order.ordered_drink
-	final_order_indicator.text = (
-			"you made:\n %s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
-	)
-	display_drink_score()
-
-	Events.order_completed.emit(customer)
-	customer.timer.stop()
-	waiting_for_response = false
-
-	accept_order(true)
 
 
 func break_down() -> void:
@@ -794,7 +782,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Global.ordered_drink_to_remake = order.ordered_drink
 	Events.minigame_active.emit(manual_drink_minigames.pick_random())
 	Events.order_remaking_drink.emit()
-	
+
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
 			var time_scale: float = 1.0
@@ -810,7 +798,27 @@ func _on_remade_drink() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	Events.force_close_minigame.disconnect(_on_force_close_minigame)
-	finished_manual_remake_drink()
+
+	gui_3d.exit_with_camera_tween()
+
+	# TODO: check if this can happen
+	if ingredients < Stats.current.ingredients_per_order:
+		return
+
+	consume_ingredients()
+
+	order.made_drink = order.ordered_drink
+	final_order_indicator.text = (
+			"you made:\n %s (%s)"
+			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+	)
+	display_drink_score()
+
+	Events.order_completed.emit(customer)
+	customer.timer.stop()
+	waiting_for_response = false
+
+	accept_order(true)
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
@@ -833,7 +841,7 @@ func _on_force_close_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	Events.force_close_minigame.disconnect(_on_force_close_minigame)
-	
+
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
 			Engine.time_scale = 1.0
