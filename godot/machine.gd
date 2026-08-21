@@ -687,6 +687,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Events.minigame_end.connect(_on_remade_drink)
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
+	Global.ordered_drink_customer = customer
 	Events.minigame_active.emit(manual_drink_minigames.pick_random())
 
 

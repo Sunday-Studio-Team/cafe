@@ -10,9 +10,11 @@ extends SubViewportContainer
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
+@export var customer_sprite: Sprite2D
 
 var ordered_drink: Drink
 var main_text: String = "The required ingredients"
+var drink_customer: Customer
 
 func _ready() -> void:
 	_start_minigame()
@@ -93,9 +95,11 @@ func shake_panel() -> void:
 func _start_minigame() -> void:
 	set_instructions(main_text)
 	
-	# Temp drink setting for testing
 	var drink: Drink = Global.ordered_drink_to_remake
 	get_ordered_drink(drink)
+	
+	drink_customer = Global.ordered_drink_customer
+	customer_sprite.texture = drink_customer.body.texture
 	
 	populate_captcha()
 	
