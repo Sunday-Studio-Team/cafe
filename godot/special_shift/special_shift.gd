@@ -21,22 +21,24 @@ var modifications: Dictionary[String, ModificationData] = {}
 
 
 func apply_stats() -> void:
-	for stat in modifications:
-		var current_stat = Stats.current.get(stat)
-		if current_stat == null:
-			push_error("%s is trying to give a bonus to '%s' but that stat does not exist" % [name, stat])
-		if modifications[stat].multiply:
-			Stats.current.set(stat, current_stat * modifications[stat].modification)
-		else:
-			Stats.current.set(stat, current_stat + modifications[stat].modification)
+	pass
+	# for stat in modifications:
+	# 	var current_stat = Stats.current.get(stat)
+	# 	if current_stat == null:
+	# 		push_error("%s is trying to give a bonus to '%s' but that stat does not exist" % [name, stat])
+	# 	if modifications[stat].multiply:
+	# 		Stats.current.set(stat, current_stat * modifications[stat].modification)
+	# 	else:
+	# 		Stats.current.set(stat, current_stat + modifications[stat].modification)
 
 
 func unapply_stats() -> void:
-	for stat in modifications:
-		var current_stat = Stats.current.get(stat)
-		if current_stat == null:
-			push_error("%s is trying to take a bonus from '%s' but that stat does not exist" % [name, stat])
-		if modifications[stat].multiply:
-			Stats.current.set(stat, current_stat / modifications[stat].modification)
-		else:
-			Stats.current.set(stat, current_stat - modifications[stat].modification)
+	pass
+	# for stat in modifications:
+	# 	var current_stat = Stats.current.get(stat)
+	# 	if current_stat == null:
+	# 		push_error("%s is trying to take a bonus from '%s' but that stat does not exist" % [name, stat])
+	# 	if modifications[stat].multiply:
+	# 		Stats.current.set(stat, current_stat / modifications[stat].modification)
+	# 	else:
+	# 		Stats.current.set(stat, current_stat - modifications[stat].modification)

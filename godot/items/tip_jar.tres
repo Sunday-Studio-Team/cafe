@@ -5,7 +5,19 @@
 
 [resource]
 script = ExtResource("1_vcoi0")
-name = "tip jar"
-description = "gives customers a chance to pay extra"
+item_id = "tip_jar"
+name = "Tip Jar"
+description_at_levels = Dictionary[int, String]({
+1: "Your end of day tips are worth 1.5x.",
+2: "Your end of day tips are worth 3x."
+})
 icon = ExtResource("1_peixf")
+price_at_levels = Dictionary[int, float]({
+1: 5.0,
+2: 5.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 7.0
+})
 metadata/_custom_type_script = "uid://w8k3e1miec1a"

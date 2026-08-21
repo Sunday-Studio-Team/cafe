@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://b42eh0jvdare4"]
+
+[ext_resource type="Script" uid="uid://fmiybk5fnlyb" path="res://tutorial_selection_menu.gd" id="1_voqx1"]
+[ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="2_hx3l8"]
+
+[sub_resource type="Theme" id="Theme_0ffxp"]
+default_font = ExtResource("2_hx3l8")
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0ffxp"]
+color = Color(0, 0, 0, 0)
+
+[node name="TutorialSelectionMenu" type="CanvasLayer" unique_id=1397742482 node_paths=PackedStringArray("skip_button", "continue_button")]
+process_mode = 3
+script = ExtResource("1_voqx1")
+skip_button = NodePath("MarginContainer/VBoxContainer/Buttons/Skip")
+continue_button = NodePath("MarginContainer/VBoxContainer/Buttons/Continue")
+
+[node name="Background" type="Control" parent="." unique_id=1244508992]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlueBorder" type="ColorRect" parent="Background" unique_id=240552004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.32941177, 0.92156863, 0.49803922)
+
+[node name="MarginContainer" type="MarginContainer" parent="Background" unique_id=638660135]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="White" type="ColorRect" parent="Background/MarginContainer" unique_id=1390817242]
+layout_mode = 2
+color = Color(1, 1, 1, 0.49803922)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=697285414]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_0ffxp")
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1998856884]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="TodayIsTrainingDay" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1041204084]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 128
+text = "Today is your training day!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Skip?" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1724938639]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 56
+text = "Would you like to skip to your first real shift instead?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=582371724]
+layout_mode = 2
+size_flags_vertical = 2
+alignment = 1
+
+[node name="Skip" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=1622205367]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 96
+text = "Yes"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/Buttons" unique_id=687689673]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0ffxp")
+
+[node name="Continue" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=96015959]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 96
+text = "No"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=587979147]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+
+[node name="ReplayReminder" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=151705056]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "You can always redo your training later
+from the main menu!"
+horizontal_alignment = 1

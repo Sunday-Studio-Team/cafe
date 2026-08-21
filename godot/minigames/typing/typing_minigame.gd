@@ -27,7 +27,7 @@ func _ready() -> void:
 func _start_minigame() -> void:
 	_state = State.CUSTOMER_APOLOGY
 	
-	_active_helpdesk_customer = Global.active_helpdesk_customer
+	_active_helpdesk_customer = Global.active_help_desk_customer
 	
 	var customer_apology_typing_minigame_variant_packed_scene: PackedScene
 	var likelihoods_total: float = full_sentence_likelihood + fill_blanks_likelihood
@@ -48,14 +48,16 @@ func _on_minigame_variant_finished(typing_minigame_variant: TypingMinigameVarian
 	match _state:
 		State.CUSTOMER_APOLOGY:
 			_active_typing_minigame_variant.queue_free()
+
+			_finish_minigame()
 			
-			var ingredients_list_typing_minigame_variant: TypingMinigameVariant = typing_minigame_variant_ingredients_list_packed_scene.instantiate()
-			typing_minigame_variant_container.add_child(ingredients_list_typing_minigame_variant)
-			ingredients_list_typing_minigame_variant.minigame_variant_finished.connect(_on_minigame_variant_finished)
-			ingredients_list_typing_minigame_variant.start_minigame_variant(_active_helpdesk_customer)
-			_active_typing_minigame_variant = ingredients_list_typing_minigame_variant
-			
-			_state = State.INGREDIENTS_LIST
+			# Disabling ingredients list minigame for now
+			# var ingredients_list_typing_minigame_variant: TypingMinigameVariant = typing_minigame_variant_ingredients_list_packed_scene.instantiate()
+			# typing_minigame_variant_container.add_child(ingredients_list_typing_minigame_variant)
+			# ingredients_list_typing_minigame_variant.minigame_variant_finished.connect(_on_minigame_variant_finished)
+			# ingredients_list_typing_minigame_variant.start_minigame_variant(_active_helpdesk_customer)
+			# _active_typing_minigame_variant = ingredients_list_typing_minigame_variant
+			# _state = State.INGREDIENTS_LIST
 		State.INGREDIENTS_LIST:
 			_active_typing_minigame_variant.queue_free()
 			_finish_minigame()

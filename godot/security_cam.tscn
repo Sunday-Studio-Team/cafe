@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dngdj3sgfen6c" path="res://security_cam.gd" id="1_w3jiq"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_8ad36"]
-[ext_resource type="Resource" uid="uid://dro03qfkl0ucg" path="res://items/whipped_cream.tres" id="2_bpkf2"]
+[ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="3_j0k3h"]
+[ext_resource type="PackedScene" uid="uid://cmy2r1onge1xx" path="res://Assets/Camera/camera.glb" id="3_qlhcy"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="5_jdgwh"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="6_0j8nf"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="7_ebrmn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3jiq"]
 albedo_color = Color(0.46034718, 0.46034718, 0.46034712, 1)
@@ -36,50 +40,144 @@ height = 0.25
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5kcxd"]
 height = 1.2861328
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("ray", "spotlight", "timer", "interactable")]
+[sub_resource type="Curve3D" id="Curve3D_qlhcy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xrivr"]
+height = 10.0
+radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlhcy"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.22352941)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sghrc"]
+viewport_path = NodePath("DisabledTimerSprite/SubViewport")
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disabled_timer_sprite", "disabled_timer_bar")]
 script = ExtResource("1_w3jiq")
-ray = NodePath("SpotLight3D/RayCast3D")
-spotlight = NodePath("SpotLight3D")
-timer = NodePath("GraceTimer")
+_shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
+spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
+camera_aimer_node = NodePath("CameraAimerModel")
+aim_path_follow_3d = NodePath("AimPath3D/AimPathFollow3D")
+grace_timer = NodePath("GraceTimer")
+disabled_timer = NodePath("DisabledTimer")
 interactable = NodePath("SabotageInteractable")
-whipped_cream_item = ExtResource("2_bpkf2")
+caught_audio_stream_player_3d = NodePath("AudioStreamPlayer3D")
+disabled_timer_sprite = NodePath("DisabledTimerSprite")
+disabled_timer_bar = NodePath("DisabledTimerSprite/SubViewport/TextureProgressBar")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1348601655]
-transform = Transform3D(1, 0, 0, 0, 0.25881904, 0.9659257, 0, -0.9659257, 0.25881904, 0, 0, 0)
-light_energy = 10.0
-light_volumetric_fog_energy = 2.5
-spot_angle = 20.0
-
-[node name="RayCast3D" type="RayCast3D" parent="SpotLight3D" unique_id=1998490399]
-transform = Transform3D(0.9659258, -1.4894287e-09, -0.258819, -0.25881907, -1.1313339e-08, -0.96592563, -1.489429e-09, 0.99999976, -1.131334e-08, 0, 0, 0)
-target_position = Vector3(0, -10, 0)
-collision_mask = 8
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=706302561]
+stream = ExtResource("3_j0k3h")
 
 [node name="GraceTimer" type="Timer" parent="." unique_id=2144038531]
 wait_time = 2.5
 one_shot = true
 
-[node name="Model" type="Node3D" parent="." unique_id=263013221]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08514333, 0.008925587)
+[node name="DisabledTimer" type="Timer" parent="." unique_id=478179154]
+one_shot = true
 
-[node name="Body" type="MeshInstance3D" parent="Model" unique_id=1938907329]
+[node name="CameraAimerModel" type="Node3D" parent="." unique_id=1953194644]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CameraAimerModel" unique_id=1348601655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6273376)
+light_energy = 5.0
+light_volumetric_fog_energy = 2.5
+spot_angle = 18.0
+spot_angle_attenuation = 2.0
+
+[node name="Model" type="Node3D" parent="CameraAimerModel" unique_id=263013221]
+transform = Transform3D(1.5499998, 0, 0, 0, 0.87564456, -1.2789629, 0, 1.2789629, 0.87564456, 0, 0.027873814, -0.5080554)
+
+[node name="camera" parent="CameraAimerModel/Model" unique_id=1944074621 instance=ExtResource("3_qlhcy")]
+transform = Transform3D(-0.4515773, -0.00734083, 0.003703244, -0.007246691, 0.25924936, -0.36976588, 0.0038842484, -0.36976397, -0.2593242, 0.0058659017, -0.020149954, 0.0857618)
+
+[node name="Cylinder_Cylinder" parent="CameraAimerModel/Model/camera" index="2" unique_id=868173451]
+transform = Transform3D(1.2503961, 0.014059592, 0.015266214, -0.0011158865, 0.88243234, -1.198308, -0.01790624, 0.92679477, 1.1407188, -0.089072615, 0.060985863, -0.39554608)
+
+[node name="Torus_004_Torus_004" parent="CameraAimerModel/Model/camera" index="3" unique_id=70328738]
+transform = Transform3D(0.9999595, 0.0059514605, 0.0068100933, -0.0019403454, 0.8766179, -0.4811833, -0.008833591, 0.48115033, 0.87659436, -0.0044638347, 0.029213324, -0.13744369)
+
+[node name="Body" type="MeshInstance3D" parent="CameraAimerModel/Model" unique_id=1938907329]
 transform = Transform3D(1, 0, 0, 0, 0.48218188, 0.8760711, 0, -0.8760711, 0.48218188, 0, -0.0008558929, 0.030187339)
+visible = false
 mesh = SubResource("BoxMesh_w3jiq")
 
-[node name="Lens" type="MeshInstance3D" parent="Model" unique_id=1601630106]
+[node name="Lens" type="MeshInstance3D" parent="CameraAimerModel/Model" unique_id=1601630106]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07340768, -0.006826341)
+visible = false
 mesh = SubResource("SphereMesh_bpkf2")
 
-[node name="Mount" type="MeshInstance3D" parent="Model" unique_id=1125263611]
+[node name="Mount" type="MeshInstance3D" parent="CameraAimerModel/Model" unique_id=1125263611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12828007, -0.0012458414)
+visible = false
 mesh = SubResource("CylinderMesh_qlhcy")
 
 [node name="SabotageInteractable" type="Area3D" parent="." unique_id=53695990 node_paths=PackedStringArray("mesh")]
 script = ExtResource("2_8ad36")
 display_name = "sabotage camera"
-mesh = NodePath("../Model/Body")
+mesh = NodePath("../CameraAimerModel/Model/camera/Cube_001")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SabotageInteractable" unique_id=2134907620]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3569336, 0)
 shape = SubResource("CylinderShape3D_5kcxd")
+
+[node name="AimPath3D" type="Path3D" parent="." unique_id=1994339220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7, 0)
+curve = SubResource("Curve3D_qlhcy")
+
+[node name="AimPathFollow3D" type="PathFollow3D" parent="AimPath3D" unique_id=1068131204]
+
+[node name="DebugCSGSphere3D" type="CSGSphere3D" parent="AimPath3D/AimPathFollow3D" unique_id=78244845]
+visible = false
+radius = 0.1
+radial_segments = 6
+
+[node name="SpotLight3D" type="SpotLight3D" parent="AimPath3D/AimPathFollow3D" unique_id=642379767]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.20921922, 0)
+light_energy = 5.0
+light_volumetric_fog_energy = 2.5
+spot_range = 1.0891194
+spot_angle = 77.86068
+spot_angle_attenuation = 0.01
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="AimPath3D/AimPathFollow3D" unique_id=1398772470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+shape = SubResource("CylinderShape3D_xrivr")
+target_position = Vector3(0, -5, 0)
+collision_mask = 9
+
+[node name="DebugCSGCylinder3D" type="CSGCylinder3D" parent="AimPath3D/AimPathFollow3D/ShapeCast3D" unique_id=1047781990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.000001, 0)
+visible = false
+radius = 0.75
+height = 10.0
+sides = 16
+material = SubResource("StandardMaterial3D_qlhcy")
+
+[node name="DisabledTimerSprite" type="Sprite3D" parent="." unique_id=1674333602]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.09615041, -0.7481325, 0)
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_sghrc")
+
+[node name="SubViewport" type="SubViewport" parent="DisabledTimerSprite" unique_id=347062602]
+transparent_bg = true
+size = Vector2i(160, 160)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="DisabledTimerSprite/SubViewport" unique_id=17941410]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("5_jdgwh")
+texture_over = ExtResource("6_0j8nf")
+texture_progress = ExtResource("7_ebrmn")
+
+[node name="Label" type="Label3D" parent="DisabledTimerSprite" unique_id=424793455]
+sorting_offset = 1.0
+pixel_size = 0.01
+billboard = 1
+text = "⌛"
+
+[editable path="CameraAimerModel/Model/camera"]

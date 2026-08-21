@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://rx4cqhgsudj7"]
+
+[ext_resource type="Script" uid="uid://cqtkavcg5wou8" path="res://minigames/words/lane.gd" id="1_fs0nv"]
+[ext_resource type="Texture2D" uid="uid://docpdsrkg2mbh" path="res://minigames/assets/red_square.png" id="2_od34h"]
+
+[node name="Lane" type="Panel" unique_id=250512026]
+custom_minimum_size = Vector2(50, 50)
+script = ExtResource("1_fs0nv")
+
+[node name="Tile" type="TextureRect" parent="." unique_id=888473966]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_od34h")

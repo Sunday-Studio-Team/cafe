@@ -11,6 +11,7 @@ const SPRITE_SIZE = Vector2(32, 32)
 @export var line_width: int = 4
 @export var options: Array[Item] = [null]
 @export var IMAGE_OFFSET: Vector2 = Vector2(40, 40)
+@export var cooldown_bar_scene: PackedScene
 
 var active = false
 var selection: int = 0
@@ -49,6 +50,10 @@ func _input(event):
 
 
 func _draw():
+	# delete any existing cooldown indicators so we can draw fresh ones
+	for child in get_children():
+		child.queue_free()
+
 	var offset = SPRITE_SIZE / -2
 
 	draw_circle(Vector2.ZERO, outer_radius, bkg_color)
@@ -78,13 +83,26 @@ func _draw():
 
 			var draw_pos = radius_mid * Vector2.from_angle(mid_rads) + offset
 
-			#Draw Image
+			# draw item icon
 			if options[i] != null:
 				draw_texture_rect(
 					options[i].icon,
 					Rect2(draw_pos - IMAGE_OFFSET, SPRITE_SIZE * 3),
 					false,
 				)
+
+			# draw cooldown indicator
+			if options[i] != null:
+				if not options[i].can_be_used:
+					var cooldown_bar: TextureProgressBar = cooldown_bar_scene.instantiate()
+					cooldown_bar.global_position = draw_pos - IMAGE_OFFSET - SPRITE_SIZE
+					cooldown_bar.value = (
+						100
+						- options[i].active_item_remaining_cooldown
+						/ options[i].active_item_cooldown_at_levels[options[i].item_level]
+						* 100
+					)
+					add_child(cooldown_bar)
 
 			if selection == i:
 				var points_per_arc = 32
@@ -116,7 +134,7 @@ func remove_item(target_item: Item):
 	#Removes specified item from being choosable
 	#NOTE: Does NOT remove it from the player's inventory
 	for i in options.size():
-		if options[i] != null and target_item.name == options[i].name:
+		if options[i] != null and target_item.item_id == options[i].item_id:
 			options.remove_at(i)
 
 

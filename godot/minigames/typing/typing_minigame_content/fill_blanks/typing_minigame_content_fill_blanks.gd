@@ -1,5 +1,4 @@
 class_name TypingMinigameContentFillBlanks
 extends Resource
 
-@export var possible_customer_dialog: Array[String]
-@export var possible_reply_sentences: Array[TypingMinigameContentFillBlanksSentence]
+@export var customer_dialog_and_player_replies: Array[TypingMinigameContentFillBlanksSentence]

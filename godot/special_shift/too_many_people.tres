@@ -4,12 +4,6 @@
 [ext_resource type="Script" uid="uid://d1wwxitrj27iw" path="res://special_shift/special_shift.gd" id="1_xc5s3"]
 [ext_resource type="Script" uid="uid://d4ho1epmr2gym" path="res://special_shift/modification_data.gd" id="2_qcjkm"]
 
-[sub_resource type="Resource" id="Resource_3exxq"]
-script = ExtResource("2_qcjkm")
-modification = 0.5
-multiply = true
-metadata/_custom_type_script = "uid://d4ho1epmr2gym"
-
 [sub_resource type="Resource" id="Resource_bmvma"]
 script = ExtResource("2_qcjkm")
 modification = 5.0
@@ -22,7 +16,6 @@ description = "Your customer base is doubling! A steady stream of new customers 
 icon = ExtResource("1_qcjkm")
 weight = 15
 modifications = Dictionary[String, ExtResource("2_qcjkm")]({
-"customer_spawn_interval": SubResource("Resource_3exxq"),
 "customer_wait_time_machine": SubResource("Resource_bmvma")
 })
 metadata/_custom_type_script = "uid://d1wwxitrj27iw"

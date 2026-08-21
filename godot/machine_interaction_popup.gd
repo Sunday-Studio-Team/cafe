@@ -4,6 +4,9 @@ const HOVER_COLOR := Color(0.7, 0.7, 0.7)
 const NORMAL_COLOR := Color(1, 1, 1)
 
 @export var popup_id: String = ""
+@export var text: Label
+@export var title: Label
+@export var icon: TextureRect
 
 @onready var close_button: TextureButton = $InputBlocker/TextureButton
 
@@ -20,6 +23,10 @@ func open() -> void:
 	if OS.has_feature("skip_popups"):
 		return
 
+	# if popup_id == "special shift":
+	# 	if text: text.text = Global.current_special_shift.description
+	# 	if title: title.text = Global.current_special_shift.name
+	# 	if icon: icon.texture = Global.current_special_shift.icon
 	visible = true
 	Global.popup_hint_showing = true
 	get_tree().paused = true

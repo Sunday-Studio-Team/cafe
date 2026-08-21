@@ -9,11 +9,13 @@ bg_color = Color(0.11366529, 0.11366529, 0.113665275, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
 font_size = 24
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_graphics_preset_option_view", "_save_settings_button")]
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_graphics_preset_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_save_settings_button")]
 process_mode = 3
 layer = 2
 script = ExtResource("1_8h7tm")
 _graphics_preset_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView")
+_crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
+_camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
 _save_settings_button = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/SaveSettingsButton")
 
 [node name="Control" type="Control" parent="." unique_id=12575952]
@@ -86,6 +88,14 @@ theme_override_constants/separation = 8
 [node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Graphics Preset"
+
+[node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Crosshair"
+
+[node name="CameraMotionOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=1495567016 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Motion Sickness"
 
 [node name="SaveSettingsButton" type="Button" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1727838823]
 custom_minimum_size = Vector2(0, 48)

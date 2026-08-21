@@ -1,10 +1,13 @@
 extends Control
 
-const DELAY_AFTER_PRESSING_BUTTON := 1.0
+const DELAY_AFTER_PRESSING_BUTTON := 0.75
 
 @export var buttons: Array[Button]
 @export var needed_successes: int = 3
-@export var prompt_text_box: TextEdit
+@export var prompt_panel: Control
+@export var prompt_text_box: Label
+@export var correct_sound: AudioStreamPlayer
+@export var wrong_sound: AudioStreamPlayer
 
 var successes: int = 0
 var colors = [Color.RED, Color.BLUE, Color.GREEN]
@@ -37,10 +40,17 @@ func show_new_prompt():
 
 func _on_button_pressed(button_index: int):
 	if prompts_and_corresponding_buttons[current_prompt] == button_index + 1:
+		correct_sound.play()
+		correct_sound.pitch_scale += 0.1
 		prompt_text_box.text = "✅"
 		successes += 1
 	else:
 		prompt_text_box.text = "❌"
+		wrong_sound.play()
+		var shake_tween := create_tween().set_trans(Tween.TRANS_SPRING)
+		shake_tween.tween_property(prompt_panel, "offset_transform_position_ratio:x", 0.1, 0.1)
+		shake_tween.tween_property(prompt_panel, "offset_transform_position_ratio:x", -0.1, 0.1)
+		shake_tween.tween_property(prompt_panel, "offset_transform_position_ratio:x", 0, 0.1)
 
 	mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 	await get_tree().create_timer(DELAY_AFTER_PRESSING_BUTTON, false).timeout
