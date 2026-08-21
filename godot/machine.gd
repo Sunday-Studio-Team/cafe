@@ -4,38 +4,41 @@ class_name Machine
 extends Node3D
 
 const BLAST_LAUNCH_MAGNITUDE: float = 20.0
+const REPAIR_MINIGAMES := ["Colors", "Arrows"]
+const MANUAL_DRINK_MINIGAMES := ["Captcha"]
+const CLEAN_SPILL_MINIGAME := "SpillClean"
+const REFILL_MINIGAME := "Refill"
 
 static var seen_breakdown_popup := false
 
+@export var static_body: StaticBody3D
+@export var gui_3d: Gui3D
+@export var timer: Timer
+@export var breakdown_timer: Timer
+@export var fix_machine_button: Interactable
+@export var spill_interactable: Interactable
+@export var spill_clean_particles: GPUParticles3D
+@export_category("Markers")
+@export var spot_for_player: Marker3D
 @export var spot_for_customer: Marker3D
 @export var start_of_customer_queue_marker: Marker3D
 @export var end_of_customer_queue_marker: Marker3D
-@export var spot_for_player: Marker3D
+@export_category("UI")
 @export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
-@export var timer: Timer
-@export var customer_order_indicator: Label
-@export var final_order_indicator: Label
-@export var _price_label_remake: Label
-@export var remake_ingredients_cost_label: Label
-@export var _price_label_accept: Label
-@export var _rating_gain_on_remake_label: Label
-@export var make_drink_button: Button
-@export var _rating_loss_on_accept_label: Label
 @export var accept_button: Button
+@export var _price_label_accept: Label
+@export var _rating_loss_on_accept_label: Label
+@export var make_drink_button: Button
+@export var _rating_gain_on_remake_label: Label
+@export var remake_ingredients_cost_label: Label
 @export var refill_button: Button
-@export var fix_machine_button: Interactable
-@export var breakdown_timer: Timer
-@export var breakdown_sound: AudioStreamPlayer3D
-@export var no_ingredients_sound: AudioStreamPlayer3D
+@export var ordered_drink_name_label: Label
+@export var made_drink_name_label: Label
+@export var _price_label_remake: Label
 @export var ingredients_bar: ProgressBar
 @export var ing_too_low_label: Label3D
-@export var tip_jar_item: Item
-@export var spill_interactable: Interactable
-@export var spill_sound: AudioStreamPlayer3D
-@export var static_body: StaticBody3D
 @export var spill_warning: Label
-@export var gui_3d: Gui3D
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
@@ -50,13 +53,16 @@ static var seen_breakdown_popup := false
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
+@export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
 @export var spill_clean_sound: AudioStreamPlayer3D
 @export var fixed_sound: AudioStreamPlayer3D
-@export var spill_clean_particles: GPUParticles3D
-@export var scrubber_item: Item
+@export var spill_sound: AudioStreamPlayer3D
+@export var breakdown_sound: AudioStreamPlayer3D
 @export var hammer_hit_sound: AudioStreamPlayer
+@export var no_ingredients_sound: AudioStreamPlayer3D
+@export_category("Popups")
 @export var popup_storage_room: PackedScene # tutorial popup that tells player to go to the storage room
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
@@ -77,10 +83,6 @@ var ingredients: int:
 		else:
 			ingredients = new_value
 var spill_on_floor := false
-var repair_minigames := ["Colors", "Arrows"]
-var manual_drink_minigames := ["Captcha"]
-var clean_spill_minigame := "SpillClean"
-var refill_minigame := "Refill"
 
 
 func _ready() -> void:
@@ -108,9 +110,9 @@ func _ready() -> void:
 	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
 	spill_interactable.interacted.connect(_on_clean_spill)
 
-	customer_order_indicator.hide()
+	ordered_drink_name_label.hide()
 	order_breakdown.hide()
-	final_order_indicator.hide()
+	made_drink_name_label.hide()
 
 	# glowing fx on spill warning
 	var t := create_tween().set_loops()
@@ -128,9 +130,13 @@ func _process(_delta: float) -> void:
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
-	
+
 	# uncomment if we want to show detailed ingredients cost for remakes
-	#remake_ingredients_cost_label.text = "-%s%%🫘" % int(Stats.current.ingredients_per_order / float(max_ingredients) * 100)
+	#remake_ingredients_cost_label.text = (
+	#"-%s%%🫘" % int(
+		#Stats.current.ingredients_per_order / float(Stats.current.machine_max_ingredients
+		#) * 100)
+	#)
 
 	ingredients_bar.value = ingredients
 	if ingredients < Stats.current.ingredients_per_order:
@@ -189,7 +195,12 @@ func _customer_queue_update_visuals() -> void:
 	var i: int = 0
 	for queued_customer in queued_customers:
 		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine 
-		var queue_global_position: Vector3 = start_of_customer_queue_marker.global_position.lerp(end_of_customer_queue_marker.global_position, ratio_along_queue)
+		var queue_global_position: Vector3 = (
+			start_of_customer_queue_marker.global_position.lerp(
+				end_of_customer_queue_marker.global_position,
+				ratio_along_queue
+			)
+		)
 		queued_customer.move_to(queue_global_position)
 		i += 1
 
@@ -349,8 +360,8 @@ func _set_customer(new_customer: Customer) -> void:
 		customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
 		await customer.move_to(spot_for_customer.global_position)
 	else:
-		customer_order_indicator.hide()
-		final_order_indicator.hide()
+		ordered_drink_name_label.hide()
+		made_drink_name_label.hide()
 		order_breakdown.hide()
 		waiting_for_response = false
 		timer.stop()
@@ -392,7 +403,7 @@ func machine_make_drink() -> void:
 
 	order = OrderData.new()
 	order.ordered_drink = customer.desired_drink
-	customer_order_indicator.text = (
+	ordered_drink_name_label.text = (
 			"%s (%s)"
 			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
 	)
@@ -412,10 +423,21 @@ func machine_make_drink() -> void:
 	timer.start()
 	Events.machine_making_drink.emit()
 
-	# TODO: make these lines shorter holy
-	var breaking_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_start_each_day[Global.day]
-	var breaking_chance_at_shift_end_for_day: float = Stats.current.chance_of_machine_breaking_at_shift_end_each_day[Global.day]
-	var breaking_chance_now: float = remap(Global.shift_progress_ratio, 0.0, 1.0, breaking_chance_at_shift_start_for_day, breaking_chance_at_shift_end_for_day)
+	var breaking_chance_at_shift_start_for_day: float = (
+		Stats.current.chance_of_machine_breaking_at_shift_start_each_day[Global.day]
+	)
+	var breaking_chance_at_shift_end_for_day: float = (
+		Stats.current.chance_of_machine_breaking_at_shift_end_each_day[Global.day]
+	)
+	var breaking_chance_now: float = (
+		remap(
+			Global.shift_progress_ratio,
+			0.0,
+			1.0,
+			breaking_chance_at_shift_start_for_day,
+			breaking_chance_at_shift_end_for_day)
+	)
+
 	if (
 			randf() <= breaking_chance_now
 			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
@@ -460,17 +482,23 @@ func machine_make_drink() -> void:
 		order.main_correct = true
 	else:
 		order.main_correct = false
-		order.star_rating_gain_for_remake += Stats.current.remade_drink_star_rating_gain_for_incorrect_main_each_day[Global.day]
+		order.star_rating_gain_for_remake += (
+			Stats.current.remade_drink_star_rating_gain_for_incorrect_main_each_day[Global.day]
+		)
 	if order.ordered_drink.liquid == order.made_drink.liquid:
 		order.liquid_correct = true
 	else:
 		order.liquid_correct = false
-		order.star_rating_gain_for_remake += Stats.current.remade_drink_star_rating_gain_for_incorrect_liquid_each_day[Global.day]
+		order.star_rating_gain_for_remake += (
+			Stats.current.remade_drink_star_rating_gain_for_incorrect_liquid_each_day[Global.day]
+		)
 	if order.ordered_drink.extra == order.made_drink.extra:
 		order.extra_correct = true
 	else:
 		order.extra_correct = false
-		order.star_rating_gain_for_remake += Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
+		order.star_rating_gain_for_remake += (
+			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
+		)
 
 	if Global.current_special_shift != null and Global.current_special_shift.name == "Critical Customers":
 		# If critical customers, halve the star rating gains.
@@ -487,16 +515,28 @@ func machine_make_drink() -> void:
 	display_drink_score()
 
 	var shift_progress_ratio: float = Global.shift_progress_ratio
-	var spill_chance_at_shift_start_for_day: float = Stats.current.chance_of_machine_spill_at_shift_start_each_day[Global.day]
-	var spill_chance_at_shift_end_for_day: float = Stats.current.chance_of_machine_spill_at_shift_end_each_day[Global.day]
-	var spill_chance_now: float = remap(shift_progress_ratio, 0.0, 1.0, spill_chance_at_shift_start_for_day, spill_chance_at_shift_end_for_day)
+	var spill_chance_at_shift_start_for_day: float = (
+		Stats.current.chance_of_machine_spill_at_shift_start_each_day[Global.day]
+	)
+	var spill_chance_at_shift_end_for_day: float = (
+		Stats.current.chance_of_machine_spill_at_shift_end_each_day[Global.day]
+	)
+	var spill_chance_now: float = (
+		remap(
+			shift_progress_ratio,
+			0.0,
+			1.0,
+			spill_chance_at_shift_start_for_day,
+			spill_chance_at_shift_end_for_day
+		)
+	)
 	if (
 			randf() < spill_chance_now
 			and Global.spills_this_shift < Stats.current.max_spills_per_shift
 	):
 		spill()
 
-	final_order_indicator.text = (
+	made_drink_name_label.text = (
 			"%s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
@@ -566,9 +606,9 @@ func display_drink_score() -> void:
 		_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
 
 	if order.star_rating_gain_for_remake == 0.0:
-		final_order_indicator.modulate = Color.GREEN
+		made_drink_name_label.modulate = Color.GREEN
 	else:
-		final_order_indicator.modulate = Color.RED
+		made_drink_name_label.modulate = Color.RED
 
 
 func fix_machine(hammer: bool = false) -> void:
@@ -628,7 +668,7 @@ func refill() -> void:
 	Global.holding_ingredients = false
 	Events.ingredients_bag_consumed.emit()
 
-	Events.minigame_active.emit(refill_minigame)
+	Events.minigame_active.emit(REFILL_MINIGAME)
 
 	await Events.minigame_end
 
@@ -728,7 +768,7 @@ func break_down() -> void:
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
 	gui_3d.interactable.visible = false
-	customer_order_indicator.hide()
+	ordered_drink_name_label.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()
 	Events.alert_posted.emit("⚙️ machine broke down")
@@ -751,7 +791,7 @@ func on_active_item_used_machine(item: Item):
 
 
 func _on_clean_spill() -> void:
-	Events.minigame_active.emit(clean_spill_minigame)
+	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
 	Events.minigame_end.connect(clean_up_spill)
 	Events.minigame_cancelled.connect(cancel_clean_spill)
 
@@ -761,7 +801,7 @@ func _on_fix_machine_button_pressed() -> void:
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_machine_fixed)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
-	Events.minigame_active.emit(repair_minigames.pick_random())
+	Events.minigame_active.emit(REPAIR_MINIGAMES.pick_random())
 
 
 func _on_machine_fixed() -> void:
@@ -780,7 +820,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Events.force_close_minigame.connect(_on_force_close_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
-	Events.minigame_active.emit(manual_drink_minigames.pick_random())
+	Events.minigame_active.emit(MANUAL_DRINK_MINIGAMES.pick_random())
 	Events.order_remaking_drink.emit()
 
 	for item in Global.owned_items:
@@ -808,7 +848,7 @@ func _on_remade_drink() -> void:
 	consume_ingredients()
 
 	order.made_drink = order.ordered_drink
-	final_order_indicator.text = (
+	made_drink_name_label.text = (
 			"you made:\n %s (%s)"
 			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
 	)
@@ -846,6 +886,7 @@ func _on_force_close_minigame() -> void:
 		if item.item_id == "barista_guide":
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
+
 
 class OrderData:
 	var ordered_drink: Drink
