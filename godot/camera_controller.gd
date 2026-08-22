@@ -18,7 +18,7 @@ func _input(event: InputEvent) -> void:
 		mouse_input.x += -event.screen_relative.x * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 		mouse_input.y += -event.screen_relative.y * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Global.in_ui:
 		return
 

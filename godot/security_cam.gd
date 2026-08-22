@@ -149,7 +149,7 @@ func _update_camera_components_active() -> void:
 func create_rays() -> void:
 	# we need to overshoot slightly to account for the sorta
 	# halo around the edge of the light
-	const ANGLE_OVERSHOOT := 5.0
+	#const ANGLE_OVERSHOOT := 5.0
 
 	_all_shape_casts.append(_shape_cast_3d)
 	# Disable the template by default.
