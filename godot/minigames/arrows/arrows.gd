@@ -86,6 +86,7 @@ func add_arrow_to_output(output_index: int, color: String, color_index: int, cor
 	else:
 		output_directions[output_index].texture = red_textures[color_index]
 	
+	# While adding to the output array, we keep track of the valid (output) indices here, in order to access the arrows that we make invisible
 	if correct_color == color:
 		valid_indices.append(output_index)
 
@@ -132,6 +133,8 @@ func _start_minigame() -> void:
 	prompt_output.text = "Press the %s directions!" % color_choice
 	
 	# Choose a pool of [max_arrow_count / (general_colors.size())] arrows for each color (likely 2, for blue and red)
+	# Since the random arrow directions chosen here are added to the output in order, we keep track of the correct directions here
+	# (after the if(choose_color == ...) part
 	@warning_ignore("integer_division")
 	for i in range(max_arrow_count / (general_colors.size())):
 		var blue_dir: String = general_directions.pick_random()
