@@ -53,7 +53,7 @@ collide_with_areas = true
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.08502839, -0.013210096, -0.050947692, 0.021402877, 0.09711249, 0.010539994, 0.048084166, -0.019866265, 0.0854005, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=2045249375]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=672749605]
 transform = Transform3D(0.83222854, 0.30946758, -0.4600262, -0.1782857, 0.93503195, 0.3064773, 0.5249845, -0.1730432, 0.8333341, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraController/Camera3D/ingredientbag" unique_id=1902215747]
@@ -70,7 +70,7 @@ one_shot = true
 [node name="ExplodingBombItem" type="Node" parent="." unique_id=749561136 node_paths=PackedStringArray("camera", "player")]
 script = ExtResource("5_sweqy")
 exploding_bomb_scene = ExtResource("6_2hs0m")
-camera = NodePath("../CameraRig/Camera3D")
+camera = NodePath("../CameraController/Camera3D")
 player = NodePath("..")
 
 [editable path="CameraController/Camera3D/ingredientbag"]
