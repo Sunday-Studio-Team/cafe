@@ -55,7 +55,7 @@ bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
 script = ExtResource("1_iuqyn")
 background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
 arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
-prompt_output = NodePath("CanvasLayer/Control/Prompt")
+prompt_output = NodePath("CanvasLayer/Prompt")
 wrong_sign = NodePath("CanvasLayer/wrong")
 arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
 blue_left = Array[Texture]([ExtResource("2_vxntg"), ExtResource("3_fv8pj"), ExtResource("4_l8ovb"), ExtResource("5_qk4ro"), ExtResource("6_27pub")])
@@ -167,40 +167,45 @@ stretch_mode = 5
 custom_maximum_size = Vector2(1758, -1)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.036000002
-anchor_top = 0.40500003
-anchor_right = 0.96400005
-anchor_bottom = 0.80600005
+anchor_top = 0.066
+anchor_right = 1.0
+anchor_bottom = 0.92300004
+offset_left = 104.28
+offset_top = 136.54713
+offset_right = -102.52014
+offset_bottom = -47.551697
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]
-layout_mode = 3
-anchor_left = 0.425
-anchor_top = 0.605
-anchor_right = 0.425
-anchor_bottom = 0.677
-grow_horizontal = 2
-
-[node name="Prompt" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1688849488]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -881.0
-offset_top = -131.5
-offset_right = 881.0
-offset_bottom = 131.5
+[node name="Prompt" type="RichTextLabel" parent="CanvasLayer" unique_id=1688849488]
+anchors_preset = -1
+anchor_left = 0.047000002
+anchor_top = 0.606
+anchor_right = 0.79700005
+anchor_bottom = 0.946
+offset_left = 308.76
+offset_top = 25.519958
+offset_right = -283.8401
+offset_bottom = -228.96014
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 57
 bbcode_enabled = true
 text = "This text should not appear in game"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]
+layout_mode = 3
+anchor_left = 0.041
+anchor_top = 0.064
+anchor_right = 0.80500007
+anchor_bottom = 0.92800003
+offset_right = 78.71997
+offset_bottom = 1406.8801
+grow_horizontal = 2
 
 [node name="Border" type="NinePatchRect" parent="CanvasLayer" unique_id=1238806735]
 anchors_preset = 15
