@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 const STRIDE_LENGTH := 0.75
 
-@export var camera: Camera3D
+@export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
@@ -19,6 +19,7 @@ var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
 
+var _is_sprinting: bool
 var mouse_sens := 0.1
 # the mouse's movement since the last physics frame .
 # we get mouse input from _unhandled_input() which is called continuously, so
@@ -45,24 +46,24 @@ func _ready() -> void:
 	Global.player = self
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
-	
+
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
 
+	ingredients_bag.visibility_changed.connect(
+		func():
+			if ingredients_bag.visible:
+				ingredients_bag.scale = Vector3.ZERO
+	)
 	Events.bag_pickup_animation_grabbed.connect(
 		func():
 			bag_pickup_sound.play()
-
-			# scuffed 'animation' of bag appearing when we grab it
-			ingredients_bag.transparency = 1
-			ingredients_bag.scale = Vector3.ZERO
 
 			await Events.viewmodel_animation_finished
 
 			var t := create_tween().set_parallel()
 			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
-			t.tween_property(ingredients_bag, "transparency", 0, 0.25),
 	)
 
 	Global.stamina = Stats.current.max_stamina
@@ -72,8 +73,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
-	
-	handle_mouselook()
+
+	#handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
@@ -86,10 +87,12 @@ func _physics_process(delta: float) -> void:
 	handle_floating_cursor()
 	move_and_slide()
 
+func is_sprinting() -> bool:
+	return _is_sprinting
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		mouse_delta += event.screen_relative * mouse_sens
+#func _unhandled_input(event: InputEvent) -> void:
+#	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+#		mouse_delta += event.screen_relative * mouse_sens
 
 
 # this is what decides whether to show the mouse
@@ -121,13 +124,13 @@ func handle_active_items() -> void:
 			Events.active_item_used.emit(Global.equipped_item)
 
 
-func handle_mouselook() -> void:
-	camera.rotation_degrees.x -= mouse_delta.y
-	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-
-	rotation_degrees.y -= mouse_delta.x
-
-	mouse_delta = Vector2.ZERO
+#func handle_mouselook() -> void:
+#	camera.rotation_degrees.x -= mouse_delta.y
+#	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
+#
+#	rotation_degrees.y -= mouse_delta.x
+#
+#	mouse_delta = Vector2.ZERO
 
 
 func handle_movement(delta: float) -> void:
@@ -173,8 +176,12 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
+		if camera == null:
+			return
+
 		if (
-			not hovered_interactable.visible or not hovered_interactable.is_inside_tree()
+			not hovered_interactable.visible
+			or not hovered_interactable.is_inside_tree()
 			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
@@ -212,8 +219,9 @@ func handle_sprint(delta: float) -> void:
 		if item.item_id == "roller_skates":
 			has_roller_skates = true
 			break
-	
+
 	if Input.is_action_pressed("sprint") and !has_roller_skates:
+		_is_sprinting = true
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
 				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
@@ -221,12 +229,14 @@ func handle_sprint(delta: float) -> void:
 			Global.stamina += Stats.current.stamina_regen_rate * delta
 
 		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
+			_is_sprinting = true
 			_current_move_speed = _sprint_move_speed
-
 		else:
+			_is_sprinting = false
 			_current_move_speed = _walk_move_speed
 			Global.stamina += Stats.current.stamina_regen_rate * delta
 	else:
+		_is_sprinting = false
 		_current_move_speed = _walk_move_speed
 		Global.stamina += Stats.current.stamina_regen_rate * delta
 
@@ -254,7 +264,7 @@ func handle_footstep_sounds() -> void:
 func tilt_camera() -> void:
 	const TILT_AMOUNT := 0.25
 
-	var local_velocity = basis.transposed() * velocity
+	var local_velocity: Vector3 = basis.transposed() * velocity
 	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
 
 
@@ -262,103 +272,12 @@ func handle_ingredients_bag() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_ingredients and not Global.in_ui):
 		Global.holding_ingredients = false
 		var bag_to_drop: RigidBody3D = ingredients_bag_scene.instantiate()
-		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		Global.main_scene.add_child(bag_to_drop)
+		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
 
+
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()
-
-class PlayerStatusEffects extends RefCounted:
-	var _player: Player
-	var _player_status_effects_array: Array[PlayerStatusEffect] = []
-
-	func _init(player: Player) -> void:
-		_player = player
-		_reset_stats()
-
-	func has_status_effect_from_owner(owner: RefCounted) -> bool:
-		for status_effect in _player_status_effects_array:
-			if status_effect.get_owner() == owner:
-				return true
-		return false
-
-	func recalculate_status_effects() -> void:
-		_reset_stats()
-		_apply_status_effects()
-
-	func apply_status_effect(status_effect: Player.PlayerStatusEffect) -> void:
-		_reset_stats()
-		_player_status_effects_array.append(status_effect)
-		_apply_status_effects()
-	
-	func remove_status_effect(status_effect: Player.PlayerStatusEffect) -> void:
-		var index: int = _player_status_effects_array.find(status_effect)
-		if index == -1:
-			return
-		_player_status_effects_array.remove_at(index)
-		_reset_stats()
-		_apply_status_effects()
-	
-	func process_status_effects(delta: float) -> void:
-		for i in range(_player_status_effects_array.size()):
-			if i >= _player_status_effects_array.size():
-				return
-			var status_effect: PlayerStatusEffect = _player_status_effects_array[i]
-			status_effect.process_status_effect(delta)
-			if status_effect.is_status_effect_expired():
-				remove_status_effect(status_effect)
-			else:
-				i += 1
-
-	func _reset_stats() -> void:
-		# Reset to base stats
-		_player._walk_move_speed = Stats.current.default_move_speed
-		_player._sprint_move_speed = Stats.current.sprint_move_speed
-	
-	func _apply_status_effects() -> void:
-		for player_status_effect in _player_status_effects_array:
-			player_status_effect.apply_effect(_player)
-
-@abstract
-class PlayerStatusEffect extends RefCounted:
-	@abstract 
-	func apply_effect(player: Player) -> void
-
-	@abstract
-	func process_status_effect(delta: float) -> void
-	
-	@abstract
-	func is_status_effect_expired() -> bool
-	
-	@abstract
-	func get_owner() -> Object
-
-
-class CameraSlowPlayerStatusEffect extends PlayerStatusEffect:
-	var _owner_camera: SecurityCam3D
-	var _duration: float
-	var _duration_remaining: float
-	var _expired: bool
-
-	func _init(owner_camera: SecurityCam3D, duration: float) -> void:
-		_owner_camera = owner_camera
-		_duration = duration
-		_duration_remaining = _duration
-	
-	func apply_effect(player: Player) -> void:
-		player._walk_move_speed *= 0.5
-		player._sprint_move_speed *= 0.5
-	
-	func process_status_effect(delta: float) -> void:
-		_duration_remaining -= delta
-		if _duration_remaining <= 0.0:
-			_expired = true
-	
-	func is_status_effect_expired() -> bool:
-		return _expired
-
-	func get_owner() -> Object:
-		return _owner_camera as Object

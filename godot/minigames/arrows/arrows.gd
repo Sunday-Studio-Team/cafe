@@ -111,12 +111,15 @@ func _start_minigame() -> void:
 	prompt_output.text = "Press the %s directions!" % color_choice
 
 	# Randomly choose arrow directions
+	@warning_ignore("integer_division")
 	for i in range(max_arrow_count / 2):
 		blue_directions.append([general_direction_to_arrow[general_directions.pick_random()].pick_random(), blue])
 		red_directions.append([general_direction_to_arrow[general_directions.pick_random()].pick_random(), red])
 
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
+	@warning_ignore("integer_division")
 	var bi: int = max_arrow_count / 2 - 1
+	@warning_ignore("integer_division")
 	var ri: int = max_arrow_count / 2 - 1
 	while bi >= 0 and ri >= 0:
 		var choose_dir = randi_range(0, 1)

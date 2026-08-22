@@ -17,5 +17,12 @@ enum CrosshairOption {
 	
 @export var crosshair_option: CrosshairOption = CrosshairOption.On
 
+enum CameraMotionOption {
+	On,
+	Off,
+}
+	
+@export var camera_motion_option: CameraMotionOption = CameraMotionOption.On
+
 func apply_options() -> void:	
 	Events.game_options_changed.emit(self)

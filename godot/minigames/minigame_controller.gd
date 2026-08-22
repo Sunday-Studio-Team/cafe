@@ -42,7 +42,6 @@ func play_minigame(minigame_name: String):
 
 
 func close_game():
-	Input.set_custom_mouse_cursor(null)
 	sub_viewport.get_child(0).queue_free()
 	visible = false
 	Global.minigame_active = false

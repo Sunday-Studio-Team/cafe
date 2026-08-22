@@ -7,6 +7,7 @@ extends Node
 @export_dir var ingredients_folder_path: String
 @export_dir var customer_sprites_folder_path: String
 @export_dir var spill_sprites_path: String
+@export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 @export var star_texture: Texture
@@ -15,7 +16,6 @@ extends Node
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 @export var special_shifts: Array[SpecialShift]
-
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
 var player: Player
@@ -51,11 +51,15 @@ var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
-var active_helpdesk_customer: Customer
+var active_help_desk_customer: Customer
 var holding_ingredients := false
 var day := 0
+var shift_length: float
+var shift_time_remaining: float
+var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
+var tippy_voice_lines: Array[TippyVoiceLine]
 var daily_cafe_money := 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
@@ -89,20 +93,18 @@ var employee_rating: float = 0:
 		# (see comment for same lines in above func)
 		await get_tree().process_frame
 		score_update_message = ""
-var customer_flow_rate: float
+var machine_customer_flow_rate: float
+var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
-# rules (true = rule in effect) (these are toggled per-day in main.gd)
-var holding_ingredients_rule := false
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[Texture]
 ## the sprites of customers that are in the cafe right now
-## (tracked so we dont spawn 2 of the same)
-var customer_sprites_spawned: Array[Texture]
+var customer_sprites_in_use: Array[Texture]
 var spill_sprites: Array[Texture]
 var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
@@ -177,6 +179,7 @@ func _ready() -> void:
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
+	tippy_voice_lines.assign(load_resources_from_folder(tippy_voice_path))
 
 
 # NOTE: these things in physics process instead of process for timing reasons
@@ -191,7 +194,7 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
-		if Global.minigame_active and in_spill_minigame:
+		if in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -238,3 +241,20 @@ func refresh_active_items():
 func put_active_item_on_cooldown(target_item: Item):
 	target_item.active_item_remaining_cooldown = target_item.active_item_cooldown_at_levels[target_item.item_level]
 	target_item.can_be_used = false
+
+
+func day_to_string(d: int) -> String:
+	var days_as_strings: Dictionary = {
+		0: "Friday",
+		1: "Monday",
+		2: "Tuesday",
+		3: "Wednesday",
+		4: "Thursday",
+	}
+
+	var day_as_string: String = days_as_strings[d % 5]
+
+	if d == 0:
+		day_as_string = "TRAINING"
+
+	return day_as_string

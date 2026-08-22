@@ -1,6 +1,8 @@
 class_name Customer
 extends Node3D
 
+signal wait_timed_out(customer: Customer)
+
 const MOVE_SPEED := 2.0
 
 @export var body: Sprite3D
@@ -21,14 +23,25 @@ var percent_time_left: float = 100
 
 
 func _ready() -> void:
-	while body.texture == null or Global.customer_sprites_spawned.has(body.texture):
-		body.texture = Global.customer_sprites.pick_random()
-	Global.customer_sprites_spawned.append(body.texture)
+	# Find all unused customer sprites
+	var unused_customer_sprites: Array[Texture]
+	for customer_sprite in Global.customer_sprites:
+		if !Global.customer_sprites_in_use.has(customer_sprite):
+			unused_customer_sprites.append(customer_sprite)
+	
+	# Prefer using an unused one, else just get a random one.
+	var customer_texture: Texture
+	if unused_customer_sprites.size() > 0:
+		customer_texture = unused_customer_sprites.pick_random()
+	else:
+		customer_texture = Global.customer_sprites.pick_random()
+	Global.customer_sprites_in_use.append(customer_texture)
+	body.texture = customer_texture
+	
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
-	Events.customer_left_machine.connect(_on_customer_left_machine)
 	# NOTE: not actually sure what this true argument does here lol
 	add_to_group("customers", true)
 
@@ -63,7 +76,7 @@ func _process(_delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	Global.customer_sprites_spawned.erase(body.texture)
+	Global.customer_sprites_in_use.erase(body.texture)
 
 
 func spawn_anim() -> void:
@@ -116,9 +129,7 @@ func leave_store() -> void:
 
 
 func _on_timer_timeout() -> void:
-	if not at_window:
-		Events.customer_approached_window.emit(self)
-
+	wait_timed_out.emit(self)
 
 func _on_order_started(customer: Customer) -> void:
 	if customer != self or orders_made > 0:
@@ -133,16 +144,3 @@ func _on_order_approved(customer: Customer) -> void:
 		return
 
 	timer.stop()
-
-
-func _on_customer_left_machine(customer: Customer, _drink_score) -> void:
-	if customer != self:
-		return
-
-	time_bonus_label.hide()
-	leave_store()
-	# window complaint mechanic (disabled for now)
-	#if (drink_score > -3):
-	#leave_store()
-	#else:
-	#Events.customer_approached_window.emit(self)

@@ -1,24 +1,23 @@
 extends Node3D
 
-static var seen_interaction_popup := false
-static var seen_breakdown_popup := false
-
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
-@export var _cameras: Array[SecurityCam3D]
+@export var _left_area_camera: SecurityCam3D
+@export var _middle_camera: SecurityCam3D
+@export var _right_area_camera: SecurityCam3D
+@export var _hallway_camera: SecurityCam3D
 @export var menu: Menu3D
-# (machines numbered in order from the window here)
-@export var first_machine: Machine
-@export var second_machine: Machine
-@export var third_machine: Machine
-@export var fourth_machine: Machine
-@export var customer_spawn_timer: Timer
+@export var _right_area_left_machine: Machine
+@export var _right_area_right_machine: Machine
+@export var _left_area_left_machine: Machine
+@export var _left_area_middle_machine: Machine
+@export var _left_area_right_machine: Machine
+@export var _customer_help_desk: CustomerHelpDesk
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
-@export var window: Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
 @export var desk: Desk
@@ -30,11 +29,8 @@ static var seen_breakdown_popup := false
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
-@export var active_item_timer: Timer
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var interaction_popup: CanvasLayer
-@export var breakdown_popup: CanvasLayer
 @export var special_shift_icon: TextureRect
 @export var special_shift_text: Label
 @export var special_shift_title: Label
@@ -44,26 +40,59 @@ static var seen_breakdown_popup := false
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
+@export var shift_start_sound: AudioStreamPlayer
+
+var _machine_customer_spawn_timer: Timer
+var _help_desk_customer_spawn_timer: Timer
+
+@export var tippy_voice_player: AudioStreamPlayer
+@export var tippy_voice_timer: Timer
 
 var seen_tutorial_machine_instructions: bool = false
-var machines: Array[Machine]
+var _all_machines: Array[Machine]
+var _active_machines: Array[Machine]
+var _all_security_cameras: Array[SecurityCam3D]
 
-@onready var tutorial_machine: Machine = first_machine
+@onready var tutorial_machine: Machine = _right_area_right_machine
 
 
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
 	SaveDataManager.get_options_data().apply_options()
-	
+
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
 	
+	_all_machines = [
+		_right_area_left_machine,
+		_right_area_right_machine,
+		_left_area_left_machine,
+		_left_area_middle_machine,
+		_left_area_right_machine,
+	]
+	
+	_all_security_cameras = [
+		_left_area_camera,
+		_middle_camera,
+		_right_area_camera,
+		_hallway_camera,
+	]
+
 	Events.employee_rating_updated.connect(_on_employee_rating_updated)
-	customer_spawn_timer.timeout.connect(_on_customer_timer_timeout)
-	customer_spawn_timer.autostart = false
+	
+	_machine_customer_spawn_timer = Timer.new()
+	add_child(_machine_customer_spawn_timer)
+	_machine_customer_spawn_timer.timeout.connect(_on_machine_customer_spawn_timer_timeout)
+	_machine_customer_spawn_timer.autostart = false
+	
+	_help_desk_customer_spawn_timer = Timer.new()
+	add_child(_help_desk_customer_spawn_timer)
+	_help_desk_customer_spawn_timer.timeout.connect(_on_help_desk_customer_spawn_timer_timeout)
+	_help_desk_customer_spawn_timer.autostart = false
+	
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
@@ -86,25 +115,26 @@ func _ready() -> void:
 	Global.spills_this_shift = 0
 	Global.breakdowns_this_shift = 0
 	Global.in_machine_ui = false
+	Global.machine_in_use = null
 	Global.in_pc_ui = false
-	Global.customer_flow_rate = _get_customer_flow_rate()
+	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
+	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	get_stats()
 
-	ui.hide()
-
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
-	if Global.day == 1:
-		if not OS.has_feature("editor"):
-			_tutorial_manager.show_tutorial()
-			await _tutorial_manager.finished_tutorial
 
-	day_indicator.text = "DAY %s" % Global.day
+	for ui_element: Control in ui.find_children("*", "Control", false):
+		ui_element.modulate = Color.TRANSPARENT
+
+	day_indicator.text = Global.day_to_string(Global.day).to_upper()
 	day_indicator.show()
+	await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
 	await get_tree().create_timer(3, false).timeout
-	if not Global.in_pc_ui:
-		ui.show()
+	await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
 	day_indicator.hide()
-	Input.set_custom_mouse_cursor(null)
+
+	for ui_element: Control in ui.find_children("*", "Control", false):
+		create_tween().tween_property(ui_element, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT)
 
 	# spawn one customer early off-sync with the timers wait time
 	# so we dont have to wait loads every time we start the game to test
@@ -119,9 +149,9 @@ func _ready() -> void:
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
-	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		Global.popups["special shift"].open()
-	
+	#if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		#Global.popups["special shift"].open()
+
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
 
@@ -135,8 +165,34 @@ func _ready() -> void:
 		# waypoint_ring.hide()
 
 
+	# Add tippy voice lines
+	Events.low_time_warning.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_low_time)
+	)
+	Events.customer_low_time_warning.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.customer_low_time)
+	)
+	Events.order_remaking_drink.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.remake_drink)
+	)
+	Events.machine_making_drink.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.machine_make_drink)
+	)
+	Events.under_money_goal.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.under_goal)
+	)
+	Events.spill_clean_done.connect(func():
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
+	)
+	Events.order_approved.connect(func(_customer: Customer):
+		_tippy_voice_play(TippyVoiceLine.TippyLineType.accept_drink)
+	)
+
 
 func _process(delta: float) -> void:
+	Global.shift_time_remaining = game_timer.time_left
+	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
+
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
@@ -147,15 +203,15 @@ func _process(delta: float) -> void:
 
 
 func get_stats() -> void:
-	customer_spawn_timer.wait_time = Global.customer_flow_rate
+	_machine_customer_spawn_timer.wait_time = Global.machine_customer_flow_rate
+	_help_desk_customer_spawn_timer.wait_time = Global.help_desk_customer_flow_rate
 
 	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
-	if Global.owned_items.has(overtime_item):
-		shift_length += Stats.current.extra_time_from_overtime_form_item
+	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
 
-	if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		Global.current_special_shift.apply_stats()
+	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+	# 	Global.current_special_shift.apply_stats()
 
 	enable_disable_teleporters()
 
@@ -185,85 +241,110 @@ func enable_disable_teleporters():
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	if Global.day == 0:
+		var email_manager: EmailsManager = EmailsManager.get_instance()
+		email_manager._delivered_emails_to_date.clear()
+		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
 		Stats.current.customer_wait_time_machine = INF
-		Stats.current.chance_of_machine_breaking = 0.0
 		Stats.current.machine_chance_of_spill = 0.0
-		machines.clear()
-		machines.push_front(tutorial_machine)
-		_set_security_cameras_active(false)
+		_active_machines.clear()
+		_active_machines.push_front(tutorial_machine)
+		_set_day_security_cameras_active([])
+
 	if Global.day == 1:
+		# Reset run.
+		var email_manager: EmailsManager = EmailsManager.get_instance()
+		email_manager._delivered_emails_to_date.clear()
+		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
-	if Global.day >= 1:
-		_set_security_cameras_active(false)
-		machines.clear()
-		machines.push_front(first_machine)
-		machines.push_front(second_machine)
-		# whiteboard_tutorial_arrow.visible = false
-	if Global.day >= 2:
-		machines.append(third_machine)
-		_set_security_cameras_active(true)
-	if Global.day >= 3:
-		machines.push_front(fourth_machine)
-		# Global.holding_ingredients_rule = true
-	if Global.day == 5:
-		pass
 
-	if Global.ai_improvement and !Global.ai_improvement_enabled:
-		# actually add the stats now
-		for stat in Global.ai_improvement.stat_bonuses:
-			var current_stat = Stats.current.get(stat)
-			if current_stat == null:
-				push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
-			Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
-		Global.ai_improvement_enabled = true
+	if Global.day == 1:
+		_active_machines.clear()
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([])
+
+	if Global.day == 2:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_set_day_security_cameras_active([_middle_camera])
+	
+	if Global.day == 3:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([_middle_camera, _right_area_camera])
+
+	if Global.day == 4:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_left_machine)
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+
+	if Global.day == 5:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_left_machine)
+		_active_machines.push_back(_left_area_middle_machine)
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
 
 	menu.populate_drinks()
 
-	Global.machines.assign(machines)
-
-	#select a special shift if it is not day one
-	if Global.day > 1:
-		var rng = RandomNumberGenerator.new()
-		var weights: PackedFloat32Array
-		for special_shift in Global.special_shifts:
-			weights.append(special_shift.weight)
-
-		var selected_index := rng.rand_weighted(weights)
-		Global.current_special_shift = Global.special_shifts[selected_index]
-	else:
-		Global.current_special_shift = Global.special_shifts[0]
-
+	Global.machines.assign(_active_machines)
 
 func spawn_machines():
-	for machine: Machine in [first_machine, second_machine, third_machine, fourth_machine]:
+	for machine: Machine in _all_machines:
 		machine.hide()
 		machine.process_mode = Node.PROCESS_MODE_DISABLED
 
-	for machine: Machine in machines:
+	for machine: Machine in _active_machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
 
 
-func _on_customer_timer_timeout() -> void:
-	customer_spawn_timer.wait_time = Global.customer_flow_rate
-	customer_spawn_timer.start()
-	spawn_customer()
+func _on_machine_customer_spawn_timer_timeout() -> void:
+	_machine_customer_spawn_timer.wait_time = Global.machine_customer_flow_rate
+	_machine_customer_spawn_timer.start()
+	spawn_machine_customer()
 
-func spawn_customer() -> void:
+func _on_help_desk_customer_spawn_timer_timeout() -> void:
+	_help_desk_customer_spawn_timer.wait_time = Global.help_desk_customer_flow_rate
+	_help_desk_customer_spawn_timer.start()
+	spawn_help_desk_customer()
+
+func spawn_machine_customer() -> void:
 	var available_machines: Array[Machine] = []
-	for machine in machines:
+	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
 			available_machines.append(machine)
 	
 	if available_machines.size() == 0:
 		return
 	
-	var assigned_machine: Machine = available_machines.pick_random()
+	# Get the machine that's got the shortest queue.
+	var shortest_queue_machine: Machine = null
+	for machine in available_machines:
+		if shortest_queue_machine == null:
+			shortest_queue_machine = machine
+			continue
+		if machine.customer == null and shortest_queue_machine.customer != null:
+			shortest_queue_machine = machine
+			continue
+		if machine.queued_customers.size() < shortest_queue_machine.queued_customers.size():
+			shortest_queue_machine = machine
+			continue
+	
+	var assigned_machine: Machine = shortest_queue_machine
 	if assigned_machine == null:
 		printerr("Machine to spawn at should never be null?")
 		return
@@ -274,6 +355,15 @@ func spawn_customer() -> void:
 
 	assigned_machine.add_customer_to_queue(new_customer)
 
+func spawn_help_desk_customer() -> void:
+	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
+		return
+	
+	var new_customer: Customer = customer_scene.instantiate()
+	new_customer.position = spot_for_customer_entry.position
+	add_child(new_customer)
+	
+	_customer_help_desk.add_customer_to_queue(new_customer)
 
 #Actives the effects of a given active item
 func active_item_used(item: Item):
@@ -284,7 +374,7 @@ func active_item_used(item: Item):
 		else:
 			customer_wait_duration_extension = 30.0
 		
-		for machine in machines:
+		for machine in _active_machines:
 			if machine.customer:
 				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
 
@@ -293,9 +383,12 @@ func active_item_used(item: Item):
 		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension)
 
 
-func _set_security_cameras_active(active: bool) -> void:
-	for security_camera in _cameras:
-		security_camera.visible = active
+func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D]) -> void:
+	for security_camera in _all_security_cameras:
+		if security_camera in cameras_to_set_active:
+			security_camera.visible = true
+		else:
+			security_camera.visible = false
 
 
 func _on_pause_menu_tutorial_requested() -> void:
@@ -333,10 +426,12 @@ func _on_minigame_end():
 
 func _on_shift_started():
 	Global.shift_started = true
+	shift_start_sound.play()
 
 	if Global.day > 0:
 		game_timer.start()
-		customer_spawn_timer.start(Stats.current.first_customer_entry_time)
+		_machine_customer_spawn_timer.start(Stats.current.first_machine_customer_entry_time)
+		_help_desk_customer_spawn_timer.start(Stats.current.first_help_desk_customer_entry_time)
 		
 		var has_scrubber: bool = false
 		for item in Global.owned_items:
@@ -349,6 +444,8 @@ func _on_shift_started():
 	
 	else:
 		_interactive_tutorial_shift()
+	
+	_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_start)
 
 func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
@@ -358,25 +455,24 @@ func _interactive_tutorial_flow():
 				_tutorial_manager.show_machine_tutorial()
 				seen_tutorial_machine_instructions = true
 	)
-	
+
 
 func _interactive_tutorial_shift() -> void:
-	
 	if tutorial_machine == null:
 		return
-	
+
 	# First customer, accept order
 	tutorial_machine.force_next_drink_perfect()
-	spawn_customer()
+	spawn_machine_customer()
 	tutorial_machine.set_order_action_buttons_available("accept")
 
 	while tutorial_machine.customer != null or tutorial_machine.queued_customers.size() > 0:
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5, false).timeout
 
-	# Third customer, make drink
+	# Second customer, manually remake drink
 	tutorial_machine.force_next_drink_incorrect()
-	spawn_customer()
+	spawn_machine_customer()
 	tutorial_machine.set_order_action_buttons_available("make_drink")
 
 	while tutorial_machine.customer != null or tutorial_machine.queued_customers.size() > 0:
@@ -387,6 +483,7 @@ func _interactive_tutorial_shift() -> void:
 	tutorial_machine.customer = null
 	tutorial_machine.waiting_for_response = false
 	tutorial_machine.ingredients = 0
+	tutorial_machine.no_ingredients_sound.play()
 	tutorial_machine.set_order_action_buttons_available("refill")
 
 	while tutorial_machine.ingredients <= 0:
@@ -405,11 +502,16 @@ func _interactive_tutorial_shift() -> void:
 	while tutorial_machine.broken_down:
 		await get_tree().process_frame
 
+	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
+
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
 	SaveDataManager.save_game()
 
-	Global.day = 1
-	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+	if replaying_tutorial:
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+	else:
+		Global.day = 1
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 func _on_desk_interacted() -> void:
@@ -469,19 +571,55 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
 
 
-func _on_employee_rating_updated(new_value: float, old_value: float) -> void:
-	var new_flow_rate: float = _get_customer_flow_rate()
-	Global.customer_flow_rate = new_flow_rate
-	if customer_spawn_timer.time_left > new_flow_rate:
-		customer_spawn_timer.wait_time = new_flow_rate
-		customer_spawn_timer.start()
+func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
+	var new_machine_customer_flow_rate: float = _get_machine_customer_flow_rate()
+	Global.machine_customer_flow_rate = new_machine_customer_flow_rate
+	if _machine_customer_spawn_timer.time_left > new_machine_customer_flow_rate:
+		_machine_customer_spawn_timer.wait_time = new_machine_customer_flow_rate
+		_machine_customer_spawn_timer.start()
 
-func _get_customer_flow_rate() -> float:
-	return _rating_to_customer_flow_rate(Global.employee_rating)
+	var new_help_desk_customer_flow_rate: float = _get_help_desk_customer_flow_rate()
+	Global.help_desk_customer_flow_rate = new_help_desk_customer_flow_rate
+	if _help_desk_customer_spawn_timer.time_left > new_help_desk_customer_flow_rate:
+		_help_desk_customer_spawn_timer.wait_time = new_help_desk_customer_flow_rate
+		_help_desk_customer_spawn_timer.start()
 
-## In seconds per customer entry.
-func _rating_to_customer_flow_rate(current_employee_rating: float) -> float:
-	var min_flow_rate_for_day: float = Stats.current.customer_flow_rate_at_min_rating_per_day[Global.day]
-	var max_flow_rate_for_day: float = Stats.current.customer_flow_rate_at_max_rating_per_day[Global.day]
-	var seconds_per_customer: float = remap(current_employee_rating, 0.0, Stats.current.employee_rating_max, min_flow_rate_for_day, max_flow_rate_for_day)
+
+func _get_machine_customer_flow_rate() -> float:
+	return _rating_to_machine_customer_flow_rate(Global.employee_rating)
+
+func _get_help_desk_customer_flow_rate() -> float:
+	return _rating_to_help_desk_customer_flow_rate(Global.employee_rating)
+
+## In seconds per machine customer entry.
+func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> float:
+	var rating_flow_rate_curve_for_day: Curve = Stats.current.machine_customer_flow_rate_at_rating_curve_per_day[Global.day]
+	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
+	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	print("secs per machine customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
+
+## In seconds per help desk customer entry.
+func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> float:
+	var rating_flow_rate_curve_for_day: Curve = Stats.current.help_desk_customer_flow_rate_at_rating_curve_per_day[Global.day]
+	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
+	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	print("secs per help desk customer: %.1f" % seconds_per_customer)
+	return seconds_per_customer
+
+
+func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
+	if tippy_voice_player.playing:
+		return
+
+	if !tippy_voice_timer.is_stopped():
+		return
+
+	var chance_play = randf_range(0.0, 1.0)
+	if voice_line == TippyVoiceLine.TippyLineType.shift_low_time:
+		chance_play += 0.25
+
+	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
+		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
+		tippy_voice_player.play()
+		tippy_voice_timer.start(randf_range(10.0, 16.0))

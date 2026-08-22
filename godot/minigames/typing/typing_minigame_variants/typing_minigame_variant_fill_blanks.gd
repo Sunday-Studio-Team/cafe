@@ -23,13 +23,9 @@ func start_minigame_variant(customer: Customer) -> void:
 	var typing_minigame_contents_index: int = randi_range(0, contents.size()-1)
 	var typing_minigame_content: TypingMinigameContentFillBlanks = contents[typing_minigame_contents_index]
 	
-	# Get a random customer dialog
-	var typing_minigame_content_customer_dialog_index: int = randi_range(0, typing_minigame_content.possible_customer_dialog.size()-1)
-	var customer_dialog: String = typing_minigame_content.possible_customer_dialog[typing_minigame_content_customer_dialog_index]
-
-	# Get a random player reply
-	var typing_minigame_content_player_reply_index: int = randi_range(0, typing_minigame_content.possible_reply_sentences.size()-1)
-	_sentence = typing_minigame_content.possible_reply_sentences[typing_minigame_content_player_reply_index]
+	## Get a random dialog with reply
+	_sentence = typing_minigame_content.customer_dialog_and_player_replies.pick_random()		
+	var customer_dialog: String = _sentence.customer_dialog
 
 	customer_dialog_view.init(customer_dialog)
 	customer_dialog_view.play_dialog()

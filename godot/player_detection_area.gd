@@ -29,7 +29,7 @@ func show_tutorial_this_is_camera()-> void:
 	# janky way to make sure the popup tutorial does not show up while in a menu/minigame
 	while (Global.in_ui):
 		await get_tree().create_timer(0.25).timeout
-		
+
 
 	#await get_tree().create_timer(0.75).timeout #allows audio to play first
 	if (Global.day == 2) and (Global.tutorial_show_camera == false):
