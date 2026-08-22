@@ -15,7 +15,6 @@ extends Node
 @export var empty_star_texture: Texture
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
-@export var special_shifts: Array[SpecialShift]
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
 var player: Player
@@ -106,7 +105,6 @@ var customer_sprites: Array[Texture]
 ## the sprites of customers that are in the cafe right now
 var customer_sprites_in_use: Array[Texture]
 var spill_sprites: Array[Texture]
-var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
