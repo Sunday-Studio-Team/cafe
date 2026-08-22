@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dngdj3sgfen6c" path="res://security_cam.gd" id="1_w3jiq"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_8ad36"]
+[ext_resource type="AudioStream" uid="uid://dt8bc2jwulf55" path="res://audio/camera_disable.wav" id="3_0j8nf"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="3_j0k3h"]
 [ext_resource type="PackedScene" uid="uid://cmy2r1onge1xx" path="res://Assets/Camera/camera.glb" id="3_qlhcy"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="5_jdgwh"]
@@ -53,7 +54,24 @@ albedo_color = Color(1, 1, 1, 0.22352941)
 [sub_resource type="ViewportTexture" id="ViewportTexture_sghrc"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disabled_timer_sprite", "disabled_timer_bar")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mjix0"]
+initial_velocity_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovvye"]
+albedo_color = Color(1, 0.6784314, 0.27450982, 1)
+metallic = 1.0
+emission_enabled = true
+emission = Color(0.7647059, 0.7647059, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_ovvye")
+radius = 0.005
+height = 0.02
+radial_segments = 4
+rings = 0
+
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disabled_timer_sprite", "disabled_timer_bar")]
 script = ExtResource("1_w3jiq")
 _shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
 spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
@@ -62,12 +80,19 @@ aim_path_follow_3d = NodePath("AimPath3D/AimPathFollow3D")
 grace_timer = NodePath("GraceTimer")
 disabled_timer = NodePath("DisabledTimer")
 interactable = NodePath("SabotageInteractable")
-caught_audio_stream_player_3d = NodePath("AudioStreamPlayer3D")
+caught_audio_stream_player_3d = NodePath("CaughtSound")
+disable_sound = NodePath("DisableSound")
+disable_particles = NodePath("DisableParticles")
 disabled_timer_sprite = NodePath("DisabledTimerSprite")
 disabled_timer_bar = NodePath("DisabledTimerSprite/SubViewport/TextureProgressBar")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=706302561]
+[node name="CaughtSound" type="AudioStreamPlayer3D" parent="." unique_id=706302561]
 stream = ExtResource("3_j0k3h")
+
+[node name="DisableSound" type="AudioStreamPlayer3D" parent="." unique_id=640117199]
+stream = ExtResource("3_0j8nf")
+volume_db = -10.0
+max_db = 0.0
 
 [node name="GraceTimer" type="Timer" parent="." unique_id=2144038531]
 wait_time = 2.5
@@ -179,5 +204,15 @@ sorting_offset = 1.0
 pixel_size = 0.01
 billboard = 1
 text = "⌛"
+
+[node name="DisableParticles" type="GPUParticles3D" parent="." unique_id=136385100]
+emitting = false
+amount = 4
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.25
+randomness = 0.25
+process_material = SubResource("ParticleProcessMaterial_mjix0")
+draw_pass_1 = SubResource("CapsuleMesh_vn1tu")
 
 [editable path="CameraAimerModel/Model/camera"]
