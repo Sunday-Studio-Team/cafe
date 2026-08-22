@@ -21,16 +21,16 @@ func _ready() -> void:
 	_start_minigame()
 
 
-func _physics_process(_delta: float) -> void:
+#func _physics_process(_delta: float) -> void:
 	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
-	if Engine.get_process_frames() % 5 == 0:
-		if captcha.get_children().any(
-			func(x: IngredientIconHolder):
-				return x.button.button_pressed,
-		):
-			set_submit_text("VERIFY")
-		else:
-			set_submit_text("SKIP")
+	#if Engine.get_process_frames() % 5 == 0:
+		#if captcha.get_children().any(
+			#func(x: IngredientIconHolder):
+				#return x.button.button_pressed,
+		#):
+			#set_submit_text("VERIFY")
+		#else:
+			#set_submit_text("SKIP")
 
 
 func populate_captcha() -> void:
@@ -46,6 +46,8 @@ func populate_captcha() -> void:
 	]:
 		if ingredient != null and ingredient.name != Ingredient.Ingredient_Label.NONE:
 			var random_icon_holder: IngredientIconHolder = captcha_slots.pick_random()
+			while(random_icon_holder in slots_with_our_ingredients):
+				random_icon_holder = captcha_slots.pick_random()
 			random_icon_holder.ingredient = ingredient
 			slots_with_our_ingredients.append(random_icon_holder)
 

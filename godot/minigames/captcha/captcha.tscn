@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/captcha/captcha.gd" id="1_pitvc"]
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
+[ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="4_hat0t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnsl6"]
 bg_color = Color(0.28627452, 0.5647059, 0.8862745, 1)
@@ -26,13 +27,13 @@ script = ExtResource("1_pitvc")
 main_ordered = NodePath("SubViewport/IngredientsReminder/MarginContainer/HBoxContainer/Main")
 liquid_ordered = NodePath("SubViewport/IngredientsReminder/MarginContainer/HBoxContainer/Liquid")
 extra_ordered = NodePath("SubViewport/IngredientsReminder/MarginContainer/HBoxContainer/Extra")
-captcha = NodePath("SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha")
+captcha = NodePath("SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha")
 submit_button = NodePath("SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton")
 instructions = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/Instructions")
 drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
 entire_panel = NodePath("SubViewport/Captcha")
 order_reminder = NodePath("SubViewport/IngredientsReminder")
-customer_sprite = NodePath("SubViewport/CanvasLayer/Customer/Control/CustomerSprite")
+customer_sprite = NodePath("SubViewport/CenterContainer/Control/CustomerSprite")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false
@@ -40,39 +41,15 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Captcha" type="PanelContainer" parent="SubViewport" unique_id=131474628]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -375.5
-offset_right = 250.0
-offset_bottom = 375.5
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.304
+anchor_right = 0.2
+anchor_bottom = 0.304
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_c5i2p")
 
-[node name="Customer" type="CenterContainer" parent="SubViewport/CanvasLayer" unique_id=585518526]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -596.0
-offset_top = 96.0
-offset_right = -498.0
-offset_bottom = 181.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Control" type="Control" parent="SubViewport/CanvasLayer/Customer" unique_id=217032882]
-layout_mode = 2
-
-[node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CanvasLayer/Customer/Control" unique_id=1022183565]
-scale = Vector2(0.55, 0.55)
-
-[node name="OrderReminder" type="PanelContainer" parent="SubViewport/CanvasLayer" unique_id=2035377822]
 [node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Captcha" unique_id=1311255116]
 layout_mode = 2
 
@@ -81,6 +58,7 @@ layout_mode = 2
 theme_override_constants/margin_bottom = -15
 
 [node name="TopBluePart" type="PanelContainer" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3" unique_id=1446138134]
+visible = false
 custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wnsl6")
@@ -124,37 +102,37 @@ text = "If there are none, press skip"
 [node name="CaptchaImageContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=1591618613]
 layout_mode = 2
 
-[node name="Captcha" type="GridContainer" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer" unique_id=1363679932]
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer" unique_id=777608128]
+layout_mode = 2
+
+[node name="Captcha" type="GridContainer" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer" unique_id=1363679932]
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
-columns = 3
+columns = 4
 
-[node name="Button0" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
+[node name="Button0" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button1" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
+[node name="Button1" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button2" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
+[node name="Button2" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button3" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
+[node name="Button3" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button4" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
+[node name="Button4" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button5" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
+[node name="Button5" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button6" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
+[node name="Button6" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
-[node name="Button7" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button8" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=617140734 instance=ExtResource("2_c5i2p")]
+[node name="Button7" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/CenterContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 
 [node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=2048074803]
@@ -238,5 +216,22 @@ vertical_alignment = 1
 [node name="IngredientIconHolder2" parent="SubViewport/InstructionWithImage" unique_id=954410995 instance=ExtResource("2_c5i2p")]
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport" unique_id=1572831613]
+anchors_preset = -1
+anchor_left = 0.807
+anchor_top = 0.774
+anchor_right = 0.812
+anchor_bottom = 0.78
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="SubViewport/CenterContainer" unique_id=1395701579]
+layout_mode = 2
+
+[node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CenterContainer/Control" unique_id=23708804]
+position = Vector2(-20, -20)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_hat0t")
 
 [connection signal="pressed" from="SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
