@@ -16,11 +16,13 @@ var closer_list = [
 	"This should move the needle on our numbers.",
 	"With this, we should hit the ground running."
 ]
+
+
 func _init():
 	var scene_loader = load("res://emails/menu_update_emails/custom_email_view_menu_update.tscn")
 	var scene: CustomEmailViewMenuUpdate = scene_loader.instantiate() as CustomEmailViewMenuUpdate
 	day_to_send = Global.day
-	is_important = true
+	is_important = false
 	sender_name = "Management"
 	displayed_time = "8:30am"
 	subject = "Important: Menu Update"

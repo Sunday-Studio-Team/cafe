@@ -12,10 +12,10 @@ func _ready() -> void:
 
 	play_button.pressed.connect(
 		func():
-			if SaveDataManager.save_data.finished_or_skipped_tutorial:
-				Global.day = 1
 			if OS.has_feature("tutorial"):
 				Global.day = 0
+			elif SaveDataManager.save_data.finished_or_skipped_tutorial:
+				Global.day = 1
 			else:
 				Global.day = 0
 

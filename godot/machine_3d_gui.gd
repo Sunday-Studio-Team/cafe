@@ -6,8 +6,6 @@ extends Node3D
 
 const CAM_TWEEN_DUR := 0.25
 
-static var seen_interaction_popup := false
-
 @export var interactable: Interactable
 @export var node_viewport: SubViewport
 @export var node_quad: MeshInstance3D
@@ -43,18 +41,12 @@ func _ready():
 			node_area.visible = true
 			interactable.visible = false
 			Global.in_machine_ui = true
+			Global.machine_in_use = machine
 			player_using_me = true
 
-			#store where the player was, before they interacted w/ the machine.
-			#used when using bomb(), which is in ingredients_refill_minigame.gd
+			# store where the player was before they interacted w/ the machine.
+			# used when using bomb(), which is in ingredients_refill_minigame.gd
 			where_was_player = Global.player.global_transform
-
-			# Showing the popup tutorial when the player uses the machine
-			if not seen_interaction_popup:
-				seen_interaction_popup = true # Only showing it once
-				Global.popups["interaction"].open()
-			else:
-				pass
 
 			create_tween().tween_property(
 				Global.player,
@@ -68,7 +60,7 @@ func _ready():
 				machine.spot_for_player.global_position,
 				0.1,
 			)
-			var cam: Camera3D = Global.player.camera
+			var cam: CameraController = Global.player.camera
 			cam_trans_b4_enter = cam.transform
 			create_tween().tween_property(
 				cam,
@@ -81,13 +73,13 @@ func _ready():
 	Events.machine_exit_button_pressed.connect(
 		func():
 			if player_using_me:
-				exit(),
+				exit_with_camera_tween(),
 	)
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not Global.minigame_active:
-		exit()
+	if Input.is_action_just_pressed("pause") and not Global.minigame_active and player_using_me:
+		exit_with_camera_tween()
 
 
 func _unhandled_input(event):
@@ -105,7 +97,22 @@ func _unhandled_input(event):
 	node_viewport.push_input(event)
 
 
-func exit() -> void:
+func exit_without_camera_tween() -> void:
+	node_area.visible = false
+	player_using_me = false
+
+	if not machine.broken_down:
+		interactable.visible = true
+
+	Global.player.camera.transform = cam_trans_b4_enter
+	Global.player.camera.sync_rotation_from_player()
+
+	if Global.in_machine_ui:
+		Global.in_machine_ui = false
+		Global.machine_in_use = null
+
+
+func exit_with_camera_tween() -> void:
 	node_area.visible = false
 	player_using_me = false
 
@@ -113,13 +120,17 @@ func exit() -> void:
 		interactable.visible = true
 
 	if Global.in_machine_ui:
-		Global.in_machine_ui = false
-		create_tween().tween_property(
-			Global.player.camera,
+		var cam: CameraController = Global.player.camera
+		var tween: PropertyTweener = create_tween().tween_property(
+			cam,
 			"transform",
 			cam_trans_b4_enter,
 			CAM_TWEEN_DUR,
 		)
+		await tween.finished
+		cam.sync_rotation_from_player()
+		Global.in_machine_ui = false
+		Global.machine_in_use = null
 
 
 func _mouse_entered_area():

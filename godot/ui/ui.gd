@@ -73,7 +73,7 @@ var _employee_rating_last_update: float = -1
 
 func _ready() -> void:
 	_update_rating()
-	
+
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			_on_score_updated(ScoreType.MONEY, new_value, old_value)
@@ -84,9 +84,10 @@ func _ready() -> void:
 	)
 	Events.shift_started.connect(
 		func():
-			objective.text = "[b]SHIFT STARTING"
+			objective.add_theme_font_size_override("bold_font_size", 96)
+			objective.text = "\n\n[b][wave amp=100 freq=7.5]SHIFT STARTING"
 			await get_tree().create_timer(5, false).timeout
-			objective.hide()
+			create_tween().tween_property(objective, "modulate", Color.TRANSPARENT, 0.5)
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
 	Events.time_up.connect(func(): hide())
@@ -150,12 +151,15 @@ new rule: don't take any more ingredients out of the store room."
 		objective.text = (
 				"your boss has installed another machine."
 		)
-	@warning_ignore("integer_division")
-	objective.text += (
-			"\n\n[b]SHIFT OBJECTIVE[/b]" + \
-			"\nmake %s!"
-			% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
-	)
+
+	if Global.day > 0:
+		@warning_ignore("integer_division")
+		objective.text += (
+				"\n\n[b]SHIFT OBJECTIVE[/b]" + \
+				"\nmake %s!"
+				% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
+		)
+
 	if Global.day == Global.final_day:
 		objective.text += "\n[color=orange](this will be your final shift!)"
 
@@ -209,10 +213,7 @@ func _process(_delta: float) -> void:
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
-			# this exception is a bit awkward cos mouse visibility is tied to
-			# being 'in ui' so we need to make sure it doesnt trigger the hud
-			# to disappear when we show the mouse in that way
-			or Global.showing_floating_cursor
+			or Global.showing_floating_cursor and not (Global.in_pc_ui or Global.minigame_active)
 	)
 
 	# if we dont have this, the remake minigame (where we're in the machine ui)
@@ -274,10 +275,13 @@ func handle_item_hover_tooltip() -> void:
 		var item: Item = hovered_icon.item
 		item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
 		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
-		item_hover_tooltip_active_indicator.visible = item.is_active_item
 		if item.is_active_item:
+			item_hover_tooltip_passive_indicator.hide()
+			item_hover_tooltip_active_indicator.show()
 			item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
-		item_hover_tooltip_passive_indicator.visible = !item.is_active_item
+		else:
+			item_hover_tooltip_passive_indicator.show()
+			item_hover_tooltip_active_indicator.hide()
 
 	item_hover_tooltip.visible = (
 			hovered_icon != null
@@ -381,6 +385,7 @@ func handle_time_left_warning() -> void:
 		rot_t.tween_property(time_left_label, "offset_transform_rotation", deg_to_rad(0), 0.75)
 
 		low_time_sound.play()
+		Events.low_time_warning.emit()
 
 		time_left_warning_played = true
 
@@ -430,18 +435,22 @@ func update_interactable_ui() -> void:
 		# TODO: replace some of these unsafe refs with the item names with refs
 		# to the actual items as export vars
 
+		var equipped_item := Global.equipped_item
+
 		if (
 				hovered_interactable.name == "FixMachineButton"
-				and Global.equipped_item != null
-				and Global.equipped_item == hammer
+				and equipped_item != null
+				and equipped_item.item_id == "hammer"
+				and equipped_item.can_be_used
 		):
 			item_indicator.show()
 			item_text.text = "[Q] HAMMER 💥"
 
 		elif (
 				hovered_interactable.display_name.contains("camera")
-				and Global.equipped_item != null
-				and Global.equipped_item == whipped_cream
+				and equipped_item != null
+				and equipped_item.item_id == "whipped_cream"
+				and equipped_item.can_be_used
 		):
 			item_indicator.show()
 			item_text.text = "[Q] WHIPPED CREAM"
@@ -490,7 +499,8 @@ func _update_rating() -> void:
 		c.queue_free()
 	
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
-	customer_flow_rate_label.text = "%s" % Global.customer_flow_rate
+	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
+
 
 func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():

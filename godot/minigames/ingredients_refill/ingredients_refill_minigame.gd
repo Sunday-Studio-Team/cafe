@@ -148,44 +148,13 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 func bomb() ->void:
 	face_sprite.texture = bomb_face_sprite
 	visual_effect.texture = bomb_visual_effect
-
-	var closest_machine = get_closest_machine_or_null()
-	if closest_machine == null: #error handling
+	
+	var using_machine: Machine = Global.machine_in_use
+	if using_machine == null:
 		return
 
-	#play a sound
 	bomb_sound_player.play()
-	await get_tree().create_timer(0.5, false).timeout
-
-	var _machine_global_position = closest_machine.global_position
-
-	#machine has a child called "3DGui", node is Gui3D
-	var _3dgui: Gui3D = closest_machine.find_child("3DGui") 
-	var _player_global_position = _3dgui.where_was_player.origin
-
-
-	Events.emit_signal("minigame_end")
-
-	# draw a line between player, and machine.
-	var _line = (_player_global_position -  _machine_global_position).normalized()*9.5
-
-	var machine_name = str(closest_machine).to_lower()
-
-	# incredibly janky way. the 'better way' includes the use of dot products but i aint got time for that
-	if("machine2" in machine_name or "machine3" in machine_name): #2 and 3 are the first machines.
-		_line.x *=2 #makes player go sideways more...? #works for first 2 machines; machine3 and machine2.
-	else:
-		_line.z*=2
-
-	# there is some code that disables movement, when we are in UI interacting w/ machine.
-	# let's explicitly exit the UI before we push/slide the player.
-	if _3dgui.player_using_me:
-		_3dgui.exit()
-
-	# apply velocity to player
-	Global.player.velocity = _line
-	Global.player.move_and_slide()
-
+	using_machine.blast_player_from_using_machine()
 
 func screw():
 	face_sprite.texture = screw_face_sprite
