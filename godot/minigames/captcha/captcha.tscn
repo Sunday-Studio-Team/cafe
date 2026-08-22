@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
 [ext_resource type="Script" uid="uid://gb6flbh2fgfb" path="res://minigames/captcha/detectdrop.gd" id="2_juyqc"]
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
-[ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="4_juyqc"]
-[ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
+[ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
+[ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="6_wy7ys"]
 [ext_resource type="AudioStream" uid="uid://b36lt7uasbtpp" path="res://audio/captcha/captcha_correct.wav" id="7_p8bru"]
 [ext_resource type="AudioStream" uid="uid://qm462c3iywm1" path="res://audio/captcha/captcha_wrong.wav" id="8_3tmsw"]
 
@@ -82,6 +82,10 @@ anchor_left = 0.2
 anchor_top = 0.37
 anchor_right = 0.2
 anchor_bottom = 0.37
+offset_left = -227.5
+offset_top = -234.0
+offset_right = 227.5
+offset_bottom = 233.99997
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_c5i2p")
@@ -304,7 +308,7 @@ offset_right = 469.55994
 offset_bottom = 968.60004
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_juyqc")
+script = ExtResource("6_wy7ys")
 finished_drink = NodePath("../Finished Drink")
 root = NodePath("../..")
 
@@ -314,6 +318,7 @@ layout_mode = 2
 [node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CustomerContainer/Control" unique_id=23708804]
 position = Vector2(-20, -20)
 scale = Vector2(0.65, 0.65)
+
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -5.0

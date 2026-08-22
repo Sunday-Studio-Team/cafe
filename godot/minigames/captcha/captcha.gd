@@ -32,18 +32,6 @@ func _ready() -> void:
 	_start_minigame()
 
 
-#func _physics_process(_delta: float) -> void:
-	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
-	#if Engine.get_process_frames() % 5 == 0:
-		#if captcha.get_children().any(
-			#func(x: IngredientIconHolder):
-				#return x.button.button_pressed,
-		#):
-			#set_submit_text("VERIFY")
-		#else:
-			#set_submit_text("SKIP")
-
-
 func _process(delta: float) -> void:
 	# This is solely for testing purposes (running the minigame outside of main)
 	if Global.ordered_drink_to_remake == null and Global.ordered_drink_customer == null:
@@ -63,9 +51,7 @@ func populate_captcha() -> void:
 		ordered_drink.extra,
 	]:
 		if ingredient != null and ingredient.name != Ingredient.Ingredient_Label.NONE:
-			var random_icon_holder: IngredientIconHolder = captcha_slots.pick_random()
-			while(random_icon_holder in slots_with_our_ingredients):
-				random_icon_holder = captcha_slots.pick_random()
+			var random_icon_holder: IngredientIconHolder = captcha_slots_to_fill.pick_random()
 			random_icon_holder.ingredient = ingredient
 			captcha_slots_to_fill.erase(random_icon_holder)
 
@@ -119,13 +105,10 @@ func verify_captcha() -> void:
 	
 	entire_panel.visible = false
 	remade_drink_sprite.visible = true
+	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)"
 	
-	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)" % [
-		ordered_drink.singular_article,
-		ordered_drink.name,
-	]
-
-	mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
+	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 	correct_sound.play()
 
 	for slot: IngredientIconHolder in captcha.get_children():
@@ -140,6 +123,7 @@ func verify_captcha() -> void:
 		colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
 
 	await correct_sound.finished
+	
 	#_end_minigame()
 
 
@@ -200,7 +184,8 @@ func _start_minigame() -> void:
 
 
 func _end_minigame() -> void:
-	print("end game")
+	print("End remaking minigame")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
 	Events.minigame_end.emit()
 
 
