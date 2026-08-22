@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/captcha/captcha.gd" id="1_pitvc"]
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
-[ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="4_hat0t"]
+[ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="4_juyqc"]
+[ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="5_b4qkc"]
+[ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnsl6"]
 bg_color = Color(0.28627452, 0.5647059, 0.8862745, 1)
@@ -17,7 +19,7 @@ bg_color = Color(0.21702155, 0.42809728, 0.671875, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uevaj"]
 bg_color = Color(0.3121078, 0.61610895, 0.96875, 1)
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder", "customer_sprite")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,7 +35,8 @@ instructions = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopB
 drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
 entire_panel = NodePath("SubViewport/Captcha")
 order_reminder = NodePath("SubViewport/IngredientsReminder")
-customer_sprite = NodePath("SubViewport/CenterContainer/Control/CustomerSprite")
+customer_sprite = NodePath("SubViewport/CustomerContainer/Control/CustomerSprite")
+remade_drink_sprite = NodePath("SubViewport/Finished Drink")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false
@@ -137,19 +140,19 @@ layout_mode = 2
 
 [node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=2048074803]
 layout_mode = 2
-theme_override_constants/margin_left = 250
+theme_override_constants/margin_left = 203
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 15
 
 [node name="SubmitButton" type="Button" parent="SubViewport/Captcha/VBoxContainer/BottomButtonContainer" unique_id=1979538868]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(2.96, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_c5i2p")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_sfm61")
 theme_override_styles/hover = SubResource("StyleBoxFlat_uevaj")
-text = "VERIFY"
+text = "Override Order"
 
 [node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
 anchors_preset = 3
@@ -217,21 +220,41 @@ vertical_alignment = 1
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="SubViewport" unique_id=1572831613]
+[node name="CustomerContainer" type="CenterContainer" parent="SubViewport" unique_id=1101866638 node_paths=PackedStringArray("remade_drink_sprite", "root")]
 anchors_preset = -1
-anchor_left = 0.807
+anchor_left = 0.757
 anchor_top = 0.774
-anchor_right = 0.812
+anchor_right = 0.757
 anchor_bottom = 0.78
-grow_horizontal = 0
+offset_left = -537.43994
+offset_top = -883.92
+offset_right = 562.9601
+offset_bottom = 968.60004
+grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_juyqc")
+remade_drink_sprite = NodePath("../Finished Drink")
+root = NodePath("../..")
 
-[node name="Control" type="Control" parent="SubViewport/CenterContainer" unique_id=1395701579]
+[node name="Control" type="Control" parent="SubViewport/CustomerContainer" unique_id=1395701579]
 layout_mode = 2
 
-[node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CenterContainer/Control" unique_id=23708804]
+[node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CustomerContainer/Control" unique_id=23708804]
 position = Vector2(-20, -20)
 scale = Vector2(0.65, 0.65)
-texture = ExtResource("4_hat0t")
+
+[node name="Finished Drink" type="TextureRect" parent="SubViewport" unique_id=1573351362]
+custom_minimum_size = Vector2(350, 350)
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.2
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_b4qkc")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("6_juyqc")
 
 [connection signal="pressed" from="SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton" to="." method="_on_submit_button_pressed"]

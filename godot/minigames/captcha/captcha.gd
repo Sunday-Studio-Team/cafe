@@ -11,6 +11,7 @@ extends SubViewportContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
 @export var customer_sprite: Sprite2D
+@export var remade_drink_sprite: TextureRect
 
 var ordered_drink: Drink
 var main_text: String = "The required ingredients"
@@ -31,6 +32,14 @@ func _ready() -> void:
 			#set_submit_text("VERIFY")
 		#else:
 			#set_submit_text("SKIP")
+
+
+func _process(delta: float) -> void:
+	# This is solely for testing purposes (running the minigame outside of main)
+	if Global.ordered_drink_to_remake == null and Global.ordered_drink_customer == null:
+		# Disable Global so we can use the mouse
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Global.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func populate_captcha() -> void:
@@ -131,11 +140,20 @@ func shake_panel() -> void:
 func _start_minigame() -> void:
 	set_instructions(main_text)
 	
-	var drink: Drink = Global.ordered_drink_to_remake
+	var drink: Drink
+	
+	# The else blocks here should only happen if this scene is ran by itself (not in the main game)
+	if(Global.ordered_drink_to_remake != null):
+		drink = Global.ordered_drink_to_remake
+	else:
+		drink = Global.drinks.pick_random()
 	get_ordered_drink(drink)
 	
-	drink_customer = Global.ordered_drink_customer
-	customer_sprite.texture = drink_customer.body.texture
+	if(Global.ordered_drink_customer != null):
+		drink_customer = Global.ordered_drink_customer
+		customer_sprite.texture = drink_customer.body.texture
+	else:
+		customer_sprite.texture = Global.customer_sprites.pick_random()
 	
 	populate_captcha()
 
