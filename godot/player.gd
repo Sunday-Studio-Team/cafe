@@ -12,7 +12,6 @@ const STRIDE_LENGTH := 0.75
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
 
-@export var pully_ball_scene: PackedScene
 
 var player_status_effects: PlayerStatusEffects
 
@@ -47,7 +46,7 @@ func _ready() -> void:
 	Global.player = self
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
-	
+
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -74,7 +73,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
-	
+
 	#handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
@@ -128,9 +127,9 @@ func handle_active_items() -> void:
 #func handle_mouselook() -> void:
 #	camera.rotation_degrees.x -= mouse_delta.y
 #	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-#	
+#
 #	rotation_degrees.y -= mouse_delta.x
-#	
+#
 #	mouse_delta = Vector2.ZERO
 
 
@@ -181,7 +180,7 @@ func handle_hovered_interactable() -> void:
 			return
 
 		if (
-			not hovered_interactable.visible 
+			not hovered_interactable.visible
 			or not hovered_interactable.is_inside_tree()
 			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
@@ -220,7 +219,7 @@ func handle_sprint(delta: float) -> void:
 		if item.item_id == "roller_skates":
 			has_roller_skates = true
 			break
-	
+
 	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		_is_sprinting = true
 		if get_last_motion().length() > 0:
@@ -245,16 +244,7 @@ func handle_sprint(delta: float) -> void:
 		sprint_lockout_timer.start()
 
 
-func handle_right_click(_delta: float)-> void:
-	#handles pully-ball 
-	
-	#TODO check if player has item. return if they don't
-	
-	if (Input.is_action_pressed("right_click") ):
-		pass
-	
-	pass
-	
+
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

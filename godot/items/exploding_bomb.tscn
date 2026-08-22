@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://do0l4oqkkpu3y"]
+
+[ext_resource type="Script" uid="uid://hqad4vu3xawh" path="res://items/exploding_bomb.gd" id="1_jcxaa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0tu14"]
+
+[node name="ExplodingBomb" type="Node3D" unique_id=525786908 node_paths=PackedStringArray("rigid_body", "collision_shape", "csg_sphere", "timer", "label") groups=["exploding_bomb"]]
+script = ExtResource("1_jcxaa")
+rigid_body = NodePath("RigidBody3D")
+collision_shape = NodePath("RigidBody3D/CollisionShape3D")
+csg_sphere = NodePath("RigidBody3D/CollisionShape3D/CSGSphere3D")
+timer = NodePath("Timer")
+label = NodePath("RigidBody3D/Label3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=974220464]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+gravity_scale = 0.6
+contact_monitor = true
+max_contacts_reported = 3
+
+[node name="Label3D" type="Label3D" parent="RigidBody3D" unique_id=1804977477]
+transform = Transform3D(3.030303, 0, 0, 0, 3.030303, 0, 0, 0, 3.030303, 0, 0, 0)
+visible = false
+billboard = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1072693879]
+shape = SubResource("SphereShape3D_0tu14")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D/CollisionShape3D" unique_id=241677578]
+
+[node name="Timer" type="Timer" parent="." unique_id=1394635480]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="body_entered" from="RigidBody3D" to="." method="_on_rigid_body_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
