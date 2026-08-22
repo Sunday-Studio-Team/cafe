@@ -7,6 +7,7 @@ extends SubViewportContainer
 @export var submit_button: Button
 @export var instructions: RichTextLabel
 @export var drink_name: RichTextLabel
+@export var player_thought: RichTextLabel
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
@@ -14,7 +15,7 @@ extends SubViewportContainer
 @export var remade_drink_sprite: TextureRect
 
 var ordered_drink: Drink
-var main_text: String = "The required ingredients"
+var main_text: String = "with the required ingredients"
 var drink_customer: Customer
 
 
@@ -76,10 +77,15 @@ func populate_order_reminder() -> void:
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
-	drink_name.text = "You are making %s [color=gold]%s" % [
+	#drink_name.text = "You are making %s [color=gold]%s" % [
+		#ordered_drink.singular_article,
+		#ordered_drink.name,
+	#]
+	player_thought.text = "I need to make %s [color=gold]%s" % [
 		ordered_drink.singular_article,
 		ordered_drink.name,
 	]
+	remade_drink_sprite.texture = drink.icon
 
 
 func verify_captcha() -> void:
@@ -102,8 +108,15 @@ func verify_captcha() -> void:
 		):
 			shake_panel()
 			return
-
-	_end_minigame()
+	
+	entire_panel.visible = false
+	remade_drink_sprite.visible = true
+	
+	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)" % [
+		ordered_drink.singular_article,
+		ordered_drink.name,
+	]
+	#_end_minigame()
 
 
 func set_instructions(text: String) -> void:
@@ -138,6 +151,7 @@ func shake_panel() -> void:
 
 
 func _start_minigame() -> void:
+	order_reminder.visible = false
 	set_instructions(main_text)
 	
 	var drink: Drink
@@ -154,13 +168,15 @@ func _start_minigame() -> void:
 		customer_sprite.texture = drink_customer.body.texture
 	else:
 		customer_sprite.texture = Global.customer_sprites.pick_random()
+		order_reminder.visible = true
+		populate_order_reminder()
 	
 	populate_captcha()
 
-	order_reminder.visible = false
 
 
 func _end_minigame() -> void:
+	print("end game")
 	Events.minigame_end.emit()
 
 

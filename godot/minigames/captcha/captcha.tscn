@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/captcha/captcha.gd" id="1_pitvc"]
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
+[ext_resource type="Script" uid="uid://gb6flbh2fgfb" path="res://minigames/captcha/detectdrop.gd" id="2_juyqc"]
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
 [ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="4_juyqc"]
-[ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="5_b4qkc"]
 [ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnsl6"]
@@ -19,7 +19,7 @@ bg_color = Color(0.21702155, 0.42809728, 0.671875, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uevaj"]
 bg_color = Color(0.3121078, 0.61610895, 0.96875, 1)
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "player_thought", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,6 +33,7 @@ captcha = NodePath("SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Cent
 submit_button = NodePath("SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton")
 instructions = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/Instructions")
 drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
+player_thought = NodePath("SubViewport/PlayerThought")
 entire_panel = NodePath("SubViewport/Captcha")
 order_reminder = NodePath("SubViewport/IngredientsReminder")
 customer_sprite = NodePath("SubViewport/CustomerContainer/Control/CustomerSprite")
@@ -43,12 +44,29 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
+[node name="PlayerThought" type="RichTextLabel" parent="SubViewport" unique_id=2080581718]
+custom_minimum_size = Vector2(681, 0)
+anchors_preset = -1
+anchor_left = 0.201
+anchor_top = 0.123
+anchor_right = 0.201
+anchor_bottom = 0.123
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[color=red] I need to make..."
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Captcha" type="PanelContainer" parent="SubViewport" unique_id=131474628]
 anchors_preset = -1
 anchor_left = 0.2
-anchor_top = 0.304
+anchor_top = 0.37
 anchor_right = 0.2
-anchor_bottom = 0.304
+anchor_bottom = 0.37
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_c5i2p")
@@ -61,7 +79,6 @@ layout_mode = 2
 theme_override_constants/margin_bottom = -15
 
 [node name="TopBluePart" type="PanelContainer" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3" unique_id=1446138134]
-visible = false
 custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wnsl6")
@@ -73,6 +90,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="DrinkName" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=1563091382]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 bbcode_enabled = true
@@ -83,9 +101,10 @@ scroll_active = false
 [node name="Intro" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=657684729]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-text = "Select all images with"
+text = "To override: select all images"
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1
 
 [node name="Instructions" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=997226404]
 custom_minimum_size = Vector2(0, 35)
@@ -94,6 +113,7 @@ bbcode_enabled = true
 text = "[color=red]Instructions Here"
 fit_content = true
 scroll_active = false
+horizontal_alignment = 1
 
 [node name="BottomText" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=554797709]
 visible = false
@@ -154,45 +174,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_sfm61")
 theme_override_styles/hover = SubResource("StyleBoxFlat_uevaj")
 text = "Override Order"
 
-[node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -548.0001
-offset_top = -370.0
-offset_right = 51.999878
-offset_bottom = 130.0
-grow_horizontal = 0
-grow_vertical = 0
-rotation = -0.3944444
-pivot_offset = Vector2(250, 250)
-
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/IngredientsReminder" unique_id=195611177]
-layout_mode = 2
-theme_override_constants/margin_top = 40
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/IngredientsReminder/MarginContainer" unique_id=346830654]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_constants/separation = 36
-alignment = 1
-
-[node name="Main" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
-custom_minimum_size = Vector2(146.84, 150)
-layout_mode = 2
-button_disabled = true
-
-[node name="Liquid" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-button_disabled = true
-
-[node name="Extra" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-button_disabled = true
-
 [node name="InstructionWithImage" type="HBoxContainer" parent="SubViewport" unique_id=67100854]
 visible = false
 anchors_preset = 8
@@ -220,20 +201,88 @@ vertical_alignment = 1
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="CustomerContainer" type="CenterContainer" parent="SubViewport" unique_id=1101866638 node_paths=PackedStringArray("remade_drink_sprite", "root")]
+[node name="Finished Drink" type="TextureRect" parent="SubViewport" unique_id=1573351362 node_paths=PackedStringArray("invalid_drop_detector")]
+visible = false
+custom_minimum_size = Vector2(350, 350)
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.2
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -175.0
+offset_right = 175.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("6_juyqc")
+invalid_drop_detector = NodePath("../DETECTDROP")
+
+[node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -83.995
+offset_top = -372.65997
+offset_right = 516.005
+offset_bottom = 127.33911
+grow_vertical = 0
+rotation = 0.5166175
+pivot_offset = Vector2(250, 250)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/IngredientsReminder" unique_id=195611177]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/IngredientsReminder/MarginContainer" unique_id=346830654]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="Main" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+button_disabled = true
+
+[node name="Liquid" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+button_disabled = true
+
+[node name="Extra" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+button_disabled = true
+
+[node name="DETECTDROP" type="Container" parent="SubViewport" unique_id=569642217 node_paths=PackedStringArray("finished_drink", "root")]
+visible = false
+offset_left = -1159.0
+offset_top = -830.0
+offset_right = 3079.0
+offset_bottom = 1792.0
+script = ExtResource("2_juyqc")
+finished_drink = NodePath("../Finished Drink")
+root = NodePath("../..")
+
+[node name="CustomerContainer" type="CenterContainer" parent="SubViewport" unique_id=1101866638 node_paths=PackedStringArray("finished_drink", "root")]
+z_index = -41
 anchors_preset = -1
 anchor_left = 0.757
 anchor_top = 0.774
 anchor_right = 0.757
 anchor_bottom = 0.78
-offset_left = -537.43994
+offset_left = -355.44006
 offset_top = -883.92
-offset_right = 562.9601
+offset_right = 469.55994
 offset_bottom = 968.60004
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_juyqc")
-remade_drink_sprite = NodePath("../Finished Drink")
+finished_drink = NodePath("../Finished Drink")
 root = NodePath("../..")
 
 [node name="Control" type="Control" parent="SubViewport/CustomerContainer" unique_id=1395701579]
@@ -242,19 +291,5 @@ layout_mode = 2
 [node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CustomerContainer/Control" unique_id=23708804]
 position = Vector2(-20, -20)
 scale = Vector2(0.65, 0.65)
-
-[node name="Finished Drink" type="TextureRect" parent="SubViewport" unique_id=1573351362]
-custom_minimum_size = Vector2(350, 350)
-anchors_preset = -1
-anchor_left = 0.2
-anchor_top = 0.5
-anchor_right = 0.2
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_b4qkc")
-expand_mode = 3
-stretch_mode = 5
-script = ExtResource("6_juyqc")
 
 [connection signal="pressed" from="SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
