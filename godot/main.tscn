@@ -585,26 +585,26 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 [node name="SpotLight3D" parent="SecurityCams/LeftAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 25.0
 
-[node name="AimPath3D" parent="SecurityCams/LeftAreaSecurityCam" index="5" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/LeftAreaSecurityCam" index="6" unique_id=1994339220]
 curve = SubResource("Curve3D_1yv1y")
 
 [node name="AimPathFollow3D" parent="SecurityCams/LeftAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="6" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_g3y5b")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
 rotation_pause_length = 4.0
 
-[node name="AimPath3D" parent="SecurityCams/MiddleSecurityCam" index="5" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/MiddleSecurityCam" index="6" unique_id=1994339220]
 curve = SubResource("Curve3D_ovcoh")
 
 [node name="AimPathFollow3D" parent="SecurityCams/MiddleSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="6" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_1slqb")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
@@ -615,13 +615,13 @@ rotation_pause_length = 4.0
 [node name="SpotLight3D" parent="SecurityCams/RightAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="AimPath3D" parent="SecurityCams/RightAreaSecurityCam" index="5" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/RightAreaSecurityCam" index="6" unique_id=1994339220]
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="6" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_uo83y")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
@@ -632,13 +632,13 @@ rotation_pause_length = 4.0
 [node name="SpotLight3D" parent="SecurityCams/HallwaySecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1382585707, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="AimPath3D" parent="SecurityCams/HallwaySecurityCam" index="5" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/HallwaySecurityCam" index="6" unique_id=1994339220]
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="6" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_y0aao")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
@@ -663,7 +663,7 @@ wait_time = 120.0
 one_shot = true
 
 [node name="TippyVoiceTimer" type="Timer" parent="." unique_id=375848378]
-wait_time = 15.0
+wait_time = 20.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
