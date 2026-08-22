@@ -1,0 +1,238 @@
+[gd_scene format=3 uid="uid://b44y3xlpccms3"]
+
+[ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/colors_minigame.gd" id="1_aq73i"]
+[ext_resource type="Texture2D" uid="uid://jtnppq73gskq" path="res://sprites/machine_fix_buttons_minigame/button_press_background.png" id="2_c04s5"]
+[ext_resource type="Texture2D" uid="uid://dt1enbernj7dl" path="res://sprites/machine_fix_buttons_minigame/tippy_broken_machine.png" id="3_vncv3"]
+[ext_resource type="Texture2D" uid="uid://chj8nhjnttj32" path="res://sprites/machine_fix_buttons_minigame/tippy_buttons_normal.png" id="4_m7lj7"]
+[ext_resource type="PackedScene" uid="uid://d3pjeuemwlp77" path="res://minigames/colors/colors_minigame_btn.tscn" id="5_ib8td"]
+[ext_resource type="Texture2D" uid="uid://gmpvwsj5h11f" path="res://sprites/machine_fix_buttons_minigame/A_BOX.png" id="6_4vt2w"]
+[ext_resource type="Texture2D" uid="uid://c2xpxx2bpb8oq" path="res://sprites/machine_fix_buttons_minigame/B_BOX.png" id="7_c0vm2"]
+[ext_resource type="Texture2D" uid="uid://bmufuft12sya5" path="res://sprites/machine_fix_buttons_minigame/C_BOX.png" id="8_itcgr"]
+[ext_resource type="AudioStream" uid="uid://ddvfhfjtmqstn" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_correct.mp3" id="9_uaykq"]
+[ext_resource type="AudioStream" uid="uid://cd7tvvoptxqc8" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_incorrect.mp3" id="10_xs2qy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aq73i"]
+viewport_path = NodePath("SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/3DPrompt")
+
+[sub_resource type="Environment" id="Environment_hbcdb"]
+
+[sub_resource type="Environment" id="Environment_odiqf"]
+
+[sub_resource type="World3D" id="World3D_s46kr"]
+environment = SubResource("Environment_hbcdb")
+fallback_environment = SubResource("Environment_odiqf")
+
+[sub_resource type="Environment" id="Environment_sryxk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cknh5"]
+viewport_path = NodePath("SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/PromptViewport")
+
+[node name="SubViewportContainer" type="SubViewportContainer" unique_id=1244272070]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=210426897]
+handle_input_locally = false
+audio_listener_enable_2d = true
+size = Vector2i(1920, 1080)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Buttons" type="MarginContainer" parent="SubViewport" unique_id=587894759 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "employee_texture_rect", "correct_sound", "wrong_sound")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 161.0
+offset_right = 3063.0
+offset_bottom = 2000.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+offset_transform_enabled = true
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_aq73i")
+buttons = [NodePath("MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer/A"), NodePath("MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer/B"), NodePath("MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer/C")]
+prompt_panel = NodePath("MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel")
+prompt_text_box = NodePath("MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/PromptViewport/Prompt")
+employee_texture_rect = NodePath("MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Employee")
+correct_sound = NodePath("CorrectSound")
+wrong_sound = NodePath("WrongSound")
+
+[node name="Background" type="TextureRect" parent="SubViewport/Buttons" unique_id=2088356955]
+layout_mode = 2
+texture = ExtResource("2_c04s5")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Buttons" unique_id=2086730106]
+layout_mode = 2
+theme_override_constants/margin_left = 680
+theme_override_constants/margin_top = 680
+theme_override_constants/margin_right = 940
+theme_override_constants/margin_bottom = 155
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SubViewport/Buttons/MarginContainer" unique_id=2129421319]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2" unique_id=1707086457]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2" unique_id=305716537]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.71379566, 0.71379566, 0.7137956, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2" unique_id=1590473284]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tippy" type="TextureRect" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer" unique_id=1504543574]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.4, 1.4)
+texture = ExtResource("3_vncv3")
+stretch_mode = 5
+
+[node name="PromptPanel" type="Control" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy" unique_id=256743011]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -136.28574
+offset_top = 678.00006
+offset_right = 351.71436
+offset_bottom = 678.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+offset_transform_enabled = true
+
+[node name="PromptViewport" type="SubViewport" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel" unique_id=1472225498]
+own_world_3d = true
+transparent_bg = true
+scaling_3d_mode = 5
+canvas_item_default_texture_filter = 0
+gui_embed_subwindows = true
+size = Vector2i(600, 600)
+
+[node name="Prompt" type="RichTextLabel" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/PromptViewport" unique_id=1752982742]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -108.605
+offset_top = -124.33501
+offset_right = 213.25192
+offset_bottom = 781.66504
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+bbcode_enabled = true
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=32][p align=center]Tippy says:[/p][font top_spacing=-8][font_size=64][p align=center]Click the[/p][p align=center][color=#00ff00ff]Blue Square"
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel" unique_id=1218646402]
+layout_mode = 0
+offset_left = 14.285736
+offset_top = -1234.2856
+offset_right = 2062.2856
+offset_bottom = 813.71436
+texture = SubResource("ViewportTexture_aq73i")
+
+[node name="3DPrompt" type="SubViewport" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel" unique_id=1536550611]
+own_world_3d = true
+world_3d = SubResource("World3D_s46kr")
+transparent_bg = true
+scaling_3d_mode = 5
+canvas_item_default_texture_filter = 0
+
+[node name="Node3D" type="Node3D" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/3DPrompt" unique_id=1100204292]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/3DPrompt/Node3D" unique_id=705064087]
+transform = Transform3D(0.9207117, -0.0027583912, -0.3902338, -0.17676619, 0.8885588, -0.4233402, 0.3479134, 0.45875442, 0.8176189, -1.8133678, -1.9033976, 4.264658)
+environment = SubResource("Environment_sryxk")
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/Tippy/PromptPanel/3DPrompt/Node3D" unique_id=1605292279]
+texture = SubResource("ViewportTexture_cknh5")
+
+[node name="Employee" type="TextureRect" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer" unique_id=1282741107]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+texture = ExtResource("4_m7lj7")
+stretch_mode = 6
+
+[node name="ButtonContainer" type="MarginContainer" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2" unique_id=1427279196]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer" unique_id=1452804329]
+layout_mode = 2
+color = Color(0.7137255, 0.7137255, 0.7137255, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer" unique_id=605900742]
+layout_mode = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 64
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer" unique_id=1500228212]
+layout_mode = 2
+color = Color(0.5274172, 0.66598505, 0.7783834, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer" unique_id=196578255]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer" unique_id=804726017]
+layout_mode = 2
+
+[node name="A" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=1674219931 instance=ExtResource("5_ib8td")]
+layout_mode = 2
+size_flags_horizontal = 3
+button_texture = ExtResource("6_4vt2w")
+
+[node name="B" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=1743484422 instance=ExtResource("5_ib8td")]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 1, 1)
+letter_color = Color(0, 1, 0, 1)
+button_texture = ExtResource("7_c0vm2")
+
+[node name="C" parent="SubViewport/Buttons/MarginContainer/VBoxContainer2/ButtonContainer/MarginContainer/MarginContainer/HBoxContainer" unique_id=469461869 instance=ExtResource("5_ib8td")]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 1, 0, 1)
+letter_color = Color(1, 0, 0, 1)
+button_texture = ExtResource("8_itcgr")
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="SubViewport/Buttons" unique_id=613272079]
+stream = ExtResource("9_uaykq")
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="SubViewport/Buttons" unique_id=1992806125]
+stream = ExtResource("10_xs2qy")
