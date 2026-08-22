@@ -72,10 +72,12 @@ func _input(event: InputEvent) -> void:
 
 
 func check_input(direction: String) -> void:
+	# Tippy dancing should go here
 	if(valid_directions[correct_input_index] == direction):
 		output_directions[valid_indices[correct_input_index]].texture = null
 		correct_input_index += 1
 	else:
+		# Angry tippy face here
 		display_wrong()
 		_start_minigame()
 
@@ -126,10 +128,12 @@ func _start_minigame() -> void:
 	# Create the colored text in the game tooltip
 	if choose_color == "blue":
 		text_color = general_colors.pick_random()
-		color_choice = "[bgcolor=%s][color=%s]blue[/color][/bgcolor]" % [background_color, text_color]
+		#color_choice = "[bgcolor=%s][color=%s]blue[/color][/bgcolor]" % [background_color, text_color]
+		color_choice = "[color=%s]blue[/color]" % [text_color]
 	else:
 		text_color = general_colors.pick_random()
-		color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
+		#color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
+		color_choice = "[color=%s]red[/color]" % [text_color]
 	prompt_output.text = "Press the %s directions!" % color_choice
 	
 	# Choose a pool of [max_arrow_count / (general_colors.size())] arrows for each color (likely 2, for blue and red)
