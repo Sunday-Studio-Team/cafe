@@ -12,7 +12,6 @@ const STRIDE_LENGTH := 0.75
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
 
-@export var pully_ball_scene: PackedScene
 
 var player_status_effects: PlayerStatusEffects
 
@@ -235,16 +234,7 @@ func handle_sprint(delta: float) -> void:
 		sprint_lockout_timer.start()
 
 
-func handle_right_click(delta: float)-> void:
-	#handles pully-ball 
-	
-	#TODO check if player has item. return if they don't
-	
-	if (Input.is_action_pressed("right_click") ):
-		pass
-	
-	pass
-	
+
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

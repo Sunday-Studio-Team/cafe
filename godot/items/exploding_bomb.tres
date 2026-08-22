@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://yipqvsqoo37x"]
+
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_d2bim"]
+[ext_resource type="Texture2D" uid="uid://b5q7vqew3ukr" path="res://sprites/items/ExplodingBomb.png" id="1_dikou"]
+
+[resource]
+script = ExtResource("1_d2bim")
+item_id = "exploding_bomb"
+name = "Exploding Bomb"
+description_at_levels = Dictionary[int, String]({
+1: "Use Right Click to spawn a bomb. After a delay, pushes the player."
+})
+icon = ExtResource("1_dikou")
+price_at_levels = Dictionary[int, float]({
+1: 5.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 5.0
+})
+metadata/_custom_type_script = "uid://w8k3e1miec1a"
