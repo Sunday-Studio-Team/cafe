@@ -132,6 +132,7 @@ func _start_minigame() -> void:
 	prompt_output.text = "Press the %s directions!" % color_choice
 	
 	# Choose a pool of [max_arrow_count / (general_colors.size())] arrows for each color (likely 2, for blue and red)
+	@warning_ignore("integer_division")
 	for i in range(max_arrow_count / (general_colors.size())):
 		var blue_dir: String = general_directions.pick_random()
 		blue_textures.append(get_arrow_array["blue"][blue_dir].pick_random())
@@ -144,6 +145,7 @@ func _start_minigame() -> void:
 			valid_directions.append(red_dir)
 		
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
+	@warning_ignore("integer_division")
 	var individual_color_max: int = max_arrow_count / 2 - 1
 	var bi: int = 0
 	var ri: int = 0

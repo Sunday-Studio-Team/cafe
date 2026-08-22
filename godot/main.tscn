@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
 [ext_resource type="PackedScene" uid="uid://l7w4dtq33b6f" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
-[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame_.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
@@ -134,6 +134,7 @@
 [ext_resource type="Texture2D" uid="uid://bs1mpgx84cqn6" path="res://Assets/UI/speech_bubble.png" id="124_1iygd"]
 [ext_resource type="Texture2D" uid="uid://b176xreldagr8" path="res://Assets/UI/x_button.png" id="125_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://s043j74ko4a1" path="res://sprites/coffee_bean.png" id="128_s4o1y"]
+[ext_resource type="AudioStream" uid="uid://dimkpitnugvme" path="res://audio/shift_start.wav" id="137_g3y5b"]
 [ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
@@ -166,7 +167,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ibca3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_g3y5b"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -177,7 +178,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g3y5b"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1slqb"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -188,7 +189,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_1slqb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_uo83y"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -199,7 +200,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_uo83y"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_y0aao"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -463,7 +464,7 @@ bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "tippy_voice_player", "tippy_voice_timer")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "special_shift_icon", "special_shift_text", "special_shift_title", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "tippy_voice_player", "tippy_voice_timer")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -502,6 +503,7 @@ teleporter3 = NodePath("Teleporter3")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
 whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
 waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
+shift_start_sound = NodePath("ShiftStartSound")
 tippy_voice_player = NodePath("TippyVoiceLinePlayer")
 tippy_voice_timer = NodePath("TippyVoiceTimer")
 
@@ -524,6 +526,21 @@ visible = false
 [node name="TrainingSkipMenu" parent="." unique_id=1397742482 instance=ExtResource("20_4obbf")]
 layer = 2
 visible = false
+
+[node name="ScoreUpdate" type="CanvasLayer" parent="." unique_id=358513537]
+layer = 2
+
+[node name="ScoreUpdate" type="Label" parent="ScoreUpdate" unique_id=938663646]
+modulate = Color(0.4, 1, 0.4, 1)
+offset_left = 40.0
+offset_top = 475.0
+offset_right = 517.0
+offset_bottom = 547.0
+offset_transform_enabled = true
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 52
+text = "+1$ from customer"
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
 
@@ -575,7 +592,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="6" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ibca3")
+texture = SubResource("ViewportTexture_g3y5b")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -588,7 +605,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="6" unique_id=1674333602]
-texture = SubResource("ViewportTexture_g3y5b")
+texture = SubResource("ViewportTexture_1slqb")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -605,7 +622,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="6" unique_id=1674333602]
-texture = SubResource("ViewportTexture_1slqb")
+texture = SubResource("ViewportTexture_uo83y")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -622,7 +639,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="6" unique_id=1674333602]
-texture = SubResource("ViewportTexture_uo83y")
+texture = SubResource("ViewportTexture_y0aao")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -650,13 +667,13 @@ wait_time = 15.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071067, 2.720034, 0, 14.536791)
+transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071067, 2.720034, 0, 15.268255)
+
+[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.4037077, 1.1920929e-07, 14.137601)
 
 [node name="CafeItemShelf" parent="." unique_id=1767295431 instance=ExtResource("26_4obbf")]
 transform = Transform3D(1.1924875e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924875e-08, -1.2828894, 1.1999999, 13.967806)
-
-[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.4037077, 1.1920929e-07, 13.4061365)
 
 [node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4011619, -0.11735466, 10.078446)
@@ -665,7 +682,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.40
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
 
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0010734, -0.09343622, 4.002124)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
@@ -781,7 +798,7 @@ position = Vector2(1547, 428)
 scale = Vector2(0.71, 0.71)
 sprite_frames = SubResource("SpriteFrames_ppx11")
 autoplay = "default"
-frame_progress = 0.32085693
+frame_progress = 0.28658438
 offset = Vector2(0, -250)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
@@ -790,7 +807,7 @@ script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
 customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
-score_update_label = NodePath("HUD/VBoxContainer/ScoreUpdate")
+score_update_label = NodePath("../ScoreUpdate/ScoreUpdate")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
@@ -1259,15 +1276,6 @@ sprite_frames = ExtResource("95_d5iia")
 frame = 71
 frame_progress = 1.0
 
-[node name="ScoreUpdate" type="Label" parent="UI/HUD/VBoxContainer" unique_id=124548306]
-modulate = Color(0.4, 1, 0.4, 1)
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 52
-text = "+1$ from customer"
-
 [node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
 size_flags_vertical = 3
@@ -1317,8 +1325,8 @@ icon = ExtResource("143_7bx05")
 [node name="Objective" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 24
-theme_override_font_sizes/bold_font_size = 48
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 text = "[b]OBJECTIVE:[/b]
 
@@ -1717,6 +1725,10 @@ stream = ExtResource("222_bvlej")
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
+
+[node name="ShiftStartSound" type="AudioStreamPlayer" parent="." unique_id=1443924933]
+stream = ExtResource("137_g3y5b")
+volume_db = -5.0
 
 [node name="TutorialCanvasLayer" type="CanvasLayer" parent="." unique_id=1790182858]
 process_mode = 3

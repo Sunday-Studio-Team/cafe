@@ -40,6 +40,7 @@ extends Node3D
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
+@export var shift_start_sound: AudioStreamPlayer
 
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
@@ -425,6 +426,7 @@ func _on_minigame_end():
 
 func _on_shift_started():
 	Global.shift_started = true
+	shift_start_sound.play()
 
 	if Global.day > 0:
 		game_timer.start()

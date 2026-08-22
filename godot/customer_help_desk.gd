@@ -14,7 +14,7 @@ func _ready() -> void:
 	_help_desk_interactable.visible = false
 	_help_desk_interactable.interacted.connect(_on_help_desk_interactable_interacted)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	_process_queued_customers()
 
 func _process_queued_customers() -> void:

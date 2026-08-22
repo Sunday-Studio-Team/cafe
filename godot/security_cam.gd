@@ -15,6 +15,8 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var disabled_timer: Timer
 @export var interactable : Interactable
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
+@export var disable_sound: AudioStreamPlayer3D
+@export var disable_particles: GPUParticles3D
 @export var disabled_timer_sprite: Sprite3D
 @export var disabled_timer_bar: TextureProgressBar
 
@@ -121,6 +123,8 @@ func _on_visibility_changed() -> void:
 
 func disarm_camera() -> void:
 	_camera_disarmed = true
+	disable_sound.play()
+	disable_particles.emitting = true
 	_update_camera_components_active()
 
 
@@ -149,7 +153,7 @@ func _update_camera_components_active() -> void:
 func create_rays() -> void:
 	# we need to overshoot slightly to account for the sorta
 	# halo around the edge of the light
-	const ANGLE_OVERSHOOT := 5.0
+	#const ANGLE_OVERSHOOT := 5.0
 
 	_all_shape_casts.append(_shape_cast_3d)
 	# Disable the template by default.

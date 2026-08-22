@@ -8,7 +8,7 @@
 size = Vector3(0.15, 0.15, 0.15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ernkv"]
-size = Vector3(0.5, 0.75, 0.5)
+size = Vector3(0.5, 1, 0.5)
 
 [node name="IngredientsBag" type="RigidBody3D" unique_id=820779 node_paths=PackedStringArray("interactable")]
 collision_layer = 4
@@ -25,7 +25,7 @@ mesh = NodePath("../ingredientbag/ingredient_bag")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1132246766]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_ernkv")
 
 [node name="ingredientbag" parent="." unique_id=832928181 instance=ExtResource("3_52fgx")]

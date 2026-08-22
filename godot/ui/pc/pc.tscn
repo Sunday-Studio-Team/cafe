@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://bgyc1mnye0hph" path="res://ui/pc/shop_app.tscn" id="4_klsw4"]
 [ext_resource type="PackedScene" uid="uid://c3hbk2kct6kc7" path="res://ui/pc/email_app.tscn" id="5_k03dd"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="8_4xb7n"]
+[ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="13_22wjn"]
+[ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="14_vd71g"]
+[ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="15_kjli4"]
 
 [sub_resource type="Theme" id="Theme_4xb7n"]
 default_font = ExtResource("1_0qe70")
@@ -57,7 +60,14 @@ corner_radius_bottom_right = 11
 corner_radius_bottom_left = 11
 corner_detail = 20
 
-[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button", "unread_label")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bh3q2"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("13_22wjn")
+stream_1/stream = ExtResource("14_vd71g")
+stream_2/stream = ExtResource("15_kjli4")
+
+[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "shop_app", "exit_button", "unread_label", "click_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,6 +82,7 @@ email_app = NodePath("MarginContainer/EmailApp")
 shop_app = NodePath("MarginContainer/ShopApp")
 exit_button = NodePath("Exit")
 unread_label = NodePath("MarginContainer/Apps/Email/UnreadCount")
+click_sound = NodePath("ClickSound")
 
 [node name="BorderGray" type="Panel" parent="." unique_id=1670875515]
 z_index = -1
@@ -221,5 +232,9 @@ offset_transform_visual_only = false
 theme = ExtResource("8_4xb7n")
 theme_override_font_sizes/font_size = 64
 text = "exit"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1708556159]
+stream = SubResource("AudioStreamRandomizer_bh3q2")
+volume_db = -5.0
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
