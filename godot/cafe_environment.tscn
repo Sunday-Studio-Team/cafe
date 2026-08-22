@@ -31,8 +31,10 @@
 [ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
 [ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
 [ext_resource type="Texture2D" uid="uid://cetushjghxirl" path="res://environment/textures/office tiles.png" id="31_omxm3"]
+[ext_resource type="PackedScene" uid="uid://7guo1hrx6oco" path="res://Assets/Locker/locker_tippy.tscn" id="31_ubo3j"]
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
+[ext_resource type="PackedScene" uid="uid://dfigy7bvip3cu" path="res://Assets/Locker/small_lockers.tscn" id="33_kmdca"]
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
 [ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="35_dmru2"]
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
@@ -48,6 +50,8 @@
 [ext_resource type="PackedScene" uid="uid://dbxcl8y3t1aqb" path="res://Assets/signs/metal arch.glb" id="45_fp6ic"]
 [ext_resource type="PackedScene" uid="uid://8j8i4rb32gr8" path="res://Assets/filling cabinets/filling_cabinets.tscn" id="46_a3sl0"]
 [ext_resource type="Texture2D" uid="uid://bsaijqk5w5k1y" path="res://Assets/Street/road.png" id="48_bqqh4"]
+[ext_resource type="PackedScene" uid="uid://1s54vqwadrmx" path="res://Assets/signs/tippy_open_close_sign.tscn" id="48_qboto"]
+[ext_resource type="Texture2D" uid="uid://drqdck5keqc5" path="res://Assets/cars/ambulance.png" id="49_0jw1j"]
 [ext_resource type="PackedScene" uid="uid://bcsqffwblcksh" path="res://Assets/Street/Street.glb" id="49_bkt63"]
 [ext_resource type="Texture2D" uid="uid://duypnvlfw06cv" path="res://Assets/Street/city pack_Image_63.png" id="50_56cmc"]
 [ext_resource type="Texture2D" uid="uid://fdi1a6klaj8t" path="res://Assets/Street/city pack_Image_64.png" id="51_rkxax"]
@@ -516,6 +520,12 @@ material = SubResource("StandardMaterial3D_2cqfq")
 text = "store room"
 pixel_size = 0.025
 depth = 0.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n35f"]
+transparency = 1
+albedo_texture = ExtResource("49_0jw1j")
+metallic = 0.3
+roughness = 0.65
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tackp"]
 resource_name = "Structure_shader"
@@ -1461,9 +1471,78 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.01
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5996704, 3, 3)
 mesh = SubResource("BoxMesh_jofr6")
 
+[node name="Locker tippy" parent="BreakRoom" unique_id=787314827 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044044, 0, -0.0034689992, 0, 0.70441294, 0, 0.0034689992, 0, -0.7044044, 2.2924411, -0.08429599, 2.152318)
+
+[node name="Locker tippy4" parent="BreakRoom" unique_id=428753990 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.009764552, -0.9211664)
+
+[node name="Locker tippy5" parent="BreakRoom" unique_id=248312422 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.797965, 0.009764552, -3.739593)
+
+[node name="Locker tippy7" parent="BreakRoom" unique_id=1913584178 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.797965, 0.009764552, -5.4898095)
+
+[node name="Locker tippy8" parent="BreakRoom" unique_id=2119566149 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.009764552, -4.5860696)
+
+[node name="Locker tippy15" parent="BreakRoom" unique_id=1479455124 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.9528513, 0.009764314, -12.49315)
+
+[node name="Locker tippy16" parent="BreakRoom" unique_id=1242390208 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.8896112, 0.009764314, -13.396957)
+
+[node name="Locker tippy18" parent="BreakRoom" unique_id=1649937457 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.887595, 0.009764314, -10.825682)
+
+[node name="Locker tippy19" parent="BreakRoom" unique_id=496520420 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.9489927, 0.009764314, -6.247348)
+
+[node name="Locker tippy20" parent="BreakRoom" unique_id=554112667 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.8857527, 0.009764314, -7.9871397)
+
+[node name="Locker tippy9" parent="BreakRoom" unique_id=28170398 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 3.7142837, 0.009764552, -0.5407038)
+
+[node name="Locker tippy10" parent="BreakRoom" unique_id=2077010906 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 1.3672915, 0.009764552, -0.56572676)
+
+[node name="Locker tippy11" parent="BreakRoom" unique_id=1597140254 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-0.613706, 0, 0.34577858, 0, 0.70441306, 0, -0.34577858, 0, -0.613706, -6.8092213, 0.009764552, -4.837779)
+
+[node name="Locker tippy12" parent="BreakRoom" unique_id=1764203829 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, -4.105858, 0.009764552, -0.59271574)
+
+[node name="Locker tippy13" parent="BreakRoom" unique_id=979761337 instance=ExtResource("31_ubo3j")]
+transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 8.777748, 0.009764552, -0.69930077)
+
 [node name="Floor" type="MeshInstance3D" parent="BreakRoom" unique_id=2034756070]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5376587, 0, 3)
 mesh = SubResource("BoxMesh_7olkn")
+
+[node name="Small Lockers" parent="BreakRoom" unique_id=461790548 instance=ExtResource("33_kmdca")]
+transform = Transform3D(0.018655129, 0, -0.99982595, 0, 1, 0, 0.99982595, 0, 0.018655129, 6.5108852, 0, -0.51410866)
+
+[node name="Small Lockers8" parent="BreakRoom" unique_id=161297905 instance=ExtResource("33_kmdca")]
+transform = Transform3D(-0.99999243, 0, 0.0038785525, 0, 1, 0, -0.0038785525, 0, -0.99999243, 2.3232331, -0.03344506, 1.3726912)
+
+[node name="Small Lockers4" parent="BreakRoom" unique_id=499351396 instance=ExtResource("33_kmdca")]
+transform = Transform3D(0.6936882, 0, -0.7202754, 0, 1, 0, 0.7202754, 0, 0.6936882, 0.71314263, 0, -0.51410866)
+
+[node name="Small Lockers5" parent="BreakRoom" unique_id=1583728907 instance=ExtResource("33_kmdca")]
+transform = Transform3D(-0.72338706, 0, -0.69044274, 0, 1, 0, 0.69044274, 0, -0.72338706, -6.5648527, 0, -1.0680676)
+
+[node name="Small Lockers6" parent="BreakRoom" unique_id=215484942 instance=ExtResource("33_kmdca")]
+transform = Transform3D(-0.97628653, 0, -0.21648237, 0, 1, 0, 0.21648237, 0, -0.97628653, -6.7949753, 0, -8.712513)
+
+[node name="Small Lockers7" parent="BreakRoom" unique_id=1688744581 instance=ExtResource("33_kmdca")]
+transform = Transform3D(-0.06041369, 0, 0.9981735, 0, 1, 0, -0.9981735, 0, -0.06041369, -6.1889067, 0, -13.842878)
+
+[node name="Small Lockers2" parent="BreakRoom" unique_id=1378622699 instance=ExtResource("33_kmdca")]
+transform = Transform3D(0.9980602, 0, -0.062256224, 0, 1, 0, 0.062256224, 0, 0.9980602, 11.909431, 0, -1.7087417)
+
+[node name="Small Lockers3" parent="BreakRoom" unique_id=677893923 instance=ExtResource("33_kmdca")]
+transform = Transform3D(0.9980602, 0, -0.062256224, -0.009588755, 0.9880676, -0.15372205, 0.06151336, 0.15402082, 0.986151, 11.909431, 0.014679372, -2.5638292)
 
 [node name="BackRoom" type="Node3D" parent="." unique_id=305847678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
@@ -1702,6 +1781,9 @@ mesh = SubResource("ArrayMesh_qgd4t")
 [node name="metal arch" parent="BackRoom/counter" unique_id=752011193 instance=ExtResource("45_fp6ic")]
 transform = Transform3D(-0.4837753, 0, -3.6683446e-08, 0, 0.658351, 0, 3.887321e-08, 0, -0.38568056, 0.7899945, 0.95003736, -0.056305647)
 
+[node name="Tippy Open Close Sign2" parent="BackRoom/counter" unique_id=56236514 instance=ExtResource("48_qboto")]
+transform = Transform3D(2.1482568, -0.6565139, 0.056880757, 0.65628374, 2.1490092, 0.01737678, -0.059475817, 6.066348e-08, 2.246267, 0.38514614, 1.5209296, 0.12744448)
+
 [node name="filling cabinets" parent="BackRoom" unique_id=1645398128 instance=ExtResource("46_a3sl0")]
 transform = Transform3D(-1.22, 0, -1.8421488e-07, 0, 1.22, 0, 1.8421488e-07, 0, -1.22, 3.8309226, 0.05262039, 0.24210644)
 visible = false
@@ -1784,6 +1866,11 @@ texture = ExtResource("48_bqqh4")
 [node name="Sprite3D4" type="Sprite3D" parent="Exterior" unique_id=640929780]
 transform = Transform3D(-0.6264175, -2.1319964e-08, 9.632258e-09, 2.738158e-08, 4.659626e-16, 0.22036037, -5.476316e-08, 0.24387196, 4.2103935e-16, 13.498823, -0.0056385994, -5.4775853)
 texture = ExtResource("48_bqqh4")
+
+[node name="ambulance" type="Sprite3D" parent="Exterior" unique_id=1089029611]
+transform = Transform3D(0.19703001, 0, 0, 0, 0.19703001, 0, 0, 0, 0.19703001, -5.078621, 1.7736286, -7.8076143)
+material_override = SubResource("StandardMaterial3D_8n35f")
+texture = ExtResource("49_0jw1j")
 
 [node name="Sprite3D9" type="Sprite3D" parent="Exterior" unique_id=1013928753]
 transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.70082474, -0.0056385994, -8.4085865)

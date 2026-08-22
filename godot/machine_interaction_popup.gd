@@ -27,12 +27,9 @@ func open() -> void:
 	# 	if text: text.text = Global.current_special_shift.description
 	# 	if title: title.text = Global.current_special_shift.name
 	# 	if icon: icon.texture = Global.current_special_shift.icon
-
 	visible = true
 	Global.popup_hint_showing = true
 	get_tree().paused = true
-	
-	
 
 
 func close() -> void:

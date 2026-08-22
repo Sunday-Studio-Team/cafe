@@ -1,23 +1,23 @@
 extends Node3D
 
-static var seen_interaction_popup := false
-static var seen_breakdown_popup := false
-
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
-@export var _cameras: Array[SecurityCam3D]
+@export var _left_area_camera: SecurityCam3D
+@export var _middle_camera: SecurityCam3D
+@export var _right_area_camera: SecurityCam3D
+@export var _hallway_camera: SecurityCam3D
 @export var menu: Menu3D
-# (machines numbered in order from the window here)
-@export var first_machine: Machine
-@export var second_machine: Machine
-@export var third_machine: Machine
-@export var fourth_machine: Machine
+@export var _right_area_left_machine: Machine
+@export var _right_area_right_machine: Machine
+@export var _left_area_left_machine: Machine
+@export var _left_area_middle_machine: Machine
+@export var _left_area_right_machine: Machine
+@export var _customer_help_desk: CustomerHelpDesk
 @export var customer_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
-@export var _customer_help_desk: CustomerHelpDesk
 @export var ui: CanvasLayer
 @export var day_indicator: Label
 @export var desk: Desk
@@ -31,8 +31,6 @@ static var seen_breakdown_popup := false
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var interaction_popup: CanvasLayer
-@export var breakdown_popup: CanvasLayer
 @export var special_shift_icon: TextureRect
 @export var special_shift_text: Label
 @export var special_shift_title: Label
@@ -42,6 +40,7 @@ static var seen_breakdown_popup := false
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
+@export var shift_start_sound: AudioStreamPlayer
 
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
@@ -50,9 +49,11 @@ var _help_desk_customer_spawn_timer: Timer
 @export var tippy_voice_timer: Timer
 
 var seen_tutorial_machine_instructions: bool = false
-var machines: Array[Machine]
+var _all_machines: Array[Machine]
+var _active_machines: Array[Machine]
+var _all_security_cameras: Array[SecurityCam3D]
 
-@onready var tutorial_machine: Machine = first_machine
+@onready var tutorial_machine: Machine = _right_area_right_machine
 
 
 func _ready() -> void:
@@ -64,6 +65,21 @@ func _ready() -> void:
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
+	
+	_all_machines = [
+		_right_area_left_machine,
+		_right_area_right_machine,
+		_left_area_left_machine,
+		_left_area_middle_machine,
+		_left_area_right_machine,
+	]
+	
+	_all_security_cameras = [
+		_left_area_camera,
+		_middle_camera,
+		_right_area_camera,
+		_hallway_camera,
+	]
 
 	Events.employee_rating_updated.connect(_on_employee_rating_updated)
 	
@@ -106,10 +122,6 @@ func _ready() -> void:
 	get_stats()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
-	if Global.day == 1:
-		if not OS.has_feature("editor"):
-			_tutorial_manager.show_tutorial()
-			await _tutorial_manager.finished_tutorial
 
 	for ui_element: Control in ui.find_children("*", "Control", false):
 		ui_element.modulate = Color.TRANSPARENT
@@ -137,9 +149,9 @@ func _ready() -> void:
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
-	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-	# 	Global.popups["special shift"].open()
-	
+	#if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		#Global.popups["special shift"].open()
+
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
 
@@ -172,7 +184,7 @@ func _ready() -> void:
 	Events.spill_clean_done.connect(func():
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
 	)
-	Events.order_approved_no_customer.connect(func():
+	Events.order_approved.connect(func(_customer: Customer):
 		_tippy_voice_play(TippyVoiceLine.TippyLineType.accept_drink)
 	)
 
@@ -180,7 +192,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
 	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
-	
+
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
@@ -229,7 +241,7 @@ func enable_disable_teleporters():
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	if Global.day == 0:
-		var email_manager = EmailsManager.get_instance()
+		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
@@ -237,65 +249,65 @@ func set_per_day_stuff() -> void:
 		Stats.reset()
 		Stats.current.customer_wait_time_machine = INF
 		Stats.current.machine_chance_of_spill = 0.0
-		machines.clear()
-		machines.push_front(tutorial_machine)
-		_set_security_cameras_active(false)
+		_active_machines.clear()
+		_active_machines.push_front(tutorial_machine)
+		_set_day_security_cameras_active([])
+
 	if Global.day == 1:
-		var email_manager = EmailsManager.get_instance()
+		# Reset run.
+		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
-	if Global.day >= 1:
-		_set_security_cameras_active(false)
-		machines.clear()
-		machines.push_front(first_machine)
-		machines.push_front(second_machine)
-		# whiteboard_tutorial_arrow.visible = false
-	if Global.day >= 2:
-		machines.append(third_machine)
-		_set_security_cameras_active(true)
-	if Global.day >= 3:
-		machines.push_front(fourth_machine)
-		# Global.holding_ingredients_rule = true
-	if Global.day >= 4:
-		pass
-	if Global.day == 5:
-		pass
 
-	# if Global.ai_improvement and !Global.ai_improvement_enabled:
-	# 	# actually add the stats now
-	# 	for stat in Global.ai_improvement.stat_bonuses:
-	# 		var current_stat = Stats.current.get(stat)
-	# 		if current_stat == null:
-	# 			push_error("email is trying to give a bonus to '%s' but that stat does not exist" % [stat])
-	# 		Stats.current.set(stat, current_stat + Global.ai_improvement.stat_bonuses[stat])
-	# 	Global.ai_improvement_enabled = true
+	if Global.day == 1:
+		_active_machines.clear()
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([])
+
+	if Global.day == 2:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_set_day_security_cameras_active([_middle_camera])
+	
+	if Global.day == 3:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([_middle_camera, _right_area_camera])
+
+	if Global.day == 4:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_left_machine)
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+
+	if Global.day == 5:
+		_active_machines.clear()
+		_active_machines.push_back(_left_area_left_machine)
+		_active_machines.push_back(_left_area_middle_machine)
+		_active_machines.push_back(_left_area_right_machine)
+		_active_machines.push_back(_right_area_left_machine)
+		_active_machines.push_back(_right_area_right_machine)
+		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
 
 	menu.populate_drinks()
 
-	Global.machines.assign(machines)
-
-	# #select a special shift if it is not day one
-	# if Global.day > 1:
-	# 	var rng = RandomNumberGenerator.new()
-	# 	var weights: PackedFloat32Array
-	# 	for special_shift in Global.special_shifts:
-	# 		weights.append(special_shift.weight)
-	# 
-	# 	var selected_index := rng.rand_weighted(weights)
-	# 	Global.current_special_shift = Global.special_shifts[selected_index]
-	# else:
-	# 	Global.current_special_shift = Global.special_shifts[0]
-
+	Global.machines.assign(_active_machines)
 
 func spawn_machines():
-	for machine: Machine in [first_machine, second_machine, third_machine, fourth_machine]:
+	for machine: Machine in _all_machines:
 		machine.hide()
 		machine.process_mode = Node.PROCESS_MODE_DISABLED
 
-	for machine: Machine in machines:
+	for machine: Machine in _active_machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
 
@@ -312,7 +324,7 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 
 func spawn_machine_customer() -> void:
 	var available_machines: Array[Machine] = []
-	for machine in machines:
+	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
 			available_machines.append(machine)
 	
@@ -362,7 +374,7 @@ func active_item_used(item: Item):
 		else:
 			customer_wait_duration_extension = 30.0
 		
-		for machine in machines:
+		for machine in _active_machines:
 			if machine.customer:
 				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
 
@@ -371,9 +383,12 @@ func active_item_used(item: Item):
 		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension)
 
 
-func _set_security_cameras_active(active: bool) -> void:
-	for security_camera in _cameras:
-		security_camera.visible = active
+func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D]) -> void:
+	for security_camera in _all_security_cameras:
+		if security_camera in cameras_to_set_active:
+			security_camera.visible = true
+		else:
+			security_camera.visible = false
 
 
 func _on_pause_menu_tutorial_requested() -> void:
@@ -411,6 +426,7 @@ func _on_minigame_end():
 
 func _on_shift_started():
 	Global.shift_started = true
+	shift_start_sound.play()
 
 	if Global.day > 0:
 		game_timer.start()
@@ -591,13 +607,14 @@ func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> 
 	print("secs per help desk customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
 
+
 func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
 	if tippy_voice_player.playing:
 		return
-		
+
 	if !tippy_voice_timer.is_stopped():
 		return
-		
+
 	var chance_play = randf_range(0.0, 1.0)
 	if voice_line == TippyVoiceLine.TippyLineType.shift_low_time:
 		chance_play += 0.25

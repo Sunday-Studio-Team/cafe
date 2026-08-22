@@ -52,19 +52,19 @@ func _ready() -> void:
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
 
+	ingredients_bag.visibility_changed.connect(
+		func():
+			if ingredients_bag.visible:
+				ingredients_bag.scale = Vector3.ZERO
+	)
 	Events.bag_pickup_animation_grabbed.connect(
 		func():
 			bag_pickup_sound.play()
-
-			# scuffed 'animation' of bag appearing when we grab it
-			ingredients_bag.transparency = 1
-			ingredients_bag.scale = Vector3.ZERO
 
 			await Events.viewmodel_animation_finished
 
 			var t := create_tween().set_parallel()
 			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
-			t.tween_property(ingredients_bag, "transparency", 0, 0.25),
 	)
 
 	Global.stamina = Stats.current.max_stamina
@@ -287,6 +287,7 @@ func handle_ingredients_bag() -> void:
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()

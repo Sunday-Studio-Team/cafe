@@ -10,12 +10,21 @@ extends SubViewportContainer
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
+@export var click_sound: AudioStreamPlayer
+@export var correct_sound: AudioStreamPlayer
+@export var wrong_sound: AudioStreamPlayer
 
 var ordered_drink: Drink
 var main_text: String = "The required ingredients"
 
 
 func _ready() -> void:
+	for slot: IngredientIconHolder in captcha.get_children():
+		slot.button.pressed.connect(
+			func():
+				click_sound.play(),
+		)
+
 	_start_minigame()
 
 
@@ -32,8 +41,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func populate_captcha() -> void:
-	var captcha_slots = captcha.get_children() as Array[IngredientIconHolder]
-	var slots_with_our_ingredients: Array[IngredientIconHolder]
+	var captcha_slots_to_fill = captcha.get_children() as Array[IngredientIconHolder]
 
 	# get the ingredients from the ordered drink and put them each in one of the
 	# slots in the captcha
@@ -43,14 +51,13 @@ func populate_captcha() -> void:
 		ordered_drink.extra,
 	]:
 		if ingredient != null and ingredient.name != Ingredient.Ingredient_Label.NONE:
-			var random_icon_holder: IngredientIconHolder = captcha_slots.pick_random()
+			var random_icon_holder: IngredientIconHolder = captcha_slots_to_fill.pick_random()
 			random_icon_holder.ingredient = ingredient
-			slots_with_our_ingredients.append(random_icon_holder)
+			captcha_slots_to_fill.erase(random_icon_holder)
 
 	# fill in the rest of the slots with random ingredients
-	for captcha_icon: IngredientIconHolder in captcha_slots:
-		if not slots_with_our_ingredients.has(captcha_icon):
-			captcha_icon.ingredient = Global.ingredients.pick_random()
+	for captcha_icon: IngredientIconHolder in captcha_slots_to_fill:
+		captcha_icon.ingredient = Global.ingredients.pick_random()
 
 
 func populate_order_reminder() -> void:
@@ -88,8 +95,24 @@ func verify_captcha() -> void:
 			)
 		):
 			shake_panel()
+			wrong_sound.play()
 			return
 
+	mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+	correct_sound.play()
+
+	for slot: IngredientIconHolder in captcha.get_children():
+		var scale_tween := create_tween()
+		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE * 0.75, 0.025)
+		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE, 0.025)
+
+		await get_tree().create_timer(0.025).timeout
+
+		var colour_tween := create_tween()
+		colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
+		colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
+
+	await correct_sound.finished
 	_end_minigame()
 
 

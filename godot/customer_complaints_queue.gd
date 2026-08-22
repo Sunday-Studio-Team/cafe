@@ -3,8 +3,6 @@ extends Node3D
 
 signal customer_added
 
-static var seen_complaint_popup := false
-
 @export var customer_interactable: Interactable
 @export var front_of_window_queue: Marker3D
 @export var queue_spacing_offset: float = -1
@@ -20,13 +18,6 @@ func _ready() -> void:
 
 
 func add_customer(customer: Customer) -> void:
-	# Showing the popup tutorial when the customer complains
-	if not seen_complaint_popup:
-		seen_complaint_popup = true # Only showing it once
-		Global.popups["complaint"].open()
-	else:
-		pass
-
 	Events.alert_posted.emit("🛎️ customer complained")
 	Global.score_update_message = "customer complained"
 

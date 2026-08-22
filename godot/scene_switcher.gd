@@ -26,10 +26,11 @@ var loading_tween: Tween
 var _cached_main_packed_scene: PackedScene
 var _cached_sub_resources: Dictionary[StringName, Resource]
 
+
 func _ready() -> void:
 	Events.scene_switch_requested.connect(load_scene)
 	Events.quit_game_requested.connect(quit_game)
-	
+
 	if OS.has_feature("editor"):
 		load_scene(SceneSwitcher.GameScene.MAIN_SCENE)
 	else:
