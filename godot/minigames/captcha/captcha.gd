@@ -184,6 +184,8 @@ func _start_minigame() -> void:
 
 
 func _end_minigame() -> void:
+	# THIS FUNCTION IS CALLED BY THE `CustomerContainer` node!
+	# Since the game should only end when giving the customer their drink now
 	print("End remaking minigame")
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
 	Events.minigame_end.emit()
