@@ -84,9 +84,10 @@ func _ready() -> void:
 	)
 	Events.shift_started.connect(
 		func():
-			objective.text = "[b]SHIFT STARTING"
+			objective.add_theme_font_size_override("bold_font_size", 96)
+			objective.text = "\n\n[b][wave amp=100 freq=7.5]SHIFT STARTING"
 			await get_tree().create_timer(5, false).timeout
-			objective.hide()
+			create_tween().tween_property(objective, "modulate", Color.TRANSPARENT, 0.5)
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
 	Events.time_up.connect(func(): hide())
