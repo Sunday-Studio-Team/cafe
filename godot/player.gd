@@ -276,7 +276,7 @@ func handle_ingredients_bag() -> void:
 		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
-	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+	ingredients_bag.visible = Global.holding_ingredients
 
 
 func _on_items_updated() -> void:

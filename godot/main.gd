@@ -396,6 +396,7 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 
 func _on_game_timer_timeout() -> void:
+	Engine.time_scale = 1
 	Events.time_up.emit()
 
 	await Events.end_screen_finished
@@ -622,4 +623,4 @@ func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
 	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
 		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
 		tippy_voice_player.play()
-		tippy_voice_timer.start(randf_range(10.0, 16.0))
+		tippy_voice_timer.start(randf_range(25, 35))

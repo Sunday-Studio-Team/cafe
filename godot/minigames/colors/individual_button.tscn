@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://d3pjeuemwlp77"]
+[gd_scene format=3 uid="uid://dbx22r4b0wtk7"]
 
-[ext_resource type="Script" uid="uid://fn1yhchp5g2a" path="res://minigames/colors/individual_button.gd" id="1_apfj3"]
+[ext_resource type="Script" uid="uid://dqc0t4v3lu6p7" path="res://minigames/colors/individual_button.gd" id="1_apfj3"]
 [ext_resource type="Texture2D" uid="uid://gmpvwsj5h11f" path="res://sprites/machine_fix_buttons_minigame/A_BOX.png" id="2_apfj3"]
 
 [node name="ButtonContainer" type="MarginContainer" unique_id=1674219931 node_paths=PackedStringArray("button", "letter_color_rect")]
@@ -22,7 +22,6 @@ letter_color_rect = NodePath("Button/ColorRect")
 
 [node name="Button" type="TextureButton" parent="." unique_id=1315123379]
 z_index = 1
-custom_minimum_size = Vector2(536, 422)
 layout_mode = 2
 offset_transform_enabled = true
 texture_normal = ExtResource("2_apfj3")
