@@ -396,6 +396,7 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 
 func _on_game_timer_timeout() -> void:
+	Engine.time_scale = 1
 	Events.time_up.emit()
 
 	await Events.end_screen_finished
