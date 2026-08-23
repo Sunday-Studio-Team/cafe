@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dbx22r4b0wtk7"]
+
+[ext_resource type="Script" uid="uid://dqc0t4v3lu6p7" path="res://minigames/colors/individual_button.gd" id="1_apfj3"]
+[ext_resource type="Texture2D" uid="uid://gmpvwsj5h11f" path="res://sprites/machine_fix_buttons_minigame/A_BOX.png" id="2_apfj3"]
+
+[node name="ButtonContainer" type="MarginContainer" unique_id=1674219931 node_paths=PackedStringArray("button", "letter_color_rect")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+script = ExtResource("1_apfj3")
+color = Color(1, 0, 0, 1)
+letter_color = Color(0, 0, 1, 1)
+button = NodePath("Button")
+letter_color_rect = NodePath("Button/ColorRect")
+
+[node name="Button" type="TextureButton" parent="." unique_id=1315123379]
+z_index = 1
+layout_mode = 2
+offset_transform_enabled = true
+texture_normal = ExtResource("2_apfj3")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="Button" unique_id=1065033765]
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]

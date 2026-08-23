@@ -15,7 +15,6 @@ extends Node
 @export var empty_star_texture: Texture
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
-@export var special_shifts: Array[SpecialShift]
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
 var player: Player
@@ -30,7 +29,7 @@ var hovered_interactable: Interactable:
 # max amount of items we can own
 var item_slots_amount: int
 var inspected_shelf_item: ShelfItem
-var main_scene: Node3D
+var main_scene: Main
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
@@ -106,7 +105,6 @@ var customer_sprites: Array[Texture]
 ## the sprites of customers that are in the cafe right now
 var customer_sprites_in_use: Array[Texture]
 var spill_sprites: Array[Texture]
-var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
@@ -154,7 +152,10 @@ var in_ui: bool:
 			return true
 		else:
 			return false
+# Remaking drink variables --
 var ordered_drink_to_remake: Drink
+var ordered_drink_customer: Customer
+# End remaking drink variables --
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
 #Active Items

@@ -1,3 +1,4 @@
+class_name Main
 extends Node3D
 
 @export var _pause_menu: PauseMenu
@@ -21,7 +22,7 @@ extends Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
 @export var desk: Desk
-@export var pc_ui: Control
+@export var pc_ui: PC_UI
 @export var overtime_item: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
@@ -31,9 +32,6 @@ extends Node3D
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var special_shift_icon: TextureRect
-@export var special_shift_text: Label
-@export var special_shift_title: Label
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var teleporter3: Teleporter
@@ -55,11 +53,12 @@ var _all_security_cameras: Array[SecurityCam3D]
 
 @onready var tutorial_machine: Machine = _right_area_right_machine
 
+var closing_time:bool = false
 
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
 	SaveDataManager.get_options_data().apply_options()
-
+	Events.customer_leave.connect(shift_end_sequence)
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -192,7 +191,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
 	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
-
+	
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
@@ -240,6 +239,7 @@ func enable_disable_teleporters():
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
+	closing_time = false
 	if Global.day == 0:
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
@@ -252,9 +252,12 @@ func set_per_day_stuff() -> void:
 		_active_machines.clear()
 		_active_machines.push_front(tutorial_machine)
 		_set_day_security_cameras_active([])
-
+	else:
+		_on_desk_interacted()
+		pc_ui._on_shop_button_pressed()
 	if Global.day == 1:
 		# Reset run.
+		Global.player_tips_bank = 5
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
@@ -313,16 +316,19 @@ func spawn_machines():
 
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
+	if closing_time: return
 	_machine_customer_spawn_timer.wait_time = Global.machine_customer_flow_rate
 	_machine_customer_spawn_timer.start()
 	spawn_machine_customer()
 
 func _on_help_desk_customer_spawn_timer_timeout() -> void:
+	if closing_time: return
 	_help_desk_customer_spawn_timer.wait_time = Global.help_desk_customer_flow_rate
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
 
 func spawn_machine_customer() -> void:
+	
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -354,6 +360,9 @@ func spawn_machine_customer() -> void:
 	add_child(new_customer)
 
 	assigned_machine.add_customer_to_queue(new_customer)
+
+func get_customers() -> Array[Customer]:
+	return (get_tree().get_nodes_in_group("customer")) as Array[Customer]
 
 func spawn_help_desk_customer() -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
@@ -396,6 +405,13 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 
 func _on_game_timer_timeout() -> void:
+	closing_time = true
+	if get_customers().is_empty():
+		shift_end_sequence()
+
+func shift_end_sequence():
+	if not closing_time and not get_customers().is_empty(): return
+	Engine.time_scale = 1
 	Events.time_up.emit()
 
 	await Events.end_screen_finished

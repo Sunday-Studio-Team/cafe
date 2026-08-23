@@ -9,7 +9,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
 viewport_path = NodePath("WaitingIndicator/SubViewport")
 
-[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "spawn_sound")]
+[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "spawn_sound") groups=["customer"]]
 script = ExtResource("1_7tiyv")
 body = NodePath("Sprite3D")
 waiting_indicator = NodePath("WaitingIndicator")

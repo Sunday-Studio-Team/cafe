@@ -450,10 +450,6 @@ func machine_make_drink() -> void:
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
 
-	if Global.current_special_shift != null and Global.current_special_shift.name == "Critical Customers":
-		# If critical customers, halve the star rating gains.
-		order.star_rating_gain_for_remake /= 2.0
-
 	# Calculate star rating loss if accepted
 	if order.star_rating_gain_for_remake == 0.0:
 		order.star_rating_loss_if_accept = 0.0
@@ -786,6 +782,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Events.force_close_minigame.connect(_on_force_close_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
+	Global.ordered_drink_customer = customer
 	Events.minigame_active.emit(MANUAL_DRINK_MINIGAMES.pick_random())
 	Events.order_remaking_drink.emit()
 
