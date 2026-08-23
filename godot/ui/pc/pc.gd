@@ -18,13 +18,6 @@ func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
-	visibility_changed.connect(
-		func():
-			if visible:
-				Global.in_pc_ui = true
-			else:
-				Global.in_pc_ui = false
-	)
 
 	# we dont even have money for shop on day 1 sooo
 	#Update from August 23 12:32:15 GMT+8 - yeah we do now weeeee
@@ -52,6 +45,8 @@ func _process(_delta: float) -> void:
 			exit()
 
 	irl_new_shop_items_indicator.visible = new_shop_items and not Global.day < 2
+
+	Global.in_pc_ui = visible
 
 
 func exit() -> void:
