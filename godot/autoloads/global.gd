@@ -58,7 +58,6 @@ var shift_time_remaining: float
 var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
-var tippy_voice_lines: Array[TippyVoiceLine]
 var daily_cafe_money := 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
@@ -165,6 +164,8 @@ var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machi
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
+# Voice Line System
+var voice_line_system: VoiceLineSystem
 
 
 func _ready() -> void:
@@ -180,7 +181,6 @@ func _ready() -> void:
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
-	tippy_voice_lines.assign(load_resources_from_folder(tippy_voice_path))
 
 
 # NOTE: these things in physics process instead of process for timing reasons

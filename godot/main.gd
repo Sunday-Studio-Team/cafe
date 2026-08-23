@@ -43,6 +43,7 @@ extends Node3D
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
+@export var _tippy_callouts_manager: TippyCalloutsManager
 @export var tippy_voice_player: AudioStreamPlayer
 @export var tippy_voice_timer: Timer
 
@@ -162,30 +163,6 @@ func _ready() -> void:
 		pass
 		# whiteboard_tutorial_arrow.visible = false
 		# waypoint_ring.hide()
-
-
-	# Add tippy voice lines
-	Events.low_time_warning.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_low_time)
-	)
-	Events.customer_low_time_warning.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.customer_low_time)
-	)
-	Events.order_remaking_drink.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.remake_drink)
-	)
-	Events.machine_making_drink.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.machine_make_drink)
-	)
-	Events.under_money_goal.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.under_goal)
-	)
-	Events.spill_clean_done.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
-	)
-	Events.order_approved.connect(func(_customer: Customer):
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.accept_drink)
-	)
 
 
 func _process(delta: float) -> void:
@@ -460,8 +437,7 @@ func _on_shift_started():
 	
 	else:
 		_interactive_tutorial_shift()
-	
-	_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_start)
+
 
 func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
@@ -622,20 +598,3 @@ func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> 
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
 	print("secs per help desk customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
-
-
-func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
-	if tippy_voice_player.playing:
-		return
-
-	if !tippy_voice_timer.is_stopped():
-		return
-
-	var chance_play = randf_range(0.0, 1.0)
-	if voice_line == TippyVoiceLine.TippyLineType.shift_low_time:
-		chance_play += 0.25
-
-	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
-		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
-		tippy_voice_player.play()
-		tippy_voice_timer.start(randf_range(25, 35))
