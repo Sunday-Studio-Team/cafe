@@ -31,9 +31,6 @@ extends Node3D
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var special_shift_icon: TextureRect
-@export var special_shift_text: Label
-@export var special_shift_title: Label
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var teleporter3: Teleporter

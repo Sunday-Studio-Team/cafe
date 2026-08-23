@@ -446,10 +446,6 @@ func machine_make_drink() -> void:
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
 
-	if Global.current_special_shift != null and Global.current_special_shift.name == "Critical Customers":
-		# If critical customers, halve the star rating gains.
-		order.star_rating_gain_for_remake /= 2.0
-
 	# Calculate star rating loss if accepted
 	if order.star_rating_gain_for_remake == 0.0:
 		order.star_rating_loss_if_accept = 0.0
