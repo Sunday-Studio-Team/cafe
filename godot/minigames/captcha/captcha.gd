@@ -7,15 +7,19 @@ extends SubViewportContainer
 @export var submit_button: Button
 @export var instructions: RichTextLabel
 @export var drink_name: RichTextLabel
+@export var player_thought: RichTextLabel
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
+@export var customer_sprite: Sprite2D
+@export var remade_drink_sprite: TextureRect
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
 
 var ordered_drink: Drink
-var main_text: String = "The required ingredients"
+var main_text: String = "with the required ingredients"
+var drink_customer: Customer
 
 
 func _ready() -> void:
@@ -28,16 +32,12 @@ func _ready() -> void:
 	_start_minigame()
 
 
-func _physics_process(_delta: float) -> void:
-	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
-	if Engine.get_process_frames() % 5 == 0:
-		if captcha.get_children().any(
-			func(x: IngredientIconHolder):
-				return x.button.button_pressed,
-		):
-			set_submit_text("VERIFY")
-		else:
-			set_submit_text("SKIP")
+func _process(delta: float) -> void:
+	# This is solely for testing purposes (running the minigame outside of main)
+	if Global.ordered_drink_to_remake == null and Global.ordered_drink_customer == null:
+		# Disable Global so we can use the mouse
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Global.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func populate_captcha() -> void:
@@ -70,10 +70,15 @@ func populate_order_reminder() -> void:
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
-	drink_name.text = "You are making %s [color=gold]%s" % [
+	#drink_name.text = "You are making %s [color=gold]%s" % [
+		#ordered_drink.singular_article,
+		#ordered_drink.name,
+	#]
+	player_thought.text = "I need to make %s [color=gold]%s" % [
 		ordered_drink.singular_article,
 		ordered_drink.name,
 	]
+	remade_drink_sprite.texture = drink.icon
 
 
 func verify_captcha() -> void:
@@ -97,8 +102,13 @@ func verify_captcha() -> void:
 			shake_panel()
 			wrong_sound.play()
 			return
-
-	mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+	
+	entire_panel.visible = false
+	remade_drink_sprite.visible = true
+	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)"
+	
+	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
+	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 	correct_sound.play()
 
 	for slot: IngredientIconHolder in captcha.get_children():
@@ -113,7 +123,8 @@ func verify_captcha() -> void:
 		colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
 
 	await correct_sound.finished
-	_end_minigame()
+	
+	#_end_minigame()
 
 
 func set_instructions(text: String) -> void:
@@ -148,18 +159,35 @@ func shake_panel() -> void:
 
 
 func _start_minigame() -> void:
+	order_reminder.visible = false
 	set_instructions(main_text)
-
-	# Temp drink setting for testing
-	var drink: Drink = Global.ordered_drink_to_remake
+	
+	var drink: Drink
+	
+	# The else blocks here should only happen if this scene is ran by itself (not in the main game)
+	if(Global.ordered_drink_to_remake != null):
+		drink = Global.ordered_drink_to_remake
+	else:
+		drink = Global.drinks.pick_random()
 	get_ordered_drink(drink)
-
+	
+	if(Global.ordered_drink_customer != null):
+		drink_customer = Global.ordered_drink_customer
+		customer_sprite.texture = drink_customer.body.texture
+	else:
+		customer_sprite.texture = Global.customer_sprites.pick_random()
+		order_reminder.visible = true
+		populate_order_reminder()
+	
 	populate_captcha()
 
-	order_reminder.visible = false
 
 
 func _end_minigame() -> void:
+	# THIS FUNCTION IS CALLED BY THE `CustomerContainer` node!
+	# Since the game should only end when giving the customer their drink now
+	print("End remaking minigame")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
 	Events.minigame_end.emit()
 
 

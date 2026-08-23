@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://k0xp76mgx728"]
+
+[ext_resource type="Script" uid="uid://umo6thqlsy7d" path="res://minigames/arrows/arrows.gd" id="1_iuqyn"]
+[ext_resource type="Texture2D" uid="uid://dmqw3ojbkrp4m" path="res://minigames/arrows/dirs.png" id="2_57lmy"]
+[ext_resource type="FontFile" uid="uid://hscjrb7045hv" path="res://minigames/arrows/fontello-c5a6b182/font/fontello.ttf" id="2_bw26h"]
+[ext_resource type="Texture2D" uid="uid://d20qby1gxruxh" path="res://minigames/arrows/assets/blue-arrows/left/blueleft1.png" id="2_vxntg"]
+[ext_resource type="Texture2D" uid="uid://dxwxqgwiijskf" path="res://minigames/arrows/assets/blue-arrows/left/blueleft2.png" id="3_fv8pj"]
+[ext_resource type="Texture2D" uid="uid://dj5s5y1n7gc0m" path="res://minigames/arrows/wrong.png" id="3_qx814"]
+[ext_resource type="Texture2D" uid="uid://dncjmt61uhm7a" path="res://minigames/arrows/assets/blue-arrows/left/blueleft3.png" id="4_l8ovb"]
+[ext_resource type="Texture2D" uid="uid://cpjfxtra45q6j" path="res://minigames/arrows/assets/blue-arrows/left/blueleft4.png" id="5_qk4ro"]
+[ext_resource type="Texture2D" uid="uid://dihlxsuag0ota" path="res://minigames/arrows/assets/blue-arrows/left/blueleft5.png" id="6_27pub"]
+[ext_resource type="Texture2D" uid="uid://ddduvf5l8kwv1" path="res://minigames/arrows/assets/border.png" id="6_cfscc"]
+[ext_resource type="Texture2D" uid="uid://snodwjwlkoge" path="res://minigames/arrows/assets/inputs.png" id="6_vxntg"]
+[ext_resource type="Texture2D" uid="uid://d0tivvdo70x6c" path="res://minigames/arrows/assets/blue-arrows/up/blueup1.png" id="7_hq6wg"]
+[ext_resource type="Texture2D" uid="uid://3xoqdxny8owh" path="res://minigames/arrows/assets/blue-arrows/up/blueup2.png" id="8_ndnsj"]
+[ext_resource type="Texture2D" uid="uid://cluorips5qmn3" path="res://minigames/arrows/assets/blue-arrows/up/blueup3.png" id="9_hea8k"]
+[ext_resource type="Texture2D" uid="uid://bxjmfdcq4x357" path="res://minigames/arrows/assets/blue-arrows/up/blueup4.png" id="10_xql7b"]
+[ext_resource type="Texture2D" uid="uid://b08p6vxh7ts4b" path="res://minigames/arrows/assets/blue-arrows/up/blueup5.png" id="11_08s2a"]
+[ext_resource type="Texture2D" uid="uid://diq5hdwrge6r4" path="res://minigames/arrows/assets/blue-arrows/right/blueright1.png" id="12_ajpp4"]
+[ext_resource type="Texture2D" uid="uid://dmb0xdhxwoinu" path="res://minigames/arrows/assets/blue-arrows/right/blueright2.png" id="13_mji0a"]
+[ext_resource type="Texture2D" uid="uid://c1st0ldpw4kv4" path="res://minigames/arrows/assets/blue-arrows/right/blueright3.png" id="14_xkcvm"]
+[ext_resource type="Texture2D" uid="uid://g1ntes82kfyb" path="res://minigames/arrows/assets/blue-arrows/right/blueright4.png" id="15_7milp"]
+[ext_resource type="Texture2D" uid="uid://cuntj0p3tt3ff" path="res://minigames/arrows/assets/blue-arrows/right/blueright5.png" id="16_gkp8u"]
+[ext_resource type="Texture2D" uid="uid://bpso3pqjow5mf" path="res://minigames/arrows/assets/blue-arrows/down/bluedown1.png" id="17_syko7"]
+[ext_resource type="Texture2D" uid="uid://okqyjv4nd882" path="res://minigames/arrows/assets/blue-arrows/down/bluedown2.png" id="18_ftfms"]
+[ext_resource type="Texture2D" uid="uid://bpigpxko2i3sn" path="res://minigames/arrows/assets/blue-arrows/down/bluedown3.png" id="19_yem23"]
+[ext_resource type="Texture2D" uid="uid://dglest18o3777" path="res://minigames/arrows/assets/blue-arrows/down/bluedown4.png" id="20_6h2j6"]
+[ext_resource type="Texture2D" uid="uid://cf4o0wrjq0h0n" path="res://minigames/arrows/assets/blue-arrows/down/bluedown5.png" id="21_8r575"]
+[ext_resource type="Texture2D" uid="uid://c831k5d56b1kl" path="res://minigames/arrows/assets/red-arrows/left/redleft1.png" id="22_gaw3v"]
+[ext_resource type="Texture2D" uid="uid://b77l4ebydue2q" path="res://minigames/arrows/assets/red-arrows/left/redleft2.png" id="23_ms8o4"]
+[ext_resource type="Texture2D" uid="uid://tununo0q3gad" path="res://minigames/arrows/assets/red-arrows/left/redleft3.png" id="24_d8qde"]
+[ext_resource type="Texture2D" uid="uid://driyu8y3u7c50" path="res://minigames/arrows/assets/red-arrows/left/redleft4.png" id="25_1aqoy"]
+[ext_resource type="Texture2D" uid="uid://1jiwfr8dagpp" path="res://minigames/arrows/assets/red-arrows/left/redleft5.png" id="26_ahodb"]
+[ext_resource type="Texture2D" uid="uid://cbn7746k3mpbr" path="res://minigames/arrows/assets/red-arrows/up/redup1.png" id="27_au8s4"]
+[ext_resource type="Texture2D" uid="uid://33fml65nhcff" path="res://minigames/arrows/assets/red-arrows/up/redup2.png" id="28_2i6wo"]
+[ext_resource type="Texture2D" uid="uid://cqh8q4rmqgcsf" path="res://minigames/arrows/assets/red-arrows/up/redup3.png" id="29_1pfxc"]
+[ext_resource type="Texture2D" uid="uid://utnn36cf88xp" path="res://minigames/arrows/assets/red-arrows/up/redup4.png" id="30_k3kyd"]
+[ext_resource type="Texture2D" uid="uid://04vpdublgb48" path="res://minigames/arrows/assets/red-arrows/up/redup5.png" id="31_ihttv"]
+[ext_resource type="Texture2D" uid="uid://cdwbax4cg8w0y" path="res://minigames/arrows/assets/red-arrows/right/redright1.png" id="32_xrvhh"]
+[ext_resource type="Texture2D" uid="uid://on84bc4dr4ve" path="res://minigames/arrows/assets/red-arrows/right/redright2.png" id="33_m17ou"]
+[ext_resource type="Texture2D" uid="uid://c34h4acefw727" path="res://minigames/arrows/assets/red-arrows/right/redright3.png" id="34_2lho4"]
+[ext_resource type="Texture2D" uid="uid://rm0we874pr42" path="res://minigames/arrows/assets/red-arrows/right/redright4.png" id="35_1isbi"]
+[ext_resource type="Texture2D" uid="uid://btg77nx7nnbcg" path="res://minigames/arrows/assets/red-arrows/right/redright5.png" id="36_gtxeh"]
+[ext_resource type="Texture2D" uid="uid://cuyometa0q4pn" path="res://minigames/arrows/assets/red-arrows/down/reddown1.png" id="37_ukk4x"]
+[ext_resource type="Texture2D" uid="uid://d2hmnr445adff" path="res://minigames/arrows/assets/red-arrows/down/reddown2.png" id="38_p5j3n"]
+[ext_resource type="Texture2D" uid="uid://bb1yjb7xx2n4u" path="res://minigames/arrows/assets/red-arrows/down/reddown3.png" id="39_iy2on"]
+[ext_resource type="Texture2D" uid="uid://bmvmfmtd5vxsx" path="res://minigames/arrows/assets/red-arrows/down/reddown4.png" id="40_5ospk"]
+[ext_resource type="Texture2D" uid="uid://gf8d5srtafg7" path="res://minigames/arrows/assets/red-arrows/down/reddown5.png" id="41_vbul5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
+bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+
+[node name="Arrows" type="Node2D" unique_id=655191518 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output", "wrong_sign", "arrows_container")]
+script = ExtResource("1_iuqyn")
+background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
+arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
+prompt_output = NodePath("CanvasLayer/Control/Prompt")
+wrong_sign = NodePath("CanvasLayer/wrong")
+arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
+blue_left = Array[Texture]([ExtResource("2_vxntg"), ExtResource("3_fv8pj"), ExtResource("4_l8ovb"), ExtResource("5_qk4ro"), ExtResource("6_27pub")])
+blue_up = Array[Texture]([ExtResource("7_hq6wg"), ExtResource("8_ndnsj"), ExtResource("9_hea8k"), ExtResource("10_xql7b"), ExtResource("11_08s2a")])
+blue_right = Array[Texture]([ExtResource("12_ajpp4"), ExtResource("13_mji0a"), ExtResource("14_xkcvm"), ExtResource("15_7milp"), ExtResource("16_gkp8u")])
+blue_down = Array[Texture]([ExtResource("17_syko7"), ExtResource("18_ftfms"), ExtResource("19_yem23"), ExtResource("20_6h2j6"), ExtResource("21_8r575")])
+red_left = Array[Texture]([ExtResource("22_gaw3v"), ExtResource("23_ms8o4"), ExtResource("24_d8qde"), ExtResource("25_1aqoy"), ExtResource("26_ahodb")])
+red_up = Array[Texture]([ExtResource("27_au8s4"), ExtResource("28_2i6wo"), ExtResource("29_1pfxc"), ExtResource("30_k3kyd"), ExtResource("31_ihttv")])
+red_right = Array[Texture]([ExtResource("32_xrvhh"), ExtResource("33_m17ou"), ExtResource("34_2lho4"), ExtResource("35_1isbi"), ExtResource("36_gtxeh")])
+red_down = Array[Texture]([ExtResource("37_ukk4x"), ExtResource("38_p5j3n"), ExtResource("39_iy2on"), ExtResource("40_5ospk"), ExtResource("41_vbul5")])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1499237152]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=538834130]
+visible = false
+anchors_preset = -1
+anchor_top = 0.123
+anchor_right = 1.1110001
+anchor_bottom = 0.49400002
+offset_left = 85.0
+offset_top = 535.16003
+offset_right = -286.12012
+offset_bottom = 431.47998
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer" unique_id=2121547647]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ol6wr")
+
+[node name="Arrows" type="RichTextLabel" parent="CanvasLayer/PanelContainer/Panel" unique_id=968681062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_bw26h")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[color=#14529F]🡹 [/color][color=#000]Error text [/color][color=#A20B10]🡹 [/color]
+"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Prompt" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1688849488]
+layout_mode = 0
+offset_left = -881.0
+offset_right = 881.0
+offset_bottom = 263.0
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "This text should not appear in game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="help" type="Control" parent="CanvasLayer" unique_id=747208162]
+visible = false
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.446
+anchor_right = 0.5
+anchor_bottom = 0.448
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dirs" type="Sprite2D" parent="CanvasLayer/help" unique_id=1774183212]
+texture = ExtResource("2_57lmy")
+
+[node name="wrong" type="Control" parent="CanvasLayer" unique_id=481486310]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -110.0
+offset_right = 20.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wrong" type="Sprite2D" parent="CanvasLayer/wrong" unique_id=1729283598]
+scale = Vector2(1.4075757, 1.5)
+texture = ExtResource("3_qx814")
+
+[node name="ArrowsBackground" type="TextureRect" parent="CanvasLayer" unique_id=1185070196]
+anchors_preset = -1
+anchor_left = 0.041
+anchor_top = 0.060000002
+anchor_right = 0.80600005
+anchor_bottom = 0.93100005
+offset_left = 8.0
+offset_top = 551.0
+offset_right = -5.0
+offset_bottom = -1.0
+texture = ExtResource("6_vxntg")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ArrowHContainer" type="HBoxContainer" parent="CanvasLayer/ArrowsBackground" unique_id=959055107]
+custom_maximum_size = Vector2(1758, -1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.036000002
+anchor_top = 0.40500003
+anchor_right = 0.96400005
+anchor_bottom = 0.80600005
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Border" type="NinePatchRect" parent="CanvasLayer" unique_id=1238806735]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_cfscc")
+region_rect = Rect2(0, 0, 2679, 1817)

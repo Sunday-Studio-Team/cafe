@@ -152,7 +152,10 @@ var in_ui: bool:
 			return true
 		else:
 			return false
+# Remaking drink variables --
 var ordered_drink_to_remake: Drink
+var ordered_drink_customer: Customer
+# End remaking drink variables --
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
 #Active Items
