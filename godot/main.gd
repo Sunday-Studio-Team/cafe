@@ -405,11 +405,13 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 
 func _on_game_timer_timeout() -> void:
-	Engine.time_scale = 1
 	closing_time = true
+	if get_customers().is_empty():
+		shift_end_sequence()
 
 func shift_end_sequence():
 	if not closing_time and not get_customers().is_empty(): return
+	Engine.time_scale = 1
 	Events.time_up.emit()
 
 	await Events.end_screen_finished
