@@ -1,5 +1,12 @@
 [gd_scene format=3 uid="uid://djqbbryv3wcns"]
 
 [ext_resource type="PackedScene" uid="uid://cexib5vqpbisp" path="res://Assets/ceiling lights/Ceiling Lamp 3D Model.glb" id="1_f51q5"]
+[ext_resource type="PackedScene" uid="uid://602nc8byjwvn" path="res://Assets/ceiling lights/Ceiling Lamp.glb" id="2_gpieq"]
 
 [node name="ceiling light" unique_id=2125586524 instance=ExtResource("1_f51q5")]
+
+[node name="Ceiling Lamp2" parent="." index="0" unique_id=1115879587 instance=ExtResource("2_gpieq")]
+transform = Transform3D(0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0.0032960027, -0.42652225, -1.4951688)
+
+[node name="Sketchfab_model" parent="." index="1" unique_id=1036273303]
+visible = false
