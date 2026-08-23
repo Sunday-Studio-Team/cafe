@@ -29,7 +29,7 @@ var hovered_interactable: Interactable:
 # max amount of items we can own
 var item_slots_amount: int
 var inspected_shelf_item: ShelfItem
-var main_scene: Node3D
+var main_scene: Main
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]

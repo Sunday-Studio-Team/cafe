@@ -1,3 +1,4 @@
+class_name Main
 extends Node3D
 
 @export var _pause_menu: PauseMenu
