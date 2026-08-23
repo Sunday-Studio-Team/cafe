@@ -1,3 +1,4 @@
+class_name PC_UI
 extends Control
 
 @export var email_button: Button

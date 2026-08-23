@@ -22,7 +22,7 @@ extends Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
 @export var desk: Desk
-@export var pc_ui: Control
+@export var pc_ui: PC_UI
 @export var overtime_item: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
@@ -252,7 +252,9 @@ func set_per_day_stuff() -> void:
 		_active_machines.clear()
 		_active_machines.push_front(tutorial_machine)
 		_set_day_security_cameras_active([])
-
+	else:
+		_on_desk_interacted()
+		pc_ui._on_shop_button_pressed()
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
