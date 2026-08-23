@@ -445,6 +445,15 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			item_text.text = "[Q] HAMMER 💥"
+		
+		elif (
+				hovered_interactable.name == "Interactable"
+				and equipped_item != null
+				and equipped_item.item_id == "airhorn"
+				and equipped_item.can_be_used
+		):
+			item_indicator.show()
+			item_text.text = "[Q] AIRHORN"
 
 		elif (
 				hovered_interactable.display_name.contains("camera")

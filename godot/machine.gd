@@ -742,7 +742,6 @@ func on_active_item_used_machine_base(item: Item):
 		return
 	
 	if item.item_id == "airhorn":
-		print("Air horn")
 		
 		#Removes the customer
 		waiting_for_response = false
@@ -750,6 +749,7 @@ func on_active_item_used_machine_base(item: Item):
 		Global.score_update_message = "customer left"
 		customer.leave_store()
 		_set_customer(null)
+		Global.put_active_item_on_cooldown(item)
 		
 
 func _on_clean_spill() -> void:
