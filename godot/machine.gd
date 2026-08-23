@@ -9,6 +9,7 @@ const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
 const REFILL_MINIGAME := "Refill"
 
+@export var base_interactable : Interactable
 @export var static_body: StaticBody3D
 @export var gui_3d: Gui3D
 @export var timer: Timer
@@ -63,6 +64,8 @@ const REFILL_MINIGAME := "Refill"
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
+
+
 var customer: Customer
 var queued_customers: Array[Customer]
 var order: OrderData
@@ -105,6 +108,7 @@ func _ready() -> void:
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
+	base_interactable.used_active_item.connect(on_active_item_used_machine_base)
 	spill_interactable.interacted.connect(_on_clean_spill)
 
 	ordered_drink_name_label.hide()
@@ -638,6 +642,7 @@ func refill() -> void:
 		machine_make_drink()
 
 
+
 func cancel_fix_minigame() -> void:
 	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
@@ -721,6 +726,7 @@ func break_down() -> void:
 	hum_sound.stop()
 
 
+#Note this comes from the fix machine interactable
 func on_active_item_used_machine(item: Item):
 	if item == null:
 		return
@@ -730,7 +736,25 @@ func on_active_item_used_machine(item: Item):
 		Global.put_active_item_on_cooldown(item)
 		await Events.hammer_animation_hit
 		fix_machine(true)
+	
+	
 
+#This coems from the base interacable (the machine on its own)
+func on_active_item_used_machine_base(item: Item):
+	print("BASE INTERACTED")
+	if item == null:
+		return
+	
+	if item.item_id == "airhorn":
+		print("Air horn")
+		
+		#Removes the customer
+		waiting_for_response = false
+		order_breakdown.hide()
+		Global.score_update_message = "customer left"
+		customer.leave_store()
+		_set_customer(null)
+		
 
 func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)

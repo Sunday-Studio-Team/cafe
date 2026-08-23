@@ -176,6 +176,7 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
+		#print(hovered_interactable)
 		if camera == null:
 			return
 
