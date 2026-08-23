@@ -123,7 +123,7 @@ func end_shift(arg: String = "") -> void:
 		detail = "(forcing loss)"
 
 	# unsafe ref but whatever
-	Global.main_scene._on_game_timer_timeout()
+	Global.main_scene.shift_end_sequence()
 	Console.print_line("ending shift %s" % detail)
 
 

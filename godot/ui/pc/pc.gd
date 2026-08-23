@@ -26,8 +26,9 @@ func _ready() -> void:
 	)
 
 	# we dont even have money for shop on day 1 sooo
-	if Global.day == 1:
-		shop_button.hide()
+	#Update from August 23 12:32:15 GMT+8 - yeah we do now weeeee
+	#if Global.day == 1:
+		#shop_button.hide()
 	set_unread_count()
 	
 	for button: Button in find_children("*", "Button"):

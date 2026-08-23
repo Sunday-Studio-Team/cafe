@@ -255,6 +255,7 @@ func set_per_day_stuff() -> void:
 
 	if Global.day == 1:
 		# Reset run.
+		Global.player_tips_bank = 5
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
