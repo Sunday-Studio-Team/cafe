@@ -30,7 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="Script" uid="uid://cpy5mfle7bldo" path="res://ingredient_spawner.gd" id="23_ppx11"]
-[ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://start_shift_whiteboard.tscn" id="24_f1p13"]
+[ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://environment/whiteboard/whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="PackedScene" uid="uid://bt2p6jpdaqe0w" path="res://cafe_item_shelf.tscn" id="26_4obbf"]
 [ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
 [ext_resource type="PackedScene" uid="uid://dyu70pksd1s2w" path="res://cafe_break_room_door.tscn" id="28_ovcoh"]
@@ -798,7 +798,7 @@ autoplay = "default"
 frame_progress = 0.28658438
 offset = Vector2(0, -250)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "objective", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -812,7 +812,7 @@ game_timer = NodePath("../GameTimer")
 time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
 time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
 time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
-objective = NodePath("HUD/Objective")
+shift_starting_label = NodePath("HUD/ShiftStarting")
 rules_controls = NodePath("HUD/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
@@ -1319,16 +1319,16 @@ theme_override_font_sizes/font_size = 50
 text = "End Shift "
 icon = ExtResource("143_7bx05")
 
-[node name="Objective" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
+[node name="ShiftStarting" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
+visible = false
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 64
+theme_override_font_sizes/bold_font_size = 96
 bbcode_enabled = true
-text = "[b]OBJECTIVE:[/b]
+text = "
 
-make $10 while keeping your customer rating above 5
-etc etc"
+[b][wave amp=100 freq=7.5]SHIFT STARTING"
 scroll_active = false
 horizontal_alignment = 1
 
