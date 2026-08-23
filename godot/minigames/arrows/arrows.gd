@@ -15,6 +15,9 @@ extends SubViewportContainer
 @export var red_right: Array[Texture]
 @export var red_down: Array[Texture]
 
+@export var correct_sound: AudioStreamPlayer
+@export var wrong_sound: AudioStreamPlayer
+
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
 var red: String = "#A20B10"
@@ -34,23 +37,13 @@ var general_direction_to_arrow: Dictionary = {
 var correct_input_index: int = 0
 
 @onready var get_arrow_array: Dictionary = {
-	"blue": {
-		"left": blue_left,
-		"up": blue_up,
-		"right": blue_right,
-		"down": blue_down,
-	},
-	"red": {
-		"left": red_left,
-		"up": red_up,
-		"right": red_right,
-		"down": red_down,
-	}
+	"blue": { "left": blue_left, "up": blue_up, "right": blue_right, "down": blue_down },
+	"red": { "left": red_left, "up": red_up, "right": red_right, "down": red_down },
 }
 @onready var background_color = "#ffffff"
+
+
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
-
-
 func _ready() -> void:
 	set_up_arrow_container()
 	_start_minigame()
@@ -68,26 +61,33 @@ func _input(event: InputEvent) -> void:
 			check_input("down")
 
 	if correct_input_index >= valid_directions.size():
+		await correct_sound.finished
 		_end_minigame()
 
 
 func check_input(direction: String) -> void:
 	# Tippy dancing should go here
-	if(valid_directions[correct_input_index] == direction):
+	if (valid_directions[correct_input_index] == direction):
 		output_directions[valid_indices[correct_input_index]].texture = null
 		correct_input_index += 1
+		correct_sound.play()
 	else:
 		# Angry tippy face here
 		display_wrong()
 		_start_minigame()
 
 
-func add_arrow_to_output(output_index: int, color: String, color_index: int, correct_color: String) -> void:
-	if(color == "blue"):
+func add_arrow_to_output(
+	output_index: int,
+	color: String,
+	color_index: int,
+	correct_color: String,
+) -> void:
+	if (color == "blue"):
 		output_directions[output_index].texture = blue_textures[color_index]
 	else:
 		output_directions[output_index].texture = red_textures[color_index]
-	
+
 	# While adding to the output array, we keep track of the valid (output) indices here, in order to access the arrows that we make invisible
 	if correct_color == color:
 		valid_indices.append(output_index)
@@ -95,6 +95,7 @@ func add_arrow_to_output(output_index: int, color: String, color_index: int, cor
 
 func display_wrong() -> void:
 	wrong_sign.visible = true
+	wrong_sound.play()
 	await get_tree().create_timer(.4).timeout
 	wrong_sign.visible = false
 
@@ -118,7 +119,7 @@ func _start_minigame() -> void:
 	valid_indices = []
 	valid_directions = []
 	correct_input_index = 0
-	
+
 	#output_directions[0].texture = blue_left[0]
 
 	# Choose if player has to click red or blue directions
@@ -135,7 +136,7 @@ func _start_minigame() -> void:
 		#color_choice = "[bgcolor=%s][color=%s]red[/color][/bgcolor]" % [background_color, text_color]
 		color_choice = "[color=%s]red[/color]" % [text_color]
 	prompt_output.text = "Press the %s directions!" % color_choice
-	
+
 	# Choose a pool of [max_arrow_count / (general_colors.size())] arrows for each color (likely 2, for blue and red)
 	# Since the random arrow directions chosen here are added to the output in order, we keep track of the correct directions here
 	# (after the if(choose_color == ...) part
@@ -143,17 +144,16 @@ func _start_minigame() -> void:
 	for i in range(max_arrow_count / (general_colors.size())):
 		var blue_dir: String = general_directions.pick_random()
 		blue_textures.append(get_arrow_array["blue"][blue_dir].pick_random())
-		if(choose_color == "blue"):
+		if (choose_color == "blue"):
 			valid_directions.append(blue_dir)
-		
+
 		var red_dir: String = general_directions.pick_random()
 		red_textures.append(get_arrow_array["red"][red_dir].pick_random())
-		if(choose_color == "red"):
+		if (choose_color == "red"):
 			valid_directions.append(red_dir)
-		
+
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
-	@warning_ignore("integer_division")
-	var individual_color_max: int = max_arrow_count / 2 - 1
+	@warning_ignore("integer_division") var individual_color_max: int = max_arrow_count / 2 - 1
 	var bi: int = 0
 	var ri: int = 0
 	var output_index: int = 0

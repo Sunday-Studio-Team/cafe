@@ -47,11 +47,34 @@
 [ext_resource type="Texture2D" uid="uid://bmvmfmtd5vxsx" path="res://minigames/arrows/assets/red-arrows/down/reddown4.png" id="40_5ospk"]
 [ext_resource type="Texture2D" uid="uid://gf8d5srtafg7" path="res://minigames/arrows/assets/red-arrows/down/reddown5.png" id="41_vbul5"]
 [ext_resource type="Texture2D" uid="uid://cqxhkomebjxod" path="res://minigames/arrows/assets/dancemachine.png" id="42_l8ovb"]
+[ext_resource type="AudioStream" uid="uid://cj8wq0y415h2u" path="res://audio/ddr/ddr_correct_1.wav" id="48_hea8k"]
+[ext_resource type="AudioStream" uid="uid://cwarhwibu7s60" path="res://audio/ddr/ddr_correct_2.wav" id="49_xql7b"]
+[ext_resource type="AudioStream" uid="uid://bynqhhvraxh3n" path="res://audio/ddr/ddr_correct_3.wav" id="50_08s2a"]
+[ext_resource type="AudioStream" uid="uid://sen2yqvqdqde" path="res://audio/ddr/ddr_correct_4.wav" id="51_ajpp4"]
+[ext_resource type="AudioStream" uid="uid://bm64e3hjg5vgi" path="res://audio/ddr/ddr_correct_5.wav" id="52_mji0a"]
+[ext_resource type="AudioStream" uid="uid://ctvbre1ribsjj" path="res://audio/ddr/ddr_wrong.wav" id="53_mji0a"]
+[ext_resource type="AudioStream" uid="uid://c02rysbc6442q" path="res://audio/ddr/ddr_drum_loop.wav" id="53_xql7b"]
+[ext_resource type="AudioStream" uid="uid://ec40um0fnntu" path="res://audio/ddr/ddr_wrong_2.wav" id="54_xkcvm"]
+[ext_resource type="AudioStream" uid="uid://ck1wv58oatpc7" path="res://audio/ddr/ddr_wrong_3.wav" id="55_7milp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
 bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
 
-[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output", "wrong_sign", "arrows_container")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
+streams_count = 5
+stream_0/stream = ExtResource("48_hea8k")
+stream_1/stream = ExtResource("49_xql7b")
+stream_2/stream = ExtResource("50_08s2a")
+stream_3/stream = ExtResource("51_ajpp4")
+stream_4/stream = ExtResource("52_mji0a")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0ffxp"]
+streams_count = 3
+stream_0/stream = ExtResource("53_mji0a")
+stream_1/stream = ExtResource("54_xkcvm")
+stream_2/stream = ExtResource("55_7milp")
+
+[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output", "wrong_sign", "arrows_container", "correct_sound", "wrong_sound")]
 script = ExtResource("1_iuqyn")
 background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
 arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
@@ -66,6 +89,8 @@ red_left = Array[Texture]([ExtResource("22_gaw3v"), ExtResource("23_ms8o4"), Ext
 red_up = Array[Texture]([ExtResource("27_au8s4"), ExtResource("28_2i6wo"), ExtResource("29_1pfxc"), ExtResource("30_k3kyd"), ExtResource("31_ihttv")])
 red_right = Array[Texture]([ExtResource("32_xrvhh"), ExtResource("33_m17ou"), ExtResource("34_2lho4"), ExtResource("35_1isbi"), ExtResource("36_gtxeh")])
 red_down = Array[Texture]([ExtResource("37_ukk4x"), ExtResource("38_p5j3n"), ExtResource("39_iy2on"), ExtResource("40_5ospk"), ExtResource("41_vbul5")])
+correct_sound = NodePath("CorrectSound")
+wrong_sound = NodePath("WrongSound")
 
 [node name="CanvasLayer" type="SubViewport" parent="." unique_id=781073748]
 handle_input_locally = false
@@ -218,3 +243,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_cfscc")
 region_rect = Rect2(0, 0, 2679, 1817)
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=1547774346]
+stream = SubResource("AudioStreamRandomizer_l8ovb")
+volume_db = -5.0
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=980615523]
+stream = SubResource("AudioStreamRandomizer_0ffxp")
+volume_db = -5.0
+
+[node name="DrumLoop" type="AudioStreamPlayer" parent="." unique_id=223541811]
+stream = ExtResource("53_xql7b")
+volume_db = -15.0
+autoplay = true
