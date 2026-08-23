@@ -1,4 +1,4 @@
-extends Node2D
+extends SubViewportContainer
 
 @export var background_panel: Panel
 @export var arrow_output: RichTextLabel
