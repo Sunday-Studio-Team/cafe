@@ -92,7 +92,7 @@ func _ready() -> void:
 	Events.items_updated.connect(get_stats)
 
 	ingredients = Stats.current.machine_starting_ingredients
-	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
+	breakdown_timer.wait_time = 0.5
 
 	accept_button.pressed.connect(
 		func():
