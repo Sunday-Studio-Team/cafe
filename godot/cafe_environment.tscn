@@ -81,6 +81,7 @@
 [ext_resource type="Texture2D" uid="uid://s8dcqt0qukfl" path="res://Assets/Storage room/PSX Storage Shelves Cardboard Boxes_Storage_Shelves.png" id="72_j0jbx"]
 [ext_resource type="PackedScene" uid="uid://b1ptf8i4ks0un" path="res://Assets/Storage room/mugs_milk_sugar_light.tscn" id="72_omxm3"]
 [ext_resource type="Texture2D" uid="uid://dbdfoa6vxo31c" path="res://Assets/Storage room/Mugs Milk Sugar Light_All Textures_Base_color.png" id="73_omxm3"]
+[ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="82_4nsdn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ho8ok"]
 size = Vector3(5.008301, 1.4721375, 1.9656067)
@@ -1965,7 +1966,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701114, -0.00016215755, -0.9999596, 1.0260144e-07, 1, -0.000162151, 0.9999596, -1.01539825e-08, 0.0005701114, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057011127, -0.00016215755, -0.99995935, 1.0260142e-07, 1, -0.00016215096, 0.99995935, -1.01539825e-08, 0.00057011127, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2424,6 +2425,9 @@ mesh = SubResource("ArrayMesh_2n5bl")
 [node name="Mug Empty_002" type="MeshInstance3D" parent="Mugs Milk Sugar Light2" unique_id=1311939345]
 transform = Transform3D(0.06073413, 0.00028541498, -0.08939244, 0.0005078734, -0.1080716, -3.5567854e-11, -0.08939146, -0.00042008766, -0.060734786, -0.11821365, 0.027962923, 0.08697438)
 mesh = SubResource("ArrayMesh_ev8bc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1201560433]
+environment = ExtResource("82_4nsdn")
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/glass window"]

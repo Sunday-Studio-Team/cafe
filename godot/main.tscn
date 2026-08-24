@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
 [ext_resource type="PackedScene" uid="uid://cgvsd5jb05afu" path="res://minigames/captcha/captcha.tscn" id="16_cpm2s"]
 [ext_resource type="PackedScene" uid="uid://ce4dmlcd3n30f" path="res://minigames/words/word_game.tscn" id="18_4obbf"]
-[ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="19_yjja3"]
 [ext_resource type="PackedScene" uid="uid://b42eh0jvdare4" path="res://tutorial_selection_menu.tscn" id="20_4obbf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
@@ -510,7 +509,7 @@ process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
 _tutorial_manager = NodePath("TutorialManager")
-_world_environment = NodePath("WorldEnvironment")
+_world_environment = NodePath("CafeEnvironment/WorldEnvironment")
 _left_area_camera = NodePath("SecurityCams/LeftAreaSecurityCam")
 _middle_camera = NodePath("SecurityCams/MiddleSecurityCam")
 _right_area_camera = NodePath("SecurityCams/RightAreaSecurityCam")
@@ -584,9 +583,6 @@ text = "+1$ from customer"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
 shape = SubResource("WorldBoundaryShape3D_2cqfq")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=992581230]
-environment = ExtResource("19_yjja3")
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
