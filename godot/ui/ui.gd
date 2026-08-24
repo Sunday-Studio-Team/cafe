@@ -119,11 +119,11 @@ func _ready() -> void:
 	if Global.day >= 1:
 		rules_controls.text = ""
 		cctv_indicator.hide()
-	if Global.day >= 3:
+	if Global.day >= 2:
 		rules_controls.text += (
 				"\n[b][i]rules [/i][/b]
 			- no running
-			- no handmade drinks"
+			- no remaking drinks"
 		)
 		cctv_indicator.show()
 	if Global.day >= 4:
