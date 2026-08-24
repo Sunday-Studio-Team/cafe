@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://oopaxvnb4er8" path="res://Assets/cafe tables/cafe table.tscn" id="25_g2jch"]
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
-[ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="28_dlkxn"]
 [ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
 [ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
 [ext_resource type="Texture2D" uid="uid://cetushjghxirl" path="res://environment/textures/office tiles.png" id="31_omxm3"]
@@ -56,6 +55,7 @@
 [ext_resource type="PackedScene" uid="uid://bcsqffwblcksh" path="res://Assets/Street/Street.glb" id="49_bkt63"]
 [ext_resource type="Texture2D" uid="uid://duypnvlfw06cv" path="res://Assets/Street/city pack_Image_63.png" id="50_56cmc"]
 [ext_resource type="Texture2D" uid="uid://fdi1a6klaj8t" path="res://Assets/Street/city pack_Image_64.png" id="51_rkxax"]
+[ext_resource type="PackedScene" uid="uid://cddylfkowt5jq" path="res://environment/ceiling_fan.tscn" id="52_4nsdn"]
 [ext_resource type="Texture2D" uid="uid://8j4nyg8ln614" path="res://Assets/Street/city pack_Image_65.png" id="52_inip5"]
 [ext_resource type="Script" uid="uid://rbvkd7u5nnvq" path="res://environment/car_spawner.gd" id="53_f2c6s"]
 [ext_resource type="ArrayMesh" uid="uid://blnnbvh7f8mrc" path="res://Assets/Street/city pack_BusStop_Sign_shader_0.res" id="53_x0sgn"]
@@ -1439,8 +1439,8 @@ transform = Transform3D(0.3305352, 0, -0.34357443, 0, 0.47675657, 0, 0.34357443,
 [node name="BreakRoom" type="Node3D" parent="." unique_id=1614027471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
 
-[node name="CeilingFan" parent="BreakRoom" unique_id=1706665380 instance=ExtResource("28_dlkxn")]
-transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 3.8391285, 1.1748112, 2.9793162)
+[node name="CeilingFan" parent="BreakRoom" unique_id=338478717 instance=ExtResource("52_4nsdn")]
+transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 3.8391285, 1.1748112, 2.9793158)
 
 [node name="trashancan" type="Node3D" parent="BreakRoom" unique_id=2009119082]
 transform = Transform3D(5.868551, 0, -6.4226236, 0, 8.7, 0, 6.4226236, 0, 5.868551, 2.522158, 0.18933806, 0.44468927)
@@ -1889,7 +1889,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6.02
 [node name="StoreRoom" type="Node3D" parent="." unique_id=2013770648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
 
-[node name="CeilingFan2" parent="StoreRoom" unique_id=135439342 instance=ExtResource("28_dlkxn")]
+[node name="CeilingFan" parent="StoreRoom" unique_id=360462673 instance=ExtResource("52_4nsdn")]
 transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 1.9817448, 1.2479188, 1.9820828)
 
 [node name="DoorwayPiece" parent="StoreRoom" unique_id=995816438 instance=ExtResource("12_02vyw")]
@@ -1965,7 +1965,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701115, -0.00016215755, -0.99995977, 1.0260146e-07, 1, -0.00016215103, 0.99995977, -1.01539825e-08, 0.0005701115, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701114, -0.00016215755, -0.9999596, 1.0260144e-07, 1, -0.000162151, 0.9999596, -1.01539825e-08, 0.0005701114, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
