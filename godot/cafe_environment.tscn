@@ -56,7 +56,9 @@
 [ext_resource type="Texture2D" uid="uid://duypnvlfw06cv" path="res://Assets/Street/city pack_Image_63.png" id="50_56cmc"]
 [ext_resource type="Texture2D" uid="uid://fdi1a6klaj8t" path="res://Assets/Street/city pack_Image_64.png" id="51_rkxax"]
 [ext_resource type="Texture2D" uid="uid://8j4nyg8ln614" path="res://Assets/Street/city pack_Image_65.png" id="52_inip5"]
+[ext_resource type="Texture2D" uid="uid://dtp8suoqxvxnk" path="res://Assets/cars/red car.png" id="53_f2c6s"]
 [ext_resource type="ArrayMesh" uid="uid://blnnbvh7f8mrc" path="res://Assets/Street/city pack_BusStop_Sign_shader_0.res" id="53_x0sgn"]
+[ext_resource type="Texture2D" uid="uid://dx0df3fydfhlj" path="res://Assets/cars/taxi.png" id="54_02vyw"]
 [ext_resource type="Texture2D" uid="uid://bci5vj157jg4g" path="res://Assets/Street/city pack_Image_48.png" id="54_a5pjg"]
 [ext_resource type="Texture2D" uid="uid://bf5whjyx6etqj" path="res://Assets/Street/city pack_Image_49.png" id="55_gje1c"]
 [ext_resource type="Texture2D" uid="uid://m8l0xbxao27v" path="res://Assets/Street/city pack_Image_50.png" id="56_3keue"]
@@ -521,11 +523,19 @@ text = "store room"
 pixel_size = 0.025
 depth = 0.025
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n35f"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hqkp"]
 transparency = 1
 albedo_texture = ExtResource("49_0jw1j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n35f"]
+transparency = 1
+albedo_texture = ExtResource("53_f2c6s")
 metallic = 0.3
 roughness = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5als"]
+transparency = 1
+albedo_texture = ExtResource("54_02vyw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tackp"]
 resource_name = "Structure_shader"
@@ -1474,7 +1484,7 @@ mesh = SubResource("BoxMesh_jofr6")
 [node name="Locker tippy" parent="BreakRoom" unique_id=787314827 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.7044044, 0, -0.0034689992, 0, 0.70441294, 0, 0.0034689992, 0, -0.7044044, 2.2924411, -0.011554956, 2.152318)
 
-[node name="Object001" parent="BreakRoom/Locker tippy" index="1" unique_id=916664131]
+[node name="Object001" parent="BreakRoom/Locker tippy" index="1" unique_id=1855045794]
 transform = Transform3D(0.9773278, 0, 0.21173207, 0, 1, 0, -0.21173207, 0, 0.9773278, -0.10115862, 0, -0.06704998)
 
 [node name="Locker tippy4" parent="BreakRoom" unique_id=428753990 instance=ExtResource("31_ubo3j")]
@@ -1489,13 +1499,13 @@ transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232,
 [node name="Locker tippy8" parent="BreakRoom" unique_id=2119566149 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.082505584, -4.5860696)
 
-[node name="Object001" parent="BreakRoom/Locker tippy8" index="1" unique_id=916664131]
+[node name="Object001" parent="BreakRoom/Locker tippy8" index="1" unique_id=1855045794]
 transform = Transform3D(0.74620664, 0, -0.66571534, 0, 1.0000007, 0, 0.66571534, 0, 0.74620664, -0.40247345, 0, 0.15174639)
 
 [node name="Locker tippy15" parent="BreakRoom" unique_id=1479455124 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.9528513, 0.082505345, -12.49315)
 
-[node name="Object001" parent="BreakRoom/Locker tippy15" index="1" unique_id=916664131]
+[node name="Object001" parent="BreakRoom/Locker tippy15" index="1" unique_id=1855045794]
 transform = Transform3D(0.16694199, 0, -0.98596674, 0, 1, 0, 0.98596674, 0, 0.16694199, -0.8491564, 0, -0.05727005)
 
 [node name="Locker tippy16" parent="BreakRoom" unique_id=1242390208 instance=ExtResource("31_ubo3j")]
@@ -1516,13 +1526,13 @@ transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.704413
 [node name="Locker tippy10" parent="BreakRoom" unique_id=2077010906 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 1.3672915, 0.082505584, -0.56572676)
 
-[node name="Object001" parent="BreakRoom/Locker tippy10" index="1" unique_id=916664131]
+[node name="Object001" parent="BreakRoom/Locker tippy10" index="1" unique_id=1855045794]
 transform = Transform3D(0.848082, 0, -0.52986556, 0, 1.0000004, 0, 0.52986556, 0, 0.848082, -0.29656458, 0, 0.15100712)
 
 [node name="Locker tippy11" parent="BreakRoom" unique_id=1597140254 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.613706, 0, 0.34577858, 0, 0.70441306, 0, -0.34577858, 0, -0.613706, -6.8092213, 0.082505584, -4.837779)
 
-[node name="Object001" parent="BreakRoom/Locker tippy11" index="1" unique_id=916664131]
+[node name="Object001" parent="BreakRoom/Locker tippy11" index="1" unique_id=1855045794]
 transform = Transform3D(0.8418917, 0, -0.5396465, 0, 1.0000001, 0, 0.5396465, 0, 0.8418917, -0.2924776, 0, 0.16479063)
 
 [node name="Locker tippy12" parent="BreakRoom" unique_id=1764203829 instance=ExtResource("31_ubo3j")]
@@ -1938,8 +1948,18 @@ texture = ExtResource("48_bqqh4")
 
 [node name="ambulance" type="Sprite3D" parent="Exterior" unique_id=1089029611]
 transform = Transform3D(0.19703001, 0, 0, 0, 0.19703001, 0, 0, 0, 0.19703001, -5.078621, 1.7736286, -7.8076143)
-material_override = SubResource("StandardMaterial3D_8n35f")
+material_override = SubResource("StandardMaterial3D_8hqkp")
 texture = ExtResource("49_0jw1j")
+
+[node name="ambulance2" type="Sprite3D" parent="Exterior" unique_id=1488382350]
+transform = Transform3D(0.19703001, 0, 0, 0, 0.19703001, 0, 0, 0, 0.19703001, 2.3154845, 1.7736286, -7.8076143)
+material_override = SubResource("StandardMaterial3D_8n35f")
+texture = ExtResource("53_f2c6s")
+
+[node name="ambulance3" type="Sprite3D" parent="Exterior" unique_id=927828417]
+transform = Transform3D(0.19703001, 0, 0, 0, 0.19703001, 0, 0, 0, 0.19703001, -2.5769944, 1.7736286, -9.083858)
+material_override = SubResource("StandardMaterial3D_x5als")
+texture = ExtResource("54_02vyw")
 
 [node name="Sprite3D9" type="Sprite3D" parent="Exterior" unique_id=1013928753]
 transform = Transform3D(0.6264175, 0, 0, 0, -1.0659982e-08, -0.22036038, 0, 0.24387196, -9.6322585e-09, -0.70082474, -0.0056385994, -8.4085865)
