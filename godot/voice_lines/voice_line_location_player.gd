@@ -16,3 +16,7 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 
 func interrupt_voice_line() -> void:
 	_audio_stream_player_3d.stop()
+	destroy()
+
+func destroy() -> void:
+	queue_free()

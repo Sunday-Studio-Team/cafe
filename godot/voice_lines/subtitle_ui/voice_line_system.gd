@@ -9,6 +9,7 @@ signal requested_hide_voice_line_subtitle(voice_line: VoiceLine)
 
 var _voice_lines_by_id: Dictionary[String, VoiceLine]
 var _playing_voice_line_location_player: VoiceLineLocationPlayer
+var _is_playing_no_location_voice_line: bool
 
 func _init() -> void:
 	Global.voice_line_system = self
@@ -23,13 +24,16 @@ func play_voice_line_at_location(voice_line_id: String, voice_line_location: Voi
 	if _playing_voice_line_location_player != null:
 		_playing_voice_line_location_player.interrupt_voice_line()
 	
+	print("playing at location")
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	var location_player: VoiceLineLocationPlayer = voice_line_location.internal_setup_voice_line_at_location(voice_line)
 	requested_show_voice_line_subtitle.emit(voice_line)
 	location_player.play_voice_line(voice_line)
 	_playing_voice_line_location_player = location_player
 	await location_player.finished_playing_voice_line
+	print("finished at location")
 	_playing_voice_line_location_player = null
+	location_player.destroy()
 	requested_hide_voice_line_subtitle.emit(voice_line)
 
 ## Play a voice line without a specific location, with its subtitle.
@@ -37,8 +41,13 @@ func play_voice_line_no_location(voice_line_id: String) -> void:
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	requested_show_voice_line_subtitle.emit(voice_line)
 	_voice_line_no_location_player.play_voice_line(voice_line)
+	_is_playing_no_location_voice_line = true
 	await _voice_line_no_location_player.finished_playing_voice_line
+	_is_playing_no_location_voice_line = false
 	requested_hide_voice_line_subtitle.emit(voice_line)
+
+func is_playing_no_location_voice_line() -> bool:
+	return _is_playing_no_location_voice_line
 
 func _get_voice_line_by_id(voice_line_id: String) -> VoiceLine:
 	if !_voice_lines_by_id.has(voice_line_id):

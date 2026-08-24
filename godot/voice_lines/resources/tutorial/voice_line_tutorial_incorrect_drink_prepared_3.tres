@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://1r37881j7h7y"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_7g53b"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_nvdia"]
+
+[resource]
+script = ExtResource("2_nvdia")
+voice_line_id = "tutorial_incorrect_drink_prepared_3"
+audio_stream = ExtResource("1_7g53b")
+subtitle_en = "My sensors are telling me that I've used the wrong ingredients, but that can't be right!"
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

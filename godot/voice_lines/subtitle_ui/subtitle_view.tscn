@@ -6,12 +6,14 @@
 bg_color = Color(0, 0, 0, 0.56078434)
 
 [node name="SubtitleView" type="PanelContainer" unique_id=1663114453 node_paths=PackedStringArray("_subtitle_label")]
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
 script = ExtResource("1_gosrr")
 _subtitle_label = NodePath("MarginContainer/RichTextLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2103703653]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -19,6 +21,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=494170942]
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 32

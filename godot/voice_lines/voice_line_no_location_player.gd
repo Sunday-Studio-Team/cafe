@@ -9,7 +9,7 @@ var _playing_voice_line: VoiceLine
 
 func play_voice_line(voice_line: VoiceLine) -> void:
 	# Interrupt existing voice line
-	if _playing_voice_line:
+	if _playing_voice_line != null:
 		for player in _audio_stream_player_3ds:
 			player.stop()
 		await finished_playing_voice_line

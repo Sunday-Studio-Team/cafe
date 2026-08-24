@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://tu4fmqyq17w0"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_kc24e"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_tcpwp"]
+
+[resource]
+script = ExtResource("2_tcpwp")
+voice_line_id = "tutorial_incorrect_drink_prepared_2"
+audio_stream = ExtResource("1_kc24e")
+subtitle_en = "It seems that my optical recognition hardware is having issues with identifying the drink I've just made."
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

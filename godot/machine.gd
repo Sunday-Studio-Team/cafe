@@ -3,6 +3,8 @@
 class_name Machine
 extends Node3D
 
+signal drink_prepared
+
 const BLAST_LAUNCH_MAGNITUDE: float = 20.0
 const REPAIR_MINIGAMES := ["Colors", "Arrows"]
 const MANUAL_DRINK_MINIGAMES := ["Captcha"]
@@ -94,6 +96,7 @@ func _ready() -> void:
 
 	accept_button.pressed.connect(
 		func():
+			Global.tutorial_drink_accepted = true
 			accept_order(false)
 	)
 	make_drink_button.pressed.connect(_on_remake_drink_button_pressed)
@@ -493,8 +496,10 @@ func machine_make_drink() -> void:
 	)
 	# NOTE: experiment: commented out for now to simplify ui
 	#final_order_indicator.show()
-
+	
+	
 	waiting_for_response = true
+	drink_prepared.emit()
 	Events.order_completed.emit(customer)
 
 
@@ -520,6 +525,8 @@ func spill() -> void:
 
 
 func display_drink_score() -> void:
+	
+	
 	# these all automatically set the icon, colour, and score of each icon 
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
@@ -778,7 +785,7 @@ func _on_remake_drink_button_pressed() -> void:
 		no_ingredients_warning.show()
 		await get_tree().create_timer(0.5, false).timeout
 		no_ingredients_warning.hide()
-
+	
 	Events.minigame_end.connect(_on_remade_drink)
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Events.force_close_minigame.connect(_on_force_close_minigame)
@@ -786,6 +793,8 @@ func _on_remake_drink_button_pressed() -> void:
 	Global.ordered_drink_customer = customer
 	Events.minigame_active.emit(MANUAL_DRINK_MINIGAMES.pick_random())
 	Events.order_remaking_drink.emit()
+	
+	Global.tutorial_remake_button_pressed = true
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
@@ -818,6 +827,7 @@ func _on_remade_drink() -> void:
 	)
 	display_drink_score()
 
+	Global.tutorial_drink_remade = true
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
