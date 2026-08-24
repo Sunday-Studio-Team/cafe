@@ -1062,11 +1062,21 @@ occluder = ExtResource("1_5utbh")
 [node name="Lights" type="Node3D" parent="." unique_id=213268664]
 
 [node name="AreaLight3D2" type="AreaLight3D" parent="Lights" unique_id=1717078030]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.049901, 2.742811, 8.090851)
-light_energy = 5.0
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.049901, 2.6315932, 7.9763575)
+light_color = Color(0.81, 1, 0.9525, 1)
+light_energy = 3.0
 shadow_enabled = true
-area_range = 5.895
+area_range = 4.069
 area_size = Vector2(2.0486052, 2.0054026)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights/AreaLight3D2" unique_id=640790520]
+transform = Transform3D(0.96450865, -0.2122803, -0.15703551, 0.2640469, 0.77879673, 0.56899464, 0.001512378, -0.59026486, 0.80720806, 0.034363747, 0.1291256, -0.08407402)
+light_color = Color(0.9672776, 0.79890335, 0.58329165, 1)
+light_energy = 10.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+spot_range = 3.685
+spot_angle = 24.39
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=1633564141]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.254367, 2.629269, 9.201126)
@@ -1884,6 +1894,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6.02
 
 [node name="StoreRoom" type="Node3D" parent="." unique_id=2013770648]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
+
+[node name="CeilingFan2" parent="StoreRoom" unique_id=135439342 instance=ExtResource("28_dlkxn")]
+transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 1.9817448, 1.2479188, 1.9820828)
 
 [node name="DoorwayPiece" parent="StoreRoom" unique_id=995816438 instance=ExtResource("12_02vyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.02268833, 0.20313454)
