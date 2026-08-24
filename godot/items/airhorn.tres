@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://mytncbiaaghj"]
 
 [ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_lm6re"]
-[ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="1_y6t1p"]
+[ext_resource type="Texture2D" uid="uid://bshe550y53my6" path="res://sprites/items/airhorn.png" id="1_y6t1p"]
 
 [resource]
 script = ExtResource("1_lm6re")
 item_id = "airhorn"
 name = "Air Horn"
 description_at_levels = Dictionary[int, String]({
-1: "Fix a broken machine instantly.",
-2: "Fix a broken machine instantly."
+1: "Make a customer leave a machine instantly without penalty.",
+2: "Make a customer leave a machine instantly without penalty."
 })
 icon = ExtResource("1_y6t1p")
 price_at_levels = Dictionary[int, float]({

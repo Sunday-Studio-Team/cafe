@@ -413,7 +413,9 @@ func update_interactable_ui() -> void:
 			item_text.text = "[Q] HAMMER 💥"
 		
 		elif (
-				hovered_interactable.name == "Interactable"
+				hovered_interactable.display_name == "Use machine"
+				# xtremely dodgy ref to check the machine has a customer
+				and hovered_interactable.get_parent().machine.customer
 				and equipped_item != null
 				and equipped_item.item_id == "airhorn"
 				and equipped_item.can_be_used

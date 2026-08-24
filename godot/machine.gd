@@ -9,7 +9,6 @@ const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
 const REFILL_MINIGAME := "Refill"
 
-@export var base_interactable : Interactable
 @export var static_body: StaticBody3D
 @export var gui_3d: Gui3D
 @export var timer: Timer
@@ -61,6 +60,7 @@ const REFILL_MINIGAME := "Refill"
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
+@export var airhorn_sound: AudioStreamPlayer
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
 
@@ -107,8 +107,8 @@ func _ready() -> void:
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
-	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
-	base_interactable.used_active_item.connect(on_active_item_used_machine_base)
+	fix_machine_button.used_active_item.connect(on_active_item_used_fix_machine)
+	gui_3d.interactable.used_active_item.connect(on_active_item_used)
 	spill_interactable.interacted.connect(_on_clean_spill)
 
 	ordered_drink_name_label.hide()
@@ -339,6 +339,11 @@ func machine_make_drink() -> void:
 
 	# should stop us restarting order if order already auto started by us refilling
 	if not timer.is_stopped():
+		return
+
+	# something weird might have happened like we airhorned customer away
+	# during short delay just then so good to check this
+	if not customer:
 		return
 
 	# (i think) we emit this before returning because it starts the customer
@@ -722,8 +727,7 @@ func break_down() -> void:
 	hum_sound.stop()
 
 
-#Note this comes from the fix machine interactable
-func on_active_item_used_machine(item: Item):
+func on_active_item_used_fix_machine(item: Item):
 	if item == null:
 		return
 
@@ -732,25 +736,22 @@ func on_active_item_used_machine(item: Item):
 		Global.put_active_item_on_cooldown(item)
 		await Events.hammer_animation_hit
 		fix_machine(true)
-	
-	
 
-#This coems from the base interacable (the machine on its own)
-func on_active_item_used_machine_base(item: Item):
-	print("BASE INTERACTED")
+
+func on_active_item_used(item: Item):
 	if item == null:
 		return
-	
+
 	if item.item_id == "airhorn":
-		
-		#Removes the customer
-		waiting_for_response = false
-		order_breakdown.hide()
-		Global.score_update_message = "customer left"
-		customer.leave_store()
-		_set_customer(null)
-		Global.put_active_item_on_cooldown(item)
-		
+		if customer:
+			airhorn_sound.play()
+			customer.leave_store()
+			_set_customer(null)
+			waiting_for_response = false
+			order_breakdown.hide()
+
+			Global.put_active_item_on_cooldown(item)
+
 
 func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
