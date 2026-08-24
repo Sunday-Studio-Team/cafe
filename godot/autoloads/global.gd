@@ -159,7 +159,8 @@ var ordered_drink_customer: Customer
 var hovered_item_icon: TabletItemIcon = null
 #Active Items
 var equipped_item: Item = null
-#tutorial flags
+# Tutorial flags
+var tutorial_machine_used: bool = false
 var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.

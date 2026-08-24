@@ -43,9 +43,8 @@ extends Node3D
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
-@export var _tippy_callouts_manager: TippyCalloutsManager
-@export var tippy_voice_player: AudioStreamPlayer
-@export var tippy_voice_timer: Timer
+@export var _tutorial_vo_location_start_shift: VoiceLineLocation
+@export var _tutorial_vo_location_machine_front: VoiceLineLocation
 
 var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
@@ -282,6 +281,7 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(_active_machines)
 
+
 func spawn_machines():
 	for machine: Machine in _all_machines:
 		machine.hide()
@@ -434,13 +434,16 @@ func _on_shift_started():
 		DraggableMop.used_scrubber = has_scrubber
 
 		desk.interactable.visible = false
-	
-	else:
-		_interactive_tutorial_shift()
 
 
 func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
+	
+	await _tutorial_manager.finished_tutorial
+	
+	# Start voice guidance
+	_interactive_tutorial_shift()
+	
 	tutorial_machine.gui_3d.interactable.interacted.connect(
 		func():
 			if Global.day == 0 and not seen_tutorial_machine_instructions:
@@ -451,8 +454,43 @@ func _interactive_tutorial_flow():
 
 func _interactive_tutorial_shift() -> void:
 	if tutorial_machine == null:
+		printerr("Missing tutorial machine?")
 		return
-
+	
+	await get_tree().create_timer(0.5, false).timeout
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_intro_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_intro_2")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_intro_3")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_intro_4")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_intro_5")
+	
+	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
+	
+	var repeat_instruction_timer: Timer = Timer.new()
+	repeat_instruction_timer.autostart = false
+	repeat_instruction_timer.one_shot = false
+	add_child(repeat_instruction_timer)
+	
+	while !Global.shift_started:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_start_shift", _tutorial_vo_location_start_shift)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_shift_started_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_shift_started_2")
+	
+	while !Global.tutorial_machine_used:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_use_machine", _tutorial_vo_location_machine_front)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
 	# First customer, accept order
 	tutorial_machine.force_next_drink_perfect()
 	spawn_machine_customer()

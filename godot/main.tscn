@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://l7w4dtq33b6f" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bgp88lexiv2bd" path="res://voice_lines/voice_line_location.tscn" id="12_4qxq8"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://d05qn0pkjxo5j" path="res://minigames/lines/lines_minigame.tscn" id="15_aivy6"]
@@ -154,8 +155,17 @@
 [ext_resource type="Resource" uid="uid://yqxd886iovvp" path="res://voice_lines/resources/contextual/voice_line_tippy_machine_drink.tres" id="129_oy6td"]
 [ext_resource type="Resource" uid="uid://bvysr5e5slkfv" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_1.tres" id="130_fe76k"]
 [ext_resource type="Resource" uid="uid://c5iubxwsxaef3" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_2.tres" id="131_p5pln"]
+[ext_resource type="Resource" uid="uid://dgxatvp4r42bv" path="res://voice_lines/resources/tutorial/voice_line_tutorial_intro_1.tres" id="136_oiuw5"]
 [ext_resource type="AudioStream" uid="uid://dimkpitnugvme" path="res://audio/shift_start.wav" id="137_g3y5b"]
+[ext_resource type="Resource" uid="uid://bl7bdfikk3kwt" path="res://voice_lines/resources/tutorial/voice_line_tutorial_intro_2.tres" id="137_mldrc"]
+[ext_resource type="Resource" uid="uid://cwg7jd7nwl2io" path="res://voice_lines/resources/tutorial/voice_line_tutorial_intro_3.tres" id="138_1tiwm"]
+[ext_resource type="Resource" uid="uid://bty8ok8mhtmlc" path="res://voice_lines/resources/tutorial/voice_line_tutorial_intro_4.tres" id="139_xxpw2"]
+[ext_resource type="Resource" uid="uid://dgoogqu3rrsu3" path="res://voice_lines/resources/tutorial/voice_line_tutorial_intro_5.tres" id="140_wghq8"]
+[ext_resource type="Resource" uid="uid://c0ysfuy0ck7m5" path="res://voice_lines/resources/tutorial/voice_line_tutorial_start_shift.tres" id="141_mldrc"]
+[ext_resource type="Resource" uid="uid://b0kg6dc7s73nb" path="res://voice_lines/resources/tutorial/voice_line_tutorial_shift_started_1.tres" id="142_wghq8"]
 [ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
+[ext_resource type="Resource" uid="uid://bhkp2r1ty7xto" path="res://voice_lines/resources/tutorial/voice_line_tutorial_shift_started_2.tres" id="143_k08w7"]
+[ext_resource type="Resource" uid="uid://dxesuytxahd1r" path="res://voice_lines/resources/tutorial/voice_line_tutorial_use_machine.tres" id="144_hp4ct"]
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
@@ -187,7 +197,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_arf1h"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fe76k"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -198,7 +208,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_s0om5"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_p5pln"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -209,7 +219,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gkfde"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_oiuw5"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -220,7 +230,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4qxq8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_mldrc"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -484,7 +494,7 @@ bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "tippy_voice_player", "tippy_voice_timer")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_front")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -521,8 +531,8 @@ tutorial_selection_menu = NodePath("TrainingSkipMenu")
 whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
 waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
 shift_start_sound = NodePath("ShiftStartSound")
-tippy_voice_player = NodePath("TippyVoiceLinePlayer")
-tippy_voice_timer = NodePath("TippyVoiceTimer")
+_tutorial_vo_location_start_shift = NodePath("StartShiftWhiteboard/TutorialStartShiftVoiceLineLocation")
+_tutorial_vo_location_machine_front = NodePath("Machines/RightAreaRightMachine/TutorialMachineVoiceLineLocation")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -582,6 +592,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
 [node name="RightAreaRightMachine" parent="Machines" unique_id=1696794453 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 
+[node name="TutorialMachineVoiceLineLocation" parent="Machines/RightAreaRightMachine" unique_id=484678936 instance=ExtResource("12_4qxq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029114842, 1.0942326, 0.8977883)
+
+[node name="TutorialMachineSpillVoiceLineLocation" parent="Machines/RightAreaRightMachine" unique_id=1197797152 instance=ExtResource("12_4qxq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029114842, 1.0942326, -0.79786277)
+
 [node name="LeftAreaLeftMachine" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.8389482)
 
@@ -593,6 +609,9 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8
 
 [node name="CustomerHelpDesk" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 4.0535426)
+
+[node name="TutorialHelpDeskVoiceLineLocation" parent="CustomerHelpDesk" unique_id=1253947193 instance=ExtResource("12_4qxq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029114842, 1.0942326, 0.8977883)
 
 [node name="SecurityCams" type="Node3D" parent="." unique_id=1471552417]
 
@@ -609,7 +628,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_arf1h")
+texture = SubResource("ViewportTexture_fe76k")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -622,7 +641,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_s0om5")
+texture = SubResource("ViewportTexture_p5pln")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -639,7 +658,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_gkfde")
+texture = SubResource("ViewportTexture_oiuw5")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -656,10 +675,13 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_4qxq8")
+texture = SubResource("ViewportTexture_mldrc")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
+
+[node name="TutorialStartShiftVoiceLineLocation" parent="StartShiftWhiteboard" unique_id=248398271 instance=ExtResource("12_4qxq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029114842, 1.0942326, 0.8977883)
 
 [node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
 transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
@@ -700,6 +722,9 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-
 
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
+
+[node name="TutorialStoreRoomVoiceLineLocation" parent="." unique_id=308586079 instance=ExtResource("12_4qxq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5832963, 1.2124534, 12.890418)
 
 [node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
@@ -1650,7 +1675,7 @@ show_percentage = false
 
 [node name="VoiceLineSystem" type="Node" parent="UI" unique_id=480311114 node_paths=PackedStringArray("_voice_line_no_location_player")]
 script = ExtResource("118_1slqb")
-_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln")])
+_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("141_mldrc"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("144_hp4ct")])
 _voice_line_no_location_player = NodePath("../../VoiceLineNoLocationPlayer")
 
 [node name="TippyCalloutsManager" type="Node" parent="UI/VoiceLineSystem" unique_id=120441579]

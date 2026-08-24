@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://dgxatvp4r42bv"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_wrnx8"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_0b85f"]
+
+[resource]
+script = ExtResource("2_0b85f")
+voice_line_id = "tutorial_intro_1"
+audio_stream = ExtResource("1_wrnx8")
+subtitle_en = "Hi there! Welcome to our interactive training session!"
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

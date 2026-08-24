@@ -10,6 +10,7 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 		printerr("Missing audio stream!")
 		return
 	_audio_stream_player_3d.stream = voice_line.audio_stream
+	_audio_stream_player_3d.play()
 	await _audio_stream_player_3d.finished
 	finished_playing_voice_line.emit(voice_line)
 

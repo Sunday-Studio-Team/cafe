@@ -22,7 +22,6 @@ func play_voice_line_at_location(voice_line_id: String, voice_line_location: Voi
 	# Interrupt any existing playing voice line locations
 	if _playing_voice_line_location_player != null:
 		_playing_voice_line_location_player.interrupt_voice_line()
-		await _playing_voice_line_location_player.finished_playing_voice_line
 	
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	var location_player: VoiceLineLocationPlayer = voice_line_location.internal_setup_voice_line_at_location(voice_line)

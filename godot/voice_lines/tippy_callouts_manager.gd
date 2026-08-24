@@ -33,6 +33,10 @@ func _ready() -> void:
 	_tippy_voice_timer.one_shot = true
 	add_child(_tippy_voice_timer)
 	
+	# Skip voice lines if tutorial day 0
+	if Global.day == 0:
+		return
+	
 	# Add tippy voice lines
 	Events.shift_started.connect(func():
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.shift_start)

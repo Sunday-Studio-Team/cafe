@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://c0ysfuy0ck7m5"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_5knjo"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_5f0at"]
+
+[resource]
+script = ExtResource("2_5f0at")
+voice_line_id = "tutorial_start_shift"
+audio_stream = ExtResource("1_5knjo")
+subtitle_en = "Just use the \"Start Shift\" sign here to get started!"
+metadata/_custom_type_script = "uid://vdv5g0q45pri"
