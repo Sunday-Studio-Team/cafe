@@ -126,8 +126,6 @@ func _ready() -> void:
 			- no remaking drinks"
 		)
 		cctv_indicator.show()
-	if Global.day >= 4:
-		rules_controls.text += "\n- no taking ingredients from store room"
 
 	# we make these things for the employee rating here instead of in editor
 	# cos theyre dynamically added based on score
