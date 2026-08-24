@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
 [ext_resource type="PackedScene" uid="uid://dfigy7bvip3cu" path="res://Assets/Locker/small_lockers.tscn" id="33_kmdca"]
+[ext_resource type="PackedScene" uid="uid://cpp4dkdwca17b" path="res://Assets/Table/toolbox_and_table.tscn" id="34_02vyw"]
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
 [ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="35_dmru2"]
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
@@ -1592,6 +1593,15 @@ transform = Transform3D(0.9980602, 0, -0.062256224, -0.009588755, 0.9880676, -0.
 
 [node name="small locker middle_001" parent="BreakRoom/Small Lockers3" index="4" unique_id=1806931370]
 transform = Transform3D(0.015713597, 0.0029760108, 0.019732883, -0.003159573, 0.025170205, -0.0012800251, -0.019704334, -0.0016627444, 0.01594161, -0.2144785, 0.5490414, 0.14039636)
+
+[node name="Toolbox and Table" parent="BreakRoom" unique_id=182250747 instance=ExtResource("34_02vyw")]
+transform = Transform3D(0.67164373, 0, -0.7408743, 0, 1, 0, 0.7408743, 0, 0.67164373, 7.826255, 0.043833077, -3.338517)
+
+[node name="Toolbox and Table2" parent="BreakRoom" unique_id=1572667255 instance=ExtResource("34_02vyw")]
+transform = Transform3D(-0.80848604, 0, -0.5885154, 0, 1, 0, 0.5885154, 0, -0.80848604, 2.698764, 0.043833077, -2.8002613)
+
+[node name="Toolbox and Table3" parent="BreakRoom" unique_id=403801904 instance=ExtResource("34_02vyw")]
+transform = Transform3D(0.17841794, 0, -0.9839549, 0, 1, 0, 0.9839549, 0, 0.17841794, -4.806674, 0.043833077, -7.574573)
 
 [node name="BackRoom" type="Node3D" parent="." unique_id=305847678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
