@@ -1,42 +1,16 @@
 [gd_scene format=3 uid="uid://c1vvwndvemdbo"]
 
 [ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/shift_end_screen.gd" id="1_cwskb"]
-[ext_resource type="Texture2D" uid="uid://cthi2138utsf1" path="res://sprites/shift_end_star_ratings/1_star.png" id="2_cypxk"]
 [ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
 [ext_resource type="PackedScene" uid="uid://dfdxran8jmt41" path="res://ui/free_item_selector_screen.tscn" id="2_n6kr8"]
-[ext_resource type="Texture2D" uid="uid://cs36irdeab2ig" path="res://sprites/shift_end_star_ratings/0_star.png" id="2_t6g3v"]
-[ext_resource type="Texture2D" uid="uid://dqlx7bdsfltf2" path="res://sprites/shift_end_star_ratings/0p5_star.png" id="3_3n0pv"]
-[ext_resource type="Texture2D" uid="uid://bkvpgxs3jaetc" path="res://sprites/shift_end_star_ratings/5_star.png" id="3_f5jmc"]
 [ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
-[ext_resource type="Texture2D" uid="uid://cv8tn1uec8v6e" path="res://sprites/shift_end_star_ratings/2_star.png" id="3_t6g3v"]
 [ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
-[ext_resource type="Texture2D" uid="uid://bq3cn2o0r313u" path="res://sprites/shift_end_star_ratings/3_star.png" id="4_t50qp"]
 [ext_resource type="AudioStream" uid="uid://cww7w5j41tgbm" path="res://audio/time_up.wav" id="5_iiu1j"]
-[ext_resource type="Texture2D" uid="uid://4m3uqi06xm3p" path="res://sprites/shift_end_star_ratings/4_star.png" id="5_l71wa"]
-[ext_resource type="Texture2D" uid="uid://bwshutnxgqtuw" path="res://sprites/shift_end_star_ratings/1p5_star.png" id="5_s5d2k"]
 [ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
-[ext_resource type="Texture2D" uid="uid://de8pj2lbltuga" path="res://sprites/shift_end_star_ratings/2p5_star.png" id="7_e16oh"]
 [ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
-[ext_resource type="Texture2D" uid="uid://bqyhqnv2s5cbl" path="res://sprites/shift_end_star_ratings/3p5_star.png" id="9_j2nqk"]
-[ext_resource type="Texture2D" uid="uid://bp12cq71gm65f" path="res://sprites/shift_end_star_ratings/4p5_star.png" id="11_wegfb"]
 
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_bottom = 10
-border_color = Color(0.6509804, 0.63529414, 0.5882353, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-expand_margin_left = 25.0
-expand_margin_top = 25.0
-expand_margin_right = 25.0
-expand_margin_bottom = 25.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n0pv"]
 bg_color = Color(0.6, 0.52156866, 0.4745098, 1)
@@ -127,7 +101,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_max_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "_profit_judgement_container", "profit_judgement_texture_rect", "button", "stars_sound", "_free_item_selector_screen_container")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -138,7 +112,6 @@ win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
 _money_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MoneyTitle")
 _min_profit_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MinGoal")
-_max_profit_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MaxGoal")
 _profit_made_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
 _rating_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/RatingTitle")
 _rating_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Rating")
@@ -148,9 +121,6 @@ _tips_today_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating
 _bank_total_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/TipsTotal")
 bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
-_profit_judgement_container = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/ProfitJudgementContainer")
-profit_judgement_textures = Array[Texture]([ExtResource("2_t6g3v"), ExtResource("3_3n0pv"), ExtResource("2_cypxk"), ExtResource("5_s5d2k"), ExtResource("3_t6g3v"), ExtResource("7_e16oh"), ExtResource("4_t50qp"), ExtResource("9_j2nqk"), ExtResource("5_l71wa"), ExtResource("11_wegfb"), ExtResource("3_f5jmc")])
-profit_judgement_texture_rect = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/ProfitJudgementContainer/ProfitJudgement")
 button = NodePath("MarginContainer/VBoxContainer/Button")
 stars_sound = NodePath("StarsSound")
 _free_item_selector_screen_packed_scene = ExtResource("2_n6kr8")
@@ -227,15 +197,6 @@ text = "required goal: $20"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="MaxGoal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=2127638548]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "perfect goal: $40"
-fit_content = true
-horizontal_alignment = 1
-
 [node name="Profit" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1865208455]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
@@ -244,27 +205,6 @@ text = "made today: $30.75"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=994164902]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
-[node name="ProfitJudgementContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1691312754]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-offset_transform_position_ratio = Vector2(0, 0.1)
-offset_transform_rotation = -0.017453292
-theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
-
-[node name="ProfitJudgement" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/ProfitJudgementContainer" unique_id=843468016]
-custom_minimum_size = Vector2(240, 240)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 2
-texture = ExtResource("3_t6g3v")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="Rating" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1855303608]
 layout_mode = 2

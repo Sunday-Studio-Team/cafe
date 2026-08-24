@@ -8,7 +8,6 @@ extends CanvasLayer
 @export var lose_shift_sound: AudioStreamPlayer
 @export var _money_title_label: RichTextLabel
 @export var _min_profit_goal_label: RichTextLabel
-@export var _max_profit_goal_label: RichTextLabel
 @export var _profit_made_label: RichTextLabel
 @export var _rating_title_label: RichTextLabel
 @export var _rating_label: RichTextLabel
@@ -18,9 +17,6 @@ extends CanvasLayer
 @export var _bank_total_label: RichTextLabel
 @export var bank_gain_sound: AudioStreamPlayer
 @export var pencil_scribble: AudioStreamPlayer
-@export var _profit_judgement_container: Control
-@export var profit_judgement_textures: Array[Texture]
-@export var profit_judgement_texture_rect: TextureRect
 @export var button: Button
 @export var stars_sound: AudioStreamPlayer
 @export var _free_item_selector_screen_packed_scene: PackedScene
@@ -66,10 +62,8 @@ func _on_time_up() -> void:
 	# Hide all the labels
 	_money_title_label.visible = false
 	_min_profit_goal_label.visible = false
-	_max_profit_goal_label.visible = false
 	_profit_made_label.visible = false
 
-	_profit_judgement_container.visible = false
 
 	_rating_title_label.visible = false
 	_rating_label.visible = false
@@ -94,7 +88,6 @@ func _on_time_up() -> void:
 	var passed_profit_goal := daily_profit >= min_profit_goal
 
 	_min_profit_goal_label.text = "required goal: %s" % Global.float_to_price(min_profit_goal)
-	_max_profit_goal_label.text = "perfect goal: %s" % Global.float_to_price(max_profit_goal)
 	_profit_made_label.text = "made today: %s/%s" % [
 		Global.float_to_price(daily_profit),
 		Global.float_to_price(min_profit_goal),
@@ -122,8 +115,6 @@ func _on_time_up() -> void:
 	_money_title_label.visible = true
 	await get_tree().create_timer(0.5).timeout
 	_min_profit_goal_label.visible = true
-	await get_tree().create_timer(0.1).timeout
-	_max_profit_goal_label.visible = true
 	await get_tree().create_timer(0.2).timeout
 	_profit_made_label.visible = true
 	
@@ -135,16 +126,6 @@ func _on_time_up() -> void:
 
 	await get_tree().create_timer(1).timeout
 
-	var profit_judgement_texture_index: int = 0
-	if passed_profit_goal:
-		var profit_judgement_index_float: float = remap(daily_profit, min_profit_goal, max_profit_goal, 0.0, 11.0)
-		if daily_profit <= max_profit_goal: 
-			profit_judgement_texture_index = floori(profit_judgement_index_float)
-		else:
-			profit_judgement_texture_index = profit_judgement_textures.size() - 1
-	if profit_judgement_texture_index >= 0 and profit_judgement_texture_index < profit_judgement_textures.size():
-		profit_judgement_texture_rect.texture = profit_judgement_textures[profit_judgement_texture_index]
-	_profit_judgement_container.visible = true
 	stars_sound.play()
 
 	await get_tree().create_timer(1.5).timeout
