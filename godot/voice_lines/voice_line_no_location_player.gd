@@ -2,6 +2,7 @@ class_name VoiceLineNoLocationPlayer
 extends Node
 
 signal finished_playing_voice_line(voice_line: VoiceLine)
+signal interrupted_playing_voice_line(voice_line: VoiceLine)
 
 @export var _audio_stream_player_3ds: Array[AudioStreamPlayer3D]
 
@@ -9,10 +10,7 @@ var _playing_voice_line: VoiceLine
 
 func play_voice_line(voice_line: VoiceLine) -> void:
 	# Interrupt existing voice line
-	if _playing_voice_line != null:
-		for player in _audio_stream_player_3ds:
-			player.stop()
-		await finished_playing_voice_line
+	await interrupt_current_voice_line()
 	
 	if voice_line.audio_stream == null:
 		printerr("Missing audio stream!")
@@ -36,3 +34,9 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 
 func get_playing_voice_line() -> VoiceLine:
 	return _playing_voice_line
+
+func interrupt_current_voice_line() -> void:
+	if _playing_voice_line != null:
+		for player in _audio_stream_player_3ds:
+			player.stop()
+		interrupted_playing_voice_line.emit(_playing_voice_line)

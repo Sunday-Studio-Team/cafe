@@ -19,7 +19,7 @@ func _on_requested_show_voice_line_subtitle(voice_line: VoiceLine) -> void:
 
 func _on_requested_hide_voice_line_subtitle(voice_line: VoiceLine) -> void:
 	if !_voice_line_to_subtitle_view_dict.has(voice_line):
-		printerr("Can't find subtitle view to hide?")
+		#printerr("Can't find subtitle view to hide?")
 		return
 	var subtitle_view = _voice_line_to_subtitle_view_dict[voice_line]
 	_voice_line_to_subtitle_view_dict.erase(voice_line)

@@ -605,13 +605,15 @@ func _interactive_tutorial_shift() -> void:
 		if Global.tutorial_drink_remade:
 			break
 	
-	while Global.tutorial_drink_remade:
+	while !Global.tutorial_drink_remade:
 		if repeat_instruction_timer.time_left == 0.0:
 			Global.voice_line_system.play_voice_line_no_location("tutorial_remaking_drink_5")
 			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
 		else:
 			await get_tree().process_frame
 	repeat_instruction_timer.stop()
+	
+	await get_tree().create_timer(0.5, false).timeout
 	
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_drink_remade_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_drink_remade_2")
@@ -638,7 +640,7 @@ func _interactive_tutorial_shift() -> void:
 		if Global.tutorial_ingredients_bag_got:
 			break
 	
-	while Global.tutorial_ingredients_bag_got:
+	while !Global.tutorial_ingredients_bag_got:
 		if repeat_instruction_timer.time_left == 0.0:
 			Global.voice_line_system.play_voice_line_at_location("tutorial_get_ingredients_3", _tutorial_vo_location_ingredients_bag)
 			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
@@ -660,6 +662,8 @@ func _interactive_tutorial_shift() -> void:
 	
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_2")
+	
+	await get_tree().create_timer(1.0, false).timeout
 	
 	# Spill tutorial: player learns to clean up spills
 	tutorial_machine.spill()
