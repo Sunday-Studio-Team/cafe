@@ -189,8 +189,6 @@ name = "Overtime Form"
 icon = ExtResource("71_m5f57")
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2cqfq"]
-
 [sub_resource type="Curve3D" id="Curve3D_1yv1y"]
 closed = true
 _data = {
@@ -578,11 +576,6 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
 theme_override_constants/shadow_outline_size = 10
 theme_override_font_sizes/font_size = 52
 text = "+1$ from customer"
-
-[node name="Floor" type="StaticBody3D" parent="." unique_id=2013648484]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=291362514]
-shape = SubResource("WorldBoundaryShape3D_2cqfq")
 
 [node name="CustomerEntrySpot" type="Marker3D" parent="." unique_id=2097310311]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
