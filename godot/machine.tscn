@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://opsuwlsv3dke" path="res://Assets/Drink Machine/machine back.glb" id="17_jqdip"]
 [ext_resource type="Script" uid="uid://c4c77yw7tsv87" path="res://low_fps_sub_viewport_updater.gd" id="18_0ne0o"]
 [ext_resource type="PackedScene" uid="uid://df558355onylt" path="res://Assets/Drink Machine/machine front.glb" id="18_2ajbd"]
-[ext_resource type="ArrayOccluder3D" uid="uid://hujuc46pc8gw" path="res://machine_occluder3d.occ" id="18_64ldb"]
 [ext_resource type="Texture2D" uid="uid://dqnm76jpmu5v6" path="res://Assets/hdri/Joburg Central Sunset HDRI.hdr" id="18_yl6qm"]
 [ext_resource type="AudioStream" uid="uid://dainvtxdkilnw" path="res://audio/airhorn.wav" id="20_64ldb"]
 [ext_resource type="Script" uid="uid://lidk43nk3l7v" path="res://non_visible_camera_disabler.gd" id="20_x45kg"]
@@ -330,14 +329,10 @@ remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamF
 
 [node name="Model" type="Node3D" parent="." unique_id=238356525]
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="Model" unique_id=334316262]
-visible = false
-occluder = ExtResource("18_64ldb")
-
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=50258527]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=958400287]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1261802568 instance=ExtResource("18_2ajbd")]
