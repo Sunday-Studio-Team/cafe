@@ -10,9 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="7_0361o"]
 
 [node name="MenuUpdateEmail" type="Container" unique_id=1099734027 node_paths=PackedStringArray("drink_1", "drinks_list", "yes_button", "ok_button")]
-custom_minimum_size = Vector2(800, 450)
-offset_right = 643.0
-offset_bottom = 450.0
+custom_minimum_size = Vector2(916, 450)
+custom_maximum_size = Vector2(916, -1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_8jh7c")
 drink_1 = NodePath("Container/ScrollContainer/VBoxContainer/NewDrinks/EmailDrinkContainer")
 drinks_list = NodePath("Container/ScrollContainer/VBoxContainer/NewDrinks")
@@ -20,6 +24,8 @@ yes_button = NodePath("Container/ScrollContainer/VBoxContainer/HBoxContainer/Yes
 ok_button = NodePath("Container/ScrollContainer/VBoxContainer/HBoxContainer/OkButton")
 
 [node name="Container" type="MarginContainer" parent="." unique_id=1963856371]
+custom_minimum_size = Vector2(916, 0)
+custom_maximum_size = Vector2(916, -1)
 layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 100

@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://vxxk7mxfwnp8"]
+
+[ext_resource type="Texture2D" uid="uid://hyrc23gvplb3" path="res://sprites/customers/gym girl.png" id="1_2t45u"]
+[ext_resource type="Script" uid="uid://bepfpiu50og" path="res://emails/reviews/custom_email_view_reviews.gd" id="1_wx22x"]
+[ext_resource type="Texture2D" uid="uid://b5u5pk4pmxhhc" path="res://sprites/stars/star.png" id="2_f7stf"]
+[ext_resource type="Script" uid="uid://bh50rw0t8ptws" path="res://emails/reviews/review_container.gd" id="2_tjjng"]
+[ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="3_p2mph"]
+[ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="4_wx22x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtxfr"]
+bg_color = Color(0.6509804, 0.05490196, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lghh"]
+bg_color = Color(0.8474744, 0.84747446, 0.8474743, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtxfr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t45u"]
+bg_color = Color(0.9297146, 0.9297147, 0.9297146, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.6509804, 0.05490196, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtxfr"]
+atlas = ExtResource("1_2t45u")
+region = Rect2(225, 10, 600, 600)
+
+[node name="CustomEmailViewReviews" type="MarginContainer" unique_id=2126401690]
+custom_minimum_size = Vector2(916, 0)
+custom_maximum_size = Vector2(916, -1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wx22x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1709141238]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1033388940]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rtxfr")
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer" unique_id=1109362662]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 75
+text = "blep reviews"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1362416269]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8lghh")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer2" unique_id=1298791558]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 15
+
+[node name="ReviewGrid" type="GridContainer" parent="VBoxContainer/PanelContainer2/MarginContainer" unique_id=1450173849]
+layout_mode = 2
+
+[node name="ReviewContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1341324083]
+custom_minimum_size = Vector2(900, 0)
+propagate_maximum_size = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rtxfr")
+script = ExtResource("2_tjjng")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1890193301]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="CustomerInfo" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer" unique_id=578529618]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1406410189]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2t45u")
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo/PanelContainer" unique_id=42599914]
+position = Vector2(100.00002, 99.5)
+scale = Vector2(0.3066667, 0.30833334)
+texture = SubResource("AtlasTexture_rtxfr")
+
+[node name="Username" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1525218022]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+text = "@sexyusername1"
+horizontal_alignment = 1
+
+[node name="ReviewsNumber" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1159995025]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "★ 12 reviews"
+horizontal_alignment = 1
+
+[node name="ReviewInfo" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer" unique_id=1280830184]
+layout_mode = 2
+
+[node name="Stars" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo" unique_id=1014444633]
+layout_mode = 2
+
+[node name="Star1" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo/Stars" unique_id=2103689801]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_f7stf")
+
+[node name="Star2" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo/Stars" unique_id=707109379]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(50, 0)
+texture = ExtResource("2_f7stf")
+
+[node name="Star3" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo/Stars" unique_id=1234316120]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(100, 0)
+texture = ExtResource("3_p2mph")
+
+[node name="Star4" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo/Stars" unique_id=992050696]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(150, 0)
+texture = ExtResource("4_wx22x")
+
+[node name="Star5" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo/Stars" unique_id=1943448285]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(200, 0)
+texture = ExtResource("4_wx22x")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo" unique_id=470299995]
+custom_minimum_size = Vector2(625, 0)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(5, 0)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 18
+text = "every time i come here they are out of toilet paper. 
+
+mid coffee. 
+"
+fit_content = true
