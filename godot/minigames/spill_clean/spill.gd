@@ -1,10 +1,6 @@
 class_name ErasableCanvas
 extends Node2D
 
-# If a pixel has alpha value lower then the threshold,
-# it was consider transparent
-const ALPHA_THRESHOLD_BYTE: int = 5
-
 
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
@@ -26,8 +22,9 @@ var starting_pixel_count: int = 0
 var remaining_pixel_count: int = 0
 var image_width: int
 var image_height: int
-var pixel_data: PackedByteArray
 var game_finished: bool = false
+var previous_mop_position := Vector2.INF
+var remaining_mask: BitMap
 
 
 func _ready() -> void:
@@ -41,7 +38,6 @@ func _ready() -> void:
 
 	image_width = canvas_image.get_width()
 	image_height = canvas_image.get_height()
-	pixel_data = canvas_image.get_data()
 
 	canvas_texture = ImageTexture.create_from_image(canvas_image)
 	canvas_sprite.texture = canvas_texture
@@ -78,7 +74,7 @@ func _ready() -> void:
 			mop.wet_mop()
 	)
 
-	count_starting_pixels()
+	initialize_progress_mask()
 	update_progress_display()
 
 
@@ -88,280 +84,67 @@ func _physics_process(_delta: float) -> void:
 
 	if mop_collision == null or mop_collision.disabled:
 		return
-
-	var image_changed: bool = erase_inside_mop_rectangle()
-
-	if not image_changed:
+	
+	if mop_collision.global_position.distance_to(previous_mop_position) < 50.0:
 		return
-	if !mop.is_dirty:
-		mop.is_dirty = true
-		if mop.used_scrubber:
-			mop.texture = mop.dirty_scrubber_texture
-		else:
-			mop.texture = mop.dirty_mop_texture
 
-	upload_changed_image()
+	var rect: Rect2i = erased_area_inside_mop_rectangle()
+	
+	previous_mop_position = mop_collision.global_position
+
+	update_image(rect)
 	update_progress_display()
 	check_for_win()
 
 
-func rect_to_global_polygon(local_rect: Rect2, global_rect_transform: Transform2D) -> PackedVector2Array:
-	var top_left: Vector2 = (
-			global_rect_transform
-			* local_rect.position
+func erased_area_inside_mop_rectangle() -> Rect2i:
+	var half_size := mop_rectangle.size / 2.0
+
+	var shape_to_sprite := (
+		canvas_sprite.global_transform.affine_inverse()
+		* mop_collision.global_transform
 	)
 
-	var top_right: Vector2 = (
-			global_rect_transform
-			* Vector2(
-				local_rect.end.x,
-				local_rect.position.y,
-			)
+	var top_left := shape_to_sprite * -half_size
+	var bottom_right := shape_to_sprite * half_size
+
+	var image_half_size := Vector2(image_width, image_height) / 2.0
+
+	top_left += image_half_size
+	bottom_right += image_half_size
+
+	return Rect2i(top_left, bottom_right - top_left).abs()
+
+
+func update_image(rect: Rect2i) -> void:
+	var image_rect := Rect2i(
+		Vector2i.ZERO,
+		canvas_image.get_size()
 	)
 
-	var bottom_right: Vector2 = (
-			global_rect_transform
-			* local_rect.end
-	)
+	rect = rect.intersection(image_rect)
 
-	var bottom_left: Vector2 = (
-			global_rect_transform
-			* Vector2(
-				local_rect.position.x,
-				local_rect.end.y,
-			)
-	)
+	if rect.size.x <= 0 or rect.size.y <= 0:
+		return
 
-	return PackedVector2Array(
-		[
-			top_left,
-			top_right,
-			bottom_right,
-			bottom_left,
-		],
-	)
+	remaining_mask.set_bit_rect(rect, false)
+	remaining_pixel_count = remaining_mask.get_true_bit_count()
 
-
-func erase_inside_mop_rectangle() -> bool:
-	var sprite_rect: Rect2 = canvas_sprite.get_rect()
-	var half_size: Vector2 = mop_rectangle.size * 0.5
-
-	# Converts a point from the collision shape's local coordinates
-	# into the sprite's local coordinates.
-	var shape_to_sprite: Transform2D = (
-			canvas_sprite.global_transform.affine_inverse()
-			* mop_collision.global_transform
-	)
-
-	# Converts a point from the sprite's local coordinates
-	# into the collision shape's local coordinates.
-	var sprite_to_shape: Transform2D = (
-			shape_to_sprite.affine_inverse()
-	)
-
-	var shape_bounds: Rect2 = Rect2(
-		-half_size,
-		mop_rectangle.size,
-	)
-
-	var bounds_on_sprite: Rect2 = transform_rect(
-		shape_bounds,
-		shape_to_sprite,
-	)
-
-	var clipped_bounds: Rect2 = (
-			bounds_on_sprite.intersection(sprite_rect)
-	)
-
-	if not clipped_bounds.has_area():
-		return false
-
-	var pixel_bounds: Rect2i = sprite_rect_to_pixel_rect(
-		clipped_bounds,
-		sprite_rect,
-	)
-
-	var image_changed: bool = false
-
-	for y: int in range(
-		pixel_bounds.position.y,
-		pixel_bounds.end.y,
+	if (
+		remaining_pixel_count < starting_pixel_count 
+		and not mop.is_dirty
 	):
-		for x: int in range(
-			pixel_bounds.position.x,
-			pixel_bounds.end.x,
-		):
-			var pixel_number: int = y * image_width + x
-			var alpha_index: int = pixel_number * 4 + 3
+		mop.get_dirty()
 
-			if pixel_data[alpha_index] <= ALPHA_THRESHOLD_BYTE:
-				continue
-
-			var sprite_point: Vector2 = pixel_to_sprite_position(
-				x,
-				y,
-				sprite_rect,
-			)
-
-			var shape_point: Vector2 = (
-					sprite_to_shape * sprite_point
-			)
-
-			var is_inside: bool = (
-					absf(shape_point.x) <= half_size.x
-					and absf(shape_point.y) <= half_size.y
-			)
-
-			if not is_inside:
-				continue
-
-			pixel_data[alpha_index] = 0
-			remaining_pixel_count -= 1
-			image_changed = true
-
-	return image_changed
-
-
-func transform_rect(
-		rect: Rect2,
-		rect_transform: Transform2D,
-) -> Rect2:
-	var top_left: Vector2 = (
-			rect_transform * rect.position
-	)
-
-	var top_right: Vector2 = (
-			rect_transform
-			* Vector2(rect.end.x, rect.position.y)
-	)
-
-	var bottom_right: Vector2 = (
-			rect_transform * rect.end
-	)
-
-	var bottom_left: Vector2 = (
-			rect_transform
-			* Vector2(rect.position.x, rect.end.y)
-	)
-
-	var result: Rect2 = Rect2(
-		top_left,
-		Vector2.ZERO,
-	)
-
-	result = result.expand(top_right)
-	result = result.expand(bottom_right)
-	result = result.expand(bottom_left)
-
-	return result
-
-
-func sprite_rect_to_pixel_rect(
-		bounds: Rect2,
-		sprite_rect: Rect2,
-) -> Rect2i:
-	var normalized_start: Vector2 = (
-			(bounds.position - sprite_rect.position)
-			/ sprite_rect.size
-	)
-
-	var normalized_end: Vector2 = (
-			(bounds.end - sprite_rect.position)
-			/ sprite_rect.size
-	)
-
-	normalized_start.x = clampf(
-		normalized_start.x,
-		0.0,
-		1.0,
-	)
-
-	normalized_start.y = clampf(
-		normalized_start.y,
-		0.0,
-		1.0,
-	)
-
-	normalized_end.x = clampf(
-		normalized_end.x,
-		0.0,
-		1.0,
-	)
-
-	normalized_end.y = clampf(
-		normalized_end.y,
-		0.0,
-		1.0,
-	)
-
-	var start_x: int = clampi(
-		floori(normalized_start.x * image_width),
-		0,
-		image_width,
-	)
-
-	var start_y: int = clampi(
-		floori(normalized_start.y * image_height),
-		0,
-		image_height,
-	)
-
-	var end_x: int = clampi(
-		ceili(normalized_end.x * image_width),
-		0,
-		image_width,
-	)
-
-	var end_y: int = clampi(
-		ceili(normalized_end.y * image_height),
-		0,
-		image_height,
-	)
-
-	return Rect2i(
-		start_x,
-		start_y,
-		end_x - start_x,
-		end_y - start_y,
-	)
-
-
-func pixel_to_sprite_position(
-		x: int,
-		y: int,
-		sprite_rect: Rect2,
-) -> Vector2:
-	var normalized_position: Vector2 = Vector2(
-		(float(x) + 0.5) / float(image_width),
-		(float(y) + 0.5) / float(image_height),
-	)
-
-	return (
-			sprite_rect.position
-			+ normalized_position * sprite_rect.size
-	)
-
-
-func upload_changed_image() -> void:
-	canvas_image.set_data(
-		image_width,
-		image_height,
-		false,
-		Image.FORMAT_RGBA8,
-		pixel_data,
-	)
+	canvas_image.fill_rect(rect, Color.TRANSPARENT)
 	canvas_texture.update(canvas_image)
 
 
-func count_starting_pixels() -> void:
-	starting_pixel_count = 0
+func initialize_progress_mask() -> void:
+	remaining_mask = BitMap.new()
+	remaining_mask.create_from_image_alpha(canvas_image, 0.0)
 
-	for pixel_index: int in range(image_width * image_height):
-		var alpha_index: int = pixel_index * 4 + 3
-
-		if pixel_data[alpha_index] > ALPHA_THRESHOLD_BYTE:
-			starting_pixel_count += 1
-
+	starting_pixel_count = remaining_mask.get_true_bit_count()
 	remaining_pixel_count = starting_pixel_count
 
 
@@ -371,8 +154,8 @@ func update_progress_display() -> void:
 		return
 
 	var remaining_ratio: float = (
-			float(remaining_pixel_count)
-			/ float(starting_pixel_count)
+		float(remaining_pixel_count)
+		/ float(starting_pixel_count)
 	)
 
 	var erased_ratio: float = 1.0 - remaining_ratio
@@ -388,8 +171,8 @@ func check_for_win() -> void:
 		return
 
 	var remaining_ratio: float = (
-			float(remaining_pixel_count)
-			/ float(starting_pixel_count)
+		float(remaining_pixel_count)
+		/ float(starting_pixel_count)
 	)
 
 	if remaining_ratio <= allowed_remaining_ratio:
