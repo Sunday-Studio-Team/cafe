@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
 [ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
+[ext_resource type="PackedScene" uid="uid://lb6ywv4xipoy" path="res://Assets/signs/beanny_balloons.tscn" id="29_wredj"]
 [ext_resource type="ArrayMesh" uid="uid://cs4x07tegdt80" path="res://Assets/trashcan/Sketchfab_Scene_Object_1.res" id="30_grihc"]
 [ext_resource type="Texture2D" uid="uid://cetushjghxirl" path="res://environment/textures/office tiles.png" id="31_omxm3"]
 [ext_resource type="PackedScene" uid="uid://7guo1hrx6oco" path="res://Assets/Locker/locker_tippy.tscn" id="31_ubo3j"]
@@ -82,6 +83,9 @@
 [ext_resource type="PackedScene" uid="uid://b1ptf8i4ks0un" path="res://Assets/Storage room/mugs_milk_sugar_light.tscn" id="72_omxm3"]
 [ext_resource type="Texture2D" uid="uid://dbdfoa6vxo31c" path="res://Assets/Storage room/Mugs Milk Sugar Light_All Textures_Base_color.png" id="73_omxm3"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="82_4nsdn"]
+[ext_resource type="PackedScene" uid="uid://dv57fp8p0wov2" path="res://Assets/signs/tippy_standee.tscn" id="84_pv1ha"]
+[ext_resource type="Texture2D" uid="uid://cp0ia1aqch04a" path="res://Assets/signs/Bean Buddy.png" id="84_yhys1"]
+[ext_resource type="Texture2D" uid="uid://c67nrt1uma0nc" path="res://Assets/signs/Tippy with coffee.png" id="85_tx4o1"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_vn1tu"]
 vertices = PackedVector3Array(-14.998764, 0.44751942, -23.75, -13.748764, 0.44751942, -23.75, -13.748764, 0.44751942, -24.75, -24.998764, 0.44751942, -19.75, -24.498764, 0.44751942, -19.25, -22.998764, 0.44751942, -19.75, -24.998764, 0.44751942, -24.75, -16.248764, 0.44751942, -22.25, -16.498764, 0.44751942, -19.5, -12.748764, 0.44751942, -23.75, -11.498764, 0.44751942, -19.25, -10.248764, 0.44751942, -19.5, -9.998764, 0.44751942, -20.75, -11.498764, 0.44751942, -22.25, -2.998764, 0.44751942, -20.25, -1.998764, 0.44751942, -20.25, 1.501236, 0.44751942, -21.75, 2.001236, 0.44751942, -22, 2.001236, 0.44751942, -24.75, -1.748764, 0.44751942, -19.25, 1.501236, 0.44751942, -19.25, -7.748764, 0.44751942, -20.75, -7.498764, 0.44751942, -19.25, -3.498764, 0.44751942, -19.25, 13.751236, 0.44751942, -20.25, 14.251236, 0.44751942, -20.5, 14.251236, 0.44751942, -24.75, 2.251236, 0.44751942, -19.5, 13.751236, 0.44751942, -19.5, 14.751236, 0.44751942, -20.25, 14.751236, 0.44751942, -19.5, 16.001236, 0.44751942, -19.25, 21.501236, 0.44751942, -19.75, 24.251236, 0.44751942, -19.5, 24.251236, 0.44751942, -20.75, 24.751236, 0.44751942, -21, 24.751236, 0.44751942, -24.75, -78.248764, 0.9475194, -20, -78.248764, 0.9475194, -19, -77.748764, 0.9475194, -19.5, -77.748764, 0.9475194, -21.5, -76.498764, 0.9475194, -21, -76.748764, 0.9475194, -22.25, -77.498764, 0.9475194, -23, -79.998764, 0.9475194, -20.25, -79.998764, 0.9475194, -19.25, -78.998764, 0.9475194, -19.25, -78.998764, 0.9475194, -20.5, -77.998764, 0.9475194, -20.5, -76.498764, 0.9475194, -19.25, -76.498764, 0.9475194, -20.25, -78.998764, 0.9475194, -23, -79.498764, 0.9475194, -22.5, -15.748764, 0.9475194, -19.75, -15.748764, 0.9475194, -19.25, -14.748764, 0.9475194, -19.25, -14.998764, 0.9475194, -20.25, -14.498764, 0.9475194, -20.5, -13.748764, 0.9475194, -20.5, -13.498764, 0.9475194, -21.5, -12.248764, 0.9475194, -21, -12.248764, 0.9475194, -22, -13.248764, 0.9475194, -23, -13.998764, 0.9475194, -19, -13.498764, 0.9475194, -19.5, -12.248764, 0.9475194, -19.25, -12.248764, 0.9475194, -20.25, -14.998764, 0.9475194, -22.75, 47.251236, 0.9475194, -19.75, 47.251236, 0.9475194, -19.25, 48.251236, 0.9475194, -19.25, 48.001236, 0.9475194, -20.25, 48.501236, 0.9475194, -20.5, 49.251236, 0.9475194, -20.5, 49.501236, 0.9475194, -21.5, 50.751236, 0.9475194, -21, 50.751236, 0.9475194, -22, 49.751236, 0.9475194, -23, 49.001236, 0.9475194, -19, 49.501236, 0.9475194, -19.5, 50.751236, 0.9475194, -19.25, 50.751236, 0.9475194, -20.25, 48.001236, 0.9475194, -22.75, 77.001236, 19.19752, -18.5, 77.501236, 19.19752, -18.25, 77.501236, 19.19752, -21.75, -37.998764, 1.1975194, -19.75, -36.998764, 1.1975194, -19.75, -36.998764, 1.1975194, -20.25, -38.248764, 1.1975194, -20.25, 26.251236, 1.1975194, -19.75, 27.501236, 1.1975194, -19.75, 27.501236, 1.1975194, -20.25, 26.001236, 1.1975194, -20.25, 89.251236, 1.1975194, -19.75, 90.501236, 1.1975194, -19.75, 90.501236, 1.1975194, -20.25, 89.001236, 1.1975194, -20.25, -73.748764, 0.6975194, -20, -72.498764, 0.6975194, -19.5, -72.498764, 0.6975194, -20, -9.498764, 0.6975194, -20, -8.248764, 0.6975194, -19.5, -8.248764, 0.6975194, -20, 53.501236, 0.6975194, -20, 54.751236, 0.6975194, -19.5, 54.751236, 0.6975194, -20, -68.248764, 0.6975194, -17.75, -68.498764, 0.6975194, -18.5, -74.248764, 0.6975194, -18.75, -95.498764, 0.6975194, -18.5, -95.498764, 0.6975194, -18, 1.751236, 0.6975194, -17.75, 0.50123596, 0.6975194, -18.5, -9.998764, 0.6975194, -18.75, -4.748764, 0.6975194, -18, 24.751236, 0.6975194, -16.75, 24.751236, 0.6975194, -17.75, 9.251236, 0.6975194, -17.5, 6.251236, 0.6975194, -16.75, -29.748764, 0.6975194, -18, -29.748764, 0.6975194, -18.5, 59.001236, 0.6975194, -17.75, 58.751236, 0.6975194, -18.5, 53.001236, 0.6975194, -18.75, 34.501236, 0.6975194, -18.5, 34.501236, 0.6975194, -18, 31.751236, 0.6975194, -17.75, 31.751236, 0.6975194, -16.75, 34.001236, 0.6975194, -16.75, 34.001236, 0.6975194, -17.75, -58.998764, 0.44751942, -15.5, -57.998764, 0.44751942, -16.25, -68.998764, 0.44751942, -17.5, -95.498764, 0.44751942, -17.5, -95.498764, 0.44751942, -15.5, -61.998764, 0.6975194, -17.5, -57.998764, 0.6975194, -16.75, -56.748764, 0.6975194, -17.25, -4.498764, 0.44751942, -8.5, -4.498764, 0.44751942, -9.5, -4.998764, 0.44751942, -9.75, -8.498764, 0.44751942, -8.25, -29.998764, 0.44751942, -16.25, -31.248764, 0.44751942, -16.25, -31.248764, 0.44751942, -15.5, -24.998764, 0.44751942, -15.25, -5.498764, 0.44751942, -15.75, -4.748764, 0.44751942, -16.5, -4.498764, 0.44751942, -17.25, -29.748764, 0.44751942, -17.5, -24.998764, 0.44751942, 6, -8.498764, 0.44751942, 6, -4.998764, 0.44751942, -10.5, -4.498764, 0.44751942, -10.75, -4.748764, 0.44751942, -15, 34.251236, 0.44751942, -16.25, 31.751236, 0.44751942, -16.25, 31.751236, 0.44751942, -15.5, 68.501236, 0.44751942, -15.5, 69.251236, 0.44751942, -16.25, 58.251236, 0.44751942, -17.5, 34.501236, 0.44751942, -17.5, 65.501236, 0.6975194, -17.5, 69.251236, 0.6975194, -16.75, 70.501236, 0.6975194, -17.25, 0.75123596, 0.44751942, -14.75, 0.50123596, 0.44751942, -15.25, -0.24876404, 0.44751942, -15.25, 2.001236, 0.44751942, -14.75, 1.251236, 0.44751942, -15.25, -0.49876404, 0.44751942, -10.25, 0.75123596, 0.44751942, -9.75, 2.751236, 0.44751942, -10.25, -0.99876404, 0.44751942, -16, -0.49876404, 0.44751942, -17, -1.248764, 0.44751942, -17.25, -3.998764, 0.44751942, -16, -3.748764, 0.44751942, -10.25, -0.99876404, 0.44751942, -9.75, -0.74876404, 0.44751942, -8.5, 3.501236, 0.44751942, -9.5, 3.751236, 0.44751942, -14.75, -3.998764, 0.44751942, -15.25, 1.251236, 0.44751942, -16.5, 1.251236, 0.44751942, -15.75, 1.501236, 0.44751942, -16.5, 2.251236, 0.44751942, -16.75, 0.50123596, 0.44751942, -17, 11.251236, 3.6975193, -14.75, 12.001236, 3.6975193, -15, 11.751236, 3.6975193, -15.5, 6.501236, 3.6975193, -16, 8.251236, 3.6975193, -15.5, 6.501236, 3.6975193, -15.25, 9.251236, 0.44751942, -7, 8.501236, 0.44751942, -6.5, 10.001236, 0.44751942, -6.5, 10.501236, 0.44751942, -0.25, 11.251236, 0.44751942, -0.25, 11.251236, 0.44751942, -2, 10.501236, 0.44751942, -6, 9.251236, 0.44751942, -9, 12.001236, 0.44751942, -2.25, 12.501236, 0.44751942, 0, 24.751236, 0.44751942, 0, 12.001236, 0.44751942, -14, 11.501236, 0.44751942, -13.75, 18.251236, 0.44751942, -14, 18.001236, 0.44751942, -14.75, 12.251236, 0.44751942, -16.25, 18.751236, 0.44751942, -15, 19.001236, 0.44751942, -14.25, 24.751236, 0.44751942, -16.25, 2.251236, 0.6975194, -16, 3.251236, 0.6975194, -15.5, 3.251236, 0.6975194, -16, 11.001236, 0.44751942, -14, 11.001236, 0.44751942, -15.75, 10.501236, 0.44751942, -15.25, 6.251236, 0.44751942, -14.75, 6.251236, 0.44751942, -15.25, 4.251236, 0.44751942, -15.25, 9.251236, 0.44751942, -15.25, 7.251236, 0.44751942, -16, 7.001236, 0.44751942, -14.5, 9.001236, 0.44751942, -9.5, 8.251236, 2.4475193, -8.5, 8.751236, 2.4475193, -7.25, 8.751236, 2.4475193, -9, 3.251236, 2.4475193, -9, 3.501236, 2.4475193, -8.5, 6.501236, 0.44751942, -8.75, 8.501236, 0.44751942, -8.25, 8.501236, 0.44751942, -8.75, -0.99876404, 3.4475193, -2, -0.49876404, 3.4475193, -1.5, 0.25123596, 3.4475193, -1.5, -0.49876404, 3.4475193, -3.5, -0.99876404, 3.4475193, -3.25, 0.75123596, 3.4475193, -2, 0.75123596, 3.4475193, -3.25, 0.25123596, 3.4475193, -3.75, -7.998764, 3.4475193, -8, -5.248764, 3.4475193, -4.75, -4.498764, 3.4475193, -4.75, 0.75123596, 3.4475193, -4, 1.001236, 3.4475193, -3.5, 1.751236, 3.4475193, -8, -0.74876404, 3.4475193, -4, -4.498764, 3.4475193, -4, -1.248764, 3.4475193, -3.5, -7.998764, 3.4475193, -4.25, -5.498764, 3.4475193, -4.25, 7.251236, 3.4475193, -3.75, 7.001236, 3.4475193, -4, 6.501236, 3.4475193, -4, 5.751236, 3.4475193, -4, 6.001236, 3.4475193, -4.5, 6.001236, 3.4475193, -5, 5.751236, 3.4475193, -5.5, 6.501236, 3.4475193, -5.5, 7.001236, 3.4475193, -5.5, 7.501236, 3.4475193, -5.75, 4.501236, 3.4475193, -0.75, 4.751236, 3.4475193, -1.25, 1.001236, 3.4475193, -1.25, 5.251236, 3.4475193, -0.75, 6.501236, 3.4475193, -0.75, 6.751236, 3.4475193, -1.25, 8.001236, 3.4475193, -6.25, 8.001236, 3.4475193, -8, 8.751236, 3.4475193, -2.5, 8.751236, 3.4475193, -2.75, -6.748764, 0.44751942, -1.25, -7.498764, 0.44751942, -1, -6.748764, 0.44751942, -0.5, -6.248764, 0.44751942, -5.75, -7.498764, 0.44751942, -5.5, -6.748764, 0.44751942, -5, 0.50123596, 0.44751942, 4.5, 1.251236, 0.44751942, 4.75, 0.50123596, 0.44751942, 3.5, -6.748764, 0.44751942, -4, -7.498764, 0.44751942, -3.75, -7.498764, 0.44751942, -3.25, -6.498764, 0.44751942, -2.5, -6.748764, 0.44751942, -7, -6.998764, 0.44751942, -6.25, -2.498764, 0.44751942, 0.25, -3.998764, 0.44751942, 1.75, -2.998764, 0.44751942, 3.5, 2.501236, 0.44751942, 2, 2.501236, 0.44751942, 0.5, -5.998764, 0.44751942, -7.5, -4.998764, 0.44751942, -3, -2.498764, 0.44751942, -7.5, -5.748764, 0.44751942, 0.25, -6.748764, 0.44751942, -2.25, -6.998764, 0.44751942, 0.75, -6.248764, 0.44751942, 1.25, -4.248764, 0.44751942, -1, -4.498764, 0.44751942, 0, -0.74876404, 0.44751942, 6, -2.998764, 0.44751942, 4.75, -3.998764, 0.44751942, 3.25, -4.498764, 0.44751942, 2, -6.248764, 0.44751942, 3.75, -4.248764, 0.44751942, 3.25, 2.251236, 0.44751942, -0.75, 2.251236, 0.44751942, -2.25, 1.251236, 0.44751942, -1.75, 1.751236, 0.44751942, -0.25, 0.25123596, 0.44751942, -1.25, 0.0012359619, 0.44751942, -0.25, -0.74876404, 0.44751942, -2.75, -0.49876404, 0.44751942, -1.75, 0.75123596, 0.44751942, -2.25, 0.75123596, 0.44751942, -3, 1.751236, 0.44751942, -3.25, 2.751236, 0.44751942, -4.75, 1.751236, 0.44751942, -5.5, -0.24876404, 0.44751942, -5.75, 0.0012359619, 0.44751942, -7.5, -1.748764, 0.44751942, -7.5, -1.748764, 0.44751942, -2.75, 2.001236, 1.1975194, -6.25, 2.251236, 1.1975194, -5.75, 3.501236, 1.1975194, -6.25, 3.501236, 1.1975194, -6.75, 0.25123596, 1.1975194, -6.75, 0.25123596, 1.1975194, -6.25, 3.001236, 0.44751942, -0.75, 7.251236, 0.44751942, -4.25, 7.751236, 0.44751942, -5.25, 7.251236, 0.44751942, -6.25, 4.001236, 0.44751942, -6.75, 4.001236, 0.44751942, -5.75, 7.001236, 0.44751942, -0.75, 7.501236, 0.44751942, -0.25, 3.251236, 0.44751942, -0.25, 7.501236, 3.4475193, -5, 7.501236, 3.4475193, -4.5, 7.501236, 3.4475193, 3.25, 7.001236, 3.4475193, 3.5, 7.251236, 3.4475193, 6, 10.001236, 3.4475193, -0.25, 7.501236, 3.4475193, 2.5, 9.251236, 3.4475193, -2, 7.251236, 3.4475193, -1, 6.751236, 3.4475193, -0.5, 7.001236, 3.4475193, 2.25, 7.751236, 3.4475193, -4, 9.001236, 3.4475193, -3.25, 12.251236, 3.4475193, 6, 12.001236, 3.4475193, -0.25, 9.501236, 3.4475193, -3, 10.001236, 3.4475193, -6, 8.251236, 0.44751942, -5.25, 8.501236, 0.44751942, -0.25, 9.501236, 0.44751942, -0.25, 9.501236, 0.44751942, -5.5, 0.25123596, 3.4475193, -1.25, -0.74876404, 3.4475193, -1, 0.0012359619, 3.4475193, 2.25, -1.248764, 3.4475193, -1.25, -0.49876404, 3.4475193, 3, -6.248764, 3.4475193, 3.25, -7.998764, 3.4475193, 3, -5.248764, 3.4475193, 3.5, -5.998764, 1.4475194, -1.5, -4.998764, 1.4475194, -1.25, -4.998764, 1.4475194, -2.25, -5.998764, 1.4475194, -2.25, -1.748764, 0.44751942, -1.5, -1.748764, 0.44751942, -0.25, -0.49876404, 0.44751942, -0.25, 6.751236, 3.4475193, 3.25, 0.50123596, 3.4475193, 2.5, 0.50123596, 3.4475193, 3.25, -5.248764, 1.4475194, -0.75, -4.748764, 1.4475194, -0.5, -4.748764, 1.4475194, -1, 12.251236, 0.44751942, 4.75, 15.001236, 0.44751942, 5, 24.751236, 0.44751942, 5.75, 15.251236, 0.44751942, 5.75, 7.501236, 0.44751942, 1.25, 7.001236, 0.44751942, 1, 7.001236, 0.44751942, 1.25, 8.751236, 0.44751942, 3, 10.001236, 0.44751942, 1.5, 10.501236, 0.44751942, 1.25, 10.501236, 0.44751942, 0.5, 8.751236, 0.44751942, 0.25, 7.751236, 0.44751942, 4.5, 7.751236, 0.44751942, 4.75, 10.501236, 0.44751942, 5, 10.751236, 0.44751942, 3, 2.001236, 0.44751942, 4.75, 1.501236, 0.44751942, 5.75, 3.751236, 0.44751942, 5, 3.751236, 0.44751942, 3.5, 4.751236, 0.44751942, 6.25, 2.501236, 0.44751942, 6.5, 2.501236, 0.44751942, 9, 5.251236, 0.44751942, 7, 3.251236, 0.44751942, 2.25, 5.751236, 0.44751942, 2.75, 1.751236, 0.44751942, 11.75, 6.001236, 0.44751942, 11.75, 6.001236, 0.44751942, 7.75, 5.501236, 0.44751942, 4.75, 5.001236, 0.44751942, 5.5, 1.751236, 0.44751942, 9.25, 6.751236, 1.4475194, 3.25, 7.751236, 1.4475194, 2.75, 7.001236, 1.4475194, 1.75, 6.251236, 1.4475194, 2.25, 2.251236, 1.4475194, 3.75, 3.251236, 1.4475194, 3.25, 2.751236, 1.4475194, 2.5, 1.751236, 1.4475194, 3, -6.248764, 3.4475193, 4, -7.998764, 3.4475193, 6, -1.748764, 3.4475193, 7.5, 0.0012359619, 3.4475193, 7.25, 0.0012359619, 3.4475193, 6.25, -3.998764, 3.4475193, 7.25, -2.248764, 3.4475193, 7.5, -4.248764, 3.4475193, 6, -5.498764, 3.4475193, 4, 0.50123596, 3.4475193, 6, 0.25123596, 3.4475193, 3.5, 1.251236, 3.4475193, 9.25, 2.751236, 3.4475193, 9.25, 3.251236, 3.4475193, 8.75, 1.251236, 3.4475193, 6.25, 6.501236, 3.4475193, 6.25, 6.501236, 3.4475193, 8.5, -7.498764, 1.9475194, 4.75, -7.498764, 1.9475194, 5.5, -6.998764, 1.9475194, 5.5, 7.001236, 0.44751942, 6.5, 7.001236, 0.44751942, 11.75, 9.751236, 0.44751942, 12, 13.501236, 0.44751942, 6.5, 9.501236, 0.44751942, 12.75, 7.501236, 0.44751942, 12.75, 7.501236, 0.44751942, 24.75, 15.001236, 0.44751942, 6.25, 24.751236, 0.44751942, 24.75, -4.998764, 0.44751942, 9, -4.498764, 0.44751942, 8.75, -4.498764, 0.44751942, 6.5, -8.248764, 0.44751942, 6.5, 1.251236, 0.44751942, 24.75, -4.748764, 0.44751942, 10.5, -24.998764, 0.44751942, 24.75, 0.75123596, 0.44751942, 14.25, 0.75123596, 0.44751942, 10.25, 1.251236, 0.44751942, 14.5, -2.248764, 0.44751942, 6.5, -1.998764, 0.44751942, 8.5, -0.99876404, 0.44751942, 8.5, -0.74876404, 0.44751942, 6.5, -1.498764, 3.4475193, 8.25, 0.0012359619, 3.4475193, 10, -2.248764, 3.4475193, 8.5, -3.998764, 3.4475193, 10, 3.501236, 3.4475193, 9.75, 1.251236, 3.4475193, 12.5, 3.751236, 3.4475193, 9, 6.751236, 3.4475193, 12.25, -3.748764, 1.4475194, 9, -3.748764, 1.4475194, 9.75, -3.248764, 1.4475194, 9.75, -3.248764, 1.4475194, 9, 1.751236, 0.44751942, 12.75, 1.751236, 0.44751942, 14.25)
@@ -1061,6 +1065,20 @@ shadow_mesh = SubResource("ArrayMesh_xshcq")
 [sub_resource type="BoxShape3D" id="BoxShape3D_mjix0"]
 size = Vector3(50, 0.1, 50)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ala11"]
+transparency = 1
+albedo_texture = ExtResource("84_yhys1")
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("84_yhys1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_li8ef"]
+transparency = 1
+albedo_texture = ExtResource("85_tx4o1")
+emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("85_tx4o1")
+
 [node name="CafeEnvironment" type="Node3D" unique_id=672806017]
 
 [node name="CafeEnvOccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1424844316]
@@ -1204,7 +1222,7 @@ area_size = Vector2(2.0486052, 2.8595924)
 [node name="MediumLights" parent="NavigationRegion3D/CustomerArea" unique_id=988487720 instance=ExtResource("5_omxm3")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3.3665109, 2.0798194, -3.0821092)
 
-[node name="circlelight" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 451585417) index="0" unique_id=895061839]
+[node name="circlelight" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1358236334) index="0" unique_id=75959247]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 35.072407, 0, 10.080775)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/circlelight" index="2" unique_id=1967334830]
@@ -1215,13 +1233,13 @@ shadow_enabled = true
 spot_range = 4.419
 spot_angle = 31.63
 
-[node name="squarelight" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 451585417) index="1" unique_id=1595560103]
+[node name="squarelight" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1358236334) index="1" unique_id=351888588]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -35.37679, 1.2221432, 5.9044085)
 
-[node name="squarelamp_lambert1_0" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1845172364) index="0" unique_id=1782853931]
+[node name="squarelamp_lambert1_0" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1668176628) index="0" unique_id=589061621]
 visible = false
 
-[node name="AreaLight3D" type="AreaLight3D" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1845172364) index="1" unique_id=987737270]
+[node name="AreaLight3D" type="AreaLight3D" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/squarelight/squarelamp" parent_id_path=PackedInt32Array(988487720, 1668176628) index="1" unique_id=987737270]
 transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 0, -6.6181183, 0)
 light_color = Color(1, 0.9666667, 0, 1)
 light_energy = 5.04
@@ -1229,7 +1247,7 @@ shadow_enabled = true
 area_range = 3.905
 area_size = Vector2(1.6194825, 2.7039185)
 
-[node name="linelight" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 451585417) index="2" unique_id=555267135]
+[node name="linelight" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 1358236334) index="2" unique_id=923804672]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
 [node name="AreaLight3D" type="AreaLight3D" parent="NavigationRegion3D/CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1917070567]
@@ -1408,10 +1426,10 @@ mesh = SubResource("BoxMesh_rkau7")
 [node name="glass window" parent="NavigationRegion3D/CustomerArea" unique_id=1259450021 instance=ExtResource("20_ala11")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, 3.0091598, -0.008068584, -7.9095745)
 
-[node name="Window_glass_0" parent="NavigationRegion3D/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 1962115550) index="2" unique_id=1461719258]
+[node name="Window_glass_0" parent="NavigationRegion3D/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 1687784366) index="2" unique_id=1414378629]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="NavigationRegion3D/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 43957841) index="2" unique_id=1538735026]
+[node name="Window2_glass_0" parent="NavigationRegion3D/CustomerArea/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 793209920) index="2" unique_id=35031064]
 mesh = SubResource("ArrayMesh_4dwmn")
 
 [node name="plastic chair2" parent="NavigationRegion3D/CustomerArea" unique_id=248825315 instance=ExtResource("22_kmdca")]
@@ -1455,6 +1473,9 @@ mesh = SubResource("TextMesh_vn1tu")
 
 [node name="glove sign" parent="NavigationRegion3D/CustomerArea" unique_id=185666047 instance=ExtResource("27_3xpao")]
 transform = Transform3D(0.3305352, 0, -0.34357443, 0, 0.47675657, 0, 0.34357443, 0, 0.3305352, 7.2255273, 0.32075867, -6.43441)
+
+[node name="Beanny Balloons" parent="NavigationRegion3D/CustomerArea" unique_id=1331156955 instance=ExtResource("29_wredj")]
+transform = Transform3D(-0.17955787, 0, -0.9837474, 0, 1, 0, 0.9837474, 0, -0.17955787, 7.210903, 1.2412802, -2.8805175)
 
 [node name="BreakRoom" type="Node3D" parent="NavigationRegion3D" unique_id=1614027471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
@@ -1507,7 +1528,7 @@ mesh = SubResource("BoxMesh_jofr6")
 [node name="Locker tippy" parent="NavigationRegion3D/BreakRoom" unique_id=787314827 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.7044044, 0, -0.0034689992, 0, 0.70441294, 0, 0.0034689992, 0, -0.7044044, 2.2924411, -0.011554956, 2.152318)
 
-[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy" index="1" unique_id=999252070]
+[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy" index="1" unique_id=2026177363]
 transform = Transform3D(0.9773278, 0, 0.21173207, 0, 1, 0, -0.21173207, 0, 0.9773278, -0.10115862, 0, -0.06704998)
 
 [node name="Locker tippy4" parent="NavigationRegion3D/BreakRoom" unique_id=428753990 instance=ExtResource("31_ubo3j")]
@@ -1522,13 +1543,13 @@ transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232,
 [node name="Locker tippy8" parent="NavigationRegion3D/BreakRoom" unique_id=2119566149 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(0.70288, 0, -0.046447232, 0, 0.70441294, 0, 0.046447232, 0, 0.70288, 11.733773, 0.082505584, -4.5860696)
 
-[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy8" index="1" unique_id=999252070]
+[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy8" index="1" unique_id=2026177363]
 transform = Transform3D(0.74620664, 0, -0.66571534, 0, 1.0000007, 0, 0.66571534, 0, 0.74620664, -0.40247345, 0, 0.15174639)
 
 [node name="Locker tippy15" parent="NavigationRegion3D/BreakRoom" unique_id=1479455124 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.7044131, 0, -6.158175e-08, 0, 0.704413, 0, 6.158175e-08, 0, -0.7044131, -6.9528513, 0.082505345, -12.49315)
 
-[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy15" index="1" unique_id=999252070]
+[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy15" index="1" unique_id=2026177363]
 transform = Transform3D(0.16694199, 0, -0.98596674, 0, 1, 0, 0.98596674, 0, 0.16694199, -0.8491564, 0, -0.05727005)
 
 [node name="Locker tippy16" parent="NavigationRegion3D/BreakRoom" unique_id=1242390208 instance=ExtResource("31_ubo3j")]
@@ -1549,13 +1570,13 @@ transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.704413
 [node name="Locker tippy10" parent="NavigationRegion3D/BreakRoom" unique_id=2077010906 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-3.0790872e-08, 0, -0.70441306, 0, 0.704413, 0, 0.70441306, 0, -3.0790872e-08, 1.3672915, 0.082505584, -0.56572676)
 
-[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy10" index="1" unique_id=999252070]
+[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy10" index="1" unique_id=2026177363]
 transform = Transform3D(0.848082, 0, -0.52986556, 0, 1.0000004, 0, 0.52986556, 0, 0.848082, -0.29656458, 0, 0.15100712)
 
 [node name="Locker tippy11" parent="NavigationRegion3D/BreakRoom" unique_id=1597140254 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.613706, 0, 0.34577858, 0, 0.70441306, 0, -0.34577858, 0, -0.613706, -6.8092213, 0.082505584, -4.837779)
 
-[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy11" index="1" unique_id=999252070]
+[node name="Object001" parent="NavigationRegion3D/BreakRoom/Locker tippy11" index="1" unique_id=2026177363]
 transform = Transform3D(0.8418917, 0, -0.5396465, 0, 1.0000001, 0, 0.5396465, 0, 0.8418917, -0.2924776, 0, 0.16479063)
 
 [node name="Locker tippy12" parent="NavigationRegion3D/BreakRoom" unique_id=1764203829 instance=ExtResource("31_ubo3j")]
@@ -1571,19 +1592,19 @@ mesh = SubResource("BoxMesh_7olkn")
 [node name="Small Lockers" parent="NavigationRegion3D/BreakRoom" unique_id=461790548 instance=ExtResource("33_kmdca")]
 transform = Transform3D(0.018655129, 0, -0.99982595, 0, 1, 0, 0.99982595, 0, 0.018655129, 6.5108852, 0, -0.51410866)
 
-[node name="small locker top door" parent="NavigationRegion3D/BreakRoom/Small Lockers" index="3" unique_id=1243888929]
+[node name="small locker top door" parent="NavigationRegion3D/BreakRoom/Small Lockers" index="3" unique_id=1945178069]
 transform = Transform3D(0.025108924, 0, 0.0038342762, 0, 0.025400003, 0, -0.0038342762, 0, 0.025108924, 0.0451746, 1.1271214, 0.067685604)
 
-[node name="small locker middle_001" parent="NavigationRegion3D/BreakRoom/Small Lockers" index="4" unique_id=1156565409]
+[node name="small locker middle_001" parent="NavigationRegion3D/BreakRoom/Small Lockers" index="4" unique_id=565507515]
 transform = Transform3D(0.010294408, 0, 0.023220362, 0, 0.025400003, 0, -0.023220362, 0, 0.010294408, -0.24656153, 0.56295377, 0.10141468)
 
-[node name="small locker bottom door" parent="NavigationRegion3D/BreakRoom/Small Lockers" index="5" unique_id=1298250424]
+[node name="small locker bottom door" parent="NavigationRegion3D/BreakRoom/Small Lockers" index="5" unique_id=1480814953]
 transform = Transform3D(0.010980318, 0, -0.005020365, 0, 0.012073585, 0, 0.005020365, 0, 0.010980318, -0.28168058, 0.11363543, -0.081498146)
 
 [node name="Small Lockers8" parent="NavigationRegion3D/BreakRoom" unique_id=161297905 instance=ExtResource("33_kmdca")]
 transform = Transform3D(-0.99999243, 0, 0.0038785525, 0, 1, 0, -0.0038785525, 0, -0.99999243, 2.3232331, -0.03344506, 1.3726912)
 
-[node name="small locker middle_001" parent="NavigationRegion3D/BreakRoom/Small Lockers8" index="4" unique_id=1156565409]
+[node name="small locker middle_001" parent="NavigationRegion3D/BreakRoom/Small Lockers8" index="4" unique_id=565507515]
 transform = Transform3D(0.020726774, 0, 0.014682001, 0, 0.025400003, 0, -0.014682001, 0, 0.020726774, -0.05045533, 0.56295377, 0.14876747)
 
 [node name="Small Lockers4" parent="NavigationRegion3D/BreakRoom" unique_id=499351396 instance=ExtResource("33_kmdca")]
@@ -1595,10 +1616,10 @@ transform = Transform3D(-0.72338706, 0, -0.69044274, 0, 1, 0, 0.69044274, 0, -0.
 [node name="Small Lockers6" parent="NavigationRegion3D/BreakRoom" unique_id=215484942 instance=ExtResource("33_kmdca")]
 transform = Transform3D(-0.97628653, 0, -0.21648237, 0, 1, 0, 0.21648237, 0, -0.97628653, -6.7949753, 0, -8.712513)
 
-[node name="small locker top door" parent="NavigationRegion3D/BreakRoom/Small Lockers6" index="3" unique_id=1243888929]
+[node name="small locker top door" parent="NavigationRegion3D/BreakRoom/Small Lockers6" index="3" unique_id=1945178069]
 transform = Transform3D(0.022136647, 0, 0.012455092, 0, 0.025400003, 0, -0.012455092, 0, 0.022136647, -0.035063267, 1.1271214, 0.056199074)
 
-[node name="small locker bottom door" parent="NavigationRegion3D/BreakRoom/Small Lockers6" index="5" unique_id=1298250424]
+[node name="small locker bottom door" parent="NavigationRegion3D/BreakRoom/Small Lockers6" index="5" unique_id=1480814953]
 transform = Transform3D(0.008092372, 0, 0.008960188, 0, 0.012073585, 0, -0.008960188, 0, 0.008092372, -0.3655882, 0.11363543, 0.09563017)
 
 [node name="Small Lockers7" parent="NavigationRegion3D/BreakRoom" unique_id=1688744581 instance=ExtResource("33_kmdca")]
@@ -1607,13 +1628,13 @@ transform = Transform3D(-0.06041369, 0, 0.9981735, 0, 1, 0, -0.9981735, 0, -0.06
 [node name="Small Lockers2" parent="NavigationRegion3D/BreakRoom" unique_id=1378622699 instance=ExtResource("33_kmdca")]
 transform = Transform3D(0.9980602, 0, -0.062256224, 0, 1, 0, 0.062256224, 0, 0.9980602, 11.909431, 0, -1.7087417)
 
-[node name="small locker top door" parent="NavigationRegion3D/BreakRoom/Small Lockers2" index="3" unique_id=1243888929]
+[node name="small locker top door" parent="NavigationRegion3D/BreakRoom/Small Lockers2" index="3" unique_id=1945178069]
 transform = Transform3D(0.020118492, 0, -0.015505044, 0, 0.025400003, 0, 0.015505044, 0, 0.020118492, -0.14455986, 1.1271214, 0.17590475)
 
 [node name="Small Lockers3" parent="NavigationRegion3D/BreakRoom" unique_id=677893923 instance=ExtResource("33_kmdca")]
 transform = Transform3D(0.9980602, 0, -0.062256224, -0.009588755, 0.9880676, -0.15372205, 0.06151336, 0.15402082, 0.986151, 11.909431, 0.014679372, -2.5638292)
 
-[node name="small locker middle_001" parent="NavigationRegion3D/BreakRoom/Small Lockers3" index="4" unique_id=1156565409]
+[node name="small locker middle_001" parent="NavigationRegion3D/BreakRoom/Small Lockers3" index="4" unique_id=565507515]
 transform = Transform3D(0.015713597, 0.0029760108, 0.019732883, -0.003159573, 0.025170205, -0.0012800251, -0.019704334, -0.0016627444, 0.01594161, -0.2144785, 0.5490414, 0.14039636)
 
 [node name="Toolbox and Table" parent="NavigationRegion3D/BreakRoom" unique_id=182250747 instance=ExtResource("34_02vyw")]
@@ -1893,7 +1914,7 @@ mesh = SubResource("ArrayMesh_qgd4t")
 transform = Transform3D(-0.4837753, 0, -3.6683446e-08, 0, 0.658351, 0, 3.887321e-08, 0, -0.38568056, 0.7899945, 0.95003736, -0.056305647)
 
 [node name="Tippy Open Close Sign2" parent="NavigationRegion3D/BackRoom/counter" unique_id=56236514 instance=ExtResource("48_qboto")]
-transform = Transform3D(2.1482568, -0.6565139, 0.056880757, 0.65628374, 2.1490092, 0.01737678, -0.059475817, 6.066348e-08, 2.246267, 0.38514614, 1.5209296, 0.12744448)
+transform = Transform3D(2.9989889, -0.91650033, 0.07940612, 0.9161788, 3.0000389, 0.024258165, -0.08302885, 8.468685e-08, 3.135812, 1.4710407, 1.2638192, 5.936922)
 
 [node name="filling cabinets" parent="NavigationRegion3D/BackRoom" unique_id=1645398128 instance=ExtResource("46_a3sl0")]
 transform = Transform3D(-1.22, 0, -1.8421488e-07, 0, 1.22, 0, 1.8421488e-07, 0, -1.22, 3.8309226, 0.05262039, 0.24210644)
@@ -1985,7 +2006,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="NavigationRegion3D/Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701111, -0.00016215755, -0.9999591, 1.0260139e-07, 1, -0.00016215091, 0.9999591, -1.01539825e-08, 0.0005701111, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701104, -0.00016215755, -0.99995786, 1.0260126e-07, 1, -0.00016215071, 0.99995786, -1.01539825e-08, 0.0005701104, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="NavigationRegion3D/Exterior/CarSpawner" unique_id=1089029611]
@@ -2099,86 +2120,86 @@ mesh = ExtResource("69_grppk")
 [node name="PSX Storage Shelves Cardboard Boxes" parent="NavigationRegion3D" unique_id=836022883 instance=ExtResource("71_a4lwu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1183012, 0, 10.88344)
 
-[node name="Cardboard_box_01_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 776343390) index="0" unique_id=157563349]
+[node name="Cardboard_box_01_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 355313746) index="0" unique_id=436619308]
 transform = Transform3D(-0.64107496, -0.7674783, -2.7447166e-07, 0.7674783, -0.64107496, -5.8689415e-07, 2.7447166e-07, -5.8689415e-07, 1, 1.9024861, 3.8909721, 0.055455238)
 
-[node name="Cardboard_box_01_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 776343390) index="1" unique_id=1428772810]
+[node name="Cardboard_box_01_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 355313746) index="1" unique_id=1428772810]
 transform = Transform3D(-0.9539966, 0.2998175, 1.07223116e-07, -0.29981756, -0.95399654, -6.9880366e-07, -1.0722315e-07, -6.9880366e-07, 1, 0.19560862, 8.295387, 0.05545667)
 mesh = SubResource("ArrayMesh_omxm3")
 
-[node name="Cardboard_box_02_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 1221266540) index="0" unique_id=80524039]
+[node name="Cardboard_box_02_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 897375267) index="0" unique_id=817159088]
 transform = Transform3D(0.039124183, 0.9992343, 3.5735405e-07, -0.9992343, 0.039124187, -3.4363597e-07, -3.5735405e-07, -3.4363606e-07, 1, 0.8013885, 5.534722, 0.042485207)
 
-[node name="Cardboard_box_02_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 1221266540) index="1" unique_id=1690710154]
+[node name="Cardboard_box_02_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 897375267) index="1" unique_id=1690710154]
 transform = Transform3D(0.9385944, 0.3450223, 1.2338955e-07, -0.3450223, 0.93859446, -2.1960375e-08, -1.2338957e-07, -2.196063e-08, 1, -3.6323795, 9.918352, 0.042486668)
 mesh = SubResource("ArrayMesh_kmdca")
 
-[node name="Cardboard_box_03_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 608845298) index="0" unique_id=458831185]
+[node name="Cardboard_box_03_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 462446207) index="0" unique_id=1858985617]
 transform = Transform3D(0.70129263, -0.7128735, -2.5494344e-07, 0.7128735, 0.70129263, -1.06826036e-07, 2.5494344e-07, -1.06826036e-07, 1, -0.7213445, 3.24362, 1.1622906e-06)
 
-[node name="Cardboard_box_03_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 608845298) index="1" unique_id=141808257]
+[node name="Cardboard_box_03_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 462446207) index="1" unique_id=141808257]
 transform = Transform3D(0.28142878, -0.9595821, -3.4317333e-07, 0.9595821, 0.2814288, -2.5698102e-07, 3.4317327e-07, -2.5698105e-07, 1, -0.7697568, 3.1488047, 0.60323465)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 608845298) index="2" unique_id=1458681459]
+[node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 462446207) index="2" unique_id=1458681459]
 transform = Transform3D(0.40185183, -0.91570467, -3.2748147e-07, 0.9157048, 0.40185183, -2.1391443e-07, 3.274816e-07, -2.1391442e-07, 1, 0.15594602, 6.742078, 2.2947788e-06)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 608845298) index="3" unique_id=161891677]
+[node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 462446207) index="3" unique_id=161891677]
 transform = Transform3D(-0.078307875, -0.9969292, -3.5652968e-07, 0.9969292, -0.078307934, -3.8563286e-07, 3.565298e-07, -3.8563314e-07, 1, 0.14442396, 6.636239, 0.6032358)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_04_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 437881794) index="0" unique_id=422287865]
+[node name="Cardboard_box_04_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 515508990) index="0" unique_id=1555360839]
 transform = Transform3D(0.62599075, 0.7798305, 2.7888913e-07, -0.7798306, 0.62599075, -1.3375607e-07, -2.7888916e-07, -1.3375603e-07, 1, -1.208724, 4.6413646, 0.05188881)
 
-[node name="Cardboard_box_04_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 437881794) index="1" unique_id=1898910109]
+[node name="Cardboard_box_04_Storage_Shelves_1" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 515508990) index="1" unique_id=1898910109]
 transform = Transform3D(0.9596605, -0.28116187, -1.0055139e-07, 0.28116187, 0.95966035, -1.44265755e-08, 1.0055138e-07, -1.4426462e-08, 1, -4.266979, 8.012367, 0.051889822)
 mesh = SubResource("ArrayMesh_f2c6s")
 
-[node name="Storage_Shelves_01_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 2053939188) index="0" unique_id=86536969]
+[node name="Storage_Shelves_01_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 247897693) index="0" unique_id=1159472652]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 6.285015, 3.199945, 0.047309875)
 
-[node name="Storage_Shelves_01_Storage_Shelves_0_002" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 2053939188) index="1" unique_id=2106907811]
+[node name="Storage_Shelves_01_Storage_Shelves_0_002" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 247897693) index="1" unique_id=2003977398]
 transform = Transform3D(0.014316622, -0.99989754, -3.5759126e-07, 0.99989754, 0.014316622, -3.5250787e-07, 3.5759126e-07, -3.5250804e-07, 1, 3.040893, 3.2777905, 0.04502797)
 
-[node name="Storage_Shelves_04_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 998385226) index="0" unique_id=295516471]
+[node name="Storage_Shelves_04_Storage_Shelves_0" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 985293672) index="0" unique_id=252083231]
 transform = Transform3D(-0.29616085, -0.9551381, -3.41584e-07, 0.9551381, -0.29616085, -4.6354324e-07, 3.41584e-07, -4.635433e-07, 1, -7.191148, 6.9717093, 0.0063648224)
 
-[node name="Storage_Shelves_04_Storage_Shelves_0_001" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 998385226) index="1" unique_id=1048064264]
+[node name="Storage_Shelves_04_Storage_Shelves_0_001" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 985293672) index="1" unique_id=716428433]
 transform = Transform3D(-0.99926764, -0.038264617, -1.3684494e-08, 0.038264617, -0.99926764, -7.1499386e-07, 1.3684494e-08, -7.149939e-07, 1, -2.2321305, 1.6594906, 0.05219078)
 
-[node name="Storage_Shelves_04_Storage_Shelves_0_002" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 998385226) index="2" unique_id=1375355156]
+[node name="Storage_Shelves_04_Storage_Shelves_0_002" type="MeshInstance3D" parent="NavigationRegion3D/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 985293672) index="2" unique_id=1375355156]
 transform = Transform3D(-4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, 2.842171e-14, 0, 1, -3.9124968, 6.1658907, 0.05219245)
 mesh = SubResource("ArrayMesh_vn30m")
 
 [node name="Mugs Milk Sugar Light" parent="NavigationRegion3D" unique_id=1868565184 instance=ExtResource("72_omxm3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0456014, 0.65221274, 9.196728)
 
-[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="0" unique_id=1763112120]
+[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="0" unique_id=805875128]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.38500035, 0.13452095, -0.055408478)
 
-[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="1" unique_id=1010691540]
+[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="1" unique_id=1810617622]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
-[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="2" unique_id=1549660741]
+[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="2" unique_id=1311609339]
 transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
 
-[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="3" unique_id=2115144948]
+[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="3" unique_id=506781111]
 transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
 
-[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="4" unique_id=486538328]
+[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="4" unique_id=1902759924]
 transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
 
-[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="5" unique_id=1072451441]
+[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="5" unique_id=154749165]
 transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
 
-[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="6" unique_id=631044253]
+[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="6" unique_id=1827624505]
 transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
 
-[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="7" unique_id=823914889]
+[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="7" unique_id=1053607423]
 transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
 
-[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="8" unique_id=393080562]
+[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light" index="8" unique_id=1232060213]
 transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
 
 [node name="Milk Var 4" type="MeshInstance3D" parent="NavigationRegion3D/Mugs Milk Sugar Light" unique_id=297439425]
@@ -2208,31 +2229,31 @@ mesh = SubResource("ArrayMesh_dx1qb")
 [node name="Mugs Milk Sugar Light3" parent="NavigationRegion3D" unique_id=136204654 instance=ExtResource("72_omxm3")]
 transform = Transform3D(-0.080434404, 0, -0.9967599, 0, 1, 0, 0.9967599, 0, -0.080434404, -0.41714126, 0.645064, 7.394346)
 
-[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="0" unique_id=1763112120]
+[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="0" unique_id=805875128]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.38500035, 0.13452095, -0.055408478)
 
-[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="1" unique_id=1010691540]
+[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="1" unique_id=1810617622]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
-[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="2" unique_id=1549660741]
+[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="2" unique_id=1311609339]
 transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
 
-[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="3" unique_id=2115144948]
+[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="3" unique_id=506781111]
 transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
 
-[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="4" unique_id=486538328]
+[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="4" unique_id=1902759924]
 transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
 
-[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="5" unique_id=1072451441]
+[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="5" unique_id=154749165]
 transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
 
-[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="6" unique_id=631044253]
+[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="6" unique_id=1827624505]
 transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
 
-[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="7" unique_id=823914889]
+[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="7" unique_id=1053607423]
 transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
 
-[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="8" unique_id=393080562]
+[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light3" index="8" unique_id=1232060213]
 transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
 
 [node name="Milk Var 4" type="MeshInstance3D" parent="NavigationRegion3D/Mugs Milk Sugar Light3" unique_id=1033015471]
@@ -2262,31 +2283,31 @@ mesh = SubResource("ArrayMesh_dx1qb")
 [node name="Mugs Milk Sugar Light4" parent="NavigationRegion3D" unique_id=1638527127 instance=ExtResource("72_omxm3")]
 transform = Transform3D(-0.080434404, 0, -0.9967599, 0, 1, 0, 0.9967599, 0, -0.080434404, -3.5392356, 0.6487255, 4.562451)
 
-[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="0" unique_id=1763112120]
+[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="0" unique_id=805875128]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.38500035, 0.13452095, -0.055408478)
 
-[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="1" unique_id=1010691540]
+[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="1" unique_id=1810617622]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
-[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="2" unique_id=1549660741]
+[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="2" unique_id=1311609339]
 transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
 
-[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="3" unique_id=2115144948]
+[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="3" unique_id=506781111]
 transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
 
-[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="4" unique_id=486538328]
+[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="4" unique_id=1902759924]
 transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
 
-[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="5" unique_id=1072451441]
+[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="5" unique_id=154749165]
 transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
 
-[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="6" unique_id=631044253]
+[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="6" unique_id=1827624505]
 transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
 
-[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="7" unique_id=823914889]
+[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="7" unique_id=1053607423]
 transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
 
-[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="8" unique_id=393080562]
+[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light4" index="8" unique_id=1232060213]
 transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
 
 [node name="Milk Var 5" type="MeshInstance3D" parent="NavigationRegion3D/Mugs Milk Sugar Light4" unique_id=1235414067]
@@ -2336,31 +2357,31 @@ mesh = SubResource("ArrayMesh_dx1qb")
 [node name="Mugs Milk Sugar Light5" parent="NavigationRegion3D" unique_id=2114931379 instance=ExtResource("72_omxm3")]
 transform = Transform3D(0.30591875, 0, -0.9520577, 0, 1, 0, 0.9520577, 0, 0.30591875, -6.939397, 0.6052749, 3.7626677)
 
-[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="0" unique_id=1763112120]
+[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="0" unique_id=805875128]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.38500035, 0.13452095, -0.055408478)
 
-[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="1" unique_id=1010691540]
+[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="1" unique_id=1810617622]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
-[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="2" unique_id=1549660741]
+[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="2" unique_id=1311609339]
 transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
 
-[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="3" unique_id=2115144948]
+[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="3" unique_id=506781111]
 transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
 
-[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="4" unique_id=486538328]
+[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="4" unique_id=1902759924]
 transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, 0.053613186, 0.040753245, -0.059288025)
 
-[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="5" unique_id=1072451441]
+[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="5" unique_id=154749165]
 transform = Transform3D(-0.07877726, -0.00037020713, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.1166929, 0.027962923, -0.120069504)
 
-[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="6" unique_id=631044253]
+[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="6" unique_id=1827624505]
 transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, 0.18258202, 0.040753245, -0.13962173)
 
-[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="7" unique_id=823914889]
+[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="7" unique_id=1053607423]
 transform = Transform3D(-0.18595545, 0, 0.12665144, 0, 0.23734608, 0, -0.11732929, 0, -0.20073014, -0.33116138, 0.15272272, -0.0737772)
 
-[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="8" unique_id=393080562]
+[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light5" index="8" unique_id=1232060213]
 transform = Transform3D(-0.12031739, 0, -0.06518892, 0, 0.145319, 0, 0.060390707, 0, -0.12987696, -0.5615889, 0.08621502, -0.05301094)
 
 [node name="Milk Var 5" type="MeshInstance3D" parent="NavigationRegion3D/Mugs Milk Sugar Light5" unique_id=1585292267]
@@ -2410,31 +2431,31 @@ mesh = SubResource("ArrayMesh_dx1qb")
 [node name="Mugs Milk Sugar Light2" parent="NavigationRegion3D" unique_id=1346052769 instance=ExtResource("72_omxm3")]
 transform = Transform3D(0.08895593, 0, 0.9960356, 0, 1, 0, -0.9960356, 0, 0.08895593, -3.5258632, 0.65221274, 7.8532343)
 
-[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="0" unique_id=1763112120]
+[node name="Milk Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="0" unique_id=805875128]
 transform = Transform3D(0.07061203, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.38500023, 0.6359428, -0.055408478)
 
-[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="1" unique_id=1010691540]
+[node name="Milk Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="1" unique_id=1810617622]
 transform = Transform3D(0.06862992, 0, -0.01872785, 0, 0.1371508, 0, 0.022487663, 0, 0.057155386, 0.57964563, 0.6359428, -0.11547375)
 
-[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="2" unique_id=1549660741]
+[node name="Milk Var 3" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="2" unique_id=1311609339]
 transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
 
-[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="3" unique_id=2115144948]
+[node name="Milk Var 3_001" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="3" unique_id=506781111]
 transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.057574805, 0.96295357, 1.5652853, -0.10199165)
 
-[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="4" unique_id=486538328]
+[node name="Mug Empty" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="4" unique_id=1902759924]
 transform = Transform3D(0.085286506, 0, -0.066377215, 0, 0.108072765, 0, 0.066377215, 0, 0.085286506, -0.29926586, 0.040753245, -0.064389944)
 
-[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="5" unique_id=1072451441]
+[node name="Mug Empty_001" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="5" unique_id=154749165]
 transform = Transform3D(-0.07877727, -0.00037020716, -0.07398467, 0.00050787337, -0.10807159, 0, -0.07398385, -0.0003476809, 0.07877812, -0.50250244, 0.027962923, -0.08561301)
 
-[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="6" unique_id=631044253]
+[node name="Mug Empty_005" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="6" unique_id=1827624505]
 transform = Transform3D(0.08615814, 0, 0.065241836, 0, 0.108072765, 0, -0.065241836, 0, 0.08615814, -0.019182205, 0.040753245, -0.1216023)
 
-[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="7" unique_id=823914889]
+[node name="Sugar Var 1" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="7" unique_id=1053607423]
 transform = Transform3D(-0.18595546, 0, 0.12665145, 0, 0.23734608, 0, -0.11732931, 0, -0.20073014, -0.3311615, 1.1330041, -0.07377696)
 
-[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="8" unique_id=393080562]
+[node name="Sugar Var 2" parent="NavigationRegion3D/Mugs Milk Sugar Light2" index="8" unique_id=1232060213]
 transform = Transform3D(-0.1203174, 0, -0.06518892, 0, 0.145319, 0, 0.06039071, 0, -0.12987696, -0.5615883, 1.0675341, -0.05301094)
 
 [node name="Milk Var 4" type="MeshInstance3D" parent="NavigationRegion3D/Mugs Milk Sugar Light2" unique_id=2112853632]
@@ -2449,6 +2470,19 @@ mesh = SubResource("ArrayMesh_ev8bc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor" unique_id=1490711311]
 shape = SubResource("BoxShape3D_mjix0")
+
+[node name="Bean Buddy" type="Sprite3D" parent="." unique_id=342906632]
+transform = Transform3D(0.15900739, 0, 0, 0, 0.15900743, 0, 0, 0, 0.15900739, -0.3887223, 1.7761464, -8.08975)
+material_override = SubResource("StandardMaterial3D_ala11")
+texture = ExtResource("84_yhys1")
+
+[node name="Tippy coffee" type="Sprite3D" parent="." unique_id=1912804920]
+transform = Transform3D(0.15900742, 0, 0, 0, 0.15900739, 0, 0, 0, 0.15900742, 1.4539151, 1.8199497, -7.9463954)
+material_override = SubResource("StandardMaterial3D_li8ef")
+texture = ExtResource("85_tx4o1")
+
+[node name="Tippy Standee" parent="." unique_id=1708982728 instance=ExtResource("84_pv1ha")]
+transform = Transform3D(-0.6698514, 0, -0.4430705, 0, 0.80312663, 0, 0.4430705, 0, -0.6698514, 7.4237614, 0.16133678, -0.49727488)
 
 [editable path="NavigationRegion3D/CustomerArea/MediumLights"]
 [editable path="NavigationRegion3D/CustomerArea/glass window"]

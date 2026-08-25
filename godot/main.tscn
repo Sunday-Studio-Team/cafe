@@ -28,8 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://k0xp76mgx728" path="res://minigames/arrows/arrows_minigame.tscn" id="20_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://bfyio22arllmm" path="res://minigames/typing/typing_minigame.tscn" id="20_d13ii"]
 [ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
-[ext_resource type="Texture2D" uid="uid://cp0ia1aqch04a" path="res://Assets/signs/Bean Buddy.png" id="22_k08w7"]
-[ext_resource type="Texture2D" uid="uid://c67nrt1uma0nc" path="res://Assets/signs/Tippy with coffee.png" id="23_hp4ct"]
 [ext_resource type="PackedScene" uid="uid://boy2yhnykffp7" path="res://minigames/ingredients_refill/ingredients_refill_minigame.tscn" id="23_lswn8"]
 [ext_resource type="Script" uid="uid://cpy5mfle7bldo" path="res://ingredient_spawner.gd" id="23_ppx11"]
 [ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://environment/whiteboard/whiteboard.tscn" id="24_f1p13"]
@@ -246,7 +244,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_bvlej"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fd6dt"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -257,7 +255,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ycw8e"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gttkg"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -268,7 +266,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2gd4m"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hiwvf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -279,7 +277,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_61bol"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ed5de"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -288,14 +286,6 @@ emission_enabled = true
 emission = Color(1, 0.29000002, 0.29000002, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmna6"]
-transparency = 1
-albedo_texture = ExtResource("22_k08w7")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n35f"]
-transparency = 1
-albedo_texture = ExtResource("23_hp4ct")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
@@ -680,7 +670,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_bvlej")
+texture = SubResource("ViewportTexture_fd6dt")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -693,7 +683,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ycw8e")
+texture = SubResource("ViewportTexture_gttkg")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -710,7 +700,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_2gd4m")
+texture = SubResource("ViewportTexture_hiwvf")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -727,7 +717,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_61bol")
+texture = SubResource("ViewportTexture_ed5de")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -771,26 +761,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.40
 
 [node name="Menu" parent="." unique_id=1811682227 instance=ExtResource("70_g5xqc")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
-
-[node name="Bean Buddy" type="Sprite3D" parent="." unique_id=10211024]
-transform = Transform3D(0.1821014, 0, -0.077700235, 0, 0.19798547, 0, 0.077700235, 0, 0.1821014, 3.082502, 1.5668623, -3.8048937)
-material_override = SubResource("StandardMaterial3D_kmna6")
-texture = ExtResource("22_k08w7")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Bean Buddy" unique_id=980021160]
-transform = Transform3D(5.0508757, 0, 2.3841858e-07, 0, 5.0508757, 0, -2.3841858e-07, 0, 5.0508757, 0.34821033, 0.037854195, 1.6773872)
-omni_range = 1.183
-omni_attenuation = -0.188
-
-[node name="Tippy coffee" type="Sprite3D" parent="." unique_id=1539656464]
-transform = Transform3D(0.19445059, 0, 0.03724536, 0, 0.19798544, 0, -0.03724536, 0, 0.19445059, -0.7189652, 1.6214033, -3.9904442)
-material_override = SubResource("StandardMaterial3D_8n35f")
-texture = ExtResource("23_hp4ct")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Tippy coffee" unique_id=1324475470]
-transform = Transform3D(5.0508757, 0, 2.3841858e-07, 0, 5.0508757, 0, -2.3841858e-07, 0, 5.0508757, 0.34821033, 0.037854195, 1.6773872)
-omni_range = 1.183
-omni_attenuation = -0.188
 
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
@@ -945,6 +915,11 @@ offset = Vector2(0, -250)
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
+_eye_logo_red_texture = ExtResource("48_lwnsi")
+_eye_logo_texture = ExtResource("44_dfxmq")
+hammer = ExtResource("150_0bk8h")
+scrubber = ExtResource("50_jbvwl")
+whipped_cream = ExtResource("51_sn1fb")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
 profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
 customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
@@ -963,8 +938,6 @@ gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
 cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
-_eye_logo_red_texture = ExtResource("48_lwnsi")
-_eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
 alert_label = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/AlertText")
 shelf_item_ui = NodePath("HUD/ShelfItem")
@@ -999,9 +972,6 @@ current_item_icon = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon"
 item_cooldown_bar = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon/CooldownIndicator")
 use_item_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
-hammer = ExtResource("150_0bk8h")
-scrubber = ExtResource("50_jbvwl")
-whipped_cream = ExtResource("51_sn1fb")
 
 [node name="Crosshair" type="Control" parent="UI" unique_id=1676497832]
 layout_mode = 3
