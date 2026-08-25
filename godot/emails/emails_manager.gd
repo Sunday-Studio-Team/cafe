@@ -21,9 +21,9 @@ func _ready() -> void:
 	_delivered_emails_to_date = []
 	
 	# Needs to be added manually since can't be added to game resource bc it uses stats that are not initialized until after the game resource is loaded
-	if not Global.ai_improvement and current_day >= 3:
-		var email_day_3 = EmailDay3.new()
-		Global.emails_schedule.append(email_day_3)
+	# if not Global.ai_improvement and current_day >= 3:
+	# 	var email_day_3 = EmailDay3.new()
+	# 	Global.emails_schedule.append(email_day_3)
 		
 	## check for menu updates
 	if Global.drinks.any(func(d: Drink): return d.day_unlocked == current_day) and current_day > 1:
