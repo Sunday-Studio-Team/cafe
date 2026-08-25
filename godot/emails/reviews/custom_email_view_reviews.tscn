@@ -30,11 +30,13 @@ region = Rect2(225, 10, 600, 600)
 [node name="CustomEmailViewReviews" type="MarginContainer" unique_id=2126401690]
 custom_minimum_size = Vector2(916, 0)
 custom_maximum_size = Vector2(916, -1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -458.0
+offset_right = 458.0
+offset_bottom = 450.0
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_wx22x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1709141238]
@@ -69,9 +71,9 @@ theme_override_constants/margin_bottom = 15
 
 [node name="ReviewGrid" type="GridContainer" parent="VBoxContainer/PanelContainer2/MarginContainer" unique_id=1450173849]
 layout_mode = 2
+theme_override_constants/v_separation = 25
 
 [node name="ReviewContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1341324083]
-custom_minimum_size = Vector2(900, 0)
 propagate_maximum_size = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rtxfr")
@@ -98,14 +100,15 @@ texture = SubResource("AtlasTexture_rtxfr")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 22
 text = "@sexyusername1"
 horizontal_alignment = 1
 
 [node name="ReviewsNumber" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1159995025]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
 text = "★ 12 reviews"
 horizontal_alignment = 1
 
@@ -154,9 +157,9 @@ layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(5, 0)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 18
-text = "every time i come here they are out of toilet paper. 
+theme_override_font_sizes/normal_font_size = 25
+text = "Used to come here back when it was King of Comics. Had a great vibe, good community, music, and the baristas were always super accommodating - they even had great horchata, for a coffee shop. Of course, their menu can’t have any character anymore with these damn robots. Just completely robbed of personality.
 
-mid coffee. 
+I hope the previous owners are doing alright. The poor employee here looks so tired of cleaning up after the AI’s mistakes. When will these corporations realize that people go to cafes for the experience?
 "
 fit_content = true

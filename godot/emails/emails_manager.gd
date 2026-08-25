@@ -28,6 +28,9 @@ func _ready() -> void:
 	## check for menu updates
 	if Global.drinks.any(func(d: Drink): return d.day_unlocked == current_day) and current_day > 1:
 		Global.emails_schedule.append(MenuUpdateEmail.new())
+		
+	## get reviews
+	Global.emails_schedule.append(ReviewUpdateEmail.new())
 
 	if days_since_random >= 2: # Can't get random emails everyday or on first day
 		var min_random = 0.1
