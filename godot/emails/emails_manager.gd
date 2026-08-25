@@ -30,8 +30,11 @@ func _ready() -> void:
 		Global.emails_schedule.append(MenuUpdateEmail.new())
 		
 	## get reviews
-	Global.emails_schedule.append(ReviewUpdateEmail.new())
-
+	if current_day >= 2:
+		var review_count = randi_range(0, 4)
+		for i in range(review_count):
+			Global.emails_schedule.append(ReviewUpdateEmail.new())
+	
 	if days_since_random >= 2: # Can't get random emails everyday or on first day
 		var min_random = 0.1
 		for i in range(1, days_since_random): # More likely to get random emails the more days have passed
