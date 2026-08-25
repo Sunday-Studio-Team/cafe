@@ -247,12 +247,15 @@ region_rect = Rect2(0, 0, 2679, 1817)
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=1547774346]
 stream = SubResource("AudioStreamRandomizer_l8ovb")
 volume_db = -5.0
+bus = &"MinigameMusic"
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=980615523]
 stream = SubResource("AudioStreamRandomizer_0ffxp")
 volume_db = -5.0
+bus = &"MinigameMusic"
 
 [node name="DrumLoop" type="AudioStreamPlayer" parent="." unique_id=223541811]
 stream = ExtResource("53_xql7b")
 volume_db = -15.0
 autoplay = true
+bus = &"MinigameMusic"
