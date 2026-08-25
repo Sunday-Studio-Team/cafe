@@ -203,15 +203,22 @@
 [ext_resource type="Resource" uid="uid://dajvlm1j5ohxx" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_used.tres" id="173_nkmqd"]
 [ext_resource type="Resource" uid="uid://dnrewvg707g00" path="res://voice_lines/resources/tutorial/voice_line_tutorial_refill_machine.tres" id="174_4b624"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
-[ext_resource type="AudioStream" uid="uid://da3xxh2xhpf1o" path="res://audio/music/customer_area_music.mp3" id="182_suf1q"]
 [ext_resource type="Resource" uid="uid://4jj3oa6b7fy2" path="res://voice_lines/resources/tutorial/voice_line_tutorial_remake_drink.tres" id="175_0li47"]
 [ext_resource type="Resource" uid="uid://pxs6fxqjawk0" path="res://voice_lines/resources/tutorial/voice_line_tutorial_remaking_drink_1.tres" id="176_idhsh"]
 [ext_resource type="Resource" uid="uid://dto2rt8oijsht" path="res://voice_lines/resources/tutorial/voice_line_tutorial_remaking_drink_2.tres" id="177_piefl"]
 [ext_resource type="Resource" uid="uid://cstunk10h87b4" path="res://voice_lines/resources/tutorial/voice_line_tutorial_remaking_drink_3.tres" id="178_asb44"]
 [ext_resource type="Resource" uid="uid://c7sk7fujv60jd" path="res://voice_lines/resources/tutorial/voice_line_tutorial_remaking_drink_4.tres" id="179_v4ssx"]
 [ext_resource type="Resource" uid="uid://bdm7aae2ibhjh" path="res://voice_lines/resources/tutorial/voice_line_tutorial_remaking_drink_5.tres" id="180_ec14y"]
+[ext_resource type="AudioStream" uid="uid://da3xxh2xhpf1o" path="res://audio/music/customer_area_music.mp3" id="182_suf1q"]
 [ext_resource type="Resource" uid="uid://dcybv7qvu05aa" path="res://voice_lines/resources/tutorial/voice_line_tutorial_spill_cleaned_1.tres" id="183_q0hco"]
 [ext_resource type="Resource" uid="uid://b6kgsc5hpxy8c" path="res://voice_lines/resources/tutorial/voice_line_tutorial_spill_cleaned_2.tres" id="184_g65e0"]
+[ext_resource type="Resource" uid="uid://bcrm3nfbe1kr" path="res://voice_lines/resources/tutorial/voice_line_tutorial_help_desk_1.tres" id="208_fd6dt"]
+[ext_resource type="Resource" uid="uid://cq8rx2io4tcvp" path="res://voice_lines/resources/tutorial/voice_line_tutorial_help_desk_2.tres" id="209_gttkg"]
+[ext_resource type="Resource" uid="uid://br4o57me014rj" path="res://voice_lines/resources/tutorial/voice_line_tutorial_help_desk_3.tres" id="210_hiwvf"]
+[ext_resource type="Resource" uid="uid://5vj171smmmp2" path="res://voice_lines/resources/tutorial/voice_line_tutorial_help_desk_4.tres" id="211_ed5de"]
+[ext_resource type="Resource" uid="uid://cpme7hahrxude" path="res://voice_lines/resources/tutorial/voice_line_tutorial_help_desk_5.tres" id="212_e31mi"]
+[ext_resource type="Resource" uid="uid://dbfkd6h4kv81t" path="res://voice_lines/resources/tutorial/voice_line_tutorial_customer_helped_1.tres" id="213_mq14a"]
+[ext_resource type="Resource" uid="uid://wnkq2bg0qcuh" path="res://voice_lines/resources/tutorial/voice_line_tutorial_customer_helped_2.tres" id="214_yf6j3"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
 [ext_resource type="AudioStream" uid="uid://bxlwlieajscls" path="res://audio/time_start.mp3" id="223_ycw8e"]
 [ext_resource type="Script" uid="uid://djpemlgyywwcb" path="res://tutorial/tutorial_view.gd" id="225_gttkg"]
@@ -239,7 +246,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hp4ct"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_bvlej"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -250,7 +257,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_suf1q"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ycw8e"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -261,7 +268,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lxb2r"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2gd4m"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -272,7 +279,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ceu5l"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_61bol"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -544,7 +551,7 @@ bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
 bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_spill")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_help_desk", "_tutorial_vo_location_spill")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _pause_menu = NodePath("PauseMenu")
@@ -584,6 +591,7 @@ shift_start_sound = NodePath("ShiftStartSound")
 _tutorial_vo_location_start_shift = NodePath("StartShiftWhiteboard/TutorialStartShiftVoiceLineLocation")
 _tutorial_vo_location_machine_ui = NodePath("Machines/RightAreaRightMachine/TutorialMachineVoiceLineLocation")
 _tutorial_vo_location_ingredients_bag = NodePath("TutorialStoreRoomVoiceLineLocation")
+_tutorial_vo_location_help_desk = NodePath("CustomerHelpDesk/TutorialHelpDeskVoiceLineLocation")
 _tutorial_vo_location_spill = NodePath("Machines/RightAreaRightMachine/TutorialMachineSpillVoiceLineLocation")
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
@@ -672,7 +680,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_hp4ct")
+texture = SubResource("ViewportTexture_bvlej")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -685,7 +693,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_suf1q")
+texture = SubResource("ViewportTexture_ycw8e")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -702,7 +710,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_lxb2r")
+texture = SubResource("ViewportTexture_2gd4m")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -719,7 +727,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ceu5l")
+texture = SubResource("ViewportTexture_61bol")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -1869,7 +1877,7 @@ layer = 3
 
 [node name="VoiceLineSystem" type="Node" parent="SubtitlesCanvasLayer" unique_id=480311114 node_paths=PackedStringArray("_voice_line_no_location_player")]
 script = ExtResource("118_1slqb")
-_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct")])
+_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("213_mq14a"), ExtResource("214_yf6j3")])
 _voice_line_no_location_player = NodePath("../../VoiceLineNoLocationPlayer")
 
 [node name="TippyCalloutsManager" type="Node" parent="SubtitlesCanvasLayer/VoiceLineSystem" unique_id=120441579]

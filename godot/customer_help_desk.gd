@@ -1,6 +1,8 @@
 class_name CustomerHelpDesk
 extends Node3D
 
+signal new_desk_customer_arrived
+
 @export var _spot_for_customer: Marker3D
 @export var _start_of_customer_queue_marker: Marker3D
 @export var _end_of_customer_queue_marker: Marker3D
@@ -40,14 +42,23 @@ func add_customer_to_queue(new_customer: Customer) -> void:
 	_queued_desk_customers.append(new_customer)
 	_customer_queue_update_visuals()
 
+func has_active_customers() -> bool:
+	return _queued_desk_customers.size() > 0 or _desk_customer != null
+
 func _set_customer(new_customer: Customer) -> void:
 	_desk_customer = new_customer
 	if _desk_customer != null:
 		_desk_customer.wait_timed_out.connect(_on_customer_wait_timed_out)
 		await _desk_customer.move_to(_spot_for_customer.global_position)
-		_desk_customer.timer.wait_time = Stats.current.customer_wait_time_help_desk
-		_desk_customer.timer.start()
-		_desk_customer.waiting_indicator.show()
+		new_desk_customer_arrived.emit()
+		
+		# Set unlimited for tutorial day
+		if Global.day == 0:
+			pass
+		else:
+			_desk_customer.timer.wait_time = Stats.current.customer_wait_time_help_desk
+			_desk_customer.timer.start()
+			_desk_customer.waiting_indicator.show()
 		bell_sound.play()
 		_help_desk_interactable.visible = true
 	else:
