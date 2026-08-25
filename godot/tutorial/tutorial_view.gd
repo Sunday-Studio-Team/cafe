@@ -15,6 +15,7 @@ func open_tutorial() -> void:
 	_spawn_tutorial_screen_view()
 
 func hide_tutorial() -> void:
+	_close_tutorial_screen_view()
 	hide()
 
 func _close_tutorial_screen_view() -> void:
