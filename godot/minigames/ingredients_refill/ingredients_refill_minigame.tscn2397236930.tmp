@@ -15,17 +15,16 @@
 [ext_resource type="AudioStream" uid="uid://bihgduw5aijw7" path="res://audio/refill_minigame/gain_score/refill_gain_score_2.mp3" id="11_1nxwo"]
 [ext_resource type="Texture2D" uid="uid://dbogthwjhaq3y" path="res://minigames/ingredients_refill/bomb/bomb_effect.png" id="11_rw5dd"]
 [ext_resource type="AudioStream" uid="uid://dqpkl2k3ckoir" path="res://audio/refill_minigame/gain_score/refill_gain_score_3.mp3" id="12_aviex"]
-[ext_resource type="Texture2D" uid="uid://dvxkld1hq8dff" path="res://minigames/ingredients_refill/assets/Pot_fill.png" id="12_cuth0"]
 [ext_resource type="Texture2D" uid="uid://b0hgr4arboyh1" path="res://minigames/ingredients_refill/screw/effect.png" id="12_tq37f"]
 [ext_resource type="AudioStream" uid="uid://d1nu16s0rr1s2" path="res://audio/refill_minigame/gain_score/refill_gain_score_4.mp3" id="13_bjc5e"]
 [ext_resource type="Texture2D" uid="uid://g2hwa4l3tupk" path="res://minigames/ingredients_refill/golden/golden_effect.png" id="13_lrtnr"]
 [ext_resource type="Texture2D" uid="uid://dotca7dgjvwsn" path="res://minigames/ingredients_refill/assets/Pot.png" id="14_rw5dd"]
 [ext_resource type="Texture2D" uid="uid://bp33dnffbdc7i" path="res://minigames/ingredients_refill/assets/Lid.png" id="15_tq37f"]
-[ext_resource type="Texture2D" uid="uid://c6467b6csgjr2" path="res://minigames/ingredients_refill/assets/refill final.png" id="16_knrnr"]
+[ext_resource type="Texture2D" uid="uid://7fqf3ki5bbgb" path="res://minigames/ingredients_refill/assets/refill_background.png" id="16_knrnr"]
 [ext_resource type="Texture2D" uid="uid://bpd4fxj4nlu0n" path="res://minigames/ingredients_refill/assets/bag_no_bg.png" id="19_r7ncj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
-size = Vector2(177, 219)
+size = Vector2(244, 326)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ffxp"]
 size = Vector2(20, 350)
@@ -82,7 +81,7 @@ pour_point = NodePath("Bag/PourPoint")
 bean_spawn_timer = NodePath("BeanSpawnTimer")
 cup_area = NodePath("Cup/CupArea")
 cup_boundaries = NodePath("Cup/CupBoundaries")
-meter = NodePath("Cup/Sprite2D/TextureProgressBar")
+meter = NodePath("../Meter")
 bag = NodePath("Bag")
 bean_hit_glasss_sound = NodePath("Cup/BeanHitGlassSound")
 bag_shake_sound = NodePath("Bag/BagShakeSound")
@@ -101,36 +100,25 @@ visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
 [node name="Cup" type="CharacterBody2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1768243399]
 z_index = 2
 position = Vector2(900, 950)
-safe_margin = 0.01
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=241036928]
 position = Vector2(-138.6, -417.54)
-scale = Vector2(1.8, 1.8)
+scale = Vector2(0.18, 0.18)
 texture = ExtResource("14_rw5dd")
 
 [node name="Sprite2D2" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=1582177721]
 texture = ExtResource("15_tq37f")
 
 [node name="Sprite2D3" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=248355465]
-position = Vector2(68, 50)
-scale = Vector2(0.136, 0.136)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=1479620205]
-z_index = -1
-offset_right = 700.0
-offset_bottom = 500.0
-max_value = 1.0
-step = 0.01
-value = 1.0
-fill_mode = 3
-texture_progress = ExtResource("12_cuth0")
-texture_progress_offset = Vector2(-350, 40)
+position = Vector2(636.445, 358.04)
+scale = Vector2(1.355, 1.355)
+texture = ExtResource("10_r7ncj")
 
 [node name="CupArea" type="Area2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1016481044]
 position = Vector2(0, -180)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup/CupArea" unique_id=856955422]
-position = Vector2(-27.5, 36.5)
+position = Vector2(-26, 23)
 shape = SubResource("RectangleShape2D_vn1tu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1320358170]
@@ -168,8 +156,9 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
 
 [node name="BackgroundSprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1252123989]
-position = Vector2(911, 506)
-scale = Vector2(0.932, 0.932)
+visible = false
+position = Vector2(870, 669.965)
+scale = Vector2(0.275, 0.275)
 texture = ExtResource("16_knrnr")
 
 [node name="Bag" type="Node2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1716841124]
@@ -178,7 +167,7 @@ position = Vector2(1623.625, 158.56)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=2140708498]
 rotation = -1.1955506
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.06, 0.06)
 texture = ExtResource("19_r7ncj")
 
 [node name="PourPoint" type="Marker2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=1502659684]
