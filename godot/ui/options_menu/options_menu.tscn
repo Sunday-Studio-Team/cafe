@@ -125,12 +125,11 @@ theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_utl02")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_kx268")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_13qdw")
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 tab_0/title = "General"
 tab_1/title = "Keybinds"
 
 [node name="GeneralScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1617562027]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 metadata/_tab_index = 0
@@ -146,9 +145,6 @@ theme_override_constants/separation = 8
 layout_mode = 2
 option_name = "Graphics Preset"
 
-[node name="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView/MarginContainer/HBoxContainer" parent_id_path=PackedInt32Array(1434606385, 306176998) index="0" unique_id=1450870077]
-text = "Graphics Preset"
-
 [node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Crosshair"
@@ -158,6 +154,7 @@ layout_mode = 2
 option_name = "Motion Sickness"
 
 [node name="KeybindsScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1598742862]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 metadata/_tab_index = 1
@@ -210,5 +207,3 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_wakw5")
 text = "Save Settings"
-
-[editable path="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView"]
