@@ -2,30 +2,31 @@
 
 [ext_resource type="Script" uid="uid://wv5q3cynq6rb" path="res://minigames/ingredients_refill/ingredients_refill_minigame.gd" id="1_2efvg"]
 [ext_resource type="PackedScene" uid="uid://bbl1ykvtf1wot" path="res://minigames/ingredients_refill/coffee_bean.tscn" id="2_51asp"]
+[ext_resource type="Texture2D" uid="uid://duttrswast3t6" path="res://sprites/coffee_bag.png" id="3_51asp"]
 [ext_resource type="PackedScene" uid="uid://c6yjlm2dq0ooh" path="res://minigames/ingredients_refill/screw_coffee_bean.tscn" id="3_mev0o"]
 [ext_resource type="AudioStream" uid="uid://l86h8xt0qx7a" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_1.mp3" id="4_5i8lf"]
 [ext_resource type="PackedScene" uid="uid://bnsmlrlfh5qwi" path="res://minigames/ingredients_refill/golden_coffee_bean.tscn" id="4_jjgte"]
 [ext_resource type="AudioStream" uid="uid://cb10bwbw0dexy" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_2.mp3" id="5_j5bal"]
 [ext_resource type="PackedScene" uid="uid://c2puysinr51lx" path="res://minigames/ingredients_refill/bomb_coffee_bean.tscn" id="5_sdu15"]
+[ext_resource type="Texture2D" uid="uid://cs32g8qm3rrge" path="res://minigames/ingredients_refill/normal/facial.png" id="6_1gq61"]
 [ext_resource type="AudioStream" uid="uid://cptjbekcax0eo" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_3.mp3" id="6_47f3m"]
+[ext_resource type="Texture2D" uid="uid://cmqseeofmexsq" path="res://minigames/ingredients_refill/bomb/facial.png" id="7_1gq61"]
+[ext_resource type="Texture2D" uid="uid://bxs744l0liimn" path="res://minigames/ingredients_refill/normal/lid.png" id="7_knrnr"]
 [ext_resource type="AudioStream" uid="uid://cxroyv25hkhls" path="res://audio/refill_minigame/beans_collide_cup/bean_collides_cup_4.mp3" id="7_mx0ba"]
+[ext_resource type="Texture2D" uid="uid://b5uxeunieqn6w" path="res://minigames/ingredients_refill/screw/facial.png" id="8_knrnr"]
+[ext_resource type="Texture2D" uid="uid://cm1crcvevri1m" path="res://minigames/ingredients_refill/golden/golden_facial.png" id="9_cuth0"]
 [ext_resource type="AudioStream" uid="uid://cfyppjyltvho2" path="res://audio/refill_minigame/bag_shake_loop.wav" id="9_j5bal"]
 [ext_resource type="AudioStream" uid="uid://d3h2qcon3jj14" path="res://audio/refill_minigame/gain_score/refill_gain_score_1.mp3" id="10_5w3ak"]
 [ext_resource type="Texture2D" uid="uid://8peo7jc57x22" path="res://minigames/ingredients_refill/normal/effect.png" id="10_r7ncj"]
 [ext_resource type="AudioStream" uid="uid://bihgduw5aijw7" path="res://audio/refill_minigame/gain_score/refill_gain_score_2.mp3" id="11_1nxwo"]
 [ext_resource type="Texture2D" uid="uid://dbogthwjhaq3y" path="res://minigames/ingredients_refill/bomb/bomb_effect.png" id="11_rw5dd"]
 [ext_resource type="AudioStream" uid="uid://dqpkl2k3ckoir" path="res://audio/refill_minigame/gain_score/refill_gain_score_3.mp3" id="12_aviex"]
-[ext_resource type="Texture2D" uid="uid://dvxkld1hq8dff" path="res://minigames/ingredients_refill/assets/Pot_fill.png" id="12_cuth0"]
 [ext_resource type="Texture2D" uid="uid://b0hgr4arboyh1" path="res://minigames/ingredients_refill/screw/effect.png" id="12_tq37f"]
 [ext_resource type="AudioStream" uid="uid://d1nu16s0rr1s2" path="res://audio/refill_minigame/gain_score/refill_gain_score_4.mp3" id="13_bjc5e"]
 [ext_resource type="Texture2D" uid="uid://g2hwa4l3tupk" path="res://minigames/ingredients_refill/golden/golden_effect.png" id="13_lrtnr"]
-[ext_resource type="Texture2D" uid="uid://dotca7dgjvwsn" path="res://minigames/ingredients_refill/assets/Pot.png" id="14_rw5dd"]
-[ext_resource type="Texture2D" uid="uid://bp33dnffbdc7i" path="res://minigames/ingredients_refill/assets/Lid.png" id="15_tq37f"]
-[ext_resource type="Texture2D" uid="uid://c6467b6csgjr2" path="res://minigames/ingredients_refill/assets/refill final.png" id="16_knrnr"]
-[ext_resource type="Texture2D" uid="uid://bpd4fxj4nlu0n" path="res://minigames/ingredients_refill/assets/bag_no_bg.png" id="19_r7ncj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
-size = Vector2(177, 219)
+size = Vector2(244, 326)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ffxp"]
 size = Vector2(20, 350)
@@ -82,15 +83,15 @@ pour_point = NodePath("Bag/PourPoint")
 bean_spawn_timer = NodePath("BeanSpawnTimer")
 cup_area = NodePath("Cup/CupArea")
 cup_boundaries = NodePath("Cup/CupBoundaries")
-meter = NodePath("Cup/Sprite2D/TextureProgressBar")
+meter = NodePath("../Meter")
 bag = NodePath("Bag")
 bean_hit_glasss_sound = NodePath("Cup/BeanHitGlassSound")
 bag_shake_sound = NodePath("Bag/BagShakeSound")
 gain_score_sound = NodePath("../GainScoreSound")
-normal_face_sprite = ExtResource("14_rw5dd")
-bomb_face_sprite = ExtResource("14_rw5dd")
-screw_face_sprite = ExtResource("14_rw5dd")
-golden_face_sprite = ExtResource("14_rw5dd")
+normal_face_sprite = ExtResource("6_1gq61")
+bomb_face_sprite = ExtResource("7_1gq61")
+screw_face_sprite = ExtResource("8_knrnr")
+golden_face_sprite = ExtResource("9_cuth0")
 normal_visual_effect = ExtResource("10_r7ncj")
 bomb_visual_effect = ExtResource("11_rw5dd")
 screw_visual_effect = ExtResource("12_tq37f")
@@ -99,38 +100,24 @@ face_sprite = NodePath("Cup/Sprite2D")
 visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
 
 [node name="Cup" type="CharacterBody2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1768243399]
-z_index = 2
-position = Vector2(900, 950)
-safe_margin = 0.01
+z_index = 1
+position = Vector2(900, 1000)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=241036928]
-position = Vector2(-138.6, -417.54)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("14_rw5dd")
+position = Vector2(-40.71, -330.89)
+scale = Vector2(0.37, 0.37)
+texture = ExtResource("6_1gq61")
 
 [node name="Sprite2D2" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=1582177721]
-texture = ExtResource("15_tq37f")
+texture = ExtResource("7_knrnr")
 
 [node name="Sprite2D3" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=248355465]
-position = Vector2(68, 50)
-scale = Vector2(0.136, 0.136)
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport/IngredientsRefillMinigame/Cup/Sprite2D" unique_id=1479620205]
-z_index = -1
-offset_right = 700.0
-offset_bottom = 500.0
-max_value = 1.0
-step = 0.01
-value = 1.0
-fill_mode = 3
-texture_progress = ExtResource("12_cuth0")
-texture_progress_offset = Vector2(-350, 40)
 
 [node name="CupArea" type="Area2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1016481044]
 position = Vector2(0, -180)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup/CupArea" unique_id=856955422]
-position = Vector2(-27.5, 36.5)
+position = Vector2(-26, 23)
 shape = SubResource("RectangleShape2D_vn1tu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/IngredientsRefillMinigame/Cup" unique_id=1320358170]
@@ -167,22 +154,14 @@ position = Vector2(-31, 181)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
 
-[node name="BackgroundSprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1252123989]
-position = Vector2(911, 506)
-scale = Vector2(0.932, 0.932)
-texture = ExtResource("16_knrnr")
-
 [node name="Bag" type="Node2D" parent="SubViewport/IngredientsRefillMinigame" unique_id=1716841124]
-z_index = 1
-position = Vector2(1623.625, 158.56)
+position = Vector2(943, 74)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=2140708498]
-rotation = -1.1955506
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("19_r7ncj")
+texture = ExtResource("3_51asp")
 
 [node name="PourPoint" type="Marker2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=1502659684]
-position = Vector2(-95.21, 20.24)
+position = Vector2(-43, 227)
 
 [node name="BagShakeSound" type="AudioStreamPlayer2D" parent="SubViewport/IngredientsRefillMinigame/Bag" unique_id=966938843]
 stream = ExtResource("9_j5bal")
@@ -190,7 +169,7 @@ volume_db = -10.0
 autoplay = true
 
 [node name="BeanSpawnTimer" type="Timer" parent="SubViewport/IngredientsRefillMinigame" unique_id=1475975290]
-wait_time = 0.25
+wait_time = 0.4
 autostart = true
 
 [node name="Controls" type="RichTextLabel" parent="SubViewport/IngredientsRefillMinigame" unique_id=1008034931]

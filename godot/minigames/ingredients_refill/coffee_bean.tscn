@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bbl1ykvtf1wot"]
 
+[ext_resource type="Script" uid="uid://drt6mt6shf1t5" path="res://minigames/ingredients_refill/coffee_bean.gd" id="1_hjpyt"]
 [ext_resource type="Texture2D" uid="uid://d2cqpi0gkd51p" path="res://minigames/ingredients_refill/normal/coffee bean.png" id="1_qurre"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
@@ -7,6 +8,8 @@ radius = 25.0
 height = 80.0
 
 [node name="Bean" type="RigidBody2D" unique_id=68542228]
+continuous_cd = 2
+script = ExtResource("1_hjpyt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
 position = Vector2(-14.36, 93.335)
