@@ -3,7 +3,9 @@
 [ext_resource type="ArrayOccluder3D" uid="uid://buhtxtsyg56d0" path="res://cafe_environment_occluder3d.occ" id="1_5utbh"]
 [ext_resource type="PackedScene" uid="uid://dqlyv7lvq0eny" path="res://Assets/signs/Let's pay.glb" id="1_qok1s"]
 [ext_resource type="PackedScene" uid="uid://cd5pgbqeaiux7" path="res://Assets/signs/caife.tscn" id="2_5utbh"]
+[ext_resource type="PackedScene" uid="uid://dv57fp8p0wov2" path="res://Assets/signs/tippy_standee.tscn" id="2_ubo3j"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="3_a4lwu"]
+[ext_resource type="PackedScene" uid="uid://lb6ywv4xipoy" path="res://Assets/signs/beanny_balloons.tscn" id="3_qboto"]
 [ext_resource type="PackedScene" uid="uid://cja7slsposkuo" path="res://Assets/ceiling light 1/Modern Interior Ceiling Light.glb" id="4_j0jbx"]
 [ext_resource type="PackedScene" uid="uid://b7lkrbc1y0a24" path="res://Assets/ceiling light 1/Ceiling Lamps 3D Model.glb" id="5_omxm3"]
 [ext_resource type="Material" uid="uid://b3y3jl5x4gdij" path="res://environment/textures/green wall.tres" id="6_0jw1j"]
@@ -1134,6 +1136,12 @@ spot_angle = 85.99
 
 [node name="CustomerArea" type="Node3D" parent="." unique_id=337821655]
 
+[node name="tippyStandee" parent="CustomerArea" unique_id=715685936 instance=ExtResource("2_ubo3j")]
+transform = Transform3D(-0.7266058, 0, -0.68705475, 0, 1, 0, 0.68705475, 0, -0.7266058, 7.671765, 0.029327169, -0.69198245)
+
+[node name="beannyBalloons" parent="CustomerArea" unique_id=1141026165 instance=ExtResource("3_qboto")]
+transform = Transform3D(0.00094795227, 0, -0.9999995, 0, 1, 0, 0.9999995, 0, 0.00094795227, 7.412069, 1.2153206, -3.0306525)
+
 [node name="Let\'s pay" parent="CustomerArea" unique_id=579902610 instance=ExtResource("1_qok1s")]
 transform = Transform3D(0.66925824, 0.023472827, 0.59345686, -0.004180076, 0.8942547, -0.030656196, -0.5939061, 0.020156927, 0.6689675, -1.4813719, -0.25505653, -1.1161604)
 
@@ -1212,7 +1220,7 @@ material_override = ExtResource("6_0jw1j")
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D3" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=875601423]
-transform = Transform3D(-6.4395365e-09, 1.0490733e-08, 0.179, 0, -0.12, 1.5648677e-08, 0.14731942, 4.585645e-16, 7.8243385e-09, -5.993949, 1.4768955, 2.170809)
+transform = Transform3D(-6.4395365e-09, 1.0490733e-08, 0.179, 0, -0.12, 1.5648677e-08, 0.14731942, 4.585645e-16, 7.8243385e-09, -5.994649, 1.483751, 2.1705217)
 material_override = ExtResource("6_0jw1j")
 texture = ExtResource("7_ubo3j")
 
