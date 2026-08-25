@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b6nu4uyy37eec"]
+
+[ext_resource type="Script" uid="uid://d0nvmruok0eqg" path="res://voice_lines/subtitle_ui/subtitle_view.gd" id="1_gosrr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(0, 0, 0, 0.56078434)
+
+[node name="SubtitleView" type="PanelContainer" unique_id=1663114453 node_paths=PackedStringArray("_subtitle_label")]
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+script = ExtResource("1_gosrr")
+_subtitle_label = NodePath("MarginContainer/RichTextLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2103703653]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=494170942]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "Another day, another dollar! Another day, another dollar!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

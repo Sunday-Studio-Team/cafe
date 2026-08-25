@@ -15,7 +15,6 @@ extends Node
 @export var empty_star_texture: Texture
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
-@export var special_shifts: Array[SpecialShift]
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
 var player: Player
@@ -30,7 +29,7 @@ var hovered_interactable: Interactable:
 # max amount of items we can own
 var item_slots_amount: int
 var inspected_shelf_item: ShelfItem
-var main_scene: Node3D
+var main_scene: Main
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
@@ -59,7 +58,6 @@ var shift_time_remaining: float
 var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
-var tippy_voice_lines: Array[TippyVoiceLine]
 var daily_cafe_money := 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
@@ -106,7 +104,6 @@ var customer_sprites: Array[Texture]
 ## the sprites of customers that are in the cafe right now
 var customer_sprites_in_use: Array[Texture]
 var spill_sprites: Array[Texture]
-var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
@@ -154,16 +151,26 @@ var in_ui: bool:
 			return true
 		else:
 			return false
+# Remaking drink variables --
 var ordered_drink_to_remake: Drink
+var ordered_drink_customer: Customer
+# End remaking drink variables --
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
 #Active Items
 var equipped_item: Item = null
-#tutorial flags
+# Tutorial flags
+var tutorial_machine_used: bool = false
+var tutorial_drink_accepted: bool = false
+var tutorial_remake_button_pressed: bool = false
+var tutorial_drink_remade: bool = false
+var tutorial_ingredients_bag_got: bool = false
 var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
+# Voice Line System
+var voice_line_system: VoiceLineSystem
 
 
 func _ready() -> void:
@@ -179,7 +186,6 @@ func _ready() -> void:
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
-	tippy_voice_lines.assign(load_resources_from_folder(tippy_voice_path))
 
 
 # NOTE: these things in physics process instead of process for timing reasons

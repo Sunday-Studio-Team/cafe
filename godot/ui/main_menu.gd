@@ -21,7 +21,7 @@ func _ready() -> void:
 
 			load_main_scene(),
 	)
-
+	
 	tutorial_button.visible = SaveDataManager.save_data.finished_or_skipped_tutorial
 	tutorial_button.pressed.connect(
 		func():

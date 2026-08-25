@@ -3,6 +3,8 @@
 class_name Machine
 extends Node3D
 
+signal drink_prepared
+
 const BLAST_LAUNCH_MAGNITUDE: float = 20.0
 const REPAIR_MINIGAMES := ["Colors", "Arrows"]
 const MANUAL_DRINK_MINIGAMES := ["Captcha"]
@@ -60,8 +62,11 @@ const REFILL_MINIGAME := "Refill"
 @export var breakdown_sound: AudioStreamPlayer3D
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
+@export var airhorn_sound: AudioStreamPlayer
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
+
+
 
 var customer: Customer
 var queued_customers: Array[Customer]
@@ -87,10 +92,11 @@ func _ready() -> void:
 	Events.items_updated.connect(get_stats)
 
 	ingredients = Stats.current.machine_starting_ingredients
-	breakdown_timer.wait_time = timer.wait_time / 2 + randf_range(-1, 1)
+	breakdown_timer.wait_time = 0.5
 
 	accept_button.pressed.connect(
 		func():
+			Global.tutorial_drink_accepted = true
 			accept_order(false)
 	)
 	make_drink_button.pressed.connect(_on_remake_drink_button_pressed)
@@ -104,7 +110,8 @@ func _ready() -> void:
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
-	fix_machine_button.used_active_item.connect(on_active_item_used_machine)
+	fix_machine_button.used_active_item.connect(on_active_item_used_fix_machine)
+	gui_3d.interactable.used_active_item.connect(on_active_item_used)
 	spill_interactable.interacted.connect(_on_clean_spill)
 
 	ordered_drink_name_label.hide()
@@ -337,6 +344,11 @@ func machine_make_drink() -> void:
 	if not timer.is_stopped():
 		return
 
+	# something weird might have happened like we airhorned customer away
+	# during short delay just then so good to check this
+	if not customer:
+		return
+
 	# (i think) we emit this before returning because it starts the customer
 	# wait timer
 	Events.customer_started_order.emit(customer)
@@ -446,10 +458,6 @@ func machine_make_drink() -> void:
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
 
-	if Global.current_special_shift != null and Global.current_special_shift.name == "Critical Customers":
-		# If critical customers, halve the star rating gains.
-		order.star_rating_gain_for_remake /= 2.0
-
 	# Calculate star rating loss if accepted
 	if order.star_rating_gain_for_remake == 0.0:
 		order.star_rating_loss_if_accept = 0.0
@@ -488,8 +496,10 @@ func machine_make_drink() -> void:
 	)
 	# NOTE: experiment: commented out for now to simplify ui
 	#final_order_indicator.show()
-
+	
+	
 	waiting_for_response = true
+	drink_prepared.emit()
 	Events.order_completed.emit(customer)
 
 
@@ -515,6 +525,8 @@ func spill() -> void:
 
 
 func display_drink_score() -> void:
+	
+	
 	# these all automatically set the icon, colour, and score of each icon 
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
@@ -638,6 +650,7 @@ func refill() -> void:
 		machine_make_drink()
 
 
+
 func cancel_fix_minigame() -> void:
 	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
@@ -721,7 +734,7 @@ func break_down() -> void:
 	hum_sound.stop()
 
 
-func on_active_item_used_machine(item: Item):
+func on_active_item_used_fix_machine(item: Item):
 	if item == null:
 		return
 
@@ -730,6 +743,21 @@ func on_active_item_used_machine(item: Item):
 		Global.put_active_item_on_cooldown(item)
 		await Events.hammer_animation_hit
 		fix_machine(true)
+
+
+func on_active_item_used(item: Item):
+	if item == null:
+		return
+
+	if item.item_id == "airhorn":
+		if customer:
+			airhorn_sound.play()
+			customer.leave_store()
+			_set_customer(null)
+			waiting_for_response = false
+			order_breakdown.hide()
+
+			Global.put_active_item_on_cooldown(item)
 
 
 func _on_clean_spill() -> void:
@@ -757,13 +785,16 @@ func _on_remake_drink_button_pressed() -> void:
 		no_ingredients_warning.show()
 		await get_tree().create_timer(0.5, false).timeout
 		no_ingredients_warning.hide()
-
+	
 	Events.minigame_end.connect(_on_remade_drink)
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Events.force_close_minigame.connect(_on_force_close_minigame)
 	Global.ordered_drink_to_remake = order.ordered_drink
+	Global.ordered_drink_customer = customer
 	Events.minigame_active.emit(MANUAL_DRINK_MINIGAMES.pick_random())
 	Events.order_remaking_drink.emit()
+	
+	Global.tutorial_remake_button_pressed = true
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
@@ -796,6 +827,7 @@ func _on_remade_drink() -> void:
 	)
 	display_drink_score()
 
+	Global.tutorial_drink_remade = true
 	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false

@@ -126,6 +126,7 @@ func leave_store() -> void:
 	spawn_sound.play()
 	await despawn_anim()
 	queue_free()
+	Events.customer_leave.emit()
 
 
 func _on_timer_timeout() -> void:

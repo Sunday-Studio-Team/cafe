@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-signal vo_started
-
 @export var vo_player: AudioStreamPlayer
 @export var sprite: AnimatedSprite2D
 
@@ -14,26 +12,17 @@ func _ready() -> void:
 	sprite.modulate = Color.TRANSPARENT
 	sprite.scale = Vector2.ZERO
 
-	vo_started.connect(_on_vo_started)
-	vo_player.finished.connect(_on_vo_finished)
+	Global.voice_line_system.requested_show_voice_line_subtitle.connect(_on_vo_started)
+	Global.voice_line_system.requested_hide_voice_line_subtitle.connect(_on_vo_finished)
 
 
-func _physics_process(_delta: float) -> void:
-	var playing := vo_player.playing
-
-	if playing and not playing_last_frame:
-		vo_started.emit()
-
-	playing_last_frame = vo_player.playing
-
-
-func _on_vo_started() -> void:
+func _on_vo_started(voice_line: VoiceLine) -> void:
 	var t := create_tween().set_parallel()
 	t.tween_property(sprite, "modulate", Color.WHITE, 0.25)
 	t.tween_property(sprite, "scale", sprite_starting_scale, 0.25)
 
 
-func _on_vo_finished() -> void:
+func _on_vo_finished(voice_line: VoiceLine) -> void:
 	var t := create_tween().set_parallel()
 	t.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.25)
 	t.tween_property(sprite, "scale", Vector2.ZERO, 0.25)

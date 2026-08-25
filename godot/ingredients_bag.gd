@@ -21,6 +21,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_interacted() -> void:
+	Global.tutorial_ingredients_bag_got = true
 	ingredients_bag_taken.emit(self)
 	Global.holding_ingredients = true
 	already_interacted = true

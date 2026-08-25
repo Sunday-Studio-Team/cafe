@@ -1,3 +1,4 @@
+class_name Main
 extends Node3D
 
 @export var _pause_menu: PauseMenu
@@ -21,7 +22,7 @@ extends Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
 @export var desk: Desk
-@export var pc_ui: Control
+@export var pc_ui: PC_UI
 @export var overtime_item: Item
 # environmental art that mentions security cams (referenced so we can disable
 # them until the day where the cameras get installed)
@@ -31,9 +32,6 @@ extends Node3D
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var special_shift_icon: TextureRect
-@export var special_shift_text: Label
-@export var special_shift_title: Label
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var teleporter3: Teleporter
@@ -45,8 +43,11 @@ extends Node3D
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
-@export var tippy_voice_player: AudioStreamPlayer
-@export var tippy_voice_timer: Timer
+@export var _tutorial_vo_location_start_shift: VoiceLineLocation
+@export var _tutorial_vo_location_machine_ui: VoiceLineLocation
+@export var _tutorial_vo_location_ingredients_bag: VoiceLineLocation
+@export var _tutorial_vo_location_help_desk: VoiceLineLocation
+@export var _tutorial_vo_location_spill: VoiceLineLocation
 
 var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
@@ -55,11 +56,12 @@ var _all_security_cameras: Array[SecurityCam3D]
 
 @onready var tutorial_machine: Machine = _right_area_right_machine
 
+var closing_time:bool = false
 
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
 	SaveDataManager.get_options_data().apply_options()
-
+	Events.customer_leave.connect(shift_end_sequence)
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -165,34 +167,10 @@ func _ready() -> void:
 		# waypoint_ring.hide()
 
 
-	# Add tippy voice lines
-	Events.low_time_warning.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_low_time)
-	)
-	Events.customer_low_time_warning.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.customer_low_time)
-	)
-	Events.order_remaking_drink.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.remake_drink)
-	)
-	Events.machine_making_drink.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.machine_make_drink)
-	)
-	Events.under_money_goal.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.under_goal)
-	)
-	Events.spill_clean_done.connect(func():
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.clean_spill)
-	)
-	Events.order_approved.connect(func(_customer: Customer):
-		_tippy_voice_play(TippyVoiceLine.TippyLineType.accept_drink)
-	)
-
-
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
 	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
-
+	
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
@@ -240,6 +218,7 @@ func enable_disable_teleporters():
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
+	closing_time = false
 	if Global.day == 0:
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
@@ -252,9 +231,12 @@ func set_per_day_stuff() -> void:
 		_active_machines.clear()
 		_active_machines.push_front(tutorial_machine)
 		_set_day_security_cameras_active([])
-
+	else:
+		_on_desk_interacted()
+		pc_ui._on_shop_button_pressed()
 	if Global.day == 1:
 		# Reset run.
+		Global.player_tips_bank = 5
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
@@ -302,6 +284,7 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(_active_machines)
 
+
 func spawn_machines():
 	for machine: Machine in _all_machines:
 		machine.hide()
@@ -313,16 +296,19 @@ func spawn_machines():
 
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
+	if closing_time: return
 	_machine_customer_spawn_timer.wait_time = Global.machine_customer_flow_rate
 	_machine_customer_spawn_timer.start()
 	spawn_machine_customer()
 
 func _on_help_desk_customer_spawn_timer_timeout() -> void:
+	if closing_time: return
 	_help_desk_customer_spawn_timer.wait_time = Global.help_desk_customer_flow_rate
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
 
 func spawn_machine_customer() -> void:
+	
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -354,6 +340,9 @@ func spawn_machine_customer() -> void:
 	add_child(new_customer)
 
 	assigned_machine.add_customer_to_queue(new_customer)
+
+func get_customers() -> Array[Customer]:
+	return (get_tree().get_nodes_in_group("customer")) as Array[Customer]
 
 func spawn_help_desk_customer() -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
@@ -396,6 +385,13 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 
 func _on_game_timer_timeout() -> void:
+	closing_time = true
+	if get_customers().is_empty():
+		shift_end_sequence()
+
+func shift_end_sequence():
+	if not closing_time and not get_customers().is_empty(): return
+	Engine.time_scale = 1
 	Events.time_up.emit()
 
 	await Events.end_screen_finished
@@ -407,7 +403,10 @@ func _on_game_timer_timeout() -> void:
 		if just_finished_final_day:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 			return
-		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
+		Global.day += 1
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+		#Leaving this here in case you guys want this scene back again
+		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
 	else:
 		Global.day = 1
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
@@ -441,14 +440,16 @@ func _on_shift_started():
 		DraggableMop.used_scrubber = has_scrubber
 
 		desk.interactable.visible = false
-	
-	else:
-		_interactive_tutorial_shift()
-	
-	_tippy_voice_play(TippyVoiceLine.TippyLineType.shift_start)
+
 
 func _interactive_tutorial_flow():
 	_tutorial_manager.show_intro_tutorial()
+	
+	await _tutorial_manager.finished_tutorial
+	
+	# Start voice guidance
+	_interactive_tutorial_shift()
+	
 	tutorial_machine.gui_3d.interactable.interacted.connect(
 		func():
 			if Global.day == 0 and not seen_tutorial_machine_instructions:
@@ -459,51 +460,303 @@ func _interactive_tutorial_flow():
 
 func _interactive_tutorial_shift() -> void:
 	if tutorial_machine == null:
+		printerr("Missing tutorial machine?")
 		return
-
+	
+	await get_tree().create_timer(0.5, false).timeout
+		
+	var tutorial_intro_lines: Array[String] = [
+		"tutorial_intro_1",
+		"tutorial_intro_2",
+		"tutorial_intro_3",
+		"tutorial_intro_4",
+		"tutorial_intro_5",
+	]
+	
+	for i in range(tutorial_intro_lines.size()):
+		var voice_line_id: String = tutorial_intro_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if Global.shift_started:
+			break
+	
+	print("shift started: %s" % Global.shift_started)
+	
+	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
+	
+	var repeat_instruction_timer: Timer = Timer.new()
+	repeat_instruction_timer.autostart = false
+	repeat_instruction_timer.one_shot = true
+	add_child(repeat_instruction_timer)
+	
+	while !Global.shift_started:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_start_shift", _tutorial_vo_location_start_shift)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	var tutorial_shift_started_lines: Array[String] = [
+		"tutorial_shift_started_1",
+		"tutorial_shift_started_2",
+	]
+	
+	Global.tutorial_machine_used = false
+	for i in range(tutorial_shift_started_lines.size()):
+		var voice_line_id: String = tutorial_shift_started_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while !Global.tutorial_machine_used and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if Global.tutorial_machine_used:
+			break
+		
+	while !Global.tutorial_machine_used:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_use_machine", _tutorial_vo_location_machine_ui)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_used")
+	
 	# First customer, accept order
 	tutorial_machine.force_next_drink_perfect()
 	spawn_machine_customer()
 	tutorial_machine.set_order_action_buttons_available("accept")
-
-	while tutorial_machine.customer != null or tutorial_machine.queued_customers.size() > 0:
-		await get_tree().process_frame
+	
+	await tutorial_machine.drink_prepared
+	
+	var tutorial_correct_drink_prepared_lines: Array[String] = [
+		"tutorial_correct_drink_prepared_1",
+		"tutorial_correct_drink_prepared_2",
+	]
+	
+	Global.tutorial_drink_accepted = false
+	for i in range(tutorial_correct_drink_prepared_lines.size()):
+		var voice_line_id: String = tutorial_correct_drink_prepared_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while !Global.tutorial_drink_accepted and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if Global.tutorial_drink_accepted:
+			break
+	
+	while !Global.tutorial_drink_accepted:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_no_location("tutorial_accept_correct_drink")
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
 	await get_tree().create_timer(0.5, false).timeout
-
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_correct_drink_accepted_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_correct_drink_accepted_2")
+	
 	# Second customer, manually remake drink
 	tutorial_machine.force_next_drink_incorrect()
 	spawn_machine_customer()
 	tutorial_machine.set_order_action_buttons_available("make_drink")
-
-	while tutorial_machine.customer != null or tutorial_machine.queued_customers.size() > 0:
-		await get_tree().process_frame
+	
+	await tutorial_machine.drink_prepared
+	
+	var tutorial_incorrect_drink_prepared_lines: Array[String] = [
+		"tutorial_incorrect_drink_prepared_1",
+		"tutorial_incorrect_drink_prepared_2",
+		"tutorial_incorrect_drink_prepared_3",
+		"tutorial_incorrect_drink_prepared_4",
+		"tutorial_incorrect_drink_prepared_5",
+		"tutorial_incorrect_drink_prepared_6",
+		"tutorial_incorrect_drink_prepared_7",
+	]
+	
+	Global.tutorial_remake_button_pressed = false
+	for i in range(tutorial_incorrect_drink_prepared_lines.size()):
+		var voice_line_id: String = tutorial_incorrect_drink_prepared_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while !Global.tutorial_remake_button_pressed and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if Global.tutorial_remake_button_pressed:
+			break
+	
+	while !Global.tutorial_remake_button_pressed:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_no_location("tutorial_remake_drink")
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	var tutorial_remaking_drink_lines: Array[String] = [
+		"tutorial_remaking_drink_1",
+		"tutorial_remaking_drink_2",
+		"tutorial_remaking_drink_3",
+		"tutorial_remaking_drink_4",
+	]
+	
+	Global.tutorial_drink_remade = false
+	for i in range(tutorial_remaking_drink_lines.size()):
+		var voice_line_id: String = tutorial_remaking_drink_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while !Global.tutorial_drink_remade and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if Global.tutorial_drink_remade:
+			break
+	
+	while !Global.tutorial_drink_remade:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_no_location("tutorial_remaking_drink_5")
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
 	await get_tree().create_timer(0.5, false).timeout
-
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_drink_remade_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_drink_remade_2")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_drink_remade_3")
+	
 	# Machine runs out of ingredients: player learns to refill without a customer.
 	tutorial_machine.customer = null
 	tutorial_machine.waiting_for_response = false
 	tutorial_machine.ingredients = 0
 	tutorial_machine.no_ingredients_sound.play()
 	tutorial_machine.set_order_action_buttons_available("refill")
-
+	
+	var tutorial_get_ingredients_lines: Array[String] = [
+		"tutorial_get_ingredients_1",
+		"tutorial_get_ingredients_2",
+	]
+	
+	Global.tutorial_ingredients_bag_got = false
+	for i in range(tutorial_get_ingredients_lines.size()):
+		var voice_line_id: String = tutorial_get_ingredients_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while !Global.tutorial_ingredients_bag_got and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if Global.tutorial_ingredients_bag_got:
+			break
+	
+	while !Global.tutorial_ingredients_bag_got:
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_get_ingredients_3", _tutorial_vo_location_ingredients_bag)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_ingredients_got")
+	
 	while tutorial_machine.ingredients <= 0:
-		await get_tree().process_frame
-
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_no_location("tutorial_refill_machine")
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
 	tutorial_machine.set_order_action_buttons_available("all")
-
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_2")
+	
+	spawn_help_desk_customer()
+	await _customer_help_desk.new_desk_customer_arrived
+	
+	await get_tree().create_timer(0.25, false).timeout
+	
+	var tutorial_help_desk_lines: Array[String] = [
+		"tutorial_help_desk_1",
+		"tutorial_help_desk_2",
+		"tutorial_help_desk_3",
+		"tutorial_help_desk_4",
+	]
+	
+	for i in range(tutorial_help_desk_lines.size()):
+		var voice_line_id: String = tutorial_help_desk_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while _customer_help_desk.has_active_customers() and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if !_customer_help_desk.has_active_customers():
+			break
+	
+	while _customer_help_desk.has_active_customers():
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_help_desk_5", _tutorial_vo_location_help_desk)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_customer_helped_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_customer_helped_2")
+	
 	# Spill tutorial: player learns to clean up spills
 	tutorial_machine.spill()
-
+	
+	await get_tree().create_timer(0.5, false).timeout
+	
+	var tutorial_machine_spilled_lines: Array[String] = [
+		"tutorial_machine_spilled_1",
+		"tutorial_machine_spilled_2",
+	]
+	
+	for i in range(tutorial_machine_spilled_lines.size()):
+		var voice_line_id: String = tutorial_machine_spilled_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while tutorial_machine.spill_on_floor and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if !tutorial_machine.spill_on_floor:
+			break
+	
 	while tutorial_machine.spill_on_floor:
-		await get_tree().process_frame
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_machine_spilled_3", _tutorial_vo_location_spill)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_spill_cleaned_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_spill_cleaned_2")
+	
+	await get_tree().create_timer(0.5, false).timeout
 	
 	tutorial_machine.break_down()
-
+	
+	var tutorial_machine_broke_lines: Array[String] = [
+		"tutorial_machine_broke_1",
+		"tutorial_machine_broke_2",
+		"tutorial_machine_broke_3",
+	]
+	
+	for i in range(tutorial_machine_broke_lines.size()):
+		var voice_line_id: String = tutorial_machine_broke_lines[i]
+		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+		while tutorial_machine.broken_down and Global.voice_line_system.is_playing_no_location_voice_line():
+			await get_tree().process_frame
+		if !tutorial_machine.broken_down:
+			break
+	
 	while tutorial_machine.broken_down:
-		await get_tree().process_frame
-
+		if repeat_instruction_timer.time_left == 0.0:
+			Global.voice_line_system.play_voice_line_at_location("tutorial_machine_broke_4", _tutorial_vo_location_machine_ui)
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	repeat_instruction_timer.stop()
+	
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_1")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_2")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_3")
+	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_4")
+	
 	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
-
+	
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
 	SaveDataManager.save_game()
 
@@ -606,20 +859,3 @@ func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> 
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
 	print("secs per help desk customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
-
-
-func _tippy_voice_play(voice_line: TippyVoiceLine.TippyLineType):
-	if tippy_voice_player.playing:
-		return
-
-	if !tippy_voice_timer.is_stopped():
-		return
-
-	var chance_play = randf_range(0.0, 1.0)
-	if voice_line == TippyVoiceLine.TippyLineType.shift_low_time:
-		chance_play += 0.25
-
-	if chance_play >= 0.5 or voice_line == TippyVoiceLine.TippyLineType.shift_start:
-		tippy_voice_player.stream = Global.tippy_voice_lines.filter(func(line: TippyVoiceLine): return line.condition == voice_line).pick_random().audio
-		tippy_voice_player.play()
-		tippy_voice_timer.start(randf_range(10.0, 16.0))

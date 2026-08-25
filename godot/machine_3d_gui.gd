@@ -43,6 +43,9 @@ func _ready():
 			Global.in_machine_ui = true
 			Global.machine_in_use = machine
 			player_using_me = true
+			
+			if !Global.tutorial_machine_used:
+				Global.tutorial_machine_used = true
 
 			# store where the player was before they interacted w/ the machine.
 			# used when using bomb(), which is in ingredients_refill_minigame.gd

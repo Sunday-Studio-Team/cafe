@@ -13,7 +13,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var time_left_ui: Control
 @export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
-@export var objective: RichTextLabel
+@export var shift_starting_label: RichTextLabel
 @export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -84,10 +84,9 @@ func _ready() -> void:
 	)
 	Events.shift_started.connect(
 		func():
-			objective.add_theme_font_size_override("bold_font_size", 96)
-			objective.text = "\n\n[b][wave amp=100 freq=7.5]SHIFT STARTING"
+			shift_starting_label.show()
 			await get_tree().create_timer(5, false).timeout
-			create_tween().tween_property(objective, "modulate", Color.TRANSPARENT, 0.5)
+			create_tween().tween_property(shift_starting_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
 	Events.time_up.connect(func(): hide())
@@ -115,53 +114,18 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	if Global.day == 0:
-		objective.text = ""
 		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 1:
-		objective.text = (
-				"You are the new manager of a fully automated cafe!
-This is your first trial shift - make it through the week to keep your new position!"
-		)
 		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 2:
-		objective.text = (
-				"your boss has installed another machine! it's located around the corner on the left.
-(your daily profit goal has been adjusted accordingly.)"
-		)
-	if Global.day >= 3:
-		objective.text = (
-				"your boss has instated some new store [i]rules[/i].
-they installed some security cameras to make sure you follow them!"
-		)
 		rules_controls.text += (
 				"\n[b][i]rules [/i][/b]
 			- no running
-			- no handmade drinks"
+			- no remaking drinks"
 		)
 		cctv_indicator.show()
-	if Global.day >= 4:
-		objective.text = (
-				"your boss says you're using up too many ingredients.
-new rule: don't take any more ingredients out of the store room."
-		)
-		rules_controls.text += "\n- no taking ingredients from store room"
-	if Global.day == 5:
-		objective.text = (
-				"your boss has installed another machine."
-		)
-
-	if Global.day > 0:
-		@warning_ignore("integer_division")
-		objective.text += (
-				"\n\n[b]SHIFT OBJECTIVE[/b]" + \
-				"\nmake %s!"
-				% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
-		)
-
-	if Global.day == Global.final_day:
-		objective.text += "\n[color=orange](this will be your final shift!)"
 
 	# we make these things for the employee rating here instead of in editor
 	# cos theyre dynamically added based on score
@@ -444,7 +408,20 @@ func update_interactable_ui() -> void:
 				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] HAMMER 💥"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] HAMMER 💥" % use_item_keybind
+		
+		elif (
+				hovered_interactable.display_name == "Use machine"
+				# xtremely dodgy ref to check the machine has a customer
+				and hovered_interactable.get_parent().machine.customer
+				and equipped_item != null
+				and equipped_item.item_id == "airhorn"
+				and equipped_item.can_be_used
+		):
+			item_indicator.show()
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] AIRHORN" % use_item_keybind
 
 		elif (
 				hovered_interactable.display_name.contains("camera")
@@ -453,15 +430,17 @@ func update_interactable_ui() -> void:
 				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] WHIPPED CREAM"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] WHIPPED CREAM" % use_item_keybind
 
 		else:
 			item_indicator.hide()
 			item_text.text = ""
 
 		if hovered_interactable.hold_to_interact:
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 			interactable_label.text = (
-					"(HOLD) [E] - "
+					("(HOLD) [%s] - " % interact_keybind)
 					+ Global.hovered_interactable.display_name
 			)
 
@@ -470,8 +449,9 @@ func update_interactable_ui() -> void:
 			)
 
 		else:
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 			interactable_label.text = (
-					"[E] - "
+					("[%s] - " % interact_keybind)
 					+ Global.hovered_interactable.display_name
 			)
 

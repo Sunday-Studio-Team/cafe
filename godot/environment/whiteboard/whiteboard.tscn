@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://dy4e7ivinjsni"]
+
+[ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/whiteboard.gd" id="1_6exnn"]
+[ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="3_4qxtd"]
+[ext_resource type="Texture2D" uid="uid://b06hlrdkxu5s3" path="res://environment/whiteboard/whiteboard_start_shift_arrows.png" id="4_5pta2"]
+[ext_resource type="FontFile" uid="uid://csg2vlq4u84fp" path="res://fonts/Permanent_Marker/PermanentMarker-Regular.ttf" id="4_mcetr"]
+[ext_resource type="PackedScene" uid="uid://cd3xb42fgnnxw" path="res://Assets/Whiteboard/low_poly_whiteboard.glb" id="7_qmmlt"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mcetr"]
+viewport_path = NodePath("Content/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qxtd"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 25.0
+expand_margin_top = 25.0
+expand_margin_right = 25.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vn1tu"]
+thickness = 5
+
+[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("whiteboard_content_container", "goal_label", "info_label")]
+transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
+script = ExtResource("1_6exnn")
+whiteboard_content_container = NodePath("Content/SubViewport/MarginContainer")
+goal_label = NodePath("Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Goal")
+info_label = NodePath("Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Info")
+daily_info_text = Array[String](["", "Welcome to cAIfe.
+This is your first trial shift.
+
+Make it through the week to keep your new position!", "Welcome back.
+We moved a machine around to the left out there- should make things more dynamic...
+
+Oh! and I installed a camera, too, just to make sure you're following the rules :)", "Welcome back!
+Another new machine came in last night, so there's plenty to do today.
+
+Oh! and another camera, too- I finally have a pair of eyes in there :)", "Welcome back!!
+Overnight, we installed yet more cameras and machines-how exciting!
+
+If only I could be there with you.", "Welcome back!!!
+Today is going to be a special day."])
+
+[node name="Model" parent="." unique_id=240193298 instance=ExtResource("7_qmmlt")]
+transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.88540924, 0, -3.8702453e-08, 0, -1.041, 0)
+
+[node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("3_4qxtd")]
+transform = Transform3D(0.56999993, 0, 0, 0, 0.56999993, 0, 0, 0, 0.56999993, 0.456, -0.228, 0.1)
+
+[node name="Content" type="Sprite3D" parent="." unique_id=399085356]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.551115e-17, 0.03351003, 0.013631233)
+pixel_size = 0.00075
+shaded = true
+texture = SubResource("ViewportTexture_mcetr")
+
+[node name="SubViewport" type="SubViewport" parent="Content" unique_id=2102935171]
+handle_input_locally = false
+size = Vector2i(1637, 1039)
+render_target_update_mode = 4
+
+[node name="Background" type="ColorRect" parent="Content/SubViewport" unique_id=1113073874]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Arrows" type="TextureRect" parent="Content/SubViewport" unique_id=1193384580]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1587.0
+offset_bottom = 989.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0.25, 0.1)
+offset_transform_scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_5pta2")
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/SubViewport" unique_id=18609656]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/SubViewport/MarginContainer" unique_id=1307414680]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/SubViewport/MarginContainer/HBoxContainer" unique_id=1963885849]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer" unique_id=550486993]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4qxtd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer" unique_id=1237155405]
+layout_mode = 2
+
+[node name="GoalTitle" type="RichTextLabel" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1083822596]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_mcetr")
+theme_override_fonts/bold_font = ExtResource("4_mcetr")
+theme_override_font_sizes/normal_font_size = 96
+theme_override_font_sizes/bold_font_size = 112
+bbcode_enabled = true
+text = "[b][color=black]TODAY'S GOAL"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1619911679]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.017453292
+theme_override_styles/separator = SubResource("StyleBoxLine_vn1tu")
+
+[node name="Goal" type="RichTextLabel" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1150997046]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_mcetr")
+theme_override_fonts/bold_font = ExtResource("4_mcetr")
+theme_override_font_sizes/normal_font_size = 96
+theme_override_font_sizes/bold_font_size = 112
+bbcode_enabled = true
+text = "[color=black]make [color=green]$30"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer" unique_id=649735891]
+layout_mode = 2
+size_flags_vertical = 6
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_4qxtd")
+
+[node name="Info" type="RichTextLabel" parent="Content/SubViewport/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2" unique_id=521210917]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = 0.017453292
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_mcetr")
+theme_override_fonts/bold_font = ExtResource("4_mcetr")
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "new info for today: blah blah blah we are adding a new machine etc blah blah blah tippy blah cafe money"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Content/SubViewport/MarginContainer/HBoxContainer" unique_id=585433727]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
