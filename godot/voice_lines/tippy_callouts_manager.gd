@@ -24,6 +24,7 @@ enum TippyLineType {
 @export var _tippy_line_array_clean_spill: Array[VoiceLine]
 @export var _tippy_line_array_accept_drink: Array[VoiceLine]
 
+var _last_voice_line_type: TippyLineType
 var _is_playing_line: bool
 var _tippy_voice_timer: Timer
 
@@ -74,6 +75,9 @@ func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
 	if voice_line_array.is_empty():
 		printerr("Missing Tippy voice line!")
 		return
+
+	if _last_voice_line_type == tippy_line_type:
+		return
 	
 	var chance_play: float = randf_range(0.0, 1.0)
 	if tippy_line_type == TippyCalloutsManager.TippyLineType.shift_low_time:
@@ -84,6 +88,7 @@ func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
 		_is_playing_line = true
 		await Global.voice_line_system.play_voice_line_no_location(random_voice_line.voice_line_id)
 		_is_playing_line = false
+		_last_voice_line_type = tippy_line_type
 		_tippy_voice_timer.start(randf_range(TIPPY_CALLOUT_MIN_COOLDOWN, TIPPY_CALLOUT_MAX_COOLDOWN))
 
 func _get_tippy_callout_array_by_type(tippy_line_type: TippyLineType) -> Array[VoiceLine]:
