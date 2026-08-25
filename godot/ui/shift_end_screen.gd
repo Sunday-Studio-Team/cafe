@@ -124,10 +124,6 @@ func _on_time_up() -> void:
 	else:
 		profit_made_tween.tween_property(_profit_made_label, "modulate", Color.RED, 1)
 
-	await get_tree().create_timer(1).timeout
-
-	stars_sound.play()
-
 	await get_tree().create_timer(1.5).timeout
 
 	# show outcome text and button
