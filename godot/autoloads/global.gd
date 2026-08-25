@@ -6,6 +6,7 @@ extends Node
 @export_dir var items_folder_path: String
 @export_dir var ingredients_folder_path: String
 @export_dir var customer_sprites_folder_path: String
+@export_dir var review_folder_path: String
 @export_dir var spill_sprites_path: String
 @export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
@@ -35,6 +36,7 @@ var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
+var reviews: Array[Review]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
@@ -184,6 +186,7 @@ func _ready() -> void:
 		drink.create() # adds the price and creates the typing minigame resource
 	items.assign(load_resources_from_folder(items_folder_path))
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
+	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
