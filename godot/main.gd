@@ -240,6 +240,7 @@ func set_per_day_stuff() -> void:
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
+		Global.emails_schedule.append(load("res://emails/tucker_intro/email_data_day_1_tucker_intro.tres"))
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
