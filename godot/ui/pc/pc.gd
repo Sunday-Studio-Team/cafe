@@ -18,11 +18,10 @@ func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
-
-	# we dont even have money for shop on day 1 sooo
-	#Update from August 23 12:32:15 GMT+8 - yeah we do now weeeee
-	#if Global.day == 1:
-		#shop_button.hide()
+	
+	# Wait until everything else is ready, as main needs to set per day stuff.
+	await get_tree().process_frame
+	
 	set_unread_count()
 	
 	for button: Button in find_children("*", "Button"):
