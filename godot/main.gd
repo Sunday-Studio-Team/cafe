@@ -151,9 +151,6 @@ func _ready() -> void:
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
-	#if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		#Global.popups["special shift"].open()
-
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
 
@@ -161,10 +158,6 @@ func _ready() -> void:
 			tutorial_selection_menu.open_menu()
 		else:
 			_interactive_tutorial_flow()
-	else:
-		pass
-		# whiteboard_tutorial_arrow.visible = false
-		# waypoint_ring.hide()
 
 
 func _process(delta: float) -> void:

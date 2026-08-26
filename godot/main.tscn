@@ -142,15 +142,12 @@
 [ext_resource type="Resource" uid="uid://dpsm3hlrkdoyt" path="res://voice_lines/resources/contextual/voice_line_tippy_accept_drink.tres" id="122_6seew"]
 [ext_resource type="Resource" uid="uid://bsm7mtf1bhqtp" path="res://voice_lines/resources/contextual/voice_line_tippy_start_shift_2.tres" id="122_s0om5"]
 [ext_resource type="Resource" uid="uid://da5qtkot2mptp" path="res://voice_lines/resources/contextual/voice_line_tippy_clean_spill.tres" id="123_6gr3f"]
-[ext_resource type="Texture2D" uid="uid://bs1mpgx84cqn6" path="res://Assets/UI/speech_bubble.png" id="124_1iygd"]
 [ext_resource type="Resource" uid="uid://c8e1ynixjucrb" path="res://voice_lines/resources/contextual/voice_line_tippy_low_customer_1.tres" id="124_3ox4t"]
 [ext_resource type="Resource" uid="uid://b8j3pxpppmlpc" path="res://voice_lines/resources/contextual/voice_line_tippy_low_customer_2.tres" id="125_4fmho"]
-[ext_resource type="Texture2D" uid="uid://b176xreldagr8" path="res://Assets/UI/x_button.png" id="125_g5xqc"]
 [ext_resource type="Resource" uid="uid://ylmdujj14nph" path="res://voice_lines/resources/contextual/voice_line_tippy_low_shift.tres" id="126_4fmho"]
 [ext_resource type="Resource" uid="uid://c3reag6jwsda6" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_1.tres" id="126_gkfde"]
 [ext_resource type="Resource" uid="uid://ch8kvde77uyru" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_2.tres" id="127_4qxq8"]
 [ext_resource type="Resource" uid="uid://bh3yardmw8ofs" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_3.tres" id="128_ryg4g"]
-[ext_resource type="Texture2D" uid="uid://s043j74ko4a1" path="res://sprites/coffee_bean.png" id="128_s4o1y"]
 [ext_resource type="Resource" uid="uid://yqxd886iovvp" path="res://voice_lines/resources/contextual/voice_line_tippy_machine_drink.tres" id="129_oy6td"]
 [ext_resource type="Resource" uid="uid://bvysr5e5slkfv" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_1.tres" id="130_fe76k"]
 [ext_resource type="Resource" uid="uid://c5iubxwsxaef3" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_2.tres" id="131_p5pln"]
@@ -229,7 +226,6 @@
 [ext_resource type="PackedScene" uid="uid://cwrrk4bkluvu" path="res://tutorial/tutorial_screen_view_6.tscn" id="232_e4ynb"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
-[ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
 
 [sub_resource type="Resource" id="Resource_1yv1y"]
 script = ExtResource("4_ovcoh")
@@ -1293,6 +1289,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Interactable" unique_id=1133469025]
 layout_mode = 2
@@ -1935,76 +1932,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SpecialShiftPopup" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
-process_mode = 3
-visible = false
-script = ExtResource("287_4fms3")
-popup_id = "special shift"
-text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
-title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
-icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
-
-[node name="InputBlocker" type="Control" parent="SpecialShiftPopup" unique_id=317794041]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="SpecialShiftPopup/InputBlocker" unique_id=1463248199]
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("124_1iygd")
-
-[node name="MarginContainer" type="MarginContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect" unique_id=460616503]
-layout_mode = 0
-offset_left = 268.0
-offset_top = 245.0
-offset_right = 1575.0
-offset_bottom = 650.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer" unique_id=785505753]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=2011957646]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("128_s4o1y")
-expand_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=745760569]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Title" type="Label" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=533747834]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-theme_override_font_sizes/font_size = 80
-text = "Shift Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Body" type="Label" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=860561688]
-custom_maximum_size = Vector2(1100, 800)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-theme_override_font_sizes/font_size = 40
-text = "This is a description."
-autowrap_mode = 3
-
-[node name="TextureButton" type="TextureButton" parent="SpecialShiftPopup/InputBlocker" unique_id=916961120]
-layout_mode = 0
-offset_left = 1590.0
-offset_top = 167.0
-offset_right = 2216.0
-offset_bottom = 793.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("125_g5xqc")
 
 [node name="CustomerAreaMusic" type="AudioStreamPlayer3D" parent="." unique_id=1077236725]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 2.4, -3.5)
