@@ -107,17 +107,6 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	spawn_machines()
-	if Global.day != 0:
-		Global.player.movement_enabled = false
-		day_indicator.text = Global.day_to_string(Global.day).to_upper()
-		day_indicator.show()
-		await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
-		await get_tree().create_timer(1.5, false).timeout
-		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
-		day_indicator.hide()
-		_on_desk_interacted()
-		pc_ui._on_shop_button_pressed()
-		Global.player.movement_enabled = true
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
 
@@ -166,7 +155,16 @@ func _ready() -> void:
 		else:
 			_interactive_tutorial_flow()
 	else:
-		pass
+		Global.player.movement_enabled = false
+		day_indicator.text = Global.day_to_string(Global.day).to_upper()
+		day_indicator.show()
+		await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
+		await get_tree().create_timer(1.5, false).timeout
+		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
+		day_indicator.hide()
+		_on_desk_interacted()
+		pc_ui._on_shop_button_pressed()
+		Global.player.movement_enabled = true
 		# whiteboard_tutorial_arrow.visible = false
 		# waypoint_ring.hide()
 
@@ -341,6 +339,7 @@ func spawn_machine_customer() -> void:
 	assigned_machine.add_customer_to_queue(new_customer)
 
 func get_customers() -> Array[Customer]:
+	print((get_tree().get_nodes_in_group("customer")).size())
 	return (get_tree().get_nodes_in_group("customer")) as Array[Customer]
 
 func spawn_help_desk_customer() -> void:
@@ -385,30 +384,35 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 func _on_game_timer_timeout() -> void:
 	closing_time = true
-	if get_customers().is_empty():
+	if get_customers().size() <= 1:
 		shift_end_sequence()
 
 func shift_end_sequence():
-	if not closing_time and not get_customers().is_empty(): return
-	Engine.time_scale = 1
-	Events.time_up.emit()
+	#Here's the thing. When a customer calls this function as they
+	#are still leaving, they are still part of the scene tree.
+	#
+	#So get_customers() will return an array that includes them.
+	#That is why it checks for a customer array of size 1 (or less)
+	if closing_time and get_customers().size() <= 1:
+		Engine.time_scale = 1
+		Events.time_up.emit()
 
-	await Events.end_screen_finished
+		await Events.end_screen_finished
 
-	get_tree().paused = false
-	var met_profit_goal: bool = Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
-	if met_profit_goal:
-		var just_finished_final_day: bool = Global.day == Global.final_day
-		if just_finished_final_day:
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
-			return
-		Global.day += 1
-		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-		#Leaving this here in case you guys want this scene back again
-		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
-	else:
-		Global.day = 1
-		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+		get_tree().paused = false
+		var met_profit_goal: bool = Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
+		if met_profit_goal:
+			var just_finished_final_day: bool = Global.day == Global.final_day
+			if just_finished_final_day:
+				Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+				return
+			Global.day += 1
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+			#Leaving this here in case you guys want this scene back again
+			#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
+		else:
+			Global.day = 1
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 #Minigame is active (Need to turn off regular player controls)
