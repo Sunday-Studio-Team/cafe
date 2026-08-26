@@ -388,14 +388,13 @@ func _on_game_timer_timeout() -> void:
 	if get_customers().size() <= 1:
 		shift_end_sequence()
 
-
-func shift_end_sequence():
+func shift_end_sequence(override:bool=false):
 	# Here's the thing. When a customer calls this function as they
 	# are still leaving, they are still part of the scene tree.
-
+	
 	# So get_customers() will return an array that includes them.
 	# That is why it checks for a customer array of size 1 (or less)
-	if closing_time and get_customers().size() <= 1:
+	if override or (closing_time and get_customers().size() <= 1):
 		Engine.time_scale = 1
 		Events.time_up.emit()
 
