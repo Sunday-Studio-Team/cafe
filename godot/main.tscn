@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="4_ovcoh"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
+[ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="6_gttkg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
@@ -556,9 +557,10 @@ cell_size = 0.15
 agent_height = 1.0
 agent_radius = 0.3
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_help_desk", "_tutorial_vo_location_spill")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "camera_posters", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_help_desk", "_tutorial_vo_location_spill")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
+_emails_manager = NodePath("EmailsManager")
 _pause_menu = NodePath("PauseMenu")
 _tutorial_manager = NodePath("TutorialManager")
 _world_environment = NodePath("NavigationRegion3D/CafeEnvironment/WorldEnvironment")
@@ -601,6 +603,7 @@ _tutorial_vo_location_spill = NodePath("Machines/RightAreaRightMachine/TutorialM
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
+_intro_email = ExtResource("6_gttkg")
 
 [node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_view_canvas_layer", "_tutorial_view")]
 script = ExtResource("10_ed5de")
@@ -2012,7 +2015,6 @@ stream = ExtResource("182_suf1q")
 volume_db = -20.0
 max_db = -5.0
 autoplay = true
-bus = &"DiegeticMusic"
 
 [node name="TippyBoss" type="CharacterBody3D" parent="." unique_id=292729429 node_paths=PackedStringArray("nav_agent", "tired_indicator", "player_kidnap_marker", "player_release_marker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, -2)

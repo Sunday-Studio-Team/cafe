@@ -14,7 +14,6 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
-@export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 var popups: Dictionary = {}
 var popup_hint_showing: bool = false
@@ -36,8 +35,6 @@ var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
-var reviews: Array[Review]
-var recieved_reviews: Dictionary[Review, int]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
@@ -49,8 +46,11 @@ var minigame_active := false:
 var current_minigame_name: String
 var in_spill_minigame := false
 var in_pc_ui := false
+var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
+var reviews: Array[Review]
+var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer

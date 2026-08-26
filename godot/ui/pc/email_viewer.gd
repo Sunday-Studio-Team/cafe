@@ -44,9 +44,18 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 	if email_data.custom_email_view_packed_scene != null:
 		active_custom_email_view = email_data.custom_email_view_packed_scene.instantiate()
 		active_custom_email_view.init(email_data, is_finished_important, is_finished_spam)
+		
+		if active_custom_email_view is ReviewsCustomEmailView:
+			var reviews_update_email_data: ReviewsUpdateEmailData = init_email_data as ReviewsUpdateEmailData
+			var reviews_custom_email_view: ReviewsCustomEmailView = active_custom_email_view as ReviewsCustomEmailView
+			if reviews_update_email_data == null or reviews_custom_email_view == null:
+				printerr("Reviews email incorrectly set up!")
+			reviews_custom_email_view.setup_reviews(reviews_update_email_data)
+		
 		custom_email_view_container.add_child(active_custom_email_view)
 		active_custom_email_view.finished_important.connect(_on_active_custom_email_view_finished_important)
 		active_custom_email_view.finished_spam.connect(_on_active_custom_email_view_finish_spam)
+		
 
 func _on_active_custom_email_view_finished_important(custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_important.disconnect(_on_active_custom_email_view_finished_important)

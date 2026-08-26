@@ -1,6 +1,7 @@
 class_name Main
 extends Node3D
 
+@export var _emails_manager: EmailsManager
 @export var _pause_menu: PauseMenu
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
@@ -220,9 +221,6 @@ func enable_disable_teleporters():
 func set_per_day_stuff() -> void:
 	closing_time = false
 	if Global.day == 0:
-		var email_manager: EmailsManager = EmailsManager.get_instance()
-		email_manager._delivered_emails_to_date.clear()
-		Global.emails_schedule.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
@@ -237,10 +235,10 @@ func set_per_day_stuff() -> void:
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
-		var email_manager: EmailsManager = EmailsManager.get_instance()
-		email_manager._delivered_emails_to_date.clear()
-		Global.emails_schedule.clear()
-		Global.emails_schedule.append(load("res://emails/tucker_intro/email_data_day_1_tucker_intro.tres"))
+		Global.received_emails.clear()
+		Global.read_emails.clear()
+		Global.spam_emails.clear()
+		Global.received_reviews.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
@@ -280,9 +278,10 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_back(_right_area_left_machine)
 		_active_machines.push_back(_right_area_right_machine)
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
-
+	
+	_emails_manager.deliver_emails()
 	menu.populate_drinks()
-
+	
 	Global.machines.assign(_active_machines)
 
 
