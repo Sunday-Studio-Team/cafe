@@ -21,6 +21,7 @@ signal customer_left_machine(customer: Customer)
 signal customer_leave
 signal customer_low_time_warning
 signal under_money_goal
+signal shift_end_sequence_started
 signal time_up
 signal low_time_warning
 signal end_screen_finished

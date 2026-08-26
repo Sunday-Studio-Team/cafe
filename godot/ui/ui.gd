@@ -13,7 +13,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var time_left_ui: Control
 @export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
-@export var shift_starting_label: RichTextLabel
+@export var shift_starting_ending_label: RichTextLabel
 @export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -84,12 +84,23 @@ func _ready() -> void:
 	)
 	Events.shift_started.connect(
 		func():
-			shift_starting_label.show()
+			shift_starting_ending_label.show()
 			await get_tree().create_timer(5, false).timeout
-			create_tween().tween_property(shift_starting_label, "modulate", Color.TRANSPARENT, 0.5)
+			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
 	Events.alert_posted.connect(func(message): _on_alert_posted(message))
+	Events.shift_end_sequence_started.connect(
+		func():
+			low_time_sound.play()
+			shift_starting_ending_label.text = (
+				"\n\n[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
+			)
+			shift_starting_ending_label.modulate = Color.WHITE
+			await get_tree().create_timer(6, false).timeout
+			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
+	)
 	Events.time_up.connect(func(): hide())
+	# TODO: figure out if this still does anything and/or should be nuked
 	Events.requirements_met.connect(func(): end_shift_guide.show())
 
 	exit_machine_button.pressed.connect(
@@ -192,7 +203,10 @@ func _process(_delta: float) -> void:
 	update_interactable_ui()
 	update_time_indicator()
 	update_cctv_indicator()
-	handle_time_left_warning()
+	# since we have a lot of time after the shift 'ends', i think we can basically
+	# replace this with the ui that tells the player the shift is ending
+	# (for now anyway)
+	#handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
