@@ -1,16 +1,12 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://bng50clin2bjy"]
 
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_y32rb"]
-[ext_resource type="Texture2D" uid="uid://q1xi150f34y7" path="res://sprites/customers/delivery guy.png" id="2_wyror"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tjjng"]
-atlas = ExtResource("2_wyror")
-region = Rect2(129, -2, 600, 600)
+[ext_resource type="Texture2D" uid="uid://b5ve4thgy424c" path="res://emails/reviews/profile_pics/goth_girl.tres" id="2_wyror"]
 
 [resource]
 script = ExtResource("1_y32rb")
 username = "dregs2384298"
 rating = 0.5
 review_content = "It’s a shame that the old cafe was taken over by this AI slop. This area used to have so much heart and soul where you could meet and chat with others but now it’s lackluster quality, robotic and so corporate there isn’t even any seating. Shame on BOOGLE!"
-sprite = SubResource("AtlasTexture_tjjng")
+sprites = Array[AtlasTexture]([ExtResource("2_wyror")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

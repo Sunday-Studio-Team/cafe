@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Review" format=3 uid="uid://cd4kqoy5p5qde"]
+
+[ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_3om7u"]
+[ext_resource type="Texture2D" uid="uid://bwgqxrf6dl7op" path="res://emails/reviews/profile_pics/comic_guy.tres" id="2_q7y11"]
+[ext_resource type="Texture2D" uid="uid://ca1ticiydkew4" path="res://emails/reviews/profile_pics/lit_professor.tres" id="3_3om7u"]
+
+[resource]
+script = ExtResource("1_3om7u")
+username = "envienna"
+rating = 0.5
+review_content = "I used to spend whole afternoons here reading books and comics while the owner refilled everyone’s coffee for free. They remembered your name, your usual order, even your birthday. 
+
+Now they ripped out every bookshelf to make room for those machines. 
+
+Funny thing is… the coffee still isn’t any faster.
+"
+sprites = Array[AtlasTexture]([ExtResource("2_q7y11"), ExtResource("3_3om7u")])
+metadata/_custom_type_script = "uid://djf3q4lwggw0g"

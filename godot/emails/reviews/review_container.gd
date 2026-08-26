@@ -14,7 +14,7 @@ var review: Review = null:
 			icon.texture = null
 		else:
 			review = value
-			icon.texture = review.sprite
+			icon.texture = review.sprites.pick_random()
 			review_content.text = review.review_content
 			username.text = "@" + review.username
 			var star_2 = star_1.duplicate()
