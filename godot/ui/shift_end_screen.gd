@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @export var background: ColorRect
+@export var _day_label: RichTextLabel
 @export var times_up: RichTextLabel
 @export var outcome: RichTextLabel
 @export var time_up_sound: AudioStreamPlayer
@@ -63,6 +64,7 @@ func _on_time_up() -> void:
 	_money_title_label.visible = false
 	_min_profit_goal_label.visible = false
 	_profit_made_label.visible = false
+	_day_label.visible = false
 
 
 	_rating_title_label.visible = false
@@ -87,6 +89,8 @@ func _on_time_up() -> void:
 	var max_profit_goal: float = Stats.current.perfect_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
 
+	#_day_label.text = Global.day_to_string(Global.day)
+	_day_label.text = "Day %d" % (Global.day + 1)
 	_min_profit_goal_label.text = "required goal: %s" % Global.float_to_price(min_profit_goal)
 	_profit_made_label.text = "made today: %s/%s" % [
 		Global.float_to_price(daily_profit),
@@ -111,6 +115,12 @@ func _on_time_up() -> void:
 	_tips_today_label.text = "= [color=gold]%s[/color] tips" % Global.float_to_price(tips)
 	
 	pencil_scribble.play()
+	
+	_day_label.visible = true
+	await get_tree().create_timer(0.3).timeout
+	_money_title_label.visible = true
+	await get_tree().create_timer(0.5).timeout
+	_min_profit_goal_label.visible = true
 
 	_money_title_label.visible = true
 	await get_tree().create_timer(0.5).timeout

@@ -101,10 +101,11 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
+_day_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/DayTitle")
 times_up = NodePath("MarginContainer/TimesUp")
 outcome = NodePath("MarginContainer/VBoxContainer/Outcome")
 time_up_sound = NodePath("TimeUpSound")
@@ -178,6 +179,16 @@ alignment = 1
 [node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=475181285]
 layout_mode = 2
 size_flags_horizontal = 6
+
+[node name="DayTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=123944233]
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 82
+bbcode_enabled = true
+text = "[b]DAY 1"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MoneyTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
 custom_maximum_size = Vector2(1000, 100)
