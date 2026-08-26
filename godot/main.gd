@@ -107,6 +107,17 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	spawn_machines()
+	if Global.day != 0:
+		Global.player.movement_enabled = false
+		day_indicator.text = Global.day_to_string(Global.day).to_upper()
+		day_indicator.show()
+		await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
+		await get_tree().create_timer(1.5, false).timeout
+		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
+		day_indicator.hide()
+		_on_desk_interacted()
+		pc_ui._on_shop_button_pressed()
+		Global.player.movement_enabled = true
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
 
@@ -144,6 +155,9 @@ func _ready() -> void:
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
+	#if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
+		#Global.popups["special shift"].open()
+
 	if Global.day == 0:
 		Events.tutorial_selected.connect(_interactive_tutorial_flow)
 
@@ -151,6 +165,10 @@ func _ready() -> void:
 			tutorial_selection_menu.open_menu()
 		else:
 			_interactive_tutorial_flow()
+	else:
+		pass
+		# whiteboard_tutorial_arrow.visible = false
+		# waypoint_ring.hide()
 
 
 func _process(delta: float) -> void:
@@ -216,17 +234,6 @@ func set_per_day_stuff() -> void:
 		_active_machines.clear()
 		_active_machines.push_front(tutorial_machine)
 		_set_day_security_cameras_active([])
-	else:
-		Global.player.movement_enabled = false
-		day_indicator.text = Global.day_to_string(Global.day).to_upper()
-		day_indicator.show()
-		await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
-		await get_tree().create_timer(1.5, false).timeout
-		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
-		day_indicator.hide()
-		_on_desk_interacted()
-		pc_ui._on_shop_button_pressed()
-		Global.player.movement_enabled = true
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
