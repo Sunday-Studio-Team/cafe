@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dyu70pksd1s2w"]
 
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="1_fnanm"]
-[ext_resource type="ArrayOccluder3D" uid="uid://cyseh0wgqavym" path="res://break_room_door_occluder3d.occ" id="2_6uinn"]
 [ext_resource type="PackedScene" uid="uid://dfmk6fgi2327m" path="res://Assets/Office door/Managers Office Door 3D Model.glb" id="3_51qo0"]
 [ext_resource type="AudioStream" uid="uid://bvl68g2188yl0" path="res://audio/door_open.ogg" id="4_564c8"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="5_pq8ay"]
@@ -24,13 +23,6 @@ door_physics_body = NodePath("DoorStaticBody3D")
 open_sound = NodePath("OpenSound")
 close_sound = NodePath("CloseSound")
 exited_break_room_detection_area = NodePath("PlayerDetectionArea")
-
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1489315657]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
-top_level = true
-layers = 2
-occluder = ExtResource("2_6uinn")
-bake_mask = 4293918722
 
 [node name="DoorStaticBody3D" type="StaticBody3D" parent="." unique_id=1987512734]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)

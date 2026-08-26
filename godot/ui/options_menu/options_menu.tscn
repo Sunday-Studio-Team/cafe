@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://p8e3ualo81vq" path="res://ui/options_menu/options_menu_option_view.tscn" id="1_3s1t0"]
 [ext_resource type="Script" uid="uid://don8op45g0jer" path="res://ui/options_menu/options_menu.gd" id="1_8h7tm"]
+[ext_resource type="PackedScene" uid="uid://bfoj2ygbyxij8" path="res://ui/options_menu/options_menu_keybind_option_view.tscn" id="3_utl02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h7tm"]
 bg_color = Color(0.11366529, 0.11366529, 0.113665275, 1)
@@ -9,13 +10,54 @@ bg_color = Color(0.11366529, 0.11366529, 0.113665275, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
 font_size = 24
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_graphics_preset_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_save_settings_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjtux"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.16, 0.16, 0.16, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utl02"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+content_margin_bottom = 16.0
+bg_color = Color(0.09, 0.09, 0.09, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx268"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+content_margin_bottom = 16.0
+bg_color = Color(0.34, 0.34, 0.34, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+content_margin_bottom = 16.0
+bg_color = Color(0.16, 0.16, 0.16, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wakw5"]
+bg_color = Color(0.06, 0.06, 0.06, 1)
+
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_graphics_preset_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
 process_mode = 3
 layer = 5
 script = ExtResource("1_8h7tm")
-_graphics_preset_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView")
-_crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
-_camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
+_tab_container = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer")
+_graphics_preset_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView")
+_crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
+_camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
+_move_forward_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveForwardOptionsMenuKeybindOptionView2")
+_move_left_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveLeftOptionsMenuKeybindOptionView")
+_move_backward_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveBackwardOptionsMenuKeybindOptionView2")
+_move_right_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveRightOptionsMenuKeybindOptionView3")
+_sprint_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/SprintOptionsMenuKeybindOptionView4")
+_interact_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/InteractOptionsMenuKeybindOptionView")
+_drop_item_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/DropItemOptionsMenuKeybindOptionView2")
+_use_contextual_active_item_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/UseContextualActiveItemOptionsMenuKeybindOptionView")
+_pause_exit_menu_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/PauseExitMenuOptionsMenuKeybindOptionView2")
 _save_settings_button = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/SaveSettingsButton")
 
 [node name="Control" type="Control" parent="." unique_id=12575952]
@@ -75,29 +117,93 @@ label_settings = SubResource("LabelSettings_xrivr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1617562027]
+[node name="TabContainer" type="TabContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1902669804]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tjtux")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_utl02")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_kx268")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_13qdw")
+tab_alignment = 1
+current_tab = 0
+tab_0/title = "General"
+tab_1/title = "Keybinds"
 
-[node name="OptionViewsVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1160021112]
+[node name="GeneralScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1617562027]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_tab_index = 0
+metadata/_tab_name = "General"
+
+[node name="GeneralOptionViewsVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer" unique_id=1160021112]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("1_3s1t0")]
+[node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Graphics Preset"
 
-[node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
+[node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Crosshair"
 
-[node name="CameraMotionOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/OptionViewsVBoxContainer" unique_id=1495567016 instance=ExtResource("1_3s1t0")]
+[node name="CameraMotionOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1495567016 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Motion Sickness"
+
+[node name="KeybindsScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1598742862]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_tab_index = 1
+metadata/_tab_name = "Keybinds"
+
+[node name="OptionViewsVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer" unique_id=1974850694]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="MoveForwardOptionsMenuKeybindOptionView2" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=260905574 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Move Forward"
+
+[node name="MoveLeftOptionsMenuKeybindOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=1872425205 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Move Left"
+
+[node name="MoveBackwardOptionsMenuKeybindOptionView2" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=2042154663 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Move Backward"
+
+[node name="MoveRightOptionsMenuKeybindOptionView3" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=549660142 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Move Right"
+
+[node name="SprintOptionsMenuKeybindOptionView4" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=2030250957 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Sprint"
+
+[node name="InteractOptionsMenuKeybindOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=1373911009 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Interact"
+
+[node name="DropItemOptionsMenuKeybindOptionView2" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=718035520 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Drop Item"
+
+[node name="UseContextualActiveItemOptionsMenuKeybindOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=587526762 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Use Contextual Active Item"
+
+[node name="PauseExitMenuOptionsMenuKeybindOptionView2" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer" unique_id=1307465321 instance=ExtResource("3_utl02")]
+layout_mode = 2
+action_name = "Pause / Exit Menu"
 
 [node name="SaveSettingsButton" type="Button" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1727838823]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wakw5")
 text = "Save Settings"

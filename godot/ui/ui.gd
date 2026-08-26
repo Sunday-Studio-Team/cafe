@@ -408,7 +408,8 @@ func update_interactable_ui() -> void:
 				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] HAMMER 💥"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] HAMMER 💥" % use_item_keybind
 		
 		elif (
 				hovered_interactable.display_name == "Use machine"
@@ -419,7 +420,8 @@ func update_interactable_ui() -> void:
 				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] AIRHORN"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] AIRHORN" % use_item_keybind
 
 		elif (
 				hovered_interactable.display_name.contains("camera")
@@ -428,15 +430,17 @@ func update_interactable_ui() -> void:
 				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] WHIPPED CREAM"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] WHIPPED CREAM" % use_item_keybind
 
 		else:
 			item_indicator.hide()
 			item_text.text = ""
 
 		if hovered_interactable.hold_to_interact:
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 			interactable_label.text = (
-					"(HOLD) [E] - "
+					("(HOLD) [%s] - " % interact_keybind)
 					+ Global.hovered_interactable.display_name
 			)
 
@@ -445,8 +449,9 @@ func update_interactable_ui() -> void:
 			)
 
 		else:
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 			interactable_label.text = (
-					"[E] - "
+					("[%s] - " % interact_keybind)
 					+ Global.hovered_interactable.display_name
 			)
 

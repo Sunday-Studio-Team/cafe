@@ -26,9 +26,12 @@ func load_options_data_from_file() -> void:
 		options_data = (saved_resource as OptionsData)
 	if options_data == null:
 		options_data = OptionsData.new()
-		print("Creating new options file.")
+		print("Creating new options data.")
 	else:
 		print("Loaded existing options file.")
+	
+	if options_data.options_version != options_data.LATEST_OPTIONS_VERSION:
+		options_data.update_version()
 	_options_data = options_data
 
 

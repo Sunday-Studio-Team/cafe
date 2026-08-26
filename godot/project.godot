@@ -44,7 +44,7 @@ project/assembly_name="cafe"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/editor_tools/plugin.cfg", "res://addons/polygon_counter/plugin.cfg", "res://addons/polygon_counter_extended/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/console/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/editor_tools/plugin.cfg", "res://addons/polygon_counter/plugin.cfg", "res://addons/polygon_counter_extended/plugin.cfg")
 
 [global_group]
 
@@ -197,6 +197,10 @@ right_click={
 3d_physics/layer_3="droppable"
 3d_physics/layer_4="player"
 
+[navigation]
+
+3d/default_cell_size=0.15
+
 [physics]
 
 3d/run_on_separate_thread=true
@@ -207,4 +211,3 @@ common/physics_interpolation=true
 
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/use_debanding=true
-occlusion_culling/use_occlusion_culling=true
