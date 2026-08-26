@@ -102,4 +102,7 @@ func _on_minigame_cancelled() -> void:
 	Global.active_help_desk_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out_during_minigame)
 
 func _on_customer_wait_timed_out_during_minigame(timed_out_customer: Customer) -> void:
+	Events.minigame_end.disconnect(_on_minigame_end)
+	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
+	
 	Events.force_close_minigame.emit()
