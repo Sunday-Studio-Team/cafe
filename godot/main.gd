@@ -128,13 +128,6 @@ func _ready() -> void:
 	for ui_element: Control in ui.find_children("*", "Control", false):
 		ui_element.modulate = Color.TRANSPARENT
 
-	day_indicator.text = Global.day_to_string(Global.day).to_upper()
-	day_indicator.show()
-	await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
-	await get_tree().create_timer(3, false).timeout
-	await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
-	day_indicator.hide()
-
 	for ui_element: Control in ui.find_children("*", "Control", false):
 		create_tween().tween_property(ui_element, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT)
 
@@ -223,7 +216,6 @@ func set_per_day_stuff() -> void:
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
-		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
 		Stats.current.customer_wait_time_machine = INF
@@ -232,15 +224,22 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_front(tutorial_machine)
 		_set_day_security_cameras_active([])
 	else:
+		Global.player.movement_enabled = false
+		day_indicator.text = Global.day_to_string(Global.day).to_upper()
+		day_indicator.show()
+		await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
+		await get_tree().create_timer(1.5, false).timeout
+		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
+		day_indicator.hide()
 		_on_desk_interacted()
 		pc_ui._on_shop_button_pressed()
+		Global.player.movement_enabled = true
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
 		var email_manager: EmailsManager = EmailsManager.get_instance()
 		email_manager._delivered_emails_to_date.clear()
 		Global.emails_schedule.clear()
-		Global.player_tips_bank = 0
 		Global.owned_items.clear()
 		Stats.reset()
 
