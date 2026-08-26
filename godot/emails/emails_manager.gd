@@ -33,6 +33,9 @@ func _ready() -> void:
 	if current_day >= 2:
 		var review_count = randi_range(0, 4)
 		for i in range(review_count):
+			var review = Global.reviews.filter(func(x: Review): return not x in Global.recieved_reviews).pick_random()
+			Global.recieved_reviews[review] = current_day
+		if review_count >= 1:
 			Global.emails_schedule.append(ReviewUpdateEmail.new())
 	
 	if days_since_random >= 2: # Can't get random emails everyday or on first day

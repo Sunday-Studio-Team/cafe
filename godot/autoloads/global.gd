@@ -37,6 +37,7 @@ var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
 var reviews: Array[Review]
+var recieved_reviews: Dictionary[Review, int]
 var owned_items: Array[Item]
 var score_update_message: String
 var player_in_cctv_los := false
