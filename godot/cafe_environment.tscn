@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://cpp4dkdwca17b" path="res://Assets/Table/toolbox_and_table.tscn" id="34_02vyw"]
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
 [ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="35_dmru2"]
+[ext_resource type="Texture2D" uid="uid://boma1g3mo73eo" path="res://environment/textures/grey carpet.png" id="36_edv2q"]
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
 [ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="37_vf5ik"]
 [ext_resource type="Texture2D" uid="uid://d0bcxshct7olx" path="res://Assets/Posters/gun watching.png" id="38_on62l"]
@@ -397,13 +398,13 @@ depth = 0.0
 material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(5.199341, 0.1, 6)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
-albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
-albedo_texture = ExtResource("31_omxm3")
-uv1_scale = Vector3(13.51, 2.58, 13.51)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3pel"]
+albedo_color = Color(0.98, 0.80278337, 0.63699996, 0.52156866)
+albedo_texture = ExtResource("36_edv2q")
+uv1_scale = Vector3(4.08, 4.08, 4.08)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7olkn"]
-material = SubResource("StandardMaterial3D_jofr6")
+material = SubResource("StandardMaterial3D_j3pel")
 size = Vector3(5.0753174, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wiun"]
@@ -577,6 +578,11 @@ shadow_mesh = SubResource("ArrayMesh_phyj4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjja3"]
 albedo_texture = ExtResource("39_5utbh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jofr6"]
+albedo_color = Color(0.6, 0.52156866, 0.4745098, 1)
+albedo_texture = ExtResource("31_omxm3")
+uv1_scale = Vector3(13.51, 2.58, 13.51)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u58gx"]
 material = SubResource("StandardMaterial3D_jofr6")
@@ -2359,7 +2365,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010987, -0.00016215755, -0.99995697, 1.0260117e-07, 1, -0.00016215057, 0.99995697, -1.01539825e-08, 0.00057010987, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010975, -0.00016215755, -0.9999568, 1.02601156e-07, 1, -0.00016215054, 0.9999568, -1.01539825e-08, 0.00057010975, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
