@@ -147,7 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 bbcode_enabled = true
-text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Green Square"
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Blue Square"
 fit_content = true
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Buttons/Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1218646402]
@@ -253,6 +253,8 @@ button_texture = ExtResource("8_itcgr")
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="SubViewport/Buttons" unique_id=613272079]
 stream = ExtResource("9_uaykq")
+volume_db = 5.0
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="SubViewport/Buttons" unique_id=1992806125]
 stream = ExtResource("10_xs2qy")
+volume_db = 5.0
