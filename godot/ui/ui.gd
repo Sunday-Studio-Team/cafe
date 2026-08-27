@@ -23,7 +23,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var _eye_logo_red_texture: Texture2D
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
-@export var alert_label: Label
+@export var alert_label: RichTextLabel
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
@@ -500,11 +500,12 @@ func _on_alert_posted(message: String) -> void:
 	if alert_tween != null and alert_tween.is_running():
 		alert_tween.kill()
 	alert_tween = create_tween()
-
-	alert_label.text = message
-	alert_tween.tween_property(alert_ui, "modulate:a", 0, 2).from(1)
-
+	alert_label.text = "[b]%s" % message
+	alert_sprite.stop()
 	alert_sprite.play()
+	alert_tween.tween_property(alert_ui, "modulate:a", 1, 0.25)
+	alert_tween.tween_interval(3)
+	alert_tween.tween_property(alert_ui, "modulate:a", 0, 0.25)
 
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money

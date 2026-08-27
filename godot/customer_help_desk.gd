@@ -68,7 +68,7 @@ func _set_customer(new_customer: Customer) -> void:
 			_desk_customer.timer.start()
 			_desk_customer.waiting_indicator.show()
 		bell_sound.play()
-		Events.alert_posted.emit("😡 customer complained")
+		Events.alert_posted.emit("🛎️ customer complained")
 		_help_desk_interactable.visible = true
 	else:
 		_help_desk_interactable.visible = false

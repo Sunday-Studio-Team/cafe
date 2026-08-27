@@ -1375,14 +1375,19 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Exclamation" type="TextureRect" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 texture = SubResource("ViewportTexture_0ffxp")
+expand_mode = 5
+stretch_mode = 5
 
-[node name="AlertText" type="Label" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
+[node name="AlertText" type="RichTextLabel" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=162298885]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "❗️🛎️ customer complained"
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[b]🛎️ customer complained"
+fit_content = true
 
 [node name="SubViewport" type="SubViewport" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
 transparent_bg = true
