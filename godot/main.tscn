@@ -102,7 +102,6 @@
 [ext_resource type="Texture2D" uid="uid://c8fk8hwv2cgrt" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0040.png" id="92_mofpq"]
 [ext_resource type="Texture2D" uid="uid://bdq4sslhpoyij" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0041.png" id="93_6kttw"]
 [ext_resource type="Texture2D" uid="uid://mvrsvfukejpx" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0042.png" id="94_oqmj5"]
-[ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
 [ext_resource type="Texture2D" uid="uid://bt8vtxtrfufm5" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0043.png" id="95_uor2d"]
 [ext_resource type="Texture2D" uid="uid://b31ttq4ehftsn" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0044.png" id="96_bdw5g"]
 [ext_resource type="Texture2D" uid="uid://fr1b11ytuaau" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0045.png" id="97_j6smb"]
@@ -246,7 +245,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fd6dt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_c6fgv"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -257,7 +256,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gttkg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fd6dt"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -268,7 +267,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hiwvf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gttkg"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -279,7 +278,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ed5de"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hiwvf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -531,9 +530,6 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
 bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 
@@ -685,7 +681,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fd6dt")
+texture = SubResource("ViewportTexture_c6fgv")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -698,7 +694,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_gttkg")
+texture = SubResource("ViewportTexture_fd6dt")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -715,7 +711,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_hiwvf")
+texture = SubResource("ViewportTexture_gttkg")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -732,7 +728,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ed5de")
+texture = SubResource("ViewportTexture_hiwvf")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -924,7 +920,7 @@ autoplay = "default"
 frame_progress = 0.28658438
 offset = Vector2(0, -250)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -948,7 +944,6 @@ cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
 _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
-alert_label = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/AlertText")
 shelf_item_ui = NodePath("HUD/ShelfItem")
 shelf_item_name = NodePath("HUD/ShelfItem/VBoxContainer/Name")
 shelf_item_description = NodePath("HUD/ShelfItem/VBoxContainer/Description")
@@ -961,7 +956,6 @@ day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/Day
 rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
 rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
 customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
-alert_sprite = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
 exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
@@ -1373,31 +1367,6 @@ horizontal_alignment = 2
 
 [node name="Alerts" type="VBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=1572896895]
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/Alerts" unique_id=407575910]
-layout_mode = 2
-
-[node name="Exclamation" type="TextureRect" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = SubResource("ViewportTexture_0ffxp")
-
-[node name="AlertText" type="Label" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "❗️🛎️ customer complained"
-
-[node name="SubViewport" type="SubViewport" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
-transparent_bg = true
-size = Vector2i(85, 100)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport" unique_id=2022034122]
-texture_filter = 1
-position = Vector2(55, 30)
-scale = Vector2(0.5, 0.5)
-sprite_frames = ExtResource("95_d5iia")
-frame = 71
-frame_progress = 1.0
 
 [node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 enum ScoreType { MONEY, CUSTOMER }
+const ALERT_QUEUE_SIZE = 5
 
 @export var profit_label: Label
 @export var profit_progress: ProgressBar
@@ -23,7 +24,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var _eye_logo_red_texture: Texture2D
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
-@export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
@@ -36,7 +36,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_label: Label
 @export var customer_flow_rate_label: Label
-@export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
 @export var sold_item_sound: AudioStreamPlayer
 @export var exit_machine_button: Button
@@ -62,8 +61,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var scrubber: Item
 @export var whipped_cream: Item
 
+var alert_queue: Array[HBoxContainer]
+var alert_load = preload("res://ui/alert.tscn")
 var score_update_tween: Tween
-var alert_tween: Tween
 var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
@@ -98,7 +98,6 @@ func _ready() -> void:
 	)
 
 	score_update_label.modulate = Color.TRANSPARENT
-	alert_ui.modulate.a = 0
 
 	stamina_bar.max_value = Stats.current.max_stamina
 
@@ -482,15 +481,33 @@ func _update_rating() -> void:
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
 
 
+func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
+	var _on_alert_tween_finished = func():
+		# Make sure parent hasn't already been freed
+		if is_instance_valid(alert_to_remove):
+			alert_to_remove.queue_free()
+	return _on_alert_tween_finished
+
 func _on_alert_posted(message: String) -> void:
-	if alert_tween != null and alert_tween.is_running():
-		alert_tween.kill()
-	alert_tween = create_tween()
+	if alert_queue.size() > ALERT_QUEUE_SIZE:
+		var alert_to_remove = alert_queue.pop_at(0)
+		var fast_fade_tween = create_tween()
+		fast_fade_tween.tween_property(alert_to_remove, "modulate:a", 0, 0.5).from(1)
+		fast_fade_tween.finished.connect(_get_on_alert_tween_finished(alert_to_remove))
+		
+	var new_alert = alert_load.instantiate()
 
-	alert_label.text = message
-	alert_tween.tween_property(alert_ui, "modulate:a", 0, 2).from(1)
+	alert_ui.add_child(new_alert)
+	alert_queue.append(new_alert)
+	var new_alert_tween = create_tween()
+	
+	new_alert.alert_label.text = message
+	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 2).from(1)
+	new_alert_tween.finished.connect(_get_on_alert_tween_finished(new_alert))
 
-	alert_sprite.play()
+	new_alert.alert_sprite.play()
+	print("alert should show now")
+	
 
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money

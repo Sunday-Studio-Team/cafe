@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://j530u4ni603j"]
+
+[ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="1_a1dw8"]
+[ext_resource type="Script" uid="uid://y5rqdveho03x" path="res://ui/alert.gd" id="1_mm7lo"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mm7lo"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Alert" type="HBoxContainer" unique_id=1465995593 node_paths=PackedStringArray("alert_label", "alert_sprite")]
+script = ExtResource("1_mm7lo")
+alert_label = NodePath("AlertLabel")
+alert_sprite = NodePath("SubViewport/AnimatedSprite2D")
+
+[node name="Exclamation" type="TextureRect" parent="." unique_id=860667440]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("ViewportTexture_mm7lo")
+
+[node name="AlertLabel" type="Label" parent="." unique_id=1926260897]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "❗️🛎️ customer complained"
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=928312859]
+transparent_bg = true
+size = Vector2i(85, 100)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SubViewport" unique_id=1059252680]
+position = Vector2(55, 30)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("1_a1dw8")
+frame = 71
