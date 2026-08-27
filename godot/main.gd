@@ -227,8 +227,6 @@ func set_per_day_stuff() -> void:
 		Global.emails_schedule.clear()
 		Global.owned_items.clear()
 		Stats.reset()
-		Stats.current.customer_wait_time_machine = INF
-		Stats.current.machine_chance_of_spill = 0.0
 		_active_machines.clear()
 		_active_machines.push_front(tutorial_machine)
 		_set_day_security_cameras_active([])
