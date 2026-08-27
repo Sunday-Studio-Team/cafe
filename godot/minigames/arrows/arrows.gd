@@ -67,6 +67,11 @@ func _input(event: InputEvent) -> void:
 
 func check_input(direction: String) -> void:
 	# Tippy dancing should go here
+	
+	if(correct_input_index>= valid_directions.size()): #error checking for index out of bound.
+		print('index out of bound caught in arrows.gd. error handled.')
+		return
+	
 	if (valid_directions[correct_input_index] == direction):
 		output_directions[valid_indices[correct_input_index]].texture = null
 		correct_input_index += 1
