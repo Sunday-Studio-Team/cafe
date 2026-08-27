@@ -426,6 +426,14 @@ func _on_minigame_end():
 func _on_shift_started():
 	Global.shift_started = true
 	shift_start_sound.play()
+	Events.alert_posted.emit("poop1")
+	Events.alert_posted.emit("poop2")
+	Events.alert_posted.emit("poop3")
+	Events.alert_posted.emit("poop4")
+	Events.alert_posted.emit("poop5")
+	Events.alert_posted.emit("poop6")
+	Events.alert_posted.emit("poop7")
+	Events.alert_posted.emit("poop8")
 
 	if Global.day > 0:
 		game_timer.start()

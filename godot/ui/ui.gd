@@ -480,35 +480,48 @@ func _update_rating() -> void:
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
 
-
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 	var _on_alert_tween_finished = func():
 		# Make sure parent hasn't already been freed
 		if is_instance_valid(alert_to_remove):
+			# remove this alert after it is done
+			alert_queue.erase(alert_to_remove)
 			alert_to_remove.queue_free()
 	return _on_alert_tween_finished
 
 func _on_alert_posted(message: String) -> void:
-	if alert_queue.size() > ALERT_QUEUE_SIZE:
+	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
+		# we need to remove before we start the tween to make sure that 
+		# any successive alerts posted don't access the same first alert
+		# which can happen if a bunch of alerts are all queued at the same time
 		var alert_to_remove = alert_queue.pop_at(0)
-		var fast_fade_tween = create_tween()
-		fast_fade_tween.tween_property(alert_to_remove, "modulate:a", 0, 0.5).from(1)
-		fast_fade_tween.finished.connect(_get_on_alert_tween_finished(alert_to_remove))
 		
+		var old_alert_tween = alert_to_remove.alert_tween
+		if old_alert_tween != null and old_alert_tween.is_running():
+			old_alert_tween.kill()
+		
+		var fast_fade_tween = create_tween()
+		alert_to_remove.alert_tween = fast_fade_tween
+
+		fast_fade_tween.tween_property(alert_to_remove, "modulate:a", 0, 0.5).from(1)
+		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before 
+		# the lambda is called
+		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
+
 	var new_alert = alert_load.instantiate()
+	new_alert.alert_label.text = message
 
 	alert_ui.add_child(new_alert)
 	alert_queue.append(new_alert)
-	var new_alert_tween = create_tween()
 	
-	new_alert.alert_label.text = message
+	var new_alert_tween = create_tween()
 	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 2).from(1)
-	new_alert_tween.finished.connect(_get_on_alert_tween_finished(new_alert))
+	new_alert.alert_tween = new_alert_tween
+	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before 
+	# the lambda is called
+	new_alert_tween.finished.connect(_get_on_alert_tween_finished.bind(new_alert).call())
 
 	new_alert.alert_sprite.play()
-	print("alert should show now")
-	
-
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money
 # and customer scores change since they share a lot of code and use the same label for the updates
