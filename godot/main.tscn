@@ -880,31 +880,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="VoiceLineNoLocationPlayer" type="Node3D" parent="." unique_id=736549418 node_paths=PackedStringArray("_audio_stream_player_3ds")]
 script = ExtResource("25_s0om5")
-_audio_stream_player_3ds = [NodePath("VoiceLineNoLocationAudioStreamPlayer3D"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D2"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D3"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D4"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D5"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D6"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D7"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D8")]
+_audio_stream_player_3ds = [NodePath("VoiceLineNoLocationAudioStreamPlayer3D"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D2"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D4"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D5")]
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D" parent="VoiceLineNoLocationPlayer" unique_id=1512127767 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.359624, 2.8379436, 6.5908065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.359624, 2.8379436, -1.4091935)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D2" parent="VoiceLineNoLocationPlayer" unique_id=753703191 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6607904, 2.8379436, 6.5908065)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D3" parent="VoiceLineNoLocationPlayer" unique_id=411783359 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.526777, 2.8379436, 1.3948846)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D4" parent="VoiceLineNoLocationPlayer" unique_id=682055878 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.105054, 2.8379436, 6.620669)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D5" parent="VoiceLineNoLocationPlayer" unique_id=1167018039 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.612702, 2.8379436, 1.0365453)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D6" parent="VoiceLineNoLocationPlayer" unique_id=294285795 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8497739, 2.8379436, 13.085711)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D7" parent="VoiceLineNoLocationPlayer" unique_id=868151332 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1076207, 2.8379436, 11.816591)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D8" parent="VoiceLineNoLocationPlayer" unique_id=2144100047 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4200745, 2.8379436, 0.12576675)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="TippyVOIndicator" type="CanvasLayer" parent="." unique_id=45213847 node_paths=PackedStringArray("vo_player", "sprite")]
 layer = 2
@@ -1847,7 +1851,7 @@ animation = &"bag_pickup"
 stream = ExtResource("222_bvlej")
 
 [node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
-volume_db = -5.0
+bus = &"TippyVO"
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
