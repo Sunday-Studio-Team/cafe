@@ -9,14 +9,25 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	create_tween().tween_property(door_physics_body, "rotation_degrees:y", door_open_angle, 0.5)
-	open_sound.play()
-	Events.shift_started.connect(_on_shift_started)
+	open_door()
+	Events.shift_started.connect(close_door_when_player_exits)
+	Events.tippy_boss_released_player.connect(
+		func():
+			open_door()
+			close_door_when_player_exits()
+	)
 
-func _on_shift_started():
+
+func open_door() -> void:
+	open_sound.play()
+	create_tween().tween_property(door_physics_body, "rotation_degrees:y", door_open_angle, 0.5)
+
+
+func close_door_when_player_exits():
 	exited_break_room_detection_area.player_entered_area.connect(
 		func(_detection_area: PlayerDetectionArea):
-			_on_player_entered_detection_area(),
+			_on_player_entered_detection_area()
+			Events.player_left_office.emit(),
 		CONNECT_ONE_SHOT,
 	)
 

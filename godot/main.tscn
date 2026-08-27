@@ -1941,13 +1941,16 @@ max_db = -5.0
 autoplay = true
 bus = &"DiegeticMusic"
 
-[node name="TippyBoss" type="CharacterBody3D" parent="." unique_id=292729429 node_paths=PackedStringArray("nav_agent", "tired_indicator", "player_kidnap_marker", "player_release_marker")]
+[node name="TippyBoss" type="CharacterBody3D" parent="." unique_id=292729429 node_paths=PackedStringArray("jumpscare_fade_rect", "nav_agent", "tired_indicator", "player_kidnap_marker", "tired_timer", "sleep_timer", "stun_timer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, -2)
 script = ExtResource("228_fd6dt")
+jumpscare_fade_rect = NodePath("JumpscareFade/ColorRect")
 nav_agent = NodePath("NavigationAgent3D")
 tired_indicator = NodePath("TiredIndicator")
 player_kidnap_marker = NodePath("PlayerKidnapPos")
-player_release_marker = NodePath("PlayerReleasePos")
+tired_timer = NodePath("TiredTimer")
+sleep_timer = NodePath("SleepTimer")
+stun_timer = NodePath("StunTimer")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="TippyBoss" unique_id=1236274477]
 path_desired_distance = 0.1
@@ -1978,6 +1981,30 @@ top_level = true
 [node name="PlayerReleasePos" type="Marker3D" parent="TippyBoss" unique_id=381971597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.720034, 0, 8.268255)
 top_level = true
+
+[node name="TiredTimer" type="Timer" parent="TippyBoss" unique_id=559038824]
+wait_time = 20.0
+one_shot = true
+
+[node name="SleepTimer" type="Timer" parent="TippyBoss" unique_id=421014853]
+wait_time = 10.0
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="TippyBoss" unique_id=37255436]
+wait_time = 5.0
+one_shot = true
+
+[node name="JumpscareFade" type="CanvasLayer" parent="TippyBoss" unique_id=576340905]
+layer = 4
+
+[node name="ColorRect" type="ColorRect" parent="TippyBoss/JumpscareFade" unique_id=1141100330]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=194220850]
 navigation_mesh = SubResource("NavigationMesh_yf6j3")

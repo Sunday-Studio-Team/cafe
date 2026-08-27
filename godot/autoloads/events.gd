@@ -34,6 +34,8 @@ signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)
 signal ingredients_bag_consumed
 signal machine_exit_button_pressed
+signal player_left_office
+signal tippy_boss_released_player
 # minigames
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled

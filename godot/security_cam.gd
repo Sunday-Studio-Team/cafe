@@ -13,7 +13,7 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var rotation_pause_length: float = 2
 @export var grace_timer: Timer
 @export var disabled_timer: Timer
-@export var interactable : Interactable
+@export var interactable: Interactable
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 @export var disable_sound: AudioStreamPlayer3D
 @export var disable_particles: GPUParticles3D
@@ -56,7 +56,7 @@ func _ready() -> void:
 	interactable.visible = false
 	Events.shift_started.connect(
 		func():
-			interactable.visible = true
+			interactable.visible = true,
 	)
 
 
@@ -104,6 +104,12 @@ func _physics_process(_delta: float) -> void:
 					player_in_spotlight = true
 					break
 
+				elif collider == Global.tippy_boss:
+					if Global.tippy_boss.state == TippyBoss.State.CHASING:
+						Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
+						grace_timer.start()
+						break
+
 	if player_in_spotlight:
 		spotlight.light_color = Color.RED
 		Global.player_in_cctv_los = true
@@ -148,13 +154,11 @@ func _update_camera_components_active() -> void:
 			stored_ray.enabled = false
 
 
-
 # duplicates our raycast many times, covering roughly the area of the spotlight
 func create_rays() -> void:
 	# we need to overshoot slightly to account for the sorta
 	# halo around the edge of the light
 	#const ANGLE_OVERSHOOT := 5.0
-
 	_all_shape_casts.append(_shape_cast_3d)
 	# Disable the template by default.
 	# ray.enabled = false

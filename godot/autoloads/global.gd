@@ -95,6 +95,7 @@ var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
+var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
