@@ -91,9 +91,9 @@ var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
-var customer_sprites: Array[Texture]
+var customer_sprites: Array[CustomerSprite]
 ## the sprites of customers that are in the cafe right now
-var customer_sprites_in_use: Array[Texture]
+var customer_sprites_in_use: Array[CustomerSprite]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
@@ -175,7 +175,7 @@ func _ready() -> void:
 	items.assign(load_resources_from_folder(items_folder_path))
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	reviews.assign(load_resources_from_folder(review_folder_path))
-	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
+	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path,"tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 

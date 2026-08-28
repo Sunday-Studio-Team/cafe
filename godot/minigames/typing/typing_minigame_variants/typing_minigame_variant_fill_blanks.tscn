@@ -6,11 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://cpm8e11dkp7ty" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_typing_section.tscn" id="4_bg8cr"]
 [ext_resource type="PackedScene" uid="uid://cyy22h6m1wrhp" path="res://minigames/typing/typing_minigame_customer_dialog_view.tscn" id="4_tlcrm"]
 [ext_resource type="PackedScene" uid="uid://vidaqp0nyrn3" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_prefilled_section.tscn" id="5_bg8cr"]
+[ext_resource type="Texture2D" uid="uid://di5dgly8ubu4k" path="res://sprites/typing_minigame/blue_red.png" id="6_x6qrv"]
+[ext_resource type="Texture2D" uid="uid://ck7cugi1dyoru" path="res://sprites/typing_minigame/Top_lightning.png" id="7_36uwy"]
+[ext_resource type="Texture2D" uid="uid://j0ifa67ft0qy" path="res://sprites/typing_minigame/sato_numb.png" id="8_0qatm"]
+[ext_resource type="Texture2D" uid="uid://dfkb41pknhde4" path="res://sprites/customers/typing_minigame_portraits/nurse.png" id="10_0qatm"]
+[ext_resource type="Texture2D" uid="uid://27dlmtm0sp81" path="res://sprites/typing_minigame/bottom_lightning.png" id="10_6668d"]
+[ext_resource type="Texture2D" uid="uid://c8sog3d01kv6q" path="res://sprites/typing_minigame/You.png" id="11_7gik8"]
+[ext_resource type="Texture2D" uid="uid://d0wpqtljemans" path="res://sprites/typing_minigame/coffee_tastes_like_dirt.png" id="12_6u2o6"]
+[ext_resource type="Texture2D" uid="uid://bu5q1ojwylv3e" path="res://sprites/typing_minigame/tippygun.png" id="13_6u2o6"]
+[ext_resource type="Texture2D" uid="uid://ceiw0jbdiie6x" path="res://sprites/typing_minigame/typeurresponse.png" id="14_6668d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
 font_size = 48
 
-[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container")]
+[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container", "sato_container", "customer_container", "tippy_group", "dialogue_box", "dialogue_box_texture", "speech_bubble_texture")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,10 +32,17 @@ prefilled_section_packed_scene = ExtResource("5_bg8cr")
 typed_section_packed_scene = ExtResource("4_bg8cr")
 customer_dialog_view = NodePath("VBoxContainer/TypingMinigameCustomerDialogView")
 instructions_container = NodePath("VBoxContainer/InstructionsContainer")
-sentence_container = NodePath("VBoxContainer/TypingSectionContainer/SentenceHFlowContainer")
+sentence_container = NodePath("DialogueContainer/TypingSectionContainer/SentenceHFlowContainer")
+sato_container = NodePath("VBoxContainer2/SatoContainer")
+customer_container = NodePath("VBoxContainer2/CustomerContainer")
+tippy_group = NodePath("TippyGroup")
+dialogue_box = NodePath("DialogueContainer")
+dialogue_box_texture = NodePath("DialogueContainer/DialogueBox")
+speech_bubble_texture = NodePath("SpeechBubbleContainer/SpeechBubbleTexture")
 metadata/_custom_type_script = "uid://dp7wiw2dh25le"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667575708]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -53,10 +69,166 @@ label_settings = SubResource("LabelSettings_xrivr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TypingSectionContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1204504852]
+[node name="RedBlueBG" type="TextureRect" parent="." unique_id=1330345404]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_x6qrv")
+
+[node name="TopBorder" type="TextureRect" parent="." unique_id=1629208897]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_36uwy")
+stretch_mode = 4
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="." unique_id=1778082158]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 64)
+
+[node name="SatoContainer" type="TextureRect" parent="VBoxContainer2" unique_id=636810154]
 layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(-960, 0)
+texture = ExtResource("8_0qatm")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="CustomerContainer" type="TextureRect" parent="VBoxContainer2" unique_id=1620205873]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(960, 0)
+texture = ExtResource("10_0qatm")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="BottomBorder" type="TextureRect" parent="." unique_id=939463067]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -310.0
+offset_right = 960.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("10_6668d")
+stretch_mode = 4
+
+[node name="SpeechBubbleContainer" type="MarginContainer" parent="." unique_id=950283947]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 640
+theme_override_constants/margin_top = 36
+
+[node name="SpeechBubbleTexture" type="TextureRect" parent="SpeechBubbleContainer" unique_id=112891622]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0, 0)
+offset_transform_rotation = 1.5707964
+texture = ExtResource("12_6u2o6")
+stretch_mode = 2
+
+[node name="DialogueContainer" type="MarginContainer" parent="." unique_id=65645439]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 480)
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 720
+theme_override_constants/margin_right = 640
 theme_override_constants/margin_bottom = 64
 
-[node name="SentenceHFlowContainer" type="HFlowContainer" parent="VBoxContainer/TypingSectionContainer" unique_id=1211199840]
+[node name="DialogueBox" type="TextureRect" parent="DialogueContainer" unique_id=1195808354]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+texture = ExtResource("11_7gik8")
+stretch_mode = 2
+
+[node name="TypingSectionContainer" type="MarginContainer" parent="DialogueContainer" unique_id=1204504852]
+layout_mode = 2
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 112
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="SentenceHFlowContainer" type="HFlowContainer" parent="DialogueContainer/TypingSectionContainer" unique_id=1211199840]
 layout_mode = 2
 alignment = 1
+
+[node name="TippyGroup" type="Control" parent="." unique_id=2095585535]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 480)
+mouse_filter = 2
+
+[node name="TippyContainer" type="MarginContainer" parent="TippyGroup" unique_id=1212276430]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1733.0
+offset_bottom = 1040.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1280
+theme_override_constants/margin_top = 600
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 40
+
+[node name="Tippy" type="TextureRect" parent="TippyGroup/TippyContainer" unique_id=820904426]
+layout_mode = 2
+texture = ExtResource("13_6u2o6")
+stretch_mode = 2
+
+[node name="TippyInstructionContainer" type="MarginContainer" parent="TippyGroup" unique_id=1549613494]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1850.0
+offset_bottom = 990.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 680
+theme_override_constants/margin_top = 660
+theme_override_constants/margin_right = 570
+theme_override_constants/margin_bottom = 200
+
+[node name="TextureRect" type="TextureRect" parent="TippyGroup/TippyInstructionContainer" unique_id=2022849449]
+layout_mode = 2
+texture = ExtResource("14_6668d")
+stretch_mode = 2

@@ -13,7 +13,9 @@ const MOVE_SPEED := 2.0
 @export var spawn_sound: AudioStreamPlayer3D
 
 @export_dir var sprites_folder: String
+@export_dir var typing_minigame_portraits_folder: String
 
+var customer_sprite_resource:CustomerSprite
 var desired_drink: Drink
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -24,19 +26,18 @@ var percent_time_left: float = 100
 
 func _ready() -> void:
 	# Find all unused customer sprites
-	var unused_customer_sprites: Array[Texture]
+	var unused_customer_sprites: Array[CustomerSprite]
 	for customer_sprite in Global.customer_sprites:
 		if !Global.customer_sprites_in_use.has(customer_sprite):
 			unused_customer_sprites.append(customer_sprite)
 	
 	# Prefer using an unused one, else just get a random one.
-	var customer_texture: Texture
 	if unused_customer_sprites.size() > 0:
-		customer_texture = unused_customer_sprites.pick_random()
+		customer_sprite_resource = unused_customer_sprites.pick_random()
 	else:
-		customer_texture = Global.customer_sprites.pick_random()
-	Global.customer_sprites_in_use.append(customer_texture)
-	body.texture = customer_texture
+		customer_sprite_resource = Global.customer_sprites.pick_random()
+	Global.customer_sprites_in_use.append(customer_sprite_resource)
+	body.texture = customer_sprite_resource.sprite
 	
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
@@ -76,7 +77,7 @@ func _process(_delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	Global.customer_sprites_in_use.erase(body.texture)
+	Global.customer_sprites_in_use.erase(customer_sprite_resource)
 
 
 func spawn_anim() -> void:
