@@ -105,9 +105,9 @@ Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
-_day_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/DayTitle")
+_day_label = NodePath("MarginContainer/VBoxContainer/Outcome")
 times_up = NodePath("MarginContainer/TimesUp")
-outcome = NodePath("MarginContainer/VBoxContainer/Outcome")
+outcome = NodePath("MarginContainer/VBoxContainer/Outcome2")
 time_up_sound = NodePath("TimeUpSound")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
@@ -172,6 +172,16 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Outcome2" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=2035401107]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/bold_font_size = 112
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1930785200]
 layout_mode = 2
 alignment = 1
@@ -181,6 +191,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 
 [node name="DayTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=123944233]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 82
 bbcode_enabled = true

@@ -90,7 +90,7 @@ func _on_time_up() -> void:
 	var passed_profit_goal := daily_profit >= min_profit_goal
 
 	#_day_label.text = Global.day_to_string(Global.day)
-	_day_label.text = "Day %d" % (Global.day + 1)
+	_day_label.text = "Day %d" % (Global.day)
 	_min_profit_goal_label.text = "required goal: %s" % Global.float_to_price(min_profit_goal)
 	_profit_made_label.text = "made today: %s/%s" % [
 		Global.float_to_price(daily_profit),

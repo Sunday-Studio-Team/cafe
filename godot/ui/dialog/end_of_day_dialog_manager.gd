@@ -20,4 +20,5 @@ func _ready() -> void:
 		printerr("No dialog for the day!")
 	
 	Global.day += 1
+	print(Global.day)
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
