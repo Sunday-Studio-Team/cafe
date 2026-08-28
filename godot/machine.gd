@@ -218,7 +218,7 @@ func _process_queued_customers() -> void:
 
 func check_for_stepping_in_spill() -> void:
 	if spill_on_floor:
-		Global.score_update_message = "customer stood in spill!"
+		Events.alert_posted.emit("customer stood in spill!", UI.AlertIconType.CUSTOMER)
 		Global.employee_rating -= Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
 
 
@@ -327,7 +327,7 @@ func _set_customer(new_customer: Customer) -> void:
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if customer == timed_out_customer:
-		Global.score_update_message = "customer left"
+		Events.alert_posted.emit("customer left", UI.AlertIconType.CUSTOMER)
 		Global.employee_rating -= Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		customer.leave_store()
 		_set_customer(null)
@@ -621,7 +621,7 @@ func clean_up_spill() -> void:
 	spill_clean_particles.restart()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
-	Global.score_update_message = "spill cleaned!"
+	Events.alert_posted.emit("spill cleaned!", UI.AlertIconType.MACHINE)
 	Global.employee_rating += rating_gained
 
 
@@ -664,6 +664,9 @@ func cancel_clean_spill() -> void:
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 
 
+func float_to_price(number: float) -> String:
+	return ("$%.2f" % number).trim_suffix(".00")
+
 func accept_order(did_remake_drink: bool) -> void:
 	gui_3d.exit_with_camera_tween()
 
@@ -676,18 +679,18 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
-			Global.score_update_message = "rated %s" % [order.made_drink.name]
+			Events.alert_posted.emit("+%.1f rated %s" % [order.star_rating_gain_for_remake, order.made_drink.name], UI.AlertIconType.RATING)
 			Global.employee_rating += order.star_rating_gain_for_remake
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
-			Global.score_update_message = "rated %s" % [order.made_drink.name]
+			Events.alert_posted.emit("-%.1f rated %s" % [order.star_rating_loss_if_accept, order.made_drink.name], UI.AlertIconType.RATING)
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout
 
-	Global.score_update_message = "sold %s" % order.made_drink.name
+	Events.alert_posted.emit("+%s sold %s" % [float_to_price(order.final_order_price), order.made_drink.name], UI.AlertIconType.RATING)
 	Global.daily_cafe_money += order.final_order_price
 
 	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left

@@ -2,11 +2,13 @@ extends CanvasLayer
 class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
-enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK }
+enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
 const ALERT_ICON_TYPE_IMAGE_MAP = {
 	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
 	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
 	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
+	AlertIconType.RATING: "res://Assets/UI/alert_icons/rule_break_icon.png",
+	AlertIconType.MONEY: "res://Assets/UI/alert_icons/rule_break_icon.png",
 }
 
 const ALERT_QUEUE_SIZE = 5
@@ -552,56 +554,55 @@ func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
 # they might ultimately be better separated but i combined the funcs for the ui notis when money
 # and customer scores change since they share a lot of code and use the same label for the updates
 func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
-	if score_update_tween != null and score_update_tween.is_running():
-		score_update_tween.kill()
-	score_update_label.offset_transform_position_ratio = Vector2.ZERO
-	score_update_label.offset_transform_rotation = 0
-	score_update_tween = create_tween().set_parallel()
+	#if score_update_tween != null and score_update_tween.is_running():
+		#score_update_tween.kill()
+	#score_update_label.offset_transform_position_ratio = Vector2.ZERO
+	#score_update_label.offset_transform_rotation = 0
+	#score_update_tween = create_tween().set_parallel()
 
-	var color: Color
+	#var color: Color
 	# the score label itself, not the label showing the updates like "+1$" etc
-	var score_label_to_tween: Label
-	score_update_label.text = ""
+	#var score_label_to_tween: Label
+	#score_update_label.text = ""
 
 	var change: float = new_value - old_value
 	print("change: %s" % change)
 	if change > 0.0:
 		match score_type:
 			ScoreType.MONEY:
-				color = Color.GOLD
+				#color = Color.GOLD
 				if is_inside_tree():
 					money_sound.play()
 			ScoreType.CUSTOMER:
-				color = Color.GREEN
+				#color = Color.GREEN
 				if is_inside_tree():
 					gain_points_sound.play()
 	else:
-		color = Color.RED
-		score_update_label.text = ""
+		#color = Color.RED
+		#score_update_label.text = ""
 		match score_type:
 			ScoreType.MONEY:
 				pass
 			ScoreType.CUSTOMER:
 				if is_inside_tree():
 					lose_points_sound.play()
-	score_update_label.modulate = color
 
-	var change_num_to_show: String = ""
-	if change > 0:
-		change_num_to_show = "+"
-
-	match score_type:
-		ScoreType.MONEY:
-			change_num_to_show += Global.float_to_price(change)
-			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
-			score_label_to_tween = profit_label
-		ScoreType.CUSTOMER:
-			change_num_to_show += "%.1f" % change
-			change_num_to_show = change_num_to_show.rstrip(".0")
-
-			score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
-			score_label_to_tween = customer_happiness_label
-	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
-	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
-	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
-	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)
+	#var change_num_to_show: String = ""
+	#if change > 0:
+		#change_num_to_show = "+"
+#
+	#match score_type:
+		#ScoreType.MONEY:
+			#change_num_to_show += Global.float_to_price(change)
+			#score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
+			#score_label_to_tween = profit_label
+		#ScoreType.CUSTOMER:
+			#change_num_to_show += "%.1f" % change
+			#change_num_to_show = change_num_to_show.rstrip(".0")
+#
+			#score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
+			#score_label_to_tween = customer_happiness_label
+	#create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
+	#score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
+	#score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
+	#score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)

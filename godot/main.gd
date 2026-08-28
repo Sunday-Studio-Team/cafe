@@ -428,15 +428,6 @@ func _on_minigame_end():
 func _on_shift_started():
 	Global.shift_started = true
 	shift_start_sound.play()
-	
-	Events.alert_posted.emit("hello1", UI.AlertIconType.MACHINE)
-	Events.alert_posted.emit("hello2", UI.AlertIconType.CUSTOMER)
-	Events.alert_posted.emit("hello3", UI.AlertIconType.RULE_BREAK)
-	Events.alert_posted.emit("hello4", UI.AlertIconType.MACHINE)
-	Events.alert_posted.emit("hello5", UI.AlertIconType.RULE_BREAK)
-	Events.alert_posted.emit("hello6", UI.AlertIconType.MACHINE)
-	Events.alert_posted.emit("hello7", UI.AlertIconType.CUSTOMER)
-	Events.alert_posted.emit("hello8", UI.AlertIconType.MACHINE)
 
 	if Global.day > 0:
 		game_timer.start()

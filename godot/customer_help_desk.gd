@@ -77,7 +77,7 @@ func _set_customer(new_customer: Customer) -> void:
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	timed_out_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out)
 	if _desk_customer == timed_out_customer:
-		Global.score_update_message = "customer didn't get help"
+		Events.alert_posted.emit("customer didn't get help", UI.AlertIconType.CUSTOMER)
 		Global.employee_rating -= Stats.current.help_desk_customer_timed_out_rating_loss_each_day[Global.day]
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
@@ -101,7 +101,7 @@ func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 	
-	Global.score_update_message = "customer placated"
+	Events.alert_posted.emit("customer placated", UI.AlertIconType.CUSTOMER)
 	Global.employee_rating += Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
 	Global.active_help_desk_customer.timer.stop()
 	Global.active_help_desk_customer.leave_store()
