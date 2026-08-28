@@ -512,7 +512,7 @@ func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 			alert_to_remove.queue_free()
 	return _on_alert_tween_finished
 
-func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
+func _on_alert_posted(message: String, alert_icon_type: AlertIconType, alert_time_to_live: float = 3.0) -> void:
 	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
 		# we need to remove before we start the tween to make sure that 
 		# any successive alerts posted don't access the same first alert
@@ -540,7 +540,7 @@ func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
 	
 	var new_alert_tween = create_tween()
 	new_alert_tween.tween_property(new_alert, "modulate:a", 1, 0.25)
-	new_alert_tween.tween_interval(3)
+	new_alert_tween.tween_interval(alert_time_to_live)
 	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 0.25)
 	new_alert.alert_tween = new_alert_tween
 	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before 
