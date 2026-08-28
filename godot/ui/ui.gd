@@ -7,8 +7,8 @@ const ALERT_ICON_TYPE_IMAGE_MAP = {
 	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
 	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
 	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
-	AlertIconType.RATING: "res://Assets/UI/alert_icons/rule_break_icon.png",
-	AlertIconType.MONEY: "res://Assets/UI/alert_icons/rule_break_icon.png",
+	AlertIconType.RATING: "res://Assets/UI/alert_icons/rating_icon.png",
+	AlertIconType.MONEY: "res://Assets/UI/alert_icons/dollar_icon.png",
 }
 
 const ALERT_QUEUE_SIZE = 5
@@ -99,7 +99,9 @@ func _ready() -> void:
 			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
 
-	Events.alert_posted.connect(func(message, alert_icon_type): _on_alert_posted(message, alert_icon_type))
+	Events.alert_posted.connect(
+		func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE): _on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
+	)
 	Events.shift_end_sequence_started.connect(
 		func():
 			low_time_sound.play()
@@ -514,7 +516,12 @@ func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 			alert_to_remove.queue_free()
 	return _on_alert_tween_finished
 
-func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
+func _on_alert_posted(
+	message: String, 
+	alert_icon_type: AlertIconType, 
+	alert_time_to_live: float = 4.0, 
+	color: Color = Color.WHITE
+) -> void:
 	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
 		# we need to remove before we start the tween to make sure that 
 		# any successive alerts posted don't access the same first alert
@@ -541,8 +548,9 @@ func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
 	alert_queue.append(new_alert)
 	
 	var new_alert_tween = create_tween()
+	new_alert_tween.tween_property(new_alert, "modulate", Color.WHITE, 1.5).from(color)
 	new_alert_tween.tween_property(new_alert, "modulate:a", 1, 0.25)
-	new_alert_tween.tween_interval(3)
+	new_alert_tween.tween_interval(alert_time_to_live)
 	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 0.25)
 	new_alert.alert_tween = new_alert_tween
 	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before 

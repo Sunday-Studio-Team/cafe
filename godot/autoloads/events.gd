@@ -28,7 +28,7 @@ signal end_screen_finished
 signal requirements_met
 signal money_updated(new_value: float, old_value: float)
 signal employee_rating_updated(new_value: float, old_value: float)
-signal alert_posted(message: String)
+signal alert_posted(message: String, alert_icon_type: UI.AlertIconType, alert_time_to_live: float, color: Color)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)

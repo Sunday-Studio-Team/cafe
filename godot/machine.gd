@@ -679,18 +679,33 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
-			Events.alert_posted.emit("+%.1f rated %s" % [order.star_rating_gain_for_remake, order.made_drink.name], UI.AlertIconType.RATING)
+			Events.alert_posted.emit(
+				"+%.1f rated %s" % [order.star_rating_gain_for_remake, order.made_drink.name], 
+				UI.AlertIconType.RATING,
+				4.0,
+				Color.GREEN,
+			)
 			Global.employee_rating += order.star_rating_gain_for_remake
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
-			Events.alert_posted.emit("-%.1f rated %s" % [order.star_rating_loss_if_accept, order.made_drink.name], UI.AlertIconType.RATING)
+			Events.alert_posted.emit(
+				"-%.1f rated %s" % [order.star_rating_loss_if_accept, order.made_drink.name], 
+				UI.AlertIconType.RATING,
+				4.0,
+				Color.RED
+			)
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout
 
-	Events.alert_posted.emit("+%s sold %s" % [float_to_price(order.final_order_price), order.made_drink.name], UI.AlertIconType.RATING)
+	Events.alert_posted.emit(
+		"+%s sold %s" % [float_to_price(order.final_order_price), order.made_drink.name], 
+		UI.AlertIconType.MONEY,
+		4.0,
+		Color.GOLD
+	)
 	Global.daily_cafe_money += order.final_order_price
 
 	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left
