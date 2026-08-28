@@ -152,38 +152,6 @@ offset_transform_rotation = 1.5707964
 texture = ExtResource("12_6u2o6")
 stretch_mode = 2
 
-[node name="DialogueContainer" type="MarginContainer" parent="." unique_id=65645439]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 480)
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 720
-theme_override_constants/margin_right = 640
-theme_override_constants/margin_bottom = 64
-
-[node name="DialogueBox" type="TextureRect" parent="DialogueContainer" unique_id=1195808354]
-layout_mode = 2
-size_flags_horizontal = 3
-offset_transform_enabled = true
-texture = ExtResource("11_7gik8")
-stretch_mode = 2
-
-[node name="TypingSectionContainer" type="MarginContainer" parent="DialogueContainer" unique_id=1204504852]
-layout_mode = 2
-theme_override_constants/margin_left = 72
-theme_override_constants/margin_top = 112
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 64
-
-[node name="SentenceHFlowContainer" type="HFlowContainer" parent="DialogueContainer/TypingSectionContainer" unique_id=1211199840]
-layout_mode = 2
-alignment = 1
-
 [node name="TippyGroup" type="Control" parent="." unique_id=2095585535]
 layout_mode = 1
 anchors_preset = 15
@@ -232,3 +200,35 @@ theme_override_constants/margin_bottom = 200
 layout_mode = 2
 texture = ExtResource("14_6668d")
 stretch_mode = 2
+
+[node name="DialogueContainer" type="MarginContainer" parent="." unique_id=65645439]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 480)
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 720
+theme_override_constants/margin_right = 640
+theme_override_constants/margin_bottom = 64
+
+[node name="DialogueBox" type="TextureRect" parent="DialogueContainer" unique_id=1195808354]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+texture = ExtResource("11_7gik8")
+stretch_mode = 2
+
+[node name="TypingSectionContainer" type="MarginContainer" parent="DialogueContainer" unique_id=1204504852]
+layout_mode = 2
+theme_override_constants/margin_left = 72
+theme_override_constants/margin_top = 112
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="SentenceHFlowContainer" type="HFlowContainer" parent="DialogueContainer/TypingSectionContainer" unique_id=1211199840]
+layout_mode = 2
+alignment = 1
