@@ -243,7 +243,6 @@ _data = {
 point_count = 7
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_61bol"]
-
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -254,9 +253,7 @@ _data = {
 }
 point_count = 7
 
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_lix4w"]
-
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -268,7 +265,6 @@ _data = {
 point_count = 8
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kmrid"]
-
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -279,9 +275,7 @@ _data = {
 }
 point_count = 8
 
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_c6fgv"]
-
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -686,9 +680,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-
 texture = SubResource("ViewportTexture_61bol")
-
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -701,9 +693,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-
 texture = SubResource("ViewportTexture_lix4w")
-
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -720,9 +710,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-
 texture = SubResource("ViewportTexture_kmrid")
-
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -739,9 +727,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-
 texture = SubResource("ViewportTexture_c6fgv")
-
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -937,9 +923,7 @@ autoplay = "default"
 frame_progress = 0.28658438
 offset = Vector2(0, -250)
 
-
 [node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
-
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")

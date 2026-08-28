@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dyu70pksd1s2w"]
 
 [ext_resource type="Script" uid="uid://bqwlacgyy3k4d" path="res://break_room_door.gd" id="1_fnanm"]
-[ext_resource type="PackedScene" uid="uid://dfmk6fgi2327m" path="res://Assets/Office door/Managers Office Door 3D Model.glb" id="3_51qo0"]
 [ext_resource type="AudioStream" uid="uid://bvl68g2188yl0" path="res://audio/door_open.ogg" id="4_564c8"]
 [ext_resource type="AudioStream" uid="uid://bwtbti5re8clm" path="res://audio/door_close.ogg" id="5_pq8ay"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="6_fntm6"]
 [ext_resource type="PackedScene" uid="uid://clu38siu3rseb" path="res://tutorial/tutorial_view_this_is_a_camera.tscn" id="7_34cy1"]
+[ext_resource type="PackedScene" uid="uid://cbxehcb1awgvk" path="res://Assets/Office door/Office Door.glb" id="7_fnanm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(0.2, 2, 1)
@@ -30,12 +30,6 @@ transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorStaticBody3D" unique_id=820153959]
 transform = Transform3D(-1, 0, -2.2351742e-08, 0, 1, 0, 2.2351742e-08, 0, -1, 0.0010708645, 0.9860133, -0.5496547)
 shape = SubResource("BoxShape3D_xrivr")
-
-[node name="BreakRoomDoorModel" type="Node3D" parent="DoorStaticBody3D" unique_id=685924687]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, 0)
-
-[node name="Sketchfab_Scene" parent="DoorStaticBody3D/BreakRoomDoorModel" unique_id=2121543409 instance=ExtResource("3_51qo0")]
-transform = Transform3D(-3.6398227e-08, 0, 1.109345, 0, 1.0077057, 0, -0.83269435, 0, -4.849101e-08, -0.029385565, -0.024177432, -0.5036449)
 
 [node name="OpenSound" type="AudioStreamPlayer3D" parent="." unique_id=300316961]
 stream = ExtResource("4_564c8")
@@ -62,3 +56,17 @@ shape = SubResource("BoxShape3D_fnanm")
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="PlayerDetectionArea" unique_id=90646488]
 transform = Transform3D(1.7049999, 0, 5.9604638e-08, 0, 1.7050002, 0, -5.9604638e-08, 0, 1.7049999, -2.0263662, 0, -3.4452095)
 shape = SubResource("BoxShape3D_fnanm")
+
+[node name="Office Door" parent="." unique_id=1122344636 instance=ExtResource("7_fnanm")]
+transform = Transform3D(-4.371138e-08, 0, -0.9999998, 0, 1, 0, 0.9999998, 0, -4.371138e-08, -0.046143647, -0.0049614906, 0.046448346)
+
+[node name="Cube_001" parent="Office Door" index="0" unique_id=967396877]
+transform = Transform3D(1.0630994, 0.00078497874, -3.3371972e-11, 0.0035290658, -0.2364678, 2.0106093e-08, 4.7416293e-10, -6.3543226e-08, -0.07482258, -1.028081, 0.96972364, -0.14364736)
+
+[node name="Cube_004" parent="Office Door" index="1" unique_id=1107172627]
+transform = Transform3D(1.0631044, 0, 0, 0, 0.23654851, 0, 3.5527137e-15, 0, 0.07482258, -1.028081, 0.9660789, 0.11536749)
+
+[node name="Door" parent="Office Door" index="2" unique_id=536283588]
+transform = Transform3D(0.2744182, 0, 0, 0, 1.1785359, 0, 8.881784e-16, 0, 0.36465946, -0.07175088, 0, 3.7252903e-09)
+
+[editable path="Office Door"]
