@@ -27,7 +27,7 @@ region = Rect2(225, 10, 600, 600)
 
 [node name="ReviewsCustomEmailView" type="MarginContainer" unique_id=2126401690 node_paths=PackedStringArray("review_1", "review_list")]
 custom_minimum_size = Vector2(916, 0)
-custom_maximum_size = Vector2(916, -1)
+custom_maximum_size = Vector2(800, -1)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -67,7 +67,7 @@ layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 100
 
 [node name="ReviewGrid" type="GridContainer" parent="VBoxContainer/PanelContainer2/MarginContainer" unique_id=1450173849]
 layout_mode = 2

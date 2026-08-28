@@ -33,7 +33,7 @@ func deliver_emails() -> void:
 		var reviews_to_add: Array[Review]
 		var review_count = randi_range(1, 4)
 		for i in range(review_count):
-			var review = Global.reviews.filter(func(x: Review): return not x in Global.received_reviews).pick_random()
+			var review = Global.reviews.filter(func(x: Review): return not Global.received_reviews.any(func(received: Review): return received.review_content == x.review_content)).pick_random()
 			if review == null:
 				printerr("Not enough reviews for us to work with!")
 				break
