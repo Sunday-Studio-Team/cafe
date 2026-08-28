@@ -2200,12 +2200,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9543986, 0.65221274, 3.1967
 
 [node name="Milk Var 1" parent="StoreRoom/Mugs Milk Sugar Light" index="0" unique_id=185086564]
 transform = Transform3D(0.07061202, 0, 0.012622006, 0, 0.1371508, 0, -0.015156003, 0, 0.058806077, 0.38500035, 0.13452095, -0.055408478)
+visible = false
 
 [node name="Milk Var 2" parent="StoreRoom/Mugs Milk Sugar Light" index="1" unique_id=1234342538]
 transform = Transform3D(0.06862993, 0, -0.01872785, 0, 0.1371508, 0, 0.022487659, 0, 0.057155382, 0.5796461, 1.1291128, -0.11547375)
 
 [node name="Milk Var 3" parent="StoreRoom/Mugs Milk Sugar Light" index="2" unique_id=615734068]
-transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.77628434, 0.13452095, 0)
+transform = Transform3D(0.07222022, 0, 0, 0, 0.1371508, 0, 0, 0, 0.060145404, 0.83549905, 0.13452095, 0.062999725)
 
 [node name="Milk Var 3_001" parent="StoreRoom/Mugs Milk Sugar Light" index="3" unique_id=1215529467]
 transform = Transform3D(0.06913356, 0, 0.017395724, 0, 0.1371508, 0, -0.020888094, 0, 0.05757481, 0.96295416, 0.13452095, -0.10199165)
@@ -2529,6 +2530,12 @@ transform = Transform3D(0.9535781, 0, -0.30114585, 0, 1, 0, 0.30114585, 0, 0.953
 [node name="Bucket_1" parent="Employee Area Cleaning Supplies" index="2" unique_id=2133183234]
 transform = Transform3D(0.48185706, 0, -0.8762497, 0, 1, 0, 0.8762497, 0, 0.48185706, -1.0759714, 0, 0.08014822)
 
+[node name="Detergent_2" parent="Employee Area Cleaning Supplies" index="3" unique_id=215387828]
+transform = Transform3D(0.1126768, 0, 0.9936316, 0, 1, 0, -0.9936316, 0, 0.1126768, -0.9348922, 1.2364734, -0.59479237)
+
+[node name="Detergent_3" parent="Employee Area Cleaning Supplies" index="4" unique_id=272489523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72582316, 0.525062, -0.29288912)
+
 [node name="Detergent_1" parent="Employee Area Cleaning Supplies" index="5" unique_id=2088015383]
 transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -0.6784649, 1.1143812, -0.4182458)
 
@@ -2537,6 +2544,83 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9265523, 1.1119231, -0.575
 
 [node name="Mop" parent="Employee Area Cleaning Supplies" index="7" unique_id=1201096098]
 transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, 0.24010563, 0, -0.22191906)
+
+[node name="Employee Area Cleaning Supplies3" parent="." unique_id=895307785 instance=ExtResource("93_g2jch")]
+transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, -6.0814047, 0.050841436, 3.4664154)
+
+[node name="Bucket_2" parent="Employee Area Cleaning Supplies3" index="1" unique_id=940190848]
+transform = Transform3D(0.9535781, 0, -0.3011458, 0, 1, 0, 0.3011458, 0, 0.9535781, -0.7211871, 0.39999813, -0.063878536)
+
+[node name="Bucket_1" parent="Employee Area Cleaning Supplies3" index="2" unique_id=2133183234]
+transform = Transform3D(0.48185703, 0, -0.8762497, 0, 1, 0, 0.8762497, 0, 0.48185703, -0.24656415, 0, 0.11536598)
+
+[node name="Detergent_2" parent="Employee Area Cleaning Supplies3" index="3" unique_id=215387828]
+transform = Transform3D(0.11267668, 0, 0.99363154, 0, 1, 0, -0.99363154, 0, 0.11267668, -0.2449174, 0.016454771, 0.15647364)
+
+[node name="Detergent_3" parent="Employee Area Cleaning Supplies3" index="4" unique_id=272489523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72582316, 0.525062, -0.29288912)
+
+[node name="Detergent_1" parent="Employee Area Cleaning Supplies3" index="5" unique_id=2088015383]
+transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -0.6784649, 0.38612247, -0.41824627)
+
+[node name="Cleaning supplies" parent="Employee Area Cleaning Supplies3" index="6" unique_id=1246702389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2181535, 0.60926867, 0.8747368)
+
+[node name="Mop" parent="Employee Area Cleaning Supplies3" index="7" unique_id=1201096098]
+transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, 0.24010563, 0, -0.22191906)
+
+[node name="Employee Area Cleaning Supplies2" parent="." unique_id=1800427633 instance=ExtResource("93_g2jch")]
+transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, -2.146789, 0.050841436, 7.3294353)
+
+[node name="Bucket_2" parent="Employee Area Cleaning Supplies2" index="1" unique_id=940190848]
+transform = Transform3D(0.9535781, 0, -0.3011458, 0, 1, 0, 0.3011458, 0, 0.9535781, -1.6097965, 0.09553456, -0.7106476)
+
+[node name="Bucket_1" parent="Employee Area Cleaning Supplies2" index="2" unique_id=2133183234]
+transform = Transform3D(-0.28963608, 0, -0.9571368, 0, 1, 0, 0.9571368, 0, -0.28963608, 0.4726143, 1.9906179, -1.390039)
+
+[node name="Detergent_2" parent="Employee Area Cleaning Supplies2" index="3" unique_id=215387828]
+transform = Transform3D(-0.14142594, 0, 0.9899488, 0, 1, 0, -0.9899488, 0, -0.14142594, -1.7476497, 0.58633256, -0.42409658)
+
+[node name="Detergent_3" parent="Employee Area Cleaning Supplies2" index="4" unique_id=272489523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9448242, 0.60579103, -0.3637128)
+
+[node name="Detergent_1" parent="Employee Area Cleaning Supplies2" index="5" unique_id=2088015383]
+transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -1.9018731, 0.5908765, -0.22077703)
+
+[node name="Cleaning supplies" parent="Employee Area Cleaning Supplies2" index="6" unique_id=1246702389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9265523, 1.1119231, -0.5757928)
+
+[node name="Mop" parent="Employee Area Cleaning Supplies2" index="7" unique_id=1201096098]
+transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, -2.5090976, 0, 0.46531487)
+
+[node name="Employee Area Cleaning Supplies4" parent="." unique_id=438097553 instance=ExtResource("93_g2jch")]
+transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, 3.710143, 0.050841436, -3.0881186)
+
+[node name="Bucket_2" parent="Employee Area Cleaning Supplies4" index="1" unique_id=940190848]
+transform = Transform3D(0.9535781, 0, -0.3011458, 0, 1, 0, 0.3011458, 0, 0.9535781, -1.6097965, 0.09553456, -0.7106476)
+visible = false
+
+[node name="Bucket_1" parent="Employee Area Cleaning Supplies4" index="2" unique_id=2133183234]
+transform = Transform3D(0.9699179, 0, -0.24343246, 0, 1, 0, 0.24343246, 0, 0.9699179, -3.3751578, 0.021390691, 0.43883038)
+
+[node name="Detergent_2" parent="Employee Area Cleaning Supplies4" index="3" unique_id=215387828]
+transform = Transform3D(-0.14142594, 0, 0.9899488, 0, 1, 0, -0.9899488, 0, -0.14142594, -1.7476497, 0.58633256, -0.42409658)
+visible = false
+
+[node name="Detergent_3" parent="Employee Area Cleaning Supplies4" index="4" unique_id=272489523]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9448242, 0.60579103, -0.3637128)
+visible = false
+
+[node name="Detergent_1" parent="Employee Area Cleaning Supplies4" index="5" unique_id=2088015383]
+transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -1.9018731, 0.5908765, -0.22077703)
+visible = false
+
+[node name="Cleaning supplies" parent="Employee Area Cleaning Supplies4" index="6" unique_id=1246702389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9265523, 1.1119231, -0.5757928)
+visible = false
+
+[node name="Mop" parent="Employee Area Cleaning Supplies4" index="7" unique_id=1201096098]
+transform = Transform3D(0.63188446, 0.006143395, 0.517861, 0.062983155, 0.80997145, -0.08645959, -0.5140534, 0.106791385, 0.62597156, -2.8882704, 0, -0.06556797)
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/glass window"]
@@ -2558,3 +2642,6 @@ transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322
 [editable path="StoreRoom/Mugs Milk Sugar Light3"]
 [editable path="StoreRoom/Mugs Milk Sugar Light2"]
 [editable path="Employee Area Cleaning Supplies"]
+[editable path="Employee Area Cleaning Supplies3"]
+[editable path="Employee Area Cleaning Supplies2"]
+[editable path="Employee Area Cleaning Supplies4"]
