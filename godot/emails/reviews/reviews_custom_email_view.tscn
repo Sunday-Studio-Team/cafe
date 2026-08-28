@@ -2,32 +2,30 @@
 
 [ext_resource type="Script" uid="uid://bepfpiu50og" path="res://emails/reviews/reviews_custom_email_view.gd" id="1_8ujkl"]
 [ext_resource type="Script" uid="uid://bh50rw0t8ptws" path="res://emails/reviews/review_container.gd" id="2_cmm6a"]
+[ext_resource type="Texture2D" uid="uid://mxsxgh2r1mjs" path="res://sprites/reviews/blep logo.png" id="2_e5feb"]
 [ext_resource type="Texture2D" uid="uid://hyrc23gvplb3" path="res://sprites/customers/gym girl.png" id="3_pyafy"]
-[ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="4_0n21w"]
+[ext_resource type="Texture2D" uid="uid://da718xp077viy" path="res://sprites/reviews/blep_revire_base_long.png" id="4_e5feb"]
+[ext_resource type="FontFile" uid="uid://d4nnmxe7g85qu" path="res://sprites/reviews/Gontserrat-ExtraBold.ttf" id="5_pyafy"]
+[ext_resource type="FontFile" uid="uid://bwijwxrerk26m" path="res://sprites/reviews/Gontserrat-Regular.ttf" id="6_0n21w"]
+[ext_resource type="Texture2D" uid="uid://blq6uocwty8px" path="res://sprites/reviews/5_star.png" id="7_0n21w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtxfr"]
-bg_color = Color(0.6509804, 0.05490196, 0, 1)
+bg_color = Color(1, 0.09803922, 0.22745098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lghh"]
-bg_color = Color(0.8474744, 0.84747446, 0.8474743, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtxfr"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2t45u"]
-bg_color = Color(0.9297146, 0.9297147, 0.9297146, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.6509804, 0.05490196, 0, 1)
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtxfr"]
 atlas = ExtResource("3_pyafy")
 region = Rect2(225, 10, 600, 600)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lghh"]
+atlas = ExtResource("4_e5feb")
+region = Rect2(305, 941, 5348, 2817)
+
 [node name="ReviewsCustomEmailView" type="MarginContainer" unique_id=2126401690 node_paths=PackedStringArray("review_1", "review_list")]
-custom_minimum_size = Vector2(916, 0)
-custom_maximum_size = Vector2(800, -1)
+custom_minimum_size = Vector2(850, 0)
+custom_maximum_size = Vector2(850, -1)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -35,111 +33,153 @@ offset_left = -458.0
 offset_right = 458.0
 offset_bottom = 450.0
 grow_horizontal = 2
+mouse_filter = 2
 script = ExtResource("1_8ujkl")
 review_1 = NodePath("VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer")
 review_list = NodePath("VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1709141238]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1033388940]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rtxfr")
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer" unique_id=1109362662]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer" unique_id=1819378788]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 75
-text = "blep reviews"
-horizontal_alignment = 1
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 10)
+offset_transform_scale = Vector2(0.25, 1)
+texture = ExtResource("2_e5feb")
+expand_mode = 1
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1362416269]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8lghh")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer2" unique_id=1298791558]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 20
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 100
 
 [node name="ReviewGrid" type="GridContainer" parent="VBoxContainer/PanelContainer2/MarginContainer" unique_id=1450173849]
 layout_mode = 2
-theme_override_constants/v_separation = 25
+mouse_filter = 2
+theme_override_constants/v_separation = 75
 
-[node name="ReviewContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1341324083 node_paths=PackedStringArray("icon", "username", "review_content", "star_1", "stars_grid", "reviews_number")]
-propagate_maximum_size = false
+[node name="ReviewContainer" type="Control" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1823459292 node_paths=PackedStringArray("icon", "username", "review_content", "star_1", "reviews_number")]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_rtxfr")
+mouse_filter = 2
 script = ExtResource("2_cmm6a")
-icon = NodePath("HBoxContainer/CustomerInfo/PanelContainer/Sprite2D")
-username = NodePath("HBoxContainer/CustomerInfo/Username")
-review_content = NodePath("HBoxContainer/ReviewInfo/RichTextLabel")
-star_1 = NodePath("HBoxContainer/ReviewInfo/Stars/Star1")
-stars_grid = NodePath("HBoxContainer/ReviewInfo/Stars")
-reviews_number = NodePath("HBoxContainer/CustomerInfo/ReviewsNumber")
+icon = NodePath("Sprite2D")
+username = NodePath("Username")
+review_content = NodePath("RichTextLabel")
+star_1 = NodePath("Star1")
+reviews_number = NodePath("ReviewsNumber")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1890193301]
-layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="CustomerInfo" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer" unique_id=578529618]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1406410189]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2t45u")
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo/PanelContainer" unique_id=42599914]
-position = Vector2(100.00002, 99.5)
-scale = Vector2(0.3066667, 0.30833334)
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=42599914]
+position = Vector2(106, 168)
+scale = Vector2(0.225, 0.225)
 texture = SubResource("AtlasTexture_rtxfr")
 
-[node name="Username" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1525218022]
-layout_mode = 2
+[node name="ReviewLong" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=2077009424]
+custom_minimum_size = Vector2(850, 0)
+layout_mode = 0
+offset_left = -7.0
+offset_right = 843.0
+offset_bottom = 447.7281
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 35)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_8lghh")
+expand_mode = 5
+
+[node name="Username" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1525218022]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 246.0
+offset_right = 170.0
+offset_bottom = 263.0
+size_flags_horizontal = 0
+offset_transform_enabled = true
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 22
-text = "@sexyusername1"
+theme_override_fonts/font = ExtResource("5_pyafy")
+theme_override_font_sizes/font_size = 13
+text = "@americana_nana"
 horizontal_alignment = 1
 
-[node name="ReviewsNumber" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/CustomerInfo" unique_id=1159995025]
-layout_mode = 2
+[node name="ReviewsNumber" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1159995025]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 278.0
+offset_right = 166.0
+offset_bottom = 301.0
+size_flags_horizontal = 0
+offset_transform_position = Vector2(40, 63)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 18
-text = "★ 12 reviews"
+theme_override_fonts/font = ExtResource("5_pyafy")
+theme_override_font_sizes/font_size = 16
+text = "999 reviews"
 horizontal_alignment = 1
 
-[node name="ReviewInfo" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer" unique_id=1280830184]
-layout_mode = 2
-
-[node name="Stars" type="GridContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo" unique_id=920374426]
-layout_mode = 2
-columns = 5
-
-[node name="Star1" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo/Stars" unique_id=2103689801]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = ExtResource("4_0n21w")
-expand_mode = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer/HBoxContainer/ReviewInfo" unique_id=470299995]
-custom_minimum_size = Vector2(625, 0)
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(5, 0)
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=470299995]
+custom_maximum_size = Vector2(580, 315)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 219.0
+offset_top = -62.0
+offset_right = 799.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_position = Vector2(220, 140)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 25
-text = "Used to come here back when it was King of Comics. Had a great vibe, good community, music, and the baristas were always super accommodating - they even had great horchata, for a coffee shop. Of course, their menu can’t have any character anymore with these damn robots. Just completely robbed of personality.
+theme_override_fonts/normal_font = ExtResource("6_0n21w")
+theme_override_font_sizes/normal_font_size = 20
+text = "EXCELLENT PROOF THAT AUTOMATION WORKS.
 
-I hope the previous owners are doing alright. The poor employee here looks so tired of cleaning up after the AI’s mistakes. When will these corporations realize that people go to cafes for the experience?
+LABOUR COSTS ARE DOWN.
+
+CUSTOMER TURNOVER IS HIGHER.
+
+OPERATING MARGINS LOOK FANTASTIC!
+EXCELLENT PROOF THAT AUTOMATION WORKS.
+
+LABOUR COSTS ARE DOWN.
+
+CUSTOMER TURNOVER IS HIGHER.
+
+OPERATING MARGINS LOOK FANTASTIC!
 "
 fit_content = true
+
+[node name="Star1" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=2103689801]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = -4.0
+offset_top = 3.0
+offset_right = 831.0
+offset_bottom = 442.82703
+offset_transform_enabled = true
+offset_transform_position = Vector2(-55, -132)
+offset_transform_scale = Vector2(0.33, 0.165)
+mouse_filter = 2
+texture = ExtResource("7_0n21w")
+expand_mode = 1
+metadata/_edit_lock_ = true

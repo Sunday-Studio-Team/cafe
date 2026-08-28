@@ -12,3 +12,4 @@ func _init():
 	recipient_name = "Employee #000000"
 	var packed_scene: PackedScene = load("res://emails/reviews/reviews_custom_email_view.tscn")
 	custom_email_view_packed_scene = packed_scene
+	contents = "You have new reviews on BLEP!\nCheck it out:" 
