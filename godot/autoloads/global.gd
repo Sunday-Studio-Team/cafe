@@ -34,7 +34,6 @@ var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
 var owned_items: Array[Item]
-var score_update_message: String
 var player_in_cctv_los := false
 var minigame_active := false:
 	set(value):
@@ -63,15 +62,6 @@ var daily_cafe_money := 0.0:
 
 		Events.money_updated.emit(new_value, daily_cafe_money)
 		daily_cafe_money = new_value
-
-		# we set this as empty to hopefully avoid anything weird if someone
-		# accidentally updates one of these score vars without setting it
-		# (like gaining money but seeing a popup like '+1 🙂' from a prev thing)
-		# NOTE: i wonder if waiting a frame could ever cause anything weird if
-		# we changed a score twice on successive frames D: should get reworked
-		# again anyway so hopefully we wont find out .
-		await get_tree().process_frame
-		score_update_message = ""
 # represented as stars (1 rating = 1 star.)
 var employee_rating: float = 0:
 	set(new_value):
@@ -88,7 +78,6 @@ var employee_rating: float = 0:
 
 		# (see comment for same lines in above func)
 		await get_tree().process_frame
-		score_update_message = ""
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0

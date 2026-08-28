@@ -218,8 +218,9 @@ func _process_queued_customers() -> void:
 
 func check_for_stepping_in_spill() -> void:
 	if spill_on_floor:
-		Events.alert_posted.emit("customer stood in spill!", UI.AlertIconType.CUSTOMER)
-		Global.employee_rating -= Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
+		var rating_loss: float = Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
+		Events.alert_posted.emit("-%s A customer stood in a spill!" % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+		Global.employee_rating -= rating_loss
 
 
 func blast_player_from_using_machine() -> void:
@@ -327,8 +328,9 @@ func _set_customer(new_customer: Customer) -> void:
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if customer == timed_out_customer:
-		Events.alert_posted.emit("customer left", UI.AlertIconType.CUSTOMER)
-		Global.employee_rating -= Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
+		var rating_loss: float = Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
+		Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+		Global.employee_rating -= rating_loss
 		customer.leave_store()
 		_set_customer(null)
 
@@ -521,7 +523,7 @@ func _calculate_drink_diff(correct_drink: Drink, made_drink: Drink) -> int:
 func spill() -> void:
 	spill_interactable.show()
 	spill_sound.play()
-	Events.alert_posted.emit("⚙️machine made a spill", UI.AlertIconType.MACHINE)
+	Events.alert_posted.emit("A machine spilled!", UI.AlertIconType.MACHINE, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
 	Global.spills_this_shift += 1
 	spill_on_floor = true
 	show_tutorial_go_clean_spill()
@@ -608,7 +610,7 @@ func fix_machine(hammer: bool = false) -> void:
 func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
 	if ingredients < Stats.current.ingredients_per_order:
-		Events.alert_posted.emit("🫘 machine ran out of ingredients", UI.AlertIconType.MACHINE)
+		Events.alert_posted.emit("A machine ran out of ingredients!", UI.AlertIconType.MACHINE)
 		no_ingredients_sound.play()
 
 
@@ -621,7 +623,7 @@ func clean_up_spill() -> void:
 	spill_clean_particles.restart()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("spill cleaned!", UI.AlertIconType.MACHINE)
+	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gained
 
 
@@ -680,19 +682,19 @@ func accept_order(did_remake_drink: bool) -> void:
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
 			Events.alert_posted.emit(
-				"+%.1f rated %s" % [order.star_rating_gain_for_remake, order.made_drink.name], 
+				"+%.1f Customer happy with drink!" % order.star_rating_gain_for_remake, 
 				UI.AlertIconType.RATING,
 				4.0,
-				Color.GREEN,
+				UI.ALERT_COLOR_GREEN
 			)
 			Global.employee_rating += order.star_rating_gain_for_remake
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
 			Events.alert_posted.emit(
-				"-%.1f rated %s" % [order.star_rating_loss_if_accept, order.made_drink.name], 
+				"-%.1f Customer unhappy with drink..." % order.star_rating_loss_if_accept, 
 				UI.AlertIconType.RATING,
 				4.0,
-				Color.RED
+				UI.ALERT_COLOR_RED
 			)
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
@@ -701,10 +703,10 @@ func accept_order(did_remake_drink: bool) -> void:
 		await get_tree().create_timer(0.8, false).timeout
 
 	Events.alert_posted.emit(
-		"+%s sold %s" % [float_to_price(order.final_order_price), order.made_drink.name], 
+		"+%s Drink sold!" % float_to_price(order.final_order_price), 
 		UI.AlertIconType.MONEY,
 		4.0,
-		Color.GOLD
+		UI.ALERT_COLOR_MONEY
 	)
 	Global.daily_cafe_money += order.final_order_price
 
@@ -747,7 +749,7 @@ func break_down() -> void:
 	ordered_drink_name_label.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()
-	Events.alert_posted.emit("⚙️ machine broke down", UI.AlertIconType.MACHINE)
+	Events.alert_posted.emit("A machine has broken down!", UI.AlertIconType.MACHINE, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
 	Global.breakdowns_this_shift += 1
 
 	timer.paused = true

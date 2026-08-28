@@ -10,6 +10,11 @@ const ALERT_ICON_TYPE_IMAGE_MAP = {
 	AlertIconType.RATING: "res://Assets/UI/alert_icons/rating_icon.png",
 	AlertIconType.MONEY: "res://Assets/UI/alert_icons/dollar_icon.png",
 }
+const ALERT_DEFUALT_DURATION: float = 4.0
+const ALERT_COLOR_NEUTRAL: Color = Color.WHITE
+const ALERT_COLOR_RED: Color = Color.RED
+const ALERT_COLOR_GREEN: Color = Color.GREEN
+const ALERT_COLOR_MONEY: Color = Color.GOLD
 
 const ALERT_QUEUE_SIZE = 5
 
@@ -548,7 +553,8 @@ func _on_alert_posted(
 	alert_queue.append(new_alert)
 	
 	var new_alert_tween = create_tween()
-	new_alert_tween.tween_property(new_alert, "modulate", Color.WHITE, 1.5).from(color)
+	new_alert_tween.tween_property(new_alert.alert_label, "modulate", Color.WHITE, 0.25).from(color)
+	new_alert_tween.tween_property(new_alert.alert_label, "modulate", color, 0.25)
 	new_alert_tween.tween_property(new_alert, "modulate:a", 1, 0.25)
 	new_alert_tween.tween_interval(alert_time_to_live)
 	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 0.25)
