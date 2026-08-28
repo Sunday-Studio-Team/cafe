@@ -8,6 +8,13 @@ attack_us = 1000.0
 release_ms = 1000.0
 sidechain = &"MinigameMusic"
 
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+tap1_delay_ms = 75.0
+tap1_level_db = -5.0
+tap1_pan = 0.0
+tap2_active = false
+
 [resource]
 bus/1/name = &"DiegeticMusic"
 bus/1/solo = false
@@ -23,3 +30,11 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/3/name = &"TippyVO"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
+bus/3/effect/0/enabled = true

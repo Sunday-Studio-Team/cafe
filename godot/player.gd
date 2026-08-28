@@ -12,7 +12,6 @@ const STRIDE_LENGTH := 0.75
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
 
-
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
@@ -87,8 +86,10 @@ func _physics_process(delta: float) -> void:
 	handle_floating_cursor()
 	move_and_slide()
 
+
 func is_sprinting() -> bool:
 	return _is_sprinting
+
 
 #func _unhandled_input(event: InputEvent) -> void:
 #	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -243,9 +244,6 @@ func handle_sprint(delta: float) -> void:
 
 	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
 		sprint_lockout_timer.start()
-
-
-
 
 
 # (unfinished) plays footstep sounds with timing adjusted to speed

@@ -123,7 +123,7 @@ func end_shift(arg: String = "") -> void:
 		detail = "(forcing loss)"
 
 	# unsafe ref but whatever
-	Global.main_scene.shift_end_sequence()
+	Global.main_scene.shift_end_sequence(true)
 	Console.print_line("ending shift %s" % detail)
 
 

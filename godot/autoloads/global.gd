@@ -15,8 +15,6 @@ extends Node
 @export var empty_star_texture: Texture
 @export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
-var popups: Dictionary = {}
-var popup_hint_showing: bool = false
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -97,6 +95,7 @@ var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
+var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
@@ -135,7 +134,6 @@ var in_ui: bool:
 		if (
 				minigame_active
 				or in_pc_ui
-				or popup_hint_showing
 				or in_machine_ui
 				or Console.is_visible()
 				or in_main_menu

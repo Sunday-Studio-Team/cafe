@@ -363,7 +363,7 @@ func machine_make_drink() -> void:
 	order.ordered_drink = customer.desired_drink
 	ordered_drink_name_label.text = (
 			"%s (%s)"
-			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
+			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day])]
 	)
 
 	ordered_main_ingredient_icon.texture = order.ordered_drink.main_ingredient.icon
@@ -398,7 +398,7 @@ func machine_make_drink() -> void:
 
 	if (
 			randf() <= breaking_chance_now
-			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
+			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift_each_day[Global.day]
 	):
 		break_down()
 
@@ -457,6 +457,9 @@ func machine_make_drink() -> void:
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
+	
+	# Calculate scaled price
+	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
 
 	# Calculate star rating loss if accepted
 	if order.star_rating_gain_for_remake == 0.0:
@@ -486,13 +489,13 @@ func machine_make_drink() -> void:
 	)
 	if (
 			randf() < spill_chance_now
-			and Global.spills_this_shift < Stats.current.max_spills_per_shift
+			and Global.spills_this_shift < Stats.current.max_spills_per_shift_each_day[Global.day]
 	):
 		spill()
 
 	made_drink_name_label.text = (
 			"%s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+			% [order.made_drink.name, Global.float_to_price(order.final_order_price)]
 	)
 	# NOTE: experiment: commented out for now to simplify ui
 	#final_order_indicator.show()
@@ -541,7 +544,7 @@ func display_drink_score() -> void:
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
 
-	var price_labels_text: String = "+%s" % Global.float_to_price(order.made_drink.price)
+	var price_labels_text: String = "+%s" % Global.float_to_price(order.final_order_price)
 	_price_label_remake.text = price_labels_text
 	_price_label_accept.text = price_labels_text
 
@@ -685,7 +688,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		await get_tree().create_timer(0.8, false).timeout
 
 	Global.score_update_message = "sold %s" % order.made_drink.name
-	Global.daily_cafe_money += order.made_drink.price
+	Global.daily_cafe_money += order.final_order_price
 
 	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left
 	if (
@@ -823,7 +826,7 @@ func _on_remade_drink() -> void:
 	order.made_drink = order.ordered_drink
 	made_drink_name_label.text = (
 			"you made:\n %s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+			% [order.made_drink.name, Global.float_to_price(order.final_order_price)]
 	)
 	display_drink_score()
 
@@ -870,4 +873,4 @@ class OrderData:
 	var extra_correct: bool = false
 	var star_rating_gain_for_remake: float
 	var star_rating_loss_if_accept: float
-	var tip: float = 0.0
+	var final_order_price: float

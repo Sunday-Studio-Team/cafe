@@ -17,7 +17,7 @@ enum DrinkType { COFFEE, TEA, LATTE }
 # where it goes on the menu
 @export var type: DrinkType
 # incase u want to make the drink more expensive on top of the regular price when calculated
-@export var upcharge: float = 0.50
+@export var upcharge: float = 1.00
 
 var price: float
 var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe = null
@@ -34,7 +34,6 @@ func create() -> void:
 		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
 		price += extra.cost
 	price += upcharge
-	price += 0.5 # profit
 
 func is_unlocked() -> bool:
 	return Global.day >= day_unlocked

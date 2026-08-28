@@ -114,7 +114,7 @@ func extend_wait_patience_time(duration: float) -> void:
 
 
 func get_stats():
-	_total_wait_time = Stats.current.customer_wait_time_machine
+	_total_wait_time = Stats.current.customer_wait_time_machine_each_day[Global.day]
 	timer.wait_time = _total_wait_time
 
 
