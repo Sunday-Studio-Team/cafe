@@ -92,6 +92,7 @@
 [ext_resource type="Texture2D" uid="uid://crgc6iohnh5ot" path="res://Assets/Street/mailbox.png" id="88_ljlh3"]
 [ext_resource type="Texture2D" uid="uid://bn8mi8oocskaq" path="res://Assets/Street/hotdog_sign.png" id="88_uftqg"]
 [ext_resource type="Texture2D" uid="uid://cajnyvi7pua8d" path="res://Assets/Street/pizza_box.png" id="89_edv2q"]
+[ext_resource type="PackedScene" uid="uid://d027k1reepg57" path="res://Assets/Cleaning supplies/cleaning_supplies.tscn" id="93_g2jch"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ala11"]
 transparency = 1
@@ -2164,11 +2165,11 @@ transform = Transform3D(0.28142878, -0.9595821, -3.4317333e-07, 0.9595821, 0.281
 mesh = SubResource("ArrayMesh_ubo3j")
 
 [node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="StoreRoom/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 1854877567) index="2" unique_id=1458681459]
-transform = Transform3D(0.40185183, -0.91570467, -3.2748147e-07, 0.9157048, 0.40185183, -2.1391443e-07, 3.274816e-07, -2.1391442e-07, 1, 0.15594602, 6.742078, 2.2947788e-06)
+transform = Transform3D(0.40185183, -0.91570467, -3.2748147e-07, 0.9157048, 0.40185183, -2.1391442e-07, 3.274816e-07, -2.1391442e-07, 1, -0.20936751, 6.7420783, 2.2947788e-06)
 mesh = SubResource("ArrayMesh_ubo3j")
 
 [node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="StoreRoom/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 1854877567) index="3" unique_id=161891677]
-transform = Transform3D(-0.078307875, -0.9969292, -3.5652968e-07, 0.9969292, -0.078307934, -3.8563286e-07, 3.565298e-07, -3.8563314e-07, 1, 0.14442396, 6.636239, 0.6032358)
+transform = Transform3D(-0.078307875, -0.9969292, -3.5652968e-07, 0.9969292, -0.078307934, -3.8563283e-07, 3.565298e-07, -3.8563314e-07, 1, -0.22088957, 6.636239, 0.6032358)
 mesh = SubResource("ArrayMesh_ubo3j")
 
 [node name="Cardboard_box_04_Storage_Shelves_0" parent="StoreRoom/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 517239114) index="0" unique_id=253069124]
@@ -2365,7 +2366,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010975, -0.00016215755, -0.9999568, 1.02601156e-07, 1, -0.00016215054, 0.9999568, -1.01539825e-08, 0.00057010975, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701097, -0.00016215755, -0.9999566, 1.02601135e-07, 1, -0.0001621505, 0.9999566, -1.01539825e-08, 0.0005701097, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2519,6 +2520,24 @@ texture = ExtResource("87_tx4o1")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1490711311]
 shape = SubResource("BoxShape3D_mjix0")
 
+[node name="Employee Area Cleaning Supplies" parent="." unique_id=52950481 instance=ExtResource("93_g2jch")]
+transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, -2.6216946, 0.050841436, 4.69302)
+
+[node name="Bucket_2" parent="Employee Area Cleaning Supplies" index="1" unique_id=940190848]
+transform = Transform3D(0.9535781, 0, -0.30114585, 0, 1, 0, 0.30114585, 0, 0.9535781, -0.5092075, 0, 0.061173916)
+
+[node name="Bucket_1" parent="Employee Area Cleaning Supplies" index="2" unique_id=2133183234]
+transform = Transform3D(0.48185706, 0, -0.8762497, 0, 1, 0, 0.8762497, 0, 0.48185706, -1.0759714, 0, 0.08014822)
+
+[node name="Detergent_1" parent="Employee Area Cleaning Supplies" index="5" unique_id=2088015383]
+transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -0.6784649, 1.1143812, -0.4182458)
+
+[node name="Cleaning supplies" parent="Employee Area Cleaning Supplies" index="6" unique_id=1246702389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9265523, 1.1119231, -0.5757928)
+
+[node name="Mop" parent="Employee Area Cleaning Supplies" index="7" unique_id=1201096098]
+transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, 0.24010563, 0, -0.22191906)
+
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/glass window"]
 [editable path="CustomerArea/Tippy cutout3"]
@@ -2538,3 +2557,4 @@ shape = SubResource("BoxShape3D_mjix0")
 [editable path="StoreRoom/Mugs Milk Sugar Light"]
 [editable path="StoreRoom/Mugs Milk Sugar Light3"]
 [editable path="StoreRoom/Mugs Milk Sugar Light2"]
+[editable path="Employee Area Cleaning Supplies"]
