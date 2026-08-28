@@ -369,7 +369,7 @@ func active_item_used(item: Item):
 
 		Global.put_active_item_on_cooldown(item)
 
-		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension)
+		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertIconType.CUSTOMER)
 
 
 func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D]) -> void:
@@ -426,14 +426,15 @@ func _on_minigame_end():
 func _on_shift_started():
 	Global.shift_started = true
 	shift_start_sound.play()
-	Events.alert_posted.emit("poop1")
-	Events.alert_posted.emit("poop2")
-	Events.alert_posted.emit("poop3")
-	Events.alert_posted.emit("poop4")
-	Events.alert_posted.emit("poop5")
-	Events.alert_posted.emit("poop6")
-	Events.alert_posted.emit("poop7")
-	Events.alert_posted.emit("poop8")
+	
+	Events.alert_posted.emit("hello1", UI.AlertIconType.MACHINE)
+	Events.alert_posted.emit("hello2", UI.AlertIconType.CUSTOMER)
+	Events.alert_posted.emit("hello3", UI.AlertIconType.RULE_BREAK)
+	Events.alert_posted.emit("hello4", UI.AlertIconType.MACHINE)
+	Events.alert_posted.emit("hello5", UI.AlertIconType.RULE_BREAK)
+	Events.alert_posted.emit("hello6", UI.AlertIconType.MACHINE)
+	Events.alert_posted.emit("hello7", UI.AlertIconType.CUSTOMER)
+	Events.alert_posted.emit("hello8", UI.AlertIconType.MACHINE)
 
 	if Global.day > 0:
 		game_timer.start()

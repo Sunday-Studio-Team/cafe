@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 func add_customer(customer: Customer) -> void:
-	Events.alert_posted.emit("🛎️ customer complained")
+	Events.alert_posted.emit("🛎️ customer complained", UI.AlertIconType.CUSTOMER)
 	Global.score_update_message = "customer complained"
 
 	customers_waiting.append(customer)

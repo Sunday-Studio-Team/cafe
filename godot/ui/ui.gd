@@ -1,6 +1,14 @@
 extends CanvasLayer
+class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
+enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK }
+const ALERT_ICON_TYPE_IMAGE_MAP = {
+	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
+	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
+	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
+}
+
 const ALERT_QUEUE_SIZE = 5
 
 @export var profit_label: Label
@@ -88,7 +96,7 @@ func _ready() -> void:
 			await get_tree().create_timer(5, false).timeout
 			create_tween().tween_property(shift_starting_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
-	Events.alert_posted.connect(func(message): _on_alert_posted(message))
+	Events.alert_posted.connect(func(message, alert_icon_type): _on_alert_posted(message, alert_icon_type))
 	Events.time_up.connect(func(): hide())
 	Events.requirements_met.connect(func(): end_shift_guide.show())
 
@@ -232,7 +240,7 @@ func handle_stamina_bar() -> void:
 func handle_item_hover_tooltip() -> void:
 	item_hover_tooltip.position = get_viewport().get_mouse_position()
 
-	var hovered_icon := Global.hovered_item_icon
+	var hovered_icon: TabletItemIcon = Global.hovered_item_icon
 
 	if hovered_icon != null:
 		var item: Item = hovered_icon.item
@@ -398,7 +406,7 @@ func update_interactable_ui() -> void:
 		# TODO: replace some of these unsafe refs with the item names with refs
 		# to the actual items as export vars
 
-		var equipped_item := Global.equipped_item
+		var equipped_item: Item = Global.equipped_item
 
 		if (
 				hovered_interactable.name == "FixMachineButton"
@@ -471,7 +479,7 @@ func update_cctv_indicator() -> void:
 
 
 func _update_rating() -> void:
-	var current_rating := Global.employee_rating
+	var current_rating: float = Global.employee_rating
 	_employee_rating_last_update = current_rating
 
 	for c in rating_stars_hbox.get_children():
@@ -489,7 +497,7 @@ func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 			alert_to_remove.queue_free()
 	return _on_alert_tween_finished
 
-func _on_alert_posted(message: String) -> void:
+func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
 	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
 		# we need to remove before we start the tween to make sure that 
 		# any successive alerts posted don't access the same first alert
@@ -510,6 +518,7 @@ func _on_alert_posted(message: String) -> void:
 
 	var new_alert = alert_load.instantiate()
 	new_alert.alert_label.text = message
+	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
 
 	alert_ui.add_child(new_alert)
 	alert_queue.append(new_alert)

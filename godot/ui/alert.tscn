@@ -6,15 +6,23 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_mm7lo"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Alert" type="HBoxContainer" unique_id=1465995593 node_paths=PackedStringArray("alert_label", "alert_sprite")]
+[sub_resource type="ImageTexture" id="ImageTexture_q1q1i"]
+
+[node name="Alert" type="HBoxContainer" unique_id=1465995593 node_paths=PackedStringArray("alert_label", "alert_sprite", "icon")]
 script = ExtResource("1_mm7lo")
 alert_label = NodePath("AlertLabel")
 alert_sprite = NodePath("SubViewport/AnimatedSprite2D")
+icon = NodePath("Icon")
 
 [node name="Exclamation" type="TextureRect" parent="." unique_id=860667440]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = SubResource("ViewportTexture_mm7lo")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1619222323]
+layout_mode = 2
+texture = SubResource("ImageTexture_q1q1i")
+expand_mode = 2
 
 [node name="AlertLabel" type="Label" parent="." unique_id=1926260897]
 layout_mode = 2

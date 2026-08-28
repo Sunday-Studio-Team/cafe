@@ -86,11 +86,11 @@ func _physics_process(_delta: float) -> void:
 					var apply_slow: bool = false
 					if Global.player.is_sprinting() and Global.player.get_last_motion() != Vector3.ZERO:
 						grace_timer.start()
-						Events.alert_posted.emit("caught running")
+						Events.alert_posted.emit("caught running", UI.AlertIconType.RULE_BREAK)
 						apply_slow = true
 					elif Global.making_drink_manually:
 						grace_timer.start()
-						Events.alert_posted.emit("caught making drink by hand")
+						Events.alert_posted.emit("caught making drink by hand", UI.AlertIconType.RULE_BREAK)
 						if Global.machine_in_use != null:
 							Global.machine_in_use.blast_player_from_using_machine()
 						apply_slow = true
