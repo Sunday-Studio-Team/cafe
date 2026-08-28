@@ -1,6 +1,17 @@
 extends CanvasLayer
+class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
+enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
+const ALERT_ICON_TYPE_IMAGE_MAP = {
+	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
+	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
+	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
+	AlertIconType.RATING: "res://Assets/UI/alert_icons/rule_break_icon.png",
+	AlertIconType.MONEY: "res://Assets/UI/alert_icons/rule_break_icon.png",
+}
+
+const ALERT_QUEUE_SIZE = 5
 
 @export var profit_label: Label
 @export var profit_progress: ProgressBar
@@ -13,7 +24,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var time_left_ui: Control
 @export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
-@export var shift_starting_label: RichTextLabel
+@export var shift_starting_ending_label: RichTextLabel
 @export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -23,7 +34,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var _eye_logo_red_texture: Texture2D
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
-@export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
@@ -36,7 +46,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_label: Label
 @export var customer_flow_rate_label: Label
-@export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
 @export var sold_item_sound: AudioStreamPlayer
 @export var exit_machine_button: Button
@@ -62,8 +71,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var scrubber: Item
 @export var whipped_cream: Item
 
+var alert_queue: Array[HBoxContainer]
+var alert_load = preload("res://ui/alert.tscn")
 var score_update_tween: Tween
-var alert_tween: Tween
 var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
@@ -84,12 +94,24 @@ func _ready() -> void:
 	)
 	Events.shift_started.connect(
 		func():
-			shift_starting_label.show()
+			shift_starting_ending_label.show()
 			await get_tree().create_timer(5, false).timeout
-			create_tween().tween_property(shift_starting_label, "modulate", Color.TRANSPARENT, 0.5)
+			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
-	Events.alert_posted.connect(func(message): _on_alert_posted(message))
+
+	Events.alert_posted.connect(func(message, alert_icon_type): _on_alert_posted(message, alert_icon_type))
+	Events.shift_end_sequence_started.connect(
+		func():
+			low_time_sound.play()
+			shift_starting_ending_label.text = (
+				"\n\n[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
+			)
+			shift_starting_ending_label.modulate = Color.WHITE
+			await get_tree().create_timer(6, false).timeout
+			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
+	)
 	Events.time_up.connect(func(): hide())
+	# TODO: figure out if this still does anything and/or should be nuked
 	Events.requirements_met.connect(func(): end_shift_guide.show())
 
 	exit_machine_button.pressed.connect(
@@ -98,7 +120,6 @@ func _ready() -> void:
 	)
 
 	score_update_label.modulate = Color.TRANSPARENT
-	alert_ui.modulate.a = 0
 
 	stamina_bar.max_value = Stats.current.max_stamina
 
@@ -192,7 +213,10 @@ func _process(_delta: float) -> void:
 	update_interactable_ui()
 	update_time_indicator()
 	update_cctv_indicator()
-	handle_time_left_warning()
+	# since we have a lot of time after the shift 'ends', i think we can basically
+	# replace this with the ui that tells the player the shift is ending
+	# (for now anyway)
+	#handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
@@ -233,7 +257,7 @@ func handle_stamina_bar() -> void:
 func handle_item_hover_tooltip() -> void:
 	item_hover_tooltip.position = get_viewport().get_mouse_position()
 
-	var hovered_icon := Global.hovered_item_icon
+	var hovered_icon: TabletItemIcon = Global.hovered_item_icon
 
 	if hovered_icon != null:
 		var item: Item = hovered_icon.item
@@ -399,7 +423,7 @@ func update_interactable_ui() -> void:
 		# TODO: replace some of these unsafe refs with the item names with refs
 		# to the actual items as export vars
 
-		var equipped_item := Global.equipped_item
+		var equipped_item: Item = Global.equipped_item
 
 		if (
 				hovered_interactable.name == "FixMachineButton"
@@ -472,7 +496,7 @@ func update_cctv_indicator() -> void:
 
 
 func _update_rating() -> void:
-	var current_rating := Global.employee_rating
+	var current_rating: float = Global.employee_rating
 	_employee_rating_last_update = current_rating
 
 	for c in rating_stars_hbox.get_children():
@@ -481,71 +505,104 @@ func _update_rating() -> void:
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
 
+func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
+	var _on_alert_tween_finished = func():
+		# Make sure parent hasn't already been freed
+		if is_instance_valid(alert_to_remove):
+			# remove this alert after it is done
+			alert_queue.erase(alert_to_remove)
+			alert_to_remove.queue_free()
+	return _on_alert_tween_finished
 
-func _on_alert_posted(message: String) -> void:
-	if alert_tween != null and alert_tween.is_running():
-		alert_tween.kill()
-	alert_tween = create_tween()
+func _on_alert_posted(message: String, alert_icon_type: AlertIconType) -> void:
+	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
+		# we need to remove before we start the tween to make sure that 
+		# any successive alerts posted don't access the same first alert
+		# which can happen if a bunch of alerts are all queued at the same time
+		var alert_to_remove = alert_queue.pop_at(0)
+		
+		var old_alert_tween = alert_to_remove.alert_tween
+		if old_alert_tween != null and old_alert_tween.is_running():
+			old_alert_tween.kill()
+		
+		var fast_fade_tween = create_tween()
+		alert_to_remove.alert_tween = fast_fade_tween
 
-	alert_label.text = message
-	alert_tween.tween_property(alert_ui, "modulate:a", 0, 2).from(1)
+		fast_fade_tween.tween_property(alert_to_remove, "modulate:a", 0, 0.25).from(1)
+		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before 
+		# the lambda is called
+		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
 
-	alert_sprite.play()
+	var new_alert = alert_load.instantiate()
+	new_alert.alert_label.text = message
+	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
 
+	alert_ui.add_child(new_alert)
+	alert_queue.append(new_alert)
+	
+	var new_alert_tween = create_tween()
+	new_alert_tween.tween_property(new_alert, "modulate:a", 1, 0.25)
+	new_alert_tween.tween_interval(3)
+	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 0.25)
+	new_alert.alert_tween = new_alert_tween
+	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before 
+	# the lambda is called
+	new_alert_tween.finished.connect(_get_on_alert_tween_finished.bind(new_alert).call())
+
+	new_alert.alert_sprite.play()
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money
 # and customer scores change since they share a lot of code and use the same label for the updates
 func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
-	if score_update_tween != null and score_update_tween.is_running():
-		score_update_tween.kill()
-	score_update_label.offset_transform_position_ratio = Vector2.ZERO
-	score_update_label.offset_transform_rotation = 0
-	score_update_tween = create_tween().set_parallel()
+	#if score_update_tween != null and score_update_tween.is_running():
+		#score_update_tween.kill()
+	#score_update_label.offset_transform_position_ratio = Vector2.ZERO
+	#score_update_label.offset_transform_rotation = 0
+	#score_update_tween = create_tween().set_parallel()
 
-	var color: Color
+	#var color: Color
 	# the score label itself, not the label showing the updates like "+1$" etc
-	var score_label_to_tween: Label
-	score_update_label.text = ""
+	#var score_label_to_tween: Label
+	#score_update_label.text = ""
 
 	var change: float = new_value - old_value
 	print("change: %s" % change)
 	if change > 0.0:
 		match score_type:
 			ScoreType.MONEY:
-				color = Color.GOLD
+				#color = Color.GOLD
 				if is_inside_tree():
 					money_sound.play()
 			ScoreType.CUSTOMER:
-				color = Color.GREEN
+				#color = Color.GREEN
 				if is_inside_tree():
 					gain_points_sound.play()
 	else:
-		color = Color.RED
-		score_update_label.text = ""
+		#color = Color.RED
+		#score_update_label.text = ""
 		match score_type:
 			ScoreType.MONEY:
 				pass
 			ScoreType.CUSTOMER:
 				if is_inside_tree():
 					lose_points_sound.play()
-	score_update_label.modulate = color
 
-	var change_num_to_show: String = ""
-	if change > 0:
-		change_num_to_show = "+"
-
-	match score_type:
-		ScoreType.MONEY:
-			change_num_to_show += Global.float_to_price(change)
-			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
-			score_label_to_tween = profit_label
-		ScoreType.CUSTOMER:
-			change_num_to_show += "%.1f" % change
-			change_num_to_show = change_num_to_show.rstrip(".0")
-
-			score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
-			score_label_to_tween = customer_happiness_label
-	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
-	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
-	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
-	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)
+	#var change_num_to_show: String = ""
+	#if change > 0:
+		#change_num_to_show = "+"
+#
+	#match score_type:
+		#ScoreType.MONEY:
+			#change_num_to_show += Global.float_to_price(change)
+			#score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
+			#score_label_to_tween = profit_label
+		#ScoreType.CUSTOMER:
+			#change_num_to_show += "%.1f" % change
+			#change_num_to_show = change_num_to_show.rstrip(".0")
+#
+			#score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
+			#score_label_to_tween = customer_happiness_label
+	#create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
+	#score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
+	#score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
+	#score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)

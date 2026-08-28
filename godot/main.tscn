@@ -103,7 +103,6 @@
 [ext_resource type="Texture2D" uid="uid://c8fk8hwv2cgrt" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0040.png" id="92_mofpq"]
 [ext_resource type="Texture2D" uid="uid://bdq4sslhpoyij" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0041.png" id="93_6kttw"]
 [ext_resource type="Texture2D" uid="uid://mvrsvfukejpx" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0042.png" id="94_oqmj5"]
-[ext_resource type="SpriteFrames" uid="uid://c0m3mfe5oxxqe" path="res://sprites/sprite_frames_resources/alert_sprite_frames.tres" id="95_d5iia"]
 [ext_resource type="Texture2D" uid="uid://bt8vtxtrfufm5" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0043.png" id="95_uor2d"]
 [ext_resource type="Texture2D" uid="uid://b31ttq4ehftsn" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0044.png" id="96_bdw5g"]
 [ext_resource type="Texture2D" uid="uid://fr1b11ytuaau" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0045.png" id="97_j6smb"]
@@ -143,15 +142,12 @@
 [ext_resource type="Resource" uid="uid://dpsm3hlrkdoyt" path="res://voice_lines/resources/contextual/voice_line_tippy_accept_drink.tres" id="122_6seew"]
 [ext_resource type="Resource" uid="uid://bsm7mtf1bhqtp" path="res://voice_lines/resources/contextual/voice_line_tippy_start_shift_2.tres" id="122_s0om5"]
 [ext_resource type="Resource" uid="uid://da5qtkot2mptp" path="res://voice_lines/resources/contextual/voice_line_tippy_clean_spill.tres" id="123_6gr3f"]
-[ext_resource type="Texture2D" uid="uid://bs1mpgx84cqn6" path="res://Assets/UI/speech_bubble.png" id="124_1iygd"]
 [ext_resource type="Resource" uid="uid://c8e1ynixjucrb" path="res://voice_lines/resources/contextual/voice_line_tippy_low_customer_1.tres" id="124_3ox4t"]
 [ext_resource type="Resource" uid="uid://b8j3pxpppmlpc" path="res://voice_lines/resources/contextual/voice_line_tippy_low_customer_2.tres" id="125_4fmho"]
-[ext_resource type="Texture2D" uid="uid://b176xreldagr8" path="res://Assets/UI/x_button.png" id="125_g5xqc"]
 [ext_resource type="Resource" uid="uid://ylmdujj14nph" path="res://voice_lines/resources/contextual/voice_line_tippy_low_shift.tres" id="126_4fmho"]
 [ext_resource type="Resource" uid="uid://c3reag6jwsda6" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_1.tres" id="126_gkfde"]
 [ext_resource type="Resource" uid="uid://ch8kvde77uyru" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_2.tres" id="127_4qxq8"]
 [ext_resource type="Resource" uid="uid://bh3yardmw8ofs" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_3.tres" id="128_ryg4g"]
-[ext_resource type="Texture2D" uid="uid://s043j74ko4a1" path="res://sprites/coffee_bean.png" id="128_s4o1y"]
 [ext_resource type="Resource" uid="uid://yqxd886iovvp" path="res://voice_lines/resources/contextual/voice_line_tippy_machine_drink.tres" id="129_oy6td"]
 [ext_resource type="Resource" uid="uid://bvysr5e5slkfv" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_1.tres" id="130_fe76k"]
 [ext_resource type="Resource" uid="uid://c5iubxwsxaef3" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_2.tres" id="131_p5pln"]
@@ -230,7 +226,6 @@
 [ext_resource type="PackedScene" uid="uid://cwrrk4bkluvu" path="res://tutorial/tutorial_screen_view_6.tscn" id="232_e4ynb"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
-[ext_resource type="Script" uid="uid://dgk4mjhta7001" path="res://machine_interaction_popup.gd" id="287_4fms3"]
 
 [sub_resource type="Resource" id="Resource_1yv1y"]
 script = ExtResource("4_ovcoh")
@@ -247,7 +242,8 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fd6dt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_61bol"]
+
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -258,7 +254,9 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gttkg"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lix4w"]
+
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -269,7 +267,8 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hiwvf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kmrid"]
+
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -280,7 +279,9 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ed5de"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_c6fgv"]
+
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -532,9 +533,6 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0ffxp"]
-viewport_path = NodePath("UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
 bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 
@@ -688,7 +686,9 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fd6dt")
+
+texture = SubResource("ViewportTexture_61bol")
+
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -701,7 +701,9 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_gttkg")
+
+texture = SubResource("ViewportTexture_lix4w")
+
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -718,7 +720,9 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_hiwvf")
+
+texture = SubResource("ViewportTexture_kmrid")
+
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.451805, 2.841, 6.2617683)
@@ -735,7 +739,9 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ed5de")
+
+texture = SubResource("ViewportTexture_c6fgv")
+
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -887,31 +893,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="VoiceLineNoLocationPlayer" type="Node3D" parent="." unique_id=736549418 node_paths=PackedStringArray("_audio_stream_player_3ds")]
 script = ExtResource("25_s0om5")
-_audio_stream_player_3ds = [NodePath("VoiceLineNoLocationAudioStreamPlayer3D"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D2"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D3"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D4"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D5"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D6"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D7"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D8")]
+_audio_stream_player_3ds = [NodePath("VoiceLineNoLocationAudioStreamPlayer3D"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D2"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D4"), NodePath("VoiceLineNoLocationAudioStreamPlayer3D5")]
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D" parent="VoiceLineNoLocationPlayer" unique_id=1512127767 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.359624, 2.8379436, 6.5908065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.359624, 2.8379436, -1.4091935)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D2" parent="VoiceLineNoLocationPlayer" unique_id=753703191 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6607904, 2.8379436, 6.5908065)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D3" parent="VoiceLineNoLocationPlayer" unique_id=411783359 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.526777, 2.8379436, 1.3948846)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D4" parent="VoiceLineNoLocationPlayer" unique_id=682055878 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.105054, 2.8379436, 6.620669)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D5" parent="VoiceLineNoLocationPlayer" unique_id=1167018039 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.612702, 2.8379436, 1.0365453)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D6" parent="VoiceLineNoLocationPlayer" unique_id=294285795 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8497739, 2.8379436, 13.085711)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D7" parent="VoiceLineNoLocationPlayer" unique_id=868151332 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1076207, 2.8379436, 11.816591)
-
-[node name="VoiceLineNoLocationAudioStreamPlayer3D8" parent="VoiceLineNoLocationPlayer" unique_id=2144100047 instance=ExtResource("26_gkfde")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4200745, 2.8379436, 0.12576675)
+volume_db = -5.0
+max_db = 0.0
+bus = &"TippyVO"
+doppler_tracking = 2
 
 [node name="TippyVOIndicator" type="CanvasLayer" parent="." unique_id=45213847 node_paths=PackedStringArray("vo_player", "sprite")]
 layer = 2
@@ -927,7 +937,9 @@ autoplay = "default"
 frame_progress = 0.28658438
 offset = Vector2(0, -250)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "alert_label", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "alert_sprite", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sell", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "sold_item_sound", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
+
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -941,7 +953,7 @@ game_timer = NodePath("../GameTimer")
 time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
 time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
 time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
-shift_starting_label = NodePath("HUD/ShiftStarting")
+shift_starting_ending_label = NodePath("HUD/ShiftStartingEnding")
 rules_controls = NodePath("HUD/VBoxContainer/HBoxContainer/ControlsRules")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
@@ -951,7 +963,6 @@ cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
 _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
-alert_label = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/AlertText")
 shelf_item_ui = NodePath("HUD/ShelfItem")
 shelf_item_name = NodePath("HUD/ShelfItem/VBoxContainer/Name")
 shelf_item_description = NodePath("HUD/ShelfItem/VBoxContainer/Description")
@@ -964,7 +975,6 @@ day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/Day
 rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
 rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
 customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
-alert_sprite = NodePath("HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport/AnimatedSprite2D")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 sold_item_sound = NodePath("SoldItemSound")
 exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
@@ -1296,6 +1306,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Interactable" unique_id=1133469025]
 layout_mode = 2
@@ -1377,31 +1388,6 @@ horizontal_alignment = 2
 [node name="Alerts" type="VBoxContainer" parent="UI/HUD/VBoxContainer" unique_id=1572896895]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/VBoxContainer/Alerts" unique_id=407575910]
-layout_mode = 2
-
-[node name="Exclamation" type="TextureRect" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=585775166]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture = SubResource("ViewportTexture_0ffxp")
-
-[node name="AlertText" type="Label" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=1414946882]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "❗️🛎️ customer complained"
-
-[node name="SubViewport" type="SubViewport" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer" unique_id=259486482]
-transparent_bg = true
-size = Vector2i(85, 100)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/HUD/VBoxContainer/Alerts/HBoxContainer/SubViewport" unique_id=2022034122]
-texture_filter = 1
-position = Vector2(55, 30)
-scale = Vector2(0.5, 0.5)
-sprite_frames = ExtResource("95_d5iia")
-frame = 71
-frame_progress = 1.0
-
 [node name="Spacer" type="Control" parent="UI/HUD/VBoxContainer" unique_id=1118819587]
 layout_mode = 2
 size_flags_vertical = 3
@@ -1448,11 +1434,11 @@ theme_override_font_sizes/font_size = 50
 text = "End Shift "
 icon = ExtResource("143_7bx05")
 
-[node name="ShiftStarting" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
+[node name="ShiftStartingEnding" type="RichTextLabel" parent="UI/HUD" unique_id=2027255565]
 visible = false
 custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 48
 theme_override_font_sizes/bold_font_size = 96
 bbcode_enabled = true
 text = "
@@ -1848,7 +1834,7 @@ animation = &"bag_pickup"
 stream = ExtResource("222_bvlej")
 
 [node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
-volume_db = -5.0
+bus = &"TippyVO"
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
@@ -1939,76 +1925,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpecialShiftPopup" type="CanvasLayer" parent="." unique_id=123186319 node_paths=PackedStringArray("text", "title", "icon")]
-process_mode = 3
-visible = false
-script = ExtResource("287_4fms3")
-popup_id = "special shift"
-text = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Body")
-title = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer/Title")
-icon = NodePath("InputBlocker/TextureRect/MarginContainer/HBoxContainer/TextureRect")
-
-[node name="InputBlocker" type="Control" parent="SpecialShiftPopup" unique_id=317794041]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="SpecialShiftPopup/InputBlocker" unique_id=1463248199]
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("124_1iygd")
-
-[node name="MarginContainer" type="MarginContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect" unique_id=460616503]
-layout_mode = 0
-offset_left = 268.0
-offset_top = 245.0
-offset_right = 1575.0
-offset_bottom = 650.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer" unique_id=785505753]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=2011957646]
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("128_s4o1y")
-expand_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer" unique_id=745760569]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Title" type="Label" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=533747834]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-theme_override_font_sizes/font_size = 80
-text = "Shift Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Body" type="Label" parent="SpecialShiftPopup/InputBlocker/TextureRect/MarginContainer/HBoxContainer/VBoxContainer" unique_id=860561688]
-custom_maximum_size = Vector2(1100, 800)
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.07058824, 0.07058824, 0.07058824, 1)
-theme_override_font_sizes/font_size = 40
-text = "This is a description."
-autowrap_mode = 3
-
-[node name="TextureButton" type="TextureButton" parent="SpecialShiftPopup/InputBlocker" unique_id=916961120]
-layout_mode = 0
-offset_left = 1590.0
-offset_top = 167.0
-offset_right = 2216.0
-offset_bottom = 793.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("125_g5xqc")
-
 [node name="CustomerAreaMusic" type="AudioStreamPlayer3D" parent="." unique_id=1077236725]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 2.4, -3.5)
 stream = ExtResource("182_suf1q")
@@ -2016,13 +1932,16 @@ volume_db = -20.0
 max_db = -5.0
 autoplay = true
 
-[node name="TippyBoss" type="CharacterBody3D" parent="." unique_id=292729429 node_paths=PackedStringArray("nav_agent", "tired_indicator", "player_kidnap_marker", "player_release_marker")]
+[node name="TippyBoss" type="CharacterBody3D" parent="." unique_id=292729429 node_paths=PackedStringArray("jumpscare_fade_rect", "nav_agent", "tired_indicator", "player_kidnap_marker", "tired_timer", "sleep_timer", "stun_timer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, -2)
 script = ExtResource("228_fd6dt")
+jumpscare_fade_rect = NodePath("JumpscareFade/ColorRect")
 nav_agent = NodePath("NavigationAgent3D")
 tired_indicator = NodePath("TiredIndicator")
 player_kidnap_marker = NodePath("PlayerKidnapPos")
-player_release_marker = NodePath("PlayerReleasePos")
+tired_timer = NodePath("TiredTimer")
+sleep_timer = NodePath("SleepTimer")
+stun_timer = NodePath("StunTimer")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="TippyBoss" unique_id=1236274477]
 path_desired_distance = 0.1
@@ -2053,6 +1972,31 @@ top_level = true
 [node name="PlayerReleasePos" type="Marker3D" parent="TippyBoss" unique_id=381971597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.720034, 0, 8.268255)
 top_level = true
+
+[node name="TiredTimer" type="Timer" parent="TippyBoss" unique_id=559038824]
+wait_time = 20.0
+one_shot = true
+
+[node name="SleepTimer" type="Timer" parent="TippyBoss" unique_id=421014853]
+wait_time = 10.0
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="TippyBoss" unique_id=37255436]
+wait_time = 5.0
+one_shot = true
+
+[node name="JumpscareFade" type="CanvasLayer" parent="TippyBoss" unique_id=576340905]
+layer = 4
+
+[node name="ColorRect" type="ColorRect" parent="TippyBoss/JumpscareFade" unique_id=1141100330]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=194220850]
 navigation_mesh = SubResource("NavigationMesh_yf6j3")

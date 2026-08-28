@@ -218,7 +218,7 @@ func _process_queued_customers() -> void:
 
 func check_for_stepping_in_spill() -> void:
 	if spill_on_floor:
-		Global.score_update_message = "customer stood in spill!"
+		Events.alert_posted.emit("customer stood in spill!", UI.AlertIconType.CUSTOMER)
 		Global.employee_rating -= Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
 
 
@@ -327,7 +327,7 @@ func _set_customer(new_customer: Customer) -> void:
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if customer == timed_out_customer:
-		Global.score_update_message = "customer left"
+		Events.alert_posted.emit("customer left", UI.AlertIconType.CUSTOMER)
 		Global.employee_rating -= Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		customer.leave_store()
 		_set_customer(null)
@@ -363,7 +363,7 @@ func machine_make_drink() -> void:
 	order.ordered_drink = customer.desired_drink
 	ordered_drink_name_label.text = (
 			"%s (%s)"
-			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price)]
+			% [order.ordered_drink.name, Global.float_to_price(order.ordered_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day])]
 	)
 
 	ordered_main_ingredient_icon.texture = order.ordered_drink.main_ingredient.icon
@@ -398,7 +398,7 @@ func machine_make_drink() -> void:
 
 	if (
 			randf() <= breaking_chance_now
-			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift
+			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift_each_day[Global.day]
 	):
 		break_down()
 
@@ -457,6 +457,9 @@ func machine_make_drink() -> void:
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
+	
+	# Calculate scaled price
+	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
 
 	# Calculate star rating loss if accepted
 	if order.star_rating_gain_for_remake == 0.0:
@@ -486,13 +489,13 @@ func machine_make_drink() -> void:
 	)
 	if (
 			randf() < spill_chance_now
-			and Global.spills_this_shift < Stats.current.max_spills_per_shift
+			and Global.spills_this_shift < Stats.current.max_spills_per_shift_each_day[Global.day]
 	):
 		spill()
 
 	made_drink_name_label.text = (
 			"%s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+			% [order.made_drink.name, Global.float_to_price(order.final_order_price)]
 	)
 	# NOTE: experiment: commented out for now to simplify ui
 	#final_order_indicator.show()
@@ -518,7 +521,7 @@ func _calculate_drink_diff(correct_drink: Drink, made_drink: Drink) -> int:
 func spill() -> void:
 	spill_interactable.show()
 	spill_sound.play()
-	Events.alert_posted.emit("⚙️machine made a spill")
+	Events.alert_posted.emit("⚙️machine made a spill", UI.AlertIconType.MACHINE)
 	Global.spills_this_shift += 1
 	spill_on_floor = true
 	show_tutorial_go_clean_spill()
@@ -541,7 +544,7 @@ func display_drink_score() -> void:
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
 
-	var price_labels_text: String = "+%s" % Global.float_to_price(order.made_drink.price)
+	var price_labels_text: String = "+%s" % Global.float_to_price(order.final_order_price)
 	_price_label_remake.text = price_labels_text
 	_price_label_accept.text = price_labels_text
 
@@ -605,7 +608,7 @@ func fix_machine(hammer: bool = false) -> void:
 func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
 	if ingredients < Stats.current.ingredients_per_order:
-		Events.alert_posted.emit("🫘 machine ran out of ingredients")
+		Events.alert_posted.emit("🫘 machine ran out of ingredients", UI.AlertIconType.MACHINE)
 		no_ingredients_sound.play()
 
 
@@ -618,7 +621,7 @@ func clean_up_spill() -> void:
 	spill_clean_particles.restart()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
-	Global.score_update_message = "spill cleaned!"
+	Events.alert_posted.emit("spill cleaned!", UI.AlertIconType.MACHINE)
 	Global.employee_rating += rating_gained
 
 
@@ -661,6 +664,9 @@ func cancel_clean_spill() -> void:
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 
 
+func float_to_price(number: float) -> String:
+	return ("$%.2f" % number).trim_suffix(".00")
+
 func accept_order(did_remake_drink: bool) -> void:
 	gui_3d.exit_with_camera_tween()
 
@@ -673,19 +679,19 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
-			Global.score_update_message = "rated %s" % [order.made_drink.name]
+			Events.alert_posted.emit("+%.1f rated %s" % [order.star_rating_gain_for_remake, order.made_drink.name], UI.AlertIconType.RATING)
 			Global.employee_rating += order.star_rating_gain_for_remake
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
-			Global.score_update_message = "rated %s" % [order.made_drink.name]
+			Events.alert_posted.emit("-%.1f rated %s" % [order.star_rating_loss_if_accept, order.made_drink.name], UI.AlertIconType.RATING)
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout
 
-	Global.score_update_message = "sold %s" % order.made_drink.name
-	Global.daily_cafe_money += order.made_drink.price
+	Events.alert_posted.emit("+%s sold %s" % [float_to_price(order.final_order_price), order.made_drink.name], UI.AlertIconType.RATING)
+	Global.daily_cafe_money += order.final_order_price
 
 	# tippy will get mad if you're 40% or more under money goal and you only have 60 sec left
 	if (
@@ -726,7 +732,7 @@ func break_down() -> void:
 	ordered_drink_name_label.hide()
 	fix_machine_button.show()
 	breakdown_sound.play()
-	Events.alert_posted.emit("⚙️ machine broke down")
+	Events.alert_posted.emit("⚙️ machine broke down", UI.AlertIconType.MACHINE)
 	Global.breakdowns_this_shift += 1
 
 	timer.paused = true
@@ -823,7 +829,7 @@ func _on_remade_drink() -> void:
 	order.made_drink = order.ordered_drink
 	made_drink_name_label.text = (
 			"you made:\n %s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.made_drink.price)]
+			% [order.made_drink.name, Global.float_to_price(order.final_order_price)]
 	)
 	display_drink_score()
 
@@ -870,4 +876,4 @@ class OrderData:
 	var extra_correct: bool = false
 	var star_rating_gain_for_remake: float
 	var star_rating_loss_if_accept: float
-	var tip: float = 0.0
+	var final_order_price: float

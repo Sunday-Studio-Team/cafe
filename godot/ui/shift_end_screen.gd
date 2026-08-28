@@ -84,7 +84,6 @@ func _on_time_up() -> void:
 	# calculate everything
 	var daily_profit := Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
-	var max_profit_goal: float = Stats.current.perfect_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
 
 	_min_profit_goal_label.text = "required goal: %s" % Global.float_to_price(min_profit_goal)
@@ -94,7 +93,7 @@ func _on_time_up() -> void:
 	]
 	
 	_rating_label.text = "⭐ %s / %s" % [Global.employee_rating, Stats.current.employee_rating_max]
-	var tip_per_star: float = Stats.current.tip_per_star_rating
+	var tip_per_star: float = Stats.current.tip_per_star_rating[Global.day]
 	var show_tip_jar_desc: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "tip_jar":
