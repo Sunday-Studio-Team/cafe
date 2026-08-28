@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Review" format=3 uid="uid://6jjfjhyutpob"]
+
+[ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_kws1w"]
+[ext_resource type="Texture2D" uid="uid://lwu3lwyp45j0" path="res://emails/reviews/profile_pics/nurse.tres" id="2_yakkn"]
+[ext_resource type="Texture2D" uid="uid://dcde60b6p1nkl" path="res://emails/reviews/profile_pics/salesman.tres" id="3_l5x5j"]
+
+[resource]
+script = ExtResource("1_kws1w")
+username = "redeye_vi"
+rating = 1.0
+review_content = "Stopped here after a twelve-hour shift.
+
+The machine gave me decaf.
+
+That’s it.
+
+That’s the review.
+"
+sprites = Array[AtlasTexture]([ExtResource("2_yakkn"), ExtResource("3_l5x5j")])
+metadata/_custom_type_script = "uid://djf3q4lwggw0g"

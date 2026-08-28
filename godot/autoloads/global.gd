@@ -6,6 +6,7 @@ extends Node
 @export_dir var items_folder_path: String
 @export_dir var ingredients_folder_path: String
 @export_dir var customer_sprites_folder_path: String
+@export_dir var review_folder_path: String
 @export_dir var spill_sprites_path: String
 @export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
@@ -13,7 +14,6 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
-@export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
 var player: Player
 var hovered_interactable: Interactable:
@@ -43,8 +43,11 @@ var minigame_active := false:
 var current_minigame_name: String
 var in_spill_minigame := false
 var in_pc_ui := false
+var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
+var reviews: Array[Review]
+var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer
@@ -171,6 +174,7 @@ func _ready() -> void:
 		drink.create() # adds the price and creates the typing minigame resource
 	items.assign(load_resources_from_folder(items_folder_path))
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
+	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
