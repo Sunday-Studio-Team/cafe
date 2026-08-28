@@ -73,7 +73,7 @@ theme_override_constants/margin_bottom = 100
 layout_mode = 2
 theme_override_constants/v_separation = 25
 
-[node name="ReviewContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1341324083 node_paths=PackedStringArray("icon", "username", "review_content", "star_1", "stars_grid")]
+[node name="ReviewContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1341324083 node_paths=PackedStringArray("icon", "username", "review_content", "star_1", "stars_grid", "reviews_number")]
 propagate_maximum_size = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rtxfr")
@@ -83,6 +83,7 @@ username = NodePath("HBoxContainer/CustomerInfo/Username")
 review_content = NodePath("HBoxContainer/ReviewInfo/RichTextLabel")
 star_1 = NodePath("HBoxContainer/ReviewInfo/Stars/Star1")
 stars_grid = NodePath("HBoxContainer/ReviewInfo/Stars")
+reviews_number = NodePath("HBoxContainer/CustomerInfo/ReviewsNumber")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1890193301]
 layout_mode = 2

@@ -15,3 +15,4 @@ func setup_reviews(reviews_update_email_data: ReviewsUpdateEmailData) -> void:
 		review_list.add_child(container)
 	# remove placeholder
 	review_list.remove_child(review_1)
+	

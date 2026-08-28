@@ -6,6 +6,7 @@ class_name ReviewContainer
 @export var review_content: RichTextLabel
 @export var star_1: TextureRect
 @export var stars_grid: GridContainer
+@export var reviews_number: Label
 
 var review: Review = null:
 	set(value):
@@ -14,6 +15,7 @@ var review: Review = null:
 			icon.texture = null
 		else:
 			review = value
+			reviews_number.text = "★ %s Reviews" % randi_range(2, 999)
 			icon.texture = review.sprites.pick_random()
 			review_content.text = review.review_content
 			username.text = "@" + review.username
@@ -45,5 +47,6 @@ var review: Review = null:
 			stars_grid.add_child(star_3)
 			stars_grid.add_child(star_4)
 			stars_grid.add_child(star_5)
-func init(r: Review) -> void:
+			
+func _init(r: Review) -> void:
 	review = r
