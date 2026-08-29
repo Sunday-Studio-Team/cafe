@@ -1,12 +1,9 @@
 extends TextureRect
 
-@export var invalid_drop_detector: Container
+var is_dragging: bool = false
+
 
 func _get_drag_data(_at_position: Vector2) -> TextureRect:
-	# Capture mouse because dropping outside of the window causes problems
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	invalid_drop_detector.visible = true
-	
 	# Create a drag preview
 	var preview_parent: Control = Control.new()
 	var preview: TextureRect = self.duplicate()

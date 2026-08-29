@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/captcha/captcha.gd" id="1_pitvc"]
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
-[ext_resource type="Script" uid="uid://gb6flbh2fgfb" path="res://minigames/captcha/detectdrop.gd" id="2_juyqc"]
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
@@ -32,9 +31,8 @@ stream_1/stream = ExtResource("5_w8b1k")
 stream_2/stream = ExtResource("6_p8bru")
 
 [node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "player_thought", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pitvc")
@@ -228,7 +226,7 @@ vertical_alignment = 1
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
 
-[node name="Finished Drink" type="TextureRect" parent="SubViewport" unique_id=1573351362 node_paths=PackedStringArray("invalid_drop_detector")]
+[node name="Finished Drink" type="TextureRect" parent="SubViewport" unique_id=1573351362]
 visible = false
 custom_minimum_size = Vector2(350, 350)
 anchors_preset = -1
@@ -245,7 +243,6 @@ grow_vertical = 2
 expand_mode = 3
 stretch_mode = 5
 script = ExtResource("6_juyqc")
-invalid_drop_detector = NodePath("../DETECTDROP")
 
 [node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
 anchors_preset = 2
@@ -284,16 +281,6 @@ button_disabled = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
-
-[node name="DETECTDROP" type="Container" parent="SubViewport" unique_id=569642217 node_paths=PackedStringArray("finished_drink", "root")]
-visible = false
-offset_left = -1159.0
-offset_top = -830.0
-offset_right = 3079.0
-offset_bottom = 1792.0
-script = ExtResource("2_juyqc")
-finished_drink = NodePath("../Finished Drink")
-root = NodePath("../..")
 
 [node name="CustomerContainer" type="CenterContainer" parent="SubViewport" unique_id=1101866638 node_paths=PackedStringArray("finished_drink", "root")]
 z_index = -41
