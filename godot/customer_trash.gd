@@ -26,6 +26,6 @@ func _on_interacted() -> void:
 	
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
-	await Events.bag_pickup_animation_grabbed
+	await Events.trash_pickup_animation_grabbed
 	Global.holding_ingredients = true
 	queue_free()

@@ -7,9 +7,11 @@ const STRIDE_LENGTH := 0.75
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
+@export var customer_trash: MeshInstance3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
+@export var customer_trash_scene: PackedScene
 @export var sprint_lockout_timer: Timer
 
 @export var pully_ball_scene: PackedScene
@@ -66,6 +68,23 @@ func _ready() -> void:
 			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 			t.tween_property(ingredients_bag, "transparency", 0, 0.25),
 	)
+	
+	Events.trash_pickup_animation_grabbed.connect(
+		func():
+			bag_pickup_sound.play()
+
+			# scuffed 'animation' of bag appearing when we grab it
+			customer_trash.transparency = 1
+			customer_trash.scale = Vector3.ZERO
+
+			await Events.viewmodel_animation_finished
+			
+			var t := create_tween().set_parallel()
+			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
+			t.tween_property(customer_trash, "transparency", 0, 0.25),
+	)
+
+
 
 	Global.stamina = Stats.current.max_stamina
 	Global.sprint_lockout_timer = sprint_lockout_timer
@@ -84,6 +103,7 @@ func _physics_process(delta: float) -> void:
 	#handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
+	handle_customer_trash()
 	handle_active_items()
 	handle_floating_cursor()
 	move_and_slide()
@@ -287,6 +307,17 @@ func handle_ingredients_bag() -> void:
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
 	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+
+
+func handle_customer_trash() -> void:
+	if (Input.is_action_just_pressed("drop") and Global.holding_ingredients and not Global.in_ui):
+		Global.holding_ingredients = false
+		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
+		Global.main_scene.add_child(trash_to_drop)
+		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
+		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
+
+	customer_trash.visible = Global.holding_ingredients and not Global.in_ui
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()

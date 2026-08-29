@@ -46,6 +46,7 @@ func _on_frame_changed() -> void:
 			and sprite.animation == "bag_pickup"
 	):
 		Events.bag_pickup_animation_grabbed.emit()
+		Events.trash_pickup_animation_grabbed.emit()
 
 
 func _on_animation_finished() -> void:
