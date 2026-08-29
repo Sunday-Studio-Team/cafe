@@ -388,14 +388,30 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 #code for  trash spawn 
 func spawn_trash() -> void:
-	
-	var spawn=randi_range(0,8)
-	if spawn==3:
+# freq of spawn 3/41 rn
+	var spawn=randi_range(0,40)
+	if spawn>=3:
 		return
 	var customer_trash = customer_trash_scene.instantiate()
-	var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
-	var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
-	customer_trash.position=Vector3(rand_x,0.2,rand_z)
+	#var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
+	#var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
+	#	position of trash spawn
+	#	0.2=ground level	
+	#customer_trash.position=Vector3(rand_x,0.2,rand_z)
+	
+	var current_customers: Array[Customer]
+	# Get all current customer positions
+	for child in get_children():
+		if child is Customer:
+			current_customers.append(child)
+	
+	#var trash_offset: float = 0
+	var littering_customer = current_customers.pick_random()
+	#var rand_x = randf_range(littering_customer.global_position.x, littering_customer.global_position.x)
+	#var rand_z = randf_range(littering_customer.global_position.z, littering_customer.global_position.z)
+	if littering_customer:
+		customer_trash.position=Vector3(littering_customer.global_position.x,0,littering_customer.global_position.z)
+	print("spawned trash")
 	
 	add_child(customer_trash)
 	

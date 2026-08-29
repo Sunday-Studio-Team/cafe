@@ -1,5 +1,5 @@
 class_name CustomerTrash
-extends Area3D
+extends RigidBody3D
 
 @export var interactable: Interactable
 
@@ -9,6 +9,7 @@ signal trash_bag_taken(customer_trash: CustomerTrash)
 # viewmodel animation
 var already_interacted := false
 
+
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 
@@ -17,7 +18,6 @@ func _ready() -> void:
 	interactable.visible = false
 	await get_tree().create_timer(0.5, false).timeout
 	interactable.visible = true
-
 func _on_interacted() -> void:
 	if Global.holding_trash or already_interacted:
 		return

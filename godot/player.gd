@@ -313,15 +313,14 @@ func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		
 		Global.holding_trash = false
-		print("heshel", customer_trash_scene)
+		#print("heshel", customer_trash_scene)
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 		
-		
-	print("asdf", ingredients_bag_scene.instantiate().get_class())
-	print(customer_trash_scene.instantiate().get_class())
+	#print("asdf", ingredients_bag_scene.instantiate().get_class())
+	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
 func _on_items_updated() -> void:

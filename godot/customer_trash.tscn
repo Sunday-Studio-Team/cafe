@@ -1,27 +1,26 @@
 [gd_scene format=3 uid="uid://b2kutc78gmwd1"]
 
 [ext_resource type="Script" uid="uid://dtsyu2epb5p76" path="res://customer_trash.gd" id="1_e16t0"]
-[ext_resource type="Texture2D" uid="uid://8qvdvf14s6li" path="res://sprites/customer_trash.png" id="2_i5ewh"]
+[ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash.png" id="2_i5ewh"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="3_i5ewh"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_715ky"]
-radius = 0.3154297
-height = 0.7463379
+[sub_resource type="BoxShape3D" id="BoxShape3D_i5ewh"]
+size = Vector3(0.24902344, 0.20874023, 0.23120117)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 
-[node name="CustomerTrash" type="Area3D" unique_id=2137740851 node_paths=PackedStringArray("interactable")]
+[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable")]
+collision_layer = 16
 script = ExtResource("1_e16t0")
 interactable = NodePath("Interactable")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.102110654, -0.021725103, -0.0062898397)
 billboard = 1
 texture = ExtResource("2_i5ewh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1263651111]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23685433, -0.06267059, -0.010090709)
-shape = SubResource("CapsuleShape3D_715ky")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018066406, 0.036743164, 0.004760742)
+shape = SubResource("BoxShape3D_i5ewh")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=1272341867]
 script = ExtResource("3_i5ewh")
