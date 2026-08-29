@@ -149,12 +149,7 @@ func _ready() -> void:
 		#Global.popups["special shift"].open()
 
 	if Global.day == 0:
-		Events.tutorial_selected.connect(_interactive_tutorial_flow)
-
-		if not SaveDataManager.save_data.finished_or_skipped_tutorial:
-			tutorial_selection_menu.open_menu()
-		else:
-			_interactive_tutorial_flow()
+		_interactive_tutorial_flow()
 	else:
 		Global.player.movement_enabled = false
 		day_indicator.text = Global.day_to_string(Global.day).to_upper()
