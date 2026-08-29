@@ -9,7 +9,6 @@ signal ingredients_bag_taken(ingredients_bag: IngredientsBag)
 # viewmodel animation
 var already_interacted := false
 
-
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 
