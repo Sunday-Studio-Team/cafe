@@ -28,7 +28,7 @@ func _ready() -> void:
 			func():
 				click_sound.play(),
 		)
-
+	
 	_start_minigame()
 
 
@@ -38,6 +38,14 @@ func _process(delta: float) -> void:
 		# Disable Global so we can use the mouse
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		Global.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _input(event: InputEvent) -> void:
+	# This is what refreshes the made_drink texture if the player drops somewhere they're not supposed to now
+	# Brings the sprite back on any left click release
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
+		remade_drink_sprite.texture = ordered_drink.icon
+
 
 
 func populate_captcha() -> void:
