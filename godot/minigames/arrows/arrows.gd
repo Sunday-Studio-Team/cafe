@@ -5,6 +5,7 @@ extends SubViewportContainer
 @export var prompt_output: RichTextLabel
 @export var wrong_sign: Control
 @export var arrows_container: HBoxContainer
+@export var tippy_image: TextureRect
 
 @export var blue_left: Array[Texture]
 @export var blue_up: Array[Texture]
@@ -14,6 +15,12 @@ extends SubViewportContainer
 @export var red_up: Array[Texture]
 @export var red_right: Array[Texture]
 @export var red_down: Array[Texture]
+
+@export var tippy_left: Array[Texture]
+@export var tippy_up: Array[Texture]
+@export var tippy_right: Array[Texture]
+@export var tippy_down: Array[Texture]
+@export var tippy_fail: Array[Texture]
 
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
@@ -66,19 +73,29 @@ func _input(event: InputEvent) -> void:
 
 
 func check_input(direction: String) -> void:
-	# Tippy dancing should go here
-	
-	if(correct_input_index>= valid_directions.size()): #error checking for index out of bound.
+	if(correct_input_index >= valid_directions.size()): #error checking for index out of bound.
 		print('index out of bound caught in arrows.gd. error handled.')
 		return
 	
 	if (valid_directions[correct_input_index] == direction):
 		output_directions[valid_indices[correct_input_index]].texture = null
+		match direction:
+			"left":
+				set_tippy_image(tippy_left.pick_random());
+				
+			"up":
+				set_tippy_image(tippy_up.pick_random());
+				
+			"right":
+				set_tippy_image(tippy_right.pick_random());
+				
+			"down":
+				set_tippy_image(tippy_down.pick_random());
 		correct_input_index += 1
 		correct_sound.play()
 	else:
-		# Angry tippy face here
-		display_wrong()
+		set_tippy_image(tippy_fail.pick_random());
+		#display_wrong()
 		_start_minigame()
 
 
@@ -115,6 +132,11 @@ func set_up_arrow_container() -> void:
 		arrow_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		arrow_rect.custom_minimum_size.x = min_arrow_size
 		arrows_container.add_child(arrow_rect)
+
+
+func set_tippy_image(tippy_texture: Texture) -> void:
+	# Could do a tween or something here with a parameter of direction to make a little feedback animation
+	tippy_image.texture = tippy_texture
 
 
 func _start_minigame() -> void:
