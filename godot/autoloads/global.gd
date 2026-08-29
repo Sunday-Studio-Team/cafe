@@ -53,6 +53,7 @@ var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer
 var holding_ingredients := false
+var holding_trash := false
 var day := 0
 var shift_length: float
 var shift_time_remaining: float

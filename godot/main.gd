@@ -100,6 +100,7 @@ func _ready() -> void:
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
+	Global.holding_trash = false
 	Global.daily_cafe_money = 0
 	Global.employee_rating = 0
 	Global.spills_this_shift = 0

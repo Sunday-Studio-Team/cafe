@@ -310,14 +310,14 @@ func handle_ingredients_bag() -> void:
 
 
 func handle_customer_trash() -> void:
-	if (Input.is_action_just_pressed("drop") and Global.holding_ingredients and not Global.in_ui):
-		Global.holding_ingredients = false
+	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
+		Global.holding_trash = false
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
-	customer_trash.visible = Global.holding_ingredients and not Global.in_ui
+	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()

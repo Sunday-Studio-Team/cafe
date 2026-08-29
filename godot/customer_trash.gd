@@ -19,7 +19,7 @@ func _ready() -> void:
 	interactable.visible = true
 
 func _on_interacted() -> void:
-	if Global.holding_ingredients or already_interacted:
+	if Global.holding_trash or already_interacted:
 		return
 
 	trash_bag_taken.emit(self)
@@ -27,5 +27,5 @@ func _on_interacted() -> void:
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
 	await Events.trash_pickup_animation_grabbed
-	Global.holding_ingredients = true
+	Global.holding_trash = true
 	queue_free()
