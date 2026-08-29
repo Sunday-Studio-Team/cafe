@@ -21,9 +21,11 @@ extends SubViewportContainer
 @export var tippy_right: Array[Texture]
 @export var tippy_down: Array[Texture]
 @export var tippy_fail: Array[Texture]
+@export var shake_intensity: float = 10
 
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+
 
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
@@ -95,6 +97,7 @@ func check_input(direction: String) -> void:
 		correct_sound.play()
 	else:
 		set_tippy_image(tippy_fail.pick_random());
+		shake_tippy()
 		#display_wrong()
 		_start_minigame()
 
@@ -137,6 +140,29 @@ func set_up_arrow_container() -> void:
 func set_tippy_image(tippy_texture: Texture) -> void:
 	# Could do a tween or something here with a parameter of direction to make a little feedback animation
 	tippy_image.texture = tippy_texture
+
+
+func shake_tippy() -> void:
+	var panel_original_position: Vector2 = tippy_image.position
+	var tween = tippy_image.create_tween()
+	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+
+	tween.tween_property(
+		tippy_image,
+		"position",
+		tippy_image.position + shake_offset_target,
+		0.025,
+	)
+	for i in range(10):
+		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+		tween.chain().tween_property(
+			tippy_image,
+			"position",
+			tippy_image.position + shake_offset_target,
+			0.025,
+		)
+
+	tween.tween_property(tippy_image, "position", panel_original_position, 0.1)
 
 
 func _start_minigame() -> void:
