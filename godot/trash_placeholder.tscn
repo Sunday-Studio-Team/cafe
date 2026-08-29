@@ -1,10 +1,22 @@
 [gd_scene format=3 uid="uid://b3r4ve216cbq3"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_yf5fn"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_fsfcj"]
+[ext_resource type="PackedScene" uid="uid://c55nqnrnp8wni" path="res://trash_placehold.tscn" id="2_kj56n"]
 
-[node name="trash_placehold" type="Node3D" unique_id=2072620561]
-transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0, 0, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 
-[node name="trash_placeholder" type="MeshInstance3D" parent="." unique_id=236552305]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5002231)
-mesh = SubResource("BoxMesh_yf5fn")
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+
+[node name="trash_placehold" type="RigidBody3D" unique_id=1231824233]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1400274494]
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=1480332201]
+script = ExtResource("1_fsfcj")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1546897978]
+shape = SubResource("BoxShape3D_yf5fn")
+
+[node name="trash_placehold" parent="." unique_id=318775450 instance=ExtResource("2_kj56n")]

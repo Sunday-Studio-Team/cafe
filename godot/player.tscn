@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dkrhm1jngkx74" path="res://camera_controller.gd" id="3_sweqy"]
 [ext_resource type="Script" uid="uid://cfdil6b7366s" path="res://camera_effects.gd" id="4_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://najej8q5da4u" path="res://audio/bag_pickup.mp3" id="4_hqtel"]
+[ext_resource type="PackedScene" uid="uid://c55nqnrnp8wni" path="res://trash_placehold.tscn" id="6_dw050"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
@@ -44,6 +45,8 @@ bob_up = 0.01
 bob_frequency = 3.0
 max_shake = 0.2
 
+[node name="trash_placehold" parent="CameraController/Camera3D" unique_id=318775450 instance=ExtResource("6_dw050")]
+
 [node name="RayCast3D" type="RayCast3D" parent="CameraController/Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
 target_position = Vector3(0, 0, -1.5)
@@ -63,13 +66,10 @@ stream = ExtResource("4_hqtel")
 volume_db = -20.0
 max_db = 0.0
 
-[node name="trash_placehold" parent="CameraController/Camera3D" unique_id=2072620561 instance=ExtResource("3_1jxqw")]
-transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 0.14622796, 0, -0.20612997)
-
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2008160580]
 
 [node name="SprintLockoutTimer" type="Timer" parent="." unique_id=1168419825]
 one_shot = true
 
-[editable path="CameraController/Camera3D/ingredientbag"]
 [editable path="CameraController/Camera3D/trash_placehold"]
+[editable path="CameraController/Camera3D/ingredientbag"]
