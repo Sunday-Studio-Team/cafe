@@ -321,15 +321,20 @@ func get_customers() -> Array[Customer]:
 	print((get_tree().get_nodes_in_group("customer")).size())
 	return (get_tree().get_nodes_in_group("customer")) as Array[Customer]
 
+
 func spawn_help_desk_customer() -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
-	
+
+	if Global.day < 2:
+		return
+
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
-	
+
 	_customer_help_desk.add_customer_to_queue(new_customer)
+
 
 #Actives the effects of a given active item
 func active_item_used(item: Item):

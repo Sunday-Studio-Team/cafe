@@ -28,7 +28,7 @@ var ingredients_per_order: int = 10
 var ingredients_per_bag: int = 50
 var cost_to_reroll := 5.0
 var max_spills_per_shift_each_day: Dictionary[int, int] = { 1: 2, 2: 3, 3: 4, 4: 5, 5: 6, 0: 2 } 
-var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 3, 2: 4, 3: 4, 4: 5, 5: 6, 0: 3 }
+var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 3, 3: 4, 4: 5, 5: 6, 0: 3 }
 var clean_spill_allowed_remaining := 0.05
 var max_stamina := 125.0
 # NOTE: set to 0 to effectively disable (was 25 before)
