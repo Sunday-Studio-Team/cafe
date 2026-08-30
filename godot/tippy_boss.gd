@@ -4,6 +4,8 @@ extends CharacterBody3D
 const GRAB_RANGE: float = 1
 const TIME_IN_JAIL: float = 10
 
+@export var customer_area: Area3D
+@export var back_room_enter_trigger: Area3D
 @export var jumpscare_fade_rect: ColorRect
 @export var nav_agent: NavigationAgent3D
 @export var tired_indicator: Label3D
@@ -19,6 +21,7 @@ enum State {IDLE, CHASING, TIRED, ZAPPED}
 
 var state: State = State.IDLE:
 	set = set_state
+var player_in_customer_area: bool = false
 
 @onready var starting_pos := global_position
 @onready var player: Player = Global.player
@@ -54,9 +57,27 @@ func _ready() -> void:
 
 	if Global.day != 5:
 		queue_free()
+	
+	customer_area.body_entered.connect(
+		func(body: PhysicsBody3D):
+			if body == Global.player:
+				player_in_customer_area = true
+	)
+	customer_area.body_exited.connect(
+		func(body: PhysicsBody3D):
+			if body == Global.player:
+				player_in_customer_area = false
+	)	
 
-	await Events.player_left_office
-	set_state(State.CHASING)
+	Events.shift_started.connect(
+		func():
+		back_room_enter_trigger.body_entered.connect(
+			func(body: PhysicsBody3D):
+				if body == Global.player:
+					set_state(State.CHASING),
+					ConnectFlags.CONNECT_ONE_SHOT
+	)
+	)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -71,6 +92,7 @@ func _physics_process(delta: float) -> void:
 			player.global_position = player_kidnap_marker.global_position
 			player.reset_physics_interpolation()
 			create_tween().tween_property(jumpscare_fade_rect, "modulate", Color.TRANSPARENT, 0.25)
+			Events.tippy_boss_kidnapped_player.emit()
 
 			# wait
 			await get_tree().create_timer(TIME_IN_JAIL, false).timeout
@@ -87,7 +109,10 @@ func _physics_process(delta: float) -> void:
 			await Events.player_left_office
 			set_state(State.TIRED)
 
-		nav_agent.target_position = player.global_position
+		if not player_in_customer_area:
+			nav_agent.target_position = player.global_position
+		else:
+			nav_agent.target_position = starting_pos
 		global_position = global_position.move_toward(nav_agent.get_next_path_position(), delta)
 		move_and_slide()
 
