@@ -18,12 +18,12 @@ func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
-	
+
 	# Wait until everything else is ready, as main needs to set per day stuff.
 	await get_tree().process_frame
-	
+
 	set_unread_count()
-	
+
 	for button: Button in find_children("*", "Button"):
 		button.pressed.connect(
 			func():
@@ -52,7 +52,6 @@ func exit() -> void:
 	email_app.hide()
 	shop_app.hide()
 	hide()
-	ui.show()
 
 
 func _on_email_button_pressed() -> void:

@@ -132,37 +132,21 @@ func _ready() -> void:
 	for ui_element: Control in ui.find_children("*", "Control", false):
 		create_tween().tween_property(ui_element, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT)
 
-	# spawn one customer early off-sync with the timers wait time
-	# so we dont have to wait loads every time we start the game to test
-	# NOTE: commenting this out for now since maybe its better to give people
-	# a few seconds to read the tutorial text and get their bearings
-	#await get_tree().create_timer(1, false).timeout
-	#customer_spawn_timer.timeout.emit()
-
 	#Active Item refresh
 	Global.refresh_active_items()
 
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
 
-	#if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-		#Global.popups["special shift"].open()
-
 	if Global.day == 0:
 		_interactive_tutorial_flow()
 	else:
-		Global.player.movement_enabled = false
 		day_indicator.text = Global.day_to_string(Global.day).to_upper()
 		day_indicator.show()
 		await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT).finished
 		await get_tree().create_timer(1.5, false).timeout
 		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
 		day_indicator.hide()
-		_on_desk_interacted()
-		pc_ui._on_shop_button_pressed()
-		Global.player.movement_enabled = true
-		# whiteboard_tutorial_arrow.visible = false
-		# waypoint_ring.hide()
 
 
 func _process(delta: float) -> void:
