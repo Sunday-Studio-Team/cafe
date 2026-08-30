@@ -101,12 +101,13 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
+_day_label = NodePath("MarginContainer/VBoxContainer/Outcome")
 times_up = NodePath("MarginContainer/TimesUp")
-outcome = NodePath("MarginContainer/VBoxContainer/Outcome")
+outcome = NodePath("MarginContainer/VBoxContainer/Outcome2")
 time_up_sound = NodePath("TimeUpSound")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
@@ -171,6 +172,16 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Outcome2" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=2035401107]
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/bold_font_size = 112
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1930785200]
 layout_mode = 2
 alignment = 1
@@ -178,6 +189,17 @@ alignment = 1
 [node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=475181285]
 layout_mode = 2
 size_flags_horizontal = 6
+
+[node name="DayTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=123944233]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/bold_font_size = 82
+bbcode_enabled = true
+text = "[b]DAY 1"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MoneyTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
 custom_maximum_size = Vector2(1000, 100)
