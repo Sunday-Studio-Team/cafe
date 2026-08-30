@@ -161,6 +161,8 @@ var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs
 var shift_started: bool = false
 # Voice Line System
 var voice_line_system: VoiceLineSystem
+# main Cafe environment resource
+var cafe_environment_res: Environment
 
 
 func _ready() -> void:

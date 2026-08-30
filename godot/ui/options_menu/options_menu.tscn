@@ -41,12 +41,14 @@ bg_color = Color(0.16, 0.16, 0.16, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wakw5"]
 bg_color = Color(0.06, 0.06, 0.06, 1)
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_graphics_preset_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
 process_mode = 3
 layer = 5
 script = ExtResource("1_8h7tm")
 _tab_container = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer")
 _graphics_preset_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView")
+_window_mode_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/WindowModeOptionsMenuOptionView")
+_vsync_mode_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/VsyncModeOptionsMenuOptionView")
 _crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
 _camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
 _move_forward_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveForwardOptionsMenuKeybindOptionView2")
@@ -144,6 +146,14 @@ theme_override_constants/separation = 8
 [node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Graphics Preset"
+
+[node name="WindowModeOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1113002814 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Window Mode"
+
+[node name="VsyncModeOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1613105363 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Vsync Mode"
 
 [node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
 layout_mode = 2

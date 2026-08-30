@@ -1,9 +1,10 @@
 class_name OptionsData
 extends Resource
 
-const LATEST_OPTIONS_VERSION: int = 1
+const LATEST_OPTIONS_VERSION: int = 2
 ## 0: Initial with only Graphics, Crosshair, and CameraMotion.
 ## 1: Added keybinds.
+## 2: Added windowing modes.
 @export var options_version: int = 0
 
 enum GraphicsOptionsPresets {
@@ -14,6 +15,23 @@ enum GraphicsOptionsPresets {
 }
 
 @export var graphics_preset: GraphicsOptionsPresets = GraphicsOptionsPresets.HIGH
+
+enum WindowModeOption {
+	Windowed,
+	Fullscreen,
+	ExclusiveFullscreen,
+}
+
+@export var window_mode_option: WindowModeOption = WindowModeOption.Fullscreen
+
+enum VsyncOption {
+	On,
+	Off,
+	Adaptive,
+	Mailbox,
+}
+
+@export var vsync_option: VsyncOption = VsyncOption.On
 
 enum CrosshairOption {
 	On,
@@ -80,11 +98,20 @@ func update_version() -> void:
 		_reset_all_keybinds()
 		print("Upgraded options version from 0 to 1+")
 	
+	if options_version < 2 and LATEST_OPTIONS_VERSION >= 2:
+		_reset_windowed_mode()
+		print("Upgraded options version from <2 to 2+")		
+
 	options_version = LATEST_OPTIONS_VERSION
 
 func _reset_all_keybinds() -> void:
 	# Get them from Project Settings.
 	interact_action_physical_keycode = _get_action_first_key_input_event(&"interact").physical_keycode
+
+func _reset_windowed_mode() -> void:
+	# Set depending on whether game was launched from editor.
+	if OS.has_feature("editor"):
+		window_mode_option = WindowModeOption.Windowed
 
 func _get_action_first_key_input_event(action_name: StringName) -> InputEventKey:
 	var input_events: Array[InputEvent] = InputMap.action_get_events(action_name)

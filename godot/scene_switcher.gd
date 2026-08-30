@@ -19,6 +19,8 @@ const LOADING_FADE_OUT_TIME := 1.0
 ## Additional resources to always keep cached for speed. 
 @export var _main_sub_resource_uids: Array[StringName]
 
+@export var _cafe_environment_res: Environment
+
 var current_scene: Node = null
 var loading_tween: Tween
 
@@ -26,8 +28,15 @@ var loading_tween: Tween
 var _cached_main_packed_scene: PackedScene
 var _cached_sub_resources: Dictionary[StringName, Resource]
 
+var _is_first_options_load: bool = true
+
 
 func _ready() -> void:
+	Global.cafe_environment_res = _cafe_environment_res
+	
+	Events.game_options_changed.connect(_on_game_options_changed)
+	SaveDataManager.get_options_data().apply_options()
+	
 	Events.scene_switch_requested.connect(load_scene)
 	Events.quit_game_requested.connect(quit_game)
 
@@ -197,4 +206,87 @@ func _count_children_recursively(node: Node) -> int:
 	for child_node in node.get_children():
 		child_count += _count_children_recursively(child_node)
 	return child_count
+
+func _on_game_options_changed(options_data: OptionsData) -> void:
+	_apply_game_options(options_data)
+
+
+func _apply_game_options(options_data: OptionsData) -> void:
+	match options_data.graphics_preset:
+		OptionsData.GraphicsOptionsPresets.HIGH:
+			Global.cafe_environment_res.ssao_enabled = true
+			Global.cafe_environment_res.ssil_enabled = true
+			Global.cafe_environment_res.sdfgi_enabled = true
+			Global.cafe_environment_res.volumetric_fog_enabled = true
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
+			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 1.0)
+		OptionsData.GraphicsOptionsPresets.MEDIUM:
+			Global.cafe_environment_res.ssao_enabled = true
+			Global.cafe_environment_res.ssil_enabled = false
+			Global.cafe_environment_res.sdfgi_enabled = true
+			Global.cafe_environment_res.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 2.0)
+		OptionsData.GraphicsOptionsPresets.LOW:
+			Global.cafe_environment_res.ssao_enabled = false
+			Global.cafe_environment_res.ssil_enabled = false
+			Global.cafe_environment_res.sdfgi_enabled = false
+			Global.cafe_environment_res.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 32.0)
+		OptionsData.GraphicsOptionsPresets.MINIMUM:
+			Global.cafe_environment_res.ssao_enabled = false
+			Global.cafe_environment_res.ssil_enabled = false
+			Global.cafe_environment_res.sdfgi_enabled = false
+			Global.cafe_environment_res.volumetric_fog_enabled = false
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
+			ProjectSettings.set_setting("rendering/scaling_3d/scale", 0.33)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
+			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 64.0)
+		_:
+			pass
+	RenderingServer.gi_set_use_half_resolution(ProjectSettings.get_setting("rendering/global_illumination/gi/use_half_resolution"))
+	if not is_inside_tree():
+		await tree_entered
+	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
+	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
+	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
+	get_tree().root.mesh_lod_threshold = (ProjectSettings.get_setting("rendering/mesh_lod/lod_change/threshold_pixels") as float)
 	
+	match options_data.window_mode_option:
+		OptionsData.WindowModeOption.Windowed:
+			if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN:
+				DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED)
+				await get_tree().process_frame
+			DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+		OptionsData.WindowModeOption.Fullscreen:
+			if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
+				DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED)
+				await get_tree().process_frame
+			DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+		OptionsData.WindowModeOption.ExclusiveFullscreen:
+			DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+		_:
+			pass
+	
+	match options_data.vsync_option:
+		OptionsData.VsyncOption.On:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSyncMode.VSYNC_ENABLED)
+		OptionsData.VsyncOption.Off:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSyncMode.VSYNC_DISABLED)
+		OptionsData.VsyncOption.Adaptive:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSyncMode.VSYNC_ADAPTIVE)
+		OptionsData.VsyncOption.Mailbox:
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSyncMode.VSYNC_MAILBOX)
+		_:
+			pass

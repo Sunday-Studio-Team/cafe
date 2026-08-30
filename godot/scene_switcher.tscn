@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dlalp4lnows75"]
 
 [ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
+[ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="2_0bfbf"]
 [ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_xn3vj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
@@ -94,6 +95,7 @@ _main_scene_uid = &"uid://nm85k5woe7rt"
 _main_menu_uid = &"uid://cqpfyo7o4qvn6"
 _end_of_day_dialog_scene_uid = &"uid://b0nxtbhq1jhc6"
 _main_sub_resource_uids = Array[StringName]([&"uid://dtbfgptmi7ixs", &"uid://cn12vpm4btpmx", &"uid://dhmqo5yinqk0t", &"uid://bt2p6jpdaqe0w"])
+_cafe_environment_res = ExtResource("2_0bfbf")
 
 [node name="LoadingCanvas" type="CanvasLayer" parent="." unique_id=520928004]
 layer = 10

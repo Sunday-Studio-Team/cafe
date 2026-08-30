@@ -4,6 +4,8 @@ extends Node
 @export var _tab_container: TabContainer
 # General
 @export var _graphics_preset_option_view: OptionsMenuOptionView
+@export var _window_mode_option_view: OptionsMenuOptionView
+@export var _vsync_mode_option_view: OptionsMenuOptionView
 @export var _crosshair_option_view: OptionsMenuOptionView
 @export var _camera_motion_option_view: OptionsMenuOptionView
 # Keybinds
@@ -23,6 +25,19 @@ const _graphics_option_presets: Dictionary[String, int] = {
 	"High": OptionsData.GraphicsOptionsPresets.MEDIUM,
 	"Low": OptionsData.GraphicsOptionsPresets.LOW,
 	"Minimum": OptionsData.GraphicsOptionsPresets.MINIMUM,
+}
+
+const _window_mode_options: Dictionary[String, int] = {
+	"Windowed": OptionsData.WindowModeOption.Windowed,
+	"Borderless Windowed (Default)": OptionsData.WindowModeOption.Fullscreen,
+	"Exclusive Fullscreen": OptionsData.WindowModeOption.ExclusiveFullscreen,
+}
+
+const _vsync_options: Dictionary[String, int] = {
+	"On (Default)": OptionsData.VsyncOption.On,
+	"Off": OptionsData.VsyncOption.Off,
+	"Advanced - Adaptive": OptionsData.VsyncOption.Adaptive,
+	"Advanced - Mailbox": OptionsData.VsyncOption.Mailbox,
 }
 
 const _crosshair_options: Dictionary[String, int] = {
@@ -59,6 +74,16 @@ func _setup_option_views() -> void:
 	_graphics_preset_option_view.set_dropdown_options(_graphics_option_presets)
 	_graphics_preset_option_view.set_selected_dropdown_option((_options_data.graphics_preset as int))
 	_graphics_preset_option_view.changed_option.connect(_on_graphics_preset_option_view_changed_option)
+	
+	_window_mode_option_view.set_label("Window Mode")
+	_window_mode_option_view.set_dropdown_options(_window_mode_options)
+	_window_mode_option_view.set_selected_dropdown_option((_options_data.window_mode_option as int))
+	_window_mode_option_view.changed_option.connect(_on_window_mode_option_view_changed_option)
+
+	_vsync_mode_option_view.set_label("VSync Mode")
+	_vsync_mode_option_view.set_dropdown_options(_vsync_options)
+	_vsync_mode_option_view.set_selected_dropdown_option((_options_data.vsync_option as int))
+	_vsync_mode_option_view.changed_option.connect(_on_vsync_mode_option_view_changed_option)
 
 	_crosshair_option_view.set_label("Crosshair")
 	_crosshair_option_view.set_dropdown_options(_crosshair_options)
@@ -117,6 +142,14 @@ func _setup_option_views() -> void:
 
 func _on_graphics_preset_option_view_changed_option(index: int) -> void:
 	_options_data.graphics_preset = (index as OptionsData.GraphicsOptionsPresets)
+	_options_data.apply_options()
+
+func _on_window_mode_option_view_changed_option(index: int) -> void:
+	_options_data.window_mode_option = (index as OptionsData.WindowModeOption)
+	_options_data.apply_options()
+
+func _on_vsync_mode_option_view_changed_option(index: int) -> void:
+	_options_data.vsync_option = (index as OptionsData.VsyncOption)
 	_options_data.apply_options()
 
 func _on_crosshair_option_view_changed_option(index: int) -> void:

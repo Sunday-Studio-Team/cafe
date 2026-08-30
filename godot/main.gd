@@ -57,8 +57,8 @@ var _all_security_cameras: Array[SecurityCam3D]
 var closing_time:bool = false
 
 func _ready() -> void:
+	_world_environment.environment = Global.cafe_environment_res
 	Events.game_options_changed.connect(_on_game_options_changed)
-	SaveDataManager.get_options_data().apply_options()
 	Events.customer_leave.connect(shift_end_sequence)
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
@@ -762,57 +762,7 @@ func _on_game_options_changed(options_data: OptionsData) -> void:
 
 
 func _apply_game_options(options_data: OptionsData) -> void:
-	match options_data.graphics_preset:
-		OptionsData.GraphicsOptionsPresets.HIGH:
-			_world_environment.environment.ssao_enabled = true
-			_world_environment.environment.ssil_enabled = true
-			_world_environment.environment.sdfgi_enabled = true
-			_world_environment.environment.volumetric_fog_enabled = true
-			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
-			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
-			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 1.0)
-		OptionsData.GraphicsOptionsPresets.MEDIUM:
-			_world_environment.environment.ssao_enabled = true
-			_world_environment.environment.ssil_enabled = false
-			_world_environment.environment.sdfgi_enabled = true
-			_world_environment.environment.volumetric_fog_enabled = false
-			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
-			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
-			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 2.0)
-		OptionsData.GraphicsOptionsPresets.LOW:
-			_world_environment.environment.ssao_enabled = false
-			_world_environment.environment.ssil_enabled = false
-			_world_environment.environment.sdfgi_enabled = false
-			_world_environment.environment.volumetric_fog_enabled = false
-			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
-			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 32.0)
-		OptionsData.GraphicsOptionsPresets.MINIMUM:
-			_world_environment.environment.ssao_enabled = false
-			_world_environment.environment.ssil_enabled = false
-			_world_environment.environment.sdfgi_enabled = false
-			_world_environment.environment.volumetric_fog_enabled = false
-			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
-			ProjectSettings.set_setting("rendering/scaling_3d/scale", 0.33)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 64.0)
-		_:
-			pass
-	RenderingServer.gi_set_use_half_resolution(ProjectSettings.get_setting("rendering/global_illumination/gi/use_half_resolution"))
-	if not is_inside_tree():
-		await tree_entered
-	get_viewport().scaling_3d_scale = (ProjectSettings.get_setting("rendering/scaling_3d/scale") as float)
-	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
-	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
-	get_tree().root.mesh_lod_threshold = (ProjectSettings.get_setting("rendering/mesh_lod/lod_change/threshold_pixels") as float)
-
+	pass
 
 func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
 	var new_machine_customer_flow_rate: float = _get_machine_customer_flow_rate()
