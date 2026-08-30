@@ -25,9 +25,6 @@ extends Node3D
 @export var desk: Desk
 @export var pc_ui: PC_UI
 @export var overtime_item: Item
-# environmental art that mentions security cams (referenced so we can disable
-# them until the day where the cameras get installed)
-@export var camera_posters: Array[Node3D]
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
