@@ -1,7 +1,7 @@
 extends Node2D
 
-const MOVE_SPEED := 7.5
-const NUM_BEANS_TO_SPAWN := 8 #originally... 5 x0.4s
+const MOVE_SPEED := 8.5
+const NUM_BEANS_TO_SPAWN := 6 #generally, change the timer in BeanSpawnTimer Node when adjusting this; ie make bean*timer = ~2.0s
 const MAX_HORIZONTAL_BEAN_FORCE := 800
 const MAX_VERTICAL_BEAN_FORCE := 450
 
@@ -104,15 +104,19 @@ func spawn_bean()->void:
 	#return
 	#
 	
-	if  beans_spawned< 3 and gold_bean_spawned == false : #gold bean case
+	if  beans_spawned< 4 and gold_bean_spawned == false : #gold bean case
 	
 		random_int =  randi_range(1,100)
-		if(beans_spawned==0 and random_int<33): #33
+		if(beans_spawned==0 and random_int<5): #33
 			spawn_gold_bean(bean)
 		
-		elif(beans_spawned==1 and random_int<67): #67
+		elif(beans_spawned==1 and random_int<40): #40
 			spawn_gold_bean(bean)
-		elif(beans_spawned==2): #100
+		
+		elif(beans_spawned==2 and random_int<60): #67
+			spawn_gold_bean(bean)
+		
+		elif(beans_spawned==3): #100
 			spawn_gold_bean(bean)
 		else:
 			spawn_normal_bean(bean)
@@ -123,7 +127,7 @@ func spawn_bean()->void:
 			spawn_normal_bean(bean)
 		else:
 			
-			if random_int<(35 + beans_spawned *3):
+			if random_int<(25 + beans_spawned *3):
 				spawn_bomb_bean(bean)
 			else:
 				spawn_normal_bean(bean)
@@ -145,7 +149,7 @@ func spawn_normal_bean(bean:PhysicsBody2D) -> void:
 func spawn_gold_bean(bean:PhysicsBody2D) -> void:
 	gold_bean_spawned= true
 	bean = golden_bean_scene.instantiate()
-	bean.gravity_scale = 0.37 + randf_range(-0.17, 0.18)
+	bean.gravity_scale = 0.33 + randf_range(-0.15, 0.15)
 	bean.global_position = pour_point.global_position
 	bean.global_position.x-= 53
 	
