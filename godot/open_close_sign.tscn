@@ -2,103 +2,91 @@
 
 [ext_resource type="Script" uid="uid://c0nsltcnkwb8t" path="res://open_closed_sign.gd" id="1_jq31d"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_rxk5n"]
+[ext_resource type="PackedScene" uid="uid://1s54vqwadrmx" path="res://Assets/signs/tippy_open_close_sign_model.tscn" id="3_vu0xl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
-size = Vector3(0.90000004, 0.5, 0.5)
+size = Vector3(1.5, 0.9, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxk5n"]
-albedo_color = Color(0.99957997, 0.5919275, 0.47328472, 1)
+[sub_resource type="Animation" id="Animation_vu0xl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.1754386, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[sub_resource type="TextMesh" id="TextMesh_vu0xl"]
-material = SubResource("StandardMaterial3D_rxk5n")
-text = "closed"
-depth = 0.01
+[sub_resource type="Animation" id="Animation_jm0q7"]
+resource_name = "open"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1754386, 0), Vector3(0, -0.175, 0.3), Vector3(0, -0.175, 0.3), Vector3(0, -0.175, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.2617994, 0), Vector3(0, 3.403392, 0), Vector3(0, 3.1415927, 0)]
+}
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm0q7"]
-albedo_color = Color(0.5647059, 1, 0.43529412, 1)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1xpwx"]
+_data = {
+&"RESET": SubResource("Animation_vu0xl"),
+&"open": SubResource("Animation_jm0q7")
+}
 
-[sub_resource type="TextMesh" id="TextMesh_1xpwx"]
-material = SubResource("StandardMaterial3D_jm0q7")
-text = "open"
-depth = 0.01
-
-[sub_resource type="BoxMesh" id="BoxMesh_dju1t"]
-size = Vector3(0.45, 0.15, 0.01)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whkqc"]
-albedo_color = Color(0.41515717, 0.25121698, 0.06559155, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wbp8u"]
-material = SubResource("StandardMaterial3D_whkqc")
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.15
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_bpwws"]
-top_radius = 0.01
-bottom_radius = 0.01
-height = 0.05
-
-[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "important_emails_required_model")]
+[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "animation_player")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 script = ExtResource("1_jq31d")
 interactable = NodePath("Interactable")
-important_emails_required_model = NodePath("ImportantEmailsRequiredModel")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=2045513509 node_paths=PackedStringArray("mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1754386, 0.3508772, 0)
 script = ExtResource("2_rxk5n")
 display_name = "start shift"
-mesh = NodePath("../SignModel/Sign")
+mesh = NodePath("../Model/tippyOpenCloseSign")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=668432471]
 shape = SubResource("BoxShape3D_jq31d")
 
-[node name="SignModel" type="Node3D" parent="." unique_id=1777842618]
+[node name="Model" parent="." unique_id=56236514 instance=ExtResource("3_vu0xl")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.1754386, 0)
 
-[node name="Closed" type="MeshInstance3D" parent="SignModel" unique_id=1595451907]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00962235)
-visible = false
-mesh = SubResource("TextMesh_vu0xl")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1479874812]
+libraries/ = SubResource("AnimationLibrary_1xpwx")
 
-[node name="Open" type="MeshInstance3D" parent="SignModel" unique_id=1318186677]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.019794166, -0.006853506)
-visible = false
-mesh = SubResource("TextMesh_1xpwx")
-
-[node name="Sign" type="MeshInstance3D" parent="SignModel" unique_id=1043669756]
-mesh = SubResource("BoxMesh_dju1t")
-
-[node name="String" type="MeshInstance3D" parent="SignModel" unique_id=54815243]
-transform = Transform3D(0.8399515, 0.5426614, 0, -0.5426614, 0.8399515, 0, 0, 0, 1, -0.03186643, 0.14003932, 0)
-visible = false
-mesh = SubResource("CylinderMesh_wbp8u")
-
-[node name="String2" type="MeshInstance3D" parent="SignModel" unique_id=384346195]
-transform = Transform3D(-0.8399515, -0.5426614, -8.742278e-08, -0.5426614, 0.8399515, 0, 7.34309e-08, 4.744097e-08, -1, 0.040038973, 0.14003932, 0)
-visible = false
-mesh = SubResource("CylinderMesh_wbp8u")
-
-[node name="Pin" type="MeshInstance3D" parent="SignModel" unique_id=2048239407]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.19728023, 0)
-visible = false
-mesh = SubResource("CylinderMesh_bpwws")
-
-[node name="StartShiftModel" type="Node3D" parent="." unique_id=64415536]
-
-[node name="Label3D" type="Label3D" parent="StartShiftModel" unique_id=832554582]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.041092753)
-text = "START
-SHIFT"
-font_size = 16
-
-[node name="CSGBox3D" type="CSGBox3D" parent="StartShiftModel" unique_id=1768748418]
-visible = false
-size = Vector3(0.88671875, 0.515625, 0.075927734)
-
-[node name="ImportantEmailsRequiredModel" type="Node3D" parent="." unique_id=1299437437]
-visible = false
-
-[node name="Label3D" type="Label3D" parent="ImportantEmailsRequiredModel" unique_id=1266681095]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4575901, 0.041092753)
-text = "BLOCKED:
-Deal with important emails first!"
+[editable path="Model"]

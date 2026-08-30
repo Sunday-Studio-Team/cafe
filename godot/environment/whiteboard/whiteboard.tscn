@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dy4e7ivinjsni"]
 
 [ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/whiteboard.gd" id="1_6exnn"]
-[ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="3_4qxtd"]
-[ext_resource type="Texture2D" uid="uid://b06hlrdkxu5s3" path="res://environment/whiteboard/whiteboard_start_shift_arrows.png" id="4_5pta2"]
 [ext_resource type="FontFile" uid="uid://csg2vlq4u84fp" path="res://fonts/Permanent_Marker/PermanentMarker-Regular.ttf" id="4_mcetr"]
 [ext_resource type="PackedScene" uid="uid://cd3xb42fgnnxw" path="res://Assets/Whiteboard/low_poly_whiteboard.glb" id="7_qmmlt"]
 
@@ -52,9 +50,6 @@ Today is going to be a special day."])
 [node name="Model" parent="." unique_id=240193298 instance=ExtResource("7_qmmlt")]
 transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.88540924, 0, -3.8702453e-08, 0, -1.041, 0)
 
-[node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("3_4qxtd")]
-transform = Transform3D(0.56999993, 0, 0, 0, 0.56999993, 0, 0, 0, 0.56999993, 0.456, -0.228, 0.1)
-
 [node name="Content" type="Sprite3D" parent="." unique_id=399085356]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.551115e-17, 0.03351003, 0.013631233)
 pixel_size = 0.00075
@@ -72,16 +67,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Arrows" type="TextureRect" parent="Content/SubViewport" unique_id=1193384580]
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 1587.0
-offset_bottom = 989.0
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0.25, 0.1)
-offset_transform_scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_5pta2")
 
 [node name="MarginContainer" type="MarginContainer" parent="Content/SubViewport" unique_id=18609656]
 anchors_preset = 15
