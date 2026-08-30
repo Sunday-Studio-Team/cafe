@@ -1,13 +1,14 @@
 class_name Player
 extends CharacterBody3D
 
-const STRIDE_LENGTH := 0.75
+const STRIDE_LENGTH := 1.1
 
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
+@export var footstep_sound: AudioStreamPlayer3D
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
@@ -30,7 +31,7 @@ var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 var holding_interactable: bool = false
 
-#when pully ball spawns, starts counting up. keeping track of strength.
+# when pully ball spawns, starts counting up. keeping track of strength.
 var pully_ball_countup: float = 0.0
 var pully_ball_instance: Node3D
 
@@ -79,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
-	#handle_footstep_sounds()
+	handle_footstep_sounds()
 	#tilt_camera()
 	handle_ingredients_bag()
 	handle_active_items()
@@ -254,7 +255,7 @@ func handle_footstep_sounds() -> void:
 		dist_travelled_since_last_step += global_position.distance_to(pos_last_physics_frame)
 
 	if dist_travelled_since_last_step >= STRIDE_LENGTH:
-		# TODO: play sound
+		footstep_sound.play()
 		dist_travelled_since_last_step = 0
 
 	pos_last_physics_frame = global_position

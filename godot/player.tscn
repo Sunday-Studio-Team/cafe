@@ -8,18 +8,33 @@
 [ext_resource type="AudioStream" uid="uid://najej8q5da4u" path="res://audio/bag_pickup.mp3" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://f3ib4e2r2ga4" path="res://exploding_bomb_on_player.gd" id="5_sweqy"]
 [ext_resource type="PackedScene" uid="uid://do0l4oqkkpu3y" path="res://items/exploding_bomb.tscn" id="6_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://ccwrshnju2b8d" path="res://audio/footsteps/003_SFX_FootStep_Concrete_01.ogg" id="9_urp6f"]
+[ext_resource type="AudioStream" uid="uid://bb2mgkt6rlw2n" path="res://audio/footsteps/003_SFX_FootStep_Concrete_02.ogg" id="10_bwjto"]
+[ext_resource type="AudioStream" uid="uid://drvs83b131cgg" path="res://audio/footsteps/003_SFX_FootStep_Concrete_03.ogg" id="11_606se"]
+[ext_resource type="AudioStream" uid="uid://byvxubbouaxi3" path="res://audio/footsteps/003_SFX_FootStep_Concrete_04.ogg" id="12_u1c27"]
+[ext_resource type="AudioStream" uid="uid://dah63qc38due7" path="res://audio/footsteps/003_SFX_FootStep_Concrete_05.ogg" id="13_op7ga"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
 height = 1.7
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "sprint_lockout_timer")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+random_pitch = 1.0594631
+streams_count = 5
+stream_0/stream = ExtResource("9_urp6f")
+stream_1/stream = ExtResource("10_bwjto")
+stream_2/stream = ExtResource("11_606se")
+stream_3/stream = ExtResource("12_u1c27")
+stream_4/stream = ExtResource("13_op7ga")
+
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
 aiming_ray = NodePath("CameraController/Camera3D/RayCast3D")
 ingredients_bag = NodePath("CameraController/Camera3D/ingredientbag/ingredient_bag")
 bag_pickup_sound = NodePath("CameraController/Camera3D/ingredientbag/BagPickupSound")
+footstep_sound = NodePath("FootstepSound")
 ingredients_bag_scene = ExtResource("2_sweqy")
 sprint_lockout_timer = NodePath("SprintLockoutTimer")
 
@@ -53,7 +68,7 @@ collide_with_areas = true
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.08502839, -0.013210096, -0.050947692, 0.021402877, 0.09711249, 0.010539994, 0.048084166, -0.019866265, 0.0854005, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=105747727]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1709506213]
 transform = Transform3D(0.83222854, 0.30946758, -0.4600262, -0.1782857, 0.93503195, 0.3064773, 0.5249845, -0.1730432, 0.8333341, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraController/Camera3D/ingredientbag" unique_id=1902215747]
@@ -72,5 +87,12 @@ script = ExtResource("5_sweqy")
 exploding_bomb_scene = ExtResource("6_2hs0m")
 camera = NodePath("../CameraController/Camera3D")
 player = NodePath("..")
+
+[node name="FootstepSound" type="AudioStreamPlayer3D" parent="." unique_id=905353981]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+attenuation_model = 1
+volume_db = -10.0
+unit_size = 1.0
+max_db = 0.0
 
 [editable path="CameraController/Camera3D/ingredientbag"]
