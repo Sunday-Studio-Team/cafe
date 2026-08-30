@@ -183,7 +183,7 @@ func _start_minigame() -> void:
 		drink_customer = Global.ordered_drink_customer
 		customer_sprite.texture = drink_customer.body.texture
 	else:
-		customer_sprite.texture = Global.customer_sprites.pick_random()
+		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
 		order_reminder.visible = true
 		populate_order_reminder()
 	
