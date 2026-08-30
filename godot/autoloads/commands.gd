@@ -46,6 +46,7 @@ func _ready() -> void:
 - [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
+- [i]vo[/i] plays a test VO line
 - [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)"
 		% [items_guide_str],
 	)
@@ -75,12 +76,17 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
 	Console.add_command("ua", toggle_unlimited_actives)
+	Console.add_command("vo", vo_test)
 
 	Events.main_scene_loaded.connect(
 		func():
 			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func vo_test() -> void:
+	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
 
 
 func wipe_save() -> void:
