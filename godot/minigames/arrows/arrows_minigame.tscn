@@ -46,7 +46,13 @@
 [ext_resource type="Texture2D" uid="uid://bb1yjb7xx2n4u" path="res://minigames/arrows/assets/red-arrows/down/reddown3.png" id="39_iy2on"]
 [ext_resource type="Texture2D" uid="uid://bmvmfmtd5vxsx" path="res://minigames/arrows/assets/red-arrows/down/reddown4.png" id="40_5ospk"]
 [ext_resource type="Texture2D" uid="uid://gf8d5srtafg7" path="res://minigames/arrows/assets/red-arrows/down/reddown5.png" id="41_vbul5"]
+[ext_resource type="Texture2D" uid="uid://uyp6cc0yqqu1" path="res://minigames/arrows/assets/tippy/left/tippyleft1.png" id="42_ftfms"]
 [ext_resource type="Texture2D" uid="uid://cqxhkomebjxod" path="res://minigames/arrows/assets/dancemachine.png" id="42_l8ovb"]
+[ext_resource type="Texture2D" uid="uid://b806ij51ipnce" path="res://minigames/arrows/assets/tippy/up/tippyup1.png" id="43_yem23"]
+[ext_resource type="Texture2D" uid="uid://baxe1dghrk0tk" path="res://minigames/arrows/assets/tippy/right/tippyright1.png" id="44_6h2j6"]
+[ext_resource type="Texture2D" uid="uid://dak5isrr507du" path="res://minigames/arrows/assets/tippy/down/tippydown1.png" id="45_8r575"]
+[ext_resource type="Texture2D" uid="uid://jhsh8xs4215" path="res://minigames/arrows/assets/tippy/fail/tippyfail1.png" id="46_gaw3v"]
+[ext_resource type="Texture2D" uid="uid://b385bvgi6r3ef" path="res://minigames/arrows/assets/arrowsBackground.png" id="47_yem23"]
 [ext_resource type="AudioStream" uid="uid://cj8wq0y415h2u" path="res://audio/ddr/ddr_correct_1.wav" id="48_hea8k"]
 [ext_resource type="AudioStream" uid="uid://cwarhwibu7s60" path="res://audio/ddr/ddr_correct_2.wav" id="49_xql7b"]
 [ext_resource type="AudioStream" uid="uid://bynqhhvraxh3n" path="res://audio/ddr/ddr_correct_3.wav" id="50_08s2a"]
@@ -74,13 +80,14 @@ stream_0/stream = ExtResource("53_mji0a")
 stream_1/stream = ExtResource("54_xkcvm")
 stream_2/stream = ExtResource("55_7milp")
 
-[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output", "wrong_sign", "arrows_container", "correct_sound", "wrong_sound")]
+[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output", "wrong_sign", "arrows_container", "tippy_image", "correct_sound", "wrong_sound")]
 script = ExtResource("1_iuqyn")
 background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
 arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
 prompt_output = NodePath("CanvasLayer/Prompt")
 wrong_sign = NodePath("CanvasLayer/wrong")
 arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
+tippy_image = NodePath("CanvasLayer/Tippy")
 blue_left = Array[Texture]([ExtResource("2_vxntg"), ExtResource("3_fv8pj"), ExtResource("4_l8ovb"), ExtResource("5_qk4ro"), ExtResource("6_27pub")])
 blue_up = Array[Texture]([ExtResource("7_hq6wg"), ExtResource("8_ndnsj"), ExtResource("9_hea8k"), ExtResource("10_xql7b"), ExtResource("11_08s2a")])
 blue_right = Array[Texture]([ExtResource("12_ajpp4"), ExtResource("13_mji0a"), ExtResource("14_xkcvm"), ExtResource("15_7milp"), ExtResource("16_gkp8u")])
@@ -89,6 +96,11 @@ red_left = Array[Texture]([ExtResource("22_gaw3v"), ExtResource("23_ms8o4"), Ext
 red_up = Array[Texture]([ExtResource("27_au8s4"), ExtResource("28_2i6wo"), ExtResource("29_1pfxc"), ExtResource("30_k3kyd"), ExtResource("31_ihttv")])
 red_right = Array[Texture]([ExtResource("32_xrvhh"), ExtResource("33_m17ou"), ExtResource("34_2lho4"), ExtResource("35_1isbi"), ExtResource("36_gtxeh")])
 red_down = Array[Texture]([ExtResource("37_ukk4x"), ExtResource("38_p5j3n"), ExtResource("39_iy2on"), ExtResource("40_5ospk"), ExtResource("41_vbul5")])
+tippy_left = Array[Texture]([ExtResource("42_ftfms")])
+tippy_up = Array[Texture]([ExtResource("43_yem23")])
+tippy_right = Array[Texture]([ExtResource("44_6h2j6")])
+tippy_down = Array[Texture]([ExtResource("45_8r575")])
+tippy_fail = Array[Texture]([ExtResource("46_gaw3v")])
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 
@@ -96,6 +108,15 @@ wrong_sound = NodePath("WrongSound")
 handle_input_locally = false
 size = Vector2i(1820, 980)
 render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=247780111]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("47_yem23")
+expand_mode = 3
 
 [node name="DanceMachine" type="TextureRect" parent="CanvasLayer" unique_id=916732716]
 anchors_preset = -1
@@ -243,6 +264,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_cfscc")
 region_rect = Rect2(0, 0, 2679, 1817)
+
+[node name="Tippy" type="TextureRect" parent="CanvasLayer" unique_id=1193548297]
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.185
+anchor_right = 0.5
+anchor_bottom = 0.47
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("44_6h2j6")
+expand_mode = 5
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=1547774346]
 stream = SubResource("AudioStreamRandomizer_l8ovb")
