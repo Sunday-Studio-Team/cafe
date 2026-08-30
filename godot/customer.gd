@@ -28,7 +28,7 @@ func _ready() -> void:
 	for customer_sprite in Global.customer_sprites:
 		if !Global.customer_sprites_in_use.has(customer_sprite):
 			unused_customer_sprites.append(customer_sprite)
-	
+
 	# Prefer using an unused one, else just get a random one.
 	var customer_texture: Texture
 	if unused_customer_sprites.size() > 0:
@@ -37,12 +37,13 @@ func _ready() -> void:
 		customer_texture = Global.customer_sprites.pick_random()
 	Global.customer_sprites_in_use.append(customer_texture)
 	body.texture = customer_texture
-	
+
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
 	# NOTE: not actually sure what this true argument does here lol
+	# NOTE^2: it keeps the customers group tag if the packed scene file is saved
 	add_to_group("customers", true)
 
 	desired_drink = Global.drinks.filter(

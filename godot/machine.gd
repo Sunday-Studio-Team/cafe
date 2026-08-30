@@ -152,7 +152,7 @@ func _process(_delta: float) -> void:
 		else:
 			ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
-	
+
 	spill_warning.visible = spill_on_floor
 
 	customer_wait_indicator.visible = (
@@ -174,7 +174,7 @@ func _process(_delta: float) -> void:
 			customer_wait_indicator.modulate = Color.ORANGE
 		else:
 			customer_wait_indicator.modulate = Color.RED
-			
+
 	_process_queued_customers()
 
 
@@ -194,7 +194,7 @@ func force_next_drink_incorrect() -> void:
 func _customer_queue_update_visuals() -> void:
 	var i: int = 0
 	for queued_customer in queued_customers:
-		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine 
+		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine
 		var queue_global_position: Vector3 = (
 			start_of_customer_queue_marker.global_position.lerp(
 				end_of_customer_queue_marker.global_position,
@@ -428,7 +428,7 @@ func machine_make_drink() -> void:
 	randomize()
 	var made_drink: Drink = null
 	for drink in unlocked_drinks:
-		# Find a drink with the specified number of 
+		# Find a drink with the specified number of
 		var drink_diff: int = _calculate_drink_diff(order.ordered_drink, drink)
 		if drink_diff == target_drink_diff:
 			made_drink = drink
@@ -459,7 +459,7 @@ func machine_make_drink() -> void:
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
-	
+
 	# Calculate scaled price
 	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
 
@@ -467,9 +467,9 @@ func machine_make_drink() -> void:
 	if order.star_rating_gain_for_remake == 0.0:
 		order.star_rating_loss_if_accept = 0.0
 	else:
-		order.star_rating_loss_if_accept = snappedf(
+		order.star_rating_loss_if_accept = maxf(0.1, snappedf(
 			order.star_rating_gain_for_remake * Stats.current.accept_incorrect_drink_star_rating_multiplier,
-			Stats.current.accept_incorrect_drink_star_rating_rounding)
+			Stats.current.accept_incorrect_drink_star_rating_rounding))
 
 	display_drink_score()
 
@@ -501,8 +501,8 @@ func machine_make_drink() -> void:
 	)
 	# NOTE: experiment: commented out for now to simplify ui
 	#final_order_indicator.show()
-	
-	
+
+
 	waiting_for_response = true
 	drink_prepared.emit()
 	Events.order_completed.emit(customer)
@@ -530,9 +530,9 @@ func spill() -> void:
 
 
 func display_drink_score() -> void:
-	
-	
-	# these all automatically set the icon, colour, and score of each icon 
+
+
+	# these all automatically set the icon, colour, and score of each icon
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
 	made_main_ingredient_panel.correct = order.main_correct
@@ -682,7 +682,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	if did_remake_drink:
 		if order.star_rating_gain_for_remake > 0.0:
 			Events.alert_posted.emit(
-				"+%.1f Customer happy with drink!" % order.star_rating_gain_for_remake, 
+				"+%.1f Customer happy with drink!" % order.star_rating_gain_for_remake,
 				UI.AlertIconType.RATING,
 				4.0,
 				UI.ALERT_COLOR_GREEN
@@ -691,7 +691,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
 			Events.alert_posted.emit(
-				"-%.1f Customer unhappy with drink..." % order.star_rating_loss_if_accept, 
+				"-%.1f Customer unhappy with drink..." % order.star_rating_loss_if_accept,
 				UI.AlertIconType.RATING,
 				4.0,
 				UI.ALERT_COLOR_RED
@@ -703,7 +703,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		await get_tree().create_timer(0.8, false).timeout
 
 	Events.alert_posted.emit(
-		"+%s Drink sold!" % float_to_price(order.final_order_price), 
+		"+%s Drink sold!" % float_to_price(order.final_order_price),
 		UI.AlertIconType.MONEY,
 		4.0,
 		UI.ALERT_COLOR_MONEY
@@ -808,7 +808,7 @@ func _on_remake_drink_button_pressed() -> void:
 		no_ingredients_warning.show()
 		await get_tree().create_timer(0.5, false).timeout
 		no_ingredients_warning.hide()
-	
+
 	Events.minigame_end.connect(_on_remade_drink)
 	Events.minigame_cancelled.connect(_cancel_remake_minigame)
 	Events.force_close_minigame.connect(_on_force_close_minigame)
@@ -816,7 +816,7 @@ func _on_remake_drink_button_pressed() -> void:
 	Global.ordered_drink_customer = customer
 	Events.minigame_active.emit(MANUAL_DRINK_MINIGAMES.pick_random())
 	Events.order_remaking_drink.emit()
-	
+
 	Global.tutorial_remake_button_pressed = true
 
 	for item in Global.owned_items:
