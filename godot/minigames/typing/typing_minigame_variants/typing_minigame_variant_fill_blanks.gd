@@ -19,6 +19,9 @@ extends TypingMinigameVariant
 @export var dialogue_box_texture:TextureRect
 @export var speech_bubble_texture: TextureRect
 
+@export_category("Audio")
+@export var correct_sound:AudioStreamPlayer
+@export var wrong_sound:AudioStreamPlayer
 
 var _sentence: TypingMinigameContentFillBlanksSentence
 var _prefilled_sections: Array[TypingMinigameVariantFillBlanksPrefilledSection]
@@ -83,10 +86,14 @@ func start_minigame_variant(customer: Customer) -> void:
 	_active_typing_section_index = 0
 	_start_next_section()
 
+
 func _start_next_section() -> void:
 	var typing_minigame_section: TypingMinigameSection = _typing_sections[_active_typing_section_index]
 	print("starting section")
+	typing_minigame_section.typed_letter_correct.connect(func(): correct_sound.play())
+	typing_minigame_section.typed_letter_wrong.connect(func(): wrong_sound.play())
 	typing_minigame_section.start_section()
+
 
 func _on_section_finished(finished_typing_minigame_section: TypingMinigameSection) -> void:
 	_active_typing_section_index += 1

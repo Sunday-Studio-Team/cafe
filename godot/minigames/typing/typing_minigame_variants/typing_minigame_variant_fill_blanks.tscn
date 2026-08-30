@@ -15,11 +15,18 @@
 [ext_resource type="Texture2D" uid="uid://d0wpqtljemans" path="res://sprites/typing_minigame/coffee_tastes_like_dirt.png" id="12_6u2o6"]
 [ext_resource type="Texture2D" uid="uid://bu5q1ojwylv3e" path="res://sprites/typing_minigame/tippygun.png" id="13_6u2o6"]
 [ext_resource type="Texture2D" uid="uid://ceiw0jbdiie6x" path="res://sprites/typing_minigame/typeurresponse.png" id="14_6668d"]
+[ext_resource type="AudioStream" uid="uid://nhy7unwkdkqn" path="res://audio/typing/key_stroke.mp3" id="16_7gik8"]
+[ext_resource type="AudioStream" uid="uid://kj12p2cjxdnu" path="res://audio/typing/key_stroke_fail.mp3" id="17_yi8od"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
 font_size = 48
 
-[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container", "sato_container", "customer_container", "tippy_group", "dialogue_box", "dialogue_box_texture", "speech_bubble_texture")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7gik8"]
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("16_7gik8")
+
+[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container", "sato_container", "customer_container", "tippy_group", "dialogue_box", "dialogue_box_texture", "speech_bubble_texture", "correct_sound", "wrong_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +46,8 @@ tippy_group = NodePath("TippyGroup")
 dialogue_box = NodePath("DialogueContainer")
 dialogue_box_texture = NodePath("DialogueContainer/DialogueBox")
 speech_bubble_texture = NodePath("SpeechBubbleContainer/SpeechBubbleTexture")
+correct_sound = NodePath("CorrectSound")
+wrong_sound = NodePath("WrongSound")
 metadata/_custom_type_script = "uid://dp7wiw2dh25le"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667575708]
@@ -234,3 +243,12 @@ theme_override_constants/margin_bottom = 64
 [node name="SentenceHFlowContainer" type="HFlowContainer" parent="DialogueContainer/TypingSectionContainer" unique_id=1211199840]
 layout_mode = 2
 alignment = 1
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=2035762792]
+stream = SubResource("AudioStreamRandomizer_7gik8")
+volume_db = 10.0
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=1913540532]
+stream = ExtResource("17_yi8od")
+volume_db = 10.0
+pitch_scale = 0.5
