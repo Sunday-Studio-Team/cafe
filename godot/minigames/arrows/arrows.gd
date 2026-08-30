@@ -26,7 +26,6 @@ extends SubViewportContainer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
 
-
 var max_arrow_count: int = 10
 var blue: String = "#14529F"
 var red: String = "#A20B10"
@@ -75,29 +74,30 @@ func _input(event: InputEvent) -> void:
 
 
 func check_input(direction: String) -> void:
-	if(correct_input_index >= valid_directions.size()): #error checking for index out of bound.
+	if (correct_input_index >= valid_directions.size()): #error checking for index out of bound.
 		print('index out of bound caught in arrows.gd. error handled.')
 		return
-	
+
 	if (valid_directions[correct_input_index] == direction):
 		output_directions[valid_indices[correct_input_index]].texture = null
 		match direction:
 			"left":
-				set_tippy_image(tippy_left.pick_random());
-				
+				set_tippy_image(tippy_left.pick_random())
+
 			"up":
-				set_tippy_image(tippy_up.pick_random());
-				
+				set_tippy_image(tippy_up.pick_random())
+
 			"right":
-				set_tippy_image(tippy_right.pick_random());
-				
+				set_tippy_image(tippy_right.pick_random())
+
 			"down":
-				set_tippy_image(tippy_down.pick_random());
+				set_tippy_image(tippy_down.pick_random())
 		correct_input_index += 1
 		correct_sound.play()
 	else:
-		set_tippy_image(tippy_fail.pick_random());
+		set_tippy_image(tippy_fail.pick_random())
 		shake_tippy()
+		wrong_sound.play()
 		#display_wrong()
 		_start_minigame()
 
@@ -147,12 +147,7 @@ func shake_tippy() -> void:
 	var tween = tippy_image.create_tween()
 	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
 
-	tween.tween_property(
-		tippy_image,
-		"position",
-		tippy_image.position + shake_offset_target,
-		0.025,
-	)
+	tween.tween_property(tippy_image, "position", tippy_image.position + shake_offset_target, 0.025)
 	for i in range(10):
 		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
 		tween.chain().tween_property(
