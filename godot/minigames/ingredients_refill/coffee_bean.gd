@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			if (time_counter_float >1/60):
 				time_counter_float -=1/60
-				gravity_scale+=0.07
+				gravity_scale+=0.065
 
 	else:
 		seconds_passed+=delta
