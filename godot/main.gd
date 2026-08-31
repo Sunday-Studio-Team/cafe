@@ -329,7 +329,6 @@ func spawn_help_desk_customer() -> void:
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
-
 	_customer_help_desk.add_customer_to_queue(new_customer)
 
 

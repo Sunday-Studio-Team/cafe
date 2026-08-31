@@ -19,7 +19,7 @@ enum State {
 @export var current_word_previous_letters_bbcode_close: String = "[/color][/b]"
 @export var current_word_next_letter_bbcode_open: String = "[b][shake level=15][color=yellow]"
 @export var current_word_next_letter_bbcode_close: String = "[/color][/shake][/b]"
-@export var current_word_future_letters_bbcode_open: String = "[b][shake level=15][color=white]"
+@export var current_word_future_letters_bbcode_open: String = "[b][shake level=15][color=red]"
 @export var current_word_future_letters_bbcode_close: String = "[/color][/shake][/b]"
 @export var future_words_bbcode_open: String = "[color=gray]"
 @export var future_words_bbcode_close: String = "[/color]"

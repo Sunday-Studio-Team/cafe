@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vidaqp0nyrn3"]
 
 [ext_resource type="Script" uid="uid://cbjsmecowcxib" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_prefilled_section.gd" id="1_e1b1v"]
+[ext_resource type="FontFile" uid="uid://cyg8ut1fje8gk" path="res://fonts/Cascadia.ttf" id="2_aym4l"]
 
 [node name="TypingMinigameVariantFillBlanksPrefilledSection" type="MarginContainer" unique_id=1005996712 node_paths=PackedStringArray("rich_text_label")]
 script = ExtResource("1_e1b1v")
@@ -11,6 +12,8 @@ layout_mode = 2
 theme_override_colors/default_color = Color(0.51, 0.51, 0.51, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_aym4l")
+theme_override_fonts/bold_font = ExtResource("2_aym4l")
 theme_override_font_sizes/normal_font_size = 36
 theme_override_font_sizes/bold_font_size = 36
 bbcode_enabled = true

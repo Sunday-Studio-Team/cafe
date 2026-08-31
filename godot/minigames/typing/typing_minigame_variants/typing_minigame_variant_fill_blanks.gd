@@ -12,12 +12,14 @@ extends TypingMinigameVariant
 @export var sentence_container: Control
 
 @export_category("New UI Stuff")
+@export var sato_expressions:Array[Texture2D]
 @export var sato_container:TextureRect
 @export var customer_container:TextureRect
 @export var tippy_group:Control
 @export var dialogue_box:MarginContainer
 @export var dialogue_box_texture:TextureRect
 @export var speech_bubble_texture: TextureRect
+@export var vs_container: MarginContainer
 
 @export_category("Audio")
 @export var correct_sound:AudioStreamPlayer
@@ -29,19 +31,21 @@ var _typing_sections: Array[TypingMinigameSection]
 var _active_typing_section_index: int
 
 func start_minigame_variant(customer: Customer) -> void:
+	sato_container.texture = sato_expressions.pick_random()
 	instructions_container.visible = false
 	if customer:
 		customer_container.texture = customer.customer_sprite_resource.typing_minigame_portrait
 	var tween := create_tween()
-	tween.tween_property(sato_container,"offset_transform_position",Vector2(0,80),1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(sato_container,"offset_transform_position",Vector2(0,00),1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 	tween.set_parallel(true)
-	tween.tween_property(customer_container,"offset_transform_position",Vector2(128,80),1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(vs_container,"offset_transform_position",Vector2(0,0),1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(customer_container,"offset_transform_position",Vector2(128,00),1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(
 		func():
 			var tween2 := create_tween()
-			tween2.tween_property(tippy_group,"offset_transform_position",Vector2(0,0),1.6).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+			tween2.tween_property(tippy_group,"offset_transform_position",Vector2(0,0),0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tween2.set_parallel(true)
-			tween2.tween_property(dialogue_box,"offset_transform_position",Vector2(0,0),1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+			tween2.tween_property(dialogue_box,"offset_transform_position",Vector2(0,0),0.8).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			
 			var tween3 := create_tween()
 			tween3.tween_property(speech_bubble_texture,"offset_transform_scale",Vector2(1,1),0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
