@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://d4bh0b3gyfbbd"]
+
+[ext_resource type="PackedScene" uid="uid://dhttshpvbkayc" path="res://ui/loadout/loadout_menu_element.tscn" id="1_0rl37"]
+[ext_resource type="Script" uid="uid://dlnawqw3ep1l4" path="res://ui/loadout/item_loadout_menu.gd" id="1_7ango"]
+
+[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("available_items_container", "equipped_items_container", "confirm_button")]
+script = ExtResource("1_7ango")
+element_scene = ExtResource("1_0rl37")
+available_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems/GridContainer")
+equipped_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/EquippedItems/GridContainer")
+confirm_button = NodePath("MarginContainer/VBoxContainer/ConfirmButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1351850692]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_right = 250
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=345839286]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=14682828]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=619312805]
+layout_mode = 2
+
+[node name="SelectYourItems" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=64258063]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "SELECT YOUR ITEMS"
+horizontal_alignment = 1
+
+[node name="AvailableItemsTitle" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1802022443]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItemsTitle" unique_id=124553075]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "AVAILABLE"
+
+[node name="AvailableItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=394145303]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems" unique_id=1149520909]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 5
+
+[node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems/GridContainer" unique_id=1731714690 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="LoadoutMenuItem2" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems/GridContainer" unique_id=2040793353 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="LoadoutMenuItem3" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems/GridContainer" unique_id=825468899 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="LoadoutMenuItem4" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems/GridContainer" unique_id=49121481 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="LoadoutMenuItem5" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/AvailableItems/GridContainer" unique_id=1377787420 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="EquippedItemsTitle" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1816768305]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/EquippedItemsTitle" unique_id=539219113]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "EQUIPPED"
+
+[node name="EquippedItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=445986721]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/EquippedItems" unique_id=1279570546]
+layout_mode = 2
+columns = 5
+
+[node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="LoadoutMenuItem2" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/EquippedItems/GridContainer" unique_id=113046902 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="LoadoutMenuItem3" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/EquippedItems/GridContainer" unique_id=2135610824 instance=ExtResource("1_0rl37")]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1608662931]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "CONFIRM"
