@@ -86,6 +86,9 @@ var ingredients: int:
 			ingredients = new_value
 var spill_on_floor := false
 
+var test_1: int = 0
+var test_2: int = 0
+var test_3: int = 0
 
 func _ready() -> void:
 	get_stats()
@@ -442,6 +445,8 @@ func machine_make_drink() -> void:
 		order.main_correct = true
 	else:
 		order.main_correct = false
+		test_1 += 1
+		print("%s Main Star Gain Count: %d" % [self.name, test_1])
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_main_each_day[Global.day]
 		)
@@ -449,6 +454,8 @@ func machine_make_drink() -> void:
 		order.liquid_correct = true
 	else:
 		order.liquid_correct = false
+		test_2 += 1
+		print("%s Liquid Star Gain Count: %d" % [self.name, test_2])
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_liquid_each_day[Global.day]
 		)
@@ -456,6 +463,8 @@ func machine_make_drink() -> void:
 		order.extra_correct = true
 	else:
 		order.extra_correct = false
+		test_3 += 1
+		print("%s Extra Star Gain Count: %d" % [self.name, test_3])
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
@@ -670,6 +679,10 @@ func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
 
 func accept_order(did_remake_drink: bool) -> void:
+	test_1 = 0
+	test_2 = 0
+	test_3 = 0
+
 	gui_3d.exit_with_camera_tween()
 
 	waiting_for_response = false
