@@ -34,8 +34,8 @@ const _window_mode_options: Dictionary[String, int] = {
 }
 
 const _vsync_options: Dictionary[String, int] = {
-	"On (Default)": OptionsData.VsyncOption.On,
-	"Off": OptionsData.VsyncOption.Off,
+	"Capped (V-Sync On) (Default)": OptionsData.VsyncOption.On,
+	"Unlimited (V-Sync Off)": OptionsData.VsyncOption.Off,
 	"Advanced - Adaptive": OptionsData.VsyncOption.Adaptive,
 	"Advanced - Mailbox": OptionsData.VsyncOption.Mailbox,
 }
@@ -80,7 +80,7 @@ func _setup_option_views() -> void:
 	_window_mode_option_view.set_selected_dropdown_option((_options_data.window_mode_option as int))
 	_window_mode_option_view.changed_option.connect(_on_window_mode_option_view_changed_option)
 
-	_vsync_mode_option_view.set_label("VSync Mode")
+	_vsync_mode_option_view.set_label("Frame Rate")
 	_vsync_mode_option_view.set_dropdown_options(_vsync_options)
 	_vsync_mode_option_view.set_selected_dropdown_option((_options_data.vsync_option as int))
 	_vsync_mode_option_view.changed_option.connect(_on_vsync_mode_option_view_changed_option)
