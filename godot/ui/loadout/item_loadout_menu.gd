@@ -12,9 +12,16 @@ var selected_available_item: Item = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	confirm_button.pressed.connect(confirm)
+	locker_interactable.interacted.connect(func(): show())
+	visibility_changed.connect(
+		func():
+			if visible:
+				populate()
+	)
 
-	# delete anything we have in the scene for testing first
+func populate() -> void:
+	# delete anything we have in the scene for testing/from prev uses first
 	for child in available_items_container.get_children():
 		child.queue_free()
 	for child in equipped_items_container.get_children():
@@ -22,25 +29,28 @@ func _ready() -> void:
 
 	# TODO: check save for unlocked items instead of just pulling every item
 	for item in Global.items:
-		add_available_item_button(item)
+		if not Global.owned_items.has(item):
+			add_available_item_button(item)
 
 	# TODO: check save for number of item slots unlocked instead of using
 	# hardcoded value
-	for i in 3:
+	for i in Global.day:
 		var equipped_item_button: LoadoutMenuElement = element_scene.instantiate()
 		equipped_item_button.type = LoadoutMenuElement.Type.EQUIPPED
+		if Global.owned_items.size() >= i + 1:
+			equipped_item_button.item = Global.owned_items[i]
 		equipped_item_button.pressed.connect(
 			func():
 				_on_equipped_slot_pressed(equipped_item_button)
 		)
 		equipped_items_container.add_child(equipped_item_button)
 
-	confirm_button.pressed.connect(confirm)
-	locker_interactable.interacted.connect(func(): show())
-
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
+
+	if Input.is_action_just_pressed("pause"):
+		confirm()
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
@@ -79,7 +89,7 @@ func add_available_item_button(item: Item) -> void:
 
 func confirm() -> void:
 	var equipped_items: Array[Item]
-	
+
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
 		if equipped_item_button.item:
 			equipped_items.append(equipped_item_button.item)
@@ -87,4 +97,5 @@ func confirm() -> void:
 	Global.owned_items.assign(equipped_items)
 	Events.items_updated.emit()
 
+	selected_available_item = null
 	hide()
