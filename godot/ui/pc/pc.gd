@@ -23,7 +23,8 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	set_unread_count()
-
+	
+	# connecting all click sounds to any buttons that show up in the pc
 	for button: Button in find_children("*", "Button"):
 		button.pressed.connect(
 			func():
@@ -31,6 +32,16 @@ func _ready() -> void:
 					click_sound.play()
 		)
 	
+	email_app.email_viewer.email_shown.connect(
+		func(email_viewer):
+			if email_viewer.active_custom_email_view != null:
+				for button: TextureButton in email_viewer.active_custom_email_view.find_children("*", "TextureButton"):
+					button.pressed.connect(
+						func():
+							click_sound.play()
+					)
+	)
+		
 	for email_app_list_item in email_app.email_app_list_items:
 		email_app_list_item.email_pressed.connect(
 			func(email_app_list_item):

@@ -14,6 +14,8 @@ var is_finished_spam: bool
 var is_current_day: bool
 var active_custom_email_view: CustomEmailView
 
+signal email_shown(email_viewer: EmailViewer)
+
 func show_email(init_email_data: EmailData, init_is_finished_important: bool, init_is_current_day: bool, init_is_finished_spam: bool) -> void:
 	if active_custom_email_view != null:
 		if active_custom_email_view.finished_important.is_connected(_on_active_custom_email_view_finished_important):
@@ -55,7 +57,8 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 		custom_email_view_container.add_child(active_custom_email_view)
 		active_custom_email_view.finished_important.connect(_on_active_custom_email_view_finished_important)
 		active_custom_email_view.finished_spam.connect(_on_active_custom_email_view_finish_spam)
-		
+	
+	email_shown.emit(self)
 
 func _on_active_custom_email_view_finished_important(custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_important.disconnect(_on_active_custom_email_view_finished_important)
