@@ -30,6 +30,12 @@ func _ready() -> void:
 				if not button == exit_button:
 					click_sound.play()
 		)
+	
+	for email_app_list_item in email_app.email_app_list_items:
+		email_app_list_item.email_pressed.connect(
+			func(email_app_list_item):
+				click_sound.play()
+		)
 
 
 func _process(_delta: float) -> void:
