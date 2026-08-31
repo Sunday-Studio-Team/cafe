@@ -4,7 +4,7 @@ extends Resource
 @export var item_id: String
 @export var name: String
 @export var description_at_levels: Dictionary[int, String]
-@export var icon: Texture
+@export var icon: Texture2D
 @export var price_at_levels: Dictionary[int, float]
 @export var sell_value_at_levels: Dictionary[int, float]
 ## this will be for 'active items' we can pick up
