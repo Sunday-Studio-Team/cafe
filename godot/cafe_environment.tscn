@@ -89,6 +89,7 @@
 [ext_resource type="PackedScene" uid="uid://qiaejs1sjhoo" path="res://Assets/old coffee machine/old_coffee_machine_fabric.tscn" id="77_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://byfk52lihnqmf" path="res://Assets/old coffee machine/old_filter_basket.tscn" id="78_3xpao"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="82_4nsdn"]
+[ext_resource type="PackedScene" uid="uid://dv2m4h0ed4aj8" path="res://Assets/signs/Order Here Sign 1.glb" id="82_bith1"]
 [ext_resource type="PackedScene" uid="uid://dv57fp8p0wov2" path="res://Assets/signs/tippy_standee.tscn" id="84_pv1ha"]
 [ext_resource type="Texture2D" uid="uid://cp0ia1aqch04a" path="res://Assets/signs/Bean Buddy.png" id="84_yhys1"]
 [ext_resource type="Texture2D" uid="uid://c67nrt1uma0nc" path="res://Assets/signs/Tippy with coffee.png" id="85_tx4o1"]
@@ -1464,7 +1465,7 @@ transform = Transform3D(0.5901272, 0, -0.8073103, 0, 1, 0, 0.8073103, 0, 0.59012
 transform = Transform3D(-3.2346428e-08, 0, -0.74, 0, 0.74, 0, 0.74, 0, -3.2346428e-08, 7.769355, 1.0831108, -3.2094498)
 
 [node name="cafe table2" parent="CustomerArea" unique_id=1555103727 instance=ExtResource("25_g2jch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8607272, 0.04417161, -6.630125)
+transform = Transform3D(0.8012202, 0, 0, 0, 1, 0, 0, 0, 1, 1.9840773, 0.04417161, -6.630125)
 
 [node name="Tippy cutout2" parent="CustomerArea" unique_id=1861450768 instance=ExtResource("26_0cjwk")]
 transform = Transform3D(0.5811208, 0, 0.3128876, 0, 0.65999997, 0, -0.3128876, 0, 0.5811208, -1.1862783, 0.04014621, -2.1705725)
@@ -1954,7 +1955,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010935, -0.00016215755, -0.999956, 1.0260107e-07, 1, -0.00016215042, 0.999956, -1.01539825e-08, 0.00057010935, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010923, -0.00016215755, -0.99995583, 1.0260106e-07, 1, -0.00016215039, 0.99995583, -1.01539825e-08, 0.00057010923, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2130,6 +2131,9 @@ texture = ExtResource("87_tx4o1")
 transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 0.40259218, 0.2938672, -4.4861813)
 shaded = true
 texture = ExtResource("87_tx4o1")
+
+[node name="Order Here Sign 1" parent="Exterior" unique_id=484677902 instance=ExtResource("82_bith1")]
+transform = Transform3D(-0.7167094, 0, 0.69737196, 0, 1, 0, -0.69737196, 0, -0.7167094, -3.5765855, -0.1, -3.5445986)
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1484351062]
 collision_mask = 9
