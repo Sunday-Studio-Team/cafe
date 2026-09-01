@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @export var element_scene: PackedScene
 @export_category("Nodes")
+@export var root: Control
 @export var locker_interactable: Interactable
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
@@ -12,13 +13,17 @@ var selected_available_item: Item = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	confirm_button.pressed.connect(confirm)
+	confirm_button.pressed.connect(confirm_and_hide)
 	locker_interactable.interacted.connect(func(): show())
 	visibility_changed.connect(
 		func():
 			if visible:
+				var t := create_tween().set_parallel()
+				t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
+				t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
 				populate()
 	)
+
 
 func populate() -> void:
 	# delete anything we have in the scene for testing/from prev uses first
@@ -36,7 +41,6 @@ func populate() -> void:
 	# hardcoded value
 	for i in Global.day:
 		var equipped_item_button: LoadoutMenuElement = element_scene.instantiate()
-		equipped_item_button.type = LoadoutMenuElement.Type.EQUIPPED
 		if Global.owned_items.size() >= i + 1:
 			equipped_item_button.item = Global.owned_items[i]
 		equipped_item_button.pressed.connect(
@@ -50,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
 
 	if Input.is_action_just_pressed("pause"):
-		confirm()
+		confirm_and_hide()
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
@@ -79,7 +83,7 @@ func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 func add_available_item_button(item: Item) -> void:
 	var available_item_button: LoadoutMenuElement = element_scene.instantiate()
 	available_item_button.item = item
-	available_item_button.type = LoadoutMenuElement.Type.AVAILABE
+	available_item_button.toggle_mode = true
 	available_item_button.pressed.connect(
 		func():
 			_on_available_item_pressed(available_item_button)
@@ -87,7 +91,7 @@ func add_available_item_button(item: Item) -> void:
 	available_items_container.add_child(available_item_button)
 
 
-func confirm() -> void:
+func confirm_and_hide() -> void:
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
@@ -98,4 +102,9 @@ func confirm() -> void:
 	Events.items_updated.emit()
 
 	selected_available_item = null
+
+	var t := create_tween()
+	t.tween_property(root, "offset_transform_scale", Vector2.ZERO, 0.1)
+	t.tween_property(root, "offset_transform_position_ratio:y", 0.25, 0.1)
+	await t.finished
 	hide()
