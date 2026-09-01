@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
 [ext_resource type="PackedScene" uid="uid://cbn6neugky8kn" path="res://Assets/signs/entry_panel_1.tscn" id="34_ppc62"]
 [ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="35_dmru2"]
+[ext_resource type="PackedScene" uid="uid://cbfqeif23m53k" path="res://Assets/signs/go_tip.tscn" id="35_ppc62"]
 [ext_resource type="Texture2D" uid="uid://boma1g3mo73eo" path="res://environment/textures/grey carpet.png" id="36_edv2q"]
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
 [ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="37_vf5ik"]
@@ -1509,6 +1510,9 @@ shape = SubResource("BoxShape3D_ovvye")
 [node name="Entry Panel 1" parent="CustomerArea" unique_id=1642733272 instance=ExtResource("34_ppc62")]
 transform = Transform3D(-0.02132044, 0, 0.99977267, 0, 1, 0, -0.99977267, 0, -0.02132044, 4.2635145, 3.5033307, -7.6535997)
 
+[node name="GoTip" parent="CustomerArea" unique_id=2008414395 instance=ExtResource("35_ppc62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.990998, 1.295922, -4.9030323)
+
 [node name="BreakRoom" type="Node3D" parent="." unique_id=1614027471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
 
@@ -1959,7 +1963,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701091, -0.00016215755, -0.9999556, 1.0260103e-07, 1, -0.00016215035, 0.9999556, -1.01539825e-08, 0.0005701091, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010906, -0.00016215755, -0.99995553, 1.0260102e-07, 1, -0.00016215035, 0.99995553, -1.01539825e-08, 0.00057010906, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
