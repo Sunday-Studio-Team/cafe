@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://52mve0rsf25i" path="res://desk.gd" id="1_7gdev"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="1_ep8l3"]
 [ext_resource type="PackedScene" uid="uid://cmt3rwlkf5iot" path="res://Assets/Desk/office desk.glb" id="3_r8wvv"]
+[ext_resource type="PackedScene" uid="uid://3k02tnvd1n05" path="res://Assets/comic book, sketches, ruler, etc/sketchbooks,_comics,_rulers_(1).tscn" id="5_ffp6v"]
+[ext_resource type="Texture2D" uid="uid://vaxsm5jjmmyv" path="res://Assets/comic book, sketches, ruler, etc/Sketchbooks, comics, rulers (1)_Sketchbooks, comics, eraser, ruler_Base_color.png" id="6_7vp4j"]
 [ext_resource type="PackedScene" uid="uid://c3gk12fh1bx5y" path="res://Assets/chinese deco/New Kitty (1).glb" id="6_lrwc4"]
 [ext_resource type="PackedScene" uid="uid://v5xwxv8wthdc" path="res://Assets/chinese deco/Blue Carp.glb" id="7_vf3xh"]
 [ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
@@ -11,7 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://clwurxo0ghkbw" path="res://Assets/chinese deco/Little Fish_littlefish_DefaultMaterial_BaseMap.png" id="11_xo3iy"]
 [ext_resource type="PackedScene" uid="uid://cfb4nrubid3de" path="res://Assets/chinese deco/WebMan (1).glb" id="12_1xfbt"]
 [ext_resource type="Texture2D" uid="uid://bqhuhom7c0lve" path="res://Assets/chinese deco/Newspaper (1)_newspaper_diffuse-newspaper_glass.png" id="13_ip4fr"]
-[ext_resource type="PackedScene" uid="uid://bfnqid5hl4v6p" path="res://bonsai.tscn" id="14_3uj6r"]
+[ext_resource type="PackedScene" uid="uid://bfnqid5hl4v6p" path="res://Assets/bonsai/bonsai.tscn" id="14_3uj6r"]
+[ext_resource type="PackedScene" uid="uid://dp2f5wjrstomy" path="res://Assets/Gourd/gourd.tscn" id="17_h1g2g"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 [ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
 
@@ -26,6 +29,143 @@ size = Vector3(1.9422656, 1, 0.8091992)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8n35f"]
 size = Vector3(0.8293457, 1, 1.1235352)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otwn2"]
+resource_name = "Sketchbooks, comics, eraser, ruler"
+cull_mode = 2
+albedo_texture = ExtResource("6_7vp4j")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_trrpf"]
+_surfaces = [{
+"aabb": AABB(-1.3215485, -1.5573114, -1.2506596, 2.5842628, 2.1659598, 2.5013192),
+"format": 34896613377,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYACAAJAAoACQALAAoACAAMAAkACgALAA0ACgANAAgACAAOAAwACAANAA4ADAAPAAkACQAPAAsADAAOAA8ADQALAA8ADQAPAA4A"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("xCIAAFfmAADEImHspxkAAMQiYexX5gAAxCIAAKcZAADi6GHspxkAAOLoAABX5gAA4uhh7FfmAADi6AAApxkAAK5L3PP//wAAULTc8wAAAAAAANzziDgAAAAA//+IOAAA///c83bHAACuS/////8AAP////92xwAAULT//wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c0sw7"]
+resource_name = "Sketchbooks, comics, rulers (1)_Cube_010"
+_surfaces = [{
+"aabb": AABB(-1.3215485, -1.5573114, -1.2506596, 2.5842628, 2.1659598, 2.5013192),
+"attribute_data": PackedByteArray("tVIFO3oqSEl6KgU7tVJISQtTDzs8KmlJPCoPOwtTaUmOKnVJBFP0OgRTdUmOKvQ6fypzSfRS8jr0UnNJfyryOuAo0WFcAU064ChNOlwB0WEvKVk6TgE6Yk4BWTovKTpiSFVzANMqaTjTKnMASFVpOKUqZDh6VasAelVkOKUqqwCjTOpzc0CXdbBCrnNWTvN1703taVZO83WjTOpzK1ADaLBCrnNJQqhn/EOwaXNAl3X8Q7BpK1ADaO9N7WlJQqhn"),
+"format": 34896613399,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
+"material": SubResource("StandardMaterial3D_otwn2"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("xCIAAFfmVNXEImHspxlU1cQiYexX5lTVxCIAAKcZVNXEIgAApxn//+LoYeynGf//xCJh7KcZ///i6AAApxn//+LoAACnGVTV4uhh7FfmVNXi6GHspxlU1eLoAABX5lTV4ugAAFfm/7/EImHsV+b/v+LoYexX5v+/xCIAAFfm/7/EIgAApxlU1eLoAABX5lTV4ugAAKcZVNXEIgAAV+ZU1eLoYeynGf+/xCJh7Ffm/7/EImHspxn/v+LoYexX5v+/rkvc8///Kc1QtNzzAAApzQAA3POIOCnN///c83bHKc2uS//////fwFC0//8AAN/A/////3bH38AAAP//iDjfwAAA3POIOLX/rkv/////yf+uS9zz///K/wAA//+IOLT/ULTc8wAAOvQAAP//iDhS/gAA3POIOHP+ULT//wAAM/SuS9zz//8G8P////92x46Q///c83bH9o+uS//////l8P//3PN2xzjPULT//wAAOM9QtNzzAAA4z/////92xzjPVFWqqlRVqqpUVaqqVFWqqv8//7//P/+//z//v/8//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////1RVVVVUVVVVVFVUVVRVVVX///9/////f////3////9/7STbye0k28ntJNvJ7STayVnxtGJZ8bRiWfG0YlnxtGIvTDiAKUwogClMJ4AvTDiA/Jcb6/bxwpzx8ueb4ZYR7B6QwnykiOJCTohJQCSQ73wVf4oAVn9kAFh/YwATf4wA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_trrpf")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_au2jq"]
+_surfaces = [{
+"aabb": AABB(-1.1938756, -4.1715164, -1.0763316, 2.2874794, 7.418254, 2.1584141),
+"format": 34896613377,
+"index_count": 396,
+"index_data": PackedByteArray("GAAZABoAGwAaABkAGwAcABoAGQAdABsAGwAeABwAGwAdAB4AHAAeAB8AHAAfABoAGgAfACAAGgAgABgAHwAhACAAHgAiAB8AHwAiACEAHgAjACIAHQAjAB4AJAAhACIAIAAhACQAJAAiACMAIAAkACUAGAAgACUAJgAkACMAJQAkACYAHQAnACMAJgAjACcAKAAnAB0AGQAoAB0AKAApACcAGAAqABkAKgAoABkAGAAlACsAKgAYACsALAAnACkALAAmACcALQApACgALQAsACkAKgAtACgALgAmACwAJQAmAC4ALgAsAC0AKwAlAC4ALwAtACoAKgArAC8ALwAuAC0AKwAuAC8AAAABAAIAAwACAAEAAwAEAAIAAQAFAAMAAwAGAAQAAwAFAAYABAAGAAcABAAHAAIAAgAHAAgAAgAIAAAABwAJAAgABgAKAAcABwAKAAkABgALAAoABQALAAYADAAJAAoACAAJAAwADAAKAAsACAAMAA0AAAAIAA0ADgAMAAsADQAMAA4ABQAPAAsADgALAA8AEAAPAAUAAQAQAAUAEAARAA8AAAASAAEAEgAQAAEAAAANABMAEgAAABMAFAAPABEAFAAOAA8AFQARABAAFQAUABEAEgAVABAAFgAOABQADQAOABYAFgAUABUAEwANABYAFwAVABIAEgATABcAFwAWABUAEwAWABcAMAAxADIAMwAyADEAMwA0ADIAMQA1ADMAMwA2ADQAMwA1ADYANAA2ADcANAA3ADIAMgA3ADgAMgA4ADAANwA5ADgANgA6ADcANwA6ADkANgA7ADoANQA7ADYAPAA5ADoAOAA5ADwAPAA6ADsAOAA8AD0AMAA4AD0APgA8ADsAPQA8AD4ANQA/ADsAPgA7AD8AQAA/ADUAMQBAADUAQABBAD8AMABCADEAQgBAADEAMAA9AEMAQgAwAEMARAA/AEEARAA+AD8ARQBBAEAARQBEAEEAQgBFAEAARgA+AEQAPQA+AEYARgBEAEUAQwA9AEYARwBFAEIAQgBDAEcARwBGAEUAQwBGAEcA"),
+"lods": [1.8395243, PackedByteArray("AAABAAIAAwACAAEAAwAEAAIAAQAFAAMAAwAGAAQAAwAFAAYABAAGAAcABAAHAAIAAgAHAAgAAgAIAAAABwAJAAgABgAKAAcABwAKAAkABgALAAoABQALAAYADAAJAAoACAAJAAwADAAKAAsACAAMAA0AAAAIAA0ADgAMAAsADQAMAA4ABQAPAAsADgALAA8AEAAPAAUAAQAQAAUAEAARAA8AAAASAAEAEgAQAAEAAAANABMAEgAAABMAFAAPABEAFAAOAA8AFQARABAAFQAUABEAEgAVABAAFgAOABQADQAOABYAFgAUABUAEwANABYAFwAVABIAEgATABcAFwAWABUAEwAWABcA")],
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("nSEAAP//AAAAACJzURQAAJ0hInP//wAAYd4icwAAAAD//yJzresAANjduWIMAAAAdv+5YrnrAAB+NrliFv4AAH42aRAW/gAATjZpEFn7AABONrliWfsAAMb3uWKr6QAAxvdpEKvpAAB2/2kQuesAAO/WaRBvAwAA79a5Ym8DAADgFLliaRIAAHcVuWIdFQAAAAAAAFEUAAD//wAAresAAHcVaRAdFQAA4BRpEGkSAADY3WkQDAAAAGHeAAAAAAAAFhD6upr2AAAWEP//ZAkAABYQ//+a9gAA6O///2QJAADo7///mvYAAF/vKPZkCQAAX+8o9pr2AAAZJSj2mvYAABkl0cSa9gAATSXRxNzzAABNJSj23PMAAAboKPbc8wAABujRxNzzAABf79HEmvYAAAbo0cQiDAAABugo9iIMAAAZJSj2ZAkAAE0lKPYiDAAAFhD6umQJAADo7/q6mvYAAE0l0cQiDAAAGSXRxGQJAABf79HEZAkAAOjv+rpkCQAAnSHsc///AAAAALG9URQAAJ0hsb3//wAAYd6xvQAAAAD//7G9resAANjdLbMMAAAAdv8ts7nrAAB+Ni2zFv4AAH42cH4W/gAATjZwfln7AABONi2zWfsAAMb3LbOr6QAAxvdwfqvpAAB2/3B+uesAAO/WcH5vAwAA79Yts28DAADgFC2zaRIAAHcVLbMdFQAAAADsc1EUAAD//+xzresAAHcVcH4dFQAA4BRwfmkSAADY3XB+DAAAAGHe7HMAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fk3eu"]
+resource_name = "Sketchbooks, comics, rulers (1)_Cube_012"
+_surfaces = [{
+"aabb": AABB(-1.1938756, -4.1715164, -1.0763316, 2.2874794, 7.418254, 2.1584141),
+"attribute_data": PackedByteArray("+MdJnADZjlgA2Umc+MeOWEvvrb9t7P+zTu//s2rsbbjt4q6/bOVtuOni/7Nq5f+z6OIqr2rl/7Pp4v+zaeUqr0/vKq9L7LepTO9eoG3sKq9L5bep6+JeoGnlKq/o4iqvFcUKlqSsDLKkrAqWFcUMskisFrLwxAOW8MQWskisA5ao4TE8qN78Nqjh/Dao3m84l9U3PKvYcjiX1fw2q9j8NqjhQC2r2AExl9U8LavYdjKX1XYyqN4DMajhdjKo3nYyTu//s23sKq9P7yqvbez/s4ysdVQYuX9IGLl1VIysf0iMrH9IGLn3Ohi5f0iMrPc6jKz3Ohi5Ai8Yufc6jKwCL5fVdjKr2Pw2l9X8NqvYdjKo4fw2qN52MqjhdjKo3vw24t32erDryD6w6/Z64t3IPkPS86Cw1SqvNdIqr5nVf6oO4fegwt2CqhDhKq/j3SqvEOH/s+PdKq8Q4Sqv4t3/szXS/7O01a64PNJPwK/V/7Pd3a+4B+FQwOLd/7MQ4f+zpKwMshXFCpYVxQyypKwKlsbc15wZ/At9GfxdnMbcC30S1mpUKNIBTx7WAU8k0ttRyspyVKHO4VGeygFPlM4BTwbWPEaezspIwMo4RpTOp0ueyqdLIdLMSB7Wp0so0qdLNdIqr6/V/7M10v+zsNUqr4q2kYsRw1N8EcORi4q2U3yKtlN8EcM1axHDU3yKtjVrirY1axHD9lsRwzVrirb2W57Kp0uUzgFPnsoBT5TOp0se1gFPKNKnSx7Wp0so0gFPne/Eemn8rT5p/MR6ne+tPrnxeKAn9CqvtPEqrwv0eqrT/Hig9Pl6qtj8Kq8Y+iqv2/z/sxj6Kq/Y/CqvGfr/s7Lx/7Mq9O23uPHkvyb0/7MW+u231vzjvxn6/7Pb/P+zFcUKlqSsDLKkrAqWFcUMsgn8H30A3UycAN0ffQn8TJxk01tBtM+NO2TTjTu0z0U9x8ZiQYfKST3Hxo07h8qNO2TTezKHyo42x8Z1MofKSTjHxkk4tM+QNmTTSTi0z0k4tPEqryb0/7Oy8f+zJ/Qqr7rEti9oum07aLq2L7rEbTu6xG07aLqvSGi6bTu6xK9IusSvSGi6ZlRouq9IusRmVMfGSTiHyo07x8aNO4fKSThk0407tM9JOGTTSTi0z407"),
+"format": 34896613399,
+"index_count": 396,
+"index_data": PackedByteArray("SABJAEoASABLAEkATABNAE4ATABPAE0AUABPAEwAUABRAE8AUgBRAFAAUgBTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAWgBZAFwAWgBcAF0AXQBcAF4AXQBeAF8AYABhAGIAYABjAGEAZABlAGYAZABnAGUAaABpAGoAaABrAGkAbABrAGgAbABtAGsAbgBtAGwAbgBvAG0AcABxAHIAcgBxAHMAcgBzAHQAcAB1AHEAdgB1AHAAdgB3AHUAeAB5AHoAeAB7AHkAfAB9AH4AfAB/AH0AgACBAIIAgACDAIEAhACFAIYAhACHAIUAiACJAIoAiACLAIkAjACNAI4AjACPAI0AAAABAAIAAAADAAEABAAFAAYABAAHAAUACAAHAAQACAAJAAcACgAJAAgACgALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAEgARABQAEgAUABUAFQAUABYAFQAWABcAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAjACAAJAAlACMAJgAlACQAJgAnACUAKAApACoAKgApACsAKgArACwAKAAtACkALgAtACgALgAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUAkACRAJIAkACTAJEAlACVAJYAlACXAJUAmACXAJQAmACZAJcAmgCZAJgAmgCbAJkAnACdAJ4AnACfAJ0AoAChAKIAoACjAKEAogChAKQAogCkAKUApQCkAKYApQCmAKcAqACpAKoAqACrAKkArACtAK4ArACvAK0AsACxALIAsACzALEAtACzALAAtAC1ALMAtgC1ALQAtgC3ALUAuAC5ALoAugC5ALsAugC7ALwAuAC9ALkAvgC9ALgAvgC/AL0AwADBAMIAwADDAMEAxADFAMYAxADHAMUAyADJAMoAyADLAMkAzADNAM4AzADPAM0A0ADRANIA0ADTANEA1ADVANYA1ADXANUA"),
+"lods": [1.8395243, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAHAAQACAAJAAcACgAJAAgACgALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAEgARABQAEgAUABUAFQAUABYAFQAWABcAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAjACAAJAAlACMAJgAlACQAJgAnACUAKAApACoAKgApACsAKgArACwAKAAtACkALgAtACgALgAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUA")],
+"material": SubResource("StandardMaterial3D_otwn2"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 216,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_au2jq")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8ilkp"]
+_surfaces = [{
+"aabb": AABB(-1.1051574, -1.1136286, -3.3271742, 2.158029, 2.309555, 6.9505296),
+"format": 34896613377,
+"index_count": 528,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwACAAQAAwAFAAAABAAGAAMAAwAGAAUABAAHAAYAAgAHAAQABgAIAAUAAgAJAAcAAQAJAAIABwAKAAYABgAKAAgACQALAAcABwALAAoABQAIAAwADAAIAAoABQAMAA0AAAAFAA0ADAAKAA4ADgAKAAsADQAMAA4AAAANAA8AAAAPAAEADQAOABAADwANABAADgALABEAEAAOABEADwAQABIAEQALABMACQATAAsAEQATABQAFQATAAkAFQAUABMAAQAVAAkAFgARABQAEAARABYAFgAUABUAEgAQABYAFwAVAAEAFwAWABUAEgAWABcADwAXAAEADwASABcAGAAZABoAGwAYABoAGwAaABwAGwAdABgAHAAeABsAGwAeAB0AHAAfAB4AGgAfABwAHgAgAB0AGgAhAB8AGQAhABoAHwAiAB4AHgAiACAAIQAjAB8AHwAjACIAHQAgACQAJAAgACIAHQAkACUAGAAdACUAJAAiACYAJgAiACMAJQAkACYAGAAlACcAGAAnABkAJQAmACgAJwAlACgAJgAjACkAKAAmACkAJwAoACoAKQAjACsAIQArACMAKQArACwALQArACEALQAsACsAGQAtACEALgApACwAKAApAC4ALgAsAC0AKgAoAC4ALwAtABkALwAuAC0AKgAuAC8AJwAvABkAJwAqAC8AMAAxADIAMwAwADIAMwAyADQAMwA1ADAANAA2ADMAMwA2ADUANAA3ADYAMgA3ADQANgA4ADUAMgA5ADcAMQA5ADIANwA6ADYANgA6ADgAOQA7ADcANwA7ADoANQA4ADwAPAA4ADoANQA8AD0AMAA1AD0APAA6AD4APgA6ADsAPQA8AD4AMAA9AD8AMAA/ADEAPQA+AEAAPwA9AEAAPgA7AEEAQAA+AEEAPwBAAEIAQQA7AEMAOQBDADsAQQBDAEQARQBDADkARQBEAEMAMQBFADkARgBBAEQAQABBAEYARgBEAEUAQgBAAEYARwBFADEARwBGAEUAQgBGAEcAPwBHADEAPwBCAEcASABJAEoASwBIAEoASwBKAEwASwBNAEgATABOAEsASwBOAE0ATABPAE4ASgBPAEwATgBQAE0ASgBRAE8ASQBRAEoATwBSAE4ATgBSAFAAUQBTAE8ATwBTAFIATQBQAFQAVABQAFIATQBUAFUASABNAFUAVABSAFYAVgBSAFMAVQBUAFYASABVAFcASABXAEkAVQBWAFgAVwBVAFgAVgBTAFkAWABWAFkAVwBYAFoAWQBTAFsAUQBbAFMAWQBbAFwAXQBbAFEAXQBcAFsASQBdAFEAXgBZAFwAWABZAF4AXgBcAF0AWgBYAF4AXwBdAEkAXwBeAF0AWgBeAF8AVwBfAEkAVwBaAF8A"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("AAD3BP//AAAAAKfiVbYAAAAAp+L//wAAP+33BP//AAA/7afi//8AADoQ9wRE9gAAd+v3BET2AAB366fiRPYAAE4VGgoD9QAAOhCn4kT2AABj5hoKA/UAAGPmhN0D9QAAThUaClHBAAA6EPcED8AAAGPmGgpRwQAAAAD3BFW2AAB36/cED8AAAGPmhN1RwQAAP+33BFW2AABOFYTdA/UAAE4VhN1RwQAAOhCn4g/AAAB366fiD8AAAD/tp+JVtgAA9AAAAOWBAAD0AE7utTIAAPQATu7lgQAA//8AAOWBAAD//07u5YEAAGYSAABvdwAAFP4AAG93AAAU/k7ub3cAANsXhAUWdgAAZhJO7m93AACf+IQFFnYAAJ/4yegWdgAA2xeEBYQ+AABmEgAAKj0AAJ/4hAWEPgAA9AAAALUyAAAU/gAAKj0AAJ/4yeiEPgAA//8AALUyAADbF8noFnYAANsXyeiEPgAAZhJO7io9AAAU/k7uKj0AAP//Tu61MgAA9ADXArW0AAD0AP//fIIAAPQA//+1tAAA///XArW0AAD/////tbQAAGYS1wITrgAAFP7XAhOuAAAU/v//E64AANsXtAg4rQAAZhL//xOuAACf+LQIOK0AAJ/4Ivo4rQAA2xe0CPmJAABmEtcCHokAAJ/4tAj5iQAA9ADXAnyCAAAU/tcCHokAAJ/4Ivr5iQAA///XAnyCAADbFyL6OK0AANsXIvr5iQAAZhL//x6JAAAU/v//HokAAP////98ggAA9ADJAjgyAAD0APH/AAAAAPQA8f84MgAA///JAjgyAAD///H/ODIAAGYSyQKWKwAAFP7JApYrAAAU/vH/lisAANsXpgi7KgAAZhLx/5YrAACf+KYIuyoAAJ/4FPq7KgAA2xemCHwHAABmEskCoQYAAJ/4pgh8BwAA9ADJAgAAAAAU/skCoQYAAJ/4FPp8BwAA///JAgAAAADbFxT6uyoAANsXFPp8BwAAZhLx/6EGAAAU/vH/oQYAAP//8f8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ve63h"]
+resource_name = "Sketchbooks, comics, rulers (1)_Cube_015"
+_surfaces = [{
+"aabb": AABB(-1.1051574, -1.1136286, -3.3271742, 2.158029, 2.309555, 6.9505296),
+"attribute_data": PackedByteArray("oCtMlt8By6LfAUyWoCvLopiC8QCvWEs4r1jxAJiCSzhbVna4o1qWvHRWysebWna4tV2UvOlhxMe6XXa4+WF2uG1YSDiXgpcAl4JIOG1YlwD5YW+utl1Rqu1hI5+5XW+upFpOqnhWGZ+aWm+uW1ZvrltWb66bWna4W1Z2uJpab65mVTpBl1iDQ2ZVk0WYWB5DZlWTRb9Y8kMsV2pKl1iDQyxXakodWehDaFv8Sb9Y8kP5YXa4uV1vrvlhb666XXa4u1QKv3FKELG7VBCxcUoKv7tU9ctxSgq/u1QKv3FK9cu7VBCxcUolpLtUJaRxShCxYVzuQBhZsUIxW208M1kXQzFbbTy7WKxC+lYyPBhZsUJoW/xJM1l8Q2dcPUUdWehDZ1w9RTNZF0NhXO5AM1l8Q/pWMjyYWB5DZlU6QbtYrEJbAayEKizUdSosrIRbAdR1+k5TfgAzTZoAM1N++k5NmmgeFrnKIenAeh7jxL8hFrlwKOzAvCvoxIAoFrnYKxa5DjNVfhJPWZoOM1maEk9VftgruLF1KFSqxStapYEouLHQIVKqhB5WpcAhuLFoHrixaB64sb8hFrloHha5wCG4selkj1BKYVlP6WQ9Tklhmk/pZD1OX2GQTq9lDEdKYVlPr2UMR5NglU4mXjdHX2GQTtgrFrmBKLix2Cu4sYAoFrlxSBK/lz8LsHFIC7CXPxK/cUj1zJc/Er9xSBK/lz/1zHFIC7CXPyiicUgoopc/C7DrW8dRg2BYUJVdVFdWYL1PlV1UV01haFAVZfJXg2BYUCZeN0dWYCtP6FunTJNglU7oW6dMVmC9T+tbx1FWYCtPFWXyV0lhmk/pZI9QTWFoUIgrcYbMAeyThAGxhtArrJMPij/e7Gs7vg+KO77saz/er2MXyctlVs28Y2PSyWUXyU5mVs1daGPST2YXyWtoF8lUimLesWvWvVSK1r2xa2LebmiSwU1mQb1ZaDG4UGaSwcllRL2sYzi4yWWSwatjksGrY5LByWUXya9jF8nJZZLBQGaj1ehk7NdAZIjVaGXT10BkiNUyZAzYI2BG1uhk7NcjYEbWLmS12AhgKtoyZAzYa2gXyVBmksFuaJLBT2YXyV80Er9bLRyvXzQcr1stEr9fNPXMWy0Sv180Er9bLfXMXzQcr1stOaFfNDmhWy0cr71lR9vWZdnYiWn52i9l5tiJafna8mUv2CxqDNfWZdnYCGAq2tRk4NjOYyjbLmS12M5jKNsvZebYvWVH29Rk4NgsagzXaGXT10Bmo9XyZS/YBCsIZtQAP3OhADRmNysUcxaJtP22cNDjFonQ47ZwtP0TIxa5xSRbuykjlb/AJBa5hyVXuzQnjb+HJRa5NCcWuVGJ8/17cJHjUYmR43tw8/00J7ixhCUEsCcny6uHJbixwiQFsBsjzavAJLixEyO4sRMjuLHAJBa5EyMWucAkuLEQZDTlU2UE4nxmMOUpZQTifGYw5aRl8OFka/bjU2UE4mRr9uOhZaThMGtC36Rl8OE0Jxa5hyW4sTQnuLGHJRa5Yj0Sv182HK9iPRyvXzYSv2I99cxfNhK/Yj0Sv1829cxiPRyvXzY5oWI9OaFfNhyvNmRr3t9kouGRXyrfLGWW4ZFfKt/YZOzhJ1+9499kouEwa0LfVWWW4ZFmYt6hZaThkWZi3ixlluE2ZGveVWWW4SdfveMpZQTiEGQ05dhk7OE="),
+"format": 34896613399,
+"index_count": 528,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkACgAJAAwACgAMAA0ADQAMAA4ADQAOAA8AEAARABIAEAATABEAFAAVABYAFAAXABUAFgAVABgAFgAYABkAGQAYABoAGQAaABsAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAWgBZAFwAWgBcAF0AXQBcAF4AXQBeAF8AYABhAGIAYABjAGEAZABlAGYAZABnAGUAZgBlAGgAZgBoAGkAaQBoAGoAaQBqAGsAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUAeAB5AHoAeAB7AHkAfAB9AH4AfAB/AH0AgACBAIIAgACDAIEAhACFAIYAhACHAIUAiACJAIoAiACLAIkAjACNAI4AjACPAI0AkACRAJIAkACTAJEAlACVAJYAlACXAJUAmACZAJoAmACbAJkAnACdAJ4AnACfAJ0AoAChAKIAoACjAKEApAClAKYApACnAKUAqACpAKoAqACrAKkAqgCpAKwAqgCsAK0ArQCsAK4ArQCuAK8AsACxALIAsACzALEAtAC1ALYAtAC3ALUAtgC1ALgAtgC4ALkAuQC4ALoAuQC6ALsAvAC9AL4AvAC/AL0AwADBAMIAwADDAMEAxADFAMYAxADHAMUAyADJAMoAyADLAMkAzADNAM4AzADPAM0A0ADRANIA0ADTANEA1ADVANYA1ADXANUA2ADZANoA2ADbANkA3ADdAN4A3ADfAN0A4ADhAOIA4ADjAOEA5ADlAOYA5ADnAOUA6ADpAOoA6ADrAOkA7ADtAO4A7ADvAO0A8ADxAPIA8ADzAPEA9AD1APYA9AD3APUA+AD5APoA+AD7APkA+gD5APwA+gD8AP0A/QD8AP4A/QD+AP8AAAEBAQIBAAEDAQEBBAEFAQYBBAEHAQUBBgEFAQgBBgEIAQkBCQEIAQoBCQEKAQsBDAENAQ4BDAEPAQ0BEAERARIBEAETAREBFAEVARYBFAEXARUBGAEZARoBGAEbARkBHAEdAR4BHAEfAR0BIAEhASIBIAEjASEBJAElASYBJAEnASUBKAEpASoBKAErASkBLAEtAS4BLAEvAS0BMAExATIBMAEzATEBNAE1ATYBNAE3ATUBOAE5AToBOAE7ATkBPAE9AT4BPAE/AT0B"),
+"material": SubResource("StandardMaterial3D_otwn2"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 320,
+"vertex_data": PackedByteArray("AAD3BP//VNUAAKfiVbZU1QAAp+L//1TVAAD3BFW2VNUAAPcEVbb//z/tp+JVtv//AACn4lW2//8/7fcEVbb//z/t9wT//wbZOhD3BET21OIAAPcE//+a73fr9wRE9q7WOhD3BA/AVsgAAPcEVbaQw3fr9wQPwAjSP+33BFW2AdQ/7fcE////vwAAp+L///+/P+2n4v///78AAPcE////vz/tp+JVttHROhCn4g/AGsoAAKfiVbZBw3frp+IPwAHUOhCn4kT2j+UAAKfi///V7nfrp+JE9snYP+2n4v//rtY/7afi//9Pwnfr9wRE9k/CP+33BP//T8J366fiRPZPwjoQ9wRE9l7qThUaClHBJcQ6EPcED8AsxE4VGgoD9X/qOhD3BA/A2Zlj5hoKUcHdmXfr9wQPwN2ZThUaClHB2Zl36/cED8BuxGPmhN1RwV7Ed+un4g/AXsRj5hoKUcFvxD/t9wRVtq69d+un4g/Arr0/7afiVbauvXfr9wQPwK69Y+YaClHB/79j5oTdA/X/v2PmhN1Rwf+/Y+YaCgP1/79OFRoKUcFU1WPmGgoD9VTVY+YaClHBVNVOFRoKA/VU1WPmhN1RwVTVThWE3QP1VNVOFYTdUcFU1WPmhN0D9VTVOhCn4kT26v9j5oTdA/W1/3frp+JE9rX/ThWE3QP16/9366fiRPbP7GPmGgoD9dHsd+v3BET20exj5oTdA/XP7Hfrp+IPwM7/ThWE3VHB+fw6EKfiD8Du/GPmhN1Rwej/OhCn4g/AKetOFYTdA/XDxjoQp+JE9rrGThWE3VHBCut36/cERPYl5k4VGgoD9SrmOhD3BET2K+Zj5hoKA/Ul5vQAAADlgVTV9ABO7rUyVNX0AE7u5YFU1fQAAAC1MlTV9AAAALUy/////07utTL///QATu61Mv////8AALUy/////wAA5YG82GYSAABvd1ng9AAAAOWB9OkU/gAAb3eu1mYSAAAqPSHK9AAAALUy6MUU/gAAKj0y0v//AAC1MgHU//8AAOWB///0AE7u5YH/////Tu7lgf//9AAAAOWB/////07utTL80WYSTu4qPUjL9ABO7rUy+sQU/k7uKj0B1GYSTu5vd63j9ABO7uWBX+sU/k7ub3eu2P//Tu7lga7W//9O7uWBT8IU/gAAb3dPwv//AADlgU/CFP5O7m93T8JmEgAAb3epxdsXhAWEPnLtZhIAACo9Ye3bF4QFFnaYxWYSAAAqPRv/n/iEBYQ+0v4U/gAAKj3R/tsXhAWEPh7/FP4AACo9ccSf+MnohD52xBT+Tu4qPXbEn/iEBYQ+ccT//wAAtTKuvRT+Tu4qPa69//9O7rUyrr0U/gAAKj2uvZ/4hAWEPv+/n/jJ6BZ2/7+f+MnohD7/v5/4hAUWdv+/2xeEBYQ+VNWf+IQFFnZU1Z/4hAWEPlTV2xeEBRZ2VNWf+MnohD5U1dsXyegWdlTV2xfJ6IQ+VNWf+MnoFnZU1WYSTu5vdyXmn/jJ6BZ2JuYU/k7ub3cm5tsXyegWdiXmFP5O7m93zuyf+IQFFnbJ7BT+AABvd8nsn/jJ6BZ2zuwU/k7uKj3YmdsXyeiEPviZZhJO7io9+Zmf+MnohD7YmWYSTu4qPTTF2xfJ6BZ2iudmEk7ub3ee59sXyeiEPkjFFP4AAG933f/bF4QFFnZ5/WYSAABvd3D9n/iEBRZ29P/0ANcCtbSY1fQA//98gpjV9AD//7W0mNX0ANcCfIKY1fQA1wJ8gv///////3yC///0AP//fIL/////1wJ8gv/////XArW09NhmEtcCE6555fQA1wK1tDfqFP7XAhOud9dmEtcCHokyx/QA1wJ8gjnGFP7XAh6JFNL//9cCfIJB0///1wK1tACA9AD//7W0AID/////tbQAgPQA1wK1tACA/////3yC4dFmEv//HolkyPQA//98grXFFP7//x6JQdNmEv//E65x5/QA//+1tDDpFP7//xOuvNj/////tbR31/////+1tKTDFP7XAhOupMP//9cCtbSkwxT+//8TrqTDZhLXAhOuhOvbF7QI+Yms62YS1wIeia7r2xe0CDitgetmEtcCHonr/5/4tAj5iYX/FP7XAh6JhP/bF7QI+Ynu/xT+1wIeiZ7Cn/gi+vmJssQU/v//HomqxJ/4tAj5iYfC///XAnyCWbwU/v//HolZvP////98glm8FP7XAh6JWbyf+LQI+Yn/v5/4Ivo4rf+/n/gi+vmJ/7+f+LQIOK3/v9sXtAj5iVTVn/i0CDitVNWf+LQI+YlU1dsXtAg4rVTVn/gi+vmJVNXbFyL6OK1U1dsXIvr5iVTVn/gi+jitVNVmEv//E64h75/4Ivo4rSHvFP7//xOuIe/bFyL6OK0h7xT+//8Trqfyn/i0CDitLPMU/tcCE64r85/4Ivo4raLyFP7//x6J1//bFyL6+Yl9/2YS//8eiXz/n/gi+vmJ2v9mEv//HomS69sXIvo4rYDrZhL//xOuf+vbFyL6+YmT6xT+1wITriHv2xe0CDitIe9mEtcCE64h75/4tAg4rSHv9ADJAjgyg9X0APH/AACD1fQA8f84MoPV9ADJAgAAg9X0AMkCAAD/////8f8AAP//9ADx/wAA/////8kCAAD/////yQI4MvjYZhLJApYr2uX0AMkCODLB6hT+yQKWK3fXZhLJAqEG+8b0AMkCAAD/xRT+yQKhBhLS///JAgAAQdP//8kCODIAgPQA8f84MgCA///x/zgyAID0AMkCODIAgP//8f8AANzRZhLx/6EGD8j0APH/AABPxRT+8f+hBkHTZhLx/5YrBOj0APH/ODLW6RT+8f+WK7/Y///x/zgyd9f///H/ODKkwxT+yQKWK6TD///JAjgypMMU/vH/liukw2YSyQKWKwLF2xemCHwHA8VmEskCoQYDxdsXpgi7KgLFZhLJAqEG3JCf+KYIfAfgkBT+yQKhBuCQ2xemCHwH3JAU/skCoQb9wZ/4FPp8B17AFP7x/6EGYsCf+KYIfAcMwv//yQIAAFm8FP7x/6EGWbz///H/AABZvBT+yQKhBlm8n/imCHwH/7+f+BT6uyr/v5/4FPp8B/+/n/imCLsq/7/bF6YIfAdU1Z/4pgi7KlTVn/imCHwHVNXbF6YIuypU1Z/4FPp8B1TV2xcU+rsqVNXbFxT6fAdU1Z/4FPq7KlTVZhLx/5Yr//+f+BT6uyrs/xT+8f+WK+z/2xcU+rsq//8U/vH/liuN8p/4pgi7Ki3yFP7JApYrLvKf+BT6uyqQ8hT+8f+hBtyQ2xcU+nwH3ZBmEvH/oQbdkJ/4FPp8B9yQZhLx/6EGAsXbFxT6uyr/xGYS8f+WK//E2xcU+nwHAsUU/skCliv5/9sXpgi7KuL/ZhLJApYr4v+f+KYIuyr7/1RVqqpUVaqqVFWqqlRVqqr/P/+//z//v/8//7//P/+/l1kzU5hjM06QbzdI71aHVFNA1V/wMIdnI1FtV7JTJlb/////////////////////ktcmL+TdyTtE6IpQJdZMLObMzhmSyCcRVNOqJofUECn/fwAA/38AAP9/AAD/fwAAoRQqyhJgzTgqYMk4vBRDynYA4IFuAcqFcgHZhW0AuoFVGlQaXhpRGl4aURpVGlQa/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AABUVVRVVFVUVVRVVFVUVVRVVNWqKlTVqipU1aoqVNWqKlCAH+ASgY3fFYGL30mAJOB5Nns2cjaANnI2gDZ5Nns2YeATAKngOQGq4D0BXuAIADW1RJWit5EYpbemGE61K5VoALB/NAZTe0oGQ3swANp/VNVU1VTVVNVU1VTVVNVU1f8//7//P/+//z//v/8//79GWVxTL2FnT05q2ErvVodURETdXcA5H2NaUVJXslMmVv9//3//f/9//3//f/9//3911+wuu9x5OankVUkl1kwsys2WGy/KXxRk08kmh9QQKf9/AAD/fwAA/38AAP9/AACOZBc4DxeEzAIXeMxfZB44on9zYIV/e2CEf3tgo39zYFSaq2VUmq5lVJquZVSaq2X/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAFRVVFVUVVRVVFVUVVRVVFVU1aoqVNWqKlTVqipU1aoqWv8lf2z+6X1p/uR9Y/8wf3i2gklstnNJbLZySXi2gknK/kuAhPGTg1bxnoNT/yqASri2HB24Q5INuFSSQbh/HP5fgf+jWRD3jFny9jxg0/8sVViqLFVYqixVWKosVViq/3////9/////f////3///4RZPVMcZvFMi2q5StdXE1R0PUVhuTqiYjNRZVe/Up9W/3////9/////f////3///4fXES/E34o/buPeRp/WQC0DzAgYM8tnFlzTuSYT1Cco/38AAP9/AAD/fwAA/38AABoUBMo7FCTKPBQlyhgUAso1Fvn/MBbd/zAW3P81Fvr/r5SKa4wT3BSPE9wUrZSAa/9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAAVFVUVVRVVFVUVVRVVFVUVVTVqipU1aoqVNWqKlTVqirv/wyArf9CgKz/Q4Dx/wqAc7kjR342XTuFNlc7YLkLRwqANJYjgC+WI4AvlgmANJbutSWU/LUWlPy1FpTttSaUoADBgDIBcoE0AXSBmwC7gDhVcao4VXGqOFVxqjhVcar/f////3////9/////f///iFk7U3dmw0wMa3lK11cTVOE8jmEHOvtiMFFnV79Sn1b/f////3////9/////f///i9cYLyrgVUAW5C1In9ZALb/LgBfmys0VWtO2JhPUJyj/fwAA/38AAP9/AAD/fwAAnGTHNp9kxjafZMY2m2THNnoA6n8KBvN+HQbvfkYA83+9FKIUfZSEan2Uhmq2FKMU/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AABUVVRVVFVUVVRVVFVUVVRVVNWqKlTVqipU1aoqVNWqKjyWCACWlnQAl5Z1ADmWBABWORA5n7ffRKO35URGOR057/+mf4D/JH1+/xx98/+9f8a2ZBvHtmsbx7ZsG8a2Yxvkf0wWS3/KFkl/zBbqf0cW")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8ilkp")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7aw3y"]
+_surfaces = [{
+"aabb": AABB(-1, -0.008795254, -1, 2, 0.017590508, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAAAAAAAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAAAA/////wAA////////AAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1hdm3"]
+resource_name = "Sketchbooks, comics, rulers (1)_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, -0.008795254, -1, 2, 0.017590508, 2),
+"attribute_data": PackedByteArray("fSigANsAGTjbAKAAfSgZOHoAtDetKF0ArSi0N3oAXQD9PIxzHjEhdsEzsHMpP/F11D08aik/8XX9PIxzd0DKZ8EzsHNrMvpnmDRgah4xIXaYNGBqd0DKZ9Q9PGprMvpn"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_otwn2"),
+"name": "Sketchbooks, comics, eraser, ruler",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNX//wAAAABU1QAAAAAAAFTV//8AAP//VNUAAP//////v/////8AAP+//////////78AAP//AAD/vwAAAAAAAPn/AAD/////+/8AAAAA///7/wAA//8AAPn///8AAAAA//8AAP//AAD//wAAAAAAAP///////wAA//8AAAAA///n/f///////2iB//8AAP//Y4EAAP/////s/f//AAD///+//////wAA/7///wAAAAD/v/////////+/qipU1aoqVNWqKlTVqipU1f///3////9/////f////3/5/wLA+/8BwPv/AcD5/wLANIPK/NH9LYLY/SWCLIPR/P9//3//f/9//3//f/9//38KgBYAB4AQAAeAEAAKgBYA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7aw3y")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncu6a"]
 resource_name = "Material.002"
@@ -175,6 +315,12 @@ visible = false
 [node name="Object_32" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="23" unique_id=1276844091]
 visible = false
 
+[node name="Object_36" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="27" unique_id=1758915598]
+visible = false
+
+[node name="Object_5" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="30" unique_id=302743791]
+transform = Transform3D(0.9984151, -0.056278285, -2.0126663e-08, 0.056278396, 0.9984147, -5.670415e-10, 2.0126713e-08, -5.6655836e-10, 0.9999996, -0.01778625, 0.090031326, 3.2197704e-08)
+
 [node name="Object_8" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="32" unique_id=2031869319]
 transform = Transform3D(-0.043619424, 0.99904823, 0, -0.99904823, -0.043619424, 0, 0, 0, 1, -0.6843137, -0.0957343, 1.0870271)
 
@@ -188,7 +334,70 @@ spot_range = 0.924
 spot_angle = 43.22
 
 [node name="bonsai" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="33" unique_id=1989564081 instance=ExtResource("14_3uj6r")]
-transform = Transform3D(-0.4, -3.4969112e-08, -1.5285484e-15, 0, -1.7484556e-08, 0.4, -3.4969112e-08, 0.4, 1.7484556e-08, 0.1722554, 0.16557962, 5.9215893e-08)
+transform = Transform3D(-0.31972253, -2.7950998e-08, 3.0198066e-14, 0, -1.3975644e-08, 0.31972218, -2.7950993e-08, 0.31972218, 1.3975658e-08, -0.8466666, -0.03742516, 1.3497663)
+
+[node name="Sketchbooks, comics, rulers (1)" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="34" unique_id=2014489085 instance=ExtResource("5_ffp6v")]
+transform = Transform3D(-1, 3.388132e-21, -8.742277e-08, -8.742278e-08, -3.5762793e-07, 1, -3.1264823e-14, 1, 3.5762793e-07, 1.8566165, 1.3616047, 4.869478e-07)
+
+[node name="Eraser" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="0" unique_id=1482864947]
+transform = Transform3D(0.013657795, 1.0657981e-16, -0.017789122, -3.0940197e-16, 0.006016339, 1.7684428e-16, 0.010886114, 3.727902e-17, 0.022318345, 2.2769468, 0.6796203, -1.0318674)
+
+[node name="Ruler" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="1" unique_id=717792842]
+transform = Transform3D(0.010943609, -0.00024421077, -0.079165645, -0.00062130083, 0.0026828682, -0.014705094, 0.01359758, 0.00031913142, 0.063042164, 2.2479627, 0.691948, -1.0891039)
+
+[node name="Sketchbook 1" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="2" unique_id=724414493]
+transform = Transform3D(-0.03177087, 2.0756153e-16, -0.12554963, -2.8514833e-15, 0.007859086, 4.953282e-15, 0.09481588, 3.0590283e-16, -0.042069092, 2.2934651, 0.68708307, -1.2095047)
+
+[node name="Stack of comics" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="3" unique_id=343947275]
+transform = Transform3D(0.089263976, -5.521458e-23, -8.172599e-26, 1.9828426e-23, 0.12981303, 0.00038431535, -5.293956e-22, -0.004938174, 0.010102751, 2.7781794, 1.3312837, -1.2082428)
+
+[node name="Stack of comics_001" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="4" unique_id=312714591]
+transform = Transform3D(0.12280816, 0, 0, 0, 0.024650227, 0, -5.293956e-23, 5.293956e-23, 0.13958074, -0.37826252, 0.84894204, -0.48915935)
+
+[node name="Stack of comics_002" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=775283270]
+transform = Transform3D(-0.05137756, 7.248805e-16, -0.11627871, -2.9077167e-15, 0.028539883, 5.3578353e-15, 0.10230602, 1.1751841e-15, -0.058394466, 2.560265, 0.77340907, -1.0538416)
+mesh = SubResource("ArrayMesh_c0sw7")
+
+[node name="Stack of comics_003" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=1922958124]
+transform = Transform3D(-0.010591861, 8.076746e-16, -0.12955974, -3.2398292e-15, 0.028539876, 4.040316e-15, 0.11399114, 8.862007e-16, -0.012038426, 2.560265, 0.7186588, -1.0538416)
+mesh = SubResource("ArrayMesh_c0sw7")
+
+[node name="Stack of comics_004" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=1068784420]
+transform = Transform3D(-0.11169174, -1.7800122e-16, 0.028553136, 7.1400727e-16, 0.02853986, 7.306188e-15, -0.025122095, 1.6025342e-15, -0.12694621, 2.7560072, 1.2628295, -0.9493866)
+mesh = SubResource("ArrayMesh_c0sw7")
+
+[node name="Stack of sketchbooks" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="8" unique_id=1928345944]
+transform = Transform3D(-0.031199284, 2.3652916e-16, -0.13032904, -2.464556e-15, 0.008480046, 5.034901e-15, 0.09842532, 2.8731495e-16, -0.041312244, -0.46439385, 0.7209182, -0.8531678)
+
+[node name="Stack of sketchbooks2" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=563953613]
+transform = Transform3D(-0.017242383, 2.4066506e-16, -0.13480026, -2.560526e-15, 0.00848005, 4.5096432e-15, 0.10180195, 2.540522e-16, -0.022831349, 2.6112962, 0.7174734, -0.73594105)
+mesh = SubResource("ArrayMesh_fk3eu")
+
+[node name="Stack of sketchbooks3" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=815132480]
+transform = Transform3D(0.080022134, -1.9318677e-17, -0.0010668896, 2.3508552e-16, 0.0065725315, -1.9290328e-17, 0.0008057093, 1.0014047e-18, 0.10596068, 2.7657955, 1.3396226, -0.7192948)
+mesh = SubResource("ArrayMesh_fk3eu")
+
+[node name="Stack of sketchbooks_001" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="11" unique_id=1572024308]
+transform = Transform3D(0.083037645, -1.009742e-28, 3.9443045e-31, 0, -0.0012559134, 0.014828648, 0, -0.1137512, -0.00016372133, 2.7612755, 1.2586632, -1.403804)
+
+[node name="Stack of sketchbooks_003" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=403477937]
+transform = Transform3D(0.083037645, -1.009742e-28, 3.9443045e-31, 0, -0.0012559133, 0.0148286475, 0, -0.113751195, -0.00016372131, 2.7612755, 1.258663, -0.70999193)
+mesh = SubResource("ArrayMesh_ve63h")
+
+[node name="Stack of sketchbooks_002" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=299122478]
+transform = Transform3D(-0.016975489, 0.12849836, 0.00018494682, 4.8109286e-12, -0.0014417784, 0.017023167, 0.09380288, 0.023254286, 3.3469754e-05, 2.6221125, 0.9271482, -0.73743033)
+mesh = SubResource("ArrayMesh_ve63h")
+
+[node name="Unfinished Comics" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" index="14" unique_id=907167775]
+transform = Transform3D(-0.05659022, 3.1258849e-15, -0.12396181, -3.4753116e-15, 0.14180599, 5.925346e-15, 0.10186473, 6.5745414e-15, -0.06886591, 2.5723295, 0.79951197, -1.0609763)
+
+[node name="Unfinished Comics3" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=1238540654]
+transform = Transform3D(0.048532702, 3.901566e-15, -0.1289219, -3.5911605e-15, 0.14180586, 2.289446e-15, 0.105940744, 3.0195505e-15, 0.059060812, 2.2737057, 0.6745595, -0.8347852)
+mesh = SubResource("ArrayMesh_1hdm3")
+
+[node name="Unfinished Comics2" type="MeshInstance3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)" unique_id=990247428]
+transform = Transform3D(0.0181083, 4.0295716e-15, -0.14008367, -3.851845e-15, 0.14180596, 3.3417423e-15, 0.115112826, 4.111143e-15, 0.022036554, 2.6477513, 0.75405514, -0.75820947)
+mesh = SubResource("ArrayMesh_1hdm3")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1381647886]
 transform = Transform3D(-0.8342353, 0, 0.5514086, 0, 1, 0, -0.5514086, 0, -0.8342353, 0.25860378, 1.0087188, 0.071932405)
@@ -218,7 +427,7 @@ omni_range = 0.5586623
 transform = Transform3D(0.578742, 0, 0, 0, 0.578742, 0, 0, 0, 0.578742, 0.007232696, 1.0449795, -0.20998544)
 
 [node name="New Kitty (1)" parent="." unique_id=44918328 instance=ExtResource("6_lrwc4")]
-transform = Transform3D(0.26072732, 0, -0.60014147, 0, 0.6543306, 0, 0.60014147, 0, 0.26072732, -0.4476324, 0.5790918, -0.3788931)
+transform = Transform3D(0.26072732, 0, -0.60014147, 0, 0.6543306, 0, 0.60014147, 0, 0.26072732, -0.5170133, 0.5790918, -0.3788931)
 
 [node name="Blue Carp" parent="." unique_id=2050908617 instance=ExtResource("7_vf3xh")]
 transform = Transform3D(0.5404715, 3.7788863e-15, -0.1329577, 0, 0.55658525, 1.5819104e-14, 0.13295777, -1.5361124e-14, 0.54047143, 0.71199316, 0.5514217, 0.44783002)
@@ -230,7 +439,10 @@ transform = Transform3D(0.6833165, 0, 0.29271302, 0, 0.7433723, 0, -0.29271302, 
 transform = Transform3D(-0.90834457, 0, -0.41822255, 0, 1, 0, 0.41822255, 0, -0.90834457, 0.63663065, 0.67911255, 0.4589079)
 
 [node name="Onigiri (1)" parent="." unique_id=284199203 instance=ExtResource("10_hdap7")]
-transform = Transform3D(0.61439466, 0.20524967, 0.047595926, -0.19991206, 0.6142192, -0.06814381, -0.066542916, 0.049809534, 0.64417744, 0.4662548, 0.6479222, 0.64561886)
+transform = Transform3D(0.5067674, 0.26943737, 0.30407867, -0.26319858, 0.5880533, -0.08242285, -0.3094945, -0.058911186, 0.56799304, 0.6929275, 1.2635409, 1.0777936)
+
+[node name="Onigiri (1)2" parent="." unique_id=1949135937 instance=ExtResource("10_hdap7")]
+transform = Transform3D(0.5467968, 0.15136984, 0.31618643, -0.16533163, 0.6279514, -0.014706835, -0.30911514, -0.06810276, 0.56717134, 0.5147146, 0.6713704, 0.58026123)
 
 [node name="Little Fish" type="Node3D" parent="." unique_id=658846964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.853085, 0.9751688, 1.8618964)
@@ -249,4 +461,8 @@ transform = Transform3D(0.12789676, 0, -0.9917877, 0, 1, 0, 0.9917877, 0, 0.1278
 transform = Transform3D(0.0039206417, 0.0018093359, 0.0027297772, -0.0001511291, 0.03497702, -0.0055916295, -0.00033090467, 0.0054629394, 0.034896865, 0.22541367, 0.5734347, 0.33157483)
 mesh = SubResource("ArrayMesh_f52o3")
 
+[node name="gourd" parent="." unique_id=700016915 instance=ExtResource("17_h1g2g")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.7640938, 1.3672101, 0.943107)
+
 [editable path="office desk"]
+[editable path="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Sketchbooks, comics, rulers (1)"]
