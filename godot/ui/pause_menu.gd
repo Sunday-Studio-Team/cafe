@@ -65,10 +65,9 @@ func _ready() -> void:
 
 	setup_button_tweens()
 
-
-func _process(_delta: float) -> void:
+func _unhandled_input(input_event: InputEvent) -> void:
 	if (
-			Input.is_action_just_pressed("pause")
+			input_event.is_action_pressed("pause")
 			and not Global.in_ui
 	):
 		if state == State.IN_OPTIONS:
@@ -80,6 +79,8 @@ func _process(_delta: float) -> void:
 		else:
 			not_sure()
 
+
+func _process(_delta: float) -> void:
 	sure_menu.visible = (
 			state == State.CONFIRMING_RESTART
 			or state == State.CONFIRMING_QUIT

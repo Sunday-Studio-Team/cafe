@@ -27,7 +27,7 @@ stream_2/stream = ExtResource("11_606se")
 stream_3/stream = ExtResource("12_u1c27")
 stream_4/stream = ExtResource("13_op7ga")
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "free_cam_visualizer")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
@@ -37,6 +37,7 @@ bag_pickup_sound = NodePath("CameraController/Camera3D/ingredientbag/BagPickupSo
 footstep_sound = NodePath("FootstepSound")
 ingredients_bag_scene = ExtResource("2_sweqy")
 sprint_lockout_timer = NodePath("SprintLockoutTimer")
+free_cam_visualizer = NodePath("FreeCamVisualizer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -49,6 +50,7 @@ player_controller = NodePath("..")
 camera_effects = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player")]
+current = true
 fov = 90.0
 script = ExtResource("4_2hs0m")
 player = NodePath("../..")
@@ -68,7 +70,7 @@ collide_with_areas = true
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.08502839, -0.013210096, -0.050947692, 0.021402877, 0.09711249, 0.010539994, 0.048084166, -0.019866265, 0.0854005, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1709506213]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=2045249375]
 transform = Transform3D(0.83222854, 0.30946758, -0.4600262, -0.1782857, 0.93503195, 0.3064773, 0.5249845, -0.1730432, 0.8333341, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraController/Camera3D/ingredientbag" unique_id=1902215747]
@@ -94,5 +96,19 @@ attenuation_model = 1
 volume_db = -10.0
 unit_size = 1.0
 max_db = 0.0
+
+[node name="FreeCamVisualizer" type="Node3D" parent="." unique_id=1884043755]
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FreeCamVisualizer" unique_id=1705248324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8689002, 0)
+radius = 0.19
+height = 1.8
+sides = 16
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="FreeCamVisualizer" unique_id=415571206]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.3944696, -0.20395732)
+radius = 0.195
+height = 0.3564453
 
 [editable path="CameraController/Camera3D/ingredientbag"]

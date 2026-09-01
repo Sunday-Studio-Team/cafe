@@ -13,6 +13,8 @@ const STRIDE_LENGTH := 1.1
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
 
+@export var free_cam_visualizer: Node3D
+
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
@@ -47,6 +49,8 @@ func _ready() -> void:
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
 
+	free_cam_visualizer.visible = false
+
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -74,14 +78,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
 
-	#handle_mouselook()
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
 	handle_footstep_sounds()
-	#tilt_camera()
+	
 	handle_ingredients_bag()
 	handle_active_items()
 	handle_floating_cursor()
@@ -136,7 +139,7 @@ func handle_active_items() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled or holding_interactable or Global.in_ui):
+	if (not movement_enabled or holding_interactable or Global.in_ui or Global.free_camera_enabled):
 		velocity = Vector3.ZERO
 		return
 
