@@ -149,6 +149,7 @@ var ordered_drink_customer: Customer
 # End remaking drink variables --
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
+var hovered_loadout_menu_element: LoadoutMenuElement
 #Active Items
 var equipped_item: Item = null
 # Tutorial flags
