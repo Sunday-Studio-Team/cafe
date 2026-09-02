@@ -21,7 +21,7 @@ enum State {
 @export var current_word_next_letter_bbcode_close: String = "[/color][/shake][/b]"
 @export var current_word_future_letters_bbcode_open: String = "[b][shake level=15][color=red]"
 @export var current_word_future_letters_bbcode_close: String = "[/color][/shake][/b]"
-@export var future_words_bbcode_open: String = "[color=gray]"
+@export var future_words_bbcode_open: String = "[color=red]"
 @export var future_words_bbcode_close: String = "[/color]"
 @export var space_hint_character: String = "_"
 
@@ -129,7 +129,7 @@ func _update_style_player_reply() -> void:
 	var current_word_future_letters_bbcode_open_index: int = current_word_next_letter_bbcode_close_index
 	var current_word_future_letters_bbcode_close_index: int = current_word_end_index + 1
 
-	var future_words_bbcode_open_index: int = current_word_end_index + 1
+	var future_words_bbcode_open_index: int = current_word_start_index
 	if future_words_bbcode_open_index > styled_player_reply.length():
 		future_words_bbcode_open_index = styled_player_reply.length()
 	var future_words_bbcode_close_index: int = styled_player_reply.length()
@@ -138,6 +138,7 @@ func _update_style_player_reply() -> void:
 	var offset: int = 0
 
 	# Only style active/finished words if minigame has started
+	var apply_future_word_styling:bool = false
 	if _state != State.PRE_START:
 		styled_player_reply = styled_player_reply.insert(
 			past_words_correct_letters_bbcode_open_index,
@@ -174,7 +175,6 @@ func _update_style_player_reply() -> void:
 			current_word_next_letter_bbcode_close,
 		)
 		offset += current_word_next_letter_bbcode_close.length()
-
 		if current_word_future_letters_bbcode_open_index <= current_word_future_letters_bbcode_close_index:
 			styled_player_reply = styled_player_reply.insert(
 				offset + current_word_future_letters_bbcode_open_index,
@@ -187,18 +187,19 @@ func _update_style_player_reply() -> void:
 				current_word_future_letters_bbcode_close,
 			)
 			offset += current_word_future_letters_bbcode_close.length()
+			apply_future_word_styling = true
+	if not apply_future_word_styling:
+		styled_player_reply = styled_player_reply.insert(
+			offset + future_words_bbcode_open_index,
+			future_words_bbcode_open,
+		)
+		offset += future_words_bbcode_open.length()
 
-	styled_player_reply = styled_player_reply.insert(
-		offset + future_words_bbcode_open_index,
-		future_words_bbcode_open,
-	)
-	offset += future_words_bbcode_open.length()
-
-	styled_player_reply = styled_player_reply.insert(
-		offset + future_words_bbcode_close_index,
-		future_words_bbcode_close,
-	)
-	offset += future_words_bbcode_close.length()
+		styled_player_reply = styled_player_reply.insert(
+			offset + future_words_bbcode_close_index,
+			future_words_bbcode_close,
+		)
+		offset += future_words_bbcode_close.length()
 
 	typing_rich_text_label.text = styled_player_reply
 

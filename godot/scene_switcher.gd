@@ -212,6 +212,20 @@ func _on_game_options_changed(options_data: OptionsData) -> void:
 
 
 func _apply_game_options(options_data: OptionsData) -> void:
+	const BUS_NAME_OVERALL: String = "Master"
+	const BUS_NAME_DIEGETIC_MUSIC: String = "DiegeticMusic"
+	const BUS_NAME_MINIGAME_MUSIC: String = "MinigameMusic"
+	const BUS_NAME_VOICE: String = "TippyVO"
+	
+	var bus_index_overall: int = AudioServer.get_bus_index(BUS_NAME_OVERALL)
+	AudioServer.set_bus_volume_linear(bus_index_overall, options_data.overall_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_diegetic_music: int = AudioServer.get_bus_index(BUS_NAME_DIEGETIC_MUSIC)
+	AudioServer.set_bus_volume_linear(bus_index_diegetic_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_minigame_music: int = AudioServer.get_bus_index(BUS_NAME_MINIGAME_MUSIC)
+	AudioServer.set_bus_volume_linear(bus_index_minigame_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_voice: int = AudioServer.get_bus_index(BUS_NAME_VOICE)
+	AudioServer.set_bus_volume_linear(bus_index_voice, options_data.voice_volume * options_data.VOLUMES_MULTIPLIER)
+	
 	match options_data.graphics_preset:
 		OptionsData.GraphicsOptionsPresets.HIGH:
 			Global.cafe_environment_res.ssao_enabled = true
@@ -265,10 +279,11 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	
 	match options_data.window_mode_option:
 		OptionsData.WindowModeOption.Windowed:
-			if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN:
-				DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED)
-				await get_tree().process_frame
-			DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+			if DisplayServer.window_get_mode() != DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED:
+				if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN:
+					DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED)
+					await get_tree().process_frame
+				DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 		OptionsData.WindowModeOption.Fullscreen:
 			if DisplayServer.window_get_mode() == DisplayServer.WindowMode.WINDOW_MODE_WINDOWED:
 				DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED)

@@ -7,6 +7,24 @@ const LATEST_OPTIONS_VERSION: int = 2
 ## 2: Added windowing modes.
 @export var options_version: int = 0
 
+const VOLUMES_RATIO_MIN: float = 0.0
+const VOLUMES_RATIO_MAX: float = 1.0
+const VOLUMES_RATIO_STEP: float = 0.01
+
+const VOLUMES_MULTIPLIER: float = 1.0
+
+const OVERALL_VOLUME_DEFAULT: float = 1.0
+@export var overall_volume: float = OVERALL_VOLUME_DEFAULT
+
+const MUSIC_VOLUME_DEFAULT: float = 1.0
+@export var music_volume: float = MUSIC_VOLUME_DEFAULT
+
+const SFX_VOLUME_DEFAULT: float = 1.0
+@export var sfx_volume: float = SFX_VOLUME_DEFAULT
+
+const VOICE_VOLUME_DEFAULT: float = 1.0
+@export var voice_volume: float = VOICE_VOLUME_DEFAULT
+
 enum GraphicsOptionsPresets {
 	HIGH,
 	MEDIUM,

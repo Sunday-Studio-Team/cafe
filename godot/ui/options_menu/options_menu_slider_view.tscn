@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cejq61xjx6sye"]
+
+[ext_resource type="Script" uid="uid://btvwjcr2lpc7l" path="res://ui/options_menu/options_menu_slider_view.gd" id="1_kg3kb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5naa7"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+
+[node name="OptionsMenuSliderView" type="MarginContainer" unique_id=1434606385 node_paths=PackedStringArray("_option_name_label", "_slider")]
+offset_right = 448.0
+offset_bottom = 55.0
+script = ExtResource("1_kg3kb")
+_option_name_label = NodePath("MarginContainer/HBoxContainer/Label")
+_slider = NodePath("MarginContainer/HBoxContainer/HSlider")
+
+[node name="Panel" type="Panel" parent="." unique_id=1924963664]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5naa7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=254389701]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=306176998]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=1450870077]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Option Label"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/HBoxContainer" unique_id=1444452837]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4

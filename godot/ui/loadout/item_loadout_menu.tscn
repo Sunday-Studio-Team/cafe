@@ -3,12 +3,72 @@
 [ext_resource type="PackedScene" uid="uid://dhttshpvbkayc" path="res://ui/loadout/loadout_menu_element.tscn" id="1_0rl37"]
 [ext_resource type="Script" uid="uid://dlnawqw3ep1l4" path="res://ui/loadout/item_loadout_menu.gd" id="1_7ango"]
 
-[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("available_items_container", "equipped_items_container", "confirm_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ango"]
+bg_color = Color(0.1882353, 0.31764707, 0.7490196, 0.88235295)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+expand_margin_left = 50.0
+expand_margin_top = 25.0
+expand_margin_right = 50.0
+expand_margin_bottom = 25.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbflg"]
+bg_color = Color(0.4509804, 0.7058824, 0.9019608, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 10
+expand_margin_right = 10.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6g3w"]
+bg_color = Color(0.32156864, 0.5137255, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4p33"]
+bg_color = Color(0.4509804, 0.7058824, 0.9019608, 1)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndpu2"]
+bg_color = Color(0.1882353, 0.31764707, 0.7490196, 1)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wej5g"]
+bg_color = Color(0.32156864, 0.5137255, 0.8, 1)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbh57"]
+bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs5tx"]
+bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
+
+[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
 script = ExtResource("1_7ango")
 element_scene = ExtResource("1_0rl37")
+root = NodePath("MarginContainer")
 available_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer")
 equipped_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer")
 confirm_button = NodePath("MarginContainer/VBoxContainer/ConfirmButton")
+item_hover_tooltip = NodePath("ItemHoverTooltip")
+item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
+item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
+item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Active/HBoxContainer/CooldownLabel")
+item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
+item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1351850692]
 anchors_preset = 15
@@ -16,8 +76,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 250
-theme_override_constants/margin_right = 250
+offset_transform_enabled = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=345839286]
 layout_mode = 2
@@ -25,15 +84,23 @@ alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=14682828]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ango")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=619312805]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 50
 
-[node name="SelectYourItems" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=64258063]
+[node name="SelectYourItems" type="RichTextLabel" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1473587798]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "SELECT YOUR ITEM(S)"
+theme_override_colors/default_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[b]SELECT YOUR ITEM(S)"
+fit_content = true
 horizontal_alignment = 1
 
 [node name="Available" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=282132923]
@@ -43,15 +110,18 @@ size_flags_horizontal = 4
 [node name="AvailableItemsTitle" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available" unique_id=1802022443]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gbflg")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItemsTitle" unique_id=124553075]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
+theme_override_font_sizes/font_size = 28
 text = "AVAILABLE"
 
 [node name="AvailableItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available" unique_id=394145303]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems" unique_id=1149520909]
 layout_mode = 2
@@ -80,18 +150,22 @@ size_flags_horizontal = 4
 [node name="EquippedItemsTitle" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=1816768305]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gbflg")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItemsTitle" unique_id=539219113]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
+theme_override_font_sizes/font_size = 28
 text = "EQUIPPED"
 
 [node name="EquippedItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=445986721]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems" unique_id=1279570546]
 layout_mode = 2
+theme_override_constants/h_separation = 10
 columns = 5
 
 [node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
@@ -106,5 +180,109 @@ layout_mode = 2
 [node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1608662931]
 layout_mode = 2
 size_flags_horizontal = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 25)
+offset_transform_visual_only = false
+theme_override_colors/font_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_t4p33")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ndpu2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wej5g")
 text = "CONFIRM"
+
+[node name="ItemHoverTooltip" type="PanelContainer" parent="." unique_id=2088283471]
+modulate = Color(1, 1, 1, 0.98039216)
+custom_minimum_size = Vector2(500, 250)
+custom_maximum_size = Vector2(500, 250)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -123.0
+offset_right = 251.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -1)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemHoverTooltip" unique_id=269649499]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer" unique_id=725533923]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_font_size = 53
+bbcode_enabled = true
+text = "[b]Item Name[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Active" type="PanelContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=31227346]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbh57")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemHoverTooltip/VBoxContainer/Active" unique_id=2121684596]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=269351974]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]ACTIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=2000028126]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=1203398786]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cs5tx")
+
+[node name="Label" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Passive" unique_id=352566929]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer" unique_id=851795990]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "item description (blah blah blah blah blah )"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1

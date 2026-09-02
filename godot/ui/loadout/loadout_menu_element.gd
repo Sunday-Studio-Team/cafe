@@ -1,12 +1,6 @@
 class_name LoadoutMenuElement
 extends Button
 
-enum Type {
-	AVAILABE,
-	EQUIPPED,
-}
-
-var type: Type
 var item: Item:
 	set(new_item):
 		item = new_item
@@ -18,7 +12,11 @@ var item: Item:
 
 
 func _ready() -> void:
-	if type == Type.AVAILABE:
-		toggle_mode = true
-	else:
-		toggle_mode = false
+	mouse_entered.connect(
+		func():
+			Global.hovered_loadout_menu_element = self,
+	)
+	mouse_exited.connect(
+		func():
+			Global.hovered_loadout_menu_element = null,
+	)

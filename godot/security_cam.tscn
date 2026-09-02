@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="5_jdgwh"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="6_0j8nf"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="7_ebrmn"]
+[ext_resource type="AudioStream" uid="uid://dr8s1vrva5psl" path="res://audio/whipped_cream.wav" id="9_ebrmn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3jiq"]
 albedo_color = Color(0.46034718, 0.46034718, 0.46034712, 1)
@@ -71,7 +72,7 @@ height = 0.02
 radial_segments = 4
 rings = 0
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disabled_timer_sprite", "disabled_timer_bar")]
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disabled_timer_sprite", "disabled_timer_bar", "whipped_cream_sound")]
 script = ExtResource("1_w3jiq")
 _shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
 spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
@@ -85,6 +86,7 @@ disable_sound = NodePath("DisableSound")
 disable_particles = NodePath("DisableParticles")
 disabled_timer_sprite = NodePath("DisabledTimerSprite")
 disabled_timer_bar = NodePath("DisabledTimerSprite/SubViewport/TextureProgressBar")
+whipped_cream_sound = NodePath("WhippedCreamSound")
 
 [node name="CaughtSound" type="AudioStreamPlayer3D" parent="." unique_id=706302561]
 stream = ExtResource("3_j0k3h")
@@ -214,5 +216,9 @@ explosiveness = 0.25
 randomness = 0.25
 process_material = SubResource("ParticleProcessMaterial_mjix0")
 draw_pass_1 = SubResource("CapsuleMesh_vn1tu")
+
+[node name="WhippedCreamSound" type="AudioStreamPlayer" parent="." unique_id=1088424431]
+stream = ExtResource("9_ebrmn")
+volume_db = 2.5
 
 [editable path="CameraAimerModel/Model/camera"]
