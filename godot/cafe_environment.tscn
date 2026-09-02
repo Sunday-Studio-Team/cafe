@@ -19,10 +19,10 @@
 [ext_resource type="ArrayMesh" uid="uid://dg7pb4va76uok" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
 [ext_resource type="ArrayMesh" uid="uid://f3vpqcxgpjle" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="20_ala11"]
-[ext_resource type="Texture2D" uid="uid://cl2g108lqa0bu" path="res://environment/textures/star floor.jpg" id="20_omxm3"]
 [ext_resource type="PackedScene" uid="uid://bkcevn46bhcie" path="res://Assets/chair/plastic_chair.tscn" id="22_kmdca"]
 [ext_resource type="PackedScene" uid="uid://brrcrumg8hxyp" path="res://Assets/trashcan/Modern Trash Bin Low Poly.glb" id="22_uftqg"]
 [ext_resource type="PackedScene" uid="uid://k2x3c55gi1fl" path="res://Assets/ATM/ATM Machine 3D Model.glb" id="23_ljlh3"]
+[ext_resource type="Texture2D" uid="uid://drjnv01m7oya4" path="res://environment/textures/coffeebusy.jpg" id="24_ppc62"]
 [ext_resource type="PackedScene" uid="uid://oopaxvnb4er8" path="res://Assets/cafe tables/cafe table.tscn" id="25_g2jch"]
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
@@ -389,9 +389,9 @@ material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3exxq"]
-albedo_texture = ExtResource("20_omxm3")
-uv1_scale = Vector3(3.06, 1.56, 2.26)
-uv1_offset = Vector3(-1.13, 0.34, 0)
+albedo_texture = ExtResource("24_ppc62")
+uv1_scale = Vector3(1.8, 1.8, 1.8)
+uv1_offset = Vector3(-0.2, -0.09, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_3exxq")
@@ -1963,7 +1963,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010906, -0.00016215755, -0.99995553, 1.0260102e-07, 1, -0.00016215035, 0.99995553, -1.01539825e-08, 0.00057010906, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.000570109, -0.00016215755, -0.9999554, 1.02601014e-07, 1, -0.00016215032, 0.9999554, -1.01539825e-08, 0.000570109, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
