@@ -390,8 +390,8 @@ size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3exxq"]
 albedo_texture = ExtResource("24_ppc62")
-uv1_scale = Vector3(1.8, 1.8, 1.8)
-uv1_offset = Vector3(-0.2, -0.09, 0)
+uv1_scale = Vector3(2.74, 2.74, 2.74)
+uv1_offset = Vector3(-0.83, -0.73, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_3exxq")
@@ -1963,7 +1963,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.000570109, -0.00016215755, -0.9999554, 1.02601014e-07, 1, -0.00016215032, 0.9999554, -1.01539825e-08, 0.000570109, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010894, -0.00016215755, -0.99995536, 1.0260101e-07, 1, -0.00016215032, 0.99995536, -1.01539825e-08, 0.00057010894, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
