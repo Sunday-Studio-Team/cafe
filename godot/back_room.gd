@@ -18,7 +18,7 @@ func _on_scene_switch_requested(scene: SceneSwitcher.GameScene) -> void:
 		
 func apply_texture(group: Array[Sprite3D], poster_slot: int) -> void:
 	var applied_texture := get_poster_path(poster_slot)
-	
+
 	for poster in group:
 		poster.texture = applied_texture
 
