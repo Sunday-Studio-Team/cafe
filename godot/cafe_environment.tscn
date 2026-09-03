@@ -104,6 +104,7 @@
 [ext_resource type="Texture2D" uid="uid://cajnyvi7pua8d" path="res://Assets/Street/pizza_box.png" id="89_edv2q"]
 [ext_resource type="PackedScene" uid="uid://dmuumticci3nh" path="res://Assets/old coffee machine/old_coffee_machine.tscn" id="93_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://d027k1reepg57" path="res://Assets/Cleaning supplies/cleaning_supplies.tscn" id="93_g2jch"]
+[ext_resource type="PackedScene" uid="uid://08twhhrq38wo" path="res://Assets/signs/entry_panel_2.tscn" id="105_vf5ik"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ala11"]
 transparency = 1
@@ -1213,7 +1214,7 @@ environment = ExtResource("82_4nsdn")
 [node name="CustomerArea" type="Node3D" parent="." unique_id=337821655]
 
 [node name="Tippy Standee" parent="CustomerArea" unique_id=1708982728 instance=ExtResource("84_pv1ha")]
-transform = Transform3D(-0.6698514, 0, -0.4430705, 0, 0.80312663, 0, 0.4430705, 0, -0.6698514, 7.4237614, 0.16133678, -0.49727488)
+transform = Transform3D(-0.6168352, 0, -0.40800312, 0, 0.73956215, 0, 0.40800312, 0, -0.6168352, 7.4237614, 0.16133678, -0.49727488)
 
 [node name="Bean Buddy" type="Sprite3D" parent="CustomerArea" unique_id=342906632]
 transform = Transform3D(0.15900739, 0, 0, 0, 0.15900743, 0, 0, 0, 0.15900739, -0.3887223, 1.7761464, -8.08975)
@@ -1227,9 +1228,6 @@ texture = ExtResource("85_tx4o1")
 
 [node name="Let\'s pay" parent="CustomerArea" unique_id=579902610 instance=ExtResource("1_qok1s")]
 transform = Transform3D(0.66925824, 0.023472827, 0.59345686, -0.004180076, 0.8942547, -0.030656196, -0.5939061, 0.020156927, 0.6689675, -1.4813719, -0.25505653, -1.1161604)
-
-[node name="CaifeSign" parent="CustomerArea" unique_id=2094984422 instance=ExtResource("2_5utbh")]
-transform = Transform3D(-0.088907875, 0, 0.99603987, 0, 1, 0, -0.99603987, 0, -0.088907875, 5.3371572, 0.8206909, -0.38349915)
 
 [node name="CaifeSign2" parent="CustomerArea" unique_id=115964136 instance=ExtResource("2_5utbh")]
 transform = Transform3D(0.6888597, 0, 0.7248947, 0, 1, 0, -0.7248947, 0, 0.6888597, -1.4008827, -0.40551677, -1.2090626)
@@ -1282,8 +1280,11 @@ area_size = Vector2(1.6194825, 2.7039185)
 [node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 62983403) index="2" unique_id=304376438]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
+[node name="linelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight/linelamp" parent_id_path=PackedInt32Array(988487720, 1199235157) index="0" unique_id=1332500483]
+visible = false
+
 [node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1917070567]
-transform = Transform3D(100.00001, 0, 2.7105054e-20, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 139.14665, -16.29895, 0)
+transform = Transform3D(100.00001, 0, 2.7105054e-20, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 166.05435, -59.084656, 0)
 light_color = Color(1, 0.3, 0.55666673, 1)
 light_energy = 5.99
 light_specular = 6.069
@@ -1455,7 +1456,7 @@ mesh = SubResource("BoxMesh_rkau7")
 transform = Transform3D(0.81930244, 0, -0.57336164, 0, 1, 0, 0.57336164, 0, 0.81930244, 2.491035, 0, -5.5838594)
 
 [node name="plastic chair3" parent="CustomerArea" unique_id=738810748 instance=ExtResource("22_kmdca")]
-transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 6.180391, 0, -7.242418)
+transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 6.4921713, 0, -7.566301)
 
 [node name="plastic chair" parent="CustomerArea" unique_id=818098487 instance=ExtResource("22_kmdca")]
 transform = Transform3D(-0.19892365, 0, 0.980015, 0, 1, 0, -0.980015, 0, -0.19892365, 1.4843868, 0, -2.4801116)
@@ -1491,7 +1492,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.94
 mesh = SubResource("TextMesh_vn1tu")
 
 [node name="glove sign" parent="CustomerArea" unique_id=185666047 instance=ExtResource("27_3xpao")]
-transform = Transform3D(-0.13227662, 0, -0.4580391, 0, 0.47675657, 0, 0.4580391, 0, -0.13227662, 7.7255273, 0.32075867, -9.13441)
+transform = Transform3D(0.25697747, 0, -0.40157127, 0, 0.47675654, 0, 0.40157127, 0, 0.25697747, 7.7255273, 0.32075867, -9.13441)
 
 [node name="Beanny Balloons" parent="CustomerArea" unique_id=1331156955 instance=ExtResource("29_wredj")]
 transform = Transform3D(-0.17955787, 0, -0.9837474, 0, 1, 0, 0.9837474, 0, -0.17955787, 7.210903, 1.2412802, -2.8805175)
@@ -1963,7 +1964,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701088, -0.00016215755, -0.99995506, 1.0260098e-07, 1, -0.00016215026, 0.99995506, -1.01539825e-08, 0.0005701088, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010865, -0.00016215755, -0.9999548, 1.0260095e-07, 1, -0.00016215023, 0.9999548, -1.01539825e-08, 0.00057010865, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2693,6 +2694,9 @@ transform = Transform3D(0.9995674, 0, 0.029411726, 0, 1, 0, -0.029411726, 0, 0.9
 
 [node name="Old Coffee Machine2" parent="." unique_id=755645669 instance=ExtResource("93_0cjwk")]
 transform = Transform3D(0.30321154, 0, -0.9529233, 0, 1, 0, 0.9529233, 0, 0.30321154, -3.3568115, 1.1409191, 9.130936)
+
+[node name="Entry Panel 2" parent="." unique_id=1262799385 instance=ExtResource("105_vf5ik")]
+transform = Transform3D(0.16910146, 0, -0.9855986, 0, 0.89321136, 0, 0.9855986, 0, 0.16910146, 5.893644, 3.0590515, -0.3496529)
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/FrontWindowAndDoor/glass window"]
