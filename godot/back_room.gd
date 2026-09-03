@@ -18,14 +18,11 @@ func _on_scene_switch_requested(scene: SceneSwitcher.GameScene) -> void:
 		
 func apply_texture(group: Array[Sprite3D], poster_slot: int) -> void:
 	var applied_texture := get_poster_path(poster_slot)
-	print("Slot ", poster_slot, " texture loaded: ", applied_texture)
-
+	
 	for poster in group:
-		print("Assigning to: ", poster.name)
 		poster.texture = applied_texture
 
 func get_poster_path(poster_type: int) -> Texture2D:
-	print("Global.day is: ", Global.day)
 	# Clamping so it won't fail after day 5. If more days are added increase this and add more posters in
 	var current_day: int = clamp(Global.day, 1, 5)  
 	var path := "res://Assets/Posters/day%d_poster%d.png" % [current_day, poster_type]
