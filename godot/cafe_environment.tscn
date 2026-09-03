@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bkcevn46bhcie" path="res://Assets/chair/plastic_chair.tscn" id="22_kmdca"]
 [ext_resource type="PackedScene" uid="uid://brrcrumg8hxyp" path="res://Assets/trashcan/Modern Trash Bin Low Poly.glb" id="22_uftqg"]
 [ext_resource type="PackedScene" uid="uid://k2x3c55gi1fl" path="res://Assets/ATM/ATM Machine 3D Model.glb" id="23_ljlh3"]
-[ext_resource type="Texture2D" uid="uid://drjnv01m7oya4" path="res://environment/textures/coffeebusy.jpg" id="24_ppc62"]
+[ext_resource type="Texture2D" uid="uid://er356iujlkii" path="res://environment/textures/lightbusycoffee.jpg" id="24_ppc62"]
 [ext_resource type="PackedScene" uid="uid://oopaxvnb4er8" path="res://Assets/cafe tables/cafe table.tscn" id="25_g2jch"]
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
@@ -1237,16 +1237,16 @@ transform = Transform3D(0.6888597, 0, 0.7248947, 0, 1, 0, -0.7248947, 0, 0.68885
 [node name="order here" parent="CustomerArea" unique_id=217684633 instance=ExtResource("3_a4lwu")]
 transform = Transform3D(-0.05020121, 0, 0.9987391, 0, 1, 0, -0.9987391, 0, -0.05020121, 2.949213, 1.3603295, 0.25712776)
 
-[node name="BigCustomerLights" parent="CustomerArea" unique_id=2103302147 instance=ExtResource("4_j0jbx")]
-transform = Transform3D(2.8963146, 0, 0, 0, 2.8963146, 0, 0, 0, 2.8963146, 3.4626575, 2.6481774, -3.3092804)
-
-[node name="AreaLight3D4" type="AreaLight3D" parent="CustomerArea/BigCustomerLights" unique_id=106209186]
-transform = Transform3D(0.34526634, 0, 0, 0, -1.5092072e-08, 0.34526634, 0, -0.34526634, -1.5092072e-08, -0.024024323, -0.11925888, 0.010626748)
+[node name="AreaLight3D4" type="AreaLight3D" parent="CustomerArea" unique_id=106209186]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 1, 0, -1, -4.3711392e-08, 3.3930755, 2.186302, -3.278502)
 light_color = Color(1, 0.95, 0, 1)
 light_energy = 5.0
 shadow_enabled = true
 area_range = 5.895
 area_size = Vector2(2.0486052, 2.8595924)
+
+[node name="BigCustomerLights" parent="CustomerArea" unique_id=2103302147 instance=ExtResource("4_j0jbx")]
+transform = Transform3D(2.8963146, 0, 0, 0, 2.8963146, 0, 0, 0, 2.8963146, 3.4626575, 2.6481774, -3.3092804)
 
 [node name="MediumLights" parent="CustomerArea" unique_id=988487720 instance=ExtResource("5_omxm3")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3.3665109, 2.0798194, -3.0821092)
@@ -1963,7 +1963,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010894, -0.00016215755, -0.99995536, 1.0260101e-07, 1, -0.00016215032, 0.99995536, -1.01539825e-08, 0.00057010894, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701088, -0.00016215755, -0.99995506, 1.0260098e-07, 1, -0.00016215026, 0.99995506, -1.01539825e-08, 0.0005701088, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
