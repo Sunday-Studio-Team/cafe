@@ -128,19 +128,6 @@ layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="SpillWarning" type="PanelContainer" parent="VBoxContainer" unique_id=337494662]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, -10)
-theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
-
-[node name="Label" type="Label" parent="VBoxContainer/SpillWarning" unique_id=1244531673]
-layout_mode = 2
-text = "⚠️ PLEASE MOP UP SPILL"
-horizontal_alignment = 1
-
 [node name="CamFeed" type="SubViewportContainer" parent="VBoxContainer" unique_id=2077053007]
 custom_minimum_size = Vector2(360, 270)
 layout_mode = 2
@@ -191,6 +178,26 @@ offset_transform_position_ratio = Vector2(-0.25, 2.5)
 layout_mode = 2
 offset_transform_position_ratio = Vector2(-0.25, 2.5)
 text = "+ 0.5⭐️ bonus"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CamFeed" unique_id=857449287]
+custom_minimum_size = Vector2(360, 270)
+layout_mode = 2
+
+[node name="SpillWarning" type="PanelContainer" parent="VBoxContainer/CamFeed/MarginContainer" unique_id=337494662]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(1, 0.25)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
+
+[node name="Label" type="Label" parent="VBoxContainer/CamFeed/MarginContainer/SpillWarning" unique_id=1244531673]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "⚠️
+SPILL"
+horizontal_alignment = 1
 
 [node name="OrderInfo" type="HBoxContainer" parent="VBoxContainer" unique_id=1829784571]
 layout_mode = 2

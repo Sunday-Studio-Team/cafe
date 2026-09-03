@@ -29,6 +29,8 @@ func _ready() -> void:
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]freecam[/i] toggles free cam mode. Useful for cinematic shots!
+- [i]freecamspeed <number>[/i] Sets free cam speed. Default is 1.0.
 - [i]wipesave[/i] wipes save (will automatically load into tutorial etc. on next run)
 - [i]startshift[/i] starts shift
 - [i]endshift[/i] ends shift
@@ -58,6 +60,8 @@ func _ready() -> void:
 (or tell us if any of the existing ones seem bugged D:)[/color]",
 	)
 
+	Console.add_command("freecam", toggle_freecam)
+	Console.add_command("freecamspeed", set_freecam_speed, ["speed"])
 	Console.add_command("wipesave", wipe_save)
 	Console.add_command("startshift", start_shift)
 	Console.add_command("bank", bank)
@@ -88,6 +92,15 @@ func _ready() -> void:
 func vo_test() -> void:
 	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
 
+func toggle_freecam() -> void:
+	Events.free_cam_toggled.emit()
+	if Global.free_camera_enabled:
+		Console.print_line("freecam enabled")
+	else:
+		Console.print_line("freecam disabled")
+
+func set_freecam_speed(speed: String) -> void:
+	Events.free_cam_set_speed.emit(float(speed))
 
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()

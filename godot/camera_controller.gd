@@ -10,15 +10,20 @@ const MOUSE_SENSITIVITY_SCALING_FACTOR: float = 1000.0
 
 var input_rotation: Vector3
 var mouse_input: Vector2
-var use_interpolation: bool = false
 
 
 func _input(event: InputEvent) -> void:
+	if Global.free_camera_enabled:
+		return
+	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not Global.in_ui:
 		mouse_input.x += -event.screen_relative.x * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 		mouse_input.y += -event.screen_relative.y * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 
 func _physics_process(_delta: float) -> void:
+	if Global.free_camera_enabled:
+		return
+	
 	if Global.in_ui:
 		return
 

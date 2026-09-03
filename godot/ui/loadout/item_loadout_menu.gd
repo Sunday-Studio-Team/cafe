@@ -7,6 +7,15 @@ extends CanvasLayer
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: Button
+# NOTE: OMG i never made this thing its own class cos it was only being used in
+# 1-2 places but ive had to redo it more times than i expected and its kind of
+# tedious . 0_0
+@export var item_hover_tooltip: Control
+@export var item_hover_tooltip_name: RichTextLabel
+@export var item_hover_tooltip_description: RichTextLabel
+@export var item_hover_tooltip_cooldown_label: RichTextLabel
+@export var item_hover_tooltip_passive_indicator: Control
+@export var item_hover_tooltip_active_indicator: Control
 
 var selected_available_item: Item = null
 
@@ -55,6 +64,8 @@ func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_just_pressed("pause"):
 		confirm_and_hide()
+
+	handle_item_hover_tooltip()
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
@@ -108,3 +119,27 @@ func confirm_and_hide() -> void:
 	t.tween_property(root, "offset_transform_position_ratio:y", 0.25, 0.1)
 	await t.finished
 	hide()
+
+
+func handle_item_hover_tooltip() -> void:
+	item_hover_tooltip.position = get_viewport().get_mouse_position()
+
+	var hovered_element: LoadoutMenuElement = Global.hovered_loadout_menu_element
+
+	if hovered_element != null:
+		var item: Item = hovered_element.item
+		if not item == null:
+			item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
+			item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
+			if item.is_active_item:
+				item_hover_tooltip_passive_indicator.hide()
+				item_hover_tooltip_active_indicator.show()
+				item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
+			else:
+				item_hover_tooltip_passive_indicator.show()
+				item_hover_tooltip_active_indicator.hide()
+
+	item_hover_tooltip.visible = (
+			hovered_element != null and hovered_element.item != null
+			and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
+	)
