@@ -34,17 +34,11 @@
 [ext_resource type="PackedScene" uid="uid://djqbbryv3wcns" path="res://Assets/ceiling lights/ceiling light.tscn" id="32_6txgl"]
 [ext_resource type="PackedScene" uid="uid://beba4d1fjp75g" path="res://models/tippy_boss_model.tscn" id="32_dlkxn"]
 [ext_resource type="Script" uid="uid://cp3g1piwywodl" path="res://tippy_statue.gd" id="32_itkf6"]
-[ext_resource type="Material" uid="uid://hpnnrlca8tw0" path="res://Assets/Posters/time.tres" id="33_3ide6"]
 [ext_resource type="PackedScene" uid="uid://dfigy7bvip3cu" path="res://Assets/Locker/small_lockers.tscn" id="33_kmdca"]
 [ext_resource type="PackedScene" uid="uid://cpp4dkdwca17b" path="res://Assets/Table/toolbox_and_table.tscn" id="34_02vyw"]
-[ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
 [ext_resource type="PackedScene" uid="uid://cbn6neugky8kn" path="res://Assets/signs/entry_panel_1.tscn" id="34_ppc62"]
-[ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="35_dmru2"]
 [ext_resource type="PackedScene" uid="uid://cbfqeif23m53k" path="res://Assets/signs/go_tip.tscn" id="35_ppc62"]
 [ext_resource type="Texture2D" uid="uid://boma1g3mo73eo" path="res://environment/textures/grey carpet.png" id="36_edv2q"]
-[ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
-[ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="37_vf5ik"]
-[ext_resource type="Texture2D" uid="uid://d0bcxshct7olx" path="res://Assets/Posters/gun watching.png" id="38_on62l"]
 [ext_resource type="Texture2D" uid="uid://ciwcmxb4pqx1t" path="res://environment/textures/stain 2.png" id="39_5utbh"]
 [ext_resource type="Texture2D" uid="uid://c6fkp2w01emjt" path="res://environment/textures/lights vent cieling.png" id="39_yftd0"]
 [ext_resource type="PackedScene" uid="uid://ttq5pes58y07" path="res://Assets/register machine/Low Poly Eftpos Machine.glb" id="40_aslp2"]
@@ -100,6 +94,7 @@
 [ext_resource type="Texture2D" uid="uid://pr38ldmsqrtg" path="res://Assets/Street/cone_2.png" id="87_tx4o1"]
 [ext_resource type="Texture2D" uid="uid://1e3evbya2fdx" path="res://Assets/Street/fire_hydrant.png" id="88_li8ef"]
 [ext_resource type="Texture2D" uid="uid://crgc6iohnh5ot" path="res://Assets/Street/mailbox.png" id="88_ljlh3"]
+[ext_resource type="Script" uid="uid://kiwocj0xcfqq" path="res://back_room.gd" id="88_on62l"]
 [ext_resource type="Texture2D" uid="uid://bn8mi8oocskaq" path="res://Assets/Street/hotdog_sign.png" id="88_uftqg"]
 [ext_resource type="Texture2D" uid="uid://cajnyvi7pua8d" path="res://Assets/Street/pizza_box.png" id="89_edv2q"]
 [ext_resource type="PackedScene" uid="uid://dmuumticci3nh" path="res://Assets/old coffee machine/old_coffee_machine.tscn" id="93_0cjwk"]
@@ -1280,7 +1275,7 @@ area_size = Vector2(1.6194825, 2.7039185)
 [node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 688347564) index="2" unique_id=240799594]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
-[node name="linelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight/linelamp" parent_id_path=PackedInt32Array(988487720, 1199235157) index="0" unique_id=1332500483]
+[node name="linelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight/linelamp" parent_id_path=PackedInt32Array(988487720, 1106364900) index="0" unique_id=1151234417]
 visible = false
 
 [node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1917070567]
@@ -1964,7 +1959,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701086, -0.00016215755, -0.9999547, 1.02600936e-07, 1, -0.0001621502, 0.9999547, -1.01539825e-08, 0.0005701086, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010836, -0.00016215755, -0.9999543, 1.0260089e-07, 1, -0.00016215014, 0.9999543, -1.01539825e-08, 0.00057010836, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2265,6 +2260,7 @@ navigation_mesh = SubResource("NavigationMesh_edv2q")
 
 [node name="BackRoom" type="Node3D" parent="NavigationRegion3D" unique_id=305847678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+script = ExtResource("88_on62l")
 
 [node name="Mugs Milk Sugar Light5" parent="NavigationRegion3D/BackRoom" unique_id=2114931379 instance=ExtResource("72_omxm3")]
 transform = Transform3D(0.30591875, 0, -0.9520577, 0, 1, 0, 0.9520577, 0, 0.30591875, -11.939397, 0.6052749, -1.2373323)
@@ -2442,33 +2438,23 @@ spot_angle = 38.76
 
 [node name="poster1_type1" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=791708533]
 transform = Transform3D(0.11596312, -0.0007790586, 0, 0.0007790588, 0.11596312, 0, 0, 0, 0.11596574, 2.720026, 1.6392398, -4.7883887)
-material_override = ExtResource("33_3ide6")
 shaded = true
-texture = ExtResource("34_bith1")
 
 [node name="poster2_type1" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=725593213]
 transform = Transform3D(-0.11594819, 0.0020175104, -1.0136513e-08, 0.0020175104, 0.11594819, 1.7637636e-10, 1.0138047e-08, 0, -0.11596574, -2.9363172, 1.4923304, 0.96424294)
-material_override = ExtResource("33_3ide6")
 shaded = true
-texture = ExtResource("34_bith1")
 
 [node name="poster4_type2" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=180610258]
 transform = Transform3D(-0.11595539, -0.0015491113, -1.0137143e-08, -0.0015491113, 0.11595539, -1.3542761e-10, 1.0138047e-08, 0, -0.11596574, 2.0290675, 1.450106, 0.96424294)
-material_override = ExtResource("35_dmru2")
 shaded = true
-texture = ExtResource("36_ppc62")
 
 [node name="poster7_type3" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=1642206506]
 transform = Transform3D(0.115964636, 0.00050575804, 0, -0.00050575804, 0.115964636, 0, 0, 0, 0.11596574, 5.297222, 1.5840777, -4.7949424)
-material_override = ExtResource("37_vf5ik")
 shaded = true
-texture = ExtResource("38_on62l")
 
 [node name="poster8_type3" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=2114589717]
 transform = Transform3D(-0.11593241, 0.00277999, -5.5863296e-09, 0.00277999, 0.11593241, 1.3395685e-10, 5.5879354e-09, 0, -0.11596574, 4.603283, 1.457395, 0.90505695)
-material_override = ExtResource("37_vf5ik")
 shaded = true
-texture = ExtResource("38_on62l")
 
 [node name="stain" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=714646856]
 transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, 2.2398763, 1.5644994, 0.9870186)
@@ -2490,27 +2476,19 @@ texture = ExtResource("39_5utbh")
 
 [node name="poster9_type3" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=1417879894]
 transform = Transform3D(-5.6616054e-09, 0, -0.12952244, -0.0009183418, 0.12951918, 4.014199e-11, 0.12951918, 0.0009183418, -5.661463e-09, -7.2233624, 1.3688644, -6.326212)
-material_override = ExtResource("37_vf5ik")
 shaded = true
-texture = ExtResource("38_on62l")
 
 [node name="poster6_type2" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=367825827]
 transform = Transform3D(0.15036875, -0.00072672014, 0, 0.00072672014, 0.15036875, 0, 0, 0, 0.1503705, -5.991908, 1.4720756, -4.785888)
-material_override = ExtResource("35_dmru2")
 shaded = true
-texture = ExtResource("36_ppc62")
 
 [node name="poster5_type2" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=1301248795]
 transform = Transform3D(-6.572903e-09, 0, 0.1503705, 0.0012303937, 0.15036546, 5.378221e-11, -0.15036546, 0.0012303937, -6.572683e-09, -12.7878065, 1.4753662, -1.8746128)
-material_override = ExtResource("35_dmru2")
 shaded = true
-texture = ExtResource("36_ppc62")
 
 [node name="poster3_type1" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=1372115444]
 transform = Transform3D(0.16055132, -0.0010343428, 0, 0.0010343428, 0.1605513, 0, 0, 0, 0.16055465, -10.080574, 1.4840565, -12.98291)
-material_override = ExtResource("33_3ide6")
 shaded = true
-texture = ExtResource("34_bith1")
 
 [node name="WallPieceLong2" parent="NavigationRegion3D/BackRoom" unique_id=1928730076 instance=ExtResource("8_qboto")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6.446703, 0, 1.0000005)
