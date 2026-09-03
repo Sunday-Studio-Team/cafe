@@ -13,11 +13,11 @@ enum State {
 
 @export var typing_rich_text_label: RichTextLabel
 @export_group("BBCode")
-@export var past_words_correct_letters_bbcode_open: String = "[color=green]"
+@export var past_words_correct_letters_bbcode_open: String = "[color=forest_green]"
 @export var past_words_correct_letters_bbcode_close: String = "[/color]"
-@export var current_word_previous_letters_bbcode_open: String = "[b][color=green]"
+@export var current_word_previous_letters_bbcode_open: String = "[b][color=forest_green]"
 @export var current_word_previous_letters_bbcode_close: String = "[/color][/b]"
-@export var current_word_next_letter_bbcode_open: String = "[b][shake level=15][color=yellow]"
+@export var current_word_next_letter_bbcode_open: String = "[b][shake level=15][color=dark_orange]"
 @export var current_word_next_letter_bbcode_close: String = "[/color][/shake][/b]"
 @export var current_word_future_letters_bbcode_open: String = "[b][shake level=15][color=red]"
 @export var current_word_future_letters_bbcode_close: String = "[/color][/shake][/b]"
