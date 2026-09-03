@@ -11,10 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://ck7cugi1dyoru" path="res://sprites/typing_minigame/Top_lightning.png" id="7_36uwy"]
 [ext_resource type="Texture2D" uid="uid://432v4ybtihg4" path="res://sprites/typing_minigame/sato_avoid.png" id="7_m3euw"]
 [ext_resource type="Texture2D" uid="uid://j0ifa67ft0qy" path="res://sprites/typing_minigame/sato_numb.png" id="8_0qatm"]
-[ext_resource type="Texture2D" uid="uid://dfkb41pknhde4" path="res://sprites/customers/typing_minigame_portraits/nurse.png" id="10_0qatm"]
+[ext_resource type="Texture2D" uid="uid://dfkb41pknhde4" path="res://sprites/customers/typing_minigame_portraits/nurse_angry.png" id="10_0qatm"]
 [ext_resource type="Texture2D" uid="uid://27dlmtm0sp81" path="res://sprites/typing_minigame/bottom_lightning.png" id="10_6668d"]
+[ext_resource type="Texture2D" uid="uid://w56cl8t24vpl" path="res://sprites/typing_minigame/speech_bubbles/Iwantarefund.png" id="10_d1drf"]
 [ext_resource type="Texture2D" uid="uid://c8sog3d01kv6q" path="res://sprites/typing_minigame/You.png" id="11_7gik8"]
-[ext_resource type="Texture2D" uid="uid://d0wpqtljemans" path="res://sprites/typing_minigame/coffee_tastes_like_dirt.png" id="12_6u2o6"]
+[ext_resource type="Texture2D" uid="uid://dfvqrxbcob6ni" path="res://sprites/typing_minigame/speech_bubbles/wantmoneyback.png" id="11_jqlkh"]
+[ext_resource type="Texture2D" uid="uid://d0wpqtljemans" path="res://sprites/typing_minigame/speech_bubbles/coffee_tastes_like_dirt.png" id="12_6u2o6"]
 [ext_resource type="Texture2D" uid="uid://bu5q1ojwylv3e" path="res://sprites/typing_minigame/tippygun.png" id="13_6u2o6"]
 [ext_resource type="Texture2D" uid="uid://ceiw0jbdiie6x" path="res://sprites/typing_minigame/typeurresponse.png" id="14_6668d"]
 [ext_resource type="AudioStream" uid="uid://nhy7unwkdkqn" path="res://audio/typing/key_stroke.mp3" id="16_7gik8"]
@@ -44,6 +46,7 @@ customer_dialog_view = NodePath("VBoxContainer/TypingMinigameCustomerDialogView"
 instructions_container = NodePath("VBoxContainer/InstructionsContainer")
 sentence_container = NodePath("BottomSegment/DialogueContainer/TypingSectionContainer/SentenceHFlowContainer")
 sato_expressions = Array[Texture2D]([ExtResource("6_ody48"), ExtResource("7_m3euw"), ExtResource("8_0qatm")])
+speech_bubbles = Array[Texture2D]([ExtResource("12_6u2o6"), ExtResource("10_d1drf"), ExtResource("11_jqlkh")])
 sato_container = NodePath("VBoxContainer2/SatoContainer")
 customer_container = NodePath("VBoxContainer2/CustomerContainer")
 tippy_group = NodePath("BottomSegment/TippyGroup")
@@ -207,6 +210,7 @@ theme_override_constants/margin_bottom = 64
 
 [node name="SentenceHFlowContainer" type="HFlowContainer" parent="BottomSegment/DialogueContainer/TypingSectionContainer" unique_id=1211199840]
 layout_mode = 2
+theme_override_constants/h_separation = 4
 alignment = 1
 
 [node name="TippyGroup" type="Control" parent="BottomSegment" unique_id=2095585535]
