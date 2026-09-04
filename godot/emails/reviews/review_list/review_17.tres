@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://b5ky2s7ykw53i"]
 
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_6nuwu"]
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_fjlux"]
-[ext_resource type="Texture2D" uid="uid://caa2pqubtoy01" path="res://emails/reviews/profile_pics/kid.tres" id="2_voa3p"]
+[ext_resource type="Resource" uid="uid://cjkc7rsvwcbej" path="res://resources/customers/kid_detective.tres" id="2_j66dj"]
 
 [resource]
 script = ExtResource("1_fjlux")
@@ -16,5 +17,5 @@ Or is it using this cafe as a trial run, set on getting smarter and smarter unti
 Or maybe… Boogle just doesn’t know what they’re doing and AI still sucks.
 
 Mark my words, I’ll uncover what’s going on here."
-sprites = Array[AtlasTexture]([ExtResource("2_voa3p")])
+customer_sprite_data_options = Array[ExtResource("1_6nuwu")]([ExtResource("2_j66dj")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

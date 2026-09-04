@@ -9,6 +9,7 @@ extends Node
 @export var _graphics_preset_option_view: OptionsMenuOptionView
 @export var _window_mode_option_view: OptionsMenuOptionView
 @export var _vsync_mode_option_view: OptionsMenuOptionView
+@export var _mouse_sensitivity_slider_view: OptionsMenuSliderView
 @export var _crosshair_option_view: OptionsMenuOptionView
 @export var _camera_motion_option_view: OptionsMenuOptionView
 # Keybinds
@@ -90,16 +91,19 @@ func _process(delta: float) -> void:
 func _setup_option_views() -> void:
 	_overall_volume_slider_view.set_label("Overall Volume")
 	_overall_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_overall_volume_slider_view.set_slider_default_value(_options_data.OVERALL_VOLUME_DEFAULT)
 	_overall_volume_slider_view.set_slider_value(_options_data.overall_volume)
 	_overall_volume_slider_view.changed_value.connect(_on_overall_volume_slider_view_changed_value)
 	
 	_music_volume_slider_view.set_label("Music Volume")
 	_music_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_music_volume_slider_view.set_slider_default_value(_options_data.MUSIC_VOLUME_DEFAULT)
 	_music_volume_slider_view.set_slider_value(_options_data.music_volume)
 	_music_volume_slider_view.changed_value.connect(_on_music_volume_slider_view_changed_value)
 
 	_voice_volume_slider_view.set_label("Voice Volume")
 	_voice_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_voice_volume_slider_view.set_slider_default_value(_options_data.VOICE_VOLUME_DEFAULT)
 	_voice_volume_slider_view.set_slider_value(_options_data.voice_volume)
 	_voice_volume_slider_view.changed_value.connect(_on_voice_volume_slider_view_changed_value)
 	
@@ -117,6 +121,12 @@ func _setup_option_views() -> void:
 	_vsync_mode_option_view.set_dropdown_options(_vsync_options)
 	_vsync_mode_option_view.set_selected_dropdown_option((_options_data.vsync_option as int))
 	_vsync_mode_option_view.changed_option.connect(_on_vsync_mode_option_view_changed_option)
+
+	_mouse_sensitivity_slider_view.set_label("Mouse Look Sensitivity")
+	_mouse_sensitivity_slider_view.set_slider_min_max_values(_options_data.MOUSE_SENSITIVITY_MIN, _options_data.MOUSE_SENSITIVITY_MAX, _options_data.MOUSE_SENSITIVITY_STEP)
+	_mouse_sensitivity_slider_view.set_slider_default_value(_options_data.MOUSE_SENSITIVITY_DEFAULT)
+	_mouse_sensitivity_slider_view.set_slider_value(_options_data.mouse_sensitivity)
+	_mouse_sensitivity_slider_view.changed_value.connect(_on_mouse_sensitivity_slider_view_changed_value)
 
 	_crosshair_option_view.set_label("Crosshair")
 	_crosshair_option_view.set_dropdown_options(_crosshair_options)
@@ -204,6 +214,10 @@ func _on_window_mode_option_view_changed_option(index: int) -> void:
 func _on_vsync_mode_option_view_changed_option(index: int) -> void:
 	_options_data.vsync_option = (index as OptionsData.VsyncOption)
 	_options_data.apply_options()
+
+func _on_mouse_sensitivity_slider_view_changed_value(value: float) -> void:
+	_options_data.mouse_sensitivity = value
+	_apply_options_deferred()
 
 func _on_crosshair_option_view_changed_option(index: int) -> void:
 	_options_data.crosshair_option = (index as OptionsData.CrosshairOption)

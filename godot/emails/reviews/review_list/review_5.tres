@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://cpw7ijx0bme0v"]
 
+[ext_resource type="Resource" uid="uid://bcy3oe0q78kh" path="res://resources/customers/art_student.tres" id="1_4hwxy"]
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_pbvtb"]
-[ext_resource type="Texture2D" uid="uid://b2pj44etaxwsr" path="res://emails/reviews/profile_pics/art_student.tres" id="2_pbvtb"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_mt1xy"]
 
 [resource]
 script = ExtResource("1_pbvtb")
 username = "mochemist"
 rating = 2.5
 review_content = "I only stop by this place because its so close to the subway I take for university but I wish it was a better cafe. I cant study here and the drinks always get mixed up when I order through those AI baristas. That said shout outs to the barista, the drink always comes out great when they are able to make it themselves."
-sprites = Array[AtlasTexture]([ExtResource("2_pbvtb")])
+customer_sprite_data_options = Array[ExtResource("2_mt1xy")]([ExtResource("1_4hwxy")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

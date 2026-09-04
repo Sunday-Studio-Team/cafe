@@ -91,9 +91,9 @@ var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
-var customer_sprites: Array[CustomerSprite]
+var customer_sprites: Array[CustomerSpriteData]
 ## the sprites of customers that are in the cafe right now
-var customer_sprites_in_use: Array[CustomerSprite]
+var customer_sprites_in_use: Array[CustomerSpriteData]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0

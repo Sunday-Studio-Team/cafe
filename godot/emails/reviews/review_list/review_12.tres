@@ -1,8 +1,9 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://6jjfjhyutpob"]
 
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_kws1w"]
-[ext_resource type="Texture2D" uid="uid://lwu3lwyp45j0" path="res://emails/reviews/profile_pics/nurse.tres" id="2_yakkn"]
-[ext_resource type="Texture2D" uid="uid://dcde60b6p1nkl" path="res://emails/reviews/profile_pics/salesman.tres" id="3_l5x5j"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_ntcib"]
+[ext_resource type="Resource" uid="uid://ddtueraer1llr" path="res://resources/customers/nurse.tres" id="2_nfvvp"]
+[ext_resource type="Resource" uid="uid://d2i6j7ffdnivq" path="res://resources/customers/salesman.tres" id="3_nfvvp"]
 
 [resource]
 script = ExtResource("1_kws1w")
@@ -16,5 +17,5 @@ That’s it.
 
 That’s the review.
 "
-sprites = Array[AtlasTexture]([ExtResource("2_yakkn"), ExtResource("3_l5x5j")])
+customer_sprite_data_options = Array[ExtResource("1_ntcib")]([ExtResource("2_nfvvp"), ExtResource("3_nfvvp")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

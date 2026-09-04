@@ -13,6 +13,7 @@ extends TypingMinigameVariant
 
 @export_category("New UI Stuff")
 @export var sato_expressions:Array[Texture2D]
+@export var speech_bubbles:Array[Texture2D]
 @export var sato_container:TextureRect
 @export var customer_container:TextureRect
 @export var tippy_group:Control
@@ -32,6 +33,7 @@ var _active_typing_section_index: int
 
 func start_minigame_variant(customer: Customer) -> void:
 	sato_container.texture = sato_expressions.pick_random()
+	speech_bubble_texture.texture = speech_bubbles.pick_random()
 	instructions_container.visible = false
 	if customer:
 		customer_container.texture = customer.customer_sprite_resource.typing_minigame_portrait

@@ -51,6 +51,13 @@ enum VsyncOption {
 
 @export var vsync_option: VsyncOption = VsyncOption.On
 
+const MOUSE_SENSITIVITY_MIN: float = 0.01
+const MOUSE_SENSITIVITY_MAX: float = 1.0
+const MOUSE_SENSITIVITY_STEP: float = 0.01
+const MOUSE_SENSITIVITY_DEFAULT: float = 0.5
+
+@export var mouse_sensitivity: float = MOUSE_SENSITIVITY_DEFAULT
+
 enum CrosshairOption {
 	On,
 	Off,
@@ -95,7 +102,7 @@ const DEFAULT_PAUSE_EXIT_MENU_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_ESCAPE
 func _init() -> void:
 	_reset_all_keybinds()
 
-func apply_options() -> void:	
+func apply_options() -> void:
 	Events.game_options_changed.emit(self)
 	
 	_set_action_first_key_input_event(&"move_forward", move_forward_action_physical_keycode)

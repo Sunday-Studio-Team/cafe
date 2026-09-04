@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="CustomerSprite" format=3 uid="uid://dncqqxl1p540w"]
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://dncqqxl1p540w"]
 
-[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/base_customer_sprite.gd" id="1_rfoak"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_rfoak"]
 [ext_resource type="Texture2D" uid="uid://dp3ya7htqwhu2" path="res://sprites/customers/goth.png" id="2_rfoak"]
-[ext_resource type="Texture2D" uid="uid://fba64dxuxjx0" path="res://sprites/customers/typing_minigame_portraits/goth.png" id="3_u58r2"]
+[ext_resource type="Texture2D" uid="uid://fba64dxuxjx0" path="res://sprites/customers/typing_minigame_portraits/goth_angry.png" id="3_u58r2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfoak"]
+atlas = ExtResource("2_rfoak")
+region = Rect2(-14.107498, -37.462494, 351.405, 351.405)
 
 [resource]
 script = ExtResource("1_rfoak")
 customer_name = "Elegant Goth Lady"
 sprite = ExtResource("2_rfoak")
 typing_minigame_portrait = ExtResource("3_u58r2")
+email_crop_size_ratio = 0.685
+email_crop_center_ratio = Vector2(0.315, 0.135)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_rfoak")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"

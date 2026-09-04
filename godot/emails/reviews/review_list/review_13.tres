@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://bam017oumnie5"]
 
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_b4gr6"]
-[ext_resource type="Texture2D" uid="uid://df1k3ngkeq7ph" path="res://emails/reviews/profile_pics/punk.tres" id="2_05ou4"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_mvbay"]
+[ext_resource type="Resource" uid="uid://cj4xda51tva2" path="res://resources/customers/punk.tres" id="2_pbn00"]
 
 [resource]
 script = ExtResource("1_b4gr6")
@@ -10,5 +11,5 @@ rating = 1.0
 review_content = "I used to enjoy coming to this cafe, getting a drink, and playing music for other customers afterwards, but now everything's changed. There used to be warmth, smiles, and plenty of friendly people. All of that is gone now.
 
 "
-sprites = Array[AtlasTexture]([ExtResource("2_05ou4")])
+customer_sprite_data_options = Array[ExtResource("1_mvbay")]([ExtResource("2_pbn00")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://cftpsp6wltdmh"]
+
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_xupmt"]
+[ext_resource type="Texture2D" uid="uid://3wf47u58crsw" path="res://sprites/customers/comic guy.png" id="2_xupmt"]
+[ext_resource type="Texture2D" uid="uid://bqbd2u08h7ge0" path="res://sprites/customers/typing_minigame_portraits/comic_guy_angry.png" id="3_rf4nh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xupmt"]
+atlas = ExtResource("2_xupmt")
+region = Rect2(-2.819992, -28.46, 302.68, 302.68)
+
+[resource]
+script = ExtResource("1_xupmt")
+customer_name = "Comic Guy"
+sprite = ExtResource("2_xupmt")
+typing_minigame_portrait = ExtResource("3_rf4nh")
+email_crop_size_ratio = 0.805
+email_crop_center_ratio = Vector2(0.395, 0.12)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_xupmt")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"

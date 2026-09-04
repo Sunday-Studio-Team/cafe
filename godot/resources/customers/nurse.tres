@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="CustomerSprite" format=3 uid="uid://ddtueraer1llr"]
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://ddtueraer1llr"]
 
-[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/base_customer_sprite.gd" id="1_whv1p"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_whv1p"]
 [ext_resource type="Texture2D" uid="uid://cy078iylaiw0b" path="res://sprites/customers/nurse.png" id="2_whv1p"]
-[ext_resource type="Texture2D" uid="uid://dfkb41pknhde4" path="res://sprites/customers/typing_minigame_portraits/nurse.png" id="3_mn2bc"]
+[ext_resource type="Texture2D" uid="uid://dfkb41pknhde4" path="res://sprites/customers/typing_minigame_portraits/nurse_angry.png" id="3_mn2bc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whv1p"]
+atlas = ExtResource("2_whv1p")
+region = Rect2(101.5625, -82.9375, 421.875, 421.875)
 
 [resource]
 script = ExtResource("1_whv1p")
 customer_name = "Nurse"
 sprite = ExtResource("2_whv1p")
 typing_minigame_portrait = ExtResource("3_mn2bc")
+email_crop_size_ratio = 0.675
+email_crop_center_ratio = Vector2(0.5, 0.125)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_whv1p")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"
