@@ -5,11 +5,12 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5naa7"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 
-[node name="OptionsMenuSliderView" type="MarginContainer" unique_id=1434606385 node_paths=PackedStringArray("_option_name_label", "_slider")]
+[node name="OptionsMenuSliderView" type="MarginContainer" unique_id=1434606385 node_paths=PackedStringArray("_option_name_label", "_reset_button", "_slider")]
 offset_right = 448.0
 offset_bottom = 55.0
 script = ExtResource("1_kg3kb")
 _option_name_label = NodePath("MarginContainer/HBoxContainer/Label")
+_reset_button = NodePath("MarginContainer/HBoxContainer/MarginContainer/ResetButton")
 _slider = NodePath("MarginContainer/HBoxContainer/HSlider")
 
 [node name="Panel" type="Panel" parent="." unique_id=1924963664]
@@ -33,6 +34,16 @@ text = "Option Label"
 fit_content = true
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=1717372046]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=926401984]
+visible = false
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Reset"
 
 [node name="HSlider" type="HSlider" parent="MarginContainer/HBoxContainer" unique_id=1444452837]
 layout_mode = 2
