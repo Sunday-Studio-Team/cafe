@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dg6mtco6uo06" path="res://Assets/cup w pens/cup_with_pens.tscn" id="5_upty0"]
 [ext_resource type="PackedScene" uid="uid://moxt1235cxs8" path="res://Assets/crane/cranes.tscn" id="6_bn8wp"]
 [ext_resource type="PackedScene" uid="uid://c3gk12fh1bx5y" path="res://Assets/chinese deco/New Kitty (1).glb" id="6_lrwc4"]
+[ext_resource type="PackedScene" uid="uid://ko1bcwrjfvqi" path="res://Assets/lamps/lamp_2.tscn" id="7_322rb"]
 [ext_resource type="PackedScene" uid="uid://v5xwxv8wthdc" path="res://Assets/chinese deco/Blue Carp.glb" id="7_vf3xh"]
 [ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
 [ext_resource type="PackedScene" uid="uid://cuphhyfq8nb83" path="res://Assets/chinese deco/Greenfish (1).glb" id="9_7hob8"]
@@ -355,7 +356,6 @@ shape = SubResource("BoxShape3D_8n35f")
 
 [node name="NewShopItemsPrompt" type="Label3D" parent="." unique_id=1744972095]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41726112, 1.4025844, -0.1311822)
-visible = false
 billboard = 2
 text = "❗️🛒"
 font_size = 64
@@ -431,13 +431,25 @@ transform = Transform3D(-0.1013288, 1.8829387e-13, -0.9948529, -0.99485177, -3.5
 transform = Transform3D(-1, 3.388132e-21, -8.742277e-08, -8.742278e-08, -3.5762793e-07, 1, -3.1264823e-14, 1, 3.5762793e-07, 0.8566165, 0.3616045, 1.2931986e-07)
 
 [node name="Paper Crane" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" index="0" unique_id=1799707030]
-transform = Transform3D(-0.023995519, 2.8413485e-14, -0.9997112, -2.841353e-14, 0.99999887, 2.9103656e-14, 0.9997116, 2.9103693e-14, -0.023995757, 0.880621, 0.675826, -1.1029525)
+transform = Transform3D(-0.03119418, 3.6937575e-14, -1.2996256, -3.693761e-14, 1.3, 3.7834804e-14, 1.2996256, 3.7834837e-14, -0.03119418, 0.880621, 0.675826, -1.1029525)
 
 [node name="Paper Crane_001" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" index="1" unique_id=1849270918]
-transform = Transform3D(-0.40670684, 2.596489e-14, -0.91355836, -2.5964895e-14, 0.99999875, 3.9980948e-14, 0.91355777, 3.9980985e-14, -0.40670606, 0.9098658, 1.1006807, -1.3919946)
+transform = Transform3D(-0.5287193, 3.3754392e-14, -1.1876261, -3.3754395e-14, 1.3, 5.1975368e-14, 1.1876261, 5.197537e-14, -0.5287193, 0.9098658, 1.1006807, -1.3919946)
 
 [node name="Paper Crane_002" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" index="2" unique_id=634688304]
-transform = Transform3D(-0.7758685, -1.7931095e-14, 0.63089454, 1.7931106e-14, 0.99999905, 5.047317e-14, -0.63089406, 5.0473192e-14, -0.77586764, 1.5557988, 0.78761536, -0.110487044)
+transform = Transform3D(-1.0086293, -2.3310421e-14, 0.82016253, 2.3310447e-14, 1.3, 6.5615224e-14, -0.82016253, 6.561523e-14, -1.0086293, 1.5557988, 0.78761536, -0.110487044)
+
+[node name="Lamp2" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" unique_id=427744705 instance=ExtResource("7_322rb")]
+transform = Transform3D(0.87091565, -1.3552527e-20, -0.49143207, -1.3967354e-14, 0.999999, -2.4752917e-14, 0.49143252, 2.8421708e-14, 0.87091476, 1.8111845, 1.380064, 0.2798829)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes/Lamp2" unique_id=725016078]
+transform = Transform3D(1, 1.623552e-22, 1.1920929e-07, 0, 1.0000011, 8.1409436e-24, 0, -6.4623485e-27, 1.0000011, -0.22595239, 0.21122968, 0.039184988)
+light_color = Color(1, 0.7176471, 0.36078432, 1)
+light_energy = 1.045
+light_indirect_energy = 0.525
+shadow_enabled = true
+omni_range = 0.316
+omni_attenuation = 0.6
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1381647886]
 transform = Transform3D(-0.8342353, 0, 0.5514086, 0, 1, 0, -0.5514086, 0, -0.8342353, 0.25860378, 1.0087188, 0.071932405)
@@ -591,23 +603,26 @@ transform = Transform3D(0.02096123, 0.0046336637, 0.0007163184, 0.0004150331, 0.
 transform = Transform3D(0.9648877, 0, -0.26266277, 0, 1, 0, 0.26266277, 0, 0.9648877, 1.6843133, 0.8665496, -0.32985038)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light" index="0" unique_id=311828212]
+transform = Transform3D(1.0000001, 0, -5.9604645e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -0.17553133, 0.022158861, 0.047783375)
 light_color = Color(0.87223864, 0.63305277, 0.24587479, 1)
 light_energy = 2.046
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
 light_specular = 0.44
+shadow_enabled = true
 omni_range = 0.963
-omni_attenuation = 0.802
+omni_attenuation = 0.406
 
 [node name="Light_002" parent="Lamp 1&5 (1)" index="3" unique_id=2088412565]
 transform = Transform3D(0.9031077, 0.20518763, 0.3772194, 0.38558728, -0.0008653467, -0.9226709, -0.18899399, 0.9787223, -0.07989928, 0.8305938, 0.9096625, -1.2708204)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light_002" index="0" unique_id=1299923416]
-transform = Transform3D(1.0000002, -2.0302832e-07, -2.9889634e-08, 0, 1.0000001, 3.8184226e-08, 2.0081643e-09, -9.313226e-10, 1.0000001, -0.00020097196, -0.0072038174, -7.7188015e-05)
+transform = Transform3D(1.0000001, -2.3841858e-07, -1.2852252e-07, 1.4901161e-08, 1, 1.4901161e-08, 2.8871e-08, 1.4901161e-08, 1, -0.010314703, 0.041406482, -0.004349351)
 light_color = Color(0.7905427, 0.5038398, 0.15310782, 1)
 light_energy = 1.663
 light_indirect_energy = 2.109
 light_specular = 0.0
+shadow_enabled = true
 omni_range = 0.5
 omni_attenuation = 0.58
 

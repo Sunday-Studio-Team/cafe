@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://brrcrumg8hxyp" path="res://Assets/trashcan/Modern Trash Bin Low Poly.glb" id="22_uftqg"]
 [ext_resource type="PackedScene" uid="uid://k2x3c55gi1fl" path="res://Assets/ATM/ATM Machine 3D Model.glb" id="23_ljlh3"]
 [ext_resource type="Texture2D" uid="uid://er356iujlkii" path="res://environment/textures/lightbusycoffee.jpg" id="24_ppc62"]
-[ext_resource type="PackedScene" uid="uid://oopaxvnb4er8" path="res://Assets/cafe tables/cafe table.tscn" id="25_g2jch"]
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
 [ext_resource type="ArrayMesh" uid="uid://u4av5hwa2hfw" path="res://Assets/trashcan/Sketchfab_Scene_Object_0.res" id="29_itkf6"]
@@ -1463,9 +1462,6 @@ transform = Transform3D(0.5901272, 0, -0.8073103, 0, 1, 0, 0.8073103, 0, 0.59012
 [node name="Sketchfab_Scene" parent="CustomerArea" unique_id=62094837 instance=ExtResource("23_ljlh3")]
 transform = Transform3D(-3.2346428e-08, 0, -0.74, 0, 0.74, 0, 0.74, 0, -3.2346428e-08, 7.769355, 1.0831108, -3.2094498)
 
-[node name="cafe table2" parent="CustomerArea" unique_id=1555103727 instance=ExtResource("25_g2jch")]
-transform = Transform3D(0.8012202, 0, 0, 0, 1, 0, 0, 0, 1, 1.9840773, 0.04417161, -6.630125)
-
 [node name="Tippy cutout2" parent="CustomerArea" unique_id=1861450768 instance=ExtResource("26_0cjwk")]
 transform = Transform3D(0.5811208, 0, 0.3128876, 0, 0.65999997, 0, -0.3128876, 0, 0.5811208, -1.1862783, 0.04014621, -2.1705725)
 
@@ -1960,7 +1956,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701082, -0.00016215755, -0.999954, 1.02600865e-07, 1, -0.00016215009, 0.999954, -1.01539825e-08, 0.0005701082, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701081, -0.00016215755, -0.99995387, 1.0260085e-07, 1, -0.00016215007, 0.99995387, -1.01539825e-08, 0.0005701081, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2678,7 +2674,7 @@ transform = Transform3D(0.30321154, 0, -0.9529233, 0, 1, 0, 0.9529233, 0, 0.3032
 transform = Transform3D(0.1466603, 0, -0.8548015, 0, 0.7746748, 0, 0.8548015, 0, 0.1466603, 5.893644, 3.0590515, -0.82174826)
 
 [node name="PinkBench" parent="." unique_id=1405981682 instance=ExtResource("101_3ide6")]
-transform = Transform3D(-0.01855351, 0, 0.24931058, 0, 0.25, 0, -0.24931058, 0, -0.01855351, 1.9138048, 0.30501938, -3.8305357)
+transform = Transform3D(-0.01855351, 0, 0.24931058, 0, 0.25, 0, -0.24931058, 0, -0.01855351, 1.9138048, 0.060233057, -3.8305357)
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/FrontWindowAndDoor/glass window"]
