@@ -15,7 +15,7 @@ const MOVE_SPEED := 2.0
 @export_dir var sprites_folder: String
 @export_dir var typing_minigame_portraits_folder: String
 
-var customer_sprite_resource:CustomerSprite
+var customer_sprite_resource: CustomerSpriteData
 var desired_drink: Drink
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -26,7 +26,7 @@ var percent_time_left: float = 100
 
 func _ready() -> void:
 	# Find all unused customer sprites
-	var unused_customer_sprites: Array[CustomerSprite]
+	var unused_customer_sprites: Array[CustomerSpriteData]
 	for customer_sprite in Global.customer_sprites:
 		if !Global.customer_sprites_in_use.has(customer_sprite):
 			unused_customer_sprites.append(customer_sprite)

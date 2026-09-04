@@ -1,12 +1,18 @@
-[gd_resource type="Resource" script_class="CustomerSprite" format=3 uid="uid://08ab3jl0o3bt"]
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://08ab3jl0o3bt"]
 
-[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/base_customer_sprite.gd" id="1_7eoya"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_7eoya"]
 [ext_resource type="Texture2D" uid="uid://iib8xrd6hfk4" path="res://sprites/customers/lit professor.png" id="2_7eoya"]
 [ext_resource type="Texture2D" uid="uid://pve3su03m7uf" path="res://sprites/customers/typing_minigame_portraits/lit_professor_angry.png" id="3_f3nsf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eoya"]
+atlas = ExtResource("2_7eoya")
+region = Rect2(0, -87.12, 420, 420)
 
 [resource]
 script = ExtResource("1_7eoya")
 customer_name = "Literature Professor"
 sprite = ExtResource("2_7eoya")
 typing_minigame_portrait = ExtResource("3_f3nsf")
+email_crop_center_ratio = Vector2(0.5, 0.12)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_7eoya")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"

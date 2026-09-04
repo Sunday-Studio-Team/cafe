@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://2rseni1mabbd"]
+
+[ext_resource type="Texture2D" uid="uid://bmfed728nxhf2" path="res://sprites/customers/heartbowgirl.png" id="1_dy3ik"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_2kx3r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy3ik"]
+atlas = ExtResource("1_dy3ik")
+region = Rect2(0, -103.62, 453, 453)
+
+[resource]
+script = ExtResource("2_2kx3r")
+customer_name = "Heart Bow Girl"
+sprite = ExtResource("1_dy3ik")
+email_crop_center_ratio = Vector2(0.5, 0.12)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_dy3ik")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"

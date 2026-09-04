@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="CustomerSprite" format=3 uid="uid://cd1mrwb2elc1c"]
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://cd1mrwb2elc1c"]
 
-[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/base_customer_sprite.gd" id="1_hra0w"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_hra0w"]
 [ext_resource type="Texture2D" uid="uid://4mwr5l6jtrl5" path="res://sprites/customers/grandma.png" id="2_hra0w"]
 [ext_resource type="Texture2D" uid="uid://dnuvsssv5hbsr" path="res://sprites/customers/typing_minigame_portraits/grandma_angry.png" id="3_l3s4y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hra0w"]
+atlas = ExtResource("2_hra0w")
+region = Rect2(194.82, -69.41999, 374.36, 374.36)
 
 [resource]
 script = ExtResource("1_hra0w")
 customer_name = "Grandma"
 sprite = ExtResource("2_hra0w")
 typing_minigame_portrait = ExtResource("3_l3s4y")
+email_crop_size_ratio = 0.49
+email_crop_center_ratio = Vector2(0.5, 0.115)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_hra0w")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"

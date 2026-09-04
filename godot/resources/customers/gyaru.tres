@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="CustomerSprite" format=3 uid="uid://tk2a5d6aiue3"]
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://tk2a5d6aiue3"]
 
-[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/base_customer_sprite.gd" id="1_1wkfd"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_1wkfd"]
 [ext_resource type="Texture2D" uid="uid://8ue4cv2pe1vc" path="res://sprites/customers/gyaru_girl.png" id="2_1wkfd"]
 [ext_resource type="Texture2D" uid="uid://bl158cixvi78f" path="res://sprites/customers/typing_minigame_portraits/gyaru_girl_angry.png" id="3_1wkfd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wkfd"]
+atlas = ExtResource("2_1wkfd")
+region = Rect2(75.17999, 16.59999, 386.64, 386.64)
 
 [resource]
 script = ExtResource("1_1wkfd")
 customer_name = "Gyaru Girl"
 sprite = ExtResource("2_1wkfd")
 typing_minigame_portrait = ExtResource("3_1wkfd")
+email_crop_size_ratio = 0.72
+email_crop_center_ratio = Vector2(0.5, 0.205)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_1wkfd")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"

@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="CustomerSprite" format=3 uid="uid://3uqeifcm0n08"]
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://3uqeifcm0n08"]
 
-[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/base_customer_sprite.gd" id="1_ow3yr"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_ow3yr"]
 [ext_resource type="Texture2D" uid="uid://d4aqn3bggyyqi" path="res://sprites/customers/finance green.png" id="2_ow3yr"]
 [ext_resource type="Texture2D" uid="uid://cudcu0cjrmsw7" path="res://sprites/customers/typing_minigame_portraits/finance_green_angry.png" id="3_f3f3v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow3yr"]
+atlas = ExtResource("2_ow3yr")
+region = Rect2(30.160019, -87.28, 440.8, 440.8)
 
 [resource]
 script = ExtResource("1_ow3yr")
 customer_name = "Finance Green"
 sprite = ExtResource("2_ow3yr")
 typing_minigame_portrait = ExtResource("3_f3f3v")
+email_crop_size_ratio = 0.95
+email_crop_center_ratio = Vector2(0.54, 0.13)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_ow3yr")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"
