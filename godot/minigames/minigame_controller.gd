@@ -43,6 +43,8 @@ func play_minigame(minigame_name: String):
 
 func close_game():
 	sub_viewport.get_child(0).queue_free()
+	if sub_viewport.gui_is_dragging():
+		sub_viewport.gui_cancel_drag()
 	visible = false
 	Global.minigame_active = false
 
