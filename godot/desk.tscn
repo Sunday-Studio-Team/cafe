@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cmt3rwlkf5iot" path="res://Assets/Desk/office desk.glb" id="3_r8wvv"]
 [ext_resource type="PackedScene" uid="uid://d1mpho6m2ulj7" path="res://Assets/stickynote/stickynote.tscn" id="4_h1g2g"]
 [ext_resource type="PackedScene" uid="uid://dg6mtco6uo06" path="res://Assets/cup w pens/cup_with_pens.tscn" id="5_upty0"]
+[ext_resource type="PackedScene" uid="uid://moxt1235cxs8" path="res://Assets/crane/cranes.tscn" id="6_bn8wp"]
 [ext_resource type="PackedScene" uid="uid://c3gk12fh1bx5y" path="res://Assets/chinese deco/New Kitty (1).glb" id="6_lrwc4"]
 [ext_resource type="PackedScene" uid="uid://v5xwxv8wthdc" path="res://Assets/chinese deco/Blue Carp.glb" id="7_vf3xh"]
 [ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
@@ -424,7 +425,19 @@ spot_angle = 43.22
 transform = Transform3D(0.6695641, -0.025966307, 0.74230003, 0.74095935, -0.04607029, -0.6699652, 0.051594615, 0.9985994, -0.011607006, -0.5804926, -0.42820156, 1.1033844)
 
 [node name="Cup with pens" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="34" unique_id=1192044732 instance=ExtResource("5_upty0")]
-transform = Transform3D(-0.014837565, 2.273737e-13, -0.9998897, -0.99988896, -3.576279e-07, 0.014837162, -3.575886e-07, 0.9999987, 5.306461e-09, -0.80441594, -0.7231874, -0.13262422)
+transform = Transform3D(-0.1013288, 1.8829387e-13, -0.9948529, -0.99485177, -3.5762793e-07, 0.10132844, -3.5578725e-07, 0.9999984, 3.6238163e-08, -0.800298, -0.6983665, -0.13262413)
+
+[node name="cranes" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 1836818213) index="35" unique_id=2126192397 instance=ExtResource("6_bn8wp")]
+transform = Transform3D(-1, 3.388132e-21, -8.742277e-08, -8.742278e-08, -3.5762793e-07, 1, -3.1264823e-14, 1, 3.5762793e-07, 0.8566165, 0.3616045, 1.2931986e-07)
+
+[node name="Paper Crane" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" index="0" unique_id=1799707030]
+transform = Transform3D(-0.023995519, 2.8413485e-14, -0.9997112, -2.841353e-14, 0.99999887, 2.9103656e-14, 0.9997116, 2.9103693e-14, -0.023995757, 0.880621, 0.675826, -1.1029525)
+
+[node name="Paper Crane_001" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" index="1" unique_id=1849270918]
+transform = Transform3D(-0.40670684, 2.596489e-14, -0.91355836, -2.5964895e-14, 0.99999875, 3.9980948e-14, 0.91355777, 3.9980985e-14, -0.40670606, 0.9098658, 1.1006807, -1.3919946)
+
+[node name="Paper Crane_002" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes" index="2" unique_id=634688304]
+transform = Transform3D(-0.7758685, -1.7931095e-14, 0.63089454, 1.7931106e-14, 0.99999905, 5.047317e-14, -0.63089406, 5.0473192e-14, -0.77586764, 1.5557988, 0.78761536, -0.110487044)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1381647886]
 transform = Transform3D(-0.8342353, 0, 0.5514086, 0, 1, 0, -0.5514086, 0, -0.8342353, 0.25860378, 1.0087188, 0.071932405)
@@ -463,10 +476,10 @@ transform = Transform3D(0.53986424, 0.026376562, -0.1328083, -0.025612932, 0.555
 transform = Transform3D(0.70223147, 0, 0.24387172, 0, 0.7433723, 0, -0.24387172, 0, 0.70223147, 0.7766919, 0.6772824, -0.26443288)
 
 [node name="Greenfish (1)" parent="." unique_id=1725124513 instance=ExtResource("9_7hob8")]
-transform = Transform3D(-0.90834457, 0, -0.41822255, 0, 1, 0, 0.41822255, 0, -0.90834457, 0.63663065, 0.7477706, 0.7653277)
+transform = Transform3D(-0.90834457, 0, -0.41822255, 0, 1, 0, 0.41822255, 0, -0.90834457, 0.7847771, 0.7143942, 0.7653277)
 
 [node name="Onigiri (1)" parent="." unique_id=284199203 instance=ExtResource("10_hdap7")]
-transform = Transform3D(0.6144945, 0.20517418, 0.04662274, -0.19991207, 0.6142191, -0.06814381, -0.0656147, 0.050119527, 0.64424855, 0.52312696, 0.6479222, 0.55334795)
+transform = Transform3D(0.5247401, 0.20654343, 0.322275, -0.19991206, 0.61421907, -0.06814381, -0.32643005, -0.04413874, 0.55979335, 0.52312696, 0.6479222, 0.55334795)
 
 [node name="Onigiri (1)2" parent="." unique_id=1949135937 instance=ExtResource("10_hdap7")]
 transform = Transform3D(0.5133744, 0.2049287, 0.34106386, -0.1999121, 0.61421925, -0.06814384, -0.3440284, -0.051114075, 0.5485485, 0.71541715, 1.2422413, 1.1181093)
@@ -475,7 +488,7 @@ transform = Transform3D(0.5133744, 0.2049287, 0.34106386, -0.1999121, 0.61421925
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.853085, 0.9751688, 1.8618964)
 
 [node name="Cube_002" type="MeshInstance3D" parent="Little Fish" unique_id=151342502]
-transform = Transform3D(0.026561638, 0.006340933, 0.01944919, 4.1476347e-10, 0.040197223, -0.009059253, -0.019007554, 0.008860981, 0.027178796, 1.4778557, 0.02507341, -1.3598576)
+transform = Transform3D(0.026561638, 0.006340933, 0.01944919, 4.1476347e-10, 0.040197223, -0.009059253, -0.019007554, 0.008860981, 0.027178796, 1.5108736, 0.019424558, -1.3803787)
 mesh = SubResource("ArrayMesh_w475f")
 
 [node name="WebMan (1)" parent="." unique_id=1336024298 instance=ExtResource("12_1xfbt")]
@@ -592,12 +605,13 @@ transform = Transform3D(0.9031077, 0.20518763, 0.3772194, 0.38558728, -0.0008653
 [node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light_002" index="0" unique_id=1299923416]
 transform = Transform3D(1.0000002, -2.0302832e-07, -2.9889634e-08, 0, 1.0000001, 3.8184226e-08, 2.0081643e-09, -9.313226e-10, 1.0000001, -0.00020097196, -0.0072038174, -7.7188015e-05)
 light_color = Color(0.7905427, 0.5038398, 0.15310782, 1)
-light_energy = 1.188
+light_energy = 1.663
 light_indirect_energy = 2.109
 light_specular = 0.0
-omni_range = 0.459
+omni_range = 0.5
 omni_attenuation = 0.58
 
 [editable path="office desk"]
+[editable path="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes"]
 [editable path="Sketchbooks, comics, rulers (1)"]
 [editable path="Lamp 1&5 (1)"]
