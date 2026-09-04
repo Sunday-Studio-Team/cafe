@@ -33,7 +33,7 @@ func _process_queued_customers() -> void:
 
 func _customer_queue_update_visuals() -> void:
 	var i: int = 0
-	if _desk_customer.customer_sprite_resource.alternate_desk_sprite:
+	if _desk_customer and _desk_customer.customer_sprite_resource.alternate_desk_sprite:
 		_desk_customer.body.texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
 	for queued_customer in _queued_desk_customers:
 		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine

@@ -1,14 +1,14 @@
 class_name Player
 extends CharacterBody3D
 
-const STRIDE_LENGTH := 1.1
+const STRIDE_LENGTH := 1.25
 
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
-@export var footstep_sound: AudioStreamPlayer3D
+@export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer

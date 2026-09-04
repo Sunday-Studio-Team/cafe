@@ -19,10 +19,10 @@
 [ext_resource type="ArrayMesh" uid="uid://dg7pb4va76uok" path="res://Assets/window/Sketchfab_Scene_Object_4.res" id="17_8xgip"]
 [ext_resource type="ArrayMesh" uid="uid://f3vpqcxgpjle" path="res://Assets/window/Sketchfab_Scene_Object_5.res" id="18_yhys1"]
 [ext_resource type="PackedScene" uid="uid://cawnt7wagkky7" path="res://Assets/window/Glass Window 3D Model by Noboa.glb" id="20_ala11"]
-[ext_resource type="Texture2D" uid="uid://cl2g108lqa0bu" path="res://environment/textures/star floor.jpg" id="20_omxm3"]
 [ext_resource type="PackedScene" uid="uid://bkcevn46bhcie" path="res://Assets/chair/plastic_chair.tscn" id="22_kmdca"]
 [ext_resource type="PackedScene" uid="uid://brrcrumg8hxyp" path="res://Assets/trashcan/Modern Trash Bin Low Poly.glb" id="22_uftqg"]
 [ext_resource type="PackedScene" uid="uid://k2x3c55gi1fl" path="res://Assets/ATM/ATM Machine 3D Model.glb" id="23_ljlh3"]
+[ext_resource type="Texture2D" uid="uid://er356iujlkii" path="res://environment/textures/lightbusycoffee.jpg" id="24_ppc62"]
 [ext_resource type="PackedScene" uid="uid://oopaxvnb4er8" path="res://Assets/cafe tables/cafe table.tscn" id="25_g2jch"]
 [ext_resource type="PackedScene" uid="uid://bjata0f5kaym4" path="res://Assets/Tippy Cutouts/tippy_cutout.tscn" id="26_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://bd20cekusvedc" path="res://Assets/signs/glove sign.glb" id="27_3xpao"]
@@ -38,7 +38,9 @@
 [ext_resource type="PackedScene" uid="uid://dfigy7bvip3cu" path="res://Assets/Locker/small_lockers.tscn" id="33_kmdca"]
 [ext_resource type="PackedScene" uid="uid://cpp4dkdwca17b" path="res://Assets/Table/toolbox_and_table.tscn" id="34_02vyw"]
 [ext_resource type="Texture2D" uid="uid://pjfssdnab8eg" path="res://Assets/Posters/Time is Money.png" id="34_bith1"]
+[ext_resource type="PackedScene" uid="uid://cbn6neugky8kn" path="res://Assets/signs/entry_panel_1.tscn" id="34_ppc62"]
 [ext_resource type="Material" uid="uid://bfuw133nr5vv1" path="res://Assets/Posters/tippy watching.tres" id="35_dmru2"]
+[ext_resource type="PackedScene" uid="uid://cbfqeif23m53k" path="res://Assets/signs/go_tip.tscn" id="35_ppc62"]
 [ext_resource type="Texture2D" uid="uid://boma1g3mo73eo" path="res://environment/textures/grey carpet.png" id="36_edv2q"]
 [ext_resource type="Texture2D" uid="uid://cb8pvhc6l14r0" path="res://Assets/Posters/Tippy always watching.png" id="36_ppc62"]
 [ext_resource type="Material" uid="uid://dgifuvpjlvldq" path="res://Assets/Posters/gun watching.tres" id="37_vf5ik"]
@@ -90,6 +92,7 @@
 [ext_resource type="PackedScene" uid="uid://byfk52lihnqmf" path="res://Assets/old coffee machine/old_filter_basket.tscn" id="78_3xpao"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="82_4nsdn"]
 [ext_resource type="PackedScene" uid="uid://dv57fp8p0wov2" path="res://Assets/signs/tippy_standee.tscn" id="84_pv1ha"]
+[ext_resource type="PackedScene" uid="uid://ch0pntkxtjbmi" path="res://Assets/signs/order_here_sign_1.tscn" id="84_vf5ik"]
 [ext_resource type="Texture2D" uid="uid://cp0ia1aqch04a" path="res://Assets/signs/Bean Buddy.png" id="84_yhys1"]
 [ext_resource type="Texture2D" uid="uid://c67nrt1uma0nc" path="res://Assets/signs/Tippy with coffee.png" id="85_tx4o1"]
 [ext_resource type="Texture2D" uid="uid://8niwxecy2ykw" path="res://Assets/Street/cone_1.png" id="86_yhys1"]
@@ -101,6 +104,7 @@
 [ext_resource type="Texture2D" uid="uid://cajnyvi7pua8d" path="res://Assets/Street/pizza_box.png" id="89_edv2q"]
 [ext_resource type="PackedScene" uid="uid://dmuumticci3nh" path="res://Assets/old coffee machine/old_coffee_machine.tscn" id="93_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://d027k1reepg57" path="res://Assets/Cleaning supplies/cleaning_supplies.tscn" id="93_g2jch"]
+[ext_resource type="PackedScene" uid="uid://08twhhrq38wo" path="res://Assets/signs/entry_panel_2.tscn" id="105_vf5ik"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ala11"]
 transparency = 1
@@ -386,9 +390,9 @@ material = SubResource("StandardMaterial3D_y5pqn")
 size = Vector3(2, 0.1, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3exxq"]
-albedo_texture = ExtResource("20_omxm3")
-uv1_scale = Vector3(3.06, 1.56, 2.26)
-uv1_offset = Vector3(-1.13, 0.34, 0)
+albedo_texture = ExtResource("24_ppc62")
+uv1_scale = Vector3(2.74, 2.74, 2.74)
+uv1_offset = Vector3(-0.83, -0.73, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_3exxq")
@@ -1210,7 +1214,7 @@ environment = ExtResource("82_4nsdn")
 [node name="CustomerArea" type="Node3D" parent="." unique_id=337821655]
 
 [node name="Tippy Standee" parent="CustomerArea" unique_id=1708982728 instance=ExtResource("84_pv1ha")]
-transform = Transform3D(-0.6698514, 0, -0.4430705, 0, 0.80312663, 0, 0.4430705, 0, -0.6698514, 7.4237614, 0.16133678, -0.49727488)
+transform = Transform3D(-0.6168352, 0, -0.40800312, 0, 0.73956215, 0, 0.40800312, 0, -0.6168352, 7.4237614, 0.16133678, -0.49727488)
 
 [node name="Bean Buddy" type="Sprite3D" parent="CustomerArea" unique_id=342906632]
 transform = Transform3D(0.15900739, 0, 0, 0, 0.15900743, 0, 0, 0, 0.15900739, -0.3887223, 1.7761464, -8.08975)
@@ -1225,25 +1229,22 @@ texture = ExtResource("85_tx4o1")
 [node name="Let\'s pay" parent="CustomerArea" unique_id=579902610 instance=ExtResource("1_qok1s")]
 transform = Transform3D(0.66925824, 0.023472827, 0.59345686, -0.004180076, 0.8942547, -0.030656196, -0.5939061, 0.020156927, 0.6689675, -1.4813719, -0.25505653, -1.1161604)
 
-[node name="CaifeSign" parent="CustomerArea" unique_id=2094984422 instance=ExtResource("2_5utbh")]
-transform = Transform3D(-0.088907875, 0, 0.99603987, 0, 1, 0, -0.99603987, 0, -0.088907875, 5.3371572, 0.8206909, -0.38349915)
-
 [node name="CaifeSign2" parent="CustomerArea" unique_id=115964136 instance=ExtResource("2_5utbh")]
 transform = Transform3D(0.6888597, 0, 0.7248947, 0, 1, 0, -0.7248947, 0, 0.6888597, -1.4008827, -0.40551677, -1.2090626)
 
 [node name="order here" parent="CustomerArea" unique_id=217684633 instance=ExtResource("3_a4lwu")]
 transform = Transform3D(-0.05020121, 0, 0.9987391, 0, 1, 0, -0.9987391, 0, -0.05020121, 2.949213, 1.3603295, 0.25712776)
 
-[node name="BigCustomerLights" parent="CustomerArea" unique_id=2103302147 instance=ExtResource("4_j0jbx")]
-transform = Transform3D(2.8963146, 0, 0, 0, 2.8963146, 0, 0, 0, 2.8963146, 3.4626575, 2.6481774, -3.3092804)
-
-[node name="AreaLight3D4" type="AreaLight3D" parent="CustomerArea/BigCustomerLights" unique_id=106209186]
-transform = Transform3D(0.34526634, 0, 0, 0, -1.5092072e-08, 0.34526634, 0, -0.34526634, -1.5092072e-08, -0.024024323, -0.11925888, 0.010626748)
+[node name="AreaLight3D4" type="AreaLight3D" parent="CustomerArea" unique_id=106209186]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 1, 0, -1, -4.3711392e-08, 3.3930755, 2.186302, -3.278502)
 light_color = Color(1, 0.95, 0, 1)
 light_energy = 5.0
 shadow_enabled = true
 area_range = 5.895
 area_size = Vector2(2.0486052, 2.8595924)
+
+[node name="BigCustomerLights" parent="CustomerArea" unique_id=2103302147 instance=ExtResource("4_j0jbx")]
+transform = Transform3D(2.8963146, 0, 0, 0, 2.8963146, 0, 0, 0, 2.8963146, 3.4626575, 2.6481774, -3.3092804)
 
 [node name="MediumLights" parent="CustomerArea" unique_id=988487720 instance=ExtResource("5_omxm3")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3.3665109, 2.0798194, -3.0821092)
@@ -1279,8 +1280,11 @@ area_size = Vector2(1.6194825, 2.7039185)
 [node name="linelight" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode" parent_id_path=PackedInt32Array(988487720, 62983403) index="2" unique_id=304376438]
 transform = Transform3D(-4.371139e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.371139e-09, 24.47423, 3.3493767, 8.910295)
 
+[node name="linelamp_lambert1_0" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight/linelamp" parent_id_path=PackedInt32Array(988487720, 1199235157) index="0" unique_id=1332500483]
+visible = false
+
 [node name="AreaLight3D" type="AreaLight3D" parent="CustomerArea/MediumLights/Sketchfab_model/26c59d79b4d04651bf25995807846f91_fbx/RootNode/linelight" index="2" unique_id=1917070567]
-transform = Transform3D(100.00001, 0, 2.7105054e-20, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 139.14665, -16.29895, 0)
+transform = Transform3D(100.00001, 0, 2.7105054e-20, 0, -4.3711393e-06, 100.00001, 0, -100.00001, -4.3711393e-06, 166.05435, -59.084656, 0)
 light_color = Color(1, 0.3, 0.55666673, 1)
 light_energy = 5.99
 light_specular = 6.069
@@ -1452,7 +1456,7 @@ mesh = SubResource("BoxMesh_rkau7")
 transform = Transform3D(0.81930244, 0, -0.57336164, 0, 1, 0, 0.57336164, 0, 0.81930244, 2.491035, 0, -5.5838594)
 
 [node name="plastic chair3" parent="CustomerArea" unique_id=738810748 instance=ExtResource("22_kmdca")]
-transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 6.180391, 0, -7.242418)
+transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 6.4921713, 0, -7.566301)
 
 [node name="plastic chair" parent="CustomerArea" unique_id=818098487 instance=ExtResource("22_kmdca")]
 transform = Transform3D(-0.19892365, 0, 0.980015, 0, 1, 0, -0.980015, 0, -0.19892365, 1.4843868, 0, -2.4801116)
@@ -1464,7 +1468,7 @@ transform = Transform3D(0.5901272, 0, -0.8073103, 0, 1, 0, 0.8073103, 0, 0.59012
 transform = Transform3D(-3.2346428e-08, 0, -0.74, 0, 0.74, 0, 0.74, 0, -3.2346428e-08, 7.769355, 1.0831108, -3.2094498)
 
 [node name="cafe table2" parent="CustomerArea" unique_id=1555103727 instance=ExtResource("25_g2jch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8607272, 0.04417161, -6.630125)
+transform = Transform3D(0.8012202, 0, 0, 0, 1, 0, 0, 0, 1, 1.9840773, 0.04417161, -6.630125)
 
 [node name="Tippy cutout2" parent="CustomerArea" unique_id=1861450768 instance=ExtResource("26_0cjwk")]
 transform = Transform3D(0.5811208, 0, 0.3128876, 0, 0.65999997, 0, -0.3128876, 0, 0.5811208, -1.1862783, 0.04014621, -2.1705725)
@@ -1488,7 +1492,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.94
 mesh = SubResource("TextMesh_vn1tu")
 
 [node name="glove sign" parent="CustomerArea" unique_id=185666047 instance=ExtResource("27_3xpao")]
-transform = Transform3D(-0.13227662, 0, -0.4580391, 0, 0.47675657, 0, 0.4580391, 0, -0.13227662, 7.7255273, 0.32075867, -9.13441)
+transform = Transform3D(0.25697747, 0, -0.40157127, 0, 0.47675654, 0, 0.40157127, 0, 0.25697747, 7.7255273, 0.32075867, -9.13441)
 
 [node name="Beanny Balloons" parent="CustomerArea" unique_id=1331156955 instance=ExtResource("29_wredj")]
 transform = Transform3D(-0.17955787, 0, -0.9837474, 0, 1, 0, 0.9837474, 0, -0.17955787, 7.210903, 1.2412802, -2.8805175)
@@ -1503,6 +1507,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020480633, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CustomerArea/TippyStatue" unique_id=48750555]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19999999, 0)
 shape = SubResource("BoxShape3D_ovvye")
+
+[node name="Entry Panel 1" parent="CustomerArea" unique_id=1642733272 instance=ExtResource("34_ppc62")]
+transform = Transform3D(-0.02132044, 0, 0.99977267, 0, 1, 0, -0.99977267, 0, -0.02132044, 4.2635145, 3.5033307, -7.6535997)
+
+[node name="GoTip" parent="CustomerArea" unique_id=2008414395 instance=ExtResource("35_ppc62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.990998, 1.295922, -4.9030323)
 
 [node name="BreakRoom" type="Node3D" parent="." unique_id=1614027471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
@@ -1954,7 +1964,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010935, -0.00016215755, -0.999956, 1.0260107e-07, 1, -0.00016215042, 0.999956, -1.01539825e-08, 0.00057010935, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701086, -0.00016215755, -0.9999547, 1.02600936e-07, 1, -0.0001621502, 0.9999547, -1.01539825e-08, 0.0005701086, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -2130,6 +2140,9 @@ texture = ExtResource("87_tx4o1")
 transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 0.40259218, 0.2938672, -4.4861813)
 shaded = true
 texture = ExtResource("87_tx4o1")
+
+[node name="Order Here Sign 2" parent="Exterior" unique_id=966749228 instance=ExtResource("84_vf5ik")]
+transform = Transform3D(-0.7506926, 0, 0.6606517, 0, 1, 0, -0.6606517, 0, -0.7506926, -3.4714193, -0.049999896, -3.421958)
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1484351062]
 collision_mask = 9
@@ -2681,6 +2694,9 @@ transform = Transform3D(0.9995674, 0, 0.029411726, 0, 1, 0, -0.029411726, 0, 0.9
 
 [node name="Old Coffee Machine2" parent="." unique_id=755645669 instance=ExtResource("93_0cjwk")]
 transform = Transform3D(0.30321154, 0, -0.9529233, 0, 1, 0, 0.9529233, 0, 0.30321154, -3.3568115, 1.1409191, 9.130936)
+
+[node name="Entry Panel 2" parent="." unique_id=1262799385 instance=ExtResource("105_vf5ik")]
+transform = Transform3D(0.1466603, 0, -0.8548015, 0, 0.7746748, 0, 0.8548015, 0, 0.1466603, 5.893644, 3.0590515, -0.82174826)
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/FrontWindowAndDoor/glass window"]
