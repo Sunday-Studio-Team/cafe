@@ -11,7 +11,7 @@ extends SubViewportContainer
 @export var entire_panel: PanelContainer
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
-@export var customer_sprite: Sprite2D
+@export var customer_sprite: TextureRect
 @export var remade_drink_sprite: TextureRect
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer

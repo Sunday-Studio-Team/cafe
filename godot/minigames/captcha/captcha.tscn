@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
+[ext_resource type="Texture2D" uid="uid://bmfed728nxhf2" path="res://sprites/customers/heartbowgirl.png" id="6_i2vbf"]
 [ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
 [ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="6_wy7ys"]
@@ -46,7 +47,7 @@ drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBlu
 player_thought = NodePath("SubViewport/PlayerThought")
 entire_panel = NodePath("SubViewport/Captcha")
 order_reminder = NodePath("SubViewport/IngredientsReminder")
-customer_sprite = NodePath("SubViewport/CustomerContainer/Control/CustomerSprite")
+customer_sprite = NodePath("SubViewport/CustomerContainer/Control/CustomerSpriteTextureRect")
 remade_drink_sprite = NodePath("SubViewport/Finished Drink")
 click_sound = NodePath("ClickSound")
 correct_sound = NodePath("CorrectSound")
@@ -302,9 +303,23 @@ root = NodePath("../..")
 [node name="Control" type="Control" parent="SubViewport/CustomerContainer" unique_id=1395701579]
 layout_mode = 2
 
-[node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CustomerContainer/Control" unique_id=23708804]
-position = Vector2(-20, -20)
-scale = Vector2(0.65, 0.65)
+[node name="CustomerSpriteTextureRect" type="TextureRect" parent="SubViewport/CustomerContainer/Control" unique_id=753214344]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -761.0
+offset_right = 235.15332
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_i2vbf")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
