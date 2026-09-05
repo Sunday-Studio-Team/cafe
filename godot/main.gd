@@ -60,6 +60,7 @@ func _ready() -> void:
 	_world_environment.environment = Global.cafe_environment_res
 	Events.game_options_changed.connect(_on_game_options_changed)
 	Events.customer_leave.connect(shift_end_sequence)
+	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -280,8 +281,7 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
 
-func spawn_machine_customer() -> void:
-
+func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -311,6 +311,9 @@ func spawn_machine_customer() -> void:
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
+	if sprite_resource:
+		new_customer.customer_sprite_resource = sprite_resource
+		Console.print_line("spawned %s at machine" % sprite_resource.customer_name)
 
 	assigned_machine.add_customer_to_queue(new_customer)
 
@@ -319,16 +322,37 @@ func get_customers() -> Array[Customer]:
 	return (get_tree().get_nodes_in_group("customer")) as Array[Customer]
 
 
-func spawn_help_desk_customer() -> void:
+func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
+	var help_desk_bool := help_desk == "true"
+	var customer_sprite_data: CustomerSpriteData = null
+	for datum in Global.customer_sprites:
+		if datum.customer_name == customer_name:
+			customer_sprite_data = datum
+			break
+	if customer_sprite_data == null:
+		customer_sprite_data = Global.customer_sprites.pick_random()
+
+	if help_desk_bool:
+		spawn_help_desk_customer(customer_sprite_data)
+	else:
+		spawn_machine_customer(customer_sprite_data)
+
+
+func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
 
 	if Global.day < 2:
+		if sprite_resource != null:
+			Console.print_line("help desk disabled today, cant spawn customer")
 		return
 
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
+	if sprite_resource:
+		new_customer.customer_sprite_resource = sprite_resource
+		Console.print_line("spawned %s at help desk" % sprite_resource.customer_name)
 	_customer_help_desk.add_customer_to_queue(new_customer)
 
 

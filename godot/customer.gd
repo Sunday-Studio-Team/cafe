@@ -15,7 +15,11 @@ const MOVE_SPEED := 2.0
 @export_dir var sprites_folder: String
 @export_dir var typing_minigame_portraits_folder: String
 
-var customer_sprite_resource: CustomerSpriteData
+var customer_sprite_resource: CustomerSpriteData:
+	set(new):
+		customer_sprite_resource = new
+		body.texture = new.sprite
+		Global.customer_sprites_in_use.append(customer_sprite_resource)
 var desired_drink: Drink
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -36,8 +40,6 @@ func _ready() -> void:
 		customer_sprite_resource = unused_customer_sprites.pick_random()
 	else:
 		customer_sprite_resource = Global.customer_sprites.pick_random()
-	Global.customer_sprites_in_use.append(customer_sprite_resource)
-	body.texture = customer_sprite_resource.sprite
 
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
@@ -45,6 +47,7 @@ func _ready() -> void:
 	Events.order_approved.connect(_on_order_approved)
 	# NOTE: not actually sure what this true argument does here lol
 	# NOTE^2: it keeps the customers group tag if the packed scene file is saved
+	# NOTE^3: ok thx
 	add_to_group("customers", true)
 
 	desired_drink = Global.drinks.filter(
