@@ -91,9 +91,9 @@ var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
-var customer_sprites: Array[CustomerSprite]
+var customer_sprites: Array[CustomerSpriteData]
 ## the sprites of customers that are in the cafe right now
-var customer_sprites_in_use: Array[CustomerSprite]
+var customer_sprites_in_use: Array[CustomerSpriteData]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
@@ -109,6 +109,7 @@ var in_dialog_screen: bool = false
 var in_options_menu: bool = false
 var showing_floating_cursor := false
 var in_tutorial_selection := false
+var in_loadout_menu := false
 var stamina: float:
 	set(new_stam):
 		if new_stam > Stats.current.max_stamina:
@@ -137,6 +138,7 @@ var in_ui: bool:
 				or in_options_menu
 				or showing_floating_cursor
 				or in_tutorial_selection
+				or in_loadout_menu
 		):
 			return true
 		else:
@@ -147,6 +149,7 @@ var ordered_drink_customer: Customer
 # End remaking drink variables --
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
+var hovered_loadout_menu_element: LoadoutMenuElement
 #Active Items
 var equipped_item: Item = null
 # Tutorial flags
@@ -163,7 +166,8 @@ var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
-
+# Free-camera mode
+var free_camera_enabled: bool = false
 
 func _ready() -> void:
 	if SaveDataManager.save_data.finished_or_skipped_tutorial:

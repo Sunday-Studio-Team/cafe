@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://p8e3ualo81vq" path="res://ui/options_menu/options_menu_option_view.tscn" id="1_3s1t0"]
 [ext_resource type="Script" uid="uid://don8op45g0jer" path="res://ui/options_menu/options_menu.gd" id="1_8h7tm"]
+[ext_resource type="PackedScene" uid="uid://cejq61xjx6sye" path="res://ui/options_menu/options_menu_slider_view.tscn" id="2_kx268"]
 [ext_resource type="PackedScene" uid="uid://bfoj2ygbyxij8" path="res://ui/options_menu/options_menu_keybind_option_view.tscn" id="3_utl02"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h7tm"]
@@ -41,14 +42,18 @@ bg_color = Color(0.16, 0.16, 0.16, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wakw5"]
 bg_color = Color(0.06, 0.06, 0.06, 1)
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_overall_volume_slider_view", "_music_volume_slider_view", "_voice_volume_slider_view", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_mouse_sensitivity_slider_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
 process_mode = 3
 layer = 5
 script = ExtResource("1_8h7tm")
 _tab_container = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer")
+_overall_volume_slider_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/OverallVolumeOptionsMenuSliderView")
+_music_volume_slider_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/MusicVolumeOptionsMenuSliderView")
+_voice_volume_slider_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/VoiceVolumeOptionsMenuSliderView")
 _graphics_preset_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/GraphicsPresetOptionsMenuOptionView")
 _window_mode_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/WindowModeOptionsMenuOptionView")
 _vsync_mode_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/VsyncModeOptionsMenuOptionView")
+_mouse_sensitivity_slider_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/MouseSensOptionsMenuSliderView")
 _crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
 _camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
 _move_forward_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveForwardOptionsMenuKeybindOptionView2")
@@ -143,7 +148,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("1_3s1t0")]
+[node name="OverallVolumeOptionsMenuSliderView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1434606385 instance=ExtResource("2_kx268")]
+layout_mode = 2
+
+[node name="MusicVolumeOptionsMenuSliderView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=62212485 instance=ExtResource("2_kx268")]
+layout_mode = 2
+
+[node name="VoiceVolumeOptionsMenuSliderView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1721394360 instance=ExtResource("2_kx268")]
+layout_mode = 2
+
+[node name="GraphicsPresetOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=597151884 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Graphics Preset"
 
@@ -154,6 +168,9 @@ option_name = "Window Mode"
 [node name="VsyncModeOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1613105363 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Vsync Mode"
+
+[node name="MouseSensOptionsMenuSliderView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=516785686 instance=ExtResource("2_kx268")]
+layout_mode = 2
 
 [node name="CrosshairOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=11185277 instance=ExtResource("1_3s1t0")]
 layout_mode = 2

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bepfpiu50og" path="res://emails/reviews/reviews_custom_email_view.gd" id="1_8ujkl"]
 [ext_resource type="Script" uid="uid://bh50rw0t8ptws" path="res://emails/reviews/review_container.gd" id="2_cmm6a"]
 [ext_resource type="Texture2D" uid="uid://mxsxgh2r1mjs" path="res://sprites/reviews/blep logo.png" id="2_e5feb"]
-[ext_resource type="Texture2D" uid="uid://hyrc23gvplb3" path="res://sprites/customers/gym girl.png" id="3_pyafy"]
 [ext_resource type="Texture2D" uid="uid://da718xp077viy" path="res://sprites/reviews/blep_revire_base_long.png" id="4_e5feb"]
 [ext_resource type="FontFile" uid="uid://d4nnmxe7g85qu" path="res://sprites/reviews/Gontserrat-ExtraBold.ttf" id="5_pyafy"]
 [ext_resource type="FontFile" uid="uid://bwijwxrerk26m" path="res://sprites/reviews/Gontserrat-Regular.ttf" id="6_0n21w"]
@@ -14,10 +13,6 @@ bg_color = Color(1, 0.09803922, 0.22745098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lghh"]
 bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rtxfr"]
-atlas = ExtResource("3_pyafy")
-region = Rect2(225, 10, 600, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8lghh"]
 atlas = ExtResource("4_e5feb")
@@ -76,21 +71,33 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/v_separation = 75
 
-[node name="ReviewContainer" type="Control" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1823459292 node_paths=PackedStringArray("icon", "username", "review_content", "star_1", "reviews_number")]
+[node name="ReviewContainer" type="Control" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1823459292 node_paths=PackedStringArray("customer_profile_texture_rect", "icon", "username", "review_content", "star_1", "reviews_number")]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_cmm6a")
-icon = NodePath("Sprite2D")
+customer_profile_texture_rect = NodePath("CustomerProfileTextureRect")
+icon = NodePath("")
 username = NodePath("Username")
 review_content = NodePath("RichTextLabel")
 star_1 = NodePath("Star1")
 reviews_number = NodePath("ReviewsNumber")
 
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=42599914]
-position = Vector2(106, 168)
-scale = Vector2(0.225, 0.225)
-texture = SubResource("AtlasTexture_rtxfr")
+[node name="CustomerProfileTextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1886906716]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 34.0
+offset_top = -107.0
+offset_right = 182.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ReviewLong" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=2077009424]
 custom_minimum_size = Vector2(850, 0)

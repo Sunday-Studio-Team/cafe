@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://dkpux6rf1y8fc"]
 
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_ssnhn"]
-[ext_resource type="Texture2D" uid="uid://bwgqxrf6dl7op" path="res://emails/reviews/profile_pics/comic_guy.tres" id="2_ssnhn"]
+[ext_resource type="Resource" uid="uid://cftpsp6wltdmh" path="res://resources/customers/comic_guy.tres" id="1_whgwn"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_k23le"]
 
 [resource]
 script = ExtResource("1_ssnhn")
@@ -9,5 +10,5 @@ username = "lornadanish"
 review_content = "I miss this place; I miss the comics. There used to be a sense of community here, but now it's gone so downhill. I just want to sit and read comics again. Seeing the changes made me want to cry. 
 
 "
-sprites = Array[AtlasTexture]([ExtResource("2_ssnhn")])
+customer_sprite_data_options = Array[ExtResource("2_k23le")]([ExtResource("1_whgwn")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

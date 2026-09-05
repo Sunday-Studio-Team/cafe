@@ -1,12 +1,13 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://6fuq21455m3l"]
 
+[ext_resource type="Resource" uid="uid://d2i6j7ffdnivq" path="res://resources/customers/salesman.tres" id="1_ivolh"]
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_rpgt4"]
-[ext_resource type="Texture2D" uid="uid://dcde60b6p1nkl" path="res://emails/reviews/profile_pics/salesman.tres" id="2_rpgt4"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_t0beh"]
 
 [resource]
 script = ExtResource("1_rpgt4")
 username = "averagejoe"
 rating = 0.5
 review_content = "ALL I WANTED WAS A BLACK COFFEE. THE STUPID IPADS THIS PLACE USES GAVE ME A CHAI, THEN A GREEN TEA, THEN SPLIT COFFEE ALL OVER MY WHITE DRESS SHIRT. I HAD AN INTERVIEW THAT DAY AND THIS DEFINITELY DID NOT HELP!"
-sprites = Array[AtlasTexture]([ExtResource("2_rpgt4")])
+customer_sprite_data_options = Array[ExtResource("2_t0beh")]([ExtResource("1_ivolh")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

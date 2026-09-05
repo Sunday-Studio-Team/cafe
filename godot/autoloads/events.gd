@@ -61,3 +61,6 @@ signal viewmodel_animation_finished
 signal bag_pickup_animation_grabbed
 signal hammer_animation_hit
 signal tutorial_selected
+# Free Cam
+signal free_cam_toggled
+signal free_cam_set_speed(speed: float)

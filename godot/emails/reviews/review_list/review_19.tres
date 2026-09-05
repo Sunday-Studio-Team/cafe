@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://coiqfnoougf1v"]
 
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_bqbgr"]
-[ext_resource type="Texture2D" uid="uid://b0c746iig1f3m" path="res://emails/reviews/profile_pics/heart_bow.tres" id="2_bqbgr"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_ujv2q"]
+[ext_resource type="Resource" uid="uid://2rseni1mabbd" path="res://resources/customers/heart_bow_girl.tres" id="2_wmvkm"]
 
 [resource]
 script = ExtResource("1_bqbgr")
@@ -13,5 +14,5 @@ Over time, we've gotten a bit attached and take turns buying each other our morn
 
 Luckily, the machine messed up my order too, so they seemed to realize the error wasn't due to my memory. A worker never would've messed up that badly! Only giving two stars for the very nice worker who fixed the mixup for us. 
 "
-sprites = Array[AtlasTexture]([ExtResource("2_bqbgr")])
+customer_sprite_data_options = Array[ExtResource("1_ujv2q")]([ExtResource("2_wmvkm")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

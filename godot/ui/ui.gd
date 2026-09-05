@@ -52,7 +52,6 @@ const ALERT_QUEUE_SIZE = 5
 @export var rating_label: Label
 @export var customer_flow_rate_label: Label
 @export var drop_button: Button
-@export var sold_item_sound: AudioStreamPlayer
 @export var exit_machine_button: Button
 @export var item_hover_tooltip: Control
 @export var item_hover_tooltip_name: RichTextLabel
@@ -191,10 +190,6 @@ func _ready() -> void:
 	var hammer_t := create_tween().set_loops()
 	hammer_t.tween_property(item_indicator, "modulate", Color.GOLD, 0.5)
 	hammer_t.tween_property(item_indicator, "modulate", Color.ORANGE_RED, 0.5)
-
-	var shelf_sell_t := create_tween().set_loops()
-	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.GOLD, 2)
-	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.WHITE, 2)
 
 
 func _process(_delta: float) -> void:
@@ -345,21 +340,6 @@ func handle_shelf_item_ui() -> void:
 
 	shelf_item_name.text = "[b]%s Lv%s" % [shelf_item.item.name, shelf_item.item.item_level]
 	shelf_item_description.text = shelf_item.item.description_at_levels[shelf_item.item.item_level]
-
-	var sell_value: float = shelf_item.item.sell_value_at_levels[shelf_item.item.item_level]
-	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(sell_value)
-
-	if Input.is_action_just_pressed("interact") and not shelf_item.clicked_sell:
-		shelf_item.clicked_sell = true
-		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(sell_value)
-		shelf_item_sold_indicator.show()
-		sold_item_sound.play()
-		await get_tree().create_timer(0.75, false).timeout
-		shelf_item_sold_indicator.hide()
-		Global.player_tips_bank += sell_value
-		Global.owned_items.erase(shelf_item.item)
-		shelf_item.item.unapply_stats()
-		Events.items_updated.emit()
 
 
 func handle_time_left_warning() -> void:

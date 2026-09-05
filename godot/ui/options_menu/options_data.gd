@@ -7,6 +7,24 @@ const LATEST_OPTIONS_VERSION: int = 2
 ## 2: Added windowing modes.
 @export var options_version: int = 0
 
+const VOLUMES_RATIO_MIN: float = 0.0
+const VOLUMES_RATIO_MAX: float = 1.0
+const VOLUMES_RATIO_STEP: float = 0.01
+
+const VOLUMES_MULTIPLIER: float = 1.0
+
+const OVERALL_VOLUME_DEFAULT: float = 1.0
+@export var overall_volume: float = OVERALL_VOLUME_DEFAULT
+
+const MUSIC_VOLUME_DEFAULT: float = 1.0
+@export var music_volume: float = MUSIC_VOLUME_DEFAULT
+
+const SFX_VOLUME_DEFAULT: float = 1.0
+@export var sfx_volume: float = SFX_VOLUME_DEFAULT
+
+const VOICE_VOLUME_DEFAULT: float = 1.0
+@export var voice_volume: float = VOICE_VOLUME_DEFAULT
+
 enum GraphicsOptionsPresets {
 	HIGH,
 	MEDIUM,
@@ -32,6 +50,13 @@ enum VsyncOption {
 }
 
 @export var vsync_option: VsyncOption = VsyncOption.On
+
+const MOUSE_SENSITIVITY_MIN: float = 0.01
+const MOUSE_SENSITIVITY_MAX: float = 1.0
+const MOUSE_SENSITIVITY_STEP: float = 0.01
+const MOUSE_SENSITIVITY_DEFAULT: float = 0.5
+
+@export var mouse_sensitivity: float = MOUSE_SENSITIVITY_DEFAULT
 
 enum CrosshairOption {
 	On,
@@ -77,7 +102,7 @@ const DEFAULT_PAUSE_EXIT_MENU_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_ESCAPE
 func _init() -> void:
 	_reset_all_keybinds()
 
-func apply_options() -> void:	
+func apply_options() -> void:
 	Events.game_options_changed.emit(self)
 	
 	_set_action_first_key_input_event(&"move_forward", move_forward_action_physical_keycode)

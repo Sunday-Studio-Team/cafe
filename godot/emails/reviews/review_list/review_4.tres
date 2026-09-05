@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://blichm66sp1p8"]
 
+[ext_resource type="Resource" uid="uid://cd1mrwb2elc1c" path="res://resources/customers/grandma.tres" id="1_mml2q"]
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_tqiy4"]
-[ext_resource type="Texture2D" uid="uid://brdxp71hvrspu" path="res://emails/reviews/profile_pics/grandma.tres" id="2_mml2q"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_gdbny"]
 
 [resource]
 script = ExtResource("1_tqiy4")
@@ -13,5 +14,5 @@ So I figured I would order a nice chai tea, and after I tapped the button, the m
 
 They pressed some buttons on their side and the machine got back to work and spat out a matcha! On the third attempt, it simply broke down! It was SO ridiculous! The worker eventually made my drink correctly themselves, but I’m wondering why they even use those sad excuses of a fountain machine. I would’ve rated 1 but put 2 stars solely for the worker being so kind.
 "
-sprites = Array[AtlasTexture]([ExtResource("2_mml2q")])
+customer_sprite_data_options = Array[ExtResource("2_gdbny")]([ExtResource("1_mml2q")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

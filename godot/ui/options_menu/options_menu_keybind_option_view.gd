@@ -32,9 +32,9 @@ func _ready() -> void:
 		_rebind_button.pressed.connect(_on_rebind_button_pressed)
 		_reset_button.pressed.connect(_on_reset_button_pressed)
 
-func set_action(action_label_text: String, action_name: StringName) -> void:
+func set_action(action_label_text: String, new_action_name: StringName) -> void:
 	_action_name_label.text = action_label_text
-	_action_name = action_name
+	_action_name = new_action_name
 
 func set_default_keybind(physical_keycode: Key) -> void:
 	_default_physical_keycode = physical_keycode
@@ -42,7 +42,7 @@ func set_default_keybind(physical_keycode: Key) -> void:
 
 func set_current_keybind(physical_keycode: Key) -> void:
 	_current_physical_keycode = physical_keycode
-	var keybind_string = OS.get_keycode_string(physical_keycode)
+	var keybind_string: String = OS.get_keycode_string(physical_keycode)
 	print("current physical_keycode: %s" % keybind_string)
 	_keybind_label.text = keybind_string
 	_update_reset_button()

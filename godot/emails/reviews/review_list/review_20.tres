@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="Review" format=3 uid="uid://jula2ganqola"]
 
 [ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_0jak2"]
-[ext_resource type="Texture2D" uid="uid://dcde60b6p1nkl" path="res://emails/reviews/profile_pics/salesman.tres" id="2_vaspv"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_4f56g"]
+[ext_resource type="Resource" uid="uid://d2i6j7ffdnivq" path="res://resources/customers/salesman.tres" id="2_yeueo"]
 
 [resource]
 script = ExtResource("1_0jak2")
@@ -11,5 +12,5 @@ review_content = "I’m falling apart. I’ve been so stressed that I’m dreami
 
 GOD FORBID something in my life turns out right.
 "
-sprites = Array[AtlasTexture]([ExtResource("2_vaspv")])
+customer_sprite_data_options = Array[ExtResource("1_4f56g")]([ExtResource("2_yeueo")])
 metadata/_custom_type_script = "uid://djf3q4lwggw0g"

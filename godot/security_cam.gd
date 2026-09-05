@@ -19,6 +19,7 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var disable_particles: GPUParticles3D
 @export var disabled_timer_sprite: Sprite3D
 @export var disabled_timer_bar: TextureProgressBar
+@export var whipped_cream_sound: AudioStreamPlayer
 
 # we duplicate the raycast many times to cover the spotlight cone on startup
 # so we store a ref to all the rays here to iterate over them
@@ -209,6 +210,7 @@ func _cancel_break_minigame() -> void:
 
 func _on_used_active_item(item: Item):
 	if item != null and item.item_id == "whipped_cream":
+		whipped_cream_sound.play()
 		Global.put_active_item_on_cooldown(item)
 		disarm_camera()
 		disabled_timer.wait_time = 15
