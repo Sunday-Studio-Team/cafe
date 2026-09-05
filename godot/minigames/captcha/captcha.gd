@@ -16,6 +16,7 @@ extends SubViewportContainer
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+@export var drag_instruction_arrow: Control
 
 var ordered_drink: Drink
 var main_text: String = "with the required ingredients"
@@ -23,6 +24,8 @@ var drink_customer: Customer
 
 
 func _ready() -> void:
+	drag_instruction_arrow.hide()
+	
 	for slot: IngredientIconHolder in captcha.get_children():
 		slot.button.pressed.connect(
 			func():
@@ -113,6 +116,7 @@ func verify_captcha() -> void:
 	
 	entire_panel.visible = false
 	remade_drink_sprite.visible = true
+	drag_instruction_arrow.visible = Global.day == 0
 	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)"
 	
 	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why

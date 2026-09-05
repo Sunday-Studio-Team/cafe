@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
+[ext_resource type="Texture2D" uid="uid://cskqkyqvsooge" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrow_long.png" id="6_i2vbf"]
 [ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
 [ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="6_wy7ys"]
@@ -30,7 +31,7 @@ stream_0/stream = ExtResource("4_juyqc")
 stream_1/stream = ExtResource("5_w8b1k")
 stream_2/stream = ExtResource("6_p8bru")
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "player_thought", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "player_thought", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "drag_instruction_arrow")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 2
@@ -51,6 +52,7 @@ remade_drink_sprite = NodePath("SubViewport/Finished Drink")
 click_sound = NodePath("ClickSound")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
+drag_instruction_arrow = NodePath("SubViewport/DragInstructionArrow")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false
@@ -305,6 +307,18 @@ layout_mode = 2
 [node name="CustomerSprite" type="Sprite2D" parent="SubViewport/CustomerContainer/Control" unique_id=23708804]
 position = Vector2(-20, -20)
 scale = Vector2(0.65, 0.65)
+
+[node name="DragInstructionArrow" type="TextureRect" parent="SubViewport" unique_id=115939403]
+visible = false
+z_index = 1
+offset_left = 953.0
+offset_top = 464.0
+offset_right = 1081.0
+offset_bottom = 592.0
+mouse_filter = 2
+texture = ExtResource("6_i2vbf")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
