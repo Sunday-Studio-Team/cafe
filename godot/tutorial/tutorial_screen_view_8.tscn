@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bj4es68ewvbba"]
 
 [ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_pyqg6"]
+[ext_resource type="PackedScene" uid="uid://bryvlrbbi4ofw" path="res://tutorial/handbook_background.tscn" id="2_hljpv"]
 [ext_resource type="Texture2D" uid="uid://yixvil8epn16" path="res://tutorial/tutorial_screen_8.png" id="2_pyqg6"]
+[ext_resource type="Theme" uid="uid://d0nulpskemldc" path="res://themes/employee_handbook_theme.tres" id="3_4obof"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_sig3r"]
 [ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_4obof"]
+[ext_resource type="Texture2D" uid="uid://btjogsibuosqi" path="res://tutorial/tippy_placeholder.png" id="4_jlmd2"]
 [ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="5_jlmd2"]
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="6_v4o66"]
 [ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="7_hlcet"]
@@ -19,7 +22,60 @@ script = ExtResource("1_pyqg6")
 _continue_buttons = [NodePath("YesButton"), NodePath("OkButton")]
 metadata/_custom_type_script = "uid://8bh0c410cd6d"
 
+[node name="HandbookBackground" parent="." unique_id=365059969 instance=ExtResource("2_hljpv")]
+layout_mode = 1
+
+[node name="HandbookContent" type="Control" parent="." unique_id=831987961]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HandbookContent" unique_id=1548973734]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HandbookContent/MarginContainer" unique_id=735302351]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HandbookContent/MarginContainer/VBoxContainer" unique_id=1276773386]
+layout_mode = 2
+theme = ExtResource("3_4obof")
+theme_override_constants/line_spacing = 40
+theme_override_font_sizes/font_size = 80
+text = "Keep the Machines WORKING
+and the Cafe CLEAN !!!"
+horizontal_alignment = 1
+
+[node name="Tippy" type="TextureRect" parent="HandbookContent" unique_id=1020841519]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -425.0
+offset_top = -552.5
+offset_right = 425.0
+offset_bottom = 684.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_jlmd2")
+stretch_mode = 3
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
