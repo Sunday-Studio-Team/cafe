@@ -43,7 +43,7 @@ func _ready():
 			Global.in_machine_ui = true
 			Global.machine_in_use = machine
 			player_using_me = true
-			
+
 			if !Global.tutorial_machine_used:
 				Global.tutorial_machine_used = true
 

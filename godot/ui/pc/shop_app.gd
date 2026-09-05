@@ -116,18 +116,18 @@ func _on_reroll_pressed() -> void:
 
 func _on_item_button_pressed(item_button: ItemButton) -> void:
 	var item: Item = item_button.item
-	
+
 	var does_own_lower_level_of_item: bool = false
 	for owned_item in Global.owned_items:
 		if item.item_id == owned_item.item_id:
 			does_own_lower_level_of_item = true
-			
+
 	var can_afford: bool = Global.player_tips_bank >= item.price_at_levels[item.item_level]
 	var has_free_item_slots: bool = does_own_lower_level_of_item or Global.owned_items.size() < Global.item_slots_amount
 	var did_buy_item: bool = can_afford and has_free_item_slots
 	item_button.notify_pressed(did_buy_item)
 	if did_buy_item:
-		
+
 		# Remove lower leveled item
 		var index: int = 0
 		for owned_item in Global.owned_items:
@@ -136,7 +136,7 @@ func _on_item_button_pressed(item_button: ItemButton) -> void:
 				Global.owned_items.remove_at(index)
 				break
 			index += 1
-		
+
 		Global.player_tips_bank -= item.price_at_levels[item.item_level]
 
 		own_and_apply_item(item)

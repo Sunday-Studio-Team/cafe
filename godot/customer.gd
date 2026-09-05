@@ -38,7 +38,7 @@ func _ready() -> void:
 		customer_sprite_resource = Global.customer_sprites.pick_random()
 	Global.customer_sprites_in_use.append(customer_sprite_resource)
 	body.texture = customer_sprite_resource.sprite
-	
+
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)

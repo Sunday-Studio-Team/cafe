@@ -16,7 +16,7 @@ const LOADING_FADE_OUT_TIME := 1.0
 @export var _main_scene_uid: StringName
 @export var _main_menu_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
-## Additional resources to always keep cached for speed. 
+## Additional resources to always keep cached for speed.
 @export var _main_sub_resource_uids: Array[StringName]
 
 @export var _cafe_environment_res: Environment
@@ -33,10 +33,10 @@ var _is_first_options_load: bool = true
 
 func _ready() -> void:
 	Global.cafe_environment_res = _cafe_environment_res
-	
+
 	Events.game_options_changed.connect(_on_game_options_changed)
 	SaveDataManager.get_options_data().apply_options()
-	
+
 	Events.scene_switch_requested.connect(load_scene)
 	Events.quit_game_requested.connect(quit_game)
 
@@ -52,7 +52,7 @@ func _process(_delta: float) -> void:
 
 func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	const TIMING_PRINTS: bool = true
-	
+
 	if current_scene:
 		get_tree().paused = true
 		loading_tween = create_tween()
@@ -67,7 +67,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 
 	var loading_start_time_ms: int = Time.get_ticks_msec()
 	if TIMING_PRINTS: print("SceneSwitcher: started timing loading")
-	
+
 	var cached_packed_scene: PackedScene = null
 	if scene == SceneSwitcher.GameScene.MAIN_SCENE:
 		if _cached_main_packed_scene != null:
@@ -79,17 +79,17 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 		if TIMING_PRINTS: print("SceneSwitcher: getting scene from cache")
 	else:
 		var scene_uid: StringName = _scene_enum_to_uid(scene)
-		
+
 		var resource_uid_requests: Array[StringName] = []
 		if scene == SceneSwitcher.GameScene.MAIN_SCENE:
 			resource_uid_requests.append_array(_main_sub_resource_uids)
 		resource_uid_requests.append(scene_uid)
-		
+
 		var finished_requests: int = 0
 		for resource_uid_request in resource_uid_requests:
 			var request_start_time_ms: int = Time.get_ticks_msec()
 			if TIMING_PRINTS: print("SceneSwitcher: started timing resource %s loading" % finished_requests)
-			
+
 			var use_sub_threads: bool = false
 			if resource_uid_request in _main_sub_resource_uids:
 				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource without threads")
@@ -103,14 +103,14 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 				# If true, it may randomly crash possibly due to engine bugs with autoloads:
 					# https://github.com/godotengine/godot/issues/98865
 				use_sub_threads = false
-			
+
 			var request_result: int = ResourceLoader.load_threaded_request(resource_uid_request, "Resource", use_sub_threads)
 			if request_result != OK:
 				push_error("Failed to request resource.")
 				return
-			
+
 			var progress_ratio_array: Array[float] = []
-			while ResourceLoader.load_threaded_get_status(resource_uid_request, progress_ratio_array) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:				
+			while ResourceLoader.load_threaded_get_status(resource_uid_request, progress_ratio_array) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_IN_PROGRESS:
 				if progress_ratio_array.size() != 1:
 					push_error("Progress ratio array empty?")
 					return
@@ -118,7 +118,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 				var total_progress_ratio: float = ((finished_requests as float) + progress_ratio) / (resource_uid_requests.size() as float)
 				_loading_progress_bar.value = total_progress_ratio
 				await get_tree().process_frame
-			
+
 			if ResourceLoader.load_threaded_get_status(resource_uid_request) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 				push_error("Failed to load resource.")
 				return
@@ -126,7 +126,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 			if requested_resource == null:
 				push_error("Failed to get resource.")
 				return
-			
+
 			if resource_uid_request == scene_uid:
 				var requested_packed_scene: PackedScene = requested_resource as PackedScene
 				if requested_packed_scene == null:
@@ -139,11 +139,11 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 			elif resource_uid_request in _main_sub_resource_uids:
 				if TIMING_PRINTS: print("SceneSwitcher: cached sub resource")
 				_cached_sub_resources[resource_uid_request] = requested_resource
-			
+
 			var request_end_time_ms: int = Time.get_ticks_msec()
 			var request_total_duration_ms: int = request_end_time_ms - request_start_time_ms
 			if TIMING_PRINTS: print("SceneSwitcher: resource %s (%s) loading duration: %s ms" % [finished_requests, requested_resource.resource_path, request_total_duration_ms])
-			
+
 			finished_requests += 1
 
 		if TIMING_PRINTS: print("SceneSwitcher: done loading, instantiating scene")
@@ -151,29 +151,29 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	var loading_end_time_ms: int = Time.get_ticks_msec()
 	var loading_total_duration_ms: int = loading_end_time_ms - loading_start_time_ms
 	if TIMING_PRINTS: print("SceneSwitcher: total loading duration: %s ms" % loading_total_duration_ms)
-	
+
 	_loading_progress_bar.visible = false
 
 	var instantiating_start_time_ms: int = Time.get_ticks_msec()
 	if TIMING_PRINTS: print("SceneSwitcher: started timing instantiation")
 
 	current_scene = scene_packed_scene.instantiate()
-	
+
 	var instantiating_end_time_ms: int = Time.get_ticks_msec()
 	var instantiating_total_duration_ms: int = instantiating_end_time_ms - instantiating_start_time_ms
 	if TIMING_PRINTS: print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
-	
+
 	var add_child_start_time_ms: int = Time.get_ticks_msec()
 	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child, current child node count: %s" % _count_children_recursively(self))
-	
+
 	add_child(current_scene)
 
 	var add_child_end_time_ms: int = Time.get_ticks_msec()
 	var add_child_total_duration_ms: int = add_child_end_time_ms - add_child_start_time_ms
 	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms, new child count: %s" % [add_child_total_duration_ms, _count_children_recursively(self)])
-	
+
 	get_tree().paused = false
-	
+
 	loading_tween = create_tween()
 	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)
 	await loading_tween.finished
@@ -216,7 +216,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	const BUS_NAME_DIEGETIC_MUSIC: String = "DiegeticMusic"
 	const BUS_NAME_MINIGAME_MUSIC: String = "MinigameMusic"
 	const BUS_NAME_VOICE: String = "TippyVO"
-	
+
 	var bus_index_overall: int = AudioServer.get_bus_index(BUS_NAME_OVERALL)
 	AudioServer.set_bus_volume_linear(bus_index_overall, options_data.overall_volume * options_data.VOLUMES_MULTIPLIER)
 	var bus_index_diegetic_music: int = AudioServer.get_bus_index(BUS_NAME_DIEGETIC_MUSIC)
@@ -225,7 +225,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	AudioServer.set_bus_volume_linear(bus_index_minigame_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
 	var bus_index_voice: int = AudioServer.get_bus_index(BUS_NAME_VOICE)
 	AudioServer.set_bus_volume_linear(bus_index_voice, options_data.voice_volume * options_data.VOLUMES_MULTIPLIER)
-	
+
 	match options_data.graphics_preset:
 		OptionsData.GraphicsOptionsPresets.HIGH:
 			Global.cafe_environment_res.ssao_enabled = true
@@ -276,7 +276,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	get_viewport().msaa_2d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_2d") as Viewport.MSAA)
 	get_viewport().msaa_3d = (ProjectSettings.get_setting("rendering/anti_aliasing/quality/msaa_3d") as Viewport.MSAA)
 	get_tree().root.mesh_lod_threshold = (ProjectSettings.get_setting("rendering/mesh_lod/lod_change/threshold_pixels") as float)
-	
+
 	match options_data.window_mode_option:
 		OptionsData.WindowModeOption.Windowed:
 			if DisplayServer.window_get_mode() != DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED:
@@ -293,7 +293,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 		_:
 			pass
-	
+
 	match options_data.vsync_option:
 		OptionsData.VsyncOption.On:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSyncMode.VSYNC_ENABLED)

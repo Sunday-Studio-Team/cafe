@@ -74,7 +74,7 @@ var employee_rating: float = 0:
 			new_value = 0.0
 		if new_value == employee_rating:
 			return
-		
+
 		var previous_employee_rating: float = employee_rating
 		employee_rating = new_value
 		Events.employee_rating_updated.emit(new_value, previous_employee_rating)

@@ -132,9 +132,9 @@ func _process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 
 	progress_indicator.visible = not timer.is_stopped()
-	
-	
-	
+
+
+
 	accept_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
