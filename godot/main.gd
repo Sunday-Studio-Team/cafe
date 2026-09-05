@@ -120,6 +120,9 @@ func _ready() -> void:
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	get_stats()
+	
+	# load data from save file
+	SaveDataManager.save_data.load_data()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
 
@@ -388,12 +391,13 @@ func shift_end_sequence(override:bool=false):
 				Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 				return
 			Global.day += 1
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 			#Leaving this here in case you guys want this scene back again
 			#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
 		else:
 			Global.day = 1
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+		
+		SaveDataManager.save_data.save_data()
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 #Minigame is active (Need to turn off regular player controls)
