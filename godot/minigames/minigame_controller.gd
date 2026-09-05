@@ -1,6 +1,9 @@
 extends CanvasLayer
 
+const OPEN_CLOSE_TWEEN_DUR := 0.1
+
 @export var minigame_dict: Dictionary[String, PackedScene]
+@export var sub_viewport_container: SubViewportContainer
 @export var sub_viewport: SubViewport
 @export var cancel_button: Button
 
@@ -40,8 +43,42 @@ func play_minigame(minigame_name: String):
 	Global.minigame_active = true
 	Global.current_minigame_name = minigame_name
 
+	var t := create_tween().set_parallel().set_trans(Tween.TRANS_SPRING)
+
+	t.tween_property(
+		sub_viewport_container,
+		"offset_transform_scale",
+		Vector2.ONE,
+		OPEN_CLOSE_TWEEN_DUR
+	).from(Vector2.ZERO)
+
+	t.tween_property(
+		sub_viewport_container,
+		"offset_transform_rotation",
+		0,
+		OPEN_CLOSE_TWEEN_DUR
+	).from(randf_range(deg_to_rad(-90), deg_to_rad(90)))
+
 
 func close_game():
+	var t := create_tween().set_parallel().set_trans(Tween.TRANS_SPRING)
+
+	t.tween_property(
+		sub_viewport_container,
+		"offset_transform_rotation",
+		randf_range(deg_to_rad(-90), deg_to_rad(90)),
+		OPEN_CLOSE_TWEEN_DUR
+	)
+
+	t.tween_property(
+		sub_viewport_container,
+		"offset_transform_scale",
+		Vector2.ZERO,
+		OPEN_CLOSE_TWEEN_DUR
+	).from(Vector2.ONE)
+
+	await t.finished
+
 	sub_viewport.get_child(0).queue_free()
 	visible = false
 	Global.minigame_active = false

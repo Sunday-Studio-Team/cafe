@@ -1474,7 +1474,7 @@ text = "MONDAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MinigameController" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
+[node name="MinigameController" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=305291737 node_paths=PackedStringArray("sub_viewport_container", "sub_viewport", "cancel_button")]
 visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
@@ -1487,6 +1487,7 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Typing": ExtResource("20_d13ii"),
 "WordMatch": ExtResource("18_4obbf")
 })
+sub_viewport_container = NodePath("MarginContainer/SubViewportContainer")
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 cancel_button = NodePath("MarginContainer/CancelButton")
 
@@ -1499,12 +1500,13 @@ grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="PlayerUiSubViewportContainer/SubViewport/MinigameController/MarginContainer" unique_id=824924343]
 layout_mode = 2
+offset_transform_enabled = true
 mouse_filter = 0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/MinigameController/MarginContainer/SubViewportContainer" unique_id=1717214408]
 handle_input_locally = false
-size = Vector2i(1920, 1080)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="CancelButton" type="Button" parent="PlayerUiSubViewportContainer/SubViewport/MinigameController/MarginContainer" unique_id=1664414392]
