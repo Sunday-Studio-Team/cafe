@@ -3,6 +3,7 @@ extends CenterContainer
 @export var root: SubViewportContainer
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+	print("q")
 	return data == finished_drink
 
 

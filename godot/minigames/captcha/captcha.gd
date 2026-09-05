@@ -5,10 +5,10 @@ extends SubViewportContainer
 @export var extra_ordered: IngredientIconHolder
 @export var captcha: GridContainer
 @export var submit_button: Button
-@export var instructions: RichTextLabel
-@export var drink_name: RichTextLabel
+#@export var instructions: RichTextLabel
+#@export var drink_name: RichTextLabel
 @export var player_thought: RichTextLabel
-@export var entire_panel: PanelContainer
+@export var entire_panel: Control
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
 @export var customer_sprite: TextureRect
@@ -16,6 +16,18 @@ extends SubViewportContainer
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+
+@export var req_and_sel:TextureRect
+@export var captcha_vbox:VBoxContainer
+@export var sato_tippy_fight:TextureRect
+@export var complete_sprite:TextureRect
+
+enum SatoTippyFight {
+	Neutral = 0,
+	Win = 1,
+	Loss = 2
+}
+@export var sato_tippy_textures:Array[Texture2D]
 
 var ordered_drink: Drink
 var main_text: String = "with the required ingredients"
@@ -88,6 +100,16 @@ func get_ordered_drink(drink: Drink) -> void:
 	]
 	remade_drink_sprite.texture = drink.icon
 
+func on_wrong():
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Loss]
+	await get_tree().create_timer(1).timeout
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
+
+func on_right():
+	req_and_sel.visible = false
+	captcha_vbox.visible = false
+	complete_sprite.visible = true
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
 
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
@@ -107,11 +129,11 @@ func verify_captcha() -> void:
 				!= captcha_icon.button.button_pressed
 			)
 		):
+			on_wrong()
 			shake_panel()
 			wrong_sound.play()
 			return
-	
-	entire_panel.visible = false
+	on_right()
 	remade_drink_sprite.visible = true
 	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)"
 	
@@ -135,8 +157,6 @@ func verify_captcha() -> void:
 	#_end_minigame()
 
 
-func set_instructions(text: String) -> void:
-	instructions.text = text
 
 
 func set_submit_text(text: String) -> void:
@@ -168,8 +188,7 @@ func shake_panel() -> void:
 
 func _start_minigame() -> void:
 	order_reminder.visible = false
-	set_instructions(main_text)
-	
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
 	var drink: Drink
 	
 	# The else blocks here should only happen if this scene is ran by itself (not in the main game)
@@ -195,6 +214,7 @@ func _end_minigame() -> void:
 	# THIS FUNCTION IS CALLED BY THE `CustomerContainer` node!
 	# Since the game should only end when giving the customer their drink now
 	print("End remaking minigame")
+	correct_sound.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
 	Events.minigame_end.emit()
 
