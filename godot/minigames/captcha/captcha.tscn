@@ -12,10 +12,12 @@
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
 [ext_resource type="Texture2D" uid="uid://bmfed728nxhf2" path="res://sprites/customers/heartbowgirl.png" id="6_i2vbf"]
 [ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
+[ext_resource type="Texture2D" uid="uid://c1xqkx7j50ik7" path="res://sprites/remake_drink_minigame/sato fail drink.png" id="6_lv3ps"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
 [ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="6_wy7ys"]
 [ext_resource type="Texture2D" uid="uid://cyassji1nenhn" path="res://sprites/remake_drink_minigame/remake red.png" id="7_ikoeo"]
 [ext_resource type="AudioStream" uid="uid://b36lt7uasbtpp" path="res://audio/captcha/captcha_correct.wav" id="7_p8bru"]
+[ext_resource type="Texture2D" uid="uid://deax8xynx1r6f" path="res://sprites/remake_drink_minigame/Sato success drink.png" id="7_x0a0u"]
 [ext_resource type="AudioStream" uid="uid://qm462c3iywm1" path="res://audio/captcha/captcha_wrong.wav" id="8_3tmsw"]
 [ext_resource type="Texture2D" uid="uid://ce36fefn26vrb" path="res://sprites/remake_drink_minigame/regular stance fighting.png" id="10_ddm81"]
 [ext_resource type="Texture2D" uid="uid://bglbsgjl1c1uo" path="res://sprites/remake_drink_minigame/completed drink.png" id="11_v4kh0"]
@@ -36,7 +38,7 @@ stream_0/stream = ExtResource("4_juyqc")
 stream_1/stream = ExtResource("5_w8b1k")
 stream_2/stream = ExtResource("6_p8bru")
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "player_thought", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite")]
+[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "player_thought", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato")]
 offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 2
@@ -59,7 +61,9 @@ req_and_sel = NodePath("SubViewport/HBoxContainer/Captcha/RequiredAndSelect")
 captcha_vbox = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox")
 sato_tippy_fight = NodePath("SubViewport/SatoTippyFight")
 complete_sprite = NodePath("SubViewport/HBoxContainer/Captcha/CompleteSprite")
+sato = NodePath("SubViewport/HBoxContainer/Sato")
 sato_tippy_textures = Array[Texture2D]([ExtResource("10_ddm81"), ExtResource("3_rttna"), ExtResource("4_v4kh0")])
+sato_sprites = Array[Texture2D]([ExtResource("3_fa211"), ExtResource("7_x0a0u"), ExtResource("6_lv3ps")])
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
 handle_input_locally = false

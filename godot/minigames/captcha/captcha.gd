@@ -21,6 +21,7 @@ extends SubViewportContainer
 @export var captcha_vbox:VBoxContainer
 @export var sato_tippy_fight:TextureRect
 @export var complete_sprite:TextureRect
+@export var sato:TextureRect
 
 enum SatoTippyFight {
 	Neutral = 0,
@@ -28,6 +29,7 @@ enum SatoTippyFight {
 	Loss = 2
 }
 @export var sato_tippy_textures:Array[Texture2D]
+@export var sato_sprites:Array[Texture2D]
 
 var ordered_drink: Drink
 var main_text: String = "with the required ingredients"
@@ -101,14 +103,17 @@ func get_ordered_drink(drink: Drink) -> void:
 	remade_drink_sprite.texture = drink.icon
 
 func on_wrong():
+	sato.texture = sato_sprites[SatoTippyFight.Loss]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Loss]
 	await get_tree().create_timer(1).timeout
+	sato.texture = sato_sprites[SatoTippyFight.Neutral]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
 
 func on_right():
 	req_and_sel.visible = false
 	captcha_vbox.visible = false
 	complete_sprite.visible = true
+	sato.texture = sato_sprites[SatoTippyFight.Win]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
 
 func verify_captcha() -> void:
