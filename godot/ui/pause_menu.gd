@@ -24,10 +24,7 @@ var state: State = State.NORMAL:
 		state = new_state
 		match state:
 			State.CONFIRMING_RESTART:
-				if SaveDataManager.save_data.finished_or_skipped_tutorial:
-					sure_info_label.text = "(this means going back to day 1!)"
-				else:
-					sure_info_label.text = "(this means losing all progress!)"
+				sure_info_label.text = "(this means losing all progress!)"
 			State.CONFIRMING_QUIT:
 				sure_info_label.text = "(this means losing all progress!)"
 
@@ -57,8 +54,6 @@ func _ready() -> void:
 					# NOTE: shouldnt this not be visible on restart anyway ? idk
 					visible = false
 					get_tree().paused = false
-					if SaveDataManager.save_data.finished_or_skipped_tutorial:
-						Global.day = 1
 					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 	)
 	no_sure_button.pressed.connect(not_sure)
