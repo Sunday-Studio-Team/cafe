@@ -182,8 +182,12 @@ func _start_minigame() -> void:
 	if(Global.ordered_drink_customer != null):
 		drink_customer = Global.ordered_drink_customer
 		customer_sprite.texture = drink_customer.body.texture
+		
+		rescale_image_to_target_height(customer_sprite)
 	else:
 		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
+		#customer_sprite.texture = Global.customer_sprites[18].sprite #girl with 2 sprite sizes
+		rescale_image_to_target_height(customer_sprite)
 		order_reminder.visible = true
 		populate_order_reminder()
 	
@@ -201,3 +205,29 @@ func _end_minigame() -> void:
 
 func _on_submit_button_pressed() -> void:
 	verify_captcha()
+
+
+
+func rescale_image_to_target_height(customer_sprite: TextureRect, target_height:int = 1024)->void:
+	#target_height is generally 1024
+	
+	
+	var original_height = customer_sprite.texture.get_height()
+	if original_height==target_height:
+		
+		return	#do nothing! texture is the correct size.
+				#all customer heights have 1024px; with variable widths. so its the only one we check.		
+			
+	var original_width = float(customer_sprite.texture.get_width())
+	
+	var ratio = float(original_height)/float(target_height) #ex 2048/1024 = 2
+	
+	var _image = customer_sprite.texture.get_image()
+	
+	var target_width = original_width
+	_image.resize(int(round(original_width/ratio)), int(target_height), Image.INTERPOLATE_LANCZOS)
+	var _texture: ImageTexture = ImageTexture.create_from_image(_image)
+	
+	customer_sprite.texture= _texture
+	#print("rescaled customer sprite size",customer_sprite.texture.get_size())
+	
