@@ -2,6 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://dhttshpvbkayc" path="res://ui/loadout/loadout_menu_element.tscn" id="1_0rl37"]
 [ext_resource type="Script" uid="uid://dlnawqw3ep1l4" path="res://ui/loadout/item_loadout_menu.gd" id="1_7ango"]
+[ext_resource type="AudioStream" uid="uid://cn0h1uvfk5nd8" path="res://audio/locker/locker_open_1.wav" id="3_ndpu2"]
+[ext_resource type="AudioStream" uid="uid://dp1el8c30hxoc" path="res://audio/locker/locker_open_2.wav" id="4_c6g3w"]
+[ext_resource type="AudioStream" uid="uid://d0e25vy8m3f3s" path="res://audio/locker/locker_open_3.wav" id="5_dbh57"]
+[ext_resource type="AudioStream" uid="uid://cigg2yn61wl2t" path="res://audio/locker/locker_open_4.wav" id="6_cs5tx"]
+[ext_resource type="AudioStream" uid="uid://b5yurcdx6tbqm" path="res://audio/locker/locker_close_1.wav" id="7_qgurv"]
+[ext_resource type="AudioStream" uid="uid://bo6a5cefkw5gs" path="res://audio/locker/locker_close_2.wav" id="8_7pc00"]
+[ext_resource type="AudioStream" uid="uid://djeihll8vr45k" path="res://audio/locker/locker_close_3.wav" id="9_6p7s6"]
+[ext_resource type="AudioStream" uid="uid://rwvc4m5snabj" path="res://audio/locker/locker_close_4.wav" id="10_plv5e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ango"]
 bg_color = Color(0.1882353, 0.31764707, 0.7490196, 0.88235295)
@@ -56,13 +64,29 @@ bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs5tx"]
 bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 
-[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+streams_count = 4
+stream_0/stream = ExtResource("3_ndpu2")
+stream_1/stream = ExtResource("4_c6g3w")
+stream_2/stream = ExtResource("5_dbh57")
+stream_3/stream = ExtResource("6_cs5tx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8dww"]
+streams_count = 4
+stream_0/stream = ExtResource("7_qgurv")
+stream_1/stream = ExtResource("8_7pc00")
+stream_2/stream = ExtResource("9_6p7s6")
+stream_3/stream = ExtResource("10_plv5e")
+
+[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "locker_open_sound", "locker_close_sound", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
 script = ExtResource("1_7ango")
 element_scene = ExtResource("1_0rl37")
 root = NodePath("MarginContainer")
 available_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer")
 equipped_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer")
 confirm_button = NodePath("MarginContainer/VBoxContainer/ConfirmButton")
+locker_open_sound = NodePath("LockerOpenSound")
+locker_close_sound = NodePath("LockerCloseSound")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
 item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
@@ -286,3 +310,9 @@ text = "item description (blah blah blah blah blah )"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="LockerOpenSound" type="AudioStreamPlayer" parent="." unique_id=667555143]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+
+[node name="LockerCloseSound" type="AudioStreamPlayer" parent="." unique_id=415072661]
+stream = SubResource("AudioStreamRandomizer_l8dww")
