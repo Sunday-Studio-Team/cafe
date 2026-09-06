@@ -326,7 +326,7 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 	var help_desk_bool := help_desk == "true"
 	var customer_sprite_data: CustomerSpriteData = null
 	for datum in Global.customer_sprites:
-		if datum.customer_name == customer_name:
+		if datum.customer_name.to_lower() == customer_name.to_lower():
 			customer_sprite_data = datum
 			break
 	if customer_sprite_data == null:
