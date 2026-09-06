@@ -71,13 +71,12 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/v_separation = 75
 
-[node name="ReviewContainer" type="Control" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1823459292 node_paths=PackedStringArray("customer_profile_texture_rect", "icon", "username", "review_content", "star_1", "reviews_number")]
+[node name="ReviewContainer" type="Control" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1823459292 node_paths=PackedStringArray("customer_profile_texture_rect", "username", "review_content", "star_1", "reviews_number")]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_cmm6a")
 customer_profile_texture_rect = NodePath("CustomerProfileTextureRect")
-icon = NodePath("")
 username = NodePath("Username")
 review_content = NodePath("RichTextLabel")
 star_1 = NodePath("Star1")

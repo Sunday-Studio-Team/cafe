@@ -20,7 +20,8 @@ extends SubViewportContainer
 @export var tippy_up: Array[Texture]
 @export var tippy_right: Array[Texture]
 @export var tippy_down: Array[Texture]
-@export var tippy_fail: Array[Texture]
+@export var tippy_fail_first: Array[Texture]
+@export var tippy_fail_again: Array[Texture]
 @export var shake_intensity: float = 10
 
 @export var correct_sound: AudioStreamPlayer
@@ -49,6 +50,7 @@ var correct_input_index: int = 0
 	"red": { "left": red_left, "up": red_up, "right": red_right, "down": red_down },
 }
 @onready var background_color = "#ffffff"
+var failures: int = 0
 
 
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
@@ -95,11 +97,15 @@ func check_input(direction: String) -> void:
 		correct_input_index += 1
 		correct_sound.play()
 	else:
-		set_tippy_image(tippy_fail.pick_random())
+		if failures < 1:
+			set_tippy_image(tippy_fail_first.pick_random())
+		else:
+			set_tippy_image(tippy_fail_again.pick_random())
 		shake_tippy()
 		wrong_sound.play()
 		#display_wrong()
 		_start_minigame()
+		failures += 1
 
 
 func add_arrow_to_output(
