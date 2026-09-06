@@ -186,7 +186,7 @@ func _start_minigame() -> void:
 		rescale_image_to_target_height(customer_sprite)
 	else:
 		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
-		customer_sprite.texture = Global.customer_sprites[18].sprite
+		#customer_sprite.texture = Global.customer_sprites[18].sprite #girl with 2 sprite sizes
 		rescale_image_to_target_height(customer_sprite)
 		order_reminder.visible = true
 		populate_order_reminder()
