@@ -5,11 +5,11 @@
 [ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
-[ext_resource type="Texture2D" uid="uid://cskqkyqvsooge" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrow_long.png" id="6_i2vbf"]
 [ext_resource type="Texture2D" uid="uid://bmfed728nxhf2" path="res://sprites/customers/heartbowgirl.png" id="6_i2vbf"]
 [ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
 [ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="6_wy7ys"]
+[ext_resource type="Texture2D" uid="uid://cskqkyqvsooge" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrow_long.png" id="7_i2vbf"]
 [ext_resource type="AudioStream" uid="uid://b36lt7uasbtpp" path="res://audio/captcha/captcha_correct.wav" id="7_p8bru"]
 [ext_resource type="AudioStream" uid="uid://qm462c3iywm1" path="res://audio/captcha/captcha_wrong.wav" id="8_3tmsw"]
 
@@ -324,14 +324,13 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="DragInstructionArrow" type="TextureRect" parent="SubViewport" unique_id=115939403]
-visible = false
 z_index = 1
 offset_left = 953.0
 offset_top = 464.0
 offset_right = 1081.0
 offset_bottom = 592.0
 mouse_filter = 2
-texture = ExtResource("6_i2vbf")
+texture = ExtResource("7_i2vbf")
 expand_mode = 1
 stretch_mode = 5
 
