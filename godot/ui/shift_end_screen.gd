@@ -31,6 +31,9 @@ func _ready() -> void:
 
 	button.pressed.connect(
 		func():
+		if Global.day == Global.final_day:
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.FINAL_COMIC_SCENE)
+		else:
 			Events.end_screen_finished.emit(),
 	)
 

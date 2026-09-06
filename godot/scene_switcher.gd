@@ -6,6 +6,7 @@ enum GameScene {
 	LEVEL_SELECT,
 	MAIN_SCENE,
 	END_OF_DAY_DIALOG_SCENE,
+	FINAL_COMIC_SCENE,
 }
 
 const LOADING_FADE_IN_TIME := 0.5
@@ -18,7 +19,8 @@ const LOADING_FADE_OUT_TIME := 1.0
 @export var _level_select_uid: StringName
 @export var _main_scene_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
-## Additional resources to always keep cached for speed.
+@export var _final_comic_scene_uid: StringName
+## Additional resources to always keep cached for speed. 
 @export var _main_sub_resource_uids: Array[StringName]
 
 @export var _cafe_environment_res: Environment
@@ -200,6 +202,8 @@ func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 			return _main_scene_uid
 		SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE:
 			return _end_of_day_dialog_scene_uid
+		SceneSwitcher.GameScene.FINAL_COMIC_SCENE:
+			return _final_comic_scene_uid
 		_:
 			push_error("Unhandled Scene!")
 			return &""
