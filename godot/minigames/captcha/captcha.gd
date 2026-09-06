@@ -4,10 +4,6 @@ extends SubViewportContainer
 @export var liquid_ordered: IngredientIconHolder
 @export var extra_ordered: IngredientIconHolder
 @export var captcha: GridContainer
-@export var submit_button: Button
-#@export var instructions: RichTextLabel
-#@export var drink_name: RichTextLabel
-@export var player_thought: RichTextLabel
 @export var entire_panel: Control
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
@@ -31,8 +27,10 @@ enum SatoTippyFight {
 @export var sato_tippy_textures:Array[Texture2D]
 @export var sato_sprites:Array[Texture2D]
 
+@export var drink_name: RichTextLabel
+
+
 var ordered_drink: Drink
-var main_text: String = "with the required ingredients"
 var drink_customer: Customer
 
 
@@ -46,7 +44,7 @@ func _ready() -> void:
 	_start_minigame()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# This is solely for testing purposes (running the minigame outside of main)
 	if Global.ordered_drink_to_remake == null and Global.ordered_drink_customer == null:
 		# Disable Global so we can use the mouse
@@ -96,10 +94,12 @@ func get_ordered_drink(drink: Drink) -> void:
 		#ordered_drink.singular_article,
 		#ordered_drink.name,
 	#]
-	player_thought.text = "I need to make %s [color=gold]%s" % [
-		ordered_drink.singular_article,
-		ordered_drink.name,
-	]
+	var drink_str:String = ""
+	var drink_arr:PackedStringArray = ordered_drink.name.to_upper().split(" ")
+	for i in range(drink_arr.size()):
+		if i == 2 and drink_arr.size() >= 4: drink_str += "[br]"
+		drink_str += str(drink_arr[i], " ")
+	drink_name.text = str("[font_size=100][color=black][center]%s" % drink_str).strip_edges()
 	remade_drink_sprite.texture = drink.icon
 
 func on_wrong():
@@ -140,8 +140,6 @@ func verify_captcha() -> void:
 			return
 	on_right()
 	remade_drink_sprite.visible = true
-	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)"
-	
 	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
 	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 	correct_sound.play()
@@ -160,12 +158,6 @@ func verify_captcha() -> void:
 	await correct_sound.finished
 	
 	#_end_minigame()
-
-
-
-
-func set_submit_text(text: String) -> void:
-	submit_button.text = text
 
 
 func shake_panel() -> void:
@@ -208,7 +200,8 @@ func _start_minigame() -> void:
 		customer_sprite.texture = drink_customer.body.texture
 	else:
 		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
-		order_reminder.visible = true
+##TODO: Unhide Ingredient Reminder for tutorial
+		#order_reminder.visible = true
 		populate_order_reminder()
 	
 	populate_captcha()
