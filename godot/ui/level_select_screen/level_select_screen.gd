@@ -1,0 +1,112 @@
+class_name LevelSelectScreen
+extends CanvasLayer
+
+@export var _previous_day_button: BaseButton
+@export var _next_day_button: BaseButton
+
+@export var _page_spread: LevelSelectPageSpread
+@export var _page_sub_viewport_a: SubViewport
+@export var _level_view_a: LevelSelectLevelView
+@export var _page_sub_viewport_b: SubViewport
+@export var _level_view_b: LevelSelectLevelView
+
+@export var _fake_flip_page: LevelSelectFakeFlipPage
+@export var _fake_flip_page_left_rotation: float
+@export var _fake_flip_page_right_rotation: float
+@export var _flip_duration: float = 0.3
+
+var _animating: bool = false
+
+var _day: int = 0
+
+var _old_page_sub_viewport: SubViewport
+var _old_page_level_view: LevelSelectLevelView
+var _new_page_sub_viewport: SubViewport
+var _new_page_level_view: LevelSelectLevelView
+
+func _ready() -> void:
+	_previous_day_button.pressed.connect(_on_previous_day_button_pressed)
+	_next_day_button.pressed.connect(_on_next_day_button_pressed)
+	
+	_old_page_sub_viewport = _page_sub_viewport_a
+	_old_page_level_view = _level_view_a
+	_new_page_sub_viewport = _page_sub_viewport_b
+	_new_page_level_view = _level_view_b
+	
+	Global.in_level_select_menu = true
+
+func _on_previous_day_button_pressed() -> void:
+	var new_day: int = _day - 1
+	new_day = clampi(new_day, 0, 5)
+	if new_day == _day:
+		return
+	
+	if _animating:
+		return
+	_animating = true
+	
+	_page_spread.set_right_page_view(_old_page_sub_viewport)
+	
+	_day = new_day
+	
+	_new_page_level_view.set_splash_day(_day)
+	_fake_flip_page.set_right_page_view(_old_page_sub_viewport)
+	_fake_flip_page.set_left_page_view(_new_page_sub_viewport)
+	_fake_flip_page.rotation_degrees.z = _fake_flip_page_left_rotation
+	var tween = create_tween().tween_property(_fake_flip_page, "rotation_degrees:z", _fake_flip_page_right_rotation, _flip_duration)
+	# Wait a moment to avoid flicker
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_page_spread.set_left_page_view(_new_page_sub_viewport)
+	_fake_flip_page.visible = true
+	await tween.finished
+	_page_spread.set_right_page_view(_new_page_sub_viewport)
+	_fake_flip_page.visible = false
+	
+	_swap_old_and_new_vars()
+	
+	_animating = false
+
+func _on_next_day_button_pressed() -> void:
+	var new_day: int = _day + 1
+	new_day = clampi(new_day, 0, 5)
+	if new_day == _day:
+		return
+	
+	if _animating:
+		return
+	_animating = true
+	
+	_page_spread.set_left_page_view(_old_page_sub_viewport)
+	
+	_day = new_day
+	
+	_new_page_level_view.set_splash_day(_day)
+	_fake_flip_page.set_left_page_view(_old_page_sub_viewport)
+	_fake_flip_page.set_right_page_view(_new_page_sub_viewport)
+	_fake_flip_page.rotation_degrees.z = _fake_flip_page_right_rotation
+	var tween = create_tween().tween_property(_fake_flip_page, "rotation_degrees:z", _fake_flip_page_left_rotation, _flip_duration)
+	# Wait a moment to avoid flicker
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_page_spread.set_right_page_view(_new_page_sub_viewport)
+	_fake_flip_page.visible = true
+	await tween.finished
+	_page_spread.set_left_page_view(_new_page_sub_viewport)
+	_fake_flip_page.visible = false
+	
+	_swap_old_and_new_vars()
+	
+	_animating = false
+
+func _swap_old_and_new_vars() -> void:
+	if _old_page_sub_viewport == _page_sub_viewport_a:
+		_old_page_sub_viewport = _page_sub_viewport_b
+		_old_page_level_view = _level_view_b
+		_new_page_sub_viewport = _page_sub_viewport_a
+		_new_page_level_view = _level_view_a
+	else:
+		_old_page_sub_viewport = _page_sub_viewport_a
+		_old_page_level_view = _level_view_a
+		_new_page_sub_viewport = _page_sub_viewport_b
+		_new_page_level_view = _level_view_b

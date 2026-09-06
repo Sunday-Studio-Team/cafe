@@ -101,6 +101,7 @@ var machines: Array[Machine]
 var in_machine_ui: bool = false
 var machine_in_use: Machine = null
 var in_main_menu := false
+var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_active_item_menu := false
 var in_tutorial_screen: bool = false
@@ -130,6 +131,7 @@ var in_ui: bool:
 				or in_machine_ui
 				or Console.is_visible()
 				or in_main_menu
+				or in_level_select_menu
 				or in_end_screen
 				or in_active_item_menu
 				or in_tutorial_screen
