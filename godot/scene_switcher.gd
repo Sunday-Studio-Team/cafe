@@ -2,8 +2,9 @@ class_name SceneSwitcher
 extends Node
 
 enum GameScene {
-	MAIN_SCENE,
 	MAIN_MENU,
+	LEVEL_SELECT,
+	MAIN_SCENE,
 	END_OF_DAY_DIALOG_SCENE,
 }
 
@@ -13,8 +14,9 @@ const LOADING_FADE_OUT_TIME := 1.0
 @export var loading_screen: ColorRect
 @export var _loading_progress_bar: ProgressBar
 @export var loading_icons: Control
-@export var _main_scene_uid: StringName
 @export var _main_menu_uid: StringName
+@export var _level_select_uid: StringName
+@export var _main_scene_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
 ## Additional resources to always keep cached for speed.
 @export var _main_sub_resource_uids: Array[StringName]
@@ -40,7 +42,7 @@ func _ready() -> void:
 	Events.scene_switch_requested.connect(load_scene)
 	Events.quit_game_requested.connect(quit_game)
 
-	if OS.has_feature("editor"):
+	if OS.has_feature("editor") and !OS.has_feature("editor_start_main_menu"):
 		load_scene(SceneSwitcher.GameScene.MAIN_SCENE)
 	else:
 		load_scene(SceneSwitcher.GameScene.MAIN_MENU)
@@ -190,10 +192,12 @@ func quit_game() -> void:
 
 func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 	match scene:
-		SceneSwitcher.GameScene.MAIN_SCENE:
-			return _main_scene_uid
 		SceneSwitcher.GameScene.MAIN_MENU:
 			return _main_menu_uid
+		SceneSwitcher.GameScene.LEVEL_SELECT:
+			return _level_select_uid
+		SceneSwitcher.GameScene.MAIN_SCENE:
+			return _main_scene_uid
 		SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE:
 			return _end_of_day_dialog_scene_uid
 		_:

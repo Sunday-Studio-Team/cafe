@@ -61,10 +61,12 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_13qdw")
 size = Vector2(0.96, 1.08)
 
-[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page")]
+[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page")]
 script = ExtResource("1_g5s43")
 _previous_day_button = NodePath("LevelSelectSwitchDayButtonPrev")
 _next_day_button = NodePath("LevelSelectSwitchDayButtonNext")
+_play_button = NodePath("PlayButton")
+_back_to_main_menu_button = NodePath("ReturnButton")
 _page_spread = NodePath("SubViewportContainer/3DWorldSubViewport/PageSpread")
 _page_sub_viewport_a = NodePath("PageSubViewportA")
 _level_view_a = NodePath("PageSubViewportA/LevelSelectLevelViewA")
@@ -76,6 +78,7 @@ _fake_flip_page_left_rotation = 180.0
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1596364073]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="3DWorldSubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2005050081]
 handle_input_locally = false
@@ -131,6 +134,32 @@ offset_bottom = 29.079346
 [node name="TextureRect" parent="LevelSelectSwitchDayButtonNext" index="0" unique_id=1543500154]
 texture = ExtResource("4_mbc1d")
 
+[node name="ReturnButton" type="Button" parent="." unique_id=1880559958]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -907.0
+offset_top = 385.0
+offset_right = -746.0
+offset_bottom = 463.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ReturnButton" unique_id=180273136]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PlayButton" type="Button" parent="." unique_id=368313340]
 anchors_preset = 8
 anchor_left = 0.5
@@ -151,6 +180,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 48
 text = "Play"
 horizontal_alignment = 1
