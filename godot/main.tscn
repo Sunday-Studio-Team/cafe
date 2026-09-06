@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://nm85k5woe7rt"]
 
 [ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b7pu4gc2t3gv6" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
@@ -1905,14 +1905,14 @@ _audio_stream_player_3ds = [NodePath("VoiceLineNoLocationAudioStreamPlayer3D"), 
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D" parent="VoiceLineNoLocationPlayer" unique_id=753703191 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6607904, 2.8379436, 6.5908065)
-volume_db = -5.0
+volume_db = -10.0
 max_db = 0.0
 bus = &"TippyVO"
 doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D2" parent="VoiceLineNoLocationPlayer" unique_id=682055878 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.105054, 2.8379436, 6.620669)
-volume_db = -5.0
+volume_db = -10.0
 max_db = 0.0
 bus = &"TippyVO"
 doppler_tracking = 2
@@ -1933,7 +1933,7 @@ volume_db = -5.0
 [node name="CustomerAreaMusic" type="AudioStreamPlayer3D" parent="." unique_id=1077236725]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 2.4, -3.5)
 stream = ExtResource("182_suf1q")
-volume_db = -20.0
+volume_db = -25.0
 max_db = -5.0
 autoplay = true
 bus = &"DiegeticMusic"
