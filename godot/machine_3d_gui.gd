@@ -82,7 +82,6 @@ func _ready():
 func _unhandled_input(input_event: InputEvent):
 	if input_event.is_action_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit_with_camera_tween()
-		print("here!")
 		get_viewport().set_input_as_handled()
 		Global.player.camera.get_viewport().set_input_as_handled()
 		
