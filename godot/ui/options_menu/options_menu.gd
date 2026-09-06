@@ -79,7 +79,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_save_and_close_menu()
-		#get_viewport().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 func _process(delta: float) -> void:
 	if _deferred_options_apply_timer != null:

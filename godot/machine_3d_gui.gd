@@ -79,25 +79,26 @@ func _ready():
 				exit_with_camera_tween(),
 	)
 
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not Global.minigame_active and player_using_me:
+func _unhandled_input(input_event: InputEvent):
+	if input_event.is_action_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit_with_camera_tween()
-
-
-func _unhandled_input(event):
-	# Check if the event is a non-mouse/non-touch event
-	for mouse_event in [
-		InputEventMouseButton,
-		InputEventMouseMotion,
-		InputEventScreenDrag,
-		InputEventScreenTouch,
-	]:
-		if is_instance_of(event, mouse_event):
-			# If the event is a mouse/touch event, then we can ignore it here, because it will be
-			# handled via Physics Picking.
-			return
-	node_viewport.push_input(event)
+		print("here!")
+		get_viewport().set_input_as_handled()
+		Global.player.camera.get_viewport().set_input_as_handled()
+		
+	else:
+		# Check if the event is a non-mouse/non-touch event
+		for mouse_event in [
+			InputEventMouseButton,
+			InputEventMouseMotion,
+			InputEventScreenDrag,
+			InputEventScreenTouch,
+		]:
+			if is_instance_of(input_event, mouse_event):
+				# If the event is a mouse/touch event, then we can ignore it here, because it will be
+				# handled via Physics Picking.
+				return
+		node_viewport.push_input(input_event)
 
 
 func exit_without_camera_tween() -> void:

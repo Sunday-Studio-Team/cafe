@@ -23,12 +23,11 @@ func _ready() -> void:
 			Events.minigame_cancelled.emit(),
 	)
 
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and Global.minigame_active:
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed("pause") and Global.minigame_active:
 		close_game()
 		Events.minigame_cancelled.emit()
-
+		get_viewport().set_input_as_handled()
 
 func play_minigame(minigame_name: String):
 	var choosen_game: PackedScene = minigame_dict.get(minigame_name)
