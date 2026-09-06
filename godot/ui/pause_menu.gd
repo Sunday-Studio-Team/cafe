@@ -68,7 +68,6 @@ func _ready() -> void:
 func _unhandled_input(input_event: InputEvent) -> void:
 	if (
 			input_event.is_action_pressed("pause")
-			and not Global.in_ui
 	):
 		if state == State.IN_OPTIONS:
 			# the options menu itself handles hiding, we just make eat the input
