@@ -46,6 +46,7 @@ var _help_desk_customer_spawn_timer: Timer
 @export var _tutorial_vo_location_ingredients_bag: VoiceLineLocation
 @export var _tutorial_vo_location_help_desk: VoiceLineLocation
 @export var _tutorial_vo_location_spill: VoiceLineLocation
+@export var day_containers: Array[Node3D] = []
 
 var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
@@ -109,6 +110,12 @@ func _ready() -> void:
 	enable_disable_teleporters()
 	Events.items_updated.connect(get_stats)
 
+	# enables more desk props as the days go by
+	for i in range(day_containers.size()):
+		if day_containers[i] != null:
+			day_containers[i].visible = (i <= Global.day)
+			
+			
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
 	Global.daily_cafe_money = 0
