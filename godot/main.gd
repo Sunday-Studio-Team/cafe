@@ -135,7 +135,9 @@ func _ready() -> void:
 
 	#Active Items
 	Events.active_item_used.connect(active_item_used)
-
+	
+	#Call the appropriate tippy tutorial instruction function for the appropriate day
+	#Look to lines 448 to 487 to see how to implement voice line logic (play the voice line and repeating)
 	if Global.day == 0:
 		_interactive_tutorial_flow()
 	else:
@@ -145,7 +147,8 @@ func _ready() -> void:
 		await get_tree().create_timer(1.5, false).timeout
 		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
 		day_indicator.hide()
-
+		_tippy_tutorials()
+		
 
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
@@ -465,6 +468,79 @@ func _interactive_tutorial_flow():
 				seen_tutorial_machine_instructions = true
 	)
 
+#Tutorial function for each day
+func _tippy_tutorials() -> void:
+	await get_tree().create_timer(0.5, false).timeout
+	#replace these with the correct voice lines
+	var tutorial_lines_day1: Array[String] = [
+		"tutorial_intro_1",
+		"tutorial_intro_2",
+	] 
+	
+	var tutorial_lines_day2: Array[String] = [
+		"tutorial_intro_2",
+		"tutorial_intro_3",
+	] 
+	
+	var tutorial_lines_day3: Array[String] = [
+		"tutorial_intro_3",
+		"tutorial_intro_4",
+	] 
+	
+	var tutorial_lines_day4: Array[String] = [
+		"tutorial_intro_4",
+		"tutorial_intro_5",
+	] 
+	
+	var tutorial_lines_day5: Array[String] = [
+		"tutorial_intro_5",
+		"tutorial_intro_1",
+	] 
+	
+	if Global.day == 1:
+		for i in range(tutorial_lines_day1.size()):
+			var voice_line_id: String = tutorial_lines_day1[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 2:
+		for i in range(tutorial_lines_day2.size()):
+			var voice_line_id: String = tutorial_lines_day2[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 3:
+		for i in range(tutorial_lines_day3.size()):
+			var voice_line_id: String = tutorial_lines_day3[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 4:
+		for i in range(tutorial_lines_day4.size()):
+			var voice_line_id: String = tutorial_lines_day4[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 5:
+		for i in range(tutorial_lines_day5.size()):
+			var voice_line_id: String = tutorial_lines_day5[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
 
 func _interactive_tutorial_shift() -> void:
 	if tutorial_machine == null:
