@@ -850,7 +850,7 @@ _tutorial_vo_location_machine_ui = NodePath("Machines/RightAreaRightMachine/Tuto
 _tutorial_vo_location_ingredients_bag = NodePath("TutorialStoreRoomVoiceLineLocation")
 _tutorial_vo_location_help_desk = NodePath("CustomerHelpDesk/TutorialHelpDeskVoiceLineLocation")
 _tutorial_vo_location_spill = NodePath("Machines/RightAreaRightMachine/TutorialMachineSpillVoiceLineLocation")
-day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath("Desk/Day3DeskProps"), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
+day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath(""), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -2022,18 +2022,6 @@ transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.707
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.4037077, -0.10281545, 14.137601)
 
-[node name="Day0DeskProps" type="Node3D" parent="Desk" unique_id=768787569]
-
-[node name="Day1DeskProps" type="Node3D" parent="Desk" unique_id=326234208]
-
-[node name="Day2DeskProps" type="Node3D" parent="Desk" unique_id=262605355]
-
-[node name="Day3DeskProps" type="Node3D" parent="Desk" unique_id=1997691496]
-
-[node name="Day4DeskProps" type="Node3D" parent="Desk" unique_id=1604414964]
-
-[node name="Day5DeskProps" type="Node3D" parent="Desk" unique_id=274148656]
-
 [node name="CafeItemShelf" parent="." unique_id=1767295431 instance=ExtResource("26_4obbf")]
 transform = Transform3D(1.1924875e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924875e-08, -1.2828894, 1.1999999, 13.967806)
 
@@ -2325,3 +2313,6 @@ LOCKER
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
+[editable path="Desk/office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes"]
+[editable path="Desk/Sketchbooks, comics, rulers (1)"]
+[editable path="Desk/Lamp 1&5 (1)"]
