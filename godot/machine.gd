@@ -64,10 +64,11 @@ const REFILL_MINIGAME := "Refill"
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export var airhorn_sound: AudioStreamPlayer
+# played when we try to refill while not holding ingredients
+# OR try to remake without enough ingredients
+@export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
-
-
 
 var customer: Customer
 var queued_customers: Array[Customer]
@@ -109,6 +110,7 @@ func _ready() -> void:
 			if Global.holding_ingredients:
 				refill()
 			else:
+				ingredients_warning_sound.play()
 				get_ingredients_prompt.show()
 				await get_tree().create_timer(0.5, false).timeout
 				get_ingredients_prompt.hide()
@@ -796,6 +798,7 @@ func on_active_item_used(item: Item):
 
 	if item.item_id == "airhorn":
 		if customer:
+			Events.play_viewmodel_animation.emit("airhorn_use")
 			airhorn_sound.play()
 			customer.leave_store()
 			_set_customer(null)
@@ -827,6 +830,7 @@ func _on_machine_fixed() -> void:
 
 func _on_remake_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
+		ingredients_warning_sound.play()
 		no_ingredients_warning.show()
 		await get_tree().create_timer(0.5, false).timeout
 		no_ingredients_warning.hide()

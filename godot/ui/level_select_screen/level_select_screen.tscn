@@ -5,14 +5,15 @@
 [ext_resource type="Script" uid="uid://60oxc6db2nux" path="res://ui/level_select_screen/level_select_page_spread.gd" id="2_gc066"]
 [ext_resource type="Script" uid="uid://bkya2tbg13vww" path="res://ui/level_select_screen/level_select_fake_flip_page.gd" id="2_mbc1d"]
 [ext_resource type="PackedScene" uid="uid://cs6toslsya8mw" path="res://ui/level_select_screen/level_select_switch_day_button.tscn" id="3_ecde1"]
+[ext_resource type="PackedScene" uid="uid://bxvlpnsv4hv2d" path="res://ui/level_select_screen/page_plane.gltf" id="4_7d84e"]
 [ext_resource type="Texture2D" uid="uid://cxtexdd42o1wu" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrows_right.png" id="4_mbc1d"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_mbc1d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7d84e"]
 viewport_path = NodePath("PageSubViewportA")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecde1"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_mbc1d")
+albedo_texture = SubResource("ViewportTexture_7d84e")
 uv1_scale = Vector3(0.5, 1, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ecde1"]
@@ -20,12 +21,12 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_ecde1")
 size = Vector2(0.96, 1.08)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gc066"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gg2t0"]
 viewport_path = NodePath("PageSubViewportA")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7d84e"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_gc066")
+albedo_texture = SubResource("ViewportTexture_gg2t0")
 uv1_scale = Vector3(0.5, 1, 1)
 uv1_offset = Vector3(0.5, 0, 0)
 
@@ -34,34 +35,31 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_7d84e")
 size = Vector2(0.96, 1.08)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7d84e"]
-viewport_path = NodePath("PageSubViewportA")
+[sub_resource type="ViewportTexture" id="ViewportTexture_r22gu"]
+viewport_path = NodePath("../../../../../PageSubViewportA")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg2t0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bagg"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_7d84e")
-uv1_scale = Vector3(0.5, 1, 1)
+albedo_texture = SubResource("ViewportTexture_r22gu")
+uv1_scale = Vector3(-0.5, 1, 1)
 uv1_offset = Vector3(0.5, 0, 0)
 
-[sub_resource type="QuadMesh" id="QuadMesh_r22gu"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7bagg"]
+viewport_path = NodePath("../../../../../PageSubViewportB")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o7og"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_gg2t0")
-size = Vector2(0.96, 1.08)
+albedo_texture = SubResource("ViewportTexture_7bagg")
+uv1_scale = Vector3(-0.5, 1, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ecde1"]
-viewport_path = NodePath("PageSubViewportA")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjtsd"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13qdw"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_ecde1")
-uv1_scale = Vector3(0.5, 1, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(2, 0.1, 2)
 
-[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_13qdw")
-size = Vector2(0.96, 1.08)
-
-[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page")]
+[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page", "_page_flip_animation_player")]
 script = ExtResource("1_g5s43")
 _previous_day_button = NodePath("LevelSelectSwitchDayButtonPrev")
 _next_day_button = NodePath("LevelSelectSwitchDayButtonNext")
@@ -72,8 +70,9 @@ _page_sub_viewport_a = NodePath("PageSubViewportA")
 _level_view_a = NodePath("PageSubViewportA/LevelSelectLevelViewA")
 _page_sub_viewport_b = NodePath("PageSubViewportB")
 _level_view_b = NodePath("PageSubViewportB/LevelSelectLevelViewB")
-_fake_flip_page = NodePath("SubViewportContainer/3DWorldSubViewport/FakeFlipPage")
-_fake_flip_page_left_rotation = 180.0
+_fake_flip_page = NodePath("SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage")
+_page_flip_animation_player = NodePath("SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane/AnimationPlayer")
+_flip_to_next_animation_name = &"turn_next_page"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1596364073]
 offset_right = 40.0
@@ -85,10 +84,11 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="PageSpread" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1783174934 node_paths=PackedStringArray("_left_page_mesh_instance", "_right_page_mesh_instance")]
+[node name="PageSpread" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1783174934 node_paths=PackedStringArray("_left_page_mesh_instance", "_right_page_mesh_instance", "_level_select_screen_local_scene")]
 script = ExtResource("2_gc066")
 _left_page_mesh_instance = NodePath("PageLeftMeshInstance3D")
 _right_page_mesh_instance = NodePath("PageRightMeshInstance3D")
+_level_select_screen_local_scene = NodePath("../../..")
 
 [node name="PageLeftMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/PageSpread" unique_id=1342228782]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.48, 0, 0)
@@ -98,22 +98,57 @@ mesh = SubResource("QuadMesh_ecde1")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.48, 0, 0)
 mesh = SubResource("QuadMesh_gg2t0")
 
-[node name="FakeFlipPage" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=42423026 node_paths=PackedStringArray("_left_page_mesh_instance", "_right_page_mesh_instance")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0.01, 0)
+[node name="TableOffset" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=89476328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+
+[node name="FakeFlipPage" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset" unique_id=7328685 node_paths=PackedStringArray("_page_plane_local_scene", "_page_mesh_instance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001, 0)
 script = ExtResource("2_mbc1d")
-_left_page_mesh_instance = NodePath("PageLeftMeshInstance3D")
-_right_page_mesh_instance = NodePath("PageRightMeshInstance3D")
+_page_plane_local_scene = NodePath("page_plane")
+_page_mesh_instance = NodePath("page_plane/page_plane_rig/Skeleton3D/page_plane")
 
-[node name="PageLeftMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/FakeFlipPage" unique_id=1212273741]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.48, 0, 0)
-mesh = SubResource("QuadMesh_r22gu")
+[node name="page_plane" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage" unique_id=296031896 instance=ExtResource("4_7d84e")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="PageRightMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/FakeFlipPage" unique_id=1901306304]
-transform = Transform3D(-1, 3.821371e-15, -8.742278e-08, 8.742278e-08, 4.371139e-08, -1, 0, -1, -4.371139e-08, 0.48, 0, 0)
-mesh = SubResource("QuadMesh_xrivr")
+[node name="Skeleton3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane/page_plane_rig" parent_id_path=PackedInt32Array(296031896, 429544833) index="0" unique_id=319054978]
+bones/0/rotation = Quaternion(2.1417086e-09, -2.8377336e-09, 0.6978275, 0.71626586)
+bones/1/rotation = Quaternion(-3.7019918e-10, 1.07312146e-14, -0.008970081, 0.99995977)
+bones/2/rotation = Quaternion(2.9423997e-09, 7.5008814e-13, 0.07129721, 0.9974551)
+bones/3/rotation = Quaternion(-3.1544034e-09, 1.8400266e-14, -0.07643577, 0.9970745)
+bones/4/rotation = Quaternion(1.035119e-09, 7.672494e-15, 0.025082499, 0.9996854)
+bones/5/rotation = Quaternion(2.4157412e-10, 8.55293e-15, 0.0058536734, 0.9999829)
+bones/6/rotation = Quaternion(-1.1660967e-10, 1.77158e-15, -0.0028256236, 0.999996)
+bones/7/rotation = Quaternion(-6.346075e-11, 5.771015e-15, -0.0015377464, 0.9999988)
+bones/8/rotation = Quaternion(-8.8313254e-13, 6.8835683e-15, -2.1399468e-05, 1)
+bones/9/rotation = Quaternion(1.1902163e-11, -2.2145825e-16, 0.00028840546, 1)
+bones/10/rotation = Quaternion(6.160165e-12, 9.994646e-16, 0.0001492722, 1)
+bones/11/rotation = Quaternion(7.1969714e-13, 4.329966e-15, 1.7436738e-05, 1)
+bones/12/rotation = Quaternion(-1.070505e-12, 1.2212496e-15, -2.593705e-05, 1)
+bones/13/rotation = Quaternion(-8.763598e-13, 3.331288e-16, -2.1238355e-05, 1)
+bones/14/rotation = Quaternion(-5.583038e-13, 2.6645797e-15, -1.3526969e-05, 1)
+bones/15/rotation = Quaternion(-5.17717e-13, -1.776291e-15, -1.2545466e-05, 1)
+bones/16/rotation = Quaternion(1.5687406e-12, -1.3321391e-15, 3.80126e-05, 1)
+bones/17/rotation = Quaternion(3.3823083e-12, 1.4434576e-15, 8.195802e-05, 1)
+bones/18/rotation = Quaternion(-2.001732e-11, 2.4418988e-15, -0.00048504016, 0.9999999)
+bones/19/rotation = Quaternion(4.274592e-11, 1.0007565e-15, 0.0010357769, 0.99999946)
+bones/20/rotation = Quaternion(-4.9662944e-11, -1.1280454e-16, -0.0012033863, 0.9999993)
+bones/21/rotation = Quaternion(2.4731219e-11, 3.8870143e-15, 0.0005992595, 0.9999998)
+
+[node name="page_plane" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane/page_plane_rig/Skeleton3D" index="0" unique_id=1074210791]
+transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_7bagg")
+surface_material_override/1 = SubResource("StandardMaterial3D_7o7og")
+surface_material_override/2 = SubResource("StandardMaterial3D_kjtsd")
+
+[node name="TableStaticBody3D" type="StaticBody3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset" unique_id=1963233410]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/TableStaticBody3D" unique_id=1195355240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049999997, 0)
+shape = SubResource("BoxShape3D_xrivr")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1599002889]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.6222136, 0)
+current = true
 fov = 40.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1174920374]
@@ -198,4 +233,5 @@ render_target_update_mode = 4
 
 [node name="LevelSelectLevelViewB" parent="PageSubViewportB" unique_id=1792966155 instance=ExtResource("2_ecde1")]
 
+[editable path="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane"]
 [editable path="LevelSelectSwitchDayButtonNext"]
