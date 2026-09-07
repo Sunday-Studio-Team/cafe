@@ -30,38 +30,36 @@ stream_0/stream = ExtResource("4_juyqc")
 stream_1/stream = ExtResource("5_w8b1k")
 stream_2/stream = ExtResource("6_p8bru")
 
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "drink_name")]
-offset_right = 1920.0
-offset_bottom = 1080.0
+[node name="DrinkRemakingMinigame" type="Control" unique_id=503615879 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "drink_name")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pitvc")
-main_ordered = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Main")
-liquid_ordered = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Liquid")
-extra_ordered = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Extra")
-captcha = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha")
-entire_panel = NodePath("SubViewport/HBoxContainer/Captcha")
-order_reminder = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder")
-customer_sprite = NodePath("SubViewport/HBoxContainer/CustomerContainer/Control/CustomerSpriteTextureRect")
-remade_drink_sprite = NodePath("SubViewport/Finished Drink")
+main_ordered = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Main")
+liquid_ordered = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Liquid")
+extra_ordered = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Extra")
+captcha = NodePath("HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha")
+entire_panel = NodePath("HBoxContainer/Captcha")
+order_reminder = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder")
+customer_sprite = NodePath("HBoxContainer/CustomerContainer/Control/CustomerSpriteTextureRect")
+remade_drink_sprite = NodePath("Finished Drink")
 click_sound = NodePath("ClickSound")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
-req_and_sel = NodePath("SubViewport/HBoxContainer/Captcha/RequiredAndSelect")
-captcha_vbox = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox")
-sato_tippy_fight = NodePath("SubViewport/SatoTippyFight")
-complete_sprite = NodePath("SubViewport/HBoxContainer/Captcha/CompleteSprite")
-sato = NodePath("SubViewport/HBoxContainer/Sato")
+req_and_sel = NodePath("HBoxContainer/Captcha/RequiredAndSelect")
+captcha_vbox = NodePath("HBoxContainer/Captcha/CaptchaVBox")
+sato_tippy_fight = NodePath("SatoTippyFight")
+complete_sprite = NodePath("HBoxContainer/Captcha/CompleteSprite")
+sato = NodePath("HBoxContainer/Sato")
 sato_tippy_textures = Array[Texture2D]([ExtResource("10_ddm81"), ExtResource("3_rttna"), ExtResource("4_v4kh0")])
 sato_sprites = Array[Texture2D]([ExtResource("3_fa211"), ExtResource("7_x0a0u"), ExtResource("6_lv3ps")])
-drink_name = NodePath("SubViewport/HBoxContainer/Captcha/CaptchaVBox/DrinkName")
+drink_name = NodePath("HBoxContainer/Captcha/CaptchaVBox/DrinkName")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="Background" type="TextureRect" parent="SubViewport" unique_id=578094195]
+[node name="Background" type="TextureRect" parent="." unique_id=578094195]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -69,25 +67,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ndr77")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport" unique_id=187758045]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=187758045]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sato" type="TextureRect" parent="SubViewport/HBoxContainer" unique_id=747455613]
+[node name="Sato" type="TextureRect" parent="HBoxContainer" unique_id=747455613]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 texture = ExtResource("3_fa211")
 stretch_mode = 2
 
-[node name="Captcha" type="Control" parent="SubViewport/HBoxContainer" unique_id=258567404]
+[node name="Captcha" type="Control" parent="HBoxContainer" unique_id=258567404]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Receipt" type="TextureRect" parent="SubViewport/HBoxContainer/Captcha" unique_id=1764770429]
+[node name="Receipt" type="TextureRect" parent="HBoxContainer/Captcha" unique_id=1764770429]
 layout_mode = 0
 offset_left = 16.0
 offset_right = 632.0
@@ -96,7 +95,7 @@ size_flags_horizontal = 4
 texture = ExtResource("4_xyrqa")
 stretch_mode = 2
 
-[node name="RequiredAndSelect" type="TextureRect" parent="SubViewport/HBoxContainer/Captcha" unique_id=326014967]
+[node name="RequiredAndSelect" type="TextureRect" parent="HBoxContainer/Captcha" unique_id=326014967]
 visible = false
 layout_mode = 1
 anchors_preset = 6
@@ -114,12 +113,12 @@ size_flags_horizontal = 4
 texture = ExtResource("5_ddm81")
 stretch_mode = 2
 
-[node name="CaptchaVBox" type="VBoxContainer" parent="SubViewport/HBoxContainer/Captcha" unique_id=1311255116]
+[node name="CaptchaVBox" type="VBoxContainer" parent="HBoxContainer/Captcha" unique_id=1311255116]
 layout_mode = 0
 offset_right = 658.0
 offset_bottom = 1080.0
 
-[node name="DrinkName" type="RichTextLabel" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox" unique_id=188088322]
+[node name="DrinkName" type="RichTextLabel" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=188088322]
 custom_maximum_size = Vector2(600, -1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -129,34 +128,34 @@ text = "[font_size=100][color=black][center]ICED ALMOND[br]CHAI TEA"
 fit_content = true
 scroll_active = false
 
-[node name="IngredientsReminder" type="MarginContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox" unique_id=832893174]
+[node name="IngredientsReminder" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=832893174]
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder" unique_id=346830654]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder" unique_id=346830654]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Main" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
+[node name="Main" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 button_disabled = true
 
-[node name="Liquid" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
+[node name="Liquid" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 button_disabled = true
 
-[node name="Extra" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
+[node name="Extra" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 button_disabled = true
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox" unique_id=1974039985]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=1974039985]
 layout_mode = 2
 theme_override_constants/margin_top = -64
 
-[node name="Separator" type="RichTextLabel" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/MarginContainer" unique_id=617130892]
+[node name="Separator" type="RichTextLabel" parent="HBoxContainer/Captcha/CaptchaVBox/MarginContainer" unique_id=617130892]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 offset_transform_enabled = true
@@ -167,61 +166,61 @@ text = "[font_size=120][color=black][center]------------"
 fit_content = true
 scroll_active = false
 
-[node name="CaptchaImageContainer" type="MarginContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox" unique_id=1591618613]
+[node name="CaptchaImageContainer" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=1591618613]
 layout_mode = 2
 theme_override_constants/margin_bottom = 36
 
-[node name="CenterContainer" type="CenterContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer" unique_id=777608128]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer" unique_id=777608128]
 layout_mode = 2
 
-[node name="Captcha" type="GridContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer" unique_id=1363679932]
+[node name="Captcha" type="GridContainer" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer" unique_id=1363679932]
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
 columns = 4
 
-[node name="Button0" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
+[node name="Button0" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button1" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
+[node name="Button1" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button2" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
+[node name="Button2" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button3" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
+[node name="Button3" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button4" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
+[node name="Button4" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button5" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
+[node name="Button5" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button6" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
+[node name="Button6" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="Button7" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
+[node name="Button7" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
 layout_mode = 2
 offset_transform_enabled = true
 
-[node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox" unique_id=2048074803]
+[node name="BottomButtonContainer" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=2048074803]
 layout_mode = 2
 theme_override_constants/margin_left = 150
 theme_override_constants/margin_right = 150
 
-[node name="TextureButton" type="TextureButton" parent="SubViewport/HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer" unique_id=1235520665]
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer" unique_id=1235520665]
 layout_mode = 2
 texture_normal = ExtResource("7_ikoeo")
 
-[node name="CompleteSprite" type="TextureRect" parent="SubViewport/HBoxContainer/Captcha" unique_id=460517940]
+[node name="CompleteSprite" type="TextureRect" parent="HBoxContainer/Captcha" unique_id=460517940]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -237,7 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_v4kh0")
 
-[node name="CustomerContainer" type="CenterContainer" parent="SubViewport/HBoxContainer" unique_id=1101866638 node_paths=PackedStringArray("finished_drink", "root")]
+[node name="CustomerContainer" type="CenterContainer" parent="HBoxContainer" unique_id=1101866638 node_paths=PackedStringArray("finished_drink", "root")]
 layout_mode = 2
 size_flags_horizontal = 3
 offset_transform_enabled = true
@@ -245,12 +244,12 @@ offset_transform_position = Vector2(0, 480)
 offset_transform_visual_only = false
 script = ExtResource("6_wy7ys")
 finished_drink = NodePath("../../Finished Drink")
-root = NodePath("../../..")
+root = NodePath("../..")
 
-[node name="Control" type="Control" parent="SubViewport/HBoxContainer/CustomerContainer" unique_id=1395701579]
+[node name="Control" type="Control" parent="HBoxContainer/CustomerContainer" unique_id=1395701579]
 layout_mode = 2
 
-[node name="CustomerSpriteTextureRect" type="TextureRect" parent="SubViewport/HBoxContainer/CustomerContainer/Control" unique_id=753214344]
+[node name="CustomerSpriteTextureRect" type="TextureRect" parent="HBoxContainer/CustomerContainer/Control" unique_id=753214344]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -268,7 +267,8 @@ texture = ExtResource("6_i2vbf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SatoTippyFight" type="TextureRect" parent="SubViewport" unique_id=1716960224]
+[node name="SatoTippyFight" type="TextureRect" parent="." unique_id=1716960224]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.36432293
 anchor_top = 0.725
@@ -279,9 +279,10 @@ grow_vertical = 2
 texture = ExtResource("10_ddm81")
 metadata/_edit_use_anchors_ = true
 
-[node name="Finished Drink" type="TextureRect" parent="SubViewport" unique_id=1573351362]
+[node name="Finished Drink" type="TextureRect" parent="." unique_id=1573351362]
 visible = false
 custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.5
@@ -297,7 +298,8 @@ expand_mode = 3
 stretch_mode = 5
 script = ExtResource("6_juyqc")
 
-[node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
+[node name="IngredientsReminder" type="PanelContainer" parent="." unique_id=2035377822]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -309,71 +311,31 @@ grow_vertical = 0
 rotation = 0.5166175
 pivot_offset = Vector2(250, 250)
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/IngredientsReminder" unique_id=195611177]
+[node name="MarginContainer" type="MarginContainer" parent="IngredientsReminder" unique_id=195611177]
 layout_mode = 2
 theme_override_constants/margin_top = 40
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/IngredientsReminder/MarginContainer" unique_id=1223525194]
+[node name="HBoxContainer" type="HBoxContainer" parent="IngredientsReminder/MarginContainer" unique_id=1223525194]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 36
 alignment = 1
 
-[node name="Main" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1577073845 instance=ExtResource("2_c5i2p")]
+[node name="Main" parent="IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1577073845 instance=ExtResource("2_c5i2p")]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
 
-[node name="Liquid" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=480793300 instance=ExtResource("2_c5i2p")]
+[node name="Liquid" parent="IngredientsReminder/MarginContainer/HBoxContainer" unique_id=480793300 instance=ExtResource("2_c5i2p")]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
 
-[node name="Extra" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1558496985 instance=ExtResource("2_c5i2p")]
+[node name="Extra" parent="IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1558496985 instance=ExtResource("2_c5i2p")]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
-
-[node name="CustomerContainer" type="CenterContainer" parent="SubViewport" unique_id=800298872 node_paths=PackedStringArray("finished_drink", "root")]
-z_index = -41
-anchors_preset = -1
-anchor_left = 0.757
-anchor_top = 0.774
-anchor_right = 0.757
-anchor_bottom = 0.78
-offset_left = -355.44006
-offset_top = -883.92
-offset_right = 469.55994
-offset_bottom = 968.60004
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-script = ExtResource("6_wy7ys")
-finished_drink = NodePath("../Finished Drink")
-root = NodePath("../..")
-
-[node name="Control" type="Control" parent="SubViewport/CustomerContainer" unique_id=2088334038]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="CustomerSpriteTextureRect" type="TextureRect" parent="SubViewport/CustomerContainer/Control" unique_id=2098074829]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = -761.0
-offset_right = 235.15332
-offset_bottom = 512.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("6_i2vbf")
-stretch_mode = 5
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
@@ -387,4 +349,4 @@ volume_db = -5.0
 stream = ExtResource("8_3tmsw")
 volume_db = -5.0
 
-[connection signal="pressed" from="SubViewport/HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer/TextureButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer/TextureButton" to="." method="_on_submit_button_pressed"]

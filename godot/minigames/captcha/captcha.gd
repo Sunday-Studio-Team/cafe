@@ -1,4 +1,4 @@
-extends SubViewportContainer
+extends Control
 
 @export var main_ordered: IngredientIconHolder
 @export var liquid_ordered: IngredientIconHolder
