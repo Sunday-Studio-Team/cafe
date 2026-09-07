@@ -798,6 +798,7 @@ func on_active_item_used(item: Item):
 
 	if item.item_id == "airhorn":
 		if customer:
+			Events.play_viewmodel_animation.emit("airhorn_use")
 			airhorn_sound.play()
 			customer.leave_store()
 			_set_customer(null)

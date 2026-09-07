@@ -210,6 +210,7 @@ func _cancel_break_minigame() -> void:
 
 func _on_used_active_item(item: Item):
 	if item != null and item.item_id == "whipped_cream":
+		Events.play_viewmodel_animation.emit("cream_use")
 		whipped_cream_sound.play()
 		Global.put_active_item_on_cooldown(item)
 		disarm_camera()
