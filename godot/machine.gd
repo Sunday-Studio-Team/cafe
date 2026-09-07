@@ -26,6 +26,7 @@ const REFILL_MINIGAME := "Refill"
 @export_category("UI")
 @export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
+@export var tippy_progress_sprite: TextureRect
 @export var accept_button: Button
 @export var _price_label_accept: Label
 @export var _rating_loss_on_accept_label: Label
@@ -131,6 +132,8 @@ func _process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 
 	progress_indicator.visible = not timer.is_stopped()
+
+
 
 	accept_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
@@ -312,10 +315,16 @@ func show_tutorial_go_clean_spill() -> void:
 
 
 func _set_customer(new_customer: Customer) -> void:
+	if customer:
+		if customer.customer_sprite_resource.alternate_desk_sprite:
+			customer.body.texture = customer.customer_sprite_resource.sprite
+
 	customer = new_customer
 	if customer != null:
 		customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
 		await customer.move_to(spot_for_customer.global_position)
+		if customer.customer_sprite_resource.alternate_desk_sprite:
+			customer.body.texture = customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
 		made_drink_name_label.hide()

@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://d2jkcyx2b28ky"]
+
+[ext_resource type="Script" uid="uid://dqd7dtoin3c" path="res://ui/level_select_screen/level_select_screen.gd" id="1_g5s43"]
+[ext_resource type="PackedScene" uid="uid://m41kjgsvqv8h" path="res://ui/level_select_screen/level_select_level_view.tscn" id="2_ecde1"]
+[ext_resource type="Script" uid="uid://60oxc6db2nux" path="res://ui/level_select_screen/level_select_page_spread.gd" id="2_gc066"]
+[ext_resource type="Script" uid="uid://bkya2tbg13vww" path="res://ui/level_select_screen/level_select_fake_flip_page.gd" id="2_mbc1d"]
+[ext_resource type="PackedScene" uid="uid://cs6toslsya8mw" path="res://ui/level_select_screen/level_select_switch_day_button.tscn" id="3_ecde1"]
+[ext_resource type="Texture2D" uid="uid://cxtexdd42o1wu" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrows_right.png" id="4_mbc1d"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mbc1d"]
+viewport_path = NodePath("PageSubViewportA")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecde1"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_mbc1d")
+uv1_scale = Vector3(0.5, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ecde1"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_ecde1")
+size = Vector2(0.96, 1.08)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gc066"]
+viewport_path = NodePath("PageSubViewportA")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7d84e"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_gc066")
+uv1_scale = Vector3(0.5, 1, 1)
+uv1_offset = Vector3(0.5, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gg2t0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_7d84e")
+size = Vector2(0.96, 1.08)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7d84e"]
+viewport_path = NodePath("PageSubViewportA")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg2t0"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_7d84e")
+uv1_scale = Vector3(0.5, 1, 1)
+uv1_offset = Vector3(0.5, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_r22gu"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gg2t0")
+size = Vector2(0.96, 1.08)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ecde1"]
+viewport_path = NodePath("PageSubViewportA")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13qdw"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_ecde1")
+uv1_scale = Vector3(0.5, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_13qdw")
+size = Vector2(0.96, 1.08)
+
+[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page")]
+script = ExtResource("1_g5s43")
+_previous_day_button = NodePath("LevelSelectSwitchDayButtonPrev")
+_next_day_button = NodePath("LevelSelectSwitchDayButtonNext")
+_play_button = NodePath("PlayButton")
+_back_to_main_menu_button = NodePath("ReturnButton")
+_page_spread = NodePath("SubViewportContainer/3DWorldSubViewport/PageSpread")
+_page_sub_viewport_a = NodePath("PageSubViewportA")
+_level_view_a = NodePath("PageSubViewportA/LevelSelectLevelViewA")
+_page_sub_viewport_b = NodePath("PageSubViewportB")
+_level_view_b = NodePath("PageSubViewportB/LevelSelectLevelViewB")
+_fake_flip_page = NodePath("SubViewportContainer/3DWorldSubViewport/FakeFlipPage")
+_fake_flip_page_left_rotation = 180.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1596364073]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="3DWorldSubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=2005050081]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="PageSpread" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1783174934 node_paths=PackedStringArray("_left_page_mesh_instance", "_right_page_mesh_instance")]
+script = ExtResource("2_gc066")
+_left_page_mesh_instance = NodePath("PageLeftMeshInstance3D")
+_right_page_mesh_instance = NodePath("PageRightMeshInstance3D")
+
+[node name="PageLeftMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/PageSpread" unique_id=1342228782]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.48, 0, 0)
+mesh = SubResource("QuadMesh_ecde1")
+
+[node name="PageRightMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/PageSpread" unique_id=273525297]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.48, 0, 0)
+mesh = SubResource("QuadMesh_gg2t0")
+
+[node name="FakeFlipPage" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=42423026 node_paths=PackedStringArray("_left_page_mesh_instance", "_right_page_mesh_instance")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0, 0.01, 0)
+script = ExtResource("2_mbc1d")
+_left_page_mesh_instance = NodePath("PageLeftMeshInstance3D")
+_right_page_mesh_instance = NodePath("PageRightMeshInstance3D")
+
+[node name="PageLeftMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/FakeFlipPage" unique_id=1212273741]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.48, 0, 0)
+mesh = SubResource("QuadMesh_r22gu")
+
+[node name="PageRightMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/FakeFlipPage" unique_id=1901306304]
+transform = Transform3D(-1, 3.821371e-15, -8.742278e-08, 8.742278e-08, 4.371139e-08, -1, 0, -1, -4.371139e-08, 0.48, 0, 0)
+mesh = SubResource("QuadMesh_xrivr")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1599002889]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.6222136, 0)
+fov = 40.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1174920374]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+
+[node name="LevelSelectSwitchDayButtonPrev" parent="." unique_id=1730237589 instance=ExtResource("3_ecde1")]
+offset_left = -926.0
+offset_top = -83.920685
+offset_right = -792.0
+offset_bottom = 29.079346
+
+[node name="LevelSelectSwitchDayButtonNext" parent="." unique_id=378158567 instance=ExtResource("3_ecde1")]
+offset_left = 797.0
+offset_top = -83.920685
+offset_right = 931.0
+offset_bottom = 29.079346
+
+[node name="TextureRect" parent="LevelSelectSwitchDayButtonNext" index="0" unique_id=1543500154]
+texture = ExtResource("4_mbc1d")
+
+[node name="ReturnButton" type="Button" parent="." unique_id=1880559958]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -907.0
+offset_top = 385.0
+offset_right = -746.0
+offset_bottom = 463.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ReturnButton" unique_id=180273136]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 24
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="." unique_id=368313340]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 350.0
+offset_right = 148.0
+offset_bottom = 463.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayButton" unique_id=655007284]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PageSubViewportA" type="SubViewport" parent="." unique_id=420357409]
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="LevelSelectLevelViewA" parent="PageSubViewportA" unique_id=1875941419 instance=ExtResource("2_ecde1")]
+
+[node name="PageSubViewportB" type="SubViewport" parent="." unique_id=388008415]
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="LevelSelectLevelViewB" parent="PageSubViewportB" unique_id=1792966155 instance=ExtResource("2_ecde1")]
+
+[editable path="LevelSelectSwitchDayButtonNext"]

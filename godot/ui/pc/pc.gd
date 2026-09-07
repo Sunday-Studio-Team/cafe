@@ -48,9 +48,8 @@ func _ready() -> void:
 				click_sound.play()
 		)
 
-
-func _process(_delta: float) -> void:
-	if (Input.is_action_just_pressed("pause") and Global.in_pc_ui):
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed("pause") and Global.in_pc_ui:
 		var in_app := false
 
 		for app in [email_app, shop_app]:
@@ -59,9 +58,9 @@ func _process(_delta: float) -> void:
 
 		if not in_app:
 			exit()
+			get_viewport().set_input_as_handled()
 
-	#irl_new_shop_items_indicator.visible = new_shop_items and not Global.day < 2
-
+func _process(_delta: float) -> void:
 	Global.in_pc_ui = visible
 
 

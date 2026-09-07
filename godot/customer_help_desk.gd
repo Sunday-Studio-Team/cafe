@@ -27,14 +27,12 @@ func _process_queued_customers() -> void:
 		if _desk_customer != null:
 			return
 		var new_current_customer: Customer = _queued_desk_customers.pop_front()
-		_customer_queue_update_visuals()
 		_set_customer(new_current_customer)
+		_customer_queue_update_visuals()
 
 
 func _customer_queue_update_visuals() -> void:
 	var i: int = 0
-	if _desk_customer and _desk_customer.customer_sprite_resource.alternate_desk_sprite:
-		_desk_customer.body.texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
 	for queued_customer in _queued_desk_customers:
 		var ratio_along_queue: float = (i as float) / Stats.current.max_customers_queued_per_machine
 		var queue_global_position: Vector3 = _start_of_customer_queue_marker.global_position.lerp(_end_of_customer_queue_marker.global_position, ratio_along_queue)
@@ -56,10 +54,16 @@ func has_active_customers() -> bool:
 
 
 func _set_customer(new_customer: Customer) -> void:
+	if _desk_customer and _desk_customer.customer_sprite_resource.alternate_desk_sprite:
+		_desk_customer.body.texture = _desk_customer.customer_sprite_resource.sprite
+
 	_desk_customer = new_customer
+
 	if _desk_customer != null:
 		_desk_customer.wait_timed_out.connect(_on_customer_wait_timed_out)
 		await _desk_customer.move_to(_spot_for_customer.global_position)
+		if _desk_customer.customer_sprite_resource.alternate_desk_sprite:
+			_desk_customer.body.texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
 		new_desk_customer_arrived.emit()
 
 		# Set unlimited for tutorial day

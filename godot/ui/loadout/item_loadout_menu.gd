@@ -58,12 +58,13 @@ func populate() -> void:
 		)
 		equipped_items_container.add_child(equipped_item_button)
 
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed("pause") and Global.in_loadout_menu:
+		confirm_and_hide()
+		get_viewport().set_input_as_handled()
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
-
-	if Input.is_action_just_pressed("pause"):
-		confirm_and_hide()
 
 	handle_item_hover_tooltip()
 
