@@ -87,6 +87,8 @@ func _on_time_up() -> void:
 	var daily_profit := Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
+	
+	grant_day_rewards(passed_profit_goal)
 
 	#_day_label.text = Global.day_to_string(Global.day)
 	_day_label.text = "Day %d" % (Global.day)
@@ -205,3 +207,35 @@ func _on_time_up() -> void:
 	button_shine_tween.tween_property(button, "modulate", Color.from_hsv(0.0, 0.0, 1.374, 1.0), 1)
 	button_shine_tween.tween_property(button, "modulate", Color.WHITE, 1)
 	button_shine_tween.tween_interval(2)
+
+func grant_day_rewards(passed_day: bool) -> void: 
+	var current_day: int = Global.day
+	
+	#Tutorial doesn't unlock 
+	if current_day <= 0:
+		return 
+	
+	if passed_day:
+		var completion_unlocks: Array = Global.DAILY_COMPLETION_UNLOCKS.get(current_day, [])
+		Global.unlock_items(completion_unlocks)
+		
+		SaveDataManager.save_data.latest_unlocked_day = maxi(
+			SaveDataManager.save_data.latest_unlocked_day,
+			min(current_day + 1, Global.final_day)
+		)
+		
+		var reached_bonus_rating: bool = (
+			Global.employee_rating >= Global.BONUS_RATING_THRESHOLD
+		)
+	
+		var bonus_already_recieved: bool = (
+			SaveDataManager.save_data.days_bonus_objective_completed.get(current_day, false)
+		)
+	
+		if reached_bonus_rating and not bonus_already_recieved:
+			var rating_unlocks: Array = Global.DAILY_RATING_UNLOCKS.get(current_day, [])
+			Global.unlock_items(rating_unlocks)
+		
+			SaveDataManager.save_data.days_bonus_objective_completed[current_day] = true
+	
+	SaveDataManager.save_game()

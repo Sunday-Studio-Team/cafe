@@ -15,6 +15,25 @@ extends Node
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
 @export var complaint_popup: CanvasLayer
+
+const DAILY_COMPLETION_UNLOCKS := {
+	1: ["nice_spoon"],
+	2: ["barista_guide"],
+	3: ["air_freshener"],
+	4: ["super_scrubber", "teleporter"],
+	5: ["roller_skates"],
+}
+
+const DAILY_RATING_UNLOCKS := {
+	1: ["airhorn"],
+	2: ["hammer"],
+	3: ["whipped_cream"],
+	4: ["tippy_coin"],
+	5: ["exploding_bomb"],
+}
+
+const BONUS_RATING_THRESHOLD := 4.5
+
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -33,6 +52,7 @@ var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
+var unlocked_items: Array[Item] = []
 var owned_items: Array[Item]
 var player_in_cctv_los := false
 var minigame_active := false:
@@ -181,11 +201,54 @@ func _ready() -> void:
 	for drink in drinks:
 		drink.create() # adds the price and creates the typing minigame resource
 	items.assign(load_resources_from_folder(items_folder_path))
+	load_unlocked_items_from_save()
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path,"tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
+
+func load_unlocked_items_from_save () -> void:
+	unlocked_items.clear()
+	
+	if SaveDataManager.save_data == null:
+		return 
+		
+	for item_id: String in SaveDataManager.save_data.unlocked_item_ids: 
+		var matching_item: Item = null 
+		
+		for item: Item in items:
+			if item.item_id == item_id:
+				matching_item = item
+				break
+		
+		if matching_item == null:
+			push_warning("Unlocked item not found: %s" % item_id)
+			continue
+		
+		if not unlocked_items.has(matching_item):
+			unlocked_items.append(matching_item)
+
+func is_item_unlocked(item_id:String) -> bool:
+	return SaveDataManager.save_data.unlocked_item_ids.has(item_id)
+
+func unlock_item(item_id: String) -> void:
+	if is_item_unlocked(item_id):
+		return
+	
+	SaveDataManager.save_data.unlocked_item_ids.append(item_id)
+	
+	for item: Item in items: 
+		if item.item_id == item_id:
+			unlocked_items.append(item)
+			break
+	
+	SaveDataManager.save_game()
+
+func unlock_items(item_ids: Array) -> void: 
+	for raw_item_id in item_ids: 
+		var item_id: String = str(raw_item_id)
+		unlock_item(item_id)
 
 # NOTE: these things in physics process instead of process for timing reasons
 func _physics_process(_delta: float) -> void:

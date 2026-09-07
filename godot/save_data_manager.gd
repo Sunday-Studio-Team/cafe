@@ -44,6 +44,9 @@ func load_save_data() -> void:
 		print("Creating new save file.")
 	else:
 		print("Loaded existing save file.")
+	
+	if save_data.unlocked_item_ids == null:
+		save_data.unlocked_item_ids = []
 
 
 func wipe_save() -> void:
