@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cn12vpm4btpmx"]
+[gd_scene format=4 uid="uid://b7pu4gc2t3gv6"]
 
 [ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
 [ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://mh131gd6x5eb" path="res://Assets/Drink Machine/Machinewsign.glb" id="20_yl6qm"]
 [ext_resource type="Texture2D" uid="uid://bio80eua61884" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_BaseColor.png-standardSurface1_Alpha.png" id="21_x45kg"]
 [ext_resource type="Material" uid="uid://bh2dbpr21t2xi" path="res://Assets/Drink Machine/machine light.tres" id="21_xkbk5"]
+[ext_resource type="AudioStream" uid="uid://douea5kkcy7c4" path="res://audio/ingredients_warning.wav" id="22_eujd3"]
 [ext_resource type="Texture2D" uid="uid://dhifwcfo1gvb1" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Metallic.png-standardSurface1_Roughness.png" id="22_xkbk5"]
 [ext_resource type="Texture2D" uid="uid://dv00djhj1p571" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Normal.png" id="23_eujd3"]
 
@@ -372,7 +373,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ag5eg")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "progress_bar", "tippy_progress_sprite", "accept_button", "_price_label_accept", "_rating_loss_on_accept_label", "make_drink_button", "_rating_gain_on_remake_label", "remake_ingredients_cost_label", "refill_button", "ordered_drink_name_label", "made_drink_name_label", "_price_label_remake", "ingredients_bar", "ing_too_low_label", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound") groups=["machines"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_11on5"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("22_eujd3")
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "progress_bar", "tippy_progress_sprite", "accept_button", "_price_label_accept", "_rating_loss_on_accept_label", "make_drink_button", "_rating_gain_on_remake_label", "remake_ingredients_cost_label", "refill_button", "ordered_drink_name_label", "made_drink_name_label", "_price_label_remake", "ingredients_bar", "ing_too_low_label", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -424,6 +430,7 @@ breakdown_sound = NodePath("BreakdownSound")
 hammer_hit_sound = NodePath("HammerHitSound")
 no_ingredients_sound = NodePath("NoIngredientsSound")
 airhorn_sound = NodePath("AirhornSound")
+ingredients_warning_sound = NodePath("IngredientsWarningSound")
 popup_go_to_spill = ExtResource("5_8sjwk")
 
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
@@ -479,27 +486,6 @@ light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
-stream = ExtResource("6_llj37")
-volume_db = -5.0
-max_db = 0.0
-
-[node name="NoIngredientsSound" type="AudioStreamPlayer3D" parent="." unique_id=689608729]
-stream = ExtResource("7_6qesk")
-volume_db = -5.0
-
-[node name="HumSound" type="AudioStreamPlayer3D" parent="." unique_id=402048072]
-stream = ExtResource("6_5f3ny")
-unit_size = 5.0
-max_db = 0.0
-
-[node name="DoneSound" type="AudioStreamPlayer3D" parent="." unique_id=400444992]
-stream = ExtResource("10_5f3ny")
-volume_db = -5.0
-
-[node name="FixedSound" type="AudioStreamPlayer3D" parent="." unique_id=2147316297]
-stream = ExtResource("8_u17ae")
-
 [node name="Spill" type="Area3D" parent="." unique_id=1225300652]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, -0.5)
 visible = false
@@ -522,17 +508,6 @@ lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_ovvye")
 draw_pass_1 = SubResource("PlaneMesh_u17ae")
-
-[node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
-stream = ExtResource("7_6qesk")
-pitch_scale = 2.0
-
-[node name="SpillCleanSound" type="AudioStreamPlayer3D" parent="." unique_id=750243636]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-stream = ExtResource("9_42f15")
-
-[node name="HammerHitSound" type="AudioStreamPlayer" parent="." unique_id=471638354]
-stream = ExtResource("12_xurph")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=460997142]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0.19999999)
@@ -621,88 +596,130 @@ remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamF
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=749704850]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=958400287]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
+
+[node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
+transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.010168403)
+
+[node name="polySurface10" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="1" unique_id=1507662400]
+visible = false
+
+[node name="polySurface11" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="2" unique_id=546098194]
+visible = false
+
+[node name="polySurface12" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="3" unique_id=1633090855]
+visible = false
+
+[node name="polySurface13" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="4" unique_id=744054917]
+visible = false
+
+[node name="polySurface15" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="6" unique_id=925687076]
+mesh = SubResource("ArrayMesh_11on5")
+
+[node name="polySurface16" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="7" unique_id=703242855]
+mesh = SubResource("ArrayMesh_xkbk5")
+
+[node name="polySurface18" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="9" unique_id=2082953461]
+mesh = SubResource("ArrayMesh_4xien")
+
+[node name="polySurface19" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="10" unique_id=1451717799]
+visible = false
+
+[node name="polySurface21" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="12" unique_id=579290539]
+mesh = SubResource("ArrayMesh_brtpr")
+
+[node name="polySurface22" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="13" unique_id=390648373]
+mesh = SubResource("ArrayMesh_n5bjd")
+
+[node name="polySurface23" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="14" unique_id=1904152881]
+mesh = SubResource("ArrayMesh_xkbk5")
+
+[node name="polySurface24" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="15" unique_id=1042682620]
+mesh = SubResource("ArrayMesh_xkbk5")
+
+[node name="polySurface29" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="20" unique_id=944169961]
+visible = false
+
+[node name="polySurface32" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="23" unique_id=106297205]
+mesh = SubResource("ArrayMesh_msgny")
+
+[node name="polySurface33" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="24" unique_id=2143646870]
+mesh = SubResource("ArrayMesh_c1t5y")
+
+[node name="polySurface35" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="26" unique_id=1554022229]
+mesh = SubResource("ArrayMesh_iwtb5")
+
+[node name="polySurface36" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="27" unique_id=895655797]
+visible = false
+
+[node name="polySurface42" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="33" unique_id=1468780930]
+visible = false
+
+[node name="polySurface43" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="34" unique_id=1555493734]
+visible = false
+
+[node name="polySurface44" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="35" unique_id=1795864085]
+visible = false
+
+[node name="polySurface45" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="36" unique_id=1070792913]
+visible = false
+
+[node name="polySurface46" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="37" unique_id=1421907863]
+visible = false
+
+[node name="polySurface47" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="38" unique_id=2098548210]
+visible = false
+
+[node name="polySurface48" parent="Model/CustomerSide/Machine" parent_id_path=PackedInt32Array(1316846637, 134242262) index="39" unique_id=616350881]
+visible = false
+
+[node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
+stream = ExtResource("6_llj37")
+volume_db = -5.0
+max_db = 0.0
+
+[node name="NoIngredientsSound" type="AudioStreamPlayer3D" parent="." unique_id=689608729]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
+stream = ExtResource("7_6qesk")
+volume_db = -5.0
+
+[node name="HumSound" type="AudioStreamPlayer3D" parent="." unique_id=402048072]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
+stream = ExtResource("6_5f3ny")
+volume_db = -5.0
+unit_size = 5.0
+max_db = 0.0
+
+[node name="DoneSound" type="AudioStreamPlayer3D" parent="." unique_id=400444992]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
+stream = ExtResource("10_5f3ny")
+volume_db = -5.0
+
+[node name="FixedSound" type="AudioStreamPlayer3D" parent="." unique_id=2147316297]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
+stream = ExtResource("8_u17ae")
+
+[node name="SpillSound" type="AudioStreamPlayer3D" parent="." unique_id=2146820084]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
+stream = ExtResource("7_6qesk")
+pitch_scale = 2.0
+
+[node name="SpillCleanSound" type="AudioStreamPlayer3D" parent="." unique_id=750243636]
+transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -3.7252903e-09, 0, -0.49999994)
+stream = ExtResource("9_42f15")
+
+[node name="IngredientsWarningSound" type="AudioStreamPlayer3D" parent="." unique_id=664608403]
+stream = SubResource("AudioStreamRandomizer_11on5")
 
 [node name="AirhornSound" type="AudioStreamPlayer" parent="." unique_id=527547622]
 stream = ExtResource("20_64ldb")
 volume_db = -10.0
 
-[node name="Machinewsign" parent="." unique_id=1316846637 instance=ExtResource("20_yl6qm")]
-transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.010168403)
-
-[node name="polySurface10" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="1" unique_id=537544703]
-visible = false
-
-[node name="polySurface11" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="2" unique_id=1621127621]
-visible = false
-
-[node name="polySurface12" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="3" unique_id=266918251]
-visible = false
-
-[node name="polySurface13" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="4" unique_id=1868202273]
-visible = false
-
-[node name="polySurface15" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="6" unique_id=1773150171]
-mesh = SubResource("ArrayMesh_11on5")
-
-[node name="polySurface16" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="7" unique_id=1288161636]
-mesh = SubResource("ArrayMesh_xkbk5")
-
-[node name="polySurface18" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="9" unique_id=1392255954]
-mesh = SubResource("ArrayMesh_4xien")
-
-[node name="polySurface19" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="10" unique_id=1735353927]
-visible = false
-
-[node name="polySurface21" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="12" unique_id=659128895]
-mesh = SubResource("ArrayMesh_brtpr")
-
-[node name="polySurface22" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="13" unique_id=149988332]
-mesh = SubResource("ArrayMesh_n5bjd")
-
-[node name="polySurface23" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="14" unique_id=1329048202]
-mesh = SubResource("ArrayMesh_xkbk5")
-
-[node name="polySurface24" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="15" unique_id=102222180]
-mesh = SubResource("ArrayMesh_xkbk5")
-
-[node name="polySurface29" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="20" unique_id=642991422]
-visible = false
-
-[node name="polySurface32" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="23" unique_id=1156432934]
-mesh = SubResource("ArrayMesh_msgny")
-
-[node name="polySurface33" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="24" unique_id=2113216465]
-mesh = SubResource("ArrayMesh_c1t5y")
-
-[node name="polySurface35" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="26" unique_id=1879042181]
-mesh = SubResource("ArrayMesh_iwtb5")
-
-[node name="polySurface36" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="27" unique_id=536140199]
-visible = false
-
-[node name="polySurface42" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="33" unique_id=1232045323]
-visible = false
-
-[node name="polySurface43" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="34" unique_id=787001357]
-visible = false
-
-[node name="polySurface44" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="35" unique_id=375098202]
-visible = false
-
-[node name="polySurface45" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="36" unique_id=1235730048]
-visible = false
-
-[node name="polySurface46" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="37" unique_id=1710394070]
-visible = false
-
-[node name="polySurface47" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="38" unique_id=1796127239]
-visible = false
-
-[node name="polySurface48" parent="Machinewsign/Machine" parent_id_path=PackedInt32Array(1316846637, 1426718257) index="39" unique_id=1664854481]
-visible = false
+[node name="HammerHitSound" type="AudioStreamPlayer" parent="." unique_id=471638354]
+stream = ExtResource("12_xurph")
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]
 [editable path="Model/EmployeeSide"]
-[editable path="Machinewsign"]
+[editable path="Model/CustomerSide"]

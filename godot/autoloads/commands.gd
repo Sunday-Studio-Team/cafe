@@ -49,7 +49,8 @@ func _ready() -> void:
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
-- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)"
+- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
+- [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
 		% [items_guide_str],
 	)
 	Console.print_line(
@@ -81,12 +82,17 @@ func _ready() -> void:
 	Console.add_command("speed", set_speed, 1)
 	Console.add_command("ua", toggle_unlimited_actives)
 	Console.add_command("vo", vo_test)
+	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
 
 	Events.main_scene_loaded.connect(
 		func():
 			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
+	Events.spawn_specific_customer.emit(customer_name, help_desk)
 
 
 func vo_test() -> void:

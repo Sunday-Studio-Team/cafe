@@ -297,6 +297,84 @@ expand_mode = 3
 stretch_mode = 5
 script = ExtResource("6_juyqc")
 
+[node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -83.995
+offset_top = -372.65997
+offset_right = 516.005
+offset_bottom = 127.33911
+grow_vertical = 0
+rotation = 0.5166175
+pivot_offset = Vector2(250, 250)
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/IngredientsReminder" unique_id=195611177]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/IngredientsReminder/MarginContainer" unique_id=1223525194]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="Main" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1577073845 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+button_disabled = true
+
+[node name="Liquid" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=480793300 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+button_disabled = true
+
+[node name="Extra" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1558496985 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+button_disabled = true
+
+[node name="CustomerContainer" type="CenterContainer" parent="SubViewport" unique_id=800298872 node_paths=PackedStringArray("finished_drink", "root")]
+z_index = -41
+anchors_preset = -1
+anchor_left = 0.757
+anchor_top = 0.774
+anchor_right = 0.757
+anchor_bottom = 0.78
+offset_left = -355.44006
+offset_top = -883.92
+offset_right = 469.55994
+offset_bottom = 968.60004
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+script = ExtResource("6_wy7ys")
+finished_drink = NodePath("../Finished Drink")
+root = NodePath("../..")
+
+[node name="Control" type="Control" parent="SubViewport/CustomerContainer" unique_id=2088334038]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CustomerSpriteTextureRect" type="TextureRect" parent="SubViewport/CustomerContainer/Control" unique_id=2098074829]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -761.0
+offset_right = 235.15332
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_i2vbf")
+stretch_mode = 5
+
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -5.0

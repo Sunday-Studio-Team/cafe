@@ -1,11 +1,8 @@
 [gd_scene format=3 uid="uid://k0xp76mgx728"]
 
 [ext_resource type="Script" uid="uid://umo6thqlsy7d" path="res://minigames/arrows/arrows.gd" id="1_iuqyn"]
-[ext_resource type="Texture2D" uid="uid://dmqw3ojbkrp4m" path="res://minigames/arrows/dirs.png" id="2_57lmy"]
-[ext_resource type="FontFile" uid="uid://hscjrb7045hv" path="res://minigames/arrows/fontello-c5a6b182/font/fontello.ttf" id="2_bw26h"]
 [ext_resource type="Texture2D" uid="uid://d20qby1gxruxh" path="res://minigames/arrows/assets/blue-arrows/left/blueleft1.png" id="2_vxntg"]
 [ext_resource type="Texture2D" uid="uid://dxwxqgwiijskf" path="res://minigames/arrows/assets/blue-arrows/left/blueleft2.png" id="3_fv8pj"]
-[ext_resource type="Texture2D" uid="uid://dj5s5y1n7gc0m" path="res://minigames/arrows/wrong.png" id="3_qx814"]
 [ext_resource type="Texture2D" uid="uid://dncjmt61uhm7a" path="res://minigames/arrows/assets/blue-arrows/left/blueleft3.png" id="4_l8ovb"]
 [ext_resource type="Texture2D" uid="uid://cpjfxtra45q6j" path="res://minigames/arrows/assets/blue-arrows/left/blueleft4.png" id="5_qk4ro"]
 [ext_resource type="Texture2D" uid="uid://dihlxsuag0ota" path="res://minigames/arrows/assets/blue-arrows/left/blueleft5.png" id="6_27pub"]
@@ -46,12 +43,13 @@
 [ext_resource type="Texture2D" uid="uid://bb1yjb7xx2n4u" path="res://minigames/arrows/assets/red-arrows/down/reddown3.png" id="39_iy2on"]
 [ext_resource type="Texture2D" uid="uid://bmvmfmtd5vxsx" path="res://minigames/arrows/assets/red-arrows/down/reddown4.png" id="40_5ospk"]
 [ext_resource type="Texture2D" uid="uid://gf8d5srtafg7" path="res://minigames/arrows/assets/red-arrows/down/reddown5.png" id="41_vbul5"]
-[ext_resource type="Texture2D" uid="uid://uyp6cc0yqqu1" path="res://minigames/arrows/assets/tippy/left/tippyleft1.png" id="42_ftfms"]
 [ext_resource type="Texture2D" uid="uid://cqxhkomebjxod" path="res://minigames/arrows/assets/dancemachine.png" id="42_l8ovb"]
-[ext_resource type="Texture2D" uid="uid://b806ij51ipnce" path="res://minigames/arrows/assets/tippy/up/tippyup1.png" id="43_yem23"]
-[ext_resource type="Texture2D" uid="uid://baxe1dghrk0tk" path="res://minigames/arrows/assets/tippy/right/tippyright1.png" id="44_6h2j6"]
-[ext_resource type="Texture2D" uid="uid://dak5isrr507du" path="res://minigames/arrows/assets/tippy/down/tippydown1.png" id="45_8r575"]
-[ext_resource type="Texture2D" uid="uid://jhsh8xs4215" path="res://minigames/arrows/assets/tippy/fail/tippyfail1.png" id="46_gaw3v"]
+[ext_resource type="Texture2D" uid="uid://v7uk4vrm2ub5" path="res://minigames/arrows/assets/tippy/left/tippy_dance_left.png" id="42_syko7"]
+[ext_resource type="Texture2D" uid="uid://csixuhfx18v2r" path="res://minigames/arrows/assets/tippy/up/tippy_dance_up.png" id="43_ftfms"]
+[ext_resource type="Texture2D" uid="uid://dpb02etlsim18" path="res://minigames/arrows/assets/tippy/right/tippy_dance_right.png" id="44_yem23"]
+[ext_resource type="Texture2D" uid="uid://bkv8h5yo7o13q" path="res://minigames/arrows/assets/tippy/down/tippy_dance_down.png" id="45_6h2j6"]
+[ext_resource type="Texture2D" uid="uid://dc3lbp0kewkwl" path="res://minigames/arrows/assets/tippy/fail_once/tippy_dance_fail_once.png" id="46_8r575"]
+[ext_resource type="Texture2D" uid="uid://clogd1sodp4me" path="res://minigames/arrows/assets/tippy/fail_again/tippy_dance_fail_again.png" id="47_syko7"]
 [ext_resource type="Texture2D" uid="uid://b385bvgi6r3ef" path="res://minigames/arrows/assets/arrowsBackground.png" id="47_yem23"]
 [ext_resource type="AudioStream" uid="uid://cj8wq0y415h2u" path="res://audio/ddr/ddr_correct_1.wav" id="48_hea8k"]
 [ext_resource type="AudioStream" uid="uid://cwarhwibu7s60" path="res://audio/ddr/ddr_correct_2.wav" id="49_xql7b"]
@@ -62,9 +60,6 @@
 [ext_resource type="AudioStream" uid="uid://c02rysbc6442q" path="res://audio/ddr/ddr_drum_loop.wav" id="53_xql7b"]
 [ext_resource type="AudioStream" uid="uid://ec40um0fnntu" path="res://audio/ddr/ddr_wrong_2.wav" id="54_xkcvm"]
 [ext_resource type="AudioStream" uid="uid://ck1wv58oatpc7" path="res://audio/ddr/ddr_wrong_3.wav" id="55_7milp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ol6wr"]
-bg_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
 streams_count = 5
@@ -80,12 +75,9 @@ stream_0/stream = ExtResource("53_mji0a")
 stream_1/stream = ExtResource("54_xkcvm")
 stream_2/stream = ExtResource("55_7milp")
 
-[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("background_panel", "arrow_output", "prompt_output", "wrong_sign", "arrows_container", "tippy_image", "correct_sound", "wrong_sound")]
+[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound")]
 script = ExtResource("1_iuqyn")
-background_panel = NodePath("CanvasLayer/PanelContainer/Panel")
-arrow_output = NodePath("CanvasLayer/PanelContainer/Panel/Arrows")
 prompt_output = NodePath("CanvasLayer/Prompt")
-wrong_sign = NodePath("CanvasLayer/wrong")
 arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
 tippy_image = NodePath("CanvasLayer/Tippy")
 blue_left = Array[Texture]([ExtResource("2_vxntg"), ExtResource("3_fv8pj"), ExtResource("4_l8ovb"), ExtResource("5_qk4ro"), ExtResource("6_27pub")])
@@ -96,17 +88,18 @@ red_left = Array[Texture]([ExtResource("22_gaw3v"), ExtResource("23_ms8o4"), Ext
 red_up = Array[Texture]([ExtResource("27_au8s4"), ExtResource("28_2i6wo"), ExtResource("29_1pfxc"), ExtResource("30_k3kyd"), ExtResource("31_ihttv")])
 red_right = Array[Texture]([ExtResource("32_xrvhh"), ExtResource("33_m17ou"), ExtResource("34_2lho4"), ExtResource("35_1isbi"), ExtResource("36_gtxeh")])
 red_down = Array[Texture]([ExtResource("37_ukk4x"), ExtResource("38_p5j3n"), ExtResource("39_iy2on"), ExtResource("40_5ospk"), ExtResource("41_vbul5")])
-tippy_left = Array[Texture]([ExtResource("42_ftfms")])
-tippy_up = Array[Texture]([ExtResource("43_yem23")])
-tippy_right = Array[Texture]([ExtResource("44_6h2j6")])
-tippy_down = Array[Texture]([ExtResource("45_8r575")])
-tippy_fail = Array[Texture]([ExtResource("46_gaw3v")])
+tippy_left = Array[Texture]([ExtResource("42_syko7")])
+tippy_up = Array[Texture]([ExtResource("43_ftfms")])
+tippy_right = Array[Texture]([ExtResource("44_yem23")])
+tippy_down = Array[Texture]([ExtResource("45_6h2j6")])
+tippy_fail_first = Array[Texture]([ExtResource("46_8r575")])
+tippy_fail_again = Array[Texture]([ExtResource("47_syko7")])
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 
 [node name="CanvasLayer" type="SubViewport" parent="." unique_id=781073748]
 handle_input_locally = false
-size = Vector2i(1820, 980)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=247780111]
@@ -118,85 +111,14 @@ grow_vertical = 2
 texture = ExtResource("47_yem23")
 expand_mode = 3
 
-[node name="DanceMachine" type="TextureRect" parent="CanvasLayer" unique_id=916732716]
-anchors_preset = -1
-anchor_left = 0.27600002
-anchor_top = 0.038
-anchor_right = 0.56700003
-anchor_bottom = 0.676
-offset_left = -30.060059
-offset_right = 30.060059
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("42_l8ovb")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=538834130]
-visible = false
-anchors_preset = -1
-anchor_top = 0.123
-anchor_right = 1.1110001
-anchor_bottom = 0.49400002
-offset_left = 85.0
-offset_top = 535.16003
-offset_right = -286.12012
-offset_bottom = 431.47998
-
-[node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer" unique_id=2121547647]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ol6wr")
-
-[node name="Arrows" type="RichTextLabel" parent="CanvasLayer/PanelContainer/Panel" unique_id=968681062]
-layout_mode = 1
+[node name="Frame" type="NinePatchRect" parent="CanvasLayer" unique_id=1238806735]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = 24.0
-offset_right = -24.0
-offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("2_bw26h")
-theme_override_font_sizes/normal_font_size = 100
-bbcode_enabled = true
-text = "[color=#14529F]🡹 [/color][color=#000]Error text [/color][color=#A20B10]🡹 [/color]
-"
-horizontal_alignment = 3
-vertical_alignment = 1
-
-[node name="help" type="Control" parent="CanvasLayer" unique_id=747208162]
-visible = false
-layout_mode = 3
-anchor_left = 0.5
-anchor_top = 0.446
-anchor_right = 0.5
-anchor_bottom = 0.448
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dirs" type="Sprite2D" parent="CanvasLayer/help" unique_id=1774183212]
-texture = ExtResource("2_57lmy")
-
-[node name="wrong" type="Control" parent="CanvasLayer" unique_id=481486310]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -110.0
-offset_right = 20.0
-offset_bottom = -110.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Wrong" type="Sprite2D" parent="CanvasLayer/wrong" unique_id=1729283598]
-scale = Vector2(1.4075757, 1.5)
-texture = ExtResource("3_qx814")
+texture = ExtResource("6_cfscc")
+region_rect = Rect2(0, 0, 2679, 1817)
 
 [node name="ArrowsBackground" type="TextureRect" parent="CanvasLayer" unique_id=1185070196]
 anchors_preset = -1
@@ -232,10 +154,10 @@ anchor_left = 0.047000002
 anchor_top = 0.606
 anchor_right = 0.79700005
 anchor_bottom = 0.946
-offset_left = 247.45999
-offset_top = 32.119995
-offset_right = -217.54004
-offset_bottom = -221.07996
+offset_left = 254.76
+offset_top = -10.47998
+offset_right = -210.24011
+offset_bottom = -263.67993
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
@@ -246,24 +168,19 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=903182620]
-layout_mode = 3
-anchor_left = 0.041
-anchor_top = 0.064
-anchor_right = 0.80500007
-anchor_bottom = 0.92800003
-offset_right = 78.71997
-offset_bottom = 1406.8801
-grow_horizontal = 2
-
-[node name="Border" type="NinePatchRect" parent="CanvasLayer" unique_id=1238806735]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="DanceMachine" type="TextureRect" parent="CanvasLayer" unique_id=916732716]
+anchors_preset = -1
+anchor_left = 0.27600002
+anchor_top = 0.038
+anchor_right = 0.56700003
+anchor_bottom = 0.676
+offset_left = -30.060059
+offset_right = 30.060059
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_cfscc")
-region_rect = Rect2(0, 0, 2679, 1817)
+texture = ExtResource("42_l8ovb")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="Tippy" type="TextureRect" parent="CanvasLayer" unique_id=1193548297]
 anchors_preset = -1
@@ -271,24 +188,23 @@ anchor_left = 0.347
 anchor_top = 0.185
 anchor_right = 0.5
 anchor_bottom = 0.47
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -91.23999
+offset_top = -61.800003
+offset_right = 81.0
+offset_bottom = 100.399994
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("44_6h2j6")
-expand_mode = 5
+texture = ExtResource("42_syko7")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=1547774346]
 stream = SubResource("AudioStreamRandomizer_l8ovb")
 volume_db = -5.0
-bus = &"MinigameMusic"
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=980615523]
 stream = SubResource("AudioStreamRandomizer_0ffxp")
 volume_db = -5.0
-bus = &"MinigameMusic"
 
 [node name="DrumLoop" type="AudioStreamPlayer" parent="." unique_id=223541811]
 stream = ExtResource("53_xql7b")

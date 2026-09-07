@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://nm85k5woe7rt"]
 
 [ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cn12vpm4btpmx" path="res://machine.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://b7pu4gc2t3gv6" path="res://machine.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
@@ -72,7 +72,6 @@
 [ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="69_j3ofb"]
 [ext_resource type="Texture2D" uid="uid://0nacro0ayx6m" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0018.png" id="70_0h8y2"]
 [ext_resource type="PackedScene" uid="uid://dohtcd6556n24" path="res://menu.tscn" id="70_g5xqc"]
-[ext_resource type="Texture2D" uid="uid://bhg3g67g8gjck" path="res://sprites/items/book.png" id="70_j3ofb"]
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
 [ext_resource type="Texture2D" uid="uid://bvnbmo7pyexom" path="res://sprites/2d_animations/tippy_vo_indicator/TTU_Rpughs_v02_0019.png" id="71_nycv6"]
 [ext_resource type="Texture2D" uid="uid://b8pqjkx1lt8xa" path="res://sprites/items/shoes.png" id="72_oirqo"]
@@ -494,7 +493,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fd6dt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_c6fgv"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -505,7 +504,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gttkg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fd6dt"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -516,7 +515,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hiwvf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gttkg"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -527,7 +526,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ed5de"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hiwvf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -980,7 +979,6 @@ script = ExtResource("69_j3ofb")
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("70_j3ofb")
 expand_mode = 5
 stretch_mode = 5
 script = ExtResource("69_j3ofb")
@@ -1474,7 +1472,7 @@ text = "MONDAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MinigameController" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=305291737 node_paths=PackedStringArray("sub_viewport", "cancel_button")]
+[node name="MinigameController" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=305291737 node_paths=PackedStringArray("sub_viewport_container", "sub_viewport", "cancel_button")]
 visible = false
 script = ExtResource("10_4c57u")
 minigame_dict = Dictionary[String, PackedScene]({
@@ -1487,6 +1485,7 @@ minigame_dict = Dictionary[String, PackedScene]({
 "Typing": ExtResource("20_d13ii"),
 "WordMatch": ExtResource("18_4obbf")
 })
+sub_viewport_container = NodePath("MarginContainer/SubViewportContainer")
 sub_viewport = NodePath("MarginContainer/SubViewportContainer/SubViewport")
 cancel_button = NodePath("MarginContainer/CancelButton")
 
@@ -1496,13 +1495,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="PlayerUiSubViewportContainer/SubViewport/MinigameController/MarginContainer" unique_id=824924343]
 layout_mode = 2
+offset_transform_enabled = true
 mouse_filter = 0
 stretch = true
 
@@ -1549,7 +1545,7 @@ hammer_item = ExtResource("150_0bk8h")
 position = Vector2(960, 540)
 scale = Vector2(3.43, 3.43)
 sprite_frames = ExtResource("108_asu84")
-animation = &"bag_pickup"
+animation = &"airhorn_use"
 
 [node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable") instance=ExtResource("136_kmrid")]
 visible = false
@@ -1701,7 +1697,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fd6dt")
+texture = SubResource("ViewportTexture_c6fgv")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -1714,7 +1710,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_gttkg")
+texture = SubResource("ViewportTexture_fd6dt")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -1731,7 +1727,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_hiwvf")
+texture = SubResource("ViewportTexture_gttkg")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -1748,7 +1744,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ed5de")
+texture = SubResource("ViewportTexture_hiwvf")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -1907,14 +1903,14 @@ _audio_stream_player_3ds = [NodePath("VoiceLineNoLocationAudioStreamPlayer3D"), 
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D" parent="VoiceLineNoLocationPlayer" unique_id=753703191 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6607904, 2.8379436, 6.5908065)
-volume_db = -5.0
+volume_db = -10.0
 max_db = 0.0
 bus = &"TippyVO"
 doppler_tracking = 2
 
 [node name="VoiceLineNoLocationAudioStreamPlayer3D2" parent="VoiceLineNoLocationPlayer" unique_id=682055878 instance=ExtResource("26_gkfde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.105054, 2.8379436, 6.620669)
-volume_db = -5.0
+volume_db = -10.0
 max_db = 0.0
 bus = &"TippyVO"
 doppler_tracking = 2
@@ -1935,7 +1931,7 @@ volume_db = -5.0
 [node name="CustomerAreaMusic" type="AudioStreamPlayer3D" parent="." unique_id=1077236725]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 2.4, -3.5)
 stream = ExtResource("182_suf1q")
-volume_db = -20.0
+volume_db = -25.0
 max_db = -5.0
 autoplay = true
 bus = &"DiegeticMusic"

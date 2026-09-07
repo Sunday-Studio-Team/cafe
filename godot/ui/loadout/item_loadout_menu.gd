@@ -7,6 +7,8 @@ extends CanvasLayer
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: Button
+@export var locker_open_sound: AudioStreamPlayer
+@export var locker_close_sound: AudioStreamPlayer
 # NOTE: OMG i never made this thing its own class cos it was only being used in
 # 1-2 places but ive had to redo it more times than i expected and its kind of
 # tedious . 0_0
@@ -27,10 +29,13 @@ func _ready() -> void:
 	visibility_changed.connect(
 		func():
 			if visible:
+				locker_open_sound.play()
 				var t := create_tween().set_parallel()
 				t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
 				t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
 				populate()
+			else:
+				locker_close_sound.play()
 	)
 
 
@@ -58,12 +63,13 @@ func populate() -> void:
 		)
 		equipped_items_container.add_child(equipped_item_button)
 
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed("pause") and Global.in_loadout_menu:
+		confirm_and_hide()
+		get_viewport().set_input_as_handled()
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
-
-	if Input.is_action_just_pressed("pause"):
-		confirm_and_hide()
 
 	handle_item_hover_tooltip()
 
