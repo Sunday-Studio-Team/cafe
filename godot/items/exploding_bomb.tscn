@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://do0l4oqkkpu3y"]
 
 [ext_resource type="Script" uid="uid://hqad4vu3xawh" path="res://items/exploding_bomb.gd" id="1_jcxaa"]
+[ext_resource type="PackedScene" uid="uid://ctyutkugnjet1" path="res://items/SM Bomb Test.glb" id="2_3vm3o"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0tu14"]
+radius = 0.61747295
 
 [node name="ExplodingBomb" type="Node3D" unique_id=525786908 node_paths=PackedStringArray("rigid_body", "collision_shape", "csg_sphere", "timer", "label") groups=["exploding_bomb"]]
 script = ExtResource("1_jcxaa")
@@ -23,10 +25,15 @@ transform = Transform3D(3.030303, 0, 0, 0, 3.030303, 0, 0, 0, 3.030303, 0, 0, 0)
 visible = false
 billboard = 1
 
+[node name="SM Bomb Test" parent="RigidBody3D" unique_id=1005638468 instance=ExtResource("2_3vm3o")]
+transform = Transform3D(3.030303, 0, 0, 0, 2.522466, 1.6792564, 0, -1.6792564, 2.522466, -0.028444601, -0.64873713, 0.30234358)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1072693879]
+transform = Transform3D(1.8374598, 0, 0, 0, 1, 0, 0, 0, 1.1253958, 0.15607855, 0, -0.124079995)
 shape = SubResource("SphereShape3D_0tu14")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D/CollisionShape3D" unique_id=241677578]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.18318403, 0, 0)
 
 [node name="Timer" type="Timer" parent="." unique_id=1394635480]
 wait_time = 8.0
