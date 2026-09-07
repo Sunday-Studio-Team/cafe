@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://m41kjgsvqv8h"]
+
+[ext_resource type="Script" uid="uid://cn7e6qfs8hpj5" path="res://ui/level_select_screen/level_select_level_view.gd" id="1_6tl0d"]
+[ext_resource type="Texture2D" uid="uid://er356iujlkii" path="res://environment/textures/lightbusycoffee.jpg" id="1_gr1b5"]
+[ext_resource type="Texture2D" uid="uid://drjnv01m7oya4" path="res://environment/textures/coffeebusy.jpg" id="3_o0ipp"]
+[ext_resource type="Texture2D" uid="uid://dsdifjweeudo1" path="res://environment/textures/square star floor.jpg" id="4_kuk43"]
+[ext_resource type="Texture2D" uid="uid://ciwanem2vjg81" path="res://environment/textures/pink tiles.jpg" id="5_o2jku"]
+[ext_resource type="Texture2D" uid="uid://bj7st8b2blyft" path="res://environment/textures/Tile floor yellow.jpg" id="6_6uxnr"]
+[ext_resource type="Texture2D" uid="uid://cl2g108lqa0bu" path="res://environment/textures/star floor.jpg" id="7_3m4ie"]
+
+[node name="LevelSelectLevelView" type="Control" unique_id=1875941419 node_paths=PackedStringArray("_level_splash_texture_rect", "_day_label")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6tl0d")
+_level_splash_texture_rect = NodePath("Control/MarginContainer/SplashTextureRect")
+_day_label = NodePath("Control/Control/RichTextLabel2")
+_level_splashes = Dictionary[int, Texture2D]({
+0: ExtResource("1_gr1b5"),
+1: ExtResource("3_o0ipp"),
+2: ExtResource("4_kuk43"),
+3: ExtResource("5_o2jku"),
+4: ExtResource("6_6uxnr"),
+5: ExtResource("7_3m4ie")
+})
+
+[node name="Control" type="Control" parent="." unique_id=208068653]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1077227902]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SplashTextureRect" type="TextureRect" parent="Control/MarginContainer" unique_id=1329225065]
+layout_mode = 2
+texture = ExtResource("1_gr1b5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="Control" unique_id=1699310063]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -799.0
+offset_top = -482.0
+offset_right = -616.0
+offset_bottom = -312.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control/Control" unique_id=1465365089]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Control" unique_id=67255185]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.5
+offset_top = -55.0
+offset_right = 29.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Day"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control/Control" unique_id=1888485823]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.5
+offset_top = -25.0
+offset_right = 18.5
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "5"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

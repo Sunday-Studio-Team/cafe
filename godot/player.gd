@@ -12,7 +12,7 @@ const STRIDE_LENGTH := 1.25
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var sprint_lockout_timer: Timer
-
+@export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 
 var player_status_effects: PlayerStatusEffects
@@ -250,15 +250,21 @@ func handle_sprint(delta: float) -> void:
 		sprint_lockout_timer.start()
 
 
-# (unfinished) plays footstep sounds with timing adjusted to speed
 func handle_footstep_sounds() -> void:
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
+		# here we play a sound just as we start walking
+		if velocity.length() > 0.2 and footstep_sfx_lockout_timer.is_stopped():
+			footstep_sound.play()
+			footstep_sfx_lockout_timer.start()
 	else:
 		dist_travelled_since_last_step += global_position.distance_to(pos_last_physics_frame)
 
+	# and here we play one if we've gone a set distance since we started walking
 	if dist_travelled_since_last_step >= STRIDE_LENGTH:
-		footstep_sound.play()
+		if footstep_sfx_lockout_timer.is_stopped():
+			footstep_sound.play()
+			footstep_sfx_lockout_timer.start()
 		dist_travelled_since_last_step = 0
 
 	pos_last_physics_frame = global_position

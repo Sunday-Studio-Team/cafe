@@ -1,14 +1,10 @@
-extends SubViewportContainer
+extends Control
 
 @export var main_ordered: IngredientIconHolder
 @export var liquid_ordered: IngredientIconHolder
 @export var extra_ordered: IngredientIconHolder
 @export var captcha: GridContainer
-@export var submit_button: Button
-@export var instructions: RichTextLabel
-@export var drink_name: RichTextLabel
-@export var player_thought: RichTextLabel
-@export var entire_panel: PanelContainer
+@export var entire_panel: Control
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
 @export var customer_sprite: TextureRect
@@ -17,8 +13,24 @@ extends SubViewportContainer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
 
+@export var req_and_sel:TextureRect
+@export var captcha_vbox:VBoxContainer
+@export var sato_tippy_fight:TextureRect
+@export var complete_sprite:TextureRect
+@export var sato:TextureRect
+
+enum SatoTippyFight {
+	Neutral = 0,
+	Win = 1,
+	Loss = 2
+}
+@export var sato_tippy_textures:Array[Texture2D]
+@export var sato_sprites:Array[Texture2D]
+
+@export var drink_name: RichTextLabel
+
+
 var ordered_drink: Drink
-var main_text: String = "with the required ingredients"
 var drink_customer: Customer
 
 
@@ -32,7 +44,7 @@ func _ready() -> void:
 	_start_minigame()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# This is solely for testing purposes (running the minigame outside of main)
 	if Global.ordered_drink_to_remake == null and Global.ordered_drink_customer == null:
 		# Disable Global so we can use the mouse
@@ -82,12 +94,27 @@ func get_ordered_drink(drink: Drink) -> void:
 		#ordered_drink.singular_article,
 		#ordered_drink.name,
 	#]
-	player_thought.text = "I need to make %s [color=gold]%s" % [
-		ordered_drink.singular_article,
-		ordered_drink.name,
-	]
+	var drink_str:String = ""
+	var drink_arr:PackedStringArray = ordered_drink.name.to_upper().split(" ")
+	for i in range(drink_arr.size()):
+		if i == 2 and drink_arr.size() >= 4: drink_str += "[br]"
+		drink_str += str(drink_arr[i], " ")
+	drink_name.text = str("[font_size=100][color=black][center]%s" % drink_str).strip_edges()
 	remade_drink_sprite.texture = drink.icon
 
+func on_wrong():
+	sato.texture = sato_sprites[SatoTippyFight.Loss]
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Loss]
+	await get_tree().create_timer(1).timeout
+	sato.texture = sato_sprites[SatoTippyFight.Neutral]
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
+
+func on_right():
+	req_and_sel.visible = false
+	captcha_vbox.visible = false
+	complete_sprite.visible = true
+	sato.texture = sato_sprites[SatoTippyFight.Win]
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
 
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
@@ -107,14 +134,12 @@ func verify_captcha() -> void:
 				!= captcha_icon.button.button_pressed
 			)
 		):
+			on_wrong()
 			shake_panel()
 			wrong_sound.play()
 			return
-	
-	entire_panel.visible = false
+	on_right()
 	remade_drink_sprite.visible = true
-	player_thought.text = "I need to give the customer their drink\n(by clicking and dragging)"
-	
 	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
 	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 	correct_sound.play()
@@ -133,14 +158,6 @@ func verify_captcha() -> void:
 	await correct_sound.finished
 	
 	#_end_minigame()
-
-
-func set_instructions(text: String) -> void:
-	instructions.text = text
-
-
-func set_submit_text(text: String) -> void:
-	submit_button.text = text
 
 
 func shake_panel() -> void:
@@ -168,8 +185,7 @@ func shake_panel() -> void:
 
 func _start_minigame() -> void:
 	order_reminder.visible = false
-	set_instructions(main_text)
-	
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
 	var drink: Drink
 	
 	# The else blocks here should only happen if this scene is ran by itself (not in the main game)
@@ -182,9 +198,13 @@ func _start_minigame() -> void:
 	if(Global.ordered_drink_customer != null):
 		drink_customer = Global.ordered_drink_customer
 		customer_sprite.texture = drink_customer.body.texture
+		
+		rescale_image_to_target_height(customer_sprite)
 	else:
 		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
-		order_reminder.visible = true
+		rescale_image_to_target_height(customer_sprite)
+##TODO: Unhide Ingredient Reminder for tutorial
+		#order_reminder.visible = true
 		populate_order_reminder()
 	
 	populate_captcha()
@@ -195,9 +215,36 @@ func _end_minigame() -> void:
 	# THIS FUNCTION IS CALLED BY THE `CustomerContainer` node!
 	# Since the game should only end when giving the customer their drink now
 	print("End remaking minigame")
+	correct_sound.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
 	Events.minigame_end.emit()
 
 
 func _on_submit_button_pressed() -> void:
 	verify_captcha()
+
+
+
+func rescale_image_to_target_height(customer_sprite: TextureRect, target_height:int = 1024)->void:
+	#target_height is generally 1024
+	
+	
+	var original_height = customer_sprite.texture.get_height()
+	if original_height==target_height:
+		
+		return	#do nothing! texture is the correct size.
+				#all customer heights have 1024px; with variable widths. so its the only one we check.		
+			
+	var original_width = float(customer_sprite.texture.get_width())
+	
+	var ratio = float(original_height)/float(target_height) #ex 2048/1024 = 2
+	
+	var _image = customer_sprite.texture.get_image()
+	
+	var target_width = original_width
+	_image.resize(int(round(original_width/ratio)), int(target_height), Image.INTERPOLATE_LANCZOS)
+	var _texture: ImageTexture = ImageTexture.create_from_image(_image)
+	
+	customer_sprite.texture= _texture
+	#print("rescaled customer sprite size",customer_sprite.texture.get_size())
+	

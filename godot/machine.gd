@@ -26,6 +26,7 @@ const REFILL_MINIGAME := "Refill"
 @export_category("UI")
 @export var progress_indicator: Control
 @export var progress_bar: TextureProgressBar
+@export var tippy_progress_sprite: TextureRect
 @export var accept_button: Button
 @export var _price_label_accept: Label
 @export var _rating_loss_on_accept_label: Label
@@ -63,10 +64,11 @@ const REFILL_MINIGAME := "Refill"
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export var airhorn_sound: AudioStreamPlayer
+# played when we try to refill while not holding ingredients
+# OR try to remake without enough ingredients
+@export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
-
-
 
 var customer: Customer
 var queued_customers: Array[Customer]
@@ -108,6 +110,7 @@ func _ready() -> void:
 			if Global.holding_ingredients:
 				refill()
 			else:
+				ingredients_warning_sound.play()
 				get_ingredients_prompt.show()
 				await get_tree().create_timer(0.5, false).timeout
 				get_ingredients_prompt.hide()
@@ -131,6 +134,8 @@ func _process(_delta: float) -> void:
 	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 
 	progress_indicator.visible = not timer.is_stopped()
+
+
 
 	accept_button.visible = waiting_for_response
 	make_drink_button.visible = waiting_for_response
@@ -312,10 +317,16 @@ func show_tutorial_go_clean_spill() -> void:
 
 
 func _set_customer(new_customer: Customer) -> void:
+	if customer:
+		if customer.customer_sprite_resource.alternate_desk_sprite:
+			customer.body.texture = customer.customer_sprite_resource.sprite
+
 	customer = new_customer
 	if customer != null:
 		customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
 		await customer.move_to(spot_for_customer.global_position)
+		if customer.customer_sprite_resource.alternate_desk_sprite:
+			customer.body.texture = customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
 		made_drink_name_label.hide()
@@ -787,6 +798,7 @@ func on_active_item_used(item: Item):
 
 	if item.item_id == "airhorn":
 		if customer:
+			Events.play_viewmodel_animation.emit("airhorn_use")
 			airhorn_sound.play()
 			customer.leave_store()
 			_set_customer(null)
@@ -818,6 +830,7 @@ func _on_machine_fixed() -> void:
 
 func _on_remake_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
+		ingredients_warning_sound.play()
 		no_ingredients_warning.show()
 		await get_tree().create_timer(0.5, false).timeout
 		no_ingredients_warning.hide()

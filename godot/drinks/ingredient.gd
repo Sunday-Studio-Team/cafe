@@ -23,7 +23,7 @@ func name_to_string() -> String:
 			return "espresso"
 		Ingredient_Label.GREEN_TEA:
 			return "green tea"
-		Ingredient_Label.TEA:	
+		Ingredient_Label.TEA:
 			return "tea"
 		Ingredient_Label.CHAI:
 			return "chai"

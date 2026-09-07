@@ -42,6 +42,7 @@ signal machine_exit_button_pressed
 signal player_left_office
 signal tippy_boss_kidnapped_player
 signal tippy_boss_released_player
+signal spawn_specific_customer(name: String, help_desk: String)
 # minigames
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled
