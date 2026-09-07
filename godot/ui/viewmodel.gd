@@ -52,3 +52,5 @@ func _on_animation_finished() -> void:
 			sprite.play("default")
 		"hammer_equip":
 			sprite.play("hammer_idle")
+		_:
+			sprite.play("default")
