@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_mgjrr"]
 [ext_resource type="PackedScene" uid="uid://bryvlrbbi4ofw" path="res://tutorial/handbook_background.tscn" id="2_jb7uw"]
-[ext_resource type="Texture2D" uid="uid://g0e85lxkljo5" path="res://tutorial/tutorial_screen_7.png" id="2_mgjrr"]
 [ext_resource type="Texture2D" uid="uid://bv17e7tq4gme4" path="res://tutorial/tutorial_screen_7_img.png" id="3_40wo0"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_kanee"]
 [ext_resource type="Theme" uid="uid://d0nulpskemldc" path="res://themes/employee_handbook_theme.tres" id="4_fvsty"]
@@ -69,23 +68,6 @@ bbcode_enabled = true
 text = "Go to the Store Room to pick up Ingredients to refill the machines when they are out!"
 fit_content = true
 horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -647.5
-offset_top = -486.0
-offset_right = 647.5
-offset_bottom = 486.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_mgjrr")
-stretch_mode = 3
 
 [node name="NextButton" type="TextureButton" parent="." unique_id=1750636259]
 layout_mode = 1

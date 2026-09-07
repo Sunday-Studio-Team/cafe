@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_ea8gr"]
 [ext_resource type="PackedScene" uid="uid://bryvlrbbi4ofw" path="res://tutorial/handbook_background.tscn" id="2_bnd7a"]
-[ext_resource type="Texture2D" uid="uid://brsir84v0lva5" path="res://tutorial/tutorial_screen_2.png" id="2_ea8gr"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_28iwr"]
 [ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_t11oh"]
 [ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="5_b2ufu"]
@@ -137,20 +136,3 @@ offset_right = 2071.0
 offset_bottom = 1300.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("10_b2ufu")
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -649.0
-offset_top = -486.0
-offset_right = 646.0
-offset_bottom = 486.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_ea8gr")
-stretch_mode = 3

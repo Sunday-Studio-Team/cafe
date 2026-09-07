@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://r1xentkdq7bs"]
 
 [ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_5i05d"]
-[ext_resource type="Texture2D" uid="uid://dgn2764dkgtr1" path="res://tutorial/tutorial_screen_3.png" id="2_5i05d"]
 [ext_resource type="PackedScene" uid="uid://bryvlrbbi4ofw" path="res://tutorial/handbook_background.tscn" id="2_xff80"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_nfxhp"]
 [ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_asung"]
@@ -109,20 +108,3 @@ drinks will be automatically
 completed by our AI agent Tippy!"
 fit_content = true
 horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -647.5
-offset_top = -486.0
-offset_right = 647.5
-offset_bottom = 486.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_5i05d")
-stretch_mode = 3
