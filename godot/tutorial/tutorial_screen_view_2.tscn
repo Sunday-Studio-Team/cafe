@@ -31,45 +31,6 @@ metadata/_custom_type_script = "uid://8bh0c410cd6d"
 [node name="HandbookBackground" parent="." unique_id=365059969 instance=ExtResource("2_bnd7a")]
 layout_mode = 1
 
-[node name="NextButton" type="TextureButton" parent="." unique_id=1750636259]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 266.0
-offset_top = 357.0
-offset_right = 621.0
-offset_bottom = 456.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("3_28iwr")
-texture_pressed = ExtResource("4_t11oh")
-texture_hover = ExtResource("5_b2ufu")
-texture_disabled = ExtResource("6_036i6")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="NextLabel" type="Label" parent="NextButton" unique_id=523071466]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("7_xxmnc")
-theme_override_font_sizes/font_size = 50
-text = "Next"
-horizontal_alignment = 1
-
 [node name="HandbookContent" type="Control" parent="." unique_id=618456630]
 layout_mode = 1
 anchors_preset = 15
@@ -136,3 +97,42 @@ offset_right = 2071.0
 offset_bottom = 1300.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("10_b2ufu")
+
+[node name="NextButton" type="TextureButton" parent="." unique_id=1750636259]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 266.0
+offset_top = 357.0
+offset_right = 621.0
+offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_28iwr")
+texture_pressed = ExtResource("4_t11oh")
+texture_hover = ExtResource("5_b2ufu")
+texture_disabled = ExtResource("6_036i6")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="NextLabel" type="Label" parent="NextButton" unique_id=523071466]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_xxmnc")
+theme_override_font_sizes/font_size = 50
+text = "Next"
+horizontal_alignment = 1
