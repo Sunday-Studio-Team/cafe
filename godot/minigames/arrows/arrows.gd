@@ -1,9 +1,6 @@
-extends SubViewportContainer
+extends Control
 
-@export var background_panel: Panel
-@export var arrow_output: RichTextLabel
 @export var prompt_output: RichTextLabel
-@export var wrong_sign: Control
 @export var arrows_container: HBoxContainer
 @export var tippy_image: TextureRect
 
@@ -122,13 +119,6 @@ func add_arrow_to_output(
 	# While adding to the output array, we keep track of the valid (output) indices here, in order to access the arrows that we make invisible
 	if correct_color == color:
 		valid_indices.append(output_index)
-
-
-func display_wrong() -> void:
-	wrong_sign.visible = true
-	wrong_sound.play()
-	await get_tree().create_timer(.4).timeout
-	wrong_sign.visible = false
 
 
 func set_up_arrow_container() -> void:

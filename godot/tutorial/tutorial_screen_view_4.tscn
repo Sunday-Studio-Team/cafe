@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://chggna86aqera"]
 
 [ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_xq5ag"]
-[ext_resource type="Texture2D" uid="uid://bp6ph84yk5o7d" path="res://tutorial/tutorial_screen_4.png" id="2_xq5ag"]
+[ext_resource type="PackedScene" uid="uid://bryvlrbbi4ofw" path="res://tutorial/handbook_background.tscn" id="2_oseof"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_7jeme"]
+[ext_resource type="Texture2D" uid="uid://bw0niftnrjron" path="res://tutorial/tutorial_screen_4_img.png" id="3_q5bdf"]
+[ext_resource type="Theme" uid="uid://d0nulpskemldc" path="res://themes/employee_handbook_theme.tres" id="4_0673g"]
 [ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_oseof"]
 [ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="5_q5bdf"]
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="6_0673g"]
 [ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="7_nfvji"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3inr0"]
 
 [node name="TutorialScreenView4" type="Control" unique_id=322187242 node_paths=PackedStringArray("_continue_buttons")]
 layout_mode = 3
@@ -19,21 +23,61 @@ script = ExtResource("1_xq5ag")
 _continue_buttons = [NodePath("NextButton")]
 metadata/_custom_type_script = "uid://8bh0c410cd6d"
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
+[node name="HandbookBackground" parent="." unique_id=365059969 instance=ExtResource("2_oseof")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -647.5
-offset_top = -486.0
-offset_right = 647.5
-offset_bottom = 486.0
+
+[node name="HandbookContent" type="Control" parent="." unique_id=1101006517]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_xq5ag")
+
+[node name="MarginContainer" type="MarginContainer" parent="HandbookContent" unique_id=2078924142]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 350
+theme_override_constants/margin_bottom = 150
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HandbookContent/MarginContainer" unique_id=1163053549]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HandbookContent/MarginContainer/HBoxContainer" unique_id=167115711]
+layout_mode = 2
+texture = ExtResource("3_q5bdf")
 stretch_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="HandbookContent/MarginContainer/HBoxContainer" unique_id=1944504244]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_3inr0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HandbookContent/MarginContainer/HBoxContainer" unique_id=591425355]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme = ExtResource("4_0673g")
+theme_override_font_sizes/normal_font_size = 45
+bbcode_enabled = true
+text = "You will have to manually approve drinks made by the machine to see if they match the order.
+
+Accept:
+Customer get the drink the machine made.
+
+Reject:
+AI will try again to remake the drink.
+
+Remake Manually:
+You remake the drink by hand but takes longer!"
+fit_content = true
 
 [node name="NextButton" type="TextureButton" parent="." unique_id=1750636259]
 layout_mode = 1

@@ -77,7 +77,8 @@ animation_player = NodePath("AnimationPlayer")
 [node name="Interactable" type="Area3D" parent="." unique_id=2045513509 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1754386, 0.3508772, 0)
 script = ExtResource("2_rxk5n")
-display_name = "start shift"
+interactable_id = &"start_shift"
+display_name = "Start shift"
 mesh = NodePath("../Model/tippyOpenCloseSign")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=668432471]

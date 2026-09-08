@@ -24,8 +24,8 @@ var desired_drink: Drink
 var orders_made: int = 0
 var bonus_points_for_time: int
 var at_window: bool = false
-var _total_wait_time: float
 var percent_time_left: float = 100
+var _total_wait_time: float
 
 
 func _ready() -> void:
@@ -89,7 +89,7 @@ func spawn_anim() -> void:
 
 	var t := create_tween().set_parallel().set_ease(Tween.EASE_OUT)
 	t.tween_property(body, "transparency", 0, DUR).from(1)
-	t.tween_property(self, "scale:y", 1, DUR).from(1.25)
+	t.tween_property(body, "scale:y", 1, DUR).from(1.25)
 
 
 func despawn_anim() -> void:
@@ -97,7 +97,7 @@ func despawn_anim() -> void:
 
 	var t := create_tween().set_parallel().set_ease(Tween.EASE_IN)
 	t.tween_property(body, "transparency", 1, DUR).from(0)
-	t.tween_property(self, "scale:y", 1.25, DUR).from(1)
+	t.tween_property(body, "scale:y", 1.25, DUR).from(1)
 
 	await t.finished
 
@@ -136,6 +136,7 @@ func leave_store() -> void:
 
 func _on_timer_timeout() -> void:
 	wait_timed_out.emit(self)
+
 
 func _on_order_started(customer: Customer) -> void:
 	if customer != self or orders_made > 0:

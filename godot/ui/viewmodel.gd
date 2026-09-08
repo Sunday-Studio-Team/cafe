@@ -44,13 +44,8 @@ func _on_frame_changed() -> void:
 func _on_animation_finished() -> void:
 	match sprite.animation:
 		"bag_pickup":
-			if Global.equipped_item == hammer_item:
-				sprite.play("hammer_idle")
-			else:
-				sprite.play("default")
+			sprite.play("default")
 		"hammer_use":
 			sprite.play("default")
-		"hammer_equip":
-			sprite.play("hammer_idle")
 		_:
 			sprite.play("default")

@@ -5,7 +5,6 @@ const GRAB_RANGE: float = 1
 const TIME_IN_JAIL: float = 10
 
 @export var customer_area: Area3D
-@export var back_room_enter_trigger: Area3D
 @export var jumpscare_fade_rect: ColorRect
 @export var nav_agent: NavigationAgent3D
 @export var tired_indicator: Label3D
@@ -17,8 +16,15 @@ const TIME_IN_JAIL: float = 10
 @export var sleep_timer: Timer
 @export var stun_timer: Timer
 
-enum State {IDLE, CHASING, TIRED, ZAPPED}
+enum State {
+	IDLE,
+	CHASING,
+	TIRED,
+	ZAPPED,
+}
 
+var shift_started := false
+var woken_up := false
 var state: State = State.IDLE:
 	set = set_state
 var player_in_customer_area: bool = false
@@ -57,38 +63,41 @@ func _ready() -> void:
 
 	if Global.day != 5:
 		queue_free()
-	
+
 	customer_area.body_entered.connect(
 		func(body: PhysicsBody3D):
 			if body == Global.player:
-				player_in_customer_area = true
+				player_in_customer_area = true,
 	)
 	customer_area.body_exited.connect(
 		func(body: PhysicsBody3D):
 			if body == Global.player:
-				player_in_customer_area = false
-	)	
+				player_in_customer_area = false,
+	)
 
 	Events.shift_started.connect(
 		func():
-		back_room_enter_trigger.body_entered.connect(
-			func(body: PhysicsBody3D):
-				if body == Global.player:
-					set_state(State.CHASING),
-					ConnectFlags.CONNECT_ONE_SHOT
-	)
+			shift_started = true,
 	)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	# wait for player to go into back room before we start chasing
+	if shift_started and not woken_up:
+		if not player_in_customer_area:
+			woken_up = true
+			set_state(State.CHASING)
+
 	if state == State.CHASING:
 		if global_position.distance_to(player.global_position) < GRAB_RANGE:
 			# stop moving + block detection of duplicate grabs
 			set_state(State.IDLE)
 
 			# send player to jail
-			await create_tween().tween_property(jumpscare_fade_rect, "modulate", Color.WHITE, 0.25).finished
+			await create_tween() \
+					.tween_property(jumpscare_fade_rect, "modulate", Color.WHITE, 0.25) \
+					.finished
 			player.global_position = player_kidnap_marker.global_position
 			player.reset_physics_interpolation()
 			create_tween().tween_property(jumpscare_fade_rect, "modulate", Color.TRANSPARENT, 0.25)

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c0wupqthmectl"]
+
+[ext_resource type="PackedScene" uid="uid://1moxy3oakad3" path="res://Assets/Fridge/Fridge Tippy.glb" id="1_nw84r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nw84r"]
+size = Vector3(2.0088348, 9.283936, 5.4632874)
+
+[node name="Fridge Tippy" unique_id=1983663641 instance=ExtResource("1_nw84r")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="0" unique_id=617442051]
+transform = Transform3D(1.4659526, 0, 0.010582544, 0, 1.4659908, 0, -0.010582544, 0, 1.4659526, 0.31440228, 1.1039027, 0.33841977)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=2069401972]
+transform = Transform3D(0.32077184, 0, 2.910383e-10, 0, 0.13486868, 0, -3.236346e-08, 0, 0.13519636, -0.2791415, -0.17120779, -0.23217635)
+shape = SubResource("BoxShape3D_nw84r")
+
+[node name="Door fridge 1" parent="." index="1" unique_id=1133044156]
+transform = Transform3D(1.4659526, 0, 0.010582544, 0, 1.4659908, 0, -0.010582544, 0, 1.4659526, 0.31440246, 1.1039027, 0.33841977)
+
+[node name="Door fridge 2" parent="." index="2" unique_id=246374465]
+transform = Transform3D(1.4535539, 0, 0.19055197, 0, 1.4659908, 0, -0.19055197, 0, 1.4535539, 0.33335692, -0.108095706, 0.35917327)
+
+[node name="Fridge" parent="." index="3" unique_id=121687102]
+transform = Transform3D(1.4659908, 0, 0, 0, 1.4659908, 0, 0, 0, 1.4659908, -0.08708908, -0.13388291, -0.093789026)
