@@ -48,7 +48,7 @@ func load_save_data() -> void:
 
 func wipe_save() -> void:
 	save_data = SaveData.new()
-	save_game()
+	save_game_to_file()
 
 
 func save_options_data_to_file() -> void:
@@ -56,6 +56,6 @@ func save_options_data_to_file() -> void:
 	print("Saved options file.")
 
 
-func save_game() -> void:
+func save_game_to_file() -> void:
 	ResourceSaver.save(save_data, _save_file_path)
 	print("Saved game.")
