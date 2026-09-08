@@ -4,7 +4,6 @@ extends Control
 @export var email_button: Button
 @export var shop_button: Button
 @export var email_app: PCApp
-@export var shop_app: PCApp
 @export var exit_button: Button
 ## regular game hud
 @export var ui: CanvasLayer
@@ -52,7 +51,7 @@ func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed("pause") and Global.in_pc_ui:
 		var in_app := false
 
-		for app in [email_app, shop_app]:
+		for app in [email_app]:
 			if app.visible:
 				in_app = true
 
@@ -66,7 +65,6 @@ func _process(_delta: float) -> void:
 
 func exit() -> void:
 	email_app.hide()
-	shop_app.hide()
 	hide()
 
 
@@ -75,7 +73,6 @@ func _on_email_button_pressed() -> void:
 
 
 func _on_shop_button_pressed() -> void:
-	shop_app.show()
 	new_shop_items = false
 
 
