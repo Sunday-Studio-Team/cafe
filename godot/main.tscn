@@ -83,10 +83,8 @@
 [ext_resource type="Texture2D" uid="uid://ur2xd8m7cjah" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00036.png" id="48_8ldsf"]
 [ext_resource type="Texture2D" uid="uid://bst7kul722rro" path="res://sprites/eye_red.png" id="48_lwnsi"]
 [ext_resource type="Texture2D" uid="uid://d32rutswqllqf" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00037.png" id="49_f4177"]
-[ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://items/super_scrubber_2000.tres" id="50_jbvwl"]
 [ext_resource type="Texture2D" uid="uid://dsylgs3p8sbji" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00038.png" id="50_nckbc"]
 [ext_resource type="Texture2D" uid="uid://ds3hktva4orjl" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00039.png" id="51_043in"]
-[ext_resource type="Resource" uid="uid://dro03qfkl0ucg" path="res://items/whipped_cream.tres" id="51_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://bde8iiqewidj1" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00040.png" id="52_r4j87"]
 [ext_resource type="Texture2D" uid="uid://bcbcp5ypdi1po" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00041.png" id="53_mwre3"]
 [ext_resource type="Texture2D" uid="uid://cm4itme6fblay" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00042.png" id="54_qwf4s"]
@@ -165,10 +163,7 @@
 [ext_resource type="Texture2D" uid="uid://dv8a7bf1igcag" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00100.png" id="112_hc6gi"]
 [ext_resource type="Texture2D" uid="uid://b5vb0jhc1bqbo" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00101.png" id="113_n64hf"]
 [ext_resource type="Texture2D" uid="uid://drv4upowgg4ih" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00102.png" id="114_4nm45"]
-[ext_resource type="Texture2D" uid="uid://c3dx5sicliquh" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_tab.png" id="114_gfi32"]
-[ext_resource type="Texture2D" uid="uid://coc6oix1rjnwv" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Vector/keyboard_q.svg" id="115_12204"]
 [ext_resource type="Texture2D" uid="uid://c3wdbe1wprj8k" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00103.png" id="115_bpvq0"]
-[ext_resource type="PackedScene" uid="uid://dgx2rjk26naaf" path="res://ui/active_item_menu/active_item_selection.tscn" id="116_3gvdc"]
 [ext_resource type="Texture2D" uid="uid://blpuuv27aw552" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00104.png" id="116_afxfb"]
 [ext_resource type="Script" uid="uid://88l7tqjx13sk" path="res://ui/viewmodel.gd" id="116_w7qqv"]
 [ext_resource type="Texture2D" uid="uid://c1f8aum61b5m7" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00105.png" id="117_lm578"]
@@ -736,7 +731,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ohsdn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -747,7 +742,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_t3ss8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_d52hs"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -758,7 +753,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g6ptb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_d635n"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -769,7 +764,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0bk8h"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_4fms3"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -912,7 +907,7 @@ sprite_frames = SubResource("SpriteFrames_ppx11")
 autoplay = "default"
 frame_progress = 0.7282886
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_menu_prompt", "item_ui", "current_item_ui", "item_indicator", "item_text", "current_item_icon", "item_cooldown_bar", "use_item_prompt", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -956,18 +951,9 @@ item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Act
 item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 stamina_bar = NodePath("StaminaBar")
-item_menu_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/MenuPrompt")
-item_ui = NodePath("HUD/ActiveItemInfo")
-current_item_ui = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem")
 item_indicator = NodePath("Interactable/ItemIndicator")
 item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
-current_item_icon = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon")
-item_cooldown_bar = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon/CooldownIndicator")
-use_item_prompt = NodePath("HUD/ActiveItemInfo/HBoxContainer/CurrentItem/UsePrompt")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
-hammer = ExtResource("150_0bk8h")
-scrubber = ExtResource("50_jbvwl")
-whipped_cream = ExtResource("51_sn1fb")
 
 [node name="Crosshair" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1676497832]
 layout_mode = 3
@@ -1315,7 +1301,8 @@ offset_transform_rotation = 0.08726646
 [node name="RichTextLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable/ItemIndicator" unique_id=1532821752]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
-text = "[Q] HAMMER 💥"
+bbcode_enabled = true
+text = "[rainbow freq=0.1 sat=0.8 speed=-5.0][Q] HAMMER 💥[/rainbow]"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -1516,61 +1503,6 @@ text = "SOLD: $5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ActiveItemInfo" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD" unique_id=1662791771]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo" unique_id=701910864]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="MenuPrompt" type="Button" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=1266925751]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "active items"
-icon = ExtResource("114_gfi32")
-
-[node name="CurrentItem" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo/HBoxContainer" unique_id=549022221]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="CurrentText" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=54325912]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "current:"
-
-[node name="Icon" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=464214271]
-custom_maximum_size = Vector2(96, 96)
-layout_mode = 2
-texture = ExtResource("69_3rmuw")
-
-[node name="CooldownIndicator" type="TextureProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem/Icon" unique_id=169002250]
-modulate = Color(1, 1, 1, 0.29411766)
-custom_maximum_size = Vector2(96, 96)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(0.6, 0.6)
-offset_transform_pivot_ratio = Vector2(0, 0)
-fill_mode = 4
-texture_under = ExtResource("45_dfxmq")
-texture_over = ExtResource("46_kcoi7")
-texture_progress = ExtResource("47_rkju4")
-
-[node name="UsePrompt" type="Button" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ActiveItemInfo/HBoxContainer/CurrentItem" unique_id=1036041825]
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 24
-text = "use"
-icon = ExtResource("115_12204")
-
 [node name="ItemHoverTooltip" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1202178015]
 visible = false
 modulate = Color(1, 1, 1, 0.98039216)
@@ -1768,14 +1700,6 @@ visible = false
 ui = NodePath("../../UI")
 irl_new_shop_items_indicator = NodePath("../../../../Desk/NewShopItemsPrompt")
 
-[node name="ActiveItemMenu" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1028925718]
-
-[node name="ActiveItemSelection" parent="PlayerUiSubViewportContainer/SubViewport/ActiveItemMenu" unique_id=1659622550 instance=ExtResource("116_3gvdc")]
-visible = false
-bkg_color = Color(0.008202022, 0.008202025, 0.008202025, 0.5529412)
-line_color = Color(1, 1, 1, 1)
-highlight_color = Color(0.28729504, 0.28729486, 0.2872949, 0.7254902)
-
 [node name="Viewmodel" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1737862047 node_paths=PackedStringArray("sprite")]
 process_mode = 3
 layer = 0
@@ -1939,7 +1863,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fkmie")
+texture = SubResource("ViewportTexture_ohsdn")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -1952,7 +1876,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_t3ss8")
+texture = SubResource("ViewportTexture_d52hs")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -1969,7 +1893,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_g6ptb")
+texture = SubResource("ViewportTexture_d635n")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -1986,7 +1910,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_0bk8h")
+texture = SubResource("ViewportTexture_4fms3")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -2273,6 +2197,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 13.1)
 [node name="Interactable" type="Area3D" parent="ItemLocker" unique_id=1174518073 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("229_c6fgv")
+interactable_id = &"use_item_locker"
 display_name = "Equip items"
 mesh = NodePath("../MeshInstance3D")
 metadata/_custom_type_script = "uid://cku66354bxktd"

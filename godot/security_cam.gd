@@ -38,7 +38,7 @@ func _ready() -> void:
 	create_rays()
 
 	interactable.interacted.connect(open_camera_minigame)
-	interactable.used_active_item.connect(_on_used_active_item)
+	interactable.requested_use_active_item.connect(_on_requested_use_active_item)
 
 	visibility_changed.connect(_on_visibility_changed)
 	_update_camera_components_active()
@@ -54,11 +54,6 @@ func _ready() -> void:
 
 	get_stats()
 	Events.items_updated.connect(get_stats)
-	interactable.visible = false
-	Events.shift_started.connect(
-		func():
-			interactable.visible = true,
-	)
 
 
 func get_stats() -> void:
@@ -116,9 +111,6 @@ func _physics_process(_delta: float) -> void:
 		Global.player_in_cctv_los = true
 	else:
 		spotlight.light_color = Color.WHITE
-
-	# commenting cos it only takes 1 minigame to disable for now
-	#interactable.display_name = "sabotage camera (%s steps left)" % tries_until_disabled
 
 	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
 	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
@@ -208,14 +200,22 @@ func _cancel_break_minigame() -> void:
 	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
 
 
-func _on_used_active_item(item: Item):
-	if item != null and item.item_id == "whipped_cream":
-		Events.play_viewmodel_animation.emit("cream_use")
-		whipped_cream_sound.play()
-		Global.put_active_item_on_cooldown(item)
-		disarm_camera()
-		disabled_timer.wait_time = 15
-		disabled_timer.start()
-		await disabled_timer.timeout
-		disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
-		rearm_camera()
+func _on_requested_use_active_item():
+	var whipped_cream: Item = null
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "whipped_cream":
+			whipped_cream = owned_item
+			break
+
+	if whipped_cream == null or !whipped_cream.can_be_used:
+		return
+	
+	Events.play_viewmodel_animation.emit("cream_use")
+	whipped_cream_sound.play()
+	Global.put_active_item_on_cooldown(whipped_cream)
+	disarm_camera()
+	disabled_timer.wait_time = 15
+	disabled_timer.start()
+	await disabled_timer.timeout
+	disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
+	rearm_camera()

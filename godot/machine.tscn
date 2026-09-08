@@ -158,7 +158,7 @@ static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
 timer = NodePath("Timer")
 breakdown_timer = NodePath("BreakdownTimer")
-fix_machine_button = NodePath("FixMachineButton")
+fix_machine_button = NodePath("FixMachineInteractable")
 spill_interactable = NodePath("Spill")
 spill_clean_particles = NodePath("SpillCleanParticles")
 spot_for_player = NodePath("SpotForPlayer")
@@ -238,23 +238,24 @@ light_color = Color(0.9411765, 0.5058824, 0.5058824, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="FixMachineButton" type="Area3D" parent="." unique_id=885014159]
+[node name="FixMachineInteractable" type="Area3D" parent="." unique_id=885014159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
 visible = false
 collision_layer = 2
 script = ExtResource("5_ioi8x")
+interactable_id = &"fix_machine"
 display_name = "Fix machine"
 time_to_hold = 1.0
 
-[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineInteractable" unique_id=969109102]
 transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
 modulate = Color(1, 0.6, 0.12156863, 1)
 text = "BROKEN DOWN"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineInteractable" unique_id=399064604]
 shape = SubResource("BoxShape3D_1hddr")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton" unique_id=1631380149]
+[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineInteractable" unique_id=1631380149]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
@@ -294,7 +295,7 @@ debug_color = Color(1, 1, 1, 1)
 [node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "_customer_side_camera")]
 transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0.30209354, 0.1217342)
 script = ExtResource("10_0d1aa")
-interactable = NodePath("Interactable")
+interactable = NodePath("UseMachineInteractable")
 node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
@@ -353,12 +354,13 @@ area_size = Vector2(0.795609, 1.06196)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
 shape = SubResource("BoxShape3D_j2xdn")
 
-[node name="Interactable" type="Area3D" parent="3DGui" unique_id=1501552722 node_paths=PackedStringArray("mesh")]
+[node name="UseMachineInteractable" type="Area3D" parent="3DGui" unique_id=1501552722 node_paths=PackedStringArray("mesh")]
 script = ExtResource("5_ioi8x")
+interactable_id = &"use_machine"
 display_name = "Use machine"
 mesh = NodePath("../Screen")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/UseMachineInteractable" unique_id=2039158149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
 shape = SubResource("BoxShape3D_yuuq8")
 
