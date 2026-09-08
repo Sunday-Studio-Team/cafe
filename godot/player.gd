@@ -129,26 +129,6 @@ func handle_floating_cursor() -> void:
 		Global.showing_floating_cursor = false
 
 
-func handle_active_items() -> void:
-	if Input.is_action_just_pressed("item_menu"):
-		if not Global.in_ui or Global.in_active_item_menu:
-			var no_active_items_owned := true
-
-			for item in Global.owned_items:
-				if item.is_active_item:
-					no_active_items_owned = false
-					break
-
-			if no_active_items_owned:
-				return
-
-			Events.active_item_menu.emit()
-
-	if Input.is_action_just_pressed("use_item") and Global.equipped_item:
-		if Global.equipped_item.can_be_used:
-			Events.active_item_used.emit(Global.equipped_item)
-
-
 #func handle_mouselook() -> void:
 #	camera.rotation_degrees.x -= mouse_delta.y
 #	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
