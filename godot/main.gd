@@ -44,7 +44,6 @@ var _help_desk_customer_spawn_timer: Timer
 @export var _tutorial_vo_location_start_shift: VoiceLineLocation
 @export var _tutorial_vo_location_machine_ui: VoiceLineLocation
 @export var _tutorial_vo_location_ingredients_bag: VoiceLineLocation
-@export var _tutorial_vo_location_help_desk: VoiceLineLocation
 @export var _tutorial_vo_location_spill: VoiceLineLocation
 
 var seen_tutorial_machine_instructions: bool = false
@@ -473,28 +472,49 @@ func _tippy_tutorials() -> void:
 	await get_tree().create_timer(0.5, false).timeout
 	#replace these with the correct voice lines
 	var tutorial_lines_day1: Array[String] = [
-		"tutorial_intro_1",
-		"tutorial_intro_2",
+		"tutorial_day1_1",
+		"tutorial_day1_2",
+		"tutorial_day1_3",
+		"tutorial_day1_4",
+		"tutorial_day1_5",
 	] 
 	
 	var tutorial_lines_day2: Array[String] = [
-		"tutorial_intro_2",
-		"tutorial_intro_3",
+		"tutorial_day2_1",
+		"tutorial_day2_2",
+		"tutorial_day2_3",
+		"tutorial_day2_4",
+		"tutorial_day2_5",
+		"tutorial_day2_6",
 	] 
 	
 	var tutorial_lines_day3: Array[String] = [
-		"tutorial_intro_3",
-		"tutorial_intro_4",
+		"tutorial_day3_1",
+		"tutorial_day3_2",
+		"tutorial_day3_3",
+		"tutorial_day3_4",
+		"tutorial_day3_5",
+		"tutorial_day3_6",
+		"tutorial_day3_7",
 	] 
 	
 	var tutorial_lines_day4: Array[String] = [
-		"tutorial_intro_4",
-		"tutorial_intro_5",
+		"tutorial_day4_1",
+		"tutorial_day4_2",
+		"tutorial_day4_3",
+		"tutorial_day4_4",
+		"tutorial_day4_5",
+		"tutorial_day4_6",
 	] 
 	
 	var tutorial_lines_day5: Array[String] = [
-		"tutorial_intro_5",
-		"tutorial_intro_1",
+		"tutorial_day5_1",
+		"tutorial_day5_2",
+		"tutorial_day5_3",
+		"tutorial_day5_4",
+		"tutorial_day5_5",
+		"tutorial_day5_6",
+		"tutorial_day5_7",
 	] 
 	
 	if Global.day == 1:
@@ -747,37 +767,6 @@ func _interactive_tutorial_shift() -> void:
 
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_2")
-
-	spawn_help_desk_customer()
-	await _customer_help_desk.new_desk_customer_arrived
-
-	await get_tree().create_timer(0.25, false).timeout
-
-	var tutorial_help_desk_lines: Array[String] = [
-		"tutorial_help_desk_1",
-		"tutorial_help_desk_2",
-		"tutorial_help_desk_3",
-		"tutorial_help_desk_4",
-	]
-
-	for i in range(tutorial_help_desk_lines.size()):
-		var voice_line_id: String = tutorial_help_desk_lines[i]
-		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-		while _customer_help_desk.has_active_customers() and Global.voice_line_system.is_playing_no_location_voice_line():
-			await get_tree().process_frame
-		if !_customer_help_desk.has_active_customers():
-			break
-
-	while _customer_help_desk.has_active_customers():
-		if repeat_instruction_timer.time_left == 0.0:
-			Global.voice_line_system.play_voice_line_at_location("tutorial_help_desk_5", _tutorial_vo_location_help_desk)
-			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-		else:
-			await get_tree().process_frame
-	repeat_instruction_timer.stop()
-
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_customer_helped_1")
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_customer_helped_2")
 
 	# Spill tutorial: player learns to clean up spills
 	tutorial_machine.spill()
