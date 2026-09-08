@@ -4,6 +4,7 @@ extends Node3D
 @export var _interactable: Interactable
 @export var _cooldown_timer_sprite: Sprite3D
 @export var _cooldown_timer_bar: TextureProgressBar
+@export var _spray_sound: AudioStreamPlayer3D
 
 var _air_freshener_item_on_cooldown: Item = null
 
@@ -46,6 +47,8 @@ func _on_requested_use_active_item() -> void:
 		customer_wait_duration_extension = 20.0
 	else:
 		customer_wait_duration_extension = 30.0
+
+	_spray_sound.play()
 
 	Global.main_scene.apply_used_air_freshener(customer_wait_duration_extension)
 	Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertIconType.CUSTOMER)
