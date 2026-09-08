@@ -1830,7 +1830,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029114842, 1.0942326, 0.89
 [node name="LeftAreaSecurityCam" parent="SecurityCams" unique_id=1261470041 instance=ExtResource("12_dg77c")]
 transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.8660253, -7.9940248, 2.841, -1.0650823)
 
-[node name="SpotLight3D" parent="SecurityCams/LeftAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
+[node name="FakeSpotlight" parent="SecurityCams/LeftAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 25.0
 
 [node name="AimPath3D" parent="SecurityCams/LeftAreaSecurityCam" index="6" unique_id=1994339220]
@@ -1860,7 +1860,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683
 rotation_time = 2.0
 rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCams/RightAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
+[node name="FakeSpotlight" parent="SecurityCams/RightAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
 [node name="AimPath3D" parent="SecurityCams/RightAreaSecurityCam" index="6" unique_id=1994339220]
@@ -1877,7 +1877,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
 rotation_time = 2.0
 rotation_pause_length = 4.0
 
-[node name="SpotLight3D" parent="SecurityCams/HallwaySecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1382585707, 1953194644) index="0" unique_id=1348601655]
+[node name="FakeSpotlight" parent="SecurityCams/HallwaySecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1382585707, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
 [node name="AimPath3D" parent="SecurityCams/HallwaySecurityCam" index="6" unique_id=1994339220]
@@ -2036,6 +2036,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="UseTeleportSound" type="AudioStreamPlayer" parent="." unique_id=730557756]
 stream = ExtResource("219_fd6dt")
+volume_db = -5.0
 
 [node name="VoiceLineNoLocationPlayer" type="Node3D" parent="." unique_id=736549418 node_paths=PackedStringArray("_audio_stream_player_3ds")]
 script = ExtResource("25_s0om5")
