@@ -849,7 +849,7 @@ _tutorial_vo_location_machine_ui = NodePath("Machines/RightAreaRightMachine/Tuto
 _tutorial_vo_location_ingredients_bag = NodePath("TutorialStoreRoomVoiceLineLocation")
 _tutorial_vo_location_help_desk = NodePath("CustomerHelpDesk/TutorialHelpDeskVoiceLineLocation")
 _tutorial_vo_location_spill = NodePath("Machines/RightAreaRightMachine/TutorialMachineSpillVoiceLineLocation")
-day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath(""), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
+day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), null, NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1968,7 +1968,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_g6ptb")
@@ -1985,7 +1985,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_0bk8h")
@@ -2309,6 +2309,6 @@ LOCKER
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
-[editable path="Desk/office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/cranes"]
+[editable path="Desk/office desk/cranes"]
 [editable path="Desk/Sketchbooks, comics, rulers (1)"]
 [editable path="Desk/Lamp 1&5 (1)"]
