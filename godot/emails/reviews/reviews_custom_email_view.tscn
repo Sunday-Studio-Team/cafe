@@ -14,10 +14,6 @@ bg_color = Color(1, 0.09803922, 0.22745098, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lghh"]
 bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8lghh"]
-atlas = ExtResource("4_e5feb")
-region = Rect2(305, 941, 5348, 2817)
-
 [node name="ReviewsCustomEmailView" type="MarginContainer" unique_id=2126401690 node_paths=PackedStringArray("review_1", "review_list")]
 custom_minimum_size = Vector2(850, 0)
 custom_maximum_size = Vector2(850, -1)
@@ -64,15 +60,13 @@ mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 100
 
-[node name="ReviewGrid" type="GridContainer" parent="VBoxContainer/PanelContainer2/MarginContainer" unique_id=1450173849]
+[node name="ReviewGrid" type="VBoxContainer" parent="VBoxContainer/PanelContainer2/MarginContainer" unique_id=2008565283]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/v_separation = 75
 
 [node name="ReviewContainer" type="Control" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid" unique_id=1823459292 node_paths=PackedStringArray("customer_profile_texture_rect", "username", "review_content", "star_1", "reviews_number")]
-custom_minimum_size = Vector2(0, 400)
+custom_minimum_size = Vector2(0, 440)
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_cmm6a")
@@ -84,38 +78,33 @@ reviews_number = NodePath("ReviewsNumber")
 
 [node name="CustomerProfileTextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1886906716]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 34.0
-offset_top = -107.0
-offset_right = 182.0
-offset_bottom = 41.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 32.0
+offset_top = 51.0
+offset_right = 180.0
+offset_bottom = 199.0
 expand_mode = 1
 stretch_mode = 5
 
 [node name="ReviewLong" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=2077009424]
 custom_minimum_size = Vector2(850, 0)
 layout_mode = 0
-offset_left = -7.0
-offset_right = 843.0
-offset_bottom = 447.7281
+offset_left = -55.0
+offset_top = -188.0
+offset_right = 869.69763
+offset_bottom = 442.2719
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 35)
 mouse_filter = 2
-texture = SubResource("AtlasTexture_8lghh")
-expand_mode = 5
+texture = ExtResource("4_e5feb")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="Username" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1525218022]
 layout_mode = 0
 offset_left = 46.0
-offset_top = 246.0
+offset_top = 203.0
 offset_right = 170.0
-offset_bottom = 263.0
+offset_bottom = 220.0
 size_flags_horizontal = 0
 offset_transform_enabled = true
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -129,9 +118,9 @@ horizontal_alignment = 1
 [node name="ReviewsNumber" type="Label" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=1159995025]
 layout_mode = 0
 offset_left = 47.0
-offset_top = 278.0
+offset_top = 235.0
 offset_right = 166.0
-offset_bottom = 301.0
+offset_bottom = 258.0
 size_flags_horizontal = 0
 offset_transform_position = Vector2(40, 63)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -143,15 +132,11 @@ horizontal_alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=470299995]
 custom_maximum_size = Vector2(580, 315)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 219.0
-offset_top = -62.0
-offset_right = 799.0
-offset_bottom = 253.0
+anchors_preset = -1
+offset_left = 220.0
+offset_top = 98.0
+offset_right = 800.0
+offset_bottom = 413.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_position = Vector2(220, 140)
@@ -176,16 +161,16 @@ OPERATING MARGINS LOOK FANTASTIC!
 fit_content = true
 
 [node name="Star1" type="TextureRect" parent="VBoxContainer/PanelContainer2/MarginContainer/ReviewGrid/ReviewContainer" unique_id=2103689801]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_left = -4.0
-offset_top = 3.0
-offset_right = 831.0
-offset_bottom = 442.82703
+layout_mode = 1
+anchors_preset = -1
+offset_left = 218.0
+offset_top = 15.0
+offset_right = 502.17834
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(-55, -132)
-offset_transform_scale = Vector2(0.33, 0.165)
 mouse_filter = 2
 texture = ExtResource("7_0n21w")
 expand_mode = 1
-metadata/_edit_lock_ = true
+stretch_mode = 5
