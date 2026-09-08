@@ -341,12 +341,15 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
-
-	if Global.day < 2:
-		if sprite_resource != null:
-			Console.print_line("help desk disabled today, cant spawn customer")
-		return
-
+	
+	# Allow help desk on tutorial day for now
+	if Global.day > 0:
+		# Disallow help desk if not unlocked yet
+		if Global.day < 2:
+			if sprite_resource != null:
+				Console.print_line("help desk disabled today, cant spawn customer")
+			return
+	
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
@@ -412,6 +415,11 @@ func shift_end_sequence(override:bool=false):
 				Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 				return
 			Global.day += 1
+			
+			if Global.day > SaveDataManager.save_data.latest_unlocked_day:
+				SaveDataManager.save_data.latest_unlocked_day = Global.day
+				SaveDataManager.save_game_to_file()
+			
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 			#Leaving this here in case you guys want this scene back again
 			#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
@@ -766,12 +774,15 @@ func _interactive_tutorial_shift() -> void:
 	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
 
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
-	SaveDataManager.save_game()
+	SaveDataManager.save_game_to_file()
 
 	if replaying_tutorial:
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 	else:
 		Global.day = 1
+		if Global.day > SaveDataManager.save_data.latest_unlocked_day:
+			SaveDataManager.save_data.latest_unlocked_day = Global.day
+			SaveDataManager.save_game_to_file()
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
