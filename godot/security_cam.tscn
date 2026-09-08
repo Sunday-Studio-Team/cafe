@@ -72,10 +72,11 @@ height = 0.02
 radial_segments = 4
 rings = 0
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disabled_timer_sprite", "disabled_timer_bar", "whipped_cream_sound")]
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "fake_spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disabled_timer_sprite", "disabled_timer_bar", "whipped_cream_sound")]
 script = ExtResource("1_w3jiq")
 _shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
 spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
+fake_spotlight = NodePath("CameraAimerModel/FakeSpotlight")
 camera_aimer_node = NodePath("CameraAimerModel")
 aim_path_follow_3d = NodePath("AimPath3D/AimPathFollow3D")
 grace_timer = NodePath("GraceTimer")
@@ -105,10 +106,10 @@ one_shot = true
 
 [node name="CameraAimerModel" type="Node3D" parent="." unique_id=1953194644]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="CameraAimerModel" unique_id=1348601655]
+[node name="FakeSpotlight" type="SpotLight3D" parent="CameraAimerModel" unique_id=1348601655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6273376)
 light_energy = 5.0
-light_volumetric_fog_energy = 2.5
+light_volumetric_fog_energy = 10.0
 spot_angle = 18.0
 spot_angle_attenuation = 2.0
 
@@ -118,10 +119,10 @@ transform = Transform3D(1.5499998, 0, 0, 0, 0.87564456, -1.2789629, 0, 1.2789629
 [node name="camera" parent="CameraAimerModel/Model" unique_id=1944074621 instance=ExtResource("3_qlhcy")]
 transform = Transform3D(-0.4515773, -0.00734083, 0.003703244, -0.007246691, 0.25924936, -0.36976588, 0.0038842484, -0.36976397, -0.2593242, 0.0058659017, -0.020149954, 0.0857618)
 
-[node name="Cylinder_Cylinder" parent="CameraAimerModel/Model/camera" index="2" unique_id=694301209]
+[node name="Cylinder_Cylinder" parent="CameraAimerModel/Model/camera" index="2" unique_id=868173451]
 transform = Transform3D(1.2503961, 0.014059592, 0.015266214, -0.0011158865, 0.88243234, -1.198308, -0.01790624, 0.92679477, 1.1407188, -0.089072615, 0.060985863, -0.39554608)
 
-[node name="Torus_004_Torus_004" parent="CameraAimerModel/Model/camera" index="3" unique_id=1345779537]
+[node name="Torus_004_Torus_004" parent="CameraAimerModel/Model/camera" index="3" unique_id=70328738]
 transform = Transform3D(0.9999595, 0.0059514605, 0.0068100933, -0.0019403454, 0.8766179, -0.4811833, -0.008833591, 0.48115033, 0.87659436, -0.0044638347, 0.029213324, -0.13744369)
 
 [node name="Body" type="MeshInstance3D" parent="CameraAimerModel/Model" unique_id=1938907329]
@@ -221,6 +222,6 @@ draw_pass_1 = SubResource("CapsuleMesh_vn1tu")
 
 [node name="WhippedCreamSound" type="AudioStreamPlayer" parent="." unique_id=1088424431]
 stream = ExtResource("9_ebrmn")
-volume_db = 2.5
+volume_db = -5.0
 
 [editable path="CameraAimerModel/Model/camera"]
