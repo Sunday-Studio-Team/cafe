@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bryvlrbbi4ofw"]
+
+[node name="HandbookBackground" type="Control" unique_id=365059969]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HandbookMargin" type="MarginContainer" parent="." unique_id=1360218677]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 313
+theme_override_constants/margin_top = 54
+theme_override_constants/margin_right = 313
+theme_override_constants/margin_bottom = 54
+
+[node name="Border" type="ColorRect" parent="HandbookMargin" unique_id=1869256969]
+layout_mode = 2
+color = Color(0, 0.32941177, 0.92156863, 1)
+
+[node name="HandbookContentMargin" type="MarginContainer" parent="HandbookMargin/Border" unique_id=1792683005]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 19
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 19
+
+[node name="BackgroundColor" type="ColorRect" parent="HandbookMargin/Border/HandbookContentMargin" unique_id=210978768]
+layout_mode = 2

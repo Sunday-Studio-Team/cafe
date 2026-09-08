@@ -111,14 +111,14 @@ grow_vertical = 2
 texture = ExtResource("47_yem23")
 expand_mode = 3
 
-[node name="Frame" type="NinePatchRect" parent="CanvasLayer" unique_id=1238806735]
+[node name="Frame" type="TextureRect" parent="CanvasLayer" unique_id=509451572]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_cfscc")
-region_rect = Rect2(0, 0, 2679, 1817)
+expand_mode = 1
 
 [node name="ArrowsBackground" type="TextureRect" parent="CanvasLayer" unique_id=1185070196]
 anchors_preset = -1
@@ -211,3 +211,6 @@ stream = ExtResource("53_xql7b")
 volume_db = -15.0
 autoplay = true
 bus = &"MinigameMusic"
+
+[node name="ArrowsMinigame" type="MarginContainer" parent="." unique_id=1145875038]
+layout_mode = 2

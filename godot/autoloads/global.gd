@@ -152,8 +152,6 @@ var ordered_drink_customer: Customer
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
 var hovered_loadout_menu_element: LoadoutMenuElement
-#Active Items
-var equipped_item: Item = null
 # Tutorial flags
 var tutorial_machine_used: bool = false
 var tutorial_drink_accepted: bool = false
@@ -221,20 +219,6 @@ func load_resources_from_folder(path: String, extension: String = "tres") -> Arr
 ## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"
 func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
-
-
-#Equips the item:
-func equip_item(item: Item):
-	equipped_item = item
-	if item == null:
-		Events.emit_signal("play_viewmodel_animation", "default")
-		return
-
-	if item.item_id == "hammer":
-		Events.emit_signal("play_viewmodel_animation", "hammer_equip")
-
-	else:
-		Events.emit_signal("play_viewmodel_animation", "default")
 
 
 func refresh_active_items():
