@@ -1845,7 +1845,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Exterior/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.000570107, -0.00016215755, -0.99995196, 1.0260066e-07, 1, -0.00016214976, 0.99995196, -1.01539825e-08, 0.000570107, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.000570107, -0.00016215755, -0.9999519, 1.0260065e-07, 1, -0.00016214975, 0.9999519, -1.01539825e-08, 0.000570107, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="Exterior/CarSpawner" unique_id=1089029611]
@@ -1939,8 +1939,9 @@ visible = false
 mesh = ExtResource("67_kxvup")
 
 [node name="cone" type="Sprite3D" parent="Exterior" unique_id=937679803]
-transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 0.9397688, 0.65697336, -6.6730423)
+transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 0.9400859, 0.60792184, -6.6735916)
 shaded = true
+alpha_cut = 1
 texture = ExtResource("86_yhys1")
 
 [node name="dumpster" type="Sprite3D" parent="Exterior" unique_id=1611393512]
@@ -1993,16 +1994,19 @@ texture = ExtResource("88_uftqg")
 [node name="firehydrant" type="Sprite3D" parent="Exterior" unique_id=1633722615]
 transform = Transform3D(0.102, 0, 0, 0, 0.102, 0, 0, 0, 0.102, 2.9169745, 0.4774852, -4.3809195)
 shaded = true
+alpha_cut = 1
 texture = ExtResource("88_li8ef")
 
 [node name="cone2" type="Sprite3D" parent="Exterior" unique_id=578764633]
-transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 4.1516924, 0.65697336, -6.2262974)
+transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 4.1520095, 0.36343554, -6.2268467)
 shaded = true
+alpha_cut = 1
 texture = ExtResource("87_tx4o1")
 
 [node name="cone3" type="Sprite3D" parent="Exterior" unique_id=665110686]
 transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 0.40259218, 0.2938672, -4.4861813)
 shaded = true
+alpha_cut = 1
 texture = ExtResource("87_tx4o1")
 
 [node name="Order Here Sign 2" parent="Exterior" unique_id=966749228 instance=ExtResource("84_vf5ik")]
@@ -2241,7 +2245,7 @@ area_range = 6.133
 area_size = Vector2(0.01, 0.01)
 
 [node name="poster1_type1" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=791708533]
-transform = Transform3D(0.25599423, -0.0017198102, 0, 0.0017198102, 0.25599423, 0, 0, 0, 0.256, -2.6981406, 1.6392398, -4.7883887)
+transform = Transform3D(0.11596311, -0.0007790587, 0, 0.0007790587, 0.11596311, 0, 0, 0, 0.11596574, -2.6981406, 1.6392398, -4.7883887)
 pixel_size = 0.0125
 shaded = true
 
@@ -2284,22 +2288,22 @@ shaded = true
 texture = ExtResource("39_5utbh")
 
 [node name="poster9_type3" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=1417879894]
-transform = Transform3D(-1.0928122e-08, -1.9428903e-15, -0.25, -0.0017725535, 0.24999371, 7.7480786e-11, 0.24999371, 0.0017725535, -1.0927847e-08, -7.2233624, 1.3688644, -6.326212)
+transform = Transform3D(-1.3113747e-08, -2.3397951e-15, -0.3, -0.0021270644, 0.29999247, 9.297694e-11, 0.29999247, 0.0021270644, -1.3113417e-08, -7.2233624, 1.3688644, -6.326212)
 pixel_size = 0.0125
 shaded = true
 
 [node name="poster6_type2" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=367825827]
-transform = Transform3D(0.24999708, -0.001208216, 0, 0.001208216, 0.24999708, 0, 0, 0, 0.25, -5.991908, 1.4720756, -4.785888)
+transform = Transform3D(0.2999965, -0.001449859, 0, 0.001449859, 0.2999965, 0, 0, 0, 0.3, -5.991908, 1.4720756, -4.785888)
 pixel_size = 0.0125
 shaded = true
 
 [node name="poster5_type2" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=1301248795]
-transform = Transform3D(-1.0928213e-08, 2.9976022e-15, 0.25, 0.0020456035, 0.24999163, 8.941617e-11, -0.24999163, 0.0020456035, -1.0927847e-08, -12.7878065, 1.4753662, -1.8746128)
+transform = Transform3D(-6.572903e-09, 0, 0.1503705, 0.0012303937, 0.15036546, 5.378221e-11, -0.15036546, 0.0012303937, -6.572683e-09, -12.7878065, 1.4753662, -1.8746128)
 pixel_size = 0.0125
 shaded = true
 
 [node name="poster5_type3" type="Sprite3D" parent="NavigationRegion3D/BackRoom" unique_id=2133829673]
-transform = Transform3D(-0.019902423, 0.00016285546, -0.24920647, 0.0020456037, 0.24999163, 1.1418198e-10, 0.24919812, -0.0020391108, -0.01990309, -10.803814, 0.9798747, -0.38339275)
+transform = Transform3D(-0.011970957, 9.7954675e-05, -0.1498932, 0.0012303937, 0.15036544, 5.3782215e-11, 0.14988817, -0.0012264883, -0.011971358, -10.803814, 0.9798747, -0.38339275)
 pixel_size = 0.0125
 shaded = true
 
