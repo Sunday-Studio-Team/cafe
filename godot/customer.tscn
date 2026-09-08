@@ -10,6 +10,9 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
 viewport_path = NodePath("WaitingIndicator/SubViewport")
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vn1tu"]
+radius = 0.4
+
 [node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "spawn_sound") groups=["customer"]]
 script = ExtResource("1_7tiyv")
 body = NodePath("Sprite3D")
@@ -64,3 +67,9 @@ stream = ExtResource("5_gn8fi")
 volume_db = -5.0
 max_db = 0.0
 pitch_scale = 3.0
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1962670033]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1471299967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0056335, 0)
+shape = SubResource("CapsuleShape3D_vn1tu")
