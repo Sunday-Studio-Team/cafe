@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://b30p1hoj2cnj2" path="res://sprites/machine_ui/tippy_slippy.png" id="4_10yj4"]
 [ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="4_apda1"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="4_dw44w"]
+[ext_resource type="Texture2D" uid="uid://dk4l5o781xj10" path="res://sprites/machine_ui/timer circle.png" id="5_l6aen"]
 [ext_resource type="Texture2D" uid="uid://caxp0o4b1t6i1" path="res://sprites/machine_ui/tippy_strong0.png" id="5_qwcv2"]
+[ext_resource type="Texture2D" uid="uid://pm6pl3iy45co" path="res://sprites/machine_ui/mini clock timer.png" id="6_b6qyr"]
 [ext_resource type="Texture2D" uid="uid://cbasg8uwmoska" path="res://sprites/machine_ui/tippy_strong1.png" id="6_dw44w"]
+[ext_resource type="Texture2D" uid="uid://bw3d6s3quy584" path="res://sprites/machine_ui/TIMER DIAL.png" id="7_b6qyr"]
 [ext_resource type="PackedScene" uid="uid://wy44aeyirhsb" path="res://ui/order_breakdown_icon.tscn" id="7_dw44w"]
 [ext_resource type="Texture2D" uid="uid://fpimoyth3i1t" path="res://sprites/machine_ui/active accept button.png" id="10_71all"]
 [ext_resource type="Texture2D" uid="uid://brnb1ddwmgdug" path="res://sprites/machine_ui/inactive accept button.png" id="11_10yj4"]
@@ -202,30 +205,39 @@ grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="CustomerTimer" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=985060453]
-anchors_preset = 0
-offset_left = 99.0
-offset_top = 302.0
-offset_right = 99.0
-offset_bottom = 302.0
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = 2.5
+offset_right = -399.0
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
-offset_transform_position = Vector2(12, 215)
+offset_transform_position = Vector2(-300, 100)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" unique_id=731233711]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -12.5
-offset_top = -12.5
-offset_right = 12.5
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-value = 34.0
-fill_mode = 5
-texture_progress = ExtResource("3_u8yrf")
+offset_right = 200.0
+offset_bottom = 200.0
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("3_u8yrf")
+texture_over = ExtResource("5_l6aen")
+texture_progress = ExtResource("6_b6qyr")
+
+[node name="TimerDial" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar" unique_id=956954245]
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 200.0
+texture = ExtResource("7_b6qyr")
 
 [node name="Control" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=1840575213]
 visible = false
@@ -367,7 +379,6 @@ layout_mode = 2
 texture = SubResource("AnimatedTexture_x45kg")
 
 [node name="MadeInfo" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo" unique_id=1867858415]
-visible = false
 custom_maximum_size = Vector2(-1, 275)
 propagate_maximum_size = false
 layout_mode = 2

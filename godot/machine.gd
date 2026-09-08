@@ -55,6 +55,8 @@ enum EqualStates {
 	Correct,
 	Wrong
 }
+@export var timer_dial: TextureRect
+
 @export var ingredient_coffeebar: TextureRect
 
 @export var idle_ing_bar_array:Array[Texture2D]
@@ -148,7 +150,7 @@ func update_animation():
 	ingredient_coffeebar.texture = current_ingbar_animation[animation_index]
 func _process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
-	
+	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
 	if animation_delay_timer >= animation_delay:
@@ -184,25 +186,26 @@ func _process(delta: float) -> void:
 	spill_warning_container.visible = spill_on_floor
 
 	customer_wait_indicator.visible = (
-		customer != null
-		and not customer.timer.is_stopped()
-		and not Global.day == 0
+		#customer != null
+		#and not customer.timer.is_stopped()
+		#and not
+		not Global.day == 0
 		)
 
 	if customer:
 		var customer_timer: Timer = customer.timer
 
-		customer_wait_bar.value = abs(100 - (customer_timer.time_left / customer_timer.wait_time * 100))
-		if customer_wait_bar.value == 100-34:
+		customer_wait_bar.value = (customer_timer.time_left / customer_timer.wait_time * 100)
+		if customer_wait_bar.value == 34:
 			Events.customer_low_time_warning.emit()
-		#if customer_wait_bar.value >= 66:
-			#customer_wait_indicator.modulate = Color.GREEN
-		#elif customer_wait_bar.value == 34:
-			#Events.customer_low_time_warning.emit()
-		#elif customer_wait_bar.value >= 33:
-			#customer_wait_indicator.modulate = Color.ORANGE
-		#else:
-			#customer_wait_indicator.modulate = Color.RED
+		if customer_wait_bar.value >= 66:
+			customer_wait_bar.modulate = Color.GREEN
+		elif customer_wait_bar.value == 34:
+			Events.customer_low_time_warning.emit()
+		elif customer_wait_bar.value >= 33:
+			customer_wait_bar.modulate = Color.ORANGE
+		else:
+			customer_wait_bar.modulate = Color.RED
 
 	_process_queued_customers()
 
