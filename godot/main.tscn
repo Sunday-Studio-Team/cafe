@@ -816,6 +816,9 @@ height = 1.1123047
 radius = 0.23144531
 height = 0.78808594
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
+viewport_path = NodePath("AirFreshener/CooldownTimerSprite/SubViewport")
+
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_help_desk", "_tutorial_vo_location_spill", "day_containers")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
@@ -2237,10 +2240,12 @@ text = "ITEM
 LOCKER
 :)"
 
-[node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable")]
+[node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable", "_cooldown_timer_sprite", "_cooldown_timer_bar")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.684926, 1.3513618, 4.233103)
 script = ExtResource("285_d52hs")
 _interactable = NodePath("Interactable")
+_cooldown_timer_sprite = NodePath("CooldownTimerSprite")
+_cooldown_timer_bar = NodePath("CooldownTimerSprite/SubViewport/TextureProgressBar")
 
 [node name="Model" type="Node3D" parent="AirFreshener" unique_id=784736911]
 
@@ -2269,6 +2274,31 @@ shape = SubResource("CapsuleShape3D_13qdw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AirFreshener/StaticBody3D" unique_id=1423340547]
 shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="CooldownTimerSprite" type="Sprite3D" parent="AirFreshener" unique_id=764980073]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.41839075, 0.2541976)
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_fkmie")
+
+[node name="SubViewport" type="SubViewport" parent="AirFreshener/CooldownTimerSprite" unique_id=1656796912]
+transparent_bg = true
+size = Vector2i(160, 160)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AirFreshener/CooldownTimerSprite/SubViewport" unique_id=588156804]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("45_dfxmq")
+texture_over = ExtResource("46_kcoi7")
+texture_progress = ExtResource("47_rkju4")
+
+[node name="Label" type="Label3D" parent="AirFreshener/CooldownTimerSprite" unique_id=1934133410]
+sorting_offset = 1.0
+pixel_size = 0.01
+billboard = 1
+text = "⌛"
 
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
