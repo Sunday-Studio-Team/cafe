@@ -103,17 +103,12 @@
 [ext_resource type="Texture2D" uid="uid://8d0nxn1bpdon" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00054.png" id="66_wr7jj"]
 [ext_resource type="Texture2D" uid="uid://c1nc0ptyd1f8j" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00055.png" id="67_1h7wj"]
 [ext_resource type="Texture2D" uid="uid://dm1561ikho00o" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00056.png" id="68_p03h6"]
-[ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="68_tfaor"]
-[ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="69_3rmuw"]
-[ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="69_j3ofb"]
 [ext_resource type="Texture2D" uid="uid://8ipw1aargs3o" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00057.png" id="69_ypkft"]
 [ext_resource type="PackedScene" uid="uid://dohtcd6556n24" path="res://menu.tscn" id="70_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://bx7qdn6tdsdbj" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00058.png" id="70_tdfff"]
 [ext_resource type="Texture2D" uid="uid://c4if2f45v14qa" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00059.png" id="71_l0fe1"]
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
-[ext_resource type="Texture2D" uid="uid://b8pqjkx1lt8xa" path="res://sprites/items/shoes.png" id="72_oirqo"]
 [ext_resource type="Texture2D" uid="uid://mbhof4amyf3l" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00060.png" id="72_tmofn"]
-[ext_resource type="Texture2D" uid="uid://1v8fx462glqc" path="res://sprites/items/teflon.png" id="73_moxjo"]
 [ext_resource type="Texture2D" uid="uid://b61x2adp1ixuf" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00061.png" id="73_xf6cw"]
 [ext_resource type="Texture2D" uid="uid://bj076qyi3413u" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00062.png" id="74_abbrq"]
 [ext_resource type="Texture2D" uid="uid://xipjkrl0r1kd" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00063.png" id="75_omtq3"]
@@ -229,6 +224,7 @@
 [ext_resource type="Resource" uid="uid://bdifg884bv40v" path="res://voice_lines/resources/tutorial/voice_line_tutorial_finished_3.tres" id="146_gttkg"]
 [ext_resource type="Resource" uid="uid://dtg5vwee6k3if" path="res://voice_lines/resources/tutorial/voice_line_tutorial_finished_4.tres" id="147_hiwvf"]
 [ext_resource type="Resource" uid="uid://b8h86l07lesqc" path="res://voice_lines/resources/tutorial/voice_line_tutorial_get_ingredients_1.tres" id="148_ed5de"]
+[ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="149_4v3l6"]
 [ext_resource type="Resource" uid="uid://dmji4xlxijqpo" path="res://voice_lines/resources/tutorial/voice_line_tutorial_get_ingredients_2.tres" id="149_e31mi"]
 [ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
 [ext_resource type="Resource" uid="uid://dxetjfhbw75vo" path="res://voice_lines/resources/tutorial/voice_line_tutorial_get_ingredients_3.tres" id="150_mq14a"]
@@ -1202,58 +1198,23 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="ItemIcon" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1878469102]
-custom_minimum_size = Vector2(50, 0)
+[node name="TabletItemIcon" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=427576900 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("68_tfaor")
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("69_j3ofb")
 
-[node name="ItemIcon2" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1702717453]
-custom_minimum_size = Vector2(50, 0)
+[node name="TabletItemIcon2" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1657180576 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("69_3rmuw")
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("69_j3ofb")
 
-[node name="ItemIcon3" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=475476002]
-custom_minimum_size = Vector2(50, 0)
+[node name="TabletItemIcon3" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1886420684 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
-size_flags_horizontal = 0
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("69_j3ofb")
 
-[node name="ItemIcon4" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=995260422]
-custom_minimum_size = Vector2(50, 0)
+[node name="TabletItemIcon4" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=522604125 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("71_m5f57")
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("69_j3ofb")
 
-[node name="ItemIcon5" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=898300513]
-custom_minimum_size = Vector2(50, 0)
+[node name="TabletItemIcon5" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1744749201 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("72_oirqo")
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("69_j3ofb")
 
-[node name="ItemIcon6" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1635346569]
-custom_minimum_size = Vector2(50, 0)
+[node name="TabletItemIcon6" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=602581531 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("73_moxjo")
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("69_j3ofb")
 
 [node name="CctvIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer" unique_id=1082245281]
 custom_minimum_size = Vector2(125, 110)
