@@ -56,10 +56,10 @@
 [ext_resource type="AudioStream" uid="uid://bynqhhvraxh3n" path="res://audio/ddr/ddr_correct_3.wav" id="50_08s2a"]
 [ext_resource type="AudioStream" uid="uid://sen2yqvqdqde" path="res://audio/ddr/ddr_correct_4.wav" id="51_ajpp4"]
 [ext_resource type="AudioStream" uid="uid://bm64e3hjg5vgi" path="res://audio/ddr/ddr_correct_5.wav" id="52_mji0a"]
-[ext_resource type="AudioStream" uid="uid://ctvbre1ribsjj" path="res://audio/ddr/ddr_wrong.wav" id="53_mji0a"]
-[ext_resource type="AudioStream" uid="uid://c02rysbc6442q" path="res://audio/ddr/ddr_drum_loop.wav" id="53_xql7b"]
+[ext_resource type="AudioStream" uid="uid://ctvbre1ribsjj" path="res://audio/ddr/ddr_wrong_1.wav" id="53_mji0a"]
 [ext_resource type="AudioStream" uid="uid://ec40um0fnntu" path="res://audio/ddr/ddr_wrong_2.wav" id="54_xkcvm"]
 [ext_resource type="AudioStream" uid="uid://ck1wv58oatpc7" path="res://audio/ddr/ddr_wrong_3.wav" id="55_7milp"]
+[ext_resource type="AudioStream" uid="uid://c4p1hn048u1d8" path="res://audio/ddr/ddr_music.wav" id="60_syko7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
 streams_count = 5
@@ -75,11 +75,17 @@ stream_0/stream = ExtResource("53_mji0a")
 stream_1/stream = ExtResource("54_xkcvm")
 stream_2/stream = ExtResource("55_7milp")
 
-[node name="Arrows" type="SubViewportContainer" unique_id=63180870 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound")]
+[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_iuqyn")
-prompt_output = NodePath("CanvasLayer/Prompt")
-arrows_container = NodePath("CanvasLayer/ArrowsBackground/ArrowHContainer")
-tippy_image = NodePath("CanvasLayer/Tippy")
+prompt_output = NodePath("Prompt")
+arrows_container = NodePath("ArrowsBackground/ArrowHContainer")
+tippy_image = NodePath("Tippy")
 blue_left = Array[Texture]([ExtResource("2_vxntg"), ExtResource("3_fv8pj"), ExtResource("4_l8ovb"), ExtResource("5_qk4ro"), ExtResource("6_27pub")])
 blue_up = Array[Texture]([ExtResource("7_hq6wg"), ExtResource("8_ndnsj"), ExtResource("9_hea8k"), ExtResource("10_xql7b"), ExtResource("11_08s2a")])
 blue_right = Array[Texture]([ExtResource("12_ajpp4"), ExtResource("13_mji0a"), ExtResource("14_xkcvm"), ExtResource("15_7milp"), ExtResource("16_gkp8u")])
@@ -97,12 +103,8 @@ tippy_fail_again = Array[Texture]([ExtResource("47_syko7")])
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 
-[node name="CanvasLayer" type="SubViewport" parent="." unique_id=781073748]
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=247780111]
+[node name="Background" type="TextureRect" parent="." unique_id=247780111]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -111,7 +113,8 @@ grow_vertical = 2
 texture = ExtResource("47_yem23")
 expand_mode = 3
 
-[node name="Frame" type="TextureRect" parent="CanvasLayer" unique_id=509451572]
+[node name="Frame" type="TextureRect" parent="." unique_id=509451572]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -120,7 +123,40 @@ grow_vertical = 2
 texture = ExtResource("6_cfscc")
 expand_mode = 1
 
-[node name="ArrowsBackground" type="TextureRect" parent="CanvasLayer" unique_id=1185070196]
+[node name="DanceMachine" type="TextureRect" parent="." unique_id=916732716]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27600002
+anchor_top = 0.038
+anchor_right = 0.56700003
+anchor_bottom = 0.676
+offset_left = -65.160034
+offset_right = 65.160034
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_l8ovb")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Tippy" type="TextureRect" parent="." unique_id=1193548297]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.185
+anchor_right = 0.5
+anchor_bottom = 0.47
+offset_left = -158.28989
+offset_top = -61.800003
+offset_right = 148.04993
+offset_bottom = 100.399994
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("42_syko7")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ArrowsBackground" type="TextureRect" parent="." unique_id=1185070196]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.041
 anchor_top = 0.060000002
@@ -134,7 +170,7 @@ texture = ExtResource("6_vxntg")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="ArrowHContainer" type="HBoxContainer" parent="CanvasLayer/ArrowsBackground" unique_id=959055107]
+[node name="ArrowHContainer" type="HBoxContainer" parent="ArrowsBackground" unique_id=959055107]
 custom_maximum_size = Vector2(1758, -1)
 layout_mode = 1
 anchors_preset = -1
@@ -148,7 +184,8 @@ offset_bottom = -26.158417
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Prompt" type="RichTextLabel" parent="CanvasLayer" unique_id=1688849488]
+[node name="Prompt" type="RichTextLabel" parent="." unique_id=1688849488]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.047000002
 anchor_top = 0.606
@@ -168,36 +205,6 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DanceMachine" type="TextureRect" parent="CanvasLayer" unique_id=916732716]
-anchors_preset = -1
-anchor_left = 0.27600002
-anchor_top = 0.038
-anchor_right = 0.56700003
-anchor_bottom = 0.676
-offset_left = -30.060059
-offset_right = 30.060059
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("42_l8ovb")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Tippy" type="TextureRect" parent="CanvasLayer" unique_id=1193548297]
-anchors_preset = -1
-anchor_left = 0.347
-anchor_top = 0.185
-anchor_right = 0.5
-anchor_bottom = 0.47
-offset_left = -91.23999
-offset_top = -61.800003
-offset_right = 81.0
-offset_bottom = 100.399994
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("42_syko7")
-expand_mode = 3
-stretch_mode = 5
-
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=1547774346]
 stream = SubResource("AudioStreamRandomizer_l8ovb")
 volume_db = -5.0
@@ -206,11 +213,8 @@ volume_db = -5.0
 stream = SubResource("AudioStreamRandomizer_0ffxp")
 volume_db = -5.0
 
-[node name="DrumLoop" type="AudioStreamPlayer" parent="." unique_id=223541811]
-stream = ExtResource("53_xql7b")
-volume_db = -15.0
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=223541811]
+stream = ExtResource("60_syko7")
+volume_db = -10.0
 autoplay = true
 bus = &"MinigameMusic"
-
-[node name="ArrowsMinigame" type="MarginContainer" parent="." unique_id=1145875038]
-layout_mode = 2
