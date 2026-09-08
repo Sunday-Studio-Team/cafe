@@ -25,19 +25,13 @@ const REFILL_MINIGAME := "Refill"
 @export var end_of_customer_queue_marker: Marker3D
 @export_category("UI")
 @export var progress_indicator: Control
-@export var progress_bar: TextureProgressBar
 @export var tippy_progress_sprite: TextureRect
-@export var accept_button: Button
-@export var _price_label_accept: Label
-@export var _rating_loss_on_accept_label: Label
-@export var make_drink_button: Button
-@export var _rating_gain_on_remake_label: Label
-@export var remake_ingredients_cost_label: Label
-@export var refill_button: Button
+@export var accept_button: TextureButton
+@export var make_drink_button: TextureButton
+@export var refill_button: TextureButton
 @export var ordered_drink_name_label: Label
 @export var made_drink_name_label: Label
-@export var _price_label_remake: Label
-@export var ingredients_bar: ProgressBar
+@export var ingredients_bar: TextureProgressBar
 @export var ing_too_low_label: Label3D
 @export var spill_warning: Label
 @export var customer_wait_indicator: Control
@@ -54,6 +48,8 @@ const REFILL_MINIGAME := "Refill"
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
+@export var idle_ing_bar_array:Array[Texture2D]
+@export var active_ing_bar_array:Array[Texture2D]
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
@@ -123,22 +119,38 @@ func _ready() -> void:
 	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 	made_drink_name_label.hide()
-
+	current_ingbar_animation = idle_ing_bar_array
 	# glowing fx on spill warning
 	var t := create_tween().set_loops()
 	t.tween_property(spill_warning, "modulate", Color.GOLD, 1)
 	t.tween_property(spill_warning, "modulate", Color.RED, 1)
 
+var current_ingbar_animation:Array[Texture2D]:
+	set(value):
+		animation_index = 0
+		current_ingbar_animation = value
+var animation_index:int
+var animation_delay_timer:float = 0
+var animation_delay:float = 0.1
 
-func _process(_delta: float) -> void:
-	progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
-
+func update_animation():
+	animation_index += 1
+	if animation_index >= current_ingbar_animation.size():
+		animation_index = 0
+	ingredients_bar.texture_progress = current_ingbar_animation[animation_index]
+func _process(delta: float) -> void:
+	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
+	
+	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
+	animation_delay_timer += delta
+	if animation_delay_timer >= animation_delay:
+		animation_delay_timer = 0
+		update_animation()
+	ingredients_bar.texture_progress_offset.y = 1100 - (1100 * (0.01 * ingredients_bar.value))
+	
 	progress_indicator.visible = not timer.is_stopped()
-
-
-
-	accept_button.visible = waiting_for_response
-	make_drink_button.visible = waiting_for_response
+	accept_button.disabled = not waiting_for_response
+	make_drink_button.disabled = not waiting_for_response
 	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
@@ -153,12 +165,12 @@ func _process(_delta: float) -> void:
 	ingredients_bar.value = ingredients
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
-		ingredients_bar.modulate = Color.RED
+		#ingredients_bar.modulate = Color.RED
 	else:
-		if ingredients <= Stats.current.machine_max_ingredients / 2.0:
-			ingredients_bar.modulate = Color.YELLOW
-		else:
-			ingredients_bar.modulate = Color.GREEN
+		#if ingredients <= Stats.current.machine_max_ingredients / 2.0:
+			#ingredients_bar.modulate = Color.YELLOW
+		#else:
+			#ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
 
 	spill_warning.visible = spill_on_floor
@@ -172,16 +184,17 @@ func _process(_delta: float) -> void:
 	if customer:
 		var customer_timer: Timer = customer.timer
 
-		customer_wait_bar.value = customer_timer.time_left / customer_timer.wait_time * 100
-
-		if customer_wait_bar.value >= 66:
-			customer_wait_indicator.modulate = Color.GREEN
-		elif customer_wait_bar.value == 34:
+		customer_wait_bar.value = abs(100 - (customer_timer.time_left / customer_timer.wait_time * 100))
+		if customer_wait_bar.value == 100-34:
 			Events.customer_low_time_warning.emit()
-		elif customer_wait_bar.value >= 33:
-			customer_wait_indicator.modulate = Color.ORANGE
-		else:
-			customer_wait_indicator.modulate = Color.RED
+		#if customer_wait_bar.value >= 66:
+			#customer_wait_indicator.modulate = Color.GREEN
+		#elif customer_wait_bar.value == 34:
+			#Events.customer_low_time_warning.emit()
+		#elif customer_wait_bar.value >= 33:
+			#customer_wait_indicator.modulate = Color.ORANGE
+		#else:
+			#customer_wait_indicator.modulate = Color.RED
 
 	_process_queued_customers()
 
@@ -567,26 +580,26 @@ func display_drink_score() -> void:
 	made_drink_icon.texture = order.made_drink.icon
 
 	var price_labels_text: String = "+%s" % Global.float_to_price(order.final_order_price)
-	_price_label_remake.text = price_labels_text
-	_price_label_accept.text = price_labels_text
+	#_price_label_remake.text = price_labels_text
+	#_price_label_accept.text = price_labels_text
 
 	if order.star_rating_gain_for_remake > 0.0:
-		_rating_gain_on_remake_label.modulate = Color.GREEN
+		#_rating_gain_on_remake_label.modulate = Color.GREEN
 		var star_rating_gain_if_remade: float = order.star_rating_gain_for_remake
-		_rating_gain_on_remake_label.text = "🙂 +%s⭐️" % star_rating_gain_if_remade
+		#_rating_gain_on_remake_label.text = "🙂 +%s⭐️" % star_rating_gain_if_remade
 	elif order.star_rating_gain_for_remake == 0.0:
-		_rating_gain_on_remake_label.modulate = Color.DARK_GRAY
+		#_rating_gain_on_remake_label.modulate = Color.DARK_GRAY
 		var star_rating_gain_if_remade: float = 0
-		_rating_gain_on_remake_label.text = "+%s⭐️" % star_rating_gain_if_remade
+		#_rating_gain_on_remake_label.text = "+%s⭐️" % star_rating_gain_if_remade
 
 	if order.star_rating_loss_if_accept > 0.0:
-		_rating_loss_on_accept_label.modulate = Color.RED
+		#_rating_loss_on_accept_label.modulate = Color.RED
 		var star_rating_loss_if_accept: float = order.star_rating_loss_if_accept
-		_rating_loss_on_accept_label.text = "☹️ -%s⭐" % star_rating_loss_if_accept
+		#_rating_loss_on_accept_label.text = "☹️ -%s⭐" % star_rating_loss_if_accept
 	elif order.star_rating_loss_if_accept == 0.0:
-		_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
+		#_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
 		var star_rating_loss_if_accept: float = 0
-		_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
+		#_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
 
 	if order.star_rating_gain_for_remake == 0.0:
 		made_drink_name_label.modulate = Color.GREEN
