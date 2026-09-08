@@ -89,7 +89,7 @@ func spawn_anim() -> void:
 
 	var t := create_tween().set_parallel().set_ease(Tween.EASE_OUT)
 	t.tween_property(body, "transparency", 0, DUR).from(1)
-	t.tween_property(self, "scale:y", 1, DUR).from(1.25)
+	t.tween_property(body, "scale:y", 1, DUR).from(1.25)
 
 
 func despawn_anim() -> void:
