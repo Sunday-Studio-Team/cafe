@@ -33,6 +33,7 @@ extends Node3D
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var teleporter3: Teleporter
+@export var air_freshener: AirFreshener
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
@@ -107,7 +108,7 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	spawn_machines()
-	enable_disable_teleporters()
+	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
 	# enables more desk props as the days go by
@@ -139,9 +140,6 @@ func _ready() -> void:
 
 	#Active Item refresh
 	Global.refresh_active_items()
-
-	#Active Items
-	Events.active_item_used.connect(active_item_used)
 
 	if Global.day == 0:
 		_interactive_tutorial_flow()
@@ -178,10 +176,11 @@ func get_stats() -> void:
 	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 	# 	Global.current_special_shift.apply_stats()
 
-	enable_disable_teleporters()
+	update_teleporters_enabled()
+	update_air_fresheners_enabled()
 
 
-func enable_disable_teleporters():
+func update_teleporters_enabled() -> void:
 	var has_teleporter: bool = false
 	var has_teleporter_level_2: bool = false
 	for item in Global.owned_items:
@@ -202,6 +201,17 @@ func enable_disable_teleporters():
 		teleporter2.disable_teleporter()
 		teleporter3.disable_teleporter()
 
+func update_air_fresheners_enabled() -> void:
+	var air_freshener_item: Item = null
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "air_freshener":
+			air_freshener_item = owned_item
+			break
+	
+	if air_freshener_item != null:
+		air_freshener.enable_air_freshener()
+	else:
+		air_freshener.disable_air_freshener()
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
@@ -365,24 +375,10 @@ func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> voi
 		Console.print_line("spawned %s at help desk" % sprite_resource.customer_name)
 	_customer_help_desk.add_customer_to_queue(new_customer)
 
-
-#Actives the effects of a given active item
-func active_item_used(item: Item):
-	if item.item_id == "air_freshener":
-		var customer_wait_duration_extension: float = 0.0
-		if item.item_level == 1:
-			customer_wait_duration_extension = 20.0
-		else:
-			customer_wait_duration_extension = 30.0
-
-		for machine in _active_machines:
-			if machine.customer:
-				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
-
-		Global.put_active_item_on_cooldown(item)
-
-		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertIconType.CUSTOMER)
-
+func apply_used_air_freshener(customer_wait_duration_extension: float) -> void:
+	for machine in _active_machines:
+		if machine.customer:
+			machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
 
 func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D]) -> void:
 	for security_camera in _all_security_cameras:

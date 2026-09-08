@@ -284,6 +284,7 @@
 [ext_resource type="PackedScene" uid="uid://cwrrk4bkluvu" path="res://tutorial/tutorial_screen_view_6.tscn" id="232_e4ynb"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
+[ext_resource type="Script" uid="uid://ce6dr8crdpidc" path="res://air_freshener.gd" id="285_d52hs"]
 
 [sub_resource type="Resource" id="Resource_1yv1y"]
 script = ExtResource("4_ovcoh")
@@ -802,7 +803,20 @@ metallic = 1.0
 material = SubResource("StandardMaterial3D_mjix0")
 size = Vector3(0.5, 2, 0.75)
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_help_desk", "_tutorial_vo_location_spill", "day_containers")]
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrivr"]
+top_radius = 0.11279297
+bottom_radius = 0.11279297
+height = 0.4140625
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_13qdw"]
+radius = 0.39990234
+height = 1.1123047
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+radius = 0.23144531
+height = 0.78808594
+
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_pause_menu", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "_tutorial_vo_location_start_shift", "_tutorial_vo_location_machine_ui", "_tutorial_vo_location_ingredients_bag", "_tutorial_vo_location_help_desk", "_tutorial_vo_location_spill", "day_containers")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -835,6 +849,7 @@ clock_item_start_sound = NodePath("ClockItemStartSound")
 teleporter1 = NodePath("Teleporter1")
 teleporter2 = NodePath("Teleporter2")
 teleporter3 = NodePath("Teleporter3")
+air_freshener = NodePath("AirFreshener")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
 whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
 waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
@@ -2221,6 +2236,39 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.39
 text = "ITEM
 LOCKER
 :)"
+
+[node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.684926, 1.3513618, 4.233103)
+script = ExtResource("285_d52hs")
+_interactable = NodePath("Interactable")
+
+[node name="Model" type="Node3D" parent="AirFreshener" unique_id=784736911]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AirFreshener/Model" unique_id=1659469002]
+mesh = SubResource("CylinderMesh_xrivr")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="AirFreshener/Model/MeshInstance3D" unique_id=1155128085]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="AirFreshener/Model/MeshInstance3D/CSGCombiner3D" unique_id=1401346843]
+transform = Transform3D(1, 0, 0, 0, -0.7071068, 0.7071067, 0, -0.7071067, -0.7071068, 0, 0.1501404, 0)
+radius = 0.10888672
+height = 0.328125
+
+[node name="Interactable" type="Area3D" parent="AirFreshener" unique_id=442264913 node_paths=PackedStringArray("mesh")]
+script = ExtResource("229_c6fgv")
+interactable_id = &"use_air_freshener"
+display_name = "Air Freshener"
+mesh = NodePath("../Model/MeshInstance3D")
+show_interact_hotkey = false
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AirFreshener/Interactable" unique_id=1699415952]
+shape = SubResource("CapsuleShape3D_13qdw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="AirFreshener" unique_id=259685776]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AirFreshener/StaticBody3D" unique_id=1423340547]
+shape = SubResource("CapsuleShape3D_xrivr")
 
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]

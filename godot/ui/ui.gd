@@ -353,10 +353,11 @@ func update_interactable_ui() -> void:
 	if hovered_interactable != null:
 		# show prompt to use active item if we need to
 		interactable_indicator.show()
-		
+
 		var owned_hammer: Item = null
 		var owned_air_horn: Item = null
 		var owned_whipped_cream: Item = null
+		var owned_air_freshener: Item = null
 		
 		for owned_item in Global.owned_items:
 			if owned_item.item_id == "hammer":
@@ -365,6 +366,8 @@ func update_interactable_ui() -> void:
 				owned_air_horn = owned_item
 			elif owned_item.item_id == "whipped_cream":
 				owned_whipped_cream = owned_item
+			elif owned_item.item_id == "air_freshener":
+				owned_air_freshener = owned_item
 		
 		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
 		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
@@ -416,6 +419,22 @@ func update_interactable_ui() -> void:
 			item_prompt = "[%s] WHIPPED CREAM" % use_item_keybind
 
 			if owned_whipped_cream.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt
+
+		elif (
+				hovered_interactable.interactable_id == &"use_air_freshener"
+				and owned_air_freshener != null
+		):
+			item_indicator.show()
+			var item_prompt: String = ""
+
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_prompt = "[%s] AIR FRESHENER" % use_item_keybind
+
+			if owned_air_freshener.can_be_used:
 				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
 			else:
 				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
