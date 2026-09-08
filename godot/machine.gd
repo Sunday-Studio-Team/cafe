@@ -33,7 +33,7 @@ const REFILL_MINIGAME := "Refill"
 @export var ingredients_bar: TextureProgressBar
 @export var ing_too_low_label: Label3D
 @export var spill_warning_container: Control
-@export var spill_warning: Label
+@export var spill_warning: TextureRect
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
@@ -48,6 +48,13 @@ const REFILL_MINIGAME := "Refill"
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
+@export var equal_sign: TextureRect
+@export var equal_sign_states: Array[Texture2D]
+enum EqualStates {
+	Empty,
+	Correct,
+	Wrong
+}
 @export var ingredient_coffeebar: TextureRect
 
 @export var idle_ing_bar_array:Array[Texture2D]
@@ -123,8 +130,8 @@ func _ready() -> void:
 	current_ingbar_animation = idle_ing_bar_array
 	# glowing fx on spill warning
 	var t := create_tween().set_loops()
-	t.tween_property(spill_warning, "modulate", Color.GOLD, 1)
-	t.tween_property(spill_warning, "modulate", Color.RED, 1)
+	t.tween_property(spill_warning, "modulate", Color.WHITE, 0.5)
+	t.tween_property(spill_warning, "modulate", Color.TRANSPARENT, 0.5)
 
 var current_ingbar_animation:Array[Texture2D]:
 	set(value):
@@ -132,7 +139,7 @@ var current_ingbar_animation:Array[Texture2D]:
 		current_ingbar_animation = value
 var animation_index:int
 var animation_delay_timer:float = 0
-var animation_delay:float = 0.1
+var animation_delay:float = 0.05
 
 func update_animation():
 	animation_index += 1
@@ -437,7 +444,7 @@ func machine_make_drink() -> void:
 	done_sound.play()
 
 	consume_ingredients()
-
+	
 	# Roll a random number of ingredients to differ.
 	const ingredient_types_count: int = 3
 	var target_drink_diff: int = randi_range(0, ingredient_types_count)
@@ -463,7 +470,7 @@ func machine_make_drink() -> void:
 		# Use a fallback random drink.
 		made_drink = unlocked_drinks.pick_random()
 	order.made_drink = made_drink
-
+	
 	# Add rating gain on remake for each incorrect ingredient.
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
@@ -492,7 +499,10 @@ func machine_make_drink() -> void:
 		order.star_rating_gain_for_remake += (
 			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
 		)
-
+	if order.main_correct and order.liquid_correct and order.extra_correct:
+		equal_sign.texture = equal_sign_states[EqualStates.Correct]
+	else:
+		equal_sign.texture = equal_sign_states[EqualStates.Wrong]
 	# Calculate scaled price
 	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
 
@@ -726,6 +736,7 @@ func accept_order(did_remake_drink: bool) -> void:
 			)
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
+	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout

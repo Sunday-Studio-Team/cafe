@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
 [ext_resource type="Texture2D" uid="uid://dyehef5xmtkfj" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0001.png" id="2_cvlju"]
+[ext_resource type="Texture2D" uid="uid://chn1ljeuebt3w" path="res://sprites/machine_ui/empty equal.png" id="2_ww5c3"]
 [ext_resource type="Texture2D" uid="uid://bjn0dj7rleawx" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0002.png" id="3_4b30b"]
+[ext_resource type="Texture2D" uid="uid://bjxrqio2ph7h2" path="res://sprites/machine_ui/green equal.png" id="3_8ej3g"]
 [ext_resource type="Texture2D" uid="uid://sjauss5xflnf" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0003.png" id="4_womjx"]
+[ext_resource type="Texture2D" uid="uid://dt5ydm1k35avc" path="res://sprites/machine_ui/red equal.png" id="4_ymic3"]
 [ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
 [ext_resource type="Texture2D" uid="uid://bxe6n5uvsdmve" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0004.png" id="5_hrogu"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
@@ -40,8 +43,10 @@
 [ext_resource type="Script" uid="uid://lidk43nk3l7v" path="res://non_visible_camera_disabler.gd" id="20_x45kg"]
 [ext_resource type="PackedScene" uid="uid://mh131gd6x5eb" path="res://Assets/Drink Machine/Machinewsign.glb" id="20_yl6qm"]
 [ext_resource type="Texture2D" uid="uid://csjhhurydkbwl" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0020.png" id="21_t5s72"]
+[ext_resource type="Texture2D" uid="uid://bio80eua61884" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_BaseColor.png-standardSurface1_Alpha.png" id="21_x45kg"]
 [ext_resource type="AudioStream" uid="uid://douea5kkcy7c4" path="res://audio/ingredients_warning.wav" id="22_eujd3"]
 [ext_resource type="Texture2D" uid="uid://cccfrvpkn3ova" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0021.png" id="22_g2688"]
+[ext_resource type="Texture2D" uid="uid://dhifwcfo1gvb1" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Metallic.png-standardSurface1_Roughness.png" id="22_xkbk5"]
 [ext_resource type="Texture2D" uid="uid://dv00djhj1p571" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Normal.png" id="23_eujd3"]
 [ext_resource type="Texture2D" uid="uid://c0w1774lqyhc3" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0022.png" id="23_rcak8"]
 [ext_resource type="Texture2D" uid="uid://ddaetti3c163g" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0023.png" id="24_0ngdq"]
@@ -102,6 +107,7 @@
 [ext_resource type="Texture2D" uid="uid://ctxtr2ku5bdym" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0054.png" id="79_eff2u"]
 [ext_resource type="Texture2D" uid="uid://b23vgfyrvljr8" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0055.png" id="80_tk0p7"]
 [ext_resource type="Texture2D" uid="uid://cl8eqgywwj5nu" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0056.png" id="81_x483m"]
+[ext_resource type="Texture2D" uid="uid://dyqgr51e3w86t" path="res://sprites/machine_ui/tippybreak.png" id="84_4b30b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -164,9 +170,22 @@ metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xkbk5"]
 resource_name = "M_Outline"
+transparency = 4
+cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("21_x45kg")
+metallic = 1.0
 metallic_specular = 0.0
+metallic_texture = ExtResource("22_xkbk5")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("22_xkbk5")
+roughness_texture_channel = 1
 emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("21_x45kg")
+normal_enabled = true
+normal_texture = ExtResource("23_eujd3")
+metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ru46g"]
 _surfaces = [{
@@ -231,7 +250,7 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "ingredient_coffeebar", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -252,8 +271,8 @@ refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/Ingre
 ordered_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderedDrinkName")
 ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
-spill_warning_container = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/SpillWarning")
-spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/SpillWarning/Label")
+spill_warning_container = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control")
+spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/TippySlippy")
 customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer")
 customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar")
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
@@ -268,6 +287,9 @@ made_main_ingredient_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxCo
 made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Liquid")
 made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Extra")
 made_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeItem")
+equal_sign = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/MarginContainer/EqualSign")
+equal_sign_states = Array[Texture2D]([ExtResource("2_ww5c3"), ExtResource("3_8ej3g"), ExtResource("4_ymic3")])
+ingredient_coffeebar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressUnder/ProgressCoffee")
 idle_ing_bar_array = Array[Texture2D]([ExtResource("2_cvlju"), ExtResource("3_4b30b"), ExtResource("4_womjx"), ExtResource("5_hrogu"), ExtResource("6_ww5c3"), ExtResource("7_8ej3g"), ExtResource("8_ymic3"), ExtResource("9_bvj4x"), ExtResource("10_vaqkk"), ExtResource("11_7p33r"), ExtResource("12_a80ij"), ExtResource("13_robek"), ExtResource("14_ovoaa"), ExtResource("15_1hlt3"), ExtResource("16_uaec5"), ExtResource("17_gtm4j"), ExtResource("18_hp8kb"), ExtResource("19_h07qc"), ExtResource("20_1cgjg"), ExtResource("21_t5s72"), ExtResource("22_g2688"), ExtResource("23_rcak8"), ExtResource("24_0ngdq"), ExtResource("25_c2how")])
 active_ing_bar_array = Array[Texture2D]([ExtResource("26_427vo"), ExtResource("27_q5jp4"), ExtResource("28_d37nw"), ExtResource("29_41yea"), ExtResource("30_bbbyo"), ExtResource("31_kuutf"), ExtResource("32_dfbyd"), ExtResource("33_gx0jy"), ExtResource("34_bgw1y"), ExtResource("35_lf4vc"), ExtResource("36_x3bhi"), ExtResource("37_avb8l"), ExtResource("38_b2l0d"), ExtResource("39_wello"), ExtResource("40_kipqy"), ExtResource("41_bgacs"), ExtResource("42_88l6f"), ExtResource("43_jac24"), ExtResource("44_om76m"), ExtResource("45_ryoht"), ExtResource("46_j2jxb"), ExtResource("47_g2mkn"), ExtResource("48_pdfax"), ExtResource("49_lx633"), ExtResource("50_w1s35"), ExtResource("51_4rr27"), ExtResource("52_evw7y"), ExtResource("53_wdkrr"), ExtResource("54_8bmd4"), ExtResource("55_qtip1"), ExtResource("56_rdhdf"), ExtResource("57_4mdt8"), ExtResource("58_0ief2"), ExtResource("59_5vek6"), ExtResource("60_vij2s"), ExtResource("61_bn4tc"), ExtResource("62_ehdnm"), ExtResource("63_ub41g"), ExtResource("64_sjdni"), ExtResource("65_ps4nf"), ExtResource("66_yaqdg"), ExtResource("67_q3tn5"), ExtResource("68_alees"), ExtResource("69_q52mk"), ExtResource("70_clr3m"), ExtResource("71_5osnv"), ExtResource("72_mpktl"), ExtResource("73_20wcn"), ExtResource("74_ujplj"), ExtResource("75_33y5n"), ExtResource("76_rsa8u"), ExtResource("77_und3g"), ExtResource("78_8ij72"), ExtResource("79_eff2u"), ExtResource("80_tk0p7"), ExtResource("81_x483m")])
 hum_sound = NodePath("HumSound")
@@ -324,6 +346,7 @@ time_to_hold = 1.0
 
 [node name="BrokenDownLabel" type="Label3D" parent="FixMachineInteractable" unique_id=969109102]
 transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+visible = false
 modulate = Color(1, 0.6, 0.12156863, 1)
 text = "BROKEN DOWN"
 
@@ -335,6 +358,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
 shadow_enabled = true
+
+[node name="BrokenDownSprite" type="Sprite3D" parent="FixMachineInteractable" unique_id=2135256805]
+texture = ExtResource("84_4b30b")
 
 [node name="Spill" type="Area3D" parent="." unique_id=1225300652]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, -0.5)
@@ -476,13 +502,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=982963143]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=749704850]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
+[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
 mesh = SubResource("ArrayMesh_eujd3")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]

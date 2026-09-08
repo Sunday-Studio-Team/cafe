@@ -2,7 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://rd1bwnrprk6s" path="res://sprites/machine_ui/background.png" id="1_uuvgi"]
 [ext_resource type="Texture2D" uid="uid://xmdnhsak8jg6" path="res://sprites/machine_ui/small screen with timer wo filter.png" id="2_motd3"]
+[ext_resource type="Texture2D" uid="uid://chn1ljeuebt3w" path="res://sprites/machine_ui/empty equal.png" id="2_u8yrf"]
 [ext_resource type="Texture2D" uid="uid://bea822q4swcq5" path="res://sprites/machine_ui/drink making timer.png" id="3_u8yrf"]
+[ext_resource type="Texture2D" uid="uid://b30p1hoj2cnj2" path="res://sprites/machine_ui/tippy_slippy.png" id="4_10yj4"]
 [ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="4_apda1"]
 [ext_resource type="Texture2D" uid="uid://4pr7emmj375d" path="res://sprites/drink_icons/espresso.png" id="4_dw44w"]
 [ext_resource type="Texture2D" uid="uid://caxp0o4b1t6i1" path="res://sprites/machine_ui/tippy_strong0.png" id="5_qwcv2"]
@@ -156,6 +158,18 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 16
 
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer" unique_id=1032271626]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 537
+theme_override_constants/margin_right = 300
+
+[node name="EqualSign" type="TextureRect" parent="HBoxContainer/MarginContainer/MarginContainer" unique_id=1227391602]
+layout_mode = 2
+texture = ExtResource("2_u8yrf")
+stretch_mode = 2
+
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=1147466751]
 layout_mode = 2
 theme_override_constants/separation = 6
@@ -214,29 +228,21 @@ fill_mode = 5
 texture_progress = ExtResource("3_u8yrf")
 
 [node name="Control" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=1840575213]
+visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 29.0
-offset_right = 29.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SpillWarning" type="PanelContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control" unique_id=1756304273]
+visible = false
 z_index = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -122.5
-offset_top = -133.5
-offset_right = 122.5
-offset_bottom = 133.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -249,6 +255,22 @@ theme_override_font_sizes/font_size = 96
 text = "⚠️
 SPILL"
 horizontal_alignment = 1
+
+[node name="TippySlippy" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control" unique_id=2032287730]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -180.0
+offset_right = 180.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_10yj4")
+stretch_mode = 2
 
 [node name="OrderInfo" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1829784571]
 layout_mode = 2
@@ -331,7 +353,7 @@ stretch_mode = 4
 [node name="ProgressIndicator" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo" unique_id=105617217]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 
 [node name="MakingDrinkText" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/ProgressIndicator" unique_id=92433370]
 layout_mode = 2
@@ -345,6 +367,7 @@ layout_mode = 2
 texture = SubResource("AnimatedTexture_x45kg")
 
 [node name="MadeInfo" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo" unique_id=1867858415]
+visible = false
 custom_maximum_size = Vector2(-1, 275)
 propagate_maximum_size = false
 layout_mode = 2
@@ -418,13 +441,13 @@ alignment = 1
 
 [node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/Buttons" unique_id=261257475]
 layout_mode = 2
-offset_transform_enabled = true
-offset_transform_visual_only = false
+size_flags_horizontal = 3
 texture_normal = ExtResource("10_71all")
 texture_disabled = ExtResource("11_10yj4")
 
 [node name="RemakeDrinkButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/Buttons" unique_id=2075147826]
 layout_mode = 2
+size_flags_horizontal = 3
 offset_transform_enabled = true
 texture_normal = ExtResource("12_motd3")
 
