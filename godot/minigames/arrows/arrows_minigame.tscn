@@ -59,7 +59,7 @@
 [ext_resource type="AudioStream" uid="uid://ctvbre1ribsjj" path="res://audio/ddr/ddr_wrong.wav" id="53_mji0a"]
 [ext_resource type="AudioStream" uid="uid://ec40um0fnntu" path="res://audio/ddr/ddr_wrong_2.wav" id="54_xkcvm"]
 [ext_resource type="AudioStream" uid="uid://ck1wv58oatpc7" path="res://audio/ddr/ddr_wrong_3.wav" id="55_7milp"]
-[ext_resource type="AudioStream" uid="uid://vmse7oiogebx" path="res://audio/music/arrows_music.wav" id="60_syko7"]
+[ext_resource type="AudioStream" uid="uid://vmse7oiogebx" path="res://audio/ddr/arrows_music.wav" id="60_syko7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
 streams_count = 5
@@ -206,7 +206,7 @@ volume_db = -8.0
 stream = SubResource("AudioStreamRandomizer_0ffxp")
 volume_db = -8.0
 
-[node name="DrumLoop" type="AudioStreamPlayer" parent="." unique_id=223541811]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=223541811]
 stream = ExtResource("60_syko7")
 volume_db = -10.0
 autoplay = true

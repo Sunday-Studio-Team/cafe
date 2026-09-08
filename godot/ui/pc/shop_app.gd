@@ -73,8 +73,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	super(_delta)
-
 	bank_balance.text = "[b]🏦[color=white]%s[/color][/b]" % Global.float_to_price(Global.player_tips_bank)
 
 
