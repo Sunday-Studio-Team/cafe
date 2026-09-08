@@ -23,9 +23,22 @@ func _on_interacted() -> void:
 		return
 
 	trash_bag_taken.emit(self)
-	
+	Global.holding_trash = true
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
+	
+	# basically some weird stuff can happen if we throw the bag right after we
+	# pick up, so we just get rid of it if something weird happened which
+	# caused it to still be in the tree after a while
+	var timer_to_delete_if_something_went_wrong := Timer.new()
+	timer_to_delete_if_something_went_wrong.wait_time = 0.25
+	timer_to_delete_if_something_went_wrong.timeout.connect(
+		func():
+			await create_tween().tween_property(self, "scale", Vector3.ZERO, 0.1).finished
+			queue_free(),
+	)
+	add_child(timer_to_delete_if_something_went_wrong)
+	timer_to_delete_if_something_went_wrong.start()
+	
 	await Events.trash_pickup_animation_grabbed
-	Global.holding_trash = true
 	queue_free()
