@@ -328,10 +328,10 @@ script = ExtResource("18_0ne0o")
 _sub_viewport = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
-transform = Transform3D(1, 0, 0, 0, 0.91160107, 0.411076, 0, -0.411076, 0.91160107, 0, 1.8781408, -0.51930994)
+transform = Transform3D(0.9099997, 0, 0, 0, 0.87899226, 0.23552525, 0, -0.23552525, 0.87899226, 0, 1.8762311, -0.5289409)
 cull_mask = 3
 environment = ExtResource("15_x45kg")
-fov = 90.0
+fov = 45.0
 
 [node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D" unique_id=1220965674 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
@@ -364,6 +364,10 @@ shape = SubResource("BoxShape3D_yuuq8")
 
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="3DGui" unique_id=1736484949]
+transform = Transform3D(0.99999964, 0, 0, 0, 0.9659255, 0.25881895, 0, -0.25881895, 0.9659255, 0, 1.7298214, -0.7150276)
+remote_path = NodePath("../Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
 [node name="Model" type="Node3D" parent="." unique_id=238356525]
 
