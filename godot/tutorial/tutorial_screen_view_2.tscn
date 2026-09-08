@@ -1,12 +1,21 @@
 [gd_scene format=3 uid="uid://8h2mdx74vf3b"]
 
 [ext_resource type="Script" uid="uid://8bh0c410cd6d" path="res://tutorial/tutorial_screen_view.gd" id="1_ea8gr"]
-[ext_resource type="Texture2D" uid="uid://brsir84v0lva5" path="res://tutorial/tutorial_screen_2.png" id="2_ea8gr"]
+[ext_resource type="PackedScene" uid="uid://bryvlrbbi4ofw" path="res://tutorial/handbook_background.tscn" id="2_bnd7a"]
 [ext_resource type="Texture2D" uid="uid://dk8agjtswgbfa" path="res://emails/button_texture_base.png" id="3_28iwr"]
 [ext_resource type="Texture2D" uid="uid://b82s2mwggd2xr" path="res://emails/button_texture_pressed.png" id="4_t11oh"]
 [ext_resource type="Texture2D" uid="uid://ui1gg0qryfjf" path="res://emails/button_texture_hover.png" id="5_b2ufu"]
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="6_036i6"]
 [ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="7_xxmnc"]
+[ext_resource type="Theme" uid="uid://d0nulpskemldc" path="res://themes/employee_handbook_theme.tres" id="9_t11oh"]
+[ext_resource type="Texture2D" uid="uid://cbux7ul03sjk" path="res://minigames/tippy_distractor/Tippy.png" id="10_b2ufu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fm6vv"]
+bg_color = Color(0.9607843, 0.69803923, 0.25882354, 1)
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_036i6"]
 
 [node name="TutorialScreenView2" type="Control" unique_id=322187242 node_paths=PackedStringArray("_continue_buttons")]
 layout_mode = 3
@@ -19,21 +28,8 @@ script = ExtResource("1_ea8gr")
 _continue_buttons = [NodePath("NextButton")]
 metadata/_custom_type_script = "uid://8bh0c410cd6d"
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1054087021]
+[node name="HandbookBackground" parent="." unique_id=365059969 instance=ExtResource("2_bnd7a")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -647.5
-offset_top = -486.0
-offset_right = 647.5
-offset_bottom = 486.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_ea8gr")
-stretch_mode = 3
 
 [node name="NextButton" type="TextureButton" parent="." unique_id=1750636259]
 layout_mode = 1
@@ -73,3 +69,70 @@ theme_override_fonts/font = ExtResource("7_xxmnc")
 theme_override_font_sizes/font_size = 50
 text = "Next"
 horizontal_alignment = 1
+
+[node name="HandbookContent" type="Control" parent="." unique_id=618456630]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HandbookContent" unique_id=2050777313]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HandbookContent/MarginContainer" unique_id=2105394246]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HandbookContent/MarginContainer/VBoxContainer" unique_id=829507904]
+layout_mode = 2
+theme_override_constants/margin_left = 135
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 135
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="HandbookContent/MarginContainer/VBoxContainer/MarginContainer" unique_id=537715330]
+layout_mode = 2
+theme = ExtResource("9_t11oh")
+theme_override_font_sizes/font_size = 135
+theme_override_styles/normal = SubResource("StyleBoxFlat_fm6vv")
+text = "Instructions"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HandbookContent/MarginContainer/VBoxContainer" unique_id=1661205832]
+layout_mode = 2
+theme_override_constants/separation = 140
+theme_override_styles/separator = SubResource("StyleBoxEmpty_036i6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HandbookContent/MarginContainer/VBoxContainer" unique_id=1761146795]
+layout_mode = 2
+theme = ExtResource("9_t11oh")
+theme_override_constants/line_separation = -1
+theme_override_font_sizes/normal_font_size = 75
+bbcode_enabled = true
+text = "WASD ---------> Movement
+Mouse ---------> Rotate Camera
+Press E ---------> Interact with Objects
+Hold SHIFT ----> Sprint while Moving"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Tippy" type="TextureRect" parent="HandbookContent" unique_id=85891634]
+layout_mode = 0
+offset_left = 1220.9999
+offset_top = 62.999996
+offset_right = 2071.0
+offset_bottom = 1300.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_b2ufu")
