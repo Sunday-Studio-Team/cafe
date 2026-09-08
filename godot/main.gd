@@ -59,6 +59,7 @@ var machines: Array[Machine]
 
 @onready var tutorial_machine: Machine = first_machine
 
+var start_spawning_trash: bool = false
 
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
@@ -267,7 +268,7 @@ func set_per_day_stuff() -> void:
 		machines.push_front(fourth_machine)
 		# Global.holding_ingredients_rule = true
 	if Global.day >= 4:
-		pass
+		start_spawning_trash = true
 	if Global.day == 5:
 		pass
 
@@ -388,6 +389,8 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 #code for  trash spawn 
 func spawn_trash() -> void:
+	if not start_spawning_trash:
+		return
 # freq of spawn 3/41 rn
 	var spawn=randi_range(0,40)
 	if spawn>=3:
