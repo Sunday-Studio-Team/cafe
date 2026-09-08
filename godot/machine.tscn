@@ -29,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://c8ximk8c23tdx" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Metallic.png" id="13_xkbk5"]
 [ext_resource type="Texture2D" uid="uid://c2ojhi4v5s8fs" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0013.png" id="14_ovoaa"]
 [ext_resource type="Texture2D" uid="uid://o1tr02kj7w6p" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0014.png" id="15_1hlt3"]
-[ext_resource type="Environment" uid="uid://cxysvt0hdbown" path="res://machine_environment.tres" id="15_x45kg"]
 [ext_resource type="Texture2D" uid="uid://b0iigd5niyu75" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0015.png" id="16_uaec5"]
 [ext_resource type="Texture2D" uid="uid://50pgpssvx63p" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0016.png" id="17_gtm4j"]
 [ext_resource type="PackedScene" uid="uid://opsuwlsv3dke" path="res://Assets/Drink Machine/machine back.glb" id="17_jqdip"]
@@ -232,7 +231,7 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "made_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -251,10 +250,10 @@ accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/Margi
 make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/Buttons/RemakeDrinkButton")
 refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/RefillButton")
 ordered_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderedDrinkName")
-made_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/ProgressIndicator/MakingDrinkText")
 ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
-spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/MarginContainer/SpillWarning/Label")
+spill_warning_container = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/SpillWarning")
+spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/SpillWarning/Label")
 customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer")
 customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar")
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
@@ -368,7 +367,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 shape = SubResource("BoxShape3D_0ffxp")
 debug_color = Color(1, 1, 1, 1)
 
-[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "_customer_side_camera")]
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
 transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0.30209354, 0.1217342)
 script = ExtResource("10_0d1aa")
 interactable = NodePath("UseMachineInteractable")
@@ -376,11 +375,14 @@ node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
-_customer_side_camera = NodePath("Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/CamFeed/Camera3D")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
 mesh = SubResource("QuadMesh_0ffxp")
+
+[node name="CustomerCameraRemoteTransform3D" type="RemoteTransform3D" parent="3DGui/Screen" unique_id=1736484949]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.258819, 0, -0.25881904, 0.96592575, 0, 0.7298213, -1.4538481)
+remote_path = NodePath("../SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport/Camera3D")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="3DGui/Screen" unique_id=379095341]
 transform = Transform3D(1.2075837, 0, 0, 0, 1.2075838, 3.2749806e-08, 0, -3.2749806e-08, 1.2075838, 0, 0, 0)
@@ -392,31 +394,57 @@ use_occlusion_culling = true
 size = Vector2i(1200, 1600)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
+offset_right = 0.0
+offset_bottom = 0.0
+size_flags_horizontal = 3
 
-[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
+[node name="CamFeedSubViewportContainer" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" parent_id_path=PackedInt32Array(317935962, 1192831864) index="0" unique_id=2077053007]
+custom_minimum_size = Vector2(360, 270)
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 60.0
+offset_right = -55.0
+offset_bottom = -69.0
+
+[node name="CamFeedSubViewport" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer" index="0" unique_id=1105624155]
 handle_input_locally = false
-use_occlusion_culling = true
 scaling_3d_scale = 0.5
-size = Vector2i(848, 354)
+size = Vector2i(653, 270)
 render_target_update_mode = 4
 
-[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/CamFeed" unique_id=719900526 node_paths=PackedStringArray("_sub_viewport")]
+[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=1366731145 node_paths=PackedStringArray("_sub_viewport")]
 script = ExtResource("18_0ne0o")
 _sub_viewport = NodePath("..")
+metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
-[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/CamFeed" unique_id=195359825]
-transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881904, 0, -0.25881904, 0.9659259, 0, 1.8762311, -0.5289409)
-cull_mask = 3
-environment = ExtResource("15_x45kg")
-fov = 45.0
+[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
+transform = Transform3D(0.90999997, 0, 0, 0, 0.87899244, 0.2355253, 0, -0.23552532, 0.8789924, 0, 1.876231, -0.56426746)
 
-[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/CamFeed/Camera3D" unique_id=1220965674 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
+[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport/Camera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
 _camera_3d = NodePath("..")
 _visible_on_screen_notifier_3d = NodePath("../../../../../../../../../../../VisibleOnScreenNotifier3D")
+metadata/_custom_type_script = "uid://lidk43nk3l7v"
 
-[node name="Label" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/MarginContainer/SpillWarning" parent_id_path=PackedInt32Array(317935962, 337494662) index="0" unique_id=1244531673]
-visible = false
+[node name="CustomerTimer" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" parent_id_path=PackedInt32Array(317935962, 1192831864) index="1" unique_id=985060453]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+offset_transform_enabled = true
+
+[node name="TextureProgressBar" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" index="0" unique_id=731233711]
+custom_maximum_size = Vector2(25, 25)
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+offset_transform_enabled = true
+value = 0.0
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
@@ -442,10 +470,6 @@ shape = SubResource("BoxShape3D_yuuq8")
 
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="3DGui" unique_id=1736484949]
-transform = Transform3D(0.99999964, 0, 0, 0, 0.9659255, 0.25881895, 0, -0.25881895, 0.9659255, 0, 1.7298214, -0.7150276)
-remote_path = NodePath("../Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
 [node name="Model" type="Node3D" parent="." unique_id=238356525]
 

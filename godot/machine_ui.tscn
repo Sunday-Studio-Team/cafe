@@ -131,9 +131,10 @@ custom_maximum_size = Vector2(1200, 1600)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -720.0
+offset_bottom = 520.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
 offset_transform_scale = Vector2(0.7, 0.7)
 theme = SubResource("Theme_yuuq8")
 theme_override_constants/margin_left = 25
@@ -169,75 +170,80 @@ layout_mode = 2
 texture = ExtResource("2_motd3")
 stretch_mode = 2
 
+[node name="CamFeedSubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=2077053007]
+custom_minimum_size = Vector2(653, 270)
+custom_maximum_size = Vector2(653, 270)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -135.0
+offset_right = 345.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
 [node name="CustomerTimer" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=985060453]
 anchors_preset = 0
+offset_left = 99.0
+offset_top = 302.0
+offset_right = 99.0
+offset_bottom = 302.0
 size_flags_horizontal = 2
 size_flags_vertical = 4
-offset_transform_enabled = true
 offset_transform_position = Vector2(12, 215)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" unique_id=731233711]
 texture_filter = 1
-custom_maximum_size = Vector2(25, 25)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
+value = 34.0
 fill_mode = 5
 texture_progress = ExtResource("3_u8yrf")
 
-[node name="TimerIcon" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" unique_id=1182337612]
-visible = false
-layout_mode = 0
-offset_right = 158.0
-offset_bottom = 34.125
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.15, 0.75)
-offset_transform_scale = Vector2(2, 2)
-text = "	"
-horizontal_alignment = 1
-
-[node name="TimeBonusPanel" type="PanelContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" unique_id=882786859]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.25, 2.5)
-
-[node name="TimeBonusText" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TimeBonusPanel" unique_id=119832678]
-layout_mode = 2
-offset_transform_position_ratio = Vector2(-0.25, 2.5)
-text = "+ 0.5⭐️ bonus"
-
-[node name="CamFeed" type="SubViewportContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=2077053007]
-z_index = -1
-custom_minimum_size = Vector2(360, 270)
+[node name="Control" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=1840575213]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_right = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpillWarning" type="PanelContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control" unique_id=1756304273]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.5
+offset_top = -133.5
+offset_right = 122.5
+offset_bottom = 133.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed" unique_id=857449287]
-custom_minimum_size = Vector2(360, 270)
-layout_mode = 2
-
-[node name="SpillWarning" type="PanelContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/MarginContainer" unique_id=337494662]
-z_index = 1
-layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 0
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(1, 0.25)
 theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
 
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeed/MarginContainer/SpillWarning" unique_id=1244531673]
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/SpillWarning" unique_id=2129222277]
 layout_mode = 2
 theme_override_font_sizes/font_size = 96
 text = "⚠️

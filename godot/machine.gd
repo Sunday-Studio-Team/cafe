@@ -30,9 +30,9 @@ const REFILL_MINIGAME := "Refill"
 @export var make_drink_button: TextureButton
 @export var refill_button: TextureButton
 @export var ordered_drink_name_label: Label
-@export var made_drink_name_label: Label
 @export var ingredients_bar: TextureProgressBar
 @export var ing_too_low_label: Label3D
+@export var spill_warning_container: Control
 @export var spill_warning: Label
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
@@ -118,7 +118,6 @@ func _ready() -> void:
 
 	ordered_drink_name_label.hide()
 	order_breakdown.hide()
-	made_drink_name_label.hide()
 	current_ingbar_animation = idle_ing_bar_array
 	# glowing fx on spill warning
 	var t := create_tween().set_loops()
@@ -173,7 +172,7 @@ func _process(delta: float) -> void:
 			#ingredients_bar.modulate = Color.GREEN
 		ing_too_low_label.hide()
 
-	spill_warning.visible = spill_on_floor
+	spill_warning_container.visible = spill_on_floor
 
 	customer_wait_indicator.visible = (
 		customer != null
@@ -342,7 +341,6 @@ func _set_customer(new_customer: Customer) -> void:
 			customer.body.texture = customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
-		made_drink_name_label.hide()
 		order_breakdown.hide()
 		waiting_for_response = false
 		timer.stop()
@@ -528,10 +526,6 @@ func machine_make_drink() -> void:
 	):
 		spill()
 
-	made_drink_name_label.text = (
-			"%s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.final_order_price)]
-	)
 	# NOTE: experiment: commented out for now to simplify ui
 	#final_order_indicator.show()
 
@@ -600,11 +594,6 @@ func display_drink_score() -> void:
 		#_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
 		var star_rating_loss_if_accept: float = 0
 		#_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
-
-	if order.star_rating_gain_for_remake == 0.0:
-		made_drink_name_label.modulate = Color.GREEN
-	else:
-		made_drink_name_label.modulate = Color.RED
 
 
 func fix_machine(hammer: bool = false) -> void:
@@ -893,10 +882,6 @@ func _on_remade_drink() -> void:
 	consume_ingredients()
 
 	order.made_drink = order.ordered_drink
-	made_drink_name_label.text = (
-			"you made:\n %s (%s)"
-			% [order.made_drink.name, Global.float_to_price(order.final_order_price)]
-	)
 	display_drink_score()
 
 	Global.tutorial_drink_remade = true
