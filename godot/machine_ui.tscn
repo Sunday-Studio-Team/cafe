@@ -439,6 +439,7 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="ProgressBar" type="TextureProgressBar" parent="HBoxContainer/IngredientsUI/MarginContainer" unique_id=1064609888]
+visible = false
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -449,6 +450,28 @@ texture_under = ExtResource("13_u8yrf")
 texture_over = ExtResource("14_l6aen")
 texture_progress = ExtResource("14_71all")
 texture_progress_offset = Vector2(0, 1100)
+
+[node name="ProgressUnder" type="TextureRect" parent="HBoxContainer/IngredientsUI/MarginContainer" unique_id=699698]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("13_u8yrf")
+stretch_mode = 2
+
+[node name="ProgressCoffee" type="TextureRect" parent="HBoxContainer/IngredientsUI/MarginContainer/ProgressUnder" unique_id=563737941]
+layout_mode = 0
+offset_top = 1125.0
+offset_right = 138.0
+offset_bottom = 2325.0
+size_flags_horizontal = 4
+texture = ExtResource("14_71all")
+stretch_mode = 2
+
+[node name="ProgressOver" type="TextureRect" parent="HBoxContainer/IngredientsUI/MarginContainer" unique_id=1307975669]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("14_l6aen")
+stretch_mode = 2
 
 [node name="IngredientsMeter" type="VBoxContainer" parent="HBoxContainer/IngredientsUI" unique_id=704912867]
 visible = false

@@ -48,6 +48,8 @@ const REFILL_MINIGAME := "Refill"
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
+@export var ingredient_coffeebar: TextureRect
+
 @export var idle_ing_bar_array:Array[Texture2D]
 @export var active_ing_bar_array:Array[Texture2D]
 @export_category("Audio")
@@ -136,7 +138,7 @@ func update_animation():
 	animation_index += 1
 	if animation_index >= current_ingbar_animation.size():
 		animation_index = 0
-	ingredients_bar.texture_progress = current_ingbar_animation[animation_index]
+	ingredient_coffeebar.texture = current_ingbar_animation[animation_index]
 func _process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 	
@@ -145,7 +147,7 @@ func _process(delta: float) -> void:
 	if animation_delay_timer >= animation_delay:
 		animation_delay_timer = 0
 		update_animation()
-	ingredients_bar.texture_progress_offset.y = 1100 - (1100 * (0.01 * ingredients_bar.value))
+	ingredient_coffeebar.position.y = 1125 - (1125 * (0.01 * ingredients_bar.value))
 	
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.disabled = not waiting_for_response
