@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://d1jvkim0rsjy3"]
+
+[ext_resource type="Texture2D" uid="uid://ba5osab2ijdwo" path="res://sprites/customers/finance bro blue.png" id="1_fmgbn"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_kobul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmgbn"]
+atlas = ExtResource("1_fmgbn")
+region = Rect2(-16.800003, -71.759995, 420, 420)
+
+[resource]
+script = ExtResource("2_kobul")
+customer_name = "Finance Blue"
+sprite = ExtResource("1_fmgbn")
+email_crop_center_ratio = Vector2(0.46, 0.135)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_fmgbn")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"

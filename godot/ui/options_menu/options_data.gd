@@ -1,5 +1,29 @@
-﻿class_name OptionsData
+class_name OptionsData
 extends Resource
+
+const LATEST_OPTIONS_VERSION: int = 2
+## 0: Initial with only Graphics, Crosshair, and CameraMotion.
+## 1: Added keybinds.
+## 2: Added windowing modes.
+@export var options_version: int = 0
+
+const VOLUMES_RATIO_MIN: float = 0.0
+const VOLUMES_RATIO_MAX: float = 1.0
+const VOLUMES_RATIO_STEP: float = 0.01
+
+const VOLUMES_MULTIPLIER: float = 1.0
+
+const OVERALL_VOLUME_DEFAULT: float = 1.0
+@export var overall_volume: float = OVERALL_VOLUME_DEFAULT
+
+const MUSIC_VOLUME_DEFAULT: float = 1.0
+@export var music_volume: float = MUSIC_VOLUME_DEFAULT
+
+const SFX_VOLUME_DEFAULT: float = 1.0
+@export var sfx_volume: float = SFX_VOLUME_DEFAULT
+
+const VOICE_VOLUME_DEFAULT: float = 1.0
+@export var voice_volume: float = VOICE_VOLUME_DEFAULT
 
 enum GraphicsOptionsPresets {
 	HIGH,
@@ -9,6 +33,30 @@ enum GraphicsOptionsPresets {
 }
 
 @export var graphics_preset: GraphicsOptionsPresets = GraphicsOptionsPresets.HIGH
+
+enum WindowModeOption {
+	Windowed,
+	Fullscreen,
+	ExclusiveFullscreen,
+}
+
+@export var window_mode_option: WindowModeOption = WindowModeOption.Fullscreen
+
+enum VsyncOption {
+	On,
+	Off,
+	Adaptive,
+	Mailbox,
+}
+
+@export var vsync_option: VsyncOption = VsyncOption.On
+
+const MOUSE_SENSITIVITY_MIN: float = 0.01
+const MOUSE_SENSITIVITY_MAX: float = 1.0
+const MOUSE_SENSITIVITY_STEP: float = 0.01
+const MOUSE_SENSITIVITY_DEFAULT: float = 0.5
+
+@export var mouse_sensitivity: float = MOUSE_SENSITIVITY_DEFAULT
 
 enum CrosshairOption {
 	On,
@@ -24,5 +72,80 @@ enum CameraMotionOption {
 	
 @export var camera_motion_option: CameraMotionOption = CameraMotionOption.On
 
-func apply_options() -> void:	
+const DEFAULT_MOVE_FORWARD_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_W
+@export var move_forward_action_physical_keycode: Key = DEFAULT_MOVE_FORWARD_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_MOVE_LEFT_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_A
+@export var move_left_action_physical_keycode: Key = DEFAULT_MOVE_LEFT_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_MOVE_BACKWARD_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_S
+@export var move_backward_action_physical_keycode: Key = DEFAULT_MOVE_BACKWARD_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_MOVE_RIGHT_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_D
+@export var move_right_action_physical_keycode: Key = DEFAULT_MOVE_RIGHT_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_SPRINT_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_SHIFT
+@export var sprint_action_physical_keycode: Key = DEFAULT_SPRINT_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_INTERACT_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_E
+@export var interact_action_physical_keycode: Key = DEFAULT_INTERACT_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_DROP_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_F
+@export var drop_action_physical_keycode: Key = DEFAULT_DROP_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_USE_CONTEXTUAL_ACTIVE_ITEM_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_Q
+@export var use_contextual_active_item_action_physical_keycode: Key = DEFAULT_USE_CONTEXTUAL_ACTIVE_ITEM_ACTION_PHYSICAL_KEYCODE
+
+const DEFAULT_PAUSE_EXIT_MENU_ACTION_PHYSICAL_KEYCODE: Key = Key.KEY_ESCAPE
+@export var pause_exit_menu_action_physical_keycode: Key = DEFAULT_PAUSE_EXIT_MENU_ACTION_PHYSICAL_KEYCODE
+
+func _init() -> void:
+	_reset_all_keybinds()
+
+func apply_options() -> void:
 	Events.game_options_changed.emit(self)
+	
+	_set_action_first_key_input_event(&"move_forward", move_forward_action_physical_keycode)
+	_set_action_first_key_input_event(&"move_left", move_left_action_physical_keycode)
+	_set_action_first_key_input_event(&"move_back", move_backward_action_physical_keycode)
+	_set_action_first_key_input_event(&"move_right", move_right_action_physical_keycode)
+	_set_action_first_key_input_event(&"sprint", sprint_action_physical_keycode)
+	_set_action_first_key_input_event(&"interact", interact_action_physical_keycode)
+	_set_action_first_key_input_event(&"drop", drop_action_physical_keycode)
+	_set_action_first_key_input_event(&"use_item", use_contextual_active_item_action_physical_keycode)
+	_set_action_first_key_input_event(&"pause", pause_exit_menu_action_physical_keycode)
+
+func update_version() -> void:
+	if options_version == LATEST_OPTIONS_VERSION:
+		return
+	
+	if options_version == 0 and LATEST_OPTIONS_VERSION >= 1:
+		_reset_all_keybinds()
+		print("Upgraded options version from 0 to 1+")
+	
+	if options_version < 2 and LATEST_OPTIONS_VERSION >= 2:
+		_reset_windowed_mode()
+		print("Upgraded options version from <2 to 2+")		
+
+	options_version = LATEST_OPTIONS_VERSION
+
+func _reset_all_keybinds() -> void:
+	# Get them from Project Settings.
+	interact_action_physical_keycode = _get_action_first_key_input_event(&"interact").physical_keycode
+
+func _reset_windowed_mode() -> void:
+	# Set depending on whether game was launched from editor.
+	if OS.has_feature("editor"):
+		window_mode_option = WindowModeOption.Windowed
+
+func _get_action_first_key_input_event(action_name: StringName) -> InputEventKey:
+	var input_events: Array[InputEvent] = InputMap.action_get_events(action_name)
+	for input_event in input_events:
+		if input_event is InputEventKey:
+			var input_event_key: InputEventKey = input_event as InputEventKey
+			return input_event_key
+	return null
+
+func _set_action_first_key_input_event(action_name: StringName, keycode: Key) -> void:
+	var input_event_key: InputEventKey = _get_action_first_key_input_event(action_name)
+	input_event_key.physical_keycode = keycode

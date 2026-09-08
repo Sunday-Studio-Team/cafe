@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dp7t0dh80ct1r"]
 
 [ext_resource type="Script" uid="uid://cvo47hwaumo88" path="res://customer.gd" id="1_7tiyv"]
+[ext_resource type="Texture2D" uid="uid://bbjb7d0asfulw" path="res://sprites/customers/aiagent.png" id="2_eas7q"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="3_gn8fi"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="4_eas7q"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_0rcyg"]
@@ -9,7 +10,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
 viewport_path = NodePath("WaitingIndicator/SubViewport")
 
-[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "spawn_sound")]
+[node name="Customer" type="Node3D" unique_id=1802589934 node_paths=PackedStringArray("body", "waiting_indicator", "waiting_bar", "timer", "time_bonus_label", "spawn_sound") groups=["customer"]]
 script = ExtResource("1_7tiyv")
 body = NodePath("Sprite3D")
 waiting_indicator = NodePath("WaitingIndicator")
@@ -18,10 +19,12 @@ timer = NodePath("Timer")
 time_bonus_label = NodePath("TimeBonusLabel")
 spawn_sound = NodePath("SpawnSound")
 sprites_folder = "res://sprites/customers"
+typing_minigame_portraits_folder = "res://sprites/customers/typing_minigame_portraits"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
-transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0.925, 0)
+transform = Transform3D(0.18, 0, 0, 0, 0.18, 0, 0, 0, 0.18, 0, 0.925, 0)
 billboard = 2
+texture = ExtResource("2_eas7q")
 
 [node name="WaitingIndicator" type="Sprite3D" parent="." unique_id=756198707]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.09615041, 1.9518676, 0)

@@ -2,220 +2,351 @@
 
 [ext_resource type="Script" uid="uid://cwls6r56arf0n" path="res://minigames/captcha/captcha.gd" id="1_pitvc"]
 [ext_resource type="PackedScene" uid="uid://05434h1dr00p" path="res://minigames/captcha/ingredient_icon_holder.tscn" id="2_c5i2p"]
-[ext_resource type="Theme" uid="uid://b00y5t2hl73tl" path="res://minigames/captcha/captcha_theme.tres" id="3_c5i2p"]
+[ext_resource type="Texture2D" uid="uid://dws24oe26n44v" path="res://sprites/remake_drink_minigame/remake ui background.png" id="2_ndr77"]
+[ext_resource type="Texture2D" uid="uid://3ygto6ct8kj5" path="res://sprites/remake_drink_minigame/sato making drink.png" id="3_fa211"]
+[ext_resource type="Texture2D" uid="uid://cxb2st3c7tysb" path="res://sprites/remake_drink_minigame/punching tippy.png" id="3_rttna"]
+[ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="4_juyqc"]
+[ext_resource type="Texture2D" uid="uid://bbg2j2pkj40cd" path="res://sprites/remake_drink_minigame/pucnhing sato.png" id="4_v4kh0"]
+[ext_resource type="Texture2D" uid="uid://p3077j6lsjsv" path="res://sprites/remake_drink_minigame/receipt.png" id="4_xyrqa"]
+[ext_resource type="Texture2D" uid="uid://b0t704yvcy53j" path="res://sprites/remake_drink_minigame/required and select.png" id="5_ddm81"]
+[ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="5_w8b1k"]
+[ext_resource type="Texture2D" uid="uid://bmfed728nxhf2" path="res://sprites/customers/heartbowgirl.png" id="6_i2vbf"]
+[ext_resource type="Script" uid="uid://d3mwwakq5c4k8" path="res://minigames/captcha/finished_drink.gd" id="6_juyqc"]
+[ext_resource type="Texture2D" uid="uid://c1xqkx7j50ik7" path="res://sprites/remake_drink_minigame/sato fail drink.png" id="6_lv3ps"]
+[ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="6_p8bru"]
+[ext_resource type="Script" uid="uid://bppelnehy244i" path="res://minigames/captcha/customer_container.gd" id="6_wy7ys"]
+[ext_resource type="Texture2D" uid="uid://cyassji1nenhn" path="res://sprites/remake_drink_minigame/remake red.png" id="7_ikoeo"]
+[ext_resource type="AudioStream" uid="uid://b36lt7uasbtpp" path="res://audio/captcha/captcha_correct.wav" id="7_p8bru"]
+[ext_resource type="Texture2D" uid="uid://deax8xynx1r6f" path="res://sprites/remake_drink_minigame/Sato success drink.png" id="7_x0a0u"]
+[ext_resource type="AudioStream" uid="uid://qm462c3iywm1" path="res://audio/captcha/captcha_wrong.wav" id="8_3tmsw"]
+[ext_resource type="Texture2D" uid="uid://ce36fefn26vrb" path="res://sprites/remake_drink_minigame/regular stance fighting.png" id="10_ddm81"]
+[ext_resource type="Texture2D" uid="uid://bglbsgjl1c1uo" path="res://sprites/remake_drink_minigame/completed drink.png" id="11_v4kh0"]
+[ext_resource type="FontFile" uid="uid://ccfl3ya08xdg5" path="res://fonts/Merchant Copy.ttf" id="11_x0a0u"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnsl6"]
-bg_color = Color(0.28627452, 0.5647059, 0.8862745, 1)
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("4_juyqc")
+stream_1/stream = ExtResource("5_w8b1k")
+stream_2/stream = ExtResource("6_p8bru")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5i2p"]
-bg_color = Color(0.28627452, 0.5647059, 0.8862745, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfm61"]
-bg_color = Color(0.21702155, 0.42809728, 0.671875, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uevaj"]
-bg_color = Color(0.3121078, 0.61610895, 0.96875, 1)
-
-[node name="DrinkMaking2" type="SubViewportContainer" unique_id=183216732 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "submit_button", "instructions", "drink_name", "entire_panel", "order_reminder")]
+[node name="DrinkRemakingMinigame" type="Control" unique_id=503615879 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "drink_name")]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pitvc")
-main_ordered = NodePath("SubViewport/IngredientsReminder/MarginContainer/HBoxContainer/Main")
-liquid_ordered = NodePath("SubViewport/IngredientsReminder/MarginContainer/HBoxContainer/Liquid")
-extra_ordered = NodePath("SubViewport/IngredientsReminder/MarginContainer/HBoxContainer/Extra")
-captcha = NodePath("SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha")
-submit_button = NodePath("SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton")
-instructions = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/Instructions")
-drink_name = NodePath("SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer/DrinkName")
-entire_panel = NodePath("SubViewport/Captcha")
-order_reminder = NodePath("SubViewport/IngredientsReminder")
+main_ordered = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Main")
+liquid_ordered = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Liquid")
+extra_ordered = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer/Extra")
+captcha = NodePath("HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha")
+entire_panel = NodePath("HBoxContainer/Captcha")
+order_reminder = NodePath("HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder")
+customer_sprite = NodePath("HBoxContainer/CustomerContainer/Control/CustomerSpriteTextureRect")
+remade_drink_sprite = NodePath("Finished Drink")
+click_sound = NodePath("ClickSound")
+correct_sound = NodePath("CorrectSound")
+wrong_sound = NodePath("WrongSound")
+req_and_sel = NodePath("HBoxContainer/Captcha/RequiredAndSelect")
+captcha_vbox = NodePath("HBoxContainer/Captcha/CaptchaVBox")
+sato_tippy_fight = NodePath("SatoTippyFight")
+complete_sprite = NodePath("HBoxContainer/Captcha/CompleteSprite")
+sato = NodePath("HBoxContainer/Sato")
+sato_tippy_textures = Array[Texture2D]([ExtResource("10_ddm81"), ExtResource("3_rttna"), ExtResource("4_v4kh0")])
+sato_sprites = Array[Texture2D]([ExtResource("3_fa211"), ExtResource("7_x0a0u"), ExtResource("6_lv3ps")])
+drink_name = NodePath("HBoxContainer/Captcha/CaptchaVBox/DrinkName")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=2064808135]
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
+[node name="Background" type="TextureRect" parent="." unique_id=578094195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ndr77")
 
-[node name="Captcha" type="PanelContainer" parent="SubViewport" unique_id=131474628]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=187758045]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sato" type="TextureRect" parent="HBoxContainer" unique_id=747455613]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+texture = ExtResource("3_fa211")
+stretch_mode = 2
+
+[node name="Captcha" type="Control" parent="HBoxContainer" unique_id=258567404]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Receipt" type="TextureRect" parent="HBoxContainer/Captcha" unique_id=1764770429]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 632.0
+offset_bottom = 1080.0
+size_flags_horizontal = 4
+texture = ExtResource("4_xyrqa")
+stretch_mode = 2
+
+[node name="RequiredAndSelect" type="TextureRect" parent="HBoxContainer/Captcha" unique_id=326014967]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -637.0
+offset_top = -540.0
+offset_right = -49.0
+offset_bottom = 540.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_ddm81")
+stretch_mode = 2
+
+[node name="CaptchaVBox" type="VBoxContainer" parent="HBoxContainer/Captcha" unique_id=1311255116]
+layout_mode = 0
+offset_right = 658.0
+offset_bottom = 1080.0
+
+[node name="DrinkName" type="RichTextLabel" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=188088322]
+custom_maximum_size = Vector2(600, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("11_x0a0u")
+bbcode_enabled = true
+text = "[font_size=100][color=black][center]ICED ALMOND[br]CHAI TEA"
+fit_content = true
+scroll_active = false
+
+[node name="IngredientsReminder" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=832893174]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder" unique_id=346830654]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Main" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+button_disabled = true
+
+[node name="Liquid" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+button_disabled = true
+
+[node name="Extra" parent="HBoxContainer/Captcha/CaptchaVBox/IngredientsReminder/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+button_disabled = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=1974039985]
+layout_mode = 2
+theme_override_constants/margin_top = -64
+
+[node name="Separator" type="RichTextLabel" parent="HBoxContainer/Captcha/CaptchaVBox/MarginContainer" unique_id=617130892]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+offset_transform_enabled = true
+theme_override_constants/paragraph_separation = -32
+theme_override_fonts/normal_font = ExtResource("11_x0a0u")
+bbcode_enabled = true
+text = "[font_size=120][color=black][center]------------"
+fit_content = true
+scroll_active = false
+
+[node name="CaptchaImageContainer" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=1591618613]
+layout_mode = 2
+theme_override_constants/margin_bottom = 36
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer" unique_id=777608128]
+layout_mode = 2
+
+[node name="Captcha" type="GridContainer" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer" unique_id=1363679932]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="Button0" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button1" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button2" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button3" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button4" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button5" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button6" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="Button7" parent="HBoxContainer/Captcha/CaptchaVBox/CaptchaImageContainer/CenterContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="BottomButtonContainer" type="MarginContainer" parent="HBoxContainer/Captcha/CaptchaVBox" unique_id=2048074803]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer" unique_id=1235520665]
+layout_mode = 2
+texture_normal = ExtResource("7_ikoeo")
+
+[node name="CompleteSprite" type="TextureRect" parent="HBoxContainer/Captcha" unique_id=460517940]
+visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -375.5
-offset_right = 250.0
-offset_bottom = 375.5
+offset_left = -259.0
+offset_top = -331.0
+offset_right = 259.0
+offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_c5i2p")
+texture = ExtResource("11_v4kh0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Captcha" unique_id=1311255116]
+[node name="CustomerContainer" type="CenterContainer" parent="HBoxContainer" unique_id=1101866638 node_paths=PackedStringArray("finished_drink", "root")]
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 480)
+offset_transform_visual_only = false
+script = ExtResource("6_wy7ys")
+finished_drink = NodePath("../../Finished Drink")
+root = NodePath("../..")
+
+[node name="Control" type="Control" parent="HBoxContainer/CustomerContainer" unique_id=1395701579]
 layout_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=510728197]
-layout_mode = 2
-theme_override_constants/margin_bottom = -15
+[node name="CustomerSpriteTextureRect" type="TextureRect" parent="HBoxContainer/CustomerContainer/Control" unique_id=753214344]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -328.0
+offset_top = -761.0
+offset_right = 235.15332
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_i2vbf")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="TopBluePart" type="PanelContainer" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3" unique_id=1446138134]
-custom_minimum_size = Vector2(0, 125)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wnsl6")
+[node name="SatoTippyFight" type="TextureRect" parent="." unique_id=1716960224]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36432293
+anchor_top = 0.725
+anchor_right = 0.6356771
+anchor_bottom = 0.9583333
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_ddm81")
+metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart" unique_id=719055689]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer" unique_id=1853410154]
-layout_mode = 2
-
-[node name="DrinkName" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=1563091382]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-bbcode_enabled = true
-text = "[color=red]Drink name you are making here"
-fit_content = true
-scroll_active = false
-
-[node name="Intro" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=657684729]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-text = "Select all images with"
-fit_content = true
-scroll_active = false
-
-[node name="Instructions" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=997226404]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-bbcode_enabled = true
-text = "[color=red]Instructions Here"
-fit_content = true
-scroll_active = false
-
-[node name="BottomText" type="RichTextLabel" parent="SubViewport/Captcha/VBoxContainer/MarginContainer3/TopBluePart/MarginContainer/VBoxContainer" unique_id=554797709]
+[node name="Finished Drink" type="TextureRect" parent="." unique_id=1573351362]
 visible = false
-custom_minimum_size = Vector2(0, 26)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 15
-text = "If there are none, press skip"
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.2
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -175.0
+offset_right = 175.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("6_juyqc")
 
-[node name="CaptchaImageContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=1591618613]
-layout_mode = 2
-
-[node name="Captcha" type="GridContainer" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer" unique_id=1363679932]
-layout_mode = 2
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 5
-columns = 3
-
-[node name="Button0" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1646284872 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button1" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1053368017 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button2" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1970163329 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button3" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=832520209 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button4" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=363701789 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button5" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1043766069 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button6" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=1269805197 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button7" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=372973952 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="Button8" parent="SubViewport/Captcha/VBoxContainer/CaptchaImageContainer/Captcha" unique_id=617140734 instance=ExtResource("2_c5i2p")]
-layout_mode = 2
-
-[node name="BottomButtonContainer" type="MarginContainer" parent="SubViewport/Captcha/VBoxContainer" unique_id=2048074803]
-layout_mode = 2
-theme_override_constants/margin_left = 250
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 15
-
-[node name="SubmitButton" type="Button" parent="SubViewport/Captcha/VBoxContainer/BottomButtonContainer" unique_id=1979538868]
-custom_minimum_size = Vector2(0, 70)
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_c5i2p")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_sfm61")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uevaj")
-text = "VERIFY"
-
-[node name="IngredientsReminder" type="PanelContainer" parent="SubViewport" unique_id=2035377822]
-anchors_preset = 3
-anchor_left = 1.0
+[node name="IngredientsReminder" type="PanelContainer" parent="." unique_id=2035377822]
+layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -548.0001
-offset_top = -370.0
-offset_right = 51.999878
-offset_bottom = 130.0
-grow_horizontal = 0
+offset_left = -83.995
+offset_top = -372.65997
+offset_right = 516.005
+offset_bottom = 127.33911
 grow_vertical = 0
-rotation = -0.3944444
+rotation = 0.5166175
 pivot_offset = Vector2(250, 250)
 
-[node name="MarginContainer" type="MarginContainer" parent="SubViewport/IngredientsReminder" unique_id=195611177]
+[node name="MarginContainer" type="MarginContainer" parent="IngredientsReminder" unique_id=195611177]
 layout_mode = 2
 theme_override_constants/margin_top = 40
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/IngredientsReminder/MarginContainer" unique_id=346830654]
+[node name="HBoxContainer" type="HBoxContainer" parent="IngredientsReminder/MarginContainer" unique_id=1223525194]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 36
 alignment = 1
 
-[node name="Main" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=307859356 instance=ExtResource("2_c5i2p")]
-custom_minimum_size = Vector2(146.84, 150)
+[node name="Main" parent="IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1577073845 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
 
-[node name="Liquid" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1821086817 instance=ExtResource("2_c5i2p")]
+[node name="Liquid" parent="IngredientsReminder/MarginContainer/HBoxContainer" unique_id=480793300 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
 
-[node name="Extra" parent="SubViewport/IngredientsReminder/MarginContainer/HBoxContainer" unique_id=11045823 instance=ExtResource("2_c5i2p")]
+[node name="Extra" parent="IngredientsReminder/MarginContainer/HBoxContainer" unique_id=1558496985 instance=ExtResource("2_c5i2p")]
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
 
-[node name="InstructionWithImage" type="HBoxContainer" parent="SubViewport" unique_id=67100854]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -329.0
-offset_top = -382.0
-offset_right = 329.0
-offset_bottom = -232.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -23
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -5.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport/InstructionWithImage" unique_id=1420202143]
-custom_minimum_size = Vector2(503.135, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 38
-text = "Select all boxes containing: "
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=430448945]
+stream = ExtResource("7_p8bru")
+volume_db = -5.0
 
-[node name="IngredientIconHolder2" parent="SubViewport/InstructionWithImage" unique_id=954410995 instance=ExtResource("2_c5i2p")]
-custom_maximum_size = Vector2(100, 100)
-layout_mode = 2
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
+stream = ExtResource("8_3tmsw")
+volume_db = -5.0
 
-[connection signal="pressed" from="SubViewport/Captcha/VBoxContainer/BottomButtonContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer/TextureButton" to="." method="_on_submit_button_pressed"]

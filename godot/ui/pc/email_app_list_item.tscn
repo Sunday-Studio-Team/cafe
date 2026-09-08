@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bo2t06x0a8xhx"]
 
 [ext_resource type="Script" uid="uid://bdeq4svbobhug" path="res://ui/pc/email_app_list_item.gd" id="1_77ee6"]
+[ext_resource type="Script" uid="uid://cp5xre3ygh6sc" path="res://ui/pc/email_viewer.gd" id="2_w8bnt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_77ee6"]
 
@@ -159,6 +160,7 @@ text = "!"
 label_settings = SubResource("LabelSettings_xrivr")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("2_w8bnt")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=511084969]
 layout_mode = 1

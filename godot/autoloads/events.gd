@@ -15,24 +15,34 @@ signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
 signal order_completed(customer: Customer)
 signal order_approved(customer: Customer)
-signal order_approved_no_customer
 signal order_remaking_drink
 signal machine_making_drink
 signal customer_left_machine(customer: Customer)
+signal customer_leave
 signal customer_low_time_warning
 signal under_money_goal
+signal shift_end_sequence_started
 signal time_up
 signal low_time_warning
 signal end_screen_finished
 signal requirements_met
 signal money_updated(new_value: float, old_value: float)
 signal employee_rating_updated(new_value: float, old_value: float)
-signal alert_posted(message: String)
+signal alert_posted(
+	message: String,
+	alert_icon_type: UI.AlertIconType,
+	alert_time_to_live: float,
+	color: Color,
+)
 signal items_updated
 signal finished_important_email(email_data: EmailData)
 signal finished_spam_email(email_data: EmailData)
 signal ingredients_bag_consumed
 signal machine_exit_button_pressed
+signal player_left_office
+signal tippy_boss_kidnapped_player
+signal tippy_boss_released_player
+signal spawn_specific_customer(name: String, help_desk: String)
 # minigames
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled
@@ -53,3 +63,6 @@ signal bag_pickup_animation_grabbed
 signal trash_pickup_animation_grabbed
 signal hammer_animation_hit
 signal tutorial_selected
+# Free Cam
+signal free_cam_toggled
+signal free_cam_set_speed(speed: float)

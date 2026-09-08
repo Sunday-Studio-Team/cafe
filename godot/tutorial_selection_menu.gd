@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _on_skip() -> void:
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
-	SaveDataManager.save_game()
+	SaveDataManager.save_game_to_file()
 
 	get_tree().paused = true
 	Global.in_tutorial_selection = false

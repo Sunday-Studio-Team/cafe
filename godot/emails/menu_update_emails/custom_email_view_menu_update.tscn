@@ -10,28 +10,36 @@
 [ext_resource type="Texture2D" uid="uid://dqmux8w3f7t26" path="res://emails/button_texture_disabled.png" id="7_0361o"]
 
 [node name="MenuUpdateEmail" type="Container" unique_id=1099734027 node_paths=PackedStringArray("drink_1", "drinks_list", "yes_button", "ok_button")]
-custom_minimum_size = Vector2(100, 500)
-custom_maximum_size = Vector2(1000, 500)
-offset_right = 520.0
-offset_bottom = 365.0
+custom_minimum_size = Vector2(916, 450)
+custom_maximum_size = Vector2(916, -1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_8jh7c")
-drink_1 = NodePath("Container/VBoxContainer/NewDrinks/EmailDrinkContainer")
-drinks_list = NodePath("Container/VBoxContainer/NewDrinks")
-yes_button = NodePath("Container/VBoxContainer/HBoxContainer/YesButton")
-ok_button = NodePath("Container/VBoxContainer/HBoxContainer/OkButton")
+drink_1 = NodePath("Container/ScrollContainer/VBoxContainer/NewDrinks/EmailDrinkContainer")
+drinks_list = NodePath("Container/ScrollContainer/VBoxContainer/NewDrinks")
+yes_button = NodePath("Container/ScrollContainer/VBoxContainer/HBoxContainer/YesButton")
+ok_button = NodePath("Container/ScrollContainer/VBoxContainer/HBoxContainer/OkButton")
 
 [node name="Container" type="MarginContainer" parent="." unique_id=1963856371]
+custom_minimum_size = Vector2(916, 0)
+custom_maximum_size = Vector2(916, -1)
 layout_mode = 2
-theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container" unique_id=194085118]
+[node name="ScrollContainer" type="ScrollContainer" parent="Container" unique_id=521541355]
+custom_minimum_size = Vector2(850, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/ScrollContainer" unique_id=194085118]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Container/VBoxContainer" unique_id=1229364220]
+[node name="Label" type="Label" parent="Container/ScrollContainer/VBoxContainer" unique_id=1229364220]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_dufui")
@@ -39,19 +47,21 @@ theme_override_font_sizes/font_size = 50
 text = "Items Added:"
 horizontal_alignment = 1
 
-[node name="NewDrinks" type="GridContainer" parent="Container/VBoxContainer" unique_id=1811236088]
+[node name="NewDrinks" type="GridContainer" parent="Container/ScrollContainer/VBoxContainer" unique_id=1811236088]
 layout_mode = 2
 size_flags_horizontal = 4
-columns = 8
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 3
 
-[node name="EmailDrinkContainer" parent="Container/VBoxContainer/NewDrinks" unique_id=2043435788 instance=ExtResource("3_maimp")]
+[node name="EmailDrinkContainer" parent="Container/ScrollContainer/VBoxContainer/NewDrinks" unique_id=2043435788 instance=ExtResource("3_maimp")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/VBoxContainer" unique_id=955129832]
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/ScrollContainer/VBoxContainer" unique_id=955129832]
 custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 
-[node name="YesButton" type="TextureButton" parent="Container/VBoxContainer/HBoxContainer" unique_id=284654496]
+[node name="YesButton" type="TextureButton" parent="Container/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=284654496]
 custom_minimum_size = Vector2(125, 0)
 custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
@@ -63,7 +73,7 @@ texture_disabled = ExtResource("7_0361o")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="YesLabel" type="Label" parent="Container/VBoxContainer/HBoxContainer/YesButton" unique_id=1278401392]
+[node name="YesLabel" type="Label" parent="Container/ScrollContainer/VBoxContainer/HBoxContainer/YesButton" unique_id=1278401392]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,7 +93,7 @@ text = "Yes"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="OkButton" type="TextureButton" parent="Container/VBoxContainer/HBoxContainer" unique_id=490732829]
+[node name="OkButton" type="TextureButton" parent="Container/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=490732829]
 custom_minimum_size = Vector2(125, 0)
 custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
@@ -95,7 +105,7 @@ texture_disabled = ExtResource("7_0361o")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="OkLabel" type="Label" parent="Container/VBoxContainer/HBoxContainer/OkButton" unique_id=2085454235]
+[node name="OkLabel" type="Label" parent="Container/ScrollContainer/VBoxContainer/HBoxContainer/OkButton" unique_id=2085454235]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

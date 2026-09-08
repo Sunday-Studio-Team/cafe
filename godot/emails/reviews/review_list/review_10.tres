@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Review" format=3 uid="uid://ct3joof1y8hmq"]
+
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_2ucg0"]
+[ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="1_teul2"]
+[ext_resource type="Resource" uid="uid://dy1rw4ifyrfno" path="res://resources/customers/fat_cs_bro.tres" id="2_ehaer"]
+[ext_resource type="Resource" uid="uid://3uqeifcm0n08" path="res://resources/customers/finance_green.tres" id="3_ehaer"]
+
+[resource]
+script = ExtResource("1_teul2")
+username = "englishbrekkie"
+rating = 5.0
+review_content = "EXCELLENT PROOF THAT AUTOMATION WORKS.
+
+LABOUR COSTS ARE DOWN.
+
+CUSTOMER TURNOVER IS HIGHER.
+
+OPERATING MARGINS LOOK FANTASTIC!
+"
+customer_sprite_data_options = Array[ExtResource("1_2ucg0")]([ExtResource("2_ehaer"), ExtResource("3_ehaer")])
+metadata/_custom_type_script = "uid://djf3q4lwggw0g"

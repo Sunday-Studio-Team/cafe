@@ -1,10 +1,27 @@
 class_name OptionsMenu
 extends Node
 
-
+@export var _tab_container: TabContainer
+# General
+@export var _overall_volume_slider_view: OptionsMenuSliderView
+@export var _music_volume_slider_view: OptionsMenuSliderView
+@export var _voice_volume_slider_view: OptionsMenuSliderView
 @export var _graphics_preset_option_view: OptionsMenuOptionView
+@export var _window_mode_option_view: OptionsMenuOptionView
+@export var _vsync_mode_option_view: OptionsMenuOptionView
+@export var _mouse_sensitivity_slider_view: OptionsMenuSliderView
 @export var _crosshair_option_view: OptionsMenuOptionView
 @export var _camera_motion_option_view: OptionsMenuOptionView
+# Keybinds
+@export var _move_forward_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _move_left_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _move_backward_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _move_right_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _sprint_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _interact_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _drop_item_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _use_contextual_active_item_keybind_option_view: OptionsMenuKeybindOptionView
+@export var _pause_exit_menu_keybind_option_view: OptionsMenuKeybindOptionView
 @export var _save_settings_button: Button
 
 const _graphics_option_presets: Dictionary[String, int] = {
@@ -12,6 +29,19 @@ const _graphics_option_presets: Dictionary[String, int] = {
 	"High": OptionsData.GraphicsOptionsPresets.MEDIUM,
 	"Low": OptionsData.GraphicsOptionsPresets.LOW,
 	"Minimum": OptionsData.GraphicsOptionsPresets.MINIMUM,
+}
+
+const _window_mode_options: Dictionary[String, int] = {
+	"Windowed": OptionsData.WindowModeOption.Windowed,
+	"Borderless Windowed (Default)": OptionsData.WindowModeOption.Fullscreen,
+	"Exclusive Fullscreen": OptionsData.WindowModeOption.ExclusiveFullscreen,
+}
+
+const _vsync_options: Dictionary[String, int] = {
+	"Capped (V-Sync On) (Default)": OptionsData.VsyncOption.On,
+	"Unlimited (V-Sync Off)": OptionsData.VsyncOption.Off,
+	"Advanced - Adaptive": OptionsData.VsyncOption.Adaptive,
+	"Advanced - Mailbox": OptionsData.VsyncOption.Mailbox,
 }
 
 const _crosshair_options: Dictionary[String, int] = {
@@ -26,28 +56,77 @@ const _camera_motion_options: Dictionary[String, int] = {
 
 var _options_data: OptionsData
 
+const _deferred_options_apply_timer_wait_time: float = 3.0
+var _stored_deferred_options_apply_timer: Timer
+var _deferred_options_apply_timer: Timer
+
 func _init() -> void:
 	SaveDataManager.load_options_data_from_file()
 	_options_data = SaveDataManager.get_options_data()
 
 func _ready() -> void:
 	Global.in_options_menu = true
-
+	_tab_container.current_tab = 0
 	_setup_option_views()
 	_save_settings_button.pressed.connect(_on_save_settings_button_pressed)
-
+	
+	_stored_deferred_options_apply_timer = Timer.new()
+	add_child(_stored_deferred_options_apply_timer)
+	_stored_deferred_options_apply_timer.autostart = false
+	_stored_deferred_options_apply_timer.one_shot = true
+	_stored_deferred_options_apply_timer.wait_time = _deferred_options_apply_timer_wait_time
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_save_and_close_menu()
 		get_viewport().set_input_as_handled()
 
+func _process(delta: float) -> void:
+	if _deferred_options_apply_timer != null:
+		if _deferred_options_apply_timer.time_left <= 0.0:
+			print("Applying options deferred.")
+			_options_data.apply_options()
+			_deferred_options_apply_timer = null
+
 func _setup_option_views() -> void:
+	_overall_volume_slider_view.set_label("Overall Volume")
+	_overall_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_overall_volume_slider_view.set_slider_default_value(_options_data.OVERALL_VOLUME_DEFAULT)
+	_overall_volume_slider_view.set_slider_value(_options_data.overall_volume)
+	_overall_volume_slider_view.changed_value.connect(_on_overall_volume_slider_view_changed_value)
+	
+	_music_volume_slider_view.set_label("Music Volume")
+	_music_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_music_volume_slider_view.set_slider_default_value(_options_data.MUSIC_VOLUME_DEFAULT)
+	_music_volume_slider_view.set_slider_value(_options_data.music_volume)
+	_music_volume_slider_view.changed_value.connect(_on_music_volume_slider_view_changed_value)
+
+	_voice_volume_slider_view.set_label("Voice Volume")
+	_voice_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_voice_volume_slider_view.set_slider_default_value(_options_data.VOICE_VOLUME_DEFAULT)
+	_voice_volume_slider_view.set_slider_value(_options_data.voice_volume)
+	_voice_volume_slider_view.changed_value.connect(_on_voice_volume_slider_view_changed_value)
 	
 	_graphics_preset_option_view.set_label("Graphics Preset")
 	_graphics_preset_option_view.set_dropdown_options(_graphics_option_presets)
 	_graphics_preset_option_view.set_selected_dropdown_option((_options_data.graphics_preset as int))
 	_graphics_preset_option_view.changed_option.connect(_on_graphics_preset_option_view_changed_option)
+	
+	_window_mode_option_view.set_label("Window Mode")
+	_window_mode_option_view.set_dropdown_options(_window_mode_options)
+	_window_mode_option_view.set_selected_dropdown_option((_options_data.window_mode_option as int))
+	_window_mode_option_view.changed_option.connect(_on_window_mode_option_view_changed_option)
+
+	_vsync_mode_option_view.set_label("Frame Rate")
+	_vsync_mode_option_view.set_dropdown_options(_vsync_options)
+	_vsync_mode_option_view.set_selected_dropdown_option((_options_data.vsync_option as int))
+	_vsync_mode_option_view.changed_option.connect(_on_vsync_mode_option_view_changed_option)
+
+	_mouse_sensitivity_slider_view.set_label("Mouse Look Sensitivity")
+	_mouse_sensitivity_slider_view.set_slider_min_max_values(_options_data.MOUSE_SENSITIVITY_MIN, _options_data.MOUSE_SENSITIVITY_MAX, _options_data.MOUSE_SENSITIVITY_STEP)
+	_mouse_sensitivity_slider_view.set_slider_default_value(_options_data.MOUSE_SENSITIVITY_DEFAULT)
+	_mouse_sensitivity_slider_view.set_slider_value(_options_data.mouse_sensitivity)
+	_mouse_sensitivity_slider_view.changed_value.connect(_on_mouse_sensitivity_slider_view_changed_value)
 
 	_crosshair_option_view.set_label("Crosshair")
 	_crosshair_option_view.set_dropdown_options(_crosshair_options)
@@ -58,10 +137,87 @@ func _setup_option_views() -> void:
 	_camera_motion_option_view.set_dropdown_options(_camera_motion_options)
 	_camera_motion_option_view.set_selected_dropdown_option((_options_data.camera_motion_option as int))
 	_camera_motion_option_view.changed_option.connect(_on_camera_motion_option_view_changed_option)
+	
+	_move_forward_keybind_option_view.set_action("Move Forward", &"move_forward")
+	_move_forward_keybind_option_view.set_default_keybind(_options_data.DEFAULT_MOVE_FORWARD_ACTION_PHYSICAL_KEYCODE)
+	_move_forward_keybind_option_view.set_current_keybind(_options_data.move_forward_action_physical_keycode)
+	_move_forward_keybind_option_view.rebound_action.connect(_on_move_forward_keybind_option_view_rebound_action)
+	
+	_move_left_keybind_option_view.set_action("Move Left", &"move_left")
+	_move_left_keybind_option_view.set_default_keybind(_options_data.DEFAULT_MOVE_LEFT_ACTION_PHYSICAL_KEYCODE)
+	_move_left_keybind_option_view.set_current_keybind(_options_data.move_left_action_physical_keycode)
+	_move_left_keybind_option_view.rebound_action.connect(_on_move_left_keybind_option_view_rebound_action)
+	
+	_move_backward_keybind_option_view.set_action("Move Backward", &"move_backward")
+	_move_backward_keybind_option_view.set_default_keybind(_options_data.DEFAULT_MOVE_BACKWARD_ACTION_PHYSICAL_KEYCODE)
+	_move_backward_keybind_option_view.set_current_keybind(_options_data.move_backward_action_physical_keycode)
+	_move_backward_keybind_option_view.rebound_action.connect(_on_move_backward_keybind_option_view_rebound_action)
+	
+	_move_right_keybind_option_view.set_action("Move Right", &"move_right")
+	_move_right_keybind_option_view.set_default_keybind(_options_data.DEFAULT_MOVE_RIGHT_ACTION_PHYSICAL_KEYCODE)
+	_move_right_keybind_option_view.set_current_keybind(_options_data.move_right_action_physical_keycode)
+	_move_right_keybind_option_view.rebound_action.connect(_on_move_right_keybind_option_view_rebound_action)
+	
+	_sprint_keybind_option_view.set_action("Sprint", &"sprint")
+	_sprint_keybind_option_view.set_default_keybind(_options_data.DEFAULT_SPRINT_ACTION_PHYSICAL_KEYCODE)
+	_sprint_keybind_option_view.set_current_keybind(_options_data.sprint_action_physical_keycode)
+	_sprint_keybind_option_view.rebound_action.connect(_on_sprint_keybind_option_view_rebound_action)
+	
+	_interact_keybind_option_view.set_action("Interact", &"interact")
+	_interact_keybind_option_view.set_default_keybind(_options_data.DEFAULT_INTERACT_ACTION_PHYSICAL_KEYCODE)
+	_interact_keybind_option_view.set_current_keybind(_options_data.interact_action_physical_keycode)
+	_interact_keybind_option_view.rebound_action.connect(_on_interact_keybind_option_view_rebound_action)
+	
+	_drop_item_keybind_option_view.set_action("Drop Item", &"drop")
+	_drop_item_keybind_option_view.set_default_keybind(_options_data.DEFAULT_DROP_ACTION_PHYSICAL_KEYCODE)
+	_drop_item_keybind_option_view.set_current_keybind(_options_data.drop_action_physical_keycode)
+	_drop_item_keybind_option_view.rebound_action.connect(_on_drop_keybind_option_view_rebound_action)
+	
+	_use_contextual_active_item_keybind_option_view.set_action("Use Contextual Active Item", &"use_item")
+	_use_contextual_active_item_keybind_option_view.set_default_keybind(_options_data.DEFAULT_USE_CONTEXTUAL_ACTIVE_ITEM_ACTION_PHYSICAL_KEYCODE)
+	_use_contextual_active_item_keybind_option_view.set_current_keybind(_options_data.use_contextual_active_item_action_physical_keycode)
+	_use_contextual_active_item_keybind_option_view.rebound_action.connect(_on_use_contextual_active_item_keybind_option_view_rebound_action)
+	
+	_pause_exit_menu_keybind_option_view.set_action("Exit Menu", &"pause")
+	_pause_exit_menu_keybind_option_view.set_default_keybind(_options_data.DEFAULT_PAUSE_EXIT_MENU_ACTION_PHYSICAL_KEYCODE)
+	_pause_exit_menu_keybind_option_view.set_current_keybind(_options_data.pause_exit_menu_action_physical_keycode)
+	_pause_exit_menu_keybind_option_view.rebound_action.connect(_on_pause_exit_menu_keybind_option_view_rebound_action)
+
+## For slider options, we don't want to apply them after every single change!
+## We'll wait a bit and apply them after a delay.
+func _apply_options_deferred() -> void:
+	if _deferred_options_apply_timer != null:
+		return
+	_deferred_options_apply_timer = _stored_deferred_options_apply_timer
+	_deferred_options_apply_timer.start()
+
+func _on_overall_volume_slider_view_changed_value(value: float) -> void:
+	_options_data.overall_volume = value
+	_apply_options_deferred()
+
+func _on_music_volume_slider_view_changed_value(value: float) -> void:
+	_options_data.music_volume = value
+	_apply_options_deferred()
+
+func _on_voice_volume_slider_view_changed_value(value: float) -> void:
+	_options_data.voice_volume = value
+	_apply_options_deferred()
 
 func _on_graphics_preset_option_view_changed_option(index: int) -> void:
 	_options_data.graphics_preset = (index as OptionsData.GraphicsOptionsPresets)
 	_options_data.apply_options()
+
+func _on_window_mode_option_view_changed_option(index: int) -> void:
+	_options_data.window_mode_option = (index as OptionsData.WindowModeOption)
+	_options_data.apply_options()
+
+func _on_vsync_mode_option_view_changed_option(index: int) -> void:
+	_options_data.vsync_option = (index as OptionsData.VsyncOption)
+	_options_data.apply_options()
+
+func _on_mouse_sensitivity_slider_view_changed_value(value: float) -> void:
+	_options_data.mouse_sensitivity = value
+	_apply_options_deferred()
 
 func _on_crosshair_option_view_changed_option(index: int) -> void:
 	_options_data.crosshair_option = (index as OptionsData.CrosshairOption)
@@ -74,7 +230,47 @@ func _on_camera_motion_option_view_changed_option(index: int) -> void:
 func _on_save_settings_button_pressed() -> void:
 	_save_and_close_menu()
 
+func _on_move_forward_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.move_forward_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_move_left_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.move_left_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_move_backward_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.move_backward_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_move_right_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.move_right_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_sprint_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.sprint_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_interact_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.interact_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_drop_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.drop_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_use_contextual_active_item_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.use_contextual_active_item_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
+func _on_pause_exit_menu_keybind_option_view_rebound_action(physical_keycode: Key) -> void:
+	_options_data.pause_exit_menu_action_physical_keycode = physical_keycode
+	_options_data.apply_options()
+
 func _save_and_close_menu() -> void:
+	if _deferred_options_apply_timer != null:
+		print("Forcing applying deferred options.")
+		_options_data.apply_options()
+	
 	SaveDataManager.save_options_data_to_file()
 	Global.in_options_menu = false
 	queue_free()

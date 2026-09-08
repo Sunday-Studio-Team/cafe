@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
-const STRIDE_LENGTH := 0.75
+const STRIDE_LENGTH := 1.25
 
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
@@ -9,12 +9,13 @@ const STRIDE_LENGTH := 0.75
 @export var ingredients_bag: MeshInstance3D
 @export var customer_trash: MeshInstance3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
+@export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var customer_trash_scene: PackedScene
 @export var sprint_lockout_timer: Timer
-
-@export var pully_ball_scene: PackedScene
+@export var footstep_sfx_lockout_timer: Timer
+@export var free_cam_visualizer: Node3D
 
 var player_status_effects: PlayerStatusEffects
 
@@ -34,7 +35,7 @@ var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 var holding_interactable: bool = false
 
-#when pully ball spawns, starts counting up. keeping track of strength.
+# when pully ball spawns, starts counting up. keeping track of strength.
 var pully_ball_countup: float = 0.0
 var pully_ball_instance: Node3D
 
@@ -49,24 +50,26 @@ func _ready() -> void:
 	Global.player = self
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
-	
+
+	free_cam_visualizer.visible = false
+
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
 
+	ingredients_bag.visibility_changed.connect(
+		func():
+			if ingredients_bag.visible:
+				ingredients_bag.scale = Vector3.ZERO
+	)
 	Events.bag_pickup_animation_grabbed.connect(
 		func():
 			bag_pickup_sound.play()
-
-			# scuffed 'animation' of bag appearing when we grab it
-			ingredients_bag.transparency = 1
-			ingredients_bag.scale = Vector3.ZERO
 
 			await Events.viewmodel_animation_finished
 
 			var t := create_tween().set_parallel()
 			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
-			t.tween_property(ingredients_bag, "transparency", 0, 0.25),
 	)
 	
 	Events.trash_pickup_animation_grabbed.connect(
@@ -93,23 +96,24 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
-	
-	#handle_mouselook()
+
 	handle_hovered_interactable()
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
 	handle_gravity(delta)
-	#handle_footstep_sounds()
-	#tilt_camera()
+	handle_footstep_sounds()
+	
 	handle_ingredients_bag()
 	handle_customer_trash()
 	handle_active_items()
 	handle_floating_cursor()
 	move_and_slide()
 
+
 func is_sprinting() -> bool:
 	return _is_sprinting
+
 
 #func _unhandled_input(event: InputEvent) -> void:
 #	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -148,14 +152,14 @@ func handle_active_items() -> void:
 #func handle_mouselook() -> void:
 #	camera.rotation_degrees.x -= mouse_delta.y
 #	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-#	
+#
 #	rotation_degrees.y -= mouse_delta.x
-#	
+#
 #	mouse_delta = Vector2.ZERO
 
 
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled or holding_interactable or Global.in_ui):
+	if (not movement_enabled or holding_interactable or Global.in_ui or Global.free_camera_enabled):
 		velocity = Vector3.ZERO
 		return
 
@@ -197,11 +201,12 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
+		#print(hovered_interactable)
 		if camera == null:
 			return
 
 		if (
-			not hovered_interactable.visible 
+			not hovered_interactable.visible
 			or not hovered_interactable.is_inside_tree()
 			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
@@ -240,7 +245,7 @@ func handle_sprint(delta: float) -> void:
 		if item.item_id == "roller_skates":
 			has_roller_skates = true
 			break
-	
+
 	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		_is_sprinting = true
 		if get_last_motion().length() > 0:
@@ -265,27 +270,21 @@ func handle_sprint(delta: float) -> void:
 		sprint_lockout_timer.start()
 
 
-func handle_right_click(_delta: float)-> void:
-	#handles pully-ball 
-	
-	#TODO check if player has item. return if they don't
-	
-	if (Input.is_action_pressed("right_click") ):
-		pass
-	
-	pass
-	
-
-
-# (unfinished) plays footstep sounds with timing adjusted to speed
 func handle_footstep_sounds() -> void:
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
+		# here we play a sound just as we start walking
+		if velocity.length() > 0.2 and footstep_sfx_lockout_timer.is_stopped():
+			footstep_sound.play()
+			footstep_sfx_lockout_timer.start()
 	else:
 		dist_travelled_since_last_step += global_position.distance_to(pos_last_physics_frame)
 
+	# and here we play one if we've gone a set distance since we started walking
 	if dist_travelled_since_last_step >= STRIDE_LENGTH:
-		# TODO: play sound
+		if footstep_sfx_lockout_timer.is_stopped():
+			footstep_sound.play()
+			footstep_sfx_lockout_timer.start()
 		dist_travelled_since_last_step = 0
 
 	pos_last_physics_frame = global_position
@@ -306,7 +305,8 @@ func handle_ingredients_bag() -> void:
 		bag_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		bag_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
-	ingredients_bag.visible = Global.holding_ingredients and not Global.in_ui
+	ingredients_bag.visible = Global.holding_ingredients
+
 
 
 func handle_customer_trash() -> void:

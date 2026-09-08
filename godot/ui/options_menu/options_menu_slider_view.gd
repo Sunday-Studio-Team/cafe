@@ -1,0 +1,44 @@
+﻿class_name OptionsMenuSliderView
+extends Control
+
+signal changed_value(value: float)
+
+@export var _option_name_label: RichTextLabel
+@export var _reset_button: BaseButton
+@export var _slider: Slider
+
+var _default_value: float
+
+func _ready() -> void:
+	_slider.value_changed.connect(_on_slider_value_changed)
+	_reset_button.pressed.connect(_on_reset_button_pressed)
+
+func set_label(label_text: String) -> void:
+	_option_name_label.text = label_text
+
+func set_slider_min_max_values(min_value: float, max_value: float, step: float) -> void:
+	_slider.min_value = min_value
+	_slider.max_value = max_value
+	_slider.step = step
+
+func set_slider_default_value(default_value: float) -> void:
+	_default_value = default_value
+	_update_reset_button()
+
+func set_slider_value(value: float) -> void:
+	_slider.value = value
+	_update_reset_button()
+
+func _on_slider_value_changed(value: float) -> void:
+	changed_value.emit(value)
+	_update_reset_button()
+
+func _on_reset_button_pressed() -> void:
+	set_slider_value(_default_value)
+	changed_value.emit(_default_value)
+
+func _update_reset_button() -> void:
+	if is_equal_approx(_default_value, _slider.value):
+		_reset_button.visible = false
+	else:
+		_reset_button.visible = true

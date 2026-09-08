@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://cq8rx2io4tcvp"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_27qkh"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_7nx0i"]
+
+[resource]
+script = ExtResource("2_7nx0i")
+voice_line_id = "tutorial_help_desk_2"
+audio_stream = ExtResource("1_27qkh")
+subtitle_en = "It looks like a customer has arrived at our customer support desk."
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

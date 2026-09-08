@@ -1,6 +1,22 @@
 extends CanvasLayer
+class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
+enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
+const ALERT_ICON_TYPE_IMAGE_MAP = {
+	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
+	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
+	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
+	AlertIconType.RATING: "res://Assets/UI/alert_icons/rating_icon.png",
+	AlertIconType.MONEY: "res://Assets/UI/alert_icons/dollar_icon.png",
+}
+const ALERT_DEFUALT_DURATION: float = 4.0
+const ALERT_COLOR_NEUTRAL: Color = Color.WHITE
+const ALERT_COLOR_RED: Color = Color.RED
+const ALERT_COLOR_GREEN: Color = Color.GREEN
+const ALERT_COLOR_MONEY: Color = Color.GOLD
+
+const ALERT_QUEUE_SIZE = 5
 
 @export var profit_label: Label
 @export var profit_progress: ProgressBar
@@ -13,7 +29,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var time_left_ui: Control
 @export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
-@export var objective: RichTextLabel
+@export var shift_starting_ending_label: RichTextLabel
 @export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -23,7 +39,6 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var _eye_logo_red_texture: Texture2D
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
-@export var alert_label: Label
 @export var shelf_item_ui: PanelContainer
 @export var shelf_item_name: RichTextLabel
 @export var shelf_item_description: RichTextLabel
@@ -36,9 +51,7 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_label: Label
 @export var customer_flow_rate_label: Label
-@export var alert_sprite: AnimatedSprite2D
 @export var drop_button: Button
-@export var sold_item_sound: AudioStreamPlayer
 @export var exit_machine_button: Button
 @export var item_hover_tooltip: Control
 @export var item_hover_tooltip_name: RichTextLabel
@@ -62,8 +75,9 @@ enum ScoreType { MONEY, CUSTOMER }
 @export var scrubber: Item
 @export var whipped_cream: Item
 
+var alert_queue: Array[HBoxContainer]
+var alert_load = preload("res://ui/alert.tscn")
 var score_update_tween: Tween
-var alert_tween: Tween
 var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
@@ -84,12 +98,26 @@ func _ready() -> void:
 	)
 	Events.shift_started.connect(
 		func():
-			objective.text = "[b]SHIFT STARTING"
+			shift_starting_ending_label.show()
 			await get_tree().create_timer(5, false).timeout
-			objective.hide()
+			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
-	Events.alert_posted.connect(func(message): _on_alert_posted(message))
+
+	Events.alert_posted.connect(
+		func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE): _on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
+	)
+	Events.shift_end_sequence_started.connect(
+		func():
+			low_time_sound.play()
+			shift_starting_ending_label.text = (
+				"\n\n[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
+			)
+			shift_starting_ending_label.modulate = Color.WHITE
+			await get_tree().create_timer(6, false).timeout
+			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
+	)
 	Events.time_up.connect(func(): hide())
+	# TODO: figure out if this still does anything and/or should be nuked
 	Events.requirements_met.connect(func(): end_shift_guide.show())
 
 	exit_machine_button.pressed.connect(
@@ -98,7 +126,6 @@ func _ready() -> void:
 	)
 
 	score_update_label.modulate = Color.TRANSPARENT
-	alert_ui.modulate.a = 0
 
 	stamina_bar.max_value = Stats.current.max_stamina
 
@@ -114,53 +141,18 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	if Global.day == 0:
-		objective.text = ""
 		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 1:
-		objective.text = (
-				"You are the new manager of a fully automated cafe!
-This is your first trial shift - make it through the week to keep your new position!"
-		)
 		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 2:
-		objective.text = (
-				"your boss has installed another machine! it's located around the corner on the left.
-(your daily profit goal has been adjusted accordingly.)"
-		)
-	if Global.day >= 3:
-		objective.text = (
-				"your boss has instated some new store [i]rules[/i].
-they installed some security cameras to make sure you follow them!"
-		)
 		rules_controls.text += (
 				"\n[b][i]rules [/i][/b]
 			- no running
-			- no handmade drinks"
+			- no remaking drinks"
 		)
 		cctv_indicator.show()
-	if Global.day >= 4:
-		objective.text = (
-				"your boss says you're using up too many ingredients.
-new rule: don't take any more ingredients out of the store room."
-		)
-		rules_controls.text += "\n- no taking ingredients from store room"
-	if Global.day == 5:
-		objective.text = (
-				"your boss has installed another machine."
-		)
-
-	if Global.day > 0:
-		@warning_ignore("integer_division")
-		objective.text += (
-				"\n\n[b]SHIFT OBJECTIVE[/b]" + \
-				"\nmake %s!"
-				% Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
-		)
-
-	if Global.day == Global.final_day:
-		objective.text += "\n[color=orange](this will be your final shift!)"
 
 	# we make these things for the employee rating here instead of in editor
 	# cos theyre dynamically added based on score
@@ -199,10 +191,6 @@ new rule: don't take any more ingredients out of the store room."
 	hammer_t.tween_property(item_indicator, "modulate", Color.GOLD, 0.5)
 	hammer_t.tween_property(item_indicator, "modulate", Color.ORANGE_RED, 0.5)
 
-	var shelf_sell_t := create_tween().set_loops()
-	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.GOLD, 2)
-	shelf_sell_t.tween_property(shelf_item_sell, "modulate", Color.WHITE, 2)
-
 
 func _process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
@@ -227,7 +215,10 @@ func _process(_delta: float) -> void:
 	update_interactable_ui()
 	update_time_indicator()
 	update_cctv_indicator()
-	handle_time_left_warning()
+	# since we have a lot of time after the shift 'ends', i think we can basically
+	# replace this with the ui that tells the player the shift is ending
+	# (for now anyway)
+	#handle_time_left_warning()
 	handle_shelf_item_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
@@ -268,7 +259,7 @@ func handle_stamina_bar() -> void:
 func handle_item_hover_tooltip() -> void:
 	item_hover_tooltip.position = get_viewport().get_mouse_position()
 
-	var hovered_icon := Global.hovered_item_icon
+	var hovered_icon: TabletItemIcon = Global.hovered_item_icon
 
 	if hovered_icon != null:
 		var item: Item = hovered_icon.item
@@ -350,21 +341,6 @@ func handle_shelf_item_ui() -> void:
 	shelf_item_name.text = "[b]%s Lv%s" % [shelf_item.item.name, shelf_item.item.item_level]
 	shelf_item_description.text = shelf_item.item.description_at_levels[shelf_item.item.item_level]
 
-	var sell_value: float = shelf_item.item.sell_value_at_levels[shelf_item.item.item_level]
-	shelf_item_sell.text = "sell (%s)" % Global.float_to_price(sell_value)
-
-	if Input.is_action_just_pressed("interact") and not shelf_item.clicked_sell:
-		shelf_item.clicked_sell = true
-		shelf_item_sold_indicator.text = "SOLD (%s)" % Global.float_to_price(sell_value)
-		shelf_item_sold_indicator.show()
-		sold_item_sound.play()
-		await get_tree().create_timer(0.75, false).timeout
-		shelf_item_sold_indicator.hide()
-		Global.player_tips_bank += sell_value
-		Global.owned_items.erase(shelf_item.item)
-		shelf_item.item.unapply_stats()
-		Events.items_updated.emit()
-
 
 func handle_time_left_warning() -> void:
 	if (
@@ -434,29 +410,48 @@ func update_interactable_ui() -> void:
 		# TODO: replace some of these unsafe refs with the item names with refs
 		# to the actual items as export vars
 
+		var equipped_item: Item = Global.equipped_item
+
 		if (
 				hovered_interactable.name == "FixMachineButton"
-				and Global.equipped_item != null
-				and Global.equipped_item == hammer
+				and equipped_item != null
+				and equipped_item.item_id == "hammer"
+				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] HAMMER 💥"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] HAMMER 💥" % use_item_keybind
+
+		elif (
+				hovered_interactable.display_name == "Use machine"
+				# xtremely dodgy ref to check the machine has a customer
+				and hovered_interactable.get_parent().machine.customer
+				and equipped_item != null
+				and equipped_item.item_id == "airhorn"
+				and equipped_item.can_be_used
+		):
+			item_indicator.show()
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] AIRHORN" % use_item_keybind
 
 		elif (
 				hovered_interactable.display_name.contains("camera")
-				and Global.equipped_item != null
-				and Global.equipped_item == whipped_cream
+				and equipped_item != null
+				and equipped_item.item_id == "whipped_cream"
+				and equipped_item.can_be_used
 		):
 			item_indicator.show()
-			item_text.text = "[Q] WHIPPED CREAM"
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_text.text = "[%s] WHIPPED CREAM" % use_item_keybind
 
 		else:
 			item_indicator.hide()
 			item_text.text = ""
 
 		if hovered_interactable.hold_to_interact:
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 			interactable_label.text = (
-					"(HOLD) [E] - "
+					("(HOLD) [%s] - " % interact_keybind)
 					+ Global.hovered_interactable.display_name
 			)
 
@@ -465,8 +460,9 @@ func update_interactable_ui() -> void:
 			)
 
 		else:
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 			interactable_label.text = (
-					"[E] - "
+					("[%s] - " % interact_keybind)
 					+ Global.hovered_interactable.display_name
 			)
 
@@ -487,79 +483,85 @@ func update_cctv_indicator() -> void:
 
 
 func _update_rating() -> void:
-	var current_rating := Global.employee_rating
+	var current_rating: float = Global.employee_rating
 	_employee_rating_last_update = current_rating
 
 	for c in rating_stars_hbox.get_children():
 		c.queue_free()
-	
+
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
 
-func _on_alert_posted(message: String) -> void:
-	if alert_tween != null and alert_tween.is_running():
-		alert_tween.kill()
-	alert_tween = create_tween()
+func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
+	var _on_alert_tween_finished = func():
+		# Make sure parent hasn't already been freed
+		if is_instance_valid(alert_to_remove):
+			# remove this alert after it is done
+			alert_queue.erase(alert_to_remove)
+			alert_to_remove.queue_free()
+	return _on_alert_tween_finished
 
-	alert_label.text = message
-	alert_tween.tween_property(alert_ui, "modulate:a", 0, 2).from(1)
+func _on_alert_posted(
+	message: String,
+	alert_icon_type: AlertIconType,
+	alert_time_to_live: float = 4.0,
+	color: Color = Color.WHITE
+) -> void:
+	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
+		# we need to remove before we start the tween to make sure that
+		# any successive alerts posted don't access the same first alert
+		# which can happen if a bunch of alerts are all queued at the same time
+		var alert_to_remove = alert_queue.pop_at(0)
 
-	alert_sprite.play()
+		var old_alert_tween = alert_to_remove.alert_tween
+		if old_alert_tween != null and old_alert_tween.is_running():
+			old_alert_tween.kill()
 
+		var fast_fade_tween = create_tween()
+		alert_to_remove.alert_tween = fast_fade_tween
+
+		fast_fade_tween.tween_property(alert_to_remove, "modulate:a", 0, 0.25).from(1)
+		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
+		# the lambda is called
+		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
+
+	var new_alert = alert_load.instantiate()
+	new_alert.alert_label.text = message
+	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
+
+	alert_ui.add_child(new_alert)
+	alert_queue.append(new_alert)
+
+	var new_alert_tween = create_tween()
+	new_alert_tween.tween_property(new_alert.alert_label, "modulate", Color.WHITE, 0.25).from(color)
+	new_alert_tween.tween_property(new_alert.alert_label, "modulate", color, 0.25)
+	new_alert_tween.tween_property(new_alert, "modulate:a", 1, 0.25)
+	new_alert_tween.tween_interval(alert_time_to_live)
+	new_alert_tween.tween_property(new_alert, "modulate:a", 0, 0.25)
+	new_alert.alert_tween = new_alert_tween
+	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
+	# the lambda is called
+	new_alert_tween.finished.connect(_get_on_alert_tween_finished.bind(new_alert).call())
+
+	new_alert.alert_sprite.play()
 
 # they might ultimately be better separated but i combined the funcs for the ui notis when money
 # and customer scores change since they share a lot of code and use the same label for the updates
 func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
-	if score_update_tween != null and score_update_tween.is_running():
-		score_update_tween.kill()
-	score_update_label.offset_transform_position_ratio = Vector2.ZERO
-	score_update_label.offset_transform_rotation = 0
-	score_update_tween = create_tween().set_parallel()
-
-	var color: Color
-	# the score label itself, not the label showing the updates like "+1$" etc
-	var score_label_to_tween: Label
-	score_update_label.text = ""
-
 	var change: float = new_value - old_value
 	print("change: %s" % change)
 	if change > 0.0:
 		match score_type:
 			ScoreType.MONEY:
-				color = Color.GOLD
 				if is_inside_tree():
 					money_sound.play()
 			ScoreType.CUSTOMER:
-				color = Color.GREEN
 				if is_inside_tree():
 					gain_points_sound.play()
 	else:
-		color = Color.RED
-		score_update_label.text = ""
 		match score_type:
 			ScoreType.MONEY:
 				pass
 			ScoreType.CUSTOMER:
 				if is_inside_tree():
 					lose_points_sound.play()
-	score_update_label.modulate = color
-
-	var change_num_to_show: String = ""
-	if change > 0:
-		change_num_to_show = "+"
-
-	match score_type:
-		ScoreType.MONEY:
-			change_num_to_show += Global.float_to_price(change)
-			score_update_label.text = "%s %s" % [change_num_to_show, Global.score_update_message]
-			score_label_to_tween = profit_label
-		ScoreType.CUSTOMER:
-			change_num_to_show += "%.1f" % change
-			change_num_to_show = change_num_to_show.rstrip(".0")
-
-			score_update_label.text = "🙂%s⭐️ %s" % [(change_num_to_show), Global.score_update_message]
-			score_label_to_tween = customer_happiness_label
-	create_tween().tween_property(score_label_to_tween, "modulate", Color.WHITE, 0.75).from(color)
-	score_update_tween.tween_property(score_update_label, "modulate:a", 0, 1.75)
-	score_update_tween.tween_property(score_update_label, "offset_transform_position_ratio:y", -2, 1.25)
-	score_update_tween.tween_property(score_update_label, "offset_transform_rotation", deg_to_rad(randf_range(-10, 10)), 1.25)

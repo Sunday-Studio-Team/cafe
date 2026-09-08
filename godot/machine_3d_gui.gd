@@ -6,13 +6,12 @@ extends Node3D
 
 const CAM_TWEEN_DUR := 0.25
 
-static var seen_interaction_popup := false
-
 @export var interactable: Interactable
 @export var node_viewport: SubViewport
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
+@export var _customer_side_camera: Camera3D
 
 var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
@@ -46,16 +45,12 @@ func _ready():
 			Global.machine_in_use = machine
 			player_using_me = true
 
-			#store where the player was, before they interacted w/ the machine.
-			#used when using bomb(), which is in ingredients_refill_minigame.gd
-			where_was_player = Global.player.global_transform
+			if !Global.tutorial_machine_used:
+				Global.tutorial_machine_used = true
 
-			# Showing the popup tutorial when the player uses the machine
-			if not seen_interaction_popup:
-				seen_interaction_popup = true # Only showing it once
-				Global.popups["interaction"].open()
-			else:
-				pass
+			# store where the player was before they interacted w/ the machine.
+			# used when using bomb(), which is in ingredients_refill_minigame.gd
+			where_was_player = Global.player.global_transform
 
 			create_tween().tween_property(
 				Global.player,
@@ -85,40 +80,41 @@ func _ready():
 				exit_with_camera_tween(),
 	)
 
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause") and not Global.minigame_active and player_using_me:
+func _unhandled_input(input_event: InputEvent):
+	if input_event.is_action_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit_with_camera_tween()
-
-
-func _unhandled_input(event):
-	# Check if the event is a non-mouse/non-touch event
-	for mouse_event in [
-		InputEventMouseButton,
-		InputEventMouseMotion,
-		InputEventScreenDrag,
-		InputEventScreenTouch,
-	]:
-		if is_instance_of(event, mouse_event):
-			# If the event is a mouse/touch event, then we can ignore it here, because it will be
-			# handled via Physics Picking.
-			return
-	node_viewport.push_input(event)
+		get_viewport().set_input_as_handled()
+		Global.player.camera.get_viewport().set_input_as_handled()
+		
+	else:
+		# Check if the event is a non-mouse/non-touch event
+		for mouse_event in [
+			InputEventMouseButton,
+			InputEventMouseMotion,
+			InputEventScreenDrag,
+			InputEventScreenTouch,
+		]:
+			if is_instance_of(input_event, mouse_event):
+				# If the event is a mouse/touch event, then we can ignore it here, because it will be
+				# handled via Physics Picking.
+				return
+		node_viewport.push_input(input_event)
 
 
 func exit_without_camera_tween() -> void:
 	node_area.visible = false
 	player_using_me = false
-	
+
 	if not machine.broken_down:
 		interactable.visible = true
 
 	Global.player.camera.transform = cam_trans_b4_enter
 	Global.player.camera.sync_rotation_from_player()
-		
+
 	if Global.in_machine_ui:
 		Global.in_machine_ui = false
 		Global.machine_in_use = null
+
 
 func exit_with_camera_tween() -> void:
 	node_area.visible = false

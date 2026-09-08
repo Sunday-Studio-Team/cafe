@@ -26,9 +26,12 @@ func load_options_data_from_file() -> void:
 		options_data = (saved_resource as OptionsData)
 	if options_data == null:
 		options_data = OptionsData.new()
-		print("Creating new options file.")
+		print("Creating new options data.")
 	else:
 		print("Loaded existing options file.")
+	
+	if options_data.options_version != options_data.LATEST_OPTIONS_VERSION:
+		options_data.update_version()
 	_options_data = options_data
 
 
@@ -45,7 +48,7 @@ func load_save_data() -> void:
 
 func wipe_save() -> void:
 	save_data = SaveData.new()
-	save_game()
+	save_game_to_file()
 
 
 func save_options_data_to_file() -> void:
@@ -53,6 +56,6 @@ func save_options_data_to_file() -> void:
 	print("Saved options file.")
 
 
-func save_game() -> void:
+func save_game_to_file() -> void:
 	ResourceSaver.save(save_data, _save_file_path)
 	print("Saved game.")

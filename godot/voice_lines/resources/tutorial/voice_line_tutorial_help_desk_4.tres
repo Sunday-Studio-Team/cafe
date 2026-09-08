@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://5vj171smmmp2"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_gqsti"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_1k2jj"]
+
+[resource]
+script = ExtResource("2_1k2jj")
+voice_line_id = "tutorial_help_desk_4"
+audio_stream = ExtResource("1_gqsti")
+subtitle_en = "Unfortunately, given my lack of physical form at the moment, I am not [i]currently[/i] qualified to directly handle customer complaints."
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

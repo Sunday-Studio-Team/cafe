@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cpp4dkdwca17b"]
+
+[ext_resource type="PackedScene" uid="uid://cmrm2rf1lgskc" path="res://Assets/Table/Toolbox and Table.glb" id="1_tc65p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8n35f"]
+size = Vector3(6.644287, 7.288574, 7.833618)
+
+[node name="Toolbox and Table" unique_id=182250747 instance=ExtResource("1_tc65p")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="0" unique_id=1018895184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1920929e-07, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1071028796]
+transform = Transform3D(0.32078892, 0, 0, 0, 0.1348687, 0, 0, 0, 0.1351965, -0.042117476, 0.50837326, -0.00012338161)
+shape = SubResource("BoxShape3D_8n35f")
+
+[node name="Table" parent="." index="1" unique_id=1828565730]
+transform = Transform3D(0.036540046, 0, 0, 0, 0.37388358, 0, 0, 0, 0.036430635, -1.0803509, 0.37672174, -0.5035516)
+
+[node name="Toolbox" parent="." index="2" unique_id=1166384730]
+transform = Transform3D(0.32078892, 0, 0, 0, 0.1348687, 0, 0, 0, 0.1351965, 0.37010717, 0.93243915, 0.0068163276)

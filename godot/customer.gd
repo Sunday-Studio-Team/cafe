@@ -13,7 +13,13 @@ const MOVE_SPEED := 2.0
 @export var spawn_sound: AudioStreamPlayer3D
 
 @export_dir var sprites_folder: String
+@export_dir var typing_minigame_portraits_folder: String
 
+var customer_sprite_resource: CustomerSpriteData:
+	set(new):
+		customer_sprite_resource = new
+		body.texture = new.sprite
+		Global.customer_sprites_in_use.append(customer_sprite_resource)
 var desired_drink: Drink
 var orders_made: int = 0
 var bonus_points_for_time: int
@@ -24,25 +30,24 @@ var percent_time_left: float = 100
 
 func _ready() -> void:
 	# Find all unused customer sprites
-	var unused_customer_sprites: Array[Texture]
+	var unused_customer_sprites: Array[CustomerSpriteData]
 	for customer_sprite in Global.customer_sprites:
 		if !Global.customer_sprites_in_use.has(customer_sprite):
 			unused_customer_sprites.append(customer_sprite)
-	
+
 	# Prefer using an unused one, else just get a random one.
-	var customer_texture: Texture
 	if unused_customer_sprites.size() > 0:
-		customer_texture = unused_customer_sprites.pick_random()
+		customer_sprite_resource = unused_customer_sprites.pick_random()
 	else:
-		customer_texture = Global.customer_sprites.pick_random()
-	Global.customer_sprites_in_use.append(customer_texture)
-	body.texture = customer_texture
-	
+		customer_sprite_resource = Global.customer_sprites.pick_random()
+
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
 	Events.order_approved.connect(_on_order_approved)
 	# NOTE: not actually sure what this true argument does here lol
+	# NOTE^2: it keeps the customers group tag if the packed scene file is saved
+	# NOTE^3: ok thx
 	add_to_group("customers", true)
 
 	desired_drink = Global.drinks.filter(
@@ -76,7 +81,7 @@ func _process(_delta: float) -> void:
 
 
 func _exit_tree() -> void:
-	Global.customer_sprites_in_use.erase(body.texture)
+	Global.customer_sprites_in_use.erase(customer_sprite_resource)
 
 
 func spawn_anim() -> void:
@@ -114,7 +119,7 @@ func extend_wait_patience_time(duration: float) -> void:
 
 
 func get_stats():
-	_total_wait_time = Stats.current.customer_wait_time_machine
+	_total_wait_time = Stats.current.customer_wait_time_machine_each_day[Global.day]
 	timer.wait_time = _total_wait_time
 
 
@@ -126,6 +131,7 @@ func leave_store() -> void:
 	spawn_sound.play()
 	await despawn_anim()
 	queue_free()
+	Events.customer_leave.emit()
 
 
 func _on_timer_timeout() -> void:

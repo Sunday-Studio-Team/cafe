@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://dnrewvg707g00"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_qp7oo"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_5wi8l"]
+
+[resource]
+script = ExtResource("2_5wi8l")
+voice_line_id = "tutorial_refill_machine"
+audio_stream = ExtResource("1_qp7oo")
+subtitle_en = "Now head on back to the machine and press \"Refill\". And if it takes more than one bag to refill the machine enough, go get another!"
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

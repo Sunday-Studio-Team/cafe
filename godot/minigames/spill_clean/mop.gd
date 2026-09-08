@@ -19,7 +19,7 @@ var is_wet: bool = false
 var is_dirty: bool = false
 var normal_range = Vector2(644, 312)
 var normal_offset = Vector2(16.0, -503.0)
-var scrubber_range = Vector2(644.0, 1348.0)
+var scrubber_range = Vector2(1348.0, 644.0)
 var scrubber_offset = Vector2(0.0, -865.0)
 var scrubber_level_2_range = Vector2(944.0, 1648.0)
 var scrubber_level_2_offset = Vector2(0.0, -865.0)
@@ -111,3 +111,15 @@ func _input(event: InputEvent) -> void:
 
 	if mouse_event.button_index != MOUSE_BUTTON_LEFT:
 		return
+
+
+func get_dirty() -> void:
+	if is_dirty:
+		return
+	
+	is_dirty = true
+	
+	if used_scrubber:
+		texture = dirty_scrubber_texture
+	else:
+		texture = dirty_mop_texture

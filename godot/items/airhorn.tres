@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://mytncbiaaghj"]
+
+[ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://items/item.gd" id="1_lm6re"]
+[ext_resource type="Texture2D" uid="uid://bshe550y53my6" path="res://sprites/items/airhorn.png" id="1_y6t1p"]
+
+[resource]
+script = ExtResource("1_lm6re")
+item_id = "airhorn"
+name = "Air Horn"
+description_at_levels = Dictionary[int, String]({
+1: "Make a customer leave a machine instantly without penalty.",
+2: "Make a customer leave a machine instantly without penalty."
+})
+icon = ExtResource("1_y6t1p")
+price_at_levels = Dictionary[int, float]({
+1: 5.0,
+2: 3.0
+})
+sell_value_at_levels = Dictionary[int, float]({
+1: 4.0,
+2: 6.0
+})
+is_active_item = true
+active_item_cooldown_at_levels = Dictionary[int, float]({
+1: 20.0,
+2: 10.0
+})
+can_activate_anywhere = false
+metadata/_custom_type_script = "uid://w8k3e1miec1a"

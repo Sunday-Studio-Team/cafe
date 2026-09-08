@@ -5,7 +5,6 @@
 extends Node
 
 var _item_ids: Array[String] = []
-var _shift_names: Array[String] = []
 # tracks whether we have the 'unlimited actives' command toggled on
 # (so we can toggle on/off with the same command)
 var ua_enabled := false
@@ -26,14 +25,12 @@ func _ready() -> void:
 	for item in Global.items:
 		items_guide_str += "\"%s\", " % item.item_id
 
-	var shift_guide_str: String = "Available shifts: "
-	for each_shift in Global.special_shifts:
-		shift_guide_str += "\"%s\", " % each_shift.name
-
 	# NOTE: theres a command which shows a command list but it seems to include builtin ones,
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]freecam[/i] toggles free cam mode. Useful for cinematic shots!
+- [i]freecamspeed <number>[/i] Sets free cam speed. Default is 1.0.
 - [i]wipesave[/i] wipes save (will automatically load into tutorial etc. on next run)
 - [i]startshift[/i] starts shift
 - [i]endshift[/i] ends shift
@@ -48,13 +45,13 @@ func _ready() -> void:
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_id>\" <item_level>[/i] gives you a specified item at the specified level (TAB to auto-complete)
 %s
-- [i]shift \"<shift name>\"[/i] change to the spcial shift (TAB to auto-complete, can't be used after the shift has started)
-%s
 - [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
-- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)"
-		% [items_guide_str, shift_guide_str],
+- [i]vo[/i] plays a test VO line
+- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
+- [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
+		% [items_guide_str],
 	)
 	Console.print_line(
 		"\n[color=green]tip: try typing the start of a command and pressing TAB to autofill ![/color]",
@@ -64,6 +61,8 @@ func _ready() -> void:
 (or tell us if any of the existing ones seem bugged D:)[/color]",
 	)
 
+	Console.add_command("freecam", toggle_freecam)
+	Console.add_command("freecamspeed", set_freecam_speed, ["speed"])
 	Console.add_command("wipesave", wipe_save)
 	Console.add_command("startshift", start_shift)
 	Console.add_command("bank", bank)
@@ -82,10 +81,8 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
 	Console.add_command("ua", toggle_unlimited_actives)
-	Console.add_command("shift", special_shift, ["shift_name"])
-	for shift in Global.special_shifts:
-		_shift_names.append("\"%s\"" % shift.name)
-	Console.add_command_autocomplete_list("shift", _shift_names)
+	Console.add_command("vo", vo_test)
+	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
 
 	Events.main_scene_loaded.connect(
 		func():
@@ -93,6 +90,23 @@ func _ready() -> void:
 				Events.active_item_used.connect(refresh_active_item),
 	)
 
+
+func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
+	Events.spawn_specific_customer.emit(customer_name, help_desk)
+
+
+func vo_test() -> void:
+	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
+
+func toggle_freecam() -> void:
+	Events.free_cam_toggled.emit()
+	if Global.free_camera_enabled:
+		Console.print_line("freecam enabled")
+	else:
+		Console.print_line("freecam disabled")
+
+func set_freecam_speed(speed: String) -> void:
+	Events.free_cam_set_speed.emit(float(speed))
 
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()
@@ -134,7 +148,7 @@ func end_shift(arg: String = "") -> void:
 		detail = "(forcing loss)"
 
 	# unsafe ref but whatever
-	Global.main_scene._on_game_timer_timeout()
+	Global.main_scene.shift_end_sequence(true)
 	Console.print_line("ending shift %s" % detail)
 
 
@@ -235,19 +249,3 @@ func refresh_active_item(item: Item):
 	await get_tree().create_timer(3, false).timeout
 	item.can_be_used = true
 	Events.items_updated.emit()
-
-
-func special_shift(shift_name: String):
-	if Global.shift_started:
-		Console.print_line(
-			"You can't change shift after the shift has started! Try to use day # to restart today."
-		)
-		return
-	Global.current_special_shift.unapply_stats()
-	for shift in Global.special_shifts:
-		if shift.name == shift_name:
-			Global.current_special_shift = shift
-			if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-				Global.popups["special shift"].open()
-			return
-	Console.print_line("Matching shift name not found; please check the spelling.")

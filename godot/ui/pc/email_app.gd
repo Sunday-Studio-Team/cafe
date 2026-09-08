@@ -11,6 +11,9 @@ var email_app_list_items: Array[EmailAppListItem]
 func _ready() -> void:
 	super()
 	
+	# Wait until everything else is ready, as main needs to set per day stuff.
+	await get_tree().process_frame
+	
 	email_viewer.visible = false
 	_populate_email_items()
 	
@@ -19,9 +22,8 @@ func _ready() -> void:
 
 func _populate_email_items() -> void:
 	Global.unread_email_count = 0
-	var emails_manager: EmailsManager = EmailsManager.get_instance()
-	var emails_to_populate: Array[EmailData] = emails_manager.get_delivered_emails_to_date()
-
+	var emails_to_populate: Array[EmailData] = Global.received_emails
+	
 	# Check current day
 	var current_day: int = Global.day
 	# Check save data for finished important emails
@@ -30,7 +32,7 @@ func _populate_email_items() -> void:
 	var read_emails: Array[EmailData] = Global.read_emails
 	# Check save data for spam emails
 	var spam_emails: Array[EmailData] = Global.spam_emails
-
+	
 	# Create email list items, and mark read or unread
 	email_app_list_items = []
 	for email_data in emails_to_populate:

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://bl7bdfikk3kwt"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_6mwvx"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_bj4hc"]
+
+[resource]
+script = ExtResource("2_bj4hc")
+voice_line_id = "tutorial_intro_2"
+audio_stream = ExtResource("1_6mwvx")
+subtitle_en = "My name's Tippy. I'm the Artificial Intelligence, or AI, who's in charge of running this cafe!"
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

@@ -9,15 +9,14 @@ var item_slots: Array[Marker3D]
 func _ready() -> void:
 	item_slots.assign(item_slots_parent.get_children())
 	Global.item_slots_amount = item_slots.size()
+	# items are cleared in main.gd so if we dont wait for that, shelf wont clear
+	# properly on restart
+	await get_tree().process_frame
 	display_items()
 	Events.items_updated.connect(display_items)
 
 
 func display_items() -> void:
-	# items are cleared in main.gd so if we dont wait for that, shelf wont clear
-	# properly on restart
-	await get_tree().process_frame
-
 	for slot in item_slots:
 		for child in slot.get_children():
 			child.queue_free()

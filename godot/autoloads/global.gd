@@ -6,6 +6,7 @@ extends Node
 @export_dir var items_folder_path: String
 @export_dir var ingredients_folder_path: String
 @export_dir var customer_sprites_folder_path: String
+@export_dir var review_folder_path: String
 @export_dir var spill_sprites_path: String
 @export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
@@ -13,11 +14,7 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
-@export var emails_schedule: Array[EmailData]
 @export var complaint_popup: CanvasLayer
-@export var special_shifts: Array[SpecialShift]
-var popups: Dictionary = {}
-var popup_hint_showing: bool = false
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -30,14 +27,13 @@ var hovered_interactable: Interactable:
 # max amount of items we can own
 var item_slots_amount: int
 var inspected_shelf_item: ShelfItem
-var main_scene: Node3D
+var main_scene: Main
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
 var owned_items: Array[Item]
-var score_update_message: String
 var player_in_cctv_los := false
 var minigame_active := false:
 	set(value):
@@ -47,8 +43,11 @@ var minigame_active := false:
 var current_minigame_name: String
 var in_spill_minigame := false
 var in_pc_ui := false
+var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]
 var spam_emails: Array[EmailData]
+var reviews: Array[Review]
+var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer
@@ -60,7 +59,6 @@ var shift_time_remaining: float
 var shift_progress_ratio: float
 var ai_improvement_enabled := false
 var ai_improvement: AIImprovement
-var tippy_voice_lines: Array[TippyVoiceLine]
 var daily_cafe_money := 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
@@ -68,15 +66,6 @@ var daily_cafe_money := 0.0:
 
 		Events.money_updated.emit(new_value, daily_cafe_money)
 		daily_cafe_money = new_value
-
-		# we set this as empty to hopefully avoid anything weird if someone
-		# accidentally updates one of these score vars without setting it
-		# (like gaining money but seeing a popup like '+1 🙂' from a prev thing)
-		# NOTE: i wonder if waiting a frame could ever cause anything weird if
-		# we changed a score twice on successive frames D: should get reworked
-		# again anyway so hopefully we wont find out .
-		await get_tree().process_frame
-		score_update_message = ""
 # represented as stars (1 rating = 1 star.)
 var employee_rating: float = 0:
 	set(new_value):
@@ -86,34 +75,34 @@ var employee_rating: float = 0:
 			new_value = 0.0
 		if new_value == employee_rating:
 			return
-		
+
 		var previous_employee_rating: float = employee_rating
 		employee_rating = new_value
 		Events.employee_rating_updated.emit(new_value, previous_employee_rating)
 
 		# (see comment for same lines in above func)
 		await get_tree().process_frame
-		score_update_message = ""
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
+var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
 var making_drink_manually := false
-var customer_sprites: Array[Texture]
+var customer_sprites: Array[CustomerSpriteData]
 ## the sprites of customers that are in the cafe right now
-var customer_sprites_in_use: Array[Texture]
+var customer_sprites_in_use: Array[CustomerSpriteData]
 var spill_sprites: Array[Texture]
-var current_special_shift: SpecialShift
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var in_machine_ui: bool = false
 var machine_in_use: Machine = null
 var in_main_menu := false
+var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_active_item_menu := false
 var in_tutorial_screen: bool = false
@@ -122,6 +111,7 @@ var in_dialog_screen: bool = false
 var in_options_menu: bool = false
 var showing_floating_cursor := false
 var in_tutorial_selection := false
+var in_loadout_menu := false
 var stamina: float:
 	set(new_stam):
 		if new_stam > Stats.current.max_stamina:
@@ -139,10 +129,10 @@ var in_ui: bool:
 		if (
 				minigame_active
 				or in_pc_ui
-				or popup_hint_showing
 				or in_machine_ui
 				or Console.is_visible()
 				or in_main_menu
+				or in_level_select_menu
 				or in_end_screen
 				or in_active_item_menu
 				or in_tutorial_screen
@@ -151,21 +141,36 @@ var in_ui: bool:
 				or in_options_menu
 				or showing_floating_cursor
 				or in_tutorial_selection
+				or in_loadout_menu
 		):
 			return true
 		else:
 			return false
+# Remaking drink variables --
 var ordered_drink_to_remake: Drink
+var ordered_drink_customer: Customer
+# End remaking drink variables --
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
+var hovered_loadout_menu_element: LoadoutMenuElement
 #Active Items
 var equipped_item: Item = null
-#tutorial flags
+# Tutorial flags
+var tutorial_machine_used: bool = false
+var tutorial_drink_accepted: bool = false
+var tutorial_remake_button_pressed: bool = false
+var tutorial_drink_remade: bool = false
+var tutorial_ingredients_bag_got: bool = false
 var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
-
+# Voice Line System
+var voice_line_system: VoiceLineSystem
+# main Cafe environment resource
+var cafe_environment_res: Environment
+# Free-camera mode
+var free_camera_enabled: bool = false
 
 func _ready() -> void:
 	if SaveDataManager.save_data.finished_or_skipped_tutorial:
@@ -178,9 +183,9 @@ func _ready() -> void:
 		drink.create() # adds the price and creates the typing minigame resource
 	items.assign(load_resources_from_folder(items_folder_path))
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
-	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "png"))
+	reviews.assign(load_resources_from_folder(review_folder_path))
+	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path,"tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
-	tippy_voice_lines.assign(load_resources_from_folder(tippy_voice_path))
 
 
 # NOTE: these things in physics process instead of process for timing reasons

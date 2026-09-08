@@ -1,39 +1,67 @@
-extends SubViewportContainer
+extends Control
 
 @export var main_ordered: IngredientIconHolder
 @export var liquid_ordered: IngredientIconHolder
 @export var extra_ordered: IngredientIconHolder
 @export var captcha: GridContainer
-@export var submit_button: Button
-@export var instructions: RichTextLabel
-@export var drink_name: RichTextLabel
-@export var entire_panel: PanelContainer
+@export var entire_panel: Control
 @export var shake_intensity: float = 10
 @export var order_reminder: Control
+@export var customer_sprite: TextureRect
+@export var remade_drink_sprite: TextureRect
+@export var click_sound: AudioStreamPlayer
+@export var correct_sound: AudioStreamPlayer
+@export var wrong_sound: AudioStreamPlayer
+
+@export var req_and_sel:TextureRect
+@export var captcha_vbox:VBoxContainer
+@export var sato_tippy_fight:TextureRect
+@export var complete_sprite:TextureRect
+@export var sato:TextureRect
+
+enum SatoTippyFight {
+	Neutral = 0,
+	Win = 1,
+	Loss = 2
+}
+@export var sato_tippy_textures:Array[Texture2D]
+@export var sato_sprites:Array[Texture2D]
+
+@export var drink_name: RichTextLabel
+
 
 var ordered_drink: Drink
-var main_text: String = "The required ingredients"
+var drink_customer: Customer
 
 
 func _ready() -> void:
+	for slot: IngredientIconHolder in captcha.get_children():
+		slot.button.pressed.connect(
+			func():
+				click_sound.play(),
+		)
+	
 	_start_minigame()
 
 
-func _physics_process(_delta: float) -> void:
-	# Perform check for submit text every 10 frames because I dunno how expensive this is and something more complicated but more efficient seemed not that worth it
-	if Engine.get_process_frames() % 5 == 0:
-		if captcha.get_children().any(
-			func(x: IngredientIconHolder):
-				return x.button.button_pressed,
-		):
-			set_submit_text("VERIFY")
-		else:
-			set_submit_text("SKIP")
+func _process(_delta: float) -> void:
+	# This is solely for testing purposes (running the minigame outside of main)
+	if Global.ordered_drink_to_remake == null and Global.ordered_drink_customer == null:
+		# Disable Global so we can use the mouse
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Global.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _input(event: InputEvent) -> void:
+	# This is what refreshes the made_drink texture if the player drops somewhere they're not supposed to now
+	# Brings the sprite back on any left click release
+	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
+		remade_drink_sprite.texture = ordered_drink.icon
+
 
 
 func populate_captcha() -> void:
-	var captcha_slots = captcha.get_children() as Array[IngredientIconHolder]
-	var slots_with_our_ingredients: Array[IngredientIconHolder]
+	var captcha_slots_to_fill = captcha.get_children() as Array[IngredientIconHolder]
 
 	# get the ingredients from the ordered drink and put them each in one of the
 	# slots in the captcha
@@ -43,14 +71,13 @@ func populate_captcha() -> void:
 		ordered_drink.extra,
 	]:
 		if ingredient != null and ingredient.name != Ingredient.Ingredient_Label.NONE:
-			var random_icon_holder: IngredientIconHolder = captcha_slots.pick_random()
+			var random_icon_holder: IngredientIconHolder = captcha_slots_to_fill.pick_random()
 			random_icon_holder.ingredient = ingredient
-			slots_with_our_ingredients.append(random_icon_holder)
+			captcha_slots_to_fill.erase(random_icon_holder)
 
 	# fill in the rest of the slots with random ingredients
-	for captcha_icon: IngredientIconHolder in captcha_slots:
-		if not slots_with_our_ingredients.has(captcha_icon):
-			captcha_icon.ingredient = Global.ingredients.pick_random()
+	for captcha_icon: IngredientIconHolder in captcha_slots_to_fill:
+		captcha_icon.ingredient = Global.ingredients.pick_random()
 
 
 func populate_order_reminder() -> void:
@@ -63,11 +90,31 @@ func populate_order_reminder() -> void:
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
-	drink_name.text = "You are making %s [color=gold]%s" % [
-		ordered_drink.singular_article,
-		ordered_drink.name,
-	]
+	#drink_name.text = "You are making %s [color=gold]%s" % [
+		#ordered_drink.singular_article,
+		#ordered_drink.name,
+	#]
+	var drink_str:String = ""
+	var drink_arr:PackedStringArray = ordered_drink.name.to_upper().split(" ")
+	for i in range(drink_arr.size()):
+		if i == 2 and drink_arr.size() >= 4: drink_str += "[br]"
+		drink_str += str(drink_arr[i], " ")
+	drink_name.text = str("[font_size=100][color=black][center]%s" % drink_str).strip_edges()
+	remade_drink_sprite.texture = drink.icon
 
+func on_wrong():
+	sato.texture = sato_sprites[SatoTippyFight.Loss]
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Loss]
+	await get_tree().create_timer(1).timeout
+	sato.texture = sato_sprites[SatoTippyFight.Neutral]
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
+
+func on_right():
+	req_and_sel.visible = false
+	captcha_vbox.visible = false
+	complete_sprite.visible = true
+	sato.texture = sato_sprites[SatoTippyFight.Win]
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
 
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
@@ -87,18 +134,30 @@ func verify_captcha() -> void:
 				!= captcha_icon.button.button_pressed
 			)
 		):
+			on_wrong()
 			shake_panel()
+			wrong_sound.play()
 			return
+	on_right()
+	remade_drink_sprite.visible = true
+	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
+	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+	correct_sound.play()
 
-	_end_minigame()
+	for slot: IngredientIconHolder in captcha.get_children():
+		var scale_tween := create_tween()
+		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE * 0.75, 0.025)
+		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE, 0.025)
 
+		await get_tree().create_timer(0.025).timeout
 
-func set_instructions(text: String) -> void:
-	instructions.text = text
+		var colour_tween := create_tween()
+		colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
+		colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
 
-
-func set_submit_text(text: String) -> void:
-	submit_button.text = text
+	await correct_sound.finished
+	
+	#_end_minigame()
 
 
 func shake_panel() -> void:
@@ -125,20 +184,67 @@ func shake_panel() -> void:
 
 
 func _start_minigame() -> void:
-	set_instructions(main_text)
-
-	# Temp drink setting for testing
-	var drink: Drink = Global.ordered_drink_to_remake
+	order_reminder.visible = false
+	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
+	var drink: Drink
+	
+	# The else blocks here should only happen if this scene is ran by itself (not in the main game)
+	if(Global.ordered_drink_to_remake != null):
+		drink = Global.ordered_drink_to_remake
+	else:
+		drink = Global.drinks.pick_random()
 	get_ordered_drink(drink)
-
+	
+	if(Global.ordered_drink_customer != null):
+		drink_customer = Global.ordered_drink_customer
+		customer_sprite.texture = drink_customer.body.texture
+		
+		rescale_image_to_target_height(customer_sprite)
+	else:
+		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
+		rescale_image_to_target_height(customer_sprite)
+##TODO: Unhide Ingredient Reminder for tutorial
+		#order_reminder.visible = true
+		populate_order_reminder()
+	
 	populate_captcha()
 
-	order_reminder.visible = false
 
 
 func _end_minigame() -> void:
+	# THIS FUNCTION IS CALLED BY THE `CustomerContainer` node!
+	# Since the game should only end when giving the customer their drink now
+	print("End remaking minigame")
+	correct_sound.play()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
 	Events.minigame_end.emit()
 
 
 func _on_submit_button_pressed() -> void:
 	verify_captcha()
+
+
+
+func rescale_image_to_target_height(customer_sprite: TextureRect, target_height:int = 1024)->void:
+	#target_height is generally 1024
+	
+	
+	var original_height = customer_sprite.texture.get_height()
+	if original_height==target_height:
+		
+		return	#do nothing! texture is the correct size.
+				#all customer heights have 1024px; with variable widths. so its the only one we check.		
+			
+	var original_width = float(customer_sprite.texture.get_width())
+	
+	var ratio = float(original_height)/float(target_height) #ex 2048/1024 = 2
+	
+	var _image = customer_sprite.texture.get_image()
+	
+	var target_width = original_width
+	_image.resize(int(round(original_width/ratio)), int(target_height), Image.INTERPOLATE_LANCZOS)
+	var _texture: ImageTexture = ImageTexture.create_from_image(_image)
+	
+	customer_sprite.texture= _texture
+	#print("rescaled customer sprite size",customer_sprite.texture.get_size())
+	

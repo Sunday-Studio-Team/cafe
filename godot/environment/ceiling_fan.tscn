@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cddylfkowt5jq"]
+
+[ext_resource type="PackedScene" uid="uid://c31uvkjwx4s5h" path="res://Assets/Ceiling fan/Ceiling Fan Free 3D Model.glb" id="1_0p03w"]
+
+[node name="CeilingFan" unique_id=338478717 instance=ExtResource("1_0p03w")]
+
+[node name="3" parent="Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode" parent_id_path=PackedInt32Array(1704897917) index="0" unique_id=589743562]
+transform = Transform3D(100.00001, 0, 0, 0, -4.3711393e-06, 100, 0, -100.00001, -4.371139e-06, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=701547981]
+autoplay = &"3|PlaneAction"

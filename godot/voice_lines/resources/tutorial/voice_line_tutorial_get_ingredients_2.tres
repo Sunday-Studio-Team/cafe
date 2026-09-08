@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://dmji4xlxijqpo"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_iu6sq"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_j03do"]
+
+[resource]
+script = ExtResource("2_j03do")
+voice_line_id = "tutorial_get_ingredients_2"
+audio_stream = ExtResource("1_iu6sq")
+subtitle_en = "That's strange, this tends to only happen so quickly when drinks get manually remade."
+metadata/_custom_type_script = "uid://vdv5g0q45pri"

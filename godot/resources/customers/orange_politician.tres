@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://cj4hes772oo3i"]
+
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_88h7j"]
+[ext_resource type="Texture2D" uid="uid://bt2fae4fdmg1u" path="res://sprites/customers/orangeT.png" id="1_umrds"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umrds"]
+atlas = ExtResource("1_umrds")
+region = Rect2(93.96001, -70.46001, 407.16, 407.16)
+
+[resource]
+script = ExtResource("1_88h7j")
+customer_name = "Orange Politician"
+sprite = ExtResource("1_umrds")
+email_crop_size_ratio = 0.78
+email_crop_center_ratio = Vector2(0.57, 0.13)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_umrds")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://cmbigm4s683no"]
+
+[ext_resource type="AudioStream" uid="uid://br5bu4gbbug8j" path="res://audio/voicelines/one_day.mp3" id="1_e5hfu"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_y5rq4"]
+
+[resource]
+script = ExtResource("2_y5rq4")
+voice_line_id = "tutorial_machine_refilled_2"
+audio_stream = ExtResource("1_e5hfu")
+subtitle_en = "Unfortunately, management hasn’t subscribed for automatic refills, so ingredient refills are one of the few things I cannot do alone."
+metadata/_custom_type_script = "uid://vdv5g0q45pri"
