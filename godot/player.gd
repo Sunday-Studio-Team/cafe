@@ -82,9 +82,9 @@ func _ready() -> void:
 
 			await Events.viewmodel_animation_finished
 			
-			var t := create_tween().set_parallel()
-			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
-			t.tween_property(customer_trash, "transparency", 0, 0.25),
+			#var t := create_tween().set_parallel()
+			#t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
+			#t.tween_property(customer_trash, "transparency", 0, 0.25),
 	)
 
 
@@ -106,7 +106,6 @@ func _physics_process(delta: float) -> void:
 	
 	handle_ingredients_bag()
 	handle_customer_trash()
-	handle_active_items()
 	handle_floating_cursor()
 	move_and_slide()
 
