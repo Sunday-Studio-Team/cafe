@@ -5,6 +5,7 @@ extends Node3D
 @export var _cooldown_timer_sprite: Sprite3D
 @export var _cooldown_timer_bar: TextureProgressBar
 @export var _spray_sound: AudioStreamPlayer3D
+@export var _collider_body: StaticBody3D
 
 var _air_freshener_item_on_cooldown: Item = null
 
@@ -24,10 +25,12 @@ func _process(delta: float) -> void:
 func enable_air_freshener() -> void:
 	visible = true
 	_interactable.visible = true
+	_collider_body.process_mode = Node.PROCESS_MODE_INHERIT
 
 func disable_air_freshener() -> void:
 	visible = false
 	_interactable.visible = false
+	_collider_body.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _on_interacted() -> void:
 	pass
