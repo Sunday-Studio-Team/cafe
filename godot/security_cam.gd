@@ -72,7 +72,7 @@ func _physics_process(_delta: float) -> void:
 
 	if not grace_timer.is_stopped():
 		spotlight.light_color = Color.DIM_GRAY
-		fake_spotlight.color = Color.DIM_GRAY
+		fake_spotlight.light_color = Color.DIM_GRAY
 		return
 
 	var player_in_spotlight := false
