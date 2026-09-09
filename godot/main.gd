@@ -485,7 +485,6 @@ func _tippy_tutorials() -> void:
 		"tutorial_day1_2",
 		"tutorial_day1_3",
 		"tutorial_day1_4",
-		"tutorial_day1_5",
 	] 
 	
 	var tutorial_lines_day2: Array[String] = [
@@ -495,6 +494,11 @@ func _tippy_tutorials() -> void:
 		"tutorial_day2_4",
 		"tutorial_day2_5",
 		"tutorial_day2_6",
+		"tutorial_day2_7",
+		"tutorial_day2_8",
+		"tutorial_day2_9",
+		"tutorial_day2_10",
+		"tutorial_day2_11",
 	] 
 	
 	var tutorial_lines_day3: Array[String] = [
@@ -505,6 +509,7 @@ func _tippy_tutorials() -> void:
 		"tutorial_day3_5",
 		"tutorial_day3_6",
 		"tutorial_day3_7",
+		"tutorial_day3_8",
 	] 
 	
 	var tutorial_lines_day4: Array[String] = [
@@ -514,6 +519,8 @@ func _tippy_tutorials() -> void:
 		"tutorial_day4_4",
 		"tutorial_day4_5",
 		"tutorial_day4_6",
+		"tutorial_day4_7",
+		"tutorial_day4_8",
 	] 
 	
 	var tutorial_lines_day5: Array[String] = [

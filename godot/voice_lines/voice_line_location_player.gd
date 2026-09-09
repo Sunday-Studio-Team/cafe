@@ -18,6 +18,9 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 	finished_playing_voice_line.emit(voice_line)
 	_active_voice_line = null
 
+func get_playing_voice_line() -> VoiceLine:
+	return _active_voice_line
+
 func interrupt_voice_line() -> void:
 	if _audio_stream_player_3d.playing and _active_voice_line != null:
 		finished_playing_voice_line.emit(_active_voice_line)
