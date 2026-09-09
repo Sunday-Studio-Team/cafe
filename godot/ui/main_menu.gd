@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@export var play_button: Button
-@export var quit_button: Button
-@export var _options_button: Button
+@export var play_button: TextureButton
+@export var quit_button: TextureButton
+@export var _options_button: TextureButton
 @export var _options_menu_packed_scene: PackedScene
 
 
