@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://dyehef5xmtkfj" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0001.png" id="14_71all"]
 [ext_resource type="Texture2D" uid="uid://cj6lcuv5eemuu" path="res://sprites/machine_ui/refill bar border.png" id="14_l6aen"]
 [ext_resource type="Texture2D" uid="uid://dfrwyav62s37u" path="res://sprites/machine_ui/refill button.png" id="16_10yj4"]
+[ext_resource type="Texture2D" uid="uid://bnq53b7bbl163" path="res://sprites/machine_ui/empty small screen.png" id="17_267yc"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -212,10 +213,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -399.0
-offset_top = 2.5
-offset_right = -399.0
-offset_bottom = 2.5
+offset_left = -90.0
+offset_top = -82.5
+offset_right = -90.0
+offset_bottom = -82.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
@@ -225,8 +226,17 @@ offset_transform_position = Vector2(-300, 100)
 [node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" unique_id=731233711]
 texture_filter = 1
 layout_mode = 1
-offset_right = 200.0
-offset_bottom = 200.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 value = 100.0
 fill_mode = 4
 texture_under = ExtResource("3_u8yrf")
@@ -440,27 +450,48 @@ layout_mode = 2
 layout_mode = 2
 text = "="
 
-[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1826884261]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1787154350]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -120)
+
+[node name="Buttons" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1826884261]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-offset_transform_enabled = true
 offset_transform_position = Vector2(0, -240)
 offset_transform_visual_only = false
-theme_override_constants/separation = 96
+theme_override_constants/separation = 32
 alignment = 1
 
-[node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/Buttons" unique_id=261257475]
+[node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=261257475]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 texture_normal = ExtResource("10_71all")
 texture_disabled = ExtResource("11_10yj4")
 
-[node name="RemakeDrinkButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/Buttons" unique_id=2075147826]
+[node name="RemakeDrinkButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=2075147826]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 offset_transform_enabled = true
 texture_normal = ExtResource("12_motd3")
+
+[node name="MoneyRatingContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=633592481]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 144
+
+[node name="AcceptCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=407529960]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("17_267yc")
+
+[node name="RemakeCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=1932690171]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("17_267yc")
 
 [node name="IngredientsUI" type="VBoxContainer" parent="HBoxContainer" unique_id=328574774]
 layout_mode = 2

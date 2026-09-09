@@ -108,6 +108,10 @@
 [ext_resource type="Texture2D" uid="uid://b23vgfyrvljr8" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0055.png" id="80_tk0p7"]
 [ext_resource type="Texture2D" uid="uid://cl8eqgywwj5nu" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0056.png" id="81_x483m"]
 [ext_resource type="Texture2D" uid="uid://dyqgr51e3w86t" path="res://sprites/machine_ui/tippybreak.png" id="84_4b30b"]
+[ext_resource type="Texture2D" uid="uid://bnq53b7bbl163" path="res://sprites/machine_ui/empty small screen.png" id="85_vaqkk"]
+[ext_resource type="Texture2D" uid="uid://b8iep07nsu2pm" path="res://sprites/machine_ui/money up star neutral.png" id="86_7p33r"]
+[ext_resource type="Texture2D" uid="uid://bdsqx6cit03ki" path="res://sprites/machine_ui/money up star up.png" id="87_a80ij"]
+[ext_resource type="Texture2D" uid="uid://30p5hiflsbof" path="res://sprites/machine_ui/money up star down.png" id="88_robek"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -250,7 +254,7 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "accept_counter", "remake_counter", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -265,8 +269,8 @@ start_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst")
 end_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst/SpotForQueuedCustomerFinal")
 progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/ProgressIndicator")
 tippy_progress_sprite = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/ProgressIndicator/TippySprite")
-accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/Buttons/AcceptButton")
-make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/Buttons/RemakeDrinkButton")
+accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons/AcceptButton")
+make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons/RemakeDrinkButton")
 refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/RefillButton")
 ordered_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderedDrinkName")
 ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressBar")
@@ -289,10 +293,13 @@ made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/Ma
 made_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeItem")
 equal_sign = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/MarginContainer/EqualSign")
 equal_sign_states = Array[Texture2D]([ExtResource("2_ww5c3"), ExtResource("3_8ej3g"), ExtResource("4_ymic3")])
-timer_dial = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TimerDial")
+timer_dial = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar/TimerDial")
 ingredient_coffeebar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressUnder/ProgressCoffee")
 idle_ing_bar_array = Array[Texture2D]([ExtResource("2_cvlju"), ExtResource("3_4b30b"), ExtResource("4_womjx"), ExtResource("5_hrogu"), ExtResource("6_ww5c3"), ExtResource("7_8ej3g"), ExtResource("8_ymic3"), ExtResource("9_bvj4x"), ExtResource("10_vaqkk"), ExtResource("11_7p33r"), ExtResource("12_a80ij"), ExtResource("13_robek"), ExtResource("14_ovoaa"), ExtResource("15_1hlt3"), ExtResource("16_uaec5"), ExtResource("17_gtm4j"), ExtResource("18_hp8kb"), ExtResource("19_h07qc"), ExtResource("20_1cgjg"), ExtResource("21_t5s72"), ExtResource("22_g2688"), ExtResource("23_rcak8"), ExtResource("24_0ngdq"), ExtResource("25_c2how")])
 active_ing_bar_array = Array[Texture2D]([ExtResource("26_427vo"), ExtResource("27_q5jp4"), ExtResource("28_d37nw"), ExtResource("29_41yea"), ExtResource("30_bbbyo"), ExtResource("31_kuutf"), ExtResource("32_dfbyd"), ExtResource("33_gx0jy"), ExtResource("34_bgw1y"), ExtResource("35_lf4vc"), ExtResource("36_x3bhi"), ExtResource("37_avb8l"), ExtResource("38_b2l0d"), ExtResource("39_wello"), ExtResource("40_kipqy"), ExtResource("41_bgacs"), ExtResource("42_88l6f"), ExtResource("43_jac24"), ExtResource("44_om76m"), ExtResource("45_ryoht"), ExtResource("46_j2jxb"), ExtResource("47_g2mkn"), ExtResource("48_pdfax"), ExtResource("49_lx633"), ExtResource("50_w1s35"), ExtResource("51_4rr27"), ExtResource("52_evw7y"), ExtResource("53_wdkrr"), ExtResource("54_8bmd4"), ExtResource("55_qtip1"), ExtResource("56_rdhdf"), ExtResource("57_4mdt8"), ExtResource("58_0ief2"), ExtResource("59_5vek6"), ExtResource("60_vij2s"), ExtResource("61_bn4tc"), ExtResource("62_ehdnm"), ExtResource("63_ub41g"), ExtResource("64_sjdni"), ExtResource("65_ps4nf"), ExtResource("66_yaqdg"), ExtResource("67_q3tn5"), ExtResource("68_alees"), ExtResource("69_q52mk"), ExtResource("70_clr3m"), ExtResource("71_5osnv"), ExtResource("72_mpktl"), ExtResource("73_20wcn"), ExtResource("74_ujplj"), ExtResource("75_33y5n"), ExtResource("76_rsa8u"), ExtResource("77_und3g"), ExtResource("78_8ij72"), ExtResource("79_eff2u"), ExtResource("80_tk0p7"), ExtResource("81_x483m")])
+accept_counter = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter")
+remake_counter = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter")
+counter_sprites = Array[Texture2D]([ExtResource("85_vaqkk"), ExtResource("86_7p33r"), ExtResource("87_a80ij"), ExtResource("88_robek")])
 hum_sound = NodePath("HumSound")
 done_sound = NodePath("DoneSound")
 spill_clean_sound = NodePath("SpillCleanSound")
@@ -466,8 +473,6 @@ offset_transform_enabled = true
 
 [node name="TextureProgressBar" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" index="0" unique_id=731233711]
 custom_maximum_size = Vector2(25, 25)
-offset_left = 0.0
-offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
 offset_transform_enabled = true

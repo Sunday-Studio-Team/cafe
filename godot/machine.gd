@@ -61,6 +61,17 @@ enum EqualStates {
 
 @export var idle_ing_bar_array:Array[Texture2D]
 @export var active_ing_bar_array:Array[Texture2D]
+
+@export var accept_counter: TextureRect
+@export var remake_counter: TextureRect
+@export var counter_sprites: Array[Texture2D]
+enum CounterStates {
+	Empty,
+	Neutral,
+	RatingUp,
+	RatingDown
+}
+
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
@@ -594,19 +605,23 @@ func display_drink_score() -> void:
 
 	if order.star_rating_gain_for_remake > 0.0:
 		#_rating_gain_on_remake_label.modulate = Color.GREEN
+		remake_counter.texture = counter_sprites[CounterStates.RatingUp]
 		var star_rating_gain_if_remade: float = order.star_rating_gain_for_remake
 		#_rating_gain_on_remake_label.text = "🙂 +%s⭐️" % star_rating_gain_if_remade
 	elif order.star_rating_gain_for_remake == 0.0:
+		remake_counter.texture = counter_sprites[CounterStates.Neutral]
 		#_rating_gain_on_remake_label.modulate = Color.DARK_GRAY
 		var star_rating_gain_if_remade: float = 0
 		#_rating_gain_on_remake_label.text = "+%s⭐️" % star_rating_gain_if_remade
 
 	if order.star_rating_loss_if_accept > 0.0:
 		#_rating_loss_on_accept_label.modulate = Color.RED
+		accept_counter.texture = counter_sprites[CounterStates.RatingDown]
 		var star_rating_loss_if_accept: float = order.star_rating_loss_if_accept
 		#_rating_loss_on_accept_label.text = "☹️ -%s⭐" % star_rating_loss_if_accept
 	elif order.star_rating_loss_if_accept == 0.0:
 		#_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
+		accept_counter.texture = counter_sprites[CounterStates.Neutral]
 		var star_rating_loss_if_accept: float = 0
 		#_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
 
@@ -740,6 +755,8 @@ func accept_order(did_remake_drink: bool) -> void:
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
+	accept_counter.texture = counter_sprites[CounterStates.Empty]
+	remake_counter.texture = counter_sprites[CounterStates.Empty]
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout
