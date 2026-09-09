@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://dkrhm1jngkx74" path="res://camera_controller.gd" id="3_sweqy"]
 [ext_resource type="Script" uid="uid://cfdil6b7366s" path="res://camera_effects.gd" id="4_2hs0m"]
 [ext_resource type="AudioStream" uid="uid://najej8q5da4u" path="res://audio/bag_pickup.mp3" id="4_hqtel"]
-[ext_resource type="PackedScene" uid="uid://c55nqnrnp8wni" path="res://trash_placehold.tscn" id="6_dw050"]
 [ext_resource type="Script" uid="uid://f3ib4e2r2ga4" path="res://exploding_bomb_on_player.gd" id="5_sweqy"]
 [ext_resource type="PackedScene" uid="uid://do0l4oqkkpu3y" path="res://items/exploding_bomb.tscn" id="6_2hs0m"]
+[ext_resource type="PackedScene" uid="uid://c55nqnrnp8wni" path="res://trash_placehold.tscn" id="6_dw050"]
 [ext_resource type="AudioStream" uid="uid://dbt083tkev0i1" path="res://audio/footsteps/footstep_concrete_1.wav" id="9_ivps1"]
 [ext_resource type="AudioStream" uid="uid://c0ssp862cxccu" path="res://audio/footsteps/footstep_concrete_2.wav" id="10_urp6f"]
 [ext_resource type="AudioStream" uid="uid://dtm03unbkcgjm" path="res://audio/footsteps/footstep_concrete_3.wav" id="11_bwjto"]
@@ -76,7 +76,7 @@ collide_with_areas = true
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.08502839, -0.013210101, -0.05094767, 0.021402875, 0.097112484, 0.010539996, 0.04808417, -0.019866265, 0.0854005, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=557025955]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=410525893]
 transform = Transform3D(0.83222854, 0.30946758, -0.4600262, -0.1782857, 0.93503195, 0.3064773, 0.5249845, -0.1730432, 0.8333341, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraController/Camera3D/ingredientbag" unique_id=1902215747]
@@ -90,7 +90,6 @@ max_db = 0.0
 [node name="SprintLockoutTimer" type="Timer" parent="." unique_id=1168419825]
 one_shot = true
 
-[editable path="CameraController/Camera3D/trash_placehold"]
 [node name="FootstepLockoutTimer" type="Timer" parent="." unique_id=385276880]
 wait_time = 0.25
 one_shot = true
@@ -121,4 +120,5 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1
 radius = 0.195
 height = 0.3564453
 
+[editable path="CameraController/Camera3D/trash_placehold"]
 [editable path="CameraController/Camera3D/ingredientbag"]

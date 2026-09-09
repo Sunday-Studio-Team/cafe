@@ -85,6 +85,7 @@ var employee_rating: float = 0:
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
+var total_trash: float
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
