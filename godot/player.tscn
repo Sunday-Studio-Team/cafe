@@ -48,7 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="CameraController" type="Node3D" parent="." unique_id=1520575227 node_paths=PackedStringArray("player_controller", "camera_effects")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 script = ExtResource("3_sweqy")
 player_controller = NodePath("..")
 camera_effects = NodePath("Camera3D")

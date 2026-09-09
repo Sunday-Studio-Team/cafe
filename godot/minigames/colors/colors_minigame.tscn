@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://bmufuft12sya5" path="res://sprites/machine_fix_buttons_minigame/C_BOX.png" id="8_itcgr"]
 [ext_resource type="AudioStream" uid="uid://ddvfhfjtmqstn" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_correct.mp3" id="9_uaykq"]
 [ext_resource type="AudioStream" uid="uid://cd7tvvoptxqc8" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_incorrect.mp3" id="10_xs2qy"]
+[ext_resource type="AudioStream" uid="uid://c2hgnmysuyt5p" path="res://audio/buttons_machine_fix_minigame/prompt_print/colors_prompt_print_1.wav" id="11_m7lj7"]
+[ext_resource type="AudioStream" uid="uid://c7i6vpun8ru7r" path="res://audio/buttons_machine_fix_minigame/prompt_print/colors_prompt_print_2.wav" id="12_ib8td"]
+[ext_resource type="AudioStream" uid="uid://bc2fpqyhob5wb" path="res://audio/buttons_machine_fix_minigame/prompt_print/colors_prompt_print_3.wav" id="13_4vt2w"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ib8td"]
 viewport_path = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt")
@@ -27,7 +30,13 @@ fallback_environment = SubResource("Environment_odiqf")
 [sub_resource type="ViewportTexture" id="ViewportTexture_4vt2w"]
 viewport_path = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/PromptViewport")
 
-[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "employee_texture_rect", "correct_sound", "wrong_sound")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aq73i"]
+streams_count = 3
+stream_0/stream = ExtResource("11_m7lj7")
+stream_1/stream = ExtResource("12_ib8td")
+stream_2/stream = ExtResource("13_4vt2w")
+
+[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "employee_texture_rect", "correct_sound", "wrong_sound", "prompt_print_sound")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,6 +50,7 @@ prompt_text_box = NodePath("Background/MarginContainer/VBoxContainer2/MarginCont
 employee_texture_rect = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Employee")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
+prompt_print_sound = NodePath("PromptPrintSound")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2088356955]
 layout_mode = 2
@@ -132,7 +142,7 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 bbcode_enabled = true
-text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Blue A"
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Red Square"
 fit_content = true
 
 [node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1218646402]
@@ -243,3 +253,6 @@ volume_db = 5.0
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=1992806125]
 stream = ExtResource("10_xs2qy")
 volume_db = 5.0
+
+[node name="PromptPrintSound" type="AudioStreamPlayer" parent="." unique_id=1099527006]
+stream = SubResource("AudioStreamRandomizer_aq73i")

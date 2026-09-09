@@ -8,13 +8,11 @@ extends Node
 @export_dir var customer_sprites_folder_path: String
 @export_dir var review_folder_path: String
 @export_dir var spill_sprites_path: String
-@export_dir var tippy_voice_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
-@export var complaint_popup: CanvasLayer
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -57,8 +55,6 @@ var day := 0
 var shift_length: float
 var shift_time_remaining: float
 var shift_progress_ratio: float
-var ai_improvement_enabled := false
-var ai_improvement: AIImprovement
 var daily_cafe_money := 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
@@ -100,8 +96,18 @@ var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
-var in_machine_ui: bool = false
 var machine_in_use: Machine = null
+var stamina: float:
+	set(new_stam):
+		if new_stam > Stats.current.max_stamina:
+			new_stam = Stats.current.max_stamina
+		if new_stam < 0:
+			new_stam = 0
+
+		stamina = new_stam
+var sprint_lockout_timer: Timer
+# ui
+var in_machine_ui: bool = false
 var in_main_menu := false
 var in_level_select_menu: bool = false
 var in_end_screen := false
@@ -113,18 +119,6 @@ var in_options_menu: bool = false
 var showing_floating_cursor := false
 var in_tutorial_selection := false
 var in_loadout_menu := false
-var stamina: float:
-	set(new_stam):
-		if new_stam > Stats.current.max_stamina:
-			new_stam = Stats.current.max_stamina
-		if new_stam < 0:
-			new_stam = 0
-
-		stamina = new_stam
-var sprint_lockout_timer: Timer
-# if we save an item in the shop (so that itll show up the next day)
-# itll be stored here
-var saved_item: Item
 var in_ui: bool:
 	get():
 		if (
@@ -154,8 +148,6 @@ var ordered_drink_customer: Customer
 # used to decide which items tooltip to show when hovering mouse over tablet
 var hovered_item_icon: TabletItemIcon = null
 var hovered_loadout_menu_element: LoadoutMenuElement
-#Active Items
-var equipped_item: Item = null
 # Tutorial flags
 var tutorial_machine_used: bool = false
 var tutorial_drink_accepted: bool = false
@@ -172,6 +164,7 @@ var voice_line_system: VoiceLineSystem
 var cafe_environment_res: Environment
 # Free-camera mode
 var free_camera_enabled: bool = false
+
 
 func _ready() -> void:
 	if SaveDataManager.save_data.finished_or_skipped_tutorial:
@@ -223,20 +216,6 @@ func load_resources_from_folder(path: String, extension: String = "tres") -> Arr
 ## [br]e.g. 1.5 -> "$1.50", 10.0 -> "$10"
 func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
-
-
-#Equips the item:
-func equip_item(item: Item):
-	equipped_item = item
-	if item == null:
-		Events.emit_signal("play_viewmodel_animation", "default")
-		return
-
-	if item.item_id == "hammer":
-		Events.emit_signal("play_viewmodel_animation", "hammer_equip")
-
-	else:
-		Events.emit_signal("play_viewmodel_animation", "default")
 
 
 func refresh_active_items():

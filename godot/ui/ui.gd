@@ -45,7 +45,6 @@ const ALERT_QUEUE_SIZE = 5
 @export var shelf_item_active_indicator: Control
 @export var shelf_item_cooldown_label: RichTextLabel
 @export var shelf_item_passive_indicator: Control
-@export var shelf_item_sell: Button
 @export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
@@ -60,20 +59,10 @@ const ALERT_QUEUE_SIZE = 5
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_description: RichTextLabel
 @export var stamina_bar: ProgressBar
-@export var item_menu_prompt: Control
-#Active Item
-@export var item_ui: Control
-@export var current_item_ui: Control
 @export var item_indicator: PanelContainer
 @export var item_text: RichTextLabel
-@export var current_item_icon: TextureRect
-@export var item_cooldown_bar: TextureProgressBar
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
-@export_category("item refs")
-@export var hammer: Item
-@export var scrubber: Item
-@export var whipped_cream: Item
 
 var alert_queue: Array[HBoxContainer]
 var alert_load = preload("res://ui/alert.tscn")
@@ -179,17 +168,10 @@ func _ready() -> void:
 
 	_update_rating()
 
-	hide_item_ui_if_no_actives()
-	Events.items_updated.connect(hide_item_ui_if_no_actives)
-
 	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
 	score_update_label.show()
-
-	var hammer_t := create_tween().set_loops()
-	hammer_t.tween_property(item_indicator, "modulate", Color.GOLD, 0.5)
-	hammer_t.tween_property(item_indicator, "modulate", Color.ORANGE_RED, 0.5)
 
 
 func _process(_delta: float) -> void:
@@ -223,24 +205,8 @@ func _process(_delta: float) -> void:
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
-	handle_item_ui()
 	handle_item_hover_tooltip()
 	handle_stamina_bar()
-
-
-func hide_item_ui_if_no_actives() -> void:
-	var no_active_items_owned := true
-
-	for item in Global.owned_items:
-		if item.is_active_item:
-			no_active_items_owned = false
-			break
-
-	if no_active_items_owned:
-		item_ui.hide()
-	else:
-		item_ui.show()
-
 
 func handle_stamina_bar() -> void:
 	var stam: float = Global.stamina
@@ -263,7 +229,11 @@ func handle_item_hover_tooltip() -> void:
 
 	if hovered_icon != null:
 		var item: Item = hovered_icon.item
-		item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
+		if item.SHOW_ITEM_LEVELS:
+			item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
+		else:
+			item_hover_tooltip_name.text = "[b]%s[/b]" % item.name
+		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
 		item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
 		if item.is_active_item:
 			item_hover_tooltip_passive_indicator.hide()
@@ -281,24 +251,6 @@ func handle_item_hover_tooltip() -> void:
 
 func handle_exit_machine_button_visibility() -> void:
 	exit_machine_button.visible = Global.in_machine_ui and not Global.minigame_active
-
-
-func handle_item_ui() -> void:
-	var item: Item = Global.equipped_item
-
-	if item != null:
-		current_item_ui.show()
-		current_item_icon.texture = item.icon
-		use_item_prompt.visible = (
-				item.can_activate_anywhere
-				and item.can_be_used
-		)
-		item_cooldown_bar.visible = not item.can_be_used
-		item_cooldown_bar.value = (
-			100 - item.active_item_remaining_cooldown / item.active_item_cooldown_at_levels[item.item_level] * 100
-			)
-	else:
-		current_item_ui.hide()
 
 
 func handle_drop_item_ui() -> void:
@@ -403,68 +355,111 @@ func update_interactable_ui() -> void:
 	var hovered_interactable: Interactable = Global.hovered_interactable
 
 	if hovered_interactable != null:
+		# show prompt to use active item if we need to
 		interactable_indicator.show()
 
-		# show prompt to use active item if we need to
-
-		# TODO: replace some of these unsafe refs with the item names with refs
-		# to the actual items as export vars
-
-		var equipped_item: Item = Global.equipped_item
+		var owned_hammer: Item = null
+		var owned_air_horn: Item = null
+		var owned_whipped_cream: Item = null
+		var owned_air_freshener: Item = null
+		
+		for owned_item in Global.owned_items:
+			if owned_item.item_id == "hammer":
+				owned_hammer = owned_item
+			elif owned_item.item_id == "air_horn":
+				owned_air_horn = owned_item
+			elif owned_item.item_id == "whipped_cream":
+				owned_whipped_cream = owned_item
+			elif owned_item.item_id == "air_freshener":
+				owned_air_freshener = owned_item
+		
+		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
+		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
+		const NON_USABLE_ITEM_BBCODE_OPEN: String = "[color=#676767]"
+		const NON_USABLE_ITEM_BBCODE_CLOSE: String = "[/color]"
 
 		if (
-				hovered_interactable.name == "FixMachineButton"
-				and equipped_item != null
-				and equipped_item.item_id == "hammer"
-				and equipped_item.can_be_used
+				hovered_interactable.interactable_id == &"fix_machine"
+				and owned_hammer != null
 		):
 			item_indicator.show()
+			var item_prompt: String = ""
+			
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
-			item_text.text = "[%s] HAMMER 💥" % use_item_keybind
+			item_prompt = "[%s] HAMMER" % use_item_keybind
+
+			if owned_hammer.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt
 
 		elif (
-				hovered_interactable.display_name == "Use machine"
-				# xtremely dodgy ref to check the machine has a customer
-				and hovered_interactable.get_parent().machine.customer
-				and equipped_item != null
-				and equipped_item.item_id == "airhorn"
-				and equipped_item.can_be_used
+				hovered_interactable.interactable_id == &"use_machine"
+				# extremely dodgy ref to check the machine has a customer
+				and ((hovered_interactable.get_parent() as Machine3DGui).machine as Machine).customer
+				and owned_air_horn != null
 		):
 			item_indicator.show()
+			var item_prompt: String = ""
+			
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
-			item_text.text = "[%s] AIRHORN" % use_item_keybind
+			item_prompt = "[%s] AIRHORN" % use_item_keybind
+
+			if owned_air_horn.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt
 
 		elif (
-				hovered_interactable.display_name.contains("camera")
-				and equipped_item != null
-				and equipped_item.item_id == "whipped_cream"
-				and equipped_item.can_be_used
+				hovered_interactable.interactable_id == &"disarm_camera"
+				and owned_whipped_cream != null
 		):
 			item_indicator.show()
+			var item_prompt: String = ""
+			
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
-			item_text.text = "[%s] WHIPPED CREAM" % use_item_keybind
+			item_prompt = "[%s] WHIPPED CREAM" % use_item_keybind
+
+			if owned_whipped_cream.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt
+
+		elif (
+				hovered_interactable.interactable_id == &"use_air_freshener"
+				and owned_air_freshener != null
+		):
+			item_indicator.show()
+			var item_prompt: String = ""
+
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_prompt = "[%s] AIR FRESHENER" % use_item_keybind
+
+			if owned_air_freshener.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt
 
 		else:
 			item_indicator.hide()
 			item_text.text = ""
 
-		if hovered_interactable.hold_to_interact:
-			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
-			interactable_label.text = (
-					("(HOLD) [%s] - " % interact_keybind)
-					+ Global.hovered_interactable.display_name
-			)
-
-			hold_interact_progress.value = (
-					hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
-			)
-
-		else:
-			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
-			interactable_label.text = (
-					("[%s] - " % interact_keybind)
-					+ Global.hovered_interactable.display_name
-			)
+		var interaction_prompt: String = ""
+		if hovered_interactable.show_interact_hotkey:
+			if hovered_interactable.hold_to_interact:
+				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
+				interaction_prompt += "(HOLD) [%s] - " % interact_keybind
+				
+				hold_interact_progress.value = hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
+			else:
+				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
+				interaction_prompt += "[%s] - " % interact_keybind
+		interaction_prompt += Global.hovered_interactable.display_name
+		interactable_label.text = interaction_prompt
 
 	else:
 		interactable_indicator.hide()
