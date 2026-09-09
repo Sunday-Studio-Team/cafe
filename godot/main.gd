@@ -601,8 +601,6 @@ func _interactive_tutorial_shift() -> void:
 		if Global.shift_started:
 			break
 
-	print("shift started: %s" % Global.shift_started)
-
 	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
 
 	var repeat_instruction_timer: Timer = Timer.new()
@@ -784,67 +782,12 @@ func _interactive_tutorial_shift() -> void:
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_2")
 
-	# Spill tutorial: player learns to clean up spills
-	tutorial_machine.spill()
-
-	await get_tree().create_timer(0.5, false).timeout
-
-	var tutorial_machine_spilled_lines: Array[String] = [
-		"tutorial_machine_spilled_1",
-		"tutorial_machine_spilled_2",
-	]
-
-	for i in range(tutorial_machine_spilled_lines.size()):
-		var voice_line_id: String = tutorial_machine_spilled_lines[i]
-		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-		while tutorial_machine.spill_on_floor and Global.voice_line_system.is_playing_no_location_voice_line():
-			await get_tree().process_frame
-		if !tutorial_machine.spill_on_floor:
-			break
-
-	while tutorial_machine.spill_on_floor:
-		if repeat_instruction_timer.time_left == 0.0:
-			Global.voice_line_system.play_voice_line_at_location("tutorial_machine_spilled_3", _tutorial_vo_location_spill)
-			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-		else:
-			await get_tree().process_frame
-	repeat_instruction_timer.stop()
-
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_spill_cleaned_1")
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_spill_cleaned_2")
-
-	await get_tree().create_timer(0.5, false).timeout
-
-	tutorial_machine.break_down()
-
-	var tutorial_machine_broke_lines: Array[String] = [
-		"tutorial_machine_broke_1",
-		"tutorial_machine_broke_2",
-		"tutorial_machine_broke_3",
-	]
-
-	for i in range(tutorial_machine_broke_lines.size()):
-		var voice_line_id: String = tutorial_machine_broke_lines[i]
-		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-		while tutorial_machine.broken_down and Global.voice_line_system.is_playing_no_location_voice_line():
-			await get_tree().process_frame
-		if !tutorial_machine.broken_down:
-			break
-
-	while tutorial_machine.broken_down:
-		if repeat_instruction_timer.time_left == 0.0:
-			Global.voice_line_system.play_voice_line_at_location("tutorial_machine_broke_4", _tutorial_vo_location_machine_ui)
-			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-		else:
-			await get_tree().process_frame
-	repeat_instruction_timer.stop()
-
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_2")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_3")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_4")
 
-	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
+	var replaying_tutorial: bool = SaveDataManager.save_data.finished_or_skipped_tutorial
 
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
 	SaveDataManager.save_game_to_file()
