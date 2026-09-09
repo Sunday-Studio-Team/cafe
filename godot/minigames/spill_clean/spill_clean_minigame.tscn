@@ -25,10 +25,10 @@ scale_min = 0.099999994
 scale_max = 0.39999998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
-size = Vector2(640, 312)
+size = Vector2(241, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
-size = Vector2(644, 1348)
+size = Vector2(239, 488)
 
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 
@@ -65,7 +65,6 @@ allowed_remaining_ratio = 0.01
 
 [node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles", "splash", "mope_range")]
 position = Vector2(960.00006, 500.00003)
-scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_omxn0")
 script = ExtResource("4_6lir2")
 drag_area = NodePath("MopDragHitbox")
@@ -78,7 +77,7 @@ scrubber_texture = ExtResource("6_v4dls")
 dirty_scrubber_texture = ExtResource("7_80bh0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Mop" unique_id=360286918]
-position = Vector2(0, -500)
+position = Vector2(5.999939, -157.00003)
 amount = 10
 texture = ExtResource("5_quysc")
 lifetime = 2.0
@@ -87,13 +86,13 @@ process_material = SubResource("ParticleProcessMaterial_xnu58")
 [node name="MopHeadHitbox" type="Area2D" parent="Mop" unique_id=1322127866]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mop/MopHeadHitbox" unique_id=426483103]
-position = Vector2(16, -503)
+position = Vector2(-0.50006104, -184.00003)
 shape = SubResource("RectangleShape2D_6lir2")
 
 [node name="MopDragHitbox" type="Area2D" parent="Mop" unique_id=1484986336]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mop/MopDragHitbox" unique_id=1835631460]
-position = Vector2(17.999756, 13.999878)
+position = Vector2(0.49993896, -9.0000305)
 shape = SubResource("RectangleShape2D_xnu58")
 
 [node name="SplashSound" type="AudioStreamPlayer2D" parent="." unique_id=1715966103]
