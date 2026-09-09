@@ -1,6 +1,9 @@
 class_name VoiceLineSystem
 extends Node
 
+const NULL_VOICE_LINE_AUDIO_DURATION_BASE: float = 1.5
+const NULL_VOICE_LINE_AUDIO_DURATION_PER_CHAR: float = 0.05
+
 signal requested_show_voice_line_subtitle(voice_line: VoiceLine)
 signal requested_hide_voice_line_subtitle(voice_line: VoiceLine)
 
@@ -69,6 +72,10 @@ func play_voice_line_no_location(voice_line_id: String) -> void:
 
 func is_playing_no_location_voice_line() -> bool:
 	return _is_playing_no_location_voice_line
+
+static func calculate_missing_audio_stream_caption_duration(voice_line: VoiceLine) -> float:
+	var duration: float = NULL_VOICE_LINE_AUDIO_DURATION_BASE + (voice_line.subtitle_en.length() * NULL_VOICE_LINE_AUDIO_DURATION_PER_CHAR)
+	return duration
 
 func _interrupt_any_no_location_voice_lines() -> void:
 	_voice_line_no_location_player.interrupt_current_voice_line()
