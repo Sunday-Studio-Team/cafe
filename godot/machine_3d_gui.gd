@@ -1,7 +1,7 @@
 # mostly copied from sample project: https://godotengine.org/asset-library/asset/2807
 # (basically just handles putting our inputs into a scene on the subviewport
 # + some camera stuff)
-class_name Gui3D
+class_name Machine3DGui
 extends Node3D
 
 const CAM_TWEEN_DUR := 0.25

@@ -12,7 +12,7 @@ const CLEAN_SPILL_MINIGAME := "SpillClean"
 const REFILL_MINIGAME := "Refill"
 
 @export var static_body: StaticBody3D
-@export var gui_3d: Gui3D
+@export var gui_3d: Machine3DGui
 @export var timer: Timer
 @export var breakdown_timer: Timer
 @export var fix_machine_button: Interactable
@@ -116,8 +116,8 @@ func _ready() -> void:
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
-	fix_machine_button.used_active_item.connect(on_active_item_used_fix_machine)
-	gui_3d.interactable.used_active_item.connect(on_active_item_used)
+	fix_machine_button.requested_use_active_item.connect(_on_requested_use_active_item_fix_machine)
+	gui_3d.interactable.requested_use_active_item.connect(_on_requested_use_active_item_machine)
 	spill_interactable.interacted.connect(_on_clean_spill)
 
 	ordered_drink_name_label.hide()
@@ -781,31 +781,43 @@ func break_down() -> void:
 	hum_sound.stop()
 
 
-func on_active_item_used_fix_machine(item: Item):
-	if item == null:
+func _on_requested_use_active_item_fix_machine():
+	var hammer: Item = null
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "hammer":
+			hammer = owned_item
+			break
+	
+	if hammer == null or !hammer.can_be_used:
 		return
+	
+	Events.play_viewmodel_animation.emit("hammer_use")
+	Global.put_active_item_on_cooldown(hammer)
+	await Events.hammer_animation_hit
+	fix_machine(true)
 
-	if item.item_id == "hammer":
-		Events.play_viewmodel_animation.emit("hammer_use")
-		Global.put_active_item_on_cooldown(item)
-		await Events.hammer_animation_hit
-		fix_machine(true)
 
+func _on_requested_use_active_item_machine():
+	var air_horn: Item = null
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "air_horn":
+			air_horn = owned_item
+			break
 
-func on_active_item_used(item: Item):
-	if item == null:
+	if air_horn == null or !air_horn.can_be_used:
 		return
+	
+	if customer:
+		#Putting new animation to test change
+		#TODO: Replace base animation with newest one
+		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		airhorn_sound.play()
+		customer.leave_store()
+		_set_customer(null)
+		waiting_for_response = false
+		order_breakdown.hide()
 
-	if item.item_id == "airhorn":
-		if customer:
-			Events.play_viewmodel_animation.emit("airhorn_use")
-			airhorn_sound.play()
-			customer.leave_store()
-			_set_customer(null)
-			waiting_for_response = false
-			order_breakdown.hide()
-
-			Global.put_active_item_on_cooldown(item)
+		Global.put_active_item_on_cooldown(air_horn)
 
 
 func _on_clean_spill() -> void:

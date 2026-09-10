@@ -2,7 +2,6 @@ extends Control
 class_name ReviewContainer
 
 @export var customer_profile_texture_rect: TextureRect
-@export var icon: Sprite2D
 @export var username: Label
 @export var review_content: RichTextLabel
 @export var star_1: TextureRect
@@ -12,7 +11,6 @@ var review: Review = null:
 	set(value):
 		if value == null:
 			review = null
-			icon.texture = null
 		else:
 			review = value
 			reviews_number.text = "%s Reviews" % review.numbers
@@ -22,12 +20,11 @@ var review: Review = null:
 				customer_sprite_data = review.customer_sprite_data_options.pick_random()
 			if customer_sprite_data != null:
 				var profile_picture: AtlasTexture = customer_sprite_data.generate_email_crop_texture()
-				customer_profile_texture_rect.texture = profile_picture
-				icon.texture = profile_picture
+				if profile_picture != null:				
+					customer_profile_texture_rect.texture = profile_picture
 			else:
 				var fallback_profile_picture: Texture2D = review.sprites.pick_random()
 				customer_profile_texture_rect.texture = fallback_profile_picture
-				icon.texture = fallback_profile_picture
 			review_content.text = review.review_content
 			username.text = "@" + review.username
 			match review.rating:

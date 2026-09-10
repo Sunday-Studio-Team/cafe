@@ -54,6 +54,7 @@ func _process(_delta: float) -> void:
 
 func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	const TIMING_PRINTS: bool = true
+	const COUNT_CHILDREN_PRINTS: bool = true
 
 	if current_scene:
 		get_tree().paused = true
@@ -67,7 +68,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	_loading_progress_bar.min_value = 0.0
 	_loading_progress_bar.max_value = 1.0
 
-	var loading_start_time_ms: int = Time.get_ticks_msec()
+	var loading_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	if TIMING_PRINTS: print("SceneSwitcher: started timing loading")
 
 	var cached_packed_scene: PackedScene = null
@@ -89,7 +90,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 
 		var finished_requests: int = 0
 		for resource_uid_request in resource_uid_requests:
-			var request_start_time_ms: int = Time.get_ticks_msec()
+			var request_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 			if TIMING_PRINTS: print("SceneSwitcher: started timing resource %s loading" % finished_requests)
 
 			var use_sub_threads: bool = false
@@ -142,37 +143,41 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 				if TIMING_PRINTS: print("SceneSwitcher: cached sub resource")
 				_cached_sub_resources[resource_uid_request] = requested_resource
 
-			var request_end_time_ms: int = Time.get_ticks_msec()
-			var request_total_duration_ms: int = request_end_time_ms - request_start_time_ms
+			var request_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
+			var request_total_duration_ms: int = floori(request_end_time_ms - request_start_time_ms)
 			if TIMING_PRINTS: print("SceneSwitcher: resource %s (%s) loading duration: %s ms" % [finished_requests, requested_resource.resource_path, request_total_duration_ms])
 
 			finished_requests += 1
 
 		if TIMING_PRINTS: print("SceneSwitcher: done loading, instantiating scene")
 
-	var loading_end_time_ms: int = Time.get_ticks_msec()
-	var loading_total_duration_ms: int = loading_end_time_ms - loading_start_time_ms
+	var loading_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
+	var loading_total_duration_ms: int = floor(loading_end_time_ms - loading_start_time_ms)
 	if TIMING_PRINTS: print("SceneSwitcher: total loading duration: %s ms" % loading_total_duration_ms)
 
 	_loading_progress_bar.visible = false
 
-	var instantiating_start_time_ms: int = Time.get_ticks_msec()
+	var instantiating_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	if TIMING_PRINTS: print("SceneSwitcher: started timing instantiation")
-
+	
 	current_scene = scene_packed_scene.instantiate()
 
-	var instantiating_end_time_ms: int = Time.get_ticks_msec()
-	var instantiating_total_duration_ms: int = instantiating_end_time_ms - instantiating_start_time_ms
+	var instantiating_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
+	var instantiating_total_duration_ms: int = floori(instantiating_end_time_ms - instantiating_start_time_ms)
 	if TIMING_PRINTS: print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
 
-	var add_child_start_time_ms: int = Time.get_ticks_msec()
-	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child, current child node count: %s" % _count_children_recursively(self))
-
+	var add_child_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
+	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child")
+	if COUNT_CHILDREN_PRINTS: print("SceneSwitcher: current child node count: %s" % _count_children_recursively(self))
+	
 	add_child(current_scene)
+	
+	await get_tree().process_frame
 
-	var add_child_end_time_ms: int = Time.get_ticks_msec()
-	var add_child_total_duration_ms: int = add_child_end_time_ms - add_child_start_time_ms
-	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms, new child count: %s" % [add_child_total_duration_ms, _count_children_recursively(self)])
+	var add_child_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
+	var add_child_total_duration_ms: int = floori(add_child_end_time_ms - add_child_start_time_ms)
+	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms" % add_child_total_duration_ms)
+	if COUNT_CHILDREN_PRINTS: print("SceneSwitcher: total new child count: %s" % _count_children_recursively(self))
 
 	get_tree().paused = false
 
