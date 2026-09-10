@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://beuytn1b6cojy" path="res://sprites/machine_ui/refill bar bg.png" id="13_u8yrf"]
 [ext_resource type="Texture2D" uid="uid://dyehef5xmtkfj" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0001.png" id="14_71all"]
 [ext_resource type="Texture2D" uid="uid://cj6lcuv5eemuu" path="res://sprites/machine_ui/refill bar border.png" id="14_l6aen"]
+[ext_resource type="Texture2D" uid="uid://yolcpmmbputy" path="res://sprites/machine_ui/inactive remake button.png" id="15_lhji5"]
 [ext_resource type="Texture2D" uid="uid://dfrwyav62s37u" path="res://sprites/machine_ui/refill button.png" id="16_10yj4"]
 [ext_resource type="Texture2D" uid="uid://bnq53b7bbl163" path="res://sprites/machine_ui/empty small screen.png" id="17_267yc"]
 
@@ -466,12 +467,15 @@ layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_visual_only = false
 texture_normal = ExtResource("12_motd3")
+texture_pressed = ExtResource("15_lhji5")
+texture_disabled = ExtResource("15_lhji5")
 
 [node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=261257475]
 layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_visual_only = false
 texture_normal = ExtResource("10_71all")
+texture_pressed = ExtResource("11_10yj4")
 texture_disabled = ExtResource("11_10yj4")
 
 [node name="MoneyRatingContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=633592481]

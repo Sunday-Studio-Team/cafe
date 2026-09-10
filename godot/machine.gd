@@ -422,7 +422,7 @@ func machine_make_drink() -> void:
 	# NOTE: experiment: commented out for now to simplify ui
 	#customer_order_indicator.show()
 	ordered_drink_icon.show()
-	ordered_drink_name_label.show()
+	# ordered_drink_name_label.show()
 	order_breakdown.show()
 
 	timer.start()
