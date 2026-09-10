@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://btqpw8yhbjges" path="res://ui/main_menu.gd" id="1_t7e0r"]
 [ext_resource type="PackedScene" uid="uid://u0mxb00igfni" path="res://ui/options_menu/options_menu.tscn" id="2_0dkrt"]
+[ext_resource type="Script" uid="uid://dh7or462kaeel" path="res://ui/global_cursor.gd" id="3_wk0pr"]
+[ext_resource type="Texture2D" uid="uid://dcgbb3g3jay21" path="res://cursor_idle.png" id="4_8uxxo"]
+[ext_resource type="Texture2D" uid="uid://e14er0jdm5sr" path="res://cursor_click.png" id="5_ei257"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "quit_button", "_options_button")]
 script = ExtResource("1_t7e0r")
@@ -9,6 +12,11 @@ play_button = NodePath("MarginContainer/VBoxContainer/Buttons/Play")
 quit_button = NodePath("MarginContainer/VBoxContainer/Buttons/Quit")
 _options_button = NodePath("MarginContainer/VBoxContainer/Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
+
+[node name="GlobalCursor" type="Node" parent="." unique_id=716050075]
+script = ExtResource("3_wk0pr")
+normal_cursor = ExtResource("4_8uxxo")
+clicked_cursor = ExtResource("5_ei257")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1287952031]
 anchors_preset = 15
