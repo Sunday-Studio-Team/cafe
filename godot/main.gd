@@ -430,6 +430,8 @@ func spawn_trash() -> void:
 	print("spawned trash")
 	
 	add_child(customer_trash)
+	Events.alert_posted.emit("Customer dropeed some trash...", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+
 	
 func _on_game_timer_timeout() -> void:
 	Events.shift_end_sequence_started.emit()
