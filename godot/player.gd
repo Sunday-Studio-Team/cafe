@@ -7,7 +7,7 @@ const STRIDE_LENGTH := 1.25
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
 @export var ingredients_bag: MeshInstance3D
-@export var customer_trash: MeshInstance3D
+@export var customer_trash: Sprite3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
@@ -72,19 +72,20 @@ func _ready() -> void:
 			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
 	
+	customer_trash.visibility_changed.connect(
+		func():
+			if customer_trash.visible:
+				customer_trash.scale = Vector3.ZERO
+	)
 	Events.trash_pickup_animation_grabbed.connect(
 		func():
 			bag_pickup_sound.play()
 
-			# scuffed 'animation' of bag appearing when we grab it
-			customer_trash.transparency = 1
-			customer_trash.scale = Vector3.ZERO
-
+			# scuffed 'animation' of trash appearing when we grab it
 			await Events.viewmodel_animation_finished
 			
-			#var t := create_tween().set_parallel()
-			#t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
-			#t.tween_property(customer_trash, "transparency", 0, 0.25),
+			var t := create_tween().set_parallel()
+			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
 
 
@@ -290,7 +291,6 @@ func handle_ingredients_bag() -> void:
 
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
-		
 		Global.holding_trash = false
 		#print("heshel", customer_trash_scene)
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
