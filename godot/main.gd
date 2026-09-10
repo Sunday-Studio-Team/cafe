@@ -485,7 +485,11 @@ func _tippy_tutorials() -> void:
 		"tutorial_day1_2",
 		"tutorial_day1_3",
 		"tutorial_day1_4",
-	] 
+		"tutorial_day1_5",
+		"tutorial_day1_6",
+		"tutorial_day1_7",
+		"tutorial_day1_8",
+	]
 	
 	var tutorial_lines_day2: Array[String] = [
 		"tutorial_day2_1",
