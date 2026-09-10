@@ -4,9 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://u0mxb00igfni" path="res://ui/options_menu/options_menu.tscn" id="2_0dkrt"]
 [ext_resource type="Texture2D" uid="uid://d30bqsmjkmds3" path="res://Assets/main_menu/MAIN MENU.png" id="3_rmr83"]
 [ext_resource type="Texture2D" uid="uid://bet57jtil2hrv" path="res://Assets/main_menu/MAINMENU-SETTINGS.png" id="3_wk0pr"]
+[ext_resource type="Texture2D" uid="uid://bwoocyv7tuqy3" path="res://Assets/main_menu/BG.png" id="4_0nobx"]
 [ext_resource type="Texture2D" uid="uid://bjx7p7r8lm7aj" path="res://Assets/main_menu/MAINMENU-CONTINUE.png" id="4_8uxxo"]
 [ext_resource type="Script" uid="uid://cd47udvmhermt" path="res://ui/buttons.gd" id="4_p8ri8"]
+[ext_resource type="Texture2D" uid="uid://d3hkkncg06tgt" path="res://Assets/main_menu/Chest.png" id="5_iyrh0"]
+[ext_resource type="Texture2D" uid="uid://32em3wf511p2" path="res://Assets/main_menu/Hair.png" id="6_8jgmr"]
 [ext_resource type="Texture2D" uid="uid://cd64ew2letnkt" path="res://Assets/main_menu/MAINMENU-EXIT.png" id="6_ei257"]
+[ext_resource type="Texture2D" uid="uid://dx7x22k7t8v1w" path="res://Assets/main_menu/Head.png" id="7_q75kt"]
+[ext_resource type="Texture2D" uid="uid://3amfmhcfnft4" path="res://Assets/main_menu/Arm.png" id="8_0i0gl"]
+[ext_resource type="Texture2D" uid="uid://djomcocgho7s4" path="res://Assets/main_menu/ForeArm.png" id="9_jqly5"]
+[ext_resource type="Texture2D" uid="uid://d4kckk2ei1dtp" path="res://Assets/main_menu/Handle.png" id="10_pbm0j"]
+[ext_resource type="Texture2D" uid="uid://b3e7ml41l5vg2" path="res://Assets/main_menu/Tippy.png" id="11_sb7pk"]
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
 
@@ -25,6 +33,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_rmr83")
+stretch_mode = 5
+
+[node name="Bg" type="Sprite2D" parent="." unique_id=128788965]
+position = Vector2(1002.00006, 557)
+scale = Vector2(1.225256, 1.225256)
+texture = ExtResource("4_0nobx")
+
+[node name="Chest" type="Sprite2D" parent="." unique_id=1423608147]
+position = Vector2(1042.5, 569)
+texture = ExtResource("5_iyrh0")
+
+[node name="Hair" type="Sprite2D" parent="." unique_id=700149125]
+position = Vector2(1042.5, 569)
+texture = ExtResource("6_8jgmr")
+
+[node name="Head" type="Sprite2D" parent="." unique_id=429291390]
+position = Vector2(1042.5, 569)
+texture = ExtResource("7_q75kt")
+
+[node name="Arm" type="Sprite2D" parent="." unique_id=1289322961]
+position = Vector2(1042.5, 569)
+texture = ExtResource("8_0i0gl")
+
+[node name="ForeArm" type="Sprite2D" parent="." unique_id=1790326256]
+position = Vector2(1042.5, 569)
+texture = ExtResource("9_jqly5")
+
+[node name="Handle" type="Sprite2D" parent="." unique_id=1561813986]
+position = Vector2(1042.5, 569)
+texture = ExtResource("10_pbm0j")
+
+[node name="Tippy" type="Sprite2D" parent="." unique_id=830360356]
+position = Vector2(1047.5, 533)
+texture = ExtResource("11_sb7pk")
 
 [node name="Buttons" type="Control" parent="." unique_id=732320545]
 layout_mode = 3
