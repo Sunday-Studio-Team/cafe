@@ -3,11 +3,25 @@
 [ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/shift_end_screen.gd" id="1_cwskb"]
 [ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
 [ext_resource type="PackedScene" uid="uid://dfdxran8jmt41" path="res://ui/free_item_selector_screen.tscn" id="2_n6kr8"]
+[ext_resource type="Texture2D" uid="uid://ctfsivqkpfh5f" path="res://sprites/end_shift/receipt_bg.png" id="3_1olvq"]
 [ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
+[ext_resource type="FontFile" uid="uid://dk6nx8axv5jyo" path="res://fonts/VCR_OSD_MONO_1.001(1).ttf" id="4_cypxk"]
 [ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
 [ext_resource type="AudioStream" uid="uid://cww7w5j41tgbm" path="res://audio/time_up.wav" id="5_iiu1j"]
+[ext_resource type="Texture2D" uid="uid://d2muiuggnd25j" path="res://sprites/end_shift/stamp_cleared.png" id="5_l71wa"]
 [ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
+[ext_resource type="Texture2D" uid="uid://bppvkw8ktws3h" path="res://sprites/end_shift/phone_plain.png" id="6_fh4al"]
+[ext_resource type="Texture2D" uid="uid://ux248k3hvbwj" path="res://sprites/end_shift/phoneUI_bg.png" id="6_t50qp"]
 [ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
+[ext_resource type="Texture2D" uid="uid://dvqlemhaqvvxh" path="res://sprites/end_shift/profile_pic.png" id="8_66p45"]
+[ext_resource type="Texture2D" uid="uid://dce1q2q1snkpk" path="res://sprites/end_shift/itemBG_unlocked.png" id="9_3n0pv"]
+[ext_resource type="Texture2D" uid="uid://gup74txmyjc5" path="res://sprites/end_shift/item_unlocked.png" id="10_66p45"]
+[ext_resource type="Texture2D" uid="uid://70b1xd6yef8g" path="res://sprites/end_shift/phone_charm.png" id="10_s5d2k"]
+[ext_resource type="Texture2D" uid="uid://cav47pprolap7" path="res://sprites/end_shift/itemBG_locked.png" id="11_3n0pv"]
+[ext_resource type="Texture2D" uid="uid://ddb2lvi5auue4" path="res://sprites/items/scrubber.png" id="11_s5d2k"]
+[ext_resource type="Texture2D" uid="uid://d4ibtdu48amcl" path="res://sprites/end_shift/item_locked.png" id="13_s5d2k"]
+[ext_resource type="Texture2D" uid="uid://b4ro5f7p2ivkb" path="res://sprites/end_shift/days_base.png" id="14_e16oh"]
+[ext_resource type="Texture2D" uid="uid://dwg0ey6l1shie" path="res://sprites/end_shift/days_check.png" id="15_j2nqk"]
 
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
@@ -101,28 +115,65 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
+[sub_resource type="Animation" id="Animation_wegfb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ReceiptMargin:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qc8dq"]
+resource_name = "ui_entry"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ReceiptMargin:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.7, 1.05, 1.5666667),
+"transitions": PackedFloat32Array(0.1250001, 0.1250001, 0.1250001, 0.8705507, 0.1250001),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, -120), Vector2(-80, -240), Vector2(-120, -360), Vector2(-360, -1080)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ln01"]
+_data = {
+&"RESET": SubResource("Animation_wegfb"),
+&"ui_entry": SubResource("Animation_qc8dq")
+}
+
 [node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
-_day_label = NodePath("MarginContainer/VBoxContainer/Outcome")
-times_up = NodePath("MarginContainer/TimesUp")
-outcome = NodePath("MarginContainer/VBoxContainer/Outcome2")
+_day_label = NodePath("VBoxContainer/Outcome")
+times_up = NodePath("TimesUp")
+outcome = NodePath("VBoxContainer/Outcome2")
 time_up_sound = NodePath("TimeUpSound")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
-_money_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MoneyTitle")
-_min_profit_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MinGoal")
-_profit_made_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
-_rating_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/RatingTitle")
-_rating_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Rating")
-_tips_per_star_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info")
-_tip_jar_desc_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer/TipMultiplierDesc")
-_tips_today_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Tips")
-_bank_total_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/TipsTotal")
+_money_title_label = NodePath("VBoxContainer/HBoxContainer/MoneyCalcScreen/MoneyTitle")
+_min_profit_goal_label = NodePath("VBoxContainer/HBoxContainer/MoneyCalcScreen/MinGoal")
+_profit_made_label = NodePath("VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
+_rating_title_label = NodePath("VBoxContainer/HBoxContainer/Rating/RatingTitle")
+_rating_label = NodePath("VBoxContainer/HBoxContainer/Rating/Rating")
+_tips_per_star_label = NodePath("VBoxContainer/HBoxContainer/Rating/Info")
+_tip_jar_desc_label = NodePath("VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer/TipMultiplierDesc")
+_tips_today_label = NodePath("VBoxContainer/HBoxContainer/Rating/Tips")
+_bank_total_label = NodePath("VBoxContainer/HBoxContainer/Rating/TipsTotal")
 bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
-button = NodePath("MarginContainer/VBoxContainer/Button")
+button = NodePath("VBoxContainer/Button")
 stars_sound = NodePath("StarsSound")
 _free_item_selector_screen_packed_scene = ExtResource("2_n6kr8")
 _free_item_selector_screen_container = NodePath("FreeItemSelectorScreenContainer")
@@ -137,21 +188,384 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 0.78431374)
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ReceiptMargin" type="MarginContainer" parent="." unique_id=1052151646]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -495.0
+offset_top = 461.0
+offset_right = 362.0
+offset_bottom = 2036.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(428.5, 787.5)
+offset_transform_enabled = true
+offset_transform_rotation = -0.20071286
 theme = SubResource("Theme_70k24")
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="TimesUp" type="RichTextLabel" parent="MarginContainer" unique_id=1255215483]
-visible = false
+[node name="ReceiptBG" type="TextureRect" parent="ReceiptMargin" unique_id=513297257]
 layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_1olvq")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ReceiptMargin/ReceiptBG" unique_id=388650804]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReceiptMargin/ReceiptBG/MarginContainer" unique_id=2004750175]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Header" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer" unique_id=1041642049]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[right][color=black][font_size=64]MONDAY[br]---------------[br][font_size=80]CAFE PROFITS[font_size=64][br]---------------"
+fit_content = true
+scroll_active = false
+
+[node name="GoalContainer" type="HBoxContainer" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer" unique_id=955932493]
+layout_mode = 2
+
+[node name="Goal" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer/GoalContainer" unique_id=1686063612]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[left][color=black][font_size=56]Goal"
+fit_content = true
+scroll_active = false
+
+[node name="GoalLines" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer/GoalContainer" unique_id=789270855]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[center][color=black][font_size=56]----"
+fit_content = true
+scroll_active = false
+
+[node name="GoalValue" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer/GoalContainer" unique_id=335345759]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[right][color=black][font_size=64]$30"
+fit_content = true
+scroll_active = false
+
+[node name="EarningsContainer" type="HBoxContainer" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer" unique_id=1740009762]
+layout_mode = 2
+
+[node name="Earnings" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer/EarningsContainer" unique_id=1751419729]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[left][color=black][font_size=56]Earnings"
+fit_content = true
+scroll_active = false
+
+[node name="EarningsLines" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer/EarningsContainer" unique_id=425837838]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[center][color=black][font_size=56]-"
+fit_content = true
+scroll_active = false
+
+[node name="EarningsValue" type="RichTextLabel" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer/EarningsContainer" unique_id=141645376]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/normal_font = ExtResource("4_cypxk")
+theme_override_fonts/bold_font = ExtResource("4_cypxk")
+bbcode_enabled = true
+text = "[right][color=black][font_size=64]$41.41"
+fit_content = true
+scroll_active = false
+
+[node name="PassFailStamp" type="TextureRect" parent="ReceiptMargin/ReceiptBG/MarginContainer/VBoxContainer" unique_id=156658026]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_rotation = 0.36651915
+texture = ExtResource("5_l71wa")
+stretch_mode = 2
+
+[node name="PhoneMargin" type="MarginContainer" parent="." unique_id=968996121]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 512.0
+offset_right = 743.0
+offset_bottom = 1375.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(365.5, 431.5)
+offset_transform_enabled = true
+offset_transform_rotation = 1.5707964
+
+[node name="PhoneBottom" type="TextureRect" parent="PhoneMargin" unique_id=1150972764]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_fh4al")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneMargin/PhoneBottom" unique_id=2014397316]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 24
+
+[node name="PhoneBG" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer" unique_id=291515224]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_t50qp")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG" unique_id=259624184]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer" unique_id=102145420]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer" unique_id=540561717]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("8_66p45")
+stretch_mode = 2
+
+[node name="RewardsContainer" type="MarginContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer" unique_id=488314616]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 88
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer" unique_id=311086711]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="G_Item" type="VBoxContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer" unique_id=1470407950]
+layout_mode = 2
+
+[node name="GuaranteedItemBG" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/G_Item" unique_id=696155713]
+layout_mode = 2
+texture = ExtResource("9_3n0pv")
+stretch_mode = 2
+
+[node name="Shine" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/G_Item/GuaranteedItemBG" unique_id=1143429672]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("10_66p45")
+
+[node name="G_ItemTexture" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/G_Item/GuaranteedItemBG" unique_id=1144051539]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_s5d2k")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/G_Item" unique_id=709058831]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0.25871998, 0.11759999, 0.42, 1)
+theme_override_constants/shadow_outline_size = 3
+bbcode_enabled = true
+text = "[color=sea_green][font_size=24][b]Clear Day X"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="B_Item" type="VBoxContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer" unique_id=872104207]
+layout_mode = 2
+
+[node name="BonusItemBG" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/B_Item" unique_id=1799533313]
+layout_mode = 2
+texture = ExtResource("11_3n0pv")
+stretch_mode = 2
+
+[node name="Shine" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/B_Item/BonusItemBG" unique_id=1956944246]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("10_66p45")
+
+[node name="G_ItemTexture" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/B_Item/BonusItemBG" unique_id=1055912274]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_s5d2k")
+expand_mode = 1
+
+[node name="Lock" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/B_Item/BonusItemBG" unique_id=1319985757]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -50.5
+offset_right = -41.5
+offset_bottom = -50.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(37.5, 58)
+texture = ExtResource("13_s5d2k")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/RewardsContainer/HBoxContainer/B_Item" unique_id=253136600]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_shadow_color = Color(0.25871998, 0.11759999, 0.42, 1)
+theme_override_constants/shadow_outline_size = 3
+bbcode_enabled = true
+text = "[color=goldenrod][font_size=24][b]Get 4.5 Rating"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="DayCounterMargin" type="MarginContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer" unique_id=1019623023]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin" unique_id=163572507]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("14_e16oh")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin/TextureRect" unique_id=474368999]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 23
+alignment = 1
+
+[node name="CheckDay1" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin/TextureRect/HBoxContainer" unique_id=1117547961]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_j2nqk")
+stretch_mode = 2
+
+[node name="CheckDay2" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin/TextureRect/HBoxContainer" unique_id=1427985236]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_j2nqk")
+stretch_mode = 2
+
+[node name="CheckDay3" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin/TextureRect/HBoxContainer" unique_id=137913191]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_j2nqk")
+stretch_mode = 2
+
+[node name="CheckDay4" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin/TextureRect/HBoxContainer" unique_id=433924277]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_j2nqk")
+stretch_mode = 2
+
+[node name="CheckDay5" type="TextureRect" parent="PhoneMargin/PhoneBottom/MarginContainer/PhoneBG/MarginContainer/VBoxContainer/DayCounterMargin/TextureRect/HBoxContainer" unique_id=1236879845]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_j2nqk")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PhoneMargin/PhoneBottom" unique_id=955096619]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 123.0
+offset_right = 665.0
+offset_bottom = 343.0
+pivot_offset = Vector2(24, 3)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("10_s5d2k")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1638629251]
+offset_left = 185.0
+offset_top = -26.0
+offset_right = 842.0
+offset_bottom = 1349.0
+
+[node name="TimesUp" type="RichTextLabel" parent="." unique_id=1255215483]
+visible = false
+offset_left = 185.0
+offset_top = -26.0
+offset_right = 842.0
+offset_bottom = 1349.0
 theme_override_font_sizes/bold_font_size = 256
 bbcode_enabled = true
 text = "[b]TIME'S
@@ -159,10 +573,14 @@ UP! ⌛️"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1545259444]
-layout_mode = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1545259444]
+visible = false
+offset_left = 185.0
+offset_top = -26.0
+offset_right = 1905.0
+offset_bottom = 1349.0
 
-[node name="Outcome" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1334439900]
+[node name="Outcome" type="RichTextLabel" parent="VBoxContainer" unique_id=1334439900]
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 size_flags_vertical = 0
@@ -172,7 +590,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Outcome2" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=2035401107]
+[node name="Outcome2" type="RichTextLabel" parent="VBoxContainer" unique_id=2035401107]
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 size_flags_vertical = 0
@@ -182,15 +600,15 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1930785200]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1930785200]
 layout_mode = 2
 alignment = 1
 
-[node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=475181285]
+[node name="MoneyCalcScreen" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=475181285]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="DayTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=123944233]
+[node name="DayTitle" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=123944233]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 82
@@ -201,7 +619,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MoneyTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
+[node name="MoneyTitle" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
 custom_maximum_size = Vector2(1000, 100)
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
@@ -210,7 +628,7 @@ text = "[b]cafe profits"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="MinGoal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1475557562]
+[node name="MinGoal" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1475557562]
 custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
@@ -219,7 +637,7 @@ text = "required goal: $20"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Profit" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1865208455]
+[node name="Profit" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1865208455]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
@@ -228,11 +646,11 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="Rating" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1855303608]
+[node name="Rating" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1855303608]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="RatingTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1751468109]
+[node name="RatingTitle" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Rating" unique_id=1751468109]
 custom_maximum_size = Vector2(1000, 100)
 layout_mode = 2
 theme_override_font_sizes/bold_font_size = 64
@@ -241,7 +659,7 @@ text = "[b]rating"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Rating" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=54102786]
+[node name="Rating" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Rating" unique_id=54102786]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
@@ -250,7 +668,7 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=398510589]
+[node name="Info" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Rating" unique_id=398510589]
 clip_contents = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 64
@@ -260,7 +678,7 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/Info" unique_id=648041750]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Rating/Info" unique_id=648041750]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -277,7 +695,7 @@ offset_transform_enabled = true
 offset_transform_rotation = 0.082030475
 alignment = 1
 
-[node name="TipMultiplierDesc" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer" unique_id=668037415]
+[node name="TipMultiplierDesc" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer" unique_id=668037415]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(1, 0.8833333, 0, 1)
@@ -288,7 +706,7 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="Tips" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=2144848338]
+[node name="Tips" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Rating" unique_id=2144848338]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -298,7 +716,7 @@ text = "= +[color=gold]$10[/color] tips"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="TipsTotal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1779244370]
+[node name="TipsTotal" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Rating" unique_id=1779244370]
 custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -310,7 +728,7 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2091535216]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=2091535216]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
@@ -323,6 +741,7 @@ theme_override_font_sizes/font_size = 96
 text = "continue"
 
 [node name="FreeItemSelectorScreenContainer" type="Control" parent="." unique_id=772795043]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -352,3 +771,6 @@ volume_db = -5.0
 [node name="StarsSound" type="AudioStreamPlayer" parent="." unique_id=1833295684]
 stream = ExtResource("7_xu4ny")
 volume_db = -5.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1075635230]
+libraries/ = SubResource("AnimationLibrary_6ln01")
