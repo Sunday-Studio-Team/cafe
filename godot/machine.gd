@@ -168,7 +168,7 @@ func _process(delta: float) -> void:
 	
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.disabled = not waiting_for_response
-	make_drink_button.disabled = not waiting_for_response and (ingredients < Stats.current.ingredients_per_order or make_drink_locked)
+	make_drink_button.disabled = not waiting_for_response or (ingredients < Stats.current.ingredients_per_order) or make_drink_locked
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
