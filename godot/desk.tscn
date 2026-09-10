@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://d1mpho6m2ulj7" path="res://Assets/stickynote/stickynote.tscn" id="4_h1g2g"]
 [ext_resource type="PackedScene" uid="uid://dg6mtco6uo06" path="res://Assets/cup w pens/cup_with_pens.tscn" id="5_upty0"]
 [ext_resource type="PackedScene" uid="uid://moxt1235cxs8" path="res://Assets/crane/cranes.tscn" id="6_bn8wp"]
-[ext_resource type="PackedScene" uid="uid://c3gk12fh1bx5y" path="res://Assets/chinese deco/New Kitty (1).glb" id="6_lrwc4"]
 [ext_resource type="PackedScene" uid="uid://ko1bcwrjfvqi" path="res://Assets/lamps/lamp_2.tscn" id="7_322rb"]
 [ext_resource type="PackedScene" uid="uid://v5xwxv8wthdc" path="res://Assets/chinese deco/Blue Carp.glb" id="7_vf3xh"]
 [ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
@@ -21,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dp2f5wjrstomy" path="res://Assets/gourd/gourd.tscn" id="17_upty0"]
 [ext_resource type="PackedScene" uid="uid://ctatvirne26k8" path="res://Assets/lamps/lamp_1&5_(1).tscn" id="19_upty0"]
 [ext_resource type="Texture2D" uid="uid://ftsy86sxb8oe" path="res://Assets/lamps/Lamp 1&5 (1)_Lamps_Base_color.png" id="22_xbtx5"]
+[ext_resource type="PackedScene" uid="uid://dsfxlutfu7q7j" path="res://Assets/cat/goldcat.tscn" id="23_xbtx5"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 [ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
 
@@ -908,9 +908,6 @@ transform = Transform3D(-0.99999994, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 
 transform = Transform3D(0.045692813, 0, 0.11777877, 0, 0.0078591015, 0, -0.08894727, 0, 0.060503744, -0.43635517, 0.6867814, -0.16624892)
 mesh = SubResource("ArrayMesh_xqqvg")
 
-[node name="New Kitty (1)" parent="Day0DeskProps" unique_id=44918328 instance=ExtResource("6_lrwc4")]
-transform = Transform3D(0.20067377, 0, -0.6227989, 0, 0.65433055, 0, 0.6227989, 0, 0.20067377, -0.50863266, 0.5790918, -0.324787)
-
 [node name="Day1DeskProps" type="Node3D" parent="." unique_id=1254205895]
 
 [node name="Lamp2" parent="Day1DeskProps" unique_id=1016242972 instance=ExtResource("80_h3q4e")]
@@ -929,6 +926,9 @@ omni_range = 0.5586623
 [node name="Day4DeskProps" type="Node3D" parent="." unique_id=1906916221]
 
 [node name="Day5DeskProps" type="Node3D" parent="." unique_id=457472114]
+
+[node name="goldcat" parent="." unique_id=1334081156 instance=ExtResource("23_xbtx5")]
+transform = Transform3D(1.2217953, 0, -1.9863026, 0, 2.3319912, 0, 1.9863026, 0, 1.2217953, -0.9967565, 1.3226638, -0.042195708)
 
 [editable path="office desk"]
 [editable path="office desk/cranes"]
