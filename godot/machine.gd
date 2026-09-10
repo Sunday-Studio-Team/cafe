@@ -279,29 +279,6 @@ func blast_player_from_using_machine() -> void:
 
 	Global.player.velocity += launch_vector
 
-
-func set_order_action_buttons_available(button_case: String) -> void:
-	accept_button.disabled = true
-	make_drink_locked = true
-	refill_button.disabled = true
-
-	match button_case:
-		"accept":
-			accept_button.disabled = false
-		"make_drink":
-			make_drink_locked = false
-		"refill":
-			refill_button.disabled = false
-		"all":
-			accept_button.disabled = false
-			make_drink_button.disabled = false
-			refill_button.disabled = false
-		"none":
-			pass
-		_:
-			print("invalid button_case passed to set_order_action_buttons_available()")
-
-
 # called from inside spill() (so that itll still show if we trigger the spill
 # via a console command etc)
 func show_tutorial_go_clean_spill() -> void:
@@ -715,9 +692,6 @@ func cancel_clean_spill() -> void:
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 
 
-func float_to_price(number: float) -> String:
-	return ("$%.2f" % number).trim_suffix(".00")
-
 func accept_order(did_remake_drink: bool) -> void:
 	test_1 = 0
 	test_2 = 0
@@ -761,7 +735,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		await get_tree().create_timer(0.8, false).timeout
 
 	Events.alert_posted.emit(
-		"+%s Drink sold!" % float_to_price(order.final_order_price),
+		"+%s Drink sold!" % Global.float_to_price(order.final_order_price),
 		UI.AlertIconType.MONEY,
 		4.0,
 		UI.ALERT_COLOR_MONEY
@@ -779,19 +753,6 @@ func accept_order(did_remake_drink: bool) -> void:
 	await get_tree().create_timer(1.5, false).timeout
 	customer.leave_store()
 	_set_customer(null)
-
-
-#func reject_order() -> void:
-	#gui_3d.exit_with_camera_tween()
-#
-	## TODO: check if this can happen
-	#if ingredients < Stats.current.ingredients_per_order:
-		#return
-#
-	#waiting_for_response = false
-#
-	#machine_make_drink()
-
 
 func break_down() -> void:
 	if broken_down:
