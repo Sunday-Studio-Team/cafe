@@ -455,6 +455,7 @@ metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
 [node name="CustomerCamera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
 transform = Transform3D(0.90999997, 0, 0, 0, 0.87899244, 0.2355253, 0, -0.23552532, 0.8789924, 0, 1.876231, -0.56426746)
+fov = 90.0
 
 [node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
