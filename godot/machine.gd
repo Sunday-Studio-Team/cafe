@@ -111,6 +111,8 @@ var test_3: int = 0
 
 func _ready() -> void:
 	get_stats()
+	ordered_drink_icon.hide()
+	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
 
 	ingredients = Stats.current.machine_starting_ingredients
@@ -166,8 +168,7 @@ func _process(delta: float) -> void:
 	
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.disabled = not waiting_for_response
-	make_drink_button.disabled = not waiting_for_response
-	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
+	make_drink_button.disabled = not waiting_for_response and (ingredients < Stats.current.ingredients_per_order or make_drink_locked)
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
@@ -192,10 +193,9 @@ func _process(delta: float) -> void:
 	spill_warning_container.visible = spill_on_floor
 
 	customer_wait_indicator.visible = (
-		#customer != null
-		#and not customer.timer.is_stopped()
-		#and not
-		not Global.day == 0
+		customer != null
+		and not customer.timer.is_stopped()
+		and not Global.day == 0
 		)
 
 	if customer:
@@ -421,6 +421,8 @@ func machine_make_drink() -> void:
 
 	# NOTE: experiment: commented out for now to simplify ui
 	#customer_order_indicator.show()
+	ordered_drink_icon.show()
+	ordered_drink_name_label.show()
 	order_breakdown.show()
 
 	timer.start()
@@ -726,6 +728,8 @@ func accept_order(did_remake_drink: bool) -> void:
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
 
+	ordered_drink_icon.hide()
+	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 
 	var rating_before_update: float = Global.employee_rating
@@ -777,16 +781,16 @@ func accept_order(did_remake_drink: bool) -> void:
 	_set_customer(null)
 
 
-func reject_order() -> void:
-	gui_3d.exit_with_camera_tween()
-
-	# TODO: check if this can happen
-	if ingredients < Stats.current.ingredients_per_order:
-		return
-
-	waiting_for_response = false
-
-	machine_make_drink()
+#func reject_order() -> void:
+	#gui_3d.exit_with_camera_tween()
+#
+	## TODO: check if this can happen
+	#if ingredients < Stats.current.ingredients_per_order:
+		#return
+#
+	#waiting_for_response = false
+#
+	#machine_make_drink()
 
 
 func break_down() -> void:

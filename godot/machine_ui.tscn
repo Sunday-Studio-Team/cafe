@@ -451,17 +451,17 @@ offset_transform_visual_only = false
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=261257475]
-layout_mode = 2
-size_flags_horizontal = 6
-texture_normal = ExtResource("10_71all")
-texture_disabled = ExtResource("11_10yj4")
-
 [node name="RemakeDrinkButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=2075147826]
 layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_enabled = true
 texture_normal = ExtResource("12_motd3")
+
+[node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=261257475]
+layout_mode = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource("10_71all")
+texture_disabled = ExtResource("11_10yj4")
 
 [node name="MoneyRatingContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=633592481]
 layout_mode = 2
@@ -469,12 +469,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 3
 theme_override_constants/separation = 144
 
-[node name="AcceptCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=407529960]
+[node name="RemakeCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=1932690171]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("17_267yc")
 
-[node name="RemakeCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=1932690171]
+[node name="AcceptCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=407529960]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("17_267yc")
