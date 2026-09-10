@@ -2,6 +2,13 @@
 
 [ext_resource type="Script" uid="uid://hqad4vu3xawh" path="res://items/exploding_bomb.gd" id="1_jcxaa"]
 [ext_resource type="PackedScene" uid="uid://ctyutkugnjet1" path="res://items/SM Bomb Test.glb" id="2_3vm3o"]
+[ext_resource type="AudioStream" uid="uid://7xyexxpgcee1" path="res://audio/bomb/bomb_drop_impact.wav" id="3_bprvm"]
+[ext_resource type="AudioStream" uid="uid://dhdbh3icwt2sd" path="res://audio/bomb/bomb_ticking_siren.wav" id="4_274rk"]
+[ext_resource type="AudioStream" uid="uid://ddoy2lk58d2dt" path="res://audio/bomb/bomb_explode.wav" id="5_r6hmf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vm3o"]
+radius = 0.3
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vm3o"]
 resource_name = "Material.002"
@@ -43,46 +50,77 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dy3xm")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_0tu14"]
-radius = 0.61747295
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(1, 0, 0.3137255, 0.19607843)
 
-[node name="ExplodingBomb" type="Node3D" unique_id=525786908 node_paths=PackedStringArray("rigid_body", "collision_shape", "csg_sphere", "timer", "label") groups=["exploding_bomb"]]
-script = ExtResource("1_jcxaa")
-rigid_body = NodePath("RigidBody3D")
-collision_shape = NodePath("RigidBody3D/CollisionShape3D")
-csg_sphere = NodePath("RigidBody3D/CollisionShape3D/CSGSphere3D")
-timer = NodePath("Timer")
-label = NodePath("RigidBody3D/Label3D")
+[sub_resource type="SphereMesh" id="SphereMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_mjix0")
+radius = 2.0
+height = 4.0
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=974220464]
-transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
-gravity_scale = 0.6
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6hmf"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(1, 0.76862746, 0.3137255, 0.19607843)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8gpl2"]
+material = SubResource("StandardMaterial3D_r6hmf")
+radius = 2.0
+height = 4.0
+
+[node name="Bomb" type="RigidBody3D" unique_id=974220464 node_paths=PackedStringArray("explode_timer", "range_indicator", "timer_progress_indicator", "danger_light", "drop_impact_sound", "ticking_siren_sound", "ticking_timer", "explode_sound", "model")]
+gravity_scale = 0.25
+lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 3
+angular_damp = 2.5
+script = ExtResource("1_jcxaa")
+explode_timer = NodePath("ExplodeTimer")
+range_indicator = NodePath("RangeIndicator")
+timer_progress_indicator = NodePath("TimerProgressIndicator")
+danger_light = NodePath("DangerLight")
+drop_impact_sound = NodePath("DropImpactSound")
+ticking_siren_sound = NodePath("TickingSirenSound")
+ticking_timer = NodePath("TickingTimer")
+explode_sound = NodePath("ExplodeSound")
+model = NodePath("Model")
 
-[node name="Label3D" type="Label3D" parent="RigidBody3D" unique_id=1804977477]
-transform = Transform3D(3.030303, 0, 0, 0, 3.030303, 0, 0, 0, 3.030303, 0, 0, 0)
-visible = false
-billboard = 1
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1072693879]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.1, 0.23880361, 0.0046022087)
+shape = SubResource("CapsuleShape3D_3vm3o")
 
-[node name="SM Bomb Test" parent="RigidBody3D" unique_id=1005638468 instance=ExtResource("2_3vm3o")]
-transform = Transform3D(3.030303, 0, 0, 0, 2.522466, 1.6792564, 0, -1.6792564, 2.522466, -0.028444601, -0.64873713, 0.30234358)
-
-[node name="SM_Bomb_Outline" parent="RigidBody3D/SM Bomb Test" index="1" unique_id=1617173334]
-mesh = SubResource("ArrayMesh_bprvm")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1072693879]
-transform = Transform3D(1.8374598, 0, 0, 0, 1, 0, 0, 0, 1.1253958, 0.15607855, 0, -0.124079995)
-shape = SubResource("SphereShape3D_0tu14")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="RigidBody3D/CollisionShape3D" unique_id=241677578]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.18318403, 0, 0)
-
-[node name="Timer" type="Timer" parent="." unique_id=1394635480]
+[node name="ExplodeTimer" type="Timer" parent="." unique_id=1394635480]
 wait_time = 8.0
 one_shot = true
 
-[connection signal="body_entered" from="RigidBody3D" to="." method="_on_rigid_body_3d_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="TickingTimer" type="Timer" parent="." unique_id=269451272]
 
-[editable path="RigidBody3D/SM Bomb Test"]
+[node name="Model" parent="." unique_id=1005638468 instance=ExtResource("2_3vm3o")]
+
+[node name="SM_Bomb_Outline" parent="Model" index="1" unique_id=1499573477]
+mesh = SubResource("ArrayMesh_bprvm")
+
+[node name="RangeIndicator" type="MeshInstance3D" parent="." unique_id=1340258381]
+mesh = SubResource("SphereMesh_vn1tu")
+
+[node name="TimerProgressIndicator" type="MeshInstance3D" parent="." unique_id=838175951]
+mesh = SubResource("SphereMesh_8gpl2")
+
+[node name="DangerLight" type="OmniLight3D" parent="." unique_id=1550243959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+light_color = Color(0.86339456, 0, 0.015078305, 1)
+light_energy = 2.0
+light_size = 1.0
+
+[node name="DropImpactSound" type="AudioStreamPlayer3D" parent="." unique_id=1626407203]
+stream = ExtResource("3_bprvm")
+
+[node name="TickingSirenSound" type="AudioStreamPlayer3D" parent="." unique_id=1792055251]
+stream = ExtResource("4_274rk")
+
+[node name="ExplodeSound" type="AudioStreamPlayer3D" parent="." unique_id=313562605]
+stream = ExtResource("5_r6hmf")
+
+[editable path="Model"]

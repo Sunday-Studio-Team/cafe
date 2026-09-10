@@ -115,7 +115,16 @@ func confirm_and_hide() -> void:
 		if equipped_item_button.item:
 			equipped_items.append(equipped_item_button.item)
 
+	# unapply existing items
+	for item in Global.owned_items:
+		item.unapply_stats()
+		
 	Global.owned_items.assign(equipped_items)
+	
+	# apply new items
+	for item in Global.owned_items:
+		item.apply_stats()
+	
 	Events.items_updated.emit()
 
 	selected_available_item = null
