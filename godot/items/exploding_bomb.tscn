@@ -2,6 +2,15 @@
 
 [ext_resource type="Script" uid="uid://hqad4vu3xawh" path="res://items/exploding_bomb.gd" id="1_jcxaa"]
 [ext_resource type="PackedScene" uid="uid://ctyutkugnjet1" path="res://items/SM Bomb Test.glb" id="2_3vm3o"]
+[ext_resource type="AudioStream" uid="uid://7xyexxpgcee1" path="res://audio/bomb/bomb_drop_impact.wav" id="3_bprvm"]
+[ext_resource type="AudioStream" uid="uid://dhdbh3icwt2sd" path="res://audio/bomb/bomb_ticking_siren.wav" id="4_274rk"]
+[ext_resource type="AudioStream" uid="uid://dsp3lgb2k4sm2" path="res://audio/bomb/meow.wav" id="5_8gpl2"]
+[ext_resource type="AudioStream" uid="uid://viuu5dv4cke6" path="res://audio/bomb/purr.wav" id="5_f1f4g"]
+[ext_resource type="AudioStream" uid="uid://ddoy2lk58d2dt" path="res://audio/bomb/bomb_explode.wav" id="5_r6hmf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vm3o"]
+radius = 0.3
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vm3o"]
 resource_name = "Material.002"
@@ -43,11 +52,44 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dy3xm")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3vm3o"]
-radius = 0.3
-height = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(1, 0, 0.3137255, 0.19607843)
 
-[node name="Bomb" type="RigidBody3D" unique_id=974220464 node_paths=PackedStringArray("explode_timer", "time_til_explosion_label")]
+[sub_resource type="SphereMesh" id="SphereMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_mjix0")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6hmf"]
+transparency = 4
+cull_mode = 2
+albedo_color = Color(1, 0.76862746, 0.3137255, 0.19607843)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8gpl2"]
+material = SubResource("StandardMaterial3D_r6hmf")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l12a6"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+spread = 180.0
+initial_velocity_max = 25.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rb8fj"]
+albedo_color = Color(1, 0.6627451, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_ovvye"]
+material = SubResource("StandardMaterial3D_rb8fj")
+radius = 0.013
+height = 0.025
+
+[node name="Bomb" type="RigidBody3D" unique_id=974220464 node_paths=PackedStringArray("explode_timer", "range_indicator", "timer_progress_indicator", "danger_light", "drop_impact_sound", "ticking_siren_sound", "ticking_timer", "explode_sound", "model", "explosion_particles", "meow_sound")]
 gravity_scale = 0.25
 lock_rotation = true
 contact_monitor = true
@@ -55,24 +97,67 @@ max_contacts_reported = 3
 angular_damp = 2.5
 script = ExtResource("1_jcxaa")
 explode_timer = NodePath("ExplodeTimer")
-time_til_explosion_label = NodePath("TimeTilExplosionLabel")
-
-[node name="TimeTilExplosionLabel" type="Label3D" parent="." unique_id=1804977477]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-billboard = 1
-text = "2"
-
-[node name="Model" parent="." unique_id=1005638468 instance=ExtResource("2_3vm3o")]
-
-[node name="SM_Bomb_Outline" parent="Model" index="1" unique_id=1499573477]
-mesh = SubResource("ArrayMesh_bprvm")
+range_indicator = NodePath("RangeIndicator")
+timer_progress_indicator = NodePath("TimerProgressIndicator")
+danger_light = NodePath("DangerLight")
+drop_impact_sound = NodePath("DropImpactSound")
+ticking_siren_sound = NodePath("TickingSirenSound")
+ticking_timer = NodePath("TickingTimer")
+explode_sound = NodePath("ExplodeSound")
+model = NodePath("Model")
+explosion_particles = NodePath("ExplosionParticles")
+meow_sound = NodePath("MeowSound")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1072693879]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.1, 0.23880361, 0.0046022087)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.038803607, 0.0046022087)
 shape = SubResource("CapsuleShape3D_3vm3o")
 
 [node name="ExplodeTimer" type="Timer" parent="." unique_id=1394635480]
 wait_time = 8.0
 one_shot = true
+
+[node name="TickingTimer" type="Timer" parent="." unique_id=269451272]
+
+[node name="Model" parent="." unique_id=1005638468 instance=ExtResource("2_3vm3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, -0.2, 0)
+
+[node name="SM_Bomb_Outline" parent="Model" index="1" unique_id=1499573477]
+mesh = SubResource("ArrayMesh_bprvm")
+
+[node name="RangeIndicator" type="MeshInstance3D" parent="." unique_id=1340258381]
+mesh = SubResource("SphereMesh_vn1tu")
+
+[node name="TimerProgressIndicator" type="MeshInstance3D" parent="." unique_id=838175951]
+mesh = SubResource("SphereMesh_8gpl2")
+
+[node name="DangerLight" type="OmniLight3D" parent="." unique_id=1550243959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+light_color = Color(0.86339456, 0, 0.015078305, 1)
+light_energy = 2.0
+light_size = 1.0
+
+[node name="DropImpactSound" type="AudioStreamPlayer3D" parent="." unique_id=1626407203]
+stream = ExtResource("3_bprvm")
+
+[node name="TickingSirenSound" type="AudioStreamPlayer3D" parent="." unique_id=1792055251]
+stream = ExtResource("4_274rk")
+
+[node name="PurrSound" type="AudioStreamPlayer3D" parent="." unique_id=2028897696]
+stream = ExtResource("5_f1f4g")
+autoplay = true
+
+[node name="MeowSound" type="AudioStreamPlayer3D" parent="." unique_id=1178767722]
+stream = ExtResource("5_8gpl2")
+
+[node name="ExplodeSound" type="AudioStreamPlayer3D" parent="." unique_id=313562605]
+stream = ExtResource("5_r6hmf")
+
+[node name="ExplosionParticles" type="GPUParticles3D" parent="." unique_id=349694141]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_l12a6")
+draw_pass_1 = SubResource("SphereMesh_ovvye")
 
 [editable path="Model"]

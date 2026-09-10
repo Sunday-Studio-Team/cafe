@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbn8kawaopd31" path="res://tippy_boss.gd" id="1_fvcbq"]
 [ext_resource type="PackedScene" uid="uid://beba4d1fjp75g" path="res://models/tippy_boss_model.tscn" id="2_un3jd"]
+[ext_resource type="PackedScene" uid="uid://lnuri24j3wjf" path="res://Assets/3D Tippy/Tippy3Danimations.glb" id="3_un3jd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vn1tu"]
 radius = 0.3
@@ -81,3 +82,65 @@ collision_mask = 9
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CustomerArea" unique_id=55459966]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0, 0)
 shape = SubResource("BoxShape3D_mjix0")
+
+[node name="Walk Cycle" parent="." unique_id=783853330 instance=ExtResource("3_un3jd")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Walk Cycle/Armature_002" parent_id_path=PackedInt32Array(783853330, 1141075009) index="0" unique_id=1131653916]
+bones/0/position = Vector3(-0.3575509, 0.8846485, 1.731678e-08)
+bones/1/rotation = Quaternion(0.0032714582, 0.00088856596, 0.92085826, 0.38988268)
+bones/2/rotation = Quaternion(-0.0039093844, 0.99999106, -0.0016376032, 1.2992627e-05)
+bones/2/scale = Vector3(1.0060716, 0.9880728, 1.0060717)
+bones/3/rotation = Quaternion(6.35332e-05, 0.0023575958, 0.9995803, 0.028873933)
+bones/4/rotation = Quaternion(-0.27311262, 0.9619714, -0.0043811435, -0.0012252149)
+bones/4/scale = Vector3(1.2113432, 0.6815491, 1.2113432)
+bones/5/rotation = Quaternion(-1.5067208e-06, -1.1921756e-07, -0.00016125735, 1)
+bones/6/rotation = Quaternion(-1.0885236e-06, 4.281061e-11, -0.00015186188, 1)
+bones/7/rotation = Quaternion(0.5186419, 0.00010523511, -0.00017347523, 0.85499156)
+bones/8/rotation = Quaternion(-0.40406057, -0.1254309, -0.06806152, 0.9035319)
+bones/10/rotation = Quaternion(-0.5073212, -0.02881171, 0.106548846, 0.85465926)
+bones/13/rotation = Quaternion(0.03598987, -0.38566917, -0.38596117, 0.83725625)
+bones/14/rotation = Quaternion(-0.2597315, 0.40691075, -0.095781066, 0.8705109)
+bones/16/rotation = Quaternion(-0.4960887, -0.005007138, 0.019407138, 0.8680405)
+bones/17/rotation = Quaternion(0.12035732, -0.0070270486, -0.07437115, 0.989916)
+bones/19/rotation = Quaternion(-0.6890493, 0.7246505, -0.006638446, -0.006981256)
+bones/20/rotation = Quaternion(-0.70433176, 0.70979404, -0.009579512, -0.004181558)
+bones/21/rotation = Quaternion(0.80359054, 0.54430044, 0.023991441, 0.23959097)
+bones/22/rotation = Quaternion(0.4565793, -0.0008177876, 0.059074294, 0.8877189)
+bones/22/scale = Vector3(1.1492374, 0.7572765, 1.1492374)
+bones/23/rotation = Quaternion(-0.87463474, 0.335907, -0.056898158, 0.34488153)
+bones/24/rotation = Quaternion(-0.42809653, 0.002927371, 0.2105465, 0.87886)
+bones/24/scale = Vector3(1.0340598, 0.93534696, 1.0340596)
+bones/25/position = Vector3(0.38533425, 0.7946007, 0.02132988)
+bones/25/rotation = Quaternion(0.9886745, 0.065684006, 0.10670425, -0.0825992)
+bones/30/position = Vector3(-1.1686765, 0.20411585, 0.18874787)
+bones/30/rotation = Quaternion(0.9694837, -0.24467234, -0.0037653812, 0.014920354)
+bones/32/position = Vector3(-0.055256147, 0.23926388, -0.18874784)
+bones/32/rotation = Quaternion(0.9740783, 0.22569059, 0.003463693, 0.014948489)
+bones/34/position = Vector3(-1.3298956, 0.715359, -0.16817534)
+bones/34/rotation = Quaternion(-0.83877164, 0.47741926, -0.19749193, 0.17184287)
+bones/36/rotation = Quaternion(0.3853897, 0.9224853, 0.021517565, -0.0057201697)
+
+[node name="Bone_016" parent="Walk Cycle/Armature_002/Skeleton3D" index="0" unique_id=231741496]
+transform = Transform3D(0.7815031, 0.5681639, -0.2577643, -0.61346877, 0.6245493, -0.4833153, -0.11361581, 0.53584284, 0.83663815, -0.26599905, 2.431938, 0.16602129)
+
+[node name="Bone_002" parent="Walk Cycle/Armature_002/Skeleton3D" index="1" unique_id=1567252671]
+transform = Transform3D(0.99999976, 0.0006262384, 1.5877317e-09, -0.0006262384, 0.99999976, 5.1905267e-06, 1.6627647e-09, -5.1905267e-06, 1, -0.35742432, 1.4796023, -1.1652398e-06)
+
+[node name="Bone_004" parent="Walk Cycle/Armature_002/Skeleton3D" index="2" unique_id=633016774]
+transform = Transform3D(-0.050324786, -0.99873203, -0.000969747, -0.99854696, 0.050333954, -0.019241966, 0.019266382, -8.684125e-09, -0.9998145, -0.51801395, 1.3622296, 0.004709816)
+
+[node name="Bone" parent="Walk Cycle/Armature_002/Skeleton3D" index="3" unique_id=1465446326]
+transform = Transform3D(1, 0, 2.3841855e-07, 0, 1, 0, -2.3841855e-07, 0, 1, -0.3575509, 0.8846485, 1.731678e-08)
+
+[node name="Foot 2_001" parent="Walk Cycle/Armature_002/Skeleton3D" index="4" unique_id=305543042]
+transform = Transform3D(-0.4546473, -0.88706625, 0.08005845, -0.88904583, 0.45740876, 0.019355932, -0.053789437, -0.062375516, -0.9966022, -1.2066154, 0.13373917, 0.19120936)
+
+[node name="Foot 2_002" parent="Walk Cycle/Armature_002/Skeleton3D" index="5" unique_id=1022965591]
+transform = Transform3D(-0.17412317, -0.8909515, 0.41938844, 0.3318015, -0.45407268, -0.82687753, 0.9271403, -0.0048247133, 0.3746839, -0.020094667, 0.16745898, -0.18629332)
+
+[node name="AnimationPlayer" parent="Walk Cycle" index="1" unique_id=883191294]
+autoplay = &"Armature_002Action"
+speed_scale = 3.0
+
+[editable path="Walk Cycle"]
