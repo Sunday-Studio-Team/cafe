@@ -1,6 +1,9 @@
 class_name VoiceLineSystem
 extends Node
 
+const NULL_VOICE_LINE_AUDIO_DURATION_BASE: float = 1.5
+const NULL_VOICE_LINE_AUDIO_DURATION_PER_CHAR: float = 0.05
+
 signal requested_show_voice_line_subtitle(voice_line: VoiceLine)
 signal requested_hide_voice_line_subtitle(voice_line: VoiceLine)
 
@@ -22,12 +25,25 @@ func _ready() -> void:
 	_voice_line_no_location_player.interrupted_playing_voice_line.connect(_on_no_location_interrupted_playing_voice_line)
 
 func play_voice_line_at_location(voice_line_id: String, voice_line_location: VoiceLineLocation) -> void:
-	await _interrupt_any_no_location_voice_lines()
+	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
+	
+	# Don't play if non-priority and a priority voice line is playing
+	if !voice_line.is_priority:
+		if _is_playing_no_location_voice_line and\
+				_voice_line_no_location_player != null and\
+				_voice_line_no_location_player.get_playing_voice_line() != null and\
+				_voice_line_no_location_player.get_playing_voice_line().is_priority:
+			return
+		if _playing_voice_line_location_player != null and\
+				_playing_voice_line_location_player.get_playing_voice_line() != null and\
+				_playing_voice_line_location_player.get_playing_voice_line().is_priority:
+			return
+	
+	_interrupt_any_no_location_voice_lines()
 	# Interrupt any existing playing voice line locations
 	if _playing_voice_line_location_player != null:
 		_playing_voice_line_location_player.interrupt_voice_line()
 
-	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	var location_player: VoiceLineLocationPlayer = voice_line_location.internal_setup_voice_line_at_location(voice_line)
 	requested_show_voice_line_subtitle.emit(voice_line)
 	location_player.play_voice_line(voice_line)
@@ -39,11 +55,24 @@ func play_voice_line_at_location(voice_line_id: String, voice_line_location: Voi
 
 ## Play a voice line without a specific location, with its subtitle.
 func play_voice_line_no_location(voice_line_id: String) -> void:
+	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
+
+	# Don't play if non-priority and a priority voice line is playing
+	if !voice_line.is_priority:
+		if _is_playing_no_location_voice_line and\
+				_voice_line_no_location_player != null and\
+				_voice_line_no_location_player.get_playing_voice_line() != null and\
+				_voice_line_no_location_player.get_playing_voice_line().is_priority:
+			return
+		if _playing_voice_line_location_player != null and\
+				_playing_voice_line_location_player.get_playing_voice_line() != null and\
+				_playing_voice_line_location_player.get_playing_voice_line().is_priority:
+			return
+	
 	# Interrupt any existing playing voice line locations
 	if _playing_voice_line_location_player != null:
 		_playing_voice_line_location_player.interrupt_voice_line()
 
-	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	requested_show_voice_line_subtitle.emit(voice_line)
 	_voice_line_no_location_player.play_voice_line(voice_line)
 	_is_playing_no_location_voice_line = true
@@ -54,8 +83,12 @@ func play_voice_line_no_location(voice_line_id: String) -> void:
 func is_playing_no_location_voice_line() -> bool:
 	return _is_playing_no_location_voice_line
 
+static func calculate_missing_audio_stream_caption_duration(voice_line: VoiceLine) -> float:
+	var duration: float = NULL_VOICE_LINE_AUDIO_DURATION_BASE + (voice_line.subtitle_en.length() * NULL_VOICE_LINE_AUDIO_DURATION_PER_CHAR)
+	return duration
+
 func _interrupt_any_no_location_voice_lines() -> void:
-	await _voice_line_no_location_player.interrupt_current_voice_line()
+	_voice_line_no_location_player.interrupt_current_voice_line()
 
 func _get_voice_line_by_id(voice_line_id: String) -> VoiceLine:
 	if !_voice_lines_by_id.has(voice_line_id):

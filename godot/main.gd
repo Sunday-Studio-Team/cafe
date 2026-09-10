@@ -33,6 +33,7 @@ extends Node3D
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var teleporter3: Teleporter
+@export var air_freshener: AirFreshener
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
@@ -44,7 +45,6 @@ var _help_desk_customer_spawn_timer: Timer
 @export var _tutorial_vo_location_start_shift: VoiceLineLocation
 @export var _tutorial_vo_location_machine_ui: VoiceLineLocation
 @export var _tutorial_vo_location_ingredients_bag: VoiceLineLocation
-@export var _tutorial_vo_location_help_desk: VoiceLineLocation
 @export var _tutorial_vo_location_spill: VoiceLineLocation
 @export var day_containers: Array[Node3D] = []
 
@@ -107,7 +107,7 @@ func _ready() -> void:
 
 	set_per_day_stuff()
 	spawn_machines()
-	enable_disable_teleporters()
+	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
 	# enables more desk props as the days go by
@@ -140,9 +140,6 @@ func _ready() -> void:
 	#Active Item refresh
 	Global.refresh_active_items()
 
-	#Active Items
-	Events.active_item_used.connect(active_item_used)
-
 	if Global.day == 0:
 		_interactive_tutorial_flow()
 	else:
@@ -152,7 +149,8 @@ func _ready() -> void:
 		await get_tree().create_timer(1.5, false).timeout
 		await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
 		day_indicator.hide()
-
+		_tippy_tutorials()
+		
 
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
@@ -178,10 +176,11 @@ func get_stats() -> void:
 	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
 	# 	Global.current_special_shift.apply_stats()
 
-	enable_disable_teleporters()
+	update_teleporters_enabled()
+	update_air_fresheners_enabled()
 
 
-func enable_disable_teleporters():
+func update_teleporters_enabled() -> void:
 	var has_teleporter: bool = false
 	var has_teleporter_level_2: bool = false
 	for item in Global.owned_items:
@@ -202,6 +201,17 @@ func enable_disable_teleporters():
 		teleporter2.disable_teleporter()
 		teleporter3.disable_teleporter()
 
+func update_air_fresheners_enabled() -> void:
+	var air_freshener_item: Item = null
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "air_freshener":
+			air_freshener_item = owned_item
+			break
+	
+	if air_freshener_item != null:
+		air_freshener.enable_air_freshener()
+	else:
+		air_freshener.disable_air_freshener()
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
@@ -348,12 +358,15 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
-
-	if Global.day < 2:
-		if sprite_resource != null:
-			Console.print_line("help desk disabled today, cant spawn customer")
-		return
-
+	
+	# Allow help desk on tutorial day for now
+	if Global.day > 0:
+		# Disallow help desk if not unlocked yet
+		if Global.day < 2:
+			if sprite_resource != null:
+				Console.print_line("help desk disabled today, cant spawn customer")
+			return
+	
 	var new_customer: Customer = customer_scene.instantiate()
 	new_customer.position = spot_for_customer_entry.position
 	add_child(new_customer)
@@ -362,24 +375,10 @@ func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> voi
 		Console.print_line("spawned %s at help desk" % sprite_resource.customer_name)
 	_customer_help_desk.add_customer_to_queue(new_customer)
 
-
-#Actives the effects of a given active item
-func active_item_used(item: Item):
-	if item.item_id == "air_freshener":
-		var customer_wait_duration_extension: float = 0.0
-		if item.item_level == 1:
-			customer_wait_duration_extension = 20.0
-		else:
-			customer_wait_duration_extension = 30.0
-
-		for machine in _active_machines:
-			if machine.customer:
-				machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
-
-		Global.put_active_item_on_cooldown(item)
-
-		Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertIconType.CUSTOMER)
-
+func apply_used_air_freshener(customer_wait_duration_extension: float) -> void:
+	for machine in _active_machines:
+		if machine.customer:
+			machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
 
 func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D]) -> void:
 	for security_camera in _all_security_cameras:
@@ -419,6 +418,11 @@ func shift_end_sequence(override:bool=false):
 				Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 				return
 			Global.day += 1
+			
+			if Global.day > SaveDataManager.save_data.latest_unlocked_day:
+				SaveDataManager.save_data.latest_unlocked_day = Global.day
+				SaveDataManager.save_game_to_file()
+			
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 			#Leaving this here in case you guys want this scene back again
 			#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
@@ -472,6 +476,107 @@ func _interactive_tutorial_flow():
 				seen_tutorial_machine_instructions = true
 	)
 
+#Tutorial function for each day
+func _tippy_tutorials() -> void:
+	await get_tree().create_timer(0.5, false).timeout
+	#replace these with the correct voice lines
+	var tutorial_lines_day1: Array[String] = [
+		"tutorial_day1_1",
+		"tutorial_day1_2",
+		"tutorial_day1_3",
+		"tutorial_day1_4",
+	] 
+	
+	var tutorial_lines_day2: Array[String] = [
+		"tutorial_day2_1",
+		"tutorial_day2_2",
+		"tutorial_day2_3",
+		"tutorial_day2_4",
+		"tutorial_day2_5",
+		"tutorial_day2_6",
+		"tutorial_day2_7",
+		"tutorial_day2_8",
+		"tutorial_day2_9",
+		"tutorial_day2_10",
+		"tutorial_day2_11",
+	] 
+	
+	var tutorial_lines_day3: Array[String] = [
+		"tutorial_day3_1",
+		"tutorial_day3_2",
+		"tutorial_day3_3",
+		"tutorial_day3_4",
+		"tutorial_day3_5",
+		"tutorial_day3_6",
+		"tutorial_day3_7",
+		"tutorial_day3_8",
+	] 
+	
+	var tutorial_lines_day4: Array[String] = [
+		"tutorial_day4_1",
+		"tutorial_day4_2",
+		"tutorial_day4_3",
+		"tutorial_day4_4",
+		"tutorial_day4_5",
+		"tutorial_day4_6",
+		"tutorial_day4_7",
+		"tutorial_day4_8",
+	] 
+	
+	var tutorial_lines_day5: Array[String] = [
+		"tutorial_day5_1",
+		"tutorial_day5_2",
+		"tutorial_day5_3",
+		"tutorial_day5_4",
+		"tutorial_day5_5",
+		"tutorial_day5_6",
+		"tutorial_day5_7",
+	] 
+	
+	if Global.day == 1:
+		for i in range(tutorial_lines_day1.size()):
+			var voice_line_id: String = tutorial_lines_day1[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 2:
+		for i in range(tutorial_lines_day2.size()):
+			var voice_line_id: String = tutorial_lines_day2[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 3:
+		for i in range(tutorial_lines_day3.size()):
+			var voice_line_id: String = tutorial_lines_day3[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 4:
+		for i in range(tutorial_lines_day4.size()):
+			var voice_line_id: String = tutorial_lines_day4[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
+				
+	if Global.day == 5:
+		for i in range(tutorial_lines_day5.size()):
+			var voice_line_id: String = tutorial_lines_day5[i]
+			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
+			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+				await get_tree().process_frame
+			if Global.shift_started:
+				break
 
 func _interactive_tutorial_shift() -> void:
 	if tutorial_machine == null:
@@ -495,8 +600,6 @@ func _interactive_tutorial_shift() -> void:
 			await get_tree().process_frame
 		if Global.shift_started:
 			break
-
-	print("shift started: %s" % Global.shift_started)
 
 	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
 
@@ -679,106 +782,23 @@ func _interactive_tutorial_shift() -> void:
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_machine_refilled_2")
 
-	spawn_help_desk_customer()
-	await _customer_help_desk.new_desk_customer_arrived
-
-	await get_tree().create_timer(0.25, false).timeout
-
-	var tutorial_help_desk_lines: Array[String] = [
-		"tutorial_help_desk_1",
-		"tutorial_help_desk_2",
-		"tutorial_help_desk_3",
-		"tutorial_help_desk_4",
-	]
-
-	for i in range(tutorial_help_desk_lines.size()):
-		var voice_line_id: String = tutorial_help_desk_lines[i]
-		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-		while _customer_help_desk.has_active_customers() and Global.voice_line_system.is_playing_no_location_voice_line():
-			await get_tree().process_frame
-		if !_customer_help_desk.has_active_customers():
-			break
-
-	while _customer_help_desk.has_active_customers():
-		if repeat_instruction_timer.time_left == 0.0:
-			Global.voice_line_system.play_voice_line_at_location("tutorial_help_desk_5", _tutorial_vo_location_help_desk)
-			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-		else:
-			await get_tree().process_frame
-	repeat_instruction_timer.stop()
-
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_customer_helped_1")
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_customer_helped_2")
-
-	# Spill tutorial: player learns to clean up spills
-	tutorial_machine.spill()
-
-	await get_tree().create_timer(0.5, false).timeout
-
-	var tutorial_machine_spilled_lines: Array[String] = [
-		"tutorial_machine_spilled_1",
-		"tutorial_machine_spilled_2",
-	]
-
-	for i in range(tutorial_machine_spilled_lines.size()):
-		var voice_line_id: String = tutorial_machine_spilled_lines[i]
-		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-		while tutorial_machine.spill_on_floor and Global.voice_line_system.is_playing_no_location_voice_line():
-			await get_tree().process_frame
-		if !tutorial_machine.spill_on_floor:
-			break
-
-	while tutorial_machine.spill_on_floor:
-		if repeat_instruction_timer.time_left == 0.0:
-			Global.voice_line_system.play_voice_line_at_location("tutorial_machine_spilled_3", _tutorial_vo_location_spill)
-			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-		else:
-			await get_tree().process_frame
-	repeat_instruction_timer.stop()
-
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_spill_cleaned_1")
-	await Global.voice_line_system.play_voice_line_no_location("tutorial_spill_cleaned_2")
-
-	await get_tree().create_timer(0.5, false).timeout
-
-	tutorial_machine.break_down()
-
-	var tutorial_machine_broke_lines: Array[String] = [
-		"tutorial_machine_broke_1",
-		"tutorial_machine_broke_2",
-		"tutorial_machine_broke_3",
-	]
-
-	for i in range(tutorial_machine_broke_lines.size()):
-		var voice_line_id: String = tutorial_machine_broke_lines[i]
-		Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-		while tutorial_machine.broken_down and Global.voice_line_system.is_playing_no_location_voice_line():
-			await get_tree().process_frame
-		if !tutorial_machine.broken_down:
-			break
-
-	while tutorial_machine.broken_down:
-		if repeat_instruction_timer.time_left == 0.0:
-			Global.voice_line_system.play_voice_line_at_location("tutorial_machine_broke_4", _tutorial_vo_location_machine_ui)
-			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-		else:
-			await get_tree().process_frame
-	repeat_instruction_timer.stop()
-
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_1")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_2")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_3")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_4")
 
-	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
+	var replaying_tutorial: bool = SaveDataManager.save_data.finished_or_skipped_tutorial
 
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
-	SaveDataManager.save_game()
+	SaveDataManager.save_game_to_file()
 
 	if replaying_tutorial:
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 	else:
 		Global.day = 1
+		if Global.day > SaveDataManager.save_data.latest_unlocked_day:
+			SaveDataManager.save_data.latest_unlocked_day = Global.day
+			SaveDataManager.save_game_to_file()
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
@@ -819,7 +839,6 @@ func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> fl
 	var rating_flow_rate_curve_for_day: Curve = Stats.current.machine_customer_flow_rate_at_rating_curve_per_day[Global.day]
 	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
-	print("secs per machine customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer
 
 ## In seconds per help desk customer entry.
@@ -827,5 +846,4 @@ func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> 
 	var rating_flow_rate_curve_for_day: Curve = Stats.current.help_desk_customer_flow_rate_at_rating_curve_per_day[Global.day]
 	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
-	print("secs per help desk customer: %.1f" % seconds_per_customer)
 	return seconds_per_customer

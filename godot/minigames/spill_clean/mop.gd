@@ -21,8 +21,6 @@ var normal_range = Vector2(644, 312)
 var normal_offset = Vector2(16.0, -503.0)
 var scrubber_range = Vector2(1348.0, 644.0)
 var scrubber_offset = Vector2(0.0, -865.0)
-var scrubber_level_2_range = Vector2(944.0, 1648.0)
-var scrubber_level_2_offset = Vector2(0.0, -865.0)
 
 @onready var mop_start_position: Vector2 = position
 
@@ -65,22 +63,18 @@ func _ready() -> void:
 	bubbles.emitting = false
 	is_wet = false
 	is_dirty = false
-	
+
 	if used_scrubber:
 		texture = scrubber_texture
-		mope_range.position = scrubber_offset
-		mope_range.shape.size = scrubber_range
+		mope_range.shape.size.x = scrubber_texture.get_width()
+		drag_collision.shape.size.x = scrubber_texture.get_width()
+		scale *= 1.5
 	else:
 		texture = mop_texture
-		mope_range.position = normal_offset
-		mope_range.shape.size = normal_range
 
 
 func _physics_process(_delta: float) -> void:
-	global_position = (
-			get_global_mouse_position()
-			+ drag_offset
-	)
+	global_position = (get_global_mouse_position() + drag_offset)
 	reset_physics_interpolation()
 
 
@@ -93,21 +87,14 @@ func wet_mop() -> void:
 		splash.play()
 		is_wet = true
 		bubbles.emitting = true
-		create_tween().tween_property(
-			self,
-			"modulate",
-			Color.WHITE,
-			1,
-		).from(Color.AQUA)
+		create_tween().tween_property(self, "modulate", Color.WHITE, 1).from(Color.AQUA)
 
 
 func _input(event: InputEvent) -> void:
 	if event is not InputEventMouseButton:
 		return
 
-	var mouse_event: InputEventMouseButton = (
-			event as InputEventMouseButton
-	)
+	var mouse_event: InputEventMouseButton = (event as InputEventMouseButton)
 
 	if mouse_event.button_index != MOUSE_BUTTON_LEFT:
 		return
@@ -116,9 +103,9 @@ func _input(event: InputEvent) -> void:
 func get_dirty() -> void:
 	if is_dirty:
 		return
-	
+
 	is_dirty = true
-	
+
 	if used_scrubber:
 		texture = dirty_scrubber_texture
 	else:

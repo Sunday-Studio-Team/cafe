@@ -1,7 +1,7 @@
 # mostly copied from sample project: https://godotengine.org/asset-library/asset/2807
 # (basically just handles putting our inputs into a scene on the subviewport
 # + some camera stuff)
-class_name Gui3D
+class_name Machine3DGui
 extends Node3D
 
 const CAM_TWEEN_DUR := 0.25
@@ -11,6 +11,7 @@ const CAM_TWEEN_DUR := 0.25
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
+@export var _customer_side_camera: Camera3D
 
 var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.

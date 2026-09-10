@@ -28,10 +28,10 @@ scale_min = 0.099999994
 scale_max = 0.39999998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
-size = Vector2(640, 312)
+size = Vector2(241, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
-size = Vector2(644, 1348)
+size = Vector2(239, 488)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx0vh"]
 load_path = "res://.godot/imported/mop_it_up.png-0e0004a1a7332602439f9a9fe450aad4.ctex"
@@ -108,13 +108,13 @@ process_material = SubResource("ParticleProcessMaterial_xnu58")
 [node name="MopHeadHitbox" type="Area2D" parent="Mop" unique_id=1322127866]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mop/MopHeadHitbox" unique_id=426483103]
-position = Vector2(16, -503)
+position = Vector2(-0.50006104, -184.00003)
 shape = SubResource("RectangleShape2D_6lir2")
 
 [node name="MopDragHitbox" type="Area2D" parent="Mop" unique_id=1484986336]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mop/MopDragHitbox" unique_id=1835631460]
-position = Vector2(17.999756, 13.999878)
+position = Vector2(0.49993896, -9.0000305)
 shape = SubResource("RectangleShape2D_xnu58")
 
 [node name="SplashSound" type="AudioStreamPlayer2D" parent="." unique_id=1715966103]

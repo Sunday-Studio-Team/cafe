@@ -5,6 +5,7 @@
 extends Node
 
 var _item_ids: Array[String] = []
+var _customer_names: Array[String] = []
 # tracks whether we have the 'unlimited actives' command toggled on
 # (so we can toggle on/off with the same command)
 var ua_enabled := false
@@ -43,7 +44,7 @@ func _ready() -> void:
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
-- [i]item \"<item_id>\" <item_level>[/i] gives you a specified item at the specified level (TAB to auto-complete)
+- [i]item \"<item_id>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
 - [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
@@ -75,7 +76,7 @@ func _ready() -> void:
 	Console.add_command("timer", toggle_timer)
 	Console.add_command("fullshelf", fill_items)
 	Console.add_command("bag", give_bag)
-	Console.add_command("item", give_item, ["item_id", "item_level"], 2)
+	Console.add_command("item", give_item, ["item_id"])
 	for item in Global.items:
 		_item_ids.append("\"%s\"" % item.item_id)
 	Console.add_command_autocomplete_list("item", _item_ids)
@@ -83,6 +84,9 @@ func _ready() -> void:
 	Console.add_command("ua", toggle_unlimited_actives)
 	Console.add_command("vo", vo_test)
 	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
+	for customer: CustomerSpriteData in Global.customer_sprites:
+		_customer_names.append("\"%s\"" % customer.customer_name)
+	Console.add_command_autocomplete_list("customer", _customer_names)
 
 	Events.main_scene_loaded.connect(
 		func():
@@ -98,6 +102,7 @@ func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
 func vo_test() -> void:
 	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
 
+
 func toggle_freecam() -> void:
 	Events.free_cam_toggled.emit()
 	if Global.free_camera_enabled:
@@ -105,8 +110,10 @@ func toggle_freecam() -> void:
 	else:
 		Console.print_line("freecam disabled")
 
+
 func set_freecam_speed(speed: String) -> void:
 	Events.free_cam_set_speed.emit(float(speed))
+
 
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()
@@ -120,7 +127,7 @@ func give_bag() -> void:
 
 func fill_items() -> void:
 	for i in Global.item_slots_amount:
-		give_item(Global.items[i].item_id, "1")
+		give_item(Global.items[i].item_id)
 
 
 func set_profit(profit: String) -> void:
@@ -174,10 +181,9 @@ func start_shift() -> void:
 	Console.print_line("starting shift")
 
 
-func give_item(item_id: String, item_level: String) -> void:
+func give_item(item_id: String) -> void:
 	for item in Global.items:
 		if item_id == item.item_id:
-			item.item_level = (item_level as int)
 			Global.owned_items.append(item)
 			item.apply_stats()
 			Events.items_updated.emit()

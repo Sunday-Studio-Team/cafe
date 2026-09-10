@@ -158,7 +158,7 @@ static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
 timer = NodePath("Timer")
 breakdown_timer = NodePath("BreakdownTimer")
-fix_machine_button = NodePath("FixMachineButton")
+fix_machine_button = NodePath("FixMachineInteractable")
 spill_interactable = NodePath("Spill")
 spill_clean_particles = NodePath("SpillCleanParticles")
 spot_for_player = NodePath("SpotForPlayer")
@@ -208,7 +208,7 @@ ingredients_warning_sound = NodePath("IngredientsWarningSound")
 popup_go_to_spill = ExtResource("5_8sjwk")
 
 [node name="SpotForCustomer" type="Marker3D" parent="." unique_id=1629603672]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -0.78443056)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -1.4163885)
 
 [node name="SpotForQueuedCustomerFirst" type="Marker3D" parent="." unique_id=1470976684]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01437436, 0, -2.7844305)
@@ -238,23 +238,24 @@ light_color = Color(0.9411765, 0.5058824, 0.5058824, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="FixMachineButton" type="Area3D" parent="." unique_id=885014159]
+[node name="FixMachineInteractable" type="Area3D" parent="." unique_id=885014159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1154252, 1.2234292)
 visible = false
 collision_layer = 2
 script = ExtResource("5_ioi8x")
+interactable_id = &"fix_machine"
 display_name = "Fix machine"
 time_to_hold = 1.0
 
-[node name="BrokenDownLabel" type="Label3D" parent="FixMachineButton" unique_id=969109102]
+[node name="BrokenDownLabel" type="Label3D" parent="FixMachineInteractable" unique_id=969109102]
 transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
 modulate = Color(1, 0.6, 0.12156863, 1)
 text = "BROKEN DOWN"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineButton" unique_id=399064604]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FixMachineInteractable" unique_id=399064604]
 shape = SubResource("BoxShape3D_1hddr")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineButton" unique_id=1631380149]
+[node name="SpotLight3D" type="SpotLight3D" parent="FixMachineInteractable" unique_id=1631380149]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
@@ -268,7 +269,7 @@ display_name = "Clean up spill"
 
 [node name="Sprite3D" type="Sprite3D" parent="Spill" unique_id=667352050]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.001
+pixel_size = 0.0025
 texture = ExtResource("9_1hddr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spill" unique_id=2013507775]
@@ -291,14 +292,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 shape = SubResource("BoxShape3D_0ffxp")
 debug_color = Color(1, 1, 1, 1)
 
-[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "_customer_side_camera")]
 transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0.30209354, 0.1217342)
 script = ExtResource("10_0d1aa")
-interactable = NodePath("Interactable")
+interactable = NodePath("UseMachineInteractable")
 node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
+_customer_side_camera = NodePath("Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
@@ -327,15 +329,18 @@ script = ExtResource("18_0ne0o")
 _sub_viewport = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
-transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
+transform = Transform3D(0.9099997, 0, 0, 0, 0.87899226, 0.23552525, 0, -0.23552525, 0.87899226, 0, 1.8762311, -0.5289409)
 cull_mask = 3
 environment = ExtResource("15_x45kg")
-fov = 90.0
+fov = 45.0
 
 [node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D" unique_id=1220965674 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
 _camera_3d = NodePath("..")
 _visible_on_screen_notifier_3d = NodePath("../../../../../../../VisibleOnScreenNotifier3D")
+
+[node name="Label" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/MarginContainer/SpillWarning" parent_id_path=PackedInt32Array(317935962, 337494662) index="0" unique_id=1244531673]
+visible = false
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
@@ -349,34 +354,35 @@ area_size = Vector2(0.795609, 1.06196)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.7)
 shape = SubResource("BoxShape3D_j2xdn")
 
-[node name="Interactable" type="Area3D" parent="3DGui" unique_id=1501552722 node_paths=PackedStringArray("mesh")]
+[node name="UseMachineInteractable" type="Area3D" parent="3DGui" unique_id=1501552722 node_paths=PackedStringArray("mesh")]
 script = ExtResource("5_ioi8x")
+interactable_id = &"use_machine"
 display_name = "Use machine"
 mesh = NodePath("../Screen")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/Interactable" unique_id=2039158149]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DGui/UseMachineInteractable" unique_id=2039158149]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
 shape = SubResource("BoxShape3D_yuuq8")
 
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 
-[node name="CamFeedSpot" type="RemoteTransform3D" parent="." unique_id=586006225]
-transform = Transform3D(1, 0, 0, 0, 0.9314618, 0.36383918, 0, -0.36383918, 0.9314618, 0, 1.732186, -0.4412867)
-remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="3DGui" unique_id=1736484949]
+transform = Transform3D(0.99999964, 0, 0, 0, 0.9659255, 0.25881895, 0, -0.25881895, 0.9659255, 0, 1.7298214, -0.7150276)
+remote_path = NodePath("../Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
 
 [node name="Model" type="Node3D" parent="." unique_id=238356525]
 
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=840317131]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=982963143]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1840568957) index="0" unique_id=2046937882]
+[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
 mesh = SubResource("ArrayMesh_eujd3")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]

@@ -6,10 +6,10 @@ extends Area3D
 # in another script
 signal interacted
 # this is like the interacted signal but it gets emitted when we pres Q instead of E .
-# since it emits a ref to the equipped item, we can check that wherever we recieve
-# the signal and have something trigger if we used a certain item on this interactable
-signal used_active_item(item: Item)
+signal requested_use_active_item
 
+# For checking unique interactables
+@export var interactable_id: StringName
 ## the name that will show in UI for this interactable
 @export var display_name: String
 ## mesh used for this object
@@ -21,6 +21,7 @@ signal used_active_item(item: Item)
 @export var keep_progress_on_interrupt: bool = false
 ## how long the player has to hold to interact (if hold_to_interact is enabled)
 @export var time_to_hold: float = 6
+@export var show_interact_hotkey: bool = true
 
 var time_held: float = 0
 
@@ -39,7 +40,7 @@ func _process(delta: float) -> void:
 	_update_material()
 
 	if (
-		Global.hovered_interactable != self 
+			Global.hovered_interactable != self 
 			or not visible
 			or Global.in_pc_ui 
 			or Global.minigame_active
@@ -49,24 +50,24 @@ func _process(delta: float) -> void:
 			time_held = 0
 		return
 
-	# One time press
-	if Input.is_action_just_pressed("interact") and not hold_to_interact:
-		interacted.emit()
-
-	# Hold to press
-	if Input.is_action_pressed("interact") and hold_to_interact:
-		time_held += delta
-		if time_held >= time_to_hold:
+	if show_interact_hotkey:
+		# One time press
+		if Input.is_action_just_pressed("interact") and not hold_to_interact:
 			interacted.emit()
-			time_held = 0
-	else:
-		if not keep_progress_on_interrupt:
-			time_held = 0
-
+	
+		# Hold to press
+		if Input.is_action_pressed("interact") and hold_to_interact:
+			time_held += delta
+			if time_held >= time_to_hold:
+				interacted.emit()
+				time_held = 0
+		else:
+			if not keep_progress_on_interrupt:
+				time_held = 0
+	
 	# alt interaction where player uses an item on this interactable
 	if Input.is_action_just_pressed("use_item"):
-		if Global.equipped_item and Global.equipped_item.can_be_used:
-			used_active_item.emit(Global.equipped_item)
+		requested_use_active_item.emit()
 
 
 func _on_visibility_changed() -> void:
