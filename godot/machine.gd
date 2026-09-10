@@ -92,8 +92,9 @@ var queued_customers: Array[Customer]
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
-var make_drink_locked: bool = false
+var tutorial_lock_remake_drink_button: bool = false
 var next_drink_forced_perfect: bool = false
+var tutorial_lock_accept_drink_button: bool = false
 var next_drink_forced_incorrect: bool = false
 var ingredients: int:
 	set(new_value):
@@ -167,8 +168,8 @@ func _process(delta: float) -> void:
 	ingredient_coffeebar.position.y = 1125 - (1125 * (0.01 * ingredients_bar.value))
 	
 	progress_indicator.visible = not timer.is_stopped()
-	accept_button.disabled = not waiting_for_response
-	make_drink_button.disabled = not waiting_for_response or (ingredients < Stats.current.ingredients_per_order) or make_drink_locked
+	accept_button.disabled = (not waiting_for_response) or tutorial_lock_accept_drink_button
+	make_drink_button.disabled = (not waiting_for_response) or (ingredients < Stats.current.ingredients_per_order) or tutorial_lock_remake_drink_button
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
@@ -278,6 +279,28 @@ func blast_player_from_using_machine() -> void:
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
 
 	Global.player.velocity += launch_vector
+
+
+func set_order_action_buttons_available(button_case: String) -> void:
+	tutorial_lock_accept_drink_button = true
+	tutorial_lock_remake_drink_button = true
+	refill_button.disabled = true
+
+	match button_case:
+		"accept":
+			tutorial_lock_accept_drink_button = false
+		"make_drink":
+			tutorial_lock_remake_drink_button = false
+		"refill":
+			refill_button.disabled = false
+		"all":
+			tutorial_lock_accept_drink_button = false
+			tutorial_lock_remake_drink_button = false
+			refill_button.disabled = false
+		"none":
+			pass
+		_:
+			print("invalid button_case passed to set_order_action_buttons_available()")
 
 # called from inside spill() (so that itll still show if we trigger the spill
 # via a console command etc)
