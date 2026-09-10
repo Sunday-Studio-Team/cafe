@@ -6,6 +6,8 @@ extends Node2D
 @export var progress_label: Label
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
+@export var machine_clean: Sprite2D
+@export var machine_dirty: Sprite2D
 @export var bucket_area: Area2D
 @export var mop: DraggableMop
 
@@ -30,7 +32,7 @@ var remaining_mask: BitMap
 func _ready() -> void:
 	Global.minigame_active = true
 	Global.in_spill_minigame = true
-	canvas_sprite.texture = Global.spill_sprites.pick_random()
+	#canvas_sprite.texture = Global.spill_sprites.pick_random()
 
 	canvas_image = canvas_sprite.texture.get_image()
 	canvas_image.convert(Image.FORMAT_RGBA8)
@@ -44,7 +46,8 @@ func _ready() -> void:
 
 	mop_collision = moping_area.get_child(0) as CollisionShape2D
 	mop_rectangle = mop_collision.shape as RectangleShape2D
-
+	
+	
 	if moping_area == null:
 		push_error("Moping Area has not been assigned.")
 		set_physics_process(false)
@@ -71,7 +74,8 @@ func _ready() -> void:
 
 	bucket_area.area_entered.connect(
 		func(_area: Area2D):
-			mop.wet_mop()
+			if _area == moping_area:
+				mop.wet_mop()
 	)
 
 	initialize_progress_mask()
@@ -92,6 +96,7 @@ func _physics_process(_delta: float) -> void:
 	
 	previous_mop_position = mop_collision.global_position
 
+	check_machine_clean()
 	update_image(rect)
 	update_progress_display()
 	check_for_win()
@@ -164,6 +169,13 @@ func update_progress_display() -> void:
 
 	progress_label.text = ("Erased: %d%%" % erased_percentage)
 
+func check_machine_clean() -> void:
+	if remaining_pixel_count <= 1000:
+		machine_clean.visible = true
+		machine_dirty.visible = false
+	else:
+		machine_clean.visible = false
+		machine_dirty.visible = true
 
 func check_for_win() -> void:
 	if starting_pixel_count <= 0:

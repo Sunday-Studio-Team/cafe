@@ -29,9 +29,14 @@ func play_voice_line_at_location(voice_line_id: String, voice_line_location: Voi
 	
 	# Don't play if non-priority and a priority voice line is playing
 	if !voice_line.is_priority:
-		if _is_playing_no_location_voice_line and _voice_line_no_location_player.get_playing_voice_line().is_priority:
+		if _is_playing_no_location_voice_line and\
+				_voice_line_no_location_player != null and\
+				_voice_line_no_location_player.get_playing_voice_line() != null and\
+				_voice_line_no_location_player.get_playing_voice_line().is_priority:
 			return
-		if _playing_voice_line_location_player != null and _playing_voice_line_location_player.get_playing_voice_line().is_priority:
+		if _playing_voice_line_location_player != null and\
+				_playing_voice_line_location_player.get_playing_voice_line() != null and\
+				_playing_voice_line_location_player.get_playing_voice_line().is_priority:
 			return
 	
 	_interrupt_any_no_location_voice_lines()
@@ -51,12 +56,17 @@ func play_voice_line_at_location(voice_line_id: String, voice_line_location: Voi
 ## Play a voice line without a specific location, with its subtitle.
 func play_voice_line_no_location(voice_line_id: String) -> void:
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
-	
+
 	# Don't play if non-priority and a priority voice line is playing
 	if !voice_line.is_priority:
-		if _is_playing_no_location_voice_line and _voice_line_no_location_player.get_playing_voice_line().is_priority:
+		if _is_playing_no_location_voice_line and\
+				_voice_line_no_location_player != null and\
+				_voice_line_no_location_player.get_playing_voice_line() != null and\
+				_voice_line_no_location_player.get_playing_voice_line().is_priority:
 			return
-		if _playing_voice_line_location_player != null and _playing_voice_line_location_player.get_playing_voice_line().is_priority:
+		if _playing_voice_line_location_player != null and\
+				_playing_voice_line_location_player.get_playing_voice_line() != null and\
+				_playing_voice_line_location_player.get_playing_voice_line().is_priority:
 			return
 	
 	# Interrupt any existing playing voice line locations

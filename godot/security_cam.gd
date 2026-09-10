@@ -230,8 +230,10 @@ func _on_requested_use_active_item():
 
 	if whipped_cream == null or !whipped_cream.can_be_used:
 		return
-
-	Events.play_viewmodel_animation.emit("cream_use")
+	
+	#Putting new animation to test change
+	#TODO: Replace base animation with newest one
+	Events.play_viewmodel_animation.emit("cream_use_new")
 	whipped_cream_sound.play()
 	Global.put_active_item_on_cooldown(whipped_cream)
 	disarm_camera()
