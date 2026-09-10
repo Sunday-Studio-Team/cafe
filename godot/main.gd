@@ -541,46 +541,36 @@ func _tippy_tutorials() -> void:
 		for i in range(tutorial_lines_day1.size()):
 			var voice_line_id: String = tutorial_lines_day1[i]
 			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+			while Global.voice_line_system.is_playing_no_location_voice_line():
 				await get_tree().process_frame
-			if Global.shift_started:
-				break
 				
 	if Global.day == 2:
 		for i in range(tutorial_lines_day2.size()):
 			var voice_line_id: String = tutorial_lines_day2[i]
 			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+			while Global.voice_line_system.is_playing_no_location_voice_line():
 				await get_tree().process_frame
-			if Global.shift_started:
-				break
 				
 	if Global.day == 3:
 		for i in range(tutorial_lines_day3.size()):
 			var voice_line_id: String = tutorial_lines_day3[i]
 			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+			while Global.voice_line_system.is_playing_no_location_voice_line():
 				await get_tree().process_frame
-			if Global.shift_started:
-				break
-				
+	
 	if Global.day == 4:
 		for i in range(tutorial_lines_day4.size()):
 			var voice_line_id: String = tutorial_lines_day4[i]
 			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+			while Global.voice_line_system.is_playing_no_location_voice_line():
 				await get_tree().process_frame
-			if Global.shift_started:
-				break
 				
 	if Global.day == 5:
 		for i in range(tutorial_lines_day5.size()):
 			var voice_line_id: String = tutorial_lines_day5[i]
 			Global.voice_line_system.play_voice_line_no_location(voice_line_id)
-			while !Global.shift_started and Global.voice_line_system.is_playing_no_location_voice_line():
+			while Global.voice_line_system.is_playing_no_location_voice_line():
 				await get_tree().process_frame
-			if Global.shift_started:
-				break
 
 func _interactive_tutorial_shift() -> void:
 	if tutorial_machine == null:
