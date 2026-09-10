@@ -254,7 +254,7 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "accept_counter", "remake_counter", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "accept_counter", "remake_counter", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -275,10 +275,9 @@ refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/Ingre
 ordered_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderedDrinkName")
 ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
-spill_warning_container = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control")
-spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/TippySlippy")
-customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer")
-customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar")
+spill_warning_container = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/SpillWarning")
+customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer")
+customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer/TextureProgressBar")
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
 get_ingredients_prompt = NodePath("3DGui/Screen/SubViewport/MachineUI/GetIngredientsPrompt")
 order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown")
@@ -293,7 +292,7 @@ made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/Ma
 made_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeItem")
 equal_sign = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/MarginContainer/EqualSign")
 equal_sign_states = Array[Texture2D]([ExtResource("2_ww5c3"), ExtResource("3_8ej3g"), ExtResource("4_ymic3")])
-timer_dial = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar/TimerDial")
+timer_dial = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer/TextureProgressBar/TimerDial")
 ingredient_coffeebar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/IngredientsUI/MarginContainer/ProgressUnder/ProgressCoffee")
 idle_ing_bar_array = Array[Texture2D]([ExtResource("2_cvlju"), ExtResource("3_4b30b"), ExtResource("4_womjx"), ExtResource("5_hrogu"), ExtResource("6_ww5c3"), ExtResource("7_8ej3g"), ExtResource("8_ymic3"), ExtResource("9_bvj4x"), ExtResource("10_vaqkk"), ExtResource("11_7p33r"), ExtResource("12_a80ij"), ExtResource("13_robek"), ExtResource("14_ovoaa"), ExtResource("15_1hlt3"), ExtResource("16_uaec5"), ExtResource("17_gtm4j"), ExtResource("18_hp8kb"), ExtResource("19_h07qc"), ExtResource("20_1cgjg"), ExtResource("21_t5s72"), ExtResource("22_g2688"), ExtResource("23_rcak8"), ExtResource("24_0ngdq"), ExtResource("25_c2how")])
 active_ing_bar_array = Array[Texture2D]([ExtResource("26_427vo"), ExtResource("27_q5jp4"), ExtResource("28_d37nw"), ExtResource("29_41yea"), ExtResource("30_bbbyo"), ExtResource("31_kuutf"), ExtResource("32_dfbyd"), ExtResource("33_gx0jy"), ExtResource("34_bgw1y"), ExtResource("35_lf4vc"), ExtResource("36_x3bhi"), ExtResource("37_avb8l"), ExtResource("38_b2l0d"), ExtResource("39_wello"), ExtResource("40_kipqy"), ExtResource("41_bgacs"), ExtResource("42_88l6f"), ExtResource("43_jac24"), ExtResource("44_om76m"), ExtResource("45_ryoht"), ExtResource("46_j2jxb"), ExtResource("47_g2mkn"), ExtResource("48_pdfax"), ExtResource("49_lx633"), ExtResource("50_w1s35"), ExtResource("51_4rr27"), ExtResource("52_evw7y"), ExtResource("53_wdkrr"), ExtResource("54_8bmd4"), ExtResource("55_qtip1"), ExtResource("56_rdhdf"), ExtResource("57_4mdt8"), ExtResource("58_0ief2"), ExtResource("59_5vek6"), ExtResource("60_vij2s"), ExtResource("61_bn4tc"), ExtResource("62_ehdnm"), ExtResource("63_ub41g"), ExtResource("64_sjdni"), ExtResource("65_ps4nf"), ExtResource("66_yaqdg"), ExtResource("67_q3tn5"), ExtResource("68_alees"), ExtResource("69_q52mk"), ExtResource("70_clr3m"), ExtResource("71_5osnv"), ExtResource("72_mpktl"), ExtResource("73_20wcn"), ExtResource("74_ujplj"), ExtResource("75_33y5n"), ExtResource("76_rsa8u"), ExtResource("77_und3g"), ExtResource("78_8ij72"), ExtResource("79_eff2u"), ExtResource("80_tk0p7"), ExtResource("81_x483m")])
@@ -401,7 +400,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 shape = SubResource("BoxShape3D_0ffxp")
 debug_color = Color(1, 1, 1, 1)
 
-[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot")]
+[node name="3DGui" type="Node3D" parent="." unique_id=439423297 node_paths=PackedStringArray("interactable", "node_viewport", "node_quad", "node_area", "cam_spot", "_customer_side_camera")]
 transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, 0, 0.30209354, 0.1217342)
 script = ExtResource("10_0d1aa")
 interactable = NodePath("UseMachineInteractable")
@@ -409,6 +408,7 @@ node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
+_customer_side_camera = NodePath("Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
@@ -416,7 +416,7 @@ mesh = SubResource("QuadMesh_0ffxp")
 
 [node name="CustomerCameraRemoteTransform3D" type="RemoteTransform3D" parent="3DGui/Screen" unique_id=1736484949]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.258819, 0, -0.25881904, 0.96592575, 0, 0.7298213, -1.4538481)
-remote_path = NodePath("../SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport/Camera3D")
+remote_path = NodePath("../SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="3DGui/Screen" unique_id=379095341]
 transform = Transform3D(1.2075837, 0, 0, 0, 1.2075838, 3.2749806e-08, 0, -3.2749806e-08, 1.2075838, 0, 0, 0)
@@ -428,55 +428,39 @@ use_occlusion_culling = true
 size = Vector2i(1200, 1600)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
-offset_right = 0.0
-offset_bottom = 0.0
 size_flags_horizontal = 3
 
-[node name="CamFeedSubViewportContainer" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" parent_id_path=PackedInt32Array(317935962, 1192831864) index="0" unique_id=2077053007]
+[node name="CamFeedSubViewportContainer" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2" parent_id_path=PackedInt32Array(317935962, 1153203435) index="0" unique_id=2077053007]
 custom_minimum_size = Vector2(360, 270)
 anchors_preset = 15
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 92.0
-offset_top = 60.0
-offset_right = -55.0
-offset_bottom = -69.0
+offset_left = 96.0
+offset_top = 64.0
+offset_right = -222.0
+offset_bottom = -65.0
 
-[node name="CamFeedSubViewport" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer" index="0" unique_id=1105624155]
+[node name="CamFeedSubViewport" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer" index="0" unique_id=1105624155]
 handle_input_locally = false
 scaling_3d_scale = 0.5
 size = Vector2i(653, 270)
 render_target_update_mode = 4
 
-[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=1366731145 node_paths=PackedStringArray("_sub_viewport")]
+[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=1366731145 node_paths=PackedStringArray("_sub_viewport")]
 script = ExtResource("18_0ne0o")
 _sub_viewport = NodePath("..")
 metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
-[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
+[node name="CustomerCamera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
 transform = Transform3D(0.90999997, 0, 0, 0, 0.87899244, 0.2355253, 0, -0.23552532, 0.8789924, 0, 1.876231, -0.56426746)
 
-[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CamFeedSubViewportContainer/CamFeedSubViewport/Camera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
+[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
 _camera_3d = NodePath("..")
 _visible_on_screen_notifier_3d = NodePath("../../../../../../../../../../../VisibleOnScreenNotifier3D")
 metadata/_custom_type_script = "uid://lidk43nk3l7v"
-
-[node name="CustomerTimer" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" parent_id_path=PackedInt32Array(317935962, 1192831864) index="1" unique_id=985060453]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-offset_transform_enabled = true
-
-[node name="TextureProgressBar" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" index="0" unique_id=731233711]
-custom_maximum_size = Vector2(25, 25)
-offset_right = 0.0
-offset_bottom = 0.0
-offset_transform_enabled = true
-value = 0.0
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
@@ -508,13 +492,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=749704850]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=982963143]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
+[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
 mesh = SubResource("ArrayMesh_eujd3")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]

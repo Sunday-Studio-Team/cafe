@@ -25,13 +25,6 @@
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
-bg_color = Color(0.52102256, 0.21740454, 0.06405475, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_x45kg"]
 frames = 2
 frame_0/texture = ExtResource("5_qwcv2")
@@ -134,11 +127,15 @@ corner_radius_bottom_left = 10
 [node name="MachineUI" type="MarginContainer" unique_id=317935962]
 custom_minimum_size = Vector2(1200, 1600)
 custom_maximum_size = Vector2(1200, 1600)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -720.0
-offset_bottom = 520.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -800.0
+offset_right = 600.0
+offset_bottom = 800.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_scale = Vector2(0.7, 0.7)
@@ -183,12 +180,10 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1192831864]
+[node name="Control2" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1153203435]
 layout_mode = 2
-texture = ExtResource("2_motd3")
-stretch_mode = 2
 
-[node name="CamFeedSubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=2077053007]
+[node name="CamFeedSubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2" unique_id=2077053007]
 custom_minimum_size = Vector2(653, 270)
 custom_maximum_size = Vector2(653, 270)
 layout_mode = 1
@@ -197,15 +192,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -308.0
+offset_left = -389.5
 offset_top = -135.0
-offset_right = 345.0
+offset_right = 263.5
 offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="CustomerTimer" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=985060453]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1192831864]
+layout_mode = 2
+texture = ExtResource("2_motd3")
+stretch_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1433618898]
+layout_mode = 2
+
+[node name="CustomerTimer" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control" unique_id=985060453]
 z_index = 1
 layout_mode = 1
 anchors_preset = 8
@@ -213,17 +216,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -82.5
-offset_right = -90.0
-offset_bottom = -82.5
+offset_left = -387.5
+offset_top = 101.5
+offset_right = -387.5
+offset_bottom = 101.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 offset_transform_position = Vector2(-300, 100)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer" unique_id=731233711]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer" unique_id=731233711]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -243,42 +246,25 @@ texture_under = ExtResource("3_u8yrf")
 texture_over = ExtResource("5_l6aen")
 texture_progress = ExtResource("6_b6qyr")
 
-[node name="TimerDial" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/CustomerTimer/TextureProgressBar" unique_id=956954245]
+[node name="TimerDial" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer/TextureProgressBar" unique_id=956954245]
 layout_mode = 1
 offset_right = 200.0
 offset_bottom = 200.0
 texture = ExtResource("7_b6qyr")
 
-[node name="Control" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect" unique_id=1840575213]
-visible = false
+[node name="SpillWarning" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control" unique_id=1840575213]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_right = -45.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpillWarning" type="PanelContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control" unique_id=1756304273]
-visible = false
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
-
-[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control/SpillWarning" unique_id=2129222277]
-layout_mode = 2
-theme_override_font_sizes/font_size = 96
-text = "⚠️
-SPILL"
-horizontal_alignment = 1
-
-[node name="TippySlippy" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/TextureRect/Control" unique_id=2032287730]
+[node name="TippySlippy" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/SpillWarning" unique_id=2032287730]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -496,6 +482,8 @@ texture = ExtResource("17_267yc")
 [node name="IngredientsUI" type="VBoxContainer" parent="HBoxContainer" unique_id=328574774]
 layout_mode = 2
 size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_position = Vector2(-32, 0)
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/IngredientsUI" unique_id=1820593901]
@@ -559,6 +547,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_enabled = true
+offset_transform_position = Vector2(-108, 0)
 offset_transform_visual_only = false
 theme = SubResource("Theme_ywufb")
 texture_normal = ExtResource("16_10yj4")

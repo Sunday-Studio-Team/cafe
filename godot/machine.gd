@@ -33,7 +33,6 @@ const REFILL_MINIGAME := "Refill"
 @export var ingredients_bar: TextureProgressBar
 @export var ing_too_low_label: Label3D
 @export var spill_warning_container: Control
-@export var spill_warning: TextureRect
 @export var customer_wait_indicator: Control
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
@@ -141,10 +140,6 @@ func _ready() -> void:
 	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 	current_ingbar_animation = idle_ing_bar_array
-	# glowing fx on spill warning
-	var t := create_tween().set_loops()
-	t.tween_property(spill_warning, "modulate", Color.WHITE, 0.5)
-	t.tween_property(spill_warning, "modulate", Color.TRANSPARENT, 0.5)
 
 var current_ingbar_animation:Array[Texture2D]:
 	set(value):
