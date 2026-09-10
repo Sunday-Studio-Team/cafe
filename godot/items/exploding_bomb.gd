@@ -2,24 +2,43 @@ class_name ExplodingBomb
 extends RigidBody3D
 
 @export var explode_timer: Timer
-@export var time_til_explosion_label: Label3D
+@export var range_indicator: MeshInstance3D
+@export var timer_progress_indicator: MeshInstance3D
+@export var danger_light: OmniLight3D
+@export var drop_impact_sound: AudioStreamPlayer3D
+@export var ticking_siren_sound: AudioStreamPlayer3D
+@export var ticking_timer: Timer
+@export var explode_sound: AudioStreamPlayer3D
+@export var model: Node3D
 
 var player: Player
+
+@onready var starting_light_energy := danger_light.light_energy
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	explode_timer.timeout.connect(explode)
+	ticking_timer.timeout.connect(
+			func():
+				ticking_siren_sound.play()
+				var new_scale_for_progress_indicator: Vector3 = timer_progress_indicator.scale + (Vector3.ONE / (explode_timer.wait_time - 1))
+				var t := create_tween().set_trans(Tween.TRANS_SPRING)
+				await t.tween_property(timer_progress_indicator, "scale", new_scale_for_progress_indicator,
+						0.1).finished
+				if timer_progress_indicator.scale >= Vector3.ONE:
+					var indicators_shrink_tween := create_tween().set_parallel()
+					indicators_shrink_tween.tween_property(range_indicator, "scale", Vector3.ZERO, 0.25)
+					indicators_shrink_tween.tween_property(timer_progress_indicator, "scale", Vector3.ZERO, 0.25)
+					ticking_timer.stop()
+	)
 
 	player = Global.player
 
-	explode_timer.start()
-
-
-func _physics_process(_delta: float) -> void:
-	time_til_explosion_label.text = str(ceil(explode_timer.time_left))
-	time_til_explosion_label.global_position = global_position + Vector3(0, 1, 0)
+	range_indicator.scale = Vector3.ZERO
+	timer_progress_indicator.scale = Vector3.ZERO
+	danger_light.light_energy = 0
 
 
 func _on_body_entered(body: PhysicsBody3D) -> void:
@@ -28,10 +47,22 @@ func _on_body_entered(body: PhysicsBody3D) -> void:
 		gravity_scale = 0
 		linear_damp = 5
 
-		time_til_explosion_label.show()
+		explode_timer.start()
+
+		drop_impact_sound.play()
+		ticking_siren_sound.play()
+		ticking_timer.start()
+
+		create_tween().tween_property(range_indicator, "scale", Vector3.ONE, 0.5)
+		var bomb_light_tween := create_tween().set_loops()
+		bomb_light_tween.tween_property(danger_light, "light_energy", starting_light_energy, 0.5)
+		bomb_light_tween.tween_property(danger_light, "light_energy", 0, 0.5)
 
 
 func explode() -> void:
+	ticking_siren_sound.volume_db = -100
+	explode_sound.play()
+
 	var player_grounded_position: Vector3 = player.global_position
 	player_grounded_position.y = 0
 	var bomb_grounded_position: Vector3 = global_position
@@ -45,10 +76,16 @@ func explode() -> void:
 	bomb_force_magnitude = clampf(bomb_force_magnitude, MIN_FORCE, MAX_FORCE)
 
 	var bomb_force: Vector3 = bomb_force_magnitude * bomb_grounded_position.direction_to(player_grounded_position)
-	bomb_force.y += 1
+	bomb_force.y += bomb_force_magnitude * 0.1
 
 	player.velocity += bomb_force
 
-	await get_tree().create_timer(0.15, false).timeout
+	model.hide()
+	danger_light.hide()
+	var range_indicator_tween := create_tween().set_parallel()
+	range_indicator_tween.tween_property(range_indicator, "scale", Vector3.ONE * 5, 0.5)
+	range_indicator_tween.tween_property(range_indicator, "transparency", 1, 0.5)
+
+	await explode_sound.finished
 	queue_free()
 	
