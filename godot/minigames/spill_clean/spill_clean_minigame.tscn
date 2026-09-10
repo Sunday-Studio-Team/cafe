@@ -20,7 +20,7 @@ size = Vector2(678.04865, 540.20624)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnu58"]
 emission_shape = 3
-emission_box_extents = Vector3(300, 150, 1)
+emission_box_extents = Vector3(130, 80, 1)
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -2.2351742e-06
 radial_accel_max = 24.999998
@@ -30,11 +30,7 @@ scale_max = 0.39999998
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
 size = Vector2(241, 130)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
-size = Vector2(239, 488)
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx0vh"]
-load_path = "res://.godot/imported/mop_it_up.png-0e0004a1a7332602439f9a9fe450aad4.ctex"
 
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 
@@ -81,16 +77,17 @@ machine_clean = NodePath("../TippyMachineClean")
 machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
+allowed_remaining_ratio = 0.05
 
-[node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles", "splash", "mope_range")]
+[node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("bubbles", "splash", "mop_range")]
 position = Vector2(960, 1000)
 rotation = -0.2485773
 texture = ExtResource("4_omxn0")
+offset = Vector2(0, 200)
 script = ExtResource("4_6lir2")
-drag_area = NodePath("MopDragHitbox")
 bubbles = NodePath("GPUParticles2D")
 splash = NodePath("../SplashSound")
-mope_range = NodePath("MopHeadHitbox/CollisionShape2D")
+mop_range = NodePath("MopHeadHitbox/CollisionShape2D")
 mop_texture = ExtResource("4_omxn0")
 dirty_mop_texture = ExtResource("4_4xqy4")
 scrubber_texture = ExtResource("6_v4dls")
@@ -98,23 +95,18 @@ dirty_scrubber_texture = ExtResource("7_80bh0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Mop" unique_id=360286918]
 modulate = Color(1, 0.8352941, 0.77254903, 0.7058824)
-position = Vector2(0, -500)
+position = Vector2(-0.2905197, 13.338501)
 amount = 10
 texture = ExtResource("5_quysc")
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_xnu58")
 
 [node name="MopHeadHitbox" type="Area2D" parent="Mop" unique_id=1322127866]
+position = Vector2(0.24222565, 202.27689)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mop/MopHeadHitbox" unique_id=426483103]
 position = Vector2(-0.50006104, -184.00003)
 shape = SubResource("RectangleShape2D_6lir2")
-
-[node name="MopDragHitbox" type="Area2D" parent="Mop" unique_id=1484986336]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mop/MopDragHitbox" unique_id=1835631460]
-position = Vector2(0.49993896, -9.0000305)
-shape = SubResource("RectangleShape2D_xnu58")
 
 [node name="SplashSound" type="AudioStreamPlayer2D" parent="." unique_id=1715966103]
 position = Vector2(451, 543)
