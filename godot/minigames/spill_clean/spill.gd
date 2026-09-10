@@ -30,7 +30,7 @@ var remaining_mask: BitMap
 func _ready() -> void:
 	Global.minigame_active = true
 	Global.in_spill_minigame = true
-	canvas_sprite.texture = Global.spill_sprites.pick_random()
+	#canvas_sprite.texture = Global.spill_sprites.pick_random()
 
 	canvas_image = canvas_sprite.texture.get_image()
 	canvas_image.convert(Image.FORMAT_RGBA8)
