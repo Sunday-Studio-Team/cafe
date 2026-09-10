@@ -192,9 +192,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -389.5
+offset_left = -303.0
 offset_top = -135.0
-offset_right = 263.5
+offset_right = 350.0
 offset_bottom = 135.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -216,9 +216,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -387.5
+offset_left = -302.0
 offset_top = 101.5
-offset_right = -387.5
+offset_right = -302.0
 offset_bottom = 101.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -248,8 +248,17 @@ texture_progress = ExtResource("6_b6qyr")
 
 [node name="TimerDial" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer/TextureProgressBar" unique_id=956954245]
 layout_mode = 1
-offset_right = 200.0
-offset_bottom = 200.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("7_b6qyr")
 
 [node name="SpillWarning" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control" unique_id=1840575213]
@@ -259,8 +268,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -45.5
-offset_right = -45.5
+offset_left = 21.0
+offset_right = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -441,6 +450,7 @@ layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -120)
+offset_transform_visual_only = false
 
 [node name="Buttons" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1826884261]
 layout_mode = 2
@@ -454,12 +464,13 @@ alignment = 1
 [node name="RemakeDrinkButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=2075147826]
 layout_mode = 2
 size_flags_horizontal = 6
-offset_transform_enabled = true
+offset_transform_visual_only = false
 texture_normal = ExtResource("12_motd3")
 
 [node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=261257475]
 layout_mode = 2
 size_flags_horizontal = 6
+offset_transform_visual_only = false
 texture_normal = ExtResource("10_71all")
 texture_disabled = ExtResource("11_10yj4")
 
@@ -482,8 +493,6 @@ texture = ExtResource("17_267yc")
 [node name="IngredientsUI" type="VBoxContainer" parent="HBoxContainer" unique_id=328574774]
 layout_mode = 2
 size_flags_horizontal = 3
-offset_transform_enabled = true
-offset_transform_position = Vector2(-32, 0)
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/IngredientsUI" unique_id=1820593901]
@@ -546,8 +555,6 @@ horizontal_alignment = 1
 [node name="RefillButton" type="TextureButton" parent="HBoxContainer/IngredientsUI" unique_id=840989236]
 layout_mode = 2
 size_flags_horizontal = 6
-offset_transform_enabled = true
-offset_transform_position = Vector2(-108, 0)
 offset_transform_visual_only = false
 theme = SubResource("Theme_ywufb")
 texture_normal = ExtResource("16_10yj4")

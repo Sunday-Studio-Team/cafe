@@ -377,7 +377,7 @@ display_name = "Clean up spill"
 
 [node name="Sprite3D" type="Sprite3D" parent="Spill" unique_id=667352050]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-pixel_size = 0.001
+pixel_size = 0.0025
 texture = ExtResource("9_1hddr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spill" unique_id=2013507775]
@@ -437,9 +437,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 96.0
+offset_left = 97.0
 offset_top = 64.0
-offset_right = -222.0
+offset_right = -50.0
 offset_bottom = -65.0
 
 [node name="CamFeedSubViewport" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer" index="0" unique_id=1105624155]
@@ -455,6 +455,7 @@ metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
 [node name="CustomerCamera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
 transform = Transform3D(0.90999997, 0, 0, 0, 0.87899244, 0.2355253, 0, -0.23552532, 0.8789924, 0, 1.876231, -0.56426746)
+fov = 90.0
 
 [node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")

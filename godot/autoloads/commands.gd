@@ -5,6 +5,7 @@
 extends Node
 
 var _item_ids: Array[String] = []
+var _customer_names: Array[String] = []
 # tracks whether we have the 'unlimited actives' command toggled on
 # (so we can toggle on/off with the same command)
 var ua_enabled := false
@@ -83,6 +84,9 @@ func _ready() -> void:
 	Console.add_command("ua", toggle_unlimited_actives)
 	Console.add_command("vo", vo_test)
 	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
+	for customer: CustomerSpriteData in Global.customer_sprites:
+		_customer_names.append("\"%s\"" % customer.customer_name)
+	Console.add_command_autocomplete_list("customer", _customer_names)
 
 	Events.main_scene_loaded.connect(
 		func():
@@ -98,6 +102,7 @@ func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
 func vo_test() -> void:
 	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
 
+
 func toggle_freecam() -> void:
 	Events.free_cam_toggled.emit()
 	if Global.free_camera_enabled:
@@ -105,8 +110,10 @@ func toggle_freecam() -> void:
 	else:
 		Console.print_line("freecam disabled")
 
+
 func set_freecam_speed(speed: String) -> void:
 	Events.free_cam_set_speed.emit(float(speed))
+
 
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()
