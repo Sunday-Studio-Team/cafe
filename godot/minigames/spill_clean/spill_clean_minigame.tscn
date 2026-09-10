@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://l7w4dtq33b6f"]
 
 [ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
-[ext_resource type="Texture2D" uid="uid://dfrkdsu4k5v6q" path="res://sprites/stains/stain3.png" id="1_imr7o"]
-[ext_resource type="Texture2D" uid="uid://db2tgyy1utbm6" path="res://sprites/spill_minigame/tippy_text.png" id="2_80bh0"]
+[ext_resource type="Texture2D" uid="uid://dkgtv4ix58vwu" path="res://sprites/spill_minigame/Bg.png" id="1_eu0yc"]
+[ext_resource type="Texture2D" uid="uid://calsmemse0jyq" path="res://sprites/spill_minigame/tippy_dirty.png" id="2_eu0yc"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/spill.gd" id="2_imr7o"]
+[ext_resource type="Texture2D" uid="uid://b58t6jac3jiqp" path="res://sprites/spill_minigame/tippy_clean.png" id="2_n873u"]
 [ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/dirty_mop.png" id="4_4xqy4"]
 [ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/mop.gd" id="4_6lir2"]
 [ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/clean_mop.png" id="4_omxn0"]
+[ext_resource type="Texture2D" uid="uid://b82ehkcm1tkoc" path="res://sprites/spill_minigame/fitted text.png" id="5_lvuj8"]
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
+[ext_resource type="Texture2D" uid="uid://rkkd7gi2oesv" path="res://sprites/spill_minigame/spill 1.png" id="6_n873u"]
 [ext_resource type="Texture2D" uid="uid://babqx6yagblfe" path="res://sprites/spill_minigame/clean_scrubber.png" id="6_v4dls"]
 [ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
@@ -30,18 +33,34 @@ size = Vector2(241, 130)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
 size = Vector2(239, 488)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx0vh"]
+load_path = "res://.godot/imported/mop_it_up.png-0e0004a1a7332602439f9a9fe450aad4.ctex"
+
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 
+[node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
+position = Vector2(961, 536)
+texture = ExtResource("1_eu0yc")
+
+[node name="TippyMachineClean" type="Sprite2D" parent="." unique_id=2093052380]
+visible = false
+position = Vector2(932, 537)
+texture = ExtResource("2_n873u")
+
+[node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
+position = Vector2(932, 538)
+texture = ExtResource("2_eu0yc")
+
 [node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
-position = Vector2(415, 611.00006)
+position = Vector2(221, 292.00006)
 scale = Vector2(0.41000003, 0.48500004)
 texture = ExtResource("1_eeqbd")
 
 [node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723]
 modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
-position = Vector2(-19.512085, -385.56702)
-scale = Vector2(6.0975604, 5.154639)
-texture = ExtResource("2_80bh0")
+position = Vector2(63.414673, -348.45367)
+scale = Vector2(0.5, 0.423)
+texture = ExtResource("5_lvuj8")
 
 [node name="Area2D" type="Area2D" parent="Bucket" unique_id=474787777]
 
@@ -49,22 +68,24 @@ texture = ExtResource("2_80bh0")
 position = Vector2(0.00012207031, 4.123657)
 shape = SubResource("RectangleShape2D_vn1tu")
 
-[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "bucket_area", "mop")]
-modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
-position = Vector2(960, 600)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_imr7o")
+[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop")]
+modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
+position = Vector2(964, 541)
+texture = ExtResource("6_n873u")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../UI/MarginContainer/Percentage")
 moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
+machine_clean = NodePath("../TippyMachineClean")
+machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
-allowed_remaining_ratio = 0.01
 
 [node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("drag_area", "bubbles", "splash", "mope_range")]
-position = Vector2(960.00006, 500.00003)
+position = Vector2(960, 1000)
+rotation = -0.2485773
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_omxn0")
 script = ExtResource("4_6lir2")
 drag_area = NodePath("MopDragHitbox")
@@ -77,7 +98,8 @@ scrubber_texture = ExtResource("6_v4dls")
 dirty_scrubber_texture = ExtResource("7_80bh0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Mop" unique_id=360286918]
-position = Vector2(5.999939, -157.00003)
+modulate = Color(1, 0.8352941, 0.77254903, 0.7058824)
+position = Vector2(0, -500)
 amount = 10
 texture = ExtResource("5_quysc")
 lifetime = 2.0
@@ -109,6 +131,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Percentage" type="Label" parent="UI/MarginContainer" unique_id=2001257238]
+visible = false
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 40
@@ -116,11 +139,6 @@ text = "Percentage Cleaned:"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Instruction" type="RichTextLabel" parent="UI/MarginContainer" unique_id=1890544718]
-custom_maximum_size = Vector2(1920, 1080)
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 64
-bbcode_enabled = true
-text = "[b]Wet the mop then wipe up the mess![/b]"
-fit_content = true
-horizontal_alignment = 1
+[node name="Instruction" type="Sprite2D" parent="." unique_id=1907843069]
+position = Vector2(932, 534)
+texture = SubResource("CompressedTexture2D_kx0vh")
