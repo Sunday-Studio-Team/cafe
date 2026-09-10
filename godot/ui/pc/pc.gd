@@ -5,6 +5,7 @@ extends Control
 @export var shop_button: Button
 @export var email_app: PCApp
 @export var exit_button: Button
+@export var gui_3d: Main
 ## regular game hud
 @export var ui: CanvasLayer
 @export var irl_new_shop_items_indicator: Label3D
@@ -65,6 +66,7 @@ func _process(_delta: float) -> void:
 
 func exit() -> void:
 	email_app.hide()
+	gui_3d.exit_with_camera_tween()
 	hide()
 
 

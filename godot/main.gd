@@ -38,6 +38,7 @@ extends Node3D
 @export var whiteboard_tutorial_arrow: Arrow3D
 @export var waypoint_ring: Area3D
 @export var shift_start_sound: AudioStreamPlayer
+@export var cam_spot: Marker3D
 
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
@@ -47,6 +48,11 @@ var _help_desk_customer_spawn_timer: Timer
 @export var _tutorial_vo_location_ingredients_bag: VoiceLineLocation
 @export var _tutorial_vo_location_spill: VoiceLineLocation
 @export var day_containers: Array[Node3D] = []
+@export var pc_cam_spot: Marker3D  
+
+const CAM_TWEEN_DUR := 0.25
+var original_cam_transform: Transform3D
+var player_using_pc := false
 
 var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
@@ -803,10 +809,36 @@ func _interactive_tutorial_shift() -> void:
 
 
 func _on_desk_interacted() -> void:
+	if player_using_pc:
+		return
+	player_using_pc = true
+	
 	ui.hide()
+	enter_with_camera_tween()
 	pc_ui.show()
 
-
+func enter_with_camera_tween() -> void:
+	var cam: CameraController = Global.player.camera
+	original_cam_transform = cam.transform
+	create_tween().tween_property(
+		cam,
+		"global_transform",
+		cam_spot.global_transform,
+		CAM_TWEEN_DUR,
+	)
+	
+func exit_with_camera_tween() -> void:
+	player_using_pc = false
+	var cam: CameraController = Global.player.camera
+	var tween: PropertyTweener = create_tween().tween_property(
+		cam,
+		"transform",
+		original_cam_transform,
+		CAM_TWEEN_DUR,
+	)
+	await tween.finished
+	cam.sync_rotation_from_player()
+	
 func _on_game_options_changed(options_data: OptionsData) -> void:
 	_apply_game_options(options_data)
 
