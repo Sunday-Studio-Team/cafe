@@ -10,6 +10,8 @@ extends RigidBody3D
 @export var ticking_timer: Timer
 @export var explode_sound: AudioStreamPlayer3D
 @export var model: Node3D
+@export var explosion_particles: GPUParticles3D
+@export var meow_sound: AudioStreamPlayer3D
 
 var player: Player
 
@@ -28,10 +30,13 @@ func _ready() -> void:
 				await t.tween_property(timer_progress_indicator, "scale", new_scale_for_progress_indicator,
 						0.1).finished
 				if timer_progress_indicator.scale >= Vector3.ONE:
+					ticking_siren_sound.volume_db = -100
 					var indicators_shrink_tween := create_tween().set_parallel()
 					indicators_shrink_tween.tween_property(range_indicator, "scale", Vector3.ZERO, 0.25)
 					indicators_shrink_tween.tween_property(timer_progress_indicator, "scale", Vector3.ZERO, 0.25)
 					ticking_timer.stop()
+					meow_sound.play()
+
 	)
 
 	player = Global.player
@@ -60,8 +65,8 @@ func _on_body_entered(body: PhysicsBody3D) -> void:
 
 
 func explode() -> void:
-	ticking_siren_sound.volume_db = -100
 	explode_sound.play()
+	explosion_particles.emitting = true
 
 	var player_grounded_position: Vector3 = player.global_position
 	player_grounded_position.y = 0
@@ -76,7 +81,7 @@ func explode() -> void:
 	bomb_force_magnitude = clampf(bomb_force_magnitude, MIN_FORCE, MAX_FORCE)
 
 	var bomb_force: Vector3 = bomb_force_magnitude * bomb_grounded_position.direction_to(player_grounded_position)
-	bomb_force.y += bomb_force_magnitude * 0.1
+	bomb_force.y += bomb_force_magnitude * 0.2
 
 	player.velocity += bomb_force
 
