@@ -51,9 +51,7 @@ func populate() -> void:
 		if not Global.owned_items.has(item):
 			add_available_item_button(item)
 
-	# TODO: check save for number of item slots unlocked instead of using
-	# hardcoded value
-	for i in Global.day:
+	for i in SaveDataManager.save_data.latest_unlocked_day:
 		var equipped_item_button: LoadoutMenuElement = element_scene.instantiate()
 		if Global.owned_items.size() >= i + 1:
 			equipped_item_button.item = Global.owned_items[i]
