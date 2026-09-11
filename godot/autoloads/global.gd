@@ -152,9 +152,9 @@ var tutorial_drink_accepted: bool = false
 var tutorial_remake_button_pressed: bool = false
 var tutorial_drink_remade: bool = false
 var tutorial_ingredients_bag_got: bool = false
-var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
-var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
-var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
+var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a machine runs out of food
+var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
+var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
 # Voice Line System
 var voice_line_system: VoiceLineSystem
@@ -176,7 +176,7 @@ func _ready() -> void:
 	items.assign(load_resources_from_folder(items_folder_path))
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	reviews.assign(load_resources_from_folder(review_folder_path))
-	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path,"tres"))
+	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 

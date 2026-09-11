@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://l7w4dtq33b6f"]
+[gd_scene format=3 uid="uid://c8jilqo1pb0th"]
 
 [ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
 [ext_resource type="Texture2D" uid="uid://dkgtv4ix58vwu" path="res://sprites/spill_minigame/Bg.png" id="1_eu0yc"]
@@ -10,10 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/clean_mop.png" id="4_omxn0"]
 [ext_resource type="Texture2D" uid="uid://b82ehkcm1tkoc" path="res://sprites/spill_minigame/fitted text.png" id="5_lvuj8"]
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
+[ext_resource type="Script" uid="uid://cfst3es72ok0h" path="res://minigames/spill_clean/tippy_text.gd" id="6_kx0vh"]
 [ext_resource type="Texture2D" uid="uid://rkkd7gi2oesv" path="res://sprites/spill_minigame/spill 1.png" id="6_n873u"]
 [ext_resource type="Texture2D" uid="uid://babqx6yagblfe" path="res://sprites/spill_minigame/clean_scrubber.png" id="6_v4dls"]
 [ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
+[ext_resource type="Texture2D" uid="uid://geesylp2blx1" path="res://sprites/spill_minigame/fitted text 2.png" id="7_kx0vh"]
+[ext_resource type="Texture2D" uid="uid://qjon7ck5mcym" path="res://sprites/spill_minigame/spill_tippy_mouse_closed.png" id="10_lww7c"]
+[ext_resource type="Texture2D" uid="uid://br7to5b13wfqn" path="res://sprites/spill_minigame/wet_mop.png" id="12_fjufl"]
+[ext_resource type="Texture2D" uid="uid://bes68l7c5t057" path="res://sprites/spill_minigame/wet_scrubber.png" id="15_lww7c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(678.04865, 540.20624)
@@ -38,35 +43,10 @@ size = Vector2(241, 130)
 position = Vector2(961, 536)
 texture = ExtResource("1_eu0yc")
 
-[node name="TippyMachineClean" type="Sprite2D" parent="." unique_id=2093052380]
-visible = false
-position = Vector2(932, 537)
-texture = ExtResource("2_n873u")
-
-[node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
-position = Vector2(932, 538)
-texture = ExtResource("2_eu0yc")
-
-[node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
-position = Vector2(221, 292.00006)
-scale = Vector2(0.41000003, 0.48500004)
-texture = ExtResource("1_eeqbd")
-
-[node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723]
-modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
-position = Vector2(182.63477, -285.60284)
-scale = Vector2(0.7207779, 0.60977817)
-texture = ExtResource("5_lvuj8")
-
-[node name="Area2D" type="Area2D" parent="Bucket" unique_id=474787777]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Area2D" unique_id=251683750]
-position = Vector2(0.00012207031, 4.123657)
-shape = SubResource("RectangleShape2D_vn1tu")
-
-[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop")]
+[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
 modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
-position = Vector2(964, 541)
+position = Vector2(964, 800)
+rotation = -3.1415925
 texture = ExtResource("6_n873u")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
@@ -77,7 +57,43 @@ machine_clean = NodePath("../TippyMachineClean")
 machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
+text_bubble = NodePath("../Bucket/TippyText")
 allowed_remaining_ratio = 0.05
+machine_clean_ratio = 0.4
+
+[node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
+position = Vector2(932, 538)
+texture = ExtResource("2_eu0yc")
+
+[node name="TippyMachineClean" type="Sprite2D" parent="." unique_id=2093052380]
+visible = false
+position = Vector2(932, 537)
+texture = ExtResource("2_n873u")
+
+[node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
+position = Vector2(221, 292.00006)
+scale = Vector2(0.41000003, 0.48500004)
+texture = ExtResource("1_eeqbd")
+
+[node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723 node_paths=PackedStringArray("tippy_bucket")]
+modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
+position = Vector2(182.63477, -285.60284)
+scale = Vector2(0.7207779, 0.60977817)
+texture = ExtResource("5_lvuj8")
+script = ExtResource("6_kx0vh")
+bubble_after_wet = ExtResource("7_kx0vh")
+grow_count = 3
+speaking_gap = 0.2
+scaling_factor = 1.5
+tippy_bucket = NodePath("..")
+tippy_bucket_normal = ExtResource("1_eeqbd")
+tippy_bucket_mouth_closed = ExtResource("10_lww7c")
+
+[node name="Area2D" type="Area2D" parent="Bucket" unique_id=474787777]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bucket/Area2D" unique_id=251683750]
+position = Vector2(0.00012207031, 4.123657)
+shape = SubResource("RectangleShape2D_vn1tu")
 
 [node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("bubbles", "splash", "mop_range")]
 position = Vector2(960, 1000)
@@ -89,8 +105,10 @@ bubbles = NodePath("GPUParticles2D")
 splash = NodePath("../SplashSound")
 mop_range = NodePath("MopHeadHitbox/CollisionShape2D")
 mop_texture = ExtResource("4_omxn0")
+wet_mop_texture = ExtResource("12_fjufl")
 dirty_mop_texture = ExtResource("4_4xqy4")
 scrubber_texture = ExtResource("6_v4dls")
+wet_scrubber_texture = ExtResource("15_lww7c")
 dirty_scrubber_texture = ExtResource("7_80bh0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Mop" unique_id=360286918]

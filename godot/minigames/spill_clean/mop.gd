@@ -7,9 +7,12 @@ static var used_scrubber: bool = false
 @export var splash: AudioStreamPlayer2D
 @export var mop_range: CollisionShape2D
 @export var mop_texture: Texture
+@export var wet_mop_texture: Texture
 @export var dirty_mop_texture: Texture
 @export var scrubber_texture: Texture
+@export var wet_scrubber_texture: Texture
 @export var dirty_scrubber_texture: Texture
+
 
 var drag_offset: Vector2 = Vector2.ZERO
 var is_wet: bool = false
@@ -52,7 +55,10 @@ func wet_mop() -> void:
 		splash.play()
 		is_wet = true
 		bubbles.emitting = true
-		create_tween().tween_property(self, "modulate", Color.WHITE, 1).from(Color.AQUA)
+		if used_scrubber:
+			texture = wet_scrubber_texture
+		else:
+			texture = wet_mop_texture
 
 
 func _input(event: InputEvent) -> void:
