@@ -798,19 +798,18 @@ func _on_desk_interacted() -> void:
 		return
 	player_using_pc = true
 	
-	ui.hide()
-	enter_with_camera_tween()
+	await enter_with_camera_tween()
 	pc_ui.show()
 
 func enter_with_camera_tween() -> void:
 	var cam: CameraController = Global.player.camera
 	original_cam_transform = cam.transform
-	create_tween().tween_property(
+	await create_tween().tween_property(
 		cam,
 		"global_transform",
 		cam_spot.global_transform,
 		CAM_TWEEN_DUR,
-	)
+	).finished
 	
 func exit_with_camera_tween() -> void:
 	player_using_pc = false
