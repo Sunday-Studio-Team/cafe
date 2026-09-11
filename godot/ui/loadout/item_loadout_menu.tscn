@@ -112,6 +112,7 @@ size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_7ango")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=619312805]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 50
@@ -153,18 +154,23 @@ theme_override_constants/h_separation = 10
 columns = 5
 
 [node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1731714690 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem2" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=2040793353 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem3" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=825468899 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem4" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=49121481 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem5" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1377787420 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="Equipped" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2071538861]
@@ -193,12 +199,15 @@ theme_override_constants/h_separation = 10
 columns = 5
 
 [node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem2" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=113046902 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem3" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=2135610824 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1608662931]
