@@ -803,7 +803,6 @@ func _interactive_tutorial_shift() -> void:
 
 
 func _on_desk_interacted() -> void:
-	print("activity in pc started")
 	CursorSwitch.pc_state_change.emit()
 	ui.hide()
 	pc_ui.show()
