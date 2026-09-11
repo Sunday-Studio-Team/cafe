@@ -116,7 +116,16 @@ func confirm_and_hide() -> void:
 		if equipped_item_button.item:
 			equipped_items.append(equipped_item_button.item)
 
+	# unapply existing items
+	for item in Global.owned_items:
+		item.unapply_stats()
+		
 	Global.owned_items.assign(equipped_items)
+	
+	# apply new items
+	for item in Global.owned_items:
+		item.apply_stats()
+	
 	Events.items_updated.emit()
 
 	selected_available_item = null
@@ -136,7 +145,10 @@ func handle_item_hover_tooltip() -> void:
 	if hovered_element != null:
 		var item: Item = hovered_element.item
 		if not item == null:
-			item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
+			if item.SHOW_ITEM_LEVELS:
+				item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
+			else:
+				item_hover_tooltip_name.text = "[b]%s[/b]" % item.name
 			item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
 			if item.is_active_item:
 				item_hover_tooltip_passive_indicator.hide()

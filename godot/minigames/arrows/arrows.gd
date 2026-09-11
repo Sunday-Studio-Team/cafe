@@ -1,9 +1,6 @@
-extends SubViewportContainer
+extends Control
 
-@export var background_panel: Panel
-@export var arrow_output: RichTextLabel
 @export var prompt_output: RichTextLabel
-@export var wrong_sign: Control
 @export var arrows_container: HBoxContainer
 @export var tippy_image: TextureRect
 
@@ -81,7 +78,15 @@ func check_input(direction: String) -> void:
 		return
 
 	if (valid_directions[correct_input_index] == direction):
-		output_directions[valid_indices[correct_input_index]].texture = null
+		var current_arrow = output_directions[valid_indices[correct_input_index]]
+		var tween = create_tween()
+		tween.tween_property(current_arrow, "scale", Vector2(1.2, 1.2), 0.05) 
+		tween.tween_property(current_arrow, "position", current_arrow.position - Vector2(2.0, 2.0), 0.05)
+		
+		tween.chain().tween_property(current_arrow, "scale", Vector2(1.0, 1.0), 0.05) 
+		tween.chain().tween_property(current_arrow, "position", current_arrow.position + Vector2(2.0, 2.0), 0.05)
+		tween.chain().tween_property(current_arrow, "modulate", Color.TRANSPARENT, 0.05)
+		#output_directions[valid_indices[correct_input_index]].texture = null
 		match direction:
 			"left":
 				set_tippy_image(tippy_left.pick_random())
@@ -124,13 +129,6 @@ func add_arrow_to_output(
 		valid_indices.append(output_index)
 
 
-func display_wrong() -> void:
-	wrong_sign.visible = true
-	wrong_sound.play()
-	await get_tree().create_timer(.4).timeout
-	wrong_sign.visible = false
-
-
 func set_up_arrow_container() -> void:
 	var container_horizontal_size: float = arrows_container.size.x
 	var required_separation_spaces: float = arrows_container.get_theme_constant("separation") * max_arrow_count
@@ -141,6 +139,8 @@ func set_up_arrow_container() -> void:
 		arrow_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		arrow_rect.custom_minimum_size.x = min_arrow_size
 		arrows_container.add_child(arrow_rect)
+		print(arrow_rect.texture)
+		print(arrow_rect.visible)
 
 
 func set_tippy_image(tippy_texture: Texture) -> void:
@@ -208,26 +208,30 @@ func _start_minigame() -> void:
 
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
 	@warning_ignore("integer_division") var individual_color_max: int = max_arrow_count / 2 - 1
-	var bi: int = 0
-	var ri: int = 0
+	var blue_index: int = 0
+	var red_index: int = 0
 	var output_index: int = 0
-	while bi <= individual_color_max and ri <= individual_color_max:
+	while blue_index <= individual_color_max and red_index <= individual_color_max:
 		var rand_color = general_colors.pick_random()
 		if rand_color == "blue":
-			add_arrow_to_output(output_index, rand_color, bi, choose_color)
-			bi += 1
+			add_arrow_to_output(output_index, rand_color, blue_index, choose_color)
+			blue_index += 1
 		else:
-			add_arrow_to_output(output_index, rand_color, ri, choose_color)
-			ri += 1
+			add_arrow_to_output(output_index, rand_color, red_index, choose_color)
+			red_index += 1
 		output_index += 1
-	while bi <= individual_color_max:
-		add_arrow_to_output(output_index, "blue", bi, choose_color)
-		bi += 1
+	while blue_index <= individual_color_max:
+		add_arrow_to_output(output_index, "blue", blue_index, choose_color)
+		blue_index += 1
 		output_index += 1
-	while ri <= individual_color_max:
-		add_arrow_to_output(output_index, "red", ri, choose_color)
-		ri += 1
+	while red_index <= individual_color_max:
+		add_arrow_to_output(output_index, "red", red_index, choose_color)
+		red_index += 1
 		output_index += 1
+	print(arrows_container.visible)
+	for arrow in arrows_container.get_children():
+		print(arrow.texture)
+		
 
 
 func _end_minigame() -> void:
