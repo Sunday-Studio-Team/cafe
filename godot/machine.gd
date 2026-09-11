@@ -81,6 +81,7 @@ enum CounterStates {
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export var airhorn_sound: AudioStreamPlayer
+@export var bomb_sound_player: AudioStreamPlayer3D
 # played when we try to refill while not holding ingredients
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
@@ -263,6 +264,7 @@ func check_for_stepping_in_spill() -> void:
 
 
 func blast_player_from_using_machine() -> void:
+	bomb_sound_player.play()
 	if gui_3d.player_using_me:
 		if Global.minigame_active:
 			Events.force_close_minigame.emit()

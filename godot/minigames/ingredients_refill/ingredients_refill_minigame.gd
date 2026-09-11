@@ -39,7 +39,7 @@ var bomb_bean_spawned: bool = false #guarantees that the refill minigame can onl
 var screw_bean_spawned: bool = false #guarantees that the refill minigame can only spawn 1 screw bean.
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
-var bomb_sound_player: AudioStreamPlayer #requires some setup in ready()
+#var bomb_sound_player: AudioStreamPlayer #requires some setup in ready()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,10 +58,10 @@ func _ready() -> void:
 				bean_hit_glasss_sound.play()
 	)
 
-	bomb_sound_player = AudioStreamPlayer.new()
-	add_child(bomb_sound_player)
-
-	bomb_sound_player.stream= preload("res://audio/hammer_hit.mp3")
+	#bomb_sound_player = AudioStreamPlayer.new()
+	#add_child(bomb_sound_player)
+#
+	#bomb_sound_player.stream= preload("res://audio/bomb/coffee_pot_bomb.wav")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -217,7 +217,7 @@ func bomb() ->void:
 	if using_machine == null:
 		return
 	await get_tree().create_timer(0.15, false).timeout
-	bomb_sound_player.play()
+	#bomb_sound_player.play()
 	#print('line 216. blastplayerfromusingmachine()')
 	using_machine.blast_player_from_using_machine()
 

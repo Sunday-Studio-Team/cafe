@@ -112,6 +112,7 @@
 [ext_resource type="Texture2D" uid="uid://b8iep07nsu2pm" path="res://sprites/machine_ui/money up star neutral.png" id="86_7p33r"]
 [ext_resource type="Texture2D" uid="uid://bdsqx6cit03ki" path="res://sprites/machine_ui/money up star up.png" id="87_a80ij"]
 [ext_resource type="Texture2D" uid="uid://30p5hiflsbof" path="res://sprites/machine_ui/money up star down.png" id="88_robek"]
+[ext_resource type="AudioStream" uid="uid://7q63nol4fikg" path="res://audio/bomb/coffe_pot_bomb_2.wav" id="111_7p33r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -254,7 +255,7 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "accept_counter", "remake_counter", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "accept_counter", "remake_counter", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -308,6 +309,7 @@ breakdown_sound = NodePath("BreakdownSound")
 hammer_hit_sound = NodePath("HammerHitSound")
 no_ingredients_sound = NodePath("NoIngredientsSound")
 airhorn_sound = NodePath("AirhornSound")
+bomb_sound_player = NodePath("BombSound")
 ingredients_warning_sound = NodePath("IngredientsWarningSound")
 popup_go_to_spill = ExtResource("5_8sjwk")
 
@@ -493,13 +495,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=749704850]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=7025000]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
+[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1417270534) index="0" unique_id=878433500]
 mesh = SubResource("ArrayMesh_eujd3")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
@@ -540,6 +542,9 @@ stream = ExtResource("9_42f15")
 
 [node name="IngredientsWarningSound" type="AudioStreamPlayer3D" parent="." unique_id=664608403]
 stream = SubResource("AudioStreamRandomizer_11on5")
+
+[node name="BombSound" type="AudioStreamPlayer3D" parent="." unique_id=200153536]
+stream = ExtResource("111_7p33r")
 
 [node name="AirhornSound" type="AudioStreamPlayer" parent="." unique_id=527547622]
 stream = ExtResource("20_64ldb")
