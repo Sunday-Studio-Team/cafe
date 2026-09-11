@@ -781,11 +781,20 @@ func _interactive_tutorial_shift() -> void:
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_3")
 	await Global.voice_line_system.play_voice_line_no_location("tutorial_finished_4")
 
-	Global.day = 1
-	if Global.day > SaveDataManager.save_data.latest_unlocked_day:
-		SaveDataManager.save_data.latest_unlocked_day = Global.day
-		SaveDataManager.save_game_to_file()
-	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
+
+	SaveDataManager.save_data.finished_or_skipped_tutorial = true
+	SaveDataManager.save_data.latest_unlocked_day = maxi(
+		SaveDataManager.save_data.latest_unlocked_day,
+		1
+	)
+	SaveDataManager.save_game()
+
+	if replaying_tutorial:
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+	else:
+		Global.day = 1
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
 func _on_desk_interacted() -> void:

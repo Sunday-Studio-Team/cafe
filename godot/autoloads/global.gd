@@ -13,6 +13,7 @@ extends Node
 @export var star_texture: Texture
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
+@export var complaint_popup: CanvasLayer
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -31,6 +32,7 @@ var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
+var unlocked_items: Array[Item] = []
 var owned_items: Array[Item]
 var player_in_cctv_los := false
 var minigame_active := false:
@@ -169,11 +171,44 @@ func _ready() -> void:
 	for drink in drinks:
 		drink.create() # adds the price and creates the typing minigame resource
 	items.assign(load_resources_from_folder(items_folder_path))
+	load_unlocked_items_from_save()
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path,"tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
+
+func load_unlocked_items_from_save() -> void:
+	unlocked_items.clear()
+
+	if SaveDataManager.save_data == null:
+		return
+
+	var latest_day: int = SaveDataManager.save_data.latest_unlocked_day
+
+	for day in range(1, latest_day):
+		var completion_items: Array = Stats.current.daily_completion_item_unlocks.get(day, [])
+		add_items_to_unlocked_list(completion_items)
+
+		if SaveDataManager.save_data.days_bonus_objective_completed.get(day, false):
+			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(day, [])
+			add_items_to_unlocked_list(bonus_items)
+
+
+func add_items_to_unlocked_list(item_ids: Array) -> void:
+	for raw_item_id in item_ids:
+		var item_id: String = str(raw_item_id)
+		var found_item := false
+
+		for item: Item in items:
+			if item.item_id == item_id:
+				found_item = true
+				if not unlocked_items.has(item):
+					unlocked_items.append(item)
+				break
+
+		if not found_item:
+			push_warning("Unlocked item not found: %s" % item_id)
 
 # NOTE: these things in physics process instead of process for timing reasons
 func _physics_process(_delta: float) -> void:

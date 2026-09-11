@@ -46,8 +46,7 @@ func populate() -> void:
 	for child in equipped_items_container.get_children():
 		child.queue_free()
 
-	# TODO: check save for unlocked items instead of just pulling every item
-	for item in Global.items:
+	for item in Global.unlocked_items:
 		if not Global.owned_items.has(item):
 			add_available_item_button(item)
 
@@ -61,6 +60,8 @@ func populate() -> void:
 			func():
 				_on_equipped_slot_pressed(equipped_item_button)
 		)
+		equipped_item_button.is_equipped_slot = true
+		equipped_item_button.loadout_menu = self
 		equipped_items_container.add_child(equipped_item_button)
 
 func _unhandled_input(input_event: InputEvent) -> void:
@@ -161,3 +162,20 @@ func handle_item_hover_tooltip() -> void:
 			hovered_element != null and hovered_element.item != null
 			and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
 	)
+
+func move_item_to_equipped(item: Item, source: LoadoutMenuElement, target_slot: LoadoutMenuElement) -> void: 
+	if source == target_slot: 
+		return
+	
+	var previous_item: Item = target_slot.item   
+	target_slot.item = item
+	
+	if source.is_equipped_slot:
+		source.item=previous_item
+	else: 
+		if previous_item != null:
+			add_available_item_button(previous_item)
+		
+		source.queue_free()
+	
+	selected_available_item = null
