@@ -19,9 +19,6 @@ extends Node3D
 @export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var customer_trash_scene: PackedScene
-@export var left_corner:Marker3D
-@export var right_corner:Marker3D
-@export var bottom_left_corner:	Marker3D
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
@@ -30,6 +27,7 @@ extends Node3D
 @export var desk: Desk
 @export var pc_ui: PC_UI
 @export var overtime_item: Item
+@export var _trash_can: TrashCan
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
@@ -60,7 +58,7 @@ var _all_security_cameras: Array[SecurityCam3D]
 
 @onready var tutorial_machine: Machine = _right_area_right_machine
 
-var start_spawning_trash: bool = false
+var should_spawn_trash_today: bool = false
 var closing_time:bool = false
 
 func _ready() -> void:
@@ -103,7 +101,7 @@ func _ready() -> void:
 	_help_desk_customer_spawn_timer.autostart = false
 
 	game_timer.timeout.connect(_on_game_timer_timeout)
-   
+	
 	Events.shift_started.connect(_on_shift_started)
 
 	desk.interactable.interacted.connect(_on_desk_interacted)
@@ -224,6 +222,7 @@ func update_air_fresheners_enabled() -> void:
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	closing_time = false
+	_trash_can.visible = false
 	if Global.day == 0:
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
@@ -268,7 +267,8 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_back(_right_area_left_machine)
 		_active_machines.push_back(_right_area_right_machine)
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
-		start_spawning_trash = true
+		should_spawn_trash_today = true
+		_trash_can.visible = true
 
 	if Global.day == 5:
 		_active_machines.clear()
@@ -278,6 +278,8 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_back(_right_area_left_machine)
 		_active_machines.push_back(_right_area_right_machine)
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
+		should_spawn_trash_today = true
+		_trash_can.visible = true
 
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()
@@ -402,7 +404,7 @@ func _on_pause_menu_tutorial_requested() -> void:
 
 #code for  trash spawn 
 func spawn_trash() -> void:
-	if not start_spawning_trash:
+	if not should_spawn_trash_today:
 		return
 # freq of spawn 3/41 rn
 	var spawn=randi_range(0,40)

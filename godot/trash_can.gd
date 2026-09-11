@@ -1,3 +1,4 @@
+class_name TrashCan
 extends Area3D
 
 var rating_gained: float = 0.2
