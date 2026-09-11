@@ -1,9 +1,9 @@
 extends Node2D
 
-const MOVE_SPEED := 8.5
+const MOVE_SPEED := 20
 const NUM_BEANS_TO_SPAWN := 6 #generally, change the timer in BeanSpawnTimer Node when adjusting this; ie make bean*timer = ~2.0s
-const MAX_HORIZONTAL_BEAN_FORCE := 800
-const MAX_VERTICAL_BEAN_FORCE := 450
+const MAX_HORIZONTAL_BEAN_FORCE := 800.0
+const MAX_VERTICAL_BEAN_FORCE := 450.0
 
 
 @export var cup: CharacterBody2D
@@ -31,6 +31,7 @@ const MAX_VERTICAL_BEAN_FORCE := 450
 @export var golden_visual_effect: CompressedTexture2D
 @export var face_sprite:Sprite2D
 @export var visual_effect:Sprite2D
+@export var horizontal_trajectory_curve: Curve
 
 var beans_in_cup: int = 0
 var beans_spawned: int = 0
@@ -40,10 +41,12 @@ var screw_bean_spawned: bool = false #guarantees that the refill minigame can on
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 var bomb_sound_player: AudioStreamPlayer #requires some setup in ready()
-
+var spawn_trajectory: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	
 	bean_spawn_timer.timeout.connect(spawn_bean)
 	cup_area.body_entered.connect(catch_bean)
 	cup_area.body_exited.connect(spill_bean)
@@ -60,16 +63,21 @@ func _ready() -> void:
 
 	bomb_sound_player = AudioStreamPlayer.new()
 	add_child(bomb_sound_player)
-
+	
 	bomb_sound_player.stream= preload("res://audio/hammer_hit.mp3")
-
+	spawn_trajectory =  Vector2(randf_range(-750, -300), randf_range( -650.0,-300)) #prefer right side of the screen, because that is where cup spawns
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	
 	var left_right_input: float = Input.get_vector("move_left", "move_right", "move_forward", "move_back").x
-	cup.position.x += left_right_input * MOVE_SPEED
-	cup.position.x = clamp(cup.position.x, 350, 1920-350)
+	print(left_right_input)
+	#cup.position.x += left_right_input * MOVE_SPEED
+	calculate_cup_x_velocity(left_right_input)
+	adjust_cup_y_velocity() # bandaid; calling move_local_x causes the cup to vertically move down. 
+	#cup.position.y=1050
+	
+	
 	cup.rotation_degrees = lerp(
 		cup.rotation_degrees,
 		left_right_input * 7,
@@ -77,6 +85,40 @@ func _physics_process(delta: float) -> void:
 	)
 
 	meter.value = (beans_in_cup as float) / (NUM_BEANS_TO_SPAWN as float)
+
+func calculate_cup_x_velocity(left_right_input:float)->void:
+	if(left_right_input==0.0):
+		#then, we need to slow the cup down.
+		cup.velocity.x= cup.velocity.x *0.975
+	elif(left_right_input>0.1):
+		if(cup.velocity.x<10):
+			cup.velocity.x +=2.5*left_right_input
+		else:
+			cup.velocity.x +=left_right_input
+	elif(left_right_input<-0.1):
+		if(cup.velocity.x>-10):
+			cup.velocity.x +=2.5*left_right_input
+		else:
+			cup.velocity.x +=left_right_input
+	
+	
+	
+	
+	cup.position.x = clamp(cup.position.x, 150, 1920-350)
+	#cup is a characterbody2d
+	#cup.velocity.x +=left_right_input
+	
+	
+	cup.velocity.x = clampf(cup.velocity.x, -25.0,25.0)
+	cup.move_local_x(cup.velocity.x)
+	
+func adjust_cup_y_velocity()-> void:
+	
+	#the cup should be at 1050
+	var _offset:float  = 1050.0 - cup.position.y
+	#if offset is negative, push up.
+	cup.velocity.y = _offset
+	cup.move_local_y(cup.velocity.y)
 
 func spawn_bean()->void:
 	
@@ -89,20 +131,14 @@ func spawn_bean()->void:
 		await get_tree().create_timer(1.5, false).timeout
 		Global.refill_minigame_accuracy = meter.value
 		Events.emit_signal("minigame_end")
-		print()
+		
 		return
 	#create a random int from 1-100
 	var random_int: int
-	var bean: RigidBody2D
+	var bean: RigidBody2D = null
 	#first do a check for the golden bean
 	random_int =  randi_range(1,100)
-	#if(beans_spawned==0 and random_int<33): #33
-		#spawn_gold_bean(bean)
-	#else:
-		#spawn_normal_bean(bean)
-	#
-	#return
-	#
+
 	
 	if  beans_spawned< 4 and gold_bean_spawned == false : #gold bean case
 	
@@ -120,6 +156,7 @@ func spawn_bean()->void:
 			spawn_gold_bean(bean)
 		else:
 			spawn_normal_bean(bean)
+		
 		return
 	else: #well, a golden bean has spawned in the past; decided between bomb and normal
 		random_int =  randi_range(1,100)
@@ -127,37 +164,44 @@ func spawn_bean()->void:
 			spawn_normal_bean(bean)
 		else:
 			
-			if random_int<(25 + beans_spawned *3):
+			if random_int<(33 + beans_spawned *3):
 				spawn_bomb_bean(bean)
 			else:
 				spawn_normal_bean(bean)
-
+	
 	return
 
 func spawn_normal_bean(bean:PhysicsBody2D) -> void:
 	bean = bean_scene.instantiate()			
 	#bean.scale= Vector2(2,2) #dont do this lol. rigidbodies will attempt to revert this.
-	bean.gravity_scale = 0.47
+	bean.gravity_scale = 0.40
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
-	bean.apply_impulse(Vector2(randf_range(-MAX_HORIZONTAL_BEAN_FORCE, -MAX_HORIZONTAL_BEAN_FORCE/2.8), randf_range( -MAX_VERTICAL_BEAN_FORCE,-MAX_VERTICAL_BEAN_FORCE/3)))
+	bean.apply_impulse(spawn_trajectory)
 	bean.rotation_degrees = randf_range(0, 360)
 	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean
 	beans_spawned += 1
+	randomize_trajectory()
 
 func spawn_gold_bean(bean:PhysicsBody2D) -> void:
 	gold_bean_spawned= true
 	bean = golden_bean_scene.instantiate()
-	bean.gravity_scale = 0.33 + randf_range(-0.15, 0.15)
+	bean.gravity_scale = 0.33 + randf_range(-0.15, 0.0)
 	bean.global_position = pour_point.global_position
-	bean.global_position.x-= 53
+	bean.global_position.x-= 53 
 	
 	bean.global_position.y-= 22 #adding a negative number, puts it vertically north. 
 	
 	bean.add_to_group("beans")
 	add_child(bean)
-	bean.apply_impulse(Vector2(randf_range(-MAX_HORIZONTAL_BEAN_FORCE+30, -MAX_HORIZONTAL_BEAN_FORCE/1.8), randf_range(-975,-940)))
+	var _horizontal_component= clampf(spawn_trajectory.x-500, -1050.0,-350.0)
+	
+	bean.apply_impulse(Vector2(_horizontal_component,0)) # applies horizontal impulse
+	
+	var _vertical_component= clampf(spawn_trajectory.y-500, -1050.0,-800.0)
+	bean.apply_impulse(Vector2(0,_vertical_component)) # applies vertical impulse
+	
 	bean.rotation_degrees = randf_range(0, 360)
 	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean
 	beans_spawned += 1
@@ -165,17 +209,23 @@ func spawn_gold_bean(bean:PhysicsBody2D) -> void:
 func spawn_bomb_bean(bean:PhysicsBody2D) -> void:
 	bomb_bean_spawned= true
 	bean = bomb_bean_scene.instantiate()			
-	bean.is_bomb= true
-	bean.gravity_scale = 0.2
+	
+	bean.gravity_scale = 1.0
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
-	bean.apply_impulse(Vector2(randf_range(-MAX_HORIZONTAL_BEAN_FORCE/1.5,-MAX_HORIZONTAL_BEAN_FORCE/2), -200))
+	var _horizontal_component= clampf(spawn_trajectory.x+200, -850.0,-350.0)
+	
+	bean.apply_impulse(Vector2(_horizontal_component,spawn_trajectory.y)) # applies horizontal impulse
+	
+	#bean.apply_impulse(spawn_trajectory)
 	bean.rotation_degrees = randf_range(0, 360)
 	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean
 	beans_spawned += 1
-
+	randomize_trajectory()
 func catch_bean(bean: PhysicsBody2D) -> void:
+	cup.velocity.y=0
+	
 	if not bean.is_in_group("beans"):
 		return #not a bean? return.
 	var bean_type : String= bean.scene_file_path.get_file() # ex 'coffee_bean.tscn'
@@ -192,6 +242,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			return
 		elif "gold" in bean_type:
 			gold(bean) #calls Events.emit_signal("minigame_end")
+			gain_score_sound.play()
 			return
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
 			face_sprite.texture = normal_face_sprite
@@ -265,3 +316,17 @@ func get_closest_machine_or_null():
 				closest_machine = _machine
 
 	return closest_machine
+
+func randomize_trajectory()-> void:
+	
+	#i want it to tend to not add ~0... i want it to add -450-200 ish 
+	#im kinda okay with having it be ~0ish sometimes. but i want it to be probabilistically rare
+	var _some_random_number = horizontal_trajectory_curve.sample_baked(randf_range(0,1)) # variable here, will usually be close to 0, or close to 1 [0~1]
+	var _test = remap(_some_random_number,0.0 ,1.0 ,-450.0, 350.0 )
+	print(_test)
+	spawn_trajectory.x += _test
+	spawn_trajectory.y += randf_range(-75.0,75.0)
+	spawn_trajectory.x= clampf(spawn_trajectory.x, -1500.0,-300.0)
+	spawn_trajectory.y= clampf(spawn_trajectory.y, -650.0,-300.0)
+	
+	

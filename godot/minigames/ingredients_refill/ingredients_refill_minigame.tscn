@@ -24,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://c6467b6csgjr2" path="res://minigames/ingredients_refill/assets/refill final.png" id="16_knrnr"]
 [ext_resource type="Texture2D" uid="uid://bpd4fxj4nlu0n" path="res://minigames/ingredients_refill/assets/bag_no_bg.png" id="19_r7ncj"]
 
+[sub_resource type="Curve" id="Curve_cuth0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(177, 219)
 
@@ -81,10 +85,13 @@ screw_visual_effect = ExtResource("12_tq37f")
 golden_visual_effect = ExtResource("13_lrtnr")
 face_sprite = NodePath("Cup/Sprite2D")
 visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
+horizontal_trajectory_curve = SubResource("Curve_cuth0")
 
 [node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
 z_index = 2
-position = Vector2(900, 950)
+position = Vector2(1300, 1050)
+collision_layer = 2
+platform_on_leave = 2
 safe_margin = 0.01
 
 [node name="Sprite2D" type="Sprite2D" parent="Cup" unique_id=241036928]
