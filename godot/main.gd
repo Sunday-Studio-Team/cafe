@@ -49,7 +49,7 @@ var _help_desk_customer_spawn_timer: Timer
 @export var _tutorial_vo_location_spill: VoiceLineLocation
 @export var day_containers: Array[Node3D] = []
 
-const CAM_TWEEN_DUR := 0.25
+const CAM_TWEEN_DUR := 0.45
 var original_cam_transform: Transform3D
 var player_using_pc := false
 
