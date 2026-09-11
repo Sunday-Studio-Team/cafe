@@ -49,4 +49,7 @@ camera_slow_player_walk_speed_multiplier,\
 camera_slow_player_sprint_speed_multiplier,\
 camera_slow_player_duration,\
 time_camera_disabled_after_sabotage,\
+daily_completion_item_unlocks,\
+daily_rating_item_unlocks,\
+item_bonus_rating_threshold,\
 "

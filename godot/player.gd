@@ -6,7 +6,10 @@ const STRIDE_LENGTH := 1.25
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
-@export var ingredients_bag: MeshInstance3D
+## the parent of both the bag meshes
+@export var ingredients_bag: Node3D
+@export var default_ingredients_bag_model: Node3D
+@export var large_ingredients_bag_model: Node3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
@@ -32,6 +35,7 @@ var mouse_delta: Vector2 = Vector2.ZERO
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 var holding_interactable: bool = false
+var has_xl_bag_item: bool = false
 
 # when pully ball spawns, starts counting up. keeping track of strength.
 var pully_ball_countup: float = 0.0
@@ -48,6 +52,7 @@ func _ready() -> void:
 	Global.player = self
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
+	_on_items_updated()
 
 	free_cam_visualizer.visible = false
 
@@ -56,18 +61,18 @@ func _ready() -> void:
 	aiming_ray.add_exception(self)
 
 	ingredients_bag.visibility_changed.connect(
-		func():
-			if ingredients_bag.visible:
-				ingredients_bag.scale = Vector3.ZERO
+			func():
+				if ingredients_bag.visible:
+					ingredients_bag.scale = Vector3.ZERO
 	)
 	Events.bag_pickup_animation_grabbed.connect(
-		func():
-			bag_pickup_sound.play()
+			func():
+				bag_pickup_sound.play()
 
-			await Events.viewmodel_animation_finished
+				await Events.viewmodel_animation_finished
 
-			var t := create_tween().set_parallel()
-			t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
+				var t := create_tween().set_parallel()
+				t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
 
 	Global.stamina = Stats.current.max_stamina
@@ -84,7 +89,7 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	handle_gravity(delta)
 	handle_footstep_sounds()
-	
+
 	handle_ingredients_bag()
 	handle_floating_cursor()
 	move_and_slide()
@@ -139,8 +144,8 @@ func handle_movement(delta: float) -> void:
 
 	if move_dir_3d.length() > 0.2:
 		horizontal_velocity = horizontal_velocity.move_toward(
-			move_dir_3d * _current_move_speed,
-			accel * delta,
+				move_dir_3d * _current_move_speed,
+				accel * delta,
 		)
 	else:
 		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, decel * delta)
@@ -165,17 +170,17 @@ func handle_hovered_interactable() -> void:
 			return
 
 		if (
-			not hovered_interactable.visible
-			or not hovered_interactable.is_inside_tree()
-			or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
+				not hovered_interactable.visible
+				or not hovered_interactable.is_inside_tree()
+				or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
 
 	# if we're currently holding interact on something, dont do anything
 	# (so we can look around while we hold)
 	if (
-		hovered_interactable != null and hovered_interactable.hold_to_interact
-		and Input.is_action_pressed("interact")
+			hovered_interactable != null and hovered_interactable.hold_to_interact
+			and Input.is_action_pressed("interact")
 	):
 		holding_interactable = true
 		return
@@ -205,7 +210,7 @@ func handle_sprint(delta: float) -> void:
 			has_roller_skates = true
 			break
 
-	if Input.is_action_pressed("sprint") and !has_roller_skates:
+	if Input.is_action_pressed("sprint") and ! has_roller_skates:
 		_is_sprinting = true
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
@@ -266,6 +271,15 @@ func handle_ingredients_bag() -> void:
 
 	ingredients_bag.visible = Global.holding_ingredients
 
+	default_ingredients_bag_model.visible = not has_xl_bag_item
+	large_ingredients_bag_model.visible = has_xl_bag_item
+
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()
+
+	has_xl_bag_item = false
+	for item: Item in Global.owned_items:
+		if item.item_id == "nice_spoon":
+			has_xl_bag_item = true
+			break	

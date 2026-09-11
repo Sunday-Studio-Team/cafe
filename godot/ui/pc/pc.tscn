@@ -66,20 +66,22 @@ stream_0/stream = ExtResource("13_22wjn")
 stream_1/stream = ExtResource("14_vd71g")
 stream_2/stream = ExtResource("15_kjli4")
 
-[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "exit_button", "unread_label", "click_sound")]
+[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "exit_button", "screen_content_container", "unread_label", "click_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 theme = SubResource("Theme_4xb7n")
 script = ExtResource("1_yl021")
-email_button = NodePath("MarginContainer/Apps/Email")
-shop_button = NodePath("MarginContainer/Apps/Shop")
-email_app = NodePath("MarginContainer/EmailApp")
+email_button = NodePath("ScreenContentContainer/Apps/Email")
+shop_button = NodePath("ScreenContentContainer/Apps/Shop")
+email_app = NodePath("ScreenContentContainer/EmailApp")
 exit_button = NodePath("Exit")
-unread_label = NodePath("MarginContainer/Apps/Email/UnreadCount")
+screen_content_container = NodePath("ScreenContentContainer")
+unread_label = NodePath("ScreenContentContainer/Apps/Email/UnreadCount")
 click_sound = NodePath("ClickSound")
 
 [node name="BorderGray" type="Panel" parent="." unique_id=1670875515]
@@ -128,7 +130,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233319173]
+[node name="ScreenContentContainer" type="MarginContainer" parent="." unique_id=1233319173]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -142,19 +144,20 @@ offset_right = 647.5
 offset_bottom = 486.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 
-[node name="Background" type="TextureRect" parent="MarginContainer" unique_id=2064125814]
+[node name="Background" type="TextureRect" parent="ScreenContentContainer" unique_id=2064125814]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_k03dd")
 stretch_mode = 5
 
-[node name="Apps" type="HBoxContainer" parent="MarginContainer" unique_id=620486221]
+[node name="Apps" type="HBoxContainer" parent="ScreenContentContainer" unique_id=620486221]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 60
 
-[node name="Email" type="Button" parent="MarginContainer/Apps" unique_id=99455866]
+[node name="Email" type="Button" parent="ScreenContentContainer/Apps" unique_id=99455866]
 texture_filter = 1
 custom_minimum_size = Vector2(30, 30)
 custom_maximum_size = Vector2(-1, 140)
@@ -172,7 +175,7 @@ icon = ExtResource("2_am8ka")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="UnreadCount" type="Label" parent="MarginContainer/Apps/Email" unique_id=1568631134]
+[node name="UnreadCount" type="Label" parent="ScreenContentContainer/Apps/Email" unique_id=1568631134]
 layout_mode = 0
 offset_left = 96.20001
 offset_top = -2.3599854
@@ -185,7 +188,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shop" type="Button" parent="MarginContainer/Apps" unique_id=58281754]
+[node name="Shop" type="Button" parent="ScreenContentContainer/Apps" unique_id=58281754]
 visible = false
 texture_filter = 1
 custom_maximum_size = Vector2(-1, 140)
@@ -203,12 +206,13 @@ icon = ExtResource("3_qefv1")
 icon_alignment = 1
 vertical_icon_alignment = 0
 
-[node name="EmailApp" parent="MarginContainer" unique_id=1865286583 node_paths=PackedStringArray("PC") instance=ExtResource("5_k03dd")]
+[node name="EmailApp" parent="ScreenContentContainer" unique_id=1865286583 node_paths=PackedStringArray("PC") instance=ExtResource("5_k03dd")]
 visible = false
 layout_mode = 2
 PC = NodePath("../..")
 
 [node name="Exit" type="Button" parent="." unique_id=114216245]
+top_level = true
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -231,5 +235,3 @@ text = "exit"
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1708556159]
 stream = SubResource("AudioStreamRandomizer_bh3q2")
 volume_db = -5.0
-
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

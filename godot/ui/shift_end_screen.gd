@@ -87,6 +87,8 @@ func _on_time_up() -> void:
 	var daily_profit := Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
+	
+	grant_day_rewards(passed_profit_goal)
 
 	#_day_label.text = Global.day_to_string(Global.day)
 	_day_label.text = "Day %d" % (Global.day)
@@ -158,29 +160,6 @@ func _on_time_up() -> void:
 	_rating_title_label.visible = true
 	await get_tree().create_timer(0.5).timeout
 	_rating_label.visible = true
-	
-	if passed_profit_goal:
-		await get_tree().create_timer(0.1).timeout
-		_tips_per_star_label.visible = true
-		if show_tip_jar_desc:
-			_tip_jar_desc_label.visible = true
-		await get_tree().create_timer(0.2).timeout
-		_tips_today_label.visible = true
-		await get_tree().create_timer(0.5).timeout
-		
-		_bank_total_label.visible = true
-		value_to_show_on_bank_total = Global.player_tips_bank
-		Global.player_tips_bank += tips
-		await get_tree().create_timer(0.5).timeout
-		if Global.player_tips_bank > value_to_show_on_bank_total:
-			bank_gain_sound.play()
-			var t := create_tween().tween_property(
-					self,
-					"value_to_show_on_bank_total",
-					Global.player_tips_bank,
-					0.75,
-					)
-			await t.finished
 
 	await get_tree().create_timer(0.5).timeout
 
@@ -205,3 +184,30 @@ func _on_time_up() -> void:
 	button_shine_tween.tween_property(button, "modulate", Color.from_hsv(0.0, 0.0, 1.374, 1.0), 1)
 	button_shine_tween.tween_property(button, "modulate", Color.WHITE, 1)
 	button_shine_tween.tween_interval(2)
+
+func grant_day_rewards(passed_day: bool) -> void: 
+	var current_day: int = Global.day
+	
+	#Tutorial doesn't unlock 
+	if current_day <= 0:
+		return 
+	
+	if passed_day:
+		SaveDataManager.save_data.latest_unlocked_day = maxi(
+			SaveDataManager.save_data.latest_unlocked_day,
+			current_day + 1
+		)
+		
+		var reached_bonus_rating: bool = (
+			Global.employee_rating >= Stats.current.item_bonus_rating_threshold
+		)
+	
+		var bonus_already_received: bool = (
+			SaveDataManager.save_data.days_bonus_objective_completed.get(current_day, false)
+		)
+	
+		if reached_bonus_rating and not bonus_already_received:
+			SaveDataManager.save_data.days_bonus_objective_completed[current_day] = true
+	
+	Global.load_unlocked_items_from_save()
+	SaveDataManager.save_game_to_file()

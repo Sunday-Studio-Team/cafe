@@ -27,6 +27,10 @@ func _ready() -> void:
 func play_voice_line_at_location(voice_line_id: String, voice_line_location: VoiceLineLocation) -> void:
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	
+	if voice_line == null:
+		printerr("Missing voice line! ID %s" % voice_line_id)
+		return
+	
 	# Don't play if non-priority and a priority voice line is playing
 	if !voice_line.is_priority:
 		if _is_playing_no_location_voice_line and\
@@ -56,6 +60,10 @@ func play_voice_line_at_location(voice_line_id: String, voice_line_location: Voi
 ## Play a voice line without a specific location, with its subtitle.
 func play_voice_line_no_location(voice_line_id: String) -> void:
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
+	
+	if voice_line == null:
+		printerr("Missing voice line! ID %s" % voice_line_id)
+		return
 
 	# Don't play if non-priority and a priority voice line is playing
 	if !voice_line.is_priority:

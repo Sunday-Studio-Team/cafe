@@ -40,8 +40,9 @@ func start_minigame_variant(customer: Customer) -> void:
 	var tween := create_tween()
 	tween.tween_property(sato_container,"offset_transform_position",Vector2(-128,00),1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 	tween.set_parallel(true)
-	tween.tween_property(vs_container,"offset_transform_position",Vector2(0,0),1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
-	tween.tween_property(customer_container,"offset_transform_position",Vector2(128,00),1).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(vs_container,"offset_transform_position",Vector2(0.0, 0.0),1).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	customer_container.offset_transform_enabled = true
+	tween.tween_property(customer_container,"offset_transform_position",Vector2(0.0, 0.0),1).from(Vector2(1000.0, 0.0)).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(
 		func():
 			var tween2 := create_tween()

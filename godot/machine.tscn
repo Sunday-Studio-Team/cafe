@@ -1,28 +1,117 @@
 [gd_scene format=4 uid="uid://b7pu4gc2t3gv6"]
 
 [ext_resource type="Script" uid="uid://cgu842804h36u" path="res://machine.gd" id="1_6a4ke"]
+[ext_resource type="Texture2D" uid="uid://dyehef5xmtkfj" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0001.png" id="2_cvlju"]
+[ext_resource type="Texture2D" uid="uid://chn1ljeuebt3w" path="res://sprites/machine_ui/empty equal.png" id="2_ww5c3"]
+[ext_resource type="Texture2D" uid="uid://bjn0dj7rleawx" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0002.png" id="3_4b30b"]
+[ext_resource type="Texture2D" uid="uid://bjxrqio2ph7h2" path="res://sprites/machine_ui/green equal.png" id="3_8ej3g"]
+[ext_resource type="Texture2D" uid="uid://sjauss5xflnf" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0003.png" id="4_womjx"]
+[ext_resource type="Texture2D" uid="uid://dt5ydm1k35avc" path="res://sprites/machine_ui/red equal.png" id="4_ymic3"]
 [ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
+[ext_resource type="Texture2D" uid="uid://bxe6n5uvsdmve" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0004.png" id="5_hrogu"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
 [ext_resource type="AudioStream" uid="uid://ctu6y7cbwdl2n" path="res://audio/machine_broke.mp3" id="6_llj37"]
+[ext_resource type="Texture2D" uid="uid://cpqho6gs3ytpx" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0005.png" id="6_ww5c3"]
 [ext_resource type="AudioStream" uid="uid://dcrkjkxu7wq8g" path="res://audio/machine_ingredients_empty.mp3" id="7_6qesk"]
+[ext_resource type="Texture2D" uid="uid://wrhtrem5frpg" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0006.png" id="7_8ej3g"]
 [ext_resource type="AudioStream" uid="uid://r1glsx5px3xm" path="res://audio/machine_fixed.mp3" id="8_u17ae"]
+[ext_resource type="Texture2D" uid="uid://bvm11lgj4fur4" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0007.png" id="8_ymic3"]
 [ext_resource type="PackedScene" uid="uid://bh5bdrvebx5nl" path="res://machine_ui.tscn" id="8_yuuq8"]
 [ext_resource type="Texture2D" uid="uid://dqrhvyyrdme8d" path="res://sprites/coffeeblop.png" id="9_1hddr"]
 [ext_resource type="AudioStream" uid="uid://b78v8ja676k6r" path="res://audio/spill_clean.mp3" id="9_42f15"]
+[ext_resource type="Texture2D" uid="uid://dbracgchy4o7l" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0008.png" id="9_bvj4x"]
 [ext_resource type="Script" uid="uid://c625xxr4coknn" path="res://machine_3d_gui.gd" id="10_0d1aa"]
 [ext_resource type="AudioStream" uid="uid://clgfwg4v0esoo" path="res://audio/order_done.mp3" id="10_5f3ny"]
+[ext_resource type="Texture2D" uid="uid://bapxsoqymyjj3" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0009.png" id="10_vaqkk"]
+[ext_resource type="Texture2D" uid="uid://bse5hqrrvnrbb" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0010.png" id="11_7p33r"]
+[ext_resource type="Texture2D" uid="uid://dktctcmdpbmas" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0011.png" id="12_a80ij"]
 [ext_resource type="Texture2D" uid="uid://d1yacqtlsks41" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_BaseColor.png" id="12_x45kg"]
 [ext_resource type="AudioStream" uid="uid://c1mwy70fw26kj" path="res://audio/hammer_hit.mp3" id="12_xurph"]
+[ext_resource type="Texture2D" uid="uid://bwt4ql5g5tbnl" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0012.png" id="13_robek"]
 [ext_resource type="Texture2D" uid="uid://c8ximk8c23tdx" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Metallic.png" id="13_xkbk5"]
-[ext_resource type="Environment" uid="uid://cxysvt0hdbown" path="res://machine_environment.tres" id="15_x45kg"]
+[ext_resource type="Texture2D" uid="uid://c2ojhi4v5s8fs" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0013.png" id="14_ovoaa"]
+[ext_resource type="Texture2D" uid="uid://o1tr02kj7w6p" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0014.png" id="15_1hlt3"]
+[ext_resource type="Texture2D" uid="uid://b0iigd5niyu75" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0015.png" id="16_uaec5"]
+[ext_resource type="Texture2D" uid="uid://50pgpssvx63p" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0016.png" id="17_gtm4j"]
 [ext_resource type="PackedScene" uid="uid://opsuwlsv3dke" path="res://Assets/Drink Machine/machine back.glb" id="17_jqdip"]
 [ext_resource type="Script" uid="uid://c4c77yw7tsv87" path="res://low_fps_sub_viewport_updater.gd" id="18_0ne0o"]
+[ext_resource type="Texture2D" uid="uid://buu8ncs543jqi" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0017.png" id="18_hp8kb"]
+[ext_resource type="Texture2D" uid="uid://viis4esgqrq" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0018.png" id="19_h07qc"]
+[ext_resource type="Texture2D" uid="uid://dl0l6xv5asgbk" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0019.png" id="20_1cgjg"]
 [ext_resource type="AudioStream" uid="uid://dainvtxdkilnw" path="res://audio/airhorn.wav" id="20_64ldb"]
 [ext_resource type="Script" uid="uid://lidk43nk3l7v" path="res://non_visible_camera_disabler.gd" id="20_x45kg"]
 [ext_resource type="PackedScene" uid="uid://mh131gd6x5eb" path="res://Assets/Drink Machine/Machinewsign.glb" id="20_yl6qm"]
+[ext_resource type="Texture2D" uid="uid://csjhhurydkbwl" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0020.png" id="21_t5s72"]
+[ext_resource type="Texture2D" uid="uid://bio80eua61884" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_BaseColor.png-standardSurface1_Alpha.png" id="21_x45kg"]
 [ext_resource type="AudioStream" uid="uid://douea5kkcy7c4" path="res://audio/ingredients_warning.wav" id="22_eujd3"]
+[ext_resource type="Texture2D" uid="uid://cccfrvpkn3ova" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0021.png" id="22_g2688"]
+[ext_resource type="Texture2D" uid="uid://dhifwcfo1gvb1" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Metallic.png-standardSurface1_Roughness.png" id="22_xkbk5"]
 [ext_resource type="Texture2D" uid="uid://dv00djhj1p571" path="res://Assets/Drink Machine/Machinewsign_standardSurface1_Normal.png" id="23_eujd3"]
+[ext_resource type="Texture2D" uid="uid://c0w1774lqyhc3" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0022.png" id="23_rcak8"]
+[ext_resource type="Texture2D" uid="uid://ddaetti3c163g" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0023.png" id="24_0ngdq"]
+[ext_resource type="Texture2D" uid="uid://dxn1bdwidifp0" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0024.png" id="25_c2how"]
+[ext_resource type="Texture2D" uid="uid://d2scdqj3jjjr1" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0001.png" id="26_427vo"]
+[ext_resource type="Texture2D" uid="uid://dkcep2k8ak0tu" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0002.png" id="27_q5jp4"]
+[ext_resource type="Texture2D" uid="uid://i200l67s6134" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0003.png" id="28_d37nw"]
+[ext_resource type="Texture2D" uid="uid://d10phdt6hkx3t" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0004.png" id="29_41yea"]
+[ext_resource type="Texture2D" uid="uid://dvrwrtij8lybp" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0005.png" id="30_bbbyo"]
+[ext_resource type="Texture2D" uid="uid://befww2vtvoqrh" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0006.png" id="31_kuutf"]
+[ext_resource type="Texture2D" uid="uid://ca7hhybl0hj7u" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0007.png" id="32_dfbyd"]
+[ext_resource type="Texture2D" uid="uid://gontp5icuwf7" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0008.png" id="33_gx0jy"]
+[ext_resource type="Texture2D" uid="uid://bd3niteol4hu" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0009.png" id="34_bgw1y"]
+[ext_resource type="Texture2D" uid="uid://ccrplpvfjehho" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0010.png" id="35_lf4vc"]
+[ext_resource type="Texture2D" uid="uid://qlcqiss15wpv" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0011.png" id="36_x3bhi"]
+[ext_resource type="Texture2D" uid="uid://wixpv6fjhuqd" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0012.png" id="37_avb8l"]
+[ext_resource type="Texture2D" uid="uid://dn8kpofl7lkui" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0013.png" id="38_b2l0d"]
+[ext_resource type="Texture2D" uid="uid://dqey5i4o42l6u" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0014.png" id="39_wello"]
+[ext_resource type="Texture2D" uid="uid://bda3twxs3mppc" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0015.png" id="40_kipqy"]
+[ext_resource type="Texture2D" uid="uid://cwjpwdmbbnwsb" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0016.png" id="41_bgacs"]
+[ext_resource type="Texture2D" uid="uid://cwtuvbq4nnmhs" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0017.png" id="42_88l6f"]
+[ext_resource type="Texture2D" uid="uid://dfwmdhbdlw0lx" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0018.png" id="43_jac24"]
+[ext_resource type="Texture2D" uid="uid://i56b2ihvww0a" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0019.png" id="44_om76m"]
+[ext_resource type="Texture2D" uid="uid://b50mkl7xf4n4f" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0020.png" id="45_ryoht"]
+[ext_resource type="Texture2D" uid="uid://c5je1u7aorj4d" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0021.png" id="46_j2jxb"]
+[ext_resource type="Texture2D" uid="uid://do7865oadc7qk" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0022.png" id="47_g2mkn"]
+[ext_resource type="Texture2D" uid="uid://chh6yy50cg06n" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0023.png" id="48_pdfax"]
+[ext_resource type="Texture2D" uid="uid://7mx1k4m3yafs" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0024.png" id="49_lx633"]
+[ext_resource type="Texture2D" uid="uid://bqdfudjjhvww7" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0025.png" id="50_w1s35"]
+[ext_resource type="Texture2D" uid="uid://1vjed14gekpn" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0026.png" id="51_4rr27"]
+[ext_resource type="Texture2D" uid="uid://ydu2q7xktipq" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0027.png" id="52_evw7y"]
+[ext_resource type="Texture2D" uid="uid://7wmsmyivg8kk" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0028.png" id="53_wdkrr"]
+[ext_resource type="Texture2D" uid="uid://cw747gl7iuioq" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0029.png" id="54_8bmd4"]
+[ext_resource type="Texture2D" uid="uid://dedto26le30wu" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0030.png" id="55_qtip1"]
+[ext_resource type="Texture2D" uid="uid://dg2v2dccwjxlv" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0031.png" id="56_rdhdf"]
+[ext_resource type="Texture2D" uid="uid://45it0uljysxq" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0032.png" id="57_4mdt8"]
+[ext_resource type="Texture2D" uid="uid://o6qqrrf4p0p1" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0033.png" id="58_0ief2"]
+[ext_resource type="Texture2D" uid="uid://cp4kvdxs3751q" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0034.png" id="59_5vek6"]
+[ext_resource type="Texture2D" uid="uid://cipqsv73eg6xp" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0035.png" id="60_vij2s"]
+[ext_resource type="Texture2D" uid="uid://diwkjuxjw4kf6" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0036.png" id="61_bn4tc"]
+[ext_resource type="Texture2D" uid="uid://dc14l5kqs3gfd" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0037.png" id="62_ehdnm"]
+[ext_resource type="Texture2D" uid="uid://cl44mbsuyq00v" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0038.png" id="63_ub41g"]
+[ext_resource type="Texture2D" uid="uid://bxi67w2jev6bc" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0039.png" id="64_sjdni"]
+[ext_resource type="Texture2D" uid="uid://c4cq6uvo4xt5d" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0040.png" id="65_ps4nf"]
+[ext_resource type="Texture2D" uid="uid://c8n64wdi04wej" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0041.png" id="66_yaqdg"]
+[ext_resource type="Texture2D" uid="uid://foqx38uaxgfn" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0042.png" id="67_q3tn5"]
+[ext_resource type="Texture2D" uid="uid://bi2gufckyu80u" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0043.png" id="68_alees"]
+[ext_resource type="Texture2D" uid="uid://bwpv5lse3fw7" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0044.png" id="69_q52mk"]
+[ext_resource type="Texture2D" uid="uid://b0cbimysqp2ri" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0045.png" id="70_clr3m"]
+[ext_resource type="Texture2D" uid="uid://coyn5oo6b5rsi" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0046.png" id="71_5osnv"]
+[ext_resource type="Texture2D" uid="uid://n2jo7oycevsn" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0047.png" id="72_mpktl"]
+[ext_resource type="Texture2D" uid="uid://dnr0ms6dqdny3" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0048.png" id="73_20wcn"]
+[ext_resource type="Texture2D" uid="uid://c4l600krur646" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0049.png" id="74_ujplj"]
+[ext_resource type="Texture2D" uid="uid://b6loa3ltl2mrw" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0050.png" id="75_33y5n"]
+[ext_resource type="Texture2D" uid="uid://brmmacs6u73nq" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0051.png" id="76_rsa8u"]
+[ext_resource type="Texture2D" uid="uid://c7dultwdfaeob" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0052.png" id="77_und3g"]
+[ext_resource type="Texture2D" uid="uid://ctg840uvh6w6o" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0053.png" id="78_8ij72"]
+[ext_resource type="Texture2D" uid="uid://ctxtr2ku5bdym" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0054.png" id="79_eff2u"]
+[ext_resource type="Texture2D" uid="uid://b23vgfyrvljr8" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0055.png" id="80_tk0p7"]
+[ext_resource type="Texture2D" uid="uid://cl8eqgywwj5nu" path="res://sprites/machine_ui/coffee_bar_active/machine_ingredients_bar_fill_brewing_0056.png" id="81_x483m"]
+[ext_resource type="Texture2D" uid="uid://dyqgr51e3w86t" path="res://sprites/machine_ui/tippybreak.png" id="84_4b30b"]
+[ext_resource type="Texture2D" uid="uid://bnq53b7bbl163" path="res://sprites/machine_ui/empty small screen.png" id="85_vaqkk"]
+[ext_resource type="Texture2D" uid="uid://b8iep07nsu2pm" path="res://sprites/machine_ui/money up star neutral.png" id="86_7p33r"]
+[ext_resource type="Texture2D" uid="uid://bdsqx6cit03ki" path="res://sprites/machine_ui/money up star up.png" id="87_a80ij"]
+[ext_resource type="Texture2D" uid="uid://30p5hiflsbof" path="res://sprites/machine_ui/money up star down.png" id="88_robek"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -85,9 +174,22 @@ metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xkbk5"]
 resource_name = "M_Outline"
+transparency = 4
+cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("21_x45kg")
+metallic = 1.0
 metallic_specular = 0.0
+metallic_texture = ExtResource("22_xkbk5")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("22_xkbk5")
+roughness_texture_channel = 1
 emission_enabled = true
+emission_energy_multiplier = 0.5
+emission_texture = ExtResource("21_x45kg")
+normal_enabled = true
+normal_texture = ExtResource("23_eujd3")
+metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ru46g"]
 _surfaces = [{
@@ -152,7 +254,7 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "progress_bar", "tippy_progress_sprite", "accept_button", "_price_label_accept", "_rating_loss_on_accept_label", "make_drink_button", "_rating_gain_on_remake_label", "remake_ingredients_cost_label", "refill_button", "ordered_drink_name_label", "made_drink_name_label", "_price_label_remake", "ingredients_bar", "ing_too_low_label", "spill_warning", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "accept_counter", "remake_counter", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
@@ -165,36 +267,38 @@ spot_for_player = NodePath("SpotForPlayer")
 spot_for_customer = NodePath("SpotForCustomer")
 start_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst")
 end_of_customer_queue_marker = NodePath("SpotForQueuedCustomerFirst/SpotForQueuedCustomerFinal")
-progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/ProgressIndicator")
-progress_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/ProgressIndicator/TextureProgressBar")
-tippy_progress_sprite = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/ProgressIndicator/TippySprite")
-accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton")
-_price_label_accept = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/AcceptPriceLabel")
-_rating_loss_on_accept_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/AcceptButton/AcceptRatingLossLabel")
-make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RemakeDrinkButton")
-_rating_gain_on_remake_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RemakeDrinkButton/RemakeRatingGainLabel")
-remake_ingredients_cost_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RemakeDrinkButton/IngredientsCostLabel")
-refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsUI/RefillButton")
-ordered_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/OrderedInfo/OrderedDrinkName")
-made_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/MadeDrinkName")
-_price_label_remake = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/Buttons/RemakeDrinkButton/RemakePriceLabel")
-ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/IngredientsUI/IngredientsMeter/ProgressBar")
+progress_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/ProgressIndicator")
+tippy_progress_sprite = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/ProgressIndicator/TippySprite")
+accept_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons/AcceptButton")
+make_drink_button = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons/RemakeDrinkButton")
+refill_button = NodePath("3DGui/Screen/SubViewport/MachineUI/IngredientsUI/ButtonContainer/RefillButton")
+ordered_drink_name_label = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderedDrinkName")
+ingredients_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/IngredientsUI/MarginContainer/ProgressBar")
 ing_too_low_label = NodePath("IngTooLow")
-spill_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/MarginContainer/SpillWarning/Label")
-customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer")
-customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CustomerTimer/TextureProgressBar")
+spill_warning_container = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/SpillWarning")
+customer_wait_indicator = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer")
+customer_wait_bar = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer/TextureProgressBar")
 no_ingredients_warning = NodePath("3DGui/Screen/SubViewport/MachineUI/NoIngredientsWarning")
 get_ingredients_prompt = NodePath("3DGui/Screen/SubViewport/MachineUI/GetIngredientsPrompt")
-order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo")
-ordered_main_ingredient_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Main/TextureRect")
-ordered_liquid_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Liquid/TextureRect")
-ordered_extra_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Extra/TextureRect")
-ordered_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/OrderedInfo/OrderedItem")
-made_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo")
-made_main_ingredient_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Main")
-made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Liquid")
-made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Extra")
-made_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/VBoxContainer/OrderInfo/MadeInfo/MadeItem")
+order_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown")
+ordered_main_ingredient_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Main/MainTexture")
+ordered_liquid_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Liquid/LiquidTexture")
+ordered_extra_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Extra/ExtraTexture")
+ordered_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderedItem")
+made_breakdown = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown")
+made_main_ingredient_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Main")
+made_liquid_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Liquid")
+made_extra_panel = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeBreakdown/Extra")
+made_drink_icon = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo/MadeItem")
+equal_sign = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/MarginContainer/EqualSign")
+equal_sign_states = Array[Texture2D]([ExtResource("2_ww5c3"), ExtResource("3_8ej3g"), ExtResource("4_ymic3")])
+timer_dial = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control/CustomerTimer/TextureProgressBar/TimerDial")
+ingredient_coffeebar = NodePath("3DGui/Screen/SubViewport/MachineUI/IngredientsUI/MarginContainer/ProgressUnder/ProgressCoffee")
+idle_ing_bar_array = Array[Texture2D]([ExtResource("2_cvlju"), ExtResource("3_4b30b"), ExtResource("4_womjx"), ExtResource("5_hrogu"), ExtResource("6_ww5c3"), ExtResource("7_8ej3g"), ExtResource("8_ymic3"), ExtResource("9_bvj4x"), ExtResource("10_vaqkk"), ExtResource("11_7p33r"), ExtResource("12_a80ij"), ExtResource("13_robek"), ExtResource("14_ovoaa"), ExtResource("15_1hlt3"), ExtResource("16_uaec5"), ExtResource("17_gtm4j"), ExtResource("18_hp8kb"), ExtResource("19_h07qc"), ExtResource("20_1cgjg"), ExtResource("21_t5s72"), ExtResource("22_g2688"), ExtResource("23_rcak8"), ExtResource("24_0ngdq"), ExtResource("25_c2how")])
+active_ing_bar_array = Array[Texture2D]([ExtResource("26_427vo"), ExtResource("27_q5jp4"), ExtResource("28_d37nw"), ExtResource("29_41yea"), ExtResource("30_bbbyo"), ExtResource("31_kuutf"), ExtResource("32_dfbyd"), ExtResource("33_gx0jy"), ExtResource("34_bgw1y"), ExtResource("35_lf4vc"), ExtResource("36_x3bhi"), ExtResource("37_avb8l"), ExtResource("38_b2l0d"), ExtResource("39_wello"), ExtResource("40_kipqy"), ExtResource("41_bgacs"), ExtResource("42_88l6f"), ExtResource("43_jac24"), ExtResource("44_om76m"), ExtResource("45_ryoht"), ExtResource("46_j2jxb"), ExtResource("47_g2mkn"), ExtResource("48_pdfax"), ExtResource("49_lx633"), ExtResource("50_w1s35"), ExtResource("51_4rr27"), ExtResource("52_evw7y"), ExtResource("53_wdkrr"), ExtResource("54_8bmd4"), ExtResource("55_qtip1"), ExtResource("56_rdhdf"), ExtResource("57_4mdt8"), ExtResource("58_0ief2"), ExtResource("59_5vek6"), ExtResource("60_vij2s"), ExtResource("61_bn4tc"), ExtResource("62_ehdnm"), ExtResource("63_ub41g"), ExtResource("64_sjdni"), ExtResource("65_ps4nf"), ExtResource("66_yaqdg"), ExtResource("67_q3tn5"), ExtResource("68_alees"), ExtResource("69_q52mk"), ExtResource("70_clr3m"), ExtResource("71_5osnv"), ExtResource("72_mpktl"), ExtResource("73_20wcn"), ExtResource("74_ujplj"), ExtResource("75_33y5n"), ExtResource("76_rsa8u"), ExtResource("77_und3g"), ExtResource("78_8ij72"), ExtResource("79_eff2u"), ExtResource("80_tk0p7"), ExtResource("81_x483m")])
+accept_counter = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter")
+remake_counter = NodePath("3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter")
+counter_sprites = Array[Texture2D]([ExtResource("85_vaqkk"), ExtResource("86_7p33r"), ExtResource("87_a80ij"), ExtResource("88_robek")])
 hum_sound = NodePath("HumSound")
 done_sound = NodePath("DoneSound")
 spill_clean_sound = NodePath("SpillCleanSound")
@@ -249,6 +353,7 @@ time_to_hold = 1.0
 
 [node name="BrokenDownLabel" type="Label3D" parent="FixMachineInteractable" unique_id=969109102]
 transform = Transform3D(0.8189471, -0.54667246, 0.17457144, 0.5575813, 0.8299543, -0.016706362, -0.13575338, 0.111019395, 0.98450273, 0, 0, 0)
+visible = false
 modulate = Color(1, 0.6, 0.12156863, 1)
 text = "BROKEN DOWN"
 
@@ -260,6 +365,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 light_color = Color(0.865337, 0.34385592, 0.17381006, 1)
 light_energy = 2.0
 shadow_enabled = true
+
+[node name="BrokenDownSprite" type="Sprite3D" parent="FixMachineInteractable" unique_id=2135256805]
+texture = ExtResource("84_4b30b")
 
 [node name="Spill" type="Area3D" parent="." unique_id=1225300652]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011, -0.5)
@@ -300,11 +408,15 @@ node_viewport = NodePath("Screen/SubViewport")
 node_quad = NodePath("Screen")
 node_area = NodePath("Area3D")
 cam_spot = NodePath("CameraSpot")
-_customer_side_camera = NodePath("Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
+_customer_side_camera = NodePath("Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
 
 [node name="Screen" type="MeshInstance3D" parent="3DGui" unique_id=1576222371]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
 mesh = SubResource("QuadMesh_0ffxp")
+
+[node name="CustomerCameraRemoteTransform3D" type="RemoteTransform3D" parent="3DGui/Screen" unique_id=1736484949]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.258819, 0, -0.25881904, 0.96592575, 0, 0.7298213, -1.4538481)
+remote_path = NodePath("../SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="3DGui/Screen" unique_id=379095341]
 transform = Transform3D(1.2075837, 0, 0, 0, 1.2075838, 3.2749806e-08, 0, -3.2749806e-08, 1.2075838, 0, 0, 0)
@@ -316,31 +428,40 @@ use_occlusion_culling = true
 size = Vector2i(1200, 1600)
 
 [node name="MachineUI" parent="3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
+size_flags_horizontal = 3
 
-[node name="CamFeed" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed" parent_id_path=PackedInt32Array(317935962, 2077053007) index="0" unique_id=2017828538]
+[node name="CamFeedSubViewportContainer" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2" parent_id_path=PackedInt32Array(317935962, 1153203435) index="0" unique_id=2077053007]
+custom_minimum_size = Vector2(360, 270)
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 97.0
+offset_top = 64.0
+offset_right = -50.0
+offset_bottom = -65.0
+
+[node name="CamFeedSubViewport" type="SubViewport" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer" index="0" unique_id=1105624155]
 handle_input_locally = false
-use_occlusion_culling = true
 scaling_3d_scale = 0.5
-size = Vector2i(848, 354)
+size = Vector2i(653, 270)
 render_target_update_mode = 4
 
-[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=719900526 node_paths=PackedStringArray("_sub_viewport")]
+[node name="LowFpsSubViewportUpdater" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=1366731145 node_paths=PackedStringArray("_sub_viewport")]
 script = ExtResource("18_0ne0o")
 _sub_viewport = NodePath("..")
+metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
-[node name="Camera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed" unique_id=195359825]
-transform = Transform3D(0.9099997, 0, 0, 0, 0.87899226, 0.23552525, 0, -0.23552525, 0.87899226, 0, 1.8762311, -0.5289409)
-cull_mask = 3
-environment = ExtResource("15_x45kg")
-fov = 45.0
+[node name="CustomerCamera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
+transform = Transform3D(0.90999997, 0, 0, 0, 0.87899244, 0.2355253, 0, -0.23552532, 0.8789924, 0, 1.876231, -0.56426746)
+fov = 90.0
 
-[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D" unique_id=1220965674 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
+[node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
 _camera_3d = NodePath("..")
-_visible_on_screen_notifier_3d = NodePath("../../../../../../../VisibleOnScreenNotifier3D")
-
-[node name="Label" parent="3DGui/Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/MarginContainer/SpillWarning" parent_id_path=PackedInt32Array(317935962, 337494662) index="0" unique_id=1244531673]
-visible = false
+_visible_on_screen_notifier_3d = NodePath("../../../../../../../../../../../VisibleOnScreenNotifier3D")
+metadata/_custom_type_script = "uid://lidk43nk3l7v"
 
 [node name="AreaLight3D" type="AreaLight3D" parent="3DGui/Screen" unique_id=591832002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03372717, 0.18553543)
@@ -367,22 +488,18 @@ shape = SubResource("BoxShape3D_yuuq8")
 [node name="CameraSpot" type="Marker3D" parent="3DGui" unique_id=513636241]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="3DGui" unique_id=1736484949]
-transform = Transform3D(0.99999964, 0, 0, 0, 0.9659255, 0.25881895, 0, -0.25881895, 0.9659255, 0, 1.7298214, -0.7150276)
-remote_path = NodePath("../Screen/SubViewport/MachineUI/VBoxContainer/CamFeed/CamFeed/Camera3D")
-
 [node name="Model" type="Node3D" parent="." unique_id=238356525]
 
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=982963143]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=749704850]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
+[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
 mesh = SubResource("ArrayMesh_eujd3")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
