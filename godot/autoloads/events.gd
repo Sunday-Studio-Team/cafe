@@ -60,10 +60,11 @@ signal viewmodel_animation_finished
 # some signals that emit on certain frames of vm animations
 # (to time certain stuff off)
 signal bag_pickup_animation_grabbed
+signal trash_pickup_animation_grabbed
 signal hammer_animation_hit
 signal tutorial_selected
 # Free Cam
 signal free_cam_toggled
 signal free_cam_set_speed(speed: float)
 # PC Cursor
-signal pc_state_change
+signal pc_state_change(using_pc: bool)
