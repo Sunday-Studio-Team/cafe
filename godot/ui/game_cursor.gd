@@ -13,31 +13,28 @@ extends Node
 var pc_active: bool
 
 func _ready() -> void:
-	#using a global signal to monitor pc to global cursor switches
 	Events.pc_state_change.connect(on_pc_state_change)
 
 	if normal_cursor:
 		Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_ARROW, normal_cursor_hotspot)
-		# Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_POINTING_HAND, normal_cursor_hotspot)
+		Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_POINTING_HAND, normal_cursor_hotspot)
 
 func _input(event: InputEvent) -> void:
-
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not pc_active:
-		# mouse left key is pressed down
-		Input.set_custom_mouse_cursor(clicked_cursor, Input.CURSOR_ARROW, normal_cursor_hotspot)
-		# Input.set_custom_mouse_cursor(clicked_cursor, Input.CURSOR_POINTING_HAND, normal_cursor_hotspot)
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and pc_active: 
-		Input.set_custom_mouse_cursor(clicked_pc_cursor, Input.CURSOR_ARROW, pc_cursor_hotspot)
-# 		Input.set_custom_mouse_cursor(clicked_pc_cursor, Input.CURSOR_POINTING_HAND, pc_cursor_hotspot)
-	elif pc_active: 
-		Input.set_custom_mouse_cursor(normal_pc_cursor, Input.CURSOR_ARROW, pc_cursor_hotspot)
-# 		Input.set_custom_mouse_cursor(normal_pc_cursor, Input.CURSOR_POINTING_HAND, pc_cursor_hotspot)
-	elif not pc_active: 
-		# as soon as mouse left key is released we go back to normal cursor
-		Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_ARROW, normal_cursor_hotspot)
-# 		Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_POINTING_HAND, normal_cursor_hotspot)
-	else:
-		print("none of cursor selection were selected, check to see if image textures are valid")
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if pc_active:
+			if event.pressed:
+				Input.set_custom_mouse_cursor(clicked_pc_cursor, Input.CURSOR_ARROW, pc_cursor_hotspot)
+				Input.set_custom_mouse_cursor(clicked_pc_cursor, Input.CURSOR_POINTING_HAND, pc_cursor_hotspot)
+			else:
+				Input.set_custom_mouse_cursor(normal_pc_cursor, Input.CURSOR_ARROW, pc_cursor_hotspot)
+				Input.set_custom_mouse_cursor(normal_pc_cursor, Input.CURSOR_POINTING_HAND, pc_cursor_hotspot)
+		else:
+			if event.pressed:
+				Input.set_custom_mouse_cursor(clicked_cursor, Input.CURSOR_ARROW, normal_cursor_hotspot)
+				Input.set_custom_mouse_cursor(clicked_cursor, Input.CURSOR_POINTING_HAND, normal_cursor_hotspot)
+			else:
+				Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_ARROW, normal_cursor_hotspot)
+				Input.set_custom_mouse_cursor(normal_cursor, Input.CURSOR_POINTING_HAND, normal_cursor_hotspot)
 
 func on_pc_state_change():
 	if not pc_active:
