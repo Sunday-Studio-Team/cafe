@@ -11,13 +11,11 @@ extends Control
 @export var unread_label:Label
 @export var click_sound: AudioStreamPlayer
 var new_shop_items := true
-
-
+		
 func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
-
 	# Wait until everything else is ready, as main needs to set per day stuff.
 	await get_tree().process_frame
 
@@ -61,10 +59,11 @@ func _unhandled_input(input_event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	Global.in_pc_ui = visible
-
-
+		
 func exit() -> void:
 	email_app.hide()
+	print("activity in pc exited")
+	CursorSwitch.pc_state_change.emit()
 	hide()
 
 
