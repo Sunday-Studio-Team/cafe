@@ -33,9 +33,6 @@ size = Vector2(241, 130)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xnu58"]
 size = Vector2(239, 488)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx0vh"]
-load_path = "res://.godot/imported/mop_it_up.png-0e0004a1a7332602439f9a9fe450aad4.ctex"
-
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
@@ -137,7 +134,3 @@ theme_override_font_sizes/font_size = 40
 text = "Percentage Cleaned:"
 horizontal_alignment = 1
 vertical_alignment = 2
-
-[node name="Instruction" type="Sprite2D" parent="." unique_id=1907843069]
-position = Vector2(932, 534)
-texture = SubResource("CompressedTexture2D_kx0vh")
