@@ -43,6 +43,7 @@ func _ready() -> void:
 	Events.quit_game_requested.connect(quit_game)
 
 	if OS.has_feature("editor") and !OS.has_feature("editor_start_main_menu"):
+		Global.day = 1
 		load_scene(SceneSwitcher.GameScene.MAIN_SCENE)
 	else:
 		load_scene(SceneSwitcher.GameScene.MAIN_MENU)

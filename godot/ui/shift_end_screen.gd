@@ -158,29 +158,6 @@ func _on_time_up() -> void:
 	_rating_title_label.visible = true
 	await get_tree().create_timer(0.5).timeout
 	_rating_label.visible = true
-	
-	if passed_profit_goal:
-		await get_tree().create_timer(0.1).timeout
-		_tips_per_star_label.visible = true
-		if show_tip_jar_desc:
-			_tip_jar_desc_label.visible = true
-		await get_tree().create_timer(0.2).timeout
-		_tips_today_label.visible = true
-		await get_tree().create_timer(0.5).timeout
-		
-		_bank_total_label.visible = true
-		value_to_show_on_bank_total = Global.player_tips_bank
-		Global.player_tips_bank += tips
-		await get_tree().create_timer(0.5).timeout
-		if Global.player_tips_bank > value_to_show_on_bank_total:
-			bank_gain_sound.play()
-			var t := create_tween().tween_property(
-					self,
-					"value_to_show_on_bank_total",
-					Global.player_tips_bank,
-					0.75,
-					)
-			await t.finished
 
 	await get_tree().create_timer(0.5).timeout
 

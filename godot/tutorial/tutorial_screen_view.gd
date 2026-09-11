@@ -10,6 +10,10 @@ func _ready() -> void:
 	for continue_button in _continue_buttons:
 		continue_button.pressed.connect(_on_continue_button_pressed)
 
+func _unhandled_input(input_event: InputEvent) -> void:
+	if input_event.is_action_pressed("pause"):
+		finished.emit(self)
+		get_viewport().set_input_as_handled()
 
 func _on_continue_button_pressed() -> void:
 	finished.emit(self)
