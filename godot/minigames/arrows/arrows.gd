@@ -48,13 +48,24 @@ var correct_input_index: int = 0
 }
 @onready var background_color = "#ffffff"
 var failures: int = 0
+@export var screenshake: AnimationPlayer
+@export var pulse: AnimationPlayer
 
+@export var music: AudioStreamPlayer
+var tween:Tween
+
+var really_bad_beat_timer:float = 0
 
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
 func _ready() -> void:
 	set_up_arrow_container()
 	_start_minigame()
 
+func _process(delta: float) -> void:
+#There seriously has to be a better way of doing this
+	really_bad_beat_timer += delta
+	if really_bad_beat_timer >= 0.5:
+		really_bad_beat_timer = 0
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -71,45 +82,53 @@ func _input(event: InputEvent) -> void:
 		await correct_sound.finished
 		_end_minigame()
 
+var currently_in_fail_pose: bool = false
 
 func check_input(direction: String) -> void:
+		
 	if (correct_input_index >= valid_directions.size()): #error checking for index out of bound.
 		print('index out of bound caught in arrows.gd. error handled.')
 		return
 
 	if (valid_directions[correct_input_index] == direction):
+		if really_bad_beat_timer <= 0.05:
+			prompt_output.text = "Marvelous!"
+		else:
+			prompt_output.text = "Great!"
+		screenshake.play("nudge_%s" % direction)
 		var current_arrow = output_directions[valid_indices[correct_input_index]]
-		var tween = create_tween()
+		tween = create_tween()
 		tween.tween_property(current_arrow, "scale", Vector2(1.2, 1.2), 0.05) 
-		tween.tween_property(current_arrow, "position", current_arrow.position - Vector2(2.0, 2.0), 0.05)
+		tween.tween_property(current_arrow, "offset_transform_position", current_arrow.position - Vector2(2.0, 2.0), 0.05)
 		
 		tween.chain().tween_property(current_arrow, "scale", Vector2(1.0, 1.0), 0.05) 
-		tween.chain().tween_property(current_arrow, "position", current_arrow.position + Vector2(2.0, 2.0), 0.05)
+		tween.chain().tween_property(current_arrow, "offset_transform_position", current_arrow.position + Vector2(2.0, 2.0), 0.05)
 		tween.chain().tween_property(current_arrow, "modulate", Color.TRANSPARENT, 0.05)
 		#output_directions[valid_indices[correct_input_index]].texture = null
-		match direction:
-			"left":
-				set_tippy_image(tippy_left.pick_random())
-
-			"up":
-				set_tippy_image(tippy_up.pick_random())
-
-			"right":
-				set_tippy_image(tippy_right.pick_random())
-
-			"down":
-				set_tippy_image(tippy_down.pick_random())
+		#match direction:
+			#"left": set_tippy_image(tippy_left.pick_random())
+			#"up": set_tippy_image(tippy_up.pick_random())
+			#"right": set_tippy_image(tippy_right.pick_random())
+			#"down": set_tippy_image(tippy_down.pick_random())
 		correct_input_index += 1
 		correct_sound.play()
+		currently_in_fail_pose = false
 	else:
+		if tween: tween.kill()
+		if not currently_in_fail_pose:
+			screenshake.play("fail")
+		currently_in_fail_pose = true
+		for arrow:TextureRect in output_directions:
+			arrow.offset_transform_position = Vector2.ZERO
+			arrow.scale = Vector2.ONE
+			arrow.modulate = Color.WHITE
 		if failures < 1:
 			set_tippy_image(tippy_fail_first.pick_random())
 		else:
 			set_tippy_image(tippy_fail_again.pick_random())
 		shake_tippy()
 		wrong_sound.play()
-		#display_wrong()
-		_start_minigame()
+		reset_minigame()
 		failures += 1
 
 
@@ -139,8 +158,6 @@ func set_up_arrow_container() -> void:
 		arrow_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		arrow_rect.custom_minimum_size.x = min_arrow_size
 		arrows_container.add_child(arrow_rect)
-		print(arrow_rect.texture)
-		print(arrow_rect.visible)
 
 
 func set_tippy_image(tippy_texture: Texture) -> void:
@@ -165,15 +182,13 @@ func shake_tippy() -> void:
 
 	tween.tween_property(tippy_image, "position", panel_original_position, 0.1)
 
-
-func _start_minigame() -> void:
+func reset_minigame():
 	blue_textures = []
 	red_textures = []
 	output_directions = arrows_container.get_children()
 	valid_indices = []
 	valid_directions = []
 	correct_input_index = 0
-
 	#output_directions[0].texture = blue_left[0]
 
 	# Choose if player has to click red or blue directions
@@ -228,10 +243,12 @@ func _start_minigame() -> void:
 		add_arrow_to_output(output_index, "red", red_index, choose_color)
 		red_index += 1
 		output_index += 1
-	print(arrows_container.visible)
-	for arrow in arrows_container.get_children():
-		print(arrow.texture)
-		
+
+func _start_minigame() -> void:
+	pulse.play("pulse")
+	music.play()
+	
+	reset_minigame()
 
 
 func _end_minigame() -> void:

@@ -55,6 +55,7 @@
 [ext_resource type="AudioStream" uid="uid://cwarhwibu7s60" path="res://audio/ddr/ddr_correct_2.wav" id="49_xql7b"]
 [ext_resource type="AudioStream" uid="uid://bynqhhvraxh3n" path="res://audio/ddr/ddr_correct_3.wav" id="50_08s2a"]
 [ext_resource type="AudioStream" uid="uid://sen2yqvqdqde" path="res://audio/ddr/ddr_correct_4.wav" id="51_ajpp4"]
+[ext_resource type="FontFile" uid="uid://bon5lsvgcu4lr" path="res://fonts/Orange Kid.otf" id="52_ftfms"]
 [ext_resource type="AudioStream" uid="uid://bm64e3hjg5vgi" path="res://audio/ddr/ddr_correct_5.wav" id="52_mji0a"]
 [ext_resource type="AudioStream" uid="uid://ctvbre1ribsjj" path="res://audio/ddr/ddr_wrong_1.wav" id="53_mji0a"]
 [ext_resource type="AudioStream" uid="uid://ec40um0fnntu" path="res://audio/ddr/ddr_wrong_2.wav" id="54_xkcvm"]
@@ -75,7 +76,390 @@ stream_0/stream = ExtResource("53_mji0a")
 stream_1/stream = ExtResource("54_xkcvm")
 stream_2/stream = ExtResource("55_7milp")
 
-[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound")]
+[sub_resource type="Animation" id="Animation_syko7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DanceMachine:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tippy:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Tippy:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("43_ftfms")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Tippy:offset_transform_rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_d8qde"]
+resource_name = "nudge_up"
+length = 0.06666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tippy:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0367),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tippy:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.036666665),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("47_syko7")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tippy:offset_transform_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.036666665),
+"transitions": PackedFloat32Array(1.1095697, 1, 1e-05),
+"update": 0,
+"values": [0.0, -0.7644542123735165, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ftfms"]
+resource_name = "nudge_up"
+length = 0.13499999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DanceMachine:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 20), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tippy:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, -25), Vector2(0, 60), Vector2(0, -25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Tippy:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("45_6h2j6")]
+}
+
+[sub_resource type="Animation" id="Animation_yem23"]
+resource_name = "nudge_up"
+length = 0.13499999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DanceMachine:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-20, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tippy:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, -25), Vector2(-100, -25), Vector2(0, -25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Tippy:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("42_syko7")]
+}
+
+[sub_resource type="Animation" id="Animation_6h2j6"]
+resource_name = "nudge_up"
+length = 0.13499999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DanceMachine:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(20, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tippy:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25, 1),
+"update": 0,
+"values": [Vector2(0, -25), Vector2(100, -25), Vector2(0, -25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Tippy:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.03333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("44_yem23")]
+}
+
+[sub_resource type="Animation" id="Animation_8r575"]
+resource_name = "nudge_up"
+length = 0.13499999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DanceMachine:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -20), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tippy:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"update": 0,
+"values": [Vector2(0, -25), Vector2(0, -90), Vector2(0, -25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Tippy:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("43_ftfms")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gaw3v"]
+_data = {
+&"RESET": SubResource("Animation_syko7"),
+&"fail": SubResource("Animation_d8qde"),
+&"nudge_down": SubResource("Animation_ftfms"),
+&"nudge_left": SubResource("Animation_yem23"),
+&"nudge_right": SubResource("Animation_6h2j6"),
+&"nudge_up": SubResource("Animation_8r575")
+}
+
+[sub_resource type="Animation" id="Animation_ms8o4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Prompt:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArrowsBackground:offset_transform_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gaw3v"]
+resource_name = "pulse"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Prompt:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 1e-05),
+"update": 0,
+"values": [Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ArrowsBackground:offset_transform_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.2, 0),
+"update": 0,
+"values": [Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ms8o4"]
+_data = {
+&"RESET": SubResource("Animation_ms8o4"),
+&"pulse": SubResource("Animation_gaw3v")
+}
+
+[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound", "screenshake", "pulse", "music")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,6 +486,9 @@ tippy_fail_first = Array[Texture]([ExtResource("46_8r575")])
 tippy_fail_again = Array[Texture]([ExtResource("47_syko7")])
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
+screenshake = NodePath("ScreenShake")
+pulse = NodePath("Pulse")
+music = NodePath("Music")
 
 [node name="Background" type="TextureRect" parent="." unique_id=247780111]
 layout_mode = 1
@@ -110,6 +497,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 texture = ExtResource("47_yem23")
 expand_mode = 3
 
@@ -120,6 +508,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 texture = ExtResource("6_cfscc")
 expand_mode = 1
 
@@ -134,6 +523,7 @@ offset_left = -65.160034
 offset_right = 65.160034
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 texture = ExtResource("42_l8ovb")
 expand_mode = 3
 stretch_mode = 5
@@ -151,7 +541,8 @@ offset_right = 148.04993
 offset_bottom = 100.399994
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("42_syko7")
+offset_transform_enabled = true
+texture = ExtResource("43_ftfms")
 expand_mode = 3
 stretch_mode = 5
 
@@ -166,6 +557,7 @@ offset_left = 8.0
 offset_top = 551.0
 offset_right = -5.0
 offset_bottom = -1.0
+offset_transform_enabled = true
 texture = ExtResource("6_vxntg")
 expand_mode = 2
 stretch_mode = 5
@@ -182,6 +574,7 @@ offset_top = 98.29573
 offset_right = -122.920044
 offset_bottom = -26.158417
 size_flags_horizontal = 3
+offset_transform_enabled = true
 alignment = 1
 
 [node name="Prompt" type="RichTextLabel" parent="." unique_id=1688849488]
@@ -191,14 +584,20 @@ anchor_left = 0.047000002
 anchor_top = 0.606
 anchor_right = 0.79700005
 anchor_bottom = 0.946
-offset_left = 254.76
-offset_top = -10.47998
-offset_right = -210.24011
-offset_bottom = -263.67993
+offset_left = 234.76
+offset_top = -17.47998
+offset_right = -205.24011
+offset_bottom = -270.68
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 50
+theme_override_colors/font_shadow_color = Color(0.49700737, 0.6478859, 0.73510796, 1)
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("52_ftfms")
+theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "This text should not appear in game"
 scroll_active = false
@@ -216,5 +615,10 @@ volume_db = -5.0
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=223541811]
 stream = ExtResource("60_syko7")
 volume_db = -10.0
-autoplay = true
 bus = &"MinigameMusic"
+
+[node name="ScreenShake" type="AnimationPlayer" parent="." unique_id=804862244]
+libraries/ = SubResource("AnimationLibrary_gaw3v")
+
+[node name="Pulse" type="AnimationPlayer" parent="." unique_id=444770165]
+libraries/ = SubResource("AnimationLibrary_ms8o4")
