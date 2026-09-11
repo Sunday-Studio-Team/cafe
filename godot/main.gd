@@ -811,7 +811,9 @@ func _on_desk_interacted() -> void:
 	player_using_pc = true
 
 	enter_with_camera_tween()
+	Events.pc_state_change.emit()
 	pc_ui.show()
+	
 
 
 func enter_with_camera_tween() -> void:

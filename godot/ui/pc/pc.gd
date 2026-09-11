@@ -13,8 +13,7 @@ extends Control
 @export var unread_label: Label
 @export var click_sound: AudioStreamPlayer
 var new_shop_items := true
-
-
+		
 func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
@@ -75,8 +74,7 @@ func _on_visibility_changed() -> void:
 
 func _process(_delta: float) -> void:
 	Global.in_pc_ui = visible
-
-
+		
 func exit() -> void:
 	var t := create_tween()
 	t.tween_property(screen_content_container, "offset_transform_scale:y", 0, 0.2)
@@ -85,6 +83,7 @@ func exit() -> void:
 	
 	email_app.hide()
 	gui_3d.exit_with_camera_tween()
+	Events.pc_state_change.emit()
 	hide()
 
 

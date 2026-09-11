@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://ui/pause_menu.gd" id="1_hdmo1"]
 [ext_resource type="PackedScene" uid="uid://u0mxb00igfni" path="res://ui/options_menu/options_menu.tscn" id="2_ejwgg"]
+[ext_resource type="Script" uid="uid://dh7or462kaeel" path="res://ui/global_cursor.gd" id="3_npydk"]
+[ext_resource type="Texture2D" uid="uid://dcgbb3g3jay21" path="res://cursor_idle.png" id="4_6ap7o"]
+[ext_resource type="Texture2D" uid="uid://e14er0jdm5sr" path="res://cursor_click.png" id="5_j3kxr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
 bg_color = Color(0.74428886, 0.5576893, 0.38271093, 1)
@@ -31,6 +34,11 @@ sure_panel = NodePath("MarginContainer/Sure/PanelContainer")
 yes_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/YesButton")
 no_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/NoButton")
 sure_info_label = NodePath("MarginContainer/Sure/PanelContainer/Info/PanelContainer/Label")
+
+[node name="GlobalCursor" type="Node" parent="." unique_id=110100438]
+script = ExtResource("3_npydk")
+normal_cursor = ExtResource("4_6ap7o")
+clicked_cursor = ExtResource("5_j3kxr")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1315358308]
 anchors_preset = 15

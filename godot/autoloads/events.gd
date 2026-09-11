@@ -65,3 +65,5 @@ signal tutorial_selected
 # Free Cam
 signal free_cam_toggled
 signal free_cam_set_speed(speed: float)
+# PC Cursor
+signal pc_state_change
