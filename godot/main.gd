@@ -16,7 +16,9 @@ extends Node3D
 @export var _left_area_middle_machine: Machine
 @export var _left_area_right_machine: Machine
 @export var _customer_help_desk: CustomerHelpDesk
+@export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
+@export var customer_trash_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
@@ -25,6 +27,7 @@ extends Node3D
 @export var desk: Desk
 @export var pc_ui: PC_UI
 @export var overtime_item: Item
+@export var _trash_can: TrashCan
 #Minigame
 @export var minigame_controller: CanvasLayer
 #Active Items
@@ -60,7 +63,8 @@ var _all_security_cameras: Array[SecurityCam3D]
 
 @onready var tutorial_machine: Machine = _right_area_right_machine
 
-var closing_time: bool = false
+var should_spawn_trash_today: bool = false
+var closing_time:bool = false
 
 func _ready() -> void:
 	_world_environment.environment = Global.cafe_environment_res
@@ -73,6 +77,7 @@ func _ready() -> void:
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
 
+	customer_trash_spawn_timer.timeout.connect(spawn_trash)
 	_all_machines = [
 		_right_area_left_machine,
 		_right_area_right_machine,
@@ -101,7 +106,7 @@ func _ready() -> void:
 	_help_desk_customer_spawn_timer.autostart = false
 
 	game_timer.timeout.connect(_on_game_timer_timeout)
-
+	
 	Events.shift_started.connect(_on_shift_started)
 
 	desk.interactable.interacted.connect(_on_desk_interacted)
@@ -122,6 +127,7 @@ func _ready() -> void:
 
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
+	Global.holding_trash = false
 	Global.daily_cafe_money = 0
 	Global.employee_rating = 0
 	Global.spills_this_shift = 0
@@ -221,6 +227,7 @@ func update_air_fresheners_enabled() -> void:
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
 	closing_time = false
+	_trash_can.visible = false
 	if Global.day == 0:
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
@@ -265,6 +272,8 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_back(_right_area_left_machine)
 		_active_machines.push_back(_right_area_right_machine)
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+		should_spawn_trash_today = true
+		_trash_can.visible = true
 
 	if Global.day == 5:
 		_active_machines.clear()
@@ -274,6 +283,8 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_back(_right_area_left_machine)
 		_active_machines.push_back(_right_area_right_machine)
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
+		should_spawn_trash_today = true
+		_trash_can.visible = true
 
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()
@@ -396,7 +407,39 @@ func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D
 func _on_pause_menu_tutorial_requested() -> void:
 	_tutorial_manager.show_tutorial()
 
+#code for  trash spawn 
+func spawn_trash() -> void:
+	if not should_spawn_trash_today:
+		return
+# freq of spawn 3/41 rn
+	var spawn=randi_range(0,40)
+	if spawn>=3:
+		return
+	var customer_trash = customer_trash_scene.instantiate()
+	#var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
+	#var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
+	#	position of trash spawn
+	#	0.2=ground level	
+	#customer_trash.position=Vector3(rand_x,0.2,rand_z)
+	
+	var current_customers: Array[Customer]
+	# Get all current customer positions
+	for child in get_children():
+		if child is Customer:
+			current_customers.append(child)
+	
+	#var trash_offset: float = 0
+	var littering_customer = current_customers.pick_random()
+	#var rand_x = randf_range(littering_customer.global_position.x, littering_customer.global_position.x)
+	#var rand_z = randf_range(littering_customer.global_position.z, littering_customer.global_position.z)
+	if littering_customer:
+		customer_trash.position=Vector3(littering_customer.global_position.x,0,littering_customer.global_position.z)
+	print("spawned trash")
+	
+	add_child(customer_trash)
+	Events.alert_posted.emit("Customer dropeed some trash...", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 
+	
 func _on_game_timer_timeout() -> void:
 	Events.shift_end_sequence_started.emit()
 	closing_time = true
@@ -448,6 +491,8 @@ func _on_minigame_end():
 
 
 func _on_shift_started():
+	
+	customer_trash_spawn_timer.start()
 	Global.shift_started = true
 	shift_start_sound.play()
 

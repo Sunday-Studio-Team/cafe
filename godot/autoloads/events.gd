@@ -60,6 +60,7 @@ signal viewmodel_animation_finished
 # some signals that emit on certain frames of vm animations
 # (to time certain stuff off)
 signal bag_pickup_animation_grabbed
+signal trash_pickup_animation_grabbed
 signal hammer_animation_hit
 signal tutorial_selected
 # Free Cam

@@ -254,7 +254,7 @@ func handle_exit_machine_button_visibility() -> void:
 
 
 func handle_drop_item_ui() -> void:
-	drop_button.visible = Global.holding_ingredients and not Global.in_ui
+	drop_button.visible = Global.holding_ingredients || Global.holding_trash and not Global.in_ui
 
 
 func update_day_indicator() -> void:

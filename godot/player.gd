@@ -10,10 +10,12 @@ const STRIDE_LENGTH := 1.25
 @export var ingredients_bag: Node3D
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
+@export var customer_trash: Sprite3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
+@export var customer_trash_scene: PackedScene
 @export var sprint_lockout_timer: Timer
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
@@ -74,6 +76,24 @@ func _ready() -> void:
 				var t := create_tween().set_parallel()
 				t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
+	
+	customer_trash.visibility_changed.connect(
+		func():
+			if customer_trash.visible:
+				customer_trash.scale = Vector3.ZERO
+	)
+	Events.trash_pickup_animation_grabbed.connect(
+		func():
+			bag_pickup_sound.play()
+
+			# scuffed 'animation' of trash appearing when we grab it
+			await Events.viewmodel_animation_finished
+			
+			var t := create_tween().set_parallel()
+			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
+	)
+
+
 
 	Global.stamina = Stats.current.max_stamina
 	Global.sprint_lockout_timer = sprint_lockout_timer
@@ -91,6 +111,7 @@ func _physics_process(delta: float) -> void:
 	handle_footstep_sounds()
 
 	handle_ingredients_bag()
+	handle_customer_trash()
 	handle_floating_cursor()
 	move_and_slide()
 
@@ -274,6 +295,20 @@ func handle_ingredients_bag() -> void:
 	default_ingredients_bag_model.visible = not has_xl_bag_item
 	large_ingredients_bag_model.visible = has_xl_bag_item
 
+
+
+func handle_customer_trash() -> void:
+	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
+		Global.holding_trash = false
+		#print("heshel", customer_trash_scene)
+		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
+		Global.main_scene.add_child(trash_to_drop)
+		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
+		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
+		
+	#print("asdf", ingredients_bag_scene.instantiate().get_class())
+	#print(customer_trash_scene.instantiate().get_class())
+	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()

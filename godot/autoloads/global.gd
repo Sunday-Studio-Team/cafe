@@ -52,6 +52,7 @@ var unread_email_count: int
 var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer
 var holding_ingredients := false
+var holding_trash := false
 var day := 0
 var shift_length: float
 var shift_time_remaining: float
@@ -82,6 +83,7 @@ var employee_rating: float = 0:
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
+var total_trash: float
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
