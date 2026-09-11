@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://h3hjb018pudc" path="res://Assets/bonsai/bonsai.tscn" id="16_h1g2g"]
 [ext_resource type="PackedScene" uid="uid://dp2f5wjrstomy" path="res://Assets/gourd/gourd.tscn" id="17_upty0"]
 [ext_resource type="PackedScene" uid="uid://ctatvirne26k8" path="res://Assets/lamps/lamp_1&5_(1).tscn" id="19_upty0"]
+[ext_resource type="PackedScene" uid="uid://cp5tqvef3w4rg" path="res://Assets/desk_posters/luckycat_poster.tscn" id="22_iuv0i"]
 [ext_resource type="Texture2D" uid="uid://ftsy86sxb8oe" path="res://Assets/lamps/Lamp 1&5 (1)_Lamps_Base_color.png" id="22_xbtx5"]
 [ext_resource type="PackedScene" uid="uid://dsfxlutfu7q7j" path="res://Assets/cat/goldcat.tscn" id="23_xbtx5"]
 [ext_resource type="PackedScene" uid="uid://bq5ucnj6r0t13" path="res://Assets/new_desk/desk_updated.tscn" id="24_w7ld0"]
@@ -884,6 +885,9 @@ shadow_enabled = true
 omni_range = 0.535
 omni_attenuation = 0.718
 
+[node name="luckycat_poster" parent="Lamp 1&5 (1)" unique_id=1756407232 instance=ExtResource("22_iuv0i")]
+transform = Transform3D(0.10939017, -0.03333922, -0.6905957, 0.0052158935, 0.69920564, -0.03292868, 0.69138026, 0, 0.10951445, 1.9847326, 0.89197266, -1.0652211)
+
 [node name="Day0DeskProps" type="Node3D" parent="." unique_id=1163803940]
 
 [node name="Lamp 2" type="MeshInstance3D" parent="Day0DeskProps" unique_id=588937938]
@@ -957,7 +961,7 @@ omni_range = 0.5586623
 transform = Transform3D(1.2217953, 0, -1.9863026, 0, 2.3319912, 0, 1.9863026, 0, 1.2217953, -0.9967565, 1.3226638, -0.042195708)
 
 [node name="DeskUpdated" parent="." unique_id=984576301 instance=ExtResource("24_w7ld0")]
-transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, -0.1561724, 0, 0.6410717)
+transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, -0.14153469, 0, 0.6410717)
 
 [editable path="office desk"]
 [editable path="office desk/cranes"]
