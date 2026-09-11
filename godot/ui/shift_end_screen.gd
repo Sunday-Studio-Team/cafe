@@ -210,4 +210,4 @@ func grant_day_rewards(passed_day: bool) -> void:
 			SaveDataManager.save_data.days_bonus_objective_completed[current_day] = true
 	
 	Global.load_unlocked_items_from_save()
-	SaveDataManager.save_game()
+	SaveDataManager.save_game_to_file()
