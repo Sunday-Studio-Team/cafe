@@ -60,7 +60,10 @@
 [ext_resource type="Texture2D" uid="uid://ddh4l6ftfhj8x" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00020.png" id="32_dfd08"]
 [ext_resource type="Texture2D" uid="uid://cq3oo435sru7w" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00021.png" id="33_fxdwr"]
 [ext_resource type="Texture2D" uid="uid://b7x0y1tkp41op" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00022.png" id="34_ecwfn"]
+[ext_resource type="Resource" uid="uid://c2ykxot8dufp0" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_5.tres" id="34_pmrog"]
 [ext_resource type="Texture2D" uid="uid://b1g8tasf318gu" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00023.png" id="35_ip2l3"]
+[ext_resource type="Resource" uid="uid://cggkb6fxtvq0" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_6.tres" id="35_pbe4p"]
+[ext_resource type="Resource" uid="uid://uc83adcvfsc7" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_7.tres" id="36_8ldsf"]
 [ext_resource type="Texture2D" uid="uid://dgrik32iop5tx" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00024.png" id="36_s14wm"]
 [ext_resource type="Texture2D" uid="uid://br526hdr76nxr" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00025.png" id="37_q4gy1"]
 [ext_resource type="Texture2D" uid="uid://44s2uo8pn5r" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00026.png" id="38_cnw22"]
@@ -279,13 +282,15 @@
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
+[ext_resource type="Script" uid="uid://04mirww3ykmv" path="res://item_locker.gd" id="279_pmrog"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
 [ext_resource type="Resource" uid="uid://gxhvc87agu1d" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_3.tres" id="283_nc1xb"]
-[ext_resource type="Resource" uid="uid://ovjt3dqetv5g" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_4.tres" id="284_wm7i3"]
+[ext_resource type="Resource" uid="uid://dj3diiswyqqq1" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_4.tres" id="284_wm7i3"]
 [ext_resource type="Resource" uid="uid://cynhnaroqip77" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day2_01.tres" id="285_d1vw0"]
 [ext_resource type="Script" uid="uid://ce6dr8crdpidc" path="res://air_freshener.gd" id="285_d52hs"]
 [ext_resource type="Resource" uid="uid://cj7hsbtdqe6k7" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day2_02.tres" id="286_pmrog"]
+[ext_resource type="Resource" uid="uid://y5eykit7a1ce" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_8.tres" id="287_d1vw0"]
 [ext_resource type="Resource" uid="uid://dpvumypa7h6u6" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_1.tres" id="291_tfaor"]
 [ext_resource type="Resource" uid="uid://dopqh5dnm5yyg" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day2_03.tres" id="292_3rmuw"]
 [ext_resource type="Resource" uid="uid://8wrbl822cmmk" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day2_04.tres" id="293_j3ofb"]
@@ -766,7 +771,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wvmv7"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -777,7 +782,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_us00v"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -788,7 +793,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nc1xb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -799,7 +804,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wm7i3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -1868,7 +1873,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_wvmv7")
+texture = SubResource("ViewportTexture_pbe4p")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -1881,7 +1886,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_us00v")
+texture = SubResource("ViewportTexture_8ldsf")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -1898,7 +1903,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_nc1xb")
+texture = SubResource("ViewportTexture_f4177")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -1915,7 +1920,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_wm7i3")
+texture = SubResource("ViewportTexture_nckbc")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
@@ -2117,8 +2122,10 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="TutorialStartShiftVoiceLineLocation" parent="OpenCloseSign" unique_id=648088612 instance=ExtResource("12_4qxq8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108849764, 0.58758664, 0.95372295)
 
-[node name="ItemLocker" type="Node3D" parent="." unique_id=964435029]
+[node name="ItemLocker" type="Node3D" parent="." unique_id=964435029 node_paths=PackedStringArray("_interactable")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 13.1)
+script = ExtResource("279_pmrog")
+_interactable = NodePath("Interactable")
 
 [node name="Interactable" type="Area3D" parent="ItemLocker" unique_id=1174518073 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
@@ -2150,7 +2157,7 @@ LOCKER
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_voice_line_no_location_player")]
 script = ExtResource("118_1slqb")
-_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln")])
+_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct")])
 _voice_line_no_location_player = NodePath("../VoiceLineNoLocationPlayer")
 metadata/_custom_type_script = "uid://curf1bfdhuo16"
 
