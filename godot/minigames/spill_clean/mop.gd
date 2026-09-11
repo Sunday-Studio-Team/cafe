@@ -19,7 +19,6 @@ var is_dirty: bool = false
 
 
 func _ready() -> void:
-	used_scrubber = true
 	if bubbles == null:
 		push_error("Particle has not been assigned.")
 		set_process(false)
