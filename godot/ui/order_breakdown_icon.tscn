@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cf0g04or10m1k" path="res://order_breakdown_ui.gd" id="1_04na6"]
 [ext_resource type="StyleBox" uid="uid://ccm6ua1f8v82b" path="res://resources/drink_machine_ingredient_panel/default.tres" id="1_815hp"]
 [ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="3_1my0v"]
+[ext_resource type="StyleBox" uid="uid://bjvaaeicsl2g3" path="res://resources/drink_machine_ingredient_panel/correct.tres" id="3_g6nb6"]
+[ext_resource type="StyleBox" uid="uid://bgvk151spqjpt" path="res://resources/drink_machine_ingredient_panel/wrong.tres" id="4_i7qcv"]
 
 [node name="BreakdownElement" type="PanelContainer" unique_id=1739128889 node_paths=PackedStringArray("star_ui", "star_sign", "icon")]
 theme_override_styles/panel = ExtResource("1_815hp")
@@ -10,12 +12,13 @@ script = ExtResource("1_04na6")
 star_ui = NodePath("Star")
 star_sign = NodePath("Star/Label")
 icon = NodePath("TextureRect")
+style_array = Array[StyleBoxFlat]([ExtResource("1_815hp"), ExtResource("3_g6nb6"), ExtResource("4_i7qcv")])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=833850189]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 expand_mode = 3
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="Star" type="HBoxContainer" parent="." unique_id=800205138]
 visible = false
