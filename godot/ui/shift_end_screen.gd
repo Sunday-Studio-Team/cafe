@@ -216,26 +216,21 @@ func grant_day_rewards(passed_day: bool) -> void:
 		return 
 	
 	if passed_day:
-		var completion_unlocks: Array = Global.DAILY_COMPLETION_UNLOCKS.get(current_day, [])
-		Global.unlock_items(completion_unlocks)
-		
 		SaveDataManager.save_data.latest_unlocked_day = maxi(
 			SaveDataManager.save_data.latest_unlocked_day,
-			min(current_day + 1, Global.final_day)
+			current_day + 1
 		)
 		
 		var reached_bonus_rating: bool = (
-			Global.employee_rating >= Global.BONUS_RATING_THRESHOLD
+			Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 		)
 	
-		var bonus_already_recieved: bool = (
+		var bonus_already_received: bool = (
 			SaveDataManager.save_data.days_bonus_objective_completed.get(current_day, false)
 		)
 	
-		if reached_bonus_rating and not bonus_already_recieved:
-			var rating_unlocks: Array = Global.DAILY_RATING_UNLOCKS.get(current_day, [])
-			Global.unlock_items(rating_unlocks)
-		
+		if reached_bonus_rating and not bonus_already_received:
 			SaveDataManager.save_data.days_bonus_objective_completed[current_day] = true
 	
+	Global.load_unlocked_items_from_save()
 	SaveDataManager.save_game()

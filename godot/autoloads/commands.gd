@@ -110,6 +110,8 @@ func set_freecam_speed(speed: String) -> void:
 
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()
+	Global.unlocked_items.clear()
+	Global.owned_items.clear()
 	Console.print_line("save wiped")
 
 

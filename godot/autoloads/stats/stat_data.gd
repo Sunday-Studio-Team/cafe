@@ -60,3 +60,21 @@ var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
 var time_camera_disabled_after_sabotage := 30.0
+
+var daily_completion_item_unlocks: Dictionary[int, Array] = {
+	1: ["nice_spoon"],
+	2: ["barista_guide"],
+	3: ["air_freshener"],
+	4: ["super_scrubber", "teleporter"],
+	5: ["roller_skates"],
+}
+
+var daily_rating_item_unlocks: Dictionary[int, Array] = {
+	1: ["airhorn"],
+	2: ["hammer"],
+	3: ["whipped_cream"],
+	4: ["tippy_coin"],
+	5: ["exploding_bomb"],
+}
+
+var item_bonus_rating_threshold: float = 4.5

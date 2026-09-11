@@ -766,6 +766,10 @@ func _interactive_tutorial_shift() -> void:
 	var replaying_tutorial = SaveDataManager.save_data.finished_or_skipped_tutorial
 
 	SaveDataManager.save_data.finished_or_skipped_tutorial = true
+	SaveDataManager.save_data.latest_unlocked_day = maxi(
+		SaveDataManager.save_data.latest_unlocked_day,
+		1
+	)
 	SaveDataManager.save_game()
 
 	if replaying_tutorial:
