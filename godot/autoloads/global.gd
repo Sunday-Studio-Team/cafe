@@ -164,6 +164,7 @@ var voice_line_system: VoiceLineSystem
 var cafe_environment_res: Environment
 # Free-camera mode
 var free_camera_enabled: bool = false
+var item_loadout_menu: ItemLoadoutMenu
 
 
 func _ready() -> void:

@@ -1,3 +1,4 @@
+class_name ItemLoadoutMenu
 extends CanvasLayer
 
 @export var element_scene: PackedScene
@@ -19,23 +20,23 @@ extends CanvasLayer
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_active_indicator: Control
 
-var selected_available_item: Item = null
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	confirm_button.pressed.connect(confirm_and_hide)
+	Global.item_loadout_menu = self
+
+	confirm_button.pressed.connect(confirm_and_hide_menu)
 	locker_interactable.interacted.connect(func(): show())
 	visibility_changed.connect(
-		func():
-			if visible:
-				locker_open_sound.play()
-				var t := create_tween().set_parallel()
-				t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
-				t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
-				populate()
-			else:
-				locker_close_sound.play()
+			func():
+				if visible:
+					locker_open_sound.play()
+					var t := create_tween().set_parallel()
+					t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
+					t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
+					populate()
+				else:
+					locker_close_sound.play()
 	)
 
 
@@ -57,17 +58,18 @@ func populate() -> void:
 		if Global.owned_items.size() >= i + 1:
 			equipped_item_button.item = Global.owned_items[i]
 		equipped_item_button.pressed.connect(
-			func():
-				_on_equipped_slot_pressed(equipped_item_button)
+				func():
+					_on_equipped_slot_pressed(equipped_item_button)
 		)
 		equipped_item_button.is_equipped_slot = true
-		equipped_item_button.loadout_menu = self
 		equipped_items_container.add_child(equipped_item_button)
+
 
 func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed("pause") and Global.in_loadout_menu:
-		confirm_and_hide()
+		confirm_and_hide_menu()
 		get_viewport().set_input_as_handled()
+
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
@@ -76,13 +78,24 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
-	if item_button.button_pressed:
-		for button: Button in available_items_container.get_children():
-			if button != item_button:
-				button.button_pressed = false
-		selected_available_item = item_button.item
-	else:
-		selected_available_item = null
+	var item_to_equip: Item = item_button.item
+
+	item_button.queue_free()
+
+	var equipped_slot_to_fill: LoadoutMenuElement
+	var potential_slots: Array[Node] = equipped_items_container.get_children()
+	for slot: LoadoutMenuElement in potential_slots:
+		if slot.item == null:
+			equipped_slot_to_fill = slot
+			break
+
+	if equipped_slot_to_fill == null:
+		equipped_slot_to_fill = potential_slots.back()
+
+	if equipped_slot_to_fill.item != null:
+		add_available_item_button(equipped_slot_to_fill.item)
+
+	equipped_slot_to_fill.item = item_to_equip
 
 
 func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
@@ -90,26 +103,18 @@ func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 		add_available_item_button(slot.item)
 		slot.item = null
 
-	if selected_available_item:
-		for available_item_button: LoadoutMenuElement in available_items_container.get_children():
-			if available_item_button.item == selected_available_item:
-				available_item_button.queue_free()
-		slot.item = selected_available_item
-		selected_available_item = null
-
 
 func add_available_item_button(item: Item) -> void:
 	var available_item_button: LoadoutMenuElement = element_scene.instantiate()
 	available_item_button.item = item
-	available_item_button.toggle_mode = true
 	available_item_button.pressed.connect(
-		func():
-			_on_available_item_pressed(available_item_button)
+			func():
+				_on_available_item_pressed(available_item_button)
 	)
 	available_items_container.add_child(available_item_button)
 
 
-func confirm_and_hide() -> void:
+func confirm_and_hide_menu() -> void:
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
@@ -119,16 +124,14 @@ func confirm_and_hide() -> void:
 	# unapply existing items
 	for item in Global.owned_items:
 		item.unapply_stats()
-		
+
 	Global.owned_items.assign(equipped_items)
-	
+
 	# apply new items
 	for item in Global.owned_items:
 		item.apply_stats()
-	
-	Events.items_updated.emit()
 
-	selected_available_item = null
+	Events.items_updated.emit()
 
 	var t := create_tween()
 	t.tween_property(root, "offset_transform_scale", Vector2.ZERO, 0.1)
@@ -153,7 +156,8 @@ func handle_item_hover_tooltip() -> void:
 			if item.is_active_item:
 				item_hover_tooltip_passive_indicator.hide()
 				item_hover_tooltip_active_indicator.show()
-				item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[item.item_level]
+				item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[
+						item.item_level]
 			else:
 				item_hover_tooltip_passive_indicator.show()
 				item_hover_tooltip_active_indicator.hide()
@@ -163,19 +167,15 @@ func handle_item_hover_tooltip() -> void:
 			and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
 	)
 
-func move_item_to_equipped(item: Item, source: LoadoutMenuElement, target_slot: LoadoutMenuElement) -> void: 
-	if source == target_slot: 
-		return
-	
-	var previous_item: Item = target_slot.item   
+
+# called when we're dragging an element and we let go on top of another
+func drop_dragged_element(item: Item, source_slot: LoadoutMenuElement, target_slot: LoadoutMenuElement) -> void:
+	var previous_item_in_target_slot: Item = target_slot.item
 	target_slot.item = item
-	
-	if source.is_equipped_slot:
-		source.item=previous_item
-	else: 
-		if previous_item != null:
-			add_available_item_button(previous_item)
-		
-		source.queue_free()
-	
-	selected_available_item = null
+
+	if source_slot.is_equipped_slot:
+		source_slot.item = previous_item_in_target_slot
+	else:
+		if previous_item_in_target_slot != null:
+			add_available_item_button(previous_item_in_target_slot)
+		source_slot.queue_free()
