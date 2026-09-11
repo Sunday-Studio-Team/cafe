@@ -5,10 +5,12 @@ extends Control
 @export var shop_button: Button
 @export var email_app: PCApp
 @export var exit_button: Button
+@export var gui_3d: Main
+@export var screen_content_container: Control
 ## regular game hud
 @export var ui: CanvasLayer
 @export var irl_new_shop_items_indicator: Label3D
-@export var unread_label:Label
+@export var unread_label: Label
 @export var click_sound: AudioStreamPlayer
 var new_shop_items := true
 
@@ -17,35 +19,38 @@ func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
+	visibility_changed.connect(_on_visibility_changed)
 
 	# Wait until everything else is ready, as main needs to set per day stuff.
 	await get_tree().process_frame
 
 	set_unread_count()
-	
+
 	# connecting all click sounds to any buttons that show up in the pc
 	for button: Button in find_children("*", "Button"):
 		button.pressed.connect(
-			func():
-				if not button == exit_button:
-					click_sound.play()
+				func():
+					if not button == exit_button:
+						click_sound.play()
 		)
-	
+
 	email_app.email_viewer.email_shown.connect(
-		func(email_viewer):
-			if email_viewer.active_custom_email_view != null:
-				for button: TextureButton in email_viewer.active_custom_email_view.find_children("*", "TextureButton"):
-					button.pressed.connect(
-						func():
-							click_sound.play()
-					)
+			func(email_viewer):
+				if email_viewer.active_custom_email_view != null:
+					for button: TextureButton in email_viewer.active_custom_email_view.find_children("*",
+							"TextureButton"):
+						button.pressed.connect(
+								func():
+									click_sound.play()
+						)
 	)
-		
+
 	for email_app_list_item in email_app.email_app_list_items:
 		email_app_list_item.email_pressed.connect(
-			func(email_app_list_item):
-				click_sound.play()
+				func(email_app_list_item):
+					click_sound.play()
 		)
+
 
 func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed("pause") and Global.in_pc_ui:
@@ -59,12 +64,27 @@ func _unhandled_input(input_event: InputEvent) -> void:
 			exit()
 			get_viewport().set_input_as_handled()
 
+
+func _on_visibility_changed() -> void:
+	if visible:
+		screen_content_container.offset_transform_scale.y = 0
+		var t := create_tween()
+		t.tween_property(self, "modulate", Color.WHITE, 0.25).from(Color.TRANSPARENT)
+		t.tween_property(screen_content_container, "offset_transform_scale:y", 1, 0.2).from(0)
+
+
 func _process(_delta: float) -> void:
 	Global.in_pc_ui = visible
 
 
 func exit() -> void:
+	var t := create_tween()
+	t.tween_property(screen_content_container, "offset_transform_scale:y", 0, 0.2)
+	t.tween_property(self, "modulate", Color.TRANSPARENT, 0.25)
+	await t.finished
+	
 	email_app.hide()
+	gui_3d.exit_with_camera_tween()
 	hide()
 
 

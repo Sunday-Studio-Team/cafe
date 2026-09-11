@@ -92,8 +92,9 @@ var queued_customers: Array[Customer]
 var order: OrderData
 var waiting_for_response: bool = false
 var broken_down: bool = false
-var make_drink_locked: bool = false
+var tutorial_lock_remake_drink_button: bool = false
 var next_drink_forced_perfect: bool = false
+var tutorial_lock_accept_drink_button: bool = false
 var next_drink_forced_incorrect: bool = false
 var ingredients: int:
 	set(new_value):
@@ -111,6 +112,8 @@ var test_3: int = 0
 
 func _ready() -> void:
 	get_stats()
+	ordered_drink_icon.hide()
+	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
 
 	ingredients = Stats.current.machine_starting_ingredients
@@ -165,9 +168,8 @@ func _process(delta: float) -> void:
 	ingredient_coffeebar.position.y = 1125 - (1125 * (0.01 * ingredients_bar.value))
 	
 	progress_indicator.visible = not timer.is_stopped()
-	accept_button.disabled = not waiting_for_response
-	make_drink_button.disabled = not waiting_for_response
-	make_drink_button.disabled = ingredients < Stats.current.ingredients_per_order or make_drink_locked
+	accept_button.disabled = (not waiting_for_response) or tutorial_lock_accept_drink_button
+	make_drink_button.disabled = (not waiting_for_response) or (ingredients < Stats.current.ingredients_per_order) or tutorial_lock_remake_drink_button
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
 
@@ -192,10 +194,9 @@ func _process(delta: float) -> void:
 	spill_warning_container.visible = spill_on_floor
 
 	customer_wait_indicator.visible = (
-		#customer != null
-		#and not customer.timer.is_stopped()
-		#and not
-		not Global.day == 0
+		customer != null
+		and not customer.timer.is_stopped()
+		and not Global.day == 0
 		)
 
 	if customer:
@@ -281,26 +282,25 @@ func blast_player_from_using_machine() -> void:
 
 
 func set_order_action_buttons_available(button_case: String) -> void:
-	accept_button.disabled = true
-	make_drink_locked = true
+	tutorial_lock_accept_drink_button = true
+	tutorial_lock_remake_drink_button = true
 	refill_button.disabled = true
 
 	match button_case:
 		"accept":
-			accept_button.disabled = false
+			tutorial_lock_accept_drink_button = false
 		"make_drink":
-			make_drink_locked = false
+			tutorial_lock_remake_drink_button = false
 		"refill":
 			refill_button.disabled = false
 		"all":
-			accept_button.disabled = false
-			make_drink_button.disabled = false
+			tutorial_lock_accept_drink_button = false
+			tutorial_lock_remake_drink_button = false
 			refill_button.disabled = false
 		"none":
 			pass
 		_:
 			print("invalid button_case passed to set_order_action_buttons_available()")
-
 
 # called from inside spill() (so that itll still show if we trigger the spill
 # via a console command etc)
@@ -421,6 +421,8 @@ func machine_make_drink() -> void:
 
 	# NOTE: experiment: commented out for now to simplify ui
 	#customer_order_indicator.show()
+	ordered_drink_icon.show()
+	# ordered_drink_name_label.show()
 	order_breakdown.show()
 
 	timer.start()
@@ -713,9 +715,6 @@ func cancel_clean_spill() -> void:
 	Events.minigame_cancelled.disconnect(cancel_clean_spill)
 
 
-func float_to_price(number: float) -> String:
-	return ("$%.2f" % number).trim_suffix(".00")
-
 func accept_order(did_remake_drink: bool) -> void:
 	test_1 = 0
 	test_2 = 0
@@ -726,6 +725,8 @@ func accept_order(did_remake_drink: bool) -> void:
 	waiting_for_response = false
 	Events.order_approved.emit(customer)
 
+	ordered_drink_icon.hide()
+	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 
 	var rating_before_update: float = Global.employee_rating
@@ -757,7 +758,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		await get_tree().create_timer(0.8, false).timeout
 
 	Events.alert_posted.emit(
-		"+%s Drink sold!" % float_to_price(order.final_order_price),
+		"+%s Drink sold!" % Global.float_to_price(order.final_order_price),
 		UI.AlertIconType.MONEY,
 		4.0,
 		UI.ALERT_COLOR_MONEY
@@ -775,19 +776,6 @@ func accept_order(did_remake_drink: bool) -> void:
 	await get_tree().create_timer(1.5, false).timeout
 	customer.leave_store()
 	_set_customer(null)
-
-
-func reject_order() -> void:
-	gui_3d.exit_with_camera_tween()
-
-	# TODO: check if this can happen
-	if ingredients < Stats.current.ingredients_per_order:
-		return
-
-	waiting_for_response = false
-
-	machine_make_drink()
-
 
 func break_down() -> void:
 	if broken_down:

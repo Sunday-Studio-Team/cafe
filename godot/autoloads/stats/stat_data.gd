@@ -45,9 +45,9 @@ var first_help_desk_customer_entry_time: float = 8.0
 # Seconds between customers entering store, linearly scaling between min and max with rating. Maybe use curves later!
 @export var machine_customer_flow_rate_at_rating_curve_per_day: Dictionary[int, Curve]
 @export var help_desk_customer_flow_rate_at_rating_curve_per_day: Dictionary[int, Curve]
-var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
-var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
-var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 0.8, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 0.8, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 0.8, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
 var accept_incorrect_drink_star_rating_multiplier: float = 0.2
 var accept_incorrect_drink_star_rating_rounding: float = 0.1
 var machine_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.15, 2: 0.18, 3: 0.2, 4: 0.25, 5: 0.3, 0: 0.2 }
@@ -60,3 +60,21 @@ var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
 var time_camera_disabled_after_sabotage := 30.0
+
+var daily_completion_item_unlocks: Dictionary[int, Array] = {
+	1: ["nice_spoon"],
+	2: ["barista_guide"],
+	3: ["air_freshener"],
+	4: ["super_scrubber", "teleporter"],
+	5: ["roller_skates"],
+}
+
+var daily_rating_item_unlocks: Dictionary[int, Array] = {
+	1: ["air_horn"],
+	2: ["hammer"],
+	3: ["whipped_cream"],
+	4: ["tippy_coin"],
+	5: ["exploding_bomb"],
+}
+
+var item_bonus_rating_threshold: float = 4.5
