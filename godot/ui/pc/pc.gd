@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 func exit() -> void:
 	email_app.hide()
 	print("activity in pc exited")
-	CursorSwitch.pc_state_change.emit()
+	Events.pc_state_change.emit()
 	hide()
 
 
