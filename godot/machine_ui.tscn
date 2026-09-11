@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://bw3d6s3quy584" path="res://sprites/machine_ui/TIMER DIAL.png" id="7_b6qyr"]
 [ext_resource type="PackedScene" uid="uid://wy44aeyirhsb" path="res://ui/order_breakdown_icon.tscn" id="7_dw44w"]
 [ext_resource type="Texture2D" uid="uid://fpimoyth3i1t" path="res://sprites/machine_ui/active accept button.png" id="10_71all"]
+[ext_resource type="StyleBox" uid="uid://ccm6ua1f8v82b" path="res://resources/drink_machine_ingredient_panel/default.tres" id="10_lhji5"]
 [ext_resource type="Texture2D" uid="uid://brnb1ddwmgdug" path="res://sprites/machine_ui/inactive accept button.png" id="11_10yj4"]
+[ext_resource type="Texture2D" uid="uid://ce70lnqiyyncd" path="res://sprites/ingredient_icons/green tea.png" id="11_35dn5"]
 [ext_resource type="Texture2D" uid="uid://cdy6nhih3dsqh" path="res://sprites/machine_ui/active remake button.png" id="12_motd3"]
 [ext_resource type="Texture2D" uid="uid://beuytn1b6cojy" path="res://sprites/machine_ui/refill bar bg.png" id="13_u8yrf"]
 [ext_resource type="Texture2D" uid="uid://dyehef5xmtkfj" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0001.png" id="14_71all"]
@@ -178,6 +180,7 @@ alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1499052787]
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 3
 
 [node name="Control2" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1153203435]
@@ -293,6 +296,7 @@ stretch_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
+theme_override_constants/separation = 72
 
 [node name="OrderedInfo" type="VBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo" unique_id=1529670566]
 custom_maximum_size = Vector2(-1, 275)
@@ -311,6 +315,7 @@ horizontal_alignment = 1
 
 [node name="OrderedItem" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo" unique_id=1920408608]
 custom_minimum_size = Vector2(300, 300)
+custom_maximum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_apda1")
@@ -337,11 +342,14 @@ columns = 3
 layout_mode = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
+theme_override_styles/panel = ExtResource("10_lhji5")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Main" unique_id=1345079991]
-custom_minimum_size = Vector2(100, 100)
+[node name="MainTexture" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Main" unique_id=1345079991]
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_vertical = 4
+offset_transform_enabled = true
+texture = ExtResource("11_35dn5")
 expand_mode = 3
 stretch_mode = 4
 
@@ -349,9 +357,10 @@ stretch_mode = 4
 layout_mode = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
+theme_override_styles/panel = ExtResource("10_lhji5")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Liquid" unique_id=1279882551]
-custom_minimum_size = Vector2(100, 100)
+[node name="LiquidTexture" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Liquid" unique_id=1279882551]
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 4
@@ -360,9 +369,10 @@ stretch_mode = 4
 layout_mode = 2
 size_flags_vertical = 4
 offset_transform_enabled = true
+theme_override_styles/panel = ExtResource("10_lhji5")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Extra" unique_id=1400792246]
-custom_minimum_size = Vector2(100, 100)
+[node name="ExtraTexture" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo/OrderBreakdown/Extra" unique_id=1400792246]
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 4
@@ -401,6 +411,7 @@ horizontal_alignment = 1
 
 [node name="MadeItem" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo" unique_id=1104273258]
 custom_minimum_size = Vector2(300, 300)
+custom_maximum_size = Vector2(300, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_dw44w")
@@ -490,17 +501,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("17_267yc")
 
-[node name="IngredientsUI" type="VBoxContainer" parent="HBoxContainer" unique_id=328574774]
+[node name="IngredientsUI" type="VBoxContainer" parent="." unique_id=328574774]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
+offset_transform_enabled = true
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/IngredientsUI" unique_id=1820593901]
+[node name="MarginContainer" type="MarginContainer" parent="IngredientsUI" unique_id=1820593901]
 layout_mode = 2
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="ProgressBar" type="TextureProgressBar" parent="HBoxContainer/IngredientsUI/MarginContainer" unique_id=1064609888]
+[node name="ProgressBar" type="TextureProgressBar" parent="IngredientsUI/MarginContainer" unique_id=1064609888]
 visible = false
 clip_contents = true
 layout_mode = 2
@@ -513,14 +525,14 @@ texture_over = ExtResource("14_l6aen")
 texture_progress = ExtResource("14_71all")
 texture_progress_offset = Vector2(0, 1100)
 
-[node name="ProgressUnder" type="TextureRect" parent="HBoxContainer/IngredientsUI/MarginContainer" unique_id=699698]
+[node name="ProgressUnder" type="TextureRect" parent="IngredientsUI/MarginContainer" unique_id=699698]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("13_u8yrf")
 stretch_mode = 2
 
-[node name="ProgressCoffee" type="TextureRect" parent="HBoxContainer/IngredientsUI/MarginContainer/ProgressUnder" unique_id=563737941]
+[node name="ProgressCoffee" type="TextureRect" parent="IngredientsUI/MarginContainer/ProgressUnder" unique_id=563737941]
 layout_mode = 0
 offset_top = 1125.0
 offset_right = 138.0
@@ -529,13 +541,13 @@ size_flags_horizontal = 4
 texture = ExtResource("14_71all")
 stretch_mode = 2
 
-[node name="ProgressOver" type="TextureRect" parent="HBoxContainer/IngredientsUI/MarginContainer" unique_id=1307975669]
+[node name="ProgressOver" type="TextureRect" parent="IngredientsUI/MarginContainer" unique_id=1307975669]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("14_l6aen")
 stretch_mode = 2
 
-[node name="IngredientsMeter" type="VBoxContainer" parent="HBoxContainer/IngredientsUI" unique_id=704912867]
+[node name="IngredientsMeter" type="VBoxContainer" parent="IngredientsUI" unique_id=704912867]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -543,7 +555,7 @@ size_flags_stretch_ratio = 4.0
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.88, 0.88)
 
-[node name="Label" type="Label" parent="HBoxContainer/IngredientsUI/IngredientsMeter" unique_id=861789852]
+[node name="Label" type="Label" parent="IngredientsUI/IngredientsMeter" unique_id=861789852]
 visible = false
 layout_mode = 2
 size_flags_vertical = 10
@@ -552,7 +564,12 @@ theme_override_font_sizes/font_size = 64
 text = "🫘"
 horizontal_alignment = 1
 
-[node name="RefillButton" type="TextureButton" parent="HBoxContainer/IngredientsUI" unique_id=840989236]
+[node name="ButtonContainer" type="MarginContainer" parent="IngredientsUI" unique_id=574620783]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="RefillButton" type="TextureButton" parent="IngredientsUI/ButtonContainer" unique_id=840989236]
 layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_visual_only = false
