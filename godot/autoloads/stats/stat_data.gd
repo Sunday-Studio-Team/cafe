@@ -70,7 +70,7 @@ var daily_completion_item_unlocks: Dictionary[int, Array] = {
 }
 
 var daily_rating_item_unlocks: Dictionary[int, Array] = {
-	1: ["airhorn"],
+	1: ["air_horn"],
 	2: ["hammer"],
 	3: ["whipped_cream"],
 	4: ["tippy_coin"],
