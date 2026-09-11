@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://ddxmp0lhwhbq"]
+
+[ext_resource type="Texture2D" uid="uid://3wf47u58crsw" path="res://sprites/customers/comic guy.png" id="1_mv6rv"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_tebfb"]
+[ext_resource type="Texture2D" uid="uid://br5ltyibw2yx5" path="res://sprites/customers/comicbookgirl.png" id="3_mv6rv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xupmt"]
+atlas = ExtResource("1_mv6rv")
+region = Rect2(-2.819992, -28.46, 302.68, 302.68)
+
+[resource]
+script = ExtResource("2_tebfb")
+customer_name = "Comic Book Girl"
+sprite = ExtResource("3_mv6rv")
+email_crop_size_ratio = 0.805
+email_crop_center_ratio = Vector2(0.395, 0.12)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_xupmt")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"

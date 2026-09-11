@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://bt6rh77klapyi"]
+
+[ext_resource type="Texture2D" uid="uid://s35shapd3epm" path="res://sprites/customers/art professor.png" id="1_nib0b"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_kul58"]
+[ext_resource type="Texture2D" uid="uid://cxvcaj8rk7wx5" path="res://sprites/customers/typing_minigame_portraits/art_professor_angry.png" id="3_nib0b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kul58"]
+atlas = ExtResource("1_nib0b")
+region = Rect2(253.21997, 3.125, 575.5, 575.5)
+
+[resource]
+script = ExtResource("2_kul58")
+customer_name = "Anime Guy"
+sprite = ExtResource("1_nib0b")
+typing_minigame_portrait = ExtResource("3_nib0b")
+email_crop_size_ratio = 0.5
+email_crop_center_ratio = Vector2(0.47, 0.125)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_kul58")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"
