@@ -30,6 +30,7 @@ func _ready() -> void:
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]unlockday <day>[/i] unlocks all days up to the given day (and the corresponding items)
 - [i]freecam[/i] toggles free cam mode. Useful for cinematic shots!
 - [i]freecamspeed <number>[/i] Sets free cam speed. Default is 1.0.
 - [i]wipesave[/i] wipes save (will automatically load into tutorial etc. on next run)
@@ -62,6 +63,7 @@ func _ready() -> void:
 (or tell us if any of the existing ones seem bugged D:)[/color]",
 	)
 
+	Console.add_command("unlockday", unlock_day, 1)
 	Console.add_command("freecam", toggle_freecam)
 	Console.add_command("freecamspeed", set_freecam_speed, ["speed"])
 	Console.add_command("wipesave", wipe_save)
@@ -93,6 +95,14 @@ func _ready() -> void:
 			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func unlock_day(day: String) -> void:
+	var day_as_int = clampi(int(day), 1, 6)
+	SaveDataManager.save_data.latest_unlocked_day = day_as_int
+	Console.print_line("unlocked day %s" % day_as_int)
+	SaveDataManager.save_game_to_file()
+	Global.load_unlocked_items_from_save()
 
 
 func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
