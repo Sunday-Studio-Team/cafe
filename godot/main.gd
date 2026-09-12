@@ -841,7 +841,7 @@ func _interactive_tutorial_shift() -> void:
 			SaveDataManager.save_data.latest_unlocked_day,
 			1
 	)
-	SaveDataManager.save_game()
+	SaveDataManager.save_game_to_file()
 
 	if replaying_tutorial:
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
