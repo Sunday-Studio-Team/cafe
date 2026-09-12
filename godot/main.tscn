@@ -284,7 +284,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
-[ext_resource type="Script" uid="uid://04mirww3ykmv" path="res://item_locker.gd" id="279_pmrog"]
+[ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
 [ext_resource type="Resource" uid="uid://gxhvc87agu1d" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_3.tres" id="283_nc1xb"]
@@ -820,19 +820,6 @@ emission = Color(1, 0.29000002, 0.29000002, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
 size = Vector3(1, 0.2680664, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ovvye"]
-size = Vector3(1, 2, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_rb8fj"]
-size = Vector3(0.5, 2, 0.75)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
-metallic = 1.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_vn1tu"]
-material = SubResource("StandardMaterial3D_mjix0")
-size = Vector3(0.5, 2, 0.75)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xrivr"]
 top_radius = 0.11279297
@@ -2141,38 +2128,8 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="TutorialStartShiftVoiceLineLocation" parent="OpenCloseSign" unique_id=648088612 instance=ExtResource("12_4qxq8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108849764, 0.58758664, 0.95372295)
 
-[node name="ItemLocker" type="Node3D" parent="." unique_id=964435029 node_paths=PackedStringArray("_interactable")]
+[node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 13.1)
-script = ExtResource("279_pmrog")
-_interactable = NodePath("Interactable")
-
-[node name="Interactable" type="Area3D" parent="ItemLocker" unique_id=1174518073 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-script = ExtResource("229_c6fgv")
-interactable_id = &"use_item_locker"
-display_name = "Equip items"
-mesh = NodePath("../MeshInstance3D")
-metadata/_custom_type_script = "uid://cku66354bxktd"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemLocker/Interactable" unique_id=1963450806]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10000038, 1, 0)
-shape = SubResource("BoxShape3D_ovvye")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="ItemLocker/Interactable" unique_id=157207215]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemLocker/Interactable/StaticBody3D" unique_id=315111713]
-shape = SubResource("BoxShape3D_rb8fj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ItemLocker" unique_id=866068881]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.90000004, 0.10000038)
-mesh = SubResource("BoxMesh_vn1tu")
-
-[node name="Label3D" type="Label3D" parent="ItemLocker" unique_id=1732849312]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.39999998, 1.4, 0.09999943)
-text = "ITEM
-LOCKER
-:)"
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_voice_line_no_location_player")]
 script = ExtResource("118_1slqb")

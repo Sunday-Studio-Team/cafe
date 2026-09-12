@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cxry80o4obgt"]
+
+[ext_resource type="Script" uid="uid://04mirww3ykmv" path="res://item_locker.gd" id="1_g6nyj"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_d87dh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rb8fj"]
+size = Vector3(0.5, 2, 0.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ovvye"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
+metallic = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_mjix0")
+size = Vector3(0.5, 2, 0.75)
+
+[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("_interactable")]
+script = ExtResource("1_g6nyj")
+_interactable = NodePath("Interactable")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=983263623]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.90000004, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=386392793]
+shape = SubResource("BoxShape3D_rb8fj")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=1396942595 node_paths=PackedStringArray("mesh")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+script = ExtResource("2_d87dh")
+interactable_id = &"use_item_locker"
+display_name = "Equip items"
+mesh = NodePath("../MeshInstance3D")
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1939244675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10000038, 1, 0)
+shape = SubResource("BoxShape3D_ovvye")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1342847676]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.90000004, 0.10000038)
+mesh = SubResource("BoxMesh_vn1tu")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1598298646]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.39999998, 1.4, 0.09999943)
+text = "ITEM
+LOCKER
+:)"
