@@ -30,6 +30,7 @@ func _ready() -> void:
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]unlockall[/i] unlocks all days and items
 - [i]unlockday <day>[/i] unlocks all days up to the given day (and the corresponding items)
 - [i]freecam[/i] toggles free cam mode. Useful for cinematic shots!
 - [i]freecamspeed <number>[/i] Sets free cam speed. Default is 1.0.
@@ -89,12 +90,22 @@ func _ready() -> void:
 	for customer: CustomerSpriteData in Global.customer_sprites:
 		_customer_names.append("\"%s\"" % customer.customer_name)
 	Console.add_command_autocomplete_list("customer", _customer_names)
+	Console.add_command("unlockall", unlock_everything)
 
 	Events.main_scene_loaded.connect(
 		func():
 			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func unlock_everything() -> void:
+	unlock_day("6")
+	for i in SaveDataManager.save_data.days_bonus_objective_completed:
+		SaveDataManager.save_data.days_bonus_objective_completed[i] = true
+	SaveDataManager.save_game_to_file()
+	Global.load_unlocked_items_from_save()
+	print("unlocked all days and items")
 
 
 func unlock_day(day: String) -> void:
