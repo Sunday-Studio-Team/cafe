@@ -399,7 +399,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0,
 mesh = SubResource("QuadMesh_0ffxp")
 
 [node name="CustomerCameraRemoteTransform3D" type="RemoteTransform3D" parent="3DGui/Screen" unique_id=1736484949]
-transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.258819, 0, -0.25881904, 0.96592575, 0, 0.7298213, -1.4538481)
+transform = Transform3D(1, 0, 0, 0, 0.874342, 0.48531002, 0, -0.48531005, 0.87434196, 0, 0.5997931, -2.0216238)
 remote_path = NodePath("../SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="3DGui/Screen" unique_id=379095341]
@@ -438,8 +438,8 @@ _sub_viewport = NodePath("..")
 metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
 [node name="CustomerCamera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
-transform = Transform3D(0.90999997, 0, 0, 0, 0.87899244, 0.2355253, 0, -0.23552532, 0.8789924, 0, 1.876231, -0.56426746)
-fov = 90.0
+transform = Transform3D(0.90999997, 0, 0, 0, 0.7956512, 0.4416321, 0, -0.44163212, 0.79565114, 0, 1.7579052, -1.0809433)
+fov = 100.0
 
 [node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
 script = ExtResource("20_x45kg")
