@@ -50,8 +50,10 @@ var correct_input_index: int = 0
 var failures: int = 0
 @export var screenshake: AnimationPlayer
 @export var pulse: AnimationPlayer
-
+@export var judgement_scene:PackedScene
 @export var music: AudioStreamPlayer
+@export var judgement_spot: Control
+
 var tween:Tween
 
 var really_bad_beat_timer:float = 0
@@ -89,12 +91,13 @@ func check_input(direction: String) -> void:
 	if (correct_input_index >= valid_directions.size()): #error checking for index out of bound.
 		print('index out of bound caught in arrows.gd. error handled.')
 		return
-
+	var judgement_node:JudgementText = judgement_scene.instantiate()
+	judgement_spot.add_child(judgement_node)
 	if (valid_directions[correct_input_index] == direction):
-		if really_bad_beat_timer <= 0.05:
-			prompt_output.text = "Marvelous!"
+		if really_bad_beat_timer <= 0.07 or really_bad_beat_timer >= 0.5 - 0.07:
+			judgement_node.set_judgement(JudgementText.PERFECT)
 		else:
-			prompt_output.text = "Great!"
+			judgement_node.set_judgement(JudgementText.GREAT)
 		screenshake.play("nudge_%s" % direction)
 		var current_arrow = output_directions[valid_indices[correct_input_index]]
 		tween = create_tween()
@@ -114,6 +117,7 @@ func check_input(direction: String) -> void:
 		correct_sound.play()
 		currently_in_fail_pose = false
 	else:
+		judgement_node.set_judgement(JudgementText.MISS)
 		if tween: tween.kill()
 		if not currently_in_fail_pose:
 			screenshake.play("fail")

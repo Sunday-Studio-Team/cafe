@@ -52,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://clogd1sodp4me" path="res://minigames/arrows/assets/tippy/fail_again/tippy_dance_fail_again.png" id="47_syko7"]
 [ext_resource type="Texture2D" uid="uid://b385bvgi6r3ef" path="res://minigames/arrows/assets/arrowsBackground.png" id="47_yem23"]
 [ext_resource type="AudioStream" uid="uid://cj8wq0y415h2u" path="res://audio/ddr/ddr_correct_1.wav" id="48_hea8k"]
+[ext_resource type="PackedScene" uid="uid://btk3jm1x5velu" path="res://minigames/arrows/judgement_popup.tscn" id="48_yem23"]
 [ext_resource type="AudioStream" uid="uid://cwarhwibu7s60" path="res://audio/ddr/ddr_correct_2.wav" id="49_xql7b"]
 [ext_resource type="AudioStream" uid="uid://bynqhhvraxh3n" path="res://audio/ddr/ddr_correct_3.wav" id="50_08s2a"]
 [ext_resource type="AudioStream" uid="uid://sen2yqvqdqde" path="res://audio/ddr/ddr_correct_4.wav" id="51_ajpp4"]
@@ -459,7 +460,7 @@ _data = {
 &"pulse": SubResource("Animation_gaw3v")
 }
 
-[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound", "screenshake", "pulse", "music")]
+[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound", "screenshake", "pulse", "music", "judgement_spot")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -488,7 +489,9 @@ correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 screenshake = NodePath("ScreenShake")
 pulse = NodePath("Pulse")
+judgement_scene = ExtResource("48_yem23")
 music = NodePath("Music")
+judgement_spot = NodePath("JudgementSpot")
 
 [node name="Background" type="TextureRect" parent="." unique_id=247780111]
 layout_mode = 1
@@ -603,6 +606,14 @@ text = "This text should not appear in game"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="JudgementSpot" type="Control" parent="." unique_id=296409292]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 370.0
+offset_top = 275.0
+offset_right = 370.0
+offset_bottom = 275.0
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=1547774346]
 stream = SubResource("AudioStreamRandomizer_l8ovb")

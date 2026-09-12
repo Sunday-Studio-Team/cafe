@@ -1,5 +1,93 @@
 [gd_scene format=3 uid="uid://btk3jm1x5velu"]
 
-[node name="Control" type="Control" unique_id=681260762]
+[ext_resource type="Texture2D" uid="uid://b54i48f0mqvhn" path="res://minigames/arrows/assets/great.png" id="1_4ym0i"]
+[ext_resource type="Script" uid="uid://bkvnl8ngtkkhe" path="res://minigames/arrows/judgement_popup.gd" id="1_wvser"]
+[ext_resource type="Texture2D" uid="uid://berwdl5f5iyp5" path="res://minigames/arrows/assets/perfect.png" id="2_w5mmt"]
+[ext_resource type="Texture2D" uid="uid://ckbfc0i0ofp7d" path="res://minigames/arrows/assets/miss.png" id="4_7kaa4"]
+
+[sub_resource type="Animation" id="Animation_w5mmt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7kaa4"]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.15389302, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 64), Vector2(0, 80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_voawn"]
+_data = {
+&"RESET": SubResource("Animation_w5mmt"),
+&"disappear": SubResource("Animation_7kaa4")
+}
+
+[node name="Control" type="Control" unique_id=681260762 node_paths=PackedStringArray("texture_rect", "text_anim")]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_wvser")
+texture_rect = NodePath("TextureRect")
+text_anim = NodePath("TextAnim")
+judgment_textures = Array[Texture2D]([ExtResource("2_w5mmt"), ExtResource("1_4ym0i"), ExtResource("4_7kaa4")])
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2104214361]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -76.0
+offset_right = 240.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("1_4ym0i")
+
+[node name="TextAnim" type="AnimationPlayer" parent="." unique_id=149129096]
+libraries/ = SubResource("AnimationLibrary_voawn")
