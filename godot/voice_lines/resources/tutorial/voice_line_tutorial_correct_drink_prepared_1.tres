@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://cd0u8c46gcxmo"]
 
+[ext_resource type="AudioStream" uid="uid://cf4o0xl2ro4f1" path="res://audio/vo/tippy/jonas_tippy/jonas_voice_line_tutorial_incorrect_drink_prepared_6.wav" id="1_lsb2h"]
 [ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_7kmmt"]
 
 [resource]
 script = ExtResource("2_7kmmt")
 voice_line_id = "tutorial_correct_drink_prepared_1"
+audio_stream = ExtResource("1_lsb2h")
 subtitle_en = "As you can see, my drink-making capabilities are world class!"
 is_priority = true
 metadata/_custom_type_script = "uid://vdv5g0q45pri"
