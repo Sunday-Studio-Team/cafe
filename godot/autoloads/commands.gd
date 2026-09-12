@@ -177,6 +177,12 @@ func set_day(day: String) -> void:
 		Console.print_error("final day is day %s, can't set day higher than that :p" % final_day)
 		return
 
+	if int(day) > SaveDataManager.save_data.latest_unlocked_day:
+		Console.print_line(
+				"the day you're skipping to isn't unlocked yet, so we'll unlock it first for this save file"
+		)
+		unlock_day(day)
+
 	Global.day = int(day)
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 	Console.print_line("skipping to day %s" % day)
