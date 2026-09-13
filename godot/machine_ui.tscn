@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bh5bdrvebx5nl"]
 
 [ext_resource type="Texture2D" uid="uid://rd1bwnrprk6s" path="res://sprites/machine_ui/background.png" id="1_uuvgi"]
+[ext_resource type="Texture2D" uid="uid://c6y4ypjcynnjn" path="res://sprites/machine_ui/blank equal sign.png" id="2_2a0lh"]
 [ext_resource type="Texture2D" uid="uid://xmdnhsak8jg6" path="res://sprites/machine_ui/small screen with timer wo filter.png" id="2_motd3"]
-[ext_resource type="Texture2D" uid="uid://chn1ljeuebt3w" path="res://sprites/machine_ui/empty equal.png" id="2_u8yrf"]
 [ext_resource type="Texture2D" uid="uid://bea822q4swcq5" path="res://sprites/machine_ui/drink making timer.png" id="3_u8yrf"]
 [ext_resource type="Texture2D" uid="uid://b30p1hoj2cnj2" path="res://sprites/machine_ui/tippy_slippy.png" id="4_10yj4"]
 [ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="4_apda1"]
@@ -22,7 +22,13 @@
 [ext_resource type="Texture2D" uid="uid://cj6lcuv5eemuu" path="res://sprites/machine_ui/refill bar border.png" id="14_l6aen"]
 [ext_resource type="Texture2D" uid="uid://yolcpmmbputy" path="res://sprites/machine_ui/inactive remake button.png" id="15_lhji5"]
 [ext_resource type="Texture2D" uid="uid://dfrwyav62s37u" path="res://sprites/machine_ui/refill button.png" id="16_10yj4"]
-[ext_resource type="Texture2D" uid="uid://bnq53b7bbl163" path="res://sprites/machine_ui/empty small screen.png" id="17_267yc"]
+[ext_resource type="Texture2D" uid="uid://dlmmfhss0hdt5" path="res://sprites/machine_ui/HOVER active REMAKE button.png" id="17_qih3p"]
+[ext_resource type="Texture2D" uid="uid://dnmx2be2evyay" path="res://sprites/machine_ui/HOVER active accept button.png" id="20_si83i"]
+[ext_resource type="Texture2D" uid="uid://giqyo3arqg7b" path="res://sprites/machine_ui/result_icons/small screen rating.png" id="21_wknqb"]
+[ext_resource type="Texture2D" uid="uid://cm1wi2vxdm63u" path="res://sprites/machine_ui/result_icons/green three arrow.png" id="22_x6rj0"]
+[ext_resource type="Texture2D" uid="uid://b5us111sbyg0r" path="res://sprites/machine_ui/result_icons/green dollar.png" id="23_wb2t4"]
+[ext_resource type="Texture2D" uid="uid://dyrk2sdr15vln" path="res://sprites/machine_ui/result_icons/green on arrow.png" id="24_il7ix"]
+[ext_resource type="Texture2D" uid="uid://cm25043d6mjou" path="res://sprites/machine_ui/result_icons/green person.png" id="25_128tk"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -171,7 +177,8 @@ theme_override_constants/margin_right = 300
 
 [node name="EqualSign" type="TextureRect" parent="HBoxContainer/MarginContainer/MarginContainer" unique_id=1227391602]
 layout_mode = 2
-texture = ExtResource("2_u8yrf")
+size_flags_vertical = 0
+texture = ExtResource("2_2a0lh")
 stretch_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=1147466751]
@@ -478,6 +485,7 @@ size_flags_horizontal = 6
 offset_transform_visual_only = false
 texture_normal = ExtResource("12_motd3")
 texture_pressed = ExtResource("15_lhji5")
+texture_hover = ExtResource("17_qih3p")
 texture_disabled = ExtResource("15_lhji5")
 
 [node name="AcceptButton" type="TextureButton" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/Buttons" unique_id=261257475]
@@ -486,6 +494,7 @@ size_flags_horizontal = 6
 offset_transform_visual_only = false
 texture_normal = ExtResource("10_71all")
 texture_pressed = ExtResource("11_10yj4")
+texture_hover = ExtResource("20_si83i")
 texture_disabled = ExtResource("11_10yj4")
 
 [node name="MoneyRatingContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=633592481]
@@ -497,12 +506,114 @@ theme_override_constants/separation = 144
 [node name="RemakeCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=1932690171]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("17_267yc")
+texture = ExtResource("21_wknqb")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter" unique_id=1740309941]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 22
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer" unique_id=1456584024]
+layout_mode = 2
+
+[node name="RemakeMoneyIconContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer/HBoxContainer" unique_id=1845661540]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="RemakeMoneyArrow" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer/HBoxContainer/RemakeMoneyIconContainer" unique_id=858220065]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture = ExtResource("22_x6rj0")
+stretch_mode = 2
+
+[node name="RemakeMoneyIcon" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer/HBoxContainer/RemakeMoneyIconContainer" unique_id=1020334746]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("23_wb2t4")
+stretch_mode = 2
+
+[node name="RemakeRatingIconContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer/HBoxContainer" unique_id=531082743]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="RemakeRatingArrow" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer/HBoxContainer/RemakeRatingIconContainer" unique_id=1109825547]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("24_il7ix")
+stretch_mode = 2
+
+[node name="RemakeRatingIcon" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/RemakeCounter/MarginContainer/HBoxContainer/RemakeRatingIconContainer" unique_id=1054596909]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("25_128tk")
+stretch_mode = 2
 
 [node name="AcceptCounter" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer" unique_id=407529960]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("17_267yc")
+texture = ExtResource("21_wknqb")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter" unique_id=20950005]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 22
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer" unique_id=2142020723]
+layout_mode = 2
+
+[node name="AcceptMoneyIconContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer/HBoxContainer" unique_id=1991695501]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="AcceptMoneyArrow" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer/HBoxContainer/AcceptMoneyIconContainer" unique_id=2009618631]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+texture = ExtResource("22_x6rj0")
+stretch_mode = 2
+
+[node name="AcceptMoneyIcon" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer/HBoxContainer/AcceptMoneyIconContainer" unique_id=1347729498]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("23_wb2t4")
+stretch_mode = 2
+
+[node name="AcceptRatingIconContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer/HBoxContainer" unique_id=1980642954]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="AcceptRatingArrow" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer/HBoxContainer/AcceptRatingIconContainer" unique_id=1265829726]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("24_il7ix")
+stretch_mode = 2
+
+[node name="AcceptRatingIcon" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/VBoxContainer/MoneyRatingContainer/AcceptCounter/MarginContainer/HBoxContainer/AcceptRatingIconContainer" unique_id=2040011995]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("25_128tk")
+stretch_mode = 2
 
 [node name="IngredientsUI" type="VBoxContainer" parent="." unique_id=328574774]
 layout_mode = 2

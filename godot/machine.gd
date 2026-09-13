@@ -61,15 +61,33 @@ enum EqualStates {
 @export var idle_ing_bar_array:Array[Texture2D]
 @export var active_ing_bar_array:Array[Texture2D]
 
-@export var accept_counter: TextureRect
-@export var remake_counter: TextureRect
-@export var counter_sprites: Array[Texture2D]
-enum CounterStates {
-	Empty,
-	Neutral,
-	RatingUp,
-	RatingDown
+@export var arrows:Array[Texture]
+@export var icons:Array[Texture]
+enum Arrow {
+	UP1,
+	UP2,
+	UP3,
+	NEUTRAL,
+	DOWN1,
+	DOWN2,
+	DOWN3
 }
+
+enum Icon {
+	MONEY_GREEN,
+	PERSON_GREEN,
+	PERSON_YELLOW,
+	PERSON_RED
+}
+@export var remake_money_arrow: TextureRect
+@export var remake_money_icon: TextureRect
+@export var remake_rating_arrow: TextureRect
+@export var remake_rating_icon: TextureRect
+@export var accept_money_arrow: TextureRect
+@export var accept_money_icon: TextureRect
+@export var accept_rating_arrow: TextureRect
+@export var accept_rating_icon: TextureRect
+
 
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
@@ -115,7 +133,7 @@ func _ready() -> void:
 	ordered_drink_icon.hide()
 	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
-
+	reset_icons()
 	ingredients = Stats.current.machine_starting_ingredients
 	breakdown_timer.wait_time = 0.5
 
@@ -151,6 +169,16 @@ var current_ingbar_animation:Array[Texture2D]:
 var animation_index:int
 var animation_delay_timer:float = 0
 var animation_delay:float = 0.05
+
+func reset_icons():
+	remake_money_arrow.texture = null
+	remake_money_icon.texture = null
+	remake_rating_arrow.texture = null
+	remake_rating_icon.texture = null
+	accept_money_arrow.texture = null
+	accept_money_icon.texture = null
+	accept_rating_arrow.texture = null
+	accept_rating_icon.texture = null
 
 func update_animation():
 	animation_index += 1
@@ -588,40 +616,50 @@ func display_drink_score() -> void:
 	made_main_ingredient_panel.correct = order.main_correct
 	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-
+	
 	if order.made_drink.extra:
 		made_extra_panel.ingredient = order.made_drink.extra
 	else:
 		made_extra_panel.ingredient = null
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
-
-	var price_labels_text: String = "+%s" % Global.float_to_price(order.final_order_price)
-	#_price_label_remake.text = price_labels_text
-	#_price_label_accept.text = price_labels_text
-
+	
+	var correct_count: int = 0
+	var total_ingredients: int = 0
+	if order.ordered_drink.main_ingredient: total_ingredients += 1
+	if order.ordered_drink.liquid: total_ingredients += 1
+	if order.ordered_drink.extra: total_ingredients += 1
+	
+	if order.main_correct: correct_count += 1
+	if order.liquid_correct: correct_count += 1
+	if order.extra_correct: correct_count += 1
+	
+	var wrong_count: int = max(total_ingredients - correct_count,0)
+	
+	accept_money_arrow.texture = arrows[Arrow.UP2]
+	accept_money_icon.texture = icons[Icon.MONEY_GREEN]
+	remake_money_arrow.texture = arrows[Arrow.UP1]
+	remake_money_icon.texture = icons[Icon.MONEY_GREEN]
+	
 	if order.star_rating_gain_for_remake > 0.0:
-		#_rating_gain_on_remake_label.modulate = Color.GREEN
-		remake_counter.texture = counter_sprites[CounterStates.RatingUp]
-		var star_rating_gain_if_remade: float = order.star_rating_gain_for_remake
-		#_rating_gain_on_remake_label.text = "🙂 +%s⭐️" % star_rating_gain_if_remade
+		remake_money_arrow.texture = arrows[Arrow.UP1]
+		remake_rating_arrow.texture = arrows[Arrow.UP2]
+		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
 	elif order.star_rating_gain_for_remake == 0.0:
-		remake_counter.texture = counter_sprites[CounterStates.Neutral]
-		#_rating_gain_on_remake_label.modulate = Color.DARK_GRAY
-		var star_rating_gain_if_remade: float = 0
-		#_rating_gain_on_remake_label.text = "+%s⭐️" % star_rating_gain_if_remade
-
+		remake_rating_arrow.texture = arrows[Arrow.NEUTRAL]
+		remake_rating_icon.texture = icons[Icon.PERSON_YELLOW]
 	if order.star_rating_loss_if_accept > 0.0:
-		#_rating_loss_on_accept_label.modulate = Color.RED
-		accept_counter.texture = counter_sprites[CounterStates.RatingDown]
-		var star_rating_loss_if_accept: float = order.star_rating_loss_if_accept
-		#_rating_loss_on_accept_label.text = "☹️ -%s⭐" % star_rating_loss_if_accept
+		accept_rating_icon.texture = icons[Icon.PERSON_RED]
+		match wrong_count:
+			1:
+				accept_rating_arrow.texture = arrows[Arrow.DOWN1]
+			2:
+				accept_rating_arrow.texture = arrows[Arrow.DOWN2]
+			3:
+				accept_rating_arrow.texture = arrows[Arrow.DOWN3]
 	elif order.star_rating_loss_if_accept == 0.0:
-		#_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
-		accept_counter.texture = counter_sprites[CounterStates.Neutral]
-		var star_rating_loss_if_accept: float = 0
-		#_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
-
+		accept_rating_arrow.texture = arrows[Arrow.NEUTRAL]
+		accept_rating_icon.texture = icons[Icon.PERSON_YELLOW]
 
 func fix_machine(hammer: bool = false) -> void:
 	if hammer:
@@ -751,8 +789,7 @@ func accept_order(did_remake_drink: bool) -> void:
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
-	accept_counter.texture = counter_sprites[CounterStates.Empty]
-	remake_counter.texture = counter_sprites[CounterStates.Empty]
+	reset_icons()
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout
