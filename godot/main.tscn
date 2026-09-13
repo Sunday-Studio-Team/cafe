@@ -155,7 +155,6 @@
 [ext_resource type="Texture2D" uid="uid://bubl4syjmg78f" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00094.png" id="106_wdkeg"]
 [ext_resource type="Texture2D" uid="uid://dui7a6dx141yq" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00095.png" id="107_47htb"]
 [ext_resource type="Texture2D" uid="uid://cbhlphm8xjwl8" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00096.png" id="108_a6nd4"]
-[ext_resource type="SpriteFrames" uid="uid://cricks5lh0svk" path="res://sprites/sprite_frames_resources/hand_animations_sprite_frames.tres" id="108_asu84"]
 [ext_resource type="Texture2D" uid="uid://doiomp6jblhx5" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00097.png" id="109_xi5el"]
 [ext_resource type="Texture2D" uid="uid://d0kugvgnkb6s4" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00098.png" id="110_4eobe"]
 [ext_resource type="Texture2D" uid="uid://bm47b1ck1534h" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00099.png" id="111_6tt5h"]
@@ -164,7 +163,6 @@
 [ext_resource type="Texture2D" uid="uid://drv4upowgg4ih" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00102.png" id="114_4nm45"]
 [ext_resource type="Texture2D" uid="uid://c3wdbe1wprj8k" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00103.png" id="115_bpvq0"]
 [ext_resource type="Texture2D" uid="uid://blpuuv27aw552" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00104.png" id="116_afxfb"]
-[ext_resource type="Script" uid="uid://88l7tqjx13sk" path="res://ui/viewmodel.gd" id="116_w7qqv"]
 [ext_resource type="Texture2D" uid="uid://c1f8aum61b5m7" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00105.png" id="117_lm578"]
 [ext_resource type="Script" uid="uid://curf1bfdhuo16" path="res://voice_lines/subtitle_ui/voice_line_system.gd" id="118_1slqb"]
 [ext_resource type="Texture2D" uid="uid://bkelra1dwta8h" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/TIPPY_THUMBSUP_COLOUR_Final00106.png" id="118_4pmsh"]
@@ -230,7 +228,6 @@
 [ext_resource type="Resource" uid="uid://b8h86l07lesqc" path="res://voice_lines/resources/tutorial/voice_line_tutorial_get_ingredients_1.tres" id="148_ed5de"]
 [ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="149_4v3l6"]
 [ext_resource type="Resource" uid="uid://dmji4xlxijqpo" path="res://voice_lines/resources/tutorial/voice_line_tutorial_get_ingredients_2.tres" id="149_e31mi"]
-[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="150_0bk8h"]
 [ext_resource type="Resource" uid="uid://dxetjfhbw75vo" path="res://voice_lines/resources/tutorial/voice_line_tutorial_get_ingredients_3.tres" id="150_mq14a"]
 [ext_resource type="Resource" uid="uid://beb48vn2ou682" path="res://voice_lines/resources/tutorial/voice_line_tutorial_incorrect_drink_prepared_1.tres" id="151_yf6j3"]
 [ext_resource type="Resource" uid="uid://tu4fmqyq17w0" path="res://voice_lines/resources/tutorial/voice_line_tutorial_incorrect_drink_prepared_2.tres" id="152_e4ynb"]
@@ -245,6 +242,7 @@
 [ext_resource type="Resource" uid="uid://b2782tf1dfv6h" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_broke_3.tres" id="166_8tqy7"]
 [ext_resource type="Resource" uid="uid://dln4qg7evfupu" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_broke_4.tres" id="167_faa31"]
 [ext_resource type="Resource" uid="uid://bn3kisjinluy3" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_refilled_1.tres" id="168_acld0"]
+[ext_resource type="PackedScene" uid="uid://bwb5fieibej21" path="res://ui/viewmodel.tscn" id="168_f4177"]
 [ext_resource type="Resource" uid="uid://cmbigm4s683no" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_refilled_2.tres" id="169_kc3cm"]
 [ext_resource type="Resource" uid="uid://ddoqok74fs7kh" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_spilled_1.tres" id="170_utcts"]
 [ext_resource type="Resource" uid="uid://ddeg0hmln14xa" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_spilled_2.tres" id="171_2pm5r"]
@@ -776,7 +774,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_r4j87"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -787,7 +785,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_mwre3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -798,7 +796,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qwf4s"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_r4j87"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -809,7 +807,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_m5kst"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_mwre3"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -1708,17 +1706,7 @@ gui_3d = NodePath("../../../..")
 ui = NodePath("../../UI")
 irl_new_shop_items_indicator = NodePath("../../../../Desk/NewShopItemsPrompt")
 
-[node name="Viewmodel" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1737862047 node_paths=PackedStringArray("sprite")]
-process_mode = 3
-layer = 0
-script = ExtResource("116_w7qqv")
-sprite = NodePath("AnimatedSprite2D")
-hammer_item = ExtResource("150_0bk8h")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerUiSubViewportContainer/SubViewport/Viewmodel" unique_id=1708238979]
-position = Vector2(960, 540)
-scale = Vector2(3.43, 3.43)
-sprite_frames = ExtResource("108_asu84")
+[node name="Viewmodel" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=70422245 instance=ExtResource("168_f4177")]
 
 [node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable") instance=ExtResource("136_kmrid")]
 visible = false
@@ -1870,7 +1858,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_r4j87")
+texture = SubResource("ViewportTexture_nckbc")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -1883,7 +1871,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_mwre3")
+texture = SubResource("ViewportTexture_043in")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -1900,7 +1888,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_qwf4s")
+texture = SubResource("ViewportTexture_r4j87")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -1917,7 +1905,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_m5kst")
+texture = SubResource("ViewportTexture_mwre3")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.700687)

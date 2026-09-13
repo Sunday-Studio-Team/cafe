@@ -50,7 +50,10 @@ var reviews: Array[Review]
 var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
+# the customer being dealt with in the typing minigame
+# (NOT the customer at the front of the help desk queue)
 var active_help_desk_customer: Customer
+var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
 var holding_trash := false
 var day := 0

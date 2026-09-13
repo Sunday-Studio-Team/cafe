@@ -864,8 +864,6 @@ func _on_requested_use_active_item_machine():
 		return
 	
 	if customer:
-		#Putting new animation to test change
-		#TODO: Replace base animation with newest one
 		Events.play_viewmodel_animation.emit("airhorn_use_new")
 		airhorn_sound.play()
 		customer.leave_store()

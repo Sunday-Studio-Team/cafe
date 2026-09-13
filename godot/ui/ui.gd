@@ -444,6 +444,23 @@ func update_interactable_ui() -> void:
 				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
 			item_text.text = item_prompt
 
+		elif (
+			hovered_interactable.interactable_id == &"help_desk"
+			and owned_air_horn != null
+			and Global.customer_at_front_of_help_desk_queue != null
+		):
+			item_indicator.show()
+			var item_prompt: String = ""
+
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_prompt = "[%s] AIR HORN" % use_item_keybind
+			
+			if owned_air_horn.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt			
+
 		else:
 			item_indicator.hide()
 			item_text.text = ""

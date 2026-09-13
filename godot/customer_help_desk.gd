@@ -8,6 +8,8 @@ signal new_desk_customer_arrived
 @export var _end_of_customer_queue_marker: Marker3D
 @export var _help_desk_interactable: Interactable
 @export var bell_sound: AudioStreamPlayer3D
+## yeah this sound should probably be on the player or viewmodel instead of duplicated on machine and here whatever .
+@export var airhorn_sound: AudioStreamPlayer
 
 ## the customer at the front of the queue
 var _desk_customer: Customer
@@ -137,6 +139,26 @@ func _on_customer_wait_timed_out_during_minigame(timed_out_customer: Customer) -
 func _on_air_freshener_used(wait_extension: float) -> void:
 	if _desk_customer != null:
 		_desk_customer.extend_wait_patience_time(wait_extension)
-	
+
 	for customer: Customer in _queued_desk_customers:
 		customer.extend_wait_patience_time(wait_extension)
+
+
+func _on_active_item_used_on_desk() -> void:
+	var we_have_airhorn := false
+	var airhorn_item: Item
+
+	for item: Item in Global.owned_items:
+		if item.item_id == "air_horn":
+			airhorn_item = item
+			we_have_airhorn = true
+			break
+
+	if we_have_airhorn and _desk_customer != null:
+		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		airhorn_sound.play()
+		_desk_customer.timer.stop()
+		_desk_customer.leave_store()
+		_set_customer(null)
+
+		Global.put_active_item_on_cooldown(airhorn_item)
