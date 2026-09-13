@@ -187,6 +187,7 @@ func update_animation():
 	ingredient_coffeebar.texture = current_ingbar_animation[animation_index]
 func _process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
+	timer_dial.offset_transform_enabled = true
 	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
