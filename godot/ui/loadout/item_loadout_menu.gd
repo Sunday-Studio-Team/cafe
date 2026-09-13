@@ -47,6 +47,9 @@ func populate() -> void:
 	for child in equipped_items_container.get_children():
 		child.queue_free()
 
+	# if we dont wait here for the children to free, we'll get the wrong values when we try to rezise the grids 	
+	await get_tree().process_frame
+
 	for item in Global.unlocked_items:
 		if not Global.owned_items.has(item):
 			add_available_item_button(item)
@@ -61,6 +64,27 @@ func populate() -> void:
 		)
 		equipped_item_button.is_equipped_slot = true
 		equipped_items_container.add_child(equipped_item_button)
+	
+	resize_grids()
+
+
+func resize_grids() -> void:
+	var num_of_available_items := available_items_container.get_children().size()
+	if num_of_available_items % 3 == 0 and num_of_available_items < 9:
+		available_items_container.columns = 3
+	elif num_of_available_items % 4 == 0:
+		available_items_container.columns = 4
+	else:
+		available_items_container.columns = 5
+
+	var num_of_equipped_item_slots := equipped_items_container.get_children().size()
+	if num_of_equipped_item_slots % 3 == 0 and num_of_equipped_item_slots < 9:
+		equipped_items_container.columns = 3
+	elif num_of_available_items % 4 == 0:
+		equipped_items_container.columns = 4
+	else:
+		equipped_items_container.columns = 5
+	
 
 
 func _unhandled_input(input_event: InputEvent) -> void:
@@ -95,6 +119,8 @@ func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
 
 	equipped_slot_to_fill.item = item_to_equip
 
+	resize_grids()
+
 
 func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 	if slot.item:
@@ -110,6 +136,7 @@ func add_available_item_button(item: Item) -> void:
 				_on_available_item_pressed(available_item_button)
 	)
 	available_items_container.add_child(available_item_button)
+	resize_grids()
 
 
 func confirm_and_hide_menu() -> void:
