@@ -16,10 +16,11 @@
 [ext_resource type="AudioStream" uid="uid://c0ssp862cxccu" path="res://audio/footsteps/footstep_concrete_2.wav" id="10_urp6f"]
 [ext_resource type="AudioStream" uid="uid://dtm03unbkcgjm" path="res://audio/footsteps/footstep_concrete_3.wav" id="11_bwjto"]
 [ext_resource type="AudioStream" uid="uid://dob2v6d5xvpoa" path="res://audio/footsteps/footstep_concrete_4.wav" id="12_606se"]
+[ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="17_op7ga"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
-height = 1.7
+height = 1.7479492
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 random_pitch = 1.0594631
@@ -48,7 +49,7 @@ footstep_sfx_lockout_timer = NodePath("FootstepLockoutTimer")
 free_cam_visualizer = NodePath("FreeCamVisualizer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8760254, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
 
 [node name="CameraController" type="Node3D" parent="." unique_id=1520575227 node_paths=PackedStringArray("player_controller", "camera_effects")]
@@ -120,18 +121,25 @@ pitch_scale = 0.8
 max_polyphony = 2
 
 [node name="FreeCamVisualizer" type="Node3D" parent="." unique_id=1884043755]
-visible = false
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="FreeCamVisualizer" unique_id=1705248324]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8689002, 0)
+visible = false
 radius = 0.19
 height = 1.8
 sides = 16
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="FreeCamVisualizer" unique_id=415571206]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.3944696, -0.20395732)
+visible = false
 radius = 0.195
 height = 0.3564453
+
+[node name="SatoSprite3D" type="Sprite3D" parent="FreeCamVisualizer" unique_id=1161365465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8978745, 0)
+pixel_size = 0.00085
+billboard = 2
+texture = ExtResource("17_op7ga")
 
 [editable path="CameraController/Camera3D/trash_placehold"]
 [editable path="CameraController/Camera3D/ingredientbag"]
