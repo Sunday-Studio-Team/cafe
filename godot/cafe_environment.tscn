@@ -1088,8 +1088,9 @@ depth = 0.025
 radius = 0.28808594
 height = 0.8843384
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
-size = Vector3(1.9013672, 1.5020752, 0.90063477)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_13qdw"]
+radius = 0.32958984
+height = 0.842041
 
 [sub_resource type="BoxMesh" id="BoxMesh_xrivr"]
 size = Vector3(1, 2.0044556, 0.16113281)
@@ -1220,7 +1221,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701041, -0.00016215755, -0.99994683, 1.0260013e-07, 1, -0.00016214894, 0.99994683, -1.01539825e-08, 0.0005701041, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701036, -0.00016215755, -0.99994594, 1.0260004e-07, 1, -0.00016214879, 0.99994594, -1.01539825e-08, 0.0005701036, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2567,12 +2568,12 @@ spot_range = 3.1582818
 spot_angle = 15.000773
 
 [node name="CeilingFan" parent="BreakRoom/PCRoom" unique_id=338478717 instance=ExtResource("52_4nsdn")]
-transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 4.0263276, 1.1748112, 4.70228)
+transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 2.9282653, 1.1748112, 4.5939417)
 
 [node name="AreaLight3D6" type="AreaLight3D" parent="BreakRoom/PCRoom" unique_id=1315107717]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.8984554, 2.5166907, 4.756689)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.9466376, 2.5166907, 4.587144)
 light_color = Color(1, 0.9882353, 0.8392157, 1)
-light_energy = 3.392
+light_energy = 1.5
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 area_range = 6.686
@@ -2581,7 +2582,7 @@ area_size = Vector2(0.309, 0.309)
 [node name="AreaLight3D7" type="AreaLight3D" parent="BreakRoom/PCRoom" unique_id=1835539455]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 2.5555964, 2.8833585, 1.5551167)
 light_color = Color(1, 0.9882353, 0.8392157, 1)
-light_energy = 3.392
+light_energy = 1.5
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 area_range = 6.686
@@ -2600,62 +2601,45 @@ shadow_enabled = true
 spot_range = 3.1582818
 spot_angle = 27.502224
 
-[node name="StaticBody3D" type="StaticBody3D" parent="BreakRoom/WhiteboardRoom" unique_id=438809753]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3654125, 0, 9.78316)
+[node name="StoolStaticBody3D" type="StaticBody3D" parent="BreakRoom/WhiteboardRoom" unique_id=1398210172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00309, 0, 7.164138)
 metadata/_edit_group_ = true
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D" unique_id=1576038786]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D" unique_id=1834821462]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D/CSGCombiner3D" unique_id=362916182]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26041788, -0.056396484)
-size = Vector3(1.8964844, 0.5335083, 0.88720703)
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1371490766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1786089, 0.33862317, 0.15153408)
+radius = 0.059
+height = 0.55615234
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D/CSGCombiner3D" unique_id=702205701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555004, 0.25563145)
-size = Vector3(1.8964844, 0.87976074, 0.27392578)
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1546880058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15841913, 0.3376466, -0.16714764)
+radius = 0.059
+height = 0.5541992
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D/CSGCombiner3D" unique_id=1776653586]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8515625, 0.44346225, -0.06797695)
-size = Vector3(0.19335938, 0.65667725, 0.9211426)
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1332072376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.138978, 0.17659384, 0.12768841)
+radius = 0.059
+height = 0.80859375
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D/CSGCombiner3D" unique_id=1363209913]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.83269715, 0.44346225, -0.06797695)
-size = Vector3(0.19824219, 0.65667725, 0.9211426)
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1941598898]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14594078, 0.32568383, -0.12370396)
+radius = 0.059
+height = 0.53027344
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D" unique_id=830416964]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2510376, -0.056030273)
-shape = SubResource("BoxShape3D_13qdw")
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1763426231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5901636, 0)
+radius = 0.30273438
+height = 0.06335449
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="BreakRoom/WhiteboardRoom" unique_id=1276190434]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.632164, -2.3841858e-07, 7.9801044)
-metadata/_edit_group_ = true
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D2" unique_id=1615892083]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D2/CSGCombiner3D" unique_id=1383024245]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26041788, -0.056396484)
-size = Vector3(1.8964844, 0.5335083, 0.88720703)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D2/CSGCombiner3D" unique_id=2084136932]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555004, 0.25563145)
-size = Vector3(1.8964844, 0.87976074, 0.27392578)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D2/CSGCombiner3D" unique_id=212818785]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8515625, 0.44346225, -0.06797695)
-size = Vector3(0.19335938, 0.65667725, 0.9211426)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D2/CSGCombiner3D" unique_id=938458323]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.83269715, 0.44346225, -0.06797695)
-size = Vector3(0.19824219, 0.65667725, 0.9211426)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoom/WhiteboardRoom/StaticBody3D2" unique_id=1193437324]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2510376, -0.056030273)
-shape = SubResource("BoxShape3D_13qdw")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D" unique_id=38093871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36462402, 0)
+shape = SubResource("CapsuleShape3D_13qdw")
 
 [node name="AreaLight3D6" type="AreaLight3D" parent="BreakRoom/WhiteboardRoom" unique_id=1968181530]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.8984554, 2.8833585, 8.142403)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.3996153, 2.8833585, 7.758215)
 light_color = Color(1, 0.9882353, 0.8392157, 1)
-light_energy = 3.392
+light_energy = 1.5
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 area_range = 6.686
@@ -2673,7 +2657,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2413516, 0.07643747)
 text = "EMPLOYEE AREA"
 
 [node name="DoorwayPiece2" parent="BreakRoom" unique_id=812048467 instance=ExtResource("12_02vyw")]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, 1.6156106, 0, 10.531081)
+transform = Transform3D(-4.3711395e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711395e-08, 2.4152522, 0, 7.8184824)
 
 [node name="BackExitStaticBody3D" type="StaticBody3D" parent="BreakRoom/DoorwayPiece2" unique_id=1782773710]
 
@@ -2691,15 +2675,18 @@ text = "Employee
 Exit"
 
 [node name="DoorwayPiece3" parent="BreakRoom" unique_id=249842544 instance=ExtResource("12_02vyw")]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, 6.820655, 0, 6.566469)
-
-[node name="Label3D4" type="Label3D" parent="BreakRoom/DoorwayPiece3" unique_id=1887659481]
-transform = Transform3D(-1, 0, 8.7422784e-08, 0, 1, 0, -8.7422784e-08, 0, -1, 0, 2.2261646, -0.22320747)
-text = "BREAK ROOM"
+transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, 5.9750013, 0, 6.566469)
 
 [node name="Label3D5" type="Label3D" parent="BreakRoom/DoorwayPiece3" unique_id=1194182393]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -0.006506443, 2.2261646, 0.014211655)
 text = "OFFICE"
+
+[node name="DoorwayPiece5" parent="BreakRoom" unique_id=1566157989 instance=ExtResource("12_02vyw")]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 5.231385, 0, 5.54517)
+
+[node name="Label3D4" type="Label3D" parent="BreakRoom/DoorwayPiece5" unique_id=1361994851]
+transform = Transform3D(-1, 0, 8.7422784e-08, 0, 1, 0, -8.7422784e-08, 0, -1, 0, 2.2261646, -0.22320747)
+text = "BREAK ROOM"
 
 [node name="DoorwayPiece4" parent="BreakRoom" unique_id=1651639814 instance=ExtResource("12_02vyw")]
 transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, 1.9411283, 0, 3.262062)
@@ -2710,35 +2697,41 @@ transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 7, 0
 [node name="WallPieceShort3" parent="BreakRoom" unique_id=66188081 instance=ExtResource("10_f84oc")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 7.0225334, 0, 2.2448416)
 
+[node name="WallPieceShort7" parent="BreakRoom" unique_id=956754511 instance=ExtResource("10_f84oc")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 2.4277418, 0, 9.753045)
+
+[node name="WallPieceShort8" parent="BreakRoom" unique_id=2052146387 instance=ExtResource("10_f84oc")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 1.6153401, 0, 6.551322)
+
+[node name="WallPieceShort9" parent="BreakRoom" unique_id=1541711653 instance=ExtResource("10_f84oc")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 1.6001178, 0, 6.7279034)
+
+[node name="WallPieceShort4" parent="BreakRoom" unique_id=1507177545 instance=ExtResource("10_f84oc")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 5.026284, -4.7683716e-07, 4.0564413)
+
+[node name="WallPieceShort5" parent="BreakRoom" unique_id=955571267 instance=ExtResource("10_f84oc")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 6.1553373, -4.7683716e-07, 4.5787554)
+
+[node name="WallPieceShort6" parent="BreakRoom" unique_id=1576847904 instance=ExtResource("10_f84oc")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 7.0017796, -4.7683716e-07, 3.0628643)
+
 [node name="WallPieceLong" parent="BreakRoom" unique_id=1080951469 instance=ExtResource("8_qboto")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.1425935, 0, 4.557391)
-
-[node name="WallPieceLong11" parent="BreakRoom" unique_id=55820949 instance=ExtResource("8_qboto")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.5595503, 0, 12.494584)
-
-[node name="WallPieceLong15" parent="BreakRoom" unique_id=914985558 instance=ExtResource("8_qboto")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.64017594, 0, 8.38758)
 
 [node name="WallPieceLong6" parent="BreakRoom" unique_id=1974291954 instance=ExtResource("8_qboto")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.1710299, 0, 1.8999996)
 
-[node name="WallPieceLong2" parent="BreakRoom" unique_id=1825084311 instance=ExtResource("8_qboto")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.6046505, 0, 4)
-
 [node name="WallPieceLong9" parent="BreakRoom" unique_id=1222580126 instance=ExtResource("8_qboto")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.6079082, 0, 7.9960146)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.74253, 0, 5.0682554)
 
 [node name="WallPieceLong10" parent="BreakRoom" unique_id=1277067152 instance=ExtResource("8_qboto")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.6105156, 0, 11.944694)
-
-[node name="WallPieceLong4" parent="BreakRoom" unique_id=578059394 instance=ExtResource("8_qboto")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -1.04807, 0, 10.347259)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.745137, 0, 9.074567)
 
 [node name="WallPieceLong14" parent="BreakRoom" unique_id=1664984460 instance=ExtResource("8_qboto")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.614335, 0, 10.328683)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.7709718, 0, 9.030555)
 
 [node name="WallPieceLong16" parent="BreakRoom" unique_id=1848027035 instance=ExtResource("8_qboto")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.61045, 0, 10.328683)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.787262, 0, 9.030555)
 
 [node name="WallPieceLong7" parent="BreakRoom" unique_id=1606032471 instance=ExtResource("8_qboto")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.6198378, 0, 3.0663538)
@@ -2755,11 +2748,8 @@ text = "<--- EMPLOYEE AREA
 <--- CUSTOMER AREA"
 horizontal_alignment = 0
 
-[node name="WallPieceLong13" parent="BreakRoom" unique_id=1764029533 instance=ExtResource("8_qboto")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.611461, 0, 3.0663538)
-
 [node name="WallPieceLong8" parent="BreakRoom" unique_id=746599901 instance=ExtResource("8_qboto")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.833215, 0, 6.362506)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.2474978, 0, 6.362506)
 
 [node name="Label3D3" type="Label3D" parent="BreakRoom/WallPieceLong8" unique_id=33416220]
 transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0.8139758, 1.6646373, 0.011451721)
@@ -2770,7 +2760,7 @@ horizontal_alignment = 0
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.12679935, 0, 6.362506)
 
 [node name="Roof" type="MeshInstance3D" parent="BreakRoom" unique_id=1275070204]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2096624, 3, 5.1317854)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1581755, 3, 5.1317854)
 mesh = SubResource("BoxMesh_jofr6")
 
 [node name="Floor" type="MeshInstance3D" parent="BreakRoom" unique_id=2034756070]
