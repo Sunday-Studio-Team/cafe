@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cnuh7l4hi6fqx"]
+
+[ext_resource type="Script" uid="uid://bynw0mmtcus0n" path="res://voice_lines/voice_line_finder.gd" id="1_wpanq"]
+
+[node name="VoiceLineFinder" type="Node" unique_id=601814473]
+script = ExtResource("1_wpanq")
+voice_lines_folders = Array[String](["res://voice_lines/resources/contextual", "res://voice_lines/resources/tutorial"])
+text_to_search = "oh"
