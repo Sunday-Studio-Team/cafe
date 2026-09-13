@@ -1917,7 +1917,7 @@ transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0
 texture = SubResource("ViewportTexture_043in")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
-transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
+transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, -0.27913088, 1.2573626, 17.104637)
 
 [node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
 transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
@@ -1942,10 +1942,10 @@ wait_time = 20.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
-transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071067, 2.720034, 0, 15.268255)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -1.25, 0, 19.528)
 
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.4037077, -0.10281545, 14.137601)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.060954094, -0.10281545, 14.420577)
 
 [node name="PCCamera" type="Marker3D" parent="Desk" unique_id=319429800]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.1507349, 1, 0.16965067)
@@ -2129,7 +2129,7 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108849764, 0.58758664, 0.95372295)
 
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 13.1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.1202581, 0, 10.590218)
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_voice_line_no_location_player")]
 script = ExtResource("118_1slqb")
