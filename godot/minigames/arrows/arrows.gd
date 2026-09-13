@@ -86,6 +86,11 @@ func _input(event: InputEvent) -> void:
 
 var currently_in_fail_pose: bool = false
 
+##If we ever do steam achievements this should be one of them!![br]
+##This should remain true if you only get Perfects, and is set to false when you get a Great.
+##When you get a Miss, the whole thing resets anyways, so that doesn't matter.
+var perfect_full_combo: bool = true
+
 func check_input(direction: String) -> void:
 		
 	if (correct_input_index >= valid_directions.size()): #error checking for index out of bound.
@@ -97,6 +102,7 @@ func check_input(direction: String) -> void:
 		if really_bad_beat_timer <= 0.07 or really_bad_beat_timer >= 0.5 - 0.07:
 			judgement_node.set_judgement(JudgementText.PERFECT)
 		else:
+			perfect_full_combo = false
 			judgement_node.set_judgement(JudgementText.GREAT)
 		screenshake.play("nudge_%s" % direction)
 		var current_arrow = output_directions[valid_indices[correct_input_index]]
@@ -117,6 +123,7 @@ func check_input(direction: String) -> void:
 		correct_sound.play()
 		currently_in_fail_pose = false
 	else:
+		perfect_full_combo = true
 		judgement_node.set_judgement(JudgementText.MISS)
 		if tween: tween.kill()
 		if not currently_in_fail_pose:
@@ -257,4 +264,5 @@ func _start_minigame() -> void:
 
 func _end_minigame() -> void:
 	Events.minigame_end.emit()
+	print("Perfect Full Combo: %s" % perfect_full_combo)
 	print("End arrows minigame")

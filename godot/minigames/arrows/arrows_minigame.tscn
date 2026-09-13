@@ -62,6 +62,10 @@
 [ext_resource type="AudioStream" uid="uid://ec40um0fnntu" path="res://audio/ddr/ddr_wrong_2.wav" id="54_xkcvm"]
 [ext_resource type="AudioStream" uid="uid://ck1wv58oatpc7" path="res://audio/ddr/ddr_wrong_3.wav" id="55_7milp"]
 [ext_resource type="AudioStream" uid="uid://c4p1hn048u1d8" path="res://audio/ddr/ddr_music.wav" id="60_syko7"]
+[ext_resource type="Texture2D" uid="uid://ctfyhctr84a53" path="res://minigames/arrows/assets/dancemachine_lit_up/down.png" id="63_ms8o4"]
+[ext_resource type="Texture2D" uid="uid://cumqafdidypd" path="res://minigames/arrows/assets/dancemachine_lit_up/left.png" id="64_d8qde"]
+[ext_resource type="Texture2D" uid="uid://diamxbu33j0uh" path="res://minigames/arrows/assets/dancemachine_lit_up/right.png" id="65_1aqoy"]
+[ext_resource type="Texture2D" uid="uid://bgob7n0smlnqs" path="res://minigames/arrows/assets/dancemachine_lit_up/up.png" id="66_ahodb"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
 streams_count = 5
@@ -139,6 +143,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DanceMachine:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("42_l8ovb")]
+}
 
 [sub_resource type="Animation" id="Animation_d8qde"]
 resource_name = "nudge_up"
@@ -179,6 +195,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0, -0.7644542123735165, 0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DanceMachine:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("42_l8ovb")]
+}
 
 [sub_resource type="Animation" id="Animation_ftfms"]
 resource_name = "nudge_up"
@@ -190,7 +218,7 @@ tracks/0/path = NodePath("Background:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
@@ -202,8 +230,8 @@ tracks/1/path = NodePath("DanceMachine:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
-"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"times": PackedFloat32Array(0, 0.06666668, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.25, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 20), Vector2(0, 0)]
 }
@@ -214,8 +242,8 @@ tracks/2/path = NodePath("Tippy:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
-"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.7, 1),
 "update": 0,
 "values": [Vector2(0, -25), Vector2(0, 60), Vector2(0, -25)]
 }
@@ -226,15 +254,27 @@ tracks/3/path = NodePath("Tippy:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.033333335),
+"times": PackedFloat32Array(0.06666668),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("45_6h2j6")]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DanceMachine:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("42_l8ovb"), ExtResource("63_ms8o4")]
+}
 
 [sub_resource type="Animation" id="Animation_yem23"]
 resource_name = "nudge_up"
-length = 0.13499999999999998
+length = 0.135
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -242,7 +282,7 @@ tracks/0/path = NodePath("Background:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0)]
@@ -254,7 +294,7 @@ tracks/1/path = NodePath("DanceMachine:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666668, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-20, 0), Vector2(0, 0)]
@@ -266,8 +306,8 @@ tracks/2/path = NodePath("Tippy:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
-"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.7, 1),
 "update": 0,
 "values": [Vector2(0, -25), Vector2(-100, -25), Vector2(0, -25)]
 }
@@ -278,10 +318,22 @@ tracks/3/path = NodePath("Tippy:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.033333335),
+"times": PackedFloat32Array(0.06666668),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("42_syko7")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DanceMachine:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("42_l8ovb"), ExtResource("64_d8qde")]
 }
 
 [sub_resource type="Animation" id="Animation_6h2j6"]
@@ -294,7 +346,7 @@ tracks/0/path = NodePath("Background:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
@@ -306,7 +358,7 @@ tracks/1/path = NodePath("DanceMachine:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666668, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(20, 0), Vector2(0, 0)]
@@ -318,8 +370,8 @@ tracks/2/path = NodePath("Tippy:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
-"transitions": PackedFloat32Array(0.25, 0.25, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.7, 1),
 "update": 0,
 "values": [Vector2(0, -25), Vector2(100, -25), Vector2(0, -25)]
 }
@@ -330,10 +382,22 @@ tracks/3/path = NodePath("Tippy:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.03333333),
+"times": PackedFloat32Array(0.06666668),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("44_yem23")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DanceMachine:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("42_l8ovb"), ExtResource("65_1aqoy")]
 }
 
 [sub_resource type="Animation" id="Animation_8r575"]
@@ -346,7 +410,7 @@ tracks/0/path = NodePath("Background:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
@@ -358,7 +422,7 @@ tracks/1/path = NodePath("DanceMachine:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03333333, 0.13333334),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
 "transitions": PackedFloat32Array(0.25, 0.25000003, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -20), Vector2(0, 0)]
@@ -370,8 +434,8 @@ tracks/2/path = NodePath("Tippy:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.033333324, 0.13333334),
-"transitions": PackedFloat32Array(0.25, 0.25000003, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
+"transitions": PackedFloat32Array(0.25, 0.7, 1),
 "update": 0,
 "values": [Vector2(0, -25), Vector2(0, -90), Vector2(0, -25)]
 }
@@ -382,10 +446,22 @@ tracks/3/path = NodePath("Tippy:texture")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.033333335),
+"times": PackedFloat32Array(0.06666668),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("43_ftfms")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DanceMachine:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("42_l8ovb"), ExtResource("66_ahodb")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gaw3v"]
