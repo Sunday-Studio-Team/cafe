@@ -9,13 +9,17 @@ signal new_desk_customer_arrived
 @export var _help_desk_interactable: Interactable
 @export var bell_sound: AudioStreamPlayer3D
 
+## the customer at the front of the queue
 var _desk_customer: Customer
+## array of the other queueing customers (does not include the _desk_customer)
 var _queued_desk_customers: Array[Customer]
 
 
 func _ready() -> void:
 	_help_desk_interactable.visible = false
 	_help_desk_interactable.interacted.connect(_on_help_desk_interactable_interacted)
+	
+	Events.air_freshener_used.connect(_on_air_freshener_used)
 
 
 func _process(_delta: float) -> void:
@@ -128,3 +132,11 @@ func _on_customer_wait_timed_out_during_minigame(timed_out_customer: Customer) -
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 
 	Events.force_close_minigame.emit()
+
+
+func _on_air_freshener_used(wait_extension: float) -> void:
+	if _desk_customer != null:
+		_desk_customer.extend_wait_patience_time(wait_extension)
+	
+	for customer: Customer in _queued_desk_customers:
+		customer.extend_wait_patience_time(wait_extension)

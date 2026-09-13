@@ -43,6 +43,7 @@ signal player_left_office
 signal tippy_boss_kidnapped_player
 signal tippy_boss_released_player
 signal spawn_specific_customer(name: String, help_desk: String)
+signal air_freshener_used(customer_wait_duration_extension: float)
 # minigames
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled

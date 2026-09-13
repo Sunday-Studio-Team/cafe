@@ -71,6 +71,7 @@ func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
+	Events.air_freshener_used.connect(apply_used_air_freshener)
 	Global.main_scene = self
 	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
