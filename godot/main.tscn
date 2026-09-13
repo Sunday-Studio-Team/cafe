@@ -286,6 +286,7 @@
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
 [ext_resource type="Script" uid="uid://bdoq2pfqp2aiu" path="res://customer_area_music.gd" id="278_nckbc"]
 [ext_resource type="AudioStream" uid="uid://cdpq40xbmsibq" path="res://audio/music/customer_area_shift_ending_music.mp3" id="279_043in"]
+[ext_resource type="AudioStream" uid="uid://d0mq5yypnhim1" path="res://audio/music/customer_area_shift_ending_music_outro_loop.mp3" id="280_043in"]
 [ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
@@ -2113,12 +2114,13 @@ volume_db = -5.0
 [node name="CustomerAreaMusic" type="AudioStreamPlayer3D" parent="." unique_id=1077236725]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 2.4, -3.5)
 stream = ExtResource("182_suf1q")
-volume_db = -25.0
+volume_db = -20.0
 max_db = -5.0
 autoplay = true
 bus = &"DiegeticMusic"
 script = ExtResource("278_nckbc")
 shift_ending_music = ExtResource("279_043in")
+shift_ending_music_outro_loop = ExtResource("280_043in")
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
