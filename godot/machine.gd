@@ -346,7 +346,7 @@ func show_tutorial_go_clean_spill() -> void:
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
 	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
-		Global.in_tutorial_screen = true
+		Global.in_popup_tutorial_screen = true
 
 		#hide tablet so it's not in the way.
 		var tablet = get_parent().get_parent().find_child("Tablet")
@@ -374,7 +374,7 @@ func show_tutorial_go_clean_spill() -> void:
 
 		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen = false # re enable pause
+		Global.in_popup_tutorial_screen = false # re enable pause
 
 
 func _set_customer(new_customer: Customer) -> void:

@@ -1,32 +1,30 @@
 class_name TutorialManager
 extends Node
 
-signal finished_tutorial
+@export var _tutorial_popups_manager: TutorialPopupsManager
 
-@export var _tutorial_view_canvas_layer: CanvasLayer
-@export var _tutorial_view: TutorialView
+var is_in_skippable_cinematic: bool = false
 
+func _init() -> void:
+	Global.tutorial_manager = self
 
-func _ready() -> void:
-	_tutorial_view.tutorials_finished.connect(_on_tutorials_finished)
-
-
-func show_tutorial() -> void:
-	Global.in_tutorial_screen = true
-	_tutorial_view.open_tutorial()
-
-
-func show_intro_tutorial() -> void:
-	Global.in_tutorial_screen = true
-	_tutorial_view.show_tutorial_intro_screen()
-
-
-func show_machine_tutorial() -> void:
-	Global.in_tutorial_screen = true
-	_tutorial_view.show_machine_tutorial_screen()
-
-
-func _on_tutorials_finished(tutorial_view: TutorialView) -> void:
-	tutorial_view.hide_tutorial()
-	Global.in_tutorial_screen = false
-	finished_tutorial.emit()
+func start_day() -> void:
+	
+	if Global.day == 0:
+		# TEMPORARY WHILE REWORKING
+		Global.day = 1
+		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+		return
+		
+		# is_in_skippable_cinematic = true
+	elif Global.day == 1:
+		pass
+	elif Global.day == 2:
+		pass
+	elif Global.day == 3:
+		pass
+	elif Global.day == 4:
+		pass
+	elif Global.day == 5:
+		pass
+	

@@ -1221,7 +1221,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701036, -0.00016215755, -0.99994594, 1.0260004e-07, 1, -0.00016214879, 0.99994594, -1.01539825e-08, 0.0005701036, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010347, -0.00016215755, -0.9999457, 1.0260001e-07, 1, -0.00016214875, 0.9999457, -1.01539825e-08, 0.00057010347, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2595,7 +2595,7 @@ text = "OFFICE"
 [node name="WhiteboardRoom" type="Node3D" parent="BreakRoom" unique_id=1574933237]
 
 [node name="LockerSpotLight3D" type="SpotLight3D" parent="BreakRoom/WhiteboardRoom" unique_id=1995634105]
-transform = Transform3D(1, 0, 0, 0, 0.4865848, 0.8736334, 0, -0.8736334, 0.4865848, 3.3427968, 2.9195423, 8.065923)
+transform = Transform3D(-1, -7.637546e-08, 4.2538595e-08, 0, 0.4865848, 0.8736334, -8.742278e-08, 0.8736334, -0.4865848, 5.01888, 2.9195423, 7.758847)
 light_energy = 5.0
 shadow_enabled = true
 spot_range = 3.1582818
