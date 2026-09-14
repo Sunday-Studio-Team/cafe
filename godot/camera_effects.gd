@@ -29,7 +29,7 @@ var _shake_strength :float = 0.0
 var _step_timer : float = 0.0
 
 @export_group("Overlays")
-@export var caught_overlay: ColorRect
+@export var caught_overlay: TextureRect
 
 func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
@@ -110,5 +110,5 @@ func _on_game_options_changed(options_data: OptionsData) -> void:
 
 func flash_red():
 	var flash_red = create_tween()
-	flash_red.tween_property(caught_overlay, "color:a", 0.5, 0.2)
-	flash_red.chain().tween_property(caught_overlay, "color:a", 0.0, 1.0)				
+	flash_red.tween_property(caught_overlay, "modulate:a", 0.5, 0.2)
+	flash_red.tween_property(caught_overlay, "modulate:a", 0.0, 1.0)				

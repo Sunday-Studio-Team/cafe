@@ -3,6 +3,8 @@ extends CharacterBody3D
 
 const STRIDE_LENGTH := 1.25
 
+# this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
+@export var main_room_spawn_point: Marker3D
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
@@ -76,7 +78,6 @@ func _ready() -> void:
 				var t := create_tween().set_parallel()
 				t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
-	
 	customer_trash.visibility_changed.connect(
 		func():
 			if customer_trash.visible:
@@ -93,11 +94,19 @@ func _ready() -> void:
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
 
-
-
 	Global.stamina = Stats.current.max_stamina
 	Global.sprint_lockout_timer = sprint_lockout_timer
 	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
+
+	if OS.has_feature("spawn_in_main_room_instead_of_office"):
+		if (
+				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
+				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
+		):
+			return
+	
+		global_transform = main_room_spawn_point.global_transform
+		reset_physics_interpolation()
 
 
 func _physics_process(delta: float) -> void:
@@ -114,6 +123,12 @@ func _physics_process(delta: float) -> void:
 	handle_customer_trash()
 	handle_floating_cursor()
 	move_and_slide()
+
+
+func override_position_rotation(override_position: Vector3, override_rotation: Vector3) -> void:
+	global_position = override_position
+	global_rotation = override_rotation
+	camera.sync_rotation_from_player()
 
 
 func is_sprinting() -> bool:

@@ -151,7 +151,12 @@ func _ready() -> void:
 			else:
 				ingredients_warning_sound.play()
 				get_ingredients_prompt.show()
-				await get_tree().create_timer(0.5, false).timeout
+				get_ingredients_prompt.offset_transform_enabled = true
+				var t := create_tween()
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+				await t.finished
+				await get_tree().create_timer(1, false).timeout
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
@@ -900,7 +905,12 @@ func _on_remake_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ingredients_warning_sound.play()
 		no_ingredients_warning.show()
-		await get_tree().create_timer(0.5, false).timeout
+		no_ingredients_warning.offset_transform_enabled = true
+		var t := create_tween()
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+		await t.finished
+		await get_tree().create_timer(1, false).timeout
 		no_ingredients_warning.hide()
 
 	Events.minigame_end.connect(_on_remade_drink)
