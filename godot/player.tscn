@@ -22,6 +22,15 @@
 radius = 0.25
 height = 1.7479492
 
+[sub_resource type="Gradient" id="Gradient_op7ga"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2qj5i"]
+gradient = SubResource("Gradient_op7ga")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 random_pitch = 1.0594631
 random_volume_offset_db = 1.0
@@ -59,7 +68,7 @@ script = ExtResource("3_sweqy")
 player_controller = NodePath("..")
 camera_effects = NodePath("Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player")]
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player", "caught_overlay")]
 current = true
 fov = 90.0
 script = ExtResource("4_2hs0m")
@@ -69,6 +78,7 @@ bob_roll = 0.04
 bob_up = 0.01
 bob_frequency = 3.0
 max_shake = 0.2
+caught_overlay = NodePath("CaughtOverlay")
 
 [node name="trash_placehold" parent="CameraController/Camera3D" unique_id=318775450 instance=ExtResource("6_dw050")]
 visible = false
@@ -88,7 +98,7 @@ texture = ExtResource("7_606se")
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1160311051]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=773479280]
 transform = Transform3D(0.0832229, 0.030946786, -0.04600267, -0.017828582, 0.09350325, 0.030647755, 0.052498486, -0.01730433, 0.083333485, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="large_ingredient_bag" parent="CameraController/Camera3D/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
@@ -99,6 +109,14 @@ transform = Transform3D(8.502839, 1.9279655, 4.897417, -1.3210089, 9.788824, -1.
 stream = ExtResource("4_hqtel")
 volume_db = -20.0
 max_db = 0.0
+
+[node name="CaughtOverlay" type="TextureRect" parent="CameraController/Camera3D" unique_id=1076028012]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = SubResource("GradientTexture2D_2qj5i")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2008160580]
 

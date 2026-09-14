@@ -114,6 +114,7 @@ func _physics_process(_delta: float) -> void:
 							_player_slow_status_effect
 						)
 						caught_audio_stream_player_3d.play()
+						Global.player.flash_red()
 					player_in_spotlight = true
 					break
 
