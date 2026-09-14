@@ -12,7 +12,10 @@ signal new_desk_customer_arrived
 @export var airhorn_sound: AudioStreamPlayer
 
 ## the customer at the front of the queue
-var _desk_customer: Customer
+var _desk_customer: Customer:
+	set(new_customer):
+		Global.customer_at_front_of_help_desk_queue = new_customer
+		_desk_customer = new_customer
 ## array of the other queueing customers (does not include the _desk_customer)
 var _queued_desk_customers: Array[Customer]
 
@@ -20,6 +23,7 @@ var _queued_desk_customers: Array[Customer]
 func _ready() -> void:
 	_help_desk_interactable.visible = false
 	_help_desk_interactable.interacted.connect(_on_help_desk_interactable_interacted)
+	_help_desk_interactable.requested_use_active_item.connect(_on_active_item_used_on_desk)
 	
 	Events.air_freshener_used.connect(_on_air_freshener_used)
 
@@ -154,7 +158,7 @@ func _on_active_item_used_on_desk() -> void:
 			we_have_airhorn = true
 			break
 
-	if we_have_airhorn and _desk_customer != null:
+	if we_have_airhorn and _desk_customer != null and airhorn_item.can_be_used:
 		Events.play_viewmodel_animation.emit("airhorn_use_new")
 		airhorn_sound.play()
 		_desk_customer.timer.stop()
