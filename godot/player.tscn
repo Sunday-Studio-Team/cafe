@@ -58,7 +58,7 @@ script = ExtResource("3_sweqy")
 player_controller = NodePath("..")
 camera_effects = NodePath("Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player")]
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player", "caught_overlay")]
 current = true
 fov = 90.0
 script = ExtResource("4_2hs0m")
@@ -68,6 +68,7 @@ bob_roll = 0.04
 bob_up = 0.01
 bob_frequency = 3.0
 max_shake = 0.2
+caught_overlay = NodePath("CaughtOverlay")
 
 [node name="trash_placehold" parent="CameraController/Camera3D" unique_id=318775450 instance=ExtResource("6_dw050")]
 visible = false
