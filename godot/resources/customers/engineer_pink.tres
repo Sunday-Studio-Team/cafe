@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://cmarj07on5wks"]
+
+[ext_resource type="Texture2D" uid="uid://cv5rlh8adfsxx" path="res://sprites/customers/engineer pink.png" id="1_elvkj"]
+[ext_resource type="Texture2D" uid="uid://t8um4dfm4slu" path="res://sprites/customers/typing_minigame_portraits/engineer_pink_angry.png" id="1_ujjp0"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_aebfj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aebfj"]
+atlas = ExtResource("1_elvkj")
+region = Rect2(294.7375, -113.46251, 651.525, 651.525)
+
+[resource]
+script = ExtResource("2_aebfj")
+customer_name = "Pink Engineer"
+sprite = ExtResource("1_elvkj")
+typing_minigame_portrait = ExtResource("1_ujjp0")
+email_crop_size_ratio = 0.525
+email_crop_center_ratio = Vector2(0.5, 0.1)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_aebfj")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"

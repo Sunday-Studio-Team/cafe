@@ -30,6 +30,8 @@ func _ready() -> void:
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]unlockall[/i] unlocks all days and items
+- [i]unlockday <day>[/i] unlocks all days up to the given day (and the corresponding items)
 - [i]freecam[/i] toggles free cam mode. Useful for cinematic shots!
 - [i]freecamspeed <number>[/i] Sets free cam speed. Default is 1.0.
 - [i]wipesave[/i] wipes save (will automatically load into tutorial etc. on next run)
@@ -62,6 +64,7 @@ func _ready() -> void:
 (or tell us if any of the existing ones seem bugged D:)[/color]",
 	)
 
+	Console.add_command("unlockday", unlock_day, 1)
 	Console.add_command("freecam", toggle_freecam)
 	Console.add_command("freecamspeed", set_freecam_speed, ["speed"])
 	Console.add_command("wipesave", wipe_save)
@@ -87,12 +90,30 @@ func _ready() -> void:
 	for customer: CustomerSpriteData in Global.customer_sprites:
 		_customer_names.append("\"%s\"" % customer.customer_name)
 	Console.add_command_autocomplete_list("customer", _customer_names)
+	Console.add_command("unlockall", unlock_everything)
 
 	Events.main_scene_loaded.connect(
 		func():
 			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func unlock_everything() -> void:
+	unlock_day("6")
+	for i in SaveDataManager.save_data.days_bonus_objective_completed:
+		SaveDataManager.save_data.days_bonus_objective_completed[i] = true
+	SaveDataManager.save_game_to_file()
+	Global.load_unlocked_items_from_save()
+	print("unlocked all days and items")
+
+
+func unlock_day(day: String) -> void:
+	var day_as_int = clampi(int(day), 1, 6)
+	SaveDataManager.save_data.latest_unlocked_day = day_as_int
+	Console.print_line("unlocked day %s" % day_as_int)
+	SaveDataManager.save_game_to_file()
+	Global.load_unlocked_items_from_save()
 
 
 func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
@@ -117,6 +138,8 @@ func set_freecam_speed(speed: String) -> void:
 
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()
+	Global.unlocked_items.clear()
+	Global.owned_items.clear()
 	Console.print_line("save wiped")
 
 
@@ -164,6 +187,12 @@ func set_day(day: String) -> void:
 	if int(day) > final_day:
 		Console.print_error("final day is day %s, can't set day higher than that :p" % final_day)
 		return
+
+	if int(day) > SaveDataManager.save_data.latest_unlocked_day:
+		Console.print_line(
+				"the day you're skipping to isn't unlocked yet, so we'll unlock it first for this save file"
+		)
+		unlock_day(day)
 
 	Global.day = int(day)
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)

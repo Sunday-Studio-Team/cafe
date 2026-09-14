@@ -3,57 +3,25 @@ extends Sprite2D
 
 static var used_scrubber: bool = false
 
-@export var drag_area: Area2D
 @export var bubbles: GPUParticles2D
 @export var splash: AudioStreamPlayer2D
-@export var mope_range: CollisionShape2D
+@export var mop_range: CollisionShape2D
 @export var mop_texture: Texture
+@export var wet_mop_texture: Texture
 @export var dirty_mop_texture: Texture
 @export var scrubber_texture: Texture
+@export var wet_scrubber_texture: Texture
 @export var dirty_scrubber_texture: Texture
 
-var drag_collision: CollisionShape2D
-var drag_rectangle: RectangleShape2D
+
 var drag_offset: Vector2 = Vector2.ZERO
 var is_wet: bool = false
 var is_dirty: bool = false
-var normal_range = Vector2(644, 312)
-var normal_offset = Vector2(16.0, -503.0)
-var scrubber_range = Vector2(1348.0, 644.0)
-var scrubber_offset = Vector2(0.0, -865.0)
 
 @onready var mop_start_position: Vector2 = position
 
 
 func _ready() -> void:
-	if drag_area == null:
-		push_error("Drag Area has not been assigned.")
-		set_process(false)
-		set_process_input(false)
-		return
-
-	if drag_area.get_child_count() == 0:
-		push_error("Drag Area requires a CollisionShape2D child.")
-		set_process(false)
-		set_process_input(false)
-		return
-
-	drag_collision = (drag_area.get_child(0) as CollisionShape2D)
-
-	if drag_collision == null:
-		push_error("Drag Area's child must be a CollisionShape2D.")
-		set_process(false)
-		set_process_input(false)
-		return
-
-	drag_rectangle = (drag_collision.shape as RectangleShape2D)
-
-	if drag_rectangle == null:
-		push_error("The CollisionShape2D must use RectangleShape2D.")
-		set_process(false)
-		set_process_input(false)
-		return
-
 	if bubbles == null:
 		push_error("Particle has not been assigned.")
 		set_process(false)
@@ -66,8 +34,8 @@ func _ready() -> void:
 
 	if used_scrubber:
 		texture = scrubber_texture
-		mope_range.shape.size.x = scrubber_texture.get_width()
-		drag_collision.shape.size.x = scrubber_texture.get_width()
+		mop_range.shape.size.x = scrubber_texture.get_width()
+		
 		scale *= 1.5
 	else:
 		texture = mop_texture
@@ -87,7 +55,10 @@ func wet_mop() -> void:
 		splash.play()
 		is_wet = true
 		bubbles.emitting = true
-		create_tween().tween_property(self, "modulate", Color.WHITE, 1).from(Color.AQUA)
+		if used_scrubber:
+			texture = wet_scrubber_texture
+		else:
+			texture = wet_mop_texture
 
 
 func _input(event: InputEvent) -> void:

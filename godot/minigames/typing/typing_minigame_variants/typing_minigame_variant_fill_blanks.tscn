@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://ck7cugi1dyoru" path="res://sprites/typing_minigame/Top_lightning.png" id="7_36uwy"]
 [ext_resource type="Texture2D" uid="uid://432v4ybtihg4" path="res://sprites/typing_minigame/sato_avoid.png" id="7_m3euw"]
 [ext_resource type="Texture2D" uid="uid://j0ifa67ft0qy" path="res://sprites/typing_minigame/sato_numb.png" id="8_0qatm"]
-[ext_resource type="Texture2D" uid="uid://dfkb41pknhde4" path="res://sprites/customers/typing_minigame_portraits/nurse_angry.png" id="10_0qatm"]
 [ext_resource type="Texture2D" uid="uid://27dlmtm0sp81" path="res://sprites/typing_minigame/bottom_lightning.png" id="10_6668d"]
 [ext_resource type="Texture2D" uid="uid://w56cl8t24vpl" path="res://sprites/typing_minigame/speech_bubbles/Iwantarefund.png" id="10_d1drf"]
 [ext_resource type="Texture2D" uid="uid://c8sog3d01kv6q" path="res://sprites/typing_minigame/You.png" id="11_7gik8"]
@@ -19,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://d0wpqtljemans" path="res://sprites/typing_minigame/speech_bubbles/coffee_tastes_like_dirt.png" id="12_6u2o6"]
 [ext_resource type="Texture2D" uid="uid://bu5q1ojwylv3e" path="res://sprites/typing_minigame/tippygun.png" id="13_6u2o6"]
 [ext_resource type="Texture2D" uid="uid://ceiw0jbdiie6x" path="res://sprites/typing_minigame/typeurresponse.png" id="14_6668d"]
+[ext_resource type="Texture2D" uid="uid://fba64dxuxjx0" path="res://sprites/customers/typing_minigame_portraits/goth_angry.png" id="15_d1drf"]
 [ext_resource type="AudioStream" uid="uid://nhy7unwkdkqn" path="res://audio/typing/key_stroke.mp3" id="16_7gik8"]
 [ext_resource type="Texture2D" uid="uid://b8gubjw7hrq6s" path="res://sprites/typing_minigame/VS.png" id="16_yi8od"]
 [ext_resource type="AudioStream" uid="uid://kj12p2cjxdnu" path="res://audio/typing/key_stroke_fail.mp3" id="17_yi8od"]
@@ -48,7 +48,7 @@ sentence_container = NodePath("BottomSegment/DialogueContainer/TypingSectionCont
 sato_expressions = Array[Texture2D]([ExtResource("6_ody48"), ExtResource("7_m3euw"), ExtResource("8_0qatm")])
 speech_bubbles = Array[Texture2D]([ExtResource("12_6u2o6"), ExtResource("10_d1drf"), ExtResource("11_jqlkh")])
 sato_container = NodePath("VBoxContainer2/SatoContainer")
-customer_container = NodePath("VBoxContainer2/CustomerContainer")
+customer_container = NodePath("CustomerContainer/CustomerSprite")
 tippy_group = NodePath("BottomSegment/TippyGroup")
 dialogue_box = NodePath("BottomSegment/DialogueContainer")
 dialogue_box_texture = NodePath("BottomSegment/DialogueContainer/DialogueBox")
@@ -126,14 +126,37 @@ texture = ExtResource("8_0qatm")
 expand_mode = 1
 stretch_mode = 2
 
-[node name="CustomerContainer" type="TextureRect" parent="VBoxContainer2" unique_id=1620205873]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="CustomerContainer" type="Control" parent="." unique_id=814543066]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
 offset_transform_enabled = true
-offset_transform_position = Vector2(960, 80)
-texture = ExtResource("10_0qatm")
-expand_mode = 1
-stretch_mode = 2
+
+[node name="CustomerSprite" type="TextureRect" parent="CustomerContainer" unique_id=1620205873]
+custom_minimum_size = Vector2(0, 1080)
+custom_maximum_size = Vector2(-1, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -972.0
+offset_top = -540.0
+offset_right = 230.89502
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8060248, 0.8060248)
+size_flags_horizontal = 3
+texture = ExtResource("15_d1drf")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="BottomBorder" type="TextureRect" parent="." unique_id=939463067]
 layout_mode = 1

@@ -43,7 +43,7 @@ func _ready() -> void:
 	_fake_flip_page.visible = false
 	
 	# Load up the latest unlocked day
-	_day = SaveDataManager.save_data.latest_unlocked_day
+	_day = mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day)
 	_old_page_level_view.set_splash_day(_day)
 	
 	_update_prev_next_buttons()
@@ -73,14 +73,14 @@ func _update_prev_next_buttons() -> void:
 	else:
 		_previous_day_button.visible = true
 	
-	if _day == SaveDataManager.save_data.latest_unlocked_day:
+	if _day >= mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day):
 		_next_day_button.visible = false
 	else:
 		_next_day_button.visible = true
 
 func _on_previous_day_button_pressed() -> void:
 	var new_day: int = _day - 1
-	new_day = clampi(new_day, 0, SaveDataManager.save_data.latest_unlocked_day)
+	new_day = clampi(new_day, 0, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
 	if new_day == _day:
 		return
 	
@@ -112,7 +112,7 @@ func _on_previous_day_button_pressed() -> void:
 
 func _on_next_day_button_pressed() -> void:
 	var new_day: int = _day + 1
-	new_day = clampi(new_day, 0, SaveDataManager.save_data.latest_unlocked_day)
+	new_day = clampi(new_day, 0, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
 	if new_day == _day:
 		return
 	

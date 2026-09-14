@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="2_0bfbf"]
+[ext_resource type="Script" uid="uid://dh7or462kaeel" path="res://ui/game_cursor.gd" id="3_3ljbu"]
+[ext_resource type="Texture2D" uid="uid://dcgbb3g3jay21" path="res://cursor_idle.png" id="4_ou5wl"]
 [ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_xn3vj"]
+[ext_resource type="Texture2D" uid="uid://e14er0jdm5sr" path="res://cursor_click.png" id="5_4h17e"]
+[ext_resource type="Texture2D" uid="uid://bb7tcpxnbi5wr" path="res://Assets/PC/cursor A.png" id="6_ep8ot"]
+[ext_resource type="Texture2D" uid="uid://bsp3tm677ki3r" path="res://Assets/PC/cursor B.png" id="7_v5u4k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
 bg_color = Color(0.1, 0.1, 0.1, 1)
@@ -97,6 +102,14 @@ _main_scene_uid = &"uid://nm85k5woe7rt"
 _end_of_day_dialog_scene_uid = &"uid://b0nxtbhq1jhc6"
 _main_sub_resource_uids = Array[StringName]([&"uid://dtbfgptmi7ixs", &"uid://b7pu4gc2t3gv6", &"uid://dhmqo5yinqk0t", &"uid://bt2p6jpdaqe0w"])
 _cafe_environment_res = ExtResource("2_0bfbf")
+
+[node name="GameCursor" type="Node" parent="." unique_id=1530510095]
+script = ExtResource("3_3ljbu")
+normal_cursor = ExtResource("4_ou5wl")
+clicked_cursor = ExtResource("5_4h17e")
+normal_pc_cursor = ExtResource("6_ep8ot")
+clicked_pc_cursor = ExtResource("7_v5u4k")
+normal_cursor_hotspot = Vector2(5, 16)
 
 [node name="LoadingCanvas" type="CanvasLayer" parent="." unique_id=520928004]
 layer = 10

@@ -1,6 +1,7 @@
+class_name BreakRoomDoor
 extends Node3D
 
-@export var door_physics_body: PhysicsBody3D
+@export var physics_body: PhysicsBody3D
 @export var door_open_angle: float = 105.0
 @export var open_sound: AudioStreamPlayer3D
 @export var close_sound: AudioStreamPlayer3D
@@ -10,7 +11,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	open_door()
-	Events.tippy_boss_kidnapped_player.connect(close_door)
+	Events.shift_started.connect(close_door)
 	Events.tippy_boss_released_player.connect(
 		func():
 			open_door()
@@ -20,12 +21,22 @@ func _ready() -> void:
 
 func open_door() -> void:
 	open_sound.play()
-	create_tween().tween_property(door_physics_body, "rotation_degrees:y", door_open_angle, 0.5)
+	create_tween().tween_property(
+			physics_body,
+			"rotation_degrees:y",
+			door_open_angle,
+			0.5
+	)
 
 
 func close_door() -> void:
-	create_tween().tween_property(door_physics_body, "rotation_degrees:y", 0, 0.5)
 	close_sound.play()
+	create_tween().tween_property(
+			physics_body,
+			"rotation_degrees:y",
+			0,
+			0.5
+	)
 
 
 func close_door_when_player_exits():

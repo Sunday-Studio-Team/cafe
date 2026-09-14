@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bbjb7d0asfulw" path="res://sprites/customers/aiagent.png" id="1_ap3gj"]
 [ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_rjt8j"]
+[ext_resource type="Texture2D" uid="uid://detsg4f1e2gnp" path="res://sprites/customers/typing_minigame_portraits/aiagent_angry.png" id="3_qodfs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qodfs"]
 atlas = ExtResource("1_ap3gj")
@@ -11,6 +12,7 @@ region = Rect2(5.7299805, -61.22, 573, 573)
 script = ExtResource("1_rjt8j")
 customer_name = "AI Agent"
 sprite = ExtResource("1_ap3gj")
+typing_minigame_portrait = ExtResource("3_qodfs")
 email_crop_center_ratio = Vector2(0.51, 0.22)
 editor_email_cropped_sprite_preview = SubResource("AtlasTexture_qodfs")
 metadata/_custom_type_script = "uid://4lpdxu8g6048"
