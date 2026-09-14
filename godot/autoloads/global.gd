@@ -117,7 +117,7 @@ var in_main_menu := false
 var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_active_item_menu := false
-var in_tutorial_screen: bool = false
+var in_popup_tutorial_screen: bool = false
 var in_end_shift_early_menu := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
@@ -135,7 +135,7 @@ var in_ui: bool:
 				or in_level_select_menu
 				or in_end_screen
 				or in_active_item_menu
-				or in_tutorial_screen
+				or in_popup_tutorial_screen
 				or in_end_shift_early_menu
 				or in_dialog_screen
 				or in_options_menu
@@ -167,8 +167,15 @@ var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
-# Free-camera mode
-var free_camera_enabled: bool = false
+var tutorial_manager: TutorialManager
+
+enum CameraMode {
+	PLAYER,
+	CINEMATIC,
+	DEBUG_FREE_CAM
+}
+var camera_mode: CameraMode = CameraMode.PLAYER
+
 var item_loadout_menu: ItemLoadoutMenu
 
 

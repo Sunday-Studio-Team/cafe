@@ -16,7 +16,7 @@ func _ready() -> void:
 	sync_rotation_from_player()
 
 func _input(event: InputEvent) -> void:
-	if Global.free_camera_enabled or Global.in_ui:
+	if Global.camera_mode != Global.CameraMode.PLAYER or Global.in_ui:
 		return
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not Global.in_ui:
@@ -29,7 +29,7 @@ func _input(event: InputEvent) -> void:
 		mouse_input.y += -event.screen_relative.y * mouse_sensitivity / MOUSE_SENSITIVITY_SCALING_FACTOR
 
 func _physics_process(_delta: float) -> void:
-	if Global.free_camera_enabled or Global.in_ui:
+	if Global.camera_mode != Global.CameraMode.PLAYER or Global.in_ui:
 		return
 
 	input_rotation.x = clampf(input_rotation.x + mouse_input.y, deg_to_rad(-90), deg_to_rad(85))

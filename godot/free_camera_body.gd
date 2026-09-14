@@ -20,7 +20,7 @@ func _ready() -> void:
 	Events.free_cam_set_speed.connect(_on_free_cam_set_speed)
 
 func _input(event: InputEvent) -> void:
-	if !Global.free_camera_enabled:
+	if Global.camera_mode != Global.CameraMode.DEBUG_FREE_CAM:
 		return
 
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not Global.in_ui:
@@ -33,7 +33,7 @@ func _input(event: InputEvent) -> void:
 		_sprinting = false
 
 func _physics_process(delta: float) -> void:
-	if !Global.free_camera_enabled:
+	if Global.camera_mode != Global.CameraMode.DEBUG_FREE_CAM:
 		return
 
 	if Global.in_ui:
@@ -94,8 +94,8 @@ func _handle_movement(delta: float) -> void:
 	velocity = Vector3(new_velocity.x, new_velocity.y, new_velocity.z)
 
 func _on_free_cam_toggled() -> void:
-	Global.free_camera_enabled = !Global.free_camera_enabled
-	if Global.free_camera_enabled:
+	if Global.camera_mode == Global.CameraMode.PLAYER:
+		Global.camera_mode = Global.CameraMode.DEBUG_FREE_CAM
 		var player_camera: Camera3D = Global.player.camera.camera_effects
 		global_position = player_camera.global_position
 		global_rotation = Vector3(player_camera.global_rotation.x, Global.player.global_rotation.y, player_camera.global_rotation.z)
@@ -103,10 +103,13 @@ func _on_free_cam_toggled() -> void:
 		Global.player.free_cam_visualizer.visible = true
 		_player_ui_sub_viewport.view_count = 0
 		_camera3D.make_current()
-	else:
+	elif Global.camera_mode == Global.CameraMode.DEBUG_FREE_CAM:
+		Global.camera_mode = Global.CameraMode.PLAYER
 		Global.player.free_cam_visualizer.visible = false
 		_player_ui_sub_viewport.view_count = 1
 		Global.player.camera.camera_effects.make_current()
+	else:
+		return
 
 func _on_free_cam_set_speed(speed: float) -> void:
 	_fly_move_speed = _base_fly_move_speed * speed

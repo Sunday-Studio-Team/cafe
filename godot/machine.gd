@@ -99,6 +99,7 @@ enum Icon {
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export var airhorn_sound: AudioStreamPlayer
+@export var bomb_sound_player: AudioStreamPlayer3D
 # played when we try to refill while not holding ingredients
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
@@ -292,6 +293,7 @@ func check_for_stepping_in_spill() -> void:
 
 
 func blast_player_from_using_machine() -> void:
+	bomb_sound_player.play()
 	if gui_3d.player_using_me:
 		if Global.minigame_active:
 			Events.force_close_minigame.emit()
@@ -344,7 +346,7 @@ func show_tutorial_go_clean_spill() -> void:
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
 	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
-		Global.in_tutorial_screen = true
+		Global.in_popup_tutorial_screen = true
 
 		#hide tablet so it's not in the way.
 		var tablet = get_parent().get_parent().find_child("Tablet")
@@ -372,7 +374,7 @@ func show_tutorial_go_clean_spill() -> void:
 
 		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen = false # re enable pause
+		Global.in_popup_tutorial_screen = false # re enable pause
 
 
 func _set_customer(new_customer: Customer) -> void:
@@ -864,7 +866,7 @@ func _on_requested_use_active_item_machine():
 		return
 	
 	if customer:
-		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
 		customer.leave_store()
 		_set_customer(null)

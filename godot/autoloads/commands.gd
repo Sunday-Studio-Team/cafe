@@ -121,16 +121,19 @@ func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
 
 
 func vo_test() -> void:
-	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
+	Global.voice_line_system.play_voice_line("tippy_start_shift_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.CALLOUTS)
 
 
 func toggle_freecam() -> void:
+	if Global.camera_mode == Global.CameraMode.CINEMATIC:
+		Console.print_line("Currently in a cinematic, can't toggle.")
+		return
+	
 	Events.free_cam_toggled.emit()
-	if Global.free_camera_enabled:
+	if Global.camera_mode == Global.CameraMode.DEBUG_FREE_CAM:
 		Console.print_line("freecam enabled")
 	else:
 		Console.print_line("freecam disabled")
-
 
 func set_freecam_speed(speed: String) -> void:
 	Events.free_cam_set_speed.emit(float(speed))
