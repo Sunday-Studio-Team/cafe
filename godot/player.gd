@@ -115,6 +115,11 @@ func _physics_process(delta: float) -> void:
 	handle_floating_cursor()
 	move_and_slide()
 
+func override_position_rotation(override_position: Vector3, override_rotation: Vector3) -> void:
+	global_position = override_position
+	global_rotation = override_rotation
+	camera.sync_rotation_from_player()
+
 
 func is_sprinting() -> bool:
 	return _is_sprinting

@@ -1,7 +1,6 @@
 class_name SkipCinematicPrompt
 extends Control
 
-@export var _cinematic_bars: CinematicBars
 @export var _skip_progress_bar: TextureProgressBar
 
 @export var _prompt_fade_in_duration: float = 0.2
@@ -44,19 +43,15 @@ func _process(delta: float) -> void:
 		else:
 			_holding_skip = false
 
-		if Input.is_action_just_pressed("interact"):
-			_cinematic_bars.show_bars()
-		elif Input.is_action_just_released("interact"):
-			_cinematic_bars.hide_bars()
+		if _holding_skip:
+			_hold_progress_ratio += (1.0 / _hold_duration_to_skip) * delta
+		else:
+			_hold_progress_ratio -= (1.0 / _hold_drop_duration) * delta
+		_hold_progress_ratio = clamp(_hold_progress_ratio, 0.0, 1.0)
+		_update_progress_bar()
 	else:
 		visible = false
-	
-	if _holding_skip:
-		_hold_progress_ratio += (1.0 / _hold_duration_to_skip) * delta
-	else:
-		_hold_progress_ratio -= (1.0 / _hold_drop_duration) * delta
-	_hold_progress_ratio = clamp(_hold_progress_ratio, 0.0, 1.0)
-	_update_progress_bar()
+
 
 func _show_prompt() -> void:
 	if _prompt_visibility_timer.time_left == 0:
