@@ -129,7 +129,7 @@ func override_position_rotation(override_position: Vector3, override_rotation: V
 	global_position = override_position
 	global_rotation = override_rotation
 	camera.sync_rotation_from_player()
-
+	reset_physics_interpolation()
 
 func is_sprinting() -> bool:
 	return _is_sprinting

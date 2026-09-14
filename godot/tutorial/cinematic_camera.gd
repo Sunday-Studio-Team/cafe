@@ -19,11 +19,11 @@ func _ready() -> void:
 	_camera_target_fov = _camera_3d.fov
 
 func enable_cinematic_camera(fov_transition_duration: float = 1.0) -> void:
-	await create_tween().tween_property(_camera_3d, "fov", _camera_target_fov, fov_transition_duration).finished
 	Global.camera_mode = Global.CameraMode.CINEMATIC
 	Global.player.free_cam_visualizer.visible = true
 	_player_ui_sub_viewport_container.visible = false
 	_camera_3d.make_current()
+	await create_tween().tween_property(_camera_3d, "fov", _camera_target_fov, fov_transition_duration).finished
 
 func disable_cinematic_camera(fov_transition_duration: float = 1.0) -> void:
 	await create_tween().tween_property(_camera_3d, "fov", Global.player.camera.camera_effects.fov, fov_transition_duration).finished
