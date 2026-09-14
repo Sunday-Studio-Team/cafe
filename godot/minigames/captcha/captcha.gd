@@ -29,7 +29,6 @@ enum SatoTippyFight {
 
 @export var drink_name: RichTextLabel
 
-
 var ordered_drink: Drink
 var drink_customer: Customer
 
@@ -57,7 +56,6 @@ func _input(event: InputEvent) -> void:
 	# Brings the sprite back on any left click release
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
 		remade_drink_sprite.texture = ordered_drink.icon
-
 
 
 func populate_captcha() -> void:
@@ -90,10 +88,7 @@ func populate_order_reminder() -> void:
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
-	#drink_name.text = "You are making %s [color=gold]%s" % [
-		#ordered_drink.singular_article,
-		#ordered_drink.name,
-	#]
+
 	var drink_str:String = ""
 	var drink_arr:PackedStringArray = ordered_drink.name.to_upper().split(" ")
 	for i in range(drink_arr.size()):
@@ -102,12 +97,14 @@ func get_ordered_drink(drink: Drink) -> void:
 	drink_name.text = str("[font_size=100][color=black][center]%s" % drink_str).strip_edges()
 	remade_drink_sprite.texture = drink.icon
 
+
 func on_wrong():
 	sato.texture = sato_sprites[SatoTippyFight.Loss]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Loss]
 	await get_tree().create_timer(1).timeout
 	sato.texture = sato_sprites[SatoTippyFight.Neutral]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
+
 
 func on_right():
 	req_and_sel.visible = false
@@ -116,48 +113,56 @@ func on_right():
 	sato.texture = sato_sprites[SatoTippyFight.Win]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
 
+
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
-	var ordered_ingredients = [
+	var ordered_ingredients: Array[Variant] = [
 		ordered_drink.main_ingredient,
 		ordered_drink.liquid,
 		ordered_drink.extra,
 	]
-
-	for captcha_icon: IngredientIconHolder in captcha.get_children():
+	
+	# not counting duplicates, so we can select 3 coffee icons and if our drink has coffee that will add 1 to this count
+	var correct_ingredients_pressed: int = 0
+	
+	for ingredient: Ingredient in ordered_ingredients:
 		if (
-			(
-				ordered_ingredients.any(
-					func(x: Ingredient):
-						return x == captcha_icon.ingredient,
-				)
-				!= captcha_icon.button.button_pressed
-			)
-		):
-			on_wrong()
-			shake_panel()
-			wrong_sound.play()
-			return
-	on_right()
-	remade_drink_sprite.visible = true
-	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
-	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
-	correct_sound.play()
+			captcha.get_children().any(
+					func(slot: IngredientIconHolder):
+						if ingredient == null:
+							return true
+						return slot.ingredient == ingredient and slot.button.button_pressed
+		)
+	):
+			correct_ingredients_pressed += 1
+
+	var wrong_ingredients_pressed: int = 0
 
 	for slot: IngredientIconHolder in captcha.get_children():
-		var scale_tween := create_tween()
-		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE * 0.75, 0.025)
-		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE, 0.025)
+		if slot.button.button_pressed and not ordered_ingredients.has(slot.ingredient):
+			wrong_ingredients_pressed += 1
+			
+	if correct_ingredients_pressed == ordered_ingredients.size() and wrong_ingredients_pressed == 0:
+		on_right()
+		remade_drink_sprite.show()
+		correct_sound.play()
 
-		await get_tree().create_timer(0.025).timeout
+		for slot: IngredientIconHolder in captcha.get_children():
+			var scale_tween := create_tween()
+			scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE * 0.75, 0.025)
+			scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE, 0.025)
 
-		var colour_tween := create_tween()
-		colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
-		colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
+			await get_tree().create_timer(0.025).timeout
 
-	await correct_sound.finished
-	
-	#_end_minigame()
+			var colour_tween := create_tween()
+			colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
+			colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
+
+			await correct_sound.finished		
+	else:
+		on_wrong()
+		shake_panel()
+		wrong_sound.play()
 
 
 func shake_panel() -> void:
@@ -222,7 +227,6 @@ func _end_minigame() -> void:
 
 func _on_submit_button_pressed() -> void:
 	verify_captcha()
-
 
 
 func rescale_image_to_target_height(customer_sprite: TextureRect, target_height:int = 1024)->void:
