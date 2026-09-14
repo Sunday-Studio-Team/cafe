@@ -82,7 +82,7 @@ func start_day() -> void:
 			tween_to_player.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 2.0)
 		_cinematic_camera.cinematic_bars.hide_bars(2.0)
 		await _cinematic_camera.disable_cinematic_camera(2.0)
-
+		
 		is_in_skippable_cinematic = false
 		
 	elif Global.day == 1:
@@ -96,4 +96,3 @@ func start_day() -> void:
 		pass
 	elif Global.day == 5:
 		pass
-	
