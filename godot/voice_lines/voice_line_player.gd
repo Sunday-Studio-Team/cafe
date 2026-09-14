@@ -36,8 +36,8 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 				printerr("Unknown VoiceLinePlayer.PlayerMode.")
 				return
 	if _active_voice_line != null:
-		finished_playing_voice_line.emit(_active_voice_line)
 		_active_voice_line = null
+	finished_playing_voice_line.emit(voice_line)
 
 func get_playing_voice_line() -> VoiceLine:
 	return _active_voice_line
