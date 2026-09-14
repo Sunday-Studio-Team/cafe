@@ -866,7 +866,7 @@ func _on_requested_use_active_item_machine():
 		return
 	
 	if customer:
-		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
 		customer.leave_store()
 		_set_customer(null)

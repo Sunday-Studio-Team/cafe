@@ -159,7 +159,7 @@ func _on_active_item_used_on_desk() -> void:
 			break
 
 	if we_have_airhorn and _desk_customer != null and airhorn_item.can_be_used:
-		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
