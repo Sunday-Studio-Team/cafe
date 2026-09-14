@@ -2354,8 +2354,13 @@ one_shot = true
 wait_time = 20.0
 one_shot = true
 
-[node name="Player" parent="." unique_id=1025923804 instance=ExtResource("4_1bvp3")]
+[node name="Player" parent="." unique_id=1025923804 node_paths=PackedStringArray("main_room_spawn_point") instance=ExtResource("4_1bvp3")]
 transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.371138e-08, -0.29745173, 0, 18.028189)
+main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
+
+[node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+top_level = true
 
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.51916504, -0.10281545, 14.420577)
