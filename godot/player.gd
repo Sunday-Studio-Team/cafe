@@ -317,4 +317,7 @@ func _on_items_updated() -> void:
 	for item: Item in Global.owned_items:
 		if item.item_id == "nice_spoon":
 			has_xl_bag_item = true
-			break	
+			break
+
+func flash_red():
+	camera.camera_effects.flash_red()
