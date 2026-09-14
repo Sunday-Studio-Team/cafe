@@ -108,8 +108,9 @@ one_shot = true
 
 [node name="FakeSpotlight" type="SpotLight3D" parent="CameraAimerModel" unique_id=1348601655]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6273376)
-light_energy = 5.0
-light_volumetric_fog_energy = 10.0
+light_energy = 16.0
+light_indirect_energy = 8.0
+light_volumetric_fog_energy = 32.0
 spot_angle = 18.0
 spot_angle_attenuation = 2.0
 
@@ -166,7 +167,7 @@ radial_segments = 6
 [node name="SpotLight3D" type="SpotLight3D" parent="AimPath3D/AimPathFollow3D" unique_id=642379767]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.20921922, 0)
 light_energy = 5.0
-light_volumetric_fog_energy = 2.5
+light_volumetric_fog_energy = 16.0
 spot_range = 1.0891194
 spot_angle = 77.86068
 spot_angle_attenuation = 0.01
