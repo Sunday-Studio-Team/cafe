@@ -118,6 +118,7 @@
 [ext_resource type="Texture2D" uid="uid://db5c52m428s4r" path="res://sprites/machine_ui/result_icons/yellow person.png" id="99_bbbyo"]
 [ext_resource type="Texture2D" uid="uid://bk322mmxx8324" path="res://sprites/machine_ui/result_icons/red person.png" id="100_kuutf"]
 [ext_resource type="AudioStream" uid="uid://7q63nol4fikg" path="res://audio/refill_minigame/bomb/coffee_pot_bomb_3.wav" id="116_uaec5"]
+[ext_resource type="AudioStream" uid="uid://b7lnt4jt1gruo" path="res://audio/machine_jump_thud.wav" id="119_gtm4j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -246,8 +247,119 @@ random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("22_eujd3")
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound") groups=["machines"]]
+[sub_resource type="Animation" id="Animation_uaec5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gtm4j"]
+resource_name = "order_ready"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.53333336, 0.6, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.75, 1), Vector3(1, 1.1, 1), Vector3(1, 1.1, 1), Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.5, 0.5, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.25, 0.5, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.08726646), Vector3(0, 0, -0.08726646), Vector3(0, 0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MachineJumpAnimationThudSfx")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.73333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hp8kb"]
+_data = {
+&"RESET": SubResource("Animation_uaec5"),
+&"order_ready_jump": SubResource("Animation_gtm4j")
+}
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound") groups=["machines"]]
 script = ExtResource("1_6a4ke")
+animation_player = NodePath("AnimationPlayer")
 static_body = NodePath("StaticBody3D")
 gui_3d = NodePath("3DGui")
 timer = NodePath("Timer")
@@ -551,6 +663,14 @@ volume_db = -10.0
 
 [node name="HammerHitSound" type="AudioStreamPlayer" parent="." unique_id=471638354]
 stream = ExtResource("12_xurph")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1626847978]
+libraries/ = SubResource("AnimationLibrary_hp8kb")
+
+[node name="MachineJumpAnimationThudSfx" type="AudioStreamPlayer3D" parent="." unique_id=1236995159]
+stream = ExtResource("119_gtm4j")
+unit_size = 2.5
+pitch_scale = 0.5
 
 [editable path="3DGui/Screen/SubViewport/MachineUI"]
 [editable path="Model/EmployeeSide"]

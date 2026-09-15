@@ -11,6 +11,8 @@ const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
 const REFILL_MINIGAME := "Refill"
 
+# for making the machine jump when an order finishes, etc.
+@export var animation_player: AnimationPlayer
 @export var static_body: StaticBody3D
 @export var gui_3d: Machine3DGui
 @export var timer: Timer
@@ -500,6 +502,16 @@ func machine_make_drink() -> void:
 
 	hum_sound.stop()
 	done_sound.play()
+	# if we can interact with the machine while its jumping it does weird stuff
+	gui_3d.interactable.hide()
+	animation_player.play("order_ready_jump")
+	await animation_player.animation_finished
+	gui_3d.interactable.show()
+	
+	# if we're using the machine when it jumps, it loses our input for some reason
+	# so we force enter the gui again
+	if gui_3d.player_using_me:
+		gui_3d.enter_gui(false)
 
 	consume_ingredients()
 	
