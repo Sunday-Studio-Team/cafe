@@ -1493,10 +1493,12 @@ metadata/_custom_type_script = "uid://cr34y8fl145mu"
 script = ExtResource("123_8ldsf")
 _popup_tutorial_view = NodePath("../PlayerUiSubViewportContainer/SubViewport/TutorialCanvasLayer/TutorialView")
 
-[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_popups_manager", "_cinematic_camera", "_day_0_sato_front_door_position", "_day_0_employee_area_detector", "_day_0_locker_room_preview_position", "_day_0_break_room_area_detector", "_day_0_break_room_preview_position", "_day_0_back_exit_preview_position")]
+[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_popups_manager", "_cinematic_camera", "_tippy_callouts_manager", "_open_closed_sign", "_day_0_sato_front_door_position", "_day_0_employee_area_detector", "_day_0_locker_room_preview_position", "_day_0_break_room_area_detector", "_day_0_break_room_preview_position", "_day_0_back_exit_preview_position")]
 script = ExtResource("10_ed5de")
 _tutorial_popups_manager = NodePath("../TutorialPopupsManager")
 _cinematic_camera = NodePath("../CinematicCamera")
+_tippy_callouts_manager = NodePath("../TippyCalloutsManager")
+_open_closed_sign = NodePath("../OpenCloseSign")
 _day_0_sato_front_door_position = NodePath("../TutorialLocations/Day0SatoFrontDoorSpawnLocationRotation")
 _day_0_employee_area_detector = NodePath("../TutorialLocations/Day0EmployeeAreaPlayerDetectionArea")
 _day_0_locker_room_preview_position = NodePath("../TutorialLocations/Day0LockerRoomPreviewLocationRotation")

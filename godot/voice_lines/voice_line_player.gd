@@ -62,12 +62,12 @@ func get_playing_voice_line() -> VoiceLine:
 func interrupt_voice_line() -> void:
 	match _player_mode:
 		PlayerMode.NON_DIRECTIONAL:
-			if _audio_stream_player.playing and _active_voice_line != null:
+			if _active_voice_line != null:
 				finished_playing_voice_line.emit(_active_voice_line)
 				_audio_stream_player.stop()
 				_active_voice_line = null
 		PlayerMode.THREE_D:
-			if _audio_stream_player_3d.playing and _active_voice_line != null:
+			if _active_voice_line != null:
 				finished_playing_voice_line.emit(_active_voice_line)
 				_audio_stream_player_3d.stop()
 				_active_voice_line = null

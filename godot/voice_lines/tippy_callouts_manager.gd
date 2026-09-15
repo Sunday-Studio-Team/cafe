@@ -24,6 +24,8 @@ enum TippyLineType {
 @export var _tippy_line_array_clean_spill: Array[VoiceLine]
 @export var _tippy_line_array_accept_drink: Array[VoiceLine]
 
+var enable_tippy_callouts: bool = true
+
 var _last_voice_line_type: TippyLineType
 var _is_playing_line: bool
 var _tippy_voice_timer: Timer
@@ -65,6 +67,9 @@ func _ready() -> void:
 	)
 
 func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
+	if not enable_tippy_callouts:
+		return
+	
 	if _is_playing_line:
 		return
 	
