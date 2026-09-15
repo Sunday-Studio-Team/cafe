@@ -3,6 +3,7 @@ extends Control
 @export var prompt_output: RichTextLabel
 @export var arrows_container: HBoxContainer
 @export var tippy_image: TextureRect
+@export var background: TextureRect
 
 @export var blue_left: Array[Texture]
 @export var blue_up: Array[Texture]
@@ -50,16 +51,18 @@ var correct_input_index: int = 0
 var failures: int = 0
 @export var screenshake: AnimationPlayer
 @export var pulse: AnimationPlayer
-@export var judgement_scene:PackedScene
+@export var judgement_scene: PackedScene
 @export var music: AudioStreamPlayer
 @export var judgement_spot: Control
 
-var tween:Tween
+var tween: Tween
 
-var really_bad_beat_timer:float = 0
+var really_bad_beat_timer: float = 0
 
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
 func _ready() -> void:
+	print(arrows_container.size.x)
+	await get_tree().process_frame
 	set_up_arrow_container()
 	_start_minigame()
 
@@ -79,7 +82,10 @@ func _input(event: InputEvent) -> void:
 			check_input("right")
 		if event.is_action("move_back"):
 			check_input("down")
-
+	
+	print("valid directions")
+	print(valid_directions.size())
+	print(correct_input_index)
 	if correct_input_index >= valid_directions.size():
 		await correct_sound.finished
 		_end_minigame()
@@ -153,16 +159,26 @@ func add_arrow_to_output(
 		output_directions[output_index].texture = blue_textures[color_index]
 	else:
 		output_directions[output_index].texture = red_textures[color_index]
-
+	
 	# While adding to the output array, we keep track of the valid (output) indices here, in order to access the arrows that we make invisible
 	if correct_color == color:
 		valid_indices.append(output_index)
 
 
 func set_up_arrow_container() -> void:
+	# This needs to happen because the arrows_container can sometimes start with a size
+	# of zero (I believe due to godot optimization logic). So we need to force it to 
+	# update to the specified size
+	print(arrows_container.size.x)
+	arrows_container.update_minimum_size()
 	var container_horizontal_size: float = arrows_container.size.x
+	print(container_horizontal_size)
+	print(arrows_container.get_theme_constant("separation"))
+	print(max_arrow_count)
 	var required_separation_spaces: float = arrows_container.get_theme_constant("separation") * max_arrow_count
+	print(required_separation_spaces)
 	var min_arrow_size: float = (container_horizontal_size - required_separation_spaces) / (max_arrow_count)
+	print(min_arrow_size)
 	for arrow in max_arrow_count:
 		var arrow_rect = TextureRect.new()
 		arrow_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
