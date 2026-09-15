@@ -1,106 +1,21 @@
 [gd_scene format=3 uid="uid://dtbylsafb51vh"]
 
 [ext_resource type="Script" uid="uid://m8ecoktyd6it" path="res://voice_lines/voice_line_player.gd" id="1_04577"]
-[ext_resource type="PackedScene" uid="uid://p0cwommaaugb" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker.glb" id="2_lfc03"]
+[ext_resource type="PackedScene" uid="uid://st3nonrdbrrv" path="res://models/tippy_loudspeaker_model.tscn" id="2_lfc03"]
 
-[sub_resource type="Curve" id="Curve_3nopi"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8013698, 0.88888884), -0.489113, -0.489113, 0, 0, Vector2(0.95205474, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_lfc03"]
-curve = SubResource("Curve_3nopi")
-
-[sub_resource type="Curve" id="Curve_8m0nf"]
-_limits = [0.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 3.9622645), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_50gvf"]
-curve = SubResource("Curve_8m0nf")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j2xdn"]
-use_rotation_3d = true
-rotation_3d_min = Vector3(90, 0, 0)
-rotation_3d_max = Vector3(90, 0, 0)
-direction = Vector3(0, 0, 1)
-spread = 0.0
-initial_velocity_min = 1.0
-initial_velocity_max = 1.0
-gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_50gvf")
-color = Color(1, 1, 0.03529412, 1)
-alpha_curve = SubResource("CurveTexture_lfc03")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mnk0"]
-transparency = 1
-vertex_color_use_as_albedo = true
-
-[sub_resource type="TorusMesh" id="TorusMesh_0ffxp"]
-material = SubResource("StandardMaterial3D_0mnk0")
-inner_radius = 0.15
-outer_radius = 0.2
-
-[sub_resource type="Animation" id="Animation_lfc03"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ParentToScaleModel/AnotherParentToPivot/Model:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8m0nf"]
-resource_name = "playing"
-length = 2.5000000000000004
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ParentToScaleModel/AnotherParentToPivot:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.5, 1.75, 2, 2.25, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0.975, 1.025, 1), Vector3(1.025, 0.975, 1), Vector3(0.975, 1.025, 1), Vector3(1.025, 0.975, 1), Vector3(1, 1, 1), Vector3(1.06, 0.94, 1), Vector3(0.94, 1.06, 1), Vector3(1.06, 0.94, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2sc6s"]
-_data = {
-&"RESET": SubResource("Animation_lfc03"),
-&"playing": SubResource("Animation_8m0nf")
-}
-
-[node name="VoiceLinePlayer3D" type="Node3D" unique_id=1543677672 node_paths=PackedStringArray("_audio_stream_player_3d", "_animation_player", "_sound_ring_particles")]
+[node name="VoiceLinePlayer3D" type="Node3D" unique_id=1543677672 node_paths=PackedStringArray("tippy_loudspeaker_model", "_audio_stream_player_3d")]
 script = ExtResource("1_04577")
 _player_mode = 1
+tippy_loudspeaker_model = NodePath("ParentToScaleModel/AnotherParentToPivot/TippyLoudspeakerModel")
 _audio_stream_player_3d = NodePath("AudioStreamPlayer3D")
-_animation_player = NodePath("AnimationPlayer")
-_sound_ring_particles = NodePath("ParentToScaleModel/AnotherParentToPivot/Model/SoundRingParticles")
 
 [node name="ParentToScaleModel" type="Node3D" parent="." unique_id=422290273]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="AnotherParentToPivot" type="Node3D" parent="ParentToScaleModel" unique_id=208642496]
-transform = Transform3D(1.0152658, 0, 0, 0, 0.9847342, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Model" parent="ParentToScaleModel/AnotherParentToPivot" unique_id=221560691 instance=ExtResource("2_lfc03")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8184001, 0)
-
-[node name="SoundRingParticles" type="GPUParticles3D" parent="ParentToScaleModel/AnotherParentToPivot/Model" unique_id=137797502]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.069232196, -2.3893986, 1.058595)
-emitting = false
-amount = 2
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_j2xdn")
-draw_pass_1 = SubResource("TorusMesh_0ffxp")
+[node name="TippyLoudspeakerModel" parent="ParentToScaleModel/AnotherParentToPivot" unique_id=775830925 instance=ExtResource("2_lfc03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56368005, 0)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1968877298]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -108,6 +23,3 @@ volume_db = -20.0
 unit_size = 25.0
 max_db = 0.0
 bus = &"TippyVO"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=121086764]
-libraries/ = SubResource("AnimationLibrary_2sc6s")

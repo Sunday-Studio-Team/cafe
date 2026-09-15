@@ -12,9 +12,8 @@ enum PlayerMode {
 @export_group("Player Mode: Non-Directional")
 @export var _audio_stream_player: AudioStreamPlayer
 @export_group("Player Mode: 3D")
+@export var tippy_loudspeaker_model: TippyLoudspeakerModel
 @export var _audio_stream_player_3d: AudioStreamPlayer3D
-@export var _animation_player: AnimationPlayer
-@export var _sound_ring_particles: GPUParticles3D
 
 var _active_voice_line: VoiceLine
 
@@ -39,9 +38,9 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 			PlayerMode.THREE_D:
 				_audio_stream_player_3d.stream = _active_voice_line.audio_stream
 				_audio_stream_player_3d.play()
-				var _playing_animation := _animation_player.get_animation("playing")
+				var _playing_animation := tippy_loudspeaker_model.animation_player.get_animation("playing")
 				_playing_animation.loop_mode = Animation.LOOP_LINEAR
-				_animation_player.play("playing")
+				tippy_loudspeaker_model.animation_player.play("playing")
 				await _audio_stream_player_3d.finished
 				# i think if we just stop() the player itll jump back to its reset position
 				# so this is smoother
@@ -79,5 +78,5 @@ func interrupt_voice_line() -> void:
 
 func _physics_process(delta: float) -> void:
 	# for some reason this is running @ the start before it has this reference so
-	if _sound_ring_particles != null:
-		_sound_ring_particles.emitting = get_playing_voice_line() != null
+	if tippy_loudspeaker_model != null and tippy_loudspeaker_model.sound_ring_particles != null:
+		tippy_loudspeaker_model.sound_ring_particles.emitting = get_playing_voice_line() != null
