@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dtbylsafb51vh"]
 
 [ext_resource type="Script" uid="uid://m8ecoktyd6it" path="res://voice_lines/voice_line_player.gd" id="1_04577"]
-[ext_resource type="PackedScene" uid="uid://dmc068xqjcrpc" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker.glb" id="2_lfc03"]
+[ext_resource type="PackedScene" uid="uid://p0cwommaaugb" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker.glb" id="2_lfc03"]
 
 [sub_resource type="Curve" id="Curve_3nopi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8013698, 0.88888884), -0.489113, -0.489113, 0, 0, Vector2(0.95205474, 0), 0.0, 0.0, 0, 0]
@@ -45,7 +45,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ParentToScaleAndRotateModel/Model:scale")
+tracks/0/path = NodePath("ParentToScaleModel/AnotherParentToPivot/Model:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -62,14 +62,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ParentToScaleAndRotateModel/Model:scale")
+tracks/0/path = NodePath("ParentToScaleModel/AnotherParentToPivot:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.5, 1.75, 2, 2.25, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0.9, 1.1, 1), Vector3(1.1, 0.9, 1), Vector3(0.9, 1.1, 1), Vector3(1.1, 0.9, 1), Vector3(1, 1, 1), Vector3(1.25, 0.75, 1), Vector3(0.75, 1.25, 1), Vector3(1.25, 0.75, 1), Vector3(1, 1, 1)]
+"values": [Vector3(1, 1, 1), Vector3(0.975, 1.025, 1), Vector3(1.025, 0.975, 1), Vector3(0.975, 1.025, 1), Vector3(1.025, 0.975, 1), Vector3(1, 1, 1), Vector3(1.06, 0.94, 1), Vector3(0.94, 1.06, 1), Vector3(1.06, 0.94, 1), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2sc6s"]
@@ -83,15 +83,19 @@ script = ExtResource("1_04577")
 _player_mode = 1
 _audio_stream_player_3d = NodePath("AudioStreamPlayer3D")
 _animation_player = NodePath("AnimationPlayer")
-_sound_ring_particles = NodePath("ParentToScaleAndRotateModel/Model/SoundRingParticles")
+_sound_ring_particles = NodePath("ParentToScaleModel/AnotherParentToPivot/Model/SoundRingParticles")
 
-[node name="ParentToScaleAndRotateModel" type="Node3D" parent="." unique_id=422290273]
-transform = Transform3D(0.19696155, 0, 0.034729637, 0, 0.2, 0, -0.034729637, 0, 0.19696155, 0, 0, 0)
+[node name="ParentToScaleModel" type="Node3D" parent="." unique_id=422290273]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
-[node name="Model" parent="ParentToScaleAndRotateModel" unique_id=221560691 instance=ExtResource("2_lfc03")]
+[node name="AnotherParentToPivot" type="Node3D" parent="ParentToScaleModel" unique_id=208642496]
+transform = Transform3D(1.0152658, 0, 0, 0, 0.9847342, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="SoundRingParticles" type="GPUParticles3D" parent="ParentToScaleAndRotateModel/Model" unique_id=137797502]
-transform = Transform3D(0.9848076, 0, -0.17364815, 0, 1, 0, 0.17364816, 0, 0.9848077, -0.12420986, -2.3620162, 1.0865557)
+[node name="Model" parent="ParentToScaleModel/AnotherParentToPivot" unique_id=221560691 instance=ExtResource("2_lfc03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8184001, 0)
+
+[node name="SoundRingParticles" type="GPUParticles3D" parent="ParentToScaleModel/AnotherParentToPivot/Model" unique_id=137797502]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.069232196, -2.3893986, 1.058595)
 emitting = false
 amount = 2
 local_coords = true

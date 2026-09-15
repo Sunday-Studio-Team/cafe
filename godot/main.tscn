@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
-[ext_resource type="PackedScene" uid="uid://l7w4dtq33b6f" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
+[ext_resource type="PackedScene" uid="uid://c8jilqo1pb0th" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
 [ext_resource type="PackedScene" uid="uid://b44y3xlpccms3" path="res://minigames/colors/colors_minigame.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
@@ -2862,10 +2862,10 @@ volume_db = -5.0
 [node name="AroundCafeVoiceLinePlayers" type="Node3D" parent="." unique_id=719194149]
 
 [node name="AroundCafeVoiceLinePlayer3D" parent="AroundCafeVoiceLinePlayers" unique_id=442759948 instance=ExtResource("312_8ldsf")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.586476, 1.9429986, 6.3377976)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.586, 1.25, 6.338)
 
 [node name="AroundCafeVoiceLinePlayer3D2" parent="AroundCafeVoiceLinePlayers" unique_id=417750739 instance=ExtResource("312_8ldsf")]
-transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.485552, 2.0379436, 7.330851)
+transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.486, 1.25, 7.331)
 
 [node name="ClockItemStopSound" type="AudioStreamPlayer" parent="." unique_id=1632177732]
 stream = ExtResource("222_bvlej")
