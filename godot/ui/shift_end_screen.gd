@@ -20,8 +20,13 @@ extends CanvasLayer
 @export var pencil_scribble: AudioStreamPlayer
 @export var button: Button
 @export var stars_sound: AudioStreamPlayer
-@export var _free_item_selector_screen_packed_scene: PackedScene
-@export var _free_item_selector_screen_container: Control
+
+@export_group("New UI")
+@export var animation_player: AnimationPlayer
+@export var cafe_profits: RichTextLabel
+@export var goal: RichTextLabel
+@export var earnings: RichTextLabel
+
 
 var value_to_show_on_bank_total: float
 
@@ -46,6 +51,7 @@ func _ready() -> void:
 			t.tween_property(button, "offset_transform_scale", Vector2.ONE, 0.1)
 			t.tween_property(button, "offset_transform_rotation", deg_to_rad(1), 0.1),
 	)
+	_on_time_up()
 
 
 func _process(_delta: float) -> void:
@@ -74,6 +80,9 @@ func _on_time_up() -> void:
 	_tips_today_label.visible = false
 	_bank_total_label.visible = false
 	
+	cafe_profits.hide()
+	goal.hide()
+	earnings.hide()
 	# show time up screen
 	show()
 	background.show()
@@ -82,58 +91,54 @@ func _on_time_up() -> void:
 	time_up_sound.play()
 	await get_tree().create_timer(2).timeout
 	times_up.hide()
+	
 
 	# calculate everything
-	var daily_profit := Global.daily_cafe_money
-	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
+	var daily_profit := 7 #Global.daily_cafe_money
+	var min_profit_goal: float = 30 #Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
+	animation_player.play("come_in_pass" if passed_profit_goal else "come_in_fail")
 	
 	grant_day_rewards(passed_profit_goal)
+	await animation_player.animation_finished
 
 	#_day_label.text = Global.day_to_string(Global.day)
-	_day_label.text = "Day %d" % (Global.day)
-	_min_profit_goal_label.text = "required goal: %s" % Global.float_to_price(min_profit_goal)
-	_profit_made_label.text = "made today: %s/%s" % [
-		Global.float_to_price(daily_profit),
-		Global.float_to_price(min_profit_goal),
-	]
+	#_day_label.text = "Day %d" % (Global.day)
+	#_min_profit_goal_label.text = "required goal: %s" % Global.float_to_price(min_profit_goal)
+	#_profit_made_label.text = "made today: %s/%s" % [
+		#Global.float_to_price(daily_profit),
+		#Global.float_to_price(min_profit_goal),
+	#]
 	
 	_rating_label.text = "⭐ %s / %s" % [Global.employee_rating, Stats.current.employee_rating_max]
-	var tip_per_star: float = Stats.current.tip_per_star_rating[Global.day]
-	var show_tip_jar_desc: bool = false
-	for item in Global.owned_items:
-		if item.item_id == "tip_jar":
-			_tip_jar_desc_label.visible = true
-			var tip_multiplier: float = 1.0
-			if item.item_level == 1:
-				tip_multiplier = 1.5
-			elif item.item_level == 2:
-				tip_multiplier = 3.0
-			tip_per_star *= tip_multiplier
-			_tip_jar_desc_label.text = "x%s from Tip Jar!" % tip_multiplier
-	_tips_per_star_label.text = "$%s tip per full star" % tip_per_star
-	var tips: float = tip_per_star * (floori(Global.employee_rating))
-	_tips_today_label.text = "= [color=gold]%s[/color] tips" % Global.float_to_price(tips)
 	
 	pencil_scribble.play()
 	
-	_day_label.visible = true
-	await get_tree().create_timer(0.3).timeout
-	_money_title_label.visible = true
-	await get_tree().create_timer(0.5).timeout
-	_min_profit_goal_label.visible = true
+	cafe_profits.show()
+	win_shift_sound.pitch_scale = 1
+	win_shift_sound.play()
+	await get_tree().create_timer(1.2).timeout
+	goal.show()
+	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
+	win_shift_sound.pitch_scale = 1.2
+	win_shift_sound.play()
+	await get_tree().create_timer(1.5).timeout
+	earnings.show()
+	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
+	win_shift_sound.pitch_scale = 1.5
+	win_shift_sound.play()
 
-	_money_title_label.visible = true
-	await get_tree().create_timer(0.5).timeout
-	_min_profit_goal_label.visible = true
-	await get_tree().create_timer(0.2).timeout
-	_profit_made_label.visible = true
+	#_money_title_label.visible = true
+	#await get_tree().create_timer(0.5).timeout
+	#_min_profit_goal_label.visible = true
+	#await get_tree().create_timer(0.2).timeout
+	#_profit_made_label.visible = true
 	
-	var profit_made_tween := create_tween()
-	if passed_profit_goal:
-		profit_made_tween.tween_property(_profit_made_label, "modulate", Color.WHITE, 1).from(Color.GREEN)
-	else:
-		profit_made_tween.tween_property(_profit_made_label, "modulate", Color.RED, 1)
+	#var profit_made_tween := create_tween()
+	#if passed_profit_goal:
+		#profit_made_tween.tween_property(_profit_made_label, "modulate", Color.WHITE, 1).from(Color.GREEN)
+	#else:
+		#profit_made_tween.tween_property(_profit_made_label, "modulate", Color.RED, 1)
 
 	await get_tree().create_timer(1.5).timeout
 

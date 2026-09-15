@@ -2,12 +2,23 @@
 
 [ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/shift_end_screen.gd" id="1_cwskb"]
 [ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
-[ext_resource type="PackedScene" uid="uid://dfdxran8jmt41" path="res://ui/free_item_selector_screen.tscn" id="2_n6kr8"]
 [ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
+[ext_resource type="Texture2D" uid="uid://bsam3ndhw4n07" path="res://sprites/endshift_ui/amazing_paper_colored.png" id="3_t50qp"]
 [ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
+[ext_resource type="Texture2D" uid="uid://vkfhygnpe56j" path="res://sprites/endshift_ui/tippy_fail_colored_v2.png" id="4_l71wa"]
+[ext_resource type="FontFile" uid="uid://f12jkge7ui88" path="res://fonts/komika/Komika_display_kaps.ttf" id="4_s5d2k"]
+[ext_resource type="FontFile" uid="uid://cikerrpxvai6v" path="res://fonts/komika/Komika_display_kaps_bold.ttf" id="5_e16oh"]
+[ext_resource type="Texture2D" uid="uid://bsyqh1ej3oxex" path="res://sprites/endshift_ui/pass_grade_colored_v2.png" id="5_fh4al"]
 [ext_resource type="AudioStream" uid="uid://cww7w5j41tgbm" path="res://audio/time_up.wav" id="5_iiu1j"]
+[ext_resource type="Texture2D" uid="uid://bwy636l6ajv5w" path="res://sprites/endshift_ui/money_right_colored.png" id="6_66p45"]
 [ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
+[ext_resource type="Texture2D" uid="uid://d2v08e48term0" path="res://sprites/endshift_ui/tippy_pass_v2.png" id="7_3n0pv"]
 [ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
+[ext_resource type="Texture2D" uid="uid://by7lnyysdhvvw" path="res://sprites/endshift_ui/money_leftcorner_colored copy.png" id="8_s5d2k"]
+[ext_resource type="Texture2D" uid="uid://durkhraw8k71a" path="res://sprites/endshift_ui/money_center_colored copy.png" id="9_e16oh"]
+[ext_resource type="Texture2D" uid="uid://dalclkggajc36" path="res://sprites/endshift_ui/tippy_angry.png" id="10_66p45"]
+[ext_resource type="Texture2D" uid="uid://bmuf31kycwlk3" path="res://sprites/endshift_ui/f_fail_colored_v3.png" id="11_3n0pv"]
+[ext_resource type="Texture2D" uid="uid://b41bjd1ujbwbc" path="res://sprites/endshift_ui/failed_paper_colored.png" id="12_s5d2k"]
 
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
@@ -101,7 +112,483 @@ Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
 Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
 Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "_free_item_selector_screen_container")]
+[sub_resource type="Animation" id="Animation_j2nqk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NewUIContainer/Paper:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NewUIContainer/Letter:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewUIContainer/MoneyRight:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NewUIContainer/TippyPass:offset_transform_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NewUIContainer/MoneyLeft:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NewUIContainer/MoneyCenter:offset_transform_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NewUIContainer/Letter:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_fh4al")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NewUIContainer/Paper:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_t50qp")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NewUIContainer/Letter:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("NewUIContainer/TippyFail:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("NewUIContainer/TippyPass:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("NewUIContainer/TippyFail:texture")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_l71wa")]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("NewUIContainer/TippyFail:offset_transform_position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("NewUIContainer/TippyFail:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e16oh"]
+resource_name = "come_in_fail"
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NewUIContainer/Paper:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25000006, 1),
+"update": 0,
+"values": [Vector2(-1920, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NewUIContainer/Letter:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.19999999, 1.35, 1.5, 1.6, 1.65, 1.7, 1.75),
+"transitions": PackedFloat32Array(2.2973974, 2.2973974, 0.5946034, 1e-05, 1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Vector2(0, -1080), Vector2(0, -1080), Vector2(0, 0), Vector2(0, 0), Vector2(32, 0), Vector2(-32, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewUIContainer/MoneyRight:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(800, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NewUIContainer/MoneyLeft:offset_transform_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(-1080, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NewUIContainer/MoneyCenter:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 0,
+"values": [Vector2(0, 640)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NewUIContainer/Letter:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("11_3n0pv")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NewUIContainer/Paper:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_s5d2k")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NewUIContainer/Letter:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.45, 1.5, 1.55, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1.7411016, 1),
+"update": 0,
+"values": [Vector2(0.5, 1.2), Vector2(0.5, 1.2), Vector2(1, 1), Vector2(1.4, 0.6), Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NewUIContainer/TippyFail:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("NewUIContainer/TippyPass:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("NewUIContainer/TippyFail:texture")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("10_66p45"), ExtResource("4_l71wa")]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("NewUIContainer/TippyFail:offset_transform_position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.85),
+"transitions": PackedFloat32Array(1, 1.7411013, 1),
+"update": 0,
+"values": [Vector2(960, 0), Vector2(960, 0), Vector2(0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("NewUIContainer/TippyFail:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(1.4999998, 1.5499997, 1.5999997),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wegfb"]
+resource_name = "come_in_pass"
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NewUIContainer/Paper:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25000006, 1),
+"update": 0,
+"values": [Vector2(-1920, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NewUIContainer/Letter:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.5, 1.7, 1.9000001, 2, 2.1500006, 2.25, 2.35),
+"transitions": PackedFloat32Array(2.2973974, 0.5946034, 1.6817927, 0.5, 1.624505, 0.4999999, 1.624505, 0.4999999),
+"update": 0,
+"values": [Vector2(0, -1080), Vector2(0, 0), Vector2(0, -160), Vector2(0, 0), Vector2(0, -80), Vector2(0, 0), Vector2(0, -20), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewUIContainer/MoneyRight:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.85, 1.2500001, 2.05),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(800, 0), Vector2(-80, 0), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NewUIContainer/TippyPass:offset_transform_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7, 0.9999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(720, 0), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NewUIContainer/MoneyLeft:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.85, 1.2500001, 2.05),
+"transitions": PackedFloat32Array(0.5, 2, 0.99999845),
+"update": 0,
+"values": [Vector2(-1080, 0), Vector2(-40, 0), Vector2(-160, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NewUIContainer/MoneyCenter:offset_transform_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.85, 1.2500001, 2.05),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0, 640), Vector2(0, 40), Vector2(0, 80)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NewUIContainer/Letter:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_fh4al")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NewUIContainer/Paper:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_t50qp")]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NewUIContainer/Letter:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.5, 1.55, 1.5999999, 1.9000001, 1.95, 2, 2.15, 2.2000003, 2.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.8), Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.8), Vector2(1, 1), Vector2(1, 1), Vector2(1.1, 0.9), Vector2(1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("NewUIContainer/TippyFail:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("NewUIContainer/TippyPass:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qc8dq"]
+_data = {
+&"RESET": SubResource("Animation_j2nqk"),
+&"come_in_fail": SubResource("Animation_e16oh"),
+&"come_in_pass": SubResource("Animation_wegfb")
+}
+
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "animation_player", "cafe_profits", "goal", "earnings")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -124,8 +611,10 @@ bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
 button = NodePath("MarginContainer/VBoxContainer/Button")
 stars_sound = NodePath("StarsSound")
-_free_item_selector_screen_packed_scene = ExtResource("2_n6kr8")
-_free_item_selector_screen_container = NodePath("FreeItemSelectorScreenContainer")
+animation_player = NodePath("AnimationPlayer")
+cafe_profits = NodePath("NewUIContainer/Paper/CafeProfits")
+goal = NodePath("NewUIContainer/Paper/Goal")
+earnings = NodePath("NewUIContainer/Paper/Earnings")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
 anchors_preset = 15
@@ -138,6 +627,7 @@ mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 0.78431374)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -322,14 +812,138 @@ theme = SubResource("Theme_j2nqk")
 theme_override_font_sizes/font_size = 96
 text = "continue"
 
-[node name="FreeItemSelectorScreenContainer" type="Control" parent="." unique_id=772795043]
+[node name="NewUIContainer" type="Control" parent="." unique_id=683434334]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+
+[node name="Paper" type="TextureRect" parent="NewUIContainer" unique_id=1375621846]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 1080)
+texture = ExtResource("3_t50qp")
+
+[node name="CafeProfits" type="RichTextLabel" parent="NewUIContainer/Paper" unique_id=696352778]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15104167
+anchor_top = 0.22592592
+anchor_right = 1.1510416
+anchor_bottom = 0.33240741
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.10389043, 0.10136073, 0.12564012, 1)
+theme_override_fonts/normal_font = ExtResource("4_s5d2k")
+theme_override_fonts/bold_font = ExtResource("5_e16oh")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "Cafe Profits:"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Goal" type="RichTextLabel" parent="NewUIContainer/Paper" unique_id=1461929183]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1140625
+anchor_top = 0.40092593
+anchor_right = 1.1140625
+anchor_bottom = 0.5074074
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.10389043, 0.10136073, 0.12564012, 1)
+theme_override_fonts/normal_font = ExtResource("4_s5d2k")
+theme_override_fonts/bold_font = ExtResource("5_e16oh")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "Goal . . ."
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Earnings" type="RichTextLabel" parent="NewUIContainer/Paper" unique_id=1233917248]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12708333
+anchor_top = 0.50648147
+anchor_right = 1.1270833
+anchor_bottom = 0.61296296
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.10389043, 0.10136073, 0.12564012, 1)
+theme_override_fonts/normal_font = ExtResource("4_s5d2k")
+theme_override_fonts/bold_font = ExtResource("5_e16oh")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "Earnings . . ."
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TippyFail" type="TextureRect" parent="NewUIContainer" unique_id=893505267]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+pivot_offset = Vector2(1364, 897)
+offset_transform_enabled = true
+texture = ExtResource("4_l71wa")
+stretch_mode = 2
+
+[node name="Letter" type="TextureRect" parent="NewUIContainer" unique_id=1340701893]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+pivot_offset = Vector2(1386, 757)
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 1080)
+texture = ExtResource("5_fh4al")
+
+[node name="MoneyRight" type="TextureRect" parent="NewUIContainer" unique_id=1876179046]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 1080)
+texture = ExtResource("6_66p45")
+
+[node name="TippyPass" type="TextureRect" parent="NewUIContainer" unique_id=1916182331]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 1080)
+texture = ExtResource("7_3n0pv")
+
+[node name="MoneyLeft" type="TextureRect" parent="NewUIContainer" unique_id=1906227577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 1080)
+texture = ExtResource("8_s5d2k")
+
+[node name="MoneyCenter" type="TextureRect" parent="NewUIContainer" unique_id=1666855026]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 1080)
+texture = ExtResource("9_e16oh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1571156116]
+libraries/ = SubResource("AnimationLibrary_qc8dq")
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_g6pkj")
