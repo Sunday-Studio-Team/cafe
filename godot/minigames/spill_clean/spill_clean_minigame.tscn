@@ -38,6 +38,7 @@ scale_max = 0.39999998
 size = Vector2(241, 130)
 
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
+metadata/_edit_vertical_guides_ = [1002.0]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
 position = Vector2(961, 536)
@@ -45,7 +46,7 @@ texture = ExtResource("1_eu0yc")
 
 [node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "canvas_sprite2", "canvas_sprite3", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
 modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
-position = Vector2(950, 721)
+position = Vector2(1000, 721)
 texture = ExtResource("4_kqolg")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
@@ -65,21 +66,21 @@ machine_clean_ratio = 0.6
 spill_clean_speed = 0.025
 
 [node name="Spills2" type="Sprite2D" parent="." unique_id=618876007]
-position = Vector2(940, 680)
+position = Vector2(1000, 680)
 rotation = 3.1415927
 texture = ExtResource("2_04o5w")
 
 [node name="Spills3" type="Sprite2D" parent="." unique_id=1360044752]
-position = Vector2(940, 680)
+position = Vector2(1000, 680)
 texture = ExtResource("5_mojnc")
 
 [node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
-position = Vector2(932, 538)
+position = Vector2(1000, 538)
 texture = ExtResource("2_eu0yc")
 
 [node name="TippyMachineClean" type="Sprite2D" parent="." unique_id=2093052380]
 visible = false
-position = Vector2(932, 537)
+position = Vector2(1000, 537)
 texture = ExtResource("2_n873u")
 
 [node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
