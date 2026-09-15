@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_6473f"]
 [ext_resource type="Texture2D" uid="uid://bqekjb5i3x4uy" path="res://sprites/customers/trans.png" id="2_6473f"]
-[ext_resource type="Texture2D" uid="uid://vfpjlb7nvhvl" path="res://sprites/customers/typing_minigame_portraits/trans_angry.png" id="3_5bclt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6473f"]
 atlas = ExtResource("2_6473f")
@@ -12,7 +11,7 @@ region = Rect2(125, -61.880005, 390, 390)
 script = ExtResource("1_6473f")
 customer_name = "Trans Man"
 sprite = ExtResource("2_6473f")
-typing_minigame_portrait = ExtResource("3_5bclt")
+typing_minigame_portrait_uid = &"uid://vfpjlb7nvhvl"
 email_crop_size_ratio = 0.78
 email_crop_center_ratio = Vector2(0.64, 0.13)
 editor_email_cropped_sprite_preview = SubResource("AtlasTexture_6473f")
