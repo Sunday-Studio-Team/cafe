@@ -5,7 +5,7 @@ extends Node3D
 
 signal drink_prepared
 
-const BLAST_LAUNCH_MAGNITUDE: float = 20.0
+const BLAST_LAUNCH_MAGNITUDE: float = 10.0
 const REPAIR_MINIGAMES := ["Colors", "Arrows"]
 const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
@@ -313,10 +313,19 @@ func blast_player_from_using_machine() -> void:
 
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
-
 	Global.player.velocity += launch_vector
-
-
+	Global.player.move_and_slide()
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	#apply velocity 3 times
+	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
+	
+	
 func set_order_action_buttons_available(button_case: String) -> void:
 	tutorial_lock_accept_drink_button = true
 	tutorial_lock_remake_drink_button = true
