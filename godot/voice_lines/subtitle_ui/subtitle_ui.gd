@@ -12,13 +12,7 @@ func _ready() -> void:
 	Global.voice_line_system.requested_hide_voice_line_subtitle.connect(_on_requested_hide_voice_line_subtitle)
 
 
-func _on_requested_show_voice_line_subtitle(voice_line: VoiceLine) -> void:
-	# To make things easier, just delete all existing subtitles.
-	for subtitle_view in _subtitle_views:
-		if subtitle_view != null:
-			subtitle_view.queue_free()
-	_subtitle_views.clear()
-	
+func _on_requested_show_voice_line_subtitle(voice_line: VoiceLine) -> void:	
 	var subtitle_view: SubtitleView = _subtitle_view_packed_scene.instantiate()
 	_voice_line_to_subtitle_view_dict[voice_line] = subtitle_view
 	_subtitle_views.append(subtitle_view)

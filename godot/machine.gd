@@ -5,7 +5,7 @@ extends Node3D
 
 signal drink_prepared
 
-const BLAST_LAUNCH_MAGNITUDE: float = 20.0
+const BLAST_LAUNCH_MAGNITUDE: float = 10.0
 const REPAIR_MINIGAMES := ["Colors", "Arrows"]
 const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
@@ -99,6 +99,7 @@ enum Icon {
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export var airhorn_sound: AudioStreamPlayer
+@export var bomb_sound_player: AudioStreamPlayer3D
 # played when we try to refill while not holding ingredients
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
@@ -150,7 +151,12 @@ func _ready() -> void:
 			else:
 				ingredients_warning_sound.play()
 				get_ingredients_prompt.show()
-				await get_tree().create_timer(0.5, false).timeout
+				get_ingredients_prompt.offset_transform_enabled = true
+				var t := create_tween()
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+				await t.finished
+				await get_tree().create_timer(1, false).timeout
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
@@ -292,6 +298,7 @@ func check_for_stepping_in_spill() -> void:
 
 
 func blast_player_from_using_machine() -> void:
+	bomb_sound_player.play()
 	if gui_3d.player_using_me:
 		if Global.minigame_active:
 			Events.force_close_minigame.emit()
@@ -306,10 +313,19 @@ func blast_player_from_using_machine() -> void:
 
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
-
 	Global.player.velocity += launch_vector
-
-
+	Global.player.move_and_slide()
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	#apply velocity 3 times
+	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
+	
+	
 func set_order_action_buttons_available(button_case: String) -> void:
 	tutorial_lock_accept_drink_button = true
 	tutorial_lock_remake_drink_button = true
@@ -344,7 +360,7 @@ func show_tutorial_go_clean_spill() -> void:
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
 	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
-		Global.in_tutorial_screen = true
+		Global.in_popup_tutorial_screen = true
 
 		#hide tablet so it's not in the way.
 		var tablet = get_parent().get_parent().find_child("Tablet")
@@ -372,7 +388,7 @@ func show_tutorial_go_clean_spill() -> void:
 
 		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen = false # re enable pause
+		Global.in_popup_tutorial_screen = false # re enable pause
 
 
 func _set_customer(new_customer: Customer) -> void:
@@ -864,9 +880,7 @@ func _on_requested_use_active_item_machine():
 		return
 	
 	if customer:
-		#Putting new animation to test change
-		#TODO: Replace base animation with newest one
-		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
 		customer.leave_store()
 		_set_customer(null)
@@ -900,7 +914,12 @@ func _on_remake_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ingredients_warning_sound.play()
 		no_ingredients_warning.show()
-		await get_tree().create_timer(0.5, false).timeout
+		no_ingredients_warning.offset_transform_enabled = true
+		var t := create_tween()
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+		await t.finished
+		await get_tree().create_timer(1, false).timeout
 		no_ingredients_warning.hide()
 
 	Events.minigame_end.connect(_on_remade_drink)

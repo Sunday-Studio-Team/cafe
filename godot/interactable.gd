@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 			or not visible
 			or Global.in_pc_ui 
 			or Global.minigame_active
-			or Global.free_camera_enabled
+			or Global.camera_mode != Global.CameraMode.PLAYER
 	):
 		if not keep_progress_on_interrupt:
 			time_held = 0
