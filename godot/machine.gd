@@ -90,7 +90,6 @@ enum Icon {
 @export var accept_rating_arrow: TextureRect
 @export var accept_rating_icon: TextureRect
 
-
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
@@ -180,6 +179,7 @@ var animation_index:int
 var animation_delay_timer:float = 0
 var animation_delay:float = 0.05
 
+
 func reset_icons():
 	remake_money_arrow.texture = null
 	remake_money_icon.texture = null
@@ -190,11 +190,14 @@ func reset_icons():
 	accept_rating_arrow.texture = null
 	accept_rating_icon.texture = null
 
+
 func update_animation():
 	animation_index += 1
 	if animation_index >= current_ingbar_animation.size():
 		animation_index = 0
 	ingredient_coffeebar.texture = current_ingbar_animation[animation_index]
+
+
 func _process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 	timer_dial.offset_transform_enabled = true
@@ -475,6 +478,7 @@ func machine_make_drink() -> void:
 	order_breakdown.show()
 
 	timer.start()
+	animation_player.play("making_drink")
 	Events.machine_making_drink.emit()
 
 	var breaking_chance_at_shift_start_for_day: float = (
@@ -496,10 +500,12 @@ func machine_make_drink() -> void:
 			randf() <= breaking_chance_now
 			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift_each_day[Global.day]
 	):
+		animation_player.stop()
 		break_down()
 
 	await timer.timeout
 
+	animation_player.stop()
 	hum_sound.stop()
 	done_sound.play()
 	# if we can interact with the machine while its jumping it does weird stuff

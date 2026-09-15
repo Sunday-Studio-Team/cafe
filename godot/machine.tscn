@@ -298,6 +298,35 @@ tracks/3/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_hp8kb"]
+resource_name = "making_drink"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.008726646), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -0.008726646), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 0.99999994, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.995, 1), Vector3(1, 1.005, 1), Vector3(1, 0.995, 1), Vector3(1, 1, 1), Vector3(1, 1.005, 1), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_gtm4j"]
 resource_name = "order_ready"
 tracks/0/type = "value"
@@ -307,10 +336,10 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.25, 0.53333336, 0.6, 0.85, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.55, 0.85, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1, 0.75, 1), Vector3(1, 1.1, 1), Vector3(1, 1.1, 1), Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+"values": [Vector3(1, 1, 1), Vector3(1, 0.75, 1), Vector3(1, 1.1, 1), Vector3(1, 1.1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -319,10 +348,10 @@ tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.25, 0.5, 0.75),
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.55, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.5, 0.5, 0.0]
+"values": [0.0, 0.0, 0.25, 0.25, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -331,10 +360,10 @@ tracks/2/path = NodePath(".:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.25, 0.5, 0.85),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.25, 0.4, 0.55, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.08726646), Vector3(0, 0, -0.08726646), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -0.08726646), Vector3(0, 0, 0.08726646), Vector3(0, 0, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -354,6 +383,7 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hp8kb"]
 _data = {
 &"RESET": SubResource("Animation_uaec5"),
+&"making_drink": SubResource("Animation_hp8kb"),
 &"order_ready_jump": SubResource("Animation_gtm4j")
 }
 
@@ -567,7 +597,7 @@ _sub_viewport = NodePath("..")
 metadata/_custom_type_script = "uid://c4c77yw7tsv87"
 
 [node name="CustomerCamera3D" type="Camera3D" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=2092847578]
-transform = Transform3D(0.90999997, 0, 0, 0, 0.7956512, 0.4416321, 0, -0.44163212, 0.79565114, 0, 1.7579052, -1.0809433)
+transform = Transform3D(0.90999705, 0.0020291747, 0.0011263085, -0.0023174207, 0.7968096, 0.44227508, 0, -0.44163212, 0.79565114, 0.0044832425, 1.7604647, -1.0809433)
 fov = 100.0
 
 [node name="NonVisibleCameraDisabler" type="Node" parent="3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D" unique_id=669245214 node_paths=PackedStringArray("_camera_3d", "_visible_on_screen_notifier_3d")]
