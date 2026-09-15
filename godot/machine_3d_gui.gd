@@ -26,7 +26,8 @@ var cam_trans_b4_enter: Transform3D
 #keeps track of where the player was before they interacted w/ machine.
 var where_was_player: Transform3D
 
-@onready var machine: Machine = get_parent() as Machine
+# i know . im sorry .
+@onready var machine: Machine = get_parent().get_parent() as Machine
 
 
 func _ready():
