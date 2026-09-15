@@ -63,9 +63,9 @@ const ALERT_QUEUE_SIZE = 5
 @export var item_text: RichTextLabel
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
+@export var _alert_packed_scene_uid: StringName
 
 var alert_queue: Array[HBoxContainer]
-var alert_load = preload("res://ui/alert.tscn")
 var score_update_tween: Tween
 var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
@@ -536,8 +536,9 @@ func _on_alert_posted(
 		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
 		# the lambda is called
 		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
-
-	var new_alert = alert_load.instantiate()
+	
+	var alert_packed_scene: PackedScene = ResourceLoader.load(_alert_packed_scene_uid)
+	var new_alert = alert_packed_scene.instantiate()
 	new_alert.alert_label.text = message
 	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
 

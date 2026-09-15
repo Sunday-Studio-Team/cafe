@@ -1633,6 +1633,7 @@ stamina_bar = NodePath("StaminaBar")
 item_indicator = NodePath("Interactable/ItemIndicator")
 item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
+_alert_packed_scene_uid = &"uid://j530u4ni603j"
 
 [node name="Crosshair" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1676497832]
 layout_mode = 3
@@ -2620,13 +2621,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3.8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 
 [node name="LeftAreaLeftMachine" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.8389482)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, -2.8389482)
 
 [node name="LeftAreaMiddleMachine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -1.1309242)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, -1.1309242)
 
 [node name="LeftAreaRightMachine" parent="Machines" unique_id=912957935 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, 0.6331055)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, 0, 0.6331055)
 
 [node name="CustomerHelpDesk" parent="." unique_id=556547264 instance=ExtResource("4_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9912045, 0, 4.0535426)
