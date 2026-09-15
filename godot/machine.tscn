@@ -367,6 +367,7 @@ light_energy = 2.0
 shadow_enabled = true
 
 [node name="BrokenDownSprite" type="Sprite3D" parent="FixMachineInteractable" unique_id=2135256805]
+pixel_size = 0.00125
 texture = ExtResource("84_4b30b")
 
 [node name="Spill" type="Area3D" parent="." unique_id=1225300652]
@@ -493,13 +494,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=7025000]
+[node name="ingr tank" parent="Model/EmployeeSide" index="0" unique_id=1531950467]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1417270534) index="0" unique_id=878433500]
+[node name="SM_Machine" parent="Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1145045213) index="0" unique_id=148677669]
 mesh = SubResource("ArrayMesh_vaqkk")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="." unique_id=1834188427]
