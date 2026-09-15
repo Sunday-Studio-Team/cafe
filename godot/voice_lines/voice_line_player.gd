@@ -13,14 +13,22 @@ enum PlayerMode {
 @export var _audio_stream_player: AudioStreamPlayer
 @export_group("Player Mode: 3D")
 @export var _audio_stream_player_3d: AudioStreamPlayer3D
+@export var _animation_player: AnimationPlayer
+@export var _sound_ring_particles: GPUParticles3D
 
 var _active_voice_line: VoiceLine
+
 
 func play_voice_line(voice_line: VoiceLine) -> void:
 	_active_voice_line = voice_line
 	if _active_voice_line.audio_stream == null:
-		var duration: float = VoiceLineSystem.calculate_missing_audio_stream_caption_duration(_active_voice_line)
-		print("Voice line \"%s\" has no audio stream! Playing silently for %s seconds." % [_active_voice_line.voice_line_id, duration])
+		var duration: float = VoiceLineSystem.calculate_missing_audio_stream_caption_duration(
+			_active_voice_line
+		)
+		print(
+			"Voice line \"%s\" has no audio stream! Playing silently for %s seconds."
+			% [_active_voice_line.voice_line_id, duration]
+		)
 		await get_tree().create_timer(duration, false).timeout
 	else:
 		match _player_mode:
@@ -31,7 +39,15 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 			PlayerMode.THREE_D:
 				_audio_stream_player_3d.stream = _active_voice_line.audio_stream
 				_audio_stream_player_3d.play()
+				var _playing_animation := _animation_player.get_animation("playing")
+				_playing_animation.loop_mode = Animation.LOOP_LINEAR
+				_animation_player.play("playing")
 				await _audio_stream_player_3d.finished
+				# i think if we just stop() the player itll jump back to its reset position
+				# so this is smoother
+				# (ideally we could get rid of the delay where it waits for the end of the
+				# animation tho . . .)
+				_playing_animation.loop_mode = Animation.LOOP_NONE
 			_:
 				printerr("Unknown VoiceLinePlayer.PlayerMode.")
 				return
@@ -39,8 +55,10 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 		_active_voice_line = null
 	finished_playing_voice_line.emit(voice_line)
 
+
 func get_playing_voice_line() -> VoiceLine:
 	return _active_voice_line
+
 
 func interrupt_voice_line() -> void:
 	match _player_mode:
@@ -57,3 +75,9 @@ func interrupt_voice_line() -> void:
 		_:
 			printerr("Unknown VoiceLinePlayer.PlayerMode.")
 			return
+
+
+func _physics_process(delta: float) -> void:
+	# for some reason this is running @ the start before it has this reference so
+	if _sound_ring_particles != null:
+		_sound_ring_particles.emitting = get_playing_voice_line() != null
