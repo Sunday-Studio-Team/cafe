@@ -2,16 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
 [ext_resource type="Texture2D" uid="uid://dkgtv4ix58vwu" path="res://sprites/spill_minigame/Bg.png" id="1_eu0yc"]
+[ext_resource type="Texture2D" uid="uid://b1k42y7srks3w" path="res://sprites/spill_minigame/spills-1.png" id="2_04o5w"]
 [ext_resource type="Texture2D" uid="uid://calsmemse0jyq" path="res://sprites/spill_minigame/tippy_dirty.png" id="2_eu0yc"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/spill.gd" id="2_imr7o"]
 [ext_resource type="Texture2D" uid="uid://b58t6jac3jiqp" path="res://sprites/spill_minigame/tippy_clean.png" id="2_n873u"]
 [ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/dirty_mop.png" id="4_4xqy4"]
 [ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/mop.gd" id="4_6lir2"]
+[ext_resource type="Texture2D" uid="uid://ddbjxea8o1m55" path="res://sprites/spill_minigame/spills-2.png" id="4_kqolg"]
 [ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/clean_mop.png" id="4_omxn0"]
 [ext_resource type="Texture2D" uid="uid://b82ehkcm1tkoc" path="res://sprites/spill_minigame/fitted text.png" id="5_lvuj8"]
+[ext_resource type="Texture2D" uid="uid://po2lu6j2mdni" path="res://sprites/spill_minigame/spills-3.png" id="5_mojnc"]
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
 [ext_resource type="Script" uid="uid://cfst3es72ok0h" path="res://minigames/spill_clean/tippy_text.gd" id="6_kx0vh"]
-[ext_resource type="Texture2D" uid="uid://rkkd7gi2oesv" path="res://sprites/spill_minigame/spill 1.png" id="6_n873u"]
 [ext_resource type="Texture2D" uid="uid://babqx6yagblfe" path="res://sprites/spill_minigame/clean_scrubber.png" id="6_v4dls"]
 [ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
@@ -35,22 +37,20 @@ scale_max = 0.39999998
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
 size = Vector2(241, 130)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx0vh"]
-
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
 position = Vector2(961, 536)
 texture = ExtResource("1_eu0yc")
 
-[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
+[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "canvas_sprite2", "canvas_sprite3", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
 modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
-position = Vector2(964, 800)
-rotation = -3.1415925
-texture = ExtResource("6_n873u")
+position = Vector2(940, 635)
+texture = ExtResource("4_kqolg")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
-progress_label = NodePath("../UI/MarginContainer/Percentage")
+canvas_sprite2 = NodePath("../Spills2")
+canvas_sprite3 = NodePath("../Spills3")
 moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
 machine_clean = NodePath("../TippyMachineClean")
@@ -58,8 +58,20 @@ machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
 text_bubble = NodePath("../Bucket/TippyText")
-allowed_remaining_ratio = 0.05
-machine_clean_ratio = 0.4
+allowed_remaining_ratio = 0.6
+allowed_remaining_ratio2 = 0.6
+allowed_remaining_ratio3 = 0.6
+machine_clean_ratio = 0.6
+spill_clean_speed = 0.025
+
+[node name="Spills2" type="Sprite2D" parent="." unique_id=618876007]
+position = Vector2(888, 539)
+rotation = 3.1415927
+texture = ExtResource("2_04o5w")
+
+[node name="Spills3" type="Sprite2D" parent="." unique_id=1360044752]
+position = Vector2(915, 553)
+texture = ExtResource("5_mojnc")
 
 [node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
 position = Vector2(932, 538)
