@@ -20,21 +20,26 @@ extends Node2D
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
-var allowed_remaining_ratio: float # = Stats.current.clean_spill_allowed_remaining
+var allowed_spill_remaining_ratio_1: float # = Stats.current.clean_spill_allowed_remaining
 @export_range(0.00, 1.0, 0.001)
-var allowed_remaining_ratio2: float
+var allowed_spill_remaining_ratio_2: float
 @export_range(0.00, 1.0, 0.001)
-var allowed_remaining_ratio3: float
+var allowed_spill_remaining_ratio_final: float
 @export_range(0.00, 1.0, 0.001)
 var machine_clean_ratio: float
 @export_range(0.00, 1.0, 0.001)
 var spill_clean_speed: float
+@export_range(0.00, 1.0, 0.001)
+var mop_dirtied_speed: float
+@export_range(0.00, 1.0, 0.001)
+var mop_dirtied_thresh: float
 var mop_collision: CollisionShape2D
 var mop_rectangle: RectangleShape2D
 var canvas_image: Image
 var canvas_texture: ImageTexture
 #var starting_pixel_count: int = 0
 #var remaining_pixel_count: int = 0
+var mop_dirtied_amount: float
 var starting_scale: Vector2 = Vector2(1.0, 1.0)
 var current_scale: Vector2 = Vector2(1.0, 1.0)
 var current_spill: int = 0
@@ -47,7 +52,7 @@ var remaining_mask: BitMap
 var remaining_ratio: float:
 	get():
 		return new_scale.x / starting_scale.x
-
+var prev_remaining_ratio: float = 1.0
 
 func _ready() -> void:
 	Global.minigame_active = true
@@ -95,6 +100,7 @@ func _ready() -> void:
 		func(_area: Area2D):
 			if _area == moping_area && not mop.is_wet:
 				mop.wet_mop()
+				print("mop is now wet")
 				text_bubble.mop_entered()
 	)
 
@@ -117,10 +123,39 @@ func _physics_process(_delta: float) -> void:
 	previous_mop_position = mop_collision.global_position
 
 	check_machine_clean()
-	update_image(rect)
-	#update_progress_display()
-	check_for_win()
 	
+	#print("prev_remaining_ratio", prev_remaining_ratio)
+	#print("remaining_ratio", remaining_ratio)
+	#print("mop.is_dirty", mop.is_dirty)
+
+
+	if (mop_dirtied_amount >= mop_dirtied_thresh):		
+		if bucket_area.overlaps_area(moping_area) or bucket_area.overlaps_body(mop): # adjust based on what type your mop/moping_area is
+					mop.wet_mop()
+					mop_dirtied_amount = 0.0
+					prev_remaining_ratio = remaining_ratio
+					#print("prev_remaining_ratio set to remaining ratio")
+					mop.is_dirty = false
+					#print("mop is now wet and clean again")
+					if text_bubble:
+						text_bubble.mop_entered()
+	else:
+		if ((prev_remaining_ratio - remaining_ratio) > 0.05 and not mop.is_dirty):
+			#print("mop is now put in to use")
+			mop.get_dirty()
+		elif ((prev_remaining_ratio - remaining_ratio) < 0.05 and not mop.is_dirty):
+			#print("mop just done cleaning")
+			
+			update_image(rect)
+			check_for_win()	
+		else:
+			#print("mop getting dirtier")
+			mop_dirtied_amount += mop_dirtied_speed
+
+			update_image(rect)
+			check_for_win()	
+		
+
 
 func erased_area_inside_mop_rectangle() -> Rect2i:
 	var half_size := mop_rectangle.size / 2.0
@@ -161,35 +196,17 @@ func update_image(rect: Rect2i) -> void:
 		new_scale = Vector2(current_scale.x - spill_clean_speed, current_scale.y - spill_clean_speed)	
 		print("new scale spill 0", new_scale)
 
-		if (
-			new_scale < current_scale
-			and not mop.is_dirty
-		):
-			mop.get_dirty()
-		
 		canvas_sprite.scale = new_scale
 	elif current_spill == 1:
 		current_scale = canvas_sprite2.scale
 		new_scale = Vector2(current_scale.x - spill_clean_speed, current_scale.y - spill_clean_speed)	
 		print("new scale spill 1", new_scale)
-
-		if (
-			new_scale < current_scale
-			and not mop.is_dirty
-		):
-			mop.get_dirty()
 		
 		canvas_sprite2.scale = new_scale
 	elif current_spill == 2:
 		current_scale = canvas_sprite3.scale
 		new_scale = Vector2(current_scale.x - spill_clean_speed, current_scale.y - spill_clean_speed)	
 		print("new scale spill 2", new_scale)
-
-		if (
-			new_scale < current_scale
-			and not mop.is_dirty
-		):
-			mop.get_dirty()
 		
 		canvas_sprite3.scale = new_scale
 		
@@ -212,8 +229,29 @@ func update_image(rect: Rect2i) -> void:
 #
 	#progress_label.text = ("Erased: %d%%" % erased_percentage)
 
+func check_mop_clean() -> void:
+	print("mop_dirtied_thresh", mop_dirtied_thresh)
+	print("mop_dirtied_amount", mop_dirtied_amount)
+
+	if (new_scale < current_scale and not mop.is_dirty):
+		mop.get_dirty()
+	elif (mop.is_dirty and mop_dirtied_amount >= mop_dirtied_thresh):
+		
+		bucket_area.area_entered.connect(
+		func(_area: Area2D):
+			if _area == moping_area && not mop.is_wet:
+				mop.wet_mop()
+				print("mop is now wet again")
+				text_bubble.mop_entered()
+		)
+	else:
+		mop_dirtied_amount += mop_dirtied_speed
+			
 func check_machine_clean() -> void:
 	if remaining_ratio <= machine_clean_ratio and current_spill == 2:
+		# machine clean ratio should always be slightly higher than
+		# "allowed spill remaining ratio final" so the player can see the
+		# clean drink machine for a quick moment before the game exits
 		machine_clean.visible = true
 		machine_dirty.visible = false
 	else:
@@ -226,7 +264,7 @@ func check_for_win() -> void:
 		#return
 	print("remaining_ratio", remaining_ratio)
 	
-	if remaining_ratio <= allowed_remaining_ratio and current_spill == 0:
+	if remaining_ratio <= allowed_spill_remaining_ratio_1 and current_spill == 0:
 		canvas_sprite.visible = false
 		canvas_sprite2.visible = true
 		canvas_image = canvas_sprite2.texture.get_image()
@@ -246,7 +284,7 @@ func check_for_win() -> void:
 		new_scale = Vector2(1.0, 1.0)
 		print("moving to second spill")
 		
-	elif remaining_ratio <= allowed_remaining_ratio2 and current_spill == 1:
+	elif remaining_ratio <= allowed_spill_remaining_ratio_2 and current_spill == 1:
 		canvas_sprite2.visible = false
 		canvas_sprite3.visible = true
 		canvas_image = canvas_sprite3.texture.get_image()
@@ -266,7 +304,7 @@ func check_for_win() -> void:
 		new_scale = Vector2(1.0, 1.0)
 		print("moving to final spill")
 		
-	elif remaining_ratio <= allowed_remaining_ratio3 and current_spill == 2:
+	elif remaining_ratio <= allowed_spill_remaining_ratio_final and current_spill == 2:
 		win_game()
 
 

@@ -51,14 +51,16 @@ func _exit_tree() -> void:
 
 
 func wet_mop() -> void:
+	splash.play()
 	if not is_wet:
-		splash.play()
 		is_wet = true
-		bubbles.emitting = true
-		if used_scrubber:
-			texture = wet_scrubber_texture
-		else:
-			texture = wet_mop_texture
+	is_dirty = false
+	
+	bubbles.emitting = true
+	if used_scrubber:
+		texture = wet_scrubber_texture
+	else:
+		texture = wet_mop_texture
 
 
 func _input(event: InputEvent) -> void:

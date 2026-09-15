@@ -59,11 +59,13 @@ machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
 text_bubble = NodePath("../Bucket/TippyText")
-allowed_remaining_ratio = 0.7
-allowed_remaining_ratio2 = 0.6
-allowed_remaining_ratio3 = 0.6
-machine_clean_ratio = 0.6
+allowed_spill_remaining_ratio_1 = 0.7
+allowed_spill_remaining_ratio_2 = 0.6
+allowed_spill_remaining_ratio_final = 0.6
+machine_clean_ratio = 0.7
 spill_clean_speed = 0.025
+mop_dirtied_speed = 0.1
+mop_dirtied_thresh = 0.2
 
 [node name="Spills2" type="Sprite2D" parent="." unique_id=618876007]
 position = Vector2(1000, 680)
