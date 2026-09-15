@@ -124,6 +124,8 @@ var ingredients: int:
 		else:
 			ingredients = new_value
 var spill_on_floor := false
+# this is rolled when the machine breaks down
+var next_repair_minigame: String
 
 var test_1: int = 0
 var test_2: int = 0
@@ -831,6 +833,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	customer.leave_store()
 	_set_customer(null)
 
+
 func break_down() -> void:
 	if broken_down:
 		return
@@ -838,6 +841,7 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
+	next_repair_minigame = REPAIR_MINIGAMES.pick_random()
 
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
@@ -901,7 +905,7 @@ func _on_fix_machine_button_pressed() -> void:
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_machine_fixed)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
-	Events.minigame_active.emit(REPAIR_MINIGAMES.pick_random())
+	Events.minigame_active.emit(next_repair_minigame)
 
 
 func _on_machine_fixed() -> void:
