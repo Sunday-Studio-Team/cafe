@@ -443,6 +443,20 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.4, 0.5), Vector2(1, 1)]
 }
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath(".")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [50.0],
+"method": &"shake_screen"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wegfb"]
 resource_name = "come_in_pass"
@@ -588,7 +602,7 @@ _data = {
 &"come_in_pass": SubResource("Animation_wegfb")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "animation_player", "cafe_profits", "goal", "earnings")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -615,6 +629,7 @@ animation_player = NodePath("AnimationPlayer")
 cafe_profits = NodePath("NewUIContainer/Paper/CafeProfits")
 goal = NodePath("NewUIContainer/Paper/Goal")
 earnings = NodePath("NewUIContainer/Paper/Earnings")
+new_ui_container = NodePath("NewUIContainer")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
 anchors_preset = 15

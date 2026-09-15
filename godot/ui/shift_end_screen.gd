@@ -26,6 +26,7 @@ extends CanvasLayer
 @export var cafe_profits: RichTextLabel
 @export var goal: RichTextLabel
 @export var earnings: RichTextLabel
+@export var new_ui_container: Control
 
 
 var value_to_show_on_bank_total: float
@@ -122,7 +123,7 @@ func _on_time_up() -> void:
 	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
 	win_shift_sound.pitch_scale = 1.2
 	win_shift_sound.play()
-	await get_tree().create_timer(1.5).timeout
+	await get_tree().create_timer(1.2).timeout
 	earnings.show()
 	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
 	win_shift_sound.pitch_scale = 1.5
@@ -189,6 +190,25 @@ func _on_time_up() -> void:
 	button_shine_tween.tween_property(button, "modulate", Color.from_hsv(0.0, 0.0, 1.374, 1.0), 1)
 	button_shine_tween.tween_property(button, "modulate", Color.WHITE, 1)
 	button_shine_tween.tween_interval(2)
+
+func shake_screen(intensity:float):
+	var shake_intensity = intensity
+	var panel_original_position: Vector2 = new_ui_container.position
+	var tween = new_ui_container.create_tween()
+	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+
+	tween.tween_property(new_ui_container, "position", new_ui_container.position + shake_offset_target, 0.025)
+	for i in range(10):
+		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+		tween.chain().tween_property(
+			new_ui_container,
+			"position",
+			new_ui_container.position + shake_offset_target,
+			0.025,
+		)
+
+	tween.tween_property(new_ui_container, "position", panel_original_position, 0.1)
+
 
 func grant_day_rewards(passed_day: bool) -> void: 
 	var current_day: int = Global.day
