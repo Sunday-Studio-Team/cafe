@@ -35,11 +35,27 @@ scale_max = 0.39999998
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
 size = Vector2(241, 130)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kx0vh"]
-
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
+[node name="Background" type="Control" parent="." unique_id=77572464]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="BgTextureRect" type="TextureRect" parent="Background" unique_id=1446066437]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_eu0yc")
+stretch_mode = 5
+
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=1478927896]
+visible = false
 position = Vector2(961, 536)
 texture = ExtResource("1_eu0yc")
 
@@ -53,22 +69,42 @@ canvas_sprite = NodePath(".")
 progress_label = NodePath("../UI/MarginContainer/Percentage")
 moping_area = NodePath("../Mop/MopHeadHitbox")
 bucket = NodePath("../Bucket")
-machine_clean = NodePath("../TippyMachineClean")
-machine_dirty = NodePath("../TippyMachineSpill")
+machine_clean = NodePath("../TippyMachineSpill/TippyMachineCleanTextureRect")
+machine_dirty = NodePath("../TippyMachineSpill/TippyMachineSpillTextureRect")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
 text_bubble = NodePath("../Bucket/TippyText")
 allowed_remaining_ratio = 0.05
 machine_clean_ratio = 0.4
 
-[node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
-position = Vector2(932, 538)
-texture = ExtResource("2_eu0yc")
+[node name="TippyMachineSpill" type="Control" parent="." unique_id=946595389]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -28.0
+offset_right = 1892.0
+offset_bottom = 1080.0
 
-[node name="TippyMachineClean" type="Sprite2D" parent="." unique_id=2093052380]
+[node name="TippyMachineSpillTextureRect" type="TextureRect" parent="TippyMachineSpill" unique_id=574325556]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eu0yc")
+stretch_mode = 5
+
+[node name="TippyMachineCleanTextureRect" type="TextureRect" parent="TippyMachineSpill" unique_id=788855678]
 visible = false
-position = Vector2(932, 537)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_n873u")
+stretch_mode = 5
 
 [node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
 position = Vector2(221, 292.00006)
