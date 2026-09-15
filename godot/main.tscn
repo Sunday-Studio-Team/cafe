@@ -314,7 +314,6 @@
 [ext_resource type="Resource" uid="uid://ww00tl82dwjn" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_2.tres" id="180_sfu8n"]
 [ext_resource type="Resource" uid="uid://qa8su28cfirs" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_3.tres" id="181_7ljty"]
 [ext_resource type="Resource" uid="uid://cicbrit366xax" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_4.tres" id="182_nmlsr"]
-[ext_resource type="AudioStream" uid="uid://da3xxh2xhpf1o" path="res://audio/music/customer_area_music.mp3" id="182_suf1q"]
 [ext_resource type="Resource" uid="uid://dc51jogos0jcr" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_5.tres" id="183_87vht"]
 [ext_resource type="Resource" uid="uid://dcybv7qvu05aa" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_spill_cleaned_1.tres" id="183_q0hco"]
 [ext_resource type="Resource" uid="uid://dq0g20th3uxor" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_6.tres" id="184_2fit5"]
@@ -363,9 +362,6 @@
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
-[ext_resource type="Script" uid="uid://bdoq2pfqp2aiu" path="res://customer_area_music.gd" id="278_nckbc"]
-[ext_resource type="AudioStream" uid="uid://cdpq40xbmsibq" path="res://audio/music/customer_area_shift_ending_music.mp3" id="279_043in"]
-[ext_resource type="AudioStream" uid="uid://d0mq5yypnhim1" path="res://audio/music/customer_area_shift_ending_music_outro_loop.mp3" id="280_043in"]
 [ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
@@ -414,6 +410,7 @@
 [ext_resource type="Resource" uid="uid://ccqhq7cuo3kxr" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day5_5.tres" id="319_pbe4p"]
 [ext_resource type="Resource" uid="uid://cd8s5g1qv8vfj" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day5_6.tres" id="320_8ldsf"]
 [ext_resource type="Resource" uid="uid://dsg2k6e5km856" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day5_7.tres" id="321_f4177"]
+[ext_resource type="PackedScene" uid="uid://b1h38lx2btyla" path="res://customer_area_music_player.tscn" id="404_mfcn2"]
 
 [sub_resource type="Resource" id="Resource_1yv1y"]
 script = ExtResource("4_ovcoh")
@@ -1356,7 +1353,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_cit2p"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_mfcn2"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1367,7 +1364,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_46ndd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kcnd4"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1378,7 +1375,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3cabt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fgks3"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1389,7 +1386,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_swcop"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_cit2p"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -2550,7 +2547,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.9575929, 0.052280813, -0.28334096, -1.6763803e-08, 0.9833997, 0.18145235, 0.28812397, -0.17375757, 0.9416964, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.9575929, 0.052280825, -0.283341, -1.8626448e-08, 0.9833997, 0.18145235, 0.288124, -0.17375757, 0.9416964, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2649,7 +2646,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_cit2p")
+texture = SubResource("ViewportTexture_mfcn2")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2662,7 +2659,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_46ndd")
+texture = SubResource("ViewportTexture_kcnd4")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2679,7 +2676,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_3cabt")
+texture = SubResource("ViewportTexture_fgks3")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2696,7 +2693,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_swcop")
+texture = SubResource("ViewportTexture_cit2p")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.700687)
@@ -2882,16 +2879,8 @@ stream = ExtResource("223_ycw8e")
 stream = ExtResource("137_g3y5b")
 volume_db = -5.0
 
-[node name="CustomerAreaMusic" type="AudioStreamPlayer3D" parent="." unique_id=1077236725]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 2.4, -3.5)
-stream = ExtResource("182_suf1q")
-volume_db = -20.0
-max_db = -5.0
-autoplay = true
-bus = &"DiegeticMusic"
-script = ExtResource("278_nckbc")
-shift_ending_music = ExtResource("279_043in")
-shift_ending_music_outro_loop = ExtResource("280_043in")
+[node name="CustomerAreaMusic" parent="." unique_id=109925331 instance=ExtResource("404_mfcn2")]
+transform = Transform3D(0.6857654, -0.009775481, -0.727757, 0, 0.9999098, -0.013431129, 0.7278226, 0.009210604, 0.68570346, 4.4972587, 2.7244682, -3.7560964)
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)

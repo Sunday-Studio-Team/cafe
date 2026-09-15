@@ -38,15 +38,16 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 			PlayerMode.THREE_D:
 				_audio_stream_player_3d.stream = _active_voice_line.audio_stream
 				_audio_stream_player_3d.play()
-				var _playing_animation := tippy_loudspeaker_model.animation_player.get_animation("playing")
-				_playing_animation.loop_mode = Animation.LOOP_LINEAR
+
 				tippy_loudspeaker_model.animation_player.play("playing")
+
 				await _audio_stream_player_3d.finished
-				# i think if we just stop() the player itll jump back to its reset position
-				# so this is smoother
-				# (ideally we could get rid of the delay where it waits for the end of the
-				# animation tho . . .)
-				_playing_animation.loop_mode = Animation.LOOP_NONE
+
+				# wait for the current loop of the animation to end so we can stop it smoothly
+				while tippy_loudspeaker_model.animation_player.current_animation_position > 0.1:
+					await get_tree().process_frame
+				
+				tippy_loudspeaker_model.animation_player.stop()
 			_:
 				printerr("Unknown VoiceLinePlayer.PlayerMode.")
 				return
