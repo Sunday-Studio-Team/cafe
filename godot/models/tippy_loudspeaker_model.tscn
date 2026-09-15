@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://st3nonrdbrrv"]
 
 [ext_resource type="Script" uid="uid://dk1jbgmw7xqet" path="res://models/tippy_loudspeaker_model.gd" id="1_ftya1"]
-[ext_resource type="PackedScene" uid="uid://p0cwommaaugb" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker.glb" id="1_g3te1"]
+[ext_resource type="PackedScene" uid="uid://bjmowrk26vnry" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker.glb" id="1_g3te1"]
 
 [sub_resource type="Curve" id="Curve_3nopi"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8013698, 0.88888884), -0.489113, -0.489113, 0, 0, Vector2(0.95205474, 0), 0.0, 0.0, 0, 0]
@@ -96,3 +96,5 @@ draw_pass_1 = SubResource("TorusMesh_0ffxp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=1282033781]
 libraries/ = SubResource("AnimationLibrary_2sc6s")
+
+[editable path="Model"]
