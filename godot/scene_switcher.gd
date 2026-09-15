@@ -75,12 +75,13 @@ func _start_tippy_loading() -> void:
 func _set_loading_progress(ratio: float) -> void:
 	_loading_progress_bar.value = clampf(ratio, 0.0, 1.0)
 	var target_stage: int = 0
-	if ratio >= 0.99:
-		target_stage = 3
-	elif ratio >= 0.6:
-		target_stage = 2
-	elif ratio >= 0.3:
-		target_stage = 1
+	match ratio:
+		ratio when ratio >= 0.99:
+			target_stage = 3
+		ratio when ratio >= 0.6:
+			target_stage = 2
+		ratio when ratio >= 0.3:
+			target_stage = 1
 	# Loading estimates can jump or regress; the character only moves forward.
 	_tippy_target_stage = maxi(_tippy_target_stage, target_stage)
 	_advance_tippy_animation()
