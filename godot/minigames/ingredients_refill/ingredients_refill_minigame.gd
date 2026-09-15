@@ -21,11 +21,11 @@ const MAX_VERTICAL_BEAN_FORCE := 450
 @export var bag_shake_sound: AudioStreamPlayer2D
 @export var gain_score_sound: AudioStreamPlayer
 @export var normal_face_sprite: CompressedTexture2D
-@export var bomb_face_sprite: CompressedTexture2D 
+@export var bomb_face_sprite: CompressedTexture2D
 @export var screw_face_sprite: CompressedTexture2D
 @export var golden_face_sprite: CompressedTexture2D
 @export var normal_visual_effect: CompressedTexture2D
-@export var bomb_visual_effect: CompressedTexture2D 
+@export var bomb_visual_effect: CompressedTexture2D
 @export var screw_visual_effect: CompressedTexture2D
 @export var golden_visual_effect: CompressedTexture2D
 @export var face_sprite:Sprite2D
@@ -59,7 +59,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	
+
 	var left_right_input: float = Input.get_vector("move_left", "move_right", "move_forward", "move_back").x
 	cup.position.x += left_right_input * MOVE_SPEED
 	cup.position.x = clamp(cup.position.x, 350, 1920-350)
@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
 	meter.value = (beans_in_cup as float) / (NUM_BEANS_TO_SPAWN as float)
 
 func spawn_bean()->void:
-	
+
 	if beans_spawned >= NUM_BEANS_TO_SPAWN:
 		#we have too many beans. end minigame.
 		# all beans have spawned; start a timer to end the minigame (signal)
@@ -96,19 +96,19 @@ func spawn_bean()->void:
 	#
 	#return
 	#
-	
+
 	if  beans_spawned< 4 and gold_bean_spawned == false : #gold bean case
-	
+
 		random_int =  randi_range(1,100)
 		if(beans_spawned==0 and random_int<5): #33
 			spawn_gold_bean(bean)
-		
+
 		elif(beans_spawned==1 and random_int<40): #40
 			spawn_gold_bean(bean)
-		
+
 		elif(beans_spawned==2 and random_int<60): #67
 			spawn_gold_bean(bean)
-		
+
 		elif(beans_spawned==3): #100
 			spawn_gold_bean(bean)
 		else:
@@ -119,7 +119,7 @@ func spawn_bean()->void:
 		if (bomb_bean_spawned==true):
 			spawn_normal_bean(bean)
 		else:
-			
+
 			if random_int<(25 + beans_spawned *3):
 				spawn_bomb_bean(bean)
 			else:
@@ -128,7 +128,7 @@ func spawn_bean()->void:
 	return
 
 func spawn_normal_bean(bean:PhysicsBody2D) -> void:
-	bean = bean_scene.instantiate()			
+	bean = bean_scene.instantiate()
 	#bean.scale= Vector2(2,2) #dont do this lol. rigidbodies will attempt to revert this.
 	bean.gravity_scale = 0.47
 	bean.global_position = pour_point.global_position
@@ -145,9 +145,9 @@ func spawn_gold_bean(bean:PhysicsBody2D) -> void:
 	bean.gravity_scale = 0.33 + randf_range(-0.15, 0.15)
 	bean.global_position = pour_point.global_position
 	bean.global_position.x-= 53
-	
-	bean.global_position.y-= 22 #adding a negative number, puts it vertically north. 
-	
+
+	bean.global_position.y-= 22 #adding a negative number, puts it vertically north.
+
 	bean.add_to_group("beans")
 	add_child(bean)
 	bean.apply_impulse(Vector2(randf_range(-MAX_HORIZONTAL_BEAN_FORCE+30, -MAX_HORIZONTAL_BEAN_FORCE/1.8), randf_range(-975,-940)))
@@ -157,7 +157,7 @@ func spawn_gold_bean(bean:PhysicsBody2D) -> void:
 
 func spawn_bomb_bean(bean:PhysicsBody2D) -> void:
 	bomb_bean_spawned= true
-	bean = bomb_bean_scene.instantiate()			
+	bean = bomb_bean_scene.instantiate()
 	bean.is_bomb= true
 	bean.gravity_scale = 0.2
 	bean.global_position = pour_point.global_position
@@ -174,7 +174,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 	var bean_type : String= bean.scene_file_path.get_file() # ex 'coffee_bean.tscn'
 
 	if not collected_beans.has(bean):
-		#collected_beans is an array of beans. 
+		#collected_beans is an array of beans.
 		if "bomb" in bean_type:
 			bomb() #also calls Events.emit_signal("minigame_end")
 			return
@@ -205,7 +205,7 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 func bomb() ->void:
 	face_sprite.texture = bomb_face_sprite
 	visual_effect.texture = bomb_visual_effect
-	
+
 	var using_machine: Machine = Global.machine_in_use
 	if using_machine == null:
 		return
@@ -217,11 +217,11 @@ func bomb() ->void:
 func screw():
 	face_sprite.texture = screw_face_sprite
 	visual_effect.texture = screw_visual_effect
-	
+
 	var _closest_machine = get_closest_machine_or_null()
 
 	await get_tree().create_timer((NUM_BEANS_TO_SPAWN-2)*bean_spawn_timer.wait_time + bean_spawn_timer.time_left, false).timeout #can we calculate when the minigame will end?
-	
+
 	#machine, when calling break_down() has a somewhat variable delay.
 	if _closest_machine.broken_down == false: #don't break a machine that is already broken
 		_closest_machine.break_down()
@@ -233,9 +233,9 @@ func gold(bean: PhysicsBody2D):
 
 	beans_in_cup = NUM_BEANS_TO_SPAWN
 
-	#create a for loop; until 
+	#create a for loop; until
 	while len(collected_beans)<NUM_BEANS_TO_SPAWN:
-		collected_beans.append(bean)	
+		collected_beans.append(bean)
 
 	await get_tree().create_timer(0.5, false).timeout
 

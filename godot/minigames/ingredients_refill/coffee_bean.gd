@@ -13,7 +13,7 @@ func _ready() -> void:
 	collision.set_deferred("disabled", true)
 	await get_tree().create_timer(0.25).timeout
 	collision.set_deferred("disabled", false)
-	
+
 	pass # Replace with function body.
 
 
@@ -27,14 +27,14 @@ func _physics_process(delta: float) -> void:
 			time_counter_float -=1/60
 			gravity_scale+=0.03
 		return
-	
-	
-	
-	if(seconds_passed>2): #prevents jitter 
+
+
+
+	if(seconds_passed>2): #prevents jitter
 		return
-	
+
 	time_counter_float += delta
-	
+
 	if(is_gold):
 		seconds_passed+= delta
 		if(seconds_passed>.4):
@@ -51,4 +51,3 @@ func _physics_process(delta: float) -> void:
 			time_counter_float -=1/60
 			gravity_scale+=0.07
 	pass
-	
