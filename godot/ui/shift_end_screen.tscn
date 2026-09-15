@@ -18,7 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://durkhraw8k71a" path="res://sprites/endshift_ui/money_center_colored copy.png" id="9_e16oh"]
 [ext_resource type="Texture2D" uid="uid://dalclkggajc36" path="res://sprites/endshift_ui/tippy_angry.png" id="10_66p45"]
 [ext_resource type="Texture2D" uid="uid://bmuf31kycwlk3" path="res://sprites/endshift_ui/f_fail_colored_v3.png" id="11_3n0pv"]
+[ext_resource type="AudioStream" uid="uid://bvd7epjeo0nwc" path="res://audio/end_shift_ui/falling_letter_buildup_and_crash_lose.wav" id="12_e16oh"]
 [ext_resource type="Texture2D" uid="uid://b41bjd1ujbwbc" path="res://sprites/endshift_ui/failed_paper_colored.png" id="12_s5d2k"]
+[ext_resource type="AudioStream" uid="uid://d0xui4lcbes53" path="res://audio/end_shift_ui/falling_letter_buildup_and_crash_win.wav" id="14_s5d2k"]
 
 [sub_resource type="Theme" id="Theme_70k24"]
 default_font_size = 128
@@ -457,6 +459,21 @@ tracks/13/keys = {
 "method": &"shake_screen"
 }]
 }
+tracks/14/type = "audio"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("ArriveSound")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.50129956,
+"stream": ExtResource("12_e16oh")
+}],
+"times": PackedFloat32Array(0.0012995601)
+}
+tracks/14/use_blend = true
 
 [sub_resource type="Animation" id="Animation_wegfb"]
 resource_name = "come_in_pass"
@@ -594,6 +611,21 @@ tracks/10/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/11/type = "audio"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ArriveSound")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.5012995,
+"stream": ExtResource("14_s5d2k")
+}],
+"times": PackedFloat32Array(0.0012995005)
+}
+tracks/11/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qc8dq"]
 _data = {
@@ -962,6 +994,9 @@ libraries/ = SubResource("AnimationLibrary_qc8dq")
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_g6pkj")
+volume_db = -10.0
+
+[node name="ArriveSound" type="AudioStreamPlayer" parent="." unique_id=1479814443]
 volume_db = -10.0
 
 [node name="LoseShiftSound" type="AudioStreamPlayer" parent="." unique_id=18379381]
