@@ -50,8 +50,12 @@ var reviews: Array[Review]
 var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
+# the customer being dealt with in the typing minigame
+# (NOT the customer at the front of the help desk queue)
 var active_help_desk_customer: Customer
+var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
+var holding_trash := false
 var day := 0
 var shift_length: float
 var shift_time_remaining: float
@@ -82,6 +86,7 @@ var employee_rating: float = 0:
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
+var total_trash: float
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
@@ -112,7 +117,7 @@ var in_main_menu := false
 var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_active_item_menu := false
-var in_tutorial_screen: bool = false
+var in_popup_tutorial_screen: bool = false
 var in_end_shift_early_menu := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
@@ -130,7 +135,7 @@ var in_ui: bool:
 				or in_level_select_menu
 				or in_end_screen
 				or in_active_item_menu
-				or in_tutorial_screen
+				or in_popup_tutorial_screen
 				or in_end_shift_early_menu
 				or in_dialog_screen
 				or in_options_menu
@@ -162,8 +167,16 @@ var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
-# Free-camera mode
-var free_camera_enabled: bool = false
+var tutorial_manager: TutorialManager
+
+enum CameraMode {
+	PLAYER,
+	CINEMATIC,
+	DEBUG_FREE_CAM
+}
+var camera_mode: CameraMode = CameraMode.PLAYER
+
+var item_loadout_menu: ItemLoadoutMenu
 
 
 func _ready() -> void:

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://udy2qfcmb0x6"]
+
+[ext_resource type="Script" uid="uid://bpnxusltsqdyt" path="res://trash_can.gd" id="1_bgvmr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wnsl6"]
+size = Vector3(0.8520508, 1.316124, 0.8761902)
+
+[node name="TrashCan" type="Area3D" unique_id=1523606592]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_bgvmr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=467515229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00390625, 0.66010666, -0.0030059814)
+shape = SubResource("BoxShape3D_wnsl6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

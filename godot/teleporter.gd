@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body is CharacterBody3D:
+	if body is Player:
 		use_sound.play()
 		body.global_position = destination.global_position
 		body.rotation.y = destination.rotation.y - deg_to_rad(90)

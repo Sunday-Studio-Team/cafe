@@ -19,9 +19,12 @@
 [ext_resource type="PackedScene" uid="uid://h3hjb018pudc" path="res://Assets/bonsai/bonsai.tscn" id="16_h1g2g"]
 [ext_resource type="PackedScene" uid="uid://dp2f5wjrstomy" path="res://Assets/gourd/gourd.tscn" id="17_upty0"]
 [ext_resource type="PackedScene" uid="uid://ctatvirne26k8" path="res://Assets/lamps/lamp_1&5_(1).tscn" id="19_upty0"]
-[ext_resource type="Texture2D" uid="uid://dkjlhfkf1llhe" path="res://Assets/crane/cranes_depositphotos_214530070-stock-photo-traditional-japanese-pattern-origami-paper.jpg" id="22_iuv0i"]
+[ext_resource type="PackedScene" uid="uid://cp5tqvef3w4rg" path="res://Assets/desk_posters/luckycat_poster.tscn" id="22_iuv0i"]
 [ext_resource type="Texture2D" uid="uid://ftsy86sxb8oe" path="res://Assets/lamps/Lamp 1&5 (1)_Lamps_Base_color.png" id="22_xbtx5"]
 [ext_resource type="PackedScene" uid="uid://dsfxlutfu7q7j" path="res://Assets/cat/goldcat.tscn" id="23_xbtx5"]
+[ext_resource type="PackedScene" uid="uid://bq5ucnj6r0t13" path="res://Assets/new_desk/desk_updated.tscn" id="24_w7ld0"]
+[ext_resource type="PackedScene" uid="uid://qiaejs1sjhoo" path="res://Assets/old coffee machine/old_coffee_machine_fabric.tscn" id="26_bdybn"]
+[ext_resource type="Texture2D" uid="uid://dkjlhfkf1llhe" path="res://Assets/crane/cranes_depositphotos_214530070-stock-photo-traditional-japanese-pattern-origami-paper.jpg" id="22_iuv0i"]
 [ext_resource type="Texture2D" uid="uid://b3ghosdsqnew" path="res://Assets/crane/cranes_58727c91164c6344bf5e15914e38aa3b.jpg" id="24_bdybn"]
 [ext_resource type="PackedScene" uid="uid://bdcr56qdkwqg6" path="res://Assets/chinese deco/TeaScroll Clubhouse Lamp Prop.glb" id="80_h3q4e"]
 [ext_resource type="PackedScene" uid="uid://bv10t5fhylsf0" path="res://Assets/chinese deco/chinese knot.glb" id="80_luojq"]
@@ -39,7 +42,11 @@ size = Vector3(0.27685547, 1.5631714, 2.0865479)
 size = Vector3(2.010498, 1.5170898, 0.5275879)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8n35f"]
-size = Vector3(0.8293457, 1, 1.1235352)
+size = Vector3(0.8293457, 1, 0.6065674)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fp6ic"]
+radius = 0.26123047
+height = 0.888916
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bn8wp"]
 resource_name = "Sketchbooks, comics, eraser, ruler"
@@ -847,9 +854,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ndbkw")
 
-[node name="Desk" type="Node3D" unique_id=466216321 node_paths=PackedStringArray("interactable")]
+[node name="Desk" type="Node3D" unique_id=466216321 node_paths=PackedStringArray("interactable", "fabric_cover_for_monitor")]
 script = ExtResource("1_7gdev")
 interactable = NodePath("Interactable")
+fabric_cover_for_monitor = NodePath("FabricCoverForMonitor")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=691218958 node_paths=PackedStringArray("mesh")]
 script = ExtResource("1_ep8l3")
@@ -877,8 +885,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13258833, 0.69718635, -0.4
 shape = SubResource("BoxShape3D_xbtx5")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=1210067965]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8659401, 0.50634766, 0.061767578)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8659401, 0.50634766, -0.19671631)
 shape = SubResource("BoxShape3D_8n35f")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="StaticBody3D" unique_id=1724097470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9664347, 0.45422363, 1.0504465)
+shape = SubResource("CapsuleShape3D_fp6ic")
 
 [node name="NewShopItemsPrompt" type="Label3D" parent="." unique_id=1744972095]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41726112, 1.4025844, -0.1311822)
@@ -992,7 +1004,6 @@ omni_range = 0.5586623
 
 [node name="Sketchbooks, comics, rulers (1)" parent="." unique_id=1251070279 instance=ExtResource("14_ffp6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
-visible = false
 
 [node name="Eraser" parent="Sketchbooks, comics, rulers (1)" index="0" unique_id=684146448]
 transform = Transform3D(0.007462033, 0, -0.025804533, 0, 0.0060163466, 0, 0.015791167, 0, 0.012193796, 2.2027125, 0.70163405, -1.1824005)
@@ -1097,6 +1108,7 @@ visible = false
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light" index="0" unique_id=311828212]
 transform = Transform3D(1.0000001, 0, -5.9604645e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -0.17553133, 0.022158861, 0.047783375)
+visible = false
 light_color = Color(0.87223864, 0.63305277, 0.24587479, 1)
 light_energy = 2.046
 light_volumetric_fog_energy = 0.0
@@ -1118,6 +1130,12 @@ shadow_enabled = true
 omni_range = 0.535
 omni_attenuation = 0.718
 
+[node name="luckycat_poster" parent="Lamp 1&5 (1)" unique_id=1756407232 instance=ExtResource("22_iuv0i")]
+transform = Transform3D(0.10939017, -0.03333922, -0.6905957, 0.0052158935, 0.69920564, -0.03292868, 0.69138026, 0, 0.10951445, 1.9847326, 0.89197266, -1.0652211)
+
+[node name="luckycat_poster2" parent="Lamp 1&5 (1)" unique_id=254400280 instance=ExtResource("22_iuv0i")]
+transform = Transform3D(-0.00037171718, -0.05323661, -1.128907, 0.095364824, 1.1248792, -0.05307807, 1.1261309, -0.09527639, 0.0041222093, 0.14663464, 0.5225129, -1.3939862)
+
 [node name="Day0DeskProps" type="Node3D" parent="." unique_id=1163803940]
 
 [node name="Newspaper (1)" type="Node3D" parent="Day0DeskProps" unique_id=1719523407]
@@ -1136,7 +1154,7 @@ transform = Transform3D(0.9648877, 0, -0.26266277, 0, 1, 0, 0.26266277, 0, 0.964
 mesh = SubResource("ArrayMesh_eobft")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Day0DeskProps/Light2" unique_id=1102422813]
-transform = Transform3D(1.0000001, 0, -5.9604645e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -0.17553133, 0.022158861, 0.047783375)
+transform = Transform3D(1.0000001, 0, -5.9604645e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -0.18347567, 0.022158861, 0.018599689)
 light_color = Color(0.87223864, 0.63305277, 0.24587479, 1)
 light_energy = 2.046
 light_volumetric_fog_energy = 0.0
@@ -1144,6 +1162,18 @@ light_specular = 0.44
 shadow_enabled = true
 omni_range = 0.704
 omni_attenuation = 0.624
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Day0DeskProps/Light2/OmniLight3D" unique_id=1880053172]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, -0.42843366, 0.17413568, 0.21494013)
+light_color = Color(1, 0.7615, 0.47000003, 1)
+light_energy = 0.4
+omni_range = 1.345
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Day0DeskProps/Light2/OmniLight3D" unique_id=1194826339]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, 0.040980518, 0.20870817, -0.38755053)
+light_color = Color(1, 0.7615, 0.47000003, 1)
+light_energy = 0.4
+omni_range = 1.345
 
 [node name="Stack of sketchbooks_006" type="MeshInstance3D" parent="Day0DeskProps" unique_id=2076378678]
 transform = Transform3D(0.083037645, 0, 0, 0, -0.0012559147, 0.014828659, 0, -0.113751285, -0.00016372149, 0.7702811, 1.2635092, 0.6113157)
@@ -1195,6 +1225,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22748578, -0.34178495, -0.0
 light_color = Color(1, 0.6446667, 0.18, 1)
 light_specular = 0.0
 omni_range = 0.5586623
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Day1DeskProps/Lamp2/OmniLight3D" unique_id=1531855168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28010535, -0.23326135, 0.34257224)
+light_color = Color(1, 0.7615, 0.47000003, 1)
+light_energy = 0.4
+omni_range = 1.258
 
 [node name="Day2DeskProps" type="Node3D" parent="." unique_id=1032963498]
 
@@ -1320,6 +1356,12 @@ omni_attenuation = 0.6
 [node name="Stack of sketchbooks_006" type="MeshInstance3D" parent="Day5DeskProps/Lamp2" unique_id=1154617566]
 transform = Transform3D(0.081415325, 0.022375416, 3.22048e-05, -1.5414699e-15, -0.001255916, 0.0148286745, 0.016333932, -0.11152902, -0.00016052298, -2.3075094, 0.14839911, -0.49246538)
 mesh = SubResource("ArrayMesh_7517r")
+
+[node name="DeskUpdated" parent="." unique_id=984576301 instance=ExtResource("24_w7ld0")]
+transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, -0.14153469, 0, 0.6410717)
+
+[node name="FabricCoverForMonitor" parent="." unique_id=1016034913 instance=ExtResource("26_bdybn")]
+transform = Transform3D(0.5409367, 0, -0.70710677, 0, 1, 0, 0.5409367, 0, 0.70710677, 0.43910122, 0.736445, -0.11008166)
 
 [editable path="office desk"]
 [editable path="office desk/cranes"]

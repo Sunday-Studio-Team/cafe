@@ -5,7 +5,7 @@ extends Node3D
 
 signal drink_prepared
 
-const BLAST_LAUNCH_MAGNITUDE: float = 20.0
+const BLAST_LAUNCH_MAGNITUDE: float = 10.0
 const REPAIR_MINIGAMES := ["Colors", "Arrows"]
 const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
@@ -61,15 +61,33 @@ enum EqualStates {
 @export var idle_ing_bar_array:Array[Texture2D]
 @export var active_ing_bar_array:Array[Texture2D]
 
-@export var accept_counter: TextureRect
-@export var remake_counter: TextureRect
-@export var counter_sprites: Array[Texture2D]
-enum CounterStates {
-	Empty,
-	Neutral,
-	RatingUp,
-	RatingDown
+@export var arrows:Array[Texture]
+@export var icons:Array[Texture]
+enum Arrow {
+	UP1,
+	UP2,
+	UP3,
+	NEUTRAL,
+	DOWN1,
+	DOWN2,
+	DOWN3
 }
+
+enum Icon {
+	MONEY_GREEN,
+	PERSON_GREEN,
+	PERSON_YELLOW,
+	PERSON_RED
+}
+@export var remake_money_arrow: TextureRect
+@export var remake_money_icon: TextureRect
+@export var remake_rating_arrow: TextureRect
+@export var remake_rating_icon: TextureRect
+@export var accept_money_arrow: TextureRect
+@export var accept_money_icon: TextureRect
+@export var accept_rating_arrow: TextureRect
+@export var accept_rating_icon: TextureRect
+
 
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
@@ -81,6 +99,7 @@ enum CounterStates {
 @export var hammer_hit_sound: AudioStreamPlayer
 @export var no_ingredients_sound: AudioStreamPlayer3D
 @export var airhorn_sound: AudioStreamPlayer
+@export var bomb_sound_player: AudioStreamPlayer3D
 # played when we try to refill while not holding ingredients
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
@@ -105,6 +124,8 @@ var ingredients: int:
 		else:
 			ingredients = new_value
 var spill_on_floor := false
+# this is rolled when the machine breaks down
+var next_repair_minigame: String
 
 var test_1: int = 0
 var test_2: int = 0
@@ -115,7 +136,7 @@ func _ready() -> void:
 	ordered_drink_icon.hide()
 	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
-
+	reset_icons()
 	ingredients = Stats.current.machine_starting_ingredients
 	breakdown_timer.wait_time = 0.5
 
@@ -132,7 +153,12 @@ func _ready() -> void:
 			else:
 				ingredients_warning_sound.play()
 				get_ingredients_prompt.show()
-				await get_tree().create_timer(0.5, false).timeout
+				get_ingredients_prompt.offset_transform_enabled = true
+				var t := create_tween()
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+				await t.finished
+				await get_tree().create_timer(1, false).timeout
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
@@ -152,6 +178,16 @@ var animation_index:int
 var animation_delay_timer:float = 0
 var animation_delay:float = 0.05
 
+func reset_icons():
+	remake_money_arrow.texture = null
+	remake_money_icon.texture = null
+	remake_rating_arrow.texture = null
+	remake_rating_icon.texture = null
+	accept_money_arrow.texture = null
+	accept_money_icon.texture = null
+	accept_rating_arrow.texture = null
+	accept_rating_icon.texture = null
+
 func update_animation():
 	animation_index += 1
 	if animation_index >= current_ingbar_animation.size():
@@ -159,6 +195,7 @@ func update_animation():
 	ingredient_coffeebar.texture = current_ingbar_animation[animation_index]
 func _process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
+	timer_dial.offset_transform_enabled = true
 	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
@@ -263,6 +300,7 @@ func check_for_stepping_in_spill() -> void:
 
 
 func blast_player_from_using_machine() -> void:
+	bomb_sound_player.play()
 	if gui_3d.player_using_me:
 		if Global.minigame_active:
 			Events.force_close_minigame.emit()
@@ -277,10 +315,19 @@ func blast_player_from_using_machine() -> void:
 
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
-
 	Global.player.velocity += launch_vector
-
-
+	Global.player.move_and_slide()
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	#apply velocity 3 times
+	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
+	
+	
 func set_order_action_buttons_available(button_case: String) -> void:
 	tutorial_lock_accept_drink_button = true
 	tutorial_lock_remake_drink_button = true
@@ -315,7 +362,7 @@ func show_tutorial_go_clean_spill() -> void:
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
 	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
 		Global.tutorial_go_clean_spill_shown = true
-		Global.in_tutorial_screen = true
+		Global.in_popup_tutorial_screen = true
 
 		#hide tablet so it's not in the way.
 		var tablet = get_parent().get_parent().find_child("Tablet")
@@ -343,7 +390,7 @@ func show_tutorial_go_clean_spill() -> void:
 
 		await popup.tree_exited # delays some code until event occurs
 		tablet.show()
-		Global.in_tutorial_screen = false # re enable pause
+		Global.in_popup_tutorial_screen = false # re enable pause
 
 
 func _set_customer(new_customer: Customer) -> void:
@@ -588,40 +635,50 @@ func display_drink_score() -> void:
 	made_main_ingredient_panel.correct = order.main_correct
 	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-
+	
 	if order.made_drink.extra:
 		made_extra_panel.ingredient = order.made_drink.extra
 	else:
 		made_extra_panel.ingredient = null
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
-
-	var price_labels_text: String = "+%s" % Global.float_to_price(order.final_order_price)
-	#_price_label_remake.text = price_labels_text
-	#_price_label_accept.text = price_labels_text
-
+	
+	var correct_count: int = 0
+	var total_ingredients: int = 0
+	if order.ordered_drink.main_ingredient: total_ingredients += 1
+	if order.ordered_drink.liquid: total_ingredients += 1
+	if order.ordered_drink.extra: total_ingredients += 1
+	
+	if order.main_correct: correct_count += 1
+	if order.liquid_correct: correct_count += 1
+	if order.extra_correct: correct_count += 1
+	
+	var wrong_count: int = max(total_ingredients - correct_count,0)
+	
+	accept_money_arrow.texture = arrows[Arrow.UP2]
+	accept_money_icon.texture = icons[Icon.MONEY_GREEN]
+	remake_money_arrow.texture = arrows[Arrow.UP1]
+	remake_money_icon.texture = icons[Icon.MONEY_GREEN]
+	
 	if order.star_rating_gain_for_remake > 0.0:
-		#_rating_gain_on_remake_label.modulate = Color.GREEN
-		remake_counter.texture = counter_sprites[CounterStates.RatingUp]
-		var star_rating_gain_if_remade: float = order.star_rating_gain_for_remake
-		#_rating_gain_on_remake_label.text = "🙂 +%s⭐️" % star_rating_gain_if_remade
+		remake_money_arrow.texture = arrows[Arrow.UP1]
+		remake_rating_arrow.texture = arrows[Arrow.UP2]
+		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
 	elif order.star_rating_gain_for_remake == 0.0:
-		remake_counter.texture = counter_sprites[CounterStates.Neutral]
-		#_rating_gain_on_remake_label.modulate = Color.DARK_GRAY
-		var star_rating_gain_if_remade: float = 0
-		#_rating_gain_on_remake_label.text = "+%s⭐️" % star_rating_gain_if_remade
-
+		remake_rating_arrow.texture = arrows[Arrow.NEUTRAL]
+		remake_rating_icon.texture = icons[Icon.PERSON_YELLOW]
 	if order.star_rating_loss_if_accept > 0.0:
-		#_rating_loss_on_accept_label.modulate = Color.RED
-		accept_counter.texture = counter_sprites[CounterStates.RatingDown]
-		var star_rating_loss_if_accept: float = order.star_rating_loss_if_accept
-		#_rating_loss_on_accept_label.text = "☹️ -%s⭐" % star_rating_loss_if_accept
+		accept_rating_icon.texture = icons[Icon.PERSON_RED]
+		match wrong_count:
+			1:
+				accept_rating_arrow.texture = arrows[Arrow.DOWN1]
+			2:
+				accept_rating_arrow.texture = arrows[Arrow.DOWN2]
+			3:
+				accept_rating_arrow.texture = arrows[Arrow.DOWN3]
 	elif order.star_rating_loss_if_accept == 0.0:
-		#_rating_loss_on_accept_label.modulate = Color.DARK_GRAY
-		accept_counter.texture = counter_sprites[CounterStates.Neutral]
-		var star_rating_loss_if_accept: float = 0
-		#_rating_loss_on_accept_label.text = "-%s⭐️" % star_rating_loss_if_accept
-
+		accept_rating_arrow.texture = arrows[Arrow.NEUTRAL]
+		accept_rating_icon.texture = icons[Icon.PERSON_YELLOW]
 
 func fix_machine(hammer: bool = false) -> void:
 	if hammer:
@@ -751,8 +808,7 @@ func accept_order(did_remake_drink: bool) -> void:
 			Global.employee_rating -= order.star_rating_loss_if_accept
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
-	accept_counter.texture = counter_sprites[CounterStates.Empty]
-	remake_counter.texture = counter_sprites[CounterStates.Empty]
+	reset_icons()
 	# stagger showing the update popups for rating and money if both changed
 	if Global.employee_rating != rating_before_update:
 		await get_tree().create_timer(0.8, false).timeout
@@ -777,6 +833,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	customer.leave_store()
 	_set_customer(null)
 
+
 func break_down() -> void:
 	if broken_down:
 		return
@@ -784,6 +841,7 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
+	next_repair_minigame = REPAIR_MINIGAMES.pick_random()
 
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
@@ -826,9 +884,7 @@ func _on_requested_use_active_item_machine():
 		return
 	
 	if customer:
-		#Putting new animation to test change
-		#TODO: Replace base animation with newest one
-		Events.play_viewmodel_animation.emit("airhorn_use_new")
+		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
 		customer.leave_store()
 		_set_customer(null)
@@ -849,7 +905,7 @@ func _on_fix_machine_button_pressed() -> void:
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_machine_fixed)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
-	Events.minigame_active.emit(REPAIR_MINIGAMES.pick_random())
+	Events.minigame_active.emit(next_repair_minigame)
 
 
 func _on_machine_fixed() -> void:
@@ -862,7 +918,12 @@ func _on_remake_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ingredients_warning_sound.play()
 		no_ingredients_warning.show()
-		await get_tree().create_timer(0.5, false).timeout
+		no_ingredients_warning.offset_transform_enabled = true
+		var t := create_tween()
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+		await t.finished
+		await get_tree().create_timer(1, false).timeout
 		no_ingredients_warning.hide()
 
 	Events.minigame_end.connect(_on_remade_drink)

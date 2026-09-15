@@ -83,7 +83,7 @@ func exit() -> void:
 	
 	email_app.hide()
 	gui_3d.exit_with_camera_tween()
-	Events.pc_state_change.emit()
+	Events.pc_state_change.emit(false)
 	hide()
 
 

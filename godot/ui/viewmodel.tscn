@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bwb5fieibej21"]
+
+[ext_resource type="Script" uid="uid://88l7tqjx13sk" path="res://ui/viewmodel.gd" id="1_a560m"]
+[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="2_v03f4"]
+[ext_resource type="SpriteFrames" uid="uid://cricks5lh0svk" path="res://sprites/sprite_frames_resources/hand_animations_sprite_frames.tres" id="3_gwji1"]
+
+[node name="Viewmodel" type="CanvasLayer" unique_id=70422245 node_paths=PackedStringArray("sprite")]
+process_mode = 3
+layer = 0
+script = ExtResource("1_a560m")
+sprite = NodePath("AnimatedSprite2D")
+hammer_item = ExtResource("2_v03f4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1231019997]
+position = Vector2(960, 540)
+scale = Vector2(3.43, 3.43)
+sprite_frames = ExtResource("3_gwji1")
+animation = &"airhorn_use"
+frame = 47
+frame_progress = 1.0

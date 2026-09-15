@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CustomerSpriteData" format=3 uid="uid://b7d5sb7y80221"]
+
+[ext_resource type="Texture2D" uid="uid://c12ercabhtut3" path="res://sprites/customers/boss.png" id="1_wgb4a"]
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="2_rbbno"]
+[ext_resource type="Texture2D" uid="uid://iuwhxyib45iu" path="res://sprites/customers/typing_minigame_portraits/boss_angry.png" id="3_midwm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_midwm"]
+atlas = ExtResource("1_wgb4a")
+region = Rect2(152.94998, -40.410004, 603.06, 603.06)
+
+[resource]
+script = ExtResource("2_rbbno")
+customer_name = "Boss"
+sprite = ExtResource("1_wgb4a")
+typing_minigame_portrait = ExtResource("3_midwm")
+email_crop_size_ratio = 0.69
+email_crop_center_ratio = Vector2(0.52, 0.255)
+editor_email_cropped_sprite_preview = SubResource("AtlasTexture_midwm")
+metadata/_custom_type_script = "uid://4lpdxu8g6048"
