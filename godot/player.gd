@@ -89,7 +89,7 @@ func _ready() -> void:
 
 			# scuffed 'animation' of trash appearing when we grab it
 			await Events.viewmodel_animation_finished
-			
+
 			var t := create_tween().set_parallel()
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
@@ -104,7 +104,7 @@ func _ready() -> void:
 				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
 		):
 			return
-	
+
 		global_transform = main_room_spawn_point.global_transform
 		reset_physics_interpolation()
 
@@ -320,7 +320,7 @@ func handle_customer_trash() -> void:
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
-		
+
 	#print("asdf", ingredients_bag_scene.instantiate().get_class())
 	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui

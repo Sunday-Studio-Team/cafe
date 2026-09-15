@@ -34,18 +34,18 @@ func setup() -> void:
 	# Process voice lines for faster referencing.
 	for voice_line in _voice_lines:
 		_voice_lines_by_id[voice_line.voice_line_id] = voice_line
-	
+
 func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineLocationEnum, priority: VoiceLineSystem.VoiceLinePriorityEnum) -> void:
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	if voice_line == null:
 		printerr("Missing voice line! ID %s" % voice_line_id)
 		return
-	
+
 	if _currently_playing_voice_line != null:
-		# Don't interrupt if current voice line is priority 
+		# Don't interrupt if current voice line is priority
 		if _currently_playing_voice_line_priority < priority:
 			return
-		
+
 		# Interrupt currently playing voice line.
 		for player in _currently_playing_voice_line_players:
 			player.interrupt_voice_line()
@@ -63,11 +63,11 @@ func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineL
 
 	_currently_playing_voice_line = voice_line
 	_currently_playing_voice_line_priority = priority
-	
+
 	requested_show_voice_line_subtitle.emit(_currently_playing_voice_line)
 	for player in _currently_playing_voice_line_players:
 		player.play_voice_line(_currently_playing_voice_line)
-	
+
 	# Just assume all are done if the first player is done.
 	var _first_playing_voice_line_player: VoiceLinePlayer = _currently_playing_voice_line_players[0]
 	await _first_playing_voice_line_player.finished_playing_voice_line

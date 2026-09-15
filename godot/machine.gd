@@ -201,7 +201,7 @@ func _process(delta: float) -> void:
 		animation_delay_timer = 0
 		update_animation()
 	ingredient_coffeebar.position.y = 1125 - (1125 * (0.01 * ingredients_bar.value))
-	
+
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.disabled = (not waiting_for_response) or tutorial_lock_accept_drink_button
 	make_drink_button.disabled = (not waiting_for_response) or (ingredients < Stats.current.ingredients_per_order) or tutorial_lock_remake_drink_button
@@ -318,14 +318,14 @@ func blast_player_from_using_machine() -> void:
 	await get_tree().create_timer(0.1).timeout
 	Global.player.velocity += launch_vector
 	Global.player.move_and_slide()
-	
+
 	await get_tree().create_timer(0.1).timeout
 	Global.player.velocity += launch_vector
 	Global.player.move_and_slide()
 	#apply velocity 3 times
 	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
-	
-	
+
+
 func set_order_action_buttons_available(button_case: String) -> void:
 	tutorial_lock_accept_drink_button = true
 	tutorial_lock_remake_drink_button = true
@@ -500,7 +500,7 @@ func machine_make_drink() -> void:
 	done_sound.play()
 
 	consume_ingredients()
-	
+
 	# Roll a random number of ingredients to differ.
 	const ingredient_types_count: int = 3
 	var target_drink_diff: int = randi_range(0, ingredient_types_count)
@@ -526,7 +526,7 @@ func machine_make_drink() -> void:
 		# Use a fallback random drink.
 		made_drink = unlocked_drinks.pick_random()
 	order.made_drink = made_drink
-	
+
 	# Add rating gain on remake for each incorrect ingredient.
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
@@ -633,31 +633,31 @@ func display_drink_score() -> void:
 	made_main_ingredient_panel.correct = order.main_correct
 	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-	
+
 	if order.made_drink.extra:
 		made_extra_panel.ingredient = order.made_drink.extra
 	else:
 		made_extra_panel.ingredient = null
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
-	
+
 	var correct_count: int = 0
 	var total_ingredients: int = 0
 	if order.ordered_drink.main_ingredient: total_ingredients += 1
 	if order.ordered_drink.liquid: total_ingredients += 1
 	if order.ordered_drink.extra: total_ingredients += 1
-	
+
 	if order.main_correct: correct_count += 1
 	if order.liquid_correct: correct_count += 1
 	if order.extra_correct: correct_count += 1
-	
+
 	var wrong_count: int = max(total_ingredients - correct_count,0)
-	
+
 	accept_money_arrow.texture = arrows[Arrow.UP2]
 	accept_money_icon.texture = icons[Icon.MONEY_GREEN]
 	remake_money_arrow.texture = arrows[Arrow.UP1]
 	remake_money_icon.texture = icons[Icon.MONEY_GREEN]
-	
+
 	if order.star_rating_gain_for_remake > 0.0:
 		remake_money_arrow.texture = arrows[Arrow.UP1]
 		remake_rating_arrow.texture = arrows[Arrow.UP2]
@@ -859,10 +859,10 @@ func _on_requested_use_active_item_fix_machine():
 		if owned_item.item_id == "hammer":
 			hammer = owned_item
 			break
-	
+
 	if hammer == null or !hammer.can_be_used:
 		return
-	
+
 	Events.play_viewmodel_animation.emit("hammer_use")
 	Global.put_active_item_on_cooldown(hammer)
 	await Events.hammer_animation_hit
@@ -878,7 +878,7 @@ func _on_requested_use_active_item_machine():
 
 	if air_horn == null or !air_horn.can_be_used:
 		return
-	
+
 	if customer:
 		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
