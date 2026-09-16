@@ -560,6 +560,12 @@ aabb = AABB(-0.39646965, -0.5177541, -0.112911776, 0.7929393, 1.0355082, 0.22582
 use_occlusion_culling = true
 size = Vector2i(1200, 1600)
 
+[node name="LowFpsSubViewportUpdater" type="Node" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport" unique_id=175221023 node_paths=PackedStringArray("_sub_viewport")]
+script = ExtResource("18_0ne0o")
+_sub_viewport = NodePath("..")
+_target_frames_per_second = 30
+metadata/_custom_type_script = "uid://c4c77yw7tsv87"
+
 [node name="MachineUI" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport" unique_id=317935962 instance=ExtResource("8_yuuq8")]
 size_flags_horizontal = 3
 
@@ -626,13 +632,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=1531950467]
+[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=982963143]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1145045213) index="0" unique_id=148677669]
+[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
 mesh = SubResource("ArrayMesh_vaqkk")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1834188427]
