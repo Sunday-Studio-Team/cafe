@@ -2,7 +2,8 @@ extends CanvasLayer
 
 const OPEN_CLOSE_TWEEN_DUR := 0.1
 
-@export var minigame_dict: Dictionary[String, PackedScene]
+# @export var minigame_dict: Dictionary[String, PackedScene]
+@export var _minigame_uids_dict: Dictionary[String, StringName]
 @export var sub_viewport_container: SubViewportContainer
 @export var sub_viewport: SubViewport
 @export var cancel_button: Button
@@ -30,13 +31,17 @@ func _unhandled_input(input_event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func play_minigame(minigame_name: String):
-	var choosen_game: PackedScene = minigame_dict.get(minigame_name)
-
+	var minigame_uid: StringName = _minigame_uids_dict.get(minigame_name)
+	if not ResourceLoader.exists(minigame_uid):
+		printerr("Minigame PackedScene UID invalid!")
+		return
+	var chosen_minigame_packed_scene: PackedScene = ResourceLoader.load(minigame_uid)
+	
 	# If Null
-	if not choosen_game:
+	if not chosen_minigame_packed_scene:
 		print("This game does not exist")
-
-	sub_viewport.add_child(choosen_game.instantiate())
+	
+	sub_viewport.add_child(chosen_minigame_packed_scene.instantiate())
 
 	visible = true
 	Global.minigame_active = true
