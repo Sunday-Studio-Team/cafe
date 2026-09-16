@@ -12,7 +12,7 @@ func _ready() -> void:
 	collision.set_deferred("disabled", true)
 	await get_tree().create_timer(0.25).timeout
 	collision.set_deferred("disabled", false)
-	
+
 	pass # Replace with function body.
 
 

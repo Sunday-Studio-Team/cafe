@@ -39,7 +39,7 @@ func trigger_shake()-> void:
 
 func _physics_process(delta: float) -> void:
 	camera_effects(delta)
-		
+
 func camera_effects(delta: float) -> void:
 	if not player:
 		return
@@ -111,4 +111,4 @@ func _on_game_options_changed(options_data: OptionsData) -> void:
 func flash_red():
 	var flash_red = create_tween()
 	flash_red.tween_property(caught_overlay, "modulate:a", 0.5, 0.2)
-	flash_red.tween_property(caught_overlay, "modulate:a", 0.0, 1.0)				
+	flash_red.tween_property(caught_overlay, "modulate:a", 0.0, 1.0)

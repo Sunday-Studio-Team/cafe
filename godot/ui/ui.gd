@@ -362,7 +362,7 @@ func update_interactable_ui() -> void:
 		var owned_air_horn: Item = null
 		var owned_whipped_cream: Item = null
 		var owned_air_freshener: Item = null
-		
+
 		for owned_item in Global.owned_items:
 			if owned_item.item_id == "hammer":
 				owned_hammer = owned_item
@@ -372,7 +372,7 @@ func update_interactable_ui() -> void:
 				owned_whipped_cream = owned_item
 			elif owned_item.item_id == "air_freshener":
 				owned_air_freshener = owned_item
-		
+
 		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
 		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
 		const NON_USABLE_ITEM_BBCODE_OPEN: String = "[color=#676767]"
@@ -384,7 +384,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] HAMMER" % use_item_keybind
 
@@ -402,7 +402,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] AIRHORN" % use_item_keybind
 
@@ -418,7 +418,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] WHIPPED CREAM" % use_item_keybind
 
@@ -454,7 +454,7 @@ func update_interactable_ui() -> void:
 
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] AIR HORN" % use_item_keybind
-			
+
 			if owned_air_horn.can_be_used:
 				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
 			else:
@@ -470,7 +470,7 @@ func update_interactable_ui() -> void:
 			if hovered_interactable.hold_to_interact:
 				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 				interaction_prompt += "(HOLD) [%s] - " % interact_keybind
-				
+
 				hold_interact_progress.value = hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
 			else:
 				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)

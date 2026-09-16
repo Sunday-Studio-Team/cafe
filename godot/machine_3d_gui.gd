@@ -48,7 +48,7 @@ func _unhandled_input(input_event: InputEvent):
 		exit_with_camera_tween()
 		get_viewport().set_input_as_handled()
 		Global.player.camera.get_viewport().set_input_as_handled()
-		
+
 	else:
 		# Check if the event is a non-mouse/non-touch event
 		for mouse_event in [

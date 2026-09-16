@@ -40,12 +40,12 @@ func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineL
 	if voice_line == null:
 		printerr("Missing voice line! ID %s" % voice_line_id)
 		return
-	
+
 	if _currently_playing_voice_line != null:
-		# Don't interrupt if current voice line is priority 
+		# Don't interrupt if current voice line is priority
 		if _currently_playing_voice_line_priority < priority:
 			return
-		
+
 		# Interrupt currently playing voice line.
 		for player in _currently_playing_voice_line_players:
 			player.interrupt_voice_line()
@@ -71,7 +71,7 @@ func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineL
 	requested_show_voice_line_subtitle.emit(_currently_playing_voice_line)
 	for player in _currently_playing_voice_line_players:
 		player.play_voice_line(_currently_playing_voice_line)
-	
+
 	# Just assume all are done if the first player is done.
 	var _first_playing_voice_line_player: VoiceLinePlayer = _currently_playing_voice_line_players[0]
 	await _first_playing_voice_line_player.finished_playing_voice_line
