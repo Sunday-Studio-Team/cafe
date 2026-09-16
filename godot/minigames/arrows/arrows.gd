@@ -50,16 +50,20 @@ var correct_input_index: int = 0
 var failures: int = 0
 @export var screenshake: AnimationPlayer
 @export var pulse: AnimationPlayer
-@export var judgement_scene:PackedScene
+@export var judgement_scene: PackedScene
 @export var music: AudioStreamPlayer
 @export var judgement_spot: Control
 
-var tween:Tween
+var tween: Tween
 
-var really_bad_beat_timer:float = 0
+var really_bad_beat_timer: float = 0
 
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
 func _ready() -> void:
+	# We need to wait for the first frame to process because the 
+	# arrow container is given a size of 0 before the first video frame
+	# which breaks the arrows by making their size negative. 
+	await get_tree().process_frame
 	set_up_arrow_container()
 	_start_minigame()
 
@@ -79,7 +83,12 @@ func _input(event: InputEvent) -> void:
 			check_input("right")
 		if event.is_action("move_back"):
 			check_input("down")
-
+	else:
+		# if we don't return here then the game could 
+		# exit early if an input event happens before
+		# valid_directions is populated
+		return 
+	
 	if correct_input_index >= valid_directions.size():
 		await correct_sound.finished
 		_end_minigame()
@@ -153,7 +162,7 @@ func add_arrow_to_output(
 		output_directions[output_index].texture = blue_textures[color_index]
 	else:
 		output_directions[output_index].texture = red_textures[color_index]
-
+	
 	# While adding to the output array, we keep track of the valid (output) indices here, in order to access the arrows that we make invisible
 	if correct_color == color:
 		valid_indices.append(output_index)
@@ -163,6 +172,7 @@ func set_up_arrow_container() -> void:
 	var container_horizontal_size: float = arrows_container.size.x
 	var required_separation_spaces: float = arrows_container.get_theme_constant("separation") * max_arrow_count
 	var min_arrow_size: float = (container_horizontal_size - required_separation_spaces) / (max_arrow_count)
+
 	for arrow in max_arrow_count:
 		var arrow_rect = TextureRect.new()
 		arrow_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -254,6 +264,7 @@ func reset_minigame():
 		add_arrow_to_output(output_index, "red", red_index, choose_color)
 		red_index += 1
 		output_index += 1
+	
 
 func _start_minigame() -> void:
 	pulse.play("pulse")
