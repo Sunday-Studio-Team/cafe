@@ -536,7 +536,7 @@ _data = {
 &"pulse": SubResource("Animation_gaw3v")
 }
 
-[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "background", "correct_sound", "wrong_sound", "screenshake", "pulse", "music", "judgement_spot")]
+[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound", "screenshake", "pulse", "music", "judgement_spot")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -547,7 +547,6 @@ script = ExtResource("1_iuqyn")
 prompt_output = NodePath("Prompt")
 arrows_container = NodePath("ArrowsBackground/ArrowHContainer")
 tippy_image = NodePath("Tippy")
-background = NodePath("Background")
 blue_left = Array[Texture]([ExtResource("2_vxntg"), ExtResource("3_fv8pj"), ExtResource("4_l8ovb"), ExtResource("5_qk4ro"), ExtResource("6_27pub")])
 blue_up = Array[Texture]([ExtResource("7_hq6wg"), ExtResource("8_ndnsj"), ExtResource("9_hea8k"), ExtResource("10_xql7b"), ExtResource("11_08s2a")])
 blue_right = Array[Texture]([ExtResource("12_ajpp4"), ExtResource("13_mji0a"), ExtResource("14_xkcvm"), ExtResource("15_7milp"), ExtResource("16_gkp8u")])

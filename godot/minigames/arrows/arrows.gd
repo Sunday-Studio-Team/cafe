@@ -3,7 +3,6 @@ extends Control
 @export var prompt_output: RichTextLabel
 @export var arrows_container: HBoxContainer
 @export var tippy_image: TextureRect
-@export var background: TextureRect
 
 @export var blue_left: Array[Texture]
 @export var blue_up: Array[Texture]
@@ -90,9 +89,6 @@ func _input(event: InputEvent) -> void:
 		# valid_directions is populated
 		return 
 	
-	print("valid directions")
-	print(valid_directions.size())
-	print(correct_input_index)
 	if correct_input_index >= valid_directions.size():
 		await correct_sound.finished
 		_end_minigame()
@@ -173,19 +169,10 @@ func add_arrow_to_output(
 
 
 func set_up_arrow_container() -> void:
-	# This needs to happen because the arrows_container can sometimes start with a size
-	# of zero (I believe due to godot optimization logic). So we need to force it to 
-	# update to the specified size
-	print(arrows_container.size.x)
-	arrows_container.update_minimum_size()
 	var container_horizontal_size: float = arrows_container.size.x
-	print(container_horizontal_size)
-	print(arrows_container.get_theme_constant("separation"))
-	print(max_arrow_count)
 	var required_separation_spaces: float = arrows_container.get_theme_constant("separation") * max_arrow_count
-	print(required_separation_spaces)
 	var min_arrow_size: float = (container_horizontal_size - required_separation_spaces) / (max_arrow_count)
-	print(min_arrow_size)
+
 	for arrow in max_arrow_count:
 		var arrow_rect = TextureRect.new()
 		arrow_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -277,9 +264,6 @@ func reset_minigame():
 		add_arrow_to_output(output_index, "red", red_index, choose_color)
 		red_index += 1
 		output_index += 1
-	
-	print("valid directions after reset")
-	print(valid_directions)
 	
 
 func _start_minigame() -> void:
