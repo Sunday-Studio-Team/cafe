@@ -557,7 +557,7 @@ layers = 4
 aabb = AABB(-0.39646965, -0.5177541, -0.112911776, 0.7929393, 1.0355082, 0.22582355)
 
 [node name="SubViewport" type="SubViewport" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen" unique_id=1837069961]
-use_occlusion_culling = true
+disable_3d = true
 size = Vector2i(1200, 1600)
 
 [node name="LowFpsSubViewportUpdater" type="Node" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport" unique_id=175221023 node_paths=PackedStringArray("_sub_viewport")]
