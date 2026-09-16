@@ -1,6 +1,7 @@
 class_name TutorialManager
 extends Node
 
+
 @export var _tutorial_popups_manager: TutorialPopupsManager
 @export var _cinematic_camera: CinematicCamera
 
@@ -30,7 +31,7 @@ func start_day() -> void:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 			return
 		
-		if false:
+		if true:
 			# Disable the open sign
 			_open_closed_sign.set_enabled(false)
 			
@@ -192,68 +193,120 @@ func start_day() -> void:
 			# Enable the open sign
 			_open_closed_sign.set_enabled(false)
 
-		const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
-
-		var repeat_instruction_timer: Timer = Timer.new()
-		repeat_instruction_timer.autostart = false
-		repeat_instruction_timer.one_shot = true
-		add_child(repeat_instruction_timer)
-		
 		# Repeat the lines until shift started.
 		if true:
-			while not Global.shift_started:
-				if repeat_instruction_timer.time_left == 0.0:
-					var repeat_lines: Array[String] = [
-						"day_0_intro_8_repeat_0",
-						"day_0_intro_8_repeat_1"
-					]
-					var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-						VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
-						VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
-					]
-					var repeat_lines_index: int = 0
-					while not Global.shift_started:
-						var out_token: Array[VoiceLinePlaybackToken]
-						var voice_line_id: String = repeat_lines[repeat_lines_index]
-						var voice_line_location: VoiceLineSystem.VoiceLineLocationEnum = repeat_lines_location[repeat_lines_index]
-						Global.voice_line_system.play_voice_line(voice_line_id, voice_line_location, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL, out_token)
-						var playback_token: VoiceLinePlaybackToken = out_token[0]
-						while not Global.shift_started:
-							if playback_token.is_finished_playing:
-								break
-							else:
-								await get_tree().process_frame
+			var repeat_lines: Array[String] = [
+				"day_0_intro_8_repeat_0",
+				"day_0_intro_8_repeat_1"
+			]
+			var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+				VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+				VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+			]
+			var condition_callable: Callable = (
+				func() -> bool:
+					return Global.shift_started
+			)
 
-						repeat_lines_index += 1
-						if repeat_lines_index >= repeat_lines.size():
-							repeat_lines_index = 0
-							break
-					
-					repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
-				else:
-					await get_tree().process_frame
-			repeat_instruction_timer.stop()
-			
-		
-		# await Global.voice_line_system.play_voice_line("day_0_intro_8_repeat_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		# await Global.voice_line_system.play_voice_line("day_0_intro_8_repeat_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 		await Global.voice_line_system.play_voice_line("day_0_intro_9_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+		is_in_skippable_cinematic = true
+		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_cinematic_camera.enable_cinematic_camera(0.5)
+		_cinematic_camera.cinematic_bars.show_bars(0.5)
+
+		_cinematic_camera.play_animation("day_0_intro_9_0")
+		
 		await Global.voice_line_system.play_voice_line("day_0_intro_9_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
-		# await Global.voice_line_system.play_voice_line("day_0_intro_9_repeat_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		# await Global.voice_line_system.play_voice_line("day_0_intro_9_repeat_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		is_in_skippable_cinematic = false
+		await _cinematic_camera.cinematic_bars.show_bars(0.5)
+		_cinematic_camera.disable_cinematic_camera(0)
 
+		# Repeat the lines until machine used.
+		if true:
+			var repeat_lines: Array[String] = [
+				"day_0_intro_9_repeat_0",
+				"day_0_intro_9_repeat_1"
+			]
+			var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+				VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+				VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+				]
+			Global.tutorial_machine_used = false
+			var condition_callable: Callable = (
+				func() -> bool:
+					return Global.tutorial_machine_used
+			)
+
+			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+		
 		await Global.voice_line_system.play_voice_line("day_0_intro_10_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_10_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		# First customer, accept order
+		Global.main_scene.tutorial_machine.force_next_drink_perfect()
+		Global.main_scene.tutorial_machine.set_order_action_buttons_available("accept")
+		Global.main_scene.spawn_machine_customer()
+		
+		await Events.customer_started_order
+		
+		Global.voice_line_system.play_voice_line("day_0_intro_10_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+		await Global.main_scene.tutorial_machine.drink_prepared
+
+		is_in_skippable_cinematic = true
+		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_cinematic_camera.enable_cinematic_camera(0.5)
+		_cinematic_camera.cinematic_bars.show_bars(0.5)
+		
 		await Global.voice_line_system.play_voice_line("day_0_intro_10_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		await Global.voice_line_system.play_voice_line("day_0_intro_10_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
-		# await Global.voice_line_system.play_voice_line("day_0_intro_10_repeat_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		# await Global.voice_line_system.play_voice_line("day_0_intro_10_repeat_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		is_in_skippable_cinematic = false
+		await _cinematic_camera.cinematic_bars.show_bars(0.5)
+		_cinematic_camera.disable_cinematic_camera(0)
 
+		# Repeat the lines until accept button is pressed.
+		if true:
+			var repeat_lines: Array[String] = [
+				"day_0_intro_10_repeat_0",
+				"day_0_intro_10_repeat_1"
+			]
+			var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+				VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+				VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+				]
+			Global.tutorial_drink_accepted = false
+			var condition_callable: Callable = (
+				func() -> bool:
+					return Global.tutorial_drink_accepted
+			)
+
+			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+		
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		# First customer, accept order
+		Global.main_scene.tutorial_machine.force_next_drink_incorrect()
+		Global.main_scene.tutorial_machine.set_order_action_buttons_available("make_drink")
+		Global.main_scene.spawn_machine_customer()
+
+		await Events.customer_started_order
+		
+		Global.voice_line_system.play_voice_line("day_0_intro_11_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+		await Global.main_scene.tutorial_machine.drink_prepared
+
+		is_in_skippable_cinematic = true
+		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_cinematic_camera.enable_cinematic_camera(0.5)
+		_cinematic_camera.cinematic_bars.show_bars(0.5)
+		
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
@@ -261,6 +314,12 @@ func start_day() -> void:
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		is_in_skippable_cinematic = false
+		await _cinematic_camera.cinematic_bars.show_bars(0.5)
+		_cinematic_camera.disable_cinematic_camera(0)
+
+		
 
 		# await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		# await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
@@ -314,3 +373,39 @@ func start_day() -> void:
 
 	# Re-enable Tippy callouts
 	_tippy_callouts_manager.enable_tippy_callouts = true
+
+
+func _repeat_line_until_condition_met(voice_line_ids: Array[String], voice_line_locations: Array[VoiceLineSystem.VoiceLineLocationEnum], condition_callable: Callable) -> void:
+	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
+
+	var repeat_instruction_timer: Timer = Timer.new()
+	repeat_instruction_timer.autostart = false
+	repeat_instruction_timer.one_shot = true
+	add_child(repeat_instruction_timer)
+	
+	while not condition_callable.call():
+		if repeat_instruction_timer.time_left == 0.0:
+			var voice_lines_index: int = 0
+			while not condition_callable.call():
+				var out_token: Array[VoiceLinePlaybackToken]
+				var voice_line_id: String = voice_line_ids[voice_lines_index]
+				var voice_line_location: VoiceLineSystem.VoiceLineLocationEnum = voice_line_locations[voice_lines_index]
+				Global.voice_line_system.play_voice_line(voice_line_id, voice_line_location, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL, out_token)
+				var playback_token: VoiceLinePlaybackToken = out_token[0]
+				while not condition_callable.call():
+					if playback_token.is_finished_playing:
+						break
+					else:
+						await get_tree().process_frame
+
+				voice_lines_index += 1
+				if voice_lines_index >= voice_line_ids.size():
+					voice_lines_index = 0
+					break
+
+			repeat_instruction_timer.start(REPEAT_INSTRUCTION_TIMER_DURATION)
+		else:
+			await get_tree().process_frame
+	
+	repeat_instruction_timer.stop()
+	repeat_instruction_timer.queue_free()

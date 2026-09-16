@@ -787,6 +787,24 @@ tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.06698774, 0.076186515, 0.0051300987, 0.99482757, 0.3, 1, -0.06698772, 0.0761865, 0.005130098, 0.99482757)
 
+[sub_resource type="Animation" id="Animation_mfcn2"]
+resource_name = "day_0_intro_9_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.7375712, 1.6134664, 7.2525296, 1, 1, 2.6857703, 1.5962713, 7.1663523)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.083602995, 0.2663132, 0.023192909, 0.9599738)
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwf4s"]
 _data = {
 &"RESET": SubResource("Animation_r4j87"),
@@ -811,7 +829,8 @@ _data = {
 &"day_0_intro_7_1": SubResource("Animation_sn277"),
 &"day_0_intro_7_2": SubResource("Animation_b52uf"),
 &"day_0_intro_8_0": SubResource("Animation_hwprm"),
-&"day_0_intro_8_1": SubResource("Animation_d0xhy")
+&"day_0_intro_8_1": SubResource("Animation_d0xhy"),
+&"day_0_intro_9_0": SubResource("Animation_mfcn2")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ldsf"]
