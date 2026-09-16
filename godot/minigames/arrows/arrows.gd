@@ -61,7 +61,9 @@ var really_bad_beat_timer: float = 0
 
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
 func _ready() -> void:
-	print(arrows_container.size.x)
+	# We need to wait for the first frame to process because the 
+	# arrow container is given a size of 0 before the first video frame
+	# which breaks the arrows by making their size negative. 
 	await get_tree().process_frame
 	set_up_arrow_container()
 	_start_minigame()
@@ -82,6 +84,11 @@ func _input(event: InputEvent) -> void:
 			check_input("right")
 		if event.is_action("move_back"):
 			check_input("down")
+	else:
+		# if we don't return here then the game could 
+		# exit early if an input event happens before
+		# valid_directions is populated
+		return 
 	
 	print("valid directions")
 	print(valid_directions.size())
@@ -270,6 +277,10 @@ func reset_minigame():
 		add_arrow_to_output(output_index, "red", red_index, choose_color)
 		red_index += 1
 		output_index += 1
+	
+	print("valid directions after reset")
+	print(valid_directions)
+	
 
 func _start_minigame() -> void:
 	pulse.play("pulse")
