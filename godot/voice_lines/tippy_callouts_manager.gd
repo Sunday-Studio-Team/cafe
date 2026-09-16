@@ -62,7 +62,7 @@ func _ready() -> void:
 	Events.spill_clean_done.connect(func():
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.clean_spill)
 	)
-	Events.order_approved.connect(func(_customer: Customer):
+	Events.order_accepted.connect(func(_customer: Customer):
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.accept_drink)
 	)
 

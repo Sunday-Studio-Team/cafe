@@ -143,7 +143,8 @@ func _ready() -> void:
 
 	accept_button.pressed.connect(
 		func():
-			Global.tutorial_drink_accepted = true
+			Global.tutorial_drink_correct_accepted = true
+			Global.tutorial_drink_incorrect_accepted = true
 			accept_order(false)
 	)
 	make_drink_button.pressed.connect(_on_remake_drink_button_pressed)
@@ -341,7 +342,10 @@ func set_order_action_buttons_available(button_case: String) -> void:
 	match button_case:
 		"accept":
 			tutorial_lock_accept_drink_button = false
-		"make_drink":
+		"remake":
+			tutorial_lock_remake_drink_button = false
+		"accept_or_remake":
+			tutorial_lock_accept_drink_button = false
 			tutorial_lock_remake_drink_button = false
 		"refill":
 			refill_button.disabled = false
@@ -620,7 +624,6 @@ func machine_make_drink() -> void:
 
 	waiting_for_response = true
 	drink_prepared.emit()
-	Events.order_completed.emit(customer)
 
 
 ## 1 per differing ingredient.
@@ -798,7 +801,12 @@ func accept_order(did_remake_drink: bool) -> void:
 	gui_3d.exit_with_camera_tween()
 
 	waiting_for_response = false
-	Events.order_approved.emit(customer)
+	Events.order_served.emit(customer)
+	
+	if did_remake_drink:
+		Events.order_remade.emit(customer)
+	else:
+		Events.order_accepted.emit(customer)
 
 	ordered_drink_icon.hide()
 	ordered_drink_name_label.hide()
@@ -982,7 +990,6 @@ func _on_remade_drink() -> void:
 	display_drink_score()
 
 	Global.tutorial_drink_remade = true
-	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
 

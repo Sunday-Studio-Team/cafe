@@ -44,6 +44,10 @@ func _ready():
 	)
 
 func _unhandled_input(input_event: InputEvent):
+	# Ignore if not allowing gui inputs
+	if not Global.cinematic_camera_allow_machine_gui_inputs:
+		return
+	
 	if input_event.is_action_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit_with_camera_tween()
 		get_viewport().set_input_as_handled()
@@ -160,6 +164,10 @@ func _mouse_input_event(
 	_normal: Vector3,
 	_shape_idx: int,
 ):
+	# Ignore if not allowing gui inputs
+	if not Global.cinematic_camera_allow_machine_gui_inputs:
+		return
+	
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
 	var quad_mesh_size = node_quad.mesh.size
 

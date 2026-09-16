@@ -212,6 +212,7 @@
 [ext_resource type="Resource" uid="uid://5vj171smmmp2" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_4.tres" id="211_ed5de"]
 [ext_resource type="Resource" uid="uid://cpme7hahrxude" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_5.tres" id="212_e31mi"]
 [ext_resource type="Resource" uid="uid://dbfkd6h4kv81t" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_customer_helped_1.tres" id="213_mq14a"]
+[ext_resource type="Script" uid="uid://biv30sphblx10" path="res://player_ui_sub_viewport_container.gd" id="214_tcxth"]
 [ext_resource type="Resource" uid="uid://wnkq2bg0qcuh" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_customer_helped_2.tres" id="214_yf6j3"]
 [ext_resource type="AudioStream" uid="uid://cosuq17hxsua5" path="res://audio/use_teleport.wav" id="219_fd6dt"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
@@ -489,6 +490,44 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266181, 0.9852271)
 
+[sub_resource type="Animation" id="Animation_e31dh"]
+resource_name = "day_0_intro_13_0"
+length = 2.0
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.8784765, 0.8172345, 4.925153, 2, 1, -1.7327307, 1.4293956, 6.267923)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.9999999, 2, 1, -0.001750982, 0.9585523, 0.0058922516, 0.28484997)
+
+[sub_resource type="Animation" id="Animation_tcxth"]
+resource_name = "day_0_intro_13_1"
+length = 2.0
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1.7327307, 1.4293956, 6.267923, 1.1, 1, -3.8937314, 1.296922, 9.84602, 2, 1, -4.3501143, 1.1991812, 12.277162)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.001750982, 0.9585523, 0.0058922516, 0.28484997, 2, 1, -0.0021013517, 0.9963409, 0.025693256, 0.08148684)
+
 [sub_resource type="Animation" id="Animation_itvpi"]
 resource_name = "day_0_intro_1_0"
 length = 1.5
@@ -573,18 +612,18 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -0.048554182, 2.0247018, 17.049965, 1, 1, 1.4156412, 1.4168657, 17.602354)
+tracks/0/keys = PackedFloat32Array(0, 1, -0.048554182, 2.0247018, 17.049965, 1, 1, 1.4032867, 1.3245393, 17.748299)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.04452658, 0.92350894, 0.1130206, -0.36383367, 1, 1, 7.0852496e-07, 0.999815, 0.019236833, -3.6824866e-05)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.04452658, 0.92350894, 0.1130206, -0.36383367, 1, 1, 0, 0.9999999, 0, 7.549788e-08)
 
 [sub_resource type="Animation" id="Animation_3cabt"]
 resource_name = "day_0_intro_4_2"
-length = 0.2
+length = 0.5
 step = 0.1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -592,14 +631,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1.319953, 1.4186549, 18.248154)
+tracks/0/keys = PackedFloat32Array(0, 1, 1.4032867, 1.3245393, 17.748299, 0.5, 1, 1.1377058, 1.5233115, 17.973768)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.047541555, -0.40217125, -0.02091681, 0.91409004)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.9999999, 0, 7.549788e-08, 0.5, 1, -0.038749795, -0.42096898, -0.018003585, 0.90606797)
 
 [sub_resource type="Animation" id="Animation_swcop"]
 resource_name = "day_0_intro_5_0"
@@ -611,14 +650,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 3.5675173, 1.8720386, -2.9106297)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.9671137, 1.3687432, -1.2561212)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.0070246016, 0.97847223, 0.033780143, 0.20347391)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0070246016, 0.9784721, 0.033780128, 0.20347388)
 
 [sub_resource type="Animation" id="Animation_r8clq"]
 resource_name = "day_0_intro_5_1"
@@ -666,14 +705,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.6743014, 1.4157851, 6.2095175, 1, 1, 0.6813578, 1.2529247, 5.8841224)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.6743014, 1.4157851, 6.2095175, 1, 1, 0.61270756, 1.2529247, 5.8841224)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.06965841, 0.3956487, 0.030111903, 0.9152612, 1, 1, -0.01487403, -0.0043107937, -6.4126565e-05, 0.9998801)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.06965841, 0.3956487, 0.030111903, 0.9152612, 1, 1, -0.01483475, 0, 0, 0.99988985)
 
 [sub_resource type="Animation" id="Animation_oodit"]
 resource_name = "day_0_intro_6_2"
@@ -684,14 +723,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.6813578, 1.2529247, 5.8841224, 1, 1, 0.8993347, 1.2015202, 5.5021625)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.61270756, 1.2529247, 5.8841224, 1, 1, 0.8864482, 1.2015202, 5.5021625)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.01487403, -0.0043107937, -6.4126565e-05, 0.9998801, 1, 1, -0.0017847293, -0.0043112664, -7.6945225e-06, 0.9999891)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.01483475, 0, 0, 0.99988985, 1, 1, -0.0017847294, -0.0043112673, -7.694524e-06, 0.999989)
 
 [sub_resource type="Animation" id="Animation_lwqyd"]
 resource_name = "day_0_intro_7_0"
@@ -703,14 +742,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.8993347, 1.2015202, 5.5021625, 1.5, 1, -2.8475165, 1.8592007, 7.352623)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.8864482, 1.2015202, 5.5021625, 1.5, 1, -2.8475165, 1.8592007, 7.352623)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.0017847293, -0.0043112664, -7.6945225e-06, 0.9999891, 1.5, 1, -0.018822772, 0.9601555, 0.06675766, 0.27072236)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0017847294, -0.0043112673, -7.694524e-06, 0.999989, 1.5, 1, -0.018822772, 0.9601555, 0.06675766, 0.27072236)
 
 [sub_resource type="Animation" id="Animation_sn277"]
 resource_name = "day_0_intro_7_1"
@@ -759,14 +798,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 3.5781336, 1.7705321, 2.7698388)
+tracks/0/keys = PackedFloat32Array(0, 1, 3.5781336, 1.6416359, 2.7698388)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.0003896549, 0.19089058, -7.577484e-05, 0.98161125)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0385385, 0.19066185, 0.0074911243, 0.98087025)
 
 [sub_resource type="Animation" id="Animation_d0xhy"]
 resource_name = "day_0_intro_8_1"
@@ -778,14 +817,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.5624661, 1.4609262, -1.3924582, 0.3, 1, 2.5119302, 1.4609262, -1.648172)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.4693236, 1.4609262, -1.376686, 0.3, 1, 2.4113598, 1.4609262, -1.6302053)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.06698774, 0.076186515, 0.0051300987, 0.99482757, 0.3, 1, -0.06698772, 0.0761865, 0.005130098, 0.99482757)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.06698773, 0.0761865, 0.0051300977, 0.9948274, 0.3, 1, -0.06698771, 0.076186486, 0.0051300973, 0.99482745)
 
 [sub_resource type="Animation" id="Animation_mfcn2"]
 resource_name = "day_0_intro_9_0"
@@ -796,14 +835,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.7375712, 1.6134664, 7.2525296, 1, 1, 2.6857703, 1.5962713, 7.1663523)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.3433642, 1.6134664, 7.209784, 1, 1, 2.2957149, 1.6134664, 7.116138)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.083602995, 0.2663132, 0.023192909, 0.9599738)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.08360296, 0.2663131, 0.023192897, 0.9599737)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwf4s"]
 _data = {
@@ -814,6 +853,8 @@ _data = {
 &"day_0_intro_0_3": SubResource("Animation_m5kst"),
 &"day_0_intro_0_4": SubResource("Animation_2ixj2"),
 &"day_0_intro_0_5": SubResource("Animation_t6w6j"),
+&"day_0_intro_13_0": SubResource("Animation_e31dh"),
+&"day_0_intro_13_1": SubResource("Animation_tcxth"),
 &"day_0_intro_1_0": SubResource("Animation_itvpi"),
 &"day_0_intro_1_1": SubResource("Animation_lw0ge"),
 &"day_0_intro_2_0": SubResource("Animation_4jpym"),
@@ -993,9 +1034,10 @@ metadata/_custom_type_script = "uid://cr34y8fl145mu"
 script = ExtResource("123_8ldsf")
 _popup_tutorial_view = NodePath("../PlayerUiSubViewportContainer/SubViewport/TutorialCanvasLayer/TutorialView")
 
-[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_popups_manager", "_cinematic_camera", "_tippy_callouts_manager", "_open_closed_sign", "_day_0_sato_front_door_position", "_day_0_employee_area_detector", "_day_0_locker_room_preview_position", "_day_0_break_room_area_detector", "_day_0_break_room_preview_position", "_day_0_back_exit_preview_position")]
+[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_popups_manager", "_player_ui_sub_viewport_container", "_cinematic_camera", "_tippy_callouts_manager", "_open_closed_sign", "_day_0_sato_front_door_position", "_day_0_employee_area_detector", "_day_0_locker_room_preview_position", "_day_0_break_room_area_detector", "_day_0_break_room_preview_position", "_day_0_back_exit_preview_position", "_day_0_machine_screen_preview_position", "_day_0_made_drink_preview_position", "_day_0_accept_button_preview_position", "_day_0_remake_button_preview_position", "_day_0_ingredients_bar_preview_position")]
 script = ExtResource("10_ed5de")
 _tutorial_popups_manager = NodePath("../TutorialPopupsManager")
+_player_ui_sub_viewport_container = NodePath("../PlayerUiSubViewportContainer")
 _cinematic_camera = NodePath("../CinematicCamera")
 _tippy_callouts_manager = NodePath("../TippyCalloutsManager")
 _open_closed_sign = NodePath("../OpenCloseSign")
@@ -1005,6 +1047,11 @@ _day_0_locker_room_preview_position = NodePath("../TutorialLocations/Day0LockerR
 _day_0_break_room_area_detector = NodePath("../TutorialLocations/Day0BreakRoomPlayerDetectionArea")
 _day_0_break_room_preview_position = NodePath("../TutorialLocations/Day0BreakRoomPreviewLocationRotation")
 _day_0_back_exit_preview_position = NodePath("../TutorialLocations/Day0BackExitPreviewLocationRotation")
+_day_0_machine_screen_preview_position = NodePath("../TutorialLocations/Day0MachineScreenLocationRotation")
+_day_0_made_drink_preview_position = NodePath("../TutorialLocations/Day0MadeDrinkLocationRotation")
+_day_0_accept_button_preview_position = NodePath("../TutorialLocations/Day0AcceptButtonLocationRotation")
+_day_0_remake_button_preview_position = NodePath("../TutorialLocations/Day0RemakeButtonLocationRotation")
+_day_0_ingredients_bar_preview_position = NodePath("../TutorialLocations/Day0IngredientsBarLocationRotation")
 metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
@@ -1055,6 +1102,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("214_tcxth")
 
 [node name="SubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer" unique_id=1981824338]
 disable_3d = true
@@ -2051,7 +2099,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.99999994, 0, 0, 0, 0.9999996, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.9999995, 0, 0, 0, 0.99999917, 0, 0, 0, 0.99999946, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2090,10 +2138,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37534714, 0)
 shape = SubResource("BoxShape3D_13qdw")
 
 [node name="Day0BreakRoomPreviewLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=52304348]
-transform = Transform3D(0.38260284, -0.22280297, 0.8966458, 0, 0.9704875, 0.24115153, -0.9239128, -0.09226526, 0.3713113, 2.9342017, 2.218735, 18.4218)
+transform = Transform3D(0.62729895, -0.32786652, 0.7063989, 0, 0.90706015, 0.42100105, -0.7787784, -0.26409352, 0.56899786, 2.925386, 2.2178087, 18.942274)
 
 [node name="Day0BackExitPreviewLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=808427352]
-transform = Transform3D(0.3006131, -0.26615876, 0.91585535, 0, 0.9602718, 0.27906668, -0.9537461, -0.0838911, 0.28867027, 0.9696531, 1.7867916, 18.236559)
+transform = Transform3D(0.17538348, -0.26140445, 0.9491619, 0, 0.96410537, 0.26552, -0.98450005, -0.04656782, 0.16908816, 0.8124549, 1.5289166, 18.31928)
+
+[node name="Day0MachineScreenLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=1765557626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5940388, 1.2063795, 5.202391)
+
+[node name="Day0MadeDrinkLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=139201436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6946182, 1.2364826, 4.925153)
+
+[node name="Day0AcceptButtonLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=1438477094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6504227, 0.90280235, 4.925153)
+
+[node name="Day0RemakeButtonLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=219068602]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37270135, 0.90280235, 4.925153)
+
+[node name="Day0IngredientsBarLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=642041358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8784765, 0.8172345, 4.925153)
 
 [node name="FreeCameraBody" type="CharacterBody3D" parent="." unique_id=516492485 node_paths=PackedStringArray("_player_ui_sub_viewport", "_camera3D")]
 collision_layer = 0
@@ -2200,7 +2263,7 @@ transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0
 texture = SubResource("ViewportTexture_4v3l6")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
-transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.700687)
+transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
 
 [node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
 transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
