@@ -73,7 +73,6 @@
 [ext_resource type="Resource" uid="uid://b10hu24rnktud" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_6.tres" id="129_vqns7"]
 [ext_resource type="Resource" uid="uid://bvysr5e5slkfv" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_1.tres" id="130_fe76k"]
 [ext_resource type="Resource" uid="uid://b5aqpwmkh4w3q" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_7.tres" id="130_ybd4b"]
-[ext_resource type="Resource" uid="uid://bqr8rp3ll76g1" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_8.tres" id="131_3pnxd"]
 [ext_resource type="Resource" uid="uid://c5iubxwsxaef3" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_2.tres" id="131_p5pln"]
 [ext_resource type="Resource" uid="uid://btba3h738cxv2" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_2_0.tres" id="132_wr7jj"]
 [ext_resource type="Resource" uid="uid://dv8ws51fnmw05" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_3_0.tres" id="133_ybd4b"]
@@ -212,7 +211,9 @@
 [ext_resource type="Resource" uid="uid://5vj171smmmp2" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_4.tres" id="211_ed5de"]
 [ext_resource type="Resource" uid="uid://cpme7hahrxude" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_5.tres" id="212_e31mi"]
 [ext_resource type="Resource" uid="uid://dbfkd6h4kv81t" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_customer_helped_1.tres" id="213_mq14a"]
+[ext_resource type="Script" uid="uid://biv30sphblx10" path="res://player_ui_sub_viewport_container.gd" id="214_tcxth"]
 [ext_resource type="Resource" uid="uid://wnkq2bg0qcuh" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_customer_helped_2.tres" id="214_yf6j3"]
+[ext_resource type="SpriteFrames" uid="uid://biu2p4iwy6rth" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/tippy_vo_indicator_thumbs_up_sprite_frames.tres" id="215_tcxth"]
 [ext_resource type="AudioStream" uid="uid://cosuq17hxsua5" path="res://audio/use_teleport.wav" id="219_fd6dt"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
 [ext_resource type="AudioStream" uid="uid://bxlwlieajscls" path="res://audio/time_start.mp3" id="223_ycw8e"]
@@ -472,6 +473,101 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_t6w6j"]
 resource_name = "day_0_intro_0_5"
+length = 1.5
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.9216303, 0.16641682, -2.8606958)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.024353314, -0.057564203, 0.0014046276, 0.9980435)
+
+[sub_resource type="Animation" id="Animation_22udi"]
+resource_name = "day_0_intro_0_6"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.2280613, 0.13292857, -2.5235634, 2, 1, 1.2240139, 1.516766, -2.4356372)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_4v3l6"]
+resource_name = "day_0_intro_0_7"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.2, 1, 0.696933, 1.7798921, -3.5278559)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.2, 1, 0.00977693, 0.9731699, 0.04210186, -0.2259903, 2.5, 1, -0.000895569, 0.97415954, 0.0038632858, 0.22582507)
+
+[sub_resource type="Animation" id="Animation_e31dh"]
+resource_name = "day_0_intro_13_0"
+length = 2.0
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.8784765, 0.8172345, 4.925153, 2, 1, -1.7327307, 1.4293956, 6.267923)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.9999999, 2, 1, -0.001750982, 0.9585523, 0.0058922516, 0.28484997)
+
+[sub_resource type="Animation" id="Animation_tcxth"]
+resource_name = "day_0_intro_13_1"
+length = 2.0
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -1.7327307, 1.4293956, 6.267923, 1.1, 1, -3.8937314, 1.296922, 9.84602, 2, 1, -4.3501143, 1.1991812, 12.277162)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.001750982, 0.9585523, 0.0058922516, 0.28484997, 2, 1, -0.0021013517, 0.9963409, 0.025693256, 0.08148684)
+
+[sub_resource type="Animation" id="Animation_xj0gb"]
+resource_name = "day_0_intro_1_0"
 length = 0.2
 step = 0.1
 tracks/0/type = "position_3d"
@@ -480,33 +576,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.58600664, 1.8021055, -0.98525)
+tracks/0/keys = PackedFloat32Array(0, 1, 3.1165311, 1.9362137, -2.5574093, 0.1, 1, 2.989764, 1.9362137, -2.5574093)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266181, 0.9852271)
-
-[sub_resource type="Animation" id="Animation_itvpi"]
-resource_name = "day_0_intro_1_0"
-length = 1.5
-step = 0.1
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CameraRig")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.55229497, 1.8021055, -0.88259685, 1.5, 1, 0.58600664, 1.8021055, -0.98525)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CameraRig")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013405, -0.14500849, -0.0132661825, 0.98522705, 1.5, 1, -0.090134054, -0.14500849, -0.013266184, 0.98522705)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.019775381, -0.7256895, 0.02087629, 0.6874207)
 
 [sub_resource type="Animation" id="Animation_lw0ge"]
 resource_name = "day_0_intro_1_1"
@@ -518,14 +595,90 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.58600664, 1.8021055, -0.98525, 0.2, 1, 0.30611604, 1.8021055, -0.366081)
+tracks/0/keys = PackedFloat32Array(0, 1, 1.7382874, 1.451355, -2.745169, 0.2, 1, 1.8913093, 1.451355, -2.5858798)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266181, 0.9852271, 0.2, 1, -0.09013404, -0.14500847, -0.013266183, 0.9852271)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.019211894, 0.2830927, -0.0056719612, 0.95888305, 0.2, 1, 0.01921189, 0.28309265, -0.005671959, 0.958883)
+
+[sub_resource type="Animation" id="Animation_2xbl0"]
+resource_name = "day_0_intro_1_2"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -2.5461905, 0.65212816, 0.24857709)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017633272, 0.95612895, -0.05886182, 0.28642815)
+
+[sub_resource type="Animation" id="Animation_ohsdn"]
+resource_name = "day_0_intro_1_3"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 3.548111, 2.0531106, -2.210018)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0031330816, -0.61292577, -0.0024304192, 0.79013014)
+
+[sub_resource type="Animation" id="Animation_d52hs"]
+resource_name = "day_0_intro_1_4"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.8913093, 1.451355, -2.5858798)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.01921189, 0.28309265, -0.00567196, 0.95888305)
+
+[sub_resource type="Animation" id="Animation_d635n"]
+resource_name = "day_0_intro_1_5"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 3.1446774, 1.9318672, -1.9079508)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017872836, -0.5936451, 0.013189787, 0.8044198)
 
 [sub_resource type="Animation" id="Animation_4jpym"]
 resource_name = "day_0_intro_2_0"
@@ -536,14 +689,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.30611604, 1.8021055, -0.366081, 1, 1, 2.2684286, 1.1281848, -2.3730447)
+tracks/0/keys = PackedFloat32Array(0, 1, 3.1446774, 1.9318672, -1.9079508, 1, 1, 2.9480634, 1.2296036, -1.75277)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266183, 0.9852271, 1, 1, -0.004258516, -0.85935456, -0.0071572186, 0.5113124)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017872836, -0.5936451, 0.013189787, 0.8044198, 1, 1, -0.010102007, -0.8055702, -0.013740517, 0.5922542)
 
 [sub_resource type="Animation" id="Animation_cit2p"]
 resource_name = "day_0_intro_4_0"
@@ -573,18 +726,18 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -0.048554182, 2.0247018, 17.049965, 1, 1, 1.4156412, 1.4168657, 17.602354)
+tracks/0/keys = PackedFloat32Array(0, 1, -0.048554182, 2.0247018, 17.049965, 1, 1, 1.4032867, 1.3245393, 17.748299)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.04452658, 0.92350894, 0.1130206, -0.36383367, 1, 1, 7.0852496e-07, 0.999815, 0.019236833, -3.6824866e-05)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.04452658, 0.92350894, 0.1130206, -0.36383367, 1, 1, 0, 0.9999999, 0, 7.549788e-08)
 
 [sub_resource type="Animation" id="Animation_3cabt"]
 resource_name = "day_0_intro_4_2"
-length = 0.2
+length = 0.5
 step = 0.1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -592,14 +745,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1.319953, 1.4186549, 18.248154)
+tracks/0/keys = PackedFloat32Array(0, 1, 1.4032867, 1.3245393, 17.748299, 0.5, 1, 1.1377058, 1.5233115, 17.973768)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.047541555, -0.40217125, -0.02091681, 0.91409004)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.9999999, 0, 7.549788e-08, 0.5, 1, -0.038749795, -0.42096898, -0.018003585, 0.90606797)
 
 [sub_resource type="Animation" id="Animation_swcop"]
 resource_name = "day_0_intro_5_0"
@@ -611,14 +764,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 3.5675173, 1.8720386, -2.9106297)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.9671137, 1.3687432, -1.2561212)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.0070246016, 0.97847223, 0.033780143, 0.20347391)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0070246016, 0.9784721, 0.033780128, 0.20347388)
 
 [sub_resource type="Animation" id="Animation_r8clq"]
 resource_name = "day_0_intro_5_1"
@@ -666,14 +819,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.6743014, 1.4157851, 6.2095175, 1, 1, 0.6813578, 1.2529247, 5.8841224)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.6743014, 1.4157851, 6.2095175, 1, 1, 0.61270756, 1.2529247, 5.8841224)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.06965841, 0.3956487, 0.030111903, 0.9152612, 1, 1, -0.01487403, -0.0043107937, -6.4126565e-05, 0.9998801)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.06965841, 0.3956487, 0.030111903, 0.9152612, 1, 1, -0.01483475, 0, 0, 0.99988985)
 
 [sub_resource type="Animation" id="Animation_oodit"]
 resource_name = "day_0_intro_6_2"
@@ -684,14 +837,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.6813578, 1.2529247, 5.8841224, 1, 1, 0.8993347, 1.2015202, 5.5021625)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.61270756, 1.2529247, 5.8841224, 1, 1, 0.8864482, 1.2015202, 5.5021625)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.01487403, -0.0043107937, -6.4126565e-05, 0.9998801, 1, 1, -0.0017847293, -0.0043112664, -7.6945225e-06, 0.9999891)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.01483475, 0, 0, 0.99988985, 1, 1, -0.0017847294, -0.0043112673, -7.694524e-06, 0.999989)
 
 [sub_resource type="Animation" id="Animation_lwqyd"]
 resource_name = "day_0_intro_7_0"
@@ -703,14 +856,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.8993347, 1.2015202, 5.5021625, 1.5, 1, -2.8475165, 1.8592007, 7.352623)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.8864482, 1.2015202, 5.5021625, 1.5, 1, -2.8475165, 1.8592007, 7.352623)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.0017847293, -0.0043112664, -7.6945225e-06, 0.9999891, 1.5, 1, -0.018822772, 0.9601555, 0.06675766, 0.27072236)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0017847294, -0.0043112673, -7.694524e-06, 0.999989, 1.5, 1, -0.018822772, 0.9601555, 0.06675766, 0.27072236)
 
 [sub_resource type="Animation" id="Animation_sn277"]
 resource_name = "day_0_intro_7_1"
@@ -759,14 +912,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 3.5781336, 1.7705321, 2.7698388)
+tracks/0/keys = PackedFloat32Array(0, 1, 3.5781336, 1.6416359, 2.7698388)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.0003896549, 0.19089058, -7.577484e-05, 0.98161125)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0385385, 0.19066185, 0.0074911243, 0.98087025)
 
 [sub_resource type="Animation" id="Animation_d0xhy"]
 resource_name = "day_0_intro_8_1"
@@ -778,14 +931,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.5624661, 1.4609262, -1.3924582, 0.3, 1, 2.5119302, 1.4609262, -1.648172)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.4693236, 1.4609262, -1.376686, 0.3, 1, 2.4113598, 1.4609262, -1.6302053)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.06698774, 0.076186515, 0.0051300987, 0.99482757, 0.3, 1, -0.06698772, 0.0761865, 0.005130098, 0.99482757)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.06698773, 0.0761865, 0.0051300977, 0.9948274, 0.3, 1, -0.06698771, 0.076186486, 0.0051300973, 0.99482745)
 
 [sub_resource type="Animation" id="Animation_mfcn2"]
 resource_name = "day_0_intro_9_0"
@@ -796,14 +949,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.7375712, 1.6134664, 7.2525296, 1, 1, 2.6857703, 1.5962713, 7.1663523)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.3433642, 1.6134664, 7.209784, 1, 1, 2.2957149, 1.6134664, 7.116138)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.083602995, 0.2663132, 0.023192909, 0.9599738)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.08360296, 0.2663131, 0.023192897, 0.9599737)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwf4s"]
 _data = {
@@ -814,8 +967,16 @@ _data = {
 &"day_0_intro_0_3": SubResource("Animation_m5kst"),
 &"day_0_intro_0_4": SubResource("Animation_2ixj2"),
 &"day_0_intro_0_5": SubResource("Animation_t6w6j"),
-&"day_0_intro_1_0": SubResource("Animation_itvpi"),
+&"day_0_intro_0_6": SubResource("Animation_22udi"),
+&"day_0_intro_0_7": SubResource("Animation_4v3l6"),
+&"day_0_intro_13_0": SubResource("Animation_e31dh"),
+&"day_0_intro_13_1": SubResource("Animation_tcxth"),
+&"day_0_intro_1_0": SubResource("Animation_xj0gb"),
 &"day_0_intro_1_1": SubResource("Animation_lw0ge"),
+&"day_0_intro_1_2": SubResource("Animation_2xbl0"),
+&"day_0_intro_1_3": SubResource("Animation_ohsdn"),
+&"day_0_intro_1_4": SubResource("Animation_d52hs"),
+&"day_0_intro_1_5": SubResource("Animation_d635n"),
 &"day_0_intro_2_0": SubResource("Animation_4jpym"),
 &"day_0_intro_4_0": SubResource("Animation_cit2p"),
 &"day_0_intro_4_1": SubResource("Animation_46ndd"),
@@ -856,7 +1017,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_e31dh"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_22udi"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -867,7 +1028,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_tcxth"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_4v3l6"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -878,7 +1039,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_22udi"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xj0gb"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -889,7 +1050,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4v3l6"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2xbl0"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -972,9 +1133,9 @@ _intro_email = ExtResource("6_gttkg")
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_cinematic_camera_voice_line_player", "_around_cafe_voice_line_players")]
 script = ExtResource("118_1slqb")
-_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("123_2ixj2"), ExtResource("124_t6w6j"), ExtResource("125_itvpi"), ExtResource("126_4jpym"), ExtResource("127_j4mna"), ExtResource("128_pnym5"), ExtResource("129_vqns7"), ExtResource("130_ybd4b"), ExtResource("131_3pnxd"), ExtResource("132_wr7jj"), ExtResource("133_ybd4b"), ExtResource("134_cit2p"), ExtResource("135_46ndd"), ExtResource("136_3cabt"), ExtResource("137_swcop"), ExtResource("138_r8clq"), ExtResource("139_ico27"), ExtResource("140_k6qn3"), ExtResource("141_oodit"), ExtResource("142_lwqyd"), ExtResource("143_sn277"), ExtResource("144_b52uf"), ExtResource("145_hwprm"), ExtResource("146_d0xhy"), ExtResource("147_lw0ge"), ExtResource("148_1e7qx"), ExtResource("149_6kqjg"), ExtResource("150_ydhsu"), ExtResource("151_p3rrp"), ExtResource("152_ewpr8"), ExtResource("153_5jugy"), ExtResource("154_320fk"), ExtResource("155_5cdne"), ExtResource("156_cdf73"), ExtResource("157_qeqs3"), ExtResource("158_21jki"), ExtResource("159_fgj2h"), ExtResource("160_33vkc"), ExtResource("161_c8pmb"), ExtResource("162_ct655"), ExtResource("163_k508x"), ExtResource("164_lt7rr"), ExtResource("165_wv2wi"), ExtResource("166_7wskh"), ExtResource("167_we7ek"), ExtResource("168_4t3jq"), ExtResource("169_wibxs"), ExtResource("170_tk4ml"), ExtResource("171_giqsh"), ExtResource("172_8bsdr"), ExtResource("173_sa5b4"), ExtResource("174_6h8os"), ExtResource("175_dpk1y"), ExtResource("176_s2e5t"), ExtResource("177_p0prv"), ExtResource("178_re7jp"), ExtResource("179_163gt"), ExtResource("180_sfu8n"), ExtResource("181_7ljty"), ExtResource("182_nmlsr"), ExtResource("183_87vht"), ExtResource("184_2fit5"), ExtResource("185_gk3yn"), ExtResource("186_lmlah"), ExtResource("187_sxhyu"), ExtResource("188_iu23i"), ExtResource("189_t4ssb"), ExtResource("190_snw3v"), ExtResource("191_avbtm"), ExtResource("192_s11hv"), ExtResource("193_k4n35"), ExtResource("194_0fjwg"), ExtResource("195_hh8eq"), ExtResource("196_u8gjg"), ExtResource("197_4eule"), ExtResource("198_8igct"), ExtResource("199_xnvgk"), ExtResource("200_b3d73"), ExtResource("201_8h177"), ExtResource("202_i7ics"), ExtResource("203_m58yd"), ExtResource("204_0l6uf"), ExtResource("205_8nef1")])
+_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("123_2ixj2"), ExtResource("124_t6w6j"), ExtResource("125_itvpi"), ExtResource("126_4jpym"), ExtResource("127_j4mna"), ExtResource("128_pnym5"), ExtResource("129_vqns7"), ExtResource("130_ybd4b"), ExtResource("132_wr7jj"), ExtResource("133_ybd4b"), ExtResource("134_cit2p"), ExtResource("135_46ndd"), ExtResource("136_3cabt"), ExtResource("137_swcop"), ExtResource("138_r8clq"), ExtResource("139_ico27"), ExtResource("140_k6qn3"), ExtResource("141_oodit"), ExtResource("142_lwqyd"), ExtResource("143_sn277"), ExtResource("144_b52uf"), ExtResource("145_hwprm"), ExtResource("146_d0xhy"), ExtResource("147_lw0ge"), ExtResource("148_1e7qx"), ExtResource("149_6kqjg"), ExtResource("150_ydhsu"), ExtResource("151_p3rrp"), ExtResource("152_ewpr8"), ExtResource("153_5jugy"), ExtResource("154_320fk"), ExtResource("155_5cdne"), ExtResource("156_cdf73"), ExtResource("157_qeqs3"), ExtResource("158_21jki"), ExtResource("159_fgj2h"), ExtResource("160_33vkc"), ExtResource("161_c8pmb"), ExtResource("162_ct655"), ExtResource("163_k508x"), ExtResource("164_lt7rr"), ExtResource("165_wv2wi"), ExtResource("166_7wskh"), ExtResource("167_we7ek"), ExtResource("168_4t3jq"), ExtResource("169_wibxs"), ExtResource("170_tk4ml"), ExtResource("171_giqsh"), ExtResource("172_8bsdr"), ExtResource("173_sa5b4"), ExtResource("174_6h8os"), ExtResource("175_dpk1y"), ExtResource("176_s2e5t"), ExtResource("177_p0prv"), ExtResource("178_re7jp"), ExtResource("179_163gt"), ExtResource("180_sfu8n"), ExtResource("181_7ljty"), ExtResource("182_nmlsr"), ExtResource("183_87vht"), ExtResource("184_2fit5"), ExtResource("185_gk3yn"), ExtResource("186_lmlah"), ExtResource("187_sxhyu"), ExtResource("188_iu23i"), ExtResource("189_t4ssb"), ExtResource("190_snw3v"), ExtResource("191_avbtm"), ExtResource("192_s11hv"), ExtResource("193_k4n35"), ExtResource("194_0fjwg"), ExtResource("195_hh8eq"), ExtResource("196_u8gjg"), ExtResource("197_4eule"), ExtResource("198_8igct"), ExtResource("199_xnvgk"), ExtResource("200_b3d73"), ExtResource("201_8h177"), ExtResource("202_i7ics"), ExtResource("203_m58yd"), ExtResource("204_0l6uf"), ExtResource("205_8nef1")])
 _cinematic_camera_voice_line_player = NodePath("../CinematicCamera/CameraRig/VoiceLinePlayerNonDirectional")
-_around_cafe_voice_line_players = [NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D2")]
+_around_cafe_voice_line_players = [NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D2"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D3")]
 metadata/_custom_type_script = "uid://curf1bfdhuo16"
 
 [node name="TippyCalloutsManager" type="Node" parent="." unique_id=120441579]
@@ -993,9 +1154,10 @@ metadata/_custom_type_script = "uid://cr34y8fl145mu"
 script = ExtResource("123_8ldsf")
 _popup_tutorial_view = NodePath("../PlayerUiSubViewportContainer/SubViewport/TutorialCanvasLayer/TutorialView")
 
-[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_popups_manager", "_cinematic_camera", "_tippy_callouts_manager", "_open_closed_sign", "_day_0_sato_front_door_position", "_day_0_employee_area_detector", "_day_0_locker_room_preview_position", "_day_0_break_room_area_detector", "_day_0_break_room_preview_position", "_day_0_back_exit_preview_position")]
+[node name="TutorialManager" type="Node" parent="." unique_id=171922067 node_paths=PackedStringArray("_tutorial_popups_manager", "_player_ui_sub_viewport_container", "_cinematic_camera", "_tippy_callouts_manager", "_open_closed_sign", "_day_0_sato_front_door_position", "_day_0_employee_area_detector", "_day_0_locker_room_preview_position", "_day_0_break_room_area_detector", "_day_0_break_room_preview_position", "_day_0_back_exit_preview_position", "_day_0_machine_screen_preview_position", "_day_0_made_drink_preview_position", "_day_0_accept_button_preview_position", "_day_0_remake_button_preview_position", "_day_0_ingredients_bar_preview_position")]
 script = ExtResource("10_ed5de")
 _tutorial_popups_manager = NodePath("../TutorialPopupsManager")
+_player_ui_sub_viewport_container = NodePath("../PlayerUiSubViewportContainer")
 _cinematic_camera = NodePath("../CinematicCamera")
 _tippy_callouts_manager = NodePath("../TippyCalloutsManager")
 _open_closed_sign = NodePath("../OpenCloseSign")
@@ -1005,6 +1167,11 @@ _day_0_locker_room_preview_position = NodePath("../TutorialLocations/Day0LockerR
 _day_0_break_room_area_detector = NodePath("../TutorialLocations/Day0BreakRoomPlayerDetectionArea")
 _day_0_break_room_preview_position = NodePath("../TutorialLocations/Day0BreakRoomPreviewLocationRotation")
 _day_0_back_exit_preview_position = NodePath("../TutorialLocations/Day0BackExitPreviewLocationRotation")
+_day_0_machine_screen_preview_position = NodePath("../TutorialLocations/Day0MachineScreenLocationRotation")
+_day_0_made_drink_preview_position = NodePath("../TutorialLocations/Day0MadeDrinkLocationRotation")
+_day_0_accept_button_preview_position = NodePath("../TutorialLocations/Day0AcceptButtonLocationRotation")
+_day_0_remake_button_preview_position = NodePath("../TutorialLocations/Day0RemakeButtonLocationRotation")
+_day_0_ingredients_bar_preview_position = NodePath("../TutorialLocations/Day0IngredientsBarLocationRotation")
 metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 
 [node name="PauseMenu" parent="." unique_id=1507952631 instance=ExtResource("11_ycdy4")]
@@ -1055,6 +1222,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("214_tcxth")
 
 [node name="SubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer" unique_id=1981824338]
 disable_3d = true
@@ -1082,12 +1250,10 @@ text = "+1$ from customer"
 layer = 2
 script = ExtResource("57_ibca3")
 sprite = NodePath("AnimatedSprite2D")
-_thumbs_up_sprite_frames_uid = &"uid://biu2p4iwy6rth"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlayerUiSubViewportContainer/SubViewport/TippyVOIndicator" unique_id=454644933]
 position = Vector2(1642, 390)
-autoplay = "default"
-frame_progress = 0.7282886
+sprite_frames = ExtResource("215_tcxth")
 
 [node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "rules_controls", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide")]
 process_mode = 3
@@ -2051,13 +2217,13 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.99999994, 0, 0, 0, 0.9999996, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.9999991, 0, 0, 0, 0.999999, 0, 0, 0, 0.99999917, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
 
 [node name="Camera3D" type="Camera3D" parent="CinematicCamera/CameraRig" unique_id=609030686]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1.0000008, 4.5520276e-12, 4.7087674e-06, 0, 1.000001, -9.667141e-07, -4.7087674e-06, 9.66714e-07, 1.0000008, 0, 0, 0)
 
 [node name="TutorialLocations" type="Node3D" parent="." unique_id=1397765395]
 
@@ -2090,10 +2256,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37534714, 0)
 shape = SubResource("BoxShape3D_13qdw")
 
 [node name="Day0BreakRoomPreviewLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=52304348]
-transform = Transform3D(0.38260284, -0.22280297, 0.8966458, 0, 0.9704875, 0.24115153, -0.9239128, -0.09226526, 0.3713113, 2.9342017, 2.218735, 18.4218)
+transform = Transform3D(0.62729895, -0.32786652, 0.7063989, 0, 0.90706015, 0.42100105, -0.7787784, -0.26409352, 0.56899786, 2.925386, 2.2178087, 18.942274)
 
 [node name="Day0BackExitPreviewLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=808427352]
-transform = Transform3D(0.3006131, -0.26615876, 0.91585535, 0, 0.9602718, 0.27906668, -0.9537461, -0.0838911, 0.28867027, 0.9696531, 1.7867916, 18.236559)
+transform = Transform3D(0.17538348, -0.26140445, 0.9491619, 0, 0.96410537, 0.26552, -0.98450005, -0.04656782, 0.16908816, 0.8124549, 1.5289166, 18.31928)
+
+[node name="Day0MachineScreenLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=1765557626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5940388, 1.2063795, 5.202391)
+
+[node name="Day0MadeDrinkLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=139201436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6946182, 1.2364826, 4.925153)
+
+[node name="Day0AcceptButtonLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=1438477094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6504227, 0.90280235, 4.925153)
+
+[node name="Day0RemakeButtonLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=219068602]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.37270135, 0.90280235, 4.925153)
+
+[node name="Day0IngredientsBarLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=642041358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8784765, 0.8172345, 4.925153)
 
 [node name="FreeCameraBody" type="CharacterBody3D" parent="." unique_id=516492485 node_paths=PackedStringArray("_player_ui_sub_viewport", "_camera3D")]
 collision_layer = 0
@@ -2150,7 +2331,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_e31dh")
+texture = SubResource("ViewportTexture_22udi")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2163,7 +2344,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_tcxth")
+texture = SubResource("ViewportTexture_4v3l6")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2180,7 +2361,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_22udi")
+texture = SubResource("ViewportTexture_xj0gb")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2197,10 +2378,10 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_4v3l6")
+texture = SubResource("ViewportTexture_2xbl0")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
-transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.700687)
+transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
 
 [node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
 transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
@@ -2370,6 +2551,9 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.
 [node name="AroundCafeVoiceLinePlayer3D2" parent="AroundCafeVoiceLinePlayers" unique_id=417750739 instance=ExtResource("312_8ldsf")]
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.486, 1.25, 7.331)
 
+[node name="AroundCafeVoiceLinePlayer3D3" parent="AroundCafeVoiceLinePlayers" unique_id=463110771 instance=ExtResource("312_8ldsf")]
+transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
+
 [node name="ClockItemStopSound" type="AudioStreamPlayer" parent="." unique_id=1632177732]
 stream = ExtResource("222_bvlej")
 
@@ -2384,7 +2568,7 @@ stream = ExtResource("137_g3y5b")
 volume_db = -5.0
 
 [node name="CustomerAreaMusic" parent="." unique_id=109925331 instance=ExtResource("404_mfcn2")]
-transform = Transform3D(0.6857654, -0.009775481, -0.727757, 0, 0.9999098, -0.013431129, 0.7278226, 0.009210604, 0.68570346, 4.4972587, 2.7244682, -3.7560964)
+transform = Transform3D(0.7278226, 0.009210606, 0.68570364, 6.386688e-10, 0.99990994, -0.013431133, -0.6857655, 0.009775481, 0.7277569, -4.3664393, 2.7244682, -3.5881112)
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)

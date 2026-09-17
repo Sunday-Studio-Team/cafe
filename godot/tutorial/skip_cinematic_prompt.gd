@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if Global.in_ui:
 		if _holding_fast_forward:
 			_holding_fast_forward = false
-			Engine.time_scale /= _fast_forward_multiplier
+			Engine.time_scale = 1.0
 		return
 
 	if Global.tutorial_manager.is_in_skippable_cinematic:
@@ -48,10 +48,10 @@ func _process(delta: float) -> void:
 
 		if Input.is_action_just_pressed("interact"):
 			_holding_fast_forward = true
-			Engine.time_scale *= _fast_forward_multiplier
+			Engine.time_scale = _fast_forward_multiplier
 		elif Input.is_action_just_released("interact"):
 			_holding_fast_forward = false
-			Engine.time_scale /= _fast_forward_multiplier
+			Engine.time_scale = 1.0
 		
 		if Input.is_action_pressed("use_item"):
 			_show_prompt()
@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 
 		if _holding_fast_forward:
 			_holding_fast_forward = false
-			Engine.time_scale /= _fast_forward_multiplier
+			Engine.time_scale = 1.0
 
 
 func _show_prompt() -> void:

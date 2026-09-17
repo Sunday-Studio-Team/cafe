@@ -48,8 +48,8 @@ var screw_bean_already_spawned := false
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 var spawn_trajectory: Vector2
-# this is the percentage accuracy of beans caught - passsed to machine @ end to determine
-# how much to fill up the ingredients bar
+# this is the ratio (as a decimal, so from 0 to 1) of beans caught.
+# its passed to machine.gd @ end of minigame to determine how much to fill up
 var accuracy: float = 0.0
 
 
@@ -290,8 +290,7 @@ func gold(bean: PhysicsBody2D):
 
 	await get_tree().create_timer(0.5, false).timeout
 
-	Global.refill_minigame_accuracy = 100
-	#print("meter.value; we are in gold()",meter.value)
+	Global.refill_minigame_accuracy = 1
 	Events.emit_signal("minigame_end")
 
 
@@ -320,7 +319,7 @@ func randomize_trajectory() -> void:
 	#im kinda okay with having it be ~0ish sometimes. but i want it to be probabilistically rare
 	var _some_random_number = horizontal_trajectory_curve.sample_baked(randf_range(0, 1)) # variable here, will usually be close to 0, or close to 1 [0~1]
 	var _test = remap(_some_random_number, 0.0, 1.0, -450.0, 350.0)
-	print(_test)
+	#print(_test)
 	spawn_trajectory.x += _test
 	spawn_trajectory.y += randf_range(-75.0, 75.0)
 	spawn_trajectory.x = clampf(spawn_trajectory.x, -1500.0, -300.0)

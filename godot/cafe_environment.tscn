@@ -113,6 +113,7 @@
 [ext_resource type="Texture2D" uid="uid://crssvr5w1sa3r" path="res://Assets/ATM/ATMTIPPY_Tippy_Base_color.png" id="110_cth7v"]
 [ext_resource type="Texture2D" uid="uid://drt1xgcgk2wg2" path="res://Assets/ATM/ATMTIPPY_Machine_Base_color.png" id="110_dtddm"]
 [ext_resource type="Texture2D" uid="uid://bjcx5dl7ueuv7" path="res://Assets/ATM/ATMTIPPY_Machine_Base_color_1.png" id="111_fp6ic"]
+[ext_resource type="PackedScene" uid="uid://blc7m6sep56kx" path="res://Assets/Archways/unfinished_archway_2.tscn" id="114_a3sl0"]
 
 [sub_resource type="Curve3D" id="Curve3D_02vyw"]
 _data = {
@@ -1848,6 +1849,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 
 
 [node name="DoorwayPiece" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=909973088 instance=ExtResource("12_02vyw")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 0, -2)
+visible = false
 
 [node name="WallPieceLong8" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=1420519109 instance=ExtResource("8_qboto")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -11, 0, 1)
@@ -2780,6 +2782,9 @@ collision_mask = 9
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldCeiling" unique_id=2029303637]
 shape = SubResource("WorldBoundaryShape3D_77ylc")
+
+[node name="Unfinished Archway3" parent="." unique_id=213665061 instance=ExtResource("114_a3sl0")]
+transform = Transform3D(-6.151399e-08, 0, -1.4072759, 0, 1.4072759, 0, 1.4072759, 0, -6.151399e-08, -4.1361904, 0.050957896, 2.8652148)
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/FrontWindowAndDoor/glass window"]

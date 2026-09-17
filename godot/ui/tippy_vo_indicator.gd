@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export var sprite: AnimatedSprite2D
-@export var _thumbs_up_sprite_frames_uid: StringName
+# @export var _thumbs_up_sprite_frames_uid: StringName
 
 var playing_last_frame := false
 
@@ -28,12 +28,12 @@ func _on_vo_finished(_voice_line: VoiceLine) -> void:
 	t.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.25)
 	t.tween_property(sprite, "scale", Vector2.ZERO, 0.25)
 	await t.finished
-	sprite.sprite_frames = null
+	# sprite.sprite_frames = null
 
 func _play_animation() -> void:
-	if not ResourceLoader.exists(_thumbs_up_sprite_frames_uid):
-		printerr("_thumbs_up_sprite_frames_uid UID missing.")
-		return
-	var sprite_frames: SpriteFrames = ResourceLoader.load(_thumbs_up_sprite_frames_uid)
-	sprite.sprite_frames = sprite_frames
+	# if not ResourceLoader.exists(_thumbs_up_sprite_frames_uid):
+	# 	printerr("_thumbs_up_sprite_frames_uid UID missing.")
+	# 	return
+	# var sprite_frames: SpriteFrames = ResourceLoader.load(_thumbs_up_sprite_frames_uid)
+	# sprite.sprite_frames = sprite_frames
 	sprite.play("default")

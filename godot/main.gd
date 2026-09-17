@@ -66,6 +66,7 @@ var closing_time:bool = false
 
 func _ready() -> void:
 	_voice_line_system.setup()
+	Global.camera_mode = Global.CameraMode.PLAYER
 
 	_world_environment.environment = Global.cafe_environment_res
 	Events.game_options_changed.connect(_on_game_options_changed)
@@ -719,7 +720,7 @@ func _interactive_tutorial_shift() -> void:
 	# # Second customer, manually remake drink
 	# tutorial_machine.force_next_drink_incorrect()
 	# spawn_machine_customer()
-	# tutorial_machine.set_order_action_buttons_available("make_drink")
+	# tutorial_machine.set_order_action_buttons_available("remake")
 	#
 	# await tutorial_machine.drink_prepared
 	#
