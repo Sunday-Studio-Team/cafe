@@ -287,3 +287,17 @@ func day_to_string(d: int) -> String:
 		day_as_string = "TRAINING"
 
 	return day_as_string
+
+
+func pitch_shift_all_audio(down: bool) -> void:
+	const LOWER_PITCH_MULTIPLIER := 0.8
+	
+	var pitch_to_shift_to: float = 1
+	
+	if down:
+		pitch_to_shift_to = LOWER_PITCH_MULTIPLIER
+	
+	var audio_bus_index: int = AudioServer.get_bus_index("Master")
+	var pitch_shift_effect: AudioEffectPitchShift = AudioServer.get_bus_effect(audio_bus_index, 0)
+	var t := create_tween().set_ignore_time_scale()
+	await t.tween_property(pitch_shift_effect, "pitch_scale", pitch_to_shift_to, 0.25).finished
