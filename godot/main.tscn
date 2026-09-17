@@ -1147,7 +1147,6 @@ tracks/1/keys = PackedFloat32Array(0, 1, -0.022827504, 0.7067378, 0.022827493, 0
 
 [sub_resource type="Animation" id="Animation_xuh84"]
 resource_name = "day_1_intro_1_2"
-length = 2.0
 step = 0.1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -1155,18 +1154,18 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1.3094512, 1.581913, 18.04312, 2, 1, 2.140641, 1.4521142, 17.429403)
+tracks/0/keys = PackedFloat32Array(0, 1, 1.3094512, 1.581913, 18.04312, 1, 1, 2.140641, 1.4521142, 17.429403)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.022827502, 0.7067377, 0.022827482, 0.70673805, 2, 1, -0.0058634724, 0.9828545, 0.031746, 0.18153262)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.022827502, 0.7067377, 0.022827482, 0.70673805, 1, 1, -0.0058634724, 0.9828545, 0.031746, 0.18153262)
 
 [sub_resource type="Animation" id="Animation_egrga"]
 resource_name = "day_1_intro_1_3"
-length = 2.0
+length = 1.5
 step = 0.1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -1174,14 +1173,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 2.140641, 1.4521142, 17.429403, 2, 1, 2.229467, 1.1329728, 17.53173)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.140641, 1.4521142, 17.429403, 1.5, 1, 2.229467, 1.1329728, 17.53173)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.0058634724, 0.9828545, 0.031746, 0.18153262, 2, 1, -0.24356705, 0.60146767, 0.19952445, 0.7342348)
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0058634724, 0.9828545, 0.031746, 0.18153262, 1.5, 1, -0.24356705, 0.60146767, 0.19952445, 0.7342348)
 
 [sub_resource type="Animation" id="Animation_tfaor"]
 resource_name = "day_1_intro_2_0"
@@ -1342,7 +1341,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7bx05"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_skfll"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1353,7 +1352,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_t3ss8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1364,7 +1363,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g6ptb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1375,7 +1374,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0bk8h"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -2533,7 +2532,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.99999905, 0, 0, 0, 0.99999875, 0, 0, 0, 0.999999, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(4.3384804e-07, -0.0645322, 0.9979146, -1.117586e-08, 0.9979144, 0.06453221, -0.99999905, -3.9149757e-08, 4.3222255e-07, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2669,7 +2668,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_7bx05")
+texture = SubResource("ViewportTexture_skfll")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2682,7 +2681,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_t3ss8")
+texture = SubResource("ViewportTexture_l0ugm")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2699,7 +2698,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_g6ptb")
+texture = SubResource("ViewportTexture_dfd08")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2716,7 +2715,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_0bk8h")
+texture = SubResource("ViewportTexture_fxdwr")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
