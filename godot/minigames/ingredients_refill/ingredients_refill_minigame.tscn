@@ -24,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://c6467b6csgjr2" path="res://minigames/ingredients_refill/assets/refill final.png" id="16_knrnr"]
 [ext_resource type="Texture2D" uid="uid://bpd4fxj4nlu0n" path="res://minigames/ingredients_refill/assets/bag_no_bg.png" id="19_r7ncj"]
 
+[sub_resource type="Curve" id="Curve_cuth0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(177, 219)
 
@@ -42,12 +46,6 @@ stream_3/stream = ExtResource("7_mx0ba")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjix0"]
 size = Vector2(20, 350)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2w8d4"]
-bg_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51asp"]
-bg_color = Color(0.3372549, 0.24705882, 0.23529412, 1)
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ovvye"]
 streams_count = 4
 stream_0/stream = ExtResource("10_5w3ak")
@@ -55,22 +53,24 @@ stream_1/stream = ExtResource("11_1nxwo")
 stream_2/stream = ExtResource("12_aviex")
 stream_3/stream = ExtResource("13_bjc5e")
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "meter", "bag", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "face_sprite", "visual_effect")]
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound")]
 script = ExtResource("1_2efvg")
+horizontal_trajectory_curve = SubResource("Curve_cuth0")
 cup = NodePath("Cup")
-bean_scene = ExtResource("2_51asp")
-screw_bean_scene = ExtResource("3_mev0o")
-golden_bean_scene = ExtResource("4_jjgte")
-bomb_bean_scene = ExtResource("5_sdu15")
+bag = NodePath("Bag")
 pour_point = NodePath("Bag/PourPoint")
 bean_spawn_timer = NodePath("BeanSpawnTimer")
 cup_area = NodePath("Cup/CupArea")
 cup_boundaries = NodePath("Cup/CupBoundaries")
-meter = NodePath("Cup/Sprite2D/TextureProgressBar")
-bag = NodePath("Bag")
+cup_face_sprite = NodePath("Cup/Sprite2D")
+visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
 bean_hit_glasss_sound = NodePath("Cup/BeanHitGlassSound")
 bag_shake_sound = NodePath("Bag/BagShakeSound")
 gain_score_sound = NodePath("GainScoreSound")
+regular_bean_scene = ExtResource("2_51asp")
+screw_bean_scene = ExtResource("3_mev0o")
+golden_bean_scene = ExtResource("4_jjgte")
+bomb_bean_scene = ExtResource("5_sdu15")
 normal_face_sprite = ExtResource("14_rw5dd")
 bomb_face_sprite = ExtResource("14_rw5dd")
 screw_face_sprite = ExtResource("14_rw5dd")
@@ -79,12 +79,12 @@ normal_visual_effect = ExtResource("10_r7ncj")
 bomb_visual_effect = ExtResource("11_rw5dd")
 screw_visual_effect = ExtResource("12_tq37f")
 golden_visual_effect = ExtResource("13_lrtnr")
-face_sprite = NodePath("Cup/Sprite2D")
-visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
 
 [node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
 z_index = 2
-position = Vector2(900, 950)
+position = Vector2(1300, 1050)
+collision_layer = 2
+platform_on_leave = 2
 safe_margin = 0.01
 
 [node name="Sprite2D" type="Sprite2D" parent="Cup" unique_id=241036928]
@@ -151,7 +151,7 @@ position = Vector2(-31, 181)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
 
-[node name="BackgroundSprite2D" type="Sprite2D" parent="." unique_id=1252123989]
+[node name="Background" type="Sprite2D" parent="." unique_id=1252123989]
 position = Vector2(960, 540)
 texture = ExtResource("16_knrnr")
 
@@ -187,27 +187,6 @@ theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
 text = "[b]A + D[/b] move cup"
 fit_content = true
-
-[node name="Meter" type="ProgressBar" parent="." unique_id=859238091]
-visible = false
-z_index = -1
-custom_minimum_size = Vector2(500, 100)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -249.0
-offset_top = -51.0
-offset_right = 251.0
-offset_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_2w8d4")
-theme_override_styles/fill = SubResource("StyleBoxFlat_51asp")
-max_value = 1.0
-value = 0.6
-fill_mode = 3
-show_percentage = false
 
 [node name="GainScoreSound" type="AudioStreamPlayer" parent="." unique_id=948120087]
 stream = SubResource("AudioStreamRandomizer_ovvye")

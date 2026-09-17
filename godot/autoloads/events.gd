@@ -13,8 +13,9 @@ signal customer_entered
 # i think thers probably nicer ways to do this lol
 signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
-signal order_completed(customer: Customer)
-signal order_approved(customer: Customer)
+signal order_remade(customer: Customer)
+signal order_accepted(customer: Customer)
+signal order_served(customer: Customer)
 signal order_remaking_drink
 signal machine_making_drink
 signal customer_left_machine(customer: Customer)
@@ -43,6 +44,7 @@ signal player_left_office
 signal tippy_boss_kidnapped_player
 signal tippy_boss_released_player
 signal spawn_specific_customer(name: String, help_desk: String)
+signal air_freshener_used(customer_wait_duration_extension: float)
 # minigames
 signal minigame_active(minigame_name: String)
 signal minigame_cancelled

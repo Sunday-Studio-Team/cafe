@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_d87dh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rb8fj"]
-size = Vector3(0.5, 2, 0.75)
+size = Vector3(0.3300171, 1.6508789, 0.60302734)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ovvye"]
 size = Vector3(1, 2, 1)
@@ -24,6 +24,7 @@ _interactable = NodePath("Interactable")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.90000004, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=386392793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.084991455, -0.17456055, -0.0056152344)
 shape = SubResource("BoxShape3D_rb8fj")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=1396942595 node_paths=PackedStringArray("mesh")]

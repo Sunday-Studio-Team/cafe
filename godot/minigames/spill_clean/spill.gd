@@ -6,8 +6,8 @@ extends Node2D
 @export var progress_label: Label
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
-@export var machine_clean: Sprite2D
-@export var machine_dirty: Sprite2D
+@export var machine_clean: TextureRect
+@export var machine_dirty: TextureRect
 @export var bucket_area: Area2D
 @export var mop: DraggableMop
 @export var text_bubble: TippyText

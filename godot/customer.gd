@@ -44,7 +44,7 @@ func _ready() -> void:
 	get_stats()
 	timer.timeout.connect(_on_timer_timeout)
 	Events.customer_started_order.connect(_on_order_started)
-	Events.order_approved.connect(_on_order_approved)
+	Events.order_served.connect(_on_order_served)
 	# NOTE: not actually sure what this true argument does here lol
 	# NOTE^2: it keeps the customers group tag if the packed scene file is saved
 	# NOTE^3: ok thx
@@ -146,7 +146,7 @@ func _on_order_started(customer: Customer) -> void:
 	orders_made += 1
 
 
-func _on_order_approved(customer: Customer) -> void:
+func _on_order_served(customer: Customer) -> void:
 	if customer != self:
 		return
 

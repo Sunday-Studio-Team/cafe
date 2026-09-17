@@ -32,6 +32,8 @@ var disable_minigames := ["Lines"]
 var _camera_disarmed := false
 var _player_slow_status_effect: CameraSlowPlayerStatusEffect
 var _direction_multiplier: float = 1.0
+var _player_in_spotlight_tween: Tween
+
 
 @onready var original_rotation := rotation_degrees
 @onready var tries_until_disabled := NUM_OF_MINIGAMES_TO_DISABLE
@@ -71,6 +73,8 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if not grace_timer.is_stopped():
+		if _player_in_spotlight_tween and _player_in_spotlight_tween.is_running():
+			_player_in_spotlight_tween.kill()
 		spotlight.light_color = Color.DIM_GRAY
 		fake_spotlight.light_color = Color.DIM_GRAY
 		return
@@ -114,6 +118,7 @@ func _physics_process(_delta: float) -> void:
 							_player_slow_status_effect
 						)
 						caught_audio_stream_player_3d.play()
+						Global.player.flash_red()
 					player_in_spotlight = true
 					break
 
@@ -124,12 +129,20 @@ func _physics_process(_delta: float) -> void:
 						break
 
 	if player_in_spotlight:
-		spotlight.light_color = Color.RED
-		fake_spotlight.light_color = Color.RED
+		if not _player_in_spotlight_tween or not _player_in_spotlight_tween.is_running():
+			_player_in_spotlight_tween = create_tween()
+			_player_in_spotlight_tween.tween_property(spotlight, "light_color", Color.WHITE, 0.5).from(Color.RED)
+			_player_in_spotlight_tween.tween_property(spotlight, "light_color", Color.RED, 0.5)
+			_player_in_spotlight_tween.tween_property(fake_spotlight, "light_color", Color.WHITE, 0.5).from(Color.RED)
+			_player_in_spotlight_tween.tween_property(fake_spotlight, "light_color", Color.RED, 0.5)
+		#spotlight.light_color = Color.RED
+		#fake_spotlight.light_color = Color.RED
 		Global.player_in_cctv_los = true
 	else:
-		spotlight.light_color = Color.WHITE
-		fake_spotlight.light_color = Color.WHITE
+		if _player_in_spotlight_tween and _player_in_spotlight_tween.is_running():
+			_player_in_spotlight_tween.kill()
+		spotlight.light_color = Color.RED
+		fake_spotlight.light_color = Color.RED
 
 	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
 	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
@@ -231,9 +244,7 @@ func _on_requested_use_active_item():
 	if whipped_cream == null or !whipped_cream.can_be_used:
 		return
 	
-	#Putting new animation to test change
-	#TODO: Replace base animation with newest one
-	Events.play_viewmodel_animation.emit("cream_use_new")
+	Events.play_viewmodel_animation.emit("cream_use")
 	whipped_cream_sound.play()
 	Global.put_active_item_on_cooldown(whipped_cream)
 	disarm_camera()

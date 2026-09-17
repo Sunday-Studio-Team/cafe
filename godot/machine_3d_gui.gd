@@ -26,7 +26,8 @@ var cam_trans_b4_enter: Transform3D
 #keeps track of where the player was before they interacted w/ machine.
 var where_was_player: Transform3D
 
-@onready var machine: Machine = get_parent() as Machine
+# i know . im sorry .
+@onready var machine: Machine = get_parent().get_parent() as Machine
 
 
 func _ready():
@@ -34,45 +35,7 @@ func _ready():
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
 	node_area.input_event.connect(_mouse_input_event)
-	interactable.interacted.connect(
-		func():
-			# seems weird because we cant interact with Interactables while in_ui
-			# anyway but this is actually to stop that CollisionShape blocking
-			# our mouse from clicking stuff lul
-			node_area.visible = true
-			interactable.visible = false
-			Global.in_machine_ui = true
-			Global.machine_in_use = machine
-			player_using_me = true
-
-			if !Global.tutorial_machine_used:
-				Global.tutorial_machine_used = true
-
-			# store where the player was before they interacted w/ the machine.
-			# used when using bomb(), which is in ingredients_refill_minigame.gd
-			where_was_player = Global.player.global_transform
-
-			create_tween().tween_property(
-				Global.player,
-				"global_rotation_degrees",
-				machine.global_rotation_degrees,
-				0.1,
-			)
-			create_tween().tween_property(
-				Global.player,
-				"global_position",
-				machine.spot_for_player.global_position,
-				0.1,
-			)
-			var cam: CameraController = Global.player.camera
-			cam_trans_b4_enter = cam.transform
-			create_tween().tween_property(
-				cam,
-				"global_transform",
-				cam_spot.global_transform,
-				CAM_TWEEN_DUR,
-			),
-	)
+	interactable.interacted.connect(enter_gui)
 
 	Events.machine_exit_button_pressed.connect(
 		func():
@@ -81,11 +44,15 @@ func _ready():
 	)
 
 func _unhandled_input(input_event: InputEvent):
+	# Ignore if not allowing gui inputs
+	if not Global.cinematic_camera_allow_machine_gui_inputs:
+		return
+	
 	if input_event.is_action_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit_with_camera_tween()
 		get_viewport().set_input_as_handled()
 		Global.player.camera.get_viewport().set_input_as_handled()
-		
+
 	else:
 		# Check if the event is a non-mouse/non-touch event
 		for mouse_event in [
@@ -99,6 +66,51 @@ func _unhandled_input(input_event: InputEvent):
 				# handled via Physics Picking.
 				return
 		node_viewport.push_input(input_event)
+
+
+func enter_gui(update_player_reset_position: bool = true) -> void:
+	# seems weird because we cant interact with Interactables while in_ui
+	# anyway but this is actually to stop that CollisionShape blocking
+	# our mouse from clicking stuff lul
+	node_area.visible = true
+	interactable.visible = false
+	Global.in_machine_ui = true
+	Global.machine_in_use = machine
+	player_using_me = true
+
+	if !Global.tutorial_machine_used:
+		Global.tutorial_machine_used = true
+
+	# store where the player was before they interacted w/ the machine.
+	# used when using bomb(), which is in ingredients_refill_minigame.gd
+	where_was_player = Global.player.global_transform
+
+	create_tween().tween_property(
+			Global.player,
+			"global_rotation_degrees",
+			machine.global_rotation_degrees,
+			0.1,
+			)
+	create_tween().tween_property(
+			Global.player,
+			"global_position",
+			machine.spot_for_player.global_position,
+			0.1,
+			)
+	var cam: CameraController = Global.player.camera
+	
+	# we DONT want to set this when forcing the interaction to stop us losing
+	# input after the machine's jump animation
+	# (otherwise we become short)
+	if update_player_reset_position:
+		cam_trans_b4_enter = cam.transform
+
+	create_tween().tween_property(
+			cam,
+			"global_transform",
+			cam_spot.global_transform,
+			CAM_TWEEN_DUR,
+			)
 
 
 func exit_without_camera_tween() -> void:
@@ -152,6 +164,10 @@ func _mouse_input_event(
 	_normal: Vector3,
 	_shape_idx: int,
 ):
+	# Ignore if not allowing gui inputs
+	if not Global.cinematic_camera_allow_machine_gui_inputs:
+		return
+	
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
 	var quad_mesh_size = node_quad.mesh.size
 

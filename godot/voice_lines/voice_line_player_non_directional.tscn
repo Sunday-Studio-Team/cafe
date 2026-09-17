@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bk6x81gp6vtel"]
+
+[ext_resource type="Script" uid="uid://m8ecoktyd6it" path="res://voice_lines/voice_line_player.gd" id="1_vorbd"]
+
+[node name="VoiceLinePlayerNonDirectional" type="Node3D" unique_id=1543677672 node_paths=PackedStringArray("_audio_stream_player")]
+script = ExtResource("1_vorbd")
+_audio_stream_player = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1641933616]
+volume_db = -15.0

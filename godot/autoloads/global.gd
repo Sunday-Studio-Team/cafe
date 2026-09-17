@@ -50,7 +50,10 @@ var reviews: Array[Review]
 var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
+# the customer being dealt with in the typing minigame
+# (NOT the customer at the front of the help desk queue)
 var active_help_desk_customer: Customer
+var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
 var holding_trash := false
 var day := 0
@@ -114,7 +117,7 @@ var in_main_menu := false
 var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_active_item_menu := false
-var in_tutorial_screen: bool = false
+var in_popup_tutorial_screen: bool = false
 var in_end_shift_early_menu := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
@@ -132,7 +135,7 @@ var in_ui: bool:
 				or in_level_select_menu
 				or in_end_screen
 				or in_active_item_menu
-				or in_tutorial_screen
+				or in_popup_tutorial_screen
 				or in_end_shift_early_menu
 				or in_dialog_screen
 				or in_options_menu
@@ -152,7 +155,8 @@ var hovered_item_icon: TabletItemIcon = null
 var hovered_loadout_menu_element: LoadoutMenuElement
 # Tutorial flags
 var tutorial_machine_used: bool = false
-var tutorial_drink_accepted: bool = false
+var tutorial_drink_correct_accepted: bool = false
+var tutorial_drink_incorrect_accepted: bool = false
 var tutorial_remake_button_pressed: bool = false
 var tutorial_drink_remade: bool = false
 var tutorial_ingredients_bag_got: bool = false
@@ -164,8 +168,16 @@ var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
-# Free-camera mode
-var free_camera_enabled: bool = false
+var tutorial_manager: TutorialManager
+
+enum CameraMode {
+	PLAYER,
+	CINEMATIC,
+	DEBUG_FREE_CAM
+}
+var camera_mode: CameraMode = CameraMode.PLAYER
+var cinematic_camera_allow_machine_gui_inputs: bool = true
+
 var item_loadout_menu: ItemLoadoutMenu
 
 

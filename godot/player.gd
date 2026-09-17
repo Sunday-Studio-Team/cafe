@@ -3,6 +3,8 @@ extends CharacterBody3D
 
 const STRIDE_LENGTH := 1.25
 
+# this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
+@export var main_room_spawn_point: Marker3D
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
 @export var movement_enabled: bool = true
@@ -76,7 +78,6 @@ func _ready() -> void:
 				var t := create_tween().set_parallel()
 				t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
-	
 	customer_trash.visibility_changed.connect(
 		func():
 			if customer_trash.visible:
@@ -88,16 +89,24 @@ func _ready() -> void:
 
 			# scuffed 'animation' of trash appearing when we grab it
 			await Events.viewmodel_animation_finished
-			
+
 			var t := create_tween().set_parallel()
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
 
-
-
 	Global.stamina = Stats.current.max_stamina
 	Global.sprint_lockout_timer = sprint_lockout_timer
 	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
+
+	if OS.has_feature("spawn_in_main_room_instead_of_office"):
+		if (
+				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
+				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
+		):
+			return
+
+		global_transform = main_room_spawn_point.global_transform
+		reset_physics_interpolation()
 
 
 func _physics_process(delta: float) -> void:
@@ -115,6 +124,12 @@ func _physics_process(delta: float) -> void:
 	handle_floating_cursor()
 	move_and_slide()
 
+
+func override_position_rotation(override_position: Vector3, override_rotation: Vector3) -> void:
+	global_position = override_position
+	global_rotation = override_rotation
+	camera.sync_rotation_from_player()
+	reset_physics_interpolation()
 
 func is_sprinting() -> bool:
 	return _is_sprinting
@@ -144,7 +159,7 @@ func handle_floating_cursor() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled or holding_interactable or Global.in_ui or Global.free_camera_enabled):
+	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
 		velocity = Vector3.ZERO
 		return
 
@@ -305,7 +320,7 @@ func handle_customer_trash() -> void:
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
-		
+
 	#print("asdf", ingredients_bag_scene.instantiate().get_class())
 	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
@@ -317,4 +332,7 @@ func _on_items_updated() -> void:
 	for item: Item in Global.owned_items:
 		if item.item_id == "nice_spoon":
 			has_xl_bag_item = true
-			break	
+			break
+
+func flash_red():
+	camera.camera_effects.flash_red()

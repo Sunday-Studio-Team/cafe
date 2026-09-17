@@ -63,9 +63,9 @@ const ALERT_QUEUE_SIZE = 5
 @export var item_text: RichTextLabel
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
+@export var _alert_packed_scene_uid: StringName
 
 var alert_queue: Array[HBoxContainer]
-var alert_load = preload("res://ui/alert.tscn")
 var score_update_tween: Tween
 var time_left_warning_played := false
 var star_texture_rect := TextureRect.new()
@@ -362,7 +362,7 @@ func update_interactable_ui() -> void:
 		var owned_air_horn: Item = null
 		var owned_whipped_cream: Item = null
 		var owned_air_freshener: Item = null
-		
+
 		for owned_item in Global.owned_items:
 			if owned_item.item_id == "hammer":
 				owned_hammer = owned_item
@@ -372,7 +372,7 @@ func update_interactable_ui() -> void:
 				owned_whipped_cream = owned_item
 			elif owned_item.item_id == "air_freshener":
 				owned_air_freshener = owned_item
-		
+
 		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
 		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
 		const NON_USABLE_ITEM_BBCODE_OPEN: String = "[color=#676767]"
@@ -384,7 +384,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] HAMMER" % use_item_keybind
 
@@ -402,7 +402,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] AIRHORN" % use_item_keybind
 
@@ -418,7 +418,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] WHIPPED CREAM" % use_item_keybind
 
@@ -444,6 +444,23 @@ func update_interactable_ui() -> void:
 				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
 			item_text.text = item_prompt
 
+		elif (
+				hovered_interactable.interactable_id == &"help_desk"
+				and owned_air_horn != null
+				and Global.customer_at_front_of_help_desk_queue != null
+		):
+			item_indicator.show()
+			var item_prompt: String = ""
+
+			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
+			item_prompt = "[%s] AIR HORN" % use_item_keybind
+
+			if owned_air_horn.can_be_used:
+				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
+			else:
+				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
+			item_text.text = item_prompt
+
 		else:
 			item_indicator.hide()
 			item_text.text = ""
@@ -453,7 +470,7 @@ func update_interactable_ui() -> void:
 			if hovered_interactable.hold_to_interact:
 				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 				interaction_prompt += "(HOLD) [%s] - " % interact_keybind
-				
+
 				hold_interact_progress.value = hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
 			else:
 				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
@@ -519,8 +536,9 @@ func _on_alert_posted(
 		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
 		# the lambda is called
 		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
-
-	var new_alert = alert_load.instantiate()
+	
+	var alert_packed_scene: PackedScene = ResourceLoader.load(_alert_packed_scene_uid)
+	var new_alert = alert_packed_scene.instantiate()
 	new_alert.alert_label.text = message
 	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
 

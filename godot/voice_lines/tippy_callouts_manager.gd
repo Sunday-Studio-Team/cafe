@@ -24,6 +24,8 @@ enum TippyLineType {
 @export var _tippy_line_array_clean_spill: Array[VoiceLine]
 @export var _tippy_line_array_accept_drink: Array[VoiceLine]
 
+var enable_tippy_callouts: bool = true
+
 var _last_voice_line_type: TippyLineType
 var _is_playing_line: bool
 var _tippy_voice_timer: Timer
@@ -60,11 +62,14 @@ func _ready() -> void:
 	Events.spill_clean_done.connect(func():
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.clean_spill)
 	)
-	Events.order_approved.connect(func(_customer: Customer):
+	Events.order_accepted.connect(func(_customer: Customer):
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.accept_drink)
 	)
 
 func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
+	if not enable_tippy_callouts:
+		return
+	
 	if _is_playing_line:
 		return
 	
@@ -86,7 +91,10 @@ func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
 	if chance_play >= 0.5 or tippy_line_type == TippyCalloutsManager.TippyLineType.shift_start:
 		var random_voice_line: VoiceLine = voice_line_array.pick_random()
 		_is_playing_line = true
-		await Global.voice_line_system.play_voice_line_no_location(random_voice_line.voice_line_id)
+		await Global.voice_line_system.play_voice_line(\
+				random_voice_line.voice_line_id, \
+				VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, \
+				VoiceLineSystem.VoiceLinePriorityEnum.CALLOUTS)
 		_is_playing_line = false
 		_last_voice_line_type = tippy_line_type
 		_tippy_voice_timer.start(randf_range(TIPPY_CALLOUT_MIN_COOLDOWN, TIPPY_CALLOUT_MAX_COOLDOWN))
