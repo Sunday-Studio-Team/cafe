@@ -19,6 +19,9 @@ extends Node
 @export var _day_0_accept_button_preview_position: Node3D
 @export var _day_0_remake_button_preview_position: Node3D
 @export var _day_0_ingredients_bar_preview_position: Node3D
+@export var _day_1_tippy_tablet_area_detector: PlayerDetectionArea
+@export var _day_1_tippy_tablet_prop: Node3D
+@export var _day_1_tippy_tablet_camera_target_location: Node3D
 
 var is_in_skippable_cinematic: bool = false
 
@@ -29,6 +32,9 @@ func start_day() -> void:
 
 	# Disable Tippy callouts
 	_tippy_callouts_manager.enable_tippy_callouts = false
+	
+	# Hide the Tippy Tablet prop
+	_day_1_tippy_tablet_prop.visible = false
 	
 	if Global.day == 0:
 		
@@ -609,8 +615,126 @@ func start_day() -> void:
 		return
 		
 	elif Global.day == 1:
+		# Show the Tippy Tablet prop
+		_day_1_tippy_tablet_prop.visible = true
+
+		is_in_skippable_cinematic = true
+		_cinematic_camera.enable_cinematic_camera(0.0)
+		_cinematic_camera.cinematic_bars.show_bars(0.0)
 		
-		pass
+		await _cinematic_camera.play_animation("day_1_intro_0_0")
+		await _cinematic_camera.play_animation("day_1_intro_0_1")
+		await _cinematic_camera.play_animation("day_1_intro_0_2")
+		await _cinematic_camera.play_animation("day_1_intro_0_3")
+
+		Global.player.visible = false
+
+		await _cinematic_camera.play_animation("day_1_intro_1_0")
+
+		Global.player.visible = true
+
+		_cinematic_camera.play_animation("day_1_intro_1_1")
+
+		await Global.voice_line_system.play_voice_line("day_1_intro_0_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		_cinematic_camera.play_animation("day_1_intro_1_2")
+		await Global.voice_line_system.play_voice_line("day_1_intro_0_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		_cinematic_camera.play_animation("day_1_intro_1_3")
+		await Global.voice_line_system.play_voice_line("day_1_intro_0_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_0_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_cinematic_camera.cinematic_bars.hide_bars(0.5)
+		await _cinematic_camera.disable_cinematic_camera(0.5)
+		is_in_skippable_cinematic = false
+		
+		await _day_1_tippy_tablet_area_detector.player_entered_area
+		
+		is_in_skippable_cinematic = true
+		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_cinematic_camera.enable_cinematic_camera(1.0)
+		_cinematic_camera.cinematic_bars.show_bars(1.0)
+
+		# Face the tablet.
+		if true:
+			var tween: Tween = create_tween()
+			var direction_to_tippy_tablet: Vector3 = _cinematic_camera.camera_rig_node.global_position\
+				.direction_to(_day_1_tippy_tablet_prop.global_position)\
+					.rotated(Vector3.UP, deg_to_rad(90.0))
+			# Flatten the roll on the direction
+			direction_to_tippy_tablet.z = 0.0
+			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", direction_to_tippy_tablet, 1.0)
+			await tween.finished
+		
+		# Pick up the tablet.
+		if true:
+			var tween: Tween = create_tween()
+			tween.tween_property(_day_1_tippy_tablet_prop, "global_position", _day_1_tippy_tablet_camera_target_location.global_position, 1.0)
+			tween.set_parallel()
+			tween.tween_property(_day_1_tippy_tablet_prop, "global_rotation", _day_1_tippy_tablet_camera_target_location.global_rotation, 1.0)
+			await tween.finished
+
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_5", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_6", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_9", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_10", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_11", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_12", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_13", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_1_14", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		# Hide the Tippy Tablet prop
+		_day_1_tippy_tablet_prop.visible = false
+
+		_cinematic_camera.play_animation("day_1_intro_2_0")
+		await Global.voice_line_system.play_voice_line("day_1_intro_2_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+		_cinematic_camera.play_animation("day_1_intro_2_1")
+		await Global.voice_line_system.play_voice_line("day_1_intro_2_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_2_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_2_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await Global.voice_line_system.play_voice_line("day_1_intro_2_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		_cinematic_camera.play_animation("day_1_intro_3_0")
+		await Global.voice_line_system.play_voice_line("day_1_intro_3_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+		_cinematic_camera.play_animation("day_1_intro_3_1")
+		await Global.voice_line_system.play_voice_line("day_1_intro_3_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_cinematic_camera.cinematic_bars.hide_bars(1.0)
+		await _cinematic_camera.disable_cinematic_camera(1.0)
+		is_in_skippable_cinematic = false
+		
+		# Repeat the lines until shift started.
+		if true:
+			var repeat_lines: Array[String] = [
+				"day_1_intro_3_repeat_0",
+				"day_1_intro_3_repeat_1"
+			]
+			var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+				VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+				VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+				]
+			var condition_callable: Callable = (
+				func() -> bool:
+					return Global.shift_started
+			)
+			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+		
+		await Global.voice_line_system.play_voice_line("day_1_intro_4_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
 	elif Global.day == 2:
 		pass
 	elif Global.day == 3:
