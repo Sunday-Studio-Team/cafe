@@ -116,6 +116,15 @@ func _physics_process(delta: float) -> void:
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
+	fake_velocity = fake_velocity.move_toward(velocity,fake_vel_follow_speed)
+	var has_roller_skates: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "roller_skates":
+			has_roller_skates = true
+			break
+	if has_roller_skates:
+		camera.camera_effects.fov = lerp(90,150,clampf((fake_velocity.length())/_current_move_speed,0,1))
+
 	handle_gravity(delta)
 	handle_footstep_sounds()
 
@@ -157,7 +166,9 @@ func handle_floating_cursor() -> void:
 #
 #	mouse_delta = Vector2.ZERO
 
-
+var fake_vel_follow_speed :float = 1.25
+var fake_velocity: Vector3
+var fov_tween:Tween
 func handle_movement(delta: float) -> void:
 	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
 		velocity = Vector3.ZERO
@@ -188,7 +199,6 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
