@@ -73,7 +73,6 @@
 [ext_resource type="Resource" uid="uid://b10hu24rnktud" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_6.tres" id="129_vqns7"]
 [ext_resource type="Resource" uid="uid://bvysr5e5slkfv" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_1.tres" id="130_fe76k"]
 [ext_resource type="Resource" uid="uid://b5aqpwmkh4w3q" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_7.tres" id="130_ybd4b"]
-[ext_resource type="Resource" uid="uid://bqr8rp3ll76g1" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_8.tres" id="131_3pnxd"]
 [ext_resource type="Resource" uid="uid://c5iubxwsxaef3" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_2.tres" id="131_p5pln"]
 [ext_resource type="Resource" uid="uid://btba3h738cxv2" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_2_0.tres" id="132_wr7jj"]
 [ext_resource type="Resource" uid="uid://dv8ws51fnmw05" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_3_0.tres" id="133_ybd4b"]
@@ -473,7 +472,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_t6w6j"]
 resource_name = "day_0_intro_0_5"
-length = 0.2
+length = 1.5
 step = 0.1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
@@ -481,14 +480,52 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.58600664, 1.8021055, -0.98525)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.9216303, 0.16641682, -2.8606958)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266181, 0.9852271)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.024353314, -0.057564203, 0.0014046276, 0.9980435)
+
+[sub_resource type="Animation" id="Animation_22udi"]
+resource_name = "day_0_intro_0_6"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.2280613, 0.13292857, -2.5235634, 2, 1, 1.2240139, 1.516766, -2.4356372)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_4v3l6"]
+resource_name = "day_0_intro_0_7"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.2, 1, 0.696933, 1.7798921, -3.5278559)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.2, 1, 0.00977693, 0.9731699, 0.04210186, -0.2259903, 2.5, 1, -0.000895569, 0.97415954, 0.0038632858, 0.22582507)
 
 [sub_resource type="Animation" id="Animation_e31dh"]
 resource_name = "day_0_intro_13_0"
@@ -528,24 +565,24 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.001750982, 0.9585523, 0.0058922516, 0.28484997, 2, 1, -0.0021013517, 0.9963409, 0.025693256, 0.08148684)
 
-[sub_resource type="Animation" id="Animation_itvpi"]
+[sub_resource type="Animation" id="Animation_xj0gb"]
 resource_name = "day_0_intro_1_0"
-length = 1.5
+length = 0.2
 step = 0.1
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.55229497, 1.8021055, -0.88259685, 1.5, 1, 0.58600664, 1.8021055, -0.98525)
+tracks/0/keys = PackedFloat32Array(0, 1, 3.1165311, 1.9362137, -2.5574093, 0.1, 1, 2.989764, 1.9362137, -2.5574093)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013405, -0.14500849, -0.0132661825, 0.98522705, 1.5, 1, -0.090134054, -0.14500849, -0.013266184, 0.98522705)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.019775381, -0.7256895, 0.02087629, 0.6874207)
 
 [sub_resource type="Animation" id="Animation_lw0ge"]
 resource_name = "day_0_intro_1_1"
@@ -557,14 +594,90 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.58600664, 1.8021055, -0.98525, 0.2, 1, 0.30611604, 1.8021055, -0.366081)
+tracks/0/keys = PackedFloat32Array(0, 1, 1.7382874, 1.451355, -2.745169, 0.2, 1, 1.8913093, 1.451355, -2.5858798)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266181, 0.9852271, 0.2, 1, -0.09013404, -0.14500847, -0.013266183, 0.9852271)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.019211894, 0.2830927, -0.0056719612, 0.95888305, 0.2, 1, 0.01921189, 0.28309265, -0.005671959, 0.958883)
+
+[sub_resource type="Animation" id="Animation_2xbl0"]
+resource_name = "day_0_intro_1_2"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -2.5461905, 0.65212816, 0.24857709)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017633272, 0.95612895, -0.05886182, 0.28642815)
+
+[sub_resource type="Animation" id="Animation_ohsdn"]
+resource_name = "day_0_intro_1_3"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 3.548111, 2.0531106, -2.210018)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.0031330816, -0.61292577, -0.0024304192, 0.79013014)
+
+[sub_resource type="Animation" id="Animation_d52hs"]
+resource_name = "day_0_intro_1_4"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.8913093, 1.451355, -2.5858798)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.01921189, 0.28309265, -0.00567196, 0.95888305)
+
+[sub_resource type="Animation" id="Animation_d635n"]
+resource_name = "day_0_intro_1_5"
+length = 0.2
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 3.1446774, 1.9318672, -1.9079508)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017872836, -0.5936451, 0.013189787, 0.8044198)
 
 [sub_resource type="Animation" id="Animation_4jpym"]
 resource_name = "day_0_intro_2_0"
@@ -575,14 +688,14 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("CameraRig")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.30611604, 1.8021055, -0.366081, 1, 1, 2.2684286, 1.1281848, -2.3730447)
+tracks/0/keys = PackedFloat32Array(0, 1, 3.1446774, 1.9318672, -1.9079508, 1, 1, 2.9480634, 1.2296036, -1.75277)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("CameraRig")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.09013404, -0.14500847, -0.013266183, 0.9852271, 1, 1, -0.004258516, -0.85935456, -0.0071572186, 0.5113124)
+tracks/1/keys = PackedFloat32Array(0, 1, 0.017872836, -0.5936451, 0.013189787, 0.8044198, 1, 1, -0.010102007, -0.8055702, -0.013740517, 0.5922542)
 
 [sub_resource type="Animation" id="Animation_cit2p"]
 resource_name = "day_0_intro_4_0"
@@ -853,10 +966,16 @@ _data = {
 &"day_0_intro_0_3": SubResource("Animation_m5kst"),
 &"day_0_intro_0_4": SubResource("Animation_2ixj2"),
 &"day_0_intro_0_5": SubResource("Animation_t6w6j"),
+&"day_0_intro_0_6": SubResource("Animation_22udi"),
+&"day_0_intro_0_7": SubResource("Animation_4v3l6"),
 &"day_0_intro_13_0": SubResource("Animation_e31dh"),
 &"day_0_intro_13_1": SubResource("Animation_tcxth"),
-&"day_0_intro_1_0": SubResource("Animation_itvpi"),
+&"day_0_intro_1_0": SubResource("Animation_xj0gb"),
 &"day_0_intro_1_1": SubResource("Animation_lw0ge"),
+&"day_0_intro_1_2": SubResource("Animation_2xbl0"),
+&"day_0_intro_1_3": SubResource("Animation_ohsdn"),
+&"day_0_intro_1_4": SubResource("Animation_d52hs"),
+&"day_0_intro_1_5": SubResource("Animation_d635n"),
 &"day_0_intro_2_0": SubResource("Animation_4jpym"),
 &"day_0_intro_4_0": SubResource("Animation_cit2p"),
 &"day_0_intro_4_1": SubResource("Animation_46ndd"),
@@ -1013,9 +1132,9 @@ _intro_email = ExtResource("6_gttkg")
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_cinematic_camera_voice_line_player", "_around_cafe_voice_line_players")]
 script = ExtResource("118_1slqb")
-_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("123_2ixj2"), ExtResource("124_t6w6j"), ExtResource("125_itvpi"), ExtResource("126_4jpym"), ExtResource("127_j4mna"), ExtResource("128_pnym5"), ExtResource("129_vqns7"), ExtResource("130_ybd4b"), ExtResource("131_3pnxd"), ExtResource("132_wr7jj"), ExtResource("133_ybd4b"), ExtResource("134_cit2p"), ExtResource("135_46ndd"), ExtResource("136_3cabt"), ExtResource("137_swcop"), ExtResource("138_r8clq"), ExtResource("139_ico27"), ExtResource("140_k6qn3"), ExtResource("141_oodit"), ExtResource("142_lwqyd"), ExtResource("143_sn277"), ExtResource("144_b52uf"), ExtResource("145_hwprm"), ExtResource("146_d0xhy"), ExtResource("147_lw0ge"), ExtResource("148_1e7qx"), ExtResource("149_6kqjg"), ExtResource("150_ydhsu"), ExtResource("151_p3rrp"), ExtResource("152_ewpr8"), ExtResource("153_5jugy"), ExtResource("154_320fk"), ExtResource("155_5cdne"), ExtResource("156_cdf73"), ExtResource("157_qeqs3"), ExtResource("158_21jki"), ExtResource("159_fgj2h"), ExtResource("160_33vkc"), ExtResource("161_c8pmb"), ExtResource("162_ct655"), ExtResource("163_k508x"), ExtResource("164_lt7rr"), ExtResource("165_wv2wi"), ExtResource("166_7wskh"), ExtResource("167_we7ek"), ExtResource("168_4t3jq"), ExtResource("169_wibxs"), ExtResource("170_tk4ml"), ExtResource("171_giqsh"), ExtResource("172_8bsdr"), ExtResource("173_sa5b4"), ExtResource("174_6h8os"), ExtResource("175_dpk1y"), ExtResource("176_s2e5t"), ExtResource("177_p0prv"), ExtResource("178_re7jp"), ExtResource("179_163gt"), ExtResource("180_sfu8n"), ExtResource("181_7ljty"), ExtResource("182_nmlsr"), ExtResource("183_87vht"), ExtResource("184_2fit5"), ExtResource("185_gk3yn"), ExtResource("186_lmlah"), ExtResource("187_sxhyu"), ExtResource("188_iu23i"), ExtResource("189_t4ssb"), ExtResource("190_snw3v"), ExtResource("191_avbtm"), ExtResource("192_s11hv"), ExtResource("193_k4n35"), ExtResource("194_0fjwg"), ExtResource("195_hh8eq"), ExtResource("196_u8gjg"), ExtResource("197_4eule"), ExtResource("198_8igct"), ExtResource("199_xnvgk"), ExtResource("200_b3d73"), ExtResource("201_8h177"), ExtResource("202_i7ics"), ExtResource("203_m58yd"), ExtResource("204_0l6uf"), ExtResource("205_8nef1")])
+_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("123_2ixj2"), ExtResource("124_t6w6j"), ExtResource("125_itvpi"), ExtResource("126_4jpym"), ExtResource("127_j4mna"), ExtResource("128_pnym5"), ExtResource("129_vqns7"), ExtResource("130_ybd4b"), ExtResource("132_wr7jj"), ExtResource("133_ybd4b"), ExtResource("134_cit2p"), ExtResource("135_46ndd"), ExtResource("136_3cabt"), ExtResource("137_swcop"), ExtResource("138_r8clq"), ExtResource("139_ico27"), ExtResource("140_k6qn3"), ExtResource("141_oodit"), ExtResource("142_lwqyd"), ExtResource("143_sn277"), ExtResource("144_b52uf"), ExtResource("145_hwprm"), ExtResource("146_d0xhy"), ExtResource("147_lw0ge"), ExtResource("148_1e7qx"), ExtResource("149_6kqjg"), ExtResource("150_ydhsu"), ExtResource("151_p3rrp"), ExtResource("152_ewpr8"), ExtResource("153_5jugy"), ExtResource("154_320fk"), ExtResource("155_5cdne"), ExtResource("156_cdf73"), ExtResource("157_qeqs3"), ExtResource("158_21jki"), ExtResource("159_fgj2h"), ExtResource("160_33vkc"), ExtResource("161_c8pmb"), ExtResource("162_ct655"), ExtResource("163_k508x"), ExtResource("164_lt7rr"), ExtResource("165_wv2wi"), ExtResource("166_7wskh"), ExtResource("167_we7ek"), ExtResource("168_4t3jq"), ExtResource("169_wibxs"), ExtResource("170_tk4ml"), ExtResource("171_giqsh"), ExtResource("172_8bsdr"), ExtResource("173_sa5b4"), ExtResource("174_6h8os"), ExtResource("175_dpk1y"), ExtResource("176_s2e5t"), ExtResource("177_p0prv"), ExtResource("178_re7jp"), ExtResource("179_163gt"), ExtResource("180_sfu8n"), ExtResource("181_7ljty"), ExtResource("182_nmlsr"), ExtResource("183_87vht"), ExtResource("184_2fit5"), ExtResource("185_gk3yn"), ExtResource("186_lmlah"), ExtResource("187_sxhyu"), ExtResource("188_iu23i"), ExtResource("189_t4ssb"), ExtResource("190_snw3v"), ExtResource("191_avbtm"), ExtResource("192_s11hv"), ExtResource("193_k4n35"), ExtResource("194_0fjwg"), ExtResource("195_hh8eq"), ExtResource("196_u8gjg"), ExtResource("197_4eule"), ExtResource("198_8igct"), ExtResource("199_xnvgk"), ExtResource("200_b3d73"), ExtResource("201_8h177"), ExtResource("202_i7ics"), ExtResource("203_m58yd"), ExtResource("204_0l6uf"), ExtResource("205_8nef1")])
 _cinematic_camera_voice_line_player = NodePath("../CinematicCamera/CameraRig/VoiceLinePlayerNonDirectional")
-_around_cafe_voice_line_players = [NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D2")]
+_around_cafe_voice_line_players = [NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D2"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D3")]
 metadata/_custom_type_script = "uid://curf1bfdhuo16"
 
 [node name="TippyCalloutsManager" type="Node" parent="." unique_id=120441579]
@@ -2099,13 +2218,13 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.9999995, 0, 0, 0, 0.99999917, 0, 0, 0, 0.99999946, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.9999991, 0, 0, 0, 0.999999, 0, 0, 0, 0.99999917, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
 
 [node name="Camera3D" type="Camera3D" parent="CinematicCamera/CameraRig" unique_id=609030686]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1.0000008, 4.5520276e-12, 4.7087674e-06, 0, 1.000001, -9.667141e-07, -4.7087674e-06, 9.66714e-07, 1.0000008, 0, 0, 0)
 
 [node name="TutorialLocations" type="Node3D" parent="." unique_id=1397765395]
 
@@ -2433,6 +2552,9 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.
 [node name="AroundCafeVoiceLinePlayer3D2" parent="AroundCafeVoiceLinePlayers" unique_id=417750739 instance=ExtResource("312_8ldsf")]
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.486, 1.25, 7.331)
 
+[node name="AroundCafeVoiceLinePlayer3D3" parent="AroundCafeVoiceLinePlayers" unique_id=463110771 instance=ExtResource("312_8ldsf")]
+transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
+
 [node name="ClockItemStopSound" type="AudioStreamPlayer" parent="." unique_id=1632177732]
 stream = ExtResource("222_bvlej")
 
@@ -2447,7 +2569,7 @@ stream = ExtResource("137_g3y5b")
 volume_db = -5.0
 
 [node name="CustomerAreaMusic" parent="." unique_id=109925331 instance=ExtResource("404_mfcn2")]
-transform = Transform3D(0.6857654, -0.009775481, -0.727757, 0, 0.9999098, -0.013431129, 0.7278226, 0.009210604, 0.68570346, 4.4972587, 2.7244682, -3.7560964)
+transform = Transform3D(0.7278226, 0.009210606, 0.68570364, 6.386688e-10, 0.99990994, -0.013431133, -0.6857655, 0.009775481, 0.7277569, -4.3664393, 2.7244682, -3.5881112)
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)

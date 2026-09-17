@@ -45,23 +45,32 @@ func start_day() -> void:
 			await _cinematic_camera.play_animation("day_0_intro_0_2")
 			await _cinematic_camera.play_animation("day_0_intro_0_3")
 			await _cinematic_camera.play_animation("day_0_intro_0_4")
-			await _cinematic_camera.play_animation("day_0_intro_0_5")
-	
+			
 			Global.player.override_position_rotation(_day_0_sato_front_door_position.global_position, _day_0_sato_front_door_position.global_rotation)
 	
-			await _cinematic_camera.play_animation("day_0_intro_1_0")
-			
-			_cinematic_camera.play_animation("day_0_intro_1_1")
+			await _cinematic_camera.play_animation("day_0_intro_0_5")
+			await _cinematic_camera.play_animation("day_0_intro_0_6")
+			await _cinematic_camera.play_animation("day_0_intro_0_7")
+	
+			_cinematic_camera.play_animation("day_0_intro_1_0")
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			
+			_cinematic_camera.play_animation("day_0_intro_1_1")
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
+			_cinematic_camera.play_animation("day_0_intro_1_2")
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			_cinematic_camera.play_animation("day_0_intro_1_3")
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_5", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			_cinematic_camera.play_animation("day_0_intro_1_4")
+			await Global.voice_line_system.play_voice_line("day_0_intro_1_5", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			_cinematic_camera.play_animation("day_0_intro_1_5")
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await Global.voice_line_system.play_voice_line("day_0_intro_1_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 	
 			_cinematic_camera.play_animation("day_0_intro_2_0")
 			await Global.voice_line_system.play_voice_line("day_0_intro_2_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
