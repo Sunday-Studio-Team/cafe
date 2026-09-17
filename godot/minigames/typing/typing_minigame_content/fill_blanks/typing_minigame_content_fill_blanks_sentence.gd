@@ -16,6 +16,8 @@ extends Resource
 				combined_preview += "\"%s\"" % sentence.typed_section
 		_editor_sentence_sections_combined_preview = combined_preview
 		return _editor_sentence_sections_combined_preview
+## These should include spaces in the prefilled sections before and after the typed sections, where necessary.
+## We want it to be formatted properly when put all together, and we also don't want the player to have to type spaces!
 @export var sentence_sections: Array[TypingMinigameContentFillBlanksSentenceSection]
 
 func _editor_force_update_preview() -> void:
