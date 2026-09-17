@@ -21,6 +21,7 @@ const STRIDE_LENGTH := 1.25
 @export var sprint_lockout_timer: Timer
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
+@export var gpu_particles_3d: GPUParticles3D
 
 var player_status_effects: PlayerStatusEffects
 
@@ -123,6 +124,7 @@ func _physics_process(delta: float) -> void:
 			has_roller_skates = true
 			break
 	if has_roller_skates:
+		gpu_particles_3d.emitting = velocity.length() > 2.5
 		camera.camera_effects.fov = lerp(90,150,clampf((fake_velocity.length())/_current_move_speed,0,1))
 
 	handle_gravity(delta)

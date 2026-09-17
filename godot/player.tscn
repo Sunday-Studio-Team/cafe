@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dtm03unbkcgjm" path="res://audio/footsteps/footstep_concrete_3.wav" id="11_bwjto"]
 [ext_resource type="AudioStream" uid="uid://dob2v6d5xvpoa" path="res://audio/footsteps/footstep_concrete_4.wav" id="12_606se"]
 [ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="17_op7ga"]
+[ext_resource type="Material" uid="uid://b18gocjjdbtpa" path="res://resources/misc_resources/roller_skates_dust_clouds.tres" id="18_q13i1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
@@ -40,7 +41,14 @@ stream_1/stream = ExtResource("10_urp6f")
 stream_2/stream = ExtResource("11_bwjto")
 stream_3/stream = ExtResource("12_606se")
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ep1o"]
+shading_mode = 0
+albedo_color = Color(0.79, 0.79, 0.79, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_coxhp"]
+material = SubResource("StandardMaterial3D_0ep1o")
+
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "gpu_particles_3d")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
@@ -56,6 +64,7 @@ customer_trash_scene = ExtResource("3_dw050")
 sprint_lockout_timer = NodePath("SprintLockoutTimer")
 footstep_sfx_lockout_timer = NodePath("FootstepLockoutTimer")
 free_cam_visualizer = NodePath("FreeCamVisualizer")
+gpu_particles_3d = NodePath("GPUParticles3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8760254, 0)
@@ -158,6 +167,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8978745, 0)
 pixel_size = 0.00085
 billboard = 2
 texture = ExtResource("17_op7ga")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1045756313]
+cast_shadow = 0
+emitting = false
+amount = 32
+process_material = ExtResource("18_q13i1")
+draw_pass_1 = SubResource("SphereMesh_coxhp")
 
 [editable path="CameraController/Camera3D/trash_placehold"]
 [editable path="CameraController/Camera3D/ingredientbag"]
