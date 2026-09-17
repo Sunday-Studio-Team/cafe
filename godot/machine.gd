@@ -525,16 +525,25 @@ func machine_make_drink() -> void:
 
 	consume_ingredients()
 
-	# Roll a random number of ingredients to differ.
+	# Figure out number of ingredients to differ.
 	const ingredient_types_count: int = 3
-	var target_drink_diff: int = randi_range(0, ingredient_types_count)
+	var target_drink_diff: int
 	if next_drink_forced_perfect:
 		target_drink_diff = 0
 		next_drink_forced_perfect = false
 	elif next_drink_forced_incorrect:
 		target_drink_diff = 2
 		next_drink_forced_incorrect = false
-
+	else:
+		# Roll whether the drink should be correct or incorrect, based on time of day and current day.
+		var chances_curve: Curve = Stats.current.chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day.get(Global.day)
+		var chance_drink_should_be_incorrect: float = chances_curve.sample(Global.shift_progress_ratio)
+		var drink_should_be_incorrect: bool = randf_range(0, 1.0) <= chance_drink_should_be_incorrect
+		if drink_should_be_incorrect:
+			target_drink_diff = randi_range(1, ingredient_types_count)
+		else:
+			target_drink_diff = 0
+	
 	var unlocked_drinks: Array[Drink]
 	for drink in Global.drinks:
 		if drink.is_unlocked():

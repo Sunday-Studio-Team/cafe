@@ -2,6 +2,30 @@
 
 [ext_resource type="Script" uid="uid://dkcvishq458wg" path="res://autoloads/stats/stat_data.gd" id="1_l8dww"]
 
+[sub_resource type="Curve" id="Curve_tcxth"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4987923, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_wt1cb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5036232, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4963637), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_pdogp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35265702, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.34545457), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_tkf2o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.32729468, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3327273), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_eb76x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.29589373, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2963637), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_yarrn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.24879228, 1), 0.0, 0.0, 0, 0, Vector2(0.99999994, 0.24909097), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="Curve" id="Curve_l8dww"]
 _limits = [20.0, 30.0, 0.0, 1.0]
 _data = [Vector2(0, 30), 0.0, -9.154129, 0, 0, Vector2(1, 20), 0.0, 0.0, 0, 0]
@@ -79,5 +103,13 @@ help_desk_customer_flow_rate_at_rating_curve_per_day = Dictionary[int, Curve]({
 3: SubResource("Curve_5q6qa"),
 4: SubResource("Curve_k36g1"),
 5: SubResource("Curve_p528g")
+})
+chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day = Dictionary[int, Curve]({
+0: SubResource("Curve_tcxth"),
+1: SubResource("Curve_wt1cb"),
+2: SubResource("Curve_pdogp"),
+3: SubResource("Curve_tkf2o"),
+4: SubResource("Curve_eb76x"),
+5: SubResource("Curve_yarrn")
 })
 metadata/_custom_type_script = "uid://dkcvishq458wg"

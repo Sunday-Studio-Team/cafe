@@ -67,6 +67,7 @@ var closing_time:bool = false
 func _ready() -> void:
 	_voice_line_system.setup()
 	Global.camera_mode = Global.CameraMode.PLAYER
+	Global.cinematic_camera_allow_machine_gui_inputs = true
 
 	_world_environment.environment = Global.cafe_environment_res
 	Events.game_options_changed.connect(_on_game_options_changed)
