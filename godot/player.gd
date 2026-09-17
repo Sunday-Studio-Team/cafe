@@ -125,8 +125,9 @@ func _physics_process(delta: float) -> void:
 			break
 	if has_roller_skates:
 		gpu_particles_3d.emitting = velocity.length() > 2.5
-		camera.camera_effects.fov = lerp(90,150,clampf((fake_velocity.length())/_current_move_speed,0,1))
-
+		camera.camera_effects.fov = lerp(90,150,clampf((fake_velocity.length()) / _current_move_speed,0,1))
+	else:
+		camera.camera_effects.fov = lerp(90,100,clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed,0,2))
 	handle_gravity(delta)
 	handle_footstep_sounds()
 
