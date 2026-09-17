@@ -36,6 +36,8 @@ func start_day() -> void:
 	# Hide the Tippy Tablet prop
 	_day_1_tippy_tablet_prop.visible = false
 	
+	var skip_cutscenes: bool = OS.has_feature("skip_cutscenes")
+	
 	if Global.day == 0:
 		
 		if true:
@@ -614,7 +616,7 @@ func start_day() -> void:
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 		return
 		
-	elif Global.day == 1:
+	elif Global.day == 1 and not skip_cutscenes:
 		# Show the Tippy Tablet prop
 		_day_1_tippy_tablet_prop.visible = true
 
@@ -735,13 +737,13 @@ func start_day() -> void:
 		
 		await Global.voice_line_system.play_voice_line("day_1_intro_4_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 		
-	elif Global.day == 2:
+	elif Global.day == 2 and not skip_cutscenes:
 		pass
-	elif Global.day == 3:
+	elif Global.day == 3 and not skip_cutscenes:
 		pass
-	elif Global.day == 4:
+	elif Global.day == 4 and not skip_cutscenes:
 		pass
-	elif Global.day == 5:
+	elif Global.day == 5 and not skip_cutscenes:
 		pass
 
 	# Re-enable Tippy callouts
