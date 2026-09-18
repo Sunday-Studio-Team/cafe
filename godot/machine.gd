@@ -407,12 +407,11 @@ func _set_customer(new_customer: Customer) -> void:
 		if customer.customer_sprite_resource.alternate_desk_sprite:
 			customer.body.texture = customer.customer_sprite_resource.sprite
 
-	customer = new_customer
-	if customer != null:
-		customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
-		await customer.move_to(spot_for_customer.global_position)
-		if customer.customer_sprite_resource.alternate_desk_sprite:
-			customer.body.texture = customer.customer_sprite_resource.alternate_desk_sprite
+	if new_customer != null:
+		new_customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
+		await new_customer.move_to(spot_for_customer.global_position)
+		if new_customer.customer_sprite_resource.alternate_desk_sprite:
+			new_customer.body.texture = new_customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
@@ -423,6 +422,7 @@ func _set_customer(new_customer: Customer) -> void:
 			# but this seems to behave correctly
 			Events.force_close_minigame.emit()
 			Events.minigame_cancelled.emit()
+	customer = new_customer
 
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
@@ -936,15 +936,15 @@ func _on_requested_use_active_item_machine():
 		return
 
 	if customer:
+		Global.put_active_item_on_cooldown(air_horn)
+		var leaving_customer: Customer = customer
 		Events.play_viewmodel_animation.emit("airhorn_use")
 		await Events.air_horn_animation_just_blasted
 		airhorn_sound.play()
-		customer.leave_store()
 		_set_customer(null)
+		leaving_customer.leave_store()
 		waiting_for_response = false
 		order_breakdown.hide()
-
-		Global.put_active_item_on_cooldown(air_horn)
 
 
 func _on_clean_spill() -> void:
