@@ -950,6 +950,7 @@ func _on_requested_use_active_item_machine():
 		order_breakdown.hide()
 		animation_player.stop()
 		hum_sound.stop()
+		equal_sign.texture = equal_sign_states[EqualStates.Empty]
 
 
 func _on_clean_spill() -> void:
