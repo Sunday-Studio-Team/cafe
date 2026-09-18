@@ -44,11 +44,15 @@ const REFILL_MINIGAME := "Refill"
 @export var ordered_liquid_icon: TextureRect
 @export var ordered_extra_icon: TextureRect
 @export var ordered_drink_icon: TextureRect
+# literally just the text that says 'ORDERED' above the icon
+@export var ordered_text: RichTextLabel
 @export var made_breakdown: Control
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
+# literally just the text that says 'MADE' above the icon
+@export var made_text: RichTextLabel
 @export var equal_sign: TextureRect
 @export var equal_sign_states: Array[Texture2D]
 enum EqualStates {
@@ -135,6 +139,7 @@ var test_3: int = 0
 func _ready() -> void:
 	get_stats()
 	ordered_drink_icon.hide()
+	ordered_text.hide()
 	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
 	reset_icons()
@@ -215,6 +220,7 @@ func _process(delta: float) -> void:
 	make_drink_button.disabled = (not waiting_for_response) or (ingredients < Stats.current.ingredients_per_order) or tutorial_lock_remake_drink_button
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
+	made_text.visible = waiting_for_response
 
 	# uncomment if we want to show detailed ingredients cost for remakes
 	#remake_ingredients_cost_label.text = (
@@ -478,6 +484,8 @@ func machine_make_drink() -> void:
 	# NOTE: experiment: commented out for now to simplify ui
 	#customer_order_indicator.show()
 	ordered_drink_icon.show()
+	ordered_text.show()
+	
 	# ordered_drink_name_label.show()
 	order_breakdown.show()
 
@@ -835,6 +843,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		Events.order_accepted.emit(customer)
 
 	ordered_drink_icon.hide()
+	ordered_text.hide()
 	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 
@@ -946,6 +955,7 @@ func _on_requested_use_active_item_machine():
 		waiting_for_response = false
 		
 		ordered_drink_icon.hide()
+		ordered_text.hide()
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
 		animation_player.stop()
