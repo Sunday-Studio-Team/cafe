@@ -1,8 +1,5 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://7eung7gb2bus"]
 
-[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_j3pel"]
-resource_name = "PitchShift"
-
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
 resource_name = "Compressor"
 threshold = -50.0
@@ -19,8 +16,6 @@ tap1_pan = 0.0
 tap2_active = false
 
 [resource]
-bus/0/effect/0/effect = SubResource("AudioEffectPitchShift_j3pel")
-bus/0/effect/0/enabled = true
 bus/1/name = &"DiegeticMusic"
 bus/1/solo = false
 bus/1/mute = false
