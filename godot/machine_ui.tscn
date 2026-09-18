@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://rd1bwnrprk6s" path="res://sprites/machine_ui/background.png" id="1_uuvgi"]
 [ext_resource type="Texture2D" uid="uid://c6y4ypjcynnjn" path="res://sprites/machine_ui/blank equal sign.png" id="2_2a0lh"]
-[ext_resource type="Texture2D" uid="uid://xmdnhsak8jg6" path="res://sprites/machine_ui/small screen with timer wo filter.png" id="2_motd3"]
 [ext_resource type="Texture2D" uid="uid://bea822q4swcq5" path="res://sprites/machine_ui/drink making timer.png" id="3_u8yrf"]
 [ext_resource type="Texture2D" uid="uid://b30p1hoj2cnj2" path="res://sprites/machine_ui/tippy_slippy.png" id="4_10yj4"]
 [ext_resource type="Texture2D" uid="uid://b7vp8srhtq10g" path="res://sprites/drink_icons/matcha.png" id="4_apda1"]
@@ -13,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cbasg8uwmoska" path="res://sprites/machine_ui/tippy_strong1.png" id="6_dw44w"]
 [ext_resource type="Texture2D" uid="uid://bw3d6s3quy584" path="res://sprites/machine_ui/TIMER DIAL.png" id="7_b6qyr"]
 [ext_resource type="PackedScene" uid="uid://wy44aeyirhsb" path="res://ui/order_breakdown_icon.tscn" id="7_dw44w"]
+[ext_resource type="FontFile" uid="uid://dk6nx8axv5jyo" path="res://fonts/VCR_OSD_MONO_1.001(1).ttf" id="9_wknqb"]
 [ext_resource type="Texture2D" uid="uid://fpimoyth3i1t" path="res://sprites/machine_ui/active accept button.png" id="10_71all"]
 [ext_resource type="StyleBox" uid="uid://ccm6ua1f8v82b" path="res://resources/drink_machine_ingredient_panel/default.tres" id="10_lhji5"]
 [ext_resource type="Texture2D" uid="uid://brnb1ddwmgdug" path="res://sprites/machine_ui/inactive accept button.png" id="11_10yj4"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://b5us111sbyg0r" path="res://sprites/machine_ui/result_icons/green dollar.png" id="23_wb2t4"]
 [ext_resource type="Texture2D" uid="uid://dyrk2sdr15vln" path="res://sprites/machine_ui/result_icons/green on arrow.png" id="24_il7ix"]
 [ext_resource type="Texture2D" uid="uid://cm25043d6mjou" path="res://sprites/machine_ui/result_icons/green person.png" id="25_128tk"]
+[ext_resource type="Texture2D" uid="uid://bo30mnulpbaus" path="res://sprites/machine_ui/smaller screen with timer.png" id="26_wknqb"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -213,7 +214,7 @@ size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1192831864]
 layout_mode = 2
-texture = ExtResource("2_motd3")
+texture = ExtResource("26_wknqb")
 stretch_mode = 2
 
 [node name="Control" type="Control" parent="HBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1433618898]
@@ -227,10 +228,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -302.0
-offset_top = 101.5
-offset_right = -302.0
-offset_bottom = 101.5
+offset_left = -281.0
+offset_top = 75.0
+offset_right = -281.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
@@ -279,8 +280,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 21.0
-offset_right = 21.0
+offset_left = 41.0
+offset_right = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -315,9 +316,14 @@ theme_override_constants/separation = 0
 
 [node name="OrderedText" type="RichTextLabel" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/OrderedInfo" unique_id=96130809]
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5176471)
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/bold_font = ExtResource("9_wknqb")
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
-text = "[b][font_size=48]ORDERED"
+text = "[b][font_size=75]ORDERED"
 fit_content = true
 horizontal_alignment = 1
 
@@ -409,10 +415,16 @@ offset_transform_position = Vector2(0, 5)
 theme_override_constants/separation = 0
 
 [node name="OrderedText" type="RichTextLabel" parent="HBoxContainer/MarginContainer/VBoxContainer/OrderInfo/MadeInfo" unique_id=611145803]
+clip_contents = false
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5176471)
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/bold_font = ExtResource("9_wknqb")
 theme_override_font_sizes/bold_font_size = 64
 bbcode_enabled = true
-text = "[b][font_size=48]MADE"
+text = "[b][font_size=75]MADE"
 fit_content = true
 horizontal_alignment = 1
 
