@@ -65,6 +65,7 @@ signal bag_pickup_animation_grabbed
 signal trash_pickup_animation_grabbed
 signal hammer_animation_hit
 signal air_horn_animation_just_blasted
+signal whipped_cream_animation_shot
 
 signal tutorial_selected
 # Free Cam

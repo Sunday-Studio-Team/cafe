@@ -245,8 +245,9 @@ func _on_requested_use_active_item():
 		return
 	
 	Events.play_viewmodel_animation.emit("cream_use")
-	whipped_cream_sound.play()
 	Global.put_active_item_on_cooldown(whipped_cream)
+	await Events.whipped_cream_animation_shot
+	whipped_cream_sound.play()
 	disarm_camera()
 	disabled_timer.wait_time = 15
 	disabled_timer.start()
