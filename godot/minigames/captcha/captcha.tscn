@@ -32,7 +32,18 @@ stream_0/stream = ExtResource("4_juyqc")
 stream_1/stream = ExtResource("5_w8b1k")
 stream_2/stream = ExtResource("6_p8bru")
 
-[node name="DrinkRemakingMinigame" type="Control" unique_id=503615879 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "drink_name")]
+[sub_resource type="Gradient" id="Gradient_j2xdn"]
+offsets = PackedFloat32Array(0, 1.5)
+colors = PackedColorArray(0, 0, 0, 0, 0, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ffxp"]
+gradient = SubResource("Gradient_j2xdn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[node name="DrinkRemakingMinigame" type="Control" unique_id=503615879 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "frozen_border", "drink_name")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,6 +67,7 @@ captcha_vbox = NodePath("HBoxContainer/Captcha/CaptchaVBox")
 sato_tippy_fight = NodePath("SatoTippyFight")
 complete_sprite = NodePath("HBoxContainer/Captcha/CompleteSprite")
 sato = NodePath("HBoxContainer/Sato")
+frozen_border = NodePath("FrozenBorder")
 sato_tippy_textures = Array[Texture2D]([ExtResource("10_ddm81"), ExtResource("3_rttna"), ExtResource("4_v4kh0")])
 sato_sprites = Array[Texture2D]([ExtResource("3_fa211"), ExtResource("7_x0a0u"), ExtResource("6_lv3ps")])
 drink_name = NodePath("HBoxContainer/Captcha/CaptchaVBox/DrinkName")
@@ -351,6 +363,17 @@ volume_db = -5.0
 stream = ExtResource("8_3tmsw")
 volume_db = -5.0
 
+[node name="FrozenBorder" type="TextureRect" parent="." unique_id=107704057]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_0ffxp")
+
 [node name="FrozenTippyIndicator" type="TextureRect" parent="." unique_id=1600440798]
 layout_mode = 0
 offset_left = 25.000122
@@ -359,6 +382,7 @@ offset_right = 121.00012
 offset_bottom = 116.0
 scale = Vector2(3.065689, 3.065689)
 offset_transform_enabled = true
+mouse_filter = 2
 texture = ExtResource("23_r6etq")
 expand_mode = 3
 stretch_mode = 5
