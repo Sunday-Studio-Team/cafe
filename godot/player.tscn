@@ -54,10 +54,21 @@ material = SubResource("StandardMaterial3D_0ep1o")
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = -1.05
+grow_amount = -1.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_pylmc"]
 material = SubResource("StandardMaterial3D_q13i1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tmop"]
+shading_mode = 0
+disable_receive_shadows = true
+grow_amount = -1.1
+stencil_flags = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ahtn"]
+material = SubResource("StandardMaterial3D_5tmop")
+radius = 0.3
+height = 1.1
 
 [node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles")]
 collision_layer = 8
@@ -117,7 +128,7 @@ texture = ExtResource("7_606se")
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1160311051]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1546531189]
 transform = Transform3D(0.0832229, 0.030946786, -0.04600267, -0.017828582, 0.09350325, 0.030647755, 0.052498486, -0.01730433, 0.083333485, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="large_ingredient_bag" parent="CameraController/Camera3D/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
@@ -181,14 +192,14 @@ texture = ExtResource("17_op7ga")
 
 [node name="RollerSkatesDustParticles" type="GPUParticles3D" parent="." unique_id=1045756313]
 cast_shadow = 0
-emitting = false
 amount = 32
-fixed_fps = 16
+fixed_fps = 12
 interpolate = false
 process_material = ExtResource("18_q13i1")
-draw_passes = 2
+draw_passes = 3
 draw_pass_1 = SubResource("SphereMesh_coxhp")
 draw_pass_2 = SubResource("SphereMesh_pylmc")
+draw_pass_3 = SubResource("SphereMesh_7ahtn")
 
 [editable path="CameraController/Camera3D/trash_placehold"]
 [editable path="CameraController/Camera3D/ingredientbag"]
