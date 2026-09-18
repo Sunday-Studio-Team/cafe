@@ -23,11 +23,14 @@ func _ready() -> void:
 
 	_play_animation("default")
 
+
 func _process(_delta: float) -> void:
 	visible = not Global.in_ui
+	
 
 func _on_play_viewmodel_animation(animation_name: String) -> void:
 	_play_animation(animation_name)
+	
 
 func _on_frame_changed() -> void:
 	if sprite.frame == 21 and sprite.animation == "hammer_use":
@@ -37,6 +40,8 @@ func _on_frame_changed() -> void:
 	elif sprite.frame == 7 and sprite.animation == "bag_pickup":
 		Events.bag_pickup_animation_grabbed.emit()
 		Events.trash_pickup_animation_grabbed.emit()
+	elif sprite.frame == 13 and sprite.animation == "airhorn_use":
+		Events.air_horn_animation_just_blasted.emit()
 
 
 func _on_animation_finished() -> void:
