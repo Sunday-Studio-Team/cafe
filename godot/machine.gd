@@ -944,7 +944,12 @@ func _on_requested_use_active_item_machine():
 		_set_customer(null)
 		leaving_customer.leave_store()
 		waiting_for_response = false
+		
+		ordered_drink_icon.hide()
+		ordered_drink_name_label.hide()
 		order_breakdown.hide()
+		animation_player.stop()
+		hum_sound.stop()
 
 
 func _on_clean_spill() -> void:
