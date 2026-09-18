@@ -177,8 +177,9 @@ enum CameraMode {
 }
 var camera_mode: CameraMode = CameraMode.PLAYER
 var cinematic_camera_allow_machine_gui_inputs: bool = true
-
 var item_loadout_menu: ItemLoadoutMenu
+# for pitch shifting
+var all_3d_audio_stream_players: Array[Node]
 
 
 func _ready() -> void:
@@ -191,6 +192,12 @@ func _ready() -> void:
 	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
+
+	while main_scene == null:
+		await get_tree().process_frame
+	for p: AudioStreamPlayer3D in Global.main_scene.find_children("*", "AudioStreamPlayer3D"):
+		p.set_meta("base_pitch_scale", p.pitch_scale)
+		all_3d_audio_stream_players.append(p)
 
 
 func load_unlocked_items_from_save() -> void:
@@ -287,3 +294,14 @@ func day_to_string(d: int) -> String:
 		day_as_string = "TRAINING"
 
 	return day_as_string
+
+
+func pitch_shift_all_3d_audio(down: bool) -> void:	
+	var pitch_tween := create_tween().set_parallel()
+
+	for p: AudioStreamPlayer3D in all_3d_audio_stream_players:
+		if down:
+			pitch_tween.tween_property(p, "pitch_scale", 0.75, 0.5)
+		else:
+			var player_base_pitch: float = p.get_meta("base_pitch_scale")
+			pitch_tween.tween_property(p, "pitch_scale", player_base_pitch, 0.25)

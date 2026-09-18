@@ -12,12 +12,14 @@ extends Control
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+@export var ice_freezing_sound: AudioStreamPlayer
 
 @export var req_and_sel:TextureRect
 @export var captcha_vbox:VBoxContainer
 @export var sato_tippy_fight:TextureRect
 @export var complete_sprite:TextureRect
 @export var sato:TextureRect
+@export var frozen_border: TextureRect
 
 enum SatoTippyFight {
 	Neutral = 0,
@@ -122,7 +124,8 @@ func verify_captcha() -> void:
 		ordered_drink.extra,
 	]
 	
-	# not counting duplicates, so we can select 3 coffee icons and if our drink has coffee that will add 1 to this count
+	# not counting duplicates, so if our drink has coffee, and we select 3 coffees,
+	# that will only add 1 to this count
 	var correct_ingredients_pressed: int = 0
 	
 	for ingredient: Ingredient in ordered_ingredients:
@@ -214,6 +217,20 @@ func _start_minigame() -> void:
 	
 	populate_captcha()
 
+	var has_frozen_tippy_item: bool = Global.owned_items.any(
+			func(item: Item) -> bool:
+				return item.item_id == "barista_guide"
+	)
+
+	if has_frozen_tippy_item:
+		ice_freezing_sound.play()
+		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
+		border_freeze_tween.tween_property(
+				frozen_border, 
+				"modulate", 
+				Color.WHITE, 
+				1
+		)
 
 
 func _end_minigame() -> void:
