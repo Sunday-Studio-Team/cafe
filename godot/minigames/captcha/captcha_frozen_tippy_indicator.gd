@@ -1,11 +1,9 @@
 extends TextureRect
 
-var has_frozen_tippy_item: bool = false
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	has_frozen_tippy_item = Global.owned_items.any(
+	var has_frozen_tippy_item: bool = Global.owned_items.any(
 			func(item: Item) -> bool:
 				return item.item_id == "barista_guide"
 	)

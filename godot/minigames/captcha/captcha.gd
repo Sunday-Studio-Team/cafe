@@ -223,8 +223,8 @@ func _start_minigame() -> void:
 	)
 
 	if has_frozen_tippy_item:
-		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
 		ice_freezing_sound.play()
+		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
 		border_freeze_tween.tween_property(
 				frozen_border, 
 				"modulate", 
