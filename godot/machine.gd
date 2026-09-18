@@ -1049,6 +1049,7 @@ func _on_force_close_minigame() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
+			Global.pitch_shift_all_3d_audio(false)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
