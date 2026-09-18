@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dtsyu2epb5p76" path="res://customer_trash.gd" id="1_e16t0"]
 [ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash.png" id="2_i5ewh"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="3_i5ewh"]
+[ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="4_ruef1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5ewh"]
 size = Vector3(0.24902344, 0.20874023, 0.23120117)
@@ -15,6 +16,7 @@ script = ExtResource("1_e16t0")
 interactable = NodePath("Interactable")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
+visible = false
 billboard = 1
 texture = ExtResource("2_i5ewh")
 
@@ -29,3 +31,6 @@ metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=464175996]
 shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="Trash Cup" parent="." unique_id=1552505292 instance=ExtResource("4_ruef1")]
+transform = Transform3D(0.28518367, 0.022747837, 0, -0.022747837, 0.28518367, 0, 0, 0, 0.28608948, 2.4399836, -0.30260834, 0.00028789043)
