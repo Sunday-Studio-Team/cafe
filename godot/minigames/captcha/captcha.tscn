@@ -24,13 +24,7 @@
 [ext_resource type="FontFile" uid="uid://ccfl3ya08xdg5" path="res://fonts/Merchant Copy.ttf" id="11_x0a0u"]
 [ext_resource type="Texture2D" uid="uid://cc1kisbo828l1" path="res://sprites/items/frozen_tippy.png" id="23_r6etq"]
 [ext_resource type="Script" uid="uid://dnxdgd2y51yfp" path="res://minigames/captcha/captcha_frozen_tippy_indicator.gd" id="24_knlx1"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
-random_pitch = 1.0594631
-streams_count = 3
-stream_0/stream = ExtResource("4_juyqc")
-stream_1/stream = ExtResource("5_w8b1k")
-stream_2/stream = ExtResource("6_p8bru")
+[ext_resource type="AudioStream" uid="uid://bya5mpl7q0qxv" path="res://audio/ice_freezing_frozen_tippy_remake_minigame.wav" id="25_eix12"]
 
 [sub_resource type="Gradient" id="Gradient_j2xdn"]
 offsets = PackedFloat32Array(0, 1.5)
@@ -43,7 +37,14 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
 
-[node name="DrinkRemakingMinigame" type="Control" unique_id=503615879 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "frozen_border", "drink_name")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("4_juyqc")
+stream_1/stream = ExtResource("5_w8b1k")
+stream_2/stream = ExtResource("6_p8bru")
+
+[node name="DrinkRemakingMinigame" type="Control" unique_id=503615879 node_paths=PackedStringArray("main_ordered", "liquid_ordered", "extra_ordered", "captcha", "entire_panel", "order_reminder", "customer_sprite", "remade_drink_sprite", "click_sound", "correct_sound", "wrong_sound", "ice_freezing_sound", "req_and_sel", "captcha_vbox", "sato_tippy_fight", "complete_sprite", "sato", "frozen_border", "drink_name")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,6 +63,7 @@ remade_drink_sprite = NodePath("Finished Drink")
 click_sound = NodePath("ClickSound")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
+ice_freezing_sound = NodePath("IceFreezingSound")
 req_and_sel = NodePath("HBoxContainer/Captcha/RequiredAndSelect")
 captcha_vbox = NodePath("HBoxContainer/Captcha/CaptchaVBox")
 sato_tippy_fight = NodePath("SatoTippyFight")
@@ -351,20 +353,9 @@ custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 button_disabled = true
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
-stream = SubResource("AudioStreamRandomizer_vn1tu")
-volume_db = -5.0
-
-[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=430448945]
-stream = ExtResource("7_p8bru")
-volume_db = -5.0
-
-[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
-stream = ExtResource("8_3tmsw")
-volume_db = -5.0
-
 [node name="FrozenBorder" type="TextureRect" parent="." unique_id=107704057]
 modulate = Color(1, 1, 1, 0)
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -375,6 +366,7 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_0ffxp")
 
 [node name="FrozenTippyIndicator" type="TextureRect" parent="." unique_id=1600440798]
+z_index = 11
 layout_mode = 0
 offset_left = 25.000122
 offset_top = 20.0
@@ -387,5 +379,21 @@ texture = ExtResource("23_r6etq")
 expand_mode = 3
 stretch_mode = 5
 script = ExtResource("24_knlx1")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -5.0
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=430448945]
+stream = ExtResource("7_p8bru")
+volume_db = -5.0
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
+stream = ExtResource("8_3tmsw")
+volume_db = -5.0
+
+[node name="IceFreezingSound" type="AudioStreamPlayer" parent="." unique_id=1079623280]
+stream = ExtResource("25_eix12")
+volume_db = -5.0
 
 [connection signal="pressed" from="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer/TextureButton" to="." method="_on_submit_button_pressed"]

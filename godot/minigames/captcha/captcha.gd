@@ -12,6 +12,7 @@ extends Control
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+@export var ice_freezing_sound: AudioStreamPlayer
 
 @export var req_and_sel:TextureRect
 @export var captcha_vbox:VBoxContainer
@@ -223,6 +224,7 @@ func _start_minigame() -> void:
 
 	if has_frozen_tippy_item:
 		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
+		ice_freezing_sound.play()
 		border_freeze_tween.tween_property(
 				frozen_border, 
 				"modulate", 
