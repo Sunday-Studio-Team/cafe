@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://ce36fefn26vrb" path="res://sprites/remake_drink_minigame/regular stance fighting.png" id="10_ddm81"]
 [ext_resource type="Texture2D" uid="uid://bglbsgjl1c1uo" path="res://sprites/remake_drink_minigame/completed drink.png" id="11_v4kh0"]
 [ext_resource type="FontFile" uid="uid://ccfl3ya08xdg5" path="res://fonts/Merchant Copy.ttf" id="11_x0a0u"]
+[ext_resource type="Texture2D" uid="uid://cc1kisbo828l1" path="res://sprites/items/frozen_tippy.png" id="23_r6etq"]
+[ext_resource type="Script" uid="uid://dnxdgd2y51yfp" path="res://minigames/captcha/captcha_frozen_tippy_indicator.gd" id="24_knlx1"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 random_pitch = 1.0594631
@@ -348,5 +350,18 @@ volume_db = -5.0
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
 stream = ExtResource("8_3tmsw")
 volume_db = -5.0
+
+[node name="FrozenTippyIndicator" type="TextureRect" parent="." unique_id=1600440798]
+layout_mode = 0
+offset_left = 25.000122
+offset_top = 20.0
+offset_right = 121.00012
+offset_bottom = 116.0
+scale = Vector2(3.065689, 3.065689)
+offset_transform_enabled = true
+texture = ExtResource("23_r6etq")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("24_knlx1")
 
 [connection signal="pressed" from="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer/TextureButton" to="." method="_on_submit_button_pressed"]
