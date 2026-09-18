@@ -996,7 +996,7 @@ func _on_remake_drink_button_pressed() -> void:
 			elif item.item_level == 2:
 				time_scale = 0.25
 
-			await Global.pitch_shift_all_audio(true)
+			Global.pitch_shift_all_3d_audio(true)
 			Engine.time_scale = time_scale
 			print("time scale set to: %s" % Engine.time_scale)
 
@@ -1025,7 +1025,7 @@ func _on_remade_drink() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
-			await Global.pitch_shift_all_audio(false)
+			Global.pitch_shift_all_3d_audio(false)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
@@ -1037,7 +1037,7 @@ func _cancel_remake_minigame() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
-			await Global.pitch_shift_all_audio(false)
+			Global.pitch_shift_all_3d_audio(false)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
