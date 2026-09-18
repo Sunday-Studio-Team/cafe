@@ -15,6 +15,47 @@
 [ext_resource type="Texture2D" uid="uid://djomcocgho7s4" path="res://Assets/main_menu/ForeArm.png" id="9_jqly5"]
 [ext_resource type="Texture2D" uid="uid://d4kckk2ei1dtp" path="res://Assets/main_menu/Handle.png" id="10_pbm0j"]
 [ext_resource type="Texture2D" uid="uid://b3e7ml41l5vg2" path="res://Assets/main_menu/Tippy.png" id="11_sb7pk"]
+[ext_resource type="Texture2D" uid="uid://dpsgki75nuglk" path="res://sprites/menu_anim/frame_001.PNG" id="16_sb7pk"]
+[ext_resource type="Texture2D" uid="uid://du6bq5ypvqadk" path="res://sprites/menu_anim/frame_002.PNG" id="17_s1050"]
+[ext_resource type="Texture2D" uid="uid://c51loj1ki0h4r" path="res://sprites/menu_anim/frame_003.PNG" id="18_i5ydv"]
+[ext_resource type="Texture2D" uid="uid://c057tndf4hyr0" path="res://sprites/menu_anim/frame_004.PNG" id="19_racxt"]
+[ext_resource type="Texture2D" uid="uid://dcaghfqxjhmep" path="res://sprites/menu_anim/frame_005.PNG" id="20_dooca"]
+[ext_resource type="Texture2D" uid="uid://3bsekxukog0r" path="res://sprites/menu_anim/frame_006.PNG" id="21_rqnt3"]
+[ext_resource type="Texture2D" uid="uid://4nqhps4rtxcv" path="res://sprites/menu_anim/frame_007.PNG" id="22_dbfs1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o0xaf"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("16_sb7pk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_s1050")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_i5ydv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_racxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_dooca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_rqnt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_dbfs1")
+}],
+"loop": 0,
+"name": &"menu",
+"speed": 3.0
+}]
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
 
@@ -26,49 +67,71 @@ _options_button = NodePath("Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
 metadata/_edit_vertical_guides_ = [1921.0, -40.0]
 
-[node name="ColorRect" type="TextureButton" parent="." unique_id=930743193]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2006666443]
+position = Vector2(967, 539)
+sprite_frames = SubResource("SpriteFrames_o0xaf")
+animation = &"menu"
+frame = 6
+frame_progress = 1.0
+speed_scale = 3.0
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1887683021]
+visible = false
+
+[node name="ColorRect" type="TextureButton" parent="Node2D" unique_id=930743193]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1497.0
+offset_bottom = 841.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_rmr83")
 stretch_mode = 5
 
-[node name="Bg" type="Sprite2D" parent="." unique_id=128788965]
+[node name="Bg" type="Sprite2D" parent="Node2D" unique_id=128788965]
+visible = false
 position = Vector2(1002.00006, 557)
 scale = Vector2(1.225256, 1.225256)
 texture = ExtResource("4_0nobx")
 
-[node name="Chest" type="Sprite2D" parent="." unique_id=1423608147]
+[node name="Chest" type="Sprite2D" parent="Node2D" unique_id=1423608147]
+visible = false
 position = Vector2(1042.5, 569)
 texture = ExtResource("5_iyrh0")
 
-[node name="Hair" type="Sprite2D" parent="." unique_id=700149125]
+[node name="Hair" type="Sprite2D" parent="Node2D" unique_id=700149125]
+visible = false
 position = Vector2(1042.5, 569)
 texture = ExtResource("6_8jgmr")
 
-[node name="Head" type="Sprite2D" parent="." unique_id=429291390]
+[node name="Head" type="Sprite2D" parent="Node2D" unique_id=429291390]
+visible = false
 position = Vector2(1042.5, 569)
 texture = ExtResource("7_q75kt")
 
-[node name="Arm" type="Sprite2D" parent="." unique_id=1289322961]
+[node name="Arm" type="Sprite2D" parent="Node2D" unique_id=1289322961]
+visible = false
 position = Vector2(1042.5, 569)
 texture = ExtResource("8_0i0gl")
 
-[node name="ForeArm" type="Sprite2D" parent="." unique_id=1790326256]
+[node name="ForeArm" type="Sprite2D" parent="Node2D" unique_id=1790326256]
+visible = false
 position = Vector2(1042.5, 569)
 texture = ExtResource("9_jqly5")
 
-[node name="Handle" type="Sprite2D" parent="." unique_id=1561813986]
+[node name="Handle" type="Sprite2D" parent="Node2D" unique_id=1561813986]
+visible = false
 position = Vector2(1042.5, 569)
 texture = ExtResource("10_pbm0j")
 
-[node name="Tippy" type="Sprite2D" parent="." unique_id=830360356]
+[node name="Tippy" type="Sprite2D" parent="Node2D" unique_id=830360356]
+visible = false
 position = Vector2(1047.5, 533)
 texture = ExtResource("11_sb7pk")
 
-[node name="Buttons" type="Control" parent="." unique_id=732320545]
+[node name="Buttons" type="Control" parent="." unique_id=732320545 node_paths=PackedStringArray("animated_sprite", "button_container")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -590.0
@@ -77,13 +140,16 @@ offset_right = 1130.0
 offset_bottom = 1132.0
 size_flags_vertical = 3
 script = ExtResource("4_p8ri8")
+animated_sprite = NodePath("../AnimatedSprite2D")
+button_container = NodePath(".")
 
 [node name="Play" type="TextureButton" parent="Buttons" unique_id=1358047692]
 layout_mode = 0
 offset_left = 594.0
-offset_top = 41.0
+offset_top = 189.0
 offset_right = 1153.0
-offset_bottom = 317.0
+offset_bottom = 465.0
+scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("4_8uxxo")
@@ -91,19 +157,21 @@ texture_click_mask = SubResource("BitMap_ei257")
 
 [node name="Options" type="TextureButton" parent="Buttons" unique_id=1503516788]
 layout_mode = 0
-offset_left = 596.0
-offset_top = 112.0
-offset_right = 1137.0
-offset_bottom = 398.0
+offset_left = 589.0
+offset_top = 295.0
+offset_right = 1130.0
+offset_bottom = 581.0
+scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("3_wk0pr")
 
 [node name="Quit" type="TextureButton" parent="Buttons" unique_id=604226931]
 layout_mode = 0
-offset_left = 1083.0
-offset_top = 159.0
-offset_right = 1245.0
-offset_bottom = 399.0
+offset_left = 1228.0
+offset_top = 349.0
+offset_right = 1390.0
+offset_bottom = 589.0
+scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 texture_normal = ExtResource("6_ei257")
