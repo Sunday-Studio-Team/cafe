@@ -48,6 +48,15 @@ albedo_color = Color(0.79, 0.79, 0.79, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_coxhp"]
 material = SubResource("StandardMaterial3D_0ep1o")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q13i1"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = -1.05
+
+[sub_resource type="SphereMesh" id="SphereMesh_pylmc"]
+material = SubResource("StandardMaterial3D_q13i1")
+
 [node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "gpu_particles_3d")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
@@ -170,10 +179,13 @@ texture = ExtResource("17_op7ga")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1045756313]
 cast_shadow = 0
-emitting = false
 amount = 32
+fixed_fps = 16
+interpolate = false
 process_material = ExtResource("18_q13i1")
+draw_passes = 2
 draw_pass_1 = SubResource("SphereMesh_coxhp")
+draw_pass_2 = SubResource("SphereMesh_pylmc")
 
 [editable path="CameraController/Camera3D/trash_placehold"]
 [editable path="CameraController/Camera3D/ingredientbag"]
