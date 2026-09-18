@@ -21,7 +21,7 @@ const STRIDE_LENGTH := 1.25
 @export var sprint_lockout_timer: Timer
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
-@export var gpu_particles_3d: GPUParticles3D
+@export var roller_skates_dust_particles: GPUParticles3D
 
 var player_status_effects: PlayerStatusEffects
 
@@ -124,9 +124,10 @@ func _physics_process(delta: float) -> void:
 			break
 	fake_velocity = fake_velocity.move_toward(velocity,fake_vel_follow_speed)
 	if has_roller_skates:
-		gpu_particles_3d.emitting = velocity.length() > 2.5
+		roller_skates_dust_particles.emitting = velocity.length() > 2.5
 		camera.camera_effects.fov = lerp(90,150,clampf((fake_velocity.length()) / _current_move_speed,0,1))
 	else:
+		roller_skates_dust_particles.emitting = false
 		camera.camera_effects.fov = lerp(90,100,clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed,0,2))
 	handle_gravity(delta)
 	handle_footstep_sounds()
