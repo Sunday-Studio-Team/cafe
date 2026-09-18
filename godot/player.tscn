@@ -44,6 +44,8 @@ stream_3/stream = ExtResource("12_606se")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ep1o"]
 shading_mode = 0
 albedo_color = Color(0.79, 0.79, 0.79, 1)
+disable_receive_shadows = true
+stencil_flags = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_coxhp"]
 material = SubResource("StandardMaterial3D_0ep1o")
