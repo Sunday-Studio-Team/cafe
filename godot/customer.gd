@@ -18,7 +18,10 @@ const MOVE_SPEED := 2.0
 var customer_sprite_resource: CustomerSpriteData:
 	set(new):
 		customer_sprite_resource = new
+		# we still need to do this even tho we're using an override cos this
+		# texture decides the size of the sprite (we'll get stretching otherwise)
 		body.texture = new.sprite
+		override_material.albedo_texture = new.sprite
 		Global.customer_sprites_in_use.append(customer_sprite_resource)
 var desired_drink: Drink
 var orders_made: int = 0
@@ -27,8 +30,12 @@ var at_window: bool = false
 var percent_time_left: float = 100
 var _total_wait_time: float
 
+@onready var override_material: StandardMaterial3D = body.material_override.duplicate()
+
 
 func _ready() -> void:
+	body.material_override = override_material
+	
 	# Find all unused customer sprites
 	var unused_customer_sprites: Array[CustomerSpriteData]
 	for customer_sprite in Global.customer_sprites:

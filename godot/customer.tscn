@@ -7,6 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_0rcyg"]
 [ext_resource type="AudioStream" uid="uid://b2l81b36awff1" path="res://audio/bell.mp3" id="5_gn8fi"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evg2n"]
+transparency = 1
+albedo_texture = ExtResource("2_eas7q")
+emission_energy_multiplier = 0.25
+emission_texture = ExtResource("2_eas7q")
+rim_enabled = true
+rim = 0.2
+rim_tint = 0.8
+clearcoat_roughness = 0.0
+billboard_mode = 2
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_frhio"]
 viewport_path = NodePath("WaitingIndicator/SubViewport")
 
@@ -25,6 +36,7 @@ sprites_folder = "res://sprites/customers"
 typing_minigame_portraits_folder = "res://sprites/customers/typing_minigame_portraits"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1992884224]
+material_override = SubResource("StandardMaterial3D_evg2n")
 offset = Vector2(0, 500)
 pixel_size = 0.0018
 billboard = 2
