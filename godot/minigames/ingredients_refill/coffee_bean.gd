@@ -3,8 +3,7 @@ extends RigidBody2D
 var time_counter_float: float = 0.0
 
 var seconds_passed: float = 0.0
-var is_gold: bool = false
-var is_bomb: bool = false
+var has_sped_up: bool = false 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	find_child("Sprite2D").scale *=1.1
@@ -13,42 +12,28 @@ func _ready() -> void:
 	collision.set_deferred("disabled", true)
 	await get_tree().create_timer(0.25).timeout
 	collision.set_deferred("disabled", false)
-	
+
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 func _physics_process(delta: float) -> void:
-	if(is_bomb):
-		time_counter_float +=delta
-		if (time_counter_float >1/60):
-			time_counter_float -=1/60
-			gravity_scale+=0.03
+	
+	
+	if(seconds_passed>2): #prevents jitter
+		if(get_collision_mask_value(1) ==false): 
+			set_collision_mask_value(1, true)
 		return
-	
-	
-	
-	if(seconds_passed>2): #prevents jitter 
-		return
-	
 	time_counter_float += delta
 	
-	if(is_gold):
-		seconds_passed+= delta
-		if(seconds_passed>.4):
-			gravity_scale+=1
-		else:
-			if (time_counter_float >1/60):
-				time_counter_float -=1/60
-				gravity_scale+=0.065
-
-	else:
-		seconds_passed+=delta
-		time_counter_float += delta
-		if(time_counter_float>1/60): #currently, physics tick is at 60hz; 8/23/2026
-			time_counter_float -=1/60
-			gravity_scale+=0.07
-	pass
+	seconds_passed+=delta
+	if(linear_velocity.y>0 and has_sped_up == false):	
+		gravity_scale*=2.5
+		has_sped_up = true
 	
+	#elif
+	if(time_counter_float>1.0/60.0): #currently, physics tick is at 60hz; 8/23/2026
+		time_counter_float -=1.0/60.0
+		gravity_scale+=0.07

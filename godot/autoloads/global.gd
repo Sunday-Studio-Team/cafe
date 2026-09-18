@@ -155,7 +155,8 @@ var hovered_item_icon: TabletItemIcon = null
 var hovered_loadout_menu_element: LoadoutMenuElement
 # Tutorial flags
 var tutorial_machine_used: bool = false
-var tutorial_drink_accepted: bool = false
+var tutorial_drink_correct_accepted: bool = false
+var tutorial_drink_incorrect_accepted: bool = false
 var tutorial_remake_button_pressed: bool = false
 var tutorial_drink_remade: bool = false
 var tutorial_ingredients_bag_got: bool = false
@@ -175,6 +176,7 @@ enum CameraMode {
 	DEBUG_FREE_CAM
 }
 var camera_mode: CameraMode = CameraMode.PLAYER
+var cinematic_camera_allow_machine_gui_inputs: bool = true
 
 var item_loadout_menu: ItemLoadoutMenu
 

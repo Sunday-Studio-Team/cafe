@@ -8,6 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://e14er0jdm5sr" path="res://cursor_click.png" id="5_4h17e"]
 [ext_resource type="Texture2D" uid="uid://bb7tcpxnbi5wr" path="res://Assets/PC/cursor A.png" id="6_ep8ot"]
 [ext_resource type="Texture2D" uid="uid://bsp3tm677ki3r" path="res://Assets/PC/cursor B.png" id="7_v5u4k"]
+[ext_resource type="Texture2D" uid="uid://doysem5wafkqj" path="res://Assets/loading_screen_img/background_panels/loading_background.jpg" id="8_e3yyn"]
+[ext_resource type="Texture2D" uid="uid://4vfa4i8ibevq" path="res://Assets/loading_screen_img/background_panels/loading_panel_1.png" id="9_qidt7"]
+[ext_resource type="Texture2D" uid="uid://ded6ja7k2jcc6" path="res://Assets/loading_screen_img/background_panels/loading_panel_2.png" id="10_s63ap"]
+[ext_resource type="Texture2D" uid="uid://buhpefmuw2b5i" path="res://Assets/loading_screen_img/background_panels/loading_panel_3.png" id="11_ltvrs"]
+[ext_resource type="Texture2D" uid="uid://bblskrrwykmh6" path="res://Assets/loading_screen_img/background_panels/loading_panel_4.png" id="12_la0pa"]
+[ext_resource type="Texture2D" uid="uid://i8tqkus51vwh" path="res://Assets/loading_screen_img/background_panels/loading_panel_5.png" id="13_8b5ky"]
+[ext_resource type="Texture2D" uid="uid://bhjnm0ym2l1t6" path="res://Assets/loading_screen_img/background_panels/loading_panel_6.png" id="14_uncec"]
+[ext_resource type="SpriteFrames" uid="uid://cff67s6qwbo04" path="res://Assets/loading_screen_img/loading_tippy_frames.tres" id="15_tippy_frames"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
 bg_color = Color(0.1, 0.1, 0.1, 1)
@@ -90,12 +98,13 @@ _data = {
 &"loading": SubResource("Animation_q6tpw")
 }
 
-[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen", "_loading_progress_bar", "loading_icons")]
+[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen", "_loading_progress_bar", "loading_icons", "loading_tippy")]
 process_mode = 3
 script = ExtResource("1_6uhv1")
 loading_screen = NodePath("LoadingCanvas/LoadingScreen")
 _loading_progress_bar = NodePath("LoadingCanvas/LoadingScreen/ProgressBar")
 loading_icons = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons")
+loading_tippy = NodePath("LoadingCanvas/LoadingScreen/TippyMargin/TippySlot/TippyAnimation")
 _main_menu_uid = &"uid://cqpfyo7o4qvn6"
 _level_select_uid = &"uid://d2jkcyx2b28ky"
 _main_scene_uid = &"uid://nm85k5woe7rt"
@@ -124,7 +133,94 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 1)
 
+[node name="LoadingBG" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=2125492662]
+layout_mode = 0
+offset_top = 1.5258789e-05
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("8_e3yyn")
+expand_mode = 1
+
+[node name="LoadingPanel1" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=872164039]
+layout_mode = 0
+offset_left = -132.0
+offset_top = -66.0
+offset_right = 670.0
+offset_bottom = 545.0
+texture = ExtResource("9_qidt7")
+
+[node name="LoadingPanel2" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=965216698]
+layout_mode = 0
+offset_left = 627.0
+offset_top = -31.000002
+offset_right = 2146.0
+offset_bottom = 296.00003
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_s63ap")
+
+[node name="LoadingPanel3" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=669964896]
+layout_mode = 0
+offset_left = 1371.9999
+offset_top = -53.99997
+offset_right = 2159.0
+offset_bottom = 749.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("11_ltvrs")
+
+[node name="LoadingPanel5" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=467243288]
+layout_mode = 0
+offset_left = -170.0
+offset_top = 773.0
+offset_right = 2624.3333
+offset_bottom = 1181.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_8b5ky")
+
+[node name="LoadingPanel4" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=1640075312]
+layout_mode = 0
+offset_left = 1341.0
+offset_top = 385.0
+offset_right = 2236.0
+offset_bottom = 1315.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("12_la0pa")
+
+[node name="LoadingPanel6" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=1796680911]
+layout_mode = 0
+offset_left = -14.999999
+offset_top = 255.0
+offset_right = 617.00006
+offset_bottom = 1339.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("14_uncec")
+
+[node name="TippyMargin" type="MarginContainer" parent="LoadingCanvas/LoadingScreen" unique_id=1030923569]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.46
+anchor_right = 0.5
+anchor_bottom = 0.46
+offset_left = -229.0
+offset_top = -268.80002
+offset_right = 300.0
+offset_bottom = 322.19998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TippySlot" type="Control" parent="LoadingCanvas/LoadingScreen/TippyMargin" unique_id=1475634309]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TippyAnimation" type="AnimatedSprite2D" parent="LoadingCanvas/LoadingScreen/TippyMargin/TippySlot" unique_id=1613845006]
+position = Vector2(223, 278)
+sprite_frames = ExtResource("15_tippy_frames")
+animation = &"loop_0"
+autoplay = "loop_0"
+
 [node name="MarginContainer" type="MarginContainer" parent="LoadingCanvas/LoadingScreen" unique_id=144886860]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

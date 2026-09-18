@@ -5,12 +5,14 @@ extends Node3D
 
 signal drink_prepared
 
-const BLAST_LAUNCH_MAGNITUDE: float = 20.0
+const BLAST_LAUNCH_MAGNITUDE: float = 10.0
 const REPAIR_MINIGAMES := ["Colors", "Arrows"]
 const MANUAL_DRINK_MINIGAMES := ["Captcha"]
 const CLEAN_SPILL_MINIGAME := "SpillClean"
 const REFILL_MINIGAME := "Refill"
 
+# for making the machine jump when an order finishes, etc.
+@export var animation_player: AnimationPlayer
 @export var static_body: StaticBody3D
 @export var gui_3d: Machine3DGui
 @export var timer: Timer
@@ -88,7 +90,6 @@ enum Icon {
 @export var accept_rating_arrow: TextureRect
 @export var accept_rating_icon: TextureRect
 
-
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
@@ -124,6 +125,8 @@ var ingredients: int:
 		else:
 			ingredients = new_value
 var spill_on_floor := false
+# this is rolled when the machine breaks down
+var next_repair_minigame: String
 
 var test_1: int = 0
 var test_2: int = 0
@@ -140,7 +143,8 @@ func _ready() -> void:
 
 	accept_button.pressed.connect(
 		func():
-			Global.tutorial_drink_accepted = true
+			Global.tutorial_drink_correct_accepted = true
+			Global.tutorial_drink_incorrect_accepted = true
 			accept_order(false)
 	)
 	make_drink_button.pressed.connect(_on_remake_drink_button_pressed)
@@ -151,7 +155,12 @@ func _ready() -> void:
 			else:
 				ingredients_warning_sound.play()
 				get_ingredients_prompt.show()
-				await get_tree().create_timer(0.5, false).timeout
+				get_ingredients_prompt.offset_transform_enabled = true
+				var t := create_tween()
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+				await t.finished
+				await get_tree().create_timer(1, false).timeout
 				get_ingredients_prompt.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
@@ -171,6 +180,7 @@ var animation_index:int
 var animation_delay_timer:float = 0
 var animation_delay:float = 0.05
 
+
 func reset_icons():
 	remake_money_arrow.texture = null
 	remake_money_icon.texture = null
@@ -181,11 +191,14 @@ func reset_icons():
 	accept_rating_arrow.texture = null
 	accept_rating_icon.texture = null
 
+
 func update_animation():
 	animation_index += 1
 	if animation_index >= current_ingbar_animation.size():
 		animation_index = 0
 	ingredient_coffeebar.texture = current_ingbar_animation[animation_index]
+
+
 func _process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 	timer_dial.offset_transform_enabled = true
@@ -196,7 +209,7 @@ func _process(delta: float) -> void:
 		animation_delay_timer = 0
 		update_animation()
 	ingredient_coffeebar.position.y = 1125 - (1125 * (0.01 * ingredients_bar.value))
-	
+
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.disabled = (not waiting_for_response) or tutorial_lock_accept_drink_button
 	make_drink_button.disabled = (not waiting_for_response) or (ingredients < Stats.current.ingredients_per_order) or tutorial_lock_remake_drink_button
@@ -308,8 +321,17 @@ func blast_player_from_using_machine() -> void:
 
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
-
 	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+
+	await get_tree().create_timer(0.1).timeout
+	Global.player.velocity += launch_vector
+	Global.player.move_and_slide()
+	#apply velocity 3 times
+	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
 
 
 func set_order_action_buttons_available(button_case: String) -> void:
@@ -320,7 +342,10 @@ func set_order_action_buttons_available(button_case: String) -> void:
 	match button_case:
 		"accept":
 			tutorial_lock_accept_drink_button = false
-		"make_drink":
+		"remake":
+			tutorial_lock_remake_drink_button = false
+		"accept_or_remake":
+			tutorial_lock_accept_drink_button = false
 			tutorial_lock_remake_drink_button = false
 		"refill":
 			refill_button.disabled = false
@@ -457,6 +482,7 @@ func machine_make_drink() -> void:
 	order_breakdown.show()
 
 	timer.start()
+	animation_player.play("making_drink")
 	Events.machine_making_drink.emit()
 
 	var breaking_chance_at_shift_start_for_day: float = (
@@ -478,25 +504,46 @@ func machine_make_drink() -> void:
 			randf() <= breaking_chance_now
 			and Global.breakdowns_this_shift < Stats.current.max_breakdowns_per_shift_each_day[Global.day]
 	):
+		animation_player.stop()
 		break_down()
 
 	await timer.timeout
 
+	animation_player.stop()
 	hum_sound.stop()
 	done_sound.play()
+	# if we can interact with the machine while its jumping it does weird stuff
+	gui_3d.interactable.hide()
+	animation_player.play("order_ready_jump")
+	await animation_player.animation_finished
+	gui_3d.interactable.show()
+	
+	# if we're using the machine when it jumps, it loses our input for some reason
+	# so we force enter the gui again
+	if gui_3d.player_using_me:
+		gui_3d.enter_gui(false)
 
 	consume_ingredients()
-	
-	# Roll a random number of ingredients to differ.
+
+	# Figure out number of ingredients to differ.
 	const ingredient_types_count: int = 3
-	var target_drink_diff: int = randi_range(0, ingredient_types_count)
+	var target_drink_diff: int
 	if next_drink_forced_perfect:
 		target_drink_diff = 0
 		next_drink_forced_perfect = false
 	elif next_drink_forced_incorrect:
 		target_drink_diff = 2
 		next_drink_forced_incorrect = false
-
+	else:
+		# Roll whether the drink should be correct or incorrect, based on time of day and current day.
+		var chances_curve: Curve = Stats.current.chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day.get(Global.day)
+		var chance_drink_should_be_incorrect: float = chances_curve.sample(Global.shift_progress_ratio)
+		var drink_should_be_incorrect: bool = randf_range(0, 1.0) <= chance_drink_should_be_incorrect
+		if drink_should_be_incorrect:
+			target_drink_diff = randi_range(1, ingredient_types_count)
+		else:
+			target_drink_diff = 0
+	
 	var unlocked_drinks: Array[Drink]
 	for drink in Global.drinks:
 		if drink.is_unlocked():
@@ -512,7 +559,7 @@ func machine_make_drink() -> void:
 		# Use a fallback random drink.
 		made_drink = unlocked_drinks.pick_random()
 	order.made_drink = made_drink
-	
+
 	# Add rating gain on remake for each incorrect ingredient.
 	if order.ordered_drink.main_ingredient == order.made_drink.main_ingredient:
 		order.main_correct = true
@@ -586,7 +633,6 @@ func machine_make_drink() -> void:
 
 	waiting_for_response = true
 	drink_prepared.emit()
-	Events.order_completed.emit(customer)
 
 
 ## 1 per differing ingredient.
@@ -619,31 +665,31 @@ func display_drink_score() -> void:
 	made_main_ingredient_panel.correct = order.main_correct
 	made_liquid_panel.ingredient = order.made_drink.liquid
 	made_liquid_panel.correct = order.liquid_correct
-	
+
 	if order.made_drink.extra:
 		made_extra_panel.ingredient = order.made_drink.extra
 	else:
 		made_extra_panel.ingredient = null
 	made_extra_panel.correct = order.extra_correct
 	made_drink_icon.texture = order.made_drink.icon
-	
+
 	var correct_count: int = 0
 	var total_ingredients: int = 0
 	if order.ordered_drink.main_ingredient: total_ingredients += 1
 	if order.ordered_drink.liquid: total_ingredients += 1
 	if order.ordered_drink.extra: total_ingredients += 1
-	
+
 	if order.main_correct: correct_count += 1
 	if order.liquid_correct: correct_count += 1
 	if order.extra_correct: correct_count += 1
-	
+
 	var wrong_count: int = max(total_ingredients - correct_count,0)
-	
+
 	accept_money_arrow.texture = arrows[Arrow.UP2]
 	accept_money_icon.texture = icons[Icon.MONEY_GREEN]
 	remake_money_arrow.texture = arrows[Arrow.UP1]
 	remake_money_icon.texture = icons[Icon.MONEY_GREEN]
-	
+
 	if order.star_rating_gain_for_remake > 0.0:
 		remake_money_arrow.texture = arrows[Arrow.UP1]
 		remake_rating_arrow.texture = arrows[Arrow.UP2]
@@ -732,7 +778,24 @@ func refill() -> void:
 				ingredient_multiplier = 2.0
 			elif item.item_level == 2:
 				ingredient_multiplier = 3.0
-	ingredients += roundi(Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy * ingredient_multiplier)
+
+	var ingredients_to_add: float = (
+			Stats.current.ingredients_per_bag
+			* Global.refill_minigame_accuracy
+			* ingredient_multiplier
+	)
+
+	var refill_prints_enabled := false
+	if refill_prints_enabled:
+		print("----------")
+		print("we're adding %s ingredients" % ingredients_to_add)
+		print(
+				"(%s (the amount per bag) x %s (our minigame accuracy) x %s (the multiplier from items))"
+				% [Stats.current.ingredients_per_bag, Global.refill_minigame_accuracy, ingredient_multiplier]
+		)
+		print("----------")
+	
+	ingredients += roundi(ingredients_to_add)
 
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
@@ -764,7 +827,12 @@ func accept_order(did_remake_drink: bool) -> void:
 	gui_3d.exit_with_camera_tween()
 
 	waiting_for_response = false
-	Events.order_approved.emit(customer)
+	Events.order_served.emit(customer)
+	
+	if did_remake_drink:
+		Events.order_remade.emit(customer)
+	else:
+		Events.order_accepted.emit(customer)
 
 	ordered_drink_icon.hide()
 	ordered_drink_name_label.hide()
@@ -817,6 +885,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	customer.leave_store()
 	_set_customer(null)
 
+
 func break_down() -> void:
 	if broken_down:
 		return
@@ -824,6 +893,7 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
+	next_repair_minigame = REPAIR_MINIGAMES.pick_random()
 
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
@@ -845,10 +915,10 @@ func _on_requested_use_active_item_fix_machine():
 		if owned_item.item_id == "hammer":
 			hammer = owned_item
 			break
-	
+
 	if hammer == null or !hammer.can_be_used:
 		return
-	
+
 	Events.play_viewmodel_animation.emit("hammer_use")
 	Global.put_active_item_on_cooldown(hammer)
 	await Events.hammer_animation_hit
@@ -864,7 +934,7 @@ func _on_requested_use_active_item_machine():
 
 	if air_horn == null or !air_horn.can_be_used:
 		return
-	
+
 	if customer:
 		Events.play_viewmodel_animation.emit("airhorn_use")
 		airhorn_sound.play()
@@ -887,7 +957,7 @@ func _on_fix_machine_button_pressed() -> void:
 	# the signal and do unintended things
 	Events.minigame_end.connect(_on_machine_fixed)
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
-	Events.minigame_active.emit(REPAIR_MINIGAMES.pick_random())
+	Events.minigame_active.emit(next_repair_minigame)
 
 
 func _on_machine_fixed() -> void:
@@ -900,7 +970,12 @@ func _on_remake_drink_button_pressed() -> void:
 	if ingredients < Stats.current.ingredients_per_order:
 		ingredients_warning_sound.play()
 		no_ingredients_warning.show()
-		await get_tree().create_timer(0.5, false).timeout
+		no_ingredients_warning.offset_transform_enabled = true
+		var t := create_tween()
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+		t.tween_property(no_ingredients_warning, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+		await t.finished
+		await get_tree().create_timer(1, false).timeout
 		no_ingredients_warning.hide()
 
 	Events.minigame_end.connect(_on_remade_drink)
@@ -941,7 +1016,6 @@ func _on_remade_drink() -> void:
 	display_drink_score()
 
 	Global.tutorial_drink_remade = true
-	Events.order_completed.emit(customer)
 	customer.timer.stop()
 	waiting_for_response = false
 

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b1h38lx2btyla"]
+
+[ext_resource type="AudioStream" uid="uid://da3xxh2xhpf1o" path="res://audio/music/customer_area_music.mp3" id="1_i433t"]
+[ext_resource type="Script" uid="uid://bdoq2pfqp2aiu" path="res://customer_area_music.gd" id="2_5vmma"]
+[ext_resource type="AudioStream" uid="uid://cdpq40xbmsibq" path="res://audio/music/customer_area_shift_ending_music.mp3" id="3_i75nq"]
+[ext_resource type="AudioStream" uid="uid://d0mq5yypnhim1" path="res://audio/music/customer_area_shift_ending_music_outro_loop.mp3" id="4_ie60f"]
+[ext_resource type="PackedScene" uid="uid://st3nonrdbrrv" path="res://models/tippy_loudspeaker_model.tscn" id="5_5vmma"]
+
+[node name="CustomerAreaMusicPlayer" type="AudioStreamPlayer3D" unique_id=109925331 node_paths=PackedStringArray("loudspeaker_model")]
+stream = ExtResource("1_i433t")
+volume_db = -20.0
+max_db = -5.0
+autoplay = true
+bus = &"DiegeticMusic"
+script = ExtResource("2_5vmma")
+shift_ending_music = ExtResource("3_i75nq")
+shift_ending_music_outro_loop = ExtResource("4_ie60f")
+loudspeaker_model = NodePath("ParentForScale/TippyLoudspeakerModel")
+
+[node name="ParentForScale" type="Node3D" parent="." unique_id=612257743]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="TippyLoudspeakerModel" parent="ParentForScale" unique_id=775830925 instance=ExtResource("5_5vmma")]

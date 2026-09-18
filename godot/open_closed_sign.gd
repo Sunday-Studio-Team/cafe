@@ -1,3 +1,4 @@
+class_name OpenClosedSign
 extends Node3D
 
 @export var interactable: Interactable
@@ -7,6 +8,8 @@ extends Node3D
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 
+func set_enabled(enabled: bool) -> void:
+	interactable.visible = enabled
 
 func _on_interacted() -> void:
 	interactable.visible = false
