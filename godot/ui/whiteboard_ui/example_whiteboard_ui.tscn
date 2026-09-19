@@ -3,16 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://qnftr8nicm52" path="res://sprites/whiteboard/frames/frame_goal.png" id="1_fgpyj"]
 [ext_resource type="Texture2D" uid="uid://cbyqfdhutjw1e" path="res://sprites/whiteboard/frames/frame_updates.png" id="2_i1wbi"]
 [ext_resource type="Texture2D" uid="uid://c7nado37b6nra" path="res://sprites/whiteboard/elements/tippy_day1.png" id="2_idikh"]
-[ext_resource type="Texture2D" uid="uid://cyeqemlsg7y1m" path="res://sprites/whiteboard/icons/icon_machine.png" id="3_5snvf"]
 [ext_resource type="Texture2D" uid="uid://ds3vv86kuwhia" path="res://sprites/whiteboard/frames/frame_rules.png" id="3_xgit6"]
-[ext_resource type="Texture2D" uid="uid://iai4l2oeueyh" path="res://sprites/whiteboard/icons/icon_new.png" id="4_n5wbc"]
 [ext_resource type="Texture2D" uid="uid://cvyml3wvq2a80" path="res://sprites/whiteboard/icons/rules.png" id="4_ty8gj"]
 [ext_resource type="FontFile" uid="uid://f12jkge7ui88" path="res://fonts/komika/Komika_display_kaps.ttf" id="4_xqmjj"]
 [ext_resource type="Texture2D" uid="uid://b8q66cr6d6oj5" path="res://sprites/whiteboard/icons/updates.png" id="5_5snvf"]
 [ext_resource type="FontFile" uid="uid://cikerrpxvai6v" path="res://fonts/komika/Komika_display_kaps_bold.ttf" id="5_cjna0"]
 [ext_resource type="Texture2D" uid="uid://dwahkrd5p0yao" path="res://sprites/whiteboard/icons/todays_goal.png" id="6_r6idw"]
-[ext_resource type="Texture2D" uid="uid://b7rh4pha2g8gr" path="res://sprites/whiteboard/icons/icon_add1.png" id="7_8ymvb"]
-[ext_resource type="Texture2D" uid="uid://b34w3wb4psaxa" path="res://sprites/whiteboard/icons/icon_helpdesk.png" id="8_8ymvb"]
 [ext_resource type="Texture2D" uid="uid://b5bw58iqridky" path="res://sprites/whiteboard/icons/icon_norunning.png" id="10_2nk10"]
 [ext_resource type="Texture2D" uid="uid://dix00u5lxqcs2" path="res://sprites/whiteboard/icons/icon_noremake.png" id="11_oqn1w"]
 [ext_resource type="FontFile" uid="uid://dwygxfbftr3l3" path="res://fonts/komika/Komika_display.ttf" id="16_emmua"]
@@ -101,80 +97,6 @@ theme_override_constants/margin_bottom = 48
 [node name="UpdatesContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer" unique_id=1587213761]
 layout_mode = 2
 
-[node name="Update1" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer" unique_id=1033904688]
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update1" unique_id=378058672]
-layout_mode = 2
-texture = ExtResource("3_5snvf")
-stretch_mode = 2
-
-[node name="ExtraOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update1/Icon" unique_id=1045414277]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_n5wbc")
-stretch_mode = 2
-
-[node name="Name" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update1" unique_id=313696590]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.19215687, 0.19215687, 0.19215687, 1)
-theme_override_fonts/normal_font = ExtResource("4_xqmjj")
-theme_override_fonts/bold_font = ExtResource("5_cjna0")
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 64
-bbcode_enabled = true
-text = "Coffee
-Machine"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="ExtraIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update1" unique_id=774278510]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("7_8ymvb")
-stretch_mode = 2
-
-[node name="Update2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer" unique_id=1393342986]
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update2" unique_id=1130233291]
-layout_mode = 2
-texture = ExtResource("8_8ymvb")
-stretch_mode = 2
-
-[node name="ExtraOverlay" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update2/Icon" unique_id=629903254]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_n5wbc")
-stretch_mode = 2
-
-[node name="Name" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer/Update2" unique_id=81052126]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_colors/default_color = Color(0.1914796, 0.19147962, 0.19147956, 1)
-theme_override_fonts/normal_font = ExtResource("4_xqmjj")
-theme_override_fonts/bold_font = ExtResource("5_cjna0")
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 64
-bbcode_enabled = true
-text = "Customer
-Help Desk"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
 [node name="Rules" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1764577851]
 layout_mode = 2
 texture = ExtResource("3_xgit6")
@@ -255,10 +177,10 @@ metadata/_edit_use_anchors_ = true
 [node name="UpdatesImage" type="TextureRect" parent="." unique_id=1163825619]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.012037037
-anchor_right = 0.6875
-anchor_bottom = 0.2037037
+anchor_left = 0.48645833
+anchor_top = 0.037962962
+anchor_right = 0.67395836
+anchor_bottom = 0.22962964
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_5snvf")

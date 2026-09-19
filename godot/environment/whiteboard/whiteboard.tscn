@@ -1,18 +1,16 @@
 [gd_scene format=3 uid="uid://dy4e7ivinjsni"]
 
 [ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/whiteboard.gd" id="1_6exnn"]
-[ext_resource type="PackedScene" uid="uid://m7e7kkhmgii4" path="res://environment/whiteboard/whiteboard_ui.tscn" id="3_4qxtd"]
-[ext_resource type="PackedScene" uid="uid://cd3xb42fgnnxw" path="res://Assets/Whiteboard/low_poly_whiteboard.glb" id="7_qmmlt"]
+[ext_resource type="PackedScene" uid="uid://ddycd6ks8e11b" path="res://Assets/Whiteboard/SM_Whiteboard.glb" id="2_4qxtd"]
+[ext_resource type="PackedScene" uid="uid://bk2jtlpmllfma" path="res://ui/whiteboard_ui/example_whiteboard_ui.tscn" id="3_4qxtd"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mcetr"]
 viewport_path = NodePath("Content/SubViewport")
 
-[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("whiteboard_content_container", "goal_label", "info_label")]
+[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("whiteboard_content_container")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
 script = ExtResource("1_6exnn")
 whiteboard_content_container = NodePath("Content/SubViewport/WhiteboardUI/MarginContainer")
-goal_label = NodePath("Content/SubViewport/WhiteboardUI/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/Goal")
-info_label = NodePath("Content/SubViewport/WhiteboardUI/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer2/Info")
 daily_info_text = Array[String](["", "Welcome to cAIfe.
 This is your first trial shift.
 
@@ -28,11 +26,11 @@ Overnight, we installed yet more cameras and machines-how exciting!
 If only I could be there with you.", "Welcome back!!!
 Today is going to be a special day."])
 
-[node name="Model" parent="." unique_id=240193298 instance=ExtResource("7_qmmlt")]
-transform = Transform3D(-3.8702453e-08, 0, 0.88540924, 0, 0.88540924, 0, -0.88540924, 0, -3.8702453e-08, 0, -1.041, 0)
+[node name="SM_Whiteboard" parent="." unique_id=376567896 instance=ExtResource("2_4qxtd")]
+transform = Transform3D(0.458, 0, 0, 0, 0.458, 0, 0, 0, 0.458, 0, -1.105, 0)
 
 [node name="Content" type="Sprite3D" parent="." unique_id=399085356]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.551115e-17, 0.03351003, 0.013631233)
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -3.4092018e-10, 0.033510022, 0.021430572)
 pixel_size = 0.00075
 shaded = true
 texture = SubResource("ViewportTexture_mcetr")
