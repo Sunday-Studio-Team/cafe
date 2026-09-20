@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bk2jtlpmllfma"]
 
+[ext_resource type="Script" uid="uid://n2jpprn4i4g" path="res://ui/whiteboard_ui/whiteboard_ui.gd" id="1_embtd"]
 [ext_resource type="Texture2D" uid="uid://qnftr8nicm52" path="res://sprites/whiteboard/frames/frame_goal.png" id="1_fgpyj"]
 [ext_resource type="Texture2D" uid="uid://cbyqfdhutjw1e" path="res://sprites/whiteboard/frames/frame_updates.png" id="2_i1wbi"]
 [ext_resource type="Texture2D" uid="uid://c7nado37b6nra" path="res://sprites/whiteboard/elements/tippy_day1.png" id="2_idikh"]
@@ -22,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_embtd")
 
 [node name="Background" type="ColorRect" parent="." unique_id=941493523]
 layout_mode = 1

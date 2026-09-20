@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjw4aujcm1kb8"]
 
 [ext_resource type="Texture2D" uid="uid://c7faj8hhrf6cc" path="res://sprites/whiteboard/frames/frame_generic.png" id="1_1x3cr"]
+[ext_resource type="Script" uid="uid://cu7htv20v6wfo" path="res://ui/whiteboard_ui/day_5_whiteboard.gd" id="1_hptbu"]
 [ext_resource type="Texture2D" uid="uid://c34qtfjtqqwbh" path="res://sprites/whiteboard/elements/tippy_day4_5.png" id="2_qw1ah"]
 [ext_resource type="Texture2D" uid="uid://dwahkrd5p0yao" path="res://sprites/whiteboard/icons/todays_goal.png" id="10_i12s0"]
 [ext_resource type="FontFile" uid="uid://dwygxfbftr3l3" path="res://fonts/komika/Komika_display.ttf" id="11_lilc7"]
@@ -8,13 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://dtbpga38j5vke" path="res://sprites/whiteboard/elements/exclamation.png" id="13_p0gxu"]
 [ext_resource type="Texture2D" uid="uid://csldbawtocsqq" path="res://sprites/whiteboard/elements/underline.png" id="14_sn51n"]
 
-[node name="WhiteboardUI" type="Control" unique_id=82864418]
+[node name="WhiteboardUI" type="Control" unique_id=82864418 node_paths=PackedStringArray("tippy")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hptbu")
+tippy = NodePath("MarginContainer/Border/Tippy")
 
 [node name="Background" type="ColorRect" parent="." unique_id=941493523]
 layout_mode = 1
@@ -65,10 +68,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -739.0
-offset_top = -331.43146
-offset_right = 141.0
-offset_bottom = 8.5685425
+offset_left = -756.0
+offset_top = -316.0
+offset_right = 124.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.23227449
@@ -126,11 +129,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 219.0
-offset_top = -228.67746
-offset_right = 519.0
-offset_bottom = -91.67743
+offset_left = 215.0
+offset_top = -321.0
+offset_right = 515.0
+offset_bottom = -183.99997
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.38527218
 texture = ExtResource("14_sn51n")
 stretch_mode = 2

@@ -2,29 +2,22 @@
 
 [ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/whiteboard.gd" id="1_6exnn"]
 [ext_resource type="PackedScene" uid="uid://ddycd6ks8e11b" path="res://Assets/Whiteboard/SM_Whiteboard.glb" id="2_4qxtd"]
-[ext_resource type="PackedScene" uid="uid://bk2jtlpmllfma" path="res://ui/whiteboard_ui/example_whiteboard_ui.tscn" id="3_4qxtd"]
+[ext_resource type="PackedScene" uid="uid://cwtw6dcai6cfe" path="res://ui/whiteboard_ui/day_0_whiteboard.tscn" id="2_lwgjv"]
+[ext_resource type="PackedScene" uid="uid://wvpnsqc7foju" path="res://ui/whiteboard_ui/day_1_whiteboard.tscn" id="3_1j2d1"]
+[ext_resource type="PackedScene" uid="uid://dt7oqk35taiov" path="res://ui/whiteboard_ui/day_2_whiteboard.tscn" id="4_dp0td"]
+[ext_resource type="PackedScene" uid="uid://buf0nqkrbns8t" path="res://ui/whiteboard_ui/day_3_whiteboard.tscn" id="5_advr0"]
+[ext_resource type="PackedScene" uid="uid://boqbqs1spaa4o" path="res://ui/whiteboard_ui/day_4_whiteboard.tscn" id="6_ix5gt"]
+[ext_resource type="PackedScene" uid="uid://cjw4aujcm1kb8" path="res://ui/whiteboard_ui/day_5_whiteboard.tscn" id="7_852qy"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_mcetr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_lwgjv"]
 viewport_path = NodePath("Content/SubViewport")
 
-[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("whiteboard_content_container")]
+[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("sub_viewport")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
 script = ExtResource("1_6exnn")
-whiteboard_content_container = NodePath("Content/SubViewport/WhiteboardUI/MarginContainer")
-daily_info_text = Array[String](["", "Welcome to cAIfe.
-This is your first trial shift.
-
-Make it through the week to keep your new position!", "Welcome back.
-We moved a machine around to the left out there- should make things more dynamic...
-
-Oh! and I installed a camera, too, just to make sure you're following the rules :)", "Welcome back!
-Another new machine came in last night, so there's plenty to do today.
-
-Oh! and another camera, too- I finally have a pair of eyes in there :)", "Welcome back!!
-Overnight, we installed yet more cameras and machines-how exciting!
-
-If only I could be there with you.", "Welcome back!!!
-Today is going to be a special day."])
+sub_viewport = NodePath("Content/SubViewport")
+whiteboard_ui_scenes = Array[PackedScene]([ExtResource("2_lwgjv"), ExtResource("3_1j2d1"), ExtResource("4_dp0td"), ExtResource("5_advr0"), ExtResource("6_ix5gt"), ExtResource("7_852qy")])
+day_test = 5
 
 [node name="SM_Whiteboard" parent="." unique_id=376567896 instance=ExtResource("2_4qxtd")]
 transform = Transform3D(0.458, 0, 0, 0, 0.458, 0, 0, 0, 0.458, 0, -1.105, 0)
@@ -33,13 +26,9 @@ transform = Transform3D(0.458, 0, 0, 0, 0.458, 0, 0, 0, 0.458, 0, -1.105, 0)
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -3.4092018e-10, 0.033510022, 0.021430572)
 pixel_size = 0.00075
 shaded = true
-texture = SubResource("ViewportTexture_mcetr")
+texture = SubResource("ViewportTexture_lwgjv")
 
 [node name="SubViewport" type="SubViewport" parent="Content" unique_id=2102935171]
 handle_input_locally = false
 size = Vector2i(1637, 1039)
 render_target_update_mode = 4
-
-[node name="WhiteboardUI" parent="Content/SubViewport" unique_id=82864418 instance=ExtResource("3_4qxtd")]
-
-[editable path="Content/SubViewport/WhiteboardUI"]
