@@ -45,6 +45,10 @@ extends Node3D
 @export var shift_start_sound: AudioStreamPlayer
 @export var cam_spot: Marker3D
 
+@export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
+@export var whiteboard: Whiteboard
+
+
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
@@ -127,7 +131,8 @@ func _ready() -> void:
 	for i in range(day_containers.size()):
 		if day_containers[i] != null:
 			day_containers[i].visible = (i <= Global.day)
-
+			
+	
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
@@ -290,6 +295,11 @@ func set_per_day_stuff() -> void:
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
 		should_spawn_trash_today = true
 		_trash_can.visible = true
+		#day 5 whiteboard tippy disappearing effect
+		day_5_tippy_whiteboard_disappear_area.monitoring = true
+		day_5_tippy_whiteboard_disappear_area.player_entered_area.connect(whiteboard.hide_tippy.unbind(1))
+	else:
+		day_5_tippy_whiteboard_disappear_area.monitoring = false
 
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()

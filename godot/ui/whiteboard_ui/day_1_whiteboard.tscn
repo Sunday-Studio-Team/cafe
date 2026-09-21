@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://wvpnsqc7foju"]
+
+[ext_resource type="PackedScene" uid="uid://bk2jtlpmllfma" path="res://ui/whiteboard_ui/example_whiteboard_ui.tscn" id="1_uoeoy"]
+[ext_resource type="PackedScene" uid="uid://b7ff1r15fkxvg" path="res://ui/whiteboard_ui/update.tscn" id="2_uxypd"]
+[ext_resource type="Texture2D" uid="uid://cyeqemlsg7y1m" path="res://sprites/whiteboard/icons/icon_machine.png" id="3_0ag80"]
+[ext_resource type="Texture2D" uid="uid://b7rh4pha2g8gr" path="res://sprites/whiteboard/icons/icon_add1.png" id="4_i6tpe"]
+
+[node name="WhiteboardUI" unique_id=82864418 instance=ExtResource("1_uoeoy")]
+
+[node name="Update" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer" parent_id_path=PackedInt32Array(1587213761) index="0" unique_id=842554168 instance=ExtResource("2_uxypd")]
+layout_mode = 2
+icon_texture = ExtResource("3_0ag80")
+extra_icon_texture = ExtResource("4_i6tpe")
+
+[node name="Rule1" parent="MarginContainer/HBoxContainer/VBoxContainer/Rules/MarginContainer/RulesContainer" parent_id_path=PackedInt32Array(688768580) index="0" unique_id=15595271]
+visible = false
+
+[node name="Rule2" parent="MarginContainer/HBoxContainer/VBoxContainer/Rules/MarginContainer/RulesContainer" parent_id_path=PackedInt32Array(688768580) index="1" unique_id=1860143982]
+visible = false
+
+[node name="MoneyGoal" parent="." index="5" unique_id=1679695572]
+text = " 15$"
