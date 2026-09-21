@@ -3,8 +3,14 @@
 [ext_resource type="Script" uid="uid://cxeqc47b6td3i" path="res://Assets/Fridge/fridge_tippy.gd" id="1_6u037"]
 [ext_resource type="PackedScene" uid="uid://cqjsrjwgrasda" path="res://Assets/Fridge/FridgeMoving.glb" id="2_6u037"]
 
-[node name="Node3D" type="Node3D" unique_id=2104615335]
+[node name="FridgeTippy" type="Node3D" unique_id=2104615335 node_paths=PackedStringArray("_animation_player")]
+script = ExtResource("1_6u037")
+_animation_player = NodePath("FridgeMoving/AnimationPlayer")
 
 [node name="FridgeMoving" parent="." unique_id=2050319966 instance=ExtResource("2_6u037")]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
-script = ExtResource("1_6u037")
+
+[node name="Door fridge 2" parent="FridgeMoving" index="3" unique_id=1094250923]
+transform = Transform3D(0.9915164, 0, 0.12998167, 0, 1, 0, -0.12998167, 0, 0.9915164, 5.7359977, 0.35180578, 6.179606)
+
+[editable path="FridgeMoving"]
