@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d4gfql8j0wcsl" path="res://ui/options_menu/options_menu_keybind_option_view.gd" id="1_vene7"]
 [ext_resource type="PackedScene" uid="uid://bcfq82qxrjrmq" path="res://ui/options_menu/options_menu_action_rebind_popup.tscn" id="2_b3tk1"]
+[ext_resource type="FontFile" uid="uid://bqbe41e30urp2" path="res://ui/options_menu/assets/komika_axis/KOMIKAX_.ttf" id="3_b3tk1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
 bg_color = Color(0.2123048, 0.21230483, 0.21230477, 1)
@@ -14,9 +15,6 @@ _reset_button = NodePath("MarginContainer/HBoxContainer/MarginContainer/HBoxCont
 _keybind_label = NodePath("MarginContainer/HBoxContainer/MarginContainer/HBoxContainer/PanelContainer/KeybindRichTextLabel")
 _rebind_button = NodePath("MarginContainer/HBoxContainer/MarginContainer/HBoxContainer/RebindButton")
 _rebind_popup_packed_scene = ExtResource("2_b3tk1")
-
-[node name="Panel" type="Panel" parent="." unique_id=1975138412]
-layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1143691871]
 layout_mode = 2
@@ -31,6 +29,8 @@ layout_mode = 2
 [node name="ActionNameRichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=1181620336]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0.00069389754, 0.00069389766, 0.0006938976, 1)
+theme_override_fonts/normal_font = ExtResource("3_b3tk1")
 text = "Action Name"
 fit_content = true
 autowrap_mode = 0
@@ -46,6 +46,7 @@ layout_mode = 2
 [node name="ResetButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=1229686713]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_b3tk1")
 text = "Reset"
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=1035699266]
@@ -56,6 +57,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
 [node name="KeybindRichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer/PanelContainer" unique_id=2092969928]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("3_b3tk1")
 text = "Keybind"
 fit_content = true
 autowrap_mode = 0
@@ -65,4 +67,5 @@ vertical_alignment = 1
 [node name="RebindButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/HBoxContainer" unique_id=1804519663]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_b3tk1")
 text = "Rebind"
