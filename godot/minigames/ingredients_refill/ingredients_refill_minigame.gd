@@ -2,7 +2,7 @@ extends Node2D
 
 const MOVE_SPEED := 20
 # generally, change the timer in BeanSpawnTimer Node when adjusting this
-# ie make sure this*wait_time = ~2.0s
+# ie make sure NUM_BEANS_TO_SPAWN * wait_time = ~2.0s
 const NUM_BEANS_TO_SPAWN := 6
 const MAX_HORIZONTAL_BEAN_FORCE := 800.0
 const MAX_VERTICAL_BEAN_FORCE := 450.0
@@ -11,6 +11,8 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export_category("Nodes")
 @export var cup: CharacterBody2D
 @export var bag: Node2D
+@export var bag_sprite: Sprite2D
+
 # the point on the bag where beans spawn from
 @export var pour_point: Marker2D
 @export var bean_spawn_timer: Timer
@@ -40,6 +42,9 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export var screw_visual_effect: CompressedTexture2D
 @export var golden_visual_effect: CompressedTexture2D
 
+@export_group("Emitters")
+@export var coffee_dust: GPUParticles2D
+
 var beans_in_cup: int = 0
 var beans_spawned: int = 0
 var gold_bean_already_spawned := false
@@ -52,23 +57,32 @@ var spawn_trajectory: Vector2
 # its passed to machine.gd @ end of minigame to determine how much to fill up
 var accuracy: float = 0.0
 
+var coffee_dust_clone_array:Array[GPUParticles2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	bean_spawn_timer.wait_time = float(2) / float(NUM_BEANS_TO_SPAWN)
 	bean_spawn_timer.timeout.connect(spawn_bean)
 	cup_area.body_entered.connect(catch_bean)
 	cup_area.body_exited.connect(spill_bean)
 
 	bag_shake_tween = create_tween().set_loops()
-	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, 0.2)
+	
+	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	bag_shake_tween.parallel().tween_property(bag, "rotation_degrees", bag.rotation_degrees - 30, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, 0.2)
+	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees + 30, 0.2)
 
 	cup_boundaries.body_entered.connect(
 		func(body):
 			if body.is_in_group("beans"):
 				bean_hit_glasss_sound.play(),
 	)
-
+	for i in range(NUM_BEANS_TO_SPAWN):
+		var clone = coffee_dust.duplicate()
+		pour_point.add_child(clone)
+		coffee_dust_clone_array.append(clone)
 	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) #prefer right side of the screen, because that is where cup spawns
 
 
@@ -170,6 +184,7 @@ func spawn_normal_bean(bean: PhysicsBody2D) -> void:
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
+	coffee_dust_clone_array[beans_spawned].restart()
 	bean.apply_impulse(spawn_trajectory)
 	bean.rotation_degrees = randf_range(0, 360)
 	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean

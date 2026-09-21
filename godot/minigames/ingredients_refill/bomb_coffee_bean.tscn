@@ -6,6 +6,21 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_cuth0"]
 radius = 35.0
 
+[sub_resource type="Gradient" id="Gradient_xmr56"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5lq3x"]
+gradient = SubResource("Gradient_xmr56")
+width = 24
+height = 24
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [node name="Bean" type="RigidBody2D" unique_id=68542228]
 collision_mask = 2
 continuous_cd = 2
@@ -20,3 +35,7 @@ texture = ExtResource("1_oqf6p")
 position = Vector2(-1, -1)
 rotation = -0.7382135
 shape = SubResource("CircleShape2D_cuth0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1666125092]
+position = Vector2(68, -55)
+texture = SubResource("GradientTexture2D_5lq3x")
