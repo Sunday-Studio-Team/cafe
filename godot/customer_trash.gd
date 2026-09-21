@@ -10,13 +10,13 @@ var rating_loss: float = 0.2
 # viewmodel animation
 var already_interacted := false
 var time_left_out: float = 0.0
-var trash_timeout_threshold: float = 15.0
+var punishment_threshold := 5
 
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 	Global.total_trash += 1
-	if Global.total_trash > 4:
+	if Global.total_trash >= punishment_threshold:
 		Global.employee_rating -= rating_loss
 		Events.alert_posted.emit("-%s Too much trash in the store" % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
 	
@@ -27,7 +27,7 @@ func _ready() -> void:
 	interactable.visible = true
 	
 func _on_interacted() -> void:
-	if Global.holding_trash or already_interacted:
+	if Global.holding_trash || already_interacted || Global.holding_ingredients:
 		return
 
 	trash_bag_taken.emit(self)
@@ -50,13 +50,3 @@ func _on_interacted() -> void:
 	
 	await Events.trash_pickup_animation_grabbed
 	queue_free()
-
-func _process(delta:float) -> void:
-	time_left_out += delta
-	if time_left_out >= trash_timeout_threshold:
-		Global.employee_rating -= (rating_loss * 2)
-		Global.total_trash -= 1
-		Events.alert_posted.emit("-%s Trash was left out too long..." % (rating_loss * 2), UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
-		queue_free()
-		
-	

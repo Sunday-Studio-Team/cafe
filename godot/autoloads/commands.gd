@@ -91,6 +91,7 @@ func _ready() -> void:
 		_customer_names.append("\"%s\"" % customer.customer_name)
 	Console.add_command_autocomplete_list("customer", _customer_names)
 	Console.add_command("unlockall", unlock_everything)
+	Console.add_command("trash", spawn_trash)
 
 	Events.main_scene_loaded.connect(
 		func():
@@ -98,6 +99,12 @@ func _ready() -> void:
 				Events.active_item_used.connect(refresh_active_item),
 	)
 
+func spawn_trash() -> void:
+	if Global.main_scene.should_spawn_trash_today:
+		Global.main_scene.spawn_trash();
+		Console.print_line("trash was spawned")
+	else:
+		Console.print_line("trash can't be spawn today")
 
 func unlock_everything() -> void:
 	unlock_day("6")

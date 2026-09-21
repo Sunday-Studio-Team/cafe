@@ -62,7 +62,7 @@ var _all_security_cameras: Array[SecurityCam3D]
 @onready var tutorial_machine: Machine = _right_area_right_machine
 
 var should_spawn_trash_today: bool = false
-var closing_time:bool = false
+var closing_time: bool = false
 
 func _ready() -> void:
 	_voice_line_system.setup()
@@ -319,7 +319,7 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
 
-func spawn_machine_customer(sprite_resource: CustomerSpriteData=null) -> void:
+func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -376,7 +376,7 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 		spawn_machine_customer(customer_sprite_data)
 
 
-func spawn_help_desk_customer(sprite_resource: CustomerSpriteData=null) -> void:
+func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
 
@@ -417,8 +417,8 @@ func spawn_trash() -> void:
 	if not should_spawn_trash_today:
 		return
 # freq of spawn 3/41 rn
-	var spawn=randi_range(0,40)
-	if spawn>=3:
+	var spawn = randi_range(0, 40)
+	if spawn >= 3:
 		return
 	var customer_trash = customer_trash_scene.instantiate()
 	#var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
@@ -438,7 +438,9 @@ func spawn_trash() -> void:
 	#var rand_x = randf_range(littering_customer.global_position.x, littering_customer.global_position.x)
 	#var rand_z = randf_range(littering_customer.global_position.z, littering_customer.global_position.z)
 	if littering_customer:
-		customer_trash.position=Vector3(littering_customer.global_position.x,0,littering_customer.global_position.z)
+		customer_trash.position = Vector3(littering_customer.global_position.x, 0, littering_customer.global_position.z)
+	else:
+		print("no customers exist, trash was generate at (0,0,0)")
 	print("spawned trash")
 
 	add_child(customer_trash)
@@ -451,10 +453,9 @@ func _on_game_timer_timeout() -> void:
 	if get_customers().size() <= 1:
 		shift_end_sequence()
 
-func shift_end_sequence(override: bool=false):
+func shift_end_sequence(override: bool = false):
 	# Here's the thing. When a customer calls this function as they
 	# are still leaving, they are still part of the scene tree.
-
 	# So get_customers() will return an array that includes them.
 	# That is why it checks for a customer array of size 1 (or less)
 	if override or (closing_time and get_customers().size() <= 1):
@@ -496,7 +497,6 @@ func _on_minigame_end():
 
 
 func _on_shift_started():
-
 	customer_trash_spawn_timer.start()
 	Global.shift_started = true
 	shift_start_sound.play()
