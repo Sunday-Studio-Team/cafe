@@ -52,6 +52,7 @@ func _ready() -> void:
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
+- [i]trash[/i] spawn a trash
 - [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
 - [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
 		% [items_guide_str],
@@ -91,6 +92,7 @@ func _ready() -> void:
 		_customer_names.append("\"%s\"" % customer.customer_name)
 	Console.add_command_autocomplete_list("customer", _customer_names)
 	Console.add_command("unlockall", unlock_everything)
+	Console.add_command("trash", spawn_trash)
 
 	Events.main_scene_loaded.connect(
 		func():
@@ -98,6 +100,9 @@ func _ready() -> void:
 				Events.active_item_used.connect(refresh_active_item),
 	)
 
+func spawn_trash() -> void:
+	Global.main_scene.spawn_trash();
+	Console.print_line("trash was spawned")
 
 func unlock_everything() -> void:
 	unlock_day("6")

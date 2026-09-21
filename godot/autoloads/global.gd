@@ -169,6 +169,8 @@ var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
 var tutorial_manager: TutorialManager
+var trash_punishment_threshold := 5
+var trash_punishment_amount := 0.2
 
 enum CameraMode {
 	PLAYER,
@@ -296,7 +298,7 @@ func day_to_string(d: int) -> String:
 	return day_as_string
 
 
-func pitch_shift_all_3d_audio(down: bool) -> void:	
+func pitch_shift_all_3d_audio(down: bool) -> void:
 	var pitch_tween := create_tween().set_parallel()
 
 	for p: AudioStreamPlayer3D in all_3d_audio_stream_players:
