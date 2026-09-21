@@ -52,6 +52,7 @@ func _ready() -> void:
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
+- [i]trash[/i] spawn a trash
 - [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
 - [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
 		% [items_guide_str],
