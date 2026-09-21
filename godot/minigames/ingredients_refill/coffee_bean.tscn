@@ -2,10 +2,16 @@
 
 [ext_resource type="Script" uid="uid://drt6mt6shf1t5" path="res://minigames/ingredients_refill/coffee_bean.gd" id="1_hjpyt"]
 [ext_resource type="Texture2D" uid="uid://d2cqpi0gkd51p" path="res://minigames/ingredients_refill/normal/coffee bean.png" id="1_qurre"]
+[ext_resource type="Script" uid="uid://bcvbxyx21awry" path="res://minigames/ingredients_refill/normal_bean_white_trail.gd" id="3_0u6p0"]
+[ext_resource type="Script" uid="uid://ftx0e8nnyhhv" path="res://minigames/ingredients_refill/normal_bean_black_trail.gd" id="4_8rkep"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 25.0
 height = 80.0
+
+[sub_resource type="Curve" id="Curve_0tu14"]
+_data = [Vector2(0.010075569, 0), 0.0, 6.9518447, 0, 0, Vector2(0.030303031, 0.99512196), 0.0, 0.0, 0, 0, Vector2(0.9318182, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.69756097), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="Bean" type="RigidBody2D" unique_id=68542228]
 collision_mask = 2
@@ -21,3 +27,26 @@ texture = ExtResource("1_qurre")
 position = Vector2(-1, -1)
 rotation = -0.7382135
 shape = SubResource("CapsuleShape2D_onrkg")
+
+[node name="Trails" type="Node2D" parent="." unique_id=2118760959]
+
+[node name="WhiteTrail" type="Line2D" parent="Trails" unique_id=1073127675]
+show_behind_parent = true
+top_level = true
+z_index = -1
+z_as_relative = false
+width_curve = SubResource("Curve_0tu14")
+script = ExtResource("3_0u6p0")
+MAX_LENGTH = 14
+
+[node name="BlackTrail" type="Line2D" parent="Trails" unique_id=382597631]
+show_behind_parent = true
+top_level = true
+z_index = -2
+z_as_relative = false
+width = 28.0
+width_curve = SubResource("Curve_0tu14")
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("4_8rkep")
+MAX_LENGTH = 14
