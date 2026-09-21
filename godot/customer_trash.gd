@@ -4,22 +4,16 @@ extends RigidBody3D
 @export var interactable: Interactable
 
 signal trash_bag_taken(customer_trash: CustomerTrash)
-var rating_loss: float = 0.2
 
 # just a thing to check so we cant spam interact and cause weird stuff with
 # viewmodel animation
 var already_interacted := false
 var time_left_out: float = 0.0
-var punishment_threshold := 5
 
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
-	Global.total_trash += 1
-	if Global.total_trash >= punishment_threshold:
-		Global.employee_rating -= rating_loss
-		Events.alert_posted.emit("-%s Too much trash in the store" % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
-	
+
 	# briefly disable on spawn so if we're dropping it we cant accidentally
 	# interact with it as it falls
 	interactable.visible = false

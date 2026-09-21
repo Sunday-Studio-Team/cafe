@@ -80,7 +80,7 @@ func _ready() -> void:
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
 
-	customer_trash_spawn_timer.timeout.connect(spawn_trash)
+	customer_trash_spawn_timer.timeout.connect(attempt_spawn_trash)
 	_all_machines = [
 		_right_area_left_machine,
 		_right_area_right_machine,
@@ -140,6 +140,7 @@ func _ready() -> void:
 	Global.in_pc_ui = false
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
+	Global.total_trash = 0
 	get_stats()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
@@ -412,14 +413,18 @@ func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D
 func _on_pause_menu_tutorial_requested() -> void:
 	_tutorial_popups_manager.show_all_handbook_popups()
 
-#code for  trash spawn
-func spawn_trash() -> void:
+func attempt_spawn_trash() -> void:
 	if not should_spawn_trash_today:
 		return
-# freq of spawn 3/41 rn
+	# freq of spawn 3/41 rn
 	var spawn = randi_range(0, 40)
 	if spawn >= 3:
 		return
+
+	spawn_trash()
+
+#code for  trash spawn
+func spawn_trash() -> void:
 	var customer_trash = customer_trash_scene.instantiate()
 	#var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
 	#var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
@@ -444,6 +449,11 @@ func spawn_trash() -> void:
 	print("spawned trash")
 
 	add_child(customer_trash)
+	
+	Global.total_trash += 1
+	if Global.total_trash >= Global.trash_punishment_threshold:
+		Global.employee_rating -= Global.trash_punishment_amount
+		Events.alert_posted.emit("-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
 	Events.alert_posted.emit("Customer dropeed some trash...", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 
 

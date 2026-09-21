@@ -100,11 +100,8 @@ func _ready() -> void:
 	)
 
 func spawn_trash() -> void:
-	if Global.main_scene.should_spawn_trash_today:
-		Global.main_scene.spawn_trash();
-		Console.print_line("trash was spawned")
-	else:
-		Console.print_line("trash can't be spawn today")
+	Global.main_scene.spawn_trash();
+	Console.print_line("trash was spawned")
 
 func unlock_everything() -> void:
 	unlock_day("6")

@@ -169,6 +169,8 @@ var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
 var tutorial_manager: TutorialManager
+var trash_punishment_threshold := 5
+var trash_punishment_amount := 0.2
 
 enum CameraMode {
 	PLAYER,
