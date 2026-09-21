@@ -2534,7 +2534,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(3.1512067e-07, -0.0645322, 0.9979146, -1.8626434e-08, 0.9979144, 0.06453221, -0.99999905, -3.8923055e-08, 3.1326184e-07, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(1.9639333e-07, -0.064532205, 0.9979146, -2.6077007e-08, 0.9979144, 0.06453222, -0.99999905, -3.869635e-08, 1.9430114e-07, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2708,7 +2708,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_dfd08")
@@ -2725,7 +2725,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_fxdwr")
@@ -2926,6 +2926,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
+[node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
+transform = Transform3D(0.000570103, -0.00016215755, -0.99994487, 1.0259993e-07, 1, -0.00016214862, 0.99994487, -1.01539825e-08, 0.000570103, -4.11582, -1.4201379, 0.23234849)
+
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
 
@@ -3016,3 +3019,29 @@ stream = ExtResource("282_xj0gb")
 [editable path="Desk/Sketchbooks, comics, rulers (1)"]
 [editable path="Desk/Lamp 1&5 (1)"]
 [editable path="TrashCan"]
+[editable path="CafeEnvironment"]
+[editable path="CafeEnvironment/CustomerArea/MediumLights"]
+[editable path="CafeEnvironment/CustomerArea/FrontWindowAndDoor/glass window"]
+[editable path="CafeEnvironment/CustomerArea/Employee Area Cleaning Supplies4"]
+[editable path="CafeEnvironment/CustomerArea/ATMTIPPY"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light/Ceiling Lamp2"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy8"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy15"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy10"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy11"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersA_Rust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers/LockersA_NoRust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersB_Rust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers6"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers3"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes"]
+[editable path="CafeEnvironment/StoreRoom/Employee Area Cleaning Supplies2"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy2"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Small Lockers8"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Tippy cutout3"]
