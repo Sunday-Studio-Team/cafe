@@ -446,7 +446,7 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 		_:
 			printerr("run_tutorial_part(): Unknown TutorialPartEnum.")
 	
-	_tutorial_manager.is_in_skippable_cinematic = true
+	_tutorial_manager.is_in_skippable_cinematic = false
 	finished_tutorial_part = true
 
 func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
