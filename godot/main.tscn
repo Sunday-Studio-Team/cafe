@@ -259,6 +259,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
 [ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
@@ -1344,12 +1345,14 @@ _data = {
 bg_color = Color(0.123473026, 0.12347307, 0.123472966, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ldsf"]
-font_size = 24
+font = ExtResource("280_l0ugm")
+font_size = 28
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_13qdw"]
-font_size = 24
+font = ExtResource("280_l0ugm")
+font_size = 28
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -1378,7 +1381,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_skfll"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1389,7 +1392,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1400,7 +1403,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1411,7 +1414,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -2480,6 +2483,7 @@ _skip_progress_bar = NodePath("SkipCinematicPrompt/SkipPrompt/SkipTextureProgres
 
 [node name="FastForwardHBoxContainer" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=1550242564]
 layout_mode = 2
+theme_override_constants/separation = 8
 alignment = 2
 
 [node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=1152299202]
@@ -2540,7 +2544,7 @@ vertical_alignment = 1
 
 [node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=901508427]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 8
 alignment = 2
 
 [node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=888468300]
@@ -2751,7 +2755,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_skfll")
+texture = SubResource("ViewportTexture_l0ugm")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2764,7 +2768,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_l0ugm")
+texture = SubResource("ViewportTexture_dfd08")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2781,7 +2785,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_dfd08")
+texture = SubResource("ViewportTexture_fxdwr")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2798,7 +2802,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fxdwr")
+texture = SubResource("ViewportTexture_ecwfn")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
