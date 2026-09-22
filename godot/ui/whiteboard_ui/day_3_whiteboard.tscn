@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://buf0nqkrbns8t"]
+
+[ext_resource type="PackedScene" uid="uid://bk2jtlpmllfma" path="res://ui/whiteboard_ui/example_whiteboard_ui.tscn" id="1_bmrur"]
+[ext_resource type="PackedScene" uid="uid://b7ff1r15fkxvg" path="res://ui/whiteboard_ui/update.tscn" id="2_c6ay3"]
+[ext_resource type="Texture2D" uid="uid://2s5vepr75b54" path="res://sprites/whiteboard/icons/icon_cam.png" id="3_0abav"]
+[ext_resource type="Texture2D" uid="uid://iai4l2oeueyh" path="res://sprites/whiteboard/icons/icon_new.png" id="4_xdobv"]
+[ext_resource type="Texture2D" uid="uid://b7rh4pha2g8gr" path="res://sprites/whiteboard/icons/icon_add1.png" id="5_47x4x"]
+[ext_resource type="Texture2D" uid="uid://cnx628nb3gdqt" path="res://sprites/whiteboard/icons/icon_spills.png" id="6_033e8"]
+
+[node name="WhiteboardUI" unique_id=82864418 instance=ExtResource("1_bmrur")]
+
+[node name="Update" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer" parent_id_path=PackedInt32Array(1587213761) index="0" unique_id=842554168 instance=ExtResource("2_c6ay3")]
+layout_mode = 2
+icon_texture = ExtResource("3_0abav")
+extra_overlay_texture = ExtResource("4_xdobv")
+extra_icon_texture = ExtResource("5_47x4x")
+text = "Camera"
+
+[node name="Update2" parent="MarginContainer/HBoxContainer/VBoxContainer/Updates/MarginContainer/UpdatesContainer" parent_id_path=PackedInt32Array(1587213761) index="1" unique_id=812774497 instance=ExtResource("2_c6ay3")]
+layout_mode = 2
+icon_texture = ExtResource("6_033e8")
+text = "Machines[br]Can Spill!"
+
+[node name="Rule2" parent="MarginContainer/HBoxContainer/VBoxContainer/Rules/MarginContainer/RulesContainer" parent_id_path=PackedInt32Array(688768580) index="1" unique_id=1860143982]
+visible = false
+
+[node name="MoneyGoal" parent="." index="5" unique_id=1679695572]
+text = "60$"
