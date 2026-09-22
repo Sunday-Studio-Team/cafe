@@ -273,7 +273,7 @@
 [ext_resource type="Resource" uid="uid://8wrbl822cmmk" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_04.tres" id="293_j3ofb"]
 [ext_resource type="Resource" uid="uid://cuy4ff6am44i6" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_05.tres" id="294_m5f57"]
 [ext_resource type="Resource" uid="uid://6sls253hpyej" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_06.tres" id="296_130bj"]
-[ext_resource type="Script" uid="uid://dg2t2004c66xl" path="res://tutorial/skip_cinematic_prompt.gd" id="297_f4177"]
+[ext_resource type="Script" uid="uid://dg2t2004c66xl" path="res://tutorial/cinematic_prompts.gd" id="297_f4177"]
 [ext_resource type="Script" uid="uid://cr6bafr6x5r2v" path="res://tutorial/cinematic_bars.gd" id="297_nckbc"]
 [ext_resource type="Resource" uid="uid://d3rjdmwvtte7g" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day3_2.tres" id="297_pbe4p"]
 [ext_resource type="Script" uid="uid://cybko6yyi52db" path="res://tutorial/cinematic_camera.gd" id="297_r4j87"]
@@ -1258,6 +1258,36 @@ tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.04048506, 0.16402633, 0.00673763, 0.9856014, 2, 1, -0.040485047, 0.1640263, 0.006737626, 0.9856014)
 
+[sub_resource type="Animation" id="Animation_skfll"]
+resource_name = "skip_cutscene_fade_to_black"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.04444445, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_l0ugm"]
+resource_name = "skip_cutscene_fade_to_view"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwf4s"]
 _data = {
 &"RESET": SubResource("Animation_r4j87"),
@@ -1303,16 +1333,23 @@ _data = {
 &"day_1_intro_2_0": SubResource("Animation_tfaor"),
 &"day_1_intro_2_1": SubResource("Animation_3rmuw"),
 &"day_1_intro_3_0": SubResource("Animation_j3ofb"),
-&"day_1_intro_3_1": SubResource("Animation_m5f57")
+&"day_1_intro_3_1": SubResource("Animation_m5f57"),
+&"skip_cutscene_fade_to_black": SubResource("Animation_skfll"),
+&"skip_cutscene_fade_to_view": SubResource("Animation_l0ugm")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skfll"]
+bg_color = Color(0.123473026, 0.12347307, 0.123472966, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_8ldsf"]
-font_size = 40
+font_size = 24
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_13qdw"]
-font_size = 32
+font_size = 24
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -2421,31 +2458,62 @@ offset_transform_enabled = true
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=901508427 node_paths=PackedStringArray("_fast_forward_label", "_skip_prompt_label", "_skip_progress_bar")]
+[node name="PromptsVBoxContainer" type="VBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=1317235223 node_paths=PackedStringArray("_fast_forward_hotkey_label", "_fast_forward_active_indicator", "_fast_forward_not_active_indicator", "_skip_hotkey_label", "_skip_progress_bar")]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -241.0
-offset_top = -114.0
-offset_right = -53.0
-offset_bottom = -36.0
+offset_left = -640.0
+offset_top = -154.0
+offset_right = -41.0
+offset_bottom = -22.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 16
-alignment = 2
+alignment = 1
 script = ExtResource("297_f4177")
-_fast_forward_label = NodePath("FfwdPrompt/FfwdPromptLabel")
-_skip_prompt_label = NodePath("SkipPrompt/SkipPromptLabel")
-_skip_progress_bar = NodePath("SkipPrompt/SkipTextureProgressBar")
+_fast_forward_hotkey_label = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdPromptLabel")
+_fast_forward_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdActivatedPanel")
+_fast_forward_not_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdNotActivatedPanel")
+_skip_hotkey_label = NodePath("SkipCinematicPrompt/SkipPrompt/SkipPromptLabel")
+_skip_progress_bar = NodePath("SkipCinematicPrompt/SkipPrompt/SkipTextureProgressBar")
 
-[node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=1152299202]
+[node name="FastForwardHBoxContainer" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=1550242564]
+layout_mode = 2
+alignment = 2
+
+[node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=1152299202]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="FfwdPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/FfwdPrompt" unique_id=1272128939]
+[node name="FfwdActivatedPanel" type="Panel" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=2006360980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="FfwdNotActivatedPanel" type="Panel" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=643353900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skfll")
+
+[node name="FfwdPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=1272128939]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2463,29 +2531,32 @@ label_settings = SubResource("LabelSettings_8ldsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FfwdLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=62495979]
+[node name="FfwdLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=62495979]
 layout_mode = 2
 text = "Fast Forward "
 label_settings = SubResource("LabelSettings_13qdw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=625154802]
-visible = false
-custom_minimum_size = Vector2(32, 0)
+[node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=901508427]
 layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
 
-[node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=888468300]
-visible = false
+[node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=888468300]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="SkipTextureProgressBar" type="TextureProgressBar" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/SkipPrompt" unique_id=164510353]
+[node name="SkipTextureProgressBar" type="TextureProgressBar" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt/SkipPrompt" unique_id=164510353]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 13.0
+offset_right = -13.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 value = 69.0
@@ -2497,7 +2568,7 @@ texture_progress = ExtResource("47_rkju4")
 tint_under = Color(0, 0, 0, 1)
 tint_progress = Color(0.46, 0.46, 0.46, 1)
 
-[node name="SkipPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/SkipPrompt" unique_id=239714230]
+[node name="SkipPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt/SkipPrompt" unique_id=239714230]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2515,8 +2586,7 @@ label_settings = SubResource("LabelSettings_8ldsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SkipLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=1186232513]
-visible = false
+[node name="SkipLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=1186232513]
 layout_mode = 2
 text = "Skip"
 label_settings = SubResource("LabelSettings_13qdw")
@@ -2534,7 +2604,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(3.1512067e-07, -0.0645322, 0.9979146, -1.8626434e-08, 0.9979144, 0.06453221, -0.99999905, -3.8923055e-08, 3.1326184e-07, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.99999905, 0, 0, 0, 0.99999875, 0, 0, 0, 0.999999, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
