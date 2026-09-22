@@ -473,7 +473,7 @@ func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 		TutorialPartEnum.DAY_0_6:
 			pass
 		TutorialPartEnum.DAY_0_7:
-			pass
+			_tutorial_manager._player_ui_sub_viewport_container.set_allow_input(true)
 		TutorialPartEnum.DAY_0_8:
 			pass
 		TutorialPartEnum.DAY_0_9:

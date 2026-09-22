@@ -37,27 +37,29 @@ func _ready() -> void:
 	_update_fast_forward_indicator()
 	_update_skip_progress_bar()
 
-func _input(input_event: InputEvent) -> void:
-	if input_event is InputEventKey:
-		_show_prompt()
-
 func _process(delta: float) -> void:
 	if Global.in_ui:
-		visible = false
-		if _fast_forward_enabled:
-			_fast_forward_enabled = false
-			Engine.time_scale = 1.0
-			_update_fast_forward_indicator()
-		return
+		# Allow ffwd/skip during cutscenes in minigames and machine UI
+		if !Global.minigame_active and !Global.in_machine_ui:
+			visible = false
+			if _fast_forward_enabled:
+				_fast_forward_enabled = false
+				Engine.time_scale = 1.0
+				_update_fast_forward_indicator()
+			return
 	
 	if Global.tutorial_manager.is_in_skippable_cinematic:
 		visible = true
+		
+		if Input.is_anything_pressed():
+			_show_prompt()
 		
 		if _fast_forward_enabled:
 			_show_prompt()
 		
 		if Input.is_action_just_pressed("interact"):
 			if _fast_forward_enabled:
+				_show_prompt()
 				_fast_forward_enabled = false
 				Engine.time_scale = 1.0
 				_update_fast_forward_indicator()
