@@ -1,0 +1,21 @@
+[gd_resource type="CompositorEffect" script_class="CompositorEffectController" format=3 uid="uid://br5semceaiw6m"]
+
+[ext_resource type="Script" uid="uid://e1ei1oolhhbp" path="res://Compositor effects/Main scene compositor/Scripts/main_scene_compositor_effect_controller.gd" id="1_t2cnu"]
+[ext_resource type="Script" uid="uid://57l5rdm5wxea" path="res://Compositor effects/Scripts/base_compositor_effect_definition.gd" id="1_y1uq5"]
+[ext_resource type="Script" uid="uid://cw7bmlxptk3m2" path="res://Compositor effects/Toon shader/Scripts/compositor_effect_controller.gd" id="2_jihs3"]
+
+[sub_resource type="Resource" id="Resource_3e82c"]
+script = ExtResource("2_jihs3")
+shader_file_path = "res://Compositor effects/Toon shader/Shaders/post_process_toon.glsl"
+metadata/_custom_type_script = "uid://cw7bmlxptk3m2"
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_t2cnu")
+compositor_effects = Array[ExtResource("1_y1uq5")]([SubResource("Resource_3e82c")])
+metadata/_custom_type_script = "uid://e1ei1oolhhbp"
