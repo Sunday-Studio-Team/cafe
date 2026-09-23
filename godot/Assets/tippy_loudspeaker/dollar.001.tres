@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bqof1hqiyu1qq"]
+
+[ext_resource type="Texture2D" uid="uid://d1myr3yefwy73" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_tippysolo_dollar_BaseColor.png" id="1_uxtk7"]
+[ext_resource type="Texture2D" uid="uid://1vupbucvtkd8" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_file5-file4.png" id="2_xwkfy"]
+
+[resource]
+resource_name = "dollar.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_uxtk7")
+metallic = 1.0
+metallic_texture = ExtResource("2_xwkfy")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_xwkfy")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_texture = ExtResource("1_uxtk7")
+metadata/_gltf_primary_texture_coord = 0

@@ -259,6 +259,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
 [ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
@@ -273,7 +274,7 @@
 [ext_resource type="Resource" uid="uid://8wrbl822cmmk" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_04.tres" id="293_j3ofb"]
 [ext_resource type="Resource" uid="uid://cuy4ff6am44i6" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_05.tres" id="294_m5f57"]
 [ext_resource type="Resource" uid="uid://6sls253hpyej" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_06.tres" id="296_130bj"]
-[ext_resource type="Script" uid="uid://dg2t2004c66xl" path="res://tutorial/skip_cinematic_prompt.gd" id="297_f4177"]
+[ext_resource type="Script" uid="uid://dg2t2004c66xl" path="res://tutorial/cinematic_prompts.gd" id="297_f4177"]
 [ext_resource type="Script" uid="uid://cr6bafr6x5r2v" path="res://tutorial/cinematic_bars.gd" id="297_nckbc"]
 [ext_resource type="Resource" uid="uid://d3rjdmwvtte7g" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day3_2.tres" id="297_pbe4p"]
 [ext_resource type="Script" uid="uid://cybko6yyi52db" path="res://tutorial/cinematic_camera.gd" id="297_r4j87"]
@@ -1258,6 +1259,36 @@ tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.04048506, 0.16402633, 0.00673763, 0.9856014, 2, 1, -0.040485047, 0.1640263, 0.006737626, 0.9856014)
 
+[sub_resource type="Animation" id="Animation_skfll"]
+resource_name = "skip_cutscene_fade_to_black"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.04444445, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_l0ugm"]
+resource_name = "skip_cutscene_fade_to_view"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwf4s"]
 _data = {
 &"RESET": SubResource("Animation_r4j87"),
@@ -1303,16 +1334,25 @@ _data = {
 &"day_1_intro_2_0": SubResource("Animation_tfaor"),
 &"day_1_intro_2_1": SubResource("Animation_3rmuw"),
 &"day_1_intro_3_0": SubResource("Animation_j3ofb"),
-&"day_1_intro_3_1": SubResource("Animation_m5f57")
+&"day_1_intro_3_1": SubResource("Animation_m5f57"),
+&"skip_cutscene_fade_to_black": SubResource("Animation_skfll"),
+&"skip_cutscene_fade_to_view": SubResource("Animation_l0ugm")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skfll"]
+bg_color = Color(0.123473026, 0.12347307, 0.123472966, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_8ldsf"]
-font_size = 40
+font = ExtResource("280_l0ugm")
+font_size = 28
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_13qdw"]
-font_size = 32
+font = ExtResource("280_l0ugm")
+font_size = 28
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -1341,7 +1381,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_skfll"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1352,7 +1392,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1363,7 +1403,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1374,7 +1414,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -2421,31 +2461,63 @@ offset_transform_enabled = true
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=901508427 node_paths=PackedStringArray("_fast_forward_label", "_skip_prompt_label", "_skip_progress_bar")]
+[node name="PromptsVBoxContainer" type="VBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=1317235223 node_paths=PackedStringArray("_fast_forward_hotkey_label", "_fast_forward_active_indicator", "_fast_forward_not_active_indicator", "_skip_hotkey_label", "_skip_progress_bar")]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -241.0
-offset_top = -114.0
-offset_right = -53.0
-offset_bottom = -36.0
+offset_left = -640.0
+offset_top = -154.0
+offset_right = -41.0
+offset_bottom = -22.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 16
-alignment = 2
+alignment = 1
 script = ExtResource("297_f4177")
-_fast_forward_label = NodePath("FfwdPrompt/FfwdPromptLabel")
-_skip_prompt_label = NodePath("SkipPrompt/SkipPromptLabel")
-_skip_progress_bar = NodePath("SkipPrompt/SkipTextureProgressBar")
+_fast_forward_hotkey_label = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdPromptLabel")
+_fast_forward_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdActivatedPanel")
+_fast_forward_not_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdNotActivatedPanel")
+_skip_hotkey_label = NodePath("SkipCinematicPrompt/SkipPrompt/SkipPromptLabel")
+_skip_progress_bar = NodePath("SkipCinematicPrompt/SkipPrompt/SkipTextureProgressBar")
 
-[node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=1152299202]
+[node name="FastForwardHBoxContainer" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=1550242564]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=1152299202]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="FfwdPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/FfwdPrompt" unique_id=1272128939]
+[node name="FfwdActivatedPanel" type="Panel" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=2006360980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="FfwdNotActivatedPanel" type="Panel" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=643353900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skfll")
+
+[node name="FfwdPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=1272128939]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2463,29 +2535,32 @@ label_settings = SubResource("LabelSettings_8ldsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FfwdLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=62495979]
+[node name="FfwdLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=62495979]
 layout_mode = 2
 text = "Fast Forward "
 label_settings = SubResource("LabelSettings_13qdw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=625154802]
-visible = false
-custom_minimum_size = Vector2(32, 0)
+[node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=901508427]
 layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
 
-[node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=888468300]
-visible = false
+[node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=888468300]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="SkipTextureProgressBar" type="TextureProgressBar" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/SkipPrompt" unique_id=164510353]
+[node name="SkipTextureProgressBar" type="TextureProgressBar" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt/SkipPrompt" unique_id=164510353]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 13.0
+offset_right = -13.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 value = 69.0
@@ -2497,7 +2572,7 @@ texture_progress = ExtResource("47_rkju4")
 tint_under = Color(0, 0, 0, 1)
 tint_progress = Color(0.46, 0.46, 0.46, 1)
 
-[node name="SkipPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/SkipPrompt" unique_id=239714230]
+[node name="SkipPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt/SkipPrompt" unique_id=239714230]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2515,8 +2590,7 @@ label_settings = SubResource("LabelSettings_8ldsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SkipLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=1186232513]
-visible = false
+[node name="SkipLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=1186232513]
 layout_mode = 2
 text = "Skip"
 label_settings = SubResource("LabelSettings_13qdw")
@@ -2534,7 +2608,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(1.9639333e-07, -0.064532205, 0.9979146, -2.6077007e-08, 0.9979144, 0.06453222, -0.99999905, -3.869635e-08, 1.9430114e-07, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.99999905, 0, 0, 0, 0.99999875, 0, 0, 0, 0.999999, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2681,7 +2755,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_skfll")
+texture = SubResource("ViewportTexture_l0ugm")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2694,7 +2768,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_l0ugm")
+texture = SubResource("ViewportTexture_dfd08")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2708,10 +2782,10 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_dfd08")
+texture = SubResource("ViewportTexture_fxdwr")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2725,10 +2799,10 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fxdwr")
+texture = SubResource("ViewportTexture_ecwfn")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
@@ -2926,9 +3000,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
-[node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.000570103, -0.00016215755, -0.99994487, 1.0259993e-07, 1, -0.00016214862, 0.99994487, -1.01539825e-08, 0.000570103, -4.11582, -1.4201379, 0.23234849)
-
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
 
@@ -3019,29 +3090,3 @@ stream = ExtResource("282_xj0gb")
 [editable path="Desk/Sketchbooks, comics, rulers (1)"]
 [editable path="Desk/Lamp 1&5 (1)"]
 [editable path="TrashCan"]
-[editable path="CafeEnvironment"]
-[editable path="CafeEnvironment/CustomerArea/MediumLights"]
-[editable path="CafeEnvironment/CustomerArea/FrontWindowAndDoor/glass window"]
-[editable path="CafeEnvironment/CustomerArea/Employee Area Cleaning Supplies4"]
-[editable path="CafeEnvironment/CustomerArea/ATMTIPPY"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light/Ceiling Lamp2"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy8"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy15"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy10"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy11"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersA_Rust"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers/LockersA_NoRust"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersB_Rust"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers6"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers3"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes"]
-[editable path="CafeEnvironment/StoreRoom/Employee Area Cleaning Supplies2"]
-[editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy"]
-[editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy2"]
-[editable path="CafeEnvironment/BreakRoom/LockerRoom/Small Lockers8"]
-[editable path="CafeEnvironment/BreakRoom/LockerRoom/Tippy cutout3"]
