@@ -2,6 +2,9 @@ class_name CustomerTrash
 extends RigidBody3D
 
 @export var interactable: Interactable
+@export var xray_material: Material
+@export var trash_cup: MeshInstance3D
+@export var activation_distance := 3.0
 
 signal trash_bag_taken(customer_trash: CustomerTrash)
 
@@ -9,7 +12,7 @@ signal trash_bag_taken(customer_trash: CustomerTrash)
 # viewmodel animation
 var already_interacted := false
 var time_left_out: float = 0.0
-
+var cup_body_surface_index := 2
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
@@ -19,7 +22,17 @@ func _ready() -> void:
 	interactable.visible = false
 	await get_tree().create_timer(0.5, false).timeout
 	interactable.visible = true
-	
+
+
+func _process(_delta: float) -> void:
+	var player = get_tree().get_first_node_in_group("player")
+
+	if global_position.distance_to(player.global_position) <= activation_distance:
+		trash_cup.set_surface_override_material(cup_body_surface_index, xray_material)
+	else:
+		trash_cup.set_surface_override_material(cup_body_surface_index, null)
+
+
 func _on_interacted() -> void:
 	if Global.holding_trash || already_interacted || Global.holding_ingredients:
 		return

@@ -58,6 +58,7 @@ func _ready() -> void:
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
 	_on_items_updated()
+	add_to_group("player")
 
 	free_cam_visualizer.visible = false
 

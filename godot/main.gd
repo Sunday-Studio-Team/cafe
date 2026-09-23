@@ -44,6 +44,7 @@ extends Node3D
 @export var waypoint_ring: Area3D
 @export var shift_start_sound: AudioStreamPlayer
 @export var cam_spot: Marker3D
+@export var default_trash_spawn_spot: Marker3D
 
 @export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
 @export var whiteboard: Whiteboard
@@ -455,7 +456,8 @@ func spawn_trash() -> void:
 	if littering_customer:
 		customer_trash.position = Vector3(littering_customer.global_position.x, 0, littering_customer.global_position.z)
 	else:
-		print("no customers exist, trash was generate at (0,0,0)")
+		customer_trash.position = default_trash_spawn_spot.position
+		print("no customers exist, trash was generate at default location")
 	print("spawned trash")
 
 	add_child(customer_trash)
