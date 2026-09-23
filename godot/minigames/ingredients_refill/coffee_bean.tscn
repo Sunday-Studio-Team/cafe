@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbl1ykvtf1wot"]
 
 [ext_resource type="Script" uid="uid://drt6mt6shf1t5" path="res://minigames/ingredients_refill/coffee_bean.gd" id="1_hjpyt"]
-[ext_resource type="Texture2D" uid="uid://d2cqpi0gkd51p" path="res://minigames/ingredients_refill/normal/coffee bean.png" id="1_qurre"]
+[ext_resource type="Texture2D" uid="uid://mau78deg5rb1" path="res://minigames/ingredients_refill/assets/coffeebean.png" id="2_8rkep"]
 [ext_resource type="Script" uid="uid://cvsuhgopkoc11" path="res://minigames/ingredients_refill/normal_bean_white_trail.gd" id="3_0u6p0"]
 [ext_resource type="Script" uid="uid://ftx0e8nnyhhv" path="res://minigames/ingredients_refill/normal_bean_black_trail.gd" id="4_8rkep"]
 
@@ -21,9 +21,7 @@ sprite_2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
 position = Vector2(1.1920929e-07, 1.1920929e-07)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_qurre")
-offset = Vector2(-17.949999, 116.66875)
+texture = ExtResource("2_8rkep")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
 position = Vector2(-1, -1)

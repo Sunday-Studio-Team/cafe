@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bnsmlrlfh5qwi"]
 
 [ext_resource type="Script" uid="uid://b4ac40i085uge" path="res://minigames/ingredients_refill/golden_coffee_bean.gd" id="1_b3x37"]
-[ext_resource type="Texture2D" uid="uid://dvgd3wbo3m6gd" path="res://minigames/ingredients_refill/golden/goldencoffeebean.png" id="1_trix1"]
+[ext_resource type="Texture2D" uid="uid://fsksmrp1gipu" path="res://minigames/ingredients_refill/assets/goldbean.png" id="2_b3x37"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 25.0
@@ -15,9 +15,7 @@ sprite_2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
 position = Vector2(-9.536743e-07, 7.6293945e-06)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_trix1")
-offset = Vector2(-15.943748, 120.86874)
+texture = ExtResource("2_b3x37")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
 position = Vector2(-1, -1)
