@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Review" format=3 uid="uid://b1u61lhaos3d2"]
+
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_x7hbb"]
+[ext_resource type="Resource" uid="uid://cm4w7welfhgie" path="res://resources/customers/ai_agent.tres" id="2_v1se1"]
+[ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="3_s0aaq"]
+
+[resource]
+script = ExtResource("3_s0aaq")
+username = "inspectorA"
+rating = 5.0
+review_content = "Marvelous. The beings observed in this establishment shall prove invaluable subjects for my… exhibition. 
+
+"
+customer_sprite_data_options = Array[ExtResource("1_x7hbb")]([ExtResource("2_v1se1")])
+metadata/_custom_type_script = "uid://djf3q4lwggw0g"

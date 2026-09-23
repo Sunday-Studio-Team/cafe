@@ -78,6 +78,14 @@ func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineL
 	playback_token.is_finished_playing = true
 	requested_hide_voice_line_subtitle.emit(_currently_playing_voice_line)
 
+func safe_interrupt_all_voice_lines() -> void:
+	if _currently_playing_voice_line != null:
+		# Interrupt currently playing voice line.
+		for player in _currently_playing_voice_line_players:
+			player.interrupt_voice_line()
+		_currently_playing_voice_line_players.clear()
+		_currently_playing_voice_line = null
+
 static func calculate_missing_audio_stream_caption_duration(voice_line: VoiceLine) -> float:
 	var duration: float = NULL_VOICE_LINE_AUDIO_DURATION_BASE + (voice_line.subtitle_en.length() * NULL_VOICE_LINE_AUDIO_DURATION_PER_CHAR)
 	return duration

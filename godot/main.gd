@@ -45,6 +45,10 @@ extends Node3D
 @export var shift_start_sound: AudioStreamPlayer
 @export var cam_spot: Marker3D
 
+@export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
+@export var whiteboard: Whiteboard
+
+
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
@@ -62,11 +66,12 @@ var _all_security_cameras: Array[SecurityCam3D]
 @onready var tutorial_machine: Machine = _right_area_right_machine
 
 var should_spawn_trash_today: bool = false
-var closing_time:bool = false
+var closing_time: bool = false
 
 func _ready() -> void:
 	_voice_line_system.setup()
 	Global.camera_mode = Global.CameraMode.PLAYER
+	Global.cinematic_camera_allow_machine_gui_inputs = true
 
 	_world_environment.environment = Global.cafe_environment_res
 	Events.game_options_changed.connect(_on_game_options_changed)
@@ -79,7 +84,7 @@ func _ready() -> void:
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
 
-	customer_trash_spawn_timer.timeout.connect(spawn_trash)
+	customer_trash_spawn_timer.timeout.connect(attempt_spawn_trash)
 	_all_machines = [
 		_right_area_left_machine,
 		_right_area_right_machine,
@@ -126,7 +131,8 @@ func _ready() -> void:
 	for i in range(day_containers.size()):
 		if day_containers[i] != null:
 			day_containers[i].visible = (i <= Global.day)
-
+			
+	
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
@@ -139,6 +145,7 @@ func _ready() -> void:
 	Global.in_pc_ui = false
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
+	Global.total_trash = 0
 	get_stats()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
@@ -289,6 +296,11 @@ func set_per_day_stuff() -> void:
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
 		should_spawn_trash_today = true
 		_trash_can.visible = true
+		#day 5 whiteboard tippy disappearing effect
+		day_5_tippy_whiteboard_disappear_area.monitoring = true
+		day_5_tippy_whiteboard_disappear_area.player_entered_area.connect(whiteboard.hide_tippy.unbind(1))
+	else:
+		day_5_tippy_whiteboard_disappear_area.monitoring = false
 
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()
@@ -318,7 +330,7 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
 
-func spawn_machine_customer(sprite_resource: CustomerSpriteData=null) -> void:
+func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -375,7 +387,7 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 		spawn_machine_customer(customer_sprite_data)
 
 
-func spawn_help_desk_customer(sprite_resource: CustomerSpriteData=null) -> void:
+func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
 
@@ -411,14 +423,18 @@ func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D
 func _on_pause_menu_tutorial_requested() -> void:
 	_tutorial_popups_manager.show_all_handbook_popups()
 
-#code for  trash spawn
-func spawn_trash() -> void:
+func attempt_spawn_trash() -> void:
 	if not should_spawn_trash_today:
 		return
-# freq of spawn 3/41 rn
-	var spawn=randi_range(0,40)
-	if spawn>=3:
+	# freq of spawn 3/41 rn
+	var spawn = randi_range(0, 40)
+	if spawn >= 3:
 		return
+
+	spawn_trash()
+
+#code for  trash spawn
+func spawn_trash() -> void:
 	var customer_trash = customer_trash_scene.instantiate()
 	#var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
 	#var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
@@ -437,10 +453,17 @@ func spawn_trash() -> void:
 	#var rand_x = randf_range(littering_customer.global_position.x, littering_customer.global_position.x)
 	#var rand_z = randf_range(littering_customer.global_position.z, littering_customer.global_position.z)
 	if littering_customer:
-		customer_trash.position=Vector3(littering_customer.global_position.x,0,littering_customer.global_position.z)
+		customer_trash.position = Vector3(littering_customer.global_position.x, 0, littering_customer.global_position.z)
+	else:
+		print("no customers exist, trash was generate at (0,0,0)")
 	print("spawned trash")
 
 	add_child(customer_trash)
+	
+	Global.total_trash += 1
+	if Global.total_trash >= Global.trash_punishment_threshold:
+		Global.employee_rating -= Global.trash_punishment_amount
+		Events.alert_posted.emit("-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
 	Events.alert_posted.emit("Customer dropeed some trash...", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 
 
@@ -450,10 +473,9 @@ func _on_game_timer_timeout() -> void:
 	if get_customers().size() <= 1:
 		shift_end_sequence()
 
-func shift_end_sequence(override: bool=false):
+func shift_end_sequence(override: bool = false):
 	# Here's the thing. When a customer calls this function as they
 	# are still leaving, they are still part of the scene tree.
-
 	# So get_customers() will return an array that includes them.
 	# That is why it checks for a customer array of size 1 (or less)
 	if override or (closing_time and get_customers().size() <= 1):
@@ -495,7 +517,6 @@ func _on_minigame_end():
 
 
 func _on_shift_started():
-
 	customer_trash_spawn_timer.start()
 	Global.shift_started = true
 	shift_start_sound.play()

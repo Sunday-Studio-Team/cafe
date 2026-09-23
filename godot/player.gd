@@ -12,7 +12,7 @@ const STRIDE_LENGTH := 1.25
 @export var ingredients_bag: Node3D
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
-@export var customer_trash: Sprite3D
+@export var customer_trash: Node3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
@@ -21,6 +21,7 @@ const STRIDE_LENGTH := 1.25
 @export var sprint_lockout_timer: Timer
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
+@export var roller_skates_dust_particles: GPUParticles3D
 
 var player_status_effects: PlayerStatusEffects
 
@@ -116,6 +117,18 @@ func _physics_process(delta: float) -> void:
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
+	var has_roller_skates: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "roller_skates":
+			has_roller_skates = true
+			break
+	fake_velocity = fake_velocity.move_toward(velocity, fake_vel_follow_speed)
+	if has_roller_skates:
+		roller_skates_dust_particles.emitting = velocity.length() > 2.5
+		camera.camera_effects.fov = lerp(90, 150, clampf((fake_velocity.length()) / _current_move_speed, 0, 1))
+	else:
+		roller_skates_dust_particles.emitting = false
+		camera.camera_effects.fov = lerp(90, 100, clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed, 0, 2))
 	handle_gravity(delta)
 	handle_footstep_sounds()
 
@@ -157,7 +170,9 @@ func handle_floating_cursor() -> void:
 #
 #	mouse_delta = Vector2.ZERO
 
-
+var fake_vel_follow_speed: float = 1.25
+var fake_velocity: Vector3
+var fov_tween: Tween
 func handle_movement(delta: float) -> void:
 	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
 		velocity = Vector3.ZERO
@@ -188,7 +203,6 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
@@ -246,7 +260,7 @@ func handle_sprint(delta: float) -> void:
 			has_roller_skates = true
 			break
 
-	if Input.is_action_pressed("sprint") and ! has_roller_skates:
+	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		_is_sprinting = true
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
@@ -294,7 +308,7 @@ func tilt_camera() -> void:
 	const TILT_AMOUNT := 0.25
 
 	var local_velocity: Vector3 = basis.transposed() * velocity
-	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
+	camera.rotation_degrees.z = - local_velocity.x * TILT_AMOUNT
 
 
 func handle_ingredients_bag() -> void:
@@ -309,7 +323,6 @@ func handle_ingredients_bag() -> void:
 
 	default_ingredients_bag_model.visible = not has_xl_bag_item
 	large_ingredients_bag_model.visible = has_xl_bag_item
-
 
 
 func handle_customer_trash() -> void:

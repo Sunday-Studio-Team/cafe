@@ -30,7 +30,6 @@ const ALERT_QUEUE_SIZE = 5
 @export var time_left_label: Label
 @export var time_left_bar: TextureProgressBar
 @export var shift_starting_ending_label: RichTextLabel
-@export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
@@ -130,17 +129,10 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	if Global.day == 0:
-		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 1:
-		rules_controls.text = ""
 		cctv_indicator.hide()
 	if Global.day >= 2:
-		rules_controls.text += (
-				"\n[b][i]rules [/i][/b]
-			- no running
-			- no remaking drinks"
-		)
 		cctv_indicator.show()
 
 	# we make these things for the employee rating here instead of in editor

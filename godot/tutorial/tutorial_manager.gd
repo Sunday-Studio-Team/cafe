@@ -1,7 +1,6 @@
 class_name TutorialManager
 extends Node
 
-
 @export var _tutorial_popups_manager: TutorialPopupsManager
 @export var _player_ui_sub_viewport_container: PlayerUiSubViewportContainer
 @export var _cinematic_camera: CinematicCamera
@@ -19,8 +18,12 @@ extends Node
 @export var _day_0_accept_button_preview_position: Node3D
 @export var _day_0_remake_button_preview_position: Node3D
 @export var _day_0_ingredients_bar_preview_position: Node3D
+@export var _day_1_tippy_tablet_area_detector: PlayerDetectionArea
+@export var _day_1_tippy_tablet_prop: Node3D
+@export var _day_1_tippy_tablet_camera_target_location: Node3D
 
 var is_in_skippable_cinematic: bool = false
+var skip_part_requested: bool = false
 
 func _init() -> void:
 	Global.tutorial_manager = self
@@ -30,179 +33,28 @@ func start_day() -> void:
 	# Disable Tippy callouts
 	_tippy_callouts_manager.enable_tippy_callouts = false
 	
+	# Hide the Tippy Tablet prop
+	_day_1_tippy_tablet_prop.visible = false
+	
+	var skip_cutscenes: bool = OS.has_feature("skip_cutscenes")
+	
 	if Global.day == 0:
+		# Disable the open sign
+		_open_closed_sign.set_enabled(false)
 		
-		if true:
-			# Disable the open sign
-			_open_closed_sign.set_enabled(false)
-			
-			is_in_skippable_cinematic = true
-	
-			_cinematic_camera.enable_cinematic_camera(0.0)
-			_cinematic_camera.cinematic_bars.show_bars(0.0)
-			await _cinematic_camera.play_animation("day_0_intro_0_0")
-			await _cinematic_camera.play_animation("day_0_intro_0_1")
-			await _cinematic_camera.play_animation("day_0_intro_0_2")
-			await _cinematic_camera.play_animation("day_0_intro_0_3")
-			await _cinematic_camera.play_animation("day_0_intro_0_4")
-			
-			Global.player.override_position_rotation(_day_0_sato_front_door_position.global_position, _day_0_sato_front_door_position.global_rotation)
-	
-			await _cinematic_camera.play_animation("day_0_intro_0_5")
-			await _cinematic_camera.play_animation("day_0_intro_0_6")
-			await _cinematic_camera.play_animation("day_0_intro_0_7")
-	
-			_cinematic_camera.play_animation("day_0_intro_1_0")
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			
-			_cinematic_camera.play_animation("day_0_intro_1_1")
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			
-			_cinematic_camera.play_animation("day_0_intro_1_2")
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_0)
+								
+		await _day_0_employee_area_detector.player_entered_area
 
-			_cinematic_camera.play_animation("day_0_intro_1_3")
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_1)
 
-			_cinematic_camera.play_animation("day_0_intro_1_4")
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_5", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		await _day_0_break_room_area_detector.player_entered_area
 
-			_cinematic_camera.play_animation("day_0_intro_1_5")
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_1_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_2_0")
-			await Global.voice_line_system.play_voice_line("day_0_intro_2_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			
-			if true:
-				var tween_to_player: Tween = create_tween()
-				tween_to_player.tween_property(_cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 2.0)
-				tween_to_player.set_parallel()
-				tween_to_player.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 2.0)
-			_cinematic_camera.cinematic_bars.hide_bars(2.0)
-			await _cinematic_camera.disable_cinematic_camera(2.0)
-			
-			is_in_skippable_cinematic = false
-			
-			await _day_0_employee_area_detector.player_entered_area
-	
-			is_in_skippable_cinematic = true
-	
-			_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-			_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-			_cinematic_camera.enable_cinematic_camera(0.5)
-			_cinematic_camera.cinematic_bars.show_bars(0.5)
-			if true:
-				var tween: Tween = create_tween()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_locker_room_preview_position.global_position, 2.0)
-				tween.set_parallel()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_locker_room_preview_position.global_rotation, 2.0)
-	
-			await Global.voice_line_system.play_voice_line("day_0_intro_3_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			if true:
-				var tween: Tween = create_tween()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 1.0)
-				tween.set_parallel()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 1.0)
-			_cinematic_camera.cinematic_bars.hide_bars(1.0)
-			await _cinematic_camera.disable_cinematic_camera(1.0)
-			
-			is_in_skippable_cinematic = false
-	
-			await _day_0_break_room_area_detector.player_entered_area
-	
-			is_in_skippable_cinematic = true
-	
-			_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-			_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-			_cinematic_camera.enable_cinematic_camera(0.5)
-			_cinematic_camera.cinematic_bars.show_bars(0.5)
-			if true:
-				var tween: Tween = create_tween()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_break_room_preview_position.global_position, 2.0)
-				tween.set_parallel()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_break_room_preview_position.global_rotation, 2.0)
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			if true:
-				var tween: Tween = create_tween()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_back_exit_preview_position.global_position, 2.0)
-				tween.set_parallel()
-				tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_back_exit_preview_position.global_rotation, 2.0)
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_4_0")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_4_1")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_5", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_4_2")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_4_9", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_5_0")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_5_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_5_1")
-	
-			await Global.voice_line_system.play_voice_line("day_0_intro_5_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_6_0")
-	
-			await Global.voice_line_system.play_voice_line("day_0_intro_6_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_6_1")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_6_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_6_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_6_2")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_6_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_6_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_7_0")
-	
-			await Global.voice_line_system.play_voice_line("day_0_intro_7_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_7_1")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_7_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_7_2")
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_7_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_7_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_8_0")
-	
-			await Global.voice_line_system.play_voice_line("day_0_intro_8_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.play_animation("day_0_intro_8_1")
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_2)
 		
-			await Global.voice_line_system.play_voice_line("day_0_intro_8_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-	
-			_cinematic_camera.disable_cinematic_camera(0.0)
-			_cinematic_camera.cinematic_bars.hide_bars(1.0)
-	
-			is_in_skippable_cinematic = false
-			
 		# Enable the open sign
 		_open_closed_sign.set_enabled(true)
-
+		
 		# Repeat the lines until shift started.
 		if true:
 			var repeat_lines: Array[String] = [
@@ -217,26 +69,11 @@ func start_day() -> void:
 				func() -> bool:
 					return Global.shift_started
 			)
-			
 			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 		
 		await Global.voice_line_system.play_voice_line("day_0_intro_9_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		
-		is_in_skippable_cinematic = true
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		_cinematic_camera.enable_cinematic_camera(0.5)
-		_cinematic_camera.cinematic_bars.show_bars(0.5)
 
-		_cinematic_camera.play_animation("day_0_intro_9_0")
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_9_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		is_in_skippable_cinematic = false
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		_cinematic_camera.cinematic_bars.hide_bars(0.5)
-		await _cinematic_camera.disable_cinematic_camera(0.5)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_3)
 		
 		# Repeat the lines until machine used.
 		if true:
@@ -253,11 +90,10 @@ func start_day() -> void:
 				func() -> bool:
 					return Global.tutorial_machine_used
 			)
-
 			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 		
 		await Global.voice_line_system.play_voice_line("day_0_intro_10_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
+		
 		# First customer, accept order
 		Global.main_scene.tutorial_machine.force_next_drink_perfect()
 		Global.main_scene.tutorial_machine.set_order_action_buttons_available("accept")
@@ -269,38 +105,8 @@ func start_day() -> void:
 		
 		await Global.main_scene.tutorial_machine.drink_prepared
 
-		is_in_skippable_cinematic = true
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		_cinematic_camera.enable_cinematic_camera(0.5)
-		_cinematic_camera.cinematic_bars.show_bars(0.5)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_4)
 
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_made_drink_preview_position.global_position, 1.0)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_made_drink_preview_position.global_rotation, 1.0)
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_10_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_accept_button_preview_position.global_position, 1.0)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_accept_button_preview_position.global_rotation, 1.0)
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_10_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 0.5)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 0.5)
-
-		is_in_skippable_cinematic = false
-		_cinematic_camera.cinematic_bars.hide_bars(0.5)
-		await _cinematic_camera.disable_cinematic_camera(0.5)
-		
 		# Repeat the lines until accept button is pressed.
 		if true:
 			var repeat_lines: Array[String] = [
@@ -316,7 +122,6 @@ func start_day() -> void:
 				func() -> bool:
 					return Global.tutorial_drink_correct_accepted
 			)
-
 			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 		
 		await Global.voice_line_system.play_voice_line("day_0_intro_11_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
@@ -332,49 +137,7 @@ func start_day() -> void:
 		
 		await Global.main_scene.tutorial_machine.drink_prepared
 
-		is_in_skippable_cinematic = true
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		_cinematic_camera.enable_cinematic_camera(0.5)
-		_cinematic_camera.cinematic_bars.show_bars(0.5)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_machine_screen_preview_position.global_position, 1.0)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_machine_screen_preview_position.global_rotation, 1.0)
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_made_drink_preview_position.global_position, 1.0)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_made_drink_preview_position.global_rotation, 1.0)
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_remake_button_preview_position.global_position, 1.0)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_remake_button_preview_position.global_rotation, 1.0)
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_5", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_6", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_11_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 0.5)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 0.5)
-		
-		is_in_skippable_cinematic = false
-		_cinematic_camera.cinematic_bars.hide_bars(0.5)
-		await _cinematic_camera.disable_cinematic_camera(0.5)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_5)
 		
 		# Repeat the lines until accept or remake button is pressed.
 		if true:
@@ -390,7 +153,6 @@ func start_day() -> void:
 				func() -> bool:
 					return Global.tutorial_drink_incorrect_accepted or Global.tutorial_remake_button_pressed
 			)
-
 			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 		
 		while true:
@@ -412,40 +174,9 @@ func start_day() -> void:
 					await Global.main_scene.tutorial_machine.drink_prepared
 					
 					is_in_skippable_cinematic = true
-					_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-					_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-					_cinematic_camera.enable_cinematic_camera(0.5)
-					_cinematic_camera.cinematic_bars.show_bars(0.5)
-
-					if true:
-						var tween: Tween = create_tween()
-						tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_made_drink_preview_position.global_position, 1.0)
-						tween.set_parallel()
-						tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_made_drink_preview_position.global_rotation, 1.0)
-	
-					await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-					await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-					if true:
-						var tween: Tween = create_tween()
-						tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_remake_button_preview_position.global_position, 1.0)
-						tween.set_parallel()
-						tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_remake_button_preview_position.global_rotation, 1.0)
 					
-					await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-					await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_5", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-					await Global.voice_line_system.play_voice_line("day_0_intro_11_repeat_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-					if true:
-						var tween: Tween = create_tween()
-						tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 0.5)
-						tween.set_parallel()
-						tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 0.5)
-	
-					is_in_skippable_cinematic = false
-					_cinematic_camera.cinematic_bars.hide_bars(0.5)
-					await _cinematic_camera.disable_cinematic_camera(0.5)
-	
+					await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_6)
+					
 					# Repeat the lines until accept or remake button is pressed.
 					if true:
 						var repeat_lines: Array[String] = [
@@ -470,19 +201,7 @@ func start_day() -> void:
 					if Global.tutorial_remake_button_pressed:
 						break
 
-			is_in_skippable_cinematic = true
-			_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-			_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-			_player_ui_sub_viewport_container.set_allow_input(false)
-			_cinematic_camera.cinematic_bars.show_bars(0.5)
-			
-			await Global.voice_line_system.play_voice_line("day_0_intro_12_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_12_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("day_0_intro_12_2", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-			is_in_skippable_cinematic = false
-			_cinematic_camera.cinematic_bars.hide_bars(0.5)
-			_player_ui_sub_viewport_container.set_allow_input(true)
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_7)
 
 			# Repeat the lines until drink is remade, or accept is pressed.
 			if true:
@@ -500,7 +219,6 @@ func start_day() -> void:
 					func() -> bool:
 						return Global.tutorial_drink_incorrect_accepted or Global.tutorial_drink_remade
 				)
-				
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 			if Global.tutorial_drink_remade:
@@ -510,41 +228,11 @@ func start_day() -> void:
 		await Global.voice_line_system.play_voice_line("day_0_intro_13_1", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 		# Machine runs out of ingredients.
-		# Global.main_scene.tutorial_machine.customer = null
-		# Global.main_scene.tutorial_machine.waiting_for_response = false
 		Global.main_scene.tutorial_machine.ingredients = 0
 		Global.main_scene.tutorial_machine.no_ingredients_sound.play()
 		Global.main_scene.tutorial_machine.set_order_action_buttons_available("refill")
 
-		is_in_skippable_cinematic = true
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		_cinematic_camera.enable_cinematic_camera(0.5)
-		_cinematic_camera.cinematic_bars.show_bars(0.5)
-
-		if true:
-			var tween: Tween = create_tween()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_position", _day_0_ingredients_bar_preview_position.global_position, 1.0)
-			tween.set_parallel()
-			tween.tween_property(_cinematic_camera.camera_rig_node, "global_rotation", _day_0_ingredients_bar_preview_position.global_rotation, 1.0)
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_13_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_13_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_13_4", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		_cinematic_camera.play_animation("day_0_intro_13_0")
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_13_5", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		_cinematic_camera.play_animation("day_0_intro_13_1")
-		
-		await Global.voice_line_system.play_voice_line("day_0_intro_13_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		is_in_skippable_cinematic = false
-		_cinematic_camera.cinematic_bars.hide_bars(0.5)
-		await _cinematic_camera.disable_cinematic_camera(0.5)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_8)
 
 		# Repeat the lines until ingredient bag is picked up.
 		if true:
@@ -565,24 +253,8 @@ func start_day() -> void:
 			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 		await get_tree().create_timer(1.0).timeout
-		
-		is_in_skippable_cinematic = true
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		_cinematic_camera.enable_cinematic_camera(0.5)
-		await _cinematic_camera.cinematic_bars.show_bars(0.5)
 
-		_cinematic_camera.camera_rig_node.global_position = _day_0_ingredients_bar_preview_position.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = _day_0_ingredients_bar_preview_position.global_rotation
-
-		await Global.voice_line_system.play_voice_line("day_0_intro_14_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-		await Global.voice_line_system.play_voice_line("day_0_intro_14_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-		_cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-		_cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-		is_in_skippable_cinematic = false
-		_cinematic_camera.cinematic_bars.hide_bars(0.5)
-		await _cinematic_camera.disable_cinematic_camera(0.5)
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_0_9)
 
 		# Repeat the lines until ingredients are filled to enough.
 		if true:
@@ -608,16 +280,41 @@ func start_day() -> void:
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 		return
 		
-	elif Global.day == 1:
+	elif Global.day == 1 and not skip_cutscenes:
+		# Show the Tippy Tablet prop
+		_day_1_tippy_tablet_prop.visible = true
+
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_0)
 		
+		await _day_1_tippy_tablet_area_detector.player_entered_area
+
+		await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_1)
+		
+		# Repeat the lines until shift started.
+		if true:
+			var repeat_lines: Array[String] = [
+				"day_1_intro_3_repeat_0",
+				"day_1_intro_3_repeat_1"
+			]
+			var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+				VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+				VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+				]
+			var condition_callable: Callable = (
+				func() -> bool:
+					return Global.shift_started
+			)
+			await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+		
+		await Global.voice_line_system.play_voice_line("day_1_intro_4_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+		
+	elif Global.day == 2 and not skip_cutscenes:
 		pass
-	elif Global.day == 2:
+	elif Global.day == 3 and not skip_cutscenes:
 		pass
-	elif Global.day == 3:
+	elif Global.day == 4 and not skip_cutscenes:
 		pass
-	elif Global.day == 4:
-		pass
-	elif Global.day == 5:
+	elif Global.day == 5 and not skip_cutscenes:
 		pass
 
 	# Re-enable Tippy callouts
@@ -660,3 +357,20 @@ func _repeat_line_until_condition_met(voice_line_ids: Array[String], voice_line_
 	
 	repeat_instruction_timer.stop()
 	repeat_instruction_timer.queue_free()
+
+func _run_skippable_tutorial_part(tutorial_part_enum: SkippableTutorialPart.TutorialPartEnum) -> void:
+	var skippable_tutorial_part: SkippableTutorialPart = SkippableTutorialPart.new()
+	add_child(skippable_tutorial_part)
+	skippable_tutorial_part.setup(self)
+	skippable_tutorial_part.run_tutorial_part(tutorial_part_enum)
+	while !skippable_tutorial_part.finished_tutorial_part:
+		if skip_part_requested:
+			skip_part_requested = false
+			skippable_tutorial_part.queue_free()
+			skippable_tutorial_part = SkippableTutorialPart.new()
+			add_child(skippable_tutorial_part)
+			skippable_tutorial_part.setup(self)
+			await skippable_tutorial_part.skip_tutorial_part(tutorial_part_enum)
+			return
+		await get_tree().process_frame
+	skippable_tutorial_part.queue_free()
