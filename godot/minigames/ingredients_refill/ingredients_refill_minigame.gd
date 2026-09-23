@@ -57,7 +57,6 @@ var spawn_trajectory: Vector2
 # its passed to machine.gd @ end of minigame to determine how much to fill up
 var accuracy: float = 0.0
 
-var coffee_dust_clone_array:Array[GPUParticles2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,22 +66,18 @@ func _ready() -> void:
 	cup_area.body_exited.connect(spill_bean)
 
 	bag_shake_tween = create_tween().set_loops()
+	var tween_time = bean_spawn_timer.wait_time
+	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees - 30, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
-	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	bag_shake_tween.parallel().tween_property(bag, "rotation_degrees", bag.rotation_degrees - 30, 0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	
-	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, 0.2)
-	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees + 30, 0.2)
+	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, tween_time)
+	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees + 30, tween_time)
 
 	cup_boundaries.body_entered.connect(
 		func(body):
 			if body.is_in_group("beans"):
 				bean_hit_glasss_sound.play(),
 	)
-	for i in range(NUM_BEANS_TO_SPAWN):
-		var clone = coffee_dust.duplicate()
-		pour_point.add_child(clone)
-		coffee_dust_clone_array.append(clone)
 	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) #prefer right side of the screen, because that is where cup spawns
 
 
@@ -177,22 +172,20 @@ func spawn_bean() -> void:
 	return
 
 
-func spawn_normal_bean(bean: PhysicsBody2D) -> void:
+func spawn_normal_bean(bean: RigidBody2D) -> void:
 	bean = regular_bean_scene.instantiate()
 	#bean.scale= Vector2(2,2) #dont do this lol. rigidbodies will attempt to revert this.
 	bean.gravity_scale = 0.40
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
-	coffee_dust_clone_array[beans_spawned].restart()
 	bean.apply_impulse(spawn_trajectory)
 	bean.rotation_degrees = randf_range(0, 360)
-	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean
 	beans_spawned += 1
 	randomize_trajectory()
 
 
-func spawn_gold_bean(bean: PhysicsBody2D) -> void:
+func spawn_gold_bean(bean: RigidBody2D) -> void:
 	gold_bean_already_spawned = true
 	bean = golden_bean_scene.instantiate()
 	bean.gravity_scale = 0.33 + randf_range(-0.15, 0.0)
@@ -215,7 +208,7 @@ func spawn_gold_bean(bean: PhysicsBody2D) -> void:
 	beans_spawned += 1
 
 
-func spawn_bomb_bean(bean: PhysicsBody2D) -> void:
+func spawn_bomb_bean(bean: RigidBody2D) -> void:
 	bomb_bean_already_spawned = true
 	bean = bomb_bean_scene.instantiate()
 
@@ -229,7 +222,6 @@ func spawn_bomb_bean(bean: PhysicsBody2D) -> void:
 
 	#bean.apply_impulse(spawn_trajectory)
 	bean.rotation_degrees = randf_range(0, 360)
-	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean
 	beans_spawned += 1
 	randomize_trajectory()
 

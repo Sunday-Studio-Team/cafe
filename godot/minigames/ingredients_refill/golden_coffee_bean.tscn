@@ -7,15 +7,17 @@
 radius = 25.0
 height = 80.0
 
-[node name="Bean" type="RigidBody2D" unique_id=68542228]
+[node name="Bean" type="RigidBody2D" unique_id=68542228 node_paths=PackedStringArray("sprite_2d")]
 collision_mask = 2
 continuous_cd = 2
 script = ExtResource("1_b3x37")
+sprite_2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
-position = Vector2(-12.755, 96.695)
+position = Vector2(-9.536743e-07, 7.6293945e-06)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_trix1")
+offset = Vector2(-15.943748, 120.86874)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
 position = Vector2(-1, -1)

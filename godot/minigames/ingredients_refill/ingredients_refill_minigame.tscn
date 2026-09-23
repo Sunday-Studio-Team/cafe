@@ -96,7 +96,7 @@ normal_visual_effect = ExtResource("10_r7ncj")
 bomb_visual_effect = ExtResource("11_rw5dd")
 screw_visual_effect = ExtResource("12_tq37f")
 golden_visual_effect = ExtResource("13_lrtnr")
-coffee_dust = NodePath("Bag/PourPoint/CoffeeDust")
+coffee_dust = NodePath("Bag/CoffeeDust")
 
 [node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
 z_index = 2
@@ -178,16 +178,9 @@ texture = ExtResource("16_knrnr")
 z_index = 1
 position = Vector2(1623.625, 158.56)
 
-[node name="BagSprite" type="Sprite2D" parent="Bag" unique_id=2140708498]
-rotation = -1.1955506
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("19_r7ncj")
-
-[node name="PourPoint" type="Marker2D" parent="Bag" unique_id=1502659684]
-position = Vector2(-95.21, 20.24)
-
-[node name="CoffeeDust" type="GPUParticles2D" parent="Bag/PourPoint" unique_id=114019607]
-position = Vector2(-64.41504, -16.800003)
+[node name="CoffeeDust" type="GPUParticles2D" parent="Bag" unique_id=114019607]
+position = Vector2(-149.625, -9.559967)
+scale = Vector2(1.0000001, 1.0000001)
 amount = 72
 texture = SubResource("GradientTexture2D_fog85")
 lifetime = 1.5
@@ -195,6 +188,15 @@ randomness = 1.0
 trail_enabled = true
 trail_lifetime = 0.14
 process_material = ExtResource("19_rw5dd")
+
+[node name="BagSprite" type="Sprite2D" parent="Bag" unique_id=2140708498]
+position = Vector2(10.375, 27.440002)
+rotation = -1.1955506
+scale = Vector2(0.6000001, 0.6000001)
+texture = ExtResource("19_r7ncj")
+
+[node name="PourPoint" type="Marker2D" parent="Bag" unique_id=1502659684]
+position = Vector2(-95.21, 20.24)
 
 [node name="BagShakeSound" type="AudioStreamPlayer2D" parent="Bag" unique_id=966938843]
 stream = ExtResource("9_j5bal")

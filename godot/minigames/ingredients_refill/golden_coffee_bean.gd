@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 var time_counter_float: float = 0.0
+@export var sprite_2d: Sprite2D
 
 var seconds_passed: float = 0.0
 var is_gold: bool = false
@@ -28,6 +29,7 @@ func _physics_process(delta: float) -> void:
 			set_collision_mask_value(1, true)
 		return
 	
+	sprite_2d.rotation_degrees += 15
 	time_counter_float += delta
 	seconds_passed+= delta
 	#print(linear_velocity.y)

@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://ct8w35tok47ha" path="res://minigames/ingredients_refill/bomb/bomb_coffee_bean.png" id="1_oqf6p"]
 [ext_resource type="Script" uid="uid://c52ddp2hlyea7" path="res://minigames/ingredients_refill/bomb_coffee_bean.gd" id="1_xmr56"]
+[ext_resource type="Material" uid="uid://dlpjugrlxarqx" path="res://resources/misc_resources/refill_minigame_bomb_fuse_fizzle.tres" id="3_5lq3x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cuth0"]
-radius = 35.0
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_laqqv"]
+blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_xmr56"]
 interpolation_mode = 1
@@ -14,28 +15,83 @@ metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5lq3x"]
 gradient = SubResource("Gradient_xmr56")
-width = 24
-height = 24
+width = 96
+height = 96
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[node name="Bean" type="RigidBody2D" unique_id=68542228]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cuth0"]
+radius = 35.0
+
+[sub_resource type="Animation" id="Animation_xmr56"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5lq3x"]
+resource_name = "flash"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.8105738, 0, 0.1515992, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5uu3k"]
+_data = {
+&"RESET": SubResource("Animation_xmr56"),
+&"flash": SubResource("Animation_5lq3x")
+}
+
+[node name="Bean" type="RigidBody2D" unique_id=68542228 node_paths=PackedStringArray("animation_player", "sprite_2d")]
 collision_mask = 2
 continuous_cd = 2
 script = ExtResource("1_xmr56")
+animation_player = NodePath("AnimationPlayer")
+sprite_2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
-position = Vector2(-19.52, 94.585)
+position = Vector2(-1.1920929e-07, -5.684342e-14)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_oqf6p")
+offset = Vector2(-24.400011, 118.23125)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2D" unique_id=1666125092]
+material = SubResource("CanvasItemMaterial_laqqv")
+position = Vector2(80, -64.999985)
+scale = Vector2(1.2499999, 1.2499999)
+amount = 128
+texture = SubResource("GradientTexture2D_5lq3x")
+lifetime = 2.0
+speed_scale = 4.0
+randomness = 1.0
+trail_lifetime = 0.2
+process_material = ExtResource("3_5lq3x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
 position = Vector2(-1, -1)
 rotation = -0.7382135
 shape = SubResource("CircleShape2D_cuth0")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1666125092]
-position = Vector2(68, -55)
-texture = SubResource("GradientTexture2D_5lq3x")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1731438266]
+libraries/ = SubResource("AnimationLibrary_5uu3k")

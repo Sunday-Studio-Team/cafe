@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drt6mt6shf1t5" path="res://minigames/ingredients_refill/coffee_bean.gd" id="1_hjpyt"]
 [ext_resource type="Texture2D" uid="uid://d2cqpi0gkd51p" path="res://minigames/ingredients_refill/normal/coffee bean.png" id="1_qurre"]
-[ext_resource type="Script" uid="uid://bcvbxyx21awry" path="res://minigames/ingredients_refill/normal_bean_white_trail.gd" id="3_0u6p0"]
+[ext_resource type="Script" uid="uid://cvsuhgopkoc11" path="res://minigames/ingredients_refill/normal_bean_white_trail.gd" id="3_0u6p0"]
 [ext_resource type="Script" uid="uid://ftx0e8nnyhhv" path="res://minigames/ingredients_refill/normal_bean_black_trail.gd" id="4_8rkep"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
@@ -13,15 +13,17 @@ height = 80.0
 _data = [Vector2(0.010075569, 0), 0.0, 6.9518447, 0, 0, Vector2(0.030303031, 0.99512196), 0.0, 0.0, 0, 0, Vector2(0.9318182, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.69756097), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[node name="Bean" type="RigidBody2D" unique_id=68542228]
+[node name="Bean" type="RigidBody2D" unique_id=68542228 node_paths=PackedStringArray("sprite_2d")]
 collision_mask = 2
 continuous_cd = 2
 script = ExtResource("1_hjpyt")
+sprite_2d = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
-position = Vector2(-14.36, 93.335)
+position = Vector2(1.1920929e-07, 1.1920929e-07)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_qurre")
+offset = Vector2(-17.949999, 116.66875)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
 position = Vector2(-1, -1)
