@@ -241,7 +241,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			gain_score_sound.play()
 			return
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
-			cup_face_sprite.texture = normal_face_sprite
+			#cup_face_sprite.texture = normal_face_sprite
 			visual_effect.texture = normal_visual_effect
 			beans_in_cup += 1
 			gain_score_sound.play()
@@ -257,7 +257,7 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 
 
 func bomb() -> void:
-	cup_face_sprite.texture = bomb_face_sprite
+	#cup_face_sprite.texture = bomb_face_sprite
 	visual_effect.texture = bomb_visual_effect
 
 	var using_machine: Machine = Global.machine_in_use
@@ -270,7 +270,7 @@ func bomb() -> void:
 
 
 func screw():
-	cup_face_sprite.texture = screw_face_sprite
+	#cup_face_sprite.texture = screw_face_sprite
 	visual_effect.texture = screw_visual_effect
 
 	var _closest_machine = get_closest_machine_or_null()
@@ -285,7 +285,7 @@ func screw():
 
 
 func gold(bean: PhysicsBody2D):
-	cup_face_sprite.texture = golden_face_sprite
+	#cup_face_sprite.texture = golden_face_sprite
 	visual_effect.texture = golden_visual_effect
 
 	await get_tree().create_timer(0.5, false).timeout
