@@ -179,11 +179,13 @@ func _ready() -> void:
 
 var current_ingbar_animation:Array[Texture2D]:
 	set(value):
+		if value == current_ingbar_animation:
+			return
 		animation_index = 0
 		current_ingbar_animation = value
 var animation_index:int
 var animation_delay_timer:float = 0
-var animation_delay:float = 0.05
+var animation_delay:float = 0.03
 
 
 func reset_icons():
@@ -210,6 +212,7 @@ func _process(delta: float) -> void:
 	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
+	animation_delay = 0.03
 	if animation_delay_timer >= animation_delay:
 		animation_delay_timer = 0
 		update_animation()

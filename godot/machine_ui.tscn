@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://brnb1ddwmgdug" path="res://sprites/machine_ui/inactive accept button.png" id="11_10yj4"]
 [ext_resource type="Texture2D" uid="uid://cdy6nhih3dsqh" path="res://sprites/machine_ui/active remake button.png" id="12_motd3"]
 [ext_resource type="Texture2D" uid="uid://beuytn1b6cojy" path="res://sprites/machine_ui/refill bar bg.png" id="13_u8yrf"]
-[ext_resource type="Texture2D" uid="uid://dyehef5xmtkfj" path="res://sprites/machine_ui/coffee_bar_idle/machine_ingredients_bar_fill_0001.png" id="14_71all"]
 [ext_resource type="Texture2D" uid="uid://cj6lcuv5eemuu" path="res://sprites/machine_ui/refill bar border.png" id="14_l6aen"]
 [ext_resource type="Texture2D" uid="uid://yolcpmmbputy" path="res://sprites/machine_ui/inactive remake button.png" id="15_lhji5"]
 [ext_resource type="Texture2D" uid="uid://dfrwyav62s37u" path="res://sprites/machine_ui/refill button.png" id="16_10yj4"]
@@ -30,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://dyrk2sdr15vln" path="res://sprites/machine_ui/result_icons/green on arrow.png" id="24_il7ix"]
 [ext_resource type="Texture2D" uid="uid://cm25043d6mjou" path="res://sprites/machine_ui/result_icons/green person.png" id="25_128tk"]
 [ext_resource type="Texture2D" uid="uid://bo30mnulpbaus" path="res://sprites/machine_ui/smaller screen with timer.png" id="26_wknqb"]
+[ext_resource type="Texture2D" uid="uid://b7l2bda3t1ha0" path="res://sprites/machine_ui/coffee_bar_idle/DM_CB_IDLE_V02_0001.png" id="29_wknqb"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -40,6 +40,9 @@ frame_0/texture = ExtResource("5_qwcv2")
 frame_0/duration = 0.5
 frame_1/texture = ExtResource("6_dw44w")
 frame_1/duration = 0.5
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x6rj0"]
+load_path = "res://.godot/imported/machine_ingredients_bar_fill_0001.png-e08673d80bf472c48481e00f9cecf9fd.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwcv2"]
 bg_color = Color(0.999996, 0.30647203, 0.34021902, 1)
@@ -648,7 +651,7 @@ value = 100.0
 fill_mode = 3
 texture_under = ExtResource("13_u8yrf")
 texture_over = ExtResource("14_l6aen")
-texture_progress = ExtResource("14_71all")
+texture_progress = SubResource("CompressedTexture2D_x6rj0")
 texture_progress_offset = Vector2(0, 1100)
 
 [node name="ProgressUnder" type="TextureRect" parent="IngredientsUI/MarginContainer" unique_id=699698]
@@ -664,7 +667,7 @@ offset_top = 1125.0
 offset_right = 138.0
 offset_bottom = 2325.0
 size_flags_horizontal = 4
-texture = ExtResource("14_71all")
+texture = ExtResource("29_wknqb")
 stretch_mode = 2
 
 [node name="ProgressOver" type="TextureRect" parent="IngredientsUI/MarginContainer" unique_id=1307975669]
