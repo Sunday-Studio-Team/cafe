@@ -53,7 +53,8 @@ func uncache_resource(token: ResourceBackgroundLoaderToken) -> void:
 		# If no tokens for this resource remain, uncache it.
 		if token_array.tokens.size() == 0:
 			resource_uid_to_token_array_dict.erase(token.resource_uid)
-			resource_uid_to_resource_dict.erase(token.resource_uid)
+			if resource_uid_to_resource_dict.has(token.resource_uid):
+				resource_uid_to_resource_dict.erase(token.resource_uid)
 			print("ResourceBackgroundLoader: Uncaching resource %s." % token.resource_uid)
 
 func get_resource(token: ResourceBackgroundLoaderToken) -> Resource:
