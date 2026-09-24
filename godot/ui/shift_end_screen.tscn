@@ -1,125 +1,46 @@
 [gd_scene format=3 uid="uid://c1vvwndvemdbo"]
 
 [ext_resource type="Script" uid="uid://b8sg6i3bs1b3b" path="res://ui/shift_end_screen.gd" id="1_cwskb"]
+[ext_resource type="Texture2D" uid="uid://bsam3ndhw4n07" path="res://sprites/endshift_ui/first_part/amazing_paper_colored.png" id="2_6ln01"]
 [ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
 [ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
-[ext_resource type="Texture2D" uid="uid://bsam3ndhw4n07" path="res://sprites/endshift_ui/amazing_paper_colored.png" id="3_t50qp"]
 [ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
-[ext_resource type="Texture2D" uid="uid://vkfhygnpe56j" path="res://sprites/endshift_ui/tippy_fail_colored_v2.png" id="4_l71wa"]
 [ext_resource type="FontFile" uid="uid://f12jkge7ui88" path="res://fonts/komika/Komika_display_kaps.ttf" id="4_s5d2k"]
+[ext_resource type="Texture2D" uid="uid://vkfhygnpe56j" path="res://sprites/endshift_ui/first_part/tippy_fail_colored_v2.png" id="5_4pg7j"]
 [ext_resource type="FontFile" uid="uid://cikerrpxvai6v" path="res://fonts/komika/Komika_display_kaps_bold.ttf" id="5_e16oh"]
-[ext_resource type="Texture2D" uid="uid://bsyqh1ej3oxex" path="res://sprites/endshift_ui/pass_grade_colored_v2.png" id="5_fh4al"]
 [ext_resource type="AudioStream" uid="uid://cww7w5j41tgbm" path="res://audio/time_up.wav" id="5_iiu1j"]
-[ext_resource type="Texture2D" uid="uid://bwy636l6ajv5w" path="res://sprites/endshift_ui/money_right_colored.png" id="6_66p45"]
 [ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
-[ext_resource type="Texture2D" uid="uid://d2v08e48term0" path="res://sprites/endshift_ui/tippy_pass_v2.png" id="7_3n0pv"]
+[ext_resource type="Texture2D" uid="uid://bsyqh1ej3oxex" path="res://sprites/endshift_ui/first_part/pass_grade_colored_v2.png" id="6_hi220"]
+[ext_resource type="Texture2D" uid="uid://bwy636l6ajv5w" path="res://sprites/endshift_ui/first_part/money_right_colored.png" id="7_nw8o8"]
 [ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
-[ext_resource type="Texture2D" uid="uid://by7lnyysdhvvw" path="res://sprites/endshift_ui/money_leftcorner_colored copy.png" id="8_s5d2k"]
-[ext_resource type="Texture2D" uid="uid://durkhraw8k71a" path="res://sprites/endshift_ui/money_center_colored copy.png" id="9_e16oh"]
-[ext_resource type="Texture2D" uid="uid://dalclkggajc36" path="res://sprites/endshift_ui/tippy_angry.png" id="10_66p45"]
-[ext_resource type="Texture2D" uid="uid://bmuf31kycwlk3" path="res://sprites/endshift_ui/f_fail_colored_v3.png" id="11_3n0pv"]
+[ext_resource type="Texture2D" uid="uid://d2v08e48term0" path="res://sprites/endshift_ui/first_part/tippy_pass_v2.png" id="8_g5mai"]
+[ext_resource type="Texture2D" uid="uid://by7lnyysdhvvw" path="res://sprites/endshift_ui/first_part/money_leftcorner_colored copy.png" id="9_g0eae"]
+[ext_resource type="Texture2D" uid="uid://durkhraw8k71a" path="res://sprites/endshift_ui/first_part/money_center_colored copy.png" id="10_jnbcj"]
+[ext_resource type="Texture2D" uid="uid://c3yhicdlivlkj" path="res://sprites/endshift_ui/second_part/rating_sato.png" id="11_iqeri"]
+[ext_resource type="Texture2D" uid="uid://dalclkggajc36" path="res://sprites/endshift_ui/first_part/tippy_angry.png" id="12_appuh"]
 [ext_resource type="AudioStream" uid="uid://bvd7epjeo0nwc" path="res://audio/end_shift_ui/falling_letter_buildup_and_crash_lose.wav" id="12_e16oh"]
-[ext_resource type="Texture2D" uid="uid://b41bjd1ujbwbc" path="res://sprites/endshift_ui/failed_paper_colored.png" id="12_s5d2k"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="12_ohy67"]
+[ext_resource type="Texture2D" uid="uid://bmuf31kycwlk3" path="res://sprites/endshift_ui/first_part/f_fail_colored_v3.png" id="14_ohy67"]
 [ext_resource type="AudioStream" uid="uid://d0xui4lcbes53" path="res://audio/end_shift_ui/falling_letter_buildup_and_crash_win.wav" id="14_s5d2k"]
-
-[sub_resource type="Theme" id="Theme_70k24"]
-default_font_size = 128
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3n0pv"]
-bg_color = Color(0.6, 0.52156866, 0.4745098, 1)
-border_width_left = 5
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 25
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 25
-expand_margin_right = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5d2k"]
-bg_color = Color(0.61960787, 0.5019608, 0.36078432, 1)
-border_width_left = 5
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 25
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e16oh"]
-bg_color = Color(0.19215687, 0.20392157, 0.19607843, 1)
-border_width_left = 5
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0.40392157, 0.32156864, 0.22352941, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 25
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 25
-expand_margin_right = 10.0
-
-[sub_resource type="FontFile" id="FontFile_8u4h4"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-cache/0/variation_coordinates = {}
-cache/0/face_index = 0
-cache/0/embolden = 0.0
-cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
-cache/0/spacing_top = 0
-cache/0/spacing_bottom = 0
-cache/0/spacing_space = 0
-cache/0/spacing_glyph = 0
-cache/0/baseline_offset = 0.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/64/0/ascent = 0.0
-cache/0/64/0/descent = 0.0
-cache/0/64/0/underline_position = 0.0
-cache/0/64/0/underline_thickness = 0.0
-cache/0/64/0/scale = 1.0
-cache/0/48/0/ascent = 0.0
-cache/0/48/0/descent = 0.0
-cache/0/48/0/underline_position = 0.0
-cache/0/48/0/underline_thickness = 0.0
-cache/0/48/0/scale = 1.0
-cache/0/24/0/ascent = 0.0
-cache/0/24/0/descent = 0.0
-cache/0/24/0/underline_position = 0.0
-cache/0/24/0/underline_thickness = 0.0
-cache/0/24/0/scale = 1.0
-cache/0/128/0/ascent = 0.0
-cache/0/128/0/descent = 0.0
-cache/0/128/0/underline_position = 0.0
-cache/0/128/0/underline_thickness = 0.0
-cache/0/128/0/scale = 1.0
-cache/0/96/0/ascent = 0.0
-cache/0/96/0/descent = 0.0
-cache/0/96/0/underline_position = 0.0
-cache/0/96/0/underline_thickness = 0.0
-cache/0/96/0/scale = 1.0
-
-[sub_resource type="Theme" id="Theme_j2nqk"]
-default_font = SubResource("FontFile_8u4h4")
-Button/icons/icon = null
-Button/styles/hover = SubResource("StyleBoxFlat_3n0pv")
-Button/styles/normal = SubResource("StyleBoxFlat_s5d2k")
-Button/styles/pressed = SubResource("StyleBoxFlat_e16oh")
+[ext_resource type="Texture2D" uid="uid://cy3s03ha65huu" path="res://sprites/endshift_ui/second_part/rating_reward.png" id="15_hi220"]
+[ext_resource type="Texture2D" uid="uid://b41bjd1ujbwbc" path="res://sprites/endshift_ui/first_part/failed_paper_colored.png" id="15_qkoyh"]
+[ext_resource type="Texture2D" uid="uid://ddb2lvi5auue4" path="res://sprites/items/scrubber.png" id="16_g5mai"]
+[ext_resource type="Texture2D" uid="uid://7hdw8mrd46ud" path="res://sprites/endshift_ui/second_part/rating_rewardlocked.png" id="16_nw8o8"]
+[ext_resource type="Texture2D" uid="uid://boomq8jce46kw" path="res://sprites/endshift_ui/second_part/rating_lock.png" id="18_g0eae"]
+[ext_resource type="Texture2D" uid="uid://dbxgwm0dd437s" path="res://sprites/endshift_ui/second_part/star.png" id="19_qkoyh"]
+[ext_resource type="Texture2D" uid="uid://0yrx4wxp4vex" path="res://sprites/endshift_ui/second_part/rating_phonecat.png" id="20_em210"]
+[ext_resource type="Texture2D" uid="uid://dk2mgca6q6oe8" path="res://sprites/endshift_ui/second_part/sato_handL.png" id="21_c1exd"]
+[ext_resource type="Texture2D" uid="uid://dp3wm37kwvm1q" path="res://sprites/endshift_ui/second_part/sato_handR.png" id="22_yx15a"]
+[ext_resource type="Texture2D" uid="uid://8asjs5hsblmy" path="res://sprites/endshift_ui/second_part/rating_phone.png" id="23_em210"]
+[ext_resource type="Texture2D" uid="uid://bokqxjmqqvj8x" path="res://sprites/endshift_ui/second_part/stars_greyed.png" id="24_c1exd"]
+[ext_resource type="Texture2D" uid="uid://2rm8v77lejbi" path="res://sprites/endshift_ui/second_part/stars_fill.png" id="25_yx15a"]
 
 [sub_resource type="Animation" id="Animation_j2nqk"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NewUIContainer/Paper:offset_transform_position")
+tracks/0/path = NodePath("FirstPartContainer/Paper:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +52,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("NewUIContainer/Letter:offset_transform_position")
+tracks/1/path = NodePath("FirstPartContainer/Letter:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -143,7 +64,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("NewUIContainer/MoneyRight:offset_transform_position")
+tracks/2/path = NodePath("FirstPartContainer/MoneyRight:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -155,7 +76,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("NewUIContainer/TippyPass:offset_transform_position")
+tracks/3/path = NodePath("FirstPartContainer/TippyPass:offset_transform_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -167,7 +88,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("NewUIContainer/MoneyLeft:offset_transform_position")
+tracks/4/path = NodePath("FirstPartContainer/MoneyLeft:offset_transform_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -179,7 +100,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("NewUIContainer/MoneyCenter:offset_transform_position")
+tracks/5/path = NodePath("FirstPartContainer/MoneyCenter:offset_transform_position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -191,31 +112,31 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("NewUIContainer/Letter:texture")
+tracks/6/path = NodePath("FirstPartContainer/Letter:texture")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_fh4al")]
+"values": [ExtResource("6_hi220")]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("NewUIContainer/Paper:texture")
+tracks/7/path = NodePath("FirstPartContainer/Paper:texture")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_t50qp")]
+"values": [ExtResource("2_6ln01")]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("NewUIContainer/Letter:scale")
+tracks/8/path = NodePath("FirstPartContainer/Letter:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -227,7 +148,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("NewUIContainer/TippyFail:visible")
+tracks/9/path = NodePath("FirstPartContainer/TippyFail:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -239,7 +160,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("NewUIContainer/TippyPass:visible")
+tracks/10/path = NodePath("FirstPartContainer/TippyPass:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -251,19 +172,19 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("NewUIContainer/TippyFail:texture")
+tracks/11/path = NodePath("FirstPartContainer/TippyFail:texture")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_l71wa")]
+"values": [ExtResource("5_4pg7j")]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("NewUIContainer/TippyFail:offset_transform_position")
+tracks/12/path = NodePath("FirstPartContainer/TippyFail:offset_transform_position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -275,7 +196,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("NewUIContainer/TippyFail:scale")
+tracks/13/path = NodePath("FirstPartContainer/TippyFail:scale")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -283,6 +204,18 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("FirstPartContainer:offset_transform_position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_e16oh"]
@@ -292,7 +225,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NewUIContainer/Paper:offset_transform_position")
+tracks/0/path = NodePath("FirstPartContainer/Paper:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -304,7 +237,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("NewUIContainer/Letter:offset_transform_position")
+tracks/1/path = NodePath("FirstPartContainer/Letter:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -316,7 +249,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("NewUIContainer/MoneyRight:offset_transform_position")
+tracks/2/path = NodePath("FirstPartContainer/MoneyRight:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -328,7 +261,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("NewUIContainer/MoneyLeft:offset_transform_position")
+tracks/3/path = NodePath("FirstPartContainer/MoneyLeft:offset_transform_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -340,7 +273,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("NewUIContainer/MoneyCenter:offset_transform_position")
+tracks/4/path = NodePath("FirstPartContainer/MoneyCenter:offset_transform_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -352,31 +285,31 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("NewUIContainer/Letter:texture")
+tracks/5/path = NodePath("FirstPartContainer/Letter:texture")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_3n0pv")]
+"values": [ExtResource("14_ohy67")]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("NewUIContainer/Paper:texture")
+tracks/6/path = NodePath("FirstPartContainer/Paper:texture")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_s5d2k")]
+"values": [ExtResource("15_qkoyh")]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("NewUIContainer/Letter:scale")
+tracks/7/path = NodePath("FirstPartContainer/Letter:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -388,7 +321,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("NewUIContainer/TippyFail:visible")
+tracks/8/path = NodePath("FirstPartContainer/TippyFail:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -400,7 +333,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("NewUIContainer/TippyPass:visible")
+tracks/9/path = NodePath("FirstPartContainer/TippyPass:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -412,19 +345,19 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("NewUIContainer/TippyFail:texture")
+tracks/10/path = NodePath("FirstPartContainer/TippyFail:texture")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("10_66p45"), ExtResource("4_l71wa")]
+"values": [ExtResource("12_appuh"), ExtResource("5_4pg7j")]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("NewUIContainer/TippyFail:offset_transform_position")
+tracks/11/path = NodePath("FirstPartContainer/TippyFail:offset_transform_position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -436,7 +369,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("NewUIContainer/TippyFail:scale")
+tracks/12/path = NodePath("FirstPartContainer/TippyFail:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -482,7 +415,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NewUIContainer/Paper:offset_transform_position")
+tracks/0/path = NodePath("FirstPartContainer/Paper:offset_transform_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -494,7 +427,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("NewUIContainer/Letter:offset_transform_position")
+tracks/1/path = NodePath("FirstPartContainer/Letter:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -506,7 +439,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("NewUIContainer/MoneyRight:offset_transform_position")
+tracks/2/path = NodePath("FirstPartContainer/MoneyRight:offset_transform_position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -518,7 +451,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("NewUIContainer/TippyPass:offset_transform_position")
+tracks/3/path = NodePath("FirstPartContainer/TippyPass:offset_transform_position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -530,7 +463,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("NewUIContainer/MoneyLeft:offset_transform_position")
+tracks/4/path = NodePath("FirstPartContainer/MoneyLeft:offset_transform_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -542,7 +475,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("NewUIContainer/MoneyCenter:offset_transform_position")
+tracks/5/path = NodePath("FirstPartContainer/MoneyCenter:offset_transform_position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -554,31 +487,31 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("NewUIContainer/Letter:texture")
+tracks/6/path = NodePath("FirstPartContainer/Letter:texture")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_fh4al")]
+"values": [ExtResource("6_hi220")]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("NewUIContainer/Paper:texture")
+tracks/7/path = NodePath("FirstPartContainer/Paper:texture")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_t50qp")]
+"values": [ExtResource("2_6ln01")]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("NewUIContainer/Letter:scale")
+tracks/8/path = NodePath("FirstPartContainer/Letter:scale")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -590,7 +523,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("NewUIContainer/TippyFail:visible")
+tracks/9/path = NodePath("FirstPartContainer/TippyFail:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -602,7 +535,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("NewUIContainer/TippyPass:visible")
+tracks/10/path = NodePath("FirstPartContainer/TippyPass:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -627,41 +560,190 @@ tracks/11/keys = {
 }
 tracks/11/use_blend = true
 
+[sub_resource type="Animation" id="Animation_ohy67"]
+resource_name = "come_in_pass"
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FirstPartContainer/Paper:offset_transform_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FirstPartContainer/Letter:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FirstPartContainer/MoneyRight:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FirstPartContainer/TippyPass:offset_transform_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FirstPartContainer/MoneyLeft:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.99999845),
+"update": 0,
+"values": [Vector2(-160, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("FirstPartContainer/MoneyCenter:offset_transform_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 80)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("FirstPartContainer/Letter:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_hi220")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("FirstPartContainer/Paper:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FirstPartContainer/Letter:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FirstPartContainer/TippyFail:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FirstPartContainer/TippyPass:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "audio"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ArriveSound")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/11/use_blend = true
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("FirstPartContainer:offset_transform_position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(2.297397, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2100, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qc8dq"]
 _data = {
 &"RESET": SubResource("Animation_j2nqk"),
 &"come_in_fail": SubResource("Animation_e16oh"),
-&"come_in_pass": SubResource("Animation_wegfb")
+&"come_in_pass": SubResource("Animation_wegfb"),
+&"come_in_second_part": SubResource("Animation_ohy67")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "_day_label", "times_up", "outcome", "time_up_sound", "win_shift_sound", "lose_shift_sound", "_money_title_label", "_min_profit_goal_label", "_profit_made_label", "_rating_title_label", "_rating_label", "_tips_per_star_label", "_tip_jar_desc_label", "_tips_today_label", "_bank_total_label", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "button", "stars_sound", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
-_day_label = NodePath("MarginContainer/VBoxContainer/Outcome")
-times_up = NodePath("MarginContainer/TimesUp")
-outcome = NodePath("MarginContainer/VBoxContainer/Outcome2")
 time_up_sound = NodePath("TimeUpSound")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
-_money_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MoneyTitle")
-_min_profit_goal_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/MinGoal")
-_profit_made_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen/Profit")
-_rating_title_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/RatingTitle")
-_rating_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Rating")
-_tips_per_star_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info")
-_tip_jar_desc_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer/TipMultiplierDesc")
-_tips_today_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/Tips")
-_bank_total_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Rating/TipsTotal")
 bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
-button = NodePath("MarginContainer/VBoxContainer/Button")
+button = NodePath("")
 stars_sound = NodePath("StarsSound")
 animation_player = NodePath("AnimationPlayer")
-cafe_profits = NodePath("NewUIContainer/Paper/CafeProfits")
-goal = NodePath("NewUIContainer/Paper/Goal")
-earnings = NodePath("NewUIContainer/Paper/Earnings")
-new_ui_container = NodePath("NewUIContainer")
+cafe_profits = NodePath("FirstPartContainer/Paper/CafeProfits")
+goal = NodePath("FirstPartContainer/Paper/Goal")
+earnings = NodePath("FirstPartContainer/Paper/Earnings")
+new_ui_container = NodePath("FirstPartContainer")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
 anchors_preset = 15
@@ -673,209 +755,24 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 0.78431374)
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052151646]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_70k24")
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
-
-[node name="TimesUp" type="RichTextLabel" parent="MarginContainer" unique_id=1255215483]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 256
-bbcode_enabled = true
-text = "[b]TIME'S
-UP! ⌛️"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1545259444]
-layout_mode = 2
-
-[node name="Outcome" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1334439900]
-custom_minimum_size = Vector2(0, 175)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/bold_font_size = 128
-bbcode_enabled = true
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Outcome2" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=2035401107]
-custom_minimum_size = Vector2(0, 175)
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/bold_font_size = 112
-bbcode_enabled = true
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1930785200]
-layout_mode = 2
-alignment = 1
-
-[node name="MoneyCalcScreen" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=475181285]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="DayTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=123944233]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 82
-bbcode_enabled = true
-text = "[b]DAY 1"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoneyTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1739397844]
-custom_maximum_size = Vector2(1000, 100)
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 64
-bbcode_enabled = true
-text = "[b]cafe profits"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="MinGoal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1475557562]
-custom_minimum_size = Vector2(800, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "required goal: $20"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="Profit" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/MoneyCalcScreen" unique_id=1865208455]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "made today: $30.75"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Rating" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1855303608]
-layout_mode = 2
-size_flags_horizontal = 6
-
-[node name="RatingTitle" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1751468109]
-custom_maximum_size = Vector2(1000, 100)
-layout_mode = 2
-theme_override_font_sizes/bold_font_size = 64
-bbcode_enabled = true
-text = "[b]rating"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="Rating" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=54102786]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "⭐ 5.0 / 5.0"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=398510589]
-clip_contents = false
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 64
-bbcode_enabled = true
-text = "$2 tip per full star"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/Info" unique_id=648041750]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 153.0
-offset_top = -54.0
-offset_right = 473.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_rotation = 0.082030475
-alignment = 1
-
-[node name="TipMultiplierDesc" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating/Info/HBoxContainer" unique_id=668037415]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/default_color = Color(1, 0.8833333, 0, 1)
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "x1.5 from Tip Jar!"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Tips" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=2144848338]
-custom_minimum_size = Vector2(900, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/normal_font_size = 96
-bbcode_enabled = true
-text = "= +[color=gold]$10[/color] tips"
-fit_content = true
-horizontal_alignment = 1
-
-[node name="TipsTotal" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Rating" unique_id=1779244370]
-custom_minimum_size = Vector2(900, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 128
-bbcode_enabled = true
-text = "🏦 Your Bank: [color=gold]$10[/color]"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2091535216]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.1, 0.15)
-offset_transform_rotation = 0.017453292
-offset_transform_visual_only = false
-theme = SubResource("Theme_j2nqk")
-theme_override_font_sizes/font_size = 96
-text = "continue"
-
-[node name="NewUIContainer" type="Control" parent="." unique_id=683434334]
+[node name="FirstPartContainer" type="Control" parent="." unique_id=683434334]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 
-[node name="Paper" type="TextureRect" parent="NewUIContainer" unique_id=1375621846]
+[node name="Paper" type="TextureRect" parent="FirstPartContainer" unique_id=1375621846]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1080)
-texture = ExtResource("3_t50qp")
+texture = ExtResource("2_6ln01")
 
-[node name="CafeProfits" type="RichTextLabel" parent="NewUIContainer/Paper" unique_id=696352778]
+[node name="CafeProfits" type="RichTextLabel" parent="FirstPartContainer/Paper" unique_id=696352778]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -893,7 +790,7 @@ text = "Cafe Profits:"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Goal" type="RichTextLabel" parent="NewUIContainer/Paper" unique_id=1461929183]
+[node name="Goal" type="RichTextLabel" parent="FirstPartContainer/Paper" unique_id=1461929183]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -911,7 +808,7 @@ text = "Goal . . ."
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Earnings" type="RichTextLabel" parent="NewUIContainer/Paper" unique_id=1233917248]
+[node name="Earnings" type="RichTextLabel" parent="FirstPartContainer/Paper" unique_id=1233917248]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -929,26 +826,26 @@ text = "Earnings . . ."
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="TippyFail" type="TextureRect" parent="NewUIContainer" unique_id=893505267]
+[node name="TippyFail" type="TextureRect" parent="FirstPartContainer" unique_id=893505267]
 visible = false
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(1364, 897)
 offset_transform_enabled = true
-texture = ExtResource("4_l71wa")
+texture = ExtResource("5_4pg7j")
 stretch_mode = 2
 
-[node name="Letter" type="TextureRect" parent="NewUIContainer" unique_id=1340701893]
+[node name="Letter" type="TextureRect" parent="FirstPartContainer" unique_id=1340701893]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 pivot_offset = Vector2(1386, 757)
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1080)
-texture = ExtResource("5_fh4al")
+texture = ExtResource("6_hi220")
 
-[node name="MoneyRight" type="TextureRect" parent="NewUIContainer" unique_id=1876179046]
+[node name="MoneyRight" type="TextureRect" parent="FirstPartContainer" unique_id=1876179046]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -957,17 +854,17 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1080)
-texture = ExtResource("6_66p45")
+texture = ExtResource("7_nw8o8")
 
-[node name="TippyPass" type="TextureRect" parent="NewUIContainer" unique_id=1916182331]
+[node name="TippyPass" type="TextureRect" parent="FirstPartContainer" unique_id=1916182331]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1080)
-texture = ExtResource("7_3n0pv")
+texture = ExtResource("8_g5mai")
 
-[node name="MoneyLeft" type="TextureRect" parent="NewUIContainer" unique_id=1906227577]
+[node name="MoneyLeft" type="TextureRect" parent="FirstPartContainer" unique_id=1906227577]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -976,9 +873,9 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1080)
-texture = ExtResource("8_s5d2k")
+texture = ExtResource("9_g0eae")
 
-[node name="MoneyCenter" type="TextureRect" parent="NewUIContainer" unique_id=1666855026]
+[node name="MoneyCenter" type="TextureRect" parent="FirstPartContainer" unique_id=1666855026]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -987,7 +884,232 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1080)
-texture = ExtResource("9_e16oh")
+texture = ExtResource("10_jnbcj")
+
+[node name="SecondPartContainer" type="Control" parent="." unique_id=2143003842]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PhoneContainer" type="Control" parent="SecondPartContainer" unique_id=783336756]
+anchors_preset = 0
+offset_left = 428.99997
+offset_top = -192.0
+offset_right = 469.0
+offset_bottom = -152.0
+rotation = 0.21204309
+
+[node name="RatingPhone" type="TextureRect" parent="SecondPartContainer/PhoneContainer" unique_id=1212478047]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 613.5
+offset_top = -20.0
+offset_right = 1266.5
+offset_bottom = 1060.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_em210")
+
+[node name="DayLabel" type="RichTextLabel" parent="SecondPartContainer/PhoneContainer/RatingPhone" unique_id=481423562]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 345.5
+offset_top = 347.0
+offset_right = -68.5
+offset_bottom = 377.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("12_ohy67")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]Monday"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone" unique_id=121774537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 56
+theme_override_constants/margin_top = 366
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 160
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer" unique_id=38768907]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer" unique_id=975686095]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+value = 50.0
+texture_under = ExtResource("24_c1exd")
+texture_progress = ExtResource("25_yx15a")
+
+[node name="MarginContainer" type="MarginContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer" unique_id=306543128]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer" unique_id=617038392]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1256838387]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="RatingReward" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1478123130]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("15_hi220")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward" unique_id=491200722]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Item" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer" unique_id=1264031132]
+layout_mode = 2
+texture = ExtResource("16_g5mai")
+expand_mode = 2
+
+[node name="CondDef" type="RichTextLabel" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1805393626]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("12_ohy67")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]clear day 2"
+fit_content = true
+scroll_active = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=707440888]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="RatingLocked" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1120321977]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("16_nw8o8")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked" unique_id=1082270003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Item" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer" unique_id=471093985]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = ExtResource("16_g5mai")
+expand_mode = 2
+
+[node name="Lock" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer" unique_id=175630747]
+layout_mode = 2
+texture = ExtResource("18_g0eae")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1890625206]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="CondBonus" type="RichTextLabel" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=476059021]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("12_ohy67")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[right]get 5"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Star" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1535579593]
+layout_mode = 2
+size_flags_horizontal = 6
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -4)
+texture = ExtResource("19_qkoyh")
+stretch_mode = 2
+
+[node name="RatingPhonecat" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone" unique_id=1804153138]
+layout_mode = 0
+offset_left = 591.07745
+offset_top = 167.01901
+offset_right = 841.07745
+offset_bottom = 423.019
+texture = ExtResource("20_em210")
+stretch_mode = 2
+
+[node name="SatoHandL" type="TextureRect" parent="SecondPartContainer/PhoneContainer" unique_id=819158646]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 394.0
+offset_right = 696.0
+offset_bottom = 1337.0
+rotation = -0.17075253
+texture = ExtResource("21_c1exd")
+
+[node name="SatoHandR" type="TextureRect" parent="SecondPartContainer/PhoneContainer" unique_id=1265172568]
+layout_mode = 0
+offset_left = 1139.0
+offset_top = 445.0
+offset_right = 1807.0
+offset_bottom = 1228.0
+rotation = -0.17075253
+texture = ExtResource("22_yx15a")
+
+[node name="RatingSato" type="TextureRect" parent="SecondPartContainer" unique_id=683123899]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -870.0
+offset_top = -534.0
+offset_right = -303.99994
+offset_bottom = 534.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_iqeri")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1571156116]
 libraries/ = SubResource("AnimationLibrary_qc8dq")
