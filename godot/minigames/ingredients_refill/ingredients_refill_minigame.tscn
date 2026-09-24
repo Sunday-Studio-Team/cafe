@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://8peo7jc57x22" path="res://minigames/ingredients_refill/normal/effect.png" id="10_r7ncj"]
 [ext_resource type="AudioStream" uid="uid://bihgduw5aijw7" path="res://audio/refill_minigame/gain_score/refill_gain_score_2.mp3" id="11_1nxwo"]
 [ext_resource type="Texture2D" uid="uid://dbogthwjhaq3y" path="res://minigames/ingredients_refill/bomb/bomb_effect.png" id="11_rw5dd"]
+[ext_resource type="Texture2D" uid="uid://dix6vj38uasco" path="res://minigames/ingredients_refill/assets/comic_tippy_jar.png" id="11_tq37f"]
 [ext_resource type="AudioStream" uid="uid://dqpkl2k3ckoir" path="res://audio/refill_minigame/gain_score/refill_gain_score_3.mp3" id="12_aviex"]
 [ext_resource type="Texture2D" uid="uid://dvxkld1hq8dff" path="res://minigames/ingredients_refill/assets/Pot_fill.png" id="12_cuth0"]
 [ext_resource type="Texture2D" uid="uid://b0hgr4arboyh1" path="res://minigames/ingredients_refill/screw/effect.png" id="12_tq37f"]
@@ -106,18 +107,20 @@ platform_on_leave = 2
 safe_margin = 0.01
 
 [node name="Sprite2D" type="Sprite2D" parent="Cup" unique_id=241036928]
-position = Vector2(-138.6, -417.54)
-scale = Vector2(1.8, 1.8)
-texture = ExtResource("14_rw5dd")
+position = Vector2(0, -160)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_tq37f")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Cup/Sprite2D" unique_id=1582177721]
+visible = false
 texture = ExtResource("15_tq37f")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Cup/Sprite2D" unique_id=248355465]
-position = Vector2(68, 50)
-scale = Vector2(0.546, 0.546)
+position = Vector2(-43, -205)
+scale = Vector2(1.1, 1.1)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Cup/Sprite2D" unique_id=1479620205]
+visible = false
 z_index = -1
 offset_right = 700.0
 offset_bottom = 500.0
