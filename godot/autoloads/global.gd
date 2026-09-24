@@ -218,6 +218,16 @@ func load_unlocked_items_from_save() -> void:
 			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(day, [])
 			add_items_to_unlocked_list(bonus_items)
 
+func get_item(item_id:String) -> Item:
+	var found_item := false
+	for item: Item in items:
+		if item.item_id == item_id:
+			found_item = true
+			return item
+
+	if not found_item:
+		push_warning("Unlocked item not found: %s" % item_id)
+	return null
 
 func add_items_to_unlocked_list(item_ids: Array) -> void:
 	for raw_item_id in item_ids:
