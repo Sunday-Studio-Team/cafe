@@ -14,8 +14,12 @@
 [ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="6_gttkg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="8_ip2l3"]
+[ext_resource type="Resource" uid="uid://dybdvkril5y03" path="res://emails/random_emails/random_email_1.tres" id="9_s14wm"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
+[ext_resource type="Resource" uid="uid://c7bola2bkchgx" path="res://emails/random_emails/random_email_2.tres" id="10_q4gy1"]
+[ext_resource type="Resource" uid="uid://c28goevsrrpa" path="res://emails/random_emails/random_email_3.tres" id="11_cnw22"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
@@ -1381,7 +1385,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8e868"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1392,7 +1396,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2vmp2"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1403,7 +1407,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_wvmv7"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1414,7 +1418,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_us00v"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -1497,6 +1501,7 @@ day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps")
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
 _intro_email = ExtResource("6_gttkg")
+_random_emails = Array[ExtResource("8_ip2l3")]([ExtResource("9_s14wm"), ExtResource("10_q4gy1"), ExtResource("11_cnw22")])
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_cinematic_camera_voice_line_player", "_around_cafe_voice_line_players")]
 script = ExtResource("118_1slqb")
@@ -2792,7 +2797,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_l0ugm")
+texture = SubResource("ViewportTexture_8e868")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2805,7 +2810,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_dfd08")
+texture = SubResource("ViewportTexture_2vmp2")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2822,7 +2827,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fxdwr")
+texture = SubResource("ViewportTexture_wvmv7")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2839,7 +2844,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ecwfn")
+texture = SubResource("ViewportTexture_us00v")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
