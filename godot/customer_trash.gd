@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	var player = get_tree().get_first_node_in_group("player")
+	var player: Player = Global.player
 
 	if global_position.distance_to(player.global_position) <= activation_distance:
 		trash_cup.set_surface_override_material(cup_body_surface_index, xray_material)
