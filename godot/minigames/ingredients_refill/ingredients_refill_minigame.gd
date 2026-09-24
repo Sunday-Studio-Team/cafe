@@ -23,6 +23,7 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export var bean_hit_glasss_sound: AudioStreamPlayer2D
 @export var bag_shake_sound: AudioStreamPlayer2D
 @export var gain_score_sound: AudioStreamPlayer
+@export var catch_gold_bean_sound: AudioStreamPlayer
 
 @export_category("PackedScenes")
 @export var regular_bean_scene: PackedScene
@@ -238,7 +239,9 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			return
 		elif "gold" in bean_type:
 			gold(bean) # calls Events.emit_signal("minigame_end")
-			gain_score_sound.play()
+			# just in case this can get called repeatedly and make ugly sounds
+			if not catch_gold_bean_sound.playing:
+				catch_gold_bean_sound.play()
 			return
 		elif "coffee_bean" in bean_type: # this has to be last one checked, because then it is a normal bean
 			cup_face_sprite.texture = normal_face_sprite
