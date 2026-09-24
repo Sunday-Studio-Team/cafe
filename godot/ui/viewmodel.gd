@@ -12,6 +12,7 @@ extends CanvasLayer
 var _sprite_frames_always_cache_tokens: Array[ResourceBackgroundLoaderToken] = []
 var _sprite_frames_item_cache_tokens: Array[ResourceBackgroundLoaderToken] = []
 
+
 func _ready() -> void:
 	Events.items_updated.connect(_on_items_updated)
 	
@@ -42,6 +43,7 @@ func _process(_delta: float) -> void:
 func _on_play_viewmodel_animation(animation_name: String) -> void:
 	_play_animation(animation_name)
 
+
 func _on_items_updated() -> void:
 	_uncache_item_resources()
 	
@@ -59,10 +61,11 @@ func _on_items_updated() -> void:
 			token = resource_background_loader.cache_resource(_hammer_use_hand_animation_sprite_frames_uid)
 			_sprite_frames_item_cache_tokens.append(token)
 
+
 func _on_frame_changed() -> void:
 	if sprite.animation == "bag_pickup" and not Global.holding_ingredients and not Global.holding_trash:
 		_play_animation("default")
-	elif sprite.frame == 21 and sprite.animation == "hammer_use":
+	elif sprite.frame == 42 and sprite.animation == "hammer_use":
 		Events.hammer_animation_hit.emit()
 	elif sprite.frame == 7 and sprite.animation == "bag_pickup":
 		Events.bag_pickup_animation_grabbed.emit()
@@ -81,6 +84,7 @@ func _on_animation_finished() -> void:
 			_play_animation("default")
 		_:
 			_play_animation("default")
+
 
 func _play_animation(animation_name: String) -> void:
 	var sprite_frames_uid: StringName
@@ -114,6 +118,7 @@ func _play_animation(animation_name: String) -> void:
 	sprite.sprite_frames = sprite_frames
 	sprite.play(animation_name)
 
+
 func _cache_always_resources() -> void:
 	# Always cache the default and bag pickup sprite frames
 	var resource_background_loader: ResourceBackgroundLoader = Global.resource_background_loader
@@ -123,12 +128,14 @@ func _cache_always_resources() -> void:
 	token = resource_background_loader.cache_resource(_bag_pickup_hand_animation_sprite_frames_uid)
 	_sprite_frames_always_cache_tokens.append(token)
 
+
 func _uncache_always_resources() -> void:
 	# Uncache previously cached stuff.
 	var resource_background_loader: ResourceBackgroundLoader = Global.resource_background_loader
 	for token in _sprite_frames_always_cache_tokens:
 		resource_background_loader.uncache_resource(token)
 	_sprite_frames_always_cache_tokens.clear()
+
 
 func _uncache_item_resources() -> void:
 	# Uncache previously cached stuff.
