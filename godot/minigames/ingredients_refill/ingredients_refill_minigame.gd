@@ -69,7 +69,7 @@ func _ready() -> void:
 				bean_hit_glasss_sound.play(),
 	)
 
-	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) #prefer right side of the screen, because that is where cup spawns
+	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) # prefer right side of the screen, because that is where cup spawns
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -133,24 +133,24 @@ func spawn_bean() -> void:
 	#first do a check for the golden bean
 	random_int = randi_range(1, 100)
 
-	if beans_spawned < 4 and gold_bean_already_spawned == false: #gold bean case
+	if beans_spawned < 4 and gold_bean_already_spawned == false: # gold bean case
 		random_int = randi_range(1, 100)
-		if (beans_spawned == 0 and random_int < 5): #33
+		if (beans_spawned == 0 and random_int < 5): # 33
 			spawn_gold_bean(bean)
 
-		elif (beans_spawned == 1 and random_int < 40): #40
+		elif (beans_spawned == 1 and random_int < 40): # 40
 			spawn_gold_bean(bean)
 
-		elif (beans_spawned == 2 and random_int < 60): #67
+		elif (beans_spawned == 2 and random_int < 60): # 67
 			spawn_gold_bean(bean)
 
-		elif (beans_spawned == 3): #100
+		elif (beans_spawned == 3): # 100
 			spawn_gold_bean(bean)
 		else:
 			spawn_normal_bean(bean)
 
 		return
-	else: #well, a golden bean has spawned in the past; decided between bomb and normal
+	else: # well, a golden bean has spawned in the past; decided between bomb and normal
 		random_int = randi_range(1, 100)
 		if (bomb_bean_already_spawned == true):
 			spawn_normal_bean(bean)
@@ -184,7 +184,7 @@ func spawn_gold_bean(bean: PhysicsBody2D) -> void:
 	bean.global_position = pour_point.global_position
 	bean.global_position.x -= 53
 
-	bean.global_position.y -= 22 #adding a negative number, puts it vertically north.
+	bean.global_position.y -= 22 # adding a negative number, puts it vertically north.
 
 	bean.add_to_group("beans")
 	add_child(bean)
@@ -223,30 +223,30 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 	cup.velocity.y = 0
 
 	if not bean.is_in_group("beans"):
-		return #not a bean? return.
+		return # not a bean? return.
 	var bean_type: String = bean.scene_file_path.get_file() # ex 'coffee_bean.tscn'
 
 	if not collected_beans.has(bean):
 		#collected_beans is an array of beans.
 		if "bomb" in bean_type:
-			bomb() #also calls Events.emit_signal("minigame_end")
+			bomb() # also calls Events.emit_signal("minigame_end")
 			return
 		elif "screw" in bean_type:
-			screw() #calls Events.emit_signal("minigame_end")
+			screw() # calls Events.emit_signal("minigame_end")
 			#break closest machine
 			collected_beans.append(bean)
 			return
 		elif "gold" in bean_type:
-			gold(bean) #calls Events.emit_signal("minigame_end")
+			gold(bean) # calls Events.emit_signal("minigame_end")
 			gain_score_sound.play()
 			return
-		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
+		elif "coffee_bean" in bean_type: # this has to be last one checked, because then it is a normal bean
 			cup_face_sprite.texture = normal_face_sprite
 			visual_effect.texture = normal_visual_effect
 			beans_in_cup += 1
 			gain_score_sound.play()
 			gain_score_sound.pitch_scale += 0.05
-			collected_beans.append(bean) #append the bean to collected_beans array
+			collected_beans.append(bean) # append the bean to collected_beans array
 
 
 func spill_bean(bean: PhysicsBody2D) -> void:
@@ -278,9 +278,9 @@ func screw():
 	await get_tree() \
 			.create_timer((NUM_BEANS_TO_SPAWN - 2) * bean_spawn_timer.wait_time
 	+ bean_spawn_timer.time_left, false) \
-			.timeout #can we calculate when the minigame will end?
+			.timeout # can we calculate when the minigame will end?
 
-	if _closest_machine.broken_down == false: #don't break a machine that is already broken
+	if _closest_machine.broken_down == false: # don't break a machine that is already broken
 		_closest_machine.break_down()
 
 

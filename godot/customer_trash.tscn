@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://ditjytf5ctu2e" path="res://Assets/tippy_loudspeaker/Material.001.tres" id="5_hdrwh"]
 [ext_resource type="Texture2D" uid="uid://u0wlcuvtde4o" path="res://Assets/Trash minigame/Trash Cup_straw.png" id="6_wycgu"]
 [ext_resource type="Texture2D" uid="uid://cv03624a1i16x" path="res://Assets/Trash minigame/Trash Cup_cup2.png" id="7_ncnsa"]
+[ext_resource type="Material" uid="uid://clyy5mn7ocsxc" path="res://Assets/Trash minigame/highlight_trash_shader.tres" id="8_wycgu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5ewh"]
 size = Vector3(0.24902344, 0.20874023, 0.23120117)
@@ -22,6 +23,8 @@ metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7pxi"]
 resource_name = "Material.001"
+render_priority = 1
+transparency = 1
 cull_mode = 2
 albedo_texture = ExtResource("7_ncnsa")
 roughness = 0.5
@@ -137,10 +140,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0lot6")
 
-[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable")]
+[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable", "trash_cup")]
 collision_layer = 16
 script = ExtResource("1_e16t0")
 interactable = NodePath("Interactable")
+xray_material = ExtResource("8_wycgu")
+trash_cup = NodePath("Trash Cup/SM_TrashCup")
+activation_distance = 10.0
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
 visible = false
@@ -165,5 +171,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03752747, 0.006050408, 0.01
 [node name="SM_TrashCup" parent="Trash Cup" index="0" unique_id=1845771321]
 transform = Transform3D(0.19297707, 0, 0, 0, 0.19297707, 0, 0, 0, 0.19297707, -0.06560476, -0.071942054, 0.008682892)
 mesh = SubResource("ArrayMesh_p1y42")
+surface_material_override/2 = ExtResource("8_wycgu")
 
 [editable path="Trash Cup"]
