@@ -191,7 +191,7 @@ func _process(_delta: float) -> void:
 
 	update_score_indicators()
 	update_interactable_ui()
-	if(!exploding_bomb_used):
+	if !exploding_bomb_used:
 		update_exploding_bomb_ui()
 	else:
 		update_exploding_bomb_timer(_delta)
@@ -490,19 +490,17 @@ func update_exploding_bomb_ui() -> void:
 		if owned_item.item_id == "exploding_bomb":
 			owned_exploding_bomb = owned_item
 			
-	if(
-			owned_exploding_bomb != null
-		):
-			exploding_bomb_ui.show()
-			if(Input.is_action_just_pressed("right_click")):
-				exploding_bomb_ui.hide()
-				exploding_bomb_used = true
+	if owned_exploding_bomb != null:
+		exploding_bomb_ui.show()
+		if Input.is_action_just_pressed("right_click"):
+			exploding_bomb_ui.hide()
+			exploding_bomb_used = true
 	else:
 		exploding_bomb_ui.hide()
 		
 func update_exploding_bomb_timer(_delta: float) -> void:
 	exploding_bomb_timer -= _delta
-	if(exploding_bomb_timer <= 0):
+	if exploding_bomb_timer <= 0:
 		exploding_bomb_timer = 10.5
 		exploding_bomb_used = false
 
