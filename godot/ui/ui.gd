@@ -461,6 +461,10 @@ func update_interactable_ui() -> void:
 				item_prompt = "%s%s%s" % [NON_USABLE_ITEM_BBCODE_OPEN, item_prompt, NON_USABLE_ITEM_BBCODE_CLOSE]
 			item_text.text = item_prompt
 
+		else:
+			item_indicator.hide()
+			item_text.text = ""
+
 		var interaction_prompt: String = ""
 		if hovered_interactable.show_interact_hotkey:
 			if hovered_interactable.hold_to_interact:
