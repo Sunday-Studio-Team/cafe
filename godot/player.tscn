@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="10_q13i1"]
 [ext_resource type="AudioStream" uid="uid://c0ssp862cxccu" path="res://audio/footsteps/footstep_concrete_2.wav" id="10_urp6f"]
 [ext_resource type="AudioStream" uid="uid://dtm03unbkcgjm" path="res://audio/footsteps/footstep_concrete_3.wav" id="11_bwjto"]
+[ext_resource type="PackedScene" uid="uid://bynusdrfe1hno" path="res://ui/3d_tablet_ui/3d_tablet_ui.tscn" id="11_pylmc"]
 [ext_resource type="AudioStream" uid="uid://dob2v6d5xvpoa" path="res://audio/footsteps/footstep_concrete_4.wav" id="12_606se"]
 [ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="17_op7ga"]
 [ext_resource type="Material" uid="uid://b18gocjjdbtpa" path="res://resources/misc_resources/roller_skates_dust_clouds.tres" id="18_q13i1"]
@@ -123,7 +124,7 @@ collide_with_areas = true
 [node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=489136358]
+[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1160311051]
 transform = Transform3D(0.0832229, 0.030946786, -0.04600267, -0.017828582, 0.09350325, 0.030647755, 0.052498486, -0.01730433, 0.083333485, -0.00945425, -0.00080776215, 0.026645422)
 
 [node name="large_ingredient_bag" parent="CameraController/Camera3D/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
@@ -138,7 +139,7 @@ max_db = 0.0
 [node name="Trash Cup" parent="CameraController/Camera3D" unique_id=1417801726 instance=ExtResource("10_q13i1")]
 transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.342, -0.16699994, -0.306)
 
-[node name="SM_TrashCup" parent="CameraController/Camera3D/Trash Cup" index="0" unique_id=1837821948]
+[node name="SM_TrashCup" parent="CameraController/Camera3D/Trash Cup" index="0" unique_id=1975850021]
 transform = Transform3D(0.179, 0, 0, 0, 0.179, 0, 0, 0, 0.179, 0, 0, 0)
 
 [node name="CaughtOverlay" type="TextureRect" parent="CameraController/Camera3D" unique_id=1076028012]
@@ -148,6 +149,9 @@ offset_bottom = 1080.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 texture = SubResource("GradientTexture2D_2qj5i")
+
+[node name="3DTabletUI" parent="CameraController/Camera3D" unique_id=1761848473 instance=ExtResource("11_pylmc")]
+transform = Transform3D(0.23507202, 0, 0.085094884, 0, 0.25, 0, -0.085094884, 0, 0.23507202, -0.25, -0.1, -0.19)
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2008160580]
 
