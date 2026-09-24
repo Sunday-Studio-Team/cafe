@@ -136,7 +136,10 @@ volume_db = -20.0
 max_db = 0.0
 
 [node name="Trash Cup" parent="CameraController/Camera3D" unique_id=1417801726 instance=ExtResource("10_q13i1")]
-transform = Transform3D(0.9985244, 3.7197934e-09, -0.054306686, 3.7252903e-09, 1, 0, 0.054306686, 2.0230817e-10, 0.9985244, 0.342, -0.16699994, -0.306)
+transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.342, -0.16699994, -0.306)
+
+[node name="SM_TrashCup" parent="CameraController/Camera3D/Trash Cup" index="0" unique_id=1837821948]
+transform = Transform3D(0.179, 0, 0, 0, 0.179, 0, 0, 0, 0.179, 0, 0, 0)
 
 [node name="CaughtOverlay" type="TextureRect" parent="CameraController/Camera3D" unique_id=1076028012]
 modulate = Color(1, 1, 1, 0)
