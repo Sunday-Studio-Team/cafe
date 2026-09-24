@@ -320,6 +320,9 @@ name = "Overtime Form"
 icon = ExtResource("71_m5f57")
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_13qdw"]
+viewport_path = NodePath("Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -1405,7 +1408,7 @@ point_count = 8
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_cnw22"]
-viewport_path = NodePath("../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
+viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
@@ -1655,6 +1658,15 @@ item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 _alert_packed_scene_uid = &"uid://j530u4ni603j"
 exploding_bomb_ui = NodePath("ExplodingBombUI")
+
+[node name="HoldingItemsCameraTextureRect" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=929551188]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_13qdw")
 
 [node name="Crosshair" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1676497832]
 layout_mode = 3
@@ -2622,6 +2634,7 @@ metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="CinematicCamera/CameraRig" unique_id=609030686]
 transform = Transform3D(1.0000008, 4.5520276e-12, 4.7087674e-06, 0, 1.000001, -9.667141e-07, -4.7087674e-06, 9.66714e-07, 1.0000008, 0, 0, 0)
+cull_mask = 1048567
 
 [node name="TippyTabletCameraLocationRotation" type="Node3D" parent="CinematicCamera/CameraRig" unique_id=653395175]
 transform = Transform3D(1, 0, 0, 0, 0.17644243, -0.9843108, 0, 0.9843108, 0.17644249, 0, -0.041411042, -0.46492958)
@@ -2834,8 +2847,10 @@ one_shot = true
 transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.371138e-08, -0.29745173, 0, 18.028189)
 main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 
-[node name="Sprite3D" parent="Player/CameraController/Camera3D/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-pixel_size = 0.0005
+[node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
+
+[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
 texture = SubResource("ViewportTexture_cnw22")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
@@ -3090,10 +3105,12 @@ stream = ExtResource("282_xj0gb")
 [editable path="SecurityCams/HallwaySecurityCam"]
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
 [editable path="Player"]
-[editable path="Player/CameraController/Camera3D/trash_placehold"]
-[editable path="Player/CameraController/Camera3D/ingredientbag"]
-[editable path="Player/CameraController/Camera3D/Trash Cup"]
-[editable path="Player/CameraController/Camera3D/3DTabletUI"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
 [editable path="Desk/office desk/cranes"]
