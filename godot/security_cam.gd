@@ -20,6 +20,7 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 @export var disable_sound: AudioStreamPlayer3D
 @export var disable_particles: GPUParticles3D
+@export var disable_2d_vfx: AnimatedSprite3D
 @export var disabled_timer_sprite: Sprite3D
 @export var disabled_timer_bar: TextureProgressBar
 @export var whipped_cream_sound: AudioStreamPlayer
@@ -156,6 +157,7 @@ func disarm_camera() -> void:
 	_camera_disarmed = true
 	disable_sound.play()
 	disable_particles.emitting = true
+	disable_2d_vfx.play()
 	_update_camera_components_active()
 
 
