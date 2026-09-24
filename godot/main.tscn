@@ -47,7 +47,6 @@
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
-[ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
@@ -1421,13 +1420,6 @@ point_count = 8
 [sub_resource type="ViewportTexture" id="ViewportTexture_us00v"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.29000002, 0.29000002, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
@@ -1449,7 +1441,7 @@ height = 0.78808594
 [sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
 viewport_path = NodePath("AirFreshener/CooldownTimerSprite/SubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "cam_spot", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1489,8 +1481,6 @@ teleporter2 = NodePath("Teleporter2")
 teleporter3 = NodePath("Teleporter3")
 air_freshener = NodePath("AirFreshener")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
-whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
-waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
 shift_start_sound = NodePath("ShiftStartSound")
 cam_spot = NodePath("Desk/PCCamera")
 default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
@@ -2848,18 +2838,6 @@ texture = SubResource("ViewportTexture_us00v")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
-
-[node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
-transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
-visible = false
-gizmo_extents = 0.0
-script = ExtResource("84_ppx11")
-arrow_material = SubResource("StandardMaterial3D_ppx11")
-
-[node name="WaypointArea3D" type="Area3D" parent="TutorialArrow3D" unique_id=156454262]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialArrow3D/WaypointArea3D" unique_id=1886631170]
-shape = SubResource("BoxShape3D_xrivr")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
