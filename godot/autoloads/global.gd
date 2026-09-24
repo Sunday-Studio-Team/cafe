@@ -183,6 +183,7 @@ var cinematic_camera_allow_machine_gui_inputs: bool = true
 var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
 var all_3d_audio_stream_players: Array[Node]
+var no_cooldowns := false
 
 
 func _ready() -> void:
