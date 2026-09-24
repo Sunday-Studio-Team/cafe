@@ -33,7 +33,6 @@ func handle_right_click(_delta: float) -> void:
 
 			bomb_instance.apply_impulse(throw_direction * 6)
 
-
 func we_have_item() -> bool:
 	has_exploding_bomb_item = false
 
