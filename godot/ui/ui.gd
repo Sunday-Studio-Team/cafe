@@ -174,7 +174,6 @@ func _process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
 	# in UI (except for the machine UI where we want the tablet to show on the
 	# side)
-
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
@@ -502,11 +501,14 @@ func update_exploding_bomb_ui() -> void:
 	else:
 		exploding_bomb_ui.hide()
 		
+		
 func update_exploding_bomb_timer(_delta: float) -> void:
-	exploding_bomb_timer -= _delta
-	if exploding_bomb_timer <= 0:
-		exploding_bomb_timer = 10.5
-		exploding_bomb_used = false
+	if not get_tree().paused:
+		exploding_bomb_timer -= _delta
+		if exploding_bomb_timer <= 0:
+			exploding_bomb_timer = 10.5
+			exploding_bomb_used = false
+
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
