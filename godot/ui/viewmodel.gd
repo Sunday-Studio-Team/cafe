@@ -4,13 +4,16 @@ extends CanvasLayer
 @export var hammer_item: Item
 
 @export var _default_hand_animation_sprite_frames_uid: StringName
-@export var _air_horn_use_hand_animation_sprite_frames_uid: StringName
 @export var _bag_pickup_hand_animation_sprite_frames_uid: StringName
+@export var _air_horn_use_hand_animation_sprite_frames_uid: StringName
 @export var _cream_use_hand_animation_sprite_frames_uid: StringName
 @export var _hammer_use_hand_animation_sprite_frames_uid: StringName
 
+var _sprite_frames_cache_tokens: Array[ResourceBackgroundLoaderToken] = []
 
 func _ready() -> void:
+	Events.items_updated.connect(_on_items_updated)
+	
 	Events.play_viewmodel_animation.connect(_on_play_viewmodel_animation)
 
 	sprite.frame_changed.connect(_on_frame_changed)
@@ -21,7 +24,13 @@ func _ready() -> void:
 			Events.viewmodel_animation_finished.emit(),
 	)
 
+	_always_cache()
+	
 	_play_animation("default")
+	
+
+func _exit_tree() -> void:
+	_uncache_resources()
 
 
 func _process(_delta: float) -> void:
@@ -30,7 +39,25 @@ func _process(_delta: float) -> void:
 
 func _on_play_viewmodel_animation(animation_name: String) -> void:
 	_play_animation(animation_name)
+
+func _on_items_updated() -> void:
+	_uncache_resources()
+
+	_always_cache()
 	
+	# Cache new stuff.
+	var resource_background_loader: ResourceBackgroundLoader = Global.resource_background_loader
+	var token: ResourceBackgroundLoaderToken
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "air_horn":
+			token = resource_background_loader.cache_resource(_air_horn_use_hand_animation_sprite_frames_uid)
+			_sprite_frames_cache_tokens.append(token)
+		elif owned_item.item_id == "whipped_cream":
+			token = resource_background_loader.cache_resource(_cream_use_hand_animation_sprite_frames_uid)
+			_sprite_frames_cache_tokens.append(token)
+		elif owned_item.item_id == "hammer":
+			token = resource_background_loader.cache_resource(_hammer_use_hand_animation_sprite_frames_uid)
+			_sprite_frames_cache_tokens.append(token)
 
 func _on_frame_changed() -> void:
 	if sprite.animation == "bag_pickup" and not Global.holding_ingredients and not Global.holding_trash:
@@ -68,6 +95,32 @@ func _play_animation(animation_name: String) -> void:
 	elif animation_name == "hammer_use":
 		sprite_frames_uid = _hammer_use_hand_animation_sprite_frames_uid
 
-	var sprite_frames: SpriteFrames = ResourceLoader.load(sprite_frames_uid)
+	var token: ResourceBackgroundLoaderToken
+	for cache_token: ResourceBackgroundLoaderToken in _sprite_frames_cache_tokens:
+		if cache_token.resource_uid == sprite_frames_uid:
+			token = cache_token
+			break
+	
+	if token == null:
+		printerr("view_model.gd: Requested spriteframes aren't cached!")
+		return
+	
+	var sprite_frames: SpriteFrames = Global.resource_background_loader.get_resource(token)
 	sprite.sprite_frames = sprite_frames
 	sprite.play(animation_name)
+
+func _always_cache() -> void:
+	# Always cache the default and bag pickup sprite frames
+	var resource_background_loader: ResourceBackgroundLoader = Global.resource_background_loader
+	var token: ResourceBackgroundLoaderToken
+	token = resource_background_loader.cache_resource(_default_hand_animation_sprite_frames_uid)
+	_sprite_frames_cache_tokens.append(token)
+	token = resource_background_loader.cache_resource(_bag_pickup_hand_animation_sprite_frames_uid)
+	_sprite_frames_cache_tokens.append(token)
+
+func _uncache_resources() -> void:
+	# Uncache previously cached stuff.
+	var resource_background_loader: ResourceBackgroundLoader = Global.resource_background_loader
+	for token in _sprite_frames_cache_tokens:
+		resource_background_loader.uncache_resource(token)
+	_sprite_frames_cache_tokens.clear()
