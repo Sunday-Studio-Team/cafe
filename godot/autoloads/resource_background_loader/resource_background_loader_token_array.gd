@@ -1,0 +1,4 @@
+﻿class_name ResourceBackgroundLoaderTokenArray
+extends RefCounted
+
+var tokens: Array[ResourceBackgroundLoaderToken]

@@ -14,6 +14,7 @@ extends Node
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
 @export var complaint_popup: CanvasLayer
+var resource_background_loader: ResourceBackgroundLoader
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -182,6 +183,7 @@ var cinematic_camera_allow_machine_gui_inputs: bool = true
 var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
 var all_3d_audio_stream_players: Array[Node]
+var no_cooldowns := false
 
 
 func _ready() -> void:

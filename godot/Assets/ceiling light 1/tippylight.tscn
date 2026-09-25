@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c5tde04ej68ys"]
+
+[ext_resource type="PackedScene" uid="uid://bu0pglixypk35" path="res://Assets/ceiling light 1/tippylight.glb" id="1_m6coi"]
+
+[node name="tippylight" unique_id=1829477193 instance=ExtResource("1_m6coi")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="face" parent_id_path=PackedInt32Array(1022238858) index="0" unique_id=684970666]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 3.4017112, 1.5551865, 55.310715)
+light_color = Color(1, 1, 0.48235294, 1)
+shadow_enabled = true
+omni_range = 2.287
