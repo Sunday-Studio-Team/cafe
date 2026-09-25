@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bynusdrfe1hno"]
+
+[ext_resource type="PackedScene" uid="uid://dirpbj4fhxbdr" path="res://Assets/tablet_ui_3d_model/tablet_ui_3d_model.glb" id="1_v17wg"]
+[ext_resource type="PackedScene" uid="uid://bs0egbcre6yie" path="res://Assets/tablet_ui_3d_model/tablet_ui_3d_model_addon.glb" id="2_bdvey"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bdvey"]
+
+[node name="3DTabletUI" type="Node3D" unique_id=1761848473]
+
+[node name="Model" type="Node3D" parent="." unique_id=433958376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
+
+[node name="BaseModel" parent="Model" unique_id=875200061 instance=ExtResource("1_v17wg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11823052, -0.07041024, 0)
+
+[node name="Cube_001" parent="Model/BaseModel" index="0" unique_id=1813733542]
+layers = 8
+
+[node name="ScreenSprite3D" type="Sprite3D" parent="Model/BaseModel" unique_id=2083645373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007, -0.012782678, 0.016923353)
+layers = 8
+pixel_size = 0.0005
+texture = SubResource("ViewportTexture_bdvey")
+
+[node name="AddonModel" parent="Model" unique_id=1254854682 instance=ExtResource("2_bdvey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
+
+[node name="BézierCurve" parent="Model/AddonModel" index="0" unique_id=588684302]
+layers = 8
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=224837986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+
+[editable path="Model/BaseModel"]
+[editable path="Model/AddonModel"]

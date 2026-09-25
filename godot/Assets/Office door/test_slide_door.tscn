@@ -1,5 +1,19 @@
 [gd_scene format=3 uid="uid://delcoklyhmj4i"]
 
 [ext_resource type="PackedScene" uid="uid://bbmrdddgxti5s" path="res://Assets/Office door/Test Slide Door.glb" id="1_tuw2l"]
+[ext_resource type="Script" uid="uid://djsluotnhw7d5" path="res://sliding_door.gd" id="2_5fbtg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ar5r"]
+size = Vector3(1.5906982, 1, 2.999878)
 
 [node name="Test Slide Door" unique_id=2106423727 instance=ExtResource("1_tuw2l")]
+script = ExtResource("2_5fbtg")
+open_offset = Vector3(1, 0, 0)
+move_time = 0.1
+
+[node name="Proximity Trigger" type="Area3D" parent="." index="2" unique_id=30711245]
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Proximity Trigger" index="0" unique_id=628711876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0022583008, 0.5402215, 0.008239746)
+shape = SubResource("BoxShape3D_6ar5r")

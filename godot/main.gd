@@ -40,10 +40,9 @@ extends Node3D
 @export var teleporter3: Teleporter
 @export var air_freshener: AirFreshener
 @export var tutorial_selection_menu: TutorialSelectionMenu
-@export var whiteboard_tutorial_arrow: Arrow3D
-@export var waypoint_ring: Area3D
 @export var shift_start_sound: AudioStreamPlayer
 @export var cam_spot: Marker3D
+@export var default_trash_spawn_spot: Marker3D
 
 @export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
 @export var whiteboard: Whiteboard
@@ -181,7 +180,10 @@ func _process(delta: float) -> void:
 	for item in Global.owned_items:
 		if item.is_active_item:
 			if item.active_item_remaining_cooldown > 0.0:
-				item.active_item_remaining_cooldown -= delta
+				if Global.no_cooldowns:
+					item.active_item_remaining_cooldown = 0
+				else:
+					item.active_item_remaining_cooldown -= delta
 				if item.active_item_remaining_cooldown <= 0.0:
 					item.can_be_used = true
 					item.active_item_remaining_cooldown = 0
@@ -435,27 +437,22 @@ func attempt_spawn_trash() -> void:
 
 #code for  trash spawn
 func spawn_trash() -> void:
-	var customer_trash = customer_trash_scene.instantiate()
-	#var rand_x = randf_range(right_corner.global_position.x, left_corner.global_position.x)
-	#var rand_z = randf_range(bottom_left_corner.global_position.z, right_corner.global_position.z)
-	#	position of trash spawn
-	#	0.2=ground level
-	#customer_trash.position=Vector3(rand_x,0.2,rand_z)
+	var customer_trash: CustomerTrash = customer_trash_scene.instantiate()
 
 	var current_customers: Array[Customer]
 	# Get all current customer positions
 	for child in get_children():
 		if child is Customer:
 			current_customers.append(child)
-
-	#var trash_offset: float = 0
-	var littering_customer = current_customers.pick_random()
-	#var rand_x = randf_range(littering_customer.global_position.x, littering_customer.global_position.x)
-	#var rand_z = randf_range(littering_customer.global_position.z, littering_customer.global_position.z)
+			
+	var littering_customer: Customer = null
+	if current_customers.size() > 0:
+		littering_customer = current_customers.pick_random()
 	if littering_customer:
 		customer_trash.position = Vector3(littering_customer.global_position.x, 0, littering_customer.global_position.z)
 	else:
-		print("no customers exist, trash was generate at (0,0,0)")
+		customer_trash.position = default_trash_spawn_spot.position
+		print("no customers exist, trash was generate at default location")
 	print("spawned trash")
 
 	add_child(customer_trash)

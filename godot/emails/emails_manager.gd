@@ -4,6 +4,7 @@ extends Node
 static var _instance: EmailsManager
 
 @export var _intro_email: EmailData
+@export var _random_emails: Array[EmailData]
 
 var last_spam_email_day: int = 0
 
@@ -23,6 +24,7 @@ func deliver_emails() -> void:
 	
 	if Global.day == 1:
 		emails_to_deliver.append(_intro_email)
+	
 	
 	## check for menu updates
 	if Global.drinks.any(func(d: Drink): return d.day_unlocked == current_day) and current_day > 1:
@@ -44,6 +46,9 @@ func deliver_emails() -> void:
 			reviews_update_email_data.email_reviews = reviews_to_add
 			emails_to_deliver.append(reviews_update_email_data)
 	
+	if Global.day == 3:
+		emails_to_deliver.append(_random_emails.pick_random())
+		
 	if days_since_random >= 2: # Can't get random emails everyday or on first day
 		var min_random = 0.1
 		for i in range(1, days_since_random): # More likely to get random emails the more days have passed
@@ -53,6 +58,7 @@ func deliver_emails() -> void:
 			last_spam_email_day = current_day
 			var spam_email = SpamEmail.new()
 			emails_to_deliver.append(spam_email)
+
 	
 	for email_data in emails_to_deliver:
 		var email_scheduled_day: int = email_data.day_to_send
