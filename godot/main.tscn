@@ -14,8 +14,12 @@
 [ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="6_gttkg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="8_ip2l3"]
+[ext_resource type="Resource" uid="uid://dybdvkril5y03" path="res://emails/random_emails/random_email_1.tres" id="9_s14wm"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
+[ext_resource type="Resource" uid="uid://c7bola2bkchgx" path="res://emails/random_emails/random_email_2.tres" id="10_q4gy1"]
+[ext_resource type="Resource" uid="uid://c28goevsrrpa" path="res://emails/random_emails/random_email_3.tres" id="11_cnw22"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
@@ -31,7 +35,6 @@
 [ext_resource type="Resource" uid="uid://cggkb6fxtvq0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_6.tres" id="35_pbe4p"]
 [ext_resource type="Resource" uid="uid://uc83adcvfsc7" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_7.tres" id="36_8ldsf"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
-[ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://dtbfgptmi7ixs" path="res://cafe_environment.tscn" id="44_h6isl"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
@@ -43,7 +46,6 @@
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
-[ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
@@ -259,6 +261,7 @@
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
 [ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_2.tres" id="282_us00v"]
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="282_xj0gb"]
@@ -268,12 +271,13 @@
 [ext_resource type="Script" uid="uid://ce6dr8crdpidc" path="res://air_freshener.gd" id="285_d52hs"]
 [ext_resource type="Resource" uid="uid://cj7hsbtdqe6k7" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_02.tres" id="286_pmrog"]
 [ext_resource type="Resource" uid="uid://y5eykit7a1ce" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_8.tres" id="287_d1vw0"]
+[ext_resource type="PackedScene" uid="uid://ch0pntkxtjbmi" path="res://Assets/signs/order_here_sign_1.tscn" id="289_ip2l3"]
 [ext_resource type="Resource" uid="uid://dpvumypa7h6u6" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_1.tres" id="291_tfaor"]
 [ext_resource type="Resource" uid="uid://dopqh5dnm5yyg" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_03.tres" id="292_3rmuw"]
 [ext_resource type="Resource" uid="uid://8wrbl822cmmk" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_04.tres" id="293_j3ofb"]
 [ext_resource type="Resource" uid="uid://cuy4ff6am44i6" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_05.tres" id="294_m5f57"]
 [ext_resource type="Resource" uid="uid://6sls253hpyej" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_06.tres" id="296_130bj"]
-[ext_resource type="Script" uid="uid://dg2t2004c66xl" path="res://tutorial/skip_cinematic_prompt.gd" id="297_f4177"]
+[ext_resource type="Script" uid="uid://dg2t2004c66xl" path="res://tutorial/cinematic_prompts.gd" id="297_f4177"]
 [ext_resource type="Script" uid="uid://cr6bafr6x5r2v" path="res://tutorial/cinematic_bars.gd" id="297_nckbc"]
 [ext_resource type="Resource" uid="uid://d3rjdmwvtte7g" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day3_2.tres" id="297_pbe4p"]
 [ext_resource type="Script" uid="uid://cybko6yyi52db" path="res://tutorial/cinematic_camera.gd" id="297_r4j87"]
@@ -316,21 +320,8 @@ name = "Overtime Form"
 icon = ExtResource("71_m5f57")
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
-border_width_left = 20
-border_width_top = 20
-border_width_right = 20
-border_width_bottom = 20
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[sub_resource type="ViewportTexture" id="ViewportTexture_13qdw"]
+viewport_path = NodePath("Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
 corner_radius_top_left = 25
@@ -1258,6 +1249,36 @@ tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.04048506, 0.16402633, 0.00673763, 0.9856014, 2, 1, -0.040485047, 0.1640263, 0.006737626, 0.9856014)
 
+[sub_resource type="Animation" id="Animation_skfll"]
+resource_name = "skip_cutscene_fade_to_black"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.04444445, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_l0ugm"]
+resource_name = "skip_cutscene_fade_to_view"
+length = 0.3
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qwf4s"]
 _data = {
 &"RESET": SubResource("Animation_r4j87"),
@@ -1303,16 +1324,25 @@ _data = {
 &"day_1_intro_2_0": SubResource("Animation_tfaor"),
 &"day_1_intro_2_1": SubResource("Animation_3rmuw"),
 &"day_1_intro_3_0": SubResource("Animation_j3ofb"),
-&"day_1_intro_3_1": SubResource("Animation_m5f57")
+&"day_1_intro_3_1": SubResource("Animation_m5f57"),
+&"skip_cutscene_fade_to_black": SubResource("Animation_skfll"),
+&"skip_cutscene_fade_to_view": SubResource("Animation_l0ugm")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skfll"]
+bg_color = Color(0.123473026, 0.12347307, 0.123472966, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_8ldsf"]
-font_size = 40
+font = ExtResource("280_l0ugm")
+font_size = 28
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_13qdw"]
-font_size = 32
+font = ExtResource("280_l0ugm")
+font_size = 28
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -1320,7 +1350,7 @@ outline_color = Color(0, 0, 0, 1)
 size = Vector3(1.9599609, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tcxth"]
-size = Vector3(1.9599609, 1, 1)
+size = Vector3(1.9599609, 1, 1.4980469)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_22udi"]
 size = Vector3(1.065918, 1, 2.1708984)
@@ -1341,7 +1371,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_skfll"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1352,7 +1382,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l0ugm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ip2l3"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1363,7 +1393,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_s14wm"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1374,15 +1404,11 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_q4gy1"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.29000002, 0.29000002, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_cnw22"]
+viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
@@ -1405,7 +1431,7 @@ height = 0.78808594
 [sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
 viewport_path = NodePath("AirFreshener/CooldownTimerSprite/SubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "cam_spot", "day_containers")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1445,15 +1471,17 @@ teleporter2 = NodePath("Teleporter2")
 teleporter3 = NodePath("Teleporter3")
 air_freshener = NodePath("AirFreshener")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
-whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
-waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
 shift_start_sound = NodePath("ShiftStartSound")
 cam_spot = NodePath("Desk/PCCamera")
+default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
+day_5_tippy_whiteboard_disappear_area = NodePath("TutorialLocations/Day5TippyWhiteboardDisappearArea")
+whiteboard = NodePath("StartShiftWhiteboard")
 day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath("Desk/Day3DeskProps"), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
 _intro_email = ExtResource("6_gttkg")
+_random_emails = Array[ExtResource("8_ip2l3")]([ExtResource("9_s14wm"), ExtResource("10_q4gy1"), ExtResource("11_cnw22")])
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_cinematic_camera_voice_line_player", "_around_cafe_voice_line_players")]
 script = ExtResource("118_1slqb")
@@ -1582,26 +1610,26 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(1642, 390)
 sprite_frames = ExtResource("215_tcxth")
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
 process_mode = 3
 script = ExtResource("5_lquwl")
-profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
-profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
-customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
+profit_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
+profit_progress = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
+customer_happiness_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
 score_update_label = NodePath("../ScoreUpdate/ScoreUpdate")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../../../GameTimer")
-time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
-time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
-time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
+time_left_ui = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
+time_left_label = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
+time_left_bar = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
 shift_starting_ending_label = NodePath("HUD/ShiftStartingEnding")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
+cctv_indicator = NodePath("TabletSubViewport/MarginContainer/CctvIndicator")
 _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
@@ -1612,10 +1640,10 @@ shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
 shelf_item_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
 shelf_item_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
-day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
-rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
-customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
+day_indicator = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
+rating_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
+customer_flow_rate_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
@@ -1629,6 +1657,16 @@ item_indicator = NodePath("Interactable/ItemIndicator")
 item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 _alert_packed_scene_uid = &"uid://j530u4ni603j"
+exploding_bomb_ui = NodePath("ExplodingBombUI")
+
+[node name="HoldingItemsCameraTextureRect" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=929551188]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_13qdw")
 
 [node name="Crosshair" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1676497832]
 layout_mode = 3
@@ -1661,46 +1699,37 @@ texture = ExtResource("28_4obbf")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Tablet" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
-custom_minimum_size = Vector2(550, 0)
-custom_maximum_size = Vector2(550, -1)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = -330.0
-offset_right = 600.0
-offset_bottom = 219.99976
-grow_vertical = 0
-rotation = 0.05235988
-size_flags_horizontal = 0
-mouse_behavior_recursive = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b2gp0")
-script = ExtResource("42_yf6j3")
-machines_container = NodePath("MarginContainer/Screen/MarginContainer/MachineContainer")
-machine_ui_scene = ExtResource("43_e4ynb")
-item_icons = NodePath("MarginContainer/Screen/HBoxContainer/ItemIcons")
+[node name="TabletSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=630542721]
+handle_input_locally = false
+size = Vector2i(631, 863)
+render_target_update_mode = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet" unique_id=1632834486]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport" unique_id=1632834486 node_paths=PackedStringArray("item_icons")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+script = ExtResource("42_yf6j3")
+item_icons = NodePath("Screen/HBoxContainer/ItemIcons")
 
-[node name="Screen" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer" unique_id=1640692384]
+[node name="Screen" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer" unique_id=1640692384]
 layout_mode = 2
 
-[node name="TopBar" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=2056308306]
+[node name="TopBar" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=2056308306]
 custom_minimum_size = Vector2(0, 50)
 custom_maximum_size = Vector2(-1, 50)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar" unique_id=29320243]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar" unique_id=29320243]
 layout_mode = 2
 alignment = 1
 
-[node name="DayIndicator" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=586450203]
+[node name="DayIndicator" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=586450203]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -1710,22 +1739,22 @@ theme_override_font_sizes/font_size = 32
 text = "day"
 horizontal_alignment = 1
 
-[node name="TimeUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=770158511]
+[node name="TimeUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=770158511]
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.9, 0.9)
 theme_override_styles/panel = SubResource("StyleBoxFlat_mjix0")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=27172397]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=27172397]
 layout_mode = 2
 
-[node name="TimeLeftText" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=2076268572]
+[node name="TimeLeftText" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=2076268572]
 layout_mode = 2
 offset_transform_enabled = true
 theme_override_font_sizes/font_size = 24
 text = "⌛60s"
 
-[node name="TimeLeftBar" type="TextureProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=1649230487]
+[node name="TimeLeftBar" type="TextureProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=1649230487]
 texture_filter = 1
 custom_minimum_size = Vector2(60, 0)
 custom_maximum_size = Vector2(60, -1)
@@ -1739,39 +1768,39 @@ texture_under = ExtResource("45_dfxmq")
 texture_over = ExtResource("46_kcoi7")
 texture_progress = ExtResource("47_rkju4")
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=1516433386]
 visible = false
 custom_minimum_size = Vector2(0, 175)
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_right = 15
 
-[node name="MachineContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/MarginContainer" unique_id=129505205]
+[node name="MachineContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/MarginContainer" unique_id=129505205]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
-[node name="Scores" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=2066546892]
+[node name="Scores" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=2066546892]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
-[node name="ScoreContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores" unique_id=1716672005]
+[node name="ScoreContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores" unique_id=1716672005]
 layout_mode = 2
 
-[node name="Scores" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
+[node name="Scores" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Money" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
+[node name="Money" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "$ 0"
 
-[node name="MoneyBar" type="ProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
+[node name="MoneyBar" type="ProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
 modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
 custom_minimum_size = Vector2(450, 30)
 layout_mode = 2
@@ -1779,41 +1808,41 @@ size_flags_horizontal = 0
 size_flags_vertical = 10
 show_percentage = false
 
-[node name="PanelContainer" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
+[node name="PanelContainer" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
 layout_mode = 2
 
-[node name="Rating" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
+[node name="Rating" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
 layout_mode = 2
 
-[node name="RatingIconLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
+[node name="RatingIconLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "🙂"
 
-[node name="RatingLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
+[node name="RatingLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "⭐2.1"
 
-[node name="Stars" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
+[node name="Stars" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
 visible = false
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
+[node name="Control" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
+[node name="PanelContainer2" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
 layout_mode = 2
 
-[node name="FlowRate" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
+[node name="FlowRate" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
 layout_mode = 2
 
-[node name="FlowRateLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
+[node name="FlowRateLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -1821,7 +1850,7 @@ theme_override_font_sizes/font_size = 32
 text = "10"
 label_settings = SubResource("LabelSettings_xrivr")
 
-[node name="FlowRateDescLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
+[node name="FlowRateDescLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -1829,16 +1858,16 @@ theme_override_font_sizes/font_size = 32
 text = "secs/custmr"
 label_settings = SubResource("LabelSettings_xrivr")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=84901258]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=84901258]
 layout_mode = 2
 alignment = 1
 
-[node name="ShowMousePrompt" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer" unique_id=726117337]
+[node name="ShowMousePrompt" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer" unique_id=726117337]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="Mouse" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1897773976]
+[node name="Mouse" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1897773976]
 custom_minimum_size = Vector2(50, 50)
 custom_maximum_size = Vector2(50, -1)
 layout_mode = 2
@@ -1846,7 +1875,7 @@ texture = ExtResource("82_ip2l3")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Alt" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1969538304]
+[node name="Alt" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1969538304]
 custom_minimum_size = Vector2(50, 50)
 custom_maximum_size = Vector2(50, -1)
 layout_mode = 2
@@ -1854,30 +1883,30 @@ texture = ExtResource("83_s14wm")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="ItemIcons" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer" unique_id=1915478391]
+[node name="ItemIcons" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer" unique_id=1915478391]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="TabletItemIcon" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=427576900 instance=ExtResource("149_4v3l6")]
+[node name="TabletItemIcon" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=427576900 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
 
-[node name="TabletItemIcon2" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1657180576 instance=ExtResource("149_4v3l6")]
+[node name="TabletItemIcon2" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1657180576 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
 
-[node name="TabletItemIcon3" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1886420684 instance=ExtResource("149_4v3l6")]
+[node name="TabletItemIcon3" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1886420684 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
 
-[node name="TabletItemIcon4" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=522604125 instance=ExtResource("149_4v3l6")]
+[node name="TabletItemIcon4" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=522604125 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
 
-[node name="TabletItemIcon5" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1744749201 instance=ExtResource("149_4v3l6")]
+[node name="TabletItemIcon5" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1744749201 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
 
-[node name="TabletItemIcon6" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=602581531 instance=ExtResource("149_4v3l6")]
+[node name="TabletItemIcon6" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=602581531 instance=ExtResource("149_4v3l6")]
 layout_mode = 2
 
-[node name="CctvIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer" unique_id=1082245281]
+[node name="CctvIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer" unique_id=1082245281]
 custom_minimum_size = Vector2(125, 110)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -1943,6 +1972,38 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[rainbow freq=0.1 sat=0.8 speed=-5.0][Q] HAMMER 💥[/rainbow]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExplodingBombUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1154891333]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -283.0
+offset_top = -262.0
+offset_right = -21.0
+offset_bottom = -141.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/ExplodingBombUI" unique_id=1588507118]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/ExplodingBombUI/MarginContainer" unique_id=1091145934]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[Right Click]
+Throw Bomb"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -2419,31 +2480,63 @@ offset_transform_enabled = true
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=901508427 node_paths=PackedStringArray("_fast_forward_label", "_skip_prompt_label", "_skip_progress_bar")]
+[node name="PromptsVBoxContainer" type="VBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=1317235223 node_paths=PackedStringArray("_fast_forward_hotkey_label", "_fast_forward_active_indicator", "_fast_forward_not_active_indicator", "_skip_hotkey_label", "_skip_progress_bar")]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -241.0
-offset_top = -114.0
-offset_right = -53.0
-offset_bottom = -36.0
+offset_left = -640.0
+offset_top = -154.0
+offset_right = -41.0
+offset_bottom = -22.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 16
-alignment = 2
+alignment = 1
 script = ExtResource("297_f4177")
-_fast_forward_label = NodePath("FfwdPrompt/FfwdPromptLabel")
-_skip_prompt_label = NodePath("SkipPrompt/SkipPromptLabel")
-_skip_progress_bar = NodePath("SkipPrompt/SkipTextureProgressBar")
+_fast_forward_hotkey_label = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdPromptLabel")
+_fast_forward_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdActivatedPanel")
+_fast_forward_not_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdNotActivatedPanel")
+_skip_hotkey_label = NodePath("SkipCinematicPrompt/SkipPrompt/SkipPromptLabel")
+_skip_progress_bar = NodePath("SkipCinematicPrompt/SkipPrompt/SkipTextureProgressBar")
 
-[node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=1152299202]
+[node name="FastForwardHBoxContainer" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=1550242564]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="FfwdPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=1152299202]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="FfwdPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/FfwdPrompt" unique_id=1272128939]
+[node name="FfwdActivatedPanel" type="Panel" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=2006360980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="FfwdNotActivatedPanel" type="Panel" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=643353900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skfll")
+
+[node name="FfwdPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer/FfwdPrompt" unique_id=1272128939]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2461,29 +2554,32 @@ label_settings = SubResource("LabelSettings_8ldsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FfwdLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=62495979]
+[node name="FfwdLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/FastForwardHBoxContainer" unique_id=62495979]
 layout_mode = 2
 text = "Fast Forward "
 label_settings = SubResource("LabelSettings_13qdw")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=625154802]
-visible = false
-custom_minimum_size = Vector2(32, 0)
+[node name="SkipCinematicPrompt" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=901508427]
 layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
 
-[node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=888468300]
-visible = false
+[node name="SkipPrompt" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=888468300]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="SkipTextureProgressBar" type="TextureProgressBar" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/SkipPrompt" unique_id=164510353]
+[node name="SkipTextureProgressBar" type="TextureProgressBar" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt/SkipPrompt" unique_id=164510353]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 13.0
+offset_right = -13.0
+offset_bottom = -13.0
 grow_horizontal = 2
 grow_vertical = 2
 value = 69.0
@@ -2495,7 +2591,7 @@ texture_progress = ExtResource("47_rkju4")
 tint_under = Color(0, 0, 0, 1)
 tint_progress = Color(0.46, 0.46, 0.46, 1)
 
-[node name="SkipPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt/SkipPrompt" unique_id=239714230]
+[node name="SkipPromptLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt/SkipPrompt" unique_id=239714230]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2513,8 +2609,7 @@ label_settings = SubResource("LabelSettings_8ldsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SkipLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/SkipCinematicPrompt" unique_id=1186232513]
-visible = false
+[node name="SkipLabel" type="Label" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer/SkipCinematicPrompt" unique_id=1186232513]
 layout_mode = 2
 text = "Skip"
 label_settings = SubResource("LabelSettings_13qdw")
@@ -2532,13 +2627,14 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(4.3384804e-07, -0.0645322, 0.9979146, -1.117586e-08, 0.9979144, 0.06453221, -0.99999905, -3.9149757e-08, 4.3222255e-07, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.99999905, 0, 0, 0, 0.99999875, 0, 0, 0, 0.999999, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
 
 [node name="Camera3D" type="Camera3D" parent="CinematicCamera/CameraRig" unique_id=609030686]
 transform = Transform3D(1.0000008, 4.5520276e-12, 4.7087674e-06, 0, 1.000001, -9.667141e-07, -4.7087674e-06, 9.66714e-07, 1.0000008, 0, 0, 0)
+cull_mask = 1048567
 
 [node name="TippyTabletCameraLocationRotation" type="Node3D" parent="CinematicCamera/CameraRig" unique_id=653395175]
 transform = Transform3D(1, 0, 0, 0, 0.17644243, -0.9843108, 0, 0.9843108, 0.17644249, 0, -0.041411042, -0.46492958)
@@ -2573,6 +2669,17 @@ metadata/_custom_type_script = "uid://cyfg6kertkbie"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialLocations/Day0BreakRoomPlayerDetectionArea" unique_id=1284285366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37534714, 0)
+shape = SubResource("BoxShape3D_tcxth")
+
+[node name="Day5TippyWhiteboardDisappearArea" type="Area3D" parent="TutorialLocations" unique_id=572531250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25463724, 1.1920929e-07, 16.09603)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("311_vqns7")
+metadata/_custom_type_script = "uid://cyfg6kertkbie"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialLocations/Day5TippyWhiteboardDisappearArea" unique_id=2044688915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37534714, -0.24902344)
 shape = SubResource("BoxShape3D_tcxth")
 
 [node name="Day0BreakRoomPreviewLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=52304348]
@@ -2632,6 +2739,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3)
 [node name="CustomerLeavingSpot" type="Marker3D" parent="." unique_id=1111936502]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3000002, 0, -3.4)
 
+[node name="DefaultTrashSpawnSpot" type="Marker3D" parent="." unique_id=2049453581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
 [node name="Machines" type="Node3D" parent="." unique_id=407734909]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05381441, 0)
 
@@ -2643,6 +2753,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 
 [node name="LeftAreaLeftMachine" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.8389482)
+
+[node name="Order Here Sign 2" parent="Machines/LeftAreaLeftMachine" unique_id=484677902 instance=ExtResource("289_ip2l3")]
+transform = Transform3D(-0.6606516, 0, -0.75069267, 0, 1, 0, 0.75069267, 0, -0.6606516, -0.77141905, -0.049999893, -1.4424014)
 
 [node name="LeftAreaMiddleMachine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -1.1309242)
@@ -2668,7 +2781,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_skfll")
+texture = SubResource("ViewportTexture_ecwfn")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2681,7 +2794,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_l0ugm")
+texture = SubResource("ViewportTexture_ip2l3")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2698,7 +2811,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_dfd08")
+texture = SubResource("ViewportTexture_s14wm")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2715,22 +2828,10 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fxdwr")
+texture = SubResource("ViewportTexture_q4gy1")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
-
-[node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
-transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
-visible = false
-gizmo_extents = 0.0
-script = ExtResource("84_ppx11")
-arrow_material = SubResource("StandardMaterial3D_ppx11")
-
-[node name="WaypointArea3D" type="Area3D" parent="TutorialArrow3D" unique_id=156454262]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialArrow3D/WaypointArea3D" unique_id=1886631170]
-shape = SubResource("BoxShape3D_xrivr")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2745,6 +2846,12 @@ one_shot = true
 [node name="Player" parent="." unique_id=1025923804 node_paths=PackedStringArray("main_room_spawn_point") instance=ExtResource("4_1bvp3")]
 transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.371138e-08, -0.29745173, 0, 18.028189)
 main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
+
+[node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
+
+[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
+texture = SubResource("ViewportTexture_cnw22")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2997,6 +3104,13 @@ stream = ExtResource("282_xj0gb")
 [editable path="SecurityCams/RightAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/HallwaySecurityCam"]
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
+[editable path="Player"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
+[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
 [editable path="Desk/office desk/cranes"]

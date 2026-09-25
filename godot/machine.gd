@@ -44,11 +44,15 @@ const REFILL_MINIGAME := "Refill"
 @export var ordered_liquid_icon: TextureRect
 @export var ordered_extra_icon: TextureRect
 @export var ordered_drink_icon: TextureRect
+# literally just the text that says 'ORDERED' above the icon
+@export var ordered_text: RichTextLabel
 @export var made_breakdown: Control
 @export var made_main_ingredient_panel: OrderBreakdownElement
 @export var made_liquid_panel: OrderBreakdownElement
 @export var made_extra_panel: OrderBreakdownElement
 @export var made_drink_icon: TextureRect
+# literally just the text that says 'MADE' above the icon
+@export var made_text: RichTextLabel
 @export var equal_sign: TextureRect
 @export var equal_sign_states: Array[Texture2D]
 enum EqualStates {
@@ -135,6 +139,7 @@ var test_3: int = 0
 func _ready() -> void:
 	get_stats()
 	ordered_drink_icon.hide()
+	ordered_text.hide()
 	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
 	reset_icons()
@@ -174,11 +179,13 @@ func _ready() -> void:
 
 var current_ingbar_animation:Array[Texture2D]:
 	set(value):
+		if value == current_ingbar_animation:
+			return
 		animation_index = 0
 		current_ingbar_animation = value
 var animation_index:int
 var animation_delay_timer:float = 0
-var animation_delay:float = 0.05
+var animation_delay:float = 0.03
 
 
 func reset_icons():
@@ -205,6 +212,7 @@ func _process(delta: float) -> void:
 	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
+	animation_delay = 0.03
 	if animation_delay_timer >= animation_delay:
 		animation_delay_timer = 0
 		update_animation()
@@ -215,6 +223,7 @@ func _process(delta: float) -> void:
 	make_drink_button.disabled = (not waiting_for_response) or (ingredients < Stats.current.ingredients_per_order) or tutorial_lock_remake_drink_button
 	made_breakdown.visible = waiting_for_response
 	made_drink_icon.visible = waiting_for_response
+	made_text.visible = waiting_for_response
 
 	# uncomment if we want to show detailed ingredients cost for remakes
 	#remake_ingredients_cost_label.text = (
@@ -407,12 +416,11 @@ func _set_customer(new_customer: Customer) -> void:
 		if customer.customer_sprite_resource.alternate_desk_sprite:
 			customer.body.texture = customer.customer_sprite_resource.sprite
 
-	customer = new_customer
-	if customer != null:
-		customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
-		await customer.move_to(spot_for_customer.global_position)
-		if customer.customer_sprite_resource.alternate_desk_sprite:
-			customer.body.texture = customer.customer_sprite_resource.alternate_desk_sprite
+	if new_customer != null:
+		new_customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
+		await new_customer.move_to(spot_for_customer.global_position)
+		if new_customer.customer_sprite_resource.alternate_desk_sprite:
+			new_customer.body.texture = new_customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
@@ -423,6 +431,7 @@ func _set_customer(new_customer: Customer) -> void:
 			# but this seems to behave correctly
 			Events.force_close_minigame.emit()
 			Events.minigame_cancelled.emit()
+	customer = new_customer
 
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
@@ -478,6 +487,8 @@ func machine_make_drink() -> void:
 	# NOTE: experiment: commented out for now to simplify ui
 	#customer_order_indicator.show()
 	ordered_drink_icon.show()
+	ordered_text.show()
+	
 	# ordered_drink_name_label.show()
 	order_breakdown.show()
 
@@ -538,10 +549,13 @@ func machine_make_drink() -> void:
 		# Roll whether the drink should be correct or incorrect, based on time of day and current day.
 		var chances_curve: Curve = Stats.current.chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day.get(Global.day)
 		var chance_drink_should_be_incorrect: float = chances_curve.sample(Global.shift_progress_ratio)
-		var drink_should_be_incorrect: bool = randf_range(0, 1.0) <= chance_drink_should_be_incorrect
+		var roll_for_drink_incorrect: float = randf_range(0, 1.0)
+		var drink_should_be_incorrect: bool = roll_for_drink_incorrect <= chance_drink_should_be_incorrect
 		if drink_should_be_incorrect:
+			print("Machine: rolled %s, which is less than %s, drink will be incorrect." % [roll_for_drink_incorrect, chance_drink_should_be_incorrect])
 			target_drink_diff = randi_range(1, ingredient_types_count)
 		else:
+			print("Machine: rolled %s, which is more than %s, drink will be correct." % [roll_for_drink_incorrect, chance_drink_should_be_incorrect])
 			target_drink_diff = 0
 	
 	var unlocked_drinks: Array[Drink]
@@ -835,6 +849,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		Events.order_accepted.emit(customer)
 
 	ordered_drink_icon.hide()
+	ordered_text.hide()
 	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 
@@ -936,14 +951,22 @@ func _on_requested_use_active_item_machine():
 		return
 
 	if customer:
-		Events.play_viewmodel_animation.emit("airhorn_use")
-		airhorn_sound.play()
-		customer.leave_store()
-		_set_customer(null)
-		waiting_for_response = false
-		order_breakdown.hide()
-
 		Global.put_active_item_on_cooldown(air_horn)
+		var leaving_customer: Customer = customer
+		Events.play_viewmodel_animation.emit("airhorn_use")
+		await Events.air_horn_animation_just_blasted
+		airhorn_sound.play()
+		_set_customer(null)
+		leaving_customer.leave_store()
+		waiting_for_response = false
+		
+		ordered_drink_icon.hide()
+		ordered_text.hide()
+		ordered_drink_name_label.hide()
+		order_breakdown.hide()
+		animation_player.stop()
+		hum_sound.stop()
+		equal_sign.texture = equal_sign_states[EqualStates.Empty]
 
 
 func _on_clean_spill() -> void:
@@ -995,7 +1018,9 @@ func _on_remake_drink_button_pressed() -> void:
 				time_scale = 0.5
 			elif item.item_level == 2:
 				time_scale = 0.25
-			Engine.time_scale *= time_scale
+
+			Global.pitch_shift_all_3d_audio(true)
+			Engine.time_scale = time_scale
 			print("time scale set to: %s" % Engine.time_scale)
 
 
@@ -1023,6 +1048,7 @@ func _on_remade_drink() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
+			Global.pitch_shift_all_3d_audio(false)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
@@ -1034,6 +1060,7 @@ func _cancel_remake_minigame() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
+			Global.pitch_shift_all_3d_audio(false)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
@@ -1045,6 +1072,7 @@ func _on_force_close_minigame() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
+			Global.pitch_shift_all_3d_audio(false)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 

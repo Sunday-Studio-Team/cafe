@@ -28,11 +28,10 @@ func handle_right_click(_delta: float) -> void:
 			var throw_direction: Vector3 = -camera.global_transform.basis.z
 
 			bomb_instance = exploding_bomb_scene.instantiate()
-			bomb_instance.global_position = camera.global_position + throw_direction
 			add_child(bomb_instance)
+			bomb_instance.global_position = camera.global_position + throw_direction
 
 			bomb_instance.apply_impulse(throw_direction * 6)
-
 
 func we_have_item() -> bool:
 	has_exploding_bomb_item = false

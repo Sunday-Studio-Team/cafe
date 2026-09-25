@@ -23,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://bp33dnffbdc7i" path="res://minigames/ingredients_refill/assets/Lid.png" id="15_tq37f"]
 [ext_resource type="Texture2D" uid="uid://c6467b6csgjr2" path="res://minigames/ingredients_refill/assets/refill final.png" id="16_knrnr"]
 [ext_resource type="Texture2D" uid="uid://bpd4fxj4nlu0n" path="res://minigames/ingredients_refill/assets/bag_no_bg.png" id="19_r7ncj"]
+[ext_resource type="AudioStream" uid="uid://dvka725lh1iap" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_1.wav" id="24_tq37f"]
+[ext_resource type="AudioStream" uid="uid://c0m8t8std8onw" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_2.wav" id="25_lrtnr"]
+[ext_resource type="AudioStream" uid="uid://dsthw36xeub67" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_3.wav" id="26_cxwh1"]
 
 [sub_resource type="Curve" id="Curve_cuth0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -53,7 +56,13 @@ stream_1/stream = ExtResource("11_1nxwo")
 stream_2/stream = ExtResource("12_aviex")
 stream_3/stream = ExtResource("13_bjc5e")
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mjix0"]
+streams_count = 3
+stream_0/stream = ExtResource("24_tq37f")
+stream_1/stream = ExtResource("25_lrtnr")
+stream_2/stream = ExtResource("26_cxwh1")
+
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "catch_gold_bean_sound")]
 script = ExtResource("1_2efvg")
 horizontal_trajectory_curve = SubResource("Curve_cuth0")
 cup = NodePath("Cup")
@@ -67,6 +76,7 @@ visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
 bean_hit_glasss_sound = NodePath("Cup/BeanHitGlassSound")
 bag_shake_sound = NodePath("Bag/BagShakeSound")
 gain_score_sound = NodePath("GainScoreSound")
+catch_gold_bean_sound = NodePath("CatchGoldBeanSound")
 regular_bean_scene = ExtResource("2_51asp")
 screw_bean_scene = ExtResource("3_mev0o")
 golden_bean_scene = ExtResource("4_jjgte")
@@ -152,6 +162,7 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1252123989]
+z_index = -5
 position = Vector2(960, 540)
 texture = ExtResource("16_knrnr")
 
@@ -190,3 +201,6 @@ fit_content = true
 
 [node name="GainScoreSound" type="AudioStreamPlayer" parent="." unique_id=948120087]
 stream = SubResource("AudioStreamRandomizer_ovvye")
+
+[node name="CatchGoldBeanSound" type="AudioStreamPlayer" parent="." unique_id=2131509292]
+stream = SubResource("AudioStreamRandomizer_mjix0")

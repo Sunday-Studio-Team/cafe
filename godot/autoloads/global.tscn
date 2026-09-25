@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b5u5pk4pmxhhc" path="res://sprites/stars/star.png" id="4_rx4vo"]
 [ext_resource type="Texture2D" uid="uid://ivi0hfqy0aps" path="res://sprites/stars/star_half.png" id="5_hx7jl"]
 [ext_resource type="Texture2D" uid="uid://dp6n1x1ih2ij6" path="res://sprites/stars/empty_star.png" id="6_4y2jn"]
+[ext_resource type="Script" uid="uid://br0t41k7w0u85" path="res://autoloads/resource_background_loader/resource_background_loader.gd" id="7_37qiw"]
 
 [node name="Global" type="Node" unique_id=668412834]
 process_mode = 3
@@ -16,9 +17,12 @@ ingredients_folder_path = "res://drinks/ingredients"
 customer_sprites_folder_path = "res://resources/customers"
 review_folder_path = "res://emails/reviews/review_list"
 spill_sprites_path = "res://sprites/stains"
-tippy_voice_path = "res://audio/voicelines"
 hover_shader = ExtResource("2_qxp0b")
 full_wrong_drink = ExtResource("3_2wtbm")
 star_texture = ExtResource("4_rx4vo")
 half_star_texture = ExtResource("5_hx7jl")
 empty_star_texture = ExtResource("6_4y2jn")
+
+[node name="ResourceBackgroundLoader" type="Node" parent="." unique_id=886383606]
+script = ExtResource("7_37qiw")
+metadata/_custom_type_script = "uid://br0t41k7w0u85"

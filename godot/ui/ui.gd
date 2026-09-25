@@ -63,6 +63,8 @@ const ALERT_QUEUE_SIZE = 5
 @export var use_item_prompt: Button
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName
+@export var exploding_bomb_ui: PanelContainer
+
 
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
@@ -71,6 +73,8 @@ var star_texture_rect := TextureRect.new()
 var half_star_texture_rect := TextureRect.new()
 var empty_star_texture_rect := TextureRect.new()
 var _employee_rating_last_update: float = -1
+var exploding_bomb_timer: float = 10.5
+var exploding_bomb_used: bool = false
 
 
 func _ready() -> void:
@@ -170,7 +174,6 @@ func _process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
 	# in UI (except for the machine UI where we want the tablet to show on the
 	# side)
-
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
@@ -187,6 +190,10 @@ func _process(_delta: float) -> void:
 
 	update_score_indicators()
 	update_interactable_ui()
+	if !exploding_bomb_used:
+		update_exploding_bomb_ui()
+	else:
+		update_exploding_bomb_timer(_delta)
 	update_time_indicator()
 	update_cctv_indicator()
 	# since we have a lot of time after the shift 'ends', i think we can basically
@@ -477,6 +484,30 @@ func update_interactable_ui() -> void:
 			hovered_interactable != null
 			and hovered_interactable.time_held > 0
 	)
+
+
+func update_exploding_bomb_ui() -> void:
+	var owned_exploding_bomb: Item = null
+
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "exploding_bomb":
+			owned_exploding_bomb = owned_item
+			
+	if owned_exploding_bomb != null:
+		exploding_bomb_ui.show()
+		if Input.is_action_just_pressed("right_click"):
+			exploding_bomb_ui.hide()
+			exploding_bomb_used = true
+	else:
+		exploding_bomb_ui.hide()
+		
+		
+func update_exploding_bomb_timer(_delta: float) -> void:
+	if not get_tree().paused:
+		exploding_bomb_timer -= _delta
+		if exploding_bomb_timer <= 0:
+			exploding_bomb_timer = 10.5
+			exploding_bomb_used = false
 
 
 func update_cctv_indicator() -> void:

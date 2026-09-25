@@ -6,9 +6,6 @@ extends Node
 
 var _item_ids: Array[String] = []
 var _customer_names: Array[String] = []
-# tracks whether we have the 'unlimited actives' command toggled on
-# (so we can toggle on/off with the same command)
-var ua_enabled := false
 
 
 func _ready() -> void:
@@ -52,7 +49,8 @@ func _ready() -> void:
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
-- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
+- [i]trash[/i] spawn a trash
+- [i]nocooldowns[/i] gives active items back shortly after you use them (possibly buggy)
 - [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
 		% [items_guide_str],
 	)
@@ -84,20 +82,26 @@ func _ready() -> void:
 		_item_ids.append("\"%s\"" % item.item_id)
 	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
-	Console.add_command("ua", toggle_unlimited_actives)
+	Console.add_command("nocooldowns", toggle_unlimited_actives)
 	Console.add_command("vo", vo_test)
 	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
 	for customer: CustomerSpriteData in Global.customer_sprites:
 		_customer_names.append("\"%s\"" % customer.customer_name)
 	Console.add_command_autocomplete_list("customer", _customer_names)
 	Console.add_command("unlockall", unlock_everything)
+	Console.add_command("trash", spawn_trash)
 
 	Events.main_scene_loaded.connect(
 		func():
-			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
+			if not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
 
+
+func spawn_trash() -> void:
+	Global.main_scene.spawn_trash();
+	Console.print_line("trash was spawned")
+	
 
 func unlock_everything() -> void:
 	unlock_day("6")
@@ -269,14 +273,12 @@ func toggle_timer() -> void:
 
 
 func toggle_unlimited_actives() -> void:
-	ua_enabled = !ua_enabled
-
-	if ua_enabled:
-		Events.active_item_used.connect(refresh_active_item)
-		Console.print_line("Unlimited Actives enabled")
+	Global.no_cooldowns = !Global.no_cooldowns
+	
+	if Global.no_cooldowns:
+		Console.print_line("item cooldowns disabled")
 	else:
-		Events.active_item_used.disconnect(refresh_active_item)
-		Console.print_line("Unlimited Actives disabled")
+		Console.print_line("item cooldowns enabled")
 
 
 func refresh_active_item(item: Item):

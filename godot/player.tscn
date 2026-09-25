@@ -9,12 +9,13 @@
 [ext_resource type="AudioStream" uid="uid://najej8q5da4u" path="res://audio/bag_pickup.mp3" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://f3ib4e2r2ga4" path="res://exploding_bomb_on_player.gd" id="5_sweqy"]
 [ext_resource type="PackedScene" uid="uid://do0l4oqkkpu3y" path="res://items/exploding_bomb.tscn" id="6_2hs0m"]
-[ext_resource type="PackedScene" uid="uid://c55nqnrnp8wni" path="res://trash_placehold.tscn" id="6_dw050"]
+[ext_resource type="Script" uid="uid://dj2jnt4p8roor" path="res://remote_transform_live_updater.gd" id="6_pylmc"]
 [ext_resource type="PackedScene" uid="uid://oe0bebo0iyvn" path="res://Assets/ingredient_bag/ingredientbag_large.glb" id="6_urp6f"]
-[ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash.png" id="7_606se"]
 [ext_resource type="AudioStream" uid="uid://dbt083tkev0i1" path="res://audio/footsteps/footstep_concrete_1.wav" id="9_ivps1"]
+[ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="10_q13i1"]
 [ext_resource type="AudioStream" uid="uid://c0ssp862cxccu" path="res://audio/footsteps/footstep_concrete_2.wav" id="10_urp6f"]
 [ext_resource type="AudioStream" uid="uid://dtm03unbkcgjm" path="res://audio/footsteps/footstep_concrete_3.wav" id="11_bwjto"]
+[ext_resource type="PackedScene" uid="uid://bynusdrfe1hno" path="res://ui/3d_tablet_ui/3d_tablet_ui.tscn" id="11_pylmc"]
 [ext_resource type="AudioStream" uid="uid://dob2v6d5xvpoa" path="res://audio/footsteps/footstep_concrete_4.wav" id="12_606se"]
 [ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="17_op7ga"]
 [ext_resource type="Material" uid="uid://b18gocjjdbtpa" path="res://resources/misc_resources/roller_skates_dust_clouds.tres" id="18_q13i1"]
@@ -22,6 +23,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
 height = 1.7479492
+
+[sub_resource type="Environment" id="Environment_3n8yq"]
+adjustment_brightness = 2.0
 
 [sub_resource type="Gradient" id="Gradient_op7ga"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
@@ -54,28 +58,39 @@ material = SubResource("StandardMaterial3D_0ep1o")
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 grow = true
-grow_amount = -1.05
+grow_amount = -1.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_pylmc"]
 material = SubResource("StandardMaterial3D_q13i1")
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "gpu_particles_3d")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tmop"]
+shading_mode = 0
+disable_receive_shadows = true
+grow_amount = -1.1
+stencil_flags = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ahtn"]
+material = SubResource("StandardMaterial3D_5tmop")
+radius = 0.3
+height = 1.1
+
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
 aiming_ray = NodePath("CameraController/Camera3D/RayCast3D")
-ingredients_bag = NodePath("CameraController/Camera3D/ingredientbag")
-default_ingredients_bag_model = NodePath("CameraController/Camera3D/ingredientbag/ingredient_bag")
-large_ingredients_bag_model = NodePath("CameraController/Camera3D/ingredientbag/large_ingredient_bag")
-customer_trash = NodePath("CameraController/Camera3D/TrashSprite")
-bag_pickup_sound = NodePath("CameraController/Camera3D/ingredientbag/BagPickupSound")
+ingredients_bag = NodePath("CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag")
+default_ingredients_bag_model = NodePath("CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/ingredient_bag")
+large_ingredients_bag_model = NodePath("CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag")
+customer_trash = NodePath("CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup")
+bag_pickup_sound = NodePath("CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/BagPickupSound")
 footstep_sound = NodePath("FootstepSound")
 ingredients_bag_scene = ExtResource("2_sweqy")
 customer_trash_scene = ExtResource("3_dw050")
 sprint_lockout_timer = NodePath("SprintLockoutTimer")
 footstep_sfx_lockout_timer = NodePath("FootstepLockoutTimer")
 free_cam_visualizer = NodePath("FreeCamVisualizer")
-gpu_particles_3d = NodePath("GPUParticles3D")
+roller_skates_dust_particles = NodePath("RollerSkatesDustParticles")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8760254, 0)
@@ -88,6 +103,7 @@ player_controller = NodePath("..")
 camera_effects = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player", "caught_overlay")]
+cull_mask = 1048567
 current = true
 fov = 90.0
 script = ExtResource("4_2hs0m")
@@ -99,8 +115,62 @@ bob_frequency = 3.0
 max_shake = 0.2
 caught_overlay = NodePath("CaughtOverlay")
 
-[node name="trash_placehold" parent="CameraController/Camera3D" unique_id=318775450 instance=ExtResource("6_dw050")]
-visible = false
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraController/Camera3D" unique_id=982490558]
+remote_path = NodePath("HoldingItemsSubViewport/HoldingItemsCamera")
+
+[node name="HoldingItemsSubViewport" type="SubViewport" parent="CameraController/Camera3D/RemoteTransform3D" unique_id=2063954524]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="HoldingItemsCamera" type="Camera3D" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport" unique_id=107124541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+cull_mask = 8
+environment = SubResource("Environment_3n8yq")
+fov = 40.0
+
+[node name="ingredientbag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=832928181 instance=ExtResource("3_hqtel")]
+transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
+
+[node name="ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=489136358]
+transform = Transform3D(0.049236596, 0.018308839, -0.027216244, -0.010547802, 0.0553187, 0.018131915, 0.031059312, -0.010237642, 0.04930202, -0.20459722, 0.05080402, -0.052625537)
+layers = 8
+
+[node name="large_ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
+transform = Transform3D(0.058251597, 0.012124337, -0.03948466, -0.0077862935, 0.07026299, 0.010088183, 0.040563658, -0.0039240527, 0.058638528, -0.19612944, 0.04663241, -0.031387717)
+
+[node name="ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=218460479]
+transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
+layers = 8
+
+[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=1146968741]
+transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
+layers = 8
+
+[node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" unique_id=1902215747]
+transform = Transform3D(8.502839, 1.9279655, 4.897417, -1.3210089, 9.788824, -1.5600466, -5.094765, 0.6795302, 8.577971, 0.08054328, 0.46025753, 0.015081406)
+stream = ExtResource("4_hqtel")
+volume_db = -20.0
+max_db = 0.0
+
+[node name="Trash Cup" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1417801726 instance=ExtResource("10_q13i1")]
+transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.17303157, -0.16699994, -0.4299096)
+
+[node name="SM_TrashCup" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1837821948]
+transform = Transform3D(0.10581238, 1.517883e-17, 0, -1.2576745e-17, 0.105812386, 0, 0, 1.7347235e-18, 0.10581238, 0, 0, 0)
+layers = 8
+
+[node name="3DTabletUI" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1761848473 instance=ExtResource("11_pylmc")]
+transform = Transform3D(0.285317, -0.025552988, 0.089113876, 0, 0.28837848, 0.08269122, -0.092705116, -0.07864401, 0.2742643, -0.2733251, -0.100000024, -0.54824734)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=121976474]
+transform = Transform3D(1, 0, 0, 0, 0.19741967, 0.98031914, 0, -0.98031914, 0.19741967, 0, 0, 0)
+layers = 8
+light_energy = 0.8
+
+[node name="RemoteTransformLiveUpdater" type="Node" parent="CameraController/Camera3D/RemoteTransform3D" unique_id=361373696 node_paths=PackedStringArray("remote_transform_3d")]
+script = ExtResource("6_pylmc")
+remote_transform_3d = NodePath("..")
+metadata/_custom_type_script = "uid://dj2jnt4p8roor"
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraController/Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
@@ -108,26 +178,6 @@ target_position = Vector3(0, 0, -1.5)
 collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
-
-[node name="TrashSprite" type="Sprite3D" parent="CameraController/Camera3D" unique_id=314507991]
-transform = Transform3D(1, 7.450581e-09, -2.9802322e-08, -7.450581e-09, 1, -7.450581e-09, -2.9802322e-08, 1.4901161e-08, 1, 0.34211293, -0.16735828, -0.30575544)
-billboard = 1
-texture = ExtResource("7_606se")
-
-[node name="ingredientbag" parent="CameraController/Camera3D" unique_id=832928181 instance=ExtResource("3_hqtel")]
-transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
-
-[node name="ingredient_bag" parent="CameraController/Camera3D/ingredientbag" index="0" unique_id=1546531189]
-transform = Transform3D(0.0832229, 0.030946786, -0.04600267, -0.017828582, 0.09350325, 0.030647755, 0.052498486, -0.01730433, 0.083333485, -0.00945425, -0.00080776215, 0.026645422)
-
-[node name="large_ingredient_bag" parent="CameraController/Camera3D/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
-transform = Transform3D(0.101967834, 0.021223323, -0.06911679, -0.0136296945, 0.122993454, 0.017659085, 0.071005575, -0.006868943, 0.102645144, 0, 0, 0)
-
-[node name="BagPickupSound" type="AudioStreamPlayer3D" parent="CameraController/Camera3D/ingredientbag" unique_id=1902215747]
-transform = Transform3D(8.502839, 1.9279655, 4.897417, -1.3210089, 9.788824, -1.5600466, -5.094765, 0.6795302, 8.577971, 0.08054328, 0.46025753, 0.015081406)
-stream = ExtResource("4_hqtel")
-volume_db = -20.0
-max_db = 0.0
 
 [node name="CaughtOverlay" type="TextureRect" parent="CameraController/Camera3D" unique_id=1076028012]
 modulate = Color(1, 1, 1, 0)
@@ -179,15 +229,21 @@ pixel_size = 0.00085
 billboard = 2
 texture = ExtResource("17_op7ga")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1045756313]
+[node name="RollerSkatesDustParticles" type="GPUParticles3D" parent="." unique_id=1045756313]
 cast_shadow = 0
+emitting = false
 amount = 32
-fixed_fps = 16
+fixed_fps = 12
 interpolate = false
 process_material = ExtResource("18_q13i1")
-draw_passes = 2
+draw_passes = 3
 draw_pass_1 = SubResource("SphereMesh_coxhp")
 draw_pass_2 = SubResource("SphereMesh_pylmc")
+draw_pass_3 = SubResource("SphereMesh_7ahtn")
 
-[editable path="CameraController/Camera3D/trash_placehold"]
-[editable path="CameraController/Camera3D/ingredientbag"]
+[editable path="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
+[editable path="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
+[editable path="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
+[editable path="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
+[editable path="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
+[editable path="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
