@@ -1633,7 +1633,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010236, -0.00016215755, -0.99994373, 1.0259981e-07, 1, -0.00016214843, 0.99994373, -1.01539825e-08, 0.00057010236, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010225, -0.00016215755, -0.99994355, 1.0259979e-07, 1, -0.0001621484, 0.99994355, -1.01539825e-08, 0.00057010225, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2039,7 +2039,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
 mesh = SubResource("BoxMesh_rkau7")
 
 [node name="plastic chair2" parent="CustomerArea" unique_id=248825315 instance=ExtResource("22_kmdca")]
-transform = Transform3D(-0.43490902, 0, -0.90047455, 0, 1, 0, 0.90047455, 0, -0.43490902, 0.44528985, 0, -7.6960106)
+transform = Transform3D(-0.43490902, 0, -0.90047455, 0, 1, 0, 0.90047455, 0, -0.43490902, 4.548725, 0, -3.6920702)
 
 [node name="plastic chair3" parent="CustomerArea" unique_id=738810748 instance=ExtResource("22_kmdca")]
 transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 6.4921713, 0, -7.566301)
@@ -2116,7 +2116,7 @@ transform = Transform3D(0.63188446, 0.006143395, 0.517861, 0.062983155, 0.809971
 transform = Transform3D(0.1466603, 0, -0.8548015, 0, 0.7746748, 0, 0.8548015, 0, 0.1466603, 5.893644, 3.0590515, -0.82174826)
 
 [node name="PinkBench (1)" parent="CustomerArea" unique_id=833292709 instance=ExtResource("35_fp6ic")]
-transform = Transform3D(0.045165975, 0, -0.99897915, 0, 0.9999998, 0, 0.99897915, 0, 0.045165975, 2.7787309, 0.049999952, -4.5311394)
+transform = Transform3D(0.045165975, 0, -0.99897915, 0, 0.9999998, 0, 0.99897915, 0, 0.045165975, 1.7001789, 0.049999952, -6.3443007)
 
 [node name="ATMTIPPY" parent="CustomerArea" unique_id=862674870 instance=ExtResource("109_1wuav")]
 transform = Transform3D(-0.029132022, 0, 0.73432875, 0, 0.7349064, 0, -0.73432875, 0, -0.029132022, 7.783643, 0.7127082, -3.9112139)
@@ -3013,32 +3013,8 @@ spot_angle = 27.502224
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00309, 0, 7.164138)
 metadata/_edit_group_ = true
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D" unique_id=1834821462]
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1371490766]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1786089, 0.33862317, 0.15153408)
-radius = 0.059
-height = 0.55615234
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1546880058]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15841913, 0.3376466, -0.16714764)
-radius = 0.059
-height = 0.5541992
-
-[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1332072376]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.138978, 0.17659384, 0.12768841)
-radius = 0.059
-height = 0.80859375
-
-[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1941598898]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14594078, 0.32568383, -0.12370396)
-radius = 0.059
-height = 0.53027344
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D/CSGCombiner3D" unique_id=1763426231]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5901636, 0)
-radius = 0.30273438
-height = 0.06335449
+[node name="plastic chair2" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D" unique_id=222905971 instance=ExtResource("22_kmdca")]
+transform = Transform3D(-0.6394402, 0, -0.7688411, 0, 1, 0, 0.7688411, 0, -0.6394402, 0.1000905, 0.07200223, -0.08022976)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BreakRoom/WhiteboardRoom/StoolStaticBody3D" unique_id=38093871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36462402, 0)
