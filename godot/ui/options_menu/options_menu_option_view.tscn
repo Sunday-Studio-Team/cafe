@@ -1,19 +1,13 @@
 [gd_scene format=3 uid="uid://p8e3ualo81vq"]
 
 [ext_resource type="Script" uid="uid://c8n2glt20ybp" path="res://ui/options_menu/options_menu_option_view.gd" id="1_5naa7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5naa7"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
+[ext_resource type="FontFile" uid="uid://bqbe41e30urp2" path="res://ui/options_menu/assets/komika_axis/KOMIKAX_.ttf" id="2_tq7pv"]
 
 [node name="OptionsMenuOptionView" type="MarginContainer" unique_id=1434606385 node_paths=PackedStringArray("_option_label", "_option_button")]
 script = ExtResource("1_5naa7")
 option_name = "Option Label"
 _option_label = NodePath("MarginContainer/HBoxContainer/Label")
 _option_button = NodePath("MarginContainer/HBoxContainer/OptionButton")
-
-[node name="Panel" type="Panel" parent="." unique_id=1924963664]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5naa7")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=254389701]
 layout_mode = 2
@@ -28,6 +22,8 @@ layout_mode = 2
 [node name="Label" type="RichTextLabel" parent="MarginContainer/HBoxContainer" unique_id=1450870077]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_tq7pv")
 text = "Option Label"
 fit_content = true
 autowrap_mode = 0
