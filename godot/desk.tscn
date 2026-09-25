@@ -941,15 +941,6 @@ visible = false
 transform = Transform3D(-0.043619424, 0.99904823, 3.3881318e-21, -0.9990482, -0.04361942, -2.842171e-14, -2.842171e-14, 0, 0.99999994, -0.6843137, -0.0957343, 1.1623282)
 visible = false
 
-[node name="SpotLight3D" type="SpotLight3D" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles/Object_8" index="0" unique_id=1455828545]
-transform = Transform3D(1.0000004, 5.2154064e-08, 2.2737368e-13, -3.7252903e-09, 1.0000001, -1.9984014e-13, -2.2737368e-13, -1.3322676e-14, 1.0000002, 0.092681944, 0.10540062, 0.11730039)
-light_color = Color(1, 0.78, 0.39999998, 1)
-light_energy = 6.862
-shadow_enabled = true
-shadow_blur = 0.5
-spot_range = 0.924
-spot_angle = 43.22
-
 [node name="cranes" parent="office desk" unique_id=2126192397 instance=ExtResource("6_bn8wp")]
 transform = Transform3D(-1, 4.9694095e-21, -8.742277e-08, 3.3881318e-21, 0.9999999, 5.684342e-14, 8.742276e-08, 5.684342e-14, -0.9999999, 0.8566165, -1.4210855e-14, -0.3616045)
 visible = false
@@ -966,16 +957,16 @@ transform = Transform3D(-1.0086293, -2.3310421e-14, 0.82016253, 2.3310447e-14, 1
 [node name="stickynote" parent="office desk" unique_id=250556312 instance=ExtResource("4_h1g2g")]
 transform = Transform3D(0.6695641, -0.025966307, 0.74230003, 0.05159434, 0.99859923, -0.011606764, -0.74095917, 0.046069913, 0.669965, -0.5804926, 1.1033841, 0.42820102)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1381647886]
+[node name="screen light" type="SpotLight3D" parent="." unique_id=1381647886]
 transform = Transform3D(-0.8342353, 0, 0.5514086, 0, 1, 0, -0.5514086, 0, -0.8342353, 0.25860378, 1.0087188, 0.071932405)
-light_color = Color(0.51, 0.95100003, 1, 1)
+light_color = Color(0.32, 0.93200004, 1, 1)
 light_energy = 15.0
 light_volumetric_fog_energy = 2.0
 spot_range = 1.5658329
 
 [node name="ScreenLight" type="OmniLight3D" parent="." unique_id=1647296300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23109445, 1.0087188, 0.088364124)
-light_color = Color(0.65999997, 0.89799994, 1, 1)
+light_color = Color(0.32, 0.8639998, 1, 1)
 light_energy = 1.554
 shadow_enabled = true
 omni_range = 0.498
@@ -984,13 +975,6 @@ omni_attenuation = 0.208
 [node name="Lamp" parent="." unique_id=504927446 instance=ExtResource("80_h3q4e")]
 transform = Transform3D(0.45745757, 0, -0.88923144, 0, 1, 0, 0.88923144, 0, 0.45745757, -0.720707, 1.6712577, -0.21237288)
 visible = false
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lamp" unique_id=785542697]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22748578, -0.34178495, -0.06651071)
-visible = false
-light_color = Color(1, 0.6446667, 0.18, 1)
-light_specular = 0.0
-omni_range = 0.5586623
 
 [node name="Sketchbooks, comics, rulers (1)" parent="." unique_id=1251070279 instance=ExtResource("14_ffp6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
@@ -1096,29 +1080,8 @@ visible = false
 transform = Transform3D(0.9648877, 0, -0.26266277, 0, 1, 0, 0.26266277, 0, 0.9648877, 1.6843133, 0.8665496, -0.32985038)
 visible = false
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light" index="0" unique_id=311828212]
-transform = Transform3D(1.0000001, 0, -5.9604645e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -0.17553133, 0.022158861, 0.047783375)
-visible = false
-light_color = Color(0.87223864, 0.63305277, 0.24587479, 1)
-light_energy = 2.046
-light_volumetric_fog_energy = 0.0
-light_specular = 0.44
-shadow_enabled = true
-omni_range = 0.704
-omni_attenuation = 0.624
-
 [node name="Light_002" parent="Lamp 1&5 (1)" index="3" unique_id=1958697863]
 transform = Transform3D(0.9031077, 0.20518763, 0.3772194, 0.38558728, -0.0008653467, -0.9226709, -0.18899399, 0.9787223, -0.07989928, 0.8305938, 0.9096625, -1.2708204)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light_002" index="0" unique_id=1299923416]
-transform = Transform3D(1.0000001, -2.3841858e-07, -1.2852252e-07, 1.4901161e-08, 1, 1.4901161e-08, 2.8871e-08, 1.4901161e-08, 1, -0.010314703, 0.041406482, -0.004349351)
-light_color = Color(0.7905427, 0.5038398, 0.15310782, 1)
-light_energy = 1.663
-light_volumetric_fog_energy = 0.0
-light_specular = 0.0
-shadow_enabled = true
-omni_range = 0.535
-omni_attenuation = 0.718
 
 [node name="Day0DeskProps" type="Node3D" parent="." unique_id=1163803940]
 

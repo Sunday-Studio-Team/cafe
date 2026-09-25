@@ -1633,7 +1633,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010225, -0.00016215755, -0.99994355, 1.0259979e-07, 1, -0.0001621484, 0.99994355, -1.01539825e-08, 0.00057010225, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701022, -0.00016215755, -0.9999435, 1.0259979e-07, 1, -0.00016214838, 0.9999435, -1.01539825e-08, 0.0005701022, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2967,13 +2967,6 @@ transform = Transform3D(1, 0, -7.1054274e-15, 0, 1, 0, 7.1054274e-15, 0, 1, 1.93
 text = "LOCKER ROOM"
 
 [node name="PCRoom" type="Node3D" parent="BreakRoom" unique_id=1612913086]
-
-[node name="PCSpotLight3D" type="SpotLight3D" parent="BreakRoom/PCRoom" unique_id=750693139]
-transform = Transform3D(0.9659259, 1.7473491e-08, 0.2588191, -0.25000006, 0.25881907, 0.9330127, -0.066987306, -0.9659259, 0.25000003, 4.0481787, 2.4671264, 4.4516735)
-light_energy = 8.0
-shadow_enabled = true
-spot_range = 3.1582818
-spot_angle = 15.000773
 
 [node name="CeilingFan" parent="BreakRoom/PCRoom" unique_id=338478717 instance=ExtResource("52_4nsdn")]
 transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 2.9282653, 1.1748112, 4.5939417)
