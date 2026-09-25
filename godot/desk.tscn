@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://bqiflsil605fe" path="res://Assets/chinese deco/Cat (1).glb" id="7_yh53x"]
 [ext_resource type="PackedScene" uid="uid://cuphhyfq8nb83" path="res://Assets/chinese deco/Greenfish (1).glb" id="9_7hob8"]
 [ext_resource type="PackedScene" uid="uid://ciaj5465hecdo" path="res://Assets/chinese deco/Onigiri (1).glb" id="10_hdap7"]
+[ext_resource type="PackedScene" uid="uid://cmy8d842qgtsn" path="res://Assets/plants/Sad Plants.glb" id="11_d0do2"]
 [ext_resource type="Texture2D" uid="uid://clwurxo0ghkbw" path="res://Assets/chinese deco/Little Fish_littlefish_DefaultMaterial_BaseMap.png" id="11_xo3iy"]
+[ext_resource type="PackedScene" uid="uid://cp5tqvef3w4rg" path="res://Assets/desk_posters/luckycat_poster.tscn" id="11_yugeg"]
 [ext_resource type="PackedScene" uid="uid://cfb4nrubid3de" path="res://Assets/chinese deco/WebMan (1).glb" id="12_1xfbt"]
 [ext_resource type="Texture2D" uid="uid://bqhuhom7c0lve" path="res://Assets/chinese deco/Newspaper (1)_newspaper_diffuse-newspaper_glass.png" id="13_ip4fr"]
 [ext_resource type="PackedScene" uid="uid://2cuwd4e3qs58" path="res://Assets/comics, sketchbooks etc/sketchbooks,_comics,_rulers_(1).tscn" id="14_ffp6v"]
@@ -821,38 +823,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sie78")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ndbkw"]
-_surfaces = [{
-"aabb": AABB(-1.1051574, -1.1136286, -3.3271742, 2.158029, 2.309555, 6.9505296),
-"format": 34896613377,
-"index_count": 528,
-"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwACAAQAAwAFAAAABAAGAAMAAwAGAAUABAAHAAYAAgAHAAQABgAIAAUAAgAJAAcAAQAJAAIABwAKAAYABgAKAAgACQALAAcABwALAAoABQAIAAwADAAIAAoABQAMAA0AAAAFAA0ADAAKAA4ADgAKAAsADQAMAA4AAAANAA8AAAAPAAEADQAOABAADwANABAADgALABEAEAAOABEADwAQABIAEQALABMACQATAAsAEQATABQAFQATAAkAFQAUABMAAQAVAAkAFgARABQAEAARABYAFgAUABUAEgAQABYAFwAVAAEAFwAWABUAEgAWABcADwAXAAEADwASABcAGAAZABoAGwAYABoAGwAaABwAGwAdABgAHAAeABsAGwAeAB0AHAAfAB4AGgAfABwAHgAgAB0AGgAhAB8AGQAhABoAHwAiAB4AHgAiACAAIQAjAB8AHwAjACIAHQAgACQAJAAgACIAHQAkACUAGAAdACUAJAAiACYAJgAiACMAJQAkACYAGAAlACcAGAAnABkAJQAmACgAJwAlACgAJgAjACkAKAAmACkAJwAoACoAKQAjACsAIQArACMAKQArACwALQArACEALQAsACsAGQAtACEALgApACwAKAApAC4ALgAsAC0AKgAoAC4ALwAtABkALwAuAC0AKgAuAC8AJwAvABkAJwAqAC8AMAAxADIAMwAwADIAMwAyADQAMwA1ADAANAA2ADMAMwA2ADUANAA3ADYAMgA3ADQANgA4ADUAMgA5ADcAMQA5ADIANwA6ADYANgA6ADgAOQA7ADcANwA7ADoANQA4ADwAPAA4ADoANQA8AD0AMAA1AD0APAA6AD4APgA6ADsAPQA8AD4AMAA9AD8AMAA/ADEAPQA+AEAAPwA9AEAAPgA7AEEAQAA+AEEAPwBAAEIAQQA7AEMAOQBDADsAQQBDAEQARQBDADkARQBEAEMAMQBFADkARgBBAEQAQABBAEYARgBEAEUAQgBAAEYARwBFADEARwBGAEUAQgBGAEcAPwBHADEAPwBCAEcASABJAEoASwBIAEoASwBKAEwASwBNAEgATABOAEsASwBOAE0ATABPAE4ASgBPAEwATgBQAE0ASgBRAE8ASQBRAEoATwBSAE4ATgBSAFAAUQBTAE8ATwBTAFIATQBQAFQAVABQAFIATQBUAFUASABNAFUAVABSAFYAVgBSAFMAVQBUAFYASABVAFcASABXAEkAVQBWAFgAVwBVAFgAVgBTAFkAWABWAFkAVwBYAFoAWQBTAFsAUQBbAFMAWQBbAFwAXQBbAFEAXQBcAFsASQBdAFEAXgBZAFwAWABZAF4AXgBcAF0AWgBYAF4AXwBdAEkAXwBeAF0AWgBeAF8AVwBfAEkAVwBaAF8A"),
-"name": "Sketchbooks, comics, eraser, ruler",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 96,
-"vertex_data": PackedByteArray("AAD3BP//AAAAAKfiVbYAAAAAp+L//wAAP+33BP//AAA/7afi//8AADoQ9wRE9gAAd+v3BET2AAB366fiRPYAAE4VGgoD9QAAOhCn4kT2AABj5hoKA/UAAGPmhN0D9QAAThUaClHBAAA6EPcED8AAAGPmGgpRwQAAAAD3BFW2AAB36/cED8AAAGPmhN1RwQAAP+33BFW2AABOFYTdA/UAAE4VhN1RwQAAOhCn4g/AAAB366fiD8AAAD/tp+JVtgAA9AAAAOWBAAD0AE7utTIAAPQATu7lgQAA//8AAOWBAAD//07u5YEAAGYSAABvdwAAFP4AAG93AAAU/k7ub3cAANsXhAUWdgAAZhJO7m93AACf+IQFFnYAAJ/4yegWdgAA2xeEBYQ+AABmEgAAKj0AAJ/4hAWEPgAA9AAAALUyAAAU/gAAKj0AAJ/4yeiEPgAA//8AALUyAADbF8noFnYAANsXyeiEPgAAZhJO7io9AAAU/k7uKj0AAP//Tu61MgAA9ADXArW0AAD0AP//fIIAAPQA//+1tAAA///XArW0AAD/////tbQAAGYS1wITrgAAFP7XAhOuAAAU/v//E64AANsXtAg4rQAAZhL//xOuAACf+LQIOK0AAJ/4Ivo4rQAA2xe0CPmJAABmEtcCHokAAJ/4tAj5iQAA9ADXAnyCAAAU/tcCHokAAJ/4Ivr5iQAA///XAnyCAADbFyL6OK0AANsXIvr5iQAAZhL//x6JAAAU/v//HokAAP////98ggAA9ADJAjgyAAD0APH/AAAAAPQA8f84MgAA///JAjgyAAD///H/ODIAAGYSyQKWKwAAFP7JApYrAAAU/vH/lisAANsXpgi7KgAAZhLx/5YrAACf+KYIuyoAAJ/4FPq7KgAA2xemCHwHAABmEskCoQYAAJ/4pgh8BwAA9ADJAgAAAAAU/skCoQYAAJ/4FPp8BwAA///JAgAAAADbFxT6uyoAANsXFPp8BwAAZhLx/6EGAAAU/vH/oQYAAP//8f8AAAAA")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_7517r"]
-resource_name = "Sketchbooks, comics, rulers (1)_Cube_015"
-_surfaces = [{
-"aabb": AABB(-1.1051574, -1.1136286, -3.3271742, 2.158029, 2.309555, 6.9505296),
-"attribute_data": PackedByteArray("oCtMlt8By6LfAUyWoCvLopiC8QCvWEs4r1jxAJiCSzhbVna4o1qWvHRWysebWna4tV2UvOlhxMe6XXa4+WF2uG1YSDiXgpcAl4JIOG1YlwD5YW+utl1Rqu1hI5+5XW+upFpOqnhWGZ+aWm+uW1ZvrltWb66bWna4W1Z2uJpab65mVTpBl1iDQ2ZVk0WYWB5DZlWTRb9Y8kMsV2pKl1iDQyxXakodWehDaFv8Sb9Y8kP5YXa4uV1vrvlhb666XXa4u1QKv3FKELG7VBCxcUoKv7tU9ctxSgq/u1QKv3FK9cu7VBCxcUolpLtUJaRxShCxYVzuQBhZsUIxW208M1kXQzFbbTy7WKxC+lYyPBhZsUJoW/xJM1l8Q2dcPUUdWehDZ1w9RTNZF0NhXO5AM1l8Q/pWMjyYWB5DZlU6QbtYrEJbAayEKizUdSosrIRbAdR1+k5TfgAzTZoAM1N++k5NmmgeFrnKIenAeh7jxL8hFrlwKOzAvCvoxIAoFrnYKxa5DjNVfhJPWZoOM1maEk9VftgruLF1KFSqxStapYEouLHQIVKqhB5WpcAhuLFoHrixaB64sb8hFrloHha5wCG4selkj1BKYVlP6WQ9Tklhmk/pZD1OX2GQTq9lDEdKYVlPr2UMR5NglU4mXjdHX2GQTtgrFrmBKLix2Cu4sYAoFrlxSBK/lz8LsHFIC7CXPxK/cUj1zJc/Er9xSBK/lz/1zHFIC7CXPyiicUgoopc/C7DrW8dRg2BYUJVdVFdWYL1PlV1UV01haFAVZfJXg2BYUCZeN0dWYCtP6FunTJNglU7oW6dMVmC9T+tbx1FWYCtPFWXyV0lhmk/pZI9QTWFoUIgrcYbMAeyThAGxhtArrJMPij/e7Gs7vg+KO77saz/er2MXyctlVs28Y2PSyWUXyU5mVs1daGPST2YXyWtoF8lUimLesWvWvVSK1r2xa2LebmiSwU1mQb1ZaDG4UGaSwcllRL2sYzi4yWWSwatjksGrY5LByWUXya9jF8nJZZLBQGaj1ehk7NdAZIjVaGXT10BkiNUyZAzYI2BG1uhk7NcjYEbWLmS12AhgKtoyZAzYa2gXyVBmksFuaJLBT2YXyV80Er9bLRyvXzQcr1stEr9fNPXMWy0Sv180Er9bLfXMXzQcr1stOaFfNDmhWy0cr71lR9vWZdnYiWn52i9l5tiJafna8mUv2CxqDNfWZdnYCGAq2tRk4NjOYyjbLmS12M5jKNsvZebYvWVH29Rk4NgsagzXaGXT10Bmo9XyZS/YBCsIZtQAP3OhADRmNysUcxaJtP22cNDjFonQ47ZwtP0TIxa5xSRbuykjlb/AJBa5hyVXuzQnjb+HJRa5NCcWuVGJ8/17cJHjUYmR43tw8/00J7ixhCUEsCcny6uHJbixwiQFsBsjzavAJLixEyO4sRMjuLHAJBa5EyMWucAkuLEQZDTlU2UE4nxmMOUpZQTifGYw5aRl8OFka/bjU2UE4mRr9uOhZaThMGtC36Rl8OE0Jxa5hyW4sTQnuLGHJRa5Yj0Sv182HK9iPRyvXzYSv2I99cxfNhK/Yj0Sv1829cxiPRyvXzY5oWI9OaFfNhyvNmRr3t9kouGRXyrfLGWW4ZFfKt/YZOzhJ1+9499kouEwa0LfVWWW4ZFmYt6hZaThkWZi3ixlluE2ZGveVWWW4SdfveMpZQTiEGQ05dhk7OE="),
-"format": 34896613399,
-"index_count": 528,
-"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkACgAJAAwACgAMAA0ADQAMAA4ADQAOAA8AEAARABIAEAATABEAFAAVABYAFAAXABUAFgAVABgAFgAYABkAGQAYABoAGQAaABsAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAWgBZAFwAWgBcAF0AXQBcAF4AXQBeAF8AYABhAGIAYABjAGEAZABlAGYAZABnAGUAZgBlAGgAZgBoAGkAaQBoAGoAaQBqAGsAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUAeAB5AHoAeAB7AHkAfAB9AH4AfAB/AH0AgACBAIIAgACDAIEAhACFAIYAhACHAIUAiACJAIoAiACLAIkAjACNAI4AjACPAI0AkACRAJIAkACTAJEAlACVAJYAlACXAJUAmACZAJoAmACbAJkAnACdAJ4AnACfAJ0AoAChAKIAoACjAKEApAClAKYApACnAKUAqACpAKoAqACrAKkAqgCpAKwAqgCsAK0ArQCsAK4ArQCuAK8AsACxALIAsACzALEAtAC1ALYAtAC3ALUAtgC1ALgAtgC4ALkAuQC4ALoAuQC6ALsAvAC9AL4AvAC/AL0AwADBAMIAwADDAMEAxADFAMYAxADHAMUAyADJAMoAyADLAMkAzADNAM4AzADPAM0A0ADRANIA0ADTANEA1ADVANYA1ADXANUA2ADZANoA2ADbANkA3ADdAN4A3ADfAN0A4ADhAOIA4ADjAOEA5ADlAOYA5ADnAOUA6ADpAOoA6ADrAOkA7ADtAO4A7ADvAO0A8ADxAPIA8ADzAPEA9AD1APYA9AD3APUA+AD5APoA+AD7APkA+gD5APwA+gD8AP0A/QD8AP4A/QD+AP8AAAEBAQIBAAEDAQEBBAEFAQYBBAEHAQUBBgEFAQgBBgEIAQkBCQEIAQoBCQEKAQsBDAENAQ4BDAEPAQ0BEAERARIBEAETAREBFAEVARYBFAEXARUBGAEZARoBGAEbARkBHAEdAR4BHAEfAR0BIAEhASIBIAEjASEBJAElASYBJAEnASUBKAEpASoBKAErASkBLAEtAS4BLAEvAS0BMAExATIBMAEzATEBNAE1ATYBNAE3ATUBOAE5AToBOAE7ATkBPAE9AT4BPAE/AT0B"),
-"material": SubResource("StandardMaterial3D_yugeg"),
-"name": "Sketchbooks, comics, eraser, ruler",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 320,
-"vertex_data": PackedByteArray("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")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ndbkw")
-
 [node name="Desk" type="Node3D" unique_id=466216321 node_paths=PackedStringArray("interactable", "fabric_cover_for_monitor")]
 script = ExtResource("1_7gdev")
 interactable = NodePath("Interactable")
@@ -901,70 +871,73 @@ font_size = 64
 [node name="office desk" parent="." unique_id=955491125 instance=ExtResource("3_r8wvv")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.1433835, 0, 0.6383956)
 
-[node name="Object_10" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="0" unique_id=982144021]
+[node name="Object_10" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="0" unique_id=1435481883]
 transform = Transform3D(0.699368, -0.7147616, -2.5561857e-07, 0.71476126, 0.6993673, -1.0751472e-07, 2.5561872e-07, -1.07514126e-07, 0.9999992, -0.37098968, 0.47674447, 1.7049715e-07)
 visible = false
 
-[node name="Object_13" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="2" unique_id=813757860]
+[node name="Object_13" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="2" unique_id=477533366]
 transform = Transform3D(0.3078905, -0.9514215, -3.4025467e-07, 0.9514211, 0.30789006, -2.4751773e-07, 3.402549e-07, -2.4751702e-07, 0.99999905, 0.20796323, 0.06719732, 2.4031635e-08)
 
-[node name="Object_16" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="5" unique_id=229268163]
+[node name="Object_16" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="5" unique_id=1834040020]
 transform = Transform3D(1, 7.1054274e-15, 6.7762636e-21, 0, 0.9999999, -5.684342e-14, -6.7762636e-21, 5.684342e-14, 0.9999999, 0, 5.9604645e-08, -0.109542355)
 
-[node name="Object_17" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="6" unique_id=1447734919]
+[node name="Object_17" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="6" unique_id=1957791012]
 transform = Transform3D(1, 7.1054274e-15, 6.7762636e-21, 0, 0.9999999, -5.684342e-14, -6.7762636e-21, 5.684342e-14, 0.9999999, 0, -5.9604645e-08, 0.1833903)
 visible = false
 
-[node name="Object_18" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="7" unique_id=42909041]
+[node name="Object_18" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="7" unique_id=1546121331]
 transform = Transform3D(0.6755821, -0.73728484, -3.3535775e-07, 0.7372847, 0.67558205, -2.3339892e-07, 3.9864307e-07, -8.957406e-08, 0.9999999, 0.55238724, 0.27897406, 1.12426534e-07)
 
-[node name="Object_19" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="8" unique_id=1206720414]
+[node name="Object_19" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="8" unique_id=15252923]
 visible = false
 
-[node name="Object_21" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="11" unique_id=1717415030]
+[node name="Object_2" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="9" unique_id=399181327]
+visible = false
+
+[node name="Object_21" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="11" unique_id=2063545574]
 transform = Transform3D(1, 2.1316282e-14, 1.6940659e-20, 0, 0.99999976, -1.4210855e-13, -1.3552527e-20, 1.4210855e-13, 0.99999976, 0.16755357, -0.24919492, -8.911904e-08)
 
-[node name="Object_22" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="12" unique_id=1290341096]
+[node name="Object_22" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="12" unique_id=1823265124]
 visible = false
 
-[node name="Object_23" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="13" unique_id=2037410058]
+[node name="Object_23" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="13" unique_id=789796357]
 visible = false
 
-[node name="Object_26" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="16" unique_id=594619808]
+[node name="Object_26" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="16" unique_id=1872323787]
 transform = Transform3D(1, 7.1054274e-15, 3.3881318e-21, 0, 0.99999994, -2.842171e-14, -3.3881318e-21, 2.842171e-14, 0.99999994, 1.4901161e-08, -0.13145399, -4.701161e-08)
 
-[node name="Object_27" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="17" unique_id=50300990]
+[node name="Object_27" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="17" unique_id=292825154]
 visible = false
 
-[node name="Object_28" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="18" unique_id=2123461009]
+[node name="Object_28" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="18" unique_id=1349778960]
 visible = false
 
-[node name="Object_29" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="19" unique_id=206692618]
+[node name="Object_29" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="19" unique_id=792980369]
 visible = false
 
-[node name="Object_3" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="20" unique_id=481774339]
+[node name="Object_3" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="20" unique_id=1463703757]
 transform = Transform3D(1, 7.1054274e-15, 6.7762636e-21, 0, 0.9999999, -5.684342e-14, -6.7762636e-21, 5.684342e-14, 0.9999999, 0, -5.9604645e-08, 0.1833903)
 visible = false
 
-[node name="Object_30" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="21" unique_id=277792305]
+[node name="Object_30" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="21" unique_id=768582857]
 visible = false
 
-[node name="Object_31" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="22" unique_id=1573955043]
+[node name="Object_31" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="22" unique_id=1384388610]
 visible = false
 
-[node name="Object_36" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="27" unique_id=683511599]
+[node name="Object_36" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="27" unique_id=1072408656]
 visible = false
 
-[node name="Object_4" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="29" unique_id=1383656402]
+[node name="Object_4" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="29" unique_id=1604566589]
 visible = false
 
-[node name="Object_5" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="30" unique_id=2084426983]
+[node name="Object_5" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="30" unique_id=2023587291]
 transform = Transform3D(1, 7.1054274e-15, 6.7762636e-21, 0, 0.9999999, -5.684342e-14, -6.7762636e-21, 5.684342e-14, 0.9999999, -0.09021592, 0.050548136, 1.807743e-08)
 
-[node name="Object_6" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="31" unique_id=1593889677]
+[node name="Object_6" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="31" unique_id=638492971]
 visible = false
 
-[node name="Object_8" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 349683929) index="32" unique_id=1792873306]
+[node name="Object_8" parent="office desk/Sketchfab_model/SceneFinal_obj_cleaner_materialmerger_gles" parent_id_path=PackedInt32Array(955491125, 261706798) index="32" unique_id=1968442861]
 transform = Transform3D(-0.043619424, 0.99904823, 3.3881318e-21, -0.9990482, -0.04361942, -2.842171e-14, -2.842171e-14, 0, 0.99999994, -0.6843137, -0.0957343, 1.1623282)
 visible = false
 
@@ -981,13 +954,13 @@ spot_angle = 43.22
 transform = Transform3D(-1, 4.9694095e-21, -8.742277e-08, 3.3881318e-21, 0.9999999, 5.684342e-14, 8.742276e-08, 5.684342e-14, -0.9999999, 0.8566165, -1.4210855e-14, -0.3616045)
 visible = false
 
-[node name="Paper Crane" parent="office desk/cranes" index="0" unique_id=627724160]
+[node name="Paper Crane" parent="office desk/cranes" index="0" unique_id=668939113]
 transform = Transform3D(0.60166013, 5.128142e-14, -1.8043045, -5.128145e-14, 1.9019744, 3.695713e-14, 1.8043038, 3.695721e-14, 0.60166, 0.5785729, 0.7345893, -1.0628994)
 
-[node name="Paper Crane_001" parent="office desk/cranes" index="1" unique_id=1316287467]
+[node name="Paper Crane_001" parent="office desk/cranes" index="1" unique_id=465479938]
 transform = Transform3D(-0.5287193, 3.3754392e-14, -1.1876261, -3.3754395e-14, 1.3, 5.1975368e-14, 1.1876261, 5.197537e-14, -0.5287193, 0.9098658, 1.1006807, -1.3919946)
 
-[node name="Paper Crane_002" parent="office desk/cranes" index="2" unique_id=2031182766]
+[node name="Paper Crane_002" parent="office desk/cranes" index="2" unique_id=397636327]
 transform = Transform3D(-1.0086293, -2.3310421e-14, 0.82016253, 2.3310447e-14, 1.3, 6.5615224e-14, -0.82016253, 6.561523e-14, -1.0086293, 1.5557988, 0.78761536, -0.110487044)
 
 [node name="stickynote" parent="office desk" unique_id=250556312 instance=ExtResource("4_h1g2g")]
@@ -1022,30 +995,30 @@ omni_range = 0.5586623
 [node name="Sketchbooks, comics, rulers (1)" parent="." unique_id=1251070279 instance=ExtResource("14_ffp6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 
-[node name="Eraser" parent="Sketchbooks, comics, rulers (1)" index="0" unique_id=2082412572]
+[node name="Eraser" parent="Sketchbooks, comics, rulers (1)" index="0" unique_id=1689521182]
 transform = Transform3D(0.007462033, 0, -0.025804533, 0, 0.0060163466, 0, 0.015791167, 0, 0.012193796, 2.2027125, 0.70163405, -1.1824005)
 visible = false
 
-[node name="Ruler" parent="Sketchbooks, comics, rulers (1)" index="1" unique_id=2140601263]
+[node name="Ruler" parent="Sketchbooks, comics, rulers (1)" index="1" unique_id=430566642]
 transform = Transform3D(0.01732235, 3.6433292e-05, 0.012992804, 0.00015288568, 0.0026720515, -0.017635345, -0.0022261522, 0.00046700708, 0.09988971, 2.23974, 0.6889421, -1.056931)
 visible = false
 
-[node name="Sketchbook 1" parent="Sketchbooks, comics, rulers (1)" index="2" unique_id=777354531]
+[node name="Sketchbook 1" parent="Sketchbooks, comics, rulers (1)" index="2" unique_id=300558960]
 transform = Transform3D(-0.045692816, 0, -0.11777877, 0, 0.0078591015, 0, 0.08894727, 0, -0.06050375, 2.2929716, 0.6867814, -1.1953555)
 
-[node name="Stack of comics" parent="Sketchbooks, comics, rulers (1)" index="3" unique_id=409765942]
+[node name="Stack of comics" parent="Sketchbooks, comics, rulers (1)" index="3" unique_id=413244478]
 transform = Transform3D(0.08000085, 0, 0.00448477, 0, 0.12990707, 0, -0.03959701, 0, 0.009060921, 2.1321058, 0.9330481, -2.3483448)
 
-[node name="Stack of comics_001" parent="Sketchbooks, comics, rulers (1)" index="4" unique_id=470167530]
+[node name="Stack of comics_001" parent="Sketchbooks, comics, rulers (1)" index="4" unique_id=348157677]
 transform = Transform3D(0.11211866, 0, 0.056956485, 0, 0.02465023, 0, -0.05011236, 0, 0.12743133, 1.5731719, 0.71948117, -2.065205)
 
-[node name="Stack of sketchbooks" parent="Sketchbooks, comics, rulers (1)" index="5" unique_id=656173661]
+[node name="Stack of sketchbooks" parent="Sketchbooks, comics, rulers (1)" index="5" unique_id=367261927]
 transform = Transform3D(-0.016365472, 0, -0.13499184, 0, 0.008480062, 0, 0.10194669, 0, -0.021670204, 2.6901493, 0.7219488, -0.73792076)
 
-[node name="Stack of sketchbooks_001" parent="Sketchbooks, comics, rulers (1)" index="6" unique_id=200628408]
-transform = Transform3D(0.062878855, 0.074296035, 0.000106933796, 0, -0.0012559145, 0.014828657, 0.05423559, -0.086136244, -0.00012397532, 1.043552, 1.5284629, -2.2829971)
+[node name="Stack of sketchbooks_001" parent="Sketchbooks, comics, rulers (1)" index="6" unique_id=1757604800]
+transform = Transform3D(0.062878855, 0.074296035, 0.000106933796, 0, -0.0012559145, 0.014828657, 0.05423559, -0.086136244, -0.00012397532, 1.0663455, 1.5284629, -2.2161903)
 
-[node name="Unfinished Comics" parent="Sketchbooks, comics, rulers (1)" index="7" unique_id=214968535]
+[node name="Unfinished Comics" parent="Sketchbooks, comics, rulers (1)" index="7" unique_id=543587490]
 transform = Transform3D(0.11640537, 0, 0.025202941, 0, 0.14388095, 0, -0.020710375, 0, 0.14165641, 2.3530588, 1.2060465, -2.0764368)
 
 [node name="Unfinished Comics7" type="MeshInstance3D" parent="Sketchbooks, comics, rulers (1)" unique_id=1015616054]
@@ -1111,15 +1084,15 @@ transform = Transform3D(-0.048011612, 0, 0.013960135, 0, 0.049999997, 0, -0.0139
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 visible = false
 
-[node name="Lamp 1" parent="Lamp 1&5 (1)" index="0" unique_id=1986271489]
+[node name="Lamp 1" parent="Lamp 1&5 (1)" index="0" unique_id=825047943]
 transform = Transform3D(0.9648877, 0, -0.26266277, 0, 1, 0, 0.26266277, 0, 0.9648877, 1.6835489, 0.8207642, -0.32817036)
 visible = false
 
-[node name="Lamp 5" parent="Lamp 1&5 (1)" index="1" unique_id=525503315]
+[node name="Lamp 5" parent="Lamp 1&5 (1)" index="1" unique_id=927857784]
 transform = Transform3D(0.02096123, 0.0046336637, 0.0007163184, 0.0004150331, 0.0014349553, -0.021427216, -0.0046702996, 0.020924311, 0.0013108157, 0.8640728, 0.9178709, -1.3013523)
 visible = false
 
-[node name="Light" parent="Lamp 1&5 (1)" index="2" unique_id=1960605686]
+[node name="Light" parent="Lamp 1&5 (1)" index="2" unique_id=1846031112]
 transform = Transform3D(0.9648877, 0, -0.26266277, 0, 1, 0, 0.26266277, 0, 0.9648877, 1.6843133, 0.8665496, -0.32985038)
 visible = false
 
@@ -1134,7 +1107,7 @@ shadow_enabled = true
 omni_range = 0.704
 omni_attenuation = 0.624
 
-[node name="Light_002" parent="Lamp 1&5 (1)" index="3" unique_id=1264047027]
+[node name="Light_002" parent="Lamp 1&5 (1)" index="3" unique_id=1958697863]
 transform = Transform3D(0.9031077, 0.20518763, 0.3772194, 0.38558728, -0.0008653467, -0.9226709, -0.18899399, 0.9787223, -0.07989928, 0.8305938, 0.9096625, -1.2708204)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lamp 1&5 (1)/Light_002" index="0" unique_id=1299923416]
@@ -1148,6 +1121,18 @@ omni_range = 0.535
 omni_attenuation = 0.718
 
 [node name="Day0DeskProps" type="Node3D" parent="." unique_id=1163803940]
+
+[node name="luckycat_poster" parent="Day0DeskProps" unique_id=1756407232 instance=ExtResource("11_yugeg")]
+transform = Transform3D(-5.02581e-08, -0.08360358, -1.1497712, -3.654429e-09, 1.1497712, -0.08360358, 1.1528068, 0, -5.039079e-08, -0.82596684, 0.5326204, -0.4470789)
+
+[node name="Sad Plants2" parent="Day0DeskProps" unique_id=196849423 instance=ExtResource("11_d0do2")]
+transform = Transform3D(-0.9897165, 0, -0.14304422, 0, 1, 0, 0.14304422, 0, -0.9897165, -0.65045834, 1.3689582, 0.46767008)
+
+[node name="Plane_001" parent="Day0DeskProps/Sad Plants2" index="0" unique_id=2094336168]
+transform = Transform3D(0.24002254, 0, 0.54131544, 0, 0.5921421, 0, -0.54131544, 0, 0.24002254, 0.6797732, 0.10201454, 1.1602962)
+
+[node name="Sad Plant 1" parent="Day0DeskProps/Sad Plants2" index="1" unique_id=833351939]
+transform = Transform3D(0.54516554, 0, -1.2665987e-07, 0, 0.5451656, 0, 1.2665987e-07, 0, 0.54516554, -0.88962185, -0.6846012, -0.8985871)
 
 [node name="Newspaper (1)" type="Node3D" parent="Day0DeskProps" unique_id=1719523407]
 transform = Transform3D(0.12789676, 0, -0.9917877, 0, 1, 0, 0.9917877, 0, 0.12789676, -0.2266039, 0.60531765, -0.46697974)
@@ -1364,10 +1349,6 @@ shadow_enabled = true
 omni_range = 0.316
 omni_attenuation = 0.6
 
-[node name="Stack of sketchbooks_006" type="MeshInstance3D" parent="Day5DeskProps/Lamp2" unique_id=1154617566]
-transform = Transform3D(0.081415325, 0.022375416, 3.22048e-05, -1.5414699e-15, -0.001255916, 0.0148286745, 0.016333932, -0.11152902, -0.00016052298, -2.3075094, 0.14839911, -0.49246538)
-mesh = SubResource("ArrayMesh_7517r")
-
 [node name="DeskUpdated" parent="." unique_id=984576301 instance=ExtResource("24_w7ld0")]
 transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, -0.14153469, 0, 0.6410717)
 
@@ -1378,3 +1359,4 @@ transform = Transform3D(0.5409367, 0, -0.70710677, 0, 1, 0, 0.5409367, 0, 0.7071
 [editable path="office desk/cranes"]
 [editable path="Sketchbooks, comics, rulers (1)"]
 [editable path="Lamp 1&5 (1)"]
+[editable path="Day0DeskProps/Sad Plants2"]
