@@ -16,15 +16,17 @@
 [ext_resource type="Texture2D" uid="uid://dbogthwjhaq3y" path="res://minigames/ingredients_refill/bomb/bomb_effect.png" id="11_rw5dd"]
 [ext_resource type="Texture2D" uid="uid://dix6vj38uasco" path="res://minigames/ingredients_refill/assets/comic_tippy_jar.png" id="11_tq37f"]
 [ext_resource type="AudioStream" uid="uid://dqpkl2k3ckoir" path="res://audio/refill_minigame/gain_score/refill_gain_score_3.mp3" id="12_aviex"]
-[ext_resource type="Texture2D" uid="uid://dvxkld1hq8dff" path="res://minigames/ingredients_refill/assets/Pot_fill.png" id="12_cuth0"]
 [ext_resource type="Texture2D" uid="uid://b0hgr4arboyh1" path="res://minigames/ingredients_refill/screw/effect.png" id="12_tq37f"]
 [ext_resource type="AudioStream" uid="uid://d1nu16s0rr1s2" path="res://audio/refill_minigame/gain_score/refill_gain_score_4.mp3" id="13_bjc5e"]
 [ext_resource type="Texture2D" uid="uid://g2hwa4l3tupk" path="res://minigames/ingredients_refill/golden/golden_effect.png" id="13_lrtnr"]
 [ext_resource type="Texture2D" uid="uid://dotca7dgjvwsn" path="res://minigames/ingredients_refill/assets/Pot.png" id="14_rw5dd"]
-[ext_resource type="Texture2D" uid="uid://bp33dnffbdc7i" path="res://minigames/ingredients_refill/assets/Lid.png" id="15_tq37f"]
 [ext_resource type="Texture2D" uid="uid://c6467b6csgjr2" path="res://minigames/ingredients_refill/assets/refill final.png" id="16_knrnr"]
+[ext_resource type="Material" uid="uid://c6rh456pse38x" path="res://resources/misc_resources/refill_minigame_firework_trail.tres" id="16_lrtnr"]
+[ext_resource type="Material" uid="uid://cl6c544707gvk" path="res://resources/misc_resources/refill_minigame_firework_boom.tres" id="17_cxwh1"]
 [ext_resource type="Texture2D" uid="uid://bpd4fxj4nlu0n" path="res://minigames/ingredients_refill/assets/bag_no_bg.png" id="19_r7ncj"]
 [ext_resource type="Material" uid="uid://dwb5rwm7lndk" path="res://resources/misc_resources/refill_minigame_coffee_dust_falling.tres" id="19_rw5dd"]
+[ext_resource type="Texture2D" uid="uid://cm885rb4thtb4" path="res://minigames/ingredients_refill/assets/stick.png" id="24_rw5dd"]
+[ext_resource type="Texture2D" uid="uid://3w0do768iinc" path="res://minigames/ingredients_refill/assets/sign.png" id="25_tq37f"]
 
 [sub_resource type="Curve" id="Curve_cuth0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -48,6 +50,39 @@ stream_3/stream = ExtResource("7_mx0ba")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mjix0"]
 size = Vector2(20, 350)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7w4w3"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_rw5dd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tq37f"]
+gradient = SubResource("Gradient_rw5dd")
+width = 24
+height = 24
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_qdd7m"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a2xku"]
+gradient = SubResource("Gradient_qdd7m")
+width = 24
+height = 24
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [sub_resource type="Gradient" id="Gradient_tq37f"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0.1, 1)
@@ -70,7 +105,128 @@ stream_1/stream = ExtResource("11_1nxwo")
 stream_2/stream = ExtResource("12_aviex")
 stream_3/stream = ExtResource("13_bjc5e")
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "coffee_dust")]
+[sub_resource type="Animation" id="Animation_rw5dd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(438, 1500)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stick:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cup/CupVisuals:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cxwh1"]
+resource_name = "bomb_flash_cup"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cup/CupVisuals:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.3),
+"transitions": PackedFloat32Array(0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tq37f"]
+resource_name = "sign_down"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999997, 0.5),
+"transitions": PackedFloat32Array(1, 3.2490103, 1),
+"update": 0,
+"values": [Vector2(438, 908), Vector2(438, 908), Vector2(438, 1550)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stick:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1.3660402, 1),
+"update": 0,
+"values": [-0.07853981633974483, -1.1588986233242344]
+}
+
+[sub_resource type="Animation" id="Animation_lrtnr"]
+resource_name = "sign_up"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Stick:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(438, 1550), Vector2(438, 908)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Stick:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.7417649320975901, -0.07853981633974483]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxwh1"]
+_data = {
+&"RESET": SubResource("Animation_rw5dd"),
+&"bomb_flash_cup": SubResource("Animation_cxwh1"),
+&"sign_down": SubResource("Animation_tq37f"),
+&"sign_up": SubResource("Animation_lrtnr")
+}
+
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "coffee_dust", "animation_player", "golden_bean_collect")]
 script = ExtResource("1_2efvg")
 horizontal_trajectory_curve = SubResource("Curve_cuth0")
 cup = NodePath("Cup")
@@ -80,8 +236,8 @@ pour_point = NodePath("Bag/PourPoint")
 bean_spawn_timer = NodePath("BeanSpawnTimer")
 cup_area = NodePath("Cup/CupArea")
 cup_boundaries = NodePath("Cup/CupBoundaries")
-cup_face_sprite = NodePath("Cup/Sprite2D")
-visual_effect = NodePath("Cup/Sprite2D/Sprite2D3")
+cup_face_sprite = NodePath("Cup/CupVisuals/Sprite2D")
+visual_effect = NodePath("Cup/CupVisuals/Sprite2D/Sprite2D3")
 bean_hit_glasss_sound = NodePath("Cup/BeanHitGlassSound")
 bag_shake_sound = NodePath("Bag/BagShakeSound")
 gain_score_sound = NodePath("GainScoreSound")
@@ -98,6 +254,8 @@ bomb_visual_effect = ExtResource("11_rw5dd")
 screw_visual_effect = ExtResource("12_tq37f")
 golden_visual_effect = ExtResource("13_lrtnr")
 coffee_dust = NodePath("Bag/CoffeeDust")
+animation_player = NodePath("AnimationPlayer")
+golden_bean_collect = NodePath("Cup/GoldenBeanCollect")
 
 [node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
 z_index = 2
@@ -106,20 +264,21 @@ collision_layer = 2
 platform_on_leave = 2
 safe_margin = 0.01
 
-[node name="Sprite2D" type="Sprite2D" parent="Cup" unique_id=241036928]
+[node name="CupVisuals" type="Node2D" parent="Cup" unique_id=1925264072]
+
+[node name="Sprite2D" type="Sprite2D" parent="Cup/CupVisuals" unique_id=241036928]
 position = Vector2(0, -160)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("11_tq37f")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Cup/Sprite2D" unique_id=1582177721]
+[node name="Sprite2D2" type="Sprite2D" parent="Cup/CupVisuals/Sprite2D" unique_id=1582177721]
 visible = false
-texture = ExtResource("15_tq37f")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Cup/Sprite2D" unique_id=248355465]
+[node name="Sprite2D3" type="Sprite2D" parent="Cup/CupVisuals/Sprite2D" unique_id=248355465]
 position = Vector2(-43, -205)
 scale = Vector2(1.1, 1.1)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Cup/Sprite2D" unique_id=1479620205]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Cup/CupVisuals/Sprite2D" unique_id=1479620205]
 visible = false
 z_index = -1
 offset_right = 700.0
@@ -127,8 +286,6 @@ offset_bottom = 500.0
 max_value = 1.0
 step = 0.01
 fill_mode = 3
-texture_over = ExtResource("14_rw5dd")
-texture_progress = ExtResource("12_cuth0")
 texture_progress_offset = Vector2(-350, 40)
 
 [node name="CupArea" type="Area2D" parent="Cup" unique_id=1016481044]
@@ -172,6 +329,31 @@ position = Vector2(-31, 181)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
 
+[node name="GoldenBeanCollect" type="GPUParticles2D" parent="Cup" unique_id=457026478]
+material = SubResource("CanvasItemMaterial_7w4w3")
+position = Vector2(-47, -318)
+emitting = false
+amount = 5
+sub_emitter = NodePath("GoldenBeanFireworkBoom")
+texture = SubResource("GradientTexture2D_tq37f")
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.5
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = ExtResource("16_lrtnr")
+
+[node name="GoldenBeanFireworkBoom" type="GPUParticles2D" parent="Cup/GoldenBeanCollect" unique_id=1526823444]
+material = SubResource("CanvasItemMaterial_7w4w3")
+emitting = false
+amount = 64
+texture = SubResource("GradientTexture2D_a2xku")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+process_material = ExtResource("17_cxwh1")
+
 [node name="Background" type="Sprite2D" parent="." unique_id=1252123989]
 self_modulate = Color(0.65, 0.65, 0.65, 1)
 z_index = -5
@@ -209,19 +391,17 @@ autoplay = true
 
 [node name="BeanSpawnTimer" type="Timer" parent="." unique_id=1475975290]
 wait_time = 0.33
-autostart = true
-
-[node name="Controls" type="RichTextLabel" parent="." unique_id=1008034931]
-custom_minimum_size = Vector2(800, 0)
-offset_left = 632.0
-offset_top = 462.0
-offset_right = 1432.0
-offset_bottom = 957.0
-theme_override_font_sizes/normal_font_size = 64
-theme_override_font_sizes/bold_font_size = 64
-bbcode_enabled = true
-text = "[b]A + D[/b] move cup"
-fit_content = true
 
 [node name="GainScoreSound" type="AudioStreamPlayer" parent="." unique_id=948120087]
 stream = SubResource("AudioStreamRandomizer_ovvye")
+
+[node name="Stick" type="Sprite2D" parent="." unique_id=520765775]
+position = Vector2(438, 1500)
+texture = ExtResource("24_rw5dd")
+
+[node name="Sign" type="Sprite2D" parent="Stick" unique_id=1944847346]
+position = Vector2(4, -183)
+texture = ExtResource("25_tq37f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1584248692]
+libraries/ = SubResource("AnimationLibrary_cxwh1")

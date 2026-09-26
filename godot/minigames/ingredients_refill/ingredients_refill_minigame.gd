@@ -57,13 +57,29 @@ var spawn_trajectory: Vector2
 # its passed to machine.gd @ end of minigame to determine how much to fill up
 var accuracy: float = 0.0
 
+var start_minigame:bool = false
+signal first_proper_input
+
+var allow_moving_cup:bool = true
+@export var animation_player: AnimationPlayer
+@export var golden_bean_collect: GPUParticles2D
+
+var bomb_bean:Node
+var gold_bean:Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	bean_spawn_timer.wait_time = float(2) / float(NUM_BEANS_TO_SPAWN)
+	bomb_bean = bomb_bean_scene.instantiate()
+	gold_bean = golden_bean_scene.instantiate()
 	bean_spawn_timer.timeout.connect(spawn_bean)
 	cup_area.body_entered.connect(catch_bean)
 	cup_area.body_exited.connect(spill_bean)
+	animation_player.play("sign_up")
+	bean_spawn_timer.wait_time = float(2) / float(NUM_BEANS_TO_SPAWN)
+	await first_proper_input
+	bean_spawn_timer.start()
+	start_minigame = true
+	animation_player.play("sign_down")
 
 	bag_shake_tween = create_tween().set_loops()
 	var tween_time = bean_spawn_timer.wait_time
@@ -79,10 +95,15 @@ func _ready() -> void:
 				bean_hit_glasss_sound.play(),
 	)
 	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) #prefer right side of the screen, because that is where cup spawns
+	
 
+func _input(event: InputEvent) -> void:
+	if not start_minigame and (event.is_action_pressed("move_left") or event.is_action_pressed("move_right")):
+		first_proper_input.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	if not start_minigame or not allow_moving_cup: return
 	var left_right_input: float = Input \
 			.get_vector("move_left", "move_right", "move_forward", "move_back") \
 			.x
@@ -145,16 +166,16 @@ func spawn_bean() -> void:
 	if beans_spawned < 4 and gold_bean_already_spawned == false: #gold bean case
 		random_int = randi_range(1, 100)
 		if (beans_spawned == 0 and random_int < 5): #33
-			spawn_gold_bean(bean)
+			spawn_gold_bean(gold_bean)
 
 		elif (beans_spawned == 1 and random_int < 40): #40
-			spawn_gold_bean(bean)
+			spawn_gold_bean(gold_bean)
 
 		elif (beans_spawned == 2 and random_int < 60): #67
-			spawn_gold_bean(bean)
+			spawn_gold_bean(gold_bean)
 
 		elif (beans_spawned == 3): #100
-			spawn_gold_bean(bean)
+			spawn_gold_bean(gold_bean)
 		else:
 			spawn_normal_bean(bean)
 
@@ -165,7 +186,7 @@ func spawn_bean() -> void:
 			spawn_normal_bean(bean)
 		else:
 			if random_int < (33 + beans_spawned * 3):
-				spawn_bomb_bean(bean)
+				spawn_bomb_bean(bomb_bean)
 			else:
 				spawn_normal_bean(bean)
 
@@ -188,30 +209,22 @@ func spawn_normal_bean(bean: RigidBody2D) -> void:
 func spawn_gold_bean(bean: RigidBody2D) -> void:
 	gold_bean_already_spawned = true
 	bean = golden_bean_scene.instantiate()
-	bean.gravity_scale = 0.33 + randf_range(-0.15, 0.0)
+	bean.gravity_scale = 0
 	bean.global_position = pour_point.global_position
-	bean.global_position.x -= 53
-
-	bean.global_position.y -= 22 #adding a negative number, puts it vertically north.
-
+	bean.drop_time += randf_range(-0.2,0.2)
 	bean.add_to_group("beans")
 	add_child(bean)
-	var _horizontal_component = clampf(spawn_trajectory.x - 500, -1050.0, -350.0)
-
+	var _horizontal_component = clampf(spawn_trajectory.x - 200, -1050.0, -350.0)
+#
 	bean.apply_impulse(Vector2(_horizontal_component, 0)) # applies horizontal impulse
-
-	var _vertical_component = clampf(spawn_trajectory.y - 500, -1050.0, -800.0)
-	bean.apply_impulse(Vector2(0, _vertical_component)) # applies vertical impulse
-
-	bean.rotation_degrees = randf_range(0, 360)
-	#bean.apply_torque_impulse(randf_range(-180,180)) #cant get this to work; spins the bean
+#
+	var _vertical_component = clampf(spawn_trajectory.y, -1050.0, -800.0)
+	bean.apply_impulse(Vector2(0, 0)) # applies vertical impulse
 	beans_spawned += 1
 
 
 func spawn_bomb_bean(bean: RigidBody2D) -> void:
 	bomb_bean_already_spawned = true
-	bean = bomb_bean_scene.instantiate()
-
 	bean.gravity_scale = 1.0
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
@@ -238,11 +251,6 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 		if "bomb" in bean_type:
 			bomb() #also calls Events.emit_signal("minigame_end")
 			return
-		elif "screw" in bean_type:
-			screw() #calls Events.emit_signal("minigame_end")
-			#break closest machine
-			collected_beans.append(bean)
-			return
 		elif "gold" in bean_type:
 			gold(bean) #calls Events.emit_signal("minigame_end")
 			gain_score_sound.play()
@@ -266,8 +274,9 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 
 func bomb() -> void:
 	#cup_face_sprite.texture = bomb_face_sprite #commented out, until we get other textures for the cup's face
-	visual_effect.texture = bomb_visual_effect
-
+	#visual_effect.texture = bomb_visual_effect
+	animation_player.play("bomb_flash_cup")
+	allow_moving_cup = false
 	var using_machine: Machine = Global.machine_in_use
 	if using_machine == null:
 		return
@@ -277,26 +286,11 @@ func bomb() -> void:
 	using_machine.blast_player_from_using_machine()
 
 
-func screw():
-	#function defunct; screw no longer in minigame
-	#cup_face_sprite.texture = screw_face_sprite #commented out, until we get other textures for the cup's face
-	visual_effect.texture = screw_visual_effect
-
-	var _closest_machine = get_closest_machine_or_null()
-
-	await get_tree() \
-			.create_timer((NUM_BEANS_TO_SPAWN - 2) * bean_spawn_timer.wait_time
-	+ bean_spawn_timer.time_left, false) \
-			.timeout #can we calculate when the minigame will end?
-
-	if _closest_machine.broken_down == false: #don't break a machine that is already broken
-		_closest_machine.break_down()
-
-
 func gold(bean: PhysicsBody2D):
 	#cup_face_sprite.texture = golden_face_sprite #commented out, until we get other textures for the cup's face
-	visual_effect.texture = golden_visual_effect
-
+	#visual_effect.texture = golden_visual_effect
+	golden_bean_collect.restart()
+	allow_moving_cup = false
 	await get_tree().create_timer(0.5, false).timeout
 
 	Global.refill_minigame_accuracy = 1

@@ -29,8 +29,10 @@ rotation = -0.7382135
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="Trails" type="Node2D" parent="." unique_id=2118760959]
+visible = false
 
 [node name="WhiteTrail" type="Line2D" parent="Trails" unique_id=1073127675]
+visible = false
 show_behind_parent = true
 top_level = true
 z_index = -1
@@ -40,6 +42,7 @@ script = ExtResource("3_0u6p0")
 MAX_LENGTH = 14
 
 [node name="BlackTrail" type="Line2D" parent="Trails" unique_id=382597631]
+visible = false
 show_behind_parent = true
 top_level = true
 z_index = -2

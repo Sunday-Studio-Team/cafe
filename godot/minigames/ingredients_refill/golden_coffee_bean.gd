@@ -15,30 +15,31 @@ func _ready() -> void:
 	collision.set_deferred("disabled", true)
 	await get_tree().create_timer(0.25).timeout
 	collision.set_deferred("disabled", false)
-	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+var drop_time = 0.674
 func _physics_process(delta: float) -> void:
-	
 	if(seconds_passed>2): #prevents jitter
-		if(get_collision_mask_value(1) ==false): 
+		if(get_collision_mask_value(1) == false): 
 			set_collision_mask_value(1, true)
 		return
-	
-	sprite_2d.rotation_degrees += 15
 	time_counter_float += delta
 	seconds_passed+= delta
-	#print(linear_velocity.y)
-	if(linear_velocity.y>0 and has_sped_up==false):	
-		gravity_scale*=1.5
+	if seconds_passed < drop_time:
+		gravity_scale = 0
+		sprite_2d.offset.y = 30 * sin(Engine.get_physics_frames() * 0.2)
 		has_sped_up = true
 	else:
-		if (time_counter_float >1.0/60.0):
-			time_counter_float -=1.0/60.0
-			gravity_scale+=0.065
-
+		sprite_2d.rotation_degrees += 15
+		if not offset_tween and sprite_2d.offset.y != 0:
+			offset_tween = create_tween()
+			offset_tween.tween_property(sprite_2d,"offset", Vector2.ZERO,0.2)
+		
+		if gravity_scale == 0: gravity_scale = 0.5
+		gravity_scale = clamp(gravity_scale*1.09,0.5,2)
+var offset_tween:Tween
 	
