@@ -348,4 +348,4 @@ func _on_items_updated() -> void:
 			break
 
 func flash_red():
-	camera.camera_effects.flash_red()
+	camera.camera_effects.flash_screen_red()

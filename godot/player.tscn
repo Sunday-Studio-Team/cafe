@@ -27,6 +27,8 @@ height = 1.7479492
 [sub_resource type="Environment" id="Environment_3n8yq"]
 adjustment_brightness = 2.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_pylmc"]
+
 [sub_resource type="Gradient" id="Gradient_op7ga"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
 
@@ -96,10 +98,10 @@ roller_skates_dust_particles = NodePath("RollerSkatesDustParticles")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8760254, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
 
-[node name="CameraController" type="Node3D" parent="." unique_id=1520575227 node_paths=PackedStringArray("player_controller", "camera_effects")]
+[node name="CameraController" type="Node3D" parent="." unique_id=1520575227 node_paths=PackedStringArray("player", "camera_effects")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 script = ExtResource("3_sweqy")
-player_controller = NodePath("..")
+player = NodePath("..")
 camera_effects = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=2046988330 node_paths=PackedStringArray("player", "caught_overlay")]
@@ -108,12 +110,11 @@ current = true
 fov = 90.0
 script = ExtResource("4_2hs0m")
 player = NodePath("../..")
+caught_overlay = NodePath("CaughtOverlay")
 bob_pitch = 0.06
 bob_roll = 0.04
-bob_up = 0.01
-bob_frequency = 3.0
-max_shake = 0.2
-caught_overlay = NodePath("CaughtOverlay")
+BOB_MAGNITUDE = 0.01
+BOB_FREQUENCY = 3.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CameraController/Camera3D" unique_id=982490558]
 remote_path = NodePath("HoldingItemsSubViewport/HoldingItemsCamera")
@@ -131,18 +132,18 @@ fov = 40.0
 [node name="ingredientbag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=489136358]
+[node name="ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=1160311051]
 transform = Transform3D(0.049236596, 0.018308839, -0.027216244, -0.010547802, 0.0553187, 0.018131915, 0.031059312, -0.010237642, 0.04930202, -0.20459722, 0.05080402, -0.052625537)
 layers = 8
 
 [node name="large_ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
 transform = Transform3D(0.058251597, 0.012124337, -0.03948466, -0.0077862935, 0.07026299, 0.010088183, 0.040563658, -0.0039240527, 0.058638528, -0.19612944, 0.04663241, -0.031387717)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=218460479]
+[node name="ingredient_bag" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=2009440182]
 transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
 layers = 8
 
-[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=1146968741]
+[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=1935166715]
 transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
 layers = 8
 
@@ -155,12 +156,15 @@ max_db = 0.0
 [node name="Trash Cup" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1417801726 instance=ExtResource("10_q13i1")]
 transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.17303157, -0.16699994, -0.4299096)
 
-[node name="SM_TrashCup" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1837821948]
+[node name="SM_TrashCup" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1975850021]
 transform = Transform3D(0.10581238, 1.517883e-17, 0, -1.2576745e-17, 0.105812386, 0, 0, 1.7347235e-18, 0.10581238, 0, 0, 0)
 layers = 8
 
 [node name="3DTabletUI" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1761848473 instance=ExtResource("11_pylmc")]
 transform = Transform3D(0.285317, -0.025552988, 0.089113876, 0, 0.28837848, 0.08269122, -0.092705116, -0.07864401, 0.2742643, -0.2733251, -0.100000024, -0.54824734)
+
+[node name="ScreenSprite3D" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1761848473, 875200061) index="1" unique_id=2083645373]
+texture = SubResource("ViewportTexture_pylmc")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=121976474]
 transform = Transform3D(1, 0, 0, 0, 0.19741967, 0.98031914, 0, -0.98031914, 0.19741967, 0, 0, 0)
