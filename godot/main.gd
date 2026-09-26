@@ -145,6 +145,7 @@ func _ready() -> void:
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	Global.total_trash = 0
+	Global.all_3d_audio_stream_players.clear()
 	get_stats()
 
 	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
