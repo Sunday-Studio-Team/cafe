@@ -65,14 +65,16 @@ position = Vector2(-1, -1)
 rotation = -0.7382135
 shape = SubResource("CapsuleShape2D_onrkg")
 
-[node name="Sparkles" type="GPUParticles2D" parent="." unique_id=909713269]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
+position = Vector2(-9.536743e-07, 7.6293945e-06)
+texture = ExtResource("2_b3x37")
+
+[node name="Sparkles" type="GPUParticles2D" parent="Sprite2D" unique_id=909713269]
+z_index = -1
 material = SubResource("CanvasItemMaterial_5bp6o")
+position = Vector2(9.536743e-07, -7.6293945e-06)
 amount = 256
 texture = SubResource("GradientTexture2D_rx43e")
 lifetime = 2.0
 speed_scale = 2.0
 process_material = SubResource("ParticleProcessMaterial_sdh2v")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
-position = Vector2(-9.536743e-07, 7.6293945e-06)
-texture = ExtResource("2_b3x37")

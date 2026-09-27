@@ -63,6 +63,7 @@ signal first_proper_input
 var allow_moving_cup:bool = true
 @export var animation_player: AnimationPlayer
 @export var golden_bean_collect: GPUParticles2D
+@export var bomb_smoke: GPUParticles2D
 
 var bomb_bean:Node
 var gold_bean:Node
@@ -214,22 +215,20 @@ func spawn_gold_bean(bean: RigidBody2D) -> void:
 	bean.drop_time += randf_range(-0.2,0.2)
 	bean.add_to_group("beans")
 	add_child(bean)
-	var _horizontal_component = clampf(spawn_trajectory.x - 200, -1050.0, -350.0)
+	var _horizontal_component = clampf(spawn_trajectory.x + 100, -1050.0, -350.0)
 #
 	bean.apply_impulse(Vector2(_horizontal_component, 0)) # applies horizontal impulse
-#
-	var _vertical_component = clampf(spawn_trajectory.y, -1050.0, -800.0)
-	bean.apply_impulse(Vector2(0, 0)) # applies vertical impulse
 	beans_spawned += 1
+	randomize_trajectory()
 
 
 func spawn_bomb_bean(bean: RigidBody2D) -> void:
 	bomb_bean_already_spawned = true
-	bean.gravity_scale = 1.0
+	bean.gravity_scale = 1
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
-	var _horizontal_component = clampf(spawn_trajectory.x + 200, -850.0, -350.0)
+	var _horizontal_component = clampf(spawn_trajectory.x + 100, -850.0, -350.0)
 
 	bean.apply_impulse(Vector2(_horizontal_component, spawn_trajectory.y)) # applies horizontal impulse
 
@@ -241,7 +240,7 @@ func spawn_bomb_bean(bean: RigidBody2D) -> void:
 
 func catch_bean(bean: PhysicsBody2D) -> void:
 	cup.velocity.y = 0
-
+	if not allow_moving_cup: return
 	if not bean.is_in_group("beans"):
 		return #not a bean? return.
 	var bean_type: String = bean.scene_file_path.get_file() # ex 'coffee_bean.tscn'
@@ -252,7 +251,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			bomb() #also calls Events.emit_signal("minigame_end")
 			return
 		elif "gold" in bean_type:
-			gold(bean) #calls Events.emit_signal("minigame_end")
+			gold() #calls Events.emit_signal("minigame_end")
 			gain_score_sound.play()
 			return
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
@@ -266,6 +265,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 
 
 func spill_bean(bean: PhysicsBody2D) -> void:
+	if not allow_moving_cup: return
 	if collected_beans.has(bean):
 		collected_beans.erase(bean)
 		beans_in_cup -= 1
@@ -273,20 +273,20 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 
 
 func bomb() -> void:
-	#cup_face_sprite.texture = bomb_face_sprite #commented out, until we get other textures for the cup's face
+	#cup_face_sprite.texture = bomb_face_sprite
 	#visual_effect.texture = bomb_visual_effect
+	bomb_smoke.emitting = true
 	animation_player.play("bomb_flash_cup")
 	allow_moving_cup = false
 	var using_machine: Machine = Global.machine_in_use
 	if using_machine == null:
 		return
-	await get_tree().create_timer(0.15, false).timeout
-	#bomb_sound_player.play()
-	#print('line 216. blastplayerfromusingmachine()')
+	await get_tree().create_timer(1).timeout
+	animation_player.stop()
 	using_machine.blast_player_from_using_machine()
 
 
-func gold(bean: PhysicsBody2D):
+func gold():
 	#cup_face_sprite.texture = golden_face_sprite #commented out, until we get other textures for the cup's face
 	#visual_effect.texture = golden_visual_effect
 	golden_bean_collect.restart()

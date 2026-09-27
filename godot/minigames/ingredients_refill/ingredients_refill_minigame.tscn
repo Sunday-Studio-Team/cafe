@@ -32,24 +32,6 @@
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
-size = Vector2(177, 219)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ffxp"]
-size = Vector2(20, 350)
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
-random_pitch = 1.0442737
-random_volume_offset_db = 5.0
-streams_count = 4
-stream_0/stream = ExtResource("4_5i8lf")
-stream_1/stream = ExtResource("5_j5bal")
-stream_2/stream = ExtResource("6_47f3m")
-stream_3/stream = ExtResource("7_mx0ba")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjix0"]
-size = Vector2(20, 350)
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7w4w3"]
 blend_mode = 1
 
@@ -82,6 +64,81 @@ use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2d2lu"]
+blend_mode = 4
+
+[sub_resource type="Gradient" id="Gradient_lrtnr"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cxwh1"]
+gradient = SubResource("Gradient_lrtnr")
+width = 24
+height = 24
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_a2xku"]
+offsets = PackedFloat32Array(0.21621622, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.41598046, 0.41598043, 0.4159804, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xlad2"]
+gradient = SubResource("Gradient_a2xku")
+
+[sub_resource type="Curve" id="Curve_sdh2v"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6160221, 1.3928572), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5bp6o"]
+curve = SubResource("Curve_sdh2v")
+
+[sub_resource type="Curve" id="Curve_bm4wv"]
+_limits = [0.0, 800.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.40055248, 800), 3447.6194, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jsfwk"]
+curve = SubResource("Curve_bm4wv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_coxhp"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 111.26
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 592.11
+initial_velocity_max = 771.93
+velocity_limit_curve = SubResource("CurveTexture_jsfwk")
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_5bp6o")
+color_ramp = SubResource("GradientTexture1D_xlad2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
+size = Vector2(177, 219)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ffxp"]
+size = Vector2(20, 350)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+random_pitch = 1.0442737
+random_volume_offset_db = 5.0
+streams_count = 4
+stream_0/stream = ExtResource("4_5i8lf")
+stream_1/stream = ExtResource("5_j5bal")
+stream_2/stream = ExtResource("6_47f3m")
+stream_3/stream = ExtResource("7_mx0ba")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjix0"]
+size = Vector2(20, 350)
 
 [sub_resource type="Gradient" id="Gradient_tq37f"]
 interpolation_mode = 1
@@ -154,10 +211,10 @@ tracks/0/path = NodePath("Cup/CupVisuals:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.3),
-"transitions": PackedFloat32Array(0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2, 0.3, 0.4, 0.45000002, 0.5500001, 0.6, 0.70000005),
+"transitions": PackedFloat32Array(0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221, 0.10511221),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1), Color(0.89827543, 2.5990605e-06, 1.2513996e-06, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_tq37f"]
@@ -226,7 +283,7 @@ _data = {
 &"sign_up": SubResource("Animation_lrtnr")
 }
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "coffee_dust", "animation_player", "golden_bean_collect")]
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "coffee_dust", "animation_player", "golden_bean_collect", "bomb_smoke")]
 script = ExtResource("1_2efvg")
 horizontal_trajectory_curve = SubResource("Curve_cuth0")
 cup = NodePath("Cup")
@@ -256,6 +313,7 @@ golden_visual_effect = ExtResource("13_lrtnr")
 coffee_dust = NodePath("Bag/CoffeeDust")
 animation_player = NodePath("AnimationPlayer")
 golden_bean_collect = NodePath("Cup/GoldenBeanCollect")
+bomb_smoke = NodePath("Cup/BombSmoke")
 
 [node name="Cup" type="CharacterBody2D" parent="." unique_id=1768243399]
 z_index = 2
@@ -263,6 +321,39 @@ position = Vector2(1300, 1050)
 collision_layer = 2
 platform_on_leave = 2
 safe_margin = 0.01
+
+[node name="GoldenBeanCollect" type="GPUParticles2D" parent="Cup" unique_id=457026478]
+material = SubResource("CanvasItemMaterial_7w4w3")
+position = Vector2(-47, -318)
+emitting = false
+amount = 5
+sub_emitter = NodePath("GoldenBeanFireworkBoom")
+texture = SubResource("GradientTexture2D_tq37f")
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.5
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = ExtResource("16_lrtnr")
+
+[node name="GoldenBeanFireworkBoom" type="GPUParticles2D" parent="Cup/GoldenBeanCollect" unique_id=1526823444]
+material = SubResource("CanvasItemMaterial_7w4w3")
+emitting = false
+amount = 64
+texture = SubResource("GradientTexture2D_a2xku")
+lifetime = 0.45
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+process_material = ExtResource("17_cxwh1")
+
+[node name="BombSmoke" type="GPUParticles2D" parent="Cup" unique_id=1495163936]
+material = SubResource("CanvasItemMaterial_2d2lu")
+position = Vector2(-17, -106)
+emitting = false
+amount = 96
+texture = SubResource("GradientTexture2D_cxwh1")
+process_material = SubResource("ParticleProcessMaterial_coxhp")
 
 [node name="CupVisuals" type="Node2D" parent="Cup" unique_id=1925264072]
 
@@ -328,31 +419,6 @@ shape = SubResource("RectangleShape2D_mjix0")
 position = Vector2(-31, 181)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
-
-[node name="GoldenBeanCollect" type="GPUParticles2D" parent="Cup" unique_id=457026478]
-material = SubResource("CanvasItemMaterial_7w4w3")
-position = Vector2(-47, -318)
-emitting = false
-amount = 5
-sub_emitter = NodePath("GoldenBeanFireworkBoom")
-texture = SubResource("GradientTexture2D_tq37f")
-lifetime = 0.5
-one_shot = true
-speed_scale = 1.5
-trail_enabled = true
-trail_lifetime = 0.5
-process_material = ExtResource("16_lrtnr")
-
-[node name="GoldenBeanFireworkBoom" type="GPUParticles2D" parent="Cup/GoldenBeanCollect" unique_id=1526823444]
-material = SubResource("CanvasItemMaterial_7w4w3")
-emitting = false
-amount = 64
-texture = SubResource("GradientTexture2D_a2xku")
-lifetime = 0.45
-one_shot = true
-explosiveness = 1.0
-trail_enabled = true
-process_material = ExtResource("17_cxwh1")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1252123989]
 self_modulate = Color(0.65, 0.65, 0.65, 1)
