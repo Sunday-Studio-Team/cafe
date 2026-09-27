@@ -212,7 +212,7 @@ func spawn_gold_bean(bean: RigidBody2D) -> void:
 	bean.drop_time += randf_range(-0.2,0.2)
 	bean.add_to_group("beans")
 	add_child(bean)
-	var _horizontal_component = clampf(spawn_trajectory.x + 100, -1050.0, -350.0)
+	var _horizontal_component = clampf(spawn_trajectory.x + 150, -1050.0, -350.0)
 #
 	bean.apply_impulse(Vector2(_horizontal_component, 0)) # applies horizontal impulse
 	beans_spawned += 1
