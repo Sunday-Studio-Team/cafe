@@ -34,7 +34,6 @@
 [ext_resource type="Resource" uid="uid://c2ykxot8dufp0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_5.tres" id="34_pmrog"]
 [ext_resource type="Resource" uid="uid://cggkb6fxtvq0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_6.tres" id="35_pbe4p"]
 [ext_resource type="Resource" uid="uid://uc83adcvfsc7" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_7.tres" id="36_8ldsf"]
-[ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://dtbfgptmi7ixs" path="res://cafe_environment.tscn" id="44_h6isl"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
@@ -44,8 +43,6 @@
 [ext_resource type="Script" uid="uid://pf7u804wu0su" path="res://ui/tippy_vo_indicator.gd" id="57_ibca3"]
 [ext_resource type="PackedScene" uid="uid://dohtcd6556n24" path="res://menu.tscn" id="70_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
-[ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
-[ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
@@ -118,7 +115,6 @@
 [ext_resource type="Resource" uid="uid://ctaysxqd8jjnq" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_1.tres" id="147_lw0ge"]
 [ext_resource type="Resource" uid="uid://d02ue0nsoidne" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_2.tres" id="148_1e7qx"]
 [ext_resource type="Resource" uid="uid://b8h86l07lesqc" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_get_ingredients_1.tres" id="148_ed5de"]
-[ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="149_4v3l6"]
 [ext_resource type="Resource" uid="uid://cfei6fy0hpjm7" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_3.tres" id="149_6kqjg"]
 [ext_resource type="Resource" uid="uid://dmji4xlxijqpo" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_get_ingredients_2.tres" id="149_e31mi"]
 [ext_resource type="Resource" uid="uid://dxetjfhbw75vo" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_get_ingredients_3.tres" id="150_mq14a"]
@@ -259,6 +255,7 @@
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
 [ext_resource type="Resource" uid="uid://c4a8wn3rpa0mi" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_4_0.tres" id="233_t6w6j"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
+[ext_resource type="PackedScene" uid="uid://ddyncetpsnx8x" path="res://ui/tablet_ui_2d.tscn" id="254_l0ugm"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
 [ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
@@ -322,16 +319,6 @@ metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_13qdw"]
 viewport_path = NodePath("Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
-font_size = 32
-font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
@@ -1371,7 +1358,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dfd08"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1382,7 +1369,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ip2l3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fxdwr"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1393,7 +1380,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_s14wm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1404,10 +1391,10 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_q4gy1"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ip2l3"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_cnw22"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_s14wm"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
@@ -1613,23 +1600,23 @@ sprite_frames = ExtResource("215_tcxth")
 [node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
 process_mode = 3
 script = ExtResource("5_lquwl")
-profit_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
-profit_progress = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
-customer_happiness_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
+profit_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
+profit_progress = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
+customer_happiness_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
 score_update_label = NodePath("../ScoreUpdate/ScoreUpdate")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../../../GameTimer")
-time_left_ui = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
-time_left_label = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
-time_left_bar = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
+time_left_ui = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
+time_left_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
+time_left_bar = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
 shift_starting_ending_label = NodePath("HUD/ShiftStartingEnding")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-cctv_indicator = NodePath("TabletSubViewport/MarginContainer/CctvIndicator")
+cctv_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/CctvIndicator")
 _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
@@ -1640,10 +1627,10 @@ shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
 shelf_item_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
 shelf_item_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
-day_indicator = NodePath("TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
-rating_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
-customer_flow_rate_label = NodePath("TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
+day_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
+rating_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
+customer_flow_rate_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
@@ -1699,221 +1686,12 @@ texture = ExtResource("28_4obbf")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="TabletSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=630542721]
+[node name="TabletSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1546138556]
 handle_input_locally = false
 size = Vector2i(631, 863)
 render_target_update_mode = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport" unique_id=1632834486 node_paths=PackedStringArray("item_icons")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-script = ExtResource("42_yf6j3")
-item_icons = NodePath("Screen/HBoxContainer/ItemIcons")
-
-[node name="Screen" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer" unique_id=1640692384]
-layout_mode = 2
-
-[node name="TopBar" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=2056308306]
-custom_minimum_size = Vector2(0, 50)
-custom_maximum_size = Vector2(-1, 50)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar" unique_id=29320243]
-layout_mode = 2
-alignment = 1
-
-[node name="DayIndicator" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=586450203]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 32
-text = "day"
-horizontal_alignment = 1
-
-[node name="TimeUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=770158511]
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(0.9, 0.9)
-theme_override_styles/panel = SubResource("StyleBoxFlat_mjix0")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=27172397]
-layout_mode = 2
-
-[node name="TimeLeftText" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=2076268572]
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 24
-text = "⌛60s"
-
-[node name="TimeLeftBar" type="TextureProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=1649230487]
-texture_filter = 1
-custom_minimum_size = Vector2(60, 0)
-custom_maximum_size = Vector2(60, -1)
-layout_mode = 2
-size_flags_horizontal = 4
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.25, -0.25)
-offset_transform_scale = Vector2(0.25, 0.25)
-fill_mode = 4
-texture_under = ExtResource("45_dfxmq")
-texture_over = ExtResource("46_kcoi7")
-texture_progress = ExtResource("47_rkju4")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=1516433386]
-visible = false
-custom_minimum_size = Vector2(0, 175)
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-
-[node name="MachineContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/MarginContainer" unique_id=129505205]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-
-[node name="Scores" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=2066546892]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 10
-
-[node name="ScoreContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores" unique_id=1716672005]
-layout_mode = 2
-
-[node name="Scores" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Money" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "$ 0"
-
-[node name="MoneyBar" type="ProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
-modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
-custom_minimum_size = Vector2(450, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 10
-show_percentage = false
-
-[node name="PanelContainer" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
-layout_mode = 2
-
-[node name="Rating" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
-layout_mode = 2
-
-[node name="RatingIconLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "🙂"
-
-[node name="RatingLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "⭐2.1"
-
-[node name="Stars" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
-visible = false
-layout_mode = 2
-
-[node name="Control" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer2" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
-layout_mode = 2
-
-[node name="FlowRate" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
-layout_mode = 2
-
-[node name="FlowRateLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "10"
-label_settings = SubResource("LabelSettings_xrivr")
-
-[node name="FlowRateDescLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "secs/custmr"
-label_settings = SubResource("LabelSettings_xrivr")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen" unique_id=84901258]
-layout_mode = 2
-alignment = 1
-
-[node name="ShowMousePrompt" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer" unique_id=726117337]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 0
-
-[node name="Mouse" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1897773976]
-custom_minimum_size = Vector2(50, 50)
-custom_maximum_size = Vector2(50, -1)
-layout_mode = 2
-texture = ExtResource("82_ip2l3")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="Alt" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1969538304]
-custom_minimum_size = Vector2(50, 50)
-custom_maximum_size = Vector2(50, -1)
-layout_mode = 2
-texture = ExtResource("83_s14wm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="ItemIcons" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer" unique_id=1915478391]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="TabletItemIcon" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=427576900 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon2" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1657180576 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon3" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1886420684 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon4" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=522604125 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon5" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1744749201 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon6" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=602581531 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="CctvIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/MarginContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(125, 110)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 0
-offset_transform_enabled = true
-texture = ExtResource("44_dfxmq")
-expand_mode = 2
+[node name="TabletUI2D" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport" unique_id=1774289997 instance=ExtResource("254_l0ugm")]
 
 [node name="Interactable" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1696852801]
 custom_maximum_size = Vector2(-1, 75)
@@ -2781,7 +2559,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ecwfn")
+texture = SubResource("ViewportTexture_dfd08")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2794,7 +2572,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_ip2l3")
+texture = SubResource("ViewportTexture_fxdwr")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2811,7 +2589,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_s14wm")
+texture = SubResource("ViewportTexture_ecwfn")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2828,7 +2606,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_q4gy1")
+texture = SubResource("ViewportTexture_ip2l3")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
@@ -2851,7 +2629,7 @@ main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_cnw22")
+texture = SubResource("ViewportTexture_s14wm")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -3096,6 +2874,7 @@ FRESHENER"
 [node name="SpraySound" type="AudioStreamPlayer3D" parent="AirFreshener" unique_id=1258576394]
 stream = ExtResource("282_xj0gb")
 
+[editable path="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/TabletUI2D"]
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/MiddleSecurityCam"]
@@ -3116,4 +2895,5 @@ stream = ExtResource("282_xj0gb")
 [editable path="Desk/office desk/cranes"]
 [editable path="Desk/Sketchbooks, comics, rulers (1)"]
 [editable path="Desk/Lamp 1&5 (1)"]
+[editable path="Desk/Day0DeskProps/Sad Plants2"]
 [editable path="TrashCan"]
