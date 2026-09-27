@@ -60,7 +60,6 @@ const ALERT_QUEUE_SIZE = 5
 @export var stamina_bar: ProgressBar
 @export var item_indicator: PanelContainer
 @export var item_text: RichTextLabel
-@export var use_item_prompt: Button
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName
 @export var exploding_bomb_ui: PanelContainer

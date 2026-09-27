@@ -156,6 +156,7 @@
 [ext_resource type="Texture2D" uid="uid://ce2iseix2wc24" path="res://Assets/Cleaning supplies/Employee Area Cleaning Supplies_1_Employee Area_Props_v6_Bucket_2_BaseColor.png" id="124_iaj8l"]
 [ext_resource type="Texture2D" uid="uid://cfcwdbkx1vaj3" path="res://Assets/Cleaning supplies/Employee Area Cleaning Supplies_1_Employee Area_Props_v6_Bucket_2_Metallic.1001-1_Employee Area_Props_v6_Bucket_2_Roughness.png" id="125_kxvup"]
 [ext_resource type="PackedScene" uid="uid://cmy8d842qgtsn" path="res://Assets/plants/Sad Plants.glb" id="146_dultt"]
+[ext_resource type="PackedScene" uid="uid://css2h7cp048j8" path="res://Assets/signs/sign_(2).tscn" id="146_f56pk"]
 [ext_resource type="PackedScene" uid="uid://delcoklyhmj4i" path="res://Assets/Office door/test_slide_door.tscn" id="158_dultt"]
 [ext_resource type="PackedScene" uid="uid://dkq6qyg7wxp6s" path="res://Assets/counter/human_helper_counter.tscn" id="159_f56pk"]
 [ext_resource type="PackedScene" uid="uid://8l8oobrdd0cg" path="res://Assets/counter/TipJar Final (1).glb" id="159_ke8eb"]
@@ -1641,7 +1642,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701016, -0.00016215755, -0.9999425, 1.02599685e-07, 1, -0.00016214822, 0.9999425, -1.01539825e-08, 0.0005701016, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010114, -0.00016215755, -0.9999416, 1.0259959e-07, 1, -0.00016214808, 0.9999416, -1.01539825e-08, 0.00057010114, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -1837,6 +1838,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 1, 0, -1, -4.3711392e-08, 3.
 light_color = Color(1, 0.95, 0, 1)
 light_energy = 5.0
 shadow_enabled = true
+shadow_caster_mask = 4294966783
 area_range = 5.895
 area_size = Vector2(2.0486052, 2.8595924)
 
@@ -1896,7 +1898,7 @@ gi_mode = 2
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D2" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1365757797]
-transform = Transform3D(-1.0927847e-08, 0, -0.179, 0, 0.12, 0, 0.25, 0, -7.8243385e-09, 3.993938, 1.4768955, 3.944484)
+transform = Transform3D(-1.0927847e-08, 0, -0.179, 0, 0.12, 0, 0.25, 0, -7.8243385e-09, 3.993938, 1.4873663, 3.9444842)
 material_override = ExtResource("6_0jw1j")
 texture = ExtResource("7_ubo3j")
 
@@ -3034,6 +3036,15 @@ shadow_enabled = true
 area_range = 6.686
 area_size = Vector2(0.309, 0.309)
 
+[node name="AreaLight3D8" type="AreaLight3D" parent="BreakRoom/PCRoom" unique_id=1434959553]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.5108566, 2.8779821, 1.5551167)
+light_color = Color(1, 0.9882353, 0.8392157, 1)
+light_energy = 1.5
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+area_range = 5.203
+area_size = Vector2(0.309, 0.309)
+
 [node name="Label3D4" type="Label3D" parent="BreakRoom/PCRoom" unique_id=124356250]
 transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 1.9737899, 2.2027667, 3.0435143)
 text = "OFFICE"
@@ -3177,16 +3188,22 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.78
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 4.6198378, 0, 3.0663538)
 
 [node name="Label3D3" type="Label3D" parent="BreakRoom/WallPieceLong7" unique_id=2086057903]
-transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -0.36474228, 1.6707246, 0.024199486)
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -0.4505334, 1.6078038, 0.06353283)
 text = "OFFICE --->
-BREAK ROOM --->"
+"
 horizontal_alignment = 2
 
 [node name="Label3D4" type="Label3D" parent="BreakRoom/WallPieceLong7" unique_id=1624088156]
-transform = Transform3D(-2.1855693e-07, 0, 1, 0, 1, 0, -1, 0, -2.1855693e-07, -2.3259177, 1.6707246, 1.8354745)
-text = "<--- EMPLOYEE AREA
-<--- CUSTOMER AREA"
+transform = Transform3D(-2.1855693e-07, 0, 1, 0, 1, 0, -1, 0, -2.1855693e-07, -2.3259177, 1.6083584, 1.6936965)
+text = "<-- EMPLOYEE AREA
+"
 horizontal_alignment = 0
+
+[node name="Sign (2)" parent="BreakRoom/WallPieceLong7" unique_id=1373650129 instance=ExtResource("146_f56pk")]
+transform = Transform3D(7.634743e-08, 1.4476855, -6.328033e-08, 0, -6.328034e-08, -1.4476854, 1.7466255, -6.328034e-08, 2.766071e-15, -2.4154687, 1.612798, 0.74977493)
+
+[node name="Sign (2)2" parent="BreakRoom/WallPieceLong7" unique_id=945395302 instance=ExtResource("146_f56pk")]
+transform = Transform3D(1.2250178, 0, 0, 0, -5.3547232e-08, -1.2250178, 0, 1.2250179, -5.354723e-08, -0.9620991, 1.6072845, -0.015678406)
 
 [node name="WallPieceLong8" parent="BreakRoom" unique_id=746599901 instance=ExtResource("8_qboto")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.2474978, 0, 6.3601923)

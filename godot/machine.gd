@@ -25,6 +25,7 @@ const REFILL_MINIGAME := "Refill"
 @export var spot_for_customer: Marker3D
 @export var start_of_customer_queue_marker: Marker3D
 @export var end_of_customer_queue_marker: Marker3D
+@export var item_aim_spot: Marker3D
 @export_category("UI")
 @export var progress_indicator: Control
 @export var tippy_progress_sprite: TextureRect
@@ -933,11 +934,16 @@ func _on_requested_use_active_item_fix_machine():
 
 	if hammer == null or !hammer.can_be_used:
 		return
-
+	
+	Global.locked_camera_target_pos = item_aim_spot.global_position
+	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	Events.play_viewmodel_animation.emit("hammer_use")
 	Global.put_active_item_on_cooldown(hammer)
 	await Events.hammer_animation_hit
 	fix_machine(true)
+	
+	await Events.viewmodel_animation_finished
+	Global.camera_mode = Global.CameraMode.PLAYER
 
 
 func _on_requested_use_active_item_machine():
@@ -951,6 +957,9 @@ func _on_requested_use_active_item_machine():
 		return
 
 	if customer:
+		Global.locked_camera_target_pos = item_aim_spot.global_position
+		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
+		
 		Global.put_active_item_on_cooldown(air_horn)
 		var leaving_customer: Customer = customer
 		Events.play_viewmodel_animation.emit("airhorn_use")
@@ -968,6 +977,8 @@ func _on_requested_use_active_item_machine():
 		hum_sound.stop()
 		equal_sign.texture = equal_sign_states[EqualStates.Empty]
 
+		await Events.viewmodel_animation_finished
+		Global.camera_mode = Global.CameraMode.PLAYER
 
 func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
