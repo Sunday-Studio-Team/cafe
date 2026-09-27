@@ -173,12 +173,16 @@ func _process(delta: float) -> void:
 	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
 
 	for item in Global.owned_items:
-		if item.is_active_item:
-			if item.active_item_remaining_cooldown > 0.0:
-				item.active_item_remaining_cooldown -= delta
-				if item.active_item_remaining_cooldown <= 0.0:
-					item.can_be_used = true
-					item.active_item_remaining_cooldown = 0
+		if !item.is_active_item:
+			return
+		if !(item.active_item_remaining_cooldown > 0.0):
+			return
+		item.active_item_remaining_cooldown -= delta
+
+		if !(item.active_item_remaining_cooldown <= 0.0):
+			return
+		item.can_be_used = true
+		item.active_item_remaining_cooldown = 0
 
 
 func get_stats() -> void:
@@ -233,63 +237,59 @@ func update_air_fresheners_enabled() -> void:
 func set_per_day_stuff() -> void:
 	closing_time = false
 	_trash_can.visible = false
-	if Global.day == 0:
-		Global.player_tips_bank = 0
-		Global.owned_items.clear()
-		Stats.reset()
-		_active_machines.clear()
-		_active_machines.push_front(tutorial_machine)
-		_set_day_security_cameras_active([])
-	if Global.day == 1:
-		# Reset run.
-		Global.player_tips_bank = 5
-		Global.received_emails.clear()
-		Global.read_emails.clear()
-		Global.spam_emails.clear()
-		Global.received_reviews.clear()
-		Global.player_tips_bank = 0
-		Global.owned_items.clear()
-		Stats.reset()
 
-	if Global.day == 1:
-		_active_machines.clear()
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([])
+	match Global.day:
+		0:
+			Global.player_tips_bank = 0
+			Global.owned_items.clear()
+			Stats.reset()
+			_active_machines.clear()
+			_active_machines.push_front(tutorial_machine)
+			_set_day_security_cameras_active([])
+		1:
+			Global.player_tips_bank = 5
+			Global.received_emails.clear()
+			Global.read_emails.clear()
+			Global.spam_emails.clear()
+			Global.received_reviews.clear()
+			Global.player_tips_bank = 0
+			Global.owned_items.clear()
+			Stats.reset()
 
-	if Global.day == 2:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_left_area_left_machine)
-		_set_day_security_cameras_active([])
-
-	if Global.day == 3:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_middle_camera])
-
-	if Global.day == 4:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_left_machine)
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
-		should_spawn_trash_today = true
-		_trash_can.visible = true
-
-	if Global.day == 5:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_left_machine)
-		_active_machines.push_back(_left_area_middle_machine)
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
-		should_spawn_trash_today = true
-		_trash_can.visible = true
+			_active_machines.clear()
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([])
+		2:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_left_area_left_machine)
+			_set_day_security_cameras_active([])
+		3:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_middle_camera])
+		4:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+			should_spawn_trash_today = true
+			_trash_can.visible = true
+		5:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_left_area_middle_machine)
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
+			should_spawn_trash_today = true
+			_trash_can.visible = true
 
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()
