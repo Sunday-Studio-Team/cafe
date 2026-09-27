@@ -20,6 +20,7 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export var cup_boundaries: Area2D
 @export var cup_face_sprite: Sprite2D
 @export var visual_effect: Sprite2D
+@export var background: Sprite2D
 
 @export_category("Audio")
 @export var bean_hit_glasss_sound: AudioStreamPlayer2D
@@ -28,22 +29,20 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 
 @export_category("PackedScenes")
 @export var regular_bean_scene: PackedScene
-@export var screw_bean_scene: PackedScene
 @export var golden_bean_scene: PackedScene
 @export var bomb_bean_scene: PackedScene
 
 @export_category("Textures")
-@export var normal_face_sprite: CompressedTexture2D
 @export var bomb_face_sprite: CompressedTexture2D
-@export var screw_face_sprite: CompressedTexture2D
 @export var golden_face_sprite: CompressedTexture2D
-@export var normal_visual_effect: CompressedTexture2D
-@export var bomb_visual_effect: CompressedTexture2D
-@export var screw_visual_effect: CompressedTexture2D
-@export var golden_visual_effect: CompressedTexture2D
+@export var bomb_bg_sprite: CompressedTexture2D
+@export var golden_bg_sprite: CompressedTexture2D
+
 
 @export_group("Emitters")
 @export var coffee_dust: GPUParticles2D
+@export var golden_bean_collect: GPUParticles2D
+@export var bomb_smoke: GPUParticles2D
 
 var beans_in_cup: int = 0
 var beans_spawned: int = 0
@@ -62,8 +61,6 @@ signal first_proper_input
 
 var allow_moving_cup:bool = true
 @export var animation_player: AnimationPlayer
-@export var golden_bean_collect: GPUParticles2D
-@export var bomb_smoke: GPUParticles2D
 
 var bomb_bean:Node
 var gold_bean:Node
@@ -248,16 +245,13 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 	if not collected_beans.has(bean):
 		#collected_beans is an array of beans.
 		if "bomb" in bean_type:
-			bomb() #also calls Events.emit_signal("minigame_end")
+			bomb()
 			return
 		elif "gold" in bean_type:
-			gold() #calls Events.emit_signal("minigame_end")
+			gold()
 			gain_score_sound.play()
 			return
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
-			#cup_face_sprite.texture = normal_face_sprite #commented out, until we get other textures for the cup's face
-			
-			visual_effect.texture = normal_visual_effect
 			beans_in_cup += 1
 			gain_score_sound.play()
 			gain_score_sound.pitch_scale += 0.05
@@ -269,12 +263,11 @@ func spill_bean(bean: PhysicsBody2D) -> void:
 	if collected_beans.has(bean):
 		collected_beans.erase(bean)
 		beans_in_cup -= 1
-		#print('spill_bean has occured;', bean)
 
 
 func bomb() -> void:
-	#cup_face_sprite.texture = bomb_face_sprite
-	#visual_effect.texture = bomb_visual_effect
+	cup_face_sprite.texture = bomb_face_sprite
+	background.texture = bomb_bg_sprite
 	bomb_smoke.emitting = true
 	animation_player.play("bomb_flash_cup")
 	allow_moving_cup = false
@@ -287,8 +280,8 @@ func bomb() -> void:
 
 
 func gold():
-	#cup_face_sprite.texture = golden_face_sprite #commented out, until we get other textures for the cup's face
-	#visual_effect.texture = golden_visual_effect
+	cup_face_sprite.texture = golden_face_sprite
+	background.texture = golden_bg_sprite
 	golden_bean_collect.restart()
 	allow_moving_cup = false
 	await get_tree().create_timer(0.5, false).timeout
