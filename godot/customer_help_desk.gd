@@ -159,6 +159,10 @@ func _on_active_item_used_on_desk() -> void:
 			break
 
 	if we_have_airhorn and _desk_customer != null and airhorn_item.can_be_used:
+		# customer origin is floor so this will roughly be like middle of body
+		# (or headshot for the kid)
+		Global.locked_camera_target_pos = _desk_customer.global_position + Vector3(0, 1.4, 0)
+		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 		Events.play_viewmodel_animation.emit("airhorn_use")
 		await Events.air_horn_animation_just_blasted
 		airhorn_sound.play()
@@ -167,3 +171,5 @@ func _on_active_item_used_on_desk() -> void:
 		_set_customer(null)
 
 		Global.put_active_item_on_cooldown(airhorn_item)
+		await Events.viewmodel_animation_finished
+		Global.camera_mode = Global.CameraMode.PLAYER

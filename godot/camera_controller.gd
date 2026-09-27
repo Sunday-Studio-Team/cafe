@@ -43,22 +43,43 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_input_since_last_physics_frame.y += -event.screen_relative.y * mouse_sens
 
 
-func _physics_process(_delta: float) -> void:
-	if Global.camera_mode != Global.CameraMode.PLAYER or Global.in_ui:
+func _physics_process(delta: float) -> void:
+	if Global.in_ui:
 		return
 
-	input_rotation.x = clampf(input_rotation.x + mouse_input_since_last_physics_frame.y, deg_to_rad(-90), deg_to_rad(85))
-	input_rotation.y += mouse_input_since_last_physics_frame.x
+	if Global.camera_mode == Global.CameraMode.PLAYER:
+		input_rotation.x = clampf(input_rotation.x + mouse_input_since_last_physics_frame.y, deg_to_rad(-90), deg_to_rad(85))
+		input_rotation.y += mouse_input_since_last_physics_frame.x
 
-	# rotate camera controller (up/down)
-	transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
+		# rotate camera controller (up/down)
+		transform.basis = Basis.from_euler(Vector3(input_rotation.x, 0.0, 0.0))
 
-	# rotate player (left/right)
-	player.global_transform.basis = Basis.from_euler(Vector3(0.0, input_rotation.y, 0.0))
+		# rotate player (left/right)
+		player.global_transform.basis = Basis.from_euler(Vector3(0.0, input_rotation.y, 0.0))
 
-	mouse_input_since_last_physics_frame = Vector2.ZERO
+		mouse_input_since_last_physics_frame = Vector2.ZERO
+	
+	elif Global.camera_mode == Global.CameraMode.LOCKED_TO_POINT:
+		const CAMERA_PAN_SPEED_MULTIPLIER := 10
+		
+		var direction_to_point: Vector3 = global_position.direction_to(Global.locked_camera_target_pos)
+		var horizontal_direction_to_point := Vector3(direction_to_point.x, 0, direction_to_point.z)
+		
+		var desired_y_rotation := Vector3.FORWARD.signed_angle_to(horizontal_direction_to_point, Vector3.UP)
+		player.global_rotation.y = lerp_angle(
+				player.global_rotation.y,
+				desired_y_rotation,
+				delta * CAMERA_PAN_SPEED_MULTIPLIER
+		)
+
+		var desired_x_rotation := horizontal_direction_to_point.signed_angle_to(direction_to_point, global_transform.basis.x)
+		global_rotation.x = lerp_angle(
+				global_rotation.x,
+				desired_x_rotation,
+				delta * CAMERA_PAN_SPEED_MULTIPLIER
+		)
 
 
-func sync_rotation_from_player():
+func sync_rotation_from_player() -> void:
 	input_rotation.y = player.global_rotation.y
 	input_rotation.x = rotation.x

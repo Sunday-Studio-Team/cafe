@@ -3,6 +3,7 @@ extends Node3D
 
 const NUM_OF_MINIGAMES_TO_DISABLE := 1
 
+@export var model: Node3D
 @export var _shape_cast_3d: ShapeCast3D
 ## this is the spotlight that illuminates the circle the camera is watching
 @export var spotlight: SpotLight3D
@@ -154,11 +155,15 @@ func _on_visibility_changed() -> void:
 
 
 func disarm_camera() -> void:
+	Global.locked_camera_target_pos = model.global_position
+	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	_camera_disarmed = true
 	disable_sound.play()
 	disable_particles.emitting = true
 	disable_2d_vfx.play()
 	_update_camera_components_active()
+	await Events.viewmodel_animation_finished
+	Global.camera_mode = Global.CameraMode.PLAYER
 
 
 func rearm_camera() -> void:

@@ -155,8 +155,9 @@ height = 0.02
 radial_segments = 4
 rings = 0
 
-[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("_shape_cast_3d", "spotlight", "fake_spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disable_2d_vfx", "disabled_timer_sprite", "disabled_timer_bar", "whipped_cream_sound")]
+[node name="SecurityCam" type="Node3D" unique_id=557976636 node_paths=PackedStringArray("model", "_shape_cast_3d", "spotlight", "fake_spotlight", "camera_aimer_node", "aim_path_follow_3d", "grace_timer", "disabled_timer", "interactable", "caught_audio_stream_player_3d", "disable_sound", "disable_particles", "disable_2d_vfx", "disabled_timer_sprite", "disabled_timer_bar", "whipped_cream_sound")]
 script = ExtResource("1_w3jiq")
+model = NodePath("CameraAimerModel/Model")
 _shape_cast_3d = NodePath("AimPath3D/AimPathFollow3D/ShapeCast3D")
 spotlight = NodePath("AimPath3D/AimPathFollow3D/SpotLight3D")
 fake_spotlight = NodePath("CameraAimerModel/FakeSpotlight")
