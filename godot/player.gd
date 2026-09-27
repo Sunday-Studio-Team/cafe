@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+# (for footstep stuff)
 const STRIDE_LENGTH := 1.25
 
 # this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
@@ -28,14 +29,9 @@ var player_status_effects: PlayerStatusEffects
 var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
-
 var _is_sprinting: bool
 var mouse_sens := 0.1
-# the mouse's movement since the last physics frame .
-# we get mouse input from _unhandled_input() which is called continuously, so
-# we store it here then apply it in the physics process so no movement is
-# applied off-sync with physics frames
-var mouse_delta: Vector2 = Vector2.ZERO
+
 # vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
@@ -45,6 +41,10 @@ var has_xl_bag_item: bool = false
 # when pully ball spawns, starts counting up. keeping track of strength.
 var pully_ball_countup: float = 0.0
 var pully_ball_instance: Node3D
+
+var fake_vel_follow_speed: float = 1.25
+var fake_velocity: Vector3
+var fov_tween: Tween
 
 # we add on top of the ray distance to avoid weird stuff with big interactables
 # (whose 'position's may be further away from us than their interactable hitbox)
@@ -144,13 +144,9 @@ func override_position_rotation(override_position: Vector3, override_rotation: V
 	camera.sync_rotation_from_player()
 	reset_physics_interpolation()
 
+
 func is_sprinting() -> bool:
 	return _is_sprinting
-
-
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-#		mouse_delta += event.screen_relative * mouse_sens
 
 
 # this is what decides whether to show the mouse
@@ -162,19 +158,9 @@ func handle_floating_cursor() -> void:
 		Global.showing_floating_cursor = false
 
 
-#func handle_mouselook() -> void:
-#	camera.rotation_degrees.x -= mouse_delta.y
-#	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-#
-#	rotation_degrees.y -= mouse_delta.x
-#
-#	mouse_delta = Vector2.ZERO
-
-var fake_vel_follow_speed: float = 1.25
-var fake_velocity: Vector3
-var fov_tween: Tween
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
+	# if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
+	if (not movement_enabled or holding_interactable or Global.in_ui):
 		velocity = Vector3.ZERO
 		return
 
@@ -203,6 +189,7 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
@@ -338,6 +325,7 @@ func handle_customer_trash() -> void:
 	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
+
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()
 
@@ -346,6 +334,7 @@ func _on_items_updated() -> void:
 		if item.item_id == "nice_spoon":
 			has_xl_bag_item = true
 			break
+
 
 func flash_red():
 	camera.camera_effects.flash_screen_red()

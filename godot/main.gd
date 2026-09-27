@@ -67,6 +67,7 @@ var _all_security_cameras: Array[SecurityCam3D]
 var should_spawn_trash_today: bool = false
 var closing_time: bool = false
 
+
 func _ready() -> void:
 	_voice_line_system.setup()
 	Global.camera_mode = Global.CameraMode.PLAYER

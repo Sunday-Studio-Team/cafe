@@ -27,7 +27,7 @@ func _ready() -> void:
 	Events.game_options_changed.connect(_on_game_options_changed)
 
 
-func trigger_shake()-> void:
+func trigger_shake() -> void:
 	_current_shake_strength = MAX_SHAKE_AMOUNT
 
 
@@ -82,7 +82,7 @@ func _on_game_options_changed(options_data: OptionsData) -> void:
 			enable_tilt = false
 
 
-func flash_screen_red():
+func flash_screen_red() -> void:
 	var t := create_tween()
 	t.tween_property(caught_overlay, "modulate:a", 0.5, 0.2)
 	t.tween_property(caught_overlay, "modulate:a", 0.0, 1.0)

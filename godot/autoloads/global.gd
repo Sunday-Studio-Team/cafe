@@ -176,9 +176,15 @@ var trash_punishment_amount := 0.2
 enum CameraMode {
 	PLAYER,
 	CINEMATIC,
-	DEBUG_FREE_CAM
+	DEBUG_FREE_CAM,
+	LOCKED_TO_POINT
 }
-var camera_mode: CameraMode = CameraMode.PLAYER
+var camera_mode: CameraMode = CameraMode.PLAYER:
+	set(new_mode):
+		if new_mode == CameraMode.PLAYER:
+			Global.player.camera.sync_rotation_from_player()
+		camera_mode = new_mode
+var locked_camera_target_pos: Vector3
 var cinematic_camera_allow_machine_gui_inputs: bool = true
 var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
