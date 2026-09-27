@@ -165,12 +165,24 @@ func handle_movement(delta: float) -> void:
 	if (not movement_enabled or holding_interactable or Global.in_ui):
 		velocity = Vector3.ZERO
 		
-		move_kaychain.play("IdleSway")
+		#move_kaychain.play("IdleSway")
 		# set this to idle move_kaychain
 		return
 
 	var accel: float = Stats.current.player_accel
 	var decel: float = Stats.current.player_decel
+
+	#print("velocity", velocity)
+
+	if Vector3(velocity.x, 0, velocity.z) == Vector3(0.0, 0.0, 0.0): 
+		move_kaychain.play("IdleSway")
+		#print("currently idle keychain")
+		# set this to idle move_kaychain
+	else:
+		# can use velocity metric to increase playback speed to create illusion of fast moving keychain
+		move_kaychain.play("KittyChainSwing")			
+		#print("keychain is swinging`")
+		#print(accel)
 
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -192,8 +204,6 @@ func handle_movement(delta: float) -> void:
 	else:
 		horizontal_velocity = horizontal_velocity.move_toward(Vector3.ZERO, decel * delta)
 
-	# can use velocity metric to increase playback speed to create illusion of fast moving keychain
-	move_kaychain.play("KeyChainSwing")
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
 	
