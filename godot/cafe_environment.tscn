@@ -1642,7 +1642,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010114, -0.00016215755, -0.99994165, 1.025996e-07, 1, -0.00016214809, 0.99994165, -1.01539825e-08, 0.00057010114, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010114, -0.00016215755, -0.9999416, 1.0259959e-07, 1, -0.00016214808, 0.9999416, -1.01539825e-08, 0.00057010114, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -3195,9 +3195,6 @@ transform = Transform3D(7.634743e-08, 1.4476855, -6.328033e-08, 0, -6.328034e-08
 
 [node name="Sign (2)2" parent="BreakRoom/WallPieceLong7" unique_id=945395302 instance=ExtResource("146_f56pk")]
 transform = Transform3D(1.2250178, 0, 0, 0, -5.3547232e-08, -1.2250178, 0, 1.2250179, -5.354723e-08, -0.9620991, 1.6072845, -0.015678406)
-
-[node name="Sign (2)3" parent="BreakRoom/WallPieceLong7" unique_id=1752944378 instance=ExtResource("146_f56pk")]
-transform = Transform3D(1.2250178, 0, 0, 0, -5.3547232e-08, -1.2250178, 0, 1.2250179, -5.354723e-08, 2.0127962, 1.6072845, -0.015678406)
 
 [node name="WallPieceLong8" parent="BreakRoom" unique_id=746599901 instance=ExtResource("8_qboto")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3.2474978, 0, 6.3601923)
