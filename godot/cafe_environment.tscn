@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dqlyv7lvq0eny" path="res://Assets/signs/Let's pay.glb" id="1_qok1s"]
 [ext_resource type="PackedScene" uid="uid://cd5pgbqeaiux7" path="res://Assets/signs/caife.tscn" id="2_5utbh"]
+[ext_resource type="PackedScene" uid="uid://blce12e8ntnmw" path="res://Assets/Street/Building 6.glb" id="2_d2otu"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="3_a4lwu"]
 [ext_resource type="PackedScene" uid="uid://cja7slsposkuo" path="res://Assets/ceiling light 1/Modern Interior Ceiling Light.glb" id="4_j0jbx"]
 [ext_resource type="PackedScene" uid="uid://b7lkrbc1y0a24" path="res://Assets/ceiling light 1/Ceiling Lamps 3D Model.glb" id="5_omxm3"]
@@ -1280,6 +1281,9 @@ environment = ExtResource("82_4nsdn")
 [node name="ExteriorStreet" type="Node3D" parent="." unique_id=229154315]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.1, -4)
 
+[node name="Building 62" parent="ExteriorStreet" unique_id=1455590819 instance=ExtResource("2_d2otu")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 12.247062, -0.051071204, -14.999596)
+
 [node name="CarSpawner" type="Path3D" parent="ExteriorStreet" unique_id=1294804828 node_paths=PackedStringArray("timer", "car_sprite", "path_follow")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2199564, 2.5736287, -8.233028)
 curve = SubResource("Curve3D_02vyw")
@@ -1290,7 +1294,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701032, -0.00016215755, -0.99994516, 1.0259996e-07, 1, -0.00016214866, 0.99994516, -1.01539825e-08, 0.0005701032, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010306, -0.00016215755, -0.99994504, 1.0259995e-07, 1, -0.00016214864, 0.99994504, -1.01539825e-08, 0.00057010306, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -1559,6 +1563,69 @@ transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 64.4
 transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 50.463913, -8.770772, -4.905945)
 
 [node name="sidewalk26" parent="ExteriorStreet/sidewalk/cafe_opp_side" unique_id=263655746 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 36.521107, -8.770772, -4.905945)
+
+[node name="cafe_opp_side2" type="Node3D" parent="ExteriorStreet/sidewalk" unique_id=1347398225]
+transform = Transform3D(1, 0, 1.7484557e-07, 0, 1, 0, -1.7484557e-07, 0, 1, -3.3649235, 0, -50.589115)
+
+[node name="sidewalk" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=874986620 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 22.59895, -8.770772, -4.905945)
+
+[node name="sidewalk2" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1734752839 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 8.61941, -8.770772, -4.905945)
+
+[node name="sidewalk3" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1556027056 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -5.348665, -8.770772, -4.905945)
+
+[node name="sidewalk4" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1892462722 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -19.328201, -8.770772, -4.905945)
+
+[node name="sidewalk5" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1420941348 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -33.27102, -8.770772, -4.905945)
+
+[node name="sidewalk6" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1186516963 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -47.250565, -8.770772, -4.905945)
+
+[node name="sidewalk7" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=437202695 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -61.218636, -8.770772, -4.905945)
+
+[node name="sidewalk8" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1864180869 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -75.19817, -8.770772, -4.905945)
+
+[node name="sidewalk9" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=737192692 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -89.218475, -8.770772, -4.905945)
+
+[node name="sidewalk10" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1974997240 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -103.19801, -8.770772, -4.905945)
+
+[node name="sidewalk11" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1231354226 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -117.166084, -8.770772, -4.905945)
+
+[node name="sidewalk12" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=215663347 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -131.14563, -8.770772, -4.905945)
+
+[node name="sidewalk19" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=163135727 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 134.35895, -8.770772, -4.905945)
+
+[node name="sidewalk20" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=618034110 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 120.390884, -8.770772, -4.905945)
+
+[node name="sidewalk21" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1766888814 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 106.41137, -8.770772, -4.905945)
+
+[node name="sidewalk22" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1070189902 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 92.39107, -8.770772, -4.905945)
+
+[node name="sidewalk23" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=52988472 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 78.41153, -8.770772, -4.905945)
+
+[node name="sidewalk24" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1281243486 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 64.44346, -8.770772, -4.905945)
+
+[node name="sidewalk25" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=41412065 instance=ExtResource("34_3keue")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 50.463913, -8.770772, -4.905945)
+
+[node name="sidewalk26" parent="ExteriorStreet/sidewalk/cafe_opp_side2" unique_id=1657104763 instance=ExtResource("34_3keue")]
 transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 36.521107, -8.770772, -4.905945)
 
 [node name="streetfloor" type="Node3D" parent="ExteriorStreet" unique_id=1897562830]
