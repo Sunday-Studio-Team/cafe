@@ -161,8 +161,7 @@ func handle_floating_cursor() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	# if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
-	if (not movement_enabled or holding_interactable or Global.in_ui):
+	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
 		velocity = Vector3.ZERO
 		
 		#move_kaychain.play("IdleSway")
