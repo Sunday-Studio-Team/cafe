@@ -37,7 +37,6 @@
 [ext_resource type="Texture2D" uid="uid://7kib8waavatk" path="res://sprites/customers/punk.png" id="21_o7qhd"]
 [ext_resource type="Texture2D" uid="uid://bfcpp6x7nlbsw" path="res://sprites/customers/rich kid.png" id="22_ik2ku"]
 [ext_resource type="PackedScene" uid="uid://bkcevn46bhcie" path="res://Assets/chair/plastic_chair.tscn" id="22_kmdca"]
-[ext_resource type="PackedScene" uid="uid://brrcrumg8hxyp" path="res://Assets/trashcan/Modern Trash Bin Low Poly.glb" id="22_uftqg"]
 [ext_resource type="Texture2D" uid="uid://dvd6qsku1lqng" path="res://sprites/customers/salesman.png" id="23_rayvh"]
 [ext_resource type="Texture2D" uid="uid://er356iujlkii" path="res://environment/textures/lightbusycoffee.jpg" id="24_ppc62"]
 [ext_resource type="Texture2D" uid="uid://bdrw6fhqo0vbx" path="res://sprites/customers/smoke_guy.png" id="24_tfpme"]
@@ -136,6 +135,7 @@
 [ext_resource type="PackedScene" uid="uid://dmuumticci3nh" path="res://Assets/old coffee machine/old_coffee_machine.tscn" id="93_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://d027k1reepg57" path="res://Assets/Cleaning supplies/cleaning_supplies.tscn" id="93_g2jch"]
 [ext_resource type="PackedScene" uid="uid://08twhhrq38wo" path="res://Assets/signs/entry_panel_2.tscn" id="105_vf5ik"]
+[ext_resource type="PackedScene" uid="uid://bk305ay464u4h" path="res://Assets/trashcan/Tippy Trashcan.glb" id="106_s7w1k"]
 [ext_resource type="PackedScene" uid="uid://c0wupqthmectl" path="res://Assets/Fridge/fridge_tippy.tscn" id="108_aslp2"]
 [ext_resource type="PackedScene" uid="uid://j678piqwcx1q" path="res://Assets/ATM/ATMTIPPY.glb" id="109_1wuav"]
 [ext_resource type="Texture2D" uid="uid://crssvr5w1sa3r" path="res://Assets/ATM/ATMTIPPY_Tippy_Base_color.png" id="110_cth7v"]
@@ -1646,7 +1646,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.000570101, -0.00016215755, -0.9999414, 1.0259957e-07, 1, -0.00016214805, 0.9999414, -1.01539825e-08, 0.000570101, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701009, -0.00016215755, -0.9999412, 1.0259955e-07, 1, -0.000162148, 0.9999412, -1.01539825e-08, 0.0005701009, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2102,13 +2102,10 @@ mesh = SubResource("BoxMesh_rkau7")
 transform = Transform3D(-0.43490902, 0, -0.90047455, 0, 1, 0, 0.90047455, 0, -0.43490902, 4.548725, 0, -3.6920702)
 
 [node name="plastic chair3" parent="CustomerArea" unique_id=738810748 instance=ExtResource("22_kmdca")]
-transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 6.4921713, 0, -7.566301)
+transform = Transform3D(-0.45335323, 0, -0.89133096, 0, 1, 0, 0.89133096, 0, -0.45335323, 2.738092, 0, -4.9394736)
 
 [node name="plastic chair" parent="CustomerArea" unique_id=818098487 instance=ExtResource("22_kmdca")]
 transform = Transform3D(0.73394215, 0, 0.679212, 0, 1, 0, -0.679212, 0, 0.73394215, 0.67507875, 0, -4.0399933)
-
-[node name="trashcan" parent="CustomerArea" unique_id=2010817888 instance=ExtResource("22_uftqg")]
-transform = Transform3D(0.5901272, 0, -0.8073103, 0, 1, 0, 0.8073103, 0, 0.5901272, 7.273385, 0.1, -7.3124294)
 
 [node name="Tippy cutout2" parent="CustomerArea" unique_id=1861450768 instance=ExtResource("26_0cjwk")]
 transform = Transform3D(0.5811208, 0, 0.3128876, 0, 0.65999997, 0, -0.3128876, 0, 0.5811208, -1.1862783, 0.04014621, -2.1705725)
@@ -2194,6 +2191,9 @@ transform = Transform3D(-1.3946975e-07, 0, -1.3, 3.6125252e-15, 1.3, 0, 1.3, -3.
 
 [node name="TestSlideDoor" parent="CustomerArea" unique_id=2106423727 instance=ExtResource("158_dultt")]
 transform = Transform3D(-3.8039836e-08, 0, -0.9442677, 0, 0.9442677, 0, 0.8702501, 0, -4.127525e-08, 8.109618, 0.049835313, -5.0099015)
+
+[node name="Tippy Trashcan" parent="CustomerArea" unique_id=833070177 instance=ExtResource("106_s7w1k")]
+transform = Transform3D(0.93574315, 0, -0.759696, 0, 1.2053021, 0, 0.759696, 0, 0.93574315, 6.9769106, 0.06429542, -7.6307445)
 
 [node name="EmployeeAreaNavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1205643826]
 navigation_mesh = SubResource("NavigationMesh_edv2q")
