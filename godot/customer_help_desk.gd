@@ -65,7 +65,7 @@ func has_active_customers() -> bool:
 
 func _set_customer(new_customer: Customer) -> void:
 	if _desk_customer and _desk_customer.customer_sprite_resource.alternate_desk_sprite:
-		_desk_customer.body.texture = _desk_customer.customer_sprite_resource.sprite
+		_desk_customer.override_material.albedo_texture = _desk_customer.customer_sprite_resource.sprite
 
 	_desk_customer = new_customer
 
@@ -73,7 +73,7 @@ func _set_customer(new_customer: Customer) -> void:
 		_desk_customer.wait_timed_out.connect(_on_customer_wait_timed_out)
 		await _desk_customer.move_to(_spot_for_customer.global_position)
 		if _desk_customer.customer_sprite_resource.alternate_desk_sprite:
-			_desk_customer.body.texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
+			_desk_customer.override_material.albedo_texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
 		new_desk_customer_arrived.emit()
 
 		# Set unlimited for tutorial day

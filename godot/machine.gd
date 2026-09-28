@@ -420,13 +420,13 @@ func show_tutorial_go_clean_spill() -> void:
 func _set_customer(new_customer: Customer) -> void:
 	if customer:
 		if customer.customer_sprite_resource.alternate_desk_sprite:
-			customer.body.texture = customer.customer_sprite_resource.sprite
+			customer.override_material.albedo_texture = customer.customer_sprite_resource.sprite
 
 	if new_customer != null:
 		new_customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
 		await new_customer.move_to(spot_for_customer.global_position)
 		if new_customer.customer_sprite_resource.alternate_desk_sprite:
-			new_customer.body.texture = new_customer.customer_sprite_resource.alternate_desk_sprite
+			new_customer.override_material.albedo_texture = new_customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
