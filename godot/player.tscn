@@ -30,8 +30,6 @@ height = 1.7479492
 [sub_resource type="Environment" id="Environment_3n8yq"]
 adjustment_brightness = 2.0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7ahtn"]
-
 [sub_resource type="Gradient" id="Gradient_op7ga"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1)
 
@@ -107,18 +105,18 @@ fov = 40.0
 [node name="ingredientbag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.850284, -0.13210094, -0.5094766, 0.21402878, 0.97112435, 0.105399944, 0.48084176, -0.19866255, 0.85400486, 0.34211293, -0.16735828, -0.30575544)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=489136358]
+[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=1160311051]
 transform = Transform3D(0.049236596, 0.018308839, -0.027216244, -0.010547802, 0.0553187, 0.018131915, 0.031059312, -0.010237642, 0.04930202, -0.20459722, 0.05080402, -0.052625537)
 layers = 8
 
 [node name="large_ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
 transform = Transform3D(0.058251597, 0.012124337, -0.03948466, -0.0077862935, 0.07026299, 0.010088183, 0.040563658, -0.0039240527, 0.058638528, -0.19612944, 0.04663241, -0.031387717)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=218460479]
+[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=2009440182]
 transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
 layers = 8
 
-[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=1146968741]
+[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=1935166715]
 transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
 layers = 8
 
@@ -131,29 +129,26 @@ max_db = 0.0
 [node name="Trash Cup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1417801726 instance=ExtResource("10_q13i1")]
 transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.17303157, -0.16699994, -0.4299096)
 
-[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1837821948]
+[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1975850021]
 transform = Transform3D(0.10581238, 1.517883e-17, 0, -1.2576745e-17, 0.105812386, 0, 0, 1.7347235e-18, 0.10581238, 0, 0, 0)
 layers = 8
 
 [node name="3DTabletUI" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1761848473 instance=ExtResource("11_pylmc")]
 transform = Transform3D(0.285317, -0.025552986, 0.089113876, 0, 0.28837845, 0.08269122, -0.092705116, -0.078644, 0.2742643, -0.2733251, -0.100000024, -0.54824734)
 
-[node name="ScreenSprite3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_7ahtn")
-
 [node name="keychainAnim" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel" parent_id_path=PackedInt32Array(1761848473, 1254854682) index="1" unique_id=1213310774 instance=ExtResource("20_pbfsw")]
 transform = Transform3D(0.066601485, -0.002524001, -0.0015212782, 0.0020323966, 0.06425938, -0.017636549, 0.002134066, 0.017572924, 0.0642735, 0.09352189, -0.36961222, -0.11672974)
 
-[node name="Skeleton3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature" parent_id_path=PackedInt32Array(1213310774, 803313187) index="0" unique_id=345753593]
+[node name="Skeleton3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature" parent_id_path=PackedInt32Array(1213310774, 1307113770) index="0" unique_id=1510495520]
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/1/rotation = Quaternion(0.067907415, -5.7041427e-05, 0.028652571, 0.9972802)
 bones/2/rotation = Quaternion(-0.039906695, 8.922967e-05, -0.0072832955, 0.9991769)
 bones/3/rotation = Quaternion(-0.037071344, -0.0010725817, 0.004623047, 0.9993014)
 
-[node name="Cube_001" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature/Skeleton3D" index="0" unique_id=1643599941]
+[node name="Cube_001" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature/Skeleton3D" index="0" unique_id=1670019027]
 layers = 8
 
-[node name="AnimationPlayer" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim" index="1" unique_id=285515305]
+[node name="AnimationPlayer" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim" index="1" unique_id=1434226818]
 playback_default_blend_time = 2.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=121976474]
