@@ -39,13 +39,11 @@ func _ready() -> void:
 - [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
 - [i]rating <number>[/i] sets your employee rating
-- [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_id>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
-- [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
