@@ -340,13 +340,9 @@ func blast_player_from_using_machine() -> void:
 	Global.player.move_and_slide()
 	await get_tree().create_timer(0.1).timeout
 	Global.player.velocity += launch_vector
-	Global.player.move_and_slide()
 
 	await get_tree().create_timer(0.1).timeout
 	Global.player.velocity += launch_vector
-	Global.player.move_and_slide()
-	#apply velocity 3 times
-	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
 
 
 func set_order_action_buttons_available(button_case: String) -> void:
@@ -372,6 +368,7 @@ func set_order_action_buttons_available(button_case: String) -> void:
 			pass
 		_:
 			print("invalid button_case passed to set_order_action_buttons_available()")
+
 
 # called from inside spill() (so that itll still show if we trigger the spill
 # via a console command etc)
@@ -677,8 +674,6 @@ func spill() -> void:
 
 
 func display_drink_score() -> void:
-
-
 	# these all automatically set the icon, colour, and score of each icon
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
