@@ -281,6 +281,11 @@ func handle_sprint(delta: float) -> void:
 
 
 func handle_footstep_sounds() -> void:
+	# idk why but the footstep sounds spam if when we fastfoward in cutscenes
+	# etc without this
+	if Engine.time_scale != 1:
+		return
+	
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
 		# here we play a sound just as we start walking
@@ -324,14 +329,11 @@ func handle_ingredients_bag() -> void:
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
-		#print("heshel", customer_trash_scene)
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
-	#print("asdf", ingredients_bag_scene.instantiate().get_class())
-	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
 
@@ -350,7 +352,6 @@ func flash_red():
 
 
 func handle_keychain_swing_animation() -> void:
-	print(get_last_motion().length())
 	if get_last_motion().length() > 0:
 		move_kaychain.play("KittyChainSwing")
 	else:
