@@ -7,6 +7,7 @@ extends CanvasLayer
 @export var bank_gain_sound: AudioStreamPlayer
 @export var pencil_scribble: AudioStreamPlayer
 @export var stars_sound: AudioStreamPlayer
+@export var win_music: AudioStreamPlayer
 
 @export_group("New UI")
 @export var animation_player: AnimationPlayer
@@ -68,11 +69,14 @@ func _on_time_up() -> void:
 	)
 
 	# calculate everything
-	
 	var daily_profit := Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
-	animation_player.play("come_in_pass" if passed_profit_goal else "come_in_fail")
+	if passed_profit_goal:
+		animation_player.play("come_in_pass")
+		win_music.play()
+	else:
+		animation_player.play("come_in_fail")
 	
 	grant_day_rewards(passed_profit_goal)
 	await animation_player.animation_finished
@@ -95,7 +99,7 @@ func _on_time_up() -> void:
 
 	await get_tree().create_timer(1.5).timeout
 	if passed_profit_goal:
-		var day:String = "Glorbsday"
+		var day: String = "Glorbsday"
 		match Global.day:
 			0: day = "Sunday"
 			1: day = "Monday"
@@ -121,6 +125,7 @@ func _on_time_up() -> void:
 			rating_locked.texture = rating_reward.texture
 		await get_tree().create_timer(0.4).timeout
 		animation_player.play("endshift_button_arrive")
+		create_tween().tween_property(win_music, "volume_db", -15, 1)
 	else:
 		lose_shift_sound.play()
 		await get_tree().create_timer(0.7).timeout

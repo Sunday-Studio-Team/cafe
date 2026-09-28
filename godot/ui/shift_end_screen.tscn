@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://8asjs5hsblmy" path="res://sprites/endshift_ui/second_part/rating_phone.png" id="23_em210"]
 [ext_resource type="Texture2D" uid="uid://bokqxjmqqvj8x" path="res://sprites/endshift_ui/second_part/stars_greyed.png" id="24_c1exd"]
 [ext_resource type="Texture2D" uid="uid://2rm8v77lejbi" path="res://sprites/endshift_ui/second_part/stars_fill.png" id="25_yx15a"]
+[ext_resource type="AudioStream" uid="uid://bjcp3lc6wo35x" path="res://audio/music/shift_end_win_music.mp3" id="35_bxlob"]
 [ext_resource type="Texture2D" uid="uid://3c7d3djl034d" path="res://sprites/endshift_ui/second_part/restart_up.png" id="35_c1exd"]
 [ext_resource type="Texture2D" uid="uid://3mexyadqhuix" path="res://sprites/endshift_ui/second_part/restart_down.png" id="36_yx15a"]
 [ext_resource type="Texture2D" uid="uid://b8obv3pajle66" path="res://sprites/endshift_ui/second_part/restart_hover.png" id="37_iijq6"]
@@ -1156,7 +1157,7 @@ _data = {
 &"restart_button_arrive": SubResource("Animation_c1exd")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "lock")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "lock")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -1166,6 +1167,7 @@ lose_shift_sound = NodePath("LoseShiftSound")
 bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
 stars_sound = NodePath("StarsSound")
+win_music = NodePath("WinMusic")
 animation_player = NodePath("AnimationPlayer")
 cafe_profits = NodePath("FirstPartContainer/Paper/CafeProfits")
 goal = NodePath("FirstPartContainer/Paper/Goal")
@@ -1593,6 +1595,10 @@ volume_db = -5.0
 [node name="StarsSound" type="AudioStreamPlayer" parent="." unique_id=1833295684]
 stream = ExtResource("7_xu4ny")
 volume_db = -5.0
+
+[node name="WinMusic" type="AudioStreamPlayer" parent="." unique_id=638685281]
+stream = ExtResource("35_bxlob")
+volume_db = -10.0
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1431337349]
 anchors_preset = 15
