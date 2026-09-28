@@ -11,7 +11,10 @@ extends Node
 
 @export var editor_enabled: bool = true
 
-func _process(delta: float) -> void:
+var prints_enabled := false
+
+
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint() and not editor_enabled:
 		return
 	
@@ -37,6 +40,6 @@ func _process(delta: float) -> void:
 		else:
 			target_node_3d.scale = reference_node_3d.scale
 	
-	if not Engine.is_editor_hint():		
+	if not Engine.is_editor_hint() and prints_enabled:
 		print("reference_node_3d.global_position: %s" % reference_node_3d.global_position)
 		print("camera_target_3d.global_position: %s" % target_node_3d.global_position)
