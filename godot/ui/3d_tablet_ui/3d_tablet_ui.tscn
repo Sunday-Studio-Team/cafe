@@ -5,6 +5,8 @@
 
 [node name="3DTabletUI" type="Node3D" unique_id=1761848473]
 
+[node name="PutEverythingInHereOnVisualLayer4" type="Node" parent="." unique_id=1944089783]
+
 [node name="Model" type="Node3D" parent="." unique_id=433958376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
 
@@ -24,6 +26,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
 
 [node name="BézierCurve" parent="Model/AddonModel" index="0" unique_id=1518185622]
 layers = 8
+
+[node name="AddonScreenSprite3D" type="Sprite3D" parent="Model/AddonModel" unique_id=831430551]
+transform = Transform3D(1, 0, 0, 0, 0.9998476, 0.017452404, 0, -0.017452404, 0.9998476, 0.036, 0.055, 0.017)
+layers = 8
+pixel_size = 0.00021
 
 [editable path="Model/BaseModel"]
 [editable path="Model/AddonModel"]

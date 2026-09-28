@@ -1394,8 +1394,11 @@ point_count = 8
 [sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7ahtn"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ip2l3"]
 viewport_path = NodePath("../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_s14wm"]
+viewport_path = NodePath("../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
@@ -1692,6 +1695,15 @@ size = Vector2i(631, 863)
 render_target_update_mode = 4
 
 [node name="TabletUI2D" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport" unique_id=1774289997 instance=ExtResource("254_l0ugm")]
+
+[node name="TabletAddonSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1732409839]
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport" unique_id=1769657425]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Interactable" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1696852801]
 custom_maximum_size = Vector2(-1, 75)
@@ -2629,7 +2641,10 @@ main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_7ahtn")
+texture = SubResource("ViewportTexture_ip2l3")
+
+[node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="2" unique_id=831430551]
+texture = SubResource("ViewportTexture_s14wm")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
