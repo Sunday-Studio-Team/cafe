@@ -23,7 +23,8 @@ const STRIDE_LENGTH := 1.25
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
-
+@export var move_kaychain: AnimationPlayer
+@export var keychain: Node3D
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
@@ -61,6 +62,7 @@ func _ready() -> void:
 	
 	free_cam_visualizer.visible = false
 
+	move_kaychain = keychain.get_node_or_null("AnimationPlayer") 
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -162,10 +164,25 @@ func handle_movement(delta: float) -> void:
 	# if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
 	if (not movement_enabled or holding_interactable or Global.in_ui):
 		velocity = Vector3.ZERO
+		
+		#move_kaychain.play("IdleSway")
+		# set this to idle move_kaychain
 		return
 
 	var accel: float = Stats.current.player_accel
 	var decel: float = Stats.current.player_decel
+
+	#print("velocity", velocity)
+
+	if Vector3(velocity.x, 0, velocity.z) == Vector3(0.0, 0.0, 0.0): 
+		move_kaychain.play("IdleSway")
+		#print("currently idle keychain")
+		# set this to idle move_kaychain
+	else:
+		# can use velocity metric to increase playback speed to create illusion of fast moving keychain
+		move_kaychain.play("KittyChainSwing")			
+		#print("keychain is swinging`")
+		#print(accel)
 
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -189,7 +206,7 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-
+	
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
