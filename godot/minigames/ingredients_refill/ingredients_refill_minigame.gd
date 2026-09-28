@@ -275,7 +275,6 @@ func bomb() -> void:
 	var using_machine: Machine = Global.machine_in_use
 	if using_machine == null:
 		return
-	await get_tree().create_timer(1).timeout
 	animation_player.stop()
 	using_machine.blast_player_from_using_machine()
 
