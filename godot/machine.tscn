@@ -155,6 +155,10 @@
 [ext_resource type="AudioStream" uid="uid://b7lnt4jt1gruo" path="res://audio/machine_jump_thud.wav" id="119_gtm4j"]
 [ext_resource type="Texture2D" uid="uid://bqr01wblpa78c" path="res://sprites/machine_ui/coffee_bar_active/DM_CB_BREWING_0055.png" id="119_shodo"]
 [ext_resource type="Texture2D" uid="uid://c65bsgxpssidv" path="res://sprites/machine_ui/coffee_bar_active/DM_CB_BREWING_0056.png" id="120_4qffw"]
+[ext_resource type="SphereMesh" uid="uid://cc8mu7ui65k8q" path="res://resources/misc_resources/roller_skates_smoke_mesh.tres" id="156_8bmd4"]
+[ext_resource type="SphereMesh" uid="uid://b5bf3p55mcv4v" path="res://resources/misc_resources/roller_skates_smoke_outline_mesh.tres" id="157_qtip1"]
+[ext_resource type="SphereMesh" uid="uid://dhu1lxc8cnlne" path="res://resources/misc_resources/machine_boom_mesh.tres" id="158_4mdt8"]
+[ext_resource type="SphereMesh" uid="uid://br6lam8mkk40o" path="res://resources/misc_resources/machine_boom_outline.tres" id="159_0ief2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -411,7 +415,68 @@ _data = {
 &"order_ready_jump": SubResource("Animation_gtm4j")
 }
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "item_aim_spot", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "ordered_text", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "made_text", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound") groups=["machines"]]
+[sub_resource type="Curve" id="Curve_qtip1"]
+_limits = [0.0, 1.0, 0.0, 1.1397848]
+_data = [Vector2(0, 0.21428573), 0.0, 0.24149883, 0, 0, Vector2(0.36460856, 0.5267858), 0.0, 0.0, 0, 0, Vector2(0.5790843, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rdhdf"]
+curve = SubResource("Curve_qtip1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4mdt8"]
+lifetime_randomness = 1.0
+direction = Vector3(0, 0, 1)
+spread = 75.0
+initial_velocity_min = 5.0
+initial_velocity_max = 7.0
+gravity = Vector3(0, 0, 0)
+damping_min = 7.7450004
+damping_max = 12.000001
+scale_min = 1.25
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_rdhdf")
+
+[sub_resource type="Gradient" id="Gradient_qtip1"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.08783784, 0.10810811, 0.1891892, 0.38513514)
+colors = PackedColorArray(0.79193056, 0.3126593, 9.62615e-07, 1, 0.87856376, 0.69594145, 0, 1, 0.3727823, 0.06784545, 2.4065375e-08, 1, 0.1577254, 0.013859656, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5vek6"]
+gradient = SubResource("Gradient_qtip1")
+
+[sub_resource type="Curve" id="Curve_rdhdf"]
+_limits = [0.0, 3.0, 0.0, 1.1397848]
+_data = [Vector2(0, 0.107142925), 0.0, 0.0, 0, 0, Vector2(0.103903025, 3), 0.0, 0.0, 0, 0, Vector2(0.55729806, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4mdt8"]
+curve = SubResource("Curve_rdhdf")
+
+[sub_resource type="Curve" id="Curve_4mdt8"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 10), 0.0, 0.0, 0, 0, Vector2(0.14640884, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ief2"]
+curve = SubResource("Curve_4mdt8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0ief2"]
+lifetime_randomness = 1.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 0, 1)
+spread = 90.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+velocity_limit_curve = SubResource("CurveTexture_0ief2")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_4mdt8")
+color_ramp = SubResource("GradientTexture1D_5vek6")
+sub_emitter_mode = 4
+sub_emitter_amount_at_start = 1
+
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "ordered_text", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "made_text", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound", "explosion_boom") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 animation_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/AnimationPlayer")
 static_body = NodePath("ParentSoWeCanAnimateWithLocalCoords/StaticBody3D")
@@ -479,6 +544,7 @@ airhorn_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/AirhornSound")
 bomb_sound_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/BombSound")
 ingredients_warning_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/IngredientsWarningSound")
 popup_go_to_spill = ExtResource("5_8sjwk")
+explosion_boom = NodePath("ParentSoWeCanAnimateWithLocalCoords/ExplosionBoom")
 
 [node name="ParentSoWeCanAnimateWithLocalCoords" type="Node3D" parent="." unique_id=1210925633]
 
@@ -740,6 +806,36 @@ libraries/ = SubResource("AnimationLibrary_hp8kb")
 stream = ExtResource("119_gtm4j")
 unit_size = 2.5
 pitch_scale = 0.5
+
+[node name="ExplosionSmoke" type="GPUParticles3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1601259887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 32
+lifetime = 3.0
+explosiveness = 1.0
+fixed_fps = 12
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_4mdt8")
+draw_passes = 2
+draw_pass_1 = ExtResource("156_8bmd4")
+draw_pass_2 = ExtResource("157_qtip1")
+
+[node name="ExplosionBoom" type="GPUParticles3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=2026331799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.46581054)
+emitting = false
+amount = 64
+sub_emitter = NodePath("../ExplosionSmoke")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 12
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_0ief2")
+draw_passes = 2
+draw_pass_1 = ExtResource("158_4mdt8")
+draw_pass_2 = ExtResource("159_0ief2")
 
 [editable path="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport/MachineUI"]
 [editable path="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide"]

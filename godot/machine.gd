@@ -111,6 +111,9 @@ enum Icon {
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
+@export_category("Explosion Particles")
+@export var explosion_boom: GPUParticles3D
+
 
 var customer: Customer
 var queued_customers: Array[Customer]
@@ -316,7 +319,6 @@ func check_for_stepping_in_spill() -> void:
 
 
 func blast_player_from_using_machine() -> void:
-	bomb_sound_player.play()
 	if gui_3d.player_using_me:
 		if Global.minigame_active:
 			Events.force_close_minigame.emit()
@@ -329,8 +331,11 @@ func blast_player_from_using_machine() -> void:
 	machine_to_player_normalized.y = 0.0
 	machine_to_player_normalized = machine_to_player_normalized.normalized()
 
+	bomb_sound_player.play()
+	explosion_boom.restart()
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
+	print(launch_vector)
 	Global.player.velocity += launch_vector
 	Global.player.move_and_slide()
 	await get_tree().create_timer(0.1).timeout
