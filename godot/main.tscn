@@ -318,7 +318,7 @@ icon = ExtResource("71_m5f57")
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_13qdw"]
-viewport_path = NodePath("Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport")
+viewport_path = NodePath("Player/CameraController/Camera3D/HoldingItemsSubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
@@ -2625,10 +2625,10 @@ one_shot = true
 transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.371138e-08, -0.29745173, 0, 18.028189)
 main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 
-[node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
+[node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
 
-[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
+[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
 texture = SubResource("ViewportTexture_ip2l3")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
@@ -2640,12 +2640,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5
 
 [node name="PCCamera" type="Marker3D" parent="Desk" unique_id=319429800]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.1507349, 1, 0.16965067)
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Desk" unique_id=813063452]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5961485, 1.0120103, -0.16767144)
-light_color = Color(1, 0.8605, 0.69, 1)
-light_energy = 0.3
-omni_range = 4.186
 
 [node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4011619, -0.11735466, 10.078446)
@@ -2884,12 +2878,13 @@ stream = ExtResource("282_xj0gb")
 [editable path="SecurityCams/HallwaySecurityCam"]
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
 [editable path="Player"]
-[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
-[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
-[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
-[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
-[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
-[editable path="Player/CameraController/Camera3D/RemoteTransform3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
 [editable path="Desk/office desk/cranes"]
