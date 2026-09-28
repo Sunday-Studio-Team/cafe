@@ -27,6 +27,9 @@
 [ext_resource type="Material" uid="uid://dwb5rwm7lndk" path="res://resources/misc_resources/refill_minigame_coffee_dust_falling.tres" id="19_rw5dd"]
 [ext_resource type="Texture2D" uid="uid://cm885rb4thtb4" path="res://minigames/ingredients_refill/assets/stick.png" id="24_rw5dd"]
 [ext_resource type="Texture2D" uid="uid://3w0do768iinc" path="res://minigames/ingredients_refill/assets/sign.png" id="25_tq37f"]
+[ext_resource type="AudioStream" uid="uid://dvka725lh1iap" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_1.wav" id="28_a2xku"]
+[ext_resource type="AudioStream" uid="uid://c0m8t8std8onw" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_2.wav" id="29_sdh2v"]
+[ext_resource type="AudioStream" uid="uid://dsthw36xeub67" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_3.wav" id="30_5bp6o"]
 
 [sub_resource type="Curve" id="Curve_cuth0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -155,13 +158,6 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ovvye"]
-streams_count = 4
-stream_0/stream = ExtResource("10_5w3ak")
-stream_1/stream = ExtResource("11_1nxwo")
-stream_2/stream = ExtResource("12_aviex")
-stream_3/stream = ExtResource("13_bjc5e")
-
 [sub_resource type="Animation" id="Animation_rw5dd"]
 length = 0.001
 tracks/0/type = "value"
@@ -283,7 +279,20 @@ _data = {
 &"sign_up": SubResource("Animation_lrtnr")
 }
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "background", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "coffee_dust", "golden_bean_collect", "bomb_smoke", "animation_player")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ovvye"]
+streams_count = 4
+stream_0/stream = ExtResource("10_5w3ak")
+stream_1/stream = ExtResource("11_1nxwo")
+stream_2/stream = ExtResource("12_aviex")
+stream_3/stream = ExtResource("13_bjc5e")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mjix0"]
+streams_count = 3
+stream_0/stream = ExtResource("28_a2xku")
+stream_1/stream = ExtResource("29_sdh2v")
+stream_2/stream = ExtResource("30_5bp6o")
+
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "background", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "catch_gold_bean_sound", "coffee_dust", "golden_bean_collect", "bomb_smoke", "animation_player")]
 script = ExtResource("1_2efvg")
 horizontal_trajectory_curve = SubResource("Curve_cuth0")
 cup = NodePath("Cup")
@@ -299,6 +308,7 @@ background = NodePath("Background")
 bean_hit_glasss_sound = NodePath("Cup/BeanHitGlassSound")
 bag_shake_sound = NodePath("Bag/BagShakeSound")
 gain_score_sound = NodePath("GainScoreSound")
+catch_gold_bean_sound = NodePath("CatchGoldBeanSound")
 regular_bean_scene = ExtResource("2_51asp")
 golden_bean_scene = ExtResource("4_jjgte")
 bomb_bean_scene = ExtResource("5_sdu15")
@@ -456,9 +466,6 @@ autoplay = true
 [node name="BeanSpawnTimer" type="Timer" parent="." unique_id=1475975290]
 wait_time = 0.33
 
-[node name="GainScoreSound" type="AudioStreamPlayer" parent="." unique_id=948120087]
-stream = SubResource("AudioStreamRandomizer_ovvye")
-
 [node name="Stick" type="Sprite2D" parent="." unique_id=520765775]
 position = Vector2(438, 1500)
 texture = ExtResource("24_rw5dd")
@@ -469,3 +476,9 @@ texture = ExtResource("25_tq37f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1584248692]
 libraries/ = SubResource("AnimationLibrary_cxwh1")
+
+[node name="GainScoreSound" type="AudioStreamPlayer" parent="." unique_id=948120087]
+stream = SubResource("AudioStreamRandomizer_ovvye")
+
+[node name="CatchGoldBeanSound" type="AudioStreamPlayer" parent="." unique_id=816919820]
+stream = SubResource("AudioStreamRandomizer_mjix0")

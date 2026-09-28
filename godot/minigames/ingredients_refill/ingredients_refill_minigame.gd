@@ -26,6 +26,7 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export var bean_hit_glasss_sound: AudioStreamPlayer2D
 @export var bag_shake_sound: AudioStreamPlayer2D
 @export var gain_score_sound: AudioStreamPlayer
+@export var catch_gold_bean_sound: AudioStreamPlayer
 
 @export_category("PackedScenes")
 @export var regular_bean_scene: PackedScene
@@ -280,6 +281,7 @@ func bomb() -> void:
 
 
 func gold():
+	catch_gold_bean_sound.play()
 	cup_face_sprite.texture = golden_face_sprite
 	background.texture = golden_bg_sprite
 	golden_bean_collect.restart()
