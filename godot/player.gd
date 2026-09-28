@@ -119,6 +119,8 @@ func _physics_process(delta: float) -> void:
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
+	
+	# TODO: move this
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "roller_skates":
@@ -131,10 +133,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		roller_skates_dust_particles.emitting = false
 		camera.camera_effects.fov = lerp(90, 100, clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed, 0, 2))
+		
 	handle_gravity(delta)
 	handle_footstep_sounds()
-
 	handle_ingredients_bag()
+	handle_keychain_swing_animation()
 	handle_customer_trash()
 	handle_floating_cursor()
 	move_and_slide()
@@ -161,27 +164,17 @@ func handle_floating_cursor() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
+	if (
+			not movement_enabled
+			or holding_interactable
+			or Global.in_ui
+			or Global.camera_mode not in [Global.CameraMode.PLAYER, Global.CameraMode.LOCKED_TO_POINT]
+	):
 		velocity = Vector3.ZERO
-		
-		#move_kaychain.play("IdleSway")
-		# set this to idle move_kaychain
 		return
 
 	var accel: float = Stats.current.player_accel
 	var decel: float = Stats.current.player_decel
-
-	#print("velocity", velocity)
-
-	if Vector3(velocity.x, 0, velocity.z) == Vector3(0.0, 0.0, 0.0): 
-		move_kaychain.play("IdleSway")
-		#print("currently idle keychain")
-		# set this to idle move_kaychain
-	else:
-		# can use velocity metric to increase playback speed to create illusion of fast moving keychain
-		move_kaychain.play("KittyChainSwing")			
-		#print("keychain is swinging`")
-		#print(accel)
 
 	# get the input direction (literally a Vector2 of the WASD/stick direction in x and y)
 	var input_dir_2d := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -354,3 +347,11 @@ func _on_items_updated() -> void:
 
 func flash_red():
 	camera.camera_effects.flash_screen_red()
+
+
+func handle_keychain_swing_animation() -> void:
+	print(get_last_motion().length())
+	if get_last_motion().length() > 0:
+		move_kaychain.play("KittyChainSwing")
+	else:
+		move_kaychain.play("IdleSway")
