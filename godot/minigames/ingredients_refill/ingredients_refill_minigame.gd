@@ -118,22 +118,22 @@ func _physics_process(delta: float) -> void:
 func calculate_cup_x_velocity(left_right_input: float) -> void:
 	if (left_right_input == 0.0):
 		#then, we need to slow the cup down.
-		cup.velocity.x = cup.velocity.x * 0.975
+		cup.velocity.x = cup.velocity.x * 0.125
 	elif (left_right_input > 0.1):
 		if (cup.velocity.x < 10):
-			cup.velocity.x += 2.5 * left_right_input
+			cup.velocity.x += 4.5 * left_right_input
 		else:
 			cup.velocity.x += left_right_input
 	elif (left_right_input < -0.1):
 		if (cup.velocity.x > -10):
-			cup.velocity.x += 2.5 * left_right_input
+			cup.velocity.x += 4.5 * left_right_input
 		else:
 			cup.velocity.x += left_right_input
 
 	cup.position.x = clamp(cup.position.x, 150, 1920 - 350)
 	#cup is a characterbody2d
 	#cup.velocity.x +=left_right_input
-	cup.velocity.x = clampf(cup.velocity.x, -25.0, 25.0)
+	cup.velocity.x = clampf(cup.velocity.x, -35.0, 35.0)
 	cup.move_local_x(cup.velocity.x)
 
 
