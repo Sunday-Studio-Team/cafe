@@ -19,8 +19,8 @@ var closer_list = [
 
 
 func _init():
-	var scene_loader = load("res://emails/menu_update_emails/custom_email_view_menu_update.tscn")
-	var scene: CustomEmailViewMenuUpdate = scene_loader.instantiate() as CustomEmailViewMenuUpdate
+	var scene_loader: PackedScene = load("res://emails/menu_update_emails/custom_email_view_menu_update.tscn")
+	# var scene: CustomEmailViewMenuUpdate = scene_loader.instantiate() as CustomEmailViewMenuUpdate
 	day_to_send = Global.day
 	is_important = false
 	sender_name = "Management"

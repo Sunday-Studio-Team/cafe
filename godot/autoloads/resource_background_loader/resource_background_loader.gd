@@ -9,7 +9,7 @@ var non_loaded_tokens: Array[ResourceBackgroundLoaderToken] = []
 func _enter_tree() -> void:
 	Global.resource_background_loader = self
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Mark any tokens with loaded resources.
 	var new_non_loaded_tokens: Array[ResourceBackgroundLoaderToken] = []
 	for token: ResourceBackgroundLoaderToken in non_loaded_tokens:

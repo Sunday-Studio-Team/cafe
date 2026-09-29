@@ -33,7 +33,6 @@ var loading_tween: Tween
 var _cached_main_packed_scene: PackedScene
 var _cached_sub_resources: Dictionary[StringName, Resource]
 
-var _is_first_options_load: bool = true
 var _tippy_stage: int = 0
 var _tippy_target_stage: int = 0
 var _tippy_switching: bool = false

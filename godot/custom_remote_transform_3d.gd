@@ -14,7 +14,7 @@ extends Node
 var prints_enabled := false
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint() and not editor_enabled:
 		return
 	

@@ -11,11 +11,10 @@ const CAM_TWEEN_DUR := 0.25
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
-@export var _customer_side_camera: Camera3D
 
 var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
-var is_mouse_inside = false
+var is_mouse_inside := false
 # The last processed input touch/mouse event. To calculate relative movement.
 var last_event_pos2D = null
 # The time of the last event in seconds since engine start.

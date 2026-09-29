@@ -218,12 +218,12 @@ func load_unlocked_items_from_save() -> void:
 
 	var latest_day: int = SaveDataManager.save_data.latest_unlocked_day
 
-	for day in range(1, latest_day):
-		var completion_items: Array = Stats.current.daily_completion_item_unlocks.get(day, [])
+	for d in range(1, latest_day):
+		var completion_items: Array = Stats.current.daily_completion_item_unlocks.get(d, [])
 		add_items_to_unlocked_list(completion_items)
 
-		if SaveDataManager.save_data.days_bonus_objective_completed.get(day, false):
-			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(day, [])
+		if SaveDataManager.save_data.days_bonus_objective_completed.get(d, false):
+			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(d, [])
 			add_items_to_unlocked_list(bonus_items)
 
 func get_item(item_id:String) -> Item:

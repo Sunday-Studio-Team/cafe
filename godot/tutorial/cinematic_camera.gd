@@ -9,7 +9,7 @@ signal animation_finished
 @export var _camera_3d: Camera3D
 @export var _animation_player: AnimationPlayer
 @export var _player_ui_sub_viewport_container: Control
-@export var _player_ui_sub_viewport: SubViewport
+# @export var _player_ui_sub_viewport: SubViewport
 
 var _camera_target_fov: float
 
@@ -38,5 +38,5 @@ func play_animation(animation_name: StringName) -> void:
 	_animation_player.play(animation_name)
 	await _animation_player.animation_finished
 
-func _on_animation_player_finished(animation_name: StringName) -> void:
+func _on_animation_player_finished(_animation_name: StringName) -> void:
 	animation_finished.emit()
