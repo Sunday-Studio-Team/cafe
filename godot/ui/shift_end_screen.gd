@@ -8,6 +8,7 @@ extends CanvasLayer
 @export var pencil_scribble: AudioStreamPlayer
 @export var stars_sound: AudioStreamPlayer
 @export var win_music: AudioStreamPlayer
+@export var lose_music: AudioStreamPlayer
 
 @export_group("New UI")
 @export var animation_player: AnimationPlayer
@@ -77,6 +78,7 @@ func _on_time_up() -> void:
 		win_music.play()
 	else:
 		animation_player.play("come_in_fail")
+		lose_music.play()
 	
 	grant_day_rewards(passed_profit_goal)
 	await animation_player.animation_finished
