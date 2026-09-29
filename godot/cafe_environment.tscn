@@ -153,6 +153,7 @@
 [ext_resource type="Texture2D" uid="uid://ce2iseix2wc24" path="res://Assets/Cleaning supplies/Employee Area Cleaning Supplies_1_Employee Area_Props_v6_Bucket_2_BaseColor.png" id="124_iaj8l"]
 [ext_resource type="Texture2D" uid="uid://cfcwdbkx1vaj3" path="res://Assets/Cleaning supplies/Employee Area Cleaning Supplies_1_Employee Area_Props_v6_Bucket_2_Metallic.1001-1_Employee Area_Props_v6_Bucket_2_Roughness.png" id="125_kxvup"]
 [ext_resource type="PackedScene" uid="uid://cktbqsy56wpkt" path="res://Assets/Archways/Customer Area.glb" id="142_s7w1k"]
+[ext_resource type="PackedScene" uid="uid://c3gfdyki0rmik" path="res://Assets/Archways/Storage Arch.glb" id="143_f56pk"]
 [ext_resource type="PackedScene" uid="uid://chy0ub7v5dmy1" path="res://Assets/sato_locker/sato's_locker_w_items__v_1.tscn" id="143_ke8eb"]
 [ext_resource type="PackedScene" uid="uid://cmy8d842qgtsn" path="res://Assets/plants/Sad Plants.glb" id="146_dultt"]
 [ext_resource type="PackedScene" uid="uid://css2h7cp048j8" path="res://Assets/signs/sign_(2).tscn" id="146_f56pk"]
@@ -1641,7 +1642,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057010056, -0.00016215755, -0.9999406, 1.02599486e-07, 1, -0.00016214792, 0.9999406, -1.01539825e-08, 0.00057010056, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701005, -0.00016215755, -0.99994045, 1.0259948e-07, 1, -0.00016214789, 0.99994045, -1.01539825e-08, 0.0005701005, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2808,6 +2809,7 @@ size = Vector3(5, 0.1, 1)
 
 [node name="Sign" type="MeshInstance3D" parent="StoreRoom" unique_id=371535473]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.0111446, 2.2822638, -0.03136635)
+visible = false
 mesh = SubResource("TextMesh_yaehf")
 
 [node name="ShelfProps" type="Node3D" parent="StoreRoom" unique_id=1716956818]
@@ -2958,6 +2960,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.071474075, 0.36524963, -0.
 
 [node name="Mop" parent="StoreRoom/Employee Area Cleaning Supplies2" index="7" unique_id=1238645509]
 transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, -2.5090976, 0, 0.46531487)
+
+[node name="Storage Arch" parent="StoreRoom" unique_id=847908752 instance=ExtResource("143_f56pk")]
+transform = Transform3D(-1.5181311, 0, 1.1237838e-07, 0, 1.2854587, 0, -1.3271924e-07, 0, -1.2854588, 3.0256598, 1.0235405, -0.0022854805)
 
 [node name="BreakRoom" type="Node3D" parent="." unique_id=1614027471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
