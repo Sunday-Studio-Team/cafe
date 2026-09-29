@@ -2,12 +2,19 @@
 
 [ext_resource type="AudioStream" uid="uid://b6218r1n1lvi2" path="res://audio/music/customer_area_music.wav" id="1_5vmma"]
 [ext_resource type="Script" uid="uid://bdoq2pfqp2aiu" path="res://customer_area_music.gd" id="2_5vmma"]
+[ext_resource type="AudioStream" uid="uid://d28yg1kk2xgq5" path="res://audio/music/customer_area_music_2.wav" id="2_i75nq"]
 [ext_resource type="AudioStream" uid="uid://cdpq40xbmsibq" path="res://audio/music/customer_area_shift_ending_music.mp3" id="3_i75nq"]
 [ext_resource type="AudioStream" uid="uid://d0mq5yypnhim1" path="res://audio/music/customer_area_shift_ending_music_outro_loop.mp3" id="4_ie60f"]
 [ext_resource type="PackedScene" uid="uid://st3nonrdbrrv" path="res://models/tippy_loudspeaker_model.tscn" id="5_5vmma"]
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_i433t"]
+shuffle = true
+stream_count = 2
+stream_0 = ExtResource("1_5vmma")
+stream_1 = ExtResource("2_i75nq")
+
 [node name="CustomerAreaMusicPlayer" type="AudioStreamPlayer3D" unique_id=109925331 node_paths=PackedStringArray("loudspeaker_model")]
-stream = ExtResource("1_5vmma")
+stream = SubResource("AudioStreamPlaylist_i433t")
 volume_db = -20.0
 max_db = -5.0
 autoplay = true
