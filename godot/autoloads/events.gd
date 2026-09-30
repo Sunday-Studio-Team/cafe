@@ -7,6 +7,7 @@ signal scene_switch_in_animation_finished
 signal main_scene_loaded
 signal quit_game_requested
 signal game_options_changed(options_data: OptionsData)
+signal player_confirmed_item_loadout
 signal shift_started
 signal customer_entered
 # NOTE: sorry for all these weird signals that pass the customer

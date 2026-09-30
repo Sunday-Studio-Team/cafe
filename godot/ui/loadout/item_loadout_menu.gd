@@ -21,6 +21,8 @@ extends CanvasLayer
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_active_indicator: Control
 
+var player_has_confirmed_loadout_at_least_once := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -88,13 +90,6 @@ func resize_grids() -> void:
 		equipped_items_container.columns = 4
 	else:
 		equipped_items_container.columns = 5
-	
-
-
-func _unhandled_input(input_event: InputEvent) -> void:
-	if input_event.is_action_pressed("pause") and Global.in_loadout_menu:
-		confirm_and_hide_menu()
-		get_viewport().set_input_as_handled()
 
 
 func _physics_process(_delta: float) -> void:
@@ -144,6 +139,12 @@ func add_available_item_button(item: Item) -> void:
 
 
 func confirm_and_hide_menu() -> void:
+	# this is what triggers the door to open
+	# we only want it to trigger once
+	if not player_has_confirmed_loadout_at_least_once:
+		Events.player_confirmed_item_loadout.emit()
+		player_has_confirmed_loadout_at_least_once = true
+	
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():

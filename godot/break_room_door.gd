@@ -10,13 +10,19 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	open_door()
+	Events.player_confirmed_item_loadout.connect(open_door)
 	Events.shift_started.connect(close_door)
 	Events.tippy_boss_released_player.connect(
 		func():
 			open_door()
-			close_door_when_player_exits(),
+			wait_for_player_to_leave_then_close_door(),
 	)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		if Global.in_loadout_menu:
+			get_viewport().set_input_as_handled()
 
 
 func open_door() -> void:
@@ -39,7 +45,7 @@ func close_door() -> void:
 	)
 
 
-func close_door_when_player_exits():
+func wait_for_player_to_leave_then_close_door():
 	exited_break_room_detection_area.player_entered_area.connect(
 		func(_detection_area: PlayerDetectionArea):
 			close_door()
