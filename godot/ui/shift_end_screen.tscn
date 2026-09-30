@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://b5w1mhqlhgjla" path="res://sprites/endshift_ui/first_part/cash_mg.png" id="25_agvtq"]
 [ext_resource type="Texture2D" uid="uid://2rm8v77lejbi" path="res://sprites/endshift_ui/second_part/stars_fill.png" id="25_yx15a"]
 [ext_resource type="Texture2D" uid="uid://cneiyweuvc4qx" path="res://sprites/endshift_ui/first_part/cash_fg.png" id="26_vob8y"]
+[ext_resource type="Texture2D" uid="uid://dh28wnrabd0ej" path="res://sprites/endshift_ui/second_part/timesup_dark.png" id="32_agvtq"]
 [ext_resource type="AudioStream" uid="uid://bjcp3lc6wo35x" path="res://audio/music/shift_end_win_music.mp3" id="35_bxlob"]
 [ext_resource type="Texture2D" uid="uid://3c7d3djl034d" path="res://sprites/endshift_ui/second_part/restart_up.png" id="35_c1exd"]
 [ext_resource type="AudioStream" uid="uid://baa6f40u450qq" path="res://audio/music/shift_fail_music.wav" id="36_q60pi"]
@@ -1207,7 +1208,7 @@ _data = {
 &"restart_button_arrive": SubResource("Animation_c1exd")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "lock")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "lock")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -1235,6 +1236,7 @@ rating_locked = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginC
 star_bar = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/StarBar")
 restart_button = NodePath("MarginContainer/RestartButton")
 end_shift_button = NodePath("MarginContainer/EndShiftButton")
+times_up = NodePath("TimesUp")
 lock = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/Lock")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
@@ -1646,6 +1648,15 @@ stretch_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1571156116]
 libraries/ = SubResource("AnimationLibrary_qc8dq")
+
+[node name="TimesUp" type="TextureRect" parent="." unique_id=431134916]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_agvtq")
+stretch_mode = 3
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_g6pkj")

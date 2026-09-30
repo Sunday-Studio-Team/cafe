@@ -27,6 +27,7 @@ extends CanvasLayer
 @export var star_bar: TextureProgressBar
 @export var restart_button: TextureButton
 @export var end_shift_button: TextureButton
+@export var times_up: TextureRect
 
 @export var lock: TextureRect
 
@@ -60,10 +61,10 @@ func _on_time_up() -> void:
 	show()
 	background.show()
 	get_tree().paused = true
-	#times_up.show()
+	times_up.show()
 	time_up_sound.play()
 	await get_tree().create_timer(2).timeout
-	#times_up.hide()#
+	times_up.hide()
 	reached_bonus_rating = (
 		Global.employee_rating >= 4.5#Stats.current.item_bonus_rating_threshold
 	)
