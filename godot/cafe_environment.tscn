@@ -279,7 +279,7 @@ initial_velocity_max = 2.5
 gravity = Vector3(0, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c0tff"]
-size = Vector2(1.125, 1.875)
+size = Vector2(1.2, 2)
 orientation = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jom5y"]
@@ -1641,7 +1641,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005701004, -0.00016215755, -0.99994034, 1.02599465e-07, 1, -0.00016214787, 0.99994034, -1.01539825e-08, 0.0005701004, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701004, -0.00016215755, -0.9999403, 1.0259946e-07, 1, -0.00016214786, 0.9999403, -1.01539825e-08, 0.0005701004, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
