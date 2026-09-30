@@ -33,7 +33,10 @@
 [ext_resource type="Texture2D" uid="uid://dp3wm37kwvm1q" path="res://sprites/endshift_ui/second_part/sato_handR.png" id="22_yx15a"]
 [ext_resource type="Texture2D" uid="uid://8asjs5hsblmy" path="res://sprites/endshift_ui/second_part/rating_phone.png" id="23_em210"]
 [ext_resource type="Texture2D" uid="uid://bokqxjmqqvj8x" path="res://sprites/endshift_ui/second_part/stars_greyed.png" id="24_c1exd"]
+[ext_resource type="Texture2D" uid="uid://bkxoc78jul3kj" path="res://sprites/endshift_ui/first_part/cash_bg.png" id="24_nxyg6"]
+[ext_resource type="Texture2D" uid="uid://b5w1mhqlhgjla" path="res://sprites/endshift_ui/first_part/cash_mg.png" id="25_agvtq"]
 [ext_resource type="Texture2D" uid="uid://2rm8v77lejbi" path="res://sprites/endshift_ui/second_part/stars_fill.png" id="25_yx15a"]
+[ext_resource type="Texture2D" uid="uid://cneiyweuvc4qx" path="res://sprites/endshift_ui/first_part/cash_fg.png" id="26_vob8y"]
 [ext_resource type="AudioStream" uid="uid://bjcp3lc6wo35x" path="res://audio/music/shift_end_win_music.mp3" id="35_bxlob"]
 [ext_resource type="Texture2D" uid="uid://3c7d3djl034d" path="res://sprites/endshift_ui/second_part/restart_up.png" id="35_c1exd"]
 [ext_resource type="AudioStream" uid="uid://baa6f40u450qq" path="res://audio/music/shift_fail_music.wav" id="36_q60pi"]
@@ -42,8 +45,6 @@
 [ext_resource type="Texture2D" uid="uid://pk34qkj68im4" path="res://sprites/endshift_ui/second_part/endshift_up.png" id="38_flxts"]
 [ext_resource type="Texture2D" uid="uid://bjrk684svjjj6" path="res://sprites/endshift_ui/second_part/endshift_down.png" id="39_bxlob"]
 [ext_resource type="Texture2D" uid="uid://bff1kxvgie52l" path="res://sprites/endshift_ui/second_part/endshift_hover.png" id="40_q60pi"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7w4w3"]
 
 [sub_resource type="Animation" id="Animation_j2nqk"]
 length = 0.001
@@ -407,6 +408,30 @@ tracks/29/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("CashWallMG:offset_transform_position")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath("CashWallBG:offset_transform_position")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_e16oh"]
 resource_name = "come_in_fail"
@@ -431,7 +456,7 @@ tracks/1/path = NodePath("FirstPartContainer/Letter:offset_transform_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.19999999, 1.35, 1.5, 1.6, 1.65, 1.7, 1.75),
+"times": PackedFloat32Array(0.19999999, 1.35, 1.6, 1.7, 1.75, 1.8000001, 1.85),
 "transitions": PackedFloat32Array(2.2973974, 2.2973974, 0.5946034, 1e-05, 1e-05, 1e-05, 1e-05),
 "update": 0,
 "values": [Vector2(0, -1080), Vector2(0, -1080), Vector2(0, 0), Vector2(0, 0), Vector2(32, 0), Vector2(-32, 0), Vector2(0, 0)]
@@ -503,7 +528,7 @@ tracks/7/path = NodePath("FirstPartContainer/Letter:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 1.45, 1.5, 1.55, 1.7),
+"times": PackedFloat32Array(0, 1.5, 1.6, 1.65, 1.8000001),
 "transitions": PackedFloat32Array(1, 1, 1, 1.7411016, 1),
 "update": 0,
 "values": [Vector2(0.5, 1.2), Vector2(0.5, 1.2), Vector2(1, 1), Vector2(1.4, 0.6), Vector2(1, 1)]
@@ -539,7 +564,7 @@ tracks/10/path = NodePath("FirstPartContainer/TippyFail:texture")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 1.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("12_appuh"), ExtResource("5_4pg7j")]
@@ -563,7 +588,7 @@ tracks/12/path = NodePath("FirstPartContainer/TippyFail:scale")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(1.4999998, 1.5499997, 1.5999997),
+"times": PackedFloat32Array(1.5999998, 1.6499997, 1.6999997),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.4, 0.5), Vector2(1, 1)]
@@ -575,7 +600,7 @@ tracks/13/path = NodePath(".")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(1.5),
+"times": PackedFloat32Array(1.6),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [50.0],
@@ -594,7 +619,7 @@ tracks/14/keys = {
 "start_offset": 0.50129956,
 "stream": ExtResource("12_e16oh")
 }],
-"times": PackedFloat32Array(0.0012995601)
+"times": PackedFloat32Array(0.1)
 }
 tracks/14/use_blend = true
 tracks/15/type = "value"
@@ -961,7 +986,7 @@ tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/path = NodePath("CashWall:offset_transform_position")
-tracks/13/interp = 1
+tracks/13/interp = 2
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0, 1, 2),
@@ -1016,6 +1041,30 @@ tracks/17/keys = {
 "transitions": PackedFloat32Array(2, 2, 2, 2, 2),
 "update": 0,
 "values": [0.0, 0.4363323129985824, -0.1308996938995747, 0.08726646259971647, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("CashWallMG:offset_transform_position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.6245054, 2.9281707, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1080), Vector2(0, 0)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("CashWallBG:offset_transform_position")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1.6245054, 2.9281707, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1080), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_5chdg"]
@@ -1559,6 +1608,30 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("11_iqeri")
 
+[node name="CashWallBG" type="TextureRect" parent="." unique_id=603440992]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("24_nxyg6")
+stretch_mode = 1
+
+[node name="CashWallMG" type="TextureRect" parent="." unique_id=450784862]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("25_agvtq")
+stretch_mode = 1
+
 [node name="CashWall" type="TextureRect" parent="." unique_id=1263136227]
 anchors_preset = 15
 anchor_right = 1.0
@@ -1568,7 +1641,8 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
-texture = SubResource("PlaceholderTexture2D_7w4w3")
+texture = ExtResource("26_vob8y")
+stretch_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1571156116]
 libraries/ = SubResource("AnimationLibrary_qc8dq")

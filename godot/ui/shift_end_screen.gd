@@ -31,7 +31,7 @@ extends CanvasLayer
 @export var lock: TextureRect
 
 var reached_bonus_rating: bool = (
-	Global.employee_rating >= 4.5#Stats.current.item_bonus_rating_threshold
+	Global.employee_rating >= 4.5
 )
 
 
@@ -40,7 +40,6 @@ func _ready() -> void:
 
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit(),)
-
 
 func _process(_delta: float) -> void:
 
@@ -68,14 +67,12 @@ func _on_time_up() -> void:
 	reached_bonus_rating = (
 		Global.employee_rating >= 4.5#Stats.current.item_bonus_rating_threshold
 	)
-
 	# calculate everything
 	var daily_profit := Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
 	if passed_profit_goal:
 		animation_player.play("come_in_pass")
-		win_music.play()
 	else:
 		animation_player.play("come_in_fail")
 		lose_music.play()
@@ -84,22 +81,27 @@ func _on_time_up() -> void:
 	await animation_player.animation_finished
 	
 	pencil_scribble.play()
-	
+	var time = 1.2
+	var time2 = 1.5
+	if passed_profit_goal:
+		time = 0.3
+		time2 = 4
+		win_music.play()
+	await get_tree().create_timer(0.7).timeout
 	cafe_profits.show()
 	win_shift_sound.pitch_scale = 1
-	win_shift_sound.play()
-	await get_tree().create_timer(1.2).timeout
+	if not passed_profit_goal: win_shift_sound.play()
+	await get_tree().create_timer(time).timeout
 	goal.show()
 	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
 	win_shift_sound.pitch_scale = 1.2
-	win_shift_sound.play()
-	await get_tree().create_timer(1.2).timeout
+	if not passed_profit_goal: win_shift_sound.play()
+	await get_tree().create_timer(time).timeout
 	earnings.show()
 	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
 	win_shift_sound.pitch_scale = 1.5
-	win_shift_sound.play()
-
-	await get_tree().create_timer(1.5).timeout
+	if not passed_profit_goal: win_shift_sound.play()
+	await get_tree().create_timer(time2).timeout
 	if passed_profit_goal:
 		var day: String = "Glorbsday"
 		match Global.day:
