@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://cm25043d6mjou" path="res://sprites/machine_ui/result_icons/green person.png" id="25_128tk"]
 [ext_resource type="Texture2D" uid="uid://bo30mnulpbaus" path="res://sprites/machine_ui/smaller screen with timer.png" id="26_wknqb"]
 [ext_resource type="Texture2D" uid="uid://b7l2bda3t1ha0" path="res://sprites/machine_ui/coffee_bar_idle/DM_CB_IDLE_V02_0001.png" id="29_wknqb"]
+[ext_resource type="Texture2D" uid="uid://cbst2trnyvqru" path="res://sprites/machine_ui/refill_disabled.png" id="31_wb2t4"]
+[ext_resource type="Texture2D" uid="uid://bohuhgoo1fplq" path="res://sprites/machine_ui/refill_hover.png" id="32_il7ix"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -697,6 +699,8 @@ horizontal_alignment = 1
 
 [node name="ButtonContainer" type="MarginContainer" parent="IngredientsUI" unique_id=574620783]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 
@@ -706,6 +710,9 @@ size_flags_horizontal = 6
 offset_transform_visual_only = false
 theme = SubResource("Theme_ywufb")
 texture_normal = ExtResource("16_10yj4")
+texture_pressed = ExtResource("31_wb2t4")
+texture_hover = ExtResource("32_il7ix")
+texture_disabled = ExtResource("31_wb2t4")
 
 [node name="NoIngredientsWarning" type="PanelContainer" parent="." unique_id=1916984411]
 visible = false
