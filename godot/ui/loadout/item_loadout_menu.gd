@@ -5,6 +5,7 @@ extends CanvasLayer
 @export_category("Nodes")
 @export var root: Control
 @export var locker_interactable: Interactable
+@export var locker_model: ItemLockerModel
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: Button
@@ -30,12 +31,15 @@ func _ready() -> void:
 	visibility_changed.connect(
 			func():
 				if visible:
+					root.offset_transform_scale = Vector2.ZERO
 					locker_open_sound.play()
+					await locker_model.open_door()
 					var t := create_tween().set_parallel()
 					t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
 					t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
 					populate()
 				else:
+					locker_model.close_door()
 					locker_close_sound.play()
 	)
 

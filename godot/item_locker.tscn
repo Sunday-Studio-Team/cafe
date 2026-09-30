@@ -2,19 +2,14 @@
 
 [ext_resource type="Script" uid="uid://04mirww3ykmv" path="res://item_locker.gd" id="1_g6nyj"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_d87dh"]
+[ext_resource type="PackedScene" uid="uid://chy0ub7v5dmy1" path="res://Assets/sato_locker/sato's_locker_w_items__v_1.tscn" id="3_d87dh"]
+[ext_resource type="Script" uid="uid://biykmw2vk68sj" path="res://Assets/sato_locker/item_locker_model.gd" id="4_f2a8y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rb8fj"]
 size = Vector3(0.3300171, 1.6508789, 0.60302734)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ovvye"]
 size = Vector3(1, 2, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
-metallic = 1.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_vn1tu"]
-material = SubResource("StandardMaterial3D_mjix0")
-size = Vector3(0.5, 0.8220215, 0.75)
 
 [node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("_interactable")]
 script = ExtResource("1_g6nyj")
@@ -34,20 +29,22 @@ collision_mask = 2
 script = ExtResource("2_d87dh")
 interactable_id = &"use_item_locker"
 display_name = "Equip items"
-mesh = NodePath("../MeshInstance3D")
+mesh = NodePath("../Model/Locker")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1939244675]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10000038, 1, 0)
 shape = SubResource("BoxShape3D_ovvye")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1342847676]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.90000004, 0.10000038)
-visible = false
-mesh = SubResource("BoxMesh_vn1tu")
+[node name="Model" parent="." unique_id=1837404991 node_paths=PackedStringArray("door_mesh") instance=ExtResource("3_d87dh")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+script = ExtResource("4_f2a8y")
+door_mesh = NodePath("Locker Door")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=1598298646]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.39999998, 1.4, 0.09999943)
-text = "ITEM
-LOCKER
-:)"
+[node name="Mirror" parent="Model" index="19" unique_id=56187317]
+transform = Transform3D(-0.055559676, -0.017108118, -0.9983087, -0.061211396, 0.99803084, -0.013696704, 0.99657726, 0.060346883, -0.056497514, 0.55770606, 2.5702512, -0.04804725)
+
+[node name="Locker Door" parent="Model" index="24" unique_id=711655157]
+transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
+
+[editable path="Model"]
