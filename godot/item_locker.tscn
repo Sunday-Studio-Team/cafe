@@ -4,6 +4,14 @@
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_d87dh"]
 [ext_resource type="PackedScene" uid="uid://chy0ub7v5dmy1" path="res://Assets/sato_locker/sato's_locker_w_items__v_1.tscn" id="3_d87dh"]
 [ext_resource type="Script" uid="uid://biykmw2vk68sj" path="res://Assets/sato_locker/item_locker_model.gd" id="4_f2a8y"]
+[ext_resource type="Script" uid="uid://dw7u504yn4u6x" path="res://ui/locker_prop_shower_hider.gd" id="5_dqjxi"]
+[ext_resource type="Resource" uid="uid://b7j7p84hynyid" path="res://items/barista_guide.tres" id="6_dt742"]
+[ext_resource type="Resource" uid="uid://dqkyw3jlemyyc" path="res://items/hammer.tres" id="7_e0bd6"]
+[ext_resource type="Resource" uid="uid://mytncbiaaghj" path="res://items/airhorn.tres" id="8_60wm3"]
+[ext_resource type="Resource" uid="uid://dro03qfkl0ucg" path="res://items/whipped_cream.tres" id="9_6i5wn"]
+[ext_resource type="Resource" uid="uid://kxjctrnpqcs3" path="res://items/nice_spoon.tres" id="10_b0jqr"]
+[ext_resource type="Resource" uid="uid://bhcmo11ttgvh3" path="res://items/roller_skates.tres" id="11_abt02"]
+[ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://items/super_scrubber_2000.tres" id="12_8r07k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rb8fj"]
 size = Vector3(0.3300171, 1.6508789, 0.60302734)
@@ -41,8 +49,40 @@ transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
 script = ExtResource("4_f2a8y")
 door_mesh = NodePath("Locker Door")
 
+[node name="PropShowerHider" type="Node" parent="Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 1962398424) index="0" unique_id=1665776569]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("6_dt742")
+
+[node name="PropShowerHider" type="Node" parent="Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 587808666) index="0" unique_id=1164381062]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("7_e0bd6")
+
+[node name="PropShowerHider" type="Node" parent="Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 1877412421) index="0" unique_id=169925206]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("8_60wm3")
+
+[node name="PropShowerHider" type="Node" parent="Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 1446751461) index="0" unique_id=1413157808]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("9_6i5wn")
+
+[node name="PropShowerHider" type="Node" parent="Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 85754966) index="0" unique_id=633572519]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("10_b0jqr")
+
 [node name="Mirror" parent="Model" index="19" unique_id=56187317]
 transform = Transform3D(-0.055559676, -0.017108118, -0.9983087, -0.061211396, 0.99803084, -0.013696704, 0.99657726, 0.060346883, -0.056497514, 0.55770606, 2.5702512, -0.04804725)
+
+[node name="PropShowerHider" type="Node" parent="Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 77218249) index="0" unique_id=1034734605]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("11_abt02")
+
+[node name="PropShowerHider" type="Node" parent="Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 266203652) index="0" unique_id=1863931289]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("11_abt02")
+
+[node name="PropShowerHider" type="Node" parent="Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 274392463) index="0" unique_id=488191577]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("12_8r07k")
 
 [node name="Locker Door" parent="Model" index="24" unique_id=711655157]
 transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
