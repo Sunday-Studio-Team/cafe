@@ -5,9 +5,9 @@ extends Node3D
 
 
 func _ready() -> void:
-	# if we're in the tutorial or we haven't beaten day 1
+	# if we haven't beaten day 1
 	# (we want to have the locker if we're replaying day 1 after beating it, but not before)
-	if Global.day == 0 or SaveDataManager.save_data.latest_unlocked_day <= 1:
+	if SaveDataManager.save_data.latest_unlocked_day <= 1:
 		hide()
 		process_mode = ProcessMode.PROCESS_MODE_DISABLED
 

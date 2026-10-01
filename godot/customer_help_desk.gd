@@ -77,7 +77,7 @@ func _set_customer(new_customer: Customer) -> void:
 		new_desk_customer_arrived.emit()
 
 		# Set unlimited for tutorial day
-		if Global.day == 0:
+		if Global.playing_tutorial:
 			pass
 		else:
 			_desk_customer.timer.wait_time = Stats.current.customer_wait_time_help_desk_each_day[Global.day]

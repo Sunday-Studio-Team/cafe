@@ -104,7 +104,7 @@ func _ready() -> void:
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
-				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
+				or Global.playing_tutorial # idk how the tutorial cutscene works so it could potentially causes issues with that
 		):
 			return
 

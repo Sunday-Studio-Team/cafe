@@ -123,6 +123,15 @@ func _ready() -> void:
 	#Connect minigame
 	Events.minigame_active.connect(_on_minigame_active)
 	Events.minigame_end.connect(_on_minigame_end)
+	
+	# Determine if we should play the tutorial!
+	var should_play_tutorial: bool = Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
+	if should_play_tutorial:
+		print("should play tutorial!")
+		Global.playing_tutorial = true
+	else:
+		Global.playing_tutorial = false
+		print("should not play tutorial!")
 
 	set_per_day_stuff()
 	spawn_machines()
@@ -178,19 +187,6 @@ func _ready() -> void:
 	Global.refresh_active_items()
 
 	_tutorial_manager.start_day()
-
-	# if Global.day == 0:
-	# 	_interactive_tutorial_flow()
-	# else:
-	# 	day_indicator.text = Global.day_to_string(Global.day).to_upper()
-	# 	day_indicator.show()
-	# 	await create_tween().tween_property(day_indicator, "modulate", Color.WHITE, 0.5).from(
-	# 			Color.TRANSPARENT).finished
-	# 	await get_tree().create_timer(1.5, false).timeout
-	# 	await create_tween().tween_property(day_indicator, "modulate", Color.TRANSPARENT, 0.5).finished
-	# 	day_indicator.hide()
-	# 	_tippy_tutorials()
-
 
 func _process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
@@ -260,13 +256,7 @@ func update_air_fresheners_enabled() -> void:
 func set_per_day_stuff() -> void:
 	closing_time = false
 	_trash_can.visible = false
-	if Global.day == 0:
-		Global.player_tips_bank = 0
-		Global.owned_items.clear()
-		Stats.reset()
-		_active_machines.clear()
-		_active_machines.push_front(tutorial_machine)
-		_set_day_security_cameras_active([])
+	
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
@@ -276,14 +266,19 @@ func set_per_day_stuff() -> void:
 		Global.received_reviews.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
-		Stats.reset()
+		Stats.reset()		
 
 	if Global.day == 1:
-		_active_machines.clear()
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([])
-
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			_active_machines.push_back(tutorial_machine)
+			_set_day_security_cameras_active([])
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([])
+	
 	if Global.day == 2:
 		_active_machines.clear()
 		_active_machines.push_back(_left_area_right_machine)
@@ -537,9 +532,10 @@ func _on_shift_started():
 	shift_start_sound.play()
 
 	if Global.day > 0:
-		game_timer.start()
-		_machine_customer_spawn_timer.start(Stats.current.first_machine_customer_entry_time)
-		_help_desk_customer_spawn_timer.start(Stats.current.first_help_desk_customer_entry_time)
+		if not Global.playing_tutorial:
+			game_timer.start()
+			_machine_customer_spawn_timer.start(Stats.current.first_machine_customer_entry_time)
+			_help_desk_customer_spawn_timer.start(Stats.current.first_help_desk_customer_entry_time)
 
 		var has_scrubber: bool = false
 		for item in Global.owned_items:

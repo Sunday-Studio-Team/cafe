@@ -114,6 +114,9 @@ func on_right():
 	complete_sprite.visible = true
 	sato.texture = sato_sprites[SatoTippyFight.Win]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
+	
+	# Tell the tutorial the captcha part is done
+	Global.tutorial_drink_remake_ingredients_done = true
 
 
 func verify_captcha() -> void:

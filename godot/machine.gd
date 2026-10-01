@@ -252,7 +252,7 @@ func _process(delta: float) -> void:
 	customer_wait_indicator.visible = (
 		customer != null
 		and not customer.timer.is_stopped()
-		and not Global.day == 0
+		and not Global.playing_tutorial
 		)
 
 	if customer:
@@ -381,7 +381,7 @@ func show_tutorial_go_clean_spill() -> void:
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
 
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
-	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
+	if (Global.playing_tutorial) and (not Global.tutorial_go_clean_spill_shown):
 		Global.tutorial_go_clean_spill_shown = true
 		Global.in_popup_tutorial_screen = true
 
@@ -1051,7 +1051,7 @@ func _on_remade_drink() -> void:
 	order.made_drink = order.ordered_drink
 	display_drink_score()
 
-	Global.tutorial_drink_remade = true
+	Global.tutorial_drink_remade_served = true
 	customer.timer.stop()
 	waiting_for_response = false
 

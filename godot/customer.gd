@@ -149,9 +149,12 @@ func _on_order_started(customer: Customer) -> void:
 	if customer != self or orders_made > 0:
 		return
 	await get_tree().process_frame
-	timer.start()
+	
+	# Don't start the timer if playing tutorial!
+	if not Global.playing_tutorial:
+		timer.start()
+	
 	orders_made += 1
-
 
 func _on_order_served(customer: Customer) -> void:
 	if customer != self:
