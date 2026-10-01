@@ -31,6 +31,9 @@ random_volume_offset_db = 2.0
 streams_count = 1
 stream_0/stream = ExtResource("16_7gik8")
 
+[sub_resource type="LabelSettings" id="LabelSettings_13qdw"]
+font_size = 32
+
 [node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container", "sato_container", "customer_container", "tippy_group", "dialogue_box", "dialogue_box_texture", "speech_bubble_texture", "vs_container", "correct_sound", "wrong_sound")]
 layout_mode = 3
 anchors_preset = 15
@@ -47,7 +50,7 @@ instructions_container = NodePath("VBoxContainer/InstructionsContainer")
 sentence_container = NodePath("BottomSegment/DialogueContainer/TypingSectionContainer/SentenceHFlowContainer")
 sato_expressions = Array[Texture2D]([ExtResource("6_ody48"), ExtResource("7_m3euw"), ExtResource("8_0qatm")])
 speech_bubbles = Array[Texture2D]([ExtResource("12_6u2o6"), ExtResource("10_d1drf"), ExtResource("11_jqlkh")])
-sato_container = NodePath("VBoxContainer2/SatoContainer")
+sato_container = NodePath("SatoContainer/SatoSprite")
 customer_container = NodePath("CustomerContainer/CustomerSprite")
 tippy_group = NodePath("BottomSegment/TippyGroup")
 dialogue_box = NodePath("BottomSegment/DialogueContainer")
@@ -107,24 +110,23 @@ mouse_filter = 2
 texture = ExtResource("7_36uwy")
 stretch_mode = 4
 
-[node name="VBoxContainer2" type="HBoxContainer" parent="." unique_id=1778082158]
+[node name="SatoContainer" type="Control" parent="." unique_id=925025813]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
 grow_vertical = 2
-offset_transform_enabled = true
-offset_transform_position = Vector2(0, 64)
 
-[node name="SatoContainer" type="TextureRect" parent="VBoxContainer2" unique_id=636810154]
-layout_mode = 2
+[node name="SatoSprite" type="TextureRect" parent="SatoContainer" unique_id=636810154]
+layout_mode = 0
+offset_left = -140.0
+offset_top = -454.0
+offset_right = 967.16296
+offset_bottom = 642.0
 size_flags_horizontal = 3
-offset_transform_enabled = true
-offset_transform_position = Vector2(-960, 80)
-texture = ExtResource("8_0qatm")
+texture = ExtResource("6_ody48")
 expand_mode = 1
-stretch_mode = 2
+stretch_mode = 5
 
 [node name="CustomerContainer" type="Control" parent="." unique_id=814543066]
 layout_mode = 1
@@ -135,7 +137,6 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 0
 grow_vertical = 2
-offset_transform_enabled = true
 
 [node name="CustomerSprite" type="TextureRect" parent="CustomerContainer" unique_id=1620205873]
 custom_minimum_size = Vector2(0, 1080)
@@ -313,3 +314,21 @@ volume_db = 10.0
 stream = ExtResource("17_yi8od")
 volume_db = 10.0
 pitch_scale = 0.5
+
+[node name="DebugLabel_SafeToRemoveInFinalGame" type="Label" parent="." unique_id=754876588]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -380.5
+offset_top = -83.0
+offset_right = 380.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "resource name"
+label_settings = SubResource("LabelSettings_13qdw")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -14,8 +14,12 @@
 [ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="6_gttkg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://djk1v35hn3es4" path="res://emails/email_data.gd" id="8_ip2l3"]
+[ext_resource type="Resource" uid="uid://dybdvkril5y03" path="res://emails/random_emails/random_email_1.tres" id="9_s14wm"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
+[ext_resource type="Resource" uid="uid://c7bola2bkchgx" path="res://emails/random_emails/random_email_2.tres" id="10_q4gy1"]
+[ext_resource type="Resource" uid="uid://c28goevsrrpa" path="res://emails/random_emails/random_email_3.tres" id="11_cnw22"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://ctyf8qliv65c4" path="res://security_cam.tscn" id="12_dg77c"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
@@ -30,8 +34,6 @@
 [ext_resource type="Resource" uid="uid://c2ykxot8dufp0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_5.tres" id="34_pmrog"]
 [ext_resource type="Resource" uid="uid://cggkb6fxtvq0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_6.tres" id="35_pbe4p"]
 [ext_resource type="Resource" uid="uid://uc83adcvfsc7" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_7.tres" id="36_8ldsf"]
-[ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="42_yf6j3"]
-[ext_resource type="PackedScene" uid="uid://ck5m4eetjuovd" path="res://ui/tablet/tablet_machine_ui.tscn" id="43_e4ynb"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://dtbfgptmi7ixs" path="res://cafe_environment.tscn" id="44_h6isl"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
@@ -41,9 +43,6 @@
 [ext_resource type="Script" uid="uid://pf7u804wu0su" path="res://ui/tippy_vo_indicator.gd" id="57_ibca3"]
 [ext_resource type="PackedScene" uid="uid://dohtcd6556n24" path="res://menu.tscn" id="70_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://bfeia08ohwl7d" path="res://sprites/items/overtime.png" id="71_m5f57"]
-[ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="82_ip2l3"]
-[ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="83_s14wm"]
-[ext_resource type="Script" uid="uid://bd82opkja4ku1" path="res://addons/arrow3d/arrow_3d.gd" id="84_ppx11"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://themes/exit_button.tres" id="97_l0gw7"]
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="97_sn1fb"]
 [ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
@@ -55,208 +54,208 @@
 [ext_resource type="Resource" uid="uid://2w20xeo8a8j" path="res://voice_lines/resources/contextual/voice_line_tippy_start_shift_1.tres" id="121_arf1h"]
 [ext_resource type="Resource" uid="uid://dpsm3hlrkdoyt" path="res://voice_lines/resources/contextual/voice_line_tippy_accept_drink.tres" id="122_6seew"]
 [ext_resource type="Resource" uid="uid://bsm7mtf1bhqtp" path="res://voice_lines/resources/contextual/voice_line_tippy_start_shift_2.tres" id="122_s0om5"]
-[ext_resource type="Resource" uid="uid://ijejvw4h82h" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_0.tres" id="123_2ixj2"]
+[ext_resource type="Resource" uid="uid://ijejvw4h82h" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_0.tres" id="123_2ixj2"]
 [ext_resource type="Resource" uid="uid://da5qtkot2mptp" path="res://voice_lines/resources/contextual/voice_line_tippy_clean_spill.tres" id="123_6gr3f"]
 [ext_resource type="Script" uid="uid://bb5853og883i5" path="res://tutorial/tutorial_popups_manager.gd" id="123_8ldsf"]
 [ext_resource type="Resource" uid="uid://c8e1ynixjucrb" path="res://voice_lines/resources/contextual/voice_line_tippy_low_customer_1.tres" id="124_3ox4t"]
-[ext_resource type="Resource" uid="uid://drucpcbxalo6g" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_1.tres" id="124_t6w6j"]
+[ext_resource type="Resource" uid="uid://drucpcbxalo6g" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_1.tres" id="124_t6w6j"]
 [ext_resource type="Resource" uid="uid://b8j3pxpppmlpc" path="res://voice_lines/resources/contextual/voice_line_tippy_low_customer_2.tres" id="125_4fmho"]
-[ext_resource type="Resource" uid="uid://beu1gskjx1gbf" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_2.tres" id="125_itvpi"]
+[ext_resource type="Resource" uid="uid://beu1gskjx1gbf" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_2.tres" id="125_itvpi"]
 [ext_resource type="Resource" uid="uid://ylmdujj14nph" path="res://voice_lines/resources/contextual/voice_line_tippy_low_shift.tres" id="126_4fmho"]
-[ext_resource type="Resource" uid="uid://q6mdk86klf13" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_3.tres" id="126_4jpym"]
+[ext_resource type="Resource" uid="uid://q6mdk86klf13" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_3.tres" id="126_4jpym"]
 [ext_resource type="Resource" uid="uid://c3reag6jwsda6" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_1.tres" id="126_gkfde"]
 [ext_resource type="Resource" uid="uid://ch8kvde77uyru" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_2.tres" id="127_4qxq8"]
-[ext_resource type="Resource" uid="uid://biyhseqkr3fvd" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_4.tres" id="127_j4mna"]
-[ext_resource type="Resource" uid="uid://ddiurw6xrwit3" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_5.tres" id="128_pnym5"]
+[ext_resource type="Resource" uid="uid://biyhseqkr3fvd" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_4.tres" id="127_j4mna"]
+[ext_resource type="Resource" uid="uid://ddiurw6xrwit3" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_5.tres" id="128_pnym5"]
 [ext_resource type="Resource" uid="uid://bh3yardmw8ofs" path="res://voice_lines/resources/contextual/voice_line_tippy_remake_drink_3.tres" id="128_ryg4g"]
 [ext_resource type="Resource" uid="uid://yqxd886iovvp" path="res://voice_lines/resources/contextual/voice_line_tippy_machine_drink.tres" id="129_oy6td"]
-[ext_resource type="Resource" uid="uid://b10hu24rnktud" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_6.tres" id="129_vqns7"]
+[ext_resource type="Resource" uid="uid://b10hu24rnktud" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_6.tres" id="129_vqns7"]
 [ext_resource type="Resource" uid="uid://bvysr5e5slkfv" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_1.tres" id="130_fe76k"]
-[ext_resource type="Resource" uid="uid://b5aqpwmkh4w3q" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_1_7.tres" id="130_ybd4b"]
+[ext_resource type="Resource" uid="uid://b5aqpwmkh4w3q" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_1_7.tres" id="130_ybd4b"]
 [ext_resource type="Resource" uid="uid://c5iubxwsxaef3" path="res://voice_lines/resources/contextual/voice_line_tippy_under_goal_2.tres" id="131_p5pln"]
-[ext_resource type="Resource" uid="uid://btba3h738cxv2" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_2_0.tres" id="132_wr7jj"]
-[ext_resource type="Resource" uid="uid://dv8ws51fnmw05" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_3_0.tres" id="133_ybd4b"]
-[ext_resource type="Resource" uid="uid://bu3rs74hf3k3d" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_0.tres" id="134_cit2p"]
-[ext_resource type="Resource" uid="uid://dae5708dksy5y" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_1.tres" id="135_46ndd"]
-[ext_resource type="Resource" uid="uid://b1nejd7a7ubnr" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_2.tres" id="136_3cabt"]
+[ext_resource type="Resource" uid="uid://btba3h738cxv2" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_2_0.tres" id="132_wr7jj"]
+[ext_resource type="Resource" uid="uid://dv8ws51fnmw05" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_3_0.tres" id="133_ybd4b"]
+[ext_resource type="Resource" uid="uid://bu3rs74hf3k3d" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_0.tres" id="134_cit2p"]
+[ext_resource type="Resource" uid="uid://dae5708dksy5y" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_1.tres" id="135_46ndd"]
+[ext_resource type="Resource" uid="uid://b1nejd7a7ubnr" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_2.tres" id="136_3cabt"]
 [ext_resource type="Resource" uid="uid://dl0o5wu638b4t" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_accept_correct_drink.tres" id="136_12204"]
 [ext_resource type="PackedScene" uid="uid://d4bh0b3gyfbbd" path="res://ui/loadout/item_loadout_menu.tscn" id="136_kmrid"]
 [ext_resource type="Resource" uid="uid://dgxatvp4r42bv" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_1.tres" id="136_oiuw5"]
 [ext_resource type="AudioStream" uid="uid://dimkpitnugvme" path="res://audio/shift_start.wav" id="137_g3y5b"]
 [ext_resource type="Resource" uid="uid://bl7bdfikk3kwt" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_2.tres" id="137_mldrc"]
-[ext_resource type="Resource" uid="uid://bhajpsmee84av" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_3.tres" id="137_swcop"]
+[ext_resource type="Resource" uid="uid://bhajpsmee84av" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_3.tres" id="137_swcop"]
 [ext_resource type="Resource" uid="uid://csrhnrcl4rjr5" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_correct_drink_accepted_1.tres" id="137_trkoe"]
 [ext_resource type="Resource" uid="uid://cwg7jd7nwl2io" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_3.tres" id="138_1tiwm"]
 [ext_resource type="Resource" uid="uid://3e6o7biodrji" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_correct_drink_accepted_2.tres" id="138_bvlej"]
-[ext_resource type="Resource" uid="uid://ccqgwq8d3dmrp" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_4.tres" id="138_r8clq"]
-[ext_resource type="Resource" uid="uid://djuwu07fnih4p" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_5.tres" id="139_ico27"]
+[ext_resource type="Resource" uid="uid://ccqgwq8d3dmrp" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_4.tres" id="138_r8clq"]
+[ext_resource type="Resource" uid="uid://djuwu07fnih4p" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_5.tres" id="139_ico27"]
 [ext_resource type="Resource" uid="uid://bty8ok8mhtmlc" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_4.tres" id="139_xxpw2"]
 [ext_resource type="Resource" uid="uid://cd0u8c46gcxmo" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_correct_drink_prepared_1.tres" id="139_ycw8e"]
 [ext_resource type="Resource" uid="uid://bwwqwn26ddbf4" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_correct_drink_prepared_2.tres" id="140_2gd4m"]
-[ext_resource type="Resource" uid="uid://bt7yhpr7660ao" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_6.tres" id="140_k6qn3"]
+[ext_resource type="Resource" uid="uid://bt7yhpr7660ao" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_6.tres" id="140_k6qn3"]
 [ext_resource type="Resource" uid="uid://dgoogqu3rrsu3" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_5.tres" id="140_wghq8"]
 [ext_resource type="Resource" uid="uid://d0ilrrcdl6rc4" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_drink_remade_1.tres" id="141_61bol"]
 [ext_resource type="Resource" uid="uid://c0ysfuy0ck7m5" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_start_shift.tres" id="141_mldrc"]
-[ext_resource type="Resource" uid="uid://d0fehxju1f2ff" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_7.tres" id="141_oodit"]
+[ext_resource type="Resource" uid="uid://d0fehxju1f2ff" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_7.tres" id="141_oodit"]
 [ext_resource type="Resource" uid="uid://k8tgwj14vvn6" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_drink_remade_2.tres" id="142_lix4w"]
-[ext_resource type="Resource" uid="uid://b8mqprdp47qex" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_8.tres" id="142_lwqyd"]
+[ext_resource type="Resource" uid="uid://b8mqprdp47qex" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_8.tres" id="142_lwqyd"]
 [ext_resource type="Resource" uid="uid://b0kg6dc7s73nb" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_shift_started_1.tres" id="142_wghq8"]
 [ext_resource type="Texture2D" uid="uid://drdugm5omfvjp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Double/keyboard_p.png" id="143_7bx05"]
 [ext_resource type="Resource" uid="uid://bhkp2r1ty7xto" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_shift_started_2.tres" id="143_k08w7"]
 [ext_resource type="Resource" uid="uid://7hxd4waqik1d" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_drink_remade_3.tres" id="143_kmrid"]
-[ext_resource type="Resource" uid="uid://bhw8a7lin6md5" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_4_9.tres" id="143_sn277"]
-[ext_resource type="Resource" uid="uid://kq8n6maa44am" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_5_0.tres" id="144_b52uf"]
+[ext_resource type="Resource" uid="uid://bhw8a7lin6md5" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_9.tres" id="143_sn277"]
+[ext_resource type="Resource" uid="uid://kq8n6maa44am" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_5_0.tres" id="144_b52uf"]
 [ext_resource type="Resource" uid="uid://di2hxe63x2f6t" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_finished_1.tres" id="144_c6fgv"]
 [ext_resource type="Resource" uid="uid://dxesuytxahd1r" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_use_machine.tres" id="144_hp4ct"]
 [ext_resource type="Resource" uid="uid://by35ytkvrjgco" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_finished_2.tres" id="145_fd6dt"]
-[ext_resource type="Resource" uid="uid://cwsseai5uq388" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_5_1.tres" id="145_hwprm"]
-[ext_resource type="Resource" uid="uid://c7oqbg81uvxpf" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_0.tres" id="146_d0xhy"]
+[ext_resource type="Resource" uid="uid://cwsseai5uq388" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_5_1.tres" id="145_hwprm"]
+[ext_resource type="Resource" uid="uid://c7oqbg81uvxpf" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_6_0.tres" id="146_d0xhy"]
 [ext_resource type="Resource" uid="uid://bdifg884bv40v" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_finished_3.tres" id="146_gttkg"]
 [ext_resource type="Resource" uid="uid://dtg5vwee6k3if" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_finished_4.tres" id="147_hiwvf"]
-[ext_resource type="Resource" uid="uid://ctaysxqd8jjnq" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_1.tres" id="147_lw0ge"]
-[ext_resource type="Resource" uid="uid://d02ue0nsoidne" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_2.tres" id="148_1e7qx"]
+[ext_resource type="Resource" uid="uid://ctaysxqd8jjnq" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_6_1.tres" id="147_lw0ge"]
+[ext_resource type="Resource" uid="uid://d02ue0nsoidne" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_6_2.tres" id="148_1e7qx"]
 [ext_resource type="Resource" uid="uid://b8h86l07lesqc" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_get_ingredients_1.tres" id="148_ed5de"]
-[ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="149_4v3l6"]
-[ext_resource type="Resource" uid="uid://cfei6fy0hpjm7" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_3.tres" id="149_6kqjg"]
+[ext_resource type="Resource" uid="uid://cfei6fy0hpjm7" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_6_3.tres" id="149_6kqjg"]
 [ext_resource type="Resource" uid="uid://dmji4xlxijqpo" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_get_ingredients_2.tres" id="149_e31mi"]
 [ext_resource type="Resource" uid="uid://dxetjfhbw75vo" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_get_ingredients_3.tres" id="150_mq14a"]
-[ext_resource type="Resource" uid="uid://ikxp515hq7rk" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_6_4.tres" id="150_ydhsu"]
-[ext_resource type="Resource" uid="uid://bcin7b31yduv3" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_7_0.tres" id="151_p3rrp"]
+[ext_resource type="Resource" uid="uid://ikxp515hq7rk" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_6_4.tres" id="150_ydhsu"]
+[ext_resource type="Resource" uid="uid://bcin7b31yduv3" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_7_0.tres" id="151_p3rrp"]
 [ext_resource type="Resource" uid="uid://beb48vn2ou682" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_1.tres" id="151_yf6j3"]
 [ext_resource type="Resource" uid="uid://tu4fmqyq17w0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_2.tres" id="152_e4ynb"]
-[ext_resource type="Resource" uid="uid://cv3eli46pi167" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_7_1.tres" id="152_ewpr8"]
-[ext_resource type="Resource" uid="uid://cb4ouofs3648b" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_7_2.tres" id="153_5jugy"]
+[ext_resource type="Resource" uid="uid://cv3eli46pi167" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_7_1.tres" id="152_ewpr8"]
+[ext_resource type="Resource" uid="uid://cb4ouofs3648b" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_7_2.tres" id="153_5jugy"]
 [ext_resource type="Resource" uid="uid://1r37881j7h7y" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_3.tres" id="153_a1n43"]
-[ext_resource type="Resource" uid="uid://riojokdu3834" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_7_3.tres" id="154_320fk"]
+[ext_resource type="Resource" uid="uid://riojokdu3834" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_7_3.tres" id="154_320fk"]
 [ext_resource type="Resource" uid="uid://dsgbp7c1o55jb" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_4.tres" id="154_dfxmq"]
-[ext_resource type="Resource" uid="uid://pp1lsoob578l" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_8_0.tres" id="155_5cdne"]
+[ext_resource type="Resource" uid="uid://pp1lsoob578l" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_0.tres" id="155_5cdne"]
 [ext_resource type="Resource" uid="uid://cq2idwtwk746x" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_5.tres" id="155_kcoi7"]
-[ext_resource type="Resource" uid="uid://bhf1a5xxiklkg" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_8_1.tres" id="156_cdf73"]
+[ext_resource type="Resource" uid="uid://bhf1a5xxiklkg" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_1.tres" id="156_cdf73"]
 [ext_resource type="Resource" uid="uid://c01ei7nx3t8b5" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_6.tres" id="156_rkju4"]
-[ext_resource type="Resource" uid="uid://rwrwq82iw6ql" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_8_repeat_0.tres" id="157_qeqs3"]
+[ext_resource type="Resource" uid="uid://rwrwq82iw6ql" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_repeat_0.tres" id="157_qeqs3"]
 [ext_resource type="Resource" uid="uid://cr6c4gp6i5c72" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_7.tres" id="157_um25j"]
 [ext_resource type="Resource" uid="uid://bdc8hcnbx72xf" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_ingredients_got.tres" id="158_7dysq"]
-[ext_resource type="Resource" uid="uid://cij5n2dkhfq82" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_8_repeat_1.tres" id="158_21jki"]
-[ext_resource type="Resource" uid="uid://dm50t5gmhxy74" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_9_0.tres" id="159_fgj2h"]
-[ext_resource type="Resource" uid="uid://qr06ctng0e3m" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_9_1.tres" id="160_33vkc"]
-[ext_resource type="Resource" uid="uid://cvepfvqs862eg" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_9_repeat_0.tres" id="161_c8pmb"]
-[ext_resource type="Resource" uid="uid://cvkgued4xlv1n" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_9_repeat_1.tres" id="162_ct655"]
-[ext_resource type="Resource" uid="uid://bw74dvmc7cniu" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_10_0.tres" id="163_k508x"]
+[ext_resource type="Resource" uid="uid://cij5n2dkhfq82" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_repeat_1.tres" id="158_21jki"]
+[ext_resource type="Resource" uid="uid://dm50t5gmhxy74" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_9_0.tres" id="159_fgj2h"]
+[ext_resource type="Resource" uid="uid://qr06ctng0e3m" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_9_1.tres" id="160_33vkc"]
+[ext_resource type="Resource" uid="uid://cvepfvqs862eg" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_9_repeat_0.tres" id="161_c8pmb"]
+[ext_resource type="Resource" uid="uid://cvkgued4xlv1n" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_9_repeat_1.tres" id="162_ct655"]
+[ext_resource type="Resource" uid="uid://bw74dvmc7cniu" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_10_0.tres" id="163_k508x"]
 [ext_resource type="Resource" uid="uid://dj13bxhc7dg6b" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_broke_1.tres" id="164_0abf2"]
-[ext_resource type="Resource" uid="uid://cs4vofmwed2lr" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_10_1.tres" id="164_lt7rr"]
+[ext_resource type="Resource" uid="uid://cs4vofmwed2lr" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_10_1.tres" id="164_lt7rr"]
 [ext_resource type="Resource" uid="uid://du1fxxuvtvwer" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_broke_2.tres" id="165_7b48j"]
-[ext_resource type="Resource" uid="uid://bqbl2pl2nrv7m" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_10_2.tres" id="165_wv2wi"]
-[ext_resource type="Resource" uid="uid://c43agpf8lgydd" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_10_3.tres" id="166_7wskh"]
+[ext_resource type="Resource" uid="uid://bqbl2pl2nrv7m" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_10_2.tres" id="165_wv2wi"]
+[ext_resource type="Resource" uid="uid://c43agpf8lgydd" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_10_3.tres" id="166_7wskh"]
 [ext_resource type="Resource" uid="uid://b2782tf1dfv6h" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_broke_3.tres" id="166_8tqy7"]
 [ext_resource type="Resource" uid="uid://dln4qg7evfupu" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_broke_4.tres" id="167_faa31"]
-[ext_resource type="Resource" uid="uid://drdugf5jwnd4" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_10_repeat_0.tres" id="167_we7ek"]
-[ext_resource type="Resource" uid="uid://c7uoe07svk6dx" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_10_repeat_1.tres" id="168_4t3jq"]
+[ext_resource type="Resource" uid="uid://drdugf5jwnd4" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_10_repeat_0.tres" id="167_we7ek"]
+[ext_resource type="Resource" uid="uid://c7uoe07svk6dx" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_10_repeat_1.tres" id="168_4t3jq"]
 [ext_resource type="Resource" uid="uid://bn3kisjinluy3" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_refilled_1.tres" id="168_acld0"]
 [ext_resource type="PackedScene" uid="uid://bwb5fieibej21" path="res://ui/viewmodel.tscn" id="168_f4177"]
 [ext_resource type="Resource" uid="uid://cmbigm4s683no" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_refilled_2.tres" id="169_kc3cm"]
-[ext_resource type="Resource" uid="uid://b40b0jgqunq02" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_0.tres" id="169_wibxs"]
-[ext_resource type="Resource" uid="uid://cfahts78e72ld" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_1.tres" id="170_tk4ml"]
+[ext_resource type="Resource" uid="uid://b40b0jgqunq02" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_0.tres" id="169_wibxs"]
+[ext_resource type="Resource" uid="uid://cfahts78e72ld" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_1.tres" id="170_tk4ml"]
 [ext_resource type="Resource" uid="uid://ddoqok74fs7kh" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_spilled_1.tres" id="170_utcts"]
 [ext_resource type="Resource" uid="uid://ddeg0hmln14xa" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_spilled_2.tres" id="171_2pm5r"]
-[ext_resource type="Resource" uid="uid://f0g1k0d5d7c3" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_2.tres" id="171_giqsh"]
-[ext_resource type="Resource" uid="uid://ctcpjxpy508jm" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_3.tres" id="172_8bsdr"]
+[ext_resource type="Resource" uid="uid://f0g1k0d5d7c3" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_2.tres" id="171_giqsh"]
+[ext_resource type="Resource" uid="uid://ctcpjxpy508jm" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_3.tres" id="172_8bsdr"]
 [ext_resource type="Resource" uid="uid://d0wclpypmirxu" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_spilled_3.tres" id="172_38n85"]
 [ext_resource type="Resource" uid="uid://dajvlm1j5ohxx" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_machine_used.tres" id="173_nkmqd"]
-[ext_resource type="Resource" uid="uid://cvh24t2k0juek" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_4.tres" id="173_sa5b4"]
+[ext_resource type="Resource" uid="uid://cvh24t2k0juek" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_4.tres" id="173_sa5b4"]
 [ext_resource type="Resource" uid="uid://dnrewvg707g00" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_refill_machine.tres" id="174_4b624"]
-[ext_resource type="Resource" uid="uid://bnglfwm7lulr6" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_5.tres" id="174_6h8os"]
+[ext_resource type="Resource" uid="uid://bnglfwm7lulr6" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_5.tres" id="174_6h8os"]
 [ext_resource type="AudioStream" uid="uid://bviu82ck60xgv" path="res://audio/points_lose.wav" id="174_8e868"]
 [ext_resource type="Resource" uid="uid://4jj3oa6b7fy2" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_remake_drink.tres" id="175_0li47"]
-[ext_resource type="Resource" uid="uid://xyutt1jg5u2u" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_6.tres" id="175_dpk1y"]
+[ext_resource type="Resource" uid="uid://xyutt1jg5u2u" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_6.tres" id="175_dpk1y"]
 [ext_resource type="Resource" uid="uid://pxs6fxqjawk0" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_remaking_drink_1.tres" id="176_idhsh"]
-[ext_resource type="Resource" uid="uid://td4h2jr4gonb" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_7.tres" id="176_s2e5t"]
-[ext_resource type="Resource" uid="uid://r3mw5vn6d0l0" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_8.tres" id="177_p0prv"]
+[ext_resource type="Resource" uid="uid://td4h2jr4gonb" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_7.tres" id="176_s2e5t"]
+[ext_resource type="Resource" uid="uid://r3mw5vn6d0l0" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_8.tres" id="177_p0prv"]
 [ext_resource type="Resource" uid="uid://dto2rt8oijsht" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_remaking_drink_2.tres" id="177_piefl"]
 [ext_resource type="Resource" uid="uid://cstunk10h87b4" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_remaking_drink_3.tres" id="178_asb44"]
-[ext_resource type="Resource" uid="uid://crxpn8ffe8j8u" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_0.tres" id="178_re7jp"]
-[ext_resource type="Resource" uid="uid://1upyapwc4khy" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_1.tres" id="179_163gt"]
+[ext_resource type="Resource" uid="uid://crxpn8ffe8j8u" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_0.tres" id="178_re7jp"]
+[ext_resource type="Resource" uid="uid://1upyapwc4khy" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_1.tres" id="179_163gt"]
 [ext_resource type="Resource" uid="uid://c7sk7fujv60jd" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_remaking_drink_4.tres" id="179_v4ssx"]
 [ext_resource type="Resource" uid="uid://bdm7aae2ibhjh" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_remaking_drink_5.tres" id="180_ec14y"]
-[ext_resource type="Resource" uid="uid://ww00tl82dwjn" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_2.tres" id="180_sfu8n"]
-[ext_resource type="Resource" uid="uid://qa8su28cfirs" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_3.tres" id="181_7ljty"]
-[ext_resource type="Resource" uid="uid://cicbrit366xax" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_4.tres" id="182_nmlsr"]
-[ext_resource type="Resource" uid="uid://dc51jogos0jcr" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_5.tres" id="183_87vht"]
+[ext_resource type="Resource" uid="uid://ww00tl82dwjn" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_2.tres" id="180_sfu8n"]
+[ext_resource type="Resource" uid="uid://qa8su28cfirs" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_3.tres" id="181_7ljty"]
+[ext_resource type="Resource" uid="uid://cicbrit366xax" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_4.tres" id="182_nmlsr"]
+[ext_resource type="Resource" uid="uid://dc51jogos0jcr" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_5.tres" id="183_87vht"]
 [ext_resource type="Resource" uid="uid://dcybv7qvu05aa" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_spill_cleaned_1.tres" id="183_q0hco"]
-[ext_resource type="Resource" uid="uid://dq0g20th3uxor" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_11_repeat_6.tres" id="184_2fit5"]
+[ext_resource type="Resource" uid="uid://dq0g20th3uxor" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_11_repeat_6.tres" id="184_2fit5"]
 [ext_resource type="Resource" uid="uid://b6kgsc5hpxy8c" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_spill_cleaned_2.tres" id="184_g65e0"]
-[ext_resource type="Resource" uid="uid://c0kt6cebwt1in" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_12_0.tres" id="185_gk3yn"]
-[ext_resource type="Resource" uid="uid://b58r0qfoxkddb" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_12_1.tres" id="186_lmlah"]
-[ext_resource type="Resource" uid="uid://bh1v8h5rgog03" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_12_2.tres" id="187_sxhyu"]
-[ext_resource type="Resource" uid="uid://bksoo5uiqmsrm" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_12_repeat_0.tres" id="188_iu23i"]
-[ext_resource type="Resource" uid="uid://1uc6iqh2iqep" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_12_repeat_1.tres" id="189_t4ssb"]
-[ext_resource type="Resource" uid="uid://b6ffhoa5ugdld" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_0.tres" id="190_snw3v"]
-[ext_resource type="Resource" uid="uid://dtg5dldlierjw" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_1.tres" id="191_avbtm"]
-[ext_resource type="Resource" uid="uid://w1je3qr04t3y" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_2.tres" id="192_s11hv"]
-[ext_resource type="Resource" uid="uid://tmlk60bc3bty" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_3.tres" id="193_k4n35"]
-[ext_resource type="Resource" uid="uid://7jgjmla1b4or" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_4.tres" id="194_0fjwg"]
-[ext_resource type="Resource" uid="uid://slcqngmud3p1" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_5.tres" id="195_hh8eq"]
-[ext_resource type="Resource" uid="uid://bmnva6ggl66aq" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_6.tres" id="196_u8gjg"]
-[ext_resource type="Resource" uid="uid://bpco7t7hh12hs" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_repeat_0.tres" id="197_4eule"]
-[ext_resource type="Resource" uid="uid://bmwtsmgc1ubfk" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_13_repeat_1.tres" id="198_8igct"]
-[ext_resource type="Resource" uid="uid://d2cqwmr6potac" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_14_0.tres" id="199_xnvgk"]
-[ext_resource type="Resource" uid="uid://c48ef3uh1xqu5" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_14_1.tres" id="200_b3d73"]
-[ext_resource type="Resource" uid="uid://bse8w4k1815ln" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_14_repeat_0.tres" id="201_8h177"]
-[ext_resource type="Resource" uid="uid://b8gnqbm4odtf4" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_15_0.tres" id="202_i7ics"]
-[ext_resource type="Resource" uid="uid://bspp8k3fpnlay" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_15_1.tres" id="203_m58yd"]
-[ext_resource type="Resource" uid="uid://c68vlwsb55muu" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_15_2.tres" id="204_0l6uf"]
-[ext_resource type="Resource" uid="uid://cs7a0il5n2ody" path="res://voice_lines/resources/tutorials/day_0/voice_line_day_0_intro_15_3.tres" id="205_8nef1"]
-[ext_resource type="Resource" uid="uid://ckp44qepvlj8k" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_0_0.tres" id="205_skfll"]
-[ext_resource type="Resource" uid="uid://b02jyb2dywofg" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_0_1.tres" id="206_l0ugm"]
-[ext_resource type="Resource" uid="uid://d3gi6ylmi0pov" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_0_2.tres" id="207_dfd08"]
+[ext_resource type="Resource" uid="uid://c0kt6cebwt1in" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_12_0.tres" id="185_gk3yn"]
+[ext_resource type="Resource" uid="uid://b58r0qfoxkddb" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_12_1.tres" id="186_lmlah"]
+[ext_resource type="Resource" uid="uid://bh1v8h5rgog03" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_12_2.tres" id="187_sxhyu"]
+[ext_resource type="Resource" uid="uid://bksoo5uiqmsrm" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_12_repeat_0.tres" id="188_iu23i"]
+[ext_resource type="Resource" uid="uid://1uc6iqh2iqep" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_12_repeat_1.tres" id="189_t4ssb"]
+[ext_resource type="Resource" uid="uid://b6ffhoa5ugdld" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_0.tres" id="190_snw3v"]
+[ext_resource type="Resource" uid="uid://dtg5dldlierjw" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_1.tres" id="191_avbtm"]
+[ext_resource type="Resource" uid="uid://w1je3qr04t3y" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_2.tres" id="192_s11hv"]
+[ext_resource type="Resource" uid="uid://tmlk60bc3bty" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_3.tres" id="193_k4n35"]
+[ext_resource type="Resource" uid="uid://7jgjmla1b4or" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_4.tres" id="194_0fjwg"]
+[ext_resource type="Resource" uid="uid://slcqngmud3p1" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_5.tres" id="195_hh8eq"]
+[ext_resource type="Resource" uid="uid://bmnva6ggl66aq" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_6.tres" id="196_u8gjg"]
+[ext_resource type="Resource" uid="uid://bpco7t7hh12hs" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_repeat_0.tres" id="197_4eule"]
+[ext_resource type="Resource" uid="uid://bmwtsmgc1ubfk" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_13_repeat_1.tres" id="198_8igct"]
+[ext_resource type="Resource" uid="uid://d2cqwmr6potac" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_14_0.tres" id="199_xnvgk"]
+[ext_resource type="Resource" uid="uid://c48ef3uh1xqu5" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_14_1.tres" id="200_b3d73"]
+[ext_resource type="Resource" uid="uid://bse8w4k1815ln" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_14_repeat_0.tres" id="201_8h177"]
+[ext_resource type="Resource" uid="uid://b8gnqbm4odtf4" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_15_0.tres" id="202_i7ics"]
+[ext_resource type="Resource" uid="uid://bspp8k3fpnlay" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_15_1.tres" id="203_m58yd"]
+[ext_resource type="Resource" uid="uid://c68vlwsb55muu" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_15_2.tres" id="204_0l6uf"]
+[ext_resource type="Resource" uid="uid://cs7a0il5n2ody" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_15_3.tres" id="205_8nef1"]
+[ext_resource type="Resource" uid="uid://ckp44qepvlj8k" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_0_0.tres" id="205_skfll"]
+[ext_resource type="Resource" uid="uid://b02jyb2dywofg" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_0_1.tres" id="206_l0ugm"]
+[ext_resource type="Resource" uid="uid://d3gi6ylmi0pov" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_0_2.tres" id="207_dfd08"]
 [ext_resource type="Resource" uid="uid://bcrm3nfbe1kr" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_1.tres" id="208_fd6dt"]
-[ext_resource type="Resource" uid="uid://mr6mt0vm078b" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_0_3.tres" id="208_fxdwr"]
-[ext_resource type="Resource" uid="uid://bjlooda338our" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_0.tres" id="209_ecwfn"]
+[ext_resource type="Resource" uid="uid://mr6mt0vm078b" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_0_3.tres" id="208_fxdwr"]
+[ext_resource type="Resource" uid="uid://bjlooda338our" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_0.tres" id="209_ecwfn"]
 [ext_resource type="Resource" uid="uid://cq8rx2io4tcvp" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_2.tres" id="209_gttkg"]
 [ext_resource type="Resource" uid="uid://br4o57me014rj" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_3.tres" id="210_hiwvf"]
-[ext_resource type="Resource" uid="uid://darwi7w8pbmos" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_1.tres" id="210_ip2l3"]
+[ext_resource type="Resource" uid="uid://darwi7w8pbmos" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_1.tres" id="210_ip2l3"]
 [ext_resource type="Resource" uid="uid://5vj171smmmp2" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_4.tres" id="211_ed5de"]
-[ext_resource type="Resource" uid="uid://dl005jxnepqex" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_2.tres" id="211_s14wm"]
+[ext_resource type="Resource" uid="uid://dl005jxnepqex" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_2.tres" id="211_s14wm"]
 [ext_resource type="Resource" uid="uid://cpme7hahrxude" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_help_desk_5.tres" id="212_e31mi"]
-[ext_resource type="Resource" uid="uid://dmxrx1iuf0h06" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_3.tres" id="212_q4gy1"]
-[ext_resource type="Resource" uid="uid://bhlqgp5lx01m7" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_4.tres" id="213_cnw22"]
+[ext_resource type="Resource" uid="uid://dmxrx1iuf0h06" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_3.tres" id="212_q4gy1"]
+[ext_resource type="Resource" uid="uid://bhlqgp5lx01m7" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_4.tres" id="213_cnw22"]
 [ext_resource type="Resource" uid="uid://dbfkd6h4kv81t" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_customer_helped_1.tres" id="213_mq14a"]
-[ext_resource type="Resource" uid="uid://bw3cjatpgiguk" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_5.tres" id="214_8e868"]
+[ext_resource type="Resource" uid="uid://bw3cjatpgiguk" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_5.tres" id="214_8e868"]
 [ext_resource type="Script" uid="uid://biv30sphblx10" path="res://player_ui_sub_viewport_container.gd" id="214_tcxth"]
 [ext_resource type="Resource" uid="uid://wnkq2bg0qcuh" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_customer_helped_2.tres" id="214_yf6j3"]
-[ext_resource type="Resource" uid="uid://d1t0uqyr6vbw3" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_6.tres" id="215_2vmp2"]
+[ext_resource type="Resource" uid="uid://d1t0uqyr6vbw3" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_6.tres" id="215_2vmp2"]
 [ext_resource type="SpriteFrames" uid="uid://biu2p4iwy6rth" path="res://sprites/2d_animations/tippy_vo_indicators/thumbs_up/tippy_vo_indicator_thumbs_up_sprite_frames.tres" id="215_tcxth"]
-[ext_resource type="Resource" uid="uid://cq1qpkpapjean" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_7.tres" id="216_wvmv7"]
-[ext_resource type="Resource" uid="uid://dnd6o5ciitc41" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_8.tres" id="217_us00v"]
-[ext_resource type="Resource" uid="uid://djxx5q8f6jsf1" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_9.tres" id="218_nc1xb"]
+[ext_resource type="Resource" uid="uid://cq1qpkpapjean" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_7.tres" id="216_wvmv7"]
+[ext_resource type="Resource" uid="uid://dnd6o5ciitc41" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_8.tres" id="217_us00v"]
+[ext_resource type="Resource" uid="uid://djxx5q8f6jsf1" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_9.tres" id="218_nc1xb"]
 [ext_resource type="AudioStream" uid="uid://cosuq17hxsua5" path="res://audio/use_teleport.wav" id="219_fd6dt"]
-[ext_resource type="Resource" uid="uid://dkghplebvoure" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_10.tres" id="219_wm7i3"]
-[ext_resource type="Resource" uid="uid://jedghn4f3l0l" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_11.tres" id="220_d1vw0"]
-[ext_resource type="Resource" uid="uid://clvyonrj45oyv" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_12.tres" id="221_pmrog"]
+[ext_resource type="Resource" uid="uid://dkghplebvoure" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_10.tres" id="219_wm7i3"]
+[ext_resource type="Resource" uid="uid://jedghn4f3l0l" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_11.tres" id="220_d1vw0"]
+[ext_resource type="Resource" uid="uid://clvyonrj45oyv" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_12.tres" id="221_pmrog"]
 [ext_resource type="AudioStream" uid="uid://wjtgquxuwxd5" path="res://audio/time_stop.mp3" id="222_bvlej"]
-[ext_resource type="Resource" uid="uid://bkr1gd2vtmeea" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_13.tres" id="222_pbe4p"]
-[ext_resource type="Resource" uid="uid://yuqbjluo3wxp" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_1_14.tres" id="223_8ldsf"]
+[ext_resource type="Resource" uid="uid://bkr1gd2vtmeea" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_13.tres" id="222_pbe4p"]
+[ext_resource type="Resource" uid="uid://yuqbjluo3wxp" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_1_14.tres" id="223_8ldsf"]
 [ext_resource type="AudioStream" uid="uid://bxlwlieajscls" path="res://audio/time_start.mp3" id="223_ycw8e"]
-[ext_resource type="Resource" uid="uid://2if7pifttihs" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_2_0.tres" id="224_f4177"]
+[ext_resource type="Resource" uid="uid://2if7pifttihs" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_2_0.tres" id="224_f4177"]
 [ext_resource type="Script" uid="uid://djpemlgyywwcb" path="res://tutorial/popup_tutorial_view.gd" id="225_gttkg"]
-[ext_resource type="Resource" uid="uid://c5cxdhsjj1feh" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_2_1.tres" id="225_nckbc"]
-[ext_resource type="Resource" uid="uid://byn5u0qiqj151" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_2_2.tres" id="226_043in"]
+[ext_resource type="Resource" uid="uid://c5cxdhsjj1feh" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_2_1.tres" id="225_nckbc"]
+[ext_resource type="Resource" uid="uid://byn5u0qiqj151" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_2_2.tres" id="226_043in"]
 [ext_resource type="PackedScene" uid="uid://by5ndd0lvwdiv" path="res://open_close_sign.tscn" id="227_kmrid"]
 [ext_resource type="PackedScene" uid="uid://b21ndqhhyxlxy" path="res://tutorial/tutorial_screen_view_1.tscn" id="227_lix4w"]
-[ext_resource type="Resource" uid="uid://c6uri8v5u4r00" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_2_3.tres" id="227_r4j87"]
+[ext_resource type="Resource" uid="uid://c6uri8v5u4r00" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_2_3.tres" id="227_r4j87"]
 [ext_resource type="PackedScene" uid="uid://8h2mdx74vf3b" path="res://tutorial/tutorial_screen_view_2.tscn" id="228_kmrid"]
-[ext_resource type="Resource" uid="uid://dp32cowq6nf6x" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_2_4.tres" id="228_mwre3"]
+[ext_resource type="Resource" uid="uid://dp32cowq6nf6x" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_2_4.tres" id="228_mwre3"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="229_c6fgv"]
 [ext_resource type="PackedScene" uid="uid://r1xentkdq7bs" path="res://tutorial/tutorial_screen_view_3.tscn" id="229_e31mi"]
 [ext_resource type="Script" uid="uid://brjiqc8nptlxl" path="res://free_camera_body.gd" id="229_fd6dt"]
-[ext_resource type="Resource" uid="uid://b1dg3s5i0noki" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_3_0.tres" id="229_qwf4s"]
-[ext_resource type="Resource" uid="uid://dsmrh48t8yt1x" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_3_1.tres" id="230_m5kst"]
-[ext_resource type="Resource" uid="uid://6c6wetylkx2x" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_3_repeat_0.tres" id="231_d8xcs"]
+[ext_resource type="Resource" uid="uid://b1dg3s5i0noki" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_3_0.tres" id="229_qwf4s"]
+[ext_resource type="Resource" uid="uid://dsmrh48t8yt1x" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_3_1.tres" id="230_m5kst"]
+[ext_resource type="Resource" uid="uid://6c6wetylkx2x" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_3_repeat_0.tres" id="231_d8xcs"]
 [ext_resource type="PackedScene" uid="uid://vpthg7i8xd5t" path="res://tutorial/tutorial_screen_view_5.tscn" id="231_yf6j3"]
-[ext_resource type="Resource" uid="uid://c68iqykn3620b" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_3_repeat_1.tres" id="232_2ixj2"]
+[ext_resource type="Resource" uid="uid://c68iqykn3620b" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_3_repeat_1.tres" id="232_2ixj2"]
 [ext_resource type="PackedScene" uid="uid://cwrrk4bkluvu" path="res://tutorial/tutorial_screen_view_6.tscn" id="232_e4ynb"]
 [ext_resource type="PackedScene" uid="uid://ju8m57xhdoy4" path="res://tutorial/tutorial_screen_view_7.tscn" id="233_a1n43"]
-[ext_resource type="Resource" uid="uid://c4a8wn3rpa0mi" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_intro_4_0.tres" id="233_t6w6j"]
+[ext_resource type="Resource" uid="uid://c4a8wn3rpa0mi" path="res://voice_lines/resources/tutorials_old_v2/day_1/voice_line_day_1_intro_4_0.tres" id="233_t6w6j"]
 [ext_resource type="PackedScene" uid="uid://bj4es68ewvbba" path="res://tutorial/tutorial_screen_view_8.tscn" id="234_dfxmq"]
+[ext_resource type="PackedScene" uid="uid://ddyncetpsnx8x" path="res://ui/tablet_ui_2d.tscn" id="254_l0ugm"]
 [ext_resource type="PackedScene" uid="uid://udy2qfcmb0x6" path="res://trash_can.tscn" id="267_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
 [ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
@@ -269,6 +268,7 @@
 [ext_resource type="Script" uid="uid://ce6dr8crdpidc" path="res://air_freshener.gd" id="285_d52hs"]
 [ext_resource type="Resource" uid="uid://cj7hsbtdqe6k7" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_02.tres" id="286_pmrog"]
 [ext_resource type="Resource" uid="uid://y5eykit7a1ce" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_8.tres" id="287_d1vw0"]
+[ext_resource type="PackedScene" uid="uid://ch0pntkxtjbmi" path="res://Assets/signs/order_here_sign_1.tscn" id="289_ip2l3"]
 [ext_resource type="Resource" uid="uid://dpvumypa7h6u6" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_1.tres" id="291_tfaor"]
 [ext_resource type="Resource" uid="uid://dopqh5dnm5yyg" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_03.tres" id="292_3rmuw"]
 [ext_resource type="Resource" uid="uid://8wrbl822cmmk" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day2_04.tres" id="293_j3ofb"]
@@ -317,31 +317,8 @@ name = "Overtime Form"
 icon = ExtResource("71_m5f57")
 metadata/_custom_type_script = "uid://w8k3e1miec1a"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b2gp0"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.52906674, 0.52906674, 0.52906656, 1)
-border_width_left = 20
-border_width_top = 20
-border_width_right = 20
-border_width_bottom = 20
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
-font_size = 32
-font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
+[sub_resource type="ViewportTexture" id="ViewportTexture_13qdw"]
+viewport_path = NodePath("Player/CameraController/Camera3D/HoldingItemsSubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
 content_margin_left = 5.0
@@ -1417,12 +1394,11 @@ point_count = 8
 [sub_resource type="ViewportTexture" id="ViewportTexture_ecwfn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.29000002, 0.29000002, 1)
+[sub_resource type="ViewportTexture" id="ViewportTexture_ip2l3"]
+viewport_path = NodePath("../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_s14wm"]
+viewport_path = NodePath("../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
@@ -1445,7 +1421,7 @@ height = 0.78808594
 [sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
 viewport_path = NodePath("AirFreshener/CooldownTimerSprite/SubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "whiteboard_tutorial_arrow", "waypoint_ring", "shift_start_sound", "cam_spot", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1485,18 +1461,18 @@ teleporter2 = NodePath("Teleporter2")
 teleporter3 = NodePath("Teleporter3")
 air_freshener = NodePath("AirFreshener")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
-whiteboard_tutorial_arrow = NodePath("TutorialArrow3D")
-waypoint_ring = NodePath("TutorialArrow3D/WaypointArea3D")
 shift_start_sound = NodePath("ShiftStartSound")
 cam_spot = NodePath("Desk/PCCamera")
 default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
 day_5_tippy_whiteboard_disappear_area = NodePath("TutorialLocations/Day5TippyWhiteboardDisappearArea")
 whiteboard = NodePath("StartShiftWhiteboard")
-day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath("Desk/Day3DeskProps"), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
+day_containers_desk = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath("Desk/Day3DeskProps"), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
+day_containers_boxes = [NodePath("CafeEnvironment/DayDecorations_0"), NodePath("CafeEnvironment/DayDecorations_1"), NodePath("CafeEnvironment/DayDecorations_2"), NodePath("CafeEnvironment/DayDecorations_3"), NodePath("CafeEnvironment/DayDecorations_4"), NodePath("CafeEnvironment/DayDecorations_5")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
 _intro_email = ExtResource("6_gttkg")
+_random_emails = Array[ExtResource("8_ip2l3")]([ExtResource("9_s14wm"), ExtResource("10_q4gy1"), ExtResource("11_cnw22")])
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_cinematic_camera_voice_line_player", "_around_cafe_voice_line_players")]
 script = ExtResource("118_1slqb")
@@ -1625,26 +1601,26 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(1642, 390)
 sprite_frames = ExtResource("215_tcxth")
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
 process_mode = 3
 script = ExtResource("5_lquwl")
-profit_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
-profit_progress = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
-customer_happiness_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingIconLabel")
+profit_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
+profit_progress = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/MoneyBar")
+customer_happiness_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
 score_update_label = NodePath("../ScoreUpdate/ScoreUpdate")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
 game_timer = NodePath("../../../GameTimer")
-time_left_ui = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
-time_left_label = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
-time_left_bar = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
+time_left_ui = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI")
+time_left_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftText")
+time_left_bar = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer/TimeLeftBar")
 shift_starting_ending_label = NodePath("HUD/ShiftStartingEnding")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-cctv_indicator = NodePath("Tablet/MarginContainer/CctvIndicator")
+cctv_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/CctvIndicator")
 _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
@@ -1655,10 +1631,10 @@ shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
 shelf_item_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
 shelf_item_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
 shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
-day_indicator = NodePath("Tablet/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
-rating_stars_hbox = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
-rating_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
-customer_flow_rate_label = NodePath("Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
+day_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
+rating_stars_hbox = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
+rating_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
+customer_flow_rate_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate/FlowRateLabel")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
@@ -1672,6 +1648,16 @@ item_indicator = NodePath("Interactable/ItemIndicator")
 item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 _alert_packed_scene_uid = &"uid://j530u4ni603j"
+exploding_bomb_ui = NodePath("ExplodingBombUI")
+
+[node name="HoldingItemsCameraTextureRect" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=929551188]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_13qdw")
 
 [node name="Crosshair" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1676497832]
 layout_mode = 3
@@ -1704,230 +1690,21 @@ texture = ExtResource("28_4obbf")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Tablet" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=467673448 node_paths=PackedStringArray("machines_container", "item_icons")]
-custom_minimum_size = Vector2(550, 0)
-custom_maximum_size = Vector2(550, -1)
-anchors_preset = 2
-anchor_top = 1.0
+[node name="TabletSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1546138556]
+handle_input_locally = false
+size = Vector2i(631, 863)
+render_target_update_mode = 4
+
+[node name="TabletUI2D" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport" unique_id=1774289997 instance=ExtResource("254_l0ugm")]
+
+[node name="TabletAddonSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1732409839]
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport" unique_id=1769657425]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = -330.0
-offset_right = 600.0
-offset_bottom = 219.99976
-grow_vertical = 0
-rotation = 0.05235988
-size_flags_horizontal = 0
-mouse_behavior_recursive = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b2gp0")
-script = ExtResource("42_yf6j3")
-machines_container = NodePath("MarginContainer/Screen/MarginContainer/MachineContainer")
-machine_ui_scene = ExtResource("43_e4ynb")
-item_icons = NodePath("MarginContainer/Screen/HBoxContainer/ItemIcons")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet" unique_id=1632834486]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Screen" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer" unique_id=1640692384]
-layout_mode = 2
-
-[node name="TopBar" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=2056308306]
-custom_minimum_size = Vector2(0, 50)
-custom_maximum_size = Vector2(-1, 50)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar" unique_id=29320243]
-layout_mode = 2
-alignment = 1
-
-[node name="DayIndicator" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=586450203]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 32
-text = "day"
-horizontal_alignment = 1
-
-[node name="TimeUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer" unique_id=770158511]
-layout_mode = 2
-offset_transform_enabled = true
-offset_transform_scale = Vector2(0.9, 0.9)
-theme_override_styles/panel = SubResource("StyleBoxFlat_mjix0")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI" unique_id=27172397]
-layout_mode = 2
-
-[node name="TimeLeftText" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=2076268572]
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 24
-text = "⌛60s"
-
-[node name="TimeLeftBar" type="TextureProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/TopBar/HBoxContainer/TimeUI/HBoxContainer" unique_id=1649230487]
-texture_filter = 1
-custom_minimum_size = Vector2(60, 0)
-custom_maximum_size = Vector2(60, -1)
-layout_mode = 2
-size_flags_horizontal = 4
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(-0.25, -0.25)
-offset_transform_scale = Vector2(0.25, 0.25)
-fill_mode = 4
-texture_under = ExtResource("45_dfxmq")
-texture_over = ExtResource("46_kcoi7")
-texture_progress = ExtResource("47_rkju4")
-
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=1516433386]
-visible = false
-custom_minimum_size = Vector2(0, 175)
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-
-[node name="MachineContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/MarginContainer" unique_id=129505205]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-
-[node name="Scores" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=2066546892]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 10
-
-[node name="ScoreContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores" unique_id=1716672005]
-layout_mode = 2
-
-[node name="Scores" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer" unique_id=1534145091]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Money" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=103958680]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "$ 0"
-
-[node name="MoneyBar" type="ProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=709890735]
-modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
-custom_minimum_size = Vector2(450, 30)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 10
-show_percentage = false
-
-[node name="PanelContainer" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=67977046]
-layout_mode = 2
-
-[node name="Rating" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=375295033]
-layout_mode = 2
-
-[node name="RatingIconLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=653594015]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "🙂"
-
-[node name="RatingLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1356270481]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "⭐2.1"
-
-[node name="Stars" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=2112858348]
-visible = false
-layout_mode = 2
-
-[node name="Control" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1416898743]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer2" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1222881989]
-layout_mode = 2
-
-[node name="FlowRate" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=1381764519]
-layout_mode = 2
-
-[node name="FlowRateLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1993813866]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "10"
-label_settings = SubResource("LabelSettings_xrivr")
-
-[node name="FlowRateDescLabel" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=17476913]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
-text = "secs/custmr"
-label_settings = SubResource("LabelSettings_xrivr")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen" unique_id=84901258]
-layout_mode = 2
-alignment = 1
-
-[node name="ShowMousePrompt" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer" unique_id=726117337]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 0
-
-[node name="Mouse" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1897773976]
-custom_minimum_size = Vector2(50, 50)
-custom_maximum_size = Vector2(50, -1)
-layout_mode = 2
-texture = ExtResource("82_ip2l3")
-expand_mode = 3
-stretch_mode = 4
-
-[node name="Alt" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ShowMousePrompt" unique_id=1969538304]
-custom_minimum_size = Vector2(50, 50)
-custom_maximum_size = Vector2(50, -1)
-layout_mode = 2
-texture = ExtResource("83_s14wm")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="ItemIcons" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer" unique_id=1915478391]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="TabletItemIcon" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=427576900 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon2" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1657180576 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon3" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1886420684 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon4" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=522604125 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon5" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=1744749201 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="TabletItemIcon6" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer/Screen/HBoxContainer/ItemIcons" unique_id=602581531 instance=ExtResource("149_4v3l6")]
-layout_mode = 2
-
-[node name="CctvIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Tablet/MarginContainer" unique_id=1082245281]
-custom_minimum_size = Vector2(125, 110)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 0
-offset_transform_enabled = true
-texture = ExtResource("44_dfxmq")
-expand_mode = 2
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Interactable" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1696852801]
 custom_maximum_size = Vector2(-1, 75)
@@ -1986,6 +1763,38 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
 text = "[rainbow freq=0.1 sat=0.8 speed=-5.0][Q] HAMMER 💥[/rainbow]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExplodingBombUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1154891333]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -283.0
+offset_top = -262.0
+offset_right = -21.0
+offset_bottom = -141.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/ExplodingBombUI" unique_id=1588507118]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/ExplodingBombUI/MarginContainer" unique_id=1091145934]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[Right Click]
+Throw Bomb"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -2372,9 +2181,10 @@ irl_new_shop_items_indicator = NodePath("../../../../Desk/NewShopItemsPrompt")
 
 [node name="Viewmodel" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=70422245 instance=ExtResource("168_f4177")]
 
-[node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable") instance=ExtResource("136_kmrid")]
+[node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable", "locker_model") instance=ExtResource("136_kmrid")]
 visible = false
 locker_interactable = NodePath("../../../ItemLocker/Interactable")
+locker_model = NodePath("../../../ItemLocker/Model")
 
 [node name="TutorialCanvasLayer" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1790182858]
 process_mode = 3
@@ -2410,7 +2220,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CinematicCamera" type="Node3D" parent="." unique_id=400491935 node_paths=PackedStringArray("cinematic_bars", "camera_rig_node", "_camera_3d", "_animation_player", "_player_ui_sub_viewport_container", "_player_ui_sub_viewport")]
+[node name="CinematicCamera" type="Node3D" parent="." unique_id=400491935 node_paths=PackedStringArray("cinematic_bars", "camera_rig_node", "_camera_3d", "_animation_player", "_player_ui_sub_viewport_container")]
 physics_interpolation_mode = 2
 script = ExtResource("297_r4j87")
 cinematic_bars = NodePath("CinematicCameraCanvasLayer/CinematicBars")
@@ -2418,7 +2228,6 @@ camera_rig_node = NodePath("CameraRig")
 _camera_3d = NodePath("CameraRig/Camera3D")
 _animation_player = NodePath("CinematicCameraAnimationPlayer")
 _player_ui_sub_viewport_container = NodePath("../PlayerUiSubViewportContainer")
-_player_ui_sub_viewport = NodePath("../PlayerUiSubViewportContainer/SubViewport")
 
 [node name="CinematicCameraAnimationPlayer" type="AnimationPlayer" parent="CinematicCamera" unique_id=586888581]
 libraries/ = SubResource("AnimationLibrary_qwf4s")
@@ -2616,6 +2425,7 @@ metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="CinematicCamera/CameraRig" unique_id=609030686]
 transform = Transform3D(1.0000008, 4.5520276e-12, 4.7087674e-06, 0, 1.000001, -9.667141e-07, -4.7087674e-06, 9.66714e-07, 1.0000008, 0, 0, 0)
+cull_mask = 1048567
 
 [node name="TippyTabletCameraLocationRotation" type="Node3D" parent="CinematicCamera/CameraRig" unique_id=653395175]
 transform = Transform3D(1, 0, 0, 0, 0.17644243, -0.9843108, 0, 0.9843108, 0.17644249, 0, -0.041411042, -0.46492958)
@@ -2735,6 +2545,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.58133173, 0, 3.8)
 [node name="LeftAreaLeftMachine" parent="Machines" unique_id=979752853 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -2.8389482)
 
+[node name="Order Here Sign 2" parent="Machines/LeftAreaLeftMachine" unique_id=484677902 instance=ExtResource("289_ip2l3")]
+transform = Transform3D(-0.6606516, 0, -0.75069267, 0, 1, 0, 0.75069267, 0, -0.6606516, -0.77141905, -0.049999893, -1.4424014)
+
 [node name="LeftAreaMiddleMachine" parent="Machines" unique_id=1346980836 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.8, 0, -1.1309242)
 
@@ -2811,18 +2624,6 @@ texture = SubResource("ViewportTexture_ecwfn")
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
 
-[node name="TutorialArrow3D" type="Marker3D" parent="." unique_id=1492420713]
-transform = Transform3D(-0.62696517, 0, 1.0231885, 0, 1.1999999, 0, -1.0231885, 0, -0.62696517, -0.5431185, 1.0153728, 11.687397)
-visible = false
-gizmo_extents = 0.0
-script = ExtResource("84_ppx11")
-arrow_material = SubResource("StandardMaterial3D_ppx11")
-
-[node name="WaypointArea3D" type="Area3D" parent="TutorialArrow3D" unique_id=156454262]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TutorialArrow3D/WaypointArea3D" unique_id=1886631170]
-shape = SubResource("BoxShape3D_xrivr")
-
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
 [node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
@@ -2837,6 +2638,15 @@ one_shot = true
 transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.371138e-08, -0.29745173, 0, 18.028189)
 main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 
+[node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
+
+[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
+texture = SubResource("ViewportTexture_ip2l3")
+
+[node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="2" unique_id=831430551]
+texture = SubResource("ViewportTexture_s14wm")
+
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 top_level = true
@@ -2846,12 +2656,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.5
 
 [node name="PCCamera" type="Marker3D" parent="Desk" unique_id=319429800]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.1507349, 1, 0.16965067)
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Desk" unique_id=813063452]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5961485, 1.0120103, -0.16767144)
-light_color = Color(1, 0.8605, 0.69, 1)
-light_energy = 0.3
-omni_range = 4.186
 
 [node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4011619, -0.11735466, 10.078446)
@@ -3004,11 +2808,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
+[node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
+transform = Transform3D(0.00057010294, -0.00016215755, -0.99994475, 1.0259992e-07, 1, -0.00016214859, 0.99994475, -1.01539825e-08, 0.00057010294, -4.11582, -1.4201379, 0.23234849)
+
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
 
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.1202581, 0, 10.590218)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.705166, -0.089264415, 10.590218)
 
 [node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable", "_cooldown_timer_sprite", "_cooldown_timer_bar", "_spray_sound", "_collider_body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.684926, 1.3513618, 4.233103)
@@ -3080,6 +2887,7 @@ FRESHENER"
 [node name="SpraySound" type="AudioStreamPlayer3D" parent="AirFreshener" unique_id=1258576394]
 stream = ExtResource("282_xj0gb")
 
+[editable path="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/TabletUI2D"]
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/MiddleSecurityCam"]
@@ -3088,9 +2896,49 @@ stream = ExtResource("282_xj0gb")
 [editable path="SecurityCams/RightAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/HallwaySecurityCam"]
 [editable path="SecurityCams/HallwaySecurityCam/CameraAimerModel/Model/camera"]
+[editable path="Player"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
 [editable path="Desk/office desk/cranes"]
 [editable path="Desk/Sketchbooks, comics, rulers (1)"]
 [editable path="Desk/Lamp 1&5 (1)"]
+[editable path="Desk/Day0DeskProps/Sad Plants2"]
 [editable path="TrashCan"]
+[editable path="CafeEnvironment"]
+[editable path="CafeEnvironment/CustomerArea/MediumLights"]
+[editable path="CafeEnvironment/CustomerArea/FrontWindowAndDoor/glass window"]
+[editable path="CafeEnvironment/CustomerArea/Employee Area Cleaning Supplies4"]
+[editable path="CafeEnvironment/CustomerArea/ATMTIPPY"]
+[editable path="CafeEnvironment/CustomerArea/ceiling light2"]
+[editable path="CafeEnvironment/CustomerArea/ceiling light2/Ceiling Lamp2"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light/Ceiling Lamp2"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy8"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy15"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy10"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy11"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersA_Rust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers/LockersA_NoRust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersB_Rust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers6"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers3"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes"]
+[editable path="CafeEnvironment/StoreRoom/Employee Area Cleaning Supplies2"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy2"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Small Lockers8"]
+[editable path="CafeEnvironment/BreakRoom/LockerRoom/Tippy cutout3"]
+[editable path="CafeEnvironment/BreakRoom/Sad Plants"]
+[editable path="CafeEnvironment/BreakRoom/Sad Plants2"]
+[editable path="CafeEnvironment/DayDecorations_3/plastic and box2"]

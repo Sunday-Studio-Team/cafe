@@ -1,6 +1,8 @@
 extends RigidBody2D
 
 var time_counter_float: float = 0.0
+@export var animation_player: AnimationPlayer
+@export var sprite_2d: Sprite2D
 
 var seconds_passed: float = 0.0
 var is_bomb: bool = false
@@ -12,7 +14,7 @@ func _ready() -> void:
 	collision.set_deferred("disabled", true)
 	await get_tree().create_timer(0.25).timeout
 	collision.set_deferred("disabled", false)
-	
+	animation_player.play("flash")
 	pass # Replace with function body.
 
 
@@ -25,6 +27,7 @@ func _physics_process(delta: float) -> void:
 		if(get_collision_mask_value(1) ==false): 
 			set_collision_mask_value(1, true)
 		return
+	sprite_2d.rotation_degrees += 6
 	seconds_passed+=delta
 	if(is_bomb):
 		time_counter_float +=delta

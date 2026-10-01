@@ -1,0 +1,50 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://dlpjugrlxarqx"]
+
+[sub_resource type="Curve" id="Curve_46npm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5607735, 0.8125), 0.0, 0.0, 0, 0, Vector2(0.7817679, 0.36607146), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_jewrf"]
+curve = SubResource("Curve_46npm")
+
+[sub_resource type="Gradient" id="Gradient_5lq3x"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.5405405, 1)
+colors = PackedColorArray(0.9195882, 0.7810216, 3.080368e-06, 1, 0.9358277, 0.9358277, 0.93582755, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o1cbm"]
+gradient = SubResource("Gradient_5lq3x")
+
+[sub_resource type="Curve" id="Curve_5uu3k"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.1071429), 0.0, 0.0, 0, 0, Vector2(0.2569061, 0.32142878), 0.0, 0.0, 0, 0, Vector2(0.5662983, 1.8392857), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_nvofm"]
+curve = SubResource("Curve_5uu3k")
+
+[resource]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 2
+emission_sphere_radius = 10.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 307.02
+initial_velocity_max = 394.72998
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 0, 0)
+damping_min = 2.0
+damping_max = 3.0000002
+scale_min = 0.08
+scale_max = 0.13
+scale_curve = SubResource("CurveTexture_nvofm")
+color_ramp = SubResource("GradientTexture1D_o1cbm")
+alpha_curve = SubResource("CurveTexture_jewrf")
+turbulence_noise_strength = 20.0
+turbulence_noise_speed_random = 0.64
+turbulence_influence_min = 0.0
+turbulence_initial_displacement_min = 1.490116e-06
+turbulence_initial_displacement_max = 100.0
