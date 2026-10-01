@@ -192,6 +192,11 @@ var all_3d_audio_stream_players: Array[Node]
 var no_cooldowns := false
 
 
+func _enter_tree() -> void:
+	if OS.has_feature("demo_mode"):
+		Commands.wipe_save()
+
+
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
