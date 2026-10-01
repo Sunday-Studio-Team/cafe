@@ -114,6 +114,7 @@
 [ext_resource type="Texture2D" uid="uid://drt1xgcgk2wg2" path="res://Assets/ATM/ATMTIPPY_Machine_Base_color.png" id="110_dtddm"]
 [ext_resource type="Texture2D" uid="uid://bjcx5dl7ueuv7" path="res://Assets/ATM/ATMTIPPY_Machine_Base_color_1.png" id="111_fp6ic"]
 [ext_resource type="PackedScene" uid="uid://blc7m6sep56kx" path="res://Assets/Archways/unfinished_archway_2.tscn" id="114_a3sl0"]
+[ext_resource type="Script" uid="uid://dwdexvi2yrfaq" path="res://environment/day_light_controller.gd" id="115_7uylh"]
 
 [sub_resource type="Curve3D" id="Curve3D_02vyw"]
 _data = {
@@ -1118,6 +1119,50 @@ size = Vector3(50, 0.1, 50)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_77ylc"]
 plane = Plane(0, -1, 0, 0)
 
+[sub_resource type="Animation" id="Animation_a3sl0"]
+resource_name = "DayLightCycleAnimation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Lights/DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.6719518, -3.5325465, 2.5586526), Vector3(-0.17614426, -2.6672297, 1.4776195)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Lights/DirectionalLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 6.084]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Lights/DirectionalLight3D:light_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.51666665, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqqh4"]
+_data = {
+&"DayLightCycleAnimation": SubResource("Animation_a3sl0")
+}
+
 [node name="CafeEnvironment" type="Node3D" unique_id=672806017]
 
 [node name="Lights" type="Node3D" parent="." unique_id=213268664]
@@ -1170,9 +1215,10 @@ light_color = Color(1, 0.43137255, 0.7607843, 1)
 omni_range = 16.497
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1628539081]
-transform = Transform3D(-0.12413308, 0.9464894, -0.29790744, 0.53371537, 0.31678876, 0.78408724, 0.836504, -0.06166663, -0.5444799, 2.33942, 1.3398706, -10.122117)
-visible = false
-light_color = Color(1, 0.872, 0.52, 1)
+transform = Transform3D(0.12311061, 0.9292546, -0.3483241, 0.97099787, -0.040302876, 0.23566703, 0.2049562, -0.36723503, -0.9072659, 0.1867733, 3.1155891, -13.6352215)
+light_color = Color(1, 0.5579888, 0.08549416, 1)
+light_energy = 5.5854483
+light_indirect_energy = 2.192
 light_volumetric_fog_energy = 2.0
 light_specular = 3.614
 shadow_enabled = true
@@ -2785,6 +2831,14 @@ shape = SubResource("WorldBoundaryShape3D_77ylc")
 
 [node name="Unfinished Archway3" parent="." unique_id=213665061 instance=ExtResource("114_a3sl0")]
 transform = Transform3D(-6.151399e-08, 0, -1.4072759, 0, 1.4072759, 0, 1.4072759, 0, -6.151399e-08, -4.1361904, 0.050957896, 2.8652148)
+
+[node name="DayLightCycle" type="Node" parent="." unique_id=533788830]
+
+[node name="DayLightController" type="Node" parent="DayLightCycle" unique_id=970580763]
+script = ExtResource("115_7uylh")
+
+[node name="DayLightCycleAnimationPlayer" type="AnimationPlayer" parent="DayLightCycle" unique_id=230689952]
+libraries/ = SubResource("AnimationLibrary_bqqh4")
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/FrontWindowAndDoor/glass window"]
