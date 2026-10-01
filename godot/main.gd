@@ -51,7 +51,9 @@ extends Node3D
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
-@export var day_containers: Array[Node3D] = []
+@export var day_containers_desk: Array[Node3D] = []
+@export var day_containers_boxes: Array[Node3D] = []
+@export var day_containers_posters: Array[Node3D] = []
 
 const CAM_TWEEN_DUR := 0.45
 var original_cam_transform: Transform3D
@@ -127,12 +129,21 @@ func _ready() -> void:
 	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
-	# enables more desk props as the days go by
-	for i in range(day_containers.size()):
-		if day_containers[i] != null:
-			day_containers[i].visible = (i <= Global.day)
+	# enables props as the days go by
+	#could combine the loops to one loop but am not sure if all props will have equivaent 
+	#number of day props
+	for i in range(day_containers_desk.size()):
+		if day_containers_desk[i] != null:
+			day_containers_desk[i].visible = (i <= Global.day)
 			
-	
+	for i in range(day_containers_boxes.size()):
+		if day_containers_boxes[i] != null:
+			day_containers_boxes[i].visible = (i <= Global.day)
+			
+	for i in range(day_containers_posters.size()):
+		if day_containers_posters[i] != null:
+			day_containers_posters[i].visible = (i <= Global.day)
+			
 	# we have to set these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
