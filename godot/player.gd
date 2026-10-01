@@ -23,8 +23,11 @@ const STRIDE_LENGTH := 1.25
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
-@export var move_kaychain: AnimationPlayer
-@export var keychain: Node3D
+@export var keychain_animation_player: AnimationPlayer
+@export var tippy_tablet_3d: TippyTablet3D
+@export var tippy_tablet_normal_position_rotation: Node3D
+@export var tippy_tablet_up_front_position_rotation: Node3D
+
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
@@ -62,7 +65,6 @@ func _ready() -> void:
 	
 	free_cam_visualizer.visible = false
 
-	move_kaychain = keychain.get_node_or_null("AnimationPlayer") 
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -352,7 +354,8 @@ func flash_red():
 
 
 func handle_keychain_swing_animation() -> void:
-	if get_last_motion().length() > 0:
-		move_kaychain.play("KittyChainSwing")
-	else:
-		move_kaychain.play("IdleSway")
+	if keychain_animation_player != null:
+		if get_last_motion().length() > 0:
+			keychain_animation_player.play("KittyChainSwing")
+		else:
+			keychain_animation_player.play("IdleSway")

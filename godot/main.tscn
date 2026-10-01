@@ -1397,10 +1397,10 @@ point_count = 8
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2cfd8"]
-viewport_path = NodePath("../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
+viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_64ppg"]
-viewport_path = NodePath("../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
+viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
 
@@ -2654,10 +2654,10 @@ main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 [node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
 
-[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
+[node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
 texture = SubResource("ViewportTexture_2cfd8")
 
-[node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="2" unique_id=831430551]
+[node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
 texture = SubResource("ViewportTexture_64ppg")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
@@ -2917,10 +2917,10 @@ stream = ExtResource("282_xj0gb")
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
-[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
-[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
-[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
-[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel/keychainAnim"]
 [editable path="Desk"]
 [editable path="Desk/office desk"]
 [editable path="Desk/office desk/cranes"]
