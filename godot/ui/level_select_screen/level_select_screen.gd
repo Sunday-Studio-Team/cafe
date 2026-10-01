@@ -44,6 +44,7 @@ func _ready() -> void:
 	
 	# Load up the latest unlocked day
 	_day = SaveDataManager.save_data.latest_unlocked_day
+	_day = clamp(_day, 0, 5)
 	_old_page_level_view.set_splash_day(_day)
 	
 	_update_prev_next_buttons()
@@ -81,6 +82,7 @@ func _update_prev_next_buttons() -> void:
 func _on_previous_day_button_pressed() -> void:
 	var new_day: int = _day - 1
 	new_day = clampi(new_day, 0, SaveDataManager.save_data.latest_unlocked_day)
+	new_day = clamp(new_day, 0, 5)
 	if new_day == _day:
 		return
 	
@@ -113,6 +115,8 @@ func _on_previous_day_button_pressed() -> void:
 func _on_next_day_button_pressed() -> void:
 	var new_day: int = _day + 1
 	new_day = clampi(new_day, 0, SaveDataManager.save_data.latest_unlocked_day)
+	new_day = clamp(new_day, 0, 5)
+	
 	if new_day == _day:
 		return
 	
