@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b7a88k1j6gt32"]
+
+[ext_resource type="PackedScene" uid="uid://b6mq82cjr3w3" path="res://Assets/clock/Tippy_Clock.glb" id="1_1a4ah"]
+[ext_resource type="Shader" uid="uid://c4qy20n68aksc" path="res://tippy_clock.gdshader" id="2_qwtqo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfhkj"]
+render_priority = 0
+shader = ExtResource("2_qwtqo")
+shader_parameter/full_color = Color(2.5990605e-06, 0.45784628, 0.19003072, 1)
+shader_parameter/empty_color = Color(0.7738555, 2.23808e-06, 9.62615e-07, 1)
+shader_parameter/radius = 0.5
+
+[node name="Tippy_Clock" unique_id=1686326203 instance=ExtResource("1_1a4ah")]
+
+[node name="ANIMATED_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(600380608) index="0" unique_id=2063914422]
+surface_material_override/0 = SubResource("ShaderMaterial_hfhkj")
+
+[node name="FACE_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(600380608) index="5" unique_id=59567483]
+transform = Transform3D(1.6886691, 0, 0, 0, 1.6886688, -7.1054274e-15, 0, 0, 0.8767085, 0, -0.005531524, -0.14197628)
