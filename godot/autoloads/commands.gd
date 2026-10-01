@@ -188,7 +188,7 @@ func end_shift(arg: String = "") -> void:
 
 
 func set_day(day: String) -> void:
-	var final_day := Global.final_day
+	var final_day: int = Global.final_day
 	if int(day) > final_day:
 		Console.print_error("final day is day %s, can't set day higher than that :p" % final_day)
 		return
