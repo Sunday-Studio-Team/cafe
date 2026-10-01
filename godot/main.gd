@@ -137,9 +137,15 @@ func _ready() -> void:
 			day_containers_desk[i].visible = (i <= Global.day)
 			
 	for i in range(day_containers_boxes.size()):
-		if day_containers_boxes[i] != null:
-			day_containers_boxes[i].visible = (i <= Global.day)
-			
+		var box: Node3D = day_containers_boxes[i]
+		if box != null:
+			var should_show_box: bool = i <= Global.day
+			if should_show_box:
+				box.show()
+				box.process_mode = Node.ProcessMode.PROCESS_MODE_ALWAYS 
+			else:
+				box.hide()
+				box.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
 	for i in range(day_containers_posters.size()):
 		if day_containers_posters[i] != null:
 			day_containers_posters[i].visible = (i <= Global.day)
