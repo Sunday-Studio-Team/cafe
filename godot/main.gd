@@ -511,7 +511,6 @@ func shift_end_sequence(override: bool = false):
 		#Leaving this here in case you guys want this scene back again
 		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
 		else:
-			Global.day = 1
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
