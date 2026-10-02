@@ -110,8 +110,9 @@ func resize_grids() -> void:
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
-
-	handle_item_hover_tooltip()
+	
+	if visible:
+		handle_item_hover_tooltip()
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
