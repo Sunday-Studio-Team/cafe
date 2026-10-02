@@ -175,6 +175,8 @@ var tutorial_manager: TutorialManager
 var trash_punishment_threshold := 5
 var trash_punishment_amount := 0.2
 
+var low_fps_updaters: Array[LowFpsSubViewportUpdater] = []
+
 enum CameraMode {
 	PLAYER,
 	CINEMATIC,
