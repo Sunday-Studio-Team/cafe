@@ -25,7 +25,7 @@ func _ready() -> void:
 	)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if Global.in_loadout_menu:
 			get_viewport().set_input_as_handled()

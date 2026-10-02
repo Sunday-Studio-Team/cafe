@@ -2185,10 +2185,11 @@ irl_new_shop_items_indicator = NodePath("../../../../Desk/NewShopItemsPrompt")
 
 [node name="Viewmodel" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=70422245 instance=ExtResource("168_f4177")]
 
-[node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable", "locker_model") instance=ExtResource("136_kmrid")]
+[node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable", "locker_model", "locker_animation_player") instance=ExtResource("136_kmrid")]
 visible = false
 locker_interactable = NodePath("../../../ItemLocker/Interactable")
 locker_model = NodePath("../../../ItemLocker/Model")
+locker_animation_player = NodePath("../../../ItemLocker/AnimationPlayer")
 
 [node name="TutorialCanvasLayer" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1790182858]
 process_mode = 3
