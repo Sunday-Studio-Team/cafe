@@ -1686,10 +1686,12 @@ volume_db = -5.0
 [node name="WinMusic" type="AudioStreamPlayer" parent="." unique_id=638685281]
 stream = ExtResource("35_bxlob")
 volume_db = -10.0
+bus = &"DiegeticMusic"
 
 [node name="LoseMusic" type="AudioStreamPlayer" parent="." unique_id=1563178062]
 stream = ExtResource("36_q60pi")
 volume_db = -5.0
+bus = &"DiegeticMusic"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1431337349]
 anchors_preset = 15
