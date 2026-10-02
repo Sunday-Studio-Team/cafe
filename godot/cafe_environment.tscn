@@ -142,6 +142,7 @@
 [ext_resource type="Texture2D" uid="uid://bjcx5dl7ueuv7" path="res://Assets/ATM/ATMTIPPY_Machine_Base_color_1.png" id="111_fp6ic"]
 [ext_resource type="Material" uid="uid://bm1a63f4w1vsa" path="res://environment/textures/ceilinglights.tres" id="111_s7w1k"]
 [ext_resource type="PackedScene" uid="uid://blc7m6sep56kx" path="res://Assets/Archways/unfinished_archway_2.tscn" id="114_a3sl0"]
+[ext_resource type="Script" uid="uid://dwdexvi2yrfaq" path="res://environment/day_light_controller.gd" id="115_7uylh"]
 [ext_resource type="Texture2D" uid="uid://dl56pwrfe1sbd" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-color_2.png" id="114_d2otu"]
 [ext_resource type="Texture2D" uid="uid://bn3gmp6jugl5f" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-roughness_1_metal_rough_3.png" id="115_wpjnw"]
 [ext_resource type="PackedScene" uid="uid://ckftlfhrtvgqs" path="res://Assets/Archways/Emergency Door.glb" id="116_bqqh4"]
@@ -1392,6 +1393,49 @@ size = Vector3(50, 0.1, 50)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_77ylc"]
 plane = Plane(0, -1, 0, 0)
 
+[sub_resource type="Animation" id="Animation_a3sl0"]
+resource_name = "DayLightCycleAnimation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Lights/DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.6719518, -3.5325465, 2.5586526), Vector3(-0.17614426, -2.6672297, 1.4776195)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Lights/DirectionalLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 6.084]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Lights/DirectionalLight3D:light_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.51666665, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqqh4"]
+_data = {
+&"DayLightCycleAnimation": SubResource("Animation_a3sl0")
+}
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xabix"]
 resource_name = "Handle"
 
@@ -3720,6 +3764,15 @@ transform = Transform3D(-1.5192599, 0, -1.6391893e-07, 0, 1.3848317, 0, 1.328179
 
 [node name="TipJar Final (1)" parent="." unique_id=1523777541 instance=ExtResource("159_ke8eb")]
 transform = Transform3D(-0.8243823, 0, -0.16706392, 0, 0.8411401, 0, 0.16706392, 0, -0.8243823, 5.5211945, 0.9440559, 0.0374476)
+
+[node name="DayLightCycle" type="Node" parent="." unique_id=533788830]
+
+[node name="DayLightController" type="Node" parent="DayLightCycle" unique_id=970580763 node_paths=PackedStringArray("day_light_cycle_animation_player")]
+script = ExtResource("115_7uylh")
+day_light_cycle_animation_player = NodePath("../DayLightCycleAnimationPlayer")
+
+[node name="DayLightCycleAnimationPlayer" type="AnimationPlayer" parent="DayLightCycle" unique_id=230689952]
+libraries/ = SubResource("AnimationLibrary_bqqh4")
 
 [editable path="CustomerArea/MediumLights"]
 [editable path="CustomerArea/FrontWindowAndDoor/glass window"]
