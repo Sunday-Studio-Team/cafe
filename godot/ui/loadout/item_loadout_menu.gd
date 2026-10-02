@@ -57,7 +57,8 @@ func _ready() -> void:
 		func(_animation: StringName) -> void:
 			if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu): 
 				await get_tree().create_timer(3, false).timeout
-				locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
+				if not Global.in_loadout_menu:
+					locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 	)
 	
 
