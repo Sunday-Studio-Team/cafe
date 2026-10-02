@@ -2635,7 +2635,7 @@ transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0
 texture = SubResource("ViewportTexture_6ttiy")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
-transform = Transform3D(-1.1999999, 0, -1.0490733e-07, 0, 1.1999999, 0, 1.0490733e-07, 0, -1.1999999, 1.4470658, 1.2573626, 18.874012)
+transform = Transform3D(1.1007682, 0, -0.47781718, 0, 1.2, 0, 0.47781718, 0, 1.1007682, 2.3493953, 1.2573628, 14.395585)
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2648,11 +2648,11 @@ wait_time = 20.0
 one_shot = true
 
 [node name="Player" parent="." unique_id=1025923804 node_paths=PackedStringArray("main_room_spawn_point") instance=ExtResource("4_1bvp3")]
-transform = Transform3D(-4.371138e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.371138e-08, -0.29745173, 0, 18.028189)
+transform = Transform3D(0.9190937, 0, -0.39403895, 0, 1, 0, 0.39403895, 0, 0.9190937, 1.5212033, 0, 15.95289)
 main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 
 [node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.29745173, 1.6, 18.028189)
+transform = Transform3D(0.9190937, 0, -0.39403895, 0, 1, 0, 0.39403895, 0, 0.9190937, 1.5212033, 1.6, 15.95289)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
 texture = SubResource("ViewportTexture_2cfd8")
@@ -2665,7 +2665,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 top_level = true
 
 [node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.51916504, -0.10281545, 14.420577)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.18685444, -0.10281545, 13.920945)
 
 [node name="PCCamera" type="Marker3D" parent="Desk" unique_id=319429800]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.1507349, 1, 0.16965067)
@@ -2822,7 +2822,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057010277, -0.00016215755, -0.9999445, 1.0259989e-07, 1, -0.00016214856, 0.9999445, -1.01539825e-08, 0.00057010277, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010096, -0.00016215755, -0.9999413, 1.02599564e-07, 1, -0.00016214803, 0.9999413, -1.01539825e-08, 0.00057010096, -4.11582, -1.4201379, 0.23234849)
 
 [node name="Label3D4" type="Label3D" parent="CafeEnvironment/StoreRoom/Storage Arch" parent_id_path=PackedInt32Array(672806017, 847908752) index="1" unique_id=1148006303]
 transform = Transform3D(0.99999994, 0, 1.4210855e-14, 0, 1, 0, 0, 0, 1.0000005, 0.01610136, 0.8703489, 0.19787931)
@@ -2832,7 +2832,7 @@ text = "Storage"
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
 
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.705166, -0.089264415, 10.590218)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
 [node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable", "_cooldown_timer_sprite", "_cooldown_timer_bar", "_spray_sound", "_collider_body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.684926, 1.3513618, 4.233103)
@@ -2956,6 +2956,8 @@ stream = ExtResource("282_xj0gb")
 [editable path="CafeEnvironment/BreakRoom/LockerRoom/Locker tippy2"]
 [editable path="CafeEnvironment/BreakRoom/LockerRoom/Small Lockers8"]
 [editable path="CafeEnvironment/BreakRoom/LockerRoom/Tippy cutout3"]
-[editable path="CafeEnvironment/BreakRoom/Sad Plants"]
+[editable path="CafeEnvironment/BreakRoom/PCRoom/CeilingFan"]
+[editable path="CafeEnvironment/BreakRoom/PCRoom/CeilingFan2"]
 [editable path="CafeEnvironment/BreakRoom/Sad Plants2"]
+[editable path="CafeEnvironment/BreakRoom/Sad Plants3"]
 [editable path="CafeEnvironment/DayDecorations_3/plastic and box2"]
