@@ -52,7 +52,6 @@ func _ready() -> void:
 					locker_model.close_door()
 					locker_close_sound.play()
 	)
-	locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 	locker_animation_player.animation_finished.connect(
 		func(_animation: StringName) -> void:
 			if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu): 
@@ -60,6 +59,8 @@ func _ready() -> void:
 				if not Global.in_loadout_menu:
 					locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 	)
+	await get_tree().create_timer(10, false).timeout
+	locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 	
 
 func populate() -> void:
