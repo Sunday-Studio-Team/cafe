@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dtbfgptmi7ixs"]
 
 [ext_resource type="PackedScene" uid="uid://dqlyv7lvq0eny" path="res://Assets/signs/Let's pay.glb" id="1_qok1s"]
+[ext_resource type="PackedScene" uid="uid://dg0qq05yew2il" path="res://Assets/street_buildings/Scenes/street_buildings.tscn" id="2_0sxr1"]
 [ext_resource type="PackedScene" uid="uid://cd5pgbqeaiux7" path="res://Assets/signs/caife.tscn" id="2_5utbh"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="3_a4lwu"]
 [ext_resource type="Texture2D" uid="uid://bbjb7d0asfulw" path="res://sprites/customers/aiagent.png" id="3_jom5y"]
@@ -2026,6 +2027,9 @@ spot_angle = 68.17
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1201560433]
 environment = ExtResource("82_4nsdn")
 
+[node name="StreetBuildings" parent="." unique_id=321260437 instance=ExtResource("2_0sxr1")]
+transform = Transform3D(-1.4765462e-07, 0, -3.3779438, 0, 3.3779438, 0, 3.3779438, 0, -1.4765462e-07, 0, 0, -16.694443)
+
 [node name="ExteriorStreet" type="Node3D" parent="." unique_id=229154315]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.1, -4)
 
@@ -2068,7 +2072,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.000570099, -0.00016215755, -0.9999379, 1.02599216e-07, 1, -0.00016214748, 0.9999379, -1.01539825e-08, 0.000570099, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009887, -0.00016215755, -0.99993765, 1.0259919e-07, 1, -0.00016214744, 0.99993765, -1.01539825e-08, 0.00057009887, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
