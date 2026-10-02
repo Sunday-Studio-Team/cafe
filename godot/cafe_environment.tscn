@@ -1215,9 +1215,8 @@ light_color = Color(1, 0.43137255, 0.7607843, 1)
 omni_range = 16.497
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1628539081]
-transform = Transform3D(0.12311061, 0.9292546, -0.3483241, 0.97099787, -0.040302876, 0.23566703, 0.2049562, -0.36723503, -0.9072659, 0.1867733, 3.1155891, -13.6352215)
-light_color = Color(1, 0.5579888, 0.08549416, 1)
-light_energy = 5.5854483
+transform = Transform3D(0.6412691, 0.70698905, 0.2982289, 0.43081075, -0.65335876, 0.62251467, 0.6349615, -0.27071923, -0.72355723, 0.1867733, 3.1155891, -13.6352215)
+light_energy = 2.0
 light_indirect_energy = 2.192
 light_volumetric_fog_energy = 2.0
 light_specular = 3.614
@@ -2834,8 +2833,9 @@ transform = Transform3D(-6.151399e-08, 0, -1.4072759, 0, 1.4072759, 0, 1.4072759
 
 [node name="DayLightCycle" type="Node" parent="." unique_id=533788830]
 
-[node name="DayLightController" type="Node" parent="DayLightCycle" unique_id=970580763]
+[node name="DayLightController" type="Node" parent="DayLightCycle" unique_id=970580763 node_paths=PackedStringArray("day_light_cycle_animation_player")]
 script = ExtResource("115_7uylh")
+day_light_cycle_animation_player = NodePath("../DayLightCycleAnimationPlayer")
 
 [node name="DayLightCycleAnimationPlayer" type="AnimationPlayer" parent="DayLightCycle" unique_id=230689952]
 libraries/ = SubResource("AnimationLibrary_bqqh4")
