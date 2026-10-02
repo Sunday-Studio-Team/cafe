@@ -14,6 +14,7 @@ extends Control
 @export var click_sound: AudioStreamPlayer
 var new_shop_items := true
 		
+		
 func _ready() -> void:
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
@@ -46,7 +47,7 @@ func _ready() -> void:
 
 	for email_app_list_item in email_app.email_app_list_items:
 		email_app_list_item.email_pressed.connect(
-				func() -> void:
+				func(_email_app_list_item: EmailAppListItem) -> void:
 					click_sound.play()
 		)
 
