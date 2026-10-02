@@ -401,9 +401,6 @@ bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjuso"]
 bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
-bg_color = Color(0.9882353, 0.91764706, 0.003921569, 1)
-
 [sub_resource type="Animation" id="Animation_r4j87"]
 length = 0.001
 tracks/0/type = "position_3d"
@@ -1608,7 +1605,7 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(1642, 390)
 sprite_frames = ExtResource("215_tcxth")
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "shelf_item_ui", "shelf_item_name", "shelf_item_description", "shelf_item_active_indicator", "shelf_item_cooldown_label", "shelf_item_passive_indicator", "shelf_item_sold_indicator", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "stamina_bar", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "customer_happiness_label", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "game_timer", "time_left_ui", "time_left_label", "time_left_bar", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "day_indicator", "rating_stars_hbox", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 profit_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/Money")
@@ -1631,13 +1628,6 @@ cctv_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/CctvIndi
 _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
-shelf_item_ui = NodePath("HUD/ShelfItem")
-shelf_item_name = NodePath("HUD/ShelfItem/VBoxContainer/Name")
-shelf_item_description = NodePath("HUD/ShelfItem/VBoxContainer/Description")
-shelf_item_active_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Active")
-shelf_item_cooldown_label = NodePath("HUD/ShelfItem/VBoxContainer/Active/HBoxContainer/CooldownLabel")
-shelf_item_passive_indicator = NodePath("HUD/ShelfItem/VBoxContainer/Passive")
-shelf_item_sold_indicator = NodePath("HUD/ShelfItem/ShelfItemSold/Label")
 day_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
 rating_stars_hbox = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/Stars")
 rating_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/RatingLabel")
@@ -1650,7 +1640,6 @@ item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/A
 item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Active/HBoxContainer/CooldownLabel")
 item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
-stamina_bar = NodePath("StaminaBar")
 item_indicator = NodePath("Interactable/ItemIndicator")
 item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
@@ -1889,105 +1878,6 @@ text = "
 scroll_active = false
 horizontal_alignment = 1
 
-[node name="ShelfItem" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD" unique_id=898520236]
-modulate = Color(1, 1, 1, 0.98039216)
-custom_minimum_size = Vector2(500, 250)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem" unique_id=259568750]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer" unique_id=1662140889]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/bold_font_size = 53
-bbcode_enabled = true
-text = "[b]Item Name[/b]"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Active" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer" unique_id=2062460218]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_h0sjo")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer/Active" unique_id=585615415]
-layout_mode = 2
-alignment = 1
-
-[node name="ActiveLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer/Active/HBoxContainer" unique_id=590042369]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "[b]ACTIVE[/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="CooldownLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer/Active/HBoxContainer" unique_id=935610494]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "(xs cooldown)"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Passive" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer" unique_id=61637865]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pjuso")
-
-[node name="Label" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer/Passive" unique_id=1393032447]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "[b]PASSIVE[/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/VBoxContainer" unique_id=1739048215]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 32
-text = "item description (blah blah blah blah blah )"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-
-[node name="ShelfItemSold" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem" unique_id=577218032]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_rotation = -0.08726646
-theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
-
-[node name="Label" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShelfItem/ShelfItemSold" unique_id=2040053351]
-visible = false
-layout_mode = 2
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 64
-text = "SOLD: $5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ItemHoverTooltip" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1202178015]
 visible = false
 modulate = Color(1, 1, 1, 0.98039216)
@@ -2085,15 +1975,6 @@ text = "item description (blah blah blah blah blah )"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
-
-[node name="StaminaBar" type="ProgressBar" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=72741199]
-custom_minimum_size = Vector2(500, 25)
-offset_left = 710.0
-offset_top = 1043.0
-offset_right = 1210.0
-offset_bottom = 1068.0
-size_flags_horizontal = 4
-show_percentage = false
 
 [node name="MoneySound" type="AudioStreamPlayer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=220836306]
 stream = ExtResource("7_5vw27")
@@ -2852,7 +2733,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005701005, -0.00016215755, -0.9999405, 1.02599486e-07, 1, -0.0001621479, 0.9999405, -1.01539825e-08, 0.0005701005, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010044, -0.00016215755, -0.9999404, 1.0259947e-07, 1, -0.00016214789, 0.9999404, -1.01539825e-08, 0.00057010044, -4.11582, -1.4201379, 0.23234849)
 
 [node name="Label3D4" type="Label3D" parent="CafeEnvironment/StoreRoom/Storage Arch" parent_id_path=PackedInt32Array(672806017, 847908752) index="1" unique_id=1148006303]
 transform = Transform3D(0.99999994, 0, 1.4210855e-14, 0, 1, 0, 0, 0, 1.0000005, 0.01610136, 0.8703489, 0.19787931)

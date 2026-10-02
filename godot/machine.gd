@@ -302,7 +302,7 @@ func _process_queued_customers() -> void:
 func check_for_stepping_in_spill() -> void:
 	if spill_on_floor:
 		var rating_loss: float = Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
-		Events.alert_posted.emit("-%s A customer stood in a spill!" % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+		Events.alert_posted.emit("-%s A customer stood in a spill!" % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 		Global.employee_rating -= rating_loss
 
 
@@ -383,7 +383,7 @@ func _set_customer(new_customer: Customer) -> void:
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if customer == timed_out_customer:
 		var rating_loss: float = Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
-		Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+		Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 		Global.employee_rating -= rating_loss
 		customer.leave_store()
 		_set_customer(null)
@@ -610,7 +610,7 @@ func _calculate_drink_diff(correct_drink: Drink, made_drink: Drink) -> int:
 func spill() -> void:
 	spill_interactable.show()
 	spill_sound.play()
-	Events.alert_posted.emit("A machine spilled!", UI.AlertIconType.MACHINE, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+	Events.alert_posted.emit("A machine spilled!", UI.AlertIconType.MACHINE, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 	Global.spills_this_shift += 1
 	spill_on_floor = true
 
@@ -716,7 +716,7 @@ func clean_up_spill() -> void:
 	spill_clean_particles.restart()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_GREEN)
+	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gained
 
 
@@ -865,7 +865,7 @@ func break_down() -> void:
 	Events.alert_posted.emit(
 			"A machine has broken down!",
 			UI.AlertIconType.MACHINE,
-			UI.ALERT_DEFUALT_DURATION,
+			UI.ALERT_DEFAULT_DURATION,
 			UI.ALERT_COLOR_RED
 	)
 	Global.breakdowns_this_shift += 1

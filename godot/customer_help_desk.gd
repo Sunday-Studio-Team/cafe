@@ -84,7 +84,7 @@ func _set_customer(new_customer: Customer) -> void:
 			_desk_customer.timer.start()
 			_desk_customer.waiting_indicator.show()
 		bell_sound.play()
-		Events.alert_posted.emit("A customer needs help!", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+		Events.alert_posted.emit("A customer needs help!", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		_help_desk_interactable.visible = true
 	else:
 		_help_desk_interactable.visible = false
@@ -94,7 +94,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	timed_out_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out)
 	if _desk_customer == timed_out_customer:
 		var rating_loss: float = Stats.current.help_desk_customer_timed_out_rating_loss_each_day[Global.day]
-		Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+		Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 		Global.employee_rating -= rating_loss
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
@@ -119,7 +119,7 @@ func _on_minigame_end() -> void:
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 	
 	var rating_gain: float = Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("+%s Customer placated!" % rating_gain, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_GREEN)
+	Events.alert_posted.emit("+%s Customer placated!" % rating_gain, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gain
 	Global.active_help_desk_customer.timer.stop()
 	Global.active_help_desk_customer.leave_store()
