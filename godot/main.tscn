@@ -1424,7 +1424,7 @@ height = 0.78808594
 [sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
 viewport_path = NodePath("AirFreshener/CooldownTimerSprite/SubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "teleporter4", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1459,9 +1459,10 @@ _trash_can = NodePath("TrashCan")
 minigame_controller = NodePath("PlayerUiSubViewportContainer/SubViewport/MinigameController")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
-teleporter1 = NodePath("Teleporter1")
-teleporter2 = NodePath("Teleporter2")
-teleporter3 = NodePath("Teleporter3")
+teleporter1 = NodePath("Teleporter1-FrontToRight")
+teleporter2 = NodePath("Teleporter2-FrontToLeft")
+teleporter3 = NodePath("Teleporter3-LeftToFront")
+teleporter4 = NodePath("Teleporter4-RightToFront")
 air_freshener = NodePath("AirFreshener")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
 shift_start_sound = NodePath("ShiftStartSound")
@@ -2709,8 +2710,8 @@ transform = Transform3D(-0.785986, 0, -0.61824423, 0, 1, 0, 0.61824423, 0, -0.78
 [node name="IngredientSpawnMarker3D6" type="Marker3D" parent="IngredientSpawner" unique_id=1211296652]
 transform = Transform3D(-0.5060448, 0, 0.86250716, 0, 1, 0, -0.86250716, 0, -0.5060448, 5.56843, -0.7501248, -13.627114)
 
-[node name="Teleporter1" type="Area3D" parent="." unique_id=247187360 node_paths=PackedStringArray("destination", "use_sound")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.987885, 0, 8.42525)
+[node name="Teleporter1-FrontToRight" type="Area3D" parent="." unique_id=247187360 node_paths=PackedStringArray("destination", "use_sound")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 collision_layer = 7
 collision_mask = 15
 monitoring = false
@@ -2718,26 +2719,25 @@ script = ExtResource("97_sn1fb")
 destination = NodePath("Marker3D")
 use_sound = NodePath("../UseTeleportSound")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter1" unique_id=731332946]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.2514602, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter1-FrontToRight" unique_id=731332946]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.14847738, 0.2514602, -4.0390205)
 shape = SubResource("BoxShape3D_punm7")
 
-[node name="Label3D" type="Label3D" parent="Teleporter1/CollisionShape3D" unique_id=790686180]
+[node name="Label3D" type="Label3D" parent="Teleporter1-FrontToRight/CollisionShape3D" unique_id=790686180]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 text = "step on to teleport"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter1/CollisionShape3D" unique_id=2091540570]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter1-FrontToRight/CollisionShape3D" unique_id=2091540570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
 mesh = SubResource("BoxMesh_xnu58")
 
-[node name="Marker3D" type="Marker3D" parent="Teleporter1" unique_id=743376530]
-transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, -7.5824304, 0, -6.8695865)
+[node name="Marker3D" type="Marker3D" parent="Teleporter1-FrontToRight" unique_id=743376530]
+transform = Transform3D(-1.0530023e-07, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -1.0530023e-07, 6.3270507, 0, -5.504344)
 
-[node name="FacingMarker3D" type="Marker3D" parent="Teleporter1/Marker3D" unique_id=2006567238]
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter1-FrontToRight/Marker3D" unique_id=2006567238]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="Teleporter2" type="Area3D" parent="." unique_id=469409372 node_paths=PackedStringArray("destination", "use_sound")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.134, 0, 2.016)
+[node name="Teleporter2-FrontToLeft" type="Area3D" parent="." unique_id=469409372 node_paths=PackedStringArray("destination", "use_sound")]
 collision_layer = 7
 collision_mask = 15
 monitoring = false
@@ -2745,26 +2745,25 @@ script = ExtResource("97_sn1fb")
 destination = NodePath("Marker3D")
 use_sound = NodePath("../UseTeleportSound")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter2" unique_id=1650664057]
-transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -0.06488752, 0.26131332, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter2-FrontToLeft" unique_id=1650664057]
+transform = Transform3D(-1.589326e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -1.589326e-08, -3.0049353, 0.26131344, 2.2623212)
 shape = SubResource("BoxShape3D_punm7")
 
-[node name="Label3D" type="Label3D" parent="Teleporter2/CollisionShape3D" unique_id=1046926191]
+[node name="Label3D" type="Label3D" parent="Teleporter2-FrontToLeft/CollisionShape3D" unique_id=1046926191]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 text = "step on to teleport"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter2/CollisionShape3D" unique_id=966457308]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter2-FrontToLeft/CollisionShape3D" unique_id=966457308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
 mesh = SubResource("BoxMesh_xnu58")
 
-[node name="Marker3D" type="Marker3D" parent="Teleporter2" unique_id=456152824]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.497669, 0, -0.41641974)
+[node name="Marker3D" type="Marker3D" parent="Teleporter2-FrontToLeft" unique_id=456152824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.757659, 0, -0.10223174)
 
-[node name="FacingMarker3D" type="Marker3D" parent="Teleporter2/Marker3D" unique_id=966291062]
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter2-FrontToLeft/Marker3D" unique_id=966291062]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
-[node name="Teleporter3" type="Area3D" parent="." unique_id=1924229073 node_paths=PackedStringArray("destination", "use_sound")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2494335, 0, -2.7986898)
+[node name="Teleporter3-LeftToFront" type="Area3D" parent="." unique_id=1924229073 node_paths=PackedStringArray("destination", "use_sound")]
 collision_layer = 7
 collision_mask = 15
 monitoring = false
@@ -2772,22 +2771,48 @@ script = ExtResource("97_sn1fb")
 destination = NodePath("Marker3D")
 use_sound = NodePath("../UseTeleportSound")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter3" unique_id=554001673]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.064888, 0.26131332, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter3-LeftToFront" unique_id=554001673]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9.099619, 0.26131332, 0.044291377)
 shape = SubResource("BoxShape3D_punm7")
 
-[node name="Label3D" type="Label3D" parent="Teleporter3/CollisionShape3D" unique_id=541196362]
+[node name="Label3D" type="Label3D" parent="Teleporter3-LeftToFront/CollisionShape3D" unique_id=541196362]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 text = "step on to teleport"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter3/CollisionShape3D" unique_id=583088529]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter3-LeftToFront/CollisionShape3D" unique_id=583088529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
 mesh = SubResource("BoxMesh_xnu58")
 
-[node name="Marker3D" type="Marker3D" parent="Teleporter3" unique_id=1836870035]
-transform = Transform3D(1.1920929e-07, 0, 1, 0, 1, 0, -1, 0, 1.1920929e-07, 11.307452, 1.1920929e-07, 10.258867)
+[node name="Marker3D" type="Marker3D" parent="Teleporter3-LeftToFront" unique_id=1836870035]
+transform = Transform3D(1, 0, -1.6292068e-07, 0, 1, 0, 1.6292068e-07, 0, 1, -1.5264506, 1.1920929e-07, 2.2927613)
 
-[node name="FacingMarker3D" type="Marker3D" parent="Teleporter3/Marker3D" unique_id=1894647867]
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter3-LeftToFront/Marker3D" unique_id=1894647867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Teleporter4-RightToFront" type="Area3D" parent="." unique_id=1008485860 node_paths=PackedStringArray("destination", "use_sound")]
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("97_sn1fb")
+destination = NodePath("Marker3D")
+use_sound = NodePath("../UseTeleportSound")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter4-RightToFront" unique_id=1191647059]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 6.8446107, 0.26131332, 6.2552495)
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Label3D" type="Label3D" parent="Teleporter4-RightToFront/CollisionShape3D" unique_id=1484805586]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter4-RightToFront/CollisionShape3D" unique_id=357712195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3659668, 0)
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="Marker3D" type="Marker3D" parent="Teleporter4-RightToFront" unique_id=1055653901]
+transform = Transform3D(-1, 0, 2.5034345e-07, 0, 1, 0, -2.5034345e-07, 0, -1, 2.522176, 1.1920929e-07, 0.114982665)
+
+[node name="FacingMarker3D" type="Marker3D" parent="Teleporter4-RightToFront/Marker3D" unique_id=2147265807]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="UseTeleportSound" type="AudioStreamPlayer" parent="." unique_id=730557756]
