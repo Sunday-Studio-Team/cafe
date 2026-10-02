@@ -83,7 +83,7 @@ func close_game():
 
 	await t.finished
 
-	if sub_viewport.get_child(0):
+	if sub_viewport.get_children().size() > 0:
 		sub_viewport.get_child(0).queue_free()
 	if sub_viewport.gui_is_dragging():
 		sub_viewport.gui_cancel_drag()

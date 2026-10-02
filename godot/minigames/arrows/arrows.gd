@@ -188,20 +188,20 @@ func set_tippy_image(tippy_texture: Texture) -> void:
 
 func shake_tippy() -> void:
 	var panel_original_position: Vector2 = tippy_image.position
-	var tween = tippy_image.create_tween()
-	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+	var shake_tween := tippy_image.create_tween()
+	var shake_offset_target := Vector2(randf_range(-shake_intensity, shake_intensity), 0)
 
-	tween.tween_property(tippy_image, "position", tippy_image.position + shake_offset_target, 0.025)
+	shake_tween.tween_property(tippy_image, "position", tippy_image.position + shake_offset_target, 0.025)
 	for i in range(10):
 		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
-		tween.chain().tween_property(
+		shake_tween.chain().tween_property(
 			tippy_image,
 			"position",
 			tippy_image.position + shake_offset_target,
 			0.025,
 		)
 
-	tween.tween_property(tippy_image, "position", panel_original_position, 0.1)
+	shake_tween.tween_property(tippy_image, "position", panel_original_position, 0.1)
 
 func reset_minigame():
 	blue_textures = []
