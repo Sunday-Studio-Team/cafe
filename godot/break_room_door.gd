@@ -12,7 +12,10 @@ extends Node3D
 func _ready() -> void:
 	# we dont have the locker on first run of day 1 so opening the door 
 	# cant be locked behind the loadout thing
-	if SaveDataManager.save_data.latest_unlocked_day < 2:
+	if (
+			SaveDataManager.save_data.latest_unlocked_day < 2
+			or OS.has_feature("spawn_in_main_room_instead_of_office")
+	):
 		open_door()
 	else:
 		Events.player_confirmed_item_loadout.connect(open_door)
