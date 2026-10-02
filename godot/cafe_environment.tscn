@@ -142,8 +142,8 @@
 [ext_resource type="Texture2D" uid="uid://bjcx5dl7ueuv7" path="res://Assets/ATM/ATMTIPPY_Machine_Base_color_1.png" id="111_fp6ic"]
 [ext_resource type="Material" uid="uid://bm1a63f4w1vsa" path="res://environment/textures/ceilinglights.tres" id="111_s7w1k"]
 [ext_resource type="PackedScene" uid="uid://blc7m6sep56kx" path="res://Assets/Archways/unfinished_archway_2.tscn" id="114_a3sl0"]
-[ext_resource type="Script" uid="uid://dwdexvi2yrfaq" path="res://environment/day_light_controller.gd" id="115_7uylh"]
 [ext_resource type="Texture2D" uid="uid://dl56pwrfe1sbd" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-color_2.png" id="114_d2otu"]
+[ext_resource type="Script" uid="uid://dwdexvi2yrfaq" path="res://environment/day_light_controller.gd" id="115_7uylh"]
 [ext_resource type="Texture2D" uid="uid://bn3gmp6jugl5f" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-roughness_1_metal_rough_3.png" id="115_wpjnw"]
 [ext_resource type="PackedScene" uid="uid://ckftlfhrtvgqs" path="res://Assets/Archways/Emergency Door.glb" id="116_bqqh4"]
 [ext_resource type="PackedScene" uid="uid://b8t42cfiudwf0" path="res://Assets/storage_boxes/plastic_and_box_2.tscn" id="117_27wgr"]
@@ -1393,49 +1393,6 @@ size = Vector3(50, 0.1, 50)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_77ylc"]
 plane = Plane(0, -1, 0, 0)
 
-[sub_resource type="Animation" id="Animation_a3sl0"]
-resource_name = "DayLightCycleAnimation"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Lights/DirectionalLight3D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.02, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.6719518, -3.5325465, 2.5586526), Vector3(-0.17614426, -2.6672297, 1.4776195)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Lights/DirectionalLight3D:light_energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.0, 6.084]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Lights/DirectionalLight3D:light_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.96),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0.51666665, 0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqqh4"]
-_data = {
-&"DayLightCycleAnimation": SubResource("Animation_a3sl0")
-}
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xabix"]
 resource_name = "Handle"
 
@@ -1937,6 +1894,50 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_08r2t")
 
+[sub_resource type="Animation" id="Animation_a3sl0"]
+resource_name = "DayLightCycleAnimation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Lights/DirectionalLight3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.6719518, -3.5325465, 2.5586526), Vector3(-0.17614426, -2.6672297, 1.4776195)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Lights/DirectionalLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 6.084]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Lights/DirectionalLight3D:light_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.51666665, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqqh4"]
+_data = {
+&"DayLightCycleAnimation": SubResource("Animation_a3sl0")
+}
+
 [node name="CafeEnvironment" type="Node3D" unique_id=672806017]
 
 [node name="Lights" type="Node3D" parent="." unique_id=213268664]
@@ -1997,7 +1998,6 @@ omni_range = 16.497
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1628539081]
 transform = Transform3D(-0.12413308, 0.9464894, -0.29790744, 0.53371537, 0.31678876, 0.78408724, 0.836504, -0.06166663, -0.5444799, 2.33942, 1.3398706, -10.122117)
-visible = false
 layers = 9
 light_color = Color(1, 0.872, 0.52, 1)
 light_volumetric_fog_energy = 2.0
@@ -2068,7 +2068,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057009904, -0.00016215755, -0.99993795, 1.0259922e-07, 1, -0.0001621475, 0.99993795, -1.01539825e-08, 0.00057009904, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.000570099, -0.00016215755, -0.9999379, 1.02599216e-07, 1, -0.00016214748, 0.9999379, -1.01539825e-08, 0.000570099, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
