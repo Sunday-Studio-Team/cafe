@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dqlyv7lvq0eny" path="res://Assets/signs/Let's pay.glb" id="1_qok1s"]
 [ext_resource type="PackedScene" uid="uid://cd5pgbqeaiux7" path="res://Assets/signs/caife.tscn" id="2_5utbh"]
-[ext_resource type="PackedScene" uid="uid://blce12e8ntnmw" path="res://Assets/Street/Building 6.glb" id="2_d2otu"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="3_a4lwu"]
 [ext_resource type="PackedScene" uid="uid://cja7slsposkuo" path="res://Assets/ceiling light 1/Modern Interior Ceiling Light.glb" id="4_j0jbx"]
 [ext_resource type="PackedScene" uid="uid://b7lkrbc1y0a24" path="res://Assets/ceiling light 1/Ceiling Lamps 3D Model.glb" id="5_omxm3"]
@@ -1280,9 +1279,6 @@ environment = ExtResource("82_4nsdn")
 
 [node name="ExteriorStreet" type="Node3D" parent="." unique_id=229154315]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.1, -4)
-
-[node name="Building 62" parent="ExteriorStreet" unique_id=1455590819 instance=ExtResource("2_d2otu")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 12.247062, -0.051071204, -14.999596)
 
 [node name="CarSpawner" type="Path3D" parent="ExteriorStreet" unique_id=1294804828 node_paths=PackedStringArray("timer", "car_sprite", "path_follow")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2199564, 2.5736287, -8.233028)
