@@ -10,6 +10,9 @@ const OPEN_CLOSE_TWEEN_DUR := 0.1
 
 
 func _ready() -> void:
+	Events.minigame_active.connect(play_minigame)
+	Events.minigame_end.connect(close_game)
+	
 	Events.time_up.connect(
 		func():
 			if Global.minigame_active:
@@ -24,11 +27,13 @@ func _ready() -> void:
 			Events.minigame_cancelled.emit(),
 	)
 
+
 func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed("pause") and Global.minigame_active:
 		close_game()
 		Events.minigame_cancelled.emit()
 		get_viewport().set_input_as_handled()
+
 
 func play_minigame(minigame_name: String):
 	var minigame_uid: StringName = _minigame_uids_dict.get(minigame_name)

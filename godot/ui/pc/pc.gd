@@ -5,7 +5,7 @@ extends Control
 @export var shop_button: Button
 @export var email_app: PCApp
 @export var exit_button: Button
-@export var gui_3d: Main
+@export var desk: Desk
 @export var screen_content_container: Control
 ## regular game hud
 @export var ui: CanvasLayer
@@ -76,6 +76,7 @@ func _on_visibility_changed() -> void:
 func _process(_delta: float) -> void:
 	Global.in_pc_ui = visible
 		
+		
 func exit() -> void:
 	var t := create_tween()
 	t.tween_property(screen_content_container, "offset_transform_scale:y", 0, 0.2)
@@ -83,7 +84,7 @@ func exit() -> void:
 	await t.finished
 	
 	email_app.hide()
-	gui_3d.exit_with_camera_tween()
+	desk.pc_interaction_camera_exit_transition()
 	Events.pc_state_change.emit(false)
 	hide()
 

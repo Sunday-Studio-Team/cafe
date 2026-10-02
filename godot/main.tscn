@@ -1424,13 +1424,11 @@ height = 0.78808594
 [sub_resource type="ViewportTexture" id="ViewportTexture_fkmie"]
 viewport_path = NodePath("AirFreshener/CooldownTimerSprite/SubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_pause_menu", "_tutorial_popups_manager", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "pc_ui", "_trash_can", "minigame_controller", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "teleporter4", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "_customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "day_indicator", "desk", "_trash_can", "clock_item_stop_sound", "clock_item_start_sound", "teleporter1", "teleporter2", "teleporter3", "teleporter4", "air_freshener", "tutorial_selection_menu", "shift_start_sound", "cam_spot", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
 _voice_line_system = NodePath("VoiceLineSystem")
-_pause_menu = NodePath("PauseMenu")
-_tutorial_popups_manager = NodePath("TutorialPopupsManager")
 _tutorial_manager = NodePath("TutorialManager")
 _world_environment = NodePath("CafeEnvironment/WorldEnvironment")
 _left_area_camera = NodePath("SecurityCams/LeftAreaSecurityCam")
@@ -1453,10 +1451,8 @@ game_timer = NodePath("GameTimer")
 ui = NodePath("PlayerUiSubViewportContainer/SubViewport/UI")
 day_indicator = NodePath("PlayerUiSubViewportContainer/SubViewport/DayIndicator/Label")
 desk = NodePath("Desk")
-pc_ui = NodePath("PlayerUiSubViewportContainer/SubViewport/PCUI/PC")
 overtime_item = SubResource("Resource_1yv1y")
 _trash_can = NodePath("TrashCan")
-minigame_controller = NodePath("PlayerUiSubViewportContainer/SubViewport/MinigameController")
 clock_item_stop_sound = NodePath("ClockItemStopSound")
 clock_item_start_sound = NodePath("ClockItemStartSound")
 teleporter1 = NodePath("Teleporter1-FrontToRight")
@@ -1466,7 +1462,8 @@ teleporter4 = NodePath("Teleporter4-RightToFront")
 air_freshener = NodePath("AirFreshener")
 tutorial_selection_menu = NodePath("TrainingSkipMenu")
 shift_start_sound = NodePath("ShiftStartSound")
-cam_spot = NodePath("Desk/PCCamera")
+cam_spot = NodePath("Desk/PCCameraSpot")
+default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
 day_5_tippy_whiteboard_disappear_area = NodePath("TutorialLocations/Day5TippyWhiteboardDisappearArea")
 whiteboard = NodePath("StartShiftWhiteboard")
 day_containers_desk = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath("Desk/Day3DeskProps"), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
@@ -2183,9 +2180,9 @@ text = "cancel"
 
 [node name="PCUI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1232958959]
 
-[node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("gui_3d", "ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
+[node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("desk", "ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
 visible = false
-gui_3d = NodePath("../../../..")
+desk = NodePath("../../../../Desk")
 ui = NodePath("../../UI")
 irl_new_shop_items_indicator = NodePath("../../../../Desk/NewShopItemsPrompt")
 
@@ -2671,10 +2668,12 @@ texture = SubResource("ViewportTexture_scdfc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 top_level = true
 
-[node name="Desk" parent="." unique_id=1519674799 instance=ExtResource("3_vivmo")]
+[node name="Desk" parent="." unique_id=1519674799 node_paths=PackedStringArray("camera_spot_for_pc_interaction", "pc_ui") instance=ExtResource("3_vivmo")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.18685444, -0.10281545, 13.920945)
+camera_spot_for_pc_interaction = NodePath("PCCameraSpot")
+pc_ui = NodePath("../PlayerUiSubViewportContainer/SubViewport/PCUI/PC")
 
-[node name="PCCamera" type="Marker3D" parent="Desk" unique_id=319429800]
+[node name="PCCameraSpot" type="Marker3D" parent="Desk" unique_id=319429800]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.1507349, 1, 0.16965067)
 
 [node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
@@ -2853,7 +2852,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005701006, -0.00016215755, -0.99994075, 1.0259951e-07, 1, -0.00016214795, 0.99994075, -1.01539825e-08, 0.0005701006, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005701005, -0.00016215755, -0.9999405, 1.02599486e-07, 1, -0.0001621479, 0.9999405, -1.01539825e-08, 0.0005701005, -4.11582, -1.4201379, 0.23234849)
 
 [node name="Label3D4" type="Label3D" parent="CafeEnvironment/StoreRoom/Storage Arch" parent_id_path=PackedInt32Array(672806017, 847908752) index="1" unique_id=1148006303]
 transform = Transform3D(0.99999994, 0, 1.4210855e-14, 0, 1, 0, 0, 0, 1.0000005, 0.01610136, 0.8703489, 0.19787931)
@@ -2865,7 +2864,7 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
-[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=1280224554]
+[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=752584853]
 transform = Transform3D(-0.05555968, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497518, 0.5577049, 2.5702512, -0.048047185)
 
 [node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable", "_cooldown_timer_sprite", "_cooldown_timer_bar", "_spray_sound", "_collider_body")]

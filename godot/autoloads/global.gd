@@ -167,11 +167,11 @@ var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a mach
 var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
-# Voice Line System
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
 var tutorial_manager: TutorialManager
+# TODO: move to Stats ?
 var trash_punishment_threshold := 5
 var trash_punishment_amount := 0.2
 

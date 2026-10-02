@@ -3,8 +3,6 @@ extends Node3D
 
 @export var _emails_manager: EmailsManager
 @export var _voice_line_system: VoiceLineSystem
-@export var _pause_menu: PauseMenu
-@export var _tutorial_popups_manager: TutorialPopupsManager
 @export var _tutorial_manager: TutorialManager
 @export var _world_environment: WorldEnvironment
 @export var _left_area_camera: SecurityCam3D
@@ -27,11 +25,8 @@ extends Node3D
 @export var ui: CanvasLayer
 @export var day_indicator: Label
 @export var desk: Desk
-@export var pc_ui: PC_UI
 @export var overtime_item: Item
 @export var _trash_can: TrashCan
-#Minigame
-@export var minigame_controller: CanvasLayer
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
@@ -48,17 +43,12 @@ extends Node3D
 @export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
 @export var whiteboard: Whiteboard
 
-
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
 @export var day_containers_desk: Array[Node3D] = []
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
-
-const CAM_TWEEN_DUR := 0.45
-var original_cam_transform: Transform3D
-var player_using_pc := false
 
 var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
@@ -77,7 +67,6 @@ func _ready() -> void:
 	Global.cinematic_camera_allow_machine_gui_inputs = true
 
 	_world_environment.environment = Global.cafe_environment_res
-	Events.game_options_changed.connect(_on_game_options_changed)
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
@@ -118,12 +107,6 @@ func _ready() -> void:
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
-
-	desk.interactable.interacted.connect(_on_desk_interacted)
-
-	#Connect minigame
-	Events.minigame_active.connect(_on_minigame_active)
-	Events.minigame_end.connect(_on_minigame_end)
 	
 	# Determine if we should play the tutorial!
 	var should_play_tutorial: bool = Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
@@ -136,13 +119,12 @@ func _ready() -> void:
 		print("should not play tutorial!")
 
 	set_per_day_stuff()
-	spawn_machines()
 	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
 	# enables props as the days go by
-	#could combine the loops to one loop but am not sure if all props will have equivaent 
-	#number of day props
+	# could combine the loops to one loop but am not sure if all props will have equivaent 
+	# number of day props
 	for i in range(day_containers_desk.size()):
 		if day_containers_desk[i] != null:
 			day_containers_desk[i].visible = (i <= Global.day)
@@ -157,11 +139,12 @@ func _ready() -> void:
 			else:
 				box.hide()
 				box.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
+				
 	for i in range(day_containers_posters.size()):
 		if day_containers_posters[i] != null:
 			day_containers_posters[i].visible = (i <= Global.day)
 			
-	# we have to set these manually here so if we reload the scene theyll reset
+	# we have to set all these manually here so if we reload the scene theyll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -175,22 +158,16 @@ func _ready() -> void:
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	Global.total_trash = 0
 	Global.all_3d_audio_stream_players.clear()
+	Global.refresh_active_items()
+	closing_time = false
+	_trash_can.visible = false
+	
 	get_stats()
 
-	_pause_menu.tutorial_requested.connect(_on_pause_menu_tutorial_requested)
-
-	for ui_element: Control in ui.find_children("*", "Control", false):
-		ui_element.modulate = Color.TRANSPARENT
-
-	for ui_element: Control in ui.find_children("*", "Control", false):
-		create_tween().tween_property(ui_element, "modulate", Color.WHITE, 0.5).from(Color.TRANSPARENT)
-
-	#Active Item refresh
-	Global.refresh_active_items()
-
 	_tutorial_manager.start_day()
+	
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
 	Global.shift_progress_ratio = (Global.shift_length - Global.shift_time_remaining) / Global.shift_length
 
@@ -213,9 +190,6 @@ func get_stats() -> void:
 	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
 	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
-
-	# if Global.current_special_shift != null && Global.current_special_shift.name != "Normal":
-	# 	Global.current_special_shift.apply_stats()
 
 	update_teleporters_enabled()
 	update_air_fresheners_enabled()
@@ -245,6 +219,7 @@ func update_teleporters_enabled() -> void:
 		teleporter3.disable_teleporter()
 		teleporter4.disable_teleporter()
 
+
 func update_air_fresheners_enabled() -> void:
 	var air_freshener_item: Item = null
 	for owned_item in Global.owned_items:
@@ -257,10 +232,9 @@ func update_air_fresheners_enabled() -> void:
 	else:
 		air_freshener.disable_air_freshener()
 
+
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
-	closing_time = false
-	_trash_can.visible = false
 	
 	if Global.day == 1:
 		# Reset run.
@@ -317,7 +291,7 @@ func set_per_day_stuff() -> void:
 		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
 		should_spawn_trash_today = true
 		_trash_can.visible = true
-		#day 5 whiteboard tippy disappearing effect
+		# day 5 whiteboard tippy disappearing effect
 		day_5_tippy_whiteboard_disappear_area.monitoring = true
 		day_5_tippy_whiteboard_disappear_area.player_entered_area.connect(whiteboard.hide_tippy.unbind(1))
 	else:
@@ -326,10 +300,6 @@ func set_per_day_stuff() -> void:
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()
 
-	Global.machines.assign(_active_machines)
-
-
-func spawn_machines():
 	for machine: Machine in _all_machines:
 		machine.hide()
 		machine.process_mode = Node.PROCESS_MODE_DISABLED
@@ -337,6 +307,8 @@ func spawn_machines():
 	for machine: Machine in _active_machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
+		
+	Global.machines.assign(_active_machines)
 
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
@@ -345,11 +317,13 @@ func _on_machine_customer_spawn_timer_timeout() -> void:
 	_machine_customer_spawn_timer.start()
 	spawn_machine_customer()
 
+
 func _on_help_desk_customer_spawn_timer_timeout() -> void:
 	if closing_time: return
 	_help_desk_customer_spawn_timer.wait_time = Global.help_desk_customer_flow_rate
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
+
 
 func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
 	var available_machines: Array[Machine] = []
@@ -387,8 +361,8 @@ func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
 
 	assigned_machine.add_customer_to_queue(new_customer)
 
+
 func get_customers() -> Array[Customer]:
-	print((get_tree().get_nodes_in_group("customer")).size())
 	return (get_tree().get_nodes_in_group("customer")) as Array[Customer]
 
 
@@ -412,6 +386,7 @@ func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> voi
 	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
 
+	# NOTE: NOTE SURE WHAT THIS IS DOING
 	# Allow help desk on tutorial day for now
 	if Global.day > 0:
 		# Disallow help desk if not unlocked yet
@@ -428,10 +403,12 @@ func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> voi
 		Console.print_line("spawned %s at help desk" % sprite_resource.customer_name)
 	_customer_help_desk.add_customer_to_queue(new_customer)
 
+
 func apply_used_air_freshener(customer_wait_duration_extension: float) -> void:
 	for machine in _active_machines:
 		if machine.customer:
 			machine.customer.extend_wait_patience_time(customer_wait_duration_extension)
+
 
 func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D]) -> void:
 	for security_camera in _all_security_cameras:
@@ -441,20 +418,19 @@ func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D
 			security_camera.visible = false
 
 
-func _on_pause_menu_tutorial_requested() -> void:
-	_tutorial_popups_manager.show_all_handbook_popups()
-
 func attempt_spawn_trash() -> void:
 	if not should_spawn_trash_today:
 		return
+	
 	# freq of spawn 3/41 rn
-	var spawn = randi_range(0, 40)
+	# TODO: move this probability to Stats ?
+	var spawn := randi_range(0, 40)
 	if spawn >= 3:
 		return
 
 	spawn_trash()
 
-#code for  trash spawn
+
 func spawn_trash() -> void:
 	var customer_trash: CustomerTrash = customer_trash_scene.instantiate()
 
@@ -489,6 +465,7 @@ func _on_game_timer_timeout() -> void:
 	if get_customers().size() <= 1:
 		shift_end_sequence()
 
+
 func shift_end_sequence(override: bool = false):
 	# Here's the thing. When a customer calls this function as they
 	# are still leaving, they are still part of the scene tree.
@@ -520,15 +497,6 @@ func shift_end_sequence(override: bool = false):
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
 
-#Minigame is active (Need to turn off regular player controls)
-func _on_minigame_active(minigame_name: String):
-	minigame_controller.play_minigame(minigame_name)
-
-
-#Closes the game -> Game is no longer visible and removed from the tree
-#Player regains all regular controls etc
-func _on_minigame_end():
-	minigame_controller.close_game()
 
 
 func _on_shift_started():
@@ -552,46 +520,7 @@ func _on_shift_started():
 		desk.interactable.visible = false
 
 
-func _on_desk_interacted() -> void:
-	if player_using_pc:
-		return
-	player_using_pc = true
 
-	enter_with_camera_tween()
-	pc_ui.show()
-
-	Events.pc_state_change.emit(true)
-
-
-func enter_with_camera_tween() -> void:
-	var cam: CameraController = Global.player.camera
-	original_cam_transform = cam.transform
-	create_tween().tween_property(
-			cam,
-			"global_transform",
-			cam_spot.global_transform,
-			CAM_TWEEN_DUR,
-	)
-
-func exit_with_camera_tween() -> void:
-	player_using_pc = false
-	var cam: CameraController = Global.player.camera
-	var tween: PropertyTweener = create_tween().tween_property(
-			cam,
-			"transform",
-			original_cam_transform,
-			CAM_TWEEN_DUR,
-	)
-	await tween.finished
-	cam.sync_rotation_from_player()
-
-
-func _on_game_options_changed(options_data: OptionsData) -> void:
-	_apply_game_options(options_data)
-
-
-func _apply_game_options(_options_data: OptionsData) -> void:
-	pass
 
 
 func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
@@ -611,8 +540,10 @@ func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
 func _get_machine_customer_flow_rate() -> float:
 	return _rating_to_machine_customer_flow_rate(Global.employee_rating)
 
+
 func _get_help_desk_customer_flow_rate() -> float:
 	return _rating_to_help_desk_customer_flow_rate(Global.employee_rating)
+
 
 ## In seconds per machine customer entry.
 func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> float:
@@ -621,6 +552,7 @@ func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> fl
 	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
 	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
 	return seconds_per_customer
+
 
 ## In seconds per help desk customer entry.
 func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> float:
