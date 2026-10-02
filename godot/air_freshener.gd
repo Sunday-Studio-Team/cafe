@@ -15,7 +15,7 @@ func _ready() -> void:
 
 	_cooldown_timer_sprite.visible = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _air_freshener_item_on_cooldown != null:
 		_cooldown_timer_bar.value = _air_freshener_item_on_cooldown.active_item_remaining_cooldown
 		if _air_freshener_item_on_cooldown.can_be_used:

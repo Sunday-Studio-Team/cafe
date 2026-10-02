@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+# (for footstep stuff)
 const STRIDE_LENGTH := 1.25
 
 # this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
@@ -12,7 +13,7 @@ const STRIDE_LENGTH := 1.25
 @export var ingredients_bag: Node3D
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
-@export var customer_trash: Sprite3D
+@export var customer_trash: Node3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
@@ -22,20 +23,19 @@ const STRIDE_LENGTH := 1.25
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
+@export var keychain_animation_player: AnimationPlayer
+@export var tippy_tablet_3d: TippyTablet3D
+@export var tippy_tablet_normal_position_rotation: Node3D
+@export var tippy_tablet_up_front_position_rotation: Node3D
 
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
-
 var _is_sprinting: bool
 var mouse_sens := 0.1
-# the mouse's movement since the last physics frame .
-# we get mouse input from _unhandled_input() which is called continuously, so
-# we store it here then apply it in the physics process so no movement is
-# applied off-sync with physics frames
-var mouse_delta: Vector2 = Vector2.ZERO
+
 # vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
@@ -45,6 +45,10 @@ var has_xl_bag_item: bool = false
 # when pully ball spawns, starts counting up. keeping track of strength.
 var pully_ball_countup: float = 0.0
 var pully_ball_instance: Node3D
+
+var fake_vel_follow_speed: float = 1.25
+var fake_velocity: Vector3
+var fov_tween: Tween
 
 # we add on top of the ray distance to avoid weird stuff with big interactables
 # (whose 'position's may be further away from us than their interactable hitbox)
@@ -58,7 +62,7 @@ func _ready() -> void:
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
 	_on_items_updated()
-
+	
 	free_cam_visualizer.visible = false
 
 	# the aiming ray is a child of the camera (not a direct child of the player)
@@ -102,7 +106,7 @@ func _ready() -> void:
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
-				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
+				or Global.playing_tutorial # idk how the tutorial cutscene works so it could potentially causes issues with that
 		):
 			return
 
@@ -117,22 +121,25 @@ func _physics_process(delta: float) -> void:
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
+	
+	# TODO: move this
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "roller_skates":
 			has_roller_skates = true
 			break
-	fake_velocity = fake_velocity.move_toward(velocity,fake_vel_follow_speed)
+	fake_velocity = fake_velocity.move_toward(velocity, fake_vel_follow_speed)
 	if has_roller_skates:
 		roller_skates_dust_particles.emitting = velocity.length() > 2.5
-		camera.camera_effects.fov = lerp(90,150,clampf((fake_velocity.length()) / _current_move_speed,0,1))
+		camera.camera_effects.fov = lerp(90, 150, clampf((fake_velocity.length()) / _current_move_speed, 0, 1))
 	else:
 		roller_skates_dust_particles.emitting = false
-		camera.camera_effects.fov = lerp(90,100,clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed,0,2))
+		camera.camera_effects.fov = lerp(90, 100, clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed, 0, 2))
+		
 	handle_gravity(delta)
 	handle_footstep_sounds()
-
 	handle_ingredients_bag()
+	handle_keychain_swing_animation()
 	handle_customer_trash()
 	handle_floating_cursor()
 	move_and_slide()
@@ -144,13 +151,9 @@ func override_position_rotation(override_position: Vector3, override_rotation: V
 	camera.sync_rotation_from_player()
 	reset_physics_interpolation()
 
+
 func is_sprinting() -> bool:
 	return _is_sprinting
-
-
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-#		mouse_delta += event.screen_relative * mouse_sens
 
 
 # this is what decides whether to show the mouse
@@ -162,19 +165,13 @@ func handle_floating_cursor() -> void:
 		Global.showing_floating_cursor = false
 
 
-#func handle_mouselook() -> void:
-#	camera.rotation_degrees.x -= mouse_delta.y
-#	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -90, 90)
-#
-#	rotation_degrees.y -= mouse_delta.x
-#
-#	mouse_delta = Vector2.ZERO
-
-var fake_vel_follow_speed :float = 1.25
-var fake_velocity: Vector3
-var fov_tween:Tween
 func handle_movement(delta: float) -> void:
-	if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
+	if (
+			not movement_enabled
+			or holding_interactable
+			or Global.in_ui
+			or Global.camera_mode not in [Global.CameraMode.PLAYER, Global.CameraMode.LOCKED_TO_POINT]
+	):
 		velocity = Vector3.ZERO
 		return
 
@@ -203,6 +200,7 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
+	
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
@@ -260,7 +258,7 @@ func handle_sprint(delta: float) -> void:
 			has_roller_skates = true
 			break
 
-	if Input.is_action_pressed("sprint") and ! has_roller_skates:
+	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		_is_sprinting = true
 		if get_last_motion().length() > 0:
 			if sprint_lockout_timer.is_stopped():
@@ -285,6 +283,11 @@ func handle_sprint(delta: float) -> void:
 
 
 func handle_footstep_sounds() -> void:
+	# idk why but the footstep sounds spam if when we fastfoward in cutscenes
+	# etc without this
+	if Engine.time_scale != 1:
+		return
+	
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
 		# here we play a sound just as we start walking
@@ -308,7 +311,7 @@ func tilt_camera() -> void:
 	const TILT_AMOUNT := 0.25
 
 	var local_velocity: Vector3 = basis.transposed() * velocity
-	camera.rotation_degrees.z = -local_velocity.x * TILT_AMOUNT
+	camera.rotation_degrees.z = - local_velocity.x * TILT_AMOUNT
 
 
 func handle_ingredients_bag() -> void:
@@ -325,19 +328,16 @@ func handle_ingredients_bag() -> void:
 	large_ingredients_bag_model.visible = has_xl_bag_item
 
 
-
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
-		#print("heshel", customer_trash_scene)
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
-	#print("asdf", ingredients_bag_scene.instantiate().get_class())
-	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
+
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()
@@ -348,5 +348,14 @@ func _on_items_updated() -> void:
 			has_xl_bag_item = true
 			break
 
+
 func flash_red():
-	camera.camera_effects.flash_red()
+	camera.camera_effects.flash_screen_red()
+
+
+func handle_keychain_swing_animation() -> void:
+	if keychain_animation_player != null:
+		if get_last_motion().length() > 0:
+			keychain_animation_player.play("KittyChainSwing")
+		else:
+			keychain_animation_player.play("IdleSway")

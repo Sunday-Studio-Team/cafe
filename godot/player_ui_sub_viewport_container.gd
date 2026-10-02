@@ -11,5 +11,5 @@ func set_allow_input(allow_input: bool) -> void:
 	else:
 		mouse_target = true
 
-func _propagate_input_event(event: InputEvent) -> bool:
+func _propagate_input_event(_event: InputEvent) -> bool:
 	return _allow_input

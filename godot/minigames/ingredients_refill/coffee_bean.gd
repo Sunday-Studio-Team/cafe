@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 var time_counter_float: float = 0.0
+@export var sprite_2d: Sprite2D
 
 var seconds_passed: float = 0.0
 var has_sped_up: bool = false 
@@ -20,14 +21,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 func _physics_process(delta: float) -> void:
-	
-	
 	if(seconds_passed>2): #prevents jitter
 		if(get_collision_mask_value(1) ==false): 
 			set_collision_mask_value(1, true)
 		return
 	time_counter_float += delta
 	
+	sprite_2d.rotation_degrees += 15
 	seconds_passed+=delta
 	if(linear_velocity.y>0 and has_sped_up == false):	
 		gravity_scale*=2.5

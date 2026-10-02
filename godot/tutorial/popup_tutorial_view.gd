@@ -56,19 +56,19 @@ func _spawn_machine_options_tutorial_screen() -> void:
 	_tutorial_screen_container.add_child(_current_tutorial_view, true)
 	_current_tutorial_view.finished.connect(_on_tutorial_section_finished)
 
-func _on_intro_screen_finished(tutorial_screen_view: TutorialScreenView) -> void:
+func _on_intro_screen_finished(_tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()
 	_spawn_tutorial_controls_screen()
 
-func _on_tutorial_section_finished(tutorial_screen_view: TutorialScreenView) -> void:
+func _on_tutorial_section_finished(_tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()
 	popup_tutorials_finished.emit(self)
 	
-func _on_machine_intro_tutorial_screen_finished(tutorial_screen_view: TutorialScreenView) -> void:
+func _on_machine_intro_tutorial_screen_finished(_tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()
 	_spawn_machine_options_tutorial_screen()
 
-func _on_tutorial_screen_view_finished(tutorial_screen_view: TutorialScreenView) -> void:
+func _on_tutorial_screen_view_finished(_tutorial_screen_view: TutorialScreenView) -> void:
 	_close_tutorial_screen_view()
 	if _current_tutorial_index + 1 >= _tutorial_screen_view_packed_scenes.size():
 		popup_tutorials_finished.emit(self)

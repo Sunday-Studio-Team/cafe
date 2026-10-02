@@ -37,7 +37,7 @@ func _ready() -> void:
 	add_child(_tippy_voice_timer)
 	
 	# Skip voice lines if tutorial day 0
-	if Global.day == 0:
+	if Global.playing_tutorial:
 		return
 	
 	# Add tippy voice lines

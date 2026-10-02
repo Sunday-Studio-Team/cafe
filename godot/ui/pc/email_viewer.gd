@@ -60,12 +60,12 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 	
 	email_shown.emit(self)
 
-func _on_active_custom_email_view_finished_important(custom_email_view: CustomEmailView) -> void:
+func _on_active_custom_email_view_finished_important(_custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_important.disconnect(_on_active_custom_email_view_finished_important)
 	Global.finished_important_emails.append(email_data)
 	Events.finished_important_email.emit(email_data)
 
-func _on_active_custom_email_view_finish_spam(custom_email_view: CustomEmailView) -> void:
+func _on_active_custom_email_view_finish_spam(_custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_spam.disconnect(_on_active_custom_email_view_finish_spam)
 	Global.spam_emails.append(email_data)
 	Events.finished_spam_email.emit(email_data)

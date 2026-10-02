@@ -25,6 +25,7 @@ const REFILL_MINIGAME := "Refill"
 @export var spot_for_customer: Marker3D
 @export var start_of_customer_queue_marker: Marker3D
 @export var end_of_customer_queue_marker: Marker3D
+@export var item_aim_spot: Marker3D
 @export_category("UI")
 @export var progress_indicator: Control
 @export var tippy_progress_sprite: TextureRect
@@ -110,6 +111,9 @@ enum Icon {
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
 @export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
+@export_category("Explosion Particles")
+@export var explosion_boom: GPUParticles3D
+
 
 var customer: Customer
 var queued_customers: Array[Customer]
@@ -179,11 +183,13 @@ func _ready() -> void:
 
 var current_ingbar_animation:Array[Texture2D]:
 	set(value):
+		if value == current_ingbar_animation:
+			return
 		animation_index = 0
 		current_ingbar_animation = value
 var animation_index:int
 var animation_delay_timer:float = 0
-var animation_delay:float = 0.05
+var animation_delay:float = 0.03
 
 
 func reset_icons():
@@ -210,6 +216,7 @@ func _process(delta: float) -> void:
 	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
+	animation_delay = 0.03
 	if animation_delay_timer >= animation_delay:
 		animation_delay_timer = 0
 		update_animation()
@@ -245,7 +252,7 @@ func _process(delta: float) -> void:
 	customer_wait_indicator.visible = (
 		customer != null
 		and not customer.timer.is_stopped()
-		and not Global.day == 0
+		and not Global.playing_tutorial
 		)
 
 	if customer:
@@ -312,7 +319,6 @@ func check_for_stepping_in_spill() -> void:
 
 
 func blast_player_from_using_machine() -> void:
-	bomb_sound_player.play()
 	if gui_3d.player_using_me:
 		if Global.minigame_active:
 			Events.force_close_minigame.emit()
@@ -325,19 +331,18 @@ func blast_player_from_using_machine() -> void:
 	machine_to_player_normalized.y = 0.0
 	machine_to_player_normalized = machine_to_player_normalized.normalized()
 
+	bomb_sound_player.play()
+	explosion_boom.restart()
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
+	print(launch_vector)
 	Global.player.velocity += launch_vector
 	Global.player.move_and_slide()
 	await get_tree().create_timer(0.1).timeout
 	Global.player.velocity += launch_vector
-	Global.player.move_and_slide()
 
 	await get_tree().create_timer(0.1).timeout
 	Global.player.velocity += launch_vector
-	Global.player.move_and_slide()
-	#apply velocity 3 times
-	#likely, friction/physics of player was changed; so delaying and appling velocity is the way to get a smoother explosion
 
 
 func set_order_action_buttons_available(button_case: String) -> void:
@@ -364,6 +369,7 @@ func set_order_action_buttons_available(button_case: String) -> void:
 		_:
 			print("invalid button_case passed to set_order_action_buttons_available()")
 
+
 # called from inside spill() (so that itll still show if we trigger the spill
 # via a console command etc)
 func show_tutorial_go_clean_spill() -> void:
@@ -375,7 +381,7 @@ func show_tutorial_go_clean_spill() -> void:
 		#janky way to make sure the popup tutorial does not show up while in a menu/minigame
 
 	await get_tree().create_timer(0.75).timeout # allows audio to play first
-	if (Global.day == 0) and (Global.tutorial_go_clean_spill_shown == false):
+	if (Global.playing_tutorial) and (not Global.tutorial_go_clean_spill_shown):
 		Global.tutorial_go_clean_spill_shown = true
 		Global.in_popup_tutorial_screen = true
 
@@ -411,13 +417,13 @@ func show_tutorial_go_clean_spill() -> void:
 func _set_customer(new_customer: Customer) -> void:
 	if customer:
 		if customer.customer_sprite_resource.alternate_desk_sprite:
-			customer.body.texture = customer.customer_sprite_resource.sprite
+			customer.override_material.albedo_texture = customer.customer_sprite_resource.sprite
 
 	if new_customer != null:
 		new_customer.wait_timed_out.connect(_on_customer_wait_timed_out, CONNECT_ONE_SHOT)
 		await new_customer.move_to(spot_for_customer.global_position)
 		if new_customer.customer_sprite_resource.alternate_desk_sprite:
-			new_customer.body.texture = new_customer.customer_sprite_resource.alternate_desk_sprite
+			new_customer.override_material.albedo_texture = new_customer.customer_sprite_resource.alternate_desk_sprite
 	else:
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
@@ -546,10 +552,13 @@ func machine_make_drink() -> void:
 		# Roll whether the drink should be correct or incorrect, based on time of day and current day.
 		var chances_curve: Curve = Stats.current.chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day.get(Global.day)
 		var chance_drink_should_be_incorrect: float = chances_curve.sample(Global.shift_progress_ratio)
-		var drink_should_be_incorrect: bool = randf_range(0, 1.0) <= chance_drink_should_be_incorrect
+		var roll_for_drink_incorrect: float = randf_range(0, 1.0)
+		var drink_should_be_incorrect: bool = roll_for_drink_incorrect <= chance_drink_should_be_incorrect
 		if drink_should_be_incorrect:
+			print("Machine: rolled %s, which is less than %s, drink will be incorrect." % [roll_for_drink_incorrect, chance_drink_should_be_incorrect])
 			target_drink_diff = randi_range(1, ingredient_types_count)
 		else:
+			print("Machine: rolled %s, which is more than %s, drink will be correct." % [roll_for_drink_incorrect, chance_drink_should_be_incorrect])
 			target_drink_diff = 0
 	
 	var unlocked_drinks: Array[Drink]
@@ -665,8 +674,6 @@ func spill() -> void:
 
 
 func display_drink_score() -> void:
-
-
 	# these all automatically set the icon, colour, and score of each icon
 	# from OrderBreakdownElement
 	made_main_ingredient_panel.ingredient = order.made_drink.main_ingredient
@@ -927,11 +934,16 @@ func _on_requested_use_active_item_fix_machine():
 
 	if hammer == null or !hammer.can_be_used:
 		return
-
+	
+	Global.locked_camera_target_pos = item_aim_spot.global_position
+	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	Events.play_viewmodel_animation.emit("hammer_use")
 	Global.put_active_item_on_cooldown(hammer)
 	await Events.hammer_animation_hit
 	fix_machine(true)
+	
+	await Events.viewmodel_animation_finished
+	Global.camera_mode = Global.CameraMode.PLAYER
 
 
 func _on_requested_use_active_item_machine():
@@ -945,6 +957,9 @@ func _on_requested_use_active_item_machine():
 		return
 
 	if customer:
+		Global.locked_camera_target_pos = item_aim_spot.global_position
+		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
+		
 		Global.put_active_item_on_cooldown(air_horn)
 		var leaving_customer: Customer = customer
 		Events.play_viewmodel_animation.emit("airhorn_use")
@@ -962,6 +977,8 @@ func _on_requested_use_active_item_machine():
 		hum_sound.stop()
 		equal_sign.texture = equal_sign_states[EqualStates.Empty]
 
+		await Events.viewmodel_animation_finished
+		Global.camera_mode = Global.CameraMode.PLAYER
 
 func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
@@ -1034,7 +1051,7 @@ func _on_remade_drink() -> void:
 	order.made_drink = order.ordered_drink
 	display_drink_score()
 
-	Global.tutorial_drink_remade = true
+	Global.tutorial_drink_remade_served = true
 	customer.timer.stop()
 	waiting_for_response = false
 

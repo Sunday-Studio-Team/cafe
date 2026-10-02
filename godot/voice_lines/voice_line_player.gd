@@ -77,7 +77,7 @@ func interrupt_voice_line() -> void:
 			return
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# for some reason this is running @ the start before it has this reference so
 	if tippy_loudspeaker_model != null and tippy_loudspeaker_model.sound_ring_particles != null:
 		tippy_loudspeaker_model.sound_ring_particles.emitting = get_playing_voice_line() != null
