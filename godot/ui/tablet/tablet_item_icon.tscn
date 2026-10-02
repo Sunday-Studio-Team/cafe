@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_jqva2"]
 
 [node name="TabletItemIcon" type="TextureRect" unique_id=427576900 node_paths=PackedStringArray("cooldown_progress_bar")]
-custom_minimum_size = Vector2(50, 0)
+custom_minimum_size = Vector2(100, 0)
 size_flags_horizontal = 0
 texture = ExtResource("1_603tw")
 expand_mode = 5
@@ -18,7 +18,7 @@ cooldown_progress_bar = NodePath("TextureProgressBar")
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=681775761]
 modulate = Color(1, 1, 1, 0.78431374)
 texture_filter = 1
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

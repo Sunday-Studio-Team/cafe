@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cqmvi1kqamlfv"]
+
+[ext_resource type="Shader" uid="uid://ct7gcsrwmjfmr" path="res://Assets/street_buildings/materials/shader/building_style_shader.gdshader" id="1_nkf50"]
+[ext_resource type="Texture2D" uid="uid://7a4p588cceci" path="res://Assets/street_buildings/materials/textures/street_buildings_brick_bc.png" id="2_rgj5f"]
+[ext_resource type="Texture2D" uid="uid://dvohy4o2yue1r" path="res://Assets/street_buildings/materials/textures/street_buildings_brick_n.png" id="4_4u2do"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dgt0i"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nkf50")
+shader_parameter/BC_Texture = ExtResource("2_rgj5f")
+shader_parameter/N_Texture = ExtResource("4_4u2do")
+shader_parameter/AO_Texture = SubResource("CompressedTexture2D_dgt0i")

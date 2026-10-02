@@ -33,7 +33,6 @@ var loading_tween: Tween
 var _cached_main_packed_scene: PackedScene
 var _cached_sub_resources: Dictionary[StringName, Resource]
 
-var _is_first_options_load: bool = true
 var _tippy_stage: int = 0
 var _tippy_target_stage: int = 0
 var _tippy_switching: bool = false
@@ -227,6 +226,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 
 	# Cached scenes and requests that finish between polls also reach completion.
 	_set_loading_progress(1.0)
+
+	await get_tree().process_frame
 
 	var instantiating_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	if TIMING_PRINTS:

@@ -22,7 +22,7 @@ func _ready() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_layer_value(2, true)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() and _editor_update_pixel_size:
 		_update_pixel_size()
 

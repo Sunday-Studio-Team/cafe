@@ -6,9 +6,6 @@ extends Node
 
 var _item_ids: Array[String] = []
 var _customer_names: Array[String] = []
-# tracks whether we have the 'unlimited actives' command toggled on
-# (so we can toggle on/off with the same command)
-var ua_enabled := false
 
 
 func _ready() -> void:
@@ -42,18 +39,16 @@ func _ready() -> void:
 - [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
 - [i]rating <number>[/i] sets your employee rating
-- [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_id>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
-- [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
 - [i]trash[/i] spawn a trash
-- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
+- [i]nocooldowns[/i] gives active items back shortly after you use them (possibly buggy)
 - [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
 		% [items_guide_str],
 	)
@@ -85,7 +80,7 @@ func _ready() -> void:
 		_item_ids.append("\"%s\"" % item.item_id)
 	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
-	Console.add_command("ua", toggle_unlimited_actives)
+	Console.add_command("nocooldowns", toggle_unlimited_actives)
 	Console.add_command("vo", vo_test)
 	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
 	for customer: CustomerSpriteData in Global.customer_sprites:
@@ -96,13 +91,15 @@ func _ready() -> void:
 
 	Events.main_scene_loaded.connect(
 		func():
-			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
+			if not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
 
 func spawn_trash() -> void:
 	Global.main_scene.spawn_trash();
 	Console.print_line("trash was spawned")
+	
 
 func unlock_everything() -> void:
 	unlock_day("6")
@@ -191,7 +188,7 @@ func end_shift(arg: String = "") -> void:
 
 
 func set_day(day: String) -> void:
-	var final_day := Global.final_day
+	var final_day: int = Global.final_day
 	if int(day) > final_day:
 		Console.print_error("final day is day %s, can't set day higher than that :p" % final_day)
 		return
@@ -274,14 +271,12 @@ func toggle_timer() -> void:
 
 
 func toggle_unlimited_actives() -> void:
-	ua_enabled = !ua_enabled
-
-	if ua_enabled:
-		Events.active_item_used.connect(refresh_active_item)
-		Console.print_line("Unlimited Actives enabled")
+	Global.no_cooldowns = !Global.no_cooldowns
+	
+	if Global.no_cooldowns:
+		Console.print_line("item cooldowns disabled")
 	else:
-		Events.active_item_used.disconnect(refresh_active_item)
-		Console.print_line("Unlimited Actives disabled")
+		Console.print_line("item cooldowns enabled")
 
 
 func refresh_active_item(item: Item):

@@ -5,7 +5,10 @@ extends Node3D
 @export var sub_viewport: SubViewport
 
 @export var whiteboard_ui_scenes: Array[PackedScene]
-
+@export var magnets: Node3D
+@export var calendar: MeshInstance3D
+@export var calendar_material: StandardMaterial3D
+@export var calendar_textures: Array[Texture2D]
 var current_child:WhiteboardUI
 
 @export_range(0,5) var day_test: int
@@ -15,6 +18,7 @@ var current_child:WhiteboardUI
 @export_tool_button("Hide Day 5 Tippy") var action3 = hide_tippy
 
 func _ready() -> void:
+	calendar.set_surface_override_material(0,calendar_material)
 	for child in sub_viewport.get_children():
 		child.queue_free()
 	if not Engine.is_editor_hint():
@@ -27,7 +31,9 @@ func tool_script_replace_ui():
 
 func replace_ui(day:int):
 	assert(day >= 0 and day <= 5, "Day is not in-between 0 and 5")
+	calendar_material.albedo_texture = calendar_textures[day]
 	current_child = null
+	magnets.visible = day != 5
 	for child in sub_viewport.get_children():
 		child.queue_free()
 	current_child = whiteboard_ui_scenes[day].instantiate()
