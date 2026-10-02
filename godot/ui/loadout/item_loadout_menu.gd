@@ -1,11 +1,18 @@
 class_name ItemLoadoutMenu
 extends CanvasLayer
 
+const LOCKER_ANIMATION_NAMES: Array[String] = [
+	"idle_notice_me_a",
+	"idle_notice_me_b",
+	"idle_notice_me_c"
+]
+
 @export var element_scene: PackedScene
 @export_category("Nodes")
 @export var root: Control
 @export var locker_interactable: Interactable
 @export var locker_model: ItemLockerModel
+@export var locker_animation_player: AnimationPlayer
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: Button
@@ -33,6 +40,7 @@ func _ready() -> void:
 	visibility_changed.connect(
 			func():
 				if visible:
+					locker_animation_player.stop()
 					root.offset_transform_scale = Vector2.ZERO
 					locker_open_sound.play()
 					await locker_model.open_door()
@@ -44,7 +52,16 @@ func _ready() -> void:
 					locker_model.close_door()
 					locker_close_sound.play()
 	)
-
+	locker_animation_player.animation_finished.connect(
+		func(_animation: StringName) -> void:
+				await get_tree().create_timer(5, false).timeout
+				if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+					locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
+	)
+	await get_tree().create_timer(10, false).timeout
+	if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+		locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
+	
 
 func populate() -> void:
 	# delete anything we have in the scene for testing/from prev uses first
@@ -94,8 +111,9 @@ func resize_grids() -> void:
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
-
-	handle_item_hover_tooltip()
+	
+	if visible:
+		handle_item_hover_tooltip()
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:

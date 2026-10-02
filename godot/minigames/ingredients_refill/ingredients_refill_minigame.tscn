@@ -131,6 +131,12 @@ size = Vector2(177, 219)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ffxp"]
 size = Vector2(20, 350)
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_coxhp"]
+points = PackedVector2Array(0, 0, 0, -24, 20, 0)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_a2xku"]
+points = PackedVector2Array(0, 0, 20, -25, 20, 0)
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 random_pitch = 1.0442737
 random_volume_offset_db = 5.0
@@ -406,6 +412,14 @@ shape = SubResource("RectangleShape2D_0ffxp")
 position = Vector2(-30, 6)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_0ffxp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Cup" unique_id=1955171894]
+position = Vector2(-180, -331)
+shape = SubResource("ConvexPolygonShape2D_coxhp")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Cup" unique_id=1940234855]
+position = Vector2(107, -331)
+shape = SubResource("ConvexPolygonShape2D_a2xku")
 
 [node name="BeanHitGlassSound" type="AudioStreamPlayer2D" parent="Cup" unique_id=240371451]
 stream = SubResource("AudioStreamRandomizer_vn1tu")

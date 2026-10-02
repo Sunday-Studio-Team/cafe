@@ -15,12 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="10_q13i1"]
 [ext_resource type="AudioStream" uid="uid://c0ssp862cxccu" path="res://audio/footsteps/footstep_concrete_2.wav" id="10_urp6f"]
 [ext_resource type="AudioStream" uid="uid://dtm03unbkcgjm" path="res://audio/footsteps/footstep_concrete_3.wav" id="11_bwjto"]
-[ext_resource type="PackedScene" uid="uid://bynusdrfe1hno" path="res://ui/3d_tablet_ui/3d_tablet_ui.tscn" id="11_pylmc"]
+[ext_resource type="PackedScene" uid="uid://bynusdrfe1hno" path="res://ui/3d_tablet_ui/tippy_tablet_3d.tscn" id="11_pylmc"]
 [ext_resource type="AudioStream" uid="uid://dob2v6d5xvpoa" path="res://audio/footsteps/footstep_concrete_4.wav" id="12_606se"]
 [ext_resource type="Texture2D" uid="uid://cqwiddmsnuams" path="res://Assets/UI/dialog/sato.png" id="17_op7ga"]
 [ext_resource type="Material" uid="uid://b18gocjjdbtpa" path="res://resources/misc_resources/roller_skates_dust_clouds.tres" id="18_q13i1"]
 [ext_resource type="SphereMesh" uid="uid://cc8mu7ui65k8q" path="res://resources/misc_resources/roller_skates_smoke_mesh.tres" id="20_5tmop"]
-[ext_resource type="PackedScene" uid="uid://ccndesh240hgx" path="res://Assets/KeyChain/keychainAnim.glb" id="20_pbfsw"]
 [ext_resource type="SphereMesh" uid="uid://b5bf3p55mcv4v" path="res://resources/misc_resources/roller_skates_smoke_outline_mesh.tres" id="21_7ahtn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
@@ -48,7 +47,7 @@ stream_1/stream = ExtResource("10_urp6f")
 stream_2/stream = ExtResource("11_bwjto")
 stream_3/stream = ExtResource("12_606se")
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles", "move_kaychain", "keychain")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "sprint_lockout_timer", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles", "keychain_animation_player", "tippy_tablet_3d", "tippy_tablet_normal_position_rotation", "tippy_tablet_up_front_position_rotation")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
@@ -65,8 +64,10 @@ sprint_lockout_timer = NodePath("SprintLockoutTimer")
 footstep_sfx_lockout_timer = NodePath("FootstepLockoutTimer")
 free_cam_visualizer = NodePath("FreeCamVisualizer")
 roller_skates_dust_particles = NodePath("RollerSkatesDustParticles")
-move_kaychain = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/AnimationPlayer")
-keychain = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim")
+keychain_animation_player = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel/keychainAnim/AnimationPlayer")
+tippy_tablet_3d = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D")
+tippy_tablet_normal_position_rotation = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation")
+tippy_tablet_up_front_position_rotation = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletUpFrontPositionRotation")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8760254, 0)
@@ -105,18 +106,18 @@ fov = 40.0
 [node name="ingredientbag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=832928181 instance=ExtResource("3_hqtel")]
 transform = Transform3D(0.850284, -0.13210092, -0.5094766, 0.21402878, 0.97112435, 0.10539995, 0.48084176, -0.19866255, 0.85400486, 0.2, -0.15, -0.406)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=1160311051]
+[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" index="0" unique_id=489136358]
 transform = Transform3D(0.049236596, 0.018308839, -0.027216244, -0.010547802, 0.0553187, 0.018131915, 0.031059312, -0.010237642, 0.04930202, 0, 0, 0)
 layers = 8
 
 [node name="large_ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag" unique_id=472804434 instance=ExtResource("6_urp6f")]
 transform = Transform3D(0.058251597, 0.012124337, -0.03948466, -0.0077862935, 0.07026299, 0.010088183, 0.040563658, -0.0039240527, 0.058638528, 0, 0, 0)
 
-[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=2009440182]
+[node name="ingredient_bag" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="0" unique_id=1057153121]
 transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
 layers = 8
 
-[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=1935166715]
+[node name="ingredient_bag_XLL" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag" index="1" unique_id=479596488]
 transform = Transform3D(1, -1.4901161e-08, 0, 0, 1.0000001, 7.450581e-09, 0, 7.450581e-09, 1, 0, 0, 0)
 layers = 8
 
@@ -129,27 +130,18 @@ max_db = 0.0
 [node name="Trash Cup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1417801726 instance=ExtResource("10_q13i1")]
 transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.17303157, -0.16699994, -0.4299096)
 
-[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1975850021]
+[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1837821948]
 transform = Transform3D(0.10581238, 1.517883e-17, 0, -1.2576745e-17, 0.105812386, 0, 0, 1.7347235e-18, 0.10581238, 0, 0, 0)
 layers = 8
 
-[node name="3DTabletUI" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1761848473 instance=ExtResource("11_pylmc")]
-transform = Transform3D(0.285317, -0.025552986, 0.089113876, 0, 0.28837845, 0.08269122, -0.092705116, -0.078644, 0.2742643, -0.2733251, -0.100000024, -0.54824734)
+[node name="TabletNormalPositionRotation" type="Marker3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=2021657142]
+transform = Transform3D(0.95105654, -0.08517663, 0.29704615, 0, 0.96126163, 0.27563733, -0.309017, -0.2621467, 0.9142141, -0.2733251, -0.100000024, -0.54824734)
 
-[node name="keychainAnim" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel" parent_id_path=PackedInt32Array(1761848473, 1254854682) index="1" unique_id=1213310774 instance=ExtResource("20_pbfsw")]
-transform = Transform3D(0.066601485, -0.002524001, -0.0015212782, 0.0020323966, 0.06425938, -0.017636549, 0.002134066, 0.017572924, 0.0642735, 0.09352189, -0.36961222, -0.11672974)
+[node name="TippyTablet3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation" unique_id=1761848473 instance=ExtResource("11_pylmc")]
+transform = Transform3D(1, 0, 2.4835263e-08, 0, 1, 0, -2.4835263e-08, 0, 1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature" parent_id_path=PackedInt32Array(1213310774, 1307113770) index="0" unique_id=1510495520]
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/1/rotation = Quaternion(0.067907415, -5.7041427e-05, 0.028652571, 0.9972802)
-bones/2/rotation = Quaternion(-0.039906695, 8.922967e-05, -0.0072832955, 0.9991769)
-bones/3/rotation = Quaternion(-0.037071344, -0.0010725817, 0.004623047, 0.9993014)
-
-[node name="Cube_001" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature/Skeleton3D" index="0" unique_id=1670019027]
-layers = 8
-
-[node name="AnimationPlayer" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim" index="1" unique_id=1434226818]
-playback_default_blend_time = 2.0
+[node name="TabletUpFrontPositionRotation" type="Marker3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=109477365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012324095, -0.47696984)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=121976474]
 transform = Transform3D(1, 0, 0, 0, 0.19741967, 0.98031914, 0, -0.98031914, 0.19741967, 0, 0, 0)
@@ -227,7 +219,7 @@ draw_pass_3 = ExtResource("21_7ahtn")
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
-[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI"]
-[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/BaseModel"]
-[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel"]
-[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim"]
+[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D"]
+[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel"]
+[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel"]
+[editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel/keychainAnim"]

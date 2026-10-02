@@ -57,7 +57,8 @@ var active_help_desk_customer: Customer
 var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
 var holding_trash := false
-var day := 0
+var day: int = 1
+var playing_tutorial: bool = false
 var shift_length: float
 var shift_time_remaining: float
 var shift_progress_ratio: float
@@ -159,19 +160,22 @@ var tutorial_machine_used: bool = false
 var tutorial_drink_correct_accepted: bool = false
 var tutorial_drink_incorrect_accepted: bool = false
 var tutorial_remake_button_pressed: bool = false
-var tutorial_drink_remade: bool = false
+var tutorial_drink_remake_ingredients_done: bool = false
+var tutorial_drink_remade_served: bool = false
 var tutorial_ingredients_bag_got: bool = false
 var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
-# Voice Line System
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
 var tutorial_manager: TutorialManager
+# TODO: move to Stats ?
 var trash_punishment_threshold := 5
 var trash_punishment_amount := 0.2
+
+var low_fps_updaters: Array[LowFpsSubViewportUpdater] = []
 
 enum CameraMode {
 	PLAYER,

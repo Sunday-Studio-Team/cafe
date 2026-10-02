@@ -227,6 +227,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	# Cached scenes and requests that finish between polls also reach completion.
 	_set_loading_progress(1.0)
 
+	await get_tree().process_frame
+
 	var instantiating_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	if TIMING_PRINTS:
 		print("SceneSwitcher: started timing instantiation")

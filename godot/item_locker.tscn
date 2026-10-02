@@ -13,25 +13,198 @@
 [ext_resource type="Resource" uid="uid://bhcmo11ttgvh3" path="res://items/roller_skates.tres" id="11_abt02"]
 [ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://items/super_scrubber_2000.tres" id="12_8r07k"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rb8fj"]
-size = Vector3(0.3300171, 1.6508789, 0.60302734)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_ovvye"]
-size = Vector3(1, 2, 1)
+size = Vector3(1.5, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dqjxi"]
+size = Vector3(1.75, 4, 1.5)
+
+[sub_resource type="Animation" id="Animation_dqjxi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ManualScaler/Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ManualScaler/Model:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ManualScaler/Model:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dt742"]
+resource_name = "idle_notice_me_a"
+length = 2.0
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ManualScaler/Model:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.25, 0.41666666, 0.5833333, 0.75, 0.9166667, 1.3333334, 1.5000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0.3, 0), Vector3(0, 0, 0), Vector3(0, 0.3, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ManualScaler/Model:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.33333334, 0.41666666, 0.5, 0.5833333, 0.75, 0.9166667, 1.3333334, 1.5000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.7, 1.2), Vector3(1, 0.8, 1), Vector3(1, 1, 1), Vector3(1, 0.8, 1), Vector3(1, 0.7, 1.2), Vector3(1, 0.8, 1), Vector3(1, 1, 1), Vector3(1, 0.7, 1.2), Vector3(1, 1, 1), Vector3(1, 0.7, 1.2), Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ManualScaler/Model:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.25, 0.41666666, 0.5833333, 0.75, 0.9166667, 1, 1.0833334, 1.1666667, 1.25, 1.3333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0, 0, 0), Vector3(-0.08726646, 0, 0), Vector3(0, 0, 0), Vector3(0.2617994, 0, 0), Vector3(0.17453292, 0, 0), Vector3(0.2617994, 0, 0), Vector3(0.17453292, 0, 0), Vector3(0.2617994, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e0bd6"]
+resource_name = "idle_notice_me_b"
+length = 2.0
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ManualScaler/Model:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.25, 0.41666666, 0.5, 0.5833333, 0.6666667, 0.75, 0.8333333, 1, 1.0833334, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.5, 0.5, 0), Vector3(2, 2, 0), Vector3(2, 3, 0), Vector3(1.5, 5, 0), Vector3(-1, 5, 0), Vector3(-2, 3, 0), Vector3(0, 2, 0), Vector3(0, 1.5, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ManualScaler/Model:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.25, 1.0833334, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.7, 1.2), Vector3(1, 1, 1), Vector3(0.8, 0.6, 1.4), Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ManualScaler/Model:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.25, 0.41666666, 0.5, 0.5833333, 0.6666667, 0.75, 0.8333333, 1.1666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.17453292), Vector3(0, 0, 0.7853982), Vector3(0, 0, 1.4835298), Vector3(0, 0, 2.443461), Vector3(0, 0, 3.8397243), Vector3(0, 0, 5.2359877), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_60wm3"]
+resource_name = "idle_notice_me_c"
+length = 2.0
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ManualScaler/Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ManualScaler/Model:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.41666666, 0.5833333, 0.6666749, 0.8333333, 0.9166667, 1.0833334, 1.1666666, 1.3333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.8, 1.1), Vector3(1, 1, 1), Vector3(0.5, 1, 2), Vector3(1, 1, 1), Vector3(0.5, 1, 2), Vector3(1, 1, 1), Vector3(0.5, 1, 2), Vector3(1, 1, 1), Vector3(0.5, 1, 2), Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ManualScaler/Model:rotation")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.41666666, 0.5, 0.5833333, 0.6666667, 0.75, 0.8333333, 0.9166667, 1, 1.0833334, 1.1666666, 1.25, 1.3333334, 1.4166666, 1.5, 1.6666666, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.27925268), Vector3(0, 0, -0.08726646), Vector3(0, 0, -1.5707964), Vector3(0, 0, -1.4835298), Vector3(0, 0, -0.2617994), Vector3(0, 0, -1.5707964), Vector3(0, 0, -1.4835298), Vector3(0, 0, -0.2617994), Vector3(0, 0, -1.5707964), Vector3(0, 0, -1.4835298), Vector3(0, 0, -0.2617994), Vector3(0, 0, -1.5707964), Vector3(0, 0, -1.4835298), Vector3(0, 0, -0.2617994), Vector3(0, 0, 0.27925268), Vector3(0, 0, 0.55850536), Vector3(0, 0, 0.08726646), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e0bd6"]
+_data = {
+&"RESET": SubResource("Animation_dqjxi"),
+&"idle_notice_me_a": SubResource("Animation_dt742"),
+&"idle_notice_me_b": SubResource("Animation_e0bd6"),
+&"idle_notice_me_c": SubResource("Animation_60wm3")
+}
 
 [node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("_interactable")]
 script = ExtResource("1_g6nyj")
-_interactable = NodePath("Interactable")
+_interactable = NodePath("ManualScaler/Interactable")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=983263623]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.90000004, 0)
+[node name="ManualScaler" type="Node3D" parent="." unique_id=130028914]
+transform = Transform3D(0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=386392793]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.084991455, -0.17456055, -0.0056152344)
-shape = SubResource("BoxShape3D_rb8fj")
+[node name="StaticBody3D" type="StaticBody3D" parent="ManualScaler" unique_id=983263623]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.179392e-08, 0.90000004, -2.1000001)
 
-[node name="Interactable" type="Area3D" parent="." unique_id=1396942595 node_paths=PackedStringArray("mesh")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ManualScaler/StaticBody3D" unique_id=1112715788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1000006, 0.8999999, 4.730679e-16)
+shape = SubResource("BoxShape3D_ovvye")
+
+[node name="Interactable" type="Area3D" parent="ManualScaler" unique_id=1396942595 node_paths=PackedStringArray("mesh")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.742278e-08, 0, -2)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_d87dh")
@@ -40,51 +213,53 @@ display_name = "Equip items"
 mesh = NodePath("../Model/Locker")
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1939244675]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10000038, 1, 0)
-shape = SubResource("BoxShape3D_ovvye")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ManualScaler/Interactable" unique_id=1939244675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0000005, 1.8, 0)
+shape = SubResource("BoxShape3D_dqjxi")
 
-[node name="Model" parent="." unique_id=1837404991 node_paths=PackedStringArray("door_mesh") instance=ExtResource("3_d87dh")]
-transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+[node name="Model" parent="ManualScaler" unique_id=1837404991 node_paths=PackedStringArray("door_mesh") instance=ExtResource("3_d87dh")]
 script = ExtResource("4_f2a8y")
 door_mesh = NodePath("Locker Door")
 
-[node name="PropShowerHider" type="Node" parent="Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 1962398424) index="0" unique_id=1665776569]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 658620535) index="0" unique_id=1665776569]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("6_dt742")
 
-[node name="PropShowerHider" type="Node" parent="Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 587808666) index="0" unique_id=1164381062]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 2072567497) index="0" unique_id=1164381062]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("7_e0bd6")
 
-[node name="PropShowerHider" type="Node" parent="Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 1877412421) index="0" unique_id=169925206]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 152920710) index="0" unique_id=169925206]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("8_60wm3")
 
-[node name="PropShowerHider" type="Node" parent="Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 1446751461) index="0" unique_id=1413157808]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 672954504) index="0" unique_id=1413157808]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("9_6i5wn")
 
-[node name="PropShowerHider" type="Node" parent="Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 85754966) index="0" unique_id=633572519]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 2062432595) index="0" unique_id=633572519]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("10_b0jqr")
 
-[node name="Mirror" parent="Model" index="19" unique_id=56187317]
-transform = Transform3D(-0.055559676, -0.017108118, -0.9983087, -0.061211396, 0.99803084, -0.013696704, 0.99657726, 0.060346883, -0.056497514, 0.55770606, 2.5702512, -0.04804725)
+[node name="Mirror" parent="ManualScaler/Model" index="19" unique_id=1669092183]
+transform = Transform3D(-0.055559676, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497514, 0.55770606, 2.5702512, -0.04804716)
 
-[node name="PropShowerHider" type="Node" parent="Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 77218249) index="0" unique_id=1034734605]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 1127249803) index="0" unique_id=1034734605]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="PropShowerHider" type="Node" parent="Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 266203652) index="0" unique_id=1863931289]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 1190557752) index="0" unique_id=1863931289]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="PropShowerHider" type="Node" parent="Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 274392463) index="0" unique_id=488191577]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 1240643384) index="0" unique_id=488191577]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("12_8r07k")
 
-[node name="Locker Door" parent="Model" index="24" unique_id=711655157]
+[node name="Locker Door" parent="ManualScaler/Model" index="24" unique_id=1429478246]
 transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
 
-[editable path="Model"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=847292096]
+libraries/ = SubResource("AnimationLibrary_e0bd6")
+
+[editable path="ManualScaler/Model"]
