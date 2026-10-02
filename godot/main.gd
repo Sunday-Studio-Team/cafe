@@ -126,7 +126,8 @@ func _ready() -> void:
 	
 	# Determine if we should play the tutorial!
 	var should_play_tutorial: bool = Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
-	if should_play_tutorial:
+	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
+	if should_play_tutorial and not skip_tutorials:
 		print("should play tutorial!")
 		Global.playing_tutorial = true
 	else:

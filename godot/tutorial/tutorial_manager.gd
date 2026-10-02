@@ -32,10 +32,8 @@ var skip_part_requested: bool = false
 func _init() -> void:
 	Global.tutorial_manager = self
 
-func start_day() -> void:
-	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
-	
-	if Global.playing_tutorial and not skip_tutorials:
+func start_day() -> void:	
+	if Global.playing_tutorial:
 		# Disable Tippy callouts
 		_tippy_callouts_manager.enable_tippy_callouts = false
 		
