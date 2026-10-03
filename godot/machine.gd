@@ -110,7 +110,8 @@ enum Icon {
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
-@export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
+@export var popup_go_to_spill: PackedScene # tutor ial popup that tells player to go to the spill
+@export var minus_rating_vfx: Machine3DPopupVfx
 @export_category("Explosion Particles")
 @export var explosion_boom_particles: GPUParticles3D
 
@@ -816,6 +817,7 @@ func accept_order(did_remake_drink: bool) -> void:
 				UI.ALERT_COLOR_RED
 			)
 			Global.employee_rating -= order.star_rating_loss_if_accept
+			minus_rating_vfx.play_anim_then_hide()
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	reset_icons()
