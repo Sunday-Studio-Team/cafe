@@ -32,8 +32,6 @@ extends Node3D
 @export var clock_item_start_sound: AudioStreamPlayer
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
-@export var teleporter3: Teleporter
-@export var teleporter4: Teleporter
 @export var air_freshener: AirFreshener
 @export var tutorial_selection_menu: TutorialSelectionMenu
 @export var shift_start_sound: AudioStreamPlayer
@@ -207,19 +205,15 @@ func update_teleporters_enabled() -> void:
 				has_teleporter_level_2 = true
 			break
 	if has_teleporter:
+		teleporter1.disable_teleporter()
 		teleporter2.enable_teleporter()
-		teleporter3.enable_teleporter()
 		if has_teleporter_level_2:
-			teleporter1.enable_teleporter()
-			teleporter4.enable_teleporter()
+			pass
 		else:
-			teleporter1.disable_teleporter()
-			teleporter4.disable_teleporter()
+			pass
 	else:
 		teleporter1.disable_teleporter()
 		teleporter2.disable_teleporter()
-		teleporter3.disable_teleporter()
-		teleporter4.disable_teleporter()
 
 
 func update_air_fresheners_enabled() -> void:
