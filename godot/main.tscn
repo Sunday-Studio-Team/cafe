@@ -372,6 +372,7 @@
 [ext_resource type="Resource" uid="uid://ccqhq7cuo3kxr" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day5_5.tres" id="319_pbe4p"]
 [ext_resource type="Resource" uid="uid://cd8s5g1qv8vfj" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day5_6.tres" id="320_8ldsf"]
 [ext_resource type="Resource" uid="uid://dsg2k6e5km856" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day5_7.tres" id="321_f4177"]
+[ext_resource type="PackedScene" uid="uid://b7a88k1j6gt32" path="res://tippy_clock.tscn" id="374_weuxt"]
 [ext_resource type="PackedScene" uid="uid://b1h38lx2btyla" path="res://customer_area_music_player.tscn" id="404_mfcn2"]
 
 [sub_resource type="Resource" id="Resource_1yv1y"]
@@ -1358,7 +1359,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jfyx3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_weuxt"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1369,7 +1370,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_weuxt"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_6ttiy"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1380,7 +1381,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_6ttiy"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2cfd8"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1391,13 +1392,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2cfd8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_64ppg"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_64ppg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_scdfc"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_scdfc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jyvw0"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
@@ -2470,7 +2471,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_jfyx3")
+texture = SubResource("ViewportTexture_weuxt")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2483,7 +2484,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_weuxt")
+texture = SubResource("ViewportTexture_6ttiy")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2500,7 +2501,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_6ttiy")
+texture = SubResource("ViewportTexture_2cfd8")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2517,7 +2518,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_2cfd8")
+texture = SubResource("ViewportTexture_64ppg")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1007682, 0, -0.47781718, 0, 1.2, 0, 0.47781718, 0, 1.1007682, 2.3493953, 1.2573628, 14.395585)
@@ -2540,10 +2541,10 @@ main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
 transform = Transform3D(0.9190937, 0, -0.39403895, 0, 1, 0, 0.39403895, 0, 0.9190937, 1.5212033, 1.6, 15.95289)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_64ppg")
+texture = SubResource("ViewportTexture_scdfc")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_scdfc")
+texture = SubResource("ViewportTexture_jyvw0")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2705,7 +2706,7 @@ volume_db = -5.0
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.586, 1.25, 6.338)
 
 [node name="AroundCafeVoiceLinePlayer3D2" parent="AroundCafeVoiceLinePlayers" unique_id=417750739 instance=ExtResource("312_8ldsf")]
-transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.486, 1.25, 7.331)
+transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.486, 1.25, 7.8654447)
 
 [node name="AroundCafeVoiceLinePlayer3D3" parent="AroundCafeVoiceLinePlayers" unique_id=463110771 instance=ExtResource("312_8ldsf")]
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
@@ -2818,6 +2819,12 @@ FRESHENER"
 [node name="SpraySound" type="AudioStreamPlayer3D" parent="AirFreshener" unique_id=1258576394]
 stream = ExtResource("282_xj0gb")
 
+[node name="Tippy_Clock" parent="." unique_id=1686326203 instance=ExtResource("374_weuxt")]
+transform = Transform3D(-3.4969108e-09, 0, -0.07999999, 0, 0.08, 0, 0.07999999, 0, -3.4969108e-09, 8.6740465, 1.223219, 6.3421893)
+
+[node name="Tippy_Clock2" parent="." unique_id=1244749543 instance=ExtResource("374_weuxt")]
+transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -7.9058084, 1.223219, -4.0249243)
+
 [editable path="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/TabletUI2D"]
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
@@ -2851,7 +2858,6 @@ stream = ExtResource("282_xj0gb")
 [editable path="CafeEnvironment/CustomerArea/ceiling light2/Ceiling Lamp2"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light/Ceiling Lamp2"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy8"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy15"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy10"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy11"]
@@ -2861,7 +2867,6 @@ stream = ExtResource("282_xj0gb")
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersB_Rust"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers6"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers3"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes"]
