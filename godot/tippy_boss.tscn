@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
 shape = SubResource("CapsuleShape3D_vn1tu")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="TippyBossModel" parent="." unique_id=1151129135 instance=ExtResource("2_un3jd")]
+[node name="PlaceholderSprite" parent="." unique_id=1151129135 instance=ExtResource("2_un3jd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
 
 [node name="TiredIndicator" type="Label3D" parent="." unique_id=744485011]
@@ -83,10 +83,11 @@ collision_mask = 9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0, 0)
 shape = SubResource("BoxShape3D_mjix0")
 
-[node name="Walk Cycle" parent="." unique_id=783853330 instance=ExtResource("3_un3jd")]
+[node name="Model" parent="." unique_id=783853330 instance=ExtResource("3_un3jd")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+visible = false
 
-[node name="Skeleton3D" parent="Walk Cycle/Armature_002" parent_id_path=PackedInt32Array(783853330, 1141075009) index="0" unique_id=1131653916]
+[node name="Skeleton3D" parent="Model/Armature_002" parent_id_path=PackedInt32Array(783853330, 1377121398) index="0" unique_id=1830174904]
 bones/0/position = Vector3(-0.3575509, 0.8846485, 1.731678e-08)
 bones/1/rotation = Quaternion(0.0032714582, 0.00088856596, 0.92085826, 0.38988268)
 bones/2/rotation = Quaternion(-0.0039093844, 0.99999106, -0.0016376032, 1.2992627e-05)
@@ -121,26 +122,26 @@ bones/34/position = Vector3(-1.3298956, 0.715359, -0.16817534)
 bones/34/rotation = Quaternion(-0.83877164, 0.47741926, -0.19749193, 0.17184287)
 bones/36/rotation = Quaternion(0.3853897, 0.9224853, 0.021517565, -0.0057201697)
 
-[node name="Bone_016" parent="Walk Cycle/Armature_002/Skeleton3D" index="0" unique_id=231741496]
+[node name="Bone_016" parent="Model/Armature_002/Skeleton3D" index="0" unique_id=115809582]
 transform = Transform3D(0.7815031, 0.5681639, -0.2577643, -0.61346877, 0.6245493, -0.4833153, -0.11361581, 0.53584284, 0.83663815, -0.26599905, 2.431938, 0.16602129)
 
-[node name="Bone_002" parent="Walk Cycle/Armature_002/Skeleton3D" index="1" unique_id=1567252671]
+[node name="Bone_002" parent="Model/Armature_002/Skeleton3D" index="1" unique_id=1528619910]
 transform = Transform3D(0.99999976, 0.0006262384, 1.5877317e-09, -0.0006262384, 0.99999976, 5.1905267e-06, 1.6627647e-09, -5.1905267e-06, 1, -0.35742432, 1.4796023, -1.1652398e-06)
 
-[node name="Bone_004" parent="Walk Cycle/Armature_002/Skeleton3D" index="2" unique_id=633016774]
+[node name="Bone_004" parent="Model/Armature_002/Skeleton3D" index="2" unique_id=383658075]
 transform = Transform3D(-0.050324786, -0.99873203, -0.000969747, -0.99854696, 0.050333954, -0.019241966, 0.019266382, -8.684125e-09, -0.9998145, -0.51801395, 1.3622296, 0.004709816)
 
-[node name="Bone" parent="Walk Cycle/Armature_002/Skeleton3D" index="3" unique_id=1465446326]
+[node name="Bone" parent="Model/Armature_002/Skeleton3D" index="3" unique_id=139930020]
 transform = Transform3D(1, 0, 2.3841855e-07, 0, 1, 0, -2.3841855e-07, 0, 1, -0.3575509, 0.8846485, 1.731678e-08)
 
-[node name="Foot 2_001" parent="Walk Cycle/Armature_002/Skeleton3D" index="4" unique_id=305543042]
+[node name="Foot 2_001" parent="Model/Armature_002/Skeleton3D" index="4" unique_id=1912600387]
 transform = Transform3D(-0.4546473, -0.88706625, 0.08005845, -0.88904583, 0.45740876, 0.019355932, -0.053789437, -0.062375516, -0.9966022, -1.2066154, 0.13373917, 0.19120936)
 
-[node name="Foot 2_002" parent="Walk Cycle/Armature_002/Skeleton3D" index="5" unique_id=1022965591]
+[node name="Foot 2_002" parent="Model/Armature_002/Skeleton3D" index="5" unique_id=791718555]
 transform = Transform3D(-0.17412317, -0.8909515, 0.41938844, 0.3318015, -0.45407268, -0.82687753, 0.9271403, -0.0048247133, 0.3746839, -0.020094667, 0.16745898, -0.18629332)
 
-[node name="AnimationPlayer" parent="Walk Cycle" index="1" unique_id=883191294]
+[node name="AnimationPlayer" parent="Model" index="1" unique_id=895436802]
 autoplay = &"Armature_002Action"
 speed_scale = 3.0
 
-[editable path="Walk Cycle"]
+[editable path="Model"]
