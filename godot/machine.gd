@@ -124,6 +124,7 @@ var tutorial_lock_remake_drink_button: bool = false
 var next_drink_forced_perfect: bool = false
 var tutorial_lock_accept_drink_button: bool = false
 var next_drink_forced_incorrect: bool = false
+var customer_arrived: bool = false
 var ingredients: int:
 	set(new_value):
 		if new_value > Stats.current.machine_max_ingredients:
@@ -259,6 +260,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			customer_wait_bar.modulate = Color.RED
 
+	if customer_arrived:
+		customer_arrived = false
+		check_for_stepping_in_spill()
+		machine_make_drink()
+
 	_process_queued_customers()
 
 
@@ -295,9 +301,7 @@ func _process_queued_customers() -> void:
 			return
 		var new_current_customer: Customer = queued_customers.pop_front()
 		_customer_queue_update_visuals()
-		await _set_customer(new_current_customer)
-		check_for_stepping_in_spill()
-		machine_make_drink()
+		_set_customer(new_current_customer)
 
 
 func check_for_stepping_in_spill() -> void:
@@ -361,15 +365,21 @@ func _set_customer(new_customer: Customer) -> void:
 		if customer.customer_sprite_resource.alternate_desk_sprite:
 			customer.override_material.albedo_texture = customer.customer_sprite_resource.sprite
 
+	customer = new_customer
+	customer_arrived = false
+
 	if new_customer != null:
 		new_customer.wait_timed_out.connect(
 				_on_customer_wait_timed_out,
 				CONNECT_ONE_SHOT
 		)
 		await new_customer.move_to(spot_for_customer.global_position)
+		#In case the customer is airhorned or some other stuff happens
+		if new_customer != customer:
+			return
 		if new_customer.customer_sprite_resource.alternate_desk_sprite:
 			new_customer.override_material.albedo_texture = new_customer.customer_sprite_resource.alternate_desk_sprite
-
+		customer_arrived = true
 	else:
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
@@ -377,8 +387,6 @@ func _set_customer(new_customer: Customer) -> void:
 		timer.stop()
 		if Global.making_drink_manually and gui_3d.player_using_me:
 			Events.force_close_minigame.emit()
-
-	customer = new_customer
 
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
