@@ -46,7 +46,6 @@ var in_spill_minigame := false
 var in_pc_ui := false
 var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]
-var spam_emails: Array[EmailData]
 var reviews: Array[Review]
 var received_reviews: Array[Review]
 var unread_email_count: int

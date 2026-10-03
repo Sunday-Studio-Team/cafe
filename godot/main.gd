@@ -241,7 +241,6 @@ func set_per_day_stuff() -> void:
 		Global.player_tips_bank = 5
 		Global.received_emails.clear()
 		Global.read_emails.clear()
-		Global.spam_emails.clear()
 		Global.received_reviews.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
