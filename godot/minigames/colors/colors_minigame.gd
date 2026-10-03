@@ -19,7 +19,7 @@ const employee_happy:Texture2D = preload("res://sprites/machine_fix_buttons_mini
 const employee_anxiety:Texture2D = preload("res://sprites/machine_fix_buttons_minigame/tippy_buttons_anx_1.png")
 
 var successes: int = 0
-var colors = [Color.RED, Color.BLUE, Color.GREEN]
+var colors = [Color(1.0, 0.331, 0.265, 1.0), Color(0.245, 0.467, 1.0, 1.0), Color(0.574, 1.0, 0.543, 1.0)]
 var prompts_and_corresponding_buttons: Dictionary = {
 	"Red Square": 1,
 	"Blue A": 1,
@@ -49,7 +49,7 @@ func show_new_prompt():
 	current_prompt = prompts_and_corresponding_buttons.keys().pick_random()
 	var color:String = str("#",(colors.pick_random() as Color).to_html())
 	#prompt_text_box.add_theme_color_override("font_color", colors.pick_random())
-	prompt_text_box.text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=%s]%s" % [color,current_prompt]
+	prompt_text_box.text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=32][p align=center]Tippy says:[/p][font_size=48][p align=center]Click the[/p][p align=center][color=%s]%s" % [color,current_prompt]
 	create_tween().tween_property(prompt_text_box, "visible_ratio", 1, 0.5).from(0)
 	prompt_print_sound.play()
 

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/colors_minigame.gd" id="1_aq73i"]
 [ext_resource type="Texture2D" uid="uid://cbr0tg082w7ue" path="res://minigames/colors/assets/colors-minigame-bg.webp" id="2_m7lj7"]
 [ext_resource type="Texture2D" uid="uid://bjnp264s7cvw7" path="res://minigames/colors/assets/tippy_textbox.webp" id="3_ib8td"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="4_fbfb6"]
 [ext_resource type="PackedScene" uid="uid://dbx22r4b0wtk7" path="res://minigames/colors/individual_button.tscn" id="5_c04s5"]
 [ext_resource type="Texture2D" uid="uid://c3lmtm2dr84he" path="res://minigames/colors/assets/ColorUIMinigameSatoAnimation-png/ColorUIMinigameSatoAnimation-01.png" id="5_fbfb6"]
 [ext_resource type="Texture2D" uid="uid://gmpvwsj5h11f" path="res://sprites/machine_fix_buttons_minigame/A_BOX.png" id="6_4vt2w"]
@@ -67,7 +68,7 @@ fallback_environment = SubResource("Environment_odiqf")
 
 [sub_resource type="Environment" id="Environment_sryxk"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4vt2w"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fbfb6"]
 viewport_path = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/PromptViewport")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jnmp6"]
@@ -207,7 +208,7 @@ stream_0/stream = ExtResource("11_m7lj7")
 stream_1/stream = ExtResource("12_ib8td")
 stream_2/stream = ExtResource("13_4vt2w")
 
-[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "employee_texture_rect", "correct_sound", "wrong_sound", "prompt_print_sound")]
+[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "correct_sound", "wrong_sound", "prompt_print_sound")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -218,7 +219,6 @@ script = ExtResource("1_aq73i")
 buttons = [NodePath("Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer/A"), NodePath("Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer/B"), NodePath("Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer/C")]
 prompt_panel = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel")
 prompt_text_box = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/PromptViewport/Prompt")
-employee_texture_rect = NodePath("")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 prompt_print_sound = NodePath("PromptPrintSound")
@@ -316,16 +316,21 @@ offset_bottom = 781.66504
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5803922)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = -4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/normal_font = ExtResource("4_fbfb6")
 bbcode_enabled = true
-text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Blue A"
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=32][p align=center]Tippy says:[/p][font_size=48][p align=center]Click the[/p][p align=center][color=#ff0000ff]Red Square"
 fit_content = true
 
 [node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1218646402]
 layout_mode = 0
-offset_left = -393.0
-offset_top = -1347.0
-offset_right = 1655.0
-offset_bottom = 701.0
+offset_left = -523.0
+offset_top = -1059.0
+offset_right = 1525.0
+offset_bottom = 989.0
 scale = Vector2(0.8, 0.8)
 offset_transform_enabled = true
 offset_transform_scale = Vector2(0.8, 0.8)
@@ -333,7 +338,6 @@ mouse_filter = 2
 texture = SubResource("ViewportTexture_ib8td")
 
 [node name="3DPrompt" type="SubViewport" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1536550611]
-own_world_3d = true
 world_3d = SubResource("World3D_s46kr")
 transparent_bg = true
 scaling_3d_mode = 5
@@ -343,11 +347,11 @@ size = Vector2i(2048, 2048)
 [node name="Node3D" type="Node3D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt" unique_id=1100204292]
 
 [node name="Camera3D" type="Camera3D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt/Node3D" unique_id=705064087]
-transform = Transform3D(0.9207117, -0.0027583912, -0.3902338, -0.17676619, 0.8885588, -0.4233402, 0.3479134, 0.45875442, 0.8176189, -1.8133678, -1.9033976, 4.264658)
+transform = Transform3D(0.98974174, 0.13482037, -0.047271736, -0.14107776, 0.97450274, -0.17447492, 0.022543665, 0.17935412, 0.98352623, -0.9083462, -1.9033976, 4.264658)
 environment = SubResource("Environment_sryxk")
 
 [node name="Sprite3D" type="Sprite3D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt/Node3D" unique_id=1605292279]
-texture = SubResource("ViewportTexture_4vt2w")
+texture = SubResource("ViewportTexture_fbfb6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer" unique_id=303839521]
 position = Vector2(1505, 208)
