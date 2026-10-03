@@ -114,6 +114,7 @@ func _on_time_up() -> void:
 			5: day = "Friday"
 		var g_item:Item = Global.get_item(Stats.current.daily_completion_item_unlocks.get(Global.day, [])[0])
 		var b_item:Item = Global.get_item(Stats.current.daily_rating_item_unlocks.get(Global.day, [])[0])
+		cond_def.text = "[center]clear day %s" % Global.day
 		guaranteed_item.texture = g_item.icon
 		bonus_item.texture = b_item.icon
 		day_label.text = "[right]%s"%day
