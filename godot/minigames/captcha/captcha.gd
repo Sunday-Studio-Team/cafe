@@ -208,7 +208,7 @@ func _start_minigame() -> void:
 	
 	if(Global.ordered_drink_customer != null):
 		drink_customer = Global.ordered_drink_customer
-		customer_sprite.texture = drink_customer.body.texture
+		customer_sprite.texture = drink_customer.full_body_sprite.texture
 		
 		rescale_image_to_target_height(customer_sprite)
 	else:
