@@ -22,7 +22,7 @@ const ALERT_QUEUE_SIZE = 5
 @export var profit_progress: ProgressBar
 @export var customer_happiness_label: Label
 @export var score_update_label: Label
-@export var interactable_indicator: PanelContainer
+@export var interactable_indicator: TextureRect
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
@@ -64,7 +64,7 @@ const ALERT_QUEUE_SIZE = 5
 #Active Item
 @export var item_ui: Control
 @export var current_item_ui: Control
-@export var item_indicator: PanelContainer
+@export var item_indicator: TextureRect
 @export var item_text: RichTextLabel
 @export var current_item_icon: TextureRect
 @export var item_cooldown_bar: TextureProgressBar

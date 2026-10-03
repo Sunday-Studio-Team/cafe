@@ -244,8 +244,12 @@
 [ext_resource type="Resource" uid="uid://dsgbp7c1o55jb" path="res://voice_lines/resources/tutorial/voice_line_tutorial_incorrect_drink_prepared_4.tres" id="154_dfxmq"]
 [ext_resource type="Resource" uid="uid://cq2idwtwk746x" path="res://voice_lines/resources/tutorial/voice_line_tutorial_incorrect_drink_prepared_5.tres" id="155_kcoi7"]
 [ext_resource type="Resource" uid="uid://c01ei7nx3t8b5" path="res://voice_lines/resources/tutorial/voice_line_tutorial_incorrect_drink_prepared_6.tres" id="156_rkju4"]
+[ext_resource type="Texture2D" uid="uid://cxwm0bcv4uyoa" path="res://Assets/UI/ui icon.png" id="157_g6ptb"]
 [ext_resource type="Resource" uid="uid://cr6c4gp6i5c72" path="res://voice_lines/resources/tutorial/voice_line_tutorial_incorrect_drink_prepared_7.tres" id="157_um25j"]
+[ext_resource type="Texture2D" uid="uid://cl01oyfrjl33w" path="res://Assets/UI/promptbubble_2.png" id="158_0bk8h"]
 [ext_resource type="Resource" uid="uid://bdc8hcnbx72xf" path="res://voice_lines/resources/tutorial/voice_line_tutorial_ingredients_got.tres" id="158_7dysq"]
+[ext_resource type="FontFile" uid="uid://iwtg6aji6yt5" path="res://fonts/Action-Man/Action_Man.ttf" id="158_egrga"]
+[ext_resource type="FontFile" uid="uid://qwglux8fnyob" path="res://fonts/Action-Man/Action_Man_Bold.ttf" id="160_tfaor"]
 [ext_resource type="Resource" uid="uid://dj13bxhc7dg6b" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_broke_1.tres" id="164_0abf2"]
 [ext_resource type="Resource" uid="uid://du1fxxuvtvwer" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_broke_2.tres" id="165_7b48j"]
 [ext_resource type="Resource" uid="uid://b2782tf1dfv6h" path="res://voice_lines/resources/tutorial/voice_line_tutorial_machine_broke_3.tres" id="166_8tqy7"]
@@ -707,17 +711,6 @@ corner_radius_bottom_left = 25
 font_size = 32
 font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.19215687, 0.20392157, 0.19607843, 0.78431374)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0sjo"]
 bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 
@@ -737,7 +730,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_t3ss8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0bk8h"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -748,7 +741,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_g6ptb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xuh84"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -759,7 +752,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0bk8h"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_egrga"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -770,7 +763,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xuh84"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_tfaor"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppx11"]
@@ -850,7 +843,7 @@ _tutorial_vo_location_machine_ui = NodePath("Machines/RightAreaRightMachine/Tuto
 _tutorial_vo_location_ingredients_bag = NodePath("TutorialStoreRoomVoiceLineLocation")
 _tutorial_vo_location_help_desk = NodePath("CustomerHelpDesk/TutorialHelpDeskVoiceLineLocation")
 _tutorial_vo_location_spill = NodePath("Machines/RightAreaRightMachine/TutorialMachineSpillVoiceLineLocation")
-day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath(""), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
+day_containers = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), null, NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1263,26 +1256,31 @@ offset_transform_enabled = true
 texture = ExtResource("44_dfxmq")
 expand_mode = 2
 
-[node name="Interactable" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1696852801]
+[node name="Interactable" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=678516276]
 custom_maximum_size = Vector2(-1, 75)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -280.0
+offset_left = -519.0
 offset_top = 118.0
-offset_right = 280.0
-offset_bottom = 192.0
+offset_right = 481.0
+offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+texture = ExtResource("157_g6ptb")
+stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable" unique_id=1133469025]
-layout_mode = 2
+layout_mode = 0
+offset_left = 291.0
+offset_top = -1.0
+offset_right = 841.0
+offset_bottom = 63.0
 size_flags_vertical = 4
 alignment = 1
 
@@ -1290,7 +1288,10 @@ alignment = 1
 custom_minimum_size = Vector2(550, 50)
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_font_sizes/normal_font_size = 32
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("158_egrga")
+theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[E] interact"
 scroll_active = false
@@ -1304,21 +1305,36 @@ size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="ItemIndicator" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable" unique_id=498491282]
+[node name="ItemIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable" unique_id=1959241907]
 custom_minimum_size = Vector2(300, 50)
 custom_maximum_size = Vector2(400, 50)
-layout_mode = 2
+layout_mode = 0
+offset_left = 417.0
+offset_top = -93.0
+offset_right = 737.0
+offset_bottom = -43.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.75, -0.5)
 offset_transform_scale = Vector2(0.75, 0.75)
 offset_transform_rotation = 0.08726646
+texture = ExtResource("158_0bk8h")
+stretch_mode = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable/ItemIndicator" unique_id=1532821752]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 36
-text = "[Q] HAMMER 💥"
+layout_mode = 0
+offset_left = 11.0
+offset_top = -39.0
+offset_right = 311.0
+offset_bottom = 71.0
+rotation = 0.07359508
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("158_egrga")
+theme_override_fonts/bold_font = ExtResource("160_tfaor")
+theme_override_font_sizes/normal_font_size = 30
+text = "[Q] HAMMER"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -1942,7 +1958,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_t3ss8")
+texture = SubResource("ViewportTexture_0bk8h")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -1955,7 +1971,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_g6ptb")
+texture = SubResource("ViewportTexture_xuh84")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -1972,7 +1988,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_0bk8h")
+texture = SubResource("ViewportTexture_egrga")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -1989,7 +2005,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_xuh84")
+texture = SubResource("ViewportTexture_tfaor")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1999999, 0, -3.5527137e-15, 0, 1.1999999, 0, 3.5527137e-15, 0, 1.1999999, 0.2796278, 1.2573626, 10.731313)
