@@ -9,7 +9,7 @@ func _ready() -> void:
 	material = plane.get_surface_override_material(0);
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if (!Global.shift_started):
 		material.set_shader_parameter("progress", 0.0);
 	else:

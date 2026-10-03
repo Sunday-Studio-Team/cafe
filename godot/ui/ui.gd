@@ -27,9 +27,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
-@export var time_left_ui: Control
-@export var time_left_label: Label
-@export var time_left_bar: TextureProgressBar
 @export var shift_starting_ending_label: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -39,13 +36,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var _eye_logo_red_texture: Texture2D
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
-@export var shelf_item_ui: PanelContainer
-@export var shelf_item_name: RichTextLabel
-@export var shelf_item_description: RichTextLabel
-@export var shelf_item_active_indicator: Control
-@export var shelf_item_cooldown_label: RichTextLabel
-@export var shelf_item_passive_indicator: Control
-@export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_label: Label
@@ -165,7 +155,6 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 		
-	update_time_indicator()
 	update_cctv_indicator()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
@@ -233,28 +222,6 @@ func update_score_indicators() -> void:
 
 	if not Global.employee_rating == _employee_rating_last_update:
 		_update_rating()
-
-
-func update_time_indicator() -> void:
-	time_left_ui.visible = not game_timer.is_stopped()
-
-	var time_left := game_timer.time_left
-
-	time_left_label.text = "⌛%s" % int(time_left)
-
-	# 'freeze' the indicator if we paused with an item
-	if game_timer.paused:
-		time_left_ui.modulate = Color.SKY_BLUE
-	else:
-		time_left_ui.modulate = Color.WHITE
-
-	time_left_bar.value = time_left / game_timer.wait_time * 100
-	if time_left_bar.value >= 66:
-		time_left_bar.modulate = Color.GREEN
-	elif time_left_bar.value >= 33:
-		time_left_bar.modulate = Color.ORANGE
-	else:
-		time_left_bar.modulate = Color.RED
 
 
 func update_interactable_ui() -> void:
