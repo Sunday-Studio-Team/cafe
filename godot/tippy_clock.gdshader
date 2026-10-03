@@ -3,6 +3,7 @@ shader_type spatial;
 uniform vec3 full_color : source_color;
 uniform vec3 empty_color : source_color;
 uniform float radius;
+uniform float progress : hint_range(0.0, 1.0);
 
 void fragment() {
 	// Called for every pixel the material is visible on.
@@ -10,6 +11,13 @@ void fragment() {
 	if (length(centered) > radius) {
 	        discard;
 	}
+	
+	float angle = fract(atan(centered.x, -centered.y) / TAU);
+	if (angle < progress) {
+		discard;
+	}
+	
+	ALBEDO = mix(full_color, empty_color, progress);
 }
 
 //void vertex() {
