@@ -6,7 +6,6 @@ extends Node2D
 @export var canvas_sprite2: Sprite2D
 @export var canvas_sprite3: Sprite2D
 
-#@export var progress_label: Label
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
 @export var machine_clean: Sprite2D
@@ -26,11 +25,7 @@ extends Node2D
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
-var allowed_spill_remaining_ratio_1: float # = Stats.current.clean_spill_allowed_remaining
-#@export_range(0.00, 1.0, 0.001)
-#var allowed_spill_remaining_ratio_2: float
-#@export_range(0.00, 1.0, 0.001)
-#var allowed_spill_remaining_ratio_final: float
+var allowed_spill_remaining_ratio_1: float 
 @export_range(0.00, 1.0, 0.001)
 var machine_clean_ratio: float
 @export_range(0.00, 1.0, 0.001)
@@ -47,9 +42,6 @@ var canvas_image3: Image
 var canvas_texture: ImageTexture
 var canvas_texture2: ImageTexture
 var canvas_texture3: ImageTexture
-
-#var starting_pixel_count: int = 0
-#var remaining_pixel_count: int = 0
 var mop_dirtied_amount: float
 var starting_scale: Vector2 = Vector2(1.0, 1.0)
 var current_scale: Vector2 = Vector2(1.0, 1.0)
@@ -79,8 +71,6 @@ var spill3_gone: bool = false
 func _ready() -> void:
 	Global.minigame_active = true
 	Global.in_spill_minigame = true
-	#canvas_sprite.texture = Global.spill_sprites.pick_random()
-
 	canvas_image = canvas_sprite.texture.get_image()
 	canvas_image.convert(Image.FORMAT_RGBA8)
 	canvas_image.clear_mipmaps()
@@ -115,8 +105,6 @@ func _ready() -> void:
 	new_scale2 = canvas_sprite2.scale
 	new_scale3 = canvas_sprite3.scale
 	starting_scale = canvas_sprite.scale
-		#canvas_sprite2.visible = false
-		#canvas_sprite3.visible = false
 
 	if moping_area == null:
 		push_error("Moping Area has not been assigned.")
@@ -171,10 +159,7 @@ func _physics_process(_delta: float) -> void:
 	previous_mop_position = mop_collision.global_position
 
 	check_machine_clean()
-	
-	#print("prev_remaining_ratio", prev_remaining_ratio)
-	#print("remaining_ratio", remaining_ratio)
-	#print("mop.is_dirty", mop.is_dirty)
+
 
 
 	if (mop_dirtied_amount >= mop_dirtied_thresh):
@@ -183,27 +168,21 @@ func _physics_process(_delta: float) -> void:
 		anim_water_flow.hide()
 		
 		text_bubble.mop_need_cleaning()
-		#print("mop_need_cleaning")
 		
 		if bucket_area.overlaps_area(moping_area) or bucket_area.overlaps_body(mop): # adjust based on what type your mop/moping_area is
 					mop.wet_mop()
 					mop_dirtied_amount = 0.0
 					prev_remaining_ratio = remaining_ratio
-					#print("prev_remaining_ratio set to remaining ratio")
 					mop.is_dirty = false
-					#print("mop is now wet and clean again")
 					if text_bubble:
 						text_bubble.mop_entered()
 	else:
 		if ((prev_remaining_ratio - remaining_ratio) > 0.05 and not mop.is_dirty):
-			#print("mop is now put in to use")
 			mop.get_dirty()
 		elif ((prev_remaining_ratio - remaining_ratio) < 0.05 and not mop.is_dirty):
-			#print("mop just done cleaning")
 			update_image(rect)
 			check_for_win()	
 		else:
-			#print("mop getting dirtier")
 			mop_dirtied_amount += mop_dirtied_speed
 
 			update_image(rect)
@@ -231,59 +210,26 @@ func erased_area_inside_mop_rectangle() -> Rect2i:
 
 
 func update_image(rect: Rect2i) -> void:
-	#var image_rect := Rect2i(
-		#Vector2i.ZERO,
-		#canvas_image.get_size()
-	#)
-#
-	#rect = rect.intersection(image_rect)
-#
-	#var image_rect2 := Rect2i(
-		#Vector2i.ZERO,
-		#canvas_image2.get_size()
-	#)
-#
-	#rect = rect.intersection(image_rect2)
-	#
-	#var image_rect3 := Rect2i(
-		#Vector2i.ZERO,
-		#canvas_image2.get_size()
-	#)
-#
-	#rect = rect.intersection(image_rect3)
-	#
-	#if rect.size.x <= 0 or rect.size.y <= 0:
-		#return
-
-	#remaining_mask.set_bit_rect(rect, false)
-	#remaining_pixel_count = remaining_mask.get_true_bit_count()
 	anim_water_flow.show()
 	anim_water_flow.play("waterflow")
 
 	new_scale = check_and_shrink_sprite(canvas_sprite, Vector2i(image_width, image_height), new_scale)
 	new_scale2 = check_and_shrink_sprite(canvas_sprite2, Vector2i(image_width2, image_height2), new_scale2)
 	new_scale3 = check_and_shrink_sprite(canvas_sprite3, Vector2i(image_width3, image_height3), new_scale3)
-	
-	#print("new scalee", new_scale)
-	#print("new scalee2", new_scale2)
-	#print("new scalee3", new_scale3)
 
 
 	if new_scale <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill1_gone==false:
 		audio_player_spills.stream = spill_shrink_audio.pick_random()
-		#print("spill audio is playing")
 		spill1_gone = true
 		audio_player_spills.play()
 		
 	if new_scale2 <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill2_gone==false:
 		audio_player_spills.stream = spill_shrink_audio.pick_random()
-		#print("spill audio is playing")
 		spill2_gone = true
 		audio_player_spills.play()
 		
 	if new_scale3 <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill3_gone==false:
 		audio_player_spills.stream = spill_shrink_audio.pick_random()
-		#print("spill audio is playing")
 		spill3_gone = true
 		audio_player_spills.play()
 		
@@ -320,49 +266,8 @@ func check_and_shrink_sprite(sprite: Sprite2D, img_size: Vector2i, current_sprit
 	
 	return current_sprite_scale
 	
-	##if current_spill == 0:
-		#current_scale = canvas_sprite.scale
-		#new_scale = Vector2(current_scale.x - spill_clean_speed, current_scale.y - spill_clean_speed)	
-		#print("new scale spill 0", new_scale)
-#
-		#canvas_sprite.scale = new_scale
-	##elif current_spill == 1:
-		#current_scale = canvas_sprite2.scale
-		#new_scale = Vector2(current_scale.x - spill_clean_speed, current_scale.y - spill_clean_speed)	
-		#print("new scale spill 1", new_scale)
-		#
-		#canvas_sprite2.scale = new_scale
-	#elif current_spill == 2:
-		#current_scale = canvas_sprite3.scale
-		#new_scale = Vector2(current_scale.x - spill_clean_speed, current_scale.y - spill_clean_speed)	
-		#print("new scale spill 2", new_scale)
-		#
-		#canvas_sprite3.scale = new_scale
-		
-#func initialize_progress_mask() -> void:
-	#remaining_mask = BitMap.new()
-	#remaining_mask.create_from_image_alpha(canvas_image, 0.0)
-
-	#starting_pixel_count = remaining_mask.get_true_bit_count()
-	#remaining_pixel_count = starting_pixel_count
-
-
-#func update_progress_display() -> void:
-	#if starting_pixel_count <= 0:
-		#progress_label.text = "Erased: 100%"
-		#return
-#
-	#var erased_ratio: float = 1.0 - remaining_ratio
-#
-	#var erased_percentage: int = roundi(erased_ratio * 100.0)
-#
-	#progress_label.text = ("Erased: %d%%" % erased_percentage)
-
 func check_machine_clean() -> void:
 	if remaining_ratio <= machine_clean_ratio:
-		# machine clean ratio should always be slightly higher than
-		# "allowed spill remaining ratio final" so the player can see the
-		# clean drink machine for a quick moment before the game exits
 		machine_clean.visible = true
 		machine_dirty.visible = false
 	else:
@@ -370,51 +275,6 @@ func check_machine_clean() -> void:
 		machine_dirty.visible = true
 
 func check_for_win() -> void:
-	#if starting_pixel_count <= 0:
-		#win_game()
-		#return
-	#print("remaining_ratio", remaining_ratio)
-	
-	#if remaining_ratio <= allowed_spill_remaining_ratio_1 and current_spill == 0:
-		#canvas_sprite.visible = false
-		#canvas_sprite2.visible = true
-		#canvas_image = canvas_sprite2.texture.get_image()
-		#canvas_image.convert(Image.FORMAT_RGBA8)
-		#canvas_image.clear_mipmaps()
-#
-		#image_width = canvas_image.get_width()
-		#image_height = canvas_image.get_height()
-#
-		#canvas_texture = ImageTexture.create_from_image(canvas_image)
-		#canvas_sprite2.texture = canvas_texture
-		#current_spill = 1
-		#
-		##reset params here
-		#starting_scale = Vector2(1.0, 1.0)
-		#current_scale = Vector2(1.0, 1.0)
-		#new_scale = Vector2(1.0, 1.0)
-		#print("moving to second spill")
-		#
-	#elif remaining_ratio <= allowed_spill_remaining_ratio_2 and current_spill == 1:
-		#canvas_sprite2.visible = false
-		#canvas_sprite3.visible = true
-		#canvas_image = canvas_sprite3.texture.get_image()
-		#canvas_image.convert(Image.FORMAT_RGBA8)
-		#canvas_image.clear_mipmaps()
-#
-		#image_width = canvas_image.get_width()
-		#image_height = canvas_image.get_height()
-#
-		#canvas_texture = ImageTexture.create_from_image(canvas_image)
-		#canvas_sprite3.texture = canvas_texture
-		#current_spill = 2
-#
-		##reset params here
-		#starting_scale = Vector2(1.0, 1.0)
-		#current_scale = Vector2(1.0, 1.0)
-		#new_scale = Vector2(1.0, 1.0)
-		#print("moving to final spill")
-		#
 	if remaining_ratio <= allowed_spill_remaining_ratio_1:
 		win_game()
 
@@ -424,8 +284,6 @@ func win_game() -> void:
 		return
 
 	game_finished = true
-
-	#progress_label.text = "Erased: 100%"
 
 	Events.emit_signal("minigame_end")
 	Events.spill_clean_done.emit()

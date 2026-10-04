@@ -25,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://buekg4y468npk" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-001.wav" id="18_t7j2k"]
 [ext_resource type="Texture2D" uid="uid://ddtql1h6lcrbg" path="res://sprites/spill_minigame/machine dirty.png" id="18_txvoc"]
 [ext_resource type="AudioStream" uid="uid://cpmck1fisrrfn" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-002.wav" id="19_qgn5y"]
+[ext_resource type="Texture2D" uid="uid://ssxstixaqt60" path="res://sprites/spill_minigame/spill_tippy mclosed.png" id="20_621mk"]
 [ext_resource type="AudioStream" uid="uid://cs7pqdxrwjhhl" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-003.wav" id="20_pkusu"]
 [ext_resource type="AudioStream" uid="uid://bgmc3pmw4rcrr" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-004.wav" id="21_65oqd"]
 [ext_resource type="Texture2D" uid="uid://qn436bgy8nq0" path="res://sprites/spill_minigame/mop_waterfall/1.PNG" id="21_ft3e1"]
@@ -34,11 +35,11 @@
 [ext_resource type="AudioStream" uid="uid://cdby21pkmhn75" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-006.wav" id="23_621mk"]
 [ext_resource type="Texture2D" uid="uid://dji4mgat702dk" path="res://sprites/spill_minigame/mop_waterfall/6.PNG" id="24_fnp53"]
 [ext_resource type="AudioStream" uid="uid://duelwnijj7pd" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-007.wav" id="24_hhbhr"]
-[ext_resource type="Script" uid="uid://2bb4gverp2t5" path="res://minigames/spill_clean/ComicOverlay.gd" id="25_4orm6"]
 [ext_resource type="AudioStream" uid="uid://c0k3ap1vjwdel" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-008.wav" id="25_it0s0"]
 [ext_resource type="Texture2D" uid="uid://tj2riqa7nv1o" path="res://sprites/spill_minigame/Overlay.png" id="26_dqypk"]
 [ext_resource type="Texture2D" uid="uid://dp07umt5ugv1u" path="res://sprites/spill_minigame/TextBox.png" id="27_4orm6"]
-[ext_resource type="Script" uid="uid://e0wibbqv0cg7" path="res://minigames/spill_clean/start_cleaning.gd" id="27_fnp53"]
+[ext_resource type="Script" uid="uid://ctya4tfidu0u1" path="res://comic_overlay.gd" id="37_txvoc"]
+[ext_resource type="Script" uid="uid://chawj185a5rch" path="res://spill_clean_text_prompt.gd" id="39_txvoc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(678.04865, 540.20624)
@@ -169,7 +170,7 @@ texture = ExtResource("7_dqypk")
 [node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
 position = Vector2(315, 348)
 scale = Vector2(0.41000003, 0.48500004)
-texture = ExtResource("8_4orm6")
+texture = ExtResource("20_621mk")
 
 [node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723 node_paths=PackedStringArray("tippy_bucket")]
 modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
@@ -183,7 +184,7 @@ speaking_gap = 0.2
 scaling_factor = 1.5
 tippy_bucket = NodePath("..")
 tippy_bucket_normal = ExtResource("8_4orm6")
-tippy_bucket_mouth_closed = ExtResource("8_4orm6")
+tippy_bucket_mouth_closed = ExtResource("20_621mk")
 
 [node name="Area2D" type="Area2D" parent="Bucket" unique_id=474787777]
 
@@ -236,15 +237,15 @@ stream = ExtResource("7_eeqbd")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1401550815]
 
-[node name="Overlay" type="Sprite2D" parent="." unique_id=1943789029]
+[node name="ComicOverlay" type="Sprite2D" parent="." unique_id=1943789029]
 position = Vector2(960, 534)
 texture = ExtResource("26_dqypk")
-script = ExtResource("25_4orm6")
+script = ExtResource("37_txvoc")
 
 [node name="TextBox" type="Sprite2D" parent="." unique_id=2079060714]
 position = Vector2(1412, 933)
 texture = ExtResource("27_4orm6")
-script = ExtResource("27_fnp53")
+script = ExtResource("39_txvoc")
 
 [node name="AudioStreamScrub" type="AudioStreamPlayer2D" parent="." unique_id=185475810]
 stream = SubResource("AudioStream_54a2r")
