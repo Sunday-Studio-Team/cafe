@@ -466,7 +466,7 @@ func spawn_trash() -> void:
 			UI.ALERT_COLOR_RED,
 		)
 	Events.alert_posted.emit(
-		"Customer dropeed some trash...",
+		"Customer dropped some trash...",
 		UI.AlertIconType.CUSTOMER,
 		UI.ALERT_DEFAULT_DURATION,
 		UI.ALERT_COLOR_NEUTRAL,
