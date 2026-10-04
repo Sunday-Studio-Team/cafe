@@ -48,11 +48,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var item_hover_tooltip_cooldown_label: RichTextLabel
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_description: RichTextLabel
-@export var stamina_bar: ProgressBar
-@export var item_menu_prompt: Control
-#Active Item
-@export var item_ui: Control
-@export var current_item_ui: Control
 @export var item_indicator: TextureRect
 @export var item_text: RichTextLabel
 @export var end_shift_guide: Button
