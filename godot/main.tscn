@@ -1066,6 +1066,9 @@ viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubV
 [sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
 size = Vector3(1, 0.2680664, 1)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_23ygw"]
+viewport_path = NodePath("StaminaBar/SubViewport")
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_xrivr"]
 top_radius = 0.11279297
 bottom_radius = 0.11279297
@@ -2333,11 +2336,17 @@ transform = Transform3D(0.7278226, 0.009210606, 0.68570364, 6.386688e-10, 0.9999
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 
+[node name="PlayerKidnapPos" parent="TippyBoss" index="4" unique_id=1663606405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3200338, 0, 16.268255)
+
+[node name="StaminaBar" parent="TippyBoss" index="12" unique_id=1673079560]
+texture = SubResource("ViewportTexture_23ygw")
+
 [node name="CafeEnvironment" parent="." unique_id=672806017 instance=ExtResource("44_h6isl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057010015, -0.00016215755, -0.9999399, 1.0259942e-07, 1, -0.0001621478, 0.9999399, -1.01539825e-08, 0.00057010015, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057010015, -0.00016215755, -0.99993986, 1.02599415e-07, 1, -0.0001621478, 0.99993986, -1.01539825e-08, 0.00057010015, -4.11582, -1.4201379, 0.23234849)
 
 [node name="Label3D4" type="Label3D" parent="CafeEnvironment/StoreRoom/Storage Arch" parent_id_path=PackedInt32Array(672806017, 847908752) index="1" unique_id=1148006303]
 transform = Transform3D(0.99999994, 0, 1.4210855e-14, 0, 1, 0, 0, 0, 1.0000005, 0.01610136, 0.8703489, 0.19787931)
@@ -2349,7 +2358,7 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
-[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=1669092183]
+[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=56187317]
 transform = Transform3D(-0.05555968, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497518, 0.5577049, 2.5702512, -0.048047185)
 
 [node name="AirFreshener" type="Node3D" parent="." unique_id=862521613 node_paths=PackedStringArray("_interactable", "_cooldown_timer_sprite", "_cooldown_timer_bar", "_spray_sound", "_collider_body")]
@@ -2452,6 +2461,8 @@ transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -7.90580
 [editable path="Desk/Lamp 1&5 (1)"]
 [editable path="Desk/Day0DeskProps/Sad Plants2"]
 [editable path="TrashCan"]
+[editable path="TippyBoss"]
+[editable path="TippyBoss/Model"]
 [editable path="CafeEnvironment"]
 [editable path="CafeEnvironment/CustomerArea/MediumLights"]
 [editable path="CafeEnvironment/CustomerArea/FrontWindowAndDoor/glass window"]
