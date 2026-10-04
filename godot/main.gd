@@ -231,6 +231,7 @@ func update_air_fresheners_enabled() -> void:
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
+	Global.player_alert = 0
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
