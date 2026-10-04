@@ -15,6 +15,7 @@ const TIME_IN_JAIL: float = 10
 # and this times how long he 'sleeps' before waking up once he gets tired
 @export var sleep_timer: Timer
 @export var stun_timer: Timer
+@export var stamina_progress_bar: ProgressBar
 
 enum State {
 	IDLE,
@@ -126,3 +127,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 	tired_indicator.visible = state == State.TIRED or state == State.ZAPPED
+
+	stamina_progress_bar.visible = state == State.CHASING
+	if stamina_progress_bar.visible:
+		stamina_progress_bar.value = tired_timer.time_left / tired_timer.wait_time * 100
