@@ -12,12 +12,14 @@ extends Control
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+@export var ice_freezing_sound: AudioStreamPlayer
 
 @export var req_and_sel:TextureRect
 @export var captcha_vbox:VBoxContainer
 @export var sato_tippy_fight:TextureRect
 @export var complete_sprite:TextureRect
 @export var sato:TextureRect
+@export var frozen_border: TextureRect
 
 enum SatoTippyFight {
 	Neutral = 0,
@@ -112,6 +114,9 @@ func on_right():
 	complete_sprite.visible = true
 	sato.texture = sato_sprites[SatoTippyFight.Win]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
+	
+	# Tell the tutorial the captcha part is done
+	Global.tutorial_drink_remake_ingredients_done = true
 
 
 func verify_captcha() -> void:
@@ -122,7 +127,8 @@ func verify_captcha() -> void:
 		ordered_drink.extra,
 	]
 	
-	# not counting duplicates, so we can select 3 coffee icons and if our drink has coffee that will add 1 to this count
+	# not counting duplicates, so if our drink has coffee, and we select 3 coffees,
+	# that will only add 1 to this count
 	var correct_ingredients_pressed: int = 0
 	
 	for ingredient: Ingredient in ordered_ingredients:
@@ -202,7 +208,7 @@ func _start_minigame() -> void:
 	
 	if(Global.ordered_drink_customer != null):
 		drink_customer = Global.ordered_drink_customer
-		customer_sprite.texture = drink_customer.body.texture
+		customer_sprite.texture = drink_customer.full_body_sprite.texture
 		
 		rescale_image_to_target_height(customer_sprite)
 	else:
@@ -214,6 +220,20 @@ func _start_minigame() -> void:
 	
 	populate_captcha()
 
+	var has_frozen_tippy_item: bool = Global.owned_items.any(
+			func(item: Item) -> bool:
+				return item.item_id == "barista_guide"
+	)
+
+	if has_frozen_tippy_item:
+		ice_freezing_sound.play()
+		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
+		border_freeze_tween.tween_property(
+				frozen_border, 
+				"modulate", 
+				Color.WHITE, 
+				1
+		)
 
 
 func _end_minigame() -> void:
@@ -229,26 +249,25 @@ func _on_submit_button_pressed() -> void:
 	verify_captcha()
 
 
-func rescale_image_to_target_height(customer_sprite: TextureRect, target_height:int = 1024)->void:
+func rescale_image_to_target_height(sprite: TextureRect, target_height:int = 1024)->void:
 	#target_height is generally 1024
 	
-	
-	var original_height = customer_sprite.texture.get_height()
+	var original_height = sprite.texture.get_height()
 	if original_height==target_height:
 		
 		return	#do nothing! texture is the correct size.
 				#all customer heights have 1024px; with variable widths. so its the only one we check.		
 			
-	var original_width = float(customer_sprite.texture.get_width())
+	var original_width = float(sprite.texture.get_width())
 	
 	var ratio = float(original_height)/float(target_height) #ex 2048/1024 = 2
 	
-	var _image = customer_sprite.texture.get_image()
+	var _image = sprite.texture.get_image()
 	
-	var target_width = original_width
+	# var target_width = original_width
 	_image.resize(int(round(original_width/ratio)), int(target_height), Image.INTERPOLATE_LANCZOS)
 	var _texture: ImageTexture = ImageTexture.create_from_image(_image)
 	
-	customer_sprite.texture= _texture
+	sprite.texture= _texture
 	#print("rescaled customer sprite size",customer_sprite.texture.get_size())
 	

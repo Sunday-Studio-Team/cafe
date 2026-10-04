@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c5tde04ej68ys"]
+
+[ext_resource type="PackedScene" uid="uid://bu0pglixypk35" path="res://Assets/ceiling light 1/tippylight.glb" id="1_m6coi"]
+[ext_resource type="Script" uid="uid://cos82r6xyxsg5" path="res://Assets/ceiling light 1/tippylight.gd" id="2_b8adf"]
+
+[node name="tippylight" unique_id=1829477193 instance=ExtResource("1_m6coi")]
+script = ExtResource("2_b8adf")
+
+[node name="black_cylinder" parent="." index="0" unique_id=1046311415]
+layers = 512
+
+[node name="cheek" parent="." index="1" unique_id=1532559636]
+layers = 512
+
+[node name="coins" parent="." index="2" unique_id=585184110]
+layers = 512
+
+[node name="face" parent="." index="3" unique_id=950641241]
+layers = 512
+
+[node name="OmniLight3D" type="OmniLight3D" parent="face" index="0" unique_id=684970666]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0.034017112, -0.4301681, 0.015551865)
+top_level = true
+visible = false
+light_color = Color(1, 1, 0.48235294, 1)
+shadow_enabled = true
+omni_range = 2.287
+
+[node name="fan_1" parent="." index="4" unique_id=972205747]
+layers = 512
+
+[node name="fan_2" parent="." index="5" unique_id=1607262266]
+layers = 512
+
+[node name="fan_3" parent="." index="6" unique_id=489293894]
+layers = 512
+
+[node name="fan_4" parent="." index="7" unique_id=1211046898]
+layers = 512
+
+[node name="fan_5" parent="." index="8" unique_id=414606904]
+layers = 512
+
+[node name="fan_6" parent="." index="9" unique_id=2044192256]
+layers = 512
+
+[node name="handel" parent="." index="10" unique_id=1059409077]
+layers = 512
+
+[node name="nose" parent="." index="11" unique_id=992801158]
+layers = 512
+
+[node name="top1" parent="." index="12" unique_id=1456688049]
+layers = 512
+
+[node name="top_coins" parent="." index="13" unique_id=1538028478]
+layers = 512

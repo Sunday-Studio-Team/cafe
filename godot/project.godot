@@ -14,6 +14,8 @@ config/name="cafe"
 config/tags=PackedStringArray("sundaystudios")
 run/main_scene="uid://dlalp4lnows75"
 config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
 config/icon="uid://b1j05q5s30754"
 
 [audio]
@@ -208,6 +210,8 @@ freecam_move_down={
 3d_render/layer_1="static_occluders"
 3d_render/layer_2="dynamic_occluders"
 3d_render/layer_3="player_camera_exclusives"
+3d_render/layer_4="player_camera_holding"
+3d_render/layer_10="customer_area_fan"
 3d_physics/layer_1="environment"
 3d_physics/layer_2="interactables"
 3d_physics/layer_3="droppable"

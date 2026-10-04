@@ -42,6 +42,9 @@ func handle_xl_bag_item() -> void:
 
 
 func _on_interacted() -> void:
+	if Global.holding_trash || already_interacted || Global.holding_ingredients:
+		return
+
 	Global.tutorial_ingredients_bag_got = true
 	ingredients_bag_taken.emit(self)
 	Global.holding_ingredients = true

@@ -14,6 +14,7 @@ extends Node
 @export var half_star_texture: Texture
 @export var empty_star_texture: Texture
 @export var complaint_popup: CanvasLayer
+var resource_background_loader: ResourceBackgroundLoader
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -45,7 +46,6 @@ var in_spill_minigame := false
 var in_pc_ui := false
 var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]
-var spam_emails: Array[EmailData]
 var reviews: Array[Review]
 var received_reviews: Array[Review]
 var unread_email_count: int
@@ -56,7 +56,8 @@ var active_help_desk_customer: Customer
 var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
 var holding_trash := false
-var day := 0
+var day: int = 1
+var playing_tutorial: bool = false
 var shift_length: float
 var shift_time_remaining: float
 var shift_progress_ratio: float
@@ -155,28 +156,48 @@ var hovered_item_icon: TabletItemIcon = null
 var hovered_loadout_menu_element: LoadoutMenuElement
 # Tutorial flags
 var tutorial_machine_used: bool = false
-var tutorial_drink_accepted: bool = false
+var tutorial_drink_correct_accepted: bool = false
+var tutorial_drink_incorrect_accepted: bool = false
 var tutorial_remake_button_pressed: bool = false
-var tutorial_drink_remade: bool = false
+var tutorial_drink_remake_ingredients_done: bool = false
+var tutorial_drink_remade_served: bool = false
 var tutorial_ingredients_bag_got: bool = false
 var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a machine runs out of food
 var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
 var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
 var shift_started: bool = false
-# Voice Line System
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
 var tutorial_manager: TutorialManager
+# TODO: move to Stats ?
+var trash_punishment_threshold := 5
+var trash_punishment_amount := 0.2
+
+var low_fps_updaters: Array[LowFpsSubViewportUpdater] = []
 
 enum CameraMode {
 	PLAYER,
 	CINEMATIC,
-	DEBUG_FREE_CAM
+	DEBUG_FREE_CAM,
+	LOCKED_TO_POINT
 }
-var camera_mode: CameraMode = CameraMode.PLAYER
-
+var camera_mode: CameraMode = CameraMode.PLAYER:
+	set(new_mode):
+		if new_mode == CameraMode.PLAYER:
+			Global.player.camera.sync_rotation_from_player()
+		camera_mode = new_mode
+var locked_camera_target_pos: Vector3
+var cinematic_camera_allow_machine_gui_inputs: bool = true
 var item_loadout_menu: ItemLoadoutMenu
+# for pitch shifting
+var all_3d_audio_stream_players: Array[Node]
+var no_cooldowns := false
+
+
+func _enter_tree() -> void:
+	if OS.has_feature("demo_mode"):
+		Commands.wipe_save()
 
 
 func _ready() -> void:
@@ -190,6 +211,12 @@ func _ready() -> void:
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
+	while main_scene == null:
+		await get_tree().process_frame
+	for p: AudioStreamPlayer3D in Global.main_scene.find_children("*", "AudioStreamPlayer3D"):
+		p.set_meta("base_pitch_scale", p.pitch_scale)
+		all_3d_audio_stream_players.append(p)
+
 
 func load_unlocked_items_from_save() -> void:
 	unlocked_items.clear()
@@ -199,14 +226,24 @@ func load_unlocked_items_from_save() -> void:
 
 	var latest_day: int = SaveDataManager.save_data.latest_unlocked_day
 
-	for day in range(1, latest_day):
-		var completion_items: Array = Stats.current.daily_completion_item_unlocks.get(day, [])
+	for d in range(1, latest_day):
+		var completion_items: Array = Stats.current.daily_completion_item_unlocks.get(d, [])
 		add_items_to_unlocked_list(completion_items)
 
-		if SaveDataManager.save_data.days_bonus_objective_completed.get(day, false):
-			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(day, [])
+		if SaveDataManager.save_data.days_bonus_objective_completed.get(d, false):
+			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(d, [])
 			add_items_to_unlocked_list(bonus_items)
 
+func get_item(item_id:String) -> Item:
+	var found_item := false
+	for item: Item in items:
+		if item.item_id == item_id:
+			found_item = true
+			return item
+
+	if not found_item:
+		push_warning("Unlocked item not found: %s" % item_id)
+	return null
 
 func add_items_to_unlocked_list(item_ids: Array) -> void:
 	for raw_item_id in item_ids:
@@ -285,3 +322,14 @@ func day_to_string(d: int) -> String:
 		day_as_string = "TRAINING"
 
 	return day_as_string
+
+
+func pitch_shift_all_3d_audio(down: bool) -> void:
+	var pitch_tween := create_tween().set_parallel()
+
+	for p: AudioStreamPlayer3D in all_3d_audio_stream_players:
+		if down:
+			pitch_tween.tween_property(p, "pitch_scale", 0.75, 0.5)
+		else:
+			var player_base_pitch: float = p.get_meta("base_pitch_scale")
+			pitch_tween.tween_property(p, "pitch_scale", player_base_pitch, 0.25)

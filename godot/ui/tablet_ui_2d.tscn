@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://ddyncetpsnx8x"]
+
+[ext_resource type="Texture2D" uid="uid://ck7ggyk1fkg4o" path="res://sprites/tablet_ui/tablet_ui_background.png" id="1_h00bf"]
+[ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="2_bv3d6"]
+[ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="6_6ci3b"]
+[ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="7_0bt22"]
+[ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="8_vx1ja"]
+[ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="9_omxmy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn1tu"]
+atlas = ExtResource("1_h00bf")
+region = Rect2(15, 17, 297, 477)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+font_size = 32
+font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
+
+[node name="TabletUI2D" type="Control" unique_id=1774289997]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 631.0
+offset_bottom = 863.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=514240901]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_vn1tu")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1455846849 node_paths=PackedStringArray("item_icons")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("2_bv3d6")
+item_icons = NodePath("Screen/ItemUI/ItemIcons")
+
+[node name="Screen" type="VBoxContainer" parent="MarginContainer" unique_id=1854976775]
+layout_mode = 2
+
+[node name="TopBar" type="PanelContainer" parent="MarginContainer/Screen" unique_id=62084678]
+custom_minimum_size = Vector2(0, 50)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Screen/TopBar" unique_id=1585032186]
+layout_mode = 2
+alignment = 1
+
+[node name="DayIndicator" type="Label" parent="MarginContainer/Screen/TopBar/HBoxContainer" unique_id=1375377799]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 32
+text = "day"
+horizontal_alignment = 1
+
+[node name="Scores" type="MarginContainer" parent="MarginContainer/Screen" unique_id=2009287525]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="ScoreContainer" type="HBoxContainer" parent="MarginContainer/Screen/Scores" unique_id=1326967826]
+layout_mode = 2
+
+[node name="Scores" type="VBoxContainer" parent="MarginContainer/Screen/Scores/ScoreContainer" unique_id=693858473]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Money" type="Label" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=1790244137]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "$ 0"
+
+[node name="MoneyBar" type="ProgressBar" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=1406614324]
+modulate = Color(0.5168811, 0.9043261, 0.5168811, 1)
+custom_minimum_size = Vector2(450, 30)
+layout_mode = 2
+size_flags_vertical = 10
+show_percentage = false
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores" unique_id=615532530]
+layout_mode = 2
+
+[node name="Rating" type="HBoxContainer" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer" unique_id=1832505298]
+layout_mode = 2
+
+[node name="RatingIconLabel" type="Label" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=1318581469]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "🙂"
+
+[node name="RatingLabel" type="Label" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=891384739]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "⭐2.1"
+
+[node name="Stars" type="HBoxContainer" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=538641716]
+visible = false
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=466928963]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating" unique_id=349206812]
+layout_mode = 2
+
+[node name="FlowRate" type="HBoxContainer" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2" unique_id=816766880]
+layout_mode = 2
+
+[node name="FlowRateLabel" type="Label" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1688117453]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "10"
+label_settings = SubResource("LabelSettings_xrivr")
+
+[node name="FlowRateDescLabel" type="Label" parent="MarginContainer/Screen/Scores/ScoreContainer/Scores/PanelContainer/Rating/PanelContainer2/FlowRate" unique_id=1290189262]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "secs/custmr"
+label_settings = SubResource("LabelSettings_xrivr")
+
+[node name="ItemUI" type="HBoxContainer" parent="MarginContainer/Screen" unique_id=1931901216]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+alignment = 1
+
+[node name="ShowMousePrompt" type="HBoxContainer" parent="MarginContainer/Screen/ItemUI" unique_id=469603555]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Mouse" type="TextureRect" parent="MarginContainer/Screen/ItemUI/ShowMousePrompt" unique_id=302696770]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+texture = ExtResource("6_6ci3b")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Alt" type="TextureRect" parent="MarginContainer/Screen/ItemUI/ShowMousePrompt" unique_id=1200303356]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+texture = ExtResource("7_0bt22")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ItemIcons" type="GridContainer" parent="MarginContainer/Screen/ItemUI" unique_id=266679496]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="TabletItemIcon" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=427576900 instance=ExtResource("8_vx1ja")]
+layout_mode = 2
+
+[node name="TabletItemIcon2" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=1173132696 instance=ExtResource("8_vx1ja")]
+layout_mode = 2
+
+[node name="TabletItemIcon3" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=2022222600 instance=ExtResource("8_vx1ja")]
+layout_mode = 2
+
+[node name="TabletItemIcon4" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=503443972 instance=ExtResource("8_vx1ja")]
+layout_mode = 2
+
+[node name="TabletItemIcon5" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=1506821280 instance=ExtResource("8_vx1ja")]
+layout_mode = 2
+
+[node name="TabletItemIcon6" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=196054252 instance=ExtResource("8_vx1ja")]
+layout_mode = 2
+
+[node name="CctvIndicator" type="TextureRect" parent="MarginContainer" unique_id=1384909801]
+custom_minimum_size = Vector2(125, 110)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("9_omxmy")
+expand_mode = 2

@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c85n0vy1briqn"]
+
+[ext_resource type="Texture2D" uid="uid://d3erum8if381" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_tippysolo_coin_BaseColor.png" id="1_v37nh"]
+[ext_resource type="Texture2D" uid="uid://dynl457rcqy01" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_file18-file17.png" id="2_857fc"]
+
+[resource]
+resource_name = "coin.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_v37nh")
+metallic = 1.0
+metallic_texture = ExtResource("2_857fc")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_857fc")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_energy_multiplier = 3.0
+emission_texture = ExtResource("1_v37nh")
+metadata/_gltf_primary_texture_coord = 0

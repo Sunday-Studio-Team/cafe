@@ -3,6 +3,8 @@ class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
 enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
+	
+# TODO: replace hardcoded file paths with @export refs
 const ALERT_ICON_TYPE_IMAGE_MAP = {
 	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
 	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
@@ -10,13 +12,12 @@ const ALERT_ICON_TYPE_IMAGE_MAP = {
 	AlertIconType.RATING: "res://Assets/UI/alert_icons/rating_icon.png",
 	AlertIconType.MONEY: "res://Assets/UI/alert_icons/dollar_icon.png",
 }
-const ALERT_DEFUALT_DURATION: float = 4.0
+const ALERT_DEFAULT_DURATION: float = 4.0
 const ALERT_COLOR_NEUTRAL: Color = Color.WHITE
 const ALERT_COLOR_RED: Color = Color.RED
 const ALERT_COLOR_GREEN: Color = Color.GREEN
 const ALERT_COLOR_MONEY: Color = Color.GOLD
-
-const ALERT_QUEUE_SIZE = 5
+const ALERT_QUEUE_SIZE := 5
 
 @export var profit_label: Label
 @export var profit_progress: ProgressBar
@@ -26,11 +27,7 @@ const ALERT_QUEUE_SIZE = 5
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
-@export var time_left_ui: Control
-@export var time_left_label: Label
-@export var time_left_bar: TextureProgressBar
 @export var shift_starting_ending_label: RichTextLabel
-@export var rules_controls: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
@@ -39,13 +36,6 @@ const ALERT_QUEUE_SIZE = 5
 @export var _eye_logo_red_texture: Texture2D
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
-@export var shelf_item_ui: PanelContainer
-@export var shelf_item_name: RichTextLabel
-@export var shelf_item_description: RichTextLabel
-@export var shelf_item_active_indicator: Control
-@export var shelf_item_cooldown_label: RichTextLabel
-@export var shelf_item_passive_indicator: Control
-@export var shelf_item_sold_indicator: Label
 @export var day_indicator: Label
 @export var rating_stars_hbox: HBoxContainer
 @export var rating_label: Label
@@ -58,42 +48,40 @@ const ALERT_QUEUE_SIZE = 5
 @export var item_hover_tooltip_cooldown_label: RichTextLabel
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_description: RichTextLabel
-@export var stamina_bar: ProgressBar
 @export var item_indicator: PanelContainer
 @export var item_text: RichTextLabel
-@export var use_item_prompt: Button
 @export var end_shift_guide: Button
+@export var _alert_packed_scene_uid: StringName
+@export var exploding_bomb_ui: PanelContainer
 
 var alert_queue: Array[HBoxContainer]
-var alert_load = preload("res://ui/alert.tscn")
 var score_update_tween: Tween
 var time_left_warning_played := false
-var star_texture_rect := TextureRect.new()
-var half_star_texture_rect := TextureRect.new()
-var empty_star_texture_rect := TextureRect.new()
 var _employee_rating_last_update: float = -1
+var exploding_bomb_timer: float = 10.5
+var exploding_bomb_on_cooldown: bool = false
 
 
 func _ready() -> void:
-	_update_rating()
-
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
-			_on_score_updated(ScoreType.MONEY, new_value, old_value)
+			play_score_update_sounds(ScoreType.MONEY, new_value, old_value)
 	)
 	Events.employee_rating_updated.connect(
 		func(new_value: float, old_value: float):
-			_on_score_updated(ScoreType.CUSTOMER, new_value, old_value)
+			play_score_update_sounds(ScoreType.CUSTOMER, new_value, old_value)
 	)
+
+	Events.alert_posted.connect(
+			func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE):
+				_on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
+	)
+	
 	Events.shift_started.connect(
 		func():
 			shift_starting_ending_label.show()
 			await get_tree().create_timer(5, false).timeout
 			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
-	)
-
-	Events.alert_posted.connect(
-		func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE): _on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
 	)
 	Events.shift_end_sequence_started.connect(
 		func():
@@ -106,6 +94,7 @@ func _ready() -> void:
 			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
 	Events.time_up.connect(func(): hide())
+	
 	# TODO: figure out if this still does anything and/or should be nuked
 	Events.requirements_met.connect(func(): end_shift_guide.show())
 
@@ -116,55 +105,21 @@ func _ready() -> void:
 
 	score_update_label.modulate = Color.TRANSPARENT
 
-	stamina_bar.max_value = Stats.current.max_stamina
-
 	# we automatically do some stuff whenever our points change,
 	# so we mute + hide that stuff
 	# while we reset our points @ the start of each day lol
 	var points_sound_volume := lose_points_sound.volume_db
-	lose_points_sound.volume_db = -70
+	lose_points_sound.volume_linear = 0
 	score_update_label.hide()
 
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
 	await get_tree().process_frame
 
-	if Global.day == 0:
-		rules_controls.text = ""
+	if Global.playing_tutorial or Global.day < 2:
 		cctv_indicator.hide()
-	if Global.day >= 1:
-		rules_controls.text = ""
-		cctv_indicator.hide()
-	if Global.day >= 2:
-		rules_controls.text += (
-				"\n[b][i]rules [/i][/b]
-			- no running
-			- no remaking drinks"
-		)
+	else:
 		cctv_indicator.show()
-
-	# we make these things for the employee rating here instead of in editor
-	# cos theyre dynamically added based on score
-	star_texture_rect.texture = Global.star_texture
-	star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	star_texture_rect.custom_minimum_size = Vector2(50, 50)
-	star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-
-	half_star_texture_rect.texture = Global.half_star_texture
-	half_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	half_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	half_star_texture_rect.custom_minimum_size = Vector2(50, 50)
-	half_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	half_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-
-	empty_star_texture_rect.texture = Global.empty_star_texture
-	empty_star_texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
-	empty_star_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	empty_star_texture_rect.custom_minimum_size = Vector2(50, 50)
-	empty_star_texture_rect.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	empty_star_texture_rect.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 
 	_update_rating()
 
@@ -174,11 +129,10 @@ func _ready() -> void:
 	score_update_label.show()
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
 	# in UI (except for the machine UI where we want the tablet to show on the
 	# side)
-
 	var should_show_hud: bool = (
 			not Global.in_ui
 			or Global.in_machine_ui
@@ -195,31 +149,17 @@ func _process(_delta: float) -> void:
 
 	update_score_indicators()
 	update_interactable_ui()
-	update_time_indicator()
+	
+	if not exploding_bomb_on_cooldown:
+		update_exploding_bomb_ui()
+	else:
+		update_exploding_bomb_timer(_delta)
+		
 	update_cctv_indicator()
-	# since we have a lot of time after the shift 'ends', i think we can basically
-	# replace this with the ui that tells the player the shift is ending
-	# (for now anyway)
-	#handle_time_left_warning()
-	handle_shelf_item_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
 	handle_item_hover_tooltip()
-	handle_stamina_bar()
-
-func handle_stamina_bar() -> void:
-	var stam: float = Global.stamina
-	var max_stam: float = Stats.current.max_stamina
-
-	stamina_bar.visible = stam < max_stam
-
-	stamina_bar.value = stam
-
-	if not Global.sprint_lockout_timer.is_stopped():
-		stamina_bar.modulate = Color.INDIAN_RED
-	else:
-		stamina_bar.modulate = Color.WHITE
 
 
 func handle_item_hover_tooltip() -> void:
@@ -258,63 +198,17 @@ func handle_drop_item_ui() -> void:
 
 
 func update_day_indicator() -> void:
-	if Global.day == 0:
-		day_indicator.text = ""
-	else:
-		match Global.day % 5: # Incase we add another week or days
-			1:
-				day_indicator.text = "Mon"
-			2:
-				day_indicator.text = "Tue"
-			3:
-				day_indicator.text = "Wed"
-			4:
-				day_indicator.text = "Thu"
-			0:
-				day_indicator.text = "Fri"
-
-
-func handle_shelf_item_ui() -> void:
-	var shelf_item: ShelfItem = Global.inspected_shelf_item
-
-	shelf_item_ui.visible = shelf_item != null
-
-	if not shelf_item:
-		return
-
-	if shelf_item.item.is_active_item:
-		shelf_item_active_indicator.visible = true
-		shelf_item_cooldown_label.text = "(%ss cooldown)" % shelf_item.item.active_item_cooldown_at_levels[shelf_item.item.item_level]
-		shelf_item_passive_indicator.visible = false
-	else:
-		shelf_item_active_indicator.visible = false
-		shelf_item_passive_indicator.visible = true
-
-	shelf_item_name.text = "[b]%s Lv%s" % [shelf_item.item.name, shelf_item.item.item_level]
-	shelf_item_description.text = shelf_item.item.description_at_levels[shelf_item.item.item_level]
-
-
-func handle_time_left_warning() -> void:
-	if (
-			not game_timer.is_stopped()
-			and game_timer.time_left <= Stats.TIME_FOR_LOW_TIME_WARNING
-			and not time_left_warning_played
-	):
-		var col_t := create_tween()
-		col_t.tween_property(time_left_label, "modulate", Color.WHITE, 1.5).from(Color.RED)
-
-		var size_t := create_tween()
-		size_t.tween_property(time_left_label, "offset_transform_scale", Vector2.ONE * 1.1, 0.25)
-		size_t.tween_property(time_left_label, "offset_transform_scale", Vector2.ONE * 1, 0.75)
-
-		var rot_t := create_tween()
-		rot_t.tween_property(time_left_label, "offset_transform_rotation", deg_to_rad(-10), 0.25)
-		rot_t.tween_property(time_left_label, "offset_transform_rotation", deg_to_rad(0), 0.75)
-
-		low_time_sound.play()
-		Events.low_time_warning.emit()
-
-		time_left_warning_played = true
+	match Global.day % 5: # Incase we add another week or days
+		1:
+			day_indicator.text = "Mon"
+		2:
+			day_indicator.text = "Tue"
+		3:
+			day_indicator.text = "Wed"
+		4:
+			day_indicator.text = "Thu"
+		0:
+			day_indicator.text = "Fri"
 
 
 func update_score_indicators() -> void:
@@ -322,33 +216,12 @@ func update_score_indicators() -> void:
 			Global.float_to_price(Global.daily_cafe_money)
 			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
 	)
+	
 	if Global.daily_cafe_money:
 		profit_progress.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
 
 	if not Global.employee_rating == _employee_rating_last_update:
 		_update_rating()
-
-
-func update_time_indicator() -> void:
-	time_left_ui.visible = not game_timer.is_stopped()
-
-	var time_left := game_timer.time_left
-
-	time_left_label.text = "⌛%s" % int(time_left)
-
-	# 'freeze' the indicator if we paused with an item
-	if game_timer.paused:
-		time_left_ui.modulate = Color.SKY_BLUE
-	else:
-		time_left_ui.modulate = Color.WHITE
-
-	time_left_bar.value = time_left / game_timer.wait_time * 100
-	if time_left_bar.value >= 66:
-		time_left_bar.modulate = Color.GREEN
-	elif time_left_bar.value >= 33:
-		time_left_bar.modulate = Color.ORANGE
-	else:
-		time_left_bar.modulate = Color.RED
 
 
 func update_interactable_ui() -> void:
@@ -362,7 +235,7 @@ func update_interactable_ui() -> void:
 		var owned_air_horn: Item = null
 		var owned_whipped_cream: Item = null
 		var owned_air_freshener: Item = null
-		
+
 		for owned_item in Global.owned_items:
 			if owned_item.item_id == "hammer":
 				owned_hammer = owned_item
@@ -372,7 +245,7 @@ func update_interactable_ui() -> void:
 				owned_whipped_cream = owned_item
 			elif owned_item.item_id == "air_freshener":
 				owned_air_freshener = owned_item
-		
+
 		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
 		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
 		const NON_USABLE_ITEM_BBCODE_OPEN: String = "[color=#676767]"
@@ -384,7 +257,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] HAMMER" % use_item_keybind
 
@@ -397,12 +270,13 @@ func update_interactable_ui() -> void:
 		elif (
 				hovered_interactable.interactable_id == &"use_machine"
 				# extremely dodgy ref to check the machine has a customer
+				# TODO: do this nicer
 				and ((hovered_interactable.get_parent() as Machine3DGui).machine as Machine).customer
 				and owned_air_horn != null
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] AIRHORN" % use_item_keybind
 
@@ -418,7 +292,7 @@ func update_interactable_ui() -> void:
 		):
 			item_indicator.show()
 			var item_prompt: String = ""
-			
+
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] WHIPPED CREAM" % use_item_keybind
 
@@ -454,7 +328,7 @@ func update_interactable_ui() -> void:
 
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 			item_prompt = "[%s] AIR HORN" % use_item_keybind
-			
+
 			if owned_air_horn.can_be_used:
 				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
 			else:
@@ -470,7 +344,7 @@ func update_interactable_ui() -> void:
 			if hovered_interactable.hold_to_interact:
 				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 				interaction_prompt += "(HOLD) [%s] - " % interact_keybind
-				
+
 				hold_interact_progress.value = hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
 			else:
 				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
@@ -485,6 +359,30 @@ func update_interactable_ui() -> void:
 			hovered_interactable != null
 			and hovered_interactable.time_held > 0
 	)
+
+
+func update_exploding_bomb_ui() -> void:
+	var owned_exploding_bomb: Item = null
+
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "exploding_bomb":
+			owned_exploding_bomb = owned_item
+			
+	if owned_exploding_bomb != null:
+		exploding_bomb_ui.show()
+		if Input.is_action_just_pressed("right_click"):
+			exploding_bomb_ui.hide()
+			exploding_bomb_on_cooldown = true
+	else:
+		exploding_bomb_ui.hide()
+		
+		
+func update_exploding_bomb_timer(_delta: float) -> void:
+	if not get_tree().paused:
+		exploding_bomb_timer -= _delta
+		if exploding_bomb_timer <= 0:
+			exploding_bomb_timer = 10.5
+			exploding_bomb_on_cooldown = false
 
 
 func update_cctv_indicator() -> void:
@@ -503,6 +401,7 @@ func _update_rating() -> void:
 
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
+	
 
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 	var _on_alert_tween_finished = func():
@@ -512,6 +411,7 @@ func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 			alert_queue.erase(alert_to_remove)
 			alert_to_remove.queue_free()
 	return _on_alert_tween_finished
+
 
 func _on_alert_posted(
 	message: String,
@@ -536,15 +436,17 @@ func _on_alert_posted(
 		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
 		# the lambda is called
 		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
-
-	var new_alert = alert_load.instantiate()
+	
+	var alert_packed_scene: PackedScene = ResourceLoader.load(_alert_packed_scene_uid)
+	# TODO: static typing for this
+	var new_alert = alert_packed_scene.instantiate()
 	new_alert.alert_label.text = message
 	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
 
 	alert_ui.add_child(new_alert)
 	alert_queue.append(new_alert)
 
-	var new_alert_tween = create_tween()
+	var new_alert_tween: Tween = create_tween()
 	new_alert_tween.tween_property(new_alert.alert_label, "modulate", Color.WHITE, 0.25).from(color)
 	new_alert_tween.tween_property(new_alert.alert_label, "modulate", color, 0.25)
 	new_alert_tween.tween_property(new_alert, "modulate:a", 1, 0.25)
@@ -557,11 +459,9 @@ func _on_alert_posted(
 
 	new_alert.alert_sprite.play()
 
-# they might ultimately be better separated but i combined the funcs for the ui notis when money
-# and customer scores change since they share a lot of code and use the same label for the updates
-func _on_score_updated(score_type: ScoreType, new_value: float, old_value: float) -> void:
+
+func play_score_update_sounds(score_type: ScoreType, new_value: float, old_value: float) -> void:
 	var change: float = new_value - old_value
-	print("change: %s" % change)
 	if change > 0.0:
 		match score_type:
 			ScoreType.MONEY:

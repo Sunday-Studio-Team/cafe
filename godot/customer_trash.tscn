@@ -3,18 +3,24 @@
 [ext_resource type="Script" uid="uid://dtsyu2epb5p76" path="res://customer_trash.gd" id="1_e16t0"]
 [ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash.png" id="2_i5ewh"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="3_i5ewh"]
+[ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="4_ruef1"]
+[ext_resource type="Material" uid="uid://clyy5mn7ocsxc" path="res://Assets/Trash minigame/highlight_trash_shader.tres" id="8_wycgu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5ewh"]
 size = Vector3(0.24902344, 0.20874023, 0.23120117)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 
-[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable")]
+[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable", "trash_cup")]
 collision_layer = 16
 script = ExtResource("1_e16t0")
 interactable = NodePath("Interactable")
+xray_material = ExtResource("8_wycgu")
+trash_cup = NodePath("Trash Cup/SM_TrashCup")
+activation_distance = 10.0
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
+visible = false
 billboard = 1
 texture = ExtResource("2_i5ewh")
 
@@ -29,3 +35,11 @@ metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=464175996]
 shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="Trash Cup" parent="." unique_id=1915222076 instance=ExtResource("4_ruef1")]
+transform = Transform3D(-9.227509e-09, -0.2111008, 0, -9.227509e-09, 4.0334724e-16, 0.2111008, -0.2111008, 9.227509e-09, -9.227509e-09, 0.10009057, 0.026606858, 0.024867669)
+
+[node name="SM_TrashCup" parent="Trash Cup" index="0" unique_id=1837821948]
+surface_material_override/2 = ExtResource("8_wycgu")
+
+[editable path="Trash Cup"]

@@ -3,9 +3,62 @@ class_name CustomerSpriteData
 extends Resource
 
 @export var customer_name: String
-@export var sprite: Texture2D
+var sprite: Texture2D:
+	get:
+		return ResourceLoader.load(sprite_uid)
+@export var sprite_uid: StringName
+
+## Disable the preview if you're done with it, so it doesn't get loaded in game!
+@export var _editor_enable_preview_sprite: bool
+## Editor only. This will automatically update to give you a preview!
+## Adjust `sprite_uid`.
+@export var _editor_sprite: Texture2D:
+	get:
+		if !Engine.is_editor_hint():
+			return null
+		if not _editor_enable_preview_sprite:
+			return null
+		if sprite_uid == null:
+			return null
+		if not ResourceLoader.exists(sprite_uid):
+			return null
+		if _editor_sprite == null:
+			_editor_sprite = ResourceLoader.load(sprite_uid)
+		return _editor_sprite
+	set(value):
+		if !Engine.is_editor_hint():
+			_editor_sprite = null
+			return
+		_editor_sprite = value
+
 @export var alternate_desk_sprite: Texture2D
-@export var typing_minigame_portrait: Texture2D
+var typing_minigame_portrait: Texture2D:
+	get:
+		return ResourceLoader.load(typing_minigame_portrait_uid)
+@export var typing_minigame_portrait_uid: StringName
+
+## Disable the preview if you're done with it, so it doesn't get loaded in game!
+@export var _editor_enable_preview_typing_minigame_portrait: bool
+## Editor only. This will automatically update to give you a preview!
+## Adjust `typing_minigame_portrait_uid`.
+@export var _editor_typing_minigame_portrait: Texture2D:
+	get:
+		if !Engine.is_editor_hint():
+			return null
+		if not _editor_enable_preview_typing_minigame_portrait:
+			return null
+		if typing_minigame_portrait_uid == null:
+			return null
+		if not ResourceLoader.exists(typing_minigame_portrait_uid):
+			return null
+		if _editor_typing_minigame_portrait == null:
+			_editor_typing_minigame_portrait = ResourceLoader.load(typing_minigame_portrait_uid)
+		return _editor_typing_minigame_portrait
+	set(value):
+		if !Engine.is_editor_hint():
+			_editor_typing_minigame_portrait = null
+			return
+		_editor_typing_minigame_portrait = value
 
 ## Determines the cropped size of the email profile picture, normalized 0.0 to 1.0.
 ## Uses the shorter dimension (height or width) as the base.
@@ -27,11 +80,15 @@ extends Resource
 			return
 		_editor_update_email_crop_texture()
 
+## Disable the preview if you're done with it, so it doesn't get loaded in game!
+@export var _editor_enable_preview_email_cropped_sprite: bool
 ## Editor only. This will automatically update to give you a preview!
 ## Adjust `email_crop_size_ratio` and `email_crop_center_ratio`.
 @export var editor_email_cropped_sprite_preview: AtlasTexture:
 	get:
 		if !Engine.is_editor_hint():
+			return
+		if not _editor_enable_preview_email_cropped_sprite:
 			return
 		if sprite == null:
 			return null

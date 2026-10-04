@@ -94,7 +94,25 @@ animations = [{
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 metadata/_edit_vertical_guides_ = [1002.0]
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
+[node name="Background" type="Control" parent="." unique_id=77572464]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="BgTextureRect" type="TextureRect" parent="Background" unique_id=1446066437]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_txvoc")
+stretch_mode = 5
+
+[node name="BackgroundSprite" type="Sprite2D" parent="." unique_id=1478927896]
+visible = false
 position = Vector2(961, 536)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_txvoc")

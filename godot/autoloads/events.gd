@@ -7,14 +7,16 @@ signal scene_switch_in_animation_finished
 signal main_scene_loaded
 signal quit_game_requested
 signal game_options_changed(options_data: OptionsData)
+signal player_confirmed_item_loadout
 signal shift_started
 signal customer_entered
 # NOTE: sorry for all these weird signals that pass the customer
 # i think thers probably nicer ways to do this lol
 signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
-signal order_completed(customer: Customer)
-signal order_approved(customer: Customer)
+signal order_remade(customer: Customer)
+signal order_accepted(customer: Customer)
+signal order_served(customer: Customer)
 signal order_remaking_drink
 signal machine_making_drink
 signal customer_left_machine(customer: Customer)
@@ -36,7 +38,6 @@ signal alert_posted(
 )
 signal items_updated
 signal finished_important_email(email_data: EmailData)
-signal finished_spam_email(email_data: EmailData)
 signal ingredients_bag_consumed
 signal machine_exit_button_pressed
 signal player_left_office
@@ -45,12 +46,19 @@ signal tippy_boss_released_player
 signal spawn_specific_customer(name: String, help_desk: String)
 signal air_freshener_used(customer_wait_duration_extension: float)
 # minigames
+# TODO: combine some of these or something
+# (below are my BEST GUESSES at what each currently do) - jack
+# starts the given minigame (name mapped to game in minigame_controller.gd)
 signal minigame_active(minigame_name: String)
+# doesnt trigger anything, but is emitted after force closing to tell other objects
+# (could probably replace this + force close with just a `cancelled` argument in minigame_end ? ? ?)
 signal minigame_cancelled
+# closes the current minigame
 signal minigame_end
 signal spill_clean_done
+# closes the minigame
 signal force_close_minigame
-#Active Items
+# Active Items
 signal active_item_used(item: Item)
 signal select_item(selection: Item)
 signal active_item_menu
@@ -63,6 +71,9 @@ signal viewmodel_animation_finished
 signal bag_pickup_animation_grabbed
 signal trash_pickup_animation_grabbed
 signal hammer_animation_hit
+signal air_horn_animation_just_blasted
+signal whipped_cream_animation_shot
+
 signal tutorial_selected
 # Free Cam
 signal free_cam_toggled

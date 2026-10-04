@@ -3,6 +3,7 @@ extends Node3D
 
 const NUM_OF_MINIGAMES_TO_DISABLE := 1
 
+@export var model: Node3D
 @export var _shape_cast_3d: ShapeCast3D
 ## this is the spotlight that illuminates the circle the camera is watching
 @export var spotlight: SpotLight3D
@@ -20,6 +21,7 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 @export var disable_sound: AudioStreamPlayer3D
 @export var disable_particles: GPUParticles3D
+@export var disable_2d_vfx: AnimatedSprite3D
 @export var disabled_timer_sprite: Sprite3D
 @export var disabled_timer_bar: TextureProgressBar
 @export var whipped_cream_sound: AudioStreamPlayer
@@ -153,10 +155,15 @@ func _on_visibility_changed() -> void:
 
 
 func disarm_camera() -> void:
+	Global.locked_camera_target_pos = model.global_position
+	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	_camera_disarmed = true
 	disable_sound.play()
 	disable_particles.emitting = true
+	disable_2d_vfx.play()
 	_update_camera_components_active()
+	await Events.viewmodel_animation_finished
+	Global.camera_mode = Global.CameraMode.PLAYER
 
 
 func rearm_camera() -> void:
@@ -244,11 +251,10 @@ func _on_requested_use_active_item():
 	if whipped_cream == null or !whipped_cream.can_be_used:
 		return
 	
-	#Putting new animation to test change
-	#TODO: Replace base animation with newest one
-	Events.play_viewmodel_animation.emit("cream_use_new")
-	whipped_cream_sound.play()
+	Events.play_viewmodel_animation.emit("cream_use")
 	Global.put_active_item_on_cooldown(whipped_cream)
+	await Events.whipped_cream_animation_shot
+	whipped_cream_sound.play()
 	disarm_camera()
 	disabled_timer.wait_time = 15
 	disabled_timer.start()
