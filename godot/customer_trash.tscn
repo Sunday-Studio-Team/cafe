@@ -422,7 +422,8 @@ shader_parameter/color_value = Color(1, 1, 1, 1)
 shader_parameter/gravity = Vector3(0, 0, 0)
 
 [sub_resource type="Curve" id="Curve_d1f4l"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 1.0, 0.0, 0.3]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3, 0.010638237), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3pel"]
@@ -470,6 +471,7 @@ transform = Transform3D(-9.227509e-09, -0.2111008, -9.227509e-09, 0, -9.227509e-
 surface_material_override/2 = ExtResource("8_wycgu")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2036556679]
+lifetime = 0.3
 transform_align = 3
 trail_enabled = true
 trail_lifetime = 1.0
