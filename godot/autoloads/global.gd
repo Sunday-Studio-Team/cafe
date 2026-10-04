@@ -63,7 +63,6 @@ var holding_trash := false:
 		if value == true && holding_trash == false:
 			holding_trash = value
 			Events.pickup_trash.emit()
-var holding_trash := false
 var day: int = 1
 var playing_tutorial: bool = false
 var shift_length: float

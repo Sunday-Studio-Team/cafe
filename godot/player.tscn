@@ -69,7 +69,7 @@ roller_skates_dust_particles = NodePath("RollerSkatesDustParticles")
 keychain_animation_player = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel/keychainAnim/AnimationPlayer")
 tippy_tablet_3d = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D")
 tippy_tablet_normal_position_rotation = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation")
-tippy_tablet_up_front_position_rotation = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletUpFrontPositionRotation")
+tippy_tablet_up_front_position_rotation = NodePath("CameraController/Camera3D/TabletUpFrontPositionRotation")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2095059819]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8760254, 0)
@@ -132,7 +132,7 @@ max_db = 0.0
 [node name="Trash Cup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1417801726 instance=ExtResource("10_q13i1")]
 transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.17303157, -0.16699994, -0.4299096)
 
-[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1440524109]
+[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1216625550]
 transform = Transform3D(0.10581238, 1.517883e-17, 0, -1.2576745e-17, 0.105812386, 0, 0, 1.7347235e-18, 0.10581238, 0, 0, 0)
 layers = 8
 
@@ -142,23 +142,14 @@ transform = Transform3D(0.95105654, -0.08517663, 0.29704615, 0, 0.96126163, 0.27
 [node name="TippyTablet3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation" unique_id=1761848473 instance=ExtResource("11_pylmc")]
 transform = Transform3D(1, 0, 2.4835263e-08, 0, 1, 0, -2.4835263e-08, 0, 1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature" parent_id_path=PackedInt32Array(1213310774, 2071309826) index="0" unique_id=1571658201]
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/1/rotation = Quaternion(0.067907415, -5.7041427e-05, 0.028652571, 0.9972802)
-bones/2/rotation = Quaternion(-0.039906695, 8.922967e-05, -0.0072832955, 0.9991769)
-bones/3/rotation = Quaternion(-0.037071344, -0.0010725817, 0.004623047, 0.9993014)
-
-[node name="Cube_001" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim/Armature/Skeleton3D" index="0" unique_id=1362528649]
-layers = 8
-
-[node name="AnimationPlayer" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/3DTabletUI/Model/AddonModel/keychainAnim" index="1" unique_id=1260672215]
-playback_default_blend_time = 2.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=121976474]
 transform = Transform3D(1, 0, 0, 0, 0.19741967, 0.98031914, 0, -0.98031914, 0.19741967, 0, 0, 0)
 visible = false
 layers = 8
 light_energy = 0.8
+
+[node name="TabletUpFrontPositionRotation" type="Marker3D" parent="CameraController/Camera3D" unique_id=149128471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.012324095, -0.47696984)
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraController/Camera3D" unique_id=1327192755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00467813, 0)
