@@ -28,6 +28,8 @@ signal time_up
 signal low_time_warning
 signal end_screen_finished
 signal requirements_met
+signal throw_trash
+signal pickup_trash
 signal money_updated(new_value: float, old_value: float)
 signal employee_rating_updated(new_value: float, old_value: float)
 signal alert_posted(

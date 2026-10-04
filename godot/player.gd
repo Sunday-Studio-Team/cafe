@@ -14,6 +14,7 @@ const STRIDE_LENGTH := 1.25
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
 @export var customer_trash: Node3D
+@export var throw_trash_sound: AudioStreamPlayer3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
@@ -329,10 +330,12 @@ func handle_ingredients_bag() -> void:
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
+		throw_trash_sound.play()
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 5)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.UP * 0.5)
 
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 

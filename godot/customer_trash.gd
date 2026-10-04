@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var xray_material: Material
 @export var trash_cup: MeshInstance3D
 @export var activation_distance := 3.0
+@export var trail: GPUParticles3D
 
 signal trash_bag_taken(customer_trash: CustomerTrash)
 
@@ -13,6 +14,7 @@ signal trash_bag_taken(customer_trash: CustomerTrash)
 var already_interacted := false
 var time_left_out: float = 0.0
 var cup_body_surface_index := 2
+var threshold_velocity := 1
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
@@ -32,6 +34,11 @@ func _process(_delta: float) -> void:
 	else:
 		trash_cup.set_surface_override_material(cup_body_surface_index, null)
 
+	var speed := linear_velocity.length()
+	if speed > threshold_velocity && trail.process_material != null:
+		trail.emitting = true
+	else:
+		trail.emitting = false
 
 func _on_interacted() -> void:
 	if Global.holding_trash || already_interacted || Global.holding_ingredients:
