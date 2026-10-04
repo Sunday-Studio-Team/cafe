@@ -1,26 +1,44 @@
 [gd_scene format=3 uid="uid://c8jilqo1pb0th"]
 
-[ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="1_eeqbd"]
-[ext_resource type="Texture2D" uid="uid://dkgtv4ix58vwu" path="res://sprites/spill_minigame/Bg.png" id="1_eu0yc"]
-[ext_resource type="Texture2D" uid="uid://b1k42y7srks3w" path="res://sprites/spill_minigame/spills-1.png" id="2_04o5w"]
-[ext_resource type="Texture2D" uid="uid://calsmemse0jyq" path="res://sprites/spill_minigame/tippy_dirty.png" id="2_eu0yc"]
+[ext_resource type="Texture2D" uid="uid://bd7gral53m7m3" path="res://sprites/spill_minigame/bg1.webp" id="1_txvoc"]
+[ext_resource type="Texture2D" uid="uid://d1s06b8uh410w" path="res://sprites/spill_minigame/Swirllspill3.png" id="2_4orm6"]
 [ext_resource type="Script" uid="uid://cpnnfanbitnd0" path="res://minigames/spill_clean/spill.gd" id="2_imr7o"]
-[ext_resource type="Texture2D" uid="uid://b58t6jac3jiqp" path="res://sprites/spill_minigame/tippy_clean.png" id="2_n873u"]
 [ext_resource type="Texture2D" uid="uid://d4j61rgwcj3yv" path="res://sprites/spill_minigame/dirty_mop.png" id="4_4xqy4"]
 [ext_resource type="Script" uid="uid://db4r76ilfreqn" path="res://minigames/spill_clean/mop.gd" id="4_6lir2"]
-[ext_resource type="Texture2D" uid="uid://ddbjxea8o1m55" path="res://sprites/spill_minigame/spills-2.png" id="4_kqolg"]
+[ext_resource type="Texture2D" uid="uid://tgen13t20434" path="res://sprites/spill_minigame/Swirlspill1.png" id="4_fnp53"]
 [ext_resource type="Texture2D" uid="uid://bbiwfv277atom" path="res://sprites/spill_minigame/clean_mop.png" id="4_omxn0"]
-[ext_resource type="Texture2D" uid="uid://b82ehkcm1tkoc" path="res://sprites/spill_minigame/fitted text.png" id="5_lvuj8"]
-[ext_resource type="Texture2D" uid="uid://po2lu6j2mdni" path="res://sprites/spill_minigame/spills-3.png" id="5_mojnc"]
+[ext_resource type="Texture2D" uid="uid://hhr8nar1lf8r" path="res://sprites/spill_minigame/Swirlspill2.png" id="5_delys"]
 [ext_resource type="Texture2D" uid="uid://d3u6cylyhclkd" path="res://sprites/bubbles/bubble_3.png" id="5_quysc"]
 [ext_resource type="Script" uid="uid://cfst3es72ok0h" path="res://minigames/spill_clean/tippy_text.gd" id="6_kx0vh"]
 [ext_resource type="Texture2D" uid="uid://babqx6yagblfe" path="res://sprites/spill_minigame/clean_scrubber.png" id="6_v4dls"]
 [ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
+[ext_resource type="Texture2D" uid="uid://c3pm8p3gxaxn4" path="res://sprites/spill_minigame/machine.png" id="7_dqypk"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
-[ext_resource type="Texture2D" uid="uid://geesylp2blx1" path="res://sprites/spill_minigame/fitted text 2.png" id="7_kx0vh"]
-[ext_resource type="Texture2D" uid="uid://qjon7ck5mcym" path="res://sprites/spill_minigame/spill_tippy_mouse_closed.png" id="10_lww7c"]
+[ext_resource type="Texture2D" uid="uid://r56engvvtppn" path="res://sprites/spill_minigame/spill tippy.png" id="8_4orm6"]
+[ext_resource type="Texture2D" uid="uid://ibpvka7lpwpp" path="res://sprites/spill_minigame/TextBubble (1).png" id="9_4orm6"]
 [ext_resource type="Texture2D" uid="uid://br7to5b13wfqn" path="res://sprites/spill_minigame/wet_mop.png" id="12_fjufl"]
+[ext_resource type="AudioStream" uid="uid://bnesqt68v2ysb" path="res://audio/spill-minigame/Mop_PuddleShrink-PS-v01-001.wav" id="12_txvoc"]
+[ext_resource type="AudioStream" uid="uid://ck0js87chxmsj" path="res://audio/spill-minigame/Mop_PuddleShrink-PS-v01-002.wav" id="13_621mk"]
+[ext_resource type="AudioStream" uid="uid://d0u8yuqljmlxa" path="res://audio/spill-minigame/Mop_PuddleShrink-PS-v01-003.wav" id="14_hhbhr"]
+[ext_resource type="AudioStream" uid="uid://d1u3iyv6pgmy1" path="res://audio/spill-minigame/Mop_PuddleShrink-PS-v01-004.wav" id="15_it0s0"]
 [ext_resource type="Texture2D" uid="uid://bes68l7c5t057" path="res://sprites/spill_minigame/wet_scrubber.png" id="15_lww7c"]
+[ext_resource type="AudioStream" uid="uid://buekg4y468npk" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-001.wav" id="18_t7j2k"]
+[ext_resource type="Texture2D" uid="uid://ddtql1h6lcrbg" path="res://sprites/spill_minigame/machine dirty.png" id="18_txvoc"]
+[ext_resource type="AudioStream" uid="uid://cpmck1fisrrfn" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-002.wav" id="19_qgn5y"]
+[ext_resource type="AudioStream" uid="uid://cs7pqdxrwjhhl" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-003.wav" id="20_pkusu"]
+[ext_resource type="AudioStream" uid="uid://bgmc3pmw4rcrr" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-004.wav" id="21_65oqd"]
+[ext_resource type="Texture2D" uid="uid://qn436bgy8nq0" path="res://sprites/spill_minigame/mop_waterfall/1.PNG" id="21_ft3e1"]
+[ext_resource type="Texture2D" uid="uid://bl0ri18lgccvf" path="res://sprites/spill_minigame/mop_waterfall/3.PNG" id="22_dqypk"]
+[ext_resource type="AudioStream" uid="uid://bpf73qv7444tn" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-005.wav" id="22_txvoc"]
+[ext_resource type="Texture2D" uid="uid://dsgmxjjmx31an" path="res://sprites/spill_minigame/mop_waterfall/4.PNG" id="23_4orm6"]
+[ext_resource type="AudioStream" uid="uid://cdby21pkmhn75" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-006.wav" id="23_621mk"]
+[ext_resource type="Texture2D" uid="uid://dji4mgat702dk" path="res://sprites/spill_minigame/mop_waterfall/6.PNG" id="24_fnp53"]
+[ext_resource type="AudioStream" uid="uid://duelwnijj7pd" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-007.wav" id="24_hhbhr"]
+[ext_resource type="Script" uid="uid://2bb4gverp2t5" path="res://minigames/spill_clean/ComicOverlay.gd" id="25_4orm6"]
+[ext_resource type="AudioStream" uid="uid://c0k3ap1vjwdel" path="res://audio/spill-minigame/Mop_Scrub-PS-v01-008.wav" id="25_it0s0"]
+[ext_resource type="Texture2D" uid="uid://tj2riqa7nv1o" path="res://sprites/spill_minigame/Overlay.png" id="26_dqypk"]
+[ext_resource type="Texture2D" uid="uid://dp07umt5ugv1u" path="res://sprites/spill_minigame/TextBox.png" id="27_4orm6"]
+[ext_resource type="Script" uid="uid://e0wibbqv0cg7" path="res://minigames/spill_clean/start_cleaning.gd" id="27_fnp53"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(678.04865, 540.20624)
@@ -37,17 +55,55 @@ scale_max = 0.39999998
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lir2"]
 size = Vector2(241, 130)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_54a2r"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("21_ft3e1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_dqypk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_4orm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_dqypk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_fnp53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_dqypk")
+}, {
+"duration": 2.0,
+"texture": ExtResource("21_ft3e1")
+}],
+"loop": 1,
+"name": &"waterflow",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStream" id="AudioStream_54a2r"]
+
 [node name="SpillCleanMinigame" type="Node2D" unique_id=533898669]
 metadata/_edit_vertical_guides_ = [1002.0]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1478927896]
 position = Vector2(961, 536)
-texture = ExtResource("1_eu0yc")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_txvoc")
 
-[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "canvas_sprite2", "canvas_sprite3", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
+[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "canvas_sprite2", "canvas_sprite3", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble", "anim_water_flow", "audio_player", "audio_player_spills")]
 modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
-position = Vector2(1000, 721)
-texture = ExtResource("4_kqolg")
+position = Vector2(538, 546)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_4orm6")
 script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
 canvas_sprite2 = NodePath("../Spills2")
@@ -59,50 +115,57 @@ machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
 text_bubble = NodePath("../Bucket/TippyText")
-allowed_spill_remaining_ratio_1 = 0.7
-allowed_spill_remaining_ratio_2 = 0.6
-allowed_spill_remaining_ratio_final = 0.6
-machine_clean_ratio = 0.7
-spill_clean_speed = 0.025
+anim_water_flow = NodePath("../Mop/AnimatedSprite2D")
+audio_player = NodePath("../AudioStreamScrub")
+audio_player_spills = NodePath("../AudioStreamSpills")
+scrubber_audio = Array[AudioStream]([ExtResource("18_t7j2k"), ExtResource("19_qgn5y"), ExtResource("20_pkusu"), ExtResource("21_65oqd"), ExtResource("22_txvoc"), ExtResource("23_621mk"), ExtResource("24_hhbhr"), ExtResource("25_it0s0")])
+spill_shrink_audio = Array[AudioStream]([ExtResource("12_txvoc"), ExtResource("13_621mk"), ExtResource("14_hhbhr"), ExtResource("15_it0s0")])
+allowed_spill_remaining_ratio_1 = 0.1
+machine_clean_ratio = 0.3
+spill_clean_speed = 0.05
 mop_dirtied_speed = 0.1
-mop_dirtied_thresh = 0.2
+mop_dirtied_thresh = 1.0
 
 [node name="Spills2" type="Sprite2D" parent="." unique_id=618876007]
-position = Vector2(1000, 680)
+position = Vector2(1373, 521)
 rotation = 3.1415927
-texture = ExtResource("2_04o5w")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_fnp53")
 
 [node name="Spills3" type="Sprite2D" parent="." unique_id=1360044752]
-position = Vector2(1000, 680)
-texture = ExtResource("5_mojnc")
+position = Vector2(987, 696)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_delys")
 
 [node name="TippyMachineSpill" type="Sprite2D" parent="." unique_id=1336493410]
-position = Vector2(1000, 538)
-texture = ExtResource("2_eu0yc")
+visible = false
+z_index = 1
+position = Vector2(910, 362)
+texture = ExtResource("18_txvoc")
 
 [node name="TippyMachineClean" type="Sprite2D" parent="." unique_id=2093052380]
-visible = false
-position = Vector2(1000, 537)
-texture = ExtResource("2_n873u")
+z_index = 1
+position = Vector2(910, 362)
+texture = ExtResource("7_dqypk")
 
 [node name="Bucket" type="Sprite2D" parent="." unique_id=960728432]
-position = Vector2(221, 292.00006)
+position = Vector2(315, 348)
 scale = Vector2(0.41000003, 0.48500004)
-texture = ExtResource("1_eeqbd")
+texture = ExtResource("8_4orm6")
 
 [node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723 node_paths=PackedStringArray("tippy_bucket")]
 modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
 position = Vector2(182.63477, -285.60284)
 scale = Vector2(0.7207779, 0.60977817)
-texture = ExtResource("5_lvuj8")
+texture = ExtResource("9_4orm6")
 script = ExtResource("6_kx0vh")
-bubble_after_wet = ExtResource("7_kx0vh")
+bubble_before_wet = ExtResource("9_4orm6")
 grow_count = 3
 speaking_gap = 0.2
 scaling_factor = 1.5
 tippy_bucket = NodePath("..")
-tippy_bucket_normal = ExtResource("1_eeqbd")
-tippy_bucket_mouth_closed = ExtResource("10_lww7c")
+tippy_bucket_normal = ExtResource("8_4orm6")
+tippy_bucket_mouth_closed = ExtResource("8_4orm6")
 
 [node name="Area2D" type="Area2D" parent="Bucket" unique_id=474787777]
 
@@ -111,6 +174,7 @@ position = Vector2(0.00012207031, 4.123657)
 shape = SubResource("RectangleShape2D_vn1tu")
 
 [node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("bubbles", "splash", "mop_range")]
+z_index = 4
 position = Vector2(960, 1000)
 rotation = -0.2485773
 texture = ExtResource("4_omxn0")
@@ -141,24 +205,32 @@ position = Vector2(0.24222565, 202.27689)
 position = Vector2(-0.50006104, -184.00003)
 shape = SubResource("RectangleShape2D_6lir2")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Mop" unique_id=1691375312]
+z_index = -1
+position = Vector2(2.4564533, 193.55354)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_54a2r")
+animation = &"Idle"
+
 [node name="SplashSound" type="AudioStreamPlayer2D" parent="." unique_id=1715966103]
 position = Vector2(451, 543)
 stream = ExtResource("7_eeqbd")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1401550815]
 
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1862559620]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Overlay" type="Sprite2D" parent="." unique_id=1943789029]
+position = Vector2(960, 534)
+texture = ExtResource("26_dqypk")
+script = ExtResource("25_4orm6")
 
-[node name="Percentage" type="Label" parent="UI/MarginContainer" unique_id=2001257238]
-visible = false
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 40
-text = "Percentage Cleaned:"
-horizontal_alignment = 1
-vertical_alignment = 2
+[node name="TextBox" type="Sprite2D" parent="." unique_id=2079060714]
+position = Vector2(1412, 933)
+texture = ExtResource("27_4orm6")
+script = ExtResource("27_fnp53")
+
+[node name="AudioStreamScrub" type="AudioStreamPlayer2D" parent="." unique_id=185475810]
+stream = SubResource("AudioStream_54a2r")
+
+[node name="AudioStreamSpills" type="AudioStreamPlayer2D" parent="." unique_id=319943381]
+stream = SubResource("AudioStream_54a2r")
+volume_db = 24.0

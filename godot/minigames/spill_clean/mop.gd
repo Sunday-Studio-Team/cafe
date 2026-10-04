@@ -13,7 +13,6 @@ static var used_scrubber: bool = false
 @export var wet_scrubber_texture: Texture
 @export var dirty_scrubber_texture: Texture
 
-
 var drag_offset: Vector2 = Vector2.ZERO
 var is_wet: bool = false
 var is_dirty: bool = false
