@@ -27,6 +27,9 @@ metadata/_gltf_primary_texture_coord = 0
 [sub_resource type="ViewportTexture" id="ViewportTexture_lwgjv"]
 viewport_path = NodePath("Content/SubViewport")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(1.4287109, 1.5673828, 0.33813477)
+
 [node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("sub_viewport", "magnets", "calendar")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
 script = ExtResource("1_6exnn")
@@ -42,9 +45,9 @@ day_test = 1
 transform = Transform3D(0.458, 0, 0, 0, 0.458, 0, 0, 0, 0.458, 0, -1.105, 0)
 
 [node name="SM_Calendar2" parent="." unique_id=646559025 instance=ExtResource("10_advr0")]
-transform = Transform3D(0.49999988, 0, -3.5527137e-15, 0, 0.49999988, 0, 3.5527137e-15, 0, 0.49999988, 1.0459753, 0, -0.25230238)
+transform = Transform3D(0.20494978, 0, -0.45606515, 0, 0.49999976, 0, 0.45606515, 0, 0.20494978, 1.1033376, -1.9868203e-07, 0.28460553)
 
-[node name="SM_Calendar" parent="SM_Calendar2" index="0" unique_id=934295146]
+[node name="SM_Calendar" parent="SM_Calendar2" index="0" unique_id=2084394539]
 surface_material_override/0 = SubResource("StandardMaterial3D_0pjr2")
 
 [node name="Magnets" type="Node3D" parent="." unique_id=2054689961]
@@ -66,5 +69,11 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1637, 1039)
 render_target_update_mode = 4
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1193080258]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=625251791]
+transform = Transform3D(0.99999976, 0, -1.0480505e-12, 0, 0.99999976, 0, 1.0480505e-12, 0, 0.99999976, 0, -0.28369135, 0)
+shape = SubResource("BoxShape3D_xrivr")
 
 [editable path="SM_Calendar2"]

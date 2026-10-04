@@ -40,7 +40,6 @@ signal alert_posted(
 )
 signal items_updated
 signal finished_important_email(email_data: EmailData)
-signal finished_spam_email(email_data: EmailData)
 signal ingredients_bag_consumed
 signal machine_exit_button_pressed
 signal player_left_office

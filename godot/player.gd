@@ -24,8 +24,11 @@ const STRIDE_LENGTH := 1.25
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
-@export var move_kaychain: AnimationPlayer
-@export var keychain: Node3D
+@export var keychain_animation_player: AnimationPlayer
+@export var tippy_tablet_3d: TippyTablet3D
+@export var tippy_tablet_normal_position_rotation: Node3D
+@export var tippy_tablet_up_front_position_rotation: Node3D
+
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
@@ -53,6 +56,7 @@ var fov_tween: Tween
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
+@onready var spawn_position := global_position
 
 
 func _ready() -> void:
@@ -60,10 +64,9 @@ func _ready() -> void:
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
 	_on_items_updated()
-	
+
 	free_cam_visualizer.visible = false
 
-	move_kaychain = keychain.get_node_or_null("AnimationPlayer") 
 	# the aiming ray is a child of the camera (not a direct child of the player)
 	# so just enabling exclude_parent doesnt work
 	aiming_ray.add_exception(self)
@@ -105,7 +108,7 @@ func _ready() -> void:
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
-				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
+				or Global.playing_tutorial # idk how the tutorial cutscene works so it could potentially causes issues with that
 		):
 			return
 
@@ -120,7 +123,7 @@ func _physics_process(delta: float) -> void:
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
-	
+
 	# TODO: move this
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
@@ -134,7 +137,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		roller_skates_dust_particles.emitting = false
 		camera.camera_effects.fov = lerp(90, 100, clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed, 0, 2))
-		
+
 	handle_gravity(delta)
 	handle_footstep_sounds()
 	handle_ingredients_bag()
@@ -199,7 +202,7 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-	
+
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
@@ -286,7 +289,7 @@ func handle_footstep_sounds() -> void:
 	# etc without this
 	if Engine.time_scale != 1:
 		return
-	
+
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
 		# here we play a sound just as we start walking
@@ -355,7 +358,8 @@ func flash_red():
 
 
 func handle_keychain_swing_animation() -> void:
-	if get_last_motion().length() > 0:
-		move_kaychain.play("KittyChainSwing")
-	else:
-		move_kaychain.play("IdleSway")
+	if keychain_animation_player != null:
+		if get_last_motion().length() > 0:
+			keychain_animation_player.play("KittyChainSwing")
+		else:
+			keychain_animation_player.play("IdleSway")

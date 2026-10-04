@@ -28,13 +28,11 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	# Add logic for giving player points here too
-
 	body.remove_from_group("trash_instances")
 	body.queue_free()
 	scored_sfx.play()
 	Global.employee_rating += rating_gained
 	Global.total_trash -= 1
-	Events.alert_posted.emit("+%s⭐ Trash cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_GREEN)
 	play_feedback()
 
 
@@ -64,3 +62,4 @@ func play_feedback() -> void:
 		trash_can_original_scale,
 		recover_duration
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	Events.alert_posted.emit("+%s⭐ Trash cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)

@@ -44,10 +44,11 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 				await _audio_stream_player_3d.finished
 
 				# wait for the current loop of the animation to end so we can stop it smoothly
-				while tippy_loudspeaker_model.animation_player.current_animation_position > 0.1:
-					await get_tree().process_frame
-				
-				tippy_loudspeaker_model.animation_player.stop()
+				if tippy_loudspeaker_model.animation_player.is_playing():
+					while tippy_loudspeaker_model.animation_player.current_animation_position > 0.1:
+						await get_tree().process_frame
+					
+					tippy_loudspeaker_model.animation_player.stop()
 			_:
 				printerr("Unknown VoiceLinePlayer.PlayerMode.")
 				return

@@ -42,8 +42,8 @@ func _ready() -> void:
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 
-func _process(_delta: float) -> void:
 
+func _process(_delta: float) -> void:
 	if visible:
 		Global.in_end_screen = true
 	else:
@@ -77,10 +77,10 @@ func _on_time_up() -> void:
 	else:
 		animation_player.play("come_in_fail")
 		lose_music.play()
-	
+
 	grant_day_rewards(passed_profit_goal)
 	await animation_player.animation_finished
-	
+
 	pencil_scribble.play()
 	var time = 1.2
 	var time2 = 1.5
@@ -114,6 +114,7 @@ func _on_time_up() -> void:
 			5: day = "Friday"
 		var g_item:Item = Global.get_item(Stats.current.daily_completion_item_unlocks.get(Global.day, [])[0])
 		var b_item:Item = Global.get_item(Stats.current.daily_rating_item_unlocks.get(Global.day, [])[0])
+		cond_def.text = "[center]clear day %s" % Global.day
 		guaranteed_item.texture = g_item.icon
 		bonus_item.texture = b_item.icon
 		day_label.text = "[right]%s"%day
@@ -155,25 +156,25 @@ func shake_screen(intensity:float):
 	tween.tween_property(new_ui_container, "position", panel_original_position, 0.1)
 
 
-func grant_day_rewards(passed_day: bool) -> void: 
+func grant_day_rewards(passed_day: bool) -> void:
 	var current_day: int = Global.day
-	
-	#Tutorial doesn't unlock 
+
+	#Tutorial doesn't unlock
 	if current_day <= 0:
-		return 
-	
+		return
+
 	if passed_day:
 		SaveDataManager.save_data.latest_unlocked_day = maxi(
 			SaveDataManager.save_data.latest_unlocked_day,
 			current_day + 1
 		)
-		
+
 		var bonus_already_received: bool = (
 			SaveDataManager.save_data.days_bonus_objective_completed.get(current_day, false)
 		)
-	
+
 		if reached_bonus_rating and not bonus_already_received:
 			SaveDataManager.save_data.days_bonus_objective_completed[current_day] = true
-	
+
 	Global.load_unlocked_items_from_save()
 	SaveDataManager.save_game_to_file()

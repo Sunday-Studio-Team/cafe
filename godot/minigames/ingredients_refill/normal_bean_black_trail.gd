@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var pos = bean.global_position
 	queue.push_front(pos)
 	if queue.size()> MAX_LENGTH:

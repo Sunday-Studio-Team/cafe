@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b7a88k1j6gt32"]
+
+[ext_resource type="PackedScene" uid="uid://7e3ghm3s7kgo" path="res://Assets/clock/tippy_clock.glb" id="1_1a4ah"]
+[ext_resource type="Script" uid="uid://c3ytnl3k5qiwd" path="res://environment/tippy_clock.gd" id="2_j2oq5"]
+[ext_resource type="Shader" uid="uid://c4qy20n68aksc" path="res://shaders/tippy_clock.gdshader" id="2_qwtqo"]
+[ext_resource type="AudioStream" uid="uid://dt16i1766gjm" path="res://audio/clock_tick_loop.wav" id="4_ki5ik"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfhkj"]
+render_priority = 0
+shader = ExtResource("2_qwtqo")
+shader_parameter/full_color = Color(0, 0.87931615, 0.2510654, 1)
+shader_parameter/empty_color = Color(0.99999994, 0.03300749, 0.23885939, 1)
+shader_parameter/radius = 0.5
+shader_parameter/progress = 0.0
+
+[node name="Tippy_Clock" unique_id=1686326203 node_paths=PackedStringArray("plane", "tick_sound") instance=ExtResource("1_1a4ah")]
+script = ExtResource("2_j2oq5")
+plane = NodePath("Wall_Clock/ANIMATED_PLANE")
+tick_sound = NodePath("TickSound")
+
+[node name="ANIMATED_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(138661666) index="0" unique_id=148553280]
+surface_material_override/0 = SubResource("ShaderMaterial_hfhkj")
+
+[node name="FACE_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(138661666) index="5" unique_id=823994690]
+transform = Transform3D(1.6886691, 0, 0, 0, 1.6886688, -7.1054274e-15, 0, 0, 0.8767085, 0, -0.005531524, -0.14197628)
+
+[node name="TickSound" type="AudioStreamPlayer3D" parent="." index="2" unique_id=50997577]
+stream = ExtResource("4_ki5ik")
+volume_db = -10.0
+max_db = 0.0
