@@ -1,9 +1,6 @@
-extends SubViewportContainer
+extends Control
 
-@export var background_panel: Panel
-@export var arrow_output: RichTextLabel
 @export var prompt_output: RichTextLabel
-@export var wrong_sign: Control
 @export var arrows_container: HBoxContainer
 @export var tippy_image: TextureRect
 
@@ -51,13 +48,30 @@ var correct_input_index: int = 0
 }
 @onready var background_color = "#ffffff"
 var failures: int = 0
+@export var screenshake: AnimationPlayer
+@export var pulse: AnimationPlayer
+@export var judgement_scene: PackedScene
+@export var music: AudioStreamPlayer
+@export var judgement_spot: Control
 
+var tween: Tween
+
+var really_bad_beat_timer: float = 0
 
 #@onready var background_color = "#" + background_panel.get_theme_stylebox("panel").get("bg_color").to_html(false)
 func _ready() -> void:
+	# We need to wait for the first frame to process because the 
+	# arrow container is given a size of 0 before the first video frame
+	# which breaks the arrows by making their size negative. 
+	await get_tree().process_frame
 	set_up_arrow_container()
 	_start_minigame()
 
+func _process(delta: float) -> void:
+#There seriously has to be a better way of doing this
+	really_bad_beat_timer += delta
+	if really_bad_beat_timer >= 0.5:
+		really_bad_beat_timer = 0
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -69,42 +83,72 @@ func _input(event: InputEvent) -> void:
 			check_input("right")
 		if event.is_action("move_back"):
 			check_input("down")
-
+	else:
+		# if we don't return here then the game could 
+		# exit early if an input event happens before
+		# valid_directions is populated
+		return 
+	
 	if correct_input_index >= valid_directions.size():
 		await correct_sound.finished
 		_end_minigame()
 
+var currently_in_fail_pose: bool = false
+
+##If we ever do steam achievements this should be one of them!![br]
+##This should remain true if you only get Perfects, and is set to false when you get a Great.
+##When you get a Miss, the whole thing resets anyways, so that doesn't matter.
+var perfect_full_combo: bool = true
 
 func check_input(direction: String) -> void:
+		
 	if (correct_input_index >= valid_directions.size()): #error checking for index out of bound.
 		print('index out of bound caught in arrows.gd. error handled.')
 		return
-
+	var judgement_node:JudgementText = judgement_scene.instantiate()
+	judgement_spot.add_child(judgement_node)
 	if (valid_directions[correct_input_index] == direction):
-		output_directions[valid_indices[correct_input_index]].texture = null
-		match direction:
-			"left":
-				set_tippy_image(tippy_left.pick_random())
-
-			"up":
-				set_tippy_image(tippy_up.pick_random())
-
-			"right":
-				set_tippy_image(tippy_right.pick_random())
-
-			"down":
-				set_tippy_image(tippy_down.pick_random())
+		if really_bad_beat_timer <= 0.07 or really_bad_beat_timer >= 0.5 - 0.07:
+			judgement_node.set_judgement(JudgementText.PERFECT)
+		else:
+			perfect_full_combo = false
+			judgement_node.set_judgement(JudgementText.GREAT)
+		screenshake.play("nudge_%s" % direction)
+		var current_arrow = output_directions[valid_indices[correct_input_index]]
+		tween = create_tween()
+		tween.tween_property(current_arrow, "scale", Vector2(1.2, 1.2), 0.05) 
+		tween.tween_property(current_arrow, "offset_transform_position", current_arrow.position - Vector2(2.0, 2.0), 0.05)
+		
+		tween.chain().tween_property(current_arrow, "scale", Vector2(1.0, 1.0), 0.05) 
+		tween.chain().tween_property(current_arrow, "offset_transform_position", current_arrow.position + Vector2(2.0, 2.0), 0.05)
+		tween.chain().tween_property(current_arrow, "modulate", Color.TRANSPARENT, 0.05)
+		#output_directions[valid_indices[correct_input_index]].texture = null
+		#match direction:
+			#"left": set_tippy_image(tippy_left.pick_random())
+			#"up": set_tippy_image(tippy_up.pick_random())
+			#"right": set_tippy_image(tippy_right.pick_random())
+			#"down": set_tippy_image(tippy_down.pick_random())
 		correct_input_index += 1
 		correct_sound.play()
+		currently_in_fail_pose = false
 	else:
+		perfect_full_combo = true
+		judgement_node.set_judgement(JudgementText.MISS)
+		if tween: tween.kill()
+		if not currently_in_fail_pose:
+			screenshake.play("fail")
+		currently_in_fail_pose = true
+		for arrow:TextureRect in output_directions:
+			arrow.offset_transform_position = Vector2.ZERO
+			arrow.scale = Vector2.ONE
+			arrow.modulate = Color.WHITE
 		if failures < 1:
 			set_tippy_image(tippy_fail_first.pick_random())
 		else:
 			set_tippy_image(tippy_fail_again.pick_random())
 		shake_tippy()
 		wrong_sound.play()
-		#display_wrong()
-		_start_minigame()
+		reset_minigame()
 		failures += 1
 
 
@@ -118,23 +162,17 @@ func add_arrow_to_output(
 		output_directions[output_index].texture = blue_textures[color_index]
 	else:
 		output_directions[output_index].texture = red_textures[color_index]
-
+	
 	# While adding to the output array, we keep track of the valid (output) indices here, in order to access the arrows that we make invisible
 	if correct_color == color:
 		valid_indices.append(output_index)
-
-
-func display_wrong() -> void:
-	wrong_sign.visible = true
-	wrong_sound.play()
-	await get_tree().create_timer(.4).timeout
-	wrong_sign.visible = false
 
 
 func set_up_arrow_container() -> void:
 	var container_horizontal_size: float = arrows_container.size.x
 	var required_separation_spaces: float = arrows_container.get_theme_constant("separation") * max_arrow_count
 	var min_arrow_size: float = (container_horizontal_size - required_separation_spaces) / (max_arrow_count)
+
 	for arrow in max_arrow_count:
 		var arrow_rect = TextureRect.new()
 		arrow_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -150,30 +188,28 @@ func set_tippy_image(tippy_texture: Texture) -> void:
 
 func shake_tippy() -> void:
 	var panel_original_position: Vector2 = tippy_image.position
-	var tween = tippy_image.create_tween()
-	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+	var shake_tween := tippy_image.create_tween()
+	var shake_offset_target := Vector2(randf_range(-shake_intensity, shake_intensity), 0)
 
-	tween.tween_property(tippy_image, "position", tippy_image.position + shake_offset_target, 0.025)
+	shake_tween.tween_property(tippy_image, "position", tippy_image.position + shake_offset_target, 0.025)
 	for i in range(10):
 		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
-		tween.chain().tween_property(
+		shake_tween.chain().tween_property(
 			tippy_image,
 			"position",
 			tippy_image.position + shake_offset_target,
 			0.025,
 		)
 
-	tween.tween_property(tippy_image, "position", panel_original_position, 0.1)
+	shake_tween.tween_property(tippy_image, "position", panel_original_position, 0.1)
 
-
-func _start_minigame() -> void:
+func reset_minigame():
 	blue_textures = []
 	red_textures = []
 	output_directions = arrows_container.get_children()
 	valid_indices = []
 	valid_directions = []
 	correct_input_index = 0
-
 	#output_directions[0].texture = blue_left[0]
 
 	# Choose if player has to click red or blue directions
@@ -208,28 +244,36 @@ func _start_minigame() -> void:
 
 	# Insert arrows randomly into arrow_output, but chosen sequentially from each direction array
 	@warning_ignore("integer_division") var individual_color_max: int = max_arrow_count / 2 - 1
-	var bi: int = 0
-	var ri: int = 0
+	var blue_index: int = 0
+	var red_index: int = 0
 	var output_index: int = 0
-	while bi <= individual_color_max and ri <= individual_color_max:
+	while blue_index <= individual_color_max and red_index <= individual_color_max:
 		var rand_color = general_colors.pick_random()
 		if rand_color == "blue":
-			add_arrow_to_output(output_index, rand_color, bi, choose_color)
-			bi += 1
+			add_arrow_to_output(output_index, rand_color, blue_index, choose_color)
+			blue_index += 1
 		else:
-			add_arrow_to_output(output_index, rand_color, ri, choose_color)
-			ri += 1
+			add_arrow_to_output(output_index, rand_color, red_index, choose_color)
+			red_index += 1
 		output_index += 1
-	while bi <= individual_color_max:
-		add_arrow_to_output(output_index, "blue", bi, choose_color)
-		bi += 1
+	while blue_index <= individual_color_max:
+		add_arrow_to_output(output_index, "blue", blue_index, choose_color)
+		blue_index += 1
 		output_index += 1
-	while ri <= individual_color_max:
-		add_arrow_to_output(output_index, "red", ri, choose_color)
-		ri += 1
+	while red_index <= individual_color_max:
+		add_arrow_to_output(output_index, "red", red_index, choose_color)
+		red_index += 1
 		output_index += 1
+	
+
+func _start_minigame() -> void:
+	pulse.play("pulse")
+	music.play()
+	
+	reset_minigame()
 
 
 func _end_minigame() -> void:
 	Events.minigame_end.emit()
+	print("Perfect Full Combo: %s" % perfect_full_combo)
 	print("End arrows minigame")

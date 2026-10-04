@@ -48,11 +48,6 @@ func set_up_tweens() -> void:
 
 func notify_pressed(did_buy_item: bool) -> void:
 	if did_buy_item:
-		#TODO REMOVE AND CHANGE
-		if item.is_active_item:
-			#Global.equipped_item = item
-			Global.equip_item(item)
-			print("Equipped: ", Global.equipped_item)
 		pass
 	else:
 		create_tween().tween_property(self, "modulate", Color.WHITE, 1.0).from(Color.RED)

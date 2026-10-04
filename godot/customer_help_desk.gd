@@ -8,14 +8,24 @@ signal new_desk_customer_arrived
 @export var _end_of_customer_queue_marker: Marker3D
 @export var _help_desk_interactable: Interactable
 @export var bell_sound: AudioStreamPlayer3D
+## yeah this sound should probably be on the player or viewmodel instead of duplicated on machine and here whatever .
+@export var airhorn_sound: AudioStreamPlayer
 
-var _desk_customer: Customer
+## the customer at the front of the queue
+var _desk_customer: Customer:
+	set(new_customer):
+		Global.customer_at_front_of_help_desk_queue = new_customer
+		_desk_customer = new_customer
+## array of the other queueing customers (does not include the _desk_customer)
 var _queued_desk_customers: Array[Customer]
 
 
 func _ready() -> void:
 	_help_desk_interactable.visible = false
 	_help_desk_interactable.interacted.connect(_on_help_desk_interactable_interacted)
+	_help_desk_interactable.requested_use_active_item.connect(_on_active_item_used_on_desk)
+	
+	Events.air_freshener_used.connect(_on_air_freshener_used)
 
 
 func _process(_delta: float) -> void:
@@ -55,7 +65,7 @@ func has_active_customers() -> bool:
 
 func _set_customer(new_customer: Customer) -> void:
 	if _desk_customer and _desk_customer.customer_sprite_resource.alternate_desk_sprite:
-		_desk_customer.body.texture = _desk_customer.customer_sprite_resource.sprite
+		_desk_customer.override_material.albedo_texture = _desk_customer.customer_sprite_resource.sprite
 
 	_desk_customer = new_customer
 
@@ -63,18 +73,18 @@ func _set_customer(new_customer: Customer) -> void:
 		_desk_customer.wait_timed_out.connect(_on_customer_wait_timed_out)
 		await _desk_customer.move_to(_spot_for_customer.global_position)
 		if _desk_customer.customer_sprite_resource.alternate_desk_sprite:
-			_desk_customer.body.texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
+			_desk_customer.override_material.albedo_texture = _desk_customer.customer_sprite_resource.alternate_desk_sprite
 		new_desk_customer_arrived.emit()
 
 		# Set unlimited for tutorial day
-		if Global.day == 0:
+		if Global.playing_tutorial:
 			pass
 		else:
 			_desk_customer.timer.wait_time = Stats.current.customer_wait_time_help_desk_each_day[Global.day]
 			_desk_customer.timer.start()
 			_desk_customer.waiting_indicator.show()
 		bell_sound.play()
-		Events.alert_posted.emit("A customer needs help!", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+		Events.alert_posted.emit("A customer needs help!", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		_help_desk_interactable.visible = true
 	else:
 		_help_desk_interactable.visible = false
@@ -84,7 +94,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	timed_out_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out)
 	if _desk_customer == timed_out_customer:
 		var rating_loss: float = Stats.current.help_desk_customer_timed_out_rating_loss_each_day[Global.day]
-		Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_RED)
+		Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 		Global.employee_rating -= rating_loss
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
@@ -109,7 +119,7 @@ func _on_minigame_end() -> void:
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 	
 	var rating_gain: float = Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("+%s Customer placated!" % rating_gain, UI.AlertIconType.RATING, UI.ALERT_DEFUALT_DURATION, UI.ALERT_COLOR_GREEN)
+	Events.alert_posted.emit("+%s Customer placated!" % rating_gain, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gain
 	Global.active_help_desk_customer.timer.stop()
 	Global.active_help_desk_customer.leave_store()
@@ -123,8 +133,43 @@ func _on_minigame_cancelled() -> void:
 	Global.active_help_desk_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out_during_minigame)
 
 
-func _on_customer_wait_timed_out_during_minigame(timed_out_customer: Customer) -> void:
+func _on_customer_wait_timed_out_during_minigame(_timed_out_customer: Customer) -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
 
 	Events.force_close_minigame.emit()
+
+
+func _on_air_freshener_used(wait_extension: float) -> void:
+	if _desk_customer != null:
+		_desk_customer.extend_wait_patience_time(wait_extension)
+
+	for customer: Customer in _queued_desk_customers:
+		customer.extend_wait_patience_time(wait_extension)
+
+
+func _on_active_item_used_on_desk() -> void:
+	var we_have_airhorn := false
+	var airhorn_item: Item
+
+	for item: Item in Global.owned_items:
+		if item.item_id == "air_horn":
+			airhorn_item = item
+			we_have_airhorn = true
+			break
+
+	if we_have_airhorn and _desk_customer != null and airhorn_item.can_be_used:
+		# customer origin is floor so this will roughly be like middle of body
+		# (or headshot for the kid)
+		Global.locked_camera_target_pos = _desk_customer.global_position + Vector3(0, 1.4, 0)
+		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
+		Events.play_viewmodel_animation.emit("airhorn_use")
+		await Events.air_horn_animation_just_blasted
+		airhorn_sound.play()
+		_desk_customer.timer.stop()
+		_desk_customer.leave_store()
+		_set_customer(null)
+
+		Global.put_active_item_on_cooldown(airhorn_item)
+		await Events.viewmodel_animation_finished
+		Global.camera_mode = Global.CameraMode.PLAYER

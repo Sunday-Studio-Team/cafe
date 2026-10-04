@@ -1,6 +1,8 @@
 class_name TabletItemIcon
 extends TextureRect
 
+@export var cooldown_progress_bar: TextureProgressBar
+
 var item: Item
 
 
@@ -13,6 +15,13 @@ func _process(_delta: float) -> void:
 	if item:
 		texture = item.icon
 		show()
+		if item.is_active_item and not item.can_be_used:
+			cooldown_progress_bar.show()
+			cooldown_progress_bar.value = (
+				(1 - item.active_item_remaining_cooldown / item.active_item_cooldown_at_levels[2]) * 100
+			)
+		else:
+			cooldown_progress_bar.hide()
 	else:
 		hide()
 

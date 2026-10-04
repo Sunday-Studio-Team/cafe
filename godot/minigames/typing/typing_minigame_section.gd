@@ -46,8 +46,10 @@ func _unhandled_input(input_event: InputEvent) -> void:
 				var pressed_key_text_lowercase: String = pressed_key_text.to_lower()
 				var required_key: String = _typing_text[_typing_text_completed_index]
 				var required_key_lowercase: String = required_key.to_lower()
-
-				if pressed_key_text_lowercase == required_key_lowercase or \
+				
+				if pressed_key_text_lowercase == "escape":
+					return
+				elif pressed_key_text_lowercase == required_key_lowercase or \
 						(
 							pressed_key_text_lowercase.begins_with("Shift + ")
 							and pressed_key_text_lowercase.ends_with(required_key_lowercase)

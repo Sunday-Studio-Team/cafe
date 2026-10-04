@@ -1,12 +1,70 @@
 [gd_scene format=3 uid="uid://djqbbryv3wcns"]
 
 [ext_resource type="PackedScene" uid="uid://cexib5vqpbisp" path="res://Assets/ceiling lights/Ceiling Lamp 3D Model.glb" id="1_f51q5"]
+[ext_resource type="Script" uid="uid://c22mb28bd2ubi" path="res://ceiling_light.gd" id="2_02gaa"]
 [ext_resource type="PackedScene" uid="uid://602nc8byjwvn" path="res://Assets/ceiling lights/Ceiling Lamp.glb" id="2_gpieq"]
+[ext_resource type="AudioStream" uid="uid://dxd4mo5bhht4j" path="res://audio/mains_hum.wav" id="3_86uh2"]
+[ext_resource type="Material" uid="uid://1ioweod5hl3b" path="res://Assets/ceiling lights/light_material.tres" id="4_64i6v"]
 
-[node name="ceiling light" unique_id=2125586524 instance=ExtResource("1_f51q5")]
+[sub_resource type="Gradient" id="Gradient_64i6v"]
+offsets = PackedFloat32Array(0.42993632, 0.56369424, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.9533678, 0.9533678, 0.9533678, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_262c5"]
+noise_type = 3
+frequency = 0.5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_64i6v"]
+width = 64
+height = 64
+noise = SubResource("FastNoiseLite_262c5")
+color_ramp = SubResource("Gradient_64i6v")
+
+[node name="ceiling light" unique_id=2125586524 node_paths=PackedStringArray("area_light", "spot_light", "light_surface_meshes", "flicker_timer") instance=ExtResource("1_f51q5")]
+script = ExtResource("2_02gaa")
+area_light = NodePath("AreaLight3D")
+spot_light = NodePath("SpotLight3D")
+shared_light_surface_material = ExtResource("4_64i6v")
+noise_texture = SubResource("NoiseTexture2D_64i6v")
+light_surface_meshes = [NodePath("Ceiling Lamp2/Light"), NodePath("Ceiling Lamp2/Light_001")]
+flicker_timer = NodePath("FlickerTimer")
 
 [node name="Ceiling Lamp2" parent="." index="0" unique_id=1115879587 instance=ExtResource("2_gpieq")]
 transform = Transform3D(0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0.0032960027, -0.42652225, -1.4951688)
 
-[node name="Sketchfab_model" parent="." index="1" unique_id=1036273303]
+[node name="Light" parent="Ceiling Lamp2" index="1" unique_id=1856758993]
+surface_material_override/0 = ExtResource("4_64i6v")
+
+[node name="Light_001" parent="Ceiling Lamp2" index="2" unique_id=71343524]
+surface_material_override/0 = ExtResource("4_64i6v")
+
+[node name="Sketchfab_model" parent="." index="1" unique_id=913148726]
 visible = false
+
+[node name="HumSound" type="AudioStreamPlayer3D" parent="." index="2" unique_id=443624158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+stream = ExtResource("3_86uh2")
+volume_db = -10.0
+unit_size = 1.0
+max_db = 0.0
+autoplay = true
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." index="3" unique_id=693720179]
+transform = Transform3D(-1.6292068e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 1.6292068e-07, 7.12149e-15, 0, 2.2, 0)
+light_color = Color(0.8784314, 1, 0.95686275, 1)
+light_energy = 10.0
+light_volumetric_fog_energy = 0.5
+shadow_enabled = true
+area_range = 2.5
+area_attenuation = 0.5
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." index="4" unique_id=853136831]
+transform = Transform3D(-1.6292068e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 1.6292068e-07, 7.12149e-15, 2.4424907e-15, 2.1426275, -4.4998625e-22)
+light_color = Color(0.8784314, 1, 0.95686275, 1)
+light_energy = 10.0
+light_volumetric_fog_energy = 2.5
+
+[node name="FlickerTimer" type="Timer" parent="." index="5" unique_id=1541118718]
+wait_time = 10.0
+
+[editable path="Ceiling Lamp2"]

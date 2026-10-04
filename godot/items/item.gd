@@ -18,7 +18,10 @@ extends Resource
 # NOTE: only relevant for active items
 @export var can_activate_anywhere: bool = true
 
-var item_level: int = 1
+# Let's make all items always level 2!
+var item_level: int = 2
+const SHOW_ITEM_LEVELS: bool = false
+
 var active_item_remaining_cooldown: float
 var can_be_used: bool = true #Set to false when the item is used
 

@@ -10,6 +10,7 @@ const DELAY_AFTER_PRESSING_BUTTON := 0.75
 @export var employee_texture_rect:TextureRect
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+@export var prompt_print_sound: AudioStreamPlayer
 
 @export_tool_button("Random Prompt") var action = show_new_prompt
 
@@ -38,8 +39,10 @@ func _ready():
 		)
 	show_new_prompt()
 
+
 func set_employee_face(texture:Texture2D=employee_default):
 	employee_texture_rect.texture = texture
+
 
 func show_new_prompt():
 	set_employee_face()
@@ -47,6 +50,9 @@ func show_new_prompt():
 	var color:String = str("#",(colors.pick_random() as Color).to_html())
 	#prompt_text_box.add_theme_color_override("font_color", colors.pick_random())
 	prompt_text_box.text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=%s]%s" % [color,current_prompt]
+	create_tween().tween_property(prompt_text_box, "visible_ratio", 1, 0.5).from(0)
+	prompt_print_sound.play()
+
 
 func _on_button_pressed(button_index: int):
 	if prompts_and_corresponding_buttons[current_prompt] == button_index + 1:

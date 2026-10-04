@@ -1,100 +1,96 @@
-extends Node3D
+class_name ExplodingBomb
+extends RigidBody3D
+
+@export var explode_timer: Timer
+@export var range_indicator: MeshInstance3D
+@export var timer_progress_indicator: MeshInstance3D
+@export var danger_light: OmniLight3D
+@export var drop_impact_sound: AudioStreamPlayer3D
+@export var ticking_siren_sound: AudioStreamPlayer3D
+@export var ticking_timer: Timer
+@export var explode_sound: AudioStreamPlayer3D
+@export var model: Node3D
+@export var explosion_particles: GPUParticles3D
+@export var meow_sound: AudioStreamPlayer3D
+
+var player: Player
+
+@onready var starting_light_energy := danger_light.light_energy
 
 
-@export var rigid_body: RigidBody3D
-@export var collision_shape: CollisionShape3D
-@export var csg_sphere: CSGShape3D #placeholder mesh kinda thing
-@export var timer: Timer
-@export var label: Label3D
-
-var player: Player =null #load this in ready()
-
-var sticky_flag:bool = false
-var push_player_in_physics_flag = false
-var _bomb_force: Vector3 = Vector3.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timer.start()
-	
+	body_entered.connect(_on_body_entered)
+	explode_timer.timeout.connect(explode)
+	ticking_timer.timeout.connect(
+			func():
+				ticking_siren_sound.play()
+				var new_scale_for_progress_indicator: Vector3 = timer_progress_indicator.scale + (Vector3.ONE / (explode_timer.wait_time - 1))
+				var t := create_tween().set_trans(Tween.TRANS_SPRING)
+				await t.tween_property(timer_progress_indicator, "scale", new_scale_for_progress_indicator,
+						0.1).finished
+				if timer_progress_indicator.scale >= Vector3.ONE:
+					ticking_siren_sound.volume_db = -100
+					var indicators_shrink_tween := create_tween().set_parallel()
+					indicators_shrink_tween.tween_property(range_indicator, "scale", Vector3.ZERO, 0.25)
+					indicators_shrink_tween.tween_property(timer_progress_indicator, "scale", Vector3.ZERO, 0.25)
+					ticking_timer.stop()
+					meow_sound.play()
+
+	)
+
 	player = Global.player
-	if (player == null):
-		print('inside exploding_bomb.gd. could not find player... error')
-	
+
+	range_indicator.scale = Vector3.ZERO
+	timer_progress_indicator.scale = Vector3.ZERO
+	danger_light.light_energy = 0
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
-	
-func _physics_process(_delta: float) -> void:
-	label.text = str(ceil(timer.time_left))
-	if (push_player_in_physics_flag == true):
-		push_player_in_physics_flag=false
-		player.velocity+= _bomb_force
-		player.move_and_slide() 
-	
-	
-func _on_rigid_body_3d_body_entered(body: Node) -> void:
-	
-	if(body is Player):
-		pass
-	elif(body is StaticBody3D): #... might be checking incorrectly
-		rigid_body.inertia = Vector3.ZERO
-		rigid_body.gravity_scale = 0
-		rigid_body.lock_rotation = true
-		
-		#rigid_body.set_freeze_mode(1) #sets freeze mode to kinematic.
-		#rigid_body.freeze = true  #freezes rigidbody; stops moving.
-		
-		#slows down the bomb when it hits the floor 
-		rigid_body.linear_damp = 2.8
-		rigid_body.angular_damp = 4.5
-		
-		label.show()
-		label.position = Vector3(0, 1, 0)
-		
-func _on_timer_timeout() -> void:
-	#grab the coordinates of player
-	#grab the coordinates of bomb [current node]
-	
-	var player_global_position = player.global_position
-	player_global_position.y= 0
-	var rigid_body_global_position = rigid_body.global_position
-	rigid_body_global_position.y= 0
-	var player_to_bomb_vector:Vector3 = player_global_position - rigid_body_global_position
-	
-	
-	
-	
-	#length of 1 or smaller needs to be about 20
-	#length of 4 needs to be about 1
-	var max_force = 35
-	var min_force = 5
-	
-	#remap maps the value of player_to_bomb_vector.length, and assumes that it is in the range of [1-4].
-	#then, it remaps it onto [max_force, min_force] respectively.
-	var some_value = remap(player_to_bomb_vector.length(), 1, 4, max_force, min_force) 
-	some_value-= 3
-	some_value = clampf(some_value, min_force+1, max_force-2)
-	#print("some_value is ", some_value)
-	_bomb_force = player_to_bomb_vector.normalized() * some_value
-	
-	if(_bomb_force.length()>4): # vertically pushes the player a tad.
-		_bomb_force.y += 1.25
-	else:
-		_bomb_force.y += 3.5
-	
-		
-	
-	
-	#add a tiny bit of z component.
-	push_player_in_physics_flag= true
-	#player.velocity+= _bomb_force
-	#player.move_and_slide() 
-	
-	await get_tree().create_timer(0.15).timeout
+func _on_body_entered(body: PhysicsBody3D) -> void:
+	# if we hit something solid like a wall, we stick to it
+	if body is StaticBody3D:
+		gravity_scale = 0
+		linear_damp = 5
+
+		explode_timer.start()
+
+		drop_impact_sound.play()
+		ticking_siren_sound.play()
+		ticking_timer.start()
+
+		create_tween().tween_property(range_indicator, "scale", Vector3.ONE, 0.5)
+		var bomb_light_tween := create_tween().set_loops()
+		bomb_light_tween.tween_property(danger_light, "light_energy", starting_light_energy, 0.5)
+		bomb_light_tween.tween_property(danger_light, "light_energy", 0, 0.5)
+
+
+func explode() -> void:
+	explode_sound.play()
+	explosion_particles.emitting = true
+
+	var player_grounded_position: Vector3 = player.global_position
+	player_grounded_position.y = 0
+	var bomb_grounded_position: Vector3 = global_position
+	bomb_grounded_position.y = 0
+	var player_distance_from_bomb: float = player_grounded_position.distance_squared_to(bomb_grounded_position)
+
+	const MIN_FORCE := 1.0
+	const MAX_FORCE := 30.0
+
+	var bomb_force_magnitude: float = remap(player_distance_from_bomb, 1, 4, MAX_FORCE, MIN_FORCE)
+	bomb_force_magnitude = clampf(bomb_force_magnitude, MIN_FORCE, MAX_FORCE)
+
+	var bomb_force: Vector3 = bomb_force_magnitude * bomb_grounded_position.direction_to(player_grounded_position)
+	bomb_force.y += bomb_force_magnitude * 0.2
+
+	player.velocity += bomb_force
+
+	model.hide()
+	danger_light.hide()
+	var range_indicator_tween := create_tween().set_parallel()
+	range_indicator_tween.tween_property(range_indicator, "scale", Vector3.ONE * 5, 0.5)
+	range_indicator_tween.tween_property(range_indicator, "transparency", 1, 0.5)
+
+	await explode_sound.finished
 	queue_free()
-	
-	#item "exploding_bomb" 1
-	
 	

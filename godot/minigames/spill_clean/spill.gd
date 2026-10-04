@@ -6,14 +6,20 @@ extends Node2D
 @export var progress_label: Label
 @export var moping_area: Area2D
 @export var bucket: Sprite2D
+@export var machine_clean: TextureRect
+@export var machine_dirty: TextureRect
 @export var bucket_area: Area2D
 @export var mop: DraggableMop
+@export var text_bubble: TippyText
+
 
 
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
 var allowed_remaining_ratio: float # = Stats.current.clean_spill_allowed_remaining
+@export_range(0.00, 1.0, 0.001)
+var machine_clean_ratio: float
 var mop_collision: CollisionShape2D
 var mop_rectangle: RectangleShape2D
 var canvas_image: Image
@@ -25,12 +31,15 @@ var image_height: int
 var game_finished: bool = false
 var previous_mop_position := Vector2.INF
 var remaining_mask: BitMap
+var remaining_ratio: float:
+	get():
+		return float(remaining_pixel_count) / float(starting_pixel_count)
 
 
 func _ready() -> void:
 	Global.minigame_active = true
 	Global.in_spill_minigame = true
-	canvas_sprite.texture = Global.spill_sprites.pick_random()
+	#canvas_sprite.texture = Global.spill_sprites.pick_random()
 
 	canvas_image = canvas_sprite.texture.get_image()
 	canvas_image.convert(Image.FORMAT_RGBA8)
@@ -44,7 +53,8 @@ func _ready() -> void:
 
 	mop_collision = moping_area.get_child(0) as CollisionShape2D
 	mop_rectangle = mop_collision.shape as RectangleShape2D
-
+	
+	
 	if moping_area == null:
 		push_error("Moping Area has not been assigned.")
 		set_physics_process(false)
@@ -71,7 +81,9 @@ func _ready() -> void:
 
 	bucket_area.area_entered.connect(
 		func(_area: Area2D):
-			mop.wet_mop()
+			if _area == moping_area && not mop.is_wet:
+				mop.wet_mop()
+				text_bubble.mop_entered()
 	)
 
 	initialize_progress_mask()
@@ -92,6 +104,7 @@ func _physics_process(_delta: float) -> void:
 	
 	previous_mop_position = mop_collision.global_position
 
+	check_machine_clean()
 	update_image(rect)
 	update_progress_display()
 	check_for_win()
@@ -153,27 +166,24 @@ func update_progress_display() -> void:
 		progress_label.text = "Erased: 100%"
 		return
 
-	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
-	)
-
 	var erased_ratio: float = 1.0 - remaining_ratio
 
 	var erased_percentage: int = roundi(erased_ratio * 100.0)
 
 	progress_label.text = ("Erased: %d%%" % erased_percentage)
 
+func check_machine_clean() -> void:
+	if remaining_ratio <= machine_clean_ratio:
+		machine_clean.visible = true
+		machine_dirty.visible = false
+	else:
+		machine_clean.visible = false
+		machine_dirty.visible = true
 
 func check_for_win() -> void:
 	if starting_pixel_count <= 0:
 		win_game()
 		return
-
-	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
-	)
 
 	if remaining_ratio <= allowed_remaining_ratio:
 		win_game()

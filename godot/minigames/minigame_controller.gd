@@ -2,13 +2,17 @@ extends CanvasLayer
 
 const OPEN_CLOSE_TWEEN_DUR := 0.1
 
-@export var minigame_dict: Dictionary[String, PackedScene]
+# @export var minigame_dict: Dictionary[String, PackedScene]
+@export var _minigame_uids_dict: Dictionary[String, StringName]
 @export var sub_viewport_container: SubViewportContainer
 @export var sub_viewport: SubViewport
 @export var cancel_button: Button
 
 
 func _ready() -> void:
+	Events.minigame_active.connect(play_minigame)
+	Events.minigame_end.connect(close_game)
+	
 	Events.time_up.connect(
 		func():
 			if Global.minigame_active:
@@ -23,20 +27,26 @@ func _ready() -> void:
 			Events.minigame_cancelled.emit(),
 	)
 
+
 func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed("pause") and Global.minigame_active:
 		close_game()
 		Events.minigame_cancelled.emit()
 		get_viewport().set_input_as_handled()
 
+
 func play_minigame(minigame_name: String):
-	var choosen_game: PackedScene = minigame_dict.get(minigame_name)
-
+	var minigame_uid: StringName = _minigame_uids_dict.get(minigame_name)
+	if not ResourceLoader.exists(minigame_uid):
+		printerr("Minigame PackedScene UID invalid!")
+		return
+	var chosen_minigame_packed_scene: PackedScene = ResourceLoader.load(minigame_uid)
+	
 	# If Null
-	if not choosen_game:
+	if not chosen_minigame_packed_scene:
 		print("This game does not exist")
-
-	sub_viewport.add_child(choosen_game.instantiate())
+	
+	sub_viewport.add_child(chosen_minigame_packed_scene.instantiate())
 
 	visible = true
 	Global.minigame_active = true
@@ -78,7 +88,8 @@ func close_game():
 
 	await t.finished
 
-	sub_viewport.get_child(0).queue_free()
+	if sub_viewport.get_children().size() > 0:
+		sub_viewport.get_child(0).queue_free()
 	if sub_viewport.gui_is_dragging():
 		sub_viewport.gui_cancel_drag()
 	visible = false

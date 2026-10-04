@@ -11,9 +11,10 @@ func _ready() -> void:
 
 
 func _on_skip() -> void:
-	SaveDataManager.save_data.finished_or_skipped_tutorial = true
-	SaveDataManager.save_game()
-
+	if SaveDataManager.save_data.latest_unlocked_day == 0:
+		SaveDataManager.save_data.latest_unlocked_day = 1 
+		SaveDataManager.save_game_to_file()
+	
 	get_tree().paused = true
 	Global.in_tutorial_selection = false
 	Global.day = 1

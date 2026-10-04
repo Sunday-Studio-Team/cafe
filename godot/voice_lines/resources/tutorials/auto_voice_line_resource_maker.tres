@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AutoVoiceLineResourceMaker" format=3 uid="uid://dk16th1uoap08"]
+
+[ext_resource type="Resource" uid="uid://dd2hcvj06k33a" path="res://voice_lines/resources/speakers/voice_line_speaker_sato.tres" id="1_sepa7"]
+[ext_resource type="Script" uid="uid://blsjnk87uu0n6" path="res://voice_lines/resources/tutorials/auto_voice_line_resource_maker.gd" id="1_ssrkn"]
+
+[resource]
+script = ExtResource("1_ssrkn")
+create_vl_resources_input_folder_path = "res://audio/vo/tutorials/day_2/"
+create_vl_resources_output_folder_path = "res://voice_lines/resources/tutorials/day_2/"
+create_vl_resources_set_speaker_resource = ExtResource("1_sepa7")
+metadata/_custom_type_script = "uid://blsjnk87uu0n6"

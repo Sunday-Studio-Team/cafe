@@ -1,0 +1,24 @@
+[gd_resource type="Theme" format=3 uid="uid://d0nulpskemldc"]
+
+[ext_resource type="FontFile" uid="uid://p0a7utn3tx0" path="res://fonts/xp/windows-xp-title-window.otf" id="1_g4qkv"]
+[ext_resource type="FontFile" uid="uid://40h5jldv4spa" path="res://fonts/xp/windowsxplike-a.otf" id="2_d68cq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fm6vv"]
+bg_color = Color(0.9607843, 0.69803923, 0.25882354, 1)
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="FontVariation" id="FontVariation_3inr0"]
+base_font = ExtResource("2_d68cq")
+spacing_space = 8
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = -6
+Label/constants/outline_size = 1
+Label/font_sizes/font_size = 94
+Label/fonts/font = ExtResource("1_g4qkv")
+Label/styles/normal = SubResource("StyleBoxFlat_fm6vv")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/normal_font_size = 54
+RichTextLabel/fonts/normal_font = SubResource("FontVariation_3inr0")

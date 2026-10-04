@@ -12,12 +12,14 @@ extends Control
 @export var click_sound: AudioStreamPlayer
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
+@export var ice_freezing_sound: AudioStreamPlayer
 
 @export var req_and_sel:TextureRect
 @export var captcha_vbox:VBoxContainer
 @export var sato_tippy_fight:TextureRect
 @export var complete_sprite:TextureRect
 @export var sato:TextureRect
+@export var frozen_border: TextureRect
 
 enum SatoTippyFight {
 	Neutral = 0,
@@ -28,7 +30,6 @@ enum SatoTippyFight {
 @export var sato_sprites:Array[Texture2D]
 
 @export var drink_name: RichTextLabel
-
 
 var ordered_drink: Drink
 var drink_customer: Customer
@@ -57,7 +58,6 @@ func _input(event: InputEvent) -> void:
 	# Brings the sprite back on any left click release
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed == false:
 		remade_drink_sprite.texture = ordered_drink.icon
-
 
 
 func populate_captcha() -> void:
@@ -90,10 +90,7 @@ func populate_order_reminder() -> void:
 # Pass the ordered_drink: Drink into here, then everything should work itself out
 func get_ordered_drink(drink: Drink) -> void:
 	ordered_drink = drink
-	#drink_name.text = "You are making %s [color=gold]%s" % [
-		#ordered_drink.singular_article,
-		#ordered_drink.name,
-	#]
+
 	var drink_str:String = ""
 	var drink_arr:PackedStringArray = ordered_drink.name.to_upper().split(" ")
 	for i in range(drink_arr.size()):
@@ -102,6 +99,7 @@ func get_ordered_drink(drink: Drink) -> void:
 	drink_name.text = str("[font_size=100][color=black][center]%s" % drink_str).strip_edges()
 	remade_drink_sprite.texture = drink.icon
 
+
 func on_wrong():
 	sato.texture = sato_sprites[SatoTippyFight.Loss]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Loss]
@@ -109,55 +107,68 @@ func on_wrong():
 	sato.texture = sato_sprites[SatoTippyFight.Neutral]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
 
+
 func on_right():
 	req_and_sel.visible = false
 	captcha_vbox.visible = false
 	complete_sprite.visible = true
 	sato.texture = sato_sprites[SatoTippyFight.Win]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
+	
+	# Tell the tutorial the captcha part is done
+	Global.tutorial_drink_remake_ingredients_done = true
+
 
 func verify_captcha() -> void:
 	# non-static for ease of use, could change this!
-	var ordered_ingredients = [
+	var ordered_ingredients: Array[Variant] = [
 		ordered_drink.main_ingredient,
 		ordered_drink.liquid,
 		ordered_drink.extra,
 	]
-
-	for captcha_icon: IngredientIconHolder in captcha.get_children():
+	
+	# not counting duplicates, so if our drink has coffee, and we select 3 coffees,
+	# that will only add 1 to this count
+	var correct_ingredients_pressed: int = 0
+	
+	for ingredient: Ingredient in ordered_ingredients:
 		if (
-			(
-				ordered_ingredients.any(
-					func(x: Ingredient):
-						return x == captcha_icon.ingredient,
-				)
-				!= captcha_icon.button.button_pressed
-			)
-		):
-			on_wrong()
-			shake_panel()
-			wrong_sound.play()
-			return
-	on_right()
-	remade_drink_sprite.visible = true
-	# Matthew: Commented this V out so the user can drag the drink, if anything breaks check if this is why
-	#mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
-	correct_sound.play()
+			captcha.get_children().any(
+					func(slot: IngredientIconHolder):
+						if ingredient == null:
+							return true
+						return slot.ingredient == ingredient and slot.button.button_pressed
+		)
+	):
+			correct_ingredients_pressed += 1
+
+	var wrong_ingredients_pressed: int = 0
 
 	for slot: IngredientIconHolder in captcha.get_children():
-		var scale_tween := create_tween()
-		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE * 0.75, 0.025)
-		scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE, 0.025)
+		if slot.button.button_pressed and not ordered_ingredients.has(slot.ingredient):
+			wrong_ingredients_pressed += 1
+			
+	if correct_ingredients_pressed == ordered_ingredients.size() and wrong_ingredients_pressed == 0:
+		on_right()
+		remade_drink_sprite.show()
+		correct_sound.play()
 
-		await get_tree().create_timer(0.025).timeout
+		for slot: IngredientIconHolder in captcha.get_children():
+			var scale_tween := create_tween()
+			scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE * 0.75, 0.025)
+			scale_tween.tween_property(slot, "offset_transform_scale", Vector2.ONE, 0.025)
 
-		var colour_tween := create_tween()
-		colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
-		colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
+			await get_tree().create_timer(0.025).timeout
 
-	await correct_sound.finished
-	
-	#_end_minigame()
+			var colour_tween := create_tween()
+			colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
+			colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
+
+			await correct_sound.finished		
+	else:
+		on_wrong()
+		shake_panel()
+		wrong_sound.play()
 
 
 func shake_panel() -> void:
@@ -197,7 +208,7 @@ func _start_minigame() -> void:
 	
 	if(Global.ordered_drink_customer != null):
 		drink_customer = Global.ordered_drink_customer
-		customer_sprite.texture = drink_customer.body.texture
+		customer_sprite.texture = drink_customer.full_body_sprite.texture
 		
 		rescale_image_to_target_height(customer_sprite)
 	else:
@@ -209,6 +220,20 @@ func _start_minigame() -> void:
 	
 	populate_captcha()
 
+	var has_frozen_tippy_item: bool = Global.owned_items.any(
+			func(item: Item) -> bool:
+				return item.item_id == "barista_guide"
+	)
+
+	if has_frozen_tippy_item:
+		ice_freezing_sound.play()
+		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
+		border_freeze_tween.tween_property(
+				frozen_border, 
+				"modulate", 
+				Color.WHITE, 
+				1
+		)
 
 
 func _end_minigame() -> void:
@@ -224,27 +249,25 @@ func _on_submit_button_pressed() -> void:
 	verify_captcha()
 
 
-
-func rescale_image_to_target_height(customer_sprite: TextureRect, target_height:int = 1024)->void:
+func rescale_image_to_target_height(sprite: TextureRect, target_height:int = 1024)->void:
 	#target_height is generally 1024
 	
-	
-	var original_height = customer_sprite.texture.get_height()
+	var original_height = sprite.texture.get_height()
 	if original_height==target_height:
 		
 		return	#do nothing! texture is the correct size.
 				#all customer heights have 1024px; with variable widths. so its the only one we check.		
 			
-	var original_width = float(customer_sprite.texture.get_width())
+	var original_width = float(sprite.texture.get_width())
 	
 	var ratio = float(original_height)/float(target_height) #ex 2048/1024 = 2
 	
-	var _image = customer_sprite.texture.get_image()
+	var _image = sprite.texture.get_image()
 	
-	var target_width = original_width
+	# var target_width = original_width
 	_image.resize(int(round(original_width/ratio)), int(target_height), Image.INTERPOLATE_LANCZOS)
 	var _texture: ImageTexture = ImageTexture.create_from_image(_image)
 	
-	customer_sprite.texture= _texture
+	sprite.texture= _texture
 	#print("rescaled customer sprite size",customer_sprite.texture.get_size())
 	
