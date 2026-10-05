@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://2rm8v77lejbi" path="res://sprites/endshift_ui/second_part/stars_fill.png" id="25_yx15a"]
 [ext_resource type="Texture2D" uid="uid://cneiyweuvc4qx" path="res://sprites/endshift_ui/first_part/cash_fg.png" id="26_vob8y"]
 [ext_resource type="Texture2D" uid="uid://dh28wnrabd0ej" path="res://sprites/endshift_ui/second_part/timesup_dark.png" id="32_agvtq"]
+[ext_resource type="Script" uid="uid://cqh54jh0eacu1" path="res://ui/shift_end_times_up_text.gd" id="33_vob8y"]
 [ext_resource type="AudioStream" uid="uid://bjcp3lc6wo35x" path="res://audio/music/shift_end_win_music.mp3" id="35_bxlob"]
 [ext_resource type="Texture2D" uid="uid://3c7d3djl034d" path="res://sprites/endshift_ui/second_part/restart_up.png" id="35_c1exd"]
 [ext_resource type="AudioStream" uid="uid://baa6f40u450qq" path="res://audio/music/shift_fail_music.wav" id="36_q60pi"]
@@ -1655,8 +1656,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 texture = ExtResource("32_agvtq")
 stretch_mode = 3
+script = ExtResource("33_vob8y")
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_g6pkj")
@@ -1686,12 +1689,11 @@ volume_db = -5.0
 [node name="WinMusic" type="AudioStreamPlayer" parent="." unique_id=638685281]
 stream = ExtResource("35_bxlob")
 volume_db = -10.0
-bus = &"DiegeticMusic"
+bus = &"NonDiegeticMusic"
 
 [node name="LoseMusic" type="AudioStreamPlayer" parent="." unique_id=1563178062]
 stream = ExtResource("36_q60pi")
-volume_db = -5.0
-bus = &"DiegeticMusic"
+bus = &"NonDiegeticMusic"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1431337349]
 anchors_preset = 15

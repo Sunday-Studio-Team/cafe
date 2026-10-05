@@ -17,13 +17,19 @@ func _ready() -> void:
 	interactable.interacted.connect(_on_desk_interacted)
 	interactable.show()
 	fabric_cover_for_monitor.hide()
-	
+
+	Events.shift_started.connect(_on_shift_started)
+
 
 func _on_desk_interacted() -> void:
 	pc_interaction_camera_enter_transition()
 	pc_ui.show()
 
 	Events.pc_state_change.emit(true)
+
+
+func _on_shift_started() -> void:
+	interactable.visible = false
 
 
 # TODO: this (and the below exit func) has similar functionality to the machine

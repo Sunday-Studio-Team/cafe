@@ -23,21 +23,9 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var ui: CanvasLayer
-@export var day_indicator: Label
-@export var desk: Desk
-@export var overtime_item: Item
 @export var _trash_can: TrashCan
 #Active Items
-@export var clock_item_stop_sound: AudioStreamPlayer
-@export var clock_item_start_sound: AudioStreamPlayer
-@export var teleporter1: Teleporter
-@export var teleporter2: Teleporter
-@export var teleporter3: Teleporter
-@export var teleporter4: Teleporter
-@export var air_freshener: AirFreshener
-@export var tutorial_selection_menu: TutorialSelectionMenu
 @export var shift_start_sound: AudioStreamPlayer
-@export var cam_spot: Marker3D
 @export var default_trash_spawn_spot: Marker3D
 
 @export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
@@ -50,7 +38,6 @@ var _help_desk_customer_spawn_timer: Timer
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
 
-var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
 var _active_machines: Array[Machine]
 var _all_security_cameras: Array[SecurityCam3D]
@@ -107,9 +94,11 @@ func _ready() -> void:
 	game_timer.timeout.connect(_on_game_timer_timeout)
 
 	Events.shift_started.connect(_on_shift_started)
-	
+
 	# Determine if we should play the tutorial!
-	var should_play_tutorial: bool = Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
+	var should_play_tutorial: bool = (
+		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
+	)
 	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
 	if should_play_tutorial and not skip_tutorials:
 		print("should play tutorial!")
@@ -119,32 +108,31 @@ func _ready() -> void:
 		print("should not play tutorial!")
 
 	set_per_day_stuff()
-	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
 	# enables props as the days go by
-	# could combine the loops to one loop but am not sure if all props will have equivaent 
+	# could combine the loops to one loop but am not sure if all props will have equivalent
 	# number of day props
 	for i in range(day_containers_desk.size()):
 		if day_containers_desk[i] != null:
 			day_containers_desk[i].visible = (i <= Global.day)
-			
+
 	for i in range(day_containers_boxes.size()):
 		var box: Node3D = day_containers_boxes[i]
 		if box != null:
 			var should_show_box: bool = i <= Global.day
 			if should_show_box:
 				box.show()
-				box.process_mode = Node.ProcessMode.PROCESS_MODE_ALWAYS 
+				box.process_mode = Node.ProcessMode.PROCESS_MODE_ALWAYS
 			else:
 				box.hide()
 				box.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
-				
+
 	for i in range(day_containers_posters.size()):
 		if day_containers_posters[i] != null:
 			day_containers_posters[i].visible = (i <= Global.day)
-			
-	# we have to set all these manually here so if we reload the scene theyll reset
+
+	# we have to set all these manually here so if we reload the scene they'll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -161,11 +149,11 @@ func _ready() -> void:
 	Global.refresh_active_items()
 	closing_time = false
 	_trash_can.visible = false
-	
+
 	get_stats()
 
 	_tutorial_manager.start_day()
-	
+
 
 func _physics_process(delta: float) -> void:
 	Global.shift_time_remaining = game_timer.time_left
@@ -191,61 +179,18 @@ func get_stats() -> void:
 	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
 
-	update_teleporters_enabled()
-	update_air_fresheners_enabled()
-
-
-func update_teleporters_enabled() -> void:
-	var has_teleporter: bool = false
-	var has_teleporter_level_2: bool = false
-	for item in Global.owned_items:
-		if item.item_id == "teleporter":
-			has_teleporter = true
-			if item.item_level == 2:
-				has_teleporter_level_2 = true
-			break
-	if has_teleporter:
-		teleporter2.enable_teleporter()
-		teleporter3.enable_teleporter()
-		if has_teleporter_level_2:
-			teleporter1.enable_teleporter()
-			teleporter4.enable_teleporter()
-		else:
-			teleporter1.disable_teleporter()
-			teleporter4.disable_teleporter()
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
-		teleporter3.disable_teleporter()
-		teleporter4.disable_teleporter()
-
-
-func update_air_fresheners_enabled() -> void:
-	var air_freshener_item: Item = null
-	for owned_item in Global.owned_items:
-		if owned_item.item_id == "air_freshener":
-			air_freshener_item = owned_item
-			break
-
-	if air_freshener_item != null:
-		air_freshener.enable_air_freshener()
-	else:
-		air_freshener.disable_air_freshener()
-
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
-	
 	if Global.day == 1:
 		# Reset run.
 		Global.player_tips_bank = 5
 		Global.received_emails.clear()
 		Global.read_emails.clear()
-		Global.spam_emails.clear()
 		Global.received_reviews.clear()
 		Global.player_tips_bank = 0
 		Global.owned_items.clear()
-		Stats.reset()		
+		Stats.reset()
 
 	if Global.day == 1:
 		if Global.playing_tutorial:
@@ -257,7 +202,7 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_left_machine)
 			_active_machines.push_back(_right_area_right_machine)
 			_set_day_security_cameras_active([])
-	
+
 	if Global.day == 2:
 		_active_machines.clear()
 		_active_machines.push_back(_left_area_right_machine)
@@ -288,12 +233,16 @@ func set_per_day_stuff() -> void:
 		_active_machines.push_back(_left_area_right_machine)
 		_active_machines.push_back(_right_area_left_machine)
 		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera])
+		_set_day_security_cameras_active(
+			[_left_area_camera, _middle_camera, _right_area_camera, _hallway_camera]
+		)
 		should_spawn_trash_today = true
 		_trash_can.visible = true
 		# day 5 whiteboard tippy disappearing effect
 		day_5_tippy_whiteboard_disappear_area.monitoring = true
-		day_5_tippy_whiteboard_disappear_area.player_entered_area.connect(whiteboard.hide_tippy.unbind(1))
+		day_5_tippy_whiteboard_disappear_area.player_entered_area.connect(
+			whiteboard.hide_tippy.unbind(1)
+		)
 	else:
 		day_5_tippy_whiteboard_disappear_area.monitoring = false
 
@@ -307,19 +256,21 @@ func set_per_day_stuff() -> void:
 	for machine: Machine in _active_machines:
 		machine.process_mode = Node.PROCESS_MODE_INHERIT
 		machine.show()
-		
+
 	Global.machines.assign(_active_machines)
 
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
-	if closing_time: return
+	if closing_time:
+		return
 	_machine_customer_spawn_timer.wait_time = Global.machine_customer_flow_rate
 	_machine_customer_spawn_timer.start()
 	spawn_machine_customer()
 
 
 func _on_help_desk_customer_spawn_timer_timeout() -> void:
-	if closing_time: return
+	if closing_time:
+		return
 	_help_desk_customer_spawn_timer.wait_time = Global.help_desk_customer_flow_rate
 	_help_desk_customer_spawn_timer.start()
 	spawn_help_desk_customer()
@@ -421,7 +372,7 @@ func _set_day_security_cameras_active(cameras_to_set_active: Array[SecurityCam3D
 func attempt_spawn_trash() -> void:
 	if not should_spawn_trash_today:
 		return
-	
+
 	# freq of spawn 3/41 rn
 	# TODO: move this probability to Stats ?
 	var spawn := randi_range(0, 40)
@@ -439,24 +390,38 @@ func spawn_trash() -> void:
 	for child in get_children():
 		if child is Customer:
 			current_customers.append(child)
-			
+
 	var littering_customer: Customer = null
 	if current_customers.size() > 0:
 		littering_customer = current_customers.pick_random()
 	if littering_customer:
-		customer_trash.position = Vector3(littering_customer.global_position.x, 0, littering_customer.global_position.z)
+		customer_trash.position = Vector3(
+			littering_customer.global_position.x,
+			0,
+			littering_customer.global_position.z,
+		)
 	else:
 		customer_trash.position = default_trash_spawn_spot.position
 		print("no customers exist, trash was generate at default location")
 	print("spawned trash")
 
 	add_child(customer_trash)
-	
+
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
 		Global.employee_rating -= Global.trash_punishment_amount
-		Events.alert_posted.emit("-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
-	Events.alert_posted.emit("Customer dropeed some trash...", UI.AlertIconType.CUSTOMER, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+		Events.alert_posted.emit(
+			"-%s Too much trash in the store" % Global.trash_punishment_amount,
+			UI.AlertIconType.RATING,
+			UI.ALERT_DEFAULT_DURATION,
+			UI.ALERT_COLOR_RED,
+		)
+	Events.alert_posted.emit(
+		"Customer dropped some trash...",
+		UI.AlertIconType.CUSTOMER,
+		UI.ALERT_DEFAULT_DURATION,
+		UI.ALERT_COLOR_NEUTRAL,
+	)
 
 
 func _on_game_timer_timeout() -> void:
@@ -478,7 +443,9 @@ func shift_end_sequence(override: bool = false):
 		await Events.end_screen_finished
 
 		get_tree().paused = false
-		var met_profit_goal: bool = Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
+		var met_profit_goal: bool = (
+			Global.daily_cafe_money >= Stats.current.daily_profit_goals_each_day[Global.day]
+		)
 		if met_profit_goal:
 			var just_finished_final_day: bool = Global.day == Global.final_day
 			if just_finished_final_day:
@@ -495,8 +462,6 @@ func shift_end_sequence(override: bool = false):
 		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
 		else:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-
-
 
 
 func _on_shift_started():
@@ -516,11 +481,6 @@ func _on_shift_started():
 				has_scrubber = true
 				break
 		DraggableMop.used_scrubber = has_scrubber
-
-		desk.interactable.visible = false
-
-
-
 
 
 func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
@@ -547,17 +507,27 @@ func _get_help_desk_customer_flow_rate() -> float:
 
 ## In seconds per machine customer entry.
 func _rating_to_machine_customer_flow_rate(current_employee_rating: float) -> float:
-	var rating_flow_rate_curve_for_day: Curve = Stats.current.machine_customer_flow_rate_at_rating_curve_per_day[
-			Global.day]
-	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
-	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	var rating_flow_rate_curve_for_day: Curve = (
+		Stats.current.machine_customer_flow_rate_at_rating_curve_per_day[Global.day]
+	)
+	var current_employee_rating_ratio: float = (
+		current_employee_rating / Stats.current.employee_rating_max
+	)
+	var seconds_per_customer: float = (
+		rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	)
 	return seconds_per_customer
 
 
 ## In seconds per help desk customer entry.
 func _rating_to_help_desk_customer_flow_rate(current_employee_rating: float) -> float:
-	var rating_flow_rate_curve_for_day: Curve = Stats.current.help_desk_customer_flow_rate_at_rating_curve_per_day[
-			Global.day]
-	var current_employee_rating_ratio: float = current_employee_rating / Stats.current.employee_rating_max
-	var seconds_per_customer: float = rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	var rating_flow_rate_curve_for_day: Curve = (
+		Stats.current.help_desk_customer_flow_rate_at_rating_curve_per_day[Global.day]
+	)
+	var current_employee_rating_ratio: float = (
+		current_employee_rating / Stats.current.employee_rating_max
+	)
+	var seconds_per_customer: float = (
+		rating_flow_rate_curve_for_day.sample(current_employee_rating_ratio)
+	)
 	return seconds_per_customer

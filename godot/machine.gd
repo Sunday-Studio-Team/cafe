@@ -110,9 +110,9 @@ enum Icon {
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
-@export var popup_go_to_spill: PackedScene # tutorial popup that tells player to go to the spill
+@export var rating_vfx: Machine3DPopupVfx
 @export_category("Explosion Particles")
-@export var explosion_boom: GPUParticles3D
+@export var explosion_boom_particles: GPUParticles3D
 
 var customer: Customer
 var queued_customers: Array[Customer]
@@ -123,6 +123,7 @@ var tutorial_lock_remake_drink_button: bool = false
 var next_drink_forced_perfect: bool = false
 var tutorial_lock_accept_drink_button: bool = false
 var next_drink_forced_incorrect: bool = false
+var customer_arrived: bool = false
 var ingredients: int:
 	set(new_value):
 		if new_value > Stats.current.machine_max_ingredients:
@@ -258,6 +259,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			customer_wait_bar.modulate = Color.RED
 
+	if customer_arrived:
+		customer_arrived = false
+		check_for_stepping_in_spill()
+		machine_make_drink()
+
 	_process_queued_customers()
 
 
@@ -294,9 +300,7 @@ func _process_queued_customers() -> void:
 			return
 		var new_current_customer: Customer = queued_customers.pop_front()
 		_customer_queue_update_visuals()
-		await _set_customer(new_current_customer)
-		check_for_stepping_in_spill()
-		machine_make_drink()
+		_set_customer(new_current_customer)
 
 
 func check_for_stepping_in_spill() -> void:
@@ -312,6 +316,10 @@ func blast_player_from_using_machine() -> void:
 			Events.force_close_minigame.emit()
 		gui_3d.exit_without_camera_tween()
 
+	# make sure we're officially not in ui (since that blocks movement)
+	while Global.in_ui:
+		await get_tree().process_frame
+
 	# Get the direction vector from machine to player.
 	var machine_to_player_normalized: Vector3 = global_position.direction_to(
 			Global.player.global_position
@@ -320,11 +328,9 @@ func blast_player_from_using_machine() -> void:
 	machine_to_player_normalized.y = 0.0
 	# Scale it.
 	var launch_vector: Vector3 = machine_to_player_normalized * BLAST_LAUNCH_MAGNITUDE
-	
+
 	bomb_sound_player.play()
-	explosion_boom.restart()
-	Global.player.velocity += launch_vector
-	await get_tree().create_timer(0.1, false).timeout
+	explosion_boom_particles.restart()
 	Global.player.velocity += launch_vector
 
 
@@ -358,26 +364,28 @@ func _set_customer(new_customer: Customer) -> void:
 		if customer.customer_sprite_resource.alternate_desk_sprite:
 			customer.override_material.albedo_texture = customer.customer_sprite_resource.sprite
 
+	customer = new_customer
+	customer_arrived = false
+
 	if new_customer != null:
 		new_customer.wait_timed_out.connect(
 				_on_customer_wait_timed_out,
 				CONNECT_ONE_SHOT
 		)
 		await new_customer.move_to(spot_for_customer.global_position)
+		#In case the customer is airhorned or some other stuff happens
+		if new_customer != customer:
+			return
 		if new_customer.customer_sprite_resource.alternate_desk_sprite:
 			new_customer.override_material.albedo_texture = new_customer.customer_sprite_resource.alternate_desk_sprite
-			
+		customer_arrived = true
 	else:
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
 		waiting_for_response = false
 		timer.stop()
 		if Global.making_drink_manually and gui_3d.player_using_me:
-			# NOTE: not sure these are both correct + necessary to cancel a minigame
-			# but this seems to behave correctly
 			Events.force_close_minigame.emit()
-			Events.minigame_cancelled.emit()
-	customer = new_customer
 
 
 func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
@@ -385,6 +393,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 		var rating_loss: float = Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 		Global.employee_rating -= rating_loss
+		rating_vfx.play_anim_then_hide("minus_rating")
 		customer.leave_store()
 		_set_customer(null)
 
@@ -434,7 +443,7 @@ func machine_make_drink() -> void:
 	#customer_order_indicator.show()
 	ordered_drink_icon.show()
 	ordered_text.show()
-	
+
 	# ordered_drink_name_label.show()
 	order_breakdown.show()
 
@@ -474,7 +483,7 @@ func machine_make_drink() -> void:
 	animation_player.play("order_ready_jump")
 	await animation_player.animation_finished
 	gui_3d.interactable.show()
-	
+
 	# if we're using the machine when it jumps, it loses our input for some reason
 	# so we force enter the gui again
 	if gui_3d.player_using_me:
@@ -503,7 +512,7 @@ func machine_make_drink() -> void:
 		else:
 			print("Machine: rolled %s, which is more than %s, drink will be correct." % [roll_for_drink_incorrect, chance_drink_should_be_incorrect])
 			target_drink_diff = 0
-	
+
 	var unlocked_drinks: Array[Drink]
 	for drink in Global.drinks:
 		if drink.is_unlocked():
@@ -751,7 +760,7 @@ func refill() -> void:
 				% [Stats.current.ingredients_per_bag, Global.refill_minigame_accuracy, ingredient_multiplier]
 		)
 		print("----------")
-	
+
 	ingredients += roundi(ingredients_to_add)
 
 	# TODO: separate this out ? its not explicit its doing this when we just call
@@ -785,7 +794,7 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	waiting_for_response = false
 	Events.order_served.emit(customer)
-	
+
 	if did_remake_drink:
 		Events.order_remade.emit(customer)
 	else:
@@ -807,6 +816,7 @@ func accept_order(did_remake_drink: bool) -> void:
 				UI.ALERT_COLOR_GREEN
 			)
 			Global.employee_rating += order.star_rating_gain_for_remake
+			rating_vfx.play_anim_then_hide("plus_rating")
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
 			Events.alert_posted.emit(
@@ -816,6 +826,7 @@ func accept_order(did_remake_drink: bool) -> void:
 				UI.ALERT_COLOR_RED
 			)
 			Global.employee_rating -= order.star_rating_loss_if_accept
+			rating_vfx.play_anim_then_hide("minus_rating")
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	reset_icons()
@@ -847,7 +858,7 @@ func accept_order(did_remake_drink: bool) -> void:
 func break_down() -> void:
 	if broken_down:
 		return
-	
+
 	broken_down = true
 	breakdown_timer.start()
 	await breakdown_timer.timeout
@@ -857,7 +868,7 @@ func break_down() -> void:
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
 	gui_3d.interactable.visible = false
-	
+
 	# NOTE: why hide this specifically ?
 	ordered_drink_name_label.hide()
 	fix_machine_button.show()
@@ -884,14 +895,14 @@ func _on_requested_use_active_item_fix_machine():
 
 	if hammer == null or !hammer.can_be_used:
 		return
-	
+
 	Global.locked_camera_target_pos = item_aim_spot.global_position
 	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	Events.play_viewmodel_animation.emit("hammer_use")
 	Global.put_active_item_on_cooldown(hammer)
 	await Events.hammer_animation_hit
 	fix_machine(true)
-	
+
 	await Events.viewmodel_animation_finished
 	Global.camera_mode = Global.CameraMode.PLAYER
 
@@ -909,7 +920,7 @@ func _on_requested_use_active_item_machine():
 	if customer:
 		Global.locked_camera_target_pos = item_aim_spot.global_position
 		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
-		
+
 		Global.put_active_item_on_cooldown(air_horn)
 		var leaving_customer: Customer = customer
 		Events.play_viewmodel_animation.emit("airhorn_use")
@@ -918,7 +929,7 @@ func _on_requested_use_active_item_machine():
 		_set_customer(null)
 		leaving_customer.leave_store()
 		waiting_for_response = false
-		
+
 		ordered_drink_icon.hide()
 		ordered_text.hide()
 		ordered_drink_name_label.hide()

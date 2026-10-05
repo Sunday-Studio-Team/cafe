@@ -407,7 +407,7 @@ theme_override_constants/shadow_offset_x = -4
 theme_override_constants/shadow_offset_y = 4
 theme_override_fonts/normal_font = ExtResource("4_fbfb6")
 bbcode_enabled = true
-text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=32][p align=center]Tippy says:[/p][font_size=48][p align=center]Click the[/p][p align=center][color=#ff5444ff]Blue A"
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Green Square"
 fit_content = true
 
 [node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1218646402]
@@ -514,7 +514,7 @@ volume_db = 5.0
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=1992806125]
 stream = ExtResource("10_xs2qy")
-volume_db = 5.0
+volume_db = -10.0
 
 [node name="PromptPrintSound" type="AudioStreamPlayer" parent="." unique_id=1099527006]
 stream = SubResource("AudioStreamRandomizer_aq73i")

@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://bafb7qrb0fiif"]
+
+[ext_resource type="Script" uid="uid://ce6dr8crdpidc" path="res://air_freshener.gd" id="1_lqk1p"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_62jgw"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="3_eta2g"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="4_0f434"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_kt2qb"]
+[ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="6_y5vsg"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xrivr"]
+top_radius = 0.11279297
+bottom_radius = 0.11279297
+height = 0.4140625
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_13qdw"]
+radius = 0.39990234
+height = 1.1123047
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+radius = 0.23144531
+height = 0.78808594
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3c47a"]
+viewport_path = NodePath("CooldownTimerSprite/SubViewport")
+
+[node name="AirFreshener" type="Node3D" unique_id=1323392743 node_paths=PackedStringArray("_interactable", "_cooldown_timer_sprite", "_cooldown_timer_bar", "_spray_sound", "_collider_body")]
+script = ExtResource("1_lqk1p")
+_interactable = NodePath("Interactable")
+_cooldown_timer_sprite = NodePath("CooldownTimerSprite")
+_cooldown_timer_bar = NodePath("CooldownTimerSprite/SubViewport/TextureProgressBar")
+_spray_sound = NodePath("SpraySound")
+_collider_body = NodePath("StaticBody3D")
+
+[node name="Model" type="Node3D" parent="." unique_id=74255199]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model" unique_id=1352094610]
+mesh = SubResource("CylinderMesh_xrivr")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Model/MeshInstance3D" unique_id=494593094]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/MeshInstance3D/CSGCombiner3D" unique_id=1233695920]
+transform = Transform3D(1, 0, 0, 0, -0.7071068, 0.7071067, 0, -0.7071067, -0.7071068, 0, 0.1501404, 0)
+radius = 0.10888672
+height = 0.328125
+
+[node name="Interactable" type="Area3D" parent="." unique_id=2095758401 node_paths=PackedStringArray("mesh")]
+script = ExtResource("2_62jgw")
+interactable_id = &"use_air_freshener"
+display_name = "Air Freshener"
+mesh = NodePath("../Model/MeshInstance3D")
+show_interact_hotkey = false
+metadata/_custom_type_script = "uid://cku66354bxktd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1106980060]
+shape = SubResource("CapsuleShape3D_13qdw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1981069836]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1285534542]
+shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="CooldownTimerSprite" type="Sprite3D" parent="." unique_id=1729304534]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.41839075, 0.2541976)
+pixel_size = 0.005
+billboard = 1
+texture = SubResource("ViewportTexture_3c47a")
+
+[node name="SubViewport" type="SubViewport" parent="CooldownTimerSprite" unique_id=335991458]
+transparent_bg = true
+size = Vector2i(160, 160)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CooldownTimerSprite/SubViewport" unique_id=332375124]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("3_eta2g")
+texture_over = ExtResource("4_0f434")
+texture_progress = ExtResource("5_kt2qb")
+
+[node name="Label" type="Label3D" parent="CooldownTimerSprite" unique_id=2119465058]
+sorting_offset = 1.0
+pixel_size = 0.01
+billboard = 1
+text = "⌛"
+
+[node name="Label3D" type="Label3D" parent="." unique_id=695930768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.60469675, 0)
+text = "AIR
+FRESHENER"
+
+[node name="SpraySound" type="AudioStreamPlayer3D" parent="." unique_id=2143104728]
+stream = ExtResource("6_y5vsg")

@@ -60,9 +60,11 @@ func _ready() -> void:
 
 	setup_button_tweens()
 
+
 func _unhandled_input(input_event: InputEvent) -> void:
 	if (
 			input_event.is_action_pressed("pause")
+			and not Global.in_end_screen
 	):
 		get_viewport().set_input_as_handled()
 		if state == State.NORMAL:
@@ -71,7 +73,7 @@ func _unhandled_input(input_event: InputEvent) -> void:
 			not_sure()
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	sure_menu.visible = (
 			state == State.CONFIRMING_RESTART
 			or state == State.CONFIRMING_QUIT

@@ -1,4 +1,4 @@
-﻿class_name DebugCustomerSpriteCycler
+class_name DebugCustomerSpriteCycler
 extends Node
 
 @export var _customer_sprite_tex_rect: TextureRect
@@ -11,7 +11,7 @@ var _customer_sprite_index: int = 0
 func _ready() -> void:
 	_update_tex()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("use_item"):
 		_customer_sprite_index -= 1
 		if _customer_sprite_index < 0:

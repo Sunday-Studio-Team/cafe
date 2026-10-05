@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://lbvthxlp62hx"]
+
+[ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="1_eumkw"]
+[ext_resource type="AudioStream" uid="uid://cosuq17hxsua5" path="res://audio/use_teleport.wav" id="2_tuehi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
+size = Vector3(1, 0.2680664, 1)
+
+[node name="Teleporter" type="Area3D" unique_id=419540253 node_paths=PackedStringArray("destination", "use_sound")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+collision_layer = 7
+collision_mask = 15
+monitoring = false
+script = ExtResource("1_eumkw")
+destination = NodePath("Destination")
+use_sound = NodePath("UseSound")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1596996897]
+shape = SubResource("BoxShape3D_punm7")
+
+[node name="Destination" type="Marker3D" parent="." unique_id=1214631514]
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1823993909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+billboard = 2
+text = "step on to teleport"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1446621872]
+mesh = SubResource("BoxMesh_xnu58")
+
+[node name="UseSound" type="AudioStreamPlayer" parent="." unique_id=439260519]
+stream = ExtResource("2_tuehi")
+volume_db = -5.0
