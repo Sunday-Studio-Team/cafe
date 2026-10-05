@@ -14,13 +14,12 @@ size = Vector3(12, 1, 8)
 [sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
 viewport_path = NodePath("StaminaBar/SubViewport")
 
-[node name="TippyBoss" type="CharacterBody3D" unique_id=1434069880 node_paths=PackedStringArray("customer_area", "jumpscare_fade_rect", "nav_agent", "tired_indicator", "player_kidnap_marker", "tired_timer", "sleep_timer", "stun_timer", "stamina_progress_bar")]
+[node name="TippyBoss" type="CharacterBody3D" unique_id=1434069880 node_paths=PackedStringArray("customer_area", "jumpscare_fade_rect", "nav_agent", "tired_indicator", "tired_timer", "sleep_timer", "stun_timer", "stamina_progress_bar")]
 script = ExtResource("1_fvcbq")
 customer_area = NodePath("CustomerArea")
 jumpscare_fade_rect = NodePath("JumpscareFade/ColorRect")
 nav_agent = NodePath("NavigationAgent3D")
 tired_indicator = NodePath("TiredIndicator")
-player_kidnap_marker = NodePath("PlayerKidnapPos")
 tired_timer = NodePath("TiredTimer")
 sleep_timer = NodePath("SleepTimer")
 stun_timer = NodePath("StunTimer")
@@ -43,14 +42,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1634545, 0)
 pixel_size = 0.0075
 billboard = 1
 text = "🍥"
-
-[node name="PlayerKidnapPos" type="Marker3D" parent="." unique_id=1663606405]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.720034, 0, 15.268255)
-top_level = true
-
-[node name="PlayerReleasePos" type="Marker3D" parent="." unique_id=780584469]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.720034, 0, 8.268255)
-top_level = true
 
 [node name="TiredTimer" type="Timer" parent="." unique_id=1856202592]
 wait_time = 20.0

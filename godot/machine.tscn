@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c6y4ypjcynnjn" path="res://sprites/machine_ui/blank equal sign.png" id="2_ymic3"]
 [ext_resource type="Texture2D" uid="uid://dq2qp70o04svd" path="res://sprites/machine_ui/green equal sign.png" id="3_bvj4x"]
 [ext_resource type="Texture2D" uid="uid://cl5kfpwtc4cux" path="res://sprites/machine_ui/red equal sign.png" id="4_vaqkk"]
-[ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="Texture2D" uid="uid://b7l2bda3t1ha0" path="res://sprites/machine_ui/coffee_bar_idle/DM_CB_IDLE_V02_0001.png" id="5_wdkrr"]
 [ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
@@ -205,6 +204,39 @@
 [ext_resource type="Texture2D" uid="uid://is0c3e3yu33f" path="res://sprites/2d_animations/minus_rating_vfx/tile042.png" id="203_owwiq"]
 [ext_resource type="Texture2D" uid="uid://g8eapo7b4obt" path="res://sprites/2d_animations/minus_rating_vfx/tile043.png" id="204_w8hnl"]
 [ext_resource type="Script" uid="uid://c3yc3pfseqvgq" path="res://machine_3d_popup_vfx.gd" id="205_t1qnq"]
+[ext_resource type="Texture2D" uid="uid://8krx7m0ntah8" path="res://sprites/2d_animations/plus_rating_vfx/frame_0000.png" id="205_ymmco"]
+[ext_resource type="Texture2D" uid="uid://dqdkkgjuui8ig" path="res://sprites/2d_animations/plus_rating_vfx/frame_0001.png" id="206_a2ble"]
+[ext_resource type="Texture2D" uid="uid://b8sb37ec4naec" path="res://sprites/2d_animations/plus_rating_vfx/frame_0002.png" id="207_ch20p"]
+[ext_resource type="Texture2D" uid="uid://bnjh8qa0e0kjv" path="res://sprites/2d_animations/plus_rating_vfx/frame_0003.png" id="208_thxll"]
+[ext_resource type="Texture2D" uid="uid://c8cj22mbcfnk2" path="res://sprites/2d_animations/plus_rating_vfx/frame_0004.png" id="209_nvwsq"]
+[ext_resource type="Texture2D" uid="uid://ist18g7wm3km" path="res://sprites/2d_animations/plus_rating_vfx/frame_0005.png" id="210_hhc3v"]
+[ext_resource type="Texture2D" uid="uid://bcnyfr5af58oe" path="res://sprites/2d_animations/plus_rating_vfx/frame_0006.png" id="211_ntb3t"]
+[ext_resource type="Texture2D" uid="uid://cr64vvow3x2hs" path="res://sprites/2d_animations/plus_rating_vfx/frame_0007.png" id="212_h1257"]
+[ext_resource type="Texture2D" uid="uid://cyo0vymdvqrk5" path="res://sprites/2d_animations/plus_rating_vfx/frame_0008.png" id="213_bwy3a"]
+[ext_resource type="Texture2D" uid="uid://dvqgbfp6f2nh5" path="res://sprites/2d_animations/plus_rating_vfx/frame_0009.png" id="214_cyek4"]
+[ext_resource type="Texture2D" uid="uid://ckdvuqmcculb" path="res://sprites/2d_animations/plus_rating_vfx/frame_0010.png" id="215_kp8jx"]
+[ext_resource type="Texture2D" uid="uid://dawqoiih7vup8" path="res://sprites/2d_animations/plus_rating_vfx/frame_0011.png" id="216_owwiq"]
+[ext_resource type="Texture2D" uid="uid://cx7k2u65run6d" path="res://sprites/2d_animations/plus_rating_vfx/frame_0012.png" id="217_w8hnl"]
+[ext_resource type="Texture2D" uid="uid://ciynx2j1w02w3" path="res://sprites/2d_animations/plus_rating_vfx/frame_0013.png" id="218_1d7p6"]
+[ext_resource type="Texture2D" uid="uid://pnga0e4ql3ke" path="res://sprites/2d_animations/plus_rating_vfx/frame_0014.png" id="219_rrpo1"]
+[ext_resource type="Texture2D" uid="uid://h4hmvrr2r3yp" path="res://sprites/2d_animations/plus_rating_vfx/frame_0015.png" id="220_1ru28"]
+[ext_resource type="Texture2D" uid="uid://cyf6nlibqejyf" path="res://sprites/2d_animations/plus_rating_vfx/frame_0016.png" id="221_71842"]
+[ext_resource type="Texture2D" uid="uid://d4nth5uxsg377" path="res://sprites/2d_animations/plus_rating_vfx/frame_0017.png" id="222_fp6dm"]
+[ext_resource type="Texture2D" uid="uid://byqv2hs5e8xj0" path="res://sprites/2d_animations/plus_rating_vfx/frame_0018.png" id="223_rlwav"]
+[ext_resource type="Texture2D" uid="uid://nxtqr88rgx5c" path="res://sprites/2d_animations/plus_rating_vfx/frame_0019.png" id="224_glo8t"]
+[ext_resource type="Texture2D" uid="uid://cav6mw1ns3qgb" path="res://sprites/2d_animations/plus_rating_vfx/frame_0020.png" id="225_rba8k"]
+[ext_resource type="Texture2D" uid="uid://bmkvjfxxqgwim" path="res://sprites/2d_animations/plus_rating_vfx/frame_0021.png" id="226_00ax1"]
+[ext_resource type="Texture2D" uid="uid://bkoufslluejjv" path="res://sprites/2d_animations/plus_rating_vfx/frame_0022.png" id="227_0neoa"]
+[ext_resource type="Texture2D" uid="uid://baxdnup8i56xm" path="res://sprites/2d_animations/plus_rating_vfx/frame_0023.png" id="228_gv2tl"]
+[ext_resource type="Texture2D" uid="uid://bsqt20klb0i6g" path="res://sprites/2d_animations/plus_rating_vfx/frame_0024.png" id="229_hnd05"]
+[ext_resource type="Texture2D" uid="uid://pan3w30jmd7r" path="res://sprites/2d_animations/plus_rating_vfx/frame_0025.png" id="230_lbdoo"]
+[ext_resource type="Texture2D" uid="uid://ku8e0qdowa3c" path="res://sprites/2d_animations/plus_rating_vfx/frame_0026.png" id="231_dn2d7"]
+[ext_resource type="Texture2D" uid="uid://r0au7i6dteai" path="res://sprites/2d_animations/plus_rating_vfx/frame_0027.png" id="232_jw8li"]
+[ext_resource type="Texture2D" uid="uid://caq6s3de0hj1w" path="res://sprites/2d_animations/plus_rating_vfx/frame_0028.png" id="233_iigeh"]
+[ext_resource type="Texture2D" uid="uid://b2hdiuhkivrxy" path="res://sprites/2d_animations/plus_rating_vfx/frame_0029.png" id="234_1x6gy"]
+
+[sub_resource type="Resource" id="Resource_ayvhg"]
+metadata/__load_path__ = "res://tutorial/tutorial_view_go_to_spill.tscn"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -662,9 +694,104 @@ animations = [{
 "loop": 0,
 "name": &"minus_rating",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("205_ymmco")
+}, {
+"duration": 1.0,
+"texture": ExtResource("206_a2ble")
+}, {
+"duration": 1.0,
+"texture": ExtResource("207_ch20p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("208_thxll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("209_nvwsq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("210_hhc3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("211_ntb3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("212_h1257")
+}, {
+"duration": 1.0,
+"texture": ExtResource("213_bwy3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("214_cyek4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("215_kp8jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("216_owwiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("217_w8hnl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("218_1d7p6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("219_rrpo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("220_1ru28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("221_71842")
+}, {
+"duration": 1.0,
+"texture": ExtResource("222_fp6dm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("223_rlwav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("224_glo8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("225_rba8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("226_00ax1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("227_0neoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("228_gv2tl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("229_hnd05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("230_lbdoo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("231_dn2d7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("232_jw8li")
+}, {
+"duration": 1.0,
+"texture": ExtResource("233_iigeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_1x6gy")
+}],
+"loop": 0,
+"name": &"plus_rating",
+"speed": 12.0
 }]
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "item_aim_spot", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "ordered_text", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "made_text", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound", "minus_rating_vfx") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "item_aim_spot", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "ordered_text", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "made_text", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound", "minus_rating_vfx", "plus_rating_vfx", "explosion_boom_particles") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 animation_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/AnimationPlayer")
 static_body = NodePath("ParentSoWeCanAnimateWithLocalCoords/StaticBody3D")
@@ -731,8 +858,9 @@ no_ingredients_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/NoIngredien
 airhorn_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/AirhornSound")
 bomb_sound_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/BombSound")
 ingredients_warning_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/IngredientsWarningSound")
-popup_go_to_spill = ExtResource("5_8sjwk")
+popup_go_to_spill = SubResource("Resource_ayvhg")
 minus_rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/MinusRating")
+plus_rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/PlusRating")
 explosion_boom_particles = NodePath("ParentSoWeCanAnimateWithLocalCoords/ExplosionBoom")
 metadata/_edit_group_ = true
 
@@ -930,13 +1058,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=982963143]
+[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=749704850]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
+[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
 mesh = SubResource("ArrayMesh_vaqkk")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1834188427]
@@ -1033,6 +1161,14 @@ visible = false
 pixel_size = 0.001
 sprite_frames = SubResource("SpriteFrames_l3ike")
 animation = &"minus_rating"
+script = ExtResource("205_t1qnq")
+
+[node name="PlusRating" type="AnimatedSprite3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1355995390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.472, 0.817)
+visible = false
+pixel_size = 0.001
+sprite_frames = SubResource("SpriteFrames_l3ike")
+animation = &"plus_rating"
 script = ExtResource("205_t1qnq")
 
 [editable path="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport/MachineUI"]

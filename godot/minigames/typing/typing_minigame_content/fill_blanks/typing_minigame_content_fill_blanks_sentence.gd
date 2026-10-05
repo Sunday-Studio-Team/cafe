@@ -21,4 +21,7 @@ extends Resource
 @export var sentence_sections: Array[TypingMinigameContentFillBlanksSentenceSection]
 
 func _editor_force_update_preview() -> void:
+	if not Engine.is_editor_hint():
+		#Just needed to get rid of that stupid warning
+		_editor_force_update_preview_action = _editor_force_update_preview_action
 	var _discard: String = _editor_sentence_sections_combined_preview

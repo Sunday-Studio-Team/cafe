@@ -3,7 +3,7 @@ class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
 enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
-	
+
 # TODO: replace hardcoded file paths with @export refs
 const ALERT_ICON_TYPE_IMAGE_MAP = {
 	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
@@ -26,7 +26,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
-@export var game_timer: Timer
 @export var shift_starting_ending_label: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -76,7 +75,7 @@ func _ready() -> void:
 			func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE):
 				_on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
 	)
-	
+
 	Events.shift_started.connect(
 		func():
 			shift_starting_ending_label.show()
@@ -94,9 +93,6 @@ func _ready() -> void:
 			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
 	)
 	Events.time_up.connect(func(): hide())
-	
-	# TODO: figure out if this still does anything and/or should be nuked
-	Events.requirements_met.connect(func(): end_shift_guide.show())
 
 	exit_machine_button.pressed.connect(
 		func():
@@ -149,12 +145,12 @@ func _physics_process(_delta: float) -> void:
 
 	update_score_indicators()
 	update_interactable_ui()
-	
+
 	if not exploding_bomb_on_cooldown:
 		update_exploding_bomb_ui()
 	else:
 		update_exploding_bomb_timer(_delta)
-		
+
 	update_cctv_indicator()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
@@ -216,7 +212,7 @@ func update_score_indicators() -> void:
 			Global.float_to_price(Global.daily_cafe_money)
 			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
 	)
-	
+
 	if Global.daily_cafe_money:
 		profit_progress.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
 
@@ -367,7 +363,7 @@ func update_exploding_bomb_ui() -> void:
 	for owned_item in Global.owned_items:
 		if owned_item.item_id == "exploding_bomb":
 			owned_exploding_bomb = owned_item
-			
+
 	if owned_exploding_bomb != null:
 		exploding_bomb_ui.show()
 		if Input.is_action_just_pressed("right_click"):
@@ -375,8 +371,8 @@ func update_exploding_bomb_ui() -> void:
 			exploding_bomb_on_cooldown = true
 	else:
 		exploding_bomb_ui.hide()
-		
-		
+
+
 func update_exploding_bomb_timer(_delta: float) -> void:
 	if not get_tree().paused:
 		exploding_bomb_timer -= _delta
@@ -401,7 +397,7 @@ func _update_rating() -> void:
 
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
-	
+
 
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 	var _on_alert_tween_finished = func():
@@ -436,7 +432,7 @@ func _on_alert_posted(
 		# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
 		# the lambda is called
 		fast_fade_tween.finished.connect(_get_on_alert_tween_finished.bind(alert_to_remove).call())
-	
+
 	var alert_packed_scene: PackedScene = ResourceLoader.load(_alert_packed_scene_uid)
 	# TODO: static typing for this
 	var new_alert = alert_packed_scene.instantiate()
