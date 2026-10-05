@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://udy2qfcmb0x6"]
 
 [ext_resource type="Script" uid="uid://bpnxusltsqdyt" path="res://trash_can.gd" id="1_bgvmr"]
+[ext_resource type="PackedScene" uid="uid://bk305ay464u4h" path="res://Assets/trashcan/Tippy Trashcan.glb" id="2_alpy1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wnsl6"]
 size = Vector3(0.8520508, 1.316124, 0.8761902)
@@ -10,8 +11,11 @@ collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_bgvmr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=467515229]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=809688403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00390625, 0.66010666, -0.0030059814)
 shape = SubResource("BoxShape3D_wnsl6")
+
+[node name="Model" parent="." unique_id=663008453 instance=ExtResource("2_alpy1")]
+transform = Transform3D(1.2053021, 0, 0, 0, 1.2053021, 0, 0, 0, 1.2053021, 0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
