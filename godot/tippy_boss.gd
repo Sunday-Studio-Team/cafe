@@ -8,7 +8,6 @@ const TIME_IN_JAIL: float = 10
 @export var jumpscare_fade_rect: ColorRect
 @export var nav_agent: NavigationAgent3D
 @export var tired_indicator: Label3D
-@export var player_kidnap_marker: Marker3D
 # confusing names i know .
 # this times how long he runs before he gets tired
 @export var tired_timer: Timer
@@ -25,6 +24,9 @@ enum State {
 }
 
 var shift_started := false
+# TODO: better name
+## tippy 'sleeps' in the back until the shift starts - this tracks if he has been WOKEN UP
+## (nothing to do with him falling asleep when he loses stamina etc. sorry for poor naming .)
 var woken_up := false
 var state: State = State.IDLE:
 	set = set_state
@@ -95,16 +97,42 @@ func _physics_process(delta: float) -> void:
 			# stop moving + block detection of duplicate grabs
 			set_state(State.IDLE)
 
+			# force quit minigame if we're in one
+			if Global.minigame_active:
+				Events.force_close_minigame.emit()
+
+			# lock player and make them look at tippy so they know they got grabbed
+			Global.player.movement_enabled = false
+			Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
+			Global.locked_camera_target_pos = global_position
+			await get_tree().create_timer(1, false).timeout
+
 			# send player to jail
-			await create_tween() \
-					.tween_property(jumpscare_fade_rect, "modulate", Color.WHITE, 0.25) \
-					.finished
-			player.global_position = player_kidnap_marker.global_position
+			await create_tween().tween_property(
+				jumpscare_fade_rect,
+				"modulate",
+				Color.WHITE,
+				0.25
+			).finished
+			player.global_position = player.spawn_position
 			player.reset_physics_interpolation()
-			create_tween().tween_property(jumpscare_fade_rect, "modulate", Color.TRANSPARENT, 0.25)
+			create_tween().tween_property(
+				jumpscare_fade_rect,
+				"modulate",
+				Color.TRANSPARENT,
+				0.25
+			)
 			Events.tippy_boss_kidnapped_player.emit()
 
-			# wait
+			# unlock player and reset their camera
+			Global.camera_mode = Global.CameraMode.PLAYER
+			player.global_rotation = Vector3.ZERO
+			player.camera.rotation = Vector3.ZERO
+			# i think we need to do this . idk .
+			player.camera.sync_rotation_from_player()
+			player.movement_enabled = true
+
+			# wait out our sentence
 			await get_tree().create_timer(TIME_IN_JAIL, false).timeout
 
 			# reset tippy
