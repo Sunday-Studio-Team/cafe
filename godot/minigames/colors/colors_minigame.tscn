@@ -1,21 +1,275 @@
 [gd_scene format=3 uid="uid://b44y3xlpccms3"]
 
 [ext_resource type="Script" uid="uid://bejotytu413bj" path="res://minigames/colors/colors_minigame.gd" id="1_aq73i"]
-[ext_resource type="Texture2D" uid="uid://jtnppq73gskq" path="res://sprites/machine_fix_buttons_minigame/button_press_background.png" id="2_c04s5"]
-[ext_resource type="Texture2D" uid="uid://dt1enbernj7dl" path="res://sprites/machine_fix_buttons_minigame/tippy_broken_machine.png" id="3_vncv3"]
-[ext_resource type="Texture2D" uid="uid://chj8nhjnttj32" path="res://sprites/machine_fix_buttons_minigame/tippy_buttons_normal.png" id="4_m7lj7"]
-[ext_resource type="PackedScene" uid="uid://dbx22r4b0wtk7" path="res://minigames/colors/individual_button.tscn" id="5_c04s5"]
+[ext_resource type="Texture2D" uid="uid://lv56gbufkcck" path="res://sprites/color-minigame/color button minigame bg 1.png" id="2_2wbdj"]
+[ext_resource type="Texture2D" uid="uid://bjnp264s7cvw7" path="res://sprites/color-minigame/tippy_textbox.webp" id="3_ffgry"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="4_fbfb6"]
+[ext_resource type="Texture2D" uid="uid://y25fvmvvo11u" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-01.png" id="5_ayqaw"]
+[ext_resource type="PackedScene" uid="uid://dbx22r4b0wtk7" path="res://minigames/colors/colors_minigame_button.tscn" id="5_c04s5"]
+[ext_resource type="Texture2D" uid="uid://cm81hc4trofl1" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-02.png" id="6_0sc64"]
 [ext_resource type="Texture2D" uid="uid://gmpvwsj5h11f" path="res://sprites/machine_fix_buttons_minigame/A_BOX.png" id="6_4vt2w"]
 [ext_resource type="Texture2D" uid="uid://c2xpxx2bpb8oq" path="res://sprites/machine_fix_buttons_minigame/B_BOX.png" id="7_c0vm2"]
+[ext_resource type="Texture2D" uid="uid://de73mqggjvy72" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-03.png" id="7_qasvu"]
+[ext_resource type="Texture2D" uid="uid://cvybl1bywsjll" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-04.png" id="8_4a3j8"]
 [ext_resource type="Texture2D" uid="uid://bmufuft12sya5" path="res://sprites/machine_fix_buttons_minigame/C_BOX.png" id="8_itcgr"]
+[ext_resource type="Texture2D" uid="uid://5cw3ehesls6q" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-05.png" id="9_jqvxt"]
 [ext_resource type="AudioStream" uid="uid://ddvfhfjtmqstn" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_correct.mp3" id="9_uaykq"]
+[ext_resource type="Texture2D" uid="uid://csfksfylk2ddm" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-06.png" id="10_18j6l"]
 [ext_resource type="AudioStream" uid="uid://cd7tvvoptxqc8" path="res://audio/buttons_machine_fix_minigame/machine_fix_buttons_incorrect.mp3" id="10_xs2qy"]
+[ext_resource type="Texture2D" uid="uid://cqsbp5eu2jd0" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-07.png" id="11_7agpt"]
 [ext_resource type="AudioStream" uid="uid://c2hgnmysuyt5p" path="res://audio/buttons_machine_fix_minigame/prompt_print/colors_prompt_print_1.wav" id="11_m7lj7"]
+[ext_resource type="Texture2D" uid="uid://gp1ow84nvvod" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-08.png" id="12_3rp72"]
 [ext_resource type="AudioStream" uid="uid://c7i6vpun8ru7r" path="res://audio/buttons_machine_fix_minigame/prompt_print/colors_prompt_print_2.wav" id="12_ib8td"]
 [ext_resource type="AudioStream" uid="uid://bc2fpqyhob5wb" path="res://audio/buttons_machine_fix_minigame/prompt_print/colors_prompt_print_3.wav" id="13_4vt2w"]
+[ext_resource type="Texture2D" uid="uid://bt8h6qgantpm5" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationCORRECT-png/ColorUIMinigameSatoAnimationCORRECT-09.png" id="13_ni88i"]
+[ext_resource type="Texture2D" uid="uid://bm1cvx46qqjve" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-01.png" id="14_xdp8g"]
+[ext_resource type="Texture2D" uid="uid://da4etpvn2n7rg" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-02.png" id="15_s0w8i"]
+[ext_resource type="Texture2D" uid="uid://vh55mnjwi6pd" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-03.png" id="16_y74sc"]
+[ext_resource type="Texture2D" uid="uid://bw7vjxgdonk2m" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-04.png" id="17_625bb"]
+[ext_resource type="Texture2D" uid="uid://bmuoftidnrnhb" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-05.png" id="18_ya33d"]
+[ext_resource type="Texture2D" uid="uid://cll0c03ne1na2" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-06.png" id="19_fbexm"]
+[ext_resource type="Texture2D" uid="uid://b47kqjnqww3ja" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-07.png" id="20_pqud8"]
+[ext_resource type="Texture2D" uid="uid://vbo7h6cul6mi" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-08.png" id="21_aiss7"]
+[ext_resource type="Texture2D" uid="uid://cvt6kbo2c3uws" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-09.png" id="22_4a3im"]
+[ext_resource type="Texture2D" uid="uid://buyub12chtlsj" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-10.png" id="23_2obo6"]
+[ext_resource type="Texture2D" uid="uid://drmk4g7ky35v7" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-11.png" id="24_nco8r"]
+[ext_resource type="Texture2D" uid="uid://bxd1f4fea30mh" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-12.png" id="25_q0q85"]
+[ext_resource type="Texture2D" uid="uid://bnadqtyxdpujq" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-13.png" id="26_0b006"]
+[ext_resource type="Texture2D" uid="uid://crvvoh6qwew8p" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-14.png" id="27_yrvhx"]
+[ext_resource type="Texture2D" uid="uid://ctdtnhrxxlbtx" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-15.png" id="28_dtlqk"]
+[ext_resource type="Texture2D" uid="uid://c73a76efkjhet" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-16.png" id="29_ny823"]
+[ext_resource type="Texture2D" uid="uid://csw7afytf8aay" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-17.png" id="30_cuon2"]
+[ext_resource type="Texture2D" uid="uid://de31l6wwtirs2" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-18.png" id="31_sehji"]
+[ext_resource type="Texture2D" uid="uid://rg1kupu70n8h" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-19.png" id="32_ay3ym"]
+[ext_resource type="Texture2D" uid="uid://bafau4fbqoiu3" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-20.png" id="33_unvqg"]
+[ext_resource type="Texture2D" uid="uid://unxu5rfhsxec" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-21.png" id="34_cnfvx"]
+[ext_resource type="Texture2D" uid="uid://btsyvhgghxqgy" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-22.png" id="35_q7btt"]
+[ext_resource type="Texture2D" uid="uid://bvm7bapa013pf" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-23.png" id="36_trbvl"]
+[ext_resource type="Texture2D" uid="uid://cxxm5f83v5mot" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-24.png" id="37_uhlkg"]
+[ext_resource type="Texture2D" uid="uid://rcbqns44lano" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-25.png" id="38_qkdwv"]
+[ext_resource type="Texture2D" uid="uid://dge3nl6qfg3np" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-26.png" id="39_kt7hj"]
+[ext_resource type="Texture2D" uid="uid://cnputyyh58ksb" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-27.png" id="40_aiqck"]
+[ext_resource type="Texture2D" uid="uid://bbn4jrpjqhh5q" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-28.png" id="41_yyxyk"]
+[ext_resource type="Texture2D" uid="uid://b8bfloagjqisn" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-29.png" id="42_si0u7"]
+[ext_resource type="Texture2D" uid="uid://c57iflgnhqvt" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-30.png" id="43_n5enp"]
+[ext_resource type="Texture2D" uid="uid://dbymqge7dx8au" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-31.png" id="44_8uahq"]
+[ext_resource type="Texture2D" uid="uid://cbt0oh431gv7q" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-32.png" id="45_tlfbm"]
+[ext_resource type="Texture2D" uid="uid://8lvj5xapdbfy" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-33.png" id="46_wypql"]
+[ext_resource type="Texture2D" uid="uid://d0ly08r5iclrv" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-34.png" id="47_6taof"]
+[ext_resource type="Texture2D" uid="uid://nsvnuidj0fm0" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-35.png" id="48_bvfts"]
+[ext_resource type="Texture2D" uid="uid://bhjb2scqmx3qx" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-36.png" id="49_pne7e"]
+[ext_resource type="Texture2D" uid="uid://buq770n3t7140" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-37.png" id="50_ti6kd"]
+[ext_resource type="Texture2D" uid="uid://cjbfk4v7tg6xk" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-38.png" id="51_kqp7m"]
+[ext_resource type="Texture2D" uid="uid://cv5nbi8d78wbo" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-39.png" id="52_yl02l"]
+[ext_resource type="Texture2D" uid="uid://dievtg11kpuo8" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-40.png" id="53_5hw2d"]
+[ext_resource type="Texture2D" uid="uid://crhut3dtke07g" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationwHand-png/ColorUIMinigameSatoAnimationwHand-41.png" id="54_c877l"]
+[ext_resource type="Texture2D" uid="uid://eywq15rvbtl6" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-01.png" id="55_ncl8f"]
+[ext_resource type="Texture2D" uid="uid://dfryhi6wtevpo" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-02.png" id="56_8h1it"]
+[ext_resource type="Texture2D" uid="uid://cvdkipdup1y3p" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-03.png" id="57_vir47"]
+[ext_resource type="Texture2D" uid="uid://bbilar1tej57m" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-04.png" id="58_ddof6"]
+[ext_resource type="Texture2D" uid="uid://cbew2ka1sh88n" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-05.png" id="59_5su4c"]
+[ext_resource type="Texture2D" uid="uid://drxqf8uyfemha" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-06.png" id="60_poyil"]
+[ext_resource type="Texture2D" uid="uid://dngeov1edkbmx" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-07.png" id="61_5cebw"]
+[ext_resource type="Texture2D" uid="uid://cib7vpqawkwfo" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-08.png" id="62_ckbip"]
+[ext_resource type="Texture2D" uid="uid://b0gyrjwjkl5d2" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-09.png" id="63_71pjd"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ib8td"]
-viewport_path = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt")
+[sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
+viewport_path = NodePath("HiddenPromptStuff/PromptProjectedIn3DViewPort")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l8dww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ayqaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0sc64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qasvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4a3j8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jqvxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_18j6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7agpt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3rp72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ni88i")
+}],
+"loop": 1,
+"name": &"correct",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_xdp8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_s0w8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_y74sc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_625bb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ya33d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_fbexm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pqud8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_aiss7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4a3im")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_2obo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_nco8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_q0q85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_0b006")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_yrvhx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_dtlqk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ny823")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_cuon2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_sehji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ay3ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_unvqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_cnfvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_q7btt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_trbvl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_uhlkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_qkdwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_kt7hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_aiqck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_yyxyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_si0u7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_n5enp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_8uahq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_tlfbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_wypql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_6taof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_bvfts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_pne7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_ti6kd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_kqp7m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_yl02l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_5hw2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_c877l")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_ncl8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_8h1it")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_vir47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_ddof6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_5su4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_poyil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_5cebw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_ckbip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_71pjd")
+}],
+"loop": 1,
+"name": &"incorrect",
+"speed": 10.0
+}]
 
 [sub_resource type="Environment" id="Environment_hbcdb"]
 
@@ -27,8 +281,8 @@ fallback_environment = SubResource("Environment_odiqf")
 
 [sub_resource type="Environment" id="Environment_sryxk"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4vt2w"]
-viewport_path = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/PromptViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_2wbdj"]
+viewport_path = NodePath("HiddenPromptStuff/PromptViewport")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aq73i"]
 streams_count = 3
@@ -36,7 +290,7 @@ stream_0/stream = ExtResource("11_m7lj7")
 stream_1/stream = ExtResource("12_ib8td")
 stream_2/stream = ExtResource("13_4vt2w")
 
-[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_panel", "prompt_text_box", "employee_texture_rect", "correct_sound", "wrong_sound", "prompt_print_sound")]
+[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_text_box", "correct_sound", "wrong_sound", "prompt_print_sound", "sato_animated_sprite")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -44,207 +298,139 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 script = ExtResource("1_aq73i")
-buttons = [NodePath("Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer/A"), NodePath("Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer/B"), NodePath("Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer/C")]
-prompt_panel = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel")
-prompt_text_box = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/PromptViewport/Prompt")
-employee_texture_rect = NodePath("Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Employee")
+buttons = [NodePath("TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer/A"), NodePath("TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer/B"), NodePath("TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer/C")]
+prompt_text_box = NodePath("HiddenPromptStuff/PromptViewport/Prompt")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 prompt_print_sound = NodePath("PromptPrintSound")
+sato_animated_sprite = NodePath("Sato")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2088356955]
 layout_mode = 2
-texture = ExtResource("2_c04s5")
+texture = ExtResource("2_2wbdj")
+expand_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Background" unique_id=2086730106]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TippyAndButtons" type="MarginContainer" parent="." unique_id=2086730106]
+layout_mode = 2
 theme_override_constants/margin_left = 256
 theme_override_constants/margin_top = 160
 theme_override_constants/margin_right = 256
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Background/MarginContainer" unique_id=2129421319]
+[node name="VBoxContainer" type="VBoxContainer" parent="TippyAndButtons" unique_id=2129421319]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Background/MarginContainer/VBoxContainer2" unique_id=1707086457]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ColorRect" type="ColorRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2" unique_id=305716537]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.71379566, 0.71379566, 0.7137956, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect" unique_id=90404053]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer" unique_id=1590473284]
+[node name="TippyContainer" type="MarginContainer" parent="TippyAndButtons/VBoxContainer" unique_id=1707086457]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Tippy" type="TextureRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer" unique_id=1504543574]
+[node name="Tippy" type="TextureRect" parent="TippyAndButtons/VBoxContainer/TippyContainer" unique_id=1504543574]
 z_index = 1
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.4, 1.4)
-texture = ExtResource("3_vncv3")
+texture = ExtResource("3_ffgry")
 stretch_mode = 5
 
-[node name="PromptPanel" type="Control" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy" unique_id=256743011]
-custom_minimum_size = Vector2(1000, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -164.0
-offset_top = 792.0
-offset_right = 324.00012
-offset_bottom = 792.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-offset_transform_enabled = true
-
-[node name="PromptViewport" type="SubViewport" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1472225498]
-own_world_3d = true
-transparent_bg = true
-scaling_3d_mode = 5
-canvas_item_default_texture_filter = 0
-gui_embed_subwindows = true
-
-[node name="Prompt" type="RichTextLabel" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/PromptViewport" unique_id=1752982742]
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -108.605
-offset_top = -124.33501
-offset_right = 213.25192
-offset_bottom = 781.66504
-grow_horizontal = 2
-grow_vertical = 2
-offset_transform_enabled = true
-bbcode_enabled = true
-text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=24][p align=center]Tippy says:[/p][font_size=32][p align=center]Click the[/p][font top_spacing=-16][p align=center][color=#ff0000ff]Green Square"
-fit_content = true
-
-[node name="TextureRect" type="TextureRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1218646402]
+[node name="ActualPromptTextureRect" type="TextureRect" parent="TippyAndButtons/VBoxContainer/TippyContainer/Tippy" unique_id=1894366898]
+custom_maximum_size = Vector2(500, 500)
 layout_mode = 0
-offset_left = -491.0
-offset_top = -1595.0
-offset_right = 1556.9999
-offset_bottom = 453.0
+offset_right = 500.0
+offset_bottom = 1000.0
 offset_transform_enabled = true
-offset_transform_scale = Vector2(0.8, 0.8)
-mouse_filter = 2
-texture = SubResource("ViewportTexture_ib8td")
+offset_transform_position_ratio = Vector2(0.25, 0.1)
+texture = SubResource("ViewportTexture_vn1tu")
+expand_mode = 3
+stretch_mode = 5
 
-[node name="3DPrompt" type="SubViewport" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel" unique_id=1536550611]
-own_world_3d = true
-world_3d = SubResource("World3D_s46kr")
-transparent_bg = true
-scaling_3d_mode = 5
-canvas_item_default_texture_filter = 0
-size = Vector2i(2048, 2048)
-
-[node name="Node3D" type="Node3D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt" unique_id=1100204292]
-
-[node name="Camera3D" type="Camera3D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt/Node3D" unique_id=705064087]
-transform = Transform3D(0.9207117, -0.0027583912, -0.3902338, -0.17676619, 0.8885588, -0.4233402, 0.3479134, 0.45875442, 0.8176189, -1.8133678, -1.9033976, 4.264658)
-environment = SubResource("Environment_sryxk")
-
-[node name="Sprite3D" type="Sprite3D" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer/Tippy/PromptPanel/3DPrompt/Node3D" unique_id=1605292279]
-texture = SubResource("ViewportTexture_4vt2w")
-
-[node name="Employee" type="TextureRect" parent="Background/MarginContainer/VBoxContainer2/MarginContainer2/ColorRect/MarginContainer/HBoxContainer" unique_id=1282741107]
-custom_maximum_size = Vector2(-1, 480)
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.7
-texture = ExtResource("4_m7lj7")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="ButtonContainer" type="MarginContainer" parent="Background/MarginContainer/VBoxContainer2" unique_id=1427279196]
+[node name="ButtonsContainer" type="MarginContainer" parent="TippyAndButtons/VBoxContainer" unique_id=1427279196]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="ColorRect" type="ColorRect" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer" unique_id=1452804329]
-layout_mode = 2
-color = Color(0.7137255, 0.7137255, 0.7137255, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect" unique_id=605900742]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_bottom = 32
 
-[node name="ColorRect" type="ColorRect" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer" unique_id=1500228212]
+[node name="HBoxContainer" type="HBoxContainer" parent="TippyAndButtons/VBoxContainer/ButtonsContainer" unique_id=804726017]
 layout_mode = 2
-color = Color(0.5274172, 0.66598505, 0.7783834, 1)
+size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect" unique_id=196578255]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" unique_id=804726017]
-layout_mode = 2
-
-[node name="A" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer" unique_id=1674219931 instance=ExtResource("5_c04s5")]
+[node name="A" parent="TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer" unique_id=1674219931 instance=ExtResource("5_c04s5")]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 size_flags_horizontal = 3
 button_texture = ExtResource("6_4vt2w")
 
-[node name="B" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer" unique_id=1743484422 instance=ExtResource("5_c04s5")]
+[node name="B" parent="TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer" unique_id=1743484422 instance=ExtResource("5_c04s5")]
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0, 0, 1, 1)
 letter_color = Color(0, 1, 0, 1)
 button_texture = ExtResource("7_c0vm2")
 
-[node name="C" parent="Background/MarginContainer/VBoxContainer2/ButtonContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/HBoxContainer" unique_id=469461869 instance=ExtResource("5_c04s5")]
+[node name="C" parent="TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer" unique_id=469461869 instance=ExtResource("5_c04s5")]
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0, 1, 0, 1)
 letter_color = Color(1, 0, 0, 1)
 button_texture = ExtResource("8_itcgr")
+
+[node name="Sato" type="AnimatedSprite2D" parent="." unique_id=303839521]
+position = Vector2(1493, 368)
+sprite_frames = SubResource("SpriteFrames_l8dww")
+autoplay = "default"
+frame_progress = 0.4264631
+
+[node name="HiddenPromptStuff" type="Control" parent="." unique_id=256743011]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="PromptViewport" type="SubViewport" parent="HiddenPromptStuff" unique_id=1472225498]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_mode = 5
+canvas_item_default_texture_filter = 0
+gui_embed_subwindows = true
+size = Vector2i(512, 256)
+render_target_update_mode = 4
+
+[node name="Prompt" type="RichTextLabel" parent="HiddenPromptStuff/PromptViewport" unique_id=1752982742]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5803922)
+theme_override_constants/shadow_outline_size = 1
+theme_override_constants/shadow_offset_x = -4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/normal_font = ExtResource("4_fbfb6")
+bbcode_enabled = true
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=64][p align=center]Tippy says:[/p][font_size=48][p align=center]Click the[/p][p align=center][color=#92ff8aff]Red C"
+fit_content = true
+
+[node name="PromptProjectedIn3DViewPort" type="SubViewport" parent="HiddenPromptStuff" unique_id=1536550611]
+world_3d = SubResource("World3D_s46kr")
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_mode = 5
+canvas_item_default_texture_filter = 0
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="HiddenPromptStuff/PromptProjectedIn3DViewPort" unique_id=1100204292]
+
+[node name="Camera3D" type="Camera3D" parent="HiddenPromptStuff/PromptProjectedIn3DViewPort/Node3D" unique_id=705064087]
+transform = Transform3D(0.9952466, 0.043453403, -0.08715574, -0.043619387, 0.99904823, 0, 0.08707278, 0.0038016797, 0.9961947, 0, 0, 2.5)
+environment = SubResource("Environment_sryxk")
+
+[node name="Sprite3D" type="Sprite3D" parent="HiddenPromptStuff/PromptProjectedIn3DViewPort/Node3D" unique_id=1605292279]
+texture = SubResource("ViewportTexture_2wbdj")
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=613272079]
 stream = ExtResource("9_uaykq")
