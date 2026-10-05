@@ -28,6 +28,7 @@ extends CanvasLayer
 @export var restart_button: TextureButton
 @export var end_shift_button: TextureButton
 @export var times_up: TextureRect
+@export var tippy_times_up: TextureRect
 
 @export var lock: TextureRect
 
@@ -38,7 +39,7 @@ var reached_bonus_rating: bool = (
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-
+	_on_time_up()
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 
@@ -62,11 +63,13 @@ func _on_time_up() -> void:
 	background.show()
 	get_tree().paused = true
 	times_up.show()
+	tippy_times_up.show()
 	time_up_sound.play()
 	await get_tree().create_timer(2).timeout
 	times_up.hide()
+	tippy_times_up.hide()
 	reached_bonus_rating = (
-		Global.employee_rating >= 4.5#Stats.current.item_bonus_rating_threshold
+		Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 	)
 	# calculate everything
 	var daily_profit := Global.daily_cafe_money
@@ -81,7 +84,6 @@ func _on_time_up() -> void:
 	grant_day_rewards(passed_profit_goal)
 	await animation_player.animation_finished
 
-	pencil_scribble.play()
 	var time = 1.2
 	var time2 = 1.5
 	if passed_profit_goal:
@@ -89,20 +91,25 @@ func _on_time_up() -> void:
 		time2 = 4
 		win_music.play()
 	await get_tree().create_timer(0.7).timeout
+	pencil_scribble.play()
 	cafe_profits.show()
 	win_shift_sound.pitch_scale = 1
 	if not passed_profit_goal: win_shift_sound.play()
+	
 	await get_tree().create_timer(time).timeout
 	goal.show()
 	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
 	win_shift_sound.pitch_scale = 1.2
 	if not passed_profit_goal: win_shift_sound.play()
+	
 	await get_tree().create_timer(time).timeout
 	earnings.show()
 	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
 	win_shift_sound.pitch_scale = 1.5
 	if not passed_profit_goal: win_shift_sound.play()
+	
 	await get_tree().create_timer(time2).timeout
+	
 	if passed_profit_goal:
 		var day: String = "Glorbsday"
 		match Global.day:
