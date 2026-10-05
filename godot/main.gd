@@ -28,8 +28,6 @@ extends Node3D
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var teleporter1: Teleporter
-@export var teleporter2: Teleporter
 @export var air_freshener: AirFreshener
 @export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
@@ -114,7 +112,6 @@ func _ready() -> void:
 		print("should not play tutorial!")
 
 	set_per_day_stuff()
-	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
 	# enables props as the days go by
@@ -186,29 +183,7 @@ func get_stats() -> void:
 	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
 
-	update_teleporters_enabled()
 	update_air_fresheners_enabled()
-
-
-func update_teleporters_enabled() -> void:
-	var has_teleporter: bool = false
-	var has_teleporter_level_2: bool = false
-	for item in Global.owned_items:
-		if item.item_id == "teleporter":
-			has_teleporter = true
-			if item.item_level == 2:
-				has_teleporter_level_2 = true
-			break
-	if has_teleporter:
-		teleporter1.disable_teleporter()
-		teleporter2.enable_teleporter()
-		if has_teleporter_level_2:
-			pass
-		else:
-			pass
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
 
 
 func update_air_fresheners_enabled() -> void:
