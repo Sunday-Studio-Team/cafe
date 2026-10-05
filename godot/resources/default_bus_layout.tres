@@ -6,11 +6,12 @@ resource_name = "Limiter"
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_g28q7"]
 resource_name = "Compressor"
 threshold = -10.0
+mix = 0.5
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_g28q7"]
 resource_name = "Delay"
 tap1_delay_ms = 50.0
-tap1_level_db = -15.0
+tap1_level_db = -10.0
 tap1_pan = 0.0
 tap2_active = false
 
@@ -21,21 +22,6 @@ ratio = 12.0
 attack_us = 1000.0
 release_ms = 1000.0
 sidechain = &"NonDiegeticMusic"
-
-[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_g28q7"]
-resource_name = "Delay"
-tap1_delay_ms = 50.0
-tap1_level_db = -15.0
-tap1_pan = 0.0
-tap2_active = false
-
-[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_g28q7"]
-resource_name = "Compressor"
-threshold = -50.0
-ratio = 12.0
-attack_us = 1000.0
-release_ms = 1000.0
-sidechain = &"MinigameMusic"
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
 resource_name = "Delay"
