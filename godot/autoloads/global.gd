@@ -10,10 +10,6 @@ extends Node
 @export_dir var spill_sprites_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
-@export var star_texture: Texture
-@export var half_star_texture: Texture
-@export var empty_star_texture: Texture
-@export var complaint_popup: CanvasLayer
 var resource_background_loader: ResourceBackgroundLoader
 var player: Player
 var hovered_interactable: Interactable:
@@ -203,7 +199,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
-		drink.create() # adds the price and creates the typing minigame resource
+		drink.calculate_price() # calculates the drinks price
 	items.assign(load_resources_from_folder(items_folder_path))
 	load_unlocked_items_from_save()
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))

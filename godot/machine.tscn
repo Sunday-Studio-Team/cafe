@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://c6y4ypjcynnjn" path="res://sprites/machine_ui/blank equal sign.png" id="2_ymic3"]
 [ext_resource type="Texture2D" uid="uid://dq2qp70o04svd" path="res://sprites/machine_ui/green equal sign.png" id="3_bvj4x"]
 [ext_resource type="Texture2D" uid="uid://cl5kfpwtc4cux" path="res://sprites/machine_ui/red equal sign.png" id="4_vaqkk"]
-[ext_resource type="PackedScene" uid="uid://dmusvp05vkrls" path="res://tutorial/tutorial_view_go_to_spill.tscn" id="5_8sjwk"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="5_ioi8x"]
 [ext_resource type="Texture2D" uid="uid://b7l2bda3t1ha0" path="res://sprites/machine_ui/coffee_bar_idle/DM_CB_IDLE_V02_0001.png" id="5_wdkrr"]
 [ext_resource type="AudioStream" uid="uid://cmphynpm7rbup" path="res://audio/machine_hum.mp3" id="6_5f3ny"]
@@ -235,6 +234,9 @@
 [ext_resource type="Texture2D" uid="uid://r0au7i6dteai" path="res://sprites/2d_animations/plus_rating_vfx/frame_0027.png" id="232_jw8li"]
 [ext_resource type="Texture2D" uid="uid://caq6s3de0hj1w" path="res://sprites/2d_animations/plus_rating_vfx/frame_0028.png" id="233_iigeh"]
 [ext_resource type="Texture2D" uid="uid://b2hdiuhkivrxy" path="res://sprites/2d_animations/plus_rating_vfx/frame_0029.png" id="234_1x6gy"]
+
+[sub_resource type="Resource" id="Resource_ayvhg"]
+metadata/__load_path__ = "res://tutorial/tutorial_view_go_to_spill.tscn"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1hddr"]
 size = Vector3(1, 1.5, 1)
@@ -856,7 +858,7 @@ no_ingredients_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/NoIngredien
 airhorn_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/AirhornSound")
 bomb_sound_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/BombSound")
 ingredients_warning_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/IngredientsWarningSound")
-popup_go_to_spill = ExtResource("5_8sjwk")
+popup_go_to_spill = SubResource("Resource_ayvhg")
 minus_rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/MinusRating")
 plus_rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/PlusRating")
 explosion_boom_particles = NodePath("ParentSoWeCanAnimateWithLocalCoords/ExplosionBoom")
@@ -1056,13 +1058,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=1015586454]
+[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=749704850]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1202444197) index="0" unique_id=1603557390]
+[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
 mesh = SubResource("ArrayMesh_vaqkk")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1834188427]
