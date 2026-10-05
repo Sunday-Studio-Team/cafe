@@ -14,7 +14,6 @@ const MOVE_SPEED := 2.0
 ## the bar is literally just the bar thing (its more like a circle thing than a bar tho)
 @export var waiting_bar: TextureProgressBar
 @export var timer: Timer
-@export var time_bonus_label: Label3D
 @export var spawn_sound: AudioStreamPlayer3D
 
 @export_dir var sprites_folder: String
@@ -30,7 +29,6 @@ var customer_sprite_resource: CustomerSpriteData:
 		Global.customer_sprites_in_use.append(customer_sprite_resource)
 var desired_drink: Drink
 var orders_made: int = 0
-var at_window: bool = false
 var percent_time_left: float = 100
 var _total_wait_time: float
 
@@ -40,8 +38,11 @@ var _total_wait_time: float
 func _ready() -> void:
 	# we use an override material to get rim lighting n stuff
 	full_body_sprite.material_override = override_material
-	
+
 	# Find all unused customer sprites
+	# NOTE: is this maybe slow ? should this array of unused sprites be being
+	# made elsewhere so each customer doesnt have to iterate on all the sprites
+	# on spawn ?
 	var unused_customer_sprites: Array[CustomerSpriteData]
 	for customer_sprite in Global.customer_sprites:
 		if !Global.customer_sprites_in_use.has(customer_sprite):
@@ -77,10 +78,10 @@ func _physics_process(_delta: float) -> void:
 	# uncomment to show time above customer head
 	# NOTE: i think the help desk might manually show this indicator
 	# waiting_indicator.visible = not timer.is_stopped()
-	
+
 	if not waiting_indicator.visible:
 		return
-	
+
 	if not timer.is_stopped():
 		percent_time_left = timer.time_left / timer.wait_time * 100
 		if timer.wait_time == INF:
@@ -158,11 +159,11 @@ func _on_order_started(customer: Customer) -> void:
 	if customer != self or orders_made > 0:
 		return
 	await get_tree().process_frame
-	
+
 	# Don't start the timer if playing tutorial!
 	if not Global.playing_tutorial:
 		timer.start()
-	
+
 	orders_made += 1
 
 

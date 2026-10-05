@@ -16,6 +16,8 @@ signal requested_use_active_item
 @export var mesh: MeshInstance3D
 ## if enabled, player has to HOLD interact to interact with this
 ## (if disabled, they just have to press once)
+## NOTE: do we have any interactables you hold anymore ? ? ?
+## could this be removed for simplicity ?
 @export var hold_to_interact: bool = false
 ## if enabled, the interact progress bar won't reset if we stop interacting
 @export var keep_progress_on_interrupt: bool = false
@@ -36,13 +38,13 @@ func _init() -> void:
 	set_collision_layer_value(2, true)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	_update_material()
 
 	if (
-			Global.hovered_interactable != self 
+			Global.hovered_interactable != self
 			or not visible
-			or Global.in_pc_ui 
+			or Global.in_pc_ui
 			or Global.minigame_active
 			or Global.camera_mode != Global.CameraMode.PLAYER
 	):
@@ -54,7 +56,7 @@ func _process(delta: float) -> void:
 		# One time press
 		if Input.is_action_just_pressed("interact") and not hold_to_interact:
 			interacted.emit()
-	
+
 		# Hold to press
 		if Input.is_action_pressed("interact") and hold_to_interact:
 			time_held += delta
@@ -64,7 +66,7 @@ func _process(delta: float) -> void:
 		else:
 			if not keep_progress_on_interrupt:
 				time_held = 0
-	
+
 	# alt interaction where player uses an item on this interactable
 	if Input.is_action_just_pressed("use_item"):
 		requested_use_active_item.emit()
@@ -73,6 +75,7 @@ func _process(delta: float) -> void:
 func _on_visibility_changed() -> void:
 	_update_enabled()
 
+
 func _update_enabled() -> void:
 	_update_material()
 	if visible:
@@ -80,6 +83,7 @@ func _update_enabled() -> void:
 	else:
 		process_mode = ProcessMode.PROCESS_MODE_DISABLED
 		time_held = 0
+
 
 func _on_interacted() -> void:
 	await get_tree().process_frame
