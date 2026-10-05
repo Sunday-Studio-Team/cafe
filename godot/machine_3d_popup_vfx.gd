@@ -8,9 +8,10 @@ func _ready() -> void:
 	hide()
 
 
-func play_anim_then_hide(name: String) -> void:
+func play_anim_then_hide(animation_name: String) -> void:
 	show()
-	play(name)
+	play(animation_name)
+
 
 func _on_animation_finished ()-> void:
 	hide()
