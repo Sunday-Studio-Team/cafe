@@ -59,7 +59,7 @@ var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = 
 var tip_per_star_rating: Dictionary[int, float] = { 1: 2, 2: 2.25, 3: 2.5, 4: 2.75, 5: 3, 0: 3 }
 var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
-var camera_slow_player_duration: float = 3.0
+var camera_slow_player_duration: float = 7.5
 var time_camera_disabled_after_sabotage := 30.0
 
 var daily_completion_item_unlocks: Dictionary[int, Array] = {

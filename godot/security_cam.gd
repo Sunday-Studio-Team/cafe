@@ -26,11 +26,7 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var disabled_timer_bar: TextureProgressBar
 @export var whipped_cream_sound: AudioStreamPlayer
 
-# we duplicate the raycast many times to cover the spotlight cone on startup
-# so we store a ref to all the rays here to iterate over them
-var _all_shape_casts: Array[ShapeCast3D]
 var rotate_tween: Tween
-var disable_minigames := ["Lines"]
 var _camera_disarmed := false
 var _player_slow_status_effect: CameraSlowPlayerStatusEffect
 var _direction_multiplier: float = 1.0
@@ -42,9 +38,6 @@ var _player_in_spotlight_tween: Tween
 
 
 func _ready() -> void:
-	create_rays()
-
-	interactable.interacted.connect(open_camera_minigame)
 	interactable.requested_use_active_item.connect(_on_requested_use_active_item)
 
 	visibility_changed.connect(_on_visibility_changed)
@@ -83,31 +76,34 @@ func _physics_process(_delta: float) -> void:
 
 	var player_in_spotlight := false
 
-	for shape_cast in _all_shape_casts:
-		var collision_count: int = shape_cast.get_collision_count()
-		if collision_count >= 0:
-			for i in range(collision_count):
-				var collider: Object = shape_cast.get_collider(i)
-				if collider == Global.player:
-					var apply_slow: bool = false
-					if (
-						Global.player.is_sprinting()
-						and Global.player.get_last_motion() != Vector3.ZERO
-					):
-						grace_timer.start()
-						Events.alert_posted.emit("Caught running!", UI.AlertIconType.RULE_BREAK)
-						apply_slow = true
-					elif Global.making_drink_manually:
-						grace_timer.start()
-						Events.alert_posted.emit(
-							"Caught making drink by hand!",
-							UI.AlertIconType.RULE_BREAK,
-						)
-						if Global.machine_in_use != null:
-							Global.machine_in_use.blast_player_from_using_machine()
-						apply_slow = true
+	var collision_count: int = _shape_cast_3d.get_collision_count()
+	if collision_count >= 0:
+		for i in range(collision_count):
+			var collider: Object = _shape_cast_3d.get_collider(i)
+			if collider == Global.player:
+				var rule_break: bool = false
+				if (
+					Global.player.is_sprinting()
+					and Global.player.get_last_motion() != Vector3.ZERO
+				):
+					grace_timer.start(3)
+					Global.add_alert(15)
+					Events.alert_posted.emit("Caught running!", UI.AlertIconType.RULE_BREAK)
+					rule_break = true
+				elif Global.making_drink_manually:
+					grace_timer.start(0.3)
+					Global.add_alert(1)
+					Events.alert_posted.emit(
+						"Caught making drink by hand!",
+						UI.AlertIconType.RULE_BREAK,
+					)
+					rule_break = true
 
-					if apply_slow:
+				if rule_break:
+					caught_audio_stream_player_3d.play()
+					Global.player.flash_red()
+					if Global.player_alert >= 100:
+						Global.player_alert = 50
 						if _player_slow_status_effect != null:
 							Global.player.player_status_effects.remove_status_effect(
 								_player_slow_status_effect
@@ -119,16 +115,16 @@ func _physics_process(_delta: float) -> void:
 						Global.player.player_status_effects.apply_status_effect(
 							_player_slow_status_effect
 						)
-						caught_audio_stream_player_3d.play()
-						Global.player.flash_red()
-					player_in_spotlight = true
-					break
+						if Global.machine_in_use != null:
+							Global.machine_in_use.blast_player_from_using_machine()
+				player_in_spotlight = true
+				break
 
-				elif collider == Global.tippy_boss:
-					if Global.tippy_boss.state == TippyBoss.State.CHASING:
-						Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
-						grace_timer.start()
-						break
+			elif collider == Global.tippy_boss:
+				if Global.tippy_boss.state == TippyBoss.State.CHASING:
+					Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
+					grace_timer.start()
+					break
 
 	if player_in_spotlight:
 		if not _player_in_spotlight_tween or not _player_in_spotlight_tween.is_running():
@@ -177,32 +173,12 @@ func _update_camera_components_active() -> void:
 		spotlight.visible = true
 		fake_spotlight.visible = true
 		_shape_cast_3d.enabled = true
-		for stored_ray in _all_shape_casts:
-			stored_ray.enabled = true
 	else:
 		interactable.visible = false
 		spotlight.visible = false
 		fake_spotlight.visible = false
 		_shape_cast_3d.enabled = false
-		for stored_ray in _all_shape_casts:
-			stored_ray.enabled = false
 
-
-# duplicates our raycast many times, covering roughly the area of the spotlight
-func create_rays() -> void:
-	# we need to overshoot slightly to account for the sorta
-	# halo around the edge of the light
-	#const ANGLE_OVERSHOOT := 5.0
-	_all_shape_casts.append(_shape_cast_3d)
-	# Disable the template by default.
-	# ray.enabled = false
-	# for x_rot in range(25, 360, 15):
-	# 	for z_rot in range(5, spotlight.spot_angle + ANGLE_OVERSHOOT, 5):
-	# 		var new_ray := ray.duplicate() as RayCast3D
-	# 		new_ray.rotation_degrees.x += x_rot
-	# 		new_ray.rotation_degrees.z += z_rot
-	# 		spotlight.add_child(new_ray)
-	# 		all_rays.append(new_ray)
 
 
 func try_disable_camera() -> void:
@@ -218,27 +194,7 @@ func try_disable_camera() -> void:
 		rearm_camera()
 
 
-func open_camera_minigame() -> void:
-	if _camera_disarmed:
-		return
 
-	if Global.minigame_active:
-		return
-
-	Events.minigame_end.connect(_on_break_camera)
-	Events.minigame_cancelled.connect(_cancel_break_minigame)
-	Events.minigame_active.emit(disable_minigames.pick_random())
-
-
-func _on_break_camera() -> void:
-	Events.minigame_end.disconnect(_on_break_camera)
-	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
-	try_disable_camera()
-
-
-func _cancel_break_minigame() -> void:
-	Events.minigame_end.disconnect(_on_break_camera)
-	Events.minigame_cancelled.disconnect(_cancel_break_minigame)
 
 
 func _on_requested_use_active_item():

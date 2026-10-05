@@ -190,6 +190,9 @@ var item_loadout_menu: ItemLoadoutMenu
 var all_3d_audio_stream_players: Array[Node]
 var no_cooldowns := false
 
+var player_alert:float = 0.0
+var alert_loss_rate:float = 0.7
+var player_alert_wait_until_decay:float = 0
 
 func _enter_tree() -> void:
 	if OS.has_feature("demo_mode"):
@@ -256,6 +259,12 @@ func add_items_to_unlocked_list(item_ids: Array) -> void:
 		if not found_item:
 			push_warning("Unlocked item not found: %s" % item_id)
 
+func add_alert(alert:float):
+	player_alert += alert
+	player_alert_wait_until_decay = 3
+	print(player_alert)
+
+
 # NOTE: these things in physics process instead of process for timing reasons
 func _physics_process(_delta: float) -> void:
 	# this have to be reset to false at the start of every frame here
@@ -266,7 +275,13 @@ func _physics_process(_delta: float) -> void:
 	making_drink_manually = current_minigame_name == "Captcha"
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	if not get_tree().paused and shift_started:
+		if player_alert_wait_until_decay > 0:
+			player_alert_wait_until_decay -= delta
+		else:
+			player_alert = max(0.0,player_alert - 0.45 * delta)
+			print(player_alert)
 	if in_ui or get_tree().paused:
 		if in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
