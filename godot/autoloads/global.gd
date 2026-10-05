@@ -20,9 +20,6 @@ var hovered_interactable: Interactable:
 			return null
 		else:
 			return hovered_interactable
-# max amount of items we can own
-var item_slots_amount: int
-var inspected_shelf_item: ShelfItem
 var main_scene: Main
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
@@ -87,6 +84,8 @@ var total_trash: float
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
+## the one that chases you on day 5
+## (boss as in boss fight)
 var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
@@ -99,23 +98,11 @@ var breakdowns_this_shift := 0
 var spills_this_shift := 0
 var machines: Array[Machine]
 var machine_in_use: Machine = null
-var stamina: float:
-	set(new_stam):
-		if new_stam > Stats.current.max_stamina:
-			new_stam = Stats.current.max_stamina
-		if new_stam < 0:
-			new_stam = 0
-
-		stamina = new_stam
-var sprint_lockout_timer: Timer
 # ui
 var in_machine_ui: bool = false
 var in_main_menu := false
 var in_level_select_menu: bool = false
 var in_end_screen := false
-var in_active_item_menu := false
-var in_popup_tutorial_screen: bool = false
-var in_end_shift_early_menu := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
 var showing_floating_cursor := false
@@ -131,9 +118,6 @@ var in_ui: bool:
 				or in_main_menu
 				or in_level_select_menu
 				or in_end_screen
-				or in_active_item_menu
-				or in_popup_tutorial_screen
-				or in_end_shift_early_menu
 				or in_dialog_screen
 				or in_options_menu
 				or showing_floating_cursor
@@ -230,6 +214,7 @@ func load_unlocked_items_from_save() -> void:
 			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(d, [])
 			add_items_to_unlocked_list(bonus_items)
 
+
 func get_item(item_id:String) -> Item:
 	var found_item := false
 	for item: Item in items:
@@ -240,6 +225,7 @@ func get_item(item_id:String) -> Item:
 	if not found_item:
 		push_warning("Unlocked item not found: %s" % item_id)
 	return null
+
 
 func add_items_to_unlocked_list(item_ids: Array) -> void:
 	for raw_item_id in item_ids:
@@ -256,7 +242,7 @@ func add_items_to_unlocked_list(item_ids: Array) -> void:
 		if not found_item:
 			push_warning("Unlocked item not found: %s" % item_id)
 
-# NOTE: these things in physics process instead of process for timing reasons
+
 func _physics_process(_delta: float) -> void:
 	# this have to be reset to false at the start of every frame here
 	# because if we set it in the individual security cameras' processes, they
@@ -265,8 +251,6 @@ func _physics_process(_delta: float) -> void:
 
 	making_drink_manually = current_minigame_name == "Captcha"
 
-
-func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
 		if in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -292,6 +276,9 @@ func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
 
 
+## meaning take them all off cooldown
+## (used to reset them at start of level)
+## TODO: maybe move it there cos its not used anywhere else
 func refresh_active_items():
 	for item in owned_items:
 		item.can_be_used = true
@@ -320,6 +307,9 @@ func day_to_string(d: int) -> String:
 	return day_as_string
 
 
+## for frozen tippy item
+## (and cutscenes if we get to that)
+## NOTE: i think this is broken rn
 func pitch_shift_all_3d_audio(down: bool) -> void:
 	var pitch_tween := create_tween().set_parallel()
 

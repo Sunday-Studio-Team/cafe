@@ -10,16 +10,12 @@ signal game_options_changed(options_data: OptionsData)
 signal player_confirmed_item_loadout
 signal shift_started
 signal customer_entered
-# NOTE: sorry for all these weird signals that pass the customer
-# i think thers probably nicer ways to do this lol
-signal customer_approached_window(customer: Customer)
 signal customer_started_order(customer: Customer)
 signal order_remade(customer: Customer)
 signal order_accepted(customer: Customer)
 signal order_served(customer: Customer)
 signal order_remaking_drink
 signal machine_making_drink
-signal customer_left_machine(customer: Customer)
 signal customer_leave
 signal customer_low_time_warning
 signal under_money_goal
@@ -27,7 +23,6 @@ signal shift_end_sequence_started
 signal time_up
 signal low_time_warning
 signal end_screen_finished
-signal requirements_met
 signal money_updated(new_value: float, old_value: float)
 signal employee_rating_updated(new_value: float, old_value: float)
 signal alert_posted(
@@ -74,7 +69,6 @@ signal hammer_animation_hit
 signal air_horn_animation_just_blasted
 signal whipped_cream_animation_shot
 
-signal tutorial_selected
 # Free Cam
 signal free_cam_toggled
 signal free_cam_set_speed(speed: float)
