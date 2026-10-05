@@ -23,11 +23,8 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var ui: CanvasLayer
-@export var desk: Desk
 @export var _trash_can: TrashCan
 #Active Items
-@export var clock_item_stop_sound: AudioStreamPlayer
-@export var clock_item_start_sound: AudioStreamPlayer
 @export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
 
@@ -484,8 +481,6 @@ func _on_shift_started():
 				has_scrubber = true
 				break
 		DraggableMop.used_scrubber = has_scrubber
-
-		desk.interactable.visible = false
 
 
 func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
