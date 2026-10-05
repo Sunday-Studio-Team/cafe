@@ -6,7 +6,6 @@ extends TypingMinigameVariant
 @export var prefilled_section_packed_scene: PackedScene
 @export var typed_section_packed_scene: PackedScene
 
-@export var customer_dialog_view: TypingMinigameCustomerDialogView
 @export var instructions_container: Control
 @export var instructions_display_duration: float = 0.1
 @export var sentence_container: Control
@@ -50,7 +49,7 @@ func start_minigame_variant(customer: Customer) -> void:
 			tween2.tween_property(tippy_group,"offset_transform_position",Vector2(0,0),0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tween2.set_parallel(true)
 			tween2.tween_property(dialogue_box,"offset_transform_position",Vector2(0,0),0.8).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-			
+
 			var tween3 := create_tween()
 			tween3.tween_property(speech_bubble_texture,"offset_transform_scale",Vector2(1,1),0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tween3.set_parallel(true)
@@ -59,20 +58,20 @@ func start_minigame_variant(customer: Customer) -> void:
 	# Get a random minigame content resource
 	var typing_minigame_contents_index: int = randi_range(0, contents.size()-1)
 	var typing_minigame_content: TypingMinigameContentFillBlanks = contents[typing_minigame_contents_index]
-	
+
 	## Get a random dialog with reply
-	_sentence = typing_minigame_content.customer_dialog_and_player_replies.pick_random()		
+	_sentence = typing_minigame_content.customer_dialog_and_player_replies.pick_random()
 	#var customer_dialog: String = _sentence.customer_dialog
 #
 	#customer_dialog_view.init(customer_dialog)
 	#customer_dialog_view.play_dialog()
 	#await customer_dialog_view.dialog_finished
-	
+
 	instructions_container.visible = true
-	
+
 	var instructions_timer: SceneTreeTimer = get_tree().create_timer(instructions_display_duration)
 	await instructions_timer.timeout
-	
+
 	# Create sentence views
 	for sentence_section_content in _sentence.sentence_sections:
 		if sentence_section_content is TypingMinigameContentFillBlanksSentencePrefilledSection:
@@ -90,7 +89,7 @@ func start_minigame_variant(customer: Customer) -> void:
 			sentence_container.add_child(typing_minigame_section)
 		else:
 			printerr("Unhandled TypingMinigameContentFillBlanksSentenceSection type")
-	
+
 	_active_typing_section_index = 0
 	_start_next_section()
 

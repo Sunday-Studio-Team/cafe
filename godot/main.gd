@@ -23,9 +23,7 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var ui: CanvasLayer
-@export var day_indicator: Label
 @export var desk: Desk
-@export var overtime_item: Item
 @export var _trash_can: TrashCan
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
@@ -33,9 +31,7 @@ extends Node3D
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var air_freshener: AirFreshener
-@export var tutorial_selection_menu: TutorialSelectionMenu
 @export var shift_start_sound: AudioStreamPlayer
-@export var cam_spot: Marker3D
 @export var default_trash_spawn_spot: Marker3D
 
 @export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
@@ -48,7 +44,6 @@ var _help_desk_customer_spawn_timer: Timer
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
 
-var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
 var _active_machines: Array[Machine]
 var _all_security_cameras: Array[SecurityCam3D]
