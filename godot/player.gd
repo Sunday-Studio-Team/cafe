@@ -55,6 +55,7 @@ var fov_tween: Tween
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
+@onready var spawn_position := global_position
 
 
 func _ready() -> void:
@@ -62,7 +63,7 @@ func _ready() -> void:
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
 	_on_items_updated()
-	
+
 	free_cam_visualizer.visible = false
 
 	# the aiming ray is a child of the camera (not a direct child of the player)
@@ -121,7 +122,7 @@ func _physics_process(delta: float) -> void:
 	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
-	
+
 	# TODO: move this
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
@@ -135,7 +136,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		roller_skates_dust_particles.emitting = false
 		camera.camera_effects.fov = lerp(90, 100, clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed, 0, 2))
-		
+
 	handle_gravity(delta)
 	handle_footstep_sounds()
 	handle_ingredients_bag()
@@ -200,7 +201,7 @@ func handle_movement(delta: float) -> void:
 
 	# apply our horizontal velocity (but leave Y alone, the gravity func will handle that)
 	velocity = Vector3(horizontal_velocity.x, velocity.y, horizontal_velocity.z)
-	
+
 
 func handle_gravity(delta: float) -> void:
 	velocity.y += get_gravity().y * delta
@@ -287,7 +288,7 @@ func handle_footstep_sounds() -> void:
 	# etc without this
 	if Engine.time_scale != 1:
 		return
-	
+
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
 		# here we play a sound just as we start walking
