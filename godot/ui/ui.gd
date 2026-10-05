@@ -23,7 +23,7 @@ const ALERT_QUEUE_SIZE := 5
 @export var profit_progress: ProgressBar
 @export var customer_happiness_label: Label
 @export var score_update_label: Label
-@export var interactable_indicator: PanelContainer
+@export var interactable_indicator: TextureRect
 @export var interactable_label: RichTextLabel
 @export var hold_interact_progress: ProgressBar
 @export var game_timer: Timer
@@ -48,7 +48,7 @@ const ALERT_QUEUE_SIZE := 5
 @export var item_hover_tooltip_cooldown_label: RichTextLabel
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_description: RichTextLabel
-@export var item_indicator: PanelContainer
+@export var item_indicator: TextureRect
 @export var item_text: RichTextLabel
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName

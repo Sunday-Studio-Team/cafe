@@ -128,8 +128,10 @@
 [ext_resource type="Resource" uid="uid://cq2idwtwk746x" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_5.tres" id="155_kcoi7"]
 [ext_resource type="Resource" uid="uid://bhf1a5xxiklkg" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_1.tres" id="156_cdf73"]
 [ext_resource type="Resource" uid="uid://c01ei7nx3t8b5" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_6.tres" id="156_rkju4"]
+[ext_resource type="Texture2D" uid="uid://cxwm0bcv4uyoa" path="res://Assets/UI/ui icon.png" id="157_g6ptb"]
 [ext_resource type="Resource" uid="uid://rwrwq82iw6ql" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_repeat_0.tres" id="157_qeqs3"]
 [ext_resource type="Resource" uid="uid://cr6c4gp6i5c72" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_incorrect_drink_prepared_7.tres" id="157_um25j"]
+[ext_resource type="Texture2D" uid="uid://cl01oyfrjl33w" path="res://Assets/UI/promptbubble_2.png" id="158_0bk8h"]
 [ext_resource type="Resource" uid="uid://bdc8hcnbx72xf" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_ingredients_got.tres" id="158_7dysq"]
 [ext_resource type="Resource" uid="uid://cij5n2dkhfq82" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_8_repeat_1.tres" id="158_21jki"]
 [ext_resource type="Resource" uid="uid://dm50t5gmhxy74" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_9_0.tres" id="159_fgj2h"]
@@ -1326,26 +1328,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Interactable" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1696852801]
+[node name="Interactable" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=678516276]
 custom_maximum_size = Vector2(-1, 75)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -280.0
+offset_left = -519.0
 offset_top = 118.0
-offset_right = 280.0
-offset_bottom = 192.0
+offset_right = 481.0
+offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+texture = ExtResource("157_g6ptb")
+stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable" unique_id=1133469025]
-layout_mode = 2
+layout_mode = 0
+offset_left = 291.0
+offset_top = -1.0
+offset_right = 841.0
+offset_bottom = 63.0
 size_flags_vertical = 4
 alignment = 1
 
@@ -1353,7 +1360,10 @@ alignment = 1
 custom_minimum_size = Vector2(550, 50)
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_font_sizes/normal_font_size = 32
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("280_l0ugm")
+theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[E] interact"
 scroll_active = false
@@ -1367,26 +1377,35 @@ size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
-[node name="ItemIndicator" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable" unique_id=498491282]
+[node name="ItemIndicator" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable" unique_id=1959241907]
 custom_minimum_size = Vector2(300, 50)
 custom_maximum_size = Vector2(400, 50)
-layout_mode = 2
+layout_mode = 0
+offset_left = 417.0
+offset_top = -95.0
+offset_right = 737.0
+offset_bottom = -45.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0.75, -0.5)
 offset_transform_scale = Vector2(0.75, 0.75)
 offset_transform_rotation = 0.08726646
+texture = ExtResource("158_0bk8h")
+stretch_mode = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/Interactable/ItemIndicator" unique_id=1532821752]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 36
-bbcode_enabled = true
-text = "[rainbow freq=0.1 sat=0.8 speed=-5.0][Q] HAMMER 💥[/rainbow]"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = -16.0
+offset_right = 364.0
+offset_bottom = 94.0
+rotation = 0.07359508
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("280_l0ugm")
+theme_override_font_sizes/normal_font_size = 30
+text = "[Q] HAMMER"
 
 [node name="ExplodingBombUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1154891333]
 anchors_preset = 3
@@ -2068,7 +2087,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_twex2")
@@ -2085,7 +2104,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_3try8")
