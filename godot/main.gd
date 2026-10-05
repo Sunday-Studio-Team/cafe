@@ -28,7 +28,6 @@ extends Node3D
 #Active Items
 @export var clock_item_stop_sound: AudioStreamPlayer
 @export var clock_item_start_sound: AudioStreamPlayer
-@export var air_freshener: AirFreshener
 @export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
 
@@ -115,7 +114,7 @@ func _ready() -> void:
 	Events.items_updated.connect(get_stats)
 
 	# enables props as the days go by
-	# could combine the loops to one loop but am not sure if all props will have equivaent
+	# could combine the loops to one loop but am not sure if all props will have equivalent
 	# number of day props
 	for i in range(day_containers_desk.size()):
 		if day_containers_desk[i] != null:
@@ -136,7 +135,7 @@ func _ready() -> void:
 		if day_containers_posters[i] != null:
 			day_containers_posters[i].visible = (i <= Global.day)
 
-	# we have to set all these manually here so if we reload the scene theyll reset
+	# we have to set all these manually here so if we reload the scene they'll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -182,21 +181,6 @@ func get_stats() -> void:
 	var shift_length: float = Stats.current.shift_lengths_for_each_day[Global.day]
 	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
-
-	update_air_fresheners_enabled()
-
-
-func update_air_fresheners_enabled() -> void:
-	var air_freshener_item: Item = null
-	for owned_item in Global.owned_items:
-		if owned_item.item_id == "air_freshener":
-			air_freshener_item = owned_item
-			break
-
-	if air_freshener_item != null:
-		air_freshener.enable_air_freshener()
-	else:
-		air_freshener.disable_air_freshener()
 
 
 # we reload this main scene to start each day, so we set all the per-day stuff here

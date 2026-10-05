@@ -9,31 +9,48 @@ extends Node3D
 
 var _air_freshener_item_on_cooldown: Item = null
 
+
 func _ready() -> void:
-	_interactable.interacted.connect(_on_interacted)
+	enable_or_disable_based_on_if_we_have_the_item()
+	Events.items_updated.connect(enable_or_disable_based_on_if_we_have_the_item)
+
 	_interactable.requested_use_active_item.connect(_on_requested_use_active_item)
 
 	_cooldown_timer_sprite.visible = false
 
-func _process(_delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	if _air_freshener_item_on_cooldown != null:
 		_cooldown_timer_bar.value = _air_freshener_item_on_cooldown.active_item_remaining_cooldown
 		if _air_freshener_item_on_cooldown.can_be_used:
 			_cooldown_timer_sprite.visible = false
 			_air_freshener_item_on_cooldown = null
 
-func enable_air_freshener() -> void:
+
+func enable() -> void:
 	visible = true
 	_interactable.visible = true
 	_collider_body.process_mode = Node.PROCESS_MODE_INHERIT
 
-func disable_air_freshener() -> void:
+
+func disable() -> void:
 	visible = false
 	_interactable.visible = false
 	_collider_body.process_mode = Node.PROCESS_MODE_DISABLED
 
-func _on_interacted() -> void:
-	pass
+
+func enable_or_disable_based_on_if_we_have_the_item() -> void:
+	var air_freshener_item: Item = null
+	for owned_item in Global.owned_items:
+		if owned_item.item_id == "air_freshener":
+			air_freshener_item = owned_item
+			break
+
+	if air_freshener_item != null:
+		enable()
+	else:
+		disable()
+
 
 func _on_requested_use_active_item() -> void:
 	var air_freshener_item: Item = null
@@ -57,8 +74,8 @@ func _on_requested_use_active_item() -> void:
 	Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertIconType.CUSTOMER)
 	Global.put_active_item_on_cooldown(air_freshener_item)
 
-	# Track the air freshener item on cooldown
 	_air_freshener_item_on_cooldown = air_freshener_item
+
 	_cooldown_timer_sprite.visible = true
 	_cooldown_timer_bar.max_value = _air_freshener_item_on_cooldown.active_item_remaining_cooldown
 	_cooldown_timer_bar.value = _air_freshener_item_on_cooldown.active_item_remaining_cooldown
