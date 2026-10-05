@@ -3,7 +3,7 @@ extends Control
 
 signal typed_letter_correct
 signal typed_letter_wrong
-signal section_finished(typing_minigame_section: TypingMinigameSection)
+signal section_finished()
 
 enum State {
 	PRE_START,
@@ -209,4 +209,4 @@ func _update_style_player_reply() -> void:
 func _on_section_finished() -> void:
 	_state = State.FINISHED
 	_update_style_player_reply()
-	section_finished.emit(self)
+	section_finished.emit()

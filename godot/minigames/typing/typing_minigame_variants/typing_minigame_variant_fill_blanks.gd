@@ -103,9 +103,9 @@ func _start_next_section() -> void:
 	typing_minigame_section.start_section()
 
 
-func _on_section_finished(finished_typing_minigame_section: TypingMinigameSection) -> void:
+func _on_section_finished() -> void:
 	_active_typing_section_index += 1
 	if _active_typing_section_index < _typing_sections.size():
 		_start_next_section()
 	else:
-		minigame_variant_finished.emit(self)
+		minigame_variant_finished.emit()
