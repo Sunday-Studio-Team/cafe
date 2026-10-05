@@ -8,9 +8,9 @@ func _ready() -> void:
 	hide()
 
 
-func play_anim_then_hide() -> void:
+func play_anim_then_hide(animation_name: String) -> void:
 	show()
-	play("minus_rating")
+	play(animation_name)
 
 
 func _on_animation_finished ()-> void:
