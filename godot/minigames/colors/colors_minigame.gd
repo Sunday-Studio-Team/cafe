@@ -11,6 +11,7 @@ const DELAY_AFTER_PRESSING_BUTTON := 0.75
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
 @export var prompt_print_sound: AudioStreamPlayer
+@export var sato_anim: AnimatedSprite2D
 
 @export_tool_button("Random Prompt") var action = show_new_prompt
 
@@ -46,6 +47,7 @@ func set_employee_face(texture:Texture2D=employee_default):
 
 func show_new_prompt():
 	set_employee_face()
+	sato_anim.play("default")
 	current_prompt = prompts_and_corresponding_buttons.keys().pick_random()
 	var color:String = str("#",(colors.pick_random() as Color).to_html())
 	#prompt_text_box.add_theme_color_override("font_color", colors.pick_random())
@@ -57,6 +59,7 @@ func show_new_prompt():
 func _on_button_pressed(button_index: int):
 	if prompts_and_corresponding_buttons[current_prompt] == button_index + 1:
 		correct_sound.play()
+		sato_anim.play("correct")
 		correct_sound.pitch_scale += 0.1
 		prompt_text_box.text = "[wave amp=75.0 freq=15.0][font_size=48][font top_spacing=-0][center]✅"
 		set_employee_face(employee_happy)
@@ -65,6 +68,7 @@ func _on_button_pressed(button_index: int):
 		set_employee_face(employee_anxiety)
 		prompt_text_box.text = "[shake rate=100.0 level=32][font_size=48][font top_spacing=-0][center]❌"
 		wrong_sound.play()
+		sato_anim.play("incorrect")
 		#var shake_tween := create_tween().set_trans(Tween.TRANS_SPRING)
 		#shake_tween.tween_property(prompt_panel, "offset_transform_position_ratio:x", 0.1, 0.1)
 		#shake_tween.tween_property(prompt_panel, "offset_transform_position_ratio:x", -0.1, 0.1)
