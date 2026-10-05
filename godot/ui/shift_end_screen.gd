@@ -39,7 +39,6 @@ var reached_bonus_rating: bool = (
 
 func _ready() -> void:
 	Events.time_up.connect(_on_time_up)
-	_on_time_up()
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit(),)
 
