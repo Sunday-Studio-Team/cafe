@@ -20,20 +20,16 @@ enum DrinkType { COFFEE, TEA, LATTE }
 @export var upcharge: float = 1.00
 
 var price: float
-var typing_minigame_ingredients_recipe: TypingMinigameContentIngredientsListRecipe = null
 
 
-func create() -> void:
-	typing_minigame_ingredients_recipe = TypingMinigameContentIngredientsListRecipe.new()
+func calculate_price() -> void:
 	price += main_ingredient.cost
-	typing_minigame_ingredients_recipe.ingredient_names.append(main_ingredient.name_to_string())
 	if liquid:
-		typing_minigame_ingredients_recipe.ingredient_names.append(liquid.name_to_string())
 		price += liquid.cost
 	if extra:
-		typing_minigame_ingredients_recipe.ingredient_names.append(extra.name_to_string())
 		price += extra.cost
 	price += upcharge
+
 
 func is_unlocked() -> bool:
 	return Global.day >= day_unlocked
