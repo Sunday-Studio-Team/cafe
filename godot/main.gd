@@ -33,7 +33,6 @@ extends Node3D
 @export var teleporter1: Teleporter
 @export var teleporter2: Teleporter
 @export var air_freshener: AirFreshener
-@export var tutorial_selection_menu: TutorialSelectionMenu
 @export var shift_start_sound: AudioStreamPlayer
 @export var cam_spot: Marker3D
 @export var default_trash_spawn_spot: Marker3D

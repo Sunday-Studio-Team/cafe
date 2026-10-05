@@ -2,9 +2,6 @@ class_name TutorialManager
 extends Node
 
 @warning_ignore_start("unused_private_class_variable")
-@export var _tutorial_popups_manager: TutorialPopupsManager
-@export var _player_ui_sub_viewport_container: PlayerUiSubViewportContainer
-@export var _cinematic_camera: CinematicCamera
 
 @export var _tippy_callouts_manager: TippyCalloutsManager
 @export var _open_closed_sign: OpenClosedSign

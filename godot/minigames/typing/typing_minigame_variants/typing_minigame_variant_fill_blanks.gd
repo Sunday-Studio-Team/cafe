@@ -6,7 +6,6 @@ extends TypingMinigameVariant
 @export var prefilled_section_packed_scene: PackedScene
 @export var typed_section_packed_scene: PackedScene
 
-@export var customer_dialog_view: TypingMinigameCustomerDialogView
 @export var instructions_container: Control
 @export var instructions_display_duration: float = 0.1
 @export var sentence_container: Control

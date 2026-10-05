@@ -10,10 +10,6 @@ extends Node
 @export_dir var spill_sprites_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
-@export var star_texture: Texture
-@export var half_star_texture: Texture
-@export var empty_star_texture: Texture
-@export var complaint_popup: CanvasLayer
 var resource_background_loader: ResourceBackgroundLoader
 var player: Player
 var hovered_interactable: Interactable:
