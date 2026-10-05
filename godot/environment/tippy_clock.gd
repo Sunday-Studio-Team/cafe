@@ -11,7 +11,8 @@ func _ready() -> void:
 
 	Events.shift_started.connect(
 			func() -> void:
-				tick_sound.play()
+				if not Global.playing_tutorial:
+					tick_sound.play()
 	)
 	Events.shift_end_sequence_started.connect(
 			func() -> void:

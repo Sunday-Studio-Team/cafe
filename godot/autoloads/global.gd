@@ -106,7 +106,6 @@ var in_end_screen := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
 var showing_floating_cursor := false
-var in_tutorial_selection := false
 var in_loadout_menu := false
 var in_ui: bool:
 	get():
@@ -121,7 +120,6 @@ var in_ui: bool:
 				or in_dialog_screen
 				or in_options_menu
 				or showing_floating_cursor
-				or in_tutorial_selection
 				or in_loadout_menu
 		):
 			return true
