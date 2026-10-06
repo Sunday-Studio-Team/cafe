@@ -1,7 +1,8 @@
 class_name TabletItemIcon
-extends TextureRect
+extends Control
 
 @export var cooldown_progress_bar: TextureProgressBar
+@export var item_texture_rect: TextureRect
 
 var item: Item
 
@@ -11,9 +12,9 @@ func _ready() -> void:
 	mouse_exited.connect(func(): Global.hovered_item_icon = null)
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if item:
-		texture = item.icon
+		item_texture_rect.texture = item.icon
 		show()
 		if item.is_active_item and not item.can_be_used:
 			cooldown_progress_bar.show()

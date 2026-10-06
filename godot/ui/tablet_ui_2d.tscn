@@ -52,7 +52,7 @@ anchors_preset = 0
 offset_right = 631.0
 offset_bottom = 863.0
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=514240901]
+[node name="Background" type="TextureRect" parent="." unique_id=514240901]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,36 +142,31 @@ layout_mode = 2
 [node name="Rating" type="PanelContainer" parent="MarginContainer/Screen" unique_id=615532530]
 layout_mode = 2
 
-[node name="Rating" type="HBoxContainer" parent="MarginContainer/Screen/Rating" unique_id=1832505298]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Screen/Rating" unique_id=1832505298]
 layout_mode = 2
 
-[node name="RatingIconLabel" type="Label" parent="MarginContainer/Screen/Rating/Rating" unique_id=1318581469]
+[node name="RatingIconLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer" unique_id=1318581469]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "🙂"
 
-[node name="RatingLabel" type="Label" parent="MarginContainer/Screen/Rating/Rating" unique_id=891384739]
+[node name="RatingLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer" unique_id=891384739]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "⭐2.1"
 
-[node name="Spacer" type="Control" parent="MarginContainer/Screen/Rating/Rating" unique_id=466928963]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FlowPanel" type="PanelContainer" parent="MarginContainer/Screen/Rating/Rating" unique_id=349206812]
+[node name="FlowPanel" type="PanelContainer" parent="MarginContainer/Screen/Rating/HBoxContainer" unique_id=349206812]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="FlowRate" type="HBoxContainer" parent="MarginContainer/Screen/Rating/Rating/FlowPanel" unique_id=816766880]
+[node name="FlowRate" type="HBoxContainer" parent="MarginContainer/Screen/Rating/HBoxContainer/FlowPanel" unique_id=816766880]
 layout_mode = 2
 
-[node name="FlowRateLabel" type="Label" parent="MarginContainer/Screen/Rating/Rating/FlowPanel/FlowRate" unique_id=1688117453]
+[node name="FlowRateLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate" unique_id=1688117453]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "10"
@@ -179,7 +174,7 @@ label_settings = SubResource("LabelSettings_xrivr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FlowRateDescLabel" type="Label" parent="MarginContainer/Screen/Rating/Rating/FlowPanel/FlowRate" unique_id=1290189262]
+[node name="FlowRateDescLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate" unique_id=1290189262]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "secs/ custmr"
@@ -187,13 +182,11 @@ label_settings = SubResource("LabelSettings_xrivr")
 
 [node name="ItemUI" type="HBoxContainer" parent="MarginContainer/Screen" unique_id=1931901216]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 3
 alignment = 1
 
 [node name="ShowMousePrompt" type="HBoxContainer" parent="MarginContainer/Screen/ItemUI" unique_id=469603555]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
@@ -215,7 +208,8 @@ stretch_mode = 4
 
 [node name="ItemIcons" type="GridContainer" parent="MarginContainer/Screen/ItemUI" unique_id=266679496]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
+size_flags_vertical = 4
 columns = 3
 
 [node name="TabletItemIcon" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=427576900 instance=ExtResource("8_vx1ja")]
