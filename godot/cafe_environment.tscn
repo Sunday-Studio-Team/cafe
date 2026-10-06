@@ -3197,18 +3197,6 @@ transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -10.896235, -0.25965, -
 [node name="ceiling light" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=2047214698 instance=ExtResource("32_6txgl")]
 transform = Transform3D(-1.3946975e-07, 0, -1.3, 3.6125252e-15, 1.3, 0, 1.3, -3.6125252e-15, -1.3946975e-07, 2.09759, -0.25965, -2.0887823)
 
-[node name="AreaLight3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light" index="3" unique_id=693720179]
-layers = 9
-
-[node name="SpotLight3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light" index="4" unique_id=853136831]
-layers = 9
-light_energy = 11.045
-light_volumetric_fog_energy = 1.0
-light_specular = 1.915
-shadow_enabled = true
-spot_range = 3.956
-spot_angle = 36.49
-
 [node name="poster1_type1" type="Sprite3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=791708533]
 transform = Transform3D(0.24999435, -0.0016795021, 0, 0.0016795021, 0.24999435, 0, 0, 0, 0.25, -2.6981406, 1.6392398, -4.7883887)
 pixel_size = 0.0125
@@ -4283,8 +4271,6 @@ mesh = SubResource("ArrayMesh_becmu")
 [editable path="CustomerArea/ATMTIPPY"]
 [editable path="CustomerArea/ceiling light2"]
 [editable path="CustomerArea/ceiling light2/Ceiling Lamp2"]
-[editable path="EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light"]
-[editable path="EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light/Ceiling Lamp2"]
 [editable path="EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy15"]
 [editable path="EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy10"]
 [editable path="EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy11"]
