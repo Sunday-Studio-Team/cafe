@@ -1178,21 +1178,6 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="ScoreUpdate" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=358513537]
-layer = 2
-
-[node name="ScoreUpdate" type="Label" parent="PlayerUiSubViewportContainer/SubViewport/ScoreUpdate" unique_id=938663646]
-modulate = Color(0.4, 1, 0.4, 1)
-offset_left = 40.0
-offset_top = 475.0
-offset_right = 517.0
-offset_bottom = 547.0
-offset_transform_enabled = true
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.19607843)
-theme_override_constants/shadow_outline_size = 10
-theme_override_font_sizes/font_size = 52
-text = "+1$ from customer"
-
 [node name="TippyVOIndicator" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=45213847 node_paths=PackedStringArray("sprite")]
 layer = 2
 script = ExtResource("57_ibca3")
@@ -1202,12 +1187,10 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(1642, 390)
 sprite_frames = ExtResource("215_tcxth")
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("profit_label", "profit_progress", "score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "day_indicator", "rating_label", "customer_flow_rate_label", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("score_update_label", "interactable_indicator", "interactable_label", "hold_interact_progress", "shift_starting_ending_label", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "day_indicator", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
 process_mode = 3
 script = ExtResource("5_lquwl")
-profit_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Money/HBoxContainer/VBoxContainer/MoneyLabel")
-profit_progress = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Money/HBoxContainer/VBoxContainer/MoneyBar")
-score_update_label = NodePath("../ScoreUpdate/ScoreUpdate")
+score_update_label = NodePath("")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
 hold_interact_progress = NodePath("Interactable/VBoxContainer/HoldInteractProgress")
@@ -1221,8 +1204,6 @@ _eye_logo_red_texture = ExtResource("48_lwnsi")
 _eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
 day_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
-rating_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Rating/HBoxContainer/RatingLabel")
-customer_flow_rate_label = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate/FlowRateLabel")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
 exit_machine_button = NodePath("HUD/VBoxContainer/FloatingButtons/ExitMachineButton")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
@@ -2176,7 +2157,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057009846, -0.00016215755, -0.99993694, 1.0259912e-07, 1, -0.00016214732, 0.99993694, -1.01539825e-08, 0.00057009846, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700982, -0.00016215755, -0.99993646, 1.0259907e-07, 1, -0.00016214725, 0.99993646, -1.01539825e-08, 0.0005700982, -4.11582, -1.4201379, 0.23234849)
 
 [node name="Label3D4" type="Label3D" parent="CafeEnvironment/StoreRoom/Storage Arch" parent_id_path=PackedInt32Array(672806017, 847908752) index="1" unique_id=1148006303]
 transform = Transform3D(0.99999994, 0, 1.4210855e-14, 0, 1, 0, 0, 0, 1.0000005, 0.01610136, 0.8703489, 0.19787931)
@@ -2200,7 +2181,6 @@ transform = Transform3D(-3.4969108e-09, 0, -0.07999999, 0, 0.08, 0, 0.07999999, 
 [node name="Tippy_Clock2" parent="." unique_id=1244749543 instance=ExtResource("374_weuxt")]
 transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -6.6900716, 1.223219, -4.0249243)
 
-[editable path="PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport/TabletUI2D"]
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
 [editable path="SecurityCams/MiddleSecurityCam"]

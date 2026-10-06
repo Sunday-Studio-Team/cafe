@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ddyncetpsnx8x"]
 
 [ext_resource type="Texture2D" uid="uid://ck7ggyk1fkg4o" path="res://sprites/tablet_ui/tablet_ui_background.png" id="1_h00bf"]
-[ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet.gd" id="2_bv3d6"]
+[ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet_ui.gd" id="2_bv3d6"]
 [ext_resource type="Texture2D" uid="uid://b125bu4qap7jh" path="res://sprites/tablet_ui/tablet_money_ui.png" id="3_dh8ow"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="6_6ci3b"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="7_0bt22"]
@@ -44,13 +44,19 @@ corner_radius_bottom_left = 16
 font_size = 32
 font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
 
-[node name="TabletUI2D" type="Control" unique_id=1774289997]
+[node name="TabletUI2D" type="Control" unique_id=1774289997 node_paths=PackedStringArray("money_made_label", "money_bar", "rating_label", "customer_flow_rate_label", "item_icons")]
 custom_maximum_size = Vector2(631, 863)
 propagate_maximum_size = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 631.0
 offset_bottom = 863.0
+script = ExtResource("2_bv3d6")
+money_made_label = NodePath("MarginContainer/Screen/Money/HBoxContainer/VBoxContainer/MoneyLabel")
+money_bar = NodePath("MarginContainer/Screen/Money/HBoxContainer/VBoxContainer/MoneyBar")
+rating_label = NodePath("MarginContainer/Screen/Rating/HBoxContainer/RatingLabel")
+customer_flow_rate_label = NodePath("MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate/FlowRateLabel")
+item_icons = NodePath("MarginContainer/Screen/ItemUI/ItemIcons")
 
 [node name="Background" type="TextureRect" parent="." unique_id=514240901]
 layout_mode = 1
@@ -61,7 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_vn1tu")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1455846849 node_paths=PackedStringArray("item_icons")]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1455846849]
 custom_maximum_size = Vector2(631, 863)
 layout_mode = 1
 anchors_preset = 15
@@ -73,8 +79,6 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
-script = ExtResource("2_bv3d6")
-item_icons = NodePath("Screen/ItemUI/ItemIcons")
 
 [node name="Screen" type="VBoxContainer" parent="MarginContainer" unique_id=1854976775]
 layout_mode = 2
