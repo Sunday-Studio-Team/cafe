@@ -6,7 +6,6 @@ const MOUSE_SENSITIVITY_AT_MIN: float = 0.1
 const MOUSE_SENSITIVITY_AT_MAX: float = 3.0
 
 @export var player: Player
-# NOTE: why are these exports ?
 @export var camera_effects: CameraEffects
 
 var mouse_sens_from_options: float
@@ -30,14 +29,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not Global.in_ui:
-		
 		var mouse_sens: float = remap(
 				mouse_sens_from_options,
 				OptionsData.MOUSE_SENSITIVITY_MIN,
 				OptionsData.MOUSE_SENSITIVITY_MAX,
 				MOUSE_SENSITIVITY_AT_MIN,
 				MOUSE_SENSITIVITY_AT_MAX
-) * MOUSE_SENSITIVITY_SCALING_FACTOR
+	) * MOUSE_SENSITIVITY_SCALING_FACTOR
 		
 		mouse_input_since_last_physics_frame.x += -event.screen_relative.x * mouse_sens
 		mouse_input_since_last_physics_frame.y += -event.screen_relative.y * mouse_sens
