@@ -21,7 +21,6 @@ const ALERT_QUEUE_SIZE := 5
 
 @export var profit_label: Label
 @export var profit_progress: ProgressBar
-@export var customer_happiness_label: Label
 @export var score_update_label: Label
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
@@ -36,7 +35,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var day_indicator: Label
-@export var rating_stars_hbox: HBoxContainer
 @export var rating_label: Label
 @export var customer_flow_rate_label: Label
 @export var drop_button: Button
@@ -208,10 +206,10 @@ func update_day_indicator() -> void:
 
 
 func update_score_indicators() -> void:
-	profit_label.text = (
-			Global.float_to_price(Global.daily_cafe_money)
-			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
-	)
+	profit_label.text = "%s/%s" % [
+		Global.float_to_price(Global.daily_cafe_money),
+		int(Stats.current.daily_profit_goals_each_day[Global.day])
+	]
 
 	if Global.daily_cafe_money:
 		profit_progress.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
@@ -391,9 +389,6 @@ func update_cctv_indicator() -> void:
 func _update_rating() -> void:
 	var current_rating: float = Global.employee_rating
 	_employee_rating_last_update = current_rating
-
-	for c in rating_stars_hbox.get_children():
-		c.queue_free()
 
 	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
 	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
