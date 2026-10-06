@@ -70,7 +70,7 @@ func _on_frame_changed() -> void:
 	elif sprite.frame == 7 and sprite.animation == "bag_pickup":
 		Events.bag_pickup_animation_grabbed.emit()
 		Events.trash_pickup_animation_grabbed.emit()
-	elif sprite.frame == 13 and sprite.animation == "airhorn_use":
+	elif sprite.frame == 11 and sprite.animation == "airhorn_use":
 		Events.air_horn_animation_just_blasted.emit()
 	elif sprite.frame == 5 and sprite.animation == "cream_use":
 		Events.whipped_cream_animation_shot.emit()
