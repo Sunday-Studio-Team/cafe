@@ -21,7 +21,6 @@ const ALERT_QUEUE_SIZE := 5
 
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
-@export var hold_interact_progress: ProgressBar
 @export var shift_starting_ending_label: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -309,24 +308,13 @@ func update_interactable_ui() -> void:
 
 		var interaction_prompt: String = ""
 		if hovered_interactable.show_interact_hotkey:
-			if hovered_interactable.hold_to_interact:
-				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
-				interaction_prompt += "(HOLD) [%s] - " % interact_keybind
-
-				hold_interact_progress.value = hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
-			else:
-				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
-				interaction_prompt += "[%s] - " % interact_keybind
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
+			interaction_prompt += "[%s] - " % interact_keybind
 		interaction_prompt += Global.hovered_interactable.display_name
 		interactable_label.text = interaction_prompt
 
 	else:
 		interactable_indicator.hide()
-
-	hold_interact_progress.visible = (
-			hovered_interactable != null
-			and hovered_interactable.time_held > 0
-	)
 
 
 func update_exploding_bomb_ui() -> void:

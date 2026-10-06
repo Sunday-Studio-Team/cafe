@@ -219,15 +219,6 @@ func handle_hovered_interactable() -> void:
 		):
 			Global.hovered_interactable = null
 
-	# if we're currently holding interact on something, dont do anything
-	# (so we can look around while we hold)
-	if (
-			hovered_interactable != null and hovered_interactable.hold_to_interact
-			and Input.is_action_pressed("interact")
-	):
-		holding_interactable = true
-		return
-
 	var collider: Object = aiming_ray.get_collider()
 	if collider is Interactable and collider.visible:
 		Global.hovered_interactable = collider
