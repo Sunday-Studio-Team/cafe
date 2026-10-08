@@ -524,6 +524,7 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 			await Global.voice_line_system.play_voice_line("voice_line_day_3_intro_7", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await Global.voice_line_system.play_voice_line("voice_line_day_3_intro_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
+			_tutorial_manager._cinematic_camera.play_animation("day_3_intro_9_0")
 			await Global.voice_line_system.play_voice_line("voice_line_day_3_intro_9", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await Global.voice_line_system.play_voice_line("voice_line_day_3_intro_10", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await Global.voice_line_system.play_voice_line("voice_line_day_3_intro_11", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)

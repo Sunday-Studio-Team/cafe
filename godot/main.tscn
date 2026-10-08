@@ -1161,6 +1161,24 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
 
+[sub_resource type="Animation" id="Animation_k4n35"]
+resource_name = "day_3_intro_9_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 2.1482844, 1.8187075, 0.4696052)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.025480175, 0.9620265, 0.096484184, 0.25405815)
+
 [sub_resource type="Animation" id="Animation_t4ssb"]
 resource_name = "day_3_training_0_0"
 length = 2.0
@@ -1307,6 +1325,7 @@ _data = {
 &"day_3_intro_13_0": SubResource("Animation_iu23i"),
 &"day_3_intro_4_0": SubResource("Animation_sxhyu"),
 &"day_3_intro_7_0": SubResource("Animation_gk3yn"),
+&"day_3_intro_9_0": SubResource("Animation_k4n35"),
 &"day_3_training_0_0": SubResource("Animation_t4ssb"),
 &"day_3_training_12_0": SubResource("Animation_avbtm"),
 &"day_3_training_13_0": SubResource("Animation_s11hv"),
@@ -2283,7 +2302,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.21365716, -0.08861389, 0.9728802, 2.2351713e-08, 0.99587584, 0.09070851, -0.9769074, -0.019380517, 0.21277638, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(-0.8696092, -0.09805033, 0.48390436, -2.2351713e-08, 0.9800815, 0.19858755, -0.49373803, 0.17269368, -0.8522894, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
