@@ -23,6 +23,8 @@ enum TutorialPartEnum {
 	DAY_3_0,
 	DAY_3_1,
 	DAY_3_2,
+	DAY_4_0,
+	DAY_4_1,
 }
 
 var finished_tutorial_part: bool = false
@@ -599,6 +601,91 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 			_tutorial_manager._cinematic_camera.cinematic_bars.hide_vignette(1.0)
 			await _tutorial_manager._cinematic_camera.disable_cinematic_camera(1.0)
 			_tutorial_manager._player_ui_sub_viewport_container.set_allow_input(true)
+		TutorialPartEnum.DAY_4_0:
+			_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+			_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+			_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.0)
+			_tutorial_manager._cinematic_camera.cinematic_bars.show_bars(0.0)
+
+			await _tutorial_manager._cinematic_camera.play_animation("day_4_intro_0_0")
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_0", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_2", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			_tutorial_manager._cinematic_camera.play_animation("day_4_intro_3_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_3", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_4", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
+			_tutorial_manager._cinematic_camera.play_animation("day_4_intro_5_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_5", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_6", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_7", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			_tutorial_manager._cinematic_camera.play_animation("day_4_intro_8_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_8", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_9", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_10", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
+			_tutorial_manager._cinematic_camera.play_animation("day_4_intro_11_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_11", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_intro_12", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			await _tutorial_manager._cinematic_camera.play_animation("day_4_intro_12_0")
+			await _tutorial_manager._cinematic_camera.play_animation("day_4_training_0_0")
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_0", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_1", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			_tutorial_manager._cinematic_camera.play_animation("day_4_training_2_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_2", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_3", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_4", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_5", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_6", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			Global.player.override_position_rotation(_tutorial_manager._day_4_sato_at_trash_position.global_position, _tutorial_manager._day_4_sato_at_trash_position.global_rotation)
+			_tutorial_manager._cinematic_camera.play_animation("day_4_training_7_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_7", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
+			Global.main_scene.spawn_trash()
+			await get_tree().create_timer(1.0).timeout
+
+			await _tutorial_manager._cinematic_camera.play_animation("day_4_training_8_0")
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_8", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_9", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			if true:
+				var tween: Tween = create_tween()
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 1.5)
+				tween.set_parallel()
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 1.5)
+			_tutorial_manager._cinematic_camera.cinematic_bars.hide_bars(1.5)
+			await _tutorial_manager._cinematic_camera.disable_cinematic_camera(1.5)
+		TutorialPartEnum.DAY_4_1:
+			_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+			_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+			_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
+			_tutorial_manager._cinematic_camera.cinematic_bars.show_bars(0.5)
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_10", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			if true:
+				var tween: Tween = create_tween()
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_position", _tutorial_manager._day_4_camera_at_trash_can_position.global_position, 2.0)
+				tween.set_parallel()
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_rotation", _tutorial_manager._day_4_camera_at_trash_can_position.global_rotation, 2.0)
+				await tween.finished
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_11", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			if true:
+				var tween: Tween = create_tween()
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 1.5)
+				tween.set_parallel()
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 1.5)
+			_tutorial_manager._cinematic_camera.cinematic_bars.hide_bars(1.5)
+			await _tutorial_manager._cinematic_camera.disable_cinematic_camera(1.5)
 		_:
 			printerr("run_tutorial_part(): Unknown TutorialPartEnum.")
 
@@ -662,7 +749,12 @@ func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 				Global.main_scene.tutorial_machine.spill()
 		TutorialPartEnum.DAY_3_2:
 			pass
-		
+		TutorialPartEnum.DAY_4_0:
+			Global.player.override_position_rotation(_tutorial_manager._day_4_sato_at_trash_position.global_position, _tutorial_manager._day_4_sato_at_trash_position.global_rotation)
+			if Global.total_trash == 0:
+				Global.main_scene.spawn_trash()
+		TutorialPartEnum.DAY_4_1:
+			pass
 		_:
 			printerr("skip_tutorial_part(): Unknown TutorialPartEnum.")
 

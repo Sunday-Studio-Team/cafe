@@ -30,6 +30,8 @@ extends Node
 @export var _day_2_sato_at_broken_machine_position: Node3D
 @export var _day_3_sato_at_camera_position: Node3D
 @export var _day_3_sato_at_machine_spill_position: Node3D
+@export var _day_4_sato_at_trash_position: Node3D
+@export var _day_4_camera_at_trash_can_position: Node3D
 
 var is_in_skippable_cinematic: bool = false
 var skip_part_requested: bool = false
@@ -494,7 +496,50 @@ func start_day() -> void:
 			await get_tree().create_timer(0.5).timeout
 
 		elif Global.day == 4:
-			pass
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_4_0)
+
+			# Repeat the lines until trash is picked up.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_4_training_9_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_4_trash_picked_up = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_4_trash_picked_up
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_4_1)
+
+			# Repeat the lines until trash is thrown away.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_4_training_11_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_4_trash_thrown_away = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_4_trash_thrown_away
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_12", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_13", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_14", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_15", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_16", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_17", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			await get_tree().create_timer(0.5).timeout
+			
 		elif Global.day == 5:
 			pass
 
