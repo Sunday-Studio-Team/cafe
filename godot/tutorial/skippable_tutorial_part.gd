@@ -544,10 +544,14 @@ func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 			_tutorial_manager._player_ui_sub_viewport_container.set_allow_input(true)
 		TutorialPartEnum.DAY_2_4:
 			Global.player.override_position_rotation(_tutorial_manager._day_2_sato_at_broken_machine_position.global_position, _tutorial_manager._day_2_sato_at_broken_machine_position.global_rotation)
+			if not Global.main_scene.tutorial_machine.broken_down:
+				Global.main_scene.tutorial_machine.break_down("Colors")
 		TutorialPartEnum.DAY_2_5:
 			_tutorial_manager._player_ui_sub_viewport_container.set_allow_input(true)
 		TutorialPartEnum.DAY_2_6:
 			Global.player.override_position_rotation(_tutorial_manager._day_2_sato_at_broken_machine_position.global_position, _tutorial_manager._day_2_sato_at_broken_machine_position.global_rotation)
+			if not Global.main_scene.tutorial_machine.broken_down:
+				Global.main_scene.tutorial_machine.break_down("Arrows")
 		TutorialPartEnum.DAY_2_7:
 			_tutorial_manager._player_ui_sub_viewport_container.set_allow_input(true)
 		_:
