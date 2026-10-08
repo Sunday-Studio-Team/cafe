@@ -20,7 +20,6 @@ const STRIDE_LENGTH := 1.25
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var customer_trash_scene: PackedScene
-@export var sprint_lockout_timer: Timer
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
@@ -40,6 +39,7 @@ var mouse_sens := 0.1
 # vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
+
 var holding_interactable: bool = false
 var has_xl_bag_item: bool = false
 
@@ -101,10 +101,6 @@ func _ready() -> void:
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
 
-	Global.stamina = Stats.current.max_stamina
-	Global.sprint_lockout_timer = sprint_lockout_timer
-	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
-
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
@@ -120,7 +116,6 @@ func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
 
 	handle_hovered_interactable()
-	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
 
@@ -190,7 +185,7 @@ func handle_movement(delta: float) -> void:
 	var move_dir_3d := transform.basis * input_dir_3d
 
 	# get current velocity without Y so we dont do anything that messes with any gravity
-	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
+	var horizontal_velocity: Vector3 = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
 		horizontal_velocity = horizontal_velocity.move_toward(
@@ -215,7 +210,6 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
-		#print(hovered_interactable)
 		if camera == null:
 			return
 
@@ -226,16 +220,7 @@ func handle_hovered_interactable() -> void:
 		):
 			Global.hovered_interactable = null
 
-	# if we're currently holding interact on something, dont do anything
-	# (so we can look around while we hold)
-	if (
-			hovered_interactable != null and hovered_interactable.hold_to_interact
-			and Input.is_action_pressed("interact")
-	):
-		holding_interactable = true
-		return
-
-	var collider = aiming_ray.get_collider()
+	var collider: Object = aiming_ray.get_collider()
 	if collider is Interactable and collider.visible:
 		Global.hovered_interactable = collider
 	else:
@@ -245,15 +230,7 @@ func handle_hovered_interactable() -> void:
 		Global.hovered_interactable = null
 
 
-func handle_inspected_shelf_item() -> void:
-	var collider = aiming_ray.get_collider()
-	if collider is ShelfItem:
-		Global.inspected_shelf_item = collider
-	else:
-		Global.inspected_shelf_item = null
-
-
-func handle_sprint(delta: float) -> void:
+func handle_sprint(_delta: float) -> void:
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "roller_skates":
@@ -262,30 +239,14 @@ func handle_sprint(delta: float) -> void:
 
 	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		_is_sprinting = true
-		if get_last_motion().length() > 0:
-			if sprint_lockout_timer.is_stopped():
-				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
-		else:
-			Global.stamina += Stats.current.stamina_regen_rate * delta
-
-		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
-			_is_sprinting = true
-			_current_move_speed = _sprint_move_speed
-		else:
-			_is_sprinting = false
-			_current_move_speed = _walk_move_speed
-			Global.stamina += Stats.current.stamina_regen_rate * delta
+		_current_move_speed = _sprint_move_speed
 	else:
 		_is_sprinting = false
 		_current_move_speed = _walk_move_speed
-		Global.stamina += Stats.current.stamina_regen_rate * delta
-
-	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
-		sprint_lockout_timer.start()
 
 
 func handle_footstep_sounds() -> void:
-	# idk why but the footstep sounds spam if when we fastfoward in cutscenes
+	# idk why but the footstep sounds spam if when we fast forward in cutscenes
 	# etc without this
 	if Engine.time_scale != 1:
 		return

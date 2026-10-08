@@ -63,3 +63,5 @@ func play_feedback() -> void:
 		recover_duration
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	Events.alert_posted.emit("+%s⭐ Trash cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
+
+	Global.tutorial_day_4_trash_thrown_away = true

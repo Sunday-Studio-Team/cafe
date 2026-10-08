@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://c4f6srfjqwpsp" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks.gd" id="2_qjm3i"]
 [ext_resource type="Resource" uid="uid://m3i7yt8fmkcm" path="res://minigames/typing/typing_minigame_content/fill_blanks/typing_minigame_content_fill_blanks_default.tres" id="3_tlcrm"]
 [ext_resource type="PackedScene" uid="uid://cpm8e11dkp7ty" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_typing_section.tscn" id="4_bg8cr"]
-[ext_resource type="PackedScene" uid="uid://cyy22h6m1wrhp" path="res://minigames/typing/typing_minigame_customer_dialog_view.tscn" id="4_tlcrm"]
 [ext_resource type="PackedScene" uid="uid://vidaqp0nyrn3" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks_prefilled_section.tscn" id="5_bg8cr"]
 [ext_resource type="Texture2D" uid="uid://77ox6xlsj8hi" path="res://sprites/typing_minigame/sato_angry.png" id="6_ody48"]
 [ext_resource type="Texture2D" uid="uid://di5dgly8ubu4k" path="res://sprites/typing_minigame/blue_red.png" id="6_x6qrv"]
@@ -23,9 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://b8gubjw7hrq6s" path="res://sprites/typing_minigame/VS.png" id="16_yi8od"]
 [ext_resource type="AudioStream" uid="uid://kj12p2cjxdnu" path="res://audio/typing/key_stroke_fail.mp3" id="17_yi8od"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
-font_size = 48
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7gik8"]
 random_volume_offset_db = 2.0
 streams_count = 1
@@ -34,7 +30,7 @@ stream_0/stream = ExtResource("16_7gik8")
 [sub_resource type="LabelSettings" id="LabelSettings_13qdw"]
 font_size = 32
 
-[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("customer_dialog_view", "instructions_container", "sentence_container", "sato_container", "customer_container", "tippy_group", "dialogue_box", "dialogue_box_texture", "speech_bubble_texture", "vs_container", "correct_sound", "wrong_sound")]
+[node name="TypingMinigameVariantFillBlanks" type="Control" unique_id=1854295577 node_paths=PackedStringArray("instructions_container", "sentence_container", "sato_container", "customer_container", "tippy_group", "dialogue_box", "dialogue_box_texture", "speech_bubble_texture", "vs_container", "correct_sound", "wrong_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,8 +41,7 @@ script = ExtResource("1_bg8cr")
 contents = Array[ExtResource("2_qjm3i")]([ExtResource("3_tlcrm")])
 prefilled_section_packed_scene = ExtResource("5_bg8cr")
 typed_section_packed_scene = ExtResource("4_bg8cr")
-customer_dialog_view = NodePath("VBoxContainer/TypingMinigameCustomerDialogView")
-instructions_container = NodePath("VBoxContainer/InstructionsContainer")
+instructions_container = NodePath("BottomSegment/TippyGroup/TippyInstructionContainer")
 sentence_container = NodePath("BottomSegment/DialogueContainer/TypingSectionContainer/SentenceHFlowContainer")
 sato_expressions = Array[Texture2D]([ExtResource("6_ody48"), ExtResource("7_m3euw"), ExtResource("8_0qatm")])
 speech_bubbles = Array[Texture2D]([ExtResource("12_6u2o6"), ExtResource("10_d1drf"), ExtResource("11_jqlkh")])
@@ -60,34 +55,6 @@ vs_container = NodePath("VSContainer")
 correct_sound = NodePath("CorrectSound")
 wrong_sound = NodePath("WrongSound")
 metadata/_custom_type_script = "uid://dp7wiw2dh25le"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1667575708]
-visible = false
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -696.0
-offset_top = -589.0
-offset_right = 696.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 24
-
-[node name="TypingMinigameCustomerDialogView" parent="VBoxContainer" unique_id=1209190186 instance=ExtResource("4_tlcrm")]
-layout_mode = 2
-
-[node name="InstructionsContainer" type="MarginContainer" parent="VBoxContainer" unique_id=639655740]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/InstructionsContainer" unique_id=943532684]
-layout_mode = 2
-text = "⬇️ TYPE REPLY! ⬇️"
-label_settings = SubResource("LabelSettings_xrivr")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="RedBlueBG" type="TextureRect" parent="." unique_id=1330345404]
 layout_mode = 1

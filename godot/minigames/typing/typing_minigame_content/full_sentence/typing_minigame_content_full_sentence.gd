@@ -1,5 +1,0 @@
-class_name TypingMinigameContentFullSentence
-extends Resource
-
-@export var possible_customer_dialog: Array[String]
-@export var possible_player_replies: Array[String]

@@ -76,6 +76,7 @@ func enter_gui(update_player_reset_position: bool = true) -> void:
 	Global.in_machine_ui = true
 	Global.machine_in_use = machine
 	player_using_me = true
+	node_viewport.notify_mouse_entered()
 
 	if !Global.tutorial_machine_used:
 		Global.tutorial_machine_used = true
@@ -113,6 +114,7 @@ func enter_gui(update_player_reset_position: bool = true) -> void:
 
 
 func exit_without_camera_tween() -> void:
+	node_viewport.notify_mouse_exited()
 	node_area.visible = false
 	player_using_me = false
 
@@ -128,6 +130,7 @@ func exit_without_camera_tween() -> void:
 
 
 func exit_with_camera_tween() -> void:
+	node_viewport.notify_mouse_exited()
 	node_area.visible = false
 	player_using_me = false
 

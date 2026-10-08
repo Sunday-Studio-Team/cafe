@@ -15,7 +15,7 @@ extends Node3D
 @export var _left_area_left_machine: Machine
 @export var _left_area_middle_machine: Machine
 @export var _left_area_right_machine: Machine
-@export var _customer_help_desk: CustomerHelpDesk
+@export var customer_help_desk: CustomerHelpDesk
 @export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var customer_trash_scene: PackedScene
@@ -23,19 +23,9 @@ extends Node3D
 @export var customer_leaving_spot: Marker3D
 @export var game_timer: Timer
 @export var ui: CanvasLayer
-@export var day_indicator: Label
-@export var desk: Desk
-@export var overtime_item: Item
 @export var _trash_can: TrashCan
 #Active Items
-@export var clock_item_stop_sound: AudioStreamPlayer
-@export var clock_item_start_sound: AudioStreamPlayer
-@export var teleporter1: Teleporter
-@export var teleporter2: Teleporter
-@export var air_freshener: AirFreshener
-@export var tutorial_selection_menu: TutorialSelectionMenu
 @export var shift_start_sound: AudioStreamPlayer
-@export var cam_spot: Marker3D
 @export var default_trash_spawn_spot: Marker3D
 
 @export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
@@ -48,12 +38,11 @@ var _help_desk_customer_spawn_timer: Timer
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
 
-var seen_tutorial_machine_instructions: bool = false
 var _all_machines: Array[Machine]
 var _active_machines: Array[Machine]
 var _all_security_cameras: Array[SecurityCam3D]
 
-@onready var tutorial_machine: Machine = _right_area_right_machine
+var tutorial_machine: Machine
 
 var should_spawn_trash_today: bool = false
 var closing_time: bool = false
@@ -119,11 +108,10 @@ func _ready() -> void:
 		print("should not play tutorial!")
 
 	set_per_day_stuff()
-	update_teleporters_enabled()
 	Events.items_updated.connect(get_stats)
 
 	# enables props as the days go by
-	# could combine the loops to one loop but am not sure if all props will have equivaent
+	# could combine the loops to one loop but am not sure if all props will have equivalent
 	# number of day props
 	for i in range(day_containers_desk.size()):
 		if day_containers_desk[i] != null:
@@ -144,7 +132,7 @@ func _ready() -> void:
 		if day_containers_posters[i] != null:
 			day_containers_posters[i].visible = (i <= Global.day)
 
-	# we have to set all these manually here so if we reload the scene theyll reset
+	# we have to set all these manually here so if we reload the scene they'll reset
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -160,7 +148,6 @@ func _ready() -> void:
 	Global.all_3d_audio_stream_players.clear()
 	Global.refresh_active_items()
 	closing_time = false
-	_trash_can.visible = false
 
 	get_stats()
 
@@ -191,43 +178,6 @@ func get_stats() -> void:
 	Global.shift_length = shift_length
 	game_timer.wait_time = shift_length
 
-	update_teleporters_enabled()
-	update_air_fresheners_enabled()
-
-
-func update_teleporters_enabled() -> void:
-	var has_teleporter: bool = false
-	var has_teleporter_level_2: bool = false
-	for item in Global.owned_items:
-		if item.item_id == "teleporter":
-			has_teleporter = true
-			if item.item_level == 2:
-				has_teleporter_level_2 = true
-			break
-	if has_teleporter:
-		teleporter1.disable_teleporter()
-		teleporter2.enable_teleporter()
-		if has_teleporter_level_2:
-			pass
-		else:
-			pass
-	else:
-		teleporter1.disable_teleporter()
-		teleporter2.disable_teleporter()
-
-
-func update_air_fresheners_enabled() -> void:
-	var air_freshener_item: Item = null
-	for owned_item in Global.owned_items:
-		if owned_item.item_id == "air_freshener":
-			air_freshener_item = owned_item
-			break
-
-	if air_freshener_item != null:
-		air_freshener.enable_air_freshener()
-	else:
-		air_freshener.disable_air_freshener()
-
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
@@ -244,6 +194,7 @@ func set_per_day_stuff() -> void:
 	if Global.day == 1:
 		if Global.playing_tutorial:
 			_active_machines.clear()
+			tutorial_machine = _right_area_right_machine
 			_active_machines.push_back(tutorial_machine)
 			_set_day_security_cameras_active([])
 		else:
@@ -251,29 +202,54 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_left_machine)
 			_active_machines.push_back(_right_area_right_machine)
 			_set_day_security_cameras_active([])
+		_trash_can.visible = false
 
 	if Global.day == 2:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_left_area_left_machine)
-		_set_day_security_cameras_active([])
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			tutorial_machine = _left_area_right_machine
+			_active_machines.push_back(tutorial_machine)
+			_set_day_security_cameras_active([])
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_left_area_left_machine)
+			_set_day_security_cameras_active([])
+		_trash_can.visible = false
 
 	if Global.day == 3:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_middle_camera])
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			tutorial_machine = _right_area_right_machine
+			_active_machines.push_back(tutorial_machine)
+			_set_day_security_cameras_active([_middle_camera])
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_middle_camera])
+		_trash_can.visible = false
 
 	if Global.day == 4:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_left_machine)
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
-		should_spawn_trash_today = true
-		_trash_can.visible = true
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+			should_spawn_trash_today = false
+			_trash_can.visible = true
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+			should_spawn_trash_today = true
+			_trash_can.visible = true
 
 	if Global.day == 5:
 		_active_machines.clear()
@@ -383,7 +359,7 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 
 
 func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
-	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
+	if customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
 
 	# NOTE: NOTE SURE WHAT THIS IS DOING
@@ -401,7 +377,7 @@ func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> voi
 	if sprite_resource:
 		new_customer.customer_sprite_resource = sprite_resource
 		Console.print_line("spawned %s at help desk" % sprite_resource.customer_name)
-	_customer_help_desk.add_customer_to_queue(new_customer)
+	customer_help_desk.add_customer_to_queue(new_customer)
 
 
 func apply_used_air_freshener(customer_wait_duration_extension: float) -> void:
@@ -530,8 +506,6 @@ func _on_shift_started():
 				has_scrubber = true
 				break
 		DraggableMop.used_scrubber = has_scrubber
-
-		desk.interactable.visible = false
 
 
 func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:

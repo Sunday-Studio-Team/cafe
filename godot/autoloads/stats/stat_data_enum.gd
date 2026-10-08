@@ -19,14 +19,9 @@ machine_starting_ingredients,\
 machine_max_ingredients,\
 ingredients_per_order,\
 ingredients_per_bag,\
-cost_to_reroll,\
 max_spills_per_shift_each_day,\
 max_breakdowns_per_shift_each_day,\
 clean_spill_allowed_remaining,\
-max_stamina,\
-sprint_stamina_drain_rate,\
-stamina_regen_rate,\
-sprint_lockout_time,\
 shift_lengths_for_each_day,\
 max_customers_queued_per_machine,\
 max_customers_queued_help_desk,\
@@ -34,6 +29,7 @@ first_machine_customer_entry_time,\
 first_help_desk_customer_entry_time,\
 machine_customer_flow_rate_at_rating_curve_per_day,\
 help_desk_customer_flow_rate_at_rating_curve_per_day,\
+chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day,\
 remade_drink_star_rating_gain_for_incorrect_main_each_day,\
 remade_drink_star_rating_gain_for_incorrect_liquid_each_day,\
 remade_drink_star_rating_gain_for_incorrect_extra_each_day,\

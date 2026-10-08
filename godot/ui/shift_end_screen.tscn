@@ -36,8 +36,11 @@
 [ext_resource type="Texture2D" uid="uid://bkxoc78jul3kj" path="res://sprites/endshift_ui/first_part/cash_bg.png" id="24_nxyg6"]
 [ext_resource type="Texture2D" uid="uid://b5w1mhqlhgjla" path="res://sprites/endshift_ui/first_part/cash_mg.png" id="25_agvtq"]
 [ext_resource type="Texture2D" uid="uid://2rm8v77lejbi" path="res://sprites/endshift_ui/second_part/stars_fill.png" id="25_yx15a"]
+[ext_resource type="Texture2D" uid="uid://cqcijvr08pamv" path="res://sprites/endshift_ui/first_part/cash_mg_top.png" id="26_t2tbe"]
 [ext_resource type="Texture2D" uid="uid://cneiyweuvc4qx" path="res://sprites/endshift_ui/first_part/cash_fg.png" id="26_vob8y"]
-[ext_resource type="Texture2D" uid="uid://dh28wnrabd0ej" path="res://sprites/endshift_ui/second_part/timesup_dark.png" id="32_agvtq"]
+[ext_resource type="Texture2D" uid="uid://57i6fdmbkgm6" path="res://sprites/endshift_ui/first_part/cash_fg_top.png" id="28_fg821"]
+[ext_resource type="Texture2D" uid="uid://dh28wnrabd0ej" path="res://sprites/endshift_ui/times_up/timesup_dark.png" id="32_agvtq"]
+[ext_resource type="Texture2D" uid="uid://4pbwksuurvdc" path="res://sprites/endshift_ui/times_up/tippy_times_up.png" id="32_u65n0"]
 [ext_resource type="Script" uid="uid://cqh54jh0eacu1" path="res://ui/shift_end_times_up_text.gd" id="33_vob8y"]
 [ext_resource type="AudioStream" uid="uid://bjcp3lc6wo35x" path="res://audio/music/shift_end_win_music.mp3" id="35_bxlob"]
 [ext_resource type="Texture2D" uid="uid://3c7d3djl034d" path="res://sprites/endshift_ui/second_part/restart_up.png" id="35_c1exd"]
@@ -994,7 +997,7 @@ tracks/13/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1.6245054, 2.9281707, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1080), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -1200), Vector2(0, 0)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -1054,7 +1057,7 @@ tracks/18/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1.6245054, 2.9281707, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1080), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -1200), Vector2(0, 0)]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
@@ -1066,7 +1069,7 @@ tracks/19/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1.6245054, 2.9281707, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -1080), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, -1200), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_5chdg"]
@@ -1209,7 +1212,7 @@ _data = {
 &"restart_button_arrive": SubResource("Animation_c1exd")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "lock")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "lock")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -1238,6 +1241,7 @@ star_bar = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContai
 restart_button = NodePath("MarginContainer/RestartButton")
 end_shift_button = NodePath("MarginContainer/EndShiftButton")
 times_up = NodePath("TimesUp")
+tippy_times_up = NodePath("TippyTimesUp")
 lock = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/Lock")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
@@ -1615,8 +1619,8 @@ texture = ExtResource("11_iqeri")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1080.0
-offset_bottom = 1080.0
+offset_top = 1200.0
+offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
@@ -1627,33 +1631,72 @@ stretch_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1080.0
-offset_bottom = 1080.0
+offset_top = 1200.0
+offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 texture = ExtResource("25_agvtq")
 stretch_mode = 1
 
+[node name="CashWallMGTop" type="TextureRect" parent="CashWallMG" unique_id=803735641]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -108.0
+offset_bottom = -565.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("26_t2tbe")
+stretch_mode = 1
+
 [node name="CashWall" type="TextureRect" parent="." unique_id=1263136227]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1080.0
-offset_bottom = 1080.0
+offset_top = 1200.0
+offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 texture = ExtResource("26_vob8y")
 stretch_mode = 1
 
+[node name="CashWallTop" type="TextureRect" parent="CashWall" unique_id=1565840180]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+offset_bottom = -567.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_fg821")
+stretch_mode = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1571156116]
 libraries/ = SubResource("AnimationLibrary_qc8dq")
+
+[node name="TippyTimesUp" type="TextureRect" parent="." unique_id=1038910996]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("32_u65n0")
+stretch_mode = 3
 
 [node name="TimesUp" type="TextureRect" parent="." unique_id=431134916]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 140.0
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
@@ -1689,12 +1732,11 @@ volume_db = -5.0
 [node name="WinMusic" type="AudioStreamPlayer" parent="." unique_id=638685281]
 stream = ExtResource("35_bxlob")
 volume_db = -10.0
-bus = &"DiegeticMusic"
+bus = &"NonDiegeticMusic"
 
 [node name="LoseMusic" type="AudioStreamPlayer" parent="." unique_id=1563178062]
 stream = ExtResource("36_q60pi")
-volume_db = -5.0
-bus = &"DiegeticMusic"
+bus = &"NonDiegeticMusic"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1431337349]
 anchors_preset = 15

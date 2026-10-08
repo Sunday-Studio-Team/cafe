@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://ck8as0fvlncab"]
+
+[ext_resource type="AudioStream" uid="uid://df3bkapws23l1" path="res://audio/vo/tutorials/day_3/voice_line_day_3_training_19.wav" id="1_0lmlt"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_mova7"]
+[ext_resource type="Resource" uid="uid://dd2hcvj06k33a" path="res://voice_lines/resources/speakers/voice_line_speaker_sato.tres" id="3_usr2j"]
+
+[resource]
+script = ExtResource("2_mova7")
+voice_line_id = "voice_line_day_3_training_19"
+audio_stream = ExtResource("1_0lmlt")
+speaker = ExtResource("3_usr2j")
+subtitle_en = "Do it over and over til it’s clean."
