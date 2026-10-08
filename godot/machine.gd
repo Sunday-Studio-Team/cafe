@@ -728,6 +728,7 @@ func clean_up_spill() -> void:
 	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gained
 
+	Global.tutorial_day_3_spill_cleaned = true
 
 func refill() -> void:
 	Global.holding_ingredients = false
@@ -950,6 +951,8 @@ func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
 	Events.minigame_end.connect(clean_up_spill)
 	Events.minigame_cancelled.connect(cancel_clean_spill)
+	
+	Global.tutorial_day_3_spill_interacted = true
 
 
 func _on_fix_machine_button_pressed() -> void:

@@ -28,6 +28,8 @@ extends Node
 @export var _day_2_sato_at_locker_position: Node3D
 @export var _day_2_sato_at_help_desk_position: Node3D
 @export var _day_2_sato_at_broken_machine_position: Node3D
+@export var _day_3_sato_at_camera_position: Node3D
+@export var _day_3_sato_at_machine_spill_position: Node3D
 
 var is_in_skippable_cinematic: bool = false
 var skip_part_requested: bool = false
@@ -426,7 +428,71 @@ func start_day() -> void:
 			await get_tree().create_timer(0.5).timeout
 			
 		elif Global.day == 3:
-			pass
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_0)
+
+			# Repeat the lines until camera stuns the player.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_3_training_6_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_3_camera_stunned_player = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_3_camera_stunned_player
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_3_training_10", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_3_training_11", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_1)
+
+			# Repeat the lines until the spill is interacted with.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_3_training_15_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_3_spill_interacted = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_3_spill_interacted
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_2)
+
+			# Repeat the lines until the spill is cleaned.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_3_training_19_repeat_0",
+					"voice_line_day_3_training_19_repeat_1",
+					"voice_line_day_3_training_19_repeat_2",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_3_spill_cleaned = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_3_spill_cleaned
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_3_training_20", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_3_training_21", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_3_training_22", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			await get_tree().create_timer(0.5).timeout
+
 		elif Global.day == 4:
 			pass
 		elif Global.day == 5:

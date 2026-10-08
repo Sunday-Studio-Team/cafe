@@ -97,6 +97,7 @@ func _physics_process(_delta: float) -> void:
 						grace_timer.start()
 						Events.alert_posted.emit("Caught running!", UI.AlertIconType.RULE_BREAK)
 						apply_slow = true
+						Global.tutorial_day_3_camera_stunned_player = true
 					elif Global.making_drink_manually:
 						grace_timer.start()
 						Events.alert_posted.emit(

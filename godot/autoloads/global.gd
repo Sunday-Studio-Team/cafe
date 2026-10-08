@@ -146,6 +146,9 @@ var tutorial_day_2_help_desk_interacted: bool = false
 var tutorial_day_2_help_desk_finished: bool = false
 var tutorial_day_2_broken_machine_interacted: bool = false
 var tutorial_day_2_broken_machine_fixed: bool = false
+var tutorial_day_3_camera_stunned_player: bool = false
+var tutorial_day_3_spill_interacted: bool = false
+var tutorial_day_3_spill_cleaned: bool = false
 var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
