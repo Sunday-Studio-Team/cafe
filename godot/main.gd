@@ -136,7 +136,7 @@ func _ready() -> void:
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
-	Global.employee_rating = 0
+	Global.employee_rating = 2
 	Global.spills_this_shift = 0
 	Global.breakdowns_this_shift = 0
 	Global.in_machine_ui = false

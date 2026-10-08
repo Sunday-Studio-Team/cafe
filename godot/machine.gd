@@ -536,8 +536,8 @@ func machine_make_drink() -> void:
 		order.main_correct = false
 		test_1 += 1
 		print("%s Main Star Gain Count: %d" % [self.name, test_1])
-		order.star_rating_gain_for_remake += (
-			Stats.current.remade_drink_star_rating_gain_for_incorrect_main_each_day[Global.day]
+		order.star_rating_loss_for_accept += (
+			Stats.current.remade_drink_star_rating_loss_for_incorrect_main_each_day[Global.day]
 		)
 	if order.ordered_drink.liquid == order.made_drink.liquid:
 		order.liquid_correct = true
@@ -545,8 +545,8 @@ func machine_make_drink() -> void:
 		order.liquid_correct = false
 		test_2 += 1
 		print("%s Liquid Star Gain Count: %d" % [self.name, test_2])
-		order.star_rating_gain_for_remake += (
-			Stats.current.remade_drink_star_rating_gain_for_incorrect_liquid_each_day[Global.day]
+		order.star_rating_loss_for_accept += (
+			Stats.current.remade_drink_star_rating_loss_for_incorrect_liquid_each_day[Global.day]
 		)
 	if order.ordered_drink.extra == order.made_drink.extra:
 		order.extra_correct = true
@@ -554,8 +554,8 @@ func machine_make_drink() -> void:
 		order.extra_correct = false
 		test_3 += 1
 		print("%s Extra Star Gain Count: %d" % [self.name, test_3])
-		order.star_rating_gain_for_remake += (
-			Stats.current.remade_drink_star_rating_gain_for_incorrect_extra_each_day[Global.day]
+		order.star_rating_loss_for_accept += (
+			Stats.current.remade_drink_star_rating_loss_for_incorrect_extra_each_day[Global.day]
 		)
 	if order.main_correct and order.liquid_correct and order.extra_correct:
 		equal_sign.texture = equal_sign_states[EqualStates.Correct]
@@ -564,12 +564,11 @@ func machine_make_drink() -> void:
 	# Calculate scaled price
 	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
 
+	order.star_rating_gain_for_remake = Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
 	# Calculate star rating loss if accepted
-	if order.star_rating_gain_for_remake == 0.0:
-		order.star_rating_loss_if_accept = 0.0
-	else:
-		order.star_rating_loss_if_accept = maxf(0.1, snappedf(
-			order.star_rating_gain_for_remake * Stats.current.accept_incorrect_drink_star_rating_multiplier,
+	if order.star_rating_loss_for_accept != 0.0:
+		order.star_rating_loss_for_accept = maxf(0.1, snappedf(
+			order.star_rating_loss_for_accept * Stats.current.accept_incorrect_drink_star_rating_multiplier,
 			Stats.current.accept_incorrect_drink_star_rating_rounding))
 
 	display_drink_score()
@@ -656,14 +655,14 @@ func display_drink_score() -> void:
 	remake_money_arrow.texture = arrows[Arrow.UP1]
 	remake_money_icon.texture = icons[Icon.MONEY_GREEN]
 
-	if order.star_rating_gain_for_remake > 0.0:
+	if order.star_rating_loss_for_accept > 0.0:
 		remake_money_arrow.texture = arrows[Arrow.UP1]
 		remake_rating_arrow.texture = arrows[Arrow.UP2]
 		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
-	elif order.star_rating_gain_for_remake == 0.0:
+	elif order.star_rating_loss_for_accept == 0.0:
 		remake_rating_arrow.texture = arrows[Arrow.NEUTRAL]
 		remake_rating_icon.texture = icons[Icon.PERSON_YELLOW]
-	if order.star_rating_loss_if_accept > 0.0:
+	if order.star_rating_loss_for_accept > 0.0:
 		accept_rating_icon.texture = icons[Icon.PERSON_RED]
 		match wrong_count:
 			1:
@@ -672,7 +671,7 @@ func display_drink_score() -> void:
 				accept_rating_arrow.texture = arrows[Arrow.DOWN2]
 			3:
 				accept_rating_arrow.texture = arrows[Arrow.DOWN3]
-	elif order.star_rating_loss_if_accept == 0.0:
+	elif order.star_rating_loss_for_accept == 0.0:
 		accept_rating_arrow.texture = arrows[Arrow.NEUTRAL]
 		accept_rating_icon.texture = icons[Icon.PERSON_YELLOW]
 
@@ -807,26 +806,24 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	var rating_before_update: float = Global.employee_rating
 
-	if did_remake_drink:
-		if order.star_rating_gain_for_remake > 0.0:
-			Events.alert_posted.emit(
-				"+%.1f Customer happy with drink!" % order.star_rating_gain_for_remake,
-				UI.AlertIconType.RATING,
-				4.0,
-				UI.ALERT_COLOR_GREEN
-			)
-			Global.employee_rating += order.star_rating_gain_for_remake
-			rating_vfx.play_anim_then_hide("plus_rating")
+	if did_remake_drink or order.star_rating_loss_for_accept == 0.0:
+		Events.alert_posted.emit(
+			"+%.1f Customer happy with drink!" % order.star_rating_gain_for_remake,
+			UI.AlertIconType.RATING,
+			4.0,
+			UI.ALERT_COLOR_GREEN
+		)
+		Global.employee_rating += order.star_rating_gain_for_remake
+		rating_vfx.play_anim_then_hide("plus_rating")
 	else:
-		if order.star_rating_loss_if_accept > 0.0:
-			Events.alert_posted.emit(
-				"-%.1f Customer unhappy with drink..." % order.star_rating_loss_if_accept,
-				UI.AlertIconType.RATING,
-				4.0,
-				UI.ALERT_COLOR_RED
-			)
-			Global.employee_rating -= order.star_rating_loss_if_accept
-			rating_vfx.play_anim_then_hide("minus_rating")
+		Events.alert_posted.emit(
+			"-%.1f Customer unhappy with drink..." % order.star_rating_loss_for_accept,
+			UI.AlertIconType.RATING,
+			4.0,
+			UI.ALERT_COLOR_RED
+		)
+		Global.employee_rating -= order.star_rating_loss_for_accept
+		rating_vfx.play_anim_then_hide("minus_rating")
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	reset_icons()
@@ -1051,5 +1048,5 @@ class OrderData:
 	var liquid_correct: bool = false
 	var extra_correct: bool = false
 	var star_rating_gain_for_remake: float
-	var star_rating_loss_if_accept: float
+	var star_rating_loss_for_accept: float
 	var final_order_price: float

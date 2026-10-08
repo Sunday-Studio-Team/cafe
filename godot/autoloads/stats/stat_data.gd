@@ -13,9 +13,9 @@ var sprint_move_speed := 5.0
 var player_accel := 25.0
 var player_decel := 25.0
 var chance_of_machine_breaking_at_shift_start_each_day: Dictionary[int, float] = { 1: 0.08, 2: 0.07, 3: 0.06, 4: 0.05, 5: 0.04, 0: 0.0 }
-var chance_of_machine_breaking_at_shift_end_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.31, 3: 0.32, 4: 0.33, 5: 0.33, 0: 0.0 }
+var chance_of_machine_breaking_at_shift_end_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.31, 3: 0.32, 4: 0.32, 5: 0.3, 0: 0.0 }
 var chance_of_machine_spill_at_shift_start_each_day: Dictionary[int, float] = { 1: 0.1, 2: 0.09, 3: 0.08, 4: 0.07, 5: 0.06, 0: 0.0 }
-var chance_of_machine_spill_at_shift_end_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.31, 3: 0.32, 4: 0.33, 5: 0.34, 0: 0.0 }
+var chance_of_machine_spill_at_shift_end_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.31, 3: 0.32, 4: 0.33, 5: 0.32, 0: 0.0 }
 var machine_time_to_make_drink := 4.0
 var customer_wait_time_machine_each_day: Dictionary[int, float] = { 1: 50.0, 2: 45.0, 3: 40.0, 4: 35.0, 5: 30.0, 0: INF }
 var customer_wait_time_help_desk_each_day: Dictionary[int, float] = { 1: 60.0, 2: 50.0, 3: 45.0, 4: 40.0, 5: 35.0, 0: INF }
@@ -26,8 +26,8 @@ var machine_starting_ingredients: int = 50
 var machine_max_ingredients: int = 100
 var ingredients_per_order: int = 10
 var ingredients_per_bag: int = 50
-var max_spills_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 0, 3: 3, 4: 4, 5: 5, 0: 2 }
-var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 3, 3: 4, 4: 5, 5: 6, 0: 3 }
+var max_spills_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 0, 3: 3, 4: 4, 5: 4, 0: 2 }
+var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 3, 3: 4, 4: 5, 5: 5, 0: 3 }
 var clean_spill_allowed_remaining := 0.05
 var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 60, 2: 100, 3: 160, 4: 180, 5: 200, 0: 999 }
 
@@ -40,9 +40,10 @@ var first_help_desk_customer_entry_time: float = 8.0
 @export var machine_customer_flow_rate_at_rating_curve_per_day: Dictionary[int, Curve]
 @export var help_desk_customer_flow_rate_at_rating_curve_per_day: Dictionary[int, Curve]
 @export var chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day: Dictionary[int, Curve]
-var remade_drink_star_rating_gain_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
-var remade_drink_star_rating_gain_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
-var remade_drink_star_rating_gain_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_loss_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_loss_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_loss_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var drink_correct_star_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 0: 1.0 }
 var accept_incorrect_drink_star_rating_multiplier: float = 0.2
 var accept_incorrect_drink_star_rating_rounding: float = 0.1
 var machine_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.15, 2: 0.18, 3: 0.2, 4: 0.25, 5: 0.3, 0: 0.2 }
@@ -72,4 +73,4 @@ var daily_rating_item_unlocks: Dictionary[int, Array] = {
 	5: ["exploding_bomb"],
 }
 
-var item_bonus_rating_threshold: float = 4.5
+var item_bonus_rating_threshold: float = 4.0
