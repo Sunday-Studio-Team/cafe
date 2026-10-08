@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://dlgmqraomek6c"]
+
+[ext_resource type="AudioStream" uid="uid://ce5pnsq2h3etu" path="res://audio/vo/tutorials/day_3/voice_line_day_3_intro_4.wav" id="1_o3vo2"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_g5djg"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_o3vo2"]
+
+[resource]
+script = ExtResource("2_g5djg")
+voice_line_id = "voice_line_day_3_intro_4"
+audio_stream = ExtResource("1_o3vo2")
+speaker = ExtResource("3_o3vo2")
+subtitle_en = "So, I’ve installed a security camera to watch you."
