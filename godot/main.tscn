@@ -498,6 +498,25 @@
 [ext_resource type="Resource" uid="uid://c5bk25vaw8cbe" path="res://voice_lines/resources/tutorials/day_4/voice_line_day_4_training_15.tres" id="436_gncs7"]
 [ext_resource type="Resource" uid="uid://bry3tuyes3ra2" path="res://voice_lines/resources/tutorials/day_4/voice_line_day_4_training_16.tres" id="437_wdxfs"]
 [ext_resource type="Resource" uid="uid://beyaplmcpgsbg" path="res://voice_lines/resources/tutorials/day_4/voice_line_day_4_training_17.tres" id="438_cno1m"]
+[ext_resource type="Resource" uid="uid://cufmnfks5sekf" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_0.tres" id="439_fyan7"]
+[ext_resource type="Resource" uid="uid://cjdwh7fchnpoj" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_1.tres" id="440_xdtur"]
+[ext_resource type="Resource" uid="uid://cy0bgsq8a6nkl" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_2.tres" id="441_d0eyq"]
+[ext_resource type="Resource" uid="uid://cfqkkv0ddikj1" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_3.tres" id="442_l14ib"]
+[ext_resource type="Resource" uid="uid://cmdd5m1gruolk" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_4.tres" id="443_ctxsq"]
+[ext_resource type="Resource" uid="uid://dyinf1if00n68" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_5.tres" id="444_hxd2u"]
+[ext_resource type="Resource" uid="uid://bygdft5bhhhhl" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_6.tres" id="445_dbrv6"]
+[ext_resource type="Resource" uid="uid://cyj3o2beb8ta8" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_intro_7.tres" id="446_e4p22"]
+[ext_resource type="Resource" uid="uid://b6irqh88h8j1t" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_0.tres" id="447_mud2v"]
+[ext_resource type="Resource" uid="uid://dm5wmldj0vlhl" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_1.tres" id="448_wtu2d"]
+[ext_resource type="Resource" uid="uid://mlopkl08mpuv" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_2.tres" id="449_58oct"]
+[ext_resource type="Resource" uid="uid://bpkl8tshia8u1" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_3.tres" id="450_gncs7"]
+[ext_resource type="Resource" uid="uid://cowvtfjf3pe2t" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_4.tres" id="451_wdxfs"]
+[ext_resource type="Resource" uid="uid://vk25qxa2473p" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_5.tres" id="452_cno1m"]
+[ext_resource type="Resource" uid="uid://cd60qy4ye5hbn" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_5_repeat_0.tres" id="453_vhwx0"]
+[ext_resource type="Resource" uid="uid://bcpqnfkcghmpy" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_6.tres" id="454_tbmjv"]
+[ext_resource type="Resource" uid="uid://cdft03nod5e3e" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_7.tres" id="455_u42q1"]
+[ext_resource type="Resource" uid="uid://c48nnjedtrlmr" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_8.tres" id="456_5e1yt"]
+[ext_resource type="Resource" uid="uid://c3nl18awvwhiu" path="res://voice_lines/resources/tutorials/day_5/voice_line_day_5_training_9.tres" id="457_c5cs3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_13qdw"]
 viewport_path = NodePath("Player/CameraController/Camera3D/HoldingItemsSubViewport")
@@ -1516,6 +1535,204 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.0025499612, 0.15139017, -0.00039054203, 0.9884702, 1, 1, -0.26348162, 0.1933416, 0.053989876, 0.9435468)
 
+[sub_resource type="Animation" id="Animation_fyan7"]
+resource_name = "day_5_intro_0_0"
+length = 3.0000000000000004
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.3862169, 1.5494294, 15.052617)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.1, 2.5)
+}
+
+[sub_resource type="Animation" id="Animation_xdtur"]
+resource_name = "day_5_intro_2_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -9.318683, 0.93277967, 4.577813)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.002067732, 0.99113244, -0.015531983, -0.13194677)
+
+[sub_resource type="Animation" id="Animation_d0eyq"]
+resource_name = "day_5_intro_4_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -9.318683, 0.93277967, 4.577813, 1, 1, -7.0418587, 1.5025852, 3.6100926)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.002067732, 0.99113244, -0.015531983, -0.13194677, 1, 1, -0.043308157, 0.63786834, 0.035965994, 0.7680844)
+
+[sub_resource type="Animation" id="Animation_l14ib"]
+resource_name = "day_5_intro_6_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.3862169, 1.5494294, 15.052617)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
+
+[sub_resource type="Animation" id="Animation_ctxsq"]
+resource_name = "day_5_intro_7_0"
+length = 2.0
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.3862169, 1.5494294, 15.052617)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.29999995, 2)
+}
+
+[sub_resource type="Animation" id="Animation_hxd2u"]
+resource_name = "day_5_training_0_0"
+length = 2.0
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.3862169, 1.5494294, 15.052617)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.5)
+}
+
+[sub_resource type="Animation" id="Animation_e4p22"]
+resource_name = "day_5_training_3_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -9.318683, 0.93277967, 4.577813)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.002067732, 0.99113244, -0.015531983, -0.13194677)
+
+[sub_resource type="Animation" id="Animation_mud2v"]
+resource_name = "day_5_training_4_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -9.318683, 0.93277967, 4.577813, 1, 1, -7.0418587, 1.5025852, 3.6100926)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.002067732, 0.99113244, -0.015531983, -0.13194677, 1, 1, -0.043308157, 0.63786834, 0.035965994, 0.7680844)
+
+[sub_resource type="Animation" id="Animation_dbrv6"]
+resource_name = "day_5_training_7_0"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 1.3862169, 1.5494294, 15.052617)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
+
 [sub_resource type="Animation" id="Animation_skfll"]
 resource_name = "skip_cutscene_fade_to_black"
 length = 0.3
@@ -1592,6 +1809,15 @@ _data = {
 &"day_4_training_2_0": SubResource("Animation_lsr6y"),
 &"day_4_training_7_0": SubResource("Animation_ovfx3"),
 &"day_4_training_8_0": SubResource("Animation_xlq0g"),
+&"day_5_intro_0_0": SubResource("Animation_fyan7"),
+&"day_5_intro_2_0": SubResource("Animation_xdtur"),
+&"day_5_intro_4_0": SubResource("Animation_d0eyq"),
+&"day_5_intro_6_0": SubResource("Animation_l14ib"),
+&"day_5_intro_7_0": SubResource("Animation_ctxsq"),
+&"day_5_training_0_0": SubResource("Animation_hxd2u"),
+&"day_5_training_3_0": SubResource("Animation_e4p22"),
+&"day_5_training_4_0": SubResource("Animation_mud2v"),
+&"day_5_training_7_0": SubResource("Animation_dbrv6"),
 &"skip_cutscene_fade_to_black": SubResource("Animation_skfll"),
 &"skip_cutscene_fade_to_view": SubResource("Animation_l0ugm")
 }
@@ -1709,7 +1935,7 @@ metadata/_custom_type_script = "uid://nv13jp083x1b"
 
 [node name="VoiceLineSystem" type="Node" parent="." unique_id=899965127 node_paths=PackedStringArray("_cinematic_camera_voice_line_player", "_around_cafe_voice_line_players")]
 script = ExtResource("118_1slqb")
-_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("123_2ixj2"), ExtResource("124_t6w6j"), ExtResource("125_itvpi"), ExtResource("126_4jpym"), ExtResource("127_j4mna"), ExtResource("128_pnym5"), ExtResource("129_vqns7"), ExtResource("130_ybd4b"), ExtResource("132_wr7jj"), ExtResource("133_ybd4b"), ExtResource("134_cit2p"), ExtResource("135_46ndd"), ExtResource("136_3cabt"), ExtResource("137_swcop"), ExtResource("138_r8clq"), ExtResource("139_ico27"), ExtResource("140_k6qn3"), ExtResource("141_oodit"), ExtResource("142_lwqyd"), ExtResource("143_sn277"), ExtResource("144_b52uf"), ExtResource("145_hwprm"), ExtResource("146_d0xhy"), ExtResource("147_lw0ge"), ExtResource("148_1e7qx"), ExtResource("149_6kqjg"), ExtResource("150_ydhsu"), ExtResource("151_p3rrp"), ExtResource("152_ewpr8"), ExtResource("153_5jugy"), ExtResource("154_320fk"), ExtResource("155_5cdne"), ExtResource("156_cdf73"), ExtResource("157_qeqs3"), ExtResource("158_21jki"), ExtResource("159_fgj2h"), ExtResource("160_33vkc"), ExtResource("161_c8pmb"), ExtResource("162_ct655"), ExtResource("163_k508x"), ExtResource("164_lt7rr"), ExtResource("165_wv2wi"), ExtResource("166_7wskh"), ExtResource("167_we7ek"), ExtResource("168_4t3jq"), ExtResource("169_wibxs"), ExtResource("170_tk4ml"), ExtResource("171_giqsh"), ExtResource("172_8bsdr"), ExtResource("173_sa5b4"), ExtResource("174_6h8os"), ExtResource("175_dpk1y"), ExtResource("176_s2e5t"), ExtResource("177_p0prv"), ExtResource("178_re7jp"), ExtResource("179_163gt"), ExtResource("180_sfu8n"), ExtResource("181_7ljty"), ExtResource("182_nmlsr"), ExtResource("183_87vht"), ExtResource("184_2fit5"), ExtResource("185_gk3yn"), ExtResource("186_lmlah"), ExtResource("187_sxhyu"), ExtResource("188_iu23i"), ExtResource("189_t4ssb"), ExtResource("190_snw3v"), ExtResource("191_avbtm"), ExtResource("192_s11hv"), ExtResource("193_k4n35"), ExtResource("194_0fjwg"), ExtResource("195_hh8eq"), ExtResource("196_u8gjg"), ExtResource("197_4eule"), ExtResource("198_8igct"), ExtResource("199_xnvgk"), ExtResource("200_b3d73"), ExtResource("201_8h177"), ExtResource("202_i7ics"), ExtResource("203_m58yd"), ExtResource("204_0l6uf"), ExtResource("205_8nef1"), ExtResource("205_skfll"), ExtResource("206_l0ugm"), ExtResource("207_dfd08"), ExtResource("208_fxdwr"), ExtResource("209_ecwfn"), ExtResource("210_ip2l3"), ExtResource("211_s14wm"), ExtResource("212_q4gy1"), ExtResource("213_cnw22"), ExtResource("214_8e868"), ExtResource("215_2vmp2"), ExtResource("216_wvmv7"), ExtResource("217_us00v"), ExtResource("218_nc1xb"), ExtResource("219_wm7i3"), ExtResource("220_d1vw0"), ExtResource("221_pmrog"), ExtResource("222_pbe4p"), ExtResource("223_8ldsf"), ExtResource("224_f4177"), ExtResource("225_nckbc"), ExtResource("226_043in"), ExtResource("227_r4j87"), ExtResource("228_mwre3"), ExtResource("229_qwf4s"), ExtResource("230_m5kst"), ExtResource("231_d8xcs"), ExtResource("232_2ixj2"), ExtResource("233_t6w6j"), ExtResource("238_yeist"), ExtResource("239_jfyx3"), ExtResource("240_weuxt"), ExtResource("241_6ttiy"), ExtResource("242_2cfd8"), ExtResource("243_64ppg"), ExtResource("244_scdfc"), ExtResource("245_jyvw0"), ExtResource("246_23ygw"), ExtResource("247_mj5jr"), ExtResource("248_gdxi3"), ExtResource("249_u1kx1"), ExtResource("250_wdkeg"), ExtResource("251_47htb"), ExtResource("252_a6nd4"), ExtResource("253_xi5el"), ExtResource("254_4eobe"), ExtResource("255_6tt5h"), ExtResource("256_hc6gi"), ExtResource("257_n64hf"), ExtResource("258_4nm45"), ExtResource("259_bpvq0"), ExtResource("260_afxfb"), ExtResource("261_lm578"), ExtResource("262_4pmsh"), ExtResource("263_4cib8"), ExtResource("264_r0mqx"), ExtResource("265_gdyyp"), ExtResource("266_n7cjp"), ExtResource("267_jh8xk"), ExtResource("268_y2duv"), ExtResource("269_g1dm8"), ExtResource("270_ewf3w"), ExtResource("271_jlis6"), ExtResource("272_22wjk"), ExtResource("273_einc0"), ExtResource("274_38yr6"), ExtResource("275_kgg5j"), ExtResource("276_u2kg7"), ExtResource("277_mfcn2"), ExtResource("278_kcnd4"), ExtResource("279_fgks3"), ExtResource("280_cit2p"), ExtResource("281_46ndd"), ExtResource("282_3cabt"), ExtResource("283_swcop"), ExtResource("284_r8clq"), ExtResource("285_ico27"), ExtResource("286_k6qn3"), ExtResource("287_oodit"), ExtResource("288_lwqyd"), ExtResource("289_sn277"), ExtResource("290_b52uf"), ExtResource("291_hwprm"), ExtResource("292_d0xhy"), ExtResource("293_lw0ge"), ExtResource("294_1e7qx"), ExtResource("295_6kqjg"), ExtResource("296_ydhsu"), ExtResource("297_p3rrp"), ExtResource("298_ewpr8"), ExtResource("299_5jugy"), ExtResource("300_320fk"), ExtResource("300_oodit"), ExtResource("301_lwqyd"), ExtResource("302_sn277"), ExtResource("303_b52uf"), ExtResource("304_hwprm"), ExtResource("305_d0xhy"), ExtResource("306_lw0ge"), ExtResource("307_1e7qx"), ExtResource("308_6kqjg"), ExtResource("309_ydhsu"), ExtResource("310_p3rrp"), ExtResource("311_ewpr8"), ExtResource("312_5jugy"), ExtResource("313_320fk"), ExtResource("314_5cdne"), ExtResource("315_cdf73"), ExtResource("316_qeqs3"), ExtResource("317_21jki"), ExtResource("318_fgj2h"), ExtResource("319_33vkc"), ExtResource("320_c8pmb"), ExtResource("321_ct655"), ExtResource("322_k508x"), ExtResource("323_lt7rr"), ExtResource("324_wv2wi"), ExtResource("325_7wskh"), ExtResource("326_we7ek"), ExtResource("327_4t3jq"), ExtResource("328_wibxs"), ExtResource("329_tk4ml"), ExtResource("330_giqsh"), ExtResource("331_8bsdr"), ExtResource("332_sa5b4"), ExtResource("333_6h8os"), ExtResource("334_dpk1y"), ExtResource("335_s2e5t"), ExtResource("336_p0prv"), ExtResource("337_re7jp"), ExtResource("338_163gt"), ExtResource("339_sfu8n"), ExtResource("340_7ljty"), ExtResource("341_nmlsr"), ExtResource("342_87vht"), ExtResource("343_2fit5"), ExtResource("344_gk3yn"), ExtResource("345_lmlah"), ExtResource("346_sxhyu"), ExtResource("347_iu23i"), ExtResource("348_t4ssb"), ExtResource("349_snw3v"), ExtResource("350_avbtm"), ExtResource("351_s11hv"), ExtResource("352_k4n35"), ExtResource("353_0fjwg"), ExtResource("354_hh8eq"), ExtResource("355_u8gjg"), ExtResource("356_4eule"), ExtResource("357_8igct"), ExtResource("358_xnvgk"), ExtResource("359_b3d73"), ExtResource("360_8h177"), ExtResource("361_i7ics"), ExtResource("362_gk3yn"), ExtResource("363_lmlah"), ExtResource("364_sxhyu"), ExtResource("365_iu23i"), ExtResource("366_t4ssb"), ExtResource("367_snw3v"), ExtResource("368_avbtm"), ExtResource("369_s11hv"), ExtResource("370_k4n35"), ExtResource("371_0fjwg"), ExtResource("372_hh8eq"), ExtResource("373_u8gjg"), ExtResource("374_4eule"), ExtResource("375_8igct"), ExtResource("376_xnvgk"), ExtResource("377_b3d73"), ExtResource("378_8h177"), ExtResource("379_i7ics"), ExtResource("380_m58yd"), ExtResource("381_0l6uf"), ExtResource("382_8nef1"), ExtResource("383_6lyvx"), ExtResource("384_aprrs"), ExtResource("385_oy7di"), ExtResource("386_pt3va"), ExtResource("387_cxdol"), ExtResource("388_r5dif"), ExtResource("389_pgpps"), ExtResource("390_mlki8"), ExtResource("391_qadea"), ExtResource("392_fn3tu"), ExtResource("393_vevns"), ExtResource("394_5w7i7"), ExtResource("395_wy6px"), ExtResource("396_py2sd"), ExtResource("397_ff6pb"), ExtResource("398_mbcnp"), ExtResource("399_bwc2y"), ExtResource("400_an72e"), ExtResource("401_6kgd8"), ExtResource("402_lsr6y"), ExtResource("403_ovfx3"), ExtResource("404_xlq0g"), ExtResource("405_awssv"), ExtResource("406_wy6px"), ExtResource("407_py2sd"), ExtResource("408_ff6pb"), ExtResource("409_mbcnp"), ExtResource("410_bwc2y"), ExtResource("411_an72e"), ExtResource("412_6kgd8"), ExtResource("413_lsr6y"), ExtResource("414_ovfx3"), ExtResource("415_xlq0g"), ExtResource("416_awssv"), ExtResource("417_278y7"), ExtResource("418_5epl3"), ExtResource("419_itk5a"), ExtResource("420_6kay4"), ExtResource("421_e06bn"), ExtResource("422_pb33p"), ExtResource("423_1teer"), ExtResource("424_kajqd"), ExtResource("425_fyan7"), ExtResource("426_xdtur"), ExtResource("427_d0eyq"), ExtResource("428_l14ib"), ExtResource("429_ctxsq"), ExtResource("430_hxd2u"), ExtResource("431_dbrv6"), ExtResource("432_e4p22"), ExtResource("433_mud2v"), ExtResource("434_wtu2d"), ExtResource("435_58oct"), ExtResource("436_gncs7"), ExtResource("437_wdxfs"), ExtResource("438_cno1m")])
+_voice_lines = Array[ExtResource("121_6gr3f")]([ExtResource("122_6seew"), ExtResource("123_6gr3f"), ExtResource("124_3ox4t"), ExtResource("125_4fmho"), ExtResource("126_4fmho"), ExtResource("129_oy6td"), ExtResource("126_gkfde"), ExtResource("127_4qxq8"), ExtResource("128_ryg4g"), ExtResource("121_arf1h"), ExtResource("122_s0om5"), ExtResource("130_fe76k"), ExtResource("131_p5pln"), ExtResource("136_12204"), ExtResource("137_trkoe"), ExtResource("138_bvlej"), ExtResource("139_ycw8e"), ExtResource("140_2gd4m"), ExtResource("213_mq14a"), ExtResource("214_yf6j3"), ExtResource("291_tfaor"), ExtResource("282_us00v"), ExtResource("283_nc1xb"), ExtResource("284_wm7i3"), ExtResource("34_pmrog"), ExtResource("35_pbe4p"), ExtResource("36_8ldsf"), ExtResource("287_d1vw0"), ExtResource("285_d1vw0"), ExtResource("286_pmrog"), ExtResource("292_3rmuw"), ExtResource("293_j3ofb"), ExtResource("294_m5f57"), ExtResource("296_130bj"), ExtResource("297_xa7an"), ExtResource("298_dk42n"), ExtResource("299_4dwmn"), ExtResource("300_swdh1"), ExtResource("301_8v027"), ExtResource("302_skfll"), ExtResource("297_pbe4p"), ExtResource("303_l0ugm"), ExtResource("304_dfd08"), ExtResource("305_fxdwr"), ExtResource("306_ecwfn"), ExtResource("307_ip2l3"), ExtResource("308_s14wm"), ExtResource("304_8ldsf"), ExtResource("309_s14wm"), ExtResource("310_q4gy1"), ExtResource("307_f4177"), ExtResource("311_cnw22"), ExtResource("313_2vmp2"), ExtResource("314_wvmv7"), ExtResource("311_nckbc"), ExtResource("315_nc1xb"), ExtResource("316_wm7i3"), ExtResource("317_d1vw0"), ExtResource("318_pmrog"), ExtResource("319_pbe4p"), ExtResource("320_8ldsf"), ExtResource("321_f4177"), ExtResource("141_61bol"), ExtResource("142_lix4w"), ExtResource("143_kmrid"), ExtResource("144_c6fgv"), ExtResource("145_fd6dt"), ExtResource("146_gttkg"), ExtResource("147_hiwvf"), ExtResource("148_ed5de"), ExtResource("149_e31mi"), ExtResource("150_mq14a"), ExtResource("208_fd6dt"), ExtResource("209_gttkg"), ExtResource("210_hiwvf"), ExtResource("211_ed5de"), ExtResource("212_e31mi"), ExtResource("151_yf6j3"), ExtResource("152_e4ynb"), ExtResource("153_a1n43"), ExtResource("154_dfxmq"), ExtResource("155_kcoi7"), ExtResource("156_rkju4"), ExtResource("157_um25j"), ExtResource("158_7dysq"), ExtResource("136_oiuw5"), ExtResource("137_mldrc"), ExtResource("138_1tiwm"), ExtResource("139_xxpw2"), ExtResource("140_wghq8"), ExtResource("164_0abf2"), ExtResource("165_7b48j"), ExtResource("166_8tqy7"), ExtResource("167_faa31"), ExtResource("168_acld0"), ExtResource("169_kc3cm"), ExtResource("170_utcts"), ExtResource("171_2pm5r"), ExtResource("172_38n85"), ExtResource("173_nkmqd"), ExtResource("174_4b624"), ExtResource("175_0li47"), ExtResource("176_idhsh"), ExtResource("177_piefl"), ExtResource("178_asb44"), ExtResource("179_v4ssx"), ExtResource("180_ec14y"), ExtResource("142_wghq8"), ExtResource("143_k08w7"), ExtResource("183_q0hco"), ExtResource("184_g65e0"), ExtResource("141_mldrc"), ExtResource("144_hp4ct"), ExtResource("123_2ixj2"), ExtResource("124_t6w6j"), ExtResource("125_itvpi"), ExtResource("126_4jpym"), ExtResource("127_j4mna"), ExtResource("128_pnym5"), ExtResource("129_vqns7"), ExtResource("130_ybd4b"), ExtResource("132_wr7jj"), ExtResource("133_ybd4b"), ExtResource("134_cit2p"), ExtResource("135_46ndd"), ExtResource("136_3cabt"), ExtResource("137_swcop"), ExtResource("138_r8clq"), ExtResource("139_ico27"), ExtResource("140_k6qn3"), ExtResource("141_oodit"), ExtResource("142_lwqyd"), ExtResource("143_sn277"), ExtResource("144_b52uf"), ExtResource("145_hwprm"), ExtResource("146_d0xhy"), ExtResource("147_lw0ge"), ExtResource("148_1e7qx"), ExtResource("149_6kqjg"), ExtResource("150_ydhsu"), ExtResource("151_p3rrp"), ExtResource("152_ewpr8"), ExtResource("153_5jugy"), ExtResource("154_320fk"), ExtResource("155_5cdne"), ExtResource("156_cdf73"), ExtResource("157_qeqs3"), ExtResource("158_21jki"), ExtResource("159_fgj2h"), ExtResource("160_33vkc"), ExtResource("161_c8pmb"), ExtResource("162_ct655"), ExtResource("163_k508x"), ExtResource("164_lt7rr"), ExtResource("165_wv2wi"), ExtResource("166_7wskh"), ExtResource("167_we7ek"), ExtResource("168_4t3jq"), ExtResource("169_wibxs"), ExtResource("170_tk4ml"), ExtResource("171_giqsh"), ExtResource("172_8bsdr"), ExtResource("173_sa5b4"), ExtResource("174_6h8os"), ExtResource("175_dpk1y"), ExtResource("176_s2e5t"), ExtResource("177_p0prv"), ExtResource("178_re7jp"), ExtResource("179_163gt"), ExtResource("180_sfu8n"), ExtResource("181_7ljty"), ExtResource("182_nmlsr"), ExtResource("183_87vht"), ExtResource("184_2fit5"), ExtResource("185_gk3yn"), ExtResource("186_lmlah"), ExtResource("187_sxhyu"), ExtResource("188_iu23i"), ExtResource("189_t4ssb"), ExtResource("190_snw3v"), ExtResource("191_avbtm"), ExtResource("192_s11hv"), ExtResource("193_k4n35"), ExtResource("194_0fjwg"), ExtResource("195_hh8eq"), ExtResource("196_u8gjg"), ExtResource("197_4eule"), ExtResource("198_8igct"), ExtResource("199_xnvgk"), ExtResource("200_b3d73"), ExtResource("201_8h177"), ExtResource("202_i7ics"), ExtResource("203_m58yd"), ExtResource("204_0l6uf"), ExtResource("205_8nef1"), ExtResource("205_skfll"), ExtResource("206_l0ugm"), ExtResource("207_dfd08"), ExtResource("208_fxdwr"), ExtResource("209_ecwfn"), ExtResource("210_ip2l3"), ExtResource("211_s14wm"), ExtResource("212_q4gy1"), ExtResource("213_cnw22"), ExtResource("214_8e868"), ExtResource("215_2vmp2"), ExtResource("216_wvmv7"), ExtResource("217_us00v"), ExtResource("218_nc1xb"), ExtResource("219_wm7i3"), ExtResource("220_d1vw0"), ExtResource("221_pmrog"), ExtResource("222_pbe4p"), ExtResource("223_8ldsf"), ExtResource("224_f4177"), ExtResource("225_nckbc"), ExtResource("226_043in"), ExtResource("227_r4j87"), ExtResource("228_mwre3"), ExtResource("229_qwf4s"), ExtResource("230_m5kst"), ExtResource("231_d8xcs"), ExtResource("232_2ixj2"), ExtResource("233_t6w6j"), ExtResource("238_yeist"), ExtResource("239_jfyx3"), ExtResource("240_weuxt"), ExtResource("241_6ttiy"), ExtResource("242_2cfd8"), ExtResource("243_64ppg"), ExtResource("244_scdfc"), ExtResource("245_jyvw0"), ExtResource("246_23ygw"), ExtResource("247_mj5jr"), ExtResource("248_gdxi3"), ExtResource("249_u1kx1"), ExtResource("250_wdkeg"), ExtResource("251_47htb"), ExtResource("252_a6nd4"), ExtResource("253_xi5el"), ExtResource("254_4eobe"), ExtResource("255_6tt5h"), ExtResource("256_hc6gi"), ExtResource("257_n64hf"), ExtResource("258_4nm45"), ExtResource("259_bpvq0"), ExtResource("260_afxfb"), ExtResource("261_lm578"), ExtResource("262_4pmsh"), ExtResource("263_4cib8"), ExtResource("264_r0mqx"), ExtResource("265_gdyyp"), ExtResource("266_n7cjp"), ExtResource("267_jh8xk"), ExtResource("268_y2duv"), ExtResource("269_g1dm8"), ExtResource("270_ewf3w"), ExtResource("271_jlis6"), ExtResource("272_22wjk"), ExtResource("273_einc0"), ExtResource("274_38yr6"), ExtResource("275_kgg5j"), ExtResource("276_u2kg7"), ExtResource("277_mfcn2"), ExtResource("278_kcnd4"), ExtResource("279_fgks3"), ExtResource("280_cit2p"), ExtResource("281_46ndd"), ExtResource("282_3cabt"), ExtResource("283_swcop"), ExtResource("284_r8clq"), ExtResource("285_ico27"), ExtResource("286_k6qn3"), ExtResource("287_oodit"), ExtResource("288_lwqyd"), ExtResource("289_sn277"), ExtResource("290_b52uf"), ExtResource("291_hwprm"), ExtResource("292_d0xhy"), ExtResource("293_lw0ge"), ExtResource("294_1e7qx"), ExtResource("295_6kqjg"), ExtResource("296_ydhsu"), ExtResource("297_p3rrp"), ExtResource("298_ewpr8"), ExtResource("299_5jugy"), ExtResource("300_320fk"), ExtResource("300_oodit"), ExtResource("301_lwqyd"), ExtResource("302_sn277"), ExtResource("303_b52uf"), ExtResource("304_hwprm"), ExtResource("305_d0xhy"), ExtResource("306_lw0ge"), ExtResource("307_1e7qx"), ExtResource("308_6kqjg"), ExtResource("309_ydhsu"), ExtResource("310_p3rrp"), ExtResource("311_ewpr8"), ExtResource("312_5jugy"), ExtResource("313_320fk"), ExtResource("314_5cdne"), ExtResource("315_cdf73"), ExtResource("316_qeqs3"), ExtResource("317_21jki"), ExtResource("318_fgj2h"), ExtResource("319_33vkc"), ExtResource("320_c8pmb"), ExtResource("321_ct655"), ExtResource("322_k508x"), ExtResource("323_lt7rr"), ExtResource("324_wv2wi"), ExtResource("325_7wskh"), ExtResource("326_we7ek"), ExtResource("327_4t3jq"), ExtResource("328_wibxs"), ExtResource("329_tk4ml"), ExtResource("330_giqsh"), ExtResource("331_8bsdr"), ExtResource("332_sa5b4"), ExtResource("333_6h8os"), ExtResource("334_dpk1y"), ExtResource("335_s2e5t"), ExtResource("336_p0prv"), ExtResource("337_re7jp"), ExtResource("338_163gt"), ExtResource("339_sfu8n"), ExtResource("340_7ljty"), ExtResource("341_nmlsr"), ExtResource("342_87vht"), ExtResource("343_2fit5"), ExtResource("344_gk3yn"), ExtResource("345_lmlah"), ExtResource("346_sxhyu"), ExtResource("347_iu23i"), ExtResource("348_t4ssb"), ExtResource("349_snw3v"), ExtResource("350_avbtm"), ExtResource("351_s11hv"), ExtResource("352_k4n35"), ExtResource("353_0fjwg"), ExtResource("354_hh8eq"), ExtResource("355_u8gjg"), ExtResource("356_4eule"), ExtResource("357_8igct"), ExtResource("358_xnvgk"), ExtResource("359_b3d73"), ExtResource("360_8h177"), ExtResource("361_i7ics"), ExtResource("362_gk3yn"), ExtResource("363_lmlah"), ExtResource("364_sxhyu"), ExtResource("365_iu23i"), ExtResource("366_t4ssb"), ExtResource("367_snw3v"), ExtResource("368_avbtm"), ExtResource("369_s11hv"), ExtResource("370_k4n35"), ExtResource("371_0fjwg"), ExtResource("372_hh8eq"), ExtResource("373_u8gjg"), ExtResource("374_4eule"), ExtResource("375_8igct"), ExtResource("376_xnvgk"), ExtResource("377_b3d73"), ExtResource("378_8h177"), ExtResource("379_i7ics"), ExtResource("380_m58yd"), ExtResource("381_0l6uf"), ExtResource("382_8nef1"), ExtResource("383_6lyvx"), ExtResource("384_aprrs"), ExtResource("385_oy7di"), ExtResource("386_pt3va"), ExtResource("387_cxdol"), ExtResource("388_r5dif"), ExtResource("389_pgpps"), ExtResource("390_mlki8"), ExtResource("391_qadea"), ExtResource("392_fn3tu"), ExtResource("393_vevns"), ExtResource("394_5w7i7"), ExtResource("395_wy6px"), ExtResource("396_py2sd"), ExtResource("397_ff6pb"), ExtResource("398_mbcnp"), ExtResource("399_bwc2y"), ExtResource("400_an72e"), ExtResource("401_6kgd8"), ExtResource("402_lsr6y"), ExtResource("403_ovfx3"), ExtResource("404_xlq0g"), ExtResource("405_awssv"), ExtResource("406_wy6px"), ExtResource("407_py2sd"), ExtResource("408_ff6pb"), ExtResource("409_mbcnp"), ExtResource("410_bwc2y"), ExtResource("411_an72e"), ExtResource("412_6kgd8"), ExtResource("413_lsr6y"), ExtResource("414_ovfx3"), ExtResource("415_xlq0g"), ExtResource("416_awssv"), ExtResource("417_278y7"), ExtResource("418_5epl3"), ExtResource("419_itk5a"), ExtResource("420_6kay4"), ExtResource("421_e06bn"), ExtResource("422_pb33p"), ExtResource("423_1teer"), ExtResource("424_kajqd"), ExtResource("425_fyan7"), ExtResource("426_xdtur"), ExtResource("427_d0eyq"), ExtResource("428_l14ib"), ExtResource("429_ctxsq"), ExtResource("430_hxd2u"), ExtResource("431_dbrv6"), ExtResource("432_e4p22"), ExtResource("433_mud2v"), ExtResource("434_wtu2d"), ExtResource("435_58oct"), ExtResource("436_gncs7"), ExtResource("437_wdxfs"), ExtResource("438_cno1m"), ExtResource("439_fyan7"), ExtResource("440_xdtur"), ExtResource("441_d0eyq"), ExtResource("442_l14ib"), ExtResource("443_ctxsq"), ExtResource("444_hxd2u"), ExtResource("445_dbrv6"), ExtResource("446_e4p22"), ExtResource("447_mud2v"), ExtResource("448_wtu2d"), ExtResource("449_58oct"), ExtResource("450_gncs7"), ExtResource("451_wdxfs"), ExtResource("452_cno1m"), ExtResource("453_vhwx0"), ExtResource("454_tbmjv"), ExtResource("455_u42q1"), ExtResource("456_5e1yt"), ExtResource("457_c5cs3")])
 _cinematic_camera_voice_line_player = NodePath("../CinematicCamera/CameraRig/VoiceLinePlayerNonDirectional")
 _around_cafe_voice_line_players = [NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D2"), NodePath("../AroundCafeVoiceLinePlayers/AroundCafeVoiceLinePlayer3D3")]
 metadata/_custom_type_script = "uid://curf1bfdhuo16"
@@ -2572,7 +2798,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.9663248, 0.0024503556, 0.25730917, -1.1641518e-10, 0.9999531, -0.009522559, -0.25732088, 0.009201894, 0.96628094, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.1836597, -0.110499606, 0.9767582, 3.7252857e-08, 0.99366015, 0.11241178, -0.9829886, -0.020645496, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]

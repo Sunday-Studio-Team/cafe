@@ -550,7 +550,11 @@ func start_day() -> void:
 			await get_tree().create_timer(0.5).timeout
 			
 		elif Global.day == 5:
-			pass
+
+			# Disable the open sign
+			_open_closed_sign.set_enabled(false)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_5_0)			
 
 		# Re-enable Tippy callouts
 		_tippy_callouts_manager.enable_tippy_callouts = true
