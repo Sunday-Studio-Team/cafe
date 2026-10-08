@@ -277,6 +277,9 @@ func start_day() -> void:
 
 		elif Global.day == 2:
 
+			# Disable the open sign
+			_open_closed_sign.set_enabled(false)
+
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_0)
 
 			# Repeat the lines until locker is interacted with.
@@ -431,6 +434,9 @@ func start_day() -> void:
 			
 		elif Global.day == 3:
 
+			# Disable the open sign
+			_open_closed_sign.set_enabled(false)
+
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_0)
 
 			# Repeat the lines until camera stuns the player.
@@ -496,6 +502,9 @@ func start_day() -> void:
 			await get_tree().create_timer(0.5).timeout
 
 		elif Global.day == 4:
+
+			# Disable the open sign
+			_open_closed_sign.set_enabled(false)
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_4_0)
 
