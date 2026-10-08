@@ -48,7 +48,14 @@ var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer
 var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
-var holding_trash := false
+var holding_trash := false:
+	set(value):
+		if value == false && holding_trash == true:
+			holding_trash = value
+			Events.throw_trash.emit()
+		if value == true && holding_trash == false:
+			holding_trash = value
+			Events.pickup_trash.emit()
 var day: int = 1
 var playing_tutorial: bool = false
 var shift_length: float
@@ -221,7 +228,7 @@ func load_unlocked_items_from_save() -> void:
 			add_items_to_unlocked_list(bonus_items)
 
 
-func get_item(item_id:String) -> Item:
+func get_item(item_id: String) -> Item:
 	var found_item := false
 	for item: Item in items:
 		if item.item_id == item_id:

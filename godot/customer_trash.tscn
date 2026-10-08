@@ -4,20 +4,942 @@
 [ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash.png" id="2_i5ewh"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="3_i5ewh"]
 [ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="4_ruef1"]
+[ext_resource type="Texture2D" uid="uid://dl6l3321jft4n" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0001.png" id="6_4s420"]
+[ext_resource type="Texture2D" uid="uid://dsyxvjj6ndx0i" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0002.png" id="7_wu0hs"]
+[ext_resource type="Texture2D" uid="uid://c8ijq1sx4rg2k" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0003.png" id="8_v7lnp"]
 [ext_resource type="Material" uid="uid://clyy5mn7ocsxc" path="res://Assets/Trash minigame/highlight_trash_shader.tres" id="8_wycgu"]
+[ext_resource type="Texture2D" uid="uid://vqqfeie73xtg" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0004.png" id="9_spuay"]
+[ext_resource type="Texture2D" uid="uid://ca15e0vx1ruw7" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0005.png" id="10_r4ek6"]
+[ext_resource type="Texture2D" uid="uid://efl45y7gyv50" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0006.png" id="11_186dj"]
+[ext_resource type="Texture2D" uid="uid://ceor4rmi8j30d" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0007.png" id="12_0kmg7"]
+[ext_resource type="Texture2D" uid="uid://cii0l7j8qhfsg" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0008.png" id="13_2wbhl"]
+[ext_resource type="Texture2D" uid="uid://w80qprisijw1" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0009.png" id="14_0a7nm"]
+[ext_resource type="Texture2D" uid="uid://o54nqlnr2lp6" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0010.png" id="15_w6hin"]
+[ext_resource type="Texture2D" uid="uid://dx17ripqf1vdv" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0011.png" id="16_ufm0e"]
+[ext_resource type="Texture2D" uid="uid://ckgqnnt5kin4d" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0012.png" id="17_qrgon"]
+[ext_resource type="Texture2D" uid="uid://dcc2re1qxflor" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0013.png" id="18_78n84"]
+[ext_resource type="Texture2D" uid="uid://2efpao5k6i50" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0014.png" id="19_invmh"]
+[ext_resource type="Texture2D" uid="uid://dqufnbkav37a2" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0015.png" id="20_ju4yt"]
+[ext_resource type="Texture2D" uid="uid://beajhsf2p7fi" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0016.png" id="21_mc0n3"]
+[ext_resource type="Texture2D" uid="uid://bxnsn7mr1w21x" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0017.png" id="22_gb6hm"]
+[ext_resource type="Texture2D" uid="uid://bpt6e3erv50ij" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0018.png" id="23_anidy"]
+[ext_resource type="Texture2D" uid="uid://cdvfw4j7t5j5g" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0019.png" id="24_cfpbk"]
+[ext_resource type="Texture2D" uid="uid://bwmvsbd8b7gu5" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0020.png" id="25_mend0"]
+[ext_resource type="Texture2D" uid="uid://b1wspuxumg0b0" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0021.png" id="26_7rwdq"]
+[ext_resource type="Texture2D" uid="uid://ok8f5842vp64" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0022.png" id="27_suluf"]
+[ext_resource type="Texture2D" uid="uid://c6vmu2ctdy46h" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0023.png" id="28_asabb"]
+[ext_resource type="Texture2D" uid="uid://cy5mwiugm6srh" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0024.png" id="29_0se44"]
+[ext_resource type="Texture2D" uid="uid://8217d76v2mn5" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0025.png" id="30_m41ta"]
+[ext_resource type="Texture2D" uid="uid://diiaperh773qx" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0026.png" id="31_ytg1a"]
+[ext_resource type="Texture2D" uid="uid://ds08jq1ovj7og" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0027.png" id="32_nk274"]
+[ext_resource type="Texture2D" uid="uid://b2jtsu0jfjqsp" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0028.png" id="33_3sedq"]
+[ext_resource type="Texture2D" uid="uid://cdo1us7t2aq60" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0029.png" id="34_oam5a"]
+[ext_resource type="Texture2D" uid="uid://gakqtdc13bji" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0030.png" id="35_gvwok"]
+[ext_resource type="Texture2D" uid="uid://cf18q3iabpo2w" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0031.png" id="36_40i1r"]
+[ext_resource type="Texture2D" uid="uid://dnc3axpd7eax5" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0032.png" id="37_gv62g"]
+[ext_resource type="Texture2D" uid="uid://1bdt0s513r2q" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0033.png" id="38_hvmob"]
+[ext_resource type="Texture2D" uid="uid://b64n08cv4jmm" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0034.png" id="39_b30je"]
+[ext_resource type="Texture2D" uid="uid://dddjluv0iuibd" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0035.png" id="40_cgw6e"]
+[ext_resource type="Texture2D" uid="uid://cpmcg5b0jyatd" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0036.png" id="41_g3rov"]
+[ext_resource type="Texture2D" uid="uid://sjqaagfovi0b" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0037.png" id="42_a27gq"]
+[ext_resource type="Texture2D" uid="uid://bxw6p4olama55" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0038.png" id="43_hkac3"]
+[ext_resource type="Texture2D" uid="uid://cafvs0c27waxv" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0039.png" id="44_jju7v"]
+[ext_resource type="Texture2D" uid="uid://c0poik2hyehnm" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0040.png" id="45_bbu1b"]
+[ext_resource type="Texture2D" uid="uid://jn07b5i65ay5" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0041.png" id="46_788gt"]
+[ext_resource type="Texture2D" uid="uid://cdvjuunle78cr" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0042.png" id="47_d4bx4"]
+[ext_resource type="Texture2D" uid="uid://mfcf8aujetl0" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0043.png" id="48_6s014"]
+[ext_resource type="Texture2D" uid="uid://bb8otst51t5wx" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0044.png" id="49_qjocn"]
+[ext_resource type="Texture2D" uid="uid://bnhv3uvk0k6f5" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0045.png" id="50_qpydj"]
+[ext_resource type="Texture2D" uid="uid://ce4umqu3mi2j" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0046.png" id="51_m4vt5"]
+[ext_resource type="Texture2D" uid="uid://bipieijrx8oj0" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0047.png" id="52_n040u"]
+[ext_resource type="Texture2D" uid="uid://cyka48ch0hjw2" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0048.png" id="53_j2f8w"]
+[ext_resource type="Texture2D" uid="uid://dlq76rnibsjlp" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0049.png" id="54_npolf"]
+[ext_resource type="Texture2D" uid="uid://evwnagcwo1rg" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0050.png" id="55_umxvr"]
+[ext_resource type="Texture2D" uid="uid://k0masgl5kqou" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0051.png" id="56_7xoyx"]
+[ext_resource type="Texture2D" uid="uid://boedlxyrh4fj7" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0052.png" id="57_if8n4"]
+[ext_resource type="Texture2D" uid="uid://bjy1lvmhqdvox" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0053.png" id="58_jwp7g"]
+[ext_resource type="Texture2D" uid="uid://jscmps75n4p" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0054.png" id="59_dw4bi"]
+[ext_resource type="Texture2D" uid="uid://bbpgffofch4vf" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0055.png" id="60_aqu5c"]
+[ext_resource type="Texture2D" uid="uid://dax0g6i7n656f" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0056.png" id="61_d70bu"]
+[ext_resource type="Texture2D" uid="uid://dkap7h2u4qauc" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0057.png" id="62_3yy2b"]
+[ext_resource type="Texture2D" uid="uid://h8au00mrcpil" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0058.png" id="63_50svg"]
+[ext_resource type="Texture2D" uid="uid://l3y8gu1hmvrn" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0059.png" id="64_2vrir"]
+[ext_resource type="Texture2D" uid="uid://bn0cqek6tjahx" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0060.png" id="65_uovjg"]
+[ext_resource type="Texture2D" uid="uid://kxtqhrcwsldp" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0061.png" id="66_rtyle"]
+[ext_resource type="Texture2D" uid="uid://lrup235gd0tg" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0062.png" id="67_sfc8k"]
+[ext_resource type="Texture2D" uid="uid://cho6om2qvbpex" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0063.png" id="68_614me"]
+[ext_resource type="Texture2D" uid="uid://3tv2nbj8bobs" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0064.png" id="69_4ycfa"]
+[ext_resource type="Texture2D" uid="uid://ci38rvflillfh" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0065.png" id="70_k6epa"]
+[ext_resource type="Texture2D" uid="uid://obxn3k5xchx" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0066.png" id="71_3br1v"]
+[ext_resource type="Texture2D" uid="uid://btf8mo0hiuw6v" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0067.png" id="72_g2hjp"]
+[ext_resource type="Texture2D" uid="uid://bqjob4b2dor6l" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0068.png" id="73_quxlv"]
+[ext_resource type="Texture2D" uid="uid://bkj4g5s0e7qr6" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0069.png" id="74_gwx2a"]
+[ext_resource type="Texture2D" uid="uid://x2mhto2xcru4" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0070.png" id="75_ccev8"]
+[ext_resource type="Texture2D" uid="uid://b70xhut46kiyn" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0071.png" id="76_o7pnq"]
+[ext_resource type="Texture2D" uid="uid://difc5hf8ukv8n" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0072.png" id="77_bucxn"]
+[ext_resource type="Texture2D" uid="uid://djtv5vwe4fxko" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0073.png" id="78_4jxj1"]
+[ext_resource type="Texture2D" uid="uid://c4sojel7m5m4d" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0074.png" id="79_hqu6s"]
+[ext_resource type="Texture2D" uid="uid://c436gkfyvf62s" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0075.png" id="80_my6kf"]
+[ext_resource type="Texture2D" uid="uid://ngk8awa5lhwg" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0076.png" id="81_hj1ph"]
+[ext_resource type="Texture2D" uid="uid://bsoties5kom8c" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0077.png" id="82_igrgg"]
+[ext_resource type="Texture2D" uid="uid://ooltqf13w1vl" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0078.png" id="83_eqoxa"]
+[ext_resource type="Texture2D" uid="uid://bwvxvq6btc6xp" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0079.png" id="84_smviy"]
+[ext_resource type="Texture2D" uid="uid://blmkn0ppjxksi" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0080.png" id="85_dyuiy"]
+[ext_resource type="Texture2D" uid="uid://dd5o3iyh0blv4" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0081.png" id="86_pgkdx"]
+[ext_resource type="Texture2D" uid="uid://bmjsp0f1k4a2s" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0082.png" id="87_aremv"]
+[ext_resource type="Texture2D" uid="uid://qhers7kymk5e" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0083.png" id="88_7w6dw"]
+[ext_resource type="Texture2D" uid="uid://brpsktjxqfuxs" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0084.png" id="89_n576c"]
+[ext_resource type="Texture2D" uid="uid://6yjmsc22c2rn" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0085.png" id="90_wvoko"]
+[ext_resource type="Texture2D" uid="uid://dwfxdvekqlytj" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0086.png" id="91_m6axr"]
+[ext_resource type="Texture2D" uid="uid://bsvn35btr37a4" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0087.png" id="92_dl6h6"]
+[ext_resource type="Texture2D" uid="uid://bd5s3tfxqcdxt" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0088.png" id="93_a6pap"]
+[ext_resource type="Texture2D" uid="uid://km04qv6si7hq" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0089.png" id="94_u2qcf"]
+[ext_resource type="Texture2D" uid="uid://bwwixx0onehyq" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0090.png" id="95_re3dp"]
+[ext_resource type="Texture2D" uid="uid://bghj2878vyda7" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0091.png" id="96_s7tkf"]
+[ext_resource type="Texture2D" uid="uid://bfrtlxfso4bkd" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0092.png" id="97_1oeg7"]
+[ext_resource type="Texture2D" uid="uid://bvf3exjkpknk6" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0093.png" id="98_bqaob"]
+[ext_resource type="Texture2D" uid="uid://gw7wy200yhdr" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0094.png" id="99_nckli"]
+[ext_resource type="Texture2D" uid="uid://dd6ycrorc5svm" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0095.png" id="100_jsdsk"]
+[ext_resource type="Texture2D" uid="uid://cwaihkbxnoyq3" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0096.png" id="101_po7ck"]
+[ext_resource type="Texture2D" uid="uid://di2qlsdi16hnq" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0097.png" id="102_s4pne"]
+[ext_resource type="Texture2D" uid="uid://dvbwbx4vmx6dd" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0098.png" id="103_08t8h"]
+[ext_resource type="Texture2D" uid="uid://dknm22xplx176" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0099.png" id="104_55ph1"]
+[ext_resource type="Texture2D" uid="uid://dd0w1ct0qlgd1" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0100.png" id="105_tw1yn"]
+[ext_resource type="Texture2D" uid="uid://ulkvyks1i884" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0101.png" id="106_jq78k"]
+[ext_resource type="Texture2D" uid="uid://6tqwk6aw476f" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0102.png" id="107_7c8wy"]
+[ext_resource type="Texture2D" uid="uid://d2884woa0ta5m" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0103.png" id="108_f8md4"]
+[ext_resource type="Texture2D" uid="uid://dsl51vjux1f2w" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0104.png" id="109_cdu5a"]
+[ext_resource type="Texture2D" uid="uid://cfehdl62lt7d4" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0105.png" id="110_sa0at"]
+[ext_resource type="Texture2D" uid="uid://dlnb6uxp6lh3e" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0106.png" id="111_6t1r7"]
+[ext_resource type="Texture2D" uid="uid://clmledk46prrp" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0107.png" id="112_y3k4m"]
+[ext_resource type="Texture2D" uid="uid://0tvmjsdopbp7" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0108.png" id="113_mp73j"]
+[ext_resource type="Texture2D" uid="uid://deyix642xi5p" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0109.png" id="114_pa5yv"]
+[ext_resource type="Texture2D" uid="uid://ckcree0vw82ma" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0110.png" id="115_dy1wn"]
+[ext_resource type="Texture2D" uid="uid://d17gbsqgq30g0" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0111.png" id="116_1yraw"]
+[ext_resource type="Texture2D" uid="uid://lusj7qrcv0m7" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0112.png" id="117_ye63k"]
+[ext_resource type="Texture2D" uid="uid://tlwlsibs4ugg" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0113.png" id="118_y52aj"]
+[ext_resource type="Texture2D" uid="uid://b37xxg51cgupj" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0114.png" id="119_82q30"]
+[ext_resource type="Texture2D" uid="uid://dt6naxos2j2a5" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0115.png" id="120_jv7h2"]
+[ext_resource type="Texture2D" uid="uid://dky1kme6sxcm8" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0116.png" id="121_p3kpi"]
+[ext_resource type="Texture2D" uid="uid://3e41wwddieor" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0117.png" id="122_am51c"]
+[ext_resource type="Texture2D" uid="uid://tyd81a0qjt0e" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0118.png" id="123_ggdso"]
+[ext_resource type="Texture2D" uid="uid://bw80w4iqbyl0s" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0119.png" id="124_83u0a"]
+[ext_resource type="Texture2D" uid="uid://bi401kuaukyps" path="res://Assets/Trash minigame/trash vfx/Trash_VFX_2D_Color_0120.png" id="125_t37ii"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5ewh"]
 size = Vector3(0.24902344, 0.20874023, 0.23120117)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 
-[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable", "trash_cup")]
+[sub_resource type="Shader" id="Shader_d1f4l"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.7.stable's ParticleProcessMaterial.
+
+shader_type particles;
+render_mode disable_velocity;
+
+uniform vec3 direction;
+uniform float spread;
+uniform float flatness;
+uniform float inherit_emitter_velocity_ratio = 0.0;
+uniform float initial_linear_velocity_min;
+uniform float initial_linear_velocity_max;
+uniform float directional_velocity_min;
+uniform float directional_velocity_max;
+uniform float angular_velocity_min;
+uniform float angular_velocity_max;
+uniform float orbit_velocity_min;
+uniform float orbit_velocity_max;
+uniform float radial_velocity_min;
+uniform float radial_velocity_max;
+uniform float linear_accel_min;
+uniform float linear_accel_max;
+uniform float radial_accel_min;
+uniform float radial_accel_max;
+uniform float tangent_accel_min;
+uniform float tangent_accel_max;
+uniform float damping_min;
+uniform float damping_max;
+uniform float initial_angle_min;
+uniform float initial_angle_max;
+uniform float scale_min;
+uniform float scale_max;
+uniform float hue_variation_min;
+uniform float hue_variation_max;
+uniform float anim_speed_min;
+uniform float anim_speed_max;
+uniform float anim_offset_min;
+uniform float anim_offset_max;
+uniform float lifetime_randomness;
+uniform vec3 emission_shape_offset = vec3(0.0);
+uniform vec3 emission_shape_scale = vec3(1.0);
+uniform vec3 velocity_pivot = vec3(0.0);
+uniform vec4 color_value : source_color;
+uniform vec3 gravity;
+
+vec3 normalize_or_else(vec3 _in, const vec3 _else) {
+	if (_in == vec3(0.0)) {
+		return _else;
+	}
+	return normalize(_in);
+}
+
+vec4 rotate_hue(vec4 current_color, float hue_rot_angle) {
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat =
+			mat4(vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.299, 0.587, 0.114, 0.0),
+					vec4(0.000, 0.000, 0.000, 1.0)) +
+			mat4(vec4(0.701, -0.587, -0.114, 0.0),
+					vec4(-0.299, 0.413, -0.114, 0.0),
+					vec4(-0.300, -0.588, 0.886, 0.0),
+					vec4(0.000, 0.000, 0.000, 0.0)) *
+					hue_rot_c +
+			mat4(vec4(0.168, 0.330, -0.497, 0.0),
+					vec4(-0.328, 0.035, 0.292, 0.0),
+					vec4(1.250, -1.050, -0.203, 0.0),
+					vec4(0.000, 0.000, 0.000, 0.0)) *
+					hue_rot_s;
+	return hue_rot_mat * current_color;
+}
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0) {
+		s = 305420679;
+	}
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0) {
+		s += 2147483647;
+	}
+	seed = uint(s);
+	return float(seed % uint(65536)) / 65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed) * 2.0 - 1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+struct DisplayParameters {
+	vec3 scale;
+	float hue_rotation;
+	float animation_speed;
+	float animation_offset;
+	float lifetime;
+	vec4 color;
+	float emission_texture_position;
+};
+
+struct DynamicsParameters {
+	float angle;
+	float angular_velocity;
+	float initial_velocity_multiplier;
+	float directional_velocity;
+	float radial_velocity;
+	float orbit_velocity;
+};
+
+struct PhysicalParameters {
+	float linear_accel;
+	float radial_accel;
+	float tangent_accel;
+	float damping;
+};
+
+void calculate_initial_physical_params(inout PhysicalParameters params, inout uint alt_seed) {
+	params.linear_accel = mix(linear_accel_min, linear_accel_max, rand_from_seed(alt_seed));
+	params.radial_accel = mix(radial_accel_min, radial_accel_max, rand_from_seed(alt_seed));
+	params.tangent_accel = mix(tangent_accel_min, tangent_accel_max, rand_from_seed(alt_seed));
+	params.damping = mix(damping_min, damping_max, rand_from_seed(alt_seed));
+}
+
+void calculate_initial_dynamics_params(inout DynamicsParameters params, inout uint alt_seed) {
+	// -------------------- DO NOT REORDER OPERATIONS, IT BREAKS VISUAL COMPATIBILITY
+	// -------------------- ADD NEW OPERATIONS AT THE BOTTOM
+	params.angle = mix(initial_angle_min, initial_angle_max, rand_from_seed(alt_seed));
+	params.angular_velocity = mix(angular_velocity_min, angular_velocity_max, rand_from_seed(alt_seed));
+	params.initial_velocity_multiplier = mix(initial_linear_velocity_min, initial_linear_velocity_max, rand_from_seed(alt_seed));
+	params.directional_velocity = mix(directional_velocity_min, directional_velocity_max, rand_from_seed(alt_seed));
+	params.radial_velocity = mix(radial_velocity_min, radial_velocity_max, rand_from_seed(alt_seed));
+	params.orbit_velocity = mix(orbit_velocity_min, orbit_velocity_max, rand_from_seed(alt_seed));
+}
+
+void calculate_initial_display_params(inout DisplayParameters params, inout uint alt_seed) {
+	// -------------------- DO NOT REORDER OPERATIONS, IT BREAKS VISUAL COMPATIBILITY
+	// -------------------- ADD NEW OPERATIONS AT THE BOTTOM
+	float pi = 3.14159;
+	params.scale = vec3(mix(scale_min, scale_max, rand_from_seed(alt_seed)));
+	params.scale = sign(params.scale) * max(abs(params.scale), 0.001);
+	params.hue_rotation = pi * 2.0 * mix(hue_variation_min, hue_variation_max, rand_from_seed(alt_seed));
+	params.animation_speed = mix(anim_speed_min, anim_speed_max, rand_from_seed(alt_seed));
+	params.animation_offset = mix(anim_offset_min, anim_offset_max, rand_from_seed(alt_seed));
+	params.lifetime = (1.0 - lifetime_randomness * rand_from_seed(alt_seed));
+	params.color = color_value;
+}
+
+void process_display_param(inout DisplayParameters parameters, float lifetime) {
+	// Compile-time add textures.
+	parameters.color = rotate_hue(parameters.color, parameters.hue_rotation);
+}
+
+vec3 calculate_initial_position(inout DisplayParameters params, inout uint alt_seed) {
+	float pi = 3.14159;
+	vec3 pos = vec3(0.0);
+	{ // Emission shape.
+	 	pos = vec3(0.0);
+	}
+	return pos * emission_shape_scale + emission_shape_offset;
+}
+
+vec3 get_random_direction_from_spread(inout uint alt_seed, float spread_angle) {
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+	float spread_rad = spread_angle * degree_to_rad;
+	float angle1_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad;
+	float angle2_rad = rand_from_seed_m1_p1(alt_seed) * spread_rad * (1.0 - flatness);
+	vec3 direction_xz = vec3(sin(angle1_rad), 0.0, cos(angle1_rad));
+	vec3 direction_yz = vec3(0.0, sin(angle2_rad), cos(angle2_rad));
+	direction_yz.z = direction_yz.z / max(0.0001, sqrt(abs(direction_yz.z))); // Better uniform distribution.
+	vec3 spread_direction = vec3(direction_xz.x * direction_yz.z, direction_yz.y, direction_xz.z * direction_yz.z);
+	vec3 direction_nrm = length(direction) > 0.0 ? normalize(direction) : vec3(0.0, 0.0, 1.0);
+	// Rotate spread to direction.
+	vec3 binormal = cross(vec3(0.0, 1.0, 0.0), direction_nrm);
+	if (length(binormal) < 0.0001) {
+		// Direction is parallel to Y. Choose Z as the binormal.
+		binormal = vec3(0.0, 0.0, 1.0);
+	}
+	binormal = normalize(binormal);
+	vec3 normal = cross(binormal, direction_nrm);
+	spread_direction = binormal * spread_direction.x + normal * spread_direction.y + direction_nrm * spread_direction.z;
+	return normalize(spread_direction);
+}
+
+vec3 process_radial_displacement(DynamicsParameters param, float lifetime, inout uint alt_seed, mat4 transform, mat4 emission_transform, float delta) {
+	vec3 radial_displacement = vec3(0.0);
+	if (delta < 0.001) {
+		return radial_displacement;
+	}
+	float radial_displacement_multiplier = 1.0;
+	vec3 global_pivot = (emission_transform * vec4(velocity_pivot, 1.0)).xyz;
+	if (length(transform[3].xyz - global_pivot) > 0.01) {
+		radial_displacement = normalize(transform[3].xyz - global_pivot) * radial_displacement_multiplier * param.radial_velocity;
+	} else {
+		radial_displacement = get_random_direction_from_spread(alt_seed, 360.0) * param.radial_velocity;
+	}
+	if (radial_displacement_multiplier * param.radial_velocity < 0.0) {
+		// Prevent inwards velocity to flicker once the point is reached.
+		radial_displacement = normalize(radial_displacement) * min(abs(radial_displacement_multiplier * param.radial_velocity), length(transform[3].xyz - global_pivot) / delta);
+	}
+	return radial_displacement;
+}
+
+void process_physical_parameters(inout PhysicalParameters params, float lifetime_percent) {
+}
+
+void start() {
+	uint base_number = NUMBER;
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	// Reset alt seed?
+	//alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+	process_display_param(params, 0.0);
+	if (rand_from_seed(alt_seed) > AMOUNT_RATIO) {
+		ACTIVE = false;
+	}
+
+	if (RESTART_CUSTOM) {
+		CUSTOM = vec4(0.0);
+		CUSTOM.w = params.lifetime;
+		CUSTOM.x = dynamic_params.angle;
+		USERDATA1.w = 0.0;
+	}
+	if (RESTART_COLOR) {
+		COLOR = params.color;
+	}
+	if (RESTART_ROT_SCALE) {
+		TRANSFORM[0].xyz = vec3(1.0, 0.0, 0.0);
+		TRANSFORM[1].xyz = vec3(0.0, 1.0, 0.0);
+		TRANSFORM[2].xyz = vec3(0.0, 0.0, 1.0);
+	}
+	process_display_param(params, 0.0);
+
+	if (RESTART_POSITION) {
+		TRANSFORM[3].xyz = calculate_initial_position(params, alt_seed);
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+	}
+	if (RESTART_VELOCITY) {
+		// We use USERDATA to accumulate our velocities. That way, we can pass both animated velocities and accumulated velocities from
+		// acceleration in VELOCITY, allowing for proper interpolation of animated velocities as well. 
+		USERDATA1.xyz = get_random_direction_from_spread(alt_seed, spread) * dynamic_params.initial_velocity_multiplier;
+	} else {
+		USERDATA1.xyz = VELOCITY.xyz;
+	}
+
+	process_display_param(params, 0.0);
+
+	USERDATA1.xyz = (EMISSION_TRANSFORM * vec4(USERDATA1.xyz, 0.0)).xyz;
+	USERDATA1.xyz += EMITTER_VELOCITY * inherit_emitter_velocity_ratio;
+
+	TRANSFORM[3].xyz = EMISSION_TRANSFORM[3].xyz;
+}
+
+void process() {
+	uint base_number = NUMBER;
+	//if (repeatable) {
+	//	base_number = INDEX;
+	//}
+	uint alt_seed = hash(base_number + uint(1) + RANDOM_SEED);
+	DisplayParameters params;
+	calculate_initial_display_params(params, alt_seed);
+	DynamicsParameters dynamic_params;
+	calculate_initial_dynamics_params(dynamic_params, alt_seed);
+	PhysicalParameters physics_params;
+	calculate_initial_physical_params(physics_params, alt_seed);
+
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+
+	bool first_frame = CUSTOM.y == 0.0;
+	CUSTOM.y += DELTA / LIFETIME;
+	CUSTOM.y = mix(CUSTOM.y, 1.0, INTERPOLATE_TO_END);
+	float lifetime_percent = CUSTOM.y / params.lifetime;
+	if (CUSTOM.y > CUSTOM.w) {
+		ACTIVE = false;
+	}
+
+	// Calculate all velocity.
+	vec3 controlled_displacement = vec3(0.0);
+	controlled_displacement += process_radial_displacement(dynamic_params, lifetime_percent, alt_seed, TRANSFORM, EMISSION_TRANSFORM, DELTA);
+
+	process_physical_parameters(physics_params, lifetime_percent);
+	vec3 force;
+	{
+		// Copied from previous version.
+		vec3 pos = TRANSFORM[3].xyz;
+		force = gravity;
+		// Apply linear acceleration.
+		force += length(USERDATA1.xyz) > 0.0 ? normalize(USERDATA1.xyz) * physics_params.linear_accel : vec3(0.0);
+		// Apply radial acceleration.
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos - org;
+		force += length(diff) > 0.0 ? normalize(diff) * physics_params.radial_accel : vec3(0.0);
+		// Apply tangential acceleration.
+		float tangent_accel_val = physics_params.tangent_accel;
+		vec3 crossDiff = cross(normalize(diff), normalize(gravity));
+		force += length(crossDiff) > 0.0 ? normalize(crossDiff) * tangent_accel_val : vec3(0.0);
+		force += ATTRACTOR_FORCE;
+		// Apply attractor forces.
+		USERDATA1.xyz += force * DELTA;
+	}
+	{
+		// Copied from previous version.
+		if (physics_params.damping > 0.0) {
+			float v = length(USERDATA1.xyz);
+			v -= physics_params.damping * DELTA;
+			if (v < 0.0) {
+				USERDATA1.xyz = vec3(0.0);
+			} else {
+				USERDATA1.xyz = normalize(USERDATA1.xyz) * v;
+			}
+		}
+	}
+
+	// Turbulence before limiting.
+	vec3 final_velocity = controlled_displacement + USERDATA1.xyz;
+
+	VELOCITY = final_velocity;
+	TRANSFORM[3].xyz += final_velocity * DELTA;
+
+	process_display_param(params, lifetime_percent);
+
+	float base_angle = dynamic_params.angle;
+	base_angle += CUSTOM.y * LIFETIME * dynamic_params.angular_velocity;
+	CUSTOM.x = base_angle * degree_to_rad;
+	COLOR = params.color;
+
+	TRANSFORM[0].xyz = normalize_or_else(TRANSFORM[0].xyz, vec3(1.0, 0.0, 0.0));
+	TRANSFORM[1].xyz = normalize_or_else(TRANSFORM[1].xyz, vec3(0.0, 1.0, 0.0));
+	TRANSFORM[2].xyz = normalize_or_else(TRANSFORM[2].xyz, vec3(0.0, 0.0, 1.0));
+	if (first_frame) {
+		float scale_sign_x = params.scale.x < 0.0 ? -1.0 : 1.0;
+		float scale_sign_y = params.scale.y < 0.0 ? -1.0 : 1.0;
+		float scale_sign_z = params.scale.z < 0.0 ? -1.0 : 1.0;
+		float scale_minimum = 0.001;
+		TRANSFORM[0].xyz *= scale_sign_x * max(abs(params.scale.x), scale_minimum);
+		TRANSFORM[1].xyz *= scale_sign_y * max(abs(params.scale.y), scale_minimum);
+		TRANSFORM[2].xyz *= scale_sign_z * max(abs(params.scale.z), scale_minimum);
+	} else {
+		float scale_minimum = 0.001;
+		TRANSFORM[0].xyz *= max(abs(params.scale.x), scale_minimum);
+		TRANSFORM[1].xyz *= max(abs(params.scale.y), scale_minimum);
+		TRANSFORM[2].xyz *= max(abs(params.scale.z), scale_minimum);
+	}
+
+	CUSTOM.z = params.animation_offset + lifetime_percent * params.animation_speed;
+
+	if (CUSTOM.y > CUSTOM.w) {
+		ACTIVE = false;
+	}
+	
+	TRANSFORM[3].xyz = EMISSION_TRANSFORM[3].xyz;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ygna"]
+shader = SubResource("Shader_d1f4l")
+shader_parameter/direction = Vector3(1, 0, 0)
+shader_parameter/spread = 5.0
+shader_parameter/flatness = 0.0
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/initial_linear_velocity_min = 0.0
+shader_parameter/initial_linear_velocity_max = 0.0
+shader_parameter/directional_velocity_min = 0.0
+shader_parameter/directional_velocity_max = 0.0
+shader_parameter/angular_velocity_min = 0.0
+shader_parameter/angular_velocity_max = 0.0
+shader_parameter/orbit_velocity_min = 0.0
+shader_parameter/orbit_velocity_max = 0.0
+shader_parameter/radial_velocity_min = 0.0
+shader_parameter/radial_velocity_max = 0.0
+shader_parameter/linear_accel_min = 0.0
+shader_parameter/linear_accel_max = 0.0
+shader_parameter/radial_accel_min = 0.0
+shader_parameter/radial_accel_max = 0.0
+shader_parameter/tangent_accel_min = 0.0
+shader_parameter/tangent_accel_max = 0.0
+shader_parameter/damping_min = 0.0
+shader_parameter/damping_max = 0.0
+shader_parameter/initial_angle_min = 0.0
+shader_parameter/initial_angle_max = 0.0
+shader_parameter/scale_min = 1.0
+shader_parameter/scale_max = 1.0
+shader_parameter/hue_variation_min = 0.0
+shader_parameter/hue_variation_max = 0.0
+shader_parameter/anim_speed_min = 0.0
+shader_parameter/anim_speed_max = 0.0
+shader_parameter/anim_offset_min = 0.0
+shader_parameter/anim_offset_max = 0.0
+shader_parameter/lifetime_randomness = 0.0
+shader_parameter/emission_shape_offset = Vector3(0, 0, 0)
+shader_parameter/emission_shape_scale = Vector3(1, 1, 1)
+shader_parameter/velocity_pivot = Vector3(0, 0, 0)
+shader_parameter/color_value = Color(1, 1, 1, 1)
+shader_parameter/gravity = Vector3(0, 0, 0)
+
+[sub_resource type="Curve" id="Curve_d1f4l"]
+_limits = [0.0, 1.0, 0.0, 0.3]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3, 0.010638237), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3pel"]
+cull_mode = 2
+shading_mode = 0
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_punm7"]
+material = SubResource("StandardMaterial3D_j3pel")
+shape = 0
+size = 0.2
+sections = 7
+curve = SubResource("Curve_d1f4l")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_punm7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_0a7nm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_w6hin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ufm0e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_qrgon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_78n84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_invmh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ju4yt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_mc0n3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_gb6hm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_anidy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_cfpbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_mend0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7rwdq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_suluf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_asabb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_0se44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_m41ta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ytg1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_nk274")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_3sedq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_oam5a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_gvwok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_40i1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_gv62g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_hvmob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_b30je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_cgw6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_g3rov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_a27gq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_hkac3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_jju7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_bbu1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_788gt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_d4bx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_6s014")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_qjocn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_qpydj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_m4vt5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_n040u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_j2f8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_npolf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_umxvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_7xoyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_if8n4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_jwp7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_dw4bi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_aqu5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_d70bu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_3yy2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_50svg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_2vrir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_uovjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_rtyle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_sfc8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_614me")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_4ycfa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_k6epa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_3br1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_g2hjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_quxlv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_gwx2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_ccev8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_o7pnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_bucxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_4jxj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_hqu6s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_my6kf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_hj1ph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_igrgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_eqoxa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_smviy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_dyuiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_pgkdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_aremv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_7w6dw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_n576c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_wvoko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_m6axr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_dl6h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_a6pap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_u2qcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_re3dp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_s7tkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_1oeg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_bqaob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_nckli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_jsdsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_po7ck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_s4pne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_08t8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_55ph1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_tw1yn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_jq78k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_7c8wy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_f8md4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_cdu5a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_sa0at")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_6t1r7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_y3k4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_mp73j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_pa5yv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_dy1wn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_1yraw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_ye63k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_y52aj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_82q30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_jv7h2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_p3kpi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_am51c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_ggdso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_83u0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_t37ii")
+}],
+"loop": 1,
+"name": &"Normal",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4s420")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wu0hs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_v7lnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_spuay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r4ek6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_186dj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0kmg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2wbhl")
+}],
+"loop": 0,
+"name": &"Pop",
+"speed": 20.0
+}]
+
+[node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable", "trash_cup", "trail", "hint_pop")]
 collision_layer = 16
 script = ExtResource("1_e16t0")
 interactable = NodePath("Interactable")
 xray_material = ExtResource("8_wycgu")
 trash_cup = NodePath("Trash Cup/SM_TrashCup")
 activation_distance = 10.0
+trail = NodePath("GPUParticles3D")
+hint_pop = NodePath("HintPop")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
 visible = false
@@ -37,9 +959,24 @@ metadata/_custom_type_script = "uid://cku66354bxktd"
 shape = SubResource("BoxShape3D_g4v7s")
 
 [node name="Trash Cup" parent="." unique_id=1915222076 instance=ExtResource("4_ruef1")]
-transform = Transform3D(-9.227509e-09, -0.2111008, 0, -9.227509e-09, 4.0334724e-16, 0.2111008, -0.2111008, 9.227509e-09, -9.227509e-09, 0.10009057, 0.026606858, 0.024867669)
+transform = Transform3D(-9.227509e-09, -0.2111008, -9.227509e-09, 0, -9.227509e-09, 0.2111008, -0.2111008, 9.227509e-09, 4.0334724e-16, 0.10009057, 0.026606858, 0.024867669)
 
-[node name="SM_TrashCup" parent="Trash Cup" index="0" unique_id=1837821948]
+[node name="SM_TrashCup" parent="Trash Cup" index="0" unique_id=1216625550]
 surface_material_override/2 = ExtResource("8_wycgu")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2036556679]
+lifetime = 0.3
+transform_align = 3
+trail_enabled = true
+trail_lifetime = 1.0
+process_material = SubResource("ShaderMaterial_4ygna")
+draw_pass_1 = SubResource("RibbonTrailMesh_punm7")
+
+[node name="HintPop" type="AnimatedSprite3D" parent="." unique_id=764749127]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0.98730385, 0)
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_punm7")
+animation = &"Pop"
+autoplay = "Pop"
 
 [editable path="Trash Cup"]

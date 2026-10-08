@@ -1849,7 +1849,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_oodit"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fyan7"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1860,7 +1860,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lwqyd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xdtur"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1871,7 +1871,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_sn277"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_d0eyq"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1882,13 +1882,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_b52uf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_l14ib"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hwprm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ctxsq"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_d0xhy"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hxd2u"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "_trash_can", "shift_start_sound", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
@@ -2798,7 +2798,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.1836597, -0.110499606, 0.9767582, 3.7252857e-08, 0.99366015, 0.11241178, -0.9829886, -0.020645496, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.18365966, -0.11049962, 0.9767582, 3.725285e-08, 0.99366015, 0.1124118, -0.9829884, -0.020645497, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2876,7 +2876,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_oodit")
+texture = SubResource("ViewportTexture_fyan7")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2889,7 +2889,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_lwqyd")
+texture = SubResource("ViewportTexture_xdtur")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2906,7 +2906,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_sn277")
+texture = SubResource("ViewportTexture_d0eyq")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2923,7 +2923,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_b52uf")
+texture = SubResource("ViewportTexture_l14ib")
 
 [node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
 transform = Transform3D(1.1007682, 0, -0.47781718, 0, 1.2, 0, 0.47781718, 0, 1.1007682, 2.3493953, 1.2573628, 14.395585)
@@ -2947,10 +2947,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2908587, 1.6, 16.214787)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_hwprm")
+texture = SubResource("ViewportTexture_ctxsq")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_d0xhy")
+texture = SubResource("ViewportTexture_hxd2u")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2972,6 +2972,9 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-
 
 [node name="TrashCan" parent="." unique_id=1523606592 instance=ExtResource("267_pbe4p")]
 transform = Transform3D(0.6218793, 0, -0.7831131, 0, 1, 0, 0.7831131, 0, 0.6218793, 4.185316, -1.1920929e-07, -3.3701005)
+
+[node name="AudioStreamPlayer3D" parent="TrashCan" index="1" unique_id=778131750]
+stream = null
 
 [node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
@@ -3023,7 +3026,6 @@ transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.48
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
 
 [node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
-bus = &"TippyVO"
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
@@ -3036,6 +3038,7 @@ volume_db = -5.0
 transform = Transform3D(0.7278226, 0.009210606, 0.68570364, 6.386688e-10, 0.99990994, -0.013431133, -0.6857655, 0.009775481, 0.7277569, -4.3664393, 2.7244682, -3.5881112)
 unit_size = 5.0
 max_db = -8.0
+bus = &"Master"
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
@@ -3045,7 +3048,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057009794, -0.00016215755, -0.99993604, 1.02599024e-07, 1, -0.00016214717, 0.99993604, -1.01539825e-08, 0.00057009794, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009776, -0.00016215755, -0.9999357, 1.0259899e-07, 1, -0.00016214712, 0.9999357, -1.01539825e-08, 0.00057009776, -4.11582, -1.4201379, 0.23234849)
 
 [node name="Label3D4" type="Label3D" parent="CafeEnvironment/StoreRoom/Storage Arch" parent_id_path=PackedInt32Array(672806017, 847908752) index="1" unique_id=1148006303]
 transform = Transform3D(0.99999994, 0, 1.4210855e-14, 0, 1, 0, 0, 0, 1.0000005, 0.01610136, 0.8703489, 0.19787931)
@@ -3057,7 +3060,7 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
-[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=1669092183]
+[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=603626681]
 transform = Transform3D(-0.05555968, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497518, 0.5577049, 2.5702512, -0.048047185)
 
 [node name="AirFreshener" parent="." unique_id=1323392743 instance=ExtResource("358_lyu6w")]
@@ -3092,6 +3095,7 @@ transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -6.69007
 [editable path="Desk/Lamp 1&5 (1)"]
 [editable path="Desk/Day0DeskProps/Sad Plants2"]
 [editable path="TrashCan"]
+[editable path="TrashCan/Model"]
 [editable path="Teleporters/FrontToBackTeleporter"]
 [editable path="Teleporters/BackToFrontTeleporter"]
 [editable path="CafeEnvironment"]

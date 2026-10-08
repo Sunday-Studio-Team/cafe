@@ -65,11 +65,11 @@ enum EqualStates {
 
 @export var ingredient_coffeebar: TextureRect
 
-@export var idle_ing_bar_array:Array[Texture2D]
-@export var active_ing_bar_array:Array[Texture2D]
+@export var idle_ing_bar_array: Array[Texture2D]
+@export var active_ing_bar_array: Array[Texture2D]
 
-@export var arrows:Array[Texture]
-@export var icons:Array[Texture]
+@export var arrows: Array[Texture]
+@export var icons: Array[Texture]
 enum Arrow {
 	UP1,
 	UP2,
@@ -182,15 +182,15 @@ func _ready() -> void:
 	order_breakdown.hide()
 	current_ingbar_animation = idle_ing_bar_array
 
-var current_ingbar_animation:Array[Texture2D]:
+var current_ingbar_animation: Array[Texture2D]:
 	set(value):
 		if value == current_ingbar_animation:
 			return
 		animation_index = 0
 		current_ingbar_animation = value
-var animation_index:int
-var animation_delay_timer:float = 0
-var animation_delay:float = 0.03
+var animation_index: int
+var animation_delay_timer: float = 0
+var animation_delay: float = 0.03
 
 
 func reset_icons():
@@ -214,7 +214,7 @@ func update_ingredients_bar_animation():
 func _physics_process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 	timer_dial.offset_transform_enabled = true
-	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
+	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0, 360, customer_wait_bar.value / 100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
 	animation_delay = 0.03
@@ -649,7 +649,7 @@ func display_drink_score() -> void:
 	if order.liquid_correct: correct_count += 1
 	if order.extra_correct: correct_count += 1
 
-	var wrong_count: int = max(total_ingredients - correct_count,0)
+	var wrong_count: int = max(total_ingredients - correct_count, 0)
 
 	accept_money_arrow.texture = arrows[Arrow.UP2]
 	accept_money_icon.texture = icons[Icon.MONEY_GREEN]
@@ -773,7 +773,6 @@ func refill() -> void:
 			and not waiting_for_response
 	):
 		machine_make_drink()
-
 
 
 func cancel_fix_minigame() -> void:
