@@ -39,8 +39,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Global.in_ui:
-		# Allow ffwd/skip during cutscenes in minigames and machine UI
-		if !Global.minigame_active and !Global.in_machine_ui:
+		# Allow ffwd/skip during cutscenes in minigames, machine UI, and loadout menu.
+		if !Global.minigame_active and !Global.in_machine_ui and !Global.in_loadout_menu:
 			visible = false
 			if _fast_forward_enabled:
 				_fast_forward_enabled = false

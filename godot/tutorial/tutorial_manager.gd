@@ -25,6 +25,9 @@ extends Node
 @export var _day_1_tippy_tablet_area_detector: PlayerDetectionArea
 @export var _day_1_tippy_tablet_prop: Node3D
 @export var _day_1_tippy_tablet_camera_target_location: Node3D
+@export var _day_2_sato_at_locker_position: Node3D
+@export var _day_2_sato_at_help_desk_position: Node3D
+@export var _day_2_sato_at_broken_machine_position: Node3D
 
 var is_in_skippable_cinematic: bool = false
 var skip_part_requested: bool = false
@@ -62,7 +65,7 @@ func start_day() -> void:
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_1)
 
-			# Repeat the lines until shift started.
+			# Repeat the lines until tutorial machine used.
 			if true:
 				var repeat_lines: Array[String] = [
 					"voice_line_day_1_training_5_repeat_0",
@@ -266,8 +269,162 @@ func start_day() -> void:
 			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_37", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_38", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
+			await get_tree().create_timer(0.5).timeout
+
 		elif Global.day == 2:
-			pass
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_0)
+
+			# Repeat the lines until locker is interacted with.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_3_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_locker_opened = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_locker_opened
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_1)
+
+			# Repeat the lines until locker loadout is confirmed.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_9_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_locker_loadout_confirmed = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_locker_loadout_confirmed
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_2)
+
+			Global.main_scene.spawn_help_desk_customer()
+			
+			await Global.main_scene.customer_help_desk.new_desk_customer_arrived
+
+			Global.voice_line_system.play_voice_line("voice_line_day_2_training_13", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			# Repeat the lines until help desk customer is talked to.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_13_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_help_desk_interacted = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_help_desk_interacted
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_3)
+
+			# Repeat the lines until help desk minigame is finished.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_17_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_help_desk_finished = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_help_desk_finished
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_18", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_4)
+
+			# Repeat the lines until broken down machine is interacted with.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_21_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_broken_machine_interacted = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_broken_machine_interacted
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_5)
+
+			# Repeat the lines until broken down machine is fixed.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_23_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_broken_machine_fixed = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_broken_machine_fixed
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_6)
+
+			# Repeat the lines until broken down machine is interacted with.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_28_repeat_0",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_broken_machine_interacted = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_broken_machine_interacted
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_7)
+
+			# Repeat the lines until broken down machine is fixed.
+			if true:
+				var repeat_lines: Array[String] = [
+					"voice_line_day_2_training_30_repeat_0",
+					"voice_line_day_2_training_30_repeat_1",
+					]
+				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					]
+				Global.tutorial_day_2_broken_machine_fixed = false
+				var condition_callable: Callable = (
+					func() -> bool:
+						return Global.tutorial_day_2_broken_machine_fixed
+				)
+				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
+
+			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_31", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_32", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_33", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+			await get_tree().create_timer(0.5).timeout
+			
 		elif Global.day == 3:
 			pass
 		elif Global.day == 4:

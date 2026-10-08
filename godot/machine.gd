@@ -855,7 +855,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	_set_customer(null)
 
 
-func break_down() -> void:
+func break_down(specific_repair_minigame_name: String="") -> void:
 	if broken_down:
 		return
 
@@ -863,7 +863,11 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
-	next_repair_minigame = REPAIR_MINIGAMES.pick_random()
+	
+	if specific_repair_minigame_name != "":
+		next_repair_minigame = specific_repair_minigame_name
+	else:
+		next_repair_minigame = REPAIR_MINIGAMES.pick_random()
 
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
@@ -955,11 +959,15 @@ func _on_fix_machine_button_pressed() -> void:
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
 	Events.minigame_active.emit(next_repair_minigame)
 
+	Global.tutorial_day_2_broken_machine_interacted = true
+
 
 func _on_machine_fixed() -> void:
 	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 	fix_machine()
+
+	Global.tutorial_day_2_broken_machine_fixed = true
 
 
 # starts the remake minigame

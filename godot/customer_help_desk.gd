@@ -105,6 +105,8 @@ func _on_help_desk_interactable_interacted() -> void:
 	if _desk_customer == null:
 		return
 
+	Global.tutorial_day_2_help_desk_interacted = true
+
 	Global.active_help_desk_customer = _desk_customer
 	Global.active_help_desk_customer.wait_timed_out.connect(_on_customer_wait_timed_out_during_minigame)
 	
@@ -117,6 +119,8 @@ func _on_help_desk_interactable_interacted() -> void:
 func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
+	
+	Global.tutorial_day_2_help_desk_finished = true
 	
 	var rating_gain: float = Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
 	Events.alert_posted.emit("+%s Customer placated!" % rating_gain, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
