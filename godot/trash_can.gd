@@ -11,3 +11,5 @@ func _on_body_entered(body: Node3D) -> void:
 	Global.employee_rating += rating_gained
 	Global.total_trash -= 1
 	Events.alert_posted.emit("+%s⭐ Trash cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
+
+	Global.tutorial_day_4_trash_thrown_away = true

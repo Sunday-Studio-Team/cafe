@@ -15,7 +15,7 @@ extends Node3D
 @export var _left_area_left_machine: Machine
 @export var _left_area_middle_machine: Machine
 @export var _left_area_right_machine: Machine
-@export var _customer_help_desk: CustomerHelpDesk
+@export var customer_help_desk: CustomerHelpDesk
 @export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
 @export var customer_trash_scene: PackedScene
@@ -42,7 +42,7 @@ var _all_machines: Array[Machine]
 var _active_machines: Array[Machine]
 var _all_security_cameras: Array[SecurityCam3D]
 
-@onready var tutorial_machine: Machine = _right_area_right_machine
+var tutorial_machine: Machine
 
 var should_spawn_trash_today: bool = false
 var closing_time: bool = false
@@ -148,7 +148,6 @@ func _ready() -> void:
 	Global.all_3d_audio_stream_players.clear()
 	Global.refresh_active_items()
 	closing_time = false
-	_trash_can.visible = false
 
 	get_stats()
 
@@ -195,6 +194,7 @@ func set_per_day_stuff() -> void:
 	if Global.day == 1:
 		if Global.playing_tutorial:
 			_active_machines.clear()
+			tutorial_machine = _right_area_right_machine
 			_active_machines.push_back(tutorial_machine)
 			_set_day_security_cameras_active([])
 		else:
@@ -202,29 +202,54 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_left_machine)
 			_active_machines.push_back(_right_area_right_machine)
 			_set_day_security_cameras_active([])
+		_trash_can.visible = false
 
 	if Global.day == 2:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_left_area_left_machine)
-		_set_day_security_cameras_active([])
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			tutorial_machine = _left_area_right_machine
+			_active_machines.push_back(tutorial_machine)
+			_set_day_security_cameras_active([])
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_left_area_left_machine)
+			_set_day_security_cameras_active([])
+		_trash_can.visible = false
 
 	if Global.day == 3:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_middle_camera])
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			tutorial_machine = _right_area_right_machine
+			_active_machines.push_back(tutorial_machine)
+			_set_day_security_cameras_active([_middle_camera])
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_middle_camera])
+		_trash_can.visible = false
 
 	if Global.day == 4:
-		_active_machines.clear()
-		_active_machines.push_back(_left_area_left_machine)
-		_active_machines.push_back(_left_area_right_machine)
-		_active_machines.push_back(_right_area_left_machine)
-		_active_machines.push_back(_right_area_right_machine)
-		_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
-		should_spawn_trash_today = true
-		_trash_can.visible = true
+		if Global.playing_tutorial:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+			should_spawn_trash_today = false
+			_trash_can.visible = true
+		else:
+			_active_machines.clear()
+			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_left_area_right_machine)
+			_active_machines.push_back(_right_area_left_machine)
+			_active_machines.push_back(_right_area_right_machine)
+			_set_day_security_cameras_active([_left_area_camera, _middle_camera, _right_area_camera])
+			should_spawn_trash_today = true
+			_trash_can.visible = true
 
 	if Global.day == 5:
 		_active_machines.clear()
@@ -334,7 +359,7 @@ func spawn_specific_customer(customer_name: String, help_desk: String) -> void:
 
 
 func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> void:
-	if _customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
+	if customer_help_desk.customer_queue_size() >= Stats.current.max_customers_queued_help_desk:
 		return
 
 	# NOTE: NOTE SURE WHAT THIS IS DOING
@@ -352,7 +377,7 @@ func spawn_help_desk_customer(sprite_resource: CustomerSpriteData = null) -> voi
 	if sprite_resource:
 		new_customer.customer_sprite_resource = sprite_resource
 		Console.print_line("spawned %s at help desk" % sprite_resource.customer_name)
-	_customer_help_desk.add_customer_to_queue(new_customer)
+	customer_help_desk.add_customer_to_queue(new_customer)
 
 
 func apply_used_air_freshener(customer_wait_duration_extension: float) -> void:

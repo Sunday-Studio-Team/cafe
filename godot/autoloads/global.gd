@@ -140,9 +140,17 @@ var tutorial_remake_button_pressed: bool = false
 var tutorial_drink_remake_ingredients_done: bool = false
 var tutorial_drink_remade_served: bool = false
 var tutorial_ingredients_bag_got: bool = false
-var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a machine runs out of food
-var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
-var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
+var tutorial_day_2_locker_opened: bool = false
+var tutorial_day_2_locker_loadout_confirmed: bool = false
+var tutorial_day_2_help_desk_interacted: bool = false
+var tutorial_day_2_help_desk_finished: bool = false
+var tutorial_day_2_broken_machine_interacted: bool = false
+var tutorial_day_2_broken_machine_fixed: bool = false
+var tutorial_day_3_camera_stunned_player: bool = false
+var tutorial_day_3_spill_interacted: bool = false
+var tutorial_day_3_spill_cleaned: bool = false
+var tutorial_day_4_trash_picked_up: bool = false
+var tutorial_day_4_trash_thrown_away: bool = false
 var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource

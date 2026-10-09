@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://cfqkkv0ddikj1"]
+
+[ext_resource type="AudioStream" uid="uid://52rr1w4vkwmr" path="res://audio/vo/tutorials/day_5/voice_line_day_5_intro_3.wav" id="1_2wn8w"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_rdqnw"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_llhrw"]
+
+[resource]
+script = ExtResource("2_rdqnw")
+voice_line_id = "voice_line_day_5_intro_3"
+audio_stream = ExtResource("1_2wn8w")
+speaker = ExtResource("3_llhrw")
+subtitle_en = "By following you around the cafe."
