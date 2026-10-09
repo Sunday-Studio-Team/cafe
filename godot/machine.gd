@@ -564,7 +564,6 @@ func machine_make_drink() -> void:
 	# Calculate scaled price
 	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
 
-	order.star_rating_gain_for_remake = Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
 	# Calculate star rating loss if accepted
 	if order.star_rating_loss_for_accept != 0.0:
 		order.star_rating_loss_for_accept = maxf(0.1, snappedf(
@@ -660,8 +659,9 @@ func display_drink_score() -> void:
 		remake_rating_arrow.texture = arrows[Arrow.UP2]
 		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
 	elif order.star_rating_loss_for_accept == 0.0:
-		remake_rating_arrow.texture = arrows[Arrow.NEUTRAL]
-		remake_rating_icon.texture = icons[Icon.PERSON_YELLOW]
+		remake_money_arrow.texture = arrows[Arrow.UP1]
+		remake_rating_arrow.texture = arrows[Arrow.UP2]
+		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
 	if order.star_rating_loss_for_accept > 0.0:
 		accept_rating_icon.texture = icons[Icon.PERSON_RED]
 		match wrong_count:
@@ -808,12 +808,12 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink or order.star_rating_loss_for_accept == 0.0:
 		Events.alert_posted.emit(
-			"+%.1f Customer happy with drink!" % order.star_rating_gain_for_remake,
+			"+%.1f Customer happy with drink!" % Stats.current.drink_correct_star_rating_gain_each_day[Global.day],
 			UI.AlertIconType.RATING,
 			4.0,
 			UI.ALERT_COLOR_GREEN
 		)
-		Global.employee_rating += order.star_rating_gain_for_remake
+		Global.employee_rating += Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
 		rating_vfx.play_anim_then_hide("plus_rating")
 	else:
 		Events.alert_posted.emit(
@@ -1047,6 +1047,5 @@ class OrderData:
 	var main_correct: bool = false
 	var liquid_correct: bool = false
 	var extra_correct: bool = false
-	var star_rating_gain_for_remake: float
 	var star_rating_loss_for_accept: float
 	var final_order_price: float
