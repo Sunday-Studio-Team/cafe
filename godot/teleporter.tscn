@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b0d6426lkqv6k" path="res://teleporter.gd" id="1_eumkw"]
 [ext_resource type="AudioStream" uid="uid://cosuq17hxsua5" path="res://audio/use_teleport.wav" id="2_tuehi"]
+[ext_resource type="PackedScene" uid="uid://dxadsyvtrisi1" path="res://resources/items/comic_teleporter.glb" id="3_kk6yu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_punm7"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_xnu58"]
-size = Vector3(1, 0.2680664, 1)
 
 [node name="Teleporter" type="Area3D" unique_id=419540253 node_paths=PackedStringArray("destination", "use_sound")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
@@ -27,9 +25,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 billboard = 2
 text = "step on to teleport"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1446621872]
-mesh = SubResource("BoxMesh_xnu58")
-
 [node name="UseSound" type="AudioStreamPlayer" parent="." unique_id=439260519]
 stream = ExtResource("2_tuehi")
 volume_db = -5.0
+
+[node name="comic_teleporter" parent="." unique_id=1387026680 instance=ExtResource("3_kk6yu")]
+transform = Transform3D(-9.3140734e-08, 0, 2.1308117, 0, 2.1308117, 0, -2.1308117, 0, -9.3140734e-08, 0.013880968, 0.01652816, -0.0045432453)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="comic_teleporter" unique_id=745740299]
+transform = Transform3D(0.4693047, 0, 0, 0, 0.4693047, 0, 0, 0, 0.4693047, 0, 0.23210952, 0)
+light_color = Color(0.5137255, 1, 1, 1)
+light_energy = 3.0
+shadow_enabled = true
+omni_range = 1.004
