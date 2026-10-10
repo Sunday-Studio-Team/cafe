@@ -1,11 +1,14 @@
 class_name TabletUi
 extends Control
 
+@export_category("Nodes")
 @export var money_made_label: Label
 @export var money_bar: ProgressBar
-@export var rating_label: Label
-@export var customer_flow_rate_label: Label
 @export var item_icons: Control
+@export var rating_meter_stars: TextureRect
+@export var rating_meter_needle: TextureRect
+@export_category("Assets")
+@export var rating_stars_textures: Array[Texture]
 
 var _employee_rating_last_update: float = -1
 
@@ -14,6 +17,9 @@ func _ready() -> void:
 	await get_tree().process_frame
 	populate_items()
 	Events.items_updated.connect(populate_items)
+
+	rating_meter_stars.texture = rating_stars_textures[0]
+	rating_meter_needle.offset_transform_rotation = deg_to_rad(-135)
 
 
 func populate_items() -> void:
@@ -28,7 +34,6 @@ func populate_items() -> void:
 
 func _physics_process(_delta: float) -> void:
 	update_score_indicators()
-	_update_rating()
 
 
 func update_score_indicators() -> void:
@@ -48,5 +53,5 @@ func _update_rating() -> void:
 	var current_rating: float = Global.employee_rating
 	_employee_rating_last_update = current_rating
 
-	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
-	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
+	rating_meter_stars.texture = rating_stars_textures[current_rating]
+	rating_meter_needle.offset_transform_rotation = deg_to_rad(-135 + 45 * current_rating)
