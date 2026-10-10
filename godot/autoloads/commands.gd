@@ -99,7 +99,7 @@ func _ready() -> void:
 func spawn_trash() -> void:
 	Global.main_scene.spawn_trash();
 	Console.print_line("trash was spawned")
-	
+
 
 func unlock_everything() -> void:
 	unlock_day("6")
@@ -130,7 +130,7 @@ func toggle_freecam() -> void:
 	if Global.camera_mode == Global.CameraMode.CINEMATIC:
 		Console.print_line("Currently in a cinematic, can't toggle.")
 		return
-	
+
 	Events.free_cam_toggled.emit()
 	if Global.camera_mode == Global.CameraMode.DEBUG_FREE_CAM:
 		Console.print_line("freecam enabled")
@@ -167,7 +167,7 @@ func set_rating(rating: String) -> void:
 	Global.employee_rating = rating as float
 	Console.print_line("setting rating to %s" % rating)
 	if int(rating) > 5.0:
-		Console.print_line("(will be clamped to limit of 5 stars")
+		Console.print_line("(will be clamped to limit of 5 stars)")
 
 
 func end_shift(arg: String = "") -> void:
@@ -272,7 +272,7 @@ func toggle_timer() -> void:
 
 func toggle_unlimited_actives() -> void:
 	Global.no_cooldowns = !Global.no_cooldowns
-	
+
 	if Global.no_cooldowns:
 		Console.print_line("item cooldowns disabled")
 	else:
