@@ -654,15 +654,11 @@ func display_drink_score() -> void:
 	remake_money_arrow.texture = arrows[Arrow.UP1]
 	remake_money_icon.texture = icons[Icon.MONEY_GREEN]
 
-	if order.star_rating_loss_for_accept > 0.0:
+	if order.star_rating_loss_for_accept == 0.0:
 		remake_money_arrow.texture = arrows[Arrow.UP1]
 		remake_rating_arrow.texture = arrows[Arrow.UP2]
 		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
-	elif order.star_rating_loss_for_accept == 0.0:
-		remake_money_arrow.texture = arrows[Arrow.UP1]
-		remake_rating_arrow.texture = arrows[Arrow.UP2]
-		remake_rating_icon.texture = icons[Icon.PERSON_GREEN]
-	if order.star_rating_loss_for_accept > 0.0:
+	elif order.star_rating_loss_for_accept > 0.0:
 		accept_rating_icon.texture = icons[Icon.PERSON_RED]
 		match wrong_count:
 			1:
@@ -671,9 +667,6 @@ func display_drink_score() -> void:
 				accept_rating_arrow.texture = arrows[Arrow.DOWN2]
 			3:
 				accept_rating_arrow.texture = arrows[Arrow.DOWN3]
-	elif order.star_rating_loss_for_accept == 0.0:
-		accept_rating_arrow.texture = arrows[Arrow.NEUTRAL]
-		accept_rating_icon.texture = icons[Icon.PERSON_YELLOW]
 
 func fix_machine(hammer: bool = false) -> void:
 	if hammer:
