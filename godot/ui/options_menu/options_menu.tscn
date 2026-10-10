@@ -3,44 +3,39 @@
 [ext_resource type="PackedScene" uid="uid://p8e3ualo81vq" path="res://ui/options_menu/options_menu_option_view.tscn" id="1_3s1t0"]
 [ext_resource type="Script" uid="uid://don8op45g0jer" path="res://ui/options_menu/options_menu.gd" id="1_8h7tm"]
 [ext_resource type="PackedScene" uid="uid://cejq61xjx6sye" path="res://ui/options_menu/options_menu_slider_view.tscn" id="2_kx268"]
+[ext_resource type="Texture2D" uid="uid://cblpsml2tob42" path="res://ui/options_menu/assets/layers setitngs bg.png" id="2_sk6u8"]
+[ext_resource type="Texture2D" uid="uid://c40el80p0p8kx" path="res://ui/options_menu/assets/layers setitngs sato.png" id="3_jyblu"]
 [ext_resource type="PackedScene" uid="uid://bfoj2ygbyxij8" path="res://ui/options_menu/options_menu_keybind_option_view.tscn" id="3_utl02"]
+[ext_resource type="Texture2D" uid="uid://camxdwc2umo5b" path="res://ui/options_menu/assets/layers setitngs clipboard.png" id="4_6s18u"]
+[ext_resource type="FontFile" uid="uid://bqbe41e30urp2" path="res://ui/options_menu/assets/komika_axis/KOMIKAX_.ttf" id="6_kg7lv"]
+[ext_resource type="Texture2D" uid="uid://b23wenu2vyx1m" path="res://ui/options_menu/assets/layers setitngs save button.png" id="8_kg7lv"]
+[ext_resource type="Texture2D" uid="uid://dvpdu2hqtvn44" path="res://ui/options_menu/assets/hand png.png" id="10_6s18u"]
+[ext_resource type="FontFile" uid="uid://dngkihvwxvm4u" path="res://ui/options_menu/assets/komika_axis/Ka-Boing!.ttf" id="10_kg7lv"]
+[ext_resource type="Texture2D" uid="uid://rt1gbxm22gxr" path="res://ui/options_menu/assets/layers setitngs second header.png" id="10_uvrmp"]
+[ext_resource type="Script" uid="uid://bttfex1cp4av0" path="res://ui/options_menu/hand_settings.gd" id="11_kg7lv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h7tm"]
-bg_color = Color(0.11366529, 0.11366529, 0.113665275, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6s18u"]
+content_margin_top = 50.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
-font_size = 24
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g28q7"]
+bg_color = Color(0.6, 0.6, 1, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjtux"]
-content_margin_left = 16.0
-content_margin_top = 16.0
-content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.16, 0.16, 0.16, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnmr0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utl02"]
-content_margin_left = 32.0
-content_margin_top = 16.0
-content_margin_right = 32.0
-content_margin_bottom = 16.0
-bg_color = Color(0.09, 0.09, 0.09, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kg7lv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx268"]
-content_margin_left = 32.0
-content_margin_top = 16.0
-content_margin_right = 32.0
-content_margin_bottom = 16.0
-bg_color = Color(0.34, 0.34, 0.34, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7inq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
-content_margin_left = 32.0
-content_margin_top = 16.0
-content_margin_right = 32.0
-content_margin_bottom = 16.0
-bg_color = Color(0.16, 0.16, 0.16, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvrmp"]
+bg_color = Color(1, 1, 1, 0)
+shadow_color = Color(0, 0, 0, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wakw5"]
-bg_color = Color(0.06, 0.06, 0.06, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52acx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_overall_volume_slider_view", "_music_volume_slider_view", "_voice_volume_slider_view", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_mouse_sensitivity_slider_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
 process_mode = 3
@@ -65,7 +60,7 @@ _interact_keybind_option_view = NodePath("Control/MarginContainer/MarginContaine
 _drop_item_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/DropItemOptionsMenuKeybindOptionView2")
 _use_contextual_active_item_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/UseContextualActiveItemOptionsMenuKeybindOptionView")
 _pause_exit_menu_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/PauseExitMenuOptionsMenuKeybindOptionView2")
-_save_settings_button = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/SaveSettingsButton")
+_save_settings_button = NodePath("Control/SaveSettingsButton")
 
 [node name="Control" type="Control" parent="." unique_id=12575952]
 layout_mode = 3
@@ -75,14 +70,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control" unique_id=7772573]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.39215687)
+[node name="LayersSetitngsBg" type="Sprite2D" parent="Control" unique_id=989975001]
+position = Vector2(956.00006, 540.00006)
+scale = Vector2(0.9423645, 0.9404553)
+texture = ExtResource("2_sk6u8")
+
+[node name="LayersSetitngsClipboard" type="Sprite2D" parent="Control" unique_id=808251373]
+position = Vector2(960.5, 541)
+scale = Vector2(0.94729066, 0.9457093)
+texture = ExtResource("4_6s18u")
+
+[node name="LayersSetitngsSecondHeader" type="Sprite2D" parent="Control" unique_id=2124941432]
+position = Vector2(967, 533)
+rotation = -0.018742291
+scale = Vector2(0.9428571, 0.94746053)
+texture = ExtResource("10_uvrmp")
+
+[node name="LayersSetitngsSaveButton" type="Sprite2D" parent="Control" unique_id=1416596797]
+position = Vector2(985, 693)
+scale = Vector2(0.9458128, 0.9535902)
+texture = ExtResource("8_kg7lv")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=1612091414]
 layout_mode = 1
@@ -91,16 +98,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -410.0
-offset_top = -452.0
-offset_right = 410.0
-offset_bottom = 452.0
+offset_left = -562.0
+offset_top = -329.0
+offset_right = 258.0
+offset_bottom = 575.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="Control/MarginContainer" unique_id=681432772]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_8h7tm")
+rotation = -0.16486166
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer" unique_id=105624590]
 layout_mode = 2
@@ -113,24 +117,19 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=926855798]
-layout_mode = 2
-theme_override_constants/margin_top = 0
-
-[node name="Label" type="Label" parent="Control/MarginContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=1065899081]
-layout_mode = 2
-text = "Game Settings"
-label_settings = SubResource("LabelSettings_xrivr")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="TabContainer" type="TabContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1902669804]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_tjtux")
-theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_utl02")
-theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_kx268")
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_13qdw")
+size_flags_stretch_ratio = 1.64
+offset_transform_enabled = true
+offset_transform_pivot_ratio = Vector2(0, 0)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_kg7lv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6s18u")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_g28q7")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_lnmr0")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_kg7lv")
 tab_alignment = 1
 current_tab = 0
 tab_0/title = "General"
@@ -166,6 +165,10 @@ layout_mode = 2
 option_name = "Window Mode"
 
 [node name="VsyncModeOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1613105363 instance=ExtResource("1_3s1t0")]
+layout_mode = 2
+option_name = "Vsync Mode"
+
+[node name="VsyncModeOptionsMenuOptionView2" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=341699350 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Vsync Mode"
 
@@ -229,8 +232,34 @@ action_name = "Use Contextual Active Item"
 layout_mode = 2
 action_name = "Pause / Exit Menu"
 
-[node name="SaveSettingsButton" type="Button" parent="Control/MarginContainer/MarginContainer/VBoxContainer" unique_id=1727838823]
+[node name="SaveSettingsButton" type="Button" parent="Control" unique_id=1727838823]
 custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_wakw5")
+layout_mode = 0
+offset_left = 577.0
+offset_top = 1065.9999
+offset_right = 1333.0
+offset_bottom = 1133.9999
+rotation = -0.15361378
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+theme_override_fonts/font = ExtResource("10_kg7lv")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_q7inq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uvrmp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_52acx")
 text = "Save Settings"
+
+[node name="HandPng" type="Sprite2D" parent="Control" unique_id=1872082485]
+position = Vector2(1820.9999, 1116.0002)
+rotation = 0.039622396
+scale = Vector2(0.94433504, 0.9404557)
+texture = ExtResource("10_6s18u")
+script = ExtResource("11_kg7lv")
+sprite_image = ExtResource("10_6s18u")
+
+[node name="LayersSetitngsSato" type="Sprite2D" parent="Control" unique_id=1224002315]
+position = Vector2(963, 553.99994)
+rotation = -0.01461696
+scale = Vector2(0.9463054, 0.95359015)
+texture = ExtResource("3_jyblu")
