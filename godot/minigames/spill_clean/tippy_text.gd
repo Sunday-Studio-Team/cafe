@@ -1,6 +1,7 @@
 class_name TippyText
 extends Sprite2D
 
+@export var bubble_before_wet: Texture2D
 @export var bubble_after_wet: Texture2D
 @export var grow_count: int 
 @export var speaking_gap: float
@@ -27,11 +28,23 @@ func _ready() -> void:
 	
 	_starting_animation(2)
 
-
-func mop_entered() -> void:
+func mop_need_cleaning() -> void:
 	if grow_tween != null:
 		grow_tween.kill()
 		scale = initial_scale
+	
+	grow_tween = create_tween()
+
+	show()
+	texture = bubble_before_wet
+	_starting_animation(2)
+	await get_tree().create_timer(4.5).timeout
+
+	#hide()
+
+func mop_entered() -> void:
+	grow_tween = create_tween()
+
 
 	show()
 	_start_speaking()
