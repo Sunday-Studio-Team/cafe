@@ -2282,7 +2282,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005700981, -0.00016215755, -0.9999363, 1.02599046e-07, 1, -0.00016214722, 0.9999363, -1.01539825e-08, 0.0005700981, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009794, -0.00016215755, -0.99993604, 1.02599024e-07, 1, -0.00016214717, 0.99993604, -1.01539825e-08, 0.00057009794, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -3908,7 +3908,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.071474075, 0.36524963, -0.
 transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, -2.5090976, 0, 0.46531487)
 
 [node name="Storage Arch" parent="StoreRoom" unique_id=847908752 instance=ExtResource("143_f56pk")]
-transform = Transform3D(-1.5181311, 0, 1.1237838e-07, 0, 1.2854587, 0, -1.3271924e-07, 0, -1.2854588, 3.0256598, 1.0235405, -0.0022854805)
+transform = Transform3D(-1.5181311, 0, 1.1237838e-07, 0, 1.3341507, 0, -1.3271924e-07, 0, -1.2854588, 3.0256598, 0.9852401, -0.012000084)
 
 [node name="BreakRoom" type="Node3D" parent="." unique_id=1614027471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
@@ -4266,6 +4266,17 @@ transform = Transform3D(33.762478, 0, 0, 0, 0, -33.762478, 0, 2.184926, 0, 2.690
 mesh = SubResource("ArrayMesh_kgm08")
 
 [node name="tippy1_001" type="MeshInstance3D" parent="Cardboard Tippy door frame" unique_id=65514177]
+transform = Transform3D(1.8884794, 0, 0, 0, 0, -1.8884794, 0, 1.8884794, 0, 2.0167825, 2.4460397, 0.03006987)
+mesh = SubResource("ArrayMesh_becmu")
+
+[node name="Cardboard Tippy door frame2" type="Node3D" parent="." unique_id=1744586711]
+transform = Transform3D(0.7651894, 0, 0, 0, 0.7651894, 0, 0, 0, 0.7651894, -3.0479543, 0.1500535, 6.2191296)
+
+[node name="frame_002" type="MeshInstance3D" parent="Cardboard Tippy door frame2" unique_id=526833294]
+transform = Transform3D(33.762478, 0, 0, 0, 0, -33.762478, 0, 2.184926, 0, 2.690011, 1.3391507, -0.029753089)
+mesh = SubResource("ArrayMesh_kgm08")
+
+[node name="tippy1_001" type="MeshInstance3D" parent="Cardboard Tippy door frame2" unique_id=1303267559]
 transform = Transform3D(1.8884794, 0, 0, 0, 0, -1.8884794, 0, 1.8884794, 0, 2.0167825, 2.4460397, 0.03006987)
 mesh = SubResource("ArrayMesh_becmu")
 
