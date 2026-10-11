@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cejq61xjx6sye"]
 
 [ext_resource type="Script" uid="uid://btvwjcr2lpc7l" path="res://ui/options_menu/options_menu_slider_view.gd" id="1_kg3kb"]
-[ext_resource type="FontFile" uid="uid://bqbe41e30urp2" path="res://ui/options_menu/assets/komika_axis/KOMIKAX_.ttf" id="2_0ufmu"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="2_0ufmu"]
 
 [node name="OptionsMenuSliderView" type="MarginContainer" unique_id=1434606385 node_paths=PackedStringArray("_option_name_label", "_reset_button", "_slider")]
 offset_right = 448.0
@@ -26,6 +26,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_0ufmu")
+theme_override_font_sizes/normal_font_size = 32
 text = "Slider"
 fit_content = true
 autowrap_mode = 0

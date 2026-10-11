@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c40el80p0p8kx" path="res://ui/options_menu/assets/layers setitngs sato.png" id="3_jyblu"]
 [ext_resource type="PackedScene" uid="uid://bfoj2ygbyxij8" path="res://ui/options_menu/options_menu_keybind_option_view.tscn" id="3_utl02"]
 [ext_resource type="Texture2D" uid="uid://camxdwc2umo5b" path="res://ui/options_menu/assets/layers setitngs clipboard.png" id="4_6s18u"]
-[ext_resource type="FontFile" uid="uid://bqbe41e30urp2" path="res://ui/options_menu/assets/komika_axis/KOMIKAX_.ttf" id="6_kg7lv"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="6_kg7lv"]
 [ext_resource type="Texture2D" uid="uid://b23wenu2vyx1m" path="res://ui/options_menu/assets/layers setitngs save button.png" id="8_kg7lv"]
 [ext_resource type="Texture2D" uid="uid://dvpdu2hqtvn44" path="res://ui/options_menu/assets/hand png.png" id="10_6s18u"]
 [ext_resource type="FontFile" uid="uid://dngkihvwxvm4u" path="res://ui/options_menu/assets/komika_axis/Ka-Boing!.ttf" id="10_kg7lv"]
@@ -37,7 +37,7 @@ shadow_color = Color(0, 0, 0, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_52acx"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_overall_volume_slider_view", "_music_volume_slider_view", "_voice_volume_slider_view", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_mouse_sensitivity_slider_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_overall_volume_slider_view", "_music_volume_slider_view", "_voice_volume_slider_view", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_mouse_sensitivity_slider_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button", "save_wipe_button")]
 process_mode = 3
 layer = 5
 script = ExtResource("1_8h7tm")
@@ -61,6 +61,7 @@ _drop_item_keybind_option_view = NodePath("Control/MarginContainer/MarginContain
 _use_contextual_active_item_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/UseContextualActiveItemOptionsMenuKeybindOptionView")
 _pause_exit_menu_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/PauseExitMenuOptionsMenuKeybindOptionView2")
 _save_settings_button = NodePath("Control/SaveSettingsButton")
+save_wipe_button = NodePath("SaveWipeButton")
 
 [node name="Control" type="Control" parent="." unique_id=12575952]
 layout_mode = 3
@@ -126,20 +127,21 @@ offset_transform_pivot_ratio = Vector2(0, 0)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_colors/font_unselected_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_kg7lv")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/panel = SubResource("StyleBoxFlat_6s18u")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_g28q7")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_lnmr0")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_kg7lv")
 tab_alignment = 1
 current_tab = 0
-tab_0/title = "General"
+tab_0/title = "General  "
 tab_1/title = "Keybinds"
 
 [node name="GeneralScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1617562027]
 layout_mode = 2
 size_flags_vertical = 3
 metadata/_tab_index = 0
-metadata/_tab_name = "General"
+metadata/_tab_name = "General  "
 
 [node name="GeneralOptionViewsVBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer" unique_id=1160021112]
 layout_mode = 2
@@ -263,3 +265,15 @@ position = Vector2(963, 553.99994)
 rotation = -0.01461696
 scale = Vector2(0.9463054, 0.95359015)
 texture = ExtResource("3_jyblu")
+
+[node name="SaveWipeButton" type="Button" parent="." unique_id=344724938]
+offset_left = 14.0
+offset_top = 927.0
+offset_right = 474.0
+offset_bottom = 1071.0
+theme_override_fonts/font = ExtResource("6_kg7lv")
+theme_override_font_sizes/font_size = 40
+text = "temporary button that
+kills your save
+like yes it just does it
+no warning no hesitation"
