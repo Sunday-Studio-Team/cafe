@@ -80,7 +80,7 @@ func _update_prev_next_buttons() -> void:
 
 func _on_previous_day_button_pressed() -> void:
 	var new_day: int = _day - 1
-	new_day = clampi(new_day, 0, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
+	new_day = clampi(new_day, 1, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
 	if new_day == _day:
 		return
 	
@@ -112,7 +112,7 @@ func _on_previous_day_button_pressed() -> void:
 
 func _on_next_day_button_pressed() -> void:
 	var new_day: int = _day + 1
-	new_day = clampi(new_day, 0, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
+	new_day = clampi(new_day, 1, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
 	if new_day == _day:
 		return
 	

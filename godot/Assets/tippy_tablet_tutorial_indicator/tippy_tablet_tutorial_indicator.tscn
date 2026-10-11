@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://lmhw5wqr2spn"]
+
+[ext_resource type="PackedScene" uid="uid://bh4pcx7vu8u36" path="res://Assets/tippy_tablet_tutorial_indicator/tippy_tablet_tutorial_indicator.glb" id="1_vr02k"]
+
+[node name="TippyTabletTutorialIndicator" type="Node3D" unique_id=118122595]
+
+[node name="Scaler" type="Node3D" parent="." unique_id=959925939]
+transform = Transform3D(0.38397884, 0, 0, 0, 0.38397884, 0, 0, 0, 0.38397884, 0, 0, 0)
+
+[node name="tippy_tablet_tutorial_indicator" parent="Scaler" unique_id=864526271 instance=ExtResource("1_vr02k")]
+transform = Transform3D(-1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.07698822, -0.56325126, -0.034954667)
+
+[node name="sign" parent="Scaler/tippy_tablet_tutorial_indicator" index="1" unique_id=1391653742]
+layers = 8
+
+[editable path="Scaler/tippy_tablet_tutorial_indicator"]

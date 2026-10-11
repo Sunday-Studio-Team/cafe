@@ -41,6 +41,8 @@ func _on_interacted() -> void:
 	Global.holding_trash = true
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
+
+	Global.tutorial_day_4_trash_picked_up = true
 	
 	# basically some weird stuff can happen if we throw the bag right after we
 	# pick up, so we just get rid of it if something weird happened which

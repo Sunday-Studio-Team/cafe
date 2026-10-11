@@ -44,10 +44,11 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 				await _audio_stream_player_3d.finished
 
 				# wait for the current loop of the animation to end so we can stop it smoothly
-				while tippy_loudspeaker_model.animation_player.current_animation_position > 0.1:
-					await get_tree().process_frame
-				
-				tippy_loudspeaker_model.animation_player.stop()
+				if tippy_loudspeaker_model.animation_player.is_playing():
+					while tippy_loudspeaker_model.animation_player.current_animation_position > 0.1:
+						await get_tree().process_frame
+					
+					tippy_loudspeaker_model.animation_player.stop()
 			_:
 				printerr("Unknown VoiceLinePlayer.PlayerMode.")
 				return
@@ -77,7 +78,7 @@ func interrupt_voice_line() -> void:
 			return
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# for some reason this is running @ the start before it has this reference so
 	if tippy_loudspeaker_model != null and tippy_loudspeaker_model.sound_ring_particles != null:
 		tippy_loudspeaker_model.sound_ring_particles.emitting = get_playing_voice_line() != null

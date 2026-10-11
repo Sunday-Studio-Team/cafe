@@ -32,13 +32,13 @@ flicker_timer = NodePath("FlickerTimer")
 [node name="Ceiling Lamp2" parent="." index="0" unique_id=1115879587 instance=ExtResource("2_gpieq")]
 transform = Transform3D(0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0.0032960027, -0.42652225, -1.4951688)
 
-[node name="Light" parent="Ceiling Lamp2" index="1" unique_id=1856758993]
+[node name="Light" parent="Ceiling Lamp2" index="1" unique_id=1897447779]
 surface_material_override/0 = ExtResource("4_64i6v")
 
-[node name="Light_001" parent="Ceiling Lamp2" index="2" unique_id=71343524]
+[node name="Light_001" parent="Ceiling Lamp2" index="2" unique_id=1469148895]
 surface_material_override/0 = ExtResource("4_64i6v")
 
-[node name="Sketchfab_model" parent="." index="1" unique_id=913148726]
+[node name="Sketchfab_model" parent="." index="1" unique_id=673102410]
 visible = false
 
 [node name="HumSound" type="AudioStreamPlayer3D" parent="." index="2" unique_id=443624158]
@@ -61,8 +61,10 @@ area_attenuation = 0.5
 [node name="SpotLight3D" type="SpotLight3D" parent="." index="4" unique_id=853136831]
 transform = Transform3D(-1.6292068e-07, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 1.6292068e-07, 7.12149e-15, 2.4424907e-15, 2.1426275, -4.4998625e-22)
 light_color = Color(0.8784314, 1, 0.95686275, 1)
-light_energy = 10.0
+light_energy = 2.0
 light_volumetric_fog_energy = 2.5
+shadow_enabled = true
+spot_angle = 85.0
 
 [node name="FlickerTimer" type="Timer" parent="." index="5" unique_id=1541118718]
 wait_time = 10.0

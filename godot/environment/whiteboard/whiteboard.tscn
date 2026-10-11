@@ -1,26 +1,62 @@
 [gd_scene format=3 uid="uid://dy4e7ivinjsni"]
 
 [ext_resource type="Script" uid="uid://xtayy8sky6vh" path="res://environment/whiteboard/whiteboard.gd" id="1_6exnn"]
-[ext_resource type="PackedScene" uid="uid://ddycd6ks8e11b" path="res://Assets/Whiteboard/SM_Whiteboard.glb" id="2_4qxtd"]
 [ext_resource type="PackedScene" uid="uid://cwtw6dcai6cfe" path="res://ui/whiteboard_ui/day_0_whiteboard.tscn" id="2_lwgjv"]
 [ext_resource type="PackedScene" uid="uid://wvpnsqc7foju" path="res://ui/whiteboard_ui/day_1_whiteboard.tscn" id="3_1j2d1"]
 [ext_resource type="PackedScene" uid="uid://dt7oqk35taiov" path="res://ui/whiteboard_ui/day_2_whiteboard.tscn" id="4_dp0td"]
 [ext_resource type="PackedScene" uid="uid://buf0nqkrbns8t" path="res://ui/whiteboard_ui/day_3_whiteboard.tscn" id="5_advr0"]
 [ext_resource type="PackedScene" uid="uid://boqbqs1spaa4o" path="res://ui/whiteboard_ui/day_4_whiteboard.tscn" id="6_ix5gt"]
 [ext_resource type="PackedScene" uid="uid://cjw4aujcm1kb8" path="res://ui/whiteboard_ui/day_5_whiteboard.tscn" id="7_852qy"]
+[ext_resource type="PackedScene" uid="uid://cr5tlg75ni3gk" path="res://Assets/Whiteboard/new_assets/SM_Whiteboard_v2.glb" id="8_dp0td"]
+[ext_resource type="Texture2D" uid="uid://ccufd8usnpdqw" path="res://Assets/Whiteboard/new_assets/T_Calendar_D01_BC.png" id="9_8f6js"]
+[ext_resource type="PackedScene" uid="uid://5mj6lo871uok" path="res://Assets/Whiteboard/new_assets/SM_Calendar.glb" id="10_advr0"]
+[ext_resource type="PackedScene" uid="uid://cwmloh4r2cl2c" path="res://Assets/Whiteboard/new_assets/SM_Magnet_A.glb" id="10_ix5gt"]
+[ext_resource type="Texture2D" uid="uid://ctnu0at0h0d22" path="res://Assets/Whiteboard/new_assets/T_Calendar_D02_BC.png" id="10_qkc70"]
+[ext_resource type="PackedScene" uid="uid://wscio6g48ygq" path="res://Assets/Whiteboard/new_assets/SM_Magnet_B.glb" id="11_852qy"]
+[ext_resource type="Texture2D" uid="uid://bkemxoj4ixbl1" path="res://Assets/Whiteboard/new_assets/T_Calendar_D03_BC.png" id="11_qjoux"]
+[ext_resource type="Texture2D" uid="uid://gpbwcxi61oht" path="res://Assets/Whiteboard/new_assets/T_Calendar_D04_BC.png" id="12_lc4wq"]
+[ext_resource type="Texture2D" uid="uid://clidyu4hkwty5" path="res://Assets/Whiteboard/new_assets/T_Calendar_D05_BC.png" id="13_7mtg1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0pjr2"]
+resource_name = "T_Calendar_D01"
+cull_mode = 2
+albedo_texture = ExtResource("9_8f6js")
+roughness = 0.5527864
+metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lwgjv"]
 viewport_path = NodePath("Content/SubViewport")
 
-[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("sub_viewport")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(1.4287109, 1.5673828, 0.33813477)
+
+[node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("sub_viewport", "magnets", "calendar")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
 script = ExtResource("1_6exnn")
 sub_viewport = NodePath("Content/SubViewport")
 whiteboard_ui_scenes = Array[PackedScene]([ExtResource("2_lwgjv"), ExtResource("3_1j2d1"), ExtResource("4_dp0td"), ExtResource("5_advr0"), ExtResource("6_ix5gt"), ExtResource("7_852qy")])
-day_test = 5
+magnets = NodePath("Magnets")
+calendar = NodePath("SM_Calendar2/SM_Calendar")
+calendar_material = SubResource("StandardMaterial3D_0pjr2")
+calendar_textures = Array[Texture2D]([ExtResource("9_8f6js"), ExtResource("9_8f6js"), ExtResource("10_qkc70"), ExtResource("11_qjoux"), ExtResource("12_lc4wq"), ExtResource("13_7mtg1")])
+day_test = 1
 
-[node name="SM_Whiteboard" parent="." unique_id=376567896 instance=ExtResource("2_4qxtd")]
+[node name="SM_Whiteboard_v2" parent="." unique_id=436235462 instance=ExtResource("8_dp0td")]
 transform = Transform3D(0.458, 0, 0, 0, 0.458, 0, 0, 0, 0.458, 0, -1.105, 0)
+
+[node name="SM_Calendar2" parent="." unique_id=646559025 instance=ExtResource("10_advr0")]
+transform = Transform3D(0.20494978, 0, -0.45606515, 0, 0.49999976, 0, 0.45606515, 0, 0.20494978, 1.1033376, -1.9868203e-07, 0.28460553)
+
+[node name="SM_Calendar" parent="SM_Calendar2" index="0" unique_id=2084394539]
+surface_material_override/0 = SubResource("StandardMaterial3D_0pjr2")
+
+[node name="Magnets" type="Node3D" parent="." unique_id=2054689961]
+
+[node name="SM_Magnet_A2" parent="Magnets" unique_id=965290203 instance=ExtResource("10_ix5gt")]
+transform = Transform3D(0.49999988, -2.1855692e-08, 9.553428e-16, 0, -2.185569e-08, -0.49999988, 2.1855692e-08, 0.49999988, -2.185569e-08, -0.017635956, -0.0834967, 0.01672751)
+
+[node name="SM_Magnet_B2" parent="Magnets" unique_id=907764035 instance=ExtResource("11_852qy")]
+transform = Transform3D(0.49999988, -2.1855692e-08, 9.553428e-16, 0, -2.185569e-08, -0.49999988, 2.1855692e-08, 0.49999988, -2.185569e-08, 0.170962, -0.110321485, 0.0126881935)
 
 [node name="Content" type="Sprite3D" parent="." unique_id=399085356]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -3.4092018e-10, 0.033510022, 0.021430572)
@@ -29,6 +65,15 @@ shaded = true
 texture = SubResource("ViewportTexture_lwgjv")
 
 [node name="SubViewport" type="SubViewport" parent="Content" unique_id=2102935171]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1637, 1039)
 render_target_update_mode = 4
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1193080258]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=625251791]
+transform = Transform3D(0.99999976, 0, -1.0480505e-12, 0, 0.99999976, 0, 1.0480505e-12, 0, 0.99999976, 0, -0.28369135, 0)
+shape = SubResource("BoxShape3D_xrivr")
+
+[editable path="SM_Calendar2"]

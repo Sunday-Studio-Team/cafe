@@ -19,10 +19,13 @@ const STRIDE_LENGTH := 1.25
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
 @export var customer_trash_scene: PackedScene
-@export var sprint_lockout_timer: Timer
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
+@export var keychain_animation_player: AnimationPlayer
+@export var tippy_tablet_3d: TippyTablet3D
+@export var tippy_tablet_normal_position_rotation: Node3D
+@export var tippy_tablet_up_front_position_rotation: Node3D
 
 var player_status_effects: PlayerStatusEffects
 
@@ -35,6 +38,7 @@ var mouse_sens := 0.1
 # vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
+
 var holding_interactable: bool = false
 var has_xl_bag_item: bool = false
 
@@ -51,6 +55,7 @@ var fov_tween: Tween
 # NOTE: if we start getting weird flickering while holding interactables, we
 # might have to increase this a bit more
 @onready var max_interact_dist: float = abs(aiming_ray.target_position.length()) + 1.25
+@onready var spawn_position := global_position
 
 
 func _ready() -> void:
@@ -58,7 +63,7 @@ func _ready() -> void:
 	player_status_effects = PlayerStatusEffects.new(self)
 	Events.items_updated.connect(_on_items_updated)
 	_on_items_updated()
-	
+
 	free_cam_visualizer.visible = false
 
 	# the aiming ray is a child of the camera (not a direct child of the player)
@@ -95,14 +100,10 @@ func _ready() -> void:
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
 
-	Global.stamina = Stats.current.max_stamina
-	Global.sprint_lockout_timer = sprint_lockout_timer
-	sprint_lockout_timer.wait_time = Stats.current.sprint_lockout_time
-
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
-				or Global.day == 0 # idk how the tutorial cutscene works so it could potentially causes issues with that
+				or Global.playing_tutorial # idk how the tutorial cutscene works so it could potentially causes issues with that
 		):
 			return
 
@@ -114,9 +115,10 @@ func _physics_process(delta: float) -> void:
 	player_status_effects.process_status_effects(delta)
 
 	handle_hovered_interactable()
-	handle_inspected_shelf_item()
 	handle_sprint(delta)
 	handle_movement(delta)
+
+	# TODO: move this
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "roller_skates":
@@ -129,10 +131,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		roller_skates_dust_particles.emitting = false
 		camera.camera_effects.fov = lerp(90, 100, clampf((fake_velocity.length() - _walk_move_speed) / _walk_move_speed, 0, 2))
+
 	handle_gravity(delta)
 	handle_footstep_sounds()
-
 	handle_ingredients_bag()
+	handle_keychain_swing_animation()
 	handle_customer_trash()
 	handle_floating_cursor()
 	move_and_slide()
@@ -159,8 +162,12 @@ func handle_floating_cursor() -> void:
 
 
 func handle_movement(delta: float) -> void:
-	# if (not movement_enabled or holding_interactable or Global.in_ui or Global.camera_mode != Global.CameraMode.PLAYER):
-	if (not movement_enabled or holding_interactable or Global.in_ui):
+	if (
+			not movement_enabled
+			or holding_interactable
+			or Global.in_ui
+			or Global.camera_mode not in [Global.CameraMode.PLAYER, Global.CameraMode.LOCKED_TO_POINT]
+	):
 		velocity = Vector3.ZERO
 		return
 
@@ -177,7 +184,7 @@ func handle_movement(delta: float) -> void:
 	var move_dir_3d := transform.basis * input_dir_3d
 
 	# get current velocity without Y so we dont do anything that messes with any gravity
-	var horizontal_velocity = Vector3(velocity.x, 0, velocity.z)
+	var horizontal_velocity: Vector3 = Vector3(velocity.x, 0, velocity.z)
 
 	if move_dir_3d.length() > 0.2:
 		horizontal_velocity = horizontal_velocity.move_toward(
@@ -202,7 +209,6 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
-		#print(hovered_interactable)
 		if camera == null:
 			return
 
@@ -213,16 +219,7 @@ func handle_hovered_interactable() -> void:
 		):
 			Global.hovered_interactable = null
 
-	# if we're currently holding interact on something, dont do anything
-	# (so we can look around while we hold)
-	if (
-			hovered_interactable != null and hovered_interactable.hold_to_interact
-			and Input.is_action_pressed("interact")
-	):
-		holding_interactable = true
-		return
-
-	var collider = aiming_ray.get_collider()
+	var collider: Object = aiming_ray.get_collider()
 	if collider is Interactable and collider.visible:
 		Global.hovered_interactable = collider
 	else:
@@ -232,15 +229,7 @@ func handle_hovered_interactable() -> void:
 		Global.hovered_interactable = null
 
 
-func handle_inspected_shelf_item() -> void:
-	var collider = aiming_ray.get_collider()
-	if collider is ShelfItem:
-		Global.inspected_shelf_item = collider
-	else:
-		Global.inspected_shelf_item = null
-
-
-func handle_sprint(delta: float) -> void:
+func handle_sprint(_delta: float) -> void:
 	var has_roller_skates: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "roller_skates":
@@ -249,29 +238,18 @@ func handle_sprint(delta: float) -> void:
 
 	if Input.is_action_pressed("sprint") and !has_roller_skates:
 		_is_sprinting = true
-		if get_last_motion().length() > 0:
-			if sprint_lockout_timer.is_stopped():
-				Global.stamina -= Stats.current.sprint_stamina_drain_rate * delta
-		else:
-			Global.stamina += Stats.current.stamina_regen_rate * delta
-
-		if Global.stamina > 0 and sprint_lockout_timer.is_stopped():
-			_is_sprinting = true
-			_current_move_speed = _sprint_move_speed
-		else:
-			_is_sprinting = false
-			_current_move_speed = _walk_move_speed
-			Global.stamina += Stats.current.stamina_regen_rate * delta
+		_current_move_speed = _sprint_move_speed
 	else:
 		_is_sprinting = false
 		_current_move_speed = _walk_move_speed
-		Global.stamina += Stats.current.stamina_regen_rate * delta
-
-	if Global.stamina < 1 and sprint_lockout_timer.is_stopped():
-		sprint_lockout_timer.start()
 
 
 func handle_footstep_sounds() -> void:
+	# idk why but the footstep sounds spam if when we fast forward in cutscenes
+	# etc without this
+	if Engine.time_scale != 1:
+		return
+
 	if get_last_motion() == Vector3.ZERO:
 		dist_travelled_since_last_step = 0
 		# here we play a sound just as we start walking
@@ -315,14 +293,11 @@ func handle_ingredients_bag() -> void:
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
-		#print("heshel", customer_trash_scene)
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
 		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
 
-	#print("asdf", ingredients_bag_scene.instantiate().get_class())
-	#print(customer_trash_scene.instantiate().get_class())
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
 
@@ -338,3 +313,11 @@ func _on_items_updated() -> void:
 
 func flash_red():
 	camera.camera_effects.flash_screen_red()
+
+
+func handle_keychain_swing_animation() -> void:
+	if keychain_animation_player != null:
+		if get_last_motion().length() > 0:
+			keychain_animation_player.play("KittyChainSwing")
+		else:
+			keychain_animation_player.play("IdleSway")

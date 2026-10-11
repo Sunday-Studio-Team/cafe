@@ -1,0 +1,11 @@
+[gd_resource type="SphereMesh" format=3 uid="uid://dhu1lxc8cnlne"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdhdf"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+stencil_flags = 2
+
+[resource]
+material = SubResource("StandardMaterial3D_rdhdf")
+rings = 3

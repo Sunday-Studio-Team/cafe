@@ -39,7 +39,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	return self
 
 
-func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	return (
 			data is LoadoutMenuElement
 			and data.item != null
@@ -47,5 +47,5 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	)
 
 
-func _drop_data(at_position: Vector2, data: Variant) -> void:
+func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	Global.item_loadout_menu.drop_dragged_element(data.item, data, self)

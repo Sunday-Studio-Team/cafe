@@ -2,9 +2,10 @@ extends Node3D
 
 @export var open_offset := Vector3(2.0, 0.0, 0.0)
 @export var move_time := 0.8
-
-@onready var door_mesh: Node3D = $"Sliding Door"
-@onready var trigger: Area3D = $"Proximity Trigger"
+@export var door_mesh: Node3D
+@export var trigger: Area3D
+@export var open_sound: AudioStreamPlayer3D
+@export var close_sound: AudioStreamPlayer3D
 
 var closed_position: Vector3
 var active_tween: Tween
@@ -25,9 +26,11 @@ func _on_trigger_body_exited(_body: Node3D) -> void:
 
 func open_door() -> void:
 	move_door_to(closed_position + open_offset)
+	open_sound.play()
 
 func close_door() -> void:
 	move_door_to(closed_position)
+	close_sound.play()
 
 ## Moves the door from its current local position to [param target_position].
 func move_door_to(target_position: Vector3) -> void:

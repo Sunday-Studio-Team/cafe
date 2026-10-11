@@ -1,23 +1,80 @@
 [gd_scene format=3 uid="uid://bnsmlrlfh5qwi"]
 
 [ext_resource type="Script" uid="uid://b4ac40i085uge" path="res://minigames/ingredients_refill/golden_coffee_bean.gd" id="1_b3x37"]
-[ext_resource type="Texture2D" uid="uid://dvgd3wbo3m6gd" path="res://minigames/ingredients_refill/golden/goldencoffeebean.png" id="1_trix1"]
+[ext_resource type="Texture2D" uid="uid://fsksmrp1gipu" path="res://minigames/ingredients_refill/assets/goldbean.png" id="2_b3x37"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 25.0
 height = 80.0
 
-[node name="Bean" type="RigidBody2D" unique_id=68542228]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5bp6o"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_b3x37"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.1, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rx43e"]
+gradient = SubResource("Gradient_b3x37")
+width = 24
+height = 24
+use_hdr = true
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5017668, 0)
+
+[sub_resource type="Curve" id="Curve_3vwav"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5607735, 1.2053571), 0.0, 0.0, 0, 0, Vector2(0.6215469, 2.892857), 0.0, 0.0, 0, 0, Vector2(0.7154696, 1.1785715), 0.0, 0.0, 0, 0, Vector2(0.9143646, 0.50892854), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_fdat8"]
+curve = SubResource("Curve_3vwav")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sdh2v"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+angle_min = 45.00001
+angle_max = 45.00001
+spread = 180.0
+initial_velocity_min = 21.93
+initial_velocity_max = 48.239998
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 236.83997
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 99.99999
+damping_min = 0.3
+damping_max = 0.3
+scale_min = 0.29999998
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_fdat8")
+color = Color(1, 0.9372549, 0.5411765, 1)
+
+[node name="Bean" type="RigidBody2D" unique_id=68542228 node_paths=PackedStringArray("sprite_2d")]
 collision_mask = 2
+lock_rotation = true
 continuous_cd = 2
 script = ExtResource("1_b3x37")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
-position = Vector2(-12.755, 96.695)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("1_trix1")
+sprite_2d = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1292871675]
 position = Vector2(-1, -1)
 rotation = -0.7382135
 shape = SubResource("CapsuleShape2D_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2111375374]
+position = Vector2(-9.536743e-07, 7.6293945e-06)
+texture = ExtResource("2_b3x37")
+
+[node name="Sparkles" type="GPUParticles2D" parent="Sprite2D" unique_id=909713269]
+z_index = -1
+material = SubResource("CanvasItemMaterial_5bp6o")
+position = Vector2(9.536743e-07, -7.6293945e-06)
+amount = 256
+texture = SubResource("GradientTexture2D_rx43e")
+lifetime = 2.0
+speed_scale = 2.0
+process_material = SubResource("ParticleProcessMaterial_sdh2v")

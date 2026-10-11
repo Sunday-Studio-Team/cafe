@@ -1,8 +1,9 @@
+@abstract
 class_name TypingMinigameVariant
 extends Control
 
-signal minigame_variant_finished(typing_minigame_variant: TypingMinigameVariant)
+@warning_ignore("unused_signal") # die stupid warning
+signal minigame_variant_finished
 
 ## Override this.
-func start_minigame_variant(customer: Customer) -> void:
-	printerr("Unimplemented TypingMinigameVariant!")
+@abstract func start_minigame_variant(customer: Customer) -> void

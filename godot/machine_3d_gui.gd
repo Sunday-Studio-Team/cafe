@@ -11,11 +11,10 @@ const CAM_TWEEN_DUR := 0.25
 @export var node_quad: MeshInstance3D
 @export var node_area: Area3D
 @export var cam_spot: Marker3D
-@export var _customer_side_camera: Camera3D
 
 var player_using_me := false
 # Used for checking if the mouse is inside the Area3D.
-var is_mouse_inside = false
+var is_mouse_inside := false
 # The last processed input touch/mouse event. To calculate relative movement.
 var last_event_pos2D = null
 # The time of the last event in seconds since engine start.
@@ -77,6 +76,7 @@ func enter_gui(update_player_reset_position: bool = true) -> void:
 	Global.in_machine_ui = true
 	Global.machine_in_use = machine
 	player_using_me = true
+	node_viewport.notify_mouse_entered()
 
 	if !Global.tutorial_machine_used:
 		Global.tutorial_machine_used = true
@@ -114,6 +114,7 @@ func enter_gui(update_player_reset_position: bool = true) -> void:
 
 
 func exit_without_camera_tween() -> void:
+	node_viewport.notify_mouse_exited()
 	node_area.visible = false
 	player_using_me = false
 
@@ -129,6 +130,7 @@ func exit_without_camera_tween() -> void:
 
 
 func exit_with_camera_tween() -> void:
+	node_viewport.notify_mouse_exited()
 	node_area.visible = false
 	player_using_me = false
 

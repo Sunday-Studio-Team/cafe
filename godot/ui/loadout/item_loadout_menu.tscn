@@ -81,10 +81,10 @@ stream_3/stream = ExtResource("10_plv5e")
 [node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "locker_open_sound", "locker_close_sound", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
 script = ExtResource("1_7ango")
 element_scene = ExtResource("1_0rl37")
-root = NodePath("MarginContainer")
-available_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer")
-equipped_items_container = NodePath("MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer")
-confirm_button = NodePath("MarginContainer/VBoxContainer/ConfirmButton")
+root = NodePath("MenuRootControl")
+available_items_container = NodePath("MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer")
+equipped_items_container = NodePath("MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer")
+confirm_button = NodePath("MenuRootControl/VBoxContainer/ConfirmButton")
 locker_open_sound = NodePath("LockerOpenSound")
 locker_close_sound = NodePath("LockerCloseSound")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
@@ -94,7 +94,7 @@ item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Act
 item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
 item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1351850692]
+[node name="MenuRootControl" type="MarginContainer" parent="." unique_id=1351850692]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -102,22 +102,22 @@ grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=345839286]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuRootControl" unique_id=345839286]
 layout_mode = 2
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=14682828]
+[node name="PanelContainer" type="PanelContainer" parent="MenuRootControl/VBoxContainer" unique_id=14682828]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_7ango")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer" unique_id=619312805]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuRootControl/VBoxContainer/PanelContainer" unique_id=619312805]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 50
 
-[node name="SelectYourItems" type="RichTextLabel" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1473587798]
+[node name="SelectYourItems" type="RichTextLabel" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1473587798]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -128,90 +128,90 @@ text = "[b]SELECT YOUR ITEM(S)"
 fit_content = true
 horizontal_alignment = 1
 
-[node name="Available" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=282132923]
+[node name="Available" type="VBoxContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer" unique_id=282132923]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="AvailableItemsTitle" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available" unique_id=1802022443]
+[node name="AvailableItemsTitle" type="PanelContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available" unique_id=1802022443]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gbflg")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItemsTitle" unique_id=124553075]
+[node name="Label" type="Label" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItemsTitle" unique_id=124553075]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
 theme_override_font_sizes/font_size = 28
 text = "AVAILABLE"
 
-[node name="AvailableItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available" unique_id=394145303]
+[node name="AvailableItems" type="PanelContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available" unique_id=394145303]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems" unique_id=1149520909]
+[node name="GridContainer" type="GridContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems" unique_id=1149520909]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 columns = 5
 
-[node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1731714690 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1731714690 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="LoadoutMenuItem2" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=2040793353 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem2" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=2040793353 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="LoadoutMenuItem3" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=825468899 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem3" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=825468899 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="LoadoutMenuItem4" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=49121481 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem4" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=49121481 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="LoadoutMenuItem5" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1377787420 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem5" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1377787420 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="Equipped" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2071538861]
+[node name="Equipped" type="VBoxContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2071538861]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="EquippedItemsTitle" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=1816768305]
+[node name="EquippedItemsTitle" type="PanelContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=1816768305]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_gbflg")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItemsTitle" unique_id=539219113]
+[node name="Label" type="Label" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItemsTitle" unique_id=539219113]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
 theme_override_font_sizes/font_size = 28
 text = "EQUIPPED"
 
-[node name="EquippedItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=445986721]
+[node name="EquippedItems" type="PanelContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=445986721]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems" unique_id=1279570546]
+[node name="GridContainer" type="GridContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems" unique_id=1279570546]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 columns = 5
 
-[node name="LoadoutMenuItem" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="LoadoutMenuItem2" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=113046902 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem2" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=113046902 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="LoadoutMenuItem3" parent="MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=2135610824 instance=ExtResource("1_0rl37")]
+[node name="LoadoutMenuItem3" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=2135610824 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
-[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1608662931]
+[node name="ConfirmButton" type="Button" parent="MenuRootControl/VBoxContainer" unique_id=1608662931]
 layout_mode = 2
 size_flags_horizontal = 4
 offset_transform_enabled = true

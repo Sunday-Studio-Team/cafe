@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bynusdrfe1hno"]
+
+[ext_resource type="Script" uid="uid://cdf1whckl0cvc" path="res://tippy_tablet_3d.gd" id="1_3j3my"]
+[ext_resource type="PackedScene" uid="uid://dirpbj4fhxbdr" path="res://Assets/tablet_ui_3d_model/tablet_ui_3d_model.glb" id="2_870e5"]
+[ext_resource type="PackedScene" uid="uid://bs0egbcre6yie" path="res://Assets/tablet_ui_3d_model/tablet_ui_3d_model_addon.glb" id="3_42h6o"]
+[ext_resource type="PackedScene" uid="uid://lmhw5wqr2spn" path="res://Assets/tippy_tablet_tutorial_indicator/tippy_tablet_tutorial_indicator.tscn" id="4_1l6aw"]
+[ext_resource type="PackedScene" uid="uid://ccndesh240hgx" path="res://Assets/KeyChain/keychainAnim.glb" id="4_870e5"]
+
+[node name="TippyTablet3D" type="Node3D" unique_id=1761848473 node_paths=PackedStringArray("clock_tutorial_indicator", "money_and_goal_tutorial_indicator", "rating_tutorial_indicator")]
+script = ExtResource("1_3j3my")
+clock_tutorial_indicator = NodePath("Scaler/TutorialIndicators/ClockMarker3D")
+money_and_goal_tutorial_indicator = NodePath("Scaler/TutorialIndicators/MoneyAndGoalMarker3D")
+rating_tutorial_indicator = NodePath("Scaler/TutorialIndicators/RatingMarker3D")
+
+[node name="PutEverythingInHereOnVisualLayer4" type="Node" parent="." unique_id=1944089783]
+
+[node name="Scaler" type="Node3D" parent="." unique_id=690826173]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Model" type="Node3D" parent="Scaler" unique_id=433958376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
+
+[node name="BaseModel" parent="Scaler/Model" unique_id=875200061 instance=ExtResource("2_870e5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11823052, -0.07041024, 0)
+
+[node name="Cube_001" parent="Scaler/Model/BaseModel" index="0" unique_id=1813733542]
+layers = 8
+
+[node name="ScreenSprite3D" type="Sprite3D" parent="Scaler/Model/BaseModel" unique_id=2083645373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007, -0.012782678, 0.016923353)
+layers = 8
+pixel_size = 0.0005
+
+[node name="AddonModel" parent="Scaler/Model" unique_id=1254854682 instance=ExtResource("3_42h6o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
+
+[node name="BézierCurve" parent="Scaler/Model/AddonModel" index="0" unique_id=588684302]
+layers = 8
+
+[node name="AddonScreenSprite3D" type="Sprite3D" parent="Scaler/Model/AddonModel" unique_id=831430551]
+transform = Transform3D(1, 0, 0, 0, 0.9998476, 0.017452404, 0, -0.017452404, 0.9998476, 0.036, 0.055, 0.017)
+layers = 8
+pixel_size = 0.00021
+
+[node name="keychainAnim" parent="Scaler/Model/AddonModel" unique_id=862151605 instance=ExtResource("4_870e5")]
+transform = Transform3D(0.066601485, -0.002524001, -0.0015212782, 0.0020323966, 0.06425938, -0.017636549, 0.002134066, 0.017572924, 0.0642735, 0.09352189, -0.36961222, -0.11672974)
+
+[node name="Skeleton3D" parent="Scaler/Model/AddonModel/keychainAnim/Armature" parent_id_path=PackedInt32Array(862151605, 803313187) index="0" unique_id=345753593]
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(0.067907415, -5.7041427e-05, 0.028652571, 0.9972802)
+bones/2/rotation = Quaternion(-0.039906695, 8.922967e-05, -0.0072832955, 0.9991769)
+bones/3/rotation = Quaternion(-0.037071344, -0.0010725817, 0.004623047, 0.9993014)
+
+[node name="Cube_001" parent="Scaler/Model/AddonModel/keychainAnim/Armature/Skeleton3D" index="0" unique_id=1643599941]
+layers = 8
+
+[node name="AnimationPlayer" parent="Scaler/Model/AddonModel/keychainAnim" index="1" unique_id=285515305]
+playback_default_blend_time = 2.0
+
+[node name="TutorialIndicators" type="Node3D" parent="Scaler" unique_id=2077913130]
+
+[node name="ClockMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=1174972329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15523008, 0.17759663, 0.036550224)
+
+[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/ClockMarker3D" unique_id=1296036049 instance=ExtResource("4_1l6aw")]
+
+[node name="MoneyAndGoalMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=1209240193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15523008, 0.1276483, 0.036550224)
+
+[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/MoneyAndGoalMarker3D" unique_id=118122595 instance=ExtResource("4_1l6aw")]
+
+[node name="RatingMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=576641468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15523008, 0.09711021, 0.036550224)
+
+[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/RatingMarker3D" unique_id=1318005858 instance=ExtResource("4_1l6aw")]
+
+[editable path="Scaler/Model/BaseModel"]
+[editable path="Scaler/Model/AddonModel"]
+[editable path="Scaler/Model/AddonModel/keychainAnim"]

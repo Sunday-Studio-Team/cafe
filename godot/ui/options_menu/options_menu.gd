@@ -81,7 +81,7 @@ func _input(event: InputEvent) -> void:
 		_save_and_close_menu()
 		get_viewport().set_input_as_handled()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _deferred_options_apply_timer != null:
 		if _deferred_options_apply_timer.time_left <= 0.0:
 			print("Applying options deferred.")

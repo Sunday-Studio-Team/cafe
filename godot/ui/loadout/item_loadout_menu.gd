@@ -1,10 +1,18 @@
 class_name ItemLoadoutMenu
 extends CanvasLayer
 
+const LOCKER_ANIMATION_NAMES: Array[String] = [
+	"idle_notice_me_a",
+	"idle_notice_me_b",
+	"idle_notice_me_c"
+]
+
 @export var element_scene: PackedScene
 @export_category("Nodes")
 @export var root: Control
 @export var locker_interactable: Interactable
+@export var locker_model: ItemLockerModel
+@export var locker_animation_player: AnimationPlayer
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: Button
@@ -20,25 +28,47 @@ extends CanvasLayer
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_active_indicator: Control
 
+@export var _player_ui_sub_viewport_container: PlayerUiSubViewportContainer
+
+var player_has_confirmed_loadout_at_least_once := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.item_loadout_menu = self
 
+	_player_ui_sub_viewport_container.allow_input_changed.connect(_on_player_ui_sub_viewport_container_allow_input_changed)
 	confirm_button.pressed.connect(confirm_and_hide_menu)
-	locker_interactable.interacted.connect(func(): show())
+	locker_interactable.interacted.connect(
+			func():
+				Global.tutorial_day_2_locker_opened = true
+				show()
+	)
 	visibility_changed.connect(
 			func():
 				if visible:
+					locker_animation_player.stop()
+					root.offset_transform_scale = Vector2.ZERO
 					locker_open_sound.play()
+					await locker_model.open_door()
 					var t := create_tween().set_parallel()
 					t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
 					t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
 					populate()
 				else:
+					locker_model.close_door()
 					locker_close_sound.play()
 	)
-
+	locker_animation_player.animation_finished.connect(
+		func(_animation: StringName) -> void:
+				await get_tree().create_timer(5, false).timeout
+				if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+					locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
+	)
+	await get_tree().create_timer(10, false).timeout
+	if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+		locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
+	
 
 func populate() -> void:
 	# delete anything we have in the scene for testing/from prev uses first
@@ -84,19 +114,13 @@ func resize_grids() -> void:
 		equipped_items_container.columns = 4
 	else:
 		equipped_items_container.columns = 5
-	
-
-
-func _unhandled_input(input_event: InputEvent) -> void:
-	if input_event.is_action_pressed("pause") and Global.in_loadout_menu:
-		confirm_and_hide_menu()
-		get_viewport().set_input_as_handled()
 
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
-
-	handle_item_hover_tooltip()
+	
+	if visible:
+		handle_item_hover_tooltip()
 
 
 func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
@@ -140,6 +164,14 @@ func add_available_item_button(item: Item) -> void:
 
 
 func confirm_and_hide_menu() -> void:
+	Global.tutorial_day_2_locker_loadout_confirmed = true
+	
+	# this is what triggers the door to open
+	# we only want it to trigger once
+	if not player_has_confirmed_loadout_at_least_once:
+		Events.player_confirmed_item_loadout.emit()
+		player_has_confirmed_loadout_at_least_once = true
+	
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
@@ -204,3 +236,9 @@ func drop_dragged_element(item: Item, source_slot: LoadoutMenuElement, target_sl
 		if previous_item_in_target_slot != null:
 			add_available_item_button(previous_item_in_target_slot)
 		source_slot.queue_free()
+
+func _on_player_ui_sub_viewport_container_allow_input_changed(allow_input: bool) -> void:
+	if allow_input:
+		root.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_INHERITED
+	else:
+		root.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_DISABLED

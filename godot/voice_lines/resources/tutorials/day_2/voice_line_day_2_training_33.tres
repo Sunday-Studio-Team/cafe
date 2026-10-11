@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://bji2s3unphwvv"]
+
+[ext_resource type="AudioStream" uid="uid://dl1286424k4cy" path="res://audio/vo/tutorials/day_2/voice_line_day_2_training_33.wav" id="1_tgy02"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_7u4lj"]
+[ext_resource type="Resource" uid="uid://dd2hcvj06k33a" path="res://voice_lines/resources/speakers/voice_line_speaker_sato.tres" id="3_2mesx"]
+
+[resource]
+script = ExtResource("2_7u4lj")
+voice_line_id = "voice_line_day_2_training_33"
+audio_stream = ExtResource("1_tgy02")
+speaker = ExtResource("3_2mesx")
+subtitle_en = "Let’s do this."
