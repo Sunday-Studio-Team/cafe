@@ -12,3 +12,5 @@ extends Resource
 	4: false,
 	5: false,
 }
+
+@export var equipped_item_ids: Array[String] = []

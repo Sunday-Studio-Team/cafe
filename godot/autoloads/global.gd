@@ -192,6 +192,7 @@ func _ready() -> void:
 		drink.calculate_price() # calculates the drinks price
 	items.assign(load_resources_from_folder(items_folder_path))
 	load_unlocked_items_from_save()
+	load_equipped_items_from_save()
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
@@ -219,6 +220,17 @@ func load_unlocked_items_from_save() -> void:
 		if SaveDataManager.save_data.days_bonus_objective_completed.get(d, false):
 			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(d, [])
 			add_items_to_unlocked_list(bonus_items)
+
+
+func load_equipped_items_from_save() -> void:
+	owned_items.clear()
+	if SaveDataManager.save_data == null:
+		return
+	
+	for id in SaveDataManager.save_data.equipped_item_ids:
+		var item = get_item(id)
+		if item:
+			owned_items.append(item)
 
 
 func get_item(item_id:String) -> Item:
