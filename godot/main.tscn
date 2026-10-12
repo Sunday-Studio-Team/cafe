@@ -2464,11 +2464,10 @@ text = "cancel"
 
 [node name="PCUI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1232958959]
 
-[node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("desk", "ui", "irl_new_shop_items_indicator") instance=ExtResource("20_82xsv")]
+[node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("desk", "ui") instance=ExtResource("20_82xsv")]
 visible = false
 desk = NodePath("../../../../Desk")
 ui = NodePath("../../UI")
-irl_new_shop_items_indicator = NodePath("../../../../Desk/NewShopItemsPrompt")
 
 [node name="Viewmodel" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=70422245 instance=ExtResource("168_f4177")]
 
@@ -2798,7 +2797,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.18365966, -0.11049962, 0.9767582, 3.725285e-08, 0.99366015, 0.1124118, -0.9829884, -0.020645497, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.18365963, -0.11049962, 0.9767582, 3.7252843e-08, 0.99366015, 0.1124118, -0.98298824, -0.020645497, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2969,6 +2968,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.40
 
 [node name="Menu" parent="." unique_id=1811682227 instance=ExtResource("70_g5xqc")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1.1739324, 0, 1, 0, -4.371139e-08, 5.7327867, 1.4000788, 2.3634775)
+visible = false
 
 [node name="TrashCan" parent="." unique_id=1523606592 instance=ExtResource("267_pbe4p")]
 transform = Transform3D(0.6218793, 0, -0.7831131, 0, 1, 0, 0.7831131, 0, 0.6218793, 4.185316, -1.1920929e-07, -3.3701005)
@@ -3045,7 +3045,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700971, -0.00016215755, -0.9999346, 1.02598875e-07, 1, -0.00016214694, 0.9999346, -1.01539825e-08, 0.0005700971, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009666, -0.00016215755, -0.9999337, 1.0259878e-07, 1, -0.0001621468, 0.9999337, -1.01539825e-08, 0.00057009666, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
@@ -3053,11 +3053,11 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
-[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=1669092183]
+[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=1626437570]
 transform = Transform3D(-0.05555968, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497518, 0.5577049, 2.5702512, -0.048047185)
 
 [node name="AirFreshener" parent="." unique_id=1323392743 instance=ExtResource("358_lyu6w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.684926, 1.3513618, 4.233103)
+transform = Transform3D(-0.525771, 0, -0.85062623, 0, 1, 0, 0.85062623, 0, -0.525771, 4.243224, 0.42619514, 1.9983644)
 
 [node name="Tippy_Clock" parent="." unique_id=1686326203 instance=ExtResource("374_weuxt")]
 transform = Transform3D(-3.4969108e-09, 0, -0.07999999, 0, 0.08, 0, 0.07999999, 0, -3.4969108e-09, 8.6740465, 1.223219, 6.3421893)
