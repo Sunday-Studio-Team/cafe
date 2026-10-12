@@ -9,7 +9,7 @@ const PC_CAMERA_TWEEN_DURATION := 0.45
 @export var pc_ui: PC_UI
 
 var camera_transform_before_pc_interaction: Transform3D
-
+var exiting_pc = false
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -22,6 +22,7 @@ func _ready() -> void:
 
 
 func _on_desk_interacted() -> void:
+	if exiting_pc: return
 	pc_interaction_camera_enter_transition()
 	pc_ui.show()
 
@@ -47,6 +48,7 @@ func pc_interaction_camera_enter_transition() -> void:
 
 
 func pc_interaction_camera_exit_transition() -> void:
+	exiting_pc = true
 	var cam: CameraController = Global.player.camera
 	# NOTE: idk why but if i dont set this process mode it bugs . . .
 	var tween := create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
@@ -58,3 +60,4 @@ func pc_interaction_camera_exit_transition() -> void:
 			)
 	await tween.finished
 	cam.sync_rotation_from_player()
+	exiting_pc = false
