@@ -1,12 +1,20 @@
 [gd_scene format=3 uid="uid://ddyncetpsnx8x"]
 
 [ext_resource type="Texture2D" uid="uid://ck7ggyk1fkg4o" path="res://sprites/tablet_ui/tablet_ui_background.png" id="1_h00bf"]
+[ext_resource type="Texture2D" uid="uid://clyrk377pgux2" path="res://sprites/tablet_ui/rating/tablet_rating_stars_0.png" id="2_0bt22"]
+[ext_resource type="Texture2D" uid="uid://cfv1eb0iqhe2v" path="res://sprites/tablet_ui/rating/tablet_rating_stars_1.png" id="2_6ci3b"]
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet_ui.gd" id="2_bv3d6"]
+[ext_resource type="Texture2D" uid="uid://bur43i1ukkqvk" path="res://sprites/tablet_ui/rating/tablet_rating_stars_2.png" id="3_0bt22"]
 [ext_resource type="Texture2D" uid="uid://b125bu4qap7jh" path="res://sprites/tablet_ui/tablet_money_ui.png" id="3_dh8ow"]
+[ext_resource type="Texture2D" uid="uid://mqcjtl08wuth" path="res://sprites/tablet_ui/rating/tablet_rating_meter.png" id="4_h00bf"]
+[ext_resource type="Texture2D" uid="uid://dmkvts8htvf0x" path="res://sprites/tablet_ui/rating/tablet_rating_stars_3.png" id="5_bv3d6"]
+[ext_resource type="Texture2D" uid="uid://bdenkgwv0wtdx" path="res://sprites/tablet_ui/rating/tablet_rating_stars_4.png" id="5_vx1ja"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="6_6ci3b"]
+[ext_resource type="Texture2D" uid="uid://dkcwic8tgurpc" path="res://sprites/tablet_ui/rating/tablet_rating_stars_5.png" id="6_omxmy"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="7_0bt22"]
 [ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="8_vx1ja"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="9_omxmy"]
+[ext_resource type="Texture2D" uid="uid://dfal061fim05l" path="res://sprites/tablet_ui/rating/tablet_rating_needle.png" id="10_jcu5s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn1tu"]
 atlas = ExtResource("1_h00bf")
@@ -40,11 +48,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
-font_size = 32
-font_color = Color(0.9384497, 0.9384497, 0.9384497, 1)
-
-[node name="TabletUI2D" type="Control" unique_id=1774289997 node_paths=PackedStringArray("money_made_label", "money_bar", "rating_label", "customer_flow_rate_label", "item_icons")]
+[node name="TabletUI2D" type="Control" unique_id=1774289997 node_paths=PackedStringArray("money_made_label", "money_bar", "item_icons", "rating_meter_stars", "rating_meter_needle")]
 custom_maximum_size = Vector2(631, 863)
 propagate_maximum_size = true
 layout_mode = 3
@@ -54,9 +58,10 @@ offset_bottom = 863.0
 script = ExtResource("2_bv3d6")
 money_made_label = NodePath("MarginContainer/Screen/Money/HBoxContainer/VBoxContainer/MoneyLabel")
 money_bar = NodePath("MarginContainer/Screen/Money/HBoxContainer/VBoxContainer/MoneyBar")
-rating_label = NodePath("MarginContainer/Screen/Rating/HBoxContainer/RatingLabel")
-customer_flow_rate_label = NodePath("MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate/FlowRateLabel")
 item_icons = NodePath("MarginContainer/Screen/ItemUI/ItemIcons")
+rating_meter_stars = NodePath("MarginContainer/Screen/RatingMeter/RatingStars")
+rating_meter_needle = NodePath("MarginContainer/Screen/RatingMeter/Needle")
+rating_stars_textures = Array[Texture]([ExtResource("2_0bt22"), ExtResource("2_6ci3b"), ExtResource("3_0bt22"), ExtResource("5_bv3d6"), ExtResource("5_vx1ja"), ExtResource("6_omxmy")])
 
 [node name="Background" type="TextureRect" parent="." unique_id=514240901]
 layout_mode = 1
@@ -143,46 +148,36 @@ show_percentage = false
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="Rating" type="PanelContainer" parent="MarginContainer/Screen" unique_id=615532530]
+[node name="RatingMeter" type="MarginContainer" parent="MarginContainer/Screen" unique_id=1095125670]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Screen/Rating" unique_id=1832505298]
+[node name="Background" type="TextureRect" parent="MarginContainer/Screen/RatingMeter" unique_id=836233231]
 layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_h00bf")
+expand_mode = 3
+stretch_mode = 5
 
-[node name="RatingIconLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer" unique_id=1318581469]
+[node name="RatingStars" type="TextureRect" parent="MarginContainer/Screen/RatingMeter" unique_id=1204670280]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 48
-text = "🙂"
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -0.08)
+offset_transform_scale = Vector2(0.66, 0.66)
+texture = ExtResource("2_6ci3b")
+expand_mode = 3
+stretch_mode = 5
 
-[node name="RatingLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer" unique_id=891384739]
+[node name="Needle" type="TextureRect" parent="MarginContainer/Screen/RatingMeter" unique_id=2098489999]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 48
-text = "⭐2.1"
-
-[node name="FlowPanel" type="PanelContainer" parent="MarginContainer/Screen/Rating/HBoxContainer" unique_id=349206812]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="FlowRate" type="HBoxContainer" parent="MarginContainer/Screen/Rating/HBoxContainer/FlowPanel" unique_id=816766880]
-layout_mode = 2
-
-[node name="FlowRateLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate" unique_id=1688117453]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "10"
-label_settings = SubResource("LabelSettings_xrivr")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FlowRateDescLabel" type="Label" parent="MarginContainer/Screen/Rating/HBoxContainer/FlowPanel/FlowRate" unique_id=1290189262]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "secs/ custmr"
-label_settings = SubResource("LabelSettings_xrivr")
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -0.025)
+offset_transform_scale = Vector2(0.75, 0.75)
+offset_transform_rotation = -2.3561945
+offset_transform_pivot_ratio = Vector2(0.5, 0.635)
+texture = ExtResource("10_jcu5s")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="ItemUI" type="HBoxContainer" parent="MarginContainer/Screen" unique_id=1931901216]
 layout_mode = 2
