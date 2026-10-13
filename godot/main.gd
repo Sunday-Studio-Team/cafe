@@ -181,15 +181,6 @@ func get_stats() -> void:
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
-	if Global.day == 1:
-		# Reset run.
-		Global.player_tips_bank = 5
-		Global.received_emails.clear()
-		Global.read_emails.clear()
-		Global.received_reviews.clear()
-		Global.player_tips_bank = 0
-		Global.owned_items.clear()
-		Stats.reset()
 
 	if Global.day == 1:
 		if Global.playing_tutorial:
