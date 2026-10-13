@@ -17,7 +17,6 @@ var time_left_out: float = 0.0
 var cup_body_surface_index := 2
 var threshold_velocity := 1
 var being_slow := false
-var hind_height_offset := 1.5
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
@@ -41,7 +40,6 @@ func _process(_delta: float) -> void:
 	else:
 		trash_cup.set_surface_override_material(cup_body_surface_index, null)
 
-	hint_pop.global_position = global_position + Vector3(0, hind_height_offset, 0)
 	var speed := linear_velocity.length()
 	if speed > threshold_velocity && trail.process_material != null:
 		trail.emitting = true
