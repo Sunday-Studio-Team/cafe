@@ -240,17 +240,6 @@ func load_equipped_items_from_save() -> void:
 			owned_items.append(item)
 
 
-func load_equipped_items_from_save() -> void:
-	owned_items.clear()
-	if SaveDataManager.save_data == null:
-		return
-	
-	for id in SaveDataManager.save_data.equipped_item_ids:
-		var item = get_item(id)
-		if item:
-			owned_items.append(item)
-
-
 func get_item(item_id: String) -> Item:
 	var found_item := false
 	for item: Item in items:
