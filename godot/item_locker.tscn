@@ -244,6 +244,7 @@ prop_item = ExtResource("10_b0jqr")
 
 [node name="Mirror" parent="ManualScaler/Model" index="19" unique_id=1191890594]
 transform = Transform3D(-0.055559676, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497514, 0.55770606, 2.5702512, -0.04804716)
+visible = false
 
 [node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 1014912074) index="0" unique_id=1034734605]
 script = ExtResource("5_dqjxi")
@@ -259,11 +260,15 @@ prop_item = ExtResource("12_8r07k")
 
 [node name="Locker Door" parent="ManualScaler/Model" index="24" unique_id=702353025]
 transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
+visible = false
 
 [node name="Name Tag" parent="ManualScaler/Model/Locker Door" index="0" unique_id=160599352 instance=ExtResource("13_dt742")]
 transform = Transform3D(-1.3411045e-07, 0, -2.9490232, 0, 2.9490216, 0, 2.9490232, 0, -1.3411045e-07, -0.16459996, 0.103236675, -0.48949295)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=847292096]
 libraries/ = SubResource("AnimationLibrary_e0bd6")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=923653526]
+transform = Transform3D(0.2249515, -0.10107769, 0.96911305, 0, 0.9946048, 0.10373646, -0.97436994, -0.023335673, 0.22373785, 2.033434, 1.1960882, -0.37550128)
 
 [editable path="ManualScaler/Model"]

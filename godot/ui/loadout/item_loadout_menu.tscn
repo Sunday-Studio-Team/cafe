@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dhttshpvbkayc" path="res://ui/loadout/loadout_menu_element.tscn" id="1_0rl37"]
 [ext_resource type="Script" uid="uid://dlnawqw3ep1l4" path="res://ui/loadout/item_loadout_menu.gd" id="1_7ango"]
+[ext_resource type="Texture2D" uid="uid://tpgiatppog4l" path="res://sprites/item_loadout_ui/base.png" id="3_7pc00"]
 [ext_resource type="AudioStream" uid="uid://cn0h1uvfk5nd8" path="res://audio/locker/locker_open_1.wav" id="3_ndpu2"]
+[ext_resource type="Texture2D" uid="uid://d15hu0e6gy2d3" path="res://sprites/item_loadout_ui/equipped.png" id="4_6p7s6"]
 [ext_resource type="AudioStream" uid="uid://dp1el8c30hxoc" path="res://audio/locker/locker_open_2.wav" id="4_c6g3w"]
 [ext_resource type="AudioStream" uid="uid://d0e25vy8m3f3s" path="res://audio/locker/locker_open_3.wav" id="5_dbh57"]
 [ext_resource type="AudioStream" uid="uid://cigg2yn61wl2t" path="res://audio/locker/locker_open_4.wav" id="6_cs5tx"]
@@ -83,7 +85,7 @@ script = ExtResource("1_7ango")
 element_scene = ExtResource("1_0rl37")
 root = NodePath("MenuRootControl")
 available_items_container = NodePath("MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer")
-equipped_items_container = NodePath("MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer")
+equipped_items_container = NodePath("MenuRootControl/TextureRect/EquippedItems/GridContainer")
 confirm_button = NodePath("MenuRootControl/VBoxContainer/ConfirmButton")
 locker_open_sound = NodePath("LockerOpenSound")
 locker_close_sound = NodePath("LockerCloseSound")
@@ -103,6 +105,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuRootControl" unique_id=345839286]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -189,28 +192,6 @@ theme_override_colors/font_color = Color(0.85490197, 0.9254902, 0.9490196, 1)
 theme_override_font_sizes/font_size = 28
 text = "EQUIPPED"
 
-[node name="EquippedItems" type="PanelContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped" unique_id=445986721]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
-
-[node name="GridContainer" type="GridContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems" unique_id=1279570546]
-layout_mode = 2
-theme_override_constants/h_separation = 10
-columns = 5
-
-[node name="LoadoutMenuItem" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
-custom_maximum_size = Vector2(-1, -1)
-layout_mode = 2
-
-[node name="LoadoutMenuItem2" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=113046902 instance=ExtResource("1_0rl37")]
-custom_maximum_size = Vector2(-1, -1)
-layout_mode = 2
-
-[node name="LoadoutMenuItem3" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Equipped/EquippedItems/GridContainer" unique_id=2135610824 instance=ExtResource("1_0rl37")]
-custom_maximum_size = Vector2(-1, -1)
-layout_mode = 2
-
 [node name="ConfirmButton" type="Button" parent="MenuRootControl/VBoxContainer" unique_id=1608662931]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -224,7 +205,74 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ndpu2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wej5g")
 text = "CONFIRM"
 
+[node name="TextureRect" type="TextureRect" parent="MenuRootControl" unique_id=1447855398]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_7pc00")
+stretch_mode = 2
+
+[node name="EquippedItems" type="PanelContainer" parent="MenuRootControl/TextureRect" unique_id=445986721]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.0
+offset_top = -314.0
+offset_right = 368.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
+
+[node name="GridContainer" type="GridContainer" parent="MenuRootControl/TextureRect/EquippedItems" unique_id=1279570546]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="LoadoutMenuItem" parent="MenuRootControl/TextureRect/EquippedItems/GridContainer" unique_id=679235414 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="LoadoutMenuItem2" parent="MenuRootControl/TextureRect/EquippedItems/GridContainer" unique_id=113046902 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="LoadoutMenuItem3" parent="MenuRootControl/TextureRect/EquippedItems/GridContainer" unique_id=2135610824 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="LoadoutMenuItem4" parent="MenuRootControl/TextureRect/EquippedItems/GridContainer" unique_id=2048816448 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="LoadoutMenuItem5" parent="MenuRootControl/TextureRect/EquippedItems/GridContainer" unique_id=1497380641 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="LoadoutMenuItem6" parent="MenuRootControl/TextureRect/EquippedItems/GridContainer" unique_id=1863413643 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MenuRootControl/TextureRect" unique_id=583782475]
+layout_mode = 0
+offset_left = 161.0
+offset_top = -43.0
+offset_right = 825.0
+offset_bottom = 263.0
+texture = ExtResource("4_6p7s6")
+
 [node name="ItemHoverTooltip" type="PanelContainer" parent="." unique_id=2088283471]
+visible = false
 modulate = Color(1, 1, 1, 0.98039216)
 custom_minimum_size = Vector2(500, 250)
 custom_maximum_size = Vector2(500, 250)

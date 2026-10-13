@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://dhttshpvbkayc"]
 
+[ext_resource type="Texture2D" uid="uid://cqcyku321c84r" path="res://sprites/item_loadout_ui/box 1.png" id="1_jqlpu"]
 [ext_resource type="Script" uid="uid://bqygei0lyjbgi" path="res://ui/loadout/loadout_menu_element.gd" id="1_pqsvv"]
 
-[node name="LoadoutMenuElement" type="Button" unique_id=1207346372]
-custom_minimum_size = Vector2(150, 150)
-custom_maximum_size = Vector2(150, 150)
+[node name="LoadoutMenuElement" type="TextureButton" unique_id=2048816448]
+custom_minimum_size = Vector2(200, 200)
+custom_maximum_size = Vector2(200, 200)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -18,5 +19,5 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_icon = true
+texture_normal = ExtResource("1_jqlpu")
 script = ExtResource("1_pqsvv")
