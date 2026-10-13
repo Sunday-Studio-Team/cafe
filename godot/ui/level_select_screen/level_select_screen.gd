@@ -68,7 +68,7 @@ func _on_back_to_main_menu_button_pressed() -> void:
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 
 func _update_prev_next_buttons() -> void:
-	if _day == 0:
+	if _day == 1:
 		_previous_day_button.visible = false
 	else:
 		_previous_day_button.visible = true

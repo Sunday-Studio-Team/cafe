@@ -174,7 +174,7 @@ func handle_exit_machine_button_visibility() -> void:
 
 
 func handle_drop_item_ui() -> void:
-	drop_button.visible = Global.holding_ingredients || Global.holding_trash and not Global.in_ui
+	drop_button.visible = (Global.holding_ingredients or Global.holding_trash) and not Global.in_ui
 
 
 func update_day_indicator() -> void:
@@ -212,6 +212,9 @@ func update_interactable_ui() -> void:
 				owned_whipped_cream = owned_item
 			elif owned_item.item_id == "air_freshener":
 				owned_air_freshener = owned_item
+				
+		if hovered_interactable.interactable_id == &"disarm_camera" && owned_whipped_cream == null:
+			interactable_indicator.hide()
 
 		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
 		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
