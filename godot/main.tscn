@@ -2050,7 +2050,7 @@ process_mode = 3
 script = ExtResource("5_lquwl")
 interactable_indicator = NodePath("Interactable")
 interactable_label = NodePath("Interactable/VBoxContainer/RichTextLabel")
-shift_starting_ending_label = NodePath("HUD/ShiftStartingEnding")
+shift_starting_ending_label = NodePath("HUD/ShiftStartingEndingCanvasLayer/ShiftStartingEnding")
 money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
@@ -2286,10 +2286,17 @@ theme_override_font_sizes/font_size = 50
 text = "End Shift "
 icon = ExtResource("143_7bx05")
 
-[node name="ShiftStartingEnding" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD" unique_id=2027255565]
+[node name="ShiftStartingEndingCanvasLayer" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD" unique_id=369392898]
+layer = 2
+
+[node name="ShiftStartingEnding" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/ShiftStartingEndingCanvasLayer" unique_id=2027255565]
 visible = false
 custom_minimum_size = Vector2(400, 250)
-layout_mode = 2
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 1895.0
+offset_bottom = 1055.0
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 48
 theme_override_font_sizes/bold_font_size = 96
 bbcode_enabled = true
