@@ -21,6 +21,7 @@
 [ext_resource type="Material" uid="uid://b18gocjjdbtpa" path="res://resources/misc_resources/roller_skates_dust_clouds.tres" id="18_q13i1"]
 [ext_resource type="SphereMesh" uid="uid://cc8mu7ui65k8q" path="res://resources/misc_resources/roller_skates_smoke_mesh.tres" id="20_5tmop"]
 [ext_resource type="SphereMesh" uid="uid://b5bf3p55mcv4v" path="res://resources/misc_resources/roller_skates_smoke_outline_mesh.tres" id="21_7ahtn"]
+[ext_resource type="AudioStream" uid="uid://citxsetwrls7k" path="res://audio/trash_can/throw.wav" id="23_7lmhl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
 radius = 0.25
@@ -47,7 +48,7 @@ stream_1/stream = ExtResource("10_urp6f")
 stream_2/stream = ExtResource("11_bwjto")
 stream_3/stream = ExtResource("12_606se")
 
-[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "bag_pickup_sound", "footstep_sound", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles", "keychain_animation_player", "tippy_tablet_3d", "tippy_tablet_normal_position_rotation", "tippy_tablet_up_front_position_rotation")]
+[node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "throw_trash_sound", "bag_pickup_sound", "footstep_sound", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles", "keychain_animation_player", "tippy_tablet_3d", "tippy_tablet_normal_position_rotation", "tippy_tablet_up_front_position_rotation")]
 collision_layer = 8
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
@@ -56,6 +57,7 @@ ingredients_bag = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/Ho
 default_ingredients_bag_model = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/ingredient_bag")
 large_ingredients_bag_model = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag")
 customer_trash = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup")
+throw_trash_sound = NodePath("ThrowTrashAudio")
 bag_pickup_sound = NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/BagPickupSound")
 footstep_sound = NodePath("FootstepSound")
 ingredients_bag_scene = ExtResource("2_sweqy")
@@ -205,6 +207,10 @@ draw_passes = 3
 draw_pass_1 = ExtResource("20_5tmop")
 draw_pass_2 = ExtResource("21_7ahtn")
 draw_pass_3 = ExtResource("21_7ahtn")
+
+[node name="ThrowTrashAudio" type="AudioStreamPlayer3D" parent="." unique_id=1422339463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4175518, 0)
+stream = ExtResource("23_7lmhl")
 
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]

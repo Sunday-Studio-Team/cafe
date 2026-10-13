@@ -2969,6 +2969,9 @@ visible = false
 [node name="TrashCan" parent="." unique_id=1523606592 instance=ExtResource("267_pbe4p")]
 transform = Transform3D(0.6218793, 0, -0.7831131, 0, 1, 0, 0.7831131, 0, 0.6218793, 4.185316, -1.1920929e-07, -3.3701005)
 
+[node name="AudioStreamPlayer3D" parent="TrashCan" index="1" unique_id=778131750]
+stream = null
+
 [node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
 script = ExtResource("23_ppx11")
@@ -3019,7 +3022,6 @@ transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.48
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
 
 [node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
-bus = &"TippyVO"
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
@@ -3032,6 +3034,7 @@ volume_db = -5.0
 transform = Transform3D(0.7278226, 0.009210606, 0.68570364, 6.386688e-10, 0.99990994, -0.013431133, -0.6857655, 0.009775481, 0.7277569, -4.3664393, 2.7244682, -3.5881112)
 unit_size = 5.0
 max_db = -8.0
+bus = &"Master"
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
@@ -3049,7 +3052,7 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6
 [node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
-[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=1669092183]
+[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=603626681]
 transform = Transform3D(-0.05555968, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497518, 0.5577049, 2.5702512, -0.048047185)
 
 [node name="AirFreshener" parent="." unique_id=1323392743 instance=ExtResource("358_lyu6w")]
@@ -3084,6 +3087,7 @@ transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -6.69007
 [editable path="Desk/Lamp 1&5 (1)"]
 [editable path="Desk/Day0DeskProps/Sad Plants2"]
 [editable path="TrashCan"]
+[editable path="TrashCan/Model"]
 [editable path="Teleporters/FrontToBackTeleporter"]
 [editable path="Teleporters/BackToFrontTeleporter"]
 [editable path="CafeEnvironment"]
