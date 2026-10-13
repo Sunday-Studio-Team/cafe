@@ -144,6 +144,7 @@
 [ext_resource type="PackedScene" uid="uid://dmuumticci3nh" path="res://Assets/old coffee machine/old_coffee_machine.tscn" id="93_0cjwk"]
 [ext_resource type="PackedScene" uid="uid://d027k1reepg57" path="res://Assets/Cleaning supplies/cleaning_supplies.tscn" id="93_g2jch"]
 [ext_resource type="PackedScene" uid="uid://08twhhrq38wo" path="res://Assets/signs/entry_panel_2.tscn" id="105_vf5ik"]
+[ext_resource type="PackedScene" uid="uid://bk305ay464u4h" path="res://Assets/Trash minigame/trashcan/Tippy Trashcan.glb" id="106_s7w1k"]
 [ext_resource type="PackedScene" uid="uid://c0wupqthmectl" path="res://Assets/Fridge/fridge_tippy.tscn" id="108_aslp2"]
 [ext_resource type="PackedScene" uid="uid://j678piqwcx1q" path="res://Assets/ATM/ATMTIPPY.glb" id="109_1wuav"]
 [ext_resource type="Texture2D" uid="uid://crssvr5w1sa3r" path="res://Assets/ATM/ATMTIPPY_Tippy_Base_color.png" id="110_cth7v"]
@@ -157,6 +158,7 @@
 [ext_resource type="Texture2D" uid="uid://bn3gmp6jugl5f" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-roughness_1_metal_rough_3.png" id="115_wpjnw"]
 [ext_resource type="PackedScene" uid="uid://ckftlfhrtvgqs" path="res://Assets/Archways/Emergency Door.glb" id="116_bqqh4"]
 [ext_resource type="PackedScene" uid="uid://b8t42cfiudwf0" path="res://Assets/storage_boxes/plastic_and_box_2.tscn" id="117_27wgr"]
+[ext_resource type="PackedScene" uid="uid://ch0pntkxtjbmi" path="res://Assets/signs/order_here_sign_1.tscn" id="118_5upnq"]
 [ext_resource type="Texture2D" uid="uid://wax7xyot8qbf" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-color.png" id="118_b5mys"]
 [ext_resource type="Texture2D" uid="uid://7pv6gttrw2g6" path="res://Assets/storage_boxes/plastic and box2_initialShadingGroup-roughness_1_metal_rough.png" id="119_m6rds"]
 [ext_resource type="PackedScene" uid="uid://ps4nbjx4ns11" path="res://Assets/storage_boxes/box_1.tscn" id="120_627m5"]
@@ -903,8 +905,8 @@ size = Vector3(2, 0.1, 6)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3exxq"]
 albedo_texture = ExtResource("24_ppc62")
 roughness = 0.41
-uv1_scale = Vector3(2.74, 2.74, 2.74)
-uv1_offset = Vector3(-0.83, -0.73, 0)
+uv1_scale = Vector3(3.595, 3.595, 3.595)
+uv1_offset = Vector3(0.6, 0, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkau7"]
 material = SubResource("StandardMaterial3D_3exxq")
@@ -2282,7 +2284,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.0005700979, -0.00016215755, -0.9999359, 1.0259901e-07, 1, -0.00016214716, 0.9999359, -1.01539825e-08, 0.0005700979, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700976, -0.00016215755, -0.99993545, 1.0259896e-07, 1, -0.00016214709, 0.99993545, -1.01539825e-08, 0.0005700976, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2350,6 +2352,7 @@ texture = ExtResource("87_ala11")
 
 [node name="mail" type="Sprite3D" parent="ExteriorStreet" unique_id=2045417453]
 transform = Transform3D(0.11874173, 0, 0, 0, 0.11874173, 0, 0, 0, 0.11874173, 3.9146566, 0.8172345, -6.284854)
+pixel_size = 0.0282
 shaded = true
 texture = ExtResource("88_ljlh3")
 
@@ -2860,61 +2863,73 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0
 transform = Transform3D(0.22, 0, 0, 0, 0.12, 0, 0, 0, 0.179, 0.48368263, 1.4768955, 0.0022182465)
 material_override = ExtResource("6_0jw1j")
 gi_mode = 2
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D2" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1365757797]
 transform = Transform3D(-1.0927847e-08, 0, -0.179, 0, 0.12, 0, 0.25, 0, -7.8243385e-09, 3.993938, 1.4873663, 3.9444842)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D3" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=875601423]
 transform = Transform3D(-6.4395365e-09, 1.0490733e-08, 0.179, 0, -0.12, 1.5648677e-08, 0.14731942, 4.585645e-16, 7.8243385e-09, -5.993949, 1.4768955, 2.170809)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D8" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=359350607]
 transform = Transform3D(6.545507e-09, -1.0723531e-15, -0.057787087, -1.3091012e-08, -0.28061995, 0, -0.14974374, 2.4532577e-08, -2.525954e-09, -6.2003975, 1.4981571, 2.2809403)
 material_override = SubResource("StandardMaterial3D_8n35f")
+pixel_size = 0.0311
 texture = ExtResource("75_f56pk")
 
 [node name="Sprite3D9" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1658524152]
-transform = Transform3D(-8.758695e-09, 0, 0.057787087, 0, 0.27541742, 0, -0.20037554, 0, -2.5259541e-09, -7.989378, 1.4981571, 3.0703402)
+transform = Transform3D(-8.52372e-09, 0, 0.078, 0, 0.273, 0, -0.195, 0, -3.4094882e-09, -7.989378, 1.4981571, 3.0703402)
 material_override = SubResource("StandardMaterial3D_8n35f")
+pixel_size = 0.0311
 texture = ExtResource("75_f56pk")
 
 [node name="Sprite3D4" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1363679056]
 transform = Transform3D(-3.6012915e-09, -1.0490733e-08, 0.179, 0, -0.12, -1.5648677e-08, 0.08238795, -4.585645e-16, 7.8243385e-09, -5.9939528, 1.4768955, 6.8028874)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D5" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1014623631]
 transform = Transform3D(1.6610328e-09, 0, 0.076, 0, -0.057, 0, -0.038, 0, 3.3220655e-09, -5.9939528, 2.6876156, 5.0391827)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D6" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1863575076]
 transform = Transform3D(-0.09591907, 0, 0, 0, 0.057, -6.6441315e-09, 0, 4.9830984e-09, 0.076000005, -4.4858856, 2.8348846, -0.011700034)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D11" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1718607314]
 transform = Transform3D(-2.171081e-09, -2.1781818e-16, -0.07600001, -4.342162e-09, 0.056999996, 0, -0.04966855, -4.983098e-09, 3.3220657e-09, -6.2055893, 2.6508267, 5.3007565)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D12" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1456354672]
 transform = Transform3D(-2.171081e-09, -3.3018938e-16, -0.07600001, -4.3421617e-09, 0.08640599, 0, -0.049668547, -7.553852e-09, 3.3220657e-09, -6.2055902, 0.9361756, 6.3137093)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D7" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=2090952203]
 transform = Transform3D(4.635711e-09, -0.042, 4.633407e-09, 0.10605272, 1.8358783e-09, 4.633407e-09, -9.2714245e-09, 3.6717562e-09, 0.053, -5.5085516, 1.2791618, 0.006743192)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="Sprite3D10" type="Sprite3D" parent="CustomerArea/customer wall" unique_id=1299428674]
 transform = Transform3D(4.1569166e-09, 0.07364888, -4.633407e-09, 0.09509917, -3.2192948e-09, 0, -3.6340924e-16, -6.43859e-09, -0.05299999, -7.097911, 1.4109048, 5.989063)
 material_override = ExtResource("6_0jw1j")
+pixel_size = 0.0311
 texture = ExtResource("7_ubo3j")
 
 [node name="WallPieceLong" parent="CustomerArea" unique_id=1045992760 instance=ExtResource("8_qboto")]
@@ -3186,6 +3201,9 @@ transform = Transform3D(-3.8039836e-08, 0, -0.9442677, 0, 0.9442677, 0, 0.870250
 transform = Transform3D(-4.3711385e-08, 0, -1, 0, 1, 0, 1, 0, -4.3711385e-08, 8.921789, 1.2550032, -5.0305104)
 omni_range = 0.991
 
+[node name="Order Here Sign 2" parent="CustomerArea" unique_id=484677902 instance=ExtResource("118_5upnq")]
+transform = Transform3D(-0.6995059, 0, 0.7146268, 0, 1, 0, -0.7146268, 0, -0.6995059, 2.4585965, -0.046654284, -7.4429235)
+
 [node name="EmployeeAreaNavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1205643826]
 navigation_mesh = SubResource("NavigationMesh_edv2q")
 
@@ -3233,18 +3251,21 @@ shaded = true
 [node name="stain" type="Sprite3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=714646856]
 transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, 2.2398763, 1.5644994, 0.9870186)
 material_override = SubResource("StandardMaterial3D_yjja3")
+pixel_size = 0.0195
 shaded = true
 texture = ExtResource("39_5utbh")
 
 [node name="stain3" type="Sprite3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=1541038549]
-transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, 9.581166, 1.5644994, 0.9870186)
+transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, -3.3548667, 1.5644994, 0.9870186)
 material_override = SubResource("StandardMaterial3D_yjja3")
+pixel_size = 0.0195
 shaded = true
 texture = ExtResource("39_5utbh")
 
 [node name="stain2" type="Sprite3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=1263953208]
 transform = Transform3D(-0.14048192, 0, -1.228132e-08, 0, 0.13468817, 0, 1.228132e-08, 0, -0.14048192, -11.397602, 1.5644994, 0.9870186)
 material_override = SubResource("StandardMaterial3D_yjja3")
+pixel_size = 0.0195
 shaded = true
 texture = ExtResource("39_5utbh")
 

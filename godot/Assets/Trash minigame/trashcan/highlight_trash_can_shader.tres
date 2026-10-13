@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://db5vtwbudln0d"]
+
+[ext_resource type="Texture2D" uid="uid://dyxhftgkvl2vx" path="res://Assets/Trash minigame/trashcan/Tippy Trashcan_tippy_trashcan_base.png" id="1_qqvdi"]
+[ext_resource type="Texture2D" uid="uid://tvuvitt8xk11" path="res://Assets/Trash minigame/trashcan/Tippy Trashcan_tippy_trashcan_emissive.png" id="2_uhvv2"]
+[ext_resource type="Shader" uid="uid://hc3ix1p71xst" path="res://outline.gdshader" id="3_f2n3a"]
+[ext_resource type="Shader" uid="uid://dm5a7nc0cwudc" path="res://shaders/xray.gdshader" id="4_us13j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ybjt"]
+render_priority = 0
+shader = ExtResource("3_f2n3a")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_width = 4.00000019
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ybjt"]
+resource_name = "tippy_trashcan_mat"
+render_priority = 1
+next_pass = SubResource("ShaderMaterial_6ybjt")
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
+albedo_texture = ExtResource("1_qqvdi")
+roughness = 0.5527864
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_texture = ExtResource("2_uhvv2")
+metadata/_gltf_primary_texture_coord = 0
+
+[resource]
+render_priority = 0
+next_pass = SubResource("StandardMaterial3D_6ybjt")
+shader = ExtResource("4_us13j")
+shader_parameter/xray_color = Color(1, 1, 1, 1)

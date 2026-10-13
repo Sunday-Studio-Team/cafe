@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode unshaded, depth_test_disabled;
+render_mode unshaded, depth_test_disabled, depth_draw_never, cull_disabled;
 
 uniform vec4 xray_color : source_color = vec4(1.0, 0.0, 0.0, 1.0);
 
