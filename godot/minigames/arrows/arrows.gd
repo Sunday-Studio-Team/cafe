@@ -1,5 +1,6 @@
 extends Control
 
+@export var _minigame_startup_overlay: MinigameStartupOverlay
 @export var prompt_output: RichTextLabel
 @export var arrows_container: HBoxContainer
 @export var tippy_image: TextureRect
@@ -269,6 +270,8 @@ func reset_minigame():
 func _start_minigame() -> void:
 	pulse.play("pulse")
 	music.play()
+
+	_minigame_startup_overlay.play("DANCE!")
 	
 	reset_minigame()
 

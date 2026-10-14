@@ -7,6 +7,8 @@ enum State {
 	FINISHED,
 }
 
+@export var _minigame_startup_overlay: MinigameStartupOverlay
+
 @export var typing_minigame_variant_fill_blanks_packed_scene: PackedScene
 
 @export var typing_minigame_variant_container: Control
@@ -19,6 +21,7 @@ var _active_typing_minigame_variant: TypingMinigameVariant
 var _active_helpdesk_customer: Customer
 
 func _ready() -> void:
+	_minigame_startup_overlay.play("TYPE!")
 	_start_minigame()
 
 

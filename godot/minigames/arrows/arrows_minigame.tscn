@@ -66,6 +66,7 @@
 [ext_resource type="Texture2D" uid="uid://cumqafdidypd" path="res://minigames/arrows/assets/dancemachine_lit_up/left.png" id="64_d8qde"]
 [ext_resource type="Texture2D" uid="uid://diamxbu33j0uh" path="res://minigames/arrows/assets/dancemachine_lit_up/right.png" id="65_1aqoy"]
 [ext_resource type="Texture2D" uid="uid://bgob7n0smlnqs" path="res://minigames/arrows/assets/dancemachine_lit_up/up.png" id="66_ahodb"]
+[ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="67_d8qde"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
 streams_count = 5
@@ -536,7 +537,7 @@ _data = {
 &"pulse": SubResource("Animation_gaw3v")
 }
 
-[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound", "screenshake", "pulse", "music", "judgement_spot")]
+[node name="Arrows" type="Control" unique_id=1050432411 node_paths=PackedStringArray("_minigame_startup_overlay", "prompt_output", "arrows_container", "tippy_image", "correct_sound", "wrong_sound", "screenshake", "pulse", "music", "judgement_spot")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -544,6 +545,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iuqyn")
+_minigame_startup_overlay = NodePath("MinigameStartupOverlay")
 prompt_output = NodePath("Prompt")
 arrows_container = NodePath("ArrowsBackground/ArrowHContainer")
 tippy_image = NodePath("Tippy")
@@ -709,3 +711,7 @@ libraries/ = SubResource("AnimationLibrary_gaw3v")
 
 [node name="Pulse" type="AnimationPlayer" parent="." unique_id=444770165]
 libraries/ = SubResource("AnimationLibrary_ms8o4")
+
+[node name="MinigameStartupOverlay" parent="." unique_id=1346680805 instance=ExtResource("67_d8qde")]
+visible = false
+layout_mode = 1

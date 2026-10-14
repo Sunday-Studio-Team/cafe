@@ -72,6 +72,7 @@
 [ext_resource type="Texture2D" uid="uid://dngeov1edkbmx" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-07.png" id="61_5cebw"]
 [ext_resource type="Texture2D" uid="uid://cib7vpqawkwfo" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-08.png" id="62_ckbip"]
 [ext_resource type="Texture2D" uid="uid://b0gyrjwjkl5d2" path="res://sprites/color-minigame/ColorUIMinigameSatoAnimationINCORRECT-png/ColorUIMinigameSatoAnimationINCORRECT-09.png" id="63_71pjd"]
+[ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="73_ffgry"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vn1tu"]
 viewport_path = NodePath("HiddenPromptStuff/PromptProjectedIn3DViewPort")
@@ -290,14 +291,14 @@ stream_0/stream = ExtResource("11_m7lj7")
 stream_1/stream = ExtResource("12_ib8td")
 stream_2/stream = ExtResource("13_4vt2w")
 
-[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("buttons", "prompt_text_box", "correct_sound", "wrong_sound", "prompt_print_sound", "sato_animated_sprite")]
+[node name="ColorsMinigame" type="MarginContainer" unique_id=32337786 node_paths=PackedStringArray("_minigame_startup_overlay", "buttons", "prompt_text_box", "correct_sound", "wrong_sound", "prompt_print_sound", "sato_animated_sprite")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-offset_transform_enabled = true
 script = ExtResource("1_aq73i")
+_minigame_startup_overlay = NodePath("MinigameStartupOverlay")
 buttons = [NodePath("TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer/A"), NodePath("TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer/B"), NodePath("TippyAndButtons/VBoxContainer/ButtonsContainer/HBoxContainer/C")]
 prompt_text_box = NodePath("HiddenPromptStuff/PromptViewport/Prompt")
 correct_sound = NodePath("CorrectSound")
@@ -380,7 +381,7 @@ button_texture = ExtResource("8_itcgr")
 position = Vector2(1493, 368)
 sprite_frames = SubResource("SpriteFrames_l8dww")
 autoplay = "default"
-frame_progress = 0.4264631
+frame_progress = 0.93017334
 
 [node name="HiddenPromptStuff" type="Control" parent="." unique_id=256743011]
 custom_minimum_size = Vector2(1000, 1000)
@@ -412,7 +413,7 @@ theme_override_constants/shadow_offset_x = -4
 theme_override_constants/shadow_offset_y = 4
 theme_override_fonts/normal_font = ExtResource("4_fbfb6")
 bbcode_enabled = true
-text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=64][p align=center]Tippy says:[/p][font_size=48][p align=center]Click the[/p][p align=center][color=#92ff8aff]Red C"
+text = "[wave amp=75.0 freq=5.0][center][color=white][outline_size=8][font_size=32][p align=center]Tippy says:[/p][font_size=48][p align=center]Click the[/p][p align=center][color=#3e77ffff]Green Square"
 fit_content = true
 
 [node name="PromptProjectedIn3DViewPort" type="SubViewport" parent="HiddenPromptStuff" unique_id=1536550611]
@@ -431,6 +432,11 @@ environment = SubResource("Environment_sryxk")
 
 [node name="Sprite3D" type="Sprite3D" parent="HiddenPromptStuff/PromptProjectedIn3DViewPort/Node3D" unique_id=1605292279]
 texture = SubResource("ViewportTexture_2wbdj")
+
+[node name="MinigameStartupOverlay" parent="." unique_id=1346680805 instance=ExtResource("73_ffgry")]
+visible = false
+z_index = 2
+layout_mode = 2
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=613272079]
 stream = ExtResource("9_uaykq")
