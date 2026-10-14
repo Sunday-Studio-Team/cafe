@@ -186,14 +186,17 @@ func _physics_process(delta: float) -> void:
 
 	for item in Global.owned_items:
 		if item.is_active_item:
-			if item.active_item_remaining_cooldown > 0.0:
-				if Global.no_cooldowns:
-					item.active_item_remaining_cooldown = 0
-				else:
-					item.active_item_remaining_cooldown -= delta
-				if item.active_item_remaining_cooldown <= 0.0:
-					item.can_be_used = true
-					item.active_item_remaining_cooldown = 0
+			if Global.playing_tutorial:
+				item.can_be_used = false
+			else:
+				if item.active_item_remaining_cooldown > 0.0:
+					if Global.no_cooldowns:
+						item.active_item_remaining_cooldown = 0
+					else:
+						item.active_item_remaining_cooldown -= delta
+					if item.active_item_remaining_cooldown <= 0.0:
+						item.can_be_used = true
+						item.active_item_remaining_cooldown = 0
 
 
 func get_stats() -> void:
