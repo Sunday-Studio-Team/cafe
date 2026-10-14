@@ -3,6 +3,7 @@ extends Node
 
 @export var _tab_container: TabContainer
 # General
+@export_group("General")
 @export var _overall_volume_slider_view: OptionsMenuSliderView
 @export var _music_volume_slider_view: OptionsMenuSliderView
 @export var _voice_volume_slider_view: OptionsMenuSliderView
@@ -13,6 +14,7 @@ extends Node
 @export var _crosshair_option_view: OptionsMenuOptionView
 @export var _camera_motion_option_view: OptionsMenuOptionView
 # Keybinds
+@export_group("Keybinds")
 @export var _move_forward_keybind_option_view: OptionsMenuKeybindOptionView
 @export var _move_left_keybind_option_view: OptionsMenuKeybindOptionView
 @export var _move_backward_keybind_option_view: OptionsMenuKeybindOptionView
@@ -22,7 +24,9 @@ extends Node
 @export var _drop_item_keybind_option_view: OptionsMenuKeybindOptionView
 @export var _use_contextual_active_item_keybind_option_view: OptionsMenuKeybindOptionView
 @export var _pause_exit_menu_keybind_option_view: OptionsMenuKeybindOptionView
+@export_group("Buttons")
 @export var _save_settings_button: Button
+@export var save_wipe_button: Button
 
 const _graphics_option_presets: Dictionary[String, int] = {
 	"Ultra (Default)": OptionsData.GraphicsOptionsPresets.HIGH,
@@ -69,7 +73,7 @@ func _ready() -> void:
 	_tab_container.current_tab = 0
 	_setup_option_views()
 	_save_settings_button.pressed.connect(_on_save_settings_button_pressed)
-	
+	save_wipe_button.pressed.connect(Commands.wipe_save)
 	_stored_deferred_options_apply_timer = Timer.new()
 	add_child(_stored_deferred_options_apply_timer)
 	_stored_deferred_options_apply_timer.autostart = false
