@@ -83,6 +83,7 @@ func populate() -> void:
 		var equipped_item_button: LoadoutMenuElement = element_scene.instantiate()
 		if Global.owned_items.size() >= i + 1:
 			equipped_item_button.item = Global.owned_items[i]
+			equipped_item_button.connected_locker_item = locker.connected_items[i]
 		equipped_item_button.pressed.connect(
 				func():
 					_on_equipped_slot_pressed(equipped_item_button)
@@ -94,14 +95,7 @@ func populate() -> void:
 
 
 func resize_grids() -> void:
-	var num_of_available_items : int = Global.owned_items.size()
-	var num_of_equipped_item_slots := equipped_items_container.get_children().size()
-	if num_of_equipped_item_slots % 3 == 0 and num_of_equipped_item_slots < 9:
-		equipped_items_container.columns = 3
-	elif num_of_available_items % 4 == 0:
-		equipped_items_container.columns = 4
-	else:
-		equipped_items_container.columns = 5
+	equipped_items_container.columns = 3
 
 
 func _physics_process(_delta: float) -> void:
@@ -111,25 +105,27 @@ func _physics_process(_delta: float) -> void:
 		handle_item_hover_tooltip()
 
 
-func _on_available_item_pressed(item_to_equip: Item) -> void:
+func _on_available_item_pressed(item_to_equip: Item, locker_item:ClickableLockerItem) -> void:
 	var equipped_slot_to_fill: LoadoutMenuElement
 	var potential_slots: Array[Node] = equipped_items_container.get_children()
 	for slot: LoadoutMenuElement in potential_slots:
+		if slot.item == item_to_equip:
+			return
 		if slot.item == null:
 			equipped_slot_to_fill = slot
 			break
-
-	if equipped_slot_to_fill == null:
-		equipped_slot_to_fill = potential_slots.back()
-
+	if not equipped_slot_to_fill: return
+	equipped_slot_to_fill.connected_locker_item = locker_item
+	locker_item.hide()
 	equipped_slot_to_fill.item = item_to_equip
-
 	resize_grids()
 
 
 func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 	if slot.item:
 		slot.item = null
+		slot.connected_locker_item.show()
+		slot.connected_locker_item = null
 
 func confirm_and_hide_menu() -> void:
 	Global.tutorial_day_2_locker_loadout_confirmed = true
@@ -145,6 +141,7 @@ func confirm_and_hide_menu() -> void:
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
 		if equipped_item_button.item:
 			equipped_items.append(equipped_item_button.item)
+			locker.connected_items.append(equipped_item_button.connected_locker_item)
 
 	# unapply existing items
 	for item in Global.owned_items:

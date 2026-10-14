@@ -8,6 +8,7 @@ extends Node3D
 const CAM_TWEEN_DURATION:float = 0.45
 var exiting_loadout = false
 var camera_transform_before_locker_interaction: Transform3D
+var connected_items:Array[ClickableLockerItem]
 func _ready() -> void:
 	# if we haven't beaten day 1
 	# (we want to have the locker if we're replaying day 1 after beating it, but not before)

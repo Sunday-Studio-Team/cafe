@@ -28,5 +28,6 @@ func on_unhover():
 
 func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if hovered and event is InputEventMouseButton:
-		if (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
-			Global.item_loadout_menu._on_available_item_pressed(item)
+		var mouse_event = (event as InputEventMouseButton)
+		if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.pressed:
+			Global.item_loadout_menu._on_available_item_pressed(item,self)
