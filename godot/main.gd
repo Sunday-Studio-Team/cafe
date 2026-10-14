@@ -21,6 +21,7 @@ extends Node3D
 @export var customer_trash_scene: PackedScene
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
+@export var cafe_front_roller_shutters: CafeFrontRollerShutters
 @export var game_timer: Timer
 @export var ui: CanvasLayer
 @export var _trash_can: TrashCan
@@ -82,6 +83,7 @@ func _ready() -> void:
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
+	Events.shutters_open_requested.connect(_on_shutters_open_requested)
 	Events.shift_start_requested.connect(_on_shift_start_requested)
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -304,7 +306,10 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(_active_machines)
 
-func _on_shift_start_requested() -> void:
+func _on_shutters_open_requested() -> void:
+	cafe_front_roller_shutters.open()
+
+func _on_shift_start_requested() -> void:	
 	if Global.playing_tutorial:
 		Events.shift_started.emit()
 	else:
