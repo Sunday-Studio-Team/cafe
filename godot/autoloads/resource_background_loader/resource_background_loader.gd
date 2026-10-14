@@ -30,6 +30,8 @@ func cache_resource(resource_uid: StringName) -> ResourceBackgroundLoaderToken:
 	
 	var token: ResourceBackgroundLoaderToken = ResourceBackgroundLoaderToken.new()
 	token.resource_uid = resource_uid
+	token.resource_resolved_path = ResourceUID.uid_to_path(resource_uid)
+	print("ResourceBackgroundLoader: Requested to cache resource %s." % token.resource_resolved_path)
 	
 	var token_array: ResourceBackgroundLoaderTokenArray = resource_uid_to_token_array_dict.get_or_add(resource_uid, ResourceBackgroundLoaderTokenArray.new())
 	token_array.tokens.append(token)
@@ -55,7 +57,7 @@ func uncache_resource(token: ResourceBackgroundLoaderToken) -> void:
 			resource_uid_to_token_array_dict.erase(token.resource_uid)
 			if resource_uid_to_resource_dict.has(token.resource_uid):
 				resource_uid_to_resource_dict.erase(token.resource_uid)
-			print("ResourceBackgroundLoader: Uncaching resource %s." % token.resource_uid)
+			print("ResourceBackgroundLoader: Uncaching resource %s." % token.resource_resolved_path)
 
 func get_resource(token: ResourceBackgroundLoaderToken) -> Resource:
 	var resource: Resource = _get_and_cache_resource(token)
@@ -73,5 +75,5 @@ func _get_and_cache_resource(token: ResourceBackgroundLoaderToken) -> Resource:
 			printerr("ResourceBackgroundLoader: resource %s is null?" % token.resource_uid)
 			return
 		resource_uid_to_resource_dict.set(token.resource_uid, resource)
-		print("ResourceBackgroundLoader: Caching resource %s." % token.resource_uid)
+		print("ResourceBackgroundLoader: Cached resource %s." % token.resource_resolved_path)
 	return resource
