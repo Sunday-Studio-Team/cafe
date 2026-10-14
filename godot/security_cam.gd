@@ -21,7 +21,8 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 @export var disable_sound: AudioStreamPlayer3D
 @export var disable_particles: GPUParticles3D
-@export var disable_2d_vfx: AnimatedSprite3D
+@export var disable_2d_vfx_animated_sprite_3d: AnimatedSprite3D
+@export var disable_2d_vfx_sprite_frames_uid: StringName
 @export var disabled_timer_sprite: Sprite3D
 @export var disabled_timer_bar: TextureProgressBar
 @export var whipped_cream_sound: AudioStreamPlayer
@@ -161,11 +162,27 @@ func disarm_camera() -> void:
 	_camera_disarmed = true
 	disable_sound.play()
 	disable_particles.emitting = true
-	disable_2d_vfx.play()
+	play_2d_vfx()
 	_update_camera_components_active()
 	await Events.viewmodel_animation_finished
 	Global.camera_mode = Global.CameraMode.PLAYER
 
+
+func play_2d_vfx() -> void:
+	disable_2d_vfx_animated_sprite_3d.visible = false
+	var token: ResourceBackgroundLoaderToken = Global.resource_background_loader.cache_resource(disable_2d_vfx_sprite_frames_uid)
+	while !token.is_loaded:
+		await get_tree().process_frame
+	var sprite_frames: SpriteFrames = Global.resource_background_loader.get_resource(token) as SpriteFrames
+	Global.resource_background_loader.uncache_resource(token)
+	if sprite_frames == null:
+		return
+	disable_2d_vfx_animated_sprite_3d.sprite_frames = sprite_frames
+	disable_2d_vfx_animated_sprite_3d.visible = true
+	disable_2d_vfx_animated_sprite_3d.play()
+	await disable_2d_vfx_animated_sprite_3d.animation_finished
+	disable_2d_vfx_animated_sprite_3d.sprite_frames = null
+	disable_2d_vfx_animated_sprite_3d.visible = false
 
 func rearm_camera() -> void:
 	_camera_disarmed = false
