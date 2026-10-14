@@ -519,12 +519,6 @@ func _on_shift_started():
 			_machine_customer_spawn_timer.start(Stats.current.first_machine_customer_entry_time)
 			_help_desk_customer_spawn_timer.start(Stats.current.first_help_desk_customer_entry_time)
 
-		var has_scrubber: bool = false
-		for item in Global.owned_items:
-			if item.item_id == "super_scrubber":
-				has_scrubber = true
-				break
-		DraggableMop.used_scrubber = has_scrubber
 
 		desk.interactable.visible = false
 

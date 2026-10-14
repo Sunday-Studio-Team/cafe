@@ -1,13 +1,11 @@
 class_name ErasableCanvas
 extends Node2D
 
-
 @export var canvas_sprite: Sprite2D
 @export var canvas_sprite2: Sprite2D
 @export var canvas_sprite3: Sprite2D
 
-@export var moping_area: Area2D
-@export var bucket: Sprite2D
+@export var mop_head: Area2D
 @export var machine_clean: Sprite2D
 @export var machine_dirty: Sprite2D
 @export var bucket_area: Area2D
@@ -15,9 +13,8 @@ extends Node2D
 @export var text_bubble: TippyText
 @export var anim_water_flow: AnimatedSprite2D
 
-#seperate audio players so they can play together
-@export var audio_player: AudioStreamPlayer2D
-@export var audio_player_spills: AudioStreamPlayer2D
+@export var scrub_sound: AudioStreamPlayer2D
+@export var spill_shrink_sound: AudioStreamPlayer2D
 
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
@@ -59,11 +56,12 @@ var previous_mop_position := Vector2.INF
 var remaining_mask: BitMap
 var remaining_ratio: float:
 	get():
-		return ((new_scale.x + new_scale2.x + new_scale3.x)/ 3.0) / starting_scale.x
+		return (new_scale.x + new_scale2.x + new_scale3.x) / 3.0 / starting_scale.x
 var prev_remaining_ratio: float = 1.0
 var spill1_gone: bool = false
 var spill2_gone: bool = false
 var spill3_gone: bool = false
+
 
 func _ready() -> void:
 	Global.minigame_active = true
@@ -103,12 +101,10 @@ func _ready() -> void:
 	new_scale3 = canvas_sprite3.scale
 	starting_scale = canvas_sprite.scale
 
-	if moping_area == null:
-		push_error("Moping Area has not been assigned.")
-		set_physics_process(false)
-		return
-
-	mop_collision = (moping_area.get_child(0) as CollisionShape2D)
+	# TODO: remove unsafe get_child
+	# NOTE: probably should use the Area2D's functionality directly instead of
+	#		referencing the CollisionShape and its shape resource anyway
+	mop_collision = (mop_head.get_child(0) as CollisionShape2D)
 
 	if mop_collision == null:
 		push_error("Moping Area must have a CollisionShape2D child.")
@@ -122,17 +118,11 @@ func _ready() -> void:
 		set_physics_process(false)
 		return
 
-	if mop == null:
-		push_error("Mop has not been assigned")
-		set_physics_process(false)
-		return
-
 	bucket_area.area_entered.connect(
 		func(_area: Area2D):
-			if _area == moping_area && not mop.is_wet:
+			if _area == mop_head && not mop.is_wet:
 				mop.wet_mop()
-				#print("mop is now wet")
-				text_bubble.mop_entered()
+				text_bubble.play_bubble_grow_animation()
 	)
 
 	machine_clean.visible = false
@@ -151,28 +141,28 @@ func _physics_process(_delta: float) -> void:
 	if mop_collision.global_position.distance_to(previous_mop_position) < 50.0:
 		return
 
+	if mop.is_wet and not mop.is_dirty:
+		text_bubble.stop_bubble_animation()
+
 	var rect: Rect2i = erased_area_inside_mop_rectangle()
 
 	previous_mop_position = mop_collision.global_position
 
 	check_machine_clean()
 
-
-
 	if (mop_dirtied_amount >= mop_dirtied_thresh):
 		anim_water_flow.stop()
 		anim_water_flow.play("Idle")
 		anim_water_flow.hide()
 
-		text_bubble.mop_need_cleaning()
+		text_bubble.play_bubble_grow_animation()
 
-		if bucket_area.overlaps_area(moping_area) or bucket_area.overlaps_body(mop): # adjust based on what type your mop/moping_area is
+		if bucket_area.overlaps_area(mop_head) or bucket_area.overlaps_body(mop): # adjust based on what type your mop/mop_head is
 					mop.wet_mop()
 					mop_dirtied_amount = 0.0
 					prev_remaining_ratio = remaining_ratio
 					mop.is_dirty = false
-					if text_bubble:
-						text_bubble.mop_entered()
+					text_bubble.hide()
 	else:
 		if ((prev_remaining_ratio - remaining_ratio) > 0.05 and not mop.is_dirty):
 			mop.get_dirty()
@@ -184,7 +174,6 @@ func _physics_process(_delta: float) -> void:
 
 			update_image(rect)
 			check_for_win()
-
 
 
 func erased_area_inside_mop_rectangle() -> Rect2i:
@@ -217,15 +206,15 @@ func update_image(_rect: Rect2i) -> void:
 
 	if new_scale <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill1_gone==false:
 		spill1_gone = true
-		audio_player_spills.play()
+		spill_shrink_sound.play()
 
 	if new_scale2 <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill2_gone==false:
 		spill2_gone = true
-		audio_player_spills.play()
+		spill_shrink_sound.play()
 
 	if new_scale3 <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill3_gone==false:
 		spill3_gone = true
-		audio_player_spills.play()
+		spill_shrink_sound.play()
 
 func check_and_shrink_sprite(sprite: Sprite2D, img_size: Vector2i, current_sprite_scale: Vector2) -> Vector2:
 	var half_size := mop_rectangle.size / 2.0
@@ -248,7 +237,7 @@ func check_and_shrink_sprite(sprite: Sprite2D, img_size: Vector2i, current_sprit
 	rect = rect.intersection(image_rect)
 
 	if rect.size.x > 0 and rect.size.y > 0:
-		audio_player.play()
+		scrub_sound.play()
 		var updated_scale = Vector2(
 			max(0.0, current_sprite_scale.x - spill_clean_speed),
 			max(0.0, current_sprite_scale.y - spill_clean_speed)
@@ -259,6 +248,7 @@ func check_and_shrink_sprite(sprite: Sprite2D, img_size: Vector2i, current_sprit
 
 	return current_sprite_scale
 
+
 func check_machine_clean() -> void:
 	if remaining_ratio <= machine_clean_ratio:
 		machine_clean.visible = true
@@ -266,6 +256,7 @@ func check_machine_clean() -> void:
 	else:
 		machine_clean.visible = false
 		machine_dirty.visible = true
+
 
 func check_for_win() -> void:
 	if remaining_ratio <= allowed_spill_remaining_ratio_1:

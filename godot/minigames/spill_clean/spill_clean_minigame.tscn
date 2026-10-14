@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://bjqf3em181w7g" path="res://sprites/spill_minigame/dirty_scrubber.png" id="7_80bh0"]
 [ext_resource type="Texture2D" uid="uid://c3pm8p3gxaxn4" path="res://sprites/spill_minigame/machine.png" id="7_dqypk"]
 [ext_resource type="AudioStream" uid="uid://c2hxmk7dnyv1d" path="res://audio/water_splash.wav" id="7_eeqbd"]
-[ext_resource type="Texture2D" uid="uid://r56engvvtppn" path="res://sprites/spill_minigame/spill tippy.png" id="8_4orm6"]
 [ext_resource type="Texture2D" uid="uid://ibpvka7lpwpp" path="res://sprites/spill_minigame/TextBubble (1).png" id="9_4orm6"]
+[ext_resource type="Texture2D" uid="uid://ddbjrht24fshn" path="res://sprites/spill_minigame/spill_tippy.png" id="11_621mk"]
 [ext_resource type="Texture2D" uid="uid://br7to5b13wfqn" path="res://sprites/spill_minigame/wet_mop.png" id="12_fjufl"]
 [ext_resource type="AudioStream" uid="uid://bnesqt68v2ysb" path="res://audio/spill-minigame/Mop_PuddleShrink-PS-v01-001.wav" id="12_txvoc"]
 [ext_resource type="AudioStream" uid="uid://ck0js87chxmsj" path="res://audio/spill-minigame/Mop_PuddleShrink-PS-v01-002.wav" id="13_621mk"]
@@ -134,7 +134,7 @@ position = Vector2(961, 536)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_txvoc")
 
-[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "canvas_sprite2", "canvas_sprite3", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble", "anim_water_flow", "audio_player", "audio_player_spills")]
+[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "canvas_sprite2", "canvas_sprite3", "mop_head", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble", "anim_water_flow", "scrub_sound", "spill_shrink_sound")]
 modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
 position = Vector2(538, 546)
 scale = Vector2(0.3, 0.3)
@@ -143,16 +143,15 @@ script = ExtResource("2_imr7o")
 canvas_sprite = NodePath(".")
 canvas_sprite2 = NodePath("../Spills2")
 canvas_sprite3 = NodePath("../Spills3")
-moping_area = NodePath("../Mop/MopHeadHitbox")
-bucket = NodePath("../Bucket")
+mop_head = NodePath("../Mop/MopHeadHitbox")
 machine_clean = NodePath("../TippyMachineClean")
 machine_dirty = NodePath("../TippyMachineSpill")
 bucket_area = NodePath("../Bucket/Area2D")
 mop = NodePath("../Mop")
 text_bubble = NodePath("../Bucket/TippyText")
 anim_water_flow = NodePath("../Mop/AnimatedSprite2D")
-audio_player = NodePath("../Mop/ScrubSound")
-audio_player_spills = NodePath("../Mop/PuddleShrinkSound")
+scrub_sound = NodePath("../Mop/ScrubSound")
+spill_shrink_sound = NodePath("../Mop/PuddleShrinkSound")
 allowed_spill_remaining_ratio_1 = 0.1
 machine_clean_ratio = 0.3
 spill_clean_speed = 0.05
@@ -186,19 +185,18 @@ position = Vector2(315, 348)
 scale = Vector2(0.41000003, 0.48500004)
 texture = ExtResource("20_621mk")
 
-[node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723 node_paths=PackedStringArray("tippy_bucket")]
+[node name="TippyText" type="Sprite2D" parent="Bucket" unique_id=423773723 node_paths=PackedStringArray("bucket")]
 modulate = Color(0.7898787, 0.7898787, 0.78987867, 1)
-position = Vector2(292.68292, -338.1443)
+z_index = 5
+position = Vector2(168.29266, -51.546387)
 scale = Vector2(0.7207779, 0.60977817)
 texture = ExtResource("9_4orm6")
+centered = false
+offset = Vector2(-100, -500)
 script = ExtResource("6_kx0vh")
-bubble_before_wet = ExtResource("9_4orm6")
-grow_count = 3
-speaking_gap = 0.2
-scaling_factor = 1.5
-tippy_bucket = NodePath("..")
-tippy_bucket_normal = ExtResource("8_4orm6")
-tippy_bucket_mouth_closed = ExtResource("20_621mk")
+bucket = NodePath("..")
+bucket_mouth_open_texture = ExtResource("11_621mk")
+bucket_mouth_closed_texture = ExtResource("20_621mk")
 
 [node name="Area2D" type="Area2D" parent="Bucket" unique_id=474787777]
 
@@ -210,24 +208,24 @@ shape = SubResource("RectangleShape2D_vn1tu")
 scale = Vector2(2.4390242, 2.0618556)
 stream = ExtResource("7_eeqbd")
 
-[node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("bubbles", "splash", "mop_range")]
+[node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("bubble_particles", "splash_sound", "mop_range")]
 z_index = 5
-position = Vector2(960, 1000)
+position = Vector2(960, 563.00006)
 rotation = -0.2485773
 texture = ExtResource("4_omxn0")
 offset = Vector2(0, 200)
 script = ExtResource("4_6lir2")
-bubbles = NodePath("GPUParticles2D")
-splash = NodePath("../Bucket/SplashSound")
+bubble_particles = NodePath("BubbleParticles")
+splash_sound = NodePath("../Bucket/SplashSound")
 mop_range = NodePath("MopHeadHitbox/CollisionShape2D")
-mop_texture = ExtResource("4_omxn0")
+normal_mop_texture = ExtResource("4_omxn0")
 wet_mop_texture = ExtResource("12_fjufl")
 dirty_mop_texture = ExtResource("4_4xqy4")
 scrubber_texture = ExtResource("6_v4dls")
 wet_scrubber_texture = ExtResource("15_lww7c")
 dirty_scrubber_texture = ExtResource("7_80bh0")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Mop" unique_id=360286918]
+[node name="BubbleParticles" type="GPUParticles2D" parent="Mop" unique_id=360286918]
 modulate = Color(1, 0.8352941, 0.77254903, 0.7058824)
 position = Vector2(-0.2905197, 13.338501)
 amount = 10
