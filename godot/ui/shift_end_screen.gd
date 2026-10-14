@@ -1,3 +1,4 @@
+class_name ShiftEndScreen
 extends CanvasLayer
 
 @export var background: ColorRect
@@ -38,19 +39,12 @@ var reached_bonus_rating: bool = (
 
 
 func _ready() -> void:
-	Events.time_up.connect(_on_time_up)
-	restart_button.pressed.connect(func():Events.end_screen_finished.emit(),)
-	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit(),)
+	restart_button.pressed.connect(func():Events.end_screen_finished.emit())
+	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit())
 
+	_play_screen()
 
-func _process(_delta: float) -> void:
-	if visible:
-		Global.in_end_screen = true
-	else:
-		Global.in_end_screen = false
-
-
-func _on_time_up() -> void:
+func _play_screen() -> void:
 	# Hide all the labels
 	first_part_container.hide()
 	second_part_container.hide()
@@ -71,7 +65,7 @@ func _on_time_up() -> void:
 		Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 	)
 	# calculate everything
-	var daily_profit := Global.daily_cafe_money
+	var daily_profit: float = Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
 	var passed_profit_goal := daily_profit >= min_profit_goal
 	if passed_profit_goal:

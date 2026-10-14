@@ -61,7 +61,7 @@ var playing_tutorial: bool = false
 var shift_length: float
 var shift_time_remaining: float
 var shift_progress_ratio: float
-var daily_cafe_money := 0.0:
+var daily_cafe_money: float = 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
 			return

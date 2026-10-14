@@ -24,6 +24,8 @@ extends Node3D
 @export var game_timer: Timer
 @export var ui: CanvasLayer
 @export var _trash_can: TrashCan
+@export var _shift_end_screen_scene_uid: StringName
+@export var _shift_end_screen_container: Node
 #Active Items
 @export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
@@ -464,6 +466,18 @@ func shift_end_sequence(override: bool = false):
 	if override or (closing_time and get_customers().size() <= 1):
 		Engine.time_scale = 1
 		Events.time_up.emit()
+
+		# Create the shift end screen
+		var token: ResourceBackgroundLoaderToken = Global.resource_background_loader.cache_resource(_shift_end_screen_scene_uid)
+		while !token.is_loaded:
+			await get_tree().process_frame
+		var shift_end_screen_scene: PackedScene = Global.resource_background_loader.get_resource(token) as PackedScene
+		Global.resource_background_loader.uncache_resource(token)
+		if shift_end_screen_scene == null:
+			printerr("shift_end_screen_scene is null!")
+			return
+		var shift_end_screen: ShiftEndScreen = shift_end_screen_scene.instantiate()
+		_shift_end_screen_container.add_child(shift_end_screen)
 
 		await Events.end_screen_finished
 
