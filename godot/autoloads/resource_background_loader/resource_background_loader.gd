@@ -41,6 +41,8 @@ func cache_resource(resource_uid: StringName) -> ResourceBackgroundLoaderToken:
 	return token
 
 func uncache_resource(token: ResourceBackgroundLoaderToken) -> void:
+	if token == null:
+		return
 	if resource_uid_to_token_array_dict.has(token.resource_uid):
 		# Stop tracking this token for the resource.
 		var token_array: ResourceBackgroundLoaderTokenArray = resource_uid_to_token_array_dict.get(token.resource_uid)
