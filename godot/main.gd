@@ -29,6 +29,9 @@ extends Node3D
 
 @export var _main_scene_loading_overlay: Control
 
+@export var _player_shift_start_position: Node3D
+@export var _shift_start_sequence_label: RichTextLabel
+
 # Lazy spawned break room nodes
 @export var _desk_scene_uid: StringName
 @export var _desk_container: Node
@@ -79,6 +82,7 @@ func _ready() -> void:
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
+	Events.shift_start_requested.connect(_on_shift_start_requested)
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
@@ -300,6 +304,32 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(_active_machines)
 
+func _on_shift_start_requested() -> void:
+	if Global.playing_tutorial:
+		Events.shift_started.emit()
+	else:
+		_shift_start_sequence_label.visible = false
+		_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
+		await _tutorial_manager._cinematic_camera.play_animation("pre_shift_start_sequence")
+		Global.player.global_position = _player_shift_start_position.global_position
+		Global.player.global_rotation = _player_shift_start_position.global_rotation
+		_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
+		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
+		await _tutorial_manager._cinematic_camera.play_animation("shift_start_sequence")
+		_shift_start_sequence_label.visible = true
+		_tutorial_manager._cinematic_camera.disable_cinematic_camera(3.0)
+		_shift_start_sequence_label.text = "3"
+		await get_tree().create_timer(1.0).timeout
+		_shift_start_sequence_label.text = "2"
+		await get_tree().create_timer(1.0).timeout
+		_shift_start_sequence_label.text = "1"
+		await get_tree().create_timer(1.0).timeout
+		_shift_start_sequence_label.text = "GO!"
+		Events.shift_started.emit()
+		await get_tree().create_timer(1.0).timeout
+		_shift_start_sequence_label.visible = false
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
 	if closing_time:

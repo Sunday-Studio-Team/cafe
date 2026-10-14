@@ -1727,6 +1727,36 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.0222335, 0.9415176, 0.06339604, -0.33019742)
 
+[sub_resource type="Animation" id="Animation_itk5a"]
+resource_name = "pre_shift_start_sequence"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.04444445, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_6kay4"]
+resource_name = "shift_start_sequence"
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicCameraCanvasLayer/CameraDarknessColorRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.04444445, 0, 0, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
 [sub_resource type="Animation" id="Animation_skfll"]
 resource_name = "skip_cutscene_fade_to_black"
 length = 0.3
@@ -1812,6 +1842,8 @@ _data = {
 &"day_5_training_3_0": SubResource("Animation_e4p22"),
 &"day_5_training_4_0": SubResource("Animation_mud2v"),
 &"day_5_training_7_0": SubResource("Animation_dbrv6"),
+&"pre_shift_start_sequence": SubResource("Animation_itk5a"),
+&"shift_start_sequence": SubResource("Animation_6kay4"),
 &"skip_cutscene_fade_to_black": SubResource("Animation_skfll"),
 &"skip_cutscene_fade_to_view": SubResource("Animation_l0ugm")
 }
@@ -1885,7 +1917,7 @@ viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubV
 [sub_resource type="ViewportTexture" id="ViewportTexture_kajqd"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "shift_start_sound", "default_trash_spawn_spot", "day_containers_desk", "day_containers_boxes")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "shift_start_sound", "default_trash_spawn_spot", "day_containers_desk", "day_containers_boxes")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1914,6 +1946,8 @@ _trash_can = NodePath("TrashCan")
 _shift_end_screen_scene_uid = &"uid://c1vvwndvemdbo"
 _shift_end_screen_container = NodePath("ShiftEndScreenContainer")
 _main_scene_loading_overlay = NodePath("PlayerUiSubViewportContainer/SubViewport/MainSceneLoadingOverlayCanvasLayer/MainSceneLoadingOverlay")
+_player_shift_start_position = NodePath("PlayerShiftStartPosition")
+_shift_start_sequence_label = NodePath("CinematicCamera/CinematicCameraCanvasLayer/ShiftStartSequence/CountdownRichTextLabel")
 _desk_scene_uid = &"uid://dhmqo5yinqk0t"
 _desk_container = NodePath("DeskSpawnPosition")
 _whiteboard_scene_uid = &"uid://dy4e7ivinjsni"
@@ -2822,8 +2856,38 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="ShiftStartSequence" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=357199991]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CountdownRichTextLabel" type="RichTextLabel" parent="CinematicCamera/CinematicCameraCanvasLayer/ShiftStartSequence" unique_id=282290146]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -601.0
+offset_top = -260.0
+offset_right = 601.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("280_l0ugm")
+theme_override_font_sizes/normal_font_size = 344
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.18365961, -0.11049962, 0.9767582, 3.725284e-08, 0.99366015, 0.1124118, -0.9829882, -0.020645497, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.9999983, 0, 0, 0, 0.99999845, 0, 0, 0, 0.9999988, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2975,6 +3039,9 @@ texture = SubResource("ViewportTexture_kajqd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 top_level = true
 
+[node name="PlayerShiftStartPosition" type="Marker3D" parent="." unique_id=1944179139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.896394, 0, 8.4851)
+
 [node name="DeskSpawnPosition" type="Marker3D" parent="." unique_id=1376370741]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.18685444, -0.10281545, 13.920945)
 
@@ -3069,7 +3136,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057009596, -0.00016215755, -0.9999325, 1.0259866e-07, 1, -0.0001621466, 0.9999325, -1.01539825e-08, 0.00057009596, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700959, -0.00016215755, -0.99993247, 1.02598655e-07, 1, -0.00016214659, 0.99993247, -1.01539825e-08, 0.0005700959, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)

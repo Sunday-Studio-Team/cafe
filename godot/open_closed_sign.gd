@@ -13,5 +13,6 @@ func set_enabled(enabled: bool) -> void:
 
 func _on_interacted() -> void:
 	interactable.visible = false
-	Events.shift_started.emit()
 	animation_player.play("open")
+	await animation_player.animation_finished
+	Events.shift_start_requested.emit()	
