@@ -174,9 +174,6 @@ func _ready() -> void:
 	
 	Events.main_scene_ready.emit()
 	
-	await create_tween().tween_property(_main_scene_loading_overlay, "modulate:a", 0.0, 1.0).finished
-	_main_scene_loading_overlay.visible = false
-	
 	_tutorial_manager.start_day()
 
 

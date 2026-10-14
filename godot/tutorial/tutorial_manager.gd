@@ -50,7 +50,8 @@ func start_day() -> void:
 		if Global.day == 1:
 			# Enable the open sign
 			_open_closed_sign.set_enabled(true)
-
+			
+			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_0)
 
 			# Repeat the lines until shift started.
@@ -280,6 +281,7 @@ func start_day() -> void:
 			# Disable the open sign
 			_open_closed_sign.set_enabled(false)
 
+			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_0)
 
 			# Repeat the lines until locker is interacted with.
@@ -437,6 +439,7 @@ func start_day() -> void:
 			# Disable the open sign
 			_open_closed_sign.set_enabled(false)
 
+			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_0)
 
 			# Repeat the lines until camera stuns the player.
@@ -506,6 +509,7 @@ func start_day() -> void:
 			# Disable the open sign
 			_open_closed_sign.set_enabled(false)
 
+			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_4_0)
 
 			# Repeat the lines until trash is picked up.
@@ -554,6 +558,7 @@ func start_day() -> void:
 			# Disable the open sign
 			_open_closed_sign.set_enabled(false)
 
+			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_5_0)			
 
 		# Re-enable Tippy callouts
@@ -566,6 +571,9 @@ func start_day() -> void:
 
 		# Reset the scene for a fresh load
 		Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+	else:
+		await create_tween().tween_property(Global.main_scene._main_scene_loading_overlay, "modulate:a", 0.0, 1.0).finished
+		Global.main_scene._main_scene_loading_overlay.visible = false
 
 func _repeat_line_until_condition_met(voice_line_ids: Array[String], voice_line_locations: Array[VoiceLineSystem.VoiceLineLocationEnum], condition_callable: Callable) -> void:
 	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
