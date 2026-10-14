@@ -65,11 +65,11 @@ enum EqualStates {
 
 @export var ingredient_coffeebar: TextureRect
 
-@export var idle_ing_bar_array:Array[Texture2D]
-@export var active_ing_bar_array:Array[Texture2D]
+@export var idle_ing_bar_array: Array[Texture2D]
+@export var active_ing_bar_array: Array[Texture2D]
 
-@export var arrows:Array[Texture]
-@export var icons:Array[Texture]
+@export var arrows: Array[Texture]
+@export var icons: Array[Texture]
 enum Arrow {
 	UP1,
 	UP2,
@@ -110,9 +110,7 @@ enum Icon {
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
-@export var popup_go_to_spill: PackedScene # tutor ial popup that tells player to go to the spill
-@export var minus_rating_vfx: Machine3DPopupVfx
-@export var plus_rating_vfx: Machine3DPopupVfx
+@export var rating_vfx: Machine3DPopupVfx
 @export_category("Explosion Particles")
 @export var explosion_boom_particles: GPUParticles3D
 
@@ -184,15 +182,15 @@ func _ready() -> void:
 	order_breakdown.hide()
 	current_ingbar_animation = idle_ing_bar_array
 
-var current_ingbar_animation:Array[Texture2D]:
+var current_ingbar_animation: Array[Texture2D]:
 	set(value):
 		if value == current_ingbar_animation:
 			return
 		animation_index = 0
 		current_ingbar_animation = value
-var animation_index:int
-var animation_delay_timer:float = 0
-var animation_delay:float = 0.03
+var animation_index: int
+var animation_delay_timer: float = 0
+var animation_delay: float = 0.03
 
 
 func reset_icons():
@@ -216,7 +214,7 @@ func update_ingredients_bar_animation():
 func _physics_process(delta: float) -> void:
 	#progress_bar.value = (1 - timer.time_left / timer.wait_time) * 100
 	timer_dial.offset_transform_enabled = true
-	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0,360,customer_wait_bar.value/100))
+	timer_dial.offset_transform_rotation = deg_to_rad(lerp(0, 360, customer_wait_bar.value / 100))
 	current_ingbar_animation = active_ing_bar_array if not timer.is_stopped() else idle_ing_bar_array
 	animation_delay_timer += delta
 	animation_delay = 0.03
@@ -395,6 +393,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 		var rating_loss: float = Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 		Global.employee_rating -= rating_loss
+		rating_vfx.play_anim_then_hide("minus_rating")
 		customer.leave_store()
 		_set_customer(null)
 
@@ -650,7 +649,7 @@ func display_drink_score() -> void:
 	if order.liquid_correct: correct_count += 1
 	if order.extra_correct: correct_count += 1
 
-	var wrong_count: int = max(total_ingredients - correct_count,0)
+	var wrong_count: int = max(total_ingredients - correct_count, 0)
 
 	accept_money_arrow.texture = arrows[Arrow.UP2]
 	accept_money_icon.texture = icons[Icon.MONEY_GREEN]
@@ -729,6 +728,7 @@ func clean_up_spill() -> void:
 	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gained
 
+	Global.tutorial_day_3_spill_cleaned = true
 
 func refill() -> void:
 	Global.holding_ingredients = false
@@ -775,7 +775,6 @@ func refill() -> void:
 		machine_make_drink()
 
 
-
 func cancel_fix_minigame() -> void:
 	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
@@ -817,7 +816,7 @@ func accept_order(did_remake_drink: bool) -> void:
 				UI.ALERT_COLOR_GREEN
 			)
 			Global.employee_rating += order.star_rating_gain_for_remake
-			plus_rating_vfx.play_anim_then_hide("plus_rating")
+			rating_vfx.play_anim_then_hide("plus_rating")
 	else:
 		if order.star_rating_loss_if_accept > 0.0:
 			Events.alert_posted.emit(
@@ -827,7 +826,7 @@ func accept_order(did_remake_drink: bool) -> void:
 				UI.ALERT_COLOR_RED
 			)
 			Global.employee_rating -= order.star_rating_loss_if_accept
-			minus_rating_vfx.play_anim_then_hide("minus_rating")
+			rating_vfx.play_anim_then_hide("minus_rating")
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	reset_icons()
@@ -856,7 +855,7 @@ func accept_order(did_remake_drink: bool) -> void:
 	_set_customer(null)
 
 
-func break_down() -> void:
+func break_down(specific_repair_minigame_name: String="") -> void:
 	if broken_down:
 		return
 
@@ -864,7 +863,11 @@ func break_down() -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
-	next_repair_minigame = REPAIR_MINIGAMES.pick_random()
+	
+	if specific_repair_minigame_name != "":
+		next_repair_minigame = specific_repair_minigame_name
+	else:
+		next_repair_minigame = REPAIR_MINIGAMES.pick_random()
 
 	if gui_3d.player_using_me:
 		gui_3d.exit_with_camera_tween()
@@ -947,6 +950,8 @@ func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
 	Events.minigame_end.connect(clean_up_spill)
 	Events.minigame_cancelled.connect(cancel_clean_spill)
+	
+	Global.tutorial_day_3_spill_interacted = true
 
 
 func _on_fix_machine_button_pressed() -> void:
@@ -956,11 +961,15 @@ func _on_fix_machine_button_pressed() -> void:
 	Events.minigame_cancelled.connect(cancel_fix_minigame)
 	Events.minigame_active.emit(next_repair_minigame)
 
+	Global.tutorial_day_2_broken_machine_interacted = true
+
 
 func _on_machine_fixed() -> void:
 	Events.minigame_end.disconnect(_on_machine_fixed)
 	Events.minigame_cancelled.disconnect(cancel_fix_minigame)
 	fix_machine()
+
+	Global.tutorial_day_2_broken_machine_fixed = true
 
 
 # starts the remake minigame

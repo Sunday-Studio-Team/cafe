@@ -2,26 +2,41 @@
 
 [ext_resource type="Texture2D" uid="uid://ctv53kv7kqndj" path="res://sprites/items/hammer.png" id="1_603tw"]
 [ext_resource type="Script" uid="uid://ddmcx2eq3uo8k" path="res://ui/tablet_item_icon.gd" id="2_5ciaa"]
+[ext_resource type="Texture2D" uid="uid://mij863vvq0v8" path="res://sprites/tablet_ui/tablet_item_slots.png" id="3_5ciaa"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="3_wpwbk"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="4_yiwhf"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="5_jqva2"]
 
-[node name="TabletItemIcon" type="TextureRect" unique_id=427576900 node_paths=PackedStringArray("cooldown_progress_bar")]
-custom_minimum_size = Vector2(100, 0)
-size_flags_horizontal = 0
-texture = ExtResource("1_603tw")
-expand_mode = 5
-stretch_mode = 5
-script = ExtResource("2_5ciaa")
-cooldown_progress_bar = NodePath("TextureProgressBar")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn1tu"]
+atlas = ExtResource("3_5ciaa")
+region = Rect2(19, 26, 249, 249)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=681775761]
+[node name="TabletItemIcon" type="MarginContainer" unique_id=1323406528 node_paths=PackedStringArray("cooldown_progress_bar", "item_texture_rect")]
+custom_minimum_size = Vector2(125, 125)
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+script = ExtResource("2_5ciaa")
+cooldown_progress_bar = NodePath("CooldownProgressBar")
+item_texture_rect = NodePath("ItemTextureRect")
+
+[node name="Background" type="TextureRect" parent="." unique_id=523436816]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vn1tu")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ItemTextureRect" type="TextureRect" parent="." unique_id=2119693488]
+layout_mode = 2
+texture = ExtResource("1_603tw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CooldownProgressBar" type="TextureProgressBar" parent="." unique_id=681775761]
 modulate = Color(1, 1, 1, 0.78431374)
 texture_filter = 1
 custom_minimum_size = Vector2(100, 100)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
 fill_mode = 4
 nine_patch_stretch = true
 texture_under = ExtResource("3_wpwbk")

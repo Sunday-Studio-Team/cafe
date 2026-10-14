@@ -306,16 +306,16 @@ func _on_game_options_changed(options_data: OptionsData) -> void:
 
 func _apply_game_options(options_data: OptionsData) -> void:
 	const BUS_NAME_OVERALL: String = "Master"
-	const BUS_NAME_DIEGETIC_MUSIC: String = "DiegeticMusic"
-	const BUS_NAME_MINIGAME_MUSIC: String = "MinigameMusic"
+	const BUS_NAME_CUSTOMER_MUSIC: String = "CustomerAreaMusic"
+	const BUS_NAME_NON_DIEGETIC_MUSIC: String = "NonDiegeticMusic"
 	const BUS_NAME_VOICE: String = "TippyVO"
 
 	var bus_index_overall: int = AudioServer.get_bus_index(BUS_NAME_OVERALL)
 	AudioServer.set_bus_volume_linear(bus_index_overall, options_data.overall_volume * options_data.VOLUMES_MULTIPLIER)
-	var bus_index_diegetic_music: int = AudioServer.get_bus_index(BUS_NAME_DIEGETIC_MUSIC)
-	AudioServer.set_bus_volume_linear(bus_index_diegetic_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
-	var bus_index_minigame_music: int = AudioServer.get_bus_index(BUS_NAME_MINIGAME_MUSIC)
-	AudioServer.set_bus_volume_linear(bus_index_minigame_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_customer_area_music: int = AudioServer.get_bus_index(BUS_NAME_CUSTOMER_MUSIC)
+	AudioServer.set_bus_volume_linear(bus_index_customer_area_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_non_diegetic_music: int = AudioServer.get_bus_index(BUS_NAME_NON_DIEGETIC_MUSIC)
+	AudioServer.set_bus_volume_linear(bus_index_non_diegetic_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
 	var bus_index_voice: int = AudioServer.get_bus_index(BUS_NAME_VOICE)
 	AudioServer.set_bus_volume_linear(bus_index_voice, options_data.voice_volume * options_data.VOLUMES_MULTIPLIER)
 
@@ -325,10 +325,10 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			Global.cafe_environment_res.ssil_enabled = true
 			Global.cafe_environment_res.sdfgi_enabled = true
 			Global.cafe_environment_res.volumetric_fog_enabled = true
-			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
 			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
 			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 1.0)
 		OptionsData.GraphicsOptionsPresets.MEDIUM:
 			Global.cafe_environment_res.ssao_enabled = true
@@ -338,7 +338,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
 			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
 			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 2.0)
 		OptionsData.GraphicsOptionsPresets.LOW:
 			Global.cafe_environment_res.ssao_enabled = false

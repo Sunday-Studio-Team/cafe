@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://b06lgyqvbhuch"]
+
+[ext_resource type="AudioStream" uid="uid://c2prgkrhjfrbq" path="res://audio/vo/tutorials/day_4/voice_line_day_4_intro_6.wav" id="1_6jtxo"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_rawdn"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_6jtxo"]
+
+[resource]
+script = ExtResource("2_rawdn")
+voice_line_id = "voice_line_day_4_intro_6"
+audio_stream = ExtResource("1_6jtxo")
+speaker = ExtResource("3_6jtxo")
+subtitle_en = "…I’ll stun you right there and then."

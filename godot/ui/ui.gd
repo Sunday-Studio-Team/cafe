@@ -19,13 +19,8 @@ const ALERT_COLOR_GREEN: Color = Color.GREEN
 const ALERT_COLOR_MONEY: Color = Color.GOLD
 const ALERT_QUEUE_SIZE := 5
 
-@export var profit_label: Label
-@export var profit_progress: ProgressBar
-@export var customer_happiness_label: Label
-@export var score_update_label: Label
 @export var interactable_indicator: PanelContainer
 @export var interactable_label: RichTextLabel
-@export var hold_interact_progress: ProgressBar
 @export var shift_starting_ending_label: RichTextLabel
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
@@ -36,9 +31,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var day_indicator: Label
-@export var rating_stars_hbox: HBoxContainer
-@export var rating_label: Label
-@export var customer_flow_rate_label: Label
 @export var drop_button: Button
 @export var exit_machine_button: Button
 @export var item_hover_tooltip: Control
@@ -56,7 +48,6 @@ const ALERT_QUEUE_SIZE := 5
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
 var time_left_warning_played := false
-var _employee_rating_last_update: float = -1
 var exploding_bomb_timer: float = 10.5
 var exploding_bomb_on_cooldown: bool = false
 
@@ -99,14 +90,11 @@ func _ready() -> void:
 			Events.machine_exit_button_pressed.emit()
 	)
 
-	score_update_label.modulate = Color.TRANSPARENT
-
 	# we automatically do some stuff whenever our points change,
 	# so we mute + hide that stuff
 	# while we reset our points @ the start of each day lol
 	var points_sound_volume := lose_points_sound.volume_db
 	lose_points_sound.volume_linear = 0
-	score_update_label.hide()
 
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
@@ -117,12 +105,9 @@ func _ready() -> void:
 	else:
 		cctv_indicator.show()
 
-	_update_rating()
-
 	# (we muted + hid these earlier, now we unmute and show)
 	await get_tree().create_timer(2, false).timeout
 	lose_points_sound.volume_db = points_sound_volume
-	score_update_label.show()
 
 
 func _physics_process(_delta: float) -> void:
@@ -143,7 +128,6 @@ func _physics_process(_delta: float) -> void:
 	# looks cleaner if we dont show the hud behind the pause menu
 	visible = should_show_hud and not get_tree().paused
 
-	update_score_indicators()
 	update_interactable_ui()
 
 	if not exploding_bomb_on_cooldown:
@@ -190,7 +174,7 @@ func handle_exit_machine_button_visibility() -> void:
 
 
 func handle_drop_item_ui() -> void:
-	drop_button.visible = Global.holding_ingredients || Global.holding_trash and not Global.in_ui
+	drop_button.visible = (Global.holding_ingredients or Global.holding_trash) and not Global.in_ui
 
 
 func update_day_indicator() -> void:
@@ -205,19 +189,6 @@ func update_day_indicator() -> void:
 			day_indicator.text = "Thu"
 		0:
 			day_indicator.text = "Fri"
-
-
-func update_score_indicators() -> void:
-	profit_label.text = (
-			Global.float_to_price(Global.daily_cafe_money)
-			+ " (goal: %s)" % Global.float_to_price(Stats.current.daily_profit_goals_each_day[Global.day])
-	)
-
-	if Global.daily_cafe_money:
-		profit_progress.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
-
-	if not Global.employee_rating == _employee_rating_last_update:
-		_update_rating()
 
 
 func update_interactable_ui() -> void:
@@ -241,6 +212,9 @@ func update_interactable_ui() -> void:
 				owned_whipped_cream = owned_item
 			elif owned_item.item_id == "air_freshener":
 				owned_air_freshener = owned_item
+				
+		if hovered_interactable.interactable_id == &"disarm_camera" && owned_whipped_cream == null:
+			interactable_indicator.hide()
 
 		const USABLE_ITEM_BBCODE_OPEN: String = "[rainbow freq=0.1 sat=0.8 speed=-5.0]"
 		const USABLE_ITEM_BBCODE_CLOSE: String = "[/rainbow]"
@@ -337,24 +311,13 @@ func update_interactable_ui() -> void:
 
 		var interaction_prompt: String = ""
 		if hovered_interactable.show_interact_hotkey:
-			if hovered_interactable.hold_to_interact:
-				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
-				interaction_prompt += "(HOLD) [%s] - " % interact_keybind
-
-				hold_interact_progress.value = hovered_interactable.time_held / hovered_interactable.time_to_hold * 100
-			else:
-				var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
-				interaction_prompt += "[%s] - " % interact_keybind
+			var interact_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
+			interaction_prompt += "[%s] - " % interact_keybind
 		interaction_prompt += Global.hovered_interactable.display_name
 		interactable_label.text = interaction_prompt
 
 	else:
 		interactable_indicator.hide()
-
-	hold_interact_progress.visible = (
-			hovered_interactable != null
-			and hovered_interactable.time_held > 0
-	)
 
 
 func update_exploding_bomb_ui() -> void:
@@ -388,19 +351,8 @@ func update_cctv_indicator() -> void:
 		cctv_indicator.texture = _eye_logo_texture
 
 
-func _update_rating() -> void:
-	var current_rating: float = Global.employee_rating
-	_employee_rating_last_update = current_rating
-
-	for c in rating_stars_hbox.get_children():
-		c.queue_free()
-
-	rating_label.text = "⭐ %s / %s" % [current_rating, Stats.current.employee_rating_max]
-	customer_flow_rate_label.text = "%.1f" % Global.machine_customer_flow_rate
-
-
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
-	var _on_alert_tween_finished = func():
+	var _on_alert_tween_finished: Callable = func():
 		# Make sure parent hasn't already been freed
 		if is_instance_valid(alert_to_remove):
 			# remove this alert after it is done
@@ -425,7 +377,7 @@ func _on_alert_posted(
 		if old_alert_tween != null and old_alert_tween.is_running():
 			old_alert_tween.kill()
 
-		var fast_fade_tween = create_tween()
+		var fast_fade_tween: Tween = create_tween()
 		alert_to_remove.alert_tween = fast_fade_tween
 
 		fast_fade_tween.tween_property(alert_to_remove, "modulate:a", 0, 0.25).from(1)

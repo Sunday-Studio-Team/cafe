@@ -14,6 +14,7 @@ const STRIDE_LENGTH := 1.25
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
 @export var customer_trash: Node3D
+@export var throw_trash_sound: AudioStreamPlayer3D
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
@@ -209,7 +210,6 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
-		#print(hovered_interactable)
 		if camera == null:
 			return
 
@@ -219,15 +219,6 @@ func handle_hovered_interactable() -> void:
 				or hovered_interactable.global_position.distance_to(camera.global_position) > max_interact_dist
 		):
 			Global.hovered_interactable = null
-
-	# if we're currently holding interact on something, dont do anything
-	# (so we can look around while we hold)
-	if (
-			hovered_interactable != null and hovered_interactable.hold_to_interact
-			and Input.is_action_pressed("interact")
-	):
-		holding_interactable = true
-		return
 
 	var collider: Object = aiming_ray.get_collider()
 	if collider is Interactable and collider.visible:
@@ -303,10 +294,12 @@ func handle_ingredients_bag() -> void:
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
+		throw_trash_sound.play()
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 2)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 5)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.UP * 0.5)
 
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 

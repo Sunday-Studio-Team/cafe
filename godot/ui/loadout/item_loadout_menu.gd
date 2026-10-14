@@ -28,6 +28,8 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_active_indicator: Control
 
+@export var _player_ui_sub_viewport_container: PlayerUiSubViewportContainer
+
 var player_has_confirmed_loadout_at_least_once := false
 
 
@@ -35,8 +37,13 @@ var player_has_confirmed_loadout_at_least_once := false
 func _ready() -> void:
 	Global.item_loadout_menu = self
 
+	_player_ui_sub_viewport_container.allow_input_changed.connect(_on_player_ui_sub_viewport_container_allow_input_changed)
 	confirm_button.pressed.connect(confirm_and_hide_menu)
-	locker_interactable.interacted.connect(func(): show())
+	locker_interactable.interacted.connect(
+			func():
+				Global.tutorial_day_2_locker_opened = true
+				show()
+	)
 	visibility_changed.connect(
 			func():
 				if visible:
@@ -157,6 +164,8 @@ func add_available_item_button(item: Item) -> void:
 
 
 func confirm_and_hide_menu() -> void:
+	Global.tutorial_day_2_locker_loadout_confirmed = true
+	
 	# this is what triggers the door to open
 	# we only want it to trigger once
 	if not player_has_confirmed_loadout_at_least_once:
@@ -227,3 +236,9 @@ func drop_dragged_element(item: Item, source_slot: LoadoutMenuElement, target_sl
 		if previous_item_in_target_slot != null:
 			add_available_item_button(previous_item_in_target_slot)
 		source_slot.queue_free()
+
+func _on_player_ui_sub_viewport_container_allow_input_changed(allow_input: bool) -> void:
+	if allow_input:
+		root.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_INHERITED
+	else:
+		root.mouse_behavior_recursive = Control.MouseBehaviorRecursive.MOUSE_BEHAVIOR_DISABLED

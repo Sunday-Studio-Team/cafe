@@ -5,6 +5,8 @@ extends RigidBody3D
 @export var xray_material: Material
 @export var trash_cup: MeshInstance3D
 @export var activation_distance := 3.0
+@export var trail: GPUParticles3D
+@export var hint_pop: AnimatedSprite3D
 
 signal trash_bag_taken(customer_trash: CustomerTrash)
 
@@ -13,6 +15,8 @@ signal trash_bag_taken(customer_trash: CustomerTrash)
 var already_interacted := false
 var time_left_out: float = 0.0
 var cup_body_surface_index := 2
+var threshold_velocity := 1
+var being_slow := false
 
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
@@ -22,6 +26,10 @@ func _ready() -> void:
 	interactable.visible = false
 	await get_tree().create_timer(0.5, false).timeout
 	interactable.visible = true
+	
+	hint_pop.animation_finished.connect(_on_pop_out_finished)
+	hint_pop.play("Pop")
+	hint_pop.top_level = true
 
 
 func _process(_delta: float) -> void:
@@ -32,6 +40,16 @@ func _process(_delta: float) -> void:
 	else:
 		trash_cup.set_surface_override_material(cup_body_surface_index, null)
 
+	var speed := linear_velocity.length()
+	if speed > threshold_velocity && trail.process_material != null:
+		trail.emitting = true
+		hint_pop.visible = false
+		being_slow = false
+	elif !being_slow:
+		being_slow = true
+		hint_pop.play("Pop")
+		hint_pop.visible = true
+		trail.emitting = false
 
 func _on_interacted() -> void:
 	if Global.holding_trash || already_interacted || Global.holding_ingredients:
@@ -41,6 +59,8 @@ func _on_interacted() -> void:
 	Global.holding_trash = true
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
+
+	Global.tutorial_day_4_trash_picked_up = true
 	
 	# basically some weird stuff can happen if we throw the bag right after we
 	# pick up, so we just get rid of it if something weird happened which
@@ -57,3 +77,7 @@ func _on_interacted() -> void:
 	
 	await Events.trash_pickup_animation_grabbed
 	queue_free()
+
+
+func _on_pop_out_finished() -> void:
+	hint_pop.play("Normal")

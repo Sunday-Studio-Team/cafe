@@ -1,7 +1,8 @@
 # this script goes on the player camera itself but only handles camera effects
 # TODO: move it to a Node underneath the camera so the naming will be less confusing
 # (theres a few places where we reference the object this script is attached to and it isnt
-# obvious that we're referencing the camera itself)
+# obvious that we're referencing the camera itself because we've made our camera
+# be a 'CameraEffects' )
 class_name CameraEffects extends Camera3D
 
 @export var player : Player

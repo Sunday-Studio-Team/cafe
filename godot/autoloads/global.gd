@@ -48,7 +48,14 @@ var finished_important_emails: Array[EmailData]
 var active_help_desk_customer: Customer
 var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
-var holding_trash := false
+var holding_trash := false:
+	set(value):
+		if value == false && holding_trash == true:
+			holding_trash = value
+			Events.throw_trash.emit()
+		if value == true && holding_trash == false:
+			holding_trash = value
+			Events.pickup_trash.emit()
 var day: int = 1
 var playing_tutorial: bool = false
 var shift_length: float
@@ -106,7 +113,6 @@ var in_end_screen := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
 var showing_floating_cursor := false
-var in_tutorial_selection := false
 var in_loadout_menu := false
 var in_ui: bool:
 	get():
@@ -121,7 +127,6 @@ var in_ui: bool:
 				or in_dialog_screen
 				or in_options_menu
 				or showing_floating_cursor
-				or in_tutorial_selection
 				or in_loadout_menu
 		):
 			return true
@@ -142,9 +147,17 @@ var tutorial_remake_button_pressed: bool = false
 var tutorial_drink_remake_ingredients_done: bool = false
 var tutorial_drink_remade_served: bool = false
 var tutorial_ingredients_bag_got: bool = false
-var tutorial_refill_shown: bool = false # on day 1, shows a tutorial when a machine runs out of food
-var tutorial_go_clean_spill_shown: bool = false # on day 1, shows a tutorial the first time a spill happens.
-var tutorial_show_camera: bool = false # on day 2, shows a tutorial; player needs to avoid running under cameras.
+var tutorial_day_2_locker_opened: bool = false
+var tutorial_day_2_locker_loadout_confirmed: bool = false
+var tutorial_day_2_help_desk_interacted: bool = false
+var tutorial_day_2_help_desk_finished: bool = false
+var tutorial_day_2_broken_machine_interacted: bool = false
+var tutorial_day_2_broken_machine_fixed: bool = false
+var tutorial_day_3_camera_stunned_player: bool = false
+var tutorial_day_3_spill_interacted: bool = false
+var tutorial_day_3_spill_cleaned: bool = false
+var tutorial_day_4_trash_picked_up: bool = false
+var tutorial_day_4_trash_thrown_away: bool = false
 var shift_started: bool = false
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
@@ -215,7 +228,7 @@ func load_unlocked_items_from_save() -> void:
 			add_items_to_unlocked_list(bonus_items)
 
 
-func get_item(item_id:String) -> Item:
+func get_item(item_id: String) -> Item:
 	var found_item := false
 	for item: Item in items:
 		if item.item_id == item_id:

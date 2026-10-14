@@ -3,6 +3,7 @@ extends Control
 
 @export var _top_bar: Control
 @export var _bottom_bar: Control
+@export var _vignette_color_rect: ColorRect
 
 func _ready() -> void:
 	_top_bar.offset_transform_enabled = true
@@ -10,6 +11,8 @@ func _ready() -> void:
 
 	_top_bar.offset_transform_position_ratio.y = -1.0
 	_bottom_bar.offset_transform_position_ratio.y = 1.0
+
+	_vignette_color_rect.modulate.a = 0.0
 
 func show_bars(animation_duration: float = 1.0) -> void:
 	var top_bar_tween: PropertyTweener = create_tween().tween_property(_top_bar, "offset_transform_position_ratio:y", 0.0, animation_duration)
@@ -20,3 +23,9 @@ func hide_bars(animation_duration: float = 1.0) -> void:
 	var top_bar_tween: PropertyTweener = create_tween().tween_property(_top_bar, "offset_transform_position_ratio:y", -1.0, animation_duration)
 	var _bottom_bar_tween: PropertyTweener = create_tween().tween_property(_bottom_bar, "offset_transform_position_ratio:y", 1.0, animation_duration)
 	await top_bar_tween.finished
+
+func show_vignette(animation_duration: float = 1.0) -> void:
+	await create_tween().tween_property(_vignette_color_rect, "modulate:a", 1.0, animation_duration).finished
+
+func hide_vignette(animation_duration: float = 1.0) -> void:
+	await create_tween().tween_property(_vignette_color_rect, "modulate:a", 0.0, animation_duration).finished

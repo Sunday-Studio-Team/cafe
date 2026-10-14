@@ -14,18 +14,7 @@ signal requested_use_active_item
 @export var display_name: String
 ## mesh used for this object
 @export var mesh: MeshInstance3D
-## if enabled, player has to HOLD interact to interact with this
-## (if disabled, they just have to press once)
-## NOTE: do we have any interactables you hold anymore ? ? ?
-## could this be removed for simplicity ?
-@export var hold_to_interact: bool = false
-## if enabled, the interact progress bar won't reset if we stop interacting
-@export var keep_progress_on_interrupt: bool = false
-## how long the player has to hold to interact (if hold_to_interact is enabled)
-@export var time_to_hold: float = 6
 @export var show_interact_hotkey: bool = true
-
-var time_held: float = 0
 
 
 func _init() -> void:
@@ -38,34 +27,21 @@ func _init() -> void:
 	set_collision_layer_value(2, true)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_update_material()
 
 	if (
-			Global.hovered_interactable != self
-			or not visible
-			or Global.in_pc_ui
-			or Global.minigame_active
-			or Global.camera_mode != Global.CameraMode.PLAYER
+		Global.hovered_interactable != self
+		or not visible
+		or Global.in_pc_ui
+		or Global.minigame_active
+		or Global.camera_mode != Global.CameraMode.PLAYER
 	):
-		if not keep_progress_on_interrupt:
-			time_held = 0
 		return
 
 	if show_interact_hotkey:
-		# One time press
-		if Input.is_action_just_pressed("interact") and not hold_to_interact:
+		if Input.is_action_just_pressed("interact"):
 			interacted.emit()
-
-		# Hold to press
-		if Input.is_action_pressed("interact") and hold_to_interact:
-			time_held += delta
-			if time_held >= time_to_hold:
-				interacted.emit()
-				time_held = 0
-		else:
-			if not keep_progress_on_interrupt:
-				time_held = 0
 
 	# alt interaction where player uses an item on this interactable
 	if Input.is_action_just_pressed("use_item"):
@@ -82,7 +58,6 @@ func _update_enabled() -> void:
 		process_mode = ProcessMode.PROCESS_MODE_INHERIT
 	else:
 		process_mode = ProcessMode.PROCESS_MODE_DISABLED
-		time_held = 0
 
 
 func _on_interacted() -> void:
