@@ -1592,10 +1592,11 @@ _data = {
 &"idle_notice_me_c": SubResource("Animation_60wm3")
 }
 
-[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("_interactable", "camera_spot")]
+[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("_interactable", "camera_spot", "body")]
 script = ExtResource("1_g6nyj")
 _interactable = NodePath("ManualScaler/Interactable")
 camera_spot = NodePath("CameraSpot")
+body = NodePath("ManualScaler/StaticBody3D")
 
 [node name="ManualScaler" type="Node3D" parent="." unique_id=130028914]
 transform = Transform3D(0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0)

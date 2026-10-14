@@ -3,6 +3,7 @@ extends Node3D
 
 @export var _interactable: Interactable
 @export var camera_spot: Camera3D
+@export var body: StaticBody3D
 
 const CAM_TWEEN_DURATION:float = 0.45
 var exiting_loadout = false
@@ -20,6 +21,8 @@ func _ready() -> void:
 	)
 	_interactable.interacted.connect(interaction_camera_enter_transition)
 func interaction_camera_enter_transition() -> void:
+	_interactable.visible = false
+	body.process_mode = Node.PROCESS_MODE_DISABLED
 	var cam: CameraController = Global.player.camera
 	camera_transform_before_locker_interaction = cam.transform
 	create_tween().tween_property(
@@ -31,6 +34,8 @@ func interaction_camera_enter_transition() -> void:
 
 
 func interaction_camera_exit_transition() -> void:
+	_interactable.visible = true
+	body.process_mode = Node.PROCESS_MODE_INHERIT
 	exiting_loadout = true
 	var cam: CameraController = Global.player.camera
 	# NOTE: idk why but if i dont set this process mode it bugs . . .
