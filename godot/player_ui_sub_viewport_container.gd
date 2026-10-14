@@ -5,6 +5,9 @@ signal allow_input_changed(allow_input: bool)
 
 var _allow_input: bool = true
 
+func _ready() -> void:
+	Global.player_ui_sub_viewport_container = self
+
 func set_allow_input(allow_input: bool) -> void:
 	if allow_input != _allow_input:
 		allow_input_changed.emit(allow_input)

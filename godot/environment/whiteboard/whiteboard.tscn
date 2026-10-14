@@ -25,55 +25,59 @@ roughness = 0.5527864
 metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lwgjv"]
-viewport_path = NodePath("Content/SubViewport")
+viewport_path = NodePath("Scaler/Content/SubViewport")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(1.4287109, 1.5673828, 0.33813477)
 
 [node name="Whiteboard" type="Node3D" unique_id=1167729138 node_paths=PackedStringArray("sub_viewport", "magnets", "calendar")]
-transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0, 0, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 script = ExtResource("1_6exnn")
-sub_viewport = NodePath("Content/SubViewport")
+sub_viewport = NodePath("Scaler/Content/SubViewport")
 whiteboard_ui_scenes = Array[PackedScene]([ExtResource("2_lwgjv"), ExtResource("3_1j2d1"), ExtResource("4_dp0td"), ExtResource("5_advr0"), ExtResource("6_ix5gt"), ExtResource("7_852qy")])
-magnets = NodePath("Magnets")
-calendar = NodePath("SM_Calendar2/SM_Calendar")
+magnets = NodePath("Scaler/Magnets")
+calendar = NodePath("Scaler/SM_Calendar2/SM_Calendar")
 calendar_material = SubResource("StandardMaterial3D_0pjr2")
 calendar_textures = Array[Texture2D]([ExtResource("9_8f6js"), ExtResource("9_8f6js"), ExtResource("10_qkc70"), ExtResource("11_qjoux"), ExtResource("12_lc4wq"), ExtResource("13_7mtg1")])
 day_test = 1
 
-[node name="SM_Whiteboard_v2" parent="." unique_id=436235462 instance=ExtResource("8_dp0td")]
-transform = Transform3D(0.458, 0, 0, 0, 0.458, 0, 0, 0, 0.458, 0, -1.105, 0)
+[node name="Scaler" type="Node3D" parent="." unique_id=147765821]
 
-[node name="SM_Calendar2" parent="." unique_id=646559025 instance=ExtResource("10_advr0")]
-transform = Transform3D(0.20494978, 0, -0.45606515, 0, 0.49999976, 0, 0.45606515, 0, 0.20494978, 1.1033376, -1.9868203e-07, 0.28460553)
+[node name="SM_Whiteboard_v2" parent="Scaler" unique_id=436235462 instance=ExtResource("8_dp0td")]
+transform = Transform3D(0.45800003, 0, 0, 0, 0.45800003, 0, 0, 0, 0.45800003, 0, -1.1050001, 0)
 
-[node name="SM_Calendar" parent="SM_Calendar2" index="0" unique_id=2084394539]
+[node name="SM_Calendar2" parent="Scaler" unique_id=646559025 instance=ExtResource("10_advr0")]
+transform = Transform3D(0.2049498, 0, -0.4560652, 0, 0.4999998, 0, 0.4560652, 0, 0.2049498, 1.1033378, -1.9868205e-07, 0.28460556)
+
+[node name="SM_Calendar" parent="Scaler/SM_Calendar2" index="0" unique_id=2084394539]
 surface_material_override/0 = SubResource("StandardMaterial3D_0pjr2")
 
-[node name="Magnets" type="Node3D" parent="." unique_id=2054689961]
+[node name="Magnets" type="Node3D" parent="Scaler" unique_id=2054689961]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 
-[node name="SM_Magnet_A2" parent="Magnets" unique_id=965290203 instance=ExtResource("10_ix5gt")]
+[node name="SM_Magnet_A2" parent="Scaler/Magnets" unique_id=965290203 instance=ExtResource("10_ix5gt")]
 transform = Transform3D(0.49999988, -2.1855692e-08, 9.553428e-16, 0, -2.185569e-08, -0.49999988, 2.1855692e-08, 0.49999988, -2.185569e-08, -0.017635956, -0.0834967, 0.01672751)
 
-[node name="SM_Magnet_B2" parent="Magnets" unique_id=907764035 instance=ExtResource("11_852qy")]
+[node name="SM_Magnet_B2" parent="Scaler/Magnets" unique_id=907764035 instance=ExtResource("11_852qy")]
 transform = Transform3D(0.49999988, -2.1855692e-08, 9.553428e-16, 0, -2.185569e-08, -0.49999988, 2.1855692e-08, 0.49999988, -2.185569e-08, 0.170962, -0.110321485, 0.0126881935)
 
-[node name="Content" type="Sprite3D" parent="." unique_id=399085356]
-transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -3.4092018e-10, 0.033510022, 0.021430572)
+[node name="Content" type="Sprite3D" parent="Scaler" unique_id=399085356]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -3.409202e-10, 0.033510026, 0.021430574)
 pixel_size = 0.00075
 shaded = true
 texture = SubResource("ViewportTexture_lwgjv")
 
-[node name="SubViewport" type="SubViewport" parent="Content" unique_id=2102935171]
+[node name="SubViewport" type="SubViewport" parent="Scaler/Content" unique_id=2102935171]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1637, 1039)
 render_target_update_mode = 4
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1193080258]
+[node name="StaticBody3D" type="StaticBody3D" parent="Scaler" unique_id=1193080258]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=625251791]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scaler/StaticBody3D" unique_id=625251791]
 transform = Transform3D(0.99999976, 0, -1.0480505e-12, 0, 0.99999976, 0, 1.0480505e-12, 0, 0.99999976, 0, -0.28369135, 0)
 shape = SubResource("BoxShape3D_xrivr")
 
-[editable path="SM_Calendar2"]
+[editable path="Scaler/SM_Calendar2"]

@@ -26,12 +26,23 @@ extends Node3D
 @export var _trash_can: TrashCan
 @export var _shift_end_screen_scene_uid: StringName
 @export var _shift_end_screen_container: Node
+
+@export var _main_scene_loading_overlay: Control
+
+# Lazy spawned break room nodes
+@export var _desk_scene_uid: StringName
+@export var _desk_container: Node
+@export var _whiteboard_scene_uid: StringName
+@export var _whiteboard_container: Node
+@export var _locker_scene_uid: StringName
+@export var _locker_container: Node
+@export var _item_loadout_menu_scene_uid: StringName
+@export var _item_loadout_menu_container: Node
+var _nodes_to_destroy_on_shift_start: Array[Node]
+
 #Active Items
 @export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
-
-@export var day_5_tippy_whiteboard_disappear_area: PlayerDetectionArea
-@export var whiteboard: Whiteboard
 
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
@@ -51,6 +62,15 @@ var closing_time: bool = false
 
 
 func _ready() -> void:
+	_main_scene_loading_overlay.visible = true
+	_main_scene_loading_overlay.modulate.a = 1.0
+	
+	# Hide the view first, while lazy loading things.
+	await lazy_spawn_node(_desk_scene_uid, _desk_container)
+	await lazy_spawn_node(_whiteboard_scene_uid, _whiteboard_container)
+	await lazy_spawn_node(_locker_scene_uid, _locker_container)
+	await lazy_spawn_node(_item_loadout_menu_scene_uid, _item_loadout_menu_container)
+	
 	_voice_line_system.setup()
 	Global.camera_mode = Global.CameraMode.PLAYER
 	Global.cinematic_camera_allow_machine_gui_inputs = true
@@ -60,7 +80,6 @@ func _ready() -> void:
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
 	Global.main_scene = self
-	Events.main_scene_loaded.emit()
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
 	Global.shift_started = false
@@ -152,7 +171,12 @@ func _ready() -> void:
 	closing_time = false
 
 	get_stats()
-
+	
+	Events.main_scene_ready.emit()
+	
+	await create_tween().tween_property(_main_scene_loading_overlay, "modulate:a", 0.0, 1.0).finished
+	_main_scene_loading_overlay.visible = false
+	
 	_tutorial_manager.start_day()
 
 
@@ -265,13 +289,6 @@ func set_per_day_stuff() -> void:
 		)
 		should_spawn_trash_today = true
 		_trash_can.visible = true
-		# day 5 whiteboard tippy disappearing effect
-		day_5_tippy_whiteboard_disappear_area.monitoring = true
-		day_5_tippy_whiteboard_disappear_area.player_entered_area.connect(
-			whiteboard.hide_tippy.unbind(1)
-		)
-	else:
-		day_5_tippy_whiteboard_disappear_area.monitoring = false
 
 	_emails_manager.deliver_emails()
 	menu.populate_drinks()
@@ -502,12 +519,27 @@ func shift_end_sequence(override: bool = false):
 		else:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
+func lazy_spawn_node(scene_uid: StringName, node_container: Node) -> void:
+	var token: ResourceBackgroundLoaderToken = Global.resource_background_loader.cache_resource(scene_uid)
+	while !token.is_loaded:
+		await get_tree().process_frame
+	var scene: PackedScene = Global.resource_background_loader.get_resource(token)
+	Global.resource_background_loader.uncache_resource(token)
+	if scene == null:
+		return
+	var node: Node = scene.instantiate()
+	node_container.add_child(node)
+	_nodes_to_destroy_on_shift_start.append(node)
 
 func _on_shift_started():
 	customer_trash_spawn_timer.start()
 	Global.shift_started = true
 	shift_start_sound.play()
-
+	
+	# Destroy break room nodes when the shift starts, save resources!
+	for node in _nodes_to_destroy_on_shift_start:
+		node.queue_free()
+	
 	if Global.day > 0:
 		if not Global.playing_tutorial:
 			game_timer.start()

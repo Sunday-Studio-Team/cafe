@@ -89,7 +89,7 @@ func _ready() -> void:
 	Console.add_command("unlockall", unlock_everything)
 	Console.add_command("trash", spawn_trash)
 
-	Events.main_scene_loaded.connect(
+	Events.main_scene_ready.connect(
 		func():
 			if not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),

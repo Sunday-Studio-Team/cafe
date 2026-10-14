@@ -10,9 +10,7 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 @export var element_scene: PackedScene
 @export_category("Nodes")
 @export var root: Control
-@export var locker_interactable: Interactable
-@export var locker_model: ItemLockerModel
-@export var locker_animation_player: AnimationPlayer
+
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: Button
@@ -28,16 +26,24 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 @export var item_hover_tooltip_passive_indicator: Control
 @export var item_hover_tooltip_active_indicator: Control
 
-@export var _player_ui_sub_viewport_container: PlayerUiSubViewportContainer
+var locker_interactable: Interactable
+var locker_model: ItemLockerModel
+var locker_animation_player: AnimationPlayer
 
 var player_has_confirmed_loadout_at_least_once := false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	visible = false
+	
 	Global.item_loadout_menu = self
+	
+	locker_interactable = Global.item_locker.interactable
+	locker_model = Global.item_locker.item_locker_model
+	locker_animation_player = Global.item_locker.animation_player
 
-	_player_ui_sub_viewport_container.allow_input_changed.connect(_on_player_ui_sub_viewport_container_allow_input_changed)
+	Global.player_ui_sub_viewport_container.allow_input_changed.connect(_on_player_ui_sub_viewport_container_allow_input_changed)
 	confirm_button.pressed.connect(confirm_and_hide_menu)
 	locker_interactable.interacted.connect(
 			func():

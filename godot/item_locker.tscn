@@ -190,9 +190,11 @@ _data = {
 &"idle_notice_me_c": SubResource("Animation_60wm3")
 }
 
-[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("_interactable")]
+[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("interactable", "item_locker_model", "animation_player")]
 script = ExtResource("1_g6nyj")
-_interactable = NodePath("ManualScaler/Interactable")
+interactable = NodePath("ManualScaler/Interactable")
+item_locker_model = NodePath("ManualScaler/Model")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="ManualScaler" type="Node3D" parent="." unique_id=130028914]
 transform = Transform3D(0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0)
@@ -222,42 +224,42 @@ shape = SubResource("BoxShape3D_dqjxi")
 script = ExtResource("4_f2a8y")
 door_mesh = NodePath("Locker Door")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 978578119) index="0" unique_id=1665776569]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 658620535) index="0" unique_id=1665776569]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("6_dt742")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 1670652583) index="0" unique_id=1164381062]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 2072567497) index="0" unique_id=1164381062]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("7_e0bd6")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 1486895907) index="0" unique_id=169925206]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 152920710) index="0" unique_id=169925206]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("8_60wm3")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 839107166) index="0" unique_id=1413157808]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 672954504) index="0" unique_id=1413157808]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("9_6i5wn")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 1334152869) index="0" unique_id=633572519]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 2062432595) index="0" unique_id=633572519]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("10_b0jqr")
 
-[node name="Mirror" parent="ManualScaler/Model" index="19" unique_id=1191890594]
+[node name="Mirror" parent="ManualScaler/Model" index="19" unique_id=1669092183]
 transform = Transform3D(-0.055559676, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497514, 0.55770606, 2.5702512, -0.04804716)
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 1014912074) index="0" unique_id=1034734605]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 1127249803) index="0" unique_id=1034734605]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 84153896) index="0" unique_id=1863931289]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 1190557752) index="0" unique_id=1863931289]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 1090691672) index="0" unique_id=488191577]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 1240643384) index="0" unique_id=488191577]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("12_8r07k")
 
-[node name="Locker Door" parent="ManualScaler/Model" index="24" unique_id=702353025]
+[node name="Locker Door" parent="ManualScaler/Model" index="24" unique_id=1429478246]
 transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
 
 [node name="Name Tag" parent="ManualScaler/Model/Locker Door" index="0" unique_id=160599352 instance=ExtResource("13_dt742")]

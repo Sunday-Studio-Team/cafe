@@ -103,6 +103,8 @@ var customer_sprites_in_use: Array[CustomerSpriteData]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
+var player_ui_sub_viewport_container: PlayerUiSubViewportContainer
+var item_locker: ItemLocker
 var machines: Array[Machine]
 var machine_in_use: Machine = null
 # ui
