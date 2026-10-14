@@ -1843,7 +1843,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kajqd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_itk5a"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1854,7 +1854,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fyan7"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_6kay4"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1865,7 +1865,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xdtur"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_e06bn"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1876,13 +1876,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_d0eyq"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pb33p"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_l14ib"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1teer"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ctxsq"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kajqd"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "shift_start_sound", "default_trash_spawn_spot", "day_containers_desk", "day_containers_boxes")]
@@ -1924,7 +1924,7 @@ _item_loadout_menu_scene_uid = &"uid://d4bh0b3gyfbbd"
 _item_loadout_menu_container = NodePath("PlayerUiSubViewportContainer/SubViewport/ItemLoadoutMenuContainer")
 shift_start_sound = NodePath("ShiftStartSound")
 default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
-day_containers_desk = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+day_containers_desk = [null, null, null, null, null, null]
 day_containers_boxes = [NodePath("CafeEnvironment/DayDecorations_0"), NodePath("CafeEnvironment/DayDecorations_1"), NodePath("CafeEnvironment/DayDecorations_2"), NodePath("CafeEnvironment/DayDecorations_3"), NodePath("CafeEnvironment/DayDecorations_4"), NodePath("CafeEnvironment/DayDecorations_5")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
@@ -2496,9 +2496,8 @@ text = "cancel"
 
 [node name="PCUI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1232958959]
 
-[node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("desk", "ui") instance=ExtResource("20_82xsv")]
+[node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("ui") instance=ExtResource("20_82xsv")]
 visible = false
-desk = NodePath("")
 ui = NodePath("../../UI")
 
 [node name="Viewmodel" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=70422245 instance=ExtResource("168_f4177")]
@@ -2899,7 +2898,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_kajqd")
+texture = SubResource("ViewportTexture_itk5a")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2912,7 +2911,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_fyan7")
+texture = SubResource("ViewportTexture_6kay4")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2929,7 +2928,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_xdtur")
+texture = SubResource("ViewportTexture_e06bn")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2946,7 +2945,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
-texture = SubResource("ViewportTexture_d0eyq")
+texture = SubResource("ViewportTexture_pb33p")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2967,10 +2966,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2908587, 1.6, 16.214787)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_l14ib")
+texture = SubResource("ViewportTexture_1teer")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_ctxsq")
+texture = SubResource("ViewportTexture_kajqd")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -3057,7 +3056,7 @@ stream = ExtResource("137_g3y5b")
 volume_db = -5.0
 
 [node name="CustomerAreaMusic" parent="." unique_id=109925331 instance=ExtResource("404_mfcn2")]
-transform = Transform3D(0.7278226, 0.009210606, 0.68570364, 6.386688e-10, 0.99990994, -0.013431133, -0.6857655, 0.009775481, 0.7277569, -4.3664393, 2.7244682, -3.5881112)
+transform = Transform3D(0.7278226, 0.009210605, 0.68570364, 6.386688e-10, 0.9999098, -0.013431131, -0.6857655, 0.00977548, 0.7277569, -4.796358, 3.2269244, -3.8294704)
 unit_size = 5.0
 max_db = -8.0
 bus = &"Master"
@@ -3070,7 +3069,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700961, -0.00016215755, -0.99993277, 1.0259869e-07, 1, -0.00016214665, 0.99993277, -1.01539825e-08, 0.0005700961, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009596, -0.00016215755, -0.9999325, 1.0259866e-07, 1, -0.0001621466, 0.9999325, -1.01539825e-08, 0.00057009596, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
