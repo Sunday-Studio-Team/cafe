@@ -61,7 +61,7 @@ var playing_tutorial: bool = false
 var shift_length: float
 var shift_time_remaining: float
 var shift_progress_ratio: float
-var daily_cafe_money := 0.0:
+var daily_cafe_money: float = 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
 			return
@@ -103,6 +103,8 @@ var customer_sprites_in_use: Array[CustomerSpriteData]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
+var player_ui_sub_viewport_container: PlayerUiSubViewportContainer
+var item_locker: ItemLocker
 var machines: Array[Machine]
 var machine_in_use: Machine = null
 # ui

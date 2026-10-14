@@ -1,7 +1,9 @@
 class_name ItemLocker
 extends Node3D
 
-@export var _interactable: Interactable
+@export var interactable: Interactable
+@export var item_locker_model: ItemLockerModel
+@export var animation_player: AnimationPlayer
 
 
 func _ready() -> void:
@@ -10,8 +12,10 @@ func _ready() -> void:
 	if SaveDataManager.save_data.latest_unlocked_day <= 1:
 		hide()
 		process_mode = ProcessMode.PROCESS_MODE_DISABLED
-
+	
+	Global.item_locker = self
+	
 	Events.shift_started.connect(
 			func() -> void:
-				_interactable.hide()
+				interactable.hide()
 	)

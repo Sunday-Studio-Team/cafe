@@ -6,9 +6,13 @@ extends RigidBody3D
 @export var trash_cup: MeshInstance3D
 @export var activation_distance := 3.0
 @export var trail: GPUParticles3D
-@export var hint_pop: AnimatedSprite3D
+@export var hint_pop_animated_sprite_3d: AnimatedSprite3D
+@export var hint_pop_sprite_frames_uid: StringName
 
 signal trash_bag_taken(customer_trash: CustomerTrash)
+
+var load_token: ResourceBackgroundLoaderToken
+var hint_pop_animated_sprite_3d_ready: bool
 
 # just a thing to check so we cant spam interact and cause weird stuff with
 # viewmodel animation
@@ -26,11 +30,27 @@ func _ready() -> void:
 	interactable.visible = false
 	await get_tree().create_timer(0.5, false).timeout
 	interactable.visible = true
-	
-	hint_pop.animation_finished.connect(_on_pop_out_finished)
-	hint_pop.play("Pop")
-	hint_pop.top_level = true
 
+	hint_pop_animated_sprite_3d.visible = false
+	load_token = Global.resource_background_loader.cache_resource(hint_pop_sprite_frames_uid)
+	while !load_token.is_loaded:
+		await get_tree().process_frame
+	var sprite_frames: SpriteFrames =  Global.resource_background_loader.get_resource(load_token) as SpriteFrames
+	if sprite_frames == null:
+		printerr("CustomerTrash sprite_frames null!")
+		return
+	Global.resource_background_loader.uncache_resource(load_token)
+	hint_pop_animated_sprite_3d.sprite_frames = sprite_frames
+	hint_pop_animated_sprite_3d.visible = true
+	
+	hint_pop_animated_sprite_3d.animation_finished.connect(_on_pop_out_finished)
+	hint_pop_animated_sprite_3d.play("Pop")
+	hint_pop_animated_sprite_3d.top_level = true
+	hint_pop_animated_sprite_3d_ready = true
+
+func _exit_tree() -> void:
+	# Unload just in case!
+	Global.resource_background_loader.uncache_resource(load_token)
 
 func _process(_delta: float) -> void:
 	var player: Player = Global.player
@@ -43,13 +63,15 @@ func _process(_delta: float) -> void:
 	var speed := linear_velocity.length()
 	if speed > threshold_velocity && trail.process_material != null:
 		trail.emitting = true
-		hint_pop.visible = false
 		being_slow = false
+		if hint_pop_animated_sprite_3d_ready:
+			hint_pop_animated_sprite_3d.visible = false
 	elif !being_slow:
 		being_slow = true
-		hint_pop.play("Pop")
-		hint_pop.visible = true
 		trail.emitting = false
+		if hint_pop_animated_sprite_3d_ready:
+			hint_pop_animated_sprite_3d.play("Pop")
+			hint_pop_animated_sprite_3d.visible = true
 
 func _on_interacted() -> void:
 	if Global.holding_trash || already_interacted || Global.holding_ingredients:
@@ -76,8 +98,9 @@ func _on_interacted() -> void:
 	timer_to_delete_if_something_went_wrong.start()
 	
 	await Events.trash_pickup_animation_grabbed
+	Global.resource_background_loader.uncache_resource(load_token)
 	queue_free()
 
 
 func _on_pop_out_finished() -> void:
-	hint_pop.play("Normal")
+	hint_pop_animated_sprite_3d.play("Normal")

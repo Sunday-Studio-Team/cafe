@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://b2kutc78gmwd1" path="res://customer_trash.tscn" id="3_1yv1y"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dhmqo5yinqk0t" path="res://desk.tscn" id="3_vivmo"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://customer_help_desk.tscn" id="4_272bh"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
@@ -24,9 +23,7 @@
 [ext_resource type="Script" uid="uid://nv13jp083x1b" path="res://low_fps_sub_viewports_delayer.gd" id="12_jfyx3"]
 [ext_resource type="AudioStream" uid="uid://dqymj08g37g78" path="res://audio/time_low.mp3" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://1efsqsuvbkts" path="res://ui/pc/pc.tscn" id="20_82xsv"]
-[ext_resource type="PackedScene" uid="uid://c1vvwndvemdbo" path="res://ui/shift_end_screen.tscn" id="21_getpj"]
 [ext_resource type="Script" uid="uid://cpy5mfle7bldo" path="res://ingredient_spawner.gd" id="23_ppx11"]
-[ext_resource type="PackedScene" uid="uid://dy4e7ivinjsni" path="res://environment/whiteboard/whiteboard.tscn" id="24_f1p13"]
 [ext_resource type="Texture2D" uid="uid://mfd4a8i36yha" path="res://Assets/UI/crosshair.png" id="28_4obbf"]
 [ext_resource type="PackedScene" uid="uid://dyu70pksd1s2w" path="res://cafe_break_room_door.tscn" id="28_ovcoh"]
 [ext_resource type="Script" uid="uid://b83i4oyqxn1q8" path="res://ui/crosshair.gd" id="28_ppx11"]
@@ -75,7 +72,6 @@
 [ext_resource type="Resource" uid="uid://dae5708dksy5y" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_1.tres" id="135_46ndd"]
 [ext_resource type="Resource" uid="uid://b1nejd7a7ubnr" path="res://voice_lines/resources/tutorials_old_v2/day_0/voice_line_day_0_intro_4_2.tres" id="136_3cabt"]
 [ext_resource type="Resource" uid="uid://dl0o5wu638b4t" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_accept_correct_drink.tres" id="136_12204"]
-[ext_resource type="PackedScene" uid="uid://d4bh0b3gyfbbd" path="res://ui/loadout/item_loadout_menu.tscn" id="136_kmrid"]
 [ext_resource type="Resource" uid="uid://dgxatvp4r42bv" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_1.tres" id="136_oiuw5"]
 [ext_resource type="AudioStream" uid="uid://dimkpitnugvme" path="res://audio/shift_start.wav" id="137_g3y5b"]
 [ext_resource type="Resource" uid="uid://bl7bdfikk3kwt" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_intro_2.tres" id="137_mldrc"]
@@ -287,7 +283,6 @@
 [ext_resource type="Resource" uid="uid://cvfd3mnb87fex" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_25_a_2.tres" id="279_fgks3"]
 [ext_resource type="Resource" uid="uid://d11n3n62l7pgw" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_25_a_3.tres" id="280_cit2p"]
 [ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
-[ext_resource type="PackedScene" uid="uid://cxry80o4obgt" path="res://item_locker.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://dw31xc7o7ps5h" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_25_a_3_repeat_0.tres" id="281_46ndd"]
 [ext_resource type="Resource" uid="uid://flhhdnq1mgf3" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_26.tres" id="282_3cabt"]
 [ext_resource type="Resource" uid="uid://c8yf8vsff41yx" path="res://voice_lines/resources/tutorial_old/voice_line_tutorial_day1_2.tres" id="282_us00v"]
@@ -1890,7 +1885,7 @@ viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubV
 [sub_resource type="ViewportTexture" id="ViewportTexture_ctxsq"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "_trash_can", "shift_start_sound", "default_trash_spawn_spot", "day_5_tippy_whiteboard_disappear_area", "whiteboard", "day_containers_desk", "day_containers_boxes")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "shift_start_sound", "default_trash_spawn_spot", "day_containers_desk", "day_containers_boxes")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1916,11 +1911,20 @@ customer_leaving_spot = NodePath("CustomerLeavingSpot")
 game_timer = NodePath("GameTimer")
 ui = NodePath("PlayerUiSubViewportContainer/SubViewport/UI")
 _trash_can = NodePath("TrashCan")
+_shift_end_screen_scene_uid = &"uid://c1vvwndvemdbo"
+_shift_end_screen_container = NodePath("ShiftEndScreenContainer")
+_main_scene_loading_overlay = NodePath("PlayerUiSubViewportContainer/SubViewport/MainSceneLoadingOverlayCanvasLayer/MainSceneLoadingOverlay")
+_desk_scene_uid = &"uid://dhmqo5yinqk0t"
+_desk_container = NodePath("DeskSpawnPosition")
+_whiteboard_scene_uid = &"uid://dy4e7ivinjsni"
+_whiteboard_container = NodePath("WhiteboardSpawnPosition")
+_locker_scene_uid = &"uid://cxry80o4obgt"
+_locker_container = NodePath("LockerSpawnPosition")
+_item_loadout_menu_scene_uid = &"uid://d4bh0b3gyfbbd"
+_item_loadout_menu_container = NodePath("PlayerUiSubViewportContainer/SubViewport/ItemLoadoutMenuContainer")
 shift_start_sound = NodePath("ShiftStartSound")
 default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
-day_5_tippy_whiteboard_disappear_area = NodePath("TutorialLocations/Day5TippyWhiteboardDisappearArea")
-whiteboard = NodePath("StartShiftWhiteboard")
-day_containers_desk = [NodePath("Desk/Day0DeskProps"), NodePath("Desk/Day1DeskProps"), NodePath("Desk/Day2DeskProps"), NodePath("Desk/Day3DeskProps"), NodePath("Desk/Day4DeskProps"), NodePath("Desk/Day5DeskProps")]
+day_containers_desk = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 day_containers_boxes = [NodePath("CafeEnvironment/DayDecorations_0"), NodePath("CafeEnvironment/DayDecorations_1"), NodePath("CafeEnvironment/DayDecorations_2"), NodePath("CafeEnvironment/DayDecorations_3"), NodePath("CafeEnvironment/DayDecorations_4"), NodePath("CafeEnvironment/DayDecorations_5")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
@@ -1987,8 +1991,7 @@ metadata/_custom_type_script = "uid://cnenanc4f2mbp"
 layer = 5
 visible = false
 
-[node name="ShiftEndScreen" parent="." unique_id=1100370049 instance=ExtResource("21_getpj")]
-visible = false
+[node name="ShiftEndScreenContainer" type="Node" parent="." unique_id=471894815]
 
 [node name="SubtitlesCanvasLayer" type="CanvasLayer" parent="." unique_id=1031922516]
 layer = 3
@@ -2035,6 +2038,29 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
+
+[node name="MainSceneLoadingOverlayCanvasLayer" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1888925505]
+layer = 10
+
+[node name="MainSceneLoadingOverlay" type="Control" parent="PlayerUiSubViewportContainer/SubViewport/MainSceneLoadingOverlayCanvasLayer" unique_id=1476683171]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="PlayerUiSubViewportContainer/SubViewport/MainSceneLoadingOverlayCanvasLayer/MainSceneLoadingOverlay" unique_id=855594016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="TippyVOIndicator" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=45213847 node_paths=PackedStringArray("sprite")]
 layer = 2
@@ -2472,17 +2498,12 @@ text = "cancel"
 
 [node name="PC" parent="PlayerUiSubViewportContainer/SubViewport/PCUI" unique_id=303240417 node_paths=PackedStringArray("desk", "ui") instance=ExtResource("20_82xsv")]
 visible = false
-desk = NodePath("../../../../Desk")
+desk = NodePath("")
 ui = NodePath("../../UI")
 
 [node name="Viewmodel" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=70422245 instance=ExtResource("168_f4177")]
 
-[node name="ItemLoadoutMenu" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2615188 node_paths=PackedStringArray("locker_interactable", "locker_model", "locker_animation_player", "_player_ui_sub_viewport_container") instance=ExtResource("136_kmrid")]
-visible = false
-locker_interactable = NodePath("../../../ItemLocker/ManualScaler/Interactable")
-locker_model = NodePath("../../../ItemLocker/ManualScaler/Model")
-locker_animation_player = NodePath("../../../ItemLocker/AnimationPlayer")
-_player_ui_sub_viewport_container = NodePath("../..")
+[node name="ItemLoadoutMenuContainer" type="Node" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=2131346964]
 
 [node name="TutorialLocations" type="Node3D" parent="." unique_id=1397765395]
 
@@ -2803,7 +2824,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(0.18365963, -0.11049962, 0.9767582, 3.7252843e-08, 0.99366015, 0.1124118, -0.98298824, -0.020645497, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.18365961, -0.11049962, 0.9767582, 3.725284e-08, 0.99366015, 0.1124118, -0.9829882, -0.020645497, 0.18249561, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2927,9 +2948,6 @@ transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_d0eyq")
 
-[node name="StartShiftWhiteboard" parent="." unique_id=1167729138 instance=ExtResource("24_f1p13")]
-transform = Transform3D(1.1007682, 0, -0.47781718, 0, 1.2, 0, 0.47781718, 0, 1.1007682, 2.3493953, 1.2573628, 14.395585)
-
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
 [node name="GameTimer" type="Timer" parent="." unique_id=1146845976]
@@ -2958,13 +2976,14 @@ texture = SubResource("ViewportTexture_ctxsq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
 top_level = true
 
-[node name="Desk" parent="." unique_id=1519674799 node_paths=PackedStringArray("camera_spot_for_pc_interaction", "pc_ui") instance=ExtResource("3_vivmo")]
+[node name="DeskSpawnPosition" type="Marker3D" parent="." unique_id=1376370741]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.18685444, -0.10281545, 13.920945)
-camera_spot_for_pc_interaction = NodePath("PCCameraSpot")
-pc_ui = NodePath("../PlayerUiSubViewportContainer/SubViewport/PCUI/PC")
 
-[node name="PCCameraSpot" type="Marker3D" parent="Desk" unique_id=319429800]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.1507349, 1, 0.16965067)
+[node name="WhiteboardSpawnPosition" type="Marker3D" parent="." unique_id=1832723094]
+transform = Transform3D(0.9173069, 0, -0.398181, 0, 1, 0, 0.398181, 0, 0.9173069, 2.3493953, 1.2573628, 14.395585)
+
+[node name="LockerSpawnPosition" type="Marker3D" parent="." unique_id=823831340]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
 
 [node name="CafeBreakRoomDoor" parent="." unique_id=1466363411 instance=ExtResource("28_ovcoh")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4011619, -0.11735466, 10.078446)
@@ -3051,16 +3070,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700965, -0.00016215755, -0.9999335, 1.0259876e-07, 1, -0.00016214677, 0.9999335, -1.01539825e-08, 0.0005700965, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700961, -0.00016215755, -0.99993277, 1.0259869e-07, 1, -0.00016214665, 0.99993277, -1.01539825e-08, 0.0005700961, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
-
-[node name="ItemLocker" parent="." unique_id=1426750684 instance=ExtResource("281_8ldsf")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.22810301, -0.089264415, 10.590218)
-
-[node name="Mirror" parent="ItemLocker/ManualScaler/Model" parent_id_path=PackedInt32Array(1426750684, 1837404991) index="19" unique_id=603626681]
-transform = Transform3D(-0.05555968, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497518, 0.5577049, 2.5702512, -0.048047185)
 
 [node name="AirFreshener" parent="." unique_id=1323392743 instance=ExtResource("358_lyu6w")]
 transform = Transform3D(-0.525771, 0, -0.85062623, 0, 1, 0, 0.85062623, 0, -0.525771, 4.243224, 0.42619514, 1.9983644)
@@ -3087,12 +3100,6 @@ transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -6.69007
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel/keychainAnim"]
-[editable path="Desk"]
-[editable path="Desk/office desk"]
-[editable path="Desk/office desk/cranes"]
-[editable path="Desk/Sketchbooks, comics, rulers (1)"]
-[editable path="Desk/Lamp 1&5 (1)"]
-[editable path="Desk/Day0DeskProps/Sad Plants2"]
 [editable path="TrashCan"]
 [editable path="TrashCan/Model"]
 [editable path="Teleporters/FrontToBackTeleporter"]
@@ -3127,5 +3134,3 @@ transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -6.69007
 [editable path="CafeEnvironment/BreakRoom/Sad Plants2"]
 [editable path="CafeEnvironment/BreakRoom/Sad Plants3"]
 [editable path="CafeEnvironment/DayDecorations_3/plastic and box2"]
-[editable path="ItemLocker"]
-[editable path="ItemLocker/ManualScaler/Model"]
