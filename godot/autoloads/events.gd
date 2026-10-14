@@ -8,6 +8,7 @@ signal main_scene_ready
 signal quit_game_requested
 signal game_options_changed(options_data: OptionsData)
 signal player_confirmed_item_loadout
+signal shutters_open_requested
 signal shift_start_requested
 signal shift_started
 signal customer_entered

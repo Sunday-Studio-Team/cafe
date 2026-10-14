@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://dvka725lh1iap" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_1.wav" id="28_a2xku"]
 [ext_resource type="AudioStream" uid="uid://c0m8t8std8onw" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_2.wav" id="29_sdh2v"]
 [ext_resource type="AudioStream" uid="uid://dsthw36xeub67" path="res://audio/refill_minigame/catch_gold_bean/refill_catch_gold_bean_3.wav" id="30_5bp6o"]
+[ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="31_sdh2v"]
 
 [sub_resource type="Curve" id="Curve_cuth0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -298,8 +299,9 @@ stream_0/stream = ExtResource("28_a2xku")
 stream_1/stream = ExtResource("29_sdh2v")
 stream_2/stream = ExtResource("30_5bp6o")
 
-[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "background", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "catch_gold_bean_sound", "coffee_dust", "golden_bean_collect", "bomb_smoke", "animation_player")]
+[node name="IngredientsRefillMinigame" type="Node2D" unique_id=402334428 node_paths=PackedStringArray("_minigame_startup_overlay", "cup", "bag", "bag_sprite", "pour_point", "bean_spawn_timer", "cup_area", "cup_boundaries", "cup_face_sprite", "visual_effect", "background", "bean_hit_glasss_sound", "bag_shake_sound", "gain_score_sound", "catch_gold_bean_sound", "coffee_dust", "golden_bean_collect", "bomb_smoke", "animation_player")]
 script = ExtResource("1_2efvg")
+_minigame_startup_overlay = NodePath("Control/MinigameStartupOverlay")
 horizontal_trajectory_curve = SubResource("Curve_cuth0")
 cup = NodePath("Cup")
 bag = NodePath("Bag")
@@ -496,3 +498,13 @@ stream = SubResource("AudioStreamRandomizer_ovvye")
 
 [node name="CatchGoldBeanSound" type="AudioStreamPlayer" parent="." unique_id=816919820]
 stream = SubResource("AudioStreamRandomizer_mjix0")
+
+[node name="Control" type="Control" parent="." unique_id=1602019414]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MinigameStartupOverlay" parent="Control" unique_id=1346680805 instance=ExtResource("31_sdh2v")]
+z_index = 2
+layout_mode = 1

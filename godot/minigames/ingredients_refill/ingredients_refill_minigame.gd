@@ -7,6 +7,8 @@ const NUM_BEANS_TO_SPAWN := 6
 const MAX_HORIZONTAL_BEAN_FORCE := 800.0
 const MAX_VERTICAL_BEAN_FORCE := 450.0
 
+@export var _minigame_startup_overlay: MinigameStartupOverlay
+
 @export var horizontal_trajectory_curve: Curve
 @export_category("Nodes")
 @export var cup: CharacterBody2D
@@ -68,6 +70,8 @@ var gold_bean:Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_minigame_startup_overlay.play("CATCH!")
+	
 	bomb_bean = bomb_bean_scene.instantiate()
 	gold_bean = golden_bean_scene.instantiate()
 	bean_spawn_timer.timeout.connect(spawn_bean)
@@ -94,7 +98,7 @@ func _ready() -> void:
 				bean_hit_glasss_sound.play(),
 	)
 	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) #prefer right side of the screen, because that is where cup spawns
-	
+
 
 func _input(event: InputEvent) -> void:
 	if not start_minigame and (event.is_action_pressed("move_left") or event.is_action_pressed("move_right")):

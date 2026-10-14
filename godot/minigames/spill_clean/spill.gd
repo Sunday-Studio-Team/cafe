@@ -1,6 +1,7 @@
 class_name ErasableCanvas
 extends Node2D
 
+@export var _minigame_startup_overlay: MinigameStartupOverlay
 
 @export var canvas_sprite: Sprite2D
 @export var progress_label: Label
@@ -88,6 +89,8 @@ func _ready() -> void:
 
 	initialize_progress_mask()
 	update_progress_display()
+
+	_minigame_startup_overlay.play("MOP!")
 
 
 func _physics_process(_delta: float) -> void:

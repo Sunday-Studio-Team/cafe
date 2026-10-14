@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ce518qg6ck3gw" path="res://minigames/typing/typing_minigame.gd" id="1_6jplg"]
 [ext_resource type="PackedScene" uid="uid://ib45bvdvotru" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks.tscn" id="3_nc7i6"]
+[ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="4_nc7i6"]
 [ext_resource type="AudioStream" uid="uid://c5gelntvraw3y" path="res://audio/music/typing_minigame_music.wav" id="5_g8vla"]
 
-[node name="TypingMinigame" type="Control" unique_id=1689639804 node_paths=PackedStringArray("typing_minigame_variant_container")]
+[node name="TypingMinigame" type="Control" unique_id=1689639804 node_paths=PackedStringArray("_minigame_startup_overlay", "typing_minigame_variant_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6jplg")
+_minigame_startup_overlay = NodePath("MinigameStartupOverlay")
 typing_minigame_variant_fill_blanks_packed_scene = ExtResource("3_nc7i6")
 typing_minigame_variant_container = NodePath("TypingMinigameContainer")
 full_sentence_likelihood = 0.0
@@ -30,3 +32,8 @@ stream = ExtResource("5_g8vla")
 volume_db = -10.0
 autoplay = true
 bus = &"NonDiegeticMusic"
+
+[node name="MinigameStartupOverlay" parent="." unique_id=1346680805 instance=ExtResource("4_nc7i6")]
+visible = false
+z_index = 2
+layout_mode = 1

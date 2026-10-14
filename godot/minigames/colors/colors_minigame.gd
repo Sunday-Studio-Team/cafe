@@ -4,6 +4,7 @@ extends Control
 
 const DELAY_AFTER_PRESSING_BUTTON := 0.75
 
+@export var _minigame_startup_overlay: MinigameStartupOverlay
 @export var buttons: Array[ColorsMinigameButton]
 @export var needed_successes: int = 3
 @export var prompt_text_box: RichTextLabel
@@ -34,10 +35,11 @@ func _ready():
 				_on_button_pressed(buttons.find(container)),
 		)
 
+	_minigame_startup_overlay.play("PRESS!")
 	show_new_prompt()
 
 
-func show_new_prompt():
+func show_new_prompt():	
 	sato_animated_sprite.play("default")
 	current_prompt = prompts_and_corresponding_buttons.keys().pick_random()
 	var color:String = str("#",(colors.pick_random() as Color).to_html())

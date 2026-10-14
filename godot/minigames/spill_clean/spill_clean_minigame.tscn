@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://qjon7ck5mcym" path="res://sprites/spill_minigame/spill_tippy_mouse_closed.png" id="10_lww7c"]
 [ext_resource type="Texture2D" uid="uid://br7to5b13wfqn" path="res://sprites/spill_minigame/wet_mop.png" id="12_fjufl"]
 [ext_resource type="Texture2D" uid="uid://bes68l7c5t057" path="res://sprites/spill_minigame/wet_scrubber.png" id="15_lww7c"]
+[ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="20_3asfj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vn1tu"]
 size = Vector2(678.04865, 540.20624)
@@ -59,12 +60,13 @@ visible = false
 position = Vector2(961, 536)
 texture = ExtResource("1_eu0yc")
 
-[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("canvas_sprite", "progress_label", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
+[node name="Spill" type="Sprite2D" parent="." unique_id=1947380260 node_paths=PackedStringArray("_minigame_startup_overlay", "canvas_sprite", "progress_label", "moping_area", "bucket", "machine_clean", "machine_dirty", "bucket_area", "mop", "text_bubble")]
 modulate = Color(0.9443788, 0.9443788, 0.9443788, 1)
 position = Vector2(964, 800)
 rotation = -3.1415925
 texture = ExtResource("6_n873u")
 script = ExtResource("2_imr7o")
+_minigame_startup_overlay = NodePath("../UI/Control/MinigameStartupOverlay")
 canvas_sprite = NodePath(".")
 progress_label = NodePath("../UI/MarginContainer/Percentage")
 moping_area = NodePath("../Mop/MopHeadHitbox")
@@ -183,3 +185,14 @@ theme_override_font_sizes/font_size = 40
 text = "Percentage Cleaned:"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="Control" type="Control" parent="UI" unique_id=1591172398]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="MinigameStartupOverlay" parent="UI/Control" unique_id=1346680805 instance=ExtResource("20_3asfj")]
+visible = false
+z_index = 2
+layout_mode = 1
