@@ -504,6 +504,7 @@ func spawn_trash() -> void:
 
 
 func _on_game_timer_timeout() -> void:
+	free_customer_queue()
 	Events.shift_end_sequence_started.emit()
 	closing_time = true
 	if get_customers().size() <= 1:
@@ -565,6 +566,20 @@ func lazy_spawn_node(scene_uid: StringName, node_container: Node) -> void:
 	var node: Node = scene.instantiate()
 	node_container.add_child(node)
 	_nodes_to_destroy_on_shift_start.append(node)
+
+
+func free_customer_queue():
+	for machine in _active_machines:
+		var leaving_array: Array[Customer] = machine.queued_customers.duplicate()
+		machine.queued_customers.clear()
+		for customer in leaving_array: #Copied so no wack stuff happens
+			customer.leave_store()
+		
+	var help_desk_leaving_array: Array[Customer] = customer_help_desk._queued_desk_customers.duplicate()
+	customer_help_desk._queued_desk_customers.clear()
+	for help_desk_customer in help_desk_leaving_array:
+		help_desk_customer.leave_store()
+
 
 func _on_shift_started():
 	customer_trash_spawn_timer.start()
