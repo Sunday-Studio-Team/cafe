@@ -486,7 +486,7 @@ func spawn_trash() -> void:
 		print("no customers exist, trash was generate at default location")
 	print("spawned trash")
 
-	add_child(customer_trash)
+	add_child(customer_trash, true)
 
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
