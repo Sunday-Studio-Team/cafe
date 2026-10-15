@@ -148,6 +148,7 @@ func _ready() -> void:
 	ordered_drink_name_label.hide()
 	Events.items_updated.connect(get_stats)
 	reset_icons()
+	ingredients_bar.max_value = Stats.current.machine_max_ingredients
 	ingredients = Stats.current.machine_starting_ingredients
 	breakdown_timer.wait_time = 0.5
 
@@ -221,7 +222,7 @@ func _physics_process(delta: float) -> void:
 	if animation_delay_timer >= animation_delay:
 		animation_delay_timer = 0
 		update_ingredients_bar_animation()
-	ingredient_coffeebar.position.y = 1125 - (1125 * (0.01 * ingredients_bar.value))
+	ingredient_coffeebar.position.y = 1125 - (1125 *  ingredients_bar.ratio)
 
 	progress_indicator.visible = not timer.is_stopped()
 	accept_button.disabled = (not waiting_for_response) or tutorial_lock_accept_drink_button
