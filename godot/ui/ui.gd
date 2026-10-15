@@ -409,6 +409,11 @@ func _on_alert_posted(
 
 
 func play_score_update_sounds(score_type: ScoreType, new_value: float, old_value: float) -> void:
+	# Don't play sounds if (NOT in tutorial AND shift not started)
+	# This is because we set rating at the start of the game, and we don't want the sound to play.
+	if not Global.playing_tutorial and not Global.shift_started:
+		return
+	
 	var change: float = new_value - old_value
 	if change > 0.0:
 		match score_type:

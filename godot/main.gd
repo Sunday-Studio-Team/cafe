@@ -133,6 +133,9 @@ func _ready() -> void:
 	else:
 		Global.playing_tutorial = false
 		print("should not play tutorial!")
+	
+	if not Global.playing_tutorial:
+		Global.employee_rating = 2
 
 	set_per_day_stuff()
 	Events.items_updated.connect(get_stats)
@@ -163,7 +166,6 @@ func _ready() -> void:
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
-	Global.employee_rating = 2
 	Global.spills_this_shift = 0
 	Global.breakdowns_this_shift = 0
 	Global.in_machine_ui = false
