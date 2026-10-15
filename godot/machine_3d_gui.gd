@@ -71,24 +71,12 @@ func enter_gui(update_player_reset_position: bool = true) -> void:
 	# seems weird because we cant interact with Interactables while in_ui
 	# anyway but this is actually to stop that CollisionShape blocking
 	# our mouse from clicking stuff lul
-	if update_player_reset_position:
-		Global.locked_camera_target_pos = node_area.global_position
-		#lwk not sure where it should look at i personally prefer without the lock
-		#issue wanted to look at so i hope this works?
-		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
-		Events.play_viewmodel_animation.emit("use_hand")
-		await Events.use_hand_animation_tap
-
-		await Events.viewmodel_animation_finished
-		Global.camera_mode = Global.CameraMode.PLAYER
-	
 	node_area.visible = true
 	interactable.visible = false
 	Global.in_machine_ui = true
 	Global.machine_in_use = machine
 	player_using_me = true
 	node_viewport.notify_mouse_entered()
-	
 
 	if !Global.tutorial_machine_used:
 		Global.tutorial_machine_used = true
