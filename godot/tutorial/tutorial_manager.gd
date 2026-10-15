@@ -535,10 +535,12 @@ func start_day() -> void:
 			# Repeat the lines until trash is picked up.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_4_training_9_repeat_0",
+					"voice_line_day_4_training_27_repeat_0",
+					"voice_line_day_4_training_27_repeat_1",
 					]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				Global.tutorial_day_4_trash_picked_up = false
 				var condition_callable: Callable = (
@@ -552,10 +554,12 @@ func start_day() -> void:
 			# Repeat the lines until trash is thrown away.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_4_training_11_repeat_0",
+					"voice_line_day_4_training_28_repeat_0",
+					"voice_line_day_4_training_28_repeat_1",
 					]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				Global.tutorial_day_4_trash_thrown_away = false
 				var condition_callable: Callable = (
@@ -564,12 +568,16 @@ func start_day() -> void:
 				)
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
-			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_12", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_13", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_14", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_15", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_16", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_17", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_29", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_30", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_31", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_32", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_33", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_34", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_35", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_36", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_37", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_38", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			await get_tree().create_timer(0.5).timeout
 			
