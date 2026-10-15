@@ -563,13 +563,6 @@ func machine_make_drink() -> void:
 		equal_sign.texture = equal_sign_states[EqualStates.Wrong]
 	# Calculate scaled price
 	order.final_order_price = order.made_drink.price * Stats.current.drink_price_multiplier_each_day[Global.day]
-
-	# Calculate star rating loss if accepted
-	if order.star_rating_loss_for_accept != 0.0:
-		order.star_rating_loss_for_accept = maxf(0.1, snappedf(
-			order.star_rating_loss_for_accept * Stats.current.accept_incorrect_drink_star_rating_multiplier,
-			Stats.current.accept_incorrect_drink_star_rating_rounding))
-
 	display_drink_score()
 
 	var shift_progress_ratio: float = Global.shift_progress_ratio
