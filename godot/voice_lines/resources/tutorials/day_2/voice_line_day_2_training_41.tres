@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://bv6032hov3k2q"]
+
+[ext_resource type="AudioStream" uid="uid://rlmojaigwhvm" path="res://audio/vo/tutorials/day_2/voice_line_day_2_training_41.wav" id="1_u2hlb"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_uuwa8"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_1sfr1"]
+
+[resource]
+script = ExtResource("2_uuwa8")
+voice_line_id = "voice_line_day_2_training_41"
+audio_stream = ExtResource("1_u2hlb")
+speaker = ExtResource("3_1sfr1")
+subtitle_en = "Ugh!"
