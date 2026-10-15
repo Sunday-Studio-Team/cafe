@@ -276,11 +276,13 @@ stretch_mode = 2
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=2035762792]
 stream = SubResource("AudioStreamRandomizer_7gik8")
 volume_db = 10.0
+bus = &"Sfx"
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=1913540532]
 stream = ExtResource("17_yi8od")
 volume_db = 10.0
 pitch_scale = 0.5
+bus = &"Sfx"
 
 [node name="DebugLabel_SafeToRemoveInFinalGame" type="Label" parent="." unique_id=754876588]
 visible = false

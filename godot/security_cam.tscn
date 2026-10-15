@@ -67,11 +67,18 @@ whipped_cream_sound = NodePath("WhippedCreamSound")
 
 [node name="CaughtSound" type="AudioStreamPlayer3D" parent="." unique_id=706302561]
 stream = ExtResource("3_j0k3h")
+bus = &"Sfx"
 
 [node name="DisableSound" type="AudioStreamPlayer3D" parent="." unique_id=640117199]
 stream = ExtResource("3_0j8nf")
 volume_db = -10.0
 max_db = 0.0
+bus = &"Sfx"
+
+[node name="WhippedCreamSound" type="AudioStreamPlayer" parent="." unique_id=1088424431]
+stream = ExtResource("9_ebrmn")
+volume_db = -5.0
+bus = &"Sfx"
 
 [node name="GraceTimer" type="Timer" parent="." unique_id=2144038531]
 wait_time = 2.5
@@ -188,9 +195,5 @@ explosiveness = 0.25
 randomness = 0.25
 process_material = SubResource("ParticleProcessMaterial_mjix0")
 draw_pass_1 = SubResource("CapsuleMesh_vn1tu")
-
-[node name="WhippedCreamSound" type="AudioStreamPlayer" parent="." unique_id=1088424431]
-stream = ExtResource("9_ebrmn")
-volume_db = -5.0
 
 [editable path="CameraAimerModel/Model/camera"]

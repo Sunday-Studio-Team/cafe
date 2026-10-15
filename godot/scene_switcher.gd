@@ -340,6 +340,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	const BUS_NAME_CUSTOMER_MUSIC: String = "CustomerAreaMusic"
 	const BUS_NAME_NON_DIEGETIC_MUSIC: String = "NonDiegeticMusic"
 	const BUS_NAME_VOICE: String = "TippyVO"
+	const BUS_NAME_SFX: String = "Sfx"
 
 	var bus_index_overall: int = AudioServer.get_bus_index(BUS_NAME_OVERALL)
 	AudioServer.set_bus_volume_linear(bus_index_overall, options_data.overall_volume * options_data.VOLUMES_MULTIPLIER)
@@ -349,6 +350,8 @@ func _apply_game_options(options_data: OptionsData) -> void:
 	AudioServer.set_bus_volume_linear(bus_index_non_diegetic_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
 	var bus_index_voice: int = AudioServer.get_bus_index(BUS_NAME_VOICE)
 	AudioServer.set_bus_volume_linear(bus_index_voice, options_data.voice_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_sfx: int = AudioServer.get_bus_index(BUS_NAME_SFX)
+	AudioServer.set_bus_volume_linear(bus_index_sfx, options_data.sfx_volume * options_data.VOLUMES_MULTIPLIER)
 
 	match options_data.graphics_preset:
 		OptionsData.GraphicsOptionsPresets.HIGH:

@@ -127,11 +127,12 @@ transform = Transform3D(8.502839, 1.9279655, 4.897417, -1.3210089, 9.788824, -1.
 stream = ExtResource("4_hqtel")
 volume_db = -20.0
 max_db = 0.0
+bus = &"Sfx"
 
 [node name="Trash Cup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera" unique_id=1417801726 instance=ExtResource("10_q13i1")]
 transform = Transform3D(0.9985243, -3.7197927e-09, -0.05430668, 3.72529e-09, 1, 1.9417385e-17, 0.05430668, -2.0230814e-10, 0.9985243, 0.17303157, -0.16699994, -0.4299096)
 
-[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=688255852]
+[node name="SM_TrashCup" parent="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup" index="0" unique_id=1139067428]
 transform = Transform3D(0.10581238, 1.517883e-17, 0, -1.2576745e-17, 0.105812386, 0, 0, 1.7347235e-18, 0.10581238, 0, 0, 0)
 layers = 8
 
@@ -174,6 +175,7 @@ stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -20.0
 pitch_scale = 0.8
 max_polyphony = 2
+bus = &"Sfx"
 
 [node name="FreeCamVisualizer" type="Node3D" parent="." unique_id=1884043755]
 
@@ -211,6 +213,7 @@ draw_pass_3 = ExtResource("21_7ahtn")
 [node name="ThrowTrashAudio" type="AudioStreamPlayer3D" parent="." unique_id=1422339463]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4175518, 0)
 stream = ExtResource("23_7lmhl")
+bus = &"Sfx"
 
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
 [editable path="CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
