@@ -41,7 +41,6 @@ customer_steps_on_spill_rating_loss_each_day,\
 spill_cleaned_rating_gain_each_day,\
 help_desk_customer_success_rating_gain_each_day,\
 help_desk_customer_timed_out_rating_loss_each_day,\
-tip_per_star_rating,\
 camera_slow_player_walk_speed_multiplier,\
 camera_slow_player_sprint_speed_multiplier,\
 camera_slow_player_duration,\

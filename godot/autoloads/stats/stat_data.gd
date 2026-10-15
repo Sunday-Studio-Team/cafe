@@ -40,18 +40,17 @@ var first_help_desk_customer_entry_time: float = 8.0
 @export var machine_customer_flow_rate_at_rating_curve_per_day: Dictionary[int, Curve]
 @export var help_desk_customer_flow_rate_at_rating_curve_per_day: Dictionary[int, Curve]
 @export var chance_of_incorrect_drink_at_shift_progress_ratio_curve_per_day: Dictionary[int, Curve]
-var remade_drink_star_rating_loss_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
-var remade_drink_star_rating_loss_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
-var remade_drink_star_rating_loss_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 1.2, 2: 0.55, 3: 0.5, 4: 0.45, 5: 0.4, 0: 0.1  }
+var remade_drink_star_rating_loss_for_incorrect_main_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.3, 3: 0.3, 4: 0.3, 5: 0.3, 0: 0.3  }
+var remade_drink_star_rating_loss_for_incorrect_liquid_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.3, 3: 0.3, 4: 0.3, 5: 0.3, 0: 0.3  }
+var remade_drink_star_rating_loss_for_incorrect_extra_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.3, 3: 0.3, 4: 0.3, 5: 0.3, 0: 0.3  }
 var drink_correct_star_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 0: 1.0 }
 var accept_incorrect_drink_star_rating_multiplier: float = 0.2
 var accept_incorrect_drink_star_rating_rounding: float = 0.1
-var machine_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.15, 2: 0.18, 3: 0.2, 4: 0.25, 5: 0.3, 0: 0.2 }
-var customer_steps_on_spill_rating_loss_each_day: Dictionary[int, float] = { 1: 0.2, 2: 0.25, 3: 0.3, 4: 0.35, 5: 0.4, 0: 0.2 }
-var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.9, 3: 0.8, 4: 0.7, 5: 0.6, 0: 1.0 }
-var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 0: 0.4 }
-var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.2, 2: 0.25, 3: 0.3, 4: 0.35, 5: 0.4, 0: 0.4 }
-var tip_per_star_rating: Dictionary[int, float] = { 1: 2, 2: 2.25, 3: 2.5, 4: 2.75, 5: 3, 0: 3 }
+var machine_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.4, 2: 0.4, 3: 0.4, 4: 0.4, 5: 0.4, 0: 0.4 }
+var customer_steps_on_spill_rating_loss_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.3, 3: 0.3, 4: 0.3, 5: 0.3, 0: 0.3 }
+var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.6, 3: 0.6, 4: 0.6, 5: 0.6, 0: 0.6 }
+var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 0.1, 2: 0.1, 3: 0.1, 4: 0.1, 5: 0.1, 0: 0.1 }
+var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.2, 2: 0.2, 3: 0.2, 4: 0.2, 5: 0.2, 0: 0.2 }
 var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
