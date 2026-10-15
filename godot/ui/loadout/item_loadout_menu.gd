@@ -36,7 +36,7 @@ var player_has_confirmed_loadout_at_least_once := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.item_loadout_menu = self
-
+	populate()
 	_player_ui_sub_viewport_container.allow_input_changed.connect(_on_player_ui_sub_viewport_container_allow_input_changed)
 	confirm_button.pressed.connect(confirm_and_hide_menu)
 	locker_interactable.interacted.connect(
@@ -54,7 +54,6 @@ func _ready() -> void:
 					var t := create_tween().set_parallel()
 					t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
 					t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
-					populate()
 				else:
 					locker_model.close_door()
 					locker_close_sound.play()
@@ -139,7 +138,7 @@ func confirm_and_hide_menu() -> void:
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
-		if equipped_item_button.item:
+		if equipped_item_button.item != null and equipped_item_button.connected_locker_item != null:
 			equipped_items.append(equipped_item_button.item)
 			locker.connected_items.append(equipped_item_button.connected_locker_item)
 
