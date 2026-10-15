@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://wua7mthmnjtq" path="res://audio/air_freshener_spray.wav" id="6_y5vsg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_13qdw"]
-radius = 0.39990234
+radius = 0.4584961
 height = 1.8115234
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
@@ -32,16 +32,15 @@ _collider_body = NodePath("StaticBody3D")
 [node name="Comic Table" parent="Model" unique_id=542511439 instance=ExtResource("2_eta2g")]
 transform = Transform3D(1.0994586, 0, 0, 0, 1.0994586, 0, 0, 0, 1.0994586, -0.011456311, -0.500829, -0.0023750067)
 
-[node name="Interactable" type="Area3D" parent="." unique_id=2095758401 node_paths=PackedStringArray("mesh")]
+[node name="Interactable" type="Area3D" parent="." unique_id=2095758401]
 script = ExtResource("2_62jgw")
 interactable_id = &"use_air_freshener"
 display_name = "Air Freshener"
-mesh = NodePath("")
 show_interact_hotkey = false
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1106980060]
-transform = Transform3D(1.4706111, 0, 0, 0, 1, 0, 0, 0, 1.3873665, 0, 0.34960938, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.34960938, 0)
 shape = SubResource("CapsuleShape3D_13qdw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1981069836]
