@@ -427,6 +427,7 @@ shape = SubResource("ConvexPolygonShape2D_a2xku")
 stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -15.0
 max_polyphony = 10
+bus = &"Sfx"
 
 [node name="CupBoundaries" type="Area2D" parent="Cup" unique_id=285867703]
 position = Vector2(0, -180)
@@ -478,6 +479,7 @@ position = Vector2(-95.21, 20.24)
 stream = ExtResource("9_j5bal")
 volume_db = -10.0
 autoplay = true
+bus = &"Sfx"
 
 [node name="BeanSpawnTimer" type="Timer" parent="." unique_id=1475975290]
 wait_time = 0.33
@@ -495,9 +497,11 @@ libraries/ = SubResource("AnimationLibrary_cxwh1")
 
 [node name="GainScoreSound" type="AudioStreamPlayer" parent="." unique_id=948120087]
 stream = SubResource("AudioStreamRandomizer_ovvye")
+bus = &"Sfx"
 
 [node name="CatchGoldBeanSound" type="AudioStreamPlayer" parent="." unique_id=816919820]
 stream = SubResource("AudioStreamRandomizer_mjix0")
+bus = &"Sfx"
 
 [node name="Control" type="Control" parent="." unique_id=1602019414]
 layout_mode = 3

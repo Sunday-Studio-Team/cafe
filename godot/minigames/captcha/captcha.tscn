@@ -383,17 +383,21 @@ script = ExtResource("24_knlx1")
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=430448945]
 stream = ExtResource("7_p8bru")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
 stream = ExtResource("8_3tmsw")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="IceFreezingSound" type="AudioStreamPlayer" parent="." unique_id=1079623280]
 stream = ExtResource("25_eix12")
 volume_db = -5.0
+bus = &"Sfx"
 
 [connection signal="pressed" from="HBoxContainer/Captcha/CaptchaVBox/BottomButtonContainer/TextureButton" to="." method="_on_submit_button_pressed"]

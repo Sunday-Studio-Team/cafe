@@ -2041,6 +2041,7 @@ mouse_filter = 2
 script = ExtResource("119_uo83y")
 _subtitle_view_packed_scene = ExtResource("118_g3y5b")
 _subtitle_views_container = NodePath("SubtitleViewsVBoxContainer")
+metadata/_edit_use_anchors_ = true
 
 [node name="SubtitleViewsVBoxContainer" type="VBoxContainer" parent="SubtitlesCanvasLayer/SubtitleUI" unique_id=1459930306]
 layout_mode = 1
@@ -2057,6 +2058,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 alignment = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayerUiSubViewportContainer" type="SubViewportContainer" parent="." unique_id=1544618442]
 anchors_preset = 15
@@ -2065,6 +2067,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("214_tcxth")
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer" unique_id=1981824338]
 disable_3d = true
@@ -2467,18 +2470,22 @@ horizontal_alignment = 1
 [node name="MoneySound" type="AudioStreamPlayer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=220836306]
 stream = ExtResource("7_5vw27")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="GainPointsSound" type="AudioStreamPlayer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1752145735]
 stream = ExtResource("8_4c57u")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="LosePointsSound" type="AudioStreamPlayer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1821886986]
 stream = ExtResource("174_8e868")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="LowTimeSound" type="AudioStreamPlayer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=170153923]
 stream = ExtResource("14_yaehf")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="MinigameController" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=305291737 node_paths=PackedStringArray("sub_viewport_container", "sub_viewport", "cancel_button")]
 visible = false
@@ -2673,6 +2680,7 @@ script = ExtResource("297_nckbc")
 _top_bar = NodePath("TopBarColorRect")
 _bottom_bar = NodePath("BottomBarColorRect")
 _vignette_color_rect = NodePath("VignetteColorRect")
+metadata/_edit_use_anchors_ = true
 
 [node name="TopBarColorRect" type="ColorRect" parent="CinematicCamera/CinematicCameraCanvasLayer/CinematicBars" unique_id=306190172]
 custom_minimum_size = Vector2(0, 180)
@@ -2729,6 +2737,7 @@ _fast_forward_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/F
 _fast_forward_not_active_indicator = NodePath("FastForwardHBoxContainer/FfwdPrompt/FfwdNotActivatedPanel")
 _skip_hotkey_label = NodePath("SkipCinematicPrompt/SkipPrompt/SkipPromptLabel")
 _skip_progress_bar = NodePath("SkipCinematicPrompt/SkipPrompt/SkipTextureProgressBar")
+metadata/_edit_use_anchors_ = true
 
 [node name="FastForwardHBoxContainer" type="HBoxContainer" parent="CinematicCamera/CinematicCameraCanvasLayer/PromptsVBoxContainer" unique_id=1550242564]
 layout_mode = 2
@@ -2855,6 +2864,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="ShiftStartSequence" type="Control" parent="CinematicCamera/CinematicCameraCanvasLayer" unique_id=357199991]
 layout_mode = 3
@@ -2864,6 +2874,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CountdownRichTextLabel" type="RichTextLabel" parent="CinematicCamera/CinematicCameraCanvasLayer/ShiftStartSequence" unique_id=282290146]
 visible = false
@@ -2955,26 +2966,26 @@ transform = Transform3D(0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, 0.866
 [node name="FakeSpotlight" parent="SecurityCams/LeftAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1261470041, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 25.0
 
-[node name="AimPath3D" parent="SecurityCams/LeftAreaSecurityCam" index="6" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1994339220]
 curve = SubResource("Curve3D_1yv1y")
 
 [node name="AimPathFollow3D" parent="SecurityCams/LeftAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="7" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="8" unique_id=1674333602]
 texture = SubResource("ViewportTexture_6kay4")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
 rotation_pause_length = 4.0
 
-[node name="AimPath3D" parent="SecurityCams/MiddleSecurityCam" index="6" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1994339220]
 curve = SubResource("Curve3D_ovcoh")
 
 [node name="AimPathFollow3D" parent="SecurityCams/MiddleSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="7" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="8" unique_id=1674333602]
 texture = SubResource("ViewportTexture_e06bn")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
@@ -2985,13 +2996,13 @@ rotation_pause_length = 4.0
 [node name="FakeSpotlight" parent="SecurityCams/RightAreaSecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(245896451, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="AimPath3D" parent="SecurityCams/RightAreaSecurityCam" index="6" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1994339220]
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="8" unique_id=1674333602]
 texture = SubResource("ViewportTexture_pb33p")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
@@ -3002,13 +3013,13 @@ rotation_pause_length = 4.0
 [node name="FakeSpotlight" parent="SecurityCams/HallwaySecurityCam/CameraAimerModel" parent_id_path=PackedInt32Array(1382585707, 1953194644) index="0" unique_id=1348601655]
 spot_angle = 21.0
 
-[node name="AimPath3D" parent="SecurityCams/HallwaySecurityCam" index="6" unique_id=1994339220]
+[node name="AimPath3D" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1994339220]
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
-[node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
+[node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="8" unique_id=1674333602]
 texture = SubResource("ViewportTexture_1teer")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
@@ -3113,20 +3124,19 @@ transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.48
 [node name="AroundCafeVoiceLinePlayer3D3" parent="AroundCafeVoiceLinePlayers" unique_id=463110771 instance=ExtResource("312_8ldsf")]
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
 
-[node name="TippyVoiceLinePlayer" type="AudioStreamPlayer" parent="." unique_id=1873797841]
-
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
+bus = &"Sfx"
 
 [node name="ShiftStartSound" type="AudioStreamPlayer" parent="." unique_id=1443924933]
 stream = ExtResource("137_g3y5b")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="CustomerAreaMusic" parent="." unique_id=109925331 instance=ExtResource("404_mfcn2")]
 transform = Transform3D(0.7278226, 0.009210605, 0.68570364, 6.386688e-10, 0.9999098, -0.013431131, -0.6857655, 0.00977548, 0.7277569, -4.796358, 3.2269244, -3.8294704)
 unit_size = 5.0
 max_db = -8.0
-bus = &"Master"
 
 [node name="TippyBoss" parent="." unique_id=1434069880 instance=ExtResource("276_wvmv7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
@@ -3136,7 +3146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057009514, -0.00016215755, -0.99993116, 1.0259852e-07, 1, -0.00016214639, 0.99993116, -1.01539825e-08, 0.00057009514, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009474, -0.00016215755, -0.9999304, 1.0259844e-07, 1, -0.00016214626, 0.9999304, -1.01539825e-08, 0.00057009474, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
