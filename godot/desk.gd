@@ -6,12 +6,13 @@ const PC_CAMERA_TWEEN_DURATION := 0.45
 @export var interactable: Interactable
 @export var fabric_cover_for_monitor: Node3D
 @export var camera_spot_for_pc_interaction: Marker3D
-@export var pc_ui: PC_UI
 
 var camera_transform_before_pc_interaction: Transform3D
 var exiting_pc = false
 
 func _ready() -> void:
+	Global.desk = self
+	
 	await get_tree().process_frame
 
 	interactable.interacted.connect(_on_desk_interacted)
@@ -24,7 +25,7 @@ func _ready() -> void:
 func _on_desk_interacted() -> void:
 	if exiting_pc: return
 	pc_interaction_camera_enter_transition()
-	pc_ui.show()
+	Global.pc_ui.show()
 
 	Events.pc_state_change.emit(true)
 
