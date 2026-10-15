@@ -42,8 +42,7 @@ func update_score_indicators() -> void:
 		int(Stats.current.daily_profit_goals_each_day[Global.day])
 	]
 
-	if Global.daily_cafe_money:
-		money_bar.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
+	money_bar.value = Global.daily_cafe_money / Stats.current.daily_profit_goals_each_day[Global.day] * 100
 
 	if not Global.employee_rating == _employee_rating_last_update:
 		_update_rating()
