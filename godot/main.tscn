@@ -16,7 +16,6 @@
 [ext_resource type="Resource" uid="uid://dybdvkril5y03" path="res://emails/random_emails/random_email_1.tres" id="9_s14wm"]
 [ext_resource type="Script" uid="uid://dpxjdxm2r1gkd" path="res://minigames/minigame_controller.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://cnenanc4f2mbp" path="res://tutorial/tutorial_manager.gd" id="10_ed5de"]
-[ext_resource type="PackedScene" uid="uid://c8jilqo1pb0th" path="res://minigames/spill_clean/spill_clean_minigame.tscn" id="10_inymm"]
 [ext_resource type="Resource" uid="uid://c7bola2bkchgx" path="res://emails/random_emails/random_email_2.tres" id="10_q4gy1"]
 [ext_resource type="Resource" uid="uid://c28goevsrrpa" path="res://emails/random_emails/random_email_3.tres" id="11_cnw22"]
 [ext_resource type="PackedScene" uid="uid://dltayqwtj31d1" path="res://ui/pause_menu.tscn" id="11_ycdy4"]
@@ -1919,7 +1918,7 @@ viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubV
 [sub_resource type="ViewportTexture" id="ViewportTexture_fyan7"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "shift_start_sound", "default_trash_spawn_spot", "day_containers_desk", "day_containers_boxes")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "shift_start_sound", "default_trash_spawn_spot")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1961,8 +1960,6 @@ _item_loadout_menu_scene_uid = &"uid://d4bh0b3gyfbbd"
 _item_loadout_menu_container = NodePath("PlayerUiSubViewportContainer/SubViewport/ItemLoadoutMenuContainer")
 shift_start_sound = NodePath("ShiftStartSound")
 default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
-day_containers_desk = [null, null, null, null, null, null]
-day_containers_boxes = [NodePath("CafeEnvironment/DayDecorations_0"), NodePath("CafeEnvironment/DayDecorations_1"), NodePath("CafeEnvironment/DayDecorations_2"), NodePath("CafeEnvironment/DayDecorations_3"), NodePath("CafeEnvironment/DayDecorations_4"), NodePath("CafeEnvironment/DayDecorations_5")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -2992,7 +2989,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_ppx11")
 
 [node name="AimPathFollow3D" parent="SecurityCams/RightAreaSecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_pb33p")
@@ -3009,7 +3006,7 @@ spot_angle = 21.0
 curve = SubResource("Curve3D_g3y5b")
 
 [node name="AimPathFollow3D" parent="SecurityCams/HallwaySecurityCam/AimPath3D" index="0" unique_id=1068131204]
-transform = Transform3D(-0.73666847, 0, -0.6762529, 0, 0.9999996, 0, 0.676253, 0, -0.73666835, 0.9857298, -0.14100003, -1.25632)
+transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="7" unique_id=1674333602]
 texture = SubResource("ViewportTexture_1teer")
@@ -3139,7 +3136,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.00057009526, -0.00016215755, -0.9999313, 1.02598534e-07, 1, -0.0001621464, 0.9999313, -1.01539825e-08, 0.00057009526, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009514, -0.00016215755, -0.99993116, 1.0259852e-07, 1, -0.00016214639, 0.99993116, -1.01539825e-08, 0.00057009514, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
