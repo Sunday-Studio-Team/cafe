@@ -22,6 +22,7 @@ extends Node
 @export var _day_1_sato_start_shift_sign_position: Node3D
 @export var _day_1_machine_front_preview_position: Node3D
 @export var _day_1_sato_at_machine_position: Node3D
+@export var _day_1_clock_preview_position: Node3D
 @export var _day_1_tippy_tablet_area_detector: PlayerDetectionArea
 @export var _day_1_tippy_tablet_prop: Node3D
 @export var _day_1_tippy_tablet_camera_target_location: Node3D
@@ -57,10 +58,12 @@ func start_day() -> void:
 			# Repeat the lines until shift started.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_2_repeat_0",
+					"voice_line_day_1_training_10_repeat_0",
+					"voice_line_day_1_training_10_repeat_1",
 				]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				var condition_callable: Callable = (
 					func() -> bool:
@@ -73,10 +76,12 @@ func start_day() -> void:
 			# Repeat the lines until tutorial machine used.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_5_repeat_0",
+					"voice_line_day_1_training_14_repeat_0",
+					"voice_line_day_1_training_14_repeat_1",
 					]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				Global.tutorial_machine_used = false
 				var condition_callable: Callable = (
@@ -85,8 +90,8 @@ func start_day() -> void:
 				)
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_6", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_7", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_15", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_16", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			# First customer, accept order
 			Global.main_scene.tutorial_machine.force_next_drink_perfect()
@@ -95,6 +100,8 @@ func start_day() -> void:
 
 			await Events.customer_started_order
 
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_17", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
 			await Global.main_scene.tutorial_machine.drink_prepared
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_2)
@@ -102,7 +109,7 @@ func start_day() -> void:
 			# Repeat the lines until accept button is pressed.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_10_repeat_0",
+					"voice_line_day_1_training_19_repeat_0",
 				]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
 					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
@@ -130,10 +137,12 @@ func start_day() -> void:
 			# Repeat the lines until accept or remake button is pressed.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_25_a_3_repeat_0",
+					"voice_line_day_1_training_40_repeat_0",
+					"voice_line_day_1_training_40_repeat_1",
 				]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
 					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				Global.tutorial_drink_incorrect_accepted = false
 				Global.tutorial_remake_button_pressed = false
@@ -150,8 +159,8 @@ func start_day() -> void:
 						# Refill the ingredients so it never runs out.
 						Global.main_scene.tutorial_machine.ingredients = Stats.current.machine_starting_ingredients
 
-						await Global.voice_line_system.play_voice_line("voice_line_day_1_training_25_a_0", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-						await Global.voice_line_system.play_voice_line("voice_line_day_1_training_25_a_1", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+						await Global.voice_line_system.play_voice_line("voice_line_day_1_training_40_a_0", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+						await Global.voice_line_system.play_voice_line("voice_line_day_1_training_40_a_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 						# Another incorrect order
 						Global.main_scene.tutorial_machine.force_next_drink_incorrect()
@@ -168,10 +177,12 @@ func start_day() -> void:
 						# Repeat the lines until accept or remake button is pressed.
 						if true:
 							var repeat_lines: Array[String] = [
-								"voice_line_day_1_training_25_a_3_repeat_0",
+								"voice_line_day_1_training_40_repeat_0",
+								"voice_line_day_1_training_40_repeat_1",
 								]
 							var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
 								VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+								VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 								]
 							Global.tutorial_drink_incorrect_accepted = false
 							Global.tutorial_remake_button_pressed = false
@@ -179,7 +190,6 @@ func start_day() -> void:
 								func() -> bool:
 									return Global.tutorial_drink_incorrect_accepted or Global.tutorial_remake_button_pressed
 							)
-
 							await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 						if Global.tutorial_remake_button_pressed:
@@ -190,8 +200,8 @@ func start_day() -> void:
 				# Repeat the lines until drink is remade, or accept is pressed.
 				if true:
 					var repeat_lines: Array[String] = [
-						"voice_line_day_1_training_28_repeat_0",
-						"voice_line_day_1_training_28_repeat_1",
+						"voice_line_day_1_training_43_repeat_0",
+						"voice_line_day_1_training_43_repeat_1",
 					]
 					var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
 						VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
@@ -213,7 +223,7 @@ func start_day() -> void:
 			# Repeat the lines until drink is dragged over to be served.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_29_repeat_0",
+					"voice_line_day_1_training_44_repeat_0",
 				]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
 					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
@@ -225,7 +235,8 @@ func start_day() -> void:
 				)
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_30", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_45", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_46", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			# Machine runs out of ingredients.
 			Global.main_scene.tutorial_machine.ingredients = 0
@@ -237,17 +248,18 @@ func start_day() -> void:
 			# Repeat the lines until ingredient bag is picked up.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_33_repeat_0",
+					"voice_line_day_1_training_49_repeat_0",
+					"voice_line_day_1_training_49_repeat_1",
 					]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				Global.tutorial_ingredients_bag_got = false
 				var condition_callable: Callable = (
 					func() -> bool:
 						return Global.tutorial_ingredients_bag_got
 				)
-
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 			await get_tree().create_timer(1.0).timeout
@@ -257,12 +269,12 @@ func start_day() -> void:
 			# Repeat the lines until ingredients are filled to enough.
 			if true:
 				var repeat_lines: Array[String] = [
-					"voice_line_day_1_training_35_repeat_0",
-					"voice_line_day_1_training_35_repeat_1",
+					"voice_line_day_1_training_50_repeat_0",
+					"voice_line_day_1_training_50_repeat_1",
 					]
 				var repeat_lines_location: Array[VoiceLineSystem.VoiceLineLocationEnum] = [
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
-					VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
+					VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE,
 					]
 				var condition_callable: Callable = (
 					func() -> bool:
@@ -270,9 +282,13 @@ func start_day() -> void:
 				)
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_36", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_37", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_38", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_51", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_52", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_53", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_54", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_55", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_56", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_57", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			await get_tree().create_timer(0.5).timeout
 

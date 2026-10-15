@@ -25,6 +25,8 @@ func enable_cinematic_camera(fov_transition_duration: float = 1.0, should_hide_p
 	
 	if should_hide_player_ui:
 		_player_ui_sub_viewport_container.visible = false
+	else:
+		_player_ui_sub_viewport_container.visible = true
 	
 	_camera_3d.make_current()
 	await create_tween().tween_property(_camera_3d, "fov", _camera_target_fov, fov_transition_duration).finished
