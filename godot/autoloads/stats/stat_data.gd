@@ -60,7 +60,8 @@ var daily_completion_item_unlocks: Dictionary[int, Array] = {
 	1: ["nice_spoon"],
 	2: ["barista_guide"],
 	3: ["air_freshener"],
-	4: ["super_scrubber", "teleporter"],
+	4: ["super_scrubber"],
+	# 4: ["super_scrubber", "teleporter"],
 	5: ["roller_skates"],
 }
 
@@ -68,7 +69,8 @@ var daily_rating_item_unlocks: Dictionary[int, Array] = {
 	1: ["air_horn"],
 	2: ["hammer"],
 	3: ["whipped_cream"],
-	4: ["tippy_coin"],
+	4: ["teleporter"],
+	# 4: ["tippy_coin"],
 	5: ["exploding_bomb"],
 }
 
