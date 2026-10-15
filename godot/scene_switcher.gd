@@ -69,7 +69,6 @@ func _process(_delta: float) -> void:
 func _start_tippy_loading() -> void:
 	# Load the tippy sprite frames
 	_loading_tippy_sprite_frames_load_token = Global.resource_background_loader.cache_resource(_loading_tippy_sprite_frames_uid)
-	
 	while !_loading_tippy_sprite_frames_load_token.is_loaded:
 		await get_tree().process_frame
 		if _tippy_finishing:
@@ -82,31 +81,31 @@ func _start_tippy_loading() -> void:
 		return
 	loading_tippy.modulate.a = 0.0
 	loading_tippy.sprite_frames = loading_tippy_sprite_frames
-	
-	await create_tween().tween_property(loading_tippy, "modulate:a", 1.0, 1.0).finished
-	
+	loading_tippy.stop()
+	loading_tippy.play(TIPPY_LOADING_LOOPS[0])
+	create_tween().tween_property(loading_tippy, "modulate:a", 1.0, 1.0)
+
 	_tippy_stage = 0
 	_tippy_target_stage = 0
 	_tippy_switching = false
 	_tippy_finishing = false
 	_loading_progress_bar.value = 0.0
-	loading_tippy.stop()
-	loading_tippy.play(TIPPY_LOADING_LOOPS[0])
-
 
 func _set_loading_progress(ratio: float) -> void:
 	_loading_progress_bar.value = clampf(ratio, 0.0, 1.0)
-	var target_stage: int = 0
-	match ratio:
-		ratio when ratio >= 0.99:
-			target_stage = 3
-		ratio when ratio >= 0.6:
-			target_stage = 2
-		ratio when ratio >= 0.3:
-			target_stage = 1
-	# Loading estimates can jump or regress; the character only moves forward.
-	_tippy_target_stage = maxi(_tippy_target_stage, target_stage)
-	_advance_tippy_animation()
+
+	if loading_tippy.sprite_frames != null:
+		var target_stage: int = 0
+		match ratio:
+			ratio when ratio >= 0.99:
+				target_stage = 3
+			ratio when ratio >= 0.6:
+				target_stage = 2
+			ratio when ratio >= 0.3:
+				target_stage = 1
+		# Loading estimates can jump or regress; the character only moves forward.
+		_tippy_target_stage = maxi(_tippy_target_stage, target_stage)
+		_advance_tippy_animation()
 
 
 func _advance_tippy_animation() -> void:

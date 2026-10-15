@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://i8tqkus51vwh" path="res://Assets/loading_screen_img/background_panels/loading_panel_5.png" id="13_8b5ky"]
 [ext_resource type="Texture2D" uid="uid://bhjnm0ym2l1t6" path="res://Assets/loading_screen_img/background_panels/loading_panel_6.png" id="14_uncec"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_cyvvf"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
 bg_color = Color(0.1, 0.1, 0.1, 1)
 
@@ -221,8 +223,7 @@ mouse_filter = 2
 
 [node name="TippyAnimation" type="AnimatedSprite2D" parent="LoadingCanvas/LoadingScreen/TippyMargin/TippySlot" unique_id=1613845006]
 position = Vector2(223, 278)
-animation = &"loop_0"
-autoplay = "loop_0"
+sprite_frames = SubResource("SpriteFrames_cyvvf")
 
 [node name="MarginContainer" type="MarginContainer" parent="LoadingCanvas/LoadingScreen" unique_id=144886860]
 z_index = 1
