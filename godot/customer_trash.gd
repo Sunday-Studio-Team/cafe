@@ -27,7 +27,7 @@ func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 
 	_hint_pop_animated_sprite_3d_relative_position = hint_pop_animated_sprite_3d.global_position - global_position
-	
+
 	# briefly disable on spawn so if we're dropping it we cant accidentally
 	# interact with it as it falls
 	interactable.visible = false
@@ -45,7 +45,7 @@ func _ready() -> void:
 	Global.resource_background_loader.uncache_resource(load_token)
 	hint_pop_animated_sprite_3d.sprite_frames = sprite_frames
 	hint_pop_animated_sprite_3d.visible = true
-	
+
 	hint_pop_animated_sprite_3d.animation_finished.connect(_on_pop_out_finished)
 	hint_pop_animated_sprite_3d.play("Pop")
 	hint_pop_animated_sprite_3d.top_level = true
@@ -55,7 +55,7 @@ func _exit_tree() -> void:
 	# Unload just in case!
 	Global.resource_background_loader.uncache_resource(load_token)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var player: Player = Global.player
 
 	if global_position.distance_to(player.global_position) <= activation_distance:
@@ -89,7 +89,7 @@ func _on_interacted() -> void:
 	Events.play_viewmodel_animation.emit("bag_pickup")
 
 	Global.tutorial_day_4_trash_picked_up = true
-	
+
 	# basically some weird stuff can happen if we throw the bag right after we
 	# pick up, so we just get rid of it if something weird happened which
 	# caused it to still be in the tree after a while
@@ -102,7 +102,7 @@ func _on_interacted() -> void:
 	)
 	add_child(timer_to_delete_if_something_went_wrong)
 	timer_to_delete_if_something_went_wrong.start()
-	
+
 	await Events.trash_pickup_animation_grabbed
 	Global.resource_background_loader.uncache_resource(load_token)
 	queue_free()
