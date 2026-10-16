@@ -13,11 +13,11 @@ func _ready() -> void:
 	Global.in_main_menu = true
 	
 	if FileAccess.file_exists(_save_file_path):
-		%NewGame.visible = false
-		%Continue.visible = true
+		play_button.visible = false
+		continue_button.visible = true
 	else:
-		%NewGame.visible = true
-		%Continue.visible = false
+		play_button.visible = true
+		continue_button.visible = false
 	
 	play_button.pressed.connect(
 		func():
