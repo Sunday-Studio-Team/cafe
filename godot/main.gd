@@ -32,6 +32,7 @@ extends Node3D
 
 @export var _player_shift_start_position: Node3D
 @export var _shift_start_sequence_label: RichTextLabel
+@export var _shift_start_countdown_sound: AudioStreamPlayer
 
 # Lazy spawned break room nodes
 @export var _desk_scene_uid: StringName
@@ -44,8 +45,6 @@ extends Node3D
 @export var _item_loadout_menu_container: Node
 var _nodes_to_destroy_on_shift_start: Array[Node]
 
-#Active Items
-@export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
 
 var _machine_customer_spawn_timer: Timer
@@ -68,13 +67,13 @@ var closing_time: bool = false
 func _ready() -> void:
 	_main_scene_loading_overlay.visible = true
 	_main_scene_loading_overlay.modulate.a = 1.0
-	
+
 	# Hide the view first, while lazy loading things.
 	await lazy_spawn_node(_desk_scene_uid, _desk_container)
 	await lazy_spawn_node(_whiteboard_scene_uid, _whiteboard_container)
 	await lazy_spawn_node(_locker_scene_uid, _locker_container)
 	await lazy_spawn_node(_item_loadout_menu_scene_uid, _item_loadout_menu_container)
-	
+
 	_voice_line_system.setup()
 	Global.camera_mode = Global.CameraMode.PLAYER
 	Global.cinematic_camera_allow_machine_gui_inputs = true
@@ -133,7 +132,7 @@ func _ready() -> void:
 	else:
 		Global.playing_tutorial = false
 		print("should not play tutorial!")
-	
+
 	if not Global.playing_tutorial:
 		Global.employee_rating = 2
 
@@ -179,9 +178,9 @@ func _ready() -> void:
 	closing_time = false
 
 	get_stats()
-	
+
 	Events.main_scene_ready.emit()
-	
+
 	_tutorial_manager.start_day()
 
 
@@ -311,10 +310,12 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(_active_machines)
 
+
 func _on_shutters_open_requested() -> void:
 	cafe_front_roller_shutters.open()
 
-func _on_shift_start_requested() -> void:	
+
+func _on_shift_start_requested() -> void:
 	if Global.playing_tutorial:
 		Events.shift_started.emit()
 	else:
@@ -330,7 +331,9 @@ func _on_shift_start_requested() -> void:
 		await _tutorial_manager._cinematic_camera.play_animation("shift_start_sequence")
 		_shift_start_sequence_label.visible = true
 		_tutorial_manager._cinematic_camera.disable_cinematic_camera(3.0)
+		_shift_start_countdown_sound.play()
 		_shift_start_sequence_label.text = "3"
+		# NOTE: can this get messsed up if the player pauses ?
 		await get_tree().create_timer(1.0).timeout
 		_shift_start_sequence_label.text = "2"
 		await get_tree().create_timer(1.0).timeout
@@ -340,6 +343,7 @@ func _on_shift_start_requested() -> void:
 		Events.shift_started.emit()
 		await get_tree().create_timer(1.0).timeout
 		_shift_start_sequence_label.visible = false
+
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
 	if closing_time:
@@ -576,7 +580,7 @@ func free_customer_queue():
 		machine.queued_customers.clear()
 		for customer in leaving_array: #Copied so no wack stuff happens
 			customer.leave_store()
-		
+
 	var help_desk_leaving_array: Array[Customer] = customer_help_desk._queued_desk_customers.duplicate()
 	customer_help_desk._queued_desk_customers.clear()
 	for help_desk_customer in help_desk_leaving_array:
@@ -586,12 +590,11 @@ func free_customer_queue():
 func _on_shift_started():
 	customer_trash_spawn_timer.start()
 	Global.shift_started = true
-	shift_start_sound.play()
-	
+
 	# Destroy break room nodes when the shift starts, save resources!
 	for node in _nodes_to_destroy_on_shift_start:
 		node.queue_free()
-	
+
 	if Global.day > 0:
 		if not Global.playing_tutorial:
 			game_timer.start()

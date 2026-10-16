@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c0nsltcnkwb8t" path="res://open_closed_sign.gd" id="1_jq31d"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_rxk5n"]
 [ext_resource type="PackedScene" uid="uid://1s54vqwadrmx" path="res://Assets/signs/tippy_open_close_sign_model.tscn" id="3_vu0xl"]
+[ext_resource type="AudioStream" uid="uid://dimkpitnugvme" path="res://audio/shift_start.wav" id="4_jm0q7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
 size = Vector3(1.5, 0.9, 0.5)
@@ -68,11 +69,12 @@ _data = {
 &"open": SubResource("Animation_jm0q7")
 }
 
-[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "animation_player")]
+[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "animation_player", "shift_start_triggered_sound")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 script = ExtResource("1_jq31d")
 interactable = NodePath("Interactable")
 animation_player = NodePath("AnimationPlayer")
+shift_start_triggered_sound = NodePath("ShiftStartTriggeredSound")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=2045513509 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1754386, 0.3508772, 0)
@@ -89,5 +91,8 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.1754386, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1479874812]
 libraries/ = SubResource("AnimationLibrary_1xpwx")
+
+[node name="ShiftStartTriggeredSound" type="AudioStreamPlayer3D" parent="." unique_id=1400984502]
+stream = ExtResource("4_jm0q7")
 
 [editable path="Model"]
