@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://biv7tx66jnqwi"]
+
+[ext_resource type="AudioStream" uid="uid://gw2nxr50twtd" path="res://audio/vo/tutorials/day_1/voice_line_day_1_training_46.wav" id="1_emo6y"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_wh484"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_g05cp"]
+
+[resource]
+script = ExtResource("2_wh484")
+voice_line_id = "voice_line_day_1_training_46"
+audio_stream = ExtResource("1_emo6y")
+speaker = ExtResource("3_g05cp")
+subtitle_en = "Think you’re better than me…?"

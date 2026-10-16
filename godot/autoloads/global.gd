@@ -36,6 +36,8 @@ var minigame_active := false:
 			current_minigame_name = ""
 var current_minigame_name: String
 var in_spill_minigame := false
+var desk: Desk
+var pc_ui: PC_UI
 var in_pc_ui := false
 var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]

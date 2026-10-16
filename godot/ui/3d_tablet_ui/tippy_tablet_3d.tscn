@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://lmhw5wqr2spn" path="res://Assets/tippy_tablet_tutorial_indicator/tippy_tablet_tutorial_indicator.tscn" id="4_1l6aw"]
 [ext_resource type="PackedScene" uid="uid://ccndesh240hgx" path="res://Assets/KeyChain/keychainAnim.glb" id="4_870e5"]
 
-[node name="TippyTablet3D" type="Node3D" unique_id=1761848473 node_paths=PackedStringArray("clock_tutorial_indicator", "money_and_goal_tutorial_indicator", "rating_tutorial_indicator")]
+[node name="TippyTablet3D" type="Node3D" unique_id=1761848473 node_paths=PackedStringArray("money_tutorial_indicator", "money_goal_tutorial_indicator", "rating_tutorial_indicator")]
 script = ExtResource("1_3j3my")
-clock_tutorial_indicator = NodePath("Scaler/TutorialIndicators/ClockMarker3D")
-money_and_goal_tutorial_indicator = NodePath("Scaler/TutorialIndicators/MoneyAndGoalMarker3D")
+money_tutorial_indicator = NodePath("Scaler/TutorialIndicators/MoneyMarker3D")
+money_goal_tutorial_indicator = NodePath("Scaler/TutorialIndicators/MoneyGoalMarker3D")
 rating_tutorial_indicator = NodePath("Scaler/TutorialIndicators/RatingMarker3D")
 
 [node name="PutEverythingInHereOnVisualLayer4" type="Node" parent="." unique_id=1944089783]
@@ -59,18 +59,18 @@ playback_default_blend_time = 2.0
 
 [node name="TutorialIndicators" type="Node3D" parent="Scaler" unique_id=2077913130]
 
-[node name="ClockMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=1174972329]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15523008, 0.17759663, 0.036550224)
+[node name="MoneyMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=1174972329]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.009415962, 0.1250143, 0.036550224)
 
-[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/ClockMarker3D" unique_id=1296036049 instance=ExtResource("4_1l6aw")]
+[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/MoneyMarker3D" unique_id=1296036049 instance=ExtResource("4_1l6aw")]
 
-[node name="MoneyAndGoalMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=1209240193]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15523008, 0.1276483, 0.036550224)
+[node name="MoneyGoalMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=1209240193]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.04001945, 0.12606357, 0.036550224)
 
-[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/MoneyAndGoalMarker3D" unique_id=118122595 instance=ExtResource("4_1l6aw")]
+[node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/MoneyGoalMarker3D" unique_id=118122595 instance=ExtResource("4_1l6aw")]
 
 [node name="RatingMarker3D" type="Marker3D" parent="Scaler/TutorialIndicators" unique_id=576641468]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15523008, 0.09711021, 0.036550224)
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, 0.09060382, -0.016617674, 0.036550224)
 
 [node name="TippyTabletTutorialIndicator" parent="Scaler/TutorialIndicators/RatingMarker3D" unique_id=1318005858 instance=ExtResource("4_1l6aw")]
 

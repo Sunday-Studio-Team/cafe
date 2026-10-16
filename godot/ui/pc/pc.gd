@@ -5,17 +5,17 @@ extends Control
 @export var shop_button: Button
 @export var email_app: PCApp
 @export var exit_button: Button
-@export var desk: Desk
 @export var screen_content_container: Control
 ## regular game hud
 @export var ui: CanvasLayer
-@export var irl_new_shop_items_indicator: Label3D
 @export var unread_label: Label
 @export var click_sound: AudioStreamPlayer
 var new_shop_items := true
-		
-		
+
+
 func _ready() -> void:
+	Global.pc_ui = self
+	
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
@@ -84,7 +84,7 @@ func exit() -> void:
 	await t.finished
 	
 	email_app.hide()
-	desk.pc_interaction_camera_exit_transition()
+	Global.desk.pc_interaction_camera_exit_transition()
 	Events.pc_state_change.emit(false)
 	hide()
 

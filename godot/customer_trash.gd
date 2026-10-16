@@ -13,6 +13,7 @@ signal trash_bag_taken(customer_trash: CustomerTrash)
 
 var load_token: ResourceBackgroundLoaderToken
 var hint_pop_animated_sprite_3d_ready: bool
+var _hint_pop_animated_sprite_3d_relative_position: Vector3
 
 # just a thing to check so we cant spam interact and cause weird stuff with
 # viewmodel animation
@@ -25,6 +26,8 @@ var being_slow := false
 func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 
+	_hint_pop_animated_sprite_3d_relative_position = hint_pop_animated_sprite_3d.global_position - global_position
+	
 	# briefly disable on spawn so if we're dropping it we cant accidentally
 	# interact with it as it falls
 	interactable.visible = false
@@ -52,7 +55,7 @@ func _exit_tree() -> void:
 	# Unload just in case!
 	Global.resource_background_loader.uncache_resource(load_token)
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var player: Player = Global.player
 
 	if global_position.distance_to(player.global_position) <= activation_distance:
@@ -72,6 +75,9 @@ func _process(_delta: float) -> void:
 		if hint_pop_animated_sprite_3d_ready:
 			hint_pop_animated_sprite_3d.play("Pop")
 			hint_pop_animated_sprite_3d.visible = true
+
+	hint_pop_animated_sprite_3d.global_position = global_position + _hint_pop_animated_sprite_3d_relative_position
+	hint_pop_animated_sprite_3d.global_rotation = Vector3.ZERO
 
 func _on_interacted() -> void:
 	if Global.holding_trash || already_interacted || Global.holding_ingredients:

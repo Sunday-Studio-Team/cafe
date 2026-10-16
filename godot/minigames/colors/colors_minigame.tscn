@@ -441,10 +441,13 @@ layout_mode = 2
 [node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=613272079]
 stream = ExtResource("9_uaykq")
 volume_db = 5.0
+bus = &"Sfx"
 
 [node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=1992806125]
 stream = ExtResource("10_xs2qy")
 volume_db = -10.0
+bus = &"Sfx"
 
 [node name="PromptPrintSound" type="AudioStreamPlayer" parent="." unique_id=1099527006]
 stream = SubResource("AudioStreamRandomizer_aq73i")
+bus = &"Sfx"

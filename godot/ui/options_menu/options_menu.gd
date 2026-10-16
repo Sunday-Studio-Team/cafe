@@ -6,6 +6,7 @@ extends Node
 @export var _overall_volume_slider_view: OptionsMenuSliderView
 @export var _music_volume_slider_view: OptionsMenuSliderView
 @export var _voice_volume_slider_view: OptionsMenuSliderView
+@export var _sfx_volume_slider_view: OptionsMenuSliderView
 @export var _graphics_preset_option_view: OptionsMenuOptionView
 @export var _window_mode_option_view: OptionsMenuOptionView
 @export var _vsync_mode_option_view: OptionsMenuOptionView
@@ -106,6 +107,12 @@ func _setup_option_views() -> void:
 	_voice_volume_slider_view.set_slider_default_value(_options_data.VOICE_VOLUME_DEFAULT)
 	_voice_volume_slider_view.set_slider_value(_options_data.voice_volume)
 	_voice_volume_slider_view.changed_value.connect(_on_voice_volume_slider_view_changed_value)
+
+	_sfx_volume_slider_view.set_label("SFX Volume")
+	_sfx_volume_slider_view.set_slider_min_max_values(_options_data.VOLUMES_RATIO_MIN, _options_data.VOLUMES_RATIO_MAX, _options_data.VOLUMES_RATIO_STEP)
+	_sfx_volume_slider_view.set_slider_default_value(_options_data.VOICE_VOLUME_DEFAULT)
+	_sfx_volume_slider_view.set_slider_value(_options_data.sfx_volume)
+	_sfx_volume_slider_view.changed_value.connect(_on_sfx_volume_slider_view_changed_value)
 	
 	_graphics_preset_option_view.set_label("Graphics Preset")
 	_graphics_preset_option_view.set_dropdown_options(_graphics_option_presets)
@@ -201,6 +208,10 @@ func _on_music_volume_slider_view_changed_value(value: float) -> void:
 
 func _on_voice_volume_slider_view_changed_value(value: float) -> void:
 	_options_data.voice_volume = value
+	_apply_options_deferred()
+
+func _on_sfx_volume_slider_view_changed_value(value: float) -> void:
+	_options_data.sfx_volume = value
 	_apply_options_deferred()
 
 func _on_graphics_preset_option_view_changed_option(index: int) -> void:

@@ -203,6 +203,7 @@ shape = SubResource("RectangleShape2D_vn1tu")
 [node name="SplashSound" type="AudioStreamPlayer2D" parent="Bucket" unique_id=1715966103]
 scale = Vector2(2.4390242, 2.0618556)
 stream = ExtResource("7_eeqbd")
+bus = &"Sfx"
 
 [node name="Mop" type="Sprite2D" parent="." unique_id=1097458666 node_paths=PackedStringArray("bubble_particles", "splash_sound", "mop_range")]
 z_index = 5
@@ -246,10 +247,12 @@ animation = &"Idle"
 [node name="ScrubSound" type="AudioStreamPlayer2D" parent="Mop" unique_id=185475810]
 rotation = 0.2485773
 stream = SubResource("AudioStreamRandomizer_621mk")
+bus = &"Sfx"
 
 [node name="PuddleShrinkSound" type="AudioStreamPlayer2D" parent="Mop" unique_id=319943381]
 rotation = 0.2485773
 stream = SubResource("AudioStreamRandomizer_qgn5y")
+bus = &"Sfx"
 
 [node name="ComicOverlay" type="Sprite2D" parent="." unique_id=1943789029]
 z_index = 7

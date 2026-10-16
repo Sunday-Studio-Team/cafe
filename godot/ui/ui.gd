@@ -90,24 +90,15 @@ func _ready() -> void:
 			Events.machine_exit_button_pressed.emit()
 	)
 
-	# we automatically do some stuff whenever our points change,
-	# so we mute + hide that stuff
-	# while we reset our points @ the start of each day lol
-	var points_sound_volume := lose_points_sound.volume_db
-	lose_points_sound.volume_linear = 0
-
 	# we wait here to make sure some global vars like profit goal
 	# get set before we show them
+	# NOTE: does this still make sense ?
 	await get_tree().process_frame
 
 	if Global.playing_tutorial or Global.day < 2:
 		cctv_indicator.hide()
 	else:
 		cctv_indicator.show()
-
-	# (we muted + hid these earlier, now we unmute and show)
-	await get_tree().create_timer(2, false).timeout
-	lose_points_sound.volume_db = points_sound_volume
 
 
 func _physics_process(_delta: float) -> void:
@@ -212,7 +203,7 @@ func update_interactable_ui() -> void:
 				owned_whipped_cream = owned_item
 			elif owned_item.item_id == "air_freshener":
 				owned_air_freshener = owned_item
-				
+
 		if hovered_interactable.interactable_id == &"disarm_camera" && owned_whipped_cream == null:
 			interactable_indicator.hide()
 
@@ -409,6 +400,11 @@ func _on_alert_posted(
 
 
 func play_score_update_sounds(score_type: ScoreType, new_value: float, old_value: float) -> void:
+	# Don't play sounds if (NOT in tutorial AND shift not started)
+	# This is because we set rating at the start of the game, and we don't want the sound to play.
+	if not Global.playing_tutorial and not Global.shift_started:
+		return
+
 	var change: float = new_value - old_value
 	if change > 0.0:
 		match score_type:
