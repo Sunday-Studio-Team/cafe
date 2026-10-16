@@ -6,16 +6,16 @@ extends CanvasLayer
 @export var _options_button: TextureButton
 @export var _options_menu_packed_scene: PackedScene
 
+@export_dir var _save_file_path: String
+
 
 func _ready() -> void:
 	Global.in_main_menu = true
 	
-	if FileAccess.file_exists("user://save_data.tres"):
-		print("Continue")
+	if FileAccess.file_exists(_save_file_path):
 		%NewGame.visible = false
 		%Continue.visible = true
 	else:
-		print("New Game")
 		%NewGame.visible = true
 		%Continue.visible = false
 	
@@ -23,7 +23,6 @@ func _ready() -> void:
 		func():
 			Global.in_main_menu = false
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-			print("Dapet ke main scene")
 	)
 	
 	continue_button.pressed.connect(
