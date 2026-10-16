@@ -1,15 +1,31 @@
 extends CanvasLayer
 
 @export var play_button: TextureButton
+@export var continue_button: TextureButton
 @export var quit_button: TextureButton
 @export var _options_button: TextureButton
 @export var _options_menu_packed_scene: PackedScene
 
+@export_dir var _save_file_path: String
+
 
 func _ready() -> void:
 	Global.in_main_menu = true
-
+	
+	if FileAccess.file_exists(_save_file_path):
+		play_button.visible = false
+		continue_button.visible = true
+	else:
+		play_button.visible = true
+		continue_button.visible = false
+	
 	play_button.pressed.connect(
+		func():
+			Global.in_main_menu = false
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
+	)
+	
+	continue_button.pressed.connect(
 		func():
 			Global.in_main_menu = false
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.LEVEL_SELECT)
