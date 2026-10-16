@@ -5,6 +5,9 @@ extends CanvasLayer
 @export var _options_button: TextureButton
 @export var _options_menu_packed_scene: PackedScene
 
+const DISCORD_URL := "https://discord.com/invite/WqhGAnZWCq"
+const INSTAGRAM_URL := "https://www.instagram.com/sundaystudiosgames/"
+
 
 func _ready() -> void:
 	Global.in_main_menu = true
@@ -21,7 +24,16 @@ func _ready() -> void:
 		func():
 			Events.quit_game_requested.emit(),
 	)
+	
+	$Buttons/Discord.pressed.connect(_open_discord)
+	$Buttons/Instagram.pressed.connect(_open_instagram)
 
 func _on_options_button_pressed() -> void:
 	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()
 	add_sibling(options_menu, true)
+
+func _open_discord() -> void:
+	OS.shell_open(DISCORD_URL)
+	
+func _open_instagram() -> void:
+	OS.shell_open(INSTAGRAM_URL)
