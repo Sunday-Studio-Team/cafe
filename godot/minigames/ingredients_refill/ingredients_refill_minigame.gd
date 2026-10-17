@@ -3,7 +3,7 @@ extends Node2D
 const MOVE_SPEED := 20
 # generally, change the timer in BeanSpawnTimer Node when adjusting this
 # ie make sure NUM_BEANS_TO_SPAWN * wait_time = ~2.0s
-const NUM_BEANS_TO_SPAWN := 6
+const NUM_BEANS_TO_SPAWN := 16
 const MAX_HORIZONTAL_BEAN_FORCE := 800.0
 const MAX_VERTICAL_BEAN_FORCE := 450.0
 
@@ -49,9 +49,10 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 
 var beans_in_cup: int = 0
 var beans_spawned: int = 0
-var gold_bean_already_spawned := false
-var bomb_bean_already_spawned := false
-var screw_bean_already_spawned := false
+var gold_beans_spawned := 0
+var bomb_beans_spawned := 0
+const MAX_GOLD = 1
+const MAX_BOMB = 4
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 var spawn_trajectory: Vector2
@@ -76,7 +77,6 @@ func _ready() -> void:
 	gold_bean = golden_bean_scene.instantiate()
 	bean_spawn_timer.timeout.connect(spawn_bean)
 	cup_area.body_entered.connect(catch_bean)
-	cup_area.body_exited.connect(spill_bean)
 	animation_player.play("sign_up")
 	bean_spawn_timer.wait_time = float(2) / float(NUM_BEANS_TO_SPAWN)
 	await first_proper_input
@@ -116,7 +116,7 @@ func _physics_process(delta: float) -> void:
 	#cup.position.y=1050
 	cup.rotation_degrees = lerp(cup.rotation_degrees, left_right_input * 7, delta * 5)
 
-	accuracy = beans_in_cup as float / NUM_BEANS_TO_SPAWN as float
+	accuracy = beans_in_cup as float / (NUM_BEANS_TO_SPAWN - bomb_beans_spawned) as float
 
 
 func calculate_cup_x_velocity(left_right_input: float) -> void:
@@ -157,6 +157,15 @@ func spawn_bean() -> void:
 		bag_shake_sound.stop()
 		await get_tree().create_timer(1.5, false).timeout
 		Global.refill_minigame_accuracy = accuracy
+		var ingredients_to_add = Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
+		print("%s / %s (%s)" % [beans_in_cup, NUM_BEANS_TO_SPAWN - bomb_beans_spawned, NUM_BEANS_TO_SPAWN])
+		print("----------")
+		print("we're adding %s ingredients" % ingredients_to_add)
+		print(
+				"(%s (the amount per bag) x %s (our minigame accuracy) x %s (the multiplier from items))"
+				% [Stats.current.ingredients_per_bag, Global.refill_minigame_accuracy, 1]
+		)
+		print("----------")
 		Events.minigame_end.emit()
 		return
 
@@ -164,34 +173,23 @@ func spawn_bean() -> void:
 	var random_int: int
 	var bean: RigidBody2D = null
 	#first do a check for the golden bean
+	@warning_ignore("integer_division")
+	@warning_ignore("narrowing_conversion")
 	random_int = randi_range(1, 100)
+	var chance_needed = 90 - max(0, 70 * (float(float(beans_spawned - 1) / float(NUM_BEANS_TO_SPAWN))))
 
-	if beans_spawned < 4 and gold_bean_already_spawned == false: #gold bean case
-		random_int = randi_range(1, 100)
-		if (beans_spawned == 0 and random_int < 5): #33
-			spawn_gold_bean(gold_bean)
-
-		elif (beans_spawned == 1 and random_int < 40): #40
-			spawn_gold_bean(gold_bean)
-
-		elif (beans_spawned == 2 and random_int < 60): #67
-			spawn_gold_bean(gold_bean)
-
-		elif (beans_spawned == 3): #100
-			spawn_gold_bean(gold_bean)
-		else:
-			spawn_normal_bean(bean)
-
-		return
-	else: #well, a golden bean has spawned in the past; decided between bomb and normal
-		random_int = randi_range(1, 100)
-		if (bomb_bean_already_spawned == true):
-			spawn_normal_bean(bean)
-		else:
-			if random_int < (33 + beans_spawned * 3):
-				spawn_bomb_bean(bomb_bean)
+	if beans_spawned < NUM_BEANS_TO_SPAWN: #bomb bean case
+		if (random_int > chance_needed):
+			if gold_beans_spawned < MAX_GOLD and bomb_beans_spawned > 1:
+				if randi_range(1, 100) < 33:
+					spawn_gold_bean(gold_bean.duplicate())
+				else:
+					spawn_bomb_bean(bomb_bean.duplicate())
 			else:
-				spawn_normal_bean(bean)
+				spawn_bomb_bean(bomb_bean.duplicate())
+		else:
+			spawn_normal_bean(bean)
+		return
 
 	return
 
@@ -210,7 +208,7 @@ func spawn_normal_bean(bean: RigidBody2D) -> void:
 
 
 func spawn_gold_bean(bean: RigidBody2D) -> void:
-	gold_bean_already_spawned = true
+	gold_beans_spawned += 1
 	bean = golden_bean_scene.instantiate()
 	bean.gravity_scale = 0
 	bean.global_position = pour_point.global_position
@@ -225,12 +223,12 @@ func spawn_gold_bean(bean: RigidBody2D) -> void:
 
 
 func spawn_bomb_bean(bean: RigidBody2D) -> void:
-	bomb_bean_already_spawned = true
+	bomb_beans_spawned += 1
 	bean.gravity_scale = 1
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
-	var _horizontal_component = clampf(spawn_trajectory.x + 100, -850.0, -350.0)
+	var _horizontal_component = clampf(spawn_trajectory.x + 150, -850.0, -350.0)
 
 	bean.apply_impulse(Vector2(_horizontal_component, spawn_trajectory.y)) # applies horizontal impulse
 
@@ -261,7 +259,7 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			gain_score_sound.play()
 			gain_score_sound.pitch_scale += 0.05
 			collected_beans.append(bean) #append the bean to collected_beans array
-
+	bean.queue_free()
 
 func spill_bean(bean: PhysicsBody2D) -> void:
 	if not allow_moving_cup: return

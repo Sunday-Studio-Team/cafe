@@ -38,8 +38,8 @@ func _physics_process(delta: float) -> void:
 		if not offset_tween and sprite_2d.offset.y != 0:
 			offset_tween = create_tween()
 			offset_tween.tween_property(sprite_2d,"offset", Vector2.ZERO,0.2)
-		
+		linear_velocity.x = 0
 		if gravity_scale == 0: gravity_scale = 0.5
-		gravity_scale = clamp(gravity_scale*1.09,0.5,2)
+		gravity_scale = clamp(gravity_scale*1.1244634,0.5,4)
 var offset_tween:Tween
 	
