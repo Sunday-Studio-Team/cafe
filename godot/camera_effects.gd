@@ -15,7 +15,7 @@ const BOB_FREQUENCY: float = 3.0
 const SHAKE_FADE_SPEED: float = 5.0
 const MAX_SHAKE_AMOUNT: float = 1.0
 
-const MAX_PITCH_DEGREES: float = 2.5
+const MAX_PITCH_DEGREES: float = 1.5
 const MAX_ROLL_DEGREES: float = 2.5
 
 var _current_shake_strength: float = 0.0
@@ -35,21 +35,21 @@ func trigger_shake() -> void:
 func _physics_process(delta: float) -> void:
 	position = Vector3.ZERO
 	rotation = Vector3.ZERO
-	
+
 	if enable_tilt:
 		var player_velocity: Vector3 = player.velocity
 		var player_horizontal_velocity_length: float = Vector2(player_velocity.x, player_velocity.z).length()
 
 		# (default can be higher than sprint if we have the roller skates)
 		var max_speed: float = max(Stats.current.default_move_speed, Stats.current.sprint_move_speed)
-		
+
 		var speed_ratio: float = player_horizontal_velocity_length / max_speed
 
 		var global_forward_direction: Vector3 = -global_transform.basis.z
 		var move_dir_to_forward_dir_dot: float = player_velocity.normalized().dot(global_forward_direction)
 		var forward_tilt_ratio: float = move_dir_to_forward_dir_dot * speed_ratio
 		rotation.x -= forward_tilt_ratio * deg_to_rad(MAX_PITCH_DEGREES)
-		
+
 		var global_right_direction: Vector3 = global_transform.basis.x
 		var move_dir_to_right_dir_dot: float = player_velocity.normalized().dot(global_right_direction)
 		var side_tilt_ratio: float = move_dir_to_right_dir_dot * speed_ratio
