@@ -381,6 +381,7 @@ func _set_customer(new_customer: Customer) -> void:
 			new_customer.override_material.albedo_texture = new_customer.customer_sprite_resource.alternate_desk_sprite
 		customer_arrived = true
 	else:
+		animation_player.stop()
 		ordered_drink_name_label.hide()
 		order_breakdown.hide()
 		waiting_for_response = false
@@ -847,7 +848,7 @@ func break_down(specific_repair_minigame_name: String="") -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
-	
+
 	if specific_repair_minigame_name != "":
 		next_repair_minigame = specific_repair_minigame_name
 	else:
@@ -934,7 +935,7 @@ func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
 	Events.minigame_end.connect(clean_up_spill)
 	Events.minigame_cancelled.connect(cancel_clean_spill)
-	
+
 	Global.tutorial_day_3_spill_interacted = true
 
 
