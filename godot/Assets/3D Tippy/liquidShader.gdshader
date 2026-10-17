@@ -4,6 +4,7 @@ render_mode cull_disabled,shadows_disabled;
 
 uniform float turbulence_strength: hint_range(0.0, 0.5) = 0.00;
 uniform float turbulence_speed: hint_range(0.0, 20.0) = 6.0;
+uniform float wave_freq: hint_range(0.0, 20.0) = 6.0;
 
 uniform float liquid_height = 0.5;
 // ANCHOR: surface_color
@@ -40,15 +41,16 @@ void vertex() {
 	vec3 rotated_vert_z = (rotate_z(1.6) * vec4(VERTEX, 1.0)).xyz;
 	vec3 rotated_vert_x = (rotate_x(-1.6) * vec4(VERTEX, 1.0)).xyz;
 
-	float wave_sample = (VERTEX.x * 6.0) + (VERTEX.z * 6.0) + (TIME * turbulence_speed);
-	float turbulence = sin(wave_sample) * cos(wave_sample * 0.7) * turbulence_strength;
-	
-	
+	float wave_sample_initial = (VERTEX.x * wave_freq) + (VERTEX.z * wave_freq) + (TIME * turbulence_speed);
+	float turbulence_initial = sin(wave_sample_initial) * cos(wave_sample_initial * 0.7) * turbulence_strength;
 	
 	vec3 vert = (rotated_vert_z + rotated_vert_x) + VERTEX;
+	float positional_change =  (MODEL_MATRIX * vec4(vert, 1.0)).y - MODEL_MATRIX[3].y - VERTEX.y;
 	
-	
-	vert.y += turbulence * 20.0;
+	float wave_sample = (VERTEX.x * wave_freq) + (VERTEX.z * wave_freq) + (TIME * turbulence_speed + (positional_change * 0.01));
+	float turbulence = sin(wave_sample) * cos(wave_sample * 0.7) * turbulence_strength;
+		
+	vert.y += turbulence * 3.0;
 	y_coordinate = (MODEL_MATRIX * (vec4(vert, 1.0))).y - MODEL_MATRIX[3].y;
 }
 
