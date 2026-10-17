@@ -8,7 +8,8 @@ signal interacted
 # this is like the interacted signal but it gets emitted when we pres Q instead of E .
 signal requested_use_active_item
 
-# For checking unique interactables
+## used to identify each interactable for logic stuff
+## (DONT change this)
 @export var interactable_id: StringName
 ## the name that will show in UI for this interactable
 @export var display_name: String

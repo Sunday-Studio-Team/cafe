@@ -21,6 +21,7 @@ var _fast_forward_enabled: bool = false
 var _holding_skip: bool
 var _hold_progress_ratio: float
 
+
 func _ready() -> void:
 	_prompt_visibility_timer = Timer.new()
 	_prompt_visibility_timer.autostart = false
@@ -31,13 +32,14 @@ func _ready() -> void:
 	_skip_progress_bar.max_value = 1.0
 	_skip_progress_bar.step = 0.01
 	_skip_progress_bar.min_value = 0.0
-	
+
 	modulate.a = 0.0
-	
+
 	_update_fast_forward_indicator()
 	_update_skip_progress_bar()
 
-func _process(delta: float) -> void:
+
+func _physics_process(delta: float) -> void:
 	if Global.in_ui:
 		# Allow ffwd/skip during cutscenes in minigames, machine UI, and loadout menu.
 		if !Global.minigame_active and !Global.in_machine_ui and !Global.in_loadout_menu:
@@ -47,16 +49,16 @@ func _process(delta: float) -> void:
 				Engine.time_scale = 1.0
 				_update_fast_forward_indicator()
 			return
-	
+
 	if Global.tutorial_manager.is_in_skippable_cinematic:
 		visible = true
-		
+
 		if Input.is_anything_pressed():
 			_show_prompt()
-		
+
 		if _fast_forward_enabled:
 			_show_prompt()
-		
+
 		if Input.is_action_just_pressed("interact"):
 			if _fast_forward_enabled:
 				_show_prompt()
@@ -67,7 +69,7 @@ func _process(delta: float) -> void:
 				_fast_forward_enabled = true
 				Engine.time_scale = _fast_forward_multiplier
 				_update_fast_forward_indicator()
-		
+
 		if Input.is_action_pressed("use_item"):
 			_show_prompt()
 			_holding_skip = true
@@ -80,18 +82,19 @@ func _process(delta: float) -> void:
 			_hold_progress_ratio -= (1.0 / _hold_drop_duration) * delta
 		_hold_progress_ratio = clamp(_hold_progress_ratio, 0.0, 1.0)
 		_update_skip_progress_bar()
-		
+
 		if _hold_progress_ratio >= 1.0:
 			Global.tutorial_manager.skip_part_requested = true
 			_hold_progress_ratio = 0.0
-		
+
 	else:
 		visible = false
-		
+
 		if _fast_forward_enabled:
 			_fast_forward_enabled = false
 			Engine.time_scale = 1.0
 			_update_fast_forward_indicator()
+
 
 func _show_prompt() -> void:
 	if _prompt_visibility_timer.time_left == 0:
@@ -101,8 +104,10 @@ func _show_prompt() -> void:
 	_skip_hotkey_label.text = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
 	_fast_forward_hotkey_label.text = OS.get_keycode_string(SaveDataManager.get_options_data().interact_action_physical_keycode)
 
+
 func _update_skip_progress_bar() -> void:
 	_skip_progress_bar.value = _hold_progress_ratio
+
 
 func _update_fast_forward_indicator() -> void:
 	if _fast_forward_enabled:
@@ -111,6 +116,7 @@ func _update_fast_forward_indicator() -> void:
 	else:
 		_fast_forward_active_indicator.visible = false
 		_fast_forward_not_active_indicator.visible = true
+
 
 func _on_prompt_visibility_timer_timeout() -> void:
 	create_tween().tween_property(self, "modulate:a", 0.0, _prompt_fade_away_duration)
