@@ -1,17 +1,17 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://wcmqw2vunn6e"]
 
 [ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://resources/items/item.gd" id="1_gooww"]
-[ext_resource type="Texture2D" uid="uid://txjl7srkqfxi" path="res://sprites/items/air_freshener.png" id="1_vofp5"]
+[ext_resource type="Texture2D" uid="uid://dkxmjph1jagx1" path="res://sprites/items/comic_book_stand.png" id="1_imdvm"]
 
 [resource]
 script = ExtResource("1_gooww")
 item_id = "air_freshener"
-name = "Air Freshener"
+name = "Comic Book Stand"
 description_at_levels = Dictionary[int, String]({
 1: "Current customers wait 20s longer.",
 2: "Make all current customers wait longer."
 })
-icon = ExtResource("1_vofp5")
+icon = ExtResource("1_imdvm")
 price_at_levels = Dictionary[int, float]({
 1: 5.0,
 2: 3.0

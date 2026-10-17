@@ -271,7 +271,7 @@ func update_interactable_ui() -> void:
 			var item_prompt: String = ""
 
 			var use_item_keybind: String = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode)
-			item_prompt = "[%s] AIR FRESHENER" % use_item_keybind
+			item_prompt = "[%s] HAND OUT COMICS" % use_item_keybind
 
 			if owned_air_freshener.can_be_used:
 				item_prompt = "%s%s%s" % [USABLE_ITEM_BBCODE_OPEN, item_prompt, USABLE_ITEM_BBCODE_CLOSE]
