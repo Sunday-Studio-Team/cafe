@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="8_vx1ja"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="9_omxmy"]
 [ext_resource type="Texture2D" uid="uid://dfal061fim05l" path="res://sprites/tablet_ui/rating/tablet_rating_needle.png" id="10_jcu5s"]
+[ext_resource type="Texture2D" uid="uid://djparycg4t5kx" path="res://sprites/tablet_ui/rating/tablet_rating_icon.png" id="12_vx1ja"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vn1tu"]
 atlas = ExtResource("1_h00bf")
@@ -176,6 +177,15 @@ offset_transform_scale = Vector2(0.75, 0.75)
 offset_transform_rotation = -2.3561945
 offset_transform_pivot_ratio = Vector2(0.5, 0.635)
 texture = ExtResource("10_jcu5s")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="RatingIcon" type="TextureRect" parent="MarginContainer/Screen/RatingMeter" unique_id=925402270]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 0.11)
+offset_transform_scale = Vector2(0.43, 0.43)
+texture = ExtResource("12_vx1ja")
 expand_mode = 3
 stretch_mode = 5
 
