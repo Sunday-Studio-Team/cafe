@@ -14,7 +14,7 @@ const STRIDE_LENGTH := 1.25
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
 @export var customer_trash: Node3D
-@export var throw_trash_sound: AudioStreamPlayer3D
+@export var throw_trash_sound: AudioStreamPlayer
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
