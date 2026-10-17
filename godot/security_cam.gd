@@ -126,11 +126,12 @@ func _physics_process(_delta: float) -> void:
 					player_in_spotlight = true
 					break
 
-				elif collider == Global.tippy_boss:
-					if Global.tippy_boss.state == TippyBoss.State.CHASING:
-						Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
-						grace_timer.start()
-						break
+				# (experimental) disabling this
+				# elif collider == Global.tippy_boss:
+				# 	if Global.tippy_boss.state == TippyBoss.State.CHASING:
+				# 		Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
+				# 		grace_timer.start()
+				# 		break
 
 	if player_in_spotlight:
 		if not _player_in_spotlight_tween or not _player_in_spotlight_tween.is_running():
@@ -268,7 +269,7 @@ func _on_requested_use_active_item():
 
 	if whipped_cream == null or !whipped_cream.can_be_used:
 		return
-	
+
 	Events.play_viewmodel_animation.emit("cream_use")
 	Global.put_active_item_on_cooldown(whipped_cream)
 	await Events.whipped_cream_animation_shot
