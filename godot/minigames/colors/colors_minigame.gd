@@ -6,7 +6,7 @@ const DELAY_AFTER_PRESSING_BUTTON := 0.75
 
 @export var _minigame_startup_overlay: MinigameStartupOverlay
 @export var buttons: Array[ColorsMinigameButton]
-@export var needed_successes: int = 3
+@export var needed_successes: int = 2
 @export var prompt_text_box: RichTextLabel
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
