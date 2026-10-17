@@ -179,7 +179,7 @@ func spawn_bean() -> void:
 	var chance_needed = 90 - max(0, 70 * (float(float(beans_spawned - 1) / float(NUM_BEANS_TO_SPAWN))))
 
 	if beans_spawned < NUM_BEANS_TO_SPAWN: #bomb bean case
-		if (random_int > chance_needed):
+		if bomb_beans_spawned < MAX_BOMB and (random_int > chance_needed):
 			if gold_beans_spawned < MAX_GOLD and bomb_beans_spawned > 1:
 				if randi_range(1, 100) < 33:
 					spawn_gold_bean(gold_bean.duplicate())
