@@ -190,6 +190,11 @@ func confirm_and_hide_menu() -> void:
 		item.unapply_stats()
 
 	Global.owned_items.assign(equipped_items)
+	
+	SaveDataManager.save_data.equipped_item_ids.clear()
+	for item in Global.owned_items:
+		SaveDataManager.save_data.equipped_item_ids.append(item.item_id)
+	SaveDataManager.save_game_to_file()
 
 	# apply new items
 	for item in Global.owned_items:
