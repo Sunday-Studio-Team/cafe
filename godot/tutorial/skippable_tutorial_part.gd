@@ -11,7 +11,6 @@ enum TutorialPartEnum {
 	DAY_1_5,
 	DAY_1_6,
 	DAY_1_7,
-	DAY_1_8,
 	DAY_2_0,
 	DAY_2_1,
 	DAY_2_2,
@@ -294,27 +293,6 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_49_1")
 
 			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_49", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-
-			_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-			_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-			_tutorial_manager._cinematic_camera.cinematic_bars.hide_bars(1.0)
-			await _tutorial_manager._cinematic_camera.disable_cinematic_camera(1.0)
-		TutorialPartEnum.DAY_1_8:
-			_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
-			_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
-			_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
-			_tutorial_manager._cinematic_camera.cinematic_bars.show_bars(0.5)
-
-			if true:
-				var tween: Tween = create_tween()
-				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_position", _tutorial_manager._day_0_ingredients_bar_preview_position.global_position, 1.0)
-				tween.set_parallel()
-				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_rotation", _tutorial_manager._day_0_ingredients_bar_preview_position.global_rotation, 1.0)
-				await tween.finished
-
-			await get_tree().create_timer(1.0).timeout
-			_tutorial_manager._cinematic_camera.play_animation("day_1_training_50_0")
-			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_50", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
 			_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
@@ -761,8 +739,6 @@ func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 		TutorialPartEnum.DAY_1_6:
 			_tutorial_manager._player_ui_sub_viewport_container.set_allow_input(true)
 		TutorialPartEnum.DAY_1_7:
-			pass
-		TutorialPartEnum.DAY_1_8:
 			pass
 		TutorialPartEnum.DAY_2_0:
 			Global.player.override_position_rotation(_tutorial_manager._day_2_sato_at_locker_position.global_position, _tutorial_manager._day_2_sato_at_locker_position.global_rotation)
