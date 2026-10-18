@@ -1,7 +1,7 @@
 class_name ClickableLockerItem
 extends Node3D
 
-@export var item:Item
+@export var item: Item
 @export var prop_shower_hider: PropHider
 @export var area: Area3D
 
@@ -28,6 +28,6 @@ func on_unhover():
 
 func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if hovered and event is InputEventMouseButton:
-		var mouse_event = (event as InputEventMouseButton)
+		var mouse_event: InputEventMouseButton = (event as InputEventMouseButton)
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.pressed:
 			Global.item_loadout_menu._on_available_item_pressed(item,self)

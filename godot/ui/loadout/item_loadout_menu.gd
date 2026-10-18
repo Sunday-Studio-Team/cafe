@@ -12,7 +12,6 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 @export_category("Nodes")
 @export var root: Control
 
-@export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
 @export var confirm_button: TextureButton
 @export var locker_open_sound: AudioStreamPlayer
@@ -39,7 +38,6 @@ func _ready() -> void:
 	visible = false
 
 	Global.item_loadout_menu = self
-	populate()
 
 	locker_interactable = Global.item_locker.interactable
 	locker_model = Global.item_locker.item_locker_model
@@ -55,6 +53,7 @@ func _ready() -> void:
 	visibility_changed.connect(
 			func():
 				if visible:
+					populate()
 					locker_animation_player.stop()
 					root.offset_transform_scale = Vector2.ZERO
 					locker_open_sound.play()
@@ -90,7 +89,14 @@ func populate() -> void:
 		var equipped_item_button: LoadoutMenuElement = element_scene.instantiate()
 		if Global.owned_items.size() >= i + 1:
 			equipped_item_button.item = Global.owned_items[i]
-			equipped_item_button.connected_locker_item = locker.connected_items[i]
+			
+			# Find the connected locker prop for the equipped item.
+			for clickable_locker_item: ClickableLockerItem in Global.item_locker.all_clickable_locker_items:
+				if clickable_locker_item.item.item_id == equipped_item_button.item.item_id:
+					equipped_item_button.connected_locker_item = clickable_locker_item
+			if equipped_item_button.connected_locker_item == null:
+				printerr("No matching prop found for equipped_item_button.item %s.", equipped_item_button.item)
+			
 		equipped_item_button.pressed.connect(
 				func():
 					_on_equipped_slot_pressed(equipped_item_button)
@@ -148,7 +154,6 @@ func confirm_and_hide_menu() -> void:
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
 		if equipped_item_button.item != null and equipped_item_button.connected_locker_item != null:
 			equipped_items.append(equipped_item_button.item)
-			locker.connected_items.append(equipped_item_button.connected_locker_item)
 
 	# unapply existing items
 	for item in Global.owned_items:
@@ -171,7 +176,7 @@ func confirm_and_hide_menu() -> void:
 	t.tween_property(root, "offset_transform_scale", Vector2.ZERO, 0.1)
 	t.tween_property(root, "offset_transform_position_ratio:y", 0.25, 0.1)
 	await t.finished
-	await locker.interaction_camera_exit_transition()
+	await Global.item_locker.interaction_camera_exit_transition()
 	hide()
 
 

@@ -21,9 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://bmu4lp4tfpgqa" path="res://Assets/sato_locker/Name Tag.glb" id="13_dt742"]
 [ext_resource type="AudioStream" uid="uid://bdpud3yqwthf5" path="res://audio/locker/locker_shaking_1.wav" id="14_6i5wn"]
 [ext_resource type="AudioStream" uid="uid://dcb6d0i0ow1ph" path="res://audio/locker/locker_shaking_2.wav" id="15_b0jqr"]
-[ext_resource type="AudioStream" uid="uid://c48li08hfo604" path="res://audio/locker/locker_shaking_3.wav" id="16_abt02"]
 [ext_resource type="Texture2D" uid="uid://dlc3hwa4bxq0w" path="res://Assets/sato_locker/Sato's Locker w Items _v1_sattoo bag!_Base_color.png" id="15_fbfyi"]
 [ext_resource type="Texture2D" uid="uid://c7vi0kqmopiec" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Apron and Mirror_Base_color.png" id="16_4eeye"]
+[ext_resource type="AudioStream" uid="uid://c48li08hfo604" path="res://audio/locker/locker_shaking_3.wav" id="16_abt02"]
 [ext_resource type="Texture2D" uid="uid://dpm0sw5akepcv" path="res://Assets/sato_locker/Sato's Locker w Items _v1_cathat1.png" id="17_85cmv"]
 [ext_resource type="Texture2D" uid="uid://bk5466j128178" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catface1.png" id="18_88prn"]
 [ext_resource type="Texture2D" uid="uid://dlmw2recd2if1" path="res://Assets/sato_locker/Sato's Locker w Items _v1_cat.png" id="19_58jqr"]
@@ -41,6 +41,8 @@
 [ext_resource type="Texture2D" uid="uid://cb2332e0c4vm5" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Skates_Roughness.png" id="31_8qhbg"]
 [ext_resource type="Texture2D" uid="uid://dbclkaihfat82" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Supper Scrubber_BaseColor.png" id="33_em3tt"]
 [ext_resource type="Texture2D" uid="uid://b0a6gfbiq3l15" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Supper Scrubber_Roughness.png" id="34_xxxkd"]
+[ext_resource type="Resource" uid="uid://bxbcn6yks4tpc" path="res://resources/items/teleporter.tres" id="35_fbfyi"]
+[ext_resource type="Resource" uid="uid://wcmqw2vunn6e" path="res://resources/items/air_freshener.tres" id="36_4eeye"]
 [ext_resource type="Texture2D" uid="uid://d0fcnsuy746ma" path="res://Assets/sato_locker/Sato's Locker w Items _v1_locker1_COL1_NoRust.png" id="36_c5iit"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ovvye"]
@@ -1615,20 +1617,22 @@ stream_0/stream = ExtResource("14_6i5wn")
 stream_1/stream = ExtResource("15_b0jqr")
 stream_2/stream = ExtResource("16_abt02")
 
-[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("interactable", "item_locker_model", "animation_player")]
+[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("interactable", "item_locker_model", "animation_player", "camera_spot", "body", "all_clickable_locker_items")]
 script = ExtResource("1_g6nyj")
 interactable = NodePath("ManualScaler/Interactable")
 item_locker_model = NodePath("ManualScaler/Model")
 animation_player = NodePath("AnimationPlayer")
+camera_spot = NodePath("CameraSpot")
+body = NodePath("ManualScaler/StaticBody3D")
+all_clickable_locker_items = [NodePath("ManualScaler/Model/LockerItems/Frozen Tippy"), NodePath("ManualScaler/Model/LockerItems/Hammer"), NodePath("ManualScaler/Model/LockerItems/Airhorn"), NodePath("ManualScaler/Model/LockerItems/WhippedCream"), NodePath("ManualScaler/Model/LockerItems/IngredientBag"), NodePath("ManualScaler/Model/LockerItems/Bomb"), NodePath("ManualScaler/Model/LockerItems/Skates"), NodePath("ManualScaler/Model/LockerItems/Teleporter"), NodePath("ManualScaler/Model/LockerItems/AirFreshener"), NodePath("ManualScaler/Model/LockerItems/SuperScrubber")]
 
 [node name="ManualScaler" type="Node3D" parent="." unique_id=130028914]
 transform = Transform3D(0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ManualScaler" unique_id=983263623]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.179392e-08, 0.90000004, -2.1000001)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ManualScaler/StaticBody3D" unique_id=1112715788]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1000006, 0.8999999, 4.730679e-16)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.5518538e-14, 1.8, 6.42195e-07)
 shape = SubResource("BoxShape3D_ovvye")
 
 [node name="Interactable" type="Area3D" parent="ManualScaler" unique_id=1396942595 node_paths=PackedStringArray("mesh")]
@@ -1708,118 +1712,164 @@ mesh = SubResource("ArrayMesh_dq72r")
 transform = Transform3D(-0.055559676, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497514, 0.55770606, 2.5702512, -0.04804716)
 mesh = SubResource("ArrayMesh_ro66q")
 
-[node name="Frozen Tippy" parent="ManualScaler/Model" unique_id=1773171203 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, 0.3280964, 1.8516847, 0.32207015)
+[node name="LockerItems" type="Node3D" parent="ManualScaler/Model" unique_id=1135491237]
+
+[node name="Frozen Tippy" parent="ManualScaler/Model/LockerItems" unique_id=1773171203 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.3280964, 1.8516846, 0.32207015)
 item = ExtResource("6_dt742")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/Frozen Tippy/Area3D" parent_id_path=PackedInt32Array(1773171203, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Frozen Tippy/Area3D" parent_id_path=PackedInt32Array(1773171203, 134056438) index="0" unique_id=1033817306]
 shape = SubResource("BoxShape3D_v8p88")
 
-[node name="Hammer" parent="ManualScaler/Model" unique_id=1118132196 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Hammer" parent="ManualScaler/Model/LockerItems" unique_id=1118132196 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.26155043, 0.5458162, 0.38506094)
 item = ExtResource("7_e0bd6")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/Hammer" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/Hammer" index="0" unique_id=1773171203]
 transform = Transform3D(0.961137, 0.2660285, -0.07378627, 1.4901148e-08, 0.2672721, 0.963621, 0.2760717, -0.9261719, 0.25688508, 0, 0, 0)
 mesh = SubResource("ArrayMesh_xu1qm")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/Hammer/Area3D" parent_id_path=PackedInt32Array(1118132196, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Hammer/Area3D" parent_id_path=PackedInt32Array(1118132196, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(1, 0, 0, 0, 0.9999965, 0, 0, 0, 0.9999965, 0.038253635, 0.00033909082, -0.027169883)
 shape = SubResource("BoxShape3D_a3mt8")
 
-[node name="Airhorn" parent="ManualScaler/Model" unique_id=1118133177 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
-transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.023541575, 1.9961593, -0.45746404)
+[node name="Airhorn" parent="ManualScaler/Model/LockerItems" unique_id=1118133177 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.023541575, 1.9961592, -0.45746404)
 item = ExtResource("8_60wm3")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/Airhorn" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/Airhorn" index="0" unique_id=1773171203]
 transform = Transform3D(-0.88768077, 0.012102246, 0.46030042, 0.03977662, 0.99793315, 0.05047076, -0.45873815, 0.063111104, -0.8863275, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mcjje")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/Airhorn/Area3D" parent_id_path=PackedInt32Array(1118133177, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Airhorn/Area3D" parent_id_path=PackedInt32Array(1118133177, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(1, 0, 0, 0, 0.9999965, 0, 0, 0, 0.9999965, 0.12980826, 0.25571108, 0.033579856)
 shape = SubResource("BoxShape3D_emdg0")
 
-[node name="WhippedCream" parent="ManualScaler/Model" unique_id=1122378018 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="WhippedCream" parent="ManualScaler/Model/LockerItems" unique_id=1122378018 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.04468177, 1.0411447, -0.43216318)
 item = ExtResource("9_6i5wn")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/WhippedCream" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/WhippedCream" index="0" unique_id=1773171203]
 transform = Transform3D(0.7606706, 0.024880558, -0.64866096, 9.313226e-10, 0.9992652, 0.038328607, 0.649138, -0.02915545, 0.76011163, 0, 0, 0)
 mesh = SubResource("ArrayMesh_v8p88")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/WhippedCream/Area3D" parent_id_path=PackedInt32Array(1122378018, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/WhippedCream/Area3D" parent_id_path=PackedInt32Array(1122378018, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(1, 0, 0, 0, 0.9999965, 0, 0, 0, 0.9999965, 0.01884539, 0.25571108, -0.01759842)
 shape = SubResource("BoxShape3D_e46jj")
 
-[node name="IngredientBag" parent="ManualScaler/Model" unique_id=1669001453 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22672178, 1.0512545, -0.17332944)
+[node name="IngredientBag" parent="ManualScaler/Model/LockerItems" unique_id=1669001453 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22672176, 1.0512545, -0.17332944)
 item = ExtResource("10_b0jqr")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/IngredientBag" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/IngredientBag" index="0" unique_id=1773171203]
 transform = Transform3D(0.5425788, -0.009220522, 0.83995426, -0.035205673, 0.99881154, 0.0337059, -0.8392668, -0.047859266, 0.54160935, 0, 0, 0)
 mesh = SubResource("ArrayMesh_c3u3i")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/IngredientBag/Area3D" parent_id_path=PackedInt32Array(1669001453, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/IngredientBag/Area3D" parent_id_path=PackedInt32Array(1669001453, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, 0.018845394, 0.17169583, -0.0025278032)
 shape = SubResource("BoxShape3D_fbfyi")
 
-[node name="Bomb" parent="ManualScaler/Model" unique_id=1197535177 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110870115, 1.9389693, -0.045111064)
+[node name="Bomb" parent="ManualScaler/Model/LockerItems" unique_id=1197535177 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110870115, 1.9389691, -0.045111064)
 item = ExtResource("29_xu1qm")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/Bomb" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/Bomb" index="0" unique_id=1773171203]
 transform = Transform3D(-0.6413011, -0.7672893, 1.4152589e-07, -0.27885804, 0.23306967, -0.9316205, 0.71482235, -0.5974493, -0.36343265, 0, 0, 0)
 mesh = SubResource("ArrayMesh_85cmv")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/Bomb/Area3D" parent_id_path=PackedInt32Array(1197535177, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Bomb/Area3D" parent_id_path=PackedInt32Array(1197535177, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990024, 0.19927812, 0.12007986)
 shape = SubResource("BoxShape3D_88prn")
 
-[node name="Skates" parent="ManualScaler/Model" unique_id=1229765571 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22602968, 0.14727, -0.34678254)
+[node name="Skates" parent="ManualScaler/Model/LockerItems" unique_id=1229765571 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22602966, 0.14727, -0.34678254)
 item = ExtResource("11_abt02")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/Skates" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/Skates" index="0" unique_id=1773171203]
 transform = Transform3D(0.6409209, 0, 0.767607, 0, 1, 0, -0.767607, 0, 0.6409209, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ayl2a")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/Skates/Area3D" parent_id_path=PackedInt32Array(1229765571, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Skates/Area3D" parent_id_path=PackedInt32Array(1229765571, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990013, 0.33373547, 0.106503695)
 shape = SubResource("BoxShape3D_uu8qk")
 
-[node name="Mesh_R" type="MeshInstance3D" parent="ManualScaler/Model/Skates" unique_id=84153896]
+[node name="Mesh_R" type="MeshInstance3D" parent="ManualScaler/Model/LockerItems/Skates" unique_id=84153896]
 transform = Transform3D(0.63537586, 1.5321293e-08, 0.7722029, 2.6758126e-08, 0.9999999, -2.6758126e-08, -0.77220297, -2.6758126e-08, 0.6353758, -0.24077155, 0, 0.17626148)
 mesh = SubResource("ArrayMesh_x5a5y")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates/Mesh_R" unique_id=1863931289]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/LockerItems/Skates/Mesh_R" unique_id=1863931289]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="SuperScrubber" parent="ManualScaler/Model" unique_id=1909818425 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Teleporter" parent="ManualScaler/Model/LockerItems" unique_id=630709873 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(0.52128136, 0, 0, 0, 0.52128136, 0, 0, 0, 0.52128136, 0.15841773, 2.810597, -0.053607244)
+item = ExtResource("35_fbfyi")
+prop_shower_hider = NodePath("Mesh/PropShowerHider")
+area = NodePath("Area3D")
+
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/Teleporter" index="0" unique_id=1773171203]
+transform = Transform3D(0.6409209, 0, 0.767607, 0, 1, 0, -0.767607, 0, 0.6409209, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ayl2a")
+
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Teleporter/Area3D" parent_id_path=PackedInt32Array(630709873, 134056438) index="0" unique_id=1033817306]
+transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990013, 0.33373547, 0.106503695)
+shape = SubResource("BoxShape3D_uu8qk")
+
+[node name="Mesh_R" type="MeshInstance3D" parent="ManualScaler/Model/LockerItems/Teleporter" unique_id=815956655]
+transform = Transform3D(0.63537586, 1.5321293e-08, 0.7722029, 2.6758126e-08, 0.9999999, -2.6758126e-08, -0.77220297, -2.6758126e-08, 0.6353758, -0.24077155, 0, 0.17626148)
+mesh = SubResource("ArrayMesh_x5a5y")
+
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/LockerItems/Teleporter/Mesh_R" unique_id=1003545828]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("11_abt02")
+
+[node name="AirFreshener" parent="ManualScaler/Model/LockerItems" unique_id=1727296348 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+transform = Transform3D(0.52128136, 0, 0, 0, 0.52128136, 0, 0, 0, 0.52128136, 0.20475344, 2.869193, -0.37809798)
+item = ExtResource("36_4eeye")
+prop_shower_hider = NodePath("Mesh/PropShowerHider")
+area = NodePath("Area3D")
+
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/AirFreshener" index="0" unique_id=1773171203]
+transform = Transform3D(0.6409209, 0, 0.767607, 0, 1, 0, -0.767607, 0, 0.6409209, 0, 0, 0)
+mesh = SubResource("ArrayMesh_ayl2a")
+
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/AirFreshener/Area3D" parent_id_path=PackedInt32Array(1727296348, 134056438) index="0" unique_id=1033817306]
+transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990013, 0.33373547, 0.106503695)
+shape = SubResource("BoxShape3D_uu8qk")
+
+[node name="Mesh_R" type="MeshInstance3D" parent="ManualScaler/Model/LockerItems/AirFreshener" unique_id=678255500]
+transform = Transform3D(0.63537586, 1.5321293e-08, 0.7722029, 2.6758126e-08, 0.9999999, -2.6758126e-08, -0.77220297, -2.6758126e-08, 0.6353758, -0.24077155, 0, 0.17626148)
+mesh = SubResource("ArrayMesh_x5a5y")
+
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/LockerItems/AirFreshener/Mesh_R" unique_id=1594459340]
+script = ExtResource("5_dqjxi")
+prop_item = ExtResource("11_abt02")
+
+[node name="SuperScrubber" parent="ManualScaler/Model/LockerItems" unique_id=1909818425 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0754869)
 item = ExtResource("12_8r07k")
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
-[node name="Mesh" parent="ManualScaler/Model/SuperScrubber" index="0" unique_id=1773171203]
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/SuperScrubber" index="0" unique_id=1773171203]
 transform = Transform3D(-1, 3.20668e-08, 3.8394086e-07, -3.253057e-08, 0.98594445, -0.16707426, -3.8390186e-07, -0.1670743, -0.9859443, 0, 0, 0)
 mesh = SubResource("ArrayMesh_47hrj")
 
-[node name="CollisionShape3D" parent="ManualScaler/Model/SuperScrubber/Area3D" parent_id_path=PackedInt32Array(1909818425, 134056438) index="0" unique_id=1033817306]
+[node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/SuperScrubber/Area3D" parent_id_path=PackedInt32Array(1909818425, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.0082001975, 1.4223574, -0.044971943)
 shape = SubResource("BoxShape3D_gyy7x")
 
@@ -1829,6 +1879,7 @@ mesh = SubResource("ArrayMesh_odeh7")
 
 [node name="Locker Door" type="MeshInstance3D" parent="ManualScaler/Model" unique_id=702353025]
 transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
+visible = false
 mesh = SubResource("ArrayMesh_p1kov")
 
 [node name="Name Tag" parent="ManualScaler/Model/Locker Door" unique_id=160599352 instance=ExtResource("13_dt742")]
@@ -1846,16 +1897,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -10.0
 
-[editable path="ManualScaler/Model"]
 [node name="CameraSpot" type="Camera3D" parent="." unique_id=923653526]
 transform = Transform3D(0.63607824, -0.13006878, 0.7605831, 0, 0.9856906, 0.16856486, -0.77162457, -0.10722043, 0.6269763, 1.3213853, 1.1567794, 0.28272855)
 fov = 100.0
 
-[editable path="ManualScaler/Model/Frozen Tippy"]
-[editable path="ManualScaler/Model/Hammer"]
-[editable path="ManualScaler/Model/Airhorn"]
-[editable path="ManualScaler/Model/WhippedCream"]
-[editable path="ManualScaler/Model/IngredientBag"]
-[editable path="ManualScaler/Model/Bomb"]
-[editable path="ManualScaler/Model/Skates"]
-[editable path="ManualScaler/Model/SuperScrubber"]
+[editable path="ManualScaler/Model/LockerItems/Frozen Tippy"]
+[editable path="ManualScaler/Model/LockerItems/Hammer"]
+[editable path="ManualScaler/Model/LockerItems/Airhorn"]
+[editable path="ManualScaler/Model/LockerItems/WhippedCream"]
+[editable path="ManualScaler/Model/LockerItems/IngredientBag"]
+[editable path="ManualScaler/Model/LockerItems/Bomb"]
+[editable path="ManualScaler/Model/LockerItems/Skates"]
+[editable path="ManualScaler/Model/LockerItems/Teleporter"]
+[editable path="ManualScaler/Model/LockerItems/AirFreshener"]
+[editable path="ManualScaler/Model/LockerItems/SuperScrubber"]

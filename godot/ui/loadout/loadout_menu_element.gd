@@ -5,7 +5,7 @@ extends TextureButton
 ## if true, this is one of the slots at the bottom showing equipped items
 var is_equipped_slot := false
 @export var texture_rect: TextureRect
-var connected_locker_item:ClickableLockerItem
+var connected_locker_item: ClickableLockerItem
 var item: Item:
 	set(new_item):
 		item = new_item
