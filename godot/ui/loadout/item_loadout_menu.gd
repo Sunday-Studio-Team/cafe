@@ -136,6 +136,7 @@ func _on_available_item_pressed(item_to_equip: Item, locker_item:ClickableLocker
 
 func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 	if slot.item:
+		Global.owned_items.erase(slot.item)
 		slot.item = null
 		slot.connected_locker_item.should_be_hidden = false
 		slot.connected_locker_item = null

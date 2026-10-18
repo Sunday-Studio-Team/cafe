@@ -16,7 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	visible = Global.unlocked_items.has(item) and not should_be_hidden
+	visible = Global.unlocked_items.has(item) and not (should_be_hidden or Global.owned_items.has(item))
 
 func on_hover():
 	hovered = true
