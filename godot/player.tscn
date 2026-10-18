@@ -50,6 +50,7 @@ stream_3/stream = ExtResource("12_606se")
 
 [node name="Player" type="CharacterBody3D" unique_id=1025923804 node_paths=PackedStringArray("camera", "aiming_ray", "ingredients_bag", "default_ingredients_bag_model", "large_ingredients_bag_model", "customer_trash", "throw_trash_sound", "bag_pickup_sound", "footstep_sound", "footstep_sfx_lockout_timer", "free_cam_visualizer", "roller_skates_dust_particles", "keychain_animation_player", "tippy_tablet_3d", "tippy_tablet_normal_position_rotation", "tippy_tablet_up_front_position_rotation")]
 collision_layer = 8
+input_ray_pickable = false
 script = ExtResource("1_4flbx")
 camera = NodePath("CameraController")
 aiming_ray = NodePath("CameraController/Camera3D/AimingRay")

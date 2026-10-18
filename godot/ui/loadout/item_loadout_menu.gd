@@ -14,7 +14,7 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 
 @export var available_items_container: GridContainer
 @export var equipped_items_container: GridContainer
-@export var confirm_button: Button
+@export var confirm_button: TextureButton
 @export var locker_open_sound: AudioStreamPlayer
 @export var locker_close_sound: AudioStreamPlayer
 # NOTE: OMG i never made this thing its own class cos it was only being used in
@@ -39,6 +39,7 @@ func _ready() -> void:
 	visible = false
 
 	Global.item_loadout_menu = self
+	populate()
 
 	locker_interactable = Global.item_locker.interactable
 	locker_model = Global.item_locker.item_locker_model
@@ -61,7 +62,6 @@ func _ready() -> void:
 					var t := create_tween().set_parallel()
 					t.tween_property(root, "offset_transform_scale", Vector2.ONE, 0.1).from(Vector2.ZERO)
 					t.tween_property(root, "offset_transform_position_ratio:y", 0, 0.1).from(0.25)
-					populate()
 				else:
 					locker_model.close_door()
 					locker_close_sound.play()
@@ -79,22 +79,18 @@ func _ready() -> void:
 
 func populate() -> void:
 	# delete anything we have in the scene for testing/from prev uses first
-	for child in available_items_container.get_children():
-		child.queue_free()
 	for child in equipped_items_container.get_children():
 		child.queue_free()
 
 	# if we dont wait here for the children to free, we'll get the wrong values when we try to rezise the grids
 	await get_tree().process_frame
 
-	for item in Global.unlocked_items:
-		if not Global.owned_items.has(item):
-			add_available_item_button(item)
 
 	for i in SaveDataManager.save_data.latest_unlocked_day:
 		var equipped_item_button: LoadoutMenuElement = element_scene.instantiate()
 		if Global.owned_items.size() >= i + 1:
 			equipped_item_button.item = Global.owned_items[i]
+			equipped_item_button.connected_locker_item = locker.connected_items[i]
 		equipped_item_button.pressed.connect(
 				func():
 					_on_equipped_slot_pressed(equipped_item_button)
@@ -106,21 +102,7 @@ func populate() -> void:
 
 
 func resize_grids() -> void:
-	var num_of_available_items := available_items_container.get_children().size()
-	if num_of_available_items % 3 == 0 and num_of_available_items < 9:
-		available_items_container.columns = 3
-	elif num_of_available_items % 4 == 0:
-		available_items_container.columns = 4
-	else:
-		available_items_container.columns = 5
-
-	var num_of_equipped_item_slots := equipped_items_container.get_children().size()
-	if num_of_equipped_item_slots % 3 == 0 and num_of_equipped_item_slots < 9:
-		equipped_items_container.columns = 3
-	elif num_of_available_items % 4 == 0:
-		equipped_items_container.columns = 4
-	else:
-		equipped_items_container.columns = 5
+	equipped_items_container.columns = 3
 
 
 func _physics_process(_delta: float) -> void:
@@ -130,45 +112,27 @@ func _physics_process(_delta: float) -> void:
 		handle_item_hover_tooltip()
 
 
-func _on_available_item_pressed(item_button: LoadoutMenuElement) -> void:
-	var item_to_equip: Item = item_button.item
-
-	item_button.queue_free()
-
+func _on_available_item_pressed(item_to_equip: Item, locker_item:ClickableLockerItem) -> void:
 	var equipped_slot_to_fill: LoadoutMenuElement
 	var potential_slots: Array[Node] = equipped_items_container.get_children()
 	for slot: LoadoutMenuElement in potential_slots:
+		if slot.item == item_to_equip:
+			return
 		if slot.item == null:
 			equipped_slot_to_fill = slot
 			break
-
-	if equipped_slot_to_fill == null:
-		equipped_slot_to_fill = potential_slots.back()
-
-	if equipped_slot_to_fill.item != null:
-		add_available_item_button(equipped_slot_to_fill.item)
-
+	if not equipped_slot_to_fill: return
+	equipped_slot_to_fill.connected_locker_item = locker_item
+	locker_item.hide()
 	equipped_slot_to_fill.item = item_to_equip
-
 	resize_grids()
 
 
 func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 	if slot.item:
-		add_available_item_button(slot.item)
 		slot.item = null
-
-
-func add_available_item_button(item: Item) -> void:
-	var available_item_button: LoadoutMenuElement = element_scene.instantiate()
-	available_item_button.item = item
-	available_item_button.pressed.connect(
-			func():
-				_on_available_item_pressed(available_item_button)
-	)
-	available_items_container.add_child(available_item_button)
-	resize_grids()
-
+		slot.connected_locker_item.show()
+		slot.connected_locker_item = null
 
 func confirm_and_hide_menu() -> void:
 	Global.tutorial_day_2_locker_loadout_confirmed = true
@@ -182,8 +146,9 @@ func confirm_and_hide_menu() -> void:
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
-		if equipped_item_button.item:
+		if equipped_item_button.item != null and equipped_item_button.connected_locker_item != null:
 			equipped_items.append(equipped_item_button.item)
+			locker.connected_items.append(equipped_item_button.connected_locker_item)
 
 	# unapply existing items
 	for item in Global.owned_items:
@@ -206,6 +171,7 @@ func confirm_and_hide_menu() -> void:
 	t.tween_property(root, "offset_transform_scale", Vector2.ZERO, 0.1)
 	t.tween_property(root, "offset_transform_position_ratio:y", 0.25, 0.1)
 	await t.finished
+	await locker.interaction_camera_exit_transition()
 	hide()
 
 
@@ -245,8 +211,6 @@ func drop_dragged_element(item: Item, source_slot: LoadoutMenuElement, target_sl
 	if source_slot.is_equipped_slot:
 		source_slot.item = previous_item_in_target_slot
 	else:
-		if previous_item_in_target_slot != null:
-			add_available_item_button(previous_item_in_target_slot)
 		source_slot.queue_free()
 
 func _on_player_ui_sub_viewport_container_allow_input_changed(allow_input: bool) -> void:

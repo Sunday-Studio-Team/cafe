@@ -1,3 +1,4 @@
+class_name PropHider
 extends Node
 
 @export var prop_item: Item
