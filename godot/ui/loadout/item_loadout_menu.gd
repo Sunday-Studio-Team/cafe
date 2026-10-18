@@ -129,7 +129,7 @@ func _on_available_item_pressed(item_to_equip: Item, locker_item:ClickableLocker
 			break
 	if not equipped_slot_to_fill: return
 	equipped_slot_to_fill.connected_locker_item = locker_item
-	locker_item.hide()
+	locker_item.should_be_hidden = true
 	equipped_slot_to_fill.item = item_to_equip
 	resize_grids()
 
@@ -137,7 +137,7 @@ func _on_available_item_pressed(item_to_equip: Item, locker_item:ClickableLocker
 func _on_equipped_slot_pressed(slot: LoadoutMenuElement) -> void:
 	if slot.item:
 		slot.item = null
-		slot.connected_locker_item.show()
+		slot.connected_locker_item.should_be_hidden = false
 		slot.connected_locker_item = null
 
 func confirm_and_hide_menu() -> void:
