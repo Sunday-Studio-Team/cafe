@@ -40,6 +40,8 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 		TutorialPartEnum.DAY_1_0:
 			_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.0)
 			_tutorial_manager._cinematic_camera.cinematic_bars.show_bars(0.0)
+			await _tutorial_manager.play_intro()
+
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_0_0")
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_0_1")
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_0_2")
@@ -723,6 +725,7 @@ func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 
 	match tutorial_part_enum:
 		TutorialPartEnum.DAY_1_0:
+			_tutorial_manager.end_intro()
 			Global.player.override_position_rotation(_tutorial_manager._day_1_sato_start_shift_sign_position.global_position, _tutorial_manager._day_1_sato_start_shift_sign_position.global_rotation)
 		TutorialPartEnum.DAY_1_1:
 			Global.player.override_position_rotation(_tutorial_manager._day_1_sato_at_machine_position.global_position, _tutorial_manager._day_1_sato_at_machine_position.global_rotation)
