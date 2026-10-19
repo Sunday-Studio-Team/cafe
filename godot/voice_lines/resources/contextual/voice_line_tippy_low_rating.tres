@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://belkiswlyccbh"]
+
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_h6if2"]
+[ext_resource type="Script" uid="uid://ccrf8lqfckbj1" path="res://voice_lines/subtitle_ui/voice_line_speaker.gd" id="2_tj1b2"]
+
+[sub_resource type="Resource" id="Resource_qdt22"]
+script = ExtResource("2_tj1b2")
+speaker_enum = 1
+metadata/_custom_type_script = "uid://ccrf8lqfckbj1"
+
+[resource]
+script = ExtResource("2_h6if2")
+voice_line_id = "tippy_low_rating"
+speaker = SubResource("Resource_qdt22")
+subtitle_en = "Increase your rating or else we won’t get customers!"
+metadata/_custom_type_script = "uid://vdv5g0q45pri"
