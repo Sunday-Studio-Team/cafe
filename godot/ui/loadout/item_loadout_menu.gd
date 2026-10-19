@@ -69,11 +69,19 @@ func _ready() -> void:
 	locker_animation_player.animation_finished.connect(
 		func(_animation: StringName) -> void:
 				await get_tree().create_timer(5, false).timeout
-				if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+				if not (
+					player_has_confirmed_loadout_at_least_once
+					or Global.in_loadout_menu
+					or Global.playing_tutorial
+				):
 					locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 	)
 	await get_tree().create_timer(10, false).timeout
-	if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+	if not (
+		player_has_confirmed_loadout_at_least_once
+		or Global.in_loadout_menu
+		or Global.playing_tutorial
+	):
 		locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 
 
@@ -190,7 +198,7 @@ func confirm_and_hide_menu() -> void:
 		item.unapply_stats()
 
 	Global.owned_items.assign(equipped_items)
-	
+
 	SaveDataManager.save_data.equipped_item_ids.clear()
 	for item in Global.owned_items:
 		SaveDataManager.save_data.equipped_item_ids.append(item.item_id)

@@ -237,7 +237,7 @@ func load_equipped_items_from_save() -> void:
 	owned_items.clear()
 	if SaveDataManager.save_data == null:
 		return
-	
+
 	for id in SaveDataManager.save_data.equipped_item_ids:
 		var item = get_item(id)
 		if item:
