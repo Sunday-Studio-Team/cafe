@@ -55,16 +55,15 @@ var camera_slow_player_duration: float = 3.0
 var time_camera_disabled_after_sabotage := 30.0
 
 var daily_completion_item_unlocks: Dictionary[int, Array] = {
-	1: ["nice_spoon"],
-	2: ["barista_guide"],
+	1: ["lucky_charm, barista_guide"],
+	2: ["air_horn"],
 	3: ["air_freshener"],
 	4: ["super_scrubber"],
-	# 4: ["super_scrubber", "teleporter"],
 	5: ["roller_skates"],
 }
 
 var daily_rating_item_unlocks: Dictionary[int, Array] = {
-	1: ["air_horn"],
+	1: ["nice_spoon"],
 	2: ["hammer"],
 	3: ["whipped_cream"],
 	4: ["teleporter"],
