@@ -616,6 +616,9 @@ func _on_employee_rating_updated(_new_value: float, _old_value: float) -> void:
 		_help_desk_customer_spawn_timer.wait_time = new_help_desk_customer_flow_rate
 		_help_desk_customer_spawn_timer.start()
 
+	if _new_value <= 1 and _old_value > _new_value:
+		Events.low_rating_warning.emit()
+
 
 func _get_machine_customer_flow_rate() -> float:
 	return _rating_to_machine_customer_flow_rate(Global.employee_rating)

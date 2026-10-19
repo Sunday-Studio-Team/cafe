@@ -45,6 +45,7 @@ signal tippy_boss_kidnapped_player
 signal tippy_boss_released_player
 signal spawn_specific_customer(name: String, help_desk: String)
 signal air_freshener_used(customer_wait_duration_extension: float)
+signal low_rating_warning
 # minigames
 # TODO: combine some of these or something
 # (below are my BEST GUESSES at what each currently do) - jack

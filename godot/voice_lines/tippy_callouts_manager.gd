@@ -12,7 +12,8 @@ enum TippyLineType {
 	machine_make_drink,
 	under_goal,
 	clean_spill,
-	accept_drink
+	accept_drink,
+	low_rating
 }
 
 @export var _tippy_line_array_shift_start: Array[VoiceLine]
@@ -23,6 +24,7 @@ enum TippyLineType {
 @export var _tippy_line_array_under_goal: Array[VoiceLine]
 @export var _tippy_line_array_clean_spill: Array[VoiceLine]
 @export var _tippy_line_array_accept_drink: Array[VoiceLine]
+@export var _tippy_line_array_low_rating: Array[VoiceLine]
 
 var enable_tippy_callouts: bool = true
 
@@ -64,6 +66,9 @@ func _ready() -> void:
 	)
 	Events.order_accepted.connect(func(_customer: Customer):
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.accept_drink)
+	)
+	Events.low_rating_warning.connect(func():
+		play_tippy_callout(TippyCalloutsManager.TippyLineType.low_rating)
 	)
 
 func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
@@ -117,6 +122,8 @@ func _get_tippy_callout_array_by_type(tippy_line_type: TippyLineType) -> Array[V
 			return _tippy_line_array_clean_spill
 		TippyLineType.accept_drink:
 			return _tippy_line_array_accept_drink
+		TippyLineType.low_rating:
+			return _tippy_line_array_low_rating
 		_:
 			printerr("Unhandled case!")
 			return []
