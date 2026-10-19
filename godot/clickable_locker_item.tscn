@@ -1,0 +1,105 @@
+[gd_scene format=4 uid="uid://b07k4ij4l51hc"]
+
+[ext_resource type="Texture2D" uid="uid://cwr1sm20fwdft" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Ice Cube_BaseColor.png" id="1_nor43"]
+[ext_resource type="Texture2D" uid="uid://dkqnov74mb7k3" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Ice Cube_Roughness.png" id="2_vey8g"]
+[ext_resource type="Texture2D" uid="uid://c26rergydhlu0" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Frozen Tippy_BaseColor.png" id="3_n0785"]
+[ext_resource type="Script" uid="uid://dw7u504yn4u6x" path="res://ui/locker_prop_shower_hider.gd" id="4_d4rmy"]
+[ext_resource type="Script" uid="uid://df56gnyo3giiq" path="res://clickable_locker_item.gd" id="4_vey8g"]
+[ext_resource type="Resource" uid="uid://b7j7p84hynyid" path="res://resources/items/barista_guide.tres" id="5_3gcoa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trjbx"]
+resource_name = "Ice Cube"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_nor43")
+metallic_texture = ExtResource("2_vey8g")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_vey8g")
+roughness_texture_channel = 1
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_120ep"]
+resource_name = "Frozen Tippy"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("3_n0785")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y6fq3"]
+_surfaces = [{
+"aabb": AABB(-0.1346767, 0.0013108253, -0.1420621, 0.26851442, 0.28070325, 0.29067063),
+"format": 34896613377,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwACAAQAAwAEAAUABQAEAAIAAAADAAYAAwAFAAYABgAFAAcAAgAHAAUACAAAAAYABgAHAAkACAAGAAkACQAHAAoACQALAAgACQAKAAsADAALAAoACwAMAAgADAAKAA0ADQAIAAwACgAHAA4ADgANAAoAAgAOAAcADQAOAAgADwAOAAIADwAIAA4ADwACAAEACAAQAAAAAAAQAAEADwARAAgACAARABAAEgARAA8AAQASAA8AEQATABAAAQAQABMAEgAUABEAEQAUABMAAQAVABIAAQATABUAFgAUABIAFQAWABIAFgAXABQAFQAYABYAFwAWABgAGQAVABMAFAAZABMAGQAYABUAFAAXABkAFwAYABkA"),
+"name": "Ice Cube",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("//+Cuj/yAACZATR///8AAMwAO7xb8wAA//+N+D/yAAAAAHP0ufMAAAAA6+lpqwAA//8n8tuqAAAAAP//c14AAP//YaQ5DwAA//+z/dJeAAAAAJnw3zMAAP//Tu4qNQAA//8n8rgIAAAAAHP0gQYAAAEHpZyAEAAAAAA7agAAAAD//w5+Qf8AAP//2Wk3AgAALQPILVwLAAD//whQmu0AAP//Wy6UCgAAZgKbUPjtAAAAAAAAgQYAAP//AAC4CAAAMwMAAD/yAAD//wAAP/IAAA==")
+}, {
+"aabb": AABB(0.116091356, 0.012718193, -0.12129165, 1e-05, 0.24258333, 0.2425833),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "Frozen Tippy",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("kgAAAAAAAAAAAP////8AAGEA//8AAAAAMAAAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_75h5y"]
+resource_name = "Sato's Locker w Items _v1_Cube_010"
+_surfaces = [{
+"aabb": AABB(-0.1346767, 0.0013108253, -0.1420621, 0.26851442, 0.28070325, 0.29067063),
+"attribute_data": PackedByteArray("OFiHkTmrnX14qx+SPVg3fRIz//8bF82q6ytgpuQhOvr//3+mwuSzUzv/tVMg4jmkpqx9pny8s1NKvHalq6yzUzmrnX04WIBt8qqzbT1YN32IU3lxAQBNYoFTsWIIAGdxHf8AAKaswVGmrAAA5f/JUoVT6osIAGdxiFN5cQAAB4xKvHalttC1U9PQf6Z8vLNTOFh/pnirH5K6qyClOFiHkTpYf1LyqrNtOFiAbbGqf1LT0H+mwuSzUyDiOaS20LVTglMzUwEATWIBAHxSgVOxYohT+aQAAAeMhVPqiwUAd6VGkHH7zKr1xLyuk998qSjuzKq4/dKX9qv7rParNYNpp1F8//+Dc5etB2gR/ThY9qs4WLj9zzuwrExXt/2xRwX8TFcwq+srYKaxRwX8EjP//887sKwbF82qAADv3oYH/cPkITr65CE6+vADuP1ABdfthgf9w+8DrKobF82qQAXX7QAA797kITr6"),
+"format": 34896613399,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOgA7ADgAOwA8ADgAOAA9ADkAPQA+ADkAOAA/AD0AOABAAD8AQABBAD8AQABCAEEAQgBDAEEAQgBEAEMARQBGAEcARQBIAEYASQBKAEsASQBMAEoATQBOAE8ATQBQAE4AUQBSAFMAVABVAFYAVwBYAFkA"),
+"material": SubResource("StandardMaterial3D_trjbx"),
+"name": "Ice Cube",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 90,
+"vertex_data": PackedByteArray("//+Cuj/y+f+ZATR////2/8wAO7xb8/T///8OfkH/+f8AADtqAADs1swAO7xb8/PWmQE0f///9NYBB6WcgBDq1gAAc/SBBvL8//9hpDkP8vz//yfyuAjy/AEHpZyAEPL8AAAAAIEG6v3//1sulArq/S0DyC1cC+r9//8AALgI6v2ZATR/////////CFCa7f//ZgKbUPjt/////w5+Qf//////s/3SXtLNAACZ8N8z0s3//07uKjXSzQAA//9zXtLN//8AALgIVNUzAwAAP/JU1f//AAA/8lTVAAAAAIEGVNX//yfy26p6twAA//9zXnq3//+z/dJeercAAOvpaat6ty0DyC1cCw37///ZaTcCDfsAADtqAAAN+///Wy6UCg37//+N+D/y///MADu8W/P//wAAc/S58/////+Cuj/y/////wAAP/L//2YCm1D47f////8IUJrt//8zAwAAP/L//wAAO2oAABD4//9hpDkPEPgBB6WcgBAQ+P//2Wk3AhD4//8n8rgIorwAAJnw3zOivAAAc/SBBqK8//9O7io1orz//434P/KdxAAA6+lpq57E//8n8tuqncQAAHP0ufOexP//YaQ5D1TV//8n8tuqVNX//7P90l5U1f//Tu4qNVTV//8n8rgIVNX//4K6P/JU1f//jfg/8lTV//8OfkH/VNX//9lpNwJU1f//CFCa7VTV//9bLpQKVNX//wAAP/JU1f//AAC4CFTVZgKbUPjtrNUAAAAAgQau1S0DyC1cC6/VMwMAAD/yrNWZATR///9b1C0DyC1cC1rUAAA7agAAWtRmAptQ+O1b1MwAO7xb85DUAAD//3NekdQAAOvpaauP1AEHpZyAEJHUAQelnIAQstMAAHP0gQay0wAAmfDfM7LTAADr6Wmr99QAAHP0ufP31MwAO7xb8/fUAACZ8N8zVtIAAP//c15W0gEHpZyAEFbSTIBzjEyAc4xNgHOMS4BzjKdWpauiVpyroVabq6hWp6uNQY5BjEGOQYxBjkGNQY5Bxb7EvsW+xL7FvsS+xb7Evp0U8f+dFPH/nhTy/54U8//c/l1/3f5if9v+XX/d/mN/VFVUVVRVVFVUVVRVVFVUVQv/qIFw/7+B6P6ggZL/x4GLQoxCi0KNQotCjEKKQo1CWYDLf1mAy39ZgMt/WYDLfw6AkoMVgJKDDYCSg5IDCQDhu+6747vsu+C77rvju+y71v59f9b+fH/W/nx/1v59f2n+CIN1/gaDZf4Ig3j+BoOqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoqqiqqKqoq5FXequNV26riVdqq5FXeqmJUEqpjVBOqY1QTqmJUEaqhUy2qoFMtqqFTL6qgUy2qBlOlqQZTpakGU6Wp+FRxqvhUcar4VHGqGlPgqBpT4KgaU+Co")
+}, {
+"aabb": AABB(0.116091356, 0.012718193, -0.12129165, 1e-05, 0.24258333, 0.2425833),
+"attribute_data": PackedByteArray("OgA6AMT/xP86AMT/xP86AA=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_120ep"),
+"name": "Frozen Tippy",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("kgAAAAAA//8AAP///////2EA//8AAP//MAAAAP//////v/9//7//f/+//3//v/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_y6fq3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0785"]
+size = Vector3(0.31848145, 0.32266235, 0.32992554)
+
+[node name="Node3D" type="Node3D" unique_id=1118132196]
+script = ExtResource("4_vey8g")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1773171203]
+transform = Transform3D(0.9782387, 0.04780004, 0.20190148, -0.030022277, 0.9954697, -0.09021499, -0.2052991, 0.08219025, 0.975242, 0, 0, 0)
+mesh = SubResource("ArrayMesh_75h5y")
+
+[node name="PropShowerHider" type="Node" parent="Mesh" unique_id=100684737]
+script = ExtResource("4_d4rmy")
+prop_item = ExtResource("5_3gcoa")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=134056438]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1033817306]
+transform = Transform3D(1, 0, 0, 0, 0.99999636, 0, 0, 0, 0.99999636, 0.012634277, 0.13294856, 0.012068142)
+shape = SubResource("BoxShape3D_n0785")
+debug_color = Color(0.7, 0, 0.23333344, 1)
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
