@@ -11,7 +11,7 @@ func _ready() -> void:
 	interactable.interacted.connect(_on_interacted)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	notice_particles.emitting = interactable.visible
 
 
