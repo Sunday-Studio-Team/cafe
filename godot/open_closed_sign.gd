@@ -8,8 +8,11 @@ extends Node3D
 
 
 func _ready() -> void:
-	notice_particles.emitting = true
 	interactable.interacted.connect(_on_interacted)
+
+
+func _physics_process(delta: float) -> void:
+	notice_particles.emitting = interactable.visible
 
 
 func set_enabled(enabled: bool) -> void:
@@ -17,7 +20,6 @@ func set_enabled(enabled: bool) -> void:
 
 
 func _on_interacted() -> void:
-	notice_particles.emitting = false
 	interactable.visible = false
 	animation_player.play("open")
 	shift_start_triggered_sound.play()
