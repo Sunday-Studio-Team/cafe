@@ -47,7 +47,7 @@ func play_voice_line(voice_line: VoiceLine) -> void:
 				if tippy_loudspeaker_model.animation_player.is_playing():
 					while tippy_loudspeaker_model.animation_player.current_animation_position > 0.1:
 						await get_tree().process_frame
-					
+
 					tippy_loudspeaker_model.animation_player.stop()
 			_:
 				printerr("Unknown VoiceLinePlayer.PlayerMode.")
