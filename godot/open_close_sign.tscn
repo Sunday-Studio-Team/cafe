@@ -101,8 +101,8 @@ initial_velocity_max = 15.0
 gravity = Vector3(0, 0, 0)
 damping_min = 40.0
 damping_max = 40.0
-scale_min = 0.5
-scale_max = 0.5
+scale_min = 0.099999994
+scale_max = 0.099999994
 scale_curve = SubResource("CurveTexture_bpwws")
 color_ramp = SubResource("GradientTexture1D_dju1t")
 alpha_curve = SubResource("CurveTexture_jm0q7")
@@ -161,9 +161,9 @@ libraries/ = SubResource("AnimationLibrary_1xpwx")
 stream = ExtResource("4_jm0q7")
 
 [node name="NoticeParticles" type="GPUParticles3D" parent="." unique_id=493137985]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49147266, -0.4052388)
-emitting = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49147266, -0.2298002)
 amount = 32
+speed_scale = 0.5
 process_material = SubResource("ParticleProcessMaterial_coxhp")
 draw_passes = 2
 draw_pass_1 = SubResource("SphereMesh_7w4w3")
