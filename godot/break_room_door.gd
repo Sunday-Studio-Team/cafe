@@ -10,7 +10,7 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# we dont have the locker on first run of day 1 so opening the door 
+	# we dont have the locker on first run of day 1 so opening the door
 	# cant be locked behind the loadout thing
 	if (
 			SaveDataManager.save_data.latest_unlocked_day < 2
@@ -19,7 +19,7 @@ func _ready() -> void:
 		open_door()
 	else:
 		Events.player_confirmed_item_loadout.connect(open_door)
-		
+
 	Events.shift_started.connect(close_door)
 	Events.tippy_boss_released_player.connect(
 		func():

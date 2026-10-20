@@ -15,7 +15,7 @@ var _sprite_frames_item_cache_tokens: Array[ResourceBackgroundLoaderToken] = []
 
 func _ready() -> void:
 	Events.items_updated.connect(_on_items_updated)
-	
+
 	Events.play_viewmodel_animation.connect(_on_play_viewmodel_animation)
 
 	sprite.frame_changed.connect(_on_frame_changed)
@@ -27,9 +27,9 @@ func _ready() -> void:
 	)
 
 	_cache_always_resources()
-	
+
 	_play_animation("default")
-	
+
 
 func _exit_tree() -> void:
 	_uncache_item_resources()
@@ -38,7 +38,7 @@ func _exit_tree() -> void:
 
 func _process(_delta: float) -> void:
 	visible = not Global.in_ui
-	
+
 
 func _on_play_viewmodel_animation(animation_name: String) -> void:
 	_play_animation(animation_name)
@@ -46,7 +46,7 @@ func _on_play_viewmodel_animation(animation_name: String) -> void:
 
 func _on_items_updated() -> void:
 	_uncache_item_resources()
-	
+
 	# Cache new stuff.
 	var resource_background_loader: ResourceBackgroundLoader = Global.resource_background_loader
 	var token: ResourceBackgroundLoaderToken
@@ -109,11 +109,11 @@ func _play_animation(animation_name: String) -> void:
 			if cache_token.resource_uid == sprite_frames_uid:
 				token = cache_token
 				break
-	
+
 	if token == null:
 		printerr("view_model.gd: Requested spriteframes aren't cached!")
 		return
-	
+
 	var sprite_frames: SpriteFrames = Global.resource_background_loader.get_resource(token)
 	sprite.sprite_frames = sprite_frames
 	sprite.play(animation_name)

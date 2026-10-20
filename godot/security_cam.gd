@@ -251,7 +251,7 @@ func _on_requested_use_active_item():
 
 	if whipped_cream == null or !whipped_cream.can_be_used:
 		return
-	
+
 	Events.play_viewmodel_animation.emit("cream_use")
 	Global.put_active_item_on_cooldown(whipped_cream)
 	await Events.whipped_cream_animation_shot

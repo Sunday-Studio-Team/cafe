@@ -84,7 +84,7 @@ func _ready() -> void:
 	var tween_time = bean_spawn_timer.wait_time
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees - 30, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	
+
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, tween_time)
 	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees + 30, tween_time)
 
@@ -94,7 +94,7 @@ func _ready() -> void:
 				bean_hit_glasss_sound.play(),
 	)
 	spawn_trajectory = Vector2(randf_range(-750, -300), randf_range(-650.0, -300)) #prefer right side of the screen, because that is where cup spawns
-	
+
 
 func _input(event: InputEvent) -> void:
 	if not start_minigame and (event.is_action_pressed("move_left") or event.is_action_pressed("move_right")):

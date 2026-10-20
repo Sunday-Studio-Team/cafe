@@ -864,7 +864,7 @@ func break_down(specific_repair_minigame_name: String="") -> void:
 	breakdown_timer.start()
 	await breakdown_timer.timeout
 	Global.player.camera.camera_effects.trigger_shake()
-	
+
 	if specific_repair_minigame_name != "":
 		next_repair_minigame = specific_repair_minigame_name
 	else:
@@ -951,7 +951,7 @@ func _on_clean_spill() -> void:
 	Events.minigame_active.emit(CLEAN_SPILL_MINIGAME)
 	Events.minigame_end.connect(clean_up_spill)
 	Events.minigame_cancelled.connect(cancel_clean_spill)
-	
+
 	Global.tutorial_day_3_spill_interacted = true
 
 
