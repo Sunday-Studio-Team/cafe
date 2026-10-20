@@ -237,7 +237,7 @@ func set_per_day_stuff() -> void:
 		else:
 			_active_machines.clear()
 			_active_machines.push_back(_left_area_right_machine)
-			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_right_area_left_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
 
