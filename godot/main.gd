@@ -485,7 +485,8 @@ func spawn_trash() -> void:
 
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
-		Global.employee_rating -= Global.trash_punishment_amount
+		if !Global.lucky_check:
+			Global.employee_rating -= Global.trash_punishment_amount
 		Events.alert_posted.emit(
 			"-%s Too much trash in the store" % Global.trash_punishment_amount,
 			UI.AlertIconType.RATING,
