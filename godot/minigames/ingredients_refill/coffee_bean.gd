@@ -4,7 +4,7 @@ var time_counter_float: float = 0.0
 @export var sprite_2d: Sprite2D
 
 var seconds_passed: float = 0.0
-var has_sped_up: bool = false 
+var has_sped_up: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	find_child("Sprite2D").scale *=1.1
@@ -22,17 +22,17 @@ func _process(_delta: float) -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if(seconds_passed>2): #prevents jitter
-		if(get_collision_mask_value(1) ==false): 
+		if(get_collision_mask_value(1) ==false):
 			set_collision_mask_value(1, true)
 		return
 	time_counter_float += delta
-	
+
 	sprite_2d.rotation_degrees += 15
 	seconds_passed+=delta
-	if(linear_velocity.y>0 and has_sped_up == false):	
+	if(linear_velocity.y>0 and has_sped_up == false):
 		gravity_scale*=2.5
 		has_sped_up = true
-	
+
 	#elif
 	if(time_counter_float>1.0/60.0): #currently, physics tick is at 60hz; 8/23/2026
 		time_counter_float -=1.0/60.0
