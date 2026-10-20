@@ -504,7 +504,7 @@ func _on_game_timer_timeout() -> void:
 	free_customer_queue()
 	Events.shift_end_sequence_started.emit()
 	closing_time = true
-	if get_customers().size() <= 1:
+	if get_customers().size() == 0:
 		shift_end_sequence()
 
 
