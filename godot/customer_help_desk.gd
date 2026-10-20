@@ -95,7 +95,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if _desk_customer == timed_out_customer:
 		var rating_loss: float = Stats.current.help_desk_customer_timed_out_rating_loss_each_day[Global.day]
 		Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
-		if !Global.lucky_check:
+		if !Global.lucky_check():
 			Global.employee_rating -= rating_loss
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
