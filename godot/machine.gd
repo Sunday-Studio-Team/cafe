@@ -888,8 +888,8 @@ func _on_requested_use_active_item_fix_machine():
 	Global.locked_camera_target_pos = item_aim_spot.global_position
 	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	Events.play_viewmodel_animation.emit("hammer_use")
-	Global.put_active_item_on_cooldown(hammer)
 	await Events.hammer_animation_hit
+	Global.put_active_item_on_cooldown(hammer)
 	fix_machine(true)
 
 	await Events.viewmodel_animation_finished
@@ -910,10 +910,10 @@ func _on_requested_use_active_item_machine():
 		Global.locked_camera_target_pos = item_aim_spot.global_position
 		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 
-		Global.put_active_item_on_cooldown(air_horn)
 		var leaving_customer: Customer = customer
 		Events.play_viewmodel_animation.emit("airhorn_use")
 		await Events.air_horn_animation_just_blasted
+		Global.put_active_item_on_cooldown(air_horn)
 		airhorn_sound.play()
 		_set_customer(null)
 		leaving_customer.leave_store()
