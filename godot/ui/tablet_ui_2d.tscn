@@ -4,14 +4,15 @@
 [ext_resource type="Script" uid="uid://dr4pn3wnsiuqb" path="res://ui/tablet/tablet_ui.gd" id="2_bv3d6"]
 [ext_resource type="Texture2D" uid="uid://b125bu4qap7jh" path="res://sprites/tablet_ui/tablet_money_ui.png" id="3_dh8ow"]
 [ext_resource type="Texture2D" uid="uid://mqcjtl08wuth" path="res://sprites/tablet_ui/rating/tablet_rating_meter.png" id="4_h00bf"]
+[ext_resource type="Texture2D" uid="uid://uqvdy0q7tnsv" path="res://sprites/tablet_ui/rating/star.png" id="5_01sxo"]
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="6_6ci3b"]
+[ext_resource type="Texture2D" uid="uid://b6n6nl35utqgg" path="res://sprites/tablet_ui/rating/star_progress.png" id="6_o38rc"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="7_0bt22"]
 [ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="8_vx1ja"]
 [ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="9_omxmy"]
+[ext_resource type="Texture2D" uid="uid://cuhwevk5fhqrf" path="res://Assets/Trash minigame/trash_icon.png" id="10_6ci3b"]
 [ext_resource type="Texture2D" uid="uid://dfal061fim05l" path="res://sprites/tablet_ui/rating/tablet_rating_needle.png" id="10_jcu5s"]
-[ext_resource type="Texture2D" uid="uid://041ew7jgtjke" path="res://sprites/tablet_ui/rating/rating_star_over.png" id="12_jcu5s"]
 [ext_resource type="Texture2D" uid="uid://djparycg4t5kx" path="res://sprites/tablet_ui/rating/tablet_rating_icon.png" id="12_vx1ja"]
-[ext_resource type="Texture2D" uid="uid://c4pw3d21rj110" path="res://sprites/tablet_ui/rating/rating_star_progress.png" id="13_bbruk"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_01sxo"]
 
@@ -57,7 +58,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="TabletUI2D" type="Control" unique_id=1774289997 node_paths=PackedStringArray("money_made_label", "money_bar", "item_icons", "rating_meter_stars", "rating_meter_needle")]
+[node name="TabletUI2D" type="Control" unique_id=1774289997 node_paths=PackedStringArray("money_made_label", "money_bar", "item_icons", "rating_meter_stars", "rating_meter_needle", "trash_stars")]
 custom_maximum_size = Vector2(631, 863)
 propagate_maximum_size = true
 layout_mode = 3
@@ -71,6 +72,7 @@ item_icons = NodePath("MarginContainer/Screen/ItemUI/ItemIcons")
 rating_meter_stars = [NodePath("MarginContainer/Screen/RatingMeter/RatingStars/Star"), NodePath("MarginContainer/Screen/RatingMeter/RatingStars/Star2"), NodePath("MarginContainer/Screen/RatingMeter/RatingStars/Star3"), NodePath("MarginContainer/Screen/RatingMeter/RatingStars/Star4"), NodePath("MarginContainer/Screen/RatingMeter/RatingStars/Star5")]
 rating_meter_needle = NodePath("MarginContainer/Screen/RatingMeter/Needle")
 rating_stars_textures = Array[Texture]([SubResource("CompressedTexture2D_01sxo"), SubResource("CompressedTexture2D_o38rc"), SubResource("CompressedTexture2D_6ci3b"), SubResource("CompressedTexture2D_0bt22"), SubResource("CompressedTexture2D_vx1ja"), SubResource("CompressedTexture2D_omxmy")])
+trash_stars = NodePath("MarginContainer/Screen/RatingMeter/TrashStars")
 
 [node name="Background" type="TextureRect" parent="." unique_id=514240901]
 layout_mode = 1
@@ -172,73 +174,68 @@ stretch_mode = 5
 layout_mode = 2
 
 [node name="Star" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/RatingStars" unique_id=1875027614]
-self_modulate = Color(0.8627451, 1, 0, 1)
 custom_minimum_size = Vector2(60, 60)
 custom_maximum_size = Vector2(50, 50)
 propagate_maximum_size = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(3.5, 2.75)
-offset_transform_scale = Vector2(1.1, 1.1)
+offset_transform_scale = Vector2(1.2, 1.2)
 offset_transform_rotation = -0.2617994
 nine_patch_stretch = true
-texture_over = ExtResource("12_jcu5s")
-texture_progress = ExtResource("13_bbruk")
+texture_over = ExtResource("5_01sxo")
+texture_progress = ExtResource("6_o38rc")
 
 [node name="Star2" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/RatingStars" unique_id=374275926]
-self_modulate = Color(0.8627451, 1, 0, 1)
 custom_minimum_size = Vector2(60, 60)
 custom_maximum_size = Vector2(50, 50)
 propagate_maximum_size = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(3, 1.5)
-offset_transform_scale = Vector2(1.1, 1.1)
+offset_transform_scale = Vector2(1.2, 1.2)
 offset_transform_rotation = -0.7853982
 nine_patch_stretch = true
-texture_over = ExtResource("12_jcu5s")
-texture_progress = ExtResource("13_bbruk")
+texture_over = ExtResource("5_01sxo")
+texture_progress = ExtResource("6_o38rc")
 
 [node name="Star3" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/RatingStars" unique_id=611449382]
-self_modulate = Color(0.8627451, 1, 0, 1)
 custom_minimum_size = Vector2(60, 60)
 custom_maximum_size = Vector2(50, 50)
 propagate_maximum_size = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(3.5, 0.9)
-offset_transform_scale = Vector2(1.1, 1.1)
+offset_transform_scale = Vector2(1.2, 1.2)
 nine_patch_stretch = true
-texture_over = ExtResource("12_jcu5s")
-texture_progress = ExtResource("13_bbruk")
+texture_over = ExtResource("5_01sxo")
+texture_progress = ExtResource("6_o38rc")
 
 [node name="Star4" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/RatingStars" unique_id=1015624608]
-self_modulate = Color(0.8627451, 1, 0, 1)
 custom_minimum_size = Vector2(60, 60)
 custom_maximum_size = Vector2(50, 50)
 propagate_maximum_size = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(4, 1.5)
-offset_transform_scale = Vector2(1.1, 1.1)
+offset_transform_scale = Vector2(1.2, 1.2)
 offset_transform_rotation = 0.7853982
 nine_patch_stretch = true
-texture_over = ExtResource("12_jcu5s")
-texture_progress = ExtResource("13_bbruk")
+texture_over = ExtResource("5_01sxo")
+texture_progress = ExtResource("6_o38rc")
 
 [node name="Star5" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/RatingStars" unique_id=932715144]
-self_modulate = Color(0.8627451, 1, 0, 1)
 custom_minimum_size = Vector2(60, 60)
 custom_maximum_size = Vector2(50, 50)
 propagate_maximum_size = true
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(3.5, 2.75)
-offset_transform_scale = Vector2(1.1, 1.1)
+offset_transform_scale = Vector2(1.2, 1.2)
 offset_transform_rotation = 0.2617994
 nine_patch_stretch = true
-texture_over = ExtResource("12_jcu5s")
-texture_progress = ExtResource("13_bbruk")
+texture_over = ExtResource("5_01sxo")
+texture_progress = ExtResource("6_o38rc")
 
 [node name="Needle" type="TextureRect" parent="MarginContainer/Screen/RatingMeter" unique_id=2098489999]
 visible = false
@@ -261,6 +258,70 @@ offset_transform_scale = Vector2(0.43, 0.43)
 texture = ExtResource("12_vx1ja")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="TrashStars" type="HBoxContainer" parent="MarginContainer/Screen/RatingMeter" unique_id=1512192978]
+visible = false
+layout_mode = 2
+
+[node name="Star" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/TrashStars" unique_id=1924014762]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(50, 50)
+propagate_maximum_size = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(3.5, 2.75)
+offset_transform_scale = Vector2(1.2, 1.2)
+offset_transform_rotation = 0.34906584
+nine_patch_stretch = true
+texture_over = ExtResource("10_6ci3b")
+
+[node name="Star2" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/TrashStars" unique_id=727777967]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(50, 50)
+propagate_maximum_size = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(3, 1.5)
+offset_transform_scale = Vector2(1.2, 1.2)
+offset_transform_rotation = 0.34906584
+nine_patch_stretch = true
+texture_over = ExtResource("10_6ci3b")
+
+[node name="Star3" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/TrashStars" unique_id=1988313927]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(50, 50)
+propagate_maximum_size = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(3.5, 0.9)
+offset_transform_scale = Vector2(1.2, 1.2)
+offset_transform_rotation = 0.34906584
+nine_patch_stretch = true
+texture_over = ExtResource("10_6ci3b")
+
+[node name="Star4" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/TrashStars" unique_id=2087132135]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(50, 50)
+propagate_maximum_size = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(4, 1.5)
+offset_transform_scale = Vector2(1.2, 1.2)
+offset_transform_rotation = 0.34906584
+nine_patch_stretch = true
+texture_over = ExtResource("10_6ci3b")
+
+[node name="Star5" type="TextureProgressBar" parent="MarginContainer/Screen/RatingMeter/TrashStars" unique_id=1535155765]
+custom_minimum_size = Vector2(60, 60)
+custom_maximum_size = Vector2(50, 50)
+propagate_maximum_size = true
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(3.5, 2.75)
+offset_transform_scale = Vector2(1.2, 1.2)
+offset_transform_rotation = 0.34906584
+nine_patch_stretch = true
+texture_over = ExtResource("10_6ci3b")
 
 [node name="ItemUI" type="HBoxContainer" parent="MarginContainer/Screen" unique_id=1931901216]
 layout_mode = 2

@@ -9,6 +9,7 @@ extends Control
 @export var rating_meter_needle: TextureRect
 @export_category("Assets")
 @export var rating_stars_textures: Array[Texture]
+@export var trash_stars: HBoxContainer
 
 var _employee_rating_last_update: float = -1
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	Events.items_updated.connect(populate_items)
 
 	rating_meter_needle.offset_transform_rotation = deg_to_rad(-135)
+	trash_stars.visible = true
 
 
 func populate_items() -> void:
