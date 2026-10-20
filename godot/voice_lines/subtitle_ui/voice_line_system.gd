@@ -34,7 +34,7 @@ func setup() -> void:
 	# Process voice lines for faster referencing.
 	for voice_line in _voice_lines:
 		_voice_lines_by_id[voice_line.voice_line_id] = voice_line
-	
+
 func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineLocationEnum, priority: VoiceLineSystem.VoiceLinePriorityEnum, out_token: Array[VoiceLinePlaybackToken] = []) -> void:
 	var voice_line: VoiceLine = _get_voice_line_by_id(voice_line_id)
 	if voice_line == null:
@@ -67,7 +67,7 @@ func play_voice_line(voice_line_id: String, location: VoiceLineSystem.VoiceLineL
 	var playback_token: VoiceLinePlaybackToken = VoiceLinePlaybackToken.new()
 	playback_token.voice_line = _currently_playing_voice_line
 	out_token.append(playback_token)
-	
+
 	requested_show_voice_line_subtitle.emit(_currently_playing_voice_line)
 	for player in _currently_playing_voice_line_players:
 		player.play_voice_line(_currently_playing_voice_line)

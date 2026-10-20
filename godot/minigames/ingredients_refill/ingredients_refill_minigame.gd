@@ -88,7 +88,7 @@ func _ready() -> void:
 	var tween_time = bean_spawn_timer.wait_time
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y + 30, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees - 30, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	
+
 	bag_shake_tween.tween_property(bag, "position:y", bag.position.y - 30, tween_time)
 	bag_shake_tween.parallel().tween_property(bag_sprite, "rotation_degrees", bag_sprite.rotation_degrees + 30, tween_time)
 
