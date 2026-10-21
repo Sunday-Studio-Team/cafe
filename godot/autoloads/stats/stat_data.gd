@@ -20,7 +20,7 @@ var machine_time_to_make_drink := 3.0
 var customer_wait_time_machine_each_day: Dictionary[int, float] = { 1: 45.0, 2: 45.0, 3: 45.0, 4: 45.0, 5: 45.0, 0: INF }
 var customer_wait_time_help_desk_each_day: Dictionary[int, float] = { 1: 45.0, 2: 45.0, 3: 45.0, 4: 45.0, 5: 45.0, 0: INF }
 var daily_profit_goals_each_day: Dictionary[int, float] = { 1: 15.0, 2: 30.0, 3: 60.0, 4: 80.0, 5: 100.0, 0: 100.0 }
-var drink_price_multiplier_each_day: Dictionary[int, float] = { 1: 1.3, 2: 1.6, 3: 2.2, 4: 3.2, 5: 3.5, 0: 1.0  }
+var drink_price_multiplier_each_day: Dictionary[int, float] = { 1: 1.2, 2: 1.5, 3: 2.0, 4: 3.0, 5: 3.5, 0: 1.0  }
 var employee_rating_max := 5.0
 var machine_starting_ingredients: int = 60
 var machine_max_ingredients: int = 80
@@ -54,17 +54,18 @@ var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
 var time_camera_disabled_after_sabotage := 30.0
 
+var lucky_charm_activation_chance: float = 0.25
+
 var daily_completion_item_unlocks: Dictionary[int, Array] = {
-	1: ["nice_spoon"],
-	2: ["barista_guide"],
+	1: ["lucky_charm", "barista_guide"],
+	2: ["air_horn"],
 	3: ["air_freshener"],
 	4: ["super_scrubber"],
-	# 4: ["super_scrubber", "teleporter"],
 	5: ["roller_skates"],
 }
 
 var daily_rating_item_unlocks: Dictionary[int, Array] = {
-	1: ["air_horn"],
+	1: ["nice_spoon"],
 	2: ["hammer"],
 	3: ["whipped_cream"],
 	4: ["teleporter"],

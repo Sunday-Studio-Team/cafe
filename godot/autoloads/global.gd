@@ -272,6 +272,18 @@ func add_items_to_unlocked_list(item_ids: Array) -> void:
 			push_warning("Unlocked item not found: %s" % item_id)
 
 
+func lucky_charm_check() -> bool:
+	var has_lucky_charm_item: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "lucky_charm":
+			has_lucky_charm_item = true
+			break
+	var luck_roll: float = randf()
+	if has_lucky_charm_item and luck_roll < Stats.current.lucky_charm_activation_chance:
+		return true
+	return false
+
+
 func _physics_process(_delta: float) -> void:
 	# this have to be reset to false at the start of every frame here
 	# because if we set it in the individual security cameras' processes, they
