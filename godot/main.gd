@@ -450,7 +450,7 @@ func attempt_spawn_trash() -> void:
 		return
 
 	var spawn := randf()
-	if spawn >= Stats.trash_spawn_chance:
+	if spawn >= Stats.current.trash_spawn_chance:
 		return
 
 	spawn_trash()

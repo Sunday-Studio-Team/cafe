@@ -20,7 +20,7 @@ func _ready() -> void:
 	Events.items_updated.connect(populate_items)
 
 	rating_meter_needle.offset_transform_rotation = deg_to_rad(-135)
-	trash_stars.visible = true
+	trash_stars.visible = false
 
 
 func populate_items() -> void:
@@ -35,6 +35,7 @@ func populate_items() -> void:
 
 func _physics_process(_delta: float) -> void:
 	update_score_indicators()
+	check_trash_stars()
 
 
 func update_score_indicators() -> void:
@@ -76,3 +77,14 @@ func fill_stars(number_of_stars_to_fill: float) -> void:
 	var value_for_final_star: float = (number_of_stars_to_fill - num_of_whole_stars) * 100
 
 	rating_meter_stars[num_of_whole_stars].value = value_for_final_star
+
+
+func check_trash_stars() -> void:
+	if Global.total_trash >= Global.trash_punishment_threshold:
+		trash_stars.visible = true
+	if Global.total_trash == 0:
+		trash_stars.visible = false
+	var i = 0
+	for star in trash_stars.get_children():
+		star.visible = i < Global.total_trash
+		i += 1
