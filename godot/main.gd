@@ -449,10 +449,8 @@ func attempt_spawn_trash() -> void:
 	if not should_spawn_trash_today:
 		return
 
-	# freq of spawn 3/41 rn
-	# TODO: move this probability to Stats ?
-	var spawn := randi_range(0, 40)
-	if spawn >= 3:
+	var spawn := randf()
+	if spawn >= Stats.trash_spawn_chance:
 		return
 
 	spawn_trash()
@@ -472,9 +470,9 @@ func spawn_trash() -> void:
 		littering_customer = current_customers.pick_random()
 	if littering_customer:
 		customer_trash.position = Vector3(
-			littering_customer.global_position.x,
+			littering_customer.global_position.x + randf() * 3,
 			0,
-			littering_customer.global_position.z,
+			littering_customer.global_position.z + randf() * 3,
 		)
 	else:
 		customer_trash.position = default_trash_spawn_spot.position
