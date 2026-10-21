@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://07gguhdfdsna"]
 
 [ext_resource type="Script" uid="uid://w8k3e1miec1a" path="res://resources/items/item.gd" id="1_d02as"]
-[ext_resource type="Texture2D" uid="uid://dqcs07ocfm8qh" path="res://Assets/lucky_charm/lucky_charm.png" id="1_e070i"]
+[ext_resource type="Texture2D" uid="uid://dqcs07ocfm8qh" path="res://sprites/items/lucky_charm.png" id="1_e070i"]
 
 [resource]
 script = ExtResource("1_d02as")
 item_id = "lucky_charm"
 name = "Lucky Charm"
 description_at_levels = Dictionary[int, String]({
-1: "25% chance to not lose rating",
-2: "25% chance to not lose rating"
+1: "25% chance to prevent rating loss.",
+2: "25% chance to prevent rating loss."
 })
 icon = ExtResource("1_e070i")
 can_activate_anywhere = false
