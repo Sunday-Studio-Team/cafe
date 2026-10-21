@@ -22,7 +22,7 @@ typing_minigame_variant_fill_blanks_packed_scene = ExtResource("3_nc7i6")
 typing_minigame_variant_container = NodePath("TypingMinigameContainer")
 full_sentence_likelihood = 0.0
 fill_blanks_likelihood = 1.0
-timer_progress_bar = NodePath("TypingMinigameContainer/TypingMinigameTimerBar")
+timer_progress_bar = NodePath("TypingMinigameContainer/TypingMinigameTimer/TypingMinigameTimerBar")
 
 [node name="TypingMinigameContainer" type="Control" parent="." unique_id=921845571]
 layout_mode = 1
@@ -32,12 +32,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TypingMinigameTimer" type="RichTextLabel" parent="TypingMinigameContainer" unique_id=2084466103]
+[node name="TypingMinigameTimer" type="Control" parent="TypingMinigameContainer" unique_id=2075638062]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 417.0
+offset_top = -465.0
+offset_right = 417.0
+offset_bottom = -465.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TypingMinigameTimer" type="RichTextLabel" parent="TypingMinigameContainer/TypingMinigameTimer" unique_id=2084466103]
 z_index = 2
 layout_mode = 0
-offset_left = 852.0
-offset_right = 1109.0
-offset_bottom = 101.0
+offset_left = -108.0
+offset_top = -48.0
+offset_right = 149.0
+offset_bottom = 53.0
 theme_override_fonts/normal_font = ExtResource("3_g8vla")
 theme_override_font_sizes/normal_font_size = 65
 theme_override_font_sizes/bold_font_size = 65
@@ -48,13 +63,14 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TypingMinigameTimerBar" type="TextureProgressBar" parent="TypingMinigameContainer" unique_id=1393870821]
+[node name="TypingMinigameTimerBar" type="TextureProgressBar" parent="TypingMinigameContainer/TypingMinigameTimer" unique_id=1393870821]
 z_index = 2
 texture_filter = 1
 layout_mode = 0
-offset_left = 906.0
-offset_right = 1066.0
-offset_bottom = 160.0
+offset_left = -54.0
+offset_top = -48.0
+offset_right = 106.0
+offset_bottom = 112.0
 scale = Vector2(0.6, 0.60000026)
 max_value = 45.0
 fill_mode = 4
@@ -62,13 +78,13 @@ texture_under = ExtResource("4_hib46")
 texture_over = ExtResource("5_l115w")
 texture_progress = ExtResource("6_ekkmo")
 
-[node name="Hourglass" type="Label" parent="TypingMinigameContainer" unique_id=1813416041]
+[node name="Hourglass" type="Label" parent="TypingMinigameContainer/TypingMinigameTimer" unique_id=1813416041]
 z_index = 2
 layout_mode = 0
-offset_left = 894.00006
-offset_top = 10.0
-offset_right = 934.00006
-offset_bottom = 33.0
+offset_left = -65.99994
+offset_top = -38.0
+offset_right = -25.999939
+offset_bottom = -15.0
 scale = Vector2(2.9999952, 3.0799997)
 text = "⌛"
 horizontal_alignment = 1
