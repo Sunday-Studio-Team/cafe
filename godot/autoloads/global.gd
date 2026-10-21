@@ -272,13 +272,14 @@ func add_items_to_unlocked_list(item_ids: Array) -> void:
 			push_warning("Unlocked item not found: %s" % item_id)
 
 
-func lucky_check() -> bool:
-	var lucky = false
+func lucky_charm_check() -> bool:
+	var has_lucky_charm_item: bool = false
 	for item in Global.owned_items:
 		if item.item_id == "lucky_charm":
-			lucky = true
+			has_lucky_charm_item = true
 			break
-	if lucky and randf() < 0.25:
+	var luck_roll: float = randf()
+	if has_lucky_charm_item and luck_roll < Stats.current.lucky_charm_activation_chance:
 		return true
 	return false
 
