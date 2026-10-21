@@ -18,25 +18,28 @@ enum State {
 
 @export var timer_progress_bar: TextureProgressBar
 
-var percent_time_left = Global.active_help_desk_customer.timer.time_left
+var percent_time_left: float
 var _state: State
 var _active_typing_minigame_variant: TypingMinigameVariant
 var _active_helpdesk_customer: Customer
 
 func _ready() -> void:
+	if Global.active_help_desk_customer != null:
+		percent_time_left = Global.active_help_desk_customer.timer.time_left
+	
 	_minigame_startup_overlay.play("TYPE!")
 	_start_minigame()
 
 func _process(delta: float) -> void:
-	percent_time_left = Global.active_help_desk_customer.timer.time_left
-	if percent_time_left >= 30:
-		timer_progress_bar.modulate = Color.GREEN
-	elif percent_time_left >= 15:
-		timer_progress_bar.modulate = Color.ORANGE
-	else:
-		timer_progress_bar.modulate = Color.RED
-		
-	timer_progress_bar.value = percent_time_left 
+	if Global.active_help_desk_customer != null:
+		percent_time_left = Global.active_help_desk_customer.timer.time_left
+		if percent_time_left >= 30:
+			timer_progress_bar.modulate = Color.GREEN
+		elif percent_time_left >= 15:
+			timer_progress_bar.modulate = Color.ORANGE
+		else:
+			timer_progress_bar.modulate = Color.RED
+		timer_progress_bar.value = percent_time_left 
 
 func _start_minigame() -> void:
 	_state = State.CUSTOMER_APOLOGY
