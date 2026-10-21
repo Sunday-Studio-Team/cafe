@@ -80,3 +80,4 @@ signal free_cam_toggled
 signal free_cam_set_speed(speed: float)
 # PC Cursor
 signal pc_state_change(using_pc: bool)
+signal rating_loss_blocked_by_lucky_charm

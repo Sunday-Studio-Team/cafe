@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://w26hgj0og5x5"]
+
+[ext_resource type="Script" uid="uid://dakom5s7ml1nr" path="res://lucky_charm_ui.gd" id="1_aqji6"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="2_63urh"]
+[ext_resource type="Texture2D" uid="uid://dqcs07ocfm8qh" path="res://sprites/items/lucky_charm.png" id="3_h5u37"]
+[ext_resource type="AudioStream" uid="uid://dsp3lgb2k4sm2" path="res://audio/bomb/meow.wav" id="4_mwlm8"]
+
+[sub_resource type="Animation" id="Animation_aqji6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/LuckyCharmIcon:offset_transform_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_63urh"]
+resource_name = "rotate_icon"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/LuckyCharmIcon:offset_transform_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0.08726646259971647, -0.2617993877991494]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h5u37"]
+_data = {
+&"RESET": SubResource("Animation_aqji6"),
+&"rotate_icon": SubResource("Animation_63urh")
+}
+
+[node name="LuckyCharmUI" type="CanvasLayer" unique_id=229603602 node_paths=PackedStringArray("ui_margin_container", "meow_sound")]
+script = ExtResource("1_aqji6")
+ui_margin_container = NodePath("MarginContainer")
+meow_sound = NodePath("Meow")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1046248090]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=136615156]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="RatingLossBlockedTextLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1934160974]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_63urh")
+theme_override_font_sizes/font_size = 64
+text = "Rating loss blocked
+by lucky charm!"
+horizontal_alignment = 1
+
+[node name="LuckyCharmIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1881363199]
+custom_minimum_size = Vector2(256, 256)
+custom_maximum_size = Vector2(256, 256)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+offset_transform_enabled = true
+texture = ExtResource("3_h5u37")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Meow" type="AudioStreamPlayer" parent="." unique_id=1192451815]
+stream = ExtResource("4_mwlm8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1546252594]
+libraries/ = SubResource("AnimationLibrary_h5u37")
+autoplay = &"rotate_icon"
