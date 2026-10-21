@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://bfyio22arllmm"]
 
 [ext_resource type="Script" uid="uid://ce518qg6ck3gw" path="res://minigames/typing/typing_minigame.gd" id="1_6jplg"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="3_g8vla"]
 [ext_resource type="PackedScene" uid="uid://ib45bvdvotru" path="res://minigames/typing/typing_minigame_variants/typing_minigame_variant_fill_blanks.tscn" id="3_nc7i6"]
+[ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="4_hib46"]
 [ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="4_nc7i6"]
 [ext_resource type="AudioStream" uid="uid://c5gelntvraw3y" path="res://audio/music/typing_minigame_music.wav" id="5_g8vla"]
+[ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="5_l115w"]
+[ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="6_ekkmo"]
 
-[node name="TypingMinigame" type="Control" unique_id=1689639804 node_paths=PackedStringArray("_minigame_startup_overlay", "typing_minigame_variant_container")]
+[node name="TypingMinigame" type="Control" unique_id=1689639804 node_paths=PackedStringArray("_minigame_startup_overlay", "typing_minigame_variant_container", "timer_progress_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +22,7 @@ typing_minigame_variant_fill_blanks_packed_scene = ExtResource("3_nc7i6")
 typing_minigame_variant_container = NodePath("TypingMinigameContainer")
 full_sentence_likelihood = 0.0
 fill_blanks_likelihood = 1.0
+timer_progress_bar = NodePath("TypingMinigameContainer/TypingMinigameTimerBar")
 
 [node name="TypingMinigameContainer" type="Control" parent="." unique_id=921845571]
 layout_mode = 1
@@ -26,6 +31,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TypingMinigameTimer" type="RichTextLabel" parent="TypingMinigameContainer" unique_id=2084466103]
+z_index = 2
+layout_mode = 0
+offset_left = 852.0
+offset_right = 1109.0
+offset_bottom = 101.0
+theme_override_fonts/normal_font = ExtResource("3_g8vla")
+theme_override_font_sizes/normal_font_size = 65
+theme_override_font_sizes/bold_font_size = 65
+theme_override_font_sizes/bold_italics_font_size = 65
+theme_override_font_sizes/italics_font_size = 65
+theme_override_font_sizes/mono_font_size = 65
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TypingMinigameTimerBar" type="TextureProgressBar" parent="TypingMinigameContainer" unique_id=1393870821]
+z_index = 2
+texture_filter = 1
+layout_mode = 0
+offset_left = 906.0
+offset_right = 1066.0
+offset_bottom = 160.0
+scale = Vector2(0.6, 0.60000026)
+max_value = 45.0
+fill_mode = 4
+texture_under = ExtResource("4_hib46")
+texture_over = ExtResource("5_l115w")
+texture_progress = ExtResource("6_ekkmo")
+
+[node name="Hourglass" type="Label" parent="TypingMinigameContainer" unique_id=1813416041]
+z_index = 2
+layout_mode = 0
+offset_left = 894.00006
+offset_top = 10.0
+offset_right = 934.00006
+offset_bottom = 33.0
+scale = Vector2(2.9999952, 3.0799997)
+text = "⌛"
+horizontal_alignment = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1544051889]
 stream = ExtResource("5_g8vla")
