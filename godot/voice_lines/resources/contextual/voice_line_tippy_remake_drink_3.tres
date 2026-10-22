@@ -2,10 +2,12 @@
 
 [ext_resource type="AudioStream" uid="uid://lufcgmjr3did" path="res://audio/vo/barks/hmm_waste.mp3" id="1_2c626"]
 [ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_3iro1"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_ytf2v"]
 
 [resource]
 script = ExtResource("2_3iro1")
 voice_line_id = "tippy_remake_drink_3"
 audio_stream = ExtResource("1_2c626")
+speaker = ExtResource("3_ytf2v")
 subtitle_en = "Hmm... Waste of [i]time[/i], don't you think?"
 metadata/_custom_type_script = "uid://vdv5g0q45pri"
