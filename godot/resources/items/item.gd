@@ -3,6 +3,12 @@ extends Resource
 
 @export var item_id: String
 @export var name: String
+enum Rarity {
+	COMMON,
+	RARE,
+	LEGENDARY,
+}
+@export var rarity: Rarity
 @export var description_at_levels: Dictionary[int, String]
 @export var icon: Texture2D
 @export var price_at_levels: Dictionary[int, float]
@@ -24,6 +30,34 @@ const SHOW_ITEM_LEVELS: bool = false
 
 var active_item_remaining_cooldown: float
 var can_be_used: bool = true #Set to false when the item is used
+
+var rarity_name: String:
+	get:
+		match rarity:
+			Rarity.COMMON:
+				return "Common"
+			Rarity.RARE:
+				return "Rare"
+			Rarity.LEGENDARY:
+				return "Legendary"
+			_:
+				return "Unhandled Rarity"
+
+var rarity_color: Color:
+	get:
+		match rarity:
+			Rarity.COMMON:
+				# Grey
+				return Color.from_string("383a39", Color.BLACK)
+			Rarity.RARE:
+				# Blue
+				return Color.from_string("1c5f73", Color.BLACK)
+			Rarity.LEGENDARY:
+				# Gold
+				return Color.from_string("ae9e00", Color.BLACK)
+			_:
+				return Color.BLACK
+
 
 
 func apply_stats() -> void:

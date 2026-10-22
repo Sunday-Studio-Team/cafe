@@ -1,6 +1,10 @@
 class_name LoadoutMenuElement
 extends Button
 
+@export var item_icon_tecture_rect: TextureRect
+@export var rarity_color_rect: ColorRect
+
+
 ## if false, this is one of the slots at the top showing available items
 ## if true, this is one of the slots at the bottom showing equipped items
 var is_equipped_slot := false
@@ -10,9 +14,14 @@ var item: Item:
 		item = new_item
 
 		if item != null:
-			icon = item.icon
+			item_icon_tecture_rect.visible = true
+			item_icon_tecture_rect.texture = item.icon
+			rarity_color_rect.visible = true
+			rarity_color_rect.color = item.rarity_color
 		else:
-			icon = null
+			item_icon_tecture_rect.visible = false
+			item_icon_tecture_rect.texture = null
+			rarity_color_rect.visible = false
 
 
 func _ready() -> void:
