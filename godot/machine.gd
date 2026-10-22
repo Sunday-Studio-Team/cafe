@@ -802,6 +802,8 @@ func accept_order(did_remake_drink: bool) -> void:
 	ordered_drink_name_label.hide()
 	order_breakdown.hide()
 
+	money_gain_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MONEY_GAIN)
+
 	var rating_before_update: float = Global.employee_rating
 
 	if did_remake_drink or order.star_rating_loss_for_accept == 0.0:
@@ -813,7 +815,6 @@ func accept_order(did_remake_drink: bool) -> void:
 		)
 		Global.employee_rating += Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
 		positive_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.PLUS_RATING)
-		money_gain_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MONEY_GAIN)
 	else:
 		if Global.lucky_charm_check():
 			Events.alert_posted.emit("Customer unhappy with drink...", UI.AlertIconType.RATING, 4.0, UI.ALERT_COLOR_RED)
