@@ -298,8 +298,8 @@ func handle_customer_trash() -> void:
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 5)
-		trash_to_drop.apply_impulse(transform.basis * Vector3.UP * 0.5)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 20)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.UP *2)
 
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 

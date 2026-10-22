@@ -31,7 +31,7 @@ func _ready() -> void:
 	# briefly disable on spawn so if we're dropping it we cant accidentally
 	# interact with it as it falls
 	interactable.visible = false
-	await get_tree().create_timer(0.5, false).timeout
+	await get_tree().create_timer(0.1, false).timeout
 	interactable.visible = true
 
 	hint_pop_animated_sprite_3d.visible = false
