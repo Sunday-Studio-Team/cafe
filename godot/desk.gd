@@ -6,27 +6,39 @@ const PC_CAMERA_TWEEN_DURATION := 0.45
 @export var interactable: Interactable
 @export var fabric_cover_for_monitor: Node3D
 @export var camera_spot_for_pc_interaction: Marker3D
+@export var email_notif_animated_sprite: AnimatedSprite3D
 
 var camera_transform_before_pc_interaction: Transform3D
-var exiting_pc = false
+var exiting_pc: bool = false
 
 func _ready() -> void:
 	Global.desk = self
 	
 	await get_tree().process_frame
-
+	
+	if Global.unread_email_count > 0:
+		email_notif_animated_sprite.visible = true
+		email_notif_animated_sprite.play("unread_emails_idle")
+	else:
+		email_notif_animated_sprite.visible = false
+	
 	interactable.interacted.connect(_on_desk_interacted)
 	interactable.show()
 	fabric_cover_for_monitor.hide()
-
+	
 	Events.shift_started.connect(_on_shift_started)
 
+func _process(delta: float) -> void:
+	if Global.unread_email_count > 0:
+		email_notif_animated_sprite.visible = true
+	else:
+		email_notif_animated_sprite.visible = false
 
 func _on_desk_interacted() -> void:
 	if exiting_pc: return
 	pc_interaction_camera_enter_transition()
 	Global.pc_ui.show()
-
+	
 	Events.pc_state_change.emit(true)
 
 
