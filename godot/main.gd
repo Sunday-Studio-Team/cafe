@@ -470,9 +470,9 @@ func spawn_trash() -> void:
 		littering_customer = current_customers.pick_random()
 	if littering_customer:
 		customer_trash.position = Vector3(
-			littering_customer.global_position.x + randf() * 3,
+			littering_customer.global_position.x + randf() * 0.5,
 			0,
-			littering_customer.global_position.z + randf() * 3,
+			littering_customer.global_position.z + randf() * 0.5,
 		)
 	else:
 		customer_trash.position = default_trash_spawn_spot.position
@@ -483,7 +483,6 @@ func spawn_trash() -> void:
 
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
-		Global.employee_rating -= Global.trash_punishment_amount
 		Events.alert_posted.emit(
 			"-%s Too much trash in the store" % Global.trash_punishment_amount,
 			UI.AlertIconType.RATING,
