@@ -280,6 +280,7 @@ func lucky_charm_check() -> bool:
 			break
 	var luck_roll: float = randf()
 	if has_lucky_charm_item and luck_roll < Stats.current.lucky_charm_activation_chance:
+		Events.rating_loss_blocked_by_lucky_charm.emit()
 		return true
 	return false
 

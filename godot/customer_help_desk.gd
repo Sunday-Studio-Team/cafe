@@ -96,7 +96,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 		var rating_loss: float = Stats.current.help_desk_customer_timed_out_rating_loss_each_day[Global.day]
 		if Global.lucky_charm_check():
 			Events.alert_posted.emit("A customer didn't get help...", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
-			Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
 			Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= rating_loss
