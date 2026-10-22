@@ -13,32 +13,34 @@ var exiting_pc: bool = false
 
 func _ready() -> void:
 	Global.desk = self
-	
+
 	await get_tree().process_frame
-	
+
 	if Global.unread_email_count > 0:
 		email_notif_animated_sprite.visible = true
 		email_notif_animated_sprite.play("unread_emails_idle")
 	else:
 		email_notif_animated_sprite.visible = false
-	
+
 	interactable.interacted.connect(_on_desk_interacted)
 	interactable.show()
 	fabric_cover_for_monitor.hide()
-	
+
 	Events.shift_started.connect(_on_shift_started)
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	if Global.unread_email_count > 0:
 		email_notif_animated_sprite.visible = true
 	else:
 		email_notif_animated_sprite.visible = false
 
+
 func _on_desk_interacted() -> void:
 	if exiting_pc: return
 	pc_interaction_camera_enter_transition()
 	Global.pc_ui.show()
-	
+
 	Events.pc_state_change.emit(true)
 
 

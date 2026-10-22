@@ -13,7 +13,8 @@ extends Node
 
 @export var debug_viewpoint_marker_3d: Node3D
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	if !enable_logic:
 		return
 
@@ -27,15 +28,16 @@ func _physics_process(delta: float) -> void:
 			_update_visuals(player_camera)
 			_match_camera_fov(player_camera)
 
+
 func _update_visuals(viewpoint_node_3d: Node3D) -> void:
 	# Update the viewpoint match node position and rotation.
 	viewpoint_match_node.global_position = viewpoint_node_3d.global_position
 	viewpoint_match_node.global_rotation = viewpoint_node_3d.global_rotation
-	
+
 	# Update the mirrored camera's local position to match the viewpoint match node's, but invert the z.
 	mirrored_camera_3d.position = viewpoint_match_node.position
 	mirrored_camera_3d.position.z *= -1.0
-	
+
 	# Update the mirrored camera's global rotation to match the viewpoint's after reflection against the mirror.
 	var incoming_vec_x: float = rad_to_deg(mirror_base_node.global_rotation.x - viewpoint_match_node.global_rotation.x)
 	var reflected_vec_x: float = -mirror_base_node.global_rotation.x - deg_to_rad(incoming_vec_x)
