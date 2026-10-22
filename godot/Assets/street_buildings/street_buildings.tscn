@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cu7jh5562e1ep" path="res://Assets/street_buildings/models/street_buildings_2.glb" id="3_3s848"]
 [ext_resource type="PackedScene" uid="uid://b4uxjrmybv5dv" path="res://Assets/street_buildings/models/street_buildings_3.glb" id="4_pxir8"]
 [ext_resource type="PackedScene" uid="uid://blce12e8ntnmw" path="res://Assets/street_buildings/models/street_buildings_6.glb" id="5_g38nb"]
-[ext_resource type="PackedScene" uid="uid://b0rpq1j5j5kwn" path="res://Assets/street_buildings/models/street_buildings_4.glb" id="5_gpshu"]
+[ext_resource type="PackedScene" uid="uid://dqkl1lrbemxn2" path="res://Assets/street_buildings/models/street_buildings_4.glb" id="5_gpshu"]
 [ext_resource type="PackedScene" uid="uid://bq6pinhceprjg" path="res://Assets/street_buildings/models/street_buildings_7.glb" id="5_wcc17"]
 [ext_resource type="PackedScene" uid="uid://0xgi3f4h2264" path="res://Assets/street_buildings/models/street_buildings_5.glb" id="6_8w05m"]
 [ext_resource type="PackedScene" uid="uid://mpye30jssoti" path="res://Assets/street_buildings/models/street_buildings_9.glb" id="6_gpshu"]
@@ -419,8 +419,8 @@ material_override = ExtResource("2_g38nb")
 [node name="Cube_005" parent="3" index="39" unique_id=409438436]
 material_override = ExtResource("2_g38nb")
 
-[node name="street_buildings_4" parent="." unique_id=1681046796 instance=ExtResource("5_gpshu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3026892, 0, 9.34702)
+[node name="street_buildings_4" parent="." unique_id=1384274438 instance=ExtResource("5_gpshu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31622046, 0, 9.268019)
 
 [node name="street_buildings_5" parent="." unique_id=1055124422 instance=ExtResource("6_8w05m")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
@@ -838,9 +838,10 @@ material_override = ExtResource("2_g38nb")
 material_override = ExtResource("2_g38nb")
 
 [node name="10_copy" parent="." unique_id=954626061 instance=ExtResource("7_8w05m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40140414, 0, 11.9253235)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40140414, 0, 11.972346)
 
 [node name="10_Base_Bulding_002" parent="10_copy" index="0" unique_id=1459091943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.120586395)
 material_override = ExtResource("8_hrw15")
 
 [node name="10_Base_Bulding" parent="10_copy/10_Base_Bulding_002" index="0" unique_id=436256988]
