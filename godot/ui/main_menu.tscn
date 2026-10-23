@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bet57jtil2hrv" path="res://Assets/main_menu/MAINMENU-SETTINGS.png" id="3_wk0pr"]
 [ext_resource type="Texture2D" uid="uid://bwoocyv7tuqy3" path="res://Assets/main_menu/BG.png" id="4_0nobx"]
 [ext_resource type="Texture2D" uid="uid://bjx7p7r8lm7aj" path="res://Assets/main_menu/MAINMENU-CONTINUE.png" id="4_8uxxo"]
-[ext_resource type="Script" uid="uid://cd47udvmhermt" path="res://ui/buttons.gd" id="4_p8ri8"]
 [ext_resource type="Texture2D" uid="uid://d3hkkncg06tgt" path="res://Assets/main_menu/Chest.png" id="5_iyrh0"]
 [ext_resource type="Texture2D" uid="uid://32em3wf511p2" path="res://Assets/main_menu/Hair.png" id="6_8jgmr"]
 [ext_resource type="Texture2D" uid="uid://cd64ew2letnkt" path="res://Assets/main_menu/MAINMENU-EXIT.png" id="6_ei257"]
@@ -23,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://3bsekxukog0r" path="res://sprites/menu_anim/frame_006.PNG" id="21_rqnt3"]
 [ext_resource type="Texture2D" uid="uid://bs6lrleala300" path="res://Assets/main_menu/MAINMENU-NEWGAME.png" id="21_s1050"]
 [ext_resource type="Texture2D" uid="uid://4nqhps4rtxcv" path="res://sprites/menu_anim/frame_007.PNG" id="22_dbfs1"]
+[ext_resource type="Texture2D" uid="uid://bdxk885j0moav" path="res://Assets/main_menu/Discord-Symbol-Blurple.png" id="23_i5ydv"]
+[ext_resource type="Texture2D" uid="uid://dqx0vd8ck62wt" path="res://Assets/main_menu/Instagram_Glyph_Gradient.png" id="24_racxt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0xaf"]
 animations = [{
@@ -54,39 +55,38 @@ animations = [{
 "texture": ExtResource("22_dbfs1")
 }],
 "loop": 0,
-"name": &"menu",
+"name": &"menu_start",
 "speed": 3.0
 }]
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "continue_button", "quit_button", "_options_button")]
+[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("_background_sprite", "_buttons_parent_node", "_new_game_button", "_continue_button", "_quit_button", "_options_button", "_discord_button", "_instagram_button")]
 script = ExtResource("1_t7e0r")
-play_button = NodePath("Buttons/NewGame")
-continue_button = NodePath("Buttons/Continue")
-quit_button = NodePath("Buttons/Quit")
+_background_sprite = NodePath("Background")
+_buttons_parent_node = NodePath("Buttons")
+_new_game_button = NodePath("Buttons/NewGame")
+_continue_button = NodePath("Buttons/Continue")
+_quit_button = NodePath("Buttons/Quit")
 _options_button = NodePath("Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
+_discord_button = NodePath("MarginContainer/HBoxContainer/Discord")
+_instagram_button = NodePath("MarginContainer/HBoxContainer/Instagram")
 _save_file_path = "user://save_data.tres"
 metadata/_edit_vertical_guides_ = [1921.0, -40.0]
 
 [node name="GlobalCursor" type="Node" parent="." unique_id=716050075]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1287952031]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2006666443]
+[node name="Background" type="AnimatedSprite2D" parent="." unique_id=2006666443]
 position = Vector2(967, 539)
 sprite_frames = SubResource("SpriteFrames_o0xaf")
-animation = &"menu"
-frame = 6
-frame_progress = 1.0
+animation = &"menu_start"
 speed_scale = 3.0
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1887683021]
+[node name="SatoAndTippy" type="Node2D" parent="." unique_id=1887683021]
 visible = false
 
-[node name="ColorRect" type="TextureButton" parent="Node2D" unique_id=930743193]
-visible = false
+[node name="ReferencePic" type="TextureButton" parent="SatoAndTippy" unique_id=930743193]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -97,48 +97,68 @@ grow_vertical = 2
 texture_normal = ExtResource("3_rmr83")
 stretch_mode = 5
 
-[node name="Bg" type="Sprite2D" parent="Node2D" unique_id=128788965]
-visible = false
+[node name="Bg" type="Sprite2D" parent="SatoAndTippy" unique_id=128788965]
 position = Vector2(1002.00006, 557)
 scale = Vector2(1.225256, 1.225256)
 texture = ExtResource("4_0nobx")
 
-[node name="Chest" type="Sprite2D" parent="Node2D" unique_id=1423608147]
-visible = false
+[node name="Chest" type="Sprite2D" parent="SatoAndTippy" unique_id=1423608147]
 position = Vector2(1042.5, 569)
 texture = ExtResource("5_iyrh0")
 
-[node name="Hair" type="Sprite2D" parent="Node2D" unique_id=700149125]
-visible = false
+[node name="Hair" type="Sprite2D" parent="SatoAndTippy" unique_id=700149125]
 position = Vector2(1042.5, 569)
 texture = ExtResource("6_8jgmr")
 
-[node name="Head" type="Sprite2D" parent="Node2D" unique_id=429291390]
-visible = false
+[node name="Head" type="Sprite2D" parent="SatoAndTippy" unique_id=429291390]
 position = Vector2(1042.5, 569)
 texture = ExtResource("7_q75kt")
 
-[node name="Arm" type="Sprite2D" parent="Node2D" unique_id=1289322961]
-visible = false
+[node name="Arm" type="Sprite2D" parent="SatoAndTippy" unique_id=1289322961]
 position = Vector2(1042.5, 569)
 texture = ExtResource("8_0i0gl")
 
-[node name="ForeArm" type="Sprite2D" parent="Node2D" unique_id=1790326256]
-visible = false
+[node name="ForeArm" type="Sprite2D" parent="SatoAndTippy" unique_id=1790326256]
 position = Vector2(1042.5, 569)
 texture = ExtResource("9_jqly5")
 
-[node name="Handle" type="Sprite2D" parent="Node2D" unique_id=1561813986]
-visible = false
+[node name="Handle" type="Sprite2D" parent="SatoAndTippy" unique_id=1561813986]
 position = Vector2(1042.5, 569)
 texture = ExtResource("10_pbm0j")
 
-[node name="Tippy" type="Sprite2D" parent="Node2D" unique_id=830360356]
-visible = false
+[node name="Tippy" type="Sprite2D" parent="SatoAndTippy" unique_id=830360356]
 position = Vector2(1047.5, 533)
 texture = ExtResource("11_sb7pk")
 
-[node name="Buttons" type="Control" parent="." unique_id=732320545 node_paths=PackedStringArray("animated_sprite", "button_container")]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1247319873]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1787102497]
+custom_maximum_size = Vector2(-1, 100)
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Discord" type="Button" parent="MarginContainer/HBoxContainer" unique_id=565715139]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+icon = ExtResource("23_i5ydv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Instagram" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1986136711]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+icon = ExtResource("24_racxt")
+expand_icon = true
+
+[node name="Buttons" type="Control" parent="." unique_id=732320545]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -590.0
@@ -146,12 +166,8 @@ offset_top = 442.0
 offset_right = 1130.0
 offset_bottom = 1132.0
 size_flags_vertical = 3
-script = ExtResource("4_p8ri8")
-animated_sprite = NodePath("../AnimatedSprite2D")
-button_container = NodePath(".")
 
 [node name="Continue" type="TextureButton" parent="Buttons" unique_id=1358047692]
-unique_name_in_owner = true
 layout_mode = 0
 offset_left = 594.0
 offset_top = 189.0
@@ -164,7 +180,6 @@ texture_normal = ExtResource("4_8uxxo")
 texture_click_mask = SubResource("BitMap_ei257")
 
 [node name="NewGame" type="TextureButton" parent="Buttons" unique_id=1239137299]
-unique_name_in_owner = true
 layout_mode = 0
 offset_left = 589.0
 offset_top = -64.0
