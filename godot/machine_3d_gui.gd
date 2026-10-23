@@ -22,7 +22,7 @@ var last_event_time: float = -1.0
 # where to put our camera back to when we exit
 var cam_trans_b4_enter: Transform3D
 
-#keeps track of where the player was before they interacted w/ machine.
+# keeps track of where the player was before they interacted w/ machine.
 var where_was_player: Transform3D
 
 # i know . im sorry .
@@ -46,7 +46,7 @@ func _unhandled_input(input_event: InputEvent):
 	# Ignore if not allowing gui inputs
 	if not Global.cinematic_camera_allow_machine_gui_inputs:
 		return
-	
+
 	if input_event.is_action_pressed("pause") and not Global.minigame_active and player_using_me:
 		exit_with_camera_tween()
 		get_viewport().set_input_as_handled()
@@ -68,15 +68,25 @@ func _unhandled_input(input_event: InputEvent):
 
 
 func enter_gui(update_player_reset_position: bool = true) -> void:
-	# seems weird because we cant interact with Interactables while in_ui
-	# anyway but this is actually to stop that CollisionShape blocking
-	# our mouse from clicking stuff lul
 	node_area.visible = true
 	interactable.visible = false
+
+	if update_player_reset_position:
+		Global.locked_camera_target_pos = machine.item_aim_spot.global_position
+		Global.player.movement_enabled = false
+		Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
+
+		Events.play_viewmodel_animation.emit("use_hand")
+		await Events.viewmodel_animation_finished
+
+		Global.player.movement_enabled = true
+		Global.camera_mode = Global.CameraMode.PLAYER
+
 	Global.in_machine_ui = true
 	Global.machine_in_use = machine
 	player_using_me = true
 	node_viewport.notify_mouse_entered()
+
 
 	if !Global.tutorial_machine_used:
 		Global.tutorial_machine_used = true
@@ -85,20 +95,20 @@ func enter_gui(update_player_reset_position: bool = true) -> void:
 	# used when using bomb(), which is in ingredients_refill_minigame.gd
 	where_was_player = Global.player.global_transform
 
-	create_tween().tween_property(
+	create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS).tween_property(
 			Global.player,
 			"global_rotation_degrees",
 			machine.global_rotation_degrees,
 			0.1,
 			)
-	create_tween().tween_property(
+	create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS).tween_property(
 			Global.player,
 			"global_position",
 			machine.spot_for_player.global_position,
 			0.1,
 			)
 	var cam: CameraController = Global.player.camera
-	
+
 	# we DONT want to set this when forcing the interaction to stop us losing
 	# input after the machine's jump animation
 	# (otherwise we become short)
@@ -169,7 +179,7 @@ func _mouse_input_event(
 	# Ignore if not allowing gui inputs
 	if not Global.cinematic_camera_allow_machine_gui_inputs:
 		return
-	
+
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
 	var quad_mesh_size = node_quad.mesh.size
 

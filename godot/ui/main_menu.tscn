@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://c057tndf4hyr0" path="res://sprites/menu_anim/frame_004.PNG" id="19_racxt"]
 [ext_resource type="Texture2D" uid="uid://dcaghfqxjhmep" path="res://sprites/menu_anim/frame_005.PNG" id="20_dooca"]
 [ext_resource type="Texture2D" uid="uid://3bsekxukog0r" path="res://sprites/menu_anim/frame_006.PNG" id="21_rqnt3"]
+[ext_resource type="Texture2D" uid="uid://bs6lrleala300" path="res://Assets/main_menu/MAINMENU-NEWGAME.png" id="21_s1050"]
 [ext_resource type="Texture2D" uid="uid://4nqhps4rtxcv" path="res://sprites/menu_anim/frame_007.PNG" id="22_dbfs1"]
 [ext_resource type="Texture2D" uid="uid://bdxk885j0moav" path="res://Assets/main_menu/Discord-Symbol-Blurple.png" id="23_i5ydv"]
 [ext_resource type="Texture2D" uid="uid://dqx0vd8ck62wt" path="res://Assets/main_menu/Instagram_Glyph_Gradient.png" id="24_racxt"]
@@ -61,14 +62,16 @@ animations = [{
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "quit_button", "_options_button", "discord_button", "instagram_button")]
+[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "continue_button", "quit_button", "_options_button", "discord_button", "instagram_button")]
 script = ExtResource("1_t7e0r")
-play_button = NodePath("Buttons/Play")
+play_button = NodePath("Buttons/NewGame")
+continue_button = NodePath("Buttons/Continue")
 quit_button = NodePath("Buttons/Quit")
 _options_button = NodePath("Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
 discord_button = NodePath("Buttons/Discord")
 instagram_button = NodePath("Buttons/Instagram")
+_save_file_path = "user://save_data.tres"
 metadata/_edit_vertical_guides_ = [1921.0, -40.0]
 
 [node name="GlobalCursor" type="Node" parent="." unique_id=716050075]
@@ -151,7 +154,8 @@ script = ExtResource("4_p8ri8")
 animated_sprite = NodePath("../AnimatedSprite2D")
 button_container = NodePath(".")
 
-[node name="Play" type="TextureButton" parent="Buttons" unique_id=1358047692]
+[node name="Continue" type="TextureButton" parent="Buttons" unique_id=1358047692]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 594.0
 offset_top = 189.0
@@ -161,6 +165,19 @@ scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource("4_8uxxo")
+texture_click_mask = SubResource("BitMap_ei257")
+
+[node name="NewGame" type="TextureButton" parent="Buttons" unique_id=1239137299]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 589.0
+offset_top = -64.0
+offset_right = 1148.0
+offset_bottom = 212.0
+scale = Vector2(1.2, 1.2)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("21_s1050")
 texture_click_mask = SubResource("BitMap_ei257")
 
 [node name="Options" type="TextureButton" parent="Buttons" unique_id=1503516788]

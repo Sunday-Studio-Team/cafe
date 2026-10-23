@@ -4,10 +4,12 @@ extends AnimatedSprite3D
 enum VfxType {
 	PLUS_RATING,
 	MINUS_RATING,
+	MONEY_GAIN
 }
 
 @export var _plus_rating_sprite_frames_uid:	StringName
 @export var _minus_rating_sprite_frames_uid: StringName
+@export var _money_gain_sprite_frames_uid: StringName
 
 var is_playing_vfx: bool
 
@@ -33,6 +35,9 @@ func play_anim_then_hide(vfx_type: VfxType) -> void:
 		VfxType.MINUS_RATING:
 			sprite_frames_uid = _minus_rating_sprite_frames_uid
 			animation_name = "minus_rating"
+		VfxType.MONEY_GAIN:
+			sprite_frames_uid = _money_gain_sprite_frames_uid
+			animation_name = "money_gain"
 	var token: ResourceBackgroundLoaderToken = Global.resource_background_loader.cache_resource(sprite_frames_uid)
 	while !token.is_loaded:
 		await get_tree().process_frame

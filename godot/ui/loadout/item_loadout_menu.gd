@@ -1,10 +1,11 @@
 class_name ItemLoadoutMenu
 extends CanvasLayer
 
+# (B AND C DISABLED CUZ THEY CLIP INTO STUFF)
 const LOCKER_ANIMATION_NAMES: Array[String] = [
 	"idle_notice_me_a",
-	"idle_notice_me_b",
-	"idle_notice_me_c"
+	#"idle_notice_me_b",
+	#"idle_notice_me_c"
 ]
 
 @export var element_scene: PackedScene
@@ -21,6 +22,8 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 # tedious . 0_0
 @export var item_hover_tooltip: Control
 @export var item_hover_tooltip_name: RichTextLabel
+@export var item_hover_tooltip_rarity_color_rect: ColorRect
+@export var item_hover_tooltip_rarity_label: RichTextLabel
 @export var item_hover_tooltip_description: RichTextLabel
 @export var item_hover_tooltip_cooldown_label: RichTextLabel
 @export var item_hover_tooltip_passive_indicator: Control
@@ -36,9 +39,9 @@ var player_has_confirmed_loadout_at_least_once := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
-	
+
 	Global.item_loadout_menu = self
-	
+
 	locker_interactable = Global.item_locker.interactable
 	locker_model = Global.item_locker.item_locker_model
 	locker_animation_player = Global.item_locker.animation_player
@@ -68,13 +71,21 @@ func _ready() -> void:
 	locker_animation_player.animation_finished.connect(
 		func(_animation: StringName) -> void:
 				await get_tree().create_timer(5, false).timeout
-				if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+				if not (
+					player_has_confirmed_loadout_at_least_once
+					or Global.in_loadout_menu
+					or Global.playing_tutorial
+				):
 					locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
 	)
 	await get_tree().create_timer(10, false).timeout
-	if not (player_has_confirmed_loadout_at_least_once or Global.in_loadout_menu):
+	if not (
+		player_has_confirmed_loadout_at_least_once
+		or Global.in_loadout_menu
+		or Global.playing_tutorial
+	):
 		locker_animation_player.play(LOCKER_ANIMATION_NAMES.pick_random())
-	
+
 
 func populate() -> void:
 	# delete anything we have in the scene for testing/from prev uses first
@@ -83,7 +94,7 @@ func populate() -> void:
 	for child in equipped_items_container.get_children():
 		child.queue_free()
 
-	# if we dont wait here for the children to free, we'll get the wrong values when we try to rezise the grids 	
+	# if we dont wait here for the children to free, we'll get the wrong values when we try to rezise the grids
 	await get_tree().process_frame
 
 	for item in Global.unlocked_items:
@@ -100,7 +111,7 @@ func populate() -> void:
 		)
 		equipped_item_button.is_equipped_slot = true
 		equipped_items_container.add_child(equipped_item_button)
-	
+
 	resize_grids()
 
 
@@ -111,7 +122,7 @@ func resize_grids() -> void:
 	elif num_of_available_items % 4 == 0:
 		available_items_container.columns = 4
 	else:
-		available_items_container.columns = 5
+		available_items_container.columns = 6
 
 	var num_of_equipped_item_slots := equipped_items_container.get_children().size()
 	if num_of_equipped_item_slots % 3 == 0 and num_of_equipped_item_slots < 9:
@@ -124,7 +135,7 @@ func resize_grids() -> void:
 
 func _physics_process(_delta: float) -> void:
 	Global.in_loadout_menu = visible
-	
+
 	if visible:
 		handle_item_hover_tooltip()
 
@@ -171,13 +182,13 @@ func add_available_item_button(item: Item) -> void:
 
 func confirm_and_hide_menu() -> void:
 	Global.tutorial_day_2_locker_loadout_confirmed = true
-	
+
 	# this is what triggers the door to open
 	# we only want it to trigger once
 	if not player_has_confirmed_loadout_at_least_once:
 		Events.player_confirmed_item_loadout.emit()
 		player_has_confirmed_loadout_at_least_once = true
-	
+
 	var equipped_items: Array[Item]
 
 	for equipped_item_button: LoadoutMenuElement in equipped_items_container.get_children():
@@ -189,6 +200,11 @@ func confirm_and_hide_menu() -> void:
 		item.unapply_stats()
 
 	Global.owned_items.assign(equipped_items)
+
+	SaveDataManager.save_data.equipped_item_ids.clear()
+	for item in Global.owned_items:
+		SaveDataManager.save_data.equipped_item_ids.append(item.item_id)
+	SaveDataManager.save_game_to_file()
 
 	# apply new items
 	for item in Global.owned_items:
@@ -215,6 +231,8 @@ func handle_item_hover_tooltip() -> void:
 				item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
 			else:
 				item_hover_tooltip_name.text = "[b]%s[/b]" % item.name
+			item_hover_tooltip_rarity_label.text = "[b]%s[/b]" % item.rarity_name.to_upper()
+			item_hover_tooltip_rarity_color_rect.color = item.rarity_color
 			item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
 			if item.is_active_item:
 				item_hover_tooltip_passive_indicator.hide()

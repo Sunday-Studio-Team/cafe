@@ -20,12 +20,12 @@ var machine_time_to_make_drink := 3.0
 var customer_wait_time_machine_each_day: Dictionary[int, float] = { 1: 45.0, 2: 45.0, 3: 45.0, 4: 45.0, 5: 45.0, 0: INF }
 var customer_wait_time_help_desk_each_day: Dictionary[int, float] = { 1: 45.0, 2: 45.0, 3: 45.0, 4: 45.0, 5: 45.0, 0: INF }
 var daily_profit_goals_each_day: Dictionary[int, float] = { 1: 15.0, 2: 30.0, 3: 60.0, 4: 80.0, 5: 100.0, 0: 100.0 }
-var drink_price_multiplier_each_day: Dictionary[int, float] = { 1: 1.3, 2: 1.6, 3: 2.2, 4: 3.2, 5: 3.5, 0: 1.0  }
+var drink_price_multiplier_each_day: Dictionary[int, float] = { 1: 1.2, 2: 1.5, 3: 2.0, 4: 3.0, 5: 3.5, 0: 1.0  }
 var employee_rating_max := 5.0
-var machine_starting_ingredients: int = 60
-var machine_max_ingredients: int = 80
+var machine_starting_ingredients: int = 40
+var machine_max_ingredients: int = 60
 var ingredients_per_order: int = 10
-var ingredients_per_bag: int = 50
+var ingredients_per_bag: int = 40
 var max_spills_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 0, 3: 2, 4: 3, 5: 4, 0: 1 }
 var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 2, 3: 3, 4: 5, 5: 4, 0: 1 }
 var clean_spill_allowed_remaining := 0.05
@@ -33,7 +33,7 @@ var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 60, 2: 90, 3: 120, 4
 
 # Redesign stuff
 var max_customers_queued_per_machine: int = 2
-var max_customers_queued_help_desk: int = 2
+var max_customers_queued_help_desk: int = 1
 var first_machine_customer_entry_time: float = 3.0
 var first_help_desk_customer_entry_time: float = 12.0
 # Seconds between customers entering store, linearly scaling between min and max with rating. Maybe use curves later!
@@ -47,24 +47,25 @@ var drink_correct_star_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 
 var machine_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 1.0, 2: 0.8, 3: 0.6, 4: 0.5, 5: 0.5, 0: 1.0 }
 var customer_steps_on_spill_rating_loss_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.3, 3: 0.3, 4: 0.3, 5: 0.3, 0: 0.3 }
 var spill_cleaned_rating_gain_each_day: Dictionary[int, float] = { 1: 0.5, 2: 0.5, 3: 0.5, 4: 0.5, 5: 0.5, 0: 0.5 }
-var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 0.6, 2: 0.6, 3: 0.6, 4: 0.6, 5: 0.6, 0: 0.6 }
-var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 0.3, 2: 0.3, 3: 0.3, 4: 0.3, 5: 0.3, 0: 0.3 }
+var help_desk_customer_success_rating_gain_each_day: Dictionary[int, float] = { 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 0: 1.0 }
+var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = { 1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 0: 1.0 }
 var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
 var time_camera_disabled_after_sabotage := 30.0
 
+var lucky_charm_activation_chance: float = 0.25
+
 var daily_completion_item_unlocks: Dictionary[int, Array] = {
-	1: ["nice_spoon"],
-	2: ["barista_guide"],
+	1: ["lucky_charm", "barista_guide"],
+	2: ["air_horn"],
 	3: ["air_freshener"],
 	4: ["super_scrubber"],
-	# 4: ["super_scrubber", "teleporter"],
 	5: ["roller_skates"],
 }
 
 var daily_rating_item_unlocks: Dictionary[int, Array] = {
-	1: ["air_horn"],
+	1: ["nice_spoon"],
 	2: ["hammer"],
 	3: ["whipped_cream"],
 	4: ["teleporter"],

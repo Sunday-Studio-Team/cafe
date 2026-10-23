@@ -32,10 +32,11 @@ _collider_body = NodePath("StaticBody3D")
 [node name="Comic Table" parent="Model" unique_id=542511439 instance=ExtResource("2_eta2g")]
 transform = Transform3D(1.0994586, 0, 0, 0, 1.0994586, 0, 0, 0, 1.0994586, -0.011456311, -0.500829, -0.0023750067)
 
-[node name="Interactable" type="Area3D" parent="." unique_id=2095758401]
+[node name="Interactable" type="Area3D" parent="." unique_id=2095758401 node_paths=PackedStringArray("mesh")]
 script = ExtResource("2_62jgw")
 interactable_id = &"use_air_freshener"
-display_name = "Air Freshener"
+display_name = "Comic Book Stand"
+mesh = NodePath("../Model/Comic Table/SM_ComicTable_")
 show_interact_hotkey = false
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
@@ -67,16 +68,14 @@ texture_under = ExtResource("3_eta2g")
 texture_over = ExtResource("4_0f434")
 texture_progress = ExtResource("5_kt2qb")
 
-[node name="Label" type="Label3D" parent="CooldownTimerSprite" unique_id=2119465058]
+[node name="TimerIcon" type="Label3D" parent="CooldownTimerSprite" unique_id=2119465058]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015455246, 0)
 sorting_offset = 1.0
 pixel_size = 0.01
 billboard = 1
 text = "⌛"
 
-[node name="Label3D" type="Label3D" parent="." unique_id=695930768]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3004193, 0)
-text = "Comic Books"
-
 [node name="SpraySound" type="AudioStreamPlayer3D" parent="." unique_id=2143104728]
 stream = ExtResource("6_y5vsg")
+
+[editable path="Model/Comic Table"]

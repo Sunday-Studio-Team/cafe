@@ -264,7 +264,7 @@ func start_day() -> void:
 
 			await get_tree().create_timer(1.0).timeout
 
-			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_8)
+			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_50", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			# Repeat the lines until ingredients are filled to enough.
 			if true:

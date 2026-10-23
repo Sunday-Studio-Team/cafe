@@ -1212,7 +1212,7 @@ _data = {
 &"restart_button_arrive": SubResource("Animation_c1exd")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "guaranteed_item", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "lock")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "bonus_item_rarity_color_rect", "guaranteed_item", "guaranteed_item_rarity_color_rect", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "lock")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -1234,7 +1234,9 @@ second_part_container = NodePath("SecondPartContainer")
 day_label = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/DayLabel")
 cond_def = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/CondDef")
 bonus_item = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/BonusItem")
+bonus_item_rarity_color_rect = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/BonusItemRarityColorRect")
 guaranteed_item = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer/GuaranteedItem")
+guaranteed_item_rarity_color_rect = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer/GuaranteedItemRarityColorRect")
 rating_reward = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward")
 rating_locked = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked")
 star_bar = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/StarBar")
@@ -1496,6 +1498,9 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
+[node name="GuaranteedItemRarityColorRect" type="ColorRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer" unique_id=669136067]
+layout_mode = 2
+
 [node name="GuaranteedItem" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer" unique_id=1264031132]
 layout_mode = 2
 texture = ExtResource("16_g5mai")
@@ -1533,6 +1538,9 @@ theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
+
+[node name="BonusItemRarityColorRect" type="ColorRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer" unique_id=915678585]
+layout_mode = 2
 
 [node name="BonusItem" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer" unique_id=471093985]
 self_modulate = Color(0, 0, 0, 1)

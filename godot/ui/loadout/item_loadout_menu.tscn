@@ -78,7 +78,7 @@ stream_1/stream = ExtResource("8_7pc00")
 stream_2/stream = ExtResource("9_6p7s6")
 stream_3/stream = ExtResource("10_plv5e")
 
-[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "locker_open_sound", "locker_close_sound", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
+[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "locker_open_sound", "locker_close_sound", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_rarity_color_rect", "item_hover_tooltip_rarity_label", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
 script = ExtResource("1_7ango")
 element_scene = ExtResource("1_0rl37")
 root = NodePath("MenuRootControl")
@@ -89,6 +89,8 @@ locker_open_sound = NodePath("LockerOpenSound")
 locker_close_sound = NodePath("LockerCloseSound")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
 item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
+item_hover_tooltip_rarity_color_rect = NodePath("ItemHoverTooltip/VBoxContainer/Rarity/RarityColorRect")
+item_hover_tooltip_rarity_label = NodePath("ItemHoverTooltip/VBoxContainer/Rarity/RarityLabel")
 item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
 item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Active/HBoxContainer/CooldownLabel")
 item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
@@ -152,7 +154,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c6g3w")
 [node name="GridContainer" type="GridContainer" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems" unique_id=1149520909]
 layout_mode = 2
 theme_override_constants/h_separation = 10
-columns = 5
+columns = 6
 
 [node name="LoadoutMenuItem" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1731714690 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
@@ -171,6 +173,10 @@ custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
 [node name="LoadoutMenuItem5" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1377787420 instance=ExtResource("1_0rl37")]
+custom_maximum_size = Vector2(-1, -1)
+layout_mode = 2
+
+[node name="LoadoutMenuItem6" parent="MenuRootControl/VBoxContainer/PanelContainer/VBoxContainer/Available/AvailableItems/GridContainer" unique_id=1207346372 instance=ExtResource("1_0rl37")]
 custom_maximum_size = Vector2(-1, -1)
 layout_mode = 2
 
@@ -226,8 +232,8 @@ text = "CONFIRM"
 
 [node name="ItemHoverTooltip" type="PanelContainer" parent="." unique_id=2088283471]
 modulate = Color(1, 1, 1, 0.98039216)
-custom_minimum_size = Vector2(500, 250)
-custom_maximum_size = Vector2(500, 250)
+custom_minimum_size = Vector2(600, 250)
+custom_maximum_size = Vector2(600, 350)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -260,6 +266,26 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Rarity" type="MarginContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=2005976788]
+layout_mode = 2
+
+[node name="RarityColorRect" type="ColorRect" parent="ItemHoverTooltip/VBoxContainer/Rarity" unique_id=2005443329]
+layout_mode = 2
+color = Color(0.10980392, 0.37254903, 0.4509804, 1)
+
+[node name="RarityLabel" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Rarity" unique_id=939447694]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]RARITY[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="Active" type="PanelContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=31227346]
 layout_mode = 2
@@ -316,7 +342,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
-text = "item description (blah blah blah blah blah )"
+text = "item description (blah blah blah blah blah blah blah blah blah blah blah)"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1

@@ -5,7 +5,7 @@ extends Control
 @export var money_made_label: Label
 @export var money_bar: ProgressBar
 @export var item_icons: Control
-@export var rating_meter_stars: TextureRect
+@export var rating_meter_stars: Array[TextureProgressBar]
 @export var rating_meter_needle: TextureRect
 @export_category("Assets")
 @export var rating_stars_textures: Array[Texture]
@@ -18,7 +18,6 @@ func _ready() -> void:
 	populate_items()
 	Events.items_updated.connect(populate_items)
 
-	rating_meter_stars.texture = rating_stars_textures[0]
 	rating_meter_needle.offset_transform_rotation = deg_to_rad(-135)
 
 
@@ -52,5 +51,26 @@ func _update_rating() -> void:
 	var current_rating: float = Global.employee_rating
 	_employee_rating_last_update = current_rating
 
-	rating_meter_stars.texture = rating_stars_textures[current_rating]
-	rating_meter_needle.offset_transform_rotation = deg_to_rad(-135 + 45 * current_rating)
+	var rotation_for_needle: float = remap(current_rating, 0, 5, -100, 100)
+	rating_meter_needle.offset_transform_rotation = deg_to_rad(rotation_for_needle)
+
+	fill_stars(current_rating)
+
+
+func fill_stars(number_of_stars_to_fill: float) -> void:
+	# clear everything first
+	for star: TextureProgressBar in rating_meter_stars:
+		star.value = 0
+
+	var num_of_whole_stars: int = int(number_of_stars_to_fill)
+
+	for i: int in num_of_whole_stars:
+		rating_meter_stars[i].value = 100
+
+	# we'd error if we tried to get rating_meter_stars[5]
+	if num_of_whole_stars == 5:
+		return
+
+	var value_for_final_star: float = (number_of_stars_to_fill - num_of_whole_stars) * 100
+
+	rating_meter_stars[num_of_whole_stars].value = value_for_final_star

@@ -1,0 +1,474 @@
+[gd_scene format=3 uid="uid://b8g62tj70g73u"]
+
+[ext_resource type="PackedScene" uid="uid://daaox6x4yn0fw" path="res://Assets/Street/sidewalk.glb" id="1_b3k8p"]
+[ext_resource type="Texture2D" uid="uid://bw7dki6l1cogn" path="res://Assets/Street/street_tilecw1l.png" id="2_t0l1j"]
+[ext_resource type="Texture2D" uid="uid://d3j0dvyl0l3j4" path="res://Assets/Street/street_tilecw1r.png" id="3_apq81"]
+[ext_resource type="Texture2D" uid="uid://b44eq4dq27ihm" path="res://Assets/Street/street_tilecw2l.png" id="4_isrmi"]
+[ext_resource type="Texture2D" uid="uid://c4iqo4oekclyw" path="res://Assets/Street/street_tilecw2r.png" id="5_mnicb"]
+[ext_resource type="Texture2D" uid="uid://dra56qvd54a47" path="res://Assets/Street/street_tile1.png" id="6_1f0fd"]
+[ext_resource type="Texture2D" uid="uid://b03gn3vfmify1" path="res://Assets/Street/street_tile2.png" id="7_aqgyc"]
+[ext_resource type="Texture2D" uid="uid://cj4e4ah44tba3" path="res://Assets/Street/street_tile3.png" id="8_or2k6"]
+[ext_resource type="Texture2D" uid="uid://c5eavbo7ktom6" path="res://Assets/Street/street_tile4.png" id="9_3e2ky"]
+[ext_resource type="Texture2D" uid="uid://ccgv13wtvg3kg" path="res://Assets/Street/street_tile5.png" id="10_whjck"]
+[ext_resource type="Texture2D" uid="uid://p5yifsdusjnx" path="res://Assets/Street/street_tile6.png" id="11_co8rl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5mys"]
+albedo_texture = ExtResource("2_t0l1j")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_m6rds"]
+material = SubResource("StandardMaterial3D_b5mys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxvup"]
+albedo_texture = ExtResource("3_apq81")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_edr0i"]
+material = SubResource("StandardMaterial3D_kxvup")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_627m5"]
+albedo_texture = ExtResource("4_isrmi")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_huol8"]
+material = SubResource("StandardMaterial3D_627m5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgcgd"]
+albedo_texture = ExtResource("5_mnicb")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_iaj8l"]
+material = SubResource("StandardMaterial3D_wgcgd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3re3d"]
+albedo_texture = ExtResource("6_1f0fd")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_wgcgd"]
+material = SubResource("StandardMaterial3D_3re3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iaj8l"]
+albedo_texture = ExtResource("7_aqgyc")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_kxvup"]
+material = SubResource("StandardMaterial3D_iaj8l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edr0i"]
+albedo_texture = ExtResource("8_or2k6")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_grppk"]
+material = SubResource("StandardMaterial3D_edr0i")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqu3g"]
+albedo_texture = ExtResource("9_3e2ky")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_q17p8"]
+material = SubResource("StandardMaterial3D_tqu3g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkxax"]
+albedo_texture = ExtResource("10_whjck")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_inip5"]
+material = SubResource("StandardMaterial3D_rkxax")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56cmc"]
+albedo_texture = ExtResource("11_co8rl")
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_oufoe"]
+material = SubResource("StandardMaterial3D_56cmc")
+
+[node name="StreetRoadAndSidewalk" type="Node3D" unique_id=1189749363]
+transform = Transform3D(0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0, 0.17196906, 0, 0, 0)
+
+[node name="sidewalk" type="Node3D" parent="." unique_id=955893847]
+
+[node name="cafe_side" type="Node3D" parent="sidewalk" unique_id=1468842536]
+
+[node name="sidewalk" parent="sidewalk/cafe_side" unique_id=1165816367 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 22.59895, -8.770772, -4.905945)
+
+[node name="sidewalk2" parent="sidewalk/cafe_side" unique_id=779655321 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 8.61941, -8.770772, -4.905945)
+
+[node name="sidewalk3" parent="sidewalk/cafe_side" unique_id=1427382494 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -5.348665, -8.770772, -4.905945)
+
+[node name="sidewalk4" parent="sidewalk/cafe_side" unique_id=1257158201 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -19.328201, -8.770772, -4.905945)
+
+[node name="sidewalk5" parent="sidewalk/cafe_side" unique_id=372045118 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -33.27102, -8.770772, -4.905945)
+
+[node name="sidewalk6" parent="sidewalk/cafe_side" unique_id=75807510 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -47.250565, -8.770772, -4.905945)
+
+[node name="sidewalk7" parent="sidewalk/cafe_side" unique_id=925258090 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -61.218636, -8.770772, -4.905945)
+
+[node name="sidewalk8" parent="sidewalk/cafe_side" unique_id=1860002739 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -75.19817, -8.770772, -4.905945)
+
+[node name="sidewalk9" parent="sidewalk/cafe_side" unique_id=661967603 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -89.218475, -8.770772, -4.905945)
+
+[node name="sidewalk10" parent="sidewalk/cafe_side" unique_id=1107069552 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -103.19801, -8.770772, -4.905945)
+
+[node name="sidewalk11" parent="sidewalk/cafe_side" unique_id=2001737016 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -117.166084, -8.770772, -4.905945)
+
+[node name="sidewalk12" parent="sidewalk/cafe_side" unique_id=1068371691 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -131.14563, -8.770772, -4.905945)
+
+[node name="sidewalk13" parent="sidewalk/cafe_side" unique_id=1018741233 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -145.08844, -8.770772, -4.905945)
+
+[node name="sidewalk19" parent="sidewalk/cafe_side" unique_id=830231196 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 134.35895, -8.770772, -4.905945)
+
+[node name="sidewalk20" parent="sidewalk/cafe_side" unique_id=1587017909 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 120.390884, -8.770772, -4.905945)
+
+[node name="sidewalk21" parent="sidewalk/cafe_side" unique_id=232897811 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 106.41137, -8.770772, -4.905945)
+
+[node name="sidewalk22" parent="sidewalk/cafe_side" unique_id=497733018 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 92.39107, -8.770772, -4.905945)
+
+[node name="sidewalk23" parent="sidewalk/cafe_side" unique_id=1997713018 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 78.41153, -8.770772, -4.905945)
+
+[node name="sidewalk24" parent="sidewalk/cafe_side" unique_id=1835566627 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 64.44346, -8.770772, -4.905945)
+
+[node name="sidewalk25" parent="sidewalk/cafe_side" unique_id=1997508753 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 50.463913, -8.770772, -4.905945)
+
+[node name="sidewalk26" parent="sidewalk/cafe_side" unique_id=1701431484 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 36.521107, -8.770772, -4.905945)
+
+[node name="cafe_opp_side" type="Node3D" parent="sidewalk" unique_id=185547519]
+transform = Transform3D(-1, 0, -8.7422784e-08, 0, 1, 0, 8.7422784e-08, 0, -1, 0, 0, -46.60397)
+
+[node name="sidewalk" parent="sidewalk/cafe_opp_side" unique_id=1799973972 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 22.59895, -8.770772, -4.905945)
+
+[node name="sidewalk2" parent="sidewalk/cafe_opp_side" unique_id=943717924 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 8.61941, -8.770772, -4.905945)
+
+[node name="sidewalk3" parent="sidewalk/cafe_opp_side" unique_id=423994326 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -5.348665, -8.770772, -4.905945)
+
+[node name="sidewalk4" parent="sidewalk/cafe_opp_side" unique_id=808088896 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -19.328201, -8.770772, -4.905945)
+
+[node name="sidewalk5" parent="sidewalk/cafe_opp_side" unique_id=1489731712 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -33.27102, -8.770772, -4.905945)
+
+[node name="sidewalk6" parent="sidewalk/cafe_opp_side" unique_id=755104163 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -47.250565, -8.770772, -4.905945)
+
+[node name="sidewalk7" parent="sidewalk/cafe_opp_side" unique_id=354973960 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -61.218636, -8.770772, -4.905945)
+
+[node name="sidewalk8" parent="sidewalk/cafe_opp_side" unique_id=1576978189 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -75.19817, -8.770772, -4.905945)
+
+[node name="sidewalk9" parent="sidewalk/cafe_opp_side" unique_id=1090574383 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -89.218475, -8.770772, -4.905945)
+
+[node name="sidewalk10" parent="sidewalk/cafe_opp_side" unique_id=1283872467 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -103.19801, -8.770772, -4.905945)
+
+[node name="sidewalk11" parent="sidewalk/cafe_opp_side" unique_id=2036273656 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -117.166084, -8.770772, -4.905945)
+
+[node name="sidewalk12" parent="sidewalk/cafe_opp_side" unique_id=1793116330 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -131.14563, -8.770772, -4.905945)
+
+[node name="sidewalk19" parent="sidewalk/cafe_opp_side" unique_id=1480670072 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 134.35895, -8.770772, -4.905945)
+
+[node name="sidewalk20" parent="sidewalk/cafe_opp_side" unique_id=1204515214 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 120.390884, -8.770772, -4.905945)
+
+[node name="sidewalk21" parent="sidewalk/cafe_opp_side" unique_id=1721942096 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 106.41137, -8.770772, -4.905945)
+
+[node name="sidewalk22" parent="sidewalk/cafe_opp_side" unique_id=1420274198 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 92.39107, -8.770772, -4.905945)
+
+[node name="sidewalk23" parent="sidewalk/cafe_opp_side" unique_id=773341365 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 78.41153, -8.770772, -4.905945)
+
+[node name="sidewalk24" parent="sidewalk/cafe_opp_side" unique_id=1653912544 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 64.44346, -8.770772, -4.905945)
+
+[node name="sidewalk25" parent="sidewalk/cafe_opp_side" unique_id=476016936 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 50.463913, -8.770772, -4.905945)
+
+[node name="sidewalk26" parent="sidewalk/cafe_opp_side" unique_id=44838505 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 36.521107, -8.770772, -4.905945)
+
+[node name="cafe_opp_side2" type="Node3D" parent="sidewalk" unique_id=902347426]
+transform = Transform3D(1, 0, 1.7484557e-07, 0, 1, 0, -1.7484557e-07, 0, 1, -3.3649235, 0, -50.589115)
+
+[node name="sidewalk" parent="sidewalk/cafe_opp_side2" unique_id=1584137256 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 22.59895, -8.770772, -4.905945)
+
+[node name="sidewalk2" parent="sidewalk/cafe_opp_side2" unique_id=472379999 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 8.61941, -8.770772, -4.905945)
+
+[node name="sidewalk3" parent="sidewalk/cafe_opp_side2" unique_id=1223774373 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -5.348665, -8.770772, -4.905945)
+
+[node name="sidewalk4" parent="sidewalk/cafe_opp_side2" unique_id=1109988919 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -19.328201, -8.770772, -4.905945)
+
+[node name="sidewalk5" parent="sidewalk/cafe_opp_side2" unique_id=1187813098 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -33.27102, -8.770772, -4.905945)
+
+[node name="sidewalk6" parent="sidewalk/cafe_opp_side2" unique_id=1611115298 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -47.250565, -8.770772, -4.905945)
+
+[node name="sidewalk7" parent="sidewalk/cafe_opp_side2" unique_id=1375474250 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -61.218636, -8.770772, -4.905945)
+
+[node name="sidewalk8" parent="sidewalk/cafe_opp_side2" unique_id=701902166 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -75.19817, -8.770772, -4.905945)
+
+[node name="sidewalk9" parent="sidewalk/cafe_opp_side2" unique_id=2109989514 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -89.218475, -8.770772, -4.905945)
+
+[node name="sidewalk10" parent="sidewalk/cafe_opp_side2" unique_id=1157450132 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -103.19801, -8.770772, -4.905945)
+
+[node name="sidewalk11" parent="sidewalk/cafe_opp_side2" unique_id=1769298689 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -117.166084, -8.770772, -4.905945)
+
+[node name="sidewalk12" parent="sidewalk/cafe_opp_side2" unique_id=1446404472 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, -131.14563, -8.770772, -4.905945)
+
+[node name="sidewalk19" parent="sidewalk/cafe_opp_side2" unique_id=738350223 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 134.35895, -8.770772, -4.905945)
+
+[node name="sidewalk20" parent="sidewalk/cafe_opp_side2" unique_id=1818230820 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 120.390884, -8.770772, -4.905945)
+
+[node name="sidewalk21" parent="sidewalk/cafe_opp_side2" unique_id=1131724897 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 106.41137, -8.770772, -4.905945)
+
+[node name="sidewalk22" parent="sidewalk/cafe_opp_side2" unique_id=1358089780 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 92.39107, -8.770772, -4.905945)
+
+[node name="sidewalk23" parent="sidewalk/cafe_opp_side2" unique_id=1853468816 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 78.41153, -8.770772, -4.905945)
+
+[node name="sidewalk24" parent="sidewalk/cafe_opp_side2" unique_id=1301712206 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 64.44346, -8.770772, -4.905945)
+
+[node name="sidewalk25" parent="sidewalk/cafe_opp_side2" unique_id=799333301 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 50.463913, -8.770772, -4.905945)
+
+[node name="sidewalk26" parent="sidewalk/cafe_opp_side2" unique_id=1804820574 instance=ExtResource("1_b3k8p")]
+transform = Transform3D(-3.059797e-07, 0, -7, 0, 7, 0, 7, 0, -3.059797e-07, 36.521107, -8.770772, -4.905945)
+
+[node name="streetfloor" type="Node3D" parent="." unique_id=281158267]
+transform = Transform3D(11.629999, 0, 0, 0, -5.083634e-07, 11.629999, 0, -11.629999, -5.083634e-07, -2.2259483, -3.264876, -29.01839)
+
+[node name="street_tile_cw1l" type="MeshInstance3D" parent="streetfloor" unique_id=733100171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9808824, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_m6rds")
+
+[node name="street_tile_cw1r" type="MeshInstance3D" parent="streetfloor" unique_id=460161834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9777448, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_edr0i")
+
+[node name="street_tile_cw2l" type="MeshInstance3D" parent="streetfloor" unique_id=1688656693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9812133, -0.99652386, 7.4505806e-08)
+mesh = SubResource("QuadMesh_huol8")
+
+[node name="street_tilecw2r" type="MeshInstance3D" parent="streetfloor" unique_id=1187925342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9801815, -0.99652386, 7.4505806e-08)
+mesh = SubResource("QuadMesh_iaj8l")
+
+[node name="street_tile_cw1l2" type="MeshInstance3D" parent="streetfloor" unique_id=131522285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9867086, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_m6rds")
+
+[node name="street_tile_cw1r2" type="MeshInstance3D" parent="streetfloor" unique_id=137253589]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.989846, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_edr0i")
+
+[node name="street_tile_cw2l2" type="MeshInstance3D" parent="streetfloor" unique_id=1469440670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9863777, -0.99652386, 7.4505806e-08)
+mesh = SubResource("QuadMesh_huol8")
+
+[node name="street_tilecw2r2" type="MeshInstance3D" parent="streetfloor" unique_id=1400473759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9874096, -0.99652386, 7.4505806e-08)
+mesh = SubResource("QuadMesh_iaj8l")
+
+[node name="street_tile1" type="MeshInstance3D" parent="streetfloor" unique_id=1509892845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9832082, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_wgcgd")
+
+[node name="street_tile1_cppy" type="MeshInstance3D" parent="streetfloor" unique_id=53431175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9817266, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_wgcgd")
+
+[node name="street_tile2" type="MeshInstance3D" parent="streetfloor" unique_id=739816039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9754143, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_kxvup")
+
+[node name="street_tile2_copy" type="MeshInstance3D" parent="streetfloor" unique_id=2017497697]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9897537, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_kxvup")
+
+[node name="street_tile3" type="MeshInstance3D" parent="streetfloor" unique_id=2108945975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9844155, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_grppk")
+
+[node name="street_tile3_copy" type="MeshInstance3D" parent="streetfloor" unique_id=1615545070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9805193, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_grppk")
+
+[node name="street_tile4" type="MeshInstance3D" parent="streetfloor" unique_id=901273382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9757204, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_q17p8")
+
+[node name="street_tile4_copy" type="MeshInstance3D" parent="streetfloor" unique_id=713728032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9894476, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_q17p8")
+
+[node name="street_tile5" type="MeshInstance3D" parent="streetfloor" unique_id=231613844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009898901, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy" type="MeshInstance3D" parent="streetfloor" unique_id=547528220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9896686, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy6" type="MeshInstance3D" parent="streetfloor" unique_id=1686910212]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.972989, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy7" type="MeshInstance3D" parent="streetfloor" unique_id=655630189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9699135, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy12" type="MeshInstance3D" parent="streetfloor" unique_id=2116863774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9649963, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy13" type="MeshInstance3D" parent="streetfloor" unique_id=176725668]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.961921, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy14" type="MeshInstance3D" parent="streetfloor" unique_id=1564873585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.958, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile6_copy15" type="MeshInstance3D" parent="streetfloor" unique_id=1823087487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.95454, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile5_copy15" type="MeshInstance3D" parent="streetfloor" unique_id=1478841618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.954925, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy3" type="MeshInstance3D" parent="streetfloor" unique_id=542755036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0043714, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy4" type="MeshInstance3D" parent="streetfloor" unique_id=80671323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.997067, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy5" type="MeshInstance3D" parent="streetfloor" unique_id=623105622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9926744, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy8" type="MeshInstance3D" parent="streetfloor" unique_id=1021948357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.975934, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy9" type="MeshInstance3D" parent="streetfloor" unique_id=1922551247]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.96863, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy10" type="MeshInstance3D" parent="streetfloor" unique_id=1754409228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.964237, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy11" type="MeshInstance3D" parent="streetfloor" unique_id=2017969679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9639435, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile5_copy2" type="MeshInstance3D" parent="streetfloor" unique_id=952586050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0090652, -0.998364, -1.0058284e-07)
+mesh = SubResource("QuadMesh_inip5")
+
+[node name="street_tile6" type="MeshInstance3D" parent="streetfloor" unique_id=821414946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.010282874, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy" type="MeshInstance3D" parent="streetfloor" unique_id=1688584231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98928475, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy6" type="MeshInstance3D" parent="streetfloor" unique_id=966541986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9726048, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy7" type="MeshInstance3D" parent="streetfloor" unique_id=1846918215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.969529, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy12" type="MeshInstance3D" parent="streetfloor" unique_id=2034013920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.964612, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy13" type="MeshInstance3D" parent="streetfloor" unique_id=1959273802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.961536, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy14" type="MeshInstance3D" parent="streetfloor" unique_id=1636146030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.957616, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy2" type="MeshInstance3D" parent="streetfloor" unique_id=615111412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0101885, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy3" type="MeshInstance3D" parent="streetfloor" unique_id=861495873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0054946, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy4" type="MeshInstance3D" parent="streetfloor" unique_id=1186130963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9981902, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy5" type="MeshInstance3D" parent="streetfloor" unique_id=2015247204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9937975, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy8" type="MeshInstance3D" parent="streetfloor" unique_id=849254815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.977057, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy9" type="MeshInstance3D" parent="streetfloor" unique_id=566357964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.969753, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy10" type="MeshInstance3D" parent="streetfloor" unique_id=826649240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.965361, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")
+
+[node name="street_tile6_copy11" type="MeshInstance3D" parent="streetfloor" unique_id=1830641648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.965067, 0.0012187958, 1.1920929e-07)
+mesh = SubResource("QuadMesh_oufoe")

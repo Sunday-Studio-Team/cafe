@@ -32,6 +32,7 @@ extends Node3D
 
 @export var _player_shift_start_position: Node3D
 @export var _shift_start_sequence_label: RichTextLabel
+@export var _shift_start_countdown_sound: AudioStreamPlayer
 
 # Lazy spawned break room nodes
 @export var _desk_scene_uid: StringName
@@ -44,8 +45,6 @@ extends Node3D
 @export var _item_loadout_menu_container: Node
 var _nodes_to_destroy_on_shift_start: Array[Node]
 
-#Active Items
-@export var shift_start_sound: AudioStreamPlayer
 @export var default_trash_spawn_spot: Marker3D
 
 var _machine_customer_spawn_timer: Timer
@@ -68,13 +67,13 @@ var closing_time: bool = false
 func _ready() -> void:
 	_main_scene_loading_overlay.visible = true
 	_main_scene_loading_overlay.modulate.a = 1.0
-	
+
 	# Hide the view first, while lazy loading things.
 	await lazy_spawn_node(_desk_scene_uid, _desk_container)
 	await lazy_spawn_node(_whiteboard_scene_uid, _whiteboard_container)
 	await lazy_spawn_node(_locker_scene_uid, _locker_container)
 	await lazy_spawn_node(_item_loadout_menu_scene_uid, _item_loadout_menu_container)
-	
+
 	_voice_line_system.setup()
 	Global.camera_mode = Global.CameraMode.PLAYER
 	Global.cinematic_camera_allow_machine_gui_inputs = true
@@ -133,7 +132,7 @@ func _ready() -> void:
 	else:
 		Global.playing_tutorial = false
 		print("should not play tutorial!")
-	
+
 	if not Global.playing_tutorial:
 		Global.employee_rating = 2
 
@@ -179,9 +178,9 @@ func _ready() -> void:
 	closing_time = false
 
 	get_stats()
-	
+
 	Events.main_scene_ready.emit()
-	
+
 	_tutorial_manager.start_day()
 
 
@@ -215,15 +214,6 @@ func get_stats() -> void:
 
 # we reload this main scene to start each day, so we set all the per-day stuff here
 func set_per_day_stuff() -> void:
-	if Global.day == 1:
-		# Reset run.
-		Global.player_tips_bank = 5
-		Global.received_emails.clear()
-		Global.read_emails.clear()
-		Global.received_reviews.clear()
-		Global.player_tips_bank = 0
-		Global.owned_items.clear()
-		Stats.reset()
 
 	if Global.day == 1:
 		if Global.playing_tutorial:
@@ -247,7 +237,7 @@ func set_per_day_stuff() -> void:
 		else:
 			_active_machines.clear()
 			_active_machines.push_back(_left_area_right_machine)
-			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_right_area_left_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
 
@@ -311,10 +301,12 @@ func set_per_day_stuff() -> void:
 
 	Global.machines.assign(_active_machines)
 
+
 func _on_shutters_open_requested() -> void:
 	cafe_front_roller_shutters.open()
 
-func _on_shift_start_requested() -> void:	
+
+func _on_shift_start_requested() -> void:
 	if Global.playing_tutorial:
 		Events.shift_started.emit()
 	else:
@@ -330,7 +322,9 @@ func _on_shift_start_requested() -> void:
 		await _tutorial_manager._cinematic_camera.play_animation("shift_start_sequence")
 		_shift_start_sequence_label.visible = true
 		_tutorial_manager._cinematic_camera.disable_cinematic_camera(3.0)
+		_shift_start_countdown_sound.play()
 		_shift_start_sequence_label.text = "3"
+		# NOTE: can this get messsed up if the player pauses ?
 		await get_tree().create_timer(1.0).timeout
 		_shift_start_sequence_label.text = "2"
 		await get_tree().create_timer(1.0).timeout
@@ -340,6 +334,7 @@ func _on_shift_start_requested() -> void:
 		Events.shift_started.emit()
 		await get_tree().create_timer(1.0).timeout
 		_shift_start_sequence_label.visible = false
+
 
 func _on_machine_customer_spawn_timer_timeout() -> void:
 	if closing_time:
@@ -490,13 +485,12 @@ func spawn_trash() -> void:
 
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
-		Global.employee_rating -= Global.trash_punishment_amount
-		Events.alert_posted.emit(
-			"-%s Too much trash in the store" % Global.trash_punishment_amount,
-			UI.AlertIconType.RATING,
-			UI.ALERT_DEFAULT_DURATION,
-			UI.ALERT_COLOR_RED,
-		)
+		if Global.lucky_charm_check():
+			Events.alert_posted.emit("Too much trash in the store", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+		else:
+			Events.alert_posted.emit( "-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Global.employee_rating -= Global.trash_punishment_amount
 	Events.alert_posted.emit(
 		"Customer dropped some trash...",
 		UI.AlertIconType.CUSTOMER,
@@ -509,7 +503,7 @@ func _on_game_timer_timeout() -> void:
 	free_customer_queue()
 	Events.shift_end_sequence_started.emit()
 	closing_time = true
-	if get_customers().size() <= 1:
+	if get_customers().size() == 0:
 		shift_end_sequence()
 
 
@@ -576,7 +570,7 @@ func free_customer_queue():
 		machine.queued_customers.clear()
 		for customer in leaving_array: #Copied so no wack stuff happens
 			customer.leave_store()
-		
+
 	var help_desk_leaving_array: Array[Customer] = customer_help_desk._queued_desk_customers.duplicate()
 	customer_help_desk._queued_desk_customers.clear()
 	for help_desk_customer in help_desk_leaving_array:
@@ -586,12 +580,11 @@ func free_customer_queue():
 func _on_shift_started():
 	customer_trash_spawn_timer.start()
 	Global.shift_started = true
-	shift_start_sound.play()
-	
+
 	# Destroy break room nodes when the shift starts, save resources!
 	for node in _nodes_to_destroy_on_shift_start:
 		node.queue_free()
-	
+
 	if Global.day > 0:
 		if not Global.playing_tutorial:
 			game_timer.start()

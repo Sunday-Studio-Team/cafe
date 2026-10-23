@@ -12,9 +12,9 @@ func _ready() -> void:
 	if SaveDataManager.save_data.latest_unlocked_day <= 1:
 		hide()
 		process_mode = ProcessMode.PROCESS_MODE_DISABLED
-	
+
 	Global.item_locker = self
-	
+
 	Events.shift_started.connect(
 			func() -> void:
 				interactable.hide()

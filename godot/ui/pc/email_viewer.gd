@@ -15,6 +15,7 @@ var active_custom_email_view: CustomEmailView
 
 signal email_shown(email_viewer: EmailViewer)
 
+
 func show_email(init_email_data: EmailData, init_is_finished_important: bool, init_is_current_day: bool) -> void:
 	if active_custom_email_view != null:
 		if active_custom_email_view.finished_important.is_connected(_on_active_custom_email_view_finished_important):
@@ -24,7 +25,7 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 	email_data = init_email_data
 	is_finished_important = init_is_finished_important
 	is_current_day = init_is_current_day
-	
+
 	sender_name_label.text = email_data.sender_name
 	subject_label.text = email_data.subject
 	if is_current_day:
@@ -36,24 +37,27 @@ func show_email(init_email_data: EmailData, init_is_finished_important: bool, in
 			displayed_date_time_label.text = "1 day ago"
 		else:
 			displayed_date_time_label.text = str(days_ago) + " days ago"
-	recipient_label.text = email_data.recipient_name
+	# we're going to have all emails addressed to the same employee number
+	# (which is set as the text for this label in the scene)
+	# recipient_label.text = email_data.recipient_name
 	brief_contents_rich_text_label.text = email_data.contents
-	
+
 	if email_data.custom_email_view_packed_scene != null:
 		active_custom_email_view = email_data.custom_email_view_packed_scene.instantiate()
 		active_custom_email_view.init(email_data, is_finished_important)
-		
+
 		if active_custom_email_view is ReviewsCustomEmailView:
 			var reviews_update_email_data: ReviewsUpdateEmailData = init_email_data as ReviewsUpdateEmailData
 			var reviews_custom_email_view: ReviewsCustomEmailView = active_custom_email_view as ReviewsCustomEmailView
 			if reviews_update_email_data == null or reviews_custom_email_view == null:
 				printerr("Reviews email incorrectly set up!")
 			reviews_custom_email_view.setup_reviews(reviews_update_email_data)
-		
+
 		custom_email_view_container.add_child(active_custom_email_view)
 		active_custom_email_view.finished_important.connect(_on_active_custom_email_view_finished_important)
-	
+
 	email_shown.emit(self)
+
 
 func _on_active_custom_email_view_finished_important(_custom_email_view: CustomEmailView) -> void:
 	active_custom_email_view.finished_important.disconnect(_on_active_custom_email_view_finished_important)

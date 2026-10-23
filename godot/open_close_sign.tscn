@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c0nsltcnkwb8t" path="res://open_closed_sign.gd" id="1_jq31d"]
 [ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="2_rxk5n"]
 [ext_resource type="PackedScene" uid="uid://1s54vqwadrmx" path="res://Assets/signs/tippy_open_close_sign_model.tscn" id="3_vu0xl"]
+[ext_resource type="AudioStream" uid="uid://dimkpitnugvme" path="res://audio/shift_start.wav" id="4_jm0q7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jq31d"]
 size = Vector3(1.5, 0.9, 0.5)
@@ -68,11 +69,77 @@ _data = {
 &"open": SubResource("Animation_jm0q7")
 }
 
-[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "animation_player")]
+[sub_resource type="Curve" id="Curve_whkqc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.179558, 0.92857146), 0.0, 0.0, 0, 0, Vector2(0.26795578, 0.16964293), 0.0, 0.0, 0, 0, Vector2(0.36740333, 0.85714287), 0.0, 0.0, 0, 0, Vector2(0.46685082, 0.8125), 0.0, 0.0, 0, 0, Vector2(0.54972374, 0.09821439), 0.0, 0.0, 0, 0, Vector2(0.5994475, 0.75), 0.0, 0.0, 0, 0, Vector2(0.76519334, 0.78571427), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="CurveTexture" id="CurveTexture_jm0q7"]
+curve = SubResource("Curve_whkqc")
+
+[sub_resource type="Gradient" id="Gradient_1xpwx"]
+offsets = PackedFloat32Array(0.41216215, 1)
+colors = PackedColorArray(1, 0.8666667, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dju1t"]
+gradient = SubResource("Gradient_1xpwx")
+
+[sub_resource type="Curve" id="Curve_wbp8u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.27900553, 0.7232143), 0.0, 0.0, 0, 0, Vector2(0.4392265, 0.40178573), 0.0, 0.0, 0, 0, Vector2(0.5331492, 0.84821427), 0.0, 0.0, 0, 0, Vector2(0.63812155, 0.2053572), 0.0, 0.0, 0, 0, Vector2(0.7817679, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_bpwws"]
+curve = SubResource("Curve_wbp8u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_coxhp"]
+lifetime_randomness = 0.5
+particle_flag_damping_as_friction = true
+direction = Vector3(0, 1, 0.05)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+damping_min = 40.0
+damping_max = 40.0
+scale_min = 0.099999994
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_bpwws")
+color_ramp = SubResource("GradientTexture1D_dju1t")
+alpha_curve = SubResource("CurveTexture_jm0q7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2d2lu"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+refraction_scale = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7w4w3"]
+material = SubResource("StandardMaterial3D_2d2lu")
+radial_segments = 4
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm0q7"]
+transparency = 1
+blend_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.18861052, 0.18861052, 0.18861052, 1)
+grow = true
+grow_amount = -1.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_1xpwx"]
+material = SubResource("StandardMaterial3D_jm0q7")
+radial_segments = 4
+rings = 1
+
+[node name="OpenCloseSign" type="Node3D" unique_id=1966668690 node_paths=PackedStringArray("interactable", "animation_player", "shift_start_triggered_sound", "notice_particles")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0, 0)
 script = ExtResource("1_jq31d")
 interactable = NodePath("Interactable")
 animation_player = NodePath("AnimationPlayer")
+shift_start_triggered_sound = NodePath("ShiftStartTriggeredSound")
+notice_particles = NodePath("NoticeParticles")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=2045513509 node_paths=PackedStringArray("mesh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1754386, 0.3508772, 0)
@@ -89,5 +156,17 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.1754386, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1479874812]
 libraries/ = SubResource("AnimationLibrary_1xpwx")
+
+[node name="ShiftStartTriggeredSound" type="AudioStreamPlayer3D" parent="." unique_id=1400984502]
+stream = ExtResource("4_jm0q7")
+
+[node name="NoticeParticles" type="GPUParticles3D" parent="." unique_id=493137985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49147266, -0.2298002)
+amount = 32
+speed_scale = 0.5
+process_material = SubResource("ParticleProcessMaterial_coxhp")
+draw_passes = 2
+draw_pass_1 = SubResource("SphereMesh_7w4w3")
+draw_pass_2 = SubResource("SphereMesh_1xpwx")
 
 [editable path="Model"]
