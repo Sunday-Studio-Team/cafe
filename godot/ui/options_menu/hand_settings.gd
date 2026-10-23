@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	
 	#print("mouse position", mouse_pos.y)
-	global_position.y = mouse_pos.y + 100.0
+	global_position.y = mouse_pos.y + 300.0
 	#print("global_position.y", global_position.y)
 
 	pass
