@@ -13,8 +13,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var mouse_pos = get_global_mouse_position()
 	
-	#print("mouse position", mouse_pos.y)
-	global_position.y = mouse_pos.y + 300.0
+	print("mouse position ", mouse_pos)
+	position = Vector2(clamp(mouse_pos.x,360, 1200) + 860, mouse_pos.y + 300.0)
 	#print("global_position.y", global_position.y)
 
 	pass
