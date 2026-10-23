@@ -4,6 +4,8 @@ extends CanvasLayer
 @export var quit_button: TextureButton
 @export var _options_button: TextureButton
 @export var _options_menu_packed_scene: PackedScene
+@export var discord_button: TextureButton
+@export var instagram_button: TextureButton
 
 const DISCORD_URL := "https://discord.com/invite/WqhGAnZWCq"
 const INSTAGRAM_URL := "https://www.instagram.com/sundaystudiosgames/"
@@ -25,8 +27,8 @@ func _ready() -> void:
 			Events.quit_game_requested.emit(),
 	)
 	
-	$Buttons/Discord.pressed.connect(_open_discord)
-	$Buttons/Instagram.pressed.connect(_open_instagram)
+	discord_button.pressed.connect(_open_discord)
+	instagram_button.pressed.connect(_open_instagram)
 
 func _on_options_button_pressed() -> void:
 	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()

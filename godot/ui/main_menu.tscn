@@ -61,12 +61,14 @@ animations = [{
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "quit_button", "_options_button")]
+[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("play_button", "quit_button", "_options_button", "discord_button", "instagram_button")]
 script = ExtResource("1_t7e0r")
 play_button = NodePath("Buttons/Play")
 quit_button = NodePath("Buttons/Quit")
 _options_button = NodePath("Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
+discord_button = NodePath("Buttons/Discord")
+instagram_button = NodePath("Buttons/Instagram")
 metadata/_edit_vertical_guides_ = [1921.0, -40.0]
 
 [node name="GlobalCursor" type="Node" parent="." unique_id=716050075]
