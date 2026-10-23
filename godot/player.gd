@@ -4,6 +4,10 @@ extends CharacterBody3D
 # (for footstep stuff)
 const STRIDE_LENGTH := 1.25
 
+#throwing garbage velocity
+const GARBAGE_FORWARD_VELOCITY := 20.0
+const GARBAGE_UPWARD_VELOCITY := 2.0 #keep it small; ~2ish
+
 # this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
 @export var main_room_spawn_point: Marker3D
 @export var camera: CameraController
@@ -298,8 +302,8 @@ func handle_customer_trash() -> void:
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)
 		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 20)
-		trash_to_drop.apply_impulse(transform.basis * Vector3.UP *2)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * GARBAGE_FORWARD_VELOCITY)
+		trash_to_drop.apply_impulse(transform.basis * Vector3.UP * GARBAGE_UPWARD_VELOCITY)
 
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
 
