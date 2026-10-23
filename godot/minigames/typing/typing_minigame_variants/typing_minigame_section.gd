@@ -44,15 +44,6 @@ func _unhandled_input(input_event: InputEvent) -> void:
 				var input_event_key: InputEventKey = input_event as InputEventKey
 				var pressed_key_text: String = input_event_key.as_text()
 				var pressed_key_text_lowercase: String = pressed_key_text.to_lower()
-				match input_event_key.keycode:
-					KEY_UP:
-						pressed_key_text_lowercase = "w"
-					KEY_DOWN:
-						pressed_key_text_lowercase = "s"
-					KEY_LEFT:
-						pressed_key_text_lowercase = "a"
-					KEY_RIGHT:
-						pressed_key_text_lowercase = "d"
 				var required_key: String = _typing_text[_typing_text_completed_index]
 				var required_key_lowercase: String = required_key.to_lower()
 				
