@@ -92,21 +92,21 @@ func _play_screen() -> void:
 	cafe_profits.show()
 	win_shift_sound.pitch_scale = 1
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time).timeout
 	goal.show()
 	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
 	win_shift_sound.pitch_scale = 1.2
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time).timeout
 	earnings.show()
 	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
 	win_shift_sound.pitch_scale = 1.5
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time2).timeout
-	
+
 	if passed_profit_goal:
 		var day: String = "Glorbsday"
 		match Global.day:
