@@ -21,6 +21,7 @@ extends CanvasLayer
 @export var second_part_container: Control
 @export var day_label: RichTextLabel
 @export var cond_def: RichTextLabel
+@export var cond_bonus: RichTextLabel
 @export var bonus_item: TextureRect
 @export var bonus_item_rarity_color_rect: ColorRect
 @export var guaranteed_item: TextureRect
@@ -36,7 +37,7 @@ extends CanvasLayer
 @export var lock: TextureRect
 
 var reached_bonus_rating: bool = (
-	Global.employee_rating >= 4.5
+	Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 )
 
 
@@ -63,6 +64,7 @@ func _play_screen() -> void:
 	await get_tree().create_timer(2).timeout
 	times_up.hide()
 	tippy_times_up.hide()
+	cond_bonus.text = "[right]get %s" % Stats.current.item_bonus_rating_threshold
 	reached_bonus_rating = (
 		Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 	)
