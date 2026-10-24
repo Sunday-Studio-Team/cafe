@@ -4,7 +4,7 @@ extends CharacterBody3D
 # (for footstep stuff)
 const STRIDE_LENGTH := 1.25
 
-#throwing garbage velocity
+# throwing garbage velocity
 const GARBAGE_FORWARD_VELOCITY := 20.0
 const GARBAGE_UPWARD_VELOCITY := 2.0 #keep it small; ~2ish
 
