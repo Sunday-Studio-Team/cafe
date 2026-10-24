@@ -33,11 +33,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Global.active_help_desk_customer != null:
 		percent_time_left = Global.active_help_desk_customer.timer.time_left
-		if percent_time_left >= 30:
-			timer_progress_bar.modulate = Color.GREEN
-		elif percent_time_left >= 15:
+		timer_progress_bar.modulate = Color.GREEN
+		if percent_time_left <= 2 * (Stats.current.customer_wait_time_help_desk_each_day[Global.day]/3):
 			timer_progress_bar.modulate = Color.ORANGE
-		else:
+		elif percent_time_left <= Stats.current.customer_wait_time_help_desk_each_day[Global.day]/4:
 			timer_progress_bar.modulate = Color.RED
 		timer_progress_bar.value = percent_time_left 
 
