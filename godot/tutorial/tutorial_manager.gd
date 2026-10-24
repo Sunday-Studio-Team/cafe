@@ -8,7 +8,6 @@ extends Node
 
 @export var _tippy_callouts_manager: TippyCalloutsManager
 @export var _open_closed_sign: OpenClosedSign
-@export var _intro_video: VideoStreamPlayer
 @export var _day_0_sato_front_door_position: Node3D
 @export var _day_0_employee_area_detector: PlayerDetectionArea
 @export var _day_0_locker_room_preview_position: Node3D
@@ -659,20 +658,3 @@ func _run_skippable_tutorial_part(tutorial_part_enum: SkippableTutorialPart.Tuto
 			return
 		await get_tree().process_frame
 	skippable_tutorial_part.queue_free()
-
-func play_intro() -> void:
-	_intro_video.finished.connect(_on_intro_video_ended)
-	
-	_intro_video.show()
-	_intro_video.play()
-
-	await intro_video_ended
-	_intro_video.hide()
-
-func _on_intro_video_ended() -> void:
-	intro_video_ended.emit()
-
-func end_intro() -> void:
-	if _intro_video.is_playing():
-		_intro_video.stop()
-		intro_video_ended.emit()

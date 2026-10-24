@@ -40,8 +40,6 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 		TutorialPartEnum.DAY_1_0:
 			_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.0)
 			_tutorial_manager._cinematic_camera.cinematic_bars.show_bars(0.0)
-			await _tutorial_manager.play_intro()
-
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_0_0")
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_0_1")
 			await _tutorial_manager._cinematic_camera.play_animation("day_1_training_0_2")
