@@ -8,6 +8,7 @@ extends Node
 
 @export var _tippy_callouts_manager: TippyCalloutsManager
 @export var _open_closed_sign: OpenClosedSign
+@export var _intro_video: VideoStreamPlayer
 @export var _day_0_sato_front_door_position: Node3D
 @export var _day_0_employee_area_detector: PlayerDetectionArea
 @export var _day_0_locker_room_preview_position: Node3D
@@ -37,6 +38,8 @@ extends Node
 var is_in_skippable_cinematic: bool = false
 var skip_part_requested: bool = false
 
+signal intro_video_ended
+
 func _init() -> void:
 	Global.tutorial_manager = self
 
@@ -51,7 +54,7 @@ func start_day() -> void:
 		if Global.day == 1:
 			# Enable the open sign
 			_open_closed_sign.set_enabled(true)
-			
+
 			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_0)
 
@@ -656,3 +659,20 @@ func _run_skippable_tutorial_part(tutorial_part_enum: SkippableTutorialPart.Tuto
 			return
 		await get_tree().process_frame
 	skippable_tutorial_part.queue_free()
+
+func play_intro() -> void:
+	_intro_video.finished.connect(_on_intro_video_ended)
+	
+	_intro_video.show()
+	_intro_video.play()
+
+	await intro_video_ended
+	_intro_video.hide()
+
+func _on_intro_video_ended() -> void:
+	intro_video_ended.emit()
+
+func end_intro() -> void:
+	if _intro_video.is_playing():
+		_intro_video.stop()
+		intro_video_ended.emit()
