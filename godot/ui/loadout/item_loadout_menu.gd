@@ -22,6 +22,8 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 # tedious . 0_0
 @export var item_hover_tooltip: Control
 @export var item_hover_tooltip_name: RichTextLabel
+@export var item_hover_tooltip_rarity_color_rect: ColorRect
+@export var item_hover_tooltip_rarity_label: RichTextLabel
 @export var item_hover_tooltip_description: RichTextLabel
 @export var item_hover_tooltip_cooldown_label: RichTextLabel
 @export var item_hover_tooltip_passive_indicator: Control
@@ -120,7 +122,7 @@ func resize_grids() -> void:
 	elif num_of_available_items % 4 == 0:
 		available_items_container.columns = 4
 	else:
-		available_items_container.columns = 5
+		available_items_container.columns = 6
 
 	var num_of_equipped_item_slots := equipped_items_container.get_children().size()
 	if num_of_equipped_item_slots % 3 == 0 and num_of_equipped_item_slots < 9:
@@ -229,6 +231,8 @@ func handle_item_hover_tooltip() -> void:
 				item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
 			else:
 				item_hover_tooltip_name.text = "[b]%s[/b]" % item.name
+			item_hover_tooltip_rarity_label.text = "[b]%s[/b]" % item.rarity_name.to_upper()
+			item_hover_tooltip_rarity_color_rect.color = item.rarity_color
 			item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
 			if item.is_active_item:
 				item_hover_tooltip_passive_indicator.hide()

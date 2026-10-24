@@ -22,7 +22,9 @@ extends CanvasLayer
 @export var day_label: RichTextLabel
 @export var cond_def: RichTextLabel
 @export var bonus_item: TextureRect
+@export var bonus_item_rarity_color_rect: ColorRect
 @export var guaranteed_item: TextureRect
+@export var guaranteed_item_rarity_color_rect: ColorRect
 @export var rating_reward: TextureRect
 @export var rating_locked: TextureRect
 @export var star_bar: TextureProgressBar
@@ -116,7 +118,9 @@ func _play_screen() -> void:
 		var b_item:Item = Global.get_item(Stats.current.daily_rating_item_unlocks.get(Global.day, [])[0])
 		cond_def.text = "[center]clear day %s" % Global.day
 		guaranteed_item.texture = g_item.icon
+		guaranteed_item_rarity_color_rect.color = g_item.rarity_color
 		bonus_item.texture = b_item.icon
+		bonus_item_rarity_color_rect.color = b_item.rarity_color
 		day_label.text = "[right]%s"%day
 		animation_player.play("come_in_second_part")
 		await animation_player.animation_finished

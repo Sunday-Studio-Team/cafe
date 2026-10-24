@@ -14,6 +14,9 @@ func _ready() -> void:
 	_sub_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 
 func _process(delta: float) -> void:
+	if _target_frames_per_second == 0:
+		return
+	
 	if _delay_frames_remaining > 0:
 		return
 	
@@ -28,8 +31,7 @@ func set_delay(delay_frames: int):
 	
 	while _delay_frames_remaining > 0:
 		await get_tree().process_frame
-		_delay_frames_remaining -= 1
-	
+		_delay_frames_remaining -= 1	
 
 func _update_sub_viewport() -> void:
 	_sub_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE

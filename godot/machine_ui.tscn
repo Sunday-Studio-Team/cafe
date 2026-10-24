@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://b7l2bda3t1ha0" path="res://sprites/machine_ui/coffee_bar_idle/DM_CB_IDLE_V02_0001.png" id="29_wknqb"]
 [ext_resource type="Texture2D" uid="uid://cbst2trnyvqru" path="res://sprites/machine_ui/refill_disabled.png" id="31_wb2t4"]
 [ext_resource type="Texture2D" uid="uid://bohuhgoo1fplq" path="res://sprites/machine_ui/refill_hover.png" id="32_il7ix"]
+[ext_resource type="Texture2D" uid="uid://df3huyrttidta" path="res://sprites/machine_ui/need ingredients from storage room.png" id="33_il7ix"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -44,7 +45,6 @@ frame_1/texture = ExtResource("6_dw44w")
 frame_1/duration = 0.5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x6rj0"]
-load_path = "res://.godot/imported/machine_ingredients_bar_fill_0001.png-e08673d80bf472c48481e00f9cecf9fd.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwcv2"]
 bg_color = Color(0.999996, 0.30647203, 0.34021902, 1)
@@ -133,6 +133,13 @@ Button/styles/pressed = SubResource("StyleBoxFlat_uuvgi")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_il7ix"]
+bg_color = Color(0.40392157, 0.007843138, 0.05490196, 0)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -741,13 +748,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 offset_transform_enabled = true
 offset_transform_rotation = 0.08726646
-theme_override_styles/panel = SubResource("StyleBoxFlat_0ffxp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_il7ix")
 
-[node name="Label" type="Label" parent="GetIngredientsPrompt" unique_id=1407812639]
+[node name="Label" type="TextureRect" parent="GetIngredientsPrompt" unique_id=692469223]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 96
-text = "NEED INGREDIENTS
-FROM STORE ROOM"
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("33_il7ix")

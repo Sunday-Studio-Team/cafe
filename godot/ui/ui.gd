@@ -19,7 +19,7 @@ const ALERT_COLOR_GREEN: Color = Color.GREEN
 const ALERT_COLOR_MONEY: Color = Color.GOLD
 const ALERT_QUEUE_SIZE := 5
 
-@export var interactable_indicator: PanelContainer
+@export var interactable_indicator: Control
 @export var interactable_label: RichTextLabel
 @export var shift_starting_ending_label: RichTextLabel
 @export var money_sound: AudioStreamPlayer
@@ -185,7 +185,7 @@ func update_day_indicator() -> void:
 func update_interactable_ui() -> void:
 	var hovered_interactable: Interactable = Global.hovered_interactable
 
-	if hovered_interactable != null:
+	if hovered_interactable != null and Global.camera_mode != Global.CameraMode.CINEMATIC:
 		# show prompt to use active item if we need to
 		interactable_indicator.show()
 

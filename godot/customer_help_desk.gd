@@ -24,7 +24,7 @@ func _ready() -> void:
 	_help_desk_interactable.visible = false
 	_help_desk_interactable.interacted.connect(_on_help_desk_interactable_interacted)
 	_help_desk_interactable.requested_use_active_item.connect(_on_active_item_used_on_desk)
-	
+
 	Events.air_freshener_used.connect(_on_air_freshener_used)
 
 
@@ -94,8 +94,12 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	timed_out_customer.wait_timed_out.disconnect(_on_customer_wait_timed_out)
 	if _desk_customer == timed_out_customer:
 		var rating_loss: float = Stats.current.help_desk_customer_timed_out_rating_loss_each_day[Global.day]
-		Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
-		Global.employee_rating -= rating_loss
+		if Global.lucky_charm_check():
+			Events.alert_posted.emit("A customer didn't get help...", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+		else:
+			Events.alert_posted.emit("-%s A customer didn't get help..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Global.employee_rating -= rating_loss
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
 		_set_customer(null)
@@ -109,7 +113,7 @@ func _on_help_desk_interactable_interacted() -> void:
 
 	Global.active_help_desk_customer = _desk_customer
 	Global.active_help_desk_customer.wait_timed_out.connect(_on_customer_wait_timed_out_during_minigame)
-	
+
 	Events.minigame_end.connect(_on_minigame_end)
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 
@@ -119,9 +123,9 @@ func _on_help_desk_interactable_interacted() -> void:
 func _on_minigame_end() -> void:
 	Events.minigame_end.disconnect(_on_minigame_end)
 	Events.minigame_cancelled.disconnect(_on_minigame_cancelled)
-	
+
 	Global.tutorial_day_2_help_desk_finished = true
-	
+
 	var rating_gain: float = Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
 	Events.alert_posted.emit("+%s Customer placated!" % rating_gain, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gain

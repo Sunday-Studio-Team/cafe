@@ -237,7 +237,7 @@ func set_per_day_stuff() -> void:
 		else:
 			_active_machines.clear()
 			_active_machines.push_back(_left_area_right_machine)
-			_active_machines.push_back(_left_area_left_machine)
+			_active_machines.push_back(_right_area_left_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
 
@@ -485,13 +485,12 @@ func spawn_trash() -> void:
 
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
-		Global.employee_rating -= Global.trash_punishment_amount
-		Events.alert_posted.emit(
-			"-%s Too much trash in the store" % Global.trash_punishment_amount,
-			UI.AlertIconType.RATING,
-			UI.ALERT_DEFAULT_DURATION,
-			UI.ALERT_COLOR_RED,
-		)
+		if Global.lucky_charm_check():
+			Events.alert_posted.emit("Too much trash in the store", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
+		else:
+			Events.alert_posted.emit( "-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Global.employee_rating -= Global.trash_punishment_amount
 	Events.alert_posted.emit(
 		"Customer dropped some trash...",
 		UI.AlertIconType.CUSTOMER,
@@ -504,7 +503,7 @@ func _on_game_timer_timeout() -> void:
 	free_customer_queue()
 	Events.shift_end_sequence_started.emit()
 	closing_time = true
-	if get_customers().size() <= 1:
+	if get_customers().size() == 0:
 		shift_end_sequence()
 
 

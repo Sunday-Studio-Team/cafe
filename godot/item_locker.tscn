@@ -10,9 +10,13 @@
 [ext_resource type="Resource" uid="uid://mytncbiaaghj" path="res://resources/items/airhorn.tres" id="8_60wm3"]
 [ext_resource type="Resource" uid="uid://dro03qfkl0ucg" path="res://resources/items/whipped_cream.tres" id="9_6i5wn"]
 [ext_resource type="Resource" uid="uid://kxjctrnpqcs3" path="res://resources/items/nice_spoon.tres" id="10_b0jqr"]
+[ext_resource type="Shader" uid="uid://bxvpfcnnewvcy" path="res://shaders/mirror_screen_uv_shader.gdshader" id="11_8r07k"]
 [ext_resource type="Resource" uid="uid://bhcmo11ttgvh3" path="res://resources/items/roller_skates.tres" id="11_abt02"]
+[ext_resource type="Script" uid="uid://ct7bg7fk17ucb" path="res://scripts/fake_mirror.gd" id="11_b0jqr"]
 [ext_resource type="Resource" uid="uid://v1yxr7b2fctp" path="res://resources/items/super_scrubber_2000.tres" id="12_8r07k"]
+[ext_resource type="Script" uid="uid://c4c77yw7tsv87" path="res://low_fps_sub_viewport_updater.gd" id="13_8r07k"]
 [ext_resource type="PackedScene" uid="uid://bmu4lp4tfpgqa" path="res://Assets/sato_locker/Name Tag.glb" id="13_dt742"]
+[ext_resource type="Environment" uid="uid://cxysvt0hdbown" path="res://machine_environment.tres" id="13_yvifc"]
 [ext_resource type="AudioStream" uid="uid://bdpud3yqwthf5" path="res://audio/locker/locker_shaking_1.wav" id="14_6i5wn"]
 [ext_resource type="AudioStream" uid="uid://dcb6d0i0ow1ph" path="res://audio/locker/locker_shaking_2.wav" id="15_b0jqr"]
 [ext_resource type="AudioStream" uid="uid://c48li08hfo604" path="res://audio/locker/locker_shaking_3.wav" id="16_abt02"]
@@ -22,6 +26,20 @@ size = Vector3(1.5, 4, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dqjxi"]
 size = Vector3(1.75, 4, 1.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ycmpi"]
+viewport_path = NodePath("ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvifc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("11_8r07k")
+shader_parameter/mirror_albedo_tex = SubResource("ViewportTexture_ycmpi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xrivr"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_yvifc")
+size = Vector2(1, 1.165)
 
 [sub_resource type="Animation" id="Animation_dqjxi"]
 length = 0.001
@@ -247,43 +265,88 @@ shape = SubResource("BoxShape3D_dqjxi")
 script = ExtResource("4_f2a8y")
 door_mesh = NodePath("Locker Door")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 1962398424) index="0" unique_id=1665776569]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 658620535) index="0" unique_id=1665776569]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("6_dt742")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 587808666) index="0" unique_id=1164381062]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Hammer" parent_id_path=PackedInt32Array(1837404991, 2072567497) index="0" unique_id=1164381062]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("7_e0bd6")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 1877412421) index="0" unique_id=169925206]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Air horn" parent_id_path=PackedInt32Array(1837404991, 152920710) index="0" unique_id=169925206]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("8_60wm3")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 1446751461) index="0" unique_id=1413157808]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Whipped cream" parent_id_path=PackedInt32Array(1837404991, 672954504) index="0" unique_id=1413157808]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("9_6i5wn")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 85754966) index="0" unique_id=633572519]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/ingredient_bag" parent_id_path=PackedInt32Array(1837404991, 2062432595) index="0" unique_id=633572519]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("10_b0jqr")
 
-[node name="Mirror" parent="ManualScaler/Model" index="19" unique_id=56187317]
-transform = Transform3D(-0.055559676, -0.01710812, -0.9983089, -0.061211396, 0.9980308, -0.013696704, 0.9965774, 0.060346887, -0.056497514, 0.55770606, 2.5702512, -0.04804716)
+[node name="Mirror" parent="ManualScaler/Model" index="19" unique_id=1669092183]
+transform = Transform3D(-0.055559684, -0.01710812, -0.99830896, -0.061211396, 0.9980308, -0.013696704, 0.9965775, 0.060346894, -0.05649752, 0.55770606, 2.5702512, -0.04804705)
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 77218249) index="0" unique_id=1034734605]
+[node name="FakeMirror" type="Node" parent="ManualScaler/Model/Mirror" index="0" unique_id=1447752080 node_paths=PackedStringArray("mirror_base_node", "mirrored_remote_transform", "mirrored_root_node", "viewpoint_match_node", "mirrored_camera_3d", "debug_viewpoint_marker_3d")]
+script = ExtResource("11_b0jqr")
+mirror_base_node = NodePath("../MirrorMeshInstance3D")
+mirrored_remote_transform = NodePath("../MirrorMeshInstance3D/MirroredCameraRemoteTransform3D")
+mirrored_root_node = NodePath("../MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot")
+viewpoint_match_node = NodePath("../MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped/ViewpointMatch")
+mirrored_camera_3d = NodePath("../MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped/MirroredCamera3D")
+debug_viewpoint_marker_3d = NodePath("../MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped/ViewpointMatch/DebugViewpointMarker3D")
+
+[node name="MirrorMeshInstance3D" type="MeshInstance3D" parent="ManualScaler/Model/Mirror" index="1" unique_id=1178726576]
+transform = Transform3D(0.582, 8.850651e-09, -5.664417e-08, -8.850651e-09, 0.582, -2.6551956e-09, 5.664417e-08, 2.6551963e-09, 0.582, 0.009709118, 0.35860536, 0.010608401)
+mesh = SubResource("QuadMesh_xrivr")
+
+[node name="MirroredCameraRemoteTransform3D" type="RemoteTransform3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D" unique_id=676477918]
+transform = Transform3D(0.9999976, 0, 0, 0, 0.99998236, 0, 0, 0, 0.9999982, 0, 0, 0)
+remote_path = NodePath("../MirrorSubViewport/MirroredRoot")
+update_scale = false
+
+[node name="MirrorSubViewport" type="SubViewport" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D" unique_id=224916509]
+size = Vector2i(256, 256)
+
+[node name="MirroredRoot" type="Node3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport" unique_id=662264350]
+transform = Transform3D(-0.05555974, -0.017107714, -0.99830884, -0.06121137, 0.99800694, -0.013696699, 0.9965767, 0.060345467, -0.056497607, 0.30096275, 1.630227, -0.009650676)
+
+[node name="Flipped" type="Node3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot" unique_id=378210045]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="MirroredCamera3D" type="Camera3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped" unique_id=2012251660]
+transform = Transform3D(0.97786, 0.009982828, 0.20902504, -0.057213955, 0.9735823, 0.22116081, -0.20129028, -0.22821784, 0.95257485, 0.15952677, 0.14445233, 0.4153327)
+environment = ExtResource("13_yvifc")
+fov = 70.01
+near = 0.66777724
+
+[node name="ViewpointMatch" type="Node3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped" unique_id=950532727]
+transform = Transform3D(-0.97887516, 0.01534237, 0.21030548, 0.0628043, 0.97338516, 0.22056895, -0.20156923, 0.2287631, -0.95257854, 0.15952674, 0.14445233, -0.41533273)
+
+[node name="DebugViewpointMarker3D" type="Marker3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped/ViewpointMatch" unique_id=177192072]
+transform = Transform3D(1, 1.6091411e-07, -6.4365923e-07, -1.6091478e-07, 1, -1.0402375e-06, 6.4365906e-07, 1.0402376e-06, 1, 0, 0, 0)
+
+[node name="LowFpsSubViewportUpdater" type="Node" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport" unique_id=148125956 node_paths=PackedStringArray("_sub_viewport")]
+script = ExtResource("13_8r07k")
+_sub_viewport = NodePath("..")
+_target_frames_per_second = 4
+metadata/_custom_type_script = "uid://c4c77yw7tsv87"
+
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_L" parent_id_path=PackedInt32Array(1837404991, 1127249803) index="0" unique_id=1034734605]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 266203652) index="0" unique_id=1863931289]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Skates_R" parent_id_path=PackedInt32Array(1837404991, 1190557752) index="0" unique_id=1863931289]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 274392463) index="0" unique_id=488191577]
+[node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Supper Scrubber" parent_id_path=PackedInt32Array(1837404991, 1240643384) index="0" unique_id=488191577]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("12_8r07k")
 
-[node name="Locker Door" parent="ManualScaler/Model" index="24" unique_id=711655157]
-transform = Transform3D(-0.9989276, 0, 0.046300218, 0, 1, 0, -0.046300218, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
+[node name="Locker Door" parent="ManualScaler/Model" index="24" unique_id=1429478246]
+transform = Transform3D(-0.9989277, 0, 0.04630022, 0, 1, 0, -0.04630022, 0, -0.9989277, 0.59405494, 1.6096349, -0.5675206)
 
 [node name="Name Tag" parent="ManualScaler/Model/Locker Door" index="0" unique_id=160599352 instance=ExtResource("13_dt742")]
 transform = Transform3D(-1.3411045e-07, 0, -2.9490232, 0, 2.9490216, 0, 2.9490232, 0, -1.3411045e-07, -0.16459996, 0.103236675, -0.48949295)
