@@ -21,6 +21,7 @@ extends CanvasLayer
 @export var second_part_container: Control
 @export var day_label: RichTextLabel
 @export var cond_def: RichTextLabel
+@export var cond_bonus: RichTextLabel
 @export var bonus_item: TextureRect
 @export var bonus_item_rarity_color_rect: ColorRect
 @export var guaranteed_item: TextureRect
@@ -36,7 +37,7 @@ extends CanvasLayer
 @export var lock: TextureRect
 
 var reached_bonus_rating: bool = (
-	Global.employee_rating >= 4.5
+	Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 )
 
 
@@ -63,6 +64,7 @@ func _play_screen() -> void:
 	await get_tree().create_timer(2).timeout
 	times_up.hide()
 	tippy_times_up.hide()
+	cond_bonus.text = "[right]get %s" % Stats.current.item_bonus_rating_threshold
 	reached_bonus_rating = (
 		Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 	)
@@ -90,21 +92,21 @@ func _play_screen() -> void:
 	cafe_profits.show()
 	win_shift_sound.pitch_scale = 1
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time).timeout
 	goal.show()
 	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
 	win_shift_sound.pitch_scale = 1.2
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time).timeout
 	earnings.show()
 	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
 	win_shift_sound.pitch_scale = 1.5
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time2).timeout
-	
+
 	if passed_profit_goal:
 		var day: String = "Glorbsday"
 		match Global.day:
