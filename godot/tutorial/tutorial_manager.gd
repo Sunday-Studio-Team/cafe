@@ -5,6 +5,7 @@ extends Node
 
 @export var _player_ui_sub_viewport_container: PlayerUiSubViewportContainer
 @export var _cinematic_camera: CinematicCamera
+@export var basic_controls_prompt_packed_scene: PackedScene
 
 @export var _tippy_callouts_manager: TippyCalloutsManager
 @export var _open_closed_sign: OpenClosedSign
@@ -51,9 +52,11 @@ func start_day() -> void:
 		if Global.day == 1:
 			# Enable the open sign
 			_open_closed_sign.set_enabled(true)
-			
+
 			Global.main_scene._main_scene_loading_overlay.visible = false
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_0)
+			var controls_prompt: CanvasLayer = basic_controls_prompt_packed_scene.instantiate()
+			add_sibling(controls_prompt)
 
 			# Repeat the lines until shift started.
 			if true:
@@ -101,7 +104,7 @@ func start_day() -> void:
 			await Events.customer_started_order
 
 			await Global.voice_line_system.play_voice_line("voice_line_day_1_training_17", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			
+
 			await Global.main_scene.tutorial_machine.drink_prepared
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_1_2)
@@ -369,7 +372,7 @@ func start_day() -> void:
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_40", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
-			
+
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_2_4)
 
 			# Repeat the lines until broken down machine is interacted with.
@@ -449,7 +452,7 @@ func start_day() -> void:
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_60", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			await get_tree().create_timer(0.5).timeout
-			
+
 		elif Global.day == 3:
 
 			# Disable the open sign
@@ -500,7 +503,7 @@ func start_day() -> void:
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_2)
-			
+
 			Global.tutorial_day_3_spill_allow_cleaning = true
 
 			# Repeat the lines until the spill is cleaned.
@@ -598,7 +601,7 @@ func start_day() -> void:
 	else:
 		await create_tween().tween_property(Global.main_scene._main_scene_loading_overlay, "modulate:a", 0.0, 1.0).finished
 		Global.main_scene._main_scene_loading_overlay.visible = false
-		
+
 		if Global.day == 5:
 			await Global.voice_line_system.play_voice_line("voice_line_day_5_training_0", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 			await get_tree().create_timer(2.0).timeout
