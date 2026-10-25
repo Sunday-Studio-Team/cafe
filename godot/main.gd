@@ -173,7 +173,6 @@ func _ready() -> void:
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	Global.total_trash = 0
-	Global.all_3d_audio_stream_players.clear()
 	Global.refresh_active_items()
 	closing_time = false
 
@@ -182,6 +181,13 @@ func _ready() -> void:
 	Events.main_scene_ready.emit()
 
 	_tutorial_manager.start_day()
+
+	await get_tree().physics_frame
+	Global.all_3d_audio_stream_players.clear()
+	for p: AudioStreamPlayer3D in find_children("*", "AudioStreamPlayer3D"):
+		print(p.name)
+		p.set_meta("base_pitch_scale", p.pitch_scale)
+		Global.all_3d_audio_stream_players.append(p)
 
 
 func _physics_process(delta: float) -> void:

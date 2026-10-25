@@ -209,12 +209,6 @@ func _ready() -> void:
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
-	while main_scene == null:
-		await get_tree().process_frame
-	for p: AudioStreamPlayer3D in Global.main_scene.find_children("*", "AudioStreamPlayer3D"):
-		p.set_meta("base_pitch_scale", p.pitch_scale)
-		all_3d_audio_stream_players.append(p)
-
 
 func load_unlocked_items_from_save() -> void:
 	unlocked_items.clear()
