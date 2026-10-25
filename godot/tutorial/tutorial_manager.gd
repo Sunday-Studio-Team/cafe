@@ -482,6 +482,8 @@ func start_day() -> void:
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_1)
 
+			Global.tutorial_day_3_spill_allow_cleaning = false
+
 			# Repeat the lines until the spill is interacted with.
 			if true:
 				var repeat_lines: Array[String] = [
@@ -498,6 +500,8 @@ func start_day() -> void:
 				await _repeat_line_until_condition_met(repeat_lines, repeat_lines_location, condition_callable)
 
 			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_3_2)
+			
+			Global.tutorial_day_3_spill_allow_cleaning = true
 
 			# Repeat the lines until the spill is cleaned.
 			if true:

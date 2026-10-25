@@ -20,6 +20,7 @@ var is_dirty: bool = false
 
 @onready var mop_start_position: Vector2 = position
 
+var _game_started: bool = false
 
 func _ready() -> void:
 	bubble_particles.emitting = false
@@ -37,8 +38,17 @@ func _ready() -> void:
 	else:
 		texture = normal_mop_texture
 
+	_game_started = false
+	if Global.playing_tutorial:
+		while not Global.tutorial_day_3_spill_allow_cleaning:
+			await get_tree().process_frame
+	_game_started = true
+
 
 func _physics_process(_delta: float) -> void:
+	if not _game_started:
+		return
+	
 	global_position = get_global_mouse_position()
 	reset_physics_interpolation()
 
