@@ -67,6 +67,8 @@ func _process(_delta: float) -> void:
 
 
 func _start_tippy_loading() -> void:
+	_tippy_finishing = false
+	
 	# Load the tippy sprite frames
 	_loading_tippy_sprite_frames_load_token = Global.resource_background_loader.cache_resource(_loading_tippy_sprite_frames_uid)
 	while !_loading_tippy_sprite_frames_load_token.is_loaded:
@@ -88,7 +90,6 @@ func _start_tippy_loading() -> void:
 	_tippy_stage = 0
 	_tippy_target_stage = 0
 	_tippy_switching = false
-	_tippy_finishing = false
 	_loading_progress_bar.value = 0.0
 
 func _set_loading_progress(ratio: float) -> void:

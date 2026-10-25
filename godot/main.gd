@@ -82,7 +82,7 @@ func _ready() -> void:
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
-	Events.shutters_open_requested.connect(_on_shutters_open_requested)
+	Events.flipped_open_sign.connect(_on_shutters_open_requested)
 	Events.shift_start_requested.connect(_on_shift_start_requested)
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -123,9 +123,11 @@ func _ready() -> void:
 
 	# Determine if we should play the tutorial!
 	var should_play_tutorial: bool = (
-		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
+		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day and\
+		Global.day != 5 # We go right into day 5, no cinematics.
 	)
 	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
+
 	if should_play_tutorial and not skip_tutorials:
 		print("should play tutorial!")
 		Global.playing_tutorial = true
@@ -173,7 +175,6 @@ func _ready() -> void:
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	Global.total_trash = 0
-	Global.all_3d_audio_stream_players.clear()
 	Global.refresh_active_items()
 	closing_time = false
 
@@ -182,6 +183,11 @@ func _ready() -> void:
 	Events.main_scene_ready.emit()
 
 	_tutorial_manager.start_day()
+
+	Global.all_audio_stream_players.clear()
+	for p: AudioStreamPlayer3D in find_children("*", "AudioStreamPlayer3D"):
+		p.set_meta("base_pitch_scale", p.pitch_scale)
+		Global.all_audio_stream_players.append(p)
 
 
 func _physics_process(delta: float) -> void:

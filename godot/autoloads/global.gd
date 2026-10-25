@@ -160,6 +160,7 @@ var tutorial_day_2_broken_machine_interacted: bool = false
 var tutorial_day_2_broken_machine_fixed: bool = false
 var tutorial_day_3_camera_stunned_player: bool = false
 var tutorial_day_3_spill_interacted: bool = false
+var tutorial_day_3_spill_allow_cleaning: bool = false
 var tutorial_day_3_spill_cleaned: bool = false
 var tutorial_day_4_trash_picked_up: bool = false
 var tutorial_day_4_trash_thrown_away: bool = false
@@ -189,7 +190,7 @@ var locked_camera_target_pos: Vector3
 var cinematic_camera_allow_machine_gui_inputs: bool = true
 var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
-var all_3d_audio_stream_players: Array[Node]
+var all_audio_stream_players: Array[Node]
 var no_cooldowns := false
 
 
@@ -209,12 +210,6 @@ func _ready() -> void:
 	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
-
-	while main_scene == null:
-		await get_tree().process_frame
-	for p: AudioStreamPlayer3D in Global.main_scene.find_children("*", "AudioStreamPlayer3D"):
-		p.set_meta("base_pitch_scale", p.pitch_scale)
-		all_3d_audio_stream_players.append(p)
 
 
 func load_unlocked_items_from_save() -> void:
@@ -350,15 +345,10 @@ func day_to_string(d: int) -> String:
 	return day_as_string
 
 
-## for frozen tippy item
-## (and cutscenes if we get to that)
-## NOTE: i think this is broken rn
-func pitch_shift_all_3d_audio(down: bool) -> void:
+## for frozen tippy item and cutscenes
+func pitch_shift_all_audio(multiplier: float = 1.0) -> void:
 	var pitch_tween := create_tween().set_parallel()
 
-	for p: AudioStreamPlayer3D in all_3d_audio_stream_players:
-		if down:
-			pitch_tween.tween_property(p, "pitch_scale", 0.75, 0.5)
-		else:
-			var player_base_pitch: float = p.get_meta("base_pitch_scale")
-			pitch_tween.tween_property(p, "pitch_scale", player_base_pitch, 0.25)
+	for p in all_audio_stream_players:
+		var base_pitch: float = p.get_meta("base_pitch_scale")
+		pitch_tween.tween_property(p, "pitch_scale", base_pitch * multiplier, 0.5)

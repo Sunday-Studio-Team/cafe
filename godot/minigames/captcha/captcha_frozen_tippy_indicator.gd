@@ -7,22 +7,22 @@ func _ready() -> void:
 			func(item: Item) -> bool:
 				return item.item_id == "barista_guide"
 	)
-	
+
 	if has_frozen_tippy_item:
 		var spawn_animation_tween := create_tween().set_ignore_time_scale().set_trans(Tween.TRANS_SPRING)
 		spawn_animation_tween.tween_property(
-				self, 
-				"offset_transform_scale", 
-				Vector2.ONE, 
+				self,
+				"offset_transform_scale",
+				Vector2.ONE,
 				0.5
 		).from(Vector2.ZERO)
 		await spawn_animation_tween.finished
-		
+
 		var rotate_tween := create_tween().set_loops().set_ignore_time_scale()
 		rotate_tween.tween_property(
-				self, 
-				"offset_transform_rotation", 
-				deg_to_rad(5), 
+				self,
+				"offset_transform_rotation",
+				deg_to_rad(5),
 				0.1
 		)
 		rotate_tween.tween_interval(1.5)
@@ -42,9 +42,9 @@ func _ready() -> void:
 func play_shake_animation() -> void:
 	var shake_horizontal_tween := create_tween().set_ignore_time_scale()
 	shake_horizontal_tween.tween_property(
-			self, 
-			"offset_transform_position_ratio:x", 
-			0.05, 
+			self,
+			"offset_transform_position_ratio:x",
+			0.05,
 			0.1
 	)
 	shake_horizontal_tween.tween_property(
@@ -82,22 +82,22 @@ func play_shake_animation() -> void:
 
 	var grow_tween := create_tween().set_ignore_time_scale()
 	grow_tween.tween_property(
-			self, 
-			"offset_transform_scale", 
-			Vector2.ONE * 1.1, 
+			self,
+			"offset_transform_scale",
+			Vector2.ONE * 1.1,
 			0.25
 	)
 	grow_tween.tween_property(
-			self, 
-			"offset_transform_scale", 
-			Vector2.ONE, 
+			self,
+			"offset_transform_scale",
+			Vector2.ONE,
 			0.25
 	)
-	
+
 	var blue_tint_tween := create_tween().set_ignore_time_scale()
-	blue_tint_tween.tween_property(self, 
-			"modulate", 
-			Color.CYAN, 
+	blue_tint_tween.tween_property(self,
+			"modulate",
+			Color.CYAN,
 			0.1
 	)
 	blue_tint_tween.tween_property(self,
@@ -105,4 +105,3 @@ func play_shake_animation() -> void:
 			Color.WHITE,
 			0.25
 	)
-	

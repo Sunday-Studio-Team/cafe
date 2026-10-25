@@ -17,22 +17,11 @@ const LOCKER_ANIMATION_NAMES: Array[String] = [
 @export var confirm_button: Button
 @export var locker_open_sound: AudioStreamPlayer
 @export var locker_close_sound: AudioStreamPlayer
-# NOTE: OMG i never made this thing its own class cos it was only being used in
-# 1-2 places but ive had to redo it more times than i expected and its kind of
-# tedious . 0_0
-@export var item_hover_tooltip: Control
-@export var item_hover_tooltip_name: RichTextLabel
-@export var item_hover_tooltip_rarity_color_rect: ColorRect
-@export var item_hover_tooltip_rarity_label: RichTextLabel
-@export var item_hover_tooltip_description: RichTextLabel
-@export var item_hover_tooltip_cooldown_label: RichTextLabel
-@export var item_hover_tooltip_passive_indicator: Control
-@export var item_hover_tooltip_active_indicator: Control
+@export var item_hover_tooltip: ItemHoverTooltip
 
 var locker_interactable: Interactable
 var locker_model: ItemLockerModel
 var locker_animation_player: AnimationPlayer
-
 var player_has_confirmed_loadout_at_least_once := false
 
 
@@ -220,33 +209,12 @@ func confirm_and_hide_menu() -> void:
 
 
 func handle_item_hover_tooltip() -> void:
-	item_hover_tooltip.position = get_viewport().get_mouse_position()
-
 	var hovered_element: LoadoutMenuElement = Global.hovered_loadout_menu_element
 
-	if hovered_element != null:
-		var item: Item = hovered_element.item
-		if not item == null:
-			if item.SHOW_ITEM_LEVELS:
-				item_hover_tooltip_name.text = "[b]%s Lv%s[/b]" % [item.name, item.item_level]
-			else:
-				item_hover_tooltip_name.text = "[b]%s[/b]" % item.name
-			item_hover_tooltip_rarity_label.text = "[b]%s[/b]" % item.rarity_name.to_upper()
-			item_hover_tooltip_rarity_color_rect.color = item.rarity_color
-			item_hover_tooltip_description.text = item.description_at_levels[item.item_level]
-			if item.is_active_item:
-				item_hover_tooltip_passive_indicator.hide()
-				item_hover_tooltip_active_indicator.show()
-				item_hover_tooltip_cooldown_label.text = "(%ss cooldown)" % item.active_item_cooldown_at_levels[
-						item.item_level]
-			else:
-				item_hover_tooltip_passive_indicator.show()
-				item_hover_tooltip_active_indicator.hide()
-
-	item_hover_tooltip.visible = (
-			hovered_element != null and hovered_element.item != null
-			and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
-	)
+	if hovered_element == null:
+		item_hover_tooltip.item = null
+	else:
+		item_hover_tooltip.item = hovered_element.item
 
 
 # called when we're dragging an element and we let go on top of another
