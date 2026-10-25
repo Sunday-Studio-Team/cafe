@@ -82,7 +82,7 @@ func _ready() -> void:
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
-	Events.shutters_open_requested.connect(_on_shutters_open_requested)
+	Events.flipped_open_sign.connect(_on_shutters_open_requested)
 	Events.shift_start_requested.connect(_on_shift_start_requested)
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
@@ -127,7 +127,7 @@ func _ready() -> void:
 		Global.day != 5 # We go right into day 5, no cinematics.
 	)
 	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
-	
+
 	if should_play_tutorial and not skip_tutorials:
 		print("should play tutorial!")
 		Global.playing_tutorial = true
@@ -233,7 +233,7 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_right_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
-	
+
 	if Global.day == 2:
 		if Global.playing_tutorial:
 			_active_machines.clear()
@@ -246,7 +246,7 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_left_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
-	
+
 	if Global.day == 3:
 		if Global.playing_tutorial:
 			_active_machines.clear()

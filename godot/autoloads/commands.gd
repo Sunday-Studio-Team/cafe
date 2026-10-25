@@ -211,8 +211,11 @@ func set_speed(param1: String) -> void:
 
 
 func start_shift() -> void:
-	Events.shift_started.emit()
-	Console.print_line("starting shift")
+	if Global.shift_started:
+		Console.print_error("shift already started")
+	else:
+		Events.flipped_open_sign.emit()
+		Console.print_line("starting shift")
 
 
 func give_item(item_id: String) -> void:
