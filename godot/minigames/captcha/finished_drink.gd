@@ -1,7 +1,5 @@
 extends TextureRect
 
-var is_dragging: bool = false
-
 
 func _get_drag_data(_at_position: Vector2) -> TextureRect:
 	# Create a drag preview
@@ -11,6 +9,6 @@ func _get_drag_data(_at_position: Vector2) -> TextureRect:
 	preview.position.x = -(preview.size.x/2)
 	preview.position.y = -(preview.size.y/2)
 	set_drag_preview(preview_parent)
-	
-	self.texture = null
+
+	texture = null
 	return self
