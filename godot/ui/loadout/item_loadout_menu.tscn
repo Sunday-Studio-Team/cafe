@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dhttshpvbkayc" path="res://ui/loadout/loadout_menu_element.tscn" id="1_0rl37"]
 [ext_resource type="Script" uid="uid://dlnawqw3ep1l4" path="res://ui/loadout/item_loadout_menu.gd" id="1_7ango"]
+[ext_resource type="PackedScene" uid="uid://7lluvsedruj0" path="res://ui/item_hover_tooltip.tscn" id="3_7pc00"]
 [ext_resource type="AudioStream" uid="uid://cn0h1uvfk5nd8" path="res://audio/locker/locker_open_1.wav" id="3_ndpu2"]
 [ext_resource type="AudioStream" uid="uid://dp1el8c30hxoc" path="res://audio/locker/locker_open_2.wav" id="4_c6g3w"]
 [ext_resource type="AudioStream" uid="uid://d0e25vy8m3f3s" path="res://audio/locker/locker_open_3.wav" id="5_dbh57"]
@@ -58,15 +59,6 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 expand_margin_top = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5cg7"]
-bg_color = Color(0, 0, 0, 0.8784314)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbh57"]
-bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs5tx"]
-bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 streams_count = 4
 stream_0/stream = ExtResource("3_ndpu2")
@@ -81,7 +73,7 @@ stream_1/stream = ExtResource("8_7pc00")
 stream_2/stream = ExtResource("9_6p7s6")
 stream_3/stream = ExtResource("10_plv5e")
 
-[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "locker_open_sound", "locker_close_sound", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_rarity_color_rect", "item_hover_tooltip_rarity_label", "item_hover_tooltip_description", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_active_indicator")]
+[node name="ItemLoadoutMenu" type="CanvasLayer" unique_id=2615188 node_paths=PackedStringArray("root", "available_items_container", "equipped_items_container", "confirm_button", "locker_open_sound", "locker_close_sound", "item_hover_tooltip")]
 script = ExtResource("1_7ango")
 element_scene = ExtResource("1_0rl37")
 root = NodePath("MenuRootControl")
@@ -91,13 +83,6 @@ confirm_button = NodePath("MenuRootControl/VBoxContainer/ConfirmButton")
 locker_open_sound = NodePath("LockerOpenSound")
 locker_close_sound = NodePath("LockerCloseSound")
 item_hover_tooltip = NodePath("ItemHoverTooltip")
-item_hover_tooltip_name = NodePath("ItemHoverTooltip/VBoxContainer/Name")
-item_hover_tooltip_rarity_color_rect = NodePath("ItemHoverTooltip/VBoxContainer/Rarity/RarityColorRect")
-item_hover_tooltip_rarity_label = NodePath("ItemHoverTooltip/VBoxContainer/Rarity/RarityLabel")
-item_hover_tooltip_description = NodePath("ItemHoverTooltip/VBoxContainer/Description")
-item_hover_tooltip_cooldown_label = NodePath("ItemHoverTooltip/VBoxContainer/Active/HBoxContainer/CooldownLabel")
-item_hover_tooltip_passive_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Passive")
-item_hover_tooltip_active_indicator = NodePath("ItemHoverTooltip/VBoxContainer/Active")
 
 [node name="MenuRootControl" type="MarginContainer" parent="." unique_id=1351850692]
 anchors_preset = 15
@@ -233,124 +218,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ndpu2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wej5g")
 text = "CONFIRM"
 
-[node name="ItemHoverTooltip" type="PanelContainer" parent="." unique_id=2088283471]
-modulate = Color(1, 1, 1, 0.98039216)
-custom_minimum_size = Vector2(600, 250)
-custom_maximum_size = Vector2(600, 350)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -249.0
-offset_top = -123.0
-offset_right = 251.0
-offset_bottom = 127.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-offset_transform_enabled = true
-offset_transform_position_ratio = Vector2(0, -1)
-mouse_filter = 2
-mouse_behavior_recursive = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_a5cg7")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemHoverTooltip" unique_id=269649499]
-layout_mode = 2
-alignment = 1
-
-[node name="Name" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer" unique_id=725533923]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/bold_font_size = 53
-bbcode_enabled = true
-text = "[b]Item Name[/b]"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Rarity" type="MarginContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=2005976788]
-layout_mode = 2
-
-[node name="RarityColorRect" type="ColorRect" parent="ItemHoverTooltip/VBoxContainer/Rarity" unique_id=2005443329]
-layout_mode = 2
-color = Color(0.10980392, 0.37254903, 0.4509804, 1)
-
-[node name="RarityLabel" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Rarity" unique_id=939447694]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "[b]RARITY[/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Active" type="PanelContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=31227346]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dbh57")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ItemHoverTooltip/VBoxContainer/Active" unique_id=2121684596]
-layout_mode = 2
-alignment = 1
-
-[node name="ActiveLabel" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=269351974]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "[b]ACTIVE[/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="CooldownLabel" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Active/HBoxContainer" unique_id=2000028126]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "(xs cooldown)"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Passive" type="PanelContainer" parent="ItemHoverTooltip/VBoxContainer" unique_id=1203398786]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_cs5tx")
-
-[node name="Label" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer/Passive" unique_id=352566929]
-custom_maximum_size = Vector2(-1, 25)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "[b]PASSIVE[/b]"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-
-[node name="Description" type="RichTextLabel" parent="ItemHoverTooltip/VBoxContainer" unique_id=851795990]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "Use on a broken machine.[br]Instantly fixes it.[br]10s cooldown."
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
+[node name="ItemHoverTooltip" parent="." unique_id=1251839867 instance=ExtResource("3_7pc00")]
 
 [node name="LockerOpenSound" type="AudioStreamPlayer" parent="." unique_id=667555143]
 stream = SubResource("AudioStreamRandomizer_vn1tu")

@@ -33,6 +33,7 @@ extends CanvasLayer
 @export var end_shift_button: TextureButton
 @export var times_up: TextureRect
 @export var tippy_times_up: TextureRect
+@export var item_hover_tooltip: ItemHoverTooltip
 
 @export var lock: TextureRect
 
@@ -121,8 +122,24 @@ func _play_screen() -> void:
 		cond_def.text = "[center]clear day %s" % Global.day
 		guaranteed_item.texture = g_item.icon
 		guaranteed_item_rarity_color_rect.color = g_item.rarity_color
+		guaranteed_item.mouse_entered.connect(
+			func() -> void:
+				item_hover_tooltip.item = g_item
+		)
+		guaranteed_item.mouse_exited.connect(
+			func() -> void:
+				item_hover_tooltip.item = null
+		)
 		bonus_item.texture = b_item.icon
 		bonus_item_rarity_color_rect.color = b_item.rarity_color
+		bonus_item.mouse_entered.connect(
+			func() -> void:
+				item_hover_tooltip.item = b_item
+		)
+		bonus_item.mouse_exited.connect(
+			func() -> void:
+				item_hover_tooltip.item = null
+		)
 		day_label.text = "[right]%s"%day
 		animation_player.play("come_in_second_part")
 		await animation_player.animation_finished
