@@ -44,6 +44,7 @@ const ALERT_QUEUE_SIZE := 5
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName
 @export var exploding_bomb_ui: PanelContainer
+@export var throw_trash_ui: PanelContainer
 
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
@@ -126,6 +127,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 
+	update_throw_trash_ui()
 	update_cctv_indicator()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
@@ -334,6 +336,14 @@ func update_exploding_bomb_timer(_delta: float) -> void:
 			exploding_bomb_timer = 10.5
 			exploding_bomb_on_cooldown = false
 
+func update_throw_trash_ui() -> void:
+	# if player has trash in their hand, show ui
+	if (Global.holding_trash == true):
+		throw_trash_ui.show()
+	
+	#else, hide ui
+	else:
+		throw_trash_ui.hide()
 
 func update_cctv_indicator() -> void:
 	if Global.player_in_cctv_los:
