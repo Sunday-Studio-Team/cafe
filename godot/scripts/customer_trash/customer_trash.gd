@@ -8,6 +8,8 @@ extends RigidBody3D
 @export var trail: GPUParticles3D
 @export var hint_pop_animated_sprite_3d: AnimatedSprite3D
 @export var hint_pop_sprite_frames_uid: StringName
+@export var cup_body_surface_index: int
+@export var model_name: String
 
 signal trash_bag_taken(customer_trash: CustomerTrash)
 
@@ -19,7 +21,6 @@ var _hint_pop_animated_sprite_3d_relative_position: Vector3
 # viewmodel animation
 var already_interacted := false
 var time_left_out: float = 0.0
-var cup_body_surface_index := 2
 var threshold_velocity := 1
 var being_slow := false
 
@@ -85,6 +86,7 @@ func _on_interacted() -> void:
 
 	trash_bag_taken.emit(self)
 	Global.holding_trash = true
+	Global.trash_in_hand = model_name
 	already_interacted = true
 	Events.play_viewmodel_animation.emit("bag_pickup")
 

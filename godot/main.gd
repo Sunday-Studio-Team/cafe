@@ -18,7 +18,7 @@ extends Node3D
 @export var customer_help_desk: CustomerHelpDesk
 @export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
-@export var customer_trash_scene: PackedScene
+@export var customer_trash_scenes: Array[PackedScene]
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var cafe_front_roller_shutters: CafeFrontRollerShutters
@@ -459,7 +459,7 @@ func attempt_spawn_trash() -> void:
 
 
 func spawn_trash() -> void:
-	var customer_trash: CustomerTrash = customer_trash_scene.instantiate()
+	var customer_trash: CustomerTrash = customer_trash_scenes.pick_random().instantiate()
 
 	var current_customers: Array[Customer]
 	# Get all current customer positions
