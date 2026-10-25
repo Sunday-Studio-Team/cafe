@@ -36,6 +36,7 @@ func _ready() -> void:
 - [i]endshift[/i] ends shift
 - [i]endshift W[/i] forces a win
 - [i]endshift L[/i] forces a loss
+- [i]timeup[/i] skips to shift end sequence (where customers stop spawning, NOT the end screen)
 - [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
 - [i]rating <number>[/i] sets your employee rating
@@ -88,6 +89,7 @@ func _ready() -> void:
 	Console.add_command_autocomplete_list("customer", _customer_names)
 	Console.add_command("unlockall", unlock_everything)
 	Console.add_command("trash", spawn_trash)
+	Console.add_command("timeup", time_up)
 
 	Events.main_scene_ready.connect(
 		func():
@@ -290,3 +292,17 @@ func refresh_active_item(item: Item):
 	await get_tree().create_timer(3, false).timeout
 	item.can_be_used = true
 	Events.items_updated.emit()
+
+
+func time_up() -> void:
+	if not Global.shift_started:
+		start_shift()
+		await Events.shift_started
+
+	if Global.main_scene.get_customers().size() == 0:
+		spawn_customer("")
+		# im sorry but we do have to do this
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+
+	Global.main_scene.game_timer.timeout.emit()
