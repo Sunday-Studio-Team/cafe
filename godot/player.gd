@@ -6,9 +6,9 @@ const STRIDE_LENGTH := 1.25
 
 # throwing garbage velocity
 const GARBAGE_FORWARD_VELOCITY := 20.0
-const GARBAGE_UPWARD_VELOCITY := 2.0 #keep it small; ~2ish
+const GARBAGE_UPWARD_VELOCITY := 2.0 # keep it small; ~2ish
 
-# this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
+## this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
 @export var main_room_spawn_point: Marker3D
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
@@ -40,16 +40,12 @@ var _current_move_speed: float
 var _is_sprinting: bool
 var mouse_sens := 0.1
 
-# vars for footstep sounds
+## vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 
 var holding_interactable: bool = false
 var has_xl_bag_item: bool = false
-
-# when pully ball spawns, starts counting up. keeping track of strength.
-var pully_ball_countup: float = 0.0
-var pully_ball_instance: Node3D
 
 var fake_vel_follow_speed: float = 1.25
 var fake_velocity: Vector3
@@ -78,6 +74,7 @@ func _ready() -> void:
 	ingredients_bag.visibility_changed.connect(
 			func():
 				if ingredients_bag.visible:
+					# so we can tween the scale up when it shows
 					ingredients_bag.scale = Vector3.ZERO
 	)
 	Events.bag_pickup_animation_grabbed.connect(
@@ -89,6 +86,7 @@ func _ready() -> void:
 				var t := create_tween().set_parallel()
 				t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
+
 	customer_trash.visibility_changed.connect(
 		func():
 			if customer_trash.visible:
