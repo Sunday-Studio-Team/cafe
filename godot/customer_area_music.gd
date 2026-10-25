@@ -22,14 +22,23 @@ func _ready() -> void:
 	loudspeaker_model.animation_player.play("playing")
 	loudspeaker_model.sound_ring_particles.emitting = true
 
-	play_random_shift_track()
 	finished.connect(
 		func() -> void:
 			if not Global.main_scene.closing_time:
 				play_random_shift_track()
 			)
+	
+	# Don't play music when day 5 starts, wait for shift start signal 
+	if Global.day == 5:
+		Events.shift_started.connect(_play_music_on_shift_start)
+	else:
+		play_random_shift_track()
 
 
 func play_random_shift_track() -> void:
 	stream = shift_tracks.pick_random()
 	play()
+
+func _play_music_on_shift_start() -> void:
+	Events.shift_started.disconnect(_play_music_on_shift_start)
+	play_random_shift_track()
