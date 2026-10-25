@@ -27,18 +27,21 @@ func _ready() -> void:
 			if not Global.main_scene.closing_time:
 				play_random_shift_track()
 			)
-	
-	# Don't play music when day 5 starts, wait for shift start signal 
+
+	# Don't play music when day 5 starts, wait for shift start signal
 	if Global.day == 5:
-		Events.shift_started.connect(_play_music_on_shift_start)
+		Events.shift_start_requested.connect(
+			func() -> void:
+				play_random_shift_track(true),
+			CONNECT_ONE_SHOT
+		)
 	else:
 		play_random_shift_track()
 
 
-func play_random_shift_track() -> void:
+func play_random_shift_track(with_creepy_startup: bool = false) -> void:
 	stream = shift_tracks.pick_random()
 	play()
 
-func _play_music_on_shift_start() -> void:
-	Events.shift_started.disconnect(_play_music_on_shift_start)
-	play_random_shift_track()
+	if with_creepy_startup:
+		create_tween().tween_property(self, "pitch_scale", 1, 3).from(0)
