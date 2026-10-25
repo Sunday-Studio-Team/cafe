@@ -212,9 +212,6 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
-		if camera == null:
-			return
-
 		if (
 				not hovered_interactable.visible
 				or not hovered_interactable.is_inside_tree()
