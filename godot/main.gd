@@ -123,9 +123,11 @@ func _ready() -> void:
 
 	# Determine if we should play the tutorial!
 	var should_play_tutorial: bool = (
-		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
+		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day and\
+		Global.day != 5 # We go right into day 5, no cinematics.
 	)
 	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
+	
 	if should_play_tutorial and not skip_tutorials:
 		print("should play tutorial!")
 		Global.playing_tutorial = true
@@ -233,7 +235,7 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_right_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
-
+	
 	if Global.day == 2:
 		if Global.playing_tutorial:
 			_active_machines.clear()
@@ -246,7 +248,7 @@ func set_per_day_stuff() -> void:
 			_active_machines.push_back(_right_area_left_machine)
 			_set_day_security_cameras_active([])
 		_trash_can.visible = false
-
+	
 	if Global.day == 3:
 		if Global.playing_tutorial:
 			_active_machines.clear()

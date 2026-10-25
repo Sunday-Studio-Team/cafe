@@ -580,14 +580,6 @@ func start_day() -> void:
 			await Global.voice_line_system.play_voice_line("voice_line_day_4_training_38", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 			await get_tree().create_timer(0.5).timeout
-			
-		elif Global.day == 5:
-
-			# Disable the open sign
-			_open_closed_sign.set_enabled(false)
-
-			Global.main_scene._main_scene_loading_overlay.visible = false
-			await _run_skippable_tutorial_part(SkippableTutorialPart.TutorialPartEnum.DAY_5_0)			
 
 		# Re-enable Tippy callouts
 		_tippy_callouts_manager.enable_tippy_callouts = true
@@ -602,6 +594,13 @@ func start_day() -> void:
 	else:
 		await create_tween().tween_property(Global.main_scene._main_scene_loading_overlay, "modulate:a", 0.0, 1.0).finished
 		Global.main_scene._main_scene_loading_overlay.visible = false
+		
+		if Global.day == 5:
+			await Global.voice_line_system.play_voice_line("voice_line_day_5_training_0", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await get_tree().create_timer(2.0).timeout
+			await Global.voice_line_system.play_voice_line("voice_line_day_5_training_1", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			await get_tree().create_timer(2.0).timeout
+			await Global.voice_line_system.play_voice_line("voice_line_day_5_training_2", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
 
 func _repeat_line_until_condition_met(voice_line_ids: Array[String], voice_line_locations: Array[VoiceLineSystem.VoiceLineLocationEnum], condition_callable: Callable) -> void:
 	const REPEAT_INSTRUCTION_TIMER_DURATION: float = 10.0
