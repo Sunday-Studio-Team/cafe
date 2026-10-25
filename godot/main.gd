@@ -184,12 +184,10 @@ func _ready() -> void:
 
 	_tutorial_manager.start_day()
 
-	await get_tree().physics_frame
-	Global.all_3d_audio_stream_players.clear()
+	Global.all_audio_stream_players.clear()
 	for p: AudioStreamPlayer3D in find_children("*", "AudioStreamPlayer3D"):
-		print(p.name)
 		p.set_meta("base_pitch_scale", p.pitch_scale)
-		Global.all_3d_audio_stream_players.append(p)
+		Global.all_audio_stream_players.append(p)
 
 
 func _physics_process(delta: float) -> void:
