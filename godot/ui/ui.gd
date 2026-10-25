@@ -22,6 +22,7 @@ const ALERT_QUEUE_SIZE := 5
 @export var interactable_indicator: Control
 @export var interactable_label: RichTextLabel
 @export var shift_starting_ending_label: RichTextLabel
+@export var shit_starting_ending_panel: PanelContainer
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
@@ -53,6 +54,8 @@ var exploding_bomb_on_cooldown: bool = false
 
 
 func _ready() -> void:
+	shift_starting_ending_label.modulate = Color.TRANSPARENT
+
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			play_score_update_sounds(ScoreType.MONEY, new_value, old_value)
@@ -67,17 +70,11 @@ func _ready() -> void:
 				_on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
 	)
 
-	Events.shift_started.connect(
-		func():
-			shift_starting_ending_label.show()
-			await get_tree().create_timer(5, false).timeout
-			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
-	)
 	Events.shift_end_sequence_started.connect(
 		func():
 			low_time_sound.play()
 			shift_starting_ending_label.text = (
-				"\n\n[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
+				"[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
 			)
 			shift_starting_ending_label.modulate = Color.WHITE
 			await get_tree().create_timer(6, false).timeout
@@ -131,6 +128,8 @@ func _physics_process(_delta: float) -> void:
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
 	handle_item_hover_tooltip()
+
+	shit_starting_ending_panel.modulate = shift_starting_ending_label.modulate
 
 
 func handle_item_hover_tooltip() -> void:
