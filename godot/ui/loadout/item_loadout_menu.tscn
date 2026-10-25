@@ -58,6 +58,9 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 expand_margin_top = 4.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5cg7"]
+bg_color = Color(0, 0, 0, 0.8784314)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbh57"]
 bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 
@@ -251,6 +254,7 @@ offset_transform_enabled = true
 offset_transform_position_ratio = Vector2(0, -1)
 mouse_filter = 2
 mouse_behavior_recursive = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_a5cg7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ItemHoverTooltip" unique_id=269649499]
 layout_mode = 2
@@ -342,7 +346,8 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
-text = "item description (blah blah blah blah blah blah blah blah blah blah blah)"
+bbcode_enabled = true
+text = "Use on a broken machine.[br]Instantly fixes it.[br]10s cooldown."
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
