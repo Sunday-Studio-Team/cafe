@@ -12,7 +12,7 @@ const OPEN_CLOSE_TWEEN_DUR := 0.1
 func _ready() -> void:
 	Events.minigame_active.connect(play_minigame)
 	Events.minigame_end.connect(close_game)
-	
+
 	Events.time_up.connect(
 		func():
 			if Global.minigame_active:
@@ -28,6 +28,11 @@ func _ready() -> void:
 	)
 
 
+func _process(_delta: float) -> void:
+	if visible:
+		cancel_button.text = "[%s]\nCANCEL" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
+
+
 func _unhandled_input(input_event: InputEvent) -> void:
 	if input_event.is_action_pressed("pause") and Global.minigame_active:
 		close_game()
@@ -41,11 +46,11 @@ func play_minigame(minigame_name: String):
 		printerr("Minigame PackedScene UID invalid!")
 		return
 	var chosen_minigame_packed_scene: PackedScene = ResourceLoader.load(minigame_uid)
-	
+
 	# If Null
 	if not chosen_minigame_packed_scene:
 		print("This game does not exist")
-	
+
 	sub_viewport.add_child(chosen_minigame_packed_scene.instantiate())
 
 	visible = true
