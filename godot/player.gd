@@ -294,6 +294,7 @@ func handle_ingredients_bag() -> void:
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
+		Events.play_viewmodel_animation.emit("throw_trash")
 		throw_trash_sound.play()
 		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
 		Global.main_scene.add_child(trash_to_drop)

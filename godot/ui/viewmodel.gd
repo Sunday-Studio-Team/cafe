@@ -9,6 +9,7 @@ extends CanvasLayer
 @export var _cream_use_hand_animation_sprite_frames_uid: StringName
 @export var _hammer_use_hand_animation_sprite_frames_uid: StringName
 @export var _use_hand_animation_sprite_frames_uid: StringName
+@export var _throw_trash_sprite_frames_uid: StringName
 
 var _sprite_frames_always_cache_tokens: Array[ResourceBackgroundLoaderToken] = []
 var _sprite_frames_item_cache_tokens: Array[ResourceBackgroundLoaderToken] = []
@@ -103,6 +104,8 @@ func _play_animation(animation_name: String) -> void:
 		sprite_frames_uid = _hammer_use_hand_animation_sprite_frames_uid
 	elif animation_name == "use_hand":
 		sprite_frames_uid = _use_hand_animation_sprite_frames_uid
+	elif animation_name == "throw_trash":
+		sprite_frames_uid = _throw_trash_sprite_frames_uid
 
 	var token: ResourceBackgroundLoaderToken
 	for cache_token: ResourceBackgroundLoaderToken in _sprite_frames_always_cache_tokens:
@@ -133,6 +136,8 @@ func _cache_always_resources() -> void:
 	token = resource_background_loader.cache_resource(_bag_pickup_hand_animation_sprite_frames_uid)
 	_sprite_frames_always_cache_tokens.append(token)
 	token = resource_background_loader.cache_resource(_use_hand_animation_sprite_frames_uid)
+	_sprite_frames_always_cache_tokens.append(token)
+	token = resource_background_loader.cache_resource(_throw_trash_sprite_frames_uid)
 	_sprite_frames_always_cache_tokens.append(token)
 
 

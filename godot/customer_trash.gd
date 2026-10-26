@@ -107,6 +107,7 @@ func _on_interacted() -> void:
 	Global.resource_background_loader.uncache_resource(load_token)
 	queue_free()
 
+	
 
 func _on_pop_out_finished() -> void:
 	hint_pop_animated_sprite_3d.play("Normal")
