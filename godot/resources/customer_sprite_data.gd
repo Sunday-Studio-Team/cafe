@@ -5,7 +5,8 @@ extends Resource
 @export var customer_name: String
 var sprite: Texture2D:
 	get:
-		return ResourceLoader.load(sprite_uid)
+		var resource: Resource = ResourceLoader.load(sprite_uid)
+		return resource
 @export var sprite_uid: StringName
 
 ## Disable the preview if you're done with it, so it doesn't get loaded in game!
@@ -34,7 +35,8 @@ var sprite: Texture2D:
 @export var alternate_desk_sprite: Texture2D
 var typing_minigame_portrait: Texture2D:
 	get:
-		return ResourceLoader.load(typing_minigame_portrait_uid)
+		var resource: Resource = ResourceLoader.load(typing_minigame_portrait_uid)
+		return resource
 @export var typing_minigame_portrait_uid: StringName
 
 ## Disable the preview if you're done with it, so it doesn't get loaded in game!

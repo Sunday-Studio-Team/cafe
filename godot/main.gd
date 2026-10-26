@@ -358,6 +358,7 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 
 
 func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
+	
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
