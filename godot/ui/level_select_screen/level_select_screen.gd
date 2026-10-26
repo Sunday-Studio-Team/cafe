@@ -21,6 +21,10 @@ extends CanvasLayer
 @export var _camera_animation_player: AnimationPlayer
 @export var _camera_animation_name_zoom_in: StringName
 
+@export var open_book_sound: AudioStreamPlayer
+@export var page_flip_sound: AudioStreamPlayer
+@export var press_play_sound: AudioStreamPlayer
+
 var _animating: bool = false
 var _finished_selection: bool = false
 
@@ -36,16 +40,16 @@ func _ready() -> void:
 	_next_day_button.pressed.connect(_on_next_day_button_pressed)
 	_play_button.pressed.connect(_on_play_button_pressed)
 	_back_to_main_menu_button.pressed.connect(_on_back_to_main_menu_button_pressed)
-	
+
 	_old_page_sub_viewport = _page_sub_viewport_a
 	_old_page_level_view = _level_view_a
 	_new_page_sub_viewport = _page_sub_viewport_b
 	_new_page_level_view = _level_view_b
-	
+
 	_page_spread.set_main_page_view(_old_page_sub_viewport)
-	
+
 	_fake_flip_page.visible = false
-	
+
 	# If coming from shift end or quitting from pause menu, go to the right day
 	if Global.should_override_level_select_day:
 		Global.should_override_level_select_day = false
@@ -53,22 +57,26 @@ func _ready() -> void:
 	else:
 		# Load up the latest unlocked day
 		_day = mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day)
-		
+
 	_old_page_level_view.set_splash_day(_day)
 	_level_select_bookmark.set_bookmark_no_animation(_day)
-	
+
 	_update_prev_next_buttons()
-	
+
 	Global.in_level_select_menu = true
+
+	open_book_sound.play()
+
 
 func _on_play_button_pressed() -> void:
 	if _finished_selection:
 		return
 	_finished_selection = true
 
+	press_play_sound.play()
 	_camera_animation_player.play(_camera_animation_name_zoom_in)
 	await _camera_animation_player.animation_finished
-	
+
 	Global.in_level_select_menu = false
 	Global.day = _day
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
@@ -77,7 +85,7 @@ func _on_back_to_main_menu_button_pressed() -> void:
 	if _finished_selection:
 		return
 	_finished_selection = true
-	
+
 	Global.in_level_select_menu = false
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
 
@@ -86,7 +94,7 @@ func _update_prev_next_buttons() -> void:
 		_previous_day_button.visible = false
 	else:
 		_previous_day_button.visible = true
-	
+
 	if _day >= mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day):
 		_next_day_button.visible = false
 	else:
@@ -97,12 +105,14 @@ func _on_previous_day_button_pressed() -> void:
 	new_day = clampi(new_day, 1, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
 	if new_day == _day:
 		return
-	
+
 	if _animating:
 		return
 	_animating = true
-		
+
 	_day = new_day
+
+	page_flip_sound.play()
 
 	await _level_select_bookmark.play_animation_swap_out()
 	_new_page_level_view.set_splash_day(_day)
@@ -116,10 +126,10 @@ func _on_previous_day_button_pressed() -> void:
 	_page_spread.set_main_page_view(_new_page_sub_viewport)
 	_fake_flip_page.visible = false
 	await _level_select_bookmark.play_animation_swap_in(_day)
-	
+
 	_swap_old_and_new_vars()
 	_update_prev_next_buttons()
-	
+
 	_animating = false
 
 func _on_next_day_button_pressed() -> void:
@@ -127,12 +137,14 @@ func _on_next_day_button_pressed() -> void:
 	new_day = clampi(new_day, 1, mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day))
 	if new_day == _day:
 		return
-	
+
 	if _animating:
 		return
 	_animating = true
-		
+
 	_day = new_day
+
+	page_flip_sound.play()
 
 	await _level_select_bookmark.play_animation_swap_out()
 	_new_page_level_view.set_splash_day(_day)
@@ -146,10 +158,10 @@ func _on_next_day_button_pressed() -> void:
 	await _page_flip_animation_player.animation_finished
 	_fake_flip_page.visible = false
 	await _level_select_bookmark.play_animation_swap_in(_day)
-	
+
 	_swap_old_and_new_vars()
 	_update_prev_next_buttons()
-	
+
 	_animating = false
 
 func _swap_old_and_new_vars() -> void:

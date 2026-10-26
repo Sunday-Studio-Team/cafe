@@ -14,6 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://bfww6fvx6liq1" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_3.glb" id="7_5pr1p"]
 [ext_resource type="PackedScene" uid="uid://ck2dlh6tjk32y" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_4.glb" id="8_lhpgf"]
 [ext_resource type="PackedScene" uid="uid://ccj0de01r1081" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_5.glb" id="9_xhic3"]
+[ext_resource type="AudioStream" uid="uid://ko6ycph3q4mj" path="res://audio/page_flip_1.ogg" id="15_lhpgf"]
+[ext_resource type="AudioStream" uid="uid://cex0kqnlc6k1n" path="res://audio/page_flip_2.ogg" id="16_xhic3"]
+[ext_resource type="AudioStream" uid="uid://cvn21aot73sqh" path="res://audio/open_book_sound.wav" id="17_xhic3"]
+[ext_resource type="AudioStream" uid="uid://dbrrx1jwav2ud" path="res://audio/paper_foley.wav" id="18_0eo0p"]
 
 [sub_resource type="Animation" id="Animation_gg2t0"]
 length = 0.001
@@ -149,7 +153,12 @@ _data = {
 &"zoom_in": SubResource("Animation_xhic3")
 }
 
-[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page", "_page_flip_animation_player", "_level_select_bookmark", "_camera_animation_player")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+streams_count = 2
+stream_0/stream = ExtResource("15_lhpgf")
+stream_1/stream = ExtResource("16_xhic3")
+
+[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page", "_page_flip_animation_player", "_level_select_bookmark", "_camera_animation_player", "open_book_sound", "page_flip_sound", "press_play_sound")]
 script = ExtResource("1_g5s43")
 _previous_day_button = NodePath("LevelSelectSwitchDayButtonPrev")
 _next_day_button = NodePath("LevelSelectSwitchDayButtonNext")
@@ -166,6 +175,9 @@ _flip_to_next_animation_name = &"turn_next_page"
 _level_select_bookmark = NodePath("SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark")
 _camera_animation_player = NodePath("SubViewportContainer/3DWorldSubViewport/CamRoot/CameraAnimationPlayer")
 _camera_animation_name_zoom_in = &"zoom_in"
+open_book_sound = NodePath("OpenBookSound")
+page_flip_sound = NodePath("PageFlipSound")
+press_play_sound = NodePath("PressPlaySound")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1596364073]
 offset_right = 40.0
@@ -351,5 +363,17 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="LevelSelectLevelViewB" parent="PageSubViewportB" unique_id=1792966155 instance=ExtResource("2_ecde1")]
+
+[node name="OpenBookSound" type="AudioStreamPlayer" parent="." unique_id=1450578813]
+stream = ExtResource("17_xhic3")
+volume_db = -5.0
+
+[node name="PageFlipSound" type="AudioStreamPlayer" parent="." unique_id=501736800]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -10.0
+
+[node name="PressPlaySound" type="AudioStreamPlayer" parent="." unique_id=310484703]
+stream = ExtResource("18_0eo0p")
+volume_db = -5.0
 
 [editable path="LevelSelectSwitchDayButtonNext"]
