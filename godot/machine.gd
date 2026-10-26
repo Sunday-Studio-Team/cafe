@@ -111,8 +111,7 @@ enum Icon {
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
-@export var negative_rating_vfx: Machine3DPopupVfx
-@export var positive_rating_vfx: Machine3DPopupVfx
+@export var rating_vfx: Machine3DPopupVfx
 @export var money_gain_vfx: Machine3DPopupVfx
 @export_category("Explosion Particles")
 @export var explosion_boom_particles: GPUParticles3D
@@ -406,7 +405,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 		else:
 			Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= rating_loss
-			negative_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
+			rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
 		customer.leave_store()
 		_set_customer(null)
 
@@ -817,7 +816,7 @@ func accept_order(did_remake_drink: bool) -> void:
 			UI.ALERT_COLOR_GREEN
 		)
 		Global.employee_rating += Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
-		positive_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.PLUS_RATING)
+		rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.PLUS_RATING)
 	else:
 		if Global.lucky_charm_check():
 			Events.alert_posted.emit("Customer unhappy with drink...", UI.AlertIconType.RATING, 4.0, UI.ALERT_COLOR_RED)
@@ -825,7 +824,7 @@ func accept_order(did_remake_drink: bool) -> void:
 		else:
 			Events.alert_posted.emit("-%.1f Customer unhappy with drink..." % order.star_rating_loss_for_accept, UI.AlertIconType.RATING, 4.0, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= order.star_rating_loss_for_accept
-			negative_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
+			rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	reset_icons()
