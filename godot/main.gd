@@ -551,9 +551,9 @@ func shift_end_sequence(override: bool = false):
 				SaveDataManager.save_data.latest_unlocked_day = Global.day
 				SaveDataManager.save_game_to_file()
 
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-		#Leaving this here in case you guys want this scene back again
-		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
+			Global.should_override_level_select_day = true
+			Global.level_select_day_override = Global.day
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.LEVEL_SELECT)
 		else:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 

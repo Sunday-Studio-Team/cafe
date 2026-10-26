@@ -46,10 +46,15 @@ func _ready() -> void:
 	
 	_fake_flip_page.visible = false
 	
-	# Load up the latest unlocked day
-	_day = mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day)
+	# If coming from shift end or quitting from pause menu, go to the right day
+	if Global.should_override_level_select_day:
+		Global.should_override_level_select_day = false
+		_day = Global.level_select_day_override
+	else:
+		# Load up the latest unlocked day
+		_day = mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day)
+		
 	_old_page_level_view.set_splash_day(_day)
-	
 	_level_select_bookmark.set_bookmark_no_animation(_day)
 	
 	_update_prev_next_buttons()

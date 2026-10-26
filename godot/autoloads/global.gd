@@ -191,7 +191,9 @@ var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
 var all_audio_stream_players: Array[Node]
 var no_cooldowns := false
-
+# For sending the player to the right level in level select after shift completion or level quit
+var should_override_level_select_day: bool = false
+var level_select_day_override: int
 
 func _enter_tree() -> void:
 	if OS.has_feature("demo_mode"):
