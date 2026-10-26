@@ -37,7 +37,7 @@ var player_status_effects: PlayerStatusEffects
 var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
-var _is_sprinting: bool
+var _is_sprinting: bool = false
 var mouse_sens := 0.1
 
 ## vars for footstep sounds
