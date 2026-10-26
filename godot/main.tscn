@@ -68,7 +68,6 @@
 [ext_resource type="Resource" uid="uid://p3hvkkub5xns" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_52.tres" id="96_mofpq"]
 [ext_resource type="Resource" uid="uid://hxhmtqun1yro" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_53.tres" id="97_6kttw"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://resources/themes/exit_button.tres" id="97_l0gw7"]
-[ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
 [ext_resource type="Resource" uid="uid://dji6o2gh0hefo" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_54.tres" id="98_oqmj5"]
 [ext_resource type="Resource" uid="uid://fsxymkcixwg7" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_55.tres" id="99_uor2d"]
 [ext_resource type="Resource" uid="uid://ciwb7w0b3hno8" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_56.tres" id="100_bdw5g"]
@@ -1220,7 +1219,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pmrog"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1231,7 +1230,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1242,7 +1241,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1253,13 +1252,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_r4j87"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_shift_start_countdown_sound", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "default_trash_spawn_spot")]
@@ -1696,7 +1695,7 @@ offset_transform_rotation = -0.08726646
 offset_transform_visual_only = false
 mouse_behavior_recursive = 2
 theme = ExtResource("97_l0gw7")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "exit"
 
 [node name="DropButton" type="Button" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/VBoxContainer/FloatingButtons" unique_id=1994757836]
@@ -1709,7 +1708,6 @@ offset_transform_rotation = 0.08726646
 theme = ExtResource("97_l0gw7")
 theme_override_font_sizes/font_size = 24
 text = "drop"
-icon = ExtResource("98_l0gw7")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/VBoxContainer" unique_id=312814953]
 layout_mode = 2
@@ -1920,7 +1918,7 @@ offset_transform_position_ratio = Vector2(-0.5, 0.25)
 offset_transform_rotation = 0.08726646
 offset_transform_visual_only = false
 theme = ExtResource("97_l0gw7")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "cancel"
 
 [node name="PCUI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1232958959]
@@ -2368,7 +2366,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_pbe4p")
+texture = SubResource("ViewportTexture_pmrog")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2381,7 +2379,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_8ldsf")
+texture = SubResource("ViewportTexture_pbe4p")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2398,7 +2396,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_f4177")
+texture = SubResource("ViewportTexture_8ldsf")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2415,7 +2413,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_nckbc")
+texture = SubResource("ViewportTexture_f4177")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2436,10 +2434,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2908587, 1.6, 16.214787)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_043in")
+texture = SubResource("ViewportTexture_nckbc")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_r4j87")
+texture = SubResource("ViewportTexture_043in")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2544,7 +2542,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700939, -0.00016215755, -0.99992895, 1.025983e-07, 1, -0.00016214603, 0.99992895, -1.01539825e-08, 0.0005700939, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700937, -0.00016215755, -0.9999286, 1.0259826e-07, 1, -0.00016214597, 0.9999286, -1.01539825e-08, 0.0005700937, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
