@@ -1484,7 +1484,7 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(1642, 390)
 sprite_frames = ExtResource("215_tcxth")
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("interactable_indicator", "interactable_label", "shift_starting_ending_label", "shit_starting_ending_panel", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "day_indicator", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui", "throw_trash_ui")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("interactable_indicator", "interactable_label", "shift_starting_ending_label", "shit_starting_ending_panel", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "day_indicator", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui", "throw_trash_ui", "throw_trash_ui_label")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 interactable_indicator = NodePath("Interactable")
@@ -1514,6 +1514,7 @@ end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 _alert_packed_scene_uid = &"uid://j530u4ni603j"
 exploding_bomb_ui = NodePath("ExplodingBombUI")
 throw_trash_ui = NodePath("ThrowTrashUI")
+throw_trash_ui_label = NodePath("ThrowTrashUI/MarginContainer/RichTextLabel")
 
 [node name="HoldingItemsCameraTextureRect" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=929551188]
 anchors_preset = 15
