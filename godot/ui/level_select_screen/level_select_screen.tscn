@@ -367,13 +367,16 @@ render_target_update_mode = 4
 [node name="OpenBookSound" type="AudioStreamPlayer" parent="." unique_id=1450578813]
 stream = ExtResource("17_xhic3")
 volume_db = -5.0
+bus = &"Sfx"
 
 [node name="PageFlipSound" type="AudioStreamPlayer" parent="." unique_id=501736800]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -10.0
+bus = &"Sfx"
 
 [node name="PressPlaySound" type="AudioStreamPlayer" parent="." unique_id=310484703]
 stream = ExtResource("18_0eo0p")
 volume_db = -5.0
+bus = &"Sfx"
 
 [editable path="LevelSelectSwitchDayButtonNext"]
