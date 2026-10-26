@@ -27,9 +27,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
-@export var cctv_indicator: TextureRect
-@export var _eye_logo_red_texture: Texture2D
-@export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var day_indicator: Label
 @export var drop_button: Button
@@ -89,16 +86,6 @@ func _ready() -> void:
 			Events.machine_exit_button_pressed.emit()
 	)
 
-	# we wait here to make sure some global vars like profit goal
-	# get set before we show them
-	# NOTE: does this still make sense ?
-	await get_tree().process_frame
-
-	if Global.playing_tutorial or Global.day < 2:
-		cctv_indicator.hide()
-	else:
-		cctv_indicator.show()
-
 
 func _physics_process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
@@ -126,7 +113,6 @@ func _physics_process(_delta: float) -> void:
 		update_exploding_bomb_timer(_delta)
 
 	update_throw_trash_ui()
-	update_cctv_indicator()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
@@ -351,13 +337,6 @@ func update_throw_trash_ui() -> void:
 
 	else:
 		throw_trash_ui.hide()
-
-
-func update_cctv_indicator() -> void:
-	if Global.player_in_cctv_los:
-		cctv_indicator.texture = _eye_logo_red_texture
-	else:
-		cctv_indicator.texture = _eye_logo_texture
 
 
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):

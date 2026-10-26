@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cyx88mjsfsq4g"]
+
+[ext_resource type="Script" uid="uid://dchjswqhphqxj" path="res://ui/tablet_addon_2d.gd" id="1_iulg8"]
+[ext_resource type="Texture2D" uid="uid://d325d02dguutn" path="res://sprites/tablet_ui/eye_meter/tablet_eye_progress_over_caught.png" id="2_gpegj"]
+[ext_resource type="Texture2D" uid="uid://ghaxs0mmwwxg" path="res://sprites/tablet_ui/eye_meter/tablet_eye_progress_over_uncaught.png" id="3_1yiku"]
+[ext_resource type="Texture2D" uid="uid://boplgtlrcxmf" path="res://sprites/tablet_ui/rules/no_remaking_tablet_icon_green.png" id="4_4irtd"]
+[ext_resource type="Texture2D" uid="uid://brf2el33ky721" path="res://sprites/tablet_ui/rules/no_remaking_tablet_icon_red.png" id="5_5o616"]
+[ext_resource type="Texture2D" uid="uid://b8am0mjwaxg8u" path="res://sprites/tablet_ui/rules/no_running_tablet_icon_green.png" id="6_dw1j0"]
+[ext_resource type="Texture2D" uid="uid://dbwoxxs3pymlw" path="res://sprites/tablet_ui/rules/no_running_tablet_icon_red.png" id="7_0yhka"]
+[ext_resource type="Texture2D" uid="uid://qx6da0q2filj" path="res://sprites/tablet_ui/eye_meter/tablet_eye_progress_texture.png" id="8_p0p4d"]
+
+[node name="TabletAddon2D" type="MarginContainer" unique_id=197907222 node_paths=PackedStringArray("background", "eye_meter", "no_remaking_icon", "no_running_icon")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1408.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iulg8")
+background = NodePath("Background")
+eye_meter = NodePath("VBoxContainer/EyeMeter")
+no_remaking_icon = NodePath("VBoxContainer/HBoxContainer/NoRemakingRuleIcon")
+no_running_icon = NodePath("VBoxContainer/HBoxContainer/NoRunningRuleIcon")
+eye_meter_over_caught_texture = ExtResource("2_gpegj")
+eye_meter_over_uncaught_texture = ExtResource("3_1yiku")
+remake_rule_icon_texture_green = ExtResource("4_4irtd")
+remake_rule_icon_texture_red = ExtResource("5_5o616")
+running_rule_icon_texture_green = ExtResource("6_dw1j0")
+running_rule_icon_texture_red = ExtResource("7_0yhka")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1846294653]
+layout_mode = 2
+color = Color(0, 1, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=503825169]
+layout_mode = 2
+
+[node name="EyeMeter" type="TextureProgressBar" parent="VBoxContainer" unique_id=69884948]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+value = 50.0
+fill_mode = 3
+texture_over = ExtResource("3_1yiku")
+texture_progress = ExtResource("8_p0p4d")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1584156408]
+layout_mode = 2
+alignment = 1
+
+[node name="NoRunningRuleIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=809150522]
+layout_mode = 2
+texture = ExtResource("6_dw1j0")
+
+[node name="NoRemakingRuleIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1611027030]
+layout_mode = 2
+texture = ExtResource("4_4irtd")
