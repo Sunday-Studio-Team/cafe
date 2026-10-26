@@ -167,8 +167,9 @@ func handle_exit_machine_button_visibility() -> void:
 	if exit_machine_button.visible:
 		exit_machine_button.text = "[%s]\nEXIT" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
 
+
 func handle_drop_item_ui() -> void:
-	drop_button.visible = (Global.holding_ingredients or Global.holding_trash) and not Global.in_ui
+	drop_button.visible = Global.holding_ingredients and not Global.in_ui
 	if drop_button.visible:
 		drop_button.text = "[%s]\nDROP" % OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode)
 
@@ -344,9 +345,8 @@ func update_throw_trash_ui() -> void:
 	if Global.holding_trash:
 		throw_trash_ui.show()
 		throw_trash_ui_label.text = (
-			"Press %s to throw" % OS.get_keycode_string(SaveDataManager
-			.get_options_data()
-			.drop_action_physical_keycode).to_upper()
+			"Press %s to throw"
+			% OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode).to_upper()
 		)
 
 	else:
