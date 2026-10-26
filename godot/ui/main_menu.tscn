@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://4nqhps4rtxcv" path="res://sprites/menu_anim/frame_007.PNG" id="22_dbfs1"]
 [ext_resource type="Texture2D" uid="uid://bdxk885j0moav" path="res://Assets/main_menu/Discord-Symbol-Blurple.png" id="23_i5ydv"]
 [ext_resource type="Texture2D" uid="uid://dqx0vd8ck62wt" path="res://Assets/main_menu/Instagram_Glyph_Gradient.png" id="24_racxt"]
+[ext_resource type="AudioStream" uid="uid://dmgrvt3x32wyh" path="res://audio/main_menu_shards.wav" id="25_racxt"]
+[ext_resource type="FontFile" uid="uid://ca062kigheqxq" path="res://fonts/action_man/Action_Man_Bold.ttf" id="26_dooca"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0xaf"]
 animations = [{
@@ -211,3 +213,28 @@ offset_bottom = 589.0
 scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 texture_normal = ExtResource("6_ei257")
+
+[node name="Shards" type="AudioStreamPlayer" parent="." unique_id=1210991955]
+stream = ExtResource("25_racxt")
+volume_db = -15.0
+autoplay = true
+
+[node name="Title" type="Label" parent="." unique_id=2090391620]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 294.0
+offset_top = 24.0
+offset_right = -10.0
+offset_bottom = -378.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.031222688
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+theme_override_fonts/font = ExtResource("26_dooca")
+theme_override_font_sizes/font_size = 256
+text = "Tippy's
+Café"
+horizontal_alignment = 1
+vertical_alignment = 1
