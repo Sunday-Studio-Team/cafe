@@ -50,7 +50,6 @@ var _nodes_to_destroy_on_shift_start: Array[Node]
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
-@export var day_containers_desk: Array[Node3D] = []
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
 
@@ -144,9 +143,6 @@ func _ready() -> void:
 	# enables props as the days go by
 	# could combine the loops to one loop but am not sure if all props will have equivalent
 	# number of day props
-	for i in range(day_containers_desk.size()):
-		if day_containers_desk[i] != null:
-			day_containers_desk[i].visible = (i <= Global.day)
 
 	for i in range(day_containers_boxes.size()):
 		var box: Node3D = day_containers_boxes[i]
