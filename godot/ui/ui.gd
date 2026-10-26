@@ -45,6 +45,8 @@ const ALERT_QUEUE_SIZE := 5
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName
 @export var exploding_bomb_ui: PanelContainer
+@export var throw_trash_ui: PanelContainer
+@export var throw_trash_ui_label: RichTextLabel
 
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
@@ -123,6 +125,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 
+	update_throw_trash_ui()
 	update_cctv_indicator()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
@@ -164,8 +167,9 @@ func handle_exit_machine_button_visibility() -> void:
 	if exit_machine_button.visible:
 		exit_machine_button.text = "[%s]\nEXIT" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
 
+
 func handle_drop_item_ui() -> void:
-	drop_button.visible = (Global.holding_ingredients or Global.holding_trash) and not Global.in_ui
+	drop_button.visible = Global.holding_ingredients and not Global.in_ui
 	if drop_button.visible:
 		drop_button.text = "[%s]\nDROP" % OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode)
 
@@ -335,6 +339,18 @@ func update_exploding_bomb_timer(_delta: float) -> void:
 		if exploding_bomb_timer <= 0:
 			exploding_bomb_timer = 10.5
 			exploding_bomb_on_cooldown = false
+
+
+func update_throw_trash_ui() -> void:
+	if Global.holding_trash:
+		throw_trash_ui.show()
+		throw_trash_ui_label.text = (
+			"Press %s to throw"
+			% OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode).to_upper()
+		)
+
+	else:
+		throw_trash_ui.hide()
 
 
 func update_cctv_indicator() -> void:
