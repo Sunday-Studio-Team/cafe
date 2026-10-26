@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dd4h85qwk70x3"]
+
+[ext_resource type="Script" uid="uid://c1t00gjfewu03" path="res://boss_jumpscare.gd" id="1_wi2yp"]
+[ext_resource type="Texture2D" uid="uid://c12ercabhtut3" path="res://sprites/customers/boss.png" id="2_4wnuu"]
+[ext_resource type="AudioStream" uid="uid://elya8m7ry7qo" path="res://audio/boss_jumpscare/heavy_walking.mp3" id="2_hpv80"]
+[ext_resource type="AudioStream" uid="uid://dsp3lgb2k4sm2" path="res://audio/bomb/meow.wav" id="4_hpv80"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1kjx"]
+
+[node name="BossJumpscare" type="Node3D" unique_id=756804760]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=432158034 node_paths=PackedStringArray("locations")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.060722, 0, 0)
+script = ExtResource("1_wi2yp")
+jumpscareMax = 2
+tippyMoveSpeed = 6
+cooldownRange = Array[int]([0, 5])
+staringTime = 5
+locations = [NodePath("../tjs_marker_1"), NodePath("../tjs_marker_end")]
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="CharacterBody3D" unique_id=341707069]
+stream = ExtResource("2_hpv80")
+
+[node name="Staring" type="AudioStreamPlayer3D" parent="CharacterBody3D" unique_id=1929887142]
+stream = ExtResource("4_hpv80")
+volume_db = -15.0
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=1970842216]
+centered = false
+offset = Vector2(-400, 0)
+flip_h = true
+texture = ExtResource("2_4wnuu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1044662550]
+shape = SubResource("BoxShape3D_g1kjx")
+
+[node name="tjs_marker_end" type="Marker3D" parent="." unique_id=1783500792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.060722, 0, 0)
+
+[node name="tjs_marker_1" type="Marker3D" parent="." unique_id=920459404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.775429, 0, 0)

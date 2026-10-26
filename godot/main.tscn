@@ -318,6 +318,7 @@
 [ext_resource type="PackedScene" uid="uid://dtbylsafb51vh" path="res://voice_lines/voice_line_player_3d.tscn" id="312_8ldsf"]
 [ext_resource type="PackedScene" uid="uid://w26hgj0og5x5" path="res://ui/lucky_charm_ui.tscn" id="313_1h7wj"]
 [ext_resource type="Material" uid="uid://bx5wxwjyspk8n" path="res://customer_material.tres" id="325_pbe4p"]
+[ext_resource type="PackedScene" uid="uid://dd4h85qwk70x3" path="res://boss_jumpscare_test.tscn" id="326_8ldsf"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="337_lyu6w"]
 [ext_resource type="AudioStream" uid="uid://cipner2ec0gg1" path="res://audio/shift_start_countdown.wav" id="337_wr7jj"]
 [ext_resource type="PackedScene" uid="uid://lbvthxlp62hx" path="res://teleporter.tscn" id="348_bty7c"]
@@ -1220,7 +1221,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1231,7 +1232,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1242,7 +1243,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1253,13 +1254,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_r4j87"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_r4j87"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_mwre3"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_shift_start_countdown_sound", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "default_trash_spawn_spot")]
@@ -2368,7 +2369,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_pbe4p")
+texture = SubResource("ViewportTexture_8ldsf")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2381,7 +2382,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_8ldsf")
+texture = SubResource("ViewportTexture_f4177")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2398,7 +2399,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_f4177")
+texture = SubResource("ViewportTexture_nckbc")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2415,7 +2416,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_nckbc")
+texture = SubResource("ViewportTexture_043in")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2436,10 +2437,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2908587, 1.6, 16.214787)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_043in")
+texture = SubResource("ViewportTexture_r4j87")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_r4j87")
+texture = SubResource("ViewportTexture_mwre3")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2544,7 +2545,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700939, -0.00016215755, -0.99992895, 1.025983e-07, 1, -0.00016214603, 0.99992895, -1.01539825e-08, 0.0005700939, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700927, -0.00016215755, -0.99992687, 1.0259808e-07, 1, -0.00016214569, 0.99992687, -1.01539825e-08, 0.0005700927, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
@@ -2564,6 +2565,31 @@ visible = false
 
 [node name="CustomerMaterialInitializerSprite3D" type="Sprite3D" parent="." unique_id=1153710459]
 material_override = ExtResource("325_pbe4p")
+
+[node name="BossJumpscare" parent="." unique_id=756804760 instance=ExtResource("326_8ldsf")]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -7.9668884, 0, -5.600937)
+
+[node name="CharacterBody3D" parent="BossJumpscare" index="0" unique_id=432158034 node_paths=PackedStringArray("locations")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.06845188, 0, -1.4305115e-06)
+jumpscareMax = 1
+tippyMoveSpeed = 1
+staringPosition = 2
+locations = [NodePath("../tjs_marker_1"), NodePath("../tjs_marker_2"), NodePath("../tjs_marker_3"), NodePath("../tjs_marker_4"), NodePath("../tjs_marker_end")]
+
+[node name="tjs_marker_end" parent="BossJumpscare" index="1" unique_id=1783500792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06845188, 0, -1.4305115e-06)
+
+[node name="tjs_marker_1" parent="BossJumpscare" index="2" unique_id=920459404]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -2.7610588, 0, 4.156359)
+
+[node name="tjs_marker_2" type="Marker3D" parent="BossJumpscare" unique_id=1286195602]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -12.897999, 0, 2.3425379)
+
+[node name="tjs_marker_3" type="Marker3D" parent="BossJumpscare" unique_id=1101785806]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -9.911739, 2.3841858e-06, -0.91585445)
+
+[node name="tjs_marker_4" type="Marker3D" parent="BossJumpscare" unique_id=1382723746]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -8.328932, 0, 2.3275208)
 
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
@@ -2631,3 +2657,4 @@ material_override = ExtResource("325_pbe4p")
 [editable path="CafeEnvironment/BreakRoom/Sad Plants2"]
 [editable path="CafeEnvironment/BreakRoom/Sad Plants3"]
 [editable path="CafeEnvironment/DayDecorations_3/plastic and box2"]
+[editable path="BossJumpscare"]
