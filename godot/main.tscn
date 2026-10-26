@@ -2502,10 +2502,13 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 0, 5)
 
 [node name="BackToFrontTeleporter" parent="Teleporters" unique_id=2081165431 instance=ExtResource("348_bty7c")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.3, 0, 2.3)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.760281, 0, 3.2096725)
 
 [node name="Destination" parent="Teleporters/BackToFrontTeleporter" index="1" unique_id=1214631514]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0000002, 0, -6)
+
+[node name="comic_teleporter" parent="Teleporters/BackToFrontTeleporter" index="4" unique_id=1387026680]
+transform = Transform3D(2.1308115, 0, 0, 0, 2.1308115, 0, 0, 0, 2.1308115, 0.013880968, 0.01652816, -0.0045433044)
 
 [node name="AroundCafeVoiceLinePlayers" type="Node3D" parent="." unique_id=719194149]
 
