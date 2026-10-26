@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bblskrrwykmh6" path="res://Assets/loading_screen_img/background_panels/loading_panel_4.png" id="12_la0pa"]
 [ext_resource type="Texture2D" uid="uid://i8tqkus51vwh" path="res://Assets/loading_screen_img/background_panels/loading_panel_5.png" id="13_8b5ky"]
 [ext_resource type="Texture2D" uid="uid://bhjnm0ym2l1t6" path="res://Assets/loading_screen_img/background_panels/loading_panel_6.png" id="14_uncec"]
+[ext_resource type="AudioStream" uid="uid://1h18drcdhc4y" path="res://audio/music/main_menu_music.mp3" id="16_s63ap"]
+[ext_resource type="Script" uid="uid://dceeffb5leffe" path="res://ui/main_menu_music.gd" id="17_ltvrs"]
 
 [sub_resource type="Animation" id="Animation_e3yyn"]
 length = 0.001
@@ -797,3 +799,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_0bfbf")
 max_value = 1.0
 value = 0.5
 show_percentage = false
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1333431792]
+stream = ExtResource("16_s63ap")
+volume_db = -15.0
+autoplay = true
+bus = &"NonDiegeticMusic"
+script = ExtResource("17_ltvrs")
