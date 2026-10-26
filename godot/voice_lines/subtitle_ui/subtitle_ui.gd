@@ -23,6 +23,8 @@ func _ready() -> void:
 	Events.minigame_cancelled.connect(_on_minigame_cancelled)
 	Events.minigame_end.connect(_on_minigame_end)
 	
+	Events.time_up.connect(_on_time_up)
+	
 	_restore_to_default_position()
 
 func _on_requested_show_voice_line_subtitle(voice_line: VoiceLine) -> void:	
@@ -59,3 +61,9 @@ func _restore_to_default_position() -> void:
 	_subtitle_views_container.reparent(_views_position_default)
 	_subtitle_views_container.set_anchors_and_offsets_preset(Control.LayoutPreset.PRESET_CENTER_BOTTOM)
 	_position_state = PositionState.DEFAULT
+
+func _on_time_up() -> void:
+	for subtitle_view in _subtitle_views:
+		if subtitle_view != null:
+			subtitle_view.destroy()
+	_subtitle_views.clear()

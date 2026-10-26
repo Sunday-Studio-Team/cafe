@@ -16,6 +16,11 @@ extends CanvasLayer
 @export var _page_flip_animation_player: AnimationPlayer
 @export var _flip_to_next_animation_name: StringName
 
+@export var _level_select_bookmark: LevelSelectBookmark
+
+@export var _camera_animation_player: AnimationPlayer
+@export var _camera_animation_name_zoom_in: StringName
+
 var _animating: bool = false
 var _finished_selection: bool = false
 
@@ -37,14 +42,20 @@ func _ready() -> void:
 	_new_page_sub_viewport = _page_sub_viewport_b
 	_new_page_level_view = _level_view_b
 	
-	_page_spread.set_left_page_view(_old_page_sub_viewport)
-	_page_spread.set_right_page_view(_old_page_sub_viewport)
+	_page_spread.set_main_page_view(_old_page_sub_viewport)
 	
 	_fake_flip_page.visible = false
 	
-	# Load up the latest unlocked day
-	_day = mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day)
+	# If coming from shift end or quitting from pause menu, go to the right day
+	if Global.should_override_level_select_day:
+		Global.should_override_level_select_day = false
+		_day = Global.level_select_day_override
+	else:
+		# Load up the latest unlocked day
+		_day = mini(SaveDataManager.save_data.latest_unlocked_day, Global.final_day)
+		
 	_old_page_level_view.set_splash_day(_day)
+	_level_select_bookmark.set_bookmark_no_animation(_day)
 	
 	_update_prev_next_buttons()
 	
@@ -54,6 +65,9 @@ func _on_play_button_pressed() -> void:
 	if _finished_selection:
 		return
 	_finished_selection = true
+
+	_camera_animation_player.play(_camera_animation_name_zoom_in)
+	await _camera_animation_player.animation_finished
 	
 	Global.in_level_select_menu = false
 	Global.day = _day
@@ -87,23 +101,21 @@ func _on_previous_day_button_pressed() -> void:
 	if _animating:
 		return
 	_animating = true
-	
-	_page_spread.set_right_page_view(_old_page_sub_viewport)
-	
+		
 	_day = new_day
-	
+
+	await _level_select_bookmark.play_animation_swap_out()
 	_new_page_level_view.set_splash_day(_day)
-	_fake_flip_page.set_right_page_view(_old_page_sub_viewport)
-	_fake_flip_page.set_left_page_view(_new_page_sub_viewport)
+	_fake_flip_page.set_fake_page_view(_new_page_sub_viewport)
 	_page_flip_animation_player.play_backwards(_flip_to_next_animation_name)
 	# Wait a moment to avoid flicker
 	await get_tree().process_frame
 	await get_tree().process_frame
-	_page_spread.set_left_page_view(_new_page_sub_viewport)
 	_fake_flip_page.visible = true
 	await _page_flip_animation_player.animation_finished
-	_page_spread.set_right_page_view(_new_page_sub_viewport)
+	_page_spread.set_main_page_view(_new_page_sub_viewport)
 	_fake_flip_page.visible = false
+	await _level_select_bookmark.play_animation_swap_in(_day)
 	
 	_swap_old_and_new_vars()
 	_update_prev_next_buttons()
@@ -119,23 +131,21 @@ func _on_next_day_button_pressed() -> void:
 	if _animating:
 		return
 	_animating = true
-	
-	_page_spread.set_left_page_view(_old_page_sub_viewport)
-	
+		
 	_day = new_day
-	
+
+	await _level_select_bookmark.play_animation_swap_out()
 	_new_page_level_view.set_splash_day(_day)
-	_fake_flip_page.set_left_page_view(_old_page_sub_viewport)
-	_fake_flip_page.set_right_page_view(_new_page_sub_viewport)
+	_fake_flip_page.set_fake_page_view(_old_page_sub_viewport)
 	_page_flip_animation_player.play(_flip_to_next_animation_name)
 	# Wait a moment to avoid flicker
 	await get_tree().process_frame
 	await get_tree().process_frame
-	_page_spread.set_right_page_view(_new_page_sub_viewport)
 	_fake_flip_page.visible = true
+	_page_spread.set_main_page_view(_new_page_sub_viewport)
 	await _page_flip_animation_player.animation_finished
-	_page_spread.set_left_page_view(_new_page_sub_viewport)
 	_fake_flip_page.visible = false
+	await _level_select_bookmark.play_animation_swap_in(_day)
 	
 	_swap_old_and_new_vars()
 	_update_prev_next_buttons()

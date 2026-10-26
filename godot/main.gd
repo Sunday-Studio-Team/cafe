@@ -50,7 +50,6 @@ var _nodes_to_destroy_on_shift_start: Array[Node]
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
-@export var day_containers_desk: Array[Node3D] = []
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
 
@@ -144,9 +143,6 @@ func _ready() -> void:
 	# enables props as the days go by
 	# could combine the loops to one loop but am not sure if all props will have equivalent
 	# number of day props
-	for i in range(day_containers_desk.size()):
-		if day_containers_desk[i] != null:
-			day_containers_desk[i].visible = (i <= Global.day)
 
 	for i in range(day_containers_boxes.size()):
 		var box: Node3D = day_containers_boxes[i]
@@ -321,8 +317,7 @@ func _on_shift_start_requested() -> void:
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 		_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
 		await _tutorial_manager._cinematic_camera.play_animation("pre_shift_start_sequence")
-		Global.player.global_position = _player_shift_start_position.global_position
-		Global.player.global_rotation = _player_shift_start_position.global_rotation
+		Global.player.override_position_rotation(_player_shift_start_position.global_position, _player_shift_start_position.global_rotation)
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 		await _tutorial_manager._cinematic_camera.play_animation("shift_start_sequence")
@@ -359,6 +354,7 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 
 
 func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
+	
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -551,9 +547,9 @@ func shift_end_sequence(override: bool = false):
 				SaveDataManager.save_data.latest_unlocked_day = Global.day
 				SaveDataManager.save_game_to_file()
 
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-		#Leaving this here in case you guys want this scene back again
-		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
+			Global.should_override_level_select_day = true
+			Global.level_select_day_override = Global.day
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.LEVEL_SELECT)
 		else:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 

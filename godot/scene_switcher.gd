@@ -13,7 +13,9 @@ const LOADING_FADE_OUT_TIME := 1.0
 const TIPPY_LOADING_LOOPS: Array[StringName] = [&"loop_0", &"loop_30", &"loop_60", &"loop_99"]
 const TIPPY_LOADING_SWITCHES: Array[StringName] = [&"switch_0_30", &"switch_30_60", &"switch_60_99"]
 
-@export var loading_screen: ColorRect
+@export var _loading_screen_animation_player: AnimationPlayer
+@export var _loading_screen_animation_name_appear: StringName
+@export var loading_screen: Control
 @export var _loading_progress_bar: ProgressBar
 @export var loading_icons: Control
 @export var loading_tippy: AnimatedSprite2D
@@ -42,6 +44,8 @@ var _tippy_finishing: bool = false
 
 
 func _ready() -> void:
+	loading_screen.visible = false
+	
 	# Clear the sprite frames, in case they were set in editor.
 	loading_tippy.sprite_frames = null
 	
@@ -133,15 +137,16 @@ func _finish_tippy_loading() -> void:
 
 
 func load_scene(scene: SceneSwitcher.GameScene) -> void:
+	loading_screen.visible = true
+	
 	const TIMING_PRINTS: bool = true
 	const COUNT_CHILDREN_PRINTS: bool = true
 	_start_tippy_loading()
 
 	if current_scene:
 		get_tree().paused = true
-		loading_tween = create_tween()
-		loading_tween.tween_property(loading_screen, "modulate:a", 1, LOADING_FADE_IN_TIME).from(0)
-		await loading_tween.finished
+		_loading_screen_animation_player.play(_loading_screen_animation_name_appear)
+		await _loading_screen_animation_player.animation_finished
 		current_scene.queue_free()
 		await current_scene.tree_exited
 
@@ -284,9 +289,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	_loading_progress_bar.visible = false
 	get_tree().paused = false
 
-	loading_tween = create_tween()
-	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)
-	await loading_tween.finished
+	_loading_screen_animation_player.play_backwards(_loading_screen_animation_name_appear)
+	await _loading_screen_animation_player.animation_finished
 	loading_tippy.stop()
 	
 	# Unload the sprite frames.
@@ -298,6 +302,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 		loading_tippy.sprite_frames = null
 	
 	Events.scene_switch_in_animation_finished.emit()
+
+	loading_screen.visible = false
 
 
 func quit_game() -> void:

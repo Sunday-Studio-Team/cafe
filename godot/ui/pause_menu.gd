@@ -49,7 +49,9 @@ func _ready() -> void:
 		func():
 			match state:
 				State.CONFIRMING_QUIT:
-					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+					Global.should_override_level_select_day = true
+					Global.level_select_day_override = Global.day
+					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.LEVEL_SELECT)
 				State.CONFIRMING_RESTART:
 					# NOTE: shouldnt this not be visible on restart anyway ? idk
 					visible = false

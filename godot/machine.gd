@@ -13,6 +13,7 @@ const REFILL_MINIGAME := "Refill"
 
 # for making the machine jump when an order finishes, etc.
 @export var animation_player: AnimationPlayer
+@export var camera_low_fps_updater: LowFpsSubViewportUpdater
 @export var static_body: StaticBody3D
 @export var gui_3d: Machine3DGui
 @export var timer: Timer
@@ -493,7 +494,9 @@ func machine_make_drink() -> void:
 	# if we can interact with the machine while its jumping it does weird stuff
 	gui_3d.interactable.hide()
 	animation_player.play("order_ready_jump")
+	camera_low_fps_updater.override_target_fps(5)
 	await animation_player.animation_finished
+	camera_low_fps_updater.clear_override_target_fps()
 	gui_3d.interactable.show()
 
 	# if we're using the machine when it jumps, it loses our input for some reason

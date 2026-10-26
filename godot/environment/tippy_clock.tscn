@@ -13,15 +13,25 @@ shader_parameter/empty_color = Color(0.99999994, 0.03300749, 0.23885939, 1)
 shader_parameter/radius = 0.5
 shader_parameter/progress = 0.0
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+radius = 2.0844727
+height = 4.604004
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ki5ik"]
+size = Vector3(1.4917297, 1.3604126, 6.913086)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xq2t2"]
+size = Vector3(24.944336, 31.601807, 3.4135742)
+
 [node name="Tippy_Clock" unique_id=1686326203 node_paths=PackedStringArray("plane", "tick_sound") instance=ExtResource("1_1a4ah")]
 script = ExtResource("2_j2oq5")
 plane = NodePath("Wall_Clock/ANIMATED_PLANE")
 tick_sound = NodePath("TickSound")
 
-[node name="ANIMATED_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(138661666) index="0" unique_id=148553280]
+[node name="ANIMATED_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(448499131) index="0" unique_id=1245482558]
 surface_material_override/0 = SubResource("ShaderMaterial_hfhkj")
 
-[node name="FACE_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(138661666) index="5" unique_id=823994690]
+[node name="FACE_PLANE" parent="Wall_Clock" parent_id_path=PackedInt32Array(448499131) index="5" unique_id=2042793554]
 transform = Transform3D(1.6886691, 0, 0, 0, 1.6886688, -7.1054274e-15, 0, 0, 0.8767085, 0, -0.005531524, -0.14197628)
 
 [node name="TickSound" type="AudioStreamPlayer3D" parent="." index="2" unique_id=50997577]
@@ -29,3 +39,17 @@ stream = ExtResource("4_ki5ik")
 volume_db = -25.0
 unit_size = 20.0
 max_db = 0.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="3" unique_id=18776528]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=901631882]
+transform = Transform3D(1, 0, 6.556302e-07, 0, 1, 0, -6.556302e-07, 0, 1, 12.167667, 0.82257104, 8.447838)
+shape = SubResource("CapsuleShape3D_xrivr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="1" unique_id=1746990760]
+transform = Transform3D(1, 0, 1.3112603e-06, 0, 1, 0, -1.3112603e-06, 0, 1, 10.800648, -0.25503492, 4.8188953)
+shape = SubResource("BoxShape3D_ki5ik")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" index="2" unique_id=272000899]
+transform = Transform3D(1, 0, 2.6225207e-06, 0, 1, 0, -2.6225207e-06, 0, 1, -1.270015, 0, 1.7497592)
+shape = SubResource("BoxShape3D_xq2t2")

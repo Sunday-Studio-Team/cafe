@@ -78,6 +78,9 @@ _data = {
 &"playing": SubResource("Animation_8m0nf")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(3.237671, 5.386963, 3.5654907)
+
 [node name="TippyLoudspeakerModel" type="Node3D" unique_id=775830925 node_paths=PackedStringArray("animation_player", "sound_ring_particles")]
 script = ExtResource("1_ftya1")
 animation_player = NodePath("Model/AnimationPlayer")
@@ -96,5 +99,11 @@ draw_pass_1 = SubResource("TorusMesh_0ffxp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=1282033781]
 libraries/ = SubResource("AnimationLibrary_2sc6s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Model" unique_id=1007955529]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/StaticBody3D" unique_id=335417460]
+transform = Transform3D(1, 0, 1.3112599e-06, 0, 0.99997455, 0, -1.3112603e-06, 0, 1, -0.4309683, -1.1197509, 0.697846)
+shape = SubResource("BoxShape3D_xrivr")
 
 [editable path="Model"]
