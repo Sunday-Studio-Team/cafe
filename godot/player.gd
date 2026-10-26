@@ -146,7 +146,8 @@ func _physics_process(delta: float) -> void:
 
 func override_position_rotation(override_position: Vector3, override_rotation: Vector3) -> void:
 	global_position = override_position
-	global_rotation = override_rotation
+	global_rotation.y = override_rotation.y
+	camera.global_rotation.x = override_rotation.x
 	camera.sync_rotation_from_player()
 	reset_physics_interpolation()
 

@@ -321,8 +321,7 @@ func _on_shift_start_requested() -> void:
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 		_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
 		await _tutorial_manager._cinematic_camera.play_animation("pre_shift_start_sequence")
-		Global.player.global_position = _player_shift_start_position.global_position
-		Global.player.global_rotation = _player_shift_start_position.global_rotation
+		Global.player.override_position_rotation(_player_shift_start_position.global_position, _player_shift_start_position.global_rotation)
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 		await _tutorial_manager._cinematic_camera.play_animation("shift_start_sequence")
