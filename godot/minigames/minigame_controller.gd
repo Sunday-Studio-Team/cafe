@@ -28,7 +28,7 @@ func _ready() -> void:
 	)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if visible:
 		cancel_button.text = "[%s]\nCANCEL" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
 
