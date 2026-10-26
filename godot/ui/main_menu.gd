@@ -69,6 +69,7 @@ func _ready() -> void:
 
 
 func _on_options_button_pressed() -> void:
+	Global.options_menu_show_delete_save_file = true
 	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()
 	add_sibling(options_menu, true)
 

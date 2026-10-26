@@ -116,6 +116,7 @@ var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
+var options_menu_show_delete_save_file: bool = false
 var showing_floating_cursor := false
 var in_loadout_menu := false
 var in_ui: bool:
