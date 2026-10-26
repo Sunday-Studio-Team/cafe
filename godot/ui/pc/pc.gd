@@ -75,7 +75,9 @@ func _on_visibility_changed() -> void:
 
 func _process(_delta: float) -> void:
 	Global.in_pc_ui = visible
-		
+	if visible:
+		exit_button.text = "[%s]\nEXIT" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
+
 		
 func exit() -> void:
 	var t := create_tween()

@@ -13,6 +13,7 @@ const REFILL_MINIGAME := "Refill"
 
 # for making the machine jump when an order finishes, etc.
 @export var animation_player: AnimationPlayer
+@export var camera_low_fps_updater: LowFpsSubViewportUpdater
 @export var static_body: StaticBody3D
 @export var gui_3d: Machine3DGui
 @export var timer: Timer
@@ -493,7 +494,9 @@ func machine_make_drink() -> void:
 	# if we can interact with the machine while its jumping it does weird stuff
 	gui_3d.interactable.hide()
 	animation_player.play("order_ready_jump")
+	camera_low_fps_updater.override_target_fps(5)
 	await animation_player.animation_finished
+	camera_low_fps_updater.clear_override_target_fps()
 	gui_3d.interactable.show()
 
 	# if we're using the machine when it jumps, it loses our input for some reason
@@ -990,7 +993,7 @@ func _on_remake_drink_button_pressed() -> void:
 			elif item.item_level == 2:
 				time_scale = 0.25
 
-			Global.pitch_shift_all_3d_audio(true)
+			Global.pitch_shift_all_audio(0.75)
 			Engine.time_scale = time_scale
 			print("time scale set to: %s" % Engine.time_scale)
 
@@ -1021,7 +1024,7 @@ func _on_remade_drink() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_3d_audio(false)
+			Global.pitch_shift_all_audio(1.0)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
@@ -1033,7 +1036,7 @@ func _cancel_remake_minigame() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_3d_audio(false)
+			Global.pitch_shift_all_audio(1.0)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 
@@ -1045,7 +1048,7 @@ func _on_force_close_remake_minigame() -> void:
 
 	for item in Global.owned_items:
 		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_3d_audio(false)
+			Global.pitch_shift_all_audio(1.0)
 			Engine.time_scale = 1.0
 			print("time scale returned to: %s" % Engine.time_scale)
 

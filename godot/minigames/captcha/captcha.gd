@@ -13,6 +13,7 @@ extends Control
 @export var correct_sound: AudioStreamPlayer
 @export var wrong_sound: AudioStreamPlayer
 @export var ice_freezing_sound: AudioStreamPlayer
+@export var remake_button: TextureButton
 
 @export var req_and_sel:TextureRect
 @export var captcha_vbox:VBoxContainer
@@ -41,7 +42,9 @@ func _ready() -> void:
 			func():
 				click_sound.play(),
 		)
-	
+
+	remake_button.pressed.connect(verify_captcha)
+
 	_start_minigame()
 
 
@@ -114,7 +117,7 @@ func on_right():
 	complete_sprite.visible = true
 	sato.texture = sato_sprites[SatoTippyFight.Win]
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Win]
-	
+
 	# Tell the tutorial the captcha part is done
 	Global.tutorial_drink_remake_ingredients_done = true
 
@@ -126,18 +129,19 @@ func verify_captcha() -> void:
 		ordered_drink.liquid,
 		ordered_drink.extra,
 	]
-	
+
 	# not counting duplicates, so if our drink has coffee, and we select 3 coffees,
 	# that will only add 1 to this count
 	var correct_ingredients_pressed: int = 0
-	
+
 	for ingredient: Ingredient in ordered_ingredients:
 		if (
 			captcha.get_children().any(
 					func(slot: IngredientIconHolder):
 						if ingredient == null:
 							return true
-						return slot.ingredient == ingredient and slot.button.button_pressed
+						else:
+							return slot.ingredient == ingredient and slot.button.button_pressed
 		)
 	):
 			correct_ingredients_pressed += 1
@@ -147,7 +151,7 @@ func verify_captcha() -> void:
 	for slot: IngredientIconHolder in captcha.get_children():
 		if slot.button.button_pressed and not ordered_ingredients.has(slot.ingredient):
 			wrong_ingredients_pressed += 1
-			
+
 	if correct_ingredients_pressed == ordered_ingredients.size() and wrong_ingredients_pressed == 0:
 		on_right()
 		remade_drink_sprite.show()
@@ -164,7 +168,6 @@ func verify_captcha() -> void:
 			colour_tween.tween_property(slot, "modulate", Color.GOLD, 0.05)
 			colour_tween.tween_property(slot, "modulate", Color.WHITE, 0.05)
 
-			await correct_sound.finished		
 	else:
 		on_wrong()
 		shake_panel()
@@ -198,26 +201,32 @@ func _start_minigame() -> void:
 	order_reminder.visible = false
 	sato_tippy_fight.texture = sato_tippy_textures[SatoTippyFight.Neutral]
 	var drink: Drink
-	
+
 	# The else blocks here should only happen if this scene is ran by itself (not in the main game)
 	if(Global.ordered_drink_to_remake != null):
 		drink = Global.ordered_drink_to_remake
 	else:
 		drink = Global.drinks.pick_random()
 	get_ordered_drink(drink)
-	
+
 	if(Global.ordered_drink_customer != null):
 		drink_customer = Global.ordered_drink_customer
-		customer_sprite.texture = drink_customer.full_body_sprite.texture
-		
+
+		var texture_to_use: Texture = null
+		if drink_customer.customer_sprite_resource.alternate_desk_sprite:
+			texture_to_use = drink_customer.customer_sprite_resource.alternate_desk_sprite
+		else:
+			texture_to_use = drink_customer.full_body_sprite.texture
+		customer_sprite.texture = texture_to_use
+
 		rescale_image_to_target_height(customer_sprite)
 	else:
 		customer_sprite.texture = Global.customer_sprites.pick_random().sprite
 		rescale_image_to_target_height(customer_sprite)
-##TODO: Unhide Ingredient Reminder for tutorial
+		# TODO: Unhide Ingredient Reminder for tutorial
 		#order_reminder.visible = true
 		populate_order_reminder()
-	
+
 	populate_captcha()
 
 	var has_frozen_tippy_item: bool = Global.owned_items.any(
@@ -229,45 +238,40 @@ func _start_minigame() -> void:
 		ice_freezing_sound.play()
 		var border_freeze_tween := create_tween().set_ignore_time_scale().set_ease(Tween.EASE_OUT)
 		border_freeze_tween.tween_property(
-				frozen_border, 
-				"modulate", 
-				Color.WHITE, 
+				frozen_border,
+				"modulate",
+				Color.WHITE,
 				1
 		)
 
 
 func _end_minigame() -> void:
 	# THIS FUNCTION IS CALLED BY THE `CustomerContainer` node!
-	# Since the game should only end when giving the customer their drink now
-	print("End remaking minigame")
+	# Since the game should only end when giving the customer their drink
+	correct_sound.pitch_scale *= 1.1
 	correct_sound.play()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE # Only really relevant when playing minigame scenes as standalone
+	await correct_sound.finished
 	Events.minigame_end.emit()
-
-
-func _on_submit_button_pressed() -> void:
-	verify_captcha()
 
 
 func rescale_image_to_target_height(sprite: TextureRect, target_height:int = 1024)->void:
 	#target_height is generally 1024
-	
+
 	var original_height = sprite.texture.get_height()
 	if original_height==target_height:
-		
+
 		return	#do nothing! texture is the correct size.
-				#all customer heights have 1024px; with variable widths. so its the only one we check.		
-			
+				#all customer heights have 1024px; with variable widths. so its the only one we check.
+
 	var original_width = float(sprite.texture.get_width())
-	
+
 	var ratio = float(original_height)/float(target_height) #ex 2048/1024 = 2
-	
+
 	var _image = sprite.texture.get_image()
-	
+
 	# var target_width = original_width
 	_image.resize(int(round(original_width/ratio)), int(target_height), Image.INTERPOLATE_LANCZOS)
 	var _texture: ImageTexture = ImageTexture.create_from_image(_image)
-	
+
 	sprite.texture= _texture
-	#print("rescaled customer sprite size",customer_sprite.texture.get_size())
-	

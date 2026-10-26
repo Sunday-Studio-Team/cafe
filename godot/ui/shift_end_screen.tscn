@@ -50,6 +50,7 @@
 [ext_resource type="Texture2D" uid="uid://pk34qkj68im4" path="res://sprites/endshift_ui/second_part/endshift_up.png" id="38_flxts"]
 [ext_resource type="Texture2D" uid="uid://bjrk684svjjj6" path="res://sprites/endshift_ui/second_part/endshift_down.png" id="39_bxlob"]
 [ext_resource type="Texture2D" uid="uid://bff1kxvgie52l" path="res://sprites/endshift_ui/second_part/endshift_hover.png" id="40_q60pi"]
+[ext_resource type="PackedScene" uid="uid://7lluvsedruj0" path="res://ui/item_hover_tooltip.tscn" id="51_fg821"]
 
 [sub_resource type="Animation" id="Animation_j2nqk"]
 length = 0.001
@@ -1212,7 +1213,7 @@ _data = {
 &"restart_button_arrive": SubResource("Animation_c1exd")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "bonus_item_rarity_color_rect", "guaranteed_item", "guaranteed_item_rarity_color_rect", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "lock")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "cond_bonus", "bonus_item", "bonus_item_rarity_color_rect", "guaranteed_item", "guaranteed_item_rarity_color_rect", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "item_hover_tooltip", "lock")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
@@ -1233,6 +1234,7 @@ first_part_container = NodePath("FirstPartContainer")
 second_part_container = NodePath("SecondPartContainer")
 day_label = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/DayLabel")
 cond_def = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/CondDef")
+cond_bonus = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/CondBonus")
 bonus_item = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/BonusItem")
 bonus_item_rarity_color_rect = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/BonusItemRarityColorRect")
 guaranteed_item = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer/GuaranteedItem")
@@ -1244,6 +1246,7 @@ restart_button = NodePath("MarginContainer/RestartButton")
 end_shift_button = NodePath("MarginContainer/EndShiftButton")
 times_up = NodePath("TimesUp")
 tippy_times_up = NodePath("TippyTimesUp")
+item_hover_tooltip = NodePath("ItemHoverTooltip")
 lock = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/Lock")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
@@ -1265,6 +1268,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+offset_transform_visual_only = false
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="Paper" type="TextureRect" parent="FirstPartContainer" unique_id=1375621846]
 layout_mode = 0
@@ -1407,6 +1413,8 @@ offset_bottom = -152.0
 rotation = 0.21204309
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1200)
+offset_transform_visual_only = false
+mouse_behavior_recursive = 2
 
 [node name="RatingPhone" type="TextureRect" parent="SecondPartContainer/PhoneContainer" unique_id=1212478047]
 layout_mode = 1
@@ -1512,7 +1520,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("12_ohy67")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]clear day 2"
+text = "[center]clear day nUM"
 fit_content = true
 scroll_active = false
 
@@ -1550,6 +1558,7 @@ expand_mode = 2
 
 [node name="Lock" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer" unique_id=175630747]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("18_g0eae")
 expand_mode = 2
 stretch_mode = 3
@@ -1566,7 +1575,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("12_ohy67")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[right]get 4.5"
+text = "[right]get NUM"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -1576,6 +1585,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -4)
+offset_transform_visual_only = false
 texture = ExtResource("19_qkoyh")
 stretch_mode = 2
 
@@ -1632,6 +1642,7 @@ offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
 texture = ExtResource("24_nxyg6")
 stretch_mode = 1
 
@@ -1644,6 +1655,8 @@ offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("25_agvtq")
 stretch_mode = 1
 
@@ -1669,6 +1682,8 @@ offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("26_vob8y")
 stretch_mode = 1
 
@@ -1696,6 +1711,8 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("32_u65n0")
 stretch_mode = 3
 
@@ -1708,6 +1725,8 @@ offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("32_agvtq")
 stretch_mode = 3
 script = ExtResource("33_vob8y")
@@ -1752,6 +1771,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
@@ -1774,3 +1794,5 @@ offset_transform_enabled = true
 texture_normal = ExtResource("38_flxts")
 texture_pressed = ExtResource("39_bxlob")
 texture_hover = ExtResource("40_q60pi")
+
+[node name="ItemHoverTooltip" parent="." unique_id=1251839867 instance=ExtResource("51_fg821")]
