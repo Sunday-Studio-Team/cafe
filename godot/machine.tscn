@@ -481,13 +481,12 @@ sub_emitter_amount_at_start = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0wwv4"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_0ief2"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_5vek6"]
 
-[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "item_aim_spot", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "ordered_text", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "made_text", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound", "negative_rating_vfx", "positive_rating_vfx", "money_gain_vfx", "explosion_boom_particles") groups=["machines"]]
+[node name="Machine" type="Node3D" unique_id=1346980836 node_paths=PackedStringArray("animation_player", "camera_low_fps_updater", "static_body", "gui_3d", "timer", "breakdown_timer", "fix_machine_button", "spill_interactable", "spill_clean_particles", "spot_for_player", "spot_for_customer", "start_of_customer_queue_marker", "end_of_customer_queue_marker", "item_aim_spot", "progress_indicator", "tippy_progress_sprite", "accept_button", "make_drink_button", "refill_button", "ordered_drink_name_label", "ingredients_bar", "ing_too_low_label", "spill_warning_container", "customer_wait_indicator", "customer_wait_bar", "no_ingredients_warning", "get_ingredients_prompt", "order_breakdown", "ordered_main_ingredient_icon", "ordered_liquid_icon", "ordered_extra_icon", "ordered_drink_icon", "ordered_text", "made_breakdown", "made_main_ingredient_panel", "made_liquid_panel", "made_extra_panel", "made_drink_icon", "made_text", "equal_sign", "timer_dial", "ingredient_coffeebar", "remake_money_arrow", "remake_money_icon", "remake_rating_arrow", "remake_rating_icon", "accept_money_arrow", "accept_money_icon", "accept_rating_arrow", "accept_rating_icon", "hum_sound", "done_sound", "spill_clean_sound", "fixed_sound", "spill_sound", "breakdown_sound", "hammer_hit_sound", "no_ingredients_sound", "airhorn_sound", "bomb_sound_player", "ingredients_warning_sound", "rating_vfx", "money_gain_vfx", "explosion_boom_particles") groups=["machines"]]
 script = ExtResource("1_6a4ke")
 animation_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/AnimationPlayer")
+camera_low_fps_updater = NodePath("ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/LowFpsSubViewportUpdater")
 static_body = NodePath("ParentSoWeCanAnimateWithLocalCoords/StaticBody3D")
 gui_3d = NodePath("ParentSoWeCanAnimateWithLocalCoords/3DGui")
 timer = NodePath("ParentSoWeCanAnimateWithLocalCoords/Timer")
@@ -552,8 +551,7 @@ no_ingredients_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/NoIngredien
 airhorn_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/AirhornSound")
 bomb_sound_player = NodePath("ParentSoWeCanAnimateWithLocalCoords/BombSound")
 ingredients_warning_sound = NodePath("ParentSoWeCanAnimateWithLocalCoords/IngredientsWarningSound")
-negative_rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/NegativeRatingVFX")
-positive_rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/PositiveRatingVFX")
+rating_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/RatingVFX")
 money_gain_vfx = NodePath("ParentSoWeCanAnimateWithLocalCoords/MoneyGainVFX")
 explosion_boom_particles = NodePath("ParentSoWeCanAnimateWithLocalCoords/ExplosionBoom")
 metadata/_edit_group_ = true
@@ -785,6 +783,7 @@ bus = &"Sfx"
 transform = Transform3D(1, 0, 7.4505815e-09, 0, 1, 0, -7.4505815e-09, 0, 1, -1.8626451e-09, 0, -1.8626451e-09)
 stream = ExtResource("148_0ief2")
 volume_db = -5.0
+max_db = 0.0
 bus = &"Sfx"
 
 [node name="FixedSound" type="AudioStreamPlayer3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=2147316297]
@@ -860,7 +859,7 @@ draw_passes = 2
 draw_pass_1 = ExtResource("158_4mdt8")
 draw_pass_2 = ExtResource("159_0ief2")
 
-[node name="NegativeRatingVFX" type="AnimatedSprite3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=355821960]
+[node name="RatingVFX" type="AnimatedSprite3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=355821960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.35, 0.917)
 visible = false
 pixel_size = 0.001
@@ -868,22 +867,9 @@ billboard = 2
 no_depth_test = true
 sprite_frames = SubResource("SpriteFrames_0wwv4")
 script = ExtResource("205_t1qnq")
-_plus_rating_sprite_frames_uid = &"uid://cshldnaeqljob"
+_plus_rating_sprite_frames_uids = Array[StringName]([&"uid://cshldnaeqljob", &"uid://b5aevq56f5vn2"])
 _minus_rating_sprite_frames_uid = &"uid://jo5ne0q7p4te"
 _money_gain_sprite_frames_uid = &"uid://bwsoad0cvd0cn"
-
-[node name="PositiveRatingVFX" type="AnimatedSprite3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1606438850]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.35, 0.917)
-visible = false
-pixel_size = 0.001
-billboard = 2
-no_depth_test = true
-sprite_frames = SubResource("SpriteFrames_0ief2")
-script = ExtResource("205_t1qnq")
-_plus_rating_sprite_frames_uid = &"uid://cshldnaeqljob"
-_minus_rating_sprite_frames_uid = &"uid://jo5ne0q7p4te"
-_money_gain_sprite_frames_uid = &"uid://bwsoad0cvd0cn"
-metadata/_custom_type_script = "uid://c3yc3pfseqvgq"
 
 [node name="MoneyGainVFX" type="AnimatedSprite3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=979664126]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.35, 0.917)
@@ -893,7 +879,6 @@ billboard = 2
 no_depth_test = true
 sprite_frames = SubResource("SpriteFrames_5vek6")
 script = ExtResource("205_t1qnq")
-_plus_rating_sprite_frames_uid = &"uid://cshldnaeqljob"
 _minus_rating_sprite_frames_uid = &"uid://jo5ne0q7p4te"
 _money_gain_sprite_frames_uid = &"uid://bwsoad0cvd0cn"
 metadata/_custom_type_script = "uid://c3yc3pfseqvgq"

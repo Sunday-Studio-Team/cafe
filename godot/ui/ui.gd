@@ -27,9 +27,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
-@export var cctv_indicator: TextureRect
-@export var _eye_logo_red_texture: Texture2D
-@export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var day_indicator: Label
 @export var drop_button: Button
@@ -45,6 +42,8 @@ const ALERT_QUEUE_SIZE := 5
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName
 @export var exploding_bomb_ui: PanelContainer
+@export var throw_trash_ui: PanelContainer
+@export var throw_trash_ui_label: RichTextLabel
 
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
@@ -87,16 +86,6 @@ func _ready() -> void:
 			Events.machine_exit_button_pressed.emit()
 	)
 
-	# we wait here to make sure some global vars like profit goal
-	# get set before we show them
-	# NOTE: does this still make sense ?
-	await get_tree().process_frame
-
-	if Global.playing_tutorial or Global.day < 2:
-		cctv_indicator.hide()
-	else:
-		cctv_indicator.show()
-
 
 func _physics_process(_delta: float) -> void:
 	# looks a bit complex but basically we want to show the HUD if we're not
@@ -123,7 +112,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 
-	update_cctv_indicator()
+	update_throw_trash_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
@@ -161,10 +150,14 @@ func handle_item_hover_tooltip() -> void:
 
 func handle_exit_machine_button_visibility() -> void:
 	exit_machine_button.visible = Global.in_machine_ui and not Global.minigame_active
+	if exit_machine_button.visible:
+		exit_machine_button.text = "[%s]\nEXIT" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
 
 
 func handle_drop_item_ui() -> void:
-	drop_button.visible = (Global.holding_ingredients or Global.holding_trash) and not Global.in_ui
+	drop_button.visible = Global.holding_ingredients and not Global.in_ui
+	if drop_button.visible:
+		drop_button.text = "[%s]\nDROP" % OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode)
 
 
 func update_day_indicator() -> void:
@@ -334,11 +327,16 @@ func update_exploding_bomb_timer(_delta: float) -> void:
 			exploding_bomb_on_cooldown = false
 
 
-func update_cctv_indicator() -> void:
-	if Global.player_in_cctv_los:
-		cctv_indicator.texture = _eye_logo_red_texture
+func update_throw_trash_ui() -> void:
+	if Global.holding_trash:
+		throw_trash_ui.show()
+		throw_trash_ui_label.text = (
+			"Press %s to throw"
+			% OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode).to_upper()
+		)
+
 	else:
-		cctv_indicator.texture = _eye_logo_texture
+		throw_trash_ui.hide()
 
 
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):

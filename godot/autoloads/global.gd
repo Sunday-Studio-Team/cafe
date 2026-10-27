@@ -117,6 +117,7 @@ var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
+var options_menu_show_delete_save_file: bool = false
 var showing_floating_cursor := false
 var in_loadout_menu := false
 var in_ui: bool:
@@ -192,7 +193,9 @@ var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
 var all_audio_stream_players: Array[Node]
 var no_cooldowns := false
-
+# For sending the player to the right level in level select after shift completion or level quit
+var should_override_level_select_day: bool = false
+var level_select_day_override: int
 
 func _enter_tree() -> void:
 	if OS.has_feature("demo_mode"):

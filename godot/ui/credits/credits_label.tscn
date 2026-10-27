@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bfvsqg5fi2ja0"]
+
+[ext_resource type="Script" uid="uid://cc2wtqasev7le" path="res://ui/credits/credits_label.gd" id="1_mkjgh"]
+
+[node name="CreditsLabel" type="RichTextLabel" unique_id=525943618]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+script = ExtResource("1_mkjgh")
+attribution_file_path = "res://ATTRIBUTION.md"
+h1_font_size = 64
+h2_font_size = 48
+h3_font_size = 32
+h4_font_size = 24
+h5_font_size = 20
+h6_font_size = 16
+max_image_width = 80

@@ -37,7 +37,7 @@ var player_status_effects: PlayerStatusEffects
 var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
-var _is_sprinting: bool
+var _is_sprinting: bool = false
 var mouse_sens := 0.1
 var customer_trash: Node3D
 
@@ -150,7 +150,8 @@ func _physics_process(delta: float) -> void:
 
 func override_position_rotation(override_position: Vector3, override_rotation: Vector3) -> void:
 	global_position = override_position
-	global_rotation = override_rotation
+	global_rotation.y = override_rotation.y
+	camera.global_rotation.x = override_rotation.x
 	camera.sync_rotation_from_player()
 	reset_physics_interpolation()
 

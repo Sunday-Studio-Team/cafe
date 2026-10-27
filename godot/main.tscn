@@ -33,12 +33,10 @@
 [ext_resource type="Resource" uid="uid://croq2gvgca4d" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_10_repeat_1.tres" id="38_rpys8"]
 [ext_resource type="Resource" uid="uid://dk6dapswgnkyr" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_14_repeat_0.tres" id="43_6gr3f"]
 [ext_resource type="Resource" uid="uid://dwrbxmrj5hn5f" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_14_repeat_1.tres" id="44_6seew"]
-[ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="44_dfxmq"]
 [ext_resource type="PackedScene" uid="uid://dtbfgptmi7ixs" path="res://cafe_environment.tscn" id="44_h6isl"]
 [ext_resource type="Texture2D" uid="uid://c8wchhdcqcgxp" path="res://sprites/progress_bar/under.png" id="45_dfxmq"]
 [ext_resource type="Texture2D" uid="uid://de1p7ebvbes8h" path="res://sprites/progress_bar/over.png" id="46_kcoi7"]
 [ext_resource type="Texture2D" uid="uid://6n4q56tell6g" path="res://sprites/progress_bar/progress.png" id="47_rkju4"]
-[ext_resource type="Texture2D" uid="uid://bst7kul722rro" path="res://sprites/eye_red.png" id="48_lwnsi"]
 [ext_resource type="Resource" uid="uid://b5vfopsoqsx8y" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_19_repeat_0.tres" id="50_3ox4t"]
 [ext_resource type="Script" uid="uid://pf7u804wu0su" path="res://ui/tippy_vo_indicator.gd" id="57_ibca3"]
 [ext_resource type="Resource" uid="uid://35kn3wuuoudw" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_39.tres" id="70_4fmho"]
@@ -71,7 +69,6 @@
 [ext_resource type="Resource" uid="uid://p3hvkkub5xns" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_52.tres" id="96_mofpq"]
 [ext_resource type="Resource" uid="uid://hxhmtqun1yro" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_53.tres" id="97_6kttw"]
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://resources/themes/exit_button.tres" id="97_l0gw7"]
-[ext_resource type="Texture2D" uid="uid://itrov10wwglw" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_f.png" id="98_l0gw7"]
 [ext_resource type="Resource" uid="uid://dji6o2gh0hefo" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_54.tres" id="98_oqmj5"]
 [ext_resource type="Resource" uid="uid://fsxymkcixwg7" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_55.tres" id="99_uor2d"]
 [ext_resource type="Resource" uid="uid://ciwb7w0b3hno8" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_56.tres" id="100_bdw5g"]
@@ -299,10 +296,10 @@
 [ext_resource type="Resource" uid="uid://bgtkal348v22c" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_25.tres" id="276_u2kg7"]
 [ext_resource type="PackedScene" uid="uid://7fe87gmqsp1b" path="res://tippy_boss.tscn" id="276_wvmv7"]
 [ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="280_l0ugm"]
+[ext_resource type="PackedScene" uid="uid://cyx88mjsfsq4g" path="res://ui/tablet_addon_2d.tscn" id="281_8ldsf"]
 [ext_resource type="Resource" uid="uid://flhhdnq1mgf3" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_26.tres" id="282_3cabt"]
 [ext_resource type="Resource" uid="uid://cbbd1r86a74rg" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_27.tres" id="283_swcop"]
 [ext_resource type="Resource" uid="uid://bd1wdjs8stjlt" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_28.tres" id="284_r8clq"]
-[ext_resource type="FontFile" uid="uid://ca062kigheqxq" path="res://fonts/action_man/Action_Man_Bold.ttf" id="285_pmrog"]
 [ext_resource type="Resource" uid="uid://dqt2e5u7i3hwf" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_29.tres" id="287_oodit"]
 [ext_resource type="Resource" uid="uid://c2q4ytemc23la" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_30.tres" id="289_sn277"]
 [ext_resource type="Resource" uid="uid://046ura6h7avm" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_31.tres" id="290_b52uf"]
@@ -317,9 +314,12 @@
 [ext_resource type="Resource" uid="uid://bvuxqjqk7ieg5" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_37.tres" id="299_5jugy"]
 [ext_resource type="PackedScene" uid="uid://bk6x81gp6vtel" path="res://voice_lines/voice_line_player_non_directional.tscn" id="299_043in"]
 [ext_resource type="Resource" uid="uid://bhs2mhae6sxqt" path="res://voice_lines/resources/tutorials/day_1/voice_line_day_1_training_38.tres" id="300_320fk"]
+[ext_resource type="Texture2D" uid="uid://bl5jt5oqyawll" path="res://Assets/UI/dialogue_popup.png" id="310_ypkft"]
 [ext_resource type="Script" uid="uid://cyfg6kertkbie" path="res://player_detection_area.gd" id="311_vqns7"]
 [ext_resource type="PackedScene" uid="uid://dtbylsafb51vh" path="res://voice_lines/voice_line_player_3d.tscn" id="312_8ldsf"]
+[ext_resource type="FontFile" uid="uid://ca062kigheqxq" path="res://fonts/action_man/Action_Man_Bold.ttf" id="312_tdfff"]
 [ext_resource type="PackedScene" uid="uid://w26hgj0og5x5" path="res://ui/lucky_charm_ui.tscn" id="313_1h7wj"]
+[ext_resource type="Material" uid="uid://bx5wxwjyspk8n" path="res://customer_material.tres" id="325_pbe4p"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="337_lyu6w"]
 [ext_resource type="AudioStream" uid="uid://cipner2ec0gg1" path="res://audio/shift_start_countdown.wav" id="337_wr7jj"]
 [ext_resource type="PackedScene" uid="uid://lbvthxlp62hx" path="res://teleporter.tscn" id="348_bty7c"]
@@ -357,6 +357,8 @@ bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjuso"]
 bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_giq8e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_13qdw"]
 size = Vector3(1.9599609, 1, 1)
@@ -1222,7 +1224,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_d1vw0"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pmrog"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1233,7 +1235,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pmrog"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1244,7 +1246,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1255,16 +1257,16 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
-[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_shift_start_countdown_sound", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "default_trash_spawn_spot")]
+[node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_shift_start_countdown_sound", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "default_trash_spawn_spot", "day_containers_boxes")]
 process_mode = 1
 script = ExtResource("1_ig7tw")
 _emails_manager = NodePath("EmailsManager")
@@ -1306,6 +1308,7 @@ _locker_container = NodePath("LockerSpawnPosition")
 _item_loadout_menu_scene_uid = &"uid://d4bh0b3gyfbbd"
 _item_loadout_menu_container = NodePath("PlayerUiSubViewportContainer/SubViewport/ItemLoadoutMenuContainer")
 default_trash_spawn_spot = NodePath("DefaultTrashSpawnSpot")
+day_containers_boxes = [NodePath("CafeEnvironment/DayDecorations_0"), NodePath("CafeEnvironment/DayDecorations_1"), NodePath("CafeEnvironment/DayDecorations_2"), NodePath("CafeEnvironment/DayDecorations_3"), NodePath("CafeEnvironment/DayDecorations_4"), NodePath("CafeEnvironment/DayDecorations_5")]
 
 [node name="EmailsManager" type="Node" parent="." unique_id=1536857784]
 script = ExtResource("4_qsp4k")
@@ -1483,7 +1486,7 @@ sprite = NodePath("AnimatedSprite2D")
 position = Vector2(1642, 390)
 sprite_frames = ExtResource("215_tcxth")
 
-[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("interactable_indicator", "interactable_label", "shift_starting_ending_label", "shit_starting_ending_panel", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "cctv_indicator", "alert_ui", "day_indicator", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui")]
+[node name="UI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1922723680 node_paths=PackedStringArray("interactable_indicator", "interactable_label", "shift_starting_ending_label", "shit_starting_ending_panel", "money_sound", "gain_points_sound", "lose_points_sound", "low_time_sound", "alert_ui", "day_indicator", "drop_button", "exit_machine_button", "item_hover_tooltip", "item_hover_tooltip_name", "item_hover_tooltip_active_indicator", "item_hover_tooltip_cooldown_label", "item_hover_tooltip_passive_indicator", "item_hover_tooltip_description", "item_indicator", "item_text", "end_shift_guide", "exploding_bomb_ui", "throw_trash_ui", "throw_trash_ui_label")]
 process_mode = 3
 script = ExtResource("5_lquwl")
 interactable_indicator = NodePath("Interactable")
@@ -1494,9 +1497,6 @@ money_sound = NodePath("MoneySound")
 gain_points_sound = NodePath("GainPointsSound")
 lose_points_sound = NodePath("LosePointsSound")
 low_time_sound = NodePath("LowTimeSound")
-cctv_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/CctvIndicator")
-_eye_logo_red_texture = ExtResource("48_lwnsi")
-_eye_logo_texture = ExtResource("44_dfxmq")
 alert_ui = NodePath("HUD/VBoxContainer/Alerts")
 day_indicator = NodePath("TabletSubViewport/TabletUI2D/MarginContainer/Screen/TopBar/HBoxContainer/DayIndicator")
 drop_button = NodePath("HUD/VBoxContainer/FloatingButtons/DropButton")
@@ -1512,6 +1512,8 @@ item_text = NodePath("Interactable/ItemIndicator/RichTextLabel")
 end_shift_guide = NodePath("HUD/VBoxContainer/HBoxContainer2/EndShiftGuide")
 _alert_packed_scene_uid = &"uid://j530u4ni603j"
 exploding_bomb_ui = NodePath("ExplodingBombUI")
+throw_trash_ui = NodePath("ThrowTrashUI")
+throw_trash_ui_label = NodePath("ThrowTrashUI/MarginContainer/RichTextLabel")
 
 [node name="HoldingItemsCameraTextureRect" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=929551188]
 anchors_preset = 15
@@ -1562,12 +1564,9 @@ render_target_update_mode = 4
 
 [node name="TabletAddonSubViewport" type="SubViewport" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1732409839]
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport" unique_id=1769657425]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TabletAddon2D" parent="PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport" unique_id=197907222 instance=ExtResource("281_8ldsf")]
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="Interactable" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=1696852801]
 custom_maximum_size = Vector2(-1, 75)
@@ -1698,7 +1697,7 @@ offset_transform_rotation = -0.08726646
 offset_transform_visual_only = false
 mouse_behavior_recursive = 2
 theme = ExtResource("97_l0gw7")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "exit"
 
 [node name="DropButton" type="Button" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/VBoxContainer/FloatingButtons" unique_id=1994757836]
@@ -1711,7 +1710,6 @@ offset_transform_rotation = 0.08726646
 theme = ExtResource("97_l0gw7")
 theme_override_font_sizes/font_size = 24
 text = "drop"
-icon = ExtResource("98_l0gw7")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/HUD/VBoxContainer" unique_id=312814953]
 layout_mode = 2
@@ -1749,7 +1747,7 @@ custom_minimum_size = Vector2(400, 250)
 layout_mode = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("280_l0ugm")
-theme_override_fonts/bold_font = ExtResource("285_pmrog")
+theme_override_fonts/bold_font = ExtResource("312_tdfff")
 theme_override_font_sizes/normal_font_size = 48
 theme_override_font_sizes/bold_font_size = 96
 bbcode_enabled = true
@@ -1877,6 +1875,49 @@ stream = ExtResource("14_yaehf")
 volume_db = -5.0
 bus = &"Sfx"
 
+[node name="ThrowTrashUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=2014583948]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 126.380005
+offset_top = -183.62
+offset_right = 554.38
+offset_bottom = 244.38
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+mouse_behavior_recursive = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_giq8e")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI/ThrowTrashUI" unique_id=233705001]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayerUiSubViewportContainer/SubViewport/UI/ThrowTrashUI/MarginContainer" unique_id=1608784996]
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(25, 0)
+texture = ExtResource("310_ypkft")
+expand_mode = 1
+stretch_mode = 6
+flip_h = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PlayerUiSubViewportContainer/SubViewport/UI/ThrowTrashUI/MarginContainer" unique_id=966176057]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 8
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("280_l0ugm")
+theme_override_fonts/bold_font = ExtResource("312_tdfff")
+theme_override_font_sizes/normal_font_size = 30
+text = "Press F to throw"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MinigameController" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=305291737 node_paths=PackedStringArray("sub_viewport_container", "sub_viewport", "cancel_button")]
 visible = false
 script = ExtResource("10_4c57u")
@@ -1922,7 +1963,7 @@ offset_transform_position_ratio = Vector2(-0.5, 0.25)
 offset_transform_rotation = 0.08726646
 offset_transform_visual_only = false
 theme = ExtResource("97_l0gw7")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "cancel"
 
 [node name="PCUI" type="CanvasLayer" parent="PlayerUiSubViewportContainer/SubViewport" unique_id=1232958959]
@@ -2370,7 +2411,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_d1vw0")
+texture = SubResource("ViewportTexture_pmrog")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2383,7 +2424,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_pmrog")
+texture = SubResource("ViewportTexture_pbe4p")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2400,7 +2441,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_pbe4p")
+texture = SubResource("ViewportTexture_8ldsf")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2417,7 +2458,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_8ldsf")
+texture = SubResource("ViewportTexture_f4177")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2444,10 +2485,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2908587, 1.6, 16.214787)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_f4177")
+texture = SubResource("ViewportTexture_nckbc")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_nckbc")
+texture = SubResource("ViewportTexture_043in")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2511,10 +2552,13 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 0, 5)
 
 [node name="BackToFrontTeleporter" parent="Teleporters" unique_id=2081165431 instance=ExtResource("348_bty7c")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6.3, 0, 2.3)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.760281, 0, 3.2096725)
 
 [node name="Destination" parent="Teleporters/BackToFrontTeleporter" index="1" unique_id=1214631514]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0000002, 0, -6)
+
+[node name="comic_teleporter" parent="Teleporters/BackToFrontTeleporter" index="4" unique_id=1387026680]
+transform = Transform3D(2.1308115, 0, 0, 0, 2.1308115, 0, 0, 0, 2.1308115, 0.013880968, 0.01652816, -0.0045433044)
 
 [node name="AroundCafeVoiceLinePlayers" type="Node3D" parent="." unique_id=719194149]
 
@@ -2552,7 +2596,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700941, -0.00016215755, -0.9999293, 1.02598335e-07, 1, -0.00016214608, 0.9999293, -1.01539825e-08, 0.0005700941, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700929, -0.00016215755, -0.99992716, 1.02598115e-07, 1, -0.00016214573, 0.99992716, -1.01539825e-08, 0.0005700929, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
@@ -2568,6 +2612,9 @@ transform = Transform3D(0.07999998, 0, 0, 0, 0.08, 0, 0, 0, 0.07999998, -6.69007
 
 [node name="CafeFrontRollerShutters" parent="." unique_id=820677285 instance=ExtResource("512_6kay4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.0041902065, -0.12663963, -4.390682)
+
+[node name="CustomerMaterialInitializerSprite3D" type="Sprite3D" parent="." unique_id=1153710459]
+material_override = ExtResource("325_pbe4p")
 
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
@@ -2593,20 +2640,39 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.00
 [editable path="Teleporters/FrontToBackTeleporter"]
 [editable path="Teleporters/BackToFrontTeleporter"]
 [editable path="CafeEnvironment"]
+[editable path="CafeEnvironment/StreetBuildings2"]
+[editable path="CafeEnvironment/StreetBuildings2/1"]
+[editable path="CafeEnvironment/StreetBuildings2/1_copy"]
+[editable path="CafeEnvironment/StreetBuildings2/2"]
+[editable path="CafeEnvironment/StreetBuildings2/3"]
+[editable path="CafeEnvironment/StreetBuildings2/7"]
+[editable path="CafeEnvironment/StreetBuildings2/9"]
+[editable path="CafeEnvironment/StreetBuildings2/10"]
+[editable path="CafeEnvironment/StreetBuildings2/10_copy"]
+[editable path="CafeEnvironment/StreetBuildings3"]
+[editable path="CafeEnvironment/StreetBuildings3/1"]
+[editable path="CafeEnvironment/StreetBuildings3/1_copy"]
+[editable path="CafeEnvironment/StreetBuildings3/2"]
+[editable path="CafeEnvironment/StreetBuildings3/3"]
+[editable path="CafeEnvironment/StreetBuildings3/7"]
+[editable path="CafeEnvironment/StreetBuildings3/9"]
+[editable path="CafeEnvironment/StreetBuildings3/10"]
+[editable path="CafeEnvironment/StreetBuildings3/10_copy"]
 [editable path="CafeEnvironment/CustomerArea/FrontWindowAndDoor/glass window"]
 [editable path="CafeEnvironment/CustomerArea/ATMTIPPY"]
 [editable path="CafeEnvironment/CustomerArea/ceiling light2"]
 [editable path="CafeEnvironment/CustomerArea/ceiling light2/Ceiling Lamp2"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/ceiling light/Ceiling Lamp2"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy15"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy10"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Locker tippy11"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersA_Rust"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers_Stickers/LockersA_NoRust"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/LockersB_Rust"]
-[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Small Lockers6"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy15"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy10"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy11"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers2"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersB_Rust"]
+[editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Small Lockers6"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3"]
 [editable path="CafeEnvironment/EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes"]
