@@ -6,6 +6,7 @@ enum GameScene {
 	LEVEL_SELECT,
 	MAIN_SCENE,
 	END_OF_DAY_DIALOG_SCENE,
+	INTRO_VIDEO,
 }
 
 const LOADING_FADE_IN_TIME := 0.5
@@ -23,6 +24,7 @@ const TIPPY_LOADING_SWITCHES: Array[StringName] = [&"switch_0_30", &"switch_30_6
 @export var _main_menu_uid: StringName
 @export var _level_select_uid: StringName
 @export var _main_scene_uid: StringName
+@export var _intro_video_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
 ## Additional resources to always keep cached for speed.
 @export var _main_sub_resource_uids: Array[StringName]
@@ -136,12 +138,15 @@ func _finish_tippy_loading() -> void:
 		await loading_tippy.animation_finished
 
 
-func load_scene(scene: SceneSwitcher.GameScene) -> void:
+func load_scene(scene: SceneSwitcher.GameScene, skip_intro: bool = false) -> void:
 	loading_screen.visible = true
 
 	const TIMING_PRINTS: bool = true
 	const COUNT_CHILDREN_PRINTS: bool = true
 	_start_tippy_loading()
+
+	if scene == SceneSwitcher.GameScene.MAIN_MENU and not skip_intro:
+		scene = SceneSwitcher.GameScene.INTRO_VIDEO
 
 	if current_scene:
 		get_tree().paused = true
@@ -325,6 +330,8 @@ func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 			return _main_scene_uid
 		SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE:
 			return _end_of_day_dialog_scene_uid
+		SceneSwitcher.GameScene.INTRO_VIDEO:
+			return _intro_video_uid
 		_:
 			push_error("Unhandled Scene!")
 			return &""

@@ -723,6 +723,7 @@ func skip_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 
 	match tutorial_part_enum:
 		TutorialPartEnum.DAY_1_0:
+			_tutorial_manager.end_intro()
 			Global.player.override_position_rotation(_tutorial_manager._day_1_sato_start_shift_sign_position.global_position, _tutorial_manager._day_1_sato_start_shift_sign_position.global_rotation)
 		TutorialPartEnum.DAY_1_1:
 			Global.player.override_position_rotation(_tutorial_manager._day_1_sato_at_machine_position.global_position, _tutorial_manager._day_1_sato_at_machine_position.global_rotation)
