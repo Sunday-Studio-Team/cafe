@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dmasft4bprmvh" path="res://audio/trash_can/scored.wav" id="2_wr0p8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wnsl6"]
-size = Vector3(1.6393433, 1.316124, 0.8761902)
+size = Vector3(1.639, 2.151, 1.646)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(1.3694153, 0.50146484, 0.6494751)
@@ -20,7 +20,7 @@ highlight_material = ExtResource("2_kcyba")
 scored_sfx = NodePath("AudioStreamPlayer3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=809688403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031433105, 0.66010666, -0.0030059814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031433105, 0.66010666, -0.403006)
 shape = SubResource("BoxShape3D_wnsl6")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=778131750]
@@ -29,7 +29,7 @@ stream = ExtResource("2_wr0p8")
 [node name="Model" parent="." unique_id=663008453 instance=ExtResource("2_alpy1")]
 transform = Transform3D(1.2053021, 0, 0, 0, 1.2053021, 0, 0, 0, 1.2053021, 0, 0, 0)
 
-[node name="tippy_trash" parent="Model" index="0" unique_id=1775762125]
+[node name="tippy_trash" parent="Model" index="0" unique_id=1188696088]
 surface_material_override/0 = ExtResource("2_kcyba")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Model" unique_id=476933652]
