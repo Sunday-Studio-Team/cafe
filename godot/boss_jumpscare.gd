@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+
 @export var jumpscareMax: int = 1
 var jumpscareCount: int = 0
 
@@ -20,7 +21,11 @@ var number = -1
 func _ready() -> void:
 	footstep_speaker = $Footsteps
 	staring_speaker = $Staring
-	_boss_begins_walking()
+	#_boss_begins_walking()
+	
+	
+	# idk how to connect this, but it should trigger when the shift starts
+	#Events.shift_start_requested.connect(_boss_begins_walking())
 
 # if at the beginning, waits a certain amt of time before continueing
 # this is used to set a time before he starts walking out
