@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bsam3ndhw4n07" path="res://sprites/endshift_ui/first_part/amazing_paper_colored.png" id="2_6ln01"]
 [ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
 [ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
-[ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
 [ext_resource type="FontFile" uid="uid://f12jkge7ui88" path="res://fonts/komika/Komika_display_kaps.ttf" id="4_s5d2k"]
 [ext_resource type="Texture2D" uid="uid://vkfhygnpe56j" path="res://sprites/endshift_ui/first_part/tippy_fail_colored_v2.png" id="5_4pg7j"]
 [ext_resource type="FontFile" uid="uid://cikerrpxvai6v" path="res://fonts/komika/Komika_display_kaps_bold.ttf" id="5_e16oh"]
@@ -12,7 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
 [ext_resource type="Texture2D" uid="uid://bsyqh1ej3oxex" path="res://sprites/endshift_ui/first_part/pass_grade_colored_v2.png" id="6_hi220"]
 [ext_resource type="Texture2D" uid="uid://bwy636l6ajv5w" path="res://sprites/endshift_ui/first_part/money_right_colored.png" id="7_nw8o8"]
-[ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
 [ext_resource type="Texture2D" uid="uid://d2v08e48term0" path="res://sprites/endshift_ui/first_part/tippy_pass_v2.png" id="8_g5mai"]
 [ext_resource type="Texture2D" uid="uid://by7lnyysdhvvw" path="res://sprites/endshift_ui/first_part/money_leftcorner_colored copy.png" id="9_g0eae"]
 [ext_resource type="Texture2D" uid="uid://durkhraw8k71a" path="res://sprites/endshift_ui/first_part/money_center_colored copy.png" id="10_jnbcj"]
@@ -42,6 +40,8 @@
 [ext_resource type="Texture2D" uid="uid://dh28wnrabd0ej" path="res://sprites/endshift_ui/times_up/timesup_dark.png" id="32_agvtq"]
 [ext_resource type="Texture2D" uid="uid://4pbwksuurvdc" path="res://sprites/endshift_ui/times_up/tippy_times_up.png" id="32_u65n0"]
 [ext_resource type="Script" uid="uid://cqh54jh0eacu1" path="res://ui/shift_end_times_up_text.gd" id="33_vob8y"]
+[ext_resource type="AudioStream" uid="uid://dah0ohe6p0a7u" path="res://audio/phone_unlock.ogg" id="34_t52qy"]
+[ext_resource type="AudioStream" uid="uid://c2q108yu36urt" path="res://audio/keychain_jingle.mp3" id="35_3emyn"]
 [ext_resource type="AudioStream" uid="uid://bjcp3lc6wo35x" path="res://audio/music/shift_end_win_music.mp3" id="35_bxlob"]
 [ext_resource type="Texture2D" uid="uid://3c7d3djl034d" path="res://sprites/endshift_ui/second_part/restart_up.png" id="35_c1exd"]
 [ext_resource type="AudioStream" uid="uid://baa6f40u450qq" path="res://audio/music/shift_fail_music.wav" id="36_q60pi"]
@@ -50,6 +50,8 @@
 [ext_resource type="Texture2D" uid="uid://pk34qkj68im4" path="res://sprites/endshift_ui/second_part/endshift_up.png" id="38_flxts"]
 [ext_resource type="Texture2D" uid="uid://bjrk684svjjj6" path="res://sprites/endshift_ui/second_part/endshift_down.png" id="39_bxlob"]
 [ext_resource type="Texture2D" uid="uid://bff1kxvgie52l" path="res://sprites/endshift_ui/second_part/endshift_hover.png" id="40_q60pi"]
+[ext_resource type="AudioStream" uid="uid://dx1gutoxjixdy" path="res://audio/end_shift_star_meter_gain.wav" id="47_3emyn"]
+[ext_resource type="PackedScene" uid="uid://7lluvsedruj0" path="res://ui/item_hover_tooltip.tscn" id="51_fg821"]
 
 [sub_resource type="Animation" id="Animation_j2nqk"]
 length = 0.001
@@ -1071,6 +1073,25 @@ tracks/19/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -1200), Vector2(0, 0)]
 }
+tracks/20/type = "audio"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("PhoneFoley")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"clips": [{
+"end_offset": 1.2199999,
+"start_offset": 0.09,
+"stream": ExtResource("34_t52qy")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.06112833,
+"stream": ExtResource("35_3emyn")
+}],
+"times": PackedFloat32Array(1.95, 2.2388716)
+}
+tracks/20/use_blend = true
 
 [sub_resource type="Animation" id="Animation_5chdg"]
 resource_name = "endshift_button_arrive"
@@ -1212,16 +1233,14 @@ _data = {
 &"restart_button_arrive": SubResource("Animation_c1exd")
 }
 
-[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "bank_gain_sound", "pencil_scribble", "stars_sound", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "bonus_item", "bonus_item_rarity_color_rect", "guaranteed_item", "guaranteed_item_rarity_color_rect", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "lock")]
+[node name="ShiftEndScreen" type="CanvasLayer" unique_id=1100370049 node_paths=PackedStringArray("background", "time_up_sound", "win_shift_sound", "lose_shift_sound", "pencil_scribble", "win_music", "lose_music", "animation_player", "cafe_profits", "goal", "earnings", "new_ui_container", "first_part_container", "second_part_container", "day_label", "cond_def", "cond_bonus", "bonus_item", "bonus_item_rarity_color_rect", "guaranteed_item", "guaranteed_item_rarity_color_rect", "rating_reward", "rating_locked", "star_bar", "restart_button", "end_shift_button", "times_up", "tippy_times_up", "item_hover_tooltip", "lock", "star_meter_gain_sound")]
 process_mode = 3
 script = ExtResource("1_cwskb")
 background = NodePath("Background")
 time_up_sound = NodePath("TimeUpSound")
 win_shift_sound = NodePath("WinShiftSound")
 lose_shift_sound = NodePath("LoseShiftSound")
-bank_gain_sound = NodePath("BankGainSound")
 pencil_scribble = NodePath("PencilScribbleSound")
-stars_sound = NodePath("StarsSound")
 win_music = NodePath("WinMusic")
 lose_music = NodePath("LoseMusic")
 animation_player = NodePath("AnimationPlayer")
@@ -1233,6 +1252,7 @@ first_part_container = NodePath("FirstPartContainer")
 second_part_container = NodePath("SecondPartContainer")
 day_label = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/DayLabel")
 cond_def = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/CondDef")
+cond_bonus = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer/CondBonus")
 bonus_item = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/BonusItem")
 bonus_item_rarity_color_rect = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/BonusItemRarityColorRect")
 guaranteed_item = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/RatingReward/MarginContainer/GuaranteedItem")
@@ -1244,7 +1264,9 @@ restart_button = NodePath("MarginContainer/RestartButton")
 end_shift_button = NodePath("MarginContainer/EndShiftButton")
 times_up = NodePath("TimesUp")
 tippy_times_up = NodePath("TippyTimesUp")
+item_hover_tooltip = NodePath("ItemHoverTooltip")
 lock = NodePath("SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer/Lock")
+star_meter_gain_sound = NodePath("StarMeterGainSound")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1075982474]
 anchors_preset = 15
@@ -1265,6 +1287,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+offset_transform_visual_only = false
+mouse_filter = 2
+mouse_behavior_recursive = 1
 
 [node name="Paper" type="TextureRect" parent="FirstPartContainer" unique_id=1375621846]
 layout_mode = 0
@@ -1407,6 +1432,8 @@ offset_bottom = -152.0
 rotation = 0.21204309
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, 1200)
+offset_transform_visual_only = false
+mouse_behavior_recursive = 2
 
 [node name="RatingPhone" type="TextureRect" parent="SecondPartContainer/PhoneContainer" unique_id=1212478047]
 layout_mode = 1
@@ -1512,7 +1539,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("12_ohy67")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[center]clear day 2"
+text = "[center]clear day nUM"
 fit_content = true
 scroll_active = false
 
@@ -1550,6 +1577,7 @@ expand_mode = 2
 
 [node name="Lock" type="TextureRect" parent="SecondPartContainer/PhoneContainer/RatingPhone/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/RatingLocked/MarginContainer" unique_id=175630747]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("18_g0eae")
 expand_mode = 2
 stretch_mode = 3
@@ -1566,7 +1594,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("12_ohy67")
 theme_override_font_sizes/normal_font_size = 36
 bbcode_enabled = true
-text = "[right]get 4.5"
+text = "[right]get NUM"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -1576,6 +1604,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 offset_transform_enabled = true
 offset_transform_position = Vector2(0, -4)
+offset_transform_visual_only = false
 texture = ExtResource("19_qkoyh")
 stretch_mode = 2
 
@@ -1632,6 +1661,7 @@ offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
 texture = ExtResource("24_nxyg6")
 stretch_mode = 1
 
@@ -1644,6 +1674,8 @@ offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("25_agvtq")
 stretch_mode = 1
 
@@ -1669,6 +1701,8 @@ offset_bottom = 1200.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("26_vob8y")
 stretch_mode = 1
 
@@ -1696,6 +1730,8 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("32_u65n0")
 stretch_mode = 3
 
@@ -1708,43 +1744,52 @@ offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 offset_transform_enabled = true
+mouse_filter = 2
+mouse_behavior_recursive = 1
 texture = ExtResource("32_agvtq")
 stretch_mode = 3
 script = ExtResource("33_vob8y")
 
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_g6pkj")
-volume_db = -10.0
+volume_db = -15.0
+bus = &"Sfx"
 
 [node name="ArriveSound" type="AudioStreamPlayer" parent="." unique_id=1479814443]
 volume_db = -10.0
+bus = &"Sfx"
 
 [node name="LoseShiftSound" type="AudioStreamPlayer" parent="." unique_id=18379381]
 stream = ExtResource("3_iiu1j")
-volume_db = -5.0
-
-[node name="BankGainSound" type="AudioStreamPlayer" parent="." unique_id=78238649]
-stream = ExtResource("4_g6pkj")
+volume_db = -10.0
+bus = &"Sfx"
 
 [node name="TimeUpSound" type="AudioStreamPlayer" parent="." unique_id=621257515]
 stream = ExtResource("5_iiu1j")
+bus = &"Sfx"
 
 [node name="PencilScribbleSound" type="AudioStreamPlayer" parent="." unique_id=911022996]
 stream = ExtResource("6_13087")
 volume_db = -5.0
-
-[node name="StarsSound" type="AudioStreamPlayer" parent="." unique_id=1833295684]
-stream = ExtResource("7_xu4ny")
-volume_db = -5.0
+bus = &"Sfx"
 
 [node name="WinMusic" type="AudioStreamPlayer" parent="." unique_id=638685281]
 stream = ExtResource("35_bxlob")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"NonDiegeticMusic"
 
 [node name="LoseMusic" type="AudioStreamPlayer" parent="." unique_id=1563178062]
 stream = ExtResource("36_q60pi")
+volume_db = -5.0
 bus = &"NonDiegeticMusic"
+
+[node name="PhoneFoley" type="AudioStreamPlayer" parent="." unique_id=348150609]
+bus = &"Sfx"
+
+[node name="StarMeterGainSound" type="AudioStreamPlayer" parent="." unique_id=1293191907]
+stream = ExtResource("47_3emyn")
+volume_db = -15.0
+bus = &"Sfx"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1431337349]
 anchors_preset = 15
@@ -1752,6 +1797,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
@@ -1774,3 +1820,5 @@ offset_transform_enabled = true
 texture_normal = ExtResource("38_flxts")
 texture_pressed = ExtResource("39_bxlob")
 texture_hover = ExtResource("40_q60pi")
+
+[node name="ItemHoverTooltip" parent="." unique_id=1251839867 instance=ExtResource("51_fg821")]

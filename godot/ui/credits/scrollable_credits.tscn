@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://osxulxw2oas3"]
+
+[ext_resource type="Script" uid="uid://c5wuso5r3dwpw" path="res://ui/credits/scrollable_credits.gd" id="1_hny8b"]
+[ext_resource type="PackedScene" uid="uid://bfvsqg5fi2ja0" path="res://ui/credits/credits_label.tscn" id="2_1ldew"]
+
+[node name="ScrollableCredits" type="Control" unique_id=1649718614 node_paths=PackedStringArray("credits_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hny8b")
+credits_label = NodePath("CreditsLabel")
+
+[node name="CreditsLabel" parent="." unique_id=967293869 instance=ExtResource("2_1ldew")]
+unique_name_in_owner = true
+layout_mode = 1
+text = "[font_size=48]Collaborators[/font_size]
+
+[font_size=32]Programming[/font_size]
+Ben Bevan - Best Programmer
+
+[font_size=32]Design[/font_size]
+Ben Bevan - Best Designer
+
+[font_size=32]QA[/font_size]
+Ben Bevan - Tester with the best feedback
+
+[font_size=32]Programming[/font_size]
+Ben Bevan - Best Programmer
+
+[font_size=32]Design[/font_size]
+Ben Bevan - Best Designer
+
+[font_size=32]QA[/font_size]
+Ben Bevan - Tester with the best feedback
+
+[font_size=32]Programming[/font_size]
+Ben Bevan - Best Programmer
+
+[font_size=32]Design[/font_size]
+Ben Bevan - Best Designer
+
+[font_size=32]QA[/font_size]
+Ben Bevan - Tester with the best feedback
+
+[font_size=32]Programming[/font_size]
+Ben Bevan - Best Programmer
+
+[font_size=32]Design[/font_size]
+Ben Bevan - Best Designer
+
+[font_size=32]QA[/font_size]
+Ben Bevan - Tester with the best feedback
+
+[font_size=32]Programming[/font_size]
+Ben Bevan - Best Programmer
+
+[font_size=32]Design[/font_size]
+Ben Bevan - Best Designer
+
+[font_size=32]QA[/font_size]
+Ben Bevan - Tester with the best feedback
+
+[font_size=48]Sourced[/font_size]
+[font_size=24]Godot Engine Logo[/font_size]
+Author: Andrea Calabró  
+Source: [url=https://godotengine.org/press/]godotengine.org : press[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LOGO_LICENSE.txt]CC BY 4.0 International[/url] 
+
+[font_size=24]Git Logo[/font_size]
+Author: [url=https://bsky.app/profile/jasonlong.me]Jason Long[/url]  
+Source: [url=https://git-scm.com/downloads/logos]git-scm.com : logos[/url]  
+License: [url=https://creativecommons.org/licenses/by/3.0/]CC BY 3.0[/url] 
+
+[font_size=48]Tools[/font_size]
+[font_size=24]Godot[/font_size]
+Author: [url=https://godotengine.org/contact]Juan Linietsky, Ariel Manzur, and contributors[/url]  
+Source: [url=https://godotengine.org/]godotengine.org[/url]  
+License: [url=https://github.com/godotengine/godot/blob/master/LICENSE.txt]MIT License[/url]  
+
+[font_size=24]Git[/font_size]
+Author: [url=https://github.com/torvalds]Linus Torvalds[/url]  
+Source: [url=https://git-scm.com/downloads]git-scm.com[/url]  
+License: [url=https://opensource.org/licenses/GPL-2.0]GNU General Public License version 2[/url]
+
+[font_size=64]You can also add images![/font_size]
+"
+fit_content = false
+scroll_active = true

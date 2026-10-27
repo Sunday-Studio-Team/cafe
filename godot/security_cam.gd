@@ -275,8 +275,7 @@ func _on_requested_use_active_item():
 	Global.put_active_item_on_cooldown(whipped_cream)
 	whipped_cream_sound.play()
 	disarm_camera()
-	disabled_timer.wait_time = 15
+	disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
 	disabled_timer.start()
 	await disabled_timer.timeout
-	disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
 	rearm_camera()

@@ -17,6 +17,8 @@ enum State { NORMAL, CONFIRMING_RESTART, CONFIRMING_QUIT }
 @export var yes_sure_button: Button
 @export var no_sure_button: Button
 @export var sure_info_label: Label
+@export var hover_sound: AudioStreamPlayer
+@export var click_sound: AudioStreamPlayer
 
 var buttons: Array[Button]
 var state: State = State.NORMAL:
@@ -49,7 +51,9 @@ func _ready() -> void:
 		func():
 			match state:
 				State.CONFIRMING_QUIT:
-					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+					Global.should_override_level_select_day = true
+					Global.level_select_day_override = Global.day
+					Events.scene_switch_requested.emit(SceneSwitcher.GameScene.LEVEL_SELECT)
 				State.CONFIRMING_RESTART:
 					# NOTE: shouldnt this not be visible on restart anyway ? idk
 					visible = false
@@ -58,6 +62,7 @@ func _ready() -> void:
 	)
 	no_sure_button.pressed.connect(not_sure)
 
+	setup_button_sounds()
 	setup_button_tweens()
 
 
@@ -124,3 +129,18 @@ func _on_tutorial_button_pressed() -> void:
 func _on_options_button_pressed() -> void:
 	var options_menu: OptionsMenu = _options_menu_packed_scene.instantiate()
 	add_sibling(options_menu, true)
+
+
+func setup_button_sounds() -> void:
+	for b: Button in find_children("*", "Button"):
+		b.mouse_entered.connect(
+				func() -> void:
+					hover_sound.pitch_scale = randf_range(0.9, 1.1)
+					hover_sound.play()
+		)
+
+		b.pressed.connect(
+				func() -> void:
+					click_sound.pitch_scale = randf_range(0.9, 1.1)
+					click_sound.play()
+		)

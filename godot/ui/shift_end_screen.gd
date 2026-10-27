@@ -5,13 +5,9 @@ extends CanvasLayer
 @export var time_up_sound: AudioStreamPlayer
 @export var win_shift_sound: AudioStreamPlayer
 @export var lose_shift_sound: AudioStreamPlayer
-@export var bank_gain_sound: AudioStreamPlayer
 @export var pencil_scribble: AudioStreamPlayer
-@export var stars_sound: AudioStreamPlayer
 @export var win_music: AudioStreamPlayer
 @export var lose_music: AudioStreamPlayer
-
-@export_group("New UI")
 @export var animation_player: AnimationPlayer
 @export var cafe_profits: RichTextLabel
 @export var goal: RichTextLabel
@@ -21,6 +17,7 @@ extends CanvasLayer
 @export var second_part_container: Control
 @export var day_label: RichTextLabel
 @export var cond_def: RichTextLabel
+@export var cond_bonus: RichTextLabel
 @export var bonus_item: TextureRect
 @export var bonus_item_rarity_color_rect: ColorRect
 @export var guaranteed_item: TextureRect
@@ -32,11 +29,12 @@ extends CanvasLayer
 @export var end_shift_button: TextureButton
 @export var times_up: TextureRect
 @export var tippy_times_up: TextureRect
-
+@export var item_hover_tooltip: ItemHoverTooltip
 @export var lock: TextureRect
+@export var star_meter_gain_sound: AudioStreamPlayer
 
 var reached_bonus_rating: bool = (
-	Global.employee_rating >= 4.5
+	Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 )
 
 
@@ -46,6 +44,7 @@ func _ready() -> void:
 
 	_play_screen()
 
+
 func _play_screen() -> void:
 	# Hide all the labels
 	first_part_container.hide()
@@ -53,6 +52,7 @@ func _play_screen() -> void:
 	cafe_profits.hide()
 	goal.hide()
 	earnings.hide()
+
 	# show time up screen
 	show()
 	background.show()
@@ -63,9 +63,11 @@ func _play_screen() -> void:
 	await get_tree().create_timer(2).timeout
 	times_up.hide()
 	tippy_times_up.hide()
+	cond_bonus.text = "[right]get %s" % Stats.current.item_bonus_rating_threshold
 	reached_bonus_rating = (
 		Global.employee_rating >= Stats.current.item_bonus_rating_threshold
 	)
+
 	# calculate everything
 	var daily_profit: float = Global.daily_cafe_money
 	var min_profit_goal: float = Stats.current.daily_profit_goals_each_day[Global.day]
@@ -75,36 +77,37 @@ func _play_screen() -> void:
 	else:
 		animation_player.play("come_in_fail")
 		lose_music.play()
-
 	grant_day_rewards(passed_profit_goal)
+
 	await animation_player.animation_finished
 
-	var time = 1.2
-	var time2 = 1.5
+	var time: float = 1.2
+	var time2: float = 1.5
 	if passed_profit_goal:
 		time = 0.3
 		time2 = 4
 		win_music.play()
+
 	await get_tree().create_timer(0.7).timeout
 	pencil_scribble.play()
 	cafe_profits.show()
 	win_shift_sound.pitch_scale = 1
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time).timeout
 	goal.show()
 	goal.text = "Goal . . . %s" % Global.float_to_price(min_profit_goal)
 	win_shift_sound.pitch_scale = 1.2
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time).timeout
 	earnings.show()
 	earnings.text = "Earnings . . . %s" % Global.float_to_price(daily_profit)
 	win_shift_sound.pitch_scale = 1.5
 	if not passed_profit_goal: win_shift_sound.play()
-	
+
 	await get_tree().create_timer(time2).timeout
-	
+
 	if passed_profit_goal:
 		var day: String = "Glorbsday"
 		match Global.day:
@@ -119,13 +122,30 @@ func _play_screen() -> void:
 		cond_def.text = "[center]clear day %s" % Global.day
 		guaranteed_item.texture = g_item.icon
 		guaranteed_item_rarity_color_rect.color = g_item.rarity_color
+		guaranteed_item.mouse_entered.connect(
+			func() -> void:
+				item_hover_tooltip.item = g_item
+		)
+		guaranteed_item.mouse_exited.connect(
+			func() -> void:
+				item_hover_tooltip.item = null
+		)
 		bonus_item.texture = b_item.icon
 		bonus_item_rarity_color_rect.color = b_item.rarity_color
+		bonus_item.mouse_entered.connect(
+			func() -> void:
+				item_hover_tooltip.item = b_item
+		)
+		bonus_item.mouse_exited.connect(
+			func() -> void:
+				item_hover_tooltip.item = null
+		)
 		day_label.text = "[right]%s"%day
 		animation_player.play("come_in_second_part")
 		await animation_player.animation_finished
 		var rating_tween:Tween = star_bar.create_tween()
 		rating_tween.tween_property(star_bar,"value",Global.employee_rating/5 * 100,2)
+		star_meter_gain_sound.play()
 		await rating_tween.finished
 		if reached_bonus_rating:
 			bonus_item.self_modulate = Color.WHITE
@@ -141,11 +161,12 @@ func _play_screen() -> void:
 		await get_tree().create_timer(0.7).timeout
 		animation_player.play("restart_button_arrive")
 
+
 func shake_screen(intensity:float):
-	var shake_intensity = intensity
+	var shake_intensity: float = intensity
 	var panel_original_position: Vector2 = new_ui_container.position
-	var tween = new_ui_container.create_tween()
-	var shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+	var tween: Tween = new_ui_container.create_tween()
+	var shake_offset_target: Vector2 = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
 
 	tween.tween_property(new_ui_container, "position", new_ui_container.position + shake_offset_target, 0.025)
 	for i in range(10):
