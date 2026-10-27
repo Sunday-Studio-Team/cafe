@@ -3,6 +3,7 @@ extends Node3D
 
 const NUM_OF_MINIGAMES_TO_DISABLE := 1
 
+@export var model: Node3D
 @export var _shape_cast_3d: ShapeCast3D
 ## this is the spotlight that illuminates the circle the camera is watching
 @export var spotlight: SpotLight3D
@@ -20,6 +21,8 @@ const NUM_OF_MINIGAMES_TO_DISABLE := 1
 @export var caught_audio_stream_player_3d: AudioStreamPlayer3D
 @export var disable_sound: AudioStreamPlayer3D
 @export var disable_particles: GPUParticles3D
+@export var disable_2d_vfx_animated_sprite_3d: AnimatedSprite3D
+@export var disable_2d_vfx_sprite_frames_uid: StringName
 @export var disabled_timer_sprite: Sprite3D
 @export var disabled_timer_bar: TextureProgressBar
 @export var whipped_cream_sound: AudioStreamPlayer
@@ -32,6 +35,8 @@ var disable_minigames := ["Lines"]
 var _camera_disarmed := false
 var _player_slow_status_effect: CameraSlowPlayerStatusEffect
 var _direction_multiplier: float = 1.0
+var _player_in_spotlight_tween: Tween
+
 
 @onready var original_rotation := rotation_degrees
 @onready var tries_until_disabled := NUM_OF_MINIGAMES_TO_DISABLE
@@ -71,8 +76,10 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if not grace_timer.is_stopped():
+		if _player_in_spotlight_tween and _player_in_spotlight_tween.is_running():
+			_player_in_spotlight_tween.kill()
 		spotlight.light_color = Color.DIM_GRAY
-		fake_spotlight.color = Color.DIM_GRAY
+		fake_spotlight.light_color = Color.DIM_GRAY
 		return
 
 	var player_in_spotlight := false
@@ -91,6 +98,7 @@ func _physics_process(_delta: float) -> void:
 						grace_timer.start()
 						Events.alert_posted.emit("Caught running!", UI.AlertIconType.RULE_BREAK)
 						apply_slow = true
+						Global.tutorial_day_3_camera_stunned_player = true
 					elif Global.making_drink_manually:
 						grace_timer.start()
 						Events.alert_posted.emit(
@@ -114,22 +122,32 @@ func _physics_process(_delta: float) -> void:
 							_player_slow_status_effect
 						)
 						caught_audio_stream_player_3d.play()
+						Global.player.flash_red()
 					player_in_spotlight = true
 					break
 
-				elif collider == Global.tippy_boss:
-					if Global.tippy_boss.state == TippyBoss.State.CHASING:
-						Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
-						grace_timer.start()
-						break
+				# (experimental) disabling this
+				# elif collider == Global.tippy_boss:
+				# 	if Global.tippy_boss.state == TippyBoss.State.CHASING:
+				# 		Global.tippy_boss.set_state(TippyBoss.State.ZAPPED)
+				# 		grace_timer.start()
+				# 		break
 
 	if player_in_spotlight:
-		spotlight.light_color = Color.RED
-		fake_spotlight.light_color = Color.RED
+		if not _player_in_spotlight_tween or not _player_in_spotlight_tween.is_running():
+			_player_in_spotlight_tween = create_tween()
+			_player_in_spotlight_tween.tween_property(spotlight, "light_color", Color.WHITE, 0.5).from(Color.RED)
+			_player_in_spotlight_tween.tween_property(spotlight, "light_color", Color.RED, 0.5)
+			_player_in_spotlight_tween.tween_property(fake_spotlight, "light_color", Color.WHITE, 0.5).from(Color.RED)
+			_player_in_spotlight_tween.tween_property(fake_spotlight, "light_color", Color.RED, 0.5)
+		#spotlight.light_color = Color.RED
+		#fake_spotlight.light_color = Color.RED
 		Global.player_in_cctv_los = true
 	else:
-		spotlight.light_color = Color.WHITE
-		fake_spotlight.light_color = Color.WHITE
+		if _player_in_spotlight_tween and _player_in_spotlight_tween.is_running():
+			_player_in_spotlight_tween.kill()
+		spotlight.light_color = Color.RED
+		fake_spotlight.light_color = Color.RED
 
 	aim_path_follow_3d.progress += _delta * aim_follow_rate * _direction_multiplier
 	camera_aimer_node.look_at(aim_path_follow_3d.global_position)
@@ -140,11 +158,32 @@ func _on_visibility_changed() -> void:
 
 
 func disarm_camera() -> void:
+	Global.locked_camera_target_pos = model.global_position
+	Global.camera_mode = Global.CameraMode.LOCKED_TO_POINT
 	_camera_disarmed = true
 	disable_sound.play()
 	disable_particles.emitting = true
+	play_2d_vfx()
 	_update_camera_components_active()
+	await Events.viewmodel_animation_finished
+	Global.camera_mode = Global.CameraMode.PLAYER
 
+
+func play_2d_vfx() -> void:
+	disable_2d_vfx_animated_sprite_3d.visible = false
+	var token: ResourceBackgroundLoaderToken = Global.resource_background_loader.cache_resource(disable_2d_vfx_sprite_frames_uid)
+	while !token.is_loaded:
+		await get_tree().process_frame
+	var sprite_frames: SpriteFrames = Global.resource_background_loader.get_resource(token) as SpriteFrames
+	Global.resource_background_loader.uncache_resource(token)
+	if sprite_frames == null:
+		return
+	disable_2d_vfx_animated_sprite_3d.sprite_frames = sprite_frames
+	disable_2d_vfx_animated_sprite_3d.visible = true
+	disable_2d_vfx_animated_sprite_3d.play()
+	await disable_2d_vfx_animated_sprite_3d.animation_finished
+	disable_2d_vfx_animated_sprite_3d.sprite_frames = null
+	disable_2d_vfx_animated_sprite_3d.visible = false
 
 func rearm_camera() -> void:
 	_camera_disarmed = false
@@ -232,11 +271,11 @@ func _on_requested_use_active_item():
 		return
 
 	Events.play_viewmodel_animation.emit("cream_use")
-	whipped_cream_sound.play()
+	await Events.whipped_cream_animation_shot
 	Global.put_active_item_on_cooldown(whipped_cream)
+	whipped_cream_sound.play()
 	disarm_camera()
-	disabled_timer.wait_time = 15
+	disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
 	disabled_timer.start()
 	await disabled_timer.timeout
-	disabled_timer.wait_time = Stats.current.time_camera_disabled_after_sabotage
 	rearm_camera()

@@ -1,0 +1,13 @@
+[gd_resource type="SphereMesh" format=3 uid="uid://br6lam8mkk40o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfl77"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+disable_receive_shadows = true
+grow = true
+grow_amount = -1.1
+stencil_flags = 2
+
+[resource]
+material = SubResource("StandardMaterial3D_bfl77")
+rings = 3

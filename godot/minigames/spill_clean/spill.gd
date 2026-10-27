@@ -1,37 +1,74 @@
 class_name ErasableCanvas
 extends Node2D
 
+@export var _minigame_startup_overlay: MinigameStartupOverlay
 
 @export var canvas_sprite: Sprite2D
-@export var progress_label: Label
-@export var moping_area: Area2D
-@export var bucket: Sprite2D
+@export var canvas_sprite2: Sprite2D
+@export var canvas_sprite3: Sprite2D
+
+@export var mop_head: Area2D
+@export var machine_clean: Sprite2D
+@export var machine_dirty: Sprite2D
 @export var bucket_area: Area2D
 @export var mop: DraggableMop
+@export var text_bubble: TippyText
+@export var anim_water_flow: AnimatedSprite2D
 
+@export var scrub_sound: AudioStreamPlayer2D
+@export var spill_shrink_sound: AudioStreamPlayer2D
 
 # 0.0 means every visible pixel must be erased.
 # You could use 0.01 to allow 1% of the image to remain.
 @export_range(0.00, 1.0, 0.001)
-var allowed_remaining_ratio: float # = Stats.current.clean_spill_allowed_remaining
+var allowed_spill_remaining_ratio_1: float
+@export_range(0.00, 1.0, 0.001)
+var machine_clean_ratio: float
+@export_range(0.00, 1.0, 0.001)
+var spill_clean_speed: float
+@export_range(0.00, 1.0, 0.001)
+var mop_dirtied_speed: float
+@export_range(0.00, 1.0, 0.001)
+var mop_dirtied_thresh: float
 var mop_collision: CollisionShape2D
 var mop_rectangle: RectangleShape2D
 var canvas_image: Image
+var canvas_image2: Image
+var canvas_image3: Image
 var canvas_texture: ImageTexture
-var starting_pixel_count: int = 0
-var remaining_pixel_count: int = 0
+var canvas_texture2: ImageTexture
+var canvas_texture3: ImageTexture
+var mop_dirtied_amount: float
+var starting_scale: Vector2 = Vector2(1.0, 1.0)
+var current_scale: Vector2 = Vector2(1.0, 1.0)
+var current_scale2: Vector2 = Vector2(1.0, 1.0)
+var current_scale3: Vector2 = Vector2(1.0, 1.0)
+var current_spill: int = 0
+var new_scale: Vector2 = Vector2(1.0, 1.0)
+var new_scale2: Vector2 = Vector2(1.0, 1.0)
+var new_scale3: Vector2 = Vector2(1.0, 1.0)
+var image_width2: int
+var image_height2: int
+var image_width3: int
+var image_height3: int
 var image_width: int
 var image_height: int
 var game_finished: bool = false
 var previous_mop_position := Vector2.INF
 var remaining_mask: BitMap
+var remaining_ratio: float:
+	get():
+		return (new_scale.x + new_scale2.x + new_scale3.x) / 3.0 / starting_scale.x
+var prev_remaining_ratio: float = 1.0
+var spill1_gone: bool = false
+var spill2_gone: bool = false
+var spill3_gone: bool = false
 
+var _game_started: bool = false
 
 func _ready() -> void:
 	Global.minigame_active = true
 	Global.in_spill_minigame = true
-	canvas_sprite.texture = Global.spill_sprites.pick_random()
-
 	canvas_image = canvas_sprite.texture.get_image()
 	canvas_image.convert(Image.FORMAT_RGBA8)
 	canvas_image.clear_mipmaps()
@@ -42,15 +79,35 @@ func _ready() -> void:
 	canvas_texture = ImageTexture.create_from_image(canvas_image)
 	canvas_sprite.texture = canvas_texture
 
-	mop_collision = moping_area.get_child(0) as CollisionShape2D
-	mop_rectangle = mop_collision.shape as RectangleShape2D
+	canvas_image2 = canvas_sprite2.texture.get_image()
+	canvas_image2.convert(Image.FORMAT_RGBA8)
+	canvas_image2.clear_mipmaps()
 
-	if moping_area == null:
-		push_error("Moping Area has not been assigned.")
-		set_physics_process(false)
-		return
+	image_width2 = canvas_image2.get_width()
+	image_height2 = canvas_image2.get_height()
 
-	mop_collision = (moping_area.get_child(0) as CollisionShape2D)
+	canvas_texture2 = ImageTexture.create_from_image(canvas_image2)
+	canvas_sprite2.texture = canvas_texture2
+
+	canvas_image3 = canvas_sprite3.texture.get_image()
+	canvas_image3.convert(Image.FORMAT_RGBA8)
+	canvas_image3.clear_mipmaps()
+
+	image_width3 = canvas_image3.get_width()
+	image_height3 = canvas_image3.get_height()
+
+	canvas_texture3 = ImageTexture.create_from_image(canvas_image3)
+	canvas_sprite3.texture = canvas_texture3
+
+	new_scale = canvas_sprite.scale
+	new_scale2 = canvas_sprite2.scale
+	new_scale3 = canvas_sprite3.scale
+	starting_scale = canvas_sprite.scale
+
+	# TODO: remove unsafe get_child
+	# NOTE: probably should use the Area2D's functionality directly instead of
+	#		referencing the CollisionShape and its shape resource anyway
+	mop_collision = (mop_head.get_child(0) as CollisionShape2D)
 
 	if mop_collision == null:
 		push_error("Moping Area must have a CollisionShape2D child.")
@@ -64,37 +121,73 @@ func _ready() -> void:
 		set_physics_process(false)
 		return
 
-	if mop == null:
-		push_error("Mop has not been assigned")
-		set_physics_process(false)
-		return
-
 	bucket_area.area_entered.connect(
 		func(_area: Area2D):
-			mop.wet_mop()
+			if _area == mop_head && not mop.is_wet:
+				mop.wet_mop()
+				text_bubble.play_bubble_grow_animation()
 	)
 
-	initialize_progress_mask()
-	update_progress_display()
+	machine_clean.visible = false
+	machine_dirty.visible = true
+	#initialize_progress_mask()
+	#update_progress_display()
+	
+	_game_started = false
+	if Global.playing_tutorial:
+		while not Global.tutorial_day_3_spill_allow_cleaning:
+			await get_tree().process_frame
+	
+	_minigame_startup_overlay.play("MOP!")
+	_game_started = true
 
 
 func _physics_process(_delta: float) -> void:
+	if not _game_started:
+		return
+	
 	if game_finished or not mop.is_wet:
 		return
 
 	if mop_collision == null or mop_collision.disabled:
 		return
-	
+
 	if mop_collision.global_position.distance_to(previous_mop_position) < 50.0:
 		return
 
+	if mop.is_wet and not mop.is_dirty:
+		text_bubble.stop_bubble_animation()
+
 	var rect: Rect2i = erased_area_inside_mop_rectangle()
-	
+
 	previous_mop_position = mop_collision.global_position
 
-	update_image(rect)
-	update_progress_display()
-	check_for_win()
+	check_machine_clean()
+
+	if (mop_dirtied_amount >= mop_dirtied_thresh):
+		anim_water_flow.stop()
+		anim_water_flow.play("Idle")
+		anim_water_flow.hide()
+
+		text_bubble.play_bubble_grow_animation()
+
+		if bucket_area.overlaps_area(mop_head) or bucket_area.overlaps_body(mop): # adjust based on what type your mop/mop_head is
+					mop.wet_mop()
+					mop_dirtied_amount = 0.0
+					prev_remaining_ratio = remaining_ratio
+					mop.is_dirty = false
+					text_bubble.hide()
+	else:
+		if ((prev_remaining_ratio - remaining_ratio) > 0.05 and not mop.is_dirty):
+			mop.get_dirty()
+		elif ((prev_remaining_ratio - remaining_ratio) < 0.05 and not mop.is_dirty):
+			update_image(rect)
+			check_for_win()
+		else:
+			mop_dirtied_amount += mop_dirtied_speed
+
+			update_image(rect)
+			check_for_win()
 
 
 func erased_area_inside_mop_rectangle() -> Rect2i:
@@ -116,66 +209,71 @@ func erased_area_inside_mop_rectangle() -> Rect2i:
 	return Rect2i(top_left, bottom_right - top_left).abs()
 
 
-func update_image(rect: Rect2i) -> void:
-	var image_rect := Rect2i(
-		Vector2i.ZERO,
-		canvas_image.get_size()
+func update_image(_rect: Rect2i) -> void:
+	anim_water_flow.show()
+	anim_water_flow.play("waterflow")
+
+	new_scale = check_and_shrink_sprite(canvas_sprite, Vector2i(image_width, image_height), new_scale)
+	new_scale2 = check_and_shrink_sprite(canvas_sprite2, Vector2i(image_width2, image_height2), new_scale2)
+	new_scale3 = check_and_shrink_sprite(canvas_sprite3, Vector2i(image_width3, image_height3), new_scale3)
+
+
+	if new_scale <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill1_gone==false:
+		spill1_gone = true
+		spill_shrink_sound.play()
+
+	if new_scale2 <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill2_gone==false:
+		spill2_gone = true
+		spill_shrink_sound.play()
+
+	if new_scale3 <= Vector2(allowed_spill_remaining_ratio_1, allowed_spill_remaining_ratio_1) and spill3_gone==false:
+		spill3_gone = true
+		spill_shrink_sound.play()
+
+func check_and_shrink_sprite(sprite: Sprite2D, img_size: Vector2i, current_sprite_scale: Vector2) -> Vector2:
+	var half_size := mop_rectangle.size / 2.0
+
+	var shape_to_sprite := (
+		sprite.global_transform.affine_inverse()
+		* mop_collision.global_transform
 	)
+
+	var top_left := shape_to_sprite * -half_size
+	var bottom_right := shape_to_sprite * half_size
+
+	var image_half_size := Vector2(img_size) / 2.0
+	top_left += image_half_size
+	bottom_right += image_half_size
+
+	var rect := Rect2i(top_left, bottom_right - top_left).abs()
+	var image_rect := Rect2i(Vector2i.ZERO, img_size)
 
 	rect = rect.intersection(image_rect)
 
-	if rect.size.x <= 0 or rect.size.y <= 0:
-		return
+	if rect.size.x > 0 and rect.size.y > 0:
+		scrub_sound.play()
+		var updated_scale = Vector2(
+			max(0.0, current_sprite_scale.x - spill_clean_speed),
+			max(0.0, current_sprite_scale.y - spill_clean_speed)
+		)
+		sprite.scale = updated_scale
 
-	remaining_mask.set_bit_rect(rect, false)
-	remaining_pixel_count = remaining_mask.get_true_bit_count()
+		return updated_scale
 
-	if (
-		remaining_pixel_count < starting_pixel_count 
-		and not mop.is_dirty
-	):
-		mop.get_dirty()
-
-	canvas_image.fill_rect(rect, Color.TRANSPARENT)
-	canvas_texture.update(canvas_image)
+	return current_sprite_scale
 
 
-func initialize_progress_mask() -> void:
-	remaining_mask = BitMap.new()
-	remaining_mask.create_from_image_alpha(canvas_image, 0.0)
-
-	starting_pixel_count = remaining_mask.get_true_bit_count()
-	remaining_pixel_count = starting_pixel_count
-
-
-func update_progress_display() -> void:
-	if starting_pixel_count <= 0:
-		progress_label.text = "Erased: 100%"
-		return
-
-	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
-	)
-
-	var erased_ratio: float = 1.0 - remaining_ratio
-
-	var erased_percentage: int = roundi(erased_ratio * 100.0)
-
-	progress_label.text = ("Erased: %d%%" % erased_percentage)
+func check_machine_clean() -> void:
+	if remaining_ratio <= machine_clean_ratio:
+		machine_clean.visible = true
+		machine_dirty.visible = false
+	else:
+		machine_clean.visible = false
+		machine_dirty.visible = true
 
 
 func check_for_win() -> void:
-	if starting_pixel_count <= 0:
-		win_game()
-		return
-
-	var remaining_ratio: float = (
-		float(remaining_pixel_count)
-		/ float(starting_pixel_count)
-	)
-
-	if remaining_ratio <= allowed_remaining_ratio:
+	if remaining_ratio <= allowed_spill_remaining_ratio_1:
 		win_game()
 
 
@@ -184,8 +282,6 @@ func win_game() -> void:
 		return
 
 	game_finished = true
-
-	progress_label.text = "Erased: 100%"
 
 	Events.emit_signal("minigame_end")
 	Events.spill_clean_done.emit()

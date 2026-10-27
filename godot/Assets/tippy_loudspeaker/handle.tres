@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cr4lr22wuvj3y"]
+
+[ext_resource type="Texture2D" uid="uid://chq7jythvwx4u" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_tippysolo_hat_BaseColor.png" id="1_dclyb"]
+[ext_resource type="Texture2D" uid="uid://dratjyco661qk" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_tippysolo_hat_Metallic-tippysolo_hat_Roughness.png" id="2_tb211"]
+[ext_resource type="Texture2D" uid="uid://dgm1exv1exwvc" path="res://Assets/tippy_loudspeaker/tippy_loudspeaker_hatredo_aiStandardSurface3_BaseColor.png" id="2_y28iy"]
+
+[resource]
+resource_name = "handle"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_dclyb")
+metallic = 1.0
+metallic_texture = ExtResource("2_tb211")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_tb211")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_texture = ExtResource("2_y28iy")
+metadata/_gltf_primary_texture_coord = 0

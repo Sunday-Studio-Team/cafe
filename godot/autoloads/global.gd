@@ -10,9 +10,7 @@ extends Node
 @export_dir var spill_sprites_path: String
 @export var hover_shader: Shader
 @export var full_wrong_drink: Drink
-@export var star_texture: Texture
-@export var half_star_texture: Texture
-@export var empty_star_texture: Texture
+var resource_background_loader: ResourceBackgroundLoader
 var player: Player
 var hovered_interactable: Interactable:
 	get():
@@ -22,15 +20,13 @@ var hovered_interactable: Interactable:
 			return null
 		else:
 			return hovered_interactable
-# max amount of items we can own
-var item_slots_amount: int
-var inspected_shelf_item: ShelfItem
 var main_scene: Main
 var customer_entry_spot: Marker3D
 var customer_leaving_spot: Marker3D
 var drinks: Array[Drink]
 var ingredients: Array[Ingredient]
 var items: Array[Item]
+var unlocked_items: Array[Item] = []
 var owned_items: Array[Item]
 var player_in_cctv_los := false
 var minigame_active := false:
@@ -40,21 +36,35 @@ var minigame_active := false:
 			current_minigame_name = ""
 var current_minigame_name: String
 var in_spill_minigame := false
+var desk: Desk
+var pc_ui: PC_UI
 var in_pc_ui := false
 var received_emails: Array[EmailData]
 var read_emails: Array[EmailData]
-var spam_emails: Array[EmailData]
 var reviews: Array[Review]
 var received_reviews: Array[Review]
 var unread_email_count: int
 var finished_important_emails: Array[EmailData]
+# the customer being dealt with in the typing minigame
+# (NOT the customer at the front of the help desk queue)
 var active_help_desk_customer: Customer
+var customer_at_front_of_help_desk_queue: Customer
 var holding_ingredients := false
-var day := 0
+var holding_trash := false:
+	set(value):
+		if value == false && holding_trash == true:
+			holding_trash = value
+			Events.throw_trash.emit()
+		if value == true && holding_trash == false:
+			holding_trash = value
+			Events.pickup_trash.emit()
+var trash_in_hand: String
+var day: int = 1
+var playing_tutorial: bool = false
 var shift_length: float
 var shift_time_remaining: float
 var shift_progress_ratio: float
-var daily_cafe_money := 0.0:
+var daily_cafe_money: float = 0.0:
 	set(new_value):
 		if new_value == daily_cafe_money:
 			return
@@ -80,9 +90,12 @@ var employee_rating: float = 0:
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
 var player_tips_bank := 0.0
+var total_trash: float
 # this just defines the max day where we quit if we beat it
 # (instead of loading the next day)
 var final_day := 5
+## the one that chases you on day 5
+## (boss as in boss fight)
 var tippy_boss: TippyBoss
 # score from refill minigame (to pass to machine)
 var refill_minigame_accuracy: float
@@ -93,29 +106,19 @@ var customer_sprites_in_use: Array[CustomerSpriteData]
 var spill_sprites: Array[Texture]
 var breakdowns_this_shift := 0
 var spills_this_shift := 0
+var player_ui_sub_viewport_container: PlayerUiSubViewportContainer
+var item_locker: ItemLocker
 var machines: Array[Machine]
 var machine_in_use: Machine = null
-var stamina: float:
-	set(new_stam):
-		if new_stam > Stats.current.max_stamina:
-			new_stam = Stats.current.max_stamina
-		if new_stam < 0:
-			new_stam = 0
-
-		stamina = new_stam
-var sprint_lockout_timer: Timer
 # ui
 var in_machine_ui: bool = false
 var in_main_menu := false
 var in_level_select_menu: bool = false
 var in_end_screen := false
-var in_active_item_menu := false
-var in_tutorial_screen: bool = false
-var in_end_shift_early_menu := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
+var options_menu_show_delete_save_file: bool = false
 var showing_floating_cursor := false
-var in_tutorial_selection := false
 var in_loadout_menu := false
 var in_ui: bool:
 	get():
@@ -127,13 +130,9 @@ var in_ui: bool:
 				or in_main_menu
 				or in_level_select_menu
 				or in_end_screen
-				or in_active_item_menu
-				or in_tutorial_screen
-				or in_end_shift_early_menu
 				or in_dialog_screen
 				or in_options_menu
 				or showing_floating_cursor
-				or in_tutorial_selection
 				or in_loadout_menu
 		):
 			return true
@@ -148,39 +147,143 @@ var hovered_item_icon: TabletItemIcon = null
 var hovered_loadout_menu_element: LoadoutMenuElement
 # Tutorial flags
 var tutorial_machine_used: bool = false
-var tutorial_drink_accepted: bool = false
+var tutorial_drink_correct_accepted: bool = false
+var tutorial_drink_incorrect_accepted: bool = false
 var tutorial_remake_button_pressed: bool = false
-var tutorial_drink_remade: bool = false
+var tutorial_drink_remake_ingredients_done: bool = false
+var tutorial_drink_remade_served: bool = false
 var tutorial_ingredients_bag_got: bool = false
-var tutorial_refill_shown: bool = false #on day 1, shows a tutorial when a machine runs out of food
-var tutorial_go_clean_spill_shown: bool = false #on day 1, shows a tutorial the first time a spill happens.
-var tutorial_show_camera: bool = false #on day 2, shows a tutorial; player needs to avoid running under cameras.
+var tutorial_day_2_locker_opened: bool = false
+var tutorial_day_2_locker_loadout_confirmed: bool = false
+var tutorial_day_2_help_desk_interacted: bool = false
+var tutorial_day_2_help_desk_finished: bool = false
+var tutorial_day_2_broken_machine_interacted: bool = false
+var tutorial_day_2_broken_machine_fixed: bool = false
+var tutorial_day_3_camera_stunned_player: bool = false
+var tutorial_day_3_spill_interacted: bool = false
+var tutorial_day_3_spill_allow_cleaning: bool = false
+var tutorial_day_3_spill_cleaned: bool = false
+var tutorial_day_4_trash_picked_up: bool = false
+var tutorial_day_4_trash_thrown_away: bool = false
 var shift_started: bool = false
-# Voice Line System
 var voice_line_system: VoiceLineSystem
 # main Cafe environment resource
 var cafe_environment_res: Environment
-# Free-camera mode
-var free_camera_enabled: bool = false
+var tutorial_manager: TutorialManager
+# TODO: move to Stats ?
+var trash_punishment_threshold := 5
+var trash_punishment_amount := 0.2
+
+var low_fps_updaters: Array[LowFpsSubViewportUpdater] = []
+
+enum CameraMode {
+	PLAYER,
+	CINEMATIC,
+	DEBUG_FREE_CAM,
+	LOCKED_TO_POINT
+}
+var camera_mode: CameraMode = CameraMode.PLAYER:
+	set(new_mode):
+		if new_mode == CameraMode.PLAYER:
+			Global.player.camera.sync_rotation_from_player()
+		camera_mode = new_mode
+var locked_camera_target_pos: Vector3
+var cinematic_camera_allow_machine_gui_inputs: bool = true
+var item_loadout_menu: ItemLoadoutMenu
+# for pitch shifting
+var all_audio_stream_players: Array[Node]
+var no_cooldowns := false
+# For sending the player to the right level in level select after shift completion or level quit
+var should_override_level_select_day: bool = false
+var level_select_day_override: int
+
+func _enter_tree() -> void:
+	if OS.has_feature("demo_mode"):
+		Commands.wipe_save()
 
 
 func _ready() -> void:
-	if SaveDataManager.save_data.finished_or_skipped_tutorial:
-		day = 1
-	if OS.has_feature("tutorial"):
-		day = 0
-
 	drinks.assign(load_resources_from_folder(drinks_folder_path))
 	for drink in drinks:
-		drink.create() # adds the price and creates the typing minigame resource
+		drink.calculate_price() # calculates the drinks price
 	items.assign(load_resources_from_folder(items_folder_path))
+	load_unlocked_items_from_save()
+	load_equipped_items_from_save()
 	ingredients.assign(load_resources_from_folder(ingredients_folder_path))
 	reviews.assign(load_resources_from_folder(review_folder_path))
-	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path,"tres"))
+	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
 
 
-# NOTE: these things in physics process instead of process for timing reasons
+func load_unlocked_items_from_save() -> void:
+	unlocked_items.clear()
+
+	if SaveDataManager.save_data == null:
+		return
+
+	var latest_day: int = SaveDataManager.save_data.latest_unlocked_day
+
+	for d in range(1, latest_day):
+		var completion_items: Array = Stats.current.daily_completion_item_unlocks.get(d, [])
+		add_items_to_unlocked_list(completion_items)
+
+		if SaveDataManager.save_data.days_bonus_objective_completed.get(d, false):
+			var bonus_items: Array = Stats.current.daily_rating_item_unlocks.get(d, [])
+			add_items_to_unlocked_list(bonus_items)
+
+
+func load_equipped_items_from_save() -> void:
+	owned_items.clear()
+	if SaveDataManager.save_data == null:
+		return
+
+	for id in SaveDataManager.save_data.equipped_item_ids:
+		var item = get_item(id)
+		if item:
+			owned_items.append(item)
+
+
+func get_item(item_id: String) -> Item:
+	var found_item := false
+	for item: Item in items:
+		if item.item_id == item_id:
+			found_item = true
+			return item
+
+	if not found_item:
+		push_warning("Unlocked item not found: %s" % item_id)
+	return null
+
+
+func add_items_to_unlocked_list(item_ids: Array) -> void:
+	for raw_item_id in item_ids:
+		var item_id: String = str(raw_item_id)
+		var found_item := false
+
+		for item: Item in items:
+			if item.item_id == item_id:
+				found_item = true
+				if not unlocked_items.has(item):
+					unlocked_items.append(item)
+				break
+
+		if not found_item:
+			push_warning("Unlocked item not found: %s" % item_id)
+
+
+func lucky_charm_check() -> bool:
+	var has_lucky_charm_item: bool = false
+	for item in Global.owned_items:
+		if item.item_id == "lucky_charm":
+			has_lucky_charm_item = true
+			break
+	var luck_roll: float = randf()
+	if has_lucky_charm_item and luck_roll < Stats.current.lucky_charm_activation_chance:
+		Events.rating_loss_blocked_by_lucky_charm.emit()
+		return true
+	return false
+
+
 func _physics_process(_delta: float) -> void:
 	# this have to be reset to false at the start of every frame here
 	# because if we set it in the individual security cameras' processes, they
@@ -189,8 +292,6 @@ func _physics_process(_delta: float) -> void:
 
 	making_drink_manually = current_minigame_name == "Captcha"
 
-
-func _process(_delta: float) -> void:
 	if in_ui or get_tree().paused:
 		if in_spill_minigame:
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
@@ -216,6 +317,9 @@ func float_to_price(number: float) -> String:
 	return ("$%.2f" % number).trim_suffix(".00")
 
 
+## meaning take them all off cooldown
+## (used to reset them at start of level)
+## TODO: maybe move it there cos its not used anywhere else
 func refresh_active_items():
 	for item in owned_items:
 		item.can_be_used = true
@@ -242,3 +346,12 @@ func day_to_string(d: int) -> String:
 		day_as_string = "TRAINING"
 
 	return day_as_string
+
+
+## for frozen tippy item and cutscenes
+func pitch_shift_all_audio(multiplier: float = 1.0) -> void:
+	var pitch_tween := create_tween().set_parallel()
+
+	for p in all_audio_stream_players:
+		var base_pitch: float = p.get_meta("base_pitch_scale")
+		pitch_tween.tween_property(p, "pitch_scale", base_pitch * multiplier, 0.5)

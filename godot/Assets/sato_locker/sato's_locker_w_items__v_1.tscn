@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://chy0ub7v5dmy1"]
+
+[ext_resource type="PackedScene" uid="uid://ca2paigmq6vhq" path="res://Assets/sato_locker/Sato's Locker w Items _v1.glb" id="1_xn4d8"]
+
+[node name="Sato\'s Locker w Items _v1" unique_id=1837404991 instance=ExtResource("1_xn4d8")]
+
+[node name="Umbrella_Folded" parent="." index="6" unique_id=220495344]
+transform = Transform3D(1, 0, 0, 0, 0.09883249, 0.9951041, 0, -0.9951041, 0.09883249, 0.4177276, 3.0730593, -0.42217025)
+
+[node name="Mirror" parent="." index="19" unique_id=56187317]
+transform = Transform3D(-0.05555956, -0.017108113, -0.99830884, -0.061211396, 0.99803084, -0.013696704, 0.9965774, 0.06034689, -0.056497402, 0.5577061, 2.5702512, -0.048047245)
+
+[node name="Locker Door" parent="." index="24" unique_id=711655157]
+transform = Transform3D(-0.9989276, 0, 0.046300102, 0, 1, 0, -0.046300102, 0, -0.9989276, 0.59405494, 1.6096349, -0.5675207)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Locker Door" index="0" unique_id=1007376440]
+transform = Transform3D(0.009358346, 0.014295697, 0.999854, -0.061211396, 0.99803084, -0.013696704, -0.99808097, -0.06107428, 0.010215014, 0.012258142, 0.96061635, -0.5205993)
+remote_path = NodePath("../../Mirror")

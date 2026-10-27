@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Review" format=3 uid="uid://d3h7hiiisxl1g"]
+
+[ext_resource type="Script" uid="uid://4lpdxu8g6048" path="res://resources/customer_sprite_data.gd" id="1_xxmj1"]
+[ext_resource type="Resource" uid="uid://cmarj07on5wks" path="res://resources/customers/engineer_pink.tres" id="2_tfg22"]
+[ext_resource type="Script" uid="uid://djf3q4lwggw0g" path="res://emails/reviews/review.gd" id="3_dbh1m"]
+[ext_resource type="Resource" uid="uid://bm0odyj0jx1m1" path="res://resources/customers/software_engineer.tres" id="3_mkpgu"]
+
+[resource]
+script = ExtResource("3_dbh1m")
+username = "flatwyatt"
+rating = 1.0
+review_content = "I spent eight years building AI tools. Last month my entire department got automated.
+
+Corporate says the system learns from customer feedback. I’ve been having the same complaint for six months! 
+
+The AI coffee machine couldn’t tell the difference between a cappuccino and hot chocolate after 3 pm."
+customer_sprite_data_options = Array[ExtResource("1_xxmj1")]([ExtResource("2_tfg22"), ExtResource("3_mkpgu")])
+metadata/_custom_type_script = "uid://djf3q4lwggw0g"

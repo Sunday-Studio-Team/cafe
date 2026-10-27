@@ -1,4 +1,5 @@
-extends CenterContainer
+extends Control
+
 @export var finished_drink: TextureRect
 @export var root: Control
 
@@ -8,6 +9,6 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	data.is_dragging = false
+	data.hide()
+	data.process_mode = ProcessMode.PROCESS_MODE_DISABLED
 	root._end_minigame()
-	return

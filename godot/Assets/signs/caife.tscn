@@ -2,4 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://bq1xdcwu168yi" path="res://Assets/signs/caife.glb" id="1_ewcy5"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(0.42199707, 1, 1.7645264)
+
 [node name="caife" unique_id=2094984422 instance=ExtResource("1_ewcy5")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="5" unique_id=2066073752]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1845665713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48284912, 1.4589212, 0.38226318)
+shape = SubResource("BoxShape3D_xrivr")

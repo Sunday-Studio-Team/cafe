@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d26vdt6uji0gm" path="res://ui/pause_menu.gd" id="1_hdmo1"]
 [ext_resource type="PackedScene" uid="uid://u0mxb00igfni" path="res://ui/options_menu/options_menu.tscn" id="2_ejwgg"]
+[ext_resource type="AudioStream" uid="uid://bj6fx53b17p82" path="res://audio/ui_focus_change_generic.ogg" id="3_avurv"]
+[ext_resource type="AudioStream" uid="uid://1uljr8m1b8m6" path="res://audio/ui_click_generic.wav" id="4_avurv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjix0"]
 bg_color = Color(0.74428886, 0.5576893, 0.38271093, 1)
@@ -17,7 +19,7 @@ expand_margin_top = 25.0
 expand_margin_right = 50.0
 expand_margin_bottom = 25.0
 
-[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "_options_button", "restart_button", "quit_button", "sure_menu", "sure_panel", "yes_sure_button", "no_sure_button", "sure_info_label")]
+[node name="PauseMenu" type="CanvasLayer" unique_id=1507952631 node_paths=PackedStringArray("_continue_button", "_tutorial_button", "_options_button", "restart_button", "quit_button", "sure_menu", "sure_panel", "yes_sure_button", "no_sure_button", "sure_info_label", "hover_sound", "click_sound")]
 process_mode = 3
 script = ExtResource("1_hdmo1")
 _continue_button = NodePath("MarginContainer/VBoxContainer/Continue")
@@ -31,6 +33,8 @@ sure_panel = NodePath("MarginContainer/Sure/PanelContainer")
 yes_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/YesButton")
 no_sure_button = NodePath("MarginContainer/Sure/PanelContainer/VBoxContainer/Buttons/NoButton")
 sure_info_label = NodePath("MarginContainer/Sure/PanelContainer/Info/PanelContainer/Label")
+hover_sound = NodePath("HoverSound")
+click_sound = NodePath("ClickSound")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1315358308]
 anchors_preset = 15
@@ -68,6 +72,7 @@ theme_override_font_sizes/font_size = 64
 text = "Continue"
 
 [node name="ShowTutorial" type="Button" parent="MarginContainer/VBoxContainer" unique_id=26743770]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -160,3 +165,13 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.992644, 0.9491355, 0.89883375, 1)
 theme_override_font_sizes/font_size = 32
 text = "(this means going back to day 1!)"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="." unique_id=1148942489]
+stream = ExtResource("3_avurv")
+volume_db = -10.0
+bus = &"Sfx"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1406418925]
+stream = ExtResource("4_avurv")
+volume_db = -10.0
+bus = &"Sfx"

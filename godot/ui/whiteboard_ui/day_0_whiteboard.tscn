@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cwtw6dcai6cfe"]
+
+[ext_resource type="Script" uid="uid://dgw4tfgqorbve" path="res://ui/whiteboard_ui/day_0_whiteboard.gd" id="1_1old6"]
+[ext_resource type="Texture2D" uid="uid://d2okfxnht3vsy" path="res://sprites/whiteboard/elements/tippy_day0.png" id="1_6hvuf"]
+
+[node name="WhiteboardUI" type="Control" unique_id=82864418]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1old6")
+
+[node name="Background" type="ColorRect" parent="." unique_id=941493523]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=15265243]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="Border" type="TextureRect" parent="MarginContainer" unique_id=272047336]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_6hvuf")
+stretch_mode = 2

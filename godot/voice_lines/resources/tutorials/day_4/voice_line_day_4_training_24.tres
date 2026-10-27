@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="VoiceLine" format=3 uid="uid://cc3yaquhyst6r"]
+
+[ext_resource type="AudioStream" uid="uid://dawjr74dtm67s" path="res://audio/vo/tutorials/day_4/voice_line_day_4_training_24.wav" id="1_m85qj"]
+[ext_resource type="Script" uid="uid://vdv5g0q45pri" path="res://voice_lines/subtitle_ui/voice_line.gd" id="2_sua3g"]
+[ext_resource type="Resource" uid="uid://r24eygoil62s" path="res://voice_lines/resources/speakers/voice_line_speaker_tippy.tres" id="3_y3gcl"]
+
+[resource]
+script = ExtResource("2_sua3g")
+voice_line_id = "voice_line_day_4_training_24"
+audio_stream = ExtResource("1_m85qj")
+speaker = ExtResource("3_y3gcl")
+subtitle_en = "So, I trust our little cleaning crew can get it done?"

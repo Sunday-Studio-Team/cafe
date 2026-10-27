@@ -11,10 +11,16 @@ enum GameScene {
 
 const LOADING_FADE_IN_TIME := 0.5
 const LOADING_FADE_OUT_TIME := 1.0
+const TIPPY_LOADING_LOOPS: Array[StringName] = [&"loop_0", &"loop_30", &"loop_60", &"loop_99"]
+const TIPPY_LOADING_SWITCHES: Array[StringName] = [&"switch_0_30", &"switch_30_60", &"switch_60_99"]
 
-@export var loading_screen: ColorRect
+@export var _loading_screen_animation_player: AnimationPlayer
+@export var _loading_screen_animation_name_appear: StringName
+@export var loading_screen: Control
 @export var _loading_progress_bar: ProgressBar
 @export var loading_icons: Control
+@export var loading_tippy: AnimatedSprite2D
+@export var _loading_tippy_sprite_frames_uid: StringName
 @export var _main_menu_uid: StringName
 @export var _level_select_uid: StringName
 @export var _main_scene_uid: StringName
@@ -32,10 +38,20 @@ var loading_tween: Tween
 var _cached_main_packed_scene: PackedScene
 var _cached_sub_resources: Dictionary[StringName, Resource]
 
-var _is_first_options_load: bool = true
+var _loading_tippy_sprite_frames_load_token: ResourceBackgroundLoaderToken
+var _tippy_stage: int = 0
+var _tippy_target_stage: int = 0
+var _tippy_switching: bool = false
+var _tippy_finishing: bool = false
 
 
 func _ready() -> void:
+	loading_screen.visible = false
+
+	# Clear the sprite frames, in case they were set in editor.
+	loading_tippy.sprite_frames = null
+
+	loading_tippy.animation_finished.connect(_on_tippy_animation_finished)
 	Global.cafe_environment_res = _cafe_environment_res
 
 	Events.game_options_changed.connect(_on_game_options_changed)
@@ -45,6 +61,7 @@ func _ready() -> void:
 	Events.quit_game_requested.connect(quit_game)
 
 	if OS.has_feature("editor") and !OS.has_feature("editor_start_main_menu"):
+		Global.day = 1
 		load_scene(SceneSwitcher.GameScene.MAIN_SCENE)
 	else:
 		load_scene(SceneSwitcher.GameScene.MAIN_MENU)
@@ -52,17 +69,86 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	loading_icons.visible = loading_screen.modulate.a == 1
+	loading_tippy.visible = loading_icons.visible
+
+
+func _start_tippy_loading() -> void:
+	_tippy_finishing = false
+
+	# Load the tippy sprite frames
+	_loading_tippy_sprite_frames_load_token = Global.resource_background_loader.cache_resource(_loading_tippy_sprite_frames_uid)
+	while !_loading_tippy_sprite_frames_load_token.is_loaded:
+		await get_tree().process_frame
+		if _tippy_finishing:
+			return
+
+	var loading_tippy_sprite_frames_resource: Resource = Global.resource_background_loader.get_resource(_loading_tippy_sprite_frames_load_token)
+	var loading_tippy_sprite_frames: SpriteFrames = loading_tippy_sprite_frames_resource as SpriteFrames
+	if loading_tippy_sprite_frames == null:
+		printerr("loading_tippy_sprite_frames invalid.")
+		return
+	loading_tippy.modulate.a = 0.0
+	loading_tippy.sprite_frames = loading_tippy_sprite_frames
+	loading_tippy.stop()
+	loading_tippy.play(TIPPY_LOADING_LOOPS[0])
+	create_tween().tween_property(loading_tippy, "modulate:a", 1.0, 1.0)
+
+	_tippy_stage = 0
+	_tippy_target_stage = 0
+	_tippy_switching = false
+	_loading_progress_bar.value = 0.0
+
+func _set_loading_progress(ratio: float) -> void:
+	_loading_progress_bar.value = clampf(ratio, 0.0, 1.0)
+
+	if loading_tippy.sprite_frames != null:
+		var target_stage: int = 0
+		match ratio:
+			ratio when ratio >= 0.99:
+				target_stage = 3
+			ratio when ratio >= 0.6:
+				target_stage = 2
+			ratio when ratio >= 0.3:
+				target_stage = 1
+		# Loading estimates can jump or regress; the character only moves forward.
+		_tippy_target_stage = maxi(_tippy_target_stage, target_stage)
+		_advance_tippy_animation()
+
+
+func _advance_tippy_animation() -> void:
+	if _tippy_switching or _tippy_finishing or _tippy_stage >= _tippy_target_stage:
+		return
+	_tippy_switching = true
+	loading_tippy.play(TIPPY_LOADING_SWITCHES[_tippy_stage])
+
+
+func _on_tippy_animation_finished() -> void:
+	if not _tippy_switching:
+		return
+	_tippy_switching = false
+	_tippy_stage += 1
+	loading_tippy.play(TIPPY_LOADING_LOOPS[_tippy_stage])
+	_advance_tippy_animation()
+
+
+func _finish_tippy_loading() -> void:
+	# Finish the current switch, without delaying fast loads for queued stages.
+	_tippy_finishing = true
+	if _tippy_switching:
+		await loading_tippy.animation_finished
 
 
 func load_scene(scene: SceneSwitcher.GameScene) -> void:
+	loading_screen.visible = true
+
 	const TIMING_PRINTS: bool = true
 	const COUNT_CHILDREN_PRINTS: bool = true
+	_start_tippy_loading()
 
 	if current_scene:
 		get_tree().paused = true
-		loading_tween = create_tween()
-		loading_tween.tween_property(loading_screen, "modulate:a", 1, LOADING_FADE_IN_TIME).from(0)
-		await loading_tween.finished
+		_loading_screen_animation_player.play(_loading_screen_animation_name_appear)
+		await _loading_screen_animation_player.animation_finished
 		current_scene.queue_free()
 		await current_scene.tree_exited
 
@@ -71,7 +157,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	_loading_progress_bar.max_value = 1.0
 
 	var loading_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
-	if TIMING_PRINTS: print("SceneSwitcher: started timing loading")
+	if TIMING_PRINTS:
+		print("SceneSwitcher: started timing loading")
 
 	var cached_packed_scene: PackedScene = null
 	if scene == SceneSwitcher.GameScene.MAIN_SCENE:
@@ -81,7 +168,8 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	var scene_packed_scene: PackedScene = null
 	if cached_packed_scene != null:
 		scene_packed_scene = cached_packed_scene
-		if TIMING_PRINTS: print("SceneSwitcher: getting scene from cache")
+		if TIMING_PRINTS:
+			print("SceneSwitcher: getting scene from cache")
 	else:
 		var scene_uid: StringName = _scene_enum_to_uid(scene)
 
@@ -93,20 +181,23 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 		var finished_requests: int = 0
 		for resource_uid_request in resource_uid_requests:
 			var request_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
-			if TIMING_PRINTS: print("SceneSwitcher: started timing resource %s loading" % finished_requests)
+			if TIMING_PRINTS:
+				print("SceneSwitcher: started timing resource %s loading" % finished_requests)
 
 			var use_sub_threads: bool = false
 			if resource_uid_request in _main_sub_resource_uids:
-				if TIMING_PRINTS: print("SceneSwitcher: loading sub resource without threads")
+				if TIMING_PRINTS:
+					print("SceneSwitcher: loading sub resource without threads")
 				use_sub_threads = false
 			else:
-				if TIMING_PRINTS: print("SceneSwitcher: loading the main requested scene")
+				if TIMING_PRINTS:
+					print("SceneSwitcher: loading the main requested scene")
 				# WARNING: If set to true for the main scene, causes errors in the debugger:
-					# E 0:00:02:675   get_script: /root/Global: The caller thread can't call the function `get_script()` on this node. Use `call_deferred()` or `call_deferred_thread_group()` instead.
-					#   <C++ Error>   Condition "!is_accessible_from_caller_thread()" is true. Returning: (Variant())
-					#   <C++ Source>  scene/main/node.cpp:4159 @ get_script()
+				# E 0:00:02:675   get_script: /root/Global: The caller thread can't call the function `get_script()` on this node. Use `call_deferred()` or `call_deferred_thread_group()` instead.
+				#   <C++ Error>   Condition "!is_accessible_from_caller_thread()" is true. Returning: (Variant())
+				#   <C++ Source>  scene/main/node.cpp:4159 @ get_script()
 				# If true, it may randomly crash possibly due to engine bugs with autoloads:
-					# https://github.com/godotengine/godot/issues/98865
+				# https://github.com/godotengine/godot/issues/98865
 				use_sub_threads = false
 
 			var request_result: int = ResourceLoader.load_threaded_request(resource_uid_request, "Resource", use_sub_threads)
@@ -121,7 +212,7 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 					return
 				var progress_ratio: float = progress_ratio_array[0]
 				var total_progress_ratio: float = ((finished_requests as float) + progress_ratio) / (resource_uid_requests.size() as float)
-				_loading_progress_bar.value = total_progress_ratio
+				_set_loading_progress(total_progress_ratio)
 				await get_tree().process_frame
 
 			if ResourceLoader.load_threaded_get_status(resource_uid_request) != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
@@ -139,54 +230,83 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 					return
 				scene_packed_scene = requested_packed_scene
 				if scene == SceneSwitcher.GameScene.MAIN_SCENE:
-					if TIMING_PRINTS: print("SceneSwitcher: cached main scene")
+					if TIMING_PRINTS:
+						print("SceneSwitcher: cached main scene")
 					_cached_main_packed_scene = scene_packed_scene
 			elif resource_uid_request in _main_sub_resource_uids:
-				if TIMING_PRINTS: print("SceneSwitcher: cached sub resource")
+				if TIMING_PRINTS:
+					print("SceneSwitcher: cached sub resource")
 				_cached_sub_resources[resource_uid_request] = requested_resource
 
 			var request_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 			var request_total_duration_ms: int = floori(request_end_time_ms - request_start_time_ms)
-			if TIMING_PRINTS: print("SceneSwitcher: resource %s (%s) loading duration: %s ms" % [finished_requests, requested_resource.resource_path, request_total_duration_ms])
+			if TIMING_PRINTS:
+				print("SceneSwitcher: resource %s (%s) loading duration: %s ms" % [finished_requests, requested_resource.resource_path, request_total_duration_ms])
 
 			finished_requests += 1
+			_set_loading_progress(float(finished_requests) / float(resource_uid_requests.size()))
 
-		if TIMING_PRINTS: print("SceneSwitcher: done loading, instantiating scene")
+		if TIMING_PRINTS:
+			print("SceneSwitcher: done loading, instantiating scene")
 
 	var loading_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	var loading_total_duration_ms: int = floor(loading_end_time_ms - loading_start_time_ms)
-	if TIMING_PRINTS: print("SceneSwitcher: total loading duration: %s ms" % loading_total_duration_ms)
+	if TIMING_PRINTS:
+		print("SceneSwitcher: total loading duration: %s ms" % loading_total_duration_ms)
 
-	_loading_progress_bar.visible = false
+	# Cached scenes and requests that finish between polls also reach completion.
+	_set_loading_progress(1.0)
+
+	await get_tree().process_frame
 
 	var instantiating_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
-	if TIMING_PRINTS: print("SceneSwitcher: started timing instantiation")
-	
+	if TIMING_PRINTS:
+		print("SceneSwitcher: started timing instantiation")
+
 	current_scene = scene_packed_scene.instantiate()
 
 	var instantiating_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	var instantiating_total_duration_ms: int = floori(instantiating_end_time_ms - instantiating_start_time_ms)
-	if TIMING_PRINTS: print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
+	if TIMING_PRINTS:
+		print("SceneSwitcher: total instantiating duration: %s ms" % instantiating_total_duration_ms)
 
 	var add_child_start_time_ms: float = Time.get_unix_time_from_system() * 1000.0
-	if TIMING_PRINTS: print("SceneSwitcher: started timing add_child")
-	if COUNT_CHILDREN_PRINTS: print("SceneSwitcher: current child node count: %s" % _count_children_recursively(self))
-	
+	if TIMING_PRINTS:
+		print("SceneSwitcher: started timing add_child")
+	if COUNT_CHILDREN_PRINTS:
+		print("SceneSwitcher: current child node count: %s" % _count_children_recursively(self))
+
 	add_child(current_scene)
-	
+
 	await get_tree().process_frame
 
 	var add_child_end_time_ms: float = Time.get_unix_time_from_system() * 1000.0
 	var add_child_total_duration_ms: int = floori(add_child_end_time_ms - add_child_start_time_ms)
-	if TIMING_PRINTS: print("SceneSwitcher: total add_child duration: %s ms" % add_child_total_duration_ms)
-	if COUNT_CHILDREN_PRINTS: print("SceneSwitcher: total new child count: %s" % _count_children_recursively(self))
+	if TIMING_PRINTS:
+		print("SceneSwitcher: total add_child duration: %s ms" % add_child_total_duration_ms)
+	if COUNT_CHILDREN_PRINTS:
+		print("SceneSwitcher: total new child count: %s" % _count_children_recursively(self))
 
+	await _finish_tippy_loading()
+	_loading_progress_bar.visible = false
 	get_tree().paused = false
 
-	loading_tween = create_tween()
-	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)
-	await loading_tween.finished
+	_loading_screen_animation_player.play_backwards(_loading_screen_animation_name_appear)
+	await _loading_screen_animation_player.animation_finished
+	loading_tippy.stop()
+
+	# Unload the sprite frames.
+	if _loading_tippy_sprite_frames_load_token != null:
+		Global.resource_background_loader.uncache_resource(_loading_tippy_sprite_frames_load_token)
+		_loading_tippy_sprite_frames_load_token = null
+		# Fade it out.
+		await create_tween().tween_property(loading_tippy, "modulate:a", 1.0, 0.5).finished
+		loading_tippy.sprite_frames = null
+
 	Events.scene_switch_in_animation_finished.emit()
+
+	loading_screen.visible = false
+
 
 func quit_game() -> void:
 	if current_scene:
@@ -213,6 +333,7 @@ func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 			push_error("Unhandled Scene!")
 			return &""
 
+
 func _count_children_recursively(node: Node) -> int:
 	var child_count: int = 0
 	child_count += get_child_count()
@@ -220,24 +341,28 @@ func _count_children_recursively(node: Node) -> int:
 		child_count += _count_children_recursively(child_node)
 	return child_count
 
+
 func _on_game_options_changed(options_data: OptionsData) -> void:
 	_apply_game_options(options_data)
 
 
 func _apply_game_options(options_data: OptionsData) -> void:
 	const BUS_NAME_OVERALL: String = "Master"
-	const BUS_NAME_DIEGETIC_MUSIC: String = "DiegeticMusic"
-	const BUS_NAME_MINIGAME_MUSIC: String = "MinigameMusic"
+	const BUS_NAME_CUSTOMER_MUSIC: String = "CustomerAreaMusic"
+	const BUS_NAME_NON_DIEGETIC_MUSIC: String = "NonDiegeticMusic"
 	const BUS_NAME_VOICE: String = "TippyVO"
+	const BUS_NAME_SFX: String = "Sfx"
 
 	var bus_index_overall: int = AudioServer.get_bus_index(BUS_NAME_OVERALL)
 	AudioServer.set_bus_volume_linear(bus_index_overall, options_data.overall_volume * options_data.VOLUMES_MULTIPLIER)
-	var bus_index_diegetic_music: int = AudioServer.get_bus_index(BUS_NAME_DIEGETIC_MUSIC)
-	AudioServer.set_bus_volume_linear(bus_index_diegetic_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
-	var bus_index_minigame_music: int = AudioServer.get_bus_index(BUS_NAME_MINIGAME_MUSIC)
-	AudioServer.set_bus_volume_linear(bus_index_minigame_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_customer_area_music: int = AudioServer.get_bus_index(BUS_NAME_CUSTOMER_MUSIC)
+	AudioServer.set_bus_volume_linear(bus_index_customer_area_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_non_diegetic_music: int = AudioServer.get_bus_index(BUS_NAME_NON_DIEGETIC_MUSIC)
+	AudioServer.set_bus_volume_linear(bus_index_non_diegetic_music, options_data.music_volume * options_data.VOLUMES_MULTIPLIER)
 	var bus_index_voice: int = AudioServer.get_bus_index(BUS_NAME_VOICE)
 	AudioServer.set_bus_volume_linear(bus_index_voice, options_data.voice_volume * options_data.VOLUMES_MULTIPLIER)
+	var bus_index_sfx: int = AudioServer.get_bus_index(BUS_NAME_SFX)
+	AudioServer.set_bus_volume_linear(bus_index_sfx, options_data.sfx_volume * options_data.VOLUMES_MULTIPLIER)
 
 	match options_data.graphics_preset:
 		OptionsData.GraphicsOptionsPresets.HIGH:
@@ -245,10 +370,10 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			Global.cafe_environment_res.ssil_enabled = true
 			Global.cafe_environment_res.sdfgi_enabled = true
 			Global.cafe_environment_res.volumetric_fog_enabled = true
-			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", false)
+			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
 			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_4X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
 			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 1.0)
 		OptionsData.GraphicsOptionsPresets.MEDIUM:
 			Global.cafe_environment_res.ssao_enabled = true
@@ -258,7 +383,7 @@ func _apply_game_options(options_data: OptionsData) -> void:
 			ProjectSettings.set_setting("rendering/global_illumination/gi/use_half_resolution", true)
 			ProjectSettings.set_setting("rendering/scaling_3d/scale", 1.0)
 			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_2d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
-			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_2X)
+			ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", RenderingServer.ViewportMSAA.VIEWPORT_MSAA_DISABLED)
 			ProjectSettings.set_setting("rendering/mesh_lod/lod_change/threshold_pixels", 2.0)
 		OptionsData.GraphicsOptionsPresets.LOW:
 			Global.cafe_environment_res.ssao_enabled = false

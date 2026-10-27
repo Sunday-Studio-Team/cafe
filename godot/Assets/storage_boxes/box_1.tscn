@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ps4nbjx4ns11"]
+
+[ext_resource type="PackedScene" uid="uid://b5sclxcer87x5" path="res://Assets/storage_boxes/box_1.glb" id="1_287ex"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(2.5759277, 1.1484375, 2.4677124)
+
+[node name="box_1" unique_id=1445430101 instance=ExtResource("1_287ex")]
+
+[node name="pCube1_initialShadingGroup" parent="." index="0" unique_id=1652971695]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=624092261]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=273692093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05407715, -0.07421875, 0.2513733)
+shape = SubResource("BoxShape3D_xrivr")

@@ -2,13 +2,410 @@
 
 [ext_resource type="Script" uid="uid://n55nnhtk0i80" path="res://scene_switcher.gd" id="1_6uhv1"]
 [ext_resource type="Environment" uid="uid://bbukfqfrfkb1r" path="res://main_world_environment.tres" id="2_0bfbf"]
+[ext_resource type="Script" uid="uid://dh7or462kaeel" path="res://ui/game_cursor.gd" id="3_3ljbu"]
+[ext_resource type="Texture2D" uid="uid://dcgbb3g3jay21" path="res://sprites/mouse_cursors/cursor_idle.png" id="4_ou5wl"]
 [ext_resource type="Texture2D" uid="uid://dx65g0k6jxb6r" path="res://sprites/ingredient_icons/coffee.png" id="4_xn3vj"]
+[ext_resource type="Texture2D" uid="uid://e14er0jdm5sr" path="res://sprites/mouse_cursors/cursor_click.png" id="5_4h17e"]
+[ext_resource type="Texture2D" uid="uid://bb7tcpxnbi5wr" path="res://sprites/mouse_cursors/cursor A.png" id="6_ep8ot"]
+[ext_resource type="Texture2D" uid="uid://bsp3tm677ki3r" path="res://sprites/mouse_cursors/cursor B.png" id="7_v5u4k"]
+[ext_resource type="Texture2D" uid="uid://doysem5wafkqj" path="res://Assets/loading_screen_img/background_panels/loading_background.jpg" id="8_e3yyn"]
+[ext_resource type="Texture2D" uid="uid://4vfa4i8ibevq" path="res://Assets/loading_screen_img/background_panels/loading_panel_1.png" id="9_qidt7"]
+[ext_resource type="Texture2D" uid="uid://ded6ja7k2jcc6" path="res://Assets/loading_screen_img/background_panels/loading_panel_2.png" id="10_s63ap"]
+[ext_resource type="Texture2D" uid="uid://buhpefmuw2b5i" path="res://Assets/loading_screen_img/background_panels/loading_panel_3.png" id="11_ltvrs"]
+[ext_resource type="Texture2D" uid="uid://bblskrrwykmh6" path="res://Assets/loading_screen_img/background_panels/loading_panel_4.png" id="12_la0pa"]
+[ext_resource type="Texture2D" uid="uid://i8tqkus51vwh" path="res://Assets/loading_screen_img/background_panels/loading_panel_5.png" id="13_8b5ky"]
+[ext_resource type="Texture2D" uid="uid://bhjnm0ym2l1t6" path="res://Assets/loading_screen_img/background_panels/loading_panel_6.png" id="14_uncec"]
+[ext_resource type="AudioStream" uid="uid://1h18drcdhc4y" path="res://audio/music/main_menu_music.mp3" id="16_s63ap"]
+[ext_resource type="Script" uid="uid://dceeffb5leffe" path="res://ui/main_menu_music.gd" id="17_ltvrs"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
-bg_color = Color(0.1, 0.1, 0.1, 1)
+[sub_resource type="Animation" id="Animation_e3yyn"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingBG:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingPanel1Base/LoadingPanel1:offset_transform_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LoadingPanel1Base/LoadingPanel1:offset_transform_position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LoadingPanel2Base/LoadingPanel2:offset_transform_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LoadingPanel2Base/LoadingPanel2:offset_transform_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LoadingPanel3Base/LoadingPanel3:offset_transform_position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LoadingPanel3Base/LoadingPanel3:offset_transform_position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LoadingPanel4Base/LoadingPanel4:offset_transform_position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LoadingPanel4Base/LoadingPanel4:offset_transform_position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("LoadingPanel5Base/LoadingPanel5:offset_transform_position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("LoadingPanel5Base/LoadingPanel5:offset_transform_position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("LoadingPanel6Base/LoadingPanel6:offset_transform_position:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("LoadingPanel6Base/LoadingPanel6:offset_transform_position:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("TippyMarginContainer:offset_transform_scale:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("TippyMarginContainer:offset_transform_scale:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("ProgressBar:offset_transform_position:x")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("ProgressBar:offset_transform_position:y")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bfbf"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="Animation" id="Animation_qidt7"]
+resource_name = "appear"
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingBG:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.20000002, 0, 1, -0.20000002, 0, 0, 0),
+"times": PackedFloat32Array(0.4, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LoadingPanel1Base/LoadingPanel1:offset_transform_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-500, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LoadingPanel1Base/LoadingPanel1:offset_transform_position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-500, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LoadingPanel2Base/LoadingPanel2:offset_transform_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LoadingPanel2Base/LoadingPanel2:offset_transform_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-500, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LoadingPanel3Base/LoadingPanel3:offset_transform_position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(800, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LoadingPanel3Base/LoadingPanel3:offset_transform_position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-250, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LoadingPanel4Base/LoadingPanel4:offset_transform_position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(700, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LoadingPanel4Base/LoadingPanel4:offset_transform_position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(700, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("LoadingPanel5Base/LoadingPanel5:offset_transform_position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("LoadingPanel5Base/LoadingPanel5:offset_transform_position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(450, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("LoadingPanel6Base/LoadingPanel6:offset_transform_position:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(-700, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/12/type = "bezier"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("LoadingPanel6Base/LoadingPanel6:offset_transform_position:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.33333334, 0, 0, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/13/type = "bezier"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("TippyMarginContainer:offset_transform_scale:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"handle_modes": PackedInt32Array(0, 1, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.4, 0.8, 1)
+}
+tracks/14/type = "bezier"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("TippyMarginContainer:offset_transform_scale:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"handle_modes": PackedInt32Array(0, 1, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.4, 0.8, 1)
+}
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("ProgressBar:offset_transform_position:x")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/16/type = "bezier"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("ProgressBar:offset_transform_position:y")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(14, -0.25, 0, 0.25, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s63ap"]
+_data = {
+&"RESET": SubResource("Animation_e3yyn"),
+&"appear": SubResource("Animation_qidt7")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cyvvf"]
 
 [sub_resource type="Animation" id="Animation_okatn"]
 length = 0.001
@@ -85,12 +482,22 @@ _data = {
 &"loading": SubResource("Animation_q6tpw")
 }
 
-[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("loading_screen", "_loading_progress_bar", "loading_icons")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myf8j"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bfbf"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="SceneSwitcher" type="Node" unique_id=850990215 node_paths=PackedStringArray("_loading_screen_animation_player", "loading_screen", "_loading_progress_bar", "loading_icons", "loading_tippy")]
 process_mode = 3
 script = ExtResource("1_6uhv1")
+_loading_screen_animation_player = NodePath("LoadingCanvas/LoadingScreen/LoadingScreenAnimationPlayer")
+_loading_screen_animation_name_appear = &"appear"
 loading_screen = NodePath("LoadingCanvas/LoadingScreen")
 _loading_progress_bar = NodePath("LoadingCanvas/LoadingScreen/ProgressBar")
 loading_icons = NodePath("LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons")
+loading_tippy = NodePath("LoadingCanvas/LoadingScreen/TippyMarginContainer/TippySlot/TippyAnimation")
+_loading_tippy_sprite_frames_uid = &"uid://cff67s6qwbo04"
 _main_menu_uid = &"uid://cqpfyo7o4qvn6"
 _level_select_uid = &"uid://d2jkcyx2b28ky"
 _main_scene_uid = &"uid://nm85k5woe7rt"
@@ -99,20 +506,248 @@ _final_comic_scene_uid = &"uid://h3nxmuxey2b8"
 _main_sub_resource_uids = Array[StringName]([&"uid://dtbfgptmi7ixs", &"uid://b7pu4gc2t3gv6", &"uid://dhmqo5yinqk0t", &"uid://bt2p6jpdaqe0w"])
 _cafe_environment_res = ExtResource("2_0bfbf")
 
+[node name="GameCursor" type="Node" parent="." unique_id=1530510095]
+script = ExtResource("3_3ljbu")
+normal_cursor = ExtResource("4_ou5wl")
+clicked_cursor = ExtResource("5_4h17e")
+normal_pc_cursor = ExtResource("6_ep8ot")
+clicked_pc_cursor = ExtResource("7_v5u4k")
+normal_cursor_hotspot = Vector2(5, 16)
+
 [node name="LoadingCanvas" type="CanvasLayer" parent="." unique_id=520928004]
 layer = 10
 
-[node name="LoadingScreen" type="ColorRect" parent="LoadingCanvas" unique_id=1915811073]
+[node name="LoadingScreen" type="Control" parent="LoadingCanvas" unique_id=1807730107]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LoadingScreenAnimationPlayer" type="AnimationPlayer" parent="LoadingCanvas/LoadingScreen" unique_id=989021246]
+libraries/ = SubResource("AnimationLibrary_s63ap")
+speed_scale = 3.0
+
+[node name="LoadingBG" type="TextureRect" parent="LoadingCanvas/LoadingScreen" unique_id=2125492662]
+layout_mode = 0
+offset_top = 1.5258789e-05
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("8_e3yyn")
+expand_mode = 1
+
+[node name="LoadingPanel1Base" type="Control" parent="LoadingCanvas/LoadingScreen" unique_id=567661566]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 272.0
+offset_top = 232.0
+offset_right = 272.0
+offset_bottom = 232.0
+
+[node name="LoadingPanel1" type="TextureRect" parent="LoadingCanvas/LoadingScreen/LoadingPanel1Base" unique_id=872164039]
+layout_mode = 0
+offset_left = -401.0
+offset_top = -305.5
+offset_right = 401.0
+offset_bottom = 305.5
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("9_qidt7")
+expand_mode = 1
+
+[node name="LoadingPanel2Base" type="Control" parent="LoadingCanvas/LoadingScreen" unique_id=370586069]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 198.6499
+offset_top = -456.55
+offset_right = 198.6499
+offset_bottom = -456.55
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingPanel2" type="TextureRect" parent="LoadingCanvas/LoadingScreen/LoadingPanel2Base" unique_id=965216698]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -759.5
+offset_top = -163.50002
+offset_right = 759.5
+offset_bottom = 163.50002
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("10_s63ap")
+expand_mode = 1
+
+[node name="LoadingPanel3Base" type="Control" parent="LoadingCanvas/LoadingScreen" unique_id=1688427248]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 707.125
+offset_top = -292.87497
+offset_right = 707.125
+offset_bottom = -292.87497
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingPanel3" type="TextureRect" parent="LoadingCanvas/LoadingScreen/LoadingPanel3Base" unique_id=669964896]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -393.50006
+offset_top = -401.5
+offset_right = 393.50006
+offset_bottom = 401.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("11_ltvrs")
+expand_mode = 1
+
+[node name="LoadingPanel4Base" type="Control" parent="LoadingCanvas/LoadingScreen" unique_id=963960566]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 716.625
+offset_top = 193.75
+offset_right = 716.625
+offset_bottom = 193.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingPanel4" type="TextureRect" parent="LoadingCanvas/LoadingScreen/LoadingPanel4Base" unique_id=1640075312]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -447.5
+offset_top = -465.0
+offset_right = 447.5
+offset_bottom = 465.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("12_la0pa")
+expand_mode = 1
+
+[node name="LoadingPanel5Base" type="Control" parent="LoadingCanvas/LoadingScreen" unique_id=226572200]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.125
+offset_top = 386.0
+offset_right = -82.125
+offset_bottom = 386.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingPanel5" type="TextureRect" parent="LoadingCanvas/LoadingScreen/LoadingPanel5Base" unique_id=467243288]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1397.1666
+offset_top = -204.0
+offset_right = 1397.1666
+offset_bottom = 204.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("13_8b5ky")
+expand_mode = 1
+
+[node name="LoadingPanel6Base" type="Control" parent="LoadingCanvas/LoadingScreen" unique_id=1684048]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -753.8
+offset_top = 94.400024
+offset_right = -753.8
+offset_bottom = 94.400024
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingPanel6" type="TextureRect" parent="LoadingCanvas/LoadingScreen/LoadingPanel6Base" unique_id=1796680911]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -316.00003
+offset_top = -542.0
+offset_right = 316.00003
+offset_bottom = 542.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+offset_transform_enabled = true
+texture = ExtResource("14_uncec")
+expand_mode = 1
+
+[node name="TippyMarginContainer" type="MarginContainer" parent="LoadingCanvas/LoadingScreen" unique_id=1030923569]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.46
+anchor_right = 0.5
+anchor_bottom = 0.46
+offset_left = -229.0
+offset_top = -268.80002
+offset_right = 300.0
+offset_bottom = 322.19998
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
 mouse_filter = 2
-mouse_behavior_recursive = 1
-color = Color(0, 0, 0, 1)
+
+[node name="TippySlot" type="Control" parent="LoadingCanvas/LoadingScreen/TippyMarginContainer" unique_id=1475634309]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TippyAnimation" type="AnimatedSprite2D" parent="LoadingCanvas/LoadingScreen/TippyMarginContainer/TippySlot" unique_id=1613845006]
+position = Vector2(223, 278)
+sprite_frames = SubResource("SpriteFrames_cyvvf")
 
 [node name="MarginContainer" type="MarginContainer" parent="LoadingCanvas/LoadingScreen" unique_id=144886860]
+visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,6 +756,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
+
+[node name="LoadingIconsAnimationPlayer" type="AnimationPlayer" parent="LoadingCanvas/LoadingScreen/MarginContainer" unique_id=964861867]
+root_node = NodePath("../../../..")
+libraries/ = SubResource("AnimationLibrary_ivs3u")
+autoplay = &"loading"
+speed_scale = 0.5
 
 [node name="LoadingIcons" type="HBoxContainer" parent="LoadingCanvas/LoadingScreen/MarginContainer" unique_id=736671333]
 layout_mode = 2
@@ -133,7 +774,7 @@ layout_mode = 2
 texture = ExtResource("4_xn3vj")
 
 [node name="LoadingIcon2" type="TextureRect" parent="LoadingCanvas/LoadingScreen/MarginContainer/LoadingIcons" unique_id=636883721]
-modulate = Color(0.19970748, 0.19970748, 0.19970748, 1)
+modulate = Color(0, 0, 0, 1)
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("4_xn3vj")
@@ -153,13 +794,16 @@ anchor_bottom = 1.0
 offset_top = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+offset_transform_enabled = true
 theme_override_styles/background = SubResource("StyleBoxFlat_myf8j")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0bfbf")
 max_value = 1.0
 value = 0.5
 show_percentage = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=964861867]
-libraries/ = SubResource("AnimationLibrary_ivs3u")
-autoplay = &"loading"
-speed_scale = 0.5
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1333431792]
+stream = ExtResource("16_s63ap")
+volume_db = -15.0
+autoplay = true
+bus = &"NonDiegeticMusic"
+script = ExtResource("17_ltvrs")

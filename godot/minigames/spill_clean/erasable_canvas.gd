@@ -68,7 +68,7 @@ func _ready() -> void:
 		push_error("The CollisionShape2D must use RectangleShape2D.")
 		set_physics_process(false)
 		return
-	
+
 	if mop == null:
 		push_error("Mop has not been assigned")
 		set_physics_process(false)
@@ -94,7 +94,7 @@ func _physics_process(_delta: float) -> void:
 			splash.play()
 			mop.is_wet = true
 			mop.modulate = "5f5f5f"
-			mop.bubbles.emitting = true
+			mop.bubble_particles.emitting = true
 			print("The mop is now wet.")
 		return
 
@@ -299,7 +299,7 @@ func transform_rect(
 	result = result.expand(bottom_left)
 
 	return result
-	
+
 
 
 func sprite_rect_to_pixel_rect(

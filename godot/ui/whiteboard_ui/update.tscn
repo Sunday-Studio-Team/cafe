@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b7ff1r15fkxvg"]
+
+[ext_resource type="Script" uid="uid://bti55xhugkiv2" path="res://ui/whiteboard_ui/update.gd" id="1_ey5qa"]
+[ext_resource type="FontFile" uid="uid://f12jkge7ui88" path="res://fonts/komika/Komika_display_kaps.ttf" id="3_fodtw"]
+[ext_resource type="FontFile" uid="uid://cikerrpxvai6v" path="res://fonts/komika/Komika_display_kaps_bold.ttf" id="4_o3f6h"]
+
+[node name="Update" type="HBoxContainer" unique_id=842554168 node_paths=PackedStringArray("icon", "extra_overlay", "update_name", "extra_icon")]
+script = ExtResource("1_ey5qa")
+icon = NodePath("Icon")
+extra_overlay = NodePath("Icon/ExtraOverlay")
+update_name = NodePath("Name")
+extra_icon = NodePath("ExtraIcon")
+text = "Coffee[br]Machine"
+
+[node name="Icon" type="TextureRect" parent="." unique_id=384488056]
+layout_mode = 2
+stretch_mode = 2
+
+[node name="ExtraOverlay" type="TextureRect" parent="Icon" unique_id=1863149473]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="." unique_id=82119697]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.19215687, 0.19215687, 0.19215687, 1)
+theme_override_fonts/normal_font = ExtResource("3_fodtw")
+theme_override_fonts/bold_font = ExtResource("4_o3f6h")
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+text = "Coffee[br]Machine"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ExtraIcon" type="TextureRect" parent="." unique_id=1315924608]
+layout_mode = 2
+size_flags_vertical = 4
+stretch_mode = 2

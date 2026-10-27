@@ -5,9 +5,7 @@
 extends Node
 
 var _item_ids: Array[String] = []
-# tracks whether we have the 'unlimited actives' command toggled on
-# (so we can toggle on/off with the same command)
-var ua_enabled := false
+var _customer_names: Array[String] = []
 
 
 func _ready() -> void:
@@ -29,6 +27,8 @@ func _ready() -> void:
 	# so i think dumping this should help make this more friendly
 	Console.print_line(
 		"\n[b]COMMANDS[/b]
+- [i]unlockall[/i] unlocks all days and items
+- [i]unlockday <day>[/i] unlocks all days up to the given day (and the corresponding items)
 - [i]freecam[/i] toggles free cam mode. Useful for cinematic shots!
 - [i]freecamspeed <number>[/i] Sets free cam speed. Default is 1.0.
 - [i]wipesave[/i] wipes save (will automatically load into tutorial etc. on next run)
@@ -36,20 +36,20 @@ func _ready() -> void:
 - [i]endshift[/i] ends shift
 - [i]endshift W[/i] forces a win
 - [i]endshift L[/i] forces a loss
+- [i]timeup[/i] skips to shift end sequence (where customers stop spawning, NOT the end screen)
 - [i]timer[/i] pauses the game timer (use again to resume)
 - [i]profit <number>[/i] sets your daily profit
 - [i]rating <number>[/i] sets your employee rating
-- [i]bank[/i] adds $100 to bank
 - [i]break[/i] makes a random machine break
 - [i]spill[/i] makes a random machine spill
 - [i]day <number>[/i] skips to a day and resets the game
 - [i]item \"<item_id>\"[/i] gives you a specified item (TAB to auto-complete)
 %s
-- [i]fullshelf[/i] gives you a full inventory of items
 - [i]speed <number>[/i] sets the game speed
 - [i]bag[/i] gives you an ingredients bag
 - [i]vo[/i] plays a test VO line
-- [i]ua[/i] (short for Unlimited Actives) gives active items back shortly after you use them (possibly buggy)
+- [i]trash[/i] spawn a trash
+- [i]nocooldowns[/i] gives active items back shortly after you use them (possibly buggy)
 - [i]customer[/i] <name> <true/false> spawns a customer - add a name to spawn a certain customer, and add true in place of true/false to send them to the help desk instead of the machine"
 		% [items_guide_str],
 	)
@@ -61,6 +61,7 @@ func _ready() -> void:
 (or tell us if any of the existing ones seem bugged D:)[/color]",
 	)
 
+	Console.add_command("unlockday", unlock_day, 1)
 	Console.add_command("freecam", toggle_freecam)
 	Console.add_command("freecamspeed", set_freecam_speed, ["speed"])
 	Console.add_command("wipesave", wipe_save)
@@ -80,15 +81,43 @@ func _ready() -> void:
 		_item_ids.append("\"%s\"" % item.item_id)
 	Console.add_command_autocomplete_list("item", _item_ids)
 	Console.add_command("speed", set_speed, 1)
-	Console.add_command("ua", toggle_unlimited_actives)
+	Console.add_command("nocooldowns", toggle_unlimited_actives)
 	Console.add_command("vo", vo_test)
 	Console.add_command("customer", spawn_customer, ["customer_name", "help_desk"])
+	for customer: CustomerSpriteData in Global.customer_sprites:
+		_customer_names.append("\"%s\"" % customer.customer_name)
+	Console.add_command_autocomplete_list("customer", _customer_names)
+	Console.add_command("unlockall", unlock_everything)
+	Console.add_command("trash", spawn_trash)
+	Console.add_command("timeup", time_up)
 
-	Events.main_scene_loaded.connect(
+	Events.main_scene_ready.connect(
 		func():
-			if ua_enabled and not Events.active_item_used.is_connected(refresh_active_item):
+			if not Events.active_item_used.is_connected(refresh_active_item):
 				Events.active_item_used.connect(refresh_active_item),
 	)
+
+
+func spawn_trash() -> void:
+	Global.main_scene.spawn_trash();
+	Console.print_line("trash was spawned")
+
+
+func unlock_everything() -> void:
+	unlock_day("6")
+	for i in SaveDataManager.save_data.days_bonus_objective_completed:
+		SaveDataManager.save_data.days_bonus_objective_completed[i] = true
+	SaveDataManager.save_game_to_file()
+	Global.load_unlocked_items_from_save()
+	print("unlocked all days and items")
+
+
+func unlock_day(day: String) -> void:
+	var day_as_int = clampi(int(day), 1, 6)
+	SaveDataManager.save_data.latest_unlocked_day = day_as_int
+	Console.print_line("unlocked day %s" % day_as_int)
+	SaveDataManager.save_game_to_file()
+	Global.load_unlocked_items_from_save()
 
 
 func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
@@ -96,11 +125,16 @@ func spawn_customer(customer_name: String, help_desk: String = "false") -> void:
 
 
 func vo_test() -> void:
-	Global.voice_line_system.play_voice_line_no_location("tippy_start_shift_1")
+	Global.voice_line_system.play_voice_line("tippy_start_shift_1", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.CALLOUTS)
+
 
 func toggle_freecam() -> void:
+	if Global.camera_mode == Global.CameraMode.CINEMATIC:
+		Console.print_line("Currently in a cinematic, can't toggle.")
+		return
+
 	Events.free_cam_toggled.emit()
-	if Global.free_camera_enabled:
+	if Global.camera_mode == Global.CameraMode.DEBUG_FREE_CAM:
 		Console.print_line("freecam enabled")
 	else:
 		Console.print_line("freecam disabled")
@@ -108,8 +142,11 @@ func toggle_freecam() -> void:
 func set_freecam_speed(speed: String) -> void:
 	Events.free_cam_set_speed.emit(float(speed))
 
+
 func wipe_save() -> void:
 	SaveDataManager.wipe_save()
+	Global.unlocked_items.clear()
+	Global.owned_items.clear()
 	Console.print_line("save wiped")
 
 
@@ -132,7 +169,7 @@ func set_rating(rating: String) -> void:
 	Global.employee_rating = rating as float
 	Console.print_line("setting rating to %s" % rating)
 	if int(rating) > 5.0:
-		Console.print_line("(will be clamped to limit of 5 stars")
+		Console.print_line("(will be clamped to limit of 5 stars)")
 
 
 func end_shift(arg: String = "") -> void:
@@ -153,10 +190,16 @@ func end_shift(arg: String = "") -> void:
 
 
 func set_day(day: String) -> void:
-	var final_day := Global.final_day
+	var final_day: int = Global.final_day
 	if int(day) > final_day:
 		Console.print_error("final day is day %s, can't set day higher than that :p" % final_day)
 		return
+
+	if int(day) > SaveDataManager.save_data.latest_unlocked_day:
+		Console.print_line(
+				"the day you're skipping to isn't unlocked yet, so we'll unlock it first for this save file"
+		)
+		unlock_day(day)
 
 	Global.day = int(day)
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
@@ -170,8 +213,11 @@ func set_speed(param1: String) -> void:
 
 
 func start_shift() -> void:
-	Events.shift_started.emit()
-	Console.print_line("starting shift")
+	if Global.shift_started:
+		Console.print_error("shift already started")
+	else:
+		Events.flipped_open_sign.emit()
+		Console.print_line("starting shift")
 
 
 func give_item(item_id: String) -> void:
@@ -230,14 +276,12 @@ func toggle_timer() -> void:
 
 
 func toggle_unlimited_actives() -> void:
-	ua_enabled = !ua_enabled
+	Global.no_cooldowns = !Global.no_cooldowns
 
-	if ua_enabled:
-		Events.active_item_used.connect(refresh_active_item)
-		Console.print_line("Unlimited Actives enabled")
+	if Global.no_cooldowns:
+		Console.print_line("item cooldowns disabled")
 	else:
-		Events.active_item_used.disconnect(refresh_active_item)
-		Console.print_line("Unlimited Actives disabled")
+		Console.print_line("item cooldowns enabled")
 
 
 func refresh_active_item(item: Item):
@@ -248,3 +292,17 @@ func refresh_active_item(item: Item):
 	await get_tree().create_timer(3, false).timeout
 	item.can_be_used = true
 	Events.items_updated.emit()
+
+
+func time_up() -> void:
+	if not Global.shift_started:
+		start_shift()
+		await Events.shift_started
+
+	if Global.main_scene.get_customers().size() == 0:
+		spawn_customer("")
+		# im sorry but we do have to do this
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+
+	Global.main_scene.game_timer.timeout.emit()
