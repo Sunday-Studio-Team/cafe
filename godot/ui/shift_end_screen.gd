@@ -40,9 +40,9 @@ var reached_bonus_rating: bool = (
 
 func _ready() -> void:
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit())
-	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit())
+	#end_shift_button.pressed.connect(func():Events.end_screen_finished.emit())
 
-	button.pressed.connect(
+	end_shift_button.pressed.connect(
 		func():
 		if Global.day == Global.final_day:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.FINAL_COMIC_SCENE)
@@ -50,17 +50,17 @@ func _ready() -> void:
 			Events.end_screen_finished.emit(),
 	)
 
-	button.mouse_entered.connect(
+	end_shift_button.mouse_entered.connect(
 		func():
 			var t := create_tween().set_parallel()
-			t.tween_property(button, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
-			t.tween_property(button, "offset_transform_rotation", deg_to_rad(-1), 0.1),
+			t.tween_property(end_shift_button, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+			t.tween_property(end_shift_button, "offset_transform_rotation", deg_to_rad(-1), 0.1),
 	)
-	button.mouse_exited.connect(
+	end_shift_button.mouse_exited.connect(
 		func():
 			var t := create_tween().set_parallel()
-			t.tween_property(button, "offset_transform_scale", Vector2.ONE, 0.1)
-			t.tween_property(button, "offset_transform_rotation", deg_to_rad(1), 0.1),
+			t.tween_property(end_shift_button, "offset_transform_scale", Vector2.ONE, 0.1)
+			t.tween_property(end_shift_button, "offset_transform_rotation", deg_to_rad(1), 0.1),
 	)
 	_play_screen()
 
