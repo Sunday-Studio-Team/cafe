@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://whnll38bl5oi"]
+
+[ext_resource type="Texture2D" uid="uid://ba1ks04hah2jt" path="res://sprites/drink_icons/iced_matcha_latte.png" id="2_nt56y"]
+[ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="23_vk3f6"]
+[ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="24_6qde6"]
+[ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="25_tqs7w"]
+[ext_resource type="AudioStream" uid="uid://b36lt7uasbtpp" path="res://audio/captcha/captcha_correct.wav" id="26_8dvyq"]
+[ext_resource type="AudioStream" uid="uid://qm462c3iywm1" path="res://audio/captcha/captcha_wrong.wav" id="27_fxgej"]
+[ext_resource type="AudioStream" uid="uid://bya5mpl7q0qxv" path="res://audio/ice_freezing_frozen_tippy_remake_minigame.wav" id="28_4cqf8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_54a2r"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("23_vk3f6")
+stream_1/stream = ExtResource("24_6qde6")
+stream_2/stream = ExtResource("25_tqs7w")
+
+[node name="DrinkDrop" type="Control" unique_id=503615879]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Drink" type="RigidBody2D" parent="." unique_id=934649099]
+z_index = 3
+position = Vector2(151, 167)
+
+[node name="Sprite2D" type="Sprite2D" parent="Drink" unique_id=2069461199]
+texture = ExtResource("2_nt56y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Drink" unique_id=916051050]
+shape = SubResource("CircleShape2D_54a2r")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -5.0
+bus = &"Sfx"
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="." unique_id=430448945]
+stream = ExtResource("26_8dvyq")
+volume_db = -5.0
+bus = &"Sfx"
+
+[node name="WrongSound" type="AudioStreamPlayer" parent="." unique_id=57096854]
+stream = ExtResource("27_fxgej")
+volume_db = -5.0
+bus = &"Sfx"
+
+[node name="IceFreezingSound" type="AudioStreamPlayer" parent="." unique_id=1079623280]
+stream = ExtResource("28_4cqf8")
+volume_db = -5.0
+bus = &"Sfx"
