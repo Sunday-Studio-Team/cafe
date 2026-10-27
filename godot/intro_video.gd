@@ -14,6 +14,7 @@ var _hold_progress_ratio: float
 var _holding_skip: bool
 var _skipped: bool
 
+
 func _ready() -> void:
 	_prompt_visibility_timer = Timer.new()
 	_prompt_visibility_timer.autostart = false
@@ -32,7 +33,7 @@ func _ready() -> void:
 	_intro_video.finished.connect(_on_video_finished)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_ESCAPE):
 		_show_prompt()
 		_holding_skip = true
@@ -45,7 +46,7 @@ func _process(delta: float) -> void:
 		_hold_progress_ratio -= (1.0 / _hold_drop_duration) * delta
 	_hold_progress_ratio = clamp(_hold_progress_ratio, 0.0, 1.0)
 	_update_skip_progress_bar()
-	
+
 	if _hold_progress_ratio >= 1.0 and not _skipped:
 		_skipped = true
 		_on_video_finished()
@@ -60,6 +61,7 @@ func _show_prompt() -> void:
 
 func _update_skip_progress_bar() -> void:
 	_skip_progress_bar.value = _hold_progress_ratio
+
 
 func _on_video_finished() -> void:
 	_intro_video.stop()

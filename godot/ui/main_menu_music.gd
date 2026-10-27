@@ -2,12 +2,9 @@ extends AudioStreamPlayer
 
 
 func _ready() -> void:
-	# this autoplays unless we're running in editor (cos thatll miss some signals)
-	if OS.has_feature("editor") and not OS.has_feature("editor_start_main_menu"):
-		stop()
-
 	Events.scene_switch_requested.connect(
-		func(scene: SceneSwitcher.GameScene) -> void:
+		# i dont know why this needs 2 parameters when the signal only has 1
+		func(scene: SceneSwitcher.GameScene, _skip_intro: bool = false) -> void:
 			if (
 				scene == SceneSwitcher.GameScene.MAIN_MENU
 				or scene == SceneSwitcher.GameScene.LEVEL_SELECT

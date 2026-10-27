@@ -81,13 +81,17 @@ func _on_play_button_pressed() -> void:
 	Global.day = _day
 	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 
+
 func _on_back_to_main_menu_button_pressed() -> void:
 	if _finished_selection:
 		return
 	_finished_selection = true
 
 	Global.in_level_select_menu = false
-	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+	# NOTE: this 2nd argument is skip_intro - the signal doesnt expect it but
+	# the function in the scene switcher does . . .
+	Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU, true)
+
 
 func _update_prev_next_buttons() -> void:
 	if _day == 1:
