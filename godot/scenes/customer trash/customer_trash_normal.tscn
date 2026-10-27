@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://b2kutc78gmwd1"]
 
-[ext_resource type="Script" uid="uid://dtsyu2epb5p76" path="res://customer_trash.gd" id="1_e16t0"]
-[ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash.png" id="2_i5ewh"]
-[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="3_i5ewh"]
-[ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/Trash Cup.glb" id="4_ruef1"]
-[ext_resource type="Material" uid="uid://clyy5mn7ocsxc" path="res://Assets/Trash minigame/highlight_trash_shader.tres" id="8_wycgu"]
+[ext_resource type="Script" uid="uid://dtsyu2epb5p76" path="res://scripts/customer_trash/customer_trash.gd" id="1_61j41"]
+[ext_resource type="Material" uid="uid://clyy5mn7ocsxc" path="res://Assets/Trash minigame/trash models/shaders/highlight_normal_trash.tres" id="2_i0c6a"]
+[ext_resource type="Texture2D" uid="uid://ds1qfafv8j5yt" path="res://Assets/Trash minigame/trash models/trash.png" id="3_chrfx"]
+[ext_resource type="Script" uid="uid://cku66354bxktd" path="res://interactable.gd" id="4_eifxn"]
+[ext_resource type="PackedScene" uid="uid://boc1mbykh3yvg" path="res://Assets/Trash minigame/trash models/models/Trash_NormalCup.glb" id="5_hvv2f"]
+[ext_resource type="ArrayMesh" uid="uid://dhwytprahyke" path="res://Assets/Trash minigame/trash models/mesh/normal_mesh.tres" id="6_li0ja"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i5ewh"]
 size = Vector3(0.24902344, 0.20874023, 0.23120117)
@@ -442,37 +443,40 @@ curve = SubResource("Curve_d1f4l")
 
 [node name="CustomerTrash" type="RigidBody3D" unique_id=1457473189 node_paths=PackedStringArray("interactable", "trash_cup", "trail", "hint_pop_animated_sprite_3d")]
 collision_layer = 16
-script = ExtResource("1_e16t0")
+script = ExtResource("1_61j41")
 interactable = NodePath("Interactable")
-xray_material = ExtResource("8_wycgu")
+xray_material = ExtResource("2_i0c6a")
 trash_cup = NodePath("Trash Cup/SM_TrashCup")
 activation_distance = 10.0
 trail = NodePath("GPUParticles3D")
 hint_pop_animated_sprite_3d = NodePath("HintPop")
 hint_pop_sprite_frames_uid = &"uid://dfge48qli6len"
+cup_body_surface_index = 2
+model_name = "Normal"
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=248134902]
 visible = false
 billboard = 1
-texture = ExtResource("2_i5ewh")
+texture = ExtResource("3_chrfx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1263651111]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018066406, 0.036743164, 0.004760742)
 shape = SubResource("BoxShape3D_i5ewh")
 
 [node name="Interactable" type="Area3D" parent="." unique_id=1272341867]
-script = ExtResource("3_i5ewh")
+script = ExtResource("4_eifxn")
 display_name = "Pick up trash"
 metadata/_custom_type_script = "uid://cku66354bxktd"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=464175996]
 shape = SubResource("BoxShape3D_g4v7s")
 
-[node name="Trash Cup" parent="." unique_id=1915222076 instance=ExtResource("4_ruef1")]
+[node name="Trash Cup" parent="." unique_id=1915222076 instance=ExtResource("5_hvv2f")]
 transform = Transform3D(-9.227509e-09, -0.2111008, -9.227509e-09, 0, -9.227509e-09, 0.2111008, -0.2111008, 9.227509e-09, 4.0334724e-16, 0.10009057, 0.026606858, 0.024867669)
 
-[node name="SM_TrashCup" parent="Trash Cup" index="0" unique_id=233138013]
-surface_material_override/2 = ExtResource("8_wycgu")
+[node name="SM_TrashCup" parent="Trash Cup" index="0" unique_id=1873577485]
+mesh = ExtResource("6_li0ja")
+surface_material_override/2 = ExtResource("2_i0c6a")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2036556679]
 lifetime = 0.3

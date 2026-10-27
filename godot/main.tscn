@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dvk5lttbyv204" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://b7pu4gc2t3gv6" path="res://machine.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://b2kutc78gmwd1" path="res://customer_trash.tscn" id="3_1yv1y"]
+[ext_resource type="PackedScene" uid="uid://b2kutc78gmwd1" path="res://scenes/customer trash/customer_trash_normal.tscn" id="3_1yv1y"]
 [ext_resource type="PackedScene" uid="uid://cg5fodl1y2je3" path="res://ingredients_bag.tscn" id="3_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://dp7t0dh80ct1r" path="res://customer.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dyvfbu8dt7ifu" path="res://scenes/customer trash/customer_trash_coffee.tscn" id="3_xf6cw"]
 [ext_resource type="PackedScene" uid="uid://c01lyg34g6sxd" path="res://player.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dm7kt8nyip6tb" path="res://customer_help_desk.tscn" id="4_272bh"]
+[ext_resource type="PackedScene" uid="uid://cehxusglh7ybl" path="res://scenes/customer trash/customer_trash_iced_coffee.tscn" id="4_abbrq"]
 [ext_resource type="Script" uid="uid://ccisayhthwpwb" path="res://emails/emails_manager.gd" id="4_qsp4k"]
 [ext_resource type="Script" uid="uid://mf7n2lw6ea0i" path="res://ui/ui.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://nynoy2i8568n" path="res://scenes/customer trash/customer_trash_iced_matcha.tscn" id="5_omtq3"]
 [ext_resource type="Resource" uid="uid://bcwvb2m3l3kdp" path="res://emails/tucker_intro/email_data_day_1_tucker_intro.tres" id="6_gttkg"]
 [ext_resource type="AudioStream" uid="uid://b81yrkbyintns" path="res://audio/money.wav" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dwjqoo54k3ixw" path="res://audio/points_gain.wav" id="8_4c57u"]
@@ -1283,7 +1286,7 @@ _left_area_right_machine = NodePath("Machines/LeftAreaRightMachine")
 customer_help_desk = NodePath("CustomerHelpDesk")
 customer_trash_spawn_timer = NodePath("CustomerSpawnTimer")
 customer_scene = ExtResource("3_h2yge")
-customer_trash_scene = ExtResource("3_1yv1y")
+customer_trash_scenes = Array[PackedScene]([ExtResource("3_1yv1y"), ExtResource("3_xf6cw"), ExtResource("4_abbrq"), ExtResource("5_omtq3")])
 spot_for_customer_entry = NodePath("CustomerEntrySpot")
 customer_leaving_spot = NodePath("CustomerLeavingSpot")
 cafe_front_roller_shutters = NodePath("CafeFrontRollerShutters")
@@ -2467,9 +2470,15 @@ one_shot = true
 wait_time = 20.0
 one_shot = true
 
-[node name="Player" parent="." unique_id=1025923804 node_paths=PackedStringArray("main_room_spawn_point") instance=ExtResource("4_1bvp3")]
+[node name="Player" parent="." unique_id=1025923804 node_paths=PackedStringArray("main_room_spawn_point", "trash_models") instance=ExtResource("4_1bvp3")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 2.2908587, 0, 16.214787)
 main_room_spawn_point = NodePath("SpawnPointForDebugBackRoomSpawn")
+trash_models = {
+"Coffee": NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Coffee Cup"),
+"IcedCoffee": NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash_IcedCoffee"),
+"IcedMatcha": NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash_IcedMatcha"),
+"Normal": NodePath("CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup")
+}
 metadata/_edit_group_ = true
 
 [node name="HoldingItemsCamera" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport" parent_id_path=PackedInt32Array(1025923804, 2063954524) index="0" unique_id=107124541]
@@ -2619,6 +2628,9 @@ material_override = ExtResource("325_pbe4p")
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/ingredientbag/large_ingredient_bag"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Cup"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash Coffee Cup"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash_IcedCoffee"]
+[editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/Trash_IcedMatcha"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel"]
 [editable path="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel"]
