@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bsam3ndhw4n07" path="res://sprites/endshift_ui/first_part/amazing_paper_colored.png" id="2_6ln01"]
 [ext_resource type="AudioStream" uid="uid://cyuqv1naarl63" path="res://audio/win_shift.wav" id="2_g6pkj"]
 [ext_resource type="AudioStream" uid="uid://cugnia44env4m" path="res://audio/lose_shift.wav" id="3_iiu1j"]
-[ext_resource type="AudioStream" uid="uid://26p081wnernw" path="res://audio/bank_gain.wav" id="4_g6pkj"]
 [ext_resource type="FontFile" uid="uid://f12jkge7ui88" path="res://fonts/komika/Komika_display_kaps.ttf" id="4_s5d2k"]
 [ext_resource type="Texture2D" uid="uid://vkfhygnpe56j" path="res://sprites/endshift_ui/first_part/tippy_fail_colored_v2.png" id="5_4pg7j"]
 [ext_resource type="FontFile" uid="uid://cikerrpxvai6v" path="res://fonts/komika/Komika_display_kaps_bold.ttf" id="5_e16oh"]
@@ -12,7 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://v18fmf0njcs8" path="res://audio/pencil scribble.mp3" id="6_13087"]
 [ext_resource type="Texture2D" uid="uid://bsyqh1ej3oxex" path="res://sprites/endshift_ui/first_part/pass_grade_colored_v2.png" id="6_hi220"]
 [ext_resource type="Texture2D" uid="uid://bwy636l6ajv5w" path="res://sprites/endshift_ui/first_part/money_right_colored.png" id="7_nw8o8"]
-[ext_resource type="AudioStream" uid="uid://sslhwirqv67a" path="res://audio/stars.mp3" id="7_xu4ny"]
 [ext_resource type="Texture2D" uid="uid://d2v08e48term0" path="res://sprites/endshift_ui/first_part/tippy_pass_v2.png" id="8_g5mai"]
 [ext_resource type="Texture2D" uid="uid://by7lnyysdhvvw" path="res://sprites/endshift_ui/first_part/money_leftcorner_colored copy.png" id="9_g0eae"]
 [ext_resource type="Texture2D" uid="uid://durkhraw8k71a" path="res://sprites/endshift_ui/first_part/money_center_colored copy.png" id="10_jnbcj"]
@@ -1755,27 +1753,25 @@ script = ExtResource("33_vob8y")
 [node name="WinShiftSound" type="AudioStreamPlayer" parent="." unique_id=1550327974]
 stream = ExtResource("2_g6pkj")
 volume_db = -15.0
+bus = &"Sfx"
 
 [node name="ArriveSound" type="AudioStreamPlayer" parent="." unique_id=1479814443]
 volume_db = -10.0
+bus = &"Sfx"
 
 [node name="LoseShiftSound" type="AudioStreamPlayer" parent="." unique_id=18379381]
 stream = ExtResource("3_iiu1j")
 volume_db = -10.0
-
-[node name="BankGainSound" type="AudioStreamPlayer" parent="." unique_id=78238649]
-stream = ExtResource("4_g6pkj")
+bus = &"Sfx"
 
 [node name="TimeUpSound" type="AudioStreamPlayer" parent="." unique_id=621257515]
 stream = ExtResource("5_iiu1j")
+bus = &"Sfx"
 
 [node name="PencilScribbleSound" type="AudioStreamPlayer" parent="." unique_id=911022996]
 stream = ExtResource("6_13087")
 volume_db = -5.0
-
-[node name="StarsSound" type="AudioStreamPlayer" parent="." unique_id=1833295684]
-stream = ExtResource("7_xu4ny")
-volume_db = -5.0
+bus = &"Sfx"
 
 [node name="WinMusic" type="AudioStreamPlayer" parent="." unique_id=638685281]
 stream = ExtResource("35_bxlob")
@@ -1788,10 +1784,12 @@ volume_db = -5.0
 bus = &"NonDiegeticMusic"
 
 [node name="PhoneFoley" type="AudioStreamPlayer" parent="." unique_id=348150609]
+bus = &"Sfx"
 
 [node name="StarMeterGainSound" type="AudioStreamPlayer" parent="." unique_id=1293191907]
 stream = ExtResource("47_3emyn")
 volume_db = -15.0
+bus = &"Sfx"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1431337349]
 anchors_preset = 15
