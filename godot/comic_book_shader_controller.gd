@@ -14,12 +14,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# normal radius, out of the window so it's not visible
 	var target_radius: float = 3.0
 	
+	# if the existing state is sprinting then set the target radis smaller, so it's visible on the screen
 	if Global.player.is_sprinting() == true:
 		target_radius = shader_range_from_middle
 	
 	var current_radius: float = comic_shader.get_shader_parameter("Radius")
+	# use a lerp to mix it in slowly
 	var new_radius: float = lerp(current_radius,target_radius,clamp(lerp_speed * delta, 0.0, 1.0))
 
 	comic_shader.set_shader_parameter("Radius",new_radius)
