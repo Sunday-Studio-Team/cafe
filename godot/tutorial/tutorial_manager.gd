@@ -38,7 +38,6 @@ extends Node
 var is_in_skippable_cinematic: bool = false
 var skip_part_requested: bool = false
 
-signal intro_video_ended
 
 func _init() -> void:
 	Global.tutorial_manager = self

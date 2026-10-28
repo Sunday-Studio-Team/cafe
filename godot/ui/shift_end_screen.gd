@@ -40,13 +40,35 @@ var reached_bonus_rating: bool = (
 
 func _ready() -> void:
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit())
-	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit())
+	#end_shift_button.pressed.connect(func():Events.end_screen_finished.emit())
 
+	end_shift_button.pressed.connect(
+		func():
+		if Global.day == Global.final_day:
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.FINAL_COMIC_SCENE)
+		else:
+			Events.end_screen_finished.emit(),
+	)
+
+	end_shift_button.mouse_entered.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(end_shift_button, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+			t.tween_property(end_shift_button, "offset_transform_rotation", deg_to_rad(-1), 0.1),
+	)
+	end_shift_button.mouse_exited.connect(
+		func():
+			var t := create_tween().set_parallel()
+			t.tween_property(end_shift_button, "offset_transform_scale", Vector2.ONE, 0.1)
+			t.tween_property(end_shift_button, "offset_transform_rotation", deg_to_rad(1), 0.1),
+	)
+
+	Global.in_end_screen = true
 	_play_screen()
 
 
-func _physics_process(_delta: float) -> void:
-	Global.in_end_screen = visible
+func _exit_tree() -> void:
+	Global.in_end_screen = false
 
 
 func _play_screen() -> void:

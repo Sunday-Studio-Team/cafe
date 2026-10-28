@@ -8,6 +8,7 @@ extends Control
 @export var _hold_duration_to_skip: float = 1.0
 @export var _hold_drop_duration: float = 0.5
 @export var _intro_video: VideoStreamPlayer
+@export var _skip_prompt_bind_label: Label
 
 var _prompt_visibility_timer: Timer
 var _hold_progress_ratio: float
@@ -16,6 +17,8 @@ var _skipped: bool
 
 
 func _ready() -> void:
+	_skip_prompt_bind_label.text = OS.get_keycode_string(SaveDataManager.get_options_data().use_contextual_active_item_action_physical_keycode).to_upper()
+
 	_prompt_visibility_timer = Timer.new()
 	_prompt_visibility_timer.autostart = false
 	_prompt_visibility_timer.one_shot = true
@@ -34,7 +37,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if Input.is_action_pressed("use_item"):
 		_show_prompt()
 		_holding_skip = true
 	else:
