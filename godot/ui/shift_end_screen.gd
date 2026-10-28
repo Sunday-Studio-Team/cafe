@@ -62,7 +62,7 @@ func _ready() -> void:
 			t.tween_property(end_shift_button, "offset_transform_scale", Vector2.ONE, 0.1)
 			t.tween_property(end_shift_button, "offset_transform_rotation", deg_to_rad(1), 0.1),
 	)
-	
+
 	Global.in_end_screen = true
 	_play_screen()
 

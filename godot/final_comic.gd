@@ -13,11 +13,11 @@ func _ready() -> void:
 	next_panel_button.pressed.connect(
 		func():
 		if current_panel_index >= comic_panel_array.size() - 1:
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU)
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_MENU, true)
 		else:
 			_on_button_pressed()
 	)
-	
+
 	next_panel_button.mouse_entered.connect(
 		func():
 			var t := create_tween().set_parallel()
@@ -32,15 +32,16 @@ func _ready() -> void:
 	)
 	_update_comic_panel_image()
 
+
+func _exit_tree() -> void:
+	Global.in_ending_comic = false
+
+
 func _on_button_pressed() -> void:
 	current_panel_index = current_panel_index + 1
 	_update_comic_panel_image()
-	
+
 
 func _update_comic_panel_image() -> void:
-	var loaded_comic_panel = comic_panel_array[current_panel_index]
+	var loaded_comic_panel: Texture2D = comic_panel_array[current_panel_index]
 	comic_panel_2d_sprite_renderer.texture = loaded_comic_panel
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#pass
