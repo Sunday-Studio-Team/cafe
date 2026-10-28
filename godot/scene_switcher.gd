@@ -6,6 +6,7 @@ enum GameScene {
 	LEVEL_SELECT,
 	MAIN_SCENE,
 	END_OF_DAY_DIALOG_SCENE,
+	FINAL_COMIC_SCENE,
 	INTRO_VIDEO,
 }
 
@@ -26,7 +27,8 @@ const TIPPY_LOADING_SWITCHES: Array[StringName] = [&"switch_0_30", &"switch_30_6
 @export var _main_scene_uid: StringName
 @export var _intro_video_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
-## Additional resources to always keep cached for speed.
+@export var _final_comic_scene_uid: StringName
+## Additional resources to always keep cached for speed. 
 @export var _main_sub_resource_uids: Array[StringName]
 
 @export var _cafe_environment_res: Environment
@@ -330,6 +332,8 @@ func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 			return _main_scene_uid
 		SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE:
 			return _end_of_day_dialog_scene_uid
+		SceneSwitcher.GameScene.FINAL_COMIC_SCENE:
+			return _final_comic_scene_uid
 		SceneSwitcher.GameScene.INTRO_VIDEO:
 			return _intro_video_uid
 		_:
