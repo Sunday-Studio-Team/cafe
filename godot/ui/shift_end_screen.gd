@@ -65,6 +65,10 @@ func _ready() -> void:
 	_play_screen()
 
 
+func _physics_process(_delta: float) -> void:
+	Global.in_end_screen = visible
+
+
 func _play_screen() -> void:
 	# Hide all the labels
 	first_part_container.hide()

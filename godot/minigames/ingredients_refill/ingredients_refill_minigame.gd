@@ -52,7 +52,7 @@ var beans_spawned: int = 0
 var gold_beans_spawned := 0
 var bomb_beans_spawned := 0
 const MAX_GOLD = 1
-const MAX_BOMB = 4
+const MAX_BOMB = 2
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 var spawn_trajectory: Vector2
