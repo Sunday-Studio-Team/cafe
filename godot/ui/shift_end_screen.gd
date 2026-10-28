@@ -42,11 +42,12 @@ func _ready() -> void:
 	restart_button.pressed.connect(func():Events.end_screen_finished.emit())
 	end_shift_button.pressed.connect(func():Events.end_screen_finished.emit())
 
+	Global.in_end_screen = true
 	_play_screen()
 
 
-func _physics_process(_delta: float) -> void:
-	Global.in_end_screen = visible
+func _exit_tree() -> void:
+	Global.in_end_screen = false
 
 
 func _play_screen() -> void:
