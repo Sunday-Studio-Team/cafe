@@ -88,7 +88,7 @@ func _ready() -> void:
 	_stored_deferred_options_apply_timer.one_shot = true
 	_stored_deferred_options_apply_timer.wait_time = _deferred_options_apply_timer_wait_time
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_save_and_close_menu()
 		get_viewport().set_input_as_handled()
