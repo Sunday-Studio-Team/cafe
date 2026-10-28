@@ -3,7 +3,7 @@ extends Node2D
 const MOVE_SPEED := 20
 # generally, change the timer in BeanSpawnTimer Node when adjusting this
 # ie make sure NUM_BEANS_TO_SPAWN * wait_time = ~2.0s
-const NUM_BEANS_TO_SPAWN := 16
+const NUM_BEANS_TO_SPAWN := 10
 const MAX_HORIZONTAL_BEAN_FORCE := 800.0
 const MAX_VERTICAL_BEAN_FORCE := 450.0
 
@@ -78,7 +78,7 @@ func _ready() -> void:
 	bean_spawn_timer.timeout.connect(spawn_bean)
 	cup_area.body_entered.connect(catch_bean)
 	animation_player.play("sign_up")
-	bean_spawn_timer.wait_time = float(2) / float(NUM_BEANS_TO_SPAWN)
+	bean_spawn_timer.wait_time = float(2) / float(NUM_BEANS_TO_SPAWN) + 0.05
 	await first_proper_input
 	bean_spawn_timer.start()
 	start_minigame = true
@@ -155,7 +155,7 @@ func spawn_bean() -> void:
 		bean_spawn_timer.stop()
 		bag_shake_tween.kill()
 		bag_shake_sound.stop()
-		await get_tree().create_timer(1.5, false).timeout
+		await get_tree().create_timer(2, false).timeout
 		Global.refill_minigame_accuracy = accuracy
 		var ingredients_to_add = Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
 		print("%s / %s (%s)" % [beans_in_cup, NUM_BEANS_TO_SPAWN - bomb_beans_spawned, NUM_BEANS_TO_SPAWN])
@@ -179,8 +179,8 @@ func spawn_bean() -> void:
 	var chance_needed = 90 - max(0, 70 * (float(float(beans_spawned - 1) / float(NUM_BEANS_TO_SPAWN))))
 
 	if beans_spawned < NUM_BEANS_TO_SPAWN: #bomb bean case
-		if bomb_beans_spawned < MAX_BOMB and (random_int > chance_needed):
-			if gold_beans_spawned < MAX_GOLD and bomb_beans_spawned > 1:
+		if bomb_beans_spawned < MAX_BOMB and (random_int <= chance_needed):
+			if gold_beans_spawned < MAX_GOLD:
 				if randi_range(1, 100) < 33:
 					spawn_gold_bean(gold_bean.duplicate())
 				else:
@@ -197,10 +197,11 @@ func spawn_bean() -> void:
 func spawn_normal_bean(bean: RigidBody2D) -> void:
 	bean = regular_bean_scene.instantiate()
 	#bean.scale= Vector2(2,2) #dont do this lol. rigidbodies will attempt to revert this.
-	bean.gravity_scale = 0.40
+	bean.gravity_scale = 0.4
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
+	spawn_trajectory.x = max(-900, spawn_trajectory.x)
 	bean.apply_impulse(spawn_trajectory)
 	bean.rotation_degrees = randf_range(0, 360)
 	beans_spawned += 1
@@ -228,8 +229,7 @@ func spawn_bomb_bean(bean: RigidBody2D) -> void:
 	bean.global_position = pour_point.global_position
 	bean.add_to_group("beans")
 	add_child(bean)
-	var _horizontal_component = clampf(spawn_trajectory.x + 150, -850.0, -350.0)
-
+	var _horizontal_component = clampf(spawn_trajectory.x - 150, -1050.0, -350.0)
 	bean.apply_impulse(Vector2(_horizontal_component, spawn_trajectory.y)) # applies horizontal impulse
 
 	#bean.apply_impulse(spawn_trajectory)
