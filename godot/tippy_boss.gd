@@ -5,6 +5,7 @@ const GRAB_RANGE: float = 1
 const TIME_IN_JAIL: float = 10
 
 @export var customer_area: Area3D
+@export var storage_room_area: Area3D
 @export var jumpscare_fade_rect: ColorRect
 @export var nav_agent: NavigationAgent3D
 @export var tired_indicator: Label3D
@@ -31,6 +32,7 @@ var woken_up := false
 var state: State = State.IDLE:
 	set = set_state
 var player_in_customer_area: bool = false
+var player_in_storage_room: bool = false
 
 @onready var starting_pos := global_position
 @onready var player: Player = Global.player
@@ -77,6 +79,19 @@ func _ready() -> void:
 			if body == Global.player:
 				player_in_customer_area = false,
 	)
+	
+	storage_room_area.body_entered.connect(
+		func(body: PhysicsBody3D):
+			if body == Global.player:
+				player_in_storage_room = true,
+	)
+	storage_room_area.body_exited.connect(
+		func(body: PhysicsBody3D):
+			if body == Global.player:
+				player_in_storage_room = false
+	## IF THERE IS ANYTHING WRONG WITH THE TIRED TIMER LOOK AT THIS AND player_in_storage_room HANDLING IN physics_process
+				tired_timer.paused = false
+	)
 
 	Events.shift_started.connect(
 		func():
@@ -91,6 +106,10 @@ func _physics_process(delta: float) -> void:
 		if not player_in_customer_area:
 			woken_up = true
 			set_state(State.CHASING)
+	
+	if player_in_storage_room:
+		tired_timer.paused = true
+		return
 
 	if state == State.CHASING:
 		if global_position.distance_to(player.global_position) < GRAB_RANGE:
