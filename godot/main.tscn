@@ -857,6 +857,25 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524, 0.5, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524)
 
+[sub_resource type="Animation" id="Animation_f4177"]
+resource_name = "day_2_training_44_0"
+length = 0.6
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -7.8460236, 1.5924425, 2.7625628, 0.6, 1, -7.7, 1.592, 5.2)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524)
+
 [sub_resource type="Animation" id="Animation_gdxi3"]
 resource_name = "day_2_training_8_0"
 length = 2.0
@@ -1180,6 +1199,7 @@ _data = {
 &"day_2_training_26_0": SubResource("Animation_lyu6w"),
 &"day_2_training_31_0": SubResource("Animation_u1kx1"),
 &"day_2_training_41_0": SubResource("Animation_lwqyd"),
+&"day_2_training_44_0": SubResource("Animation_f4177"),
 &"day_2_training_8_0": SubResource("Animation_gdxi3"),
 &"day_3_training_0_0": SubResource("Animation_sn277"),
 &"day_3_training_14_0": SubResource("Animation_sxhyu"),
@@ -1224,7 +1244,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pmrog"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ovcoh"]
@@ -1235,7 +1255,7 @@ _data = {
 }
 point_count = 7
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_pbe4p"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ppx11"]
@@ -1246,7 +1266,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_8ldsf"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_g3y5b"]
@@ -1257,13 +1277,13 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f4177"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_r4j87"]
 viewport_path = NodePath("DisabledTimerSprite/SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nckbc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_mwre3"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletSubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_043in"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qwf4s"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_shift_start_countdown_sound", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "default_trash_spawn_spot", "day_containers_boxes")]
@@ -2078,13 +2098,13 @@ transform = Transform3D(0.9457384, 0, -0.32492858, 0, 0.9999999, 0, 0.32492858, 
 transform = Transform3D(0.9457384, 0, -0.32492858, 0, 0.9999999, 0, 0.32492858, 0, 0.9457384, 1.799, -0.09, 8.332)
 
 [node name="Day2SatoAtBrokenMachineLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=1469893796]
-transform = Transform3D(0.37145466, 0, -0.9284508, 0, 0.9999999, 0, 0.9284508, 0, 0.37145466, -8.981, -0.09, 1.319)
+transform = Transform3D(0.82412595, 0, 0.5664061, 0, 0.9999999, 0, -0.5664061, 0, 0.82412595, 1.9790764, -0.09, 6.3718185)
 
 [node name="Day3SatoAtCameraLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=320793439]
 transform = Transform3D(0.1946161, 0, 0.98087883, 0, 0.9999999, 0, -0.98087883, 0, 0.1946161, -0.044, -0.09, 5.995)
 
 [node name="Day3SatoAtMachineSpillRotation" type="Marker3D" parent="TutorialLocations" unique_id=989229560]
-transform = Transform3D(-0.8318231, 0, 0.5550399, 0, 0.9999999, 0, -0.5550399, 0, -0.8318231, 2.756, -0.09, 0.375)
+transform = Transform3D(0.99572414, 0, 0.09237054, 0, 0.9999999, 0, -0.09237054, 0, 0.99572414, 2.756, -0.09, 6.019816)
 
 [node name="Day4SatoAtTrashRotation" type="Marker3D" parent="TutorialLocations" unique_id=1875544799]
 transform = Transform3D(-0.0041754534, 0, 0.9999907, 0, 0.9999999, 0, -0.9999907, 0, -0.0041754534, 4.33, -0.09, -1.015)
@@ -2336,7 +2356,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(-0.7809494, 0.083732806, -0.6189538, 5.2153997e-08, 0.9909714, 0.13405971, 0.6245922, 0.104693964, -0.77389956, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.50223297, 0.15690733, -0.85037565, -2.2351713e-08, 0.98339796, 0.18145196, 0.86473083, -0.091131255, 0.4938955, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
@@ -2411,7 +2431,7 @@ curve = SubResource("Curve3D_1yv1y")
 transform = Transform3D(-0.97212535, 0.018857265, -0.23369761, -9.313217e-10, 0.9967597, 0.080429345, 0.23445717, 0.078187525, -0.968976, 1.2787304, 0, -0.6934252)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/LeftAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_pmrog")
+texture = SubResource("ViewportTexture_f4177")
 
 [node name="MiddleSecurityCam" parent="SecurityCams" unique_id=557976636 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.204384, 2.8413355, 5.391653)
@@ -2424,7 +2444,7 @@ curve = SubResource("Curve3D_ovcoh")
 transform = Transform3D(-0.9990931, 0, 0.042376798, 0, 0.99999136, 0, -0.042376723, 0, -0.99909484, 1.3646345, -0.14133549, -0.23825216)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/MiddleSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_pbe4p")
+texture = SubResource("ViewportTexture_nckbc")
 
 [node name="RightAreaSecurityCam" parent="SecurityCams" unique_id=245896451 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.63835084, 2.841, 6.2617683)
@@ -2441,7 +2461,7 @@ curve = SubResource("Curve3D_ppx11")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/RightAreaSecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_8ldsf")
+texture = SubResource("ViewportTexture_043in")
 
 [node name="HallwaySecurityCam" parent="SecurityCams" unique_id=1382585707 instance=ExtResource("12_dg77c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1518054, 2.841, 6.2617683)
@@ -2458,7 +2478,7 @@ curve = SubResource("Curve3D_g3y5b")
 transform = Transform3D(-0.7366683, 0, -0.6762531, 0, 0.9999996, 0, 0.6762532, 0, -0.73666817, 0.9857298, -0.14100003, -1.25632)
 
 [node name="DisabledTimerSprite" parent="SecurityCams/HallwaySecurityCam" index="8" unique_id=1674333602]
-texture = SubResource("ViewportTexture_f4177")
+texture = SubResource("ViewportTexture_r4j87")
 
 [node name="CustomerSpawnTimer" type="Timer" parent="." unique_id=785760779]
 
@@ -2485,10 +2505,10 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2908587, 1.6, 16.214787)
 
 [node name="ScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/BaseModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 875200061) index="1" unique_id=2083645373]
-texture = SubResource("ViewportTexture_nckbc")
+texture = SubResource("ViewportTexture_mwre3")
 
 [node name="AddonScreenSprite3D" parent="Player/CameraController/Camera3D/HoldingItemsSubViewport/HoldingItemsCamera/TabletNormalPositionRotation/TippyTablet3D/Scaler/Model/AddonModel" parent_id_path=PackedInt32Array(1025923804, 1761848473, 1254854682) index="1" unique_id=831430551]
-texture = SubResource("ViewportTexture_043in")
+texture = SubResource("ViewportTexture_qwf4s")
 
 [node name="SpawnPointForDebugBackRoomSpawn" type="Marker3D" parent="Player" unique_id=755128592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
@@ -2596,7 +2616,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700929, -0.00016215755, -0.99992716, 1.02598115e-07, 1, -0.00016214573, 0.99992716, -1.01539825e-08, 0.0005700929, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700928, -0.00016215755, -0.99992704, 1.025981e-07, 1, -0.00016214572, 0.99992704, -1.01539825e-08, 0.0005700928, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
