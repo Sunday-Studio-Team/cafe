@@ -336,6 +336,8 @@
 [ext_resource type="FontFile" uid="uid://ca062kigheqxq" path="res://fonts/action_man/Action_Man_Bold.ttf" id="312_tdfff"]
 [ext_resource type="PackedScene" uid="uid://w26hgj0og5x5" path="res://ui/lucky_charm_ui.tscn" id="313_1h7wj"]
 [ext_resource type="Material" uid="uid://bx5wxwjyspk8n" path="res://customer_material.tres" id="325_pbe4p"]
+[ext_resource type="Shader" uid="uid://ciblwtr8jp6n3" path="res://shaders/comic_book_shader.gdshader" id="328_nckbc"]
+[ext_resource type="Script" uid="uid://da1jmpjk72as8" path="res://comic_book_shader_controller.gd" id="329_043in"]
 [ext_resource type="PackedScene" uid="uid://tv2v3glvo0hk" path="res://Assets/signs/order here.tscn" id="337_lyu6w"]
 [ext_resource type="AudioStream" uid="uid://cipner2ec0gg1" path="res://audio/shift_start_countdown.wav" id="337_wr7jj"]
 [ext_resource type="PackedScene" uid="uid://lbvthxlp62hx" path="res://teleporter.tscn" id="348_bty7c"]
@@ -1281,6 +1283,12 @@ viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubV
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qwf4s"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4177"]
+shader = ExtResource("328_nckbc")
+shader_parameter/Speed = 0.8
+shader_parameter/LineColor = Color(1, 1, 1, 1)
+shader_parameter/Radius = 3.14000014915
 
 [node name="Main" type="Node3D" unique_id=1806237155 node_paths=PackedStringArray("_emails_manager", "_voice_line_system", "_tutorial_manager", "_world_environment", "_left_area_camera", "_middle_camera", "_right_area_camera", "_hallway_camera", "menu", "_right_area_left_machine", "_right_area_right_machine", "_left_area_left_machine", "_left_area_middle_machine", "_left_area_right_machine", "customer_help_desk", "customer_trash_spawn_timer", "spot_for_customer_entry", "customer_leaving_spot", "cafe_front_roller_shutters", "game_timer", "ui", "_trash_can", "_shift_end_screen_container", "_main_scene_loading_overlay", "_player_shift_start_position", "_shift_start_sequence_label", "_shift_start_countdown_sound", "_desk_container", "_whiteboard_container", "_locker_container", "_item_loadout_menu_container", "default_trash_spawn_spot", "day_containers_boxes")]
 process_mode = 1
@@ -2632,6 +2640,20 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.00
 
 [node name="CustomerMaterialInitializerSprite3D" type="Sprite3D" parent="." unique_id=1153710459]
 material_override = ExtResource("325_pbe4p")
+
+[node name="ComicBookShader" type="Node" parent="." unique_id=1262814567]
+
+[node name="ComicBookShader_CanvasLayer" type="CanvasLayer" parent="ComicBookShader" unique_id=2041061376]
+
+[node name="ComicBookShader-ColorRect" type="ColorRect" parent="ComicBookShader/ComicBookShader_CanvasLayer" unique_id=2004578239]
+material = SubResource("ShaderMaterial_f4177")
+offset_right = 1919.0
+offset_bottom = 1078.0
+mouse_filter = 2
+
+[node name="ComicBookShaderController" type="Node" parent="ComicBookShader" unique_id=122771125 node_paths=PackedStringArray("comic_shader_color_rect")]
+script = ExtResource("329_043in")
+comic_shader_color_rect = NodePath("../ComicBookShader_CanvasLayer/ComicBookShader-ColorRect")
 
 [editable path="SecurityCams/LeftAreaSecurityCam"]
 [editable path="SecurityCams/LeftAreaSecurityCam/CameraAimerModel/Model/camera"]
