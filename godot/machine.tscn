@@ -153,6 +153,7 @@
 [ext_resource type="AudioStream" uid="uid://b7lnt4jt1gruo" path="res://audio/machine_jump_thud.wav" id="119_gtm4j"]
 [ext_resource type="Texture2D" uid="uid://bqr01wblpa78c" path="res://sprites/machine_ui/coffee_bar_active/DM_CB_BREWING_0055.png" id="119_shodo"]
 [ext_resource type="Texture2D" uid="uid://c65bsgxpssidv" path="res://sprites/machine_ui/coffee_bar_active/DM_CB_BREWING_0056.png" id="120_4qffw"]
+[ext_resource type="Script" uid="uid://i404cc8nx8ra" path="res://scripts/editor_machine_cam_disabler.gd" id="138_5vek6"]
 [ext_resource type="Environment" uid="uid://cxysvt0hdbown" path="res://machine_environment.tres" id="139_0ief2"]
 [ext_resource type="AudioStream" uid="uid://d2m2kx6wcte3i" path="res://audio/order_done.wav" id="148_0ief2"]
 [ext_resource type="SphereMesh" uid="uid://cc8mu7ui65k8q" path="res://resources/misc_resources/roller_skates_smoke_mesh.tres" id="156_8bmd4"]
@@ -700,7 +701,11 @@ offset_bottom = -65.0
 handle_input_locally = false
 scaling_3d_scale = 0.5
 size = Vector2i(653, 270)
-render_target_update_mode = 4
+render_target_update_mode = 0
+
+[node name="EditorMachineCamDisabler" type="Node" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=1949478116 node_paths=PackedStringArray("_sub_viewport")]
+script = ExtResource("138_5vek6")
+_sub_viewport = NodePath("..")
 
 [node name="LowFpsSubViewportUpdater" type="Node" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport" unique_id=1366731145 node_paths=PackedStringArray("_sub_viewport")]
 script = ExtResource("18_0ne0o")
@@ -749,13 +754,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=1531950467]
+[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=982963143]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1145045213) index="0" unique_id=148677669]
+[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1814460353) index="0" unique_id=531778950]
 mesh = SubResource("ArrayMesh_vaqkk")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1834188427]
