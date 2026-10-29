@@ -403,8 +403,6 @@ func _on_alert_posted(
 	# the lambda is called
 	new_alert_tween.finished.connect(_get_on_alert_tween_finished.bind(new_alert).call())
 
-	new_alert.alert_sprite.play()
-
 
 func play_score_update_sounds(score_type: ScoreType, new_value: float, old_value: float) -> void:
 	# Don't play sounds if (NOT in tutorial AND shift not started)

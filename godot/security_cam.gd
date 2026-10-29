@@ -102,7 +102,7 @@ func _physics_process(_delta: float) -> void:
 					elif Global.making_drink_manually:
 						grace_timer.start()
 						Events.alert_posted.emit(
-							"Caught making drink by hand!",
+							"Caught remaking!",
 							UI.AlertType.BROKE_RULE_REMAKE,
 						)
 						if Global.machine_in_use != null:
