@@ -85,7 +85,6 @@ var employee_rating: float = 0:
 		employee_rating = new_value
 		Events.employee_rating_updated.emit(new_value, previous_employee_rating)
 
-		# (see comment for same lines in above func)
 		await get_tree().process_frame
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
@@ -198,6 +197,7 @@ var no_cooldowns := false
 # For sending the player to the right level in level select after shift completion or level quit
 var should_override_level_select_day: bool = false
 var level_select_day_override: int
+
 
 func _enter_tree() -> void:
 	if OS.has_feature("demo_mode"):

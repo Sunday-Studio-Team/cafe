@@ -86,7 +86,6 @@ func _ready() -> void:
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
-	Global.shift_started = false
 
 	customer_trash_spawn_timer.timeout.connect(attempt_spawn_trash)
 	_all_machines = [
@@ -160,6 +159,7 @@ func _ready() -> void:
 			day_containers_posters[i].visible = (i <= Global.day)
 
 	# we have to set all these manually here so if we reload the scene they'll reset
+	Global.shift_started = false
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -354,7 +354,6 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 
 
 func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
-	
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
