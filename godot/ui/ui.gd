@@ -53,8 +53,6 @@ const ALERT_QUEUE_SIZE := 5
 @export var exploding_bomb_ui: PanelContainer
 @export var throw_trash_ui: PanelContainer
 @export var throw_trash_ui_label: RichTextLabel
-# TODO: import correct rule break icons
-# (currently using the tablet icons instead of the ones made for this alert feed)
 @export var alert_icons: Array[Texture]
 
 var alert_queue: Array[HBoxContainer]
