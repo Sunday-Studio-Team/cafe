@@ -86,7 +86,6 @@ func _ready() -> void:
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
-	Global.shift_started = false
 
 	customer_trash_spawn_timer.timeout.connect(attempt_spawn_trash)
 	_all_machines = [
@@ -160,6 +159,7 @@ func _ready() -> void:
 			day_containers_posters[i].visible = (i <= Global.day)
 
 	# we have to set all these manually here so if we reload the scene they'll reset
+	Global.shift_started = false
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -354,7 +354,6 @@ func _on_help_desk_customer_spawn_timer_timeout() -> void:
 
 
 func spawn_machine_customer(sprite_resource: CustomerSpriteData = null) -> void:
-	
 	var available_machines: Array[Machine] = []
 	for machine in _active_machines:
 		if machine.queued_customers.size() < Stats.current.max_customers_queued_per_machine:
@@ -488,14 +487,14 @@ func spawn_trash() -> void:
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
 		if Global.lucky_charm_check():
-			Events.alert_posted.emit("Too much trash in the store", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Too much trash!", UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit( "-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit( "-%s Too much trash!" % Global.trash_punishment_amount, UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= Global.trash_punishment_amount
 	Events.alert_posted.emit(
-		"Customer dropped some trash...",
-		UI.AlertIconType.CUSTOMER,
+		"Customer dropped trash!",
+		UI.AlertType.TRASH,
 		UI.ALERT_DEFAULT_DURATION,
 		UI.ALERT_COLOR_NEUTRAL,
 	)

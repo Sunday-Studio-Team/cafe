@@ -96,14 +96,14 @@ func _physics_process(_delta: float) -> void:
 						and Global.player.get_last_motion() != Vector3.ZERO
 					):
 						grace_timer.start()
-						Events.alert_posted.emit("Caught running!", UI.AlertIconType.RULE_BREAK)
+						Events.alert_posted.emit("Caught running!", UI.AlertType.BROKE_RULE_RUNNING)
 						apply_slow = true
 						Global.tutorial_day_3_camera_stunned_player = true
 					elif Global.making_drink_manually:
 						grace_timer.start()
 						Events.alert_posted.emit(
-							"Caught making drink by hand!",
-							UI.AlertIconType.RULE_BREAK,
+							"Caught remaking!",
+							UI.AlertType.BROKE_RULE_REMAKE,
 						)
 						if Global.machine_in_use != null:
 							Global.machine_in_use.blast_player_from_using_machine()
