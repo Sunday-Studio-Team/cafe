@@ -33,7 +33,7 @@ signal money_updated(new_value: float, old_value: float)
 signal employee_rating_updated(new_value: float, old_value: float)
 signal alert_posted(
 	message: String,
-	alert_icon_type: UI.AlertIconType,
+	alert_icon_type: UI.AlertType,
 	alert_time_to_live: float,
 	color: Color,
 )
