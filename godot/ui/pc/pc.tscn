@@ -13,7 +13,11 @@
 [ext_resource type="Theme" uid="uid://uv4g7m7luum2" path="res://resources/themes/exit_button.tres" id="8_4xb7n"]
 [ext_resource type="AudioStream" uid="uid://ddm3c0suy770q" path="res://audio/mouse_click/mouse_click_1.wav" id="13_22wjn"]
 [ext_resource type="AudioStream" uid="uid://cgsdgp54iqma8" path="res://audio/mouse_click/mouse_click_2.wav" id="14_vd71g"]
+[ext_resource type="AudioStream" uid="uid://cef27dqr2nujb" path="res://audio/pc_interact/pc_interact_1.wav" id="15_bh3q2"]
 [ext_resource type="AudioStream" uid="uid://bch5lsrdlgwql" path="res://audio/mouse_click/mouse_click_3.wav" id="15_kjli4"]
+[ext_resource type="AudioStream" uid="uid://p2n688bun0lm" path="res://audio/pc_interact/pc_interact_2.wav" id="16_r8v63"]
+[ext_resource type="AudioStream" uid="uid://s2ykdqbu6v8w" path="res://audio/pc_interact/pc_interact_3.wav" id="17_l8jou"]
+[ext_resource type="AudioStream" uid="uid://cb5ftpmrxnpuo" path="res://audio/pc_interact/pc_interact_4.wav" id="18_mwvkm"]
 
 [sub_resource type="Theme" id="Theme_4xb7n"]
 default_font = ExtResource("1_0qe70")
@@ -66,7 +70,14 @@ stream_0/stream = ExtResource("13_22wjn")
 stream_1/stream = ExtResource("14_vd71g")
 stream_2/stream = ExtResource("15_kjli4")
 
-[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "exit_button", "screen_content_container", "unread_label", "click_sound")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+streams_count = 4
+stream_0/stream = ExtResource("15_bh3q2")
+stream_1/stream = ExtResource("16_r8v63")
+stream_2/stream = ExtResource("17_l8jou")
+stream_3/stream = ExtResource("18_mwvkm")
+
+[node name="PC" type="Control" unique_id=303240417 node_paths=PackedStringArray("email_button", "shop_button", "email_app", "exit_button", "screen_content_container", "unread_label", "click_sound", "interact_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,6 +94,7 @@ exit_button = NodePath("Exit")
 screen_content_container = NodePath("ScreenContentContainer")
 unread_label = NodePath("ScreenContentContainer/Apps/Email/UnreadCount")
 click_sound = NodePath("ClickSound")
+interact_sound = NodePath("InteractSound")
 
 [node name="BorderGray" type="Panel" parent="." unique_id=1670875515]
 z_index = -1
@@ -234,4 +246,8 @@ text = "EXIT"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1708556159]
 stream = SubResource("AudioStreamRandomizer_bh3q2")
+volume_db = -5.0
+
+[node name="InteractSound" type="AudioStreamPlayer" parent="." unique_id=1077013255]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -5.0

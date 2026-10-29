@@ -10,12 +10,14 @@ extends Control
 @export var ui: CanvasLayer
 @export var unread_label: Label
 @export var click_sound: AudioStreamPlayer
+@export var interact_sound: AudioStreamPlayer
+
 var new_shop_items := true
 
 
 func _ready() -> void:
 	Global.pc_ui = self
-	
+
 	email_button.pressed.connect(_on_email_button_pressed)
 	shop_button.pressed.connect(_on_shop_button_pressed)
 	exit_button.pressed.connect(exit)
@@ -67,6 +69,7 @@ func _unhandled_input(input_event: InputEvent) -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
+		interact_sound.play()
 		screen_content_container.offset_transform_scale.y = 0
 		var t := create_tween()
 		t.tween_property(self, "modulate", Color.WHITE, 0.25).from(Color.TRANSPARENT)
@@ -78,13 +81,13 @@ func _process(_delta: float) -> void:
 	if visible:
 		exit_button.text = "[%s]\nEXIT" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
 
-		
+
 func exit() -> void:
 	var t := create_tween()
 	t.tween_property(screen_content_container, "offset_transform_scale:y", 0, 0.2)
 	t.tween_property(self, "modulate", Color.TRANSPARENT, 0.25)
 	await t.finished
-	
+
 	email_app.hide()
 	Global.desk.pc_interaction_camera_exit_transition()
 	Events.pc_state_change.emit(false)
