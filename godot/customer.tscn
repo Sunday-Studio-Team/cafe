@@ -86,6 +86,9 @@ shape = SubResource("CapsuleShape3D_vn1tu")
 
 [node name="CustomerDissatisfactionVFX" type="AnimatedSprite3D" parent="." unique_id=1224708346]
 transform = Transform3D(0.962975, 0.2695907, 0, -0.2695907, 0.962975, 0, 0, 0, 1, -0.52733636, 1.5361165, 0)
-visible = false
 pixel_size = 0.002
+billboard = 1
+no_depth_test = true
 sprite_frames = ExtResource("7_0rcyg")
+frame = 24
+frame_progress = 1.0
