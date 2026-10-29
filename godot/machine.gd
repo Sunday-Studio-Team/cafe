@@ -314,6 +314,7 @@ func check_for_stepping_in_spill() -> void:
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
 			Events.alert_posted.emit("-%s Customer stood in spill!" % rating_loss, UI.AlertType.CUSTOMER_STEPPED_IN_SPILL, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			customer.play_spill_dissatisfaction_vfx()
 			Global.employee_rating -= rating_loss
 
 
@@ -722,6 +723,8 @@ func clean_up_spill() -> void:
 	spill_on_floor = false
 	spill_clean_sound.play()
 	spill_clean_particles.restart()
+	if is_instance_valid(customer):
+		customer.hide_spill_dissatisfaction_vfx()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
 	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertType.SPILL_CLEANED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
