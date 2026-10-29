@@ -1,7 +1,7 @@
 extends MarginContainer
 
-const FIRST_DAY_WITH_REMAKE_RULE: int = 3
-const FIRST_DAY_WITH_RUNNING_RULE: int = 4
+const FIRST_DAY_WITH_REMAKE_RULE: int = 4
+const FIRST_DAY_WITH_RUNNING_RULE: int = 3
 const RED_COLOR: Color = Color("6d0000")
 const GREEN_COLOR: Color = Color("225619")
 
