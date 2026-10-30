@@ -734,33 +734,18 @@ INGREDIENTS !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GetIngredientsPrompt" type="Control" parent="." unique_id=1778940689]
+[node name="GetIngredientsPrompt" type="MarginContainer" parent="." unique_id=369104178]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="ColorRect" type="ColorRect" parent="GetIngredientsPrompt" unique_id=1488763540]
-layout_mode = 0
-offset_left = -586.0
-offset_top = -783.0
-offset_right = 586.0
-offset_bottom = 787.0
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
 color = Color(0, 0, 0, 0.5568628)
 
 [node name="Label" type="TextureRect" parent="GetIngredientsPrompt" unique_id=692469223]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -459.0
-offset_top = -361.0
-offset_right = 436.5161
-offset_bottom = 846.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 texture = ExtResource("33_il7ix")
-expand_mode = 1
+expand_mode = 5
 stretch_mode = 5
