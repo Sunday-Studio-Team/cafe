@@ -2172,7 +2172,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057009445, -0.00016215755, -0.99992985, 1.0259839e-07, 1, -0.00016214617, 0.99992985, -1.01539825e-08, 0.00057009445, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009445, -0.00016215755, -0.9999299, 1.0259839e-07, 1, -0.00016214619, 0.9999299, -1.01539825e-08, 0.00057009445, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -2629,10 +2629,10 @@ mesh = SubResource("ArrayMesh_rmllg")
 [node name="glass window" parent="CustomerArea/FrontWindowAndDoor" unique_id=1259450021 instance=ExtResource("20_ala11")]
 transform = Transform3D(1.7429196, 0, 0, 0, 1.5229928, 0, 0, 0, 1.5229928, -0.8279717, -0.07204573, 0.066066265)
 
-[node name="Window_glass_0" parent="CustomerArea/FrontWindowAndDoor/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 738625875) index="2" unique_id=286321655]
+[node name="Window_glass_0" parent="CustomerArea/FrontWindowAndDoor/glass window/Sketchfab_model/Windows_fbx/RootNode/Window" parent_id_path=PackedInt32Array(1259450021, 2049998051) index="2" unique_id=1124025184]
 mesh = SubResource("ArrayMesh_dk42n")
 
-[node name="Window2_glass_0" parent="CustomerArea/FrontWindowAndDoor/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 573813721) index="2" unique_id=459020367]
+[node name="Window2_glass_0" parent="CustomerArea/FrontWindowAndDoor/glass window/Sketchfab_model/Windows_fbx/RootNode/Window2" parent_id_path=PackedInt32Array(1259450021, 1672089265) index="2" unique_id=1569560385]
 transform = Transform3D(1, 0, 0, 0, 1.0000002, -1.4210855e-14, 0, 1.4210855e-14, 1.0000002, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4dwmn")
 
@@ -2715,11 +2715,11 @@ shape = SubResource("CapsuleShape3D_xrivr")
 [node name="ATMTIPPY" parent="CustomerArea" unique_id=862674870 instance=ExtResource("109_1wuav")]
 transform = Transform3D(-0.029132022, 0, 0.73432875, 0, 0.7349064, 0, -0.73432875, 0, -0.029132022, 7.783643, 0.7127082, -3.9112139)
 
-[node name="Machine" parent="CustomerArea/ATMTIPPY" index="0" unique_id=462870723]
+[node name="Machine" parent="CustomerArea/ATMTIPPY" index="0" unique_id=1430655640]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.9999999, 0, 0, 0, 0.99999994, -0.0031757355, 0, 0.08005524)
 mesh = SubResource("ArrayMesh_7uylh")
 
-[node name="Tippyonmachine" parent="CustomerArea/ATMTIPPY" index="1" unique_id=1222628975]
+[node name="Tippyonmachine" parent="CustomerArea/ATMTIPPY" index="1" unique_id=1132128901]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.99999976, 0, 0, 0, 0.9999999, -0.067008495, 0.02496624, -0.10198307)
 mesh = SubResource("ArrayMesh_dtddm")
 
@@ -3044,7 +3044,7 @@ transform = Transform3D(0.704413, 0, -3.7252903e-09, 0, 0.70441294, 0, 3.7252903
 [node name="Locker tippy15" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=1479455124 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.70288014, 0, -0.046447296, 0, 0.704413, 0, 0.046447296, 0, -0.70288014, -13.254676, 0.082505345, -10.412188)
 
-[node name="Object001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy15" index="1" unique_id=943283406]
+[node name="Object001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy15" index="1" unique_id=302450401]
 transform = Transform3D(0.16694199, 0, -0.98596674, 0, 1, 0, 0.98596674, 0, 0.16694199, -0.8491564, 0, -0.05727005)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy15/Object001" index="0" unique_id=378936759]
@@ -3068,13 +3068,13 @@ transform = Transform3D(0.046447203, 0, -0.7028801, 0, 0.704413, 0, 0.7028801, 0
 [node name="Locker tippy10" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=2077010906 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(0.046447203, 0, -0.7028801, 0, 0.704413, 0, 0.7028801, 0, 0.046447203, -4.166175, 0.082505584, 0.94066954)
 
-[node name="Object001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy10" index="1" unique_id=943283406]
+[node name="Object001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy10" index="1" unique_id=302450401]
 transform = Transform3D(0.848082, 0, -0.52986556, 0, 1.0000004, 0, 0.52986556, 0, 0.848082, -0.29656458, 0, 0.15100712)
 
 [node name="Locker tippy11" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=1597140254 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.6351702, 0, 0.30455986, 0, 0.70441306, 0, -0.30455986, 0, -0.6351702, -12.606583, 0.082505584, -2.782947)
 
-[node name="Object001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy11" index="1" unique_id=943283406]
+[node name="Object001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy11" index="1" unique_id=302450401]
 transform = Transform3D(0.8418917, 0, -0.5396465, 0, 1.0000001, 0, 0.5396465, 0, 0.8418917, -0.2924776, 0, 0.16479063)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Locker tippy11/Object001" index="0" unique_id=323601593]
@@ -3092,7 +3092,7 @@ transform = Transform3D(0.046447203, 0, -0.7028801, 0, 0.704413, 0, 0.7028801, 0
 [node name="LockersA_Rust" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=1904828024 instance=ExtResource("34_on62l")]
 transform = Transform3D(0.59869426, 0, 0.0395625, 0, 0.6, 0, -0.0395625, 0, 0.59869426, 5.0363235, -0.21681666, -1.3299856)
 
-[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust" index="0" unique_id=1160233471]
+[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust" index="0" unique_id=1982730095]
 transform = Transform3D(0.00064944936, 0, -0.020932332, 0, 0.020942401, 0, 0.020932332, 0, 0.00064944936, -4.6476126, 2.2737758, 2.5701861)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust/Cube_001" index="0" unique_id=209766665]
@@ -3101,7 +3101,7 @@ transform = Transform3D(0.00064944936, 0, -0.020932332, 0, 0.020942401, 0, 0.020
 transform = Transform3D(1.0000011, 0, 1.5832484e-07, 0, 1.000009, 0, -1.5832484e-07, 0, 1.0000011, 2.7323303, -1.2695923, -1.4686279)
 shape = SubResource("BoxShape3D_rjm56")
 
-[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust" index="1" unique_id=626560567]
+[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust" index="1" unique_id=1370135702]
 transform = Transform3D(0.007851946, 0, -0.019414708, 0, 0.020942401, 0, 0.019414708, 0, 0.007851946, -13.184107, 2.1860259, 2.00629)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_Rust/small locker top door" index="0" unique_id=56516835]
@@ -3113,7 +3113,7 @@ shape = SubResource("BoxShape3D_km6jg")
 [node name="LockersA_NoRust" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=2052049151 instance=ExtResource("35_yftd0")]
 transform = Transform3D(0.53882486, 0, 0.035606254, 0, 0.54, 0, -0.035606254, 0, 0.53882486, -12.9165325, 0.08200267, -7.3728104)
 
-[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust" index="0" unique_id=820743332]
+[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust" index="0" unique_id=1930874845]
 transform = Transform3D(-0.022511099, 0, -0.004717062, 0, 0.023000002, 0, 0.004717062, 0, -0.022511099, -0.2505083, 1.9938229, 4.402646)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust/Cube_001" index="0" unique_id=610823262]
@@ -3122,7 +3122,7 @@ transform = Transform3D(-0.022511099, 0, -0.004717062, 0, 0.023000002, 0, 0.0047
 transform = Transform3D(1.0000011, 0, 1.5832484e-07, 0, 1.000009, 0, -1.5832484e-07, 0, 1.0000011, 2.7323303, -1.2695923, -1.4686279)
 shape = SubResource("BoxShape3D_gu4va")
 
-[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust" index="1" unique_id=1594707850]
+[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust" index="1" unique_id=105298701]
 transform = Transform3D(-0.020257285, 0, 0.005312879, 0, 0.020942403, 0, -0.005312879, 0, -0.020257285, -0.19196892, 1.8236003, 5.8628607)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersA_NoRust/small locker top door" index="0" unique_id=1108774110]
@@ -3134,7 +3134,7 @@ shape = SubResource("BoxShape3D_vt2u6")
 [node name="Lockers_Stickers" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=592483655 instance=ExtResource("36_aslp2")]
 transform = Transform3D(0.59869426, 0, 0.0395625, 0, 0.6, 0, -0.0395625, 0, 0.59869426, 4.0038176, -0.27138066, -4.2792406)
 
-[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers" index="0" unique_id=1303562380]
+[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers" index="0" unique_id=1421822358]
 transform = Transform3D(0.020648377, 0, 0.0034969565, 0, 0.020942401, 0, -0.0034969565, 0, 0.020648377, 3.0308313, 2.378756, -0.40779078)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers/Cube_001" index="0" unique_id=168141189]
@@ -3143,7 +3143,7 @@ transform = Transform3D(0.020648377, 0, 0.0034969565, 0, 0.020942401, 0, -0.0034
 transform = Transform3D(0.99999255, 0, 1.7718412e-07, 0, 0.9999992, 0, -1.7718412e-07, 0, 0.99999255, 2.7323914, 0, -1.4686279)
 shape = SubResource("BoxShape3D_r5yh0")
 
-[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers" index="1" unique_id=1479736771]
+[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers" index="1" unique_id=1417534018]
 transform = Transform3D(0.020667076, 0, -0.0033846577, 0, 0.020942401, 0, 0.0033846577, 0, 0.020667076, 3.4424791, 2.38597, 5.9329615)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers/small locker top door" index="0" unique_id=1713699529]
@@ -3155,7 +3155,7 @@ shape = SubResource("BoxShape3D_08r2t")
 [node name="Lockers_Stickers2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=685792332 instance=ExtResource("36_aslp2")]
 transform = Transform3D(0.59869426, 0, 0.0395625, 0, 0.6, 0, -0.0395625, 0, 0.59869426, 4.0038176, -0.27138066, -4.2792406)
 
-[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers2" index="0" unique_id=1303562380]
+[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers2" index="0" unique_id=1421822358]
 transform = Transform3D(-5.2844825e-05, 0, -0.020942327, 0, 0.020942401, 0, 0.020942327, 0, -5.2844825e-05, -4.6884136, 2.378756, 7.6371613)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers2/Cube_001" index="0" unique_id=1400135687]
@@ -3164,7 +3164,7 @@ transform = Transform3D(-5.2844825e-05, 0, -0.020942327, 0, 0.020942401, 0, 0.02
 transform = Transform3D(0.99999255, 0, 1.7718412e-07, 0, 0.9999992, 0, -1.7718412e-07, 0, 0.99999255, 2.7323914, 0, -1.4686279)
 shape = SubResource("BoxShape3D_wi6ju")
 
-[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers2" index="1" unique_id=1479736771]
+[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Lockers_Stickers2" index="1" unique_id=1417534018]
 transform = Transform3D(0.020667076, 0, -0.0033846577, 0, 0.020942401, 0, 0.0033846577, 0, 0.020667076, 3.4424791, 2.38597, 5.9329615)
 visible = false
 
@@ -3177,11 +3177,11 @@ shape = SubResource("BoxShape3D_o82dc")
 [node name="LockersB_Rust" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=890060368 instance=ExtResource("37_1wuav")]
 transform = Transform3D(0.29190248, 0, -0.5807693, 0, 0.65, 0, 0.5807693, 0, 0.29190248, 2.4378848, -0.27702522, 0.15942001)
 
-[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersB_Rust" index="0" unique_id=561863480]
+[node name="Cube_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersB_Rust" index="0" unique_id=1123256374]
 transform = Transform3D(0.018031843, 0, -0.0059877196, 0, 0.019000003, 0, 0.0059877196, 0, 0.018031843, 0.2101841, 2.1929722, 0.19172478)
 visible = false
 
-[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersB_Rust" index="1" unique_id=1952733644]
+[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersB_Rust" index="1" unique_id=617512795]
 transform = Transform3D(0.018345285, 0, -0.010101235, 0, 0.020942401, 0, 0.010101235, 0, 0.018345285, 1.4389896, 2.3644006, -2.0953903)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/LockersB_Rust/small locker top door" index="0" unique_id=594035042]
@@ -3196,10 +3196,10 @@ transform = Transform3D(0.73967177, 0, -0.67296785, 0, 1, 0, 0.67296785, 0, 0.73
 [node name="Small Lockers6" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=215484942 instance=ExtResource("33_kmdca")]
 transform = Transform3D(-0.9598876, 0, -0.28038514, 0, 1, 0, 0.28038514, 0, -0.9598876, -12.847857, 0, -6.6501884)
 
-[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Small Lockers6" index="3" unique_id=179212947]
+[node name="small locker top door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Small Lockers6" index="3" unique_id=1359222888]
 transform = Transform3D(0.022136647, 0, 0.012455092, 0, 0.025400003, 0, -0.012455092, 0, 0.022136647, -0.035063267, 1.1271214, 0.056199074)
 
-[node name="small locker bottom door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Small Lockers6" index="5" unique_id=1196210673]
+[node name="small locker bottom door" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers/Small Lockers6" index="5" unique_id=1339879166]
 transform = Transform3D(0.008092372, 0, 0.008960188, 0, 0.012073585, 0, -0.008960188, 0, 0.008092372, -0.3655882, 0.11363543, 0.09563017)
 
 [node name="Small Lockers7" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Lockers" unique_id=1688744581 instance=ExtResource("33_kmdca")]
@@ -3208,10 +3208,10 @@ transform = Transform3D(-0.12609927, 0, 0.99201775, 0, 1, 0, -0.99201775, 0, -0.
 [node name="Employee Area Cleaning Supplies" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=52950481 instance=ExtResource("93_g2jch")]
 transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, -7.6216946, 0.050841436, -0.30698013)
 
-[node name="Bucket_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="1" unique_id=969069515]
+[node name="Bucket_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="1" unique_id=1737464044]
 transform = Transform3D(0.9535781, 0, -0.30114585, 0, 1, 0, 0.30114585, 0, 0.9535781, -0.5092075, 0, 0.061173916)
 
-[node name="Bucket_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="2" unique_id=2116270073]
+[node name="Bucket_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="2" unique_id=810098967]
 transform = Transform3D(0.48185706, 0, -0.8762497, 0, 1, 0, 0.8762497, 0, 0.48185706, -1.0759714, 0, 0.08014822)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies/Bucket_1" index="0" unique_id=1260553967]
@@ -3221,28 +3221,28 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, 0, -1.1921193e-07, 0, 1, 0, 1.1921193e-07, 0, 1, 0.11346245, 0.78729194, -0.6018542)
 shape = SubResource("BoxShape3D_p5vdn")
 
-[node name="Detergent_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="3" unique_id=1306863462]
+[node name="Detergent_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="3" unique_id=1592731825]
 transform = Transform3D(0.1126768, 0, 0.9936316, 0, 1, 0, -0.9936316, 0, 0.1126768, -0.9348922, 1.2364734, -0.59479237)
 
-[node name="Detergent_3" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="4" unique_id=1845363236]
+[node name="Detergent_3" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="4" unique_id=661367031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72582316, 0.525062, -0.29288912)
 
-[node name="Detergent_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="5" unique_id=1905189312]
+[node name="Detergent_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="5" unique_id=1961455476]
 transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -0.6784649, 1.1143812, -0.4182458)
 
-[node name="Cleaning supplies" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="6" unique_id=922560421]
+[node name="Cleaning supplies" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="6" unique_id=1557901310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9265523, 1.1119231, -0.5757928)
 
-[node name="Mop" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="7" unique_id=728818618]
+[node name="Mop" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies" index="7" unique_id=709847515]
 transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, 0.24010563, 0, -0.22191906)
 
 [node name="Employee Area Cleaning Supplies3" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=895307785 instance=ExtResource("93_g2jch")]
 transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, -11.081405, 0.050841436, -1.5335846)
 
-[node name="Bucket_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="1" unique_id=969069515]
+[node name="Bucket_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="1" unique_id=1737464044]
 transform = Transform3D(0.9535781, 0, -0.3011458, 0, 1, 0, 0.3011458, 0, 0.9535781, -1.0504553, -0.0016558617, 0.49427414)
 
-[node name="Bucket_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="2" unique_id=2116270073]
+[node name="Bucket_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="2" unique_id=810098967]
 transform = Transform3D(0.48185703, 0, -0.8762497, 0, 1, 0, 0.8762497, 0, 0.48185703, -0.20249653, 0, 0.20225716)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3/Bucket_1" index="0" unique_id=1344166551]
@@ -3251,19 +3251,19 @@ transform = Transform3D(0.48185703, 0, -0.8762497, 0, 1, 0, 0.8762497, 0, 0.4818
 transform = Transform3D(1, 1.4016567e-07, 0, -1.4016574e-07, 1, -9.05282e-07, 0, 9.05282e-07, 1, 0.009097099, 0.15172505, 0.0012226105)
 shape = SubResource("BoxShape3D_w0uga")
 
-[node name="Detergent_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="3" unique_id=1306863462]
+[node name="Detergent_2" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="3" unique_id=1592731825]
 transform = Transform3D(0.11267668, 0, 0.99363154, 0, 1, 0, -0.99363154, 0, 0.11267668, -0.2449174, 0.016454771, 0.15647364)
 
-[node name="Detergent_3" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="4" unique_id=1845363236]
+[node name="Detergent_3" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="4" unique_id=661367031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.72582364, 0.82017463, -0.29289007)
 
-[node name="Detergent_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="5" unique_id=1905189312]
+[node name="Detergent_1" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="5" unique_id=1961455476]
 transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -0.6784644, 0.80905753, -0.41824722)
 
-[node name="Cleaning supplies" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="6" unique_id=922560421]
+[node name="Cleaning supplies" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="6" unique_id=1557901310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2181535, 0.60926867, 0.8747368)
 
-[node name="Mop" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="7" unique_id=728818618]
+[node name="Mop" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3" index="7" unique_id=709847515]
 transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, 0.24010563, 0, -0.22191906)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/Employee Area Cleaning Supplies3/Mop" index="0" unique_id=1360022863]
@@ -3288,7 +3288,7 @@ transform = Transform3D(0.87451714, 0.11689636, -1.6734824, -0.0811176, 1.887962
 [node name="PSX Storage Shelves Cardboard Boxes" parent="EmployeeAreaNavigationRegion3D/EmployeeArea" unique_id=836022883 instance=ExtResource("71_a4lwu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.118301, 0, 5.88344)
 
-[node name="Cardboard_box_01_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 1420861526) index="0" unique_id=577258025]
+[node name="Cardboard_box_01_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 1516693247) index="0" unique_id=2004558999]
 transform = Transform3D(-0.64107496, -0.7674783, -2.7447166e-07, 0.7674783, -0.64107496, -5.8689415e-07, 2.7447166e-07, -5.8689415e-07, 1, 1.9024861, 3.8909721, 0.055455238)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01/Cardboard_box_01_Storage_Shelves_0" index="0" unique_id=1235039027]
@@ -3298,7 +3298,7 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, -4.768372e-07, 5.4759073e-07, 4.7683716e-07, 1, 8.0091155e-08, -5.475908e-07, -8.009089e-08, 1, 0.030125618, 0.0020685196, 0.013269931)
 shape = SubResource("BoxShape3D_tfpme")
 
-[node name="Cardboard_box_01_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 1420861526) index="1" unique_id=1428772810]
+[node name="Cardboard_box_01_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_01" parent_id_path=PackedInt32Array(836022883, 1516693247) index="1" unique_id=1428772810]
 transform = Transform3D(-0.9539966, 0.2998175, 1.07223116e-07, -0.29981756, -0.95399654, -6.9880366e-07, -1.0722315e-07, -6.9880366e-07, 1, 0.19560862, 8.295387, 0.05545667)
 mesh = SubResource("ArrayMesh_omxm3")
 
@@ -3308,7 +3308,7 @@ mesh = SubResource("ArrayMesh_omxm3")
 transform = Transform3D(1, -1.4901161e-07, 6.556302e-07, 0, 1, 0, -6.556302e-07, -4.9169557e-12, 1, -0.01269722, -0.055358887, 0)
 shape = SubResource("BoxShape3D_7ae3m")
 
-[node name="Cardboard_box_02_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 938473025) index="0" unique_id=1521920643]
+[node name="Cardboard_box_02_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 2003393913) index="0" unique_id=966847709]
 transform = Transform3D(0.039124183, 0.9992343, 3.5735405e-07, -0.9992343, 0.039124187, -3.4363597e-07, -3.5735405e-07, -3.4363606e-07, 1, 0.8013885, 5.534722, 0.042485207)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02/Cardboard_box_02_Storage_Shelves_0" index="0" unique_id=1999769467]
@@ -3318,7 +3318,7 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, -4.768372e-07, 5.4759073e-07, 4.7683716e-07, 1, 8.0091155e-08, -5.475908e-07, -8.009089e-08, 1, 0.030125618, 0.0020685196, 0.013269931)
 shape = SubResource("BoxShape3D_tsygs")
 
-[node name="Cardboard_box_02_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 938473025) index="1" unique_id=1690710154]
+[node name="Cardboard_box_02_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_02" parent_id_path=PackedInt32Array(836022883, 2003393913) index="1" unique_id=1690710154]
 transform = Transform3D(0.9385944, 0.3450223, 1.2338955e-07, -0.3450223, 0.93859446, -2.1960375e-08, -1.2338957e-07, -2.196063e-08, 1, -3.6323795, 9.918352, 0.042486668)
 mesh = SubResource("ArrayMesh_kmdca")
 
@@ -3328,22 +3328,22 @@ mesh = SubResource("ArrayMesh_kmdca")
 transform = Transform3D(1, 0, 6.556272e-07, 0, 1, 9.2867936e-12, -6.556302e-07, -1.080025e-11, 1, 0.031863213, 0.04879713, 0.022338629)
 shape = SubResource("BoxShape3D_3662s")
 
-[node name="Cardboard_box_03_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 475696099) index="0" unique_id=405708612]
+[node name="Cardboard_box_03_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 162675831) index="0" unique_id=923166724]
 transform = Transform3D(0.70129263, -0.7128735, -2.5494344e-07, 0.7128735, 0.70129263, -1.06826036e-07, 2.5494344e-07, -1.06826036e-07, 1, -0.7213445, 3.24362, 1.1622906e-06)
 
-[node name="Cardboard_box_03_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 475696099) index="1" unique_id=141808257]
+[node name="Cardboard_box_03_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 162675831) index="1" unique_id=141808257]
 transform = Transform3D(0.28142878, -0.9595821, -3.4317333e-07, 0.9595821, 0.2814288, -2.5698102e-07, 3.4317327e-07, -2.5698105e-07, 1, -0.7697568, 3.1488047, 0.60323465)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 475696099) index="2" unique_id=1458681459]
+[node name="Cardboard_box_03_Storage_Shelves_2" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 162675831) index="2" unique_id=1458681459]
 transform = Transform3D(0.40185183, -0.91570467, -3.2748147e-07, 0.9157048, 0.40185183, -2.1391442e-07, 3.274816e-07, -2.1391442e-07, 1, -0.20936751, 6.7420783, 2.2947788e-06)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 475696099) index="3" unique_id=161891677]
+[node name="Cardboard_box_03_Storage_Shelves_3" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_03" parent_id_path=PackedInt32Array(836022883, 162675831) index="3" unique_id=161891677]
 transform = Transform3D(-0.078307875, -0.9969292, -3.5652968e-07, 0.9969292, -0.078307934, -3.8563283e-07, 3.565298e-07, -3.8563314e-07, 1, -0.22088957, 6.636239, 0.6032358)
 mesh = SubResource("ArrayMesh_ubo3j")
 
-[node name="Cardboard_box_04_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 1714480513) index="0" unique_id=1019818881]
+[node name="Cardboard_box_04_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 1968172909) index="0" unique_id=1231050037]
 transform = Transform3D(0.62599075, 0.7798305, 2.7888913e-07, -0.7798306, 0.62599075, -1.3375607e-07, -2.7888916e-07, -1.3375603e-07, 1, -1.208724, 4.6413646, 0.05188881)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04/Cardboard_box_04_Storage_Shelves_0" index="0" unique_id=961878049]
@@ -3353,11 +3353,11 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(0.9999999, -4.7683716e-07, 5.4758914e-07, 4.7683716e-07, 0.9999999, 8.009365e-08, -5.4757925e-07, -8.009668e-08, 0.99999386, 0.02447939, 0.00206995, 0.013269991)
 shape = SubResource("BoxShape3D_gxhcj")
 
-[node name="Cardboard_box_04_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 1714480513) index="1" unique_id=1898910109]
+[node name="Cardboard_box_04_Storage_Shelves_1" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Cardboard_box_04" parent_id_path=PackedInt32Array(836022883, 1968172909) index="1" unique_id=1898910109]
 transform = Transform3D(0.9596605, -0.28116187, -1.0055139e-07, 0.28116187, 0.95966035, -1.44265755e-08, 1.0055138e-07, -1.4426462e-08, 1, -4.266979, 8.012367, 0.051889822)
 mesh = SubResource("ArrayMesh_f2c6s")
 
-[node name="Storage_Shelves_01_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 1307939580) index="0" unique_id=1634124793]
+[node name="Storage_Shelves_01_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 565588146) index="0" unique_id=1843574349]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 6.285015, 3.199945, 0.047309875)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01/Storage_Shelves_01_Storage_Shelves_0" index="0" unique_id=1626569662]
@@ -3367,7 +3367,7 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, -4.7684057e-07, 5.4761085e-07, 4.768405e-07, 1, 8.009118e-08, -5.476109e-07, -8.009092e-08, 1, -0.019928455, 0.030939579, 0.022125244)
 shape = SubResource("BoxShape3D_aedk8")
 
-[node name="Storage_Shelves_01_Storage_Shelves_0_002" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 1307939580) index="1" unique_id=581370944]
+[node name="Storage_Shelves_01_Storage_Shelves_0_002" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01" parent_id_path=PackedInt32Array(836022883, 565588146) index="1" unique_id=1987468719]
 transform = Transform3D(0.014316622, -0.99989754, -3.5759126e-07, 0.99989754, 0.014316622, -3.5250787e-07, 3.5759126e-07, -3.5250804e-07, 1, 3.040893, 3.2777905, 0.04502797)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_01/Storage_Shelves_01_Storage_Shelves_0_002" index="0" unique_id=899542490]
@@ -3377,7 +3377,7 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, -4.7684057e-07, 5.4761085e-07, 4.768405e-07, 1, 8.009118e-08, -5.476109e-07, -8.009092e-08, 1, -0.019928455, 0.030939579, 0.022125244)
 shape = SubResource("BoxShape3D_5ewd2")
 
-[node name="Storage_Shelves_04_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 559063242) index="0" unique_id=990129537]
+[node name="Storage_Shelves_04_Storage_Shelves_0" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 827358215) index="0" unique_id=388276915]
 transform = Transform3D(-0.29616085, -0.9551381, -3.41584e-07, 0.9551381, -0.29616085, -4.6354324e-07, 3.41584e-07, -4.635433e-07, 1, -7.191148, 6.9717093, 0.0063648224)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04/Storage_Shelves_04_Storage_Shelves_0" index="0" unique_id=673585430]
@@ -3387,7 +3387,7 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, -4.7684057e-07, 5.4761085e-07, 4.768405e-07, 1, 8.009118e-08, -5.476109e-07, -8.009092e-08, 1, -0.019928455, 0.030939579, 0.022125244)
 shape = SubResource("BoxShape3D_26ve7")
 
-[node name="Storage_Shelves_04_Storage_Shelves_0_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 559063242) index="1" unique_id=1276833015]
+[node name="Storage_Shelves_04_Storage_Shelves_0_001" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 827358215) index="1" unique_id=1489154111]
 transform = Transform3D(-0.99926764, -0.038264617, -1.3684494e-08, 0.038264617, -0.99926764, -7.1499386e-07, 1.3684494e-08, -7.149939e-07, 1, -2.2321305, 1.6594906, 0.05219078)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04/Storage_Shelves_04_Storage_Shelves_0_001" index="0" unique_id=711395585]
@@ -3397,7 +3397,7 @@ transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0
 transform = Transform3D(1, -4.7683716e-07, 5.4761085e-07, 4.7683716e-07, 1, 8.009118e-08, -5.476108e-07, -8.009087e-08, 0.9999999, -0.019928575, 0.03094101, -0.5262147)
 shape = SubResource("BoxShape3D_0sxr1")
 
-[node name="Storage_Shelves_04_Storage_Shelves_0_002" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 559063242) index="2" unique_id=1375355156]
+[node name="Storage_Shelves_04_Storage_Shelves_0_002" type="MeshInstance3D" parent="EmployeeAreaNavigationRegion3D/EmployeeArea/PSX Storage Shelves Cardboard Boxes/Sketchfab_model/Storage_Shelves_and_Cardboard_Boxs_fbx/RootNode/Storage_Shelves_04" parent_id_path=PackedInt32Array(836022883, 1917018504) index="2" unique_id=1375355156]
 transform = Transform3D(-4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, 2.842171e-14, 0, 1, -3.9124968, 6.1658907, 0.05219245)
 mesh = SubResource("ArrayMesh_vn30m")
 
@@ -3634,25 +3634,25 @@ transform = Transform3D(0.30321154, 0, -0.9529233, 0, 1, 0, 0.9529233, 0, 0.3032
 [node name="Employee Area Cleaning Supplies2" parent="StoreRoom" unique_id=1800427633 instance=ExtResource("93_g2jch")]
 transform = Transform3D(-0.5081001, 0, 0.861298, 0, 1, 0, -0.861298, 0, -0.5081001, 1.8532109, 0.050841436, 1.3294353)
 
-[node name="Bucket_2" parent="StoreRoom/Employee Area Cleaning Supplies2" index="1" unique_id=969069515]
+[node name="Bucket_2" parent="StoreRoom/Employee Area Cleaning Supplies2" index="1" unique_id=1737464044]
 transform = Transform3D(0.9535781, 0, -0.3011458, 0, 1, 0, 0.3011458, 0, 0.9535781, -1.6097965, 0.09553456, -0.7106476)
 
-[node name="Bucket_1" parent="StoreRoom/Employee Area Cleaning Supplies2" index="2" unique_id=2116270073]
+[node name="Bucket_1" parent="StoreRoom/Employee Area Cleaning Supplies2" index="2" unique_id=810098967]
 transform = Transform3D(-0.28963608, 0, -0.9571368, 0, 1, 0, 0.9571368, 0, -0.28963608, 0.4726143, 1.9906179, -1.390039)
 
-[node name="Detergent_2" parent="StoreRoom/Employee Area Cleaning Supplies2" index="3" unique_id=1306863462]
+[node name="Detergent_2" parent="StoreRoom/Employee Area Cleaning Supplies2" index="3" unique_id=1592731825]
 transform = Transform3D(-0.14142594, 0, 0.9899488, 0, 1, 0, -0.9899488, 0, -0.14142594, -1.7476497, 0.58633256, -0.42409658)
 
-[node name="Detergent_3" parent="StoreRoom/Employee Area Cleaning Supplies2" index="4" unique_id=1845363236]
+[node name="Detergent_3" parent="StoreRoom/Employee Area Cleaning Supplies2" index="4" unique_id=661367031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9448242, 0.60579103, -0.3637128)
 
-[node name="Detergent_1" parent="StoreRoom/Employee Area Cleaning Supplies2" index="5" unique_id=1905189312]
+[node name="Detergent_1" parent="StoreRoom/Employee Area Cleaning Supplies2" index="5" unique_id=1961455476]
 transform = Transform3D(0.12012631, 0, -0.99275863, 0, 1, 0, 0.99275863, 0, 0.12012631, -1.9018731, 0.5908765, -0.22077703)
 
-[node name="Cleaning supplies" parent="StoreRoom/Employee Area Cleaning Supplies2" index="6" unique_id=922560421]
+[node name="Cleaning supplies" parent="StoreRoom/Employee Area Cleaning Supplies2" index="6" unique_id=1557901310]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.071474075, 0.36524963, -0.8161192)
 
-[node name="Mop" parent="StoreRoom/Employee Area Cleaning Supplies2" index="7" unique_id=728818618]
+[node name="Mop" parent="StoreRoom/Employee Area Cleaning Supplies2" index="7" unique_id=709847515]
 transform = Transform3D(0.8170042, 0, 2.9802322e-08, 0, 0.8170042, 0, -2.9802322e-08, 0, 0.8170042, -2.5090976, 0, 0.46531487)
 
 [node name="Storage Arch" parent="StoreRoom" unique_id=847908752 instance=ExtResource("143_f56pk")]
@@ -3667,14 +3667,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.58642507, 0, 6.229642)
 transform = Transform3D(-0.39720005, 0, 0.5817472, 0, 0.70441294, 0, -0.5817472, 0, -0.39720005, 1.8654207, -0.011554956, 0.395463)
 metadata/_edit_group_ = true
 
-[node name="Object001" parent="BreakRoom/LockerRoom/Locker tippy" index="1" unique_id=943283406]
+[node name="Object001" parent="BreakRoom/LockerRoom/Locker tippy" index="1" unique_id=302450401]
 transform = Transform3D(0.9773278, 0, 0.21173207, 0, 1, 0, -0.21173207, 0, 0.9773278, -0.10115862, 0, -0.06704998)
 
 [node name="Locker tippy2" parent="BreakRoom/LockerRoom" unique_id=118125833 instance=ExtResource("31_ubo3j")]
 transform = Transform3D(-0.60116863, 0, 0.36714286, 0, 0.70441294, 0, -0.36714286, 0, -0.60116863, 1.5194715, -0.011554956, 1.4104047)
 metadata/_edit_group_ = true
 
-[node name="Object001" parent="BreakRoom/LockerRoom/Locker tippy2" index="1" unique_id=943283406]
+[node name="Object001" parent="BreakRoom/LockerRoom/Locker tippy2" index="1" unique_id=302450401]
 transform = Transform3D(0.9773278, 0, 0.21173207, 0, 1, 0, -0.21173207, 0, 0.9773278, -0.10115862, 0, -0.06704998)
 
 [node name="Small Lockers8" parent="BreakRoom/LockerRoom" unique_id=161297905 instance=ExtResource("33_kmdca")]
@@ -3682,7 +3682,7 @@ transform = Transform3D(0.0038785962, 0, 0.99999243, 0, 1, 0, -0.99999243, 0, 0.
 visible = false
 metadata/_edit_group_ = true
 
-[node name="small locker middle_001" parent="BreakRoom/LockerRoom/Small Lockers8" index="4" unique_id=777240553]
+[node name="small locker middle_001" parent="BreakRoom/LockerRoom/Small Lockers8" index="4" unique_id=2111047349]
 transform = Transform3D(0.020726774, 0, 0.014682001, 0, 0.025400003, 0, -0.014682001, 0, 0.020726774, -0.05045533, 0.56295377, 0.14876747)
 
 [node name="LockerSpotLight3D" type="SpotLight3D" parent="BreakRoom/LockerRoom" unique_id=417050247]
@@ -3707,10 +3707,10 @@ omni_range = 1.212
 [node name="CeilingFan" parent="BreakRoom/PCRoom" unique_id=338478717 instance=ExtResource("52_4nsdn")]
 transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 3.8782725, 1.1748112, 1.6352806)
 
-[node name="3_Metal_0" parent="BreakRoom/PCRoom/CeilingFan/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(338478717, 389946300) index="0" unique_id=574597724]
+[node name="3_Metal_0" parent="BreakRoom/PCRoom/CeilingFan/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(338478717, 11763844) index="0" unique_id=268695785]
 layers = 512
 
-[node name="3_Emission_0" parent="BreakRoom/PCRoom/CeilingFan/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(338478717, 389946300) index="1" unique_id=1264413134]
+[node name="3_Emission_0" parent="BreakRoom/PCRoom/CeilingFan/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(338478717, 11763844) index="1" unique_id=1883509480]
 layers = 512
 
 [node name="AreaLight3D6" type="AreaLight3D" parent="BreakRoom/PCRoom/CeilingFan" unique_id=1315107717]
@@ -3734,10 +3734,10 @@ omni_range = 4.223
 [node name="CeilingFan2" parent="BreakRoom/PCRoom" unique_id=963417518 instance=ExtResource("52_4nsdn")]
 transform = Transform3D(2.82, 0, 0, 0, 2.82, 0, 0, 0, 2.82, 3.7431917, 1.1748112, 4.619011)
 
-[node name="3_Metal_0" parent="BreakRoom/PCRoom/CeilingFan2/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(963417518, 389946300) index="0" unique_id=574597724]
+[node name="3_Metal_0" parent="BreakRoom/PCRoom/CeilingFan2/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(963417518, 11763844) index="0" unique_id=268695785]
 layers = 512
 
-[node name="3_Emission_0" parent="BreakRoom/PCRoom/CeilingFan2/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(963417518, 389946300) index="1" unique_id=1264413134]
+[node name="3_Emission_0" parent="BreakRoom/PCRoom/CeilingFan2/Sketchfab_model/1aa78e972a8e4b6db980ede9a9983241_fbx/Object_2/RootNode/3" parent_id_path=PackedInt32Array(963417518, 11763844) index="1" unique_id=1883509480]
 layers = 512
 
 [node name="AreaLight3D6" type="AreaLight3D" parent="BreakRoom/PCRoom/CeilingFan2" unique_id=909215229]
@@ -3806,7 +3806,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.02
 [node name="Sad Plants2" parent="BreakRoom" unique_id=742092574 instance=ExtResource("146_dultt")]
 transform = Transform3D(0.0152879525, 0, -0.9998831, 0, 1, 0, 0.9998831, 0, 0.0152879525, 1.7273431, 0, 6.0930624)
 
-[node name="Plane_001" parent="BreakRoom/Sad Plants2" index="0" unique_id=255391933]
+[node name="Plane_001" parent="BreakRoom/Sad Plants2" index="0" unique_id=1978114625]
 transform = Transform3D(0.40954164, 0, 0.9236272, 0, 1.0103499, 0, -0.9236272, 0, 0.40954164, -4.827328, 0.042689316, -2.572308)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BreakRoom/Sad Plants2/Plane_001" index="0" unique_id=468049921]
@@ -3816,7 +3816,7 @@ transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, -0.0
 transform = Transform3D(0.999993, 0, -8.940697e-08, 0, 0.9999993, 0, 8.940697e-08, 0, 0.999993, 0, 0.2639159, 0)
 shape = SubResource("CapsuleShape3D_tfpme")
 
-[node name="Sad Plant 1" parent="BreakRoom/Sad Plants2" index="1" unique_id=1034806478]
+[node name="Sad Plant 1" parent="BreakRoom/Sad Plants2" index="1" unique_id=186832596]
 transform = Transform3D(1.0000005, 0, 0, 0, 1, 0, 0, 0, 1.0000005, -0.2867508, 0.053052694, 0.15381312)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BreakRoom/Sad Plants2/Sad Plant 1" index="0" unique_id=11501513]
@@ -3829,7 +3829,7 @@ shape = SubResource("CapsuleShape3D_rayvh")
 [node name="Sad Plants3" parent="BreakRoom" unique_id=1250004326 instance=ExtResource("146_dultt")]
 transform = Transform3D(0.0152879525, 0, -0.9998831, 0, 1, 0, 0.9998831, 0, 0.0152879525, 1.7273431, 0, 6.0930624)
 
-[node name="Plane_001" parent="BreakRoom/Sad Plants3" index="0" unique_id=255391933]
+[node name="Plane_001" parent="BreakRoom/Sad Plants3" index="0" unique_id=1978114625]
 transform = Transform3D(0.40954164, 0, 0.9236272, 0, 1.0103499, 0, -0.9236272, 0, 0.40954164, -2.9478788, 0.042689316, 0.38994008)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BreakRoom/Sad Plants3/Plane_001" index="0" unique_id=2092047158]
@@ -3839,7 +3839,7 @@ transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, -0.1
 transform = Transform3D(0.999993, 0, -8.940697e-08, 0, 0.9999993, 0, 8.940697e-08, 0, 0.999993, 0.08954954, 0.26391593, -0.03807926)
 shape = SubResource("CapsuleShape3D_0darh")
 
-[node name="Sad Plant 1" parent="BreakRoom/Sad Plants3" index="1" unique_id=1034806478]
+[node name="Sad Plant 1" parent="BreakRoom/Sad Plants3" index="1" unique_id=186832596]
 transform = Transform3D(1.0000007, 0, 0, 0, 1, 0, 0, 0, 1.0000007, -3.962922, 0.053052694, -4.914998)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BreakRoom/Sad Plants3/Sad Plant 1" index="0" unique_id=1008228136]
@@ -3978,10 +3978,10 @@ transform = Transform3D(0.84262747, 0, 0.5384968, 0, 1, 0, -0.5384968, 0, 0.8426
 [node name="plastic and box2" parent="DayDecorations_3" unique_id=955722468 instance=ExtResource("117_27wgr")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4, 1, 2)
 
-[node name="pCube2_initialShadingGroup" parent="DayDecorations_3/plastic and box2" index="0" unique_id=422140646]
+[node name="pCube2_initialShadingGroup" parent="DayDecorations_3/plastic and box2" index="0" unique_id=1788975934]
 transform = Transform3D(-0.082422115, 0, 0.3914161, 0, 0.40000004, 0, -0.3914161, 0, -0.082422115, -7.276158, -0.28537703, 5.718416)
 
-[node name="pCube3_initialShadingGroup" parent="DayDecorations_3/plastic and box2" index="1" unique_id=613377389]
+[node name="pCube3_initialShadingGroup" parent="DayDecorations_3/plastic and box2" index="1" unique_id=849773223]
 transform = Transform3D(0.45635924, 0, -0.20429449, 0, 0.5, 0, 0.20429449, 0, 0.45635924, -7.121556, -1.4582144, 5.830042)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DayDecorations_3/plastic and box2/pCube3_initialShadingGroup" index="0" unique_id=397652153]
