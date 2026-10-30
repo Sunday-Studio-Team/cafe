@@ -1024,35 +1024,17 @@ func _on_remade_drink() -> void:
 
 	accept_order(true)
 
-	for item in Global.owned_items:
-		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_audio(1.0)
-			Engine.time_scale = 1.0
-			print("time scale returned to: %s" % Engine.time_scale)
-
 
 func _cancel_remake_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	Events.force_close_minigame.disconnect(_on_force_close_remake_minigame)
 
-	for item in Global.owned_items:
-		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_audio(1.0)
-			Engine.time_scale = 1.0
-			print("time scale returned to: %s" % Engine.time_scale)
-
 
 func _on_force_close_remake_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	Events.force_close_minigame.disconnect(_on_force_close_remake_minigame)
-
-	for item in Global.owned_items:
-		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_audio(1.0)
-			Engine.time_scale = 1.0
-			print("time scale returned to: %s" % Engine.time_scale)
 
 
 class OrderData:
