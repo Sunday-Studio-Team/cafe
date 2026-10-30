@@ -15,11 +15,16 @@ const INSTAGRAM_URL := "https://www.instagram.com/sundaystudiosgames/"
 @export var _instagram_button: Button
 @export var _hover_sound: AudioStreamPlayer
 @export var _click_sound: AudioStreamPlayer
+@export var UI: Node2D
+@export var game_logo: Sprite2D
+@export var sato_anim: Node2D
 
 @export_dir var _save_file_path: String
 
 
 func _ready() -> void:
+	UI.hide()
+	
 	Global.in_main_menu = true
 
 	if FileAccess.file_exists(_save_file_path):
@@ -50,13 +55,33 @@ func _ready() -> void:
 
 	setup_button_sounds()
 
-	_buttons_parent_node.modulate.a = 0.0
+	game_logo.scale = Vector2.ZERO
+	game_logo.modulate.a = 1.0
+	game_logo.visible = true
+	
+	sato_anim.scale = Vector2.ZERO
+	sato_anim.modulate.a = 1.0
+	sato_anim.visible = true
+	
+	UI.modulate.a = 0.0
+	await get_tree().create_timer(0.8).timeout
 	_background_sprite.play("menu_start")
 	await _background_sprite.animation_finished
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
 	var tween: Tween = create_tween()
-	tween.tween_property(_buttons_parent_node, "modulate:a", 1.0, 1.0)
+	tween.tween_property(UI, "modulate:a", 1.0, 1.0)
 
+	# reveal all UI here
+	UI.show()
+	
+	tween.tween_property(game_logo, "scale", Vector2.ONE, 0.6)\
+			.set_trans(Tween.TRANS_BACK)\
+			.set_ease(Tween.EASE_OUT)
+	
+	tween.tween_property(sato_anim, "scale", Vector2.ONE, 0.6)\
+			.set_trans(Tween.TRANS_BACK)\
+			.set_ease(Tween.EASE_OUT)
+			
 	for child in _buttons_parent_node.get_children():
 		if child is TextureButton and child.texture_normal:
 			var image: Image = child.texture_normal.get_image()
