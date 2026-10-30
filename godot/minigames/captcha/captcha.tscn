@@ -43,11 +43,20 @@ shader_parameter/outline_width = 1.0
 shader = ExtResource("26_b5rff")
 shader_parameter/Speed = 0.5
 shader_parameter/LineLength = 2.0
-shader_parameter/LineColor = Color(1, 1, 1, 1)
+shader_parameter/LineColor = Color(0.19607843, 0.19607843, 0.19607843, 0.39215687)
 shader_parameter/Softness = 0.1
 shader_parameter/Weirdness = 0.1
 shader_parameter/Radius = 1.3
 shader_parameter/Freq = 10.0
+
+[sub_resource type="Gradient" id="Gradient_8dmmt"]
+offsets = PackedFloat32Array(0.3374613, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vn1tu"]
+gradient = SubResource("Gradient_8dmmt")
+fill = 1
+fill_from = Vector2(0.50427353, 0.47863248)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
 random_pitch = 1.0594631
@@ -83,7 +92,7 @@ captcha_vbox = NodePath("HBoxContainer/ReceiptCaptcha/CaptchaVBox")
 sato_tippy_fight = NodePath("SatoTippyFight")
 complete_sprite = NodePath("HBoxContainer/ReceiptCaptcha/CompleteSprite")
 sato = NodePath("HBoxContainer/Control/Sato")
-frozen_border = NodePath("FrozenTippyIndicator")
+frozen_border = NodePath("FrozenBorder")
 remake_drink_button = NodePath("HBoxContainer/ReceiptCaptcha/CaptchaVBox/RemakeButtonContainer/RemakeButton")
 remake_drink_button_ready = ExtResource("17_y2juk")
 remake_drink_button_not_ready = ExtResource("16_g7068")
@@ -461,7 +470,7 @@ expand_mode = 3
 stretch_mode = 5
 script = ExtResource("24_knlx1")
 
-[node name="BorderEffect" type="TextureRect" parent="." unique_id=17602975]
+[node name="SpeedLines" type="TextureRect" parent="." unique_id=17602975]
 z_index = 11
 material = SubResource("ShaderMaterial_8dmmt")
 layout_mode = 0
@@ -472,7 +481,18 @@ offset_bottom = 1076.0
 offset_transform_enabled = true
 mouse_filter = 2
 texture = ExtResource("27_8dmmt")
-script = ExtResource("24_knlx1")
+
+[node name="FrozenBorder" type="TextureRect" parent="." unique_id=831855556]
+modulate = Color(1, 1, 1, 0)
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_vn1tu")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=431691117]
 stream = SubResource("AudioStreamRandomizer_vn1tu")
