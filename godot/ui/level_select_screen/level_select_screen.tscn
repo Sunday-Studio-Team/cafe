@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bkya2tbg13vww" path="res://ui/level_select_screen/level_select_fake_flip_page.gd" id="2_mbc1d"]
 [ext_resource type="PackedScene" uid="uid://cs6toslsya8mw" path="res://ui/level_select_screen/level_select_switch_day_button.tscn" id="3_ecde1"]
 [ext_resource type="PackedScene" uid="uid://flo7ynm2u85f" path="res://Assets/level_select_book/level_select_book.glb" id="3_gg2t0"]
-[ext_resource type="Texture2D" uid="uid://cxtexdd42o1wu" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrows_right.png" id="4_mbc1d"]
 [ext_resource type="PackedScene" uid="uid://ci8imac7bf0m6" path="res://Assets/level_select_book/level_select_page.tscn" id="4_r22gu"]
 [ext_resource type="PackedScene" uid="uid://c4qovswj8xdcp" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_1.glb" id="5_cso46"]
 [ext_resource type="Script" uid="uid://c2v78yjtje66e" path="res://ui/level_select_screen/level_select_bookmark.gd" id="5_pple6"]
@@ -14,7 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://bfww6fvx6liq1" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_3.glb" id="7_5pr1p"]
 [ext_resource type="PackedScene" uid="uid://ck2dlh6tjk32y" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_4.glb" id="8_lhpgf"]
 [ext_resource type="PackedScene" uid="uid://ccj0de01r1081" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_5.glb" id="9_xhic3"]
+[ext_resource type="Texture2D" uid="uid://bof0ir81ifd5s" path="res://Assets/level_select_book/level_select_background.png" id="12_r7qqf"]
+[ext_resource type="Texture2D" uid="uid://bucsrh1v04fjh" path="res://Assets/level_select_book/level_select_right_arrow.png" id="14_r7qqf"]
+[ext_resource type="Texture2D" uid="uid://cu7xpks7m1l18" path="res://Assets/level_select_book/level_select_play_button.png" id="15_bwfbf"]
 [ext_resource type="AudioStream" uid="uid://ko6ycph3q4mj" path="res://audio/page_flip_1.ogg" id="15_lhpgf"]
+[ext_resource type="Script" uid="uid://jb8p13jmydvc" path="res://ui/level_select_screen/button_animator.gd" id="16_qdbow"]
 [ext_resource type="AudioStream" uid="uid://cex0kqnlc6k1n" path="res://audio/page_flip_2.ogg" id="16_xhic3"]
 [ext_resource type="AudioStream" uid="uid://cvn21aot73sqh" path="res://audio/open_book_sound.wav" id="17_xhic3"]
 [ext_resource type="AudioStream" uid="uid://dbrrx1jwav2ud" path="res://audio/paper_foley.wav" id="18_0eo0p"]
@@ -113,11 +116,12 @@ size = Vector2(1.92, 1.08)
 size = Vector3(3.493164, 0.1, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
-albedo_color = Color(0.5973726, 0.3129843, 0.15195501, 1)
+shading_mode = 0
+albedo_texture = ExtResource("12_r7qqf")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vn1tu"]
 material = SubResource("StandardMaterial3D_mjix0")
-size = Vector2(4, 2)
+size = Vector2(1.92, 1.08)
 
 [sub_resource type="Animation" id="Animation_lhpgf"]
 length = 0.001
@@ -167,9 +171,9 @@ stream_1/stream = ExtResource("16_xhic3")
 
 [node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page", "_page_flip_animation_player", "_level_select_bookmark", "_camera_animation_player", "open_book_sound", "page_flip_sound", "press_play_sound")]
 script = ExtResource("1_g5s43")
-_previous_day_button = NodePath("LevelSelectSwitchDayButtonPrev")
-_next_day_button = NodePath("LevelSelectSwitchDayButtonNext")
-_play_button = NodePath("PlayButton")
+_previous_day_button = NodePath("Buttons/LevelSelectSwitchDayButtonPrev")
+_next_day_button = NodePath("Buttons/LevelSelectSwitchDayButtonNext")
+_play_button = NodePath("Buttons/PlayButton")
 _back_to_main_menu_button = NodePath("ReturnButton")
 _page_spread = NodePath("SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread")
 _page_sub_viewport_a = NodePath("PageSubViewportA")
@@ -270,13 +274,14 @@ transform = Transform3D(3.110171, 0, 0, 0, -1.359499e-07, 3.110171, 0, -3.110171
 mesh = SubResource("QuadMesh_r22gu")
 
 [node name="TableStaticBody3D" type="StaticBody3D" parent="SubViewportContainer/3DWorldSubViewport/Scene" unique_id=1963233410]
+transform = Transform3D(0.9995599, 0, -0.029666245, 0, 1, 0, 0.029666245, 0, 0.9995599, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/TableStaticBody3D" unique_id=1195355240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049999997, 0)
 shape = SubResource("BoxShape3D_xrivr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/Scene" unique_id=924040502]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07819915, 0)
+[node name="TableMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/TableStaticBody3D" unique_id=924040502]
+transform = Transform3D(1.594, 0, 0, 0, 1.594, 0, 0, 0, 1.594, 0, -0.07819915, 0)
 mesh = SubResource("PlaneMesh_vn1tu")
 
 [node name="CamRoot" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=603227250]
@@ -299,25 +304,73 @@ light_energy = 0.25
 shadow_enabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=263571936]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 0)
-light_color = Color(0.9998563, 0.7498929, 0.37033412, 1)
+transform = Transform3D(0.844586, 0.0028665098, -0.5354123, -0.0025495826, 0.9999959, 0.0013319755, 0.53541386, 0.00024011004, 0.8445898, 1, 2, 0)
+light_color = Color(1, 0.9381789, 0.8550506, 1)
 light_energy = 1.5
 shadow_enabled = true
 
-[node name="LevelSelectSwitchDayButtonPrev" parent="." unique_id=1730237589 instance=ExtResource("3_ecde1")]
-offset_left = -926.0
-offset_top = -83.920685
-offset_right = -792.0
-offset_bottom = 29.079346
+[node name="Buttons" type="Control" parent="." unique_id=1989739047]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -574.0
+offset_top = 228.86597
+offset_right = 563.0
+offset_bottom = 424.14575
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.029670598
+offset_transform_visual_only = false
 
-[node name="LevelSelectSwitchDayButtonNext" parent="." unique_id=378158567 instance=ExtResource("3_ecde1")]
-offset_left = 797.0
-offset_top = -83.920685
-offset_right = 931.0
-offset_bottom = 29.079346
+[node name="LevelSelectSwitchDayButtonPrev" parent="Buttons" unique_id=1730237589 instance=ExtResource("3_ecde1")]
+custom_minimum_size = Vector2(200, 128)
+layout_mode = 1
+offset_left = -640.0
+offset_top = -63.999893
+offset_right = -440.0
+offset_bottom = 64.00011
+size_flags_vertical = 4
 
-[node name="TextureRect" parent="LevelSelectSwitchDayButtonNext" index="0" unique_id=1543500154]
-texture = ExtResource("4_mbc1d")
+[node name="PlayButton" type="Button" parent="Buttons" unique_id=368313340]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 468.0
+offset_right = 668.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Buttons/PlayButton" unique_id=2028338415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_bwfbf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonAnimator" type="Node" parent="Buttons/PlayButton" unique_id=1407037622 node_paths=PackedStringArray("_button")]
+script = ExtResource("16_qdbow")
+_button = NodePath("..")
+metadata/_custom_type_script = "uid://jb8p13jmydvc"
+
+[node name="LevelSelectSwitchDayButtonNext" parent="Buttons" unique_id=378158567 instance=ExtResource("3_ecde1")]
+custom_minimum_size = Vector2(200, 128)
+layout_mode = 1
+offset_left = 440.0
+offset_top = -63.999893
+offset_right = 640.0
+offset_bottom = 64.00011
+size_flags_vertical = 4
+
+[node name="TextureRect" parent="Buttons/LevelSelectSwitchDayButtonNext" index="0" unique_id=1543500154]
+texture = ExtResource("14_r7qqf")
 
 [node name="ReturnButton" type="Button" parent="." unique_id=1880559958]
 anchors_preset = 8
@@ -342,32 +395,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 24
 text = "Return"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PlayButton" type="Button" parent="." unique_id=368313340]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = 350.0
-offset_right = 148.0
-offset_bottom = 463.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayButton" unique_id=655007284]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 48
-text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -398,4 +425,4 @@ stream = ExtResource("18_0eo0p")
 volume_db = -10.0
 bus = &"Sfx"
 
-[editable path="LevelSelectSwitchDayButtonNext"]
+[editable path="Buttons/LevelSelectSwitchDayButtonNext"]
