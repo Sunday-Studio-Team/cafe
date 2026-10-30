@@ -61,6 +61,7 @@ var holding_trash := false:
 var trash_in_hand: String
 var day: int = 1
 var intro_email: bool = false
+var last_email_day: int = 0
 var playing_tutorial: bool = false
 var shift_length: float
 var shift_time_remaining: float

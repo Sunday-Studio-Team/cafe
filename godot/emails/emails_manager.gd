@@ -16,6 +16,9 @@ func deliver_emails() -> void:
 	# Check current day
 	var current_day: int = Global.day
 	
+	if Global.last_email_day == current_day:
+		return
+	
 	var emails_to_deliver: Array[EmailData]
 	
 	if Global.day == 1 and Global.intro_email == false:
@@ -49,6 +52,8 @@ func deliver_emails() -> void:
 		var email_scheduled_day: int = email_data.day_to_send
 		if current_day >= email_scheduled_day:
 			Global.received_emails.append(email_data)
+	
+	Global.last_email_day = current_day
 
 func has_unfinished_important_emails_to_date() -> bool:
 	# Check save data for finished important emails
