@@ -337,7 +337,9 @@ emission_energy_multiplier = 0.5
 emission_texture = ExtResource("84_yhys1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_li8ef"]
-transparency = 1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("85_tx4o1")
 emission_enabled = true
 emission_energy_multiplier = 0.5
