@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://lmhw5wqr2spn" path="res://Assets/tippy_tablet_tutorial_indicator/tippy_tablet_tutorial_indicator.tscn" id="4_1l6aw"]
 [ext_resource type="PackedScene" uid="uid://ccndesh240hgx" path="res://Assets/KeyChain/keychainAnim.glb" id="4_870e5"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cyvvf"]
+size = Vector2(631, 863)
+
 [node name="TippyTablet3D" type="Node3D" unique_id=1761848473 node_paths=PackedStringArray("money_tutorial_indicator", "money_goal_tutorial_indicator", "rating_tutorial_indicator", "addon_model")]
 script = ExtResource("1_3j3my")
 money_tutorial_indicator = NodePath("Scaler/TutorialIndicators/MoneyMarker3D")
@@ -24,18 +27,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
 [node name="BaseModel" parent="Scaler/Model" unique_id=875200061 instance=ExtResource("2_870e5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11823052, -0.07041024, 0)
 
-[node name="Cube_001" parent="Scaler/Model/BaseModel" index="0" unique_id=1445274746]
+[node name="tablet" parent="Scaler/Model/BaseModel" index="0" unique_id=2013804031]
 layers = 8
 
 [node name="ScreenSprite3D" type="Sprite3D" parent="Scaler/Model/BaseModel" unique_id=2083645373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007, -0.012782678, 0.016923353)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.021543607, -0.07146025, 0.04528496)
 layers = 8
 pixel_size = 0.0005
+texture = SubResource("PlaceholderTexture2D_cyvvf")
 
 [node name="AddonModel" parent="Scaler/Model" unique_id=1254854682 instance=ExtResource("3_42h6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
 
-[node name="BézierCurve" parent="Scaler/Model/AddonModel" index="0" unique_id=1518185622]
+[node name="tablet_addon" parent="Scaler/Model/AddonModel" index="0" unique_id=1283749201]
 layers = 8
 
 [node name="AddonScreenSprite3D" type="Sprite3D" parent="Scaler/Model/AddonModel" unique_id=831430551]
