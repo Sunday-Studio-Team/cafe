@@ -19,6 +19,7 @@ const INSTAGRAM_URL := "https://www.instagram.com/sundaystudiosgames/"
 @export var game_logo: Sprite2D
 @export var sato_anim: Node2D
 
+
 @export_dir var _save_file_path: String
 
 
@@ -67,13 +68,15 @@ func _ready() -> void:
 	await get_tree().create_timer(0.8).timeout
 	_background_sprite.play("menu_start")
 	await _background_sprite.animation_finished
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.05).timeout
 	var tween: Tween = create_tween()
 	tween.tween_property(UI, "modulate:a", 1.0, 1.0)
 
 	# reveal all UI here
 	UI.show()
-	
+		
+	slide_ui_buttons()
+
 	tween.tween_property(game_logo, "scale", Vector2.ONE, 0.6)\
 			.set_trans(Tween.TRANS_BACK)\
 			.set_ease(Tween.EASE_OUT)
@@ -82,6 +85,7 @@ func _ready() -> void:
 			.set_trans(Tween.TRANS_BACK)\
 			.set_ease(Tween.EASE_OUT)
 			
+
 	for child in _buttons_parent_node.get_children():
 		if child is TextureButton and child.texture_normal:
 			var image: Image = child.texture_normal.get_image()
@@ -120,3 +124,42 @@ func setup_button_sounds() -> void:
 					_click_sound.pitch_scale = randf_range(0.9, 1.1)
 					_click_sound.play()
 		)
+
+func slide_ui_buttons() -> void:
+	var children = _buttons_parent_node.get_children()
+	
+	for i in range(children.size()):
+		var child = children[i] as Control
+		if not child:
+			continue
+			
+		child.visible = true
+		child.modulate.a = 1.0
+		
+		# push all the way back
+		var target_x = child.position.x
+		var target_y = child.position.y
+
+		if (2 - i) > 0:
+			print('first')
+			child.position.x = target_x - 800
+			child.position.y = target_y
+		elif (2 - i) < 0:
+			print('second')
+			child.position.x = target_x
+			child.position.y = target_y + 800
+		else:
+			print('third')
+			child.position.x = target_x - 800
+			child.position.y = target_y + 800
+
+		var tween = create_tween()
+		tween.tween_interval(i * 0.25) 
+
+		var sub_tween = create_tween().set_parallel(true)
+		sub_tween.tween_property(child, "position:x", target_x, 0.7)\
+			.set_trans(Tween.TRANS_CUBIC)\
+			.set_ease(Tween.EASE_OUT)
+		sub_tween.tween_property(child, "position:y", target_y, 0.7)\
+			.set_trans(Tween.TRANS_CUBIC)\
+			.set_ease(Tween.EASE_OUT)
