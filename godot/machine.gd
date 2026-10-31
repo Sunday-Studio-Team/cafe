@@ -313,7 +313,7 @@ func check_for_stepping_in_spill() -> void:
 			Events.alert_posted.emit("Customer stood in spill!", UI.AlertType.CUSTOMER_STEPPED_IN_SPILL, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%s Customer stood in spill!" % rating_loss, UI.AlertType.CUSTOMER_STEPPED_IN_SPILL, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Customer stood in spill!", UI.AlertType.CUSTOMER_STEPPED_IN_SPILL, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED, -rating_loss)
 			customer.play_spill_dissatisfaction_vfx()
 			Global.employee_rating -= rating_loss
 
@@ -404,7 +404,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 			Events.alert_posted.emit("Customer left!", UI.AlertType.CUSTOMER_NOT_SERVED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%s Customer left!" % rating_loss, UI.AlertType.CUSTOMER_NOT_SERVED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Customer left!", UI.AlertType.CUSTOMER_NOT_SERVED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED, -rating_loss)
 			Global.employee_rating -= rating_loss
 			rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
 		customer.leave_store()
@@ -727,7 +727,7 @@ func clean_up_spill() -> void:
 		customer.hide_spill_dissatisfaction_vfx()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertType.SPILL_CLEANED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
+	Events.alert_posted.emit("Spill cleaned!", UI.AlertType.SPILL_CLEANED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN, rating_gained)
 	Global.employee_rating += rating_gained
 
 	Global.tutorial_day_3_spill_cleaned = true
@@ -813,10 +813,11 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink or order.star_rating_loss_for_accept == 0.0:
 		Events.alert_posted.emit(
-			"+%.1f Correct drink!" % Stats.current.drink_correct_star_rating_gain_each_day[Global.day],
+			"Correct drink!",
 			UI.AlertType.RATING_UP_DRINK,
 			4.0,
-			UI.ALERT_COLOR_GREEN
+			UI.ALERT_COLOR_GREEN,
+			Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
 		)
 		Global.employee_rating += Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
 		rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.PLUS_RATING)
@@ -825,7 +826,7 @@ func accept_order(did_remake_drink: bool) -> void:
 			Events.alert_posted.emit("Wrong drink!", UI.AlertType.RATING_DOWN_DRINK, 4.0, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%.1f Wrong drink!" % order.star_rating_loss_for_accept, UI.AlertType.RATING_DOWN_DRINK, 4.0, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Wrong drink!", UI.AlertType.RATING_DOWN_DRINK, 4.0, UI.ALERT_COLOR_RED, -order.star_rating_loss_for_accept)
 			Global.employee_rating -= order.star_rating_loss_for_accept
 			rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
 
