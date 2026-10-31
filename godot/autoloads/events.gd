@@ -70,6 +70,7 @@ signal viewmodel_animation_finished
 # (to time certain stuff off)
 signal bag_pickup_animation_grabbed
 signal trash_pickup_animation_grabbed
+signal trash_throw_animation_released
 signal hammer_animation_hit
 signal air_horn_animation_just_blasted
 signal whipped_cream_animation_shot

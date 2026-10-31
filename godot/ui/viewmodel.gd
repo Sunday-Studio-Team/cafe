@@ -78,7 +78,8 @@ func _on_frame_changed() -> void:
 		Events.whipped_cream_animation_shot.emit()
 	elif sprite.frame == 5 and sprite.animation == "use_hand":
 		Events.use_hand_animation_tap.emit()
-
+	elif sprite.frame == 24 and sprite.animation == "throw_trash":
+		Events.trash_throw_animation_released.emit()
 
 func _on_animation_finished() -> void:
 	match sprite.animation:

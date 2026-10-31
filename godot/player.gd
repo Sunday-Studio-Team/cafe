@@ -100,7 +100,10 @@ func _ready() -> void:
 			var t := create_tween().set_parallel()
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
-
+	Events.trash_throw_animation_released.connect(
+		func():
+			drop_trash()
+	)
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
@@ -295,15 +298,14 @@ func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
 		Global.holding_trash = false
 		Events.play_viewmodel_animation.emit("throw_trash")
-		throw_trash_sound.play()
-		var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
-		Global.main_scene.add_child(trash_to_drop)
-		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 5)
-		trash_to_drop.apply_impulse(transform.basis * Vector3.UP * 0.5)
-
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
-
+func drop_trash() -> void:
+	throw_trash_sound.play()
+	var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
+	Global.main_scene.add_child(trash_to_drop)
+	trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
+	trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 5)
+	trash_to_drop.apply_impulse(transform.basis * Vector3.UP * 0.5)
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()
