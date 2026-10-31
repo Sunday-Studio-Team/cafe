@@ -75,8 +75,8 @@ func _ready() -> void:
 	)
 
 	Events.alert_posted.connect(
-			func(message, alert_type, alert_time_to_live = 4.0, color = Color.WHITE):
-				_on_alert_posted(message, alert_type, alert_time_to_live, color)
+			func(message, alert_type, alert_time_to_live = 4.0, color = Color.WHITE, rating_change = 0.0):
+				_on_alert_posted(message, alert_type, alert_time_to_live, color, rating_change)
 	)
 
 	Events.shift_end_sequence_started.connect(
@@ -363,7 +363,8 @@ func _on_alert_posted(
 	message: String,
 	alert_type: AlertType,
 	alert_time_to_live: float = 4.0,
-	color: Color = Color.WHITE
+	color: Color = Color.WHITE,
+	rating_change: float = 0.0
 ) -> void:
 	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
 		# we need to remove before we start the tween to make sure that
@@ -388,6 +389,19 @@ func _on_alert_posted(
 	var new_alert = alert_packed_scene.instantiate()
 	new_alert.alert_label.text = message
 	new_alert.icon.texture = alert_icons[alert_type]
+
+	if (rating_change != 0):
+		new_alert.sign_label.visible = true
+		new_alert.star_fill.visible = true
+		if rating_change > 0.0:
+			new_alert.sign_label.text = "+"
+		else:
+			new_alert.sign_label.text = "-"
+		new_alert.sign_label.modulate = color
+		new_alert.star_fill.value = absf(rating_change)
+	else:
+		new_alert.sign_label.visible = false
+		new_alert.star_fill.visible = false
 
 	alert_ui.add_child(new_alert)
 	alert_queue.append(new_alert)
