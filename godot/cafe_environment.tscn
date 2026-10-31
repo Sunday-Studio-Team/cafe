@@ -180,9 +180,12 @@
 [ext_resource type="PackedScene" uid="uid://dkr2bbbpterbu" path="res://Assets/signs/SM_OrderHereSign1.glb" id="182_twa5i"]
 [ext_resource type="Texture2D" uid="uid://bdme8brmtos08" path="res://Assets/Posters/Untitled-4_copy.jpg" id="183_4k4ck"]
 [ext_resource type="Texture2D" uid="uid://lxgkq35w1bxd" path="res://Assets/Archways/Cardboard Tippy door frame_tippydoor_standardSurface1_Roughness.png" id="183_5upnq"]
+[ext_resource type="Texture2D" uid="uid://d0bcxshct7olx" path="res://Assets/Posters/day5_poster1.png" id="184_4k4ck"]
 [ext_resource type="Texture2D" uid="uid://dueil6mpmxhu0" path="res://Assets/Archways/Cardboard Tippy door frame_tippycardboard_standardSurface1_BaseColor.png" id="184_v7jt7"]
+[ext_resource type="Texture2D" uid="uid://ew1aivavbvbq" path="res://Assets/Posters/Tippys_Watching_You_Shading_Test_Big_Big_Eyes_Text.png" id="184_w0uga"]
 [ext_resource type="Texture2D" uid="uid://brxk2p8vh1ajm" path="res://Assets/Archways/Cardboard Tippy door frame_tippycardboard_standardSurface1_Metallic-tippycardboard_standardSurface1_Roughness_6.png" id="185_twa5i"]
 [ext_resource type="Texture2D" uid="uid://dou7kpqy1hium" path="res://Assets/Archways/Cardboard Tippy door frame_cardboardback.jpg" id="186_4iebn"]
+[ext_resource type="Texture2D" uid="uid://bnvw0oe47vmod" path="res://Assets/Posters/no text].png" id="186_5upnq"]
 
 [sub_resource type="Shader" id="Shader_a3sl0"]
 code = "shader_type spatial;
@@ -2188,7 +2191,7 @@ path_follow = NodePath("PathFollow3D")
 car_textures = Array[Texture]([ExtResource("54_02vyw"), ExtResource("55_vn30m"), ExtResource("49_0jw1j")])
 
 [node name="PathFollow3D" type="PathFollow3D" parent="ExteriorStreet/CarSpawner" unique_id=1082367862]
-transform = Transform3D(0.00057009363, -0.00016215755, -0.9999285, 1.0259825e-07, 1, -0.00016214595, 0.9999285, -1.01539825e-08, 0.00057009363, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700934, -0.00016215755, -0.99992806, 1.0259821e-07, 1, -0.00016214588, 0.99992806, -1.01539825e-08, 0.0005700934, -4.11582, -1.4201379, 0.23234849)
 progress = 138.29292
 
 [node name="Car" type="Sprite3D" parent="ExteriorStreet/CarSpawner" unique_id=1089029611]
@@ -3970,7 +3973,6 @@ shape = SubResource("BoxShape3D_b1lj4")
 transform = Transform3D(0.08136937, 0, -0.39163637, 0, 0.40000007, 0, 0.39163637, 0, 0.08136937, 2.2018874, 0.27715945, 4.3964224)
 
 [node name="DayDecorations_3" type="Node3D" parent="." unique_id=1247227043]
-visible = false
 
 [node name="pCube3_initialShadingGroup3" type="MeshInstance3D" parent="DayDecorations_3" unique_id=1105072305]
 transform = Transform3D(-0.12088239, 0, -0.1593343, 0, 0.19999997, 0, 0.1593343, 0, -0.12088239, -6.103766, 0.41671425, -1.7302004)
@@ -4021,7 +4023,6 @@ transform = Transform3D(0.4020295, 0, -0.9156269, 0, 1, 0, 0.9156269, 0, 0.40202
 transform = Transform3D(-1.416163, 0, 0.49445328, 0, 1.5000006, 0, -0.49445328, 0, -1.416163, -0.1301136, 0.81879205, 0.23782468)
 
 [node name="DayDecorations_4" type="Node3D" parent="." unique_id=767141268]
-visible = false
 
 [node name="Bucket_3" type="MeshInstance3D" parent="DayDecorations_4" unique_id=692006742]
 transform = Transform3D(0.99194854, 0, -0.12664013, 0, 1, 0, 0.12664013, 0, 0.99194854, -5.8568873, 0.6172709, -1.8262788)
@@ -4057,7 +4058,6 @@ transform = Transform3D(0.99999297, -3.5762787e-07, -8.940697e-08, 4.61936e-07, 
 shape = SubResource("BoxShape3D_2pgs5")
 
 [node name="DayDecorations_5" type="Node3D" parent="." unique_id=118281843]
-visible = false
 
 [node name="Sugar17" parent="DayDecorations_5" unique_id=472151074 instance=ExtResource("54_aslp2")]
 transform = Transform3D(0.33303154, 0, 1.4625629, 0, 1.5000001, 0, -1.4625629, 0, 0.33303154, -2.1265962, 0.86709887, 0.5928272)
@@ -4201,6 +4201,10 @@ texture = ExtResource("170_8akal")
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, -5.1595426, 1.3328564, -7.998749)
 texture = ExtResource("170_8akal")
 
+[node name="best coffee3" type="Sprite3D" parent="PosterDecoration_day1" unique_id=414929737]
+transform = Transform3D(-3.0597969e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0597969e-09, -7.7782936, 1.3328564, 2.4980159)
+texture = ExtResource("170_8akal")
+
 [node name="dont run" type="Sprite3D" parent="PosterDecoration_day1" unique_id=1314594926]
 transform = Transform3D(-2.1855695e-09, 0, -0.05, 0, 0.05, 0, 0.05, 0, -2.1855695e-09, 9.986876, 1.3320632, -1.4488366)
 texture = ExtResource("171_w0uga")
@@ -4246,7 +4250,7 @@ transform = Transform3D(-9.616507e-09, 0, 0.22, 0, 0.22, 0, -0.22, 0, -9.616507e
 texture = ExtResource("174_5upnq")
 
 [node name="ai progress" type="Sprite3D" parent="PosterDecoration_day2" unique_id=1668434535]
-transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, -5.148024, -0.008028388, -7.9143205)
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, -5.148024, -0.008028388, -7.9143205)
 texture = ExtResource("172_m3afe")
 
 [node name="ai progress2" type="Sprite3D" parent="PosterDecoration_day2" unique_id=1427827122]
@@ -4290,7 +4294,11 @@ transform = Transform3D(-3.1909302e-09, 0, -0.073, 0, 0.073, 0, 0.073, 0, -3.190
 texture = ExtResource("173_4k4ck")
 
 [node name="time is money3" type="Sprite3D" parent="PosterDecoration_day3" unique_id=1664726343]
-transform = Transform3D(0.22, 0, -3.8466027e-08, 0, 0.22, 0, 3.8466027e-08, 0, 0.22, -5.213929, 1.3528346, -7.9953065)
+transform = Transform3D(0.24, 0, -4.1962938e-08, 0, 0.24, 0, 4.1962938e-08, 0, 0.24, -5.213929, 1.3528346, -7.9953065)
+texture = ExtResource("174_5upnq")
+
+[node name="time is money4" type="Sprite3D" parent="PosterDecoration_day3" unique_id=767741153]
+transform = Transform3D(-1.1019878e-08, 1.331744e-08, 0.24, -0.019041719, 0.23924342, -1.414978e-08, -0.23924342, -0.019041719, -9.928556e-09, -7.786844, 1.3528346, 0.3876585)
 texture = ExtResource("174_5upnq")
 
 [node name="fill up" type="Sprite3D" parent="PosterDecoration_day3" unique_id=1316385820]
@@ -4305,6 +4313,10 @@ texture = ExtResource("176_twa5i")
 transform = Transform3D(0.018, 0, 0, 0, 0.018, 0, 0, 0, 0.018, 7.592406, 1.3076605, 0.21619351)
 texture = ExtResource("177_4iebn")
 
+[node name="faster4" type="Sprite3D" parent="PosterDecoration_day3" unique_id=1014875429]
+transform = Transform3D(-0.018, 0, -1.5736097e-09, 0, 0.018, 0, 1.5736097e-09, 0, -0.018, -6.037448, 1.6221899, 5.934596)
+texture = ExtResource("177_4iebn")
+
 [node name="faster2" type="Sprite3D" parent="PosterDecoration_day3" unique_id=816216553]
 transform = Transform3D(-7.868053e-10, 0, 0.018, 0, 0.018, 0, -0.018, 0, -7.868053e-10, 8.208551, 1.3076605, -1.1983663)
 texture = ExtResource("177_4iebn")
@@ -4315,6 +4327,10 @@ texture = ExtResource("177_4iebn")
 
 [node name="how bout work" type="Sprite3D" parent="PosterDecoration_day3" unique_id=1392489849]
 transform = Transform3D(-1.6173214e-09, 0, 0.037, 0, 0.037, 0, -0.037, 0, -1.6173214e-09, 8.208552, 1.3076605, -2.9510152)
+texture = ExtResource("178_xomd1")
+
+[node name="how bout work3" type="Sprite3D" parent="PosterDecoration_day3" unique_id=1212683617]
+transform = Transform3D(-1.5359429e-09, -4.8873185e-09, -0.036999997, -0.0041458085, 0.036767002, -4.6844413e-09, 0.036767002, 0.0041458085, -2.073886e-09, -2.2091112, 1.3076605, -0.6972139)
 texture = ExtResource("178_xomd1")
 
 [node name="how bout work2" type="Sprite3D" parent="PosterDecoration_day3" unique_id=278177095]
@@ -4339,6 +4355,10 @@ visible = false
 
 [node name="times ticking" type="Sprite3D" parent="PosterDecoration_day4" unique_id=893983881]
 transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 7.5571084, 1.3837392, 0.20593025)
+texture = ExtResource("180_8akal")
+
+[node name="times ticking5" type="Sprite3D" parent="PosterDecoration_day4" unique_id=1360876175]
+transform = Transform3D(-0.03956118, 0.005908711, -2.844743e-09, 0.005908711, 0.03956118, 8.78145e-09, 4.110717e-09, 8.2648945e-09, -0.04, 10.195405, 1.3837392, 5.674785)
 texture = ExtResource("180_8akal")
 
 [node name="ai progress" type="Sprite3D" parent="PosterDecoration_day4" unique_id=1701819692]
@@ -4423,6 +4443,226 @@ texture = ExtResource("183_4k4ck")
 
 [node name="PosterDecoration_day5" type="Node3D" parent="." unique_id=1674942894]
 transform = Transform3D(1, 0, 2.7975289e-06, 0, 1, 0, -2.7975289e-06, 0, 1, 3.668516e-12, 0, 2.7975289e-06)
+
+[node name="always watching5" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1318988967]
+transform = Transform3D(0.039269675, 0.0076087234, -5.697212e-08, -0.0076087234, 0.039269675, -1.0642814e-08, 5.3907456e-08, 2.1285622e-08, 0.04, -0.46897104, 1.0084841, 0.20337087)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching10" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1123488613]
+transform = Transform3D(-1.7163302e-09, -3.3362113e-10, 0.04, -0.00763236, 0.039265085, 0, -0.039265085, -0.00763236, -1.7484538e-09, 0.6243145, 1.2000102, 8.63587)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching11" type="Sprite3D" parent="PosterDecoration_day5" unique_id=253188453]
+transform = Transform3D(-6.051188e-09, -5.8960442e-08, 0.04, 0.013324287, 0.03771555, 5.760884e-08, -0.03771555, 0.013324287, 1.3934574e-08, 0.6243095, 1.006423, 10.415407)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching9" type="Sprite3D" parent="PosterDecoration_day5" unique_id=928406319]
+transform = Transform3D(0.059999995, 0, 0, 0, 0.059999995, 0, 0, 0, 0.06, -5.127865, 1.4132445, -7.999241)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching8" type="Sprite3D" parent="PosterDecoration_day5" unique_id=2128622030]
+transform = Transform3D(3.05306e-10, -1.8914298e-08, 0.04, -0.0009905417, 0.03998773, 1.8916058e-08, -0.03998773, -0.0009905417, -1.6317614e-10, -7.7983007, 1.7840104, 0.32051033)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching6" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1344955086]
+transform = Transform3D(-1.7163302e-09, -3.3362113e-10, -0.04, -0.00763236, 0.039265085, 0, 0.039265085, 0.00763236, -1.7484538e-09, 9.957431, 1.0084841, -0.7983016)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching7" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1803672500]
+transform = Transform3D(0.039265085, 0.00763236, 0, -0.00763236, 0.039265085, 0, 0, 0, 0.04, 9.411213, 1.1000772, -5.978596)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching12" type="Sprite3D" parent="PosterDecoration_day5" unique_id=460009128]
+transform = Transform3D(-1.0727071e-09, -2.0851336e-10, 0.025, -0.004770225, 0.02454068, 2.0678922e-16, -0.02454068, -0.004770225, -1.0927848e-09, 8.207988, 0.63589114, -3.4660835)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching13" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1947692135]
+transform = Transform3D(-1.9138753e-09, -3.066696e-08, 0.024999999, 0.006117401, 0.024239995, 3.0202997e-08, -0.024239995, 0.006117401, 5.6483884e-09, 8.207984, 2.084009, -2.0423403)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching15" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1632726932]
+transform = Transform3D(1.997762e-10, -1.2231829e-08, 0.024999999, -0.0004723901, 0.024995536, 1.223342e-08, -0.024995536, -0.0004723901, -3.1384673e-11, 8.213246, 2.2185082, -2.6696162)
+texture = ExtResource("183_4k4ck")
+
+[node name="always watching14" type="Sprite3D" parent="PosterDecoration_day5" unique_id=381110970]
+transform = Transform3D(-1.1634e-09, 2.498881e-10, 0.024999999, -0.004934083, 0.024508258, -4.7458265e-10, -0.024508258, -0.004934083, -1.0912018e-09, 8.207981, 0.8803121, -0.93484557)
+texture = ExtResource("183_4k4ck")
+
+[node name="Sprite3D" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1752108599]
+transform = Transform3D(0.03991774, -0.0025649315, -5.988811e-08, 0.0025649315, 0.03991774, -2.061813e-08, 6.108703e-08, 1.6735484e-08, 0.04000002, -0.49636778, 2.0517242, 0.20337082)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D2" type="Sprite3D" parent="PosterDecoration_day5" unique_id=327406847]
+transform = Transform3D(-0.039089885, 0.008484448, -2.2156073e-09, 0.008484448, 0.039089885, 1.714872e-08, 5.802626e-09, 1.6288574e-08, -0.040000025, -5.5063996, 1.8985503, 5.985517)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D3" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1809475339]
+transform = Transform3D(-0.039703365, -0.0048628733, -1.4968862e-09, -0.0048628733, 0.039703365, -2.1391566e-08, 4.0863952e-09, -2.1050944e-08, -0.040000025, -5.8016467, 1.2421474, 5.985516)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D4" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1685761393]
+transform = Transform3D(-0.039842166, -0.0035506827, -2.1407587e-09, -0.0035506827, 0.039842166, -1.7639692e-08, 3.698112e-09, -1.7380057e-08, -0.040000025, -6.120405, 2.0910015, 5.985515)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D7" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1964153374]
+transform = Transform3D(-2.458144e-09, 5.9652265e-09, 0.040000025, -0.0057436586, 0.039585557, -6.2563723e-09, -0.039585557, -0.0057436586, -1.5761259e-09, -7.787422, 1.473424, -3.2494187)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D8" type="Sprite3D" parent="PosterDecoration_day5" unique_id=882755578]
+transform = Transform3D(-3.3141774e-09, -3.1246266e-08, 0.04000002, 0.0075579, 0.039279558, 3.1309604e-08, -0.039279558, 0.0075579, 2.6494007e-09, -7.7874207, 1.8107919, -3.7498956)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D6" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1762792203]
+transform = Transform3D(-0.037862647, -0.012900586, 5.298837e-09, -0.012900586, 0.037862647, -4.4188933e-08, 9.235869e-09, -4.3536684e-08, -0.040000025, -6.5305567, 1.8835154, 5.985514)
+texture = ExtResource("184_4k4ck")
+
+[node name="Sprite3D5" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1660528604]
+transform = Transform3D(-0.03848821, 0.010895205, 3.7212544e-09, 0.010895372, 0.038487617, -9.677226e-08, 7.4875075e-09, 2.3032742e-08, 0.15994574, -6.3269467, 1.4352597, 5.9855146)
+texture = ExtResource("184_4k4ck")
+
+[node name="tippys watching d5" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1834327077]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 2.3909307, 1.4326358, 0.20702244)
+texture = ExtResource("184_w0uga")
+
+[node name="tippys watching d11" type="Sprite3D" parent="PosterDecoration_day5" unique_id=2110031867]
+transform = Transform3D(-9.448286e-09, -5.9584966e-08, -0.27, -0.021299142, 0.2691586, -5.865395e-08, 0.2691586, 0.021299142, -1.4119166e-08, 6.4204226, 1.5184686, 12.124669)
+texture = ExtResource("184_w0uga")
+
+[node name="tippys watching d7" type="Sprite3D" parent="PosterDecoration_day5" unique_id=674720690]
+transform = Transform3D(-1.0053611e-08, 0, 0.23, 0, 0.23, 0, -0.23, 0, -1.0053611e-08, 8.206518, 1.4326358, -0.64673483)
+texture = ExtResource("184_w0uga")
+
+[node name="tippys watching d8" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1585553169]
+transform = Transform3D(-1.0053611e-08, 0, 0.23, 0, 0.23, 0, -0.23, 0, -1.0053611e-08, 8.206521, 1.4326358, -1.7111828)
+texture = ExtResource("184_w0uga")
+
+[node name="tippys watching d9" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1184481978]
+transform = Transform3D(-1.0053611e-08, 0, 0.23, 0, 0.23, 0, -0.23, 0, -1.0053611e-08, 8.206524, 1.4326358, -2.7635512)
+texture = ExtResource("184_w0uga")
+
+[node name="tippys watching d10" type="Sprite3D" parent="PosterDecoration_day5" unique_id=307980951]
+transform = Transform3D(-1.0053611e-08, 0, 0.23, 0, 0.23, 0, -0.23, 0, -1.0053611e-08, 8.206527, 1.4326358, -3.823829)
+texture = ExtResource("184_w0uga")
+
+[node name="tippys watching d6" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1106386101]
+transform = Transform3D(0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, -2.5282414, 1.3446536, 6.2054358)
+texture = ExtResource("184_w0uga")
+
+[node name="no text" type="Sprite3D" parent="PosterDecoration_day5" unique_id=445966900]
+transform = Transform3D(0.038, 0, 0, 0, 0.038, 0, 0, 0, 0.038, 7.6197495, 1.4326358, 0.20703708)
+texture = ExtResource("186_5upnq")
+
+[node name="no text11" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1024809650]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 2.1947064, 1.4326358, 6.2264743)
+texture = ExtResource("186_5upnq")
+
+[node name="no text12" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1901323454]
+transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 3.3478358, 1.4326358, 6.2264776)
+texture = ExtResource("186_5upnq")
+
+[node name="no text13" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1060431382]
+transform = Transform3D(-0.04, 0, -3.4969077e-09, 0, 0.04, 0, 3.4969077e-09, 0, -0.04, 3.2805011, 1.4326358, 12.465939)
+texture = ExtResource("186_5upnq")
+
+[node name="no text14" type="Sprite3D" parent="PosterDecoration_day5" unique_id=630328153]
+transform = Transform3D(-2.100613e-09, 8.870814e-09, 0.04, -0.0031709464, 0.039874114, -9.00942e-09, -0.039874114, -0.0031709464, -1.3907808e-09, 0.57580614, 1.3967007, 11.594549)
+texture = ExtResource("186_5upnq")
+
+[node name="no text15" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1248074502]
+transform = Transform3D(-0.039942518, 0.002143616, -3.3310883e-09, 0.002143616, 0.039942518, 6.184229e-09, 3.6577106e-09, 5.996828e-09, -0.04, 2.2036664, 1.4326358, 12.465935)
+texture = ExtResource("186_5upnq")
+
+[node name="no text16" type="Sprite3D" parent="PosterDecoration_day5" unique_id=956097446]
+transform = Transform3D(-0.03999842, 0.00035569168, -3.492353e-09, 0.00035569168, 0.03999842, 1.0261533e-09, 3.5013272e-09, 9.950577e-10, -0.04, 1.134282, 1.3912704, 12.465932)
+texture = ExtResource("186_5upnq")
+
+[node name="no text17" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1016832555]
+transform = Transform3D(-0.03999842, 0.00035569168, -3.492353e-09, 0.00035569168, 0.03999842, 1.0261533e-09, 3.5013272e-09, 9.950577e-10, -0.04, -0.86575633, 1.3912704, 9.973458)
+texture = ExtResource("186_5upnq")
+
+[node name="no text18" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1483913697]
+transform = Transform3D(-0.03999842, 0.00035569168, -3.492353e-09, 0.00035569168, 0.03999842, 1.0261533e-09, 3.5013272e-09, 9.950577e-10, -0.04, -1.9692049, 1.3912704, 9.973455)
+texture = ExtResource("186_5upnq")
+
+[node name="no text19" type="Sprite3D" parent="PosterDecoration_day5" unique_id=2013186202]
+transform = Transform3D(-0.03999842, 0.00035569168, -3.492353e-09, 0.00035569168, 0.03999842, 1.0261533e-09, 3.5013272e-09, 9.950577e-10, -0.04, -3.0560713, 1.3912704, 9.973453)
+texture = ExtResource("186_5upnq")
+
+[node name="no text20" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1163500566]
+transform = Transform3D(-1.7483899e-09, 1.5257906e-11, -0.04, 0.00034906142, 0.039998475, 0, 0.039998475, -0.00034906142, -1.7484538e-09, -0.010670781, 1.54966, 6.7540617)
+texture = ExtResource("186_5upnq")
+
+[node name="no text21" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1134312491]
+transform = Transform3D(-1.3479209e-09, -1.047009e-08, -0.04, -0.0033990135, 0.03985532, -1.0317679e-08, 0.03985532, 0.0033990135, -2.2327313e-09, -0.13676448, 1.3912704, 8.0367775)
+texture = ExtResource("186_5upnq")
+
+[node name="no text22" type="Sprite3D" parent="PosterDecoration_day5" unique_id=771526960]
+transform = Transform3D(0.0019217423, -1.7070284e-05, 0.0399538, -0.006830374, 0.039410997, 0.00034537324, -0.039365627, -0.0068390784, 0.0018905296, -3.9729664, 1.6259756, 8.036766)
+texture = ExtResource("186_5upnq")
+
+[node name="no text3" type="Sprite3D" parent="PosterDecoration_day5" unique_id=988473475]
+transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 9.062545, 1.4603117, -5.9875135)
+texture = ExtResource("186_5upnq")
+
+[node name="no text4" type="Sprite3D" parent="PosterDecoration_day5" unique_id=179054227]
+transform = Transform3D(-0.00010748944, 5.796581e-05, -0.042999826, 0.0015687605, 0.04297134, 5.400573e-05, 0.04297124, -0.0015686192, -0.00010953263, 9.982344, 1.405011, -3.4423733)
+texture = ExtResource("186_5upnq")
+
+[node name="no text5" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1978679924]
+transform = Transform3D(-1.8278214e-09, -3.528482e-09, -0.043, -0.0012612853, 0.042981498, -3.4733496e-09, 0.042981498, 0.0012612853, -1.9305375e-09, 9.988348, 1.4982182, -2.231323)
+texture = ExtResource("186_5upnq")
+
+[node name="red tippy watching" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1564579243]
+transform = Transform3D(-9.179416e-09, 0, -0.21, 0, 0.21, 0, 0.21, 0, -9.179416e-09, 9.962856, 1.7997644, -1.1015651)
+texture = ExtResource("181_w0uga")
+
+[node name="red tippy watching2" type="Sprite3D" parent="PosterDecoration_day5" unique_id=894017746]
+transform = Transform3D(-1.17346985e-08, 1.5289512e-08, -0.27197236, 0.005465363, 0.27191746, 1.5050613e-08, 0.27191746, -0.005465363, -1.203955e-08, 6.420137, 1.4787624, 10.33285)
+texture = ExtResource("181_w0uga")
+
+[node name="red tippy watching5" type="Sprite3D" parent="PosterDecoration_day5" unique_id=440893997]
+transform = Transform3D(-1.9362346e-08, -2.7614453e-07, 0.27197233, 0.05645211, 0.26604915, 2.7414933e-07, -0.26604915, 0.05645211, 3.8377323e-08, 0.58698064, 1.7579597, 9.372703)
+texture = ExtResource("181_w0uga")
+
+[node name="red tippy watching3" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1561564799]
+transform = Transform3D(-0.2694139, -0.037171524, 0.0018419542, -0.03714469, 0.2693994, 0.0036323923, -0.0023209832, 0.0033466567, -0.27194184, -2.5710847, 1.6191568, 5.9723587)
+texture = ExtResource("181_w0uga")
+
+[node name="red tippy watching7" type="Sprite3D" parent="PosterDecoration_day5" unique_id=282748442]
+transform = Transform3D(-0.26891237, 0.04058647, 0.0027946352, 0.040616307, 0.26890612, 0.0029628589, -0.0023209818, 0.0033468744, -0.2719418, 2.471721, 1.3525217, 5.972373)
+texture = ExtResource("181_w0uga")
+
+[node name="red tippy watching6" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1944851646]
+transform = Transform3D(0.24842474, 0.028020622, -4.4068997e-09, -0.028020622, 0.24842474, -7.838848e-08, -4.4068997e-09, 7.838848e-08, 0.25, -3.358763, 1.845397, 6.2088847)
+texture = ExtResource("181_w0uga")
+
+[node name="red tippy watching4" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1092725437]
+transform = Transform3D(0.26583996, -0.05742884, -1.7155571e-08, 0.05742884, 0.26583996, 1.6065883e-07, -1.7155571e-08, -1.6065884e-07, 0.27197233, -6.0816503, 1.9733083, -7.9952226)
+texture = ExtResource("181_w0uga")
+
+[node name="no text2" type="Sprite3D" parent="PosterDecoration_day5" unique_id=2081079887]
+transform = Transform3D(0.037965633, -0.0016156767, 1.1054841e-06, 0.0016156763, 0.037965633, 8.438214e-06, -1.4632611e-06, -8.38358e-06, 0.038, -1.343798, 1.4326358, 0.207012)
+texture = ExtResource("186_5upnq")
+
+[node name="no text6" type="Sprite3D" parent="PosterDecoration_day5" unique_id=912498628]
+transform = Transform3D(-1.659572e-09, 6.9556805e-11, 0.038000003, 0.0015912746, 0.03796667, 0, -0.037966665, 0.0015912747, -1.6610358e-09, -7.796757, 1.4326358, 2.5187166)
+texture = ExtResource("186_5upnq")
+
+[node name="no text10" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1915279159]
+transform = Transform3D(-1.877936e-09, 7.870904e-11, 0.043, 0.001800653, 0.042962283, -1.4038442e-16, -0.042962283, 0.001800653, -1.8795845e-09, -7.796735, 1.3263059, -5.372535)
+texture = ExtResource("186_5upnq")
+
+[node name="no text7" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1312445282]
+transform = Transform3D(-0.01965438, -0.003702056, -1.4929178e-09, -0.003702056, 0.01965438, -1.3332784e-08, 3.9350745e-09, -1.2826035e-08, -0.019999998, -7.0586505, 1.4105282, 5.9771357)
+texture = ExtResource("186_5upnq")
+
+[node name="no text8" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1558600309]
+transform = Transform3D(-0.01999998, 2.2201799e-05, -2.9708858e-09, 2.2201799e-05, 0.01999998, -2.4040263e-09, 2.968239e-09, -2.407319e-09, -0.019999994, -5.6870685, 2.3606186, 5.9771395)
+texture = ExtResource("186_5upnq")
+
+[node name="no text9" type="Sprite3D" parent="PosterDecoration_day5" unique_id=1779006234]
+transform = Transform3D(-0.018800268, 0.006822732, -2.7628033e-10, 0.006822732, 0.018800268, 1.7778046e-08, 6.32447e-09, 1.661736e-08, -0.019999992, -5.317197, 1.1045401, 5.9771404)
+texture = ExtResource("186_5upnq")
 
 [editable path="StreetBuildings2"]
 [editable path="StreetBuildings2/1"]
