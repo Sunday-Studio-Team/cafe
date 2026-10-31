@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://h3nxmuxey2b8"]
+
+[ext_resource type="Script" uid="uid://bdmnvs1b44fxm" path="res://final_comic.gd" id="1_r6jjl"]
+[ext_resource type="Texture2D" uid="uid://fj00ankvm2wu" path="res://sprites/final_comic_panels/Comic Panel 1.png" id="2_5rym0"]
+[ext_resource type="Texture2D" uid="uid://cpl5mh0uybpdp" path="res://sprites/final_comic_panels/Comic Panel 2.png" id="3_ftfw4"]
+[ext_resource type="Texture2D" uid="uid://ca6wes0vw3jee" path="res://sprites/final_comic_panels/Comic Panel 3.png" id="4_8e2xf"]
+[ext_resource type="Texture2D" uid="uid://dl1n4hjcn0krm" path="res://sprites/final_comic_panels/Comic Panel 4.png" id="5_5l5wn"]
+[ext_resource type="Texture2D" uid="uid://k3abugj2siiw" path="res://sprites/final_comic_panels/Comic Panel 5.png" id="6_76k1j"]
+[ext_resource type="Texture2D" uid="uid://cv8xb5xgo08g4" path="res://sprites/final_comic_panels/Comic Panel 6.png" id="7_6blng"]
+[ext_resource type="Texture2D" uid="uid://busonllfeeno3" path="res://sprites/final_comic_panels/Comic Panel 7.png" id="8_r2og0"]
+[ext_resource type="Texture2D" uid="uid://dkrsjd3ewe1i1" path="res://sprites/final_comic_panels/Comic Panel 8.png" id="9_xumvr"]
+[ext_resource type="Texture2D" uid="uid://od8ohhrh8f81" path="res://sprites/final_comic_panels/Comic Panel 9.png" id="10_xss2w"]
+[ext_resource type="Texture2D" uid="uid://ciae8movw226k" path="res://sprites/final_comic_panels/Comic Panel 10.png" id="11_kmkbb"]
+[ext_resource type="Texture2D" uid="uid://crv2owp137kax" path="res://sprites/endshift_ui/second_part/next_up.png" id="12_5l5wn"]
+[ext_resource type="Texture2D" uid="uid://bbajttqlv5mrb" path="res://sprites/endshift_ui/second_part/next_down.png" id="13_76k1j"]
+[ext_resource type="Texture2D" uid="uid://b3anqoh00iasi" path="res://sprites/endshift_ui/second_part/next_hover.png" id="14_6blng"]
+
+[node name="final_comic" type="Node2D" unique_id=1796735985 node_paths=PackedStringArray("comic_panel_2d_sprite_renderer", "next_panel_button")]
+process_mode = 3
+script = ExtResource("1_r6jjl")
+comic_panel_array = Array[Texture2D]([ExtResource("2_5rym0"), ExtResource("3_ftfw4"), ExtResource("4_8e2xf"), ExtResource("5_5l5wn"), ExtResource("6_76k1j"), ExtResource("7_6blng"), ExtResource("8_r2og0"), ExtResource("9_xumvr"), ExtResource("10_xss2w"), ExtResource("11_kmkbb")])
+comic_panel_2d_sprite_renderer = NodePath("FinalComicRenderer")
+next_panel_button = NodePath("MarginContainer/NextComicPanelButton")
+
+[node name="Background" type="ColorRect" parent="." unique_id=15277258]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(19.447819, 10.959776)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=58712233]
+process_priority = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 1904.0
+offset_bottom = 1064.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="NextComicPanelButton" type="TextureButton" parent="MarginContainer" unique_id=2144308336]
+process_mode = 3
+process_priority = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+texture_normal = ExtResource("12_5l5wn")
+texture_pressed = ExtResource("13_76k1j")
+texture_hover = ExtResource("14_6blng")
+
+[node name="FinalComicRenderer" type="Sprite2D" parent="." unique_id=487719553]
+z_index = 1
+position = Vector2(960, 540)
+scale = Vector2(1.5, 1.5)

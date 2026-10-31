@@ -18,7 +18,7 @@ extends Node3D
 @export var customer_help_desk: CustomerHelpDesk
 @export var customer_trash_spawn_timer: Timer
 @export var customer_scene: PackedScene
-@export var customer_trash_scene: PackedScene
+@export var customer_trash_scenes: Array[PackedScene]
 @export var spot_for_customer_entry: Marker3D
 @export var customer_leaving_spot: Marker3D
 @export var cafe_front_roller_shutters: CafeFrontRollerShutters
@@ -50,7 +50,6 @@ var _nodes_to_destroy_on_shift_start: Array[Node]
 var _machine_customer_spawn_timer: Timer
 var _help_desk_customer_spawn_timer: Timer
 
-@export var day_containers_desk: Array[Node3D] = []
 @export var day_containers_boxes: Array[Node3D] = []
 @export var day_containers_posters: Array[Node3D] = []
 
@@ -82,12 +81,11 @@ func _ready() -> void:
 	Events.customer_leave.connect(shift_end_sequence)
 	Events.spawn_specific_customer.connect(spawn_specific_customer)
 	Events.air_freshener_used.connect(apply_used_air_freshener)
-	Events.shutters_open_requested.connect(_on_shutters_open_requested)
+	Events.flipped_open_sign.connect(_on_shutters_open_requested)
 	Events.shift_start_requested.connect(_on_shift_start_requested)
 	Global.main_scene = self
 	Global.customer_entry_spot = spot_for_customer_entry
 	Global.customer_leaving_spot = customer_leaving_spot
-	Global.shift_started = false
 
 	customer_trash_spawn_timer.timeout.connect(attempt_spawn_trash)
 	_all_machines = [
@@ -123,9 +121,11 @@ func _ready() -> void:
 
 	# Determine if we should play the tutorial!
 	var should_play_tutorial: bool = (
-		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day
+		Global.day > SaveDataManager.save_data.latest_tutorial_completed_day and\
+		Global.day != 5 # We go right into day 5, no cinematics.
 	)
 	var skip_tutorials: bool = OS.has_feature("skip_tutorials")
+
 	if should_play_tutorial and not skip_tutorials:
 		print("should play tutorial!")
 		Global.playing_tutorial = true
@@ -142,9 +142,6 @@ func _ready() -> void:
 	# enables props as the days go by
 	# could combine the loops to one loop but am not sure if all props will have equivalent
 	# number of day props
-	for i in range(day_containers_desk.size()):
-		if day_containers_desk[i] != null:
-			day_containers_desk[i].visible = (i <= Global.day)
 
 	for i in range(day_containers_boxes.size()):
 		var box: Node3D = day_containers_boxes[i]
@@ -162,6 +159,7 @@ func _ready() -> void:
 			day_containers_posters[i].visible = (i <= Global.day)
 
 	# we have to set all these manually here so if we reload the scene they'll reset
+	Global.shift_started = false
 	Global.holding_ingredients = false
 	Global.holding_trash = false
 	Global.daily_cafe_money = 0
@@ -173,7 +171,6 @@ func _ready() -> void:
 	Global.machine_customer_flow_rate = _get_machine_customer_flow_rate()
 	Global.help_desk_customer_flow_rate = _get_help_desk_customer_flow_rate()
 	Global.total_trash = 0
-	Global.all_3d_audio_stream_players.clear()
 	Global.refresh_active_items()
 	closing_time = false
 
@@ -182,6 +179,11 @@ func _ready() -> void:
 	Events.main_scene_ready.emit()
 
 	_tutorial_manager.start_day()
+
+	Global.all_audio_stream_players.clear()
+	for p: AudioStreamPlayer3D in find_children("*", "AudioStreamPlayer3D"):
+		p.set_meta("base_pitch_scale", p.pitch_scale)
+		Global.all_audio_stream_players.append(p)
 
 
 func _physics_process(delta: float) -> void:
@@ -315,8 +317,7 @@ func _on_shift_start_requested() -> void:
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 		_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
 		await _tutorial_manager._cinematic_camera.play_animation("pre_shift_start_sequence")
-		Global.player.global_position = _player_shift_start_position.global_position
-		Global.player.global_rotation = _player_shift_start_position.global_rotation
+		Global.player.override_position_rotation(_player_shift_start_position.global_position, _player_shift_start_position.global_rotation)
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_position = Global.player.camera.camera_effects.global_position
 		_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 		await _tutorial_manager._cinematic_camera.play_animation("shift_start_sequence")
@@ -459,7 +460,7 @@ func attempt_spawn_trash() -> void:
 
 
 func spawn_trash() -> void:
-	var customer_trash: CustomerTrash = customer_trash_scene.instantiate()
+	var customer_trash: CustomerTrash = customer_trash_scenes.pick_random().instantiate()
 
 	var current_customers: Array[Customer]
 	# Get all current customer positions
@@ -486,14 +487,14 @@ func spawn_trash() -> void:
 	Global.total_trash += 1
 	if Global.total_trash >= Global.trash_punishment_threshold:
 		if Global.lucky_charm_check():
-			Events.alert_posted.emit("Too much trash in the store", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Too much trash!", UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit( "-%s Too much trash in the store" % Global.trash_punishment_amount, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit( "-%s Too much trash!" % Global.trash_punishment_amount, UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= Global.trash_punishment_amount
 	Events.alert_posted.emit(
-		"Customer dropped some trash...",
-		UI.AlertIconType.CUSTOMER,
+		"Customer dropped trash!",
+		UI.AlertType.TRASH,
 		UI.ALERT_DEFAULT_DURATION,
 		UI.ALERT_COLOR_NEUTRAL,
 	)
@@ -545,9 +546,9 @@ func shift_end_sequence(override: bool = false):
 				SaveDataManager.save_data.latest_unlocked_day = Global.day
 				SaveDataManager.save_game_to_file()
 
-			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
-		#Leaving this here in case you guys want this scene back again
-		#Events.scene_switch_requested.emit(SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE)
+			Global.should_override_level_select_day = true
+			Global.level_select_day_override = Global.day
+			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.LEVEL_SELECT)
 		else:
 			Events.scene_switch_requested.emit(SceneSwitcher.GameScene.MAIN_SCENE)
 

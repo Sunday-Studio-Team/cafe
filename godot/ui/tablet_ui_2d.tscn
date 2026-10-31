@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://ba3pq2tu8j81o" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/mouse_move.png" id="6_6ci3b"]
 [ext_resource type="Texture2D" uid="uid://cnoukfb10j5j1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_alt.png" id="7_0bt22"]
 [ext_resource type="PackedScene" uid="uid://c8dt253af0lw5" path="res://ui/tablet/tablet_item_icon.tscn" id="8_vx1ja"]
-[ext_resource type="Texture2D" uid="uid://cmhkquk0vxyj3" path="res://sprites/eye_logo.png" id="9_omxmy"]
 [ext_resource type="Texture2D" uid="uid://dfal061fim05l" path="res://sprites/tablet_ui/rating/tablet_rating_needle.png" id="10_jcu5s"]
 [ext_resource type="Texture2D" uid="uid://041ew7jgtjke" path="res://sprites/tablet_ui/rating/rating_star_over.png" id="12_jcu5s"]
 [ext_resource type="Texture2D" uid="uid://djparycg4t5kx" path="res://sprites/tablet_ui/rating/tablet_rating_icon.png" id="12_vx1ja"]
@@ -268,6 +267,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="ShowMousePrompt" type="HBoxContainer" parent="MarginContainer/Screen/ItemUI" unique_id=469603555]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
@@ -290,7 +290,7 @@ stretch_mode = 4
 
 [node name="ItemIcons" type="GridContainer" parent="MarginContainer/Screen/ItemUI" unique_id=266679496]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 6
 size_flags_vertical = 4
 columns = 3
 
@@ -311,12 +311,3 @@ layout_mode = 2
 
 [node name="TabletItemIcon6" parent="MarginContainer/Screen/ItemUI/ItemIcons" unique_id=196054252 instance=ExtResource("8_vx1ja")]
 layout_mode = 2
-
-[node name="CctvIndicator" type="TextureRect" parent="MarginContainer" unique_id=1384909801]
-custom_minimum_size = Vector2(125, 110)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 0
-offset_transform_enabled = true
-texture = ExtResource("9_omxmy")
-expand_mode = 2

@@ -13,6 +13,7 @@ const REFILL_MINIGAME := "Refill"
 
 # for making the machine jump when an order finishes, etc.
 @export var animation_player: AnimationPlayer
+@export var camera_low_fps_updater: LowFpsSubViewportUpdater
 @export var static_body: StaticBody3D
 @export var gui_3d: Machine3DGui
 @export var timer: Timer
@@ -110,8 +111,7 @@ enum Icon {
 # OR try to remake without enough ingredients
 @export var ingredients_warning_sound: AudioStreamPlayer3D
 @export_category("Popups")
-@export var negative_rating_vfx: Machine3DPopupVfx
-@export var positive_rating_vfx: Machine3DPopupVfx
+@export var rating_vfx: Machine3DPopupVfx
 @export var money_gain_vfx: Machine3DPopupVfx
 @export_category("Explosion Particles")
 @export var explosion_boom_particles: GPUParticles3D
@@ -310,10 +310,11 @@ func check_for_stepping_in_spill() -> void:
 	if spill_on_floor:
 		var rating_loss: float = Stats.current.customer_steps_on_spill_rating_loss_each_day[Global.day]
 		if Global.lucky_charm_check():
-			Events.alert_posted.emit("A customer stood in a spill!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Customer stood in spill!", UI.AlertType.CUSTOMER_STEPPED_IN_SPILL, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%s A customer stood in a spill!" % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("-%s Customer stood in spill!" % rating_loss, UI.AlertType.CUSTOMER_STEPPED_IN_SPILL, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			customer.play_spill_dissatisfaction_vfx()
 			Global.employee_rating -= rating_loss
 
 
@@ -400,12 +401,12 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 	if customer == timed_out_customer:
 		var rating_loss: float = Stats.current.machine_customer_timed_out_rating_loss_each_day[Global.day]
 		if Global.lucky_charm_check():
-			Events.alert_posted.emit("Customer not served order, left...", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Customer left!", UI.AlertType.CUSTOMER_NOT_SERVED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%s Customer not served order, left..." % rating_loss, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("-%s Customer left!" % rating_loss, UI.AlertType.CUSTOMER_NOT_SERVED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= rating_loss
-			negative_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
+			rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
 		customer.leave_store()
 		_set_customer(null)
 
@@ -493,7 +494,9 @@ func machine_make_drink() -> void:
 	# if we can interact with the machine while its jumping it does weird stuff
 	gui_3d.interactable.hide()
 	animation_player.play("order_ready_jump")
+	camera_low_fps_updater.override_target_fps(5)
 	await animation_player.animation_finished
+	camera_low_fps_updater.clear_override_target_fps()
 	gui_3d.interactable.show()
 
 	# if we're using the machine when it jumps, it loses our input for some reason
@@ -622,7 +625,7 @@ func _calculate_drink_diff(correct_drink: Drink, made_drink: Drink) -> int:
 func spill() -> void:
 	spill_interactable.show()
 	spill_sound.play()
-	Events.alert_posted.emit("A machine spilled!", UI.AlertIconType.MACHINE, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+	Events.alert_posted.emit("Machine spilled!", UI.AlertType.MACHINE_SPILLED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 	Global.spills_this_shift += 1
 	spill_on_floor = true
 
@@ -709,7 +712,7 @@ func fix_machine(hammer: bool = false) -> void:
 func consume_ingredients() -> void:
 	ingredients -= Stats.current.ingredients_per_order
 	if ingredients < Stats.current.ingredients_per_order:
-		Events.alert_posted.emit("A machine ran out of ingredients!", UI.AlertIconType.MACHINE)
+		Events.alert_posted.emit("Machine out of ingredients!", UI.AlertType.MACHINE_RAN_OUT_OF_INGREDIENTS)
 		no_ingredients_sound.play()
 
 
@@ -720,9 +723,11 @@ func clean_up_spill() -> void:
 	spill_on_floor = false
 	spill_clean_sound.play()
 	spill_clean_particles.restart()
+	if is_instance_valid(customer):
+		customer.hide_spill_dissatisfaction_vfx()
 
 	var rating_gained: float = Stats.current.spill_cleaned_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
+	Events.alert_posted.emit("+%s⭐ Spill cleaned!" % rating_gained, UI.AlertType.SPILL_CLEANED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 	Global.employee_rating += rating_gained
 
 	Global.tutorial_day_3_spill_cleaned = true
@@ -808,21 +813,21 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	if did_remake_drink or order.star_rating_loss_for_accept == 0.0:
 		Events.alert_posted.emit(
-			"+%.1f Customer happy with drink!" % Stats.current.drink_correct_star_rating_gain_each_day[Global.day],
-			UI.AlertIconType.RATING,
+			"+%.1f Correct drink!" % Stats.current.drink_correct_star_rating_gain_each_day[Global.day],
+			UI.AlertType.RATING_UP_DRINK,
 			4.0,
 			UI.ALERT_COLOR_GREEN
 		)
 		Global.employee_rating += Stats.current.drink_correct_star_rating_gain_each_day[Global.day]
-		positive_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.PLUS_RATING)
+		rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.PLUS_RATING)
 	else:
 		if Global.lucky_charm_check():
-			Events.alert_posted.emit("Customer unhappy with drink...", UI.AlertIconType.RATING, 4.0, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Wrong drink!", UI.AlertType.RATING_DOWN_DRINK, 4.0, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%.1f Customer unhappy with drink..." % order.star_rating_loss_for_accept, UI.AlertIconType.RATING, 4.0, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("-%.1f Wrong drink!" % order.star_rating_loss_for_accept, UI.AlertType.RATING_DOWN_DRINK, 4.0, UI.ALERT_COLOR_RED)
 			Global.employee_rating -= order.star_rating_loss_for_accept
-			negative_rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
+			rating_vfx.play_anim_then_hide(Machine3DPopupVfx.VfxType.MINUS_RATING)
 
 	equal_sign.texture = equal_sign_states[EqualStates.Empty]
 	reset_icons()
@@ -832,7 +837,7 @@ func accept_order(did_remake_drink: bool) -> void:
 
 	Events.alert_posted.emit(
 		"+%s Drink sold!" % Global.float_to_price(order.final_order_price),
-		UI.AlertIconType.MONEY,
+		UI.AlertType.DRINK_SOLD,
 		4.0,
 		UI.ALERT_COLOR_MONEY
 	)
@@ -874,8 +879,8 @@ func break_down(specific_repair_minigame_name: String="") -> void:
 	fix_machine_button.show()
 	breakdown_sound.play()
 	Events.alert_posted.emit(
-			"A machine has broken down!",
-			UI.AlertIconType.MACHINE,
+			"Machine broke!",
+			UI.AlertType.MACHINE_BROKE_DOWN,
 			UI.ALERT_DEFAULT_DURATION,
 			UI.ALERT_COLOR_RED
 	)
@@ -990,7 +995,7 @@ func _on_remake_drink_button_pressed() -> void:
 			elif item.item_level == 2:
 				time_scale = 0.25
 
-			Global.pitch_shift_all_3d_audio(true)
+			Global.pitch_shift_all_audio(0.75)
 			Engine.time_scale = time_scale
 			print("time scale set to: %s" % Engine.time_scale)
 
@@ -1019,35 +1024,17 @@ func _on_remade_drink() -> void:
 
 	accept_order(true)
 
-	for item in Global.owned_items:
-		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_3d_audio(false)
-			Engine.time_scale = 1.0
-			print("time scale returned to: %s" % Engine.time_scale)
-
 
 func _cancel_remake_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	Events.force_close_minigame.disconnect(_on_force_close_remake_minigame)
 
-	for item in Global.owned_items:
-		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_3d_audio(false)
-			Engine.time_scale = 1.0
-			print("time scale returned to: %s" % Engine.time_scale)
-
 
 func _on_force_close_remake_minigame() -> void:
 	Events.minigame_end.disconnect(_on_remade_drink)
 	Events.minigame_cancelled.disconnect(_cancel_remake_minigame)
 	Events.force_close_minigame.disconnect(_on_force_close_remake_minigame)
-
-	for item in Global.owned_items:
-		if item.item_id == "barista_guide":
-			Global.pitch_shift_all_3d_audio(false)
-			Engine.time_scale = 1.0
-			print("time scale returned to: %s" % Engine.time_scale)
 
 
 class OrderData:

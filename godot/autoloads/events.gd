@@ -8,7 +8,8 @@ signal main_scene_ready
 signal quit_game_requested
 signal game_options_changed(options_data: OptionsData)
 signal player_confirmed_item_loadout
-signal shutters_open_requested
+signal flipped_open_sign
+# emitted after the sign + shutters animation, triggers the countdown etc
 signal shift_start_requested
 signal shift_started
 signal customer_entered
@@ -32,7 +33,7 @@ signal money_updated(new_value: float, old_value: float)
 signal employee_rating_updated(new_value: float, old_value: float)
 signal alert_posted(
 	message: String,
-	alert_icon_type: UI.AlertIconType,
+	alert_icon_type: UI.AlertType,
 	alert_time_to_live: float,
 	color: Color,
 )

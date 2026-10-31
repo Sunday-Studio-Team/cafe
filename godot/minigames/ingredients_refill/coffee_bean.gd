@@ -30,10 +30,9 @@ func _physics_process(delta: float) -> void:
 	sprite_2d.rotation_degrees += 15
 	seconds_passed+=delta
 	if(linear_velocity.y>0 and has_sped_up == false):
-		gravity_scale*=2.5
 		has_sped_up = true
 
 	#elif
 	if(time_counter_float>1.0/60.0): #currently, physics tick is at 60hz; 8/23/2026
 		time_counter_float -=1.0/60.0
-		gravity_scale+=0.07
+		gravity_scale+=0.03

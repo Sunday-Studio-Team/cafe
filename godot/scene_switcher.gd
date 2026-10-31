@@ -6,6 +6,8 @@ enum GameScene {
 	LEVEL_SELECT,
 	MAIN_SCENE,
 	END_OF_DAY_DIALOG_SCENE,
+	FINAL_COMIC_SCENE,
+	INTRO_VIDEO,
 }
 
 const LOADING_FADE_IN_TIME := 0.5
@@ -13,7 +15,9 @@ const LOADING_FADE_OUT_TIME := 1.0
 const TIPPY_LOADING_LOOPS: Array[StringName] = [&"loop_0", &"loop_30", &"loop_60", &"loop_99"]
 const TIPPY_LOADING_SWITCHES: Array[StringName] = [&"switch_0_30", &"switch_30_60", &"switch_60_99"]
 
-@export var loading_screen: ColorRect
+@export var _loading_screen_animation_player: AnimationPlayer
+@export var _loading_screen_animation_name_appear: StringName
+@export var loading_screen: Control
 @export var _loading_progress_bar: ProgressBar
 @export var loading_icons: Control
 @export var loading_tippy: AnimatedSprite2D
@@ -21,8 +25,10 @@ const TIPPY_LOADING_SWITCHES: Array[StringName] = [&"switch_0_30", &"switch_30_6
 @export var _main_menu_uid: StringName
 @export var _level_select_uid: StringName
 @export var _main_scene_uid: StringName
+@export var _intro_video_uid: StringName
 @export var _end_of_day_dialog_scene_uid: StringName
-## Additional resources to always keep cached for speed.
+@export var _final_comic_scene_uid: StringName
+## Additional resources to always keep cached for speed. 
 @export var _main_sub_resource_uids: Array[StringName]
 
 @export var _cafe_environment_res: Environment
@@ -42,9 +48,11 @@ var _tippy_finishing: bool = false
 
 
 func _ready() -> void:
+	loading_screen.visible = false
+
 	# Clear the sprite frames, in case they were set in editor.
 	loading_tippy.sprite_frames = null
-	
+
 	loading_tippy.animation_finished.connect(_on_tippy_animation_finished)
 	Global.cafe_environment_res = _cafe_environment_res
 
@@ -67,13 +75,15 @@ func _process(_delta: float) -> void:
 
 
 func _start_tippy_loading() -> void:
+	_tippy_finishing = false
+
 	# Load the tippy sprite frames
 	_loading_tippy_sprite_frames_load_token = Global.resource_background_loader.cache_resource(_loading_tippy_sprite_frames_uid)
 	while !_loading_tippy_sprite_frames_load_token.is_loaded:
 		await get_tree().process_frame
 		if _tippy_finishing:
 			return
-	
+
 	var loading_tippy_sprite_frames_resource: Resource = Global.resource_background_loader.get_resource(_loading_tippy_sprite_frames_load_token)
 	var loading_tippy_sprite_frames: SpriteFrames = loading_tippy_sprite_frames_resource as SpriteFrames
 	if loading_tippy_sprite_frames == null:
@@ -88,7 +98,6 @@ func _start_tippy_loading() -> void:
 	_tippy_stage = 0
 	_tippy_target_stage = 0
 	_tippy_switching = false
-	_tippy_finishing = false
 	_loading_progress_bar.value = 0.0
 
 func _set_loading_progress(ratio: float) -> void:
@@ -131,16 +140,20 @@ func _finish_tippy_loading() -> void:
 		await loading_tippy.animation_finished
 
 
-func load_scene(scene: SceneSwitcher.GameScene) -> void:
+func load_scene(scene: SceneSwitcher.GameScene, skip_intro: bool = false) -> void:
+	loading_screen.visible = true
+
 	const TIMING_PRINTS: bool = true
 	const COUNT_CHILDREN_PRINTS: bool = true
 	_start_tippy_loading()
 
+	if scene == SceneSwitcher.GameScene.MAIN_MENU and not skip_intro:
+		scene = SceneSwitcher.GameScene.INTRO_VIDEO
+
 	if current_scene:
 		get_tree().paused = true
-		loading_tween = create_tween()
-		loading_tween.tween_property(loading_screen, "modulate:a", 1, LOADING_FADE_IN_TIME).from(0)
-		await loading_tween.finished
+		_loading_screen_animation_player.play(_loading_screen_animation_name_appear)
+		await _loading_screen_animation_player.animation_finished
 		current_scene.queue_free()
 		await current_scene.tree_exited
 
@@ -283,11 +296,10 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 	_loading_progress_bar.visible = false
 	get_tree().paused = false
 
-	loading_tween = create_tween()
-	loading_tween.tween_property(loading_screen, "modulate:a", 0, LOADING_FADE_OUT_TIME).from(1)
-	await loading_tween.finished
+	_loading_screen_animation_player.play_backwards(_loading_screen_animation_name_appear)
+	await _loading_screen_animation_player.animation_finished
 	loading_tippy.stop()
-	
+
 	# Unload the sprite frames.
 	if _loading_tippy_sprite_frames_load_token != null:
 		Global.resource_background_loader.uncache_resource(_loading_tippy_sprite_frames_load_token)
@@ -295,8 +307,10 @@ func load_scene(scene: SceneSwitcher.GameScene) -> void:
 		# Fade it out.
 		await create_tween().tween_property(loading_tippy, "modulate:a", 1.0, 0.5).finished
 		loading_tippy.sprite_frames = null
-	
+
 	Events.scene_switch_in_animation_finished.emit()
+
+	loading_screen.visible = false
 
 
 func quit_game() -> void:
@@ -318,6 +332,10 @@ func _scene_enum_to_uid(scene: SceneSwitcher.GameScene) -> StringName:
 			return _main_scene_uid
 		SceneSwitcher.GameScene.END_OF_DAY_DIALOG_SCENE:
 			return _end_of_day_dialog_scene_uid
+		SceneSwitcher.GameScene.FINAL_COMIC_SCENE:
+			return _final_comic_scene_uid
+		SceneSwitcher.GameScene.INTRO_VIDEO:
+			return _intro_video_uid
 		_:
 			push_error("Unhandled Scene!")
 			return &""

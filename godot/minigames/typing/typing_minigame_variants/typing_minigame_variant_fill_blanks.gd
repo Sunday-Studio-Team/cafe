@@ -54,6 +54,9 @@ func start_minigame_variant(customer: Customer) -> void:
 			tween3.tween_property(speech_bubble_texture,"offset_transform_scale",Vector2(1,1),0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			tween3.set_parallel(true)
 			tween3.tween_property(speech_bubble_texture,"offset_transform_rotation",0,1.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			tween3.tween_callback(
+				func(): shake_thing(customer_container, 30, 20)
+			).set_delay(0.5)
 	).set_delay(0.5)
 	# Get a random minigame content resource
 	var typing_minigame_contents_index: int = randi_range(0, contents.size()-1)
@@ -93,11 +96,31 @@ func start_minigame_variant(customer: Customer) -> void:
 	_active_typing_section_index = 0
 	_start_next_section()
 
+func shake_thing(thing:Control, strength=20, shakes=5):
+	var shake_intensity = strength
+	var sato_original_position: Vector2 = thing.position
+	var shake_tween := thing.create_tween()
+	var shake_offset_target := Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+
+	shake_tween.tween_property(thing, "position", thing.position + shake_offset_target, 0.025)
+	for i in range(shakes):
+		shake_offset_target = Vector2(randf_range(-shake_intensity, shake_intensity), 0)
+		shake_tween.chain().tween_property(
+			thing,
+			"position",
+			thing.position + shake_offset_target,
+			0.025,
+		)
+	shake_tween.tween_property(thing, "position", sato_original_position, 0.1)
+
 
 func _start_next_section() -> void:
 	var typing_minigame_section: TypingMinigameSection = _typing_sections[_active_typing_section_index]
 	print("starting section")
-	typing_minigame_section.typed_letter_correct.connect(func(): correct_sound.play())
+	typing_minigame_section.typed_letter_correct.connect(func():
+		correct_sound.play()
+		shake_thing(sato_container)
+		)
 	typing_minigame_section.typed_letter_wrong.connect(func(): wrong_sound.play())
 	typing_minigame_section.start_section()
 

@@ -2,16 +2,25 @@ extends CanvasLayer
 class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
-enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
-
-# TODO: replace hardcoded file paths with @export refs
-const ALERT_ICON_TYPE_IMAGE_MAP = {
-	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
-	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
-	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
-	AlertIconType.RATING: "res://Assets/UI/alert_icons/rating_icon.png",
-	AlertIconType.MONEY: "res://Assets/UI/alert_icons/dollar_icon.png",
+enum AlertType {
+	CUSTOMER_COMPLAINED,
+	CUSTOMER_NOT_SERVED,
+	CUSTOMER_STEPPED_IN_SPILL,
+	DRINK_SOLD,
+	HELP_DESK_CUSTOMER_CLEARED,
+	HELP_DESK_CUSTOMER_LEFT,
+	LOW_TIME_WARNING,
+	MACHINE_BROKE_DOWN,
+	MACHINE_RAN_OUT_OF_INGREDIENTS,
+	MACHINE_SPILLED,
+	RATING_DOWN_DRINK,
+	RATING_UP_DRINK,
+	SPILL_CLEANED,
+	TRASH,
+	BROKE_RULE_REMAKE,
+	BROKE_RULE_RUNNING,
 }
+
 const ALERT_DEFAULT_DURATION: float = 4.0
 const ALERT_COLOR_NEUTRAL: Color = Color.WHITE
 const ALERT_COLOR_RED: Color = Color.RED
@@ -22,13 +31,11 @@ const ALERT_QUEUE_SIZE := 5
 @export var interactable_indicator: Control
 @export var interactable_label: RichTextLabel
 @export var shift_starting_ending_label: RichTextLabel
+@export var shit_starting_ending_panel: PanelContainer
 @export var money_sound: AudioStreamPlayer
 @export var gain_points_sound: AudioStreamPlayer
 @export var lose_points_sound: AudioStreamPlayer
 @export var low_time_sound: AudioStreamPlayer
-@export var cctv_indicator: TextureRect
-@export var _eye_logo_red_texture: Texture2D
-@export var _eye_logo_texture: Texture2D
 @export var alert_ui: Control
 @export var day_indicator: Label
 @export var drop_button: Button
@@ -44,6 +51,9 @@ const ALERT_QUEUE_SIZE := 5
 @export var end_shift_guide: Button
 @export var _alert_packed_scene_uid: StringName
 @export var exploding_bomb_ui: PanelContainer
+@export var throw_trash_ui: PanelContainer
+@export var throw_trash_ui_label: RichTextLabel
+@export var alert_icons: Array[Texture]
 
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
@@ -53,6 +63,8 @@ var exploding_bomb_on_cooldown: bool = false
 
 
 func _ready() -> void:
+	shift_starting_ending_label.modulate = Color.TRANSPARENT
+
 	Events.money_updated.connect(
 		func(new_value: float, old_value: float):
 			play_score_update_sounds(ScoreType.MONEY, new_value, old_value)
@@ -63,21 +75,15 @@ func _ready() -> void:
 	)
 
 	Events.alert_posted.connect(
-			func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE):
-				_on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
+			func(message, alert_type, alert_time_to_live = 4.0, color = Color.WHITE):
+				_on_alert_posted(message, alert_type, alert_time_to_live, color)
 	)
 
-	Events.shift_started.connect(
-		func():
-			shift_starting_ending_label.show()
-			await get_tree().create_timer(5, false).timeout
-			create_tween().tween_property(shift_starting_ending_label, "modulate", Color.TRANSPARENT, 0.5)
-	)
 	Events.shift_end_sequence_started.connect(
 		func():
 			low_time_sound.play()
 			shift_starting_ending_label.text = (
-				"\n\n[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
+				"[wave amp=100 freq=7.5][b]SHIFT ENDING[/b][/wave]\nThe café will close after these customers leave!"
 			)
 			shift_starting_ending_label.modulate = Color.WHITE
 			await get_tree().create_timer(6, false).timeout
@@ -89,16 +95,6 @@ func _ready() -> void:
 		func():
 			Events.machine_exit_button_pressed.emit()
 	)
-
-	# we wait here to make sure some global vars like profit goal
-	# get set before we show them
-	# NOTE: does this still make sense ?
-	await get_tree().process_frame
-
-	if Global.playing_tutorial or Global.day < 2:
-		cctv_indicator.hide()
-	else:
-		cctv_indicator.show()
 
 
 func _physics_process(_delta: float) -> void:
@@ -126,11 +122,13 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 
-	update_cctv_indicator()
+	update_throw_trash_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
 	handle_item_hover_tooltip()
+
+	shit_starting_ending_panel.modulate = shift_starting_ending_label.modulate
 
 
 func handle_item_hover_tooltip() -> void:
@@ -162,10 +160,14 @@ func handle_item_hover_tooltip() -> void:
 
 func handle_exit_machine_button_visibility() -> void:
 	exit_machine_button.visible = Global.in_machine_ui and not Global.minigame_active
+	if exit_machine_button.visible:
+		exit_machine_button.text = "[%s]\nEXIT" % OS.get_keycode_string(SaveDataManager.get_options_data().pause_exit_menu_action_physical_keycode)
 
 
 func handle_drop_item_ui() -> void:
-	drop_button.visible = (Global.holding_ingredients or Global.holding_trash) and not Global.in_ui
+	drop_button.visible = Global.holding_ingredients and not Global.in_ui
+	if drop_button.visible:
+		drop_button.text = "[%s]\nDROP" % OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode)
 
 
 func update_day_indicator() -> void:
@@ -335,11 +337,16 @@ func update_exploding_bomb_timer(_delta: float) -> void:
 			exploding_bomb_on_cooldown = false
 
 
-func update_cctv_indicator() -> void:
-	if Global.player_in_cctv_los:
-		cctv_indicator.texture = _eye_logo_red_texture
+func update_throw_trash_ui() -> void:
+	if Global.holding_trash:
+		throw_trash_ui.show()
+		throw_trash_ui_label.text = (
+			"Press %s to throw"
+			% OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode).to_upper()
+		)
+
 	else:
-		cctv_indicator.texture = _eye_logo_texture
+		throw_trash_ui.hide()
 
 
 func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
@@ -354,7 +361,7 @@ func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 
 func _on_alert_posted(
 	message: String,
-	alert_icon_type: AlertIconType,
+	alert_type: AlertType,
 	alert_time_to_live: float = 4.0,
 	color: Color = Color.WHITE
 ) -> void:
@@ -380,7 +387,7 @@ func _on_alert_posted(
 	# TODO: static typing for this
 	var new_alert = alert_packed_scene.instantiate()
 	new_alert.alert_label.text = message
-	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
+	new_alert.icon.texture = alert_icons[alert_type]
 
 	alert_ui.add_child(new_alert)
 	alert_queue.append(new_alert)
@@ -395,8 +402,6 @@ func _on_alert_posted(
 	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
 	# the lambda is called
 	new_alert_tween.finished.connect(_get_on_alert_tween_finished.bind(new_alert).call())
-
-	new_alert.alert_sprite.play()
 
 
 func play_score_update_sounds(score_type: ScoreType, new_value: float, old_value: float) -> void:

@@ -52,7 +52,7 @@ var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = 
 var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
-var time_camera_disabled_after_sabotage := 30.0
+var time_camera_disabled_after_sabotage := 15.0
 
 var lucky_charm_activation_chance: float = 0.25
 

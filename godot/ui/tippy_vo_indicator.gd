@@ -17,6 +17,9 @@ func _ready() -> void:
 
 
 func _on_vo_started(_voice_line: VoiceLine) -> void:
+	if _voice_line.speaker.speaker_enum != VoiceLineSpeaker.SpeakerEnum.TIPPY:
+		return
+	
 	_play_animation()
 	var t := create_tween().set_parallel()
 	t.tween_property(sprite, "modulate", Color.WHITE, 0.25)
@@ -24,6 +27,9 @@ func _on_vo_started(_voice_line: VoiceLine) -> void:
 
 
 func _on_vo_finished(_voice_line: VoiceLine) -> void:
+	if _voice_line.speaker.speaker_enum != VoiceLineSpeaker.SpeakerEnum.TIPPY:
+		return
+	
 	var t := create_tween().set_parallel()
 	t.tween_property(sprite, "modulate", Color.TRANSPARENT, 0.25)
 	t.tween_property(sprite, "scale", Vector2.ZERO, 0.25)

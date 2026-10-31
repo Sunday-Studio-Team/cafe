@@ -7,9 +7,10 @@
 script = ExtResource("1_d2bim")
 item_id = "exploding_bomb"
 name = "Bomb"
+rarity = 2
 description_at_levels = Dictionary[int, String]({
-1: "Use Right Click to spawn a bomb. After a delay, pushes the player.",
-2: "Launch a bomb. Its explosion gives you a large amount of momentum."
+1: "Right Click to launch a bomb.[br]Its explosion gives you a large amount of momentum.[br]No cooldown.",
+2: "Right Click to launch a bomb.[br]Its explosion gives you a large amount of momentum.[br]No cooldown."
 })
 icon = ExtResource("1_dikou")
 price_at_levels = Dictionary[int, float]({

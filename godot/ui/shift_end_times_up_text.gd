@@ -4,7 +4,7 @@ var degrees_to_rotate := 10.0
 
 
 func _ready() -> void:
-	Events.time_up.connect(_on_time_up)
+	_on_time_up()
 
 
 func _on_time_up() -> void:

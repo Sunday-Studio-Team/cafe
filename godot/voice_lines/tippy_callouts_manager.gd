@@ -39,7 +39,11 @@ func _ready() -> void:
 	# Skip voice lines if tutorial day 0
 	if Global.playing_tutorial:
 		return
-
+	
+	# Skip if playing day 5, we want it to be eerie
+	if Global.day == 5:
+		return
+	
 	# Add tippy voice lines
 	Events.shift_started.connect(func():
 		play_tippy_callout(TippyCalloutsManager.TippyLineType.shift_start)
