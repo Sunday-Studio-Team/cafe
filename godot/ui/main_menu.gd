@@ -77,7 +77,7 @@ func _ready() -> void:
 		
 	slide_ui_buttons()
 
-	tween.tween_property(game_logo, "scale", Vector2.ONE, 0.6)\
+	tween.tween_property(game_logo, "scale", Vector2.ONE, 0.3)\
 			.set_trans(Tween.TRANS_BACK)\
 			.set_ease(Tween.EASE_OUT)
 	
@@ -154,12 +154,12 @@ func slide_ui_buttons() -> void:
 			child.position.y = target_y + 800
 
 		var tween = create_tween()
-		tween.tween_interval(i * 0.25) 
+		tween.tween_interval(i * 0.15) 
 
 		var sub_tween = create_tween().set_parallel(true)
-		sub_tween.tween_property(child, "position:x", target_x, 0.7)\
+		sub_tween.tween_property(child, "position:x", target_x, 0.5)\
 			.set_trans(Tween.TRANS_CUBIC)\
 			.set_ease(Tween.EASE_OUT)
-		sub_tween.tween_property(child, "position:y", target_y, 0.7)\
+		sub_tween.tween_property(child, "position:y", target_y, 0.5)\
 			.set_trans(Tween.TRANS_CUBIC)\
 			.set_ease(Tween.EASE_OUT)

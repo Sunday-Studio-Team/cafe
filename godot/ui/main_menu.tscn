@@ -33,24 +33,24 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 3.0,
+"duration": 2.0,
 "texture": ExtResource("3_i5ydv")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": ExtResource("4_racxt")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": ExtResource("7_dooca")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": ExtResource("8_rqnt3")
 }, {
-"duration": 1.0,
+"duration": 10.0,
 "texture": ExtResource("8_rqnt3")
 }],
 "loop": 0,
 "name": &"menu_start",
-"speed": 10.0
+"speed": 60.0
 }]
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
@@ -80,13 +80,11 @@ metadata/_edit_vertical_guides_ = [1921.0, -40.0]
 position = Vector2(967, 539)
 sprite_frames = SubResource("SpriteFrames_o0xaf")
 animation = &"menu_start"
-speed_scale = 2.0
 
 [node name="UI" type="Node2D" parent="." unique_id=1887683021]
 
 [node name="Sato" type="Node2D" parent="UI" unique_id=1340863253]
-position = Vector2(-72, -84)
-scale = Vector2(1.05, 1.05)
+position = Vector2(15, -56)
 
 [node name="Sato" type="Sprite2D" parent="UI/Sato" unique_id=128788965]
 z_index = 2
@@ -229,6 +227,7 @@ vertical_alignment = 1
 [node name="Shards" type="AudioStreamPlayer" parent="." unique_id=1210991955]
 stream = ExtResource("25_racxt")
 volume_db = -15.0
+pitch_scale = 1.8
 autoplay = true
 bus = &"Sfx"
 
