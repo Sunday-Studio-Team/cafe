@@ -8,8 +8,8 @@ script = ExtResource("1_lm6re")
 item_id = "air_horn"
 name = "Air Horn"
 description_at_levels = Dictionary[int, String]({
-1: "Use at a machine or help desk.[br]Makes a customer leave instantly without losing any rating.[br]15s cooldown.",
-2: "Use at a machine or help desk.[br]Makes a customer leave instantly without losing any rating.[br]15s cooldown."
+1: "Use at a machine or help desk.[br]Makes a customer leave instantly without losing any rating.[br]3s cooldown.",
+2: "Use at a machine or help desk.[br]Makes a customer leave instantly without losing any rating.[br]3s cooldown."
 })
 icon = ExtResource("1_y6t1p")
 price_at_levels = Dictionary[int, float]({
@@ -22,8 +22,8 @@ sell_value_at_levels = Dictionary[int, float]({
 })
 is_active_item = true
 active_item_cooldown_at_levels = Dictionary[int, float]({
-1: 20.0,
-2: 15.0
+1: 3.0,
+2: 3.0
 })
 can_activate_anywhere = false
 metadata/_custom_type_script = "uid://w8k3e1miec1a"

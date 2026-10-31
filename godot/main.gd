@@ -134,7 +134,7 @@ func _ready() -> void:
 		print("should not play tutorial!")
 
 	if not Global.playing_tutorial:
-		Global.employee_rating = 2
+		Global.employee_rating = 2.5
 
 	set_per_day_stuff()
 	Events.items_updated.connect(get_stats)
