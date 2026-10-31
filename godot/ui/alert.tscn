@@ -43,13 +43,15 @@ stretch_mode = 5
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_0ps8o")
 theme_override_font_sizes/font_size = 56
-text = "- "
+text = "+"
 
 [node name="StarFill" type="TextureProgressBar" parent="." unique_id=1180985329]
 self_modulate = Color(0.8627451, 1, 0, 1)
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
 nine_patch_stretch = true
 texture_over = ExtResource("4_vxat4")
 texture_progress = ExtResource("5_84ntu")
