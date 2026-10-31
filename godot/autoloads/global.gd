@@ -96,8 +96,6 @@ var final_day := 5
 ## the one that chases you on day 5
 ## (boss as in boss fight)
 var tippy_boss: TippyBoss
-# score from refill minigame (to pass to machine)
-var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[CustomerSpriteData]
 ## the sprites of customers that are in the cafe right now
@@ -244,7 +242,7 @@ func load_equipped_items_from_save() -> void:
 		if item:
 			owned_items.append(item)
 
-
+##Gets an item from the list of all items that exist.
 func get_item(item_id: String) -> Item:
 	var found_item := false
 	for item: Item in items:
@@ -256,6 +254,12 @@ func get_item(item_id: String) -> Item:
 		push_warning("Unlocked item not found: %s" % item_id)
 	return null
 
+##Returns true if item is currently equipped.
+func is_equipped_item(item_id: String) -> bool:
+	for item: Item in owned_items:
+		if item.item_id == item_id:
+			return true
+	return false
 
 func add_items_to_unlocked_list(item_ids: Array) -> void:
 	for raw_item_id in item_ids:

@@ -739,33 +739,6 @@ func refill() -> void:
 	Events.minigame_active.emit(REFILL_MINIGAME)
 
 	await Events.minigame_end
-
-	var ingredient_multiplier: float = 1.0
-	for item in Global.owned_items:
-		if item.item_id == "nice_spoon":
-			if item.item_level == 1:
-				ingredient_multiplier = 2.0
-			elif item.item_level == 2:
-				ingredient_multiplier = 3.0
-
-	var ingredients_to_add: float = (
-			Stats.current.ingredients_per_bag
-			* Global.refill_minigame_accuracy
-			* ingredient_multiplier
-	)
-
-	var refill_prints_enabled := false
-	if refill_prints_enabled:
-		print("----------")
-		print("we're adding %s ingredients" % ingredients_to_add)
-		print(
-				"(%s (the amount per bag) x %s (our minigame accuracy) x %s (the multiplier from items))"
-				% [Stats.current.ingredients_per_bag, Global.refill_minigame_accuracy, ingredient_multiplier]
-		)
-		print("----------")
-
-	ingredients += roundi(ingredients_to_add)
-
 	# TODO: separate this out ? its not explicit its doing this when we just call
 	# 'refill()'
 	if (

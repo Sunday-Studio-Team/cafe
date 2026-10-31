@@ -14,6 +14,7 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export var cup: CharacterBody2D
 @export var bag: Node2D
 @export var bag_sprite: Sprite2D
+@export var animation_player: AnimationPlayer
 
 # the point on the bag where beans spawn from
 @export var pour_point: Marker2D
@@ -47,6 +48,20 @@ const MAX_VERTICAL_BEAN_FORCE := 450.0
 @export var golden_bean_collect: GPUParticles2D
 @export var bomb_smoke: GPUParticles2D
 
+@export_group("Ingredient Bar")
+@export var idle_ing_bar_array:Array[Texture2D]
+@export var progress_coffee: TextureRect
+@export var progress_bar: TextureProgressBar
+
+var animation_index: int
+var animation_delay_timer: float = 0
+var animation_delay: float = 0.03
+func update_ingredients_bar_animation():
+	animation_index += 1
+	if animation_index >= idle_ing_bar_array.size():
+		animation_index = 0
+	progress_coffee.texture = idle_ing_bar_array[animation_index]
+
 var beans_in_cup: int = 0
 var beans_spawned: int = 0
 var gold_beans_spawned := 0
@@ -56,15 +71,17 @@ const MAX_BOMB = 2
 var bag_shake_tween: Tween
 var collected_beans: Array[PhysicsBody2D]
 var spawn_trajectory: Vector2
-# this is the ratio (as a decimal, so from 0 to 1) of beans caught.
-# its passed to machine.gd @ end of minigame to determine how much to fill up
-var accuracy: float = 0.0
+
+var bean_value: int:
+	get:
+		if Global.is_equipped_item("nice_spoon"):
+			return 15
+		return 5
 
 var start_minigame:bool = false
 signal first_proper_input
 
 var allow_moving_cup:bool = true
-@export var animation_player: AnimationPlayer
 
 var bomb_bean:Node
 var gold_bean:Node
@@ -72,7 +89,11 @@ var gold_bean:Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_minigame_startup_overlay.play("CATCH!")
-	
+	if Global.machine_in_use:
+		progress_bar.max_value = Stats.current.machine_max_ingredients
+	else:
+		progress_bar.max_value = 80
+		progress_bar.value = 10
 	bomb_bean = bomb_bean_scene.instantiate()
 	gold_bean = golden_bean_scene.instantiate()
 	bean_spawn_timer.timeout.connect(spawn_bean)
@@ -106,6 +127,14 @@ func _input(event: InputEvent) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	progress_coffee.position.y = 1125 - (1125 *  progress_bar.ratio)
+	animation_delay_timer += delta
+	animation_delay = 0.03
+	if animation_delay_timer >= animation_delay:
+		animation_delay_timer = 0
+		update_ingredients_bar_animation()
+	if Global.machine_in_use:
+		progress_bar.value = Global.machine_in_use.ingredients
 	if not start_minigame or not allow_moving_cup: return
 	var left_right_input: float = Input \
 			.get_vector("move_left", "move_right", "move_forward", "move_back") \
@@ -115,9 +144,6 @@ func _physics_process(delta: float) -> void:
 	adjust_cup_y_velocity() # bandaid; calling move_local_x causes the cup to vertically move down.
 	#cup.position.y=1050
 	cup.rotation_degrees = lerp(cup.rotation_degrees, left_right_input * 7, delta * 5)
-
-	accuracy = beans_in_cup as float / (NUM_BEANS_TO_SPAWN - bomb_beans_spawned) as float
-
 
 func calculate_cup_x_velocity(left_right_input: float) -> void:
 	if (left_right_input == 0.0):
@@ -156,16 +182,6 @@ func spawn_bean() -> void:
 		bag_shake_tween.kill()
 		bag_shake_sound.stop()
 		await get_tree().create_timer(2, false).timeout
-		Global.refill_minigame_accuracy = accuracy
-		var ingredients_to_add = Stats.current.ingredients_per_bag * Global.refill_minigame_accuracy
-		print("%s / %s (%s)" % [beans_in_cup, NUM_BEANS_TO_SPAWN - bomb_beans_spawned, NUM_BEANS_TO_SPAWN])
-		print("----------")
-		print("we're adding %s ingredients" % ingredients_to_add)
-		print(
-				"(%s (the amount per bag) x %s (our minigame accuracy) x %s (the multiplier from items))"
-				% [Stats.current.ingredients_per_bag, Global.refill_minigame_accuracy, 1]
-		)
-		print("----------")
 		Events.minigame_end.emit()
 		return
 
@@ -179,13 +195,16 @@ func spawn_bean() -> void:
 	var chance_needed = 90 - max(0, 70 * (float(float(beans_spawned - 1) / float(NUM_BEANS_TO_SPAWN))))
 
 	if beans_spawned < NUM_BEANS_TO_SPAWN: #bomb bean case
-		if bomb_beans_spawned < MAX_BOMB and (random_int <= chance_needed):
-			if gold_beans_spawned < MAX_GOLD:
-				if randi_range(1, 100) < 33:
-					spawn_gold_bean(gold_bean.duplicate())
+		if bomb_beans_spawned < MAX_BOMB:
+			if (random_int <= chance_needed):
+				if gold_beans_spawned < MAX_GOLD:
+					if randi_range(1, 100) < 33:
+						spawn_gold_bean(gold_bean.duplicate())
+					else:
+						spawn_bomb_bean(bomb_bean.duplicate())
 				else:
 					spawn_bomb_bean(bomb_bean.duplicate())
-			else:
+			elif beans_spawned > 5:
 				spawn_bomb_bean(bomb_bean.duplicate())
 		else:
 			spawn_normal_bean(bean)
@@ -256,6 +275,12 @@ func catch_bean(bean: PhysicsBody2D) -> void:
 			return
 		elif "coffee_bean" in bean_type: #this has to be last one checked, because then it is a normal bean
 			beans_in_cup += 1
+			if Global.machine_in_use:
+				Global.machine_in_use.ingredients += bean_value
+				print(bean_value)
+			else:
+				print(bean_value)
+				progress_bar.value += bean_value
 			gain_score_sound.play()
 			gain_score_sound.pitch_scale += 0.05
 			collected_beans.append(bean) #append the bean to collected_beans array
@@ -287,9 +312,12 @@ func gold():
 	background.texture = golden_bg_sprite
 	golden_bean_collect.restart()
 	allow_moving_cup = false
+	if Global.machine_in_use:
+		Global.machine_in_use.ingredients = Stats.current.machine_max_ingredients
+	else:
+		progress_bar.value = 80
 	await get_tree().create_timer(0.5, false).timeout
 
-	Global.refill_minigame_accuracy = 1
 	Events.emit_signal("minigame_end")
 
 
