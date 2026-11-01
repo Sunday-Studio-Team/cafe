@@ -54,7 +54,7 @@ func _customer_queue_update_visuals() -> void:
 
 
 func _update_help_desk_notif() -> void:
-	if _desk_customer == null:
+	if !_help_desk_interactable.visible:
 		notif_animation.visible = false
 		return
 	if Global.player.global_position.distance_to(global_position) > notif_hide_radius:
