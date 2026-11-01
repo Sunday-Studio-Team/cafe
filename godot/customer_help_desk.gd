@@ -8,6 +8,8 @@ signal new_desk_customer_arrived
 @export var _end_of_customer_queue_marker: Marker3D
 @export var _help_desk_interactable: Interactable
 @export var bell_sound: AudioStreamPlayer3D
+@export var notif_animation: AnimatedSprite3D
+@export var notif_hide_radius: float
 ## yeah this sound should probably be on the player or viewmodel instead of duplicated on machine and here whatever .
 @export var airhorn_sound: AudioStreamPlayer
 
@@ -30,6 +32,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_process_queued_customers()
+	_update_help_desk_notif()
 
 
 func _process_queued_customers() -> void:
@@ -49,6 +52,15 @@ func _customer_queue_update_visuals() -> void:
 		queued_customer.move_to(queue_global_position)
 		i += 1
 
+
+func _update_help_desk_notif() -> void:
+	if _desk_customer == null:
+		notif_animation.visible = false
+		return
+	if Global.player.global_position.distance_to(global_position) > notif_hide_radius:
+		notif_animation.visible = true
+	else:
+		notif_animation.visible = false
 
 func customer_queue_size() -> int:
 	return _queued_desk_customers.size()
