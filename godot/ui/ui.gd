@@ -122,7 +122,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 
-	update_throw_trash_ui()
+	#update_throw_trash_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()

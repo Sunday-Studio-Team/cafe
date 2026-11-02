@@ -1284,6 +1284,9 @@ viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubV
 [sub_resource type="ViewportTexture" id="ViewportTexture_tmofn"]
 viewport_path = NodePath("../../../../../../../PlayerUiSubViewportContainer/SubViewport/UI/TabletAddonSubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xf6cw"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f4177"]
 shader = ExtResource("328_nckbc")
 shader_parameter/Speed = 0.8
@@ -1901,6 +1904,7 @@ volume_db = -5.0
 bus = &"Sfx"
 
 [node name="ThrowTrashUI" type="PanelContainer" parent="PlayerUiSubViewportContainer/SubViewport/UI" unique_id=2014583948]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -2544,6 +2548,9 @@ transform = Transform3D(0.6218793, 0, -0.7831131, 0, 1, 0, 0.7831131, 0, 0.62187
 [node name="AudioStreamPlayer3D" parent="TrashCan" index="1" unique_id=778131750]
 stream = null
 
+[node name="Popup" parent="TrashCan" index="4" unique_id=1851390350]
+texture = SubResource("ViewportTexture_xf6cw")
+
 [node name="IngredientSpawner" type="Node3D" parent="." unique_id=1312596977 node_paths=PackedStringArray("_ingredient_spawn_points")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.594318, 1.8985789, 26.78452)
 script = ExtResource("23_ppx11")
@@ -2594,7 +2601,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.
 transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 8.486, 1.25, 7.8654447)
 
 [node name="AroundCafeVoiceLinePlayer3D3" parent="AroundCafeVoiceLinePlayers" unique_id=463110771 instance=ExtResource("312_8ldsf")]
-transform = Transform3D(3.7252903e-08, 0, -1, 0, 1, 0, 1, 0, 3.7252903e-08, 4.76339, 1.6501799, -2.455091)
+transform = Transform3D(-7.54979e-08, 0, -1, 0, 1, 0, -1, 0, 7.54979e-08, 4.763, 2.942976, -3.092)
 
 [node name="ClockItemStartSound" type="AudioStreamPlayer" parent="." unique_id=895273458]
 stream = ExtResource("223_ycw8e")
@@ -2621,7 +2628,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.956
 metadata/_edit_group_ = true
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700928, -0.00016215755, -0.99992704, 1.025981e-07, 1, -0.00016214572, 0.99992704, -1.01539825e-08, 0.0005700928, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.00057009223, -0.00016215755, -0.99992603, 1.02597994e-07, 1, -0.00016214556, 0.99992603, -1.01539825e-08, 0.00057009223, -4.11582, -1.4201379, 0.23234849)
+
+[node name="Car" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="1" unique_id=1089029611]
+transform = Transform3D(0.6999993, 2.4557253e-10, -2.5849755e-11, -2.4557253e-10, 0.6999993, -1.3253012e-13, 2.584978e-11, 1.325303e-13, 0.7000003, -4.11582, -1.4201379, 0.23234844)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)

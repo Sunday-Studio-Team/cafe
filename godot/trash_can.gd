@@ -4,6 +4,8 @@ extends Area3D
 @export var trash_can_model: MeshInstance3D
 @export var highlight_material: Material
 @export var scored_sfx: AudioStreamPlayer3D
+@export var throw_trash_ui: Sprite3D
+@export var throw_trash_ui_label: RichTextLabel
 
 var rating_gained: float = 0.2
 var surface_index := 0
@@ -25,6 +27,9 @@ func _ready() -> void:
 			trash_can_model.set_surface_override_material(surface_index, null)
 	)
 
+
+func _physics_process(delta: float) -> void:
+	update_throw_trash_ui()
 
 func _on_body_entered(body: Node3D) -> void:
 	# Add logic for giving player points here too
@@ -65,3 +70,15 @@ func play_feedback() -> void:
 	Events.alert_posted.emit("+%s⭐ Trash cleaned!" % rating_gained, UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
 
 	Global.tutorial_day_4_trash_thrown_away = true
+
+
+func update_throw_trash_ui() -> void:
+	if Global.holding_trash:
+		throw_trash_ui.show()
+		throw_trash_ui_label.text = (
+			"%s"
+			% OS.get_keycode_string(SaveDataManager.get_options_data().drop_action_physical_keycode).to_upper()
+		)
+
+	else:
+		throw_trash_ui.hide()
