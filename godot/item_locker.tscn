@@ -29,14 +29,17 @@
 [ext_resource type="Texture2D" uid="uid://dlmw2recd2if1" path="res://Assets/sato_locker/Sato's Locker w Items _v1_cat.png" id="19_58jqr"]
 [ext_resource type="Texture2D" uid="uid://bqycfnnq67pbx" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catapron1.png" id="20_ayl2a"]
 [ext_resource type="Texture2D" uid="uid://b2ymqknwqdodx" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catapron2.png" id="21_uu8qk"]
+[ext_resource type="Texture2D" uid="uid://cwr1sm20fwdft" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Ice Cube_BaseColor.png" id="22_88prn"]
 [ext_resource type="Texture2D" uid="uid://jjjgnl41mioh" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catbell1.png" id="22_e1avn"]
 [ext_resource type="Texture2D" uid="uid://ccgrtrx1e4rnu" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catbellhold.png" id="23_47hrj"]
 [ext_resource type="Texture2D" uid="uid://bhrwbrqrw7l6t" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catbroomhandle.png" id="24_gyy7x"]
 [ext_resource type="Texture2D" uid="uid://0y24u4yjocbi" path="res://Assets/sato_locker/Sato's Locker w Items _v1_catbroombrush.png" id="25_3x50v"]
 [ext_resource type="Texture2D" uid="uid://jlnmxahppstq" path="res://Assets/sato_locker/Sato's Locker w Items _v1_tears.png" id="26_iw0ns"]
 [ext_resource type="Texture2D" uid="uid://bxp4gwxqabngh" path="res://Assets/sato_locker/Sato's Locker w Items _v1_ingredient_bag Color.png" id="27_4tlrw"]
+[ext_resource type="Shader" uid="uid://dmg5gm62s1ddv" path="res://shaders/item_highlight.gdshader" id="29_85cmv"]
 [ext_resource type="Texture2D" uid="uid://dex5lpqt2uj07" path="res://Assets/sato_locker/Sato's Locker w Items _v1_T_Bomb_BC.png" id="29_i4lof"]
 [ext_resource type="Resource" uid="uid://yipqvsqoo37x" path="res://resources/items/exploding_bomb.tres" id="29_xu1qm"]
+[ext_resource type="Texture2D" uid="uid://cthwraa251j0w" path="res://Assets/ingredient_bag/ingredientbag_large_ingredient_bag Color.png" id="30_88prn"]
 [ext_resource type="Texture2D" uid="uid://b0suh3mk020di" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Skates_BaseColor.png" id="30_tedrr"]
 [ext_resource type="Texture2D" uid="uid://cb2332e0c4vm5" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Skates_Roughness.png" id="31_8qhbg"]
 [ext_resource type="Texture2D" uid="uid://dbclkaihfat82" path="res://Assets/sato_locker/Sato's Locker w Items _v1_Locker_For Texturing_Supper Scrubber_BaseColor.png" id="33_em3tt"]
@@ -974,6 +977,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i76oa")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i4lof"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("22_88prn")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.63509303, 0.7131102, 0.80480987, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8p88"]
 size = Vector3(0.31848145, 0.32266235, 0.32992554)
 
@@ -1021,6 +1034,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e46jj")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88prn"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("7_a3mt8")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.6313726, 0.5372549, 0.26666668, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_a3mt8"]
 size = Vector3(0.4721985, 0.8461189, 0.42928314)
 
@@ -1062,6 +1085,16 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_a3mt8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ayl2a"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("12_c3u3i")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.93333334, 0.1254902, 0.1254902, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emdg0"]
 size = Vector3(0.47607803, 0.5264497, 0.47395897)
@@ -1107,6 +1140,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_fwclv")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uu8qk"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("12_c3u3i")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.7490196, 0.64705884, 0.56078434, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_e46jj"]
 size = Vector3(0.2541523, 0.5264497, 0.27317333)
 
@@ -1149,6 +1192,16 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_emdg0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58jqr"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("30_88prn")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.30588236, 0.5137255, 0.39607844, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbfyi"]
 size = Vector3(0.2541523, 0.35841906, 0.24303198)
@@ -1193,6 +1246,16 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4eeye")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85cmv"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("29_i4lof")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = false
+shader_parameter/glow_color = Color(1, 0.8352941, 0.64705884, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_88prn"]
 size = Vector3(0.40582323, 0.41358453, 0.48824823)
@@ -1241,6 +1304,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_58jqr")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1avn"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("30_tedrr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.6117647, 0.54509807, 0.7529412, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_uu8qk"]
 size = Vector3(0.40582323, 0.68250024, 0.65044343)
 
@@ -1277,6 +1350,46 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b5qwe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47hrj"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("30_tedrr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.6117647, 0.5411765, 0.74509805, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyy7x"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("30_tedrr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.6117647, 0.54509807, 0.7529412, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3x50v"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("30_tedrr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.6117647, 0.54509807, 0.7529412, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iw0ns"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("30_tedrr")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.6117647, 0.54509807, 0.7529412, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hjxp"]
 resource_name = "Supper Scrubber.001"
@@ -1321,6 +1434,16 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e1avn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tlrw"]
+render_priority = 0
+shader = ExtResource("29_85cmv")
+shader_parameter/texture_albedo = ExtResource("33_em3tt")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.27058825, 0.4, 0.6666667, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyy7x"]
 size = Vector3(1.3533479, 2.9432387, 0.7170674)
@@ -1715,94 +1838,110 @@ mesh = SubResource("ArrayMesh_ro66q")
 
 [node name="LockerItems" type="Node3D" parent="ManualScaler/Model" unique_id=1135491237]
 
-[node name="Frozen Tippy" parent="ManualScaler/Model/LockerItems" unique_id=1773171203 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Frozen Tippy" parent="ManualScaler/Model/LockerItems" unique_id=1773171203 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.3280964, 1.8516846, 0.32207015)
 item = ExtResource("6_dt742")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
+
+[node name="Mesh" parent="ManualScaler/Model/LockerItems/Frozen Tippy" index="0" unique_id=1773171203]
+surface_material_override/0 = SubResource("ShaderMaterial_i4lof")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Frozen Tippy/Area3D" parent_id_path=PackedInt32Array(1773171203, 134056438) index="0" unique_id=1033817306]
 shape = SubResource("BoxShape3D_v8p88")
 
-[node name="Hammer" parent="ManualScaler/Model/LockerItems" unique_id=1118132196 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Hammer" parent="ManualScaler/Model/LockerItems" unique_id=1118132196 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.26155043, 0.5458162, 0.38506094)
 item = ExtResource("7_e0bd6")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/Hammer" index="0" unique_id=1773171203]
 transform = Transform3D(0.961137, 0.2660285, -0.07378627, 1.4901148e-08, 0.2672721, 0.963621, 0.2760717, -0.9261719, 0.25688508, 0, 0, 0)
 mesh = SubResource("ArrayMesh_xu1qm")
+surface_material_override/0 = SubResource("ShaderMaterial_88prn")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Hammer/Area3D" parent_id_path=PackedInt32Array(1118132196, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(1, 0, 0, 0, 0.9999965, 0, 0, 0, 0.9999965, 0.038253635, 0.00033909082, -0.027169883)
 shape = SubResource("BoxShape3D_a3mt8")
 
-[node name="Airhorn" parent="ManualScaler/Model/LockerItems" unique_id=1118133177 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Airhorn" parent="ManualScaler/Model/LockerItems" unique_id=1118133177 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.023541575, 1.9961592, -0.45746404)
 item = ExtResource("8_60wm3")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/Airhorn" index="0" unique_id=1773171203]
 transform = Transform3D(-0.88768077, 0.012102246, 0.46030042, 0.03977662, 0.99793315, 0.05047076, -0.45873815, 0.063111104, -0.8863275, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mcjje")
+surface_material_override/0 = SubResource("ShaderMaterial_ayl2a")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Airhorn/Area3D" parent_id_path=PackedInt32Array(1118133177, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(1, 0, 0, 0, 0.9999965, 0, 0, 0, 0.9999965, 0.12980826, 0.25571108, 0.033579856)
 shape = SubResource("BoxShape3D_emdg0")
 
-[node name="WhippedCream" parent="ManualScaler/Model/LockerItems" unique_id=1122378018 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="WhippedCream" parent="ManualScaler/Model/LockerItems" unique_id=1122378018 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0.04468177, 1.0411447, -0.43216318)
 item = ExtResource("9_6i5wn")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/WhippedCream" index="0" unique_id=1773171203]
 transform = Transform3D(0.7606706, 0.024880558, -0.64866096, 9.313226e-10, 0.9992652, 0.038328607, 0.649138, -0.02915545, 0.76011163, 0, 0, 0)
 mesh = SubResource("ArrayMesh_v8p88")
+surface_material_override/0 = SubResource("ShaderMaterial_uu8qk")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/WhippedCream/Area3D" parent_id_path=PackedInt32Array(1122378018, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(1, 0, 0, 0, 0.9999965, 0, 0, 0, 0.9999965, 0.01884539, 0.25571108, -0.01759842)
 shape = SubResource("BoxShape3D_e46jj")
 
-[node name="IngredientBag" parent="ManualScaler/Model/LockerItems" unique_id=1669001453 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="IngredientBag" parent="ManualScaler/Model/LockerItems" unique_id=1669001453 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22672176, 1.0512545, -0.17332944)
 item = ExtResource("10_b0jqr")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/IngredientBag" index="0" unique_id=1773171203]
 transform = Transform3D(0.5425788, -0.009220522, 0.83995426, -0.035205673, 0.99881154, 0.0337059, -0.8392668, -0.047859266, 0.54160935, 0, 0, 0)
 mesh = SubResource("ArrayMesh_c3u3i")
+surface_material_override/0 = SubResource("ShaderMaterial_58jqr")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/IngredientBag/Area3D" parent_id_path=PackedInt32Array(1669001453, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, 0.018845394, 0.17169583, -0.0025278032)
 shape = SubResource("BoxShape3D_fbfyi")
 
-[node name="Bomb" parent="ManualScaler/Model/LockerItems" unique_id=1197535177 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Bomb" parent="ManualScaler/Model/LockerItems" unique_id=1197535177 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.110870115, 1.9389691, -0.045111064)
 item = ExtResource("29_xu1qm")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/Bomb" index="0" unique_id=1773171203]
 transform = Transform3D(-0.6413011, -0.7672893, 1.4152589e-07, -0.27885804, 0.23306967, -0.9316205, 0.71482235, -0.5974493, -0.36343265, 0, 0, 0)
 mesh = SubResource("ArrayMesh_85cmv")
+surface_material_override/0 = SubResource("ShaderMaterial_85cmv")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Bomb/Area3D" parent_id_path=PackedInt32Array(1197535177, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990024, 0.19927812, 0.12007986)
 shape = SubResource("BoxShape3D_88prn")
 
-[node name="Skates" parent="ManualScaler/Model/LockerItems" unique_id=1229765571 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Skates" parent="ManualScaler/Model/LockerItems" unique_id=1229765571 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22602966, 0.14727, -0.34678254)
 item = ExtResource("11_abt02")
+item3Ds = [NodePath("Mesh"), NodePath("Mesh_R")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/Skates" index="0" unique_id=1773171203]
 transform = Transform3D(0.6409209, 0, 0.767607, 0, 1, 0, -0.767607, 0, 0.6409209, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ayl2a")
+surface_material_override/0 = SubResource("ShaderMaterial_e1avn")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Skates/Area3D" parent_id_path=PackedInt32Array(1229765571, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990013, 0.33373547, 0.106503695)
@@ -1816,15 +1955,17 @@ mesh = SubResource("ArrayMesh_x5a5y")
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="Teleporter" parent="ManualScaler/Model/LockerItems" unique_id=630709873 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="Teleporter" parent="ManualScaler/Model/LockerItems" unique_id=630709873 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.52128136, 0, 0, 0, 0.52128136, 0, 0, 0, 0.52128136, 0.15841773, 2.810597, -0.053607244)
 item = ExtResource("35_fbfyi")
+item3Ds = [NodePath("Mesh"), NodePath("Mesh_R")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/Teleporter" index="0" unique_id=1773171203]
 transform = Transform3D(0.6409209, 0, 0.767607, 0, 1, 0, -0.767607, 0, 0.6409209, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ayl2a")
+surface_material_override/0 = SubResource("ShaderMaterial_47hrj")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/Teleporter/Area3D" parent_id_path=PackedInt32Array(630709873, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990013, 0.33373547, 0.106503695)
@@ -1833,20 +1974,23 @@ shape = SubResource("BoxShape3D_uu8qk")
 [node name="Mesh_R" type="MeshInstance3D" parent="ManualScaler/Model/LockerItems/Teleporter" unique_id=815956655]
 transform = Transform3D(0.63537586, 1.5321293e-08, 0.7722029, 2.6758126e-08, 0.9999999, -2.6758126e-08, -0.77220297, -2.6758126e-08, 0.6353758, -0.24077155, 0, 0.17626148)
 mesh = SubResource("ArrayMesh_x5a5y")
+surface_material_override/0 = SubResource("ShaderMaterial_gyy7x")
 
 [node name="PropShowerHider" type="Node" parent="ManualScaler/Model/LockerItems/Teleporter/Mesh_R" unique_id=1003545828]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="AirFreshener" parent="ManualScaler/Model/LockerItems" unique_id=1727296348 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="AirFreshener" parent="ManualScaler/Model/LockerItems" unique_id=1727296348 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(0.52128136, 0, 0, 0, 0.52128136, 0, 0, 0, 0.52128136, 0.20475344, 2.869193, -0.37809798)
 item = ExtResource("36_4eeye")
+item3Ds = [NodePath("Mesh_R"), NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/AirFreshener" index="0" unique_id=1773171203]
 transform = Transform3D(0.6409209, 0, 0.767607, 0, 1, 0, -0.767607, 0, 0.6409209, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ayl2a")
+surface_material_override/0 = SubResource("ShaderMaterial_3x50v")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/AirFreshener/Area3D" parent_id_path=PackedInt32Array(1727296348, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.056990013, 0.33373547, 0.106503695)
@@ -1855,20 +1999,23 @@ shape = SubResource("BoxShape3D_uu8qk")
 [node name="Mesh_R" type="MeshInstance3D" parent="ManualScaler/Model/LockerItems/AirFreshener" unique_id=678255500]
 transform = Transform3D(0.63537586, 1.5321293e-08, 0.7722029, 2.6758126e-08, 0.9999999, -2.6758126e-08, -0.77220297, -2.6758126e-08, 0.6353758, -0.24077155, 0, 0.17626148)
 mesh = SubResource("ArrayMesh_x5a5y")
+surface_material_override/0 = SubResource("ShaderMaterial_iw0ns")
 
 [node name="PropShowerHider" type="Node" parent="ManualScaler/Model/LockerItems/AirFreshener/Mesh_R" unique_id=1594459340]
 script = ExtResource("5_dqjxi")
 prop_item = ExtResource("11_abt02")
 
-[node name="SuperScrubber" parent="ManualScaler/Model/LockerItems" unique_id=1909818425 node_paths=PackedStringArray("prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
+[node name="SuperScrubber" parent="ManualScaler/Model/LockerItems" unique_id=1909818425 node_paths=PackedStringArray("item3Ds", "prop_shower_hider", "area") instance=ExtResource("4_v8p88")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0754869)
 item = ExtResource("12_8r07k")
+item3Ds = [NodePath("Mesh")]
 prop_shower_hider = NodePath("Mesh/PropShowerHider")
 area = NodePath("Area3D")
 
 [node name="Mesh" parent="ManualScaler/Model/LockerItems/SuperScrubber" index="0" unique_id=1773171203]
 transform = Transform3D(-1, 3.20668e-08, 3.8394086e-07, -3.253057e-08, 0.98594445, -0.16707426, -3.8390186e-07, -0.1670743, -0.9859443, 0, 0, 0)
 mesh = SubResource("ArrayMesh_47hrj")
+surface_material_override/0 = SubResource("ShaderMaterial_4tlrw")
 
 [node name="CollisionShape3D" parent="ManualScaler/Model/LockerItems/SuperScrubber/Area3D" parent_id_path=PackedInt32Array(1909818425, 134056438) index="0" unique_id=1033817306]
 transform = Transform3D(0.9999995, 0, 0, 0, 0.9999964, 0, 0, 0, 0.9999964, -0.0082001975, 1.4223574, -0.044971943)
@@ -1899,7 +2046,7 @@ stream = SubResource("AudioStreamRandomizer_vn1tu")
 volume_db = -10.0
 
 [node name="CameraSpot" type="Camera3D" parent="." unique_id=923653526]
-transform = Transform3D(0.63607824, -0.13006878, 0.7605831, 0, 0.9856906, 0.16856486, -0.77162457, -0.10722043, 0.6269763, 1.3213853, 1.1567794, 0.28272855)
+transform = Transform3D(0.7599947, -0.109555215, 0.64062923, 0, 0.98569053, 0.16856484, -0.6499292, -0.12810837, 0.7491195, 1.3213853, 1.1567794, 0.28272855)
 fov = 100.0
 
 [editable path="ManualScaler/Model/LockerItems/Frozen Tippy"]

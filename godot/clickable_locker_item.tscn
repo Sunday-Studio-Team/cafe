@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dw7u504yn4u6x" path="res://ui/locker_prop_shower_hider.gd" id="4_d4rmy"]
 [ext_resource type="Script" uid="uid://df56gnyo3giiq" path="res://clickable_locker_item.gd" id="4_vey8g"]
 [ext_resource type="Resource" uid="uid://b7j7p84hynyid" path="res://resources/items/barista_guide.tres" id="5_3gcoa"]
+[ext_resource type="Shader" uid="uid://dmg5gm62s1ddv" path="res://shaders/item_highlight.gdshader" id="5_n0785"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trjbx"]
 resource_name = "Ice Cube"
@@ -80,6 +81,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y6fq3")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4rmy"]
+render_priority = 0
+shader = ExtResource("5_n0785")
+shader_parameter/texture_albedo = ExtResource("1_nor43")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/use_texture = true
+shader_parameter/glow_color = Color(0.5372549, 0.654902, 0.79607844, 1)
+shader_parameter/glow_intensity = 1.250000059375
+shader_parameter/u_hover = 0.0
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_n0785"]
 size = Vector3(0.31848145, 0.32266235, 0.32992554)
 
@@ -89,6 +100,7 @@ script = ExtResource("4_vey8g")
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1773171203]
 transform = Transform3D(0.9782387, 0.04780004, 0.20190148, -0.030022277, 0.9954697, -0.09021499, -0.2052991, 0.08219025, 0.975242, 0, 0, 0)
 mesh = SubResource("ArrayMesh_75h5y")
+surface_material_override/0 = SubResource("ShaderMaterial_d4rmy")
 
 [node name="PropShowerHider" type="Node" parent="Mesh" unique_id=100684737]
 script = ExtResource("4_d4rmy")
