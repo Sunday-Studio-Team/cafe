@@ -50,12 +50,15 @@
 [ext_resource type="Texture2D" uid="uid://bkv8h5yo7o13q" path="res://minigames/arrows/assets/tippy/down/tippy_dance_down.png" id="45_6h2j6"]
 [ext_resource type="Texture2D" uid="uid://dc3lbp0kewkwl" path="res://minigames/arrows/assets/tippy/fail_once/tippy_dance_fail_once.png" id="46_8r575"]
 [ext_resource type="Texture2D" uid="uid://clogd1sodp4me" path="res://minigames/arrows/assets/tippy/fail_again/tippy_dance_fail_again.png" id="47_syko7"]
-[ext_resource type="Texture2D" uid="uid://b385bvgi6r3ef" path="res://minigames/arrows/assets/arrowsBackground.png" id="47_yem23"]
 [ext_resource type="AudioStream" uid="uid://cj8wq0y415h2u" path="res://audio/ddr/ddr_correct_1.wav" id="48_hea8k"]
 [ext_resource type="PackedScene" uid="uid://btk3jm1x5velu" path="res://minigames/arrows/judgement_popup.tscn" id="48_yem23"]
+[ext_resource type="Texture2D" uid="uid://bourk3mcicjp4" path="res://minigames/arrows/assets/new_bg/DDR Background Flats.png" id="49_d8qde"]
 [ext_resource type="AudioStream" uid="uid://cwarhwibu7s60" path="res://audio/ddr/ddr_correct_2.wav" id="49_xql7b"]
 [ext_resource type="AudioStream" uid="uid://bynqhhvraxh3n" path="res://audio/ddr/ddr_correct_3.wav" id="50_08s2a"]
+[ext_resource type="Texture2D" uid="uid://bnq74n6m868h4" path="res://minigames/arrows/assets/new_bg/DDR Background light gradient.png" id="50_au8s4"]
+[ext_resource type="Texture2D" uid="uid://ctmq3tufqkp3m" path="res://minigames/arrows/assets/new_bg/DDR Background light beams.png" id="51_2i6wo"]
 [ext_resource type="AudioStream" uid="uid://sen2yqvqdqde" path="res://audio/ddr/ddr_correct_4.wav" id="51_ajpp4"]
+[ext_resource type="Texture2D" uid="uid://d1eyr4io25ulx" path="res://minigames/arrows/assets/new_bg/DDR Background light dust.png" id="52_1pfxc"]
 [ext_resource type="FontFile" uid="uid://bon5lsvgcu4lr" path="res://fonts/Orange Kid.otf" id="52_ftfms"]
 [ext_resource type="AudioStream" uid="uid://bm64e3hjg5vgi" path="res://audio/ddr/ddr_correct_5.wav" id="52_mji0a"]
 [ext_resource type="AudioStream" uid="uid://ctvbre1ribsjj" path="res://audio/ddr/ddr_wrong_1.wav" id="53_mji0a"]
@@ -67,6 +70,12 @@
 [ext_resource type="Texture2D" uid="uid://diamxbu33j0uh" path="res://minigames/arrows/assets/dancemachine_lit_up/right.png" id="65_1aqoy"]
 [ext_resource type="Texture2D" uid="uid://bgob7n0smlnqs" path="res://minigames/arrows/assets/dancemachine_lit_up/up.png" id="66_ahodb"]
 [ext_resource type="PackedScene" uid="uid://d0wq4vaglo2k1" path="res://scenes/minigame_startup_overlay.tscn" id="67_d8qde"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_coxhp"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v3b0y"]
+blend_mode = 1
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_l8ovb"]
 streams_count = 5
@@ -501,11 +510,36 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/BeamLights:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/Lights:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_gaw3v"]
 resource_name = "pulse"
 length = 0.5
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -529,6 +563,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(0.2, 0),
 "update": 0,
 "values": [Vector2(0.95, 0.95), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/BeamLights:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/Lights:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.049999714, 1, 1), Color(1, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ms8o4"]
@@ -573,14 +631,44 @@ judgement_spot = NodePath("JudgementSpot")
 
 [node name="Background" type="TextureRect" parent="." unique_id=247780111]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 66.0
+offset_top = 11.0
+offset_right = 1641.0
+offset_bottom = 1080.0
 offset_transform_enabled = true
-texture = ExtResource("47_yem23")
-expand_mode = 3
+texture = ExtResource("49_d8qde")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Lights" type="TextureRect" parent="Background" unique_id=1582063358]
+material = SubResource("CanvasItemMaterial_coxhp")
+layout_mode = 0
+offset_right = 1575.0
+offset_bottom = 1069.0
+texture = ExtResource("50_au8s4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BeamLights" type="TextureRect" parent="Background" unique_id=845774278]
+modulate = Color(1, 1, 1, 0.13559598)
+material = SubResource("CanvasItemMaterial_v3b0y")
+layout_mode = 0
+offset_left = -79.0
+offset_right = 1496.0
+offset_bottom = 1069.0
+texture = ExtResource("51_2i6wo")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="LightDust" type="TextureRect" parent="Background/BeamLights" unique_id=1457818484]
+material = SubResource("CanvasItemMaterial_v3b0y")
+layout_mode = 0
+offset_left = 79.0
+offset_right = 1654.0
+offset_bottom = 1069.0
+texture = ExtResource("52_1pfxc")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="Frame" type="TextureRect" parent="." unique_id=509451572]
 layout_mode = 1
@@ -603,7 +691,6 @@ anchor_bottom = 0.676
 offset_left = -65.160034
 offset_right = 65.160034
 grow_horizontal = 2
-grow_vertical = 2
 offset_transform_enabled = true
 texture = ExtResource("42_l8ovb")
 expand_mode = 3
