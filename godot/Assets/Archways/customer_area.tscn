@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://du4vygcg4rdjw"]
+
+[ext_resource type="PackedScene" uid="uid://cktbqsy56wpkt" path="res://Assets/Archways/Customer Area.glb" id="1_j8llx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j8llx"]
+radius = 0.44091797
+height = 1.1218262
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ka5f0"]
+radius = 0.2919922
+height = 0.5839844
+
+[node name="Customer Area" unique_id=1188952128 instance=ExtResource("1_j8llx")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BézierCurve" parent_id_path=PackedInt32Array(2090213174) index="0" unique_id=1736692887]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.53865004, -1.4234987, -0.45786917)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BézierCurve/StaticBody3D" index="0" unique_id=169048564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.840443, 1.1714276, 0.8039129)
+shape = SubResource("CapsuleShape3D_j8llx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BézierCurve/StaticBody3D" index="1" unique_id=1709654335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54336166, 0.99267244, 0.5897275)
+shape = SubResource("CapsuleShape3D_ka5f0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="BézierCurve" parent_id_path=PackedInt32Array(2090213174) index="1" unique_id=1768573729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73962057, -0.25719118, 0.82311904)
+omni_range = 0.846
+
+[node name="Cube_004" parent="." index="6" unique_id=1404656093]
+transform = Transform3D(0.7244917, -0.067770265, -0.68594396, 0.09313522, 0.99565357, 0, 0.6829624, -0.06388553, 0.72765446, 0.6922633, 1.4746447, 0.79187584)
+
+[node name="Cylinder" parent="." index="13" unique_id=1432332719]
+transform = Transform3D(0.31316054, 0.012400661, 0.94961923, 0.17992963, 0.98103005, -0.07214713, -0.93249977, 0.1934583, 0.3049888, 0.74482405, 1.1225218, 0.7255271)
