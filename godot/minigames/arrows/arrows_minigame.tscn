@@ -578,7 +578,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("Background/Lights:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -586,7 +586,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0.049999714, 1, 1), Color(1, 0, 0, 1)]
+"values": [Color(0, 0.63333344, 1, 1), Color(0.95338494, 1.8289685e-06, 0.5464002, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ms8o4"]
@@ -650,7 +650,6 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="BeamLights" type="TextureRect" parent="Background" unique_id=845774278]
-modulate = Color(1, 1, 1, 0.13559598)
 material = SubResource("CanvasItemMaterial_v3b0y")
 layout_mode = 0
 offset_left = -79.0
