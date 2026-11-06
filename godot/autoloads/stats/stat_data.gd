@@ -29,7 +29,7 @@ var ingredients_per_bag: int = 40
 var max_spills_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 0, 3: 2, 4: 3, 5: 4, 0: 1 }
 var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 2, 3: 3, 4: 5, 5: 4, 0: 1 }
 var clean_spill_allowed_remaining := 0.05
-var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 60, 2: 90, 3: 120, 4: 150, 5: 180, 0: 999 }
+var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 80, 2: 120, 3: 140, 4: 160, 5: 180, 0: 999 }
 
 # Redesign stuff
 var max_customers_queued_per_machine: int = 2
