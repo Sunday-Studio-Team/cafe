@@ -95,7 +95,7 @@ enum Icon {
 @export var accept_money_icon: TextureRect
 @export var accept_rating_arrow: TextureRect
 @export var accept_rating_icon: TextureRect
-
+@export var blue_screen: TextureRect
 @export_category("Audio")
 @export var hum_sound: AudioStreamPlayer3D
 @export var done_sound: AudioStreamPlayer3D
@@ -120,7 +120,10 @@ var customer: Customer
 var queued_customers: Array[Customer]
 var order: OrderData
 var waiting_for_response: bool = false
-var broken_down: bool = false
+var broken_down: bool = false:
+	set(value):
+		broken_down = value
+		blue_screen.visible = broken_down
 var tutorial_lock_remake_drink_button: bool = false
 var next_drink_forced_perfect: bool = false
 var tutorial_lock_accept_drink_button: bool = false
