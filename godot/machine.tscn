@@ -664,10 +664,6 @@ cam_spot = NodePath("CameraSpot")
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 0.70000005)
 mesh = SubResource("QuadMesh_0ffxp")
 
-[node name="CustomerCameraRemoteTransform3D" type="RemoteTransform3D" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen" unique_id=1736484949]
-transform = Transform3D(1, 0, 0, 0, 0.87461954, 0.48480943, 0, -0.48480952, 0.8746194, 0, 0.6, -2.022)
-remote_path = NodePath("../SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
-
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen" unique_id=379095341]
 transform = Transform3D(1.2075837, 0, 0, 0, 1.2075838, 3.2749806e-08, 0, -3.2749806e-08, 1.2075838, 0, 0, 0)
 layers = 4
@@ -754,13 +750,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.35)
 [node name="EmployeeSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=515903536 instance=ExtResource("17_jqdip")]
 transform = Transform3D(-5.8749322e-08, 0, -1.6221055, 0, 1.21, 0, 1.3440279, 0, -7.090448e-08, -0.013025522, 0, 0.45290476)
 
-[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=749704850]
+[node name="ingr tank" parent="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide" index="0" unique_id=1845322766]
 transform = Transform3D(0.4426128, 0, 1.7763568e-15, 0, 1.7087489, 0, 0, 0, 0.39932978, 0.10855335, 0.39117616, -0.4770483)
 
 [node name="CustomerSide" parent="ParentSoWeCanAnimateWithLocalCoords/Model" unique_id=1316846637 instance=ExtResource("20_yl6qm")]
 transform = Transform3D(-0.72791165, 0, 0.03469649, 0, 0.7287381, 0, -0.03469649, 0, -0.72791165, -0.027284622, 0, -0.106841296)
 
-[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1060681027) index="0" unique_id=641430984]
+[node name="SM_Machine" parent="ParentSoWeCanAnimateWithLocalCoords/Model/CustomerSide/SM_Machine_Outlined" parent_id_path=PackedInt32Array(1316846637, 1066077878) index="0" unique_id=1627503518]
 mesh = SubResource("ArrayMesh_vaqkk")
 
 [node name="BreakdownSound" type="AudioStreamPlayer3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1834188427]
@@ -887,6 +883,10 @@ script = ExtResource("205_t1qnq")
 _minus_rating_sprite_frames_uid = &"uid://jo5ne0q7p4te"
 _money_gain_sprite_frames_uid = &"uid://bwsoad0cvd0cn"
 metadata/_custom_type_script = "uid://c3yc3pfseqvgq"
+
+[node name="CustomerCameraRemoteTransform3D" type="RemoteTransform3D" parent="ParentSoWeCanAnimateWithLocalCoords" unique_id=1736484949]
+transform = Transform3D(0.90999997, 0, 0, 0, 0.79590374, 0.44117656, 0, -0.44117665, 0.7959036, 0, 1.7580936, -1.0812857)
+remote_path = NodePath("../3DGui/Screen/SubViewport/MachineUI/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Control2/CamFeedSubViewportContainer/CamFeedSubViewport/CustomerCamera3D")
 
 [editable path="ParentSoWeCanAnimateWithLocalCoords/3DGui/Screen/SubViewport/MachineUI"]
 [editable path="ParentSoWeCanAnimateWithLocalCoords/Model/EmployeeSide"]
