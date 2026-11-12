@@ -85,7 +85,6 @@ var employee_rating: float = 0:
 		employee_rating = new_value
 		Events.employee_rating_updated.emit(new_value, previous_employee_rating)
 
-		# (see comment for same lines in above func)
 		await get_tree().process_frame
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
@@ -97,8 +96,6 @@ var final_day := 5
 ## the one that chases you on day 5
 ## (boss as in boss fight)
 var tippy_boss: TippyBoss
-# score from refill minigame (to pass to machine)
-var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[CustomerSpriteData]
 ## the sprites of customers that are in the cafe right now
@@ -121,6 +118,7 @@ var options_menu_show_delete_save_file: bool = false
 var showing_floating_cursor := false
 var in_loadout_menu := false
 var in_ending_comic := false
+var in_scene_transition := false
 var in_ui: bool:
 	get():
 		if (
@@ -136,6 +134,7 @@ var in_ui: bool:
 				or showing_floating_cursor
 				or in_loadout_menu
 				or in_ending_comic
+				or in_scene_transition
 		):
 			return true
 		else:
@@ -199,6 +198,7 @@ var no_cooldowns := false
 var should_override_level_select_day: bool = false
 var level_select_day_override: int
 
+
 func _enter_tree() -> void:
 	if OS.has_feature("demo_mode"):
 		Commands.wipe_save()
@@ -244,7 +244,7 @@ func load_equipped_items_from_save() -> void:
 		if item:
 			owned_items.append(item)
 
-
+##Gets an item from the list of all items that exist.
 func get_item(item_id: String) -> Item:
 	var found_item := false
 	for item: Item in items:
@@ -256,6 +256,12 @@ func get_item(item_id: String) -> Item:
 		push_warning("Unlocked item not found: %s" % item_id)
 	return null
 
+##Returns true if item is currently equipped.
+func is_equipped_item(item_id: String) -> bool:
+	for item: Item in owned_items:
+		if item.item_id == item_id:
+			return true
+	return false
 
 func add_items_to_unlocked_list(item_ids: Array) -> void:
 	for raw_item_id in item_ids:

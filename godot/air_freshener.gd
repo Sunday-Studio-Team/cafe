@@ -71,7 +71,8 @@ func _on_requested_use_active_item() -> void:
 	_spray_sound.play()
 
 	Events.air_freshener_used.emit(customer_wait_duration_extension)
-	Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertIconType.CUSTOMER)
+	# TODO: get an icon for this alert or figure out one to re-use
+	# Events.alert_posted.emit("+%ss to all customers' patience!" % customer_wait_duration_extension, UI.AlertType.CUSTOMER)
 	Global.put_active_item_on_cooldown(air_freshener_item)
 
 	_air_freshener_item_on_cooldown = air_freshener_item

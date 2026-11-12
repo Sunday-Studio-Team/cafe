@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cbst2trnyvqru" path="res://sprites/machine_ui/refill_disabled.png" id="31_wb2t4"]
 [ext_resource type="Texture2D" uid="uid://bohuhgoo1fplq" path="res://sprites/machine_ui/refill_hover.png" id="32_il7ix"]
 [ext_resource type="Texture2D" uid="uid://df3huyrttidta" path="res://sprites/machine_ui/need ingredients from storage room.png" id="33_il7ix"]
+[ext_resource type="Texture2D" uid="uid://c3vqyru3x2n5e" path="res://sprites/machine_ui/machine_bluescreen.png" id="34_128tk"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -133,13 +134,6 @@ Button/styles/pressed = SubResource("StyleBoxFlat_uuvgi")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ffxp"]
 bg_color = Color(0.4054141, 0.008191438, 0.056673996, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_il7ix"]
-bg_color = Color(0.40392157, 0.007843138, 0.05490196, 0)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -741,15 +735,24 @@ INGREDIENTS !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GetIngredientsPrompt" type="PanelContainer" parent="." unique_id=1409498974]
+[node name="GetIngredientsPrompt" type="MarginContainer" parent="." unique_id=369104178]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="GetIngredientsPrompt" unique_id=1488763540]
+layout_mode = 2
 offset_transform_enabled = true
-offset_transform_rotation = 0.08726646
-theme_override_styles/panel = SubResource("StyleBoxFlat_il7ix")
+offset_transform_scale = Vector2(1.5, 1.5)
+color = Color(0, 0, 0, 0.5568628)
 
 [node name="Label" type="TextureRect" parent="GetIngredientsPrompt" unique_id=692469223]
 layout_mode = 2
 texture = ExtResource("33_il7ix")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="BlueScreen" type="TextureRect" parent="." unique_id=2105802720]
+visible = false
+z_index = 1
+layout_mode = 2
+texture = ExtResource("34_128tk")

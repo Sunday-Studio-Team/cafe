@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://lmhw5wqr2spn" path="res://Assets/tippy_tablet_tutorial_indicator/tippy_tablet_tutorial_indicator.tscn" id="4_1l6aw"]
 [ext_resource type="PackedScene" uid="uid://ccndesh240hgx" path="res://Assets/KeyChain/keychainAnim.glb" id="4_870e5"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cyvvf"]
+size = Vector2(631, 863)
+
 [node name="TippyTablet3D" type="Node3D" unique_id=1761848473 node_paths=PackedStringArray("money_tutorial_indicator", "money_goal_tutorial_indicator", "rating_tutorial_indicator", "addon_model")]
 script = ExtResource("1_3j3my")
 money_tutorial_indicator = NodePath("Scaler/TutorialIndicators/MoneyMarker3D")
@@ -24,18 +27,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
 [node name="BaseModel" parent="Scaler/Model" unique_id=875200061 instance=ExtResource("2_870e5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11823052, -0.07041024, 0)
 
-[node name="Cube_001" parent="Scaler/Model/BaseModel" index="0" unique_id=1445274746]
+[node name="tablet" parent="Scaler/Model/BaseModel" index="0" unique_id=1075669844]
 layers = 8
 
 [node name="ScreenSprite3D" type="Sprite3D" parent="Scaler/Model/BaseModel" unique_id=2083645373]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.007, -0.012782678, 0.016923353)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.021543607, -0.07146025, 0.04528496)
 layers = 8
 pixel_size = 0.0005
+texture = SubResource("PlaceholderTexture2D_cyvvf")
 
 [node name="AddonModel" parent="Scaler/Model" unique_id=1254854682 instance=ExtResource("3_42h6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11823052, 0.07041024, 0)
 
-[node name="BézierCurve" parent="Scaler/Model/AddonModel" index="0" unique_id=1518185622]
+[node name="tablet_addon" parent="Scaler/Model/AddonModel" index="0" unique_id=986236620]
 layers = 8
 
 [node name="AddonScreenSprite3D" type="Sprite3D" parent="Scaler/Model/AddonModel" unique_id=831430551]
@@ -46,16 +50,10 @@ pixel_size = 0.00021
 [node name="keychainAnim" parent="Scaler/Model/AddonModel" unique_id=862151605 instance=ExtResource("4_870e5")]
 transform = Transform3D(0.066601485, -0.002524001, -0.0015212782, 0.0020323966, 0.06425938, -0.017636549, 0.002134066, 0.017572924, 0.0642735, 0.09352189, -0.36961222, -0.11672974)
 
-[node name="Skeleton3D" parent="Scaler/Model/AddonModel/keychainAnim/Armature" parent_id_path=PackedInt32Array(862151605, 1307113770) index="0" unique_id=1510495520]
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/1/rotation = Quaternion(0.067907415, -5.7041427e-05, 0.028652571, 0.9972802)
-bones/2/rotation = Quaternion(-0.039906695, 8.922967e-05, -0.0072832955, 0.9991769)
-bones/3/rotation = Quaternion(-0.037071344, -0.0010725817, 0.004623047, 0.9993014)
-
-[node name="Cube_001" parent="Scaler/Model/AddonModel/keychainAnim/Armature/Skeleton3D" index="0" unique_id=1670019027]
+[node name="Cube_001" parent="Scaler/Model/AddonModel/keychainAnim/Armature/Skeleton3D" parent_id_path=PackedInt32Array(862151605, 1408357247) index="0" unique_id=1327320952]
 layers = 8
 
-[node name="AnimationPlayer" parent="Scaler/Model/AddonModel/keychainAnim" index="1" unique_id=1434226818]
+[node name="AnimationPlayer" parent="Scaler/Model/AddonModel/keychainAnim" index="1" unique_id=1291476078]
 playback_default_blend_time = 2.0
 
 [node name="TutorialIndicators" type="Node3D" parent="Scaler" unique_id=2077913130]

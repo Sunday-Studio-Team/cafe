@@ -73,6 +73,10 @@ func _on_play_button_pressed() -> void:
 		return
 	_finished_selection = true
 
+	create_tween().tween_property(_play_button, "modulate:a", 0.0, 0.2)
+	create_tween().tween_property(_previous_day_button, "modulate:a", 0.0, 0.2)
+	create_tween().tween_property(_next_day_button, "modulate:a", 0.0, 0.2)
+
 	press_play_sound.play()
 	_camera_animation_player.play(_camera_animation_name_zoom_in)
 	await _camera_animation_player.animation_finished

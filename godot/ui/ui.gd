@@ -2,16 +2,25 @@ extends CanvasLayer
 class_name UI
 
 enum ScoreType { MONEY, CUSTOMER }
-enum AlertIconType { MACHINE, CUSTOMER, RULE_BREAK, RATING, MONEY}
-
-# TODO: replace hardcoded file paths with @export refs
-const ALERT_ICON_TYPE_IMAGE_MAP = {
-	AlertIconType.MACHINE: "res://Assets/UI/alert_icons/machine_icon.png",
-	AlertIconType.CUSTOMER: "res://Assets/UI/alert_icons/customer_icon.png",
-	AlertIconType.RULE_BREAK: "res://Assets/UI/alert_icons/rule_break_icon.png",
-	AlertIconType.RATING: "res://Assets/UI/alert_icons/rating_icon.png",
-	AlertIconType.MONEY: "res://Assets/UI/alert_icons/dollar_icon.png",
+enum AlertType {
+	CUSTOMER_COMPLAINED,
+	CUSTOMER_NOT_SERVED,
+	CUSTOMER_STEPPED_IN_SPILL,
+	DRINK_SOLD,
+	HELP_DESK_CUSTOMER_CLEARED,
+	HELP_DESK_CUSTOMER_LEFT,
+	LOW_TIME_WARNING,
+	MACHINE_BROKE_DOWN,
+	MACHINE_RAN_OUT_OF_INGREDIENTS,
+	MACHINE_SPILLED,
+	RATING_DOWN_DRINK,
+	RATING_UP_DRINK,
+	SPILL_CLEANED,
+	TRASH,
+	BROKE_RULE_REMAKE,
+	BROKE_RULE_RUNNING,
 }
+
 const ALERT_DEFAULT_DURATION: float = 4.0
 const ALERT_COLOR_NEUTRAL: Color = Color.WHITE
 const ALERT_COLOR_RED: Color = Color.RED
@@ -44,6 +53,7 @@ const ALERT_QUEUE_SIZE := 5
 @export var exploding_bomb_ui: PanelContainer
 @export var throw_trash_ui: PanelContainer
 @export var throw_trash_ui_label: RichTextLabel
+@export var alert_icons: Array[Texture]
 
 var alert_queue: Array[HBoxContainer]
 var score_update_tween: Tween
@@ -65,8 +75,8 @@ func _ready() -> void:
 	)
 
 	Events.alert_posted.connect(
-			func(message, alert_icon_type, alert_time_to_live = 4.0, color = Color.WHITE):
-				_on_alert_posted(message, alert_icon_type, alert_time_to_live, color)
+			func(message, alert_type, alert_time_to_live = 4.0, color = Color.WHITE, rating_change = 0.0):
+				_on_alert_posted(message, alert_type, alert_time_to_live, color, rating_change)
 	)
 
 	Events.shift_end_sequence_started.connect(
@@ -112,7 +122,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		update_exploding_bomb_timer(_delta)
 
-	update_throw_trash_ui()
+	#update_throw_trash_ui()
 	update_day_indicator()
 	handle_exit_machine_button_visibility()
 	handle_drop_item_ui()
@@ -351,9 +361,10 @@ func _get_on_alert_tween_finished(alert_to_remove: HBoxContainer):
 
 func _on_alert_posted(
 	message: String,
-	alert_icon_type: AlertIconType,
+	alert_type: AlertType,
 	alert_time_to_live: float = 4.0,
-	color: Color = Color.WHITE
+	color: Color = Color.WHITE,
+	rating_change: float = 0.0
 ) -> void:
 	if alert_queue.size() + 1 > ALERT_QUEUE_SIZE:
 		# we need to remove before we start the tween to make sure that
@@ -377,7 +388,20 @@ func _on_alert_posted(
 	# TODO: static typing for this
 	var new_alert = alert_packed_scene.instantiate()
 	new_alert.alert_label.text = message
-	new_alert.icon.texture = load(ALERT_ICON_TYPE_IMAGE_MAP[alert_icon_type])
+	new_alert.icon.texture = alert_icons[alert_type]
+
+	if (rating_change != 0):
+		new_alert.sign_label.visible = true
+		new_alert.star_fill.visible = true
+		if rating_change > 0.0:
+			new_alert.sign_label.text = "+"
+		else:
+			new_alert.sign_label.text = "-"
+		new_alert.sign_label.modulate = color
+		new_alert.star_fill.value = absf(rating_change)
+	else:
+		new_alert.sign_label.visible = false
+		new_alert.star_fill.visible = false
 
 	alert_ui.add_child(new_alert)
 	alert_queue.append(new_alert)
@@ -392,8 +416,6 @@ func _on_alert_posted(
 	# Bind is used here to ensure that the lambda doesn't throw an error if the alert is freed before
 	# the lambda is called
 	new_alert_tween.finished.connect(_get_on_alert_tween_finished.bind(new_alert).call())
-
-	new_alert.alert_sprite.play()
 
 
 func play_score_update_sounds(score_type: ScoreType, new_value: float, old_value: float) -> void:
