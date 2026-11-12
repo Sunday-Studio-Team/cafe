@@ -70,6 +70,7 @@ func _unhandled_input(input_event: InputEvent) -> void:
 	if (
 			input_event.is_action_pressed("pause")
 			and not Global.in_end_screen
+			and not Global.in_scene_transition
 	):
 		get_viewport().set_input_as_handled()
 		if state == State.NORMAL:

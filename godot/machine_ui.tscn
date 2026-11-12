@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cbst2trnyvqru" path="res://sprites/machine_ui/refill_disabled.png" id="31_wb2t4"]
 [ext_resource type="Texture2D" uid="uid://bohuhgoo1fplq" path="res://sprites/machine_ui/refill_hover.png" id="32_il7ix"]
 [ext_resource type="Texture2D" uid="uid://df3huyrttidta" path="res://sprites/machine_ui/need ingredients from storage room.png" id="33_il7ix"]
+[ext_resource type="Texture2D" uid="uid://c3vqyru3x2n5e" path="res://sprites/machine_ui/machine_bluescreen.png" id="34_128tk"]
 
 [sub_resource type="Theme" id="Theme_yuuq8"]
 default_font_size = 36
@@ -749,3 +750,9 @@ layout_mode = 2
 texture = ExtResource("33_il7ix")
 expand_mode = 5
 stretch_mode = 5
+
+[node name="BlueScreen" type="TextureRect" parent="." unique_id=2105802720]
+visible = false
+z_index = 1
+layout_mode = 2
+texture = ExtResource("34_128tk")

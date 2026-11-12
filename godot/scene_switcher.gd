@@ -142,6 +142,7 @@ func _finish_tippy_loading() -> void:
 
 func load_scene(scene: SceneSwitcher.GameScene, skip_intro: bool = false) -> void:
 	loading_screen.visible = true
+	Global.in_scene_transition = true
 
 	const TIMING_PRINTS: bool = true
 	const COUNT_CHILDREN_PRINTS: bool = true
@@ -311,6 +312,8 @@ func load_scene(scene: SceneSwitcher.GameScene, skip_intro: bool = false) -> voi
 	Events.scene_switch_in_animation_finished.emit()
 
 	loading_screen.visible = false
+	Global.in_scene_transition = false
+
 
 
 func quit_game() -> void:

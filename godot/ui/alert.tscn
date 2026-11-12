@@ -4,18 +4,22 @@
 [ext_resource type="Script" uid="uid://y5rqdveho03x" path="res://ui/alert.gd" id="1_mm7lo"]
 [ext_resource type="Texture2D" uid="uid://bvjjyqwl72gqd" path="res://sprites/alert_icons/alert_icon_trash.png" id="2_0ps8o"]
 [ext_resource type="FontFile" uid="uid://b4twii0q61ai0" path="res://fonts/action_man/Action_Man_Bold_Italic.ttf" id="3_0ps8o"]
+[ext_resource type="Texture2D" uid="uid://041ew7jgtjke" path="res://sprites/tablet_ui/rating/rating_star_over.png" id="4_vxat4"]
+[ext_resource type="Texture2D" uid="uid://c4pw3d21rj110" path="res://sprites/tablet_ui/rating/rating_star_progress.png" id="5_84ntu"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mm7lo"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Alert" type="HBoxContainer" unique_id=1465995593 node_paths=PackedStringArray("alert_label", "alert_sprite", "icon")]
+[node name="Alert" type="HBoxContainer" unique_id=1465995593 node_paths=PackedStringArray("alert_label", "alert_sprite", "icon", "star_fill", "sign_label")]
 custom_minimum_size = Vector2(0, 32)
-offset_right = 625.0
-offset_bottom = 45.0
+offset_right = 1151.0
+offset_bottom = 84.0
 script = ExtResource("1_mm7lo")
 alert_label = NodePath("AlertLabel")
 alert_sprite = NodePath("SubViewport/AnimatedSprite2D")
 icon = NodePath("Icon")
+star_fill = NodePath("StarFill")
+sign_label = NodePath("SignLabel")
 
 [node name="Exclamation" type="TextureRect" parent="." unique_id=860667440]
 layout_mode = 2
@@ -27,12 +31,30 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1619222323]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_0ps8o")
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
+
+[node name="SignLabel" type="Label" parent="." unique_id=1287823990]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_0ps8o")
+theme_override_font_sizes/font_size = 56
+text = "+ "
+
+[node name="StarFill" type="TextureProgressBar" parent="." unique_id=1180985329]
+self_modulate = Color(0.8627451, 1, 0, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+nine_patch_stretch = true
+texture_over = ExtResource("4_vxat4")
+texture_progress = ExtResource("5_84ntu")
 
 [node name="AlertLabel" type="Label" parent="." unique_id=1926260897]
 layout_mode = 2

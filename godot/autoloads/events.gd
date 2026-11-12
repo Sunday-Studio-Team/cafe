@@ -36,6 +36,7 @@ signal alert_posted(
 	alert_icon_type: UI.AlertType,
 	alert_time_to_live: float,
 	color: Color,
+	rating_change: float,
 )
 signal items_updated
 signal finished_important_email(email_data: EmailData)

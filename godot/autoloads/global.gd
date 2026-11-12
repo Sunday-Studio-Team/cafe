@@ -118,6 +118,7 @@ var options_menu_show_delete_save_file: bool = false
 var showing_floating_cursor := false
 var in_loadout_menu := false
 var in_ending_comic := false
+var in_scene_transition := false
 var in_ui: bool:
 	get():
 		if (
@@ -133,6 +134,7 @@ var in_ui: bool:
 				or showing_floating_cursor
 				or in_loadout_menu
 				or in_ending_comic
+				or in_scene_transition
 		):
 			return true
 		else:

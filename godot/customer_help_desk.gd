@@ -8,6 +8,8 @@ signal new_desk_customer_arrived
 @export var _end_of_customer_queue_marker: Marker3D
 @export var _help_desk_interactable: Interactable
 @export var bell_sound: AudioStreamPlayer3D
+@export var notif_animation: AnimatedSprite3D
+@export var notif_hide_radius: float
 ## yeah this sound should probably be on the player or viewmodel instead of duplicated on machine and here whatever .
 @export var airhorn_sound: AudioStreamPlayer
 
@@ -30,6 +32,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	_process_queued_customers()
+	_update_help_desk_notif()
 
 
 func _process_queued_customers() -> void:
@@ -49,6 +52,15 @@ func _customer_queue_update_visuals() -> void:
 		queued_customer.move_to(queue_global_position)
 		i += 1
 
+
+func _update_help_desk_notif() -> void:
+	if !_help_desk_interactable.visible:
+		notif_animation.visible = false
+		return
+	if Global.player.global_position.distance_to(global_position) > notif_hide_radius:
+		notif_animation.visible = true
+	else:
+		notif_animation.visible = false
 
 func customer_queue_size() -> int:
 	return _queued_desk_customers.size()
@@ -98,7 +110,7 @@ func _on_customer_wait_timed_out(timed_out_customer: Customer) -> void:
 			Events.alert_posted.emit("Customer left!", UI.AlertType.HELP_DESK_CUSTOMER_LEFT, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit("-%s Customer left!" % rating_loss, UI.AlertType.HELP_DESK_CUSTOMER_LEFT, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Customer left!", UI.AlertType.HELP_DESK_CUSTOMER_LEFT, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED, -rating_loss)
 			Global.employee_rating -= rating_loss
 		_desk_customer.timer.stop()
 		_desk_customer.leave_store()
@@ -127,7 +139,7 @@ func _on_minigame_end() -> void:
 	Global.tutorial_day_2_help_desk_finished = true
 
 	var rating_gain: float = Stats.current.help_desk_customer_success_rating_gain_each_day[Global.day]
-	Events.alert_posted.emit("+%s Customer happy!" % rating_gain, UI.AlertType.HELP_DESK_CUSTOMER_CLEARED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN)
+	Events.alert_posted.emit("Customer happy!", UI.AlertType.HELP_DESK_CUSTOMER_CLEARED, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_GREEN, rating_gain)
 	Global.employee_rating += rating_gain
 	Global.active_help_desk_customer.timer.stop()
 	Global.active_help_desk_customer.leave_store()
