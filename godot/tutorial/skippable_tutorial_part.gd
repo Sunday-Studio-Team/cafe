@@ -430,12 +430,26 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 
 			await get_tree().create_timer(1.0).timeout
 
+			# "my precious machine has broken down!"
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_41", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_42", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_43", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
+
+			await _tutorial_manager._cinematic_camera.play_animation("day_2_training_44_0")
+			
+			# "so just me?"
+			
+			
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_44", VoiceLineSystem.VoiceLineLocationEnum.AT_CINEMATIC_CAMERA, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_45", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+			
+			# "interact with the machine to start fixing it"
 			await Global.voice_line_system.play_voice_line("voice_line_day_2_training_46", VoiceLineSystem.VoiceLineLocationEnum.AROUND_CAFE, VoiceLineSystem.VoiceLinePriorityEnum.TUTORIAL)
+
 			
 			if true:
 				var tween: Tween = create_tween()
@@ -551,7 +565,7 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 			_tutorial_manager._cinematic_camera.camera_rig_node.global_rotation = Global.player.camera.camera_effects.global_rotation
 			_tutorial_manager._cinematic_camera.enable_cinematic_camera(0.5)
 			_tutorial_manager._cinematic_camera.cinematic_bars.show_bars(0.5)
-
+			
 			Global.player.override_position_rotation(_tutorial_manager._day_3_sato_at_machine_spill_position.global_position, _tutorial_manager._day_3_sato_at_machine_spill_position.global_rotation)
 			await _tutorial_manager._cinematic_camera.play_animation("day_3_training_32_0")
 			

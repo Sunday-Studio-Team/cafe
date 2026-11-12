@@ -875,6 +875,25 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524, 0.5, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524)
 
+[sub_resource type="Animation" id="Animation_f4177"]
+resource_name = "day_2_training_44_0"
+length = 0.6
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -7.8460236, 1.5924425, 2.7625628, 0.6, 1, -7.7, 1.592, 5.2)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524)
+
 [sub_resource type="Animation" id="Animation_gdxi3"]
 resource_name = "day_2_training_8_0"
 length = 2.0
@@ -1198,6 +1217,7 @@ _data = {
 &"day_2_training_26_0": SubResource("Animation_lyu6w"),
 &"day_2_training_31_0": SubResource("Animation_u1kx1"),
 &"day_2_training_41_0": SubResource("Animation_lwqyd"),
+&"day_2_training_44_0": SubResource("Animation_f4177"),
 &"day_2_training_8_0": SubResource("Animation_gdxi3"),
 &"day_3_training_0_0": SubResource("Animation_sn277"),
 &"day_3_training_14_0": SubResource("Animation_sxhyu"),
@@ -2107,13 +2127,13 @@ transform = Transform3D(0.9457384, 0, -0.32492858, 0, 0.9999999, 0, 0.32492858, 
 transform = Transform3D(0.9457384, 0, -0.32492858, 0, 0.9999999, 0, 0.32492858, 0, 0.9457384, 1.799, -0.09, 8.332)
 
 [node name="Day2SatoAtBrokenMachineLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=1469893796]
-transform = Transform3D(0.37145466, 0, -0.9284508, 0, 0.9999999, 0, 0.9284508, 0, 0.37145466, -8.981, -0.09, 1.319)
+transform = Transform3D(0.82412595, 0, 0.5664061, 0, 0.9999999, 0, -0.5664061, 0, 0.82412595, 1.9790764, -0.09, 6.3718185)
 
 [node name="Day3SatoAtCameraLocationRotation" type="Marker3D" parent="TutorialLocations" unique_id=320793439]
 transform = Transform3D(0.1946161, 0, 0.98087883, 0, 0.9999999, 0, -0.98087883, 0, 0.1946161, -0.044, -0.09, 5.995)
 
 [node name="Day3SatoAtMachineSpillRotation" type="Marker3D" parent="TutorialLocations" unique_id=989229560]
-transform = Transform3D(-0.8318231, 0, 0.5550399, 0, 0.9999999, 0, -0.5550399, 0, -0.8318231, 2.756, -0.09, 0.375)
+transform = Transform3D(0.99572414, 0, 0.09237054, 0, 0.9999999, 0, -0.09237054, 0, 0.99572414, 2.756, -0.09, 6.019816)
 
 [node name="Day4SatoAtTrashRotation" type="Marker3D" parent="TutorialLocations" unique_id=1875544799]
 transform = Transform3D(-0.0041754534, 0, 0.9999907, 0, 0.9999999, 0, -0.9999907, 0, -0.0041754534, 4.33, -0.09, -1.015)
@@ -2365,7 +2385,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CameraRig" type="Node3D" parent="CinematicCamera" unique_id=457424306]
-transform = Transform3D(-0.7809494, 0.083732806, -0.6189538, 5.2153997e-08, 0.9909714, 0.13405971, 0.6245922, 0.104693964, -0.77389956, 1.2754613, 1.4115822, 0.00028151274)
+transform = Transform3D(0.50223297, 0.15690733, -0.85037565, -2.2351713e-08, 0.98339796, 0.18145196, 0.86473083, -0.091131255, 0.4938955, 1.2754613, 1.4115822, 0.00028151274)
 metadata/_edit_group_ = true
 
 [node name="VoiceLinePlayerNonDirectional" parent="CinematicCamera/CameraRig" unique_id=1543677672 instance=ExtResource("299_043in")]
