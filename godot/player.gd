@@ -98,14 +98,19 @@ func _ready() -> void:
 		Events.trash_pickup_animation_grabbed.connect(
 			func():
 				bag_pickup_sound.play()
-
-				# scuffed 'animation' of trash appearing when we grab it
 				await Events.viewmodel_animation_finished
-
 				var t := create_tween().set_parallel()
 				t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
-		)
-		customer_trash.visible = false
+	)
+	Events.trash_throw_animation_released.connect(
+		func():
+			drop_trash()
+			# scuffed 'animation' of trash appearing when we grab it
+			await Events.viewmodel_animation_finished
+			var t := create_tween().set_parallel()
+			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
+	)
+	customer_trash.visible = false
 
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
@@ -297,14 +302,20 @@ func handle_ingredients_bag() -> void:
 
 func handle_customer_trash() -> void:
 	if (Input.is_action_just_pressed("drop") and Global.holding_trash and not Global.in_ui):
-		throw_trash_sound.play()
-		var trash_to_drop: RigidBody3D = customer_trash_scenes[Global.trash_in_hand].instantiate()
-		Global.main_scene.add_child(trash_to_drop)
-		trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-		trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * GARBAGE_FORWARD_VELOCITY)
-		trash_to_drop.apply_impulse(transform.basis * Vector3.UP * GARBAGE_UPWARD_VELOCITY)
 		Global.holding_trash = false
-		Global.trash_in_hand = ""
+		Events.play_viewmodel_animation.emit("throw_trash")
+	customer_trash.visible = Global.holding_trash and not Global.in_ui
+
+
+func drop_trash() -> void:
+	throw_trash_sound.play()
+	var trash_to_drop: RigidBody3D = customer_trash_scenes[Global.trash_in_hand].instantiate()
+	Global.main_scene.add_child(trash_to_drop)
+	trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
+	trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * GARBAGE_FORWARD_VELOCITY)
+	trash_to_drop.apply_impulse(transform.basis * Vector3.UP * GARBAGE_UPWARD_VELOCITY)
+	Global.holding_trash = false
+	Global.trash_in_hand = ""
 
 	if Global.holding_trash and not Global.in_ui and trash_models.has(Global.trash_in_hand):
 		if customer_trash != trash_models[Global.trash_in_hand]:
