@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://bk305ay464u4h" path="res://Assets/Trash minigame/trashcan/Tippy Trashcan.glb" id="2_alpy1"]
 [ext_resource type="Material" uid="uid://db5vtwbudln0d" path="res://Assets/Trash minigame/trashcan/highlight_trash_can_shader.tres" id="2_kcyba"]
 [ext_resource type="AudioStream" uid="uid://dmasft4bprmvh" path="res://audio/trash_can/scored.wav" id="2_wr0p8"]
+[ext_resource type="Texture2D" uid="uid://bl5jt5oqyawll" path="res://Assets/UI/dialogue_popup.png" id="5_dv6pg"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="6_ym8ld"]
+[ext_resource type="FontFile" uid="uid://ca062kigheqxq" path="res://fonts/action_man/Action_Man_Bold.ttf" id="7_7m4bc"]
+[ext_resource type="Texture2D" uid="uid://bht2d6kw74y6" path="res://sprites/kenney_input-prompts_1.5/Generic/Vector/generic_button_square_outline.svg" id="8_hqxdy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wnsl6"]
 size = Vector3(1.639, 2.151, 1.646)
@@ -11,13 +15,18 @@ size = Vector3(1.639, 2.151, 1.646)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
 size = Vector3(1.3694153, 0.50146484, 0.6494751)
 
-[node name="TrashCan" type="Area3D" unique_id=1523606592 node_paths=PackedStringArray("trash_can_model", "scored_sfx")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_q44ip"]
+viewport_path = NodePath("SubViewport")
+
+[node name="TrashCan" type="Area3D" unique_id=1523606592 node_paths=PackedStringArray("trash_can_model", "scored_sfx", "throw_trash_ui", "throw_trash_ui_label")]
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_bgvmr")
 trash_can_model = NodePath("Model/tippy_trash")
 highlight_material = ExtResource("2_kcyba")
 scored_sfx = NodePath("AudioStreamPlayer3D")
+throw_trash_ui = NodePath("Popup")
+throw_trash_ui_label = NodePath("SubViewport/RichTextLabel")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=809688403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0031433105, 0.66010666, -0.403006)
@@ -29,7 +38,7 @@ stream = ExtResource("2_wr0p8")
 [node name="Model" parent="." unique_id=663008453 instance=ExtResource("2_alpy1")]
 transform = Transform3D(1.2053021, 0, 0, 0, 1.2053021, 0, 0, 0, 1.2053021, 0, 0, 0)
 
-[node name="tippy_trash" parent="Model" index="0" unique_id=1188696088]
+[node name="tippy_trash" parent="Model" index="0" unique_id=1562495764]
 surface_material_override/0 = ExtResource("2_kcyba")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Model" unique_id=476933652]
@@ -37,6 +46,47 @@ surface_material_override/0 = ExtResource("2_kcyba")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/StaticBody3D" unique_id=1746944897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0048675546, 0.24926756, -0.00048820287)
 shape = SubResource("BoxShape3D_xrivr")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=729228700]
+transparent_bg = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewport" unique_id=1343920142]
+z_index = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_right = 256.0
+offset_bottom = 264.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 28
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("6_ym8ld")
+theme_override_fonts/bold_font = ExtResource("7_7m4bc")
+theme_override_font_sizes/normal_font_size = 54
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PopupDialogue" type="Sprite2D" parent="SubViewport" unique_id=405946077]
+position = Vector2(85.333, 0)
+scale = Vector2(0.65, 1)
+texture = ExtResource("5_dv6pg")
+offset = Vector2(256, 128)
+
+[node name="ButtonBackground" type="Sprite2D" parent="SubViewport" unique_id=982462762]
+z_index = 1
+position = Vector2(258.325, 126.255)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("8_hqxdy")
+
+[node name="Popup" type="Sprite3D" parent="." unique_id=1851390350]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.36, 0.5119809)
+billboard = 1
+alpha_cut = 1
+texture = SubResource("ViewportTexture_q44ip")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 
