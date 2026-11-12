@@ -13,6 +13,11 @@ extends Node
 @export var _mouse_sensitivity_slider_view: OptionsMenuSliderView
 @export var _crosshair_option_view: OptionsMenuOptionView
 @export var _camera_motion_option_view: OptionsMenuOptionView
+@export var _delete_save_file_option_container: Control
+@export var _delete_save_file_button: Button
+@export var _delete_save_file_button_text_prompt: String = "Delete Save Data"
+@export var _delete_save_file_button_text_confirm: String = "Really Delete Save Data?"
+@export var _delete_save_file_button_text_deleted: String = "Save Data Deleted!"
 # Keybinds
 @export var _move_forward_keybind_option_view: OptionsMenuKeybindOptionView
 @export var _move_left_keybind_option_view: OptionsMenuKeybindOptionView
@@ -55,6 +60,12 @@ const _camera_motion_options: Dictionary[String, int] = {
 	"Camera Effects Off (Motion Sickness Friendly)": OptionsData.CameraMotionOption.Off,
 }
 
+enum DeleteSaveButtonState {
+	IDLE,
+	CONFIRMING,
+}
+var _delete_save_button_state: DeleteSaveButtonState = DeleteSaveButtonState.IDLE
+
 var _options_data: OptionsData
 
 const _deferred_options_apply_timer_wait_time: float = 3.0
@@ -77,7 +88,7 @@ func _ready() -> void:
 	_stored_deferred_options_apply_timer.one_shot = true
 	_stored_deferred_options_apply_timer.wait_time = _deferred_options_apply_timer_wait_time
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_save_and_close_menu()
 		get_viewport().set_input_as_handled()
@@ -144,6 +155,14 @@ func _setup_option_views() -> void:
 	_camera_motion_option_view.set_dropdown_options(_camera_motion_options)
 	_camera_motion_option_view.set_selected_dropdown_option((_options_data.camera_motion_option as int))
 	_camera_motion_option_view.changed_option.connect(_on_camera_motion_option_view_changed_option)
+
+	if Global.options_menu_show_delete_save_file:
+		_delete_save_file_option_container.visible = true
+		_delete_save_file_button.text = _delete_save_file_button_text_prompt
+		_delete_save_file_button.pressed.connect(_on_delete_save_file_button_pressed)
+		Global.options_menu_show_delete_save_file = false
+	else:
+		_delete_save_file_option_container.visible = false
 	
 	_move_forward_keybind_option_view.set_action("Move Forward", &"move_forward")
 	_move_forward_keybind_option_view.set_default_keybind(_options_data.DEFAULT_MOVE_FORWARD_ACTION_PHYSICAL_KEYCODE)
@@ -237,6 +256,25 @@ func _on_crosshair_option_view_changed_option(index: int) -> void:
 func _on_camera_motion_option_view_changed_option(index: int) -> void:
 	_options_data.camera_motion_option = (index as OptionsData.CameraMotionOption)
 	_options_data.apply_options()
+
+func _on_delete_save_file_button_pressed() -> void:
+	match _delete_save_button_state:
+		DeleteSaveButtonState.IDLE:
+			_delete_save_button_state = DeleteSaveButtonState.CONFIRMING
+			_delete_save_file_button.disabled = true
+			_delete_save_file_button.text = "%s (3...)" % _delete_save_file_button_text_confirm
+			await get_tree().create_timer(1.0).timeout
+			_delete_save_file_button.text = "%s (2...)" % _delete_save_file_button_text_confirm
+			await get_tree().create_timer(1.0).timeout
+			_delete_save_file_button.text = "%s (1...)" % _delete_save_file_button_text_confirm
+			await get_tree().create_timer(1.0).timeout
+			_delete_save_file_button.text = "%s" % _delete_save_file_button_text_confirm
+			_delete_save_file_button.disabled = false
+		DeleteSaveButtonState.CONFIRMING:
+			_delete_save_button_state = DeleteSaveButtonState.IDLE
+			_delete_save_file_button.disabled = true
+			SaveDataManager.wipe_save()
+			_delete_save_file_button.text = "%s" % _delete_save_file_button_text_deleted
 
 func _on_save_settings_button_pressed() -> void:
 	_save_and_close_menu()

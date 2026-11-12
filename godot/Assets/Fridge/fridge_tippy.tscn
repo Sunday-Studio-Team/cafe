@@ -3,11 +3,20 @@
 [ext_resource type="Script" uid="uid://dsno53vovy3oi" path="res://Assets/Fridge/fridge_tippy.gd" id="1_6u037"]
 [ext_resource type="PackedScene" uid="uid://cqjsrjwgrasda" path="res://Assets/Fridge/FridgeMoving.glb" id="2_6u037"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7vtss"]
+size = Vector3(0.86376953, 1.6948242, 0.9647217)
+
 [node name="FridgeTippy" type="Node3D" unique_id=2104615335 node_paths=PackedStringArray("_animation_player")]
 script = ExtResource("1_6u037")
 _animation_player = NodePath("FridgeMoving/AnimationPlayer")
 
 [node name="FridgeMoving" parent="." unique_id=2050319966 instance=ExtResource("2_6u037")]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1198284767]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=801396096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0017089844, 0.88183594, 0.07269287)
+shape = SubResource("BoxShape3D_7vtss")
 
 [editable path="FridgeMoving"]

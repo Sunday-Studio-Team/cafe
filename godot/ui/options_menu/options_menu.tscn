@@ -39,10 +39,13 @@ content_margin_right = 32.0
 content_margin_bottom = 16.0
 bg_color = Color(0.16, 0.16, 0.16, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ubxx"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wakw5"]
 bg_color = Color(0.06, 0.06, 0.06, 1)
 
-[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_overall_volume_slider_view", "_music_volume_slider_view", "_voice_volume_slider_view", "_sfx_volume_slider_view", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_mouse_sensitivity_slider_view", "_crosshair_option_view", "_camera_motion_option_view", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
+[node name="OptionsMenu" type="CanvasLayer" unique_id=1700233844 node_paths=PackedStringArray("_tab_container", "_overall_volume_slider_view", "_music_volume_slider_view", "_voice_volume_slider_view", "_sfx_volume_slider_view", "_graphics_preset_option_view", "_window_mode_option_view", "_vsync_mode_option_view", "_mouse_sensitivity_slider_view", "_crosshair_option_view", "_camera_motion_option_view", "_delete_save_file_option_container", "_delete_save_file_button", "_move_forward_keybind_option_view", "_move_left_keybind_option_view", "_move_backward_keybind_option_view", "_move_right_keybind_option_view", "_sprint_keybind_option_view", "_interact_keybind_option_view", "_drop_item_keybind_option_view", "_use_contextual_active_item_keybind_option_view", "_pause_exit_menu_keybind_option_view", "_save_settings_button")]
 process_mode = 3
 layer = 5
 script = ExtResource("1_8h7tm")
@@ -57,6 +60,8 @@ _vsync_mode_option_view = NodePath("Control/MarginContainer/MarginContainer/VBox
 _mouse_sensitivity_slider_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/MouseSensOptionsMenuSliderView")
 _crosshair_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CrosshairOptionsMenuOptionView")
 _camera_motion_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/CameraMotionOptionsMenuOptionView")
+_delete_save_file_option_container = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/DeleteSaveOptionsMenuButtonView")
+_delete_save_file_button = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/DeleteSaveOptionsMenuButtonView/MarginContainer/DeleteSaveButton")
 _move_forward_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveForwardOptionsMenuKeybindOptionView2")
 _move_left_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveLeftOptionsMenuKeybindOptionView")
 _move_backward_keybind_option_view = NodePath("Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/KeybindsScrollContainer/OptionViewsVBoxContainer/MoveBackwardOptionsMenuKeybindOptionView2")
@@ -183,6 +188,25 @@ option_name = "Crosshair"
 [node name="CameraMotionOptionsMenuOptionView" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=1495567016 instance=ExtResource("1_3s1t0")]
 layout_mode = 2
 option_name = "Motion Sickness"
+
+[node name="DeleteSaveOptionsMenuButtonView" type="MarginContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer" unique_id=104043242]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/DeleteSaveOptionsMenuButtonView" unique_id=277705162]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ubxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/DeleteSaveOptionsMenuButtonView" unique_id=1352726702]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="DeleteSaveButton" type="Button" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer/GeneralScrollContainer/GeneralOptionViewsVBoxContainer/DeleteSaveOptionsMenuButtonView/MarginContainer" unique_id=522493622]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Delete Save File"
 
 [node name="KeybindsScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/MarginContainer/VBoxContainer/TabContainer" unique_id=1598742862]
 visible = false

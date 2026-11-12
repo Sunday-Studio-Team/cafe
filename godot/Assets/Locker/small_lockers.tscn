@@ -2,4 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://dtcggljghikjy" path="res://Assets/Locker/Small Lockers.glb" id="1_vio4i"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxhcj"]
+size = Vector3(0.5765381, 1.6894531, 0.8623047)
+
 [node name="Small Lockers" unique_id=461790548 instance=ExtResource("1_vio4i")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="6" unique_id=1996262783]
+transform = Transform3D(0.99999994, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 0.99999994, -0.02861023, 0, -0.005959034)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1006936789]
+transform = Transform3D(1, 0, -8.940621e-08, 0, 1, 0, 8.940621e-08, 0, 1, 0.11346302, 0.8498529, 0.0688464)
+shape = SubResource("BoxShape3D_gxhcj")

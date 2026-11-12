@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://chtkwetnsvy28"]
+
+[ext_resource type="Texture2D" uid="uid://bx2v0cynov7eg" path="res://Assets/Trash minigame/trash models/models/Trash_CoffeeCup_DefaultMaterial_BaseColor.png" id="1_g23pp"]
+[ext_resource type="Texture2D" uid="uid://bife4rrh6ar2r" path="res://Assets/Trash minigame/trash models/models/Trash_CoffeeCup_DefaultMaterial_Roughness.png" id="2_gy5dm"]
+
+[resource]
+resource_name = "Material"
+render_priority = 1
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_g23pp")
+metallic_texture = ExtResource("2_gy5dm")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_gy5dm")
+roughness_texture_channel = 1
+metadata/_gltf_primary_texture_coord = 0

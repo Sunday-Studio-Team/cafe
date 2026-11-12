@@ -20,7 +20,7 @@ var machine_time_to_make_drink := 3.0
 var customer_wait_time_machine_each_day: Dictionary[int, float] = { 1: 45.0, 2: 45.0, 3: 45.0, 4: 45.0, 5: 45.0, 0: INF }
 var customer_wait_time_help_desk_each_day: Dictionary[int, float] = { 1: 45.0, 2: 45.0, 3: 45.0, 4: 45.0, 5: 45.0, 0: INF }
 var daily_profit_goals_each_day: Dictionary[int, float] = { 1: 15.0, 2: 30.0, 3: 60.0, 4: 80.0, 5: 100.0, 0: 100.0 }
-var drink_price_multiplier_each_day: Dictionary[int, float] = { 1: 1.2, 2: 1.5, 3: 2.0, 4: 3.0, 5: 3.5, 0: 1.0  }
+var drink_price_multiplier_each_day: Dictionary[int, float] = { 1: 1.2, 2: 1.5, 3: 2.0, 4: 2.5, 5: 3.0, 0: 1.0  }
 var employee_rating_max := 5.0
 var machine_starting_ingredients: int = 40
 var machine_max_ingredients: int = 60
@@ -29,7 +29,7 @@ var ingredients_per_bag: int = 40
 var max_spills_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 0, 3: 2, 4: 3, 5: 4, 0: 1 }
 var max_breakdowns_per_shift_each_day: Dictionary[int, int] = { 1: 0, 2: 2, 3: 3, 4: 5, 5: 4, 0: 1 }
 var clean_spill_allowed_remaining := 0.05
-var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 60, 2: 90, 3: 120, 4: 150, 5: 180, 0: 999 }
+var shift_lengths_for_each_day: Dictionary[int, int] = { 1: 80, 2: 120, 3: 140, 4: 160, 5: 180, 0: 999 }
 
 # Redesign stuff
 var max_customers_queued_per_machine: int = 2
@@ -52,7 +52,7 @@ var help_desk_customer_timed_out_rating_loss_each_day: Dictionary[int, float] = 
 var camera_slow_player_walk_speed_multiplier: float = 0.3
 var camera_slow_player_sprint_speed_multiplier: float = 0.25
 var camera_slow_player_duration: float = 3.0
-var time_camera_disabled_after_sabotage := 30.0
+var time_camera_disabled_after_sabotage := 15.0
 
 var lucky_charm_activation_chance: float = 0.25
 

@@ -24,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://4nqhps4rtxcv" path="res://sprites/menu_anim/frame_007.PNG" id="22_dbfs1"]
 [ext_resource type="Texture2D" uid="uid://bdxk885j0moav" path="res://Assets/main_menu/Discord-Symbol-Blurple.png" id="23_i5ydv"]
 [ext_resource type="Texture2D" uid="uid://dqx0vd8ck62wt" path="res://Assets/main_menu/Instagram_Glyph_Gradient.png" id="24_racxt"]
+[ext_resource type="AudioStream" uid="uid://dmgrvt3x32wyh" path="res://audio/main_menu_shards.wav" id="25_racxt"]
+[ext_resource type="FontFile" uid="uid://ca062kigheqxq" path="res://fonts/action_man/Action_Man_Bold.ttf" id="26_dooca"]
+[ext_resource type="AudioStream" uid="uid://bj6fx53b17p82" path="res://audio/ui_focus_change_generic.ogg" id="27_dbfs1"]
+[ext_resource type="AudioStream" uid="uid://1uljr8m1b8m6" path="res://audio/ui_click_generic.wav" id="28_mxs5a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o0xaf"]
 animations = [{
@@ -61,7 +65,7 @@ animations = [{
 
 [sub_resource type="BitMap" id="BitMap_ei257"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("_background_sprite", "_buttons_parent_node", "_new_game_button", "_continue_button", "_quit_button", "_options_button", "_discord_button", "_instagram_button")]
+[node name="MainMenu" type="CanvasLayer" unique_id=2062662636 node_paths=PackedStringArray("_background_sprite", "_buttons_parent_node", "_new_game_button", "_continue_button", "_quit_button", "_options_button", "_discord_button", "_instagram_button", "_hover_sound", "_click_sound")]
 script = ExtResource("1_t7e0r")
 _background_sprite = NodePath("Background")
 _buttons_parent_node = NodePath("Buttons")
@@ -72,6 +76,8 @@ _options_button = NodePath("Buttons/Options")
 _options_menu_packed_scene = ExtResource("2_0dkrt")
 _discord_button = NodePath("MarginContainer/HBoxContainer/Discord")
 _instagram_button = NodePath("MarginContainer/HBoxContainer/Instagram")
+_hover_sound = NodePath("HoverSound")
+_click_sound = NodePath("ClickSound")
 _save_file_path = "user://save_data.tres"
 metadata/_edit_vertical_guides_ = [1921.0, -40.0]
 
@@ -211,3 +217,39 @@ offset_bottom = 589.0
 scale = Vector2(1.2, 1.2)
 size_flags_horizontal = 4
 texture_normal = ExtResource("6_ei257")
+
+[node name="Title" type="Label" parent="." unique_id=2090391620]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 294.0
+offset_top = 24.0
+offset_right = -10.0
+offset_bottom = -378.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.031222688
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+theme_override_fonts/font = ExtResource("26_dooca")
+theme_override_font_sizes/font_size = 256
+text = "Tippy's
+Café"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shards" type="AudioStreamPlayer" parent="." unique_id=1210991955]
+stream = ExtResource("25_racxt")
+volume_db = -15.0
+autoplay = true
+bus = &"Sfx"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="." unique_id=1536235842]
+stream = ExtResource("27_dbfs1")
+volume_db = -10.0
+bus = &"Sfx"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1912657313]
+stream = ExtResource("28_mxs5a")
+volume_db = -10.0
+bus = &"Sfx"

@@ -5,74 +5,190 @@
 [ext_resource type="Script" uid="uid://60oxc6db2nux" path="res://ui/level_select_screen/level_select_page_spread.gd" id="2_gc066"]
 [ext_resource type="Script" uid="uid://bkya2tbg13vww" path="res://ui/level_select_screen/level_select_fake_flip_page.gd" id="2_mbc1d"]
 [ext_resource type="PackedScene" uid="uid://cs6toslsya8mw" path="res://ui/level_select_screen/level_select_switch_day_button.tscn" id="3_ecde1"]
-[ext_resource type="PackedScene" uid="uid://bxvlpnsv4hv2d" path="res://ui/level_select_screen/page_plane.gltf" id="4_7d84e"]
-[ext_resource type="Texture2D" uid="uid://cxtexdd42o1wu" path="res://sprites/kenney_input-prompts_1.5/Flairs/Double/flair_arrows_right.png" id="4_mbc1d"]
+[ext_resource type="PackedScene" uid="uid://flo7ynm2u85f" path="res://Assets/level_select_book/level_select_book.glb" id="3_gg2t0"]
+[ext_resource type="PackedScene" uid="uid://ci8imac7bf0m6" path="res://Assets/level_select_book/level_select_page.tscn" id="4_r22gu"]
+[ext_resource type="PackedScene" uid="uid://c4qovswj8xdcp" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_1.glb" id="5_cso46"]
+[ext_resource type="Script" uid="uid://c2v78yjtje66e" path="res://ui/level_select_screen/level_select_bookmark.gd" id="5_pple6"]
+[ext_resource type="PackedScene" uid="uid://o8sstfkutq12" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_2.glb" id="6_pple6"]
+[ext_resource type="PackedScene" uid="uid://bfww6fvx6liq1" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_3.glb" id="7_5pr1p"]
+[ext_resource type="PackedScene" uid="uid://ck2dlh6tjk32y" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_4.glb" id="8_lhpgf"]
+[ext_resource type="PackedScene" uid="uid://ccj0de01r1081" path="res://Assets/level_select_book/bookmarks/level_select_bookmark_5.glb" id="9_xhic3"]
+[ext_resource type="Texture2D" uid="uid://bof0ir81ifd5s" path="res://Assets/level_select_book/level_select_background.png" id="12_r7qqf"]
+[ext_resource type="Texture2D" uid="uid://bucsrh1v04fjh" path="res://Assets/level_select_book/level_select_right_arrow.png" id="14_r7qqf"]
+[ext_resource type="Texture2D" uid="uid://cu7xpks7m1l18" path="res://Assets/level_select_book/level_select_play_button.png" id="15_bwfbf"]
+[ext_resource type="AudioStream" uid="uid://ko6ycph3q4mj" path="res://audio/page_flip_1.ogg" id="15_lhpgf"]
+[ext_resource type="Script" uid="uid://jb8p13jmydvc" path="res://ui/level_select_screen/button_animator.gd" id="16_qdbow"]
+[ext_resource type="AudioStream" uid="uid://cex0kqnlc6k1n" path="res://audio/page_flip_2.ogg" id="16_xhic3"]
+[ext_resource type="AudioStream" uid="uid://cvn21aot73sqh" path="res://audio/open_book_sound.wav" id="17_xhic3"]
+[ext_resource type="AudioStream" uid="uid://dbrrx1jwav2ud" path="res://audio/paper_foley.wav" id="18_0eo0p"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7d84e"]
-viewport_path = NodePath("PageSubViewportA")
+[sub_resource type="Animation" id="Animation_gg2t0"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/Hinge")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecde1"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_7d84e")
-uv1_scale = Vector3(0.5, 1, 1)
+[sub_resource type="Animation" id="Animation_r22gu"]
+resource_name = "turn_next_page"
+step = 0.1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/Hinge")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0, 0, 0.70710677, 0.70710677, 1, 1, 0, 0, 1, -4.371139e-08)
 
-[sub_resource type="QuadMesh" id="QuadMesh_ecde1"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_ecde1")
-size = Vector2(0.96, 1.08)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7bagg"]
+_data = {
+&"RESET": SubResource("Animation_gg2t0"),
+&"turn_next_page": SubResource("Animation_r22gu")
+}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gg2t0"]
 viewport_path = NodePath("PageSubViewportA")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7d84e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r22gu"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_gg2t0")
-uv1_scale = Vector3(0.5, 1, 1)
-uv1_offset = Vector3(0.5, 0, 0)
 
-[sub_resource type="QuadMesh" id="QuadMesh_gg2t0"]
+[sub_resource type="QuadMesh" id="QuadMesh_7bagg"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_7d84e")
-size = Vector2(0.96, 1.08)
+material = SubResource("StandardMaterial3D_r22gu")
+size = Vector2(1.92, 1.08)
+
+[sub_resource type="Animation" id="Animation_cso46"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animated")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_5pr1p"]
+resource_name = "swap_in"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animated")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, -0.5615727, 1, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_pple6"]
+resource_name = "swap_out"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animated")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 0, -0.5615727)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5pr1p"]
+_data = {
+&"RESET": SubResource("Animation_cso46"),
+&"swap_in": SubResource("Animation_5pr1p"),
+&"swap_out": SubResource("Animation_pple6")
+}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_r22gu"]
-viewport_path = NodePath("../../../../../PageSubViewportA")
+viewport_path = NodePath("PageSubViewportA")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bagg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg2t0"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_r22gu")
-uv1_scale = Vector3(-0.5, 1, 1)
-uv1_offset = Vector3(0.5, 0, 0)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7bagg"]
-viewport_path = NodePath("../../../../../PageSubViewportB")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o7og"]
+[sub_resource type="QuadMesh" id="QuadMesh_r22gu"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_7bagg")
-uv1_scale = Vector3(-0.5, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjtsd"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0)
+material = SubResource("StandardMaterial3D_gg2t0")
+size = Vector2(1.92, 1.08)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
-size = Vector3(2, 0.1, 2)
+size = Vector3(3.493164, 0.1, 2)
 
-[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page", "_page_flip_animation_player")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mjix0"]
+shading_mode = 0
+albedo_texture = ExtResource("12_r7qqf")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vn1tu"]
+material = SubResource("StandardMaterial3D_mjix0")
+size = Vector2(1.92, 1.08)
+
+[sub_resource type="Animation" id="Animation_lhpgf"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BasePosition/CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BasePosition/CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_xhic3"]
+resource_name = "zoom_in"
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BasePosition/CameraRig")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.7, 1, 0, 2.894313e-08, -0.66214174, 1, 1, 0, 3.23026e-08, -0.73899746)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BasePosition/CameraRig")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.7, 1, 7.971928e-16, -6.4678957e-10, 0.01479682, 0.9998905, 1, 1, 8.882995e-16, -7.218593e-10, 0.016514216, 0.9998636)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0eo0p"]
+_data = {
+&"RESET": SubResource("Animation_lhpgf"),
+&"zoom_in": SubResource("Animation_xhic3")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vn1tu"]
+streams_count = 2
+stream_0/stream = ExtResource("15_lhpgf")
+stream_1/stream = ExtResource("16_xhic3")
+
+[node name="LevelSelectScreen" type="CanvasLayer" unique_id=1432030176 node_paths=PackedStringArray("_previous_day_button", "_next_day_button", "_play_button", "_back_to_main_menu_button", "_page_spread", "_page_sub_viewport_a", "_level_view_a", "_page_sub_viewport_b", "_level_view_b", "_fake_flip_page", "_page_flip_animation_player", "_level_select_bookmark", "_camera_animation_player", "open_book_sound", "page_flip_sound", "press_play_sound")]
 script = ExtResource("1_g5s43")
-_previous_day_button = NodePath("LevelSelectSwitchDayButtonPrev")
-_next_day_button = NodePath("LevelSelectSwitchDayButtonNext")
-_play_button = NodePath("PlayButton")
+_previous_day_button = NodePath("Buttons/LevelSelectSwitchDayButtonPrev")
+_next_day_button = NodePath("Buttons/LevelSelectSwitchDayButtonNext")
+_play_button = NodePath("Buttons/PlayButton")
 _back_to_main_menu_button = NodePath("ReturnButton")
-_page_spread = NodePath("SubViewportContainer/3DWorldSubViewport/PageSpread")
+_page_spread = NodePath("SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread")
 _page_sub_viewport_a = NodePath("PageSubViewportA")
 _level_view_a = NodePath("PageSubViewportA/LevelSelectLevelViewA")
 _page_sub_viewport_b = NodePath("PageSubViewportB")
 _level_view_b = NodePath("PageSubViewportB/LevelSelectLevelViewB")
-_fake_flip_page = NodePath("SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage")
-_page_flip_animation_player = NodePath("SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane/AnimationPlayer")
+_fake_flip_page = NodePath("SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage")
+_page_flip_animation_player = NodePath("SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage/Root/FakeFlipPageAnimationPlayer")
 _flip_to_next_animation_name = &"turn_next_page"
+_level_select_bookmark = NodePath("SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark")
+_camera_animation_player = NodePath("SubViewportContainer/3DWorldSubViewport/CamRoot/CameraAnimationPlayer")
+_camera_animation_name_zoom_in = &"zoom_in"
+open_book_sound = NodePath("OpenBookSound")
+page_flip_sound = NodePath("PageFlipSound")
+press_play_sound = NodePath("PressPlaySound")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1596364073]
 offset_right = 40.0
@@ -84,90 +200,177 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="PageSpread" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1783174934 node_paths=PackedStringArray("_left_page_mesh_instance", "_right_page_mesh_instance", "_level_select_screen_local_scene")]
-script = ExtResource("2_gc066")
-_left_page_mesh_instance = NodePath("PageLeftMeshInstance3D")
-_right_page_mesh_instance = NodePath("PageRightMeshInstance3D")
-_level_select_screen_local_scene = NodePath("../../..")
+[node name="Scene" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=89476328]
 
-[node name="PageLeftMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/PageSpread" unique_id=1342228782]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.48, 0, 0)
-mesh = SubResource("QuadMesh_ecde1")
+[node name="LeftPages" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene" unique_id=1979359764]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, -1.2458013, -0.016755627, 0)
 
-[node name="PageRightMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/PageSpread" unique_id=273525297]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.48, 0, 0)
-mesh = SubResource("QuadMesh_gg2t0")
+[node name="level_select_page2" parent="SubViewportContainer/3DWorldSubViewport/Scene/LeftPages" unique_id=478924620 instance=ExtResource("4_r22gu")]
 
-[node name="TableOffset" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=89476328]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
-
-[node name="FakeFlipPage" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset" unique_id=7328685 node_paths=PackedStringArray("_page_plane_local_scene", "_page_mesh_instance")]
+[node name="FakeFlipPage" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene" unique_id=7328685 node_paths=PackedStringArray("_level_select_screen_local_scene", "_page_mesh_instance")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.001, 0)
 script = ExtResource("2_mbc1d")
-_page_plane_local_scene = NodePath("page_plane")
-_page_mesh_instance = NodePath("page_plane/page_plane_rig/Skeleton3D/page_plane")
+_level_select_screen_local_scene = NodePath("../../../..")
+_page_mesh_instance = NodePath("Root/Hinge/level_select_page/FlipPageMeshInstance3D")
 
-[node name="page_plane" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage" unique_id=296031896 instance=ExtResource("4_7d84e")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="Root" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage" unique_id=1620669949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.246, 0, 0)
 
-[node name="Skeleton3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane/page_plane_rig" parent_id_path=PackedInt32Array(296031896, 429544833) index="0" unique_id=319054978]
-bones/0/rotation = Quaternion(2.1417086e-09, -2.8377336e-09, 0.6978275, 0.71626586)
-bones/1/rotation = Quaternion(-3.7019918e-10, 1.07312146e-14, -0.008970081, 0.99995977)
-bones/2/rotation = Quaternion(2.9423997e-09, 7.5008814e-13, 0.07129721, 0.9974551)
-bones/3/rotation = Quaternion(-3.1544034e-09, 1.8400266e-14, -0.07643577, 0.9970745)
-bones/4/rotation = Quaternion(1.035119e-09, 7.672494e-15, 0.025082499, 0.9996854)
-bones/5/rotation = Quaternion(2.4157412e-10, 8.55293e-15, 0.0058536734, 0.9999829)
-bones/6/rotation = Quaternion(-1.1660967e-10, 1.77158e-15, -0.0028256236, 0.999996)
-bones/7/rotation = Quaternion(-6.346075e-11, 5.771015e-15, -0.0015377464, 0.9999988)
-bones/8/rotation = Quaternion(-8.8313254e-13, 6.8835683e-15, -2.1399468e-05, 1)
-bones/9/rotation = Quaternion(1.1902163e-11, -2.2145825e-16, 0.00028840546, 1)
-bones/10/rotation = Quaternion(6.160165e-12, 9.994646e-16, 0.0001492722, 1)
-bones/11/rotation = Quaternion(7.1969714e-13, 4.329966e-15, 1.7436738e-05, 1)
-bones/12/rotation = Quaternion(-1.070505e-12, 1.2212496e-15, -2.593705e-05, 1)
-bones/13/rotation = Quaternion(-8.763598e-13, 3.331288e-16, -2.1238355e-05, 1)
-bones/14/rotation = Quaternion(-5.583038e-13, 2.6645797e-15, -1.3526969e-05, 1)
-bones/15/rotation = Quaternion(-5.17717e-13, -1.776291e-15, -1.2545466e-05, 1)
-bones/16/rotation = Quaternion(1.5687406e-12, -1.3321391e-15, 3.80126e-05, 1)
-bones/17/rotation = Quaternion(3.3823083e-12, 1.4434576e-15, 8.195802e-05, 1)
-bones/18/rotation = Quaternion(-2.001732e-11, 2.4418988e-15, -0.00048504016, 0.9999999)
-bones/19/rotation = Quaternion(4.274592e-11, 1.0007565e-15, 0.0010357769, 0.99999946)
-bones/20/rotation = Quaternion(-4.9662944e-11, -1.1280454e-16, -0.0012033863, 0.9999993)
-bones/21/rotation = Quaternion(2.4731219e-11, 3.8870143e-15, 0.0005992595, 0.9999998)
+[node name="FakeFlipPageAnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage/Root" unique_id=2129708488]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_7bagg")
+speed_scale = 3.0
 
-[node name="page_plane" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane/page_plane_rig/Skeleton3D" index="0" unique_id=1074210791]
-transform = Transform3D(1, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 0, 0)
-surface_material_override/0 = SubResource("StandardMaterial3D_7bagg")
-surface_material_override/1 = SubResource("StandardMaterial3D_7o7og")
-surface_material_override/2 = SubResource("StandardMaterial3D_kjtsd")
+[node name="Hinge" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage/Root" unique_id=2012771832]
 
-[node name="TableStaticBody3D" type="StaticBody3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset" unique_id=1963233410]
+[node name="level_select_page" parent="SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage/Root/Hinge" unique_id=1721911066 instance=ExtResource("4_r22gu")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/3DWorldSubViewport/TableOffset/TableStaticBody3D" unique_id=1195355240]
+[node name="FlipPageMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/FakeFlipPage/Root/Hinge/level_select_page" unique_id=15007509]
+transform = Transform3D(1.0926783, 0, 0, 0, -4.7762487e-08, 1.0926783, 0, -1.0926783, -4.7762487e-08, 1.2331133, 0.0024952143, 0)
+mesh = SubResource("QuadMesh_7bagg")
+
+[node name="LevelSelectPageSpread" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene" unique_id=1164952896 node_paths=PackedStringArray("_level_select_screen_local_scene", "_main_page_mesh_instance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0054917336, 0)
+script = ExtResource("2_gc066")
+_level_select_screen_local_scene = NodePath("../../../..")
+_main_page_mesh_instance = NodePath("level_select_book/MainPageMeshInstance3D")
+
+[node name="LevelSelectBookmark" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread" unique_id=882824078 node_paths=PackedStringArray("_animation_player", "_day_bookmark_nodes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.89217544, 0, -0.6818317)
+script = ExtResource("5_pple6")
+_animation_player = NodePath("BookmarkAnimationPlayer")
+_animation_name_swap_out = &"swap_out"
+_animation_name_swap_in = &"swap_in"
+_day_bookmark_nodes = [NodePath("Animated/OffsetAndScale/level_select_bookmark_1"), NodePath("Animated/OffsetAndScale/level_select_bookmark_2"), NodePath("Animated/OffsetAndScale/level_select_bookmark_3"), NodePath("Animated/OffsetAndScale/level_select_bookmark_4"), NodePath("Animated/OffsetAndScale/level_select_bookmark_5")]
+
+[node name="BookmarkAnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark" unique_id=932929781]
+libraries/ = SubResource("AnimationLibrary_5pr1p")
+speed_scale = 20.0
+
+[node name="Animated" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark" unique_id=1311109196]
+
+[node name="OffsetAndScale" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark/Animated" unique_id=663583983]
+transform = Transform3D(0.4928034, 0, -0.08069312, 0, 0.49936616, 0, 0.08069312, 0, 0.4928034, 0.83932036, -0.32122803, 0.871984)
+
+[node name="level_select_bookmark_1" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark/Animated/OffsetAndScale" unique_id=1349310335 instance=ExtResource("5_cso46")]
+
+[node name="level_select_bookmark_2" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark/Animated/OffsetAndScale" unique_id=1335584469 instance=ExtResource("6_pple6")]
+visible = false
+
+[node name="level_select_bookmark_3" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark/Animated/OffsetAndScale" unique_id=199673359 instance=ExtResource("7_5pr1p")]
+visible = false
+
+[node name="level_select_bookmark_4" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark/Animated/OffsetAndScale" unique_id=155438953 instance=ExtResource("8_lhpgf")]
+visible = false
+
+[node name="level_select_bookmark_5" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/LevelSelectBookmark/Animated/OffsetAndScale" unique_id=1116389282 instance=ExtResource("9_xhic3")]
+visible = false
+
+[node name="level_select_book" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread" unique_id=1144569216 instance=ExtResource("3_gg2t0")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -1.0429721, -0.025373373, -0.011220634)
+
+[node name="MainPageMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/LevelSelectPageSpread/level_select_book" unique_id=17031293]
+transform = Transform3D(3.110171, 0, 0, 0, -1.359499e-07, 3.110171, 0, -3.110171, -1.359499e-07, 2.943669, 0.06348504, 0.032058954)
+mesh = SubResource("QuadMesh_r22gu")
+
+[node name="TableStaticBody3D" type="StaticBody3D" parent="SubViewportContainer/3DWorldSubViewport/Scene" unique_id=1963233410]
+transform = Transform3D(0.9995599, 0, -0.029666245, 0, 1, 0, 0.029666245, 0, 0.9995599, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/TableStaticBody3D" unique_id=1195355240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049999997, 0)
 shape = SubResource("BoxShape3D_xrivr")
 
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1599002889]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.6222136, 0)
+[node name="TableMeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/3DWorldSubViewport/Scene/TableStaticBody3D" unique_id=924040502]
+transform = Transform3D(1.594, 0, 0, 0, 1.594, 0, 0, 0, 1.594, 0, -0.07819915, 0)
+mesh = SubResource("PlaneMesh_vn1tu")
+
+[node name="CamRoot" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=603227250]
+
+[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/3DWorldSubViewport/CamRoot" unique_id=1040021372]
+libraries/ = SubResource("AnimationLibrary_0eo0p")
+
+[node name="BasePosition" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/CamRoot" unique_id=1648620271]
+transform = Transform3D(0.99957883, 0.0290204, 1.268522e-09, 0, -4.371139e-08, 1, 0.0290204, -0.99957883, -4.3692978e-08, 0, 2.2524085, 0)
+
+[node name="CameraRig" type="Node3D" parent="SubViewportContainer/3DWorldSubViewport/CamRoot/BasePosition" unique_id=2089430815]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/3DWorldSubViewport/CamRoot/BasePosition/CameraRig" unique_id=1599002889]
 current = true
 fov = 40.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=1174920374]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+transform = Transform3D(0.5, 0.7071068, -0.49999997, 0.7071068, -4.371139e-08, 0.7071068, 0.49999994, -0.70710677, -0.5, 0, 5, 0)
+light_energy = 0.25
+shadow_enabled = true
 
-[node name="LevelSelectSwitchDayButtonPrev" parent="." unique_id=1730237589 instance=ExtResource("3_ecde1")]
-offset_left = -926.0
-offset_top = -83.920685
-offset_right = -792.0
-offset_bottom = 29.079346
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/3DWorldSubViewport" unique_id=263571936]
+transform = Transform3D(0.844586, 0.0028665098, -0.5354123, -0.0025495826, 0.9999959, 0.0013319755, 0.53541386, 0.00024011004, 0.8445898, 1, 2, 0)
+light_color = Color(1, 0.9381789, 0.8550506, 1)
+light_energy = 1.5
+shadow_enabled = true
 
-[node name="LevelSelectSwitchDayButtonNext" parent="." unique_id=378158567 instance=ExtResource("3_ecde1")]
-offset_left = 797.0
-offset_top = -83.920685
-offset_right = 931.0
-offset_bottom = 29.079346
+[node name="Buttons" type="Control" parent="." unique_id=1989739047]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -574.0
+offset_top = 228.86597
+offset_right = 563.0
+offset_bottom = 424.14575
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.029670598
+offset_transform_visual_only = false
 
-[node name="TextureRect" parent="LevelSelectSwitchDayButtonNext" index="0" unique_id=1543500154]
-texture = ExtResource("4_mbc1d")
+[node name="LevelSelectSwitchDayButtonPrev" parent="Buttons" unique_id=1730237589 instance=ExtResource("3_ecde1")]
+custom_minimum_size = Vector2(200, 128)
+layout_mode = 1
+offset_left = -640.0
+offset_top = -63.999893
+offset_right = -440.0
+offset_bottom = 64.00011
+size_flags_vertical = 4
+
+[node name="PlayButton" type="Button" parent="Buttons" unique_id=368313340]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 468.0
+offset_right = 668.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Buttons/PlayButton" unique_id=2028338415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_bwfbf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonAnimator" type="Node" parent="Buttons/PlayButton" unique_id=1407037622 node_paths=PackedStringArray("_button")]
+script = ExtResource("16_qdbow")
+_button = NodePath("..")
+metadata/_custom_type_script = "uid://jb8p13jmydvc"
+
+[node name="LevelSelectSwitchDayButtonNext" parent="Buttons" unique_id=378158567 instance=ExtResource("3_ecde1")]
+custom_minimum_size = Vector2(200, 128)
+layout_mode = 1
+offset_left = 440.0
+offset_top = -63.999893
+offset_right = 640.0
+offset_bottom = 64.00011
+size_flags_vertical = 4
+
+[node name="TextureRect" parent="Buttons/LevelSelectSwitchDayButtonNext" index="0" unique_id=1543500154]
+texture = ExtResource("14_r7qqf")
 
 [node name="ReturnButton" type="Button" parent="." unique_id=1880559958]
 anchors_preset = 8
@@ -195,32 +398,6 @@ text = "Return"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayButton" type="Button" parent="." unique_id=368313340]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = 350.0
-offset_right = 148.0
-offset_bottom = 463.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="PlayButton" unique_id=655007284]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 48
-text = "Play"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="PageSubViewportA" type="SubViewport" parent="." unique_id=420357409]
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
@@ -233,5 +410,19 @@ render_target_update_mode = 4
 
 [node name="LevelSelectLevelViewB" parent="PageSubViewportB" unique_id=1792966155 instance=ExtResource("2_ecde1")]
 
-[editable path="SubViewportContainer/3DWorldSubViewport/TableOffset/FakeFlipPage/page_plane"]
-[editable path="LevelSelectSwitchDayButtonNext"]
+[node name="OpenBookSound" type="AudioStreamPlayer" parent="." unique_id=1450578813]
+stream = ExtResource("17_xhic3")
+volume_db = -5.0
+bus = &"Sfx"
+
+[node name="PageFlipSound" type="AudioStreamPlayer" parent="." unique_id=501736800]
+stream = SubResource("AudioStreamRandomizer_vn1tu")
+volume_db = -10.0
+bus = &"Sfx"
+
+[node name="PressPlaySound" type="AudioStreamPlayer" parent="." unique_id=310484703]
+stream = ExtResource("18_0eo0p")
+volume_db = -10.0
+bus = &"Sfx"
+
+[editable path="Buttons/LevelSelectSwitchDayButtonNext"]

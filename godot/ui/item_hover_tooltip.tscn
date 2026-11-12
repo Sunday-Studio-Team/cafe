@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://7lluvsedruj0"]
+
+[ext_resource type="Script" uid="uid://dp2u3ebywe3no" path="res://ui/item_hover_tooltip.gd" id="1_lj7gb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5cg7"]
+bg_color = Color(0, 0, 0, 0.8784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbh57"]
+bg_color = Color(0.8901961, 0.5686275, 0.20392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cs5tx"]
+bg_color = Color(0.49411765, 0.6666667, 0.87058824, 1)
+
+[node name="ItemHoverTooltip" type="PanelContainer" unique_id=1251839867 node_paths=PackedStringArray("name_label", "rarity_label", "rarity_color_rect", "active_indicator", "cooldown_label", "passive_indicator", "description_label")]
+modulate = Color(1, 1, 1, 0.98039216)
+custom_minimum_size = Vector2(600, 250)
+custom_maximum_size = Vector2(600, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -123.0
+offset_right = 251.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, -1)
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_a5cg7")
+script = ExtResource("1_lj7gb")
+name_label = NodePath("VBoxContainer/Name")
+rarity_label = NodePath("VBoxContainer/Rarity/RarityLabel")
+rarity_color_rect = NodePath("VBoxContainer/Rarity/RarityColorRect")
+active_indicator = NodePath("VBoxContainer/Active")
+cooldown_label = NodePath("VBoxContainer/Active/HBoxContainer/CooldownLabel")
+passive_indicator = NodePath("VBoxContainer/Passive")
+description_label = NodePath("VBoxContainer/Description")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=229834387]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="RichTextLabel" parent="VBoxContainer" unique_id=1908426849]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_font_size = 53
+bbcode_enabled = true
+text = "[b]Item Name[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rarity" type="MarginContainer" parent="VBoxContainer" unique_id=1744362908]
+layout_mode = 2
+
+[node name="RarityColorRect" type="ColorRect" parent="VBoxContainer/Rarity" unique_id=1460308407]
+layout_mode = 2
+color = Color(0.10980392, 0.37254903, 0.4509804, 1)
+
+[node name="RarityLabel" type="RichTextLabel" parent="VBoxContainer/Rarity" unique_id=311040876]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]RARITY[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Active" type="PanelContainer" parent="VBoxContainer" unique_id=1636640966]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dbh57")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Active" unique_id=1277322636]
+layout_mode = 2
+alignment = 1
+
+[node name="ActiveLabel" type="RichTextLabel" parent="VBoxContainer/Active/HBoxContainer" unique_id=667251719]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]ACTIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="CooldownLabel" type="RichTextLabel" parent="VBoxContainer/Active/HBoxContainer" unique_id=345815474]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "(xs cooldown)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Passive" type="PanelContainer" parent="VBoxContainer" unique_id=743579593]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cs5tx")
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/Passive" unique_id=1318188584]
+custom_maximum_size = Vector2(-1, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = "[b]PASSIVE[/b]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="VBoxContainer" unique_id=1417394928]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Use on a broken machine.[br]Instantly fixes it.[br]10s cooldown."
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1

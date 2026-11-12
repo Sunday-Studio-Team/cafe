@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cse4p3gw3jfy7"]
+
+[ext_resource type="Texture2D" uid="uid://bumo7l0k6bvtv" path="res://Assets/Trash minigame/trash models/models/Trash_IcedMatcha_DefaultMaterial_BaseColor.png" id="1_pvkwr"]
+[ext_resource type="Texture2D" uid="uid://c25vjlk3q5ow4" path="res://Assets/Trash minigame/trash models/models/Trash_IcedMatcha_DefaultMaterial_Roughness.png" id="2_n7qrc"]
+
+[resource]
+resource_name = "Material.002"
+render_priority = 1
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_pvkwr")
+metallic_texture = ExtResource("2_n7qrc")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_n7qrc")
+roughness_texture_channel = 1
+metadata/_gltf_primary_texture_coord = 0

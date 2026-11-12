@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://f2vudjm0yha0"]
+
+[ext_resource type="Script" uid="uid://dk04a646y7vwi" path="res://ui/basic_controls_prompt.gd" id="1_vskvq"]
+[ext_resource type="Texture2D" uid="uid://dwr3hk6ee5dxq" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_w.png" id="2_5dv4o"]
+[ext_resource type="Texture2D" uid="uid://h33a4rpnqkbp" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_a.png" id="3_ix0fd"]
+[ext_resource type="Texture2D" uid="uid://h4m77qojosr1" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_s.png" id="4_k7ieq"]
+[ext_resource type="Texture2D" uid="uid://dpfl30b711lp8" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_d.png" id="5_k3mpt"]
+[ext_resource type="Texture2D" uid="uid://cqrqxmrh8itg8" path="res://sprites/kenney_input-prompts_1.5/Keyboard & Mouse/Default/keyboard_shift.png" id="6_0yfva"]
+[ext_resource type="FontFile" uid="uid://ci61xd65omflw" path="res://fonts/action_man/Action_Man.ttf" id="6_5dv4o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn1tu"]
+bg_color = Color(0.16078432, 0.16078432, 0.16078432, 0.4862745)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 24.0
+expand_margin_top = 24.0
+expand_margin_right = 24.0
+expand_margin_bottom = 24.0
+
+[node name="BasicControlsPrompt" type="CanvasLayer" unique_id=1663647158 node_paths=PackedStringArray("control_root")]
+script = ExtResource("1_vskvq")
+control_root = NodePath("MarginContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1136523773]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=761034116]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_vn1tu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=925978817]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="MovePrompt" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1027935466]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="W" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MovePrompt" unique_id=1094279786]
+layout_mode = 2
+texture = ExtResource("2_5dv4o")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="A" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MovePrompt" unique_id=478903390]
+layout_mode = 2
+texture = ExtResource("3_ix0fd")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="S" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MovePrompt" unique_id=1457987314]
+layout_mode = 2
+texture = ExtResource("4_k7ieq")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="D" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MovePrompt" unique_id=1827906935]
+layout_mode = 2
+texture = ExtResource("5_k3mpt")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Move" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MovePrompt" unique_id=402890675]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5dv4o")
+theme_override_font_sizes/font_size = 64
+text = "MOVE"
+
+[node name="SprintPrompt" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1740926709]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Shift" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/SprintPrompt" unique_id=512943260]
+layout_mode = 2
+texture = ExtResource("6_0yfva")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Sprint" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/SprintPrompt" unique_id=1899255703]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_5dv4o")
+theme_override_font_sizes/font_size = 64
+text = "SPRINT"

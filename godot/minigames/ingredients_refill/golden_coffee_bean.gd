@@ -21,7 +21,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
-var drop_time = 0.674
+var drop_time = 1.22
 func _physics_process(delta: float) -> void:
 	if(seconds_passed>2): #prevents jitter
 		if(get_collision_mask_value(1) == false): 

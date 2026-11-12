@@ -64,6 +64,7 @@ var spill1_gone: bool = false
 var spill2_gone: bool = false
 var spill3_gone: bool = false
 
+var _game_started: bool = false
 
 func _ready() -> void:
 	Global.minigame_active = true
@@ -131,11 +132,20 @@ func _ready() -> void:
 	machine_dirty.visible = true
 	#initialize_progress_mask()
 	#update_progress_display()
-
+	
+	_game_started = false
+	if Global.playing_tutorial:
+		while not Global.tutorial_day_3_spill_allow_cleaning:
+			await get_tree().process_frame
+	
 	_minigame_startup_overlay.play("MOP!")
+	_game_started = true
 
 
 func _physics_process(_delta: float) -> void:
+	if not _game_started:
+		return
+	
 	if game_finished or not mop.is_wet:
 		return
 

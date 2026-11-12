@@ -2,4 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dhdg26l13yiwn" path="res://Assets/old coffee machine/Old Coffee Machine.glb" id="1_v35d4"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_v35d4"]
+size = Vector3(0.71899414, 0.49809265, 0.5442505)
+
 [node name="Old Coffee Machine" unique_id=84792697 instance=ExtResource("1_v35d4")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=1901514951]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1804925841]
+transform = Transform3D(1.000005, -2.8312206e-06, -2.5579538e-12, 2.7418137e-06, 1.0000043, 1.66267e-12, 1.1937118e-12, -4.973799e-13, 1.0000113, -0.0014340556, 0.26233837, -0.007659998)
+shape = SubResource("BoxShape3D_v35d4")

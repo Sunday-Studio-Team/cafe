@@ -2,4 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://gwfd0fvk0gme" path="res://Assets/chair/plastic chair.glb" id="1_23imy"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xrivr"]
+radius = 0.37841797
+height = 1.065979
+
 [node name="plastic chair" unique_id=738810748 instance=ExtResource("1_23imy")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=321488839]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=1148478426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.079569936, 0.5187073, 0)
+shape = SubResource("CapsuleShape3D_xrivr")

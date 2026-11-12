@@ -231,11 +231,12 @@ stream_0/stream = ExtResource("14_6i5wn")
 stream_1/stream = ExtResource("15_b0jqr")
 stream_2/stream = ExtResource("16_abt02")
 
-[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("interactable", "item_locker_model", "animation_player")]
+[node name="ItemLocker" type="Node3D" unique_id=1426750684 node_paths=PackedStringArray("interactable", "item_locker_model", "animation_player", "shake_sound")]
 script = ExtResource("1_g6nyj")
 interactable = NodePath("ManualScaler/Interactable")
 item_locker_model = NodePath("ManualScaler/Model")
 animation_player = NodePath("AnimationPlayer")
+shake_sound = NodePath("ShakeSound")
 
 [node name="ManualScaler" type="Node3D" parent="." unique_id=130028914]
 transform = Transform3D(0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0, 0.5568836, 0, 0, 0)
@@ -261,9 +262,11 @@ metadata/_custom_type_script = "uid://cku66354bxktd"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0000005, 1.8, 0)
 shape = SubResource("BoxShape3D_dqjxi")
 
-[node name="Model" parent="ManualScaler" unique_id=1837404991 node_paths=PackedStringArray("door_mesh") instance=ExtResource("3_d87dh")]
+[node name="Model" parent="ManualScaler" unique_id=1837404991 node_paths=PackedStringArray("door_mesh", "fake_mirror_low_fps_updater") instance=ExtResource("3_d87dh")]
 script = ExtResource("4_f2a8y")
 door_mesh = NodePath("Locker Door")
+fake_mirror_low_fps_updater = NodePath("Mirror/MirrorMeshInstance3D/MirrorSubViewport/LowFpsSubViewportUpdater")
+fake_mirror_low_fps_updater_override_fps = 30
 
 [node name="PropShowerHider" type="Node" parent="ManualScaler/Model/Frozen Tippy" parent_id_path=PackedInt32Array(1837404991, 658620535) index="0" unique_id=1665776569]
 script = ExtResource("5_dqjxi")
@@ -310,19 +313,19 @@ update_scale = false
 size = Vector2i(256, 256)
 
 [node name="MirroredRoot" type="Node3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport" unique_id=662264350]
-transform = Transform3D(-0.05555974, -0.017107714, -0.99830884, -0.06121137, 0.99800694, -0.013696699, 0.9965767, 0.060345467, -0.056497607, 0.30096275, 1.630227, -0.009650676)
+transform = Transform3D(-0.05555975, -0.017107712, -0.99830884, -0.06121138, 0.99800676, -0.013696699, 0.9965769, 0.060345456, -0.056497607, 0.30096275, 1.630227, -0.009650676)
 
 [node name="Flipped" type="Node3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot" unique_id=378210045]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="MirroredCamera3D" type="Camera3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped" unique_id=2012251660]
-transform = Transform3D(0.97786, 0.009982828, 0.20902504, -0.057213955, 0.9735823, 0.22116081, -0.20129028, -0.22821784, 0.95257485, 0.15952677, 0.14445233, 0.4153327)
+transform = Transform3D(-0.52796763, 0.47920305, -0.70115316, 0.020729125, 0.83264524, 0.5534623, 0.8490116, 0.2776691, -0.4495321, -2.9853022, 0.4497646, -1.5581713)
 environment = ExtResource("13_yvifc")
 fov = 70.01
-near = 0.66777724
+near = 3.5973814
 
 [node name="ViewpointMatch" type="Node3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped" unique_id=950532727]
-transform = Transform3D(-0.97887516, 0.01534237, 0.21030548, 0.0628043, 0.97338516, 0.22056895, -0.20156923, 0.2287631, -0.95257854, 0.15952674, 0.14445233, -0.41533273)
+transform = Transform3D(0.5273857, 0.46024382, -0.71491385, -0.04401702, 0.854418, 0.51785964, 0.85037065, -0.24121085, 0.47018147, -2.9853015, 0.44976437, 1.5581712)
 
 [node name="DebugViewpointMarker3D" type="Marker3D" parent="ManualScaler/Model/Mirror/MirrorMeshInstance3D/MirrorSubViewport/MirroredRoot/Flipped/ViewpointMatch" unique_id=177192072]
 transform = Transform3D(1, 1.6091411e-07, -6.4365923e-07, -1.6091478e-07, 1, -1.0402375e-06, 6.4365906e-07, 1.0402376e-06, 1, 0, 0, 0)

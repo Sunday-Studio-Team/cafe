@@ -8,6 +8,8 @@ const PC_CAMERA_TWEEN_DURATION := 0.45
 @export var camera_spot_for_pc_interaction: Marker3D
 @export var email_notif_animated_sprite: AnimatedSprite3D
 
+@export var day_containers_desk: Array[Node3D] = []
+
 var camera_transform_before_pc_interaction: Transform3D
 var exiting_pc: bool = false
 
@@ -15,6 +17,10 @@ func _ready() -> void:
 	Global.desk = self
 
 	await get_tree().process_frame
+
+	for i in range(day_containers_desk.size()):
+		if day_containers_desk[i] != null:
+			day_containers_desk[i].visible = (i <= Global.day)
 
 	if Global.unread_email_count > 0:
 		email_notif_animated_sprite.visible = true

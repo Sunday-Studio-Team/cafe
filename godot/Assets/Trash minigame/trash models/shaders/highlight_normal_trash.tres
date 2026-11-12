@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://clyy5mn7ocsxc"]
+
+[ext_resource type="Texture2D" uid="uid://hvvdxsn3l8sq" path="res://Assets/Trash minigame/trash models/models/Trash Cup_cup2.png" id="1_byjak"]
+[ext_resource type="Shader" uid="uid://dm5a7nc0cwudc" path="res://shaders/xray.gdshader" id="2_n1ofl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7pxi"]
+resource_name = "Material.001"
+render_priority = 1
+transparency = 1
+cull_mode = 2
+albedo_texture = ExtResource("1_byjak")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[resource]
+render_priority = 0
+next_pass = SubResource("StandardMaterial3D_v7pxi")
+shader = ExtResource("2_n1ofl")
+shader_parameter/xray_color = Color(1, 1, 1, 1)

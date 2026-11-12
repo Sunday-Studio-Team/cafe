@@ -4,7 +4,11 @@ extends CharacterBody3D
 # (for footstep stuff)
 const STRIDE_LENGTH := 1.25
 
-# this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
+# throwing garbage velocity
+const GARBAGE_FORWARD_VELOCITY := 20.0
+const GARBAGE_UPWARD_VELOCITY := 2.0 # keep it small; ~2ish
+
+## this is where we'll spawn if we have the 'spawn_in_main_room_instead_of_office' feature tag
 @export var main_room_spawn_point: Marker3D
 @export var camera: CameraController
 @export var aiming_ray: RayCast3D
@@ -13,13 +17,12 @@ const STRIDE_LENGTH := 1.25
 @export var ingredients_bag: Node3D
 @export var default_ingredients_bag_model: Node3D
 @export var large_ingredients_bag_model: Node3D
-@export var customer_trash: Node3D
 @export var throw_trash_sound: AudioStreamPlayer
 @export var bag_pickup_sound: AudioStreamPlayer3D
 @export var footstep_sound: AudioStreamPlayer
 # to spawn when we drop the bag
 @export var ingredients_bag_scene: PackedScene
-@export var customer_trash_scene: PackedScene
+@export var customer_trash_scenes: Dictionary[String, PackedScene]
 @export var footstep_sfx_lockout_timer: Timer
 @export var free_cam_visualizer: Node3D
 @export var roller_skates_dust_particles: GPUParticles3D
@@ -27,25 +30,23 @@ const STRIDE_LENGTH := 1.25
 @export var tippy_tablet_3d: TippyTablet3D
 @export var tippy_tablet_normal_position_rotation: Node3D
 @export var tippy_tablet_up_front_position_rotation: Node3D
+@export var trash_models: Dictionary[String, Node3D]
 
 var player_status_effects: PlayerStatusEffects
 
 var _walk_move_speed: float
 var _sprint_move_speed: float
 var _current_move_speed: float
-var _is_sprinting: bool
+var _is_sprinting: bool = false
 var mouse_sens := 0.1
+var customer_trash: Node3D
 
-# vars for footstep sounds
+## vars for footstep sounds
 var pos_last_physics_frame: Vector3
 var dist_travelled_since_last_step: float
 
 var holding_interactable: bool = false
 var has_xl_bag_item: bool = false
-
-# when pully ball spawns, starts counting up. keeping track of strength.
-var pully_ball_countup: float = 0.0
-var pully_ball_instance: Node3D
 
 var fake_vel_follow_speed: float = 1.25
 var fake_velocity: Vector3
@@ -74,6 +75,7 @@ func _ready() -> void:
 	ingredients_bag.visibility_changed.connect(
 			func():
 				if ingredients_bag.visible:
+					# so we can tween the scale up when it shows
 					ingredients_bag.scale = Vector3.ZERO
 	)
 	Events.bag_pickup_animation_grabbed.connect(
@@ -85,17 +87,17 @@ func _ready() -> void:
 				var t := create_tween().set_parallel()
 				t.tween_property(ingredients_bag, "scale", Vector3.ONE, 0.25)
 	)
-	customer_trash.visibility_changed.connect(
-		func():
-			if customer_trash.visible:
-				customer_trash.scale = Vector3.ZERO
-	)
-	Events.trash_pickup_animation_grabbed.connect(
-		func():
-			bag_pickup_sound.play()
+	for trash in trash_models.values():
+		customer_trash = trash
 
-			# scuffed 'animation' of trash appearing when we grab it
-			await Events.viewmodel_animation_finished
+		customer_trash.visibility_changed.connect(
+			func():
+				if customer_trash.visible:
+					customer_trash.scale = Vector3.ZERO
+		)
+		Events.trash_pickup_animation_grabbed.connect(
+			func():
+				bag_pickup_sound.play()
 
 			var t := create_tween().set_parallel()
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
@@ -103,7 +105,14 @@ func _ready() -> void:
 	Events.trash_throw_animation_released.connect(
 		func():
 			drop_trash()
+			# scuffed 'animation' of trash appearing when we grab it
+			await Events.viewmodel_animation_finished
+
+			var t := create_tween().set_parallel()
+			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
+	customer_trash.visible = false
+
 	if OS.has_feature("spawn_in_main_room_instead_of_office"):
 		if (
 				main_room_spawn_point == null # in case we ever load the player in a scene other than main or something
@@ -147,7 +156,8 @@ func _physics_process(delta: float) -> void:
 
 func override_position_rotation(override_position: Vector3, override_rotation: Vector3) -> void:
 	global_position = override_position
-	global_rotation = override_rotation
+	global_rotation.y = override_rotation.y
+	camera.global_rotation.x = override_rotation.x
 	camera.sync_rotation_from_player()
 	reset_physics_interpolation()
 
@@ -213,9 +223,6 @@ func handle_hovered_interactable() -> void:
 	# if we're somehow hovering an interactable which has been disabled,
 	# deleted or moved far away, fix that
 	if hovered_interactable != null:
-		if camera == null:
-			return
-
 		if (
 				not hovered_interactable.visible
 				or not hovered_interactable.is_inside_tree()
@@ -299,13 +306,26 @@ func handle_customer_trash() -> void:
 		Global.holding_trash = false
 		Events.play_viewmodel_animation.emit("throw_trash")
 	customer_trash.visible = Global.holding_trash and not Global.in_ui
+
+
 func drop_trash() -> void:
 	throw_trash_sound.play()
-	var trash_to_drop: RigidBody3D = customer_trash_scene.instantiate()
+	var trash_to_drop: RigidBody3D = customer_trash_scenes[Global.trash_in_hand].instantiate()
 	Global.main_scene.add_child(trash_to_drop)
 	trash_to_drop.global_position = camera.global_position + transform.basis * Vector3.FORWARD / 2
-	trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * 5)
-	trash_to_drop.apply_impulse(transform.basis * Vector3.UP * 0.5)
+	trash_to_drop.apply_impulse(transform.basis * Vector3.FORWARD * GARBAGE_FORWARD_VELOCITY)
+	trash_to_drop.apply_impulse(transform.basis * Vector3.UP * GARBAGE_UPWARD_VELOCITY)
+	Global.holding_trash = false
+	Global.trash_in_hand = ""
+
+	if Global.holding_trash and not Global.in_ui and trash_models.has(Global.trash_in_hand):
+		if customer_trash != trash_models[Global.trash_in_hand]:
+			customer_trash.visible = false
+			customer_trash = trash_models[Global.trash_in_hand]
+		customer_trash.visible = true
+	else:
+		customer_trash.visible = false
+
 
 func _on_items_updated() -> void:
 	player_status_effects.recalculate_status_effects()

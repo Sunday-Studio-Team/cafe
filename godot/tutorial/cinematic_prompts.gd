@@ -47,6 +47,7 @@ func _physics_process(delta: float) -> void:
 			if _fast_forward_enabled:
 				_fast_forward_enabled = false
 				Engine.time_scale = 1.0
+				Global.pitch_shift_all_audio(1.0)
 				_update_fast_forward_indicator()
 			return
 
@@ -64,10 +65,12 @@ func _physics_process(delta: float) -> void:
 				_show_prompt()
 				_fast_forward_enabled = false
 				Engine.time_scale = 1.0
+				Global.pitch_shift_all_audio(1.0)
 				_update_fast_forward_indicator()
 			else:
 				_fast_forward_enabled = true
 				Engine.time_scale = _fast_forward_multiplier
+				Global.pitch_shift_all_audio(_fast_forward_multiplier)
 				_update_fast_forward_indicator()
 
 		if Input.is_action_pressed("use_item"):
@@ -93,6 +96,7 @@ func _physics_process(delta: float) -> void:
 		if _fast_forward_enabled:
 			_fast_forward_enabled = false
 			Engine.time_scale = 1.0
+			Global.pitch_shift_all_audio(1.0)
 			_update_fast_forward_indicator()
 
 

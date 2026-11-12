@@ -58,6 +58,7 @@ var holding_trash := false:
 		if value == true && holding_trash == false:
 			holding_trash = value
 			Events.pickup_trash.emit()
+var trash_in_hand: String
 var day: int = 1
 var playing_tutorial: bool = false
 var shift_length: float
@@ -84,7 +85,6 @@ var employee_rating: float = 0:
 		employee_rating = new_value
 		Events.employee_rating_updated.emit(new_value, previous_employee_rating)
 
-		# (see comment for same lines in above func)
 		await get_tree().process_frame
 var machine_customer_flow_rate: float
 var help_desk_customer_flow_rate: float
@@ -96,8 +96,6 @@ var final_day := 5
 ## the one that chases you on day 5
 ## (boss as in boss fight)
 var tippy_boss: TippyBoss
-# score from refill minigame (to pass to machine)
-var refill_minigame_accuracy: float
 var making_drink_manually := false
 var customer_sprites: Array[CustomerSpriteData]
 ## the sprites of customers that are in the cafe right now
@@ -116,8 +114,11 @@ var in_level_select_menu: bool = false
 var in_end_screen := false
 var in_dialog_screen: bool = false
 var in_options_menu: bool = false
+var options_menu_show_delete_save_file: bool = false
 var showing_floating_cursor := false
 var in_loadout_menu := false
+var in_ending_comic := false
+var in_scene_transition := false
 var in_ui: bool:
 	get():
 		if (
@@ -132,6 +133,8 @@ var in_ui: bool:
 				or in_options_menu
 				or showing_floating_cursor
 				or in_loadout_menu
+				or in_ending_comic
+				or in_scene_transition
 		):
 			return true
 		else:
@@ -159,6 +162,7 @@ var tutorial_day_2_broken_machine_interacted: bool = false
 var tutorial_day_2_broken_machine_fixed: bool = false
 var tutorial_day_3_camera_stunned_player: bool = false
 var tutorial_day_3_spill_interacted: bool = false
+var tutorial_day_3_spill_allow_cleaning: bool = false
 var tutorial_day_3_spill_cleaned: bool = false
 var tutorial_day_4_trash_picked_up: bool = false
 var tutorial_day_4_trash_thrown_away: bool = false
@@ -188,8 +192,11 @@ var locked_camera_target_pos: Vector3
 var cinematic_camera_allow_machine_gui_inputs: bool = true
 var item_loadout_menu: ItemLoadoutMenu
 # for pitch shifting
-var all_3d_audio_stream_players: Array[Node]
+var all_audio_stream_players: Array[Node]
 var no_cooldowns := false
+# For sending the player to the right level in level select after shift completion or level quit
+var should_override_level_select_day: bool = false
+var level_select_day_override: int
 
 
 func _enter_tree() -> void:
@@ -208,12 +215,6 @@ func _ready() -> void:
 	reviews.assign(load_resources_from_folder(review_folder_path))
 	customer_sprites.assign(load_resources_from_folder(customer_sprites_folder_path, "tres"))
 	spill_sprites.assign(load_resources_from_folder(spill_sprites_path, "png"))
-
-	while main_scene == null:
-		await get_tree().process_frame
-	for p: AudioStreamPlayer3D in Global.main_scene.find_children("*", "AudioStreamPlayer3D"):
-		p.set_meta("base_pitch_scale", p.pitch_scale)
-		all_3d_audio_stream_players.append(p)
 
 
 func load_unlocked_items_from_save() -> void:
@@ -243,7 +244,7 @@ func load_equipped_items_from_save() -> void:
 		if item:
 			owned_items.append(item)
 
-
+##Gets an item from the list of all items that exist.
 func get_item(item_id: String) -> Item:
 	var found_item := false
 	for item: Item in items:
@@ -255,6 +256,12 @@ func get_item(item_id: String) -> Item:
 		push_warning("Unlocked item not found: %s" % item_id)
 	return null
 
+##Returns true if item is currently equipped.
+func is_equipped_item(item_id: String) -> bool:
+	for item: Item in owned_items:
+		if item.item_id == item_id:
+			return true
+	return false
 
 func add_items_to_unlocked_list(item_ids: Array) -> void:
 	for raw_item_id in item_ids:
@@ -349,15 +356,10 @@ func day_to_string(d: int) -> String:
 	return day_as_string
 
 
-## for frozen tippy item
-## (and cutscenes if we get to that)
-## NOTE: i think this is broken rn
-func pitch_shift_all_3d_audio(down: bool) -> void:
+## for frozen tippy item and cutscenes
+func pitch_shift_all_audio(multiplier: float = 1.0) -> void:
 	var pitch_tween := create_tween().set_parallel()
 
-	for p: AudioStreamPlayer3D in all_3d_audio_stream_players:
-		if down:
-			pitch_tween.tween_property(p, "pitch_scale", 0.75, 0.5)
-		else:
-			var player_base_pitch: float = p.get_meta("base_pitch_scale")
-			pitch_tween.tween_property(p, "pitch_scale", player_base_pitch, 0.25)
+	for p in all_audio_stream_players:
+		var base_pitch: float = p.get_meta("base_pitch_scale")
+		pitch_tween.tween_property(p, "pitch_scale", base_pitch * multiplier, 0.5)

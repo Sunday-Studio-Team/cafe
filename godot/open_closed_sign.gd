@@ -8,7 +8,12 @@ extends Node3D
 
 
 func _ready() -> void:
-	interactable.interacted.connect(_on_interacted)
+	Events.flipped_open_sign.connect(_on_sign_flipped)
+
+	interactable.interacted.connect(
+	func() -> void:
+		Events.flipped_open_sign.emit()
+	)
 
 
 func _physics_process(_delta: float) -> void:
@@ -19,10 +24,9 @@ func set_enabled(enabled: bool) -> void:
 	interactable.visible = enabled
 
 
-func _on_interacted() -> void:
+func _on_sign_flipped() -> void:
 	interactable.visible = false
 	animation_player.play("open")
 	shift_start_triggered_sound.play()
-	Events.shutters_open_requested.emit()
 	await animation_player.animation_finished
 	Events.shift_start_requested.emit()

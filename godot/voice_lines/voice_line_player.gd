@@ -18,6 +18,15 @@ enum PlayerMode {
 var _active_voice_line: VoiceLine
 
 
+func _ready() -> void:
+	while Global.main_scene == null:
+		await get_tree().process_frame
+
+	if _audio_stream_player:
+		_audio_stream_player.set_meta("base_pitch_scale", _audio_stream_player.pitch_scale)
+		Global.all_audio_stream_players.append(_audio_stream_player)
+
+
 func play_voice_line(voice_line: VoiceLine) -> void:
 	_active_voice_line = voice_line
 	if _active_voice_line.audio_stream == null:

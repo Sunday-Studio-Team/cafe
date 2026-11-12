@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://hy5hcrtdxslx"]
+
+[ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://ui/credits/scrolling_credits.tscn" id="1_i0rqt"]
+[ext_resource type="Script" uid="uid://birw0brxd228d" path="res://ui/credits/end_credits.gd" id="1_tvovn"]
+
+[node name="EndCredits" type="CanvasLayer" unique_id=788906847]
+script = ExtResource("1_tvovn")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1536206944]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundColour" type="ColorRect" parent="MarginContainer" unique_id=1997559929]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BackgroundTexture" type="TextureRect" parent="MarginContainer" unique_id=767810516]
+layout_mode = 2
+
+[node name="ScrollingCredits" parent="MarginContainer" unique_id=1162279489 instance=ExtResource("1_i0rqt")]
+layout_mode = 2
+scroll_paused = true
+
+[connection signal="end_reached" from="MarginContainer/ScrollingCredits" to="." method="_end_reached"]

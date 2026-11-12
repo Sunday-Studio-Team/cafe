@@ -46,8 +46,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tsm6y")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(1.59375, 2.3690186, 0.5303955)
+
 [node name="Tippy Standee" unique_id=1708982728 instance=ExtResource("1_n1onh")]
 
-[node name="Cube_001" parent="." index="0" unique_id=335543176]
+[node name="Cube_001" parent="." index="0" unique_id=1183983576]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0041265488, 1.0477374, -0.03427371)
 mesh = SubResource("ArrayMesh_7qfts")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1" unique_id=909589892]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=64484124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1845093, -0.23480225)
+shape = SubResource("BoxShape3D_xrivr")

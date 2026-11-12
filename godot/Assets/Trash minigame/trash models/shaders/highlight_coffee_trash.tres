@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://2ksyowankus4"]
+
+[ext_resource type="Material" uid="uid://chtkwetnsvy28" path="res://Assets/Trash minigame/trash models/shaders/coffee_trash.tres" id="1_k1ga4"]
+[ext_resource type="Shader" uid="uid://dm5a7nc0cwudc" path="res://shaders/xray.gdshader" id="2_1qac6"]
+
+[resource]
+render_priority = 0
+next_pass = ExtResource("1_k1ga4")
+shader = ExtResource("2_1qac6")
+shader_parameter/xray_color = Color(1, 1, 1, 1)

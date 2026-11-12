@@ -2,5 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://b0r048nyq4al5" path="res://Assets/Locker/Locker tippy.glb" id="1_l3cnd"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrivr"]
+size = Vector3(1.076294, 3.2162476, 1)
+
 [node name="Locker tippy" unique_id=118125833 instance=ExtResource("1_l3cnd")]
 transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, 0.035055712, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2" unique_id=532168605]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0" unique_id=326425941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.038147006, 1.544098, 0)
+shape = SubResource("BoxShape3D_xrivr")

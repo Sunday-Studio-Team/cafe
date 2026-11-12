@@ -11,6 +11,9 @@ func setup(action_name: StringName) -> void:
 func _input(input_event: InputEvent) -> void:
 	if input_event is InputEventKey:
 		var input_event_key: InputEventKey = input_event as InputEventKey
+		if not input_event_key.pressed or input_event_key.echo:
+			return
+		get_viewport().set_input_as_handled()
 		key_pressed.emit(input_event_key.physical_keycode)
 
 func close_popup() -> void:
