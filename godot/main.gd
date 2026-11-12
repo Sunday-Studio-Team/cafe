@@ -490,7 +490,7 @@ func spawn_trash() -> void:
 			Events.alert_posted.emit("Too much trash!", UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
 			#Events.alert_posted.emit("Lucky! Rating loss prevented!", UI.AlertIconType.RATING, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_NEUTRAL)
 		else:
-			Events.alert_posted.emit( "-%s Too much trash!" % Global.trash_punishment_amount, UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED)
+			Events.alert_posted.emit("Too much trash!", UI.AlertType.TRASH, UI.ALERT_DEFAULT_DURATION, UI.ALERT_COLOR_RED, -Global.trash_punishment_amount)
 			Global.employee_rating -= Global.trash_punishment_amount
 	Events.alert_posted.emit(
 		"Customer dropped trash!",
