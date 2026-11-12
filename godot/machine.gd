@@ -41,6 +41,7 @@ const REFILL_MINIGAME := "Refill"
 @export var customer_wait_bar: TextureProgressBar
 @export var no_ingredients_warning: Control
 @export var get_ingredients_prompt: Control
+@export var get_ingredients_prompt_refill_button_press: Control
 @export var order_breakdown: Control
 @export var ordered_main_ingredient_icon: TextureRect
 @export var ordered_liquid_icon: TextureRect
@@ -145,6 +146,8 @@ var test_1: int = 0
 var test_2: int = 0
 var test_3: int = 0
 
+var hide_get_ingredients_ui_bool: bool = true
+
 
 func _ready() -> void:
 	get_stats()
@@ -170,14 +173,14 @@ func _ready() -> void:
 				refill()
 			else:
 				ingredients_warning_sound.play()
-				get_ingredients_prompt.show()
-				get_ingredients_prompt.offset_transform_enabled = true
+				get_ingredients_prompt_refill_button_press.show()
+				get_ingredients_prompt_refill_button_press.offset_transform_enabled = true
 				var t := create_tween()
-				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
-				t.tween_property(get_ingredients_prompt, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
+				t.tween_property(get_ingredients_prompt_refill_button_press, "offset_transform_scale", Vector2.ONE * 1.1, 0.1)
+				t.tween_property(get_ingredients_prompt_refill_button_press, "offset_transform_scale", Vector2.ONE * 0.9, 0.1)
 				await t.finished
 				await get_tree().create_timer(1, false).timeout
-				get_ingredients_prompt.hide()
+				get_ingredients_prompt_refill_button_press.hide()
 	)
 	fix_machine_button.interacted.connect(_on_fix_machine_button_pressed)
 	fix_machine_button.requested_use_active_item.connect(_on_requested_use_active_item_fix_machine)
@@ -239,8 +242,12 @@ func _physics_process(delta: float) -> void:
 	ingredients_bar.value = ingredients
 	if ingredients < Stats.current.ingredients_per_order:
 		ing_too_low_label.show()
+		get_ingredients_prompt.show()
+		if Global.holding_ingredients:
+			get_ingredients_prompt.hide()
 	else:
 		ing_too_low_label.hide()
+		get_ingredients_prompt.hide()
 
 	spill_warning_container.visible = spill_on_floor
 
@@ -271,7 +278,6 @@ func _physics_process(delta: float) -> void:
 		machine_make_drink()
 
 	_process_queued_customers()
-
 
 func add_customer_to_queue(new_customer: Customer) -> void:
 	queued_customers.append(new_customer)
