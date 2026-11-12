@@ -98,16 +98,15 @@ func _ready() -> void:
 		Events.trash_pickup_animation_grabbed.connect(
 			func():
 				bag_pickup_sound.play()
-
-			var t := create_tween().set_parallel()
-			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
+				await Events.viewmodel_animation_finished
+				var t := create_tween().set_parallel()
+				t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)
 	Events.trash_throw_animation_released.connect(
 		func():
 			drop_trash()
 			# scuffed 'animation' of trash appearing when we grab it
 			await Events.viewmodel_animation_finished
-
 			var t := create_tween().set_parallel()
 			t.tween_property(customer_trash, "scale", Vector3.ONE, 0.25)
 	)

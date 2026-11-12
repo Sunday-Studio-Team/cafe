@@ -8,4 +8,5 @@ class_name Review
 @export var numbers: int
 
 func _init() -> void:
-	numbers = randi_range(2, 999)
+	#numbers = randi_range(2, 999)
+	pass
