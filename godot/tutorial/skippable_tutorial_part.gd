@@ -484,8 +484,8 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 
 			await get_tree().create_timer(1.0).timeout
 
-			Global.player.override_position_rotation(_tutorial_manager._day_2_sato_at_broken_machine_position.global_position, _tutorial_manager._day_2_sato_at_broken_machine_position.global_rotation)
-			await _tutorial_manager._cinematic_camera.play_animation("day_2_training_41_0")
+			#Global.player.override_position_rotation(_tutorial_manager._day_2_sato_at_broken_machine_position.global_position, _tutorial_manager._day_2_sato_at_broken_machine_position.global_rotation)
+			#await _tutorial_manager._cinematic_camera.play_animation("day_2_training_51_0")
 
 			Global.main_scene.tutorial_machine.break_down("Arrows")
 
@@ -498,9 +498,9 @@ func run_tutorial_part(tutorial_part_enum: TutorialPartEnum) -> void:
 			
 			if true:
 				var tween: Tween = create_tween()
-				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 1.0)
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_position", Global.player.camera.camera_effects.global_position, 0.25)
 				tween.set_parallel()
-				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 1.0)
+				tween.tween_property(_tutorial_manager._cinematic_camera.camera_rig_node, "global_rotation", Global.player.camera.camera_effects.global_rotation, 0.25)
 			_tutorial_manager._cinematic_camera.cinematic_bars.hide_bars(1.0)
 			await _tutorial_manager._cinematic_camera.disable_cinematic_camera(1.0)
 		TutorialPartEnum.DAY_2_7:
