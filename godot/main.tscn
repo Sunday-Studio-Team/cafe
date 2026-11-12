@@ -894,6 +894,25 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524)
 
+[sub_resource type="Animation" id="Animation_1h7wj"]
+resource_name = "day_2_training_51_0"
+length = 0.6
+step = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraRig")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -7.8460236, 1.5924425, 2.7625628)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraRig")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, -0.078957945, -0.49680704, -0.045450654, 0.86306524)
+
 [sub_resource type="Animation" id="Animation_gdxi3"]
 resource_name = "day_2_training_8_0"
 length = 2.0
@@ -1218,6 +1237,7 @@ _data = {
 &"day_2_training_31_0": SubResource("Animation_u1kx1"),
 &"day_2_training_41_0": SubResource("Animation_lwqyd"),
 &"day_2_training_44_0": SubResource("Animation_f4177"),
+&"day_2_training_51_0": SubResource("Animation_1h7wj"),
 &"day_2_training_8_0": SubResource("Animation_gdxi3"),
 &"day_3_training_0_0": SubResource("Animation_sn277"),
 &"day_3_training_14_0": SubResource("Animation_sxhyu"),
@@ -2647,7 +2667,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.224927, 0.3, 7.877434)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0091028, -0.1386095, 3.9566064)
 
 [node name="PathFollow3D" parent="CafeEnvironment/ExteriorStreet/CarSpawner" parent_id_path=PackedInt32Array(672806017, 1294804828) index="0" unique_id=1082367862]
-transform = Transform3D(0.0005700925, -0.00016215755, -0.99992657, 1.0259805e-07, 1, -0.00016214565, 0.99992657, -1.01539825e-08, 0.0005700925, -4.11582, -1.4201379, 0.23234849)
+transform = Transform3D(0.0005700925, -0.00016215755, -0.9999265, 1.02598044e-07, 1, -0.00016214563, 0.9999265, -1.01539825e-08, 0.0005700925, -4.11582, -1.4201379, 0.23234849)
 
 [node name="OpenCloseSign" parent="." unique_id=1966668690 instance=ExtResource("227_kmrid")]
 transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 2.1, 1.0067635, -3.6999998)
