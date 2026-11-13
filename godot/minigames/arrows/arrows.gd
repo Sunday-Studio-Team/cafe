@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 		really_bad_beat_timer = 0
 
 func _input(event: InputEvent) -> void:
-	if event.is_pressed():
+	if event.is_pressed() and not event.is_echo():
 		if event.is_action("move_left"):
 			check_input("left")
 		if event.is_action("move_forward"):
