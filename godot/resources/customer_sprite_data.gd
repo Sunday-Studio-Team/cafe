@@ -102,6 +102,14 @@ var typing_minigame_portrait: Texture2D:
 			return
 		_editor_email_cropped_sprite_preview = value
 
+@export var number_of_reviews_made: int:
+	get:
+		if number_of_reviews_made == 0:
+			number_of_reviews_made = randi_range(1, 35)
+			return number_of_reviews_made
+		else:
+			return number_of_reviews_made
+
 var _editor_email_cropped_sprite_preview: AtlasTexture
 
 func generate_email_crop_texture() -> AtlasTexture:
