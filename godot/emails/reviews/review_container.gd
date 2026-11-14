@@ -13,18 +13,19 @@ var review: Review = null:
 			review = null
 		else:
 			review = value
-			reviews_number.text = "%s Reviews" % review.numbers
 			
 			var customer_sprite_data: CustomerSpriteData
 			if review.customer_sprite_data_options.size() > 0:
 				customer_sprite_data = review.customer_sprite_data_options.pick_random()
 			if customer_sprite_data != null:
 				var profile_picture: AtlasTexture = customer_sprite_data.generate_email_crop_texture()
-				if profile_picture != null:				
+				if profile_picture != null:
 					customer_profile_texture_rect.texture = profile_picture
+				reviews_number.text = "%s Reviews" % customer_sprite_data.number_of_reviews_made
 			else:
 				var fallback_profile_picture: Texture2D = review.sprites.pick_random()
 				customer_profile_texture_rect.texture = fallback_profile_picture
+				reviews_number.text = "%s Reviews" % randi_range(1, 35)
 			review_content.text = review.review_content
 			username.text = "@" + review.username
 			match review.rating:
