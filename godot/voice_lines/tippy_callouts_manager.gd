@@ -35,7 +35,7 @@ func _ready() -> void:
 	_tippy_voice_timer.autostart = false
 	_tippy_voice_timer.one_shot = true
 	add_child(_tippy_voice_timer)
-	
+
 	# Skip voice lines if tutorial day 0
 	if Global.playing_tutorial:
 		return
@@ -73,13 +73,16 @@ func _ready() -> void:
 func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
 	if not enable_tippy_callouts:
 		return
-	
+
 	if _is_playing_line:
 		return
-	
+
 	if !_tippy_voice_timer.is_stopped():
 		return
-	
+
+	if Global.day == 5:
+		return
+
 	var voice_line_array: Array[VoiceLine] = _get_tippy_callout_array_by_type(tippy_line_type)
 	if voice_line_array.is_empty():
 		printerr("Missing Tippy voice line!")
@@ -87,11 +90,11 @@ func play_tippy_callout(tippy_line_type: TippyLineType) -> void:
 
 	if _last_voice_line_type == tippy_line_type:
 		return
-	
+
 	var chance_play: float = randf_range(0.0, 1.0)
 	if tippy_line_type == TippyCalloutsManager.TippyLineType.shift_low_time:
 		chance_play += 0.25
-	
+
 	if chance_play >= 0.5 or tippy_line_type == TippyCalloutsManager.TippyLineType.shift_start:
 		var random_voice_line: VoiceLine = voice_line_array.pick_random()
 		_is_playing_line = true
